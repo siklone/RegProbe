@@ -1,0 +1,79 @@
+﻿{
+    "generated_utc":  "2026-03-29T14:05:45.0078454Z",
+    "snapshot_name":  "RegProbe-Baseline-Clean-20260329",
+    "probe_name":  "power-control-docs-first-postboot-trigger-20260329-161427",
+    "note":  "research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+    "status":  "no-hit",
+    "total_candidates":  5,
+    "exact_hit_candidates":  0,
+    "no_hit_candidates":  5,
+    "error_candidates":  0,
+    "candidate_results":  [
+                              {
+                                  "candidate_id":  [
+                                                       "power.control.class1-initial-unpark-count",
+                                                       "power.control.hibernate-enabled-default",
+                                                       "power.control.mf-buffering-threshold",
+                                                       "power.control.perf-calculate-actual-utilization",
+                                                       "power.control.timer-rebase-threshold-on-drips-exit"
+                                                   ],
+                                  "value_name":  [
+                                                     "Class1InitialUnparkCount",
+                                                     "HibernateEnabledDefault",
+                                                     "MfBufferingThreshold",
+                                                     "PerfCalculateActualUtilization",
+                                                     "TimerRebaseThresholdOnDripsExit"
+                                                 ],
+                                  "trigger_profile":  [
+                                                          "processor-load",
+                                                          "hibernate-query",
+                                                          "media-perf",
+                                                          "processor-load",
+                                                          "drips-timer"
+                                                      ],
+                                  "status":  [
+                                                 "no-hit",
+                                                 "no-hit",
+                                                 "no-hit",
+                                                 "no-hit",
+                                                 "no-hit"
+                                             ],
+                                  "exact_runtime_read":  true,
+                                  "summary_txt":  [
+                                                      "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.txt",
+                                                      "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.txt",
+                                                      "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.txt",
+                                                      "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.txt",
+                                                      "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.txt"
+                                                  ],
+                                  "hits_csv":  [
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv",
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv",
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv",
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv",
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv"
+                                               ],
+                                  "powercfg_log":  [
+                                                       "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger-powercfg.txt",
+                                                       "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger-powercfg.txt",
+                                                       "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger-powercfg.txt",
+                                                       "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger-powercfg.txt",
+                                                       "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger-powercfg.txt"
+                                                   ],
+                                  "winsat_log":  [
+                                                     "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger-winsat.txt",
+                                                     null,
+                                                     "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger-winsat.txt",
+                                                     "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger-winsat.txt",
+                                                     null
+                                                 ],
+                                  "jobs_log":  [
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger-jobs.json",
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger-jobs.json",
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger-jobs.json",
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger-jobs.json",
+                                                   "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger-jobs.json"
+                                               ]
+                              }
+                          ]
+}

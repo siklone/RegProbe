@@ -119,7 +119,7 @@
   "classification": {
     "class": "C",
     "pipeline_version": "v3.1",
-    "reason": "MfBufferingThreshold is now backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and a successful guest-processed stepwise Procmon boot log package. It still remains below Class A because the current clean-baseline runtime lane did not capture an exact runtime read for this value.",
+    "reason": "MfBufferingThreshold is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, and a second guest-processed post-boot Procmon trigger batch. It still remains below Class A because neither runtime lane captured an exact runtime read for this value on the current baseline.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
@@ -140,19 +140,19 @@
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-29T12:05:15.743845Z"
+      "timestamp": "2026-03-29T14:07:35.367976Z"
     },
     {
       "step": "faz6",
-      "timestamp": "2026-03-29T12:05:15.743845Z"
+      "timestamp": "2026-03-29T14:07:35.367976Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-29T12:05:15.743845Z"
+      "timestamp": "2026-03-29T14:07:35.367976Z"
     },
     {
       "step": "last_reviewed",
-      "timestamp": "2026-03-29T11:55:00Z"
+      "timestamp": "2026-03-29T14:05:00Z"
     }
   ],
   "artifact_refs": [],

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-29T12:05:16.498988Z",
+  "generated_utc": "2026-03-29T14:07:36.438034Z",
   "summary": {
     "total_records": 305,
     "class_counts": {
@@ -5848,6 +5848,12 @@
             "url": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
             "kind": "procmon-trace",
             "summary": "The guest-processed stepwise Procmon boot log completed shell-safe on RegProbe-Baseline-Clean-20260329 but did not capture an exact runtime read for Class1InitialUnparkCount."
+          },
+          {
+            "title": "Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "A guest-processed post-boot Procmon lane ran powercfg queries, powercfg /energy, CPU stress, and profile-specific follow-up commands on RegProbe-Baseline-Clean-20260329. It capt..."
           }
         ]
       },
@@ -5915,6 +5921,12 @@
             "url": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
             "kind": "procmon-trace",
             "summary": "The guest-processed stepwise Procmon boot log completed shell-safe on RegProbe-Baseline-Clean-20260329 but did not capture an exact runtime read for HibernateEnabledDefault."
+          },
+          {
+            "title": "Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "A guest-processed post-boot Procmon lane ran powercfg queries, powercfg /energy, CPU stress, and profile-specific follow-up commands on RegProbe-Baseline-Clean-20260329. It capt..."
           }
         ]
       },
@@ -6116,6 +6128,12 @@
             "url": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
             "kind": "procmon-trace",
             "summary": "The guest-processed stepwise Procmon boot log completed shell-safe on RegProbe-Baseline-Clean-20260329 but did not capture an exact runtime read for MfBufferingThreshold."
+          },
+          {
+            "title": "Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "A guest-processed post-boot Procmon lane ran powercfg queries, powercfg /energy, CPU stress, and profile-specific follow-up commands on RegProbe-Baseline-Clean-20260329. It capt..."
           }
         ]
       },
@@ -6183,6 +6201,12 @@
             "url": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
             "kind": "procmon-trace",
             "summary": "The guest-processed stepwise Procmon boot log completed shell-safe on RegProbe-Baseline-Clean-20260329 but did not capture an exact runtime read for PerfCalculateActualUtilization."
+          },
+          {
+            "title": "Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "A guest-processed post-boot Procmon lane ran powercfg queries, powercfg /energy, CPU stress, and profile-specific follow-up commands on RegProbe-Baseline-Clean-20260329. It capt..."
           }
         ]
       },
@@ -6250,6 +6274,12 @@
             "url": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
             "kind": "procmon-trace",
             "summary": "The guest-processed stepwise Procmon boot log completed shell-safe on RegProbe-Baseline-Clean-20260329 but did not capture an exact runtime read for TimerRebaseThresholdOnDripsE..."
+          },
+          {
+            "title": "Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "A guest-processed post-boot Procmon lane ran powercfg queries, powercfg /energy, CPU stress, and profile-specific follow-up commands on RegProbe-Baseline-Clean-20260329. It capt..."
           }
         ]
       },

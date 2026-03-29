@@ -1,0 +1,64 @@
+﻿{
+    "generated_utc":  "2026-03-29T13:43:21.1450249Z",
+    "candidate_id":  "power.control.mf-buffering-threshold",
+    "value_name":  "MfBufferingThreshold",
+    "trigger_profile":  "media-perf",
+    "snapshot_name":  "RegProbe-Baseline-Clean-20260329",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-29T13:38:46.2586043Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-29T13:43:13.7600249Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  true
+                                   }
+                    },
+    "copied":  {
+                   "summary_txt":  true,
+                   "hits_csv":  true,
+                   "powercfg_log":  true,
+                   "typeperf_log":  false,
+                   "winsat_log":  true,
+                   "jobs_log":  true,
+                   "wrapper_error":  false
+               },
+    "exact_hit_count":  0,
+    "exact_runtime_read":  false,
+    "hit_processes":  [
+
+                      ],
+    "hit_operations":  [
+
+                       ],
+    "status":  "no-hit",
+    "artifacts":  {
+                      "summary_txt":  "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.txt",
+                      "hits_csv":  "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv",
+                      "powercfg_log":  "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger-powercfg.txt",
+                      "typeperf_log":  null,
+                      "winsat_log":  "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger-winsat.txt",
+                      "jobs_log":  "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger-jobs.json",
+                      "wrapper_error":  null
+                  }
+}

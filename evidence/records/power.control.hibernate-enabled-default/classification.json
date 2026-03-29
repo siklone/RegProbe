@@ -3,7 +3,7 @@
   "classification": {
     "class": "C",
     "pipeline_version": "v3.1",
-    "reason": "HibernateEnabledDefault is now backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and a successful guest-processed stepwise Procmon boot log package. It still remains below Class A because the current clean-baseline runtime lane did not capture an exact runtime read for this value.",
+    "reason": "HibernateEnabledDefault is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, and a second guest-processed post-boot Procmon trigger batch. It still remains below Class A because neither runtime lane captured an exact runtime read for this value on the current baseline.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
