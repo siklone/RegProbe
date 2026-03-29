@@ -15,9 +15,9 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 241 |
-| Class B | 1 |
-| Class C | 9 |
+| Class A | 243 |
+| Class B | 3 |
+| Class C | 5 |
 | Class E | 54 |
 
 ## Category coverage
@@ -78,9 +78,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -200,9 +200,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -332,9 +332,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -454,9 +454,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -576,9 +576,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -689,9 +689,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -809,9 +809,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -928,9 +928,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -1049,9 +1049,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -1170,9 +1170,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -1293,9 +1293,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -1404,9 +1404,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -1518,9 +1518,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -1629,9 +1629,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -1749,9 +1749,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -1869,9 +1869,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -1992,9 +1992,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -2113,9 +2113,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -2228,9 +2228,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -2348,9 +2348,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -2468,9 +2468,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -2582,9 +2582,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -2703,9 +2703,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -2824,9 +2824,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -2945,9 +2945,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -3065,9 +3065,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -3185,9 +3185,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -3300,9 +3300,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -3422,9 +3422,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -3542,9 +3542,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -3665,9 +3665,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -3793,9 +3793,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -3936,9 +3936,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -4062,9 +4062,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -4190,9 +4190,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -4335,9 +4335,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -4461,9 +4461,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -4592,9 +4592,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -4722,9 +4722,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -4850,9 +4850,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -4977,9 +4977,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -5105,9 +5105,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -5230,9 +5230,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -5356,9 +5356,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -5483,9 +5483,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -5610,9 +5610,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -5736,9 +5736,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -5863,9 +5863,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -5990,9 +5990,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -6118,9 +6118,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -6260,9 +6260,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -6404,9 +6404,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -6534,9 +6534,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -6689,9 +6689,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -6818,9 +6818,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -7005,9 +7005,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -7148,9 +7148,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -7291,9 +7291,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -7437,9 +7437,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -7555,9 +7555,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -7676,9 +7676,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -7797,9 +7797,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -7918,9 +7918,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8041,9 +8041,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8168,9 +8168,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8294,9 +8294,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8426,9 +8426,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8554,9 +8554,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8700,9 +8700,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -8829,9 +8829,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class B` |
-| Title | Strong but Partial |
+| Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | Primary values are understood, but this record is still intentionally gated from one-click apply. |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
 
 **Sources**
 
@@ -8964,9 +8964,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9095,9 +9095,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9218,9 +9218,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9347,9 +9347,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9473,9 +9473,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9603,9 +9603,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9732,9 +9732,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9861,9 +9861,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9993,9 +9993,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -10177,9 +10177,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -10299,9 +10299,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -10412,9 +10412,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -10563,9 +10563,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -10683,9 +10683,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -10802,9 +10802,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -10924,9 +10924,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -11061,9 +11061,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -11194,9 +11194,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -11356,9 +11356,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -11478,9 +11478,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -11599,9 +11599,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -11719,9 +11719,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -11839,9 +11839,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -11959,9 +11959,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -12081,9 +12081,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -12220,9 +12220,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -12339,9 +12339,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -12461,9 +12461,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -12575,9 +12575,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -12697,9 +12697,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -12819,9 +12819,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -12943,9 +12943,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -13093,9 +13093,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -13216,9 +13216,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -13337,9 +13337,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -13459,9 +13459,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -13581,9 +13581,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -13704,9 +13704,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -13822,9 +13822,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -13946,9 +13946,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -14080,9 +14080,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -14199,9 +14199,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -14320,9 +14320,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -14440,9 +14440,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -14562,9 +14562,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -14684,9 +14684,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -14797,9 +14797,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -14919,9 +14919,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -15041,9 +15041,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -15163,9 +15163,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -15284,9 +15284,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -15399,9 +15399,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -15523,9 +15523,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -15646,9 +15646,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -15767,9 +15767,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -15889,9 +15889,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -16012,9 +16012,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -16134,9 +16134,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -16265,9 +16265,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -16418,9 +16418,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -16533,9 +16533,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -16654,9 +16654,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -16776,9 +16776,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -16899,9 +16899,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -17021,9 +17021,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -17157,9 +17157,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -17278,9 +17278,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -17397,9 +17397,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -17518,9 +17518,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -17637,9 +17637,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -17758,9 +17758,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -17879,9 +17879,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -18000,9 +18000,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -18122,9 +18122,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -18237,9 +18237,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -18364,9 +18364,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -18511,9 +18511,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -18644,9 +18644,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -18770,9 +18770,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -18900,9 +18900,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -19025,9 +19025,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -19155,9 +19155,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -19281,9 +19281,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -19407,9 +19407,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -19534,9 +19534,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -19658,9 +19658,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -19786,9 +19786,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -19930,9 +19930,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -20058,9 +20058,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -20219,9 +20219,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -20349,9 +20349,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -20474,9 +20474,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -20602,9 +20602,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -20735,9 +20735,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -20876,9 +20876,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -21035,9 +21035,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -21164,9 +21164,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -21324,9 +21324,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -21452,9 +21452,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -21579,9 +21579,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -21704,9 +21704,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -21832,9 +21832,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -21961,9 +21961,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -22090,9 +22090,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -22235,9 +22235,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -22367,9 +22367,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -22497,9 +22497,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -22610,9 +22610,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -22741,9 +22741,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -22869,9 +22869,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -22997,9 +22997,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -23124,9 +23124,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -23249,9 +23249,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -23375,9 +23375,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -23515,9 +23515,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -23643,9 +23643,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -23772,9 +23772,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -23900,9 +23900,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -24025,9 +24025,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -24153,9 +24153,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -24281,9 +24281,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -24408,9 +24408,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -24531,9 +24531,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -24654,9 +24654,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -24780,9 +24780,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -24903,9 +24903,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -25026,9 +25026,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -25155,9 +25155,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -25282,9 +25282,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -25409,9 +25409,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -25535,9 +25535,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -25660,9 +25660,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -25786,9 +25786,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -25912,9 +25912,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -26041,9 +26041,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -26168,9 +26168,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -26296,9 +26296,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -26420,9 +26420,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -26549,9 +26549,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -26681,9 +26681,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -26826,9 +26826,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -26949,9 +26949,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -27072,9 +27072,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -27196,9 +27196,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -27319,9 +27319,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -27442,9 +27442,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -27565,9 +27565,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -27690,9 +27690,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -27816,9 +27816,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -27944,9 +27944,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -28063,9 +28063,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -28184,9 +28184,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -28305,9 +28305,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -28426,9 +28426,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -28545,9 +28545,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -28665,9 +28665,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -28786,9 +28786,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -28907,9 +28907,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -29028,9 +29028,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -29149,9 +29149,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -29270,9 +29270,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -29391,9 +29391,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -29512,9 +29512,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -29633,9 +29633,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -29754,9 +29754,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -29875,9 +29875,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -29997,9 +29997,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -30118,9 +30118,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -30238,9 +30238,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -30357,9 +30357,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -30479,9 +30479,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -30599,9 +30599,9 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Label | `Class A` |
-| Title | App Ready |
+| Title | Cross-Layer Verified |
 | Action state | `actionable` |
-| Gating reason | This record is app-ready and can stay one-click actionable. |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 

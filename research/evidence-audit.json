@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-29T11:14:27.250164Z",
+  "generated_utc": "2026-03-29T12:05:16.345441Z",
   "summary": {
     "total_active_records": 251,
     "class_counts": {
-      "A": 241,
-      "C": 9,
-      "B": 1
+      "A": 243,
+      "C": 5,
+      "B": 3
     },
     "lane_counts": {
       "official-policy": 236,
@@ -15,11 +15,12 @@
       "system": 3
     },
     "next_missing_layer_counts": {
-      "none": 241,
-      "app-mapping": 9,
-      "decision-gate": 1
+      "none": 243,
+      "runtime-trace": 5,
+      "decision-gate": 2,
+      "incident-review": 1
     },
-    "re_audit_required_count": 0
+    "re_audit_required_count": 4
   },
   "entries": [
     {
@@ -201,7 +202,7 @@
       "class_ready_basis": "official-doc",
       "official": true,
       "official_doc_exists": true,
-      "procmon": false,
+      "procmon": true,
       "ghidra": false,
       "ghidra_no_function_fallback": false,
       "wpr": false,
@@ -211,11 +212,13 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_procmon",
         "runtime_reboot",
         "official_doc"
       ],
       "tools_used": [
         "official-doc",
+        "procmon",
         "reboot"
       ],
       "boot_phase_relevant": false,
@@ -812,7 +815,7 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": true,
@@ -821,12 +824,14 @@
       "layers_used": [
         "runtime_procmon",
         "static_ghidra",
+        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
         "etw",
         "procmon",
         "ghidra",
+        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": false,
@@ -3123,7 +3128,7 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": true,
@@ -3132,12 +3137,14 @@
       "layers_used": [
         "runtime_procmon",
         "static_ghidra",
+        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
         "etw",
         "procmon",
         "ghidra",
+        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": false,
@@ -3319,31 +3326,33 @@
       "ghidra_no_function_fallback": true,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "app-mapping",
+      "next_missing_layer": "runtime-trace",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "runtime_reboot"
       ],
       "tools_used": [
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback"
+        "ghidra_no_function_fallback",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
@@ -3368,31 +3377,33 @@
       "ghidra_no_function_fallback": true,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "app-mapping",
+      "next_missing_layer": "runtime-trace",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "runtime_reboot"
       ],
       "tools_used": [
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback"
+        "ghidra_no_function_fallback",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
@@ -3407,9 +3418,9 @@
     {
       "record_id": "power.control.hibernate-enabled",
       "tweak_id": "power.control.hibernate-enabled",
-      "evidence_class": "C",
+      "evidence_class": "A",
       "lane": "early-boot",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": true,
@@ -3417,48 +3428,50 @@
       "ghidra_no_function_fallback": true,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "app-mapping",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "runtime_reboot"
       ],
       "tools_used": [
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback"
+        "ghidra_no_function_fallback",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
+      "confidence": "high",
       "source_file": "research/records/power.control.hibernate-enabled.json",
       "incident_ids": []
     },
     {
       "record_id": "power.control.lid-reliability-state",
       "tweak_id": "power.control.lid-reliability-state",
-      "evidence_class": "C",
+      "evidence_class": "A",
       "lane": "early-boot",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": true,
@@ -3466,39 +3479,41 @@
       "ghidra_no_function_fallback": true,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "app-mapping",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "runtime_reboot"
       ],
       "tools_used": [
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback"
+        "ghidra_no_function_fallback",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
+      "confidence": "high",
       "source_file": "research/records/power.control.lid-reliability-state.json",
       "incident_ids": []
     },
@@ -3515,31 +3530,33 @@
       "ghidra_no_function_fallback": true,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "app-mapping",
+      "next_missing_layer": "runtime-trace",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "runtime_reboot"
       ],
       "tools_used": [
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback"
+        "ghidra_no_function_fallback",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
@@ -3564,31 +3581,33 @@
       "ghidra_no_function_fallback": true,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "app-mapping",
+      "next_missing_layer": "runtime-trace",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "runtime_reboot"
       ],
       "tools_used": [
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback"
+        "ghidra_no_function_fallback",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
@@ -3613,31 +3632,33 @@
       "ghidra_no_function_fallback": true,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "app-mapping",
+      "next_missing_layer": "runtime-trace",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "runtime_reboot"
       ],
       "tools_used": [
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback"
+        "ghidra_no_function_fallback",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
@@ -3660,7 +3681,7 @@
       "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": true,
       "reboot_tested": true,
       "incident_seen": true,
@@ -3668,6 +3689,7 @@
       "cross_layer_satisfied": true,
       "layers_used": [
         "static_ghidra",
+        "behavior_wpr",
         "behavior_benchmark",
         "runtime_reboot",
         "official_doc"
@@ -3676,6 +3698,7 @@
         "official-doc",
         "etw",
         "ghidra",
+        "wpr",
         "benchmark",
         "reboot"
       ],
@@ -4151,27 +4174,29 @@
     {
       "record_id": "power.session-watchdog-timeouts",
       "tweak_id": "power.session-watchdog-timeouts",
-      "evidence_class": "C",
+      "evidence_class": "B",
       "lane": "system",
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": true,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": true,
-      "next_missing_layer": "app-mapping",
+      "next_missing_layer": "incident-review",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_procmon",
         "static_ghidra",
         "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
         "etw",
+        "procmon",
         "ghidra",
         "ghidra_no_function_fallback",
         "wpr",
@@ -4186,11 +4211,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -9503,7 +9528,7 @@
     {
       "record_id": "system.executive-additional-worker-threads",
       "tweak_id": "system.executive-additional-worker-threads",
-      "evidence_class": "C",
+      "evidence_class": "B",
       "lane": "system",
       "class_ready_basis": "pending",
       "official": false,
@@ -9515,7 +9540,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "app-mapping",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -9538,11 +9563,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -9892,30 +9917,32 @@
       "procmon": false,
       "ghidra": false,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "behavior_wpr",
         "official_doc"
       ],
       "tools_used": [
-        "official-doc"
+        "official-doc",
+        "wpr"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
@@ -10352,7 +10379,7 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": true,
       "reboot_tested": true,
       "incident_seen": false,
@@ -10361,6 +10388,7 @@
       "layers_used": [
         "runtime_procmon",
         "static_ghidra",
+        "behavior_wpr",
         "behavior_benchmark",
         "runtime_reboot",
         "official_doc"
@@ -10369,6 +10397,7 @@
         "official-doc",
         "procmon",
         "ghidra",
+        "wpr",
         "benchmark",
         "reboot"
       ],

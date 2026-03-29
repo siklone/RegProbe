@@ -4,12 +4,12 @@
   "record_id": "power.control.class1-initial-unpark-count",
   "tweak_id": "power.control.class1-initial-unpark-count",
   "record_status": "draft",
-  "summary": "Draft candidate package for Class1InitialUnparkCount under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed Class1InitialUnparkCount=64, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.",
+  "summary": "Draft candidate package for Class1InitialUnparkCount under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for Class1InitialUnparkCount.",
   "validation_proof": {
     "source_url": "Docs/power/power.md",
     "exact_quote_or_path": "Docs/power/power.md:104 shows `Class1InitialUnparkCount` with observed literal `64` in the repo power notes.",
     "key_found_on_page": true,
-    "notes": "The docs-first triage and phase-0 baseline agree on `Class1InitialUnparkCount=64` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface."
+    "notes": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for Class1InitialUnparkCount. App surfacing is tracked separately from evidence classification."
   },
   "setting": {
     "name": "Class1 Initial Unpark Count",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "Class1 Initial Unpark Count is a low-level power-manager registry value under the main Power key.",
     "why_people_change_it": "Researchers track this value when looking at core parking heuristics and how many class-1 cores the kernel initially unparks.",
-    "tradeoffs_overview": "This is a kernel-facing power-manager value, not a normal end-user power setting. The current evidence supports existence and naming, but not a shipped standalone tweak profile.",
-    "professional_notes": "Win25H2Clean phase-0 existence confirmed Class1InitialUnparkCount on the live baseline with preview value 64. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:104. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. A shared Procmon-safe runtime batch was then rerun from RegProbe-Baseline-Clean-20260329, but all seven values came back copy-incomplete with no guest-side wrapper-error file copied back. That keeps the runtime lane honest but incomplete.",
+    "tradeoffs_overview": "Cross-layer evidence is strong, but the current clean-baseline runtime package still lacks an exact runtime read for this raw power-manager value.",
+    "professional_notes": "Win25H2Clean phase-0 existence confirmed Class1InitialUnparkCount on the live baseline with preview value 64. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:104. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. A guest-processed stepwise Procmon boot log was then rerun from RegProbe-Baseline-Clean-20260329. It completed shell-safe and copied back the guest-processed summary and filtered CSV outputs, but it still did not capture an exact runtime read for Class1InitialUnparkCount on the current baseline.",
     "targets": [
       {
         "target_id": "class1initialunparkcount",
@@ -159,9 +159,9 @@
     {
       "evidence_id": "vm-power-control-runtime-batch-20260329",
       "kind": "procmon-trace",
-      "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
-      "location": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
-      "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for Class1InitialUnparkCount, leaving no usable per-candidate guest capture file.",
+      "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values",
+      "location": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+      "summary": "The guest-processed stepwise Procmon boot log completed shell-safe on RegProbe-Baseline-Clean-20260329 but did not capture an exact runtime read for Class1InitialUnparkCount.",
       "supports": [
         "behavior",
         "risk",
@@ -177,11 +177,10 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "Class1InitialUnparkCount is now packaged as a real candidate with live baseline existence, exact repo-doc hits, shared ntoskrnl string and Ghidra corroboration, and a clean-baseline runtime follow-up. It still stays research-gated because the app does not ship this raw registry value as a standalone supported surface and the shared runtime lane did not materialize usable exact-read artifacts.",
+    "why": "Class1InitialUnparkCount is now backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and a successful guest-processed stepwise Procmon boot log package. It still remains below Class A because the current clean-baseline runtime lane did not capture an exact runtime read for this value.",
     "blocking_issues": [
-      "No shipped standalone app mapping for the raw registry value.",
-      "Shared clean-baseline runtime capture stayed copy-incomplete and did not yield per-candidate guest artifacts."
+      "The clean-baseline stepwise Procmon boot log did not capture an exact runtime read for this value."
     ]
   },
-  "last_reviewed_utc": "2026-03-29T11:10:13.492625Z"
+  "last_reviewed_utc": "2026-03-29T11:55:00Z"
 }

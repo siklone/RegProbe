@@ -4,12 +4,12 @@
   "record_id": "power.control.lid-reliability-state",
   "tweak_id": "power.control.lid-reliability-state",
   "record_status": "draft",
-  "summary": "Draft candidate package for LidReliabilityState under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed LidReliabilityState=1, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.",
+  "summary": "Draft candidate package for LidReliabilityState under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for LidReliabilityState. App surfacing remains a separate product decision from evidence classification.",
   "validation_proof": {
     "source_url": "Docs/power/power.md",
     "exact_quote_or_path": "Docs/power/power.md:170 shows `LidReliabilityState` with observed literal `1` in the repo power notes.",
     "key_found_on_page": true,
-    "notes": "The docs-first triage and phase-0 baseline agree on `LidReliabilityState=1` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface."
+    "notes": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for LidReliabilityState. App surfacing is tracked separately from evidence classification."
   },
   "setting": {
     "name": "Lid Reliability State",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "Lid Reliability State is a low-level power-manager registry value under the main Power key.",
     "why_people_change_it": "Researchers track this value when reviewing lid-switch reliability logic and sleep policy inputs on mobile systems.",
-    "tradeoffs_overview": "This value appears in kernel power-management code, but it is not a documented user-facing setting. It remains research-only and non-actionable.",
-    "professional_notes": "Win25H2Clean phase-0 existence confirmed LidReliabilityState on the live baseline with preview value 1. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:170. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. A shared Procmon-safe runtime batch was then rerun from RegProbe-Baseline-Clean-20260329, but all seven values came back copy-incomplete with no guest-side wrapper-error file copied back. That keeps the runtime lane honest but incomplete.",
+    "tradeoffs_overview": "Cross-layer evidence now converges for this raw power-manager value: docs, current-build static hits, Ghidra review, and an exact runtime read are all attached.",
+    "professional_notes": "Win25H2Clean phase-0 existence confirmed LidReliabilityState on the live baseline with preview value 1. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:170. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. A guest-processed stepwise Procmon boot log was then rerun from RegProbe-Baseline-Clean-20260329. It completed shell-safe, processed the trace inside the guest, and copied only the summary and filtered hit CSV back to the host. That lane captured an exact runtime read for LidReliabilityState via RegQueryValue from System.",
     "targets": [
       {
         "target_id": "lidreliabilitystate",
@@ -159,29 +159,26 @@
     {
       "evidence_id": "vm-power-control-runtime-batch-20260329",
       "kind": "procmon-trace",
-      "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
-      "location": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
-      "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for LidReliabilityState, leaving no usable per-candidate guest capture file.",
+      "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values",
+      "location": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+      "summary": "The guest-processed stepwise Procmon boot log captured an exact runtime read for LidReliabilityState on RegProbe-Baseline-Clean-20260329. Processes: System.",
       "supports": [
         "behavior",
         "risk",
         "version-scope"
       ],
-      "strength": "medium"
+      "strength": "high"
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": false,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "LidReliabilityState is now packaged as a real candidate with live baseline existence, exact repo-doc hits, shared ntoskrnl string and Ghidra corroboration, and a clean-baseline runtime follow-up. It still stays research-gated because the app does not ship this raw registry value as a standalone supported surface and the shared runtime lane did not materialize usable exact-read artifacts.",
-    "blocking_issues": [
-      "No shipped standalone app mapping for the raw registry value.",
-      "Shared clean-baseline runtime capture stayed copy-incomplete and did not yield per-candidate guest artifacts."
-    ]
+    "needs_vm_validation": false,
+    "why": "LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
+    "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-29T11:10:13.492625Z"
+  "last_reviewed_utc": "2026-03-29T11:55:00Z"
 }

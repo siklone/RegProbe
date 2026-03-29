@@ -3,21 +3,22 @@
   "classification": {
     "class": "C",
     "pipeline_version": "v3.1",
-    "reason": "MfBufferingThreshold is now packaged as a real candidate with live baseline existence, exact repo-doc hits, shared ntoskrnl string and Ghidra corroboration, and a clean-baseline runtime follow-up. It still stays research-gated because the app does not ship this raw registry value as a standalone supported surface and the shared runtime lane did not materialize usable exact-read artifacts.",
+    "reason": "MfBufferingThreshold is now backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and a successful guest-processed stepwise Procmon boot log package. It still remains below Class A because the current clean-baseline runtime lane did not capture an exact runtime read for this value.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
-      "static_ghidra"
+      "static_ghidra",
+      "runtime_reboot"
     ],
-    "layer_count": 2,
+    "layer_count": 3,
     "frida_kernel_guard_applied": true,
     "dead_flag_checks": {
       "etw_executed": false,
-      "boot_phase_included": false,
+      "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
     "class_ready_basis": "pending",
-    "next_missing_layer": "app-mapping"
+    "next_missing_layer": "runtime-trace"
   }
 }

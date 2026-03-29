@@ -33,14 +33,14 @@
       "reading_pid": null,
       "operation": null,
       "timestamp": null,
-      "boot_phase_included": false,
+      "boot_phase_included": true,
       "trace_file": null
     },
     "procmon": {
       "executed": true,
       "events_found": true,
       "reading_process": null,
-      "trace_file": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md"
+      "trace_file": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv"
     },
     "frida": {
       "executed": false,
@@ -117,44 +117,67 @@
     }
   },
   "classification": {
-    "class": "C",
+    "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "HibernateEnabled is now packaged as a real candidate with live baseline existence, exact repo-doc hits, shared ntoskrnl string and Ghidra corroboration, and a clean-baseline runtime follow-up. It still stays research-gated because the app does not ship this raw registry value as a standalone supported surface and the shared runtime lane did not materialize usable exact-read artifacts.",
+    "reason": "HibernateEnabled now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
-      "static_ghidra"
+      "static_ghidra",
+      "runtime_reboot"
     ],
-    "layer_count": 2,
+    "layer_count": 3,
     "frida_kernel_guard_applied": true,
     "dead_flag_checks": {
       "etw_executed": false,
-      "boot_phase_included": false,
+      "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
-    "class_ready_basis": "pending",
-    "next_missing_layer": "app-mapping"
+    "class_ready_basis": "converged-vm",
+    "next_missing_layer": "none"
   },
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-29T11:14:15.605524Z"
+      "timestamp": "2026-03-29T12:03:53.555788Z"
     },
     {
-      "step": "all",
-      "timestamp": "2026-03-29T11:14:15.605524Z"
+      "step": "faz6",
+      "timestamp": "2026-03-29T12:03:53.555788Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-29T11:14:15.605524Z"
+      "timestamp": "2026-03-29T12:03:53.555788Z"
     },
     {
       "step": "last_reviewed",
-      "timestamp": "2026-03-29T11:10:13.492625Z"
+      "timestamp": "2026-03-29T11:55:00Z"
     }
   ],
   "artifact_refs": [],
   "research_record": "research/records/power.control.hibernate-enabled.json",
-  "research_record_fallback": "research/records/power.control.hibernate-enabled.review.json"
+  "research_record_fallback": "research/records/power.control.hibernate-enabled.review.json",
+  "re_audit": {
+    "is_re_audit": true,
+    "original_class": "A",
+    "original_evidence_tools": [
+      "procmon",
+      "ghidra",
+      "reboot"
+    ],
+    "original_cross_layer": true,
+    "original_pipeline_version": "pre-v3.1",
+    "re_audit_date": "2026-03-29T12:03:53.555788Z",
+    "re_audit_reason": "non_official_v31_reaudit; etw_not_recorded; dead_flag_checks_incomplete",
+    "re_audit_priority": 1,
+    "new_tools_applied": [],
+    "new_cross_layer": true,
+    "new_class": "A",
+    "class_changed": false,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_four_conditions_met": false,
+    "notes": "Bootstrapped from the current research record and evidence audit.",
+    "new_pipeline_version": "v3.1"
+  }
 }

@@ -1,0 +1,159 @@
+﻿{
+    "total_exact_hits":  2,
+    "commands":  {
+                     "convert_bootlog":  {
+                                             "exit_code":  0,
+                                             "output":  ""
+                                         },
+                     "save_as_csv":  {
+                                         "exit_code":  0,
+                                         "output":  ""
+                                     }
+                 },
+    "generated_utc":  "2026-03-29T11:49:38.6448624Z",
+    "guest_root":  "C:\\RegProbe-Diag\\power-control-docs-first-stepwise-runtime-20260329-143515",
+    "procmon_state_before":  {
+                                 "Logfile":  "C:\\Tools\\Perf\\Procmon\\shortcut-arrow-noarrow.pml",
+                                 "SourcePath":  "",
+                                 "FlightRecorder":  0,
+                                 "RingBufferSize":  0,
+                                 "RingBufferMin":  0
+                             },
+    "exact_hits_exists":  true,
+    "errors":  [
+
+               ],
+    "bootlog_candidates_before":  {
+
+                                  },
+    "status":  "exact-hit",
+    "total_path_hits":  120418,
+    "bootlog_candidates_after":  {
+
+                                 },
+    "csv_exists":  true,
+    "no_hit_candidates":  5,
+    "candidate_results":  [
+                              {
+                                  "candidate_id":  "power.control.class1-initial-unpark-count",
+                                  "value_name":  "Class1InitialUnparkCount",
+                                  "path_hit_count":  0,
+                                  "exact_value_hit_count":  0,
+                                  "exact_read_hit_count":  0,
+                                  "exact_runtime_read":  false,
+                                  "hit_processes":  [
+
+                                                    ],
+                                  "hit_operations":  [
+
+                                                     ],
+                                  "status":  "no-hit"
+                              },
+                              {
+                                  "candidate_id":  "power.control.hibernate-enabled",
+                                  "value_name":  "HibernateEnabled",
+                                  "path_hit_count":  1,
+                                  "exact_value_hit_count":  1,
+                                  "exact_read_hit_count":  1,
+                                  "exact_runtime_read":  true,
+                                  "hit_processes":  [
+                                                        "smss.exe"
+                                                    ],
+                                  "hit_operations":  [
+                                                         "RegQueryValue"
+                                                     ],
+                                  "status":  "exact-hit"
+                              },
+                              {
+                                  "candidate_id":  "power.control.hibernate-enabled-default",
+                                  "value_name":  "HibernateEnabledDefault",
+                                  "path_hit_count":  0,
+                                  "exact_value_hit_count":  0,
+                                  "exact_read_hit_count":  0,
+                                  "exact_runtime_read":  false,
+                                  "hit_processes":  [
+
+                                                    ],
+                                  "hit_operations":  [
+
+                                                     ],
+                                  "status":  "no-hit"
+                              },
+                              {
+                                  "candidate_id":  "power.control.lid-reliability-state",
+                                  "value_name":  "LidReliabilityState",
+                                  "path_hit_count":  1,
+                                  "exact_value_hit_count":  1,
+                                  "exact_read_hit_count":  1,
+                                  "exact_runtime_read":  true,
+                                  "hit_processes":  [
+                                                        "System"
+                                                    ],
+                                  "hit_operations":  [
+                                                         "RegQueryValue"
+                                                     ],
+                                  "status":  "exact-hit"
+                              },
+                              {
+                                  "candidate_id":  "power.control.mf-buffering-threshold",
+                                  "value_name":  "MfBufferingThreshold",
+                                  "path_hit_count":  0,
+                                  "exact_value_hit_count":  0,
+                                  "exact_read_hit_count":  0,
+                                  "exact_runtime_read":  false,
+                                  "hit_processes":  [
+
+                                                    ],
+                                  "hit_operations":  [
+
+                                                     ],
+                                  "status":  "no-hit"
+                              },
+                              {
+                                  "candidate_id":  "power.control.perf-calculate-actual-utilization",
+                                  "value_name":  "PerfCalculateActualUtilization",
+                                  "path_hit_count":  0,
+                                  "exact_value_hit_count":  0,
+                                  "exact_read_hit_count":  0,
+                                  "exact_runtime_read":  false,
+                                  "hit_processes":  [
+
+                                                    ],
+                                  "hit_operations":  [
+
+                                                     ],
+                                  "status":  "no-hit"
+                              },
+                              {
+                                  "candidate_id":  "power.control.timer-rebase-threshold-on-drips-exit",
+                                  "value_name":  "TimerRebaseThresholdOnDripsExit",
+                                  "path_hit_count":  0,
+                                  "exact_value_hit_count":  0,
+                                  "exact_read_hit_count":  0,
+                                  "exact_runtime_read":  false,
+                                  "hit_processes":  [
+
+                                                    ],
+                                  "hit_operations":  [
+
+                                                     ],
+                                  "status":  "no-hit"
+                              }
+                          ],
+    "procmon_state_after":  {
+                                "Logfile":  "C:\\Tools\\Perf\\Procmon\\shortcut-arrow-noarrow.pml",
+                                "SourcePath":  "",
+                                "FlightRecorder":  0,
+                                "RingBufferSize":  0,
+                                "RingBufferMin":  0
+                            },
+    "csv_length":  359512658,
+    "procmon_path":  "C:\\Tools\\Sysinternals\\Procmon64.exe",
+    "path_hits_exists":  true,
+    "phase":  "collect",
+    "procmon_exists":  true,
+    "pml_length":  878775035,
+    "exact_hit_candidates":  2,
+    "pml_exists":  true,
+    "path_only_candidates":  0
+}

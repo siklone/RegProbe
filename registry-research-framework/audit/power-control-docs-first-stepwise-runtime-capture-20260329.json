@@ -1,0 +1,27 @@
+{
+  "generated_utc": "2026-03-29T11:55:00Z",
+  "source_manifest": "registry-research-framework/audit/power-control-docs-first-value-exists-static-triage-20260329.json",
+  "source_summary": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json",
+  "source_results": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json",
+  "source_exact_hits": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+  "source_path_hits": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv",
+  "snapshot_name": "RegProbe-Baseline-Clean-20260329",
+  "lane_kind": "stepwise-procmon-bootlog",
+  "guest_processed": true,
+  "status": "exact-hit",
+  "total_candidates": 7,
+  "exact_hit_candidates": 2,
+  "path_only_candidates": 0,
+  "no_hit_candidates": 5,
+  "exact_runtime_read_ids": [
+    "power.control.hibernate-enabled",
+    "power.control.lid-reliability-state"
+  ],
+  "no_exact_runtime_read_ids": [
+    "power.control.class1-initial-unpark-count",
+    "power.control.hibernate-enabled-default",
+    "power.control.mf-buffering-threshold",
+    "power.control.perf-calculate-actual-utilization",
+    "power.control.timer-rebase-threshold-on-drips-exit"
+  ]
+}

@@ -1,0 +1,107 @@
+﻿[
+    {
+        "candidate_id":  "power.control.class1-initial-unpark-count",
+        "value_name":  "Class1InitialUnparkCount",
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_read_hit_count":  0,
+        "exact_runtime_read":  false,
+        "hit_processes":  [
+
+                          ],
+        "hit_operations":  [
+
+                           ],
+        "status":  "no-hit"
+    },
+    {
+        "candidate_id":  "power.control.hibernate-enabled",
+        "value_name":  "HibernateEnabled",
+        "path_hit_count":  1,
+        "exact_value_hit_count":  1,
+        "exact_read_hit_count":  1,
+        "exact_runtime_read":  true,
+        "hit_processes":  [
+                              "smss.exe"
+                          ],
+        "hit_operations":  [
+                               "RegQueryValue"
+                           ],
+        "status":  "exact-hit"
+    },
+    {
+        "candidate_id":  "power.control.hibernate-enabled-default",
+        "value_name":  "HibernateEnabledDefault",
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_read_hit_count":  0,
+        "exact_runtime_read":  false,
+        "hit_processes":  [
+
+                          ],
+        "hit_operations":  [
+
+                           ],
+        "status":  "no-hit"
+    },
+    {
+        "candidate_id":  "power.control.lid-reliability-state",
+        "value_name":  "LidReliabilityState",
+        "path_hit_count":  1,
+        "exact_value_hit_count":  1,
+        "exact_read_hit_count":  1,
+        "exact_runtime_read":  true,
+        "hit_processes":  [
+                              "System"
+                          ],
+        "hit_operations":  [
+                               "RegQueryValue"
+                           ],
+        "status":  "exact-hit"
+    },
+    {
+        "candidate_id":  "power.control.mf-buffering-threshold",
+        "value_name":  "MfBufferingThreshold",
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_read_hit_count":  0,
+        "exact_runtime_read":  false,
+        "hit_processes":  [
+
+                          ],
+        "hit_operations":  [
+
+                           ],
+        "status":  "no-hit"
+    },
+    {
+        "candidate_id":  "power.control.perf-calculate-actual-utilization",
+        "value_name":  "PerfCalculateActualUtilization",
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_read_hit_count":  0,
+        "exact_runtime_read":  false,
+        "hit_processes":  [
+
+                          ],
+        "hit_operations":  [
+
+                           ],
+        "status":  "no-hit"
+    },
+    {
+        "candidate_id":  "power.control.timer-rebase-threshold-on-drips-exit",
+        "value_name":  "TimerRebaseThresholdOnDripsExit",
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_read_hit_count":  0,
+        "exact_runtime_read":  false,
+        "hit_processes":  [
+
+                          ],
+        "hit_operations":  [
+
+                           ],
+        "status":  "no-hit"
+    }
+]

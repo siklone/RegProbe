@@ -1,0 +1,65 @@
+﻿{
+    "generated_utc":  "2026-03-29T11:35:15.1727715Z",
+    "probe_name":  "power-control-docs-first-stepwise-runtime-20260329-143515",
+    "snapshot_name":  "RegProbe-Baseline-Clean-20260329",
+    "record_family":  "power-control-docs-first",
+    "host_output_root":  "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515",
+    "guest_root":  "C:\\RegProbe-Diag\\power-control-docs-first-stepwise-runtime-20260329-143515",
+    "guest_payload_path":  "C:\\RegProbe-Diag\\power-control-docs-first-stepwise-runtime-20260329-143515\\power-control-stepwise-runtime-payload.ps1",
+    "completed_steps":  [
+                            "A",
+                            "B",
+                            "C1",
+                            "C2",
+                            "C3",
+                            "C4",
+                            "D"
+                        ],
+    "next_step":  "",
+    "phase_status":  {
+                         "A":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-a-summary.json"
+                               },
+                         "B":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-b-summary.json"
+                               },
+                         "C1":  {
+                                    "status":  "ok",
+                                    "failed_stage":  null,
+                                    "summary_file":  "step-c1-summary.json"
+                                },
+                         "C2":  {
+                                    "status":  "ok",
+                                    "failed_stage":  null,
+                                    "summary_file":  "step-c2-summary.json"
+                                },
+                         "C3":  {
+                                    "status":  "ok",
+                                    "failed_stage":  null,
+                                    "summary_file":  "step-c3-summary.json"
+                                },
+                         "C4":  {
+                                    "status":  "ok",
+                                    "failed_stage":  null,
+                                    "summary_file":  "step-c4-summary.json"
+                                },
+                         "D":  {
+                                   "status":  "ok",
+                                   "failed_stage":  null,
+                                   "summary_file":  "step-d-summary.json"
+                               }
+                     },
+    "artifacts":  {
+                      "summary":  "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json",
+                      "results":  "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json",
+                      "arm_summary":  "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary-arm.json",
+                      "collect_summary":  "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary-collect.json",
+                      "exact_hits":  "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+                      "path_hits":  "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv",
+                      "pml_placeholder":  "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/power-control-docs-first-runtime.pml.md"
+                  }
+}

@@ -1,23 +1,24 @@
 {
   "$schema": "registry-evidence-v3.1/classification",
   "classification": {
-    "class": "C",
+    "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "LidReliabilityState is now packaged as a real candidate with live baseline existence, exact repo-doc hits, shared ntoskrnl string and Ghidra corroboration, and a clean-baseline runtime follow-up. It still stays research-gated because the app does not ship this raw registry value as a standalone supported surface and the shared runtime lane did not materialize usable exact-read artifacts.",
+    "reason": "LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
-      "static_ghidra"
+      "static_ghidra",
+      "runtime_reboot"
     ],
-    "layer_count": 2,
+    "layer_count": 3,
     "frida_kernel_guard_applied": true,
     "dead_flag_checks": {
       "etw_executed": false,
-      "boot_phase_included": false,
+      "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
-    "class_ready_basis": "pending",
-    "next_missing_layer": "app-mapping"
+    "class_ready_basis": "converged-vm",
+    "next_missing_layer": "none"
   }
 }

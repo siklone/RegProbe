@@ -15,18 +15,18 @@ USER_PATH_REPLACEMENTS = {
 CLASS_DEFINITIONS: dict[str, dict[str, str]] = {
     "A": {
         "label": "Class A",
-        "title": "App Ready",
-        "description": "Key exists, app-exposed values have trusted meanings, validation proof is present, the app mapping matches research, and the restore/default story is known.",
+        "title": "Cross-Layer Verified",
+        "description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
     },
     "B": {
         "label": "Class B",
-        "title": "Strong but Partial",
-        "description": "Key and primary values are known, but the record is still gated from one-click apply or has incomplete edge semantics.",
+        "title": "Strong but Decision-Gated",
+        "description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
     },
     "C": {
         "label": "Class C",
-        "title": "Key Known, Value Model Partial",
-        "description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+        "title": "Key Known, Runtime Layer Partial",
+        "description": "The key existence is solid and some values are known, but runtime convergence still needs a tighter trace, benchmark, or reboot story.",
     },
     "D": {
         "label": "Class D",
@@ -145,8 +145,11 @@ REBOOT_HINTS = (
     "reboot",
     "restart",
     "lastbootuptime",
+    "last_boot",
     "after boot",
     "after reboot",
+    "boot cycle",
+    "boot log",
     "boot diff",
     "booted",
 )
@@ -307,7 +310,9 @@ def has_official_evidence(record: dict[str, Any]) -> bool:
 
 
 def has_procmon_evidence(record: dict[str, Any]) -> bool:
-    return bool(evidence_kinds(record) & PROCMON_EVIDENCE_KINDS)
+    if evidence_kinds(record) & PROCMON_EVIDENCE_KINDS:
+        return True
+    return "procmon" in record_text_blob(record)
 
 
 def has_ghidra_evidence(record: dict[str, Any]) -> bool:
@@ -315,7 +320,25 @@ def has_ghidra_evidence(record: dict[str, Any]) -> bool:
 
 
 def has_wpr_evidence(record: dict[str, Any]) -> bool:
-    return bool(evidence_kinds(record) & WPR_EVIDENCE_KINDS)
+    if evidence_kinds(record) & WPR_EVIDENCE_KINDS:
+        return True
+    blob = record_text_blob(record)
+    return any(keyword in blob for keyword in ("wpr", ".etl", "etl exists", "boot trace"))
+
+
+def has_exact_runtime_read(record: dict[str, Any]) -> bool:
+    for item in evidence_items(record):
+        if evidence_kind(item) not in (RUNTIME_EVIDENCE_KINDS | PROCMON_EVIDENCE_KINDS | WPR_EVIDENCE_KINDS):
+            continue
+        text = " ".join(
+            str(item.get(field) or "")
+            for field in ("title", "summary", "location", "Title", "Summary", "Location")
+        ).lower()
+        if "did not capture an exact runtime read" in text or "no exact runtime read" in text:
+            continue
+        if "exact runtime read" in text or "exact-value read" in text or "exact-hit" in text:
+            return True
+    return False
 
 
 def has_benchmark_evidence(record: dict[str, Any]) -> bool:
@@ -406,12 +429,9 @@ def determine_evidence_lane(record: dict[str, Any]) -> str:
 def has_converged_vm_evidence(record: dict[str, Any]) -> bool:
     lane = determine_evidence_lane(record)
     if lane == "early-boot":
-        signals = [
-            has_ghidra_evidence(record),
-            has_reboot_evidence(record),
-            has_wpr_evidence(record),
-        ]
-        return sum(1 for item in signals if item) >= 2
+        runtime_signal = has_wpr_evidence(record) or has_exact_runtime_read(record)
+        signals = [has_ghidra_evidence(record), has_reboot_evidence(record), runtime_signal]
+        return all(signals)
 
     if not has_procmon_evidence(record):
         return False
@@ -553,13 +573,10 @@ def build_upstream_lineage_block(record: dict[str, Any], provenance_entry: dict[
 
 def next_missing_layer(record: dict[str, Any], incident_seen: bool = False) -> str:
     decision = record.get("decision") or {}
-    app_status = extract_app_status(record)
     if str(record.get("record_status") or "").strip().lower() == "deprecated":
         return "archived"
     if not validation_proof(record):
         return "validation-proof"
-    if app_status != "matches-research":
-        return "app-mapping"
     if not restore_story_known(record):
         return "restore-story"
     if incident_seen and not has_incident_review(record):
@@ -578,9 +595,9 @@ def next_missing_layer(record: dict[str, Any], incident_seen: bool = False) -> s
             return "ghidra"
         if not has_reboot_evidence(record):
             return "reboot-diff"
-        if not has_wpr_evidence(record):
-            return "wpr-or-ttd"
-        if not bool_value(decision.get("apply_allowed")):
+        if not (has_wpr_evidence(record) or has_exact_runtime_read(record)):
+            return "runtime-trace"
+        if bool(decision.get("blocking_issues")):
             return "decision-gate"
         return "none"
 
@@ -590,7 +607,7 @@ def next_missing_layer(record: dict[str, Any], incident_seen: bool = False) -> s
         return "ghidra"
     if lane == "system" and not (has_wpr_evidence(record) or has_benchmark_evidence(record)):
         return "wpr-or-benchmark"
-    if not bool_value(decision.get("apply_allowed")):
+    if bool(decision.get("blocking_issues")):
         return "decision-gate"
     return "none"
 
@@ -599,19 +616,21 @@ def build_gating_reason(class_id: str, record: dict[str, Any]) -> str:
     decision = record.get("decision") or {}
     app_status = extract_app_status(record)
     if class_id == "A":
-        return "This record is app-ready and can stay one-click actionable."
+        if app_status == "matches-research" and bool_value(decision.get("apply_allowed")):
+            return "This record is cross-layer verified and also aligned with a shipped one-click surface."
+        return "This record is cross-layer verified. App surfacing and one-click actionability are tracked separately."
     if class_id == "B":
         missing = next_missing_layer(record)
-        if not bool_value(decision.get("apply_allowed")):
-            return "Primary values are understood, but this record is still intentionally gated from one-click apply."
+        if bool(decision.get("blocking_issues")):
+            return "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion."
         if not restore_story_known(record):
             return "Semantics are strong, but the restore/default story is still incomplete."
         if missing not in {"none", "decision-gate"}:
             return f"This record is strong enough to show, but it still needs a tighter {missing} layer before it becomes Class A."
-        return "This record is strong enough to show, but it still needs a tighter policy edge or app contract before it becomes Class A."
+        return "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A."
     if class_id == "C":
         if app_status in {"not-mapped", "partially-matches"}:
-            return "The key is understood, but the app mapping is still partial or indirect."
+            return "The key is understood, but runtime convergence is still incomplete. App mapping is tracked separately."
         return "The key is known, but the value model still needs VM diff, benchmark work, or a cleaner runtime story."
     if class_id == "D":
         return "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface."
@@ -631,11 +650,11 @@ def derive_class_id(record: dict[str, Any]) -> str:
     has_blockers = bool(decision.get("blocking_issues"))
     needs_vm = bool_value(decision.get("needs_vm_validation"))
     unknown_state = has_unknown_state(record)
+    app_gate_cleared = app_status != "matches-research" or apply_allowed
 
     if (
         has_validation
-        and app_status == "matches-research"
-        and apply_allowed
+        and app_gate_cleared
         and confidence == "high"
         and restore_story_known(record)
         and not has_blockers
@@ -648,7 +667,10 @@ def derive_class_id(record: dict[str, Any]) -> str:
     if unknown_state or app_status in {"unknown", "mismatch-suspected"} or not has_validation:
         return "D"
 
-    if app_status == "matches-research" and restore_story_known(record):
+    if restore_story_known(record) and (
+        app_status == "matches-research"
+        or (has_converged_vm_evidence(record) and next_missing_layer(record) in {"none", "decision-gate"})
+    ):
         return "B"
 
     return "C"
@@ -666,7 +688,7 @@ def build_class_entry(
     definition = CLASS_DEFINITIONS[class_id]
     decision = record.get("decision") or {}
     app_status = extract_app_status(record)
-    actionable = class_id == "A"
+    actionable = class_id == "A" and app_status == "matches-research" and bool_value(decision.get("apply_allowed"))
     show_in_app = class_id != "E"
 
     gating_reason = truncate_text(build_gating_reason(class_id, record), 220)
