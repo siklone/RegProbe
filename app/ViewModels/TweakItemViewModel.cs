@@ -372,8 +372,18 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string ActionButtonText
     {
         get => _actionButtonText;
-        set => SetProperty(ref _actionButtonText, value);
+        set
+        {
+            if (SetProperty(ref _actionButtonText, value))
+            {
+                OnPropertyChanged(nameof(RepairsActionButtonText));
+            }
+        }
     }
+
+    public string RepairsActionButtonText => string.Equals(ActionButtonText, "Apply", StringComparison.Ordinal)
+        ? "Run"
+        : ActionButtonText;
 
     public string RegistryPath
     {

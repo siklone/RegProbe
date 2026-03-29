@@ -364,7 +364,18 @@
                                 MinWidth="86"
                                 Margin="0,0,6,0"
                                 Visibility="{Binding DataContext.IsSettingsWorkspaceSelected, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
-                        <Button Content="{Binding ActionButtonText}" Command="{Binding ApplyCommand}" ToolTip="{Binding PrimaryActionTooltip}" Style="{StaticResource ApplyButtonStyle}" MinWidth="86"/>
+                        <Button Content="{Binding ActionButtonText}"
+                                Command="{Binding ApplyCommand}"
+                                ToolTip="{Binding PrimaryActionTooltip}"
+                                Style="{StaticResource ApplyButtonStyle}"
+                                MinWidth="86"
+                                Visibility="{Binding DataContext.IsSettingsWorkspaceSelected, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
+                        <Button Content="{Binding RepairsActionButtonText}"
+                                Command="{Binding ApplyCommand}"
+                                ToolTip="{Binding PrimaryActionTooltip}"
+                                Style="{StaticResource ApplyButtonStyle}"
+                                MinWidth="86"
+                                Visibility="{Binding DataContext.IsMaintenanceWorkspaceSelected, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                     </StackPanel>
                 </Grid>
             </Border>
