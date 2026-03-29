@@ -7,7 +7,6 @@ using RegProbe.Core.Services;
 using RegProbe.Engine;
 using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Commands.Cleanup;
-using RegProbe.Engine.Tweaks.Commands.System;
 
 namespace RegProbe.App.Services.TweakProviders;
 
@@ -343,7 +342,6 @@ public sealed class SystemTweakProvider : BaseTweakProvider
             -1);
 
         // Command-based System Tweaks
-        yield return new CheckDiskHealthTweak(context.ElevatedCommandRunner);
         yield return new ClearEventLogsTweak(context.ElevatedCommandRunner, "System");
     }
 }

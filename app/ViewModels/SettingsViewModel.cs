@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using RegProbe.App.Services;
-using RegProbe.App.Utilities;
 using RegProbe.Infrastructure;
 
 namespace RegProbe.App.ViewModels;
@@ -12,30 +10,24 @@ namespace RegProbe.App.ViewModels;
 public sealed class SettingsViewModel : ViewModelBase, IDisposable
 {
     private readonly ISettingsStore _settingsStore;
-    private readonly RelayCommand _saveCommand;
     private readonly IAppLogger _appLogger;
     private readonly ThemeManager _themeManager = new();
     private ThemePalette _currentThemePalette = ThemeManager.Nord;
-    private bool _isDarkTheme = true;
     private bool _runStartupScanOnLaunch = true;
-    private bool _showPreviewHint = true;
     private bool _isSaving;
-    private string _statusMessage = "Settings loaded.";
+    private bool _isLoading;
     private bool _isDisposed;
+    private string _statusMessage = "Settings loaded.";
 
     public SettingsViewModel()
     {
         var paths = AppPaths.FromEnvironment();
         _settingsStore = new SettingsStore(paths);
         _appLogger = new FileAppLogger(paths);
-        _saveCommand = new RelayCommand(_ => _ = SaveSettingsAsync(), _ => !IsSaving);
         _ = LoadSettingsAsync();
     }
 
     public string Title => "Settings";
-    public string AppVersion => AppInfo.Version;
-    public string BuildConfiguration => AppInfo.BuildConfiguration;
-    public string Framework => AppInfo.FrameworkLabel;
 
     public IEnumerable<ThemePalette> AvailableThemes => new[]
     {
@@ -54,20 +46,7 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
             if (SetProperty(ref _currentThemePalette, value))
             {
                 _themeManager.ApplyTheme(value);
-                _ = SaveSettingsAsync();
-            }
-        }
-    }
-
-    public bool IsDarkTheme
-    {
-        get => _isDarkTheme;
-        set
-        {
-            if (SetProperty(ref _isDarkTheme, value))
-            {
-                _themeManager.SetBaseTheme(value);
-                _ = SaveSettingsAsync();
+                QueueSaveIfReady();
             }
         }
     }
@@ -75,90 +54,81 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
     public bool RunStartupScanOnLaunch
     {
         get => _runStartupScanOnLaunch;
-        set => SetProperty(ref _runStartupScanOnLaunch, value);
-    }
-
-    public bool ShowPreviewHint
-    {
-        get => _showPreviewHint;
-        set => SetProperty(ref _showPreviewHint, value);
+        set
+        {
+            if (SetProperty(ref _runStartupScanOnLaunch, value))
+            {
+                QueueSaveIfReady();
+            }
+        }
     }
 
     public string StatusMessage
     {
         get => _statusMessage;
-        set => SetProperty(ref _statusMessage, value);
+        private set => SetProperty(ref _statusMessage, value);
     }
 
     public bool IsSaving
     {
         get => _isSaving;
-        set
-        {
-            if (SetProperty(ref _isSaving, value))
-            {
-                _saveCommand.RaiseCanExecuteChanged();
-            }
-        }
+        private set => SetProperty(ref _isSaving, value);
     }
 
-    public ICommand SaveCommand => _saveCommand;
+    private void QueueSaveIfReady()
+    {
+        if (_isLoading)
+        {
+            return;
+        }
+
+        _ = SaveSettingsAsync();
+    }
 
     private async Task LoadSettingsAsync()
     {
+        _isLoading = true;
         try
         {
             var settings = await _settingsStore.LoadAsync(CancellationToken.None);
-            _isDarkTheme = settings.Theme != "Light";
             _runStartupScanOnLaunch = settings.RunStartupScanOnLaunch;
-            _showPreviewHint = settings.ShowPreviewHint;
+            _currentThemePalette = AvailableThemes.FirstOrDefault(theme => theme.Name == settings.Theme) ?? ThemeManager.Nord;
 
-            var matchedTheme = AvailableThemes.FirstOrDefault(theme => theme.Name == settings.Theme) ?? ThemeManager.Nord;
-            _currentThemePalette = matchedTheme;
-
-            UiPreferences.Current.EnableCardShadows = false;
-            UiPreferences.Current.IsCompactMode = false;
-            _themeManager.SetCardShadows(false);
-            _themeManager.SetCompactMode(false);
-            _themeManager.SetBaseTheme(_isDarkTheme);
             _themeManager.ApplyTheme(_currentThemePalette);
 
             OnPropertyChanged(nameof(CurrentThemePalette));
-            OnPropertyChanged(nameof(IsDarkTheme));
             OnPropertyChanged(nameof(RunStartupScanOnLaunch));
-            OnPropertyChanged(nameof(ShowPreviewHint));
-
-            StatusMessage = "Settings loaded successfully.";
+            StatusMessage = "Theme and startup scan preferences load automatically.";
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             StatusMessage = $"Failed to load settings: {ex.Message}";
+        }
+        finally
+        {
+            _isLoading = false;
         }
     }
 
     private async Task SaveSettingsAsync()
     {
         IsSaving = true;
-        StatusMessage = "Saving settings...";
+        StatusMessage = "Saving changes...";
 
         try
         {
             var settings = await _settingsStore.LoadAsync(CancellationToken.None);
             var previousTheme = settings.Theme;
             var previousStartupScan = settings.RunStartupScanOnLaunch;
-            var previousPreviewHint = settings.ShowPreviewHint;
 
             settings.Theme = CurrentThemePalette.Name;
-            settings.EnableCardShadows = false;
-            settings.IsCompactMode = false;
             settings.RunStartupScanOnLaunch = RunStartupScanOnLaunch;
-            settings.ShowPreviewHint = ShowPreviewHint;
 
             await _settingsStore.SaveAsync(settings, CancellationToken.None);
-            LogSettingsChanges(previousTheme, previousStartupScan, previousPreviewHint, settings);
-            StatusMessage = "Settings saved successfully.";
+            LogSettingsChanges(previousTheme, previousStartupScan, settings);
+            StatusMessage = "Changes saved automatically.";
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             StatusMessage = $"Failed to save settings: {ex.Message}";
         }
@@ -168,11 +138,11 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private void LogSettingsChanges(string previousTheme, bool previousStartupScan, bool previousPreviewHint, AppSettings current)
+    private void LogSettingsChanges(string previousTheme, bool previousStartupScan, AppSettings current)
     {
         var changes = new List<string>();
 
-        if (!string.Equals(previousTheme, current.Theme, System.StringComparison.OrdinalIgnoreCase))
+        if (!string.Equals(previousTheme, current.Theme, StringComparison.OrdinalIgnoreCase))
         {
             changes.Add($"Theme={current.Theme}");
         }
@@ -180,11 +150,6 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
         if (previousStartupScan != current.RunStartupScanOnLaunch)
         {
             changes.Add($"StartupScan={(current.RunStartupScanOnLaunch ? "On" : "Off")}");
-        }
-
-        if (previousPreviewHint != current.ShowPreviewHint)
-        {
-            changes.Add($"PreviewHint={(current.ShowPreviewHint ? "On" : "Off")}");
         }
 
         if (changes.Count == 0)

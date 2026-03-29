@@ -48,8 +48,6 @@ public partial class App : Application
 
             // Load saved theme preference before showing any windows.
             ApplyTheme(settings);
-            UiPreferences.Current.EnableCardShadows = false;
-            UiPreferences.Current.IsCompactMode = false;
             ConfigureProcessRenderSettings();
 
             var showSplash = true;
@@ -194,7 +192,8 @@ public partial class App : Application
             ThemeManager.Nord,
             ThemeManager.ElectricPurple,
             ThemeManager.SunsetOrange,
-            ThemeManager.CyberGreen
+            ThemeManager.CyberGreen,
+            ThemeManager.RubyRed
         };
 
         var selectedPalette = System.Linq.Enumerable.FirstOrDefault(palettes, p => p.Name == settings.Theme) 

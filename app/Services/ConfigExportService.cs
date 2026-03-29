@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using RegProbe.Core;
 using RegProbe.Engine;
 using RegProbe.Infrastructure;
@@ -13,12 +8,11 @@ namespace RegProbe.App.Services;
 
 /// <summary>
 /// Service for exporting and importing application configuration.
-/// Supports backup/restore of applied tweaks, startup settings, and preferences.
+/// Supports backup and restore of tweak state, DNS configuration, and minimal app settings.
 /// </summary>
 public class ConfigExportService
 {
     private readonly ITweakCatalog _tweakCatalog;
-    private readonly StartupService _startupService;
     private readonly DnsService _dnsService;
     private readonly ISettingsStore _settingsStore;
 
@@ -30,20 +24,15 @@ public class ConfigExportService
 
     public ConfigExportService(
         ITweakCatalog? tweakCatalog = null,
-        StartupService? startupService = null,
         DnsService? dnsService = null,
         ISettingsStore? settingsStore = null)
     {
         var paths = AppPaths.FromEnvironment();
         _tweakCatalog = tweakCatalog ?? new TweakCatalogService();
-        _startupService = startupService ?? new StartupService();
         _dnsService = dnsService ?? new DnsService();
         _settingsStore = settingsStore ?? new SettingsStore(paths);
     }
 
-    /// <summary>
-    /// Export current configuration to a file.
-    /// </summary>
     public async Task<bool> ExportAsync(string filePath, ExportOptions options)
     {
         try
@@ -59,11 +48,6 @@ public class ConfigExportService
             if (options.IncludeTweakStates)
             {
                 config.AppliedTweakIds = await GetAppliedTweaksAsync();
-            }
-
-            if (options.IncludeStartupItems)
-            {
-                config.DisabledStartupItems = await GetDisabledStartupItemsAsync();
             }
 
             if (options.IncludeDnsSettings)
@@ -87,9 +71,6 @@ public class ConfigExportService
         }
     }
 
-    /// <summary>
-    /// Import configuration from a file.
-    /// </summary>
     public async Task<ImportResult> ImportAsync(string filePath, bool dryRun = false)
     {
         try
@@ -98,12 +79,13 @@ public class ConfigExportService
             var config = JsonSerializer.Deserialize<ExportedConfig>(json, JsonOptions);
 
             if (config == null)
+            {
                 return new ImportResult(false, "Invalid configuration file");
+            }
 
             var result = new ImportResult(true, "Import successful")
             {
                 TweaksToApply = config.AppliedTweakIds?.Count ?? 0,
-                StartupItemsToRestore = config.DisabledStartupItems?.Count ?? 0,
                 DnsToSet = config.DnsProvider != null,
                 SettingsToApply = config.Settings?.Count ?? 0
             };
@@ -114,11 +96,10 @@ public class ConfigExportService
             }
 
             var failedTweaks = await ApplyTweaksAsync(config.AppliedTweakIds);
-            var failedStartup = await ApplyStartupItemsAsync(config.DisabledStartupItems);
             var dnsApplied = await ApplyDnsAsync(config.DnsProvider);
             var settingsApplied = await ApplySettingsAsync(config.Settings);
 
-            var failures = failedTweaks.Count + failedStartup.Count;
+            var failures = failedTweaks.Count;
             if (!dnsApplied && config.DnsProvider != null)
             {
                 failures += 1;
@@ -136,7 +117,6 @@ public class ConfigExportService
             return new ImportResult(failures == 0, message)
             {
                 TweaksToApply = result.TweaksToApply,
-                StartupItemsToRestore = result.StartupItemsToRestore,
                 DnsToSet = result.DnsToSet,
                 SettingsToApply = result.SettingsToApply
             };
@@ -147,9 +127,6 @@ public class ConfigExportService
         }
     }
 
-    /// <summary>
-    /// Validate a configuration file without importing.
-    /// </summary>
     public async Task<ImportResult> ValidateAsync(string filePath)
     {
         return await ImportAsync(filePath, dryRun: true);
@@ -171,17 +148,10 @@ public class ConfigExportService
             }
             catch
             {
-                // Skip tweaks that fail to detect.
             }
         }
 
         return applied;
-    }
-
-    private async Task<List<string>> GetDisabledStartupItemsAsync()
-    {
-        var items = await _startupService.GetAllStartupItemsAsync();
-        return items.Where(item => !item.IsEnabled).Select(item => item.Id).ToList();
     }
 
     private async Task<string?> GetDnsProviderNameAsync()
@@ -202,10 +172,7 @@ public class ConfigExportService
         return new Dictionary<string, object>
         {
             ["Theme"] = settings.Theme,
-            ["EnableCardShadows"] = settings.EnableCardShadows,
-            ["RunStartupScanOnLaunch"] = settings.RunStartupScanOnLaunch,
-            ["ShowPreviewHint"] = settings.ShowPreviewHint,
-            ["IsCompactMode"] = settings.IsCompactMode
+            ["RunStartupScanOnLaunch"] = settings.RunStartupScanOnLaunch
         };
     }
 
@@ -250,45 +217,6 @@ public class ConfigExportService
         return failed;
     }
 
-    private async Task<List<string>> ApplyStartupItemsAsync(List<string>? disabledItems)
-    {
-        var failed = new List<string>();
-        if (disabledItems == null || disabledItems.Count == 0)
-        {
-            return failed;
-        }
-
-        var items = await _startupService.GetAllStartupItemsAsync();
-        var byId = items.ToDictionary(item => item.Id, StringComparer.OrdinalIgnoreCase);
-
-        foreach (var id in disabledItems)
-        {
-            if (!byId.TryGetValue(id, out var item))
-            {
-                item = items.FirstOrDefault(i => string.Equals(i.Name, id, StringComparison.OrdinalIgnoreCase));
-            }
-
-            if (item == null)
-            {
-                failed.Add(id);
-                continue;
-            }
-
-            if (!item.IsEnabled)
-            {
-                continue;
-            }
-
-            var success = await _startupService.DisableStartupItemAsync(item);
-            if (!success)
-            {
-                failed.Add(id);
-            }
-        }
-
-        return failed;
-    }
-
     private async Task<bool> ApplyDnsAsync(string? providerName)
     {
         if (string.IsNullOrWhiteSpace(providerName))
@@ -321,24 +249,9 @@ public class ConfigExportService
             current.Theme = theme;
         }
 
-        if (TryReadBool(settings, "EnableCardShadows", out var enableShadows))
-        {
-            current.EnableCardShadows = enableShadows;
-        }
-
         if (TryReadBool(settings, "RunStartupScanOnLaunch", out var runStartupScan))
         {
             current.RunStartupScanOnLaunch = runStartupScan;
-        }
-
-        if (TryReadBool(settings, "ShowPreviewHint", out var showPreviewHint))
-        {
-            current.ShowPreviewHint = showPreviewHint;
-        }
-
-        if (TryReadBool(settings, "IsCompactMode", out var compactMode))
-        {
-            current.IsCompactMode = compactMode;
         }
 
         await _settingsStore.SaveAsync(current, CancellationToken.None);
@@ -393,35 +306,24 @@ public class ConfigExportService
     }
 }
 
-/// <summary>
-/// Options for configuration export.
-/// </summary>
 public class ExportOptions
 {
     public bool IncludeTweakStates { get; init; } = true;
-    public bool IncludeStartupItems { get; init; } = true;
     public bool IncludeDnsSettings { get; init; } = true;
     public bool IncludeAppSettings { get; init; } = true;
 }
 
-/// <summary>
-/// Exported configuration structure.
-/// </summary>
 public class ExportedConfig
 {
     public DateTime ExportDate { get; init; }
-    public string AppVersion { get; init; } = "";
-    public string MachineName { get; init; } = "";
+    public string AppVersion { get; init; } = string.Empty;
+    public string MachineName { get; init; } = string.Empty;
     public ExportOptions Options { get; init; } = new();
     public List<string>? AppliedTweakIds { get; set; }
-    public List<string>? DisabledStartupItems { get; set; }
     public string? DnsProvider { get; set; }
     public Dictionary<string, object>? Settings { get; set; }
 }
 
-/// <summary>
-/// Result of an import operation.
-/// </summary>
 public class ImportResult
 {
     public ImportResult(bool success, string message)
@@ -433,9 +335,8 @@ public class ImportResult
     public bool Success { get; }
     public string Message { get; }
     public int TweaksToApply { get; init; }
-    public int StartupItemsToRestore { get; init; }
     public bool DnsToSet { get; init; }
     public int SettingsToApply { get; init; }
-    
-    public int TotalChanges => TweaksToApply + StartupItemsToRestore + (DnsToSet ? 1 : 0) + SettingsToApply;
+
+    public int TotalChanges => TweaksToApply + (DnsToSet ? 1 : 0) + SettingsToApply;
 }

@@ -37,6 +37,20 @@ public sealed class TweakItemViewModelTests
         Assert.Contains("Restore Default", viewModel.RestoreDefaultButtonText);
     }
 
+    [Fact]
+    public async Task RunDetectAsync_SwitchesToRunDetails_AndWritesTerminalOutput()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("misc.test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        await viewModel.RunDetectAsync(CancellationToken.None);
+
+        Assert.True(viewModel.ShowTerminal);
+        Assert.True(viewModel.HasTerminalOutput);
+        Assert.Contains("Detect started.", viewModel.TerminalOutput);
+    }
+
     private sealed class RecordingLogger : IAppLogger
     {
         public void Log(LogLevel level, string message, Exception? exception = null)

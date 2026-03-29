@@ -1,5 +1,4 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,14 +14,14 @@ namespace RegProbe.App.ViewModels;
 
 public sealed class MainViewModel : ViewModelBase, IDisposable
 {
-    private NavigationItem? _selectedNavigationItem;
     private ViewModelBase? _currentViewModel;
     private string _searchText = string.Empty;
     private readonly RelayCommand _clearSearchCommand;
     private readonly IRollbackStateStore _rollbackStore;
     private readonly IBusyService _busyService = new BusyService();
-    private TweaksViewModel? _tweaksViewModel;
-    private System.ComponentModel.PropertyChangedEventHandler? _tweaksPropertyChangedHandler;
+    private readonly TweaksViewModel _workspaceViewModel;
+    private readonly SettingsViewModel _settingsViewModel;
+    private readonly AboutViewModel _aboutViewModel;
 
     private bool _hasPendingRollbacks;
     private int _pendingRollbackCount;
@@ -55,33 +54,19 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             new MiscTweakProvider()
         };
 
-        var bloatware = new BloatwareViewModel();
-        var startup = new StartupViewModel();
-        var tweaks = new TweaksViewModel(providers, _busyService, bloatware, startup);
-        _tweaksViewModel = tweaks;
-
-        var settings = new SettingsViewModel();
-        var about = new AboutViewModel();
-
-        NavigationItems = new ObservableCollection<NavigationItem>
-        {
-            new NavigationItem("tweaks", "Configuration", tweaks),
-            new NavigationItem("settings", "Settings", settings),
-            new NavigationItem("about", "About", about)
-        };
-
-        _tweaksPropertyChangedHandler = (_, _) => { };
-        tweaks.PropertyChanged += _tweaksPropertyChangedHandler;
-
-        SelectedNavigationItem = NavigationItems[0];
+        _workspaceViewModel = new TweaksViewModel(providers, _busyService);
+        _settingsViewModel = new SettingsViewModel();
+        _aboutViewModel = new AboutViewModel();
 
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
 
-        NavigateToTweaksCommand = new RelayCommand(_ => NavigateToTab(0));
-        NavigateToSettingsCommand = new RelayCommand(_ => NavigateToTab(1));
-        NavigateToAboutCommand = new RelayCommand(_ => NavigateToTab(2));
+        ShowWorkspaceCommand = new RelayCommand(_ => ShowWorkspace());
+        ShowSettingsCommand = new RelayCommand(_ => ShowSettings());
+        ShowAboutCommand = new RelayCommand(_ => ShowAbout());
         FocusSearchCommand = new RelayCommand(_ => OnFocusSearchRequested());
         ClearFiltersCommand = new RelayCommand(_ => OnClearFilters());
+
+        ShowWorkspace();
 
         _ = Task.Run(async () =>
         {
@@ -96,8 +81,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         });
     }
 
-    public ObservableCollection<NavigationItem> NavigationItems { get; }
-
     public IBusyService BusyService => _busyService;
 
     public string AppVersionLabel => AppInfo.VersionLabel;
@@ -108,42 +91,17 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public ICommand DismissPendingRollbacksCommand { get; }
 
-    public RelayCommand NavigateToTweaksCommand { get; }
+    public RelayCommand ShowWorkspaceCommand { get; }
 
-    public RelayCommand NavigateToSettingsCommand { get; }
+    public RelayCommand ShowSettingsCommand { get; }
 
-    public RelayCommand NavigateToAboutCommand { get; }
+    public RelayCommand ShowAboutCommand { get; }
 
     public RelayCommand FocusSearchCommand { get; }
 
     public RelayCommand ClearFiltersCommand { get; }
 
     public event Action? FocusSearchRequested;
-
-    public NavigationItem? SelectedNavigationItem
-    {
-        get => _selectedNavigationItem;
-        set
-        {
-            try
-            {
-                LogToFile($"SelectedNavigationItem setter: New value = {value?.Id}");
-                if (SetProperty(ref _selectedNavigationItem, value))
-                {
-                    LogToFile($"SelectedNavigationItem: Setting CurrentViewModel to {_selectedNavigationItem?.Id}");
-                    CurrentViewModel = _selectedNavigationItem?.ViewModel;
-                    LogToFile("SelectedNavigationItem: CurrentViewModel set successfully");
-                    SyncSearchText();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogToFile($"CRASH in SelectedNavigationItem setter: {ex.Message}");
-                LogToFile($"Stack: {ex.StackTrace}");
-                throw;
-            }
-        }
-    }
 
     public ViewModelBase? CurrentViewModel
     {
@@ -153,7 +111,13 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             try
             {
                 LogToFile($"CurrentViewModel setter: Setting to {value?.GetType().Name}");
-                SetProperty(ref _currentViewModel, value);
+                if (SetProperty(ref _currentViewModel, value))
+                {
+                    OnPropertyChanged(nameof(IsWorkspaceViewActive));
+                    OnPropertyChanged(nameof(IsSettingsViewActive));
+                    OnPropertyChanged(nameof(IsAboutViewActive));
+                }
+
                 LogToFile("CurrentViewModel setter: Set complete");
             }
             catch (Exception ex)
@@ -164,6 +128,12 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             }
         }
     }
+
+    public bool IsWorkspaceViewActive => ReferenceEquals(CurrentViewModel, _workspaceViewModel);
+
+    public bool IsSettingsViewActive => ReferenceEquals(CurrentViewModel, _settingsViewModel);
+
+    public bool IsAboutViewActive => ReferenceEquals(CurrentViewModel, _aboutViewModel);
 
     public string SearchText
     {
@@ -226,7 +196,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public async Task RunStartupScanAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
     {
-        if (_tweaksViewModel == null || IsStartupScanActive)
+        if (IsStartupScanActive)
         {
             return;
         }
@@ -234,7 +204,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         IsStartupScanActive = true;
         try
         {
-            await _tweaksViewModel.DetectAllTweaksAsync(progress, ct, isStartupScan: true, forceRedetect: true, skipElevationPrompts: true, skipExpensiveOperations: true);
+            await _workspaceViewModel.DetectAllTweaksAsync(progress, ct, isStartupScan: true, forceRedetect: true, skipElevationPrompts: true, skipExpensiveOperations: true);
             QueueBackgroundInventoryRefresh();
         }
         catch (Exception ex)
@@ -249,31 +219,23 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public void Dispose()
     {
-        if (_tweaksViewModel != null && _tweaksPropertyChangedHandler != null)
+        if (_workspaceViewModel is IDisposable workspaceDisposable)
         {
-            _tweaksViewModel.PropertyChanged -= _tweaksPropertyChangedHandler;
+            workspaceDisposable.Dispose();
         }
 
-        foreach (var item in NavigationItems)
+        if (_settingsViewModel is IDisposable settingsDisposable)
         {
-            if (item.ViewModel is IDisposable disposable)
-            {
-                disposable.Dispose();
-            }
+            settingsDisposable.Dispose();
         }
     }
 
     private void QueueBackgroundInventoryRefresh()
     {
-        if (_tweaksViewModel == null)
-        {
-            return;
-        }
-
         var dispatcher = Application.Current?.Dispatcher;
         if (dispatcher == null)
         {
-            _ = _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
+            _ = _workspaceViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
             return;
         }
 
@@ -282,7 +244,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             try
             {
                 await Task.Delay(250);
-                await _tweaksViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
+                await _workspaceViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
             }
             catch (Exception ex)
             {
@@ -291,36 +253,39 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         }, DispatcherPriority.ContextIdle);
     }
 
-    private void NavigateToTab(int index)
+    private void ShowWorkspace()
     {
-        if (index >= 0 && index < NavigationItems.Count)
-        {
-            SelectedNavigationItem = NavigationItems[index];
-        }
+        CurrentViewModel = _workspaceViewModel;
+        SyncSearchText();
+    }
+
+    private void ShowSettings()
+    {
+        CurrentViewModel = _settingsViewModel;
+    }
+
+    private void ShowAbout()
+    {
+        CurrentViewModel = _aboutViewModel;
     }
 
     private void OnFocusSearchRequested()
     {
-        NavigateToTab(0);
+        ShowWorkspace();
         FocusSearchRequested?.Invoke();
     }
 
     private void OnClearFilters()
     {
+        ShowWorkspace();
         SearchText = string.Empty;
-        if (_currentViewModel is TweaksViewModel tweaksViewModel)
-        {
-            tweaksViewModel.StatusFilter = string.Empty;
-            tweaksViewModel.ShowFavoritesOnly = false;
-        }
+        _workspaceViewModel.StatusFilter = string.Empty;
+        _workspaceViewModel.ShowFavoritesOnly = false;
     }
 
     private void SyncSearchText()
     {
-        if (_currentViewModel is TweaksViewModel tweaksViewModel)
-        {
-            tweaksViewModel.SearchText = _searchText;
-        }
+        _workspaceViewModel.SearchText = _searchText;
     }
 
     private async Task CheckPendingRollbacksAsync()
@@ -346,11 +311,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     private async Task RecoverPendingRollbacksAsync()
     {
-        if (_tweaksViewModel == null)
-        {
-            return;
-        }
-
         IsRecovering = true;
         LogToFile("Crash recovery: Starting rollback recovery...");
 
@@ -363,7 +323,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             {
                 try
                 {
-                    var tweakVm = _tweaksViewModel.Tweaks.FirstOrDefault(t => t.Id == entry.TweakId);
+                    var tweakVm = _workspaceViewModel.Tweaks.FirstOrDefault(t => t.Id == entry.TweakId);
                     if (tweakVm != null && tweakVm.IsApplied)
                     {
                         await tweakVm.RunRollbackAsync(CancellationToken.None);

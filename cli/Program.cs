@@ -445,19 +445,16 @@ class Program
         var exportSubCommand = new Command("export", "Export configuration to file");
         var fileOption = new Option<string>("--file", () => "config.json", "Output file path");
         var includeTweaks = new Option<bool>("--include-tweaks", () => true, "Include applied tweak states");
-        var includeStartup = new Option<bool>("--include-startup", () => true, "Include disabled startup items");
         var includeDns = new Option<bool>("--include-dns", () => true, "Include DNS settings");
         var includeSettings = new Option<bool>("--include-settings", () => true, "Include app settings");
         exportSubCommand.AddOption(fileOption);
         exportSubCommand.AddOption(includeTweaks);
-        exportSubCommand.AddOption(includeStartup);
         exportSubCommand.AddOption(includeDns);
         exportSubCommand.AddOption(includeSettings);
         exportSubCommand.SetHandler(async context =>
         {
             var file = context.ParseResult.GetValueForOption(fileOption) ?? "config.json";
             var includeTweaksValue = context.ParseResult.GetValueForOption(includeTweaks);
-            var includeStartupValue = context.ParseResult.GetValueForOption(includeStartup);
             var includeDnsValue = context.ParseResult.GetValueForOption(includeDns);
             var includeSettingsValue = context.ParseResult.GetValueForOption(includeSettings);
 
@@ -465,7 +462,6 @@ class Program
             var options = new ExportOptions
             {
                 IncludeTweakStates = includeTweaksValue,
-                IncludeStartupItems = includeStartupValue,
                 IncludeDnsSettings = includeDnsValue,
                 IncludeAppSettings = includeSettingsValue
             };
@@ -494,7 +490,7 @@ class Program
 
             var result = await service.ImportAsync(file, dryRun: !apply);
             Console.WriteLine(result.Message);
-            Console.WriteLine($"Tweaks: {result.TweaksToApply}, Startup: {result.StartupItemsToRestore}, DNS: {(result.DnsToSet ? "yes" : "no")}, Settings: {result.SettingsToApply}");
+            Console.WriteLine($"Tweaks: {result.TweaksToApply}, DNS: {(result.DnsToSet ? "yes" : "no")}, Settings: {result.SettingsToApply}");
             Console.WriteLine($"Total changes: {result.TotalChanges}");
 
             context.ExitCode = result.Success ? 0 : 2;

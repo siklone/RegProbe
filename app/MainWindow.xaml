@@ -23,7 +23,7 @@
 
     <!-- WindowChrome for resize borders -->
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="44"
+        <WindowChrome CaptionHeight="40"
                       ResizeBorderThickness="6"
                       GlassFrameThickness="0"
                       CornerRadius="0"/>
@@ -32,10 +32,10 @@
 
     <!-- Keyboard Shortcuts -->
     <Window.InputBindings>
-        <!-- Navigation: Ctrl+1 to Ctrl+3 -->
-        <KeyBinding Key="D1" Modifiers="Control" Command="{Binding NavigateToTweaksCommand}"/>
-        <KeyBinding Key="D2" Modifiers="Control" Command="{Binding NavigateToSettingsCommand}"/>
-        <KeyBinding Key="D3" Modifiers="Control" Command="{Binding NavigateToAboutCommand}"/>
+        <!-- Navigation -->
+        <KeyBinding Key="D1" Modifiers="Control" Command="{Binding ShowWorkspaceCommand}"/>
+        <KeyBinding Key="OemComma" Modifiers="Control" Command="{Binding ShowSettingsCommand}"/>
+        <KeyBinding Key="F1" Command="{Binding ShowAboutCommand}"/>
         <!-- Search: Ctrl+F -->
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
         <!-- Clear filters: Escape -->
@@ -62,7 +62,7 @@
         <Style x:Key="ShellTopNavItemStyle" TargetType="ListBoxItem">
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="Margin" Value="0,0,8,0" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -71,10 +71,10 @@
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border x:Name="Border"
                                 Background="{DynamicResource ShellTopNavItemBrush}"
-                                CornerRadius="7"
+                                CornerRadius="6"
                                 BorderThickness="1"
                                 BorderBrush="{DynamicResource ShellTopNavBorderBrush}"
-                                Padding="12,6">
+                                Padding="10,5">
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -89,6 +89,57 @@
                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
                                 <Setter Property="FontWeight" Value="SemiBold" />
                             </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ShellWindowControlButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+        </Style>
+
+        <Style x:Key="ShellHeaderButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource ShellTopNavItemBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="11,5"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavHoverBrush}"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -157,7 +208,7 @@
 
     <Grid Background="{DynamicResource BackgroundGradientBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="44"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -198,29 +249,55 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <!-- Title and Icon (Draggable area) -->
-                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0"
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0"
                             MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
                             MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
                     <TextBlock Text="RegProbe" 
                                Foreground="{DynamicResource ForegroundBrightBrush}"
                                FontFamily="{DynamicResource FontFamilyDisplay}"
-                               FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                               FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
                 </StackPanel>
-                
+
                 <!-- Window Controls -->
                 <StackPanel Grid.Column="1" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <!-- Minimize -->
+                    <Button x:Name="MinimizeButton" Click="MinimizeButton_Click"
+                            ToolTip="Minimize">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource ShellWindowControlButtonStyle}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
+                                                <Path Data="M 0,0 H 10"
+                                                      Stroke="{DynamicResource ForegroundLightBrush}"
+                                                      StrokeThickness="1.2"
+                                                      StrokeStartLineCap="Square"
+                                                      StrokeEndLineCap="Square"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Margin="0,8,0,0"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
                     <!-- Maximize/Restore -->
                     <Button x:Name="MaximizeButton" Click="MaximizeButton_Click"
-                            Width="44" Height="44"
-                            Background="Transparent" BorderThickness="0" Cursor="Hand"
-                            Focusable="False"
-                            FocusVisualStyle="{x:Null}"
                             ToolTip="Maximize"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                         <Button.Style>
-                            <Style TargetType="Button">
+                            <Style TargetType="Button" BasedOn="{StaticResource ShellWindowControlButtonStyle}">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
@@ -245,14 +322,10 @@
                     
                     <!-- Close -->
                     <Button x:Name="CloseButton" Click="CloseButton_Click"
-                            Width="44" Height="44"
-                            Background="Transparent" BorderThickness="0" Cursor="Hand"
-                            Focusable="False"
-                            FocusVisualStyle="{x:Null}"
                             ToolTip="Close"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                         <Button.Style>
-                            <Style TargetType="Button">
+                            <Style TargetType="Button" BasedOn="{StaticResource ShellWindowControlButtonStyle}">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
@@ -288,33 +361,39 @@
                     Background="#A6090B10"
                     BorderBrush="#16FFFFFF"
                     BorderThickness="0,0,0,1"
-                    Padding="10,6">
+                    Padding="8,4">
                 <DockPanel LastChildFill="False">
-                    <ListBox DockPanel.Dock="Left"
-                             ItemsSource="{Binding NavigationItems}"
-                             SelectedItem="{Binding SelectedNavigationItem}"
-                             Style="{StaticResource ShellTopNavListStyle}"
-                             ItemContainerStyle="{StaticResource ShellTopNavItemStyle}"
-                             WindowChrome.IsHitTestVisibleInChrome="True">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}"
-                                           VerticalAlignment="Center"
-                                           FontFamily="{DynamicResource FontFamilyDisplay}"
-                                           FontSize="12"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
                     <StackPanel DockPanel.Dock="Right"
                                 Orientation="Horizontal"
                                 VerticalAlignment="Center">
+                        <Button Content="Settings"
+                                Command="{Binding ShowSettingsCommand}"
+                                Tag="{Binding IsSettingsViewActive}"
+                                Style="{StaticResource ShellHeaderButtonStyle}"/>
+                        <Button Content="About"
+                                Command="{Binding ShowAboutCommand}"
+                                Tag="{Binding IsAboutViewActive}"
+                                Style="{StaticResource ShellHeaderButtonStyle}"/>
                         <TextBlock Text="{Binding AppVersionLabel}"
-                                   Margin="0,0,4,0"
+                                   Margin="10,0,2,0"
                                    Foreground="{DynamicResource ForegroundLightBrush}"
-                                       FontFamily="{DynamicResource FontFamilyMono}"
-                                   FontSize="10"
+                                   FontFamily="{DynamicResource FontFamilyMono}"
+                                   FontSize="9"
                                    VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Left"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <Button Content="Configuration"
+                                Command="{Binding ShowWorkspaceCommand}"
+                                Tag="{Binding IsWorkspaceViewActive}"
+                                Style="{StaticResource ShellHeaderButtonStyle}"/>
+                        <TextBlock Margin="4,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource MutedForegroundBrush}"
+                                   FontSize="10"
+                                   Text="Workspace-first shell"/>
                     </StackPanel>
                 </DockPanel>
             </Border>

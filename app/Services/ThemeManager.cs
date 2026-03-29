@@ -78,55 +78,8 @@ public class ThemeManager
     }
 
     /// <summary>
-    /// Enable or disable card shadow effects application-wide.
-    /// </summary>
-    public void SetCardShadows(bool enabled)
-    {
-        var effect = enabled 
-            ? new System.Windows.Media.Effects.DropShadowEffect
-            {
-                Color = Colors.Black,
-                BlurRadius = 15,
-                ShadowDepth = 2,
-                Opacity = 0.3,
-                Direction = 270
-            }
-            : null;
-
-        if (_resources.Contains("CardShadowEffect"))
-            _resources["CardShadowEffect"] = effect;
-        else
-            _resources.Add("CardShadowEffect", effect);
-    }
-
-    /// <summary>
-    /// Set compact mode spacing values.
-    /// </summary>
-    public void SetCompactMode(bool compact)
-    {
-        var padding = compact ? new Thickness(8, 4, 8, 4) : new Thickness(12, 8, 12, 8);
-        var margin = compact ? new Thickness(0, 2, 0, 2) : new Thickness(0, 4, 0, 4);
-        var fontSize = compact ? 12.0 : 13.0;
-
-        if (_resources.Contains("CardPadding"))
-            _resources["CardPadding"] = padding;
-        else
-            _resources.Add("CardPadding", padding);
-
-        if (_resources.Contains("CardMargin"))
-            _resources["CardMargin"] = margin;
-        else
-            _resources.Add("CardMargin", margin);
-
-        if (_resources.Contains("CompactFontSize"))
-            _resources["CompactFontSize"] = fontSize;
-        else
-            _resources.Add("CompactFontSize", fontSize);
-    }
-
-    /// <summary>
-    /// Set the base theme (Dark or Light) by swapping ResourceDictionaries.
-    /// </summary>
+     /// Set the base theme (Dark or Light) by swapping ResourceDictionaries.
+     /// </summary>
     public void SetBaseTheme(bool isDark)
     {
         try

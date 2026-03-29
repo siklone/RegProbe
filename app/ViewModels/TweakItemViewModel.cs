@@ -1015,8 +1015,16 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string TerminalOutput
     {
         get => _terminalOutput;
-        private set => SetProperty(ref _terminalOutput, value);
+        private set
+        {
+            if (SetProperty(ref _terminalOutput, value))
+            {
+                OnPropertyChanged(nameof(HasTerminalOutput));
+            }
+        }
     }
+
+    public bool HasTerminalOutput => !string.IsNullOrWhiteSpace(_terminalOutput);
 
     public bool ShowTerminal
     {
@@ -1315,6 +1323,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         StatusMessage = dryRun ? "Preview run started." : "Apply run started.";
         LastUpdatedText = "Last update: -";
         ClearTerminal();
+        ShowTerminal = true;
         AppendToTerminal(dryRun ? "Starting Pre-Execution Check (Dry Run)..." : "Starting Execution Pipeline...");
         ResetSteps();
         Steps.First().MarkInProgress();
@@ -1345,6 +1354,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             LogToFile($"RunAsync: '{Name}' was CANCELLED");
             LastOutcome = TweakRunOutcome.Cancelled;
             StatusMessage = "Run cancelled.";
+            AppendToTerminal("Run cancelled.");
         }
         catch (Exception ex)
         {
@@ -1352,6 +1362,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             LogToFile($"Stack: {ex.StackTrace}");
             LastOutcome = TweakRunOutcome.Failed;
             StatusMessage = $"Run failed: {ex.Message}";
+            AppendToTerminal($"Run failed: {ex.Message}");
         }
         finally
         {
@@ -1417,6 +1428,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         LastActionText = action.ToString();
         LastOutcome = TweakRunOutcome.InProgress;
         StatusMessage = $"{action} started.";
+        ShowTerminal = true;
+        AppendToTerminal($"{action} started.");
         var step = Steps.FirstOrDefault(item => item.Action == action);
         step?.MarkInProgress();
 
@@ -1442,11 +1455,13 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             LastOutcome = TweakRunOutcome.Cancelled;
             StatusMessage = $"{action} cancelled.";
+            AppendToTerminal($"{action} cancelled.");
         }
         catch (Exception ex)
         {
             LastOutcome = TweakRunOutcome.Failed;
             StatusMessage = $"{action} failed: {ex.Message}";
+            AppendToTerminal($"{action} failed: {ex.Message}");
         }
         finally
         {

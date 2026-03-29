@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace RegProbe.App.Utilities;
 
@@ -15,6 +16,13 @@ public static class ScrollViewerHelper
             typeof(ScrollViewerHelper),
             new PropertyMetadata(false, OnEnableMouseWheelScrollChanged));
 
+    public static readonly DependencyProperty ScrollToEndOnChangeProperty =
+        DependencyProperty.RegisterAttached(
+            "ScrollToEndOnChange",
+            typeof(object),
+            typeof(ScrollViewerHelper),
+            new PropertyMetadata(null, OnScrollToEndOnChangeChanged));
+
     public static void SetEnableMouseWheelScroll(DependencyObject element, bool value)
     {
         element.SetValue(EnableMouseWheelScrollProperty, value);
@@ -25,6 +33,15 @@ public static class ScrollViewerHelper
         return (bool)element.GetValue(EnableMouseWheelScrollProperty);
     }
 
+    public static void SetScrollToEndOnChange(DependencyObject element, object? value)
+    {
+        element.SetValue(ScrollToEndOnChangeProperty, value);
+    }
+
+    public static object? GetScrollToEndOnChange(DependencyObject element)
+    {
+        return element.GetValue(ScrollToEndOnChangeProperty);
+    }
     private static void OnEnableMouseWheelScrollChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not UIElement element)
@@ -42,6 +59,18 @@ public static class ScrollViewerHelper
         }
     }
 
+    private static void OnScrollToEndOnChangeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is not ScrollViewer scrollViewer || Equals(e.NewValue, e.OldValue))
+        {
+            return;
+        }
+
+        scrollViewer.Dispatcher.BeginInvoke(
+            new Action(scrollViewer.ScrollToEnd),
+            DispatcherPriority.Background);
+    }
+
     private static void OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
         if (sender is not DependencyObject source)
@@ -49,28 +78,37 @@ public static class ScrollViewerHelper
             return;
         }
 
-        var scrollViewer = FindScrollViewer(source);
-        if (scrollViewer == null || scrollViewer.ScrollableHeight <= 0)
+        var scrollViewer = FindScrollViewer(source) ?? FindAncestorScrollViewer(source);
+        while (scrollViewer != null)
         {
-            scrollViewer = FindAncestorScrollViewer(source);
-        }
+            if (TryScroll(scrollViewer, e.Delta))
+            {
+                e.Handled = true;
+                return;
+            }
 
-        if (scrollViewer == null || scrollViewer.ScrollableHeight <= 0)
+            scrollViewer = FindAncestorScrollViewer(scrollViewer);
+        }
+    }
+
+    private static bool TryScroll(ScrollViewer scrollViewer, int wheelDelta)
+    {
+        if (scrollViewer.ScrollableHeight <= 0)
         {
-            return;
+            return false;
         }
 
         var lines = Math.Max(1, SystemParameters.WheelScrollLines);
-        var delta = -e.Delta / 120.0;
+        var delta = -wheelDelta / 120.0;
         var offset = scrollViewer.VerticalOffset + delta * lines * 16;
         offset = Math.Max(0, Math.Min(offset, scrollViewer.ScrollableHeight));
         if (Math.Abs(offset - scrollViewer.VerticalOffset) < 0.1)
         {
-            return;
+            return false;
         }
 
         scrollViewer.ScrollToVerticalOffset(offset);
-        e.Handled = true;
+        return true;
     }
 
     private static ScrollViewer? FindScrollViewer(DependencyObject root)

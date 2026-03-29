@@ -5,11 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:core="clr-namespace:RegProbe.Core;assembly=RegProbe.Core"
              xmlns:viewModels="clr-namespace:RegProbe.App.ViewModels"
-              xmlns:services="clr-namespace:RegProbe.App.Services"
-              xmlns:converters="clr-namespace:RegProbe.App.Converters"
-              xmlns:utilities="clr-namespace:RegProbe.App.Utilities"
-              xmlns:local="clr-namespace:RegProbe.App.Views"
-              x:Name="TweaksRoot"
+             xmlns:converters="clr-namespace:RegProbe.App.Converters"
+             xmlns:utilities="clr-namespace:RegProbe.App.Utilities"
+             x:Name="TweaksRoot"
               mc:Ignorable="d"
              FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12"
@@ -141,39 +139,6 @@
             <Setter Property="Margin" Value="0,0,8,8"/>
         </Style>
 
-        <Style x:Key="ServiceManagementListItemStyle" TargetType="ListBoxItem">
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0,0,0,4"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="Root"
-                                Background="{DynamicResource AppInsetSurfaceBrush}"
-                                BorderBrush="{DynamicResource GlassBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="14"
-                                Padding="10,8">
-                            <ContentPresenter/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppWorkspaceHoverBrush}"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="ServiceManagementDetailCardStyle" TargetType="Border" BasedOn="{StaticResource PolicyReferenceInfoCardStyle}">
-            <Setter Property="Margin" Value="0,0,0,10"/>
-            <Setter Property="Padding" Value="12"/>
-        </Style>
 
         <converters:EnumToBooleanConverter x:Key="EnumToBool" />
         <converters:TabToVisibilityConverter x:Key="TabToVis" />
@@ -358,8 +323,8 @@
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="16,8"/>
-            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Padding" Value="14,6"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -389,9 +354,9 @@
         </Style>
 
         <Style x:Key="SectionTabToggleStyle" TargetType="ToggleButton" BasedOn="{StaticResource WorkspaceModeButtonStyle}">
-            <Setter Property="Padding" Value="18,7"/>
-            <Setter Property="MinHeight" Value="34"/>
-            <Setter Property="MinWidth" Value="112"/>
+            <Setter Property="Padding" Value="15,6"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="MinWidth" Value="104"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
         </Style>
 
@@ -489,9 +454,9 @@
 	            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
 	            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
 	            <Setter Property="BorderThickness" Value="1"/>
-	            <Setter Property="Padding" Value="12,0"/>
-	            <Setter Property="FontSize" Value="12"/>
-	            <Setter Property="Height" Value="34"/>
+	            <Setter Property="Padding" Value="10,0"/>
+	            <Setter Property="FontSize" Value="11"/>
+	            <Setter Property="Height" Value="32"/>
 	            <Setter Property="VerticalContentAlignment" Value="Center"/>
 	            <Setter Property="CaretBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
 	            <Setter Property="Template">
@@ -510,7 +475,7 @@
                                 <TextBlock x:Name="Watermark"
                                            Text="{TemplateBinding Tag}"
                                            Foreground="{DynamicResource MutedForegroundBrush}"
-                                           Margin="10,0,10,0"
+                                           Margin="8,0,8,0"
                                            VerticalAlignment="Center"
                                            IsHitTestVisible="False"
                                            Visibility="Collapsed"/>
@@ -543,7 +508,7 @@
                                 BorderBrush="{DynamicResource GlassBorderBrush}"
                                 BorderThickness="1"
                                 CornerRadius="8"
-                                Padding="11,6">
+                                Padding="10,5">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <ControlTemplate.Triggers>
@@ -1137,9 +1102,6 @@
                 <Border.Style>
                     <Style TargetType="Border">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Source={x:Static services:UiPreferences.Current}, Path=IsCompactMode}" Value="True">
-                                <Setter Property="Padding" Value="13,12,12,12"/>
-                            </DataTrigger>
                             <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
                                 <Setter Property="Background" Value="#121720"/>
                                 <Setter Property="BorderBrush" Value="#36FF4C58"/>
@@ -1718,13 +1680,43 @@
 
                          <!-- Tab View 2: Execution Log -->
                          <StackPanel Visibility="{Binding ShowTerminal, Converter={StaticResource BoolToVisibility}}">
-                             <Border Background="{DynamicResource TerminalBackgroundBrush}" CornerRadius="4" Padding="10" Height="130">
-                                 <ScrollViewer VerticalScrollBarVisibility="Auto"
-                                               HorizontalScrollBarVisibility="Disabled"
-                                               CanContentScroll="False"
-                                               utilities:ScrollViewerHelper.EnableMouseWheelScroll="True">
-                                        <TextBlock Text="{Binding TerminalOutput}" Foreground="{DynamicResource ForegroundLightBrush}" FontSize="11" FontFamily="{DynamicResource FontFamilyMono}" TextWrapping="Wrap"/>
-                                 </ScrollViewer>
+                             <Border Background="{DynamicResource BackgroundDarkestBrush}"
+                                     BorderBrush="{DynamicResource GlassBorderBrush}"
+                                     BorderThickness="1"
+                                     CornerRadius="4"
+                                     Padding="8,6"
+                                     Margin="0,0,0,8">
+                                 <TextBlock Text="Runs land here automatically. The log stays pinned to the newest line while fresh output arrives."
+                                            Foreground="{DynamicResource MutedForegroundBrush}"
+                                            FontSize="10"
+                                            TextWrapping="Wrap"/>
+                             </Border>
+                             <Border Background="{DynamicResource TerminalBackgroundBrush}"
+                                     CornerRadius="4"
+                                     Padding="10"
+                                     MinHeight="118"
+                                     MaxHeight="220">
+                                 <Grid>
+                                     <TextBlock Text="Use Detect, Apply, Verify, or Restore Previous to populate this log."
+                                                Foreground="{DynamicResource MutedForegroundBrush}"
+                                                FontSize="11"
+                                                TextWrapping="Wrap"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Left"
+                                                Visibility="{Binding HasTerminalOutput, Converter={StaticResource InverseBoolToVisibility}}"/>
+                                     <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                                   HorizontalScrollBarVisibility="Disabled"
+                                                   CanContentScroll="False"
+                                                   utilities:ScrollViewerHelper.EnableMouseWheelScroll="True"
+                                                   utilities:ScrollViewerHelper.ScrollToEndOnChange="{Binding TerminalOutput}"
+                                                   Visibility="{Binding HasTerminalOutput, Converter={StaticResource BoolToVisibility}}">
+                                            <TextBlock Text="{Binding TerminalOutput}"
+                                                       Foreground="{DynamicResource ForegroundLightBrush}"
+                                                       FontSize="11"
+                                                       FontFamily="{DynamicResource FontFamilyMono}"
+                                                       TextWrapping="Wrap"/>
+                                     </ScrollViewer>
+                                 </Grid>
                              </Border>
                          </StackPanel>
 
@@ -1963,10 +1955,6 @@
                                 <DataTrigger Binding="{Binding IsNested}" Value="True">
                                     <Setter Property="Background" Value="Transparent"/>
                                 </DataTrigger>
-                            <DataTrigger Binding="{Binding Source={x:Static services:UiPreferences.Current}, Path=IsCompactMode}" Value="True">
-                                    <Setter Property="Padding" Value="10,5"/>
-                                    <Setter Property="Margin" Value="0,0,0,3"/>
-                            </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
@@ -2079,7 +2067,7 @@
     </UserControl.Resources>
 
     <Grid ClipToBounds="False">
-        <Grid Margin="16,8,16,12"
+        <Grid Margin="16,6,16,10"
               HorizontalAlignment="Stretch"
               ClipToBounds="False">
             <Grid.RowDefinitions>
@@ -2088,19 +2076,20 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Margin="0,0,0,14">
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
                 <TextBlock Text="{Binding CurrentMainTabEyebrow}"
                            Style="{StaticResource AppSectionEyebrowTextStyle}"/>
                 <TextBlock Text="{Binding CurrentMainTabTitle}"
-                           Margin="0,2,0,0"
+                           Margin="0,1,0,0"
                            Style="{StaticResource AppHeroTitleTextStyle}"/>
                 <TextBlock Text="{Binding CurrentMainTabSubtitle}"
-                           Margin="0,3,0,0"
+                           Margin="0,2,0,0"
                            Style="{StaticResource AppSectionSubtitleTextStyle}"/>
             </StackPanel>
 
-            <Grid Grid.Row="1" Margin="0,0,0,14">
+            <Grid Grid.Row="1" Margin="0,0,0,10">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
@@ -2110,7 +2099,8 @@
                         BorderBrush="{StaticResource AccentSoftBorderBrush}"
                         BorderThickness="1"
                         CornerRadius="10"
-                        Padding="5">
+                        Padding="4"
+                        HorizontalAlignment="Left">
                     <WrapPanel>
                         <ToggleButton IsChecked="{Binding IsConfigurationTabSelected, Mode=OneWay}"
                                       Command="{Binding SetTabCommand}"
@@ -2124,35 +2114,11 @@
                                       Style="{StaticResource SectionTabToggleStyle}">
                             <TextBlock Text="Policy Reference"/>
                         </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsServicesTabSelected, Mode=OneWay}"
-                                      Command="{Binding SetTabCommand}"
-                                      CommandParameter="Services"
-                                      Style="{StaticResource SectionTabToggleStyle}">
-                            <TextBlock Text="Services"/>
-                        </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsBloatwareTabSelected, Mode=OneWay}"
-                                      Command="{Binding SetTabCommand}"
-                                      CommandParameter="Bloatware"
-                                      Style="{StaticResource SectionTabToggleStyle}">
-                            <TextBlock Text="Bloatware"/>
-                        </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsStartupTabSelected, Mode=OneWay}"
-                                      Command="{Binding SetTabCommand}"
-                                      CommandParameter="Startup"
-                                      Style="{StaticResource SectionTabToggleStyle}">
-                            <TextBlock Text="Startup"/>
-                        </ToggleButton>
-                        <ToggleButton IsChecked="{Binding IsDiskHealthTabSelected, Mode=OneWay}"
-                                      Command="{Binding SetTabCommand}"
-                                      CommandParameter="Disk Health"
-                                      Style="{StaticResource SectionTabToggleStyle}">
-                            <TextBlock Text="Disk Health"/>
-                        </ToggleButton>
                     </WrapPanel>
                 </Border>
 
-                <WrapPanel Grid.Column="1"
-                           Margin="12,0,0,0"
+                <WrapPanel Grid.Column="2"
+                           Margin="10,0,0,0"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Center"
                            Visibility="{Binding IsConfigurationTabSelected, Converter={StaticResource BoolToVisibility}}">
@@ -2160,14 +2126,14 @@
                                   IsChecked="{Binding IsSettingsWorkspaceSelected, Mode=OneWay}"
                                   Style="{StaticResource WorkspaceModeButtonStyle}">
                         <TextBlock Text="{Binding SettingsWorkspaceCount, StringFormat={}{0} items}"
-                                   FontSize="12"
+                                   FontSize="11"
                                    FontWeight="SemiBold"/>
                     </ToggleButton>
                     <ToggleButton Command="{Binding ShowMaintenanceWorkspaceCommand}"
                                   IsChecked="{Binding IsMaintenanceWorkspaceSelected, Mode=OneWay}"
                                   Style="{StaticResource WorkspaceModeButtonStyle}">
                         <TextBlock Text="{Binding MaintenanceWorkspaceCount, StringFormat=Cleanup &amp; Repair - {0}}"
-                                    FontSize="12"
+                                    FontSize="11"
                                     FontWeight="SemiBold"/>
                     </ToggleButton>
                 </WrapPanel>
@@ -2187,7 +2153,7 @@
                         </Grid.RowDefinitions>
 
                     <!-- Control Bar -->
-                    <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                    <StackPanel Grid.Row="0" Margin="0,0,0,8">
                         <Grid Margin="0,0,0,10"
                               Visibility="Collapsed">
                             <Grid.ColumnDefinitions>
@@ -2236,32 +2202,32 @@
                                 BorderBrush="{StaticResource AccentSoftBorderBrush}"
                                 BorderThickness="1"
                                 CornerRadius="10"
-                                Padding="12">
+                                Padding="10,9">
                             <WrapPanel VerticalAlignment="Center">
-                                <Grid Width="300" Margin="0,0,10,6">
+                                <Grid Width="280" Margin="0,0,8,4">
                                     <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                              Style="{StaticResource SearchBoxStyle}"
                                              Tag="Search settings and feature switches..."/>
                                 </Grid>
-                                <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource FilterCheckbox}" Margin="0,0,4,4">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="&#xE7B8;" FontFamily="Segoe MDL2 Assets" FontSize="12" Margin="0,0,6,0"/>
                                         <TextBlock Text="Safe"/>
                                     </StackPanel>
                                 </CheckBox>
-                                <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource FilterCheckbox}" Margin="0,0,4,4">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="12" Margin="0,0,6,0"/>
                                         <TextBlock Text="Advanced"/>
                                     </StackPanel>
                                 </CheckBox>
-                                <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource FilterCheckbox}" Margin="0,0,4,4">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" FontSize="12" Margin="0,0,6,0"/>
                                         <TextBlock Text="Risky"/>
                                     </StackPanel>
                                 </CheckBox>
-                                <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource FilterCheckbox}" Margin="0,0,4,4">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="&#xE734;" FontFamily="Segoe MDL2 Assets" FontSize="12" Margin="0,0,6,0"/>
                                         <TextBlock Text="Favorites"/>
@@ -2274,16 +2240,16 @@
                                 </CheckBox>
                                 <StackPanel Orientation="Horizontal"
                                             Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}">
-                                    <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                    <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource FilterCheckbox}" Margin="0,0,4,4">
                                         <TextBlock Text="Class A"/>
                                     </CheckBox>
-                                    <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                    <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource FilterCheckbox}" Margin="0,0,4,4">
                                         <TextBlock Text="Class B"/>
                                     </CheckBox>
-                                    <CheckBox Tag="ClassC" IsChecked="{Binding ShowClassC}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                    <CheckBox Tag="ClassC" IsChecked="{Binding ShowClassC}" Style="{StaticResource FilterCheckbox}" Margin="0,0,4,4">
                                         <TextBlock Text="Class C"/>
                                     </CheckBox>
-                                    <CheckBox Tag="ClassD" IsChecked="{Binding ShowClassD}" Style="{StaticResource FilterCheckbox}" Margin="0,0,6,6">
+                                    <CheckBox Tag="ClassD" IsChecked="{Binding ShowClassD}" Style="{StaticResource FilterCheckbox}" Margin="0,0,4,4">
                                         <TextBlock Text="Class D"/>
                                     </CheckBox>
                                 </StackPanel>
@@ -2304,7 +2270,7 @@
                             </WrapPanel>
                         </Border>
 
-                            <Grid Margin="2,8,2,0">
+                            <Grid Margin="0,6,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -2907,435 +2873,7 @@
                         </ScrollViewer>
                     </Grid>
                 </TabItem>
-
-                <TabItem Header="Services">
-                    <Grid DataContext="{Binding ServiceManagement}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Margin="0,0,0,8">
-                            <Border Background="{StaticResource TweakPanelGradientBrush}"
-                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="10"
-                                    Padding="10">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-
-                                    <StackPanel Margin="0,0,10,0">
-                                        <TextBlock Text="{Binding Headline}"
-                                                   Style="{StaticResource AppSectionTitleTextStyle}"/>
-                                        <TextBlock Text="{Binding Detail}"
-                                                   Margin="0,4,0,0"
-                                                   FontSize="11"
-                                                   Foreground="{DynamicResource ForegroundLightBrush}"
-                                                   TextWrapping="Wrap"/>
-                                        <TextBlock Text="{Binding Context}"
-                                                   Margin="0,4,0,0"
-                                                   FontSize="10"
-                                                   Foreground="{DynamicResource MutedForegroundBrush}"
-                                                   TextWrapping="Wrap"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Column="1"
-                                                Orientation="Horizontal"
-                                                VerticalAlignment="Top">
-                                        <Grid Width="250">
-                                            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                                                     Style="{StaticResource SearchBoxStyle}"
-                                                     Tag="Search services, descriptions, startup types..."/>
-                                        </Grid>
-                                        <Button Content="Refresh"
-                                                Command="{Binding RefreshCommand}"
-                                                Style="{StaticResource CompactButton}"
-                                                Margin="8,0,0,0"
-                                                VerticalAlignment="Center"/>
-                                    </StackPanel>
-
-                                    <Grid Grid.Row="1"
-                                          Grid.ColumnSpan="2"
-                                          Margin="0,8,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <WrapPanel>
-                                            <Button Command="{Binding SetFilterCommand}"
-                                                    CommandParameter="all"
-                                                    Margin="0,0,8,8">
-                                                <Button.Style>
-                                                    <Style TargetType="Button" BasedOn="{StaticResource CompactButton}">
-                                                        <Setter Property="Padding" Value="10,6"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsAllFilterSelected}" Value="True">
-                                                                <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                                <TextBlock Text="{Binding TotalCount, Mode=OneWay, StringFormat=All {0}}"/>
-                                            </Button>
-                                            <Button Command="{Binding SetFilterCommand}"
-                                                    CommandParameter="running"
-                                                    Margin="0,0,8,8">
-                                                <Button.Style>
-                                                    <Style TargetType="Button" BasedOn="{StaticResource CompactButton}">
-                                                        <Setter Property="Padding" Value="10,6"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsRunningFilterSelected}" Value="True">
-                                                                <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                                <TextBlock Text="{Binding RunningCount, Mode=OneWay, StringFormat=Running {0}}"/>
-                                            </Button>
-                                            <Button Command="{Binding SetFilterCommand}"
-                                                    CommandParameter="disabled"
-                                                    Margin="0,0,8,8">
-                                                <Button.Style>
-                                                    <Style TargetType="Button" BasedOn="{StaticResource CompactButton}">
-                                                        <Setter Property="Padding" Value="10,6"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsDisabledFilterSelected}" Value="True">
-                                                                <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                                <TextBlock Text="{Binding DisabledCount, Mode=OneWay, StringFormat=Disabled {0}}"/>
-                                            </Button>
-                                            <Button Command="{Binding SetFilterCommand}"
-                                                    CommandParameter="drivers"
-                                                    Margin="0,0,8,8">
-                                                <Button.Style>
-                                                    <Style TargetType="Button" BasedOn="{StaticResource CompactButton}">
-                                                        <Setter Property="Padding" Value="10,6"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsDriversFilterSelected}" Value="True">
-                                                                <Setter Property="Background" Value="{DynamicResource BackgroundLightBrush}"/>
-                                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                                <TextBlock Text="{Binding DriverCount, Mode=OneWay, StringFormat=Drivers {0}}"/>
-                                            </Button>
-                                        </WrapPanel>
-                                        <TextBlock Grid.Column="1"
-                                                   Text="{Binding FilterStatusText}"
-                                                   VerticalAlignment="Center"
-                                                   FontSize="10"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                                    </Grid>
-                                </Grid>
-                            </Border>
-                        </StackPanel>
-
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.12*"/>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="0.88*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Border Grid.Column="0"
-                                    Style="{StaticResource AppSurfaceCardStyle}"
-                                    Background="{StaticResource TweakPanelGradientBrush}"
-                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="10"
-                                    Padding="12">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <TextBlock Text="{Binding StatusMessage}"
-                                               FontSize="11"
-                                               Foreground="{DynamicResource MutedForegroundBrush}"/>
-
-                                    <ListBox Grid.Row="1"
-                                             Margin="0,8,0,0"
-                                             ItemsSource="{Binding ItemsView}"
-                                             SelectedItem="{Binding SelectedService}"
-                                             Background="Transparent"
-                                             BorderThickness="0"
-                                             ItemContainerStyle="{StaticResource ServiceManagementListItemStyle}"
-                                             ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel>
-                                                    <DockPanel>
-                                                        <TextBlock Text="{Binding DisplayName}"
-                                                                   FontSize="13"
-                                                                   FontWeight="SemiBold"
-                                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                                                   TextWrapping="Wrap"
-                                                                   DockPanel.Dock="Left"/>
-                                                        <TextBlock Text="{Binding Name}"
-                                                                   FontSize="10"
-                                                                   Foreground="{DynamicResource MutedForegroundBrush}"
-                                                                   HorizontalAlignment="Right"/>
-                                                    </DockPanel>
-
-                                                    <TextBlock Text="{Binding DescriptionOrFallback}"
-                                                               Margin="0,5,0,0"
-                                                               FontSize="11"
-                                                               Foreground="{DynamicResource ForegroundLightBrush}"
-                                                               TextWrapping="Wrap"
-                                                               MaxHeight="46"/>
-
-                                                    <WrapPanel Margin="0,7,0,0">
-                                                        <Border Style="{StaticResource AppChipStyle}">
-                                                            <TextBlock Text="{Binding Status}"
-                                                                       FontSize="10"
-                                                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                                        </Border>
-                                                        <Border Style="{StaticResource AppChipStyle}">
-                                                            <TextBlock Text="{Binding StartType}"
-                                                                       FontSize="10"
-                                                                       Foreground="{DynamicResource ForegroundLightBrush}"/>
-                                                        </Border>
-                                                        <Border Style="{StaticResource AppChipStyle}">
-                                                            <TextBlock Text="{Binding KindText}"
-                                                                       FontSize="10"
-                                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                                                        </Border>
-                                                    </WrapPanel>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                </Grid>
-                            </Border>
-
-                            <Border Grid.Column="2"
-                                    Style="{StaticResource AppSurfaceCardStyle}"
-                                    Background="{StaticResource TweakPanelGradientBrush}"
-                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="10"
-                                    Padding="12">
-                                <StackPanel>
-                                    <TextBlock Text="Selected service"
-                                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                                    <TextBlock Text="{Binding SelectedIdentity}"
-                                               Margin="0,5,0,0"
-                                               FontSize="16"
-                                               FontWeight="Bold"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding SelectedState}"
-                                               Margin="0,5,0,0"
-                                               FontSize="11"
-                                               Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                               TextWrapping="Wrap"/>
-
-                                    <Border Style="{StaticResource ServiceManagementDetailCardStyle}" Margin="0,10,0,8">
-                                        <StackPanel>
-                                            <TextBlock Text="What it does"
-                                                       FontSize="10"
-                                                       FontWeight="SemiBold"
-                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                                            <TextBlock Text="{Binding SelectedWhatItDoes}"
-                                                       Margin="0,4,0,0"
-                                                       FontSize="11"
-                                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                                       TextWrapping="Wrap"/>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <Border Style="{StaticResource ServiceManagementDetailCardStyle}">
-                                        <StackPanel>
-                                            <TextBlock Text="Technical details"
-                                                       FontSize="10"
-                                                       FontWeight="SemiBold"
-                                                       Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                                            <TextBlock Text="{Binding SelectedTechnicalDetails}"
-                                                       Margin="0,4,0,0"
-                                                       FontSize="11"
-                                                       Foreground="{DynamicResource ForegroundLightBrush}"
-                                                       TextWrapping="Wrap"/>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <WrapPanel Margin="0,4,0,0">
-                                        <Button Content="Docs"
-                                                Command="{Binding OpenDocsCommand}"
-                                                Style="{StaticResource CompactButton}"/>
-                                        <Button Content="Set Manual"
-                                                Command="{Binding EnableServiceCommand}"
-                                                Style="{StaticResource CompactButton}"
-                                                Margin="8,0,0,0"
-                                                IsEnabled="{Binding CanEnableSelectedService}"/>
-                                        <Button Content="Disable"
-                                                Command="{Binding DisableServiceCommand}"
-                                                Style="{StaticResource CompactButton}"
-                                                Margin="8,0,0,0"
-                                                IsEnabled="{Binding CanDisableSelectedService}"/>
-                                    </WrapPanel>
-
-                                    <TextBlock Margin="0,10,0,0"
-                                               Text="Drivers are listed for context. Start-mode changes are only enabled for regular services."
-                                               FontSize="10"
-                                               Foreground="{DynamicResource MutedForegroundBrush}"
-                                               TextWrapping="Wrap"/>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="Bloatware">
-                    <local:BloatwareView DataContext="{Binding Bloatware}"/>
-                </TabItem>
-
-                <TabItem Header="Startup">
-                    <local:StartupView DataContext="{Binding Startup}"/>
-                </TabItem>
-
-                <TabItem Header="Disk Health">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <Border Background="{StaticResource TweakPanelGradientBrush}"
-                                BorderBrush="{StaticResource AccentSoftBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="10"
-                                Padding="12">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <StackPanel>
-                                    <TextBlock Text="Read-only diagnostics"
-                                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                                    <TextBlock Text="These checks live here so they are treated like tools, not persistent tweaks or optimization settings."
-                                               Margin="0,4,0,0"
-                                               Style="{StaticResource AppSectionSubtitleTextStyle}"/>
-                                </StackPanel>
-
-                                <Border Grid.Column="1"
-                                        Background="{DynamicResource AppChipSurfaceBrush}"
-                                        CornerRadius="10"
-                                        Padding="10,4"
-                                        Margin="12,0,0,0"
-                                        VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding DiskHealthCount, StringFormat={}{0} checks}"
-                                               FontSize="11"
-                                               FontWeight="SemiBold"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                </Border>
-                            </Grid>
-                        </Border>
-
-                        <Border Grid.Row="1"
-                                Margin="0,10,0,10"
-                                Background="{DynamicResource AppInsetSurfaceBrush}"
-                                BorderBrush="{DynamicResource GlassBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="10"
-                                Padding="12">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBox Text="{Binding DiskHealthSearchText, UpdateSourceTrigger=PropertyChanged}"
-                                         Style="{StaticResource SearchBoxStyle}"
-                                         Tag="Search disk checks, drives, or report text..."/>
-
-                                <TextBlock Grid.Column="1"
-                                           Text="{Binding DiskHealthFilterSummary}"
-                                           Margin="12,0,0,0"
-                                           VerticalAlignment="Center"
-                                           FontSize="10"
-                                           FontFamily="{DynamicResource FontFamilyMono}"
-                                           Foreground="{DynamicResource AccentBrightCyanBrush}"/>
-                            </Grid>
-                        </Border>
-
-                        <Grid Grid.Row="2">
-                            <Border Style="{StaticResource AppSurfaceCardStyle}"
-                                    Background="{StaticResource TweakPanelGradientBrush}"
-                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="12"
-                                    Padding="0">
-                                <ListBox ItemsSource="{Binding DiskHealthTweaksView}"
-                                         Background="Transparent"
-                                         BorderThickness="0"
-                                         Padding="0,0,0,8"
-                                         HorizontalContentAlignment="Stretch"
-                                         VirtualizingPanel.IsVirtualizing="True"
-                                         VirtualizingPanel.VirtualizationMode="Recycling"
-                                         VirtualizingPanel.ScrollUnit="Pixel"
-                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                         ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                         ScrollViewer.CanContentScroll="True"
-                                         ItemTemplate="{StaticResource TweakItemTemplate}">
-                                    <ListBox.ItemContainerStyle>
-                                        <Style TargetType="ListBoxItem">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="Padding" Value="0"/>
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="ListBoxItem">
-                                                        <ContentPresenter />
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </ListBox.ItemContainerStyle>
-                                </ListBox>
-                            </Border>
-
-                            <Border Padding="20"
-                                    Background="{DynamicResource BackgroundDarkBrush}"
-                                    CornerRadius="10"
-                                    Margin="0,20"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Visibility="{Binding HasVisibleDiskHealthTweaks, Converter={StaticResource InverseBoolToVisibility}}">
-                                <StackPanel HorizontalAlignment="Center">
-                                    <TextBlock Text="{Binding DiskHealthEmptyStateTitle}"
-                                               FontSize="13"
-                                               FontWeight="SemiBold"
-                                               Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                               HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding DiskHealthEmptyStateDescription}"
-                                               FontSize="11"
-                                               Foreground="{DynamicResource MutedForegroundBrush}"
-                                               HorizontalAlignment="Center"
-                                               Margin="0,4,0,0"/>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+</TabControl>
         </Grid>
     </Grid>
 </UserControl>

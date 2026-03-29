@@ -24,7 +24,6 @@ using RegProbe.Engine.Tweaks.Commands.Power;
 using RegProbe.Engine.Tweaks.Commands.Cleanup;
 using RegProbe.Engine.Tweaks.Commands.Performance;
 using RegProbe.Engine.Tweaks.Commands.Network;
-using RegProbe.Engine.Tweaks.Commands.System;
 using RegProbe.Engine.Tweaks.Misc;
 using RegProbe.Engine.Tweaks.Peripheral;
 using RegProbe.Engine.Tweaks.Power;
@@ -46,11 +45,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         "cleanup.directx-shader-cache",
         "cleanup.thumbnail-cache",
         "cleanup.wer-files"
-    };
-
-    private static readonly string[] DiskCheckTweakIds =
-    {
-        "system-check-disk-health"
     };
 
     private bool _isDisposed;
@@ -99,7 +93,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private int _bulkProgressTotal;
     private int _selectedCount;
     private string _searchText = string.Empty;
-    private string _diskHealthSearchText = string.Empty;
     private string _statusFilter = string.Empty; // "applied", "rolledback", or empty for all
     private bool _showSafe = true;
     private bool _showAdvanced = true;
@@ -109,22 +102,15 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private bool _showClassB = true;
     private bool _showClassC = true;
     private bool _showClassD = true;
-    private bool _showDiskChecksOnly = false;
     private string _selectedCategoryName = string.Empty;
     private ConfigurationWorkspaceKind _selectedWorkspace = ConfigurationWorkspaceKind.Settings;
     private int _selectedMainTabIndex;
-    private string _diskHealthFilterSummary = "Showing 0 of 0 disk checks.";
     private static readonly string[] MainTabNames =
     [
         "Configuration",
-        "Policy Reference",
-        "Services",
-        "Bloatware",
-        "Startup",
-        "Disk Health"
+        "Policy Reference"
     ];
     private bool _hasVisibleTweaks;
-    private bool _hasVisibleDiskHealthTweaks;
     private bool _isFlatView;
     private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
     private readonly IFavoritesStore _favoritesStore;
@@ -166,10 +152,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public DnsConfigurationViewModel DnsConfiguration { get; } = new();
     public WinConfigCatalogPanelViewModel WinConfigCatalog { get; }
     public PolicyReferencePanelViewModel PolicyReference { get; }
-    public ServiceManagementPanelViewModel ServiceManagement { get; }
-
-    public BloatwareViewModel Bloatware { get; }
-    public StartupViewModel Startup { get; }
 
     private string _currentTab = "Configuration";
     public string CurrentTab
@@ -199,12 +181,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             if (SetProperty(ref _selectedWorkspace, value))
             {
-                if (value != ConfigurationWorkspaceKind.Settings && _showDiskChecksOnly)
-                {
-                    _showDiskChecksOnly = false;
-                    OnPropertyChanged(nameof(ShowDiskChecksOnly));
-                }
-
                 RaiseWorkspacePropertiesChanged();
 
                 if (!string.IsNullOrWhiteSpace(_selectedCategoryName) && !CurrentWorkspaceContainsCategory(_selectedCategoryName))
@@ -242,12 +218,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public TweaksViewModel(
         IEnumerable<ITweakProvider>? providers,
-        IBusyService busyService,
-        BloatwareViewModel bloatware,
-        StartupViewModel startup)
+        IBusyService busyService)
     {
-        Bloatware = bloatware ?? throw new ArgumentNullException(nameof(bloatware));
-        Startup = startup ?? throw new ArgumentNullException(nameof(startup));
         _busyService = busyService ?? throw new ArgumentNullException(nameof(busyService));
         _providerList = providers;
         var paths = AppPaths.FromEnvironment();
@@ -297,10 +269,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         TweaksView.Filter = FilterTweaks;
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
-
-        DiskHealthTweaksView = new ListCollectionView(Tweaks);
-        DiskHealthTweaksView.Filter = FilterDiskHealthTweak;
-        DiskHealthTweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
         _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", GetAllFilteredTweaks, (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
@@ -353,15 +321,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _evidenceClassCatalogService.Apply(Tweaks);
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
         PolicyReference = new PolicyReferencePanelViewModel(OpenPolicyReferenceEntry);
-        ServiceManagement = new ServiceManagementPanelViewModel(_elevatedServiceManager, _isElevatedHostAvailable, _appLogger);
         UpdateFilterSummary();
-        UpdateDiskHealthSummary();
         LoadDocsCoverageReport();
         LoadProvenanceCoverageReport();
         RefreshSummaryStats();
         RefreshPolicyReferencePanel();
         _ = InitializePresetsAsync();
-        _ = ServiceManagement.RefreshAsync();
 
     }
 
@@ -369,7 +334,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     {
         var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
-        foreach (var tweak in Tweaks.Where(t => !IsDiskCheckTweak(t)))
+        foreach (var tweak in Tweaks)
         {
             var categoryId = MapLocalCategoryToWinConfigId(tweak.Category);
             if (string.IsNullOrWhiteSpace(categoryId))
@@ -522,15 +487,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             vscode.ReferenceLinks.Add(new ReferenceLink("VS Code update behavior", "https://code.visualstudio.com/docs/setup/setup-overview#_updates", kind: ReferenceLinkKind.Docs));
         }
 
-        var diskHealth = Tweaks.FirstOrDefault(IsDiskCheckTweak);
-        if (diskHealth != null)
-        {
-            diskHealth.ActionType = TweakActionType.Custom;
-            diskHealth.ActionButtonText = "Run Check";
-            diskHealth.TargetValue = "Report ready";
-            diskHealth.CodeExample = "chkdsk C:";
-            diskHealth.ReferenceLinks.Add(new ReferenceLink("CHKDSK reference", "https://learn.microsoft.com/windows-server/administration/windows-commands/chkdsk", kind: ReferenceLinkKind.Docs));
-        }
     }
 
     public string Title => "Configuration";
@@ -552,8 +508,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public IEnumerable<TweakItemViewModel> AllTweaks => Tweaks;
 
     public ICollectionView TweaksView { get; }
-
-    public ICollectionView DiskHealthTweaksView { get; }
 
     public ObservableCollection<CategoryGroupViewModel> CategoryGroups { get; } = new();
 
@@ -618,11 +572,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         private set => SetProperty(ref _totalTweaksAvailable, value);
     }
 
-    public int SettingsWorkspaceCount => Tweaks.Count(t => t.ShowInApp && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Settings && !IsDiskCheckTweak(t));
+    public int SettingsWorkspaceCount => Tweaks.Count(t => t.ShowInApp && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Settings);
 
     public int MaintenanceWorkspaceCount => Tweaks.Count(t => t.ShowInApp && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Maintenance);
-
-    public int DiskHealthCount => Tweaks.Count(IsDiskCheckTweak);
 
     public int CurrentWorkspaceItemCount => SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance
         ? MaintenanceWorkspaceCount
@@ -641,57 +593,23 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string CurrentMainTabEyebrow => CurrentTab switch
     {
         "Policy Reference" => "Policy Reference",
-        "Services" => "Services",
-        "Bloatware" => "Bloatware",
-        "Startup" => "Startup",
-        "Disk Health" => "Disk Health",
         _ => "Configuration"
     };
 
     public string CurrentMainTabTitle => CurrentTab switch
     {
         "Policy Reference" => "Windows Policy Reference",
-        "Services" => "Service Management",
-        "Bloatware" => "Bloatware",
-        "Startup" => "Startup Apps",
-        "Disk Health" => "Disk Health Checks",
         _ => CurrentWorkspaceLabel
     };
 
     public string CurrentMainTabSubtitle => CurrentTab switch
     {
         "Policy Reference" => "See which parts of Windows and installed components are driven by policy paths.",
-        "Services" => "Review Windows services with descriptions, startup modes, and safe actions.",
-        "Bloatware" => "Review installed apps and remove the ones you do not want on this PC.",
-        "Startup" => "Trim startup items so Windows boots cleaner and quieter.",
-        "Disk Health" => "Run read-only storage diagnostics here. These checks are tools, not persistent tweaks, and they do not count toward the optimization score.",
         _ => CurrentWorkspaceDescription
     };
 
     public bool IsConfigurationTabSelected => SelectedMainTabIndex == 0;
     public bool IsPolicyReferenceTabSelected => SelectedMainTabIndex == 1;
-    public bool IsServicesTabSelected => SelectedMainTabIndex == 2;
-    public bool IsBloatwareTabSelected => SelectedMainTabIndex == 3;
-    public bool IsStartupTabSelected => SelectedMainTabIndex == 4;
-    public bool IsDiskHealthTabSelected => SelectedMainTabIndex == 5;
-
-    public string DiskHealthFilterSummary
-    {
-        get => _diskHealthFilterSummary;
-        private set => SetProperty(ref _diskHealthFilterSummary, value);
-    }
-
-    public bool HasVisibleDiskHealthTweaks
-    {
-        get => _hasVisibleDiskHealthTweaks;
-        private set => SetProperty(ref _hasVisibleDiskHealthTweaks, value);
-    }
-
-    public string DiskHealthEmptyStateTitle => "No disk checks match";
-
-    public string DiskHealthEmptyStateDescription => string.IsNullOrWhiteSpace(DiskHealthSearchText)
-        ? "Disk diagnostics will show up here when available."
-        : "Try a simpler search or clear the disk-health filter.";
 
     public string CurrentWorkspaceCountLabel => IsMaintenanceWorkspaceSelected
         ? $"{CurrentWorkspaceItemCount} tasks available"
@@ -824,7 +742,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private static bool IsScorableForHealth(TweakItemViewModel tweak) =>
         !tweak.Id.StartsWith("demo.", StringComparison.OrdinalIgnoreCase)
-        && !IsDiskCheckTweak(tweak)
         && tweak.Risk != TweakRiskLevel.Risky;
 
     public string ExportStatusMessage
@@ -949,19 +866,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
-    public string DiskHealthSearchText
-    {
-        get => _diskHealthSearchText;
-        set
-        {
-            if (SetProperty(ref _diskHealthSearchText, value))
-            {
-                TriggerDiskHealthSearchUpdate();
-                OnPropertyChanged(nameof(DiskHealthEmptyStateDescription));
-            }
-        }
-    }
-
     public string StatusFilter
     {
         get => _statusFilter;
@@ -1003,15 +907,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 });
             }
         }, token);
-    }
-
-    private void TriggerDiskHealthSearchUpdate()
-    {
-        System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() =>
-        {
-            DiskHealthTweaksView.Refresh();
-            UpdateDiskHealthSummary();
-        });
     }
 
     public bool ShowSafe
@@ -1114,24 +1009,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             if (SetProperty(ref _showClassD, value))
             {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
-            }
-        }
-    }
-
-    public bool ShowDiskChecksOnly
-    {
-        get => _showDiskChecksOnly;
-        set
-        {
-            if (SetProperty(ref _showDiskChecksOnly, value))
-            {
-                if (value)
-                {
-                    SelectedCategoryName = string.Empty;
-                }
-
                 TweaksView.Refresh();
                 UpdateFilterSummary();
             }
@@ -1366,13 +1243,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             }
         }
 
-        if (!string.IsNullOrWhiteSpace(_diskHealthSearchText)
-            && e.PropertyName is (nameof(TweakItemViewModel.StatusMessage)
-                or nameof(TweakItemViewModel.TerminalOutput)))
-        {
-            DiskHealthTweaksView.Refresh();
-            UpdateDiskHealthSummary();
-        }
     }
 
     private void OnTweakFavoriteChanged(TweakItemViewModel tweak, bool isFavorite)
@@ -1422,9 +1292,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         RaiseWorkspacePropertiesChanged();
         RefreshSummaryStats();
         RefreshPolicyReferencePanel();
-        DiskHealthTweaksView.Refresh();
-        UpdateDiskHealthSummary();
-        OnPropertyChanged(nameof(DiskHealthCount));
     }
 
     private void RaiseHealthMetricsChanged()
@@ -1477,11 +1344,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private bool FilterTweaksInternal(TweakItemViewModel item, bool includeCategoryFilter)
     {
-        if (IsDiskCheckTweak(item))
-        {
-            return false;
-        }
-
         if (!item.ShowInApp)
         {
             return false;
@@ -1573,25 +1435,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         return matches;
     }
 
-    private bool FilterDiskHealthTweak(object? candidate)
-    {
-        if (candidate is not TweakItemViewModel item || !IsDiskCheckTweak(item))
-        {
-            return false;
-        }
-
-        if (string.IsNullOrWhiteSpace(_diskHealthSearchText))
-        {
-            return true;
-        }
-
-        return item.Name.Contains(_diskHealthSearchText, StringComparison.OrdinalIgnoreCase)
-            || item.Description.Contains(_diskHealthSearchText, StringComparison.OrdinalIgnoreCase)
-            || item.Id.Contains(_diskHealthSearchText, StringComparison.OrdinalIgnoreCase)
-            || item.StatusMessage.Contains(_diskHealthSearchText, StringComparison.OrdinalIgnoreCase)
-            || item.TerminalOutput.Contains(_diskHealthSearchText, StringComparison.OrdinalIgnoreCase);
-    }
-
     private void UpdateFilterSummary(bool rebuildCategoryGroups = true)
     {
         var total = CurrentWorkspaceItemCount;
@@ -1607,14 +1450,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             BuildCategoryGroups();
         }
         HasVisibleTweaks = visible > 0;
-    }
-
-    private void UpdateDiskHealthSummary()
-    {
-        var total = DiskHealthCount;
-        var visible = DiskHealthTweaksView.Cast<object>().Count();
-        DiskHealthFilterSummary = $"Showing {visible} of {total} disk check{(total == 1 ? string.Empty : "s")}.";
-        HasVisibleDiskHealthTweaks = visible > 0;
     }
 
     private void BuildCategoryGroups()
@@ -1726,7 +1561,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         => Tweaks.Any(t =>
             t.ShowInApp &&
             GetWorkspaceKind(t) == SelectedWorkspace &&
-            !IsDiskCheckTweak(t) &&
             string.Equals(t.Category, categoryName, StringComparison.OrdinalIgnoreCase));
 
     private void RaiseWorkspacePropertiesChanged()
@@ -1758,10 +1592,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(CurrentMainTabSubtitle));
         OnPropertyChanged(nameof(IsConfigurationTabSelected));
         OnPropertyChanged(nameof(IsPolicyReferenceTabSelected));
-        OnPropertyChanged(nameof(IsServicesTabSelected));
-        OnPropertyChanged(nameof(IsBloatwareTabSelected));
-        OnPropertyChanged(nameof(IsStartupTabSelected));
-        OnPropertyChanged(nameof(IsDiskHealthTabSelected));
     }
 
     private static string NormalizeMainTabName(string? value)
@@ -1820,7 +1650,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private void ResetFilters()
     {
         SearchText = string.Empty;
-        DiskHealthSearchText = string.Empty;
         StatusFilter = string.Empty;
         ShowSafe = true;
         ShowAdvanced = true;
@@ -1829,16 +1658,15 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ShowClassB = true;
         ShowClassC = true;
         ShowClassD = true;
-        ShowDiskChecksOnly = false;
         SelectedCategoryName = string.Empty;
     }
 
     private void RefreshSummaryStats()
     {
-        TotalTweaksAvailable = Tweaks.Count(t => t.ShowInApp && !IsDiskCheckTweak(t));
+        TotalTweaksAvailable = Tweaks.Count(t => t.ShowInApp);
         RaiseWorkspacePropertiesChanged();
-        TweaksApplied = Tweaks.Count(t => t.ShowInApp && !IsDiskCheckTweak(t) && t.IsApplied);
-        TweaksRolledBack = Tweaks.Count(t => t.ShowInApp && !IsDiskCheckTweak(t) && t.WasRolledBack);
+        TweaksApplied = Tweaks.Count(t => t.ShowInApp && t.IsApplied);
+        TweaksRolledBack = Tweaks.Count(t => t.ShowInApp && t.WasRolledBack);
         RefreshLogFileSize();
         UpdateInventoryStatusMessage();
     }
@@ -1859,7 +1687,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         SelectedWorkspace = ConfigurationWorkspaceKind.Settings;
         SelectedCategoryName = string.Empty;
         StatusFilter = string.Empty;
-        ShowDiskChecksOnly = false;
         SearchText = entry.SearchFragment;
     }
 
@@ -1875,21 +1702,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
-        ShowDiskChecksOnly = false;
         TweaksView.Refresh();
         UpdateFilterSummary();
-    }
-
-    private static bool IsDiskCheckTweak(TweakItemViewModel item)
-    {
-        if (DiskCheckTweakIds.Any(id => string.Equals(item.Id, id, StringComparison.OrdinalIgnoreCase)))
-        {
-            return true;
-        }
-
-        return item.Id.Contains("disk-health", StringComparison.OrdinalIgnoreCase)
-            || item.Name.Contains("Disk Health", StringComparison.OrdinalIgnoreCase)
-            || item.Description.Contains("file system errors", StringComparison.OrdinalIgnoreCase);
     }
 
     public async Task RunFastCleanAsync(CancellationToken ct = default)
@@ -1990,7 +1804,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void UpdateInventoryStatusMessage()
     {
-        var inventoryTweaks = Tweaks.Where(t => !IsDiskCheckTweak(t)).ToList();
+        var inventoryTweaks = Tweaks.ToList();
         var total = inventoryTweaks.Count;
         var detected = inventoryTweaks.Count(t => t.AppliedStatus != TweakAppliedStatus.Unknown);
         var requiresPrompt = inventoryTweaks.Count(t => t.WillPromptForDetect);
@@ -2481,7 +2295,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         bool skipElevationPrompts = false,
         bool skipExpensiveOperations = false)
     {
-        IEnumerable<TweakItemViewModel> candidates = Tweaks.Where(t => !IsDiskCheckTweak(t));
+        IEnumerable<TweakItemViewModel> candidates = Tweaks;
         if (isStartupScan)
         {
             candidates = candidates.Where(t => t.IsStartupScanEligible);

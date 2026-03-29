@@ -209,9 +209,7 @@ public sealed class AppSettingsTests
         Assert.False(settings.DemoTweakAlphaEnabled);
         Assert.False(settings.DemoTweakBetaEnabled);
         Assert.Equal("Dark", settings.Theme);
-        Assert.False(settings.EnableCardShadows);
         Assert.True(settings.RunStartupScanOnLaunch);
-        Assert.True(settings.ShowPreviewHint);
         Assert.NotNull(settings.MonitorSections);
         Assert.Empty(settings.MonitorSections);
     }
