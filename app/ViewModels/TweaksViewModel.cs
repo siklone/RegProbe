@@ -69,13 +69,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 	private readonly bool _isElevated;
 	private readonly string _elevatedHostExecutablePath;
 	private readonly bool _isElevatedHostAvailable;
-	private readonly IRegistryAccessor _localRegistryAccessor;
-	private readonly IRegistryAccessor _elevatedRegistryAccessor;
-    private readonly IRegistryAccessor _scanAwareElevatedRegistryAccessor;
-	private readonly IServiceManager _elevatedServiceManager;
-    private readonly IScheduledTaskManager _elevatedTaskManager;
-    private readonly IFileSystemAccessor _elevatedFileSystemAccessor;
-    private readonly ICommandRunner _elevatedCommandRunner;
     private string _bulkStatusMessage = "Bulk actions are idle.";
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
@@ -86,13 +79,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly ObservableCollection<RepairsItemViewModel> _repairsRows = new();
     private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
     private readonly IFavoritesStore _favoritesStore;
-    private CancellationTokenSource? _searchCts;
     private readonly IProfileSyncService _syncService = new ProfileSyncService();
-    private readonly PluginLoader _pluginLoader = new();
     private readonly TweakExecutionPipeline _pipeline;
-    private readonly IEnumerable<ITweakProvider>? _providerList;
     private readonly IRollbackStateStore _rollbackStore;
-    private readonly ConfigurationWorkspaceClassifier _workspaceClassifier = new();
+    private readonly WorkspaceBrowseCoordinator _browseCoordinator;
+    private readonly WorkspaceCatalogCoordinator _catalogCoordinator;
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
     private readonly WorkspaceInventoryCoordinator _inventoryCoordinator;
     private readonly WorkspaceOperationsCoordinator _operationsCoordinator;
@@ -134,9 +125,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     {
         _busyService = busyService ?? throw new ArgumentNullException(nameof(busyService));
         _workspaceActionCoordinator = new WorkspaceActionCoordinator(_busyService);
-        _providerList = providers;
         _shellState.PropertyChanged += OnShellStatePropertyChanged;
         _presentationState.PropertyChanged += OnPresentationStatePropertyChanged;
+        _browseCoordinator = new WorkspaceBrowseCoordinator(_shellState, _presentationState, _showContributorEvidenceUi);
         _configurationCoordinator = new ConfigurationWorkspaceCoordinator(this);
         _supportCoordinator = new WorkspaceSupportCoordinator(_configurationCoordinator.OpenPolicyReferenceEntry);
         _supportCoordinator.PropertyChanged += OnSupportCoordinatorPropertyChanged;
@@ -169,22 +160,33 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 			ParentProcessId = Process.GetCurrentProcess().Id
 		});
         var machineLocalRegistryAccessor = new LocalRegistryAccessor();
-        _elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
-        _localRegistryAccessor = new RoutingRegistryAccessor(machineLocalRegistryAccessor, _elevatedRegistryAccessor);
-        var hybridRegistryAccessor = new HybridRegistryAccessor(machineLocalRegistryAccessor, _elevatedRegistryAccessor);
-        _scanAwareElevatedRegistryAccessor = _isElevated ? _elevatedRegistryAccessor : hybridRegistryAccessor;
-        _elevatedServiceManager = new ElevatedServiceManager(elevatedHostClient);
-        _elevatedTaskManager = new ElevatedScheduledTaskManager(elevatedHostClient);
-        _elevatedFileSystemAccessor = new ElevatedFileSystemAccessor(elevatedHostClient);
-        _elevatedCommandRunner = new ElevatedCommandRunner(elevatedHostClient);
+        var elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
+        var localRegistryAccessor = new RoutingRegistryAccessor(machineLocalRegistryAccessor, elevatedRegistryAccessor);
+        var hybridRegistryAccessor = new HybridRegistryAccessor(machineLocalRegistryAccessor, elevatedRegistryAccessor);
+        IRegistryAccessor scanAwareElevatedRegistryAccessor = _isElevated ? elevatedRegistryAccessor : hybridRegistryAccessor;
+        var elevatedServiceManager = new ElevatedServiceManager(elevatedHostClient);
+        var elevatedTaskManager = new ElevatedScheduledTaskManager(elevatedHostClient);
+        var elevatedFileSystemAccessor = new ElevatedFileSystemAccessor(elevatedHostClient);
+        var elevatedCommandRunner = new ElevatedCommandRunner(elevatedHostClient);
         var systemRoot = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
         var system32Path = Path.Combine(systemRoot, "System32");
         var mobsyncPath = Path.Combine(system32Path, "mobsync.exe");
         var mobsyncDisabledPath = mobsyncPath + ".disabled";
         var psrPath = Path.Combine(system32Path, "psr.exe");
         var psrDisabledPath = psrPath + ".disabled";
-        var helpPanePath = Path.Combine(system32Path, "HelpPane.exe");
+		var helpPanePath = Path.Combine(system32Path, "HelpPane.exe");
         var helpPaneDisabledPath = helpPanePath + ".disabled";
+        _catalogCoordinator = new WorkspaceCatalogCoordinator(
+            providers,
+            localRegistryAccessor,
+            scanAwareElevatedRegistryAccessor,
+            elevatedServiceManager,
+            elevatedTaskManager,
+            elevatedFileSystemAccessor,
+            elevatedCommandRunner,
+            _pipeline,
+            _isElevated,
+            _appLogger);
 
         Tweaks = new ObservableCollection<TweakItemViewModel>();
         Tweaks.CollectionChanged += OnTweaksCollectionChanged;
@@ -240,9 +242,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 CurrentTab = tabName;
         });
 
-        LoadProviderTweaks();
-        LoadPlugins();
-        ApplyTweakMetadata();
+        _catalogCoordinator.LoadInitialTweaks(Tweaks);
         _inventoryCoordinator.LoadCachedInventoryState(Tweaks);
         _supportCoordinator.ApplyCatalogs(Tweaks);
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
@@ -255,161 +255,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private IDictionary<string, int> BuildWinConfigCategoryCoverageMap()
     {
-        var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-
-        foreach (var tweak in Tweaks)
-        {
-            var categoryId = MapLocalCategoryToWinConfigId(tweak.Category);
-            if (string.IsNullOrWhiteSpace(categoryId))
-            {
-                continue;
-            }
-
-            counts.TryGetValue(categoryId, out var current);
-            counts[categoryId] = current + 1;
-        }
-
-        return counts;
-    }
-
-    private static string? MapLocalCategoryToWinConfigId(string? category)
-    {
-        if (string.IsNullOrWhiteSpace(category))
-        {
-            return null;
-        }
-
-        var normalized = category.Trim().ToLowerInvariant();
-
-        if (normalized.Contains("network"))
-            return "network";
-        if (normalized.Contains("power"))
-            return "power";
-        if (normalized.Contains("privacy"))
-            return "privacy";
-        if (normalized.Contains("security"))
-            return "security";
-        if (normalized.Contains("system"))
-            return "system";
-        if (normalized.Contains("visibility") || normalized.Contains("display") || normalized.Contains("explorer"))
-            return "visibility";
-        if (normalized.Contains("peripheral") || normalized.Contains("input") || normalized.Contains("usb") || normalized.Contains("audio"))
-            return "peripheral";
-        if (normalized.Contains("nvidia") || normalized.Contains("graphics") || normalized.Contains("gpu"))
-            return "nvidia";
-        if (normalized.Contains("cleanup"))
-            return "cleanup";
-        if (normalized.Contains("policy"))
-            return "policies";
-        if (normalized.Contains("performance") || normalized.Contains("affinity"))
-            return "affinities";
-        if (normalized.Contains("misc"))
-            return "misc";
-
-        return null;
-    }
-
-    private void LoadProviderTweaks()
-    {
-        if (_providerList != null)
-        {
-            var existingIds = new HashSet<string>(
-                Tweaks.Select(t => t.Id).Where(id => !string.IsNullOrWhiteSpace(id)),
-                StringComparer.OrdinalIgnoreCase);
-
-            var tweakContext = new TweakContext(
-                _localRegistryAccessor,
-                _scanAwareElevatedRegistryAccessor,
-                _elevatedServiceManager,
-                _elevatedTaskManager,
-                _elevatedFileSystemAccessor,
-                _elevatedCommandRunner);
-
-            foreach (var provider in _providerList)
-            {
-                var providerTweaks = provider.CreateTweaks(_pipeline, tweakContext, _isElevated);
-                foreach (var tweak in providerTweaks)
-                {
-                    if (string.IsNullOrWhiteSpace(tweak.Id) || !existingIds.Add(tweak.Id))
-                    {
-                        continue;
-                    }
-
-                    Tweaks.Add(new TweakItemViewModel(tweak, _pipeline, _isElevated));
-                }
-            }
-        }
-    }
-
-    private void ApplyTweakMetadata()
-    {
-        var aeroShake = Tweaks.FirstOrDefault(t => t.Id == "system.aero-shake");
-        if (aeroShake != null)
-        {
-            aeroShake.RegistryPath = @"HKCU\Software\Policies\Microsoft\Windows\Explorer\NoWindowMinimizingShortcuts";
-            aeroShake.CodeExample = "reg add \"HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\" /v \"NoWindowMinimizingShortcuts\" /t REG_DWORD /d 1 /f";
-            aeroShake.ReferenceLinks.Add(new ReferenceLink("Policy Documentation", "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-explorer"));
-        }
-
-        var gameMode = Tweaks.FirstOrDefault(t => t.Id == "system.enable-game-mode");
-        if (gameMode != null)
-        {
-            gameMode.RegistryPath = @"HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled";
-            gameMode.CodeExample = "reg add \"HKCU\\Software\\Microsoft\\GameBar\" /v \"AutoGameModeEnabled\" /t REG_DWORD /d 1 /f";
-            gameMode.SubOptions.Add(new TweakSubOption("Enable Game Bar", TweakSubOptionType.Toggle) { IsEnabled = true });
-            gameMode.SubOptions.Add(new TweakSubOption("Allow Background DVR", TweakSubOptionType.Toggle));
-            gameMode.ReferenceLinks.Add(new ReferenceLink("Xbox Support", "https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc"));
-        }
-
-        var clipboard = Tweaks.FirstOrDefault(t => t.Id == "system.disable-clipboard-history");
-        if (clipboard != null)
-        {
-            clipboard.RegistryPath = @"HKLM\Software\Policies\Microsoft\Windows\System\AllowClipboardHistory";
-            clipboard.CodeExample = "reg add \"HKLM\\Software\\Policies\\Microsoft\\Windows\\System\" /v \"AllowClipboardHistory\" /t REG_DWORD /d 0 /f";
-            clipboard.TargetValue = "0 (Disabled)";
-            clipboard.ReferenceLinks.Add(new ReferenceLink("Security Best Practices", "https://learn.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/user-rights-assignment"));
-        }
-
-        var edgeBoost = Tweaks.FirstOrDefault(t => t.Id == "system.disable-edge-startup-boost");
-        if (edgeBoost != null)
-        {
-            edgeBoost.ActionType = TweakActionType.Clean;
-            edgeBoost.ActionButtonText = "Disable Boost";
-            edgeBoost.RegistryPath = @"HKLM\Software\Policies\Microsoft\Edge\StartupBoostEnabled";
-            edgeBoost.TargetValue = "0 (Disabled)";
-        }
-
-        var mitigations = Tweaks.FirstOrDefault(t => t.Id == "security.disable-system-mitigations");
-        if (mitigations != null)
-        {
-            mitigations.RegistryPath = @"HKLM\System\CurrentControlSet\Control\Session Manager\kernel\MitigationOptions";
-            mitigations.CodeExample = "# View current mitigation options\nGet-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\Session Manager\\kernel' -Name MitigationOptions\n\n# Set mitigations to 22202022... (Hex)";
-            mitigations.TargetValue = "22202022 (Optimized)";
-            mitigations.ReferenceLinks.Add(new ReferenceLink("Exploit Protection Reference", "https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/exploit-protection-reference"));
-            mitigations.ReferenceLinks.Add(new ReferenceLink("Bypass Mitigations Guide", "https://github.com/SirenOfTitan/Exploit-Mitigations-Bypass"));
-        }
-
-        var priority = Tweaks.FirstOrDefault(t => t.Id == "system.priority-control");
-        if (priority != null)
-        {
-            priority.RegistryPath = @"HKLM\System\CurrentControlSet\Control\PriorityControl\Win32PrioritySeparation";
-            priority.CodeExample = "Set-ItemProperty -Path 'HKLM:\\System\\CurrentControlSet\\Control\\PriorityControl' -Name Win32PrioritySeparation -Value 38";
-            priority.PriorityCalculator = new PriorityCalculatorViewModel { Bitmask = 0x26 };
-            priority.ReferenceLinks.Add(new ReferenceLink("MSDN PriorityControl", "https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities"));
-        }
-
-        var vscode = Tweaks.FirstOrDefault(t => t.Id == "misc.disable-vscode-telemetry");
-        if (vscode != null)
-        {
-            vscode.CodeExample =
-                "\"telemetry.telemetryLevel\": \"off\"\n" +
-                "\"workbench.enableExperiments\": false\n" +
-                "\"update.mode\": \"manual\"\n" +
-                "\"extensions.autoUpdate\": false";
-            vscode.ReferenceLinks.Add(new ReferenceLink("VS Code telemetry docs", "https://code.visualstudio.com/docs/getstarted/telemetry", kind: ReferenceLinkKind.Docs));
-            vscode.ReferenceLinks.Add(new ReferenceLink("VS Code update behavior", "https://code.visualstudio.com/docs/setup/setup-overview#_updates", kind: ReferenceLinkKind.Docs));
-        }
-
+        return _catalogCoordinator.BuildWinConfigCategoryCoverageMap(Tweaks);
     }
 
     public string Title => "Configuration";
@@ -721,20 +567,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void TriggerSearchUpdate()
     {
-        _searchCts?.Cancel();
-        _searchCts = new CancellationTokenSource();
-        var token = _searchCts.Token;
-
-        Task.Delay(300, token).ContinueWith(t =>
-        {
-            if (!t.IsCanceled)
-            {
-                System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() =>
-                {
-                    RefreshFilteredViews();
-                });
-            }
-        }, token);
+        _browseCoordinator.TriggerSearchUpdate(() => RefreshFilteredViews());
     }
 
     public bool ShowSafe
@@ -980,7 +813,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             return false;
         }
 
-        return FilterTweaksInternal(item, includeCategoryFilter: true);
+        return _browseCoordinator.FilterTweak(item);
     }
 
     private bool FilterRepairsRows(object obj)
@@ -990,224 +823,28 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             return false;
         }
 
-        return FilterTweaksInternal(item.Source, includeCategoryFilter: true);
-    }
-
-    private bool FilterTweaksInternal(TweakItemViewModel item, bool includeCategoryFilter)
-    {
-        if (!item.ShowInApp)
-        {
-            return false;
-        }
-
-        if (GetWorkspaceKind(item) != SelectedWorkspace)
-        {
-            return false;
-        }
-
-        if (includeCategoryFilter && !IsAllCategoriesSelected)
-        {
-            if (!string.Equals(item.Category, SelectedCategoryName, StringComparison.OrdinalIgnoreCase))
-            {
-                return false;
-            }
-        }
-
-        // Status filter (applied/rolled back)
-        if (!string.IsNullOrEmpty(StatusFilter))
-        {
-            if (StatusFilter == "applied" && !item.IsApplied)
-            {
-                return false;
-            }
-            if (StatusFilter == "rolledback" && !item.WasRolledBack)
-            {
-                return false;
-            }
-        }
-
-        // Favorites filter
-        if (ShowFavoritesOnly && !item.IsFavorite)
-        {
-            return false;
-        }
-
-        if (item.Risk == TweakRiskLevel.Safe && !ShowSafe)
-        {
-            return false;
-        }
-
-        if (item.Risk == TweakRiskLevel.Advanced && !ShowAdvanced)
-        {
-            return false;
-        }
-
-        if (item.Risk == TweakRiskLevel.Risky && !ShowRisky)
-        {
-            return false;
-        }
-
-        if (_showContributorEvidenceUi)
-        {
-            if (item.EvidenceClassId == "A" && !ShowClassA)
-            {
-                return false;
-            }
-
-            if (item.EvidenceClassId == "B" && !ShowClassB)
-            {
-                return false;
-            }
-
-            if (item.EvidenceClassId == "C" && !ShowClassC)
-            {
-                return false;
-            }
-
-            if (item.EvidenceClassId == "D" && !ShowClassD)
-            {
-                return false;
-            }
-        }
-
-        if (string.IsNullOrWhiteSpace(SearchText))
-        {
-            item.IsHighlighted = false;
-            return true;
-        }
-
-        bool matches = item.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-            || item.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-            || item.Id.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-            || item.RegistryPath.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
-            || item.Risk.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
-
-        item.IsHighlighted = matches;
-        return matches;
+        return _browseCoordinator.FilterRepair(item);
     }
 
     private void UpdateFilterSummary(bool rebuildCategoryGroups = true)
     {
-        var total = CurrentWorkspaceItemCount;
-        var visible = TweaksView.Cast<object>().Count();
-        var noun = IsMaintenanceWorkspaceSelected ? "repairs" : "settings";
-        var scope = IsAllCategoriesSelected ? "all areas" : SelectedCategoryLabel;
-        var filterState = string.IsNullOrWhiteSpace(SearchText) && !ShowFavoritesOnly
-            ? "live"
-            : "filtered";
-        _presentationState.SetFilterSummary(
-            $"{visible} of {total} {noun} / {scope} / {filterState}.",
-            visible > 0);
+        _browseCoordinator.RefreshPresentation(
+            Tweaks,
+            CurrentWorkspaceItemCount,
+            TweaksView.Cast<object>().Count(),
+            rebuildCategoryGroups,
+            () => SelectedCategoryName = string.Empty);
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
         _rollbackAllCommand.RaiseCanExecuteChanged();
-        if (rebuildCategoryGroups)
-        {
-            BuildCategoryGroups();
-        }
-    }
-
-    private void BuildCategoryGroups()
-    {
-        if (!(System.Windows.Application.Current?.Dispatcher?.CheckAccess() ?? true))
-        {
-            System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() => BuildCategoryGroups());
-            return;
-        }
-
-        static string FormatGroupName(string segment, string fallback)
-        {
-            if (string.IsNullOrWhiteSpace(segment))
-            {
-                return fallback;
-            }
-
-            segment = segment.Trim();
-            return segment.Length == 1
-                ? segment.ToUpperInvariant()
-                : char.ToUpperInvariant(segment[0]) + segment[1..].ToLowerInvariant();
-        }
-
-        var categoryOrder = IsMaintenanceWorkspaceSelected
-            ? new[] { "Cleanup", "Network", "System", "Security", "Privacy", "Peripheral", "Power" }
-            : new[] { "System", "Security", "Privacy", "Network", "Visibility", "Audio", "Peripheral", "Power", "Performance", "Cleanup", "Explorer", "Notifications", "Devtools" };
-        var rootGroups = new Dictionary<string, CategoryGroupViewModel>(StringComparer.OrdinalIgnoreCase);
-
-        foreach (var tweak in Tweaks.Where(t => FilterTweaksInternal(t, includeCategoryFilter: false)))
-        {
-            var tweakId = tweak.Id ?? string.Empty;
-            var parts = tweakId
-                .Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            if (parts.Length == 0)
-            {
-                continue;
-            }
-
-            var rootCatName = !string.IsNullOrWhiteSpace(tweak.Category) &&
-                              !string.Equals(tweak.Category, "Other", StringComparison.OrdinalIgnoreCase)
-                ? tweak.Category
-                : FormatGroupName(parts[0], "Other");
-
-            if (!rootGroups.TryGetValue(rootCatName, out var currentGroup))
-            {
-                currentGroup = new CategoryGroupViewModel(rootCatName, tweak.CategoryIcon)
-                {
-                    IsDense = rootCatName.Equals("Visibility", StringComparison.OrdinalIgnoreCase)
-                };
-                rootGroups[rootCatName] = currentGroup;
-            }
-
-            // Handle intermediate sub-groups (e.g. network.tcp.tweak)
-            var parent = currentGroup;
-            var subgroupStartIndex = tweakId.StartsWith("plugin.", StringComparison.OrdinalIgnoreCase) ? 2 : 1;
-            for (int i = subgroupStartIndex; i < parts.Length - 1; i++)
-            {
-                var subName = FormatGroupName(parts[i], "Other");
-                var subGroup = parent.SubGroups.FirstOrDefault(g => g.CategoryName == subName);
-                if (subGroup == null)
-                {
-                    subGroup = new CategoryGroupViewModel(subName, "--") { IsNested = true, IsExpanded = true, Parent = parent };
-                    parent.SubGroups.Add(subGroup);
-                }
-                parent = subGroup;
-            }
-
-            parent.AddTweak(tweak);
-        }
-
-        var orderedGroups = new List<CategoryGroupViewModel>();
-
-        // Add in preferred order first
-        foreach (var catName in categoryOrder)
-        {
-            if (rootGroups.TryGetValue(catName, out var g))
-            {
-                orderedGroups.Add(g);
-                rootGroups.Remove(catName);
-            }
-        }
-
-        // Add any remaining categories
-        orderedGroups.AddRange(rootGroups.Values.OrderBy(x => x.CategoryName));
-
-        _presentationState.ReplaceCategoryGroups(orderedGroups);
-
-        if (!string.IsNullOrWhiteSpace(SelectedCategoryName)
-            && !CategoryGroups.Any(g => string.Equals(g.CategoryName, SelectedCategoryName, StringComparison.OrdinalIgnoreCase)))
-        {
-            SelectedCategoryName = string.Empty;
-        }
     }
 
     private ConfigurationWorkspaceKind GetWorkspaceKind(TweakItemViewModel tweak)
-        => _workspaceClassifier.Classify(tweak.Id, tweak.Category);
+        => _browseCoordinator.GetWorkspaceKind(tweak);
 
     private bool CurrentWorkspaceContainsCategory(string categoryName)
-        => Tweaks.Any(t =>
-            t.ShowInApp &&
-            GetWorkspaceKind(t) == SelectedWorkspace &&
-            string.Equals(t.Category, categoryName, StringComparison.OrdinalIgnoreCase));
+        => _browseCoordinator.CurrentWorkspaceContainsCategory(Tweaks, categoryName);
 
     private void OnShellStatePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
@@ -1453,55 +1090,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private void LoadPlugins()
-    {
-        try
-        {
-            var baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            _appLogger.Log(LogLevel.Info, $"Plugin discovery: baseDir='{baseDir}'");
-
-            var existingIds = new HashSet<string>(
-                Tweaks.Select(t => t.Id).Where(id => !string.IsNullOrWhiteSpace(id)),
-                StringComparer.OrdinalIgnoreCase);
-
-            var pluginsPath = Path.Combine(baseDir, "Plugins");
-            if (!Directory.Exists(pluginsPath))
-            {
-                Directory.CreateDirectory(pluginsPath);
-            }
-
-            _appLogger.Log(LogLevel.Info, $"Plugin discovery: pluginsPath='{pluginsPath}'");
-
-            var plugins = _pluginLoader.LoadPlugins(pluginsPath);
-
-            var pluginList = plugins.ToList();
-            _appLogger.Log(LogLevel.Info, $"Plugin discovery: loadedPlugins={pluginList.Count}");
-
-            foreach (var plugin in pluginList)
-            {
-                _appLogger.Log(LogLevel.Info, $"Plugin loaded: name='{plugin.PluginName}' version='{plugin.Version}'");
-
-                var pluginTweaks = plugin.GetTweaks();
-                var pluginTweaksList = pluginTweaks?.ToList() ?? new List<ITweak>();
-                _appLogger.Log(LogLevel.Info, $"Plugin tweaks: plugin='{plugin.PluginName}' count={pluginTweaksList.Count}");
-
-                foreach (var tweak in pluginTweaksList)
-                {
-                    if (string.IsNullOrWhiteSpace(tweak.Id) || !existingIds.Add(tweak.Id))
-                    {
-                        continue;
-                    }
-
-                    Tweaks.Add(new TweakItemViewModel(tweak, _pipeline, _isElevated));
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            _appLogger.Log(LogLevel.Error, "Plugin system error", ex);
-        }
-    }
-
     public async Task ExportEncryptedProfileAsync(string filePath, string password)
     {
         var enabledIds = AllTweaks.Where(t => t.AppliedStatus == TweakAppliedStatus.Applied).Select(t => t.Id).ToList();
@@ -1601,8 +1189,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _isDisposed = true;
 
         // Dispose CancellationTokenSources
-        _searchCts?.Cancel();
-        _searchCts?.Dispose();
+        _browseCoordinator.Dispose();
         _workspaceActionCoordinator.Dispose();
         _inventoryCoordinator.Dispose();
 
