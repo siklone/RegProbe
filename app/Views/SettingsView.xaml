@@ -7,7 +7,8 @@
              mc:Ignorable="d"
              FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12"
-             Background="Transparent">
+             Background="#0D0D0D">
+
     <UserControl.Resources>
         <ItemsPanelTemplate x:Key="ThemePickerPanel">
             <WrapPanel/>
@@ -25,69 +26,105 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Margin" Value="0,0,8,8"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="Chip"
-                                Padding="12,10"
-                                MinWidth="132"
-                                Background="{DynamicResource ShellPanelRaisedBrush}"
-                                BorderBrush="{DynamicResource ShellHairlineBrush}"
+                        <Border x:Name="Root"
+                                Background="#141414"
+                                BorderBrush="#232323"
                                 BorderThickness="1"
-                                CornerRadius="10">
+                                Padding="12,10">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Chip" Property="Background" Value="{DynamicResource ShellPanelAltBrush}"/>
-                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#343434"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Chip" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}"/>
-                                <Setter TargetName="Chip" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
+                                <Setter TargetName="Root" Property="Background" Value="#211412"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="SectionEyebrowTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="#6E6E6E"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="SectionTitleTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="#F1F1F1"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="SectionBodyTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="#707070"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Disabled"
                   Background="Transparent">
-        <Grid Margin="24,22,24,24">
-            <StackPanel>
-                <StackPanel Margin="0,0,0,18">
-                    <TextBlock Text="Utility"
-                               Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                    <TextBlock Text="{Binding Title}"
-                               Margin="0,4,0,0"
-                               Style="{StaticResource AppHeroTitleTextStyle}"/>
-                    <TextBlock Margin="0,6,0,0"
-                               Style="{StaticResource AppHeroSubtitleTextStyle}"
-                               Text="Only the palette and startup scan preference live here. Changes save immediately."/>
-                </StackPanel>
+        <Grid Margin="20,18,24,24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
+            <StackPanel Grid.Row="0"
+                        Margin="0,0,0,18">
+                <TextBlock Text="Utility"
+                           Style="{StaticResource SectionEyebrowTextStyle}"/>
+                <TextBlock Text="{Binding Title}"
+                           Margin="0,4,0,0"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           Foreground="#FFFFFF"/>
+                <TextBlock Margin="0,6,0,0"
+                           Style="{StaticResource SectionBodyTextStyle}"
+                           Text="Only theme and startup scan preferences live here. Changes save as soon as you make them."/>
+            </StackPanel>
+
+            <Border Grid.Row="1"
+                    BorderBrush="#171717"
+                    BorderThickness="0,1,0,1"
+                    Padding="0">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                    <Border Grid.Column="0"
-                            Style="{StaticResource ShellPanelStyle}">
-                        <StackPanel>
+                    <Grid Grid.Row="0"
+                          Margin="0,14,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Margin="0,0,20,0">
                             <TextBlock Text="Theme"
-                                       Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                                       Style="{StaticResource SectionEyebrowTextStyle}"/>
                             <TextBlock Text="Palette"
-                                       Margin="0,6,0,0"
-                                       Style="{StaticResource AppSectionTitleTextStyle}"/>
-                            <TextBlock Margin="0,6,0,14"
-                                       Style="{StaticResource AppSectionSubtitleTextStyle}"
-                                       Text="Choose the accent palette used across the shell and configuration surfaces."/>
+                                       Margin="0,5,0,0"
+                                       Style="{StaticResource SectionTitleTextStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Margin="0,0,0,10"
+                                       Style="{StaticResource SectionBodyTextStyle}"
+                                       Text="Choose the accent palette used across the shell and workspace surfaces."/>
 
                             <ListBox ItemsSource="{Binding AvailableThemes}"
                                      SelectedItem="{Binding CurrentThemePalette, Mode=TwoWay}"
@@ -98,62 +135,71 @@
                                         <TextBlock Text="{Binding Name}"
                                                    FontSize="12"
                                                    FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                                   Foreground="#EAEAEA"
                                                    HorizontalAlignment="Center"/>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         </StackPanel>
-                    </Border>
+                    </Grid>
 
-                    <Border Grid.Column="2"
-                            Style="{StaticResource ShellPanelStyle}">
-                        <StackPanel>
-                            <TextBlock Text="Launch"
-                                       Style="{StaticResource AppSectionEyebrowTextStyle}"/>
-                            <TextBlock Text="Startup scan"
-                                       Margin="0,6,0,0"
-                                       Style="{StaticResource AppSectionTitleTextStyle}"/>
-                            <TextBlock Margin="0,6,0,14"
-                                       Style="{StaticResource AppSectionSubtitleTextStyle}"
-                                       Text="Keep the inventory pass on if you want fresh state as soon as the app opens."/>
+                    <Border Grid.Row="1"
+                            BorderBrush="#171717"
+                            BorderThickness="0,1,0,0">
+                        <Grid Margin="0,14,0,14">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                            <Border Style="{StaticResource ShellSubtlePanelStyle}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Margin="0,0,12,0">
-                                        <TextBlock Text="Run startup scan on launch"
-                                                   FontSize="13"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource ForegroundBrightestBrush}"/>
-                                        <TextBlock Margin="0,4,0,0"
-                                                   FontSize="11"
-                                                   Foreground="{DynamicResource ForegroundLightBrush}"
-                                                   TextWrapping="Wrap"
-                                                   Text="Performs a quick detect pass after the shell loads."/>
-                                    </StackPanel>
-                                    <CheckBox Grid.Column="1"
-                                              VerticalAlignment="Center"
-                                              Style="{StaticResource ToggleSwitchStyle}"
-                                              IsChecked="{Binding RunStartupScanOnLaunch, Mode=TwoWay}"/>
-                                </Grid>
-                            </Border>
-                        </StackPanel>
+                            <StackPanel Margin="0,0,20,0">
+                                <TextBlock Text="Launch"
+                                           Style="{StaticResource SectionEyebrowTextStyle}"/>
+                                <TextBlock Text="Startup scan"
+                                           Margin="0,5,0,0"
+                                           Style="{StaticResource SectionTitleTextStyle}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1"
+                                        Margin="0,0,20,0">
+                                <TextBlock Text="Run startup scan on launch"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           Foreground="#F0F0F0"/>
+                                <TextBlock Margin="0,4,0,0"
+                                           Style="{StaticResource SectionBodyTextStyle}"
+                                           Text="Performs a quick detect pass after the shell loads so the workspace starts with fresher state."/>
+                            </StackPanel>
+
+                            <CheckBox Grid.Column="2"
+                                      VerticalAlignment="Center"
+                                      Style="{StaticResource ToggleSwitchStyle}"
+                                      IsChecked="{Binding RunStartupScanOnLaunch, Mode=TwoWay}"/>
+                        </Grid>
                     </Border>
                 </Grid>
+            </Border>
 
-                <Border Margin="0,18,0,0"
-                        Style="{StaticResource ShellSubtlePanelStyle}">
+            <Border Grid.Row="2"
+                    Margin="0,18,0,0"
+                    BorderBrush="#171717"
+                    BorderThickness="0,1,0,0"
+                    Padding="0,14,0,0">
+                <StackPanel>
+                    <TextBlock Text="State"
+                               Style="{StaticResource SectionEyebrowTextStyle}"/>
+                    <TextBlock Text="Save status"
+                               Margin="0,5,0,0"
+                               Style="{StaticResource SectionTitleTextStyle}"/>
                     <TextBlock Text="{Binding StatusMessage}"
-                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               Margin="0,10,0,0"
+                               Foreground="#7B7B7B"
                                FontFamily="{DynamicResource FontFamilyMono}"
                                FontSize="11"
                                TextWrapping="Wrap"/>
-                </Border>
-            </StackPanel>
+                </StackPanel>
+            </Border>
         </Grid>
     </ScrollViewer>
 </UserControl>
