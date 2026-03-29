@@ -357,7 +357,13 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,16,0,0" VerticalAlignment="Top" HorizontalAlignment="Right">
-                        <Button Content="Revert" Command="{Binding RollbackCommand}" ToolTip="{Binding RollbackActionTooltip}" Style="{StaticResource FlatButtonStyle}" MinWidth="86" Margin="0,0,6,0"/>
+                        <Button Content="Revert"
+                                Command="{Binding RollbackCommand}"
+                                ToolTip="{Binding RollbackActionTooltip}"
+                                Style="{StaticResource FlatButtonStyle}"
+                                MinWidth="86"
+                                Margin="0,0,6,0"
+                                Visibility="{Binding DataContext.IsSettingsWorkspaceSelected, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                         <Button Content="{Binding ActionButtonText}" Command="{Binding ApplyCommand}" ToolTip="{Binding PrimaryActionTooltip}" Style="{StaticResource ApplyButtonStyle}" MinWidth="86"/>
                     </StackPanel>
                 </Grid>
