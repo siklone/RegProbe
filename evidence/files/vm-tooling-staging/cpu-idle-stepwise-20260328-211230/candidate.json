@@ -1,0 +1,7 @@
+﻿{
+    "generated_utc":  "2026-03-28T18:20:58.3301903Z",
+    "action":  "set-candidate",
+    "status":  "error",
+    "error":  "Cannot delete a subkey tree because the subkey does not exist.",
+    "at":  "At C:\\RegProbe-Diag\\cpu-idle-stepwise-20260328-211230\\cpu-idle-stepwise-payload.ps1:54 char:13\r\n+             New-Item -Path $registryPath -Force | Out-Null\r\n+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+}

@@ -1,0 +1,47 @@
+﻿{
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "failed_stage":  "set-candidate",
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "shell_before":  {
+                         "generated_utc":  "2026-03-28T18:00:09.5325264Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "step":  "A",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260328-205218",
+    "record_id":  "power.disable-cpu-idle-states",
+    "generated_utc":  "2026-03-28T18:11:07.1861171Z",
+    "wpr_start":  {
+                      "generated_utc":  "2026-03-28T18:01:41.9739555Z",
+                      "action":  "start-wpr",
+                      "started":  true
+                  },
+    "status":  "failed",
+    "session_id":  "cpu-idle-stepwise-20260328-205218",
+    "errors":  [
+                   "vmrun failed (1): Guest program exited with non-zero exit code: 1"
+               ],
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-205218",
+    "baseline":  {
+                     "generated_utc":  "2026-03-28T18:00:21.9285600Z",
+                     "last_boot_utc":  "2026-03-25T11:14:21.5000000Z",
+                     "values":  {
+                                    "DisableIdleStatesAtBoot":  null,
+                                    "IdleStateTimeout":  null,
+                                    "ExitLatencyCheckEnabled":  null
+                                }
+                 }
+}

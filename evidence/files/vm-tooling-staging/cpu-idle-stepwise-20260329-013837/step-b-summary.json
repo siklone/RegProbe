@@ -1,0 +1,19 @@
+﻿{
+    "generated_utc":  "2026-03-28T22:53:46.8484404Z",
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-013837",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260329-013837",
+    "step":  "B",
+    "errors":  [
+                   "Guest reached VMware Tools ready state, but the shell did not become healthy in time."
+               ],
+    "reboot_mode":  "soft",
+    "session_id":  "cpu-idle-stepwise-20260329-013837",
+    "record_id":  "power.disable-cpu-idle-states",
+    "snapshot_name":  "RegProbe-Baseline-20260328",
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "failed_stage":  "wait-shell-post-reboot",
+    "status":  "failed"
+}

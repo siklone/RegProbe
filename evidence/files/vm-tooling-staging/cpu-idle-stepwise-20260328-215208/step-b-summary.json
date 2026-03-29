@@ -1,0 +1,18 @@
+﻿{
+    "session_id":  "cpu-idle-stepwise-20260328-215208",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "generated_utc":  "2026-03-28T19:21:53.6971026Z",
+    "failed_stage":  "restart-guest",
+    "step":  "B",
+    "record_id":  "power.disable-cpu-idle-states",
+    "status":  "failed",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260328-215208",
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-215208",
+    "errors":  [
+                   "Guest did not complete a reboot cycle in time."
+               ]
+}

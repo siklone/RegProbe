@@ -1,0 +1,53 @@
+﻿{
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "failed_stage":  "set-candidate",
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "shell_before":  {
+                         "generated_utc":  "2026-03-28T18:20:32.3889790Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "step":  "A",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260328-211230",
+    "record_id":  "power.disable-cpu-idle-states",
+    "generated_utc":  "2026-03-28T18:29:04.3307351Z",
+    "wpr_start":  {
+                      "generated_utc":  "2026-03-28T18:20:54.1288880Z",
+                      "action":  "start-wpr",
+                      "status":  "ok",
+                      "started":  true
+                  },
+    "status":  "failed",
+    "session_id":  "cpu-idle-stepwise-20260328-211230",
+    "errors":  [
+                   "Guest action set-candidate failed: Cannot delete a subkey tree because the subkey does not exist."
+               ],
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-211230",
+    "baseline":  {
+                     "generated_utc":  "2026-03-28T18:20:46.4774244Z",
+                     "action":  "set-baseline",
+                     "status":  "ok",
+                     "state":  {
+                                   "generated_utc":  "2026-03-28T18:20:46.5334822Z",
+                                   "last_boot_utc":  "2026-03-25T11:14:21.5000000Z",
+                                   "values":  {
+                                                  "DisableIdleStatesAtBoot":  null,
+                                                  "IdleStateTimeout":  null,
+                                                  "ExitLatencyCheckEnabled":  null
+                                              }
+                               }
+                 }
+}

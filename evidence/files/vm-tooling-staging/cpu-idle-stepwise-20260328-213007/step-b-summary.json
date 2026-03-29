@@ -1,0 +1,18 @@
+﻿{
+    "session_id":  "cpu-idle-stepwise-20260328-213007",
+    "snapshot_name":  "baseline-20260327-regprobe-visible-shell-stable",
+    "generated_utc":  "2026-03-28T18:49:53.5257121Z",
+    "failed_stage":  "restart-guest",
+    "step":  "B",
+    "record_id":  "power.disable-cpu-idle-states",
+    "status":  "failed",
+    "guest_root":  "C:\\RegProbe-Diag\\cpu-idle-stepwise-20260328-213007",
+    "recovery":  {
+                     "performed":  true,
+                     "shell_healthy_after_recovery":  true
+                 },
+    "repo_root":  "evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260328-213007",
+    "errors":  [
+                   "vmrun failed (-1): Error: Unrecognized command: restartGuest"
+               ]
+}
