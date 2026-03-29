@@ -90,7 +90,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly IFavoritesStore _favoritesStore;
     private readonly ITweakInventoryStateStore _inventoryStateStore;
     private CancellationTokenSource? _searchCts;
-    private CancellationTokenSource? _bulkCts;
     private CancellationTokenSource? _inventorySaveCts;
     private bool _isApplyingCachedInventory;
     private bool _isBackgroundRefreshRunning;
@@ -115,6 +114,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly TweakEvidenceClassCatalogService _evidenceClassCatalogService = new();
     private readonly ConfigurationWorkspaceClassifier _workspaceClassifier = new();
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
+    private readonly WorkspaceActionCoordinator _workspaceActionCoordinator;
     private readonly IAppLogger _appLogger;
     private readonly IBusyService _busyService;
 
@@ -150,6 +150,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         IBusyService busyService)
     {
         _busyService = busyService ?? throw new ArgumentNullException(nameof(busyService));
+        _workspaceActionCoordinator = new WorkspaceActionCoordinator(_busyService);
         _providerList = providers;
         _shellState.PropertyChanged += OnShellStatePropertyChanged;
         _presentationState.PropertyChanged += OnPresentationStatePropertyChanged;
@@ -910,22 +911,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private bool CanRunBulkInspectable(Func<List<TweakItemViewModel>> getTweaks)
     {
-        if (IsBulkRunning || Tweaks.Any(item => item.IsRunning))
-        {
-            return false;
-        }
-
-        return getTweaks().Count > 0;
+        return _workspaceActionCoordinator.CanRunInspectable(IsBulkRunning, Tweaks, getTweaks);
     }
 
     private bool CanRunBulkMutating(Func<List<TweakItemViewModel>> getTweaks)
     {
-        if (IsBulkRunning || Tweaks.Any(item => item.IsRunning))
-        {
-            return false;
-        }
-
-        return getTweaks().Any(item => item.IsEvidenceClassActionable);
+        return _workspaceActionCoordinator.CanRunMutating(IsBulkRunning, Tweaks, getTweaks);
     }
 
     private async Task RunBulkAsync(
@@ -933,62 +924,17 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         Func<List<TweakItemViewModel>> getTweaks,
         Func<TweakItemViewModel, CancellationToken, Task> runner)
     {
-        if (IsBulkRunning)
-        {
-            return;
-        }
-
-        StartBulkCancellation();
-        IsBulkRunning = true;
-        SetBulkLock(true);
-        var actionLabel = label.ToLowerInvariant();
-
-        try
-        {
-            var items = getTweaks();
-            if (items.Count == 0)
-            {
-                BulkStatusMessage = $"No tweaks to {actionLabel}.";
-                return;
-            }
-
-            BulkProgressTotal = items.Count;
-            BulkProgressCurrent = 0;
-            BulkStatusMessage = $"{label} in progress ({items.Count} items)...";
-            using var busy = _busyService.Busy(BulkStatusMessage);
-
-            OnPropertyChanged(nameof(BulkProgressText));
-
-            foreach (var item in items)
-            {
-                _bulkCts?.Token.ThrowIfCancellationRequested();
-                BulkStatusMessage = $"Running {actionLabel} on {item.Name}...";
-                await runner(item, _bulkCts?.Token ?? CancellationToken.None);
-
-                BulkProgressCurrent++;
-                OnPropertyChanged(nameof(BulkProgressText));
-            }
-
-            BulkStatusMessage = $"Bulk {actionLabel} completed ({items.Count} tweaks).";
-        }
-        catch (OperationCanceledException)
-        {
-            BulkStatusMessage = $"Bulk {actionLabel} cancelled.";
-        }
-        catch (Exception ex)
-        {
-            BulkStatusMessage = $"Bulk {actionLabel} failed: {ex.Message}";
-        }
-        finally
-        {
-            IsBulkRunning = false;
-            SetBulkLock(false);
-            BulkProgressCurrent = 0;
-            BulkProgressTotal = 0;
-            OnPropertyChanged(nameof(BulkProgressText));
-            ClearBulkCancellation();
-            RefreshSummaryStats();
-        }
+        await _workspaceActionCoordinator.RunBulkAsync(
+            label,
+            getTweaks,
+            runner,
+            () => IsBulkRunning,
+            value => IsBulkRunning = value,
+            value => BulkProgressCurrent = value,
+            value => BulkProgressTotal = value,
+            value => BulkStatusMessage = value,
+            () => OnPropertyChanged(nameof(BulkProgressText)),
+            RefreshSummaryStats);
     }
 
     private List<TweakItemViewModel> GetAllFilteredTweaks()
@@ -1017,18 +963,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void SelectAll()
     {
-        foreach (var tweak in TweaksView.Cast<TweakItemViewModel>())
-        {
-            tweak.IsSelected = true;
-        }
+        _workspaceActionCoordinator.SelectAll(TweaksView.Cast<TweakItemViewModel>());
     }
 
     private void DeselectAll()
     {
-        foreach (var tweak in Tweaks)
-        {
-            tweak.IsSelected = false;
-        }
+        _workspaceActionCoordinator.DeselectAll(Tweaks);
     }
 
     private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -1131,30 +1071,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void UpdateSelectionCount()
     {
-        SelectedCount = Tweaks.Count(t => t.IsSelected);
+        SelectedCount = _workspaceActionCoordinator.CountSelected(Tweaks);
     }
 
     private void CancelBulk()
     {
-        if (!IsBulkRunning || _bulkCts is null)
-        {
-            return;
-        }
-
-        _bulkCts.Cancel();
-        BulkStatusMessage = "Bulk cancellation requested.";
-    }
-
-    private void StartBulkCancellation()
-    {
-        ClearBulkCancellation();
-        _bulkCts = new CancellationTokenSource();
-    }
-
-    private void ClearBulkCancellation()
-    {
-        _bulkCts?.Dispose();
-        _bulkCts = null;
+        _workspaceActionCoordinator.CancelBulk(IsBulkRunning, value => BulkStatusMessage = value);
     }
 
     private bool FilterTweaks(object obj)
@@ -2212,8 +2134,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         // Dispose CancellationTokenSources
         _searchCts?.Cancel();
         _searchCts?.Dispose();
-        _bulkCts?.Cancel();
-        _bulkCts?.Dispose();
+        _workspaceActionCoordinator.Dispose();
         _inventorySaveCts?.Cancel();
         _inventorySaveCts?.Dispose();
 
