@@ -629,6 +629,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ? "Surface one-off cleanup and recovery actions fast."
         : "Narrow the list to the settings you actively manage.";
 
+    public string CurrentWorkspaceModeNote => IsMaintenanceWorkspaceSelected
+        ? "Run these when Windows needs intervention, then get out of the way."
+        : "These settings stay in place until you choose a different default.";
+
     public string WorkspaceStatusHint => IsMaintenanceWorkspaceSelected
         ? "Use filters for a targeted repair path, a reset, or a one-off maintenance action."
         : "Search by behavior, narrow to one area, or keep favorites close for the settings you revisit most.";
@@ -645,9 +649,19 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ? "Show all repairs"
         : "Show all settings";
 
+    public bool CanClearCategorySelection => !IsAllCategoriesSelected;
+
+    public string ClearCategorySelectionText => IsMaintenanceWorkspaceSelected
+        ? "Browse all repair categories"
+        : "Browse all areas";
+
     public string FilterSummaryLabel => IsMaintenanceWorkspaceSelected ? "Repair scope" : "Configuration scope";
 
     public string InventorySummaryLabel => IsMaintenanceWorkspaceSelected ? "Repair status" : "Configuration status";
+
+    public string SelectedCategoryContext => IsAllCategoriesSelected
+        ? (IsMaintenanceWorkspaceSelected ? "Browsing all repair categories" : "Browsing all configuration areas")
+        : (IsMaintenanceWorkspaceSelected ? $"{SelectedCategoryLabel} repair category" : $"{SelectedCategoryLabel} area");
 
     public bool ShowDnsConfigurationPanel =>
         IsSettingsWorkspaceSelected &&
@@ -1596,13 +1610,17 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(SearchPlaceholder));
         OnPropertyChanged(nameof(ToolbarSectionLabel));
         OnPropertyChanged(nameof(ToolbarSectionHint));
+        OnPropertyChanged(nameof(CurrentWorkspaceModeNote));
         OnPropertyChanged(nameof(WorkspaceStatusHint));
         OnPropertyChanged(nameof(EmptyStateTitle));
         OnPropertyChanged(nameof(EmptyStateDescription));
         OnPropertyChanged(nameof(EmptyStateActionText));
+        OnPropertyChanged(nameof(CanClearCategorySelection));
+        OnPropertyChanged(nameof(ClearCategorySelectionText));
         OnPropertyChanged(nameof(FilterSummaryLabel));
         OnPropertyChanged(nameof(InventorySummaryLabel));
         OnPropertyChanged(nameof(SelectedCategoryLabel));
+        OnPropertyChanged(nameof(SelectedCategoryContext));
         OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
         OnPropertyChanged(nameof(CurrentMainTabTitle));
         OnPropertyChanged(nameof(CurrentMainTabSubtitle));
