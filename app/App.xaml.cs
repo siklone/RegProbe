@@ -30,15 +30,14 @@ public partial class App : Application
         }
         _singleInstance.ArgumentsReceived += OnArgumentsReceived;
 
-        CrashReportService.Initialize(); // Initialize crash reporter first
-        
+        CrashReportService.Initialize();
+
         DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         TaskScheduler.UnobservedTaskException += OnUnobservedTaskException;
 
         base.OnStartup(e);
 
-        SplashWindowHost? splashHost = null;
         try
         {
             AppDiagnostics.Log("[APP] OnStartup begin");
@@ -50,24 +49,6 @@ public partial class App : Application
             ApplyTheme(settings);
             ConfigureProcessRenderSettings();
 
-            var showSplash = true;
-            if (showSplash)
-            {
-                splashHost = new SplashWindowHost();
-                await splashHost.ShowAsync();
-                await Task.Delay(80);
-            }
-
-            var preloadProgress = showSplash
-                ? new Progress<PreloadProgress>(progress => splashHost?.UpdatePreloadProgress(progress))
-                : new Progress<PreloadProgress>(_ => { });
-
-            var preloader = CreateStartupPreloader(preloadProgress);
-
-            AppDiagnostics.Log("[APP] Calling PreloadAllAsync...");
-            await Task.Run(() => preloader.RunAllAsync(CancellationToken.None));
-            AppDiagnostics.Log("[APP] PreloadAllAsync done.");
-
             var mainWindow = new MainWindow();
             MainWindow = mainWindow;
             ConfigureWindowRenderSettings(mainWindow);
@@ -76,16 +57,10 @@ public partial class App : Application
             await Dispatcher.Yield(DispatcherPriority.Render);
             mainWindow.Activate();
 
-            if (splashHost != null)
-            {
-                await splashHost.CompleteAndCloseAsync();
-            }
-
             QueueDeferredStartupWork(settings, mainWindow);
         }
         catch (Exception ex)
         {
-            splashHost?.CloseImmediately();
             AppDiagnostics.LogException("Startup sequence failed", ex);
             _ = CrashReportService.LogCrashAsync(ex, "Startup", true);
 
@@ -101,39 +76,11 @@ public partial class App : Application
         }
     }
 
-    private static PreloadManager CreateStartupPreloader(IProgress<PreloadProgress> progress)
-    {
-        var preloader = new PreloadManager(progress);
-        RegisterCorePreloadTasks(preloader);
-        return preloader;
-    }
-
-    private static PreloadManager CreateDeferredPreloader()
-    {
-        var preloader = new PreloadManager(new Progress<PreloadProgress>(_ => { }));
-        preloader.RegisterTask("Analyze nohuto updates", async ct =>
-        {
-            using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-            timeoutCts.CancelAfter(TimeSpan.FromSeconds(12));
-
-            var scanPaths = AppPaths.FromEnvironment();
-            using var scanService = new NohutoRepoScanService(scanPaths);
-            var result = await scanService.CheckAndAnalyzeAsync(timeoutCts.Token, TimeSpan.FromHours(2));
-            AppDiagnostics.Log($"[NohutoScan] {result.Summary}");
-        }, isCritical: false, priority: 40);
-
-        return preloader;
-    }
-
-    private static void RegisterCorePreloadTasks(PreloadManager preloader)
-    {
-    }
-
     private void QueueDeferredStartupWork(AppSettings settings, MainWindow mainWindow)
     {
         _ = Dispatcher.InvokeAsync(() =>
         {
-            _ = RunDeferredPreloadAsync();
+            _ = RunDeferredBackgroundWorkAsync();
 
             if (settings.RunStartupScanOnLaunch && mainWindow.DataContext is MainViewModel mainVm)
             {
@@ -142,13 +89,16 @@ public partial class App : Application
         }, DispatcherPriority.ContextIdle);
     }
 
-    private static async Task RunDeferredPreloadAsync()
+    private static async Task RunDeferredBackgroundWorkAsync()
     {
         try
         {
             AppDiagnostics.Log("[APP] Starting deferred startup work");
-            var preloader = CreateDeferredPreloader();
-            await preloader.RunAllAsync(CancellationToken.None);
+            using var timeoutCts = new CancellationTokenSource(TimeSpan.FromSeconds(12));
+            var scanPaths = AppPaths.FromEnvironment();
+            using var scanService = new NohutoRepoScanService(scanPaths);
+            var result = await scanService.CheckAndAnalyzeAsync(timeoutCts.Token, TimeSpan.FromHours(2));
+            AppDiagnostics.Log($"[NohutoScan] {result.Summary}");
             AppDiagnostics.Log("[APP] Deferred startup work complete");
         }
         catch (Exception ex)
