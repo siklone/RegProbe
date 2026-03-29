@@ -76,7 +76,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private int _selectedCount;
     private readonly TweaksShellStateViewModel _shellState = new();
     private readonly TweaksPresentationStateViewModel _presentationState = new();
-    private readonly ObservableCollection<RepairsItemViewModel> _repairsRows = new();
     private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
     private readonly IFavoritesStore _favoritesStore;
     private readonly IProfileSyncService _syncService = new ProfileSyncService();
@@ -84,6 +83,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly IRollbackStateStore _rollbackStore;
     private readonly WorkspaceBrowseCoordinator _browseCoordinator;
     private readonly WorkspaceCatalogCoordinator _catalogCoordinator;
+    private readonly WorkspaceCollectionCoordinator _collectionCoordinator;
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
     private readonly WorkspaceInventoryCoordinator _inventoryCoordinator;
     private readonly WorkspaceOperationsCoordinator _operationsCoordinator;
@@ -146,6 +146,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _operationsCoordinator.PropertyChanged += OnOperationsCoordinatorPropertyChanged;
         _rollbackStore = new RollbackStateStore(paths);
         _favoritesStore = new FavoritesStore(paths);
+        _collectionCoordinator = new WorkspaceCollectionCoordinator(_favoritesStore, GetWorkspaceKind);
         _inventoryCoordinator = new WorkspaceInventoryCoordinator(new TweakInventoryStateStore(paths));
         _inventoryCoordinator.PropertyChanged += OnInventoryCoordinatorPropertyChanged;
 		_pipeline = new TweakExecutionPipeline(logger, _logStore, _rollbackStore);
@@ -195,7 +196,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         TweaksView.Filter = FilterTweaks;
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
-        RepairsRowsView = CollectionViewSource.GetDefaultView(_repairsRows);
+        RepairsRowsView = CollectionViewSource.GetDefaultView(_collectionCoordinator.RepairsRows);
         RepairsRowsView.Filter = FilterRepairsRows;
         RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Risk), ListSortDirection.Ascending));
         RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Name), ListSortDirection.Ascending));
@@ -733,14 +734,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void OnTweakFavoriteChanged(TweakItemViewModel tweak, bool isFavorite)
     {
-        if (isFavorite)
-        {
-            _favoritesStore.AddFavorite(tweak.Id);
-        }
-        else
-        {
-            _favoritesStore.RemoveFavorite(tweak.Id);
-        }
+        _collectionCoordinator.HandleFavoriteChanged(tweak, isFavorite);
 
         OnPropertyChanged(nameof(FavoritesCount));
 
@@ -753,31 +747,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void OnTweaksCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        if (e.NewItems != null)
-        {
-            foreach (var item in e.NewItems.OfType<TweakItemViewModel>())
-            {
-                item.PropertyChanged += OnTweakPropertyChanged;
-                item.FavoriteChanged += OnTweakFavoriteChanged;
-                item.IsFavorite = _favoritesStore.IsFavorite(item.Id);
-                AddRepairsRow(item);
-            }
-        }
-
-        if (e.OldItems != null)
-        {
-            foreach (var item in e.OldItems.OfType<TweakItemViewModel>())
-            {
-                item.PropertyChanged -= OnTweakPropertyChanged;
-                item.FavoriteChanged -= OnTweakFavoriteChanged;
-                RemoveRepairsRow(item);
-            }
-        }
-
-        if (e.Action == NotifyCollectionChangedAction.Reset)
-        {
-            RebuildRepairsRows();
-        }
+        _collectionCoordinator.HandleCollectionChanged(Tweaks, e, OnTweakPropertyChanged, OnTweakFavoriteChanged);
 
         UpdateSelectionCount();
         RaiseHealthMetricsChanged();
@@ -1027,48 +997,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         return RunBulkAsync(label, getTweaks, runner);
     }
 
-    private void AddRepairsRow(TweakItemViewModel item)
-    {
-        if (GetWorkspaceKind(item) != ConfigurationWorkspaceKind.Maintenance)
-        {
-            return;
-        }
-
-        if (_repairsRows.Any(row => ReferenceEquals(row.Source, item)))
-        {
-            return;
-        }
-
-        _repairsRows.Add(new RepairsItemViewModel(item));
-    }
-
-    private void RemoveRepairsRow(TweakItemViewModel item)
-    {
-        var existing = _repairsRows.FirstOrDefault(row => ReferenceEquals(row.Source, item));
-        if (existing is null)
-        {
-            return;
-        }
-
-        existing.Dispose();
-        _repairsRows.Remove(existing);
-    }
-
-    private void RebuildRepairsRows()
-    {
-        foreach (var row in _repairsRows)
-        {
-            row.Dispose();
-        }
-
-        _repairsRows.Clear();
-
-        foreach (var item in Tweaks.Where(t => GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Maintenance))
-        {
-            _repairsRows.Add(new RepairsItemViewModel(item));
-        }
-    }
-
     private void RefreshLogFileSize()
     {
         _operationsCoordinator.RefreshLogFileSize();
@@ -1190,6 +1118,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
         // Dispose CancellationTokenSources
         _browseCoordinator.Dispose();
+        _collectionCoordinator.Dispose(OnTweakPropertyChanged, OnTweakFavoriteChanged);
         _workspaceActionCoordinator.Dispose();
         _inventoryCoordinator.Dispose();
 
@@ -1200,18 +1129,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _supportCoordinator.PropertyChanged -= OnSupportCoordinatorPropertyChanged;
         _operationsCoordinator.PropertyChanged -= OnOperationsCoordinatorPropertyChanged;
         Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
-
-        // Unsubscribe tweak property changed events
-        foreach (var tweak in Tweaks)
-        {
-            tweak.PropertyChanged -= OnTweakPropertyChanged;
-            tweak.FavoriteChanged -= OnTweakFavoriteChanged;
-        }
-
-        foreach (var row in _repairsRows)
-        {
-            row.Dispose();
-        }
 
     }
 }
