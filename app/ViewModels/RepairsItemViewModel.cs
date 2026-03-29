@@ -25,7 +25,11 @@ public sealed class RepairsItemViewModel : ViewModelBase, IDisposable
 
     public TweakAppliedStatus AppliedStatus => _source.AppliedStatus;
 
+    public TweakAppliedStatus RepairState => _source.AppliedStatus;
+
     public string StatusText => _source.StatusText;
+
+    public string RepairStatusText => _source.StatusText;
 
     public string EvidenceClassId => _source.EvidenceClassId;
 
@@ -49,7 +53,11 @@ public sealed class RepairsItemViewModel : ViewModelBase, IDisposable
 
     public string RepairsActionButtonText => _source.RepairsActionButtonText;
 
+    public string RunRepairButtonText => _source.RepairsActionButtonText;
+
     public string PrimaryActionTooltip => _source.PrimaryActionTooltip;
+
+    public string RunRepairTooltip => _source.PrimaryActionTooltip;
 
     public bool IsAdvancedRisk => _source.IsAdvancedRisk;
 
@@ -71,6 +79,8 @@ public sealed class RepairsItemViewModel : ViewModelBase, IDisposable
     }
 
     public ICommand ApplyCommand => _source.ApplyCommand;
+
+    public ICommand RunRepairCommand => _source.ApplyCommand;
 
     private void OnSourcePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {

@@ -213,6 +213,11 @@
 
     <Style x:Key="RepairsActionButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
         <Style.Triggers>
+            <DataTrigger Binding="{Binding RepairState}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
+                <Setter Property="Background" Value="#2B1715"/>
+                <Setter Property="BorderBrush" Value="#C0392B"/>
+                <Setter Property="Foreground" Value="#F0B1A8"/>
+            </DataTrigger>
             <DataTrigger Binding="{Binding IsAdvancedRisk}" Value="True">
                 <Setter Property="Background" Value="#20170F"/>
                 <Setter Property="BorderBrush" Value="#5A4020"/>
@@ -285,26 +290,26 @@
                                     <Setter Property="Background" Value="#191919"/>
                                     <Setter Property="BorderBrush" Value="#2B2B2B"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
+                                        <DataTrigger Binding="{Binding RepairState}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
                                             <Setter Property="Background" Value="#17311E"/>
                                             <Setter Property="BorderBrush" Value="#2E7D32"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Error}">
+                                        <DataTrigger Binding="{Binding RepairState}" Value="{x:Static viewModels:TweakAppliedStatus.Error}">
                                             <Setter Property="Background" Value="#261614"/>
                                             <Setter Property="BorderBrush" Value="#5A2A24"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
-                            <TextBlock Text="{Binding StatusText}" FontSize="10" FontWeight="SemiBold">
+                            <TextBlock Text="{Binding RepairStatusText}" FontSize="10" FontWeight="SemiBold">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Foreground" Value="#8C8C8C"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
+                                            <DataTrigger Binding="{Binding RepairState}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
                                                 <Setter Property="Foreground" Value="#6DC171"/>
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Error}">
+                                            <DataTrigger Binding="{Binding RepairState}" Value="{x:Static viewModels:TweakAppliedStatus.Error}">
                                                 <Setter Property="Foreground" Value="#D98075"/>
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -480,9 +485,9 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,16,0,0" VerticalAlignment="Top" HorizontalAlignment="Right">
-                    <Button Content="{Binding RepairsActionButtonText}"
-                            Command="{Binding ApplyCommand}"
-                            ToolTip="{Binding PrimaryActionTooltip}"
+                    <Button Content="{Binding RunRepairButtonText}"
+                            Command="{Binding RunRepairCommand}"
+                            ToolTip="{Binding RunRepairTooltip}"
                             Style="{StaticResource RepairsActionButtonStyle}"
                             MinWidth="86"/>
                 </StackPanel>
