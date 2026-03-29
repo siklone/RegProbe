@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -18,28 +17,20 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private ViewModelBase? _currentViewModel;
     private string _searchText = string.Empty;
     private readonly RelayCommand _clearSearchCommand;
-    private readonly IRollbackStateStore _rollbackStore;
     private readonly IBusyService _busyService = new BusyService();
     private readonly TweaksViewModel _workspaceViewModel;
     private readonly ConfigurationShellViewModel _configurationViewModel;
     private readonly RepairsShellViewModel _repairsViewModel;
     private readonly SettingsViewModel _settingsViewModel;
     private readonly AboutViewModel _aboutViewModel;
-
-    private bool _hasPendingRollbacks;
-    private int _pendingRollbackCount;
-    private string _pendingRollbackMessage = string.Empty;
-    private bool _isRecovering;
+    private readonly MainRecoveryCoordinator _recoveryCoordinator;
 
     public MainViewModel()
     {
         LogToFile("========== APPLICATION STARTED ==========");
 
         var paths = AppPaths.FromEnvironment();
-        _rollbackStore = new RollbackStateStore(paths);
-
-        RecoverPendingRollbacksCommand = new RelayCommand(_ => _ = RecoverPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
-        DismissPendingRollbacksCommand = new RelayCommand(_ => _ = DismissPendingRollbacksAsync(), _ => HasPendingRollbacks && !IsRecovering);
+        var rollbackStore = new RollbackStateStore(paths);
 
         var providers = new ITweakProvider[]
         {
@@ -62,6 +53,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         _repairsViewModel = new RepairsShellViewModel(_workspaceViewModel);
         _settingsViewModel = new SettingsViewModel();
         _aboutViewModel = new AboutViewModel();
+        _recoveryCoordinator = new MainRecoveryCoordinator(rollbackStore, _workspaceViewModel, LogToFile);
+        _recoveryCoordinator.PropertyChanged += OnRecoveryCoordinatorPropertyChanged;
 
         _clearSearchCommand = new RelayCommand(_ => SearchText = string.Empty, _ => !string.IsNullOrEmpty(SearchText));
 
@@ -76,14 +69,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
         _ = Task.Run(async () =>
         {
-            try
-            {
-                await CheckPendingRollbacksAsync();
-            }
-            catch (Exception ex)
-            {
-                LogToFile($"Pending rollback check failed: {ex.Message}");
-            }
+            await _recoveryCoordinator.InitializeAsync();
         });
     }
 
@@ -93,9 +79,9 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public string AppCopyrightLabel => AppInfo.CopyrightLabel;
 
-    public ICommand RecoverPendingRollbacksCommand { get; }
+    public ICommand RecoverPendingRollbacksCommand => _recoveryCoordinator.RecoverPendingRollbacksCommand;
 
-    public ICommand DismissPendingRollbacksCommand { get; }
+    public ICommand DismissPendingRollbacksCommand => _recoveryCoordinator.DismissPendingRollbacksCommand;
 
     public RelayCommand ShowRepairsCommand { get; }
 
@@ -163,45 +149,28 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public bool HasPendingRollbacks
     {
-        get => _hasPendingRollbacks;
-        private set
-        {
-            if (SetProperty(ref _hasPendingRollbacks, value))
-            {
-                ((RelayCommand)RecoverPendingRollbacksCommand).RaiseCanExecuteChanged();
-                ((RelayCommand)DismissPendingRollbacksCommand).RaiseCanExecuteChanged();
-            }
-        }
+        get => _recoveryCoordinator.HasPendingRollbacks;
     }
 
     public int PendingRollbackCount
     {
-        get => _pendingRollbackCount;
-        private set => SetProperty(ref _pendingRollbackCount, value);
+        get => _recoveryCoordinator.PendingRollbackCount;
     }
 
     public string PendingRollbackMessage
     {
-        get => _pendingRollbackMessage;
-        private set => SetProperty(ref _pendingRollbackMessage, value);
+        get => _recoveryCoordinator.PendingRollbackMessage;
     }
 
     public bool IsRecovering
     {
-        get => _isRecovering;
-        private set
-        {
-            if (SetProperty(ref _isRecovering, value))
-            {
-                ((RelayCommand)RecoverPendingRollbacksCommand).RaiseCanExecuteChanged();
-                ((RelayCommand)DismissPendingRollbacksCommand).RaiseCanExecuteChanged();
-            }
-        }
+        get => _recoveryCoordinator.IsRecovering;
     }
 
     public void Dispose()
     {
         _workspaceViewModel.PropertyChanged -= OnWorkspaceViewModelPropertyChanged;
+        _recoveryCoordinator.PropertyChanged -= OnRecoveryCoordinatorPropertyChanged;
 
         if (_workspaceViewModel is IDisposable workspaceDisposable)
         {
@@ -279,104 +248,19 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(IsAboutViewActive));
     }
 
+    private void OnRecoveryCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            return;
+        }
+
+        OnPropertyChanged(e.PropertyName);
+    }
+
     private void SyncSearchText()
     {
         _workspaceViewModel.SearchText = _searchText;
-    }
-
-    private async Task CheckPendingRollbacksAsync()
-    {
-        try
-        {
-            var pending = await _rollbackStore.GetPendingRollbacksAsync(CancellationToken.None);
-            if (pending.Count > 0)
-            {
-                PendingRollbackCount = pending.Count;
-                PendingRollbackMessage = pending.Count == 1
-                    ? $"1 tweak was not properly rolled back after a crash: {pending[0].TweakId}"
-                    : $"{pending.Count} tweaks were not properly rolled back after a crash.";
-                HasPendingRollbacks = true;
-                LogToFile($"Crash recovery: Found {pending.Count} pending rollbacks");
-            }
-        }
-        catch (Exception ex)
-        {
-            LogToFile($"Crash recovery check failed: {ex.Message}");
-        }
-    }
-
-    private async Task RecoverPendingRollbacksAsync()
-    {
-        IsRecovering = true;
-        LogToFile("Crash recovery: Starting rollback recovery...");
-
-        try
-        {
-            var pending = await _rollbackStore.GetPendingRollbacksAsync(CancellationToken.None);
-            var successCount = 0;
-
-            foreach (var entry in pending)
-            {
-                try
-                {
-                    var tweakVm = _workspaceViewModel.Tweaks.FirstOrDefault(t => t.Id == entry.TweakId);
-                    if (tweakVm != null && tweakVm.IsApplied)
-                    {
-                        await tweakVm.RunRollbackAsync(CancellationToken.None);
-                        successCount++;
-                        LogToFile($"Crash recovery: Rolled back {entry.TweakId}");
-                    }
-                    else
-                    {
-                        await _rollbackStore.MarkRolledBackAsync(entry.TweakId, CancellationToken.None);
-                        successCount++;
-                        LogToFile($"Crash recovery: Marked {entry.TweakId} as recovered (not found or already rolled back)");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LogToFile($"Crash recovery: Failed to rollback {entry.TweakId}: {ex.Message}");
-                }
-            }
-
-            if (successCount == pending.Count)
-            {
-                HasPendingRollbacks = false;
-                PendingRollbackMessage = string.Empty;
-                PendingRollbackCount = 0;
-                LogToFile("Crash recovery: All rollbacks completed successfully");
-            }
-            else
-            {
-                PendingRollbackMessage = $"Recovery completed with {pending.Count - successCount} failures. Check logs for details.";
-            }
-        }
-        catch (Exception ex)
-        {
-            LogToFile($"Crash recovery failed: {ex.Message}");
-            PendingRollbackMessage = $"Recovery failed: {ex.Message}";
-        }
-        finally
-        {
-            IsRecovering = false;
-        }
-    }
-
-    private async Task DismissPendingRollbacksAsync()
-    {
-        LogToFile("Crash recovery: User dismissed pending rollbacks");
-
-        try
-        {
-            await _rollbackStore.ClearAllAsync(CancellationToken.None);
-            HasPendingRollbacks = false;
-            PendingRollbackMessage = string.Empty;
-            PendingRollbackCount = 0;
-        }
-        catch (Exception ex)
-        {
-            LogToFile($"Failed to clear pending rollbacks: {ex.Message}");
-        }
     }
 
     private static void LogToFile(string message)
