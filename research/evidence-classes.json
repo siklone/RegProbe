@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-29T00:42:09.786396Z",
+  "generated_utc": "2026-03-29T11:14:26.957491Z",
   "summary": {
-    "total_records": 298,
+    "total_records": 305,
     "class_counts": {
       "A": 241,
       "B": 1,
-      "C": 2,
+      "C": 9,
       "D": 0,
       "E": 54
     },
     "action_state_counts": {
       "actionable": 241,
       "archived": 54,
-      "research-gated": 3
+      "research-gated": 10
     }
   },
   "classes": {
@@ -5789,6 +5789,475 @@
             "summary": "Matched 3 audit token(s) in win-config."
           }
         ]
+      }
+    },
+    {
+      "record_id": "power.control.class1-initial-unpark-count",
+      "tweak_id": "power.control.class1-initial-unpark-count",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Value Model Partial",
+      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The docs-first triage and phase-0 baseline agree on `Class1InitialUnparkCount=64` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:104 shows `Class1InitialUnparkCount` with observed literal `64` in the repo power notes."
+          },
+          {
+            "title": "Repo power notes for docs-first power-control values",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain an exact entry for Class1InitialUnparkCount, led by Docs/power/power.md:104."
+          },
+          {
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "kind": "repo-doc",
+            "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for Class1InitialUnparkCount."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed Class1InitialUnparkCount exists on the clean baseline with observed value 64.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed Class1InitialUnparkCount exists on the clean baseline with observed value 64."
+          },
+          {
+            "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for Class1InitialUnparkCount, leaving no usable per-..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
+      "record_id": "power.control.hibernate-enabled-default",
+      "tweak_id": "power.control.hibernate-enabled-default",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Value Model Partial",
+      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The docs-first triage and phase-0 baseline agree on `HibernateEnabledDefault=1` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:154 shows `HibernateEnabledDefault` with observed literal `1` in the repo power notes."
+          },
+          {
+            "title": "Repo power notes for docs-first power-control values",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain an exact entry for HibernateEnabledDefault, led by Docs/power/power.md:154."
+          },
+          {
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "kind": "repo-doc",
+            "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for HibernateEnabledDefault."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed HibernateEnabledDefault exists on the clean baseline with observed value 1.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed HibernateEnabledDefault exists on the clean baseline with observed value 1."
+          },
+          {
+            "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for HibernateEnabledDefault, leaving no usable per-c..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
+      "record_id": "power.control.hibernate-enabled",
+      "tweak_id": "power.control.hibernate-enabled",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Value Model Partial",
+      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The docs-first triage and phase-0 baseline agree on `HibernateEnabled=0` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:154 shows `HibernateEnabled` with observed literal `0` in the repo power notes."
+          },
+          {
+            "title": "Repo power notes for docs-first power-control values",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain an exact entry for HibernateEnabled, led by Docs/power/power.md:154."
+          },
+          {
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "kind": "repo-doc",
+            "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for HibernateEnabled."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed HibernateEnabled exists on the clean baseline with observed value 0.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed HibernateEnabled exists on the clean baseline with observed value 0."
+          },
+          {
+            "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for HibernateEnabled, leaving no usable per-candidat..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
+      "record_id": "power.control.lid-reliability-state",
+      "tweak_id": "power.control.lid-reliability-state",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Value Model Partial",
+      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The docs-first triage and phase-0 baseline agree on `LidReliabilityState=1` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:170 shows `LidReliabilityState` with observed literal `1` in the repo power notes."
+          },
+          {
+            "title": "Repo power notes for docs-first power-control values",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain an exact entry for LidReliabilityState, led by Docs/power/power.md:170."
+          },
+          {
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "kind": "repo-doc",
+            "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for LidReliabilityState."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed LidReliabilityState exists on the clean baseline with observed value 1.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed LidReliabilityState exists on the clean baseline with observed value 1."
+          },
+          {
+            "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for LidReliabilityState, leaving no usable per-candi..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
+      "record_id": "power.control.mf-buffering-threshold",
+      "tweak_id": "power.control.mf-buffering-threshold",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Value Model Partial",
+      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The docs-first triage and phase-0 baseline agree on `MfBufferingThreshold=0` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:173 shows `MfBufferingThreshold` with observed literal `0` in the repo power notes."
+          },
+          {
+            "title": "Repo power notes for docs-first power-control values",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain an exact entry for MfBufferingThreshold, led by Docs/power/power.md:173."
+          },
+          {
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "kind": "repo-doc",
+            "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for MfBufferingThreshold."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed MfBufferingThreshold exists on the clean baseline with observed value 0.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed MfBufferingThreshold exists on the clean baseline with observed value 0."
+          },
+          {
+            "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for MfBufferingThreshold, leaving no usable per-cand..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
+      "record_id": "power.control.perf-calculate-actual-utilization",
+      "tweak_id": "power.control.perf-calculate-actual-utilization",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Value Model Partial",
+      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The docs-first triage and phase-0 baseline agree on `PerfCalculateActualUtilization=1` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:181 shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes."
+          },
+          {
+            "title": "Repo power notes for docs-first power-control values",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain an exact entry for PerfCalculateActualUtilization, led by Docs/power/power.md:181."
+          },
+          {
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "kind": "repo-doc",
+            "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for PerfCalculateActualUtilization."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed PerfCalculateActualUtilization exists on the clean baseline with observed value 1.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed PerfCalculateActualUtilization exists on the clean baseline with observed value 1."
+          },
+          {
+            "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for PerfCalculateActualUtilization, leaving no usabl..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
+      "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
+      "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Value Model Partial",
+      "class_description": "The key existence is solid and some values are known, but value behavior still needs VM diff, benchmark work, or tighter app mapping.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but the app mapping is still partial or indirect.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The docs-first triage and phase-0 baseline agree on `TimerRebaseThresholdOnDripsExit=60` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:206 shows `TimerRebaseThresholdOnDripsExit` with observed literal `60` in the repo power notes."
+          },
+          {
+            "title": "Repo power notes for docs-first power-control values",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain an exact entry for TimerRebaseThresholdOnDripsExit, led by Docs/power/power.md:206."
+          },
+          {
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "kind": "repo-doc",
+            "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for TimerRebaseThresholdOnDripsExit."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed TimerRebaseThresholdOnDripsExit exists on the clean baseline with observed value 60.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed TimerRebaseThresholdOnDripsExit exists on the clean baseline with observed value 60."
+          },
+          {
+            "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
+            "kind": "procmon-trace",
+            "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for TimerRebaseThresholdOnDripsExit, leaving no usab..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {

@@ -1,0 +1,57 @@
+{
+  "generated_utc": "2026-03-29T11:10:13.492625Z",
+  "batch_id": "power-control-docs-first-runtime-capture-20260329",
+  "status": "copy-incomplete",
+  "snapshot_name": "RegProbe-Baseline-Clean-20260329",
+  "source_manifest": "registry-research-framework/audit/power-control-docs-first-value-exists-static-triage-20260329.json",
+  "summary_path": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json",
+  "results_path": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json",
+  "driver_log": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/driver-run.log",
+  "copy_incomplete_candidates": 7,
+  "shell_healthy_before": true,
+  "shell_healthy_after": true,
+  "candidate_statuses": [
+    {
+      "candidate_id": "power.control.class1-initial-unpark-count",
+      "status": "copy-incomplete",
+      "exact_value_hit_count": 0,
+      "path_hit_count": 0
+    },
+    {
+      "candidate_id": "power.control.hibernate-enabled",
+      "status": "copy-incomplete",
+      "exact_value_hit_count": 0,
+      "path_hit_count": 0
+    },
+    {
+      "candidate_id": "power.control.hibernate-enabled-default",
+      "status": "copy-incomplete",
+      "exact_value_hit_count": 0,
+      "path_hit_count": 0
+    },
+    {
+      "candidate_id": "power.control.lid-reliability-state",
+      "status": "copy-incomplete",
+      "exact_value_hit_count": 0,
+      "path_hit_count": 0
+    },
+    {
+      "candidate_id": "power.control.mf-buffering-threshold",
+      "status": "copy-incomplete",
+      "exact_value_hit_count": 0,
+      "path_hit_count": 0
+    },
+    {
+      "candidate_id": "power.control.perf-calculate-actual-utilization",
+      "status": "copy-incomplete",
+      "exact_value_hit_count": 0,
+      "path_hit_count": 0
+    },
+    {
+      "candidate_id": "power.control.timer-rebase-threshold-on-drips-exit",
+      "status": "copy-incomplete",
+      "exact_value_hit_count": 0,
+      "path_hit_count": 0
+    }
+  ]
+}

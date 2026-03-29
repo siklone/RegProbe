@@ -1,0 +1,251 @@
+INFO  Using log config file: jar:file:/C:/Tools/Ghidra/ghidra_12.0.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)
+INFO  Using log file: <local-path>
+INFO  Loading user preferences: <local-path>
+INFO  Searching for classes... (ClassSearcher)
+INFO  Class search complete (1280 ms) (ClassSearcher)
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)
+INFO  Initializing Random Number Generator... (SecureRandomFactory)
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)
+INFO  Starting cache cleanup: <local-path>
+INFO  Finished cache cleanup, estimated storage used: 0 (FileCacheMaintenanceDaemon)
+INFO  Headless startup complete (32618 ms) (AnalyzeHeadless)
+INFO  Class searcher loaded 58 extension points (18 false positives) (ClassSearcher)
+INFO  HEADLESS Script Paths:
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+    <local-path>
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)
+INFO  Creating temporary project: <local-path>
+INFO  Creating project: <local-path>
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)
+INFO       project: <local-path>
+INFO  IMPORTING: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)
+INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)
+INFO  Using Library Search Path: [., <local-path>
+INFO  Additional info:
+Loading file:///C:/Windows/System32/ntoskrnl.exe?MD5=b37e6e677de4e6412c2020ab35be2322...
+------------------------------------------------
+
+Searching 15 paths for library BOOTVID.DLL...
+Loading file:///C:/Windows/System32/BOOTVID.DLL?MD5=583f1fac9ba692ccf70bcd87d25f7dad...
+Created exports file: <local-path>
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library CI.DLL...
+Loading file:///C:/Windows/System32/ci.dll?MD5=b4b65a3c19251eb589050f6a6857763c...
+[ci.dll]: failed to create WEVTResource at 1800f37c8: Failed to resolve data length for WEVTResource
+Created exports file: <local-path>
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library CNG.SYS...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-ACCEL-API-KM-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-FS-CLFS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-CLIPSP-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-GLOBMERGER-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-KCMINITCFG-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-KSECURITY-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-KSR-L1-1-5.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-PROCESSPARAMETERS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-RUNLEVELS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-STATESEPARATION-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-TM-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-TRACE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-UCODE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-WERKERNEL-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-WIN32K-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library KDCOM.DLL...
+Loading file:///C:/Windows/System32/kdcom.dll?MD5=23a7e41fe80788922ed4acab18ecd9e7...
+Created exports file: <local-path>
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library MSRPC.SYS...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library PSHED.DLL...
+Loading file:///C:/Windows/System32/PSHED.DLL?MD5=467d490720309451176caf5e0268a731...
+Index 5 out of bounds for length 5
+Created exports file: <local-path>
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library SYMCRYPTK.DLL...
+Loading file:///C:/Windows/System32/symcryptk.dll?MD5=499c6a4eaba6b0e07ea3f0b6612cf7d2...
+Created exports file: <local-path>
+Library not saved to project.
+------------------------------------------------
+
+Applying cached symbols from SYMCRYPTK.DLL
+Applying cached symbols from PSHED.DLL
+Applying cached symbols from BOOTVID.DLL
+Applying cached symbols from KDCOM.DLL
+Applying cached symbols from CI.DLL
+Linking the External Programs of 'ntoskrnl.exe' to imported libraries...
+  [EXT-MS-WIN-NTOS-PROCESSPARAMETERS-L1-1-0.DLL] -> not found in project
+  [SYMCRYPTK.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-TM-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-ACCEL-API-KM-L1-1-0.DLL] -> not found in project
+  [PSHED.DLL] -> not found in project
+  [BOOTVID.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-CLIPSP-L1-1-0.DLL] -> not found in project
+  [KDCOM.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-KCMINITCFG-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-KSR-L1-1-5.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-TRACE-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-KSECURITY-L1-1-1.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-WERKERNEL-L1-1-1.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-UCODE-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-WIN32K-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-RUNLEVELS-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-STATESEPARATION-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-FS-CLFS-L1-1-0.DLL] -> not found in project
+  [CI.DLL] -> not found in project
+  [MSRPC.SYS] -> not found in project
+  [CNG.SYS] -> not found in project
+  [EXT-MS-WIN-NTOS-GLOBMERGER-L1-1-0.DLL] -> not found in project
+------------------------------------------------
+
+ (ProgramLoader)
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)
+INFO  ANALYZING all memory and code: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: <local-path>
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: <local-path>
+INFO  Skipping PDB processing: failed to locate PDB file in configured locations (PdbUniversalAnalyzer)
+INFO  Use a script to set the PDB file location. I.e.,
+    PdbAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb")); or
+    PdbUniversalAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb"));
+Or set the symbol server search configuration using:    PdbPlugin.saveSymbolServerServiceConfig(...);
+ This must be done using a pre-script (prior to analysis). (PdbUniversalAnalyzer)
+INFO  Packed database cache: <local-path>
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)
+INFO  -----------------------------------------------------
+    ASCII Strings                              2.243 secs
+    Apply Data Archives                        4.943 secs
+    Call Convention ID                         0.843 secs
+    Call-Fixup Installer                       0.273 secs
+    Create Address Tables                      2.198 secs
+    Create Address Tables - One Time           7.139 secs
+    Create Function                            1.752 secs
+    Data Reference                             3.856 secs
+    Decompiler Switch Analysis                89.896 secs
+    Demangler Microsoft                        0.436 secs
+    Disassemble                                0.169 secs
+    Disassemble Entry Points                  63.741 secs
+    Embedded Media                             0.127 secs
+    External Entry References                  0.054 secs
+    Function ID                               42.647 secs
+    Function Start Search                      0.378 secs
+    Non-Returning Functions - Discovered     421.755 secs
+    Non-Returning Functions - Known            0.100 secs
+    PDB Universal                              0.672 secs
+    Reference                                  4.784 secs
+    Scalar Operand References                 17.401 secs
+    Shared Return Calls                        4.565 secs
+    Stack                                    269.435 secs
+    Subroutine References                      2.887 secs
+    Subroutine References - One Time           0.008 secs
+    Windows x86 PE Exception Handling          0.170 secs
+    Windows x86 PE RTTI Analyzer               0.120 secs
+    Windows x86 Thread Environment Block (TEB) Analyzer     0.081 secs
+    WindowsResourceReference                   1.448 secs
+    x86 Constant Reference Analyzer          202.342 secs
+-----------------------------------------------------
+     Total Time   1146 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)
+INFO  REPORT: Analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
+INFO  REPORT: Execute script: ExportStringXrefs.java '<local-path>
+INFO  SCRIPT: <local-path>
+INFO  ExportStringXrefs.java> MATCH 140c64148 <no function> -> fallback (GhidraScript)
+WARN  Decompiling 140c6413e, pcode error at 140c64208: Unable to resolve constructor at 140c64208 (DecompileCallback)
+INFO  ExportStringXrefs.java> MATCH 140e07500 <no function> -> fallback (GhidraScript)
+WARN  Decompiling 140e07510, pcode error at 140e07514: Unable to resolve constructor at 140e07514 (DecompileCallback)
+INFO  ExportStringXrefs.java> MATCH 140c63728 <no function> -> fallback (GhidraScript)
+WARN  Decompiling 140c6371e, pcode error at 140c63750: Unable to resolve constructor at 140c63750 (DecompileCallback)
+INFO  ExportStringXrefs.java> MATCH 1405cf133 in FUN_1405cf0ec (GhidraScript)
+INFO  ExportStringXrefs.java> MATCH 140747fd8 in FUN_140747fb8 (GhidraScript)
+INFO  ExportStringXrefs.java> MATCH 140c63ed8 <no function> -> fallback (GhidraScript)
+WARN  Decompiling 140c63ece, pcode error at 140c63f10: Unable to resolve constructor at 140c63f10 (DecompileCallback)
+INFO  ExportStringXrefs.java> MATCH 140c640b8 <no function> -> fallback (GhidraScript)
+WARN  Decompiling 140c640ae, pcode error at 140c64208: Unable to resolve constructor at 140c64208 (DecompileCallback)
+INFO  ExportStringXrefs.java> MATCH 140c64ec8 <no function> -> fallback (GhidraScript)
+WARN  Decompiling 140c64ebe, pcode error at 140c64f50: Unable to resolve constructor at 140c64f50 (DecompileCallback)
+INFO  ANALYZING changes made by post scripts: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
+INFO  REPORT: Post-analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
+INFO  /ntoskrnl.exe: file created (Administrator) (LocalFileSystem)
+INFO  REPORT: Save succeeded for: /ntoskrnl.exe (Probe_power_control_docs_first_ntoskrnl:/ntoskrnl.exe) (HeadlessAnalyzer)
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)

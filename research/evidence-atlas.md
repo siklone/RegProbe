@@ -7,17 +7,17 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 
 | Field | Value |
 | --- | --- |
-| Total records | 298 |
+| Total records | 305 |
 | Validated | 242 |
 | Deprecated | 54 |
 | Review required | 0 |
-| Records with evidence | 298 |
+| Records with evidence | 305 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 241 |
 | Class B | 1 |
-| Class C | 2 |
+| Class C | 9 |
 | Class E | 54 |
 
 ## Category coverage
@@ -32,7 +32,7 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Notifications | 5 |
 | Performance | 3 |
 | Peripheral | 3 |
-| Power | 14 |
+| Power | 21 |
 | Privacy | 84 |
 | Security | 24 |
 | System | 76 |

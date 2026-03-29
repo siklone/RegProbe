@@ -23,6 +23,8 @@ from evidence_class_lib import (  # noqa: E402
     has_procmon_evidence,
     has_reboot_evidence,
     has_wpr_evidence,
+    evidence_items,
+    evidence_kind,
 )
 
 RESEARCH_ROOT = REPO_ROOT / "research"

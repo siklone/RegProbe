@@ -1,0 +1,184 @@
+﻿[
+    {
+        "candidate_id":  "power.control.class1-initial-unpark-count",
+        "value_name":  "Class1InitialUnparkCount",
+        "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "trigger":  "powercfg /a + powercfg /list + powercfg /query + powercfg /requests + sc query Power + Win32_PowerPlan CIM query + System event read",
+        "txt":  "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/power.control.class1-initial-unpark-count/power.control.class1-initial-unpark-count.txt",
+        "csv":  null,
+        "hits_csv":  null,
+        "pml_placeholder":  null,
+        "wrapper_error":  null,
+        "copied":  {
+                       "txt":  false,
+                       "csv":  false,
+                       "hits_csv":  false,
+                       "wrapper_error":  false
+                   },
+        "match_count":  0,
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_value_hit":  false,
+        "hit_processes":  [
+
+                          ],
+        "error_present":  false,
+        "status":  "copy-incomplete"
+    },
+    {
+        "candidate_id":  "power.control.hibernate-enabled",
+        "value_name":  "HibernateEnabled",
+        "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "trigger":  "powercfg /a + powercfg /list + powercfg /query + powercfg /requests + sc query Power + Win32_PowerPlan CIM query + System event read",
+        "txt":  "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/power.control.hibernate-enabled/power.control.hibernate-enabled.txt",
+        "csv":  null,
+        "hits_csv":  null,
+        "pml_placeholder":  null,
+        "wrapper_error":  null,
+        "copied":  {
+                       "txt":  false,
+                       "csv":  false,
+                       "hits_csv":  false,
+                       "wrapper_error":  false
+                   },
+        "match_count":  0,
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_value_hit":  false,
+        "hit_processes":  [
+
+                          ],
+        "error_present":  false,
+        "status":  "copy-incomplete"
+    },
+    {
+        "candidate_id":  "power.control.hibernate-enabled-default",
+        "value_name":  "HibernateEnabledDefault",
+        "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "trigger":  "powercfg /a + powercfg /list + powercfg /query + powercfg /requests + sc query Power + Win32_PowerPlan CIM query + System event read",
+        "txt":  "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/power.control.hibernate-enabled-default/power.control.hibernate-enabled-default.txt",
+        "csv":  null,
+        "hits_csv":  null,
+        "pml_placeholder":  null,
+        "wrapper_error":  null,
+        "copied":  {
+                       "txt":  false,
+                       "csv":  false,
+                       "hits_csv":  false,
+                       "wrapper_error":  false
+                   },
+        "match_count":  0,
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_value_hit":  false,
+        "hit_processes":  [
+
+                          ],
+        "error_present":  false,
+        "status":  "copy-incomplete"
+    },
+    {
+        "candidate_id":  "power.control.lid-reliability-state",
+        "value_name":  "LidReliabilityState",
+        "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "trigger":  "powercfg /a + powercfg /list + powercfg /query + powercfg /requests + sc query Power + Win32_PowerPlan CIM query + System event read",
+        "txt":  "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/power.control.lid-reliability-state/power.control.lid-reliability-state.txt",
+        "csv":  null,
+        "hits_csv":  null,
+        "pml_placeholder":  null,
+        "wrapper_error":  null,
+        "copied":  {
+                       "txt":  false,
+                       "csv":  false,
+                       "hits_csv":  false,
+                       "wrapper_error":  false
+                   },
+        "match_count":  0,
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_value_hit":  false,
+        "hit_processes":  [
+
+                          ],
+        "error_present":  false,
+        "status":  "copy-incomplete"
+    },
+    {
+        "candidate_id":  "power.control.mf-buffering-threshold",
+        "value_name":  "MfBufferingThreshold",
+        "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "trigger":  "powercfg /a + powercfg /list + powercfg /query + powercfg /requests + sc query Power + Win32_PowerPlan CIM query + System event read",
+        "txt":  "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/power.control.mf-buffering-threshold/power.control.mf-buffering-threshold.txt",
+        "csv":  null,
+        "hits_csv":  null,
+        "pml_placeholder":  null,
+        "wrapper_error":  null,
+        "copied":  {
+                       "txt":  false,
+                       "csv":  false,
+                       "hits_csv":  false,
+                       "wrapper_error":  false
+                   },
+        "match_count":  0,
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_value_hit":  false,
+        "hit_processes":  [
+
+                          ],
+        "error_present":  false,
+        "status":  "copy-incomplete"
+    },
+    {
+        "candidate_id":  "power.control.perf-calculate-actual-utilization",
+        "value_name":  "PerfCalculateActualUtilization",
+        "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "trigger":  "powercfg /a + powercfg /list + powercfg /query + powercfg /requests + sc query Power + Win32_PowerPlan CIM query + System event read",
+        "txt":  "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/power.control.perf-calculate-actual-utilization/power.control.perf-calculate-actual-utilization.txt",
+        "csv":  null,
+        "hits_csv":  null,
+        "pml_placeholder":  null,
+        "wrapper_error":  null,
+        "copied":  {
+                       "txt":  false,
+                       "csv":  false,
+                       "hits_csv":  false,
+                       "wrapper_error":  false
+                   },
+        "match_count":  0,
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_value_hit":  false,
+        "hit_processes":  [
+
+                          ],
+        "error_present":  false,
+        "status":  "copy-incomplete"
+    },
+    {
+        "candidate_id":  "power.control.timer-rebase-threshold-on-drips-exit",
+        "value_name":  "TimerRebaseThresholdOnDripsExit",
+        "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "trigger":  "powercfg /a + powercfg /list + powercfg /query + powercfg /requests + sc query Power + Win32_PowerPlan CIM query + System event read",
+        "txt":  "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/power.control.timer-rebase-threshold-on-drips-exit/power.control.timer-rebase-threshold-on-drips-exit.txt",
+        "csv":  null,
+        "hits_csv":  null,
+        "pml_placeholder":  null,
+        "wrapper_error":  null,
+        "copied":  {
+                       "txt":  false,
+                       "csv":  false,
+                       "hits_csv":  false,
+                       "wrapper_error":  false
+                   },
+        "match_count":  0,
+        "path_hit_count":  0,
+        "exact_value_hit_count":  0,
+        "exact_value_hit":  false,
+        "hit_processes":  [
+
+                          ],
+        "error_present":  false,
+        "status":  "copy-incomplete"
+    }
+]

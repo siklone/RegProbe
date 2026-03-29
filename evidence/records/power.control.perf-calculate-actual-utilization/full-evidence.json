@@ -1,0 +1,160 @@
+{
+  "$schema": "registry-evidence-v3.1/full-evidence",
+  "record_id": "power.control.perf-calculate-actual-utilization",
+  "tweak_id": "power.control.perf-calculate-actual-utilization",
+  "metadata": {
+    "$schema": "registry-evidence-v3.1/metadata",
+    "tweak_id": "power.control.perf-calculate-actual-utilization",
+    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name": "PerfCalculateActualUtilization",
+    "value_type": "REG_DWORD",
+    "value_data_before": 1,
+    "value_data_after": 1,
+    "enrichment": {
+      "hive": "HKLM",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "acl_owner": null,
+      "acl_sddl": null,
+      "acl_user_readable": null,
+      "source": "repo_research",
+      "official_doc_exists": false,
+      "reactos_reference": false,
+      "geoff_chappell_reference": false,
+      "pdb_symbol_match": null,
+      "source_repositories": []
+    }
+  },
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": false,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "trace_file": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md"
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: key is treated as kernel, Frida is not valid for this lane.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": true,
+      "trigger": "existing_record_evidence",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "string_xref_found": true,
+      "function_name": null,
+      "decompile_snippet": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for PerfCalculateActualUtilization; some values resolved naturally while several remained forced-boundary fallback blocks.",
+      "call_graph_depth": null,
+      "output_file": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+      "ghidra_no_function_fallback": true
+    }
+  },
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": false,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": null
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "classification": {
+    "class": "C",
+    "pipeline_version": "v3.1",
+    "reason": "PerfCalculateActualUtilization is now packaged as a real candidate with live baseline existence, exact repo-doc hits, shared ntoskrnl string and Ghidra corroboration, and a clean-baseline runtime follow-up. It still stays research-gated because the app does not ship this raw registry value as a standalone supported surface and the shared runtime lane did not materialize usable exact-read artifacts.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_procmon",
+      "static_ghidra"
+    ],
+    "layer_count": 2,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": false,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "pending",
+    "next_missing_layer": "app-mapping"
+  },
+  "timeline": [
+    {
+      "step": "bootstrap_record_load",
+      "timestamp": "2026-03-29T11:14:15.604518Z"
+    },
+    {
+      "step": "all",
+      "timestamp": "2026-03-29T11:14:15.604518Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-29T11:14:15.604518Z"
+    },
+    {
+      "step": "last_reviewed",
+      "timestamp": "2026-03-29T11:10:13.492625Z"
+    }
+  ],
+  "artifact_refs": [],
+  "research_record": "research/records/power.control.perf-calculate-actual-utilization.json",
+  "research_record_fallback": "research/records/power.control.perf-calculate-actual-utilization.review.json"
+}

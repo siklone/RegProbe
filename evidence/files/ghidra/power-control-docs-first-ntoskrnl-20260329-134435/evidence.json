@@ -1,0 +1,85 @@
+﻿{
+    "binary":  "ntoskrnl.exe",
+    "probe":  "power-control-docs-first-ntoskrnl",
+    "timestamp":  "2026-03-29T11:05:39.871860200Z",
+    "ghidra_no_function_fallback":  true,
+    "matches":  [
+                    {
+                        "address":  "140c64148",
+                        "function":  "FUN_140c6413e",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  60,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "140e07500",
+                        "function":  "FUN_140e07510",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  15,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "140c63728",
+                        "function":  "FUN_140c6371e",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  49,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "1405cf133",
+                        "function":  "FUN_1405cf0ec",
+                        "forced_boundary":  false,
+                        "decompile_success":  true,
+                        "output_lines":  44,
+                        "naturally_resolved":  true,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "140747fd8",
+                        "function":  "FUN_140747fb8",
+                        "forced_boundary":  false,
+                        "decompile_success":  true,
+                        "output_lines":  21,
+                        "naturally_resolved":  true,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "140c63ed8",
+                        "function":  "FUN_140c63ece",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  41,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "140c640b8",
+                        "function":  "FUN_140c640ae",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  60,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    },
+                    {
+                        "address":  "140c64ec8",
+                        "function":  "FUN_140c64ebe",
+                        "forced_boundary":  true,
+                        "decompile_success":  true,
+                        "output_lines":  60,
+                        "naturally_resolved":  false,
+                        "output_kind":  "decompile"
+                    }
+                ],
+    "exit_code":  0,
+    "status":  "completed",
+    "failure":  null,
+    "markdown_exists":  true,
+    "run_log_exists":  true
+}

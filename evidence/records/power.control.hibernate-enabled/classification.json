@@ -1,0 +1,23 @@
+{
+  "$schema": "registry-evidence-v3.1/classification",
+  "classification": {
+    "class": "C",
+    "pipeline_version": "v3.1",
+    "reason": "HibernateEnabled is now packaged as a real candidate with live baseline existence, exact repo-doc hits, shared ntoskrnl string and Ghidra corroboration, and a clean-baseline runtime follow-up. It still stays research-gated because the app does not ship this raw registry value as a standalone supported surface and the shared runtime lane did not materialize usable exact-read artifacts.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_procmon",
+      "static_ghidra"
+    ],
+    "layer_count": 2,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": false,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "pending",
+    "next_missing_layer": "app-mapping"
+  }
+}

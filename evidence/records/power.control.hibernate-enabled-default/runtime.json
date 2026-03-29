@@ -1,0 +1,36 @@
+{
+  "$schema": "registry-evidence-v3.1/runtime-evidence",
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": false,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "trace_file": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md"
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: key is treated as kernel, Frida is not valid for this lane.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "source_evidence_ids": [
+    "vm-power-control-phase0-20260329",
+    "vm-power-control-runtime-batch-20260329"
+  ]
+}

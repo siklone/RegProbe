@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 298 |
+| Total records | 305 |
 | Validated | 242 |
 | Deprecated | 54 |
 | Review required | 0 |
 | Records with V3.1 evidence roots | 10 |
-| Records with evidence | 298 |
+| Records with evidence | 305 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 241 |
 | Class B | 1 |
-| Class C | 2 |
+| Class C | 9 |
 | Class E | 54 |
 
 ## Record index
@@ -78,6 +78,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `996a45b975762ceb94c99cffc36f106f56ed3e287366be3425ee9fdb79faa65f` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `453abb60e2f46d55c680a76faab4eca1f11d38d48ab38ae964a4f134352a7645` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `b103dfb5b2b112ed75d28ef9daebeaf2bb8fd9e0d1e5bf8796dd3eb4e29ea013` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
+| `power.control.class1-initial-unpark-count` | draft | Class C | `research/records/power.control.class1-initial-unpark-count.json` | - | `dc69023c69decc8ac34d5123242d8c62732e2eff171fc656ddab882775d725c4` | `d48ed9204086368fb0835f77737643d9f6207287bc105dead18195d7dead869b` | 5 |
+| `power.control.hibernate-enabled` | draft | Class C | `research/records/power.control.hibernate-enabled.json` | - | `47a048e523afae07e1b7400483b2e45aaf9c528fa0e90de06c83a56ab567e7c4` | `765b742dfc5dee190f3ec39c4d6c23ca1d3d668986a03bc8aa600742dcd228c7` | 5 |
+| `power.control.hibernate-enabled-default` | draft | Class C | `research/records/power.control.hibernate-enabled-default.json` | - | `e5201bd2ddf86f75db12cfde21e98fcac5a0ebc7573f185aef2634749f406851` | `0e5f3a73c86b43dfab779fae4c903f957d252366abc0d777c9f0d6a2feba0b17` | 5 |
+| `power.control.lid-reliability-state` | draft | Class C | `research/records/power.control.lid-reliability-state.json` | - | `76e95746f64b3e59dbcd1e610fb7ae9d88fe714b127bb041a8429a35e3c41af6` | `cfad759c5e3adc17bd245658e46c0e988c13cafe8683a2936f90631dc9f95f22` | 5 |
+| `power.control.mf-buffering-threshold` | draft | Class C | `research/records/power.control.mf-buffering-threshold.json` | - | `bd2358e5dec965a59f39ea36a90f136c4984a259c57d40fd1b048cf5a3d74552` | `40a8cb4494fd9c252b91919ebb81c1d2490d0d524ab7765a87a28f172bbf9a72` | 5 |
+| `power.control.perf-calculate-actual-utilization` | draft | Class C | `research/records/power.control.perf-calculate-actual-utilization.json` | - | `ae746d45ce72c1be8b1cc77ff3aae0a515f2c2d1ee918e2d8589a73ae0cdf186` | `2a2245c69c138262febc346aa12f81ae62ed249e3ef1130214c7e01db7ec35f3` | 5 |
+| `power.control.timer-rebase-threshold-on-drips-exit` | draft | Class C | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | - | `f99aa1fc9f1b0fd2716a24df78a0abc4cba8af17ba7a4dc864a5922320e23f20` | `3477643ce5f619dfa0c368f9c26428d3f42911593b05f27fa8dce11780143ae3` | 5 |
 | `power.session-watchdog-timeouts` | draft | Class C | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `8a2a1d9a6409cb71f9f9036a19adf84e9f668e850968debf90613fbb665cc24d` | `f355df9bc19fd7fc2004d519f9dad438bf2d9efeafdcd4e47820b874951f52a8` | 12 |
 | `system.executive-additional-worker-threads` | draft | Class C | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `3f4475c5de442f01911fa80644d8ffe5e8f3d3c598d7b297c77ec2bae04a5c3f` | `2e041291b008ee5b933d99b59c8fac2dcdbab0473dc22a10c456fa689a83377c` | 9 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `6ce0e5db2707ec9cbf72aa19ccf4a8e60cbfe2e7be762f6f1331aadfc5d5e150` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
@@ -1826,6 +1833,216 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt](notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt) |
 | Exact quote / path | SERVICE_NAME: WerSvc \| START_TYPE : 4 DISABLED \| DISPLAY_NAME: Windows Error Reporting Service \| BINARY_PATH_NAME: [evidence/files/external/c/WINDOWS/System32/svchost.exe.md](../evidence/files/external/c/WINDOWS/System32/svchost.exe.md) -k WerSvcGroup |
 | Notes | The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker. |
+
+---
+
+### `power.control.class1-initial-unpark-count`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/power.control.class1-initial-unpark-count.json`
+- Source SHA256: `dc69023c69decc8ac34d5123242d8c62732e2eff171fc656ddab882775d725c4`
+- Proof SHA256: `d48ed9204086368fb0835f77737643d9f6207287bc105dead18195d7dead869b`
+
+**Summary:** Draft candidate package for Class1InitialUnparkCount under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed Class1InitialUnparkCount=64, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
+| `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline Procmon follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json) and [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json) and [research/notes/power-control-docs-first-runtime-capture-20260329.md](notes/power-control-docs-first-runtime-capture-20260329.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:104](../Docs/power/power.md:104) shows `Class1InitialUnparkCount` with observed literal `64` in the repo power notes. |
+| Notes | The docs-first triage and phase-0 baseline agree on `Class1InitialUnparkCount=64` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface. |
+
+---
+
+### `power.control.hibernate-enabled`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/power.control.hibernate-enabled.json`
+- Source SHA256: `47a048e523afae07e1b7400483b2e45aaf9c528fa0e90de06c83a56ab567e7c4`
+- Proof SHA256: `765b742dfc5dee190f3ec39c4d6c23ca1d3d668986a03bc8aa600742dcd228c7`
+
+**Summary:** Draft candidate package for HibernateEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed HibernateEnabled=0, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
+| `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline Procmon follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json) and [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json) and [research/notes/power-control-docs-first-runtime-capture-20260329.md](notes/power-control-docs-first-runtime-capture-20260329.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:154](../Docs/power/power.md:154) shows `HibernateEnabled` with observed literal `0` in the repo power notes. |
+| Notes | The docs-first triage and phase-0 baseline agree on `HibernateEnabled=0` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface. |
+
+---
+
+### `power.control.hibernate-enabled-default`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/power.control.hibernate-enabled-default.json`
+- Source SHA256: `e5201bd2ddf86f75db12cfde21e98fcac5a0ebc7573f185aef2634749f406851`
+- Proof SHA256: `0e5f3a73c86b43dfab779fae4c903f957d252366abc0d777c9f0d6a2feba0b17`
+
+**Summary:** Draft candidate package for HibernateEnabledDefault under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed HibernateEnabledDefault=1, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
+| `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline Procmon follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json) and [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json) and [research/notes/power-control-docs-first-runtime-capture-20260329.md](notes/power-control-docs-first-runtime-capture-20260329.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:154](../Docs/power/power.md:154) shows `HibernateEnabledDefault` with observed literal `1` in the repo power notes. |
+| Notes | The docs-first triage and phase-0 baseline agree on `HibernateEnabledDefault=1` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface. |
+
+---
+
+### `power.control.lid-reliability-state`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/power.control.lid-reliability-state.json`
+- Source SHA256: `76e95746f64b3e59dbcd1e610fb7ae9d88fe714b127bb041a8429a35e3c41af6`
+- Proof SHA256: `cfad759c5e3adc17bd245658e46c0e988c13cafe8683a2936f90631dc9f95f22`
+
+**Summary:** Draft candidate package for LidReliabilityState under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed LidReliabilityState=1, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
+| `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline Procmon follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json) and [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json) and [research/notes/power-control-docs-first-runtime-capture-20260329.md](notes/power-control-docs-first-runtime-capture-20260329.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:170](../Docs/power/power.md:170) shows `LidReliabilityState` with observed literal `1` in the repo power notes. |
+| Notes | The docs-first triage and phase-0 baseline agree on `LidReliabilityState=1` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface. |
+
+---
+
+### `power.control.mf-buffering-threshold`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/power.control.mf-buffering-threshold.json`
+- Source SHA256: `bd2358e5dec965a59f39ea36a90f136c4984a259c57d40fd1b048cf5a3d74552`
+- Proof SHA256: `40a8cb4494fd9c252b91919ebb81c1d2490d0d524ab7765a87a28f172bbf9a72`
+
+**Summary:** Draft candidate package for MfBufferingThreshold under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed MfBufferingThreshold=0, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
+| `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline Procmon follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json) and [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json) and [research/notes/power-control-docs-first-runtime-capture-20260329.md](notes/power-control-docs-first-runtime-capture-20260329.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:173](../Docs/power/power.md:173) shows `MfBufferingThreshold` with observed literal `0` in the repo power notes. |
+| Notes | The docs-first triage and phase-0 baseline agree on `MfBufferingThreshold=0` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface. |
+
+---
+
+### `power.control.perf-calculate-actual-utilization`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/power.control.perf-calculate-actual-utilization.json`
+- Source SHA256: `ae746d45ce72c1be8b1cc77ff3aae0a515f2c2d1ee918e2d8589a73ae0cdf186`
+- Proof SHA256: `2a2245c69c138262febc346aa12f81ae62ed249e3ef1130214c7e01db7ec35f3`
+
+**Summary:** Draft candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed PerfCalculateActualUtilization=1, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
+| `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline Procmon follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json) and [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json) and [research/notes/power-control-docs-first-runtime-capture-20260329.md](notes/power-control-docs-first-runtime-capture-20260329.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:181](../Docs/power/power.md:181) shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes. |
+| Notes | The docs-first triage and phase-0 baseline agree on `PerfCalculateActualUtilization=1` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface. |
+
+---
+
+### `power.control.timer-rebase-threshold-on-drips-exit`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/power.control.timer-rebase-threshold-on-drips-exit.json`
+- Source SHA256: `f99aa1fc9f1b0fd2716a24df78a0abc4cba8af17ba7a4dc864a5922320e23f20`
+- Proof SHA256: `3477643ce5f619dfa0c368f9c26428d3f42911593b05f27fa8dce11780143ae3`
+
+**Summary:** Draft candidate package for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed TimerRebaseThresholdOnDripsExit=60, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) |
+| `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-control-string-20260329` | `repo-doc` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline Procmon follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json) and [evidence/files/vm/power-control-docs-first-runtime-20260329-134010/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json) and [research/notes/power-control-docs-first-runtime-capture-20260329.md](notes/power-control-docs-first-runtime-capture-20260329.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:206](../Docs/power/power.md:206) shows `TimerRebaseThresholdOnDripsExit` with observed literal `60` in the repo power notes. |
+| Notes | The docs-first triage and phase-0 baseline agree on `TimerRebaseThresholdOnDripsExit=60` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface. |
 
 ---
 

@@ -1,0 +1,187 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.control.mf-buffering-threshold",
+  "tweak_id": "power.control.mf-buffering-threshold",
+  "record_status": "draft",
+  "summary": "Draft candidate package for MfBufferingThreshold under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed MfBufferingThreshold=0, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the shared clean-baseline Procmon follow-up stayed shell-safe but did not materialize usable per-candidate output files. The current app does not ship this raw value as a standalone supported tweak surface.",
+  "validation_proof": {
+    "source_url": "Docs/power/power.md",
+    "exact_quote_or_path": "Docs/power/power.md:173 shows `MfBufferingThreshold` with observed literal `0` in the repo power notes.",
+    "key_found_on_page": true,
+    "notes": "The docs-first triage and phase-0 baseline agree on `MfBufferingThreshold=0` for the current Win25H2Clean baseline. The value remains research-only because the app does not currently ship this raw registry control as a standalone supported surface."
+  },
+  "setting": {
+    "name": "MF Buffering Threshold",
+    "category": "Power",
+    "area": "Raw Power Manager Registry",
+    "scope": "device",
+    "casual_explanation": "MF Buffering Threshold is a low-level power-manager registry value under the main Power key.",
+    "why_people_change_it": "Researchers track this value when reviewing media framework and buffering-related power heuristics.",
+    "tradeoffs_overview": "This value appears to belong to low-level media or performance buffering behavior. It remains research-only and non-actionable.",
+    "professional_notes": "Win25H2Clean phase-0 existence confirmed MfBufferingThreshold on the live baseline with preview value 0. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:173. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. A shared Procmon-safe runtime batch was then rerun from RegProbe-Baseline-Clean-20260329, but all seven values came back copy-incomplete with no guest-side wrapper-error file copied back. That keeps the runtime lane honest but incomplete.",
+    "targets": [
+      {
+        "target_id": "mfbufferingthreshold",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "MfBufferingThreshold",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current clean VM baseline exposes MfBufferingThreshold=0.",
+            "evidence_ids": [
+              "vm-power-control-phase0-20260329",
+              "repo-power-doc"
+            ]
+          }
+        ],
+        "notes": "This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The current app does not expose MfBufferingThreshold as a direct tweak or supported UI surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-Clean-20260329 research baseline",
+      "states": [
+        {
+          "target_id": "mfbufferingthreshold",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the currently observed baseline value (0) while this raw control stays in research packaging only."
+        }
+      ],
+      "notes": "Observed directly from the 96-key phase-0 existence batch on Win25H2Clean.",
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-baseline",
+      "label": "Observed baseline",
+      "intended_for": [
+        "Registry research tracking",
+        "Power-manager documentation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click apply surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "mfbufferingthreshold",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Track the observed baseline value without turning it into a shipped preset."
+        }
+      ],
+      "good_when": "You want the repo to track the live baseline and current evidence for this raw power-manager value.",
+      "bad_when": "You want a supported end-user tweak or a documented Microsoft control surface.",
+      "tradeoffs": [
+        "Preserves the observed baseline value.",
+        "Keeps the candidate research-only and non-actionable."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329",
+        "ghidra-power-control-docs-first-20260329"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power notes for docs-first power-control values",
+      "location": "Docs/power/power.md",
+      "summary": "Repo power notes contain an exact entry for MfBufferingThreshold, led by Docs/power/power.md:173.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-phase0-20260329",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The 96-key existence batch confirmed MfBufferingThreshold exists on the clean baseline with observed value 0.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-power-control-string-20260329",
+      "kind": "repo-doc",
+      "title": "Shared docs-first string triage for current-build ntoskrnl",
+      "location": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+      "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for MfBufferingThreshold.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ghidra-power-control-docs-first-20260329",
+      "kind": "decompilation",
+      "title": "Shared Ghidra xref batch for docs-first power-control values",
+      "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+      "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for MfBufferingThreshold; some values resolved naturally while several remained forced-boundary fallback blocks.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-runtime-batch-20260329",
+      "kind": "procmon-trace",
+      "title": "Shared clean-baseline Procmon follow-up for docs-first power-control values",
+      "location": "evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-runtime-20260329-134010/results.json and research/notes/power-control-docs-first-runtime-capture-20260329.md",
+      "summary": "The shared Procmon-safe runtime follow-up stayed shell-safe on RegProbe-Baseline-Clean-20260329 but returned copy-incomplete for MfBufferingThreshold, leaving no usable per-candidate guest capture file.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "MfBufferingThreshold is now packaged as a real candidate with live baseline existence, exact repo-doc hits, shared ntoskrnl string and Ghidra corroboration, and a clean-baseline runtime follow-up. It still stays research-gated because the app does not ship this raw registry value as a standalone supported surface and the shared runtime lane did not materialize usable exact-read artifacts.",
+    "blocking_issues": [
+      "No shipped standalone app mapping for the raw registry value.",
+      "Shared clean-baseline runtime capture stayed copy-incomplete and did not yield per-candidate guest artifacts."
+    ]
+  },
+  "last_reviewed_utc": "2026-03-29T11:10:13.492625Z"
+}
