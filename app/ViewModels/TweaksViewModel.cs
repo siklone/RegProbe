@@ -86,14 +86,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly ICommandRunner _elevatedCommandRunner;
     private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
-    private string _filterSummary = "Showing 0 of 0 settings.";
     private bool _isExporting;
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
     private int _bulkProgressTotal;
     private int _selectedCount;
     private readonly TweaksShellStateViewModel _shellState = new();
-    private bool _hasVisibleTweaks;
+    private readonly TweaksPresentationStateViewModel _presentationState = new();
     private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
     private readonly IFavoritesStore _favoritesStore;
     private readonly ITweakInventoryStateStore _inventoryStateStore;
@@ -107,9 +106,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly IProfileSyncService _syncService = new ProfileSyncService();
     private readonly PluginLoader _pluginLoader = new();
     private readonly string _tweakLogFilePath;
-    private int _totalTweaksAvailable;
-    private int _tweaksApplied;
-    private int _tweaksRolledBack;
     private long _logFileSizeBytes;
     private int _docsMissingCount;
     private string _docsCoverageSummary = "Docs report unavailable.";
@@ -162,6 +158,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _busyService = busyService ?? throw new ArgumentNullException(nameof(busyService));
         _providerList = providers;
         _shellState.PropertyChanged += OnShellStatePropertyChanged;
+        _presentationState.PropertyChanged += OnPresentationStatePropertyChanged;
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
         _appLogger = new FileAppLogger(paths);
@@ -449,7 +446,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public ICollectionView TweaksView { get; }
 
-    public ObservableCollection<CategoryGroupViewModel> CategoryGroups { get; } = new();
+    public ObservableCollection<CategoryGroupViewModel> CategoryGroups => _presentationState.CategoryGroups;
 
     public ICommand ExportLogsCommand => _exportLogsCommand;
 
@@ -506,11 +503,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public int ScorableTweaksTotal => Tweaks.Count(IsScorableForHealth);
 
-    public int TotalTweaksAvailable
-    {
-        get => _totalTweaksAvailable;
-        private set => SetProperty(ref _totalTweaksAvailable, value);
-    }
+    public int TotalTweaksAvailable => _presentationState.TotalTweaksAvailable;
 
     public int SettingsWorkspaceCount => Tweaks.Count(t => t.ShowInApp && GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Settings);
 
@@ -575,17 +568,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         IsSettingsWorkspaceSelected &&
         string.Equals(SelectedCategoryName, "Network", StringComparison.OrdinalIgnoreCase);
 
-    public int TweaksApplied
-    {
-        get => _tweaksApplied;
-        private set => SetProperty(ref _tweaksApplied, value);
-    }
+    public int TweaksApplied => _presentationState.TweaksApplied;
 
-    public int TweaksRolledBack
-    {
-        get => _tweaksRolledBack;
-        private set => SetProperty(ref _tweaksRolledBack, value);
-    }
+    public int TweaksRolledBack => _presentationState.TweaksRolledBack;
 
     public long LogFileSizeBytes
     {
@@ -881,17 +866,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public int FavoritesCount => Tweaks.Count(t => t.IsFavorite);
 
-    public string FilterSummary
-    {
-        get => _filterSummary;
-        private set => SetProperty(ref _filterSummary, value);
-    }
+    public string FilterSummary => _presentationState.FilterSummary;
 
-    public bool HasVisibleTweaks
-    {
-        get => _hasVisibleTweaks;
-        private set => SetProperty(ref _hasVisibleTweaks, value);
-    }
+    public bool HasVisibleTweaks => _presentationState.HasVisibleTweaks;
 
 
     private async Task ExportLogsAsync()
@@ -1287,7 +1264,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         var filterState = string.IsNullOrWhiteSpace(SearchText) && !ShowFavoritesOnly
             ? "live"
             : "filtered";
-        FilterSummary = $"{visible} of {total} {noun} / {scope} / {filterState}.";
+        _presentationState.SetFilterSummary(
+            $"{visible} of {total} {noun} / {scope} / {filterState}.",
+            visible > 0);
         _previewAllCommand.RaiseCanExecuteChanged();
         _applyAllCommand.RaiseCanExecuteChanged();
         _verifyAllCommand.RaiseCanExecuteChanged();
@@ -1296,7 +1275,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             BuildCategoryGroups();
         }
-        HasVisibleTweaks = visible > 0;
     }
 
     private void BuildCategoryGroups()
@@ -1382,11 +1360,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         // Add any remaining categories
         orderedGroups.AddRange(rootGroups.Values.OrderBy(x => x.CategoryName));
 
-        CategoryGroups.Clear();
-        foreach (var g in orderedGroups)
-        {
-            CategoryGroups.Add(g);
-        }
+        _presentationState.ReplaceCategoryGroups(orderedGroups);
 
         if (!string.IsNullOrWhiteSpace(SelectedCategoryName)
             && !CategoryGroups.Any(g => string.Equals(g.CategoryName, SelectedCategoryName, StringComparison.OrdinalIgnoreCase)))
@@ -1450,6 +1424,16 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
     }
 
+    private void OnPresentationStatePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            return;
+        }
+
+        OnPropertyChanged(e.PropertyName);
+    }
+
     private void RaiseWorkspaceMetricsChanged()
     {
         OnPropertyChanged(nameof(SettingsWorkspaceCount));
@@ -1482,10 +1466,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void RefreshSummaryStats()
     {
-        TotalTweaksAvailable = Tweaks.Count(t => t.ShowInApp);
+        _presentationState.SetInventoryCounts(
+            Tweaks.Count(t => t.ShowInApp),
+            Tweaks.Count(t => t.ShowInApp && t.IsApplied),
+            Tweaks.Count(t => t.ShowInApp && t.WasRolledBack));
         RaiseWorkspaceMetricsChanged();
-        TweaksApplied = Tweaks.Count(t => t.ShowInApp && t.IsApplied);
-        TweaksRolledBack = Tweaks.Count(t => t.ShowInApp && t.WasRolledBack);
         RefreshLogFileSize();
         UpdateInventoryStatusMessage();
     }
@@ -2211,6 +2196,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
         // Unsubscribe collection changed events
         _shellState.PropertyChanged -= OnShellStatePropertyChanged;
+        _presentationState.PropertyChanged -= OnPresentationStatePropertyChanged;
         Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
 
         // Unsubscribe tweak property changed events
