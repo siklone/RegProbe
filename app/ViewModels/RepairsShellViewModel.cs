@@ -3,18 +3,28 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
+using RegProbe.Core.Commands;
 
 namespace RegProbe.App.ViewModels;
 
 public sealed class RepairsShellViewModel : ViewModelBase
 {
+    private readonly RepairsWorkspaceCoordinator _repairsCoordinator;
+
     public RepairsShellViewModel(TweaksViewModel workspace)
     {
         Workspace = workspace ?? throw new ArgumentNullException(nameof(workspace));
+        _repairsCoordinator = new RepairsWorkspaceCoordinator(Workspace);
         Workspace.PropertyChanged += OnWorkspacePropertyChanged;
+        ShowCleanupWorkspaceCommand = new RelayCommand(_ => _repairsCoordinator.ShowCleanupWorkspace());
+        RunFastCleanCommand = new RelayCommand(async _ => await _repairsCoordinator.RunFastCleanAsync(), _ => !Workspace.IsBulkRunning);
     }
 
     public TweaksViewModel Workspace { get; }
+
+    public ICommand ShowCleanupWorkspaceCommand { get; }
+
+    public ICommand RunFastCleanCommand { get; }
 
     public ObservableCollection<CategoryGroupViewModel> CategoryGroups => Workspace.CategoryGroups;
 
@@ -131,5 +141,10 @@ public sealed class RepairsShellViewModel : ViewModelBase
         }
 
         OnPropertyChanged(e.PropertyName);
+
+        if (e.PropertyName == nameof(TweaksViewModel.IsBulkRunning) && RunFastCleanCommand is RelayCommand relayCommand)
+        {
+            relayCommand.RaiseCanExecuteChanged();
+        }
     }
 }

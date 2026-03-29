@@ -39,14 +39,6 @@ namespace RegProbe.App.ViewModels;
 
 public sealed class TweaksViewModel : ViewModelBase, IDisposable
 {
-    private static readonly string[] FastCleanTweakIds =
-    {
-        "cleanup.temp-files",
-        "cleanup.directx-shader-cache",
-        "cleanup.thumbnail-cache",
-        "cleanup.wer-files"
-    };
-
     private bool _isDisposed;
     private readonly ITweakLogStore _logStore;
     private readonly RelayCommand _exportLogsCommand;
@@ -1521,19 +1513,42 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         SearchText = entry.SearchFragment;
     }
 
-    public void ShowMaintenanceCleanupWorkspace()
+    internal void FocusMaintenanceWorkspace(string categoryName)
     {
         SelectedMainTabIndex = 0;
         CurrentTab = "Configuration";
         SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance;
-        SelectedCategoryName = ResolveMaintenanceCleanupCategoryName();
+        SelectedCategoryName = categoryName;
         StatusFilter = string.Empty;
         SearchText = string.Empty;
         ShowFavoritesOnly = false;
         ShowSafe = true;
-       ShowAdvanced = true;
+        ShowAdvanced = true;
         ShowRisky = true;
         RefreshFilteredViews();
+    }
+
+    internal void SetBulkStatusFromRepairs(string message)
+    {
+        BulkStatusMessage = message;
+    }
+
+    internal void ClearSelectionFromRepairs()
+    {
+        DeselectAll();
+    }
+
+    internal ConfigurationWorkspaceKind GetWorkspaceKindForRepairs(TweakItemViewModel tweak)
+    {
+        return GetWorkspaceKind(tweak);
+    }
+
+    internal Task RunRepairsBatchAsync(
+        string label,
+        Func<List<TweakItemViewModel>> getTweaks,
+        Func<TweakItemViewModel, CancellationToken, Task> runner)
+    {
+        return RunBulkAsync(label, getTweaks, runner);
     }
 
     private void AddRepairsRow(TweakItemViewModel item)
@@ -1576,54 +1591,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             _repairsRows.Add(new RepairsItemViewModel(item));
         }
-    }
-
-    public async Task RunFastCleanAsync(CancellationToken ct = default)
-    {
-        ShowMaintenanceCleanupWorkspace();
-
-        if (IsBulkRunning)
-        {
-            return;
-        }
-
-        var fastCleanItems = Tweaks
-            .Where(t => FastCleanTweakIds.Contains(t.Id, StringComparer.OrdinalIgnoreCase))
-            .ToList();
-
-        if (fastCleanItems.Count == 0)
-        {
-            BulkStatusMessage = "Fast Clean is not available right now.";
-            return;
-        }
-
-        DeselectAll();
-        foreach (var item in fastCleanItems)
-        {
-            item.IsSelected = true;
-        }
-
-        await RunBulkAsync(
-            "Fast Clean",
-            () => fastCleanItems,
-            async (item, token) =>
-            {
-                ct.ThrowIfCancellationRequested();
-                await item.RunApplyAsync(token);
-            });
-    }
-
-    private string ResolveMaintenanceCleanupCategoryName()
-    {
-        return Tweaks
-            .Where(t => GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Maintenance)
-            .Select(t => t.Category)
-            .Where(category => !string.IsNullOrWhiteSpace(category))
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .FirstOrDefault(category =>
-                category.Contains("cleanup", StringComparison.OrdinalIgnoreCase)
-                || category.Contains("clean", StringComparison.OrdinalIgnoreCase))
-            ?? string.Empty;
     }
 
     private void LoadCachedInventoryState()
