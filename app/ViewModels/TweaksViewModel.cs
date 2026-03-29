@@ -623,6 +623,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ? "Search cleanup, reset, and recovery actions..."
         : "Search settings, features, and switches...";
 
+    public string ToolbarSectionLabel => IsMaintenanceWorkspaceSelected ? "Repair filters" : "Configuration filters";
+
+    public string ToolbarSectionHint => IsMaintenanceWorkspaceSelected
+        ? "Surface one-off cleanup and recovery actions fast."
+        : "Narrow the list to the settings you actively manage.";
+
     public string WorkspaceStatusHint => IsMaintenanceWorkspaceSelected
         ? "Use filters for a targeted repair path, a reset, or a one-off maintenance action."
         : "Search by behavior, narrow to one area, or keep favorites close for the settings you revisit most.";
@@ -634,6 +640,14 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string EmptyStateDescription => IsMaintenanceWorkspaceSelected
         ? "Try a broader search or choose another category."
         : "Try a simpler search or pick a different area.";
+
+    public string EmptyStateActionText => IsMaintenanceWorkspaceSelected
+        ? "Show all repairs"
+        : "Show all settings";
+
+    public string FilterSummaryLabel => IsMaintenanceWorkspaceSelected ? "Repair scope" : "Configuration scope";
+
+    public string InventorySummaryLabel => IsMaintenanceWorkspaceSelected ? "Repair status" : "Configuration status";
 
     public bool ShowDnsConfigurationPanel =>
         IsSettingsWorkspaceSelected &&
@@ -1580,9 +1594,14 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(WorkspaceCategoryHeader));
         OnPropertyChanged(nameof(AllItemsLabel));
         OnPropertyChanged(nameof(SearchPlaceholder));
+        OnPropertyChanged(nameof(ToolbarSectionLabel));
+        OnPropertyChanged(nameof(ToolbarSectionHint));
         OnPropertyChanged(nameof(WorkspaceStatusHint));
         OnPropertyChanged(nameof(EmptyStateTitle));
         OnPropertyChanged(nameof(EmptyStateDescription));
+        OnPropertyChanged(nameof(EmptyStateActionText));
+        OnPropertyChanged(nameof(FilterSummaryLabel));
+        OnPropertyChanged(nameof(InventorySummaryLabel));
         OnPropertyChanged(nameof(SelectedCategoryLabel));
         OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
         OnPropertyChanged(nameof(CurrentMainTabTitle));
@@ -1658,6 +1677,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;
+        ShowFavoritesOnly = false;
         ShowClassA = true;
         ShowClassB = true;
         ShowClassC = true;
