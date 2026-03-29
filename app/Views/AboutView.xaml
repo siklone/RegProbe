@@ -5,80 +5,108 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              FontFamily="{DynamicResource FontFamilyText}"
-             FontSize="12">
-    <UserControl.Resources>
-        <Style x:Key="AboutCardStyle" TargetType="Border" BasedOn="{StaticResource AppSurfaceCardStyle}">
-            <Setter Property="Padding" Value="16"/>
-            <Setter Property="Margin" Value="0,0,0,12"/>
-        </Style>
-    </UserControl.Resources>
-
+             FontSize="12"
+             Background="Transparent">
     <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  HorizontalContentAlignment="Stretch"
-                  Background="{DynamicResource BackgroundDarkestBrush}">
-        <Grid Margin="16,8,16,12"
-              HorizontalAlignment="Stretch">
-            <StackPanel Margin="0,6,0,8">
-                <StackPanel Margin="0,0,0,16">
-                    <TextBlock Text="Utility"
+                  HorizontalScrollBarVisibility="Disabled"
+                  Background="Transparent">
+        <Grid Margin="24,22,24,24">
+            <StackPanel>
+                <StackPanel Margin="0,0,0,18">
+                    <TextBlock Text="{Binding Title}"
                                Style="{StaticResource AppSectionEyebrowTextStyle}"/>
                     <TextBlock Text="RegProbe"
-                               Margin="0,3,0,0"
+                               Margin="0,4,0,0"
                                Style="{StaticResource AppHeroTitleTextStyle}"/>
-                    <TextBlock Margin="0,4,0,0"
-                               Text="Registry research and tweak workspace with evidence trails, rollback, and policy mapping."
-                               Style="{StaticResource AppHeroSubtitleTextStyle}"/>
+                    <TextBlock Margin="0,6,0,0"
+                               Style="{StaticResource AppHeroSubtitleTextStyle}"
+                               Text="Registry research and tweak workspace with rollback, evidence gating, and policy-backed reference links."/>
                 </StackPanel>
 
-                <Border Style="{StaticResource AboutCardStyle}">
-                    <UniformGrid Columns="4">
+                <WrapPanel Margin="0,0,0,10">
+                    <Border Style="{StaticResource ShellMetricChipStyle}">
                         <StackPanel>
-                            <TextBlock Text="Version" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
-                            <TextBlock Text="{Binding AppVersion}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold" FontSize="16"/>
+                            <TextBlock Text="Version"
+                                       Style="{StaticResource AppMetricLabelTextStyle}"/>
+                            <TextBlock Text="{Binding AppVersion}"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                         </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource ShellMetricChipStyle}">
                         <StackPanel>
-                            <TextBlock Text="Build" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
-                            <TextBlock Text="{Binding BuildConfiguration}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold" FontSize="16"/>
+                            <TextBlock Text="Build"
+                                       Style="{StaticResource AppMetricLabelTextStyle}"/>
+                            <TextBlock Text="{Binding BuildConfiguration}"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                         </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource ShellMetricChipStyle}">
                         <StackPanel>
-                            <TextBlock Text="Framework" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
-                            <TextBlock Text="{Binding Framework}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold" FontSize="16"/>
+                            <TextBlock Text="Framework"
+                                       Style="{StaticResource AppMetricLabelTextStyle}"/>
+                            <TextBlock Text="{Binding Framework}"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                         </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource ShellMetricChipStyle}">
                         <StackPanel>
-                            <TextBlock Text="Log Size" Foreground="{DynamicResource MutedForegroundBrush}" FontSize="10"/>
-                            <TextBlock Text="{Binding LogFileSizeFormatted}" Foreground="{DynamicResource ForegroundBrightestBrush}" FontWeight="SemiBold" FontSize="16"/>
+                            <TextBlock Text="Architecture"
+                                       Style="{StaticResource AppMetricLabelTextStyle}"/>
+                            <TextBlock Text="{Binding Architecture}"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                         </StackPanel>
-                    </UniformGrid>
-                </Border>
+                    </Border>
+                    <Border Style="{StaticResource ShellMetricChipStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Log size"
+                                       Style="{StaticResource AppMetricLabelTextStyle}"/>
+                            <TextBlock Text="{Binding LogFileSizeFormatted}"
+                                       FontSize="18"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                        </StackPanel>
+                    </Border>
+                </WrapPanel>
 
-                <Border Style="{StaticResource AboutCardStyle}">
+                <Border Style="{StaticResource ShellPanelStyle}"
+                        Margin="0,0,0,14">
                     <StackPanel>
                         <TextBlock Text="Repository"
                                    Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                        <TextBlock Text="Canonical source"
+                                   Margin="0,6,0,0"
+                                   Style="{StaticResource AppSectionTitleTextStyle}"/>
+                        <TextBlock Margin="0,6,0,10"
+                                   Style="{StaticResource AppSectionSubtitleTextStyle}"
+                                   Text="Open the project repository for source, issue context, and implementation history."/>
                         <Button Content="{Binding RepositoryUrl}"
                                 Command="{Binding OpenUrlCommand}"
                                 CommandParameter="{Binding RepositoryUrl}"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                Cursor="Hand"/>
+                                Style="{StaticResource ShellInlineLinkButtonStyle}"/>
                     </StackPanel>
                 </Border>
 
-                <Border Style="{StaticResource AboutCardStyle}">
+                <Border Style="{StaticResource ShellPanelStyle}">
                     <StackPanel>
                         <TextBlock Text="Logs"
                                    Style="{StaticResource AppSectionEyebrowTextStyle}"/>
+                        <TextBlock Text="Runtime trace"
+                                   Margin="0,6,0,0"
+                                   Style="{StaticResource AppSectionTitleTextStyle}"/>
+                        <TextBlock Margin="0,6,0,10"
+                                   Style="{StaticResource AppSectionSubtitleTextStyle}"
+                                   Text="Open the local tweak log if you need to inspect recent commands, detections, or failures."/>
                         <Button Content="Open tweak log"
                                 Command="{Binding OpenLogFileCommand}"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Foreground="{DynamicResource AccentBrightCyanBrush}"
-                                Padding="0"
-                                HorizontalAlignment="Left"
-                                Cursor="Hand"/>
+                                Style="{StaticResource ShellInlineLinkButtonStyle}"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

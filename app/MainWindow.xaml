@@ -8,10 +8,10 @@
         xmlns:controls="clr-namespace:RegProbe.App.Views.Controls"
         mc:Ignorable="d"
         Title="RegProbe"
-        Width="1000"
-        Height="780"
-        MinWidth="920"
-        MinHeight="620"
+        Width="1080"
+        Height="820"
+        MinWidth="980"
+        MinHeight="680"
         Background="{DynamicResource ShellWindowBackgroundBrush}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -21,83 +21,27 @@
         TextOptions.TextFormattingMode="Display"
         TextOptions.TextRenderingMode="ClearType">
 
-    <!-- WindowChrome for resize borders -->
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="40"
+        <WindowChrome CaptionHeight="44"
                       ResizeBorderThickness="6"
                       GlassFrameThickness="0"
                       CornerRadius="0"/>
     </WindowChrome.WindowChrome>
 
-
-    <!-- Keyboard Shortcuts -->
     <Window.InputBindings>
-        <!-- Navigation -->
         <KeyBinding Key="D1" Modifiers="Control" Command="{Binding ShowWorkspaceCommand}"/>
         <KeyBinding Key="OemComma" Modifiers="Control" Command="{Binding ShowSettingsCommand}"/>
         <KeyBinding Key="F1" Command="{Binding ShowAboutCommand}"/>
-        <!-- Search: Ctrl+F -->
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
-        <!-- Clear filters: Escape -->
         <KeyBinding Key="Escape" Command="{Binding ClearFiltersCommand}"/>
     </Window.InputBindings>
-    
+
     <Window.Resources>
-        <!-- Converters -->
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 
-        <ItemsPanelTemplate x:Key="ShellTopNavItemsPanel">
-            <StackPanel Orientation="Horizontal"/>
-        </ItemsPanelTemplate>
-
-        <Style x:Key="ShellTopNavListStyle" TargetType="ListBox">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
-            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
-            <Setter Property="ItemsPanel" Value="{StaticResource ShellTopNavItemsPanel}"/>
-        </Style>
-
-        <Style x:Key="ShellTopNavItemStyle" TargetType="ListBoxItem">
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0,0,8,0" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border x:Name="Border"
-                                Background="{DynamicResource ShellTopNavItemBrush}"
-                                CornerRadius="6"
-                                BorderThickness="1"
-                                BorderBrush="{DynamicResource ShellTopNavBorderBrush}"
-                                Padding="10,5">
-                            <ContentPresenter />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavHoverBrush}" />
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}" />
-                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}" />
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}" />
-                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
-                                <Setter Property="FontWeight" Value="SemiBold" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style x:Key="ShellWindowControlButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="40"/>
-            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="44"/>
+            <Setter Property="Height" Value="44"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -111,11 +55,12 @@
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavBorderBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="11,5"/>
+            <Setter Property="Padding" Value="14,9"/>
             <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="MinWidth" Value="120"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
-            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -123,7 +68,7 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="6"
+                                CornerRadius="10"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
@@ -140,204 +85,118 @@
                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
                                 <Setter Property="FontWeight" Value="SemiBold"/>
                             </DataTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <!-- Sidebar ListBox Style -->
-        <Style TargetType="ListBox">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
-        </Style>
-        
-        <!-- Navigation Item Style with MDL2 Icons -->
-        <Style TargetType="ListBoxItem">
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}" />
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="8,2" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="Template">
-                <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
-                            <Grid>
-                                <!-- Selection Indicator Bar -->
-                                <Border x:Name="SelectionIndicator"
-                                        Width="3"
-                                        HorizontalAlignment="Left"
-                                        CornerRadius="0,2,2,0"
-                                        Background="Transparent"
-                                        Margin="-8,6,0,6"/>
-                                <!-- Main Border -->
-                                <Border x:Name="Border"
-                                        Background="Transparent"
-                                        CornerRadius="8"
-                                        BorderThickness="1"
-                                        BorderBrush="Transparent"
-                                        Padding="12,9">
-                                    <ContentPresenter />
-                                </Border>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundDarkBrush}" />
-                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundMediumBrush}" />
-                                    <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource GlowCyanBorderBrush}" />
-                                    <Setter TargetName="SelectionIndicator" Property="Background" Value="{DynamicResource AccentBrightCyanBrush}" />
-                                    <Setter TargetName="SelectionIndicator" Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect Color="{StaticResource Nord8}" BlurRadius="12" ShadowDepth="0" Opacity="0.8"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}" />
-                                    <Setter Property="FontWeight" Value="Medium" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Window.Resources>
 
-    <Grid Background="{DynamicResource BackgroundGradientBrush}">
+    <Grid Background="{DynamicResource ShellWindowBackgroundBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="44"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Ellipse Grid.RowSpan="2"
-                 Width="520"
-                 Height="520"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Margin="90,-210,0,0"
-                 Fill="{DynamicResource ShellWarmGlowBrush}"
-                 IsHitTestVisible="False">
-            <Ellipse.Effect>
-                <BlurEffect Radius="120"/>
-            </Ellipse.Effect>
-        </Ellipse>
-
-        <Ellipse Grid.RowSpan="2"
-                 Width="660"
-                 Height="500"
-                 HorizontalAlignment="Right"
-                 VerticalAlignment="Top"
-                 Margin="0,-170,120,0"
-                 Fill="{DynamicResource ShellCoolGlowBrush}"
-                 IsHitTestVisible="False">
-            <Ellipse.Effect>
-                <BlurEffect Radius="150"/>
-            </Ellipse.Effect>
-        </Ellipse>
-
-        <!-- Custom Title Bar -->
-        <Border Grid.Row="0" 
+        <Border Grid.Row="0"
                 Panel.ZIndex="100"
                 Background="{DynamicResource ShellTitleBarBackgroundBrush}"
                 BorderBrush="{DynamicResource ShellTitleBarBorderBrush}"
                 BorderThickness="0,0,0,1">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Title and Icon (Draggable area) -->
-                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0"
-                            MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-                            MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
-                    <TextBlock Text="RegProbe" 
-                               Foreground="{DynamicResource ForegroundBrightBrush}"
+                <Border Grid.Column="0"
+                        Margin="14,9,0,9"
+                        Padding="10,0"
+                        Background="{DynamicResource ShellBrandChipBrush}"
+                        BorderBrush="{DynamicResource ShellBrandChipBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        VerticalAlignment="Stretch"
+                        WindowChrome.IsHitTestVisibleInChrome="True">
+                    <TextBlock Text="RP"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource ForegroundBrightestBrush}"
                                FontFamily="{DynamicResource FontFamilyDisplay}"
-                               FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                </StackPanel>
+                               FontWeight="Bold"
+                               FontSize="12"/>
+                </Border>
 
-                <!-- Window Controls -->
-                <StackPanel Grid.Column="1" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
-                    <!-- Minimize -->
-                    <Button x:Name="MinimizeButton" Click="MinimizeButton_Click"
-                            ToolTip="Minimize">
-                        <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource ShellWindowControlButtonStyle}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
-                                                <Path Data="M 0,0 H 10"
-                                                      Stroke="{DynamicResource ForegroundLightBrush}"
-                                                      StrokeThickness="1.2"
-                                                      StrokeStartLineCap="Square"
-                                                      StrokeEndLineCap="Square"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"
-                                                      Margin="0,8,0,0"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
+                <Grid Grid.Column="1"
+                      Margin="14,0,0,0"
+                      MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+                      MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="RegProbe"
+                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                   FontFamily="{DynamicResource FontFamilyDisplay}"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Text="Registry research and reversible configuration workspace"
+                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   FontSize="10"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button x:Name="MinimizeButton"
+                            Click="MinimizeButton_Click"
+                            ToolTip="Minimize"
+                            Style="{StaticResource ShellWindowControlButtonStyle}">
+                        <Path Data="M 0,0 H 10"
+                              Stroke="{DynamicResource ForegroundLightBrush}"
+                              StrokeThickness="1.2"
+                              StrokeStartLineCap="Square"
+                              StrokeEndLineCap="Square"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Margin="0,10,0,0"/>
                     </Button>
 
-                    <!-- Maximize/Restore -->
-                    <Button x:Name="MaximizeButton" Click="MaximizeButton_Click"
+                    <Button x:Name="MaximizeButton"
+                            Click="MaximizeButton_Click"
                             ToolTip="Maximize"
-                            WindowChrome.IsHitTestVisibleInChrome="True">
-                        <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource ShellWindowControlButtonStyle}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
-                                                <Path x:Name="MaxIcon" 
-                                                      Data="M 0,0 H 10 V 10 H 0 Z" 
-                                                      Stroke="{DynamicResource ForegroundLightBrush}" 
-                                                      StrokeThickness="1" Fill="Transparent"
-                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
+                            Style="{StaticResource ShellWindowControlButtonStyle}">
+                        <Grid>
+                            <Rectangle Width="10"
+                                       Height="10"
+                                       Stroke="{DynamicResource ForegroundLightBrush}"
+                                       StrokeThickness="1"
+                                       Fill="Transparent"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Grid>
                     </Button>
-                    
-                    <!-- Close -->
-                    <Button x:Name="CloseButton" Click="CloseButton_Click"
-                            ToolTip="Close"
-                            WindowChrome.IsHitTestVisibleInChrome="True">
+
+                    <Button x:Name="CloseButton"
+                            Click="CloseButton_Click"
+                            ToolTip="Close">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource ShellWindowControlButtonStyle}">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
-                                            <Border x:Name="Bd" Background="{TemplateBinding Background}">
-                                                <Path Data="M 0,0 L 10,10 M 10,0 L 0,10" 
-                                                      Stroke="{DynamicResource ForegroundLightBrush}" 
-                                                      StrokeThickness="1"
-                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <Border x:Name="Root" Background="Transparent">
+                                                <Path Data="M 0,0 L 10,10 M 10,0 L 0,10"
+                                                      Stroke="{DynamicResource ForegroundLightBrush}"
+                                                      StrokeThickness="1.1"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource DangerBrush}"/>
+                                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource DangerBrush}"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
@@ -349,67 +208,69 @@
                 </StackPanel>
             </Grid>
         </Border>
-        
-        <!-- Main Layout Grid -->
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
 
-            <Border Grid.Row="0"
-                    Background="#A6090B10"
-                    BorderBrush="#16FFFFFF"
-                    BorderThickness="0,0,0,1"
-                    Padding="8,4">
-                <DockPanel LastChildFill="False">
-                    <StackPanel DockPanel.Dock="Right"
-                                Orientation="Horizontal"
-                                VerticalAlignment="Center">
-                        <Button Content="Settings"
-                                Command="{Binding ShowSettingsCommand}"
-                                Tag="{Binding IsSettingsViewActive}"
-                                Style="{StaticResource ShellHeaderButtonStyle}"/>
-                        <Button Content="About"
-                                Command="{Binding ShowAboutCommand}"
-                                Tag="{Binding IsAboutViewActive}"
-                                Style="{StaticResource ShellHeaderButtonStyle}"/>
+        <Border Grid.Row="1"
+                Margin="16,12,16,0"
+                Style="{StaticResource ShellSubtlePanelStyle}"
+                Padding="12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Configuration"
+                            Command="{Binding ShowWorkspaceCommand}"
+                            Tag="{Binding IsWorkspaceViewActive}"
+                            Style="{StaticResource ShellHeaderButtonStyle}"/>
+                    <Button Content="Settings"
+                            Command="{Binding ShowSettingsCommand}"
+                            Tag="{Binding IsSettingsViewActive}"
+                            Style="{StaticResource ShellHeaderButtonStyle}"/>
+                    <Button Content="About"
+                            Command="{Binding ShowAboutCommand}"
+                            Tag="{Binding IsAboutViewActive}"
+                            Style="{StaticResource ShellHeaderButtonStyle}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Ctrl+1  Ctrl+,  F1"
+                               Margin="0,0,16,0"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource MutedForegroundBrush}"
+                               FontFamily="{DynamicResource FontFamilyMono}"
+                               FontSize="10"/>
+                    <Border Padding="10,6"
+                            Background="{DynamicResource ShellPanelRaisedBrush}"
+                            BorderBrush="{DynamicResource ShellHairlineBrush}"
+                            BorderThickness="1"
+                            CornerRadius="10">
                         <TextBlock Text="{Binding AppVersionLabel}"
-                                   Margin="10,0,2,0"
-                                   Foreground="{DynamicResource ForegroundLightBrush}"
+                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
                                    FontFamily="{DynamicResource FontFamilyMono}"
-                                   FontSize="9"
-                                   VerticalAlignment="Center"/>
-                    </StackPanel>
+                                   FontSize="10"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
 
-                    <StackPanel DockPanel.Dock="Left"
-                                Orientation="Horizontal"
-                                VerticalAlignment="Center">
-                        <Button Content="Configuration"
-                                Command="{Binding ShowWorkspaceCommand}"
-                                Tag="{Binding IsWorkspaceViewActive}"
-                                Style="{StaticResource ShellHeaderButtonStyle}"/>
-                        <TextBlock Margin="4,0,0,0"
-                                   VerticalAlignment="Center"
-                                   Foreground="{DynamicResource MutedForegroundBrush}"
-                                   FontSize="10"
-                                   Text="Workspace-first shell"/>
-                    </StackPanel>
-                </DockPanel>
-            </Border>
-
-            <!-- Main Content Area -->
-            <Border Grid.Row="1" Background="{DynamicResource BackgroundDarkestBrush}">
+        <Border Grid.Row="2"
+                Margin="16,12,16,16"
+                Style="{StaticResource ShellPanelStyle}"
+                Padding="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0">
-                    <!-- Crash Recovery Banner -->
+                <StackPanel Grid.Row="0" Margin="0">
                     <Border Background="{DynamicResource DangerBrush}"
                             Padding="16,12"
+                            CornerRadius="14,14,0,0"
                             Visibility="{Binding HasPendingRollbacks, Converter={StaticResource BoolToVisibility}}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -418,7 +279,6 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <!-- Warning Icon -->
                             <TextBlock Grid.Column="0"
                                        Text="&#xE7BA;"
                                        FontFamily="Segoe MDL2 Assets"
@@ -427,7 +287,6 @@
                                        Foreground="{DynamicResource ForegroundOnAccentBrush}"
                                        Margin="0,0,12,0"/>
 
-                            <!-- Message -->
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock Text="Crash Recovery Required"
                                            Foreground="{DynamicResource ForegroundOnAccentBrush}"
@@ -440,89 +299,28 @@
                                            Margin="0,2,0,0"/>
                             </StackPanel>
 
-                            <!-- Action Buttons -->
-                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-                                <!-- Recover Button -->
+                            <StackPanel Grid.Column="2"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Center">
                                 <Button Command="{Binding RecoverPendingRollbacksCommand}"
+                                        Style="{StaticResource AppQuietActionButtonStyle}"
                                         Background="{DynamicResource SuccessBrush}"
                                         Foreground="{DynamicResource ForegroundOnLightAccentBrush}"
-                                        Padding="12,6"
                                         Margin="0,0,8,0"
-                                        Cursor="Hand"
-                                        ToolTip="Roll back all pending tweaks to restore previous state">
-                                    <Button.Style>
-                                        <Style TargetType="Button">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="Button">
-                                                        <Border x:Name="Bd"
-                                                                Background="{TemplateBinding Background}"
-                                                                CornerRadius="4"
-                                                                Padding="{TemplateBinding Padding}">
-                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                        </Border>
-                                                        <ControlTemplate.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SuccessHoverBrush}"/>
-                                                            </Trigger>
-                                                            <Trigger Property="IsEnabled" Value="False">
-                                                                <Setter TargetName="Bd" Property="Opacity" Value="0.5"/>
-                                                            </Trigger>
-                                                        </ControlTemplate.Triggers>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </Button.Style>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Recover" FontWeight="SemiBold" FontSize="12"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <!-- Dismiss Button -->
+                                        Content="Recover"/>
                                 <Button Command="{Binding DismissPendingRollbacksCommand}"
+                                        Style="{StaticResource AppQuietActionButtonStyle}"
                                         Background="Transparent"
+                                        BorderBrush="{DynamicResource ForegroundOnAccentBrush}"
                                         Foreground="{DynamicResource ForegroundOnAccentBrush}"
-                                        Padding="12,6"
-                                        Cursor="Hand"
-                                        ToolTip="Dismiss this warning without rolling back (tweaks will remain applied)">
-                                    <Button.Style>
-                                        <Style TargetType="Button">
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="Button">
-                                                        <Border x:Name="Bd"
-                                                                Background="{TemplateBinding Background}"
-                                                                BorderBrush="{DynamicResource ForegroundOnAccentBrush}"
-                                                                BorderThickness="1"
-                                                                CornerRadius="4"
-                                                                Padding="{TemplateBinding Padding}">
-                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                        </Border>
-                                                        <ControlTemplate.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource HoverOverlayBrush}"/>
-                                                            </Trigger>
-                                                            <Trigger Property="IsEnabled" Value="False">
-                                                                <Setter TargetName="Bd" Property="Opacity" Value="0.5"/>
-                                                            </Trigger>
-                                                        </ControlTemplate.Triggers>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </Button.Style>
-                                    <TextBlock Text="Dismiss" FontSize="12"/>
-                                </Button>
+                                        Content="Dismiss"/>
                             </StackPanel>
                         </Grid>
                     </Border>
 
-                    <!-- Recovery Progress Indicator -->
                     <Border Background="{DynamicResource AccentDarkBlueBrush}"
                             Padding="16,12"
-                            Visibility="{Binding IsRecovering, Converter={StaticResource BoolToVisibility}}"
-                            Margin="0,2,0,0">
+                            Visibility="{Binding IsRecovering, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="&#xE72C;"
                                        FontFamily="Segoe MDL2 Assets"
@@ -539,36 +337,32 @@
                     </Border>
                 </StackPanel>
 
-                <!-- Content with Page Transitions -->
-                <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
-                    <i:Interaction.Behaviors>
-                        <behaviors:NavigationTransitionBehavior Transition="FadeAndSlide" />
-                    </i:Interaction.Behaviors>
-                </ContentControl>
+                <Border Grid.Row="1"
+                        Margin="14"
+                        Background="{DynamicResource ShellSubtleFillBrush}"
+                        CornerRadius="12">
+                    <ContentControl Content="{Binding CurrentViewModel}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:NavigationTransitionBehavior Transition="FadeAndSlide"/>
+                        </i:Interaction.Behaviors>
+                    </ContentControl>
+                </Border>
             </Grid>
         </Border>
-        </Grid>
 
-        <!-- Startup Scan Overlay -->
         <Grid Panel.ZIndex="100"
               IsHitTestVisible="False"
               Visibility="{Binding IsStartupScanActive, Converter={StaticResource BoolToVisibility}}">
             <Border HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    Width="240"
-                    Margin="0,0,24,24"
+                    Width="252"
+                    Margin="0,0,28,28"
                     Padding="16,14"
-                    Background="{DynamicResource BackgroundDarkestBrush}"
-                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                    Background="{DynamicResource ShellPanelAltBrush}"
+                    BorderBrush="{DynamicResource ShellHairlineBrush}"
                     BorderThickness="1"
                     CornerRadius="14"
-                    Opacity="0.96">
-                <Border.Effect>
-                    <DropShadowEffect Color="{DynamicResource ShadowColorMedium}"
-                                      BlurRadius="18"
-                                      ShadowDepth="0"
-                                      Opacity="0.28"/>
-                </Border.Effect>
+                    Opacity="0.98">
                 <StackPanel>
                     <TextBlock Text="Background scan"
                                Foreground="{DynamicResource ForegroundBrightestBrush}"
@@ -582,16 +376,14 @@
             </Border>
         </Grid>
 
-        <!-- Toast Notifications Overlay -->
         <controls:NotificationHost x:Name="NotificationHost"
                                    Panel.ZIndex="200"
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Bottom"
                                    IsHitTestVisible="True"/>
 
-        <!-- Busy Indicator Overlay -->
-        <controls:LoadingOverlay DataContext="{Binding BusyService}" 
-                                Panel.ZIndex="300"
-                                d:IsHidden="True"/>
+        <controls:LoadingOverlay DataContext="{Binding BusyService}"
+                                 Panel.ZIndex="300"
+                                 d:IsHidden="True"/>
     </Grid>
 </Window>

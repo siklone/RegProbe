@@ -150,6 +150,53 @@
         <Setter Property="Padding" Value="8,7"/>
     </Style>
 
+    <Style x:Key="ShellPanelStyle" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource ShellPanelBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="14"/>
+        <Setter Property="Padding" Value="16"/>
+    </Style>
+
+    <Style x:Key="ShellSubtlePanelStyle" TargetType="Border" BasedOn="{StaticResource ShellPanelStyle}">
+        <Setter Property="Background" Value="{DynamicResource ShellPanelAltBrush}"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="12"/>
+    </Style>
+
+    <Style x:Key="ShellMetricChipStyle" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource ShellPanelRaisedBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="10,8"/>
+        <Setter Property="Margin" Value="0,0,8,8"/>
+    </Style>
+
+    <Style x:Key="ShellInlineLinkButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentBrightCyanBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="AppChipStyle" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource AppChipSurfaceBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>

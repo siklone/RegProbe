@@ -52,8 +52,8 @@
         <SolidColorBrush x:Key="AccentBrightCyan20Brush" Color="{DynamicResource AccentBrightCyan20}"/>
 
         <LinearGradientBrush x:Key="TweakPanelGradientBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="{DynamicResource Nord1}" Offset="0"/>
-            <GradientStop Color="{DynamicResource Nord0}" Offset="1"/>
+            <GradientStop Color="#16202C" Offset="0"/>
+            <GradientStop Color="#0E141C" Offset="1"/>
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="TweakStatCardGradientBrush" StartPoint="0,0" EndPoint="1,1">
@@ -101,12 +101,12 @@
         </Style>
 
         <Style x:Key="CatalogCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource BackgroundDarkBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource ShellPanelAltBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="Margin" Value="0,0,10,10"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="0,0,12,12"/>
             <Setter Property="Width" Value="300"/>
             <Setter Property="MinHeight" Value="170"/>
         </Style>
@@ -117,21 +117,21 @@
         </Style>
 
         <Style x:Key="PolicyReferenceInfoCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource BackgroundDarkestBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource ShellDetailsSurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="Padding" Value="6"/>
-            <Setter Property="Margin" Value="0,0,5,5"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
         </Style>
 
         <Style x:Key="ConfigInlineStatChipStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource AppChipSurfaceBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource ShellPanelRaisedBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="8,5"/>
-            <Setter Property="Margin" Value="0,0,5,5"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
             <Setter Property="MinWidth" Value="90"/>
         </Style>
 
@@ -203,93 +203,39 @@
 
 
 
-        <!-- Compact Button Style with Smooth Animations -->
-	        <Style x:Key="CompactButton" TargetType="Button">
-	            <Setter Property="Background" Value="{DynamicResource AppQuietButtonBrush}"/>
-	            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-	            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-	            <Setter Property="BorderThickness" Value="1"/>
-	            <Setter Property="Padding" Value="10,5"/>
-	            <Setter Property="FontSize" Value="11"/>
-	            <Setter Property="MinHeight" Value="28"/>
-	            <Setter Property="Cursor" Value="Hand"/>
-	            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-	            <Setter Property="ToolTipService.InitialShowDelay" Value="250"/>
-	            <Setter Property="Template">
+        <Style x:Key="CompactButton" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource ShellPanelAltBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+            <Setter Property="ToolTipService.InitialShowDelay" Value="250"/>
+            <Setter Property="Template">
                 <Setter.Value>
-	                    <ControlTemplate TargetType="Button">
-		                        <Border x:Name="Border"
-		                                Background="{TemplateBinding Background}"
-		                                BorderBrush="{TemplateBinding BorderBrush}"
-		                                BorderThickness="{TemplateBinding BorderThickness}"
-		                                CornerRadius="8"
-		                                RenderTransformOrigin="0.5,0.5">
-			                            <Border.RenderTransform>
-			                                <ScaleTransform x:Name="BorderScale" ScaleX="1" ScaleY="1"/>
-			                            </Border.RenderTransform>
-		                            <Grid>
-		                                <Border x:Name="HoverOverlay"
-		                                        Background="{DynamicResource AppQuietButtonHoverBrush}"
-	                                        CornerRadius="8"
-	                                        Opacity="0"
-	                                        IsHitTestVisible="False"/>
-	                                <ContentPresenter HorizontalAlignment="Center"
-	                                                  VerticalAlignment="Center"
-	                                                  Margin="{TemplateBinding Padding}"/>
-	                            </Grid>
-	                        </Border>
-	                        <ControlTemplate.Triggers>
-	                            <Trigger Property="IsMouseOver" Value="True">
-	                                <Trigger.EnterActions>
-	                                    <BeginStoryboard>
-	                                        <Storyboard>
-		                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
-		                                                           Storyboard.TargetProperty="Opacity"
-		                                                           To="1" Duration="0:0:0.15"/>
-	                                        </Storyboard>
-	                                    </BeginStoryboard>
-	                                </Trigger.EnterActions>
-	                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
-	                                <Trigger.ExitActions>
-	                                    <BeginStoryboard>
-	                                        <Storyboard>
-		                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
-		                                                           Storyboard.TargetProperty="Opacity"
-		                                                           To="0" Duration="0:0:0.15"/>
-	                                        </Storyboard>
-	                                    </BeginStoryboard>
-	                                </Trigger.ExitActions>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="9"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavHoverBrush}"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
                             </Trigger>
-		                            <Trigger Property="IsPressed" Value="True">
-		                                <Trigger.EnterActions>
-		                                    <BeginStoryboard>
-		                                        <Storyboard>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleX"
-		                                                           To="0.95" Duration="0:0:0.05"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleY"
-		                                                           To="0.95" Duration="0:0:0.05"/>
-		                                        </Storyboard>
-		                                    </BeginStoryboard>
-		                                </Trigger.EnterActions>
-		                                <Trigger.ExitActions>
-		                                    <BeginStoryboard>
-		                                        <Storyboard>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleX"
-		                                                           To="1.0" Duration="0:0:0.05"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleY"
-		                                                           To="1.0" Duration="0:0:0.05"/>
-		                                        </Storyboard>
-		                                    </BeginStoryboard>
-		                                </Trigger.ExitActions>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundMediumBrush}"/>
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
-                                <Setter Property="Foreground" Value="{DynamicResource MutedForegroundBrush}"/>
+                                <Setter TargetName="Border" Property="Opacity" Value="0.45"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -302,8 +248,9 @@
         </Style>
 
         <Style x:Key="TweakPrimaryActionButtonStyle" TargetType="Button" BasedOn="{StaticResource TweakActionButtonStyle}">
-            <Setter Property="Background" Value="{DynamicResource AccentDarkBlueBrush}"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundOnAccentBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding AppliedStatus}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
                     <Setter Property="Background" Value="{DynamicResource SuccessSurfaceBrush}"/>
@@ -319,12 +266,13 @@
         </Style>
 
         <Style x:Key="WorkspaceModeButtonStyle" TargetType="ToggleButton">
-            <Setter Property="Background" Value="{DynamicResource AppWorkspaceSurfaceBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource ShellPanelAltBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightBrush}"/>
-            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="14,6"/>
+            <Setter Property="Padding" Value="14,8"/>
             <Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="MinHeight" Value="36"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -333,18 +281,18 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="6"
+                                CornerRadius="10"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppWorkspaceHoverBrush}"/>
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource ShellTopNavHoverBrush}"/>
                                 <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
                             </Trigger>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppWorkspaceSelectedBorderBrush}"/>
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -354,109 +302,26 @@
         </Style>
 
         <Style x:Key="SectionTabToggleStyle" TargetType="ToggleButton" BasedOn="{StaticResource WorkspaceModeButtonStyle}">
-            <Setter Property="Padding" Value="15,6"/>
-            <Setter Property="MinHeight" Value="32"/>
-            <Setter Property="MinWidth" Value="104"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="MinHeight" Value="36"/>
+            <Setter Property="MinWidth" Value="120"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundLightBrush}"/>
         </Style>
 
-        <!-- Filter Bar Button with Smooth Animations -->
-	        <Style x:Key="FilterButton" TargetType="Button">
-	            <Setter Property="Background" Value="{DynamicResource AccentDarkBlueBrush}"/>
-	            <Setter Property="Foreground" Value="{DynamicResource ForegroundOnAccentBrush}"/>
-	            <Setter Property="BorderThickness" Value="0"/>
-	            <Setter Property="Padding" Value="11,6"/>
-	            <Setter Property="FontSize" Value="11"/>
-	            <Setter Property="FontWeight" Value="Medium"/>
-	            <Setter Property="Cursor" Value="Hand"/>
-	            <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-	            <Setter Property="ToolTipService.InitialShowDelay" Value="250"/>
-	            <Setter Property="Template">
-                <Setter.Value>
-	                    <ControlTemplate TargetType="Button">
-		                        <Border x:Name="Border"
-		                                Background="{TemplateBinding Background}"
-		                                CornerRadius="8"
-		                                RenderTransformOrigin="0.5,0.5">
-			                            <Border.RenderTransform>
-			                                <ScaleTransform x:Name="BorderScale" ScaleX="1" ScaleY="1"/>
-			                            </Border.RenderTransform>
-		                            <Grid>
-		                                <Border x:Name="HoverOverlay"
-		                                        Background="{DynamicResource AccentBlueBrush}"
-	                                        CornerRadius="8"
-	                                        Opacity="0"
-	                                        IsHitTestVisible="False"/>
-	                                <ContentPresenter HorizontalAlignment="Center"
-	                                                  VerticalAlignment="Center"
-	                                                  Margin="{TemplateBinding Padding}"/>
-	                            </Grid>
-	                        </Border>
-	                        <ControlTemplate.Triggers>
-	                            <Trigger Property="IsMouseOver" Value="True">
-	                                <Trigger.EnterActions>
-	                                    <BeginStoryboard>
-	                                        <Storyboard>
-		                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
-		                                                           Storyboard.TargetProperty="Opacity"
-		                                                           To="1" Duration="0:0:0.15"/>
-	                                        </Storyboard>
-	                                    </BeginStoryboard>
-	                                </Trigger.EnterActions>
-	                                <Trigger.ExitActions>
-	                                    <BeginStoryboard>
-	                                        <Storyboard>
-		                                            <DoubleAnimation Storyboard.TargetName="HoverOverlay"
-		                                                           Storyboard.TargetProperty="Opacity"
-		                                                           To="0" Duration="0:0:0.15"/>
-	                                        </Storyboard>
-	                                    </BeginStoryboard>
-	                                </Trigger.ExitActions>
-                            </Trigger>
-		                            <Trigger Property="IsPressed" Value="True">
-		                                <Trigger.EnterActions>
-		                                    <BeginStoryboard>
-		                                        <Storyboard>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleX"
-		                                                           To="0.95" Duration="0:0:0.05"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleY"
-		                                                           To="0.95" Duration="0:0:0.05"/>
-		                                        </Storyboard>
-		                                    </BeginStoryboard>
-		                                </Trigger.EnterActions>
-		                                <Trigger.ExitActions>
-		                                    <BeginStoryboard>
-		                                        <Storyboard>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleX"
-		                                                           To="1.0" Duration="0:0:0.05"/>
-		                                            <DoubleAnimation Storyboard.TargetName="BorderScale"
-		                                                           Storyboard.TargetProperty="ScaleY"
-		                                                           To="1.0" Duration="0:0:0.05"/>
-		                                        </Storyboard>
-		                                    </BeginStoryboard>
-		                                </Trigger.ExitActions>
-		                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" Value="0.5"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style x:Key="FilterButton" TargetType="Button" BasedOn="{StaticResource TweakPrimaryActionButtonStyle}">
+            <Setter Property="Padding" Value="11,6"/>
+            <Setter Property="MinWidth" Value="72"/>
         </Style>
 
         <!-- Search Box Style -->
 	        <Style x:Key="SearchBoxStyle" TargetType="TextBox">
-	            <Setter Property="Background" Value="{DynamicResource AppSearchSurfaceBrush}"/>
+	            <Setter Property="Background" Value="{DynamicResource ShellSubtleFillBrush}"/>
 	            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
-	            <Setter Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+	            <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
 	            <Setter Property="BorderThickness" Value="1"/>
 	            <Setter Property="Padding" Value="10,0"/>
 	            <Setter Property="FontSize" Value="11"/>
-	            <Setter Property="Height" Value="32"/>
+	            <Setter Property="Height" Value="36"/>
 	            <Setter Property="VerticalContentAlignment" Value="Center"/>
 	            <Setter Property="CaretBrush" Value="{DynamicResource AccentBrightCyanBrush}"/>
 	            <Setter Property="Template">
@@ -466,7 +331,7 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8">
+                                CornerRadius="10">
                             <Grid>
                                 <ScrollViewer x:Name="PART_ContentHost"
                                               VerticalAlignment="Center"
@@ -487,7 +352,7 @@
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="True">
                                 <Setter TargetName="SearchRoot" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
-                                <Setter TargetName="SearchRoot" Property="Background" Value="{DynamicResource AppQuietButtonHoverBrush}"/>
+                                <Setter TargetName="SearchRoot" Property="Background" Value="{DynamicResource ShellPanelAltBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -504,21 +369,21 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="CheckBox">
                                 <Border x:Name="Pill"
-                                Background="{DynamicResource AppWorkspaceSurfaceBrush}"
-                                BorderBrush="{DynamicResource GlassBorderBrush}"
+                                Background="{DynamicResource ShellPanelAltBrush}"
+                                BorderBrush="{DynamicResource ShellHairlineBrush}"
                                 BorderThickness="1"
-                                CornerRadius="8"
-                                Padding="10,5">
+                                CornerRadius="10"
+                                Padding="11,6">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="Pill" Property="Background" Value="{DynamicResource AppWorkspaceHoverBrush}"/>
+                                    <Setter TargetName="Pill" Property="Background" Value="{DynamicResource ShellTopNavHoverBrush}"/>
                                     <Setter TargetName="Pill" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="True">
-                                    <Setter TargetName="Pill" Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
-                                    <Setter TargetName="Pill" Property="BorderBrush" Value="{DynamicResource AppWorkspaceSelectedBorderBrush}"/>
+                                    <Setter TargetName="Pill" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}"/>
+                                    <Setter TargetName="Pill" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
                                     <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
                                     <Setter Property="FontWeight" Value="SemiBold"/>
                                 </Trigger>
@@ -651,10 +516,10 @@
 
         <!-- Category Sidebar Styles -->
         <Style x:Key="CategoryAllButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="{DynamicResource ShellSidebarBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="14,9"/>
+            <Setter Property="Padding" Value="14,10"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -663,14 +528,14 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8"
+                                CornerRadius="10"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppWorkspaceSurfaceBrush}"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource ShellSidebarHoverBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -678,18 +543,18 @@
             </Setter>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsAllCategoriesSelected}" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
-                    <Setter Property="BorderBrush" Value="{DynamicResource AppWorkspaceSelectedBorderBrush}"/>
+                    <Setter Property="Background" Value="{DynamicResource ShellSidebarSelectedBrush}"/>
+                    <Setter Property="BorderBrush" Value="{DynamicResource ShellSidebarSelectedBorderBrush}"/>
                     <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="CategoryListItemStyle" TargetType="ListBoxItem">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="{DynamicResource ShellSidebarBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ShellHairlineBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="14,9"/>
+            <Setter Property="Padding" Value="14,10"/>
             <Setter Property="Margin" Value="0,0,0,4"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
@@ -699,12 +564,12 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8"
+                                CornerRadius="10"
                                 Padding="{TemplateBinding Padding}">
                             <Grid>
                                 <Border x:Name="AccentBar"
                                         Width="3"
-                                        Background="{DynamicResource DangerBrush}"
+                                        Background="{DynamicResource AccentBrightCyanBrush}"
                                         CornerRadius="2"
                                         HorizontalAlignment="Left"
                                         Margin="0,2,0,2"
@@ -714,13 +579,13 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppWorkspaceSurfaceBrush}"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource GlassBorderBrush}"/>
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource ShellSidebarHoverBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
                                 <Setter TargetName="AccentBar" Property="Opacity" Value="0.35"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
-                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppWorkspaceSelectedBorderBrush}"/>
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource ShellSidebarSelectedBrush}"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource ShellSidebarSelectedBorderBrush}"/>
                                 <Setter TargetName="AccentBar" Property="Opacity" Value="1"/>
                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
                             </Trigger>
@@ -984,13 +849,13 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="TabBorder" Property="Background" Value="{DynamicResource AppQuietButtonHoverBrush}"/>
+                                <Setter TargetName="TabBorder" Property="Background" Value="{DynamicResource ShellTopNavHoverBrush}"/>
                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
                                 <Setter TargetName="TabBorder" Property="BorderBrush" Value="{DynamicResource ShellTopNavHoverBorderBrush}"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="TabBorder" Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
-                                <Setter TargetName="TabBorder" Property="BorderBrush" Value="{DynamicResource AppWorkspaceSelectedBorderBrush}"/>
+                                <Setter TargetName="TabBorder" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}"/>
+                                <Setter TargetName="TabBorder" Property="BorderBrush" Value="{DynamicResource ShellTopNavSelectedBorderBrush}"/>
                                 <Setter Property="Foreground" Value="{DynamicResource ForegroundBrightestBrush}"/>
                             </Trigger>
                             <MultiTrigger>
@@ -998,7 +863,7 @@
                                     <Condition Property="IsSelected" Value="True"/>
                                     <Condition Property="IsMouseOver" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter TargetName="TabBorder" Property="Background" Value="{DynamicResource AppWorkspaceSelectedBrush}"/>
+                                <Setter TargetName="TabBorder" Property="Background" Value="{DynamicResource ShellTopNavSelectedBrush}"/>
                             </MultiTrigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Opacity" Value="0.55"/>
@@ -1066,48 +931,20 @@
         <!-- Tweak Item Template -->
         <DataTemplate x:Key="TweakItemTemplate" DataType="{x:Type viewModels:TweakItemViewModel}">
             <Border Background="Transparent"
-                    CornerRadius="0"
                     Margin="0"
-                    Padding="15,14,14,14"
-                    BorderBrush="{DynamicResource GlassBorderBrush}"
+                    Padding="16,14,12,14"
+                    BorderBrush="{DynamicResource ShellHairlineBrush}"
                     BorderThickness="0,0,0,1"
-                    SnapsToDevicePixels="True"
-                    RenderTransformOrigin="0.5,0.5">
-                <Border.RenderTransform>
-                    <TransformGroup>
-                        <TranslateTransform x:Name="CardTranslate" Y="0"/>
-                    </TransformGroup>
-                </Border.RenderTransform>
-                <Border.Triggers>
-                    <EventTrigger RoutedEvent="Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                 From="0" To="1" Duration="0:0:0.2">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CardTranslate"
-                                                 Storyboard.TargetProperty="Y"
-                                                 From="4" To="0" Duration="0:0:0.2">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Border.Triggers>
+                    SnapsToDevicePixels="True">
                 <Border.Style>
                     <Style TargetType="Border">
+                        <Setter Property="Background" Value="Transparent"/>
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsMouseOver}" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource ShellRowHoverBrush}"/>
+                            </DataTrigger>
                             <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
-                                <Setter Property="Background" Value="#121720"/>
-                                <Setter Property="BorderBrush" Value="#36FF4C58"/>
-                                <Setter Property="BorderThickness" Value="1"/>
-                                <Setter Property="CornerRadius" Value="10"/>
-                                <Setter Property="Margin" Value="0,0,0,4"/>
+                                <Setter Property="Background" Value="{DynamicResource ShellRowHighlightBrush}"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -1766,179 +1603,11 @@
 	                            </StackPanel>
 	                        </Border>
                         <!-- ExpanderIconRotate animation removed: rotation is handled inside ExpanderButtonStyle's own ControlTemplate via IsChecked trigger -->
-                    </DataTemplate>
+        </DataTemplate>
 
         <DataTemplate x:Key="TweakItemCompactTemplate" DataType="{x:Type viewModels:TweakItemViewModel}">
-            <Border Background="{DynamicResource BackgroundDarkBrush}"
-                    BorderBrush="{DynamicResource GlassBorderBrush}"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Padding="10"
-                    Margin="0,0,0,8"
-                    RenderTransformOrigin="0.5,0.5">
-                <Border.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform x:Name="CompactScale" ScaleX="1" ScaleY="1"/>
-                        <TranslateTransform x:Name="CompactTranslate" Y="0"/>
-                    </TransformGroup>
-                </Border.RenderTransform>
-                <Border.Effect>
-                    <DropShadowEffect Color="{DynamicResource ShadowColorSmall}"
-                                      BlurRadius="10"
-                                      ShadowDepth="2"
-                                      Opacity="0.2"/>
-                </Border.Effect>
-                <Border.Triggers>
-                    <EventTrigger RoutedEvent="Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                 From="0"
-                                                 To="1"
-                                                 Duration="0:0:0.2">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CompactTranslate"
-                                                 Storyboard.TargetProperty="Y"
-                                                 From="6"
-                                                 To="0"
-                                                 Duration="0:0:0.2">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="MouseEnter">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="CompactScale"
-                                                 Storyboard.TargetProperty="ScaleX"
-                                                 To="1.01"
-                                                 Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CompactScale"
-                                                 Storyboard.TargetProperty="ScaleY"
-                                                 To="1.01"
-                                                 Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CompactTranslate"
-                                                 Storyboard.TargetProperty="Y"
-                                                 To="-1"
-                                                 Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                    <EventTrigger RoutedEvent="MouseLeave">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="CompactScale"
-                                                 Storyboard.TargetProperty="ScaleX"
-                                                 To="1"
-                                                 Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CompactScale"
-                                                 Storyboard.TargetProperty="ScaleY"
-                                                 To="1"
-                                                 Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                                <DoubleAnimation Storyboard.TargetName="CompactTranslate"
-                                                 Storyboard.TargetProperty="Y"
-                                                 To="0"
-                                                 Duration="0:0:0.12">
-                                    <DoubleAnimation.EasingFunction>
-                                        <CubicEase EasingMode="EaseOut"/>
-                                    </DoubleAnimation.EasingFunction>
-                                </DoubleAnimation>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Border.Triggers>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Border Grid.Column="0"
-                            Width="26"
-                            Height="26"
-                            CornerRadius="13"
-                            Background="{Binding StatusBadgeBackground}"
-                            BorderBrush="{Binding StatusColor}"
-                            BorderThickness="1"
-                            Margin="0,0,8,0">
-                        <TextBlock Text="{Binding StatusIcon}"
-                                   Foreground="{Binding StatusColor}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontSize="13"
-                                   FontWeight="SemiBold"/>
-                    </Border>
-
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Name}"
-                                   FontWeight="SemiBold"
-                                   Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                   FontSize="12"/>
-                        <TextBlock Text="{Binding Description}"
-                                   Foreground="{DynamicResource ForegroundLightBrush}"
-                                   FontSize="10"
-                                   TextWrapping="Wrap"
-                                   MaxHeight="30"
-                                   ToolTip="{Binding Description}"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                            <Border Style="{StaticResource RiskBadgeStyle}" Margin="0,0,6,0">
-                                <TextBlock Text="{Binding Risk}"
-                                           Foreground="{DynamicResource ForegroundLightBrush}"
-                                           FontSize="10"
-                                           FontWeight="SemiBold"/>
-                            </Border>
-                            <Border Background="{DynamicResource BackgroundMediumBrush}"
-                                    BorderBrush="{DynamicResource GlassBorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="4"
-                                    Padding="6,2"
-                                    Visibility="{Binding RequiresElevation, Converter={StaticResource BoolToVisibility}}">
-                                <TextBlock Text="{Binding ElevationBadgeText}"
-                                           Foreground="{DynamicResource ForegroundLightBrush}"
-                                           FontSize="10"
-                                           FontWeight="SemiBold"/>
-                            </Border>
-                        </StackPanel>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-                        <Button Content="Detect"
-                                Command="{Binding DetectCommand}"
-                                Style="{StaticResource TweakActionButtonStyle}"
-                                Margin="0,0,4,0"/>
-                        <Button Content="{Binding ActionButtonText}"
-                                Command="{Binding ApplyCommand}"
-                                Style="{StaticResource TweakPrimaryActionButtonStyle}"/>
-                    </StackPanel>
-                </Grid>
-            </Border>
+            <ContentPresenter Content="{Binding}"
+                              ContentTemplate="{StaticResource TweakItemTemplate}"/>
         </DataTemplate>
 
         <!-- Recursive Category Template -->
@@ -2085,6 +1754,49 @@
                 <TextBlock Text="{Binding CurrentMainTabSubtitle}"
                            Margin="0,2,0,0"
                            Style="{StaticResource AppSectionSubtitleTextStyle}"/>
+                <WrapPanel Margin="0,12,0,0">
+                    <Border Style="{StaticResource ShellMetricChipStyle}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding CurrentWorkspaceLabel}"
+                                       Style="{StaticResource AppMetricLabelTextStyle}"/>
+                            <TextBlock Text="{Binding CurrentWorkspaceCountLabel}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource ShellMetricChipStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Filters"
+                                       Style="{StaticResource AppMetricLabelTextStyle}"/>
+                            <TextBlock Text="{Binding FilterSummary}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource ShellMetricChipStyle}"
+                            Visibility="{Binding HasSelection, Converter={StaticResource BoolToVisibility}}">
+                        <StackPanel>
+                            <TextBlock Text="Selection"
+                                       Style="{StaticResource AppMetricLabelTextStyle}"/>
+                            <TextBlock Text="{Binding SelectionSummary}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource ShellMetricChipStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Inventory"
+                                       Style="{StaticResource AppMetricLabelTextStyle}"/>
+                            <TextBlock Text="{Binding InventoryStatusMessage}"
+                                       FontSize="12"
+                                       Foreground="{DynamicResource ForegroundBrightestBrush}"
+                                       TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+                </WrapPanel>
             </StackPanel>
 
             <Grid Grid.Row="1" Margin="0,0,0,10">
@@ -2096,10 +1808,10 @@
 
                 <Border Grid.Column="0"
                         Background="{StaticResource TweakPanelGradientBrush}"
-                        BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                        BorderBrush="{DynamicResource ShellHairlineBrush}"
                         BorderThickness="1"
-                        CornerRadius="10"
-                        Padding="4"
+                        CornerRadius="12"
+                        Padding="6"
                         HorizontalAlignment="Left">
                     <WrapPanel>
                         <ToggleButton IsChecked="{Binding IsConfigurationTabSelected, Mode=OneWay}"
@@ -2197,12 +1909,12 @@
                             </WrapPanel>
                         </Grid>
 
-                        <Border Style="{StaticResource AppSurfaceCardStyle}"
+                        <Border Style="{StaticResource ShellPanelStyle}"
                                 Background="{StaticResource TweakPanelGradientBrush}"
-                                BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                                BorderBrush="{DynamicResource ShellHairlineBrush}"
                                 BorderThickness="1"
-                                CornerRadius="10"
-                                Padding="10,9">
+                                CornerRadius="14"
+                                Padding="12">
                             <WrapPanel VerticalAlignment="Center">
                                 <Grid Width="280" Margin="0,0,8,4">
                                     <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
@@ -2290,10 +2002,10 @@
 
                         <Border Margin="0,10,0,0"
                                 Padding="12,10"
-                                Background="{DynamicResource AppInsetSurfaceBrush}"
-                                BorderBrush="{DynamicResource GlassBorderBrush}"
+                                Background="{DynamicResource ShellPanelAltBrush}"
+                                BorderBrush="{DynamicResource ShellHairlineBrush}"
                                 BorderThickness="1"
-                                CornerRadius="10"
+                                CornerRadius="12"
                                 Visibility="{Binding HasSelection, Converter={StaticResource BoolToVisibility}}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -2346,18 +2058,20 @@
                     </StackPanel>
 
                     <!-- Content -->
-                        <Grid Grid.Row="1">
+                            <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="204"/>
-                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="224"/>
+                                <ColumnDefinition Width="24"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                         <!-- Category Sidebar -->
                         <Border Grid.Column="0"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Padding="0,4,0,0">
+                                Background="{DynamicResource ShellSidebarBrush}"
+                                BorderBrush="{DynamicResource ShellHairlineBrush}"
+                                BorderThickness="1"
+                                CornerRadius="14"
+                                Padding="10">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2375,7 +2089,7 @@
                                                    FontWeight="SemiBold"
                                                    Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                         <Border Grid.Column="1"
-                                                Background="{DynamicResource AppChipSurfaceBrush}"
+                                                Background="{DynamicResource ShellPanelRaisedBrush}"
                                                 CornerRadius="8"
                                                 Padding="8,2">
                                             <TextBlock Text="{Binding CurrentWorkspaceItemCount}"
@@ -2437,13 +2151,11 @@
                                 <TextBlock Text="{Binding SelectedCategoryLabel}"
                                            FontSize="16"
                                            FontWeight="Bold"
-                                           Foreground="{DynamicResource ForegroundBrightestBrush}"
-                                           Visibility="Collapsed"/>
+                                           Foreground="{DynamicResource ForegroundBrightestBrush}"/>
                                 <TextBlock Text="{Binding WorkspaceStatusHint}"
                                            FontSize="11"
                                            Foreground="{DynamicResource ForegroundLightBrush}"
-                                           Margin="0,4,0,0"
-                                           Visibility="Collapsed"/>
+                                           Margin="0,4,0,0"/>
                                 <TextBlock Text="{Binding BulkStatusMessage}"
                                            FontSize="11"
                                            Foreground="{DynamicResource MutedForegroundBrush}"
@@ -2451,12 +2163,12 @@
                                            Visibility="Collapsed"/>
 
                                 <!-- DNS Configuration Panel - Compact single-line design -->
-                                <Border Background="{DynamicResource BackgroundDarkBrush}"
-                                        BorderBrush="{DynamicResource GlassBorderBrush}"
+                                <Border Background="{DynamicResource ShellPanelAltBrush}"
+                                        BorderBrush="{DynamicResource ShellHairlineBrush}"
                                         BorderThickness="1"
-                                        CornerRadius="8"
-                                        Padding="10,6"
-                                        Margin="0,0,0,4"
+                                        CornerRadius="12"
+                                        Padding="12,8"
+                                        Margin="0,0,0,8"
                                         Visibility="{Binding ShowDnsConfigurationPanel, Converter={StaticResource BoolToVisibility}}">
                                     <Grid DataContext="{Binding DnsConfiguration}">
                                         <Grid.ColumnDefinitions>
@@ -2518,25 +2230,33 @@
                             </StackPanel>
 
                             <Grid Grid.Row="1">
-                                <Border Style="{StaticResource AppSurfaceCardStyle}"
+                                <Border Style="{StaticResource ShellPanelStyle}"
                                         Background="{StaticResource TweakPanelGradientBrush}"
-                                        BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                                        BorderBrush="{DynamicResource ShellHairlineBrush}"
                                         BorderThickness="1"
-                                        CornerRadius="12"
+                                        CornerRadius="16"
                                         Padding="0">
                                     <ListBox ItemsSource="{Binding TweaksView}"
-                                             Background="Transparent"
-                                             BorderThickness="0"
-                                             Padding="0,0,0,8"
-                                             HorizontalContentAlignment="Stretch"
-                                             VirtualizingPanel.IsVirtualizing="True"
-                                             VirtualizingPanel.VirtualizationMode="Recycling"
-                                             VirtualizingPanel.ScrollUnit="Pixel"
-                                             VirtualizingPanel.CacheLength="2"
-                                             VirtualizingPanel.CacheLengthUnit="Page"
-                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                             ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                             ScrollViewer.CanContentScroll="True">
+                                              Background="Transparent"
+                                              BorderThickness="0"
+                                              Padding="0,0,0,8"
+                                              HorizontalContentAlignment="Stretch"
+                                              VirtualizingPanel.IsVirtualizing="True"
+                                              VirtualizingPanel.IsContainerVirtualizable="True"
+                                              VirtualizingPanel.VirtualizationMode="Recycling"
+                                              VirtualizingPanel.ScrollUnit="Pixel"
+                                              VirtualizingPanel.CacheLength="1,1"
+                                              VirtualizingPanel.CacheLengthUnit="Page"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                              ScrollViewer.CanContentScroll="True"
+                                              ScrollViewer.IsDeferredScrollingEnabled="True"
+                                              SnapsToDevicePixels="True">
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel/>
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
                                         <ListBox.Style>
                                             <Style TargetType="ListBox">
                                                 <Setter Property="ItemTemplate" Value="{StaticResource TweakItemTemplate}"/>
@@ -2551,6 +2271,7 @@
                                             <Style TargetType="ListBoxItem">
                                                 <Setter Property="Background" Value="Transparent"/>
                                                 <Setter Property="Padding" Value="0"/>
+                                                <Setter Property="SnapsToDevicePixels" Value="True"/>
                                                 <Setter Property="Template">
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="ListBoxItem">
@@ -2565,8 +2286,10 @@
 
                                 <!-- Empty State -->
                                 <Border Padding="20"
-                                        Background="{DynamicResource BackgroundDarkBrush}"
-                                        CornerRadius="10"
+                                        Background="{DynamicResource ShellPanelAltBrush}"
+                                        BorderBrush="{DynamicResource ShellHairlineBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="12"
                                         Margin="0,20"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
@@ -2599,10 +2322,10 @@
 
                         <StackPanel Margin="0,0,0,8">
                             <Border Background="{StaticResource TweakPanelGradientBrush}"
-                                    BorderBrush="{StaticResource AccentSoftBorderBrush}"
+                                    BorderBrush="{DynamicResource ShellHairlineBrush}"
                                     BorderThickness="1"
-                                    CornerRadius="10"
-                                    Padding="10">
+                                    CornerRadius="14"
+                                    Padding="12">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -2851,8 +2574,10 @@
                                 </ItemsControl>
 
                                 <Border Padding="20"
-                                        Background="{DynamicResource BackgroundDarkBrush}"
-                                        CornerRadius="10"
+                                        Background="{DynamicResource ShellPanelAltBrush}"
+                                        BorderBrush="{DynamicResource ShellHairlineBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="12"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
                                         Visibility="{Binding HasItems, Converter={StaticResource InverseBoolToVisibility}}">

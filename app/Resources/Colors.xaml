@@ -130,20 +130,32 @@
     <SolidColorBrush x:Key="ScrimOverlayBrush" Color="#99000000"/>
 
     <!-- Shared shell and surface brushes -->
-    <SolidColorBrush x:Key="ShellWindowBackgroundBrush" Color="#090B10"/>
-    <SolidColorBrush x:Key="ShellTitleBarBackgroundBrush" Color="#CC090B10"/>
-    <SolidColorBrush x:Key="ShellTitleBarBorderBrush" Color="#16FFFFFF"/>
-    <SolidColorBrush x:Key="ShellTopNavItemBrush" Color="#0D1218"/>
-    <SolidColorBrush x:Key="ShellTopNavBorderBrush" Color="#24FFFFFF"/>
-    <SolidColorBrush x:Key="ShellTopNavHoverBrush" Color="#131821"/>
-    <SolidColorBrush x:Key="ShellTopNavHoverBorderBrush" Color="#33FF4C58"/>
-    <SolidColorBrush x:Key="ShellTopNavSelectedBrush" Color="#18FF4C58"/>
-    <SolidColorBrush x:Key="ShellTopNavSelectedBorderBrush" Color="#66FF4C58"/>
+    <SolidColorBrush x:Key="ShellWindowBackgroundBrush" Color="#080B10"/>
+    <SolidColorBrush x:Key="ShellTitleBarBackgroundBrush" Color="#F20B1016"/>
+    <SolidColorBrush x:Key="ShellTitleBarBorderBrush" Color="#1FFFFFFF"/>
+    <SolidColorBrush x:Key="ShellTopNavItemBrush" Color="#10161E"/>
+    <SolidColorBrush x:Key="ShellTopNavBorderBrush" Color="#22FFFFFF"/>
+    <SolidColorBrush x:Key="ShellTopNavHoverBrush" Color="#151D28"/>
+    <SolidColorBrush x:Key="ShellTopNavHoverBorderBrush" Color="#3A526A85"/>
+    <SolidColorBrush x:Key="ShellTopNavSelectedBrush" Color="#1A2333"/>
+    <SolidColorBrush x:Key="ShellTopNavSelectedBorderBrush" Color="#667EA4CC"/>
     <SolidColorBrush x:Key="ShellBrandChipBrush" Color="#121720"/>
-    <SolidColorBrush x:Key="ShellBrandChipBorderBrush" Color="#44FF4C58"/>
+    <SolidColorBrush x:Key="ShellBrandChipBorderBrush" Color="#4459728F"/>
     <SolidColorBrush x:Key="ShellBrandAccentBrush" Color="#FF4C58"/>
     <SolidColorBrush x:Key="ShellWarmGlowBrush" Color="#14FF4C58"/>
     <SolidColorBrush x:Key="ShellCoolGlowBrush" Color="#1200D5FF"/>
+    <SolidColorBrush x:Key="ShellPanelBrush" Color="#0E141C"/>
+    <SolidColorBrush x:Key="ShellPanelAltBrush" Color="#111924"/>
+    <SolidColorBrush x:Key="ShellPanelRaisedBrush" Color="#172131"/>
+    <SolidColorBrush x:Key="ShellSidebarBrush" Color="#0B1118"/>
+    <SolidColorBrush x:Key="ShellSidebarHoverBrush" Color="#121A26"/>
+    <SolidColorBrush x:Key="ShellSidebarSelectedBrush" Color="#162232"/>
+    <SolidColorBrush x:Key="ShellSidebarSelectedBorderBrush" Color="#56728F"/>
+    <SolidColorBrush x:Key="ShellHairlineBrush" Color="#1FFFFFFF"/>
+    <SolidColorBrush x:Key="ShellSubtleFillBrush" Color="#0B1016"/>
+    <SolidColorBrush x:Key="ShellRowHoverBrush" Color="#101924"/>
+    <SolidColorBrush x:Key="ShellRowHighlightBrush" Color="#162130"/>
+    <SolidColorBrush x:Key="ShellDetailsSurfaceBrush" Color="#0C121A"/>
 
     <LinearGradientBrush x:Key="AppSurfaceGradientBrush" StartPoint="0,0" EndPoint="1,1">
         <GradientStop Color="#171B24" Offset="0"/>
