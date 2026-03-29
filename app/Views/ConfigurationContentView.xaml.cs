@@ -2,9 +2,9 @@ using System.Windows.Controls;
 
 namespace RegProbe.App.Views;
 
-public partial class TweaksView : UserControl
+public partial class ConfigurationContentView : UserControl
 {
-    public TweaksView()
+    public ConfigurationContentView()
     {
         InitializeComponent();
     }
