@@ -37,7 +37,7 @@ function Resolve-CanonicalVmPath {
 
 function Resolve-DefaultVmSnapshotName {
     param(
-        [string]$Fallback = 'baseline-20260327-regprobe-visible-shell-stable',
+        [string]$Fallback = 'RegProbe-Baseline-Clean-20260329',
         [string]$ConfigPath = ''
     )
 
@@ -60,7 +60,8 @@ function Get-LegacyVmSnapshotNames {
             'baseline-20260325-defender-on',
             'baseline-20260325-shell-stable',
             'baseline-20260327-shell-stable',
-            'baseline-20260327-regprobe-visible-shell-stable'
+            'baseline-20260327-regprobe-visible-shell-stable',
+            'RegProbe-Baseline-20260328'
         ),
         [string]$ConfigPath = ''
     )

@@ -2,13 +2,21 @@
   "schema_version": "1.0",
   "canonical_vm": "Win25H2Clean",
   "vm_path": "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
-  "default_snapshot": "RegProbe-Baseline-20260328",
-  "seed_snapshot": "baseline-20260327-regprobe-visible-shell-stable",
+  "default_snapshot": "RegProbe-Baseline-Clean-20260329",
+  "seed_snapshot": "RegProbe-Baseline-20260328",
+  "baseline_policy": {
+    "mode": "hybrid",
+    "tooling_first": true,
+    "baseline_app_free": true,
+    "app_deployment": "ephemeral-only",
+    "notes": "The canonical baseline snapshot must stay free of deployed RegProbe app payloads. App launch smoke is allowed only as a deploy-validate-cleanup lane and must not persist into the saved baseline state."
+  },
   "legacy_snapshots": [
     "baseline-20260324-high-risk-lane",
     "baseline-20260325-defender-on",
     "baseline-20260325-shell-stable",
     "baseline-20260327-shell-stable",
-    "baseline-20260327-regprobe-visible-shell-stable"
+    "baseline-20260327-regprobe-visible-shell-stable",
+    "RegProbe-Baseline-20260328"
   ]
 }

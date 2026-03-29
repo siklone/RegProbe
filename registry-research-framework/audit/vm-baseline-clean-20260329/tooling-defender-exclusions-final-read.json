@@ -1,0 +1,84 @@
+﻿{
+    "generated_utc":  "2026-03-29T09:27:33.1751427Z",
+    "mode":  "read",
+    "exclusion_paths_requested":  [
+                                      "C:\\Tools",
+                                      "C:\\RegProbe-Diag"
+                                  ],
+    "exclusion_processes_requested":  [
+                                          "powershell.exe",
+                                          "Procmon64.exe",
+                                          "wpr.exe",
+                                          "wpa.exe",
+                                          "xperf.exe",
+                                          "java.exe",
+                                          "javaw.exe",
+                                          "diskspd.exe",
+                                          "winsat.exe",
+                                          "RegProbe.App.exe",
+                                          "RegProbe.ElevatedHost.exe"
+                                      ],
+    "execution_policy_requested":  "RemoteSigned",
+    "applied_paths":  [
+
+                      ],
+    "applied_processes":  [
+
+                          ],
+    "before":  {
+                   "exclusion_paths":  [
+                                           "C:\\RegProbe-Diag",
+                                           "C:\\Tools"
+                                       ],
+                   "exclusion_processes":  [
+                                               "diskspd.exe",
+                                               "java.exe",
+                                               "javaw.exe",
+                                               "powershell.exe",
+                                               "Procmon64.exe",
+                                               "RegProbe.App.exe",
+                                               "RegProbe.ElevatedHost.exe",
+                                               "winsat.exe",
+                                               "wpa.exe",
+                                               "wpr.exe",
+                                               "xperf.exe"
+                                           ],
+                   "execution_policy":  {
+                                            "MachinePolicy":  "Undefined",
+                                            "UserPolicy":  "Undefined",
+                                            "Process":  "Bypass",
+                                            "CurrentUser":  "Undefined",
+                                            "LocalMachine":  "RemoteSigned"
+                                        }
+               },
+    "after":  {
+                  "exclusion_paths":  [
+                                          "C:\\RegProbe-Diag",
+                                          "C:\\Tools"
+                                      ],
+                  "exclusion_processes":  [
+                                              "diskspd.exe",
+                                              "java.exe",
+                                              "javaw.exe",
+                                              "powershell.exe",
+                                              "Procmon64.exe",
+                                              "RegProbe.App.exe",
+                                              "RegProbe.ElevatedHost.exe",
+                                              "winsat.exe",
+                                              "wpa.exe",
+                                              "wpr.exe",
+                                              "xperf.exe"
+                                          ],
+                  "execution_policy":  {
+                                           "MachinePolicy":  "Undefined",
+                                           "UserPolicy":  "Undefined",
+                                           "Process":  "Bypass",
+                                           "CurrentUser":  "Undefined",
+                                           "LocalMachine":  "RemoteSigned"
+                                       }
+              },
+    "status":  "ok",
+    "errors":  [
+
+               ]
+}

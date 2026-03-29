@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
@@ -9,10 +9,19 @@ param(
     [string]$GuestScriptPath = 'C:\Tools\Scripts\app-launch-smoke.ps1',
     [string]$GuestResultPath = 'C:\Tools\ValidationController\smoke\app-launch-smoke.json',
     [string]$OutputPath = 'H:\Temp\vm-tooling-staging\app-launch-smoke.json',
-    [bool]$RefreshPackage = $true
+    [bool]$RefreshPackage = $true,
+    [string]$PreCleanupOutputPath = '',
+    [string]$PostCleanupOutputPath = '',
+    [bool]$EnforceEphemeralCleanup = $true
 )
 
 $ErrorActionPreference = 'Stop'
+
+. (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
+
+if ([string]::IsNullOrWhiteSpace($VmPath)) {
+    $VmPath = Resolve-CanonicalVmPath
+}
 
 function Invoke-Vmrun {
     param([string[]]$Arguments)
@@ -58,6 +67,24 @@ $hostScriptPath = Join-Path $PSScriptRoot 'app-launch-smoke.ps1'
 if (-not (Test-Path $hostScriptPath)) {
     throw "Guest smoke script not found at $hostScriptPath"
 }
+$artifactAuditScriptPath = Join-Path $PSScriptRoot 'run-guest-app-artifact-audit.ps1'
+if (-not (Test-Path $artifactAuditScriptPath)) {
+    throw "Guest app artifact audit script not found at $artifactAuditScriptPath"
+}
+
+$outputDirectory = Split-Path -Parent $OutputPath
+if ($outputDirectory) {
+    New-Item -ItemType Directory -Path $outputDirectory -Force | Out-Null
+}
+
+if ([string]::IsNullOrWhiteSpace($PreCleanupOutputPath)) {
+    $PreCleanupOutputPath = Join-Path $outputDirectory 'app-launch-smoke-pre-cleanup.json'
+}
+
+if ([string]::IsNullOrWhiteSpace($PostCleanupOutputPath)) {
+    $PostCleanupOutputPath = Join-Path $outputDirectory 'app-launch-smoke-post-cleanup.json'
+}
+
 $hostPrepScriptPath = Join-Path $env:TEMP 'regprobe-app-launch-smoke-prep.ps1'
 $guestPrepScriptPath = 'C:\Tools\Scripts\app-launch-smoke-prep.ps1'
 
@@ -81,6 +108,17 @@ do {
 
 if ($toolsState -notmatch 'running|installed') {
     throw "VMware Tools not ready for $VmPath"
+}
+
+if ($EnforceEphemeralCleanup) {
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $artifactAuditScriptPath `
+        -VmPath $VmPath `
+        -VmrunPath $VmrunPath `
+        -GuestUser $GuestUser `
+        -GuestPassword $GuestPassword `
+        -Mode cleanup `
+        -RequireClean `
+        -OutputPath $PreCleanupOutputPath | Out-Null
 }
 
 Invoke-Vmrun -Arguments @(
@@ -127,28 +165,70 @@ Invoke-Vmrun -Arguments @(
     $GuestScriptPath
 ) | Out-Null
 
-Invoke-Vmrun -Arguments @(
-    '-T', 'ws',
-    '-gu', $GuestUser,
-    '-gp', $GuestPassword,
-    'runProgramInGuest',
-    $VmPath,
-    'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
-    '-NoProfile',
-    '-ExecutionPolicy',
-    'Bypass',
-    '-File',
-    $GuestScriptPath
-) | Out-Null
+$capturedError = $null
 
-Invoke-Vmrun -Arguments @(
-    '-T', 'ws',
-    '-gu', $GuestUser,
-    '-gp', $GuestPassword,
-    'CopyFileFromGuestToHost',
-    $VmPath,
-    $GuestResultPath,
-    $OutputPath
-) | Out-Null
+try {
+    Invoke-Vmrun -Arguments @(
+        '-T', 'ws',
+        '-gu', $GuestUser,
+        '-gp', $GuestPassword,
+        'runProgramInGuest',
+        $VmPath,
+        'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
+        '-NoProfile',
+        '-ExecutionPolicy',
+        'Bypass',
+        '-File',
+        $GuestScriptPath
+    ) | Out-Null
+
+    Invoke-Vmrun -Arguments @(
+        '-T', 'ws',
+        '-gu', $GuestUser,
+        '-gp', $GuestPassword,
+        'CopyFileFromGuestToHost',
+        $VmPath,
+        $GuestResultPath,
+        $OutputPath
+    ) | Out-Null
+
+    $guestResult = Get-Content -Path $OutputPath -Raw | ConvertFrom-Json
+    if ($guestResult.PSObject.Properties.Name -contains 'error' -and -not [string]::IsNullOrWhiteSpace($guestResult.error)) {
+        throw "Guest app smoke failed: $($guestResult.error)"
+    }
+
+    if (-not $guestResult.process_started -or -not $guestResult.process_alive_after_12s) {
+        throw 'Guest app smoke did not keep the app process alive through the validation window.'
+    }
+}
+catch {
+    $capturedError = $_.Exception.Message
+}
+finally {
+    if ($EnforceEphemeralCleanup) {
+        try {
+            & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $artifactAuditScriptPath `
+                -VmPath $VmPath `
+                -VmrunPath $VmrunPath `
+                -GuestUser $GuestUser `
+                -GuestPassword $GuestPassword `
+                -Mode cleanup `
+                -RequireClean `
+                -OutputPath $PostCleanupOutputPath | Out-Null
+        }
+        catch {
+            if ([string]::IsNullOrWhiteSpace($capturedError)) {
+                $capturedError = $_.Exception.Message
+            }
+            else {
+                $capturedError = "$capturedError; $($_.Exception.Message)"
+            }
+        }
+    }
+}
+
+if (-not [string]::IsNullOrWhiteSpace($capturedError)) {
+    throw $capturedError
+}
 
 Get-Content -Path $OutputPath

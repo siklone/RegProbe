@@ -5,7 +5,7 @@ param(
     [string]$AppRoot = 'C:\Tools\AppSmoke'
 )
 
-$ErrorActionPreference = 'Continue'
+$ErrorActionPreference = 'Stop'
 
 New-Item -ItemType Directory -Path $OutputRoot -Force | Out-Null
 New-Item -ItemType Directory -Path 'C:\Tools\Inbound' -Force | Out-Null
@@ -42,6 +42,8 @@ $result = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
 }
 
+$runningProcess = $null
+
 try {
     $result.stopped_processes = Stop-LegacyAppProcesses
 
@@ -77,19 +79,37 @@ try {
 
     $proc = Start-Process -FilePath $exe -PassThru
     Start-Sleep -Seconds 12
-    $running = Get-Process -Id $proc.Id -ErrorAction SilentlyContinue
+    $runningProcess = Get-Process -Id $proc.Id -ErrorAction SilentlyContinue
 
     $result.process_started = [bool]$proc
-    $result.process_alive_after_12s = [bool]$running
-    $result.process_id = if ($running) { $running.Id } else { $proc.Id }
-    $result.main_window_title = if ($running) { $running.MainWindowTitle } else { '' }
-
-    if ($running) {
-        Stop-Process -Id $running.Id -Force
-    }
+    $result.process_alive_after_12s = [bool]$runningProcess
+    $result.process_id = if ($runningProcess) { $runningProcess.Id } else { $proc.Id }
+    $result.main_window_title = if ($runningProcess) { $runningProcess.MainWindowTitle } else { '' }
 }
 catch {
     $result.error = $_.Exception.Message
+}
+finally {
+    if ($runningProcess) {
+        Stop-Process -Id $runningProcess.Id -Force -ErrorAction SilentlyContinue
+    }
+
+    $cleanupRemoved = @()
+    foreach ($path in @($AppRoot, $PublishZipPath)) {
+        if (-not (Test-Path $path)) {
+            continue
+        }
+
+        Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
+        if (-not (Test-Path $path)) {
+            $cleanupRemoved += $path
+        }
+    }
+
+    $result.cleanup_removed_paths = $cleanupRemoved
+    $result.cleanup_verified =
+        (-not (Test-Path $AppRoot)) -and
+        (-not (Test-Path $PublishZipPath))
 }
 
 $resultPath = Join-Path $OutputRoot 'app-launch-smoke.json'

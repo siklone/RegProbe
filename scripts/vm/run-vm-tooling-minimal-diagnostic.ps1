@@ -6,7 +6,8 @@ param(
     [string]$GuestPassword = 'CodexVm2026!',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestRoot = 'C:\RegProbe-Diag',
-    [string]$SnapshotName = ''
+    [string]$SnapshotName = '',
+    [string]$TrackedOutputRoot = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -22,15 +23,22 @@ if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
 }
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
-$repoEvidenceRoot = Join-Path $repoRoot 'evidence\files\vm-tooling-staging'
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $probeName = "vm-tooling-minimal-diagnostic-$stamp"
 $hostRoot = Join-Path $HostOutputRoot $probeName
-$repoRootOut = Join-Path $repoEvidenceRoot $probeName
+$defaultTrackedRoot = Join-Path $repoRoot 'evidence\files\vm-tooling-staging'
+$trackedRootBase =
+    if ([string]::IsNullOrWhiteSpace($TrackedOutputRoot)) {
+        $defaultTrackedRoot
+    }
+    else {
+        $TrackedOutputRoot
+    }
+$trackedRootOut = Join-Path $trackedRootBase $probeName
 $hostPayloadPath = Join-Path $hostRoot 'vm-tooling-minimal-payload.ps1'
 $guestPayloadPath = Join-Path $GuestRoot 'vm-tooling-minimal-payload.ps1'
 $hostSummaryPath = Join-Path $hostRoot 'summary.json'
-$repoSummaryPath = Join-Path $repoRootOut 'summary.json'
+$trackedSummaryPath = Join-Path $trackedRootOut 'summary.json'
 $guestWriteTestPath = Join-Path $GuestRoot 'write-test.txt'
 $guestEnvPath = Join-Path $GuestRoot 'environment.json'
 $guestScriptResultPath = Join-Path $GuestRoot 'script-result.json'
@@ -39,7 +47,7 @@ $hostEnvPath = Join-Path $hostRoot 'environment.json'
 $hostScriptResultPath = Join-Path $hostRoot 'script-result.json'
 
 New-Item -ItemType Directory -Path $hostRoot -Force | Out-Null
-New-Item -ItemType Directory -Path $repoRootOut -Force | Out-Null
+New-Item -ItemType Directory -Path $trackedRootOut -Force | Out-Null
 
 $guestPayload = @'
 param(
@@ -220,7 +228,7 @@ $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
     probe_name = $probeName
     snapshot_name = $SnapshotName
-    host_output_root = "evidence/files/vm-tooling-staging/$probeName"
+    tracked_output_root = $trackedRootOut
     guest_root = $GuestRoot
     run_program_exit = $null
     copied = [ordered]@{
@@ -259,7 +267,7 @@ $summary.copied.environment = Copy-FromGuestBestEffort -GuestPath $guestEnvPath 
 $summary.copied.script_result = Copy-FromGuestBestEffort -GuestPath $guestScriptResultPath -HostPath $hostScriptResultPath
 
 if ($summary.copied.script_result) {
-    Copy-Item -Path $hostScriptResultPath -Destination (Join-Path $repoRootOut 'script-result.json') -Force
+    Copy-Item -Path $hostScriptResultPath -Destination (Join-Path $trackedRootOut 'script-result.json') -Force
     $scriptResult = Get-Content -Path $hostScriptResultPath -Raw | ConvertFrom-Json
     $summary.script_result_status = $scriptResult.status
     if ($scriptResult.PSObject.Properties.Name -contains 'error') {
@@ -268,11 +276,11 @@ if ($summary.copied.script_result) {
 }
 
 if ($summary.copied.write_test) {
-    Copy-Item -Path $hostWriteTestPath -Destination (Join-Path $repoRootOut 'write-test.txt') -Force
+    Copy-Item -Path $hostWriteTestPath -Destination (Join-Path $trackedRootOut 'write-test.txt') -Force
 }
 
 if ($summary.copied.environment) {
-    Copy-Item -Path $hostEnvPath -Destination (Join-Path $repoRootOut 'environment.json') -Force
+    Copy-Item -Path $hostEnvPath -Destination (Join-Path $trackedRootOut 'environment.json') -Force
     $envPayload = Get-Content -Path $hostEnvPath -Raw | ConvertFrom-Json
     $summary.write_test_exists = [bool]$envPayload.write_test_exists
     $summary.execution_policy = $envPayload.execution_policy
@@ -290,9 +298,9 @@ $summary.status =
     }
 
 $summary | ConvertTo-Json -Depth 8 | Set-Content -Path $hostSummaryPath -Encoding UTF8
-$summary | ConvertTo-Json -Depth 8 | Set-Content -Path $repoSummaryPath -Encoding UTF8
+$summary | ConvertTo-Json -Depth 8 | Set-Content -Path $trackedSummaryPath -Encoding UTF8
 
-Write-Output $repoSummaryPath
+Write-Output $trackedSummaryPath
 if ($summary.status -ne 'ok') {
     exit 1
 }

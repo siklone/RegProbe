@@ -1,0 +1,216 @@
+﻿{
+    "generated_utc":  "2026-03-29T08:49:01.7421816Z",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+    "source_snapshot":  "RegProbe-Baseline-20260328",
+    "target_snapshot":  "RegProbe-Baseline-Clean-20260329",
+    "audit_session_root":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329",
+    "policy":  {
+                   "baseline":  "tooling-first and app-free",
+                   "app_smoke":  "ephemeral deploy -\u003e validate -\u003e cleanup only",
+                   "defender":  "keep tooling exclusions intact; do not disable Defender"
+               },
+    "validation":  {
+                       "source_cleanup":  {
+                                              "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\source-app-artifacts-cleanup.json",
+                                              "mode":  "cleanup",
+                                              "status":  "error",
+                                              "policy_compliant":  true,
+                                              "stale_binary_count":  0,
+                                              "residual_item_count":  0
+                                          },
+                       "baseline_audit":  {
+                                              "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\baseline-app-artifacts-audit.json",
+                                              "mode":  "audit",
+                                              "status":  "ok",
+                                              "policy_compliant":  true,
+                                              "stale_binary_count":  0,
+                                              "residual_item_count":  0
+                                          },
+                       "tooling_minimal":  {
+                                               "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\vm-tooling-minimal-diagnostic-20260329-121108\\summary.json",
+                                               "status":  "ok",
+                                               "write_test_exists":  true,
+                                               "procmon_paths":  [
+                                                                     {
+                                                                         "path":  "C:\\Tools\\Sysinternals\\Procmon64.exe",
+                                                                         "exists":  true
+                                                                     },
+                                                                     {
+                                                                         "path":  "C:\\Tools\\Procmon.exe",
+                                                                         "exists":  false
+                                                                     },
+                                                                     {
+                                                                         "path":  "C:\\Tools\\SysinternalsSuite\\Procmon64.exe",
+                                                                         "exists":  false
+                                                                     }
+                                                                 ],
+                                               "defender":  {
+                                                                "DisableRealtimeMonitoring":  false
+                                                            }
+                                           },
+                       "app_launch_smoke":  {
+                                                "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\app-launch-smoke.json",
+                                                "process_started":  true,
+                                                "process_alive_after_12s":  true,
+                                                "cleanup_verified":  true,
+                                                "executable":  "C:\\Tools\\AppSmoke\\RegProbe.App.exe"
+                                            },
+                       "app_launch_smoke_pre_cleanup":  {
+                                                            "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\app-launch-smoke-pre-cleanup.json",
+                                                            "mode":  "cleanup",
+                                                            "status":  "ok",
+                                                            "policy_compliant":  true,
+                                                            "stale_binary_count":  0,
+                                                            "residual_item_count":  0
+                                                        },
+                       "app_launch_smoke_post_cleanup":  {
+                                                             "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\app-launch-smoke-post-cleanup.json",
+                                                             "mode":  "cleanup",
+                                                             "status":  "ok",
+                                                             "policy_compliant":  true,
+                                                             "stale_binary_count":  0,
+                                                             "residual_item_count":  0
+                                                         },
+                       "after_smoke_audit":  {
+                                                 "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\after-smoke-app-artifacts-audit.json",
+                                                 "mode":  "audit",
+                                                 "status":  "ok",
+                                                 "policy_compliant":  true,
+                                                 "stale_binary_count":  0,
+                                                 "residual_item_count":  0
+                                             },
+                       "final_revert_audit":  {
+                                                  "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\final-revert-app-artifacts-audit.json",
+                                                  "mode":  "audit",
+                                                  "status":  "ok",
+                                                  "policy_compliant":  true,
+                                                  "stale_binary_count":  0,
+                                                  "residual_item_count":  0
+                                              },
+                       "shell_before_snapshot":  {
+                                                     "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\shell-before-snapshot.json",
+                                                     "shell_healthy":  true,
+                                                     "explorer":  true,
+                                                     "sihost":  true,
+                                                     "shellhost":  true,
+                                                     "ctfmon":  true
+                                                 },
+                       "shell_after_smoke":  {
+                                                 "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\shell-after-smoke.json",
+                                                 "shell_healthy":  true,
+                                                 "explorer":  true,
+                                                 "sihost":  true,
+                                                 "shellhost":  true,
+                                                 "ctfmon":  true
+                                             },
+                       "shell_after_final_revert":  {
+                                                        "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\shell-after-final-revert.json",
+                                                        "shell_healthy":  true,
+                                                        "explorer":  true,
+                                                        "sihost":  true,
+                                                        "shellhost":  true,
+                                                        "ctfmon":  true
+                                                    }
+                   },
+    "defender_exclusions":  {
+                                "apply":  {
+                                              "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\tooling-defender-exclusions-apply.json",
+                                              "status":  "ok",
+                                              "exclusion_paths":  [
+                                                                      "C:\\RegProbe-Diag",
+                                                                      "C:\\Tools"
+                                                                  ],
+                                              "exclusion_processes":  [
+                                                                          "diskspd.exe",
+                                                                          "java.exe",
+                                                                          "javaw.exe",
+                                                                          "powershell.exe",
+                                                                          "Procmon64.exe",
+                                                                          "RegProbe.App.exe",
+                                                                          "RegProbe.ElevatedHost.exe",
+                                                                          "winsat.exe",
+                                                                          "wpa.exe",
+                                                                          "wpr.exe",
+                                                                          "xperf.exe"
+                                                                      ],
+                                              "execution_policy":  {
+                                                                       "MachinePolicy":  "Undefined",
+                                                                       "UserPolicy":  "Undefined",
+                                                                       "Process":  "Bypass",
+                                                                       "CurrentUser":  "Undefined",
+                                                                       "LocalMachine":  "RemoteSigned"
+                                                                   }
+                                          },
+                                "readback":  {
+                                                 "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\tooling-defender-exclusions-read.json",
+                                                 "status":  "ok",
+                                                 "exclusion_paths":  [
+                                                                         "C:\\RegProbe-Diag",
+                                                                         "C:\\Tools"
+                                                                     ],
+                                                 "exclusion_processes":  [
+                                                                             "diskspd.exe",
+                                                                             "java.exe",
+                                                                             "javaw.exe",
+                                                                             "powershell.exe",
+                                                                             "Procmon64.exe",
+                                                                             "RegProbe.App.exe",
+                                                                             "RegProbe.ElevatedHost.exe",
+                                                                             "winsat.exe",
+                                                                             "wpa.exe",
+                                                                             "wpr.exe",
+                                                                             "xperf.exe"
+                                                                         ],
+                                                 "execution_policy":  {
+                                                                          "MachinePolicy":  "Undefined",
+                                                                          "UserPolicy":  "Undefined",
+                                                                          "Process":  "Bypass",
+                                                                          "CurrentUser":  "Undefined",
+                                                                          "LocalMachine":  "RemoteSigned"
+                                                                      }
+                                             },
+                                "final_readback":  {
+                                                       "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\tooling-defender-exclusions-final-read.json",
+                                                       "status":  "ok",
+                                                       "exclusion_paths":  [
+                                                                               "C:\\RegProbe-Diag",
+                                                                               "C:\\Tools"
+                                                                           ],
+                                                       "exclusion_processes":  [
+                                                                                   "diskspd.exe",
+                                                                                   "java.exe",
+                                                                                   "javaw.exe",
+                                                                                   "powershell.exe",
+                                                                                   "Procmon64.exe",
+                                                                                   "RegProbe.App.exe",
+                                                                                   "RegProbe.ElevatedHost.exe",
+                                                                                   "winsat.exe",
+                                                                                   "wpa.exe",
+                                                                                   "wpr.exe",
+                                                                                   "xperf.exe"
+                                                                               ],
+                                                       "execution_policy":  {
+                                                                                "MachinePolicy":  "Undefined",
+                                                                                "UserPolicy":  "Undefined",
+                                                                                "Process":  "Bypass",
+                                                                                "CurrentUser":  "Undefined",
+                                                                                "LocalMachine":  "RemoteSigned"
+                                                                            }
+                                                   }
+                            },
+    "snapshot_lists":  {
+                           "before":  [
+                                          "RegProbe-Baseline-20260328"
+                                      ],
+                           "after":  [
+                                         "RegProbe-Baseline-Clean-20260329"
+                                     ]
+                       },
+    "deleted_snapshots":  [
+                              "RegProbe-Baseline-20260328"
+                          ],
+    "status":  "ok",
+    "errors":  [
+
+               ]
+}

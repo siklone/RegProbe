@@ -4,11 +4,12 @@ param(
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
-    [string]$SourceSnapshotName = 'baseline-20260327-regprobe-visible-shell-stable',
-    [string]$TargetSnapshotName = 'RegProbe-Baseline-20260328',
+    [string]$SourceSnapshotName = 'RegProbe-Baseline-20260328',
+    [string]$TargetSnapshotName = 'RegProbe-Baseline-Clean-20260329',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
-    [string]$GuestOutputRoot = 'C:\RegProbe-Diag\baseline-output'
+    [string]$GuestOutputRoot = 'C:\Tools\Temp\baseline-output',
+    [string]$AuditLabel = 'vm-baseline-clean-20260329'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -20,26 +21,40 @@ if ([string]::IsNullOrWhiteSpace($VmPath)) {
 }
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
-$repoEvidenceRoot = Join-Path $repoRoot 'evidence\files\vm-tooling-staging'
 $auditRoot = Join-Path $repoRoot 'registry-research-framework\audit'
+$auditSessionRoot = Join-Path $auditRoot $AuditLabel
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$sessionName = "regprobe-baseline-setup-$stamp"
-$hostRoot = Join-Path $HostOutputRoot $sessionName
-$repoRootOut = Join-Path $repoEvidenceRoot $sessionName
-$hostGuestScript = Join-Path $PSScriptRoot 'apply-defender-tooling-exclusions.ps1'
-$guestGuestScript = Join-Path $GuestScriptRoot 'apply-defender-tooling-exclusions.ps1'
+$hostRoot = Join-Path $HostOutputRoot ("regprobe-clean-baseline-$stamp")
+
+$hostDefenderScript = Join-Path $PSScriptRoot 'apply-defender-tooling-exclusions.ps1'
+$guestDefenderScript = Join-Path $GuestScriptRoot 'apply-defender-tooling-exclusions.ps1'
+$artifactAuditHostScript = Join-Path $PSScriptRoot 'run-guest-app-artifact-audit.ps1'
+$toolingDiagnosticHostScript = Join-Path $PSScriptRoot 'run-vm-tooling-minimal-diagnostic.ps1'
+$appSmokeHostScript = Join-Path $PSScriptRoot 'run-app-launch-smoke-host.ps1'
+
 $guestApplyJson = Join-Path $GuestOutputRoot 'tooling-defender-exclusions-apply.json'
 $guestReadJson = Join-Path $GuestOutputRoot 'tooling-defender-exclusions-read.json'
-$repoApplyJson = Join-Path $repoRootOut 'tooling-defender-exclusions-apply.json'
-$repoReadJson = Join-Path $repoRootOut 'tooling-defender-exclusions-read.json'
-$repoShellHealthJson = Join-Path $repoRootOut 'shell-health.json'
-$repoSnapshotListBefore = Join-Path $repoRootOut 'snapshots-before.txt'
-$repoSnapshotListAfter = Join-Path $repoRootOut 'snapshots-after.txt'
-$auditPath = Join-Path $auditRoot 'regprobe-baseline-defender-exclusions-20260328.json'
+
+$applyJsonPath = Join-Path $auditSessionRoot 'tooling-defender-exclusions-apply.json'
+$readJsonPath = Join-Path $auditSessionRoot 'tooling-defender-exclusions-read.json'
+$finalReadJsonPath = Join-Path $auditSessionRoot 'tooling-defender-exclusions-final-read.json'
+$sourceCleanupPath = Join-Path $auditSessionRoot 'source-app-artifacts-cleanup.json'
+$baselineAuditPath = Join-Path $auditSessionRoot 'baseline-app-artifacts-audit.json'
+$afterSmokeAuditPath = Join-Path $auditSessionRoot 'after-smoke-app-artifacts-audit.json'
+$finalRevertAuditPath = Join-Path $auditSessionRoot 'final-revert-app-artifacts-audit.json'
+$appSmokePath = Join-Path $auditSessionRoot 'app-launch-smoke.json'
+$appSmokePreCleanupPath = Join-Path $auditSessionRoot 'app-launch-smoke-pre-cleanup.json'
+$appSmokePostCleanupPath = Join-Path $auditSessionRoot 'app-launch-smoke-post-cleanup.json'
+$shellBeforeSnapshotPath = Join-Path $auditSessionRoot 'shell-before-snapshot.json'
+$shellAfterSmokePath = Join-Path $auditSessionRoot 'shell-after-smoke.json'
+$shellAfterFinalRevertPath = Join-Path $auditSessionRoot 'shell-after-final-revert.json'
+$snapshotsBeforePath = Join-Path $auditSessionRoot 'snapshots-before.txt'
+$snapshotsAfterPath = Join-Path $auditSessionRoot 'snapshots-after.txt'
+$auditPath = Join-Path $auditRoot 'regprobe-baseline-clean-20260329.json'
 
 New-Item -ItemType Directory -Path $hostRoot -Force | Out-Null
-New-Item -ItemType Directory -Path $repoRootOut -Force | Out-Null
 New-Item -ItemType Directory -Path $auditRoot -Force | Out-Null
+New-Item -ItemType Directory -Path $auditSessionRoot -Force | Out-Null
 
 function Invoke-Vmrun {
     param(
@@ -57,13 +72,17 @@ function Invoke-Vmrun {
 
 function Get-SnapshotNames {
     $raw = Invoke-Vmrun -Arguments @('-T', 'ws', 'listSnapshots', $VmPath)
-    $raw | Set-Content -Path $repoSnapshotListBefore -Encoding UTF8
-    return @(
+    $snapshots = @(
         $raw -split "`r?`n" |
         Where-Object { $_ -and $_ -notmatch '^Total snapshots:' } |
         ForEach-Object { $_.Trim() } |
         Where-Object { $_ }
     )
+
+    return [pscustomobject]@{
+        raw = $raw
+        names = $snapshots
+    }
 }
 
 function Save-SnapshotList {
@@ -155,43 +174,208 @@ function Get-ShellHealthJson {
         -VmrunPath $VmrunPath `
         -GuestUser $GuestUser `
         -GuestPassword $GuestPassword
+
     return $raw | ConvertFrom-Json
 }
 
 function Remove-SnapshotIfExists {
     param([Parameter(Mandatory = $true)][string]$SnapshotName)
 
-    $snapshots = @(
-        Invoke-Vmrun -Arguments @('-T', 'ws', 'listSnapshots', $VmPath) -IgnoreExitCode -split "`r?`n" |
-        Where-Object { $_ -and $_ -notmatch '^Total snapshots:' } |
-        ForEach-Object { $_.Trim() } |
-        Where-Object { $_ }
-    )
-
+    $snapshots = (Get-SnapshotNames).names
     if ($snapshots -contains $SnapshotName) {
         Invoke-Vmrun -Arguments @('-T', 'ws', 'deleteSnapshot', $VmPath, $SnapshotName) | Out-Null
+        return $true
+    }
+
+    return $false
+}
+
+function Remove-GuestPath {
+    param([Parameter(Mandatory = $true)][string]$GuestPath)
+
+    Invoke-GuestPowerShell -ArgumentList @(
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-Command', "if (Test-Path -LiteralPath '$GuestPath') { Remove-Item -LiteralPath '$GuestPath' -Recurse -Force -ErrorAction SilentlyContinue }"
+    )
+}
+
+function Invoke-AppArtifactAudit {
+    param(
+        [Parameter(Mandatory = $true)][ValidateSet('audit', 'cleanup')][string]$Mode,
+        [Parameter(Mandatory = $true)][string]$OutputPath,
+        [switch]$RequireClean,
+        [string]$GuestOutputRootOverride = ''
+    )
+
+    $arguments = @(
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-File', $artifactAuditHostScript,
+        '-VmPath', $VmPath,
+        '-VmrunPath', $VmrunPath,
+        '-GuestUser', $GuestUser,
+        '-GuestPassword', $GuestPassword,
+        '-Mode', $Mode,
+        '-OutputPath', $OutputPath
+    )
+
+    if ($RequireClean) {
+        $arguments += '-RequireClean'
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($GuestOutputRootOverride)) {
+        $arguments += @('-GuestOutputRoot', $GuestOutputRootOverride)
+    }
+
+    & powershell.exe @arguments | Out-Null
+    return Get-Content -Path $OutputPath -Raw | ConvertFrom-Json
+}
+
+function Invoke-DefenderExclusionMode {
+    param(
+        [Parameter(Mandatory = $true)][ValidateSet('apply', 'read')][string]$Mode,
+        [Parameter(Mandatory = $true)][string]$GuestJsonPath,
+        [Parameter(Mandatory = $true)][string]$HostJsonPath
+    )
+
+    Invoke-GuestPowerShell -ArgumentList @(
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-File', $guestDefenderScript,
+        '-Mode', $Mode,
+        '-OutputPath', $GuestJsonPath
+    )
+
+    Copy-FromGuest -GuestPath $GuestJsonPath -HostPath $HostJsonPath
+    $payload = Get-Content -Path $HostJsonPath -Raw | ConvertFrom-Json
+    if ($payload.status -ne 'ok') {
+        throw ("Defender exclusion {0} failed: {1}" -f $Mode, (($payload.errors | Where-Object { $_ }) -join '; '))
+    }
+
+    return $payload
+}
+
+function Convert-AppArtifactSummary {
+    param(
+        [Parameter(Mandatory = $true)]$Result,
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    $state =
+        if ($Result.mode -eq 'cleanup') {
+            $Result.post_cleanup
+        }
+        else {
+            $Result.pre_cleanup
+        }
+
+    return [ordered]@{
+        path = $Path
+        mode = $Result.mode
+        status = $Result.status
+        policy_compliant = [bool]$Result.policy_compliant
+        stale_binary_count = if ($state) { [int]$state.stale_binary_count } else { -1 }
+        residual_item_count = if ($state) { [int]$state.residual_item_count } else { -1 }
     }
 }
 
-$beforeSnapshots = Get-SnapshotNames
+function Convert-DefenderSummary {
+    param(
+        [Parameter(Mandatory = $true)]$Result,
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    return [ordered]@{
+        path = $Path
+        status = $Result.status
+        exclusion_paths = @($Result.after.exclusion_paths)
+        exclusion_processes = @($Result.after.exclusion_processes)
+        execution_policy = $Result.after.execution_policy
+    }
+}
+
+function Convert-ShellSummary {
+    param(
+        [Parameter(Mandatory = $true)]$ShellHealth,
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    return [ordered]@{
+        path = $Path
+        shell_healthy = [bool]$ShellHealth.shell_healthy
+        explorer = [bool]$ShellHealth.checks.explorer
+        sihost = [bool]$ShellHealth.checks.sihost
+        shellhost = [bool]$ShellHealth.checks.shellhost
+        ctfmon = [bool]$ShellHealth.checks.ctfmon
+    }
+}
+
+function Convert-ToolingSummary {
+    param(
+        [Parameter(Mandatory = $true)]$Summary,
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    return [ordered]@{
+        path = $Path
+        status = $Summary.status
+        write_test_exists = [bool]$Summary.write_test_exists
+        procmon_paths = @($Summary.procmon_paths)
+        defender = $Summary.defender
+    }
+}
+
+function Convert-AppSmokeSummary {
+    param(
+        [Parameter(Mandatory = $true)]$Result,
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    return [ordered]@{
+        path = $Path
+        process_started = [bool]$Result.process_started
+        process_alive_after_12s = [bool]$Result.process_alive_after_12s
+        cleanup_verified = [bool]$Result.cleanup_verified
+        executable = $Result.executable
+    }
+}
+
+$beforeSnapshotInfo = Get-SnapshotNames
+$beforeSnapshotInfo.raw | Set-Content -Path $snapshotsBeforePath -Encoding UTF8
 $deletedSnapshots = New-Object 'System.Collections.Generic.List[string]'
+
 $audit = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
     vm_path = $VmPath
     source_snapshot = $SourceSnapshotName
     target_snapshot = $TargetSnapshotName
-    host_output_root = "evidence/files/vm-tooling-staging/$sessionName"
+    audit_session_root = $auditSessionRoot
+    policy = [ordered]@{
+        baseline = 'tooling-first and app-free'
+        app_smoke = 'ephemeral deploy -> validate -> cleanup only'
+        defender = 'keep tooling exclusions intact; do not disable Defender'
+    }
     validation = [ordered]@{
+        source_cleanup = $null
+        baseline_audit = $null
         tooling_minimal = $null
         app_launch_smoke = $null
-        shell_health = $null
+        app_launch_smoke_pre_cleanup = $null
+        app_launch_smoke_post_cleanup = $null
+        after_smoke_audit = $null
+        final_revert_audit = $null
+        shell_before_snapshot = $null
+        shell_after_smoke = $null
+        shell_after_final_revert = $null
     }
     defender_exclusions = [ordered]@{
         apply = $null
         readback = $null
+        final_readback = $null
     }
     snapshot_lists = [ordered]@{
-        before = $beforeSnapshots
+        before = @($beforeSnapshotInfo.names)
         after = @()
     }
     deleted_snapshots = @()
@@ -203,86 +387,101 @@ try {
     Revert-AndStartVm -SnapshotName $SourceSnapshotName
     Ensure-GuestDirectory -GuestPath $GuestScriptRoot
     Ensure-GuestDirectory -GuestPath $GuestOutputRoot
-    Copy-ToGuest -HostPath $hostGuestScript -GuestPath $guestGuestScript
+    Copy-ToGuest -HostPath $hostDefenderScript -GuestPath $guestDefenderScript
 
-    Invoke-GuestPowerShell -ArgumentList @(
-        '-NoProfile',
-        '-ExecutionPolicy', 'Bypass',
-        '-File', $guestGuestScript,
-        '-Mode', 'apply',
-        '-OutputPath', $guestApplyJson
-    )
-    Copy-FromGuest -GuestPath $guestApplyJson -HostPath $repoApplyJson
-    $audit.defender_exclusions.apply = Get-Content -Path $repoApplyJson -Raw | ConvertFrom-Json
-    if ($audit.defender_exclusions.apply.status -ne 'ok') {
-        throw ("Defender exclusion apply failed: {0}" -f (($audit.defender_exclusions.apply.errors | Where-Object { $_ }) -join '; '))
+    $sourceCleanup = Invoke-AppArtifactAudit -Mode cleanup -OutputPath $sourceCleanupPath -RequireClean -GuestOutputRootOverride 'C:\Tools\Temp\baseline-source-artifact-audit'
+    $audit.validation.source_cleanup = Convert-AppArtifactSummary -Result $sourceCleanup -Path $sourceCleanupPath
+    Remove-GuestPath -GuestPath 'C:\Tools\Temp\baseline-source-artifact-audit'
+
+    $applyPayload = Invoke-DefenderExclusionMode -Mode apply -GuestJsonPath $guestApplyJson -HostJsonPath $applyJsonPath
+    $audit.defender_exclusions.apply = Convert-DefenderSummary -Result $applyPayload -Path $applyJsonPath
+    Remove-GuestPath -GuestPath $GuestOutputRoot
+
+    $shellBeforeSnapshot = Get-ShellHealthJson
+    $shellBeforeSnapshot | ConvertTo-Json -Depth 6 | Set-Content -Path $shellBeforeSnapshotPath -Encoding UTF8
+    $audit.validation.shell_before_snapshot = Convert-ShellSummary -ShellHealth $shellBeforeSnapshot -Path $shellBeforeSnapshotPath
+    if (-not $shellBeforeSnapshot.shell_healthy) {
+        throw 'Shell health check failed before creating the clean baseline snapshot.'
     }
 
-    $preSnapshotShell = Get-ShellHealthJson
-    if (-not $preSnapshotShell.shell_healthy) {
-        throw 'Shell health check failed before creating the Defender-excluded baseline snapshot.'
-    }
-
-    Remove-SnapshotIfExists -SnapshotName $TargetSnapshotName
+    Remove-SnapshotIfExists -SnapshotName $TargetSnapshotName | Out-Null
     Invoke-Vmrun -Arguments @('-T', 'ws', 'snapshot', $VmPath, $TargetSnapshotName) | Out-Null
 
     Revert-AndStartVm -SnapshotName $TargetSnapshotName
+    $baselineAudit = Invoke-AppArtifactAudit -Mode audit -OutputPath $baselineAuditPath -RequireClean -GuestOutputRootOverride 'C:\Tools\Temp\baseline-audit'
+    $audit.validation.baseline_audit = Convert-AppArtifactSummary -Result $baselineAudit -Path $baselineAuditPath
+    Remove-GuestPath -GuestPath 'C:\Tools\Temp\baseline-audit'
 
-    Invoke-GuestPowerShell -ArgumentList @(
-        '-NoProfile',
-        '-ExecutionPolicy', 'Bypass',
-        '-File', $guestGuestScript,
-        '-Mode', 'read',
-        '-OutputPath', $guestReadJson
-    )
-    Copy-FromGuest -GuestPath $guestReadJson -HostPath $repoReadJson
-    $audit.defender_exclusions.readback = Get-Content -Path $repoReadJson -Raw | ConvertFrom-Json
-    if ($audit.defender_exclusions.readback.status -ne 'ok') {
-        throw ("Defender exclusion readback failed: {0}" -f (($audit.defender_exclusions.readback.errors | Where-Object { $_ }) -join '; '))
-    }
+    $readPayload = Invoke-DefenderExclusionMode -Mode read -GuestJsonPath $guestReadJson -HostJsonPath $readJsonPath
+    $audit.defender_exclusions.readback = Convert-DefenderSummary -Result $readPayload -Path $readJsonPath
+    Remove-GuestPath -GuestPath $GuestOutputRoot
 
-    $toolingSummaryPath = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'run-vm-tooling-minimal-diagnostic.ps1') `
+    $toolingSummaryPath = (& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $toolingDiagnosticHostScript `
         -VmPath $VmPath `
         -VmrunPath $VmrunPath `
         -GuestUser $GuestUser `
         -GuestPassword $GuestPassword `
-        -SnapshotName $TargetSnapshotName
-    $audit.validation.tooling_minimal = $toolingSummaryPath.Trim()
+        -SnapshotName $TargetSnapshotName `
+        -TrackedOutputRoot $auditSessionRoot).Trim()
+    $toolingSummary = Get-Content -Path $toolingSummaryPath -Raw | ConvertFrom-Json
+    if ($toolingSummary.status -ne 'ok') {
+        throw 'Minimal tooling diagnostic did not complete successfully.'
+    }
+    $audit.validation.tooling_minimal = Convert-ToolingSummary -Summary $toolingSummary -Path $toolingSummaryPath
 
     Revert-AndStartVm -SnapshotName $TargetSnapshotName
-    $appSmokePath = Join-Path $repoRootOut 'app-launch-smoke.json'
-    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'run-app-launch-smoke-host.ps1') `
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $appSmokeHostScript `
         -VmPath $VmPath `
         -VmrunPath $VmrunPath `
         -GuestUser $GuestUser `
         -GuestPassword $GuestPassword `
-        -OutputPath $appSmokePath | Out-Null
-    $audit.validation.app_launch_smoke = "evidence/files/vm-tooling-staging/$sessionName/app-launch-smoke.json"
+        -OutputPath $appSmokePath `
+        -PreCleanupOutputPath $appSmokePreCleanupPath `
+        -PostCleanupOutputPath $appSmokePostCleanupPath | Out-Null
 
-    $shellHealth = Get-ShellHealthJson
-    $shellHealth | ConvertTo-Json -Depth 6 | Set-Content -Path $repoShellHealthJson -Encoding UTF8
-    $audit.validation.shell_health = "evidence/files/vm-tooling-staging/$sessionName/shell-health.json"
-    if (-not $shellHealth.shell_healthy) {
-        throw 'Shell health check failed after validating the Defender-excluded baseline.'
+    $appSmoke = Get-Content -Path $appSmokePath -Raw | ConvertFrom-Json
+    $appSmokePreCleanup = Get-Content -Path $appSmokePreCleanupPath -Raw | ConvertFrom-Json
+    $appSmokePostCleanup = Get-Content -Path $appSmokePostCleanupPath -Raw | ConvertFrom-Json
+    $audit.validation.app_launch_smoke = Convert-AppSmokeSummary -Result $appSmoke -Path $appSmokePath
+    $audit.validation.app_launch_smoke_pre_cleanup = Convert-AppArtifactSummary -Result $appSmokePreCleanup -Path $appSmokePreCleanupPath
+    $audit.validation.app_launch_smoke_post_cleanup = Convert-AppArtifactSummary -Result $appSmokePostCleanup -Path $appSmokePostCleanupPath
+
+    $shellAfterSmoke = Get-ShellHealthJson
+    $shellAfterSmoke | ConvertTo-Json -Depth 6 | Set-Content -Path $shellAfterSmokePath -Encoding UTF8
+    $audit.validation.shell_after_smoke = Convert-ShellSummary -ShellHealth $shellAfterSmoke -Path $shellAfterSmokePath
+    if (-not $shellAfterSmoke.shell_healthy) {
+        throw 'Shell health check failed after the app smoke lane.'
     }
 
-    foreach ($snapshot in (Get-LegacyVmSnapshotNames)) {
-        if ($snapshot -eq $TargetSnapshotName) {
-            continue
+    $afterSmokeAudit = Invoke-AppArtifactAudit -Mode audit -OutputPath $afterSmokeAuditPath -RequireClean -GuestOutputRootOverride 'C:\Tools\Temp\after-smoke-audit'
+    $audit.validation.after_smoke_audit = Convert-AppArtifactSummary -Result $afterSmokeAudit -Path $afterSmokeAuditPath
+    Remove-GuestPath -GuestPath 'C:\Tools\Temp\after-smoke-audit'
+
+    Revert-AndStartVm -SnapshotName $TargetSnapshotName
+    $finalReadPayload = Invoke-DefenderExclusionMode -Mode read -GuestJsonPath $guestReadJson -HostJsonPath $finalReadJsonPath
+    $audit.defender_exclusions.final_readback = Convert-DefenderSummary -Result $finalReadPayload -Path $finalReadJsonPath
+    Remove-GuestPath -GuestPath $GuestOutputRoot
+
+    $finalRevertAudit = Invoke-AppArtifactAudit -Mode audit -OutputPath $finalRevertAuditPath -RequireClean -GuestOutputRootOverride 'C:\Tools\Temp\final-revert-audit'
+    $audit.validation.final_revert_audit = Convert-AppArtifactSummary -Result $finalRevertAudit -Path $finalRevertAuditPath
+    Remove-GuestPath -GuestPath 'C:\Tools\Temp\final-revert-audit'
+
+    $shellAfterFinalRevert = Get-ShellHealthJson
+    $shellAfterFinalRevert | ConvertTo-Json -Depth 6 | Set-Content -Path $shellAfterFinalRevertPath -Encoding UTF8
+    $audit.validation.shell_after_final_revert = Convert-ShellSummary -ShellHealth $shellAfterFinalRevert -Path $shellAfterFinalRevertPath
+    if (-not $shellAfterFinalRevert.shell_healthy) {
+        throw 'Shell health check failed after the final clean-baseline revert.'
+    }
+
+    if ($SourceSnapshotName -ne $TargetSnapshotName) {
+        if (Remove-SnapshotIfExists -SnapshotName $SourceSnapshotName) {
+            $deletedSnapshots.Add($SourceSnapshotName)
         }
-
-        Invoke-Vmrun -Arguments @('-T', 'ws', 'deleteSnapshot', $VmPath, $snapshot) | Out-Null
-        $deletedSnapshots.Add($snapshot)
     }
 
-    $afterSnapshots = @(
-        Invoke-Vmrun -Arguments @('-T', 'ws', 'listSnapshots', $VmPath) -split "`r?`n" |
-        Where-Object { $_ -and $_ -notmatch '^Total snapshots:' } |
-        ForEach-Object { $_.Trim() } |
-        Where-Object { $_ }
-    )
-    Save-SnapshotList -Path $repoSnapshotListAfter -Snapshots $afterSnapshots
-    $audit.snapshot_lists.after = $afterSnapshots
+    $afterSnapshotInfo = Get-SnapshotNames
+    Save-SnapshotList -Path $snapshotsAfterPath -Snapshots $afterSnapshotInfo.names
+    $audit.snapshot_lists.after = @($afterSnapshotInfo.names)
     $audit.deleted_snapshots = @($deletedSnapshots)
     $audit.status = 'ok'
 }
@@ -297,8 +496,10 @@ $audit | ConvertTo-Json -Depth 10 | Set-Content -Path $auditPath -Encoding UTF8
 if ($audit.status -ne 'ok') {
     $errorList = @($audit.errors | Where-Object { $_ })
     if ($errorList.Count -eq 0) {
-        throw 'Defender-excluded baseline creation failed for an unknown reason.'
+        throw 'Clean baseline creation failed for an unknown reason.'
     }
 
     throw ($errorList -join '; ')
 }
+
+Write-Output $auditPath
