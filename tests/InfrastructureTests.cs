@@ -209,7 +209,6 @@ public sealed class AppSettingsTests
         Assert.False(settings.DemoTweakAlphaEnabled);
         Assert.False(settings.DemoTweakBetaEnabled);
         Assert.Equal("Dark", settings.Theme);
-        Assert.True(settings.RunStartupScanOnLaunch);
         Assert.NotNull(settings.MonitorSections);
         Assert.Empty(settings.MonitorSections);
     }

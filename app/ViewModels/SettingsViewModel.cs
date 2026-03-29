@@ -13,7 +13,6 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
     private readonly IAppLogger _appLogger;
     private readonly ThemeManager _themeManager = new();
     private ThemePalette _currentThemePalette = ThemeManager.Nord;
-    private bool _runStartupScanOnLaunch = true;
     private bool _isSaving;
     private bool _isLoading;
     private bool _isDisposed;
@@ -51,18 +50,6 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
         }
     }
 
-    public bool RunStartupScanOnLaunch
-    {
-        get => _runStartupScanOnLaunch;
-        set
-        {
-            if (SetProperty(ref _runStartupScanOnLaunch, value))
-            {
-                QueueSaveIfReady();
-            }
-        }
-    }
-
     public string StatusMessage
     {
         get => _statusMessage;
@@ -91,14 +78,12 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
         try
         {
             var settings = await _settingsStore.LoadAsync(CancellationToken.None);
-            _runStartupScanOnLaunch = settings.RunStartupScanOnLaunch;
             _currentThemePalette = AvailableThemes.FirstOrDefault(theme => theme.Name == settings.Theme) ?? ThemeManager.Nord;
 
             _themeManager.ApplyTheme(_currentThemePalette);
 
             OnPropertyChanged(nameof(CurrentThemePalette));
-            OnPropertyChanged(nameof(RunStartupScanOnLaunch));
-            StatusMessage = "Theme and startup scan preferences load automatically.";
+            StatusMessage = "Theme preference loads automatically.";
         }
         catch (Exception ex)
         {
@@ -119,13 +104,11 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
         {
             var settings = await _settingsStore.LoadAsync(CancellationToken.None);
             var previousTheme = settings.Theme;
-            var previousStartupScan = settings.RunStartupScanOnLaunch;
 
             settings.Theme = CurrentThemePalette.Name;
-            settings.RunStartupScanOnLaunch = RunStartupScanOnLaunch;
 
             await _settingsStore.SaveAsync(settings, CancellationToken.None);
-            LogSettingsChanges(previousTheme, previousStartupScan, settings);
+            LogSettingsChanges(previousTheme, settings);
             StatusMessage = "Changes saved automatically.";
         }
         catch (Exception ex)
@@ -138,18 +121,13 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private void LogSettingsChanges(string previousTheme, bool previousStartupScan, AppSettings current)
+    private void LogSettingsChanges(string previousTheme, AppSettings current)
     {
         var changes = new List<string>();
 
         if (!string.Equals(previousTheme, current.Theme, StringComparison.OrdinalIgnoreCase))
         {
             changes.Add($"Theme={current.Theme}");
-        }
-
-        if (previousStartupScan != current.RunStartupScanOnLaunch)
-        {
-            changes.Add($"StartupScan={(current.RunStartupScanOnLaunch ? "On" : "Off")}");
         }
 
         if (changes.Count == 0)

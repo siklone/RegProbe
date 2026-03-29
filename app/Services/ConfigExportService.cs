@@ -171,8 +171,7 @@ public class ConfigExportService
         var settings = await _settingsStore.LoadAsync(CancellationToken.None);
         return new Dictionary<string, object>
         {
-            ["Theme"] = settings.Theme,
-            ["RunStartupScanOnLaunch"] = settings.RunStartupScanOnLaunch
+            ["Theme"] = settings.Theme
         };
     }
 
@@ -249,11 +248,6 @@ public class ConfigExportService
             current.Theme = theme;
         }
 
-        if (TryReadBool(settings, "RunStartupScanOnLaunch", out var runStartupScan))
-        {
-            current.RunStartupScanOnLaunch = runStartupScan;
-        }
-
         await _settingsStore.SaveAsync(current, CancellationToken.None);
         return true;
     }
@@ -281,29 +275,6 @@ public class ConfigExportService
         return false;
     }
 
-    private static bool TryReadBool(Dictionary<string, object> settings, string key, out bool value)
-    {
-        value = false;
-        if (!settings.TryGetValue(key, out var raw) || raw == null)
-        {
-            return false;
-        }
-
-        if (raw is bool flag)
-        {
-            value = flag;
-            return true;
-        }
-
-        if (raw is JsonElement element &&
-            (element.ValueKind == JsonValueKind.True || element.ValueKind == JsonValueKind.False))
-        {
-            value = element.GetBoolean();
-            return true;
-        }
-
-        return false;
-    }
 }
 
 public class ExportOptions

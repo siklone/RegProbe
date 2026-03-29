@@ -28,7 +28,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     private int _pendingRollbackCount;
     private string _pendingRollbackMessage = string.Empty;
     private bool _isRecovering;
-    private bool _isStartupScanActive;
 
     public MainViewModel()
     {
@@ -200,35 +199,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         }
     }
 
-    public bool IsStartupScanActive
-    {
-        get => _isStartupScanActive;
-        private set => SetProperty(ref _isStartupScanActive, value);
-    }
-
-    public async Task RunStartupScanAsync(IProgress<StartupScanProgress>? progress = null, CancellationToken ct = default)
-    {
-        if (IsStartupScanActive)
-        {
-            return;
-        }
-
-        IsStartupScanActive = true;
-        try
-        {
-            await _workspaceViewModel.DetectAllTweaksAsync(progress, ct, isStartupScan: true, forceRedetect: true, skipElevationPrompts: true, skipExpensiveOperations: true);
-            QueueBackgroundInventoryRefresh();
-        }
-        catch (Exception ex)
-        {
-            LogToFile($"Startup scan failed: {ex.Message}");
-        }
-        finally
-        {
-            IsStartupScanActive = false;
-        }
-    }
-
     public void Dispose()
     {
         _workspaceViewModel.PropertyChanged -= OnWorkspaceViewModelPropertyChanged;
@@ -242,29 +212,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
         {
             settingsDisposable.Dispose();
         }
-    }
-
-    private void QueueBackgroundInventoryRefresh()
-    {
-        var dispatcher = Application.Current?.Dispatcher;
-        if (dispatcher == null)
-        {
-            _ = _workspaceViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
-            return;
-        }
-
-        _ = dispatcher.InvokeAsync(async () =>
-        {
-            try
-            {
-                await Task.Delay(250);
-                await _workspaceViewModel.RefreshInventoryInBackgroundAsync(CancellationToken.None);
-            }
-            catch (Exception ex)
-            {
-                LogToFile($"Background inventory refresh failed: {ex.Message}");
-            }
-        }, DispatcherPriority.ContextIdle);
     }
 
     private void ShowConfiguration()

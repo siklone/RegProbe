@@ -2284,22 +2284,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         // Sync logic to match imported IDs with existing tweaks
     }
 
-    /// <summary>
-    /// Detects all tweaks in all categories. Used by Dashboard's Scan Now button.
-    /// </summary>
     public async Task DetectAllTweaksAsync(
-        IProgress<StartupScanProgress>? progress = null,
         CancellationToken ct = default,
-        bool isStartupScan = false,
         bool forceRedetect = false,
         bool skipElevationPrompts = false,
         bool skipExpensiveOperations = false)
     {
         IEnumerable<TweakItemViewModel> candidates = Tweaks;
-        if (isStartupScan)
-        {
-            candidates = candidates.Where(t => t.IsStartupScanEligible);
-        }
 
         if (skipExpensiveOperations)
         {
@@ -2312,22 +2303,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
 
         var tweaksToScan = candidates.ToList();
-        var perTweakTimeout = isStartupScan
-            ? TimeSpan.FromSeconds(2)
-            : TimeSpan.FromSeconds(6);
-
-        // Wait for all detection to complete by detecting each tweak directly
-        var totalTweaks = tweaksToScan.Count;
-        var currentIndex = 0;
-        progress?.Report(new StartupScanProgress(0, totalTweaks));
+        var perTweakTimeout = TimeSpan.FromSeconds(6);
 
         foreach (var tweak in tweaksToScan)
         {
             try
             {
                 ct.ThrowIfCancellationRequested();
-                currentIndex++;
-                progress?.Report(new StartupScanProgress(currentIndex, totalTweaks, tweak.Name));
                 if (forceRedetect || tweak.AppliedStatus == TweakAppliedStatus.Unknown)
                 {
                     using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
@@ -2348,8 +2330,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 // Silently ignore detection failures for individual tweaks
             }
         }
-
-        progress?.Report(new StartupScanProgress(totalTweaks, totalTweaks));
         SaveInventorySnapshot();
         UpdateInventoryStatusMessage();
 
@@ -2360,7 +2340,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(HealthCalculationSummary));
         OnPropertyChanged(nameof(HealthStatusMessage));
 
-        if (!isStartupScan && !skipElevationPrompts && !skipExpensiveOperations)
+        if (!skipElevationPrompts && !skipExpensiveOperations)
         {
             foreach (var category in CategoryGroups)
             {
@@ -2381,9 +2361,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         try
         {
             await DetectAllTweaksAsync(
-                progress: null,
                 ct: ct,
-                isStartupScan: false,
                 forceRedetect: true,
                 skipElevationPrompts: true,
                 skipExpensiveOperations: false);

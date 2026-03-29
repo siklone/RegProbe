@@ -8,7 +8,6 @@ public sealed class AppSettings
     public bool DemoTweakAlphaEnabled { get; set; }
     public bool DemoTweakBetaEnabled { get; set; }
     public string Theme { get; set; } = "Dark";
-    public bool RunStartupScanOnLaunch { get; set; } = true;
     public List<MonitorSectionState> MonitorSections { get; set; } = new();
 }
 

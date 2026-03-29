@@ -56,8 +56,6 @@ public partial class App : Application
             mainWindow.Show();
             await Dispatcher.Yield(DispatcherPriority.Render);
             mainWindow.Activate();
-
-            QueueDeferredStartupWork(settings, mainWindow);
         }
         catch (Exception ex)
         {
@@ -73,50 +71,6 @@ public partial class App : Application
             MainWindow.Opacity = 1;
             MainWindow.Show();
             MainWindow.Activate();
-        }
-    }
-
-    private void QueueDeferredStartupWork(AppSettings settings, MainWindow mainWindow)
-    {
-        _ = Dispatcher.InvokeAsync(() =>
-        {
-            _ = RunDeferredBackgroundWorkAsync();
-
-            if (settings.RunStartupScanOnLaunch && mainWindow.DataContext is MainViewModel mainVm)
-            {
-                _ = RunDeferredStartupScanAsync(mainVm);
-            }
-        }, DispatcherPriority.ContextIdle);
-    }
-
-    private static async Task RunDeferredBackgroundWorkAsync()
-    {
-        try
-        {
-            AppDiagnostics.Log("[APP] Starting deferred startup work");
-            using var timeoutCts = new CancellationTokenSource(TimeSpan.FromSeconds(12));
-            var scanPaths = AppPaths.FromEnvironment();
-            using var scanService = new NohutoRepoScanService(scanPaths);
-            var result = await scanService.CheckAndAnalyzeAsync(timeoutCts.Token, TimeSpan.FromHours(2));
-            AppDiagnostics.Log($"[NohutoScan] {result.Summary}");
-            AppDiagnostics.Log("[APP] Deferred startup work complete");
-        }
-        catch (Exception ex)
-        {
-            AppDiagnostics.LogException("Deferred startup work failed", ex);
-        }
-    }
-
-    private static async Task RunDeferredStartupScanAsync(MainViewModel mainVm)
-    {
-        try
-        {
-            await Task.Delay(150);
-            await mainVm.RunStartupScanAsync(null, CancellationToken.None);
-        }
-        catch (Exception ex)
-        {
-            AppDiagnostics.LogException("Deferred startup scan failed", ex);
         }
     }
 

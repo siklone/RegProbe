@@ -93,91 +93,47 @@
                            Foreground="#FFFFFF"/>
                 <TextBlock Margin="0,6,0,0"
                            Style="{StaticResource SectionBodyTextStyle}"
-                           Text="Only theme and startup scan preferences live here. Changes save as soon as you make them."/>
+                           Text="Theme preferences live here. Changes save as soon as you make them."/>
             </StackPanel>
 
             <Border Grid.Row="1"
                     BorderBrush="#171717"
                     BorderThickness="0,1,0,1"
                     Padding="0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <Grid Margin="0,14,0,14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="220"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Row="0"
-                          Margin="0,14,0,14">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,20,0">
+                        <TextBlock Text="Theme"
+                                   Style="{StaticResource SectionEyebrowTextStyle}"/>
+                        <TextBlock Text="Palette"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource SectionTitleTextStyle}"/>
+                    </StackPanel>
 
-                        <StackPanel Margin="0,0,20,0">
-                            <TextBlock Text="Theme"
-                                       Style="{StaticResource SectionEyebrowTextStyle}"/>
-                            <TextBlock Text="Palette"
-                                       Margin="0,5,0,0"
-                                       Style="{StaticResource SectionTitleTextStyle}"/>
-                        </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Margin="0,0,0,10"
+                                   Style="{StaticResource SectionBodyTextStyle}"
+                                   Text="Choose the accent palette used across the shell and workspace surfaces."/>
 
-                        <StackPanel Grid.Column="1">
-                            <TextBlock Margin="0,0,0,10"
-                                       Style="{StaticResource SectionBodyTextStyle}"
-                                       Text="Choose the accent palette used across the shell and workspace surfaces."/>
-
-                            <ListBox ItemsSource="{Binding AvailableThemes}"
-                                     SelectedItem="{Binding CurrentThemePalette, Mode=TwoWay}"
-                                     Style="{StaticResource ThemePickerListStyle}"
-                                     ItemContainerStyle="{StaticResource ThemePickerItemStyle}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type services:ThemePalette}">
-                                        <TextBlock Text="{Binding Name}"
-                                                   FontSize="12"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="#EAEAEA"
-                                                   HorizontalAlignment="Center"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </Grid>
-
-                    <Border Grid.Row="1"
-                            BorderBrush="#171717"
-                            BorderThickness="0,1,0,0">
-                        <Grid Margin="0,14,0,14">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="220"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Margin="0,0,20,0">
-                                <TextBlock Text="Launch"
-                                           Style="{StaticResource SectionEyebrowTextStyle}"/>
-                                <TextBlock Text="Startup scan"
-                                           Margin="0,5,0,0"
-                                           Style="{StaticResource SectionTitleTextStyle}"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="1"
-                                        Margin="0,0,20,0">
-                                <TextBlock Text="Run startup scan on launch"
-                                           FontSize="13"
-                                           FontWeight="SemiBold"
-                                           Foreground="#F0F0F0"/>
-                                <TextBlock Margin="0,4,0,0"
-                                           Style="{StaticResource SectionBodyTextStyle}"
-                                           Text="Performs a quick detect pass after the shell loads so the workspace starts with fresher state."/>
-                            </StackPanel>
-
-                            <CheckBox Grid.Column="2"
-                                      VerticalAlignment="Center"
-                                      Style="{StaticResource ToggleSwitchStyle}"
-                                      IsChecked="{Binding RunStartupScanOnLaunch, Mode=TwoWay}"/>
-                        </Grid>
-                    </Border>
+                        <ListBox ItemsSource="{Binding AvailableThemes}"
+                                 SelectedItem="{Binding CurrentThemePalette, Mode=TwoWay}"
+                                 Style="{StaticResource ThemePickerListStyle}"
+                                 ItemContainerStyle="{StaticResource ThemePickerItemStyle}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type services:ThemePalette}">
+                                    <TextBlock Text="{Binding Name}"
+                                               FontSize="12"
+                                               FontWeight="SemiBold"
+                                               Foreground="#EAEAEA"
+                                               HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
                 </Grid>
             </Border>
 
