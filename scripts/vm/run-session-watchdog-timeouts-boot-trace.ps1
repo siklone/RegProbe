@@ -515,7 +515,10 @@ try {
     }
 
     $summary.raw_etl_captured = [bool](Test-Path $hostEtlPath)
-    if (-not $summary.raw_etl_captured) {
+    if ($summary.raw_etl_captured -and $copyStatus -eq 'failed') {
+        $copyStatus = 'ok-with-timeout'
+    }
+    elseif (-not $summary.raw_etl_captured) {
         $probeFailed = $true
         if ($copyStatus -eq 'ok') {
             $copyStatus = 'missing'

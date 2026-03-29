@@ -1,19 +1,19 @@
 {
-  "generated_utc": "2026-03-29T00:24:32.0000000Z",
+  "generated_utc": "2026-03-29T05:57:02.0683170Z",
   "record_id": "power.session-watchdog-timeouts",
   "lane_label": "power.session-watchdog-timeouts",
   "snapshot_name": "RegProbe-Baseline-20260328",
   "migration_source_script": "scripts/vm/run-session-watchdog-timeouts-boot-trace.ps1",
-  "stepwise_propagation_status": "partial-success",
-  "failed_step": "copy",
+  "stepwise_propagation_status": "success",
+  "failed_step": null,
   "artifacts": {
-    "summary": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/summary.json",
-    "session": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/session.json",
-    "step_arm": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-arm-summary.json",
-    "step_boot": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-boot-summary.json",
-    "step_stop": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-stop-summary.json",
-    "step_etl": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-etl-summary.json",
-    "step_copy": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/step-copy-summary.json",
+    "summary": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/summary.json",
+    "session": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/session.json",
+    "step_arm": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-arm-summary.json",
+    "step_boot": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-boot-summary.json",
+    "step_stop": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-stop-summary.json",
+    "step_etl": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-etl-summary.json",
+    "step_copy": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-copy-summary.json",
     "note": "research/notes/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.md"
   },
   "result": {
@@ -21,11 +21,11 @@
     "boot": "ok",
     "stop": "ok",
     "etl": "ok",
-    "copy": "failed"
+    "copy": "ok-with-timeout"
   },
   "notes": [
-    "The propagated stepwise shape now exposes the watchdog lane's first failing primitive explicitly.",
-    "The guest-side ETL existed and the baseline values stayed stable across the rebooted trace.",
-    "The remaining problem for this lane is raw ETL copy-back, not WPR stop or guest-side ETL creation."
+    "The propagated stepwise shape now completes natively on the excluded baseline and emits summary plus session files without manual normalization.",
+    "The guest-side ETL existed, the host ETL also materialized, and the baseline values stayed stable across the rebooted trace.",
+    "The remaining nuance for this lane is not opaque failure anymore; it is an inspectable copy-back timeout edge case that can be tuned independently."
   ]
 }

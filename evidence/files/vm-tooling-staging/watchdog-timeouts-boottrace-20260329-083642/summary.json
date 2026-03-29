@@ -1,0 +1,78 @@
+﻿{
+    "generated_utc":  "2026-03-29T05:36:42.3987976Z",
+    "probe_name":  "watchdog-timeouts-boottrace-20260329-083642",
+    "lane_label":  "power.session-watchdog-timeouts",
+    "snapshot_name":  "RegProbe-Baseline-20260328",
+    "host_output_root":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642",
+    "status":  "ok",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-29T05:39:44.1535071Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  true
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-29T05:57:01.9960767Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "boot_cycle":  {
+                       "previous_last_boot_utc":  "2026-03-25T14:14:21.5000000+03:00",
+                       "current_last_boot_utc":  "2026-03-29T08:41:58.5000000+03:00",
+                       "stop_mode":  "soft"
+                   },
+    "summary":  {
+                    "generated_utc":  "2026-03-29T05:53:56.4542978Z",
+                    "lane_label":  "power.session-watchdog-timeouts",
+                    "phase":  "completed",
+                    "guest_root":  "C:\\Tools\\ValidationController\\watchdog-timeouts-boottrace\\watchdog-timeouts-boottrace-20260329-083642",
+                    "guest_etl_path":  "C:\\Tools\\ValidationController\\watchdog-timeouts-boottrace\\watchdog-timeouts-boottrace-20260329-083642\\watchdog-timeouts-boot.etl",
+                    "baseline":  {
+                                     "WatchdogResumeTimeout":  120,
+                                     "WatchdogSleepTimeout":  300,
+                                     "PowerSettingProfile":  0
+                                 },
+                    "after_boot":  {
+                                       "WatchdogResumeTimeout":  120,
+                                       "WatchdogSleepTimeout":  300,
+                                       "PowerSettingProfile":  0
+                                   },
+                    "etl_exists":  true
+                },
+    "raw_etl_captured":  true,
+    "repo_etl_placeholder":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/watchdog-timeouts-boot.etl.md",
+    "recovery":  {
+                     "performed":  false,
+                     "shell_healthy_after_recovery":  false
+                 },
+    "step_summary_files":  {
+                               "arm":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-arm-summary.json",
+                               "boot":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-boot-summary.json",
+                               "stop":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-stop-summary.json",
+                               "etl":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-etl-summary.json",
+                               "copy":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/step-copy-summary.json",
+                               "session":  "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/session.json"
+                           },
+    "errors":  [
+
+               ]
+}

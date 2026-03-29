@@ -3,15 +3,15 @@
 ## Summary
 
 - The watchdog boot-trace lane is now migrated to the same explicit step-summary shape used by the CPU idle lane.
-- The first propagated run used the canonical excluded baseline `RegProbe-Baseline-20260328`.
-- The run isolated its first failing primitive clearly: guest-side ETL creation succeeded, but raw ETL copy-back to the host did not complete.
+- A final native run on the canonical excluded baseline `RegProbe-Baseline-20260328` completed all visible steps and produced a full `summary.json` plus `session.json` package.
+- The lane still exposes copy-back nuance clearly: the bounded copy helper timed out, but the host ETL still materialized, so the step is now treated as degraded rather than opaque failure.
 
-## Stepwise evidence package
+## Final native stepwise package
 
 - Summary:
-  - `evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/summary.json`
+  - `evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/summary.json`
 - Session:
-  - `evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-024632/session.json`
+  - `evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260329-083642/session.json`
 - Step summaries:
   - `step-arm-summary.json`
   - `step-boot-summary.json`
@@ -25,18 +25,19 @@
 - `boot` completed successfully with a host-driven soft stop/start cycle
 - `stop` completed successfully
 - `etl` completed successfully and confirmed that the watchdog ETL existed in the guest
-- `copy` is the first failing primitive for this migrated lane
+- `copy` completed in a degraded form: the bounded helper reported a timeout, but the host ETL still existed by the time the step summary was written
 
 ## Why this matters
 
-The old monolithic watchdog boot-trace lane could tell us only that the end-to-end run was flaky. The migrated lane now shows where it breaks:
+The old monolithic watchdog boot-trace lane could tell us only that the end-to-end run was flaky. The migrated lane now shows what each primitive did:
 
 - not at snapshot revert
 - not at reboot detection
 - not at `WPR stop`
 - not at guest-side ETL existence
-- but at raw ETL copy-back
+- and not at opaque ETL loss
+- but at a bounded, inspectable copy-back edge case when the raw host ETL takes too long to acknowledge completion
 
-That is exactly the propagation goal of the CPU idle stepwise pattern: turn a vague reboot/WPR failure into a named failing primitive that can be fixed independently.
+That is exactly the propagation goal of the CPU idle stepwise pattern: turn a vague reboot/WPR failure into named primitives that can be fixed independently.
 
-A second rerun on the same excluded baseline also stayed within the stepwise shape but timed out one step earlier, during `stop`. That reinforces the same conclusion: the migrated lane no longer fails as an opaque monolith, and the remaining volatility is now visible at named substeps.
+Earlier propagated attempts at `watchdog-timeouts-boottrace-20260329-024632` and `watchdog-timeouts-boottrace-20260329-031816` are still useful historical evidence because they exposed the same lane before the longer host timeout was allowed. The final native run closes that gap and confirms that the stepwise shape itself is sound on the excluded baseline.
