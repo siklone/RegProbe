@@ -73,12 +73,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 	private readonly IRegistryAccessor _elevatedRegistryAccessor;
     private readonly IRegistryAccessor _scanAwareElevatedRegistryAccessor;
 	private readonly IServiceManager _elevatedServiceManager;
-	private readonly IScheduledTaskManager _elevatedTaskManager;
+    private readonly IScheduledTaskManager _elevatedTaskManager;
     private readonly IFileSystemAccessor _elevatedFileSystemAccessor;
     private readonly ICommandRunner _elevatedCommandRunner;
-    private string _exportStatusMessage = "Logs are ready to export.";
     private string _bulkStatusMessage = "Bulk actions are idle.";
-    private bool _isExporting;
     private bool _isBulkRunning;
     private int _bulkProgressCurrent;
     private int _bulkProgressTotal;
@@ -94,17 +92,14 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private bool _isApplyingCachedInventory;
     private bool _isBackgroundRefreshRunning;
     private string _inventoryStatusMessage = "Status check not available yet.";
-    private readonly string _logFolderPath;
     private readonly IProfileSyncService _syncService = new ProfileSyncService();
     private readonly PluginLoader _pluginLoader = new();
-    private readonly string _tweakLogFilePath;
-    private long _logFileSizeBytes;
-    private readonly IProfileManager _profileManager;
     private readonly TweakExecutionPipeline _pipeline;
     private readonly IEnumerable<ITweakProvider>? _providerList;
     private readonly IRollbackStateStore _rollbackStore;
     private readonly ConfigurationWorkspaceClassifier _workspaceClassifier = new();
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
+    private readonly WorkspaceOperationsCoordinator _operationsCoordinator;
     private readonly WorkspaceSupportCoordinator _supportCoordinator;
     private readonly WorkspaceActionCoordinator _workspaceActionCoordinator;
     private readonly IAppLogger _appLogger;
@@ -153,10 +148,15 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         paths.EnsureDirectories();
         _appLogger = new FileAppLogger(paths);
         var logger = _appLogger;
-        _logFolderPath = paths.LogDirectory;
-        _tweakLogFilePath = paths.TweakLogFilePath;
         _logStore = new FileTweakLogStore(paths);
-        _profileManager = new ProfileManager(paths);
+        var profileManager = new ProfileManager(paths);
+        _operationsCoordinator = new WorkspaceOperationsCoordinator(
+            _logStore,
+            profileManager,
+            _appLogger,
+            paths.LogDirectory,
+            paths.TweakLogFilePath);
+        _operationsCoordinator.PropertyChanged += OnOperationsCoordinatorPropertyChanged;
         _rollbackStore = new RollbackStateStore(paths);
         _favoritesStore = new FavoritesStore(paths);
         _inventoryStateStore = new TweakInventoryStateStore(paths);
@@ -201,7 +201,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Risk), ListSortDirection.Ascending));
         RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Name), ListSortDirection.Ascending));
 
-        _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
+        _exportLogsCommand = new RelayCommand(_ => _ = _operationsCoordinator.ExportLogsAsync(), _ => !IsExporting);
         _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", GetAllFilteredTweaks, (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
         _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Apply", GetAllActionableFilteredTweaks, (item, token) => item.RunApplyAsync(token)), _ => CanRunBulkMutating(GetAllActionableFilteredTweaks));
         _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", GetAllFilteredTweaks, (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
@@ -221,11 +221,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _rollbackSelectedCommand = new RelayCommand(
             _ => _ = RunBulkAsync("Rollback Selected", GetSelectedActionableTweaks, (item, token) => item.RunRollbackAsync(token)),
             _ => CanRunBulkMutating(GetSelectedActionableTweaks));
-        _loadPresetCommand = new RelayCommand(async parameter => await LoadPresetAsync(parameter));
+        _loadPresetCommand = new RelayCommand(async parameter => await _operationsCoordinator.LoadPresetAsync(parameter, Tweaks));
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _clearCategorySelectionCommand = new RelayCommand(_ => SelectedCategoryName = string.Empty);
-        _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
-        _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
+        _openLogFolderCommand = new RelayCommand(_ => _operationsCoordinator.OpenLogFolder());
+        _openCsvLogCommand = new RelayCommand(_ => _operationsCoordinator.OpenCsvLog());
         _openDocsCoverageReportCommand = new RelayCommand(_ => _supportCoordinator.OpenDocsCoverageReport());
         _openProvenanceReportCommand = new RelayCommand(_ => _supportCoordinator.OpenProvenanceReport());
         _filterAppliedCommand = new RelayCommand(_ => _configurationCoordinator.ShowAppliedOnly());
@@ -234,9 +234,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _showMaintenanceWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance);
         _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
         _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
-        ExportPresetCommand = new RelayCommand(async _ => await ExportPresetsAsync());
-        ImportPresetCommand = new RelayCommand(async _ => await ImportPresetsAsync());
-        CreateSnapshotCommand = new RelayCommand(_ => CreateSnapshot());
+        ExportPresetCommand = new RelayCommand(async _ => await _operationsCoordinator.ExportPresetsAsync(Tweaks));
+        ImportPresetCommand = new RelayCommand(async _ => await _operationsCoordinator.ImportPresetsAsync(Tweaks));
+        CreateSnapshotCommand = new RelayCommand(_ => _operationsCoordinator.CreateSnapshot());
         SetTabCommand = new RelayCommand(param =>
         {
             if (param is string tabName)
@@ -252,7 +252,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         UpdateFilterSummary();
         _supportCoordinator.Initialize(Tweaks);
         RefreshSummaryStats();
-        _ = InitializePresetsAsync();
+        _ = _operationsCoordinator.InitializePresetsAsync();
 
     }
 
@@ -563,13 +563,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public int TweaksRolledBack => _presentationState.TweaksRolledBack;
 
-    public long LogFileSizeBytes
-    {
-        get => _logFileSizeBytes;
-        private set => SetProperty(ref _logFileSizeBytes, value);
-    }
+    public long LogFileSizeBytes => _operationsCoordinator.LogFileSizeBytes;
 
-    public string LogFileSizeFormatted => FormatBytes(LogFileSizeBytes);
+    public string LogFileSizeFormatted => _operationsCoordinator.LogFileSizeFormatted;
 
     public int DocsMissingCount => _supportCoordinator.DocsMissingCount;
 
@@ -624,11 +620,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         !tweak.Id.StartsWith("demo.", StringComparison.OrdinalIgnoreCase)
         && tweak.Risk != TweakRiskLevel.Risky;
 
-    public string ExportStatusMessage
-    {
-        get => _exportStatusMessage;
-        private set => SetProperty(ref _exportStatusMessage, value);
-    }
+    public string ExportStatusMessage => _operationsCoordinator.ExportStatusMessage;
 
     public string BulkStatusMessage
     {
@@ -642,17 +634,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         private set => SetProperty(ref _inventoryStatusMessage, value);
     }
 
-    public bool IsExporting
-    {
-        get => _isExporting;
-        private set
-        {
-            if (SetProperty(ref _isExporting, value))
-            {
-                _exportLogsCommand.RaiseCanExecuteChanged();
-            }
-        }
-    }
+    public bool IsExporting => _operationsCoordinator.IsExporting;
 
     public bool IsBulkRunning
     {
@@ -827,44 +809,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string FilterSummary => _presentationState.FilterSummary;
 
     public bool HasVisibleTweaks => _presentationState.HasVisibleTweaks;
-
-
-    private async Task ExportLogsAsync()
-    {
-        if (IsExporting)
-        {
-            return;
-        }
-
-        var dialog = new SaveFileDialog
-        {
-            Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
-            FileName = "configuration-log.csv",
-            Title = "Export activity logs"
-        };
-
-        if (dialog.ShowDialog() != true)
-        {
-            ExportStatusMessage = "Export cancelled.";
-            return;
-        }
-
-        IsExporting = true;
-        try
-        {
-            await _logStore.ExportCsvAsync(dialog.FileName, CancellationToken.None);
-            ExportStatusMessage = $"Exported to {dialog.FileName}.";
-            _appLogger.Log(LogLevel.Info, $"Activity: Logs - Tweak log exported ({dialog.FileName})");
-        }
-        catch (Exception ex)
-        {
-            ExportStatusMessage = $"Export failed: {ex.Message}";
-        }
-        finally
-        {
-            IsExporting = false;
-        }
-    }
 
     private bool CanRunBulkInspectable(Func<List<TweakItemViewModel>> getTweaks)
     {
@@ -1337,6 +1281,21 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(e.PropertyName);
     }
 
+    private void OnOperationsCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            return;
+        }
+
+        OnPropertyChanged(e.PropertyName);
+
+        if (e.PropertyName == nameof(WorkspaceOperationsCoordinator.IsExporting))
+        {
+            _exportLogsCommand.RaiseCanExecuteChanged();
+        }
+    }
+
     private void RaiseWorkspaceMetricsChanged()
     {
         OnPropertyChanged(nameof(SettingsWorkspaceCount));
@@ -1573,64 +1532,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void RefreshLogFileSize()
     {
-        if (!File.Exists(_tweakLogFilePath))
-        {
-            LogFileSizeBytes = 0;
-            return;
-        }
-
-        try
-        {
-            LogFileSizeBytes = new FileInfo(_tweakLogFilePath).Length;
-        }
-        catch
-        {
-            LogFileSizeBytes = 0;
-        }
-    }
-
-    private void OpenLogFolder()
-    {
-        try
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = _logFolderPath,
-                UseShellExecute = true
-            });
-
-            ExportStatusMessage = $"Opened log folder: {_logFolderPath}.";
-            _appLogger.Log(LogLevel.Info, $"Activity: Logs - Log folder opened ({_logFolderPath})");
-        }
-        catch (Exception ex)
-        {
-            ExportStatusMessage = $"Open log folder failed: {ex.Message}";
-        }
-    }
-
-    private void OpenCsvLog()
-    {
-        try
-        {
-            if (!File.Exists(_tweakLogFilePath))
-            {
-                ExportStatusMessage = "No tweak log file yet. Run a tweak to generate one.";
-                return;
-            }
-
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = _tweakLogFilePath,
-                UseShellExecute = true
-            });
-
-            ExportStatusMessage = $"Opened log file: {_tweakLogFilePath}.";
-            _appLogger.Log(LogLevel.Info, $"Activity: Logs - Tweak log opened ({_tweakLogFilePath})");
-        }
-        catch (Exception ex)
-        {
-            ExportStatusMessage = $"Open log failed: {ex.Message}";
-        }
+        _operationsCoordinator.RefreshLogFileSize();
     }
 
     private void SetDetailsExpanded(bool isExpanded)
@@ -1639,164 +1541,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             item.IsDetailsExpanded = isExpanded;
         }
-    }
-
-    private static string FormatBytes(long bytes)
-    {
-        if (bytes < 1024)
-            return $"{bytes} B";
-        if (bytes < 1024 * 1024)
-            return $"{bytes / 1024.0:F2} KB";
-        if (bytes < 1024 * 1024 * 1024)
-            return $"{bytes / (1024.0 * 1024.0):F2} MB";
-        return $"{bytes / (1024.0 * 1024.0 * 1024.0):F2} GB";
-    }
-
-    private async Task ExportPresetsAsync()
-    {
-        try
-        {
-            var dialog = new SaveFileDialog
-            {
-                Filter = "Optimizer Profile (*.json)|*.json|All Files (*.*)|*.*",
-                FileName = $"optimizer_profile_{DateTime.Now:yyyyMMdd_HHmmss}.json",
-                Title = "Export Profile"
-            };
-
-            if (dialog.ShowDialog() != true)
-            {
-                return;
-            }
-
-            var selectedIds = Tweaks.Where(t => t.IsSelected).Select(t => t.Id).ToList();
-            var appliedIds = Tweaks.Where(t => t.AppliedStatus == TweakAppliedStatus.Applied).Select(t => t.Id).ToList();
-
-            var profile = new Core.Models.TweakProfile
-            {
-                Name = Path.GetFileNameWithoutExtension(dialog.FileName),
-                Description = $"Custom profile exported on {DateTime.Now:yyyy-MM-dd HH:mm}",
-                Author = "User",
-                CreatedDate = DateTime.Now,
-                Version = "1.0",
-                SelectedTweakIds = selectedIds.Count > 0 ? selectedIds : appliedIds,
-                AppliedTweakIds = appliedIds,
-                Metadata = new Core.Models.ProfileMetadata
-                {
-                    TargetUseCase = "Custom",
-                    TotalTweakCount = selectedIds.Count > 0 ? selectedIds.Count : appliedIds.Count,
-                    TweaksByCategory = new Dictionary<string, int>(),
-                    TweaksByRiskLevel = new Dictionary<string, int>()
-                }
-            };
-
-            await _profileManager.SaveProfileAsync(profile, dialog.FileName);
-            ExportStatusMessage = $"Profile exported successfully to {Path.GetFileName(dialog.FileName)}";
-        }
-        catch (Exception ex)
-        {
-            ExportStatusMessage = $"Export failed: {ex.Message}";
-        }
-    }
-
-    private async Task ImportPresetsAsync()
-    {
-        try
-        {
-            var dialog = new OpenFileDialog
-            {
-                Filter = "Optimizer Profile (*.json)|*.json|All Files (*.*)|*.*",
-                Title = "Import Profile"
-            };
-
-            if (dialog.ShowDialog() != true)
-            {
-                return;
-            }
-
-            var profile = await _profileManager.LoadProfileAsync(dialog.FileName);
-
-            // Clear current selections
-            foreach (var tweak in Tweaks)
-            {
-                tweak.IsSelected = false;
-            }
-
-            // Mark tweaks as selected based on profile
-            int selectedCount = 0;
-            foreach (var id in profile.SelectedTweakIds)
-            {
-                var tweak = Tweaks.FirstOrDefault(t => t.Id == id);
-                if (tweak != null)
-                {
-                    tweak.IsSelected = true;
-                    tweak.IsDetailsExpanded = true;
-                    selectedCount++;
-                }
-            }
-
-            ExportStatusMessage = $"Imported profile '{profile.Name}': {selectedCount}/{profile.SelectedTweakIds.Count} tweaks selected. Ready to apply.";
-        }
-        catch (Exception ex)
-        {
-            ExportStatusMessage = $"Import failed: {ex.Message}";
-        }
-    }
-
-    private async Task LoadPresetAsync(object? parameter)
-    {
-        try
-        {
-            var presetName = parameter as string;
-            if (string.IsNullOrEmpty(presetName))
-            {
-                return;
-            }
-
-            var profile = await _profileManager.CreatePresetAsync(presetName);
-
-            // Clear current selections
-            foreach (var tweak in Tweaks)
-            {
-                tweak.IsSelected = false;
-            }
-
-            // Mark tweaks as selected based on preset
-            int selectedCount = 0;
-            foreach (var id in profile.SelectedTweakIds)
-            {
-                var tweak = Tweaks.FirstOrDefault(t => t.Id == id);
-                if (tweak != null)
-                {
-                    tweak.IsSelected = true;
-                    selectedCount++;
-                }
-            }
-
-            ExportStatusMessage = $"Loaded '{profile.Name}' preset: {selectedCount}/{profile.SelectedTweakIds.Count} tweaks selected.";
-        }
-        catch (Exception ex)
-        {
-            ExportStatusMessage = $"Failed to load preset: {ex.Message}";
-        }
-    }
-
-    private async Task InitializePresetsAsync()
-    {
-        try
-        {
-            await _profileManager.InitializePresetsAsync();
-        }
-        catch (Exception ex)
-        {
-            // Silently fail - presets are not critical
-            Debug.WriteLine($"Failed to initialize presets: {ex.Message}");
-        }
-    }
-
-    private void CreateSnapshot()
-    {
-        // Simulate Registry Snapshot
-        ExportStatusMessage = $"Registry Snapshot created: {DateTime.Now:yyyyMMdd_HHmm}.";
     }
 
     private void SetBulkLock(bool isLocked)
@@ -1977,6 +1721,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _shellState.PropertyChanged -= OnShellStatePropertyChanged;
         _presentationState.PropertyChanged -= OnPresentationStatePropertyChanged;
         _supportCoordinator.PropertyChanged -= OnSupportCoordinatorPropertyChanged;
+        _operationsCoordinator.PropertyChanged -= OnOperationsCoordinatorPropertyChanged;
         Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
 
         // Unsubscribe tweak property changed events
