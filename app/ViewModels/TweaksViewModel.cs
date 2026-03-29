@@ -93,6 +93,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private int _selectedCount;
     private readonly TweaksShellStateViewModel _shellState = new();
     private readonly TweaksPresentationStateViewModel _presentationState = new();
+    private readonly ObservableCollection<RepairsItemViewModel> _repairsRows = new();
     private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
     private readonly IFavoritesStore _favoritesStore;
     private readonly ITweakInventoryStateStore _inventoryStateStore;
@@ -206,6 +207,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         TweaksView.Filter = FilterTweaks;
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Risk), ListSortDirection.Ascending));
         TweaksView.SortDescriptions.Add(new SortDescription(nameof(TweakItemViewModel.Name), ListSortDirection.Ascending));
+        RepairsRowsView = CollectionViewSource.GetDefaultView(_repairsRows);
+        RepairsRowsView.Filter = FilterRepairsRows;
+        RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Risk), ListSortDirection.Ascending));
+        RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Name), ListSortDirection.Ascending));
 
         _exportLogsCommand = new RelayCommand(_ => _ = ExportLogsAsync(), _ => !IsExporting);
         _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", GetAllFilteredTweaks, (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
@@ -445,6 +450,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public IEnumerable<TweakItemViewModel> AllTweaks => Tweaks;
 
     public ICollectionView TweaksView { get; }
+
+    public ICollectionView RepairsRowsView { get; }
 
     public ObservableCollection<CategoryGroupViewModel> CategoryGroups => _presentationState.CategoryGroups;
 
@@ -797,8 +804,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             {
                 System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() =>
                 {
-                    TweaksView.Refresh();
-                    UpdateFilterSummary();
+                    RefreshFilteredViews();
                 });
             }
         }, token);
@@ -1058,8 +1064,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             RefreshPolicyReferencePanel();
             if (HasStatusFilter)
             {
-                TweaksView.Refresh();
-                UpdateFilterSummary();
+                RefreshFilteredViews();
             }
         }
 
@@ -1081,8 +1086,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         // Refresh view if showing favorites only
         if (ShowFavoritesOnly)
         {
-            TweaksView.Refresh();
-            UpdateFilterSummary();
+            RefreshFilteredViews();
         }
     }
 
@@ -1095,6 +1099,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 item.PropertyChanged += OnTweakPropertyChanged;
                 item.FavoriteChanged += OnTweakFavoriteChanged;
                 item.IsFavorite = _favoritesStore.IsFavorite(item.Id);
+                AddRepairsRow(item);
             }
         }
 
@@ -1104,7 +1109,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             {
                 item.PropertyChanged -= OnTweakPropertyChanged;
                 item.FavoriteChanged -= OnTweakFavoriteChanged;
+                RemoveRepairsRow(item);
             }
+        }
+
+        if (e.Action == NotifyCollectionChangedAction.Reset)
+        {
+            RebuildRepairsRows();
         }
 
         UpdateSelectionCount();
@@ -1160,6 +1171,16 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
 
         return FilterTweaksInternal(item, includeCategoryFilter: true);
+    }
+
+    private bool FilterRepairsRows(object obj)
+    {
+        if (obj is not RepairsItemViewModel item)
+        {
+            return false;
+        }
+
+        return FilterTweaksInternal(item.Source, includeCategoryFilter: true);
     }
 
     private bool FilterTweaksInternal(TweakItemViewModel item, bool includeCategoryFilter)
@@ -1403,12 +1424,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             case nameof(TweaksShellStateViewModel.ShowClassD):
             case nameof(TweaksShellStateViewModel.IsFlatView):
                 TweaksView.Refresh();
+                RepairsRowsView.Refresh();
                 UpdateFilterSummary();
                 break;
             case nameof(TweaksShellStateViewModel.SelectedCategoryName):
                 OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
-                TweaksView.Refresh();
-                UpdateFilterSummary(rebuildCategoryGroups: false);
+                RefreshFilteredViews(rebuildCategoryGroups: false);
                 break;
             case nameof(TweaksShellStateViewModel.SelectedWorkspace):
                 if (!string.IsNullOrWhiteSpace(SelectedCategoryName) && !CurrentWorkspaceContainsCategory(SelectedCategoryName))
@@ -1418,8 +1439,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
                 RaiseWorkspaceMetricsChanged();
                 OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
-                TweaksView.Refresh();
-                UpdateFilterSummary();
+                RefreshFilteredViews();
                 break;
         }
     }
@@ -1464,6 +1484,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _shellState.ResetFilters();
     }
 
+    private void RefreshFilteredViews(bool rebuildCategoryGroups = true)
+    {
+        TweaksView.Refresh();
+        RepairsRowsView.Refresh();
+        UpdateFilterSummary(rebuildCategoryGroups);
+    }
+
     private void RefreshSummaryStats()
     {
         _presentationState.SetInventoryCounts(
@@ -1504,10 +1531,51 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         SearchText = string.Empty;
         ShowFavoritesOnly = false;
         ShowSafe = true;
-        ShowAdvanced = true;
+       ShowAdvanced = true;
         ShowRisky = true;
-        TweaksView.Refresh();
-        UpdateFilterSummary();
+        RefreshFilteredViews();
+    }
+
+    private void AddRepairsRow(TweakItemViewModel item)
+    {
+        if (GetWorkspaceKind(item) != ConfigurationWorkspaceKind.Maintenance)
+        {
+            return;
+        }
+
+        if (_repairsRows.Any(row => ReferenceEquals(row.Source, item)))
+        {
+            return;
+        }
+
+        _repairsRows.Add(new RepairsItemViewModel(item));
+    }
+
+    private void RemoveRepairsRow(TweakItemViewModel item)
+    {
+        var existing = _repairsRows.FirstOrDefault(row => ReferenceEquals(row.Source, item));
+        if (existing is null)
+        {
+            return;
+        }
+
+        existing.Dispose();
+        _repairsRows.Remove(existing);
+    }
+
+    private void RebuildRepairsRows()
+    {
+        foreach (var row in _repairsRows)
+        {
+            row.Dispose();
+        }
+
+        _repairsRows.Clear();
+
+        foreach (var item in Tweaks.Where(t => GetWorkspaceKind(t) == ConfigurationWorkspaceKind.Maintenance))
+        {
+            _repairsRows.Add(new RepairsItemViewModel(item));
+        }
     }
 
     public async Task RunFastCleanAsync(CancellationToken ct = default)
@@ -2204,6 +2272,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         {
             tweak.PropertyChanged -= OnTweakPropertyChanged;
             tweak.FavoriteChanged -= OnTweakFavoriteChanged;
+        }
+
+        foreach (var row in _repairsRows)
+        {
+            row.Dispose();
         }
 
     }

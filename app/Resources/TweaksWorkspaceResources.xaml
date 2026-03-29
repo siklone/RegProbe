@@ -370,7 +370,7 @@
         </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="RepairsTweakRowTemplate" DataType="{x:Type viewModels:TweakItemViewModel}">
+    <DataTemplate x:Key="RepairsTweakRowTemplate" DataType="{x:Type viewModels:RepairsItemViewModel}">
         <Border BorderBrush="#191919" BorderThickness="0,0,0,0.5" Padding="0">
             <Grid>
                 <Grid.ColumnDefinitions>

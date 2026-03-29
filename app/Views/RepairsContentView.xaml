@@ -76,7 +76,7 @@
         </Border>
 
         <Grid Grid.Row="3">
-            <ListBox ItemsSource="{Binding TweaksView}" ItemTemplate="{StaticResource RepairsTweakRowTemplate}" ItemContainerStyle="{StaticResource TweakListItemStyle}" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox ItemsSource="{Binding RepairsRowsView}" ItemTemplate="{StaticResource RepairsTweakRowTemplate}" ItemContainerStyle="{StaticResource TweakListItemStyle}" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListBox.Style>
                     <Style TargetType="ListBox">
                         <Setter Property="Visibility" Value="Visible"/>
