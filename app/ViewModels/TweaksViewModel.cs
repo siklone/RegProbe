@@ -99,21 +99,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly PluginLoader _pluginLoader = new();
     private readonly string _tweakLogFilePath;
     private long _logFileSizeBytes;
-    private int _docsMissingCount;
-    private string _docsCoverageSummary = "Docs report unavailable.";
-    private string _docsCoverageReportPath = string.Empty;
-    private int _provenanceReviewCount;
-    private string _provenanceCoverageSummary = "Source links unavailable.";
-    private string _provenanceReportPath = string.Empty;
     private readonly IProfileManager _profileManager;
     private readonly TweakExecutionPipeline _pipeline;
     private readonly IEnumerable<ITweakProvider>? _providerList;
     private readonly IRollbackStateStore _rollbackStore;
-    private readonly TweakDocumentationLinker _documentationLinker = new();
-    private readonly TweakProvenanceCatalogService _provenanceCatalogService = new();
-    private readonly TweakEvidenceClassCatalogService _evidenceClassCatalogService = new();
     private readonly ConfigurationWorkspaceClassifier _workspaceClassifier = new();
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
+    private readonly WorkspaceSupportCoordinator _supportCoordinator;
     private readonly WorkspaceActionCoordinator _workspaceActionCoordinator;
     private readonly IAppLogger _appLogger;
     private readonly IBusyService _busyService;
@@ -123,7 +115,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     /// </summary>
     public DnsConfigurationViewModel DnsConfiguration { get; } = new();
     public WinConfigCatalogPanelViewModel WinConfigCatalog { get; }
-    public PolicyReferencePanelViewModel PolicyReference { get; }
+    public PolicyReferencePanelViewModel PolicyReference => _supportCoordinator.PolicyReference;
 
     public RelayCommand SetTabCommand { get; }
 
@@ -154,6 +146,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _providerList = providers;
         _shellState.PropertyChanged += OnShellStatePropertyChanged;
         _presentationState.PropertyChanged += OnPresentationStatePropertyChanged;
+        _configurationCoordinator = new ConfigurationWorkspaceCoordinator(this);
+        _supportCoordinator = new WorkspaceSupportCoordinator(_configurationCoordinator.OpenPolicyReferenceEntry);
+        _supportCoordinator.PropertyChanged += OnSupportCoordinatorPropertyChanged;
         var paths = AppPaths.FromEnvironment();
         paths.EnsureDirectories();
         _appLogger = new FileAppLogger(paths);
@@ -231,9 +226,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _clearCategorySelectionCommand = new RelayCommand(_ => SelectedCategoryName = string.Empty);
         _openLogFolderCommand = new RelayCommand(_ => OpenLogFolder());
         _openCsvLogCommand = new RelayCommand(_ => OpenCsvLog());
-        _openDocsCoverageReportCommand = new RelayCommand(_ => OpenDocsCoverageReport());
-        _openProvenanceReportCommand = new RelayCommand(_ => OpenProvenanceReport());
-        _configurationCoordinator = new ConfigurationWorkspaceCoordinator(this);
+        _openDocsCoverageReportCommand = new RelayCommand(_ => _supportCoordinator.OpenDocsCoverageReport());
+        _openProvenanceReportCommand = new RelayCommand(_ => _supportCoordinator.OpenProvenanceReport());
         _filterAppliedCommand = new RelayCommand(_ => _configurationCoordinator.ShowAppliedOnly());
         _filterRolledBackCommand = new RelayCommand(_ => _configurationCoordinator.ShowRolledBackOnly());
         _showSettingsWorkspaceCommand = new RelayCommand(_ => _configurationCoordinator.ShowConfigurationWorkspace());
@@ -253,16 +247,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         LoadPlugins();
         ApplyTweakMetadata();
         LoadCachedInventoryState();
-        _documentationLinker.Apply(Tweaks);
-        _provenanceCatalogService.Apply(Tweaks);
-        _evidenceClassCatalogService.Apply(Tweaks);
+        _supportCoordinator.ApplyCatalogs(Tweaks);
         WinConfigCatalog = new WinConfigCatalogPanelViewModel(paths, BuildWinConfigCategoryCoverageMap);
-        PolicyReference = new PolicyReferencePanelViewModel(_configurationCoordinator.OpenPolicyReferenceEntry);
         UpdateFilterSummary();
-        LoadDocsCoverageReport();
-        LoadProvenanceCoverageReport();
+        _supportCoordinator.Initialize(Tweaks);
         RefreshSummaryStats();
-        RefreshPolicyReferencePanel();
         _ = InitializePresetsAsync();
 
     }
@@ -582,55 +571,23 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string LogFileSizeFormatted => FormatBytes(LogFileSizeBytes);
 
-    public int DocsMissingCount
-    {
-        get => _docsMissingCount;
-        private set
-        {
-            if (SetProperty(ref _docsMissingCount, value))
-            {
-                OnPropertyChanged(nameof(DocsCoverageOk));
-                OnPropertyChanged(nameof(DocsCoverageWarn));
-                OnPropertyChanged(nameof(DocsCoverageCritical));
-            }
-        }
-    }
+    public int DocsMissingCount => _supportCoordinator.DocsMissingCount;
 
-    public string DocsCoverageSummary
-    {
-        get => _docsCoverageSummary;
-        private set => SetProperty(ref _docsCoverageSummary, value);
-    }
+    public string DocsCoverageSummary => _supportCoordinator.DocsCoverageSummary;
 
-    public string DocsCoverageReportPath
-    {
-        get => _docsCoverageReportPath;
-        private set => SetProperty(ref _docsCoverageReportPath, value);
-    }
+    public string DocsCoverageReportPath => _supportCoordinator.DocsCoverageReportPath;
 
-    public bool DocsCoverageOk => DocsMissingCount == 0;
+    public bool DocsCoverageOk => _supportCoordinator.DocsCoverageOk;
 
-    public bool DocsCoverageWarn => DocsMissingCount > 0 && DocsMissingCount <= 10;
+    public bool DocsCoverageWarn => _supportCoordinator.DocsCoverageWarn;
 
-    public bool DocsCoverageCritical => DocsMissingCount > 10;
+    public bool DocsCoverageCritical => _supportCoordinator.DocsCoverageCritical;
 
-    public int ProvenanceReviewCount
-    {
-        get => _provenanceReviewCount;
-        private set => SetProperty(ref _provenanceReviewCount, value);
-    }
+    public int ProvenanceReviewCount => _supportCoordinator.ProvenanceReviewCount;
 
-    public string ProvenanceCoverageSummary
-    {
-        get => _provenanceCoverageSummary;
-        private set => SetProperty(ref _provenanceCoverageSummary, value);
-    }
+    public string ProvenanceCoverageSummary => _supportCoordinator.ProvenanceCoverageSummary;
 
-    public string ProvenanceReportPath
-    {
-        get => _provenanceReportPath;
-        private set => SetProperty(ref _provenanceReportPath, value);
-    }
+    public string ProvenanceReportPath => _supportCoordinator.ProvenanceReportPath;
 
     public int ScorableTweaksMeasuredTotal => Tweaks.Count(t => IsScorableForHealth(t) && t.AppliedStatus != TweakAppliedStatus.Unknown);
 
@@ -1370,6 +1327,16 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(e.PropertyName);
     }
 
+    private void OnSupportCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            return;
+        }
+
+        OnPropertyChanged(e.PropertyName);
+    }
+
     private void RaiseWorkspaceMetricsChanged()
     {
         OnPropertyChanged(nameof(SettingsWorkspaceCount));
@@ -1420,7 +1387,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void RefreshPolicyReferencePanel()
     {
-        PolicyReference?.Refresh(Tweaks);
+        _supportCoordinator.RefreshPolicyReferencePanel(Tweaks);
     }
 
     internal void FocusMaintenanceWorkspace(string categoryName)
@@ -1619,138 +1586,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         catch
         {
             LogFileSizeBytes = 0;
-        }
-    }
-
-    private void LoadDocsCoverageReport()
-    {
-        try
-        {
-            var docsRoot = DocsLocator.TryFindDocsRoot();
-            if (string.IsNullOrWhiteSpace(docsRoot))
-            {
-                DocsCoverageReportPath = string.Empty;
-                DocsMissingCount = 0;
-                DocsCoverageSummary = "Docs folder not found.";
-                return;
-            }
-
-            var priorityHtml = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.html");
-            var priorityMd = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.md");
-            var priorityCsv = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing-priority.csv");
-            var fallbackHtml = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.html");
-            var fallbackMd = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.md");
-            var fallbackCsv = Path.Combine(docsRoot, "tweaks", "tweak-docs-missing.csv");
-
-            var reportPath = File.Exists(priorityHtml)
-                ? priorityHtml
-                : File.Exists(priorityMd)
-                    ? priorityMd
-                    : File.Exists(fallbackHtml)
-                        ? fallbackHtml
-                        : File.Exists(fallbackMd) ? fallbackMd : string.Empty;
-
-            DocsCoverageReportPath = reportPath;
-
-            var csvPath = File.Exists(priorityCsv)
-                ? priorityCsv
-                : File.Exists(fallbackCsv) ? fallbackCsv : string.Empty;
-
-            if (!string.IsNullOrWhiteSpace(csvPath))
-            {
-                var lines = File.ReadAllLines(csvPath);
-                DocsMissingCount = Math.Max(0, lines.Length - 1);
-                DocsCoverageSummary = DocsMissingCount == 0 ? "All documented" : $"{DocsMissingCount} missing";
-            }
-            else
-            {
-                DocsMissingCount = 0;
-                DocsCoverageSummary = string.IsNullOrWhiteSpace(reportPath)
-                    ? "Docs report unavailable."
-                    : "Docs report ready.";
-            }
-        }
-        catch
-        {
-            DocsCoverageReportPath = string.Empty;
-            DocsMissingCount = 0;
-            DocsCoverageSummary = "Docs report unavailable.";
-        }
-    }
-
-    private void LoadProvenanceCoverageReport()
-    {
-        try
-        {
-            var catalog = _provenanceCatalogService.Catalog;
-            ProvenanceReportPath = _provenanceCatalogService.ResolveMarkdownReportPath();
-
-            if (catalog.TotalTweaks <= 0)
-            {
-                ProvenanceReviewCount = 0;
-                ProvenanceCoverageSummary = "Source links unavailable.";
-                return;
-            }
-
-            ProvenanceReviewCount = catalog.ReviewNeededTweaks;
-            ProvenanceCoverageSummary =
-                $"{catalog.RepoBackedTweaks}/{catalog.TotalTweaks} repo-linked | " +
-                $"{catalog.InternalsBackedTweaks} internals refs | " +
-                $"{catalog.ReviewNeededTweaks} review";
-        }
-        catch
-        {
-            ProvenanceReportPath = string.Empty;
-            ProvenanceReviewCount = 0;
-            ProvenanceCoverageSummary = "Source links unavailable.";
-        }
-    }
-
-    private void OpenDocsCoverageReport()
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(DocsCoverageReportPath) || !File.Exists(DocsCoverageReportPath))
-            {
-                LoadDocsCoverageReport();
-            }
-
-            if (!string.IsNullOrWhiteSpace(DocsCoverageReportPath) && File.Exists(DocsCoverageReportPath))
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = DocsCoverageReportPath,
-                    UseShellExecute = true
-                });
-            }
-        }
-        catch
-        {
-            // Ignore errors
-        }
-    }
-
-    private void OpenProvenanceReport()
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(ProvenanceReportPath) || !File.Exists(ProvenanceReportPath))
-            {
-                LoadProvenanceCoverageReport();
-            }
-
-            if (!string.IsNullOrWhiteSpace(ProvenanceReportPath) && File.Exists(ProvenanceReportPath))
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = ProvenanceReportPath,
-                    UseShellExecute = true
-                });
-            }
-        }
-        catch
-        {
-            // Ignore errors
         }
     }
 
@@ -2141,6 +1976,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         // Unsubscribe collection changed events
         _shellState.PropertyChanged -= OnShellStatePropertyChanged;
         _presentationState.PropertyChanged -= OnPresentationStatePropertyChanged;
+        _supportCoordinator.PropertyChanged -= OnSupportCoordinatorPropertyChanged;
         Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
 
         // Unsubscribe tweak property changed events
