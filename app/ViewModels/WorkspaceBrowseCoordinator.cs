@@ -12,7 +12,6 @@ public sealed class WorkspaceBrowseCoordinator : IDisposable
 {
     private readonly TweaksShellStateViewModel _shellState;
     private readonly TweaksPresentationStateViewModel _presentationState;
-    private readonly bool _showContributorEvidenceUi;
     private readonly ConfigurationWorkspaceClassifier _workspaceClassifier = new();
     private CancellationTokenSource? _searchCts;
 
@@ -23,7 +22,6 @@ public sealed class WorkspaceBrowseCoordinator : IDisposable
     {
         _shellState = shellState ?? throw new ArgumentNullException(nameof(shellState));
         _presentationState = presentationState ?? throw new ArgumentNullException(nameof(presentationState));
-        _showContributorEvidenceUi = showContributorEvidenceUi;
     }
 
     public ConfigurationWorkspaceKind GetWorkspaceKind(TweakItemViewModel tweak)
@@ -157,27 +155,24 @@ public sealed class WorkspaceBrowseCoordinator : IDisposable
             return false;
         }
 
-        if (_showContributorEvidenceUi)
+        if (item.EvidenceClassId == "A" && !_shellState.ShowClassA)
         {
-            if (item.EvidenceClassId == "A" && !_shellState.ShowClassA)
-            {
-                return false;
-            }
+            return false;
+        }
 
-            if (item.EvidenceClassId == "B" && !_shellState.ShowClassB)
-            {
-                return false;
-            }
+        if (item.EvidenceClassId == "B" && !_shellState.ShowClassB)
+        {
+            return false;
+        }
 
-            if (item.EvidenceClassId == "C" && !_shellState.ShowClassC)
-            {
-                return false;
-            }
+        if (item.EvidenceClassId == "C" && !_shellState.ShowClassC)
+        {
+            return false;
+        }
 
-            if (item.EvidenceClassId == "D" && !_shellState.ShowClassD)
-            {
-                return false;
-            }
+        if (item.EvidenceClassId == "D" && !_shellState.ShowClassD)
+        {
+            return false;
         }
 
         if (string.IsNullOrWhiteSpace(_shellState.SearchText))

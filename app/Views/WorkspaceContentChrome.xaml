@@ -25,26 +25,39 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="24,6,32,8">
-            <Grid MaxWidth="980" HorizontalAlignment="Left">
+        <Border Grid.Row="0" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="16,12,28,12">
+            <Grid MaxWidth="1040" HorizontalAlignment="Left">
                 <StackPanel>
                     <TextBlock Text="{Binding CurrentWorkspaceLabel}" FontSize="20" FontWeight="SemiBold" Foreground="#FFFFFF"/>
-                    <TextBlock Text="{Binding CurrentWorkspaceDescription}" Margin="0,5,0,0" FontSize="12" Foreground="#ABABAB" TextWrapping="Wrap" MaxWidth="720"/>
+                    <TextBlock Text="{Binding CurrentWorkspaceDescription}" Margin="0,4,0,0" FontSize="12" Foreground="#ABABAB" TextWrapping="Wrap" MaxWidth="720"/>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <Border Grid.Row="1" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="24,8,32,12">
-            <Grid MaxWidth="980" HorizontalAlignment="Left">
+        <Border Grid.Row="1" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="16,12,28,12">
+            <Grid MaxWidth="1040" HorizontalAlignment="Left">
                 <StackPanel>
-                    <TextBox Width="448"
-                             HorizontalAlignment="Left"
-                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                             Style="{StaticResource SearchBoxStyle}"
-                             Tag="{Binding SearchPlaceholder}"
-                             ToolTip="{Binding SearchPlaceholder}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="420"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                                 HorizontalAlignment="Left"
+                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource SearchBoxStyle}"
+                                 Tag="{Binding SearchPlaceholder}"
+                                 ToolTip="{Binding SearchPlaceholder}"/>
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding FilterSummary}"
+                                   Margin="16,0,0,0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   FontSize="11"
+                                   Foreground="#7D7D7D"/>
+                    </Grid>
 
-                    <Grid Margin="0,8,0,0">
+                    <Grid Margin="0,10,0,0">
                         <Grid.Style>
                             <Style TargetType="Grid">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -68,10 +81,10 @@
                                 <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
                                 <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
                             </WrapPanel>
-                            <WrapPanel Margin="0,4,0,0"
-                                       Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}">
+                            <WrapPanel Margin="0,0,0,0">
                                 <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class A"/></CheckBox>
                                 <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class B"/></CheckBox>
+                                <CheckBox Tag="ClassD" IsChecked="{Binding ShowClassD}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class D"/></CheckBox>
                             </WrapPanel>
                         </StackPanel>
                     </Grid>
@@ -94,19 +107,17 @@
                         </WrapPanel>
                     </Grid>
 
-                    <TextBlock Margin="0,8,0,0"
+                    <TextBlock Margin="0,2,0,0"
                                FontSize="11"
                                Foreground="#8A8A8A"
                                TextWrapping="Wrap">
-                        <Run Text="{Binding FilterSummary, Mode=OneWay}"/>
-                        <Run Text=" &#183; "/>
                         <Run Text="{Binding InventoryStatusMessage, Mode=OneWay}"/>
                     </TextBlock>
                 </StackPanel>
             </Grid>
         </Border>
 
-        <Grid Grid.Row="2" Margin="24,0,32,0" MaxWidth="980" HorizontalAlignment="Left">
+        <Grid Grid.Row="2" Margin="16,12,28,0" MaxWidth="1040" HorizontalAlignment="Left">
             <ListBox ItemsSource="{Binding ElementName=Root, Path=ItemsSource}"
                      ItemTemplate="{Binding ElementName=Root, Path=ItemTemplate}"
                      ItemContainerStyle="{StaticResource TweakListItemStyle}"

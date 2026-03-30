@@ -186,9 +186,19 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public TweakRiskLevel Risk => _tweak.Risk;
 
+    public bool IsSafeRisk => Risk == TweakRiskLevel.Safe;
+
     public bool IsAdvancedRisk => Risk == TweakRiskLevel.Advanced;
 
     public bool IsRisky => Risk == TweakRiskLevel.Risky;
+
+    public string RiskBadgeText => Risk switch
+    {
+        TweakRiskLevel.Safe => "SAFE",
+        TweakRiskLevel.Advanced => "ADVANCED",
+        TweakRiskLevel.Risky => "RISKY",
+        _ => "SAFE"
+    };
 
     public string RepairsRiskHint => Risk switch
     {
@@ -943,6 +953,10 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string EvidenceClassBadgeText => EvidenceClassId;
 
+    public bool IsEvidenceConfirmed => IsEvidenceClassActionable;
+
+    public string EvidenceStateText => IsEvidenceConfirmed ? "Confirmed" : "Evidence pending";
+
     public string EvidenceClassActionState => _evidenceClassActionState;
 
     public string EvidenceClassTooltip => $"{EvidenceClassTitle}. {EvidenceClassDescription}";
@@ -1132,6 +1146,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(EvidenceClassTitle));
         OnPropertyChanged(nameof(EvidenceClassDescription));
         OnPropertyChanged(nameof(EvidenceClassBadgeText));
+        OnPropertyChanged(nameof(IsEvidenceConfirmed));
+        OnPropertyChanged(nameof(EvidenceStateText));
         OnPropertyChanged(nameof(EvidenceClassActionState));
         OnPropertyChanged(nameof(EvidenceClassTooltip));
         OnPropertyChanged(nameof(EvidenceClassGatingReason));

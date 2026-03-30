@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.Windows.Media;
 using RegProbe.Core;
 using RegProbe.Engine.Tweaks;
 
@@ -31,9 +32,19 @@ public sealed class RepairsItemViewModel : ViewModelBase, IDisposable
 
     public string RepairStatusText => _source.StatusText;
 
+    public Brush StatusColor => _source.StatusColor;
+
+    public Brush StatusBadgeBackground => _source.StatusBadgeBackground;
+
+    public bool IsApplied => _source.IsApplied;
+
     public string EvidenceClassId => _source.EvidenceClassId;
 
     public string EvidenceClassBadgeText => _source.EvidenceClassBadgeText;
+
+    public bool IsEvidenceConfirmed => _source.IsEvidenceConfirmed;
+
+    public string EvidenceStateText => _source.EvidenceStateText;
 
     public string FriendlyDescription => _source.FriendlyDescription;
 
@@ -72,6 +83,10 @@ public sealed class RepairsItemViewModel : ViewModelBase, IDisposable
     public bool IsAdvancedRisk => _source.IsAdvancedRisk;
 
     public bool IsRisky => _source.IsRisky;
+
+    public bool IsSafeRisk => _source.IsSafeRisk;
+
+    public string RiskBadgeText => _source.RiskBadgeText;
 
     public bool IsSelected
     {

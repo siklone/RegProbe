@@ -99,6 +99,18 @@ public abstract class WorkspaceShellViewModelBase : ViewModelBase, IDisposable
         set => Workspace.ShowClassB = value;
     }
 
+    public bool ShowClassC
+    {
+        get => Workspace.ShowClassC;
+        set => Workspace.ShowClassC = value;
+    }
+
+    public bool ShowClassD
+    {
+        get => Workspace.ShowClassD;
+        set => Workspace.ShowClassD = value;
+    }
+
     public int FavoritesCount => Workspace.FavoritesCount;
 
     public bool ShowContributorEvidenceUi => Workspace.ShowContributorEvidenceUi;
@@ -112,6 +124,8 @@ public abstract class WorkspaceShellViewModelBase : ViewModelBase, IDisposable
     public string InventorySummaryLabel => Workspace.InventorySummaryLabel;
 
     public string InventoryStatusMessage => Workspace.InventoryStatusMessage;
+
+    public int TotalTweaksAvailable => Workspace.TotalTweaksAvailable;
 
     public bool HasVisibleTweaks => Workspace.HasVisibleTweaks;
 
