@@ -1,0 +1,69 @@
+﻿{
+    "generated_utc":  "2026-03-29T22:44:21.7378013Z",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+    "source_snapshot":  "RegProbe-Baseline-Clean-20260329",
+    "target_snapshot":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "audit_session_root":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330",
+    "policy":  {
+                   "baseline":  "tooling-first, app-free, VMware Tools hardened",
+                   "app_smoke":  "ephemeral deploy -\u003e validate -\u003e cleanup only",
+                   "defender":  "keep tooling exclusions intact; do not disable Defender"
+               },
+    "validation":  {
+                       "shell_before_snapshot":  {
+                                                     "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330\\shell-before-snapshot.json",
+                                                     "shell_healthy":  true
+                                                 },
+                       "baseline_app_artifacts":  {
+                                                      "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330\\baseline-app-artifacts-audit.json",
+                                                      "status":  "ok",
+                                                      "policy_compliant":  true
+                                                  },
+                       "vmtools_hardening_apply":  {
+                                                       "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330\\vmtools-hardening-apply.json",
+                                                       "status":  "ok",
+                                                       "service_name":  "VMTools",
+                                                       "vmtoolsd_priority":  "AboveNormal"
+                                                   },
+                       "vmtools_hardening_read":  {
+                                                      "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330\\vmtools-hardening-read.json",
+                                                      "status":  "ok",
+                                                      "service_name":  "VMTools",
+                                                      "vmtoolsd_priority":  "AboveNormal"
+                                                  },
+                       "tooling_minimal":  {
+                                               "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330\\vm-tooling-minimal-diagnostic-20260330-015051\\summary.json",
+                                               "status":  "ok",
+                                               "write_test_exists":  true
+                                           },
+                       "validation_app_artifacts":  {
+                                                        "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330\\validation-app-artifacts-audit.json",
+                                                        "status":  "ok",
+                                                        "policy_compliant":  true
+                                                    },
+                       "validation_tooling_minimal":  {
+                                                          "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330\\vm-tooling-minimal-diagnostic-20260330-021128\\summary.json",
+                                                          "status":  "ok",
+                                                          "write_test_exists":  true
+                                                      },
+                       "shell_after_validation":  {
+                                                      "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330\\shell-after-validation.json",
+                                                      "shell_healthy":  true
+                                                  }
+                   },
+    "snapshot_lists":  {
+                           "before":  [
+                                          "RegProbe-Baseline-Clean-20260329"
+                                      ],
+                           "after":  [
+                                         "RegProbe-Baseline-ToolsHardened-20260330"
+                                     ]
+                       },
+    "deleted_snapshots":  [
+                              "RegProbe-Baseline-Clean-20260329"
+                          ],
+    "status":  "ok",
+    "errors":  [
+
+               ]
+}

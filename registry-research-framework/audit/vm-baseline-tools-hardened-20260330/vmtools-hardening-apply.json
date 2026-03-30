@@ -1,0 +1,48 @@
+﻿{
+    "generated_utc":  "2026-03-29T22:50:46.6367908Z",
+    "mode":  "apply",
+    "status":  "ok",
+    "before":  {
+                   "service_name":  "VMTools",
+                   "display_name":  "VMware Tools",
+                   "state":  "Running",
+                   "status":  "Running",
+                   "start_mode":  "Auto",
+                   "failure_config":  "[SC] QueryServiceConfig2 SUCCESS\r\n\r\nSERVICE_NAME: VMTools\r\n        RESET_PERIOD (in seconds)    : 1800\r\n        REBOOT_MESSAGE               : \r\n        COMMAND_LINE                 : \r\n        FAILURE_ACTIONS              : RESTART -- Delay = 300000 milliseconds.",
+                   "failure_flag_enabled":  "[SC] QueryServiceConfig2 SUCCESS\r\n\r\nSERVICE_NAME: VMTools\r\nFAILURE_ACTIONS_ON_NONCRASH_FAILURES:  FALSE",
+                   "vmtoolsd_priority":  "High",
+                   "directories":  [
+                                       {
+                                           "path":  "C:\\RegProbe-Diag",
+                                           "exists":  true
+                                       },
+                                       {
+                                           "path":  "C:\\Tools\\Scripts",
+                                           "exists":  true
+                                       }
+                                   ]
+               },
+    "after":  {
+                  "service_name":  "VMTools",
+                  "display_name":  "VMware Tools",
+                  "state":  "Running",
+                  "status":  "Running",
+                  "start_mode":  "Auto",
+                  "failure_config":  "[SC] QueryServiceConfig2 SUCCESS\r\n\r\nSERVICE_NAME: VMTools\r\n        RESET_PERIOD (in seconds)    : 30\r\n        REBOOT_MESSAGE               : \r\n        COMMAND_LINE                 : \r\n        FAILURE_ACTIONS              : RESTART -- Delay = 5000 milliseconds.\r\n                                       RESTART -- Delay = 10000 milliseconds.\r\n                                       RESTART -- Delay = 30000 milliseconds.",
+                  "failure_flag_enabled":  "[SC] QueryServiceConfig2 SUCCESS\r\n\r\nSERVICE_NAME: VMTools\r\nFAILURE_ACTIONS_ON_NONCRASH_FAILURES:  TRUE",
+                  "vmtoolsd_priority":  "AboveNormal",
+                  "directories":  [
+                                      {
+                                          "path":  "C:\\RegProbe-Diag",
+                                          "exists":  true
+                                      },
+                                      {
+                                          "path":  "C:\\Tools\\Scripts",
+                                          "exists":  true
+                                      }
+                                  ]
+              },
+    "errors":  [
+
+               ]
+}

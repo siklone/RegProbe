@@ -1,0 +1,42 @@
+﻿{
+    "generated_utc":  "2026-03-29T23:11:38.5696572Z",
+    "probe_name":  "vm-tooling-minimal-diagnostic-20260330-021128",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "tracked_output_root":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-tools-hardened-20260330\\vm-tooling-minimal-diagnostic-20260330-021128",
+    "guest_root":  "C:\\RegProbe-Diag",
+    "run_program_exit":  "",
+    "copied":  {
+                   "write_test":  true,
+                   "environment":  true,
+                   "script_result":  true
+               },
+    "script_result_status":  "ok",
+    "script_result_error":  null,
+    "write_test_exists":  true,
+    "execution_policy":  4,
+    "procmon_paths":  [
+                          {
+                              "path":  "C:\\Tools\\Sysinternals\\Procmon64.exe",
+                              "exists":  true
+                          },
+                          {
+                              "path":  "C:\\Tools\\Procmon.exe",
+                              "exists":  false
+                          },
+                          {
+                              "path":  "C:\\Tools\\SysinternalsSuite\\Procmon64.exe",
+                              "exists":  false
+                          }
+                      ],
+    "defender":  {
+                     "DisableRealtimeMonitoring":  false
+                 },
+    "drive_c":  {
+                    "Used":  41254309888,
+                    "Free":  43263008768
+                },
+    "status":  "ok",
+    "errors":  [
+
+               ]
+}

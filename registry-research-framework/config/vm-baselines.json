@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "canonical_vm": "Win25H2Clean",
   "vm_path": "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
-  "default_snapshot": "RegProbe-Baseline-Clean-20260329",
-  "seed_snapshot": "RegProbe-Baseline-20260328",
+  "default_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "seed_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
   "baseline_policy": {
     "mode": "hybrid",
     "tooling_first": true,
@@ -17,6 +17,7 @@
     "baseline-20260325-shell-stable",
     "baseline-20260327-shell-stable",
     "baseline-20260327-regprobe-visible-shell-stable",
-    "RegProbe-Baseline-20260328"
+    "RegProbe-Baseline-20260328",
+    "RegProbe-Baseline-Clean-20260329"
   ]
 }
