@@ -38,33 +38,15 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 {
     private bool _isDisposed;
     private readonly ITweakLogStore _logStore;
-    private readonly RelayCommand _previewAllCommand;
-    private readonly RelayCommand _applyAllCommand;
-    private readonly RelayCommand _verifyAllCommand;
-    private readonly RelayCommand _rollbackAllCommand;
-    private readonly RelayCommand _cancelAllCommand;
-    private readonly RelayCommand _selectAllCommand;
-    private readonly RelayCommand _deselectAllCommand;
-    private readonly RelayCommand _detectSelectedCommand;
-    private readonly RelayCommand _applySelectedCommand;
-    private readonly RelayCommand _verifySelectedCommand;
-    private readonly RelayCommand _rollbackSelectedCommand;
     private readonly RelayCommand _resetFiltersCommand;
     private readonly RelayCommand _clearCategorySelectionCommand;
     private readonly RelayCommand _filterAppliedCommand;
     private readonly RelayCommand _filterRolledBackCommand;
     private readonly RelayCommand _showSettingsWorkspaceCommand;
     private readonly RelayCommand _showMaintenanceWorkspaceCommand;
-	private readonly RelayCommand _expandAllDetailsCommand;
-	private readonly RelayCommand _collapseAllDetailsCommand;
 	private readonly bool _isElevated;
 	private readonly string _elevatedHostExecutablePath;
 	private readonly bool _isElevatedHostAvailable;
-    private string _bulkStatusMessage = "Bulk actions are idle.";
-    private bool _isBulkRunning;
-    private int _bulkProgressCurrent;
-    private int _bulkProgressTotal;
-    private int _selectedCount;
     private readonly TweaksShellStateViewModel _shellState = new();
     private readonly TweaksPresentationStateViewModel _presentationState = new();
     private readonly bool _showContributorEvidenceUi = ContributorMode.IsEnabled;
@@ -74,12 +56,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly WorkspaceBrowseCoordinator _browseCoordinator;
     private readonly WorkspaceCatalogCoordinator _catalogCoordinator;
     private readonly WorkspaceCollectionCoordinator _collectionCoordinator;
+    private readonly WorkspaceCommandCoordinator _commandCoordinator;
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
     private readonly WorkspaceDetectionCoordinator _detectionCoordinator;
     private readonly WorkspaceHealthCoordinator _healthCoordinator;
     private readonly WorkspaceInventoryCoordinator _inventoryCoordinator;
     private readonly WorkspaceSupportCoordinator _supportCoordinator;
-    private readonly WorkspaceActionCoordinator _workspaceActionCoordinator;
     private readonly IAppLogger _appLogger;
     private readonly IBusyService _busyService;
 
@@ -100,7 +82,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         IBusyService busyService)
     {
         _busyService = busyService ?? throw new ArgumentNullException(nameof(busyService));
-        _workspaceActionCoordinator = new WorkspaceActionCoordinator(_busyService);
         _shellState.PropertyChanged += OnShellStatePropertyChanged;
         _presentationState.PropertyChanged += OnPresentationStatePropertyChanged;
         _browseCoordinator = new WorkspaceBrowseCoordinator(_shellState, _presentationState, _showContributorEvidenceUi);
@@ -170,33 +151,24 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Risk), ListSortDirection.Ascending));
         RepairsRowsView.SortDescriptions.Add(new SortDescription(nameof(RepairsItemViewModel.Name), ListSortDirection.Ascending));
 
-        _previewAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Preview", GetAllFilteredTweaks, (item, token) => item.RunPreviewAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
-        _applyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Apply", GetAllActionableFilteredTweaks, (item, token) => item.RunApplyAsync(token)), _ => CanRunBulkMutating(GetAllActionableFilteredTweaks));
-        _verifyAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Verify", GetAllFilteredTweaks, (item, token) => item.RunVerifyAsync(token)), _ => CanRunBulkInspectable(GetAllFilteredTweaks));
-        _rollbackAllCommand = new RelayCommand(_ => _ = RunBulkAsync("Rollback", GetAllActionableFilteredTweaks, (item, token) => item.RunRollbackAsync(token)), _ => CanRunBulkMutating(GetAllActionableFilteredTweaks));
-        _cancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
-        _selectAllCommand = new RelayCommand(_ => SelectAll());
-        _deselectAllCommand = new RelayCommand(_ => DeselectAll());
-        _detectSelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Detect Selected", GetSelectedTweaks, (item, token) => item.RunDetectAsync(token)),
-            _ => CanRunBulkInspectable(GetSelectedTweaks));
-        _applySelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Apply Selected", GetSelectedActionableTweaks, (item, token) => item.RunApplyAsync(token)),
-            _ => CanRunBulkMutating(GetSelectedActionableTweaks));
-        _verifySelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Verify Selected", GetSelectedTweaks, (item, token) => item.RunVerifyAsync(token)),
-            _ => CanRunBulkInspectable(GetSelectedTweaks));
-        _rollbackSelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Rollback Selected", GetSelectedActionableTweaks, (item, token) => item.RunRollbackAsync(token)),
-            _ => CanRunBulkMutating(GetSelectedActionableTweaks));
+        _commandCoordinator = new WorkspaceCommandCoordinator(
+            _busyService,
+            () => Tweaks,
+            () => TweaksView.Cast<TweakItemViewModel>(),
+            GetAllFilteredTweaks,
+            GetAllActionableFilteredTweaks,
+            GetSelectedTweaks,
+            GetSelectedActionableTweaks,
+            RefreshSummaryStats,
+            SetBulkLock,
+            SetDetailsExpanded);
+        _commandCoordinator.PropertyChanged += OnCommandCoordinatorPropertyChanged;
         _resetFiltersCommand = new RelayCommand(_ => ResetFilters());
         _clearCategorySelectionCommand = new RelayCommand(_ => SelectedCategoryName = string.Empty);
         _filterAppliedCommand = new RelayCommand(_ => _configurationCoordinator.ShowAppliedOnly());
         _filterRolledBackCommand = new RelayCommand(_ => _configurationCoordinator.ShowRolledBackOnly());
         _showSettingsWorkspaceCommand = new RelayCommand(_ => _configurationCoordinator.ShowConfigurationWorkspace());
         _showMaintenanceWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance);
-        _expandAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(true));
-        _collapseAllDetailsCommand = new RelayCommand(_ => SetDetailsExpanded(false));
 
         _catalogCoordinator.LoadInitialTweaks(Tweaks);
         _inventoryCoordinator.LoadCachedInventoryState(Tweaks);
@@ -237,27 +209,27 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public ObservableCollection<CategoryGroupViewModel> CategoryGroups => _presentationState.CategoryGroups;
 
-    public ICommand PreviewAllCommand => _previewAllCommand;
+    public ICommand PreviewAllCommand => _commandCoordinator.PreviewAllCommand;
 
-    public ICommand ApplyAllCommand => _applyAllCommand;
+    public ICommand ApplyAllCommand => _commandCoordinator.ApplyAllCommand;
 
-    public ICommand VerifyAllCommand => _verifyAllCommand;
+    public ICommand VerifyAllCommand => _commandCoordinator.VerifyAllCommand;
 
-    public ICommand RollbackAllCommand => _rollbackAllCommand;
+    public ICommand RollbackAllCommand => _commandCoordinator.RollbackAllCommand;
 
-    public ICommand CancelAllCommand => _cancelAllCommand;
+    public ICommand CancelAllCommand => _commandCoordinator.CancelAllCommand;
 
-    public ICommand SelectAllCommand => _selectAllCommand;
+    public ICommand SelectAllCommand => _commandCoordinator.SelectAllCommand;
 
-    public ICommand DeselectAllCommand => _deselectAllCommand;
+    public ICommand DeselectAllCommand => _commandCoordinator.DeselectAllCommand;
 
-    public ICommand DetectSelectedCommand => _detectSelectedCommand;
+    public ICommand DetectSelectedCommand => _commandCoordinator.DetectSelectedCommand;
 
-    public ICommand ApplySelectedCommand => _applySelectedCommand;
+    public ICommand ApplySelectedCommand => _commandCoordinator.ApplySelectedCommand;
 
-    public ICommand VerifySelectedCommand => _verifySelectedCommand;
+    public ICommand VerifySelectedCommand => _commandCoordinator.VerifySelectedCommand;
 
-    public ICommand RollbackSelectedCommand => _rollbackSelectedCommand;
+    public ICommand RollbackSelectedCommand => _commandCoordinator.RollbackSelectedCommand;
 
     public ICommand ResetFiltersCommand => _resetFiltersCommand;
 
@@ -271,9 +243,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public ICommand ShowMaintenanceWorkspaceCommand => _showMaintenanceWorkspaceCommand;
 
-    public ICommand ExpandAllDetailsCommand => _expandAllDetailsCommand;
+    public ICommand ExpandAllDetailsCommand => _commandCoordinator.ExpandAllDetailsCommand;
 
-    public ICommand CollapseAllDetailsCommand => _collapseAllDetailsCommand;
+    public ICommand CollapseAllDetailsCommand => _commandCoordinator.CollapseAllDetailsCommand;
 
     public int ScorableTweaksTotal => _healthCoordinator.ScorableTweaksTotal;
 
@@ -347,81 +319,23 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string HealthStatusMessage => _healthCoordinator.HealthStatusMessage;
 
-    public string BulkStatusMessage
-    {
-        get => _bulkStatusMessage;
-        private set => SetProperty(ref _bulkStatusMessage, value);
-    }
+    public string BulkStatusMessage => _commandCoordinator.BulkStatusMessage;
 
     public string InventoryStatusMessage => _inventoryCoordinator.InventoryStatusMessage;
 
-    public bool IsBulkRunning
-    {
-        get => _isBulkRunning;
-        private set
-        {
-            if (SetProperty(ref _isBulkRunning, value))
-            {
-                _previewAllCommand.RaiseCanExecuteChanged();
-                _applyAllCommand.RaiseCanExecuteChanged();
-                _verifyAllCommand.RaiseCanExecuteChanged();
-                _rollbackAllCommand.RaiseCanExecuteChanged();
-                _cancelAllCommand.RaiseCanExecuteChanged();
-                SetBulkLock(value);
-            }
-        }
-    }
+    public bool IsBulkRunning => _commandCoordinator.IsBulkRunning;
 
-    public int BulkProgressCurrent
-    {
-        get => _bulkProgressCurrent;
-        private set
-        {
-            if (SetProperty(ref _bulkProgressCurrent, value))
-            {
-                OnPropertyChanged(nameof(BulkProgressText));
-            }
-        }
-    }
+    public int BulkProgressCurrent => _commandCoordinator.BulkProgressCurrent;
 
-    public int BulkProgressTotal
-    {
-        get => _bulkProgressTotal;
-        private set
-        {
-            if (SetProperty(ref _bulkProgressTotal, value))
-            {
-                OnPropertyChanged(nameof(BulkProgressText));
-            }
-        }
-    }
+    public int BulkProgressTotal => _commandCoordinator.BulkProgressTotal;
 
-    public string BulkProgressText => BulkProgressTotal == 0
-        ? "Bulk progress: 0/0"
-        : $"Bulk progress: {BulkProgressCurrent}/{BulkProgressTotal}";
+    public string BulkProgressText => _commandCoordinator.BulkProgressText;
 
-    public int SelectedCount
-    {
-        get => _selectedCount;
-        private set
-        {
-            if (SetProperty(ref _selectedCount, value))
-            {
-                OnPropertyChanged(nameof(SelectionSummary));
-                OnPropertyChanged(nameof(HasSelection));
-                _detectSelectedCommand?.RaiseCanExecuteChanged();
-                _applySelectedCommand?.RaiseCanExecuteChanged();
-                _verifySelectedCommand?.RaiseCanExecuteChanged();
-                _rollbackSelectedCommand?.RaiseCanExecuteChanged();
-            }
-        }
-    }
+    public int SelectedCount => _commandCoordinator.SelectedCount;
 
-    public string SelectionSummary => SelectedCount == 0
-        ? "No settings selected"
-        : $"{SelectedCount} setting{(SelectedCount == 1 ? string.Empty : "s")} selected";
+    public string SelectionSummary => _commandCoordinator.SelectionSummary;
 
-    public bool HasSelection => SelectedCount > 0;
+    public bool HasSelection => _commandCoordinator.HasSelection;
 
     public bool IsFlatView
     {
@@ -516,34 +430,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public bool HasVisibleTweaks => _presentationState.HasVisibleTweaks;
 
-    private bool CanRunBulkInspectable(Func<List<TweakItemViewModel>> getTweaks)
-    {
-        return _workspaceActionCoordinator.CanRunInspectable(IsBulkRunning, Tweaks, getTweaks);
-    }
-
-    private bool CanRunBulkMutating(Func<List<TweakItemViewModel>> getTweaks)
-    {
-        return _workspaceActionCoordinator.CanRunMutating(IsBulkRunning, Tweaks, getTweaks);
-    }
-
-    private async Task RunBulkAsync(
-        string label,
-        Func<List<TweakItemViewModel>> getTweaks,
-        Func<TweakItemViewModel, CancellationToken, Task> runner)
-    {
-        await _workspaceActionCoordinator.RunBulkAsync(
-            label,
-            getTweaks,
-            runner,
-            () => IsBulkRunning,
-            value => IsBulkRunning = value,
-            value => BulkProgressCurrent = value,
-            value => BulkProgressTotal = value,
-            value => BulkStatusMessage = value,
-            () => OnPropertyChanged(nameof(BulkProgressText)),
-            RefreshSummaryStats);
-    }
-
     private List<TweakItemViewModel> GetAllFilteredTweaks()
     {
         return TweaksView.Cast<TweakItemViewModel>().ToList();
@@ -568,16 +454,6 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             .ToList();
     }
 
-    private void SelectAll()
-    {
-        _workspaceActionCoordinator.SelectAll(TweaksView.Cast<TweakItemViewModel>());
-    }
-
-    private void DeselectAll()
-    {
-        _workspaceActionCoordinator.DeselectAll(Tweaks);
-    }
-
     private void OnTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(TweakItemViewModel.IsSelected))
@@ -586,10 +462,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         }
         else if (e.PropertyName == nameof(TweakItemViewModel.IsRunning))
         {
-            _previewAllCommand.RaiseCanExecuteChanged();
-            _applyAllCommand.RaiseCanExecuteChanged();
-            _verifyAllCommand.RaiseCanExecuteChanged();
-            _rollbackAllCommand.RaiseCanExecuteChanged();
+            _commandCoordinator.NotifyTweakRunningChanged();
         }
         else if (e.PropertyName is nameof(TweakItemViewModel.IsApplied)
                  or nameof(TweakItemViewModel.AppliedStatus)
@@ -640,12 +513,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     private void UpdateSelectionCount()
     {
-        SelectedCount = _workspaceActionCoordinator.CountSelected(Tweaks);
-    }
-
-    private void CancelBulk()
-    {
-        _workspaceActionCoordinator.CancelBulk(IsBulkRunning, value => BulkStatusMessage = value);
+        _commandCoordinator.SyncSelectionState();
     }
 
     private bool FilterTweaks(object obj)
@@ -676,10 +544,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             TweaksView.Cast<object>().Count(),
             rebuildCategoryGroups,
             () => SelectedCategoryName = string.Empty);
-        _previewAllCommand.RaiseCanExecuteChanged();
-        _applyAllCommand.RaiseCanExecuteChanged();
-        _verifyAllCommand.RaiseCanExecuteChanged();
-        _rollbackAllCommand.RaiseCanExecuteChanged();
+        _commandCoordinator.NotifyFilterStateChanged();
     }
 
     private ConfigurationWorkspaceKind GetWorkspaceKind(TweakItemViewModel tweak)
@@ -734,6 +599,16 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     }
 
     private void OnPresentationStatePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            return;
+        }
+
+        OnPropertyChanged(e.PropertyName);
+    }
+
+    private void OnCommandCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(e.PropertyName))
         {
@@ -825,12 +700,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     internal void SetBulkStatusFromRepairs(string message)
     {
-        BulkStatusMessage = message;
+        _commandCoordinator.SetBulkStatusMessage(message);
     }
 
     internal void ClearSelectionFromRepairs()
     {
-        DeselectAll();
+        _commandCoordinator.DeselectAll();
     }
 
     internal ConfigurationWorkspaceKind GetWorkspaceKindForRepairs(TweakItemViewModel tweak)
@@ -843,7 +718,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         Func<List<TweakItemViewModel>> getTweaks,
         Func<TweakItemViewModel, CancellationToken, Task> runner)
     {
-        return RunBulkAsync(label, getTweaks, runner);
+        return _commandCoordinator.RunRepairsBatchAsync(label, getTweaks, runner);
     }
 
     private void SetDetailsExpanded(bool isExpanded)
@@ -901,7 +776,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         // Dispose CancellationTokenSources
         _browseCoordinator.Dispose();
         _collectionCoordinator.Dispose(OnTweakPropertyChanged, OnTweakFavoriteChanged);
-        _workspaceActionCoordinator.Dispose();
+        _commandCoordinator.PropertyChanged -= OnCommandCoordinatorPropertyChanged;
+        _commandCoordinator.Dispose();
         _inventoryCoordinator.Dispose();
 
         // Unsubscribe collection changed events
