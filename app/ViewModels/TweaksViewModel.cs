@@ -75,6 +75,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly WorkspaceCatalogCoordinator _catalogCoordinator;
     private readonly WorkspaceCollectionCoordinator _collectionCoordinator;
     private readonly ConfigurationWorkspaceCoordinator _configurationCoordinator;
+    private readonly WorkspaceDetectionCoordinator _detectionCoordinator;
     private readonly WorkspaceHealthCoordinator _healthCoordinator;
     private readonly WorkspaceInventoryCoordinator _inventoryCoordinator;
     private readonly WorkspaceSupportCoordinator _supportCoordinator;
@@ -104,6 +105,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _presentationState.PropertyChanged += OnPresentationStatePropertyChanged;
         _browseCoordinator = new WorkspaceBrowseCoordinator(_shellState, _presentationState, _showContributorEvidenceUi);
         _configurationCoordinator = new ConfigurationWorkspaceCoordinator(this);
+        _detectionCoordinator = new WorkspaceDetectionCoordinator();
         _supportCoordinator = new WorkspaceSupportCoordinator();
         _healthCoordinator = new WorkspaceHealthCoordinator();
         _healthCoordinator.PropertyChanged += OnHealthCoordinatorPropertyChanged;
@@ -866,69 +868,24 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         bool skipElevationPrompts = false,
         bool skipExpensiveOperations = false)
     {
-        IEnumerable<TweakItemViewModel> candidates = Tweaks;
-
-        if (skipExpensiveOperations)
-        {
-            candidates = candidates.Where(t => t.IsScanFriendly);
-        }
-
-        if (skipElevationPrompts)
-        {
-            candidates = candidates.Where(t => !t.WillPromptForDetect);
-        }
-
-        var tweaksToScan = candidates.ToList();
-        var perTweakTimeout = TimeSpan.FromSeconds(6);
-
-        foreach (var tweak in tweaksToScan)
-        {
-            try
-            {
-                ct.ThrowIfCancellationRequested();
-                if (forceRedetect || tweak.AppliedStatus == TweakAppliedStatus.Unknown)
-                {
-                    using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-                    timeoutCts.CancelAfter(perTweakTimeout);
-                    await tweak.DetectStatusAsync(timeoutCts.Token);
-                }
-            }
-            catch (OperationCanceledException) when (ct.IsCancellationRequested)
-            {
-                throw;
-            }
-            catch (OperationCanceledException)
-            {
-                // Timed out. Leave the previous state and continue.
-            }
-            catch
-            {
-                // Silently ignore detection failures for individual tweaks
-            }
-        }
-        _inventoryCoordinator.SaveSnapshot(Tweaks);
-        _inventoryCoordinator.UpdateStatusMessage(Tweaks);
-
-        _healthCoordinator.Refresh(Tweaks);
-
-        if (!skipElevationPrompts && !skipExpensiveOperations)
-        {
-            foreach (var category in CategoryGroups)
-            {
-                category.MarkDetected();
-            }
-        }
+        await _detectionCoordinator.DetectAllTweaksAsync(
+            Tweaks,
+            CategoryGroups,
+            _inventoryCoordinator,
+            _healthCoordinator,
+            ct,
+            forceRedetect,
+            skipElevationPrompts,
+            skipExpensiveOperations);
     }
 
     public async Task RefreshInventoryInBackgroundAsync(CancellationToken ct = default)
     {
-        await _inventoryCoordinator.RunBackgroundRefreshAsync(
+        await _detectionCoordinator.RefreshInventoryInBackgroundAsync(
             Tweaks,
-            async token => await DetectAllTweaksAsync(
-                ct: token,
-                forceRedetect: true,
-                skipElevationPrompts: true,
-                skipExpensiveOperations: false),
+            CategoryGroups,
+            _inventoryCoordinator,
+            _healthCoordinator,
             ct);
     }
 
