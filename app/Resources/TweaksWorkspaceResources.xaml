@@ -392,14 +392,14 @@
     </Style>
 
     <Style x:Key="WorkspaceStatusBadgeBorderStyle" TargetType="Border">
-        <Setter Property="Margin" Value="0,0,6,0"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
         <Setter Property="Padding" Value="7,3"/>
         <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="Background" Value="#202020"/>
         <Setter Property="BorderBrush" Value="#363636"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="MinWidth" Value="72"/>
+        <Setter Property="MinWidth" Value="80"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
@@ -437,13 +437,15 @@
     </Style>
 
     <Style x:Key="WorkspaceEvidenceBadgeBorderStyle" TargetType="Border">
-        <Setter Property="Margin" Value="0,0,6,0"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
         <Setter Property="Padding" Value="5,1"/>
         <Setter Property="CornerRadius" Value="3"/>
         <Setter Property="Background" Value="#202020"/>
         <Setter Property="BorderBrush" Value="#303030"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="MinWidth" Value="28"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="A">
                 <Setter Property="Background" Value="#24201F"/>
@@ -492,8 +494,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="76"/>
-                    <ColumnDefinition Width="112"/>
+                    <ColumnDefinition Width="88"/>
+                    <ColumnDefinition Width="120"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
@@ -522,7 +524,7 @@
                                Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,14,16" VerticalAlignment="Top">
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,18,16" VerticalAlignment="Top">
                     <Border Tag="{Binding AppliedStatus}"
                             Style="{StaticResource WorkspaceStatusBadgeBorderStyle}"
                             ToolTip="{Binding StatusTooltip}">
@@ -557,8 +559,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="76"/>
-                    <ColumnDefinition Width="104"/>
+                    <ColumnDefinition Width="88"/>
+                    <ColumnDefinition Width="108"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
@@ -585,7 +587,7 @@
                                Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,14,16" VerticalAlignment="Top">
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,18,16" VerticalAlignment="Top">
                     <Border Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeBorderStyle}">
                         <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
                     </Border>
