@@ -20,37 +20,45 @@
 
     <Grid Background="#0D0D0D">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="210"/>
+            <ColumnDefinition Width="224"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Background="#0F0F0F" BorderBrush="#191919" BorderThickness="0,0,1,0">
-            <Grid Margin="0,18,0,0">
+        <Border Grid.Column="0" Background="#101010" BorderBrush="#171717" BorderThickness="0,0,1,0">
+            <Grid Margin="0,22,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Margin="20,0,16,12">
+                <StackPanel Grid.Row="0" Margin="22,0,18,14">
                     <TextBlock Text="{Binding WorkspaceCategoryHeader}" Style="{StaticResource SectionEyebrowStyle}"/>
                     <TextBlock Text="{Binding SelectedCategoryLabel}" Margin="0,4,0,0" FontSize="16" FontWeight="SemiBold" Foreground="#F4F4F4"/>
-                    <TextBlock Text="{Binding SelectedCategoryContext}" Margin="0,4,0,0" FontSize="11" Foreground="#585858"/>
+                    <TextBlock Text="{Binding SelectedCategoryContext}" Margin="0,5,0,0" FontSize="11" Foreground="#5C5C5C" TextWrapping="Wrap"/>
                 </StackPanel>
 
-                <Button Grid.Row="1" Command="{Binding ClearCategorySelectionCommand}" Tag="{Binding IsAllCategoriesSelected}" Style="{StaticResource SidebarButtonStyle}">
+                <Button Grid.Row="1"
+                        Margin="0,0,0,2"
+                        Command="{Binding ClearCategorySelectionCommand}"
+                        Tag="{Binding IsAllCategoriesSelected}"
+                        Style="{StaticResource SidebarButtonStyle}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="36"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="{Binding AllItemsLabel}" FontSize="12"/>
-                        <TextBlock Grid.Column="1" Text="{Binding CurrentWorkspaceItemCount}" FontSize="11" Foreground="#474747"/>
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding CurrentWorkspaceItemCount}"
+                                   FontSize="11"
+                                   Foreground="#4E4E4E"
+                                   HorizontalAlignment="Right"/>
                     </Grid>
                 </Button>
 
                 <ListBox Grid.Row="2"
-                         Margin="0,8,0,0"
+                         Margin="0,6,0,0"
                          ItemsSource="{Binding CategoryGroups}"
                          SelectedValuePath="CategoryName"
                          SelectedValue="{Binding SelectedCategoryName, Mode=TwoWay}"
@@ -64,10 +72,14 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="36"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{Binding CategoryName}" FontSize="12"/>
-                                <TextBlock Grid.Column="1" Text="{Binding CountBadge}" FontSize="11" Foreground="#474747"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding CountBadge}"
+                                           FontSize="11"
+                                           Foreground="#4E4E4E"
+                                           HorizontalAlignment="Right"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

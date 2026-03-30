@@ -5,9 +5,9 @@
 
     <Style x:Key="SidebarButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#777777"/>
+        <Setter Property="Foreground" Value="#767676"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="20,12,16,12"/>
+        <Setter Property="Padding" Value="22,11,18,11"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -23,7 +23,7 @@
                             <Setter Property="Foreground" Value="#DADADA"/>
                         </Trigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#141414"/>
+                            <Setter TargetName="Root" Property="Background" Value="#161616"/>
                             <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
                             <Setter Property="Foreground" Value="#FFFFFF"/>
                             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -36,9 +36,9 @@
 
     <Style x:Key="SidebarItemStyle" TargetType="ListBoxItem">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#777777"/>
+        <Setter Property="Foreground" Value="#767676"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="20,12,16,12"/>
+        <Setter Property="Padding" Value="22,11,18,11"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -54,7 +54,7 @@
                             <Setter Property="Foreground" Value="#DADADA"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#141414"/>
+                            <Setter TargetName="Root" Property="Background" Value="#161616"/>
                             <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
                             <Setter Property="Foreground" Value="#FFFFFF"/>
                             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -70,13 +70,13 @@
         <Setter Property="Background" Value="#151515"/>
         <Setter Property="BorderBrush" Value="#252525"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10,4"/>
-        <Setter Property="Margin" Value="0,0,8,8"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Margin" Value="0,0,8,0"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
-                    <Border x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" Padding="{TemplateBinding Padding}">
+                    <Border x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4" Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -132,7 +132,8 @@
         <Setter Property="Foreground" Value="#E8E8E8"/>
         <Setter Property="BorderBrush" Value="#232323"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10,7"/>
+        <Setter Property="MinHeight" Value="34"/>
+        <Setter Property="Padding" Value="12,8"/>
         <Setter Property="CaretBrush" Value="#E8E8E8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -177,14 +178,14 @@
         <Setter Property="Foreground" Value="#909090"/>
         <Setter Property="BorderBrush" Value="#252525"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="12,5"/>
+        <Setter Property="Padding" Value="12,6"/>
         <Setter Property="MinWidth" Value="76"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" Padding="{TemplateBinding Padding}">
+                    <Border x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4" Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -256,13 +257,13 @@
     </Style>
 
     <Style x:Key="WorkspaceRowBorderStyle" TargetType="Border">
-        <Setter Property="BorderBrush" Value="#191919"/>
-        <Setter Property="BorderThickness" Value="0,0,0,0.5"/>
+        <Setter Property="BorderBrush" Value="#171717"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
 
     <Style x:Key="WorkspaceSelectionCheckBoxStyle" TargetType="CheckBox">
-        <Setter Property="Margin" Value="0,20,20,0"/>
+        <Setter Property="Margin" Value="0,18,18,0"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -283,36 +284,36 @@
     </Style>
 
     <Style x:Key="WorkspaceRowTitleStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0,0,12,6"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Margin" Value="0,0,12,7"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="#ECECEC"/>
     </Style>
 
     <Style x:Key="WorkspaceDescriptionStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0,2,0,0"/>
+        <Setter Property="Margin" Value="0,1,0,0"/>
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="Foreground" Value="#8A8A8A"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="MaxWidth" Value="820"/>
+        <Setter Property="MaxWidth" Value="760"/>
     </Style>
 
     <Style x:Key="WorkspaceResearchGateStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0,7,0,0"/>
+        <Setter Property="Margin" Value="0,8,0,0"/>
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="#33FFFFFF"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="WorkspaceRowMetaStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="Margin" Value="0,9,0,0"/>
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="#666666"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="WorkspaceBatchSummaryStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0,5,0,0"/>
+        <Setter Property="Margin" Value="0,6,0,0"/>
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="#5B5B5B"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -390,7 +391,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="196"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
@@ -435,7 +436,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="112"/>
+                    <ColumnDefinition Width="124"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
