@@ -571,6 +571,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(HasDiff));
                 OnPropertyChanged(nameof(CompactInfoLine));
+                OnPropertyChanged(nameof(ConfigurationCompactInfoLine));
                 OnPropertyChanged(nameof(CompactInfoTooltip));
                 OnPropertyChanged(nameof(StatusIcon));
                 OnPropertyChanged(nameof(StatusColor));
@@ -589,6 +590,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             if (SetProperty(ref _targetValue, value))
             {
                 OnPropertyChanged(nameof(CompactInfoLine));
+                OnPropertyChanged(nameof(ConfigurationCompactInfoLine));
                 OnPropertyChanged(nameof(CompactInfoTooltip));
             }
         }
@@ -603,6 +605,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(HasDetectedState));
                 OnPropertyChanged(nameof(InventoryFreshnessText));
+                OnPropertyChanged(nameof(ConfigurationInventoryFreshnessText));
             }
         }
     }
@@ -615,6 +618,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             if (SetProperty(ref _isStateFromCache, value))
             {
                 OnPropertyChanged(nameof(InventoryFreshnessText));
+                OnPropertyChanged(nameof(ConfigurationInventoryFreshnessText));
             }
         }
     }
@@ -659,6 +663,45 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
+    public string ConfigurationInventoryFreshnessText
+    {
+        get
+        {
+            if (!LastDetectedAtUtc.HasValue)
+            {
+                return "Not checked yet";
+            }
+
+            var elapsed = DateTimeOffset.UtcNow - LastDetectedAtUtc.Value;
+            if (elapsed < TimeSpan.Zero)
+            {
+                elapsed = TimeSpan.Zero;
+            }
+
+            string ageText;
+            if (elapsed.TotalMinutes < 1)
+            {
+                ageText = $"{Math.Max(1, (int)elapsed.TotalSeconds)}s ago";
+            }
+            else if (elapsed.TotalHours < 1)
+            {
+                ageText = $"{(int)elapsed.TotalMinutes}m ago";
+            }
+            else if (elapsed.TotalDays < 1)
+            {
+                ageText = $"{(int)elapsed.TotalHours}h ago";
+            }
+            else
+            {
+                ageText = $"{(int)elapsed.TotalDays}d ago";
+            }
+
+            return IsStateFromCache
+                ? $"Checked from cache {ageText}"
+                : $"Checked live {ageText}";
+        }
+    }
+
     /// <summary>
     /// Before state for snapshot comparison (same as CurrentValue).
     /// </summary>
@@ -686,6 +729,19 @@ public sealed class TweakItemViewModel : ViewModelBase
         : "No changes detected";
 
     public string ImpactAreaLabel => _impactAreaLabel;
+
+    public string ConfigurationImpactAreaText => ImpactAreaLabel switch
+    {
+        "Registry" => "Registry setting",
+        "Preset" => "Preset option",
+        "Service" => "Service setting",
+        "Task" => "Scheduled task",
+        "Settings" => "Windows setting",
+        "File" => "File cleanup",
+        "Command" => "Command action",
+        "Composite" => "Multi-step change",
+        _ => ImpactAreaLabel
+    };
 
     public string EffectSummary
     {
@@ -755,6 +811,27 @@ public sealed class TweakItemViewModel : ViewModelBase
             var current = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : CurrentValue;
             var target = string.IsNullOrWhiteSpace(TargetValue) ? "Optimized" : TargetValue;
             return $"{current} -> {target}";
+        }
+    }
+
+    public string ConfigurationCompactInfoLine
+    {
+        get
+        {
+            var target = string.IsNullOrWhiteSpace(TargetValue) ? "Preferred state" : TargetValue;
+            var current = string.IsNullOrWhiteSpace(CurrentValue) ? string.Empty : CurrentValue;
+
+            if (string.IsNullOrWhiteSpace(current) || current.Equals("Unknown", StringComparison.OrdinalIgnoreCase))
+            {
+                return $"Preferred: {target}";
+            }
+
+            if (current.Equals(target, StringComparison.OrdinalIgnoreCase))
+            {
+                return $"Current: {current}";
+            }
+
+            return $"Current: {current}   Preferred: {target}";
         }
     }
 

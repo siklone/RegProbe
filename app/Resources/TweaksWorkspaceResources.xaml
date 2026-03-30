@@ -466,14 +466,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding ImpactAreaLabel}"
+                        <TextBlock Text="{Binding ConfigurationImpactAreaText}"
                                    Style="{StaticResource WorkspaceFooterLabelStyle}"/>
                         <TextBlock Grid.Column="2"
-                                   Text="{Binding CompactInfoLine}"
+                                   Text="{Binding ConfigurationCompactInfoLine}"
                                    Style="{StaticResource ConfigurationFooterValueStyle}"
                                    Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"/>
                         <TextBlock Grid.Column="3"
-                                   Text="{Binding InventoryFreshnessText}"
+                                   Text="{Binding ConfigurationInventoryFreshnessText}"
                                    Style="{StaticResource WorkspaceFooterHintStyle}"
                                    Margin="16,0,0,0"/>
                     </Grid>
