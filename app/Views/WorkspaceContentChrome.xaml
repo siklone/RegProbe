@@ -98,9 +98,9 @@
                                FontSize="11"
                                Foreground="#8A8A8A"
                                TextWrapping="Wrap">
-                        <Run Text="{Binding FilterSummary}"/>
+                        <Run Text="{Binding FilterSummary, Mode=OneWay}"/>
                         <Run Text=" &#183; "/>
-                        <Run Text="{Binding InventoryStatusMessage}"/>
+                        <Run Text="{Binding InventoryStatusMessage, Mode=OneWay}"/>
                     </TextBlock>
                 </StackPanel>
             </Grid>
