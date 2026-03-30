@@ -133,9 +133,12 @@
         <Setter Property="Foreground" Value="#E8E8E8"/>
         <Setter Property="BorderBrush" Value="#2F2F2F"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="MinHeight" Value="36"/>
-        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="MinHeight" Value="34"/>
+        <Setter Property="Padding" Value="12,7"/>
         <Setter Property="CaretBrush" Value="#E8E8E8"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -145,23 +148,29 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
                             <ScrollViewer x:Name="PART_ContentHost"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Center"
                                           Margin="{TemplateBinding Padding}"/>
-                            <TextBlock Margin="10,0,10,0"
-                                       VerticalAlignment="Center"
-                                       Foreground="#575757"
-                                       IsHitTestVisible="False"
-                                       Text="{TemplateBinding Tag}">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text.Length, RelativeSource={RelativeSource TemplatedParent}}" Value="0">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
+                              <TextBlock Margin="10,0,10,0"
+                                         VerticalAlignment="Center"
+                                         Foreground="#575757"
+                                         IsHitTestVisible="False"
+                                         Text="{TemplateBinding Tag}">
+                                  <TextBlock.Style>
+                                      <Style TargetType="TextBlock">
+                                          <Setter Property="Visibility" Value="Collapsed"/>
+                                          <Style.Triggers>
+                                              <MultiDataTrigger>
+                                                  <MultiDataTrigger.Conditions>
+                                                      <Condition Binding="{Binding Text.Length, RelativeSource={RelativeSource TemplatedParent}}" Value="0"/>
+                                                      <Condition Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                                  </MultiDataTrigger.Conditions>
+                                                  <Setter Property="Visibility" Value="Visible"/>
+                                              </MultiDataTrigger>
+                                          </Style.Triggers>
+                                      </Style>
+                                  </TextBlock.Style>
+                              </TextBlock>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
