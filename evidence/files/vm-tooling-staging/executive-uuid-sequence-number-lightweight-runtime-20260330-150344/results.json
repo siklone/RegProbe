@@ -1,0 +1,106 @@
+﻿{
+    "generated_utc":  "2026-03-30T13:23:47.2412522Z",
+    "candidate_id":  "system.executive-uuid-sequence-number",
+    "value_name":  "UuidSequenceNumber",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "shell_before":  null,
+    "shell_after":  null,
+    "best_phase":  "short-trigger-etw",
+    "status":  "no-hit",
+    "exact_query_hits":  0,
+    "exact_runtime_read":  false,
+    "phase_results":  {
+                          "short-trigger-etw":  {
+                                                    "generated_utc":  "2026-03-30T12:14:34.8570156Z",
+                                                    "value_name":  "UuidSequenceNumber",
+                                                    "phase":  "short-trigger-etw",
+                                                    "trigger_profile":  "uuid-rpc-com-burst-short",
+                                                    "status":  "no-hit",
+                                                    "etl_exists":  true,
+                                                    "csv_exists":  true,
+                                                    "etl_length":  66306048,
+                                                    "csv_line_count":  489192,
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "exact_line_count":  0,
+                                                    "path_line_count":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "trigger_failures":  [
+
+                                                                         ],
+                                                    "errors":  [
+
+                                                               ]
+                                                },
+                          "split-trace-start":  {
+                                                    "generated_utc":  "2026-03-30T12:14:46.9879207Z",
+                                                    "value_name":  "UuidSequenceNumber",
+                                                    "phase":  "split-trace-start",
+                                                    "trigger_profile":  "uuid-rpc-com-burst-only",
+                                                    "status":  "trace-started",
+                                                    "etl_exists":  false,
+                                                    "csv_exists":  false,
+                                                    "etl_length":  0,
+                                                    "csv_line_count":  0,
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "exact_line_count":  0,
+                                                    "path_line_count":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "trigger_failures":  [
+
+                                                                         ],
+                                                    "errors":  [
+
+                                                               ]
+                                                },
+                          "split-trigger":  {
+                                                "generated_utc":  "2026-03-30T12:15:32.6551650Z",
+                                                "value_name":  "UuidSequenceNumber",
+                                                "phase":  "split-trigger",
+                                                "trigger_profile":  "uuid-rpc-com-burst-only",
+                                                "status":  "trigger-complete",
+                                                "etl_exists":  false,
+                                                "csv_exists":  false,
+                                                "etl_length":  0,
+                                                "csv_line_count":  0,
+                                                "exact_runtime_read":  false,
+                                                "exact_query_hits":  0,
+                                                "exact_line_count":  0,
+                                                "path_line_count":  0,
+                                                "trigger_failure_count":  0,
+                                                "trigger_failures":  [
+
+                                                                     ],
+                                                "errors":  [
+
+                                                           ]
+                                            },
+                          "split-trace-stop":  {
+                                                   "generated_utc":  "2026-03-30T12:21:14.2915302Z",
+                                                   "value_name":  "UuidSequenceNumber",
+                                                   "phase":  "split-trace-stop",
+                                                   "trigger_profile":  "uuid-rpc-com-burst-only",
+                                                   "status":  "no-hit",
+                                                   "etl_exists":  true,
+                                                   "csv_exists":  true,
+                                                   "etl_length":  73596928,
+                                                   "csv_line_count":  506653,
+                                                   "exact_runtime_read":  false,
+                                                   "exact_query_hits":  0,
+                                                   "exact_line_count":  0,
+                                                   "path_line_count":  0,
+                                                   "trigger_failure_count":  0,
+                                                   "trigger_failures":  [
+
+                                                                        ],
+                                                   "errors":  [
+
+                                                              ]
+                                               }
+                      },
+    "artifacts":  {
+                      "summary":  "evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json",
+                      "note":  "research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md"
+                  }
+}

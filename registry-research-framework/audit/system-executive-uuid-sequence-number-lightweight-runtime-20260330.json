@@ -1,0 +1,26 @@
+{
+  "generated_utc": "2026-03-30T13:20:00Z",
+  "candidate_id": "system.executive-uuid-sequence-number",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "status": "no-hit",
+  "best_phase": "short-trigger-etw",
+  "exact_runtime_read": false,
+  "exact_query_hits": 0,
+  "phase_statuses": {
+    "short-trigger-etw": "no-hit",
+    "split-trace-start": "trace-started",
+    "split-trigger": "trigger-complete",
+    "split-trace-stop": "no-hit"
+  },
+  "artifacts": {
+    "summary": "evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json",
+    "results": "evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/results.json",
+    "candidate_summary": "evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json",
+    "note": "research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md"
+  },
+  "notes": [
+    "The guest trigger quoting bug was fixed before the final run.",
+    "Both the short-trigger ETW lane and the split trace lane produced ETL and CSV output on the tools-hardened baseline.",
+    "Neither lane produced an exact UuidSequenceNumber query or even a path-only Executive hit."
+  ]
+}
