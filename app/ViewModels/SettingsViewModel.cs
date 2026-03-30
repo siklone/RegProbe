@@ -1,141 +1,36 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using RegProbe.App.Services;
-using RegProbe.Infrastructure;
 
 namespace RegProbe.App.ViewModels;
 
 public sealed class SettingsViewModel : ViewModelBase, IDisposable
 {
-    private readonly ISettingsStore _settingsStore;
-    private readonly IAppLogger _appLogger;
-    private readonly ThemeManager _themeManager = new();
-    private ThemePalette _currentThemePalette = ThemeManager.Nord;
-    private bool _isSaving;
-    private bool _isLoading;
+    private readonly SettingsWorkspaceCoordinator _coordinator = new();
     private bool _isDisposed;
-    private string _statusMessage = "Settings loaded.";
 
     public SettingsViewModel()
     {
-        var paths = AppPaths.FromEnvironment();
-        _settingsStore = new SettingsStore(paths);
-        _appLogger = new FileAppLogger(paths);
-        _ = LoadSettingsAsync();
+        _coordinator.PropertyChanged += OnCoordinatorPropertyChanged;
     }
 
-    public string Title => "Settings";
+    public string Title => _coordinator.Title;
 
-    public IEnumerable<ThemePalette> AvailableThemes => new[]
-    {
-        ThemeManager.Nord,
-        ThemeManager.ElectricPurple,
-        ThemeManager.SunsetOrange,
-        ThemeManager.CyberGreen,
-        ThemeManager.RubyRed
-    };
+    public IEnumerable<ThemePalette> AvailableThemes => _coordinator.AvailableThemes;
 
     public ThemePalette CurrentThemePalette
     {
-        get => _currentThemePalette;
-        set
-        {
-            if (SetProperty(ref _currentThemePalette, value))
-            {
-                _themeManager.ApplyTheme(value);
-                QueueSaveIfReady();
-            }
-        }
+        get => _coordinator.CurrentThemePalette;
+        set => _coordinator.CurrentThemePalette = value;
     }
 
-    public string StatusMessage
+    public string StatusMessage => _coordinator.StatusMessage;
+
+    public bool IsSaving => _coordinator.IsSaving;
+
+    private void OnCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        get => _statusMessage;
-        private set => SetProperty(ref _statusMessage, value);
-    }
-
-    public bool IsSaving
-    {
-        get => _isSaving;
-        private set => SetProperty(ref _isSaving, value);
-    }
-
-    private void QueueSaveIfReady()
-    {
-        if (_isLoading)
-        {
-            return;
-        }
-
-        _ = SaveSettingsAsync();
-    }
-
-    private async Task LoadSettingsAsync()
-    {
-        _isLoading = true;
-        try
-        {
-            var settings = await _settingsStore.LoadAsync(CancellationToken.None);
-            _currentThemePalette = AvailableThemes.FirstOrDefault(theme => theme.Name == settings.Theme) ?? ThemeManager.Nord;
-
-            _themeManager.ApplyTheme(_currentThemePalette);
-
-            OnPropertyChanged(nameof(CurrentThemePalette));
-            StatusMessage = "Theme preference loads automatically.";
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = $"Failed to load settings: {ex.Message}";
-        }
-        finally
-        {
-            _isLoading = false;
-        }
-    }
-
-    private async Task SaveSettingsAsync()
-    {
-        IsSaving = true;
-        StatusMessage = "Saving changes...";
-
-        try
-        {
-            var settings = await _settingsStore.LoadAsync(CancellationToken.None);
-            var previousTheme = settings.Theme;
-
-            settings.Theme = CurrentThemePalette.Name;
-
-            await _settingsStore.SaveAsync(settings, CancellationToken.None);
-            LogSettingsChanges(previousTheme, settings);
-            StatusMessage = "Changes saved automatically.";
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = $"Failed to save settings: {ex.Message}";
-        }
-        finally
-        {
-            IsSaving = false;
-        }
-    }
-
-    private void LogSettingsChanges(string previousTheme, AppSettings current)
-    {
-        var changes = new List<string>();
-
-        if (!string.Equals(previousTheme, current.Theme, StringComparison.OrdinalIgnoreCase))
-        {
-            changes.Add($"Theme={current.Theme}");
-        }
-
-        if (changes.Count == 0)
-        {
-            return;
-        }
-
-        _appLogger.Log(LogLevel.Info, $"Activity: Settings - {string.Join(", ", changes)}");
+        OnPropertyChanged(e.PropertyName);
     }
 
     public void Dispose()
@@ -146,5 +41,7 @@ public sealed class SettingsViewModel : ViewModelBase, IDisposable
         }
 
         _isDisposed = true;
+        _coordinator.PropertyChanged -= OnCoordinatorPropertyChanged;
+        _coordinator.Dispose();
     }
 }
