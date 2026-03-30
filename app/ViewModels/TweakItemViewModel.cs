@@ -862,12 +862,20 @@ public sealed class TweakItemViewModel : ViewModelBase
         _ => ClassEBackgroundBrush
     };
 
+    public string ConfigurationPrimaryActionTooltip => IsEvidenceClassActionable
+        ? "Apply this setting."
+        : PublicEvidenceClassGatingReason;
+
+    public string ConfigurationRollbackActionTooltip => IsEvidenceClassActionable
+        ? "Restore the value from before you changed this setting."
+        : PublicEvidenceClassGatingReason;
+
     public string PrimaryActionTooltip => IsEvidenceClassActionable
-        ? "Apply this setting without opening details."
+        ? "Run this action."
         : PublicEvidenceClassGatingReason;
 
     public string RollbackActionTooltip => IsEvidenceClassActionable
-        ? "Restore the previous value captured before Apply."
+        ? "Restore the previous value captured before you ran this action."
         : PublicEvidenceClassGatingReason;
 
     public string ResearchGateMessage => IsEvidenceClassActionable ? string.Empty : "Evidence pending";
@@ -1016,6 +1024,8 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(HasEvidenceClass));
         OnPropertyChanged(nameof(EvidenceClassBrush));
         OnPropertyChanged(nameof(EvidenceClassBackgroundBrush));
+        OnPropertyChanged(nameof(ConfigurationPrimaryActionTooltip));
+        OnPropertyChanged(nameof(ConfigurationRollbackActionTooltip));
         OnPropertyChanged(nameof(PrimaryActionTooltip));
         OnPropertyChanged(nameof(RollbackActionTooltip));
         OnPropertyChanged(nameof(ResearchGateMessage));

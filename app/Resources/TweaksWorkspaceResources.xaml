@@ -326,6 +326,11 @@
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
+    <Style x:Key="ConfigurationFooterValueStyle" TargetType="TextBlock" BasedOn="{StaticResource WorkspaceFooterValueStyle}">
+        <Setter Property="Foreground" Value="#717171"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyText}"/>
+    </Style>
+
     <Style x:Key="WorkspaceFooterHintStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="#505050"/>
@@ -339,6 +344,11 @@
         <Setter Property="Foreground" Value="#555555"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="ConfigurationBatchSummaryStyle" TargetType="TextBlock" BasedOn="{StaticResource WorkspaceBatchSummaryStyle}">
+        <Setter Property="Foreground" Value="#636363"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyText}"/>
     </Style>
 
     <Style x:Key="WorkspaceStatusBadgeBorderStyle" TargetType="Border">
@@ -437,8 +447,10 @@
                 <StackPanel Grid.Column="1" Margin="0,16,24,16">
                     <WrapPanel>
                         <TextBlock Text="{Binding Name}" Style="{StaticResource WorkspaceRowTitleStyle}"/>
-                        <Border Tag="{Binding RepairState}" Style="{StaticResource WorkspaceStatusBadgeBorderStyle}">
-                            <TextBlock Text="{Binding RepairStatusText}" Tag="{Binding RepairState}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
+                        <Border Tag="{Binding AppliedStatus}"
+                                Style="{StaticResource WorkspaceStatusBadgeBorderStyle}"
+                                ToolTip="{Binding StatusTooltip}">
+                            <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
                         </Border>
                         <Border Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeBorderStyle}" Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
                             <TextBlock Text="{Binding EvidenceClassBadgeText}" Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeTextStyle}"/>
@@ -458,26 +470,26 @@
                                    Style="{StaticResource WorkspaceFooterLabelStyle}"/>
                         <TextBlock Grid.Column="2"
                                    Text="{Binding CompactInfoLine}"
-                                   Style="{StaticResource WorkspaceFooterValueStyle}"
+                                   Style="{StaticResource ConfigurationFooterValueStyle}"
                                    Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"/>
                         <TextBlock Grid.Column="3"
                                    Text="{Binding InventoryFreshnessText}"
                                    Style="{StaticResource WorkspaceFooterHintStyle}"
                                    Margin="16,0,0,0"/>
                     </Grid>
-                    <TextBlock Text="{Binding BatchSummaryLine}" Style="{StaticResource WorkspaceBatchSummaryStyle}" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
+                    <TextBlock Text="{Binding BatchSummaryLine}" Style="{StaticResource ConfigurationBatchSummaryStyle}" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <Button Content="Revert"
+                    <Button Content="Restore"
                             Command="{Binding RollbackCommand}"
-                            ToolTip="{Binding RollbackActionTooltip}"
+                            ToolTip="{Binding ConfigurationRollbackActionTooltip}"
                             Style="{StaticResource FlatButtonStyle}"
-                            MinWidth="82"
+                            MinWidth="88"
                             Margin="0,0,6,0"/>
                     <Button Content="{Binding ActionButtonText}"
                             Command="{Binding ApplyCommand}"
-                            ToolTip="{Binding PrimaryActionTooltip}"
+                            ToolTip="{Binding ConfigurationPrimaryActionTooltip}"
                             Style="{StaticResource ApplyButtonStyle}"
                             MinWidth="82"/>
                 </StackPanel>
