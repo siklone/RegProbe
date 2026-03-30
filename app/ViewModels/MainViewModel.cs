@@ -1,70 +1,30 @@
 using System;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using RegProbe.App.Services;
-using RegProbe.App.Services.TweakProviders;
 using RegProbe.App.Utilities;
-using RegProbe.Engine.Services;
-using RegProbe.Infrastructure;
 
 namespace RegProbe.App.ViewModels;
 
 public sealed class MainViewModel : ViewModelBase, IDisposable
 {
-    private readonly IBusyService _busyService = new BusyService();
-    private readonly TweaksViewModel _workspaceViewModel;
-    private readonly SettingsViewModel _settingsViewModel;
+    private readonly MainCompositionCoordinator _compositionCoordinator;
     private readonly MainRecoveryCoordinator _recoveryCoordinator;
     private readonly MainShellCoordinator _shellCoordinator;
 
     public MainViewModel()
     {
         LogToFile("========== APPLICATION STARTED ==========");
-
-        var paths = AppPaths.FromEnvironment();
-        var rollbackStore = new RollbackStateStore(paths);
-
-        var providers = new ITweakProvider[]
-        {
-            new SystemTweakProvider(),
-            new SystemRegistryTweakProvider(),
-            new PrivacyTweakProvider(),
-            new SecurityTweakProvider(),
-            new NetworkTweakProvider(),
-            new PowerTweakProvider(),
-            new PeripheralTweakProvider(),
-            new VisibilityTweakProvider(),
-            new PerformanceTweakProvider(),
-            new AudioTweakProvider(),
-            new MiscTweakProvider()
-        };
-
-        _workspaceViewModel = new TweaksViewModel(providers, _busyService);
-        _settingsViewModel = new SettingsViewModel();
-        var configurationViewModel = new ConfigurationShellViewModel(_workspaceViewModel);
-        var repairsViewModel = new RepairsShellViewModel(_workspaceViewModel);
-        var aboutViewModel = new AboutViewModel();
-
-        _recoveryCoordinator = new MainRecoveryCoordinator(rollbackStore, _workspaceViewModel, LogToFile);
+        _compositionCoordinator = new MainCompositionCoordinator(LogToFile);
+        _recoveryCoordinator = _compositionCoordinator.RecoveryCoordinator;
         _recoveryCoordinator.PropertyChanged += OnRecoveryCoordinatorPropertyChanged;
 
-        _shellCoordinator = new MainShellCoordinator(
-            configurationViewModel,
-            repairsViewModel,
-            _settingsViewModel,
-            aboutViewModel,
-            LogToFile);
+        _shellCoordinator = _compositionCoordinator.ShellCoordinator;
         _shellCoordinator.PropertyChanged += OnShellCoordinatorPropertyChanged;
-        _shellCoordinator.Initialize();
-
-        _ = Task.Run(async () =>
-        {
-            await _recoveryCoordinator.InitializeAsync();
-        });
+        _compositionCoordinator.Initialize();
     }
 
-    public IBusyService BusyService => _busyService;
+    public IBusyService BusyService => _compositionCoordinator.BusyService;
 
     public string AppVersionLabel => AppInfo.VersionLabel;
 
@@ -108,16 +68,7 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     {
         _recoveryCoordinator.PropertyChanged -= OnRecoveryCoordinatorPropertyChanged;
         _shellCoordinator.PropertyChanged -= OnShellCoordinatorPropertyChanged;
-
-        if (_workspaceViewModel is IDisposable workspaceDisposable)
-        {
-            workspaceDisposable.Dispose();
-        }
-
-        if (_settingsViewModel is IDisposable settingsDisposable)
-        {
-            settingsDisposable.Dispose();
-        }
+        _compositionCoordinator.Dispose();
     }
 
     private void OnRecoveryCoordinatorPropertyChanged(object? sender, PropertyChangedEventArgs e)
