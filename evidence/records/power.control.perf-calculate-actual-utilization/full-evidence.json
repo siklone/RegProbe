@@ -27,14 +27,14 @@
   },
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
-      "operation": null,
+      "operation": "RegQueryValue",
       "timestamp": null,
       "boot_phase_included": true,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json and research/notes/power-control-lightweight-runtime-follow-up-20260330.md"
     },
     "procmon": {
       "executed": true,
@@ -117,25 +117,26 @@
     }
   },
   "classification": {
-    "class": "C",
+    "class": "A",
     "pipeline_version": "v3.1",
-    "reason": "PerfCalculateActualUtilization is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, and a second guest-processed post-boot Procmon trigger batch. It still remains below Class A because neither runtime lane captured an exact runtime read for this value on the current baseline.",
+    "reason": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
       "static_ghidra",
-      "runtime_reboot"
+      "runtime_reboot",
+      "behavior_wpr"
     ],
-    "layer_count": 3,
+    "layer_count": 4,
     "frida_kernel_guard_applied": true,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
-    "class_ready_basis": "pending",
-    "next_missing_layer": "runtime-trace"
+    "class_ready_basis": "converged-vm",
+    "next_missing_layer": "none"
   },
   "timeline": [
     {
@@ -153,6 +154,14 @@
     {
       "step": "last_reviewed",
       "timestamp": "2026-03-29T14:05:00Z"
+    },
+    {
+      "step": "tools_hardened_lightweight_runtime",
+      "timestamp": "2026-03-30T00:05:00Z"
+    },
+    {
+      "step": "last_reviewed",
+      "timestamp": "2026-03-30T00:05:00Z"
     }
   ],
   "artifact_refs": [],

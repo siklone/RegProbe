@@ -15,9 +15,9 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 243 |
+| Class A | 245 |
 | Class B | 4 |
-| Class C | 4 |
+| Class C | 2 |
 | Class E | 54 |
 
 ## Category coverage

@@ -1,0 +1,25 @@
+{
+  "generated_utc": "2026-03-30T00:05:00Z",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "runtime_root": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603",
+  "note": "research/notes/power-control-lightweight-runtime-follow-up-20260330.md",
+  "vmtools_hardened": true,
+  "guestvar_reliable": false,
+  "guestvar_failure": "vmtoolsd info-set failed: Two and exactly two arguments expected",
+  "candidates": [
+    {
+      "candidate_id": "power.control.class1-initial-unpark-count",
+      "status": "exact-hit",
+      "exact_query_hits": 1,
+      "best_phase": "short-trigger-etw",
+      "summary": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/power-control-class1-initial-unpark-count/summary.json"
+    },
+    {
+      "candidate_id": "power.control.perf-calculate-actual-utilization",
+      "status": "exact-hit",
+      "exact_query_hits": 1,
+      "best_phase": "short-trigger-etw",
+      "summary": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/power-control-perf-calculate-actual-utilization/summary.json"
+    }
+  ]
+}

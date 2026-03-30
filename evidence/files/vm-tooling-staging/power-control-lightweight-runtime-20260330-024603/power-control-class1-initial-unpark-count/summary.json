@@ -1,0 +1,122 @@
+﻿{
+    "generated_utc":  "2026-03-29T23:53:34.4298971Z",
+    "candidate_id":  "power.control.class1-initial-unpark-count",
+    "value_name":  "Class1InitialUnparkCount",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-29T23:49:09.8753174Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-29T23:53:34.3590386Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "best_phase":  "short-trigger-etw",
+    "status":  "exact-hit",
+    "exact_query_hits":  1,
+    "exact_runtime_read":  true,
+    "phase_results":  {
+                          "short-trigger-etw":  {
+                                                    "generated_utc":  "2026-03-29T23:50:37.2055228Z",
+                                                    "value_name":  "Class1InitialUnparkCount",
+                                                    "phase":  "short-trigger-etw",
+                                                    "trigger_profile":  "processor-current-scheme-refresh-short",
+                                                    "status":  "exact-hit",
+                                                    "etl_exists":  true,
+                                                    "csv_exists":  true,
+                                                    "etl_length":  4571136,
+                                                    "csv_line_count":  32625,
+                                                    "exact_runtime_read":  true,
+                                                    "exact_query_hits":  1,
+                                                    "exact_line_count":  3,
+                                                    "path_line_count":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "errors":  [
+                                                                   "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                               ]
+                                                },
+                          "split-trace-start":  {
+                                                    "generated_utc":  "2026-03-29T23:51:16.8559662Z",
+                                                    "value_name":  "Class1InitialUnparkCount",
+                                                    "phase":  "split-trace-start",
+                                                    "trigger_profile":  "processor-current-scheme-refresh-only",
+                                                    "status":  "trace-started",
+                                                    "etl_exists":  false,
+                                                    "csv_exists":  false,
+                                                    "etl_length":  0,
+                                                    "csv_line_count":  0,
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "exact_line_count":  0,
+                                                    "path_line_count":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "errors":  [
+                                                                   "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                               ]
+                                                },
+                          "split-trigger":  {
+                                                "generated_utc":  "2026-03-29T23:52:09.9903562Z",
+                                                "value_name":  "Class1InitialUnparkCount",
+                                                "phase":  "split-trigger",
+                                                "trigger_profile":  "processor-current-scheme-refresh-only",
+                                                "status":  "trigger-complete",
+                                                "etl_exists":  false,
+                                                "csv_exists":  false,
+                                                "etl_length":  0,
+                                                "csv_line_count":  0,
+                                                "exact_runtime_read":  false,
+                                                "exact_query_hits":  0,
+                                                "exact_line_count":  0,
+                                                "path_line_count":  0,
+                                                "trigger_failure_count":  0,
+                                                "errors":  [
+                                                               "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                           ]
+                                            },
+                          "split-trace-stop":  {
+                                                   "generated_utc":  "2026-03-29T23:52:57.9114042Z",
+                                                   "value_name":  "Class1InitialUnparkCount",
+                                                   "phase":  "split-trace-stop",
+                                                   "trigger_profile":  "processor-current-scheme-refresh-only",
+                                                   "status":  "error",
+                                                   "etl_exists":  false,
+                                                   "csv_exists":  false,
+                                                   "etl_length":  0,
+                                                   "csv_line_count":  0,
+                                                   "exact_runtime_read":  false,
+                                                   "exact_query_hits":  0,
+                                                   "exact_line_count":  0,
+                                                   "path_line_count":  0,
+                                                   "trigger_failure_count":  0,
+                                                   "errors":  [
+                                                                  "logman stop failed: ",
+                                                                  "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                              ]
+                                               }
+                      },
+    "artifacts":  {
+                      "summary":  "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/power-control-class1-initial-unpark-count/summary.json"
+                  }
+}
