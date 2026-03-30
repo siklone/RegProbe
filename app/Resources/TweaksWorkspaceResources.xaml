@@ -70,7 +70,7 @@
         <Setter Property="Background" Value="#151515"/>
         <Setter Property="BorderBrush" Value="#252525"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Padding" Value="10,4"/>
         <Setter Property="Margin" Value="0,0,8,0"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
@@ -132,8 +132,8 @@
         <Setter Property="Foreground" Value="#E8E8E8"/>
         <Setter Property="BorderBrush" Value="#232323"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="MinHeight" Value="34"/>
-        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="MinHeight" Value="32"/>
+        <Setter Property="Padding" Value="12,7"/>
         <Setter Property="CaretBrush" Value="#E8E8E8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -306,16 +306,16 @@
     </Style>
 
     <Style x:Key="WorkspaceRowMetaStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0,9,0,0"/>
+        <Setter Property="Margin" Value="0,8,0,0"/>
         <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Foreground" Value="#666666"/>
+        <Setter Property="Foreground" Value="#5E5E5E"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="WorkspaceBatchSummaryStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0,6,0,0"/>
+        <Setter Property="Margin" Value="0,4,0,0"/>
         <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Foreground" Value="#5B5B5B"/>
+        <Setter Property="Foreground" Value="#555555"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
@@ -391,7 +391,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="196"/>
+                    <ColumnDefinition Width="188"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
@@ -413,18 +413,18 @@
                     <TextBlock Text="{Binding BatchSummaryLine}" Style="{StaticResource WorkspaceBatchSummaryStyle}" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,16,0,0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <Button Content="Revert"
                             Command="{Binding RollbackCommand}"
                             ToolTip="{Binding RollbackActionTooltip}"
                             Style="{StaticResource FlatButtonStyle}"
-                            MinWidth="86"
+                            MinWidth="82"
                             Margin="0,0,6,0"/>
                     <Button Content="{Binding ActionButtonText}"
                             Command="{Binding ApplyCommand}"
                             ToolTip="{Binding PrimaryActionTooltip}"
                             Style="{StaticResource ApplyButtonStyle}"
-                            MinWidth="86"/>
+                            MinWidth="82"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -436,7 +436,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="124"/>
+                    <ColumnDefinition Width="112"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
@@ -464,12 +464,12 @@
                     <TextBlock Text="{Binding BatchSummaryLine}" Style="{StaticResource WorkspaceBatchSummaryStyle}" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,16,0,0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <Button Content="{Binding RunRepairButtonText}"
                             Command="{Binding RunRepairCommand}"
                             ToolTip="{Binding RunRepairTooltip}"
                             Style="{StaticResource RepairsActionButtonStyle}"
-                            MinWidth="86"/>
+                            MinWidth="82"/>
                 </StackPanel>
             </Grid>
         </Border>
