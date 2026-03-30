@@ -38,8 +38,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public RelayCommand ShowConfigurationCommand => _shellCoordinator.ShowConfigurationCommand;
 
-    public RelayCommand ShowSettingsCommand => _shellCoordinator.ShowSettingsCommand;
-
     public RelayCommand ShowAboutCommand => _shellCoordinator.ShowAboutCommand;
 
     public RelayCommand FocusSearchCommand => _shellCoordinator.FocusSearchCommand;
@@ -51,8 +49,6 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
     public bool IsConfigurationViewActive => _shellCoordinator.IsConfigurationViewActive;
 
     public bool IsRepairsViewActive => _shellCoordinator.IsRepairsViewActive;
-
-    public bool IsSettingsViewActive => _shellCoordinator.IsSettingsViewActive;
 
     public bool IsAboutViewActive => _shellCoordinator.IsAboutViewActive;
 

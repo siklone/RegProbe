@@ -35,9 +35,6 @@
             <DataTemplate DataType="{x:Type viewModels:RepairsShellViewModel}">
                 <views:RepairsView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModels:SettingsViewModel}">
-                <views:SettingsView />
-            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModels:AboutViewModel}">
                 <views:AboutView />
             </DataTemplate>

@@ -33,7 +33,6 @@ public sealed class MainCompositionCoordinator : IDisposable
         };
 
         WorkspaceViewModel = new TweaksViewModel(providers, BusyService);
-        SettingsViewModel = new SettingsViewModel();
         var configurationViewModel = new ConfigurationShellViewModel(WorkspaceViewModel);
         var repairsViewModel = new RepairsShellViewModel(WorkspaceViewModel);
         var aboutViewModel = new AboutViewModel();
@@ -42,7 +41,6 @@ public sealed class MainCompositionCoordinator : IDisposable
         ShellCoordinator = new MainShellCoordinator(
             configurationViewModel,
             repairsViewModel,
-            SettingsViewModel,
             aboutViewModel,
             logToFile);
     }
@@ -50,8 +48,6 @@ public sealed class MainCompositionCoordinator : IDisposable
     public IBusyService BusyService { get; }
 
     public TweaksViewModel WorkspaceViewModel { get; }
-
-    public SettingsViewModel SettingsViewModel { get; }
 
     public MainRecoveryCoordinator RecoveryCoordinator { get; }
 
@@ -66,6 +62,5 @@ public sealed class MainCompositionCoordinator : IDisposable
     public void Dispose()
     {
         WorkspaceViewModel.Dispose();
-        SettingsViewModel.Dispose();
     }
 }

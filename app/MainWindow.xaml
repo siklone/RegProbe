@@ -32,7 +32,6 @@
     <Window.InputBindings>
         <KeyBinding Key="D1" Modifiers="Control" Command="{Binding ShowConfigurationCommand}"/>
         <KeyBinding Key="D2" Modifiers="Control" Command="{Binding ShowRepairsCommand}"/>
-        <KeyBinding Key="OemComma" Modifiers="Control" Command="{Binding ShowSettingsCommand}"/>
         <KeyBinding Key="F1" Command="{Binding ShowAboutCommand}"/>
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
         <KeyBinding Key="Escape" Command="{Binding ClearFiltersCommand}"/>
@@ -44,7 +43,7 @@
         <Style x:Key="TrafficCommandButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="18"/>
             <Setter Property="Height" Value="18"/>
-            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -158,23 +157,8 @@
                             Margin="22,0,0,0"
                             VerticalAlignment="Center"
                             WindowChrome.IsHitTestVisibleInChrome="True">
-                    <Button Command="{Binding HostController.CloseCommand, ElementName=RootWindow}"
-                            ToolTip="Close"
-                            Foreground="#FF5F57"
-                            Tag="M 1,1 L 6,6 M 6,1 L 1,6"
-                            Style="{StaticResource TrafficCommandButtonStyle}"/>
-                    <Button Command="{Binding HostController.MinimizeCommand, ElementName=RootWindow}"
-                            ToolTip="Minimize"
-                            Foreground="#FEBC2E"
-                            Tag="M 1,3.5 H 6"
-                            Style="{StaticResource TrafficCommandButtonStyle}"/>
-                    <Button Command="{Binding HostController.ToggleMaximizeRestoreCommand, ElementName=RootWindow}"
-                            ToolTip="Maximize or restore"
-                            Foreground="#28C840"
-                            Tag="M 1,1.2 H 6 V 5.8 H 1 Z"
-                            Style="{StaticResource TrafficCommandButtonStyle}"/>
                     <TextBlock Text="RegProbe"
-                               Margin="12,0,0,0"
+                               Margin="0,0,0,0"
                                VerticalAlignment="Center"
                                Foreground="#747474"
                                FontFamily="{DynamicResource FontFamilyDisplay}"
@@ -193,11 +177,28 @@
                             Margin="0,0,18,0"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                     <TextBlock Text="{Binding AppVersionLabel}"
-                               Margin="0,0,0,0"
+                               Margin="0,0,12,0"
                                VerticalAlignment="Center"
                                Foreground="#505050"
                                FontFamily="{DynamicResource FontFamilyMono}"
                                FontSize="10"/>
+                    <Button Command="{Binding HostController.MinimizeCommand, ElementName=RootWindow}"
+                            ToolTip="Minimize"
+                            Foreground="#FEBC2E"
+                            Tag="M 1,3.5 H 6"
+                            Margin="0,0,8,0"
+                            Style="{StaticResource TrafficCommandButtonStyle}"/>
+                    <Button Command="{Binding HostController.ToggleMaximizeRestoreCommand, ElementName=RootWindow}"
+                            ToolTip="Maximize or restore"
+                            Foreground="#28C840"
+                            Tag="M 1,1.2 H 6 V 5.8 H 1 Z"
+                            Margin="0,0,8,0"
+                            Style="{StaticResource TrafficCommandButtonStyle}"/>
+                    <Button Command="{Binding HostController.CloseCommand, ElementName=RootWindow}"
+                            ToolTip="Close"
+                            Foreground="#FF5F57"
+                            Tag="M 1,1 L 6,6 M 6,1 L 1,6"
+                            Style="{StaticResource TrafficCommandButtonStyle}"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -213,17 +214,12 @@
                     <Button Content="Configuration"
                             Command="{Binding ShowConfigurationCommand}"
                             Tag="{Binding IsConfigurationViewActive}"
-                            Margin="0,0,10,0"
+                            Margin="0,0,14,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="Repairs"
                             Command="{Binding ShowRepairsCommand}"
                             Tag="{Binding IsRepairsViewActive}"
-                            Margin="0,0,10,0"
-                            Style="{StaticResource ShellTopTabButtonStyle}"/>
-                    <Button Content="Settings"
-                            Command="{Binding ShowSettingsCommand}"
-                            Tag="{Binding IsSettingsViewActive}"
-                            Margin="0,0,10,0"
+                            Margin="0,0,14,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="About"
                             Command="{Binding ShowAboutCommand}"
