@@ -23,6 +23,8 @@ public abstract class WorkspaceShellViewModelBase : ViewModelBase, IDisposable
 
     public string WorkspaceCategoryHeader => Workspace.WorkspaceCategoryHeader;
 
+    public string WorkspaceCategoryHint => Workspace.WorkspaceCategoryHint;
+
     public string SelectedCategoryLabel => Workspace.SelectedCategoryLabel;
 
     public string SelectedCategoryContext => Workspace.SelectedCategoryContext;

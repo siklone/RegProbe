@@ -273,6 +273,8 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string WorkspaceCategoryHeader => _shellState.WorkspaceCategoryHeader;
 
+    public string WorkspaceCategoryHint => _shellState.WorkspaceCategoryHint;
+
     public string AllItemsLabel => _shellState.AllItemsLabel;
 
     public string SearchPlaceholder => _shellState.SearchPlaceholder;
