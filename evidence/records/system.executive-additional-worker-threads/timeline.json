@@ -1,30 +1,21 @@
-[
-  {
-    "step": "faz0_intake",
-    "timestamp": "2026-03-28T00:08:28Z"
-  },
-  {
-    "step": "faz2_static_triage",
-    "timestamp": "2026-03-28T00:32:36Z"
-  },
-  {
-    "step": "faz3_registry_baseline_export",
-    "timestamp": "2026-03-28T06:50:53.0500795Z"
-  },
-  {
-    "step": "faz3_etl_registry_review",
-    "timestamp": "2026-03-28T13:47:39Z"
-  },
-  {
-    "step": "faz1_procmon_bootlog",
-    "timestamp": "2026-03-28T14:50:12Z"
-  },
-  {
-    "step": "faz1_procmon_stress_trigger",
-    "timestamp": "2026-03-28T16:02:02Z"
-  },
-  {
-    "step": "classification",
-    "timestamp": "2026-03-28T16:05:00Z"
-  }
-]
+{
+  "$schema": "registry-evidence-v3.1/timeline",
+  "timeline": [
+    {
+      "step": "bootstrap_record_load",
+      "timestamp": "2026-03-30T09:42:17.383399Z"
+    },
+    {
+      "step": "faz6",
+      "timestamp": "2026-03-30T09:42:17.383399Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-30T09:42:17.383399Z"
+    },
+    {
+      "step": "last_reviewed",
+      "timestamp": "2026-03-30T09:38:14Z"
+    }
+  ]
+}

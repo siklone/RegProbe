@@ -1,0 +1,162 @@
+﻿[
+    {
+        "generated_utc":  "2026-03-30T09:38:14.5485923Z",
+        "candidate_id":  "system.executive-additional-worker-threads",
+        "value_names":  [
+                            "AdditionalCriticalWorkerThreads",
+                            "AdditionalDelayedWorkerThreads"
+                        ],
+        "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+        "shell_before":  {
+                             "generated_utc":  "2026-03-30T09:30:03.6128422Z",
+                             "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                             "vm_running":  true,
+                             "tools_state":  "running",
+                             "process_query_error":  null,
+                             "shell_healthy":  true,
+                             "checks":  {
+                                            "explorer":  true,
+                                            "sihost":  true,
+                                            "shellhost":  true,
+                                            "ctfmon":  true,
+                                            "app":  false
+                                        }
+                         },
+        "shell_after":  {
+                            "generated_utc":  "2026-03-30T09:38:14.4789756Z",
+                            "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                            "vm_running":  true,
+                            "tools_state":  "running",
+                            "process_query_error":  null,
+                            "shell_healthy":  true,
+                            "checks":  {
+                                           "explorer":  true,
+                                           "sihost":  true,
+                                           "shellhost":  true,
+                                           "ctfmon":  true,
+                                           "app":  false
+                                       }
+                        },
+        "best_phase":  "split-trace-stop",
+        "status":  "exact-hit",
+        "exact_query_hits":  2,
+        "exact_runtime_read":  true,
+        "phase_results":  {
+                              "short-trigger-etw":  {
+                                                        "generated_utc":  "2026-03-30T09:32:07.6501373Z",
+                                                        "phase":  "short-trigger-etw",
+                                                        "trigger_profile":  "executive-concurrent-burst-short",
+                                                        "status":  "exact-hit",
+                                                        "etl_exists":  true,
+                                                        "csv_exists":  true,
+                                                        "etl_length":  30711808,
+                                                        "csv_line_count":  205549,
+                                                        "exact_runtime_read":  true,
+                                                        "exact_query_hits":  2,
+                                                        "exact_line_count":  4,
+                                                        "path_line_count":  0,
+                                                        "trigger_failure_count":  0,
+                                                        "trigger_failures":  [
+
+                                                                             ],
+                                                        "per_value_line_counts":  {
+                                                                                      "AdditionalDelayedWorkerThreads":  2,
+                                                                                      "AdditionalCriticalWorkerThreads":  2
+                                                                                  },
+                                                        "per_value_query_counts":  {
+                                                                                       "AdditionalDelayedWorkerThreads":  1,
+                                                                                       "AdditionalCriticalWorkerThreads":  1
+                                                                                   },
+                                                        "errors":  [
+
+                                                                   ]
+                                                    },
+                              "split-trace-start":  {
+                                                        "generated_utc":  "2026-03-30T09:32:16.5925225Z",
+                                                        "phase":  "split-trace-start",
+                                                        "trigger_profile":  "executive-concurrent-burst-only",
+                                                        "status":  "trace-started",
+                                                        "etl_exists":  false,
+                                                        "csv_exists":  false,
+                                                        "etl_length":  0,
+                                                        "csv_line_count":  0,
+                                                        "exact_runtime_read":  false,
+                                                        "exact_query_hits":  0,
+                                                        "exact_line_count":  0,
+                                                        "path_line_count":  0,
+                                                        "trigger_failure_count":  0,
+                                                        "trigger_failures":  [
+
+                                                                             ],
+                                                        "per_value_line_counts":  {
+
+                                                                                  },
+                                                        "per_value_query_counts":  {
+
+                                                                                   },
+                                                        "errors":  [
+
+                                                                   ]
+                                                    },
+                              "split-trigger":  {
+                                                    "generated_utc":  "2026-03-30T09:32:47.8823823Z",
+                                                    "phase":  "split-trigger",
+                                                    "trigger_profile":  "executive-concurrent-burst-only",
+                                                    "status":  "trigger-complete",
+                                                    "etl_exists":  false,
+                                                    "csv_exists":  false,
+                                                    "etl_length":  0,
+                                                    "csv_line_count":  0,
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "exact_line_count":  0,
+                                                    "path_line_count":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "trigger_failures":  [
+
+                                                                         ],
+                                                    "per_value_line_counts":  {
+
+                                                                              },
+                                                    "per_value_query_counts":  {
+
+                                                                               },
+                                                    "errors":  [
+
+                                                               ]
+                                                },
+                              "split-trace-stop":  {
+                                                       "generated_utc":  "2026-03-30T09:38:08.8455988Z",
+                                                       "phase":  "split-trace-stop",
+                                                       "trigger_profile":  "executive-concurrent-burst-only",
+                                                       "status":  "exact-hit",
+                                                       "etl_exists":  true,
+                                                       "csv_exists":  true,
+                                                       "etl_length":  68943872,
+                                                       "csv_line_count":  473979,
+                                                       "exact_runtime_read":  true,
+                                                       "exact_query_hits":  2,
+                                                       "exact_line_count":  4,
+                                                       "path_line_count":  0,
+                                                       "trigger_failure_count":  0,
+                                                       "trigger_failures":  [
+
+                                                                            ],
+                                                       "per_value_line_counts":  {
+                                                                                     "AdditionalDelayedWorkerThreads":  2,
+                                                                                     "AdditionalCriticalWorkerThreads":  2
+                                                                                 },
+                                                       "per_value_query_counts":  {
+                                                                                      "AdditionalDelayedWorkerThreads":  1,
+                                                                                      "AdditionalCriticalWorkerThreads":  1
+                                                                                  },
+                                                       "errors":  [
+
+                                                                  ]
+                                                   }
+                          },
+        "artifacts":  {
+                          "summary":  "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json"
+                      }
+    }
+]

@@ -1,42 +1,40 @@
 {
-  "etw": {
-    "executed": true,
-    "events_found": true,
-    "reading_process": "System (PID 4)",
-    "reading_pid": null,
-    "operation": "RegKcbCreate/RegOpenKey/RegQueryValue/RegSetValue around Session Manager\\\\Executive",
-    "timestamp": "2026-03-28T13:47:39Z",
-    "boot_phase_included": true,
-    "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json and evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt"
+  "$schema": "registry-evidence-v3.1/runtime-evidence",
+  "runtime": {
+    "etw": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": true,
+      "trace_file": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md"
+    },
+    "procmon": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "trace_file": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md"
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: key is treated as kernel, Frida is not valid for this lane.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
   },
-  "procmon": {
-    "executed": true,
-    "events_found": false,
-    "reading_process": null,
-    "trace_file": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/executive-worker-threads-procmon-bootlog.pml.md and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.pml.md and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt"
-  },
-  "frida": {
-    "executed": false,
-    "skip_reason": "KERNEL_GUARD: the Executive worker-thread pair lives under HKLM\\\\SYSTEM and stays out of Frida.",
-    "result_valid": false
-  },
-  "dtrace": {
-    "executed": false,
-    "events_found": false,
-    "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
-    "output_file": null
-  },
-  "registry_observation": {
-    "executed": true,
-    "query_exit_code": 0,
-    "export_exit_code": 0,
-    "timestamp": "2026-03-28T06:50:53.0500795Z",
-    "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
-    "observation": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
-    "output_files": [
-      "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
-      "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg",
-      "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/metadata.json"
-    ]
-  }
+  "source_evidence_ids": [
+    "vm-executive-lightweight-runtime-20260330",
+    "vm-session-manager-executive-baseline-20260328",
+    "vm-executive-etl-registry-review-20260328",
+    "vm-executive-etw-keyword-review-20260328",
+    "vm-executive-procmon-bootlog-20260328",
+    "vm-executive-stress-trigger-20260328"
+  ]
 }

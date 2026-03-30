@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-30T00:56:53.660039Z",
+  "generated_utc": "2026-03-30T09:42:18.148413Z",
   "summary": {
     "total_active_records": 251,
     "class_counts": {
-      "A": 246,
-      "B": 5
+      "A": 248,
+      "B": 3
     },
     "lane_counts": {
       "official-policy": 236,
@@ -14,11 +14,11 @@
       "system": 3
     },
     "next_missing_layer_counts": {
-      "none": 246,
-      "decision-gate": 4,
+      "none": 247,
+      "decision-gate": 3,
       "incident-review": 1
     },
-    "re_audit_required_count": 8
+    "re_audit_required_count": 7
   },
   "entries": [
     {
@@ -3686,9 +3686,9 @@
     {
       "record_id": "power.disable-cpu-idle-states",
       "tweak_id": "power.disable-cpu-idle-states",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "official-policy",
-      "class_ready_basis": "final-decision-gate",
+      "class_ready_basis": "official-doc",
       "official": true,
       "official_doc_exists": true,
       "procmon": false,
@@ -9541,9 +9541,9 @@
     {
       "record_id": "system.executive-additional-worker-threads",
       "tweak_id": "system.executive-additional-worker-threads",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "system",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": true,
@@ -9553,7 +9553,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -9576,17 +9576,17 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": true,
-      "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker",
-      "original_class": "B",
-      "original_pipeline_version": "pre-v3.1",
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
       "new_pipeline_version": "v3.1",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
+      "confidence": "high",
       "source_file": "research/records/system.executive-additional-worker-threads.json",
       "incident_ids": []
     },

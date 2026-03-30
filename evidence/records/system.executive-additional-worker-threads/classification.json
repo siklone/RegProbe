@@ -1,20 +1,24 @@
 {
-  "class": "C",
-  "pipeline_version": "v3.1",
-  "reason": "The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\\Executive activity from System (PID 4), a successful Procmon boot-log lane with zero exact-value hits, a shell-safe post-boot stress trigger lane with zero exact-value hits, and current-build ntoskrnl string hits plus Ghidra fallback artifacts for both values. That gives the lane credible cross-layer evidence, but the semantics still depend on unresolved current-build code blocks, the exact worker-thread pair still does not appear in runtime payloads, and there is no shipped RegProbe mapping.",
-  "cross_layer_satisfied": true,
-  "layers_used": [
-    "runtime_etw",
-    "static_ghidra"
-  ],
-  "layer_count": 2,
-  "frida_kernel_guard_applied": true,
-  "dead_flag_checks": {
-    "etw_executed": true,
-    "boot_phase_included": true,
-    "correct_tool_used": true,
-    "trigger_condition_tested": true
-  },
-  "class_ready_basis": "candidate-lane",
-  "next_missing_layer": "app-mapping"
+  "$schema": "registry-evidence-v3.1/classification",
+  "classification": {
+    "class": "A",
+    "pipeline_version": "v3.1",
+    "reason": "The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager/Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project even though the lane remains research-only and not app-actionable.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "layer_count": 3,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": true,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "converged-vm",
+    "next_missing_layer": "none"
+  }
 }

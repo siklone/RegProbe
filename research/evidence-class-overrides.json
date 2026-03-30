@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "record_id": "power.disable-cpu-idle-states",
+      "evidence_class": "A",
+      "reason_code": "cross_layer_verified_undocumented_surface",
+      "gating_reason": "This record is cross-layer verified. The project treats strong proof for undocumented raw registry surfaces as Class A even when app actionability stays separate."
+    },
+    {
       "record_id": "power.control.hibernate-enabled-default",
       "evidence_class": "B",
       "reason_code": "vm_firmware_limitation",
@@ -11,6 +17,12 @@
       "evidence_class": "B",
       "reason_code": "vm_standby_limitation",
       "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated."
+    },
+    {
+      "record_id": "system.executive-additional-worker-threads",
+      "evidence_class": "A",
+      "reason_code": "cross_layer_verified_runtime_triggered_lane",
+      "gating_reason": "This record is cross-layer verified. Exact runtime reads now exist for both Executive worker-thread values, and app actionability stays separate from evidence class."
     }
   ]
 }

@@ -7,7 +7,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Total records | 305 |
-| Validated | 242 |
+| Validated | 243 |
 | Deprecated | 54 |
 | Review required | 0 |
 | Records with V3.1 evidence roots | 17 |
@@ -15,9 +15,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 245 |
+| Class A | 247 |
 | Class B | 4 |
-| Class C | 2 |
 | Class E | 54 |
 
 ## Record index
@@ -82,11 +81,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.hibernate-enabled` | draft | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `6c21df45712ef4b051c4ef9ccdf72ca465dcfbec51781ed1c79e8b0234de2a4f` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 5 |
 | `power.control.hibernate-enabled-default` | draft | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `e4a43cf36d0469a04b74ffda95a33fa9eefd5e6265631d89e68d04bb579cca07` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 8 |
 | `power.control.lid-reliability-state` | draft | Class A | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `de78b98f5ddb7704eef29828abb84265225420b4785d1a85f15b179cc2dea257` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 5 |
-| `power.control.mf-buffering-threshold` | draft | Class C | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `1269f0a19b1472b29cd03a650d32ae4225e2f02f1eb4b6efa9f86467ff539549` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 6 |
+| `power.control.mf-buffering-threshold` | draft | Class A | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `1269f0a19b1472b29cd03a650d32ae4225e2f02f1eb4b6efa9f86467ff539549` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 7 |
 | `power.control.perf-calculate-actual-utilization` | draft | Class A | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `fd43a45e38a2817c49f08897abb5a0fc61e91ad377f41225c60ef5c4062ce3c6` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 7 |
-| `power.control.timer-rebase-threshold-on-drips-exit` | draft | Class C | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `b638842f7751a8955e18eb3b71db4638f83313cdf562ebc430b4656cbd23a8c9` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 6 |
+| `power.control.timer-rebase-threshold-on-drips-exit` | draft | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `b638842f7751a8955e18eb3b71db4638f83313cdf562ebc430b4656cbd23a8c9` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 7 |
 | `power.session-watchdog-timeouts` | draft | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `8a2a1d9a6409cb71f9f9036a19adf84e9f668e850968debf90613fbb665cc24d` | `f355df9bc19fd7fc2004d519f9dad438bf2d9efeafdcd4e47820b874951f52a8` | 12 |
-| `system.executive-additional-worker-threads` | draft | Class B | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `3f4475c5de442f01911fa80644d8ffe5e8f3d3c598d7b297c77ec2bae04a5c3f` | `2e041291b008ee5b933d99b59c8fac2dcdbab0473dc22a10c456fa689a83377c` | 9 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `6ce0e5db2707ec9cbf72aa19ccf4a8e60cbfe2e7be762f6f1331aadfc5d5e150` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `4893acbb2b403e5e4019cb4a2a6b24eb9df08c9ca701abe536ee94bd2132f1f9` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
 | `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `bfa0e4a8a76f638ce108c59b6996e8effa2401ed3352af8d6a292f05a5535409` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 3 |
@@ -156,7 +154,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `6a731a6f1daaf7e8c60484c08470bf9b797792229e0db6efb7b289236f593b5f` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `d99a4a196bb7ade9872b432e8823c3a2e8b36f7dc3f2a337ccb8afc0870dd615` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `41ec2d697f93f72a365362b9a27540a2dd5099759fa6c883cc8ea3b760089c93` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
-| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `9f56b6df6c94fca006dc60edd96e3cca55e2272f8bcb2937a2e201cf4787f921` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 12 |
+| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `b14f18b1518e357f58cc9d9f7fec4d3f189d322db7e792fac16cf79ab5dec68e` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 12 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `fe497a2a85b6de48d9a8cda72987ff783682f1ae3de3b475a9e391a3ff825040` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 5 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | - | `084ee7e96b498345f57f1c5614d1c3a23f9a3ffe8889d2901866f201aa69845b` | `44e29d37bb9e8b44313f77307041293d030872438f451cb698ed815556190ae0` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `7e90c125281f67c1372246356f80900ddc6aa7f81b2ad306ce8dea935c0be2ca` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
@@ -278,6 +276,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `3dfff6cd25df091a39c6812d5deb2eff7a5e109a7c89df74012b5ae55eef2bc7` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 5 |
 | `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `5b1ee4edeb7d7e48fb4e7a3d248e4690da561b156aed37e484a0a53d8c12abf6` | `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5` | 4 |
 | `system.enable-indexing-encrypted-items` | validated | Class A | `research/records/system.enable-indexing-encrypted-items.json` | - | `dbc7f44a53867d870654bc9969d1ece428a69ad464ef00450df6b5e5902bdefd` | `2d8e2f73bef48f5c225b93406c5963cbf2d66c538cc9f6125fb87906a648f73d` | 3 |
+| `system.executive-additional-worker-threads` | validated | Class A | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `c8ef40765b0555636bf3aa6055244a82ecd3d4c3d1ce137e6268151c954ae1af` | `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490` | 10 |
 | `system.graphics-tdr-ddi-delay` | validated | Class A | `research/records/system.graphics-tdr-ddi-delay.json` | - | `c5605404618dd9a49e50579d0cbd5225dbd9d1301aa3dc21c9074052bd8e4cf9` | `4da5d6e01596bef7305846933e89c7e400510e7d321079dff7d499ed24c500ba` | 2 |
 | `system.graphics-tdr-delay` | validated | Class A | `research/records/system.graphics-tdr-delay.json` | - | `2087a405a1d5e63e0cfcd7da9b2cf161309b05c1fa1f913303d0dc442d77db3e` | `51e9efa0b205e822d3a1801971b53d243a521fe4987bfac8f20c9e6602f61067` | 2 |
 | `system.graphics-tdr-level` | validated | Class A | `research/records/system.graphics-tdr-level.json` | - | `39874b63fc82ef8396e9affffe5972a76c6ef7697ecb2df78a88a8feb15cf1f5` | `51ac3d035a9005a8668aba311d68be1aa3a5f3f45848950ccad2a10ce18ce893` | 2 |
@@ -1995,13 +1994,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.mf-buffering-threshold`
 
 - Status: `draft`
-- Evidence class: `Class C`
+- Evidence class: `Class A`
 - Source file: `research/records/power.control.mf-buffering-threshold.json`
 - V3.1 evidence root: [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold)
 - Source SHA256: `1269f0a19b1472b29cd03a650d32ae4225e2f02f1eb4b6efa9f86467ff539549`
 - Proof SHA256: `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2`
 
-**Summary:** Draft candidate package for MfBufferingThreshold under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for MfBufferingThreshold. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for MfBufferingThreshold.
+**Summary:** Draft candidate package for MfBufferingThreshold under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for MfBufferingThreshold through the new disk I/O burst trigger. App surfacing remains a separate product decision from evidence classification.
 
 **Evidence**
 
@@ -2013,6 +2012,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) |
+| `vm-power-control-lightweight-runtime-remaining-20260330` | `etw-trace` | Tools-hardened lightweight ETW I/O burst follow-up for remaining power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) |
 
 **Validation proof**
 
@@ -2021,6 +2021,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:173](../Docs/power/power.md:173) shows `MfBufferingThreshold` with observed literal `0` in the repo power notes. |
 | Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for MfBufferingThreshold. App surfacing is tracked separately from evidence classification. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | A |
+| Reason | non_official_v31_reaudit |
+| Priority | 1 |
+| New pipeline version | v3.1 |
 
 ---
 
@@ -2060,13 +2069,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.timer-rebase-threshold-on-drips-exit`
 
 - Status: `draft`
-- Evidence class: `Class C`
+- Evidence class: `Class B`
 - Source file: `research/records/power.control.timer-rebase-threshold-on-drips-exit.json`
 - V3.1 evidence root: [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit)
 - Source SHA256: `b638842f7751a8955e18eb3b71db4638f83313cdf562ebc430b4656cbd23a8c9`
 - Proof SHA256: `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095`
 
-**Summary:** Draft candidate package for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for TimerRebaseThresholdOnDripsExit. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for TimerRebaseThresholdOnDripsExit.
+**Summary:** Draft candidate package for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 first checked modern standby capability before attempting any DRIPS-exit trigger. That capability gate showed the current VMware baseline only exposes Standby (S1), so a real DRIPS / Modern Standby exit trigger cannot be exercised here and the record remains decision-gated by a VM standby limitation rather than by a dead-flag conclusion.
 
 **Evidence**
 
@@ -2078,6 +2087,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) |
+| `vm-power-control-drips-capability-20260330` | `etw-trace` | Tools-hardened lightweight DRIPS capability gate for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) |
 
 **Validation proof**
 
@@ -2086,6 +2096,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:206](../Docs/power/power.md:206) shows `TimerRebaseThresholdOnDripsExit` with observed literal `60` in the repo power notes. |
 | Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for TimerRebaseThresholdOnDripsExit. App surfacing is tracked separately from evidence classification. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | B |
+| Reason | current_blocker |
+| Priority | 1 |
+| New pipeline version | v3.1 |
 
 ---
 
@@ -2124,41 +2143,6 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md](notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md) |
 | Exact quote / path | The scheduled-task decoupling did not fix the lane: the guest-side task did not leave behind a usable probe bundle, the task itself was not present when queried after recovery, wake history still stayed at zero, and the postmortem still did not show a fresh sleep/resume Kernel-Power trail. |
 | Notes | The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger that stayed shell-safe while still returning no matching hits, and two separate S1-specific Procmon attempts. One disturbed the VMware guest-ops channel without leaving usable in-guest artifacts, and the scheduled-task variant still left no task registration, no usable artifacts, no wake-history signal, and no fresh Kernel-Power sleep/resume output. Together they confirm the candidate surface is real, but they still do not show a direct read of WatchdogResumeTimeout or WatchdogSleepTimeout. |
-
----
-
-### `system.executive-additional-worker-threads`
-
-- Status: `draft`
-- Evidence class: `Class B`
-- Source file: `research/records/system.executive-additional-worker-threads.json`
-- V3.1 evidence root: [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads)
-- Source SHA256: `3f4475c5de442f01911fa80644d8ffe5e8f3d3c598d7b297c77ec2bae04a5c3f`
-- Proof SHA256: `2e041291b008ee5b933d99b59c8fac2dcdbab0473dc22a10c456fa689a83377c`
-
-**Summary:** Draft candidate record only. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\\Executive, an ETW-specific keyword review, a successful Procmon boot-log lane with exact-value filtering, a shell-safe post-boot stress trigger lane with exact-value filtering, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, and a supporting ReactOS semantic hypothesis for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads. That is enough to keep the pair active as a research lane, but the semantics still rely on unresolved current-build code blocks, the exact worker-thread values still do not show up in runtime payloads, and there is no shipped RegProbe mapping.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `vm-session-manager-executive-baseline-20260328` | `registry-observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) |
-| `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) |
-| `kernel-power-existing-static-probe-20260328` | `inference` | Kernel power static probe summary for existing Session Manager candidates | [registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json](../registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json) and [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) |
-| `kernel-power-existing-next-gate-20260328` | `inference` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) |
-| `vm-executive-etl-registry-review-20260328` | `etw-trace` | Bounded host-side ETL review for Session Manager Executive | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) |
-| `vm-executive-etw-keyword-review-20260328` | `etw-trace` | ETW-specific keyword review for the Executive worker-thread pair | [evidence/files/vm/executive-etw-keyword-review-20260328-180226/summary.json](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json) and [evidence/files/vm/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt) and [research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md](notes/system-executive-additional-worker-threads-follow-up-package-20260328.md) |
-| `vm-executive-procmon-bootlog-20260328` | `procmon-trace` | Procmon boot-log review for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json) and [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json) and [research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md](notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md) |
-| `vm-executive-stress-trigger-20260328` | `procmon-trace` | Shell-safe post-boot stress trigger for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-stress-20260328-184856/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json) and [evidence/files/vm/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt) and [research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md](notes/system-executive-additional-worker-threads-stress-trigger-20260328.md) |
-| `reactos-executive-worker-threads-hypothesis-20260328` | `open-source-reference` | ReactOS semantic hypothesis for the Executive worker-thread pair | [evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md](../evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md) and [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) |
-
-**Validation proof**
-
-| Field | Value |
-| --- | --- |
-| Source | [research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md](notes/system-executive-additional-worker-threads-stress-trigger-20260328.md) |
-| Exact quote / path | The Executive pair is no longer waiting on "maybe a post-boot stress condition will surface it." A real post-boot stressed Procmon lane now exists, stayed shell-safe, and still failed to produce an exact read for either worker-thread value or the adjacent UuidSequenceNumber value. |
-| Notes | This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, a successful exact-value Procmon boot-log lane, a successful shell-safe post-boot stress trigger lane, plus current-build ntoskrnl string and Ghidra fallback evidence. It is strong enough for an active candidate record, but still too weak for a shipped mapping or a claimed non-default profile because the exact worker-thread pair does not yet appear in the runtime payload. |
 
 ---
 
@@ -4196,10 +4180,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/power.disable-cpu-idle-states.json`
 - V3.1 evidence root: [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states)
-- Source SHA256: `9f56b6df6c94fca006dc60edd96e3cca55e2272f8bcb2937a2e201cf4787f921`
+- Source SHA256: `b14f18b1518e357f58cc9d9f7fec4d3f189d322db7e792fac16cf79ab5dec68e`
 - Proof SHA256: `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b`
 
-**Summary:** Validated observed implementation only. This record now has a Defender-excluded canonical VM baseline, a successful stepwise A/B/C1/C2/C3/C4/D runtime package on RegProbe-Baseline-20260328, and a machine-checkable apply, reboot, WPR, ETL, copy-back, and restore pass for the app's current profile. The remaining blocker is no longer guest execution, registry write rights, reboot orchestration, WPR stop, ETL existence, or host collection. The record stays Class B because the app still exposes a raw power-manager registry bundle rather than a supported Microsoft control surface.
+**Summary:** Validated observed implementation only. This record now has a Defender-excluded canonical VM baseline, a successful stepwise A/B/C1/C2/C3/C4/D runtime package on RegProbe-Baseline-20260328, and a machine-checkable apply, reboot, WPR, ETL, copy-back, and restore pass for the app's current profile. The remaining blocker is no longer guest execution, registry write rights, reboot orchestration, WPR stop, ETL existence, or host collection. Cross-layer evidence now converges strongly enough for Class A even though the bundle remains a raw undocumented power-manager surface.
 
 **Evidence**
 
@@ -7818,6 +7802,51 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [evidence/files/missing/search-admx.md](../evidence/files/missing/search-admx.md) |
 | Exact quote / path | <policy name="AllowIndexingEncryptedStoresOrItems" class="Machine" ... key="SOFTWARE/Policies/Microsoft/Windows/Windows Search" valueName="AllowIndexingEncryptedStoresOrItems"> ... <enabledValue><decimal value="1" /></enabledValue> |
 | Notes | Local Microsoft Search.admx defines the exact machine policy path and value name. The companion Search.adml help text explains that enabling the policy indexes encrypted content, disabling it blocks encrypted indexing, and not configuring it falls back to the local setting. |
+
+---
+
+### `system.executive-additional-worker-threads`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/system.executive-additional-worker-threads.json`
+- V3.1 evidence root: [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads)
+- Source SHA256: `c8ef40765b0555636bf3aa6055244a82ecd3d4c3d1ce137e6268151c954ae1af`
+- Proof SHA256: `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490`
+
+**Summary:** Validated cross-layer record. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\\Executive, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, a supporting ReactOS semantic hypothesis, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent I/O and process-burst trigger. That is enough for Class A within this project even though the lane remains research-only and non-actionable in the app.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `vm-executive-lightweight-runtime-20260330` | `etw-trace` | Tools-hardened lightweight ETW runtime follow-up for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json) and [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md](notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md) |
+| `vm-session-manager-executive-baseline-20260328` | `registry-observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) |
+| `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) |
+| `kernel-power-existing-static-probe-20260328` | `inference` | Kernel power static probe summary for existing Session Manager candidates | [registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json](../registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json) and [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) |
+| `kernel-power-existing-next-gate-20260328` | `inference` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) |
+| `vm-executive-etl-registry-review-20260328` | `etw-trace` | Bounded host-side ETL review for Session Manager Executive | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) |
+| `vm-executive-etw-keyword-review-20260328` | `etw-trace` | ETW-specific keyword review for the Executive worker-thread pair | [evidence/files/vm/executive-etw-keyword-review-20260328-180226/summary.json](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json) and [evidence/files/vm/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt) and [research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md](notes/system-executive-additional-worker-threads-follow-up-package-20260328.md) |
+| `vm-executive-procmon-bootlog-20260328` | `procmon-trace` | Procmon boot-log review for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json) and [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json) and [research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md](notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md) |
+| `vm-executive-stress-trigger-20260328` | `procmon-trace` | Shell-safe post-boot stress trigger for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-stress-20260328-184856/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json) and [evidence/files/vm/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt) and [research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md](notes/system-executive-additional-worker-threads-stress-trigger-20260328.md) |
+| `reactos-executive-worker-threads-hypothesis-20260328` | `open-source-reference` | ReactOS semantic hypothesis for the Executive worker-thread pair | [evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md](../evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md) and [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md](notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md) |
+| Exact quote / path | The tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under the concurrent burst trigger, with shell health preserved before and after the run. |
+| Notes | This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, current-build ntoskrnl string and Ghidra fallback evidence, and a tools-hardened lightweight ETW runtime lane that produced exact live reads for both values. It is strong enough for Class A while still leaving app actionability off. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | A |
+| Reason | non_official_v31_reaudit |
+| Priority | 1 |
+| New pipeline version | v3.1 |
 
 ---
 

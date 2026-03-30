@@ -1,0 +1,24 @@
+{
+  "generated_utc": "2026-03-30T09:38:14Z",
+  "record_id": "system.executive-additional-worker-threads",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "runner": "registry-research-framework/tools/run-executive-worker-threads-lightweight-runtime-followup.ps1",
+  "summary_ref": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json",
+  "candidate_summary_ref": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json",
+  "result": {
+    "status": "exact-hit",
+    "exact_runtime_read": true,
+    "exact_query_hits": 2,
+    "best_phase": "split-trace-stop",
+    "trigger_profile": "executive-concurrent-burst-only"
+  },
+  "value_names": [
+    "AdditionalCriticalWorkerThreads",
+    "AdditionalDelayedWorkerThreads"
+  ],
+  "notes": [
+    "The tools-hardened lightweight ETW lane produced exact RegQueryValue hits for both Executive worker-thread values.",
+    "The final successful run happened after fixing the reg-add quoting bug and the split-phase shared trace-path bug.",
+    "Shell health stayed clean before and after the run."
+  ]
+}

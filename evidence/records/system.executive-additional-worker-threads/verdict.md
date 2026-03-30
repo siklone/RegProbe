@@ -1,25 +1,14 @@
-# system.executive-additional-worker-threads verdict
+# system.executive-additional-worker-threads
 
-## Classification
+- Class: `A`
+- Pipeline: `v3.1`
+- Official doc: `false`
+- Cross-layer: `true`
+- Layer set: `runtime_procmon, static_ghidra, behavior_wpr`
+- Tools: `etw, procmon, ghidra, ghidra_no_function_fallback, wpr`
 
-- `Class C`
+Validated cross-layer record. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager/Executive, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, a supporting ReactOS semantic hypothesis, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent I/O and process-burst trigger. That is enough for Class A within this project even though the lane remains research-only and non-actionable in the app.
 
-## Why
+## Current verdict
 
-- baseline existence is confirmed on Win25H2Clean
-- a bounded boot-time ETL extract proves early `Session Manager\Executive` activity from `System (PID 4)`
-- a real Procmon boot-log lane completed cleanly but still returned zero exact-value hits
-- a shell-safe post-boot stress trigger lane also completed cleanly and still returned zero exact-value hits
-- current-build ntoskrnl exact string hits and Ghidra fallback artifacts exist
-- both values are present together at `0` on the clean baseline
-
-## Why not higher
-
-- no shipped RegProbe mapping exists yet
-- no direct live read of the exact Executive worker-thread values has been captured yet
-- even the successful Procmon boot-log and post-boot stress trigger lanes still returned `MATCH_COUNT=0`
-- the strongest semantic lead still depends on forced-boundary current-build Ghidra artifacts
-
-## Current posture
-
-Keep this lane active as research only. Do not ship it as an end-user tweak.
+The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager/Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project even though the lane remains research-only and not app-actionable.

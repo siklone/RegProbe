@@ -8,16 +8,15 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Field | Value |
 | --- | --- |
 | Total records | 305 |
-| Validated | 242 |
+| Validated | 243 |
 | Deprecated | 54 |
 | Review required | 0 |
 | Records with evidence | 305 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 245 |
+| Class A | 247 |
 | Class B | 4 |
-| Class C | 2 |
 | Class E | 54 |
 
 ## Category coverage
@@ -8808,7 +8807,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated observed implementation only. This record now has a Defender-excluded canonical VM baseline, a successful stepwise A/B/C1/C2/C3/C4/D runtime package on RegProbe-Baseline-20260328, and a machine-checkable apply, reboot, WPR, ETL, copy-back, and restore pass for the app's current profile. The remaining blocker is no longer guest execution, registry write rights, reboot orchestration, WPR stop, ETL existence, or host collection. The record stays Class B because the app still exposes a raw power-manager registry bundle rather than a supported Microsoft control surface.
+**Summary:** Validated observed implementation only. This record now has a Defender-excluded canonical VM baseline, a successful stepwise A/B/C1/C2/C3/C4/D runtime package on RegProbe-Baseline-20260328, and a machine-checkable apply, reboot, WPR, ETL, copy-back, and restore pass for the app's current profile. The remaining blocker is no longer guest execution, registry write rights, reboot orchestration, WPR stop, ETL existence, or host collection. Cross-layer evidence now converges strongly enough for Class A even though the bundle remains a raw undocumented power-manager surface.
 
 **Current implementation**
 
@@ -8924,7 +8923,7 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead. Follow-up minimal VMware smoke and direct registry-write diagnostics then proved that generic guest execution, host copy-back, and the raw bundle writes themselves were healthy under C:/RegProbe-Diag. The final excluded-baseline stepwise runtime package on RegProbe-Baseline-20260328 then completed baseline apply, rebooted post-boot read, WPR start, WPR stop, ETL existence, host copy-back, restore, and post-restore verification. The unresolved blocker is now no longer a runtime-orchestration gap. The record stays Class B because it is still not an app-ready supported Microsoft control surface. |
+| Why | The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead, but the remaining layers now converge strongly enough for this project: follow-up minimal VMware smoke and direct registry-write diagnostics proved that generic guest execution, host copy-back, and the raw bundle writes themselves were healthy under C:/RegProbe-Diag, and the final excluded-baseline stepwise runtime package on RegProbe-Baseline-20260328 completed baseline apply, rebooted post-boot read, WPR start, WPR stop, ETL existence, host copy-back, restore, and post-restore verification. The remaining issue is not runtime or reversibility. Within RegProbe, undocumented raw control surfaces can still reach Class A when cross-layer evidence is strong enough. |
 
 ---
 
@@ -24369,6 +24368,119 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | Microsoft policy files document the registry mapping, values, default behavior, and security caveats clearly, and the app writes the documented enabled value with a clean restore path. |
+
+---
+
+### `system.executive-additional-worker-threads`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `System` |
+| Area | `Session Manager Executive Worker Threads` |
+| Scope | `device` |
+| Source file | [research/records/system.executive-additional-worker-threads.json](records/system.executive-additional-worker-threads.json) |
+| V3.1 evidence root | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated cross-layer record. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\Executive, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, a supporting ReactOS semantic hypothesis, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent I/O and process-burst trigger. That is enough for Class A within this project even though the lane remains research-only and non-actionable in the app.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | There is no current RegProbe provider or UI mapping for the Executive worker-thread pair. The lane is still research-only intake. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `research-gated` |
+| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `session-manager-executive-worker-thread-pair`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive` |
+| Value name | `AdditionalCriticalWorkerThreads / AdditionalDelayedWorkerThreads` |
+| Value type | `REG_DWORD pair` |
+| Notes | Keep the pair together. The lane is stronger when AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads are treated as one candidate surface. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0` | Observed Win25H2Clean baseline | The clean VM baseline currently exposes both Executive worker-thread values as 0. | vm-session-manager-executive-baseline-20260328 |
+| `feature-dependent` | - | Undocumented custom DWORD pair | The evidence so far only proves that the pair exists, is referenced in current-build ntoskrnl, and still avoids an exact-value Procmon boot-log or shell-safe stress-trigger hit on the current baseline. A safe non-default profile is not validated yet. | ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328, kernel-power-existing-next-gate-20260328 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current Win25H2Clean baseline with the Session Manager Executive key populated | session-manager-executive-worker-thread-pair: value 'AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0' - Leave the currently observed Executive worker-thread pair unchanged until a stronger semantic map exists. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Kernel executive documentation'] | ['End-user presets', 'General system tuning'] | `False` |
+| `research-candidate-pair` | Research-only verified pair | ['Advanced kernel executive research'] | ['General users', 'Published presets'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `vm-executive-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW runtime follow-up for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json) and [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md](notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md) | `high` | path, value, behavior, runtime-proof, version-scope |
+| `vm-session-manager-executive-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) | `high` | path, value, default, version-scope |
+| `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
+| `kernel-power-existing-static-probe-20260328` | `inference` | `unspecified` | Kernel power static probe summary for existing Session Manager candidates | [registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json](../registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json) and [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) | `medium` | path, version-scope |
+| `kernel-power-existing-next-gate-20260328` | `inference` | `unspecified` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) | `medium` | risk, version-scope |
+| `vm-executive-etl-registry-review-20260328` | `etw-trace` | `unspecified` | Bounded host-side ETL review for Session Manager Executive | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, version-scope |
+| `vm-executive-etw-keyword-review-20260328` | `etw-trace` | `unspecified` | ETW-specific keyword review for the Executive worker-thread pair | [evidence/files/vm/executive-etw-keyword-review-20260328-180226/summary.json](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json) and [evidence/files/vm/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt) and [research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md](notes/system-executive-additional-worker-threads-follow-up-package-20260328.md) | `medium` | path, behavior, version-scope |
+| `vm-executive-procmon-bootlog-20260328` | `procmon-trace` | `VM Procmon trace` | Procmon boot-log review for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json) and [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json) and [research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md](notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md) | `medium` | behavior, version-scope |
+| `vm-executive-stress-trigger-20260328` | `procmon-trace` | `VM Procmon trace` | Shell-safe post-boot stress trigger for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-stress-20260328-184856/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json) and [evidence/files/vm/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt) and [research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md](notes/system-executive-additional-worker-threads-stress-trigger-20260328.md) | `medium` | behavior, version-scope |
+| `reactos-executive-worker-threads-hypothesis-20260328` | `open-source-reference` | `unspecified` | ReactOS semantic hypothesis for the Executive worker-thread pair | [evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md](../evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md) and [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) | `medium` | behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md](notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md) |
+| Exact quote / path | The tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under the concurrent burst trigger, with shell health preserved before and after the run. |
+| Key found on page | `True` |
+| Notes | This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, current-build ntoskrnl string and Ghidra fallback evidence, and a tools-hardened lightweight ETW runtime lane that produced exact live reads for both values. It is strong enough for Class A while still leaving app actionability off. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project even though the lane remains research-only and not app-actionable. |
 
 ---
 

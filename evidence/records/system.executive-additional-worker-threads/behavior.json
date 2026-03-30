@@ -1,29 +1,37 @@
 {
-  "typeperf": {
-    "executed": false,
-    "counter": null,
-    "before_average": null,
-    "after_average": null,
-    "delta_percent": null,
-    "sample_count": null,
-    "before_file": null,
-    "after_file": null
+  "$schema": "registry-evidence-v3.1/behavior-evidence",
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": true,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md"
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
   },
-  "wpr": {
-    "executed": false,
-    "boot_time_before_ms": null,
-    "boot_time_after_ms": null,
-    "cpu_delta": null,
-    "trace_file": null
-  },
-  "benchmark": {
-    "executed": false,
-    "summary": null,
-    "output_file": null
-  },
-  "registry_sideeffects": {
-    "executed": false,
-    "sideeffect_count": null,
-    "diff_file": null
-  }
+  "source_evidence_ids": [
+    "vm-executive-lightweight-runtime-20260330",
+    "vm-executive-etl-registry-review-20260328",
+    "vm-executive-etw-keyword-review-20260328"
+  ]
 }
