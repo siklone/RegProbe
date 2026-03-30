@@ -11,31 +11,13 @@ RegProbe is a Windows desktop configuration shell plus a research workspace for 
 
 ## What Ships Today
 
-The current app is a focused desktop shell with three top-level surfaces:
+The shipped app is a focused three-surface shell: `Configuration` for the main workspace, `Repairs` for recovery and cleanup actions, and `About` for repo, build, and log context. The current UI is deliberately tighter than the older builds. It is a dark, flat-row workspace with a custom chrome, a left category rail, and a denser list-first layout instead of boxed cards. Contributor-only evidence metadata still exists, but it stays behind repo and developer gating.
 
-- `Configuration`
-  the main workspace for browsing, filtering, previewing, and applying reversible tweaks
-- `Repairs`
-  the operational lane for recovery, cleanup, and repair-focused actions
-- `About`
-  repository, build, and log context
-
-The UI is intentionally tighter than the older builds. The current shell is a dark, flat-row workspace with:
-
-- a custom title bar
-- a category rail on the left
-- a dense tweak list instead of boxed cards
-- contributor-only evidence metadata kept behind repo/developer gating
-
-Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the old policy-heavy shell are not the current shipped experience.
+Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the old policy-heavy shell are no longer part of the shipped experience.
 
 ## Core Principles
 
-- SAFE tweaks follow `Detect -> Apply -> Verify -> Rollback`
-- the app does not auto-mutate the system on startup
-- elevated actions run through `RegProbe.ElevatedHost`, not the main app process
-- runtime validation happens in the VM, not on the host
-- research classification is evidence-first, not folklore-first
+RegProbe stays preview-first and reversible. SAFE tweaks follow `Detect -> Apply -> Verify -> Rollback`, the app does not mutate the system on startup, and elevated work runs through `RegProbe.ElevatedHost` instead of the main process. Runtime validation happens in the VM, not on the host, and research classification is evidence-first, not folklore-first.
 
 ## Repo Shape
 
@@ -95,17 +77,7 @@ If you are trying to learn the repo, read that file before deleting any `.ps1`. 
 
 ## Where To Start If You Want To Learn
 
-Read in this order:
-
-1. [README](README.md)
-2. [Contributing](CONTRIBUTING.md)
-3. [VM workflow](Docs/VM_WORKFLOW.md)
-4. [Script catalog](Docs/SCRIPT_CATALOG.md)
-5. [Research atlas](research/evidence-atlas.md)
-6. one record under [research/records](research/records)
-7. the matching bundle under [evidence/records](evidence/records)
-
-That path gives you the "what", the "how", and the proof trail in the same order contributors usually discover it.
+Start with [README](README.md) and [Contributing](CONTRIBUTING.md), then move to the [VM workflow](Docs/VM_WORKFLOW.md) and the [script catalog](Docs/SCRIPT_CATALOG.md). After that, open the [research atlas](research/evidence-atlas.md), pick one record under [research/records](research/records), and read it next to its matching bundle under [evidence/records](evidence/records). That path gives you the "what", the "how", and the proof trail in the same order most contributors discover it.
 
 ## Build And Run
 
@@ -163,4 +135,4 @@ This project is licensed under the MIT License.
 
 ## Studio Note
 
-This repo was built in a very human-in-the-loop way: mostly with Codex doing the heavy lifting, with a small Claude assist on a few design and review passes. The result is still hand-directed, repo-specific, and evidence-driven rather than generated-once-and-forgotten.
+Built with Codex for the heavy lifting and occasional Claude passes on design and review. Everything here is hand-directed and repo-specific.
