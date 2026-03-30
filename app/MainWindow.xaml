@@ -13,7 +13,7 @@
         Height="820"
         MinWidth="980"
         MinHeight="680"
-        Background="#0D0D0D"
+        Background="#151515"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="False"
@@ -135,7 +135,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="#0D0D0D">
+    <Grid Background="#151515">
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition Height="42"/>
@@ -144,7 +144,7 @@
 
         <Border Grid.Row="0"
                 Panel.ZIndex="100"
-                Background="#101010">
+                Background="#1B1B1B">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -160,9 +160,9 @@
                     <TextBlock Text="RegProbe"
                                Margin="0,0,0,0"
                                VerticalAlignment="Center"
-                               Foreground="#747474"
-                               FontFamily="{DynamicResource FontFamilyDisplay}"
-                               FontSize="11"/>
+                               Foreground="#A5A5A5"
+                               FontSize="12"
+                               FontWeight="SemiBold"/>
                 </StackPanel>
 
                 <Grid Grid.Column="1">
@@ -176,12 +176,6 @@
                             VerticalAlignment="Center"
                             Margin="0,0,18,0"
                             WindowChrome.IsHitTestVisibleInChrome="True">
-                    <TextBlock Text="{Binding AppVersionLabel}"
-                               Margin="0,0,12,0"
-                               VerticalAlignment="Center"
-                               Foreground="#505050"
-                               FontFamily="{DynamicResource FontFamilyMono}"
-                               FontSize="10"/>
                     <Button Command="{Binding HostController.MinimizeCommand, ElementName=RootWindow}"
                             ToolTip="Minimize"
                             Foreground="#FEBC2E"
@@ -205,8 +199,8 @@
 
         <Border Grid.Row="1"
                 Panel.ZIndex="90"
-                Background="#101010"
-                BorderBrush="#171717"
+                Background="#1B1B1B"
+                BorderBrush="#2A2A2A"
                 BorderThickness="0,0,0,1">
             <Grid Margin="22,0,22,0">
                 <StackPanel Orientation="Horizontal"
@@ -214,12 +208,12 @@
                     <Button Content="Configuration"
                             Command="{Binding ShowConfigurationCommand}"
                             Tag="{Binding IsConfigurationViewActive}"
-                            Margin="0,0,14,0"
+                            Margin="0,0,16,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="Repairs"
                             Command="{Binding ShowRepairsCommand}"
                             Tag="{Binding IsRepairsViewActive}"
-                            Margin="0,0,14,0"
+                            Margin="0,0,16,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="About"
                             Command="{Binding ShowAboutCommand}"
@@ -307,7 +301,7 @@
             </StackPanel>
 
             <Border Grid.Row="1"
-                    Background="#0D0D0D">
+                    Background="#151515">
                 <ContentControl Content="{Binding CurrentViewModel}">
                     <i:Interaction.Behaviors>
                         <behaviors:NavigationTransitionBehavior Transition="FadeAndSlide"/>

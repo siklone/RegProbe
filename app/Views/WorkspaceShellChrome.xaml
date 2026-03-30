@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Background="#0D0D0D"
+             Background="#151515"
              FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12"
              UseLayoutRounding="True"
@@ -18,13 +18,13 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="#0D0D0D">
+    <Grid Background="#151515">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="224"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Background="#101010" BorderBrush="#171717" BorderThickness="0,0,1,0">
+        <Border Grid.Column="0" Background="#1B1B1B" BorderBrush="#2A2A2A" BorderThickness="0,0,1,0">
             <Grid Margin="0,22,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>

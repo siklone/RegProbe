@@ -134,11 +134,11 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         ? "One-off cleanup, reset, and recovery actions."
         : "Registry-backed settings and feature switches that remain in place until you change them.";
 
-    public string WorkspaceCategoryHeader => IsMaintenanceWorkspaceSelected ? "Categories" : "Areas";
+    public string WorkspaceCategoryHeader => "Categories";
 
     public string WorkspaceCategoryHint => IsMaintenanceWorkspaceSelected
-        ? "Choose a repair category."
-        : "Choose a configuration area.";
+        ? "Browse repair categories."
+        : "Browse configuration categories.";
 
     public string AllItemsLabel => "All";
 

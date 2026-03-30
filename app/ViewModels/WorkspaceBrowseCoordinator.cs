@@ -83,14 +83,14 @@ public sealed class WorkspaceBrowseCoordinator : IDisposable
         ArgumentNullException.ThrowIfNull(clearSelectedCategory);
 
         var noun = _shellState.IsMaintenanceWorkspaceSelected ? "repairs" : "settings";
-        var scope = _shellState.IsAllCategoriesSelected ? "all areas" : _shellState.SelectedCategoryLabel;
-        var filterState = string.IsNullOrWhiteSpace(_shellState.SearchText) && !_shellState.ShowFavoritesOnly
-            ? "live"
-            : "filtered";
+        var scopedText = _shellState.IsAllCategoriesSelected
+            ? $"{visibleCount} of {totalCount} {noun}"
+            : $"{visibleCount} of {totalCount} {noun} in {_shellState.SelectedCategoryLabel}";
+        var filterSuffix = string.IsNullOrWhiteSpace(_shellState.SearchText) && !_shellState.ShowFavoritesOnly
+            ? string.Empty
+            : " filtered";
 
-        _presentationState.SetFilterSummary(
-            $"{visibleCount} of {totalCount} {noun} / {scope} / {filterState}.",
-            visibleCount > 0);
+        _presentationState.SetFilterSummary($"{scopedText}{filterSuffix}", visibleCount > 0);
 
         if (rebuildCategoryGroups)
         {

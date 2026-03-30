@@ -19,11 +19,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#141414"/>
+                            <Setter TargetName="Root" Property="Background" Value="#202020"/>
                             <Setter Property="Foreground" Value="#DADADA"/>
                         </Trigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#161616"/>
+                            <Setter TargetName="Root" Property="Background" Value="#222222"/>
                             <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
                             <Setter Property="Foreground" Value="#FFFFFF"/>
                             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -50,11 +50,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#141414"/>
+                            <Setter TargetName="Root" Property="Background" Value="#202020"/>
                             <Setter Property="Foreground" Value="#DADADA"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#161616"/>
+                            <Setter TargetName="Root" Property="Background" Value="#222222"/>
                             <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
                             <Setter Property="Foreground" Value="#FFFFFF"/>
                             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -66,13 +66,13 @@
     </Style>
 
     <Style x:Key="ChipStyle" TargetType="CheckBox">
-        <Setter Property="Foreground" Value="#686868"/>
-        <Setter Property="Background" Value="#151515"/>
-        <Setter Property="BorderBrush" Value="#252525"/>
+        <Setter Property="Foreground" Value="#8D8D8D"/>
+        <Setter Property="Background" Value="#202020"/>
+        <Setter Property="BorderBrush" Value="#2F2F2F"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="12,6"/>
         <Setter Property="Margin" Value="0,0,8,0"/>
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="11"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -82,8 +82,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#1A1A1A"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#353535"/>
+                            <Setter TargetName="Root" Property="Background" Value="#252525"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#444444"/>
                             <Setter Property="Foreground" Value="#F0F0F0"/>
                         </Trigger>
                         <MultiTrigger>
@@ -91,36 +91,36 @@
                                 <Condition Property="IsChecked" Value="True"/>
                                 <Condition Property="Tag" Value="Advanced"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Root" Property="Background" Value="#20170F"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#5A4020"/>
-                            <Setter Property="Foreground" Value="#E0AF63"/>
+                            <Setter TargetName="Root" Property="Background" Value="#2A241E"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#5A4830"/>
+                            <Setter Property="Foreground" Value="#D4B27E"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True"/>
                                 <Condition Property="Tag" Value="Risky"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Root" Property="Background" Value="#261614"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#5A2A24"/>
-                            <Setter Property="Foreground" Value="#D87A70"/>
+                            <Setter TargetName="Root" Property="Background" Value="#2C1E1B"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#694037"/>
+                            <Setter Property="Foreground" Value="#D49A92"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True"/>
                                 <Condition Property="Tag" Value="ClassA"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Root" Property="Background" Value="#241412"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#5A241C"/>
-                            <Setter Property="Foreground" Value="#E36A59"/>
+                            <Setter TargetName="Root" Property="Background" Value="#272120"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#4B3A37"/>
+                            <Setter Property="Foreground" Value="#B89D99"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True"/>
                                 <Condition Property="Tag" Value="ClassB"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Root" Property="Background" Value="#14202A"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#27445D"/>
-                            <Setter Property="Foreground" Value="#6FADE8"/>
+                            <Setter TargetName="Root" Property="Background" Value="#1D2328"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#37424C"/>
+                            <Setter Property="Foreground" Value="#9AAAB8"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -129,12 +129,12 @@
     </Style>
 
     <Style x:Key="SearchBoxStyle" TargetType="TextBox">
-        <Setter Property="Background" Value="#121212"/>
+        <Setter Property="Background" Value="#202020"/>
         <Setter Property="Foreground" Value="#E8E8E8"/>
-        <Setter Property="BorderBrush" Value="#232323"/>
+        <Setter Property="BorderBrush" Value="#2F2F2F"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="MinHeight" Value="38"/>
-        <Setter Property="Padding" Value="12,9"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Padding" Value="12,8"/>
         <Setter Property="CaretBrush" Value="#E8E8E8"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -166,7 +166,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#343434"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#4A4A4A"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -175,12 +175,13 @@
     </Style>
 
     <Style x:Key="FlatButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="#151515"/>
-        <Setter Property="Foreground" Value="#909090"/>
-        <Setter Property="BorderBrush" Value="#252525"/>
+        <Setter Property="Background" Value="#202020"/>
+        <Setter Property="Foreground" Value="#D8D8D8"/>
+        <Setter Property="BorderBrush" Value="#363636"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="Padding" Value="12,7"/>
         <Setter Property="MinWidth" Value="76"/>
+        <Setter Property="MinHeight" Value="34"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
@@ -191,8 +192,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#373737"/>
-                            <Setter Property="Foreground" Value="#E8E8E8"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#4A4A4A"/>
+                            <Setter Property="Foreground" Value="#F1F1F1"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Root" Property="Opacity" Value="0.4"/>
@@ -214,19 +215,23 @@
     </Style>
 
     <Style x:Key="ConfigurationPrimaryActionButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
-        <Setter Property="MinWidth" Value="104"/>
-        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="MinWidth" Value="108"/>
+        <Setter Property="Background" Value="#202020"/>
+        <Setter Property="BorderBrush" Value="#4B4B4B"/>
+        <Setter Property="Foreground" Value="#F0F0F0"/>
     </Style>
 
     <Style x:Key="ConfigurationSecondaryActionButtonStyle" TargetType="Button" BasedOn="{StaticResource FlatButtonStyle}">
-        <Setter Property="MinWidth" Value="104"/>
-        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="MinWidth" Value="108"/>
+        <Setter Property="MinHeight" Value="24"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#7C7C7C"/>
-        <Setter Property="BorderBrush" Value="#202020"/>
+        <Setter Property="Foreground" Value="#8A8A8A"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="2,2"/>
     </Style>
 
     <Style x:Key="RepairsActionButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
+        <Setter Property="MinWidth" Value="96"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RepairState}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
                 <Setter Property="Background" Value="#2B1715"/>
@@ -234,14 +239,14 @@
                 <Setter Property="Foreground" Value="#F0B1A8"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding IsAdvancedRisk}" Value="True">
-                <Setter Property="Background" Value="#20170F"/>
-                <Setter Property="BorderBrush" Value="#5A4020"/>
-                <Setter Property="Foreground" Value="#E0AF63"/>
+                <Setter Property="Background" Value="#2A241E"/>
+                <Setter Property="BorderBrush" Value="#5A4830"/>
+                <Setter Property="Foreground" Value="#D4B27E"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding IsRisky}" Value="True">
-                <Setter Property="Background" Value="#261614"/>
-                <Setter Property="BorderBrush" Value="#8E3A31"/>
-                <Setter Property="Foreground" Value="#E7A096"/>
+                <Setter Property="Background" Value="#2C1E1B"/>
+                <Setter Property="BorderBrush" Value="#694037"/>
+                <Setter Property="Foreground" Value="#D49A92"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
@@ -271,13 +276,13 @@
     </Style>
 
     <Style x:Key="WorkspaceRowBorderStyle" TargetType="Border">
-        <Setter Property="BorderBrush" Value="#171717"/>
+        <Setter Property="BorderBrush" Value="#2A2A2A"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
 
     <Style x:Key="WorkspaceSelectionCheckBoxStyle" TargetType="CheckBox">
-        <Setter Property="Margin" Value="0,18,16,0"/>
+        <Setter Property="Margin" Value="0,18,18,0"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -299,7 +304,7 @@
 
     <Style x:Key="WorkspaceRowTitleStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="0,0,12,0"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="#ECECEC"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
@@ -307,16 +312,16 @@
 
     <Style x:Key="WorkspaceDescriptionStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="0,6,0,0"/>
-        <Setter Property="FontSize" Value="11"/>
-        <Setter Property="Foreground" Value="#8E8E8E"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#A8A8A8"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="MaxWidth" Value="700"/>
+        <Setter Property="MaxWidth" Value="660"/>
     </Style>
 
     <Style x:Key="ConfigurationDescriptionStyle" TargetType="TextBlock" BasedOn="{StaticResource WorkspaceDescriptionStyle}">
         <Setter Property="Margin" Value="0,6,0,0"/>
-        <Setter Property="Foreground" Value="#989898"/>
-        <Setter Property="MaxWidth" Value="720"/>
+        <Setter Property="Foreground" Value="#B0B0B0"/>
+        <Setter Property="MaxWidth" Value="680"/>
     </Style>
 
     <Style x:Key="WorkspaceResearchGateStyle" TargetType="TextBlock">
@@ -334,15 +339,15 @@
     </Style>
 
     <Style x:Key="WorkspaceFooterLabelStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Foreground" Value="#686868"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="#8B8B8B"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
     </Style>
 
     <Style x:Key="WorkspaceFooterValueStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Foreground" Value="#666666"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="#8A8A8A"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
@@ -353,16 +358,16 @@
     </Style>
 
     <Style x:Key="WorkspaceFooterHintStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Foreground" Value="#505050"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="#7A7A7A"/>
         <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="WorkspaceBatchSummaryStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="0,3,0,0"/>
-        <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Foreground" Value="#555555"/>
+        <Setter Property="FontSize" Value="9"/>
+        <Setter Property="Foreground" Value="#626262"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
@@ -374,34 +379,34 @@
 
     <Style x:Key="WorkspaceStatusBadgeBorderStyle" TargetType="Border">
         <Setter Property="Margin" Value="0,0,6,0"/>
-        <Setter Property="Padding" Value="7,2"/>
+        <Setter Property="Padding" Value="6,2"/>
         <Setter Property="CornerRadius" Value="4"/>
-        <Setter Property="Background" Value="#191919"/>
-        <Setter Property="BorderBrush" Value="#2B2B2B"/>
+        <Setter Property="Background" Value="#202020"/>
+        <Setter Property="BorderBrush" Value="#363636"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
-                <Setter Property="Background" Value="#17311E"/>
-                <Setter Property="BorderBrush" Value="#2E7D32"/>
+                <Setter Property="Background" Value="#1F2D22"/>
+                <Setter Property="BorderBrush" Value="#45634C"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="{x:Static viewModels:TweakAppliedStatus.Error}">
-                <Setter Property="Background" Value="#261614"/>
-                <Setter Property="BorderBrush" Value="#5A2A24"/>
+                <Setter Property="Background" Value="#2A1C1A"/>
+                <Setter Property="BorderBrush" Value="#71453F"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="WorkspaceStatusBadgeTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="9"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="#8C8C8C"/>
+        <Setter Property="Foreground" Value="#A3A3A3"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
-                <Setter Property="Foreground" Value="#6DC171"/>
+                <Setter Property="Foreground" Value="#88C08F"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="{x:Static viewModels:TweakAppliedStatus.Error}">
-                <Setter Property="Foreground" Value="#D98075"/>
+                <Setter Property="Foreground" Value="#D89A91"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
@@ -416,34 +421,34 @@
 
     <Style x:Key="WorkspaceEvidenceBadgeBorderStyle" TargetType="Border">
         <Setter Property="Margin" Value="0,0,6,0"/>
-        <Setter Property="Padding" Value="6,1"/>
+        <Setter Property="Padding" Value="5,1"/>
         <Setter Property="CornerRadius" Value="3"/>
-        <Setter Property="Background" Value="#151515"/>
-        <Setter Property="BorderBrush" Value="#242424"/>
+        <Setter Property="Background" Value="#202020"/>
+        <Setter Property="BorderBrush" Value="#303030"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="A">
-                <Setter Property="Background" Value="#191211"/>
-                <Setter Property="BorderBrush" Value="#3D2420"/>
+                <Setter Property="Background" Value="#24201F"/>
+                <Setter Property="BorderBrush" Value="#403531"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="B">
-                <Setter Property="Background" Value="#11171D"/>
-                <Setter Property="BorderBrush" Value="#233545"/>
+                <Setter Property="Background" Value="#1F2327"/>
+                <Setter Property="BorderBrush" Value="#343D45"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="WorkspaceEvidenceBadgeTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="9"/>
+        <Setter Property="FontSize" Value="8"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="#787878"/>
+        <Setter Property="Foreground" Value="#8B8B8B"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="A">
-                <Setter Property="Foreground" Value="#C67A6F"/>
+                <Setter Property="Foreground" Value="#B08D88"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="B">
-                <Setter Property="Foreground" Value="#79A8D4"/>
+                <Setter Property="Foreground" Value="#91A4B5"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
@@ -470,30 +475,14 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="112"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
 
-                <StackPanel Grid.Column="1" Margin="0,16,24,16">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Name}" Style="{StaticResource WorkspaceRowTitleStyle}" Margin="0,0,16,0"/>
-                        <WrapPanel Grid.Column="1" VerticalAlignment="Center">
-                            <Border Tag="{Binding AppliedStatus}"
-                                    Style="{StaticResource WorkspaceStatusBadgeBorderStyle}"
-                                    ToolTip="{Binding StatusTooltip}">
-                                <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
-                            </Border>
-                            <Border Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeBorderStyle}" Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
-                                <TextBlock Text="{Binding EvidenceClassBadgeText}" Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeTextStyle}"/>
-                            </Border>
-                        </WrapPanel>
-                    </Grid>
-
+                <StackPanel Grid.Column="1" Margin="0,16,22,16">
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource WorkspaceRowTitleStyle}" Margin="0,0,0,0"/>
                     <TextBlock Text="{Binding ConfigurationFriendlyDescription}"
                                ToolTip="{Binding FriendlyDescription}"
                                Style="{StaticResource ConfigurationDescriptionStyle}"/>
@@ -501,22 +490,36 @@
                     <WrapPanel Margin="0,8,0,0" VerticalAlignment="Center">
                         <TextBlock Text="{Binding ConfigurationImpactAreaText}"
                                    Style="{StaticResource WorkspaceFooterLabelStyle}"/>
-                        <TextBlock Style="{StaticResource WorkspaceInlineMetaSeparatorStyle}"/>
+                        <TextBlock Text="·" Style="{StaticResource WorkspaceFooterHintStyle}" Margin="6,0"/>
                         <TextBlock
                                    Text="{Binding ConfigurationCompactInfoLine}"
                                    Style="{StaticResource ConfigurationFooterValueStyle}"
                                    Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"/>
-                        <TextBlock Style="{StaticResource WorkspaceInlineMetaSeparatorStyle}"/>
+                        <TextBlock Text="·" Style="{StaticResource WorkspaceFooterHintStyle}" Margin="6,0"/>
                         <TextBlock
                                    Text="{Binding ConfigurationInventoryFreshnessText}"
-                                   Style="{StaticResource WorkspaceFooterHintStyle}"
-                                   TextAlignment="Left"
-                                   Margin="0"/>
+                                   Style="{StaticResource WorkspaceFooterHintStyle}"/>
                     </WrapPanel>
-                    <TextBlock Text="{Binding BatchSummaryLine}" Style="{StaticResource ConfigurationBatchSummaryStyle}" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
+                    <TextBlock Text="{Binding BatchSummaryLine}"
+                               Style="{StaticResource ConfigurationBatchSummaryStyle}"
+                               Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,0,16" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,18,16" VerticalAlignment="Top">
+                    <Border Tag="{Binding AppliedStatus}"
+                            Style="{StaticResource WorkspaceStatusBadgeBorderStyle}"
+                            ToolTip="{Binding StatusTooltip}">
+                        <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
+                    </Border>
+                    <Border Tag="{Binding EvidenceClassId}"
+                            Margin="0,6,0,0"
+                            Style="{StaticResource WorkspaceEvidenceBadgeBorderStyle}"
+                            Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
+                        <TextBlock Text="{Binding EvidenceClassBadgeText}" Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeTextStyle}"/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Grid.Column="3" Orientation="Vertical" Margin="0,16,0,16" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Button Content="{Binding ActionButtonText}"
                             Command="{Binding ApplyCommand}"
                             ToolTip="{Binding ConfigurationPrimaryActionTooltip}"
@@ -537,54 +540,53 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="104"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
 
-                <StackPanel Grid.Column="1" Margin="0,16,24,16">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Name}" Style="{StaticResource WorkspaceRowTitleStyle}" Margin="0,0,16,0"/>
-                        <WrapPanel Grid.Column="1" VerticalAlignment="Center">
-                            <Border Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeBorderStyle}">
-                                <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
-                            </Border>
-                            <Border Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeBorderStyle}" Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
-                                <TextBlock Text="{Binding EvidenceClassBadgeText}" Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeTextStyle}"/>
-                            </Border>
-                        </WrapPanel>
-                    </Grid>
-
+                <StackPanel Grid.Column="1" Margin="0,16,22,16">
+                    <TextBlock Text="{Binding Name}" Style="{StaticResource WorkspaceRowTitleStyle}" Margin="0,0,0,0"/>
                     <TextBlock Text="{Binding FriendlyDescription}" Style="{StaticResource WorkspaceDescriptionStyle}"/>
                     <TextBlock Text="{Binding ResearchGateMessage}" Style="{StaticResource WorkspaceResearchGateStyle}" Visibility="{Binding HasResearchGateMessage, Converter={StaticResource BoolToVisibility}}"/>
                     <WrapPanel Margin="0,8,0,0" VerticalAlignment="Center">
                         <TextBlock Text="{Binding ImpactAreaLabel}"
                                    Style="{StaticResource WorkspaceFooterLabelStyle}"/>
-                        <TextBlock Style="{StaticResource WorkspaceInlineMetaSeparatorStyle}"/>
+                        <TextBlock Text="·" Style="{StaticResource WorkspaceFooterHintStyle}" Margin="6,0"/>
                         <TextBlock
                                    Text="{Binding CompactInfoLine}"
                                    Style="{StaticResource WorkspaceFooterValueStyle}"
                                    Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"/>
-                        <TextBlock Style="{StaticResource WorkspaceInlineMetaSeparatorStyle}"/>
+                        <TextBlock Text="·" Style="{StaticResource WorkspaceFooterHintStyle}" Margin="6,0"/>
                         <TextBlock
                                    Text="{Binding InventoryFreshnessText}"
-                                   Style="{StaticResource WorkspaceFooterHintStyle}"
-                                   TextAlignment="Left"
-                                   Margin="0"/>
+                                   Style="{StaticResource WorkspaceFooterHintStyle}"/>
                     </WrapPanel>
-                    <Border Style="{StaticResource RepairsRiskBadgeBorderStyle}"
+                    <TextBlock Text="{Binding BatchSummaryLine}"
+                               Style="{StaticResource WorkspaceBatchSummaryStyle}"
+                               Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,18,16" VerticalAlignment="Top">
+                    <Border Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeBorderStyle}">
+                        <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
+                    </Border>
+                    <Border Tag="{Binding EvidenceClassId}"
+                            Margin="0,6,0,0"
+                            Style="{StaticResource WorkspaceEvidenceBadgeBorderStyle}"
+                            Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
+                        <TextBlock Text="{Binding EvidenceClassBadgeText}" Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeTextStyle}"/>
+                    </Border>
+                    <Border Margin="0,6,0,0"
+                            Style="{StaticResource RepairsRiskBadgeBorderStyle}"
                             Visibility="{Binding HasRepairsRiskHint, Converter={StaticResource BoolToVisibility}}">
                         <TextBlock Text="{Binding RepairsRiskHint}"
                                    Style="{StaticResource RepairsRiskBadgeTextStyle}"/>
                     </Border>
-                    <TextBlock Text="{Binding BatchSummaryLine}" Style="{StaticResource WorkspaceBatchSummaryStyle}" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,16,0,16" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,16,0,16" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Button Content="{Binding RunRepairButtonText}"
                             Command="{Binding RunRepairCommand}"
                             ToolTip="{Binding RunRepairTooltip}"

@@ -14,7 +14,7 @@ public sealed class WorkspaceInventoryCoordinator : ViewModelBase, IDisposable
     private CancellationTokenSource? _inventorySaveCts;
     private bool _isApplyingCachedInventory;
     private bool _isBackgroundRefreshRunning;
-    private string _inventoryStatusMessage = "Status check not available yet.";
+    private string _inventoryStatusMessage = "Status not checked yet";
 
     public WorkspaceInventoryCoordinator(ITweakInventoryStateStore inventoryStateStore)
     {
@@ -65,7 +65,7 @@ public sealed class WorkspaceInventoryCoordinator : ViewModelBase, IDisposable
                 var latestText = latestTimestamp.HasValue
                     ? latestTimestamp.Value.ToLocalTime().ToString("HH:mm:ss")
                     : "unknown time";
-                InventoryStatusMessage = $"Loaded last checked status for {appliedCount} settings (last: {latestText}).";
+                InventoryStatusMessage = $"{appliedCount} loaded from cache · {latestText}";
             }
         }
         finally
@@ -83,8 +83,8 @@ public sealed class WorkspaceInventoryCoordinator : ViewModelBase, IDisposable
         var suffix = _isBackgroundRefreshRunning ? " Refreshing in background..." : string.Empty;
 
         InventoryStatusMessage = requiresPrompt > 0
-            ? $"Live status: {detected}/{total} checked. {requiresPrompt} need admin confirmation.{suffix}"
-            : $"Live status: {detected}/{total} checked.{suffix}";
+            ? $"{detected}/{total} checked live · {requiresPrompt} need admin{suffix}"
+            : $"{detected}/{total} checked live{suffix}";
     }
 
     public async void ScheduleSnapshotSave(IEnumerable<TweakItemViewModel> tweaks)
