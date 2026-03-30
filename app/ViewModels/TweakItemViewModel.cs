@@ -27,13 +27,14 @@ public sealed class TweakItemViewModel : ViewModelBase
 {
     private const string PublicResearchGateExplanation = "Evidence pending";
     private static readonly SolidColorBrush AppliedStatusBrush = CreateFrozenBrush("#A3BE8C");
-    private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#EBCB8B");
+    private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#666666");
+    private static readonly SolidColorBrush NotAppliedStatusBorderBrush = CreateFrozenBrush("#333333");
     private static readonly SolidColorBrush MixedStatusBrush = CreateFrozenBrush("#D08770");
     private static readonly SolidColorBrush ErrorStatusBrush = CreateFrozenBrush("#BF616A");
     private static readonly SolidColorBrush UnknownStatusBrush = CreateFrozenBrush("#88C0D0");
 
     private static readonly SolidColorBrush AppliedStatusBackgroundBrush = CreateFrozenBrush("#2AA3BE8C");
-    private static readonly SolidColorBrush NotAppliedStatusBackgroundBrush = CreateFrozenBrush("#2AEBCB8B");
+    private static readonly SolidColorBrush NotAppliedStatusBackgroundBrush = CreateFrozenBrush("#1A1A1A");
     private static readonly SolidColorBrush MixedStatusBackgroundBrush = CreateFrozenBrush("#2AD08770");
     private static readonly SolidColorBrush ErrorStatusBackgroundBrush = CreateFrozenBrush("#2ABF616A");
     private static readonly SolidColorBrush UnknownStatusBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
@@ -617,6 +618,8 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(CompactInfoTooltip));
                 OnPropertyChanged(nameof(StatusIcon));
                 OnPropertyChanged(nameof(StatusColor));
+                OnPropertyChanged(nameof(StatusBorderBrush));
+                OnPropertyChanged(nameof(StatusTextBrush));
                 OnPropertyChanged(nameof(StatusBadgeBackground));
                 OnPropertyChanged(nameof(StatusText));
                 OnPropertyChanged(nameof(StatusTooltip));
@@ -1292,6 +1295,8 @@ public sealed class TweakItemViewModel : ViewModelBase
                 OnPropertyChanged(nameof(IsApplied));
                 OnPropertyChanged(nameof(StatusIcon));
                 OnPropertyChanged(nameof(StatusColor));
+                OnPropertyChanged(nameof(StatusBorderBrush));
+                OnPropertyChanged(nameof(StatusTextBrush));
                 OnPropertyChanged(nameof(StatusBadgeBackground));
                 OnPropertyChanged(nameof(StatusText));
                 OnPropertyChanged(nameof(StatusTooltip));
@@ -1326,6 +1331,20 @@ public sealed class TweakItemViewModel : ViewModelBase
         TweakAppliedStatus.Error => ErrorStatusBrush,
         _ when RequiresAdminScan => NotAppliedStatusBrush,
         _ => UnknownStatusBrush
+    };
+
+    public Brush StatusBorderBrush => AppliedStatus switch
+    {
+        TweakAppliedStatus.NotApplied => NotAppliedStatusBorderBrush,
+        _ when RequiresAdminScan => NotAppliedStatusBorderBrush,
+        _ => StatusColor
+    };
+
+    public Brush StatusTextBrush => AppliedStatus switch
+    {
+        TweakAppliedStatus.NotApplied => NotAppliedStatusBrush,
+        _ when RequiresAdminScan => NotAppliedStatusBrush,
+        _ => StatusColor
     };
 
     public Brush StatusBadgeBackground => AppliedStatus switch

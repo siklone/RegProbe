@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$ArtifactRoot = 'H:\Temp\vm-tooling-staging',
+    [string]$ArtifactRoot = '',
     [string]$RepoRoot = '',
     [string]$ReportPath = '',
     [switch]$Apply
@@ -10,6 +10,10 @@ $ErrorActionPreference = 'Stop'
 
 if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
     $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
+}
+
+if ([string]::IsNullOrWhiteSpace($ArtifactRoot)) {
+    $ArtifactRoot = Join-Path ([System.IO.Path]::GetTempPath()) 'vm-tooling-staging'
 }
 
 if ([string]::IsNullOrWhiteSpace($ReportPath)) {
@@ -25,7 +29,8 @@ $scanRoots = @(
     (Join-Path $RepoRoot 'Docs\VM_WORKFLOW.md')
 )
 
-$artifactPattern = [regex]'H:\\Temp\\vm-tooling-staging[^"''`\r\n\t <>\]\)]+'
+$escapedArtifactRoot = [regex]::Escape($ArtifactRoot.TrimEnd('\'))
+$artifactPattern = [regex]($escapedArtifactRoot + '[^"''`\r\n\t <>\]\)]+')
 $referencedTopLevel = New-Object 'System.Collections.Generic.HashSet[string]' ([System.StringComparer]::OrdinalIgnoreCase)
 
 foreach ($scanRoot in $scanRoots) {

@@ -1,9 +1,9 @@
-﻿{
+{
     "generated_utc":  "2026-03-29T08:49:01.7421816Z",
-    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+    "vm_path":  "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
     "source_snapshot":  "RegProbe-Baseline-20260328",
     "target_snapshot":  "RegProbe-Baseline-Clean-20260329",
-    "audit_session_root":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329",
+    "audit_session_root":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329",
     "policy":  {
                    "baseline":  "tooling-first and app-free",
                    "app_smoke":  "ephemeral deploy -\u003e validate -\u003e cleanup only",
@@ -11,7 +11,7 @@
                },
     "validation":  {
                        "source_cleanup":  {
-                                              "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\source-app-artifacts-cleanup.json",
+                                              "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\source-app-artifacts-cleanup.json",
                                               "mode":  "cleanup",
                                               "status":  "error",
                                               "policy_compliant":  true,
@@ -19,7 +19,7 @@
                                               "residual_item_count":  0
                                           },
                        "baseline_audit":  {
-                                              "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\baseline-app-artifacts-audit.json",
+                                              "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\baseline-app-artifacts-audit.json",
                                               "mode":  "audit",
                                               "status":  "ok",
                                               "policy_compliant":  true,
@@ -27,7 +27,7 @@
                                               "residual_item_count":  0
                                           },
                        "tooling_minimal":  {
-                                               "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\vm-tooling-minimal-diagnostic-20260329-121108\\summary.json",
+                                               "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\vm-tooling-minimal-diagnostic-20260329-121108\\summary.json",
                                                "status":  "ok",
                                                "write_test_exists":  true,
                                                "procmon_paths":  [
@@ -49,14 +49,14 @@
                                                             }
                                            },
                        "app_launch_smoke":  {
-                                                "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\app-launch-smoke.json",
+                                                "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\app-launch-smoke.json",
                                                 "process_started":  true,
                                                 "process_alive_after_12s":  true,
                                                 "cleanup_verified":  true,
                                                 "executable":  "C:\\Tools\\AppSmoke\\RegProbe.App.exe"
                                             },
                        "app_launch_smoke_pre_cleanup":  {
-                                                            "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\app-launch-smoke-pre-cleanup.json",
+                                                            "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\app-launch-smoke-pre-cleanup.json",
                                                             "mode":  "cleanup",
                                                             "status":  "ok",
                                                             "policy_compliant":  true,
@@ -64,7 +64,7 @@
                                                             "residual_item_count":  0
                                                         },
                        "app_launch_smoke_post_cleanup":  {
-                                                             "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\app-launch-smoke-post-cleanup.json",
+                                                             "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\app-launch-smoke-post-cleanup.json",
                                                              "mode":  "cleanup",
                                                              "status":  "ok",
                                                              "policy_compliant":  true,
@@ -72,7 +72,7 @@
                                                              "residual_item_count":  0
                                                          },
                        "after_smoke_audit":  {
-                                                 "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\after-smoke-app-artifacts-audit.json",
+                                                 "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\after-smoke-app-artifacts-audit.json",
                                                  "mode":  "audit",
                                                  "status":  "ok",
                                                  "policy_compliant":  true,
@@ -80,7 +80,7 @@
                                                  "residual_item_count":  0
                                              },
                        "final_revert_audit":  {
-                                                  "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\final-revert-app-artifacts-audit.json",
+                                                  "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\final-revert-app-artifacts-audit.json",
                                                   "mode":  "audit",
                                                   "status":  "ok",
                                                   "policy_compliant":  true,
@@ -88,7 +88,7 @@
                                                   "residual_item_count":  0
                                               },
                        "shell_before_snapshot":  {
-                                                     "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\shell-before-snapshot.json",
+                                                     "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\shell-before-snapshot.json",
                                                      "shell_healthy":  true,
                                                      "explorer":  true,
                                                      "sihost":  true,
@@ -96,7 +96,7 @@
                                                      "ctfmon":  true
                                                  },
                        "shell_after_smoke":  {
-                                                 "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\shell-after-smoke.json",
+                                                 "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\shell-after-smoke.json",
                                                  "shell_healthy":  true,
                                                  "explorer":  true,
                                                  "sihost":  true,
@@ -104,7 +104,7 @@
                                                  "ctfmon":  true
                                              },
                        "shell_after_final_revert":  {
-                                                        "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\shell-after-final-revert.json",
+                                                        "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\shell-after-final-revert.json",
                                                         "shell_healthy":  true,
                                                         "explorer":  true,
                                                         "sihost":  true,
@@ -114,7 +114,7 @@
                    },
     "defender_exclusions":  {
                                 "apply":  {
-                                              "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\tooling-defender-exclusions-apply.json",
+                                              "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\tooling-defender-exclusions-apply.json",
                                               "status":  "ok",
                                               "exclusion_paths":  [
                                                                       "C:\\RegProbe-Diag",
@@ -142,7 +142,7 @@
                                                                    }
                                           },
                                 "readback":  {
-                                                 "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\tooling-defender-exclusions-read.json",
+                                                 "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\tooling-defender-exclusions-read.json",
                                                  "status":  "ok",
                                                  "exclusion_paths":  [
                                                                          "C:\\RegProbe-Diag",
@@ -170,7 +170,7 @@
                                                                       }
                                              },
                                 "final_readback":  {
-                                                       "path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\tooling-defender-exclusions-final-read.json",
+                                                       "path":  "<REPO_ROOT>\\registry-research-framework\\audit\\vm-baseline-clean-20260329\\tooling-defender-exclusions-final-read.json",
                                                        "status":  "ok",
                                                        "exclusion_paths":  [
                                                                                "C:\\RegProbe-Diag",
@@ -214,3 +214,4 @@
 
                ]
 }
+

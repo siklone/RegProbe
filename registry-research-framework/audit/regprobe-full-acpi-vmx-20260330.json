@@ -1,9 +1,9 @@
-﻿{
+{
     "generated_utc":  "2026-03-30T13:05:51.4253189Z",
-    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+    "vm_path":  "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
     "base_snapshot":  "RegProbe-Baseline-ToolsHardened-20260330",
     "target_snapshot":  "RegProbe-Baseline-FullACPI-20260330",
-    "vmx_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+    "vmx_path":  "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
     "vmx_changes":  {
                         "firmware":  {
                                          "before":  "firmware = \"efi\"",
@@ -27,10 +27,10 @@
                                                  }
                     },
     "before":  {
-                   "powercfg_a_path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\regprobe-full-acpi-vmx-20260330.before.txt"
+                   "powercfg_a_path":  "<REPO_ROOT>\\registry-research-framework\\audit\\regprobe-full-acpi-vmx-20260330.before.txt"
                },
     "after":  {
-                  "powercfg_a_path":  "H:\\D\\Dev\\RegProbe\\registry-research-framework\\audit\\regprobe-full-acpi-vmx-20260330.after.txt",
+                  "powercfg_a_path":  "<REPO_ROOT>\\registry-research-framework\\audit\\regprobe-full-acpi-vmx-20260330.after.txt",
                   "hibernate_visible":  false,
                   "s3_visible":  false,
                   "snapshot_created":  false
@@ -40,3 +40,4 @@
 
                ]
 }
+

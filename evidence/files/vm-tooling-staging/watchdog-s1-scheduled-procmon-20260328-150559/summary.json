@@ -1,4 +1,4 @@
-﻿{
+{
     "generated_utc":  "2026-03-28T12:22:28.4872537Z",
     "probe_name":  "watchdog-s1-scheduled-procmon-20260328-150559",
     "lane_label":  "power.session-watchdog-timeouts",
@@ -7,7 +7,7 @@
     "host_output_root":  "evidence/files/vm-tooling-staging/watchdog-s1-scheduled-procmon-20260328-150559",
     "shell_before":  {
                          "generated_utc":  "2026-03-28T12:08:17.7125737Z",
-                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_path":  "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
                          "vm_running":  true,
                          "tools_state":  "running",
                          "process_query_error":  null,
@@ -22,7 +22,7 @@
                      },
     "shell_after":  {
                         "generated_utc":  "2026-03-28T12:22:09.4520144Z",
-                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_path":  "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
                         "vm_running":  true,
                         "tools_state":  "running",
                         "process_query_error":  null,
@@ -140,3 +140,4 @@
     "wrapper_error_present":  false,
     "status":  "copy-incomplete"
 }
+

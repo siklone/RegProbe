@@ -136,9 +136,7 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
 
     public string WorkspaceCategoryHeader => "Categories";
 
-    public string WorkspaceCategoryHint => IsMaintenanceWorkspaceSelected
-        ? "Browse repair categories."
-        : "Browse configuration categories.";
+    public string WorkspaceCategoryHint => string.Empty;
 
     public string AllItemsLabel => "All";
 

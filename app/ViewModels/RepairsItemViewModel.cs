@@ -34,6 +34,10 @@ public sealed class RepairsItemViewModel : ViewModelBase, IDisposable
 
     public Brush StatusColor => _source.StatusColor;
 
+    public Brush StatusBorderBrush => _source.StatusBorderBrush;
+
+    public Brush StatusTextBrush => _source.StatusTextBrush;
+
     public Brush StatusBadgeBackground => _source.StatusBadgeBackground;
 
     public bool IsApplied => _source.IsApplied;

@@ -1,4 +1,4 @@
-﻿{
+{
     "generated_utc":  "2026-03-30T19:55:49.3660612Z",
     "candidate_id":  "policy.system.enable-virtualization",
     "family":  "policy-system",
@@ -11,7 +11,7 @@
                          "guest_path":  "C:\\Windows\\System32\\ntoskrnl.exe",
                          "exists":  true,
                          "exact_scan":  {
-                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\ntoskrnl.exe",
+                                            "binary":  "%LOCALAPPDATA%\\Temp\\path-aware-static-20260330-222908\\ntoskrnl.exe",
                                             "size":  12952992,
                                             "minimum_length":  4,
                                             "ascii_total":  179113,
@@ -89,7 +89,7 @@
                          "guest_path":  "C:\\Windows\\System32\\ci.dll",
                          "exists":  true,
                          "exact_scan":  {
-                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\ci.dll",
+                                            "binary":  "%LOCALAPPDATA%\\Temp\\path-aware-static-20260330-222908\\ci.dll",
                                             "size":  1096416,
                                             "minimum_length":  4,
                                             "ascii_total":  12923,
@@ -167,7 +167,7 @@
                          "guest_path":  "C:\\Windows\\System32\\winload.exe",
                          "exists":  true,
                          "exact_scan":  {
-                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\winload.exe",
+                                            "binary":  "%LOCALAPPDATA%\\Temp\\path-aware-static-20260330-222908\\winload.exe",
                                             "size":  1864600,
                                             "minimum_length":  4,
                                             "ascii_total":  24751,
@@ -245,7 +245,7 @@
                          "guest_path":  "C:\\Windows\\System32\\KernelBase.dll",
                          "exists":  true,
                          "exact_scan":  {
-                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\kernelbase.dll",
+                                            "binary":  "%LOCALAPPDATA%\\Temp\\path-aware-static-20260330-222908\\kernelbase.dll",
                                             "size":  4154152,
                                             "minimum_length":  4,
                                             "ascii_total":  60908,
@@ -323,7 +323,7 @@
                          "guest_path":  "C:\\Windows\\System32\\advapi32.dll",
                          "exists":  true,
                          "exact_scan":  {
-                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\advapi32.dll",
+                                            "binary":  "%LOCALAPPDATA%\\Temp\\path-aware-static-20260330-222908\\advapi32.dll",
                                             "size":  745208,
                                             "minimum_length":  4,
                                             "ascii_total":  10756,
@@ -401,7 +401,7 @@
                          "guest_path":  "C:\\Windows\\System32\\sechost.dll",
                          "exists":  true,
                          "exact_scan":  {
-                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\sechost.dll",
+                                            "binary":  "%LOCALAPPDATA%\\Temp\\path-aware-static-20260330-222908\\sechost.dll",
                                             "size":  691520,
                                             "minimum_length":  4,
                                             "ascii_total":  8086,
@@ -479,7 +479,7 @@
                          "guest_path":  "C:\\Windows\\System32\\services.exe",
                          "exists":  true,
                          "exact_scan":  {
-                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\services.exe",
+                                            "binary":  "%LOCALAPPDATA%\\Temp\\path-aware-static-20260330-222908\\services.exe",
                                             "size":  906400,
                                             "minimum_length":  4,
                                             "ascii_total":  11546,
@@ -557,7 +557,7 @@
                          "guest_path":  "C:\\Windows\\System32\\lsass.exe",
                          "exists":  true,
                          "exact_scan":  {
-                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\lsass.exe",
+                                            "binary":  "%LOCALAPPDATA%\\Temp\\path-aware-static-20260330-222908\\lsass.exe",
                                             "size":  84096,
                                             "minimum_length":  4,
                                             "ascii_total":  795,
@@ -653,3 +653,4 @@
                          ],
     "summary_artifact":  "evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json"
 }
+

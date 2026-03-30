@@ -1,11 +1,11 @@
-﻿{
+{
     "generated_utc":  "2026-03-30T13:51:52.0134931Z",
     "candidate_id":  "power.control.hiber-file-size-percent",
     "value_name":  "HiberFileSizePercent",
     "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
     "shell_before":  {
                          "generated_utc":  "2026-03-30T13:45:54.4694717Z",
-                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_path":  "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
                          "vm_running":  true,
                          "tools_state":  "running",
                          "process_query_error":  null,
@@ -20,7 +20,7 @@
                      },
     "shell_after":  {
                         "generated_utc":  "2026-03-30T13:51:51.4932683Z",
-                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_path":  "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
                         "vm_running":  true,
                         "tools_state":  "running",
                         "process_query_error":  null,
@@ -120,3 +120,4 @@
                       "summary":  "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/power-control-hiber-file-size-percent/summary.json"
                   }
 }
+

@@ -47,6 +47,8 @@ scripts/vm/_resolve-vm-baseline.ps1
 registry-research-framework/config/vm-baselines.json
 ```
 
+The checked-in `vm_path` is sanitized for public repo hygiene. Set it to your own local VMX path before you run VM automation on a fresh clone.
+
 ## Defender Exclusion Rule
 
 Defender stays enabled. We do not disable real-time protection. The canonical baseline applies bounded exclusions only for trusted tooling roots and processes:

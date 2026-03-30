@@ -1,7 +1,7 @@
-﻿{
+{
     "generated_utc":  "2026-03-29T09:22:58.8854612Z",
     "mode":  "cleanup",
-    "user_profile_root":  "C:\\Users\\Administrator",
+    "user_profile_root":  "%GUEST_USERPROFILE%",
     "pre_cleanup":  {
                         "clean":  false,
                         "stale_binary_count":  0,
@@ -18,11 +18,11 @@
                         "appdata_roots":  [
                                               {
                                                   "kind":  "directory",
-                                                  "path":  "C:\\Users\\Administrator\\AppData\\Local\\RegProbe"
+                                                  "path":  "%GUEST_USERPROFILE%\\AppData\\Local\\RegProbe"
                                               },
                                               {
                                                   "kind":  "directory",
-                                                  "path":  "C:\\Users\\Administrator\\AppData\\Roaming\\RegProbe"
+                                                  "path":  "%GUEST_USERPROFILE%\\AppData\\Roaming\\RegProbe"
                                               }
                                           ],
                         "scheduled_tasks":  [
@@ -61,8 +61,8 @@
 
                                                ],
                      "removed_paths":  [
-                                           "C:\\Users\\Administrator\\AppData\\Local\\RegProbe",
-                                           "C:\\Users\\Administrator\\AppData\\Roaming\\RegProbe"
+                                           "%GUEST_USERPROFILE%\\AppData\\Local\\RegProbe",
+                                           "%GUEST_USERPROFILE%\\AppData\\Roaming\\RegProbe"
                                        ]
                  },
     "post_cleanup":  {
@@ -106,3 +106,4 @@
 
                ]
 }
+

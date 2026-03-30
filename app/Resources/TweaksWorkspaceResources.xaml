@@ -154,7 +154,7 @@
         <Setter Property="BorderBrush" Value="#373737"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="10,5,10,5"/>
-        <Setter Property="Margin" Value="0,0,8,8"/>
+        <Setter Property="Margin" Value="0,0,8,0"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
@@ -450,10 +450,10 @@
                         <Border.Style>
                             <Style TargetType="Border" BasedOn="{StaticResource StatusPillBorderStyle}">
                                 <Setter Property="Background" Value="{Binding StatusBadgeBackground}"/>
-                                <Setter Property="BorderBrush" Value="{Binding StatusColor}"/>
+                                <Setter Property="BorderBrush" Value="{Binding StatusBorderBrush}"/>
                             </Style>
                         </Border.Style>
-                        <TextBlock Text="{Binding StatusText}" Foreground="{Binding StatusColor}" FontSize="10" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding StatusText}" Foreground="{Binding StatusTextBrush}" FontSize="10" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                     </Border>
                 </StackPanel>
 
@@ -586,10 +586,10 @@
                         <Border.Style>
                             <Style TargetType="Border" BasedOn="{StaticResource StatusPillBorderStyle}">
                                 <Setter Property="Background" Value="{Binding StatusBadgeBackground}"/>
-                                <Setter Property="BorderBrush" Value="{Binding StatusColor}"/>
+                                <Setter Property="BorderBrush" Value="{Binding StatusBorderBrush}"/>
                             </Style>
                         </Border.Style>
-                        <TextBlock Text="{Binding RepairStatusText}" Foreground="{Binding StatusColor}" FontSize="10" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding RepairStatusText}" Foreground="{Binding StatusTextBrush}" FontSize="10" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                     </Border>
                 </StackPanel>
 

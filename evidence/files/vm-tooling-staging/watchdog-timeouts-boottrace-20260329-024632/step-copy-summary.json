@@ -4,7 +4,8 @@
   "status": "failed",
   "snapshot_name": "RegProbe-Baseline-20260328",
   "guest_etl_path": "C:\\Tools\\ValidationController\\watchdog-timeouts-boottrace\\watchdog-timeouts-boottrace-20260329-024632\\watchdog-timeouts-boot.etl",
-  "host_etl_path": "H:\\Temp\\vm-tooling-staging\\watchdog-timeouts-boottrace-20260329-024632\\watchdog-timeouts-boot.etl",
+  "host_etl_path": "<HOST_STAGING_ROOT>\\watchdog-timeouts-boottrace-20260329-024632\\watchdog-timeouts-boot.etl",
   "raw_etl_captured": false,
   "error": "The raw ETL copy-back stage did not complete before the host-side lane timed out. The guest-side ETL existence check had already succeeded."
 }
+

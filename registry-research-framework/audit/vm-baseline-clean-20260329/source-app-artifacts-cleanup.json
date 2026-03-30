@@ -1,7 +1,7 @@
-﻿{
+{
     "generated_utc":  "2026-03-29T08:54:32.5463183Z",
     "mode":  "cleanup",
-    "user_profile_root":  "C:\\Users\\Administrator",
+    "user_profile_root":  "%GUEST_USERPROFILE%",
     "pre_cleanup":  {
                         "clean":  false,
                         "stale_binary_count":  3,
@@ -24,19 +24,19 @@
                         "appdata_roots":  [
                                               {
                                                   "kind":  "directory",
-                                                  "path":  "C:\\Users\\Administrator\\AppData\\Local\\RegProbe"
+                                                  "path":  "%GUEST_USERPROFILE%\\AppData\\Local\\RegProbe"
                                               },
                                               {
                                                   "kind":  "directory",
-                                                  "path":  "C:\\Users\\Administrator\\AppData\\Local\\WindowsOptimizer"
+                                                  "path":  "%GUEST_USERPROFILE%\\AppData\\Local\\WindowsOptimizer"
                                               },
                                               {
                                                   "kind":  "directory",
-                                                  "path":  "C:\\Users\\Administrator\\AppData\\Roaming\\RegProbe"
+                                                  "path":  "%GUEST_USERPROFILE%\\AppData\\Roaming\\RegProbe"
                                               },
                                               {
                                                   "kind":  "directory",
-                                                  "path":  "C:\\Users\\Administrator\\AppData\\Roaming\\WindowsOptimizerSuite"
+                                                  "path":  "%GUEST_USERPROFILE%\\AppData\\Roaming\\WindowsOptimizerSuite"
                                               }
                                           ],
                         "scheduled_tasks":  [
@@ -98,10 +98,10 @@
                      "removed_paths":  [
                                            "C:\\Tools\\AppSmoke",
                                            "C:\\Tools\\Inbound\\app-publish.zip",
-                                           "C:\\Users\\Administrator\\AppData\\Local\\RegProbe",
-                                           "C:\\Users\\Administrator\\AppData\\Local\\WindowsOptimizer",
-                                           "C:\\Users\\Administrator\\AppData\\Roaming\\RegProbe",
-                                           "C:\\Users\\Administrator\\AppData\\Roaming\\WindowsOptimizerSuite"
+                                           "%GUEST_USERPROFILE%\\AppData\\Local\\RegProbe",
+                                           "%GUEST_USERPROFILE%\\AppData\\Local\\WindowsOptimizer",
+                                           "%GUEST_USERPROFILE%\\AppData\\Roaming\\RegProbe",
+                                           "%GUEST_USERPROFILE%\\AppData\\Roaming\\WindowsOptimizerSuite"
                                        ]
                  },
     "post_cleanup":  {
@@ -146,3 +146,4 @@
                    "Failed to stop process \u0027RegProbe.ElevatedHost\u0027 (5084): Error formatting a string: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.."
                ]
 }
+

@@ -1,4 +1,4 @@
-﻿{
+{
     "generated_utc":  "2026-03-29T06:45:25.2449506Z",
     "probe_name":  "registry-batch-existence-96-20260329-094524",
     "manifest":  "registry-research-framework/audit/kernel-power-96-phase0-candidates-20260329.json",
@@ -19,7 +19,8 @@
                      "shell_healthy_after_recovery":  false
                  },
     "errors":  [
-                   "vmrun failed (-1): Error: The virtual machine is not powered on: H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                   "vmrun failed (-1): Error: The virtual machine is not powered on: <LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
                    "Recovery failed: vmrun failed (-1): Error: The file is already in use"
                ]
 }
+

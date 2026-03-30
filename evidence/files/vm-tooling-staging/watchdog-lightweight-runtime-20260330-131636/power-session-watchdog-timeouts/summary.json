@@ -1,4 +1,4 @@
-﻿{
+{
     "generated_utc":  "2026-03-30T10:41:21.5754835Z",
     "candidate_id":  "power.session-watchdog-timeouts",
     "value_names":  [
@@ -11,7 +11,7 @@
     "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
     "shell_before":  {
                          "generated_utc":  "2026-03-30T10:20:58.7592509Z",
-                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_path":  "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
                          "vm_running":  true,
                          "tools_state":  "running",
                          "process_query_error":  null,
@@ -26,7 +26,7 @@
                      },
     "shell_after":  {
                         "generated_utc":  "2026-03-30T10:41:16.4943100Z",
-                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_path":  "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
                         "vm_running":  false,
                         "tools_state":  "not-running",
                         "process_query_error":  null,
@@ -99,3 +99,4 @@
                       "summary":  "evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/power-session-watchdog-timeouts/summary.json"
                   }
 }
+
