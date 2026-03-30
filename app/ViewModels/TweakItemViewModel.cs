@@ -344,6 +344,36 @@ public sealed class TweakItemViewModel : ViewModelBase
         return Utilities.StringPool.GetImpactArea(area);
     }
 
+    private static string BuildConfigurationFriendlyDescription(string description)
+    {
+        if (string.IsNullOrWhiteSpace(description))
+        {
+            return string.Empty;
+        }
+
+        var normalized = string.Join(" ", description
+            .Split(['\r', '\n', '\t'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+
+        if (normalized.Length <= 132)
+        {
+            return normalized;
+        }
+
+        var sentenceEnd = normalized.IndexOfAny(['.', '!', '?']);
+        if (sentenceEnd is > 0 and <= 156)
+        {
+            return normalized[..(sentenceEnd + 1)].Trim();
+        }
+
+        var softBreak = normalized.LastIndexOf(' ', 132);
+        if (softBreak < 72)
+        {
+            softBreak = 132;
+        }
+
+        return $"{normalized[..softBreak].Trim()}...";
+    }
+
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
 
     public ICommand DetectCommand => _detectCommand;
@@ -480,6 +510,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     public string FriendlyDescription => string.IsNullOrWhiteSpace(Guidance?.CasualSummary)
         ? Description
         : Guidance!.CasualSummary;
+
+    public string ConfigurationFriendlyDescription => BuildConfigurationFriendlyDescription(FriendlyDescription);
 
     public string GuidanceWhenHelpful => Guidance?.WhenHelpful ?? string.Empty;
 
