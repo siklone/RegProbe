@@ -7,7 +7,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#767676"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="22,8,18,8"/>
+        <Setter Property="Padding" Value="18,8,16,8"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -17,16 +17,16 @@
                     <Border x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="2,0,0,0">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center"/>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#202020"/>
-                            <Setter Property="Foreground" Value="#DADADA"/>
-                        </Trigger>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#222222"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
-                            <Setter Property="Foreground" Value="#FFFFFF"/>
-                            <Setter Property="FontWeight" Value="SemiBold"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="#1F1F1F"/>
+                                <Setter Property="Foreground" Value="#DADADA"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="#202020"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -38,7 +38,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#767676"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="22,7,18,7"/>
+        <Setter Property="Padding" Value="18,7,16,7"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -48,16 +48,16 @@
                     <Border x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="2,0,0,0">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center"/>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#202020"/>
-                            <Setter Property="Foreground" Value="#DADADA"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#222222"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
-                            <Setter Property="Foreground" Value="#FFFFFF"/>
-                            <Setter Property="FontWeight" Value="SemiBold"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="#1F1F1F"/>
+                                <Setter Property="Foreground" Value="#DADADA"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="#202020"/>
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -67,11 +67,11 @@
 
     <Style x:Key="ChipStyle" TargetType="CheckBox">
         <Setter Property="Foreground" Value="#8D8D8D"/>
-        <Setter Property="Background" Value="#202020"/>
-        <Setter Property="BorderBrush" Value="#2F2F2F"/>
+        <Setter Property="Background" Value="#1E1E1E"/>
+        <Setter Property="BorderBrush" Value="#343434"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="12,6"/>
-        <Setter Property="Margin" Value="0,0,8,0"/>
+        <Setter Property="Padding" Value="11,6"/>
+        <Setter Property="Margin" Value="0,0,10,10"/>
         <Setter Property="FontSize" Value="11"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
@@ -82,8 +82,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Root" Property="Background" Value="#252525"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#444444"/>
+                            <Setter TargetName="Root" Property="Background" Value="#242424"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#4A4A4A"/>
                             <Setter Property="Foreground" Value="#F0F0F0"/>
                         </Trigger>
                         <MultiTrigger>
@@ -91,18 +91,18 @@
                                 <Condition Property="IsChecked" Value="True"/>
                                 <Condition Property="Tag" Value="Advanced"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Root" Property="Background" Value="#2A241E"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#5A4830"/>
-                            <Setter Property="Foreground" Value="#D4B27E"/>
+                            <Setter TargetName="Root" Property="Background" Value="#29251F"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#5A4A36"/>
+                            <Setter Property="Foreground" Value="#CEB285"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True"/>
                                 <Condition Property="Tag" Value="Risky"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Root" Property="Background" Value="#2C1E1B"/>
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#694037"/>
-                            <Setter Property="Foreground" Value="#D49A92"/>
+                            <Setter TargetName="Root" Property="Background" Value="#2B201E"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#63423B"/>
+                            <Setter Property="Foreground" Value="#CE9C94"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -129,33 +129,34 @@
     </Style>
 
     <Style x:Key="SearchBoxStyle" TargetType="TextBox">
-        <Setter Property="Background" Value="#202020"/>
+        <Setter Property="Background" Value="#1E1E1E"/>
         <Setter Property="Foreground" Value="#E8E8E8"/>
-        <Setter Property="BorderBrush" Value="#2F2F2F"/>
+        <Setter Property="BorderBrush" Value="#343434"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="MinHeight" Value="34"/>
-        <Setter Property="Padding" Value="12,7"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Padding" Value="12,8"/>
         <Setter Property="CaretBrush" Value="#E8E8E8"/>
         <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Border x:Name="Root"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid>
-                            <ScrollViewer x:Name="PART_ContentHost"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Center"
-                                          Margin="{TemplateBinding Padding}"/>
-                              <TextBlock Margin="10,0,10,0"
-                                         VerticalAlignment="Center"
-                                         Foreground="#575757"
-                                         IsHitTestVisible="False"
-                                         Text="{TemplateBinding Tag}">
+                    <ControlTemplate TargetType="TextBox">
+                      <Border x:Name="Root"
+                              Background="{TemplateBinding Background}"
+                              BorderBrush="{TemplateBinding BorderBrush}"
+                              BorderThickness="{TemplateBinding BorderThickness}"
+                              CornerRadius="4">
+                          <Grid>
+                              <ScrollViewer x:Name="PART_ContentHost"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Margin="{TemplateBinding Padding}"/>
+                                <TextBlock Margin="10,0,10,0"
+                                           VerticalAlignment="Center"
+                                           Foreground="#626262"
+                                           IsHitTestVisible="False"
+                                           Text="{TemplateBinding Tag}">
                                   <TextBlock.Style>
                                       <Style TargetType="TextBlock">
                                           <Setter Property="Visibility" Value="Collapsed"/>
@@ -175,7 +176,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#4A4A4A"/>
+                            <Setter TargetName="Root" Property="BorderBrush" Value="#575757"/>
+                            <Setter TargetName="Root" Property="Background" Value="#202020"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -184,9 +186,9 @@
     </Style>
 
     <Style x:Key="FlatButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="#202020"/>
+        <Setter Property="Background" Value="#1E1E1E"/>
         <Setter Property="Foreground" Value="#D8D8D8"/>
-        <Setter Property="BorderBrush" Value="#363636"/>
+        <Setter Property="BorderBrush" Value="#3A3A3A"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="12,7"/>
         <Setter Property="MinWidth" Value="76"/>
@@ -199,11 +201,11 @@
                     <Border x:Name="Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4" Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Root" Property="BorderBrush" Value="#4A4A4A"/>
-                            <Setter Property="Foreground" Value="#F1F1F1"/>
-                        </Trigger>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#565656"/>
+                                <Setter Property="Foreground" Value="#F1F1F1"/>
+                            </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Root" Property="Opacity" Value="0.4"/>
                         </Trigger>
@@ -224,23 +226,26 @@
     </Style>
 
     <Style x:Key="ConfigurationPrimaryActionButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
-        <Setter Property="MinWidth" Value="108"/>
-        <Setter Property="Background" Value="#202020"/>
-        <Setter Property="BorderBrush" Value="#4B4B4B"/>
-        <Setter Property="Foreground" Value="#F0F0F0"/>
+        <Setter Property="MinWidth" Value="104"/>
+        <Setter Property="Background" Value="#241A19"/>
+        <Setter Property="BorderBrush" Value="#7A4D48"/>
+        <Setter Property="Foreground" Value="#F2DFDB"/>
     </Style>
 
     <Style x:Key="ConfigurationSecondaryActionButtonStyle" TargetType="Button" BasedOn="{StaticResource FlatButtonStyle}">
-        <Setter Property="MinWidth" Value="108"/>
+        <Setter Property="MinWidth" Value="104"/>
         <Setter Property="MinHeight" Value="24"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#8A8A8A"/>
+        <Setter Property="Foreground" Value="#8E8E8E"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="2,2"/>
     </Style>
 
     <Style x:Key="RepairsActionButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
         <Setter Property="MinWidth" Value="96"/>
+        <Setter Property="Background" Value="#241A19"/>
+        <Setter Property="BorderBrush" Value="#7A4D48"/>
+        <Setter Property="Foreground" Value="#F2DFDB"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RepairState}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
                 <Setter Property="Background" Value="#2B1715"/>
@@ -285,13 +290,13 @@
     </Style>
 
     <Style x:Key="WorkspaceRowBorderStyle" TargetType="Border">
-        <Setter Property="BorderBrush" Value="#2A2A2A"/>
+        <Setter Property="BorderBrush" Value="#2D2D2D"/>
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="Padding" Value="0"/>
     </Style>
 
     <Style x:Key="WorkspaceSelectionCheckBoxStyle" TargetType="CheckBox">
-        <Setter Property="Margin" Value="0,18,18,0"/>
+        <Setter Property="Margin" Value="0,16,16,0"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -313,16 +318,16 @@
 
     <Style x:Key="WorkspaceRowTitleStyle" TargetType="TextBlock">
         <Setter Property="Margin" Value="0,0,12,0"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="#ECECEC"/>
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
     </Style>
 
     <Style x:Key="WorkspaceDescriptionStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0,6,0,0"/>
+        <Setter Property="Margin" Value="0,5,0,0"/>
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Foreground" Value="#A8A8A8"/>
+        <Setter Property="Foreground" Value="#ADADAD"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="MaxWidth" Value="660"/>
     </Style>
@@ -334,7 +339,7 @@
     </Style>
 
     <Style x:Key="WorkspaceResearchGateStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0,7,0,0"/>
+        <Setter Property="Margin" Value="0,6,0,0"/>
         <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="#33FFFFFF"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -368,7 +373,7 @@
 
     <Style x:Key="WorkspaceFooterHintStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="11"/>
-        <Setter Property="Foreground" Value="#7A7A7A"/>
+        <Setter Property="Foreground" Value="#797979"/>
         <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
@@ -388,7 +393,7 @@
 
     <Style x:Key="WorkspaceStatusBadgeBorderStyle" TargetType="Border">
         <Setter Property="Margin" Value="0,0,6,0"/>
-        <Setter Property="Padding" Value="6,2"/>
+        <Setter Property="Padding" Value="7,3"/>
         <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="Background" Value="#202020"/>
         <Setter Property="BorderBrush" Value="#363636"/>
@@ -484,8 +489,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="112"/>
+                    <ColumnDefinition Width="88"/>
+                    <ColumnDefinition Width="116"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
@@ -514,7 +519,7 @@
                                Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,18,16" VerticalAlignment="Top">
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,12,16" VerticalAlignment="Top">
                     <Border Tag="{Binding AppliedStatus}"
                             Style="{StaticResource WorkspaceStatusBadgeBorderStyle}"
                             ToolTip="{Binding StatusTooltip}">
@@ -528,7 +533,7 @@
                     </Border>
                 </StackPanel>
 
-                <StackPanel Grid.Column="3" Orientation="Vertical" Margin="0,16,0,16" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <StackPanel Grid.Column="3" Orientation="Vertical" Margin="0,14,0,14" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Button Content="{Binding ActionButtonText}"
                             Command="{Binding ApplyCommand}"
                             ToolTip="{Binding ConfigurationPrimaryActionTooltip}"
@@ -549,7 +554,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="88"/>
                     <ColumnDefinition Width="104"/>
                 </Grid.ColumnDefinitions>
 
@@ -577,7 +582,7 @@
                                Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,18,16" VerticalAlignment="Top">
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,12,16" VerticalAlignment="Top">
                     <Border Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeBorderStyle}">
                         <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
                     </Border>
@@ -595,7 +600,7 @@
                     </Border>
                 </StackPanel>
 
-                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,16,0,16" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,14,0,14" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Button Content="{Binding RunRepairButtonText}"
                             Command="{Binding RunRepairCommand}"
                             ToolTip="{Binding RunRepairTooltip}"
