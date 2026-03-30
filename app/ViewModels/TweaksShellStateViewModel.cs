@@ -183,8 +183,8 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     public string SelectedCategoryLabel => IsAllCategoriesSelected ? AllItemsLabel : _selectedCategoryName;
 
     public string SelectedCategoryContext => IsAllCategoriesSelected
-        ? (IsMaintenanceWorkspaceSelected ? "Browsing all repair categories" : "Browsing all configuration areas")
-        : (IsMaintenanceWorkspaceSelected ? $"{SelectedCategoryLabel} repair category" : $"{SelectedCategoryLabel} area");
+        ? (IsMaintenanceWorkspaceSelected ? "All repair categories" : "All configuration areas")
+        : SelectedCategoryLabel;
 
     public void ResetFilters()
     {

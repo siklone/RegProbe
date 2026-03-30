@@ -192,8 +192,8 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string RepairsRiskHint => Risk switch
     {
-        TweakRiskLevel.Advanced => "Deeper repair action. Use when the normal path is not enough.",
-        TweakRiskLevel.Risky => "High-consequence repair. Verify Windows behavior immediately after running it.",
+        TweakRiskLevel.Advanced => "Advanced repair",
+        TweakRiskLevel.Risky => "Risky repair",
         _ => string.Empty
     };
 
@@ -824,7 +824,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string EvidenceClassDescription => _evidenceClassDescription;
 
-    public string EvidenceClassBadgeText => EvidenceClassLabel;
+    public string EvidenceClassBadgeText => EvidenceClassId;
 
     public string EvidenceClassActionState => _evidenceClassActionState;
 

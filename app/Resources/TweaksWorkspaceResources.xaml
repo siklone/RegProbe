@@ -376,35 +376,51 @@
 
     <Style x:Key="WorkspaceEvidenceBadgeBorderStyle" TargetType="Border">
         <Setter Property="Margin" Value="0,0,6,6"/>
-        <Setter Property="Padding" Value="7,2"/>
-        <Setter Property="CornerRadius" Value="4"/>
-        <Setter Property="Background" Value="#181818"/>
-        <Setter Property="BorderBrush" Value="#2B2B2B"/>
+        <Setter Property="Padding" Value="6,1"/>
+        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="Background" Value="#151515"/>
+        <Setter Property="BorderBrush" Value="#242424"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="A">
-                <Setter Property="Background" Value="#241412"/>
-                <Setter Property="BorderBrush" Value="#5A241C"/>
+                <Setter Property="Background" Value="#191211"/>
+                <Setter Property="BorderBrush" Value="#3D2420"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="B">
-                <Setter Property="Background" Value="#14202A"/>
-                <Setter Property="BorderBrush" Value="#27445D"/>
+                <Setter Property="Background" Value="#11171D"/>
+                <Setter Property="BorderBrush" Value="#233545"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="WorkspaceEvidenceBadgeTextStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="9"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="#8D8D8D"/>
+        <Setter Property="Foreground" Value="#787878"/>
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="A">
-                <Setter Property="Foreground" Value="#E36A59"/>
+                <Setter Property="Foreground" Value="#C67A6F"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="B">
-                <Setter Property="Foreground" Value="#6FADE8"/>
+                <Setter Property="Foreground" Value="#79A8D4"/>
             </DataTrigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="RepairsRiskBadgeBorderStyle" TargetType="Border">
+        <Setter Property="Margin" Value="0,6,0,0"/>
+        <Setter Property="Padding" Value="6,1"/>
+        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="Background" Value="#191512"/>
+        <Setter Property="BorderBrush" Value="#3D2C1D"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style x:Key="RepairsRiskBadgeTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="9"/>
+        <Setter Property="Foreground" Value="#B78A62"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
     </Style>
 
     <DataTemplate x:Key="ConfigurationTweakRowTemplate" DataType="{x:Type viewModels:TweakItemViewModel}">
@@ -511,12 +527,11 @@
                                    Style="{StaticResource WorkspaceFooterHintStyle}"
                                    Margin="16,0,0,0"/>
                     </Grid>
-                    <TextBlock Text="{Binding RepairsRiskHint}"
-                               Margin="0,6,0,0"
-                               FontSize="10"
-                               Foreground="#B78763"
-                               TextWrapping="Wrap"
-                               Visibility="{Binding HasRepairsRiskHint, Converter={StaticResource BoolToVisibility}}"/>
+                    <Border Style="{StaticResource RepairsRiskBadgeBorderStyle}"
+                            Visibility="{Binding HasRepairsRiskHint, Converter={StaticResource BoolToVisibility}}">
+                        <TextBlock Text="{Binding RepairsRiskHint}"
+                                   Style="{StaticResource RepairsRiskBadgeTextStyle}"/>
+                    </Border>
                     <TextBlock Text="{Binding BatchSummaryLine}" Style="{StaticResource WorkspaceBatchSummaryStyle}" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
