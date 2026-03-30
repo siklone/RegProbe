@@ -1,0 +1,39 @@
+{
+  "binary": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-194412\\ntoskrnl.exe",
+  "size": 12952992,
+  "minimum_length": 4,
+  "ascii_total": 179113,
+  "wide_total": 4227,
+  "needles": [
+    {
+      "needle": "AllowRemoteDASD",
+      "ascii_hits": 0,
+      "wide_hits": 1,
+      "ascii_samples": [],
+      "wide_samples": [
+        "AllowRemoteDASD"
+      ]
+    },
+    {
+      "needle": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "ascii_samples": [],
+      "wide_samples": []
+    },
+    {
+      "needle": "SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD",
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "ascii_samples": [],
+      "wide_samples": []
+    },
+    {
+      "needle": "RemovableStorageDevices",
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "ascii_samples": [],
+      "wide_samples": []
+    }
+  ]
+}

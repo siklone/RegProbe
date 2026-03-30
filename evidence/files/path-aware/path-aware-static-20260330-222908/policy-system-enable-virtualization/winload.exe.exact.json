@@ -1,0 +1,46 @@
+{
+  "binary": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\winload.exe",
+  "size": 1864600,
+  "minimum_length": 4,
+  "ascii_total": 24751,
+  "wide_total": 1309,
+  "needles": [
+    {
+      "needle": "EnableVirtualization",
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "ascii_samples": [],
+      "wide_samples": []
+    },
+    {
+      "needle": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "ascii_samples": [],
+      "wide_samples": []
+    },
+    {
+      "needle": "EnableLUA",
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "ascii_samples": [],
+      "wide_samples": []
+    },
+    {
+      "needle": "EnableInstallerDetection",
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "ascii_samples": [],
+      "wide_samples": []
+    },
+    {
+      "needle": "EnableVirtualizationBasedSecurity",
+      "ascii_hits": 0,
+      "wide_hits": 1,
+      "ascii_samples": [],
+      "wide_samples": [
+        "EnableVirtualizationBasedSecurity"
+      ]
+    }
+  ]
+}

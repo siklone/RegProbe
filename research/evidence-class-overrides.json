@@ -35,6 +35,18 @@
       "evidence_class": "B",
       "reason_code": "runtime_no_read",
       "gating_reason": "Docs/static evidence is strong and the lightweight ETW lane surfaced exact HiberFileSizePercent lines, but the current VMware runtime still did not produce an exact live read."
+    },
+    {
+      "record_id": "policy.system.enable-virtualization",
+      "evidence_class": "B",
+      "reason_code": "runtime_no_read_path_context_unclear",
+      "gating_reason": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe."
+    },
+    {
+      "record_id": "system.io-allow-remote-dasd",
+      "evidence_class": "B",
+      "reason_code": "runtime_no_read_path_context_unclear",
+      "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit."
     }
   ]
 }

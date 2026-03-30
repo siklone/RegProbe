@@ -1,0 +1,44 @@
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "system-io-allow-remote-dasd-ntoskrnl-exe-path-aware",
+  "timestamp": "2026-03-30T17:09:59.173708800Z",
+  "ghidra_no_function_fallback": false,
+  "matches": [
+    {
+      "address": "1404cb643",
+      "function": "FUN_1404cb634",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 43,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1404cb6b0",
+      "function": "FUN_1404cb634",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 43,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1404cb657",
+      "function": "FUN_1404cb634",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 43,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1404cb661",
+      "function": "FUN_1404cb634",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 43,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    }
+  ]
+}

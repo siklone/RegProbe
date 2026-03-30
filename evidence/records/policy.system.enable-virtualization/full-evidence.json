@@ -1,0 +1,181 @@
+{
+  "$schema": "registry-evidence-v3.1/full-evidence",
+  "record_id": "policy.system.enable-virtualization",
+  "tweak_id": "policy.system.enable-virtualization",
+  "metadata": {
+    "$schema": "registry-evidence-v3.1/metadata",
+    "tweak_id": "policy.system.enable-virtualization",
+    "key_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "value_name": "EnableVirtualization",
+    "value_type": "REG_DWORD",
+    "value_data_before": 1,
+    "value_data_after": 1,
+    "enrichment": {
+      "hive": "HKLM",
+      "suspected_layer": "user-mode",
+      "boot_phase_relevant": false,
+      "acl_owner": null,
+      "acl_sddl": null,
+      "acl_user_readable": null,
+      "source": "repo_research",
+      "official_doc_exists": false,
+      "reactos_reference": false,
+      "geoff_chappell_reference": false,
+      "pdb_symbol_match": null,
+      "source_repositories": []
+    }
+  },
+  "runtime": {
+    "etw": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": false,
+      "trace_file": "evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json and evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json"
+    },
+    "procmon": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "trace_file": null
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "Not yet executed under v3.1.",
+      "result_valid": null
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": true,
+      "trigger": "existing_record_evidence",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "string_xref_found": true,
+      "function_name": null,
+      "decompile_snippet": "The repo boot-phase source mirror references EnableLUA, EnableVirtualization, and EnableInstallerDetection under Policies\\System during boot-phase processing.",
+      "call_graph_depth": null,
+      "output_file": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c",
+      "ghidra_no_function_fallback": false
+    }
+  },
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": true,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": "evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json and evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json"
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "classification": {
+    "class": "B",
+    "pipeline_version": "v3.1",
+    "reason": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, and a shell-safe path-aware ETW runtime lane. The runtime lane still stayed a clean no-hit and the family still carries a nearby VBS collision in winload.exe, so the record remains decision-gated at Class B.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "layer_count": 2,
+    "frida_kernel_guard_applied": false,
+    "dead_flag_checks": {
+      "etw_executed": true,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "pending",
+    "next_missing_layer": "procmon"
+  },
+  "timeline": [
+    {
+      "step": "bootstrap_record_load",
+      "timestamp": "2026-03-30T20:12:15.385777Z"
+    },
+    {
+      "step": "all",
+      "timestamp": "2026-03-30T20:12:15.385777Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-30T20:12:15.385777Z"
+    },
+    {
+      "step": "last_reviewed",
+      "timestamp": "2026-03-30T19:30:00Z"
+    }
+  ],
+  "artifact_refs": [],
+  "research_record": "research/records/policy.system.enable-virtualization.json",
+  "research_record_fallback": "research/records/policy.system.enable-virtualization.review.json",
+  "re_audit": {
+    "is_re_audit": true,
+    "original_class": "B",
+    "original_evidence_tools": [
+      "ghidra",
+      "wpr"
+    ],
+    "original_cross_layer": true,
+    "original_pipeline_version": "pre-v3.1",
+    "re_audit_date": "2026-03-30T20:12:15.385777Z",
+    "re_audit_reason": "current_blocker",
+    "re_audit_priority": 1,
+    "new_tools_applied": [],
+    "new_cross_layer": true,
+    "new_class": "B",
+    "class_changed": false,
+    "frida_kernel_guard_applied": false,
+    "dead_flag_four_conditions_met": true,
+    "notes": "Bootstrapped from the current research record and evidence audit.",
+    "new_pipeline_version": "v3.1"
+  }
+}

@@ -1,25 +1,26 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-30T14:29:17.336543Z",
+  "generated_utc": "2026-03-30T20:12:00.931576Z",
   "summary": {
-    "total_active_records": 252,
+    "total_active_records": 254,
     "class_counts": {
       "A": 248,
-      "B": 4
+      "B": 6
     },
     "lane_counts": {
       "official-policy": 236,
-      "runtime": 5,
+      "runtime": 6,
       "early-boot": 8,
-      "system": 3
+      "system": 4
     },
     "next_missing_layer_counts": {
       "none": 247,
+      "procmon": 2,
       "ghidra": 1,
       "decision-gate": 3,
       "incident-review": 1
     },
-    "re_audit_required_count": 8
+    "re_audit_required_count": 10
   },
   "entries": [
     {
@@ -3310,6 +3311,55 @@
       "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/peripheral.disable-sticky-keys-prompt.review.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "policy.system.enable-virtualization",
+      "tweak_id": "policy.system.enable-virtualization",
+      "evidence_class": "B",
+      "lane": "runtime",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": true,
+      "ghidra_no_function_fallback": false,
+      "wpr": true,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "procmon",
+      "cross_layer_satisfied": true,
+      "layers_used": [
+        "static_ghidra",
+        "behavior_wpr"
+      ],
+      "tools_used": [
+        "etw",
+        "ghidra",
+        "wpr"
+      ],
+      "boot_phase_relevant": false,
+      "suspected_layer": "user-mode",
+      "frida_kernel_guard_applied": false,
+      "dead_flag_checks": {
+        "etw_executed": true,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
+      "new_pipeline_version": "v3.1",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "medium",
+      "source_file": "research/records/policy.system.enable-virtualization.json",
       "incident_ids": []
     },
     {
@@ -9866,6 +9916,55 @@
       "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/system.graphics-tdr-limit-time.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "system.io-allow-remote-dasd",
+      "tweak_id": "system.io-allow-remote-dasd",
+      "evidence_class": "B",
+      "lane": "system",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": true,
+      "ghidra_no_function_fallback": false,
+      "wpr": true,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "procmon",
+      "cross_layer_satisfied": true,
+      "layers_used": [
+        "static_ghidra",
+        "behavior_wpr"
+      ],
+      "tools_used": [
+        "etw",
+        "ghidra",
+        "wpr"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": true,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
+      "new_pipeline_version": "v3.1",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "medium",
+      "source_file": "research/records/system.io-allow-remote-dasd.json",
       "incident_ids": []
     },
     {

@@ -1,0 +1,138 @@
+﻿{
+    "generated_utc":  "2026-03-30T19:14:47.7323176Z",
+    "candidate_id":  "system.io-allow-remote-dasd",
+    "family":  "session-manager-io",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "registry_path_fragment":  "SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\I/O System",
+    "value_name":  "AllowRemoteDASD",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-30T19:09:29.0782549Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-30T19:14:47.6475371Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "best_phase":  "short-trigger-etw",
+    "status":  "no-hit",
+    "exact_query_hits":  0,
+    "exact_runtime_read":  false,
+    "exact_line_count":  0,
+    "path_line_count":  0,
+    "collision_path_hits":  0,
+    "phase_results":  {
+                          "short-trigger-etw":  {
+                                                    "generated_utc":  "2026-03-30T19:11:06.2820518Z",
+                                                    "phase":  "short-trigger-etw",
+                                                    "trigger_profile":  "session-manager-io-raw-io-short",
+                                                    "status":  "no-hit",
+                                                    "etl_exists":  true,
+                                                    "csv_exists":  true,
+                                                    "etl_length":  7798784,
+                                                    "csv_line_count":  56690,
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "exact_line_count":  0,
+                                                    "path_line_count":  0,
+                                                    "collision_path_hits":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "trigger_failures":  [
+
+                                                                         ],
+                                                    "errors":  [
+
+                                                               ]
+                                                },
+                          "split-trace-start":  {
+                                                    "generated_utc":  "2026-03-30T19:11:16.6910289Z",
+                                                    "phase":  "split-trace-start",
+                                                    "trigger_profile":  "session-manager-io-raw-io-only",
+                                                    "status":  "trace-started",
+                                                    "etl_exists":  false,
+                                                    "csv_exists":  false,
+                                                    "etl_length":  0,
+                                                    "csv_line_count":  0,
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "exact_line_count":  0,
+                                                    "path_line_count":  0,
+                                                    "collision_path_hits":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "trigger_failures":  [
+
+                                                                         ],
+                                                    "errors":  [
+
+                                                               ]
+                                                },
+                          "split-trigger":  {
+                                                "generated_utc":  "2026-03-30T19:11:24.7913954Z",
+                                                "phase":  "split-trigger",
+                                                "trigger_profile":  "session-manager-io-raw-io-only",
+                                                "status":  "trigger-complete",
+                                                "etl_exists":  false,
+                                                "csv_exists":  false,
+                                                "etl_length":  0,
+                                                "csv_line_count":  0,
+                                                "exact_runtime_read":  false,
+                                                "exact_query_hits":  0,
+                                                "exact_line_count":  0,
+                                                "path_line_count":  0,
+                                                "collision_path_hits":  0,
+                                                "trigger_failure_count":  0,
+                                                "trigger_failures":  [
+
+                                                                     ],
+                                                "errors":  [
+
+                                                           ]
+                                            },
+                          "split-trace-stop":  {
+                                                   "generated_utc":  "2026-03-30T19:14:41.0903717Z",
+                                                   "phase":  "split-trace-stop",
+                                                   "trigger_profile":  "session-manager-io-raw-io-only",
+                                                   "status":  "no-hit",
+                                                   "etl_exists":  true,
+                                                   "csv_exists":  true,
+                                                   "etl_length":  32374784,
+                                                   "csv_line_count":  221873,
+                                                   "exact_runtime_read":  false,
+                                                   "exact_query_hits":  0,
+                                                   "exact_line_count":  0,
+                                                   "path_line_count":  0,
+                                                   "collision_path_hits":  0,
+                                                   "trigger_failure_count":  0,
+                                                   "trigger_failures":  [
+
+                                                                        ],
+                                                   "errors":  [
+
+                                                              ]
+                                               }
+                      },
+    "artifacts":  {
+                      "summary":  "evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json"
+                  }
+}

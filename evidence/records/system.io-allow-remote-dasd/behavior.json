@@ -1,0 +1,35 @@
+{
+  "$schema": "registry-evidence-v3.1/behavior-evidence",
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": true,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": "evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json and evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json"
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "source_evidence_ids": [
+    "vm-session-manager-io-allow-remote-dasd-runtime-20260330"
+  ]
+}

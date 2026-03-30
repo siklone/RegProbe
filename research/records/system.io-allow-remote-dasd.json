@@ -1,0 +1,171 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.io-allow-remote-dasd",
+  "tweak_id": "system.io-allow-remote-dasd",
+  "record_status": "draft",
+  "summary": "Draft candidate package for AllowRemoteDASD under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System. The clean Win25H2Clean baseline confirmed the live value, the path-aware static pass found an exact current-build ntoskrnl.exe value hit, and a naturally resolved current-build Ghidra export showed that the strongest code route opens the removable-storage policy path instead of the intended Session Manager I/O path. The tools-hardened path-aware ETW lane completed shell-safe with a real I/O burst but stayed a clean no-hit for the intended path. That keeps the lane at Class B with runtime_no_read and path-context uncertainty.",
+  "validation_proof": {
+    "source_url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+    "exact_quote_or_path": "The 96-key phase-0 existence batch recorded `system.io-allow-remote-dasd` at HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System with observed value 0.",
+    "key_found_on_page": true,
+    "notes": "Phase-0 existence confirmed the intended registry path exists on the clean baseline before path-aware routing began."
+  },
+  "setting": {
+    "name": "Allow Remote DASD",
+    "category": "System",
+    "area": "Session Manager I/O Registry",
+    "scope": "device",
+    "casual_explanation": "Allow Remote DASD is a low-level Session Manager I/O value that appears related to raw disk access policy.",
+    "why_people_change_it": "Researchers track it when studying removable storage policy overlap and low-level I/O access behavior.",
+    "tradeoffs_overview": "The lane now has baseline existence, an exact current-build value-name hit, a decisive current-build Ghidra route to a removable-storage policy path, and a shell-safe intended-path ETW runtime lane that stayed no-hit.",
+    "professional_notes": "Phase-0 existence confirmed AllowRemoteDASD on the live Win25H2Clean baseline with preview value 0 under Session Manager I/O System. The path-aware static pass over the narrowed binary set found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but no exact intended path-context string in the narrowed exact-string scan. The decisive current-build Ghidra export then showed the naturally resolved ntoskrnl.exe function opening \\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices and querying AllowRemoteDASD there. A tools-hardened path-aware ETW lane then ran both short and split I/O-burst traces against the intended Session Manager I/O path on RegProbe-Baseline-ToolsHardened-20260330. It produced real ETL/CSV outputs, kept shell health clean, and still returned a clean no-hit for both the exact value name and the intended path.",
+    "targets": [
+      {
+        "target_id": "allow-remote-dasd",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+        "value_name": "AllowRemoteDASD",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Observed baseline",
+            "meaning": "The clean Win25H2Clean baseline exposes AllowRemoteDASD=0 at the intended Session Manager I/O path.",
+            "evidence_ids": [
+              "vm-session-manager-io-phase0-20260329"
+            ]
+          }
+        ],
+        "notes": "The intended Session Manager I/O value exists, but the strongest current-build static route points at a removable-storage policy path rather than the intended path."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The current app does not expose AllowRemoteDASD as a direct tweak or UI surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+      "states": [
+        {
+          "target_id": "allow-remote-dasd",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the observed baseline while the intended path remains research-only and unresolved."
+        }
+      ],
+      "notes": "Observed directly from the 96-key phase-0 existence batch on Win25H2Clean.",
+      "evidence_ids": [
+        "vm-session-manager-io-phase0-20260329"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-baseline",
+      "label": "Observed baseline",
+      "intended_for": [
+        "Registry research tracking",
+        "Session Manager I/O documentation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click apply surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "allow-remote-dasd",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Track the observed baseline value without turning it into a shipped preset."
+        }
+      ],
+      "good_when": "You want the repo to track the live baseline and current evidence for this disputed low-level I/O value.",
+      "bad_when": "You want a cleanly attributed, runtime-proven control surface.",
+      "tradeoffs": [
+        "Preserves the observed baseline value.",
+        "Keeps the candidate research-only and non-actionable."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vm-session-manager-io-phase0-20260329",
+        "static-session-manager-io-allow-remote-dasd-20260330"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "vm-session-manager-io-phase0-20260329",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The 96-key existence batch confirmed AllowRemoteDASD exists on the clean baseline at the intended Session Manager I/O path with observed value 0.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-session-manager-io-allow-remote-dasd-20260330",
+      "kind": "decompilation",
+      "title": "Path-aware static probe for AllowRemoteDASD",
+      "location": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
+      "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but the naturally resolved current-build Ghidra function opened the removable-storage policy path rather than the intended Session Manager I/O path.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-io-allow-remote-dasd-runtime-20260330",
+      "kind": "etw-trace",
+      "title": "Path-aware lightweight ETW follow-up for AllowRemoteDASD",
+      "location": "evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json and evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json",
+      "summary": "The tools-hardened path-aware ETW lane completed shell-safe with a real I/O burst and produced real ETL/CSV outputs, but still did not capture an exact runtime read or intended-path line for AllowRemoteDASD.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "historical-collision-note-20260328",
+      "kind": "repo-doc",
+      "title": "Historical collision review for AllowRemoteDASD",
+      "location": "research/notes/kernel-power-existing-static-triage-20260328.md",
+      "summary": "Earlier triage had already flagged AllowRemoteDASD as a likely removable-storage-policy collision rather than clean Session Manager I/O coverage.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "AllowRemoteDASD is backed by phase-0 baseline existence, an exact current-build ntoskrnl value-name hit, a naturally resolved current-build Ghidra route to the removable-storage policy path, and a shell-safe intended-path ETW lane that remained a clean no-hit. That is enough to keep the candidate visible, but not enough to treat the intended Session Manager I/O path as cross-layer verified.",
+    "blocking_issues": [
+      "runtime_no_read",
+      "path_context_unclear"
+    ]
+  },
+  "last_reviewed_utc": "2026-03-30T19:30:00Z"
+}

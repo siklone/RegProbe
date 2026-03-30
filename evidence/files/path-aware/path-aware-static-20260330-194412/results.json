@@ -1,0 +1,566 @@
+﻿{
+    "generated_utc":  "2026-03-30T17:10:24.5184514Z",
+    "candidate_id":  "system.io-allow-remote-dasd",
+    "family":  "session-manager-io",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+    "value_name":  "AllowRemoteDASD",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "binaries":  [
+                     {
+                         "binary_name":  "ntoskrnl.exe",
+                         "guest_path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-194412\\ntoskrnl.exe",
+                                            "size":  12952992,
+                                            "minimum_length":  4,
+                                            "ascii_total":  179113,
+                                            "wide_total":  4227,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  1,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+                                                                                     "AllowRemoteDASD"
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "RemovableStorageDevices",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "total_hits":  0,
+                                       "output_file":  null,
+                                       "error":  "floss returned no JSON output"
+                                   }
+                     },
+                     {
+                         "binary_name":  "ci.dll",
+                         "guest_path":  "C:\\Windows\\System32\\ci.dll",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-194412\\ci.dll",
+                                            "size":  1096416,
+                                            "minimum_length":  4,
+                                            "ascii_total":  12923,
+                                            "wide_total":  1657,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "RemovableStorageDevices",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "winload.exe",
+                         "guest_path":  "C:\\Windows\\System32\\winload.exe",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-194412\\winload.exe",
+                                            "size":  1864600,
+                                            "minimum_length":  4,
+                                            "ascii_total":  24751,
+                                            "wide_total":  1309,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "RemovableStorageDevices",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "kernelbase.dll",
+                         "guest_path":  "C:\\Windows\\System32\\KernelBase.dll",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-194412\\kernelbase.dll",
+                                            "size":  4154152,
+                                            "minimum_length":  4,
+                                            "ascii_total":  60908,
+                                            "wide_total":  1017,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "RemovableStorageDevices",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "advapi32.dll",
+                         "guest_path":  "C:\\Windows\\System32\\advapi32.dll",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-194412\\advapi32.dll",
+                                            "size":  745208,
+                                            "minimum_length":  4,
+                                            "ascii_total":  10756,
+                                            "wide_total":  393,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "RemovableStorageDevices",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "sechost.dll",
+                         "guest_path":  "C:\\Windows\\System32\\sechost.dll",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-194412\\sechost.dll",
+                                            "size":  691520,
+                                            "minimum_length":  4,
+                                            "ascii_total":  8086,
+                                            "wide_total":  342,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "RemovableStorageDevices",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "services.exe",
+                         "guest_path":  "C:\\Windows\\System32\\services.exe",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-194412\\services.exe",
+                                            "size":  906400,
+                                            "minimum_length":  4,
+                                            "ascii_total":  11546,
+                                            "wide_total":  1277,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "RemovableStorageDevices",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "lsass.exe",
+                         "guest_path":  "C:\\Windows\\System32\\lsass.exe",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-194412\\lsass.exe",
+                                            "size":  84096,
+                                            "minimum_length":  4,
+                                            "ascii_total":  795,
+                                            "wide_total":  46,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "RemovableStorageDevices",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     }
+                 ],
+    "static_value_hit":  true,
+    "static_context_hit":  false,
+    "static_collision_hit":  false,
+    "value_hit_binaries":  [
+                               "ntoskrnl.exe"
+                           ],
+    "context_hit_binaries":  [
+
+                             ],
+    "collision_binaries":  [
+
+                           ],
+    "ghidra_artifacts":  [
+                             {
+                                 "binary_name":  "ntoskrnl.exe",
+                                 "output_root":  "evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412",
+                                 "guest_target":  "C:\\Windows\\System32\\ntoskrnl.exe"
+                             }
+                         ],
+    "summary_artifact":  "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json"
+}

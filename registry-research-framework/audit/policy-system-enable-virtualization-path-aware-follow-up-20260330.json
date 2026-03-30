@@ -1,0 +1,19 @@
+{
+  "generated_utc": "2026-03-30T19:30:00Z",
+  "candidate_id": "policy.system.enable-virtualization",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "static_artifacts": {
+    "summary": "evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json",
+    "ghidra": "evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md"
+  },
+  "runtime_artifacts": {
+    "root_summary": "evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json",
+    "candidate_summary": "evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json"
+  },
+  "exact_static_value_hit": true,
+  "exact_runtime_read": false,
+  "runtime_status": "no-hit",
+  "evidence_class": "B",
+  "reason_code": "runtime_no_read_path_context_unclear",
+  "note": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe."
+}

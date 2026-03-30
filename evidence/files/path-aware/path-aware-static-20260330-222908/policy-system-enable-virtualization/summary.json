@@ -1,0 +1,655 @@
+﻿{
+    "generated_utc":  "2026-03-30T19:55:49.3660612Z",
+    "candidate_id":  "policy.system.enable-virtualization",
+    "family":  "policy-system",
+    "registry_path":  "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+    "value_name":  "EnableVirtualization",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "binaries":  [
+                     {
+                         "binary_name":  "ntoskrnl.exe",
+                         "guest_path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\ntoskrnl.exe",
+                                            "size":  12952992,
+                                            "minimum_length":  4,
+                                            "ascii_total":  179113,
+                                            "wide_total":  4227,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "EnableVirtualization",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  1,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+                                                                                     "EnableVirtualization"
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableLUA",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  1,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+                                                                                     "EnableLUA"
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableInstallerDetection",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  1,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+                                                                                     "EnableInstallerDetection"
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableVirtualizationBasedSecurity",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "total_hits":  0,
+                                       "output_file":  null,
+                                       "error":  "floss returned no JSON output"
+                                   }
+                     },
+                     {
+                         "binary_name":  "ci.dll",
+                         "guest_path":  "C:\\Windows\\System32\\ci.dll",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\ci.dll",
+                                            "size":  1096416,
+                                            "minimum_length":  4,
+                                            "ascii_total":  12923,
+                                            "wide_total":  1657,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "EnableVirtualization",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableLUA",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableInstallerDetection",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableVirtualizationBasedSecurity",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "winload.exe",
+                         "guest_path":  "C:\\Windows\\System32\\winload.exe",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\winload.exe",
+                                            "size":  1864600,
+                                            "minimum_length":  4,
+                                            "ascii_total":  24751,
+                                            "wide_total":  1309,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "EnableVirtualization",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableLUA",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableInstallerDetection",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableVirtualizationBasedSecurity",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  1,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+                                                                                     "EnableVirtualizationBasedSecurity"
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "total_hits":  0,
+                                       "output_file":  null,
+                                       "error":  "floss returned no JSON output"
+                                   }
+                     },
+                     {
+                         "binary_name":  "kernelbase.dll",
+                         "guest_path":  "C:\\Windows\\System32\\KernelBase.dll",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\kernelbase.dll",
+                                            "size":  4154152,
+                                            "minimum_length":  4,
+                                            "ascii_total":  60908,
+                                            "wide_total":  1017,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "EnableVirtualization",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableLUA",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableInstallerDetection",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableVirtualizationBasedSecurity",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "advapi32.dll",
+                         "guest_path":  "C:\\Windows\\System32\\advapi32.dll",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\advapi32.dll",
+                                            "size":  745208,
+                                            "minimum_length":  4,
+                                            "ascii_total":  10756,
+                                            "wide_total":  393,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "EnableVirtualization",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableLUA",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableInstallerDetection",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableVirtualizationBasedSecurity",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "sechost.dll",
+                         "guest_path":  "C:\\Windows\\System32\\sechost.dll",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\sechost.dll",
+                                            "size":  691520,
+                                            "minimum_length":  4,
+                                            "ascii_total":  8086,
+                                            "wide_total":  342,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "EnableVirtualization",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableLUA",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableInstallerDetection",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableVirtualizationBasedSecurity",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "services.exe",
+                         "guest_path":  "C:\\Windows\\System32\\services.exe",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\services.exe",
+                                            "size":  906400,
+                                            "minimum_length":  4,
+                                            "ascii_total":  11546,
+                                            "wide_total":  1277,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "EnableVirtualization",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableLUA",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableInstallerDetection",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableVirtualizationBasedSecurity",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     },
+                     {
+                         "binary_name":  "lsass.exe",
+                         "guest_path":  "C:\\Windows\\System32\\lsass.exe",
+                         "exists":  true,
+                         "exact_scan":  {
+                                            "binary":  "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\lsass.exe",
+                                            "size":  84096,
+                                            "minimum_length":  4,
+                                            "ascii_total":  795,
+                                            "wide_total":  46,
+                                            "needles":  [
+                                                            {
+                                                                "needle":  "EnableVirtualization",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableLUA",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableInstallerDetection",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            },
+                                                            {
+                                                                "needle":  "EnableVirtualizationBasedSecurity",
+                                                                "ascii_hits":  0,
+                                                                "wide_hits":  0,
+                                                                "ascii_samples":  [
+
+                                                                                  ],
+                                                                "wide_samples":  [
+
+                                                                                 ]
+                                                            }
+                                                        ]
+                                        },
+                         "floss":  {
+                                       "executed":  false,
+                                       "total_hits":  0,
+                                       "exact_hits":  [
+
+                                                      ],
+                                       "output_file":  null,
+                                       "error":  "skipped-no-exact-hit"
+                                   }
+                     }
+                 ],
+    "static_value_hit":  true,
+    "static_context_hit":  true,
+    "static_collision_hit":  true,
+    "value_hit_binaries":  [
+                               "ntoskrnl.exe"
+                           ],
+    "context_hit_binaries":  [
+                                 "ntoskrnl.exe",
+                                 "winload.exe"
+                             ],
+    "collision_binaries":  [
+                               "winload.exe"
+                           ],
+    "ghidra_artifacts":  [
+                             {
+                                 "binary_name":  "ntoskrnl.exe",
+                                 "output_root":  "evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908",
+                                 "guest_target":  "C:\\Windows\\System32\\ntoskrnl.exe"
+                             }
+                         ],
+    "summary_artifact":  "evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json"
+}

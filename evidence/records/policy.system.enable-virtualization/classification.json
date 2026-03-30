@@ -1,0 +1,23 @@
+{
+  "$schema": "registry-evidence-v3.1/classification",
+  "classification": {
+    "class": "B",
+    "pipeline_version": "v3.1",
+    "reason": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, and a shell-safe path-aware ETW runtime lane. The runtime lane still stayed a clean no-hit and the family still carries a nearby VBS collision in winload.exe, so the record remains decision-gated at Class B.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "layer_count": 2,
+    "frida_kernel_guard_applied": false,
+    "dead_flag_checks": {
+      "etw_executed": true,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "pending",
+    "next_missing_layer": "procmon"
+  }
+}

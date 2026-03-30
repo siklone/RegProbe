@@ -6,17 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 305 |
+| Total records | 306 |
 | Validated | 244 |
 | Deprecated | 54 |
 | Review required | 0 |
-| Records with V3.1 evidence roots | 17 |
-| Records with evidence | 305 |
+| Records with V3.1 evidence roots | 18 |
+| Records with evidence | 306 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 247 |
 | Class B | 4 |
+| Class C | 1 |
 | Class E | 54 |
 
 ## Record index
@@ -78,6 +79,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `453abb60e2f46d55c680a76faab4eca1f11d38d48ab38ae964a4f134352a7645` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `b103dfb5b2b112ed75d28ef9daebeaf2bb8fd9e0d1e5bf8796dd3eb4e29ea013` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
 | `power.control.class1-initial-unpark-count` | draft | Class A | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `9d21d604c1722a80af4c771d8dfa43b5397019b97dc9ad10fba7364450f26ab2` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 7 |
+| `power.control.hiber-file-size-percent` | draft | Class C | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `1bd5c31b152dec2c8edffdfc9ac45cd2123d41647a562df4f940a54b0c159ab3` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 4 |
 | `power.control.hibernate-enabled` | draft | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `6c21df45712ef4b051c4ef9ccdf72ca465dcfbec51781ed1c79e8b0234de2a4f` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 5 |
 | `power.control.hibernate-enabled-default` | draft | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `e4a43cf36d0469a04b74ffda95a33fa9eefd5e6265631d89e68d04bb579cca07` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 8 |
 | `power.control.lid-reliability-state` | draft | Class A | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `de78b98f5ddb7704eef29828abb84265225420b4785d1a85f15b179cc2dea257` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 5 |
@@ -1865,6 +1867,36 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:104](../Docs/power/power.md:104) shows `Class1InitialUnparkCount` with observed literal `64` in the repo power notes. |
 | Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for Class1InitialUnparkCount. App surfacing is tracked separately from evidence classification. |
+
+---
+
+### `power.control.hiber-file-size-percent`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/power.control.hiber-file-size-percent.json`
+- V3.1 evidence root: [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent)
+- Source SHA256: `1bd5c31b152dec2c8edffdfc9ac45cd2123d41647a562df4f940a54b0c159ab3`
+- Proof SHA256: `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4`
+
+**Summary:** Draft candidate package for HiberFileSizePercent under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the residual string triage found an exact current-build ntoskrnl.exe hit, and the tools-hardened lightweight ETW follow-up surfaced exact runtime lines but not an exact runtime read. That keeps the lane at Class B with a runtime_no_read gate.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power notes for HiberFileSizePercent | [Docs/power/power.md](../Docs/power/power.md) |
+| `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-control-residual-string-20260330` | `repo-doc` | Residual value-exists string triage for HiberFileSizePercent | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) |
+| `vm-power-control-hiber-runtime-20260330` | `etw-trace` | Tools-hardened lightweight ETW follow-up for HiberFileSizePercent | [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json) and [research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md](notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:149](../Docs/power/power.md:149) shows `HiberFileSizePercent` with the note that the literal is set to 0 by default on LTSC IoT Enterprise 2024 when hibernation is unsupported by default. |
+| Notes | The docs-first triage and the 96-key baseline existence batch agree on the current Win25H2Clean baseline value for HiberFileSizePercent. |
 
 ---
 

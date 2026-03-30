@@ -1,0 +1,50 @@
+{
+  "binary": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\path-aware-static-20260330-222908\\ntoskrnl.exe",
+  "size": 12952992,
+  "minimum_length": 4,
+  "ascii_total": 179113,
+  "wide_total": 4227,
+  "needles": [
+    {
+      "needle": "EnableVirtualization",
+      "ascii_hits": 0,
+      "wide_hits": 1,
+      "ascii_samples": [],
+      "wide_samples": [
+        "EnableVirtualization"
+      ]
+    },
+    {
+      "needle": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "ascii_samples": [],
+      "wide_samples": []
+    },
+    {
+      "needle": "EnableLUA",
+      "ascii_hits": 0,
+      "wide_hits": 1,
+      "ascii_samples": [],
+      "wide_samples": [
+        "EnableLUA"
+      ]
+    },
+    {
+      "needle": "EnableInstallerDetection",
+      "ascii_hits": 0,
+      "wide_hits": 1,
+      "ascii_samples": [],
+      "wide_samples": [
+        "EnableInstallerDetection"
+      ]
+    },
+    {
+      "needle": "EnableVirtualizationBasedSecurity",
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "ascii_samples": [],
+      "wide_samples": []
+    }
+  ]
+}

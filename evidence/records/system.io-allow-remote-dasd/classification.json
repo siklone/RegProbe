@@ -1,0 +1,23 @@
+{
+  "$schema": "registry-evidence-v3.1/classification",
+  "classification": {
+    "class": "B",
+    "pipeline_version": "v3.1",
+    "reason": "AllowRemoteDASD is backed by phase-0 baseline existence, an exact current-build ntoskrnl value-name hit, a naturally resolved current-build Ghidra route to the removable-storage policy path, and a shell-safe intended-path ETW lane that remained a clean no-hit. That is enough to keep the candidate visible, but not enough to treat the intended Session Manager I/O path as cross-layer verified.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "layer_count": 2,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": true,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "pending",
+    "next_missing_layer": "procmon"
+  }
+}

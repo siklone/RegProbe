@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-30T14:29:17.335537Z",
+  "generated_utc": "2026-03-30T20:12:34.150173Z",
   "summary": {
-    "total_records": 306,
+    "total_records": 308,
     "class_counts": {
       "A": 248,
-      "B": 4,
+      "B": 6,
       "C": 0,
       "D": 0,
       "E": 54
@@ -13,7 +13,7 @@
     "action_state_counts": {
       "actionable": 241,
       "archived": 54,
-      "research-gated": 11
+      "research-gated": 13
     }
   },
   "classes": {
@@ -5789,6 +5789,67 @@
             "summary": "Matched 3 audit token(s) in win-config."
           }
         ]
+      }
+    },
+    {
+      "record_id": "policy.system.enable-virtualization",
+      "tweak_id": "policy.system.enable-virtualization",
+      "record_status": "draft",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "Phase-0 existence and repo security documentation agree on the current baseline value for EnableVirtualization.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/security/security.md",
+            "kind": "validation-proof",
+            "summary": "Docs/security/security.md:105-110 documents `EnableVirtualization` with 0 = disables data redirection and 1 = enables legacy file and registry virtualization."
+          },
+          {
+            "title": "Repo security notes for EnableVirtualization",
+            "url": "Docs/security/security.md",
+            "kind": "repo-doc",
+            "summary": "Repo security notes document EnableVirtualization and its value meanings under the Policies\\System path."
+          },
+          {
+            "title": "Boot-phase UAC policy cluster lead",
+            "url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c",
+            "kind": "decompilation",
+            "summary": "The repo boot-phase source mirror references EnableLUA, EnableVirtualization, and EnableInstallerDetection under Policies\\System during boot-phase processing."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed EnableVirtualization exists on the clean baseline with observed value 1.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed EnableVirtualization exists on the clean baseline with observed value 1."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {
@@ -18013,6 +18074,67 @@
             "summary": "Matched 2 audit token(s) in win-config."
           }
         ]
+      }
+    },
+    {
+      "record_id": "system.io-allow-remote-dasd",
+      "tweak_id": "system.io-allow-remote-dasd",
+      "record_status": "draft",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "Phase-0 existence confirmed the intended registry path exists on the clean baseline before path-aware routing began.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "validation-proof",
+            "summary": "The 96-key phase-0 existence batch recorded `system.io-allow-remote-dasd` at HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System with observed value 0."
+          },
+          {
+            "title": "Path-aware static probe for AllowRemoteDASD",
+            "url": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
+            "kind": "decompilation",
+            "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but the naturally resolved current-build Ghidra function opened the removable..."
+          },
+          {
+            "title": "Historical collision review for AllowRemoteDASD",
+            "url": "research/notes/kernel-power-existing-static-triage-20260328.md",
+            "kind": "repo-doc",
+            "summary": "Earlier triage had already flagged AllowRemoteDASD as a likely removable-storage-policy collision rather than clean Session Manager I/O coverage."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed AllowRemoteDASD exists on the clean baseline at the intended Session Manager I/O path with observed value 0.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed AllowRemoteDASD exists on the clean baseline at the intended Session Manager I/O path with observed value 0."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {

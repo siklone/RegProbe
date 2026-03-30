@@ -1,0 +1,19 @@
+{
+  "generated_utc": "2026-03-30T19:30:00Z",
+  "candidate_id": "system.io-allow-remote-dasd",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "static_artifacts": {
+    "summary": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json",
+    "ghidra": "evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md"
+  },
+  "runtime_artifacts": {
+    "root_summary": "evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json",
+    "candidate_summary": "evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json"
+  },
+  "exact_static_value_hit": true,
+  "exact_runtime_read": false,
+  "runtime_status": "no-hit",
+  "evidence_class": "B",
+  "reason_code": "runtime_no_read_path_context_unclear",
+  "note": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit."
+}

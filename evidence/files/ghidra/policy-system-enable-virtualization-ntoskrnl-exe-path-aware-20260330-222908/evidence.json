@@ -1,0 +1,62 @@
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "policy-system-enable-virtualization-ntoskrnl-exe-path-aware",
+  "timestamp": "2026-03-30T19:55:28.038926200Z",
+  "ghidra_no_function_fallback": false,
+  "matches": [
+    {
+      "address": "140761e9d",
+      "function": "FUN_140761df8",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140761ead",
+      "function": "FUN_140761df8",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140761e8b",
+      "function": "FUN_140761df8",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140761e96",
+      "function": "FUN_140761df8",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140761eb1",
+      "function": "FUN_140761df8",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140761eb8",
+      "function": "FUN_140761df8",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    }
+  ]
+}
