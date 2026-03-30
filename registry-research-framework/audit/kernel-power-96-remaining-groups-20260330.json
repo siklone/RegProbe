@@ -1,0 +1,154 @@
+{
+  "generated_utc": "2026-03-30T11:10:39.0134981Z",
+  "source_note": "research/notes/kernel-power-96-key-routing-20260327.md",
+  "source_manifest": "registry-research-framework/audit/kernel-power-96-phase0-candidates-20260329.json",
+  "source_follow_up": "registry-research-framework/audit/kernel-power-96-phase0-follow-up-20260329.json",
+  "status": "ready-for-next-batch",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "totals": {
+    "total_candidates": 96,
+    "completed_or_decision_gated": 11,
+    "covered_value_exists_hold": 3,
+    "pending_value_exists_safe_static_queue": 5,
+    "pending_value_exists_path_sensitive_queue": 2,
+    "pending_path_only_hold": 73,
+    "path_missing_hold": 2
+  },
+  "completed_or_decision_gated": [
+    "power.control.class1-initial-unpark-count",
+    "power.control.hibernate-enabled",
+    "power.control.hibernate-enabled-default",
+    "power.control.lid-reliability-state",
+    "power.control.mf-buffering-threshold",
+    "power.control.perf-calculate-actual-utilization",
+    "power.control.timer-rebase-threshold-on-drips-exit",
+    "system.executive-additional-critical-worker-threads",
+    "system.executive-additional-delayed-worker-threads",
+    "power.session-watchdog-resume-timeout",
+    "power.session-watchdog-sleep-timeout"
+  ],
+  "covered_value_exists_hold": [
+    {
+      "candidate_id": "power.control.energy-estimation-enabled",
+      "reason": "Existing-covered value under the current optimize-performance bundle; do not requeue unless an explicit bundle split or re-audit is requested."
+    },
+    {
+      "candidate_id": "power.control.event-processor-enabled",
+      "reason": "Existing-covered value under the current optimize-performance bundle; do not requeue unless an explicit bundle split or re-audit is requested."
+    },
+    {
+      "candidate_id": "power.session.hiberboot-enabled",
+      "reason": "Existing-covered value under the current fast-startup surface; do not requeue unless an explicit re-audit is requested."
+    }
+  ],
+  "pending_value_exists_safe_static_queue": [
+    {
+      "candidate_id": "power.customize-during-setup",
+      "family": "power-control",
+      "needle": "CustomizeDuringSetup",
+      "next_lane": "static-string-first"
+    },
+    {
+      "candidate_id": "power.source-settings-version",
+      "family": "power-control",
+      "needle": "SourceSettingsVersion",
+      "next_lane": "static-string-first"
+    },
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "family": "session-manager-power",
+      "needle": "PowerSettingProfile",
+      "next_lane": "static-string-first"
+    },
+    {
+      "candidate_id": "system.executive-uuid-sequence-number",
+      "family": "session-manager-executive",
+      "needle": "UuidSequenceNumber",
+      "next_lane": "static-string-first"
+    },
+    {
+      "candidate_id": "power.control.hiber-file-size-percent",
+      "family": "power-control",
+      "needle": "HiberFileSizePercent",
+      "next_lane": "static-string-first"
+    }
+  ],
+  "pending_value_exists_path_sensitive_queue": [
+    {
+      "candidate_id": "policy.system.enable-virtualization",
+      "family": "policy-system",
+      "reason": "Exact value-name string search is substring-ambiguous with EnableVirtualizationBasedSecurity, so this needs a policy/UAC-specific lane instead of the generic batch string probe."
+    },
+    {
+      "candidate_id": "system.io-allow-remote-dasd",
+      "family": "session-manager-io",
+      "reason": "Prior static routing showed an exact-string collision with RemovableStorageDevices policy, so this needs exact-path or path-aware follow-up instead of the generic batch string probe."
+    }
+  ],
+  "pending_path_only_groups": [
+    {
+      "group_id": "docs-first-new-candidate-power-control-path-only",
+      "count": 33
+    },
+    {
+      "group_id": "docs-first-new-candidate-session-manager-kernel-path-only",
+      "count": 21
+    },
+    {
+      "group_id": "docs-first-new-candidate-power-modern-sleep-path-only",
+      "count": 1
+    },
+    {
+      "group_id": "net-new-session-manager-executive-path-only",
+      "count": 4
+    },
+    {
+      "group_id": "net-new-session-manager-io-path-only",
+      "count": 3
+    },
+    {
+      "group_id": "net-new-session-manager-power-path-only",
+      "count": 3
+    },
+    {
+      "group_id": "net-new-policy-system-path-only",
+      "count": 1
+    },
+    {
+      "group_id": "research-only-power-control-path-only",
+      "count": 1
+    },
+    {
+      "group_id": "research-only-power-modern-sleep-path-only",
+      "count": 1
+    },
+    {
+      "group_id": "research-only-session-manager-power-path-only",
+      "count": 1
+    },
+    {
+      "group_id": "existing-covered-power-control-path-only",
+      "count": 3
+    },
+    {
+      "group_id": "existing-covered-session-manager-kernel-path-only",
+      "count": 1
+    }
+  ],
+  "path_missing_hold": [
+    "power.force-hibernate-disabled.policy",
+    "power.throttling.power-throttling-off"
+  ],
+  "recommended_next_queue": [
+    "power.customize-during-setup",
+    "power.source-settings-version",
+    "power.session-power-setting-profile",
+    "system.executive-uuid-sequence-number",
+    "power.control.hiber-file-size-percent"
+  ],
+  "notes": [
+    "Repo truth for the broad batch is still 96 candidates.",
+    "The completed-or-decision-gated list subtracts the docs-first 7, the Executive worker-thread pair, and the Session Manager watchdog pair from the original value-exists queue.",
+    "EnableVirtualization and AllowRemoteDASD stay out of the generic string-first queue because both have known substring or path-collision risk."
+  ]
+}

@@ -1,0 +1,112 @@
+﻿[
+    {
+        "candidate_id":  "power.customize-during-setup",
+        "family":  "power-control",
+        "needle":  "CustomizeDuringSetup",
+        "hit_count":  0,
+        "binaries":  [
+                         {
+                             "path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                             "exists":  true,
+                             "size":  12952992,
+                             "ascii_match":  false,
+                             "unicode_match":  false
+                         },
+                         {
+                             "path":  "C:\\Windows\\System32\\powrprof.dll",
+                             "exists":  true,
+                             "size":  398160,
+                             "ascii_match":  false,
+                             "unicode_match":  false
+                         }
+                     ]
+    },
+    {
+        "candidate_id":  "power.source-settings-version",
+        "family":  "power-control",
+        "needle":  "SourceSettingsVersion",
+        "hit_count":  0,
+        "binaries":  [
+                         {
+                             "path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                             "exists":  true,
+                             "size":  12952992,
+                             "ascii_match":  false,
+                             "unicode_match":  false
+                         },
+                         {
+                             "path":  "C:\\Windows\\System32\\powrprof.dll",
+                             "exists":  true,
+                             "size":  398160,
+                             "ascii_match":  false,
+                             "unicode_match":  false
+                         }
+                     ]
+    },
+    {
+        "candidate_id":  "power.session-power-setting-profile",
+        "family":  "session-manager-power",
+        "needle":  "PowerSettingProfile",
+        "hit_count":  0,
+        "binaries":  [
+                         {
+                             "path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                             "exists":  true,
+                             "size":  12952992,
+                             "ascii_match":  false,
+                             "unicode_match":  false
+                         },
+                         {
+                             "path":  "C:\\Windows\\System32\\powrprof.dll",
+                             "exists":  true,
+                             "size":  398160,
+                             "ascii_match":  false,
+                             "unicode_match":  false
+                         }
+                     ]
+    },
+    {
+        "candidate_id":  "system.executive-uuid-sequence-number",
+        "family":  "session-manager-executive",
+        "needle":  "UuidSequenceNumber",
+        "hit_count":  1,
+        "binaries":  [
+                         {
+                             "path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                             "exists":  true,
+                             "size":  12952992,
+                             "ascii_match":  false,
+                             "unicode_match":  true
+                         },
+                         {
+                             "path":  "C:\\Windows\\System32\\smss.exe",
+                             "exists":  true,
+                             "size":  228768,
+                             "ascii_match":  false,
+                             "unicode_match":  false
+                         }
+                     ]
+    },
+    {
+        "candidate_id":  "power.control.hiber-file-size-percent",
+        "family":  "power-control",
+        "needle":  "HiberFileSizePercent",
+        "hit_count":  1,
+        "binaries":  [
+                         {
+                             "path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+                             "exists":  true,
+                             "size":  12952992,
+                             "ascii_match":  false,
+                             "unicode_match":  true
+                         },
+                         {
+                             "path":  "C:\\Windows\\System32\\powrprof.dll",
+                             "exists":  true,
+                             "size":  398160,
+                             "ascii_match":  false,
+                             "unicode_match":  false
+                         }
+                     ]
+    }
+]

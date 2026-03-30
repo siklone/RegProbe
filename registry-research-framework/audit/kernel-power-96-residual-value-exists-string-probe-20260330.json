@@ -1,0 +1,53 @@
+{
+  "generated_utc": "2026-03-30T11:10:39.0134981Z",
+  "source_follow_up": "registry-research-framework/audit/kernel-power-96-remaining-groups-20260330.json",
+  "probe_kind": "static-string-first",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "candidates": [
+    {
+      "candidate_id": "power.customize-during-setup",
+      "needle": "CustomizeDuringSetup",
+      "family": "power-control",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    },
+    {
+      "candidate_id": "power.source-settings-version",
+      "needle": "SourceSettingsVersion",
+      "family": "power-control",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    },
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "needle": "PowerSettingProfile",
+      "family": "session-manager-power",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    },
+    {
+      "candidate_id": "system.executive-uuid-sequence-number",
+      "needle": "UuidSequenceNumber",
+      "family": "session-manager-executive",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\smss.exe"
+      ]
+    },
+    {
+      "candidate_id": "power.control.hiber-file-size-percent",
+      "needle": "HiberFileSizePercent",
+      "family": "power-control",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    }
+  ]
+}

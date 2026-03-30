@@ -1,0 +1,54 @@
+{
+  "generated_utc": "2026-03-30T11:20:46.7289388Z",
+  "source_manifest": "registry-research-framework/audit/kernel-power-96-residual-value-exists-string-probe-20260330.json",
+  "source_summary": "evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/summary.json",
+  "source_results": "evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json",
+  "status": "ready-for-next-pass",
+  "totals": {
+    "total_candidates": 5,
+    "candidates_with_hits": 2,
+    "candidates_without_hits": 3
+  },
+  "positive_candidates": [
+    {
+      "candidate_id": "system.executive-uuid-sequence-number",
+      "family": "session-manager-executive",
+      "primary_binary": "C:\\Windows\\System32\\ntoskrnl.exe",
+      "match_kind": "unicode",
+      "recommended_next_lane": "path-aware-static-follow-up"
+    },
+    {
+      "candidate_id": "power.control.hiber-file-size-percent",
+      "family": "power-control",
+      "primary_binary": "C:\\Windows\\System32\\ntoskrnl.exe",
+      "match_kind": "unicode",
+      "recommended_next_lane": "docs-static-follow-up"
+    }
+  ],
+  "negative_candidates": [
+    {
+      "candidate_id": "power.customize-during-setup",
+      "family": "power-control",
+      "reason": "No exact string hit in ntoskrnl.exe or powrprof.dll on the tools-hardened baseline."
+    },
+    {
+      "candidate_id": "power.source-settings-version",
+      "family": "power-control",
+      "reason": "No exact string hit in ntoskrnl.exe or powrprof.dll on the tools-hardened baseline."
+    },
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "family": "session-manager-power",
+      "reason": "No exact string hit in ntoskrnl.exe or powrprof.dll on the tools-hardened baseline."
+    }
+  ],
+  "recommended_next_queue": [
+    "power.control.hiber-file-size-percent",
+    "system.executive-uuid-sequence-number"
+  ],
+  "notes": [
+    "The tools-hardened baseline completed the batch string lane without shell degradation or recovery.",
+    "UuidSequenceNumber remains semantically adjacent to the already-promoted Executive worker-thread lane, so it should move into a path-aware follow-up rather than being merged into that record automatically.",
+    "HiberFileSizePercent now has both a documented repo lead and a current-build ntoskrnl string hit, making it the strongest broad-batch residual candidate."
+  ]
+}
