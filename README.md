@@ -1,5 +1,9 @@
 # RegProbe
 
+<p align="center">
+  <img src="assets/brand/regprobe-logo-full.png" alt="RegProbe logo" width="320">
+</p>
+
 RegProbe is a Windows desktop configuration shell plus a research workspace for evidence-backed tweak work. The app stays reversible and preview-first, while the repo keeps the proof trail: records, runtime captures, static analysis, audits, and VM orchestration.
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)

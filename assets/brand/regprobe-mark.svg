@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">RegProbe mark</title>
+  <desc id="desc">A compact RegProbe mark with a magnifier, cubes, and a green telemetry trace.</desc>
+  <defs>
+    <linearGradient id="ringBlue" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0248D3"/>
+      <stop offset="55%" stop-color="#1897FF"/>
+      <stop offset="100%" stop-color="#97E8FF"/>
+    </linearGradient>
+    <linearGradient id="handleBlue" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#023DBA"/>
+      <stop offset="100%" stop-color="#2A9BFF"/>
+    </linearGradient>
+    <linearGradient id="cubeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A3ECFF"/>
+      <stop offset="100%" stop-color="#42C8FF"/>
+    </linearGradient>
+    <linearGradient id="cubeFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F7BFF"/>
+      <stop offset="100%" stop-color="#109CFF"/>
+    </linearGradient>
+    <linearGradient id="cubeSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#003DB3"/>
+      <stop offset="100%" stop-color="#1677FF"/>
+    </linearGradient>
+    <linearGradient id="traceGreen" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#08B96A"/>
+      <stop offset="45%" stop-color="#29D36E"/>
+      <stop offset="100%" stop-color="#BBFF00"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="208" cy="214" r="136" fill="none" stroke="url(#ringBlue)" stroke-width="22"/>
+  <path d="M 96 334 L 50 380" fill="none" stroke="url(#handleBlue)" stroke-width="40" stroke-linecap="round"/>
+
+  <polygon points="208,132 250,154 208,176 166,154" fill="url(#cubeTop)"/>
+  <polygon points="166,154 166,203 208,226 208,176" fill="url(#cubeSide)"/>
+  <polygon points="250,154 250,203 208,226 208,176" fill="url(#cubeFront)"/>
+
+  <polygon points="132,206 174,228 132,250 90,228" fill="url(#cubeTop)"/>
+  <polygon points="90,228 90,277 132,300 132,250" fill="url(#cubeSide)"/>
+  <polygon points="174,228 174,277 132,300 132,250" fill="url(#cubeFront)"/>
+
+  <polygon points="284,206 326,228 284,250 242,228" fill="url(#cubeTop)"/>
+  <polygon points="242,228 242,277 284,300 284,250" fill="url(#cubeSide)"/>
+  <polygon points="326,228 326,277 284,300 284,250" fill="url(#cubeFront)"/>
+
+  <polygon points="208,266 250,288 208,310 166,288" fill="url(#cubeTop)"/>
+  <polygon points="166,288 166,337 208,360 208,310" fill="url(#cubeSide)"/>
+  <polygon points="250,288 250,337 208,360 208,310" fill="url(#cubeFront)"/>
+
+  <g fill="none" stroke="url(#traceGreen)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 300 262 H 344 L 370 216 L 398 282 V 150"/>
+    <path d="M 398 204 V 288 H 468"/>
+    <path d="M 432 214 L 458 244 L 486 216"/>
+    <path d="M 332 352 H 386 V 328 H 430"/>
+  </g>
+
+  <g fill="url(#traceGreen)">
+    <circle cx="398" cy="150" r="12"/>
+    <circle cx="398" cy="282" r="12"/>
+    <circle cx="432" cy="214" r="10"/>
+    <circle cx="486" cy="216" r="10"/>
+    <circle cx="468" cy="288" r="10"/>
+    <circle cx="430" cy="328" r="10"/>
+  </g>
+</svg>

@@ -30,6 +30,8 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
   creates the normal packaged desktop build and zip output
 - `scripts/publish_release.ps1`
   creates a deterministic publish folder for release review or local smoke checks
+- `scripts/build_brand_assets.ps1`
+  regenerates the checked-in RegProbe logo PNG and ICO assets from the SVG brand sources
 - `scripts/sanitize_public_artifacts.ps1`
   replaces machine-specific user, repo, temp, and VM path strings in tracked evidence and audit artifacts before a public push
 

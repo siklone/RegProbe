@@ -14,6 +14,7 @@
         MinWidth="980"
         MinHeight="680"
         Background="#151515"
+        Icon="Resources/Brand/regprobe-mark.ico"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="False"
@@ -157,6 +158,12 @@
                             Margin="22,0,0,0"
                             VerticalAlignment="Center"
                             WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Image Source="Resources/Brand/regprobe-mark.png"
+                           Width="18"
+                           Height="18"
+                           Margin="0,0,8,0"
+                           Stretch="Uniform"
+                           SnapsToDevicePixels="True"/>
                     <TextBlock Text="RegProbe"
                                Margin="0,0,0,0"
                                VerticalAlignment="Center"

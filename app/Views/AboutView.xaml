@@ -18,9 +18,29 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
+                        Padding="18"
+                        Style="{StaticResource UtilitySectionBorderStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/RegProbe.App;component/Resources/Brand/regprobe-logo-full.png"
+                               Width="112"
+                               Height="112"
+                               Stretch="Uniform"
+                               Margin="0,0,18,0"/>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="RegProbe"
+                                       Style="{StaticResource UtilitySectionTitleTextStyle}"/>
+                            <TextBlock Margin="0,6,0,0"
+                                       Style="{StaticResource UtilitySectionBodyTextStyle}"
+                                       Text="Evidence-backed Windows configuration work, packaged as a calmer desktop shell and a reproducible research repo."/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1"
                         Style="{StaticResource UtilityPanelBorderStyle}">
                     <Grid Grid.IsSharedSizeScope="True">
                         <Grid.RowDefinitions>
@@ -110,7 +130,7 @@
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="1"
+                <Border Grid.Row="2"
                         Margin="0,18,0,0"
                         Style="{StaticResource UtilitySectionBorderStyle}">
                     <StackPanel>
@@ -132,7 +152,7 @@
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Row="2"
+                <Border Grid.Row="3"
                         Margin="0,18,0,0"
                         Style="{StaticResource UtilitySectionBorderStyle}">
                     <StackPanel>

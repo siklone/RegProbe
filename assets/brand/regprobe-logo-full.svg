@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">RegProbe logo</title>
+  <desc id="desc">A blue magnifier around stacked cubes with a green telemetry circuit trace.</desc>
+  <defs>
+    <linearGradient id="ringBlue" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0248D3"/>
+      <stop offset="55%" stop-color="#1897FF"/>
+      <stop offset="100%" stop-color="#97E8FF"/>
+    </linearGradient>
+    <linearGradient id="handleBlue" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#023DBA"/>
+      <stop offset="100%" stop-color="#2A9BFF"/>
+    </linearGradient>
+    <linearGradient id="cubeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A3ECFF"/>
+      <stop offset="100%" stop-color="#42C8FF"/>
+    </linearGradient>
+    <linearGradient id="cubeFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F7BFF"/>
+      <stop offset="100%" stop-color="#109CFF"/>
+    </linearGradient>
+    <linearGradient id="cubeSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#003DB3"/>
+      <stop offset="100%" stop-color="#1677FF"/>
+    </linearGradient>
+    <linearGradient id="traceGreen" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#08B96A"/>
+      <stop offset="45%" stop-color="#29D36E"/>
+      <stop offset="100%" stop-color="#BBFF00"/>
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#00194D" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softGlow)">
+    <circle cx="420" cy="420" r="250" fill="none" stroke="url(#ringBlue)" stroke-width="34"/>
+    <path d="M 200 640 L 118 722" fill="none" stroke="url(#handleBlue)" stroke-width="72" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#softGlow)">
+    <polygon points="420,276 497,316 420,356 343,316" fill="url(#cubeTop)"/>
+    <polygon points="343,316 343,406 420,448 420,356" fill="url(#cubeSide)"/>
+    <polygon points="497,316 497,406 420,448 420,356" fill="url(#cubeFront)"/>
+
+    <polygon points="280,410 357,450 280,490 203,450" fill="url(#cubeTop)"/>
+    <polygon points="203,450 203,540 280,582 280,490" fill="url(#cubeSide)"/>
+    <polygon points="357,450 357,540 280,582 280,490" fill="url(#cubeFront)"/>
+
+    <polygon points="560,410 637,450 560,490 483,450" fill="url(#cubeTop)"/>
+    <polygon points="483,450 483,540 560,582 560,490" fill="url(#cubeSide)"/>
+    <polygon points="637,450 637,540 560,582 560,490" fill="url(#cubeFront)"/>
+
+    <polygon points="420,520 497,560 420,600 343,560" fill="url(#cubeTop)"/>
+    <polygon points="343,560 343,650 420,692 420,600" fill="url(#cubeSide)"/>
+    <polygon points="497,560 497,650 420,692 420,600" fill="url(#cubeFront)"/>
+  </g>
+
+  <g fill="none" stroke="url(#traceGreen)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" filter="url(#softGlow)">
+    <path d="M 586 516 H 688 L 733 430 L 780 560 V 294"/>
+    <path d="M 780 386 V 570 H 915"/>
+    <path d="M 838 410 L 890 478 L 950 414"/>
+    <path d="M 648 690 H 736 V 654 H 804"/>
+  </g>
+
+  <g fill="url(#traceGreen)" filter="url(#softGlow)">
+    <circle cx="780" cy="294" r="22"/>
+    <circle cx="780" cy="560" r="22"/>
+    <circle cx="838" cy="410" r="18"/>
+    <circle cx="950" cy="414" r="18"/>
+    <circle cx="915" cy="570" r="18"/>
+    <circle cx="804" cy="654" r="18"/>
+  </g>
+</svg>
