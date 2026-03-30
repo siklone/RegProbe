@@ -1,0 +1,103 @@
+﻿[
+    {
+        "generated_utc":  "2026-03-30T10:41:21.5754835Z",
+        "candidate_id":  "power.session-watchdog-timeouts",
+        "value_names":  [
+                            "WatchdogResumeTimeout",
+                            "WatchdogSleepTimeout"
+                        ],
+        "adjacent_value_names":  [
+                                     "Win32CalloutWatchdogBugcheckEnabled"
+                                 ],
+        "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+        "shell_before":  {
+                             "generated_utc":  "2026-03-30T10:20:58.7592509Z",
+                             "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                             "vm_running":  true,
+                             "tools_state":  "running",
+                             "process_query_error":  null,
+                             "shell_healthy":  true,
+                             "checks":  {
+                                            "explorer":  true,
+                                            "sihost":  true,
+                                            "shellhost":  true,
+                                            "ctfmon":  true,
+                                            "app":  false
+                                        }
+                         },
+        "shell_after":  {
+                            "generated_utc":  "2026-03-30T10:41:16.4943100Z",
+                            "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                            "vm_running":  false,
+                            "tools_state":  "not-running",
+                            "process_query_error":  null,
+                            "shell_healthy":  false,
+                            "checks":  {
+                                           "explorer":  false,
+                                           "sihost":  false,
+                                           "shellhost":  false,
+                                           "ctfmon":  false,
+                                           "app":  false
+                                       }
+                        },
+        "best_phase":  "short-trigger-etw",
+        "status":  "error",
+        "exact_query_hits":  0,
+        "exact_runtime_read":  false,
+        "s1_supported":  true,
+        "modern_standby_supported":  false,
+        "phase_results":  {
+                              "capability-check":  {
+                                                       "powercfg_output":  "The following sleep states are available on this system:\r\n\r\n\r\n    Standby (S1)\r\n\r\n\r\n\r\n\r\n\r\nThe following sleep states are not available on this system:\r\n\r\n\r\n    Standby (S2)\r\n\r\n\r\n\tThe system firmware does not support this standby state.\r\n\r\n\r\n\r\n\r\n\r\n    Standby (S3)\r\n\r\n\r\n\tThe system firmware does not support this standby state.\r\n\r\n\r\n\r\n\r\n\r\n    Hibernate\r\n\r\n\r\n\tThe system firmware does not support hibernation.\r\n\r\n",
+                                                       "status":  "s1-supported",
+                                                       "s1_supported":  true,
+                                                       "generated_utc":  "2026-03-30T10:21:26.8267726Z",
+                                                       "modern_standby_supported":  false,
+                                                       "phase":  "capability-check"
+                                                   },
+                              "short-trigger-etw":  {
+                                                        "generated_utc":  "2026-03-30T10:23:08.0130695Z",
+                                                        "phase":  "short-trigger-etw",
+                                                        "status":  "error",
+                                                        "exact_runtime_read":  false,
+                                                        "exact_query_hits":  0,
+                                                        "errors":  [
+                                                                       "vmrun failed (-1): Error: VMware Tools are not running in the guest"
+                                                                   ]
+                                                    },
+                              "split-trace-start":  {
+                                                        "generated_utc":  "2026-03-30T10:28:10.3480263Z",
+                                                        "phase":  "split-trace-start",
+                                                        "status":  "error",
+                                                        "exact_runtime_read":  false,
+                                                        "exact_query_hits":  0,
+                                                        "errors":  [
+                                                                       "Guest is not ready for vmrun guest operations."
+                                                                   ]
+                                                    },
+                              "split-trigger":  {
+                                                    "generated_utc":  "2026-03-30T10:33:13.0332957Z",
+                                                    "phase":  "split-trigger",
+                                                    "status":  "error",
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "errors":  [
+                                                                   "Guest is not ready for vmrun guest operations."
+                                                               ]
+                                                },
+                              "split-trace-stop":  {
+                                                       "generated_utc":  "2026-03-30T10:38:15.8043038Z",
+                                                       "phase":  "split-trace-stop",
+                                                       "status":  "error",
+                                                       "exact_runtime_read":  false,
+                                                       "exact_query_hits":  0,
+                                                       "errors":  [
+                                                                      "Guest is not ready for vmrun guest operations."
+                                                                  ]
+                                                   }
+                          },
+        "artifacts":  {
+                          "summary":  "evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/power-session-watchdog-timeouts/summary.json"
+                      }
+    }
+]

@@ -1,0 +1,19 @@
+{
+  "generated_utc": "2026-03-30T10:41:21Z",
+  "record_id": "power.session-watchdog-timeouts",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "runner": "registry-research-framework/tools/run-watchdog-lightweight-runtime-followup.ps1",
+  "summary_ref": "evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/summary.json",
+  "results_ref": "evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/results.json",
+  "result": {
+    "status": "error",
+    "exact_runtime_read": false,
+    "s1_supported": true,
+    "modern_standby_supported": false
+  },
+  "notes": [
+    "The tools-hardened lightweight ETW retry confirmed S1 support again.",
+    "The guest still dropped out during the S1 transition before a decisive exact-value watchdog ETW bundle could complete.",
+    "This keeps the lane at Class B with vm_s1_only_limitation rather than closing it as a dead flag."
+  ]
+}

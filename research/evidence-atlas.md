@@ -8,7 +8,7 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Field | Value |
 | --- | --- |
 | Total records | 305 |
-| Validated | 243 |
+| Validated | 244 |
 | Deprecated | 54 |
 | Review required | 0 |
 | Records with evidence | 305 |
@@ -10135,6 +10135,126 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | Microsoft documents the exact MMCSS SystemProfile registry path and allowed values, the app writes those same fields, and the Win25H2Clean export gives a concrete Games-task baseline for this build. This is app-ready evidence-wise, but it stays non-default because it applies a custom Games task profile rather than the stock MMCSS baseline. |
+
+---
+
+### `power.session-watchdog-timeouts`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Power` |
+| Area | `Directed Power Watchdog Timeouts` |
+| Scope | `device` |
+| Source file | [research/records/power.session-watchdog-timeouts.json](records/power.session-watchdog-timeouts.json) |
+| V3.1 evidence root | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, and a new tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed. The pair remains Class B because the current VMware baseline is S1-only and still does not provide a reliable decisive runtime path for the exact watchdog values.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | There is no current RegProbe provider or UI mapping for this candidate. The pair is still in research-only intake. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
+| Action state | `research-gated` |
+| Gating reason | Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `session-watchdog-timeout-pair`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power` |
+| Value name | `WatchdogResumeTimeout / WatchdogSleepTimeout` |
+| Value type | `REG_DWORD pair` |
+| Notes | Keep the pair together. The current evidence is strongest when WatchdogResumeTimeout and WatchdogSleepTimeout are treated as one lane. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `WatchdogResumeTimeout=120;WatchdogSleepTimeout=300` | Observed Win25H2Clean baseline | The clean VM baseline currently exposes WatchdogResumeTimeout = 120 and WatchdogSleepTimeout = 300. | vm-session-manager-power-baseline-20260328, vm-watchdog-boot-trace-20260328 |
+| `feature-dependent` | - | Undocumented custom DWORD pair | The evidence so far only proves that the pair exists and flows through the power-management path. A safe non-default profile is not validated yet. | ghidra-watchdog-nextgate-ntoskrnl-20260328, repo-pofx-pseudocode-watchdog |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current Win25H2Clean baseline with the Session Manager Power key populated | session-watchdog-timeout-pair: value 'WatchdogResumeTimeout=120;WatchdogSleepTimeout=300' - Leave the currently observed watchdog timeout pair unchanged until a stronger supported mapping exists. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Kernel power documentation'] | ['End-user presets', 'General system tuning'] | `False` |
+| `research-candidate-pair` | Research candidate pair | ['Advanced kernel-power research'] | ['General users', 'Published presets'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `vm-session-manager-power-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Power baseline export | [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg) and [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt) | `high` | path, value, default, version-scope |
+| `ghidra-watchdog-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair | [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
+| `repo-pofx-pseudocode-watchdog` | `repo-doc` | `Current repo docs` | Repo PoFxInitPowerManagement pseudocode lead | [Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c](../Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c) and [research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md](notes/power-session-watchdog-timeouts-runtime-prep-20260328.md) | `medium` | behavior, side-effects, version-scope |
+| `vm-watchdog-boot-trace-20260328` | `etw-trace` | `unspecified` | Win25H2Clean reboot-verified watchdog timeout boot trace | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/summary.json](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md](notes/power-session-watchdog-timeouts-boot-trace-20260328.md) | `high` | value, behavior, version-scope |
+| `vm-watchdog-etl-registry-review-20260328` | `etw-trace` | `unspecified` | Host-side ETL registry review for Session Manager Power | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt) and [research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md](notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md) | `high` | path, behavior, version-scope |
+| `vm-watchdog-procmon-bootlog-20260328` | `procmon` | `unspecified` | Win25H2Clean Procmon boot-log review for Session Manager Power | [evidence/files/vm/watchdog-procmon-bootlog-20260328-131306/summary.json](../evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary.json) and [evidence/files/vm/watchdog-procmon-bootlog-20260328-131306/summary-collect.json](../evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary-collect.json) and [evidence/files/vm/watchdog-procmon-bootlog-20260328-131306/watchdog-procmon-bootlog.hits.csv](../evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/watchdog-procmon-bootlog.hits.csv) and [research/notes/power-session-watchdog-timeouts-procmon-bootlog-20260328.md](notes/power-session-watchdog-timeouts-procmon-bootlog-20260328.md) | `high` | path, behavior, version-scope |
+| `vm-watchdog-sleep-capability-20260328` | `vm-observation` | `unspecified` | Win25H2Clean sleep capability for the watchdog lane | [evidence/files/vm/watchdog-sleep-capability-20260328-104406/summary.json](../evidence/files/vm-tooling-staging/watchdog-sleep-capability-20260328-104406/summary.json) and [evidence/files/vm/watchdog-sleep-capability-20260328-104406/powercfg-a.txt](../evidence/files/vm-tooling-staging/watchdog-sleep-capability-20260328-104406/powercfg-a.txt) and [research/notes/power-session-watchdog-timeouts-sleep-capability-20260328.md](notes/power-session-watchdog-timeouts-sleep-capability-20260328.md) | `medium` | risk, version-scope |
+| `vm-watchdog-dcomlaunch-attribution-20260328` | `etw-trace` | `unspecified` | DcomLaunch attribution for the watchdog svchost lead | [evidence/files/vm/watchdog-dcomlaunch-attribution-20260328/summary.json](../evidence/files/vm-tooling-staging/watchdog-dcomlaunch-attribution-20260328/summary.json) and [evidence/files/vm/watchdog-dcomlaunch-attribution-20260328/dcomlaunch-services.json](../evidence/files/vm-tooling-staging/watchdog-dcomlaunch-attribution-20260328/dcomlaunch-services.json) and [evidence/files/vm/watchdog-dcomlaunch-attribution-20260328/svchost-pid980-etl-lines.txt](../evidence/files/vm-tooling-staging/watchdog-dcomlaunch-attribution-20260328/svchost-pid980-etl-lines.txt) and [research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md](notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md) | `high` | path, behavior, version-scope |
+| `vm-watchdog-postboot-power-trigger-20260328` | `procmon` | `unspecified` | Targeted post-boot Procmon trigger for the DcomLaunch Power lane | [evidence/files/vm/watchdog-power-trigger-20260328-141804/summary.json](../evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/summary.json) and [evidence/files/vm/watchdog-power-trigger-20260328-141804/watchdog-power-trigger.txt](../evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/watchdog-power-trigger.txt) and [evidence/files/vm/watchdog-power-trigger-20260328-141804/watchdog-power-trigger-tasklist.txt](../evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/watchdog-power-trigger-tasklist.txt) and [evidence/files/vm/watchdog-power-trigger-20260328-141804/watchdog-power-trigger-sc-power.txt](../evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/watchdog-power-trigger-sc-power.txt) and [research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md](notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md) | `high` | behavior, risk, version-scope |
+| `vm-watchdog-s1-procmon-follow-up-20260328` | `vm-observation` | `unspecified` | S1-specific Procmon follow-up for the watchdog lane | [evidence/files/vm/watchdog-s1-procmon-20260328-144402/summary.json](../evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/summary.json) and [evidence/files/vm/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-lastwake-postcheck.txt](../evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-lastwake-postcheck.txt) and [evidence/files/vm/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-kernelpower-postcheck.txt](../evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-kernelpower-postcheck.txt) and [research/notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md](notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md) | `medium` | risk, version-scope |
+| `vm-watchdog-s1-scheduled-procmon-follow-up-20260328` | `vm-observation` | `unspecified` | S1 scheduled-task Procmon follow-up for the watchdog lane | [evidence/files/vm/watchdog-s1-scheduled-procmon-20260328-150559/summary.json](../evidence/files/vm-tooling-staging/watchdog-s1-scheduled-procmon-20260328-150559/summary.json) and [evidence/files/vm/watchdog-s1-scheduled-procmon-20260328-150559/watchdog-s1-scheduled-procmon-live-postmortem.txt](../evidence/files/vm-tooling-staging/watchdog-s1-scheduled-procmon-20260328-150559/watchdog-s1-scheduled-procmon-live-postmortem.txt) and [research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md](notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md) | `medium` | risk, version-scope |
+| `vm-watchdog-lightweight-runtime-20260330` | `vm-observation` | `unspecified` | Tools-hardened lightweight ETW S1 follow-up for the watchdog lane | [evidence/files/vm/watchdog-lightweight-runtime-20260330-131636/summary.json](../evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/summary.json) and [evidence/files/vm/watchdog-lightweight-runtime-20260330-131636/results.json](../evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/results.json) and [research/notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md](notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md) | `high` | risk, version-scope |
+| `kernel-power-existing-next-gate-20260328` | `inference` | `unspecified` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) | `medium` | version-scope, risk |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [research/notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md](notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md) |
+| Exact quote / path | The tools-hardened lightweight ETW follow-up confirmed that S1 is available on this VM, but the sleep transition still pushed VMware Tools and the guest shell out before a usable exact-value ETW bundle could be completed, so the current environment still cannot close the watchdog lane decisively. |
+| Key found on page | `True` |
+| Notes | The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, and a newer tools-hardened lightweight ETW follow-up. All of them confirm the candidate surface is real, but the current VMware environment still does not produce a decisive exact live read of WatchdogResumeTimeout or WatchdogSleepTimeout. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and Ghidra fallback artifacts, repo-side PoFx pseudocode, a successful reboot-verified boot trace, a host-side ETL registry review, and multiple runtime attempts across Procmon and lightweight ETW. The current blocker is no longer lack of research depth. It is that the current S1-only VMware environment still does not provide a reliable decisive exact-value runtime path for the watchdog pair. |
+
+Blocking issues:
+- The ETL review, the Procmon boot-log review, the targeted post-boot DcomLaunch/Power trigger, and the newer tools-hardened lightweight ETW S1 follow-up still stop short of a decisive exact live read of WatchdogResumeTimeout and WatchdogSleepTimeout.
+- The current Win25H2Clean VMware baseline only exposes Standby (S1), and repeated S1-specific follow-ups still fail by dropping guest ops or guest shell state before the decisive runtime bundle can complete.
 
 ---
 

@@ -1,21 +1,25 @@
 {
-  "class": "C",
-  "pipeline_version": "v3.1",
-  "reason": "The watchdog timeout pair now has a clean baseline export, exact current-build ntoskrnl string hits plus Ghidra fallback artifacts, a repo-side PoFx pseudocode lead, a successful reboot-verified boot trace, a host-side ETL registry review, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, and four Procmon-adjacent runtime attempts: a working boot-log review with adjacent Session Manager\\Power hits, a shell-safe post-boot DcomLaunch/Power trigger that still returned no exact watchdog reads, a direct S1-specific follow-up that disturbed guest ops without leaving usable in-guest artifacts or wake-history confirmation, and a scheduled-task S1 follow-up that still left no task registration, no usable artifacts, and no fresh sleep/resume signal. That gives the candidate a credible cross-layer evidence base, but there is still no shipped app mapping, no validated non-default profile, and no direct live read of the exact watchdog values themselves.",
-  "cross_layer_satisfied": true,
-  "layers_used": [
-    "runtime_etw",
-    "static_ghidra",
-    "behavior_wpr"
-  ],
-  "layer_count": 3,
-  "frida_kernel_guard_applied": true,
-  "dead_flag_checks": {
-    "etw_executed": true,
-    "boot_phase_included": true,
-    "correct_tool_used": true,
-    "trigger_condition_tested": true
-  },
-  "class_ready_basis": "candidate-lane",
-  "next_missing_layer": "app-mapping"
+  "$schema": "registry-evidence-v3.1/classification",
+  "classification": {
+    "class": "B",
+    "pipeline_version": "v3.1",
+    "reason": "The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and Ghidra fallback artifacts, repo-side PoFx pseudocode, a successful reboot-verified boot trace, a host-side ETL registry review, and multiple runtime attempts across Procmon and lightweight ETW. The current blocker is no longer lack of research depth. It is that the current S1-only VMware environment still does not provide a reliable decisive exact-value runtime path for the watchdog pair.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr",
+      "runtime_reboot"
+    ],
+    "layer_count": 4,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": true,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "pending",
+    "next_missing_layer": "incident-review"
+  }
 }

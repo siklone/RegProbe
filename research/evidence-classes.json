@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-30T09:42:17.648473Z",
+  "generated_utc": "2026-03-30T10:50:49.561717Z",
   "summary": {
     "total_records": 305,
     "class_counts": {
@@ -7318,7 +7318,7 @@
     {
       "record_id": "power.session-watchdog-timeouts",
       "tweak_id": "power.session-watchdog-timeouts",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "B",
       "class_label": "Class B",
       "class_title": "Strong but Decision-Gated",
@@ -7327,20 +7327,20 @@
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
+      "gating_reason": "Cross-layer evidence is strong, but the current S1-only VMware baseline still drops guest state before a decisive exact-value watchdog runtime lane can complete.",
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger that stayed shell-safe while still returning no matching hits, and two separate S1-specific Procmon attempts. One disturbed the VMware...",
+        "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, and a newer tools-hardened lightweight ETW follow-up. All of them confirm the candidate surfac...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md",
+            "url": "research/notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md",
             "kind": "validation-proof",
-            "summary": "The scheduled-task decoupling did not fix the lane: the guest-side task did not leave behind a usable probe bundle, the task itself was not present when queried after recovery,..."
+            "summary": "The tools-hardened lightweight ETW follow-up confirmed that S1 is available on this VM, but the sleep transition still pushed VMware Tools and the guest shell out before a usabl..."
           },
           {
             "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",
