@@ -37,6 +37,7 @@ bld/
 # Build results on 'Bin' directories
 ## Keep source bins out of git; allow a single publish_final folder for distribution
 **/[Bb]in/*
+dist/
 publish_final/
 # Uncomment if you have tasks that rely on *.refresh files to move binaries
 # (https://github.com/github/gitignore/pull/3736)
@@ -416,7 +417,6 @@ FodyWeavers.xsd
 *.msp
 *.dll
 *.exe
-dist/
 
 # Local build logs (project root)
 /nul

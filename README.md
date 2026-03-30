@@ -1,100 +1,119 @@
 # RegProbe
 
-RegProbe is a .NET 8 desktop app and research workspace for evidence-backed Windows configuration work. It focuses on safe, reversible tweaks and a registry research pipeline that ties each shipped setting back to source notes, VM validation, and captured evidence.
+RegProbe is a Windows desktop configuration shell plus a research workspace for evidence-backed tweak work. The app stays reversible and preview-first, while the repo keeps the proof trail: records, runtime captures, static analysis, audits, and VM orchestration.
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
-![App](https://img.shields.io/badge/app-desktop-1f2937)
-![Status](https://img.shields.io/badge/status-active-ff5a5f)
-![License](https://img.shields.io/badge/license-TBD-yellow)
+![Shell](https://img.shields.io/badge/shell-WPF_MVVM-1f2937)
+![Research](https://img.shields.io/badge/research-v3.1_pipeline-c0392b)
+![License](https://img.shields.io/badge/license-MIT-22c55e)
+[![CI](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml/badge.svg)](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml)
 
-## What RegProbe Does
+## What Ships Today
 
-- exposes a Windows desktop UI for reviewing and applying reversible tweaks
-- keeps tweak execution inside a `Detect -> Apply -> Verify -> Rollback` safety model
-- routes admin-required actions through a separate elevated host instead of forcing the whole app to run as admin
-- publishes research records, evidence manifests, audits, and captured artifacts alongside the app
-- validates runtime behavior inside the `Win25H2Clean` VM with Procmon, WPR/WPA, ETW, and Ghidra headless workflows
-
-## App Surface
-
-The live product surface is configuration-focused:
+The current app is a focused desktop shell with three top-level surfaces:
 
 - `Configuration`
-- `Policy Reference`
-- `Settings`
+  the main workspace for browsing, filtering, previewing, and applying reversible tweaks
+- `Repairs`
+  the operational lane for recovery, cleanup, and repair-focused actions
 - `About`
+  repository, build, and log context
 
-The old hardware dashboard, services panel, bloatware browser, startup manager, and disk-health surface are no longer part of the shipped app. Config export/import now stays focused on the current workspace state and no longer carries startup payload data.
+The UI is intentionally tighter than the older builds. The current shell is a dark, flat-row workspace with:
 
-## Research Surface
+- a custom title bar
+- a category rail on the left
+- a dense tweak list instead of boxed cards
+- contributor-only evidence metadata kept behind repo/developer gating
 
-RegProbe ships with a parallel research stack:
+Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the old policy-heavy shell are not the current shipped experience.
 
-- [research](research)
-  human-facing records, generated audits, evidence atlas, and notes
-- [evidence](evidence)
-  normalized evidence bundles and imported artifacts
-- [registry-research-framework](registry-research-framework)
-  the v3.1 pipeline, schemas, audit queue, routing rules, and tool wrappers
+## Core Principles
 
-This repo cross-checks official Microsoft sources, repo evidence, and VM runtime captures instead of relying on one-line tweak folklore.
+- SAFE tweaks follow `Detect -> Apply -> Verify -> Rollback`
+- the app does not auto-mutate the system on startup
+- elevated actions run through `RegProbe.ElevatedHost`, not the main app process
+- runtime validation happens in the VM, not on the host
+- research classification is evidence-first, not folklore-first
 
-## VM Validation
-
-Runtime validation happens in the VMware guest, not on the host machine.
-
-- supported VM: `Win25H2Clean`
-- canonical runtime baseline snapshot: `RegProbe-Baseline-20260328`
-- use the VM for live app runs, registry experiments, performance tests, Procmon captures, WPR/WPA traces, ETW, and Ghidra headless analysis
-- the canonical baseline keeps Defender enabled and applies bounded exclusions only for trusted tooling paths and processes
-- use the host only for source edits, docs, and offline artifact prep
-- workflow details live in [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
-
-## Solution Layout
+## Repo Shape
 
 ```text
-app/                        Desktop UI, views, view models, startup
-core/                       Contracts, models, and abstractions
-engine/                     Tweak execution pipeline and tweak implementations
-infrastructure/             Registry, elevation, files, and adapters
-elevated-host/              Elevated helper process for admin-required actions
-cli/                        CLI entry point
-plugins-devtools/           Example/support plugin assembly
-tests/                      Unit tests
-research/                   Published research records and generated outputs
-evidence/                   Evidence bundles and imported artifacts
-registry-research-framework/ Pipeline v3.1 orchestration and schemas
-Docs/                       Supporting docs and workflows
-Tools/                      Developer utilities
-scripts/                    Build, publish, cleanup, and validation scripts
+app/                         WPF shell, views, view models, resources
+core/                        Contracts and shared models
+engine/                      Tweak implementations and execution pipeline
+infrastructure/              Registry, file, process, and elevation adapters
+elevated-host/               Separate admin helper process
+cli/                         Command-line entry point
+tests/                       Unit and behavior tests
+research/                    Human-facing records, notes, audit outputs
+evidence/                    Bundles and imported runtime/static artifacts
+registry-research-framework/ v3.1 routing, phases, tools, manifests
+Docs/                        Workflow and contributor-facing docs
+scripts/                     Build, package, VM, and validation helpers
 ```
 
-## Safety Model
+## VM Reality
 
-SAFE tweak work stays preview-first, reversible, and logged.
+The supported validation VM is `Win25H2Clean`.
 
-- `Detect -> Apply -> Verify -> Rollback`
-- no automatic system mutations on startup
-- elevated work stays outside the main app process
-- tweak activity is logged and exportable
+Current canonical snapshot:
 
-Under SAFE, RegProbe does not add one-click flows that disable Defender, Firewall, or SmartScreen.
+- `RegProbe-Baseline-ToolsHardened-20260330`
 
-## Getting Started
+Current baseline policy:
+
+- tooling-first
+- Defender stays enabled
+- bounded exclusions only for trusted tooling
+- app payloads do not persist in the saved baseline
+- app launch smoke is allowed only as an ephemeral deploy/validate/cleanup lane
+
+Start here for the full flow:
+
+- [VM workflow](Docs/VM_WORKFLOW.md)
+
+## Scripts: What We Actually Use
+
+The repo has a lot of PowerShell, but not all of it serves the same purpose.
+
+- everyday scripts
+  build, package, clean, baseline maintenance, shell health, app smoke
+- active research scripts
+  current v3.1 runners and follow-up lanes
+- historical reproducibility scripts
+  older one-off runners kept because notes, audits, and evidence bundles still depend on them
+- regenerable clutter
+  `bin/`, `obj/`, `publish/`, `dist/`, and `TestResults/`
+
+The full script map lives here:
+
+- [Script catalog](Docs/SCRIPT_CATALOG.md)
+
+If you are trying to learn the repo, read that file before deleting any `.ps1`. Many narrow runners are intentionally preserved so an old evidence claim can still be replayed.
+
+## Where To Start If You Want To Learn
+
+Read in this order:
+
+1. [README](README.md)
+2. [Contributing](CONTRIBUTING.md)
+3. [VM workflow](Docs/VM_WORKFLOW.md)
+4. [Script catalog](Docs/SCRIPT_CATALOG.md)
+5. [Research atlas](research/evidence-atlas.md)
+6. one record under [research/records](research/records)
+7. the matching bundle under [evidence/records](evidence/records)
+
+That path gives you the "what", the "how", and the proof trail in the same order contributors usually discover it.
+
+## Build And Run
 
 ### Prerequisites
 
 - Windows 10 or Windows 11
 - .NET 8 SDK
-- PowerShell 7+ recommended
-
-### Clone
-
-```powershell
-git clone https://github.com/siklone/RegProbe.git
-cd RegProbe
-```
+- PowerShell 7+ recommended for script work
 
 ### Build
 
@@ -114,23 +133,34 @@ dotnet run --project app/app.csproj
 dotnet test tests/tests.csproj -c Release --no-build -v minimal
 ```
 
+### Package
+
+```powershell
+pwsh -File scripts/package_windows.ps1 -Configuration Release -Runtime win-x64
+```
+
 ### Publish
 
 ```powershell
 pwsh -File scripts/publish_release.ps1
 ```
 
-## Elevated Host Override
-
-If the app cannot discover the elevated host automatically, use:
-
-```powershell
-$env:REGPROBE_ELEVATED_HOST_PATH = "C:\path\to\RegProbe.ElevatedHost.exe"
-```
-
 ## Useful Entry Points
 
-- [research/README.md](research/README.md)
-- [research/evidence-atlas.md](research/evidence-atlas.md)
-- [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
-- [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
+- [Contributing](CONTRIBUTING.md)
+- [VM workflow](Docs/VM_WORKFLOW.md)
+- [Script catalog](Docs/SCRIPT_CATALOG.md)
+- [Tweak sources](Docs/TWEAK_SOURCES.md)
+- [Research readme](research/README.md)
+- [Evidence atlas](research/evidence-atlas.md)
+- [Evidence audit](research/evidence-audit.json)
+
+## License
+
+This project is licensed under the MIT License.
+
+- [LICENSE](LICENSE)
+
+## Studio Note
+
+This repo was built in a very human-in-the-loop way: mostly with Codex doing the heavy lifting, with a small Claude assist on a few design and review passes. The result is still hand-directed, repo-specific, and evidence-driven rather than generated-once-and-forgotten.

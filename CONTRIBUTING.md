@@ -24,6 +24,7 @@ Read these first:
 - [research/evidence-atlas.md](research/evidence-atlas.md)
 - [research/evidence-audit.json](research/evidence-audit.json)
 - [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
+- [Docs/SCRIPT_CATALOG.md](Docs/SCRIPT_CATALOG.md)
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
 - [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)
 

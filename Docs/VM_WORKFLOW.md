@@ -15,18 +15,29 @@ Runtime validation for this repository happens in the `Win25H2Clean` VMware gues
   - Ghidra headless analysis
 - Use the host only for source editing, docs, artifact review, and offline prep.
 
+For the current script map, also see:
+
+- `Docs/SCRIPT_CATALOG.md`
+
 ## Canonical Baseline
 
 - VM identity: `Win25H2Clean`
-- Canonical runtime snapshot: `RegProbe-Baseline-20260328`
-- Seed snapshot used to build the canonical baseline: `baseline-20260327-regprobe-visible-shell-stable`
+- Canonical runtime snapshot: `RegProbe-Baseline-ToolsHardened-20260330`
+- Seed snapshot used to build the canonical baseline: `RegProbe-Baseline-Clean-20260329`
 
-New runtime work should start from `RegProbe-Baseline-20260328`, not from older shell-stable snapshots.
+New runtime work should start from `RegProbe-Baseline-ToolsHardened-20260330`, not from older shell-stable snapshots.
+
+Current baseline policy:
+
+- `hybrid`
+- tooling-first
+- app-free saved baseline
+- app launch smoke allowed only as an ephemeral deploy/validate/cleanup lane
 
 The baseline wrapper lives at:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scripts\vm\new-regprobe-defender-excluded-baseline.ps1
+powershell -ExecutionPolicy Bypass -File scripts\vm\new-regprobe-tools-hardened-baseline.ps1
 ```
 
 The shared snapshot resolver used by active research scripts lives at:
@@ -67,7 +78,7 @@ powershell -ExecutionPolicy Bypass -File scripts\vm\apply-defender-tooling-exclu
 The baseline audit package is tracked in:
 
 ```text
-registry-research-framework/audit/regprobe-baseline-defender-exclusions-20260328.json
+registry-research-framework/audit/regprobe-baseline-tools-hardened-20260330.json
 ```
 
 ## Tooling Available In The VM
@@ -114,6 +125,8 @@ Visible app launch smoke:
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\run-app-launch-smoke-host.ps1
 ```
+
+This lane is intentionally ephemeral. It should deploy the app, validate launch, and clean the guest again before the baseline is saved or reused as the canonical starting point.
 
 Shell health check:
 
@@ -228,3 +241,4 @@ powershell -ExecutionPolicy Bypass -File scripts\vm\cleanup-guest-validation-art
 
 - Historical evidence can still mention older snapshot names. Do not rewrite those records just to normalize naming.
 - The canonical baseline may change later, but active runtime scripts should resolve their default snapshot through the shared baseline config instead of hardcoding a snapshot name.
+- `new-regprobe-defender-excluded-baseline.ps1` is still kept as historical lineage, but it is no longer the canonical baseline builder.
