@@ -27,14 +27,14 @@
   },
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
       "operation": null,
       "timestamp": null,
       "boot_phase_included": true,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json and research/notes/power-control-lightweight-runtime-remaining-two-20260330.md"
     },
     "procmon": {
       "executed": true,
@@ -99,11 +99,11 @@
       "after_file": null
     },
     "wpr": {
-      "executed": false,
+      "executed": true,
       "boot_time_before_ms": null,
       "boot_time_after_ms": null,
       "cpu_delta": null,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json and research/notes/power-control-lightweight-runtime-remaining-two-20260330.md"
     },
     "benchmark": {
       "executed": false,
@@ -117,45 +117,69 @@
     }
   },
   "classification": {
-    "class": "C",
+    "class": "B",
     "pipeline_version": "v3.1",
-    "reason": "TimerRebaseThresholdOnDripsExit is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, and a second guest-processed post-boot Procmon trigger batch. It still remains below Class A because neither runtime lane captured an exact runtime read for this value on the current baseline.",
+    "reason": "TimerRebaseThresholdOnDripsExit is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and a tools-hardened DRIPS capability gate on RegProbe-Baseline-ToolsHardened-20260330. The record remains decision-gated because the current VMware baseline does not support Modern Standby / DRIPS exit, so the intended runtime trigger cannot be exercised on this VM.",
     "cross_layer_satisfied": true,
     "layers_used": [
       "runtime_procmon",
       "static_ghidra",
+      "behavior_wpr",
       "runtime_reboot"
     ],
-    "layer_count": 3,
+    "layer_count": 4,
     "frida_kernel_guard_applied": true,
     "dead_flag_checks": {
-      "etw_executed": false,
+      "etw_executed": true,
       "boot_phase_included": true,
       "correct_tool_used": true,
       "trigger_condition_tested": true
     },
     "class_ready_basis": "pending",
-    "next_missing_layer": "runtime-trace"
+    "next_missing_layer": "decision-gate"
   },
   "timeline": [
     {
       "step": "bootstrap_record_load",
-      "timestamp": "2026-03-29T14:07:35.718053Z"
+      "timestamp": "2026-03-30T00:56:38.734754Z"
     },
     {
       "step": "faz6",
-      "timestamp": "2026-03-29T14:07:35.718053Z"
+      "timestamp": "2026-03-30T00:56:38.734754Z"
     },
     {
       "step": "classification",
-      "timestamp": "2026-03-29T14:07:35.718053Z"
+      "timestamp": "2026-03-30T00:56:38.734754Z"
     },
     {
       "step": "last_reviewed",
-      "timestamp": "2026-03-29T14:05:00Z"
+      "timestamp": "2026-03-30T00:53:00Z"
     }
   ],
   "artifact_refs": [],
   "research_record": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
-  "research_record_fallback": "research/records/power.control.timer-rebase-threshold-on-drips-exit.review.json"
+  "research_record_fallback": "research/records/power.control.timer-rebase-threshold-on-drips-exit.review.json",
+  "re_audit": {
+    "is_re_audit": true,
+    "original_class": "B",
+    "original_evidence_tools": [
+      "procmon",
+      "ghidra",
+      "wpr",
+      "reboot"
+    ],
+    "original_cross_layer": true,
+    "original_pipeline_version": "pre-v3.1",
+    "re_audit_date": "2026-03-30T00:56:38.734754Z",
+    "re_audit_reason": "current_blocker",
+    "re_audit_priority": 1,
+    "new_tools_applied": [],
+    "new_cross_layer": true,
+    "new_class": "B",
+    "class_changed": false,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_four_conditions_met": true,
+    "notes": "Bootstrapped from the current research record and evidence audit.",
+    "new_pipeline_version": "v3.1"
+  }
 }

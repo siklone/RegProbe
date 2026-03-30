@@ -53,6 +53,19 @@ $candidates = @(
         value_name = 'PerfCalculateActualUtilization'
         short_trigger_profile = 'perf-current-scheme-refresh-short'
         split_trigger_profile = 'perf-current-scheme-refresh-only'
+    },
+    [ordered]@{
+        candidate_id = 'power.control.mf-buffering-threshold'
+        value_name = 'MfBufferingThreshold'
+        short_trigger_profile = 'mf-io-burst-short'
+        split_trigger_profile = 'mf-io-burst-only'
+    },
+    [ordered]@{
+        candidate_id = 'power.control.timer-rebase-threshold-on-drips-exit'
+        value_name = 'TimerRebaseThresholdOnDripsExit'
+        capability_check_profile = 'modern-standby-capability-check'
+        short_trigger_profile = 'drips-exit-short'
+        split_trigger_profile = 'drips-exit-only'
     }
 )
 
@@ -167,10 +180,30 @@ function Publish-CompactResultBestEffort {
     }
 }
 
+function Get-ModernStandbyCapability {
+    $powercfg = Invoke-CmdCapture -FilePath 'C:\Windows\System32\cmd.exe' -Arguments @('/c', 'powercfg /a')
+    $raw = if (-not [string]::IsNullOrWhiteSpace($powercfg.stdout)) { $powercfg.stdout } else { $powercfg.stderr }
+    $availableSection = $raw
+    $marker = 'The following sleep states are not available on this system:'
+    if ($availableSection -like "*$marker*") {
+        $availableSection = $availableSection.Split(@($marker), 2, [System.StringSplitOptions]::None)[0]
+    }
+
+    $supported = ($availableSection -match 'Standby \(S0 Low Power Idle\)' -or $availableSection -match 'Modern Standby')
+    return [ordered]@{
+        modern_standby_supported = [bool]$supported
+        powercfg_exit_code = $powercfg.exit_code
+        powercfg_output = (($raw -split "(`r`n|`n|`r)") | Select-Object -First 24) -join [Environment]::NewLine
+    }
+}
+
 function Invoke-TriggerProfile {
     param([string]$Profile)
 
     $commands = switch ($Profile) {
+        'modern-standby-capability-check' {
+            @()
+        }
         'processor-current-scheme-refresh-short' {
             @(
                 ('reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "{0}" /t REG_DWORD /d 64 /f' -f $ValueName),
@@ -211,6 +244,36 @@ function Invoke-TriggerProfile {
                 'powercfg /setactive SCHEME_CURRENT',
                 'timeout /t 1 /nobreak',
                 'powershell -NoProfile -Command "$end=(Get-Date).AddSeconds(3); while((Get-Date) -lt $end){ 1..8000 | ForEach-Object { [Math]::Sqrt($_) | Out-Null } }"'
+            )
+        }
+        'mf-io-burst-short' {
+            @(
+                ('reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "{0}" /t REG_DWORD /d 0 /f' -f $ValueName),
+                'timeout /t 1 /nobreak',
+                'powershell -NoProfile -Command "$path=''C:\RegProbe-Diag\io-burst''; New-Item -ItemType Directory -Path $path -Force | Out-Null; 1..100 | ForEach-Object { [byte[]]$data = New-Object byte[] 1048576; [System.IO.File]::WriteAllBytes((Join-Path $path (''file'' + $_ + ''.bin'')), $data) }; Remove-Item -Path $path -Recurse -Force"',
+                'timeout /t 1 /nobreak'
+            )
+        }
+        'mf-io-burst-only' {
+            @(
+                ('reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "{0}" /t REG_DWORD /d 0 /f' -f $ValueName),
+                'timeout /t 1 /nobreak',
+                'powershell -NoProfile -Command "$path=''C:\RegProbe-Diag\io-burst''; New-Item -ItemType Directory -Path $path -Force | Out-Null; 1..100 | ForEach-Object { [byte[]]$data = New-Object byte[] 1048576; [System.IO.File]::WriteAllBytes((Join-Path $path (''file'' + $_ + ''.bin'')), $data) }; Remove-Item -Path $path -Recurse -Force"'
+            )
+        }
+        'drips-exit-short' {
+            @(
+                ('reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "{0}" /t REG_DWORD /d 60 /f' -f $ValueName),
+                'timeout /t 1 /nobreak',
+                'powercfg /sleepstudy',
+                'timeout /t 1 /nobreak'
+            )
+        }
+        'drips-exit-only' {
+            @(
+                ('reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "{0}" /t REG_DWORD /d 60 /f' -f $ValueName),
+                'timeout /t 1 /nobreak',
+                'powercfg /sleepstudy'
             )
         }
         default {
@@ -276,7 +339,21 @@ $sessionName = ('RegProbeRegistry_' + ($ValueName -replace '[^A-Za-z0-9]', '') +
 $registryPathFragment = 'SYSTEM\\CurrentControlSet\\Control\\Power'
 
 try {
-    if ($Phase -eq 'short-trigger-etw') {
+    if ($Phase -eq 'capability-check') {
+        $capability = Get-ModernStandbyCapability
+        $status = if ($capability.modern_standby_supported) { 'modern-standby-supported' } else { 'vm-standby-limitation' }
+        $payload = Build-CompactSummary -Status $status -EtlExists $false -CsvExists $false -EtlLength 0 -CsvLineCount 0 -ExactLineCount 0 -ExactQueryHits 0 -PathLineCount 0 -TriggerFailureCount 0 -Errors @()
+        $payload['modern_standby_supported'] = [bool]$capability.modern_standby_supported
+        $payload['powercfg_exit_code'] = $capability.powercfg_exit_code
+        $payload['powercfg_output'] = $capability.powercfg_output
+        $publishError = Publish-CompactResultBestEffort -Payload $payload
+        if (-not [string]::IsNullOrWhiteSpace($publishError)) {
+            $payload.errors = @($payload.errors + "guestvar publish: $publishError")
+        }
+        $json = $payload | ConvertTo-Json -Depth 6 -Compress
+        [System.IO.File]::WriteAllText($phaseSummaryPath, $json, [System.Text.Encoding]::UTF8)
+    }
+    elseif ($Phase -eq 'short-trigger-etw') {
         foreach ($path in @($etlPath, $csvPath, $phaseSummaryPath)) {
             if (Test-Path -LiteralPath $path) {
                 Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
@@ -740,6 +817,7 @@ $summary = [ordered]@{
     exact_line_only_candidates = 0
     path_only_candidates = 0
     no_hit_candidates = 0
+    limitation_candidates = 0
     error_candidates = 0
     candidate_summary_files = @()
     errors = @()
@@ -769,68 +847,110 @@ try {
 
         $shellBefore = Get-ShellHealthBestEffort
         $phaseResults = [ordered]@{}
+        $skipRuntimePhases = $false
 
-        foreach ($phaseSpec in @(
-            [ordered]@{ phase = 'short-trigger-etw'; trigger = $candidate.short_trigger_profile },
-            [ordered]@{ phase = 'split-trace-start'; trigger = $candidate.split_trigger_profile },
-            [ordered]@{ phase = 'split-trigger'; trigger = $candidate.split_trigger_profile },
-            [ordered]@{ phase = 'split-trace-stop'; trigger = $candidate.split_trigger_profile }
-        )) {
-            $phaseName = $phaseSpec.phase
-            $variableName = ("rpl.$stamp." + $candidateLabel.Substring(0, [Math]::Min(12, $candidateLabel.Length)) + '.' + ($phaseName -replace '[^A-Za-z0-9]', '').ToLowerInvariant())
-            $phaseError = $null
-            $phaseError = Invoke-GuestPhaseSafe -GuestPayloadPath $guestPayloadPath -GuestRoot $guestCandidateRoot -ValueName $candidate.value_name -Phase $phaseName -TriggerProfile $phaseSpec.trigger -ResultVariableName $variableName
-
-            if ($phaseName -in @('split-trace-start', 'split-trigger')) {
-                Start-Sleep -Seconds 10
-                Wait-GuestReady
-                Wait-GuestCommandReady
-            }
-
-            $encodedSummary = Read-GuestVariableBestEffort -Name $variableName
-            $phaseSummary = Convert-GuestVariableToObject -Encoded $encodedSummary
-            $guestPhaseSummaryPath = Join-Path $guestCandidateRoot ("$phaseName-summary.json")
-            $hostPhaseSummaryPath = Join-Path $hostCandidateRoot ("$phaseName-summary.json")
-            if ($null -eq $phaseSummary) {
-                $copied = Copy-FromGuestBestEffort -GuestPath $guestPhaseSummaryPath -HostPath $hostPhaseSummaryPath
+        if ($candidate.Contains('capability_check_profile')) {
+            $capabilityVariableName = ("rpl.$stamp." + $candidateLabel.Substring(0, [Math]::Min(12, $candidateLabel.Length)) + '.capabilitycheck')
+            $capabilityError = Invoke-GuestPhaseSafe -GuestPayloadPath $guestPayloadPath -GuestRoot $guestCandidateRoot -ValueName $candidate.value_name -Phase 'capability-check' -TriggerProfile $candidate.capability_check_profile -ResultVariableName $capabilityVariableName
+            $encodedCapability = Read-GuestVariableBestEffort -Name $capabilityVariableName
+            $capabilitySummary = Convert-GuestVariableToObject -Encoded $encodedCapability
+            $guestCapabilityPath = Join-Path $guestCandidateRoot 'capability-check-summary.json'
+            $hostCapabilityPath = Join-Path $hostCandidateRoot 'capability-check-summary.json'
+            if ($null -eq $capabilitySummary) {
+                $copied = Copy-FromGuestBestEffort -GuestPath $guestCapabilityPath -HostPath $hostCapabilityPath
                 if ($copied) {
                     try {
-                        $phaseSummary = Get-Content -LiteralPath $hostPhaseSummaryPath -Raw | ConvertFrom-Json
+                        $capabilitySummary = Get-Content -LiteralPath $hostCapabilityPath -Raw | ConvertFrom-Json
                     }
                     catch {
                     }
                 }
             }
-            if ($null -eq $phaseSummary) {
-                $phaseSummary = [pscustomobject]@{
+            if ($null -eq $capabilitySummary) {
+                $capabilitySummary = [pscustomobject]@{
                     generated_utc = [DateTime]::UtcNow.ToString('o')
                     value_name = $candidate.value_name
-                    phase = $phaseName
-                    trigger_profile = $phaseSpec.trigger
+                    phase = 'capability-check'
+                    trigger_profile = $candidate.capability_check_profile
                     status = 'no-guestvar'
-                    exact_runtime_read = $false
-                    exact_query_hits = 0
-                    errors = @('Guest summary was not returned through guestVar.')
+                    modern_standby_supported = $false
+                    errors = @('Guest capability summary was not returned through guestVar.')
                 }
             }
-            if ($phaseError) {
-                $phaseSummary | Add-Member -NotePropertyName host_phase_error -NotePropertyValue $phaseError -Force
+            if ($capabilityError) {
+                $capabilitySummary | Add-Member -NotePropertyName host_phase_error -NotePropertyValue $capabilityError -Force
             }
+            $phaseResults['capability-check'] = $capabilitySummary
+            if (-not [bool]$capabilitySummary.modern_standby_supported) {
+                $skipRuntimePhases = $true
+            }
+        }
 
-            $phaseResults[$phaseName] = $phaseSummary
+        if (-not $skipRuntimePhases) {
+            foreach ($phaseSpec in @(
+                [ordered]@{ phase = 'short-trigger-etw'; trigger = $candidate.short_trigger_profile },
+                [ordered]@{ phase = 'split-trace-start'; trigger = $candidate.split_trigger_profile },
+                [ordered]@{ phase = 'split-trigger'; trigger = $candidate.split_trigger_profile },
+                [ordered]@{ phase = 'split-trace-stop'; trigger = $candidate.split_trigger_profile }
+            )) {
+                $phaseName = $phaseSpec.phase
+                $variableName = ("rpl.$stamp." + $candidateLabel.Substring(0, [Math]::Min(12, $candidateLabel.Length)) + '.' + ($phaseName -replace '[^A-Za-z0-9]', '').ToLowerInvariant())
+                $phaseError = $null
+                $phaseError = Invoke-GuestPhaseSafe -GuestPayloadPath $guestPayloadPath -GuestRoot $guestCandidateRoot -ValueName $candidate.value_name -Phase $phaseName -TriggerProfile $phaseSpec.trigger -ResultVariableName $variableName
+
+                if ($phaseName -in @('split-trace-start', 'split-trigger')) {
+                    Start-Sleep -Seconds 10
+                    Wait-GuestReady
+                    Wait-GuestCommandReady
+                }
+
+                $encodedSummary = Read-GuestVariableBestEffort -Name $variableName
+                $phaseSummary = Convert-GuestVariableToObject -Encoded $encodedSummary
+                $guestPhaseSummaryPath = Join-Path $guestCandidateRoot ("$phaseName-summary.json")
+                $hostPhaseSummaryPath = Join-Path $hostCandidateRoot ("$phaseName-summary.json")
+                if ($null -eq $phaseSummary) {
+                    $copied = Copy-FromGuestBestEffort -GuestPath $guestPhaseSummaryPath -HostPath $hostPhaseSummaryPath
+                    if ($copied) {
+                        try {
+                            $phaseSummary = Get-Content -LiteralPath $hostPhaseSummaryPath -Raw | ConvertFrom-Json
+                        }
+                        catch {
+                        }
+                    }
+                }
+                if ($null -eq $phaseSummary) {
+                    $phaseSummary = [pscustomobject]@{
+                        generated_utc = [DateTime]::UtcNow.ToString('o')
+                        value_name = $candidate.value_name
+                        phase = $phaseName
+                        trigger_profile = $phaseSpec.trigger
+                        status = 'no-guestvar'
+                        exact_runtime_read = $false
+                        exact_query_hits = 0
+                        errors = @('Guest summary was not returned through guestVar.')
+                    }
+                }
+                if ($phaseError) {
+                    $phaseSummary | Add-Member -NotePropertyName host_phase_error -NotePropertyValue $phaseError -Force
+                }
+
+                $phaseResults[$phaseName] = $phaseSummary
+            }
         }
 
         $shellAfter = Get-ShellHealthBestEffort
 
-        $best = $phaseResults['short-trigger-etw']
-        foreach ($phaseName in @('split-trace-stop', 'split-trigger', 'split-trace-start')) {
-            $candidatePhase = $phaseResults[$phaseName]
-            if ($candidatePhase.exact_runtime_read) {
-                $best = $candidatePhase
-                break
-            }
-            if ($best.status -eq 'no-guestvar' -and $candidatePhase.status -ne 'no-guestvar') {
-                $best = $candidatePhase
+        $best = if ($phaseResults.Contains('short-trigger-etw')) { $phaseResults['short-trigger-etw'] } else { $phaseResults['capability-check'] }
+        if (-not $skipRuntimePhases) {
+            foreach ($phaseName in @('split-trace-stop', 'split-trigger', 'split-trace-start')) {
+                $candidatePhase = $phaseResults[$phaseName]
+                if ($candidatePhase.exact_runtime_read) {
+                    $best = $candidatePhase
+                    break
+                }
+                if ($best.status -eq 'no-guestvar' -and $candidatePhase.status -ne 'no-guestvar') {
+                    $best = $candidatePhase
+                }
             }
         }
 
@@ -850,6 +970,9 @@ try {
                 summary = "evidence/files/vm-tooling-staging/$probeName/$candidateLabel/summary.json"
             }
         }
+        if ($skipRuntimePhases) {
+            $candidateResult['limitation_reason'] = 'vm_standby_limitation'
+        }
 
         Write-Json -Payload $candidateResult -HostPath (Join-Path $hostCandidateRoot 'summary.json') -RepoPath (Join-Path $repoCandidateRoot 'summary.json')
         $summary.candidate_summary_files += "evidence/files/vm-tooling-staging/$probeName/$candidateLabel/summary.json"
@@ -860,10 +983,11 @@ try {
     $summary.exact_line_only_candidates = @($results | Where-Object { $_.status -eq 'exact-line-no-query' }).Count
     $summary.path_only_candidates = @($results | Where-Object { $_.status -eq 'path-only-hit' }).Count
     $summary.no_hit_candidates = @($results | Where-Object { $_.status -eq 'no-hit' }).Count
+    $summary.limitation_candidates = @($results | Where-Object { $_.status -eq 'vm-standby-limitation' }).Count
     $summary.error_candidates = @($results | Where-Object { $_.status -in @('error', 'no-guestvar') }).Count
     $summary.handle_check_available = $false
     $summary.handle_check_reason = 'C:\Tools\handle.exe is not present on the current clean baseline.'
-    $summary.status = if ($summary.exact_hit_candidates -gt 0) { 'exact-hit' } elseif ($summary.exact_line_only_candidates -gt 0) { 'exact-line-no-query' } elseif ($summary.path_only_candidates -gt 0) { 'path-only-hit' } elseif ($summary.error_candidates -gt 0) { 'error' } else { 'no-hit' }
+    $summary.status = if ($summary.exact_hit_candidates -gt 0) { 'exact-hit' } elseif ($summary.exact_line_only_candidates -gt 0) { 'exact-line-no-query' } elseif ($summary.path_only_candidates -gt 0) { 'path-only-hit' } elseif ($summary.limitation_candidates -gt 0) { 'vm-standby-limitation' } elseif ($summary.error_candidates -gt 0) { 'error' } else { 'no-hit' }
 }
 catch {
     $summary.status = 'error'

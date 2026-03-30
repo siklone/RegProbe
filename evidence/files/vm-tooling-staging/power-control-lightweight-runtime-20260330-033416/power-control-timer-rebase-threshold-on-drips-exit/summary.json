@@ -1,0 +1,68 @@
+﻿{
+    "generated_utc":  "2026-03-30T00:52:23.7781868Z",
+    "candidate_id":  "power.control.timer-rebase-threshold-on-drips-exit",
+    "value_name":  "TimerRebaseThresholdOnDripsExit",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-30T00:51:21.6946533Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-30T00:52:23.7177701Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "best_phase":  "capability-check",
+    "status":  "vm-standby-limitation",
+    "exact_query_hits":  0,
+    "exact_runtime_read":  false,
+    "phase_results":  {
+                          "capability-check":  {
+                                                   "generated_utc":  "2026-03-30T00:51:33.6685929Z",
+                                                   "value_name":  "TimerRebaseThresholdOnDripsExit",
+                                                   "phase":  "capability-check",
+                                                   "trigger_profile":  "modern-standby-capability-check",
+                                                   "status":  "vm-standby-limitation",
+                                                   "etl_exists":  false,
+                                                   "csv_exists":  false,
+                                                   "etl_length":  0,
+                                                   "csv_line_count":  0,
+                                                   "exact_runtime_read":  false,
+                                                   "exact_query_hits":  0,
+                                                   "exact_line_count":  0,
+                                                   "path_line_count":  0,
+                                                   "trigger_failure_count":  0,
+                                                   "errors":  [
+                                                                  "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                              ],
+                                                   "modern_standby_supported":  false,
+                                                   "powercfg_exit_code":  0,
+                                                   "powercfg_output":  "The following sleep states are available on this system:\r\n\r\n\r\n    Standby (S1)\r\n\r\n\r\n\r\n\r\n\r\nThe following sleep states are not available on this system:\r\n\r\n\r\n    Standby (S2)\r\n\r\n\r\n\tThe system firmware does not support this standby state.\r\n\r\n\r\n\r\n\r\n\r\n    Standby (S3)\r\n\r\n\r\n\tThe system firmware does not support this standby state.\r\n\r\n\r\n\r\n\r\n\r\n    Hibernate\r\n\r\n\r\n\tThe system firmware does not support hibernation.\r\n\r\n"
+                                               }
+                      },
+    "artifacts":  {
+                      "summary":  "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/power-control-timer-rebase-threshold-on-drips-exit/summary.json"
+                  },
+    "limitation_reason":  "vm_standby_limitation"
+}

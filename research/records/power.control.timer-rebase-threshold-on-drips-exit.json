@@ -4,7 +4,7 @@
     "record_id":  "power.control.timer-rebase-threshold-on-drips-exit",
     "tweak_id":  "power.control.timer-rebase-threshold-on-drips-exit",
     "record_status":  "draft",
-    "summary":  "Draft candidate package for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for TimerRebaseThresholdOnDripsExit. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for TimerRebaseThresholdOnDripsExit.",
+    "summary":  "Draft candidate package for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 first checked modern standby capability before attempting any DRIPS-exit trigger. That capability gate showed the current VMware baseline only exposes Standby (S1), so a real DRIPS / Modern Standby exit trigger cannot be exercised here and the record remains decision-gated by a VM standby limitation rather than by a dead-flag conclusion.",
     "validation_proof":  {
                              "source_url":  "Docs/power/power.md",
                              "exact_quote_or_path":  "Docs/power/power.md:206 shows `TimerRebaseThresholdOnDripsExit` with observed literal `60` in the repo power notes.",
@@ -18,8 +18,8 @@
                     "scope":  "device",
                     "casual_explanation":  "Timer Rebase Threshold On Drips Exit is a low-level power-manager registry value under the main Power key.",
                     "why_people_change_it":  "Researchers track this value when reviewing timer rebasing behavior after drips exit and related idle-transition timing.",
-                    "tradeoffs_overview":  "Cross-layer evidence is strong, but the current clean-baseline runtime package still lacks an exact runtime read for this raw power-manager value.",
-                    "professional_notes":  "Win25H2Clean phase-0 existence confirmed TimerRebaseThresholdOnDripsExit on the live baseline with preview value 60. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:206. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. A guest-processed stepwise Procmon boot log was then rerun from RegProbe-Baseline-Clean-20260329. It completed shell-safe and copied back the guest-processed summary and filtered CSV outputs, but it still did not capture an exact runtime read for TimerRebaseThresholdOnDripsExit on the current baseline. A second guest-processed post-boot Procmon trigger batch then ran from RegProbe-Baseline-Clean-20260329 using powercfg queries, powercfg /energy, CPU stress jobs, and profile-specific follow-up commands. That lane produced guest-processed summaries and filtered hit CSVs, but it still did not capture an exact runtime read for TimerRebaseThresholdOnDripsExit on the current baseline.",
+                    "tradeoffs_overview":  "Cross-layer evidence is strong, but the current VM baseline does not support Modern Standby / DRIPS, so the intended runtime trigger remains environment-limited rather than dead-flagged.",
+                    "professional_notes":  "Win25H2Clean phase-0 existence confirmed TimerRebaseThresholdOnDripsExit on the live baseline with preview value 60. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:206. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. Earlier shell-safe Procmon lanes on RegProbe-Baseline-Clean-20260329 tightened the runtime story but did not capture an exact read. The tools-hardened lightweight ETW follow-up then reran the candidate on RegProbe-Baseline-ToolsHardened-20260330 and began with a capability gate tailored to DRIPS / Modern Standby. That gate showed the current VMware baseline only exposes Standby (S1), while S0 Low Power Idle / Modern Standby is unavailable, so the real DRIPS-exit trigger cannot be exercised on this VM.",
                     "targets":  [
                                     {
                                         "target_id":  "timerrebasethresholdondripsexit",
@@ -54,7 +54,7 @@
     "windows_defaults":  [
                              {
                                  "label":  "Observed Win25H2Clean baseline",
-                                 "applies_to":  "Current RegProbe-Baseline-Clean-20260329 research baseline",
+                                 "applies_to":  "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
                                  "states":  [
                                                 {
                                                     "target_id":  "timerrebasethresholdondripsexit",
@@ -181,8 +181,21 @@
                                           "behavior",
                                           "risk",
                                           "version-scope"
-                                      ],
+                         ],
                          "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "vm-power-control-drips-capability-20260330",
+                         "kind":  "etw-trace",
+                         "title":  "Tools-hardened lightweight DRIPS capability gate for TimerRebaseThresholdOnDripsExit",
+                         "location":  "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json and research/notes/power-control-lightweight-runtime-remaining-two-20260330.md",
+                         "summary":  "The tools-hardened lightweight follow-up checked modern standby capability before attempting any DRIPS-exit trigger. On RegProbe-Baseline-ToolsHardened-20260330 the VM reported only Standby (S1), so a real DRIPS / Modern Standby exit trigger is not available on this baseline.",
+                         "supports":  [
+                                          "behavior",
+                                          "risk",
+                                          "version-scope"
+                                      ],
+                         "strength":  "high"
                      }
                  ],
     "decision":  {
@@ -192,11 +205,12 @@
                      "restore_default_supported":  true,
                      "restore_previous_supported":  true,
                      "needs_vm_validation":  true,
-                     "why":  "TimerRebaseThresholdOnDripsExit is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, and a second guest-processed post-boot Procmon trigger batch. It still remains below Class A because neither runtime lane captured an exact runtime read for this value on the current baseline.",
+                     "why":  "TimerRebaseThresholdOnDripsExit is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and a tools-hardened DRIPS capability gate on RegProbe-Baseline-ToolsHardened-20260330. The record remains decision-gated because the current VMware baseline does not support Modern Standby / DRIPS exit, so the intended runtime trigger cannot be exercised on this VM.",
                      "blocking_issues":  [
-                                             "Neither the clean-baseline stepwise Procmon boot log nor the guest-processed post-boot trigger batch captured an exact runtime read for this value."
+                                             "The current clean VMware baseline exposes only Standby (S1); it does not support S0 Low Power Idle / Modern Standby, so a real DRIPS-exit trigger cannot be exercised here.",
+                                             "The runtime package therefore still lacks an exact runtime query/read operation for this value on the current VM baseline."
                                          ]
                  },
-    "last_reviewed_utc":  "2026-03-29T14:05:00Z"
+    "last_reviewed_utc":  "2026-03-30T00:53:00Z"
 }
 

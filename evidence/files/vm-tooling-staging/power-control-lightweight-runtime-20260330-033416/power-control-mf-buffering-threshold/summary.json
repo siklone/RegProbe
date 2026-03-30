@@ -1,0 +1,122 @@
+﻿{
+    "generated_utc":  "2026-03-30T00:45:41.5468670Z",
+    "candidate_id":  "power.control.mf-buffering-threshold",
+    "value_name":  "MfBufferingThreshold",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "shell_before":  {
+                         "generated_utc":  "2026-03-30T00:41:12.7403332Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-30T00:45:41.4607098Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "best_phase":  "short-trigger-etw",
+    "status":  "exact-hit",
+    "exact_query_hits":  1,
+    "exact_runtime_read":  true,
+    "phase_results":  {
+                          "short-trigger-etw":  {
+                                                    "generated_utc":  "2026-03-30T00:42:42.3247938Z",
+                                                    "value_name":  "MfBufferingThreshold",
+                                                    "phase":  "short-trigger-etw",
+                                                    "trigger_profile":  "mf-io-burst-short",
+                                                    "status":  "exact-hit",
+                                                    "etl_exists":  true,
+                                                    "csv_exists":  true,
+                                                    "etl_length":  4751360,
+                                                    "csv_line_count":  34090,
+                                                    "exact_runtime_read":  true,
+                                                    "exact_query_hits":  1,
+                                                    "exact_line_count":  3,
+                                                    "path_line_count":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "errors":  [
+                                                                   "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                               ]
+                                                },
+                          "split-trace-start":  {
+                                                    "generated_utc":  "2026-03-30T00:43:22.8426184Z",
+                                                    "value_name":  "MfBufferingThreshold",
+                                                    "phase":  "split-trace-start",
+                                                    "trigger_profile":  "mf-io-burst-only",
+                                                    "status":  "trace-started",
+                                                    "etl_exists":  false,
+                                                    "csv_exists":  false,
+                                                    "etl_length":  0,
+                                                    "csv_line_count":  0,
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "exact_line_count":  0,
+                                                    "path_line_count":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "errors":  [
+                                                                   "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                               ]
+                                                },
+                          "split-trigger":  {
+                                                "generated_utc":  "2026-03-30T00:44:16.5043798Z",
+                                                "value_name":  "MfBufferingThreshold",
+                                                "phase":  "split-trigger",
+                                                "trigger_profile":  "mf-io-burst-only",
+                                                "status":  "trigger-complete",
+                                                "etl_exists":  false,
+                                                "csv_exists":  false,
+                                                "etl_length":  0,
+                                                "csv_line_count":  0,
+                                                "exact_runtime_read":  false,
+                                                "exact_query_hits":  0,
+                                                "exact_line_count":  0,
+                                                "path_line_count":  0,
+                                                "trigger_failure_count":  0,
+                                                "errors":  [
+                                                               "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                           ]
+                                            },
+                          "split-trace-stop":  {
+                                                   "generated_utc":  "2026-03-30T00:45:05.0308642Z",
+                                                   "value_name":  "MfBufferingThreshold",
+                                                   "phase":  "split-trace-stop",
+                                                   "trigger_profile":  "mf-io-burst-only",
+                                                   "status":  "error",
+                                                   "etl_exists":  false,
+                                                   "csv_exists":  false,
+                                                   "etl_length":  0,
+                                                   "csv_line_count":  0,
+                                                   "exact_runtime_read":  false,
+                                                   "exact_query_hits":  0,
+                                                   "exact_line_count":  0,
+                                                   "path_line_count":  0,
+                                                   "trigger_failure_count":  0,
+                                                   "errors":  [
+                                                                  "logman stop failed: ",
+                                                                  "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                              ]
+                                               }
+                      },
+    "artifacts":  {
+                      "summary":  "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/power-control-mf-buffering-threshold/summary.json"
+                  }
+}

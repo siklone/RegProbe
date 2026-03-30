@@ -1,0 +1,35 @@
+{
+  "generated_utc": "2026-03-30T00:53:00Z",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "tool": "registry-research-framework/tools/run-power-control-lightweight-runtime-followup.ps1",
+  "scope": [
+    "power.control.mf-buffering-threshold",
+    "power.control.timer-rebase-threshold-on-drips-exit"
+  ],
+  "source_summary": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json",
+  "source_results": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json",
+  "results": {
+    "power.control.mf-buffering-threshold": {
+      "status": "exact-hit",
+      "best_phase": "short-trigger-etw",
+      "exact_query_hits": 1,
+      "trigger_profile": "mf-io-burst-short",
+      "shell_healthy_before": true,
+      "shell_healthy_after": true,
+      "promote_to": "A"
+    },
+    "power.control.timer-rebase-threshold-on-drips-exit": {
+      "status": "vm-standby-limitation",
+      "best_phase": "capability-check",
+      "modern_standby_supported": false,
+      "available_sleep_state": "Standby (S1)",
+      "promote_to": "B",
+      "reason_code": "vm_standby_limitation"
+    }
+  },
+  "transport_notes": {
+    "guestvar_reliable": false,
+    "fallback_copy_recovered_summary": true,
+    "note": "vmtoolsd guestVar publication still fails with the known argument-shape error, but the host recovered the compact summary files from the guest after the run completed."
+  }
+}

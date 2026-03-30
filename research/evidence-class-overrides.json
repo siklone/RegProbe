@@ -5,6 +5,12 @@
       "evidence_class": "B",
       "reason_code": "vm_firmware_limitation",
       "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline cannot exercise a real hibernation trigger (`vm_firmware_limitation`), so runtime promotion stays decision-gated."
+    },
+    {
+      "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
+      "evidence_class": "B",
+      "reason_code": "vm_standby_limitation",
+      "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated."
     }
   ]
 }

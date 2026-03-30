@@ -2,14 +2,14 @@
   "$schema": "registry-evidence-v3.1/runtime-evidence",
   "runtime": {
     "etw": {
-      "executed": false,
-      "events_found": false,
+      "executed": true,
+      "events_found": true,
       "reading_process": null,
       "reading_pid": null,
       "operation": null,
       "timestamp": null,
       "boot_phase_included": true,
-      "trace_file": null
+      "trace_file": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json and research/notes/power-control-lightweight-runtime-remaining-two-20260330.md"
     },
     "procmon": {
       "executed": true,
@@ -32,6 +32,7 @@
   "source_evidence_ids": [
     "vm-power-control-phase0-20260329",
     "vm-power-control-runtime-batch-20260329",
-    "vm-power-control-postboot-trigger-20260329"
+    "vm-power-control-postboot-trigger-20260329",
+    "vm-power-control-lightweight-runtime-remaining-20260330"
   ]
 }
