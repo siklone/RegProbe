@@ -1,0 +1,124 @@
+﻿[
+    {
+        "generated_utc":  "2026-03-30T13:51:52.0134931Z",
+        "candidate_id":  "power.control.hiber-file-size-percent",
+        "value_name":  "HiberFileSizePercent",
+        "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+        "shell_before":  {
+                             "generated_utc":  "2026-03-30T13:45:54.4694717Z",
+                             "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                             "vm_running":  true,
+                             "tools_state":  "running",
+                             "process_query_error":  null,
+                             "shell_healthy":  true,
+                             "checks":  {
+                                            "explorer":  true,
+                                            "sihost":  true,
+                                            "shellhost":  true,
+                                            "ctfmon":  true,
+                                            "app":  false
+                                        }
+                         },
+        "shell_after":  {
+                            "generated_utc":  "2026-03-30T13:51:51.4932683Z",
+                            "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                            "vm_running":  true,
+                            "tools_state":  "running",
+                            "process_query_error":  null,
+                            "shell_healthy":  true,
+                            "checks":  {
+                                           "explorer":  true,
+                                           "sihost":  true,
+                                           "shellhost":  true,
+                                           "ctfmon":  true,
+                                           "app":  false
+                                       }
+                        },
+        "best_phase":  "short-trigger-etw",
+        "status":  "exact-line-no-query",
+        "exact_query_hits":  0,
+        "exact_runtime_read":  false,
+        "phase_results":  {
+                              "short-trigger-etw":  {
+                                                        "generated_utc":  "2026-03-30T13:48:36.4184740Z",
+                                                        "value_name":  "HiberFileSizePercent",
+                                                        "phase":  "short-trigger-etw",
+                                                        "trigger_profile":  "hiber-file-size-multi-trigger-short",
+                                                        "status":  "exact-line-no-query",
+                                                        "etl_exists":  true,
+                                                        "csv_exists":  true,
+                                                        "etl_length":  19800064,
+                                                        "csv_line_count":  145817,
+                                                        "exact_runtime_read":  false,
+                                                        "exact_query_hits":  0,
+                                                        "exact_line_count":  2,
+                                                        "path_line_count":  0,
+                                                        "trigger_failure_count":  1,
+                                                        "errors":  [
+                                                                       "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                                   ]
+                                                    },
+                              "split-trace-start":  {
+                                                        "generated_utc":  "2026-03-30T13:49:16.0008017Z",
+                                                        "value_name":  "HiberFileSizePercent",
+                                                        "phase":  "split-trace-start",
+                                                        "trigger_profile":  "hiber-file-size-multi-trigger-only",
+                                                        "status":  "trace-started",
+                                                        "etl_exists":  false,
+                                                        "csv_exists":  false,
+                                                        "etl_length":  0,
+                                                        "csv_line_count":  0,
+                                                        "exact_runtime_read":  false,
+                                                        "exact_query_hits":  0,
+                                                        "exact_line_count":  0,
+                                                        "path_line_count":  0,
+                                                        "trigger_failure_count":  0,
+                                                        "errors":  [
+                                                                       "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                                   ]
+                                                    },
+                              "split-trigger":  {
+                                                    "generated_utc":  "2026-03-30T13:50:24.4485125Z",
+                                                    "value_name":  "HiberFileSizePercent",
+                                                    "phase":  "split-trigger",
+                                                    "trigger_profile":  "hiber-file-size-multi-trigger-only",
+                                                    "status":  "trigger-complete",
+                                                    "etl_exists":  false,
+                                                    "csv_exists":  false,
+                                                    "etl_length":  0,
+                                                    "csv_line_count":  0,
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "exact_line_count":  0,
+                                                    "path_line_count":  0,
+                                                    "trigger_failure_count":  1,
+                                                    "errors":  [
+                                                                   "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                               ]
+                                                },
+                              "split-trace-stop":  {
+                                                       "generated_utc":  "2026-03-30T13:51:13.2094025Z",
+                                                       "value_name":  "HiberFileSizePercent",
+                                                       "phase":  "split-trace-stop",
+                                                       "trigger_profile":  "hiber-file-size-multi-trigger-only",
+                                                       "status":  "error",
+                                                       "etl_exists":  false,
+                                                       "csv_exists":  false,
+                                                       "etl_length":  0,
+                                                       "csv_line_count":  0,
+                                                       "exact_runtime_read":  false,
+                                                       "exact_query_hits":  0,
+                                                       "exact_line_count":  0,
+                                                       "path_line_count":  0,
+                                                       "trigger_failure_count":  0,
+                                                       "errors":  [
+                                                                      "logman stop failed: ",
+                                                                      "guestvar publish: vmtoolsd info-set failed: Two and exactly two arguments expected"
+                                                                  ]
+                                                   }
+                          },
+        "artifacts":  {
+                          "summary":  "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/power-control-hiber-file-size-percent/summary.json"
+                      }
+    }
+]

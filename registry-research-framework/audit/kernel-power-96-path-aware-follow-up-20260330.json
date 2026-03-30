@@ -1,0 +1,22 @@
+{
+  "generated_utc": "2026-03-30T14:20:00Z",
+  "source_queue": "registry-research-framework/audit/kernel-power-96-remaining-groups-20260330.json",
+  "status": "ready-for-manual-path-aware-lanes",
+  "candidates": [
+    {
+      "candidate_id": "policy.system.enable-virtualization",
+      "family": "policy-system",
+      "reason": "The generic string-first lane is substring-ambiguous with EnableVirtualizationBasedSecurity.",
+      "recommended_next_lane": "exact-path-static-plus-policy-runtime",
+      "frida_allowed": true
+    },
+    {
+      "candidate_id": "system.io-allow-remote-dasd",
+      "family": "session-manager-io",
+      "reason": "The prior static routing collided with the removable-storage policy path rather than Session Manager I/O System.",
+      "recommended_next_lane": "exact-path-static-plus-session-manager-io-runtime",
+      "frida_allowed": false
+    }
+  ],
+  "note": "research/notes/kernel-power-96-path-aware-follow-up-20260330.md"
+}

@@ -1,0 +1,172 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.control.hiber-file-size-percent",
+  "tweak_id": "power.control.hiber-file-size-percent",
+  "record_status": "draft",
+  "summary": "Draft candidate package for HiberFileSizePercent under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the residual string triage found an exact current-build ntoskrnl.exe hit, and the tools-hardened lightweight ETW follow-up surfaced exact runtime lines but not an exact runtime read. That keeps the lane at Class B with a runtime_no_read gate.",
+  "validation_proof": {
+    "source_url": "Docs/power/power.md",
+    "exact_quote_or_path": "Docs/power/power.md:149 shows `HiberFileSizePercent` with the note that the literal is set to 0 by default on LTSC IoT Enterprise 2024 when hibernation is unsupported by default.",
+    "key_found_on_page": true,
+    "notes": "The docs-first triage and the 96-key baseline existence batch agree on the current Win25H2Clean baseline value for HiberFileSizePercent."
+  },
+  "setting": {
+    "name": "Hiber File Size Percent",
+    "category": "Power",
+    "area": "Raw Power Manager Registry",
+    "scope": "device",
+    "casual_explanation": "Hiber File Size Percent is a low-level power-manager value under the main Power key that appears to relate to hibernation file sizing behavior.",
+    "why_people_change_it": "Researchers track this value when studying hibernation support, hiberfil sizing, and adjacent power-manager behavior.",
+    "tradeoffs_overview": "The lane now has a clean baseline value, exact docs and static hits, and a runtime ETW lane that surfaced exact value-name lines. It still lacks an exact runtime read on the current VMware baseline.",
+    "professional_notes": "Win25H2Clean phase-0 existence confirmed HiberFileSizePercent on the live baseline with preview value 0. The residual docs-first static triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:149. The shared residual string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe. The tools-hardened lightweight ETW follow-up reran the candidate on RegProbe-Baseline-ToolsHardened-20260330 with a multi-trigger profile that combined hibernate toggle attempts, `powercfg /a`, and a file-I/O burst. That lane surfaced exact HiberFileSizePercent lines but still did not capture an exact RegQueryValue hit, so the candidate remains decision-gated at Class B.",
+    "targets": [
+      {
+        "target_id": "hiberfilesizepercent",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "HiberFileSizePercent",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current clean VM baseline exposes HiberFileSizePercent=0.",
+            "evidence_ids": [
+              "vm-power-control-phase0-20260329",
+              "repo-power-doc"
+            ]
+          }
+        ],
+        "notes": "This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The current app does not expose HiberFileSizePercent as a direct tweak or supported UI surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+      "states": [
+        {
+          "target_id": "hiberfilesizepercent",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the currently observed baseline value (0) while this raw control stays in research packaging only."
+        }
+      ],
+      "notes": "Observed directly from the 96-key phase-0 existence batch on Win25H2Clean.",
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-baseline",
+      "label": "Observed baseline",
+      "intended_for": [
+        "Registry research tracking",
+        "Power-manager documentation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click apply surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "hiberfilesizepercent",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Track the observed baseline value without turning it into a shipped preset."
+        }
+      ],
+      "good_when": "You want the repo to track the live baseline and current evidence for this raw power-manager value.",
+      "bad_when": "You want a supported end-user tweak or a documented Microsoft control surface.",
+      "tradeoffs": [
+        "Preserves the observed baseline value.",
+        "Keeps the candidate research-only and non-actionable."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329",
+        "static-power-control-residual-string-20260330"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power notes for HiberFileSizePercent",
+      "location": "Docs/power/power.md",
+      "summary": "Repo power notes contain exact HiberFileSizePercent entries, including the note that the current baseline is 0 when hibernation is unsupported by default.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-phase0-20260329",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The 96-key existence batch confirmed HiberFileSizePercent exists on the clean baseline with observed value 0.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-power-control-residual-string-20260330",
+      "kind": "repo-doc",
+      "title": "Residual value-exists string triage for HiberFileSizePercent",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json and research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md",
+      "summary": "Residual string triage found an exact current-build ntoskrnl.exe string hit for HiberFileSizePercent.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-hiber-runtime-20260330",
+      "kind": "etw-trace",
+      "title": "Tools-hardened lightweight ETW follow-up for HiberFileSizePercent",
+      "location": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json and research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md",
+      "summary": "The tools-hardened lightweight ETW lane surfaced exact HiberFileSizePercent lines on the current VMware baseline but did not capture an exact RegQueryValue hit.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "HiberFileSizePercent now has a real docs/static/runtime package on RegProbe-Baseline-ToolsHardened-20260330, but the runtime lane only reached exact-line-no-query and did not produce an exact runtime read. That keeps the record decision-gated at Class B.",
+    "blocking_issues": [
+      "runtime_no_read"
+    ]
+  },
+  "last_reviewed_utc": "2026-03-30T13:55:00Z"
+}

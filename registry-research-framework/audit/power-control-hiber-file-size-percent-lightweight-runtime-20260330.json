@@ -1,0 +1,24 @@
+{
+  "generated_utc": "2026-03-30T13:55:00Z",
+  "candidate_id": "power.control.hiber-file-size-percent",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "status": "exact-line-no-query",
+  "best_phase": "short-trigger-etw",
+  "exact_runtime_read": false,
+  "exact_query_hits": 0,
+  "exact_line_count": 2,
+  "path_line_count": 0,
+  "gating_decision": "B",
+  "gating_reason": "runtime_no_read",
+  "artifacts": {
+    "summary": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json",
+    "results": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json",
+    "candidate_summary": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/power-control-hiber-file-size-percent/summary.json",
+    "note": "research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md"
+  },
+  "notes": [
+    "The tools-hardened lightweight ETW lane surfaced exact HiberFileSizePercent lines but no exact RegQueryValue hit.",
+    "The current VMware baseline remains hibernation-limited, so the hibernate toggle branch cannot be treated as a native hibernation proof.",
+    "This candidate is promoted from residual intake into a real Class B record rather than being left as an untracked string hit."
+  ]
+}

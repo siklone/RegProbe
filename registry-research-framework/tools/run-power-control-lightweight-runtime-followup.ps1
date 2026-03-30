@@ -55,6 +55,12 @@ $candidates = @(
         split_trigger_profile = 'perf-current-scheme-refresh-only'
     },
     [ordered]@{
+        candidate_id = 'power.control.hiber-file-size-percent'
+        value_name = 'HiberFileSizePercent'
+        short_trigger_profile = 'hiber-file-size-multi-trigger-short'
+        split_trigger_profile = 'hiber-file-size-multi-trigger-only'
+    },
+    [ordered]@{
         candidate_id = 'power.control.mf-buffering-threshold'
         value_name = 'MfBufferingThreshold'
         short_trigger_profile = 'mf-io-burst-short'
@@ -259,6 +265,33 @@ function Invoke-TriggerProfile {
                 ('reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "{0}" /t REG_DWORD /d 0 /f' -f $ValueName),
                 'timeout /t 1 /nobreak',
                 'powershell -NoProfile -Command "$path=''C:\RegProbe-Diag\io-burst''; New-Item -ItemType Directory -Path $path -Force | Out-Null; 1..100 | ForEach-Object { [byte[]]$data = New-Object byte[] 1048576; [System.IO.File]::WriteAllBytes((Join-Path $path (''file'' + $_ + ''.bin'')), $data) }; Remove-Item -Path $path -Recurse -Force"'
+            )
+        }
+        'hiber-file-size-multi-trigger-short' {
+            @(
+                ('reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "{0}" /t REG_DWORD /d 0 /f' -f $ValueName),
+                'timeout /t 1 /nobreak',
+                'powercfg /hibernate on',
+                'timeout /t 1 /nobreak',
+                'powercfg /hibernate off',
+                'timeout /t 1 /nobreak',
+                'powercfg /a',
+                'timeout /t 1 /nobreak',
+                'powershell -NoProfile -Command "$path=''C:\RegProbe-Diag\hiber-io-burst''; New-Item -ItemType Directory -Path $path -Force | Out-Null; 1..48 | ForEach-Object { [byte[]]$data = New-Object byte[] 2097152; [System.IO.File]::WriteAllBytes((Join-Path $path (''hiber'' + $_ + ''.bin'')), $data) }; Remove-Item -Path $path -Recurse -Force"',
+                'timeout /t 1 /nobreak'
+            )
+        }
+        'hiber-file-size-multi-trigger-only' {
+            @(
+                ('reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "{0}" /t REG_DWORD /d 0 /f' -f $ValueName),
+                'timeout /t 1 /nobreak',
+                'powercfg /hibernate on',
+                'timeout /t 1 /nobreak',
+                'powercfg /hibernate off',
+                'timeout /t 1 /nobreak',
+                'powercfg /a',
+                'timeout /t 1 /nobreak',
+                'powershell -NoProfile -Command "$path=''C:\RegProbe-Diag\hiber-io-burst''; New-Item -ItemType Directory -Path $path -Force | Out-Null; 1..48 | ForEach-Object { [byte[]]$data = New-Object byte[] 2097152; [System.IO.File]::WriteAllBytes((Join-Path $path (''hiber'' + $_ + ''.bin'')), $data) }; Remove-Item -Path $path -Recurse -Force"'
             )
         }
         'drips-exit-short' {

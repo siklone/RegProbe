@@ -1,24 +1,25 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-30T10:50:50.212243Z",
+  "generated_utc": "2026-03-30T14:29:17.336543Z",
   "summary": {
-    "total_active_records": 251,
+    "total_active_records": 252,
     "class_counts": {
       "A": 248,
-      "B": 3
+      "B": 4
     },
     "lane_counts": {
       "official-policy": 236,
       "runtime": 5,
-      "early-boot": 7,
+      "early-boot": 8,
       "system": 3
     },
     "next_missing_layer_counts": {
       "none": 247,
+      "ghidra": 1,
       "decision-gate": 3,
       "incident-review": 1
     },
-    "re_audit_required_count": 7
+    "re_audit_required_count": 8
   },
   "entries": [
     {
@@ -3363,6 +3364,53 @@
       "apply_allowed": false,
       "confidence": "high",
       "source_file": "research/records/power.control.class1-initial-unpark-count.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "power.control.hiber-file-size-percent",
+      "tweak_id": "power.control.hiber-file-size-percent",
+      "evidence_class": "B",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": true,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "ghidra",
+      "cross_layer_satisfied": false,
+      "layers_used": [
+        "behavior_wpr"
+      ],
+      "tools_used": [
+        "etw",
+        "wpr"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": true,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
+      "new_pipeline_version": "v3.1",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "medium",
+      "source_file": "research/records/power.control.hiber-file-size-percent.json",
       "incident_ids": []
     },
     {

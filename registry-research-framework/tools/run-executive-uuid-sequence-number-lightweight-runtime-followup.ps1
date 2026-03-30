@@ -4,7 +4,9 @@ param(
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
-    [string]$SnapshotName = ''
+    [string]$SnapshotName = '',
+    [ValidateSet('rpc-com-burst','thread-worker-burst')]
+    [string]$TriggerVariant = 'rpc-com-burst'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -122,11 +124,38 @@ function Invoke-UuidRpcComBurst {
     return [ordered]@{ failed = $false; exit_code = 0; stdout = ''; stderr = '' }
 }
 
+function Invoke-UuidThreadWorkerBurst {
+    param([int]$OuterLoops = 4)
+    $burstScript = [string]::Join("`n", @(
+        '$ErrorActionPreference = ''SilentlyContinue''',
+        '1..12 | ForEach-Object {',
+        '    try { Start-Process -FilePath ''C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'' -ArgumentList ''-NoProfile'',''-Command'',''1..800 | ForEach-Object { [guid]::NewGuid() | Out-Null }; Get-CimInstance Win32_Process | Select-Object -First 8 | Out-Null'' -WindowStyle Hidden -Wait | Out-Null } catch {}',
+        '    try { Start-Process -FilePath ''C:\Windows\System32\cmd.exe'' -ArgumentList ''/c'',''ver'' -WindowStyle Hidden -Wait | Out-Null } catch {}',
+        '}',
+        '1..1800 | ForEach-Object { [guid]::NewGuid() | Out-Null }',
+        '1..6 | ForEach-Object {',
+        '    try { Get-CimInstance Win32_OperatingSystem | Out-Null } catch {}',
+        '    try { Get-CimInstance Win32_ComputerSystemProduct | Out-Null } catch {}',
+        '    try { Get-CimInstance Win32_Process | Select-Object -First 16 | Out-Null } catch {}',
+        '}'
+    ))
+    for ($i = 0; $i -lt $OuterLoops; $i++) {
+        $result = Invoke-CmdCapture -FilePath 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe' -Arguments @('-NoProfile','-ExecutionPolicy','Bypass','-Command',$burstScript)
+        if ($result.exit_code -ne 0 -or -not [string]::IsNullOrWhiteSpace($result.stderr)) {
+            return [ordered]@{ failed = $true; exit_code = $result.exit_code; stdout = $result.stdout; stderr = $result.stderr }
+        }
+        Start-Sleep -Milliseconds 350
+    }
+    return [ordered]@{ failed = $false; exit_code = 0; stdout = ''; stderr = '' }
+}
+
 function Invoke-TriggerProfile {
     param([string]$Profile)
     switch ($Profile) {
         'uuid-rpc-com-burst-short' { return ,(Invoke-UuidRpcComBurst -OuterLoops 10) }
         'uuid-rpc-com-burst-only' { return ,(Invoke-UuidRpcComBurst -OuterLoops 10) }
+        'uuid-thread-worker-burst-short' { return ,(Invoke-UuidThreadWorkerBurst -OuterLoops 4) }
+        'uuid-thread-worker-burst-only' { return ,(Invoke-UuidThreadWorkerBurst -OuterLoops 4) }
         default { throw "Unknown trigger profile: $Profile" }
     }
 }
@@ -435,11 +464,13 @@ try {
 
     $shellBefore = Get-ShellHealthBestEffort
     $phaseResults = [ordered]@{}
+    $shortTrigger = if ($TriggerVariant -eq 'thread-worker-burst') { 'uuid-thread-worker-burst-short' } else { 'uuid-rpc-com-burst-short' }
+    $splitTrigger = if ($TriggerVariant -eq 'thread-worker-burst') { 'uuid-thread-worker-burst-only' } else { 'uuid-rpc-com-burst-only' }
     foreach ($phaseSpec in @(
-        [ordered]@{ phase = 'short-trigger-etw'; trigger = 'uuid-rpc-com-burst-short' },
-        [ordered]@{ phase = 'split-trace-start'; trigger = 'uuid-rpc-com-burst-only' },
-        [ordered]@{ phase = 'split-trigger'; trigger = 'uuid-rpc-com-burst-only' },
-        [ordered]@{ phase = 'split-trace-stop'; trigger = 'uuid-rpc-com-burst-only' }
+        [ordered]@{ phase = 'short-trigger-etw'; trigger = $shortTrigger },
+        [ordered]@{ phase = 'split-trace-start'; trigger = $splitTrigger },
+        [ordered]@{ phase = 'split-trigger'; trigger = $splitTrigger },
+        [ordered]@{ phase = 'split-trace-stop'; trigger = $splitTrigger }
     )) {
         $phaseSummary = $null
         try {
@@ -494,6 +525,7 @@ try {
         candidate_id = $candidateId
         value_name = $valueName
         snapshot_name = $SnapshotName
+        trigger_variant = $TriggerVariant
         shell_before = $shellBefore
         shell_after = $shellAfter
         best_phase = $best.phase

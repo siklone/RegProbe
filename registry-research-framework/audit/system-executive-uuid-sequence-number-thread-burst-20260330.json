@@ -1,0 +1,16 @@
+{
+  "generated_utc": "2026-03-30T14:20:00Z",
+  "candidate_id": "system.executive-uuid-sequence-number",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "status": "alternate-trigger-stalled",
+  "canonical_runtime_result": "registry-research-framework/audit/system-executive-uuid-sequence-number-lightweight-runtime-20260330.json",
+  "attempt_roots": [
+    "evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-165518",
+    "evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-171236"
+  ],
+  "notes": [
+    "The alternate thread-burst trigger stalled during short-trigger-etw before a usable phase summary was emitted.",
+    "Direct shell-health follow-up still showed the VM shell as healthy.",
+    "The earlier RPC/COM lightweight runtime no-hit remains the canonical UUID runtime result."
+  ]
+}

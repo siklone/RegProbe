@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-30T10:50:49.561717Z",
+  "generated_utc": "2026-03-30T14:29:17.335537Z",
   "summary": {
-    "total_records": 305,
+    "total_records": 306,
     "class_counts": {
       "A": 248,
-      "B": 3,
+      "B": 4,
       "C": 0,
       "D": 0,
       "E": 54
@@ -13,7 +13,7 @@
     "action_state_counts": {
       "actionable": 241,
       "archived": 54,
-      "research-gated": 10
+      "research-gated": 11
     }
   },
   "classes": {
@@ -5854,6 +5854,67 @@
             "url": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
             "kind": "procmon-trace",
             "summary": "A guest-processed post-boot Procmon lane ran powercfg queries, powercfg /energy, CPU stress, and profile-specific follow-up commands on RegProbe-Baseline-Clean-20260329. It capt..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
+      "record_id": "power.control.hiber-file-size-percent",
+      "tweak_id": "power.control.hiber-file-size-percent",
+      "record_status": "draft",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "Docs/static evidence is strong and the lightweight ETW lane surfaced exact HiberFileSizePercent lines, but the current VMware runtime still did not produce an exact live read.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The docs-first triage and the 96-key baseline existence batch agree on the current Win25H2Clean baseline value for HiberFileSizePercent.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:149 shows `HiberFileSizePercent` with the note that the literal is set to 0 by default on LTSC IoT Enterprise 2024 when hibernation is unsupported by default."
+          },
+          {
+            "title": "Repo power notes for HiberFileSizePercent",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain exact HiberFileSizePercent entries, including the note that the current baseline is 0 when hibernation is unsupported by default."
+          },
+          {
+            "title": "Residual value-exists string triage for HiberFileSizePercent",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json and research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md",
+            "kind": "repo-doc",
+            "summary": "Residual string triage found an exact current-build ntoskrnl.exe string hit for HiberFileSizePercent."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed HiberFileSizePercent exists on the clean baseline with observed value 0.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed HiberFileSizePercent exists on the clean baseline with observed value 0."
           }
         ]
       },
