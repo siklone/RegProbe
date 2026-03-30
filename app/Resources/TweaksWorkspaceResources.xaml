@@ -212,6 +212,19 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="ConfigurationPrimaryActionButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
+        <Setter Property="MinWidth" Value="104"/>
+        <Setter Property="Padding" Value="12,6"/>
+    </Style>
+
+    <Style x:Key="ConfigurationSecondaryActionButtonStyle" TargetType="Button" BasedOn="{StaticResource FlatButtonStyle}">
+        <Setter Property="MinWidth" Value="104"/>
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#7C7C7C"/>
+        <Setter Property="BorderBrush" Value="#202020"/>
+    </Style>
+
     <Style x:Key="RepairsActionButtonStyle" TargetType="Button" BasedOn="{StaticResource ApplyButtonStyle}">
         <Style.Triggers>
             <DataTrigger Binding="{Binding RepairState}" Value="{x:Static viewModels:TweakAppliedStatus.Applied}">
@@ -445,7 +458,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="188"/>
+                    <ColumnDefinition Width="120"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
@@ -488,18 +501,16 @@
                     <TextBlock Text="{Binding BatchSummaryLine}" Style="{StaticResource ConfigurationBatchSummaryStyle}" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <Button Content="Restore"
-                            Command="{Binding RollbackCommand}"
-                            ToolTip="{Binding ConfigurationRollbackActionTooltip}"
-                            Style="{StaticResource FlatButtonStyle}"
-                            MinWidth="88"
-                            Margin="0,0,6,0"/>
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,0,16" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Button Content="{Binding ActionButtonText}"
                             Command="{Binding ApplyCommand}"
                             ToolTip="{Binding ConfigurationPrimaryActionTooltip}"
-                            Style="{StaticResource ApplyButtonStyle}"
-                            MinWidth="82"/>
+                            Style="{StaticResource ConfigurationPrimaryActionButtonStyle}"
+                            Margin="0,0,0,6"/>
+                    <Button Content="Restore"
+                            Command="{Binding RollbackCommand}"
+                            ToolTip="{Binding ConfigurationRollbackActionTooltip}"
+                            Style="{StaticResource ConfigurationSecondaryActionButtonStyle}"/>
                 </StackPanel>
             </Grid>
         </Border>
