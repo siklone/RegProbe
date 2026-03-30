@@ -23,7 +23,7 @@
         TextOptions.TextRenderingMode="ClearType">
 
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="34"
+        <WindowChrome CaptionHeight="32"
                       ResizeBorderThickness="6"
                       GlassFrameThickness="0"
                       CornerRadius="0"/>
@@ -42,14 +42,14 @@
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 
         <Style x:Key="TrafficDotStyle" TargetType="Ellipse">
-            <Setter Property="Width" Value="10"/>
-            <Setter Property="Height" Value="10"/>
-            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Width" Value="9"/>
+            <Setter Property="Height" Value="9"/>
+            <Setter Property="Margin" Value="0,0,7,0"/>
         </Style>
 
         <Style x:Key="ShellWindowControlButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="46"/>
-            <Setter Property="Height" Value="34"/>
+            <Setter Property="Width" Value="44"/>
+            <Setter Property="Height" Value="32"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#8D8D8D"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -93,9 +93,9 @@
 
         <Style x:Key="ShellTopTabButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#676767"/>
+            <Setter Property="Foreground" Value="#6C6C6C"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="12,6,12,8"/>
+            <Setter Property="Padding" Value="10,4,10,6"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
             <Setter Property="FontSize" Value="12"/>
@@ -117,7 +117,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" Value="#D8D8D8"/>
+                                <Setter Property="Foreground" Value="#DDDDDD"/>
                             </Trigger>
                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="True">
                                 <Setter Property="Foreground" Value="#F3F3F3"/>
@@ -136,16 +136,14 @@
 
     <Grid Background="#0D0D0D">
         <Grid.RowDefinitions>
-            <RowDefinition Height="34"/>
-            <RowDefinition Height="46"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="42"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0"
                 Panel.ZIndex="100"
-                Background="#111111"
-                BorderBrush="#1E1E1E"
-                BorderThickness="0,0,0,1">
+                Background="#101010">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -155,18 +153,18 @@
 
                 <StackPanel Grid.Column="0"
                             Orientation="Horizontal"
-                            Margin="14,0,0,0"
+                            Margin="16,0,0,0"
                             VerticalAlignment="Center"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                     <Ellipse Style="{StaticResource TrafficDotStyle}" Fill="#FF5F57"/>
                     <Ellipse Style="{StaticResource TrafficDotStyle}" Fill="#FEBC2E"/>
                     <Ellipse Style="{StaticResource TrafficDotStyle}" Fill="#28C840"/>
                     <TextBlock Text="RegProbe"
-                               Margin="8,0,0,0"
+                               Margin="10,0,0,0"
                                VerticalAlignment="Center"
-                               Foreground="#666666"
+                               Foreground="#747474"
                                FontFamily="{DynamicResource FontFamilyDisplay}"
-                               FontSize="12"/>
+                               FontSize="11"/>
                 </StackPanel>
 
                 <Grid Grid.Column="1">
@@ -177,7 +175,14 @@
 
                 <StackPanel Grid.Column="2"
                             Orientation="Horizontal"
+                            VerticalAlignment="Center"
                             WindowChrome.IsHitTestVisibleInChrome="True">
+                    <TextBlock Text="{Binding AppVersionLabel}"
+                               Margin="0,0,14,0"
+                               VerticalAlignment="Center"
+                               Foreground="#505050"
+                               FontFamily="{DynamicResource FontFamilyMono}"
+                               FontSize="10"/>
                     <Button x:Name="MinimizeButton"
                             Command="{Binding HostController.MinimizeCommand, ElementName=RootWindow}"
                             ToolTip="Minimize"
@@ -214,48 +219,31 @@
 
         <Border Grid.Row="1"
                 Panel.ZIndex="90"
-                Background="#111111"
-                BorderBrush="#1A1A1A"
+                Background="#101010"
+                BorderBrush="#171717"
                 BorderThickness="0,0,0,1">
-            <Grid Margin="20,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
+            <Grid Margin="22,0,22,0">
                 <StackPanel Orientation="Horizontal"
-                            Grid.Column="0"
                             VerticalAlignment="Center">
                     <Button Content="Configuration"
                             Command="{Binding ShowConfigurationCommand}"
                             Tag="{Binding IsConfigurationViewActive}"
-                            Margin="0,0,6,0"
+                            Margin="0,0,10,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="Repairs"
                             Command="{Binding ShowRepairsCommand}"
                             Tag="{Binding IsRepairsViewActive}"
-                            Margin="0,0,6,0"
+                            Margin="0,0,10,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="Settings"
                             Command="{Binding ShowSettingsCommand}"
                             Tag="{Binding IsSettingsViewActive}"
-                            Margin="0,0,6,0"
+                            Margin="0,0,10,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="About"
                             Command="{Binding ShowAboutCommand}"
                             Tag="{Binding IsAboutViewActive}"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
-                </StackPanel>
-
-                <StackPanel Grid.Column="1"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <TextBlock Text="{Binding AppVersionLabel}"
-                               Margin="20,0,0,0"
-                               VerticalAlignment="Center"
-                               Foreground="#484848"
-                               FontFamily="{DynamicResource FontFamilyMono}"
-                               FontSize="11"/>
                 </StackPanel>
             </Grid>
         </Border>
