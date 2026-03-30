@@ -277,8 +277,8 @@
     </Style>
 
     <Style x:Key="WorkspaceSelectionCheckBoxStyle" TargetType="CheckBox">
-        <Setter Property="Margin" Value="0,0,18,0"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,20,18,0"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
@@ -302,6 +302,7 @@
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Foreground" Value="#ECECEC"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
     </Style>
 
     <Style x:Key="WorkspaceDescriptionStyle" TargetType="TextBlock">
@@ -405,6 +406,14 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="WorkspaceInlineMetaSeparatorStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="8,0"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="#4A4A4A"/>
+        <Setter Property="Text" Value="•"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
     <Style x:Key="WorkspaceEvidenceBadgeBorderStyle" TargetType="Border">
         <Setter Property="Margin" Value="0,1,6,0"/>
         <Setter Property="Padding" Value="6,1"/>
@@ -467,40 +476,43 @@
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
 
                 <StackPanel Grid.Column="1" Margin="0,18,28,18">
-                    <WrapPanel>
-                        <TextBlock Text="{Binding Name}" Style="{StaticResource WorkspaceRowTitleStyle}"/>
-                        <Border Tag="{Binding AppliedStatus}"
-                                Style="{StaticResource WorkspaceStatusBadgeBorderStyle}"
-                                ToolTip="{Binding StatusTooltip}">
-                            <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
-                        </Border>
-                        <Border Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeBorderStyle}" Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
-                            <TextBlock Text="{Binding EvidenceClassBadgeText}" Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeTextStyle}"/>
-                        </Border>
-                    </WrapPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource WorkspaceRowTitleStyle}" Margin="0,0,16,0"/>
+                        <WrapPanel Grid.Column="1" VerticalAlignment="Center">
+                            <Border Tag="{Binding AppliedStatus}"
+                                    Style="{StaticResource WorkspaceStatusBadgeBorderStyle}"
+                                    ToolTip="{Binding StatusTooltip}">
+                                <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
+                            </Border>
+                            <Border Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeBorderStyle}" Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
+                                <TextBlock Text="{Binding EvidenceClassBadgeText}" Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeTextStyle}"/>
+                            </Border>
+                        </WrapPanel>
+                    </Grid>
 
                     <TextBlock Text="{Binding ConfigurationFriendlyDescription}"
                                ToolTip="{Binding FriendlyDescription}"
                                Style="{StaticResource ConfigurationDescriptionStyle}"/>
                     <TextBlock Text="{Binding ResearchGateMessage}" Style="{StaticResource WorkspaceResearchGateStyle}" Visibility="{Binding HasResearchGateMessage, Converter={StaticResource BoolToVisibility}}"/>
-                    <Grid Margin="0,10,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="14"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <WrapPanel Margin="0,10,0,0" VerticalAlignment="Center">
                         <TextBlock Text="{Binding ConfigurationImpactAreaText}"
                                    Style="{StaticResource WorkspaceFooterLabelStyle}"/>
-                        <TextBlock Grid.Column="2"
+                        <TextBlock Style="{StaticResource WorkspaceInlineMetaSeparatorStyle}"/>
+                        <TextBlock
                                    Text="{Binding ConfigurationCompactInfoLine}"
                                    Style="{StaticResource ConfigurationFooterValueStyle}"
                                    Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"/>
-                        <TextBlock Grid.Column="3"
+                        <TextBlock Style="{StaticResource WorkspaceInlineMetaSeparatorStyle}"/>
+                        <TextBlock
                                    Text="{Binding ConfigurationInventoryFreshnessText}"
                                    Style="{StaticResource WorkspaceFooterHintStyle}"
-                                   Margin="16,0,0,0"/>
-                    </Grid>
+                                   TextAlignment="Left"
+                                   Margin="0"/>
+                    </WrapPanel>
                     <TextBlock Text="{Binding BatchSummaryLine}" Style="{StaticResource ConfigurationBatchSummaryStyle}" Visibility="{Binding HasBatchSummaryLine, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
@@ -531,36 +543,39 @@
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
 
                 <StackPanel Grid.Column="1" Margin="0,18,28,18">
-                    <WrapPanel>
-                        <TextBlock Text="{Binding Name}" Style="{StaticResource WorkspaceRowTitleStyle}"/>
-                        <Border Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeBorderStyle}">
-                            <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
-                        </Border>
-                        <Border Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeBorderStyle}" Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
-                            <TextBlock Text="{Binding EvidenceClassBadgeText}" Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeTextStyle}"/>
-                        </Border>
-                    </WrapPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource WorkspaceRowTitleStyle}" Margin="0,0,16,0"/>
+                        <WrapPanel Grid.Column="1" VerticalAlignment="Center">
+                            <Border Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeBorderStyle}">
+                                <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
+                            </Border>
+                            <Border Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeBorderStyle}" Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}">
+                                <TextBlock Text="{Binding EvidenceClassBadgeText}" Tag="{Binding EvidenceClassId}" Style="{StaticResource WorkspaceEvidenceBadgeTextStyle}"/>
+                            </Border>
+                        </WrapPanel>
+                    </Grid>
 
                     <TextBlock Text="{Binding FriendlyDescription}" Style="{StaticResource WorkspaceDescriptionStyle}"/>
                     <TextBlock Text="{Binding ResearchGateMessage}" Style="{StaticResource WorkspaceResearchGateStyle}" Visibility="{Binding HasResearchGateMessage, Converter={StaticResource BoolToVisibility}}"/>
-                    <Grid Margin="0,10,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="14"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <WrapPanel Margin="0,10,0,0" VerticalAlignment="Center">
                         <TextBlock Text="{Binding ImpactAreaLabel}"
                                    Style="{StaticResource WorkspaceFooterLabelStyle}"/>
-                        <TextBlock Grid.Column="2"
+                        <TextBlock Style="{StaticResource WorkspaceInlineMetaSeparatorStyle}"/>
+                        <TextBlock
                                    Text="{Binding CompactInfoLine}"
                                    Style="{StaticResource WorkspaceFooterValueStyle}"
                                    Visibility="{Binding HasCompactInfoLine, Converter={StaticResource BoolToVisibility}}"/>
-                        <TextBlock Grid.Column="3"
+                        <TextBlock Style="{StaticResource WorkspaceInlineMetaSeparatorStyle}"/>
+                        <TextBlock
                                    Text="{Binding InventoryFreshnessText}"
                                    Style="{StaticResource WorkspaceFooterHintStyle}"
-                                   Margin="16,0,0,0"/>
-                    </Grid>
+                                   TextAlignment="Left"
+                                   Margin="0"/>
+                    </WrapPanel>
                     <Border Style="{StaticResource RepairsRiskBadgeBorderStyle}"
                             Visibility="{Binding HasRepairsRiskHint, Converter={StaticResource BoolToVisibility}}">
                         <TextBlock Text="{Binding RepairsRiskHint}"
