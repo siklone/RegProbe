@@ -25,7 +25,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="24,10,32,10">
+        <Border Grid.Row="0" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="24,6,32,8">
             <Grid MaxWidth="980" HorizontalAlignment="Left">
                 <StackPanel>
                     <TextBlock Text="{Binding CurrentWorkspaceLabel}" FontSize="20" FontWeight="SemiBold" Foreground="#FFFFFF"/>
@@ -34,7 +34,7 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="1" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="24,10,32,14">
+        <Border Grid.Row="1" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="24,8,32,12">
             <Grid MaxWidth="980" HorizontalAlignment="Left">
                 <StackPanel>
                     <TextBox Width="448"
@@ -44,7 +44,7 @@
                              Tag="{Binding SearchPlaceholder}"
                              ToolTip="{Binding SearchPlaceholder}"/>
 
-                    <Grid Margin="0,10,0,0">
+                    <Grid Margin="0,8,0,0">
                         <Grid.Style>
                             <Style TargetType="Grid">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -68,7 +68,7 @@
                                 <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
                                 <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
                             </WrapPanel>
-                            <WrapPanel Margin="0,6,0,0"
+                            <WrapPanel Margin="0,4,0,0"
                                        Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}">
                                 <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class A"/></CheckBox>
                                 <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource ChipStyle}"><TextBlock Text="Class B"/></CheckBox>
@@ -76,7 +76,7 @@
                         </StackPanel>
                     </Grid>
 
-                    <Grid Margin="0,10,0,0">
+                    <Grid Margin="0,8,0,0">
                         <Grid.Style>
                             <Style TargetType="Grid">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -94,7 +94,7 @@
                         </WrapPanel>
                     </Grid>
 
-                    <TextBlock Margin="0,10,0,0"
+                    <TextBlock Margin="0,8,0,0"
                                FontSize="11"
                                Foreground="#8A8A8A"
                                TextWrapping="Wrap">

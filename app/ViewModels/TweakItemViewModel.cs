@@ -863,7 +863,7 @@ public sealed class TweakItemViewModel : ViewModelBase
                 return $"Current: {current}";
             }
 
-            return $"Current: {current}   Preferred: {target}";
+            return $"Current: {current}  ·  Preferred: {target}";
         }
     }
 
