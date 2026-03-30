@@ -41,17 +41,11 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
 
-        <Style x:Key="TrafficDotStyle" TargetType="Ellipse">
-            <Setter Property="Width" Value="9"/>
-            <Setter Property="Height" Value="9"/>
-            <Setter Property="Margin" Value="0,0,7,0"/>
-        </Style>
-
-        <Style x:Key="ShellWindowControlButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="44"/>
-            <Setter Property="Height" Value="32"/>
+        <Style x:Key="TrafficCommandButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="18"/>
+            <Setter Property="Height" Value="18"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#8D8D8D"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Focusable" Value="False"/>
@@ -61,34 +55,42 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="Root"
-                                Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
+                                Width="18"
+                                Height="18"
+                                Background="Transparent">
+                            <Grid>
+                                <Ellipse x:Name="Dot"
+                                         Width="10"
+                                         Height="10"
+                                         Fill="{TemplateBinding Foreground}"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Center"/>
+                                <Path x:Name="Glyph"
+                                      Width="7"
+                                      Height="7"
+                                      Stroke="#0D0D0D"
+                                      StrokeThickness="1.1"
+                                      StrokeStartLineCap="Round"
+                                      StrokeEndLineCap="Round"
+                                      StrokeLineJoin="Round"
+                                      Visibility="Collapsed"
+                                      Stretch="Fill"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      Data="{TemplateBinding Tag}"/>
+                            </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#181818"/>
-                                <Setter Property="Foreground" Value="#F3F3F3"/>
+                                <Setter TargetName="Glyph" Property="Visibility" Value="Visible"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#202020"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Root" Property="Opacity" Value="0.4"/>
+                                <Setter TargetName="Dot" Property="Opacity" Value="0.82"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
-
-        <Style x:Key="CloseWindowButtonStyle" TargetType="Button" BasedOn="{StaticResource ShellWindowControlButtonStyle}">
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#C0392B"/>
-                    <Setter Property="Foreground" Value="#F6F6F6"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         <Style x:Key="ShellTopTabButtonStyle" TargetType="Button">
@@ -153,14 +155,26 @@
 
                 <StackPanel Grid.Column="0"
                             Orientation="Horizontal"
-                            Margin="16,0,0,0"
+                            Margin="22,0,0,0"
                             VerticalAlignment="Center"
                             WindowChrome.IsHitTestVisibleInChrome="True">
-                    <Ellipse Style="{StaticResource TrafficDotStyle}" Fill="#FF5F57"/>
-                    <Ellipse Style="{StaticResource TrafficDotStyle}" Fill="#FEBC2E"/>
-                    <Ellipse Style="{StaticResource TrafficDotStyle}" Fill="#28C840"/>
+                    <Button Command="{Binding HostController.CloseCommand, ElementName=RootWindow}"
+                            ToolTip="Close"
+                            Foreground="#FF5F57"
+                            Tag="M 1,1 L 6,6 M 6,1 L 1,6"
+                            Style="{StaticResource TrafficCommandButtonStyle}"/>
+                    <Button Command="{Binding HostController.MinimizeCommand, ElementName=RootWindow}"
+                            ToolTip="Minimize"
+                            Foreground="#FEBC2E"
+                            Tag="M 1,3.5 H 6"
+                            Style="{StaticResource TrafficCommandButtonStyle}"/>
+                    <Button Command="{Binding HostController.ToggleMaximizeRestoreCommand, ElementName=RootWindow}"
+                            ToolTip="Maximize or restore"
+                            Foreground="#28C840"
+                            Tag="M 1,1.2 H 6 V 5.8 H 1 Z"
+                            Style="{StaticResource TrafficCommandButtonStyle}"/>
                     <TextBlock Text="RegProbe"
-                               Margin="10,0,0,0"
+                               Margin="12,0,0,0"
                                VerticalAlignment="Center"
                                Foreground="#747474"
                                FontFamily="{DynamicResource FontFamilyDisplay}"
@@ -176,43 +190,14 @@
                 <StackPanel Grid.Column="2"
                             Orientation="Horizontal"
                             VerticalAlignment="Center"
+                            Margin="0,0,18,0"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                     <TextBlock Text="{Binding AppVersionLabel}"
-                               Margin="0,0,14,0"
+                               Margin="0,0,0,0"
                                VerticalAlignment="Center"
                                Foreground="#505050"
                                FontFamily="{DynamicResource FontFamilyMono}"
                                FontSize="10"/>
-                    <Button x:Name="MinimizeButton"
-                            Command="{Binding HostController.MinimizeCommand, ElementName=RootWindow}"
-                            ToolTip="Minimize"
-                            Style="{StaticResource ShellWindowControlButtonStyle}">
-                        <Path Data="M 0,0 H 10"
-                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                              StrokeThickness="1.1"
-                              StrokeStartLineCap="Square"
-                              StrokeEndLineCap="Square"/>
-                    </Button>
-
-                    <Button x:Name="MaximizeButton"
-                            Command="{Binding HostController.ToggleMaximizeRestoreCommand, ElementName=RootWindow}"
-                            ToolTip="Maximize"
-                            Style="{StaticResource ShellWindowControlButtonStyle}">
-                        <Rectangle Width="10"
-                                   Height="10"
-                                   Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                                   StrokeThickness="1"
-                                   Fill="Transparent"/>
-                    </Button>
-
-                    <Button x:Name="CloseButton"
-                            Command="{Binding HostController.CloseCommand, ElementName=RootWindow}"
-                            ToolTip="Close"
-                            Style="{StaticResource CloseWindowButtonStyle}">
-                        <Path Data="M 0,0 L 10,10 M 10,0 L 0,10"
-                              Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
-                              StrokeThickness="1.1"/>
-                    </Button>
                 </StackPanel>
             </Grid>
         </Border>
