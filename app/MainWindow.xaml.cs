@@ -11,6 +11,7 @@ namespace RegProbe.App;
 public partial class MainWindow : Window
 {
     private readonly MainWindowHostController _hostController;
+    private readonly MainWindowLifecycleCoordinator _lifecycleCoordinator;
 
     public MainWindowHostController HostController => _hostController;
 
@@ -18,8 +19,9 @@ public partial class MainWindow : Window
     {
         ArgumentNullException.ThrowIfNull(viewModel);
         _hostController = new MainWindowHostController(this);
+        _lifecycleCoordinator = new MainWindowLifecycleCoordinator(this);
         InitializeComponent();
         DataContext = viewModel;
-        _hostController.Initialize(NotificationHost);
+        _lifecycleCoordinator.Initialize(NotificationHost);
     }
 }
