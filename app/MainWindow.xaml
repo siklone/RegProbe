@@ -1,4 +1,5 @@
 <Window x:Class="RegProbe.App.MainWindow"
+        x:Name="RootWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -175,7 +176,7 @@
                             Orientation="Horizontal"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                     <Button x:Name="MinimizeButton"
-                            Click="MinimizeButton_Click"
+                            Command="{Binding HostController.MinimizeCommand, ElementName=RootWindow}"
                             ToolTip="Minimize"
                             Style="{StaticResource ShellWindowControlButtonStyle}">
                         <Path Data="M 0,0 H 10"
@@ -186,7 +187,7 @@
                     </Button>
 
                     <Button x:Name="MaximizeButton"
-                            Click="MaximizeButton_Click"
+                            Command="{Binding HostController.ToggleMaximizeRestoreCommand, ElementName=RootWindow}"
                             ToolTip="Maximize"
                             Style="{StaticResource ShellWindowControlButtonStyle}">
                         <Rectangle Width="10"
@@ -197,7 +198,7 @@
                     </Button>
 
                     <Button x:Name="CloseButton"
-                            Click="CloseButton_Click"
+                            Command="{Binding HostController.CloseCommand, ElementName=RootWindow}"
                             ToolTip="Close"
                             Style="{StaticResource CloseWindowButtonStyle}">
                         <Path Data="M 0,0 L 10,10 M 10,0 L 0,10"
