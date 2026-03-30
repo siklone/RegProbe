@@ -1,0 +1,39 @@
+<UserControl x:Class="RegProbe.App.Views.UtilityPageChrome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             FontFamily="{DynamicResource FontFamilyText}"
+             FontSize="12"
+             Background="#0D0D0D">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  Background="Transparent">
+        <Grid Margin="20,18,24,24"
+              MaxWidth="920">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0"
+                        Margin="0,0,0,18">
+                <TextBlock Text="{Binding HeaderEyebrow, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                <TextBlock Text="{Binding HeaderTitle, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           Margin="0,4,0,0"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           Foreground="#FFFFFF"/>
+                <TextBlock Margin="0,6,0,0"
+                           Text="{Binding HeaderDescription, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                           Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+            </StackPanel>
+
+            <ContentPresenter Grid.Row="1"
+                              Content="{Binding BodyContent, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

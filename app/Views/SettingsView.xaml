@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:services="clr-namespace:RegProbe.App.Services"
+             xmlns:views="clr-namespace:RegProbe.App.Views"
              mc:Ignorable="d"
              FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12"
@@ -51,112 +52,77 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <Style x:Key="SectionEyebrowTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="Foreground" Value="#6E6E6E"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
-
-        <Style x:Key="SectionTitleTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="#F1F1F1"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
-
-        <Style x:Key="SectionBodyTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="Foreground" Value="#707070"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  HorizontalScrollBarVisibility="Disabled"
-                  Background="Transparent">
-        <Grid Margin="20,18,24,24"
-              MaxWidth="920">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+    <views:UtilityPageChrome HeaderEyebrow="Utility"
+                             HeaderTitle="{Binding Title}"
+                             HeaderDescription="Only shell-level preferences live here. This page stays intentionally small and quiet.">
+        <views:UtilityPageChrome.BodyContent>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0"
-                        Margin="0,0,0,18">
-                <TextBlock Text="Utility"
-                           Style="{StaticResource SectionEyebrowTextStyle}"/>
-                <TextBlock Text="{Binding Title}"
-                           Margin="0,4,0,0"
-                           FontSize="18"
-                           FontWeight="SemiBold"
-                           Foreground="#FFFFFF"/>
-                <TextBlock Margin="0,6,0,0"
-                           Style="{StaticResource SectionBodyTextStyle}"
-                           Text="Only shell-level preferences live here. This page stays intentionally small and quiet."/>
-            </StackPanel>
+                <Border Grid.Row="0"
+                        BorderBrush="#171717"
+                        BorderThickness="0,1,0,1"
+                        Padding="0">
+                    <Grid Margin="0,14,0,14">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="1"
-                    BorderBrush="#171717"
-                    BorderThickness="0,1,0,1"
-                    Padding="0">
-                <Grid Margin="0,14,0,14">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="220"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                        <StackPanel Margin="0,0,20,0">
+                            <TextBlock Text="Theme"
+                                       Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                            <TextBlock Text="Palette"
+                                       Margin="0,5,0,0"
+                                       Style="{StaticResource UtilitySectionTitleTextStyle}"/>
+                        </StackPanel>
 
-                    <StackPanel Margin="0,0,20,0">
-                        <TextBlock Text="Theme"
-                                   Style="{StaticResource SectionEyebrowTextStyle}"/>
-                        <TextBlock Text="Palette"
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Margin="0,0,0,10"
+                                       Style="{StaticResource UtilitySectionBodyTextStyle}"
+                                       Text="Choose the accent palette used across the shell and workspace surfaces."/>
+
+                            <ListBox ItemsSource="{Binding AvailableThemes}"
+                                     SelectedItem="{Binding CurrentThemePalette, Mode=TwoWay}"
+                                     Style="{StaticResource ThemePickerListStyle}"
+                                     ItemContainerStyle="{StaticResource ThemePickerItemStyle}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type services:ThemePalette}">
+                                        <TextBlock Text="{Binding Name}"
+                                                   FontSize="12"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="#EAEAEA"
+                                                   HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1"
+                        Margin="0,18,0,0"
+                        Style="{StaticResource UtilitySectionBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="State"
+                                   Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                        <TextBlock Text="Save status"
                                    Margin="0,5,0,0"
-                                   Style="{StaticResource SectionTitleTextStyle}"/>
+                                   Style="{StaticResource UtilitySectionTitleTextStyle}"/>
+                        <TextBlock Text="{Binding StatusMessage}"
+                                   Margin="0,10,0,0"
+                                   Foreground="#7B7B7B"
+                                   FontFamily="{DynamicResource FontFamilyMono}"
+                                   FontSize="11"
+                                   TextWrapping="Wrap"/>
                     </StackPanel>
-
-                    <StackPanel Grid.Column="1">
-                        <TextBlock Margin="0,0,0,10"
-                                   Style="{StaticResource SectionBodyTextStyle}"
-                                   Text="Choose the accent palette used across the shell and workspace surfaces."/>
-
-                        <ListBox ItemsSource="{Binding AvailableThemes}"
-                                 SelectedItem="{Binding CurrentThemePalette, Mode=TwoWay}"
-                                 Style="{StaticResource ThemePickerListStyle}"
-                                 ItemContainerStyle="{StaticResource ThemePickerItemStyle}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="{x:Type services:ThemePalette}">
-                                    <TextBlock Text="{Binding Name}"
-                                               FontSize="12"
-                                               FontWeight="SemiBold"
-                                               Foreground="#EAEAEA"
-                                               HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </StackPanel>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="2"
-                    Margin="0,18,0,0"
-                    BorderBrush="#171717"
-                    BorderThickness="0,1,0,0"
-                    Padding="0,14,0,0">
-                <StackPanel>
-                    <TextBlock Text="State"
-                               Style="{StaticResource SectionEyebrowTextStyle}"/>
-                    <TextBlock Text="Save status"
-                               Margin="0,5,0,0"
-                               Style="{StaticResource SectionTitleTextStyle}"/>
-                    <TextBlock Text="{Binding StatusMessage}"
-                               Margin="0,10,0,0"
-                               Foreground="#7B7B7B"
-                               FontFamily="{DynamicResource FontFamilyMono}"
-                               FontSize="11"
-                               TextWrapping="Wrap"/>
-                </StackPanel>
-            </Border>
-        </Grid>
-    </ScrollViewer>
+                </Border>
+            </Grid>
+        </views:UtilityPageChrome.BodyContent>
+    </views:UtilityPageChrome>
 </UserControl>

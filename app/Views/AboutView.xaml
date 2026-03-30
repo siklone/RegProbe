@@ -3,237 +3,166 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:RegProbe.App.Views"
              mc:Ignorable="d"
              FontFamily="{DynamicResource FontFamilyText}"
              FontSize="12"
              Background="#0D0D0D">
 
-    <UserControl.Resources>
-        <Style x:Key="SectionEyebrowTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="Foreground" Value="#6E6E6E"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
+    <views:UtilityPageChrome HeaderEyebrow="{Binding Title}"
+                             HeaderTitle="RegProbe"
+                             HeaderDescription="A focused Windows configuration shell with reversible changes, clean logging, and a calmer day-to-day workspace.">
+        <views:UtilityPageChrome.BodyContent>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <Style x:Key="SectionTitleTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="#F1F1F1"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
+                <Border Grid.Row="0"
+                        BorderBrush="#171717"
+                        BorderThickness="0,1,0,1"
+                        Padding="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-        <Style x:Key="SectionBodyTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="Foreground" Value="#707070"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-        </Style>
-
-        <Style x:Key="InlineLinkButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#151515"/>
-            <Setter Property="Foreground" Value="#C8C8C8"/>
-            <Setter Property="BorderBrush" Value="#252525"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,6"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="Root"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="BorderBrush" Value="#C0392B"/>
-                                <Setter Property="Foreground" Value="#F0D2CD"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#1D1514"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
-
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  HorizontalScrollBarVisibility="Disabled"
-                  Background="Transparent">
-        <Grid Margin="20,18,24,24"
-              MaxWidth="920">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <StackPanel Grid.Row="0"
-                        Margin="0,0,0,18">
-                <TextBlock Text="{Binding Title}"
-                           Style="{StaticResource SectionEyebrowTextStyle}"/>
-                <TextBlock Text="RegProbe"
-                           Margin="0,4,0,0"
-                           FontSize="18"
-                           FontWeight="SemiBold"
-                           Foreground="#FFFFFF"/>
-                <TextBlock Margin="0,6,0,0"
-                           Style="{StaticResource SectionBodyTextStyle}"
-                           Text="A focused Windows configuration shell with reversible changes, clean logging, and a calmer day-to-day workspace."/>
-            </StackPanel>
-
-            <Border Grid.Row="1"
-                    BorderBrush="#171717"
-                    BorderThickness="0,1,0,1"
-                    Padding="0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Margin="0,12,0,12">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Version"
-                                   Style="{StaticResource SectionEyebrowTextStyle}"/>
+                        <Grid Margin="0,12,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Version"
+                                       Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
                             <TextBlock Grid.Column="1"
                                        Text="{Binding AppVersion}"
                                        FontSize="13"
                                        FontWeight="SemiBold"
                                        Foreground="#F0F0F0"
                                        FontFamily="{DynamicResource FontFamilyMono}"/>
+                        </Grid>
+
+                        <Border Grid.Row="1"
+                                BorderBrush="#171717"
+                                BorderThickness="0,1,0,0">
+                            <Grid Margin="0,12,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Build"
+                                           Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding BuildConfiguration}"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           Foreground="#F0F0F0"
+                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="2"
+                                BorderBrush="#171717"
+                                BorderThickness="0,1,0,0">
+                            <Grid Margin="0,12,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Framework"
+                                           Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Framework}"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           Foreground="#F0F0F0"
+                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="3"
+                                BorderBrush="#171717"
+                                BorderThickness="0,1,0,0">
+                            <Grid Margin="0,12,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Architecture"
+                                           Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding Architecture}"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           Foreground="#F0F0F0"
+                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="4"
+                                BorderBrush="#171717"
+                                BorderThickness="0,1,0,0">
+                            <Grid Margin="0,12,0,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Log size"
+                                           Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding LogFileSizeFormatted}"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           Foreground="#F0F0F0"
+                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                            </Grid>
+                        </Border>
                     </Grid>
+                </Border>
 
-                    <Border Grid.Row="1"
-                            BorderBrush="#171717"
-                            BorderThickness="0,1,0,0">
-                        <Grid Margin="0,12,0,12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="220"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Build"
-                                       Style="{StaticResource SectionEyebrowTextStyle}"/>
-                            <TextBlock Grid.Column="1"
-                                       Text="{Binding BuildConfiguration}"
-                                       FontSize="13"
-                                       FontWeight="SemiBold"
-                                       Foreground="#F0F0F0"
-                                       FontFamily="{DynamicResource FontFamilyMono}"/>
-                        </Grid>
-                    </Border>
+                <Border Grid.Row="1"
+                        Margin="0,18,0,0"
+                        Style="{StaticResource UtilitySectionBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Repository"
+                                   Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                        <TextBlock Text="Canonical source"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource UtilitySectionTitleTextStyle}"/>
+                        <TextBlock Margin="0,6,0,10"
+                                   Style="{StaticResource UtilitySectionBodyTextStyle}"
+                                   Text="Open the canonical repository for source, release history, and implementation context."/>
+                        <Button Content="{Binding RepositoryUrl}"
+                                Command="{Binding OpenUrlCommand}"
+                                CommandParameter="{Binding RepositoryUrl}"
+                                Style="{StaticResource UtilityInlineLinkButtonStyle}"/>
+                    </StackPanel>
+                </Border>
 
-                    <Border Grid.Row="2"
-                            BorderBrush="#171717"
-                            BorderThickness="0,1,0,0">
-                        <Grid Margin="0,12,0,12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="220"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Framework"
-                                       Style="{StaticResource SectionEyebrowTextStyle}"/>
-                            <TextBlock Grid.Column="1"
-                                       Text="{Binding Framework}"
-                                       FontSize="13"
-                                       FontWeight="SemiBold"
-                                       Foreground="#F0F0F0"
-                                       FontFamily="{DynamicResource FontFamilyMono}"/>
-                        </Grid>
-                    </Border>
-
-                    <Border Grid.Row="3"
-                            BorderBrush="#171717"
-                            BorderThickness="0,1,0,0">
-                        <Grid Margin="0,12,0,12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="220"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Architecture"
-                                       Style="{StaticResource SectionEyebrowTextStyle}"/>
-                            <TextBlock Grid.Column="1"
-                                       Text="{Binding Architecture}"
-                                       FontSize="13"
-                                       FontWeight="SemiBold"
-                                       Foreground="#F0F0F0"
-                                       FontFamily="{DynamicResource FontFamilyMono}"/>
-                        </Grid>
-                    </Border>
-
-                    <Border Grid.Row="4"
-                            BorderBrush="#171717"
-                            BorderThickness="0,1,0,0">
-                        <Grid Margin="0,12,0,12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="220"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Log size"
-                                       Style="{StaticResource SectionEyebrowTextStyle}"/>
-                            <TextBlock Grid.Column="1"
-                                       Text="{Binding LogFileSizeFormatted}"
-                                       FontSize="13"
-                                       FontWeight="SemiBold"
-                                       Foreground="#F0F0F0"
-                                       FontFamily="{DynamicResource FontFamilyMono}"/>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
-
-            <Border Grid.Row="2"
-                    Margin="0,18,0,0"
-                    BorderBrush="#171717"
-                    BorderThickness="0,1,0,0"
-                    Padding="0,14,0,0">
-                <StackPanel>
-                    <TextBlock Text="Repository"
-                               Style="{StaticResource SectionEyebrowTextStyle}"/>
-                    <TextBlock Text="Canonical source"
-                               Margin="0,5,0,0"
-                               Style="{StaticResource SectionTitleTextStyle}"/>
-                    <TextBlock Margin="0,6,0,10"
-                               Style="{StaticResource SectionBodyTextStyle}"
-                               Text="Open the canonical repository for source, release history, and implementation context."/>
-                    <Button Content="{Binding RepositoryUrl}"
-                            Command="{Binding OpenUrlCommand}"
-                            CommandParameter="{Binding RepositoryUrl}"
-                            Style="{StaticResource InlineLinkButtonStyle}"/>
-                </StackPanel>
-            </Border>
-
-            <Border Grid.Row="3"
-                    Margin="0,18,0,0"
-                    BorderBrush="#171717"
-                    BorderThickness="0,1,0,0"
-                    Padding="0,14,0,0">
-                <StackPanel>
-                    <TextBlock Text="Logs"
-                               Style="{StaticResource SectionEyebrowTextStyle}"/>
-                    <TextBlock Text="Runtime trace"
-                               Margin="0,5,0,0"
-                               Style="{StaticResource SectionTitleTextStyle}"/>
-                    <TextBlock Margin="0,6,0,10"
-                               Style="{StaticResource SectionBodyTextStyle}"
-                               Text="Open the local tweak log when you need recent commands, detections, or failure details."/>
-                    <Button Content="Open tweak log"
-                            Command="{Binding OpenLogFileCommand}"
-                            Style="{StaticResource InlineLinkButtonStyle}"/>
-                </StackPanel>
-            </Border>
-        </Grid>
-    </ScrollViewer>
+                <Border Grid.Row="2"
+                        Margin="0,18,0,0"
+                        Style="{StaticResource UtilitySectionBorderStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Logs"
+                                   Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                        <TextBlock Text="Runtime trace"
+                                   Margin="0,5,0,0"
+                                   Style="{StaticResource UtilitySectionTitleTextStyle}"/>
+                        <TextBlock Margin="0,6,0,10"
+                                   Style="{StaticResource UtilitySectionBodyTextStyle}"
+                                   Text="Open the local tweak log when you need recent commands, detections, or failure details."/>
+                        <Button Content="Open tweak log"
+                                Command="{Binding OpenLogFileCommand}"
+                                Style="{StaticResource UtilityInlineLinkButtonStyle}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </views:UtilityPageChrome.BodyContent>
+    </views:UtilityPageChrome>
 </UserControl>
