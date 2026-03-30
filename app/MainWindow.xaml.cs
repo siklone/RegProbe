@@ -14,11 +14,12 @@ public partial class MainWindow : Window
 
     public MainWindowHostController HostController => _hostController;
 
-    public MainWindow()
+    public MainWindow(MainViewModel viewModel)
     {
+        ArgumentNullException.ThrowIfNull(viewModel);
         _hostController = new MainWindowHostController(this);
         InitializeComponent();
-        DataContext = new MainViewModel();
+        DataContext = viewModel;
         _hostController.Initialize(NotificationHost);
     }
 }

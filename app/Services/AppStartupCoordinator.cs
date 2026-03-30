@@ -14,6 +14,8 @@ namespace RegProbe.App.Services;
 
 public sealed class AppStartupCoordinator
 {
+    private readonly MainWindowFactory _windowFactory = new();
+
     public async Task<MainWindow> CreateAndShowMainWindowAsync(Application application)
     {
         ArgumentNullException.ThrowIfNull(application);
@@ -26,7 +28,7 @@ public sealed class AppStartupCoordinator
         ApplyTheme(settings);
         ConfigureProcessRenderSettings();
 
-        var mainWindow = new MainWindow();
+        var mainWindow = _windowFactory.CreateMainWindow();
         ConfigureWindowRenderSettings(mainWindow);
 
         application.MainWindow = mainWindow;
@@ -43,12 +45,7 @@ public sealed class AppStartupCoordinator
             return existingWindow;
         }
 
-        var mainWindow = new MainWindow
-        {
-            Opacity = 1
-        };
-
-        return mainWindow;
+        return _windowFactory.CreateRecoveryWindow();
     }
 
     private static async Task<AppSettings> LoadSettingsAsync()
