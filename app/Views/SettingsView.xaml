@@ -12,7 +12,7 @@
 
     <UserControl.Resources>
         <ItemsPanelTemplate x:Key="ThemePickerPanel">
-            <WrapPanel/>
+            <UniformGrid Columns="5"/>
         </ItemsPanelTemplate>
 
         <Style x:Key="ThemePickerListStyle" TargetType="ListBox">
@@ -25,9 +25,10 @@
 
         <Style x:Key="ThemePickerItemStyle" TargetType="ListBoxItem">
             <Setter Property="Padding" Value="0"/>
-            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
@@ -35,7 +36,8 @@
                                 Background="#141414"
                                 BorderBrush="#232323"
                                 BorderThickness="1"
-                                Padding="12,10">
+                                Padding="12,12"
+                                MinHeight="72">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center"/>
                         </Border>
@@ -65,12 +67,10 @@
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
-                        BorderBrush="#171717"
-                        BorderThickness="0,1,0,1"
-                        Padding="0">
+                        Style="{StaticResource UtilityPanelBorderStyle}">
                     <Grid Margin="0,14,0,14">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="176"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
@@ -93,14 +93,27 @@
                                      ItemContainerStyle="{StaticResource ThemePickerItemStyle}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate DataType="{x:Type services:ThemePalette}">
-                                        <TextBlock Text="{Binding Name}"
-                                                   FontSize="12"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="#EAEAEA"
-                                                   HorizontalAlignment="Center"/>
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <WrapPanel HorizontalAlignment="Center"
+                                                       Margin="0,0,0,10">
+                                                <Border Width="10" Height="10" Margin="0,0,6,0" Background="{Binding AccentPrimary}"/>
+                                                <Border Width="10" Height="10" Margin="0,0,6,0" Background="{Binding AccentDark}"/>
+                                                <Border Width="10" Height="10" Margin="0,0,6,0" Background="{Binding AccentLight}"/>
+                                                <Border Width="10" Height="10" Background="{Binding AccentSecondary}"/>
+                                            </WrapPanel>
+                                            <TextBlock Text="{Binding Name}"
+                                                       FontSize="12"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#EAEAEA"
+                                                       HorizontalAlignment="Center"/>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
+
+                            <TextBlock Margin="0,10,0,0"
+                                       Style="{StaticResource UtilitySubtleMonoTextStyle}"
+                                       Text="{Binding CurrentThemePalette.Name, StringFormat=Selected palette: {0}}"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -116,10 +129,7 @@
                                    Style="{StaticResource UtilitySectionTitleTextStyle}"/>
                         <TextBlock Text="{Binding StatusMessage}"
                                    Margin="0,10,0,0"
-                                   Foreground="#7B7B7B"
-                                   FontFamily="{DynamicResource FontFamilyMono}"
-                                   FontSize="11"
-                                   TextWrapping="Wrap"/>
+                                   Style="{StaticResource UtilitySubtleMonoTextStyle}"/>
                     </StackPanel>
                 </Border>
             </Grid>

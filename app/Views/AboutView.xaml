@@ -9,8 +9,8 @@
              FontSize="12"
              Background="#0D0D0D">
 
-    <views:UtilityPageChrome HeaderEyebrow="{Binding Title}"
-                             HeaderTitle="RegProbe"
+    <views:UtilityPageChrome HeaderEyebrow="Utility"
+                             HeaderTitle="{Binding Title}"
                              HeaderDescription="A focused Windows configuration shell with reversible changes, clean logging, and a calmer day-to-day workspace.">
         <views:UtilityPageChrome.BodyContent>
             <Grid>
@@ -21,10 +21,8 @@
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
-                        BorderBrush="#171717"
-                        BorderThickness="0,1,0,1"
-                        Padding="0">
-                    <Grid>
+                        Style="{StaticResource UtilityPanelBorderStyle}">
+                    <Grid Grid.IsSharedSizeScope="True">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -35,92 +33,78 @@
 
                         <Grid Margin="0,12,0,12">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Version"
-                                       Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                                       Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                             <TextBlock Grid.Column="1"
                                        Text="{Binding AppVersion}"
-                                       FontSize="13"
-                                       FontWeight="SemiBold"
-                                       Foreground="#F0F0F0"
-                                       FontFamily="{DynamicResource FontFamilyMono}"/>
+                                       Margin="20,0,0,0"
+                                       Style="{StaticResource UtilityMetricValueTextStyle}"/>
                         </Grid>
 
                         <Border Grid.Row="1"
-                                BorderBrush="#171717"
-                                BorderThickness="0,1,0,0">
+                                Style="{StaticResource UtilityMetricRowBorderStyle}">
                             <Grid Margin="0,12,0,12">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Build"
-                                           Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                                           Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding BuildConfiguration}"
-                                           FontSize="13"
-                                           FontWeight="SemiBold"
-                                           Foreground="#F0F0F0"
-                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                                           Margin="20,0,0,0"
+                                           Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Row="2"
-                                BorderBrush="#171717"
-                                BorderThickness="0,1,0,0">
+                                Style="{StaticResource UtilityMetricRowBorderStyle}">
                             <Grid Margin="0,12,0,12">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Framework"
-                                           Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                                           Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding Framework}"
-                                           FontSize="13"
-                                           FontWeight="SemiBold"
-                                           Foreground="#F0F0F0"
-                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                                           Margin="20,0,0,0"
+                                           Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Row="3"
-                                BorderBrush="#171717"
-                                BorderThickness="0,1,0,0">
+                                Style="{StaticResource UtilityMetricRowBorderStyle}">
                             <Grid Margin="0,12,0,12">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Architecture"
-                                           Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                                           Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding Architecture}"
-                                           FontSize="13"
-                                           FontWeight="SemiBold"
-                                           Foreground="#F0F0F0"
-                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                                           Margin="20,0,0,0"
+                                           Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
 
                         <Border Grid.Row="4"
-                                BorderBrush="#171717"
-                                BorderThickness="0,1,0,0">
+                                Style="{StaticResource UtilityMetricRowBorderStyle}">
                             <Grid Margin="0,12,0,12">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="UtilityMetricLabel"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Log size"
-                                           Style="{StaticResource UtilitySectionEyebrowTextStyle}"/>
+                                           Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding LogFileSizeFormatted}"
-                                           FontSize="13"
-                                           FontWeight="SemiBold"
-                                           Foreground="#F0F0F0"
-                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                                           Margin="20,0,0,0"
+                                           Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
                     </Grid>
@@ -138,7 +122,10 @@
                         <TextBlock Margin="0,6,0,10"
                                    Style="{StaticResource UtilitySectionBodyTextStyle}"
                                    Text="Open the canonical repository for source, release history, and implementation context."/>
-                        <Button Content="{Binding RepositoryUrl}"
+                        <TextBlock Text="{Binding RepositoryUrl}"
+                                   Margin="0,0,0,10"
+                                   Style="{StaticResource UtilitySubtleMonoTextStyle}"/>
+                        <Button Content="Open repository"
                                 Command="{Binding OpenUrlCommand}"
                                 CommandParameter="{Binding RepositoryUrl}"
                                 Style="{StaticResource UtilityInlineLinkButtonStyle}"/>
@@ -157,6 +144,9 @@
                         <TextBlock Margin="0,6,0,10"
                                    Style="{StaticResource UtilitySectionBodyTextStyle}"
                                    Text="Open the local tweak log when you need recent commands, detections, or failure details."/>
+                        <TextBlock Text="{Binding LogFileSizeFormatted, StringFormat=Current file size: {0}}"
+                                   Margin="0,0,0,10"
+                                   Style="{StaticResource UtilitySubtleMonoTextStyle}"/>
                         <Button Content="Open tweak log"
                                 Command="{Binding OpenLogFileCommand}"
                                 Style="{StaticResource UtilityInlineLinkButtonStyle}"/>

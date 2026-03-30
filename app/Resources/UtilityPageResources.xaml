@@ -19,10 +19,42 @@
         <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
+    <Style x:Key="UtilitySubtleMonoTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="#5B5B5B"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
     <Style x:Key="UtilitySectionBorderStyle" TargetType="Border">
         <Setter Property="BorderBrush" Value="#171717"/>
         <Setter Property="BorderThickness" Value="0,1,0,0"/>
         <Setter Property="Padding" Value="0,14,0,0"/>
+    </Style>
+
+    <Style x:Key="UtilityPanelBorderStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="#171717"/>
+        <Setter Property="BorderThickness" Value="0,1,0,1"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <Style x:Key="UtilityMetricRowBorderStyle" TargetType="Border">
+        <Setter Property="BorderBrush" Value="#171717"/>
+        <Setter Property="BorderThickness" Value="0,1,0,0"/>
+    </Style>
+
+    <Style x:Key="UtilityMetricLabelTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="#727272"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <Style x:Key="UtilityMetricValueTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground" Value="#F0F0F0"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyMono}"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 
     <Style x:Key="UtilityInlineLinkButtonStyle" TargetType="Button">
