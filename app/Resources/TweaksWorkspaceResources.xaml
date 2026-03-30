@@ -494,8 +494,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="88"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="96"/>
+                    <ColumnDefinition Width="128"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
@@ -524,7 +524,7 @@
                                Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,18,16" VerticalAlignment="Top">
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,12,16" VerticalAlignment="Top">
                     <Border Tag="{Binding AppliedStatus}"
                             Style="{StaticResource WorkspaceStatusBadgeBorderStyle}"
                             ToolTip="{Binding StatusTooltip}">
@@ -559,8 +559,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="88"/>
-                    <ColumnDefinition Width="108"/>
+                    <ColumnDefinition Width="96"/>
+                    <ColumnDefinition Width="112"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource WorkspaceSelectionCheckBoxStyle}"/>
@@ -587,7 +587,7 @@
                                Visibility="{Binding DataContext.ShowContributorEvidenceUi, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolToVisibility}}"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,18,16" VerticalAlignment="Top">
+                <StackPanel Grid.Column="2" Orientation="Vertical" Margin="0,16,12,16" VerticalAlignment="Top">
                     <Border Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeBorderStyle}">
                         <TextBlock Text="{Binding StatusText}" Tag="{Binding AppliedStatus}" Style="{StaticResource WorkspaceStatusBadgeTextStyle}"/>
                     </Border>
