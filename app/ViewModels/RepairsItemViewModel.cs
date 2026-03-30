@@ -41,6 +41,14 @@ public sealed class RepairsItemViewModel : ViewModelBase, IDisposable
 
     public bool HasResearchGateMessage => _source.HasResearchGateMessage;
 
+    public string ImpactAreaLabel => _source.ImpactAreaLabel;
+
+    public bool HasCompactInfoLine => _source.HasCompactInfoLine;
+
+    public string CompactInfoLine => _source.CompactInfoLine;
+
+    public string InventoryFreshnessText => _source.InventoryFreshnessText;
+
     public string RowMetaText => _source.RowMetaText;
 
     public string RepairsRiskHint => _source.RepairsRiskHint;
