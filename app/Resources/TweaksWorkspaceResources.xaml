@@ -7,7 +7,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#7A7A7A"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="18,8,16,8"/>
+        <Setter Property="Padding" Value="16,7,14,7"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -38,7 +38,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#7A7A7A"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="18,7,16,7"/>
+        <Setter Property="Padding" Value="16,6,14,6"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -70,9 +70,9 @@
         <Setter Property="Background" Value="#1D1D1D"/>
         <Setter Property="BorderBrush" Value="#303030"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10,5"/>
-        <Setter Property="Margin" Value="0,0,10,10"/>
-        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Padding" Value="9,4"/>
+        <Setter Property="Margin" Value="0,0,8,8"/>
+        <Setter Property="FontSize" Value="10"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -276,15 +276,15 @@
     </Style>
 
     <Style x:Key="SectionEyebrowStyle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11"/>
-        <Setter Property="Foreground" Value="#696969"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="#747474"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
     </Style>
 
     <Style x:Key="ToolbarLabelStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Foreground" Value="#5E5E5E"/>
+        <Setter Property="Foreground" Value="#707070"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
     </Style>

@@ -840,8 +840,8 @@ public sealed class TweakItemViewModel : ViewModelBase
                 return string.Empty;
             }
 
-            var current = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : CurrentValue;
-            var target = string.IsNullOrWhiteSpace(TargetValue) ? "Optimized" : TargetValue;
+            var current = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : NormalizeDisplayValue(CurrentValue);
+            var target = string.IsNullOrWhiteSpace(TargetValue) ? "Optimized" : NormalizeDisplayValue(TargetValue);
             return $"{current} -> {target}";
         }
     }
@@ -850,8 +850,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         get
         {
-            var target = string.IsNullOrWhiteSpace(TargetValue) ? "Preferred state" : TargetValue;
-            var current = string.IsNullOrWhiteSpace(CurrentValue) ? string.Empty : CurrentValue;
+            var target = string.IsNullOrWhiteSpace(TargetValue) ? "Preferred state" : NormalizeDisplayValue(TargetValue);
+            var current = string.IsNullOrWhiteSpace(CurrentValue) ? string.Empty : NormalizeDisplayValue(CurrentValue);
 
             if (string.IsNullOrWhiteSpace(current) || current.Equals("Unknown", StringComparison.OrdinalIgnoreCase))
             {
@@ -865,6 +865,14 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             return $"Current: {current}   Preferred: {target}";
         }
+    }
+
+    private static string NormalizeDisplayValue(string value)
+    {
+        var normalized = value.Trim();
+        normalized = normalized.Replace("(0x", " (0x", StringComparison.Ordinal);
+        normalized = normalized.Replace("(0X", " (0X", StringComparison.Ordinal);
+        return normalized;
     }
 
     public string CompactInfoTooltip

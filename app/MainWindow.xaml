@@ -96,10 +96,10 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#6C6C6C"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="10,4,10,6"/>
+            <Setter Property="Padding" Value="8,2,8,4"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="11"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -109,7 +109,7 @@
                                               VerticalAlignment="Center"
                                               Margin="{TemplateBinding Padding}"/>
                             <Border x:Name="Accent"
-                                    Width="24"
+                                    Width="20"
                                     Height="2"
                                     Background="#C0392B"
                                     VerticalAlignment="Bottom"
@@ -135,10 +135,10 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="#151515">
+        <Grid Background="#151515">
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
-            <RowDefinition Height="42"/>
+            <RowDefinition Height="36"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -202,18 +202,18 @@
                 Background="#1B1B1B"
                 BorderBrush="#2A2A2A"
                 BorderThickness="0,0,0,1">
-            <Grid Margin="22,0,22,0">
+            <Grid Margin="18,0,18,0">
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center">
                     <Button Content="Configuration"
                             Command="{Binding ShowConfigurationCommand}"
                             Tag="{Binding IsConfigurationViewActive}"
-                            Margin="0,0,16,0"
+                            Margin="0,0,12,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="Repairs"
                             Command="{Binding ShowRepairsCommand}"
                             Tag="{Binding IsRepairsViewActive}"
-                            Margin="0,0,16,0"
+                            Margin="0,0,12,0"
                             Style="{StaticResource ShellTopTabButtonStyle}"/>
                     <Button Content="About"
                             Command="{Binding ShowAboutCommand}"
