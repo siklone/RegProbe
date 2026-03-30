@@ -43,6 +43,10 @@ public abstract class WorkspaceShellViewModelBase : ViewModelBase, IDisposable
 
     public string CurrentWorkspaceDescription => Workspace.CurrentWorkspaceDescription;
 
+    public bool IsSettingsWorkspaceSelected => Workspace.IsSettingsWorkspaceSelected;
+
+    public bool IsMaintenanceWorkspaceSelected => Workspace.IsMaintenanceWorkspaceSelected;
+
     public string CurrentWorkspaceModeNote => Workspace.CurrentWorkspaceModeNote;
 
     public string WorkspaceStatusHint => Workspace.WorkspaceStatusHint;

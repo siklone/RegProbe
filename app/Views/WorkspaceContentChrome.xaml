@@ -56,20 +56,58 @@
                               Background="Transparent"
                               Focusable="False"
                               VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
-                        <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
-                        <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
-                        <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource ChipStyle}">
-                            <TextBlock>
-                                <Run Text="Favorites"/>
-                                <Run Text=" "/>
-                                <Run Text="{Binding FavoritesCount, Mode=OneWay}"/>
-                            </TextBlock>
-                        </CheckBox>
-                        <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class A"/></CheckBox>
-                        <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class B"/></CheckBox>
-                    </StackPanel>
+                    <Grid>
+                        <Grid>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSettingsWorkspaceSelected}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Tag="Favorites" IsChecked="{Binding ShowFavoritesOnly}" Style="{StaticResource ChipStyle}">
+                                    <TextBlock>
+                                        <Run Text="Favorites"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding FavoritesCount, Mode=OneWay}"/>
+                                    </TextBlock>
+                                </CheckBox>
+                                <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
+                                <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
+                                <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
+                                <CheckBox Tag="ClassA" IsChecked="{Binding ShowClassA}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class A"/></CheckBox>
+                                <CheckBox Tag="ClassB" IsChecked="{Binding ShowClassB}" Style="{StaticResource ChipStyle}" Visibility="{Binding ShowContributorEvidenceUi, Converter={StaticResource BoolToVisibility}}"><TextBlock Text="Class B"/></CheckBox>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMaintenanceWorkspaceSelected}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Tag="Safe" IsChecked="{Binding ShowSafe}" Style="{StaticResource ChipStyle}"><TextBlock Text="Safe"/></CheckBox>
+                                <CheckBox Tag="Advanced" IsChecked="{Binding ShowAdvanced}" Style="{StaticResource ChipStyle}"><TextBlock Text="Advanced"/></CheckBox>
+                                <CheckBox Tag="Risky" IsChecked="{Binding ShowRisky}" Style="{StaticResource ChipStyle}"><TextBlock Text="Risky"/></CheckBox>
+                                <TextBlock Text="One-off actions"
+                                           Margin="8,0,0,0"
+                                           VerticalAlignment="Center"
+                                           Foreground="#525252"
+                                           FontSize="10"
+                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
                 </ScrollViewer>
             </Grid>
         </Border>
