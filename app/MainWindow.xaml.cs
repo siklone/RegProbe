@@ -21,13 +21,4 @@ public partial class MainWindow : Window
         DataContext = new MainViewModel();
         _hostController.Initialize(NotificationHost);
     }
-
-    #region Custom Title Bar Handlers
-    
-    private void TitleBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        _hostController.HandleTitleBarMouseLeftButtonDown(this, e);
-    }
-
-    #endregion
 }

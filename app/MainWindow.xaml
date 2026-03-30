@@ -169,8 +169,11 @@
                                FontSize="12"/>
                 </StackPanel>
 
-                <Grid Grid.Column="1"
-                      MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"/>
+                <Grid Grid.Column="1">
+                    <i:Interaction.Behaviors>
+                        <behaviors:WindowTitleBarDragBehavior/>
+                    </i:Interaction.Behaviors>
+                </Grid>
 
                 <StackPanel Grid.Column="2"
                             Orientation="Horizontal"

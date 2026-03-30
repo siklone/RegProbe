@@ -71,20 +71,6 @@ public sealed class MainWindowHostController
         }
     }
 
-    public void HandleTitleBarMouseLeftButtonDown(Window window, MouseButtonEventArgs e)
-    {
-        ArgumentNullException.ThrowIfNull(window);
-        ArgumentNullException.ThrowIfNull(e);
-
-        if (e.ClickCount == 2)
-        {
-            ToggleMaximizeRestore(window);
-            return;
-        }
-
-        window.DragMove();
-    }
-
     public void ToggleMaximizeRestore(Window window)
     {
         ArgumentNullException.ThrowIfNull(window);
