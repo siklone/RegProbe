@@ -1,0 +1,23 @@
+{
+  "generated_utc": "2026-03-31T11:05:00Z",
+  "source_follow_up": "registry-research-framework/audit/power-session-power-setting-profile-broadened-string-probe-20260331.json",
+  "probe_kind": "narrow-static-string-first",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "notes": [
+    "This quick follow-up narrows the binary set to the most plausible early-boot and power-service readers after the broader pass proved too slow to be useful.",
+    "The goal is to cheaply decide whether PowerSettingProfile belongs in an early-boot or service-host lane at all."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "needle": "PowerSettingProfile",
+      "family": "session-manager-power",
+      "binaries": [
+        "C:\\Windows\\System32\\smss.exe",
+        "C:\\Windows\\System32\\svchost.exe",
+        "C:\\Windows\\System32\\services.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ]
+    }
+  ]
+}

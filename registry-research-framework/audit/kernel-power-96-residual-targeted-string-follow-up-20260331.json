@@ -1,0 +1,62 @@
+{
+  "generated_utc": "2026-03-31T10:45:00Z",
+  "status": "residual-hold-tightened",
+  "scope": "kernel-power-96 residual no-hit follow-up",
+  "source_inputs": [
+    "registry-research-framework/audit/kernel-power-96-residual-value-exists-string-probe-20260330.json",
+    "research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md"
+  ],
+  "follow_up_candidates": [
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "previous_exact_no_hit_binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ],
+      "targeted_follow_up_binaries": [
+        "C:\\Windows\\System32\\smss.exe",
+        "C:\\Windows\\System32\\svchost.exe",
+        "C:\\Windows\\System32\\services.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ],
+      "result": "no-hit",
+      "summary_ref": "evidence/files/vm-tooling-staging/power-setting-profile-targeted-string-primary-20260331-133427/summary.json"
+    },
+    {
+      "candidate_id": "power.customize-during-setup",
+      "previous_exact_no_hit_binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ],
+      "targeted_follow_up_binaries": [
+        "C:\\Windows\\System32\\smss.exe",
+        "C:\\Windows\\System32\\svchost.exe",
+        "C:\\Windows\\System32\\services.exe",
+        "C:\\Windows\\System32\\powrprof.dll",
+        "C:\\Windows\\System32\\winload.exe"
+      ],
+      "result": "no-hit",
+      "summary_ref": "evidence/files/vm-tooling-staging/power-customize-during-setup-targeted-string-primary-20260331-133521/summary.json"
+    },
+    {
+      "candidate_id": "power.source-settings-version",
+      "previous_exact_no_hit_binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll"
+      ],
+      "targeted_follow_up_binaries": [
+        "C:\\Windows\\System32\\smss.exe",
+        "C:\\Windows\\System32\\svchost.exe",
+        "C:\\Windows\\System32\\services.exe",
+        "C:\\Windows\\System32\\powrprof.dll",
+        "C:\\Windows\\System32\\winload.exe"
+      ],
+      "result": "no-hit",
+      "summary_ref": "evidence/files/vm-tooling-staging/power-source-settings-version-targeted-string-primary-20260331-133521/summary.json"
+    }
+  ],
+  "decision": {
+    "queue_change": "deprioritize",
+    "reason": "All three residual values now stay exact no-hit across the first kernel-oriented pass and the narrower boot/service-host pass, so they are not the strongest next-lane spend on the current VMware baseline."
+  }
+}

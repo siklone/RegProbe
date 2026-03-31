@@ -1,0 +1,29 @@
+{
+  "generated_utc": "2026-03-31T10:40:00Z",
+  "source_follow_up": "research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md",
+  "probe_kind": "broadened-static-string-first",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "notes": [
+    "This follow-up revisits PowerSettingProfile with a wider binary set after the first residual string pass found no exact hit in ntoskrnl.exe or powrprof.dll.",
+    "The goal is to decide whether a new runtime lane is justified or whether the candidate should stay in residual hold."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "power.session-power-setting-profile",
+      "needle": "PowerSettingProfile",
+      "family": "session-manager-power",
+      "binaries": [
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "C:\\Windows\\System32\\powrprof.dll",
+        "C:\\Windows\\System32\\smss.exe",
+        "C:\\Windows\\System32\\KernelBase.dll",
+        "C:\\Windows\\System32\\advapi32.dll",
+        "C:\\Windows\\System32\\sechost.dll",
+        "C:\\Windows\\System32\\services.exe",
+        "C:\\Windows\\System32\\svchost.exe",
+        "C:\\Windows\\System32\\lsass.exe",
+        "C:\\Windows\\System32\\winload.exe"
+      ]
+    }
+  ]
+}
