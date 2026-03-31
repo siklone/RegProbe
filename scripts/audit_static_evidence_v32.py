@@ -218,6 +218,19 @@ def scan_ghidra_outputs() -> dict[str, Any]:
     ghidra_files = sorted(GHIDRA_ROOT.rglob("ghidra-matches.md"))
     pdb_missing: list[dict[str, Any]] = []
     bloat: list[dict[str, Any]] = []
+    branch_template_missing: list[dict[str, Any]] = []
+    required_fields = {
+        "function_confidence",
+        "register_focus",
+        "flag_focus",
+        "compare_condition",
+        "jump_condition",
+        "branch_effect",
+        "stack_summary",
+        "exception_review_required",
+        "heuristic_score",
+        "heuristic_reasons",
+    }
 
     for file_path in ghidra_files:
         text = read_text(file_path)
@@ -255,13 +268,29 @@ def scan_ghidra_outputs() -> dict[str, Any]:
                 }
             )
 
+        matches = evidence_payload.get("matches") or []
+        if matches:
+            first = matches[0] if isinstance(matches[0], dict) else {}
+            missing = sorted(field for field in required_fields if field not in first)
+            if missing:
+                branch_template_missing.append(
+                    {
+                        "artifact": repo_relative(file_path),
+                        "evidence": repo_relative(evidence_path) if evidence_path.exists() else None,
+                        "missing_fields": missing,
+                        "reason": "Committed evidence does not satisfy the bounded branch template.",
+                    }
+                )
+
     return {
         "generated_utc": now_utc(),
         "ghidra_artifact_count": len(ghidra_files),
         "pdb_missing_count": len(pdb_missing),
         "ghidra_bloat_count": len(bloat),
+        "branch_template_missing_count": len(branch_template_missing),
         "pdb_missing": pdb_missing,
         "ghidra_bloat": bloat,
+        "branch_template_missing": branch_template_missing,
     }
 
 
@@ -463,6 +492,7 @@ def render_markdown_summary(
         f"- Ghidra artifacts scanned: {ghidra_scan['ghidra_artifact_count']}",
         f"- PDB-missing artifacts: {ghidra_scan['pdb_missing_count']}",
         f"- Ghidra bloat artifacts: {ghidra_scan['ghidra_bloat_count']}",
+        f"- Branch-template-missing artifacts: {ghidra_scan['branch_template_missing_count']}",
         f"- URL references: {link_audit['url_reference_count']}",
         f"- Unique URLs: {link_audit['unique_url_count']}",
         f"- Broken URLs: {link_audit['broken_count']}",
@@ -517,6 +547,7 @@ def main() -> int:
         "ghidra_artifact_count": ghidra_scan["ghidra_artifact_count"],
         "pdb_missing_count": ghidra_scan["pdb_missing_count"],
         "ghidra_bloat_count": ghidra_scan["ghidra_bloat_count"],
+        "branch_template_missing_count": ghidra_scan["branch_template_missing_count"],
         "url_reference_count": link_audit["url_reference_count"],
         "unique_url_count": link_audit["unique_url_count"],
         "broken_url_count": link_audit["broken_count"],
@@ -527,6 +558,7 @@ def main() -> int:
     write_json(AUDIT_ROOT / f"static-evidence-v32-scan-{args.stamp}.json", summary)
     write_json(AUDIT_ROOT / f"static-evidence-v32-pdb-missing-{args.stamp}.json", {"entries": ghidra_scan["pdb_missing"]})
     write_json(AUDIT_ROOT / f"static-evidence-v32-ghidra-bloat-{args.stamp}.json", {"entries": ghidra_scan["ghidra_bloat"]})
+    write_json(AUDIT_ROOT / f"static-evidence-v32-branch-template-missing-{args.stamp}.json", {"entries": ghidra_scan["branch_template_missing"]})
     write_json(AUDIT_ROOT / f"static-evidence-v32-link-audit-{args.stamp}.json", link_audit)
     write_json(AUDIT_ROOT / f"static-evidence-v32-link-broken-{args.stamp}.json", {"entries": link_audit["link_broken"]})
     write_json(AUDIT_ROOT / f"static-evidence-v32-link-context-review-{args.stamp}.json", {"entries": link_audit["link_context_review"]})

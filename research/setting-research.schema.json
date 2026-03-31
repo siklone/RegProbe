@@ -189,6 +189,23 @@
             "mixed"
           ]
         },
+        "policy_or_intent_only": {
+          "type": "boolean"
+        },
+        "docs_do_not_prove_binary_semantics": {
+          "type": "boolean"
+        },
+        "binary_semantics_source": {
+          "type": "string",
+          "enum": [
+            "none",
+            "static-analysis",
+            "runtime-etw",
+            "runtime-procmon",
+            "mixed",
+            "manual-review"
+          ]
+        },
         "primary_contract": {
           "type": "string"
         },
@@ -207,8 +224,49 @@
         "condition": {
           "type": "string"
         },
+        "register_focus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "flag_focus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compare_condition": {
+          "type": "string"
+        },
+        "jump_condition": {
+          "type": "string"
+        },
         "value_map": {
           "type": "string"
+        },
+        "branch_effect": {
+          "type": "string"
+        },
+        "stack_summary": {
+          "type": "string"
+        },
+        "exception_review_required": {
+          "type": "boolean"
+        },
+        "exception_reason": {
+          "type": "string"
+        },
+        "heuristic_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "heuristic_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "context_before": {
           "type": "array",
@@ -273,10 +331,35 @@
             "null"
           ]
         },
+        "function_confidence": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "symbolized_branch",
+            "string_only_review",
+            null
+          ]
+        },
         "branch_analysis": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/branchAnalysis"
+          }
+        },
+        "heuristic_score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "heuristic_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "effect_summary": {
@@ -324,6 +407,52 @@
             "null"
           ]
         },
+        "ghidra_function": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ida_function": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ghidra_function_confidence": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "symbolized_branch",
+            "string_only_review",
+            null
+          ]
+        },
+        "ida_function_confidence": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "symbolized_branch",
+            "string_only_review",
+            null
+          ]
+        },
+        "ghidra_value_map": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ida_value_map": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "status": {
           "type": "string",
           "enum": [
@@ -332,6 +461,12 @@
             "insufficient",
             "blocked"
           ]
+        },
+        "verdict": {
+          "type": "string"
+        },
+        "parity_summary": {
+          "type": "string"
         },
         "confidence": {
           "type": [

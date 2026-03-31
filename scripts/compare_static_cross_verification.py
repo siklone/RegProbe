@@ -18,11 +18,42 @@ def first_match(payload: dict[str, Any]) -> dict[str, Any] | None:
     return None
 
 
+def norm_text(value: Any) -> str:
+    return str(value or "").strip().lower()
+
+
+def branch_signature(match: dict[str, Any]) -> dict[str, str]:
+    return {
+        "compare_condition": norm_text(match.get("compare_condition")),
+        "jump_condition": norm_text(match.get("jump_condition")),
+        "branch_effect": norm_text(match.get("branch_effect")),
+        "value_map": norm_text(match.get("value_map")),
+    }
+
+
+def build_parity_summary(
+    ghidra_function: str,
+    ida_function: str,
+    branch_status: str,
+    ghidra_value_map: str,
+    ida_value_map: str,
+    verdict: str,
+) -> str:
+    return (
+        f"Ghidra function={ghidra_function or '<none>'}; "
+        f"IDA function={ida_function or '<none>'}; "
+        f"branch={branch_status}; "
+        f"value_map={ghidra_value_map or '<none>'} vs {ida_value_map or '<none>'}; "
+        f"verdict={verdict}."
+    )
+
+
 def summarize_status(ghidra: dict[str, Any], ida: dict[str, Any]) -> dict[str, Any]:
     g = first_match(ghidra)
     i = first_match(ida)
 
     if not g or not i:
+        verdict = "review-only"
         return {
             "executed": bool(ghidra) and bool(ida),
             "functions_match": None,
@@ -30,15 +61,39 @@ def summarize_status(ghidra: dict[str, Any], ida: dict[str, Any]) -> dict[str, A
             "status": "insufficient",
             "confidence": "low",
             "cross_conflict": False,
+            "ghidra_function": g.get("function_name") if g else None,
+            "ida_function": i.get("function_name") if i else None,
+            "ghidra_function_confidence": g.get("function_confidence") if g else None,
+            "ida_function_confidence": i.get("function_confidence") if i else None,
+            "ghidra_value_map": g.get("value_map") if g else None,
+            "ida_value_map": i.get("value_map") if i else None,
+            "verdict": verdict,
+            "parity_summary": build_parity_summary(
+                ghidra_function=str(g.get("function_name") or "") if g else "",
+                ida_function=str(i.get("function_name") or "") if i else "",
+                branch_status="insufficient",
+                ghidra_value_map=str(g.get("value_map") or "") if g else "",
+                ida_value_map=str(i.get("value_map") or "") if i else "",
+                verdict=verdict,
+            ),
             "notes": "At least one tool did not return a comparable bounded branch match.",
         }
 
-    functions_match = (g.get("function_name") or "").lower() == (i.get("function_name") or "").lower()
-    ghidra_branch = "\n".join(g.get("branch_snippet") or [])
-    ida_branch = "\n".join(i.get("branch_snippet") or [])
-    branches_match = bool(ghidra_branch and ida_branch and ghidra_branch.lower() == ida_branch.lower())
+    ghidra_function = str(g.get("function_name") or "")
+    ida_function = str(i.get("function_name") or "")
+    ghidra_confidence = str(g.get("function_confidence") or "")
+    ida_confidence = str(i.get("function_confidence") or "")
+    ghidra_value_map = str(g.get("value_map") or "")
+    ida_value_map = str(i.get("value_map") or "")
+    functions_match = norm_text(ghidra_function) == norm_text(ida_function)
+    ghidra_branch = branch_signature(g)
+    ida_branch = branch_signature(i)
+    branches_match = ghidra_branch == ida_branch and bool(ghidra_branch["compare_condition"] or ghidra_branch["jump_condition"])
+    symbolized_both = ghidra_confidence == "symbolized_branch" and ida_confidence == "symbolized_branch"
+    either_unclear = bool(g.get("unclear")) or bool(i.get("unclear"))
 
-    if functions_match and branches_match:
+    if symbolized_both and functions_match and branches_match and not either_unclear:
+        verdict = "cross-verified"
         return {
             "executed": True,
             "functions_match": True,
@@ -46,10 +101,26 @@ def summarize_status(ghidra: dict[str, Any], ida: dict[str, Any]) -> dict[str, A
             "status": "match",
             "confidence": "high",
             "cross_conflict": False,
-            "notes": "Ghidra and IDA reported the same first function and bounded branch snippet.",
+            "ghidra_function": ghidra_function,
+            "ida_function": ida_function,
+            "ghidra_function_confidence": ghidra_confidence,
+            "ida_function_confidence": ida_confidence,
+            "ghidra_value_map": ghidra_value_map,
+            "ida_value_map": ida_value_map,
+            "verdict": verdict,
+            "parity_summary": build_parity_summary(
+                ghidra_function=ghidra_function,
+                ida_function=ida_function,
+                branch_status="match",
+                ghidra_value_map=ghidra_value_map,
+                ida_value_map=ida_value_map,
+                verdict=verdict,
+            ),
+            "notes": "Ghidra and IDA reported the same function, bounded branch template, and value map.",
         }
 
-    if functions_match is False or branches_match is False:
+    if symbolized_both and (functions_match is False or branches_match is False):
+        verdict = "manual-review-required"
         return {
             "executed": True,
             "functions_match": functions_match,
@@ -57,9 +128,25 @@ def summarize_status(ghidra: dict[str, Any], ida: dict[str, Any]) -> dict[str, A
             "status": "conflict",
             "confidence": "low",
             "cross_conflict": True,
-            "notes": "The tools disagreed on either the function identity or the bounded branch snippet.",
+            "ghidra_function": ghidra_function,
+            "ida_function": ida_function,
+            "ghidra_function_confidence": ghidra_confidence,
+            "ida_function_confidence": ida_confidence,
+            "ghidra_value_map": ghidra_value_map,
+            "ida_value_map": ida_value_map,
+            "verdict": verdict,
+            "parity_summary": build_parity_summary(
+                ghidra_function=ghidra_function,
+                ida_function=ida_function,
+                branch_status="conflict",
+                ghidra_value_map=ghidra_value_map,
+                ida_value_map=ida_value_map,
+                verdict=verdict,
+            ),
+            "notes": "The tools disagreed on function identity, branch template, or value mapping.",
         }
 
+    verdict = "review-only"
     return {
         "executed": True,
         "functions_match": functions_match,
@@ -67,7 +154,22 @@ def summarize_status(ghidra: dict[str, Any], ida: dict[str, Any]) -> dict[str, A
         "status": "insufficient",
         "confidence": "low",
         "cross_conflict": False,
-        "notes": "The tools ran, but one or both outputs were still unclear.",
+        "ghidra_function": ghidra_function,
+        "ida_function": ida_function,
+        "ghidra_function_confidence": ghidra_confidence,
+        "ida_function_confidence": ida_confidence,
+        "ghidra_value_map": ghidra_value_map,
+        "ida_value_map": ida_value_map,
+        "verdict": verdict,
+        "parity_summary": build_parity_summary(
+            ghidra_function=ghidra_function,
+            ida_function=ida_function,
+            branch_status="insufficient",
+            ghidra_value_map=ghidra_value_map,
+            ida_value_map=ida_value_map,
+            verdict=verdict,
+        ),
+        "notes": "The tools ran, but one or both outputs are still review-only or lack a symbolized branch mapping.",
     }
 
 

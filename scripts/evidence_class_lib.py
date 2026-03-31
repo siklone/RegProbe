@@ -268,6 +268,9 @@ def static_tool_counts_as_evidence(payload: dict[str, Any]) -> bool:
         return False
     if payload.get("pdb_loaded") is False:
         return False
+    function_confidence = str(payload.get("function_confidence") or "").strip().lower()
+    if function_confidence and function_confidence != "symbolized_branch":
+        return False
     return True
 
 

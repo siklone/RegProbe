@@ -217,13 +217,23 @@ function Find-LicenseArtifacts {
 
     $root = Split-Path -Parent $IdaExePath
     $paths = @(
+        (Join-Path $root 'ida.hexlic'),
+        (Join-Path $root '*.hexlic'),
         (Join-Path $root 'ida.key'),
+        (Join-Path $root 'license\*.hexlic'),
         (Join-Path $root 'license\ida.key'),
+        (Join-Path $root 'cfg\*.hexlic'),
         (Join-Path $root 'cfg\ida.reg'),
-        (Join-Path $root 'cfg\ida.key')
+        (Join-Path $root 'cfg\ida.key'),
+        (Join-Path $env:APPDATA 'Hex-Rays\IDA Pro\*.hexlic'),
+        (Join-Path $env:APPDATA 'Hex-Rays\IDA Pro\ida.key')
     )
 
-    return @($paths | Where-Object { Test-Path $_ })
+    $matches = foreach ($path in $paths) {
+        Get-ChildItem -Path $path -Force -ErrorAction SilentlyContinue
+    }
+
+    return @($matches | Select-Object -ExpandProperty FullName -Unique)
 }
 
 $idaInfo = Find-GuestIda

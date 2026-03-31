@@ -1,0 +1,182 @@
+{
+  "binary": "kernel32.dll",
+  "binary_path": "C:\\Windows\\System32\\kernel32.dll",
+  "label": "kernel32-smoke",
+  "patterns_scanned": {
+    "win32_loader": [
+      "GetProcAddress",
+      "GetModuleHandleA",
+      "GetModuleHandleW",
+      "LoadLibraryA",
+      "LoadLibraryW"
+    ],
+    "nt_loader": [
+      "LdrGetProcedureAddress",
+      "LdrLoadDll",
+      "RtlInitUnicodeString"
+    ],
+    "kernel_resolution": [
+      "MmGetSystemRoutineAddress",
+      "ZwQuerySystemInformation",
+      "ZwSetValueKey"
+    ]
+  },
+  "summary": {
+    "dynamic_resolution_signal": true,
+    "unique_pattern_count": 9,
+    "unique_category_count": 3,
+    "heuristic_score": 100,
+    "verdict": "signal-present"
+  },
+  "categories": [
+    {
+      "category": "win32_loader",
+      "matched_patterns": [
+        "GetProcAddress",
+        "GetModuleHandleA",
+        "GetModuleHandleW",
+        "LoadLibraryA",
+        "LoadLibraryW"
+      ],
+      "hit_count": 11
+    },
+    {
+      "category": "nt_loader",
+      "matched_patterns": [
+        "LdrGetProcedureAddress",
+        "LdrLoadDll",
+        "RtlInitUnicodeString"
+      ],
+      "hit_count": 7
+    },
+    {
+      "category": "kernel_resolution",
+      "matched_patterns": [
+        "ZwQuerySystemInformation"
+      ],
+      "hit_count": 2
+    }
+  ],
+  "hits": [
+    {
+      "category": "win32_loader",
+      "pattern": "GetProcAddress",
+      "encoding": "ascii",
+      "offset": 710295
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "GetProcAddress",
+      "encoding": "ascii",
+      "offset": 753404
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "GetProcAddress",
+      "encoding": "ascii",
+      "offset": 761862
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "GetModuleHandleA",
+      "encoding": "ascii",
+      "offset": 708528
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "GetModuleHandleA",
+      "encoding": "ascii",
+      "offset": 762214
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "GetModuleHandleW",
+      "encoding": "ascii",
+      "offset": 708583
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "GetModuleHandleW",
+      "encoding": "ascii",
+      "offset": 762380
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "LoadLibraryA",
+      "encoding": "ascii",
+      "offset": 717522
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "LoadLibraryA",
+      "encoding": "ascii",
+      "offset": 762324
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "LoadLibraryW",
+      "encoding": "ascii",
+      "offset": 717565
+    },
+    {
+      "category": "win32_loader",
+      "pattern": "LoadLibraryW",
+      "encoding": "ascii",
+      "offset": 762066
+    },
+    {
+      "category": "nt_loader",
+      "pattern": "LdrGetProcedureAddress",
+      "encoding": "ascii",
+      "offset": 749574
+    },
+    {
+      "category": "nt_loader",
+      "pattern": "LdrLoadDll",
+      "encoding": "ascii",
+      "offset": 749850
+    },
+    {
+      "category": "nt_loader",
+      "pattern": "RtlInitUnicodeString",
+      "encoding": "ascii",
+      "offset": 588312
+    },
+    {
+      "category": "nt_loader",
+      "pattern": "RtlInitUnicodeString",
+      "encoding": "ascii",
+      "offset": 596016
+    },
+    {
+      "category": "nt_loader",
+      "pattern": "RtlInitUnicodeString",
+      "encoding": "ascii",
+      "offset": 615690
+    },
+    {
+      "category": "nt_loader",
+      "pattern": "RtlInitUnicodeString",
+      "encoding": "ascii",
+      "offset": 748370
+    },
+    {
+      "category": "nt_loader",
+      "pattern": "RtlInitUnicodeString",
+      "encoding": "ascii",
+      "offset": 749920
+    },
+    {
+      "category": "kernel_resolution",
+      "pattern": "ZwQuerySystemInformation",
+      "encoding": "ascii",
+      "offset": 627448
+    },
+    {
+      "category": "kernel_resolution",
+      "pattern": "ZwQuerySystemInformation",
+      "encoding": "ascii",
+      "offset": 779326
+    }
+  ]
+}

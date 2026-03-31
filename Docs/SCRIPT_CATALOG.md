@@ -150,6 +150,8 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
   current path-aware residual-candidate pair
 - `registry-research-framework/tools/run-executive-uuid-sequence-number-lightweight-runtime-followup.ps1`
   current UUID-specific follow-up lane
+- `registry-research-framework/tools/run-import-dynamic-resolution-probe.ps1`
+  static sidecar for loader-style binaries where the normal import table is not enough
 
 ### `Historical / Repro`
 
