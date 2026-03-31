@@ -10,19 +10,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Validated | 245 |
 | Deprecated | 54 |
 | Review required | 0 |
-| Records with V3.1 evidence roots | 22 |
+| Records with evidence roots | 24 |
 | Records with evidence | 310 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 248 |
-| Class B | 4 |
-| Class C | 4 |
+| Class A | 249 |
+| Class B | 7 |
 | Class E | 54 |
 
 ## Record index
 
-| Record | Status | Class | Source file | V3.1 root | Source SHA256 | Proof SHA256 | Evidence |
+| Record | Status | Class | Source file | Evidence root | Source SHA256 | Proof SHA256 | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `audio.disable-spatial-audio` | deprecated | Class E | `research/records/audio.disable-spatial-audio.review.json` | - | `f2e0c7a0dc6b9a2576946aeb51b15a0e3183b068eb7f7d057b8d25a9cd70e4d1` | `4040aa7349c6686133cd32ff685d01521bd1e75ea6e571c1a07fdb317ed267bf` | 3 |
 | `audio.disable-system-sounds` | deprecated | Class E | `research/records/audio.disable-system-sounds.review.json` | - | `5493c2bb7b0adfdeac7160592423740c290219e63d9183e6f857bd2874316b6f` | `06a1e4b4952f98195f4caec1090ccdc61370bfe21708fdf3fba46e40f294fe2b` | 2 |
@@ -78,17 +77,17 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `996a45b975762ceb94c99cffc36f106f56ed3e287366be3425ee9fdb79faa65f` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `453abb60e2f46d55c680a76faab4eca1f11d38d48ab38ae964a4f134352a7645` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `b103dfb5b2b112ed75d28ef9daebeaf2bb8fd9e0d1e5bf8796dd3eb4e29ea013` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
-| `policy.system.enable-virtualization` | draft | Class C | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `b211df1f3fac3223a2ab1bc65b0b78f3cbbc3311fbb0fe18a9398752bdfa6bfb` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 6 |
+| `policy.system.enable-virtualization` | draft | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `b211df1f3fac3223a2ab1bc65b0b78f3cbbc3311fbb0fe18a9398752bdfa6bfb` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 6 |
 | `power.control.class1-initial-unpark-count` | draft | Class A | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `9d21d604c1722a80af4c771d8dfa43b5397019b97dc9ad10fba7364450f26ab2` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 7 |
-| `power.control.hiber-file-size-percent` | draft | Class C | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `1bd5c31b152dec2c8edffdfc9ac45cd2123d41647a562df4f940a54b0c159ab3` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 4 |
+| `power.control.hiber-file-size-percent` | draft | Class B | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `1bd5c31b152dec2c8edffdfc9ac45cd2123d41647a562df4f940a54b0c159ab3` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 4 |
 | `power.control.hibernate-enabled` | draft | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `6c21df45712ef4b051c4ef9ccdf72ca465dcfbec51781ed1c79e8b0234de2a4f` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 5 |
 | `power.control.hibernate-enabled-default` | draft | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `e4a43cf36d0469a04b74ffda95a33fa9eefd5e6265631d89e68d04bb579cca07` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 8 |
 | `power.control.lid-reliability-state` | draft | Class A | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `de78b98f5ddb7704eef29828abb84265225420b4785d1a85f15b179cc2dea257` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 5 |
 | `power.control.mf-buffering-threshold` | draft | Class A | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `1269f0a19b1472b29cd03a650d32ae4225e2f02f1eb4b6efa9f86467ff539549` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 7 |
 | `power.control.perf-calculate-actual-utilization` | draft | Class A | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `fd43a45e38a2817c49f08897abb5a0fc61e91ad377f41225c60ef5c4062ce3c6` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 7 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | draft | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `b638842f7751a8955e18eb3b71db4638f83313cdf562ebc430b4656cbd23a8c9` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 7 |
-| `system.executive-uuid-sequence-number` | draft | Class C | `research/records/system.executive-uuid-sequence-number.json` | [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number) | `42d17a9bcb4d75922e4f50353376a9e76910197017f254d7e91df697d83d8641` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 7 |
-| `system.io-allow-remote-dasd` | draft | Class C | `research/records/system.io-allow-remote-dasd.json` | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) | `55c461824f2e3e815866bb7d2a1686e01ec11e26a7e59d5b15239e7f54f742fe` | `a201a8c1d34674e2acf76d44363529c1f88c3d060989c54e093fe2452de97bc8` | 4 |
+| `system.executive-uuid-sequence-number` | draft | Class B | `research/records/system.executive-uuid-sequence-number.json` | [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number) | `42d17a9bcb4d75922e4f50353376a9e76910197017f254d7e91df697d83d8641` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 7 |
+| `system.io-allow-remote-dasd` | draft | Class B | `research/records/system.io-allow-remote-dasd.json` | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) | `55c461824f2e3e815866bb7d2a1686e01ec11e26a7e59d5b15239e7f54f742fe` | `a201a8c1d34674e2acf76d44363529c1f88c3d060989c54e093fe2452de97bc8` | 4 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `6ce0e5db2707ec9cbf72aa19ccf4a8e60cbfe2e7be762f6f1331aadfc5d5e150` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `4893acbb2b403e5e4019cb4a2a6b24eb9df08c9ca701abe536ee94bd2132f1f9` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
 | `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `bfa0e4a8a76f638ce108c59b6996e8effa2401ed3352af8d6a292f05a5535409` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 3 |
@@ -158,9 +157,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `6a731a6f1daaf7e8c60484c08470bf9b797792229e0db6efb7b289236f593b5f` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 3 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `d99a4a196bb7ade9872b432e8823c3a2e8b36f7dc3f2a337ccb8afc0870dd615` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `41ec2d697f93f72a365362b9a27540a2dd5099759fa6c883cc8ea3b760089c93` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
-| `power.disable-cpu-idle-states` | validated | Class B | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `b14f18b1518e357f58cc9d9f7fec4d3f189d322db7e792fac16cf79ab5dec68e` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 12 |
+| `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `b14f18b1518e357f58cc9d9f7fec4d3f189d322db7e792fac16cf79ab5dec68e` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 12 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `fe497a2a85b6de48d9a8cda72987ff783682f1ae3de3b475a9e391a3ff825040` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 5 |
-| `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | - | `084ee7e96b498345f57f1c5614d1c3a23f9a3ffe8889d2901866f201aa69845b` | `44e29d37bb9e8b44313f77307041293d030872438f451cb698ed815556190ae0` | 3 |
+| `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `ba01f6f76a3acde404bfbaf7f4783cb3559b5a100b51d0dc8b8708a118ce4fa9` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `7e90c125281f67c1372246356f80900ddc6aa7f81b2ad306ce8dea935c0be2ca` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
 | `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `5b90c707b7cb5d2d167b6cf467366d60f9dc7a048fa14eecddffe9be8f0f0119` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 3 |
 | `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `994eef363b3849e1a13b44d3d75708595ab7a62a84a676ed35282449daa45728` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
@@ -300,7 +299,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | - | `f3bfccd8877ab26805c35c70e87fbc6419285fcdc31d00805e6bf2c4b5df7cb1` | `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0` | 4 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | - | `ae244ae0cbddc7b023929d9c607d4654e11b71a0bcc68f46ff2d8324efdd836c` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | - | `a2ba63d6aa4cc3c3a7dc35eff9ea3e94f9502dfb91118af6df9e38bf905a39c3` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
-| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | - | `4c5ca1479d735284836784cfb9d4cc8eaad43d5ddd0f0beafa9f6e61f2c0b799` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 7 |
+| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `10333e928c0d9952717ec7b8679df6d4050c2920d87e0fb23893253c92edca58` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 7 |
 | `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) | `0ad8d154dffb4a24c3b9b706d6d65d5494b47e07d7ff60ffca32c2b132c2b269` | `4889e542a1c51d2109d508afc7c7e6b70722135c302951dc96e7cc5cea498d37` | 6 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `89eef18cd06a1a5cc70abf1aba238f53b44093097fb0d019481c5cc111b198d9` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 2 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | - | `3d60bf3412777c1b6d8dfd7c6901fd86b3bb969012192cae477f70daf1a2060f` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 2 |
@@ -1844,9 +1843,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `policy.system.enable-virtualization`
 
 - Status: `draft`
-- Evidence class: `Class C`
+- Evidence class: `Class B`
 - Source file: `research/records/policy.system.enable-virtualization.json`
-- V3.1 evidence root: [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization)
+- Evidence root: [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization)
 - Source SHA256: `b211df1f3fac3223a2ab1bc65b0b78f3cbbc3311fbb0fe18a9398752bdfa6bfb`
 - Proof SHA256: `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047`
 
@@ -1887,7 +1886,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.class1-initial-unpark-count.json`
-- V3.1 evidence root: [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count)
+- Evidence root: [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count)
 - Source SHA256: `9d21d604c1722a80af4c771d8dfa43b5397019b97dc9ad10fba7364450f26ab2`
 - Proof SHA256: `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910`
 
@@ -1918,9 +1917,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.hiber-file-size-percent`
 
 - Status: `draft`
-- Evidence class: `Class C`
+- Evidence class: `Class B`
 - Source file: `research/records/power.control.hiber-file-size-percent.json`
-- V3.1 evidence root: [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent)
+- Evidence root: [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent)
 - Source SHA256: `1bd5c31b152dec2c8edffdfc9ac45cd2123d41647a562df4f940a54b0c159ab3`
 - Proof SHA256: `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4`
 
@@ -1950,7 +1949,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.hibernate-enabled.json`
-- V3.1 evidence root: [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled)
+- Evidence root: [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled)
 - Source SHA256: `6c21df45712ef4b051c4ef9ccdf72ca465dcfbec51781ed1c79e8b0234de2a4f`
 - Proof SHA256: `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b`
 
@@ -1990,7 +1989,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.hibernate-enabled-default.json`
-- V3.1 evidence root: [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default)
+- Evidence root: [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default)
 - Source SHA256: `e4a43cf36d0469a04b74ffda95a33fa9eefd5e6265631d89e68d04bb579cca07`
 - Proof SHA256: `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916`
 
@@ -2033,7 +2032,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.lid-reliability-state.json`
-- V3.1 evidence root: [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state)
+- Evidence root: [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state)
 - Source SHA256: `de78b98f5ddb7704eef29828abb84265225420b4785d1a85f15b179cc2dea257`
 - Proof SHA256: `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e`
 
@@ -2073,7 +2072,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.mf-buffering-threshold.json`
-- V3.1 evidence root: [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold)
+- Evidence root: [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold)
 - Source SHA256: `1269f0a19b1472b29cd03a650d32ae4225e2f02f1eb4b6efa9f86467ff539549`
 - Proof SHA256: `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2`
 
@@ -2115,7 +2114,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.perf-calculate-actual-utilization.json`
-- V3.1 evidence root: [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization)
+- Evidence root: [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization)
 - Source SHA256: `fd43a45e38a2817c49f08897abb5a0fc61e91ad377f41225c60ef5c4062ce3c6`
 - Proof SHA256: `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572`
 
@@ -2148,7 +2147,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.timer-rebase-threshold-on-drips-exit.json`
-- V3.1 evidence root: [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit)
+- Evidence root: [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit)
 - Source SHA256: `b638842f7751a8955e18eb3b71db4638f83313cdf562ebc430b4656cbd23a8c9`
 - Proof SHA256: `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095`
 
@@ -2188,9 +2187,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.executive-uuid-sequence-number`
 
 - Status: `draft`
-- Evidence class: `Class C`
+- Evidence class: `Class B`
 - Source file: `research/records/system.executive-uuid-sequence-number.json`
-- V3.1 evidence root: [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number)
+- Evidence root: [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number)
 - Source SHA256: `42d17a9bcb4d75922e4f50353376a9e76910197017f254d7e91df697d83d8641`
 - Proof SHA256: `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef`
 
@@ -2230,9 +2229,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.io-allow-remote-dasd`
 
 - Status: `draft`
-- Evidence class: `Class C`
+- Evidence class: `Class B`
 - Source file: `research/records/system.io-allow-remote-dasd.json`
-- V3.1 evidence root: [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd)
+- Evidence root: [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd)
 - Source SHA256: `55c461824f2e3e815866bb7d2a1686e01ec11e26a7e59d5b15239e7f54f742fe`
 - Proof SHA256: `a201a8c1d34674e2acf76d44363529c1f88c3d060989c54e093fe2452de97bc8`
 
@@ -2300,7 +2299,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-disconnected-devices.review.json`
-- V3.1 evidence root: [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices)
+- Evidence root: [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices)
 - Source SHA256: `4893acbb2b403e5e4019cb4a2a6b24eb9df08c9ca701abe536ee94bd2132f1f9`
 - Proof SHA256: `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa`
 
@@ -2350,7 +2349,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-hidden-devices.review.json`
-- V3.1 evidence root: [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices)
+- Evidence root: [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices)
 - Source SHA256: `bfa0e4a8a76f638ce108c59b6996e8effa2401ed3352af8d6a292f05a5535409`
 - Proof SHA256: `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379`
 
@@ -2758,7 +2757,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.enable-explorer-compact-mode.review.json`
-- V3.1 evidence root: [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode)
+- Evidence root: [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode)
 - Source SHA256: `5783d727787935d7193595e7c49a48ff2d7d672f3181dbbb774cefba8c84765b`
 - Proof SHA256: `42ebb8c1be1c901d81e1930503d81762c5df0c31723f8b0de752f12282e0f9cf`
 
@@ -4169,7 +4168,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/performance.disable-taskbar-animations.review.json`
-- V3.1 evidence root: [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations)
+- Evidence root: [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations)
 - Source SHA256: `ff16bbf48557f19afff02da0cc9c2806983dd6d2b5c59d4142cab2eec94df917`
 - Proof SHA256: `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358`
 
@@ -4297,9 +4296,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.disable-cpu-idle-states`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/power.disable-cpu-idle-states.json`
-- V3.1 evidence root: [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states)
+- Evidence root: [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states)
 - Source SHA256: `b14f18b1518e357f58cc9d9f7fec4d3f189d322db7e792fac16cf79ab5dec68e`
 - Proof SHA256: `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b`
 
@@ -4367,10 +4366,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-network-power-saving.policy.review.json`
-- Source SHA256: `084ee7e96b498345f57f1c5614d1c3a23f9a3ffe8889d2901866f201aa69845b`
-- Proof SHA256: `44e29d37bb9e8b44313f77307041293d030872438f451cb698ed815556190ae0`
+- Evidence root: [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy)
+- Source SHA256: `ba01f6f76a3acde404bfbaf7f4783cb3559b5a100b51d0dc8b8708a118ce4fa9`
+- Proof SHA256: `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a`
 
-**Summary:** Controls the official TCP/IP offload and MMCSS responsiveness values only. The opaque NetworkThrottlingIndex value remains in the deprecated parent audit trail.
+**Summary:** This child record keeps only the documented DisableTaskOffload and SystemResponsiveness values. SystemResponsiveness is supported here for path plus rounding/clamping behavior; the opaque NetworkThrottlingIndex write remains outside this child in the deprecated parent audit trail.
 
 **Evidence**
 
@@ -4384,9 +4384,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading) |
-| Exact quote / path | HKLM/System/CurrentControlSet/Services/TCPIP/Parameters/DisableTaskOffload |
-| Notes | The child record also relies on Microsoft's MMCSS documentation for SystemResponsiveness. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail. |
+| Source | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) |
+| Exact quote / path | HKLM/SOFTWARE/Microsoft/Windows NT/CurrentVersion/Multimedia/SystemProfile/SystemResponsiveness; values not divisible by 10 are rounded down to the nearest multiple of 10. |
+| Notes | DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail. |
 
 ---
 
@@ -4599,7 +4599,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/power.session-watchdog-timeouts.json`
-- V3.1 evidence root: [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts)
+- Evidence root: [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts)
 - Source SHA256: `9958eee236c9d4b77929c06b5064d375eedb82dd5c2dcc774afd838333074ec5`
 - Proof SHA256: `54acbd0c7bf4bde41e8f225e89f53006d534f18130b41f04839abc25ae7b385b`
 
@@ -7542,7 +7542,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-jpeg-reduction.review.json`
-- V3.1 evidence root: [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction)
+- Evidence root: [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction)
 - Source SHA256: `b1ee56e74878dffbf59de9e415f8713d96d9184ddefb86c6a9f586dfe91b7620`
 - Proof SHA256: `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69`
 
@@ -7725,7 +7725,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-startup-delay.review.json`
-- V3.1 evidence root: [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay)
+- Evidence root: [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay)
 - Source SHA256: `16cf8e79e0de5b96cdff282f3b155ec38d4508fcbbdfcb57bdc094c0a6e6d3de`
 - Proof SHA256: `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6`
 
@@ -7978,7 +7978,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.executive-additional-worker-threads.json`
-- V3.1 evidence root: [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads)
+- Evidence root: [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads)
 - Source SHA256: `c8ef40765b0555636bf3aa6055244a82ecd3d4c3d1ce137e6268151c954ae1af`
 - Proof SHA256: `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490`
 
@@ -8188,7 +8188,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.kernel.disable-exception-chain-validation.json`
-- V3.1 evidence root: [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation)
+- Evidence root: [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation)
 - Source SHA256: `879de2607fae2cff7e9462fa24a995c5fc7f6aa8b7041f564c12d5dcf7bb7375`
 - Proof SHA256: `6e8d2adff13d710dbd8a0ef85e5fc8f02232ccbdeb53f0a7fb83a1f9a50b047c`
 
@@ -8543,10 +8543,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.priority-control.review.json`
-- Source SHA256: `4c5ca1479d735284836784cfb9d4cc8eaad43d5ddd0f0beafa9f6e61f2c0b799`
+- Evidence root: [evidence/records/system.priority-control](../evidence/records/system.priority-control)
+- Source SHA256: `10333e928c0d9952717ec7b8679df6d4050c2920d87e0fb23893253c92edca58`
 - Proof SHA256: `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345`
 
-**Summary:** Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: current-build read/write code paths, reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded CPU/memory benchmark runs after real reboots.
+**Summary:** Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded rebooted benchmark runs. The raw 0x26 bitmask semantics remain repo interpretation rather than a modern Microsoft-published contract.
 
 **Evidence**
 
@@ -8575,7 +8576,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.reliability-timestamp-enabled.review.json`
-- V3.1 evidence root: [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled)
+- Evidence root: [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled)
 - Source SHA256: `0ad8d154dffb4a24c3b9b706d6d65d5494b47e07d7ff60ffca32c2b132c2b269`
 - Proof SHA256: `4889e542a1c51d2109d508afc7c7e6b70722135c302951dc96e7cc5cea498d37`
 

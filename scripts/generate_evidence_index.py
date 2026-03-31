@@ -7,11 +7,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from evidence_class_lib import build_class_entry, load_provenance_map as load_provenance_entries
+from evidence_class_lib import build_class_entry, load_overrides, load_provenance_map as load_provenance_entries
 from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, normalize_reference, normalize_reference_text
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
 PROVENANCE_PATH = REPO_ROOT / "Docs" / "tweaks" / "tweak-provenance.json"
+OVERRIDES_PATH = RESEARCH_ROOT / "evidence-class-overrides.json"
 OUTPUT_PATH = RESEARCH_ROOT / "evidence-index.json"
 REDACTED_USER = "<USER>"
 HOME_PATH = str(Path.home())
@@ -232,6 +233,13 @@ def compact_validation_proof(record: dict[str, Any]) -> dict[str, Any] | None:
     return normalized
 
 
+def compact_optional_block(record: dict[str, Any], key: str) -> dict[str, Any] | None:
+    payload = record.get(key)
+    if isinstance(payload, dict) and payload:
+        return sanitize_value(payload)
+    return None
+
+
 def load_v31_companion(record_id: str) -> dict[str, Any] | None:
     path = V31_EVIDENCE_ROOT / record_id / "full-evidence.json"
     if not path.exists():
@@ -281,6 +289,7 @@ def main() -> int:
     validation_proof_missing = 0
     deprecated_without_validation_proof = 0
     provenance_map = load_provenance_entries(PROVENANCE_PATH)
+    overrides = load_overrides(OVERRIDES_PATH)
     class_counts: Counter[str] = Counter()
 
     for path in sorted(RECORDS_DIR.glob("*.json")):
@@ -307,6 +316,7 @@ def main() -> int:
         class_entry = build_class_entry(
             record,
             provenance_entry=provenance_entry,
+            override=overrides.get(record_key),
         )
         class_counts[class_entry["evidence_class"]] += 1
         v31 = load_v31_companion(record_key)
@@ -330,6 +340,9 @@ def main() -> int:
                 "recommended_profiles": compact_profiles(record),
                 "evidence": evidence,
                 "validation_proof": proof,
+                "doc_source": compact_optional_block(record, "doc_source"),
+                "static_analysis": compact_optional_block(record, "static_analysis"),
+                "cross_verification": compact_optional_block(record, "cross_verification"),
                 "provenance": compact_provenance(record, provenance_map),
                 "v31_evidence_root": (
                     str((V31_EVIDENCE_ROOT / record_key).relative_to(REPO_ROOT)).replace("\\", "/")

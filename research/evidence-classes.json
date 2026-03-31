@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-31T15:03:09.003538Z",
+  "generated_utc": "2026-03-31T18:56:04.820377Z",
   "summary": {
     "total_records": 310,
     "class_counts": {
@@ -6670,15 +6670,15 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "validated_semantics": {
-        "summary": "The child record also relies on Microsoft's MMCSS documentation for SystemResponsiveness. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail.",
+        "summary": "DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in...",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+            "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
             "kind": "validation-proof",
-            "summary": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload"
+            "summary": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness; values not divisible by 10 are rounded down to the nearest multiple of 10."
           },
           {
             "title": "Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading",
@@ -6690,7 +6690,7 @@
             "title": "Microsoft Learn: Multimedia Class Scheduler Service",
             "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
             "kind": "official-doc",
-            "summary": "Microsoft documents SystemResponsiveness under the SystemProfile key and explains how the value is rounded and clamped."
+            "summary": "Microsoft documents SystemResponsiveness under the SystemProfile key and explains the rounding/clamping behavior. This record uses that page for the path and value-handling rule..."
           }
         ]
       },
@@ -19921,7 +19921,7 @@
             "title": "Microsoft Learn: Win32_OperatingSystem class",
             "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem",
             "kind": "official-doc",
-            "summary": "Microsoft maps ForegroundApplicationBoost, QuantumLength, and QuantumType to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation. The page explains the..."
+            "summary": "Microsoft maps ForegroundApplicationBoost, QuantumLength, and QuantumType to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation. The page proves the p..."
           },
           {
             "title": "Repo system research notes for Win32PrioritySeparation",

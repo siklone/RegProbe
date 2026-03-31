@@ -1,0 +1,29 @@
+{
+  "$schema": "registry-evidence-v3.2/metadata",
+  "tweak_id": "power.disable-network-power-saving.policy",
+  "key_path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+  "value_name": "DisableTaskOffload",
+  "value_type": "REG_DWORD",
+  "value_data_before": 0,
+  "value_data_after": 0,
+  "enrichment": {
+    "hive": "HKLM",
+    "suspected_layer": "driver",
+    "boot_phase_relevant": true,
+    "acl_owner": null,
+    "acl_sddl": null,
+    "acl_user_readable": null,
+    "source": "official_doc",
+    "official_doc_exists": true,
+    "reactos_reference": false,
+    "geoff_chappell_reference": false,
+    "pdb_symbol_match": null,
+    "source_repositories": []
+  },
+  "doc_source": {
+    "source_origin": "mixed",
+    "primary_contract": "Microsoft documents DisableTaskOffload under TCPIP Parameters and documents SystemResponsiveness under the MMCSS SystemProfile key, including the path and rounding/clamping rules for SystemResponsiveness.",
+    "repo_interpretation": "This child record intentionally does not treat the MMCSS page as proof of NetworkThrottlingIndex semantics or as proof of one universal stock SystemResponsiveness default across all Windows builds.",
+    "notes": "The current app's 10 value is kept as a documented in-range child profile, not as a sweeping claim about every Windows baseline."
+  }
+}

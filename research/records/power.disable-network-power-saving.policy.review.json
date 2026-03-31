@@ -1,11 +1,53 @@
 {
   "$schema": "../setting-research.schema.json",
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "record_id": "power.disable-network-power-saving.policy",
   "tweak_id": "power.disable-network-power-saving.policy",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
-  "summary": "Controls the official TCP/IP offload and MMCSS responsiveness values only. The opaque NetworkThrottlingIndex value remains in the deprecated parent audit trail.",
+  "summary": "This child record keeps only the documented DisableTaskOffload and SystemResponsiveness values. SystemResponsiveness is supported here for path plus rounding/clamping behavior; the opaque NetworkThrottlingIndex write remains outside this child in the deprecated parent audit trail.",
+  "doc_source": {
+    "source_origin": "mixed",
+    "primary_contract": "Microsoft documents DisableTaskOffload under TCPIP Parameters and documents SystemResponsiveness under the MMCSS SystemProfile key, including the path and rounding/clamping rules for SystemResponsiveness.",
+    "repo_interpretation": "This child record intentionally does not treat the MMCSS page as proof of NetworkThrottlingIndex semantics or as proof of one universal stock SystemResponsiveness default across all Windows builds.",
+    "notes": "The current app's 10 value is kept as a documented in-range child profile, not as a sweeping claim about every Windows baseline."
+  },
+  "static_analysis": {
+    "ghidra": {
+      "executed": false,
+      "status": "not-run",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "binary": null,
+      "function_name": null,
+      "function_source": null,
+      "branch_analysis": [],
+      "effect_summary": "This child record currently stands on Microsoft documentation and repo-code mapping rather than a static branch audit.",
+      "unclear": false,
+      "artifact_path": null
+    },
+    "ida": {
+      "executed": false,
+      "status": "blocked-ida-missing",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "binary": null,
+      "function_name": null,
+      "function_source": null,
+      "branch_analysis": [],
+      "effect_summary": "IDA headless is not provisioned for this doc-driven child record yet.",
+      "unclear": false,
+      "artifact_path": null
+    }
+  },
+  "cross_verification": {
+    "executed": false,
+    "functions_match": null,
+    "branches_match": null,
+    "status": "insufficient",
+    "confidence": "low",
+    "cross_conflict": false,
+    "notes": "This child record is currently doc-driven. No dedicated Ghidra+IDA parity artifact is attached yet."
+  },
   "setting": {
     "name": "Network Power and Multimedia Responsiveness",
     "category": "Power",
@@ -13,8 +55,8 @@
     "scope": "device",
     "casual_explanation": "These settings affect whether TCP/IP task offloads stay enabled and how much CPU is reserved for multimedia responsiveness.",
     "why_people_change_it": "People tune these values when chasing lower latency for gaming, streaming, or other timing-sensitive workloads.",
-    "tradeoffs_overview": "The official TCP/IP offload and MMCSS values are documented by Microsoft. This child record excludes the opaque NetworkThrottlingIndex value that keeps the parent bundle from being publishable as a single preset.",
-    "professional_notes": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters and SystemResponsiveness under HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile. The current app writes the documented values for those two settings. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail and is not part of this child record.",
+    "tradeoffs_overview": "The official TCP/IP offload and MMCSS values are documented by Microsoft, but this child record keeps the claims narrow. It excludes the opaque NetworkThrottlingIndex value that keeps the parent bundle from being publishable as a single preset.",
+    "professional_notes": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters and SystemResponsiveness under HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile. For SystemResponsiveness, the Microsoft page proves the path and the rounding/clamping rules; this re-audit does not stretch that page into proof of NetworkThrottlingIndex semantics or of one universal stock default value across every build. The current app writes DisableTaskOffload = 0 and SystemResponsiveness = 10. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail and is not part of this child record.",
     "targets": [
       {
         "target_id": "disable-task-offload",
@@ -54,8 +96,8 @@
           {
             "state_kind": "value",
             "value": 10,
-            "label": "App responsiveness value",
-            "meaning": "Microsoft documents SystemResponsiveness as the percentage of CPU resources guaranteed to low-priority tasks. Values not divisible by 10 are rounded down to the nearest multiple of 10.",
+            "label": "Current app child value",
+            "meaning": "Microsoft documents SystemResponsiveness as the percentage of CPU resources guaranteed to low-priority tasks and documents the rounding/clamping rules. The current app uses 10, which is an in-range documented child value rather than a claim about every stock Windows baseline.",
             "evidence_ids": [
               "ms-mmcss",
               "app-power-provider"
@@ -90,8 +132,8 @@
   },
   "windows_defaults": [
     {
-      "label": "Microsoft documented defaults",
-      "applies_to": "Windows SMB client tuning surface documented by Microsoft",
+      "label": "Documented offload baseline and MMCSS rules",
+      "applies_to": "Windows systems where DisableTaskOffload follows Microsoft's documented baseline and SystemResponsiveness is interpreted using Microsoft's MMCSS rules",
       "states": [
         {
           "target_id": "disable-task-offload",
@@ -101,9 +143,9 @@
         },
         {
           "target_id": "system-responsiveness",
-          "state_kind": "value",
-          "value": 10,
-          "rationale": "Microsoft's MMCSS documentation uses 10 as the example baseline."
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Microsoft documents the SystemResponsiveness path plus rounding/clamping behavior, but this child record does not treat that page as proof of one universal stock default."
         }
       ],
       "evidence_ids": [
@@ -134,13 +176,13 @@
           "target_id": "system-responsiveness",
           "state_kind": "value",
           "value": 10,
-          "rationale": "Keep the documented MMCSS baseline."
+          "rationale": "Use the current app's documented child value while keeping the claim narrower than a universal stock-default statement."
         }
       ],
-      "good_when": "You want the documented Windows baseline.",
+      "good_when": "You want the documented child profile this repo currently ships for task offload plus MMCSS responsiveness.",
       "bad_when": "You are targeting the broader app bundle or the opaque NetworkThrottlingIndex value.",
       "tradeoffs": [
-        "Best match to Microsoft's documented baseline.",
+        "Keeps the claim inside Microsoft's documented path and rounding/clamping contract.",
         "Does not include the unresolved opaque tuning value."
       ],
       "apply_allowed": true,
@@ -171,7 +213,7 @@
       "kind": "official-doc",
       "title": "Microsoft Learn: Multimedia Class Scheduler Service",
       "location": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
-      "summary": "Microsoft documents SystemResponsiveness under the SystemProfile key and explains how the value is rounded and clamped.",
+      "summary": "Microsoft documents SystemResponsiveness under the SystemProfile key and explains the rounding/clamping behavior. This record uses that page for the path and value-handling rules, not as proof of NetworkThrottlingIndex semantics.",
       "supports": [
         "path",
         "value",
@@ -195,10 +237,10 @@
     }
   ],
   "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
-    "exact_quote_or_path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload",
+    "source_url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+    "exact_quote_or_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness; values not divisible by 10 are rounded down to the nearest multiple of 10.",
     "key_found_on_page": true,
-    "notes": "The child record also relies on Microsoft's MMCSS documentation for SystemResponsiveness. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail."
+    "notes": "DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail."
   },
   "decision": {
     "confidence": "high",
@@ -207,7 +249,9 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The official TCP/IP offload and MMCSS values are documented and machine-checkable. The unresolved NetworkThrottlingIndex value remains in the deprecated parent audit trail.",
+    "why": "DisableTaskOffload and the narrowed SystemResponsiveness claim are documented and machine-checkable. This record now treats the MMCSS page as proof of path plus rounding/clamping behavior, not as proof of the unresolved opaque NetworkThrottlingIndex value.",
+    "manual_review_required": false,
     "blocking_issues": []
-  }
+  },
+  "last_reviewed_utc": "2026-03-31T00:00:00Z"
 }

@@ -1,14 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://regprobe.local/registry-research-framework/schemas/classification.schema.json",
-  "title": "v3.1 Classification",
+  "title": "v3.2 Classification",
   "type": "object",
   "required": ["classification"],
   "properties": {
     "$schema": { "type": "string" },
     "classification": {
       "type": "object",
-      "required": ["class", "pipeline_version", "cross_layer_satisfied", "layers_used"]
+      "required": ["class", "pipeline_version", "cross_layer_satisfied", "layers_used"],
+      "properties": {
+        "class": { "type": "string" },
+        "pipeline_version": { "type": "string" },
+        "cross_layer_satisfied": { "type": "boolean" },
+        "layers_used": { "type": "array", "items": { "type": "string" } },
+        "cross_verification": { "type": "object" },
+        "manual_review_required": { "type": "boolean" },
+        "doc_source": { "type": "object" }
+      }
     }
   }
 }

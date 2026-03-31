@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://regprobe.local/registry-research-framework/schemas/metadata.schema.json",
-  "title": "v3.1 Metadata",
+  "title": "v3.2 Metadata",
   "type": "object",
   "required": ["tweak_id", "key_path", "value_name", "value_type", "enrichment"],
   "properties": {
@@ -12,6 +12,7 @@
     "value_type": { "type": ["string", "null"] },
     "value_data_before": {},
     "value_data_after": {},
-    "enrichment": { "type": "object" }
+    "enrichment": { "type": "object" },
+    "doc_source": { "type": "object" }
   }
 }

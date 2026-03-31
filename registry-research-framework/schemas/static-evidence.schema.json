@@ -1,12 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://regprobe.local/registry-research-framework/schemas/static-evidence.schema.json",
-  "title": "v3.1 Static Evidence",
+  "title": "v3.2 Static Evidence",
   "type": "object",
   "required": ["static"],
   "properties": {
     "$schema": { "type": "string" },
-    "static": { "type": "object" },
+    "static": {
+      "type": "object",
+      "properties": {
+        "bingrep": { "type": "object" },
+        "floss": { "type": "object" },
+        "capa": { "type": "object" },
+        "ghidra": { "type": "object" },
+        "ida": { "type": "object" },
+        "cross_verification": { "type": "object" },
+        "doc_source": { "type": "object" }
+      }
+    },
     "source_evidence_ids": { "type": "array", "items": { "type": "string" } }
   }
 }

@@ -1,0 +1,38 @@
+{
+  "$schema": "registry-evidence-v3.2/classification",
+  "classification": {
+    "class": "A",
+    "pipeline_version": "v3.2",
+    "reason": "DisableTaskOffload and the narrowed SystemResponsiveness claim are documented and machine-checkable. This record now treats the MMCSS page as proof of path plus rounding/clamping behavior, not as proof of the unresolved opaque NetworkThrottlingIndex value.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "official_doc"
+    ],
+    "layer_count": 1,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": false,
+      "correct_tool_used": true,
+      "trigger_condition_tested": false
+    },
+    "class_ready_basis": "official-doc",
+    "next_missing_layer": "none",
+    "cross_verification": {
+      "executed": false,
+      "functions_match": null,
+      "branches_match": null,
+      "status": "insufficient",
+      "confidence": "low",
+      "cross_conflict": false,
+      "notes": "This child record is currently doc-driven. No dedicated Ghidra+IDA parity artifact is attached yet."
+    },
+    "manual_review_required": false,
+    "doc_source": {
+      "source_origin": "mixed",
+      "primary_contract": "Microsoft documents DisableTaskOffload under TCPIP Parameters and documents SystemResponsiveness under the MMCSS SystemProfile key, including the path and rounding/clamping rules for SystemResponsiveness.",
+      "repo_interpretation": "This child record intentionally does not treat the MMCSS page as proof of NetworkThrottlingIndex semantics or as proof of one universal stock SystemResponsiveness default across all Windows builds.",
+      "notes": "The current app's 10 value is kept as a documented in-range child profile, not as a sweeping claim about every Windows baseline."
+    }
+  }
+}

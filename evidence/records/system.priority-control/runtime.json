@@ -1,0 +1,37 @@
+{
+  "$schema": "registry-evidence-v3.2/runtime-evidence",
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": true,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "trace_file": "evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv"
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: key is treated as kernel, Frida is not valid for this lane.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "source_evidence_ids": [
+    "procmon-priority-control-wmi-read",
+    "vm-batch-probe-20260320-priority-control",
+    "vm-manual-benchmark-20260324-priority-control"
+  ]
+}

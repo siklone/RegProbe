@@ -1,0 +1,29 @@
+{
+  "$schema": "registry-evidence-v3.2/metadata",
+  "tweak_id": "system.priority-control",
+  "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+  "value_name": "Win32PrioritySeparation",
+  "value_type": "REG_DWORD",
+  "value_data_before": 2,
+  "value_data_after": 38,
+  "enrichment": {
+    "hive": "HKLM",
+    "suspected_layer": "kernel",
+    "boot_phase_relevant": true,
+    "acl_owner": null,
+    "acl_sddl": null,
+    "acl_user_readable": null,
+    "source": "official_doc",
+    "official_doc_exists": true,
+    "reactos_reference": false,
+    "geoff_chappell_reference": false,
+    "pdb_symbol_match": null,
+    "source_repositories": []
+  },
+  "doc_source": {
+    "source_origin": "mixed",
+    "primary_contract": "Microsoft's Win32_OperatingSystem documentation proves the Win32PrioritySeparation registry path and the high-level WMI mapping for ForegroundApplicationBoost, QuantumLength, and QuantumType.",
+    "repo_interpretation": "The raw Win32PrioritySeparation bitmask interpretation for values such as 0x26 still comes from repo analysis and historical decompilation, not from a modern Microsoft page that publishes the exact bit semantics.",
+    "notes": "This re-audit keeps the Microsoft WMI contract separate from the repo-side raw scheduler interpretation."
+  }
+}

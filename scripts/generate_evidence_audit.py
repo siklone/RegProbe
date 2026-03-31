@@ -129,7 +129,7 @@ def re_audit_completed(record_id: str, class_id: str, official: bool) -> bool:
     etw = runtime.get("etw") or {}
     return (
         re_audit.get("is_re_audit") is True
-        and str(re_audit.get("new_pipeline_version") or "") == "v3.1"
+        and str(re_audit.get("new_pipeline_version") or "") in {"v3.1", "v3.2"}
         and bool(re_audit.get("new_cross_layer"))
         and bool(re_audit.get("dead_flag_four_conditions_met"))
         and (bool(re_audit.get("new_tools_applied")) or bool(etw.get("executed")))
@@ -318,7 +318,7 @@ def main() -> int:
                     "re_audit_reason": re_audit_reason(class_id, official, record, record_id, incident_seen),
                     "original_class": class_id if audit_required else None,
                     "original_pipeline_version": "pre-v3.1" if audit_required else None,
-                    "new_pipeline_version": "v3.1",
+                    "new_pipeline_version": "v3.2",
                     "artifact_refs": load_v31_artifact_refs(record_id),
                     "app_mapping_status": extract_app_status(record),
                     "restore_story_known": restore_story_known(record),

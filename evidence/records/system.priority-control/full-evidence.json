@@ -1,0 +1,229 @@
+{
+  "$schema": "registry-evidence-v3.2/full-evidence",
+  "record_id": "system.priority-control",
+  "tweak_id": "system.priority-control",
+  "metadata": {
+    "$schema": "registry-evidence-v3.2/metadata",
+    "tweak_id": "system.priority-control",
+    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+    "value_name": "Win32PrioritySeparation",
+    "value_type": "REG_DWORD",
+    "value_data_before": 2,
+    "value_data_after": 38,
+    "enrichment": {
+      "hive": "HKLM",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "acl_owner": null,
+      "acl_sddl": null,
+      "acl_user_readable": null,
+      "source": "official_doc",
+      "official_doc_exists": true,
+      "reactos_reference": false,
+      "geoff_chappell_reference": false,
+      "pdb_symbol_match": null,
+      "source_repositories": []
+    },
+    "doc_source": {
+      "source_origin": "mixed",
+      "primary_contract": "Microsoft's Win32_OperatingSystem documentation proves the Win32PrioritySeparation registry path and the high-level WMI mapping for ForegroundApplicationBoost, QuantumLength, and QuantumType.",
+      "repo_interpretation": "The raw Win32PrioritySeparation bitmask interpretation for values such as 0x26 still comes from repo analysis and historical decompilation, not from a modern Microsoft page that publishes the exact bit semantics.",
+      "notes": "This re-audit keeps the Microsoft WMI contract separate from the repo-side raw scheduler interpretation."
+    }
+  },
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": true,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "trace_file": "evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv"
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: key is treated as kernel, Frida is not valid for this lane.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": false,
+      "status": "blocked-pdb-required",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "binary": "cimwin32.dll",
+      "function_name": null,
+      "function_source": null,
+      "branch_analysis": [],
+      "effect_summary": "Legacy repo decomp exists for the read/write path, but no PDB-backed bounded v3.2 branch audit is attached to this record yet.",
+      "unclear": true,
+      "artifact_path": null
+    },
+    "ida": {
+      "executed": false,
+      "status": "blocked-ida-missing",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "binary": "cimwin32.dll",
+      "function_name": null,
+      "function_source": null,
+      "branch_analysis": [],
+      "effect_summary": "IDA headless cross-verification is not provisioned for this record yet.",
+      "unclear": true,
+      "artifact_path": null
+    },
+    "cross_verification": {
+      "executed": false,
+      "functions_match": null,
+      "branches_match": null,
+      "status": "insufficient",
+      "confidence": "low",
+      "cross_conflict": false,
+      "notes": "Cross-verification is pending until a PDB-backed Ghidra branch audit and an IDA headless pass exist for this record."
+    },
+    "doc_source": {
+      "source_origin": "mixed",
+      "primary_contract": "Microsoft's Win32_OperatingSystem documentation proves the Win32PrioritySeparation registry path and the high-level WMI mapping for ForegroundApplicationBoost, QuantumLength, and QuantumType.",
+      "repo_interpretation": "The raw Win32PrioritySeparation bitmask interpretation for values such as 0x26 still comes from repo analysis and historical decompilation, not from a modern Microsoft page that publishes the exact bit semantics.",
+      "notes": "This re-audit keeps the Microsoft WMI contract separate from the repo-side raw scheduler interpretation."
+    }
+  },
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": false,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": null
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "classification": {
+    "class": "A",
+    "pipeline_version": "v3.2",
+    "reason": "Win25H2Clean reversible proof, the later rebooted VM benchmark pass, and the wmiprvse.exe Procmon reads for both states are enough to treat 2 and 38 as current-build observed runtime states. This verdict does not rely on Microsoft publishing the raw 0x26 bitmask semantics.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_procmon",
+      "behavior_wpr",
+      "behavior_benchmark",
+      "runtime_reboot",
+      "official_doc"
+    ],
+    "layer_count": 5,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "official-doc",
+    "next_missing_layer": "none",
+    "cross_verification": {
+      "executed": false,
+      "functions_match": null,
+      "branches_match": null,
+      "status": "insufficient",
+      "confidence": "low",
+      "cross_conflict": false,
+      "notes": "Cross-verification is pending until a PDB-backed Ghidra branch audit and an IDA headless pass exist for this record."
+    },
+    "manual_review_required": false,
+    "doc_source": {
+      "source_origin": "mixed",
+      "primary_contract": "Microsoft's Win32_OperatingSystem documentation proves the Win32PrioritySeparation registry path and the high-level WMI mapping for ForegroundApplicationBoost, QuantumLength, and QuantumType.",
+      "repo_interpretation": "The raw Win32PrioritySeparation bitmask interpretation for values such as 0x26 still comes from repo analysis and historical decompilation, not from a modern Microsoft page that publishes the exact bit semantics.",
+      "notes": "This re-audit keeps the Microsoft WMI contract separate from the repo-side raw scheduler interpretation."
+    }
+  },
+  "timeline": [
+    {
+      "step": "bootstrap_record_load",
+      "timestamp": "2026-03-31T18:56:15.536743Z"
+    },
+    {
+      "step": "faz5",
+      "timestamp": "2026-03-31T18:56:15.536743Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-31T18:56:15.536743Z"
+    },
+    {
+      "step": "last_reviewed",
+      "timestamp": "2026-03-31T00:00:00Z"
+    }
+  ],
+  "artifact_refs": [],
+  "doc_source": {
+    "source_origin": "mixed",
+    "primary_contract": "Microsoft's Win32_OperatingSystem documentation proves the Win32PrioritySeparation registry path and the high-level WMI mapping for ForegroundApplicationBoost, QuantumLength, and QuantumType.",
+    "repo_interpretation": "The raw Win32PrioritySeparation bitmask interpretation for values such as 0x26 still comes from repo analysis and historical decompilation, not from a modern Microsoft page that publishes the exact bit semantics.",
+    "notes": "This re-audit keeps the Microsoft WMI contract separate from the repo-side raw scheduler interpretation."
+  },
+  "cross_verification": {
+    "executed": false,
+    "functions_match": null,
+    "branches_match": null,
+    "status": "insufficient",
+    "confidence": "low",
+    "cross_conflict": false,
+    "notes": "Cross-verification is pending until a PDB-backed Ghidra branch audit and an IDA headless pass exist for this record."
+  },
+  "research_record": "research/records/system.priority-control.json",
+  "research_record_fallback": "research/records/system.priority-control.review.json"
+}

@@ -26,7 +26,8 @@
       "type": "string",
       "enum": [
         "1.0",
-        "1.1"
+        "1.1",
+        "1.2"
       ]
     },
     "record_id": {
@@ -57,6 +58,15 @@
     },
     "validation_proof": {
       "$ref": "#/$defs/validationProof"
+    },
+    "doc_source": {
+      "$ref": "#/$defs/docSource"
+    },
+    "static_analysis": {
+      "$ref": "#/$defs/staticAnalysis"
+    },
+    "cross_verification": {
+      "$ref": "#/$defs/crossVerification"
     },
     "setting": {
       "$ref": "#/$defs/setting"
@@ -162,6 +172,185 @@
           "type": "null"
         }
       ]
+    },
+    "docSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_origin": {
+          "type": "string",
+          "enum": [
+            "microsoft-docs",
+            "static-analysis",
+            "runtime-etw",
+            "runtime-procmon",
+            "repo-doc",
+            "repo-code",
+            "mixed"
+          ]
+        },
+        "primary_contract": {
+          "type": "string"
+        },
+        "repo_interpretation": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "branchAnalysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "type": "string"
+        },
+        "value_map": {
+          "type": "string"
+        },
+        "context_before": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "context_after": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "branch_snippet": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "effect_summary": {
+          "type": "string"
+        },
+        "unclear": {
+          "type": "boolean"
+        }
+      }
+    },
+    "staticToolAnalysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "executed": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string"
+        },
+        "pdb_loaded": {
+          "type": "boolean"
+        },
+        "pdb_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "binary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "function_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "function_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "branch_analysis": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/branchAnalysis"
+          }
+        },
+        "effect_summary": {
+          "type": "string"
+        },
+        "unclear": {
+          "type": "boolean"
+        },
+        "artifact_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "staticAnalysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ghidra": {
+          "$ref": "#/$defs/staticToolAnalysis"
+        },
+        "ida": {
+          "$ref": "#/$defs/staticToolAnalysis"
+        }
+      }
+    },
+    "crossVerification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "executed": {
+          "type": "boolean"
+        },
+        "functions_match": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "branches_match": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "match",
+            "conflict",
+            "insufficient",
+            "blocked"
+          ]
+        },
+        "confidence": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "high",
+            "low",
+            null
+          ]
+        },
+        "cross_conflict": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
     },
     "stateKind": {
       "type": "string",
@@ -634,6 +823,9 @@
         },
         "why": {
           "type": "string"
+        },
+        "manual_review_required": {
+          "type": "boolean"
         },
         "blocking_issues": {
           "type": "array",

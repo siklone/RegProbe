@@ -31,6 +31,7 @@ RESEARCH_ROOT = REPO_ROOT / "research"
 RECORDS_DIR = RESEARCH_ROOT / "records"
 AUDIT_PATH = RESEARCH_ROOT / "evidence-audit.json"
 DEFAULT_QUEUE_PATH = REPO_ROOT / "registry-research-framework" / "audit" / "re-audit-queue.csv"
+PIPELINE_VERSION = "v3.2"
 
 
 def now_utc() -> str:
@@ -207,7 +208,7 @@ def build_metadata(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
     target = first_target(record)
     provenance = record.get("provenance") or {}
     return {
-        "$schema": "registry-evidence-v3.1/metadata",
+        "$schema": "registry-evidence-v3.2/metadata",
         "tweak_id": record.get("tweak_id"),
         "key_path": target.get("path"),
         "value_name": target.get("value_name"),
@@ -228,6 +229,57 @@ def build_metadata(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
             "pdb_symbol_match": None,
             "source_repositories": provenance.get("source_repositories") or [],
         },
+        "doc_source": record.get("doc_source") or {},
+    }
+
+
+def normalize_static_tool(record: dict[str, Any], key: str, fallback_item: dict[str, Any] | None) -> dict[str, Any]:
+    payload = ((record.get("static_analysis") or {}).get(key) or {}) if isinstance(record.get("static_analysis"), dict) else {}
+    if isinstance(payload, dict) and payload:
+        return payload
+
+    if key == "ghidra":
+        return {
+            "executed": fallback_item is not None,
+            "status": "legacy-evidence" if fallback_item else "not-run",
+            "pdb_loaded": False,
+            "pdb_source": None,
+            "binary": None,
+            "function_name": None,
+            "function_source": None,
+            "branch_analysis": [],
+            "effect_summary": fallback_item.get("summary") if fallback_item else None,
+            "unclear": True if fallback_item else False,
+            "artifact_path": normalized_location(fallback_item, "Ghidra output"),
+        }
+
+    return {
+        "executed": False,
+        "status": "not-run",
+        "pdb_loaded": False,
+        "pdb_source": None,
+        "binary": None,
+        "function_name": None,
+        "function_source": None,
+        "branch_analysis": [],
+        "effect_summary": None,
+        "unclear": False,
+        "artifact_path": None,
+    }
+
+
+def normalize_cross_verification(record: dict[str, Any]) -> dict[str, Any]:
+    payload = record.get("cross_verification")
+    if isinstance(payload, dict) and payload:
+        return payload
+    return {
+        "executed": False,
+        "functions_match": None,
+        "branches_match": None,
+        "status": "insufficient",
+        "confidence": "low",
+        "cross_conflict": False,
+        "notes": "No dedicated Ghidra+IDA comparison is attached to this record yet.",
     }
 
 
@@ -266,7 +318,7 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
             operation = "runtime-reboot-probe"
 
     return {
-        "$schema": "registry-evidence-v3.1/runtime-evidence",
+        "$schema": "registry-evidence-v3.2/runtime-evidence",
         "runtime": {
             "etw": {
                 "executed": etw_item is not None or lane_executed(runtime_lane),
@@ -307,8 +359,11 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
 def build_static(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
     static_items = collect_evidence(record, {"decompilation", "ghidra-headless", "ghidra-trace"})
     ghidra_item = static_items[0] if static_items else None
+    ghidra_block = normalize_static_tool(record, "ghidra", ghidra_item)
+    ida_block = normalize_static_tool(record, "ida", None)
+    cross_block = normalize_cross_verification(record)
     return {
-        "$schema": "registry-evidence-v3.1/static-evidence",
+        "$schema": "registry-evidence-v3.2/static-evidence",
         "static": {
             "bingrep": {
                 "executed": False,
@@ -329,18 +384,10 @@ def build_static(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any
                 "target_binary": None,
                 "output_file": None,
             },
-            "ghidra": {
-                "executed": ghidra_item is not None,
-                "trigger": "existing_record_evidence" if ghidra_item else None,
-                "pdb_loaded": False,
-                "pdb_source": None,
-                "string_xref_found": ghidra_item is not None,
-                "function_name": None,
-                "decompile_snippet": ghidra_item.get("summary") if ghidra_item else None,
-                "call_graph_depth": None,
-                "output_file": normalized_location(ghidra_item, "Ghidra output"),
-                "ghidra_no_function_fallback": audit.get("ghidra_no_function_fallback"),
-            },
+            "ghidra": ghidra_block,
+            "ida": ida_block,
+            "cross_verification": cross_block,
+            "doc_source": record.get("doc_source") or {},
         },
         "source_evidence_ids": [item.get("evidence_id") for item in static_items if item.get("evidence_id")],
     }
@@ -358,7 +405,7 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
         behavior_summary = f"Runner failed with exit code {behavior_lane.get('exit_code')}. See {behavior_lane.get('log_file') or behavior_lane.get('output_file')}."
 
     return {
-        "$schema": "registry-evidence-v3.1/behavior-evidence",
+        "$schema": "registry-evidence-v3.2/behavior-evidence",
         "behavior": {
             "typeperf": {
                 "executed": False,
@@ -478,7 +525,7 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
     re_audit_reason = "; ".join(reason_parts)
     re_audit_note = "; ".join(notes) if notes else "Bootstrapped from the current research record and evidence audit."
     return {
-        "$schema": "registry-evidence-v3.1/re-audit",
+        "$schema": "registry-evidence-v3.2/re-audit",
         "re_audit": {
             "is_re_audit": True,
             "original_class": existing_re_audit.get("original_class") or audit.get("original_class") or audit.get("evidence_class"),
@@ -495,18 +542,19 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
             "frida_kernel_guard_applied": audit.get("frida_kernel_guard_applied"),
             "dead_flag_four_conditions_met": all(checks.values()),
             "notes": re_audit_note,
-            "new_pipeline_version": "v3.1",
+            "new_pipeline_version": PIPELINE_VERSION,
         },
     }
 
 
 def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
     checks = live_dead_flag_checks(record, audit)
+    cross_block = normalize_cross_verification(record)
     return {
-        "$schema": "registry-evidence-v3.1/classification",
+        "$schema": "registry-evidence-v3.2/classification",
         "classification": {
             "class": audit.get("evidence_class"),
-            "pipeline_version": "v3.1",
+            "pipeline_version": PIPELINE_VERSION,
             "reason": normalize_reference_text((record.get("decision") or {}).get("why"), title="Classification reason"),
             "cross_layer_satisfied": audit.get("cross_layer_satisfied"),
             "layers_used": audit.get("layers_used") or [],
@@ -515,6 +563,9 @@ def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[
             "dead_flag_checks": checks,
             "class_ready_basis": audit.get("class_ready_basis"),
             "next_missing_layer": audit.get("next_missing_layer"),
+            "cross_verification": cross_block,
+            "manual_review_required": bool(cross_block.get("cross_conflict")) or bool((record.get("decision") or {}).get("manual_review_required")),
+            "doc_source": record.get("doc_source") or {},
         },
     }
 
@@ -541,7 +592,7 @@ def current_artifact_refs(tweak_id: str) -> list[dict[str, Any]]:
 
 def build_timeline(record: dict[str, Any], audit: dict[str, Any], phase: str) -> dict[str, Any]:
     return {
-        "$schema": "registry-evidence-v3.1/timeline",
+        "$schema": "registry-evidence-v3.2/timeline",
         "timeline": [
             {"step": "bootstrap_record_load", "timestamp": now_utc()},
             {"step": phase, "timestamp": now_utc()},
@@ -561,6 +612,7 @@ def render_verdict(record: dict[str, Any], audit: dict[str, Any], classification
         f"- Pipeline: `{classification['classification'].get('pipeline_version')}`",
         f"- Official doc: `{str(audit.get('official_doc_exists')).lower()}`",
         f"- Cross-layer: `{str(audit.get('cross_layer_satisfied')).lower()}`",
+        f"- Cross verification: `{(classification['classification'].get('cross_verification') or {}).get('status', 'insufficient')}`",
         f"- Layer set: `{', '.join(audit.get('layers_used') or []) or 'none'}`",
         f"- Tools: `{', '.join(audit.get('tools_used') or []) or 'none'}`",
         "",
@@ -591,7 +643,7 @@ def build_full_evidence(record: dict[str, Any], audit: dict[str, Any], phase: st
     artifact_refs = current_artifact_refs(str(record.get("tweak_id") or ""))
 
     payload: dict[str, Any] = {
-        "$schema": "registry-evidence-v3.1/full-evidence",
+        "$schema": "registry-evidence-v3.2/full-evidence",
         "record_id": record.get("record_id"),
         "tweak_id": record.get("tweak_id"),
         "metadata": metadata,
@@ -601,6 +653,8 @@ def build_full_evidence(record: dict[str, Any], audit: dict[str, Any], phase: st
         "classification": classification["classification"],
         "timeline": timeline["timeline"],
         "artifact_refs": artifact_refs,
+        "doc_source": record.get("doc_source") or {},
+        "cross_verification": normalize_cross_verification(record),
         "research_record": str(((RESEARCH_ROOT / "records") / f"{record.get('tweak_id')}.json").relative_to(REPO_ROOT)).replace("\\", "/"),
         "research_record_fallback": str(((RESEARCH_ROOT / "records") / f"{record.get('tweak_id')}.review.json").relative_to(REPO_ROOT)).replace("\\", "/"),
     }
@@ -687,7 +741,7 @@ def current_queue_ids() -> list[str]:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Bootstrap v3.1 evidence outputs.")
+    parser = argparse.ArgumentParser(description="Bootstrap v3.2 evidence outputs.")
     parser.add_argument("--phase", required=True, choices=["faz0", "faz1", "faz2", "faz3", "faz4", "faz5", "faz6", "all"])
     parser.add_argument("--tweak-id")
     parser.add_argument("--queue-only", action="store_true")
@@ -715,7 +769,7 @@ def main() -> int:
         record = load_record(tweak_id)
         audit = load_audit_entry(tweak_id)
         write_phase_outputs(tweak_id, record, audit, args.phase)
-        print(f"Wrote v3.1 evidence bundle for {tweak_id}")
+        print(f"Wrote v3.2 evidence bundle for {tweak_id}")
 
     return 0
 

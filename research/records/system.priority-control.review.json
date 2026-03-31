@@ -1,10 +1,53 @@
 {
   "$schema": "../setting-research.schema.json",
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "record_id": "system.priority-control",
   "tweak_id": "system.priority-control",
   "record_status": "validated",
-  "summary": "Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: current-build read/write code paths, reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded CPU/memory benchmark runs after real reboots.",
+  "summary": "Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded rebooted benchmark runs. The raw 0x26 bitmask semantics remain repo interpretation rather than a modern Microsoft-published contract.",
+  "doc_source": {
+    "source_origin": "mixed",
+    "primary_contract": "Microsoft's Win32_OperatingSystem documentation proves the Win32PrioritySeparation registry path and the high-level WMI mapping for ForegroundApplicationBoost, QuantumLength, and QuantumType.",
+    "repo_interpretation": "The raw Win32PrioritySeparation bitmask interpretation for values such as 0x26 still comes from repo analysis and historical decompilation, not from a modern Microsoft page that publishes the exact bit semantics.",
+    "notes": "This re-audit keeps the Microsoft WMI contract separate from the repo-side raw scheduler interpretation."
+  },
+  "static_analysis": {
+    "ghidra": {
+      "executed": false,
+      "status": "blocked-pdb-required",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "binary": "cimwin32.dll",
+      "function_name": null,
+      "function_source": null,
+      "branch_analysis": [],
+      "effect_summary": "Legacy repo decomp exists for the read/write path, but no PDB-backed bounded v3.2 branch audit is attached to this record yet.",
+      "unclear": true,
+      "artifact_path": null
+    },
+    "ida": {
+      "executed": false,
+      "status": "blocked-ida-missing",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "binary": "cimwin32.dll",
+      "function_name": null,
+      "function_source": null,
+      "branch_analysis": [],
+      "effect_summary": "IDA headless cross-verification is not provisioned for this record yet.",
+      "unclear": true,
+      "artifact_path": null
+    }
+  },
+  "cross_verification": {
+    "executed": false,
+    "functions_match": null,
+    "branches_match": null,
+    "status": "insufficient",
+    "confidence": "low",
+    "cross_conflict": false,
+    "notes": "Cross-verification is pending until a PDB-backed Ghidra branch audit and an IDA headless pass exist for this record."
+  },
   "setting": {
     "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
     "category": "System",
@@ -12,8 +55,8 @@
     "scope": "device",
     "casual_explanation": "This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak.",
     "why_people_change_it": "People change it when chasing old gaming or responsiveness advice, or when undoing manual scheduler tweaks from third-party guides.",
-    "tradeoffs_overview": "Changing the value can alter how much extra runtime the foreground app gets and how scheduler quantums behave. The feature area is real and the current build evidence is strong, but the exact raw bitmask semantics for 0x26 still do not come from a modern Microsoft publication.",
-    "professional_notes": "Microsoft's Win32_OperatingSystem class maps Win32PrioritySeparation to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl and exposes related high-level properties such as ForegroundApplicationBoost, QuantumLength, and QuantumType. Decompiled PriorityControl logic in the repo confirms the read/write path for the raw value. The Win25H2Clean VM then confirmed the current observed baseline value 2, the app profile 38 (0x26), and a clean restore back to 2 after real reboots. On 2026-03-26, a Procmon pass around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading Win32PrioritySeparation with Data: 2 and Data: 38 in separate reversible runs. That is strong enough to treat 2 and 38 as current observed states and to treat the current app profile as app-ready on this build, even though raw 0x26 still is not published by Microsoft as a modern default.",
+    "tradeoffs_overview": "Changing the value can alter how much extra runtime the foreground app gets and how scheduler quantums behave. The feature area is real and the current build runtime evidence is strong, but the exact raw bitmask semantics for 0x26 still do not come from a modern Microsoft publication.",
+    "professional_notes": "Microsoft's Win32_OperatingSystem documentation maps Win32PrioritySeparation to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl and exposes related high-level WMI properties such as ForegroundApplicationBoost, QuantumLength, and QuantumType. That page proves the path and the WMI-facing feature family, not the raw 0x26 bit semantics. Repo decompilation and historical notes still cover the raw bitmask interpretation, but this re-audit treats that interpretation as repo provenance. The Win25H2Clean VM then confirmed the current observed baseline value 2, the app profile 38 (0x26), and a clean restore back to 2 after real reboots. On 2026-03-26, a Procmon pass around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading Win32PrioritySeparation with Data: 2 and Data: 38 in separate reversible runs. That is strong enough to treat 2 and 38 as current observed states on this build, even though the exact raw 0x26 semantics remain repo interpretation rather than a Microsoft-published default.",
     "targets": [
       {
         "target_id": "win32-priority-separation",
@@ -26,7 +69,7 @@
             "state_kind": "value",
             "value": 2,
             "label": "Observed Win25H2Clean baseline",
-            "meaning": "The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied.",
+            "meaning": "The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied. This is an observed runtime state, not a claim about the full raw bitmask semantics.",
             "evidence_ids": [
               "procmon-priority-control-wmi-read",
               "vm-batch-probe-20260320-priority-control",
@@ -37,7 +80,7 @@
             "state_kind": "value",
             "value": 38,
             "label": "Observed app profile",
-            "meaning": "The current app treats 0x26 as its balanced foreground scheduling profile, and the Win25H2Clean VM confirmed that write under real rebooted runs.",
+            "meaning": "The current app writes 38 (0x26), and the Win25H2Clean VM confirmed that observed state under real rebooted runs. This record does not claim that Microsoft publishes the full raw 0x26 bit semantics.",
             "evidence_ids": [
               "app-system-registry-provider",
               "repo-system-doc-priority",
@@ -48,7 +91,7 @@
             ]
           }
         ],
-        "notes": "Tracked as a current observed scheduler bitmask, not as a published Microsoft default."
+        "notes": "Tracked as a current observed scheduler state on this build, not as a Microsoft-published raw bitmask contract."
       }
     ]
   },
@@ -139,11 +182,11 @@
       "good_when": "You want to compare the app's current scheduler profile against the observed 25H2 baseline.",
       "bad_when": "You want only Microsoft-published raw bitmask values.",
       "tradeoffs": [
-        "The current app behavior is backed by Procmon, decomp, VM runtime, and bounded benchmark proof.",
+        "The current app behavior is backed by Procmon, VM runtime, and bounded benchmark proof.",
         "The exact raw scheduler semantics still are not published by Microsoft at the bit level."
       ],
       "apply_allowed": true,
-      "notes": "This is the current app-ready scheduler profile for the tested build, even though raw 0x26 still is not a Microsoft-published default.",
+      "notes": "This is the current app-ready observed scheduler profile for the tested build, even though raw 0x26 still is not a Microsoft-published default.",
       "evidence_ids": [
         "app-system-registry-provider",
         "repo-system-doc-priority",
@@ -160,7 +203,7 @@
       "kind": "official-doc",
       "title": "Microsoft Learn: Win32_OperatingSystem class",
       "location": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem",
-      "summary": "Microsoft maps ForegroundApplicationBoost, QuantumLength, and QuantumType to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation. The page explains the foreground boost concept, but modern documentation does not publish the exact raw 0x26 bitmask used by the app.",
+      "summary": "Microsoft maps ForegroundApplicationBoost, QuantumLength, and QuantumType to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation. The page proves the path and high-level WMI contract, but it does not publish the exact raw 0x26 bitmask used by the app.",
       "supports": [
         "path",
         "behavior",
@@ -187,7 +230,7 @@
       "kind": "decompilation",
       "title": "Decompiled PriorityControl read/write path",
       "location": "Docs/system/assets/lsc-cimwin32.c",
-      "summary": "Decompiled PriorityControl logic opens HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl, reads Win32PrioritySeparation, and writes it back after applying the ForegroundApplicationBoost bitfield.",
+      "summary": "Repo decompilation shows a PriorityControl read/write path for Win32PrioritySeparation, but this is still repo static provenance rather than a PDB-backed v3.2 branch audit.",
       "supports": [
         "path",
         "value",
@@ -257,14 +300,14 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Win25H2Clean reversible proof, the later rebooted VM benchmark pass, the wmiprvse.exe Procmon reads for both states, and the repo decompiled read/write path all line up on Win32PrioritySeparation. That is enough to treat the observed baseline value 2 and the app profile 38 as current-build app-ready states, even though 0x26 still is not a published Microsoft default.",
+    "why": "Win25H2Clean reversible proof, the later rebooted VM benchmark pass, and the wmiprvse.exe Procmon reads for both states are enough to treat 2 and 38 as current-build observed runtime states. This verdict does not rely on Microsoft publishing the raw 0x26 bitmask semantics.",
     "blocking_issues": []
   },
   "open_questions": [
-    "Can a modern Microsoft primary source for the exact raw Win32PrioritySeparation bitmask semantics be captured?",
-    "Should the app surface this only as an advanced research setting instead of a published preset?"
+    "Can a PDB-backed bounded branch audit replace the legacy repo decomp proof for Win32PrioritySeparation?",
+    "Can a modern Microsoft primary source for the exact raw Win32PrioritySeparation bitmask semantics be captured?"
   ],
-  "last_reviewed_utc": "2026-03-26T00:00:00Z",
+  "last_reviewed_utc": "2026-03-31T00:00:00Z",
   "validation_proof": {
     "source_url": "research/notes/priority-control-procmon-validation-20260326.md",
     "exact_quote_or_path": "prioritycontrol-state-2.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 2. prioritycontrol-state-38.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 38. priority-control-20260324-201011/summary.json: baseline=2, candidate=38, restore=2 with bounded CPU and memory runs.",

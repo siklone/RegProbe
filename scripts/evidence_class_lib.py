@@ -231,6 +231,46 @@ def validation_proof(record: dict[str, Any]) -> dict[str, Any]:
     return {}
 
 
+def doc_source_block(record: dict[str, Any]) -> dict[str, Any]:
+    payload = record.get("doc_source")
+    if isinstance(payload, dict):
+        return payload
+    return {}
+
+
+def static_analysis_block(record: dict[str, Any]) -> dict[str, Any]:
+    payload = record.get("static_analysis")
+    if isinstance(payload, dict):
+        return payload
+    return {}
+
+
+def static_tool_block(record: dict[str, Any], key: str) -> dict[str, Any]:
+    payload = static_analysis_block(record).get(key)
+    if isinstance(payload, dict):
+        return payload
+    return {}
+
+
+def cross_verification_block(record: dict[str, Any]) -> dict[str, Any]:
+    payload = record.get("cross_verification")
+    if isinstance(payload, dict):
+        return payload
+    return {}
+
+
+def static_tool_counts_as_evidence(payload: dict[str, Any]) -> bool:
+    if not payload:
+        return False
+    if payload.get("executed") is not True:
+        return False
+    if payload.get("unclear") is True:
+        return False
+    if payload.get("pdb_loaded") is False:
+        return False
+    return True
+
+
 def evidence_items(record: dict[str, Any]) -> list[dict[str, Any]]:
     return [item for item in record.get("evidence", []) or [] if isinstance(item, dict)]
 
@@ -306,6 +346,8 @@ def has_semantics_evidence(record: dict[str, Any]) -> bool:
 def has_official_evidence(record: dict[str, Any]) -> bool:
     if evidence_kinds(record) & OFFICIAL_EVIDENCE_KINDS:
         return True
+    if str(doc_source_block(record).get("source_origin") or "").strip().lower() == "microsoft-docs":
+        return True
     return source_looks_microsoft(str(validation_proof(record).get("source_url") or ""))
 
 
@@ -316,7 +358,14 @@ def has_procmon_evidence(record: dict[str, Any]) -> bool:
 
 
 def has_ghidra_evidence(record: dict[str, Any]) -> bool:
+    ghidra_block = static_tool_block(record, "ghidra")
+    if ghidra_block:
+        return static_tool_counts_as_evidence(ghidra_block)
     return bool(evidence_kinds(record) & GHIDRA_EVIDENCE_KINDS)
+
+
+def has_ida_evidence(record: dict[str, Any]) -> bool:
+    return static_tool_counts_as_evidence(static_tool_block(record, "ida"))
 
 
 def has_wpr_evidence(record: dict[str, Any]) -> bool:
@@ -386,6 +435,8 @@ def classification_layers(record: dict[str, Any]) -> list[str]:
         layers.append("runtime_procmon")
     if has_ghidra_evidence(record):
         layers.append("static_ghidra")
+    if has_ida_evidence(record):
+        layers.append("static_ida")
     if has_wpr_evidence(record):
         layers.append("behavior_wpr")
     if has_benchmark_evidence(record):
@@ -651,6 +702,11 @@ def derive_class_id(record: dict[str, Any]) -> str:
     needs_vm = bool_value(decision.get("needs_vm_validation"))
     unknown_state = has_unknown_state(record)
     app_gate_cleared = app_status != "matches-research" or apply_allowed
+    cross_verification = cross_verification_block(record)
+    cross_conflict = bool_value(cross_verification.get("cross_conflict")) or bool_value(decision.get("manual_review_required"))
+
+    if cross_conflict:
+        return "B" if has_validation else "D"
 
     if (
         has_validation

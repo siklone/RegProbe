@@ -1,0 +1,42 @@
+{
+  "$schema": "registry-evidence-v3.2/classification",
+  "classification": {
+    "class": "A",
+    "pipeline_version": "v3.2",
+    "reason": "Win25H2Clean reversible proof, the later rebooted VM benchmark pass, and the wmiprvse.exe Procmon reads for both states are enough to treat 2 and 38 as current-build observed runtime states. This verdict does not rely on Microsoft publishing the raw 0x26 bitmask semantics.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "runtime_procmon",
+      "behavior_wpr",
+      "behavior_benchmark",
+      "runtime_reboot",
+      "official_doc"
+    ],
+    "layer_count": 5,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "official-doc",
+    "next_missing_layer": "none",
+    "cross_verification": {
+      "executed": false,
+      "functions_match": null,
+      "branches_match": null,
+      "status": "insufficient",
+      "confidence": "low",
+      "cross_conflict": false,
+      "notes": "Cross-verification is pending until a PDB-backed Ghidra branch audit and an IDA headless pass exist for this record."
+    },
+    "manual_review_required": false,
+    "doc_source": {
+      "source_origin": "mixed",
+      "primary_contract": "Microsoft's Win32_OperatingSystem documentation proves the Win32PrioritySeparation registry path and the high-level WMI mapping for ForegroundApplicationBoost, QuantumLength, and QuantumType.",
+      "repo_interpretation": "The raw Win32PrioritySeparation bitmask interpretation for values such as 0x26 still comes from repo analysis and historical decompilation, not from a modern Microsoft page that publishes the exact bit semantics.",
+      "notes": "This re-audit keeps the Microsoft WMI contract separate from the repo-side raw scheduler interpretation."
+    }
+  }
+}

@@ -9068,12 +9068,12 @@ Windows Internals references:
 | Area | `TCP/IP offload + MMCSS policy` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-network-power-saving.policy.review.json](records/power.disable-network-power-saving.policy.review.json) |
-| V3.1 evidence root | - |
+| V3.1 evidence root | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Controls the official TCP/IP offload and MMCSS responsiveness values only. The opaque NetworkThrottlingIndex value remains in the deprecated parent audit trail.
+**Summary:** This child record keeps only the documented DisableTaskOffload and SystemResponsiveness values. SystemResponsiveness is supported here for path plus rounding/clamping behavior; the opaque NetworkThrottlingIndex write remains outside this child in the deprecated parent audit trail.
 
 **Current implementation**
 
@@ -9138,13 +9138,13 @@ Current writes
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `value` | `10` | App responsiveness value | Microsoft documents SystemResponsiveness as the percentage of CPU resources guaranteed to low-priority tasks. Values not divisible by 10 are rounded down to the nearest multiple of 10. | ms-mmcss, app-power-provider |
+| `value` | `10` | Current app child value | Microsoft documents SystemResponsiveness as the percentage of CPU resources guaranteed to low-priority tasks and documents the rounding/clamping rules. The current app uses 10, which is an in-range documented child value rather than a claim about every stock Windows baseline. | ms-mmcss, app-power-provider |
 
 **Windows defaults**
 
 | Label | Applies to | States |
 | --- | --- | --- |
-| Microsoft documented defaults | Windows SMB client tuning surface documented by Microsoft | disable-task-offload: value 0 - Microsoft lists 0 as the enabled baseline.; system-responsiveness: value 10 - Microsoft's MMCSS documentation uses 10 as the example baseline. |
+| Documented offload baseline and MMCSS rules | Windows systems where DisableTaskOffload follows Microsoft's documented baseline and SystemResponsiveness is interpreted using Microsoft's MMCSS rules | disable-task-offload: value 0 - Microsoft lists 0 as the enabled baseline.; system-responsiveness: unknown None - Microsoft documents the SystemResponsiveness path plus rounding/clamping behavior, but this child record does not treat that page as proof of one universal stock default. |
 
 **Recommended profiles**
 
@@ -9164,10 +9164,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading) |
-| Exact quote / path | HKLM/System/CurrentControlSet/Services/TCPIP/Parameters/DisableTaskOffload |
+| Source | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) |
+| Exact quote / path | HKLM/SOFTWARE/Microsoft/Windows NT/CurrentVersion/Multimedia/SystemProfile/SystemResponsiveness; values not divisible by 10 are rounded down to the nearest multiple of 10. |
 | Key found on page | `True` |
-| Notes | The child record also relies on Microsoft's MMCSS documentation for SystemResponsiveness. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail. |
+| Notes | DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail. |
 
 **Decision**
 
@@ -9178,7 +9178,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The official TCP/IP offload and MMCSS values are documented and machine-checkable. The unresolved NetworkThrottlingIndex value remains in the deprecated parent audit trail. |
+| Why | DisableTaskOffload and the narrowed SystemResponsiveness claim are documented and machine-checkable. This record now treats the MMCSS page as proof of path plus rounding/clamping behavior, not as proof of the unresolved opaque NetworkThrottlingIndex value. |
 
 ---
 
@@ -26862,12 +26862,12 @@ Windows Internals references:
 | Area | `Scheduler / Priority Control` |
 | Scope | `device` |
 | Source file | [research/records/system.priority-control.review.json](records/system.priority-control.review.json) |
-| V3.1 evidence root | - |
+| V3.1 evidence root | [evidence/records/system.priority-control](../evidence/records/system.priority-control) |
 | Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean now has a full current-build evidence chain for Win32PrioritySeparation: current-build read/write code paths, reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded CPU/memory benchmark runs after real reboots.
+**Summary:** Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded rebooted benchmark runs. The raw 0x26 bitmask semantics remain repo interpretation rather than a modern Microsoft-published contract.
 
 **Current implementation**
 
@@ -26929,12 +26929,12 @@ Windows Internals references:
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl` |
 | Value name | `Win32PrioritySeparation` |
 | Value type | `REG_DWORD` |
-| Notes | Tracked as a current observed scheduler bitmask, not as a published Microsoft default. |
+| Notes | Tracked as a current observed scheduler state on this build, not as a Microsoft-published raw bitmask contract. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
-| `value` | `2` | Observed Win25H2Clean baseline | The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied. | procmon-priority-control-wmi-read, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
-| `value` | `38` | Observed app profile | The current app treats 0x26 as its balanced foreground scheduling profile, and the Win25H2Clean VM confirmed that write under real rebooted runs. | app-system-registry-provider, repo-system-doc-priority, repo-system-decomp-prioritycontrol, procmon-priority-control-wmi-read, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
+| `value` | `2` | Observed Win25H2Clean baseline | The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied. This is an observed runtime state, not a claim about the full raw bitmask semantics. | procmon-priority-control-wmi-read, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
+| `value` | `38` | Observed app profile | The current app writes 38 (0x26), and the Win25H2Clean VM confirmed that observed state under real rebooted runs. This record does not claim that Microsoft publishes the full raw 0x26 bit semantics. | app-system-registry-provider, repo-system-doc-priority, repo-system-decomp-prioritycontrol, procmon-priority-control-wmi-read, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
 
 **Windows defaults**
 
@@ -26979,7 +26979,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible proof, the later rebooted VM benchmark pass, the wmiprvse.exe Procmon reads for both states, and the repo decompiled read/write path all line up on Win32PrioritySeparation. That is enough to treat the observed baseline value 2 and the app profile 38 as current-build app-ready states, even though 0x26 still is not a published Microsoft default. |
+| Why | Win25H2Clean reversible proof, the later rebooted VM benchmark pass, and the wmiprvse.exe Procmon reads for both states are enough to treat 2 and 38 as current-build observed runtime states. This verdict does not rely on Microsoft publishing the raw 0x26 bitmask semantics. |
 
 ---
 

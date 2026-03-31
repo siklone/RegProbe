@@ -1,0 +1,225 @@
+{
+  "$schema": "registry-evidence-v3.2/full-evidence",
+  "record_id": "power.disable-network-power-saving.policy",
+  "tweak_id": "power.disable-network-power-saving.policy",
+  "metadata": {
+    "$schema": "registry-evidence-v3.2/metadata",
+    "tweak_id": "power.disable-network-power-saving.policy",
+    "key_path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+    "value_name": "DisableTaskOffload",
+    "value_type": "REG_DWORD",
+    "value_data_before": 0,
+    "value_data_after": 0,
+    "enrichment": {
+      "hive": "HKLM",
+      "suspected_layer": "driver",
+      "boot_phase_relevant": true,
+      "acl_owner": null,
+      "acl_sddl": null,
+      "acl_user_readable": null,
+      "source": "official_doc",
+      "official_doc_exists": true,
+      "reactos_reference": false,
+      "geoff_chappell_reference": false,
+      "pdb_symbol_match": null,
+      "source_repositories": []
+    },
+    "doc_source": {
+      "source_origin": "mixed",
+      "primary_contract": "Microsoft documents DisableTaskOffload under TCPIP Parameters and documents SystemResponsiveness under the MMCSS SystemProfile key, including the path and rounding/clamping rules for SystemResponsiveness.",
+      "repo_interpretation": "This child record intentionally does not treat the MMCSS page as proof of NetworkThrottlingIndex semantics or as proof of one universal stock SystemResponsiveness default across all Windows builds.",
+      "notes": "The current app's 10 value is kept as a documented in-range child profile, not as a sweeping claim about every Windows baseline."
+    }
+  },
+  "runtime": {
+    "etw": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": false,
+      "trace_file": null
+    },
+    "procmon": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "trace_file": null
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: key is treated as driver, Frida is not valid for this lane.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": false,
+      "status": "not-run",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "binary": null,
+      "function_name": null,
+      "function_source": null,
+      "branch_analysis": [],
+      "effect_summary": "This child record currently stands on Microsoft documentation and repo-code mapping rather than a static branch audit.",
+      "unclear": false,
+      "artifact_path": null
+    },
+    "ida": {
+      "executed": false,
+      "status": "blocked-ida-missing",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "binary": null,
+      "function_name": null,
+      "function_source": null,
+      "branch_analysis": [],
+      "effect_summary": "IDA headless is not provisioned for this doc-driven child record yet.",
+      "unclear": false,
+      "artifact_path": null
+    },
+    "cross_verification": {
+      "executed": false,
+      "functions_match": null,
+      "branches_match": null,
+      "status": "insufficient",
+      "confidence": "low",
+      "cross_conflict": false,
+      "notes": "This child record is currently doc-driven. No dedicated Ghidra+IDA parity artifact is attached yet."
+    },
+    "doc_source": {
+      "source_origin": "mixed",
+      "primary_contract": "Microsoft documents DisableTaskOffload under TCPIP Parameters and documents SystemResponsiveness under the MMCSS SystemProfile key, including the path and rounding/clamping rules for SystemResponsiveness.",
+      "repo_interpretation": "This child record intentionally does not treat the MMCSS page as proof of NetworkThrottlingIndex semantics or as proof of one universal stock SystemResponsiveness default across all Windows builds.",
+      "notes": "The current app's 10 value is kept as a documented in-range child profile, not as a sweeping claim about every Windows baseline."
+    }
+  },
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": false,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": null
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "classification": {
+    "class": "A",
+    "pipeline_version": "v3.2",
+    "reason": "DisableTaskOffload and the narrowed SystemResponsiveness claim are documented and machine-checkable. This record now treats the MMCSS page as proof of path plus rounding/clamping behavior, not as proof of the unresolved opaque NetworkThrottlingIndex value.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "official_doc"
+    ],
+    "layer_count": 1,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": false,
+      "boot_phase_included": false,
+      "correct_tool_used": true,
+      "trigger_condition_tested": false
+    },
+    "class_ready_basis": "official-doc",
+    "next_missing_layer": "none",
+    "cross_verification": {
+      "executed": false,
+      "functions_match": null,
+      "branches_match": null,
+      "status": "insufficient",
+      "confidence": "low",
+      "cross_conflict": false,
+      "notes": "This child record is currently doc-driven. No dedicated Ghidra+IDA parity artifact is attached yet."
+    },
+    "manual_review_required": false,
+    "doc_source": {
+      "source_origin": "mixed",
+      "primary_contract": "Microsoft documents DisableTaskOffload under TCPIP Parameters and documents SystemResponsiveness under the MMCSS SystemProfile key, including the path and rounding/clamping rules for SystemResponsiveness.",
+      "repo_interpretation": "This child record intentionally does not treat the MMCSS page as proof of NetworkThrottlingIndex semantics or as proof of one universal stock SystemResponsiveness default across all Windows builds.",
+      "notes": "The current app's 10 value is kept as a documented in-range child profile, not as a sweeping claim about every Windows baseline."
+    }
+  },
+  "timeline": [
+    {
+      "step": "bootstrap_record_load",
+      "timestamp": "2026-03-31T18:56:15.536743Z"
+    },
+    {
+      "step": "faz5",
+      "timestamp": "2026-03-31T18:56:15.536743Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-31T18:56:15.536743Z"
+    },
+    {
+      "step": "last_reviewed",
+      "timestamp": "2026-03-31T00:00:00Z"
+    }
+  ],
+  "artifact_refs": [],
+  "doc_source": {
+    "source_origin": "mixed",
+    "primary_contract": "Microsoft documents DisableTaskOffload under TCPIP Parameters and documents SystemResponsiveness under the MMCSS SystemProfile key, including the path and rounding/clamping rules for SystemResponsiveness.",
+    "repo_interpretation": "This child record intentionally does not treat the MMCSS page as proof of NetworkThrottlingIndex semantics or as proof of one universal stock SystemResponsiveness default across all Windows builds.",
+    "notes": "The current app's 10 value is kept as a documented in-range child profile, not as a sweeping claim about every Windows baseline."
+  },
+  "cross_verification": {
+    "executed": false,
+    "functions_match": null,
+    "branches_match": null,
+    "status": "insufficient",
+    "confidence": "low",
+    "cross_conflict": false,
+    "notes": "This child record is currently doc-driven. No dedicated Ghidra+IDA parity artifact is attached yet."
+  },
+  "research_record": "research/records/power.disable-network-power-saving.policy.json",
+  "research_record_fallback": "research/records/power.disable-network-power-saving.policy.review.json"
+}

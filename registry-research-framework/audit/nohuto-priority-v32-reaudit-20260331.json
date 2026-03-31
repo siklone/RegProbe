@@ -1,0 +1,50 @@
+{
+  "generated_utc": "2026-03-31T18:57:03.5357715Z",
+  "entries": [
+    {
+      "tweak_id": "system.priority-control",
+      "priority": 1,
+      "pdb_loaded": false,
+      "ghidra_function": null,
+      "ghidra_status": "blocked-pdb-required",
+      "ida_function": null,
+      "ida_status": "blocked-ida-missing",
+      "branch_mapping": "not attached in v3.2 yet",
+      "link_status": "reachable_but_mismatch",
+      "verdict": "A",
+      "what_changed": [
+        "Microsoft Win32_OperatingSystem evidence is now limited to path plus high-level WMI mapping.",
+        "Raw 0x26 semantics are explicitly labeled as repo interpretation rather than Microsoft contract.",
+        "The v3.2 static block fails closed when PDB-backed bounded branch analysis is missing.",
+        "Long decompile prose and FUN_-named static claims were removed from the priority record."
+      ]
+    },
+    {
+      "tweak_id": "power.disable-network-power-saving.policy",
+      "priority": 1,
+      "pdb_loaded": false,
+      "ghidra_function": null,
+      "ghidra_status": "not-run",
+      "ida_function": null,
+      "ida_status": "blocked-ida-missing",
+      "branch_mapping": "not required for the narrowed child verdict",
+      "link_status": "reachable_but_mismatch",
+      "verdict": "A",
+      "what_changed": [
+        "The MMCSS page is now used only for SystemResponsiveness path plus rounding/clamping behavior.",
+        "The record no longer treats MMCSS as proof of NetworkThrottlingIndex semantics.",
+        "The old broad default-value wording for SystemResponsiveness was removed.",
+        "The unresolved NetworkThrottlingIndex claim remains outside this child record in the deprecated parent trail."
+      ]
+    }
+  ],
+  "pilot_status": {
+    "ghidra_symbolized_pilot": "blocked-pdb-missing",
+    "ida_headless_provisioning": "blocked-installer-missing",
+    "controlled_cross_verification_outputs": {
+      "match": "registry-research-framework/audit/static-cross-verification-match-20260331.json",
+      "conflict": "registry-research-framework/audit/static-cross-verification-conflict-20260331.json",
+      "insufficient": "registry-research-framework/audit/static-cross-verification-insufficient-20260331.json"
+    }
+  }
+}
