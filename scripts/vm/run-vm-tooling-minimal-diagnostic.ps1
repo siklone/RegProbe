@@ -1,10 +1,11 @@
 [CmdletBinding()]
 param(
+    [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
-    [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
+    [string]$HostOutputRoot = '',
     [string]$GuestRoot = 'C:\RegProbe-Diag',
     [string]$SnapshotName = '',
     [string]$TrackedOutputRoot = ''
@@ -14,22 +15,31 @@ $ErrorActionPreference = 'Stop'
 
 . (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
 
+$vmProfileTag = Resolve-VmProfileTag -VmProfile $VmProfile
 if ([string]::IsNullOrWhiteSpace($VmPath)) {
-    $VmPath = Resolve-CanonicalVmPath
+    $VmPath = Resolve-CanonicalVmPath -VmProfile $VmProfile
 }
 
 if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
-    $SnapshotName = Resolve-DefaultVmSnapshotName
+    $SnapshotName = Resolve-DefaultVmSnapshotName -VmProfile $VmProfile
+}
+
+if ([string]::IsNullOrWhiteSpace($HostOutputRoot)) {
+    $HostOutputRoot = Resolve-HostStagingRoot -VmProfile $VmProfile
+}
+
+if ($GuestRoot -eq 'C:\RegProbe-Diag') {
+    $GuestRoot = Resolve-GuestDiagRoot -VmProfile $VmProfile
 }
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$probeName = "vm-tooling-minimal-diagnostic-$stamp"
+$probeName = "vm-tooling-minimal-diagnostic-$vmProfileTag-$stamp"
 $hostRoot = Join-Path $HostOutputRoot $probeName
 $defaultTrackedRoot = Join-Path $repoRoot 'evidence\files\vm-tooling-staging'
 $trackedRootBase =
     if ([string]::IsNullOrWhiteSpace($TrackedOutputRoot)) {
-        $defaultTrackedRoot
+        Resolve-TrackedVmOutputRoot -VmProfile $VmProfile -Fallback $defaultTrackedRoot
     }
     else {
         $TrackedOutputRoot

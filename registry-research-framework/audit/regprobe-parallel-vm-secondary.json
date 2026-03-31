@@ -1,0 +1,34 @@
+﻿{
+    "generated_utc":  "2026-03-31T00:30:21.8943629Z",
+    "source":  {
+                   "profile":  "primary",
+                   "vm_name":  "Win25H2Clean",
+                   "vm_path":  "\u003cLOCAL_VM_ROOT\u003e\\Win25H2Clean\\Win25H2.vmx",
+                   "snapshot":  "RegProbe-Baseline-ToolsHardened-20260330"
+               },
+    "target":  {
+                   "profile":  "secondary",
+                   "vm_name":  "Win25H2Clean-B",
+                   "vm_path":  "\u003cLOCAL_VM_ROOT\u003e\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+                   "snapshot":  "RegProbe-Baseline-ToolsHardened-20260330",
+                   "host_staging_root":  "\u003cHOST_STAGING_ROOT\u003e\\secondary"
+               },
+    "clone_type":  "full",
+    "target_exists_before":  true,
+    "replaced_existing":  false,
+    "clone_performed":  false,
+    "source_running_at_start":  true,
+    "source_restarted_after_clone":  false,
+    "validation":  {
+                       "tooling_diagnostic_summary":  "\u003cREPO_ROOT\u003e\\\\registry-research-framework\\\\audit\\\\parallel-vm-bootstrap-20260331\\\\secondary-bootstrap-20260331-033021\\\\summary.json",
+                       "write_test_path":  "\u003cREPO_ROOT\u003e\\\\registry-research-framework\\\\audit\\\\parallel-vm-bootstrap-20260331\\\\secondary-bootstrap-20260331-033021\\\\write-test.txt",
+                       "environment_path":  "\u003cREPO_ROOT\u003e\\\\registry-research-framework\\\\audit\\\\parallel-vm-bootstrap-20260331\\\\secondary-bootstrap-20260331-033021\\\\environment.json",
+                       "script_result_path":  "\u003cREPO_ROOT\u003e\\\\registry-research-framework\\\\audit\\\\parallel-vm-bootstrap-20260331\\\\secondary-bootstrap-20260331-033021\\\\script-result.json",
+                       "app_smoke_output":  null
+                   },
+    "clone_strategy":  null,
+    "status":  "ok",
+    "errors":  [
+
+               ]
+}

@@ -43,6 +43,8 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
   shared snapshot resolver used by active VM lanes
 - `scripts/vm/new-regprobe-tools-hardened-baseline.ps1`
   creates the current canonical VM baseline
+- `scripts/vm/new-regprobe-parallel-vm.ps1`
+  clones the canonical baseline into the optional secondary VM and validates it for parallel research work
 - `scripts/vm/apply-defender-tooling-exclusions.ps1`
   applies bounded Defender exclusions for trusted tooling only
 - `scripts/vm/apply-vmtools-hardening.ps1`

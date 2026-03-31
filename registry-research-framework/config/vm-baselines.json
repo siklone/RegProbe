@@ -1,9 +1,37 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "canonical_vm": "Win25H2Clean",
+  "canonical_profile": "primary",
+  "default_profile": "primary",
   "vm_path": "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
   "default_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
   "seed_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "host_staging_root": "<HOST_STAGING_ROOT>\\primary",
+  "tracked_output_root": "<REPO_ROOT>\\evidence\\files\\vm-tooling-staging\\primary",
+  "guest_diag_root": "C:\\RegProbe-Diag",
+  "guest_script_root": "C:\\Tools\\Scripts",
+  "profiles": {
+    "primary": {
+      "vm_name": "Win25H2Clean",
+      "vm_path": "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
+      "default_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+      "seed_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+      "host_staging_root": "<HOST_STAGING_ROOT>\\primary",
+      "tracked_output_root": "<REPO_ROOT>\\evidence\\files\\vm-tooling-staging\\primary",
+      "guest_diag_root": "C:\\RegProbe-Diag",
+      "guest_script_root": "C:\\Tools\\Scripts"
+    },
+    "secondary": {
+      "vm_name": "Win25H2Clean-B",
+      "vm_path": "<LOCAL_VM_ROOT>\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+      "default_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+      "seed_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+      "host_staging_root": "<HOST_STAGING_ROOT>\\secondary",
+      "tracked_output_root": "<REPO_ROOT>\\evidence\\files\\vm-tooling-staging\\secondary",
+      "guest_diag_root": "C:\\RegProbe-Diag",
+      "guest_script_root": "C:\\Tools\\Scripts"
+    }
+  },
   "baseline_policy": {
     "mode": "hybrid",
     "tooling_first": true,

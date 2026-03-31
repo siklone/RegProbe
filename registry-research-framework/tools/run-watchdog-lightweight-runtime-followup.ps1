@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param(
+    [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
@@ -12,20 +13,25 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 . (Join-Path $repoRoot 'scripts\vm\_resolve-vm-baseline.ps1')
 
-if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = Resolve-CanonicalVmPath }
-if ([string]::IsNullOrWhiteSpace($SnapshotName)) { $SnapshotName = Resolve-DefaultVmSnapshotName }
+$vmProfileTag = Resolve-VmProfileTag -VmProfile $VmProfile
+$repoEvidenceBase = Resolve-TrackedVmOutputRoot -VmProfile $VmProfile -Fallback (Join-Path $repoRoot 'evidence\files\vm-tooling-staging')
+$hostStagingBase = Resolve-HostStagingRoot -VmProfile $VmProfile
+$guestScriptRoot = Resolve-GuestScriptRoot -VmProfile $VmProfile
+$guestDiagBase = Resolve-GuestDiagRoot -VmProfile $VmProfile
+
+if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = Resolve-CanonicalVmPath -VmProfile $VmProfile }
+if ([string]::IsNullOrWhiteSpace($SnapshotName)) { $SnapshotName = Resolve-DefaultVmSnapshotName -VmProfile $VmProfile }
 if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx' }
 if ([string]::IsNullOrWhiteSpace($SnapshotName)) { $SnapshotName = 'RegProbe-Baseline-ToolsHardened-20260330' }
 
 $shellHealthScript = Join-Path $repoRoot 'scripts\vm\get-vm-shell-health.ps1'
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$probeName = "watchdog-lightweight-runtime-$stamp"
-$repoOutputRoot = Join-Path $repoRoot "evidence\files\vm-tooling-staging\$probeName"
-$hostWorkRoot = Join-Path ([System.IO.Path]::GetTempPath()) $probeName
+$probeName = "watchdog-lightweight-runtime-$vmProfileTag-$stamp"
+$repoOutputRoot = Join-Path $repoEvidenceBase $probeName
+$hostWorkRoot = Join-Path $hostStagingBase $probeName
 $repoSummaryPath = Join-Path $repoOutputRoot 'summary.json'
 $repoResultsPath = Join-Path $repoOutputRoot 'results.json'
-$guestScriptRoot = 'C:\Tools\Scripts'
-$guestRoot = "C:\RegProbe-Diag\$probeName"
+$guestRoot = Join-Path $guestDiagBase $probeName
 $candidateId = 'power.session-watchdog-timeouts'
 $candidateLabel = 'power-session-watchdog-timeouts'
 

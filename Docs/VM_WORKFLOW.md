@@ -19,6 +19,26 @@ For the current script map, also see:
 
 - `Docs/SCRIPT_CATALOG.md`
 
+## Profiles
+
+The active VM automation now understands profile names as well as raw VMX paths.
+
+- `primary`
+  - VM name: `Win25H2Clean`
+  - role: canonical day-to-day runtime lane
+- `secondary`
+  - VM name: `Win25H2Clean-B`
+  - role: optional parallel research lane for a second operator or sub-agent
+
+Profile metadata lives in:
+
+```text
+registry-research-framework/config/vm-baselines.json
+scripts/vm/_resolve-vm-baseline.ps1
+```
+
+When a runner accepts `-VmProfile`, use `primary` or `secondary` instead of hardcoding a VMX path.
+
 ## Canonical Baseline
 
 - VM identity: `Win25H2Clean`
@@ -39,6 +59,14 @@ The baseline wrapper lives at:
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\new-regprobe-tools-hardened-baseline.ps1
 ```
+
+To bootstrap a second VM from the canonical snapshot for parallel research work:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\new-regprobe-parallel-vm.ps1
+```
+
+That script clones from the canonical primary snapshot, creates a matching snapshot on the secondary VM, and validates the clone with the minimal tooling diagnostic.
 
 The shared snapshot resolver used by active research scripts lives at:
 
@@ -120,12 +148,14 @@ Minimal tooling smoke:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\run-vm-tooling-minimal-diagnostic.ps1
+powershell -ExecutionPolicy Bypass -File scripts\vm\run-vm-tooling-minimal-diagnostic.ps1 -VmProfile secondary
 ```
 
 Visible app launch smoke:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\vm\run-app-launch-smoke-host.ps1
+powershell -ExecutionPolicy Bypass -File scripts\vm\run-app-launch-smoke-host.ps1 -VmProfile secondary
 ```
 
 This lane is intentionally ephemeral. It should deploy the app, validate launch, and clean the guest again before the baseline is saved or reused as the canonical starting point.

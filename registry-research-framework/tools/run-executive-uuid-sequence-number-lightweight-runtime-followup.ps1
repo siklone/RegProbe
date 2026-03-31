@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param(
+    [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
@@ -13,21 +14,30 @@ $ErrorActionPreference = 'Stop'
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $baselineResolver = Join-Path $repoRoot 'scripts\vm\_resolve-vm-baseline.ps1'
+$vmProfileTag = 'primary'
+$repoEvidenceBase = Join-Path $repoRoot 'evidence\files\vm-tooling-staging'
+$hostStagingBase = Join-Path ([System.IO.Path]::GetTempPath()) 'vm-tooling-staging-primary'
+$guestScriptRoot = 'C:\Tools\Scripts'
+$guestDiagBase = 'C:\RegProbe-Diag'
 if (Test-Path $baselineResolver) {
     . $baselineResolver
-    if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = Resolve-CanonicalVmPath }
-    if ([string]::IsNullOrWhiteSpace($SnapshotName)) { $SnapshotName = Resolve-DefaultVmSnapshotName }
+    $vmProfileTag = Resolve-VmProfileTag -VmProfile $VmProfile
+    if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = Resolve-CanonicalVmPath -VmProfile $VmProfile }
+    if ([string]::IsNullOrWhiteSpace($SnapshotName)) { $SnapshotName = Resolve-DefaultVmSnapshotName -VmProfile $VmProfile }
+    $repoEvidenceBase = Resolve-TrackedVmOutputRoot -VmProfile $VmProfile -Fallback $repoEvidenceBase
+    $hostStagingBase = Resolve-HostStagingRoot -VmProfile $VmProfile -Fallback $hostStagingBase
+    $guestScriptRoot = Resolve-GuestScriptRoot -VmProfile $VmProfile -Fallback $guestScriptRoot
+    $guestDiagBase = Resolve-GuestDiagRoot -VmProfile $VmProfile -Fallback $guestDiagBase
 }
 if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx' }
 if ([string]::IsNullOrWhiteSpace($SnapshotName)) { $SnapshotName = 'RegProbe-Baseline-ToolsHardened-20260330' }
 
 $shellHealthScript = Join-Path $repoRoot 'scripts\vm\get-vm-shell-health.ps1'
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$probeName = "executive-uuid-sequence-number-lightweight-runtime-$stamp"
-$repoOutputRoot = Join-Path $repoRoot "evidence\files\vm-tooling-staging\$probeName"
-$hostWorkRoot = Join-Path ([System.IO.Path]::GetTempPath()) $probeName
-$guestScriptRoot = 'C:\Tools\Scripts'
-$guestRoot = "C:\RegProbe-Diag\$probeName"
+$probeName = "executive-uuid-sequence-number-lightweight-runtime-$vmProfileTag-$stamp"
+$repoOutputRoot = Join-Path $repoEvidenceBase $probeName
+$hostWorkRoot = Join-Path $hostStagingBase $probeName
+$guestRoot = Join-Path $guestDiagBase $probeName
 $candidateId = 'system.executive-uuid-sequence-number'
 $candidateLabel = 'system-executive-uuid-sequence-number'
 $valueName = 'UuidSequenceNumber'

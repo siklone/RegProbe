@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param(
+    [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
@@ -13,16 +14,20 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 . (Join-Path $repoRoot 'scripts\vm\_resolve-vm-baseline.ps1')
 
-if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = Resolve-CanonicalVmPath }
-if ([string]::IsNullOrWhiteSpace($SnapshotName)) { $SnapshotName = Resolve-DefaultVmSnapshotName }
+$vmProfileTag = Resolve-VmProfileTag -VmProfile $VmProfile
+$hostStagingBase = Resolve-HostStagingRoot -VmProfile $VmProfile
+$guestDiagBase = Resolve-GuestDiagRoot -VmProfile $VmProfile
+
+if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = Resolve-CanonicalVmPath -VmProfile $VmProfile }
+if ([string]::IsNullOrWhiteSpace($SnapshotName)) { $SnapshotName = Resolve-DefaultVmSnapshotName -VmProfile $VmProfile }
 if ([string]::IsNullOrWhiteSpace($VmPath)) { $VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx' }
 if ([string]::IsNullOrWhiteSpace($SnapshotName)) { $SnapshotName = 'RegProbe-Baseline-ToolsHardened-20260330' }
 
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$probeName = "path-aware-static-$stamp"
-$repoOutputRoot = Join-Path $repoRoot "evidence\files\path-aware\$probeName"
-$hostWorkRoot = Join-Path ([System.IO.Path]::GetTempPath()) $probeName
-$guestProbeRoot = "C:\RegProbe-Diag\$probeName"
+$probeName = "path-aware-static-$vmProfileTag-$stamp"
+$repoOutputRoot = Join-Path $repoRoot "evidence\files\path-aware\$vmProfileTag\$probeName"
+$hostWorkRoot = Join-Path $hostStagingBase $probeName
+$guestProbeRoot = Join-Path $guestDiagBase $probeName
 $ghidraProbeRoot = Join-Path $repoRoot 'evidence\files\ghidra'
 $repoSummaryPath = Join-Path $repoOutputRoot 'summary.json'
 $repoResultsPath = Join-Path $repoOutputRoot 'results.json'

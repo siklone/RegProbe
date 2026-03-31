@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param(
+    [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
@@ -11,14 +12,24 @@ $ErrorActionPreference = 'Stop'
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 $baselineResolver = Join-Path $repoRoot 'scripts\vm\_resolve-vm-baseline.ps1'
+$vmProfileTag = 'primary'
+$repoEvidenceBase = Join-Path $repoRoot 'evidence\files\vm-tooling-staging'
+$hostStagingBase = Join-Path ([System.IO.Path]::GetTempPath()) 'vm-tooling-staging-primary'
+$guestScriptRoot = 'C:\Tools\Scripts'
+$guestDiagBase = 'C:\RegProbe-Diag'
 if (Test-Path $baselineResolver) {
     . $baselineResolver
+    $vmProfileTag = Resolve-VmProfileTag -VmProfile $VmProfile
     if ([string]::IsNullOrWhiteSpace($VmPath)) {
-        $VmPath = Resolve-CanonicalVmPath
+        $VmPath = Resolve-CanonicalVmPath -VmProfile $VmProfile
     }
     if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
-        $SnapshotName = Resolve-DefaultVmSnapshotName
+        $SnapshotName = Resolve-DefaultVmSnapshotName -VmProfile $VmProfile
     }
+    $repoEvidenceBase = Resolve-TrackedVmOutputRoot -VmProfile $VmProfile -Fallback $repoEvidenceBase
+    $hostStagingBase = Resolve-HostStagingRoot -VmProfile $VmProfile -Fallback $hostStagingBase
+    $guestScriptRoot = Resolve-GuestScriptRoot -VmProfile $VmProfile -Fallback $guestScriptRoot
+    $guestDiagBase = Resolve-GuestDiagRoot -VmProfile $VmProfile -Fallback $guestDiagBase
 }
 
 if ([string]::IsNullOrWhiteSpace($VmPath)) {
@@ -31,11 +42,10 @@ if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
 
 $shellHealthScript = Join-Path $repoRoot 'scripts\vm\get-vm-shell-health.ps1'
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$probeName = "executive-worker-threads-lightweight-runtime-$stamp"
-$repoOutputRoot = Join-Path $repoRoot "evidence\files\vm-tooling-staging\$probeName"
-$hostWorkRoot = Join-Path ([System.IO.Path]::GetTempPath()) $probeName
-$guestScriptRoot = 'C:\Tools\Scripts'
-$guestBatchRoot = "C:\RegProbe-Diag\$probeName"
+$probeName = "executive-worker-threads-lightweight-runtime-$vmProfileTag-$stamp"
+$repoOutputRoot = Join-Path $repoEvidenceBase $probeName
+$hostWorkRoot = Join-Path $hostStagingBase $probeName
+$guestBatchRoot = Join-Path $guestDiagBase $probeName
 $candidateId = 'system.executive-additional-worker-threads'
 $valueNames = @('AdditionalCriticalWorkerThreads', 'AdditionalDelayedWorkerThreads')
 

@@ -1,14 +1,15 @@
 [CmdletBinding()]
 param(
+    [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
-    [string]$PublishZipPath = 'H:\Temp\vm-tooling-staging\regprobe-app-publish.zip',
+    [string]$PublishZipPath = '',
     [string]$GuestPublishZipPath = 'C:\Tools\Inbound\app-publish.zip',
     [string]$GuestScriptPath = 'C:\Tools\Scripts\app-launch-smoke.ps1',
     [string]$GuestResultPath = 'C:\Tools\ValidationController\smoke\app-launch-smoke.json',
-    [string]$OutputPath = 'H:\Temp\vm-tooling-staging\app-launch-smoke.json',
+    [string]$OutputPath = '',
     [bool]$RefreshPackage = $true,
     [string]$PreCleanupOutputPath = '',
     [string]$PostCleanupOutputPath = '',
@@ -19,8 +20,17 @@ $ErrorActionPreference = 'Stop'
 
 . (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
 
+$vmProfileTag = Resolve-VmProfileTag -VmProfile $VmProfile
 if ([string]::IsNullOrWhiteSpace($VmPath)) {
-    $VmPath = Resolve-CanonicalVmPath
+    $VmPath = Resolve-CanonicalVmPath -VmProfile $VmProfile
+}
+
+$hostStagingRoot = Resolve-HostStagingRoot -VmProfile $VmProfile
+if ([string]::IsNullOrWhiteSpace($PublishZipPath)) {
+    $PublishZipPath = Join-Path $hostStagingRoot 'regprobe-app-publish.zip'
+}
+if ([string]::IsNullOrWhiteSpace($OutputPath)) {
+    $OutputPath = Join-Path $hostStagingRoot ("app-launch-smoke-{0}.json" -f $vmProfileTag)
 }
 
 function Invoke-Vmrun {
@@ -78,11 +88,11 @@ if ($outputDirectory) {
 }
 
 if ([string]::IsNullOrWhiteSpace($PreCleanupOutputPath)) {
-    $PreCleanupOutputPath = Join-Path $outputDirectory 'app-launch-smoke-pre-cleanup.json'
+    $PreCleanupOutputPath = Join-Path $outputDirectory ("app-launch-smoke-pre-cleanup-{0}.json" -f $vmProfileTag)
 }
 
 if ([string]::IsNullOrWhiteSpace($PostCleanupOutputPath)) {
-    $PostCleanupOutputPath = Join-Path $outputDirectory 'app-launch-smoke-post-cleanup.json'
+    $PostCleanupOutputPath = Join-Path $outputDirectory ("app-launch-smoke-post-cleanup-{0}.json" -f $vmProfileTag)
 }
 
 $hostPrepScriptPath = Join-Path $env:TEMP 'regprobe-app-launch-smoke-prep.ps1'

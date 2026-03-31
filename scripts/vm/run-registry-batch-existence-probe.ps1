@@ -3,11 +3,12 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ManifestPath,
 
+    [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
-    [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
+    [string]$HostOutputRoot = '',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\batch-existence',
     [string]$SnapshotName = '',
     [switch]$SkipSnapshot,
@@ -18,12 +19,17 @@ param(
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
 
+$vmProfileTag = Resolve-VmProfileTag -VmProfile $VmProfile
 if ([string]::IsNullOrWhiteSpace($VmPath)) {
-    $VmPath = Resolve-CanonicalVmPath
+    $VmPath = Resolve-CanonicalVmPath -VmProfile $VmProfile
 }
 
 if ([string]::IsNullOrWhiteSpace($SnapshotName)) {
-    $SnapshotName = Resolve-DefaultVmSnapshotName
+    $SnapshotName = Resolve-DefaultVmSnapshotName -VmProfile $VmProfile
+}
+
+if ([string]::IsNullOrWhiteSpace($HostOutputRoot)) {
+    $HostOutputRoot = Resolve-HostStagingRoot -VmProfile $VmProfile
 }
 
 if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
@@ -31,9 +37,9 @@ if ([string]::IsNullOrWhiteSpace($IncidentLogPath)) {
 }
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
-$repoEvidenceRoot = Join-Path $repoRoot 'evidence\files\vm-tooling-staging'
+$repoEvidenceRoot = Resolve-TrackedVmOutputRoot -VmProfile $VmProfile -Fallback (Join-Path $repoRoot 'evidence\files\vm-tooling-staging')
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$probeName = "$ProbePrefix-$stamp"
+$probeName = "$ProbePrefix-$vmProfileTag-$stamp"
 $hostRoot = Join-Path $HostOutputRoot $probeName
 $guestRoot = Join-Path $GuestOutputRoot $probeName
 $repoRootOut = Join-Path $repoEvidenceRoot $probeName

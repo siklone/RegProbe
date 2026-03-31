@@ -1,19 +1,37 @@
 [CmdletBinding()]
 param(
-    [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
+    [string]$VmProfile = '',
+    [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
-    [string]$PublishZipPath = 'H:\Temp\vm-tooling-staging\regprobe-app-publish.zip',
+    [string]$PublishZipPath = '',
     [string]$GuestPublishZipPath = 'C:\Tools\Inbound\app-publish.zip',
     [string]$GuestScriptPath = 'C:\Tools\Scripts\app-deploy.ps1',
     [string]$GuestResultPath = 'C:\Tools\ValidationController\smoke\app-deploy.json',
-    [string]$HostDeployResultPath = 'H:\Temp\vm-tooling-staging\open-regprobe-in-vm.deploy.json',
-    [string]$OutputPath = 'H:\Temp\vm-tooling-staging\open-regprobe-in-vm.json',
+    [string]$HostDeployResultPath = '',
+    [string]$OutputPath = '',
     [bool]$RefreshPackage = $true
 )
 
 $ErrorActionPreference = 'Stop'
+
+. (Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1')
+
+$vmProfileTag = Resolve-VmProfileTag -VmProfile $VmProfile
+if ([string]::IsNullOrWhiteSpace($VmPath)) {
+    $VmPath = Resolve-CanonicalVmPath -VmProfile $VmProfile
+}
+$hostStagingRoot = Resolve-HostStagingRoot -VmProfile $VmProfile
+if ([string]::IsNullOrWhiteSpace($PublishZipPath)) {
+    $PublishZipPath = Join-Path $hostStagingRoot 'regprobe-app-publish.zip'
+}
+if ([string]::IsNullOrWhiteSpace($HostDeployResultPath)) {
+    $HostDeployResultPath = Join-Path $hostStagingRoot ("open-regprobe-in-vm.{0}.deploy.json" -f $vmProfileTag)
+}
+if ([string]::IsNullOrWhiteSpace($OutputPath)) {
+    $OutputPath = Join-Path $hostStagingRoot ("open-regprobe-in-vm.{0}.json" -f $vmProfileTag)
+}
 
 function Invoke-Vmrun {
     param([string[]]$Arguments)
