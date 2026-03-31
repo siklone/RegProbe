@@ -82,6 +82,10 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
   broad Phase 0 value/path existence intake
 - `scripts/vm/run-registry-batch-string-probe.ps1`
   broad binary-string narrowing pass for grouped candidates
+- `scripts/vm/run-targeted-string-probe.ps1`
+  exact single-candidate static triage when the broad grouped probe is too blunt
+- `scripts/vm/run-targeted-string-batch-probe.ps1`
+  exact family-routed broad-batch triage for the remaining path-only queue
 - `scripts/vm/run-ghidra-string-xref-probe.ps1`
   VM-safe Ghidra xref batch runner
 

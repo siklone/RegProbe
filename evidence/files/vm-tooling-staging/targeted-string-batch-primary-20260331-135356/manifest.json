@@ -1,0 +1,971 @@
+﻿{
+    "generated_utc":  "2026-03-31T10:52:49.4994667Z",
+    "source_follow_up":  "registry-research-framework/audit/kernel-power-96-remaining-groups-20260330.json",
+    "probe_kind":  "broad-path-only-targeted-string-first",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "candidate_count":  69,
+    "notes":  [
+                  "This manifest covers the remaining non-existing-covered broad-batch candidates after subtracting completed, decision-gated, safe-static, path-sensitive, and path-missing queues.",
+                  "The probe stays string-first and family-routed; runtime lanes will only open for the strongest exact-hit subset."
+              ],
+    "candidates":  [
+                       {
+                           "candidate_id":  "power.control.msdisabled",
+                           "family":  "power-control",
+                           "route_bucket":  "research-only",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "MSDisabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.modern-sleep.enabled-actions",
+                           "family":  "power-modern-sleep",
+                           "route_bucket":  "research-only",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+                           "needle":  "EnabledActions",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.session.sleep-study-disabled",
+                           "family":  "session-manager-power",
+                           "route_bucket":  "research-only",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                           "needle":  "SleepStudyDisabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.allow-audio-to-enable-execution-required-power-requests",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "AllowAudioToEnableExecutionRequiredPowerRequests",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.allow-system-required-power-requests",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "AllowSystemRequiredPowerRequests",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.always-compute-qos-hints",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "AlwaysComputeQosHints",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.coalescing-flush-interval",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "CoalescingFlushInterval",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.disable-display-burst-on-power-source-change",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "DisableDisplayBurstOnPowerSourceChange",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.disable-inbox-pep-generated-constraints",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "DisableInboxPepGeneratedConstraints",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.disable-vsync-latency-update",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "DisableVsyncLatencyUpdate",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.drips-sw-hw-divergence-enable-live-dump",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "DripsSwHwDivergenceEnableLiveDump",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.enable-input-suppression",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "EnableInputSuppression",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.enable-minimal-hiber-file",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "EnableMinimalHiberFile",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.enforce-austerity-mode",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "EnforceAusterityMode",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.fx-accounting-telemetry-disabled",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "FxAccountingTelemetryDisabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.hetero-hgs-ee-perf-hints-independent-enabled",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "HeteroHgsEePerfHintsIndependentEnabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.hetero-hgs-plus-disabled",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "HeteroHgsPlusDisabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.hetero-multi-class-parking-enabled",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "HeteroMultiClassParkingEnabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.hetero-multi-core-classes-enabled",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "HeteroMultiCoreClassesEnabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.hiberboot-enabled",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "HiberbootEnabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.idle-processors-require-qos-management",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "IdleProcessorsRequireQosManagement",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.ignore-cs-compliance-check",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "IgnoreCsComplianceCheck",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.ipi-last-clock-owner-disable",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "IpiLastClockOwnerDisable",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.maximum-frequency-override",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "MaximumFrequencyOverride",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.perf-boost-at-guaranteed",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "PerfBoostAtGuaranteed",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.perf-check-timer-implementation",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "PerfCheckTimerImplementation",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.po-fx-system-irp-wait-for-report-device-powered",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "PoFxSystemIrpWaitForReportDevicePowered",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.power-watchdog-drv-set-monitor-timeout-msec",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "PowerWatchdogDrvSetMonitorTimeoutMsec",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.power-watchdog-dwm-sync-flush-timeout-msec",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "PowerWatchdogDwmSyncFlushTimeoutMsec",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.power-watchdog-po-callout-timeout-msec",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "PowerWatchdogPoCalloutTimeoutMsec",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.power-watchdog-power-on-gdi-timeout-msec",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "PowerWatchdogPowerOnGdiTimeoutMsec",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.power-watchdog-request-queue-timeout-msec",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "PowerWatchdogRequestQueueTimeoutMsec",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.sleepstudy-accounting-enabled",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "SleepstudyAccountingEnabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.standby-connectivity-grace-period",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "StandbyConnectivityGracePeriod",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.ttm-enabled",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "TtmEnabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.control.win32k-callout-watchdog-timeout-seconds",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "needle":  "Win32kCalloutWatchdogTimeoutSeconds",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.modern-sleep.enable-ds-net-refresh",
+                           "family":  "power-modern-sleep",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+                           "needle":  "EnableDsNetRefresh",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.always-track-io-boosting",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "AlwaysTrackIoBoosting",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.disable-control-flow-guard-export-suppression",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "DisableControlFlowGuardExportSuppression",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.disable-exception-chain-validation",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "DisableExceptionChainValidation",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.disable-light-weight-suspend",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "DisableLightWeightSuspend",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.enable-per-cpu-clock-tick-scheduling",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "EnablePerCpuClockTickScheduling",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.enable-tick-accumulation-from-accounting-periods",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "EnableTickAccumulationFromAccountingPeriods",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-bugcheck-for-dpc-watchdog",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "ForceBugcheckForDpcWatchdog",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-foreground-boost-decay",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "ForceForegroundBoostDecay",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-idle-grace-period",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "ForceIdleGracePeriod",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-parking-requested",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "ForceParkingRequested",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.global-timer-resolution-requests",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "GlobalTimerResolutionRequests",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.hyper-start-disabled",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "HyperStartDisabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.interrupt-steering-flags",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "InterruptSteeringFlags",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.long-dpc-queue-threshold",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "LongDpcQueueThreshold",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.long-dpc-runtime-threshold",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "LongDpcRuntimeThreshold",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.max-dynamic-tick-duration",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "MaxDynamicTickDuration",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.maximum-cooperative-idle-search-width",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "MaximumCooperativeIdleSearchWidth",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.rebalance-min-priority",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "RebalanceMinPriority",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.timer-check-flags",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "TimerCheckFlags",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.xstate-context-lookaside-per-proc-max-depth",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "XStateContextLookasidePerProcMaxDepth",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.kernel.enable-wer-user-reporting",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "needle":  "EnableWerUserReporting",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\ci.dll"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "policy.enable-local-logon-sid",
+                           "family":  "policy-system",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+                           "needle":  "EnableLocalLogonSid",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ci.dll",
+                                            "C:\\Windows\\System32\\winload.exe",
+                                            "C:\\Windows\\System32\\KernelBase.dll",
+                                            "C:\\Windows\\System32\\advapi32.dll",
+                                            "C:\\Windows\\System32\\sechost.dll",
+                                            "C:\\Windows\\System32\\services.exe",
+                                            "C:\\Windows\\System32\\lsass.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.executive-force-enable-mutant-autoboost",
+                           "family":  "session-manager-executive",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+                           "needle":  "ForceEnableMutantAutoboost",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.executive-kernel-worker-test-flags",
+                           "family":  "session-manager-executive",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+                           "needle":  "KernelWorkerTestFlags",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.executive-maximum-kernel-worker-threads",
+                           "family":  "session-manager-executive",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+                           "needle":  "MaximumKernelWorkerThreads",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.executive-tickcount-rollover-delay",
+                           "family":  "session-manager-executive",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+                           "needle":  "TickcountRolloverDelay",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.io-disable-disk-counters",
+                           "family":  "session-manager-io",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                           "needle":  "DisableDiskCounters",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.io-allow-load-crash-dump-driver",
+                           "family":  "session-manager-io",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                           "needle":  "IoAllowLoadCrashDumpDriver",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "system.io-enable-session-zero-access-check",
+                           "family":  "session-manager-io",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+                           "needle":  "IoEnableSessionZeroAccessCheck",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\smss.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.session-idle-scan-interval",
+                           "family":  "session-manager-power",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                           "needle":  "IdleScanInterval",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.session-skip-tick-override",
+                           "family":  "session-manager-power",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                           "needle":  "SkipTickOverride",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe"
+                                        ]
+                       },
+                       {
+                           "candidate_id":  "power.session-win32-callout-watchdog-bugcheck-enabled",
+                           "family":  "session-manager-power",
+                           "route_bucket":  "net-new",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                           "needle":  "Win32CalloutWatchdogBugcheckEnabled",
+                           "binaries":  [
+                                            "C:\\Windows\\System32\\ntoskrnl.exe",
+                                            "C:\\Windows\\System32\\powrprof.dll",
+                                            "C:\\Windows\\System32\\smss.exe",
+                                            "C:\\Windows\\System32\\svchost.exe",
+                                            "C:\\Windows\\System32\\services.exe"
+                                        ]
+                       }
+                   ]
+}

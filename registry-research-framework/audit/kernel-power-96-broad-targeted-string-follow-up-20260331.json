@@ -1,0 +1,184 @@
+﻿{
+    "generated_utc":  "2026-03-31T11:04:59.6707100Z",
+    "source_manifest":  "registry-research-framework/audit/kernel-power-96-broad-targeted-string-manifest-20260331.json",
+    "source_summary":  "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/summary.json",
+    "source_results":  "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+    "status":  "ready-for-runtime-grouping",
+    "totals":  {
+                   "total_candidates":  69,
+                   "hit_count":  63,
+                   "no_hit_count":  6
+               },
+    "hit_groups":  [
+                       {
+                           "family":  "power-control",
+                           "count":  29,
+                           "candidate_ids":  [
+                                                 "power.control.msdisabled",
+                                                 "power.control.allow-audio-to-enable-execution-required-power-requests",
+                                                 "power.control.allow-system-required-power-requests",
+                                                 "power.control.always-compute-qos-hints",
+                                                 "power.control.coalescing-flush-interval",
+                                                 "power.control.disable-display-burst-on-power-source-change",
+                                                 "power.control.disable-inbox-pep-generated-constraints",
+                                                 "power.control.disable-vsync-latency-update",
+                                                 "power.control.drips-sw-hw-divergence-enable-live-dump",
+                                                 "power.control.enable-input-suppression",
+                                                 "power.control.enable-minimal-hiber-file",
+                                                 "power.control.enforce-austerity-mode",
+                                                 "power.control.fx-accounting-telemetry-disabled",
+                                                 "power.control.hetero-hgs-ee-perf-hints-independent-enabled",
+                                                 "power.control.hetero-hgs-plus-disabled",
+                                                 "power.control.hetero-multi-class-parking-enabled",
+                                                 "power.control.hetero-multi-core-classes-enabled",
+                                                 "power.control.hiberboot-enabled",
+                                                 "power.control.idle-processors-require-qos-management",
+                                                 "power.control.ignore-cs-compliance-check",
+                                                 "power.control.ipi-last-clock-owner-disable",
+                                                 "power.control.maximum-frequency-override",
+                                                 "power.control.perf-boost-at-guaranteed",
+                                                 "power.control.perf-check-timer-implementation",
+                                                 "power.control.po-fx-system-irp-wait-for-report-device-powered",
+                                                 "power.control.sleepstudy-accounting-enabled",
+                                                 "power.control.standby-connectivity-grace-period",
+                                                 "power.control.ttm-enabled",
+                                                 "power.control.win32k-callout-watchdog-timeout-seconds"
+                                             ]
+                       },
+                       {
+                           "family":  "session-manager-kernel",
+                           "count":  21,
+                           "candidate_ids":  [
+                                                 "system.kernel.always-track-io-boosting",
+                                                 "system.kernel.disable-control-flow-guard-export-suppression",
+                                                 "system.kernel.disable-exception-chain-validation",
+                                                 "system.kernel.disable-light-weight-suspend",
+                                                 "system.kernel.enable-per-cpu-clock-tick-scheduling",
+                                                 "system.kernel.enable-tick-accumulation-from-accounting-periods",
+                                                 "system.kernel.force-bugcheck-for-dpc-watchdog",
+                                                 "system.kernel.force-foreground-boost-decay",
+                                                 "system.kernel.force-idle-grace-period",
+                                                 "system.kernel.force-parking-requested",
+                                                 "system.kernel.global-timer-resolution-requests",
+                                                 "system.kernel.hyper-start-disabled",
+                                                 "system.kernel.interrupt-steering-flags",
+                                                 "system.kernel.long-dpc-queue-threshold",
+                                                 "system.kernel.long-dpc-runtime-threshold",
+                                                 "system.kernel.max-dynamic-tick-duration",
+                                                 "system.kernel.maximum-cooperative-idle-search-width",
+                                                 "system.kernel.rebalance-min-priority",
+                                                 "system.kernel.timer-check-flags",
+                                                 "system.kernel.xstate-context-lookaside-per-proc-max-depth",
+                                                 "system.kernel.enable-wer-user-reporting"
+                                             ]
+                       },
+                       {
+                           "family":  "session-manager-executive",
+                           "count":  4,
+                           "candidate_ids":  [
+                                                 "system.executive-force-enable-mutant-autoboost",
+                                                 "system.executive-kernel-worker-test-flags",
+                                                 "system.executive-maximum-kernel-worker-threads",
+                                                 "system.executive-tickcount-rollover-delay"
+                                             ]
+                       },
+                       {
+                           "family":  "session-manager-power",
+                           "count":  4,
+                           "candidate_ids":  [
+                                                 "power.session.sleep-study-disabled",
+                                                 "power.session-idle-scan-interval",
+                                                 "power.session-skip-tick-override",
+                                                 "power.session-win32-callout-watchdog-bugcheck-enabled"
+                                             ]
+                       },
+                       {
+                           "family":  "session-manager-io",
+                           "count":  3,
+                           "candidate_ids":  [
+                                                 "system.io-disable-disk-counters",
+                                                 "system.io-allow-load-crash-dump-driver",
+                                                 "system.io-enable-session-zero-access-check"
+                                             ]
+                       },
+                       {
+                           "family":  "power-modern-sleep",
+                           "count":  2,
+                           "candidate_ids":  [
+                                                 "power.modern-sleep.enabled-actions",
+                                                 "power.modern-sleep.enable-ds-net-refresh"
+                                             ]
+                       }
+                   ],
+    "no_hit_groups":  [
+                          {
+                              "family":  "power-control",
+                              "count":  5,
+                              "candidate_ids":  [
+                                                    "power.control.power-watchdog-drv-set-monitor-timeout-msec",
+                                                    "power.control.power-watchdog-dwm-sync-flush-timeout-msec",
+                                                    "power.control.power-watchdog-po-callout-timeout-msec",
+                                                    "power.control.power-watchdog-power-on-gdi-timeout-msec",
+                                                    "power.control.power-watchdog-request-queue-timeout-msec"
+                                                ]
+                          },
+                          {
+                              "family":  "policy-system",
+                              "count":  1,
+                              "candidate_ids":  [
+                                                    "policy.enable-local-logon-sid"
+                                                ]
+                          }
+                      ],
+    "exact_no_hit_candidates":  [
+                                    "power.control.power-watchdog-drv-set-monitor-timeout-msec",
+                                    "power.control.power-watchdog-dwm-sync-flush-timeout-msec",
+                                    "power.control.power-watchdog-po-callout-timeout-msec",
+                                    "power.control.power-watchdog-power-on-gdi-timeout-msec",
+                                    "power.control.power-watchdog-request-queue-timeout-msec",
+                                    "policy.enable-local-logon-sid"
+                                ],
+    "notes":  [
+                  "This broad path-only follow-up used family-routed exact string matching against the tools-hardened baseline and produced a strong first-pass split: 63 hits, 6 no-hits.",
+                  "All hit candidates matched in ntoskrnl.exe during this first pass; no supporting secondary-binary hit was required to keep them in the runtime-ready queue.",
+                  "The five PowerWatchdog* timeout values and EnableLocalLogonSid move to lower-priority hold until a stronger path-aware or docs-backed lane justifies more work."
+              ],
+    "recommended_next_runtime_groups":  [
+                                            {
+                                                "group_id":  "broad-path-only-session-manager-kernel-exact-hit",
+                                                "family":  "session-manager-kernel",
+                                                "count":  21,
+                                                "rationale":  "Large coherent HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel batch with exact ntoskrnl string hits."
+                                            },
+                                            {
+                                                "group_id":  "broad-path-only-power-control-exact-hit",
+                                                "family":  "power-control",
+                                                "count":  29,
+                                                "rationale":  "Large Control\\Power hit set after subtracting the five no-hit watchdog timeout values."
+                                            },
+                                            {
+                                                "group_id":  "broad-path-only-session-manager-executive-exact-hit",
+                                                "family":  "session-manager-executive",
+                                                "count":  4,
+                                                "rationale":  "Small exact-hit executive group that can likely be runtime-checked cheaply."
+                                            },
+                                            {
+                                                "group_id":  "broad-path-only-session-manager-power-exact-hit",
+                                                "family":  "session-manager-power",
+                                                "count":  4,
+                                                "rationale":  "Small exact-hit Session Manager\\\\Power group with adjacent historical evidence."
+                                            },
+                                            {
+                                                "group_id":  "broad-path-only-session-manager-io-exact-hit",
+                                                "family":  "session-manager-io",
+                                                "count":  3,
+                                                "rationale":  "Small exact-hit I/O System group suitable for a later path-specific runtime lane."
+                                            },
+                                            {
+                                                "group_id":  "broad-path-only-power-modern-sleep-exact-hit",
+                                                "family":  "power-modern-sleep",
+                                                "count":  2,
+                                                "rationale":  "Exact-hit pair, but likely environment-limited and lower ROI than the kernel/power groups."
+                                            }
+                                        ]
+}
