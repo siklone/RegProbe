@@ -12,11 +12,10 @@ What happened:
 
 - The guest shell was healthy before and after the run.
 - No host-side `symchk.exe` fallback root was available.
-- Guest `winget` was present, but all three package attempts failed with the same code: `0x8a15000f`
-  - `Microsoft.WinDbg`
-  - `Microsoft.WindowsSDK.10.0.18362`
-  - `Microsoft.WindowsSDK.10.0.17134`
-- After the attempts, `symchk.exe` still was not present anywhere in the guest search roots.
+- The VM is now treated as offline for symbol provisioning. Guest `winget` and guest bootstrapper retries are disabled by default.
+- A host-side layout attempt was added, but the current host still returns `1618` while trying to stage the Windows SDK layout.
+- The shared WinDbg package path is reachable through HGFS now, but that package does not contain `symchk.exe`, so it is not a valid substitute for the SDK debugger tools.
+- After the host layout attempt and guest-side discovery pass, `symchk.exe` still was not present anywhere in the guest search roots.
 
 ## Ghidra pilot rerun
 
@@ -47,6 +46,6 @@ Current blocker:
 
 The v3.2 pipeline is now more honest about the environment edge:
 
-- `symchk` is blocked by real guest provisioning failure
+- `symchk` is blocked by missing host-prepared debugger tooling, not by a false assumption that the guest can reach package feeds
 - `IDA` is blocked by real installer availability, not by a brittle detection script
 - The Ghidra runner and the IDA provisioning path both now fail closed with reproducible JSON output
