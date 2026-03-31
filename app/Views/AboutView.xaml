@@ -179,6 +179,8 @@
 
                 <Border Grid.Row="2"
                         Margin="0,18,0,0"
+                        HorizontalAlignment="Left"
+                        MaxWidth="760"
                         Style="{StaticResource UtilitySectionBorderStyle}">
                     <StackPanel>
                         <TextBlock Text="Repository"
@@ -201,6 +203,8 @@
 
                 <Border Grid.Row="3"
                         Margin="0,18,0,0"
+                        HorizontalAlignment="Left"
+                        MaxWidth="760"
                         Style="{StaticResource UtilitySectionBorderStyle}">
                     <StackPanel>
                         <TextBlock Text="Logs"
