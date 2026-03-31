@@ -24,20 +24,67 @@
                 <Border Grid.Row="0"
                         Padding="18"
                         Style="{StaticResource UtilitySectionBorderStyle}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/RegProbe.App;component/Resources/Brand/regprobe-logo-full.png"
-                               Width="112"
-                               Height="112"
-                               Stretch="Uniform"
-                               Margin="0,0,18,0"/>
-                        <StackPanel VerticalAlignment="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="136"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0"
+                                Background="#111111"
+                                BorderBrush="#242424"
+                                BorderThickness="1"
+                                Padding="12"
+                                Margin="0,0,18,0">
+                            <Image Source="/RegProbe.App;component/Resources/Brand/regprobe-logo-full.png"
+                                   Width="112"
+                                   Height="112"
+                                   Stretch="Uniform"/>
+                        </Border>
+
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center">
                             <TextBlock Text="RegProbe"
                                        Style="{StaticResource UtilitySectionTitleTextStyle}"/>
                             <TextBlock Margin="0,6,0,0"
+                                       MaxWidth="640"
                                        Style="{StaticResource UtilitySectionBodyTextStyle}"
                                        Text="Evidence-backed Windows configuration work, packaged as a calmer desktop shell and a reproducible research repo."/>
+
+                            <WrapPanel Margin="0,14,0,0">
+                                <Border Background="#111111"
+                                        BorderBrush="#232323"
+                                        BorderThickness="1"
+                                        Padding="8,4"
+                                        Margin="0,0,8,8">
+                                    <TextBlock Text="Reversible"
+                                               Foreground="#D6D6D6"
+                                               FontSize="10"
+                                               FontWeight="SemiBold"/>
+                                </Border>
+                                <Border Background="#111111"
+                                        BorderBrush="#232323"
+                                        BorderThickness="1"
+                                        Padding="8,4"
+                                        Margin="0,0,8,8">
+                                    <TextBlock Text="Logged"
+                                               Foreground="#D6D6D6"
+                                               FontSize="10"
+                                               FontWeight="SemiBold"/>
+                                </Border>
+                                <Border Background="#111111"
+                                        BorderBrush="#232323"
+                                        BorderThickness="1"
+                                        Padding="8,4"
+                                        Margin="0,0,8,8">
+                                    <TextBlock Text="Research-backed"
+                                               Foreground="#D6D6D6"
+                                               FontSize="10"
+                                               FontWeight="SemiBold"/>
+                                </Border>
+                            </WrapPanel>
                         </StackPanel>
-                    </StackPanel>
+                    </Grid>
                 </Border>
 
                 <Border Grid.Row="1"
@@ -60,7 +107,7 @@
                                        Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                             <TextBlock Grid.Column="1"
                                        Text="{Binding AppVersion}"
-                                       Margin="20,0,0,0"
+                                       Margin="16,0,0,0"
                                        Style="{StaticResource UtilityMetricValueTextStyle}"/>
                         </Grid>
 
@@ -75,7 +122,7 @@
                                            Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding BuildConfiguration}"
-                                           Margin="20,0,0,0"
+                                           Margin="16,0,0,0"
                                            Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
@@ -91,7 +138,7 @@
                                            Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding Framework}"
-                                           Margin="20,0,0,0"
+                                           Margin="16,0,0,0"
                                            Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
@@ -107,7 +154,7 @@
                                            Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding Architecture}"
-                                           Margin="20,0,0,0"
+                                           Margin="16,0,0,0"
                                            Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
@@ -123,7 +170,7 @@
                                            Style="{StaticResource UtilityMetricLabelTextStyle}"/>
                                 <TextBlock Grid.Column="1"
                                            Text="{Binding LogFileSizeFormatted}"
-                                           Margin="20,0,0,0"
+                                           Margin="16,0,0,0"
                                            Style="{StaticResource UtilityMetricValueTextStyle}"/>
                             </Grid>
                         </Border>
