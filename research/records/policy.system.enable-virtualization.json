@@ -4,7 +4,7 @@
   "record_id": "policy.system.enable-virtualization",
   "tweak_id": "policy.system.enable-virtualization",
   "record_status": "draft",
-  "summary": "Draft candidate package for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. That keeps the lane at Class B with a runtime_no_read and path-context gate.",
+  "summary": "Draft candidate package for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. The same path-aware runtime lane on the secondary profile reproduced the no-hit result, so the lane remains Class B with a runtime_no_read and path-context gate rather than a single-VM artifact.",
   "validation_proof": {
     "source_url": "Docs/security/security.md",
     "exact_quote_or_path": "Docs/security/security.md:105-110 documents `EnableVirtualization` with 0 = disables data redirection and 1 = enables legacy file and registry virtualization.",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "Enable Virtualization controls legacy UAC file and registry virtualization under the Policies\\System branch.",
     "why_people_change_it": "Researchers track it when studying legacy app compatibility, UAC virtualization, and adjacent policy-system behavior.",
-    "tradeoffs_overview": "The lane now has exact docs, phase-0 existence, exact current-build static hits, and a shell-safe path-aware runtime ETW lane. The runtime lane still stayed no-hit, so the current-build route to the intended live read remains decision-gated.",
-    "professional_notes": "Phase-0 existence confirmed EnableVirtualization on the live Win25H2Clean baseline with preview value 1. The repo security notes document the value and meanings in Docs/security/security.md. The path-aware static pass over the narrowed binary set found an exact EnableVirtualization hit in ntoskrnl.exe, plus exact adjacent EnableLUA and EnableInstallerDetection hits in the same binary, while the VBS collision remained isolated to winload.exe through EnableVirtualizationBasedSecurity. The current-build Ghidra export kept EnableVirtualization, EnableLUA, and EnableInstallerDetection in the same naturally resolved ntoskrnl.exe function. A tools-hardened path-aware ETW lane then ran short and split policy/UAC bursts on RegProbe-Baseline-ToolsHardened-20260330 and produced real ETL/CSV outputs, but it still returned a clean no-hit for both the exact value name and the intended path.",
+    "tradeoffs_overview": "The lane now has exact docs, phase-0 existence, exact current-build static hits, and shell-safe path-aware runtime ETW lanes on both primary and secondary profiles. Both runtime lanes still stayed no-hit, so the current-build route to the intended live read remains decision-gated.",
+    "professional_notes": "Phase-0 existence confirmed EnableVirtualization on the live Win25H2Clean baseline with preview value 1. The repo security notes document the value and meanings in Docs/security/security.md. The path-aware static pass over the narrowed binary set found an exact EnableVirtualization hit in ntoskrnl.exe, plus exact adjacent EnableLUA and EnableInstallerDetection hits in the same binary, while the VBS collision remained isolated to winload.exe through EnableVirtualizationBasedSecurity. The current-build Ghidra export kept EnableVirtualization, EnableLUA, and EnableInstallerDetection in the same naturally resolved ntoskrnl.exe function. A tools-hardened path-aware ETW lane then ran short and split policy/UAC bursts on RegProbe-Baseline-ToolsHardened-20260330 and produced real ETL/CSV outputs, but it still returned a clean no-hit for both the exact value name and the intended path. A secondary-profile replay on Win25H2Clean-B reproduced the same shell-safe no-hit, so the blocker is now cross-profile and not a single-VM transport quirk.",
     "targets": [
       {
         "target_id": "enable-virtualization",
@@ -177,6 +177,19 @@
         "version-scope"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-policy-system-enable-virtualization-runtime-secondary-20260331",
+      "kind": "etw-trace",
+      "title": "Secondary-profile path-aware ETW replay for EnableVirtualization",
+      "location": "evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json and evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json",
+      "summary": "The secondary-profile path-aware ETW replay completed shell-safe on Win25H2Clean-B and reproduced the same clean no-hit for the exact value name and intended path.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -186,11 +199,11 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, and a shell-safe path-aware ETW runtime lane. The runtime lane still stayed a clean no-hit and the family still carries a nearby VBS collision in winload.exe, so the record remains decision-gated at Class B.",
+    "why": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, and shell-safe path-aware ETW runtime lanes on both primary and secondary profiles. Both runtime lanes still stayed a clean no-hit and the family still carries a nearby VBS collision in winload.exe, so the record remains decision-gated at Class B.",
     "blocking_issues": [
       "runtime_no_read",
       "path_context_unclear"
     ]
   },
-  "last_reviewed_utc": "2026-03-30T19:30:00Z"
+  "last_reviewed_utc": "2026-03-31T08:21:42Z"
 }

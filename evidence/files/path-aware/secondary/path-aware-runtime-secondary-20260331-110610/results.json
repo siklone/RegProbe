@@ -1,0 +1,140 @@
+﻿[
+    {
+        "generated_utc":  "2026-03-31T08:21:42.3742106Z",
+        "candidate_id":  "policy.system.enable-virtualization",
+        "family":  "policy-system",
+        "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+        "registry_path_fragment":  "SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System",
+        "value_name":  "EnableVirtualization",
+        "shell_before":  {
+                             "generated_utc":  "2026-03-31T08:16:55.0157029Z",
+                             "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+                             "vm_running":  true,
+                             "tools_state":  "running",
+                             "process_query_error":  null,
+                             "shell_healthy":  true,
+                             "checks":  {
+                                            "explorer":  true,
+                                            "sihost":  true,
+                                            "shellhost":  true,
+                                            "ctfmon":  true,
+                                            "app":  false
+                                        }
+                         },
+        "shell_after":  {
+                            "generated_utc":  "2026-03-31T08:21:42.2945676Z",
+                            "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+                            "vm_running":  true,
+                            "tools_state":  "running",
+                            "process_query_error":  null,
+                            "shell_healthy":  true,
+                            "checks":  {
+                                           "explorer":  true,
+                                           "sihost":  true,
+                                           "shellhost":  true,
+                                           "ctfmon":  true,
+                                           "app":  false
+                                       }
+                        },
+        "best_phase":  "short-trigger-etw",
+        "status":  "no-hit",
+        "exact_query_hits":  0,
+        "exact_runtime_read":  false,
+        "exact_line_count":  0,
+        "path_line_count":  0,
+        "collision_path_hits":  0,
+        "phase_results":  {
+                              "short-trigger-etw":  {
+                                                        "generated_utc":  "2026-03-31T08:18:59.0515331Z",
+                                                        "phase":  "short-trigger-etw",
+                                                        "trigger_profile":  "uac-policy-surface-short",
+                                                        "status":  "no-hit",
+                                                        "etl_exists":  true,
+                                                        "csv_exists":  true,
+                                                        "etl_length":  3694592,
+                                                        "csv_line_count":  25317,
+                                                        "exact_runtime_read":  false,
+                                                        "exact_query_hits":  0,
+                                                        "exact_line_count":  0,
+                                                        "path_line_count":  0,
+                                                        "collision_path_hits":  0,
+                                                        "trigger_failure_count":  0,
+                                                        "trigger_failures":  [
+
+                                                                             ],
+                                                        "errors":  [
+
+                                                                   ]
+                                                    },
+                              "split-trace-start":  {
+                                                        "generated_utc":  "2026-03-31T08:19:17.1980577Z",
+                                                        "phase":  "split-trace-start",
+                                                        "trigger_profile":  "uac-policy-surface-only",
+                                                        "status":  "trace-started",
+                                                        "etl_exists":  false,
+                                                        "csv_exists":  false,
+                                                        "etl_length":  0,
+                                                        "csv_line_count":  0,
+                                                        "exact_runtime_read":  false,
+                                                        "exact_query_hits":  0,
+                                                        "exact_line_count":  0,
+                                                        "path_line_count":  0,
+                                                        "collision_path_hits":  0,
+                                                        "trigger_failure_count":  0,
+                                                        "trigger_failures":  [
+
+                                                                             ],
+                                                        "errors":  [
+
+                                                                   ]
+                                                    },
+                              "split-trigger":  {
+                                                    "generated_utc":  "2026-03-31T08:19:40.3327948Z",
+                                                    "phase":  "split-trigger",
+                                                    "trigger_profile":  "uac-policy-surface-only",
+                                                    "status":  "trigger-complete",
+                                                    "etl_exists":  false,
+                                                    "csv_exists":  false,
+                                                    "etl_length":  0,
+                                                    "csv_line_count":  0,
+                                                    "exact_runtime_read":  false,
+                                                    "exact_query_hits":  0,
+                                                    "exact_line_count":  0,
+                                                    "path_line_count":  0,
+                                                    "collision_path_hits":  0,
+                                                    "trigger_failure_count":  0,
+                                                    "trigger_failures":  [
+
+                                                                         ],
+                                                    "errors":  [
+
+                                                               ]
+                                                },
+                              "split-trace-stop":  {
+                                                       "generated_utc":  "2026-03-31T08:21:36.9283151Z",
+                                                       "phase":  "split-trace-stop",
+                                                       "trigger_profile":  "uac-policy-surface-only",
+                                                       "status":  "no-hit",
+                                                       "etl_exists":  true,
+                                                       "csv_exists":  true,
+                                                       "etl_length":  23724032,
+                                                       "csv_line_count":  171173,
+                                                       "exact_runtime_read":  false,
+                                                       "exact_query_hits":  0,
+                                                       "exact_line_count":  0,
+                                                       "path_line_count":  0,
+                                                       "collision_path_hits":  0,
+                                                       "trigger_failure_count":  0,
+                                                       "trigger_failures":  [
+
+                                                                            ],
+                                                       "errors":  [
+
+                                                                  ]
+                                                   }
+                          },
+        "artifacts":  {
+                          "summary":  "evidence/files/path-aware/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json"
+                      }
+    }
+]

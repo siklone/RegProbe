@@ -9,16 +9,18 @@
     ],
     "original_cross_layer": true,
     "original_pipeline_version": "pre-v3.1",
-    "re_audit_date": "2026-03-30T20:12:15.384267Z",
+    "re_audit_date": "2026-03-31T08:21:42Z",
     "re_audit_reason": "current_blocker",
     "re_audit_priority": 1,
-    "new_tools_applied": [],
+    "new_tools_applied": [
+      "path-aware-runtime-secondary"
+    ],
     "new_cross_layer": true,
     "new_class": "B",
     "class_changed": false,
     "frida_kernel_guard_applied": false,
     "dead_flag_four_conditions_met": true,
-    "notes": "Bootstrapped from the current research record and evidence audit.",
+    "notes": "Bootstrapped from the current research record, evidence audit, and a secondary-profile replay of the path-aware runtime lane.",
     "new_pipeline_version": "v3.1"
   }
 }

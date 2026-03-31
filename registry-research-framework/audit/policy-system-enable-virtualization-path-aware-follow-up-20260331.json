@@ -1,0 +1,15 @@
+{
+  "generated_utc": "2026-03-31T08:21:42Z",
+  "candidate_id": "policy.system.enable-virtualization",
+  "vm_profile": "secondary",
+  "snapshot_name": "RegProbe-Baseline-ToolsHardened-20260330",
+  "runtime_artifacts": {
+    "root_summary": "evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json",
+    "candidate_summary": "evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json"
+  },
+  "exact_runtime_read": false,
+  "runtime_status": "no-hit",
+  "evidence_class": "B",
+  "reason_code": "runtime_no_read_path_context_unclear",
+  "note": "Secondary-profile replay reproduced the same shell-safe no-hit for EnableVirtualization, so the blocker remains decision-gated and is no longer attributable to a single VM profile."
+}

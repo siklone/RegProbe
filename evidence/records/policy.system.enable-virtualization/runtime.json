@@ -9,7 +9,7 @@
       "operation": null,
       "timestamp": null,
       "boot_phase_included": false,
-      "trace_file": "evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json and evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json"
+      "trace_file": "evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json and evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json and evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json and evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json"
     },
     "procmon": {
       "executed": false,
@@ -31,6 +31,7 @@
   },
   "source_evidence_ids": [
     "vm-policy-system-phase0-20260329",
-    "vm-policy-system-enable-virtualization-runtime-20260330"
+    "vm-policy-system-enable-virtualization-runtime-20260330",
+    "vm-policy-system-enable-virtualization-runtime-secondary-20260331"
   ]
 }
