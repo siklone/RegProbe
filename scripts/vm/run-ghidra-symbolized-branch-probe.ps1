@@ -14,6 +14,9 @@ param(
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = 'CodexVm2026!',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging\ghidra-v32-probes',
+    [string]$HostSdkRoot = 'H:\Temp\winsdk-debuggers-x64\Windows Kits\10\Debuggers\x64',
+    [string]$HostSharedFolderPath = 'H:\Temp\vm-tooling-staging',
+    [string]$SharedFolderGuestName = 'vm-tooling-staging',
     [string]$GuestOutputRoot = 'C:\Tools\GhidraV32Probes',
     [string]$GuestProjectRoot = 'C:\Tools\GhidraProjects',
     [string]$GuestSymbolRoot = 'C:\Tools\Symbols',
@@ -51,9 +54,13 @@ $hostStdout = Join-Path $hostRoot 'ghidra-stdout.txt'
 $guestStdout = Join-Path $guestRoot 'ghidra-stdout.txt'
 $hostStderr = Join-Path $hostRoot 'ghidra-stderr.txt'
 $guestStderr = Join-Path $guestRoot 'ghidra-stderr.txt'
+$hostTargetBinary = Join-Path $hostRoot ([IO.Path]::GetFileName($TargetBinary))
+$hostSymbolCacheRoot = Join-Path $hostRoot 'symbol-cache'
+$hostSymchkLog = Join-Path $hostRoot 'symchk-host.log'
 $patternPayload = ($Patterns | ForEach-Object { $_.Trim() } | Where-Object { $_ }) -join '|||'
 
 New-Item -ItemType Directory -Path $hostRoot -Force | Out-Null
+New-Item -ItemType Directory -Path $hostSymbolCacheRoot -Force | Out-Null
 Copy-Item -Path $branchScriptSource -Destination $hostBranchScript -Force
 Copy-Item -Path $pdbScriptSource -Destination $hostPdbScript -Force
 
@@ -137,58 +144,19 @@ if (-not $analyzeHeadless) {
     exit 0
 }
 
-function Find-Symchk {
-    $direct = Get-Command symchk.exe -ErrorAction SilentlyContinue
-    if ($direct) {
-        return $direct.Source
+function Test-LocalPdbCache {
+    param([string]$Root)
+
+    if (-not (Test-Path $Root)) {
+        return $false
     }
 
-    $roots = New-Object System.Collections.Generic.List[string]
-    foreach ($path in @(
-        'C:\Tools\SymbolTools',
-        'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64',
-        'C:\Program Files\Windows Kits\10\Debuggers\x64',
-        'C:\Program Files\Debugging Tools for Windows (x64)',
-        'C:\Program Files\Debugging Tools for Windows'
-    )) {
-        if ((Test-Path $path) -and -not $roots.Contains($path)) {
-            $roots.Add($path)
-        }
-    }
-
-    foreach ($pkg in @(Get-AppxPackage -Name Microsoft.WinDbg* -ErrorAction SilentlyContinue)) {
-        if ($pkg.InstallLocation -and (Test-Path $pkg.InstallLocation) -and -not $roots.Contains($pkg.InstallLocation)) {
-            $roots.Add($pkg.InstallLocation)
-        }
-    }
-
-    foreach ($root in $roots) {
-        $candidate = Get-ChildItem -Path $root -Recurse -Filter 'symchk.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
-        if ($candidate) {
-            return $candidate.FullName
-        }
-    }
-
-    return $null
+    $candidate = Get-ChildItem -Path $Root -Recurse -Include '*.pdb','*.pd_' -ErrorAction SilentlyContinue | Select-Object -First 1
+    return [bool]$candidate
 }
 
-$symchkPath = Find-Symchk
-if ($symchkPath) {
-    $symchk = @{ Source = $symchkPath }
-}
-else {
-    $symchk = $null
-}
-if (-not $symchk) {
-    Write-Evidence -Status 'blocked-pdb-missing' -PdbLoaded $false -PdbSource $SymbolRoot -Failure 'symchk.exe is not installed in the guest environment.'
-    exit 0
-}
-
-$symbolLog = Join-Path (Split-Path -Parent $RunLogPath) 'symchk.log'
-& $symchk.Source /r $TargetBinary /s "SRV*$SymbolRoot*https://msdl.microsoft.com/download/symbols" *> $symbolLog
-$symchkExit = $LASTEXITCODE
-if ($symchkExit -ne 0) {
-    Write-Evidence -Status 'blocked-pdb-missing' -PdbLoaded $false -PdbSource $SymbolRoot -Failure "symchk failed with exit code $symchkExit"
+if (-not (Test-LocalPdbCache -Root $SymbolRoot)) {
+    Write-Evidence -Status 'blocked-pdb-missing' -PdbLoaded $false -PdbSource $SymbolRoot -Failure 'No local PDB cache was staged into the guest symbol root.'
     exit 0
 }
 
@@ -254,6 +222,57 @@ function Invoke-Vmrun {
     return $output.Trim()
 }
 
+function Resolve-SharedGuestPath {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$HostPath,
+        [Parameter(Mandatory = $true)]
+        [string]$SharedRoot,
+        [Parameter(Mandatory = $true)]
+        [string]$GuestShareName
+    )
+
+    $resolvedHostPath = (Resolve-Path $HostPath).Path
+    $resolvedSharedRoot = (Resolve-Path $SharedRoot).Path
+    if (-not $resolvedHostPath.StartsWith($resolvedSharedRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Path '$resolvedHostPath' is outside shared root '$resolvedSharedRoot'."
+    }
+
+    $relative = $resolvedHostPath.Substring($resolvedSharedRoot.Length).TrimStart('\')
+    if ([string]::IsNullOrWhiteSpace($relative)) {
+        return "\\vmware-host\Shared Folders\$GuestShareName"
+    }
+
+    return "\\vmware-host\Shared Folders\$GuestShareName\$relative"
+}
+
+function Find-HostSymchk {
+    param([string]$ExplicitRoot)
+
+    $candidates = New-Object System.Collections.Generic.List[string]
+    foreach ($path in @(
+        $ExplicitRoot,
+        'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64',
+        'C:\Program Files\Windows Kits\10\Debuggers\x64',
+        'C:\Program Files\Debugging Tools for Windows (x64)',
+        'C:\Program Files\Debugging Tools for Windows'
+    )) {
+        if (-not [string]::IsNullOrWhiteSpace($path) -and -not $candidates.Contains($path)) {
+            $candidates.Add($path)
+        }
+    }
+
+    foreach ($candidate in $candidates) {
+        if (-not (Test-Path $candidate)) { continue }
+        $symchk = Join-Path $candidate 'symchk.exe'
+        if (Test-Path $symchk) {
+            return $symchk
+        }
+    }
+
+    return $null
+}
+
 function Normalize-TextArtifact {
     param([string]$Path)
     if (-not (Test-Path $Path)) { return }
@@ -265,11 +284,86 @@ function Normalize-TextArtifact {
 Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath, 'nogui') -IgnoreExitCode | Out-Null
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'createDirectoryInGuest', $VmPath, $guestRoot) -IgnoreExitCode | Out-Null
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'createDirectoryInGuest', $VmPath, $guestScriptsRoot) -IgnoreExitCode | Out-Null
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $TargetBinary, $hostTargetBinary) | Out-Null
+
+$hostSymchk = Find-HostSymchk -ExplicitRoot $HostSdkRoot
+if (-not $hostSymchk) {
+    throw "Host symchk.exe was not found. Expected under '$HostSdkRoot' or a standard debugger root."
+}
+
+& $hostSymchk /r $hostTargetBinary /s "SRV*$hostSymbolCacheRoot*https://msdl.microsoft.com/download/symbols" *> $hostSymchkLog
+$hostSymchkExit = $LASTEXITCODE
+if ($hostSymchkExit -ne 0) {
+    throw "Host symchk failed with exit code $hostSymchkExit. See $hostSymchkLog"
+}
+
+$guestSymbolRoot = Join-Path $GuestSymbolRoot $OutputName
+$guestSharedSymbolCache = Resolve-SharedGuestPath -HostPath $hostSymbolCacheRoot -SharedRoot $HostSharedFolderPath -GuestShareName $SharedFolderGuestName
+$hostStageScript = Join-Path $hostRoot 'stage-symbol-cache.ps1'
+$guestStageScript = Join-Path $guestRoot 'stage-symbol-cache.ps1'
+$hostStageResult = Join-Path $hostRoot 'stage-symbol-cache.json'
+$guestStageResult = Join-Path $guestRoot 'stage-symbol-cache.json'
+
+@'
+param(
+    [string]$SourceRoot,
+    [string]$DestinationRoot,
+    [string]$ResultPath
+)
+$ErrorActionPreference = 'Stop'
+New-Item -ItemType Directory -Path (Split-Path -Parent $ResultPath) -Force | Out-Null
+$payload = [ordered]@{
+    source_root = $SourceRoot
+    destination_root = $DestinationRoot
+    source_visible = (Test-Path $SourceRoot)
+    status = 'not-run'
+    pdb_count = 0
+    error = $null
+}
+try {
+    if (-not $payload.source_visible) { throw 'shared symbol cache is not visible in the guest' }
+    New-Item -ItemType Directory -Path $DestinationRoot -Force | Out-Null
+    Copy-Item -Path (Join-Path $SourceRoot '*') -Destination $DestinationRoot -Recurse -Force
+    $payload.pdb_count = @(
+        Get-ChildItem -Path $DestinationRoot -Recurse -Include '*.pdb','*.pd_' -ErrorAction SilentlyContinue
+    ).Count
+    $payload.status = if ($payload.pdb_count -gt 0) { 'staged' } else { 'failed-no-pdb' }
+}
+catch {
+    $payload.status = 'failed'
+    $payload.error = $_.Exception.Message
+}
+$payload | ConvertTo-Json -Depth 6 | Set-Content -Path $ResultPath -Encoding UTF8
+'@ | Set-Content -Path $hostStageScript -Encoding UTF8
+
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostStageScript, $guestStageScript) | Out-Null
+Invoke-Vmrun -Arguments @(
+    '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
+    'runProgramInGuest', $VmPath,
+    'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
+    '-NonInteractive',
+    '-NoProfile',
+    '-ExecutionPolicy', 'Bypass',
+    '-File', $guestStageScript,
+    '-SourceRoot', $guestSharedSymbolCache,
+    '-DestinationRoot', $guestSymbolRoot,
+    '-ResultPath', $guestStageResult
+) -IgnoreExitCode | Out-Null
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestStageResult, $hostStageResult) -IgnoreExitCode | Out-Null
+
+if (-not (Test-Path $hostStageResult)) {
+    throw "Guest symbol-cache staging did not produce stage-symbol-cache.json."
+}
+
+$stagePayload = Get-Content -Path $hostStageResult -Raw | ConvertFrom-Json
+if ($stagePayload.status -ne 'staged') {
+    throw "Guest symbol-cache staging failed: $($stagePayload.status) $($stagePayload.error)"
+}
+
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostRunner, $guestRunner) | Out-Null
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostBranchScript, $guestBranchScript) | Out-Null
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostPdbScript, $guestPdbScript) | Out-Null
 
-$guestSymbolRoot = Join-Path $GuestSymbolRoot $OutputName
 $vmrunArgs = @(
     '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
     'runProgramInGuest', $VmPath,
@@ -316,4 +410,15 @@ if (-not (Test-Path $hostEvidence)) {
     throw "Guest Ghidra v3.2 probe did not produce evidence.json. See $hostRoot"
 }
 
-Get-Content -Path $hostEvidence -Raw
+$evidencePayload = Get-Content -Path $hostEvidence -Raw | ConvertFrom-Json
+if (Test-Path $hostRunLog) {
+    $runLog = Get-Content -Path $hostRunLog -Raw
+    $pdbLoadedFromLog = $runLog -match 'PDB analyzer parsing file:' -and $runLog -match 'PDB Types and Main Symbols Processing Terminated Normally'
+    if ($pdbLoadedFromLog) {
+        $evidencePayload | Add-Member -NotePropertyName pdb_loaded -NotePropertyValue $true -Force
+        $evidencePayload | Add-Member -NotePropertyName pdb_verification_source -NotePropertyValue 'ghidra-run-log' -Force
+    }
+}
+
+$evidencePayload | ConvertTo-Json -Depth 10 | Set-Content -Path $hostEvidence -Encoding UTF8
+$evidencePayload | ConvertTo-Json -Depth 10

@@ -1,0 +1,326 @@
+INFO  Using log config file: jar:file:/C:/Tools/Ghidra/ghidra_12.0.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\application.log (LoggingInitialization)  
+INFO  Loading user preferences: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (997 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (2708 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 58 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\8051\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BSim\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PDB\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Jython\ghidra_scripts
+    C:\Tools\GhidraV32Probes\serialize-timer-expiration-ghidra-v32-rerun-20260401-005209\scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FileFormats\ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: C:\Tools\GhidraProjects\Probe_serialize_timer_expiration_ghidra_v32_rerun (HeadlessAnalyzer)  
+INFO  Creating project: C:\Tools\GhidraProjects\Probe_serialize_timer_expiration_ghidra_v32_rerun (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: C:\Tools\GhidraProjects\Probe_serialize_timer_expiration_ghidra_v32_rerun (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)  
+INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)  
+INFO  Using Library Search Path: [., C:\Windows\SysWOW64, C:\Tools\Java\jdk-21.0.10+7\bin, C:\Windows\Sun\Java\bin, C:\Windows\system32, C:\Windows, C:\Windows\System32\Wbem, C:\Windows\System32\WindowsPowerShell\v1.0\, C:\Tools\Scripts, C:\Tools\Sysinternals, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit, C:\Tools\DotNetSDK\8.0.416, C:\Tools\WindowsTerminal\terminal-1.24.10621.0, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\, C:\Program Files\dotnet\, C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps, C:\Users\Administrator\.dotnet\tools] (ProgramLoader)  
+INFO  Additional info:
+Loading file:///C:/Windows/System32/ntoskrnl.exe?MD5=b37e6e677de4e6412c2020ab35be2322...
+------------------------------------------------
+
+Searching 15 paths for library BOOTVID.DLL...
+Loading file:///C:/Windows/System32/BOOTVID.DLL?MD5=583f1fac9ba692ccf70bcd87d25f7dad...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\bootvid.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library CI.DLL...
+Loading file:///C:/Windows/System32/ci.dll?MD5=b4b65a3c19251eb589050f6a6857763c...
+[ci.dll]: failed to create WEVTResource at 1800f37c8: Failed to resolve data length for WEVTResource
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\ci.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library CNG.SYS...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-ACCEL-API-KM-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-FS-CLFS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-CLIPSP-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-GLOBMERGER-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-KCMINITCFG-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-KSECURITY-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-KSR-L1-1-5.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-PROCESSPARAMETERS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-RUNLEVELS-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-STATESEPARATION-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-TM-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-TRACE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-UCODE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-WERKERNEL-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library EXT-MS-WIN-NTOS-WIN32K-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library KDCOM.DLL...
+Loading file:///C:/Windows/System32/kdcom.dll?MD5=23a7e41fe80788922ed4acab18ecd9e7...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\kdcom.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library MSRPC.SYS...
+Library not found.
+------------------------------------------------
+
+Searching 15 paths for library PSHED.DLL...
+Loading file:///C:/Windows/System32/PSHED.DLL?MD5=467d490720309451176caf5e0268a731...
+Index 5 out of bounds for length 5
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\pshed.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 15 paths for library SYMCRYPTK.DLL...
+Loading file:///C:/Windows/System32/symcryptk.dll?MD5=499c6a4eaba6b0e07ea3f0b6612cf7d2...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\symcryptk.exports
+Library not saved to project.
+------------------------------------------------
+
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\symcryptk.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\pshed.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\bootvid.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\kdcom.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\ci.exports
+Linking the External Programs of 'ntoskrnl.exe' to imported libraries...
+  [EXT-MS-WIN-NTOS-PROCESSPARAMETERS-L1-1-0.DLL] -> not found in project
+  [SYMCRYPTK.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-TM-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-ACCEL-API-KM-L1-1-0.DLL] -> not found in project
+  [PSHED.DLL] -> not found in project
+  [BOOTVID.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-CLIPSP-L1-1-0.DLL] -> not found in project
+  [KDCOM.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-KCMINITCFG-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-KSR-L1-1-5.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-TRACE-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-KSECURITY-L1-1-1.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-WERKERNEL-L1-1-1.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-UCODE-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-WIN32K-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-RUNLEVELS-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-NTOS-STATESEPARATION-L1-1-0.DLL] -> not found in project
+  [EXT-MS-WIN-FS-CLFS-L1-1-0.DLL] -> not found in project
+  [CI.DLL] -> not found in project
+  [MSRPC.SYS] -> not found in project
+  [CNG.SYS] -> not found in project
+  [EXT-MS-WIN-NTOS-GLOBMERGER-L1-1-0.DLL] -> not found in project
+------------------------------------------------
+
+ (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: SetPdbSymbolRepository.java 'C:\Tools\Symbols\serialize-timer-expiration-ghidra-v32-rerun'  (HeadlessAnalyzer)  
+INFO  SCRIPT: C:\Tools\GhidraV32Probes\serialize-timer-expiration-ghidra-v32-rerun-20260401-005209\scripts\SetPdbSymbolRepository.java (HeadlessAnalyzer)  
+ERROR PDB.Symbol Repository Path could not be found for this program. (SetPdbSymbolRepository)  
+INFO  SetPdbSymbolRepository.java> Configured PDB.Symbol Repository Path = C:\Tools\Symbols\serialize-timer-expiration-ghidra-v32-rerun (GhidraScript)  
+INFO  SetPdbSymbolRepository.java> Configured explicit PDB file = C:\Tools\Symbols\serialize-timer-expiration-ghidra-v32-rerun\ntkrnlmp.pdb\E6426A07C26E66F8EB8594621A7B273B1\ntkrnlmp.pdb (GhidraScript)  
+INFO  ANALYZING all memory and code: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+INFO  PDB analyzer parsing file: C:\Tools\Symbols\serialize-timer-expiration-ghidra-v32-rerun\ntkrnlmp.pdb\E6426A07C26E66F8EB8594621A7B273B1\ntkrnlmp.pdb (PdbUniversalAnalyzer)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ETW_SILO_TRACING_BLOCK (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001199> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001189> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001184> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001155> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_0000114C> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001142> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001140> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_0000113C> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KSCHEDULING_GROUP (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_DEVICE_OBJECT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ETW_APC_POOL (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ETW_STACK_TRACE_BLOCK (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_WMI_LOGGER_CONTEXT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MMSUPPORT_SHARED (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MMSUPPORT_FLAGS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_SLIST_ENTRY (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_HANDLE_TABLE_FREE_LIST (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_EPROCESS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KPRCB (CppCompositeType)  
+WARN  PDB UNION reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001236> (CompositeTypeApplier)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ACPI_SRAT_ENTRY (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_INTERRUPT_TARGET (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_WHEA_RECOVERY_CONTEXT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KUSER_SHARED_DATA (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KPCR (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_GENERAL_LOOKASIDE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KSHARED_READY_QUEUE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_SYMCRYPT_ENTROPY_ACCUMULATOR_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ENODE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MMPAGING_FILE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_VISIBLE_PARTITION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_SLABS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_ACCESS_LOG_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_PAGE_LISTS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_SEGMENTS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_NODE_SLAB_IDENTITY_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_NODE_FREE_PAGE_INFORMATION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_NODE_INFORMATION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_CORE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MMCLONE_DESCRIPTOR (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_AWEINFO (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_CM_KEY_NODE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_DBGKD_ANY_CONTROL_SET (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_DBGKD_CONTINUE2 (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_CC_PARTITION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_PRIVATE_VOLUME_CACHEMAP (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_HEAP_SEG_CONTEXT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_RTLP_HP_HEAP_GLOBALS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_HEAP_VS_AFFINITY_SLOT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_RTL_LOOKASIDE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_HEAP_UNPACKED_ENTRY (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_BLOB (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ALPC_COMPLETION_LIST_HEADER (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_IOP_IRP_EXTENSION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_POOL_LIMIT_TABLE_ENTRY (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_VF_TARGET_VERIFIED_DRIVER_DATA (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_VISIBLE_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_SYSTEM_TRIM_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PAGING_IO_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_IO_PAGE_STATE_CELL (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_IO_PAGE_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_ALIGNED_SLIST (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_STANDBY_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_SYSTEM_NODE_INFORMATION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_HARDWARE_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_SYSTEM_IMAGE_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_SECTION_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_VF_AVL_TABLE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_EX_POOL_HEAP_MANAGER_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ETW_WMITRACE_WORK (CppCompositeType)  
+INFO  resolveCount: 6568 (DefaultPdbApplicator)  
+INFO  conflictCount: 7 (DefaultPdbApplicator)  
+INFO  PDB Types and Main Symbols Processing Terminated Normally (DefaultPdbApplicator)  
+INFO  PDB Universal: scheduling PDB Function Internals Analysis (PdbUniversalAnalyzer)  
+WARN  Decompiling 14027a3c0, pcode error at 14027a736: Unable to resolve constructor at 14027a736 (DecompileCallback)  
+INFO  Packed database cache: C:\Users\Administrator\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)  
+ERROR Could not create Data at address 140e0e6a0 (DemangledVariable)  
+INFO  PDB Function Internals Processing Terminated Normally (DefaultPdbApplicator)  
+INFO  PDB Applicator Reporting (DefaultPdbApplicator)  
+INFO  ===Begin PdbApplicatorMetrics Report===
+Could not apply one or more instances of an unsupported PDB data type: FunctionIdMsType
+Could not apply one or more instances of an unsupported PDB data type: BuildInfoMsType
+Could not apply one or more instances of an unsupported PDB data type: StringIdMsType
+Could not apply one or more instances of an unsupported PDB symbol type: AnnotationMsSymbol
+Could not nest one or more instances of a PDB symbol type: AnnotationMsSymbol
+====End PdbApplicatorMetrics Report====
+ (PdbApplicatorMetrics)  
+INFO  PDB Applicator Reporting Terminated Normally (DefaultPdbApplicator)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              1.230 secs
+    Apply Data Archives                        0.791 secs
+    Call Convention ID                         0.742 secs
+    Call-Fixup Installer                       0.275 secs
+    Create Address Tables                      1.994 secs
+    Create Address Tables - One Time           5.925 secs
+    Create Function                            1.488 secs
+    Data Reference                             3.481 secs
+    Decompiler Switch Analysis               157.963 secs
+    Demangler Microsoft                        3.662 secs
+    Disassemble Entry Points                  56.538 secs
+    Disassemble Entry Points - One Time        0.122 secs
+    Embedded Media                             0.132 secs
+    External Entry References                  0.047 secs
+    Function ID                               16.775 secs
+    Function Start Search                      0.434 secs
+    Non-Returning Functions - Discovered      13.288 secs
+    Non-Returning Functions - Known            0.099 secs
+    PDB Universal                              8.576 secs
+    PDB Universal Function Internals           0.273 secs
+    PDB Universal Reporting                    0.005 secs
+    Reference                                  3.737 secs
+    Scalar Operand References                 15.548 secs
+    Shared Return Calls                        4.236 secs
+    Stack                                    255.110 secs
+    Subroutine References                      2.670 secs
+    Subroutine References - One Time           0.016 secs
+    Windows x86 PE Exception Handling          0.038 secs
+    Windows x86 PE RTTI Analyzer               0.130 secs
+    Windows x86 Thread Environment Block (TEB) Analyzer     0.024 secs
+    WindowsResourceReference                   0.515 secs
+    x86 Constant Reference Analyzer          203.425 secs
+-----------------------------------------------------
+     Total Time   759 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: ExportBranchAnalysis.java 'C:\Tools\GhidraV32Probes\serialize-timer-expiration-ghidra-v32-rerun-20260401-005209\ghidra-matches.md' 'C:\Tools\GhidraV32Probes\serialize-timer-expiration-ghidra-v32-rerun-20260401-005209\evidence.json' 'serialize-timer-expiration-ghidra-v32-rerun' 'C:\Tools\Symbols\serialize-timer-expiration-ghidra-v32-rerun' 'SerializeTimerExpiration'  (HeadlessAnalyzer)  
+INFO  SCRIPT: C:\Tools\GhidraV32Probes\serialize-timer-expiration-ghidra-v32-rerun-20260401-005209\scripts\ExportBranchAnalysis.java (HeadlessAnalyzer)  
+INFO  ANALYZING changes made by post scripts: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  REPORT: Post-analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  /ntoskrnl.exe: file created (Administrator) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /ntoskrnl.exe (Probe_serialize_timer_expiration_ghidra_v32_rerun:/ntoskrnl.exe) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

@@ -1,16 +1,23 @@
 ﻿{
-    "generated_utc":  "2026-03-31T19:23:33.7987695Z",
+    "generated_utc":  "2026-03-31T21:23:23.5752861Z",
     "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
     "vm_profile":  "primary",
     "guest_install_root":  "C:\\Tools\\IDA",
+    "guest_ida_path":  "C:\\Tools\\IDA\\Freeware\\ida64.exe",
     "guest_idat64_path":  null,
-    "status":  "blocked-installer-missing",
+    "status":  "provisioned-freeware-gui-only",
     "license_present":  false,
+    "edition":  "freeware",
+    "product_name":  "The Interactive Disassembler",
+    "hex_rays_decompiler":  false,
+    "headless_available":  false,
     "host_installer_root":  null,
     "host_installer_source":  null,
+    "host_installer_path":  "H:\\Temp\\idafree\\IDA Freeware_8.4_Machine_X64_exe_en-US.exe",
     "copied_from_host":  false,
+    "installed_from_shared_installer":  false,
     "shell_health_before":  {
-                                "generated_utc":  "2026-03-31T19:23:24.9015961Z",
+                                "generated_utc":  "2026-03-31T21:23:15.4516488Z",
                                 "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
                                 "vm_running":  true,
                                 "tools_state":  "running",
@@ -25,7 +32,7 @@
                                            }
                             },
     "shell_health_ready":  {
-                               "generated_utc":  "2026-03-31T19:23:28.9405012Z",
+                               "generated_utc":  "2026-03-31T21:23:19.7203615Z",
                                "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
                                "vm_running":  true,
                                "tools_state":  "running",
@@ -40,6 +47,7 @@
                                           }
                            },
     "notes":  [
-                  "No guest IDA installation was found and no host portable installer root was discovered."
+                  "IDA Freeware is installed in the guest. This is enough for string/xref/disassembly work, but Hex-Rays decompiler features remain unavailable.",
+                  "The freeware install exposes ida64.exe but not idat64.exe, so headless IDAPython automation is still blocked."
               ]
 }

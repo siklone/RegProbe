@@ -1,0 +1,35 @@
+﻿{
+    "binary":  "ntoskrnl.exe",
+    "probe":  "serialize-timer-expiration-ghidra-v32-rerun",
+    "timestamp":  "2026-03-31T22:05:42.408600100Z",
+    "pdb_source":  "C:\\Tools\\Symbols\\serialize-timer-expiration-ghidra-v32-rerun",
+    "matches":  [
+                    {
+                        "pattern":  "SerializeTimerExpiration",
+                        "address":  "140c63068",
+                        "function_name":  "\u003cno function\u003e",
+                        "function_source":  "unresolved",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "effect_summary":  "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+                        "context_before":  [
+                                               "140c618b1  HLT",
+                                               "140c619a8  ADD byte ptr CS:[RAX],DH",
+                                               "140c619ab  ADD byte ptr [RAX],AL",
+                                               "140c619ad  ADD byte ptr [RAX],AL",
+                                               "140c619af  ADD byte ptr [RAX],DL"
+                                           ],
+                        "branch_snippet":  [
+                                               "140c619b1  INT1"
+                                           ],
+                        "context_after":  [
+
+                                          ]
+                    }
+                ],
+    "exit_code":  0,
+    "markdown_exists":  true,
+    "run_log_exists":  true,
+    "pdb_loaded":  true,
+    "pdb_verification_source":  "ghidra-run-log"
+}

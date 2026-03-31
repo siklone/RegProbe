@@ -6,46 +6,59 @@ This follow-up covers the first real environment pass after the v3.2 static hard
 
 - Script: `scripts/vm/provision-symbol-tools.ps1`
 - Audit: `registry-research-framework/audit/symbol-tools-provisioning-20260331.json`
-- Result: `blocked-symchk-still-missing`
+- Result: `ready`
 
 What happened:
 
 - The guest shell was healthy before and after the run.
-- No host-side `symchk.exe` fallback root was available.
 - The VM is now treated as offline for symbol provisioning. Guest `winget` and guest bootstrapper retries are disabled by default.
-- A host-side layout attempt was added, but the current host still returns `1618` while trying to stage the Windows SDK layout.
-- The shared WinDbg package path is reachable through HGFS now, but that package does not contain `symchk.exe`, so it is not a valid substitute for the SDK debugger tools.
-- After the host layout attempt and guest-side discovery pass, `symchk.exe` still was not present anywhere in the guest search roots.
+- `symchk.exe` was solved from the host side, not the guest side. The host downloaded the official Windows SDK ISO, extracted the debugger tools offline, and staged the full `x64` debugger root into the VM through the HGFS share.
+- The canonical guest tool root is now `C:\Tools\SymbolTools`, and `symchk.exe` resolves there cleanly.
+- The shared WinDbg package path is still reachable, but it remains a side channel only. It is not the canonical symbol-tool source because it does not contain `symchk.exe`.
 
 ## Ghidra pilot rerun
 
-- Artifact root: `evidence/files/ghidra-v32/serialize-timer-expiration-ghidra-v32-rerun-20260331-222508`
-- Result: still `blocked-pdb-missing`
+- Artifact root: `evidence/files/ghidra-v32/serialize-timer-expiration-ghidra-v32-rerun-20260401-005209`
+- Result: no longer blocked by missing symbol tooling
 
-This rerun matters because it used the widened `symchk` discovery logic. The blocker is now confirmed as environment provisioning, not a narrow path assumption inside the Ghidra runner.
+What changed:
+
+- The exact guest binary is copied back to the host.
+- `symchk` runs on the host against that exact binary with internet access.
+- The downloaded symbol cache is staged back into the guest through the shared folder.
+- Ghidra now parses the staged `ntkrnlmp.pdb` locally in the guest. The run log contains both:
+  - `PDB analyzer parsing file: ...ntkrnlmp.pdb`
+  - `PDB Types and Main Symbols Processing Terminated Normally`
+
+Current remaining blocker:
+
+- The environment blocker is gone, but the bounded branch export is still unresolved for the pilot string.
+- The current probe is now `review-only`, not `blocked-pdb-missing`.
+- `pdb_loaded = true` is verified from the Ghidra run log, but the exported match still resolves to `<no function>`, so no promotion-grade branch claim is made yet.
 
 ## IDA provisioning
 
 - Script: `scripts/vm/provision-ida-headless.ps1`
 - Audit: `registry-research-framework/audit/ida-provisioning-20260331.json`
-- Result: `blocked-installer-missing`
+- Result: `provisioned-freeware-gui-only`
 
 What changed:
 
-- The script no longer relies on `vmrun` stdout to detect guest state.
-- Guest detection now writes a JSON probe and copies it back to the host.
-- Host discovery now searches common install roots instead of only a manually supplied folder.
+- The official IDA Free installer is now downloaded on the host and staged into the guest through the shared folder.
+- The guest now has `C:\Tools\IDA\Freeware\ida64.exe`.
+- The freeware install is useful for interactive string/xref/disassembly review inside the VM.
 
 Current blocker:
 
-- No guest `idat64.exe`
-- No host portable IDA root
-- No local license artifact to validate even if a binary were found later
+- `idat64.exe` is still absent.
+- Hex-Rays decompiler is still absent.
+- So the original headless IDAPython lane remains blocked until a licensed/headless-capable build is supplied.
 
 ## Net result
 
 The v3.2 pipeline is now more honest about the environment edge:
 
-- `symchk` is blocked by missing host-prepared debugger tooling, not by a false assumption that the guest can reach package feeds
-- `IDA` is blocked by real installer availability, not by a brittle detection script
-- The Ghidra runner and the IDA provisioning path both now fail closed with reproducible JSON output
+- `symchk` and the Windows debugger tools are now downloaded on the host and available in the guest
+- the Ghidra pilot is no longer blocked by missing symbol tooling or guest internet assumptions
+- `IDA` is present in the guest, but only as Freeware GUI tooling
+- the remaining gap is no longer “can the tools exist in the VM?” but “can the static lane produce a bounded, symbol-backed branch mapping for the target record?”

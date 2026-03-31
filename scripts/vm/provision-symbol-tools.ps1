@@ -237,6 +237,9 @@ $hostWinDbgPackage = Get-HostWinDbgPackageCandidate -ExplicitPath $HostWinDbgPac
 $guestSharedWinDbgPackage = $null
 $sharedPackagePrepared = $false
 $sharedPackageSource = $null
+$sharedSymbolRootPrepared = $false
+$sharedSymbolRootSource = $null
+$guestSharedSymbolRoot = $null
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $hostRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("symbol-tools-provisioning-$stamp")
 $guestRoot = Join-Path $GuestWorkRoot ("symbol-tools-provisioning-$stamp")
@@ -475,15 +478,76 @@ Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 
 
 $hostFallbackApplied = $false
 if ($hostCandidate) {
-    foreach ($file in @($hostCandidate.symchk, $hostCandidate.dbghelp, $hostCandidate.symsrv)) {
-        if ([string]::IsNullOrWhiteSpace($file) -or -not (Test-Path $file)) {
-            continue
+    if (-not [string]::IsNullOrWhiteSpace($HostSharedFolderPath) -and -not [string]::IsNullOrWhiteSpace($SharedFolderGuestName)) {
+        $hostSharedSymbolRoot = Join-Path $HostSharedFolderPath 'symbol-tools-x64'
+        Remove-Item $hostSharedSymbolRoot -Recurse -Force -ErrorAction SilentlyContinue
+        New-Item -ItemType Directory -Path $hostSharedSymbolRoot -Force | Out-Null
+        Copy-Item -Path (Join-Path $hostCandidate.root '*') -Destination $hostSharedSymbolRoot -Recurse -Force
+
+        $guestSharedSymbolRoot = "\\vmware-host\Shared Folders\$SharedFolderGuestName\symbol-tools-x64"
+        $sharedSymbolRootPrepared = Test-Path (Join-Path $hostSharedSymbolRoot 'symchk.exe')
+        $sharedSymbolRootSource = $hostSharedSymbolRoot
+
+        if ($sharedSymbolRootPrepared) {
+            $hostStageScript = Join-Path $hostRoot 'stage-symbol-tools.ps1'
+            $guestStageScript = Join-Path $guestRoot 'stage-symbol-tools.ps1'
+            $guestStageResult = Join-Path $guestRoot 'stage-symbol-tools.json'
+            $hostStageResult = Join-Path $hostRoot 'stage-symbol-tools.json'
+
+            @'
+param(
+    [string]$SourceRoot,
+    [string]$DestinationRoot,
+    [string]$ResultPath
+)
+$ErrorActionPreference = 'Stop'
+New-Item -ItemType Directory -Path (Split-Path -Parent $ResultPath) -Force | Out-Null
+$payload = [ordered]@{
+    source_root = $SourceRoot
+    destination_root = $DestinationRoot
+    source_visible = (Test-Path $SourceRoot)
+    status = 'not-run'
+    error = $null
+}
+try {
+    if (-not $payload.source_visible) { throw 'shared symbol root not visible' }
+    New-Item -ItemType Directory -Path $DestinationRoot -Force | Out-Null
+    Copy-Item -Path (Join-Path $SourceRoot '*') -Destination $DestinationRoot -Recurse -Force
+    $payload.status = 'staged'
+}
+catch {
+    $payload.status = 'failed'
+    $payload.error = $_.Exception.Message
+}
+$payload | ConvertTo-Json -Depth 6 | Set-Content -Path $ResultPath -Encoding UTF8
+'@ | Set-Content -Path $hostStageScript -Encoding UTF8
+
+            Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostStageScript, $guestStageScript) | Out-Null
+            Invoke-Vmrun -Arguments @(
+                '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
+                'runProgramInGuest', $VmPath,
+                'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
+                '-NoProfile', '-ExecutionPolicy', 'Bypass',
+                '-File', $guestStageScript,
+                '-SourceRoot', $guestSharedSymbolRoot,
+                '-DestinationRoot', $GuestInstallRoot,
+                '-ResultPath', $guestStageResult
+            ) -IgnoreExitCode | Out-Null
+            Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestStageResult, $hostStageResult) -IgnoreExitCode | Out-Null
+            $hostFallbackApplied = $true
         }
-        Invoke-Vmrun -Arguments @(
-            '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
-            'CopyFileFromHostToGuest', $VmPath, $file, (Join-Path $GuestInstallRoot ([IO.Path]::GetFileName($file)))
-        ) | Out-Null
-        $hostFallbackApplied = $true
+    }
+    else {
+        foreach ($file in @($hostCandidate.symchk, $hostCandidate.dbghelp, $hostCandidate.symsrv)) {
+            if ([string]::IsNullOrWhiteSpace($file) -or -not (Test-Path $file)) {
+                continue
+            }
+            Invoke-Vmrun -Arguments @(
+                '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
+                'CopyFileFromHostToGuest', $VmPath, $file, (Join-Path $GuestInstallRoot ([IO.Path]::GetFileName($file)))
+            ) | Out-Null
+            $hostFallbackApplied = $true
+        }
     }
 }
 
@@ -580,6 +644,9 @@ $payload | Add-Member -NotePropertyName host_windbg_package_path -NotePropertyVa
 $payload | Add-Member -NotePropertyName shared_package_prepared -NotePropertyValue $sharedPackagePrepared -Force
 $payload | Add-Member -NotePropertyName shared_package_source -NotePropertyValue $sharedPackageSource -Force
 $payload | Add-Member -NotePropertyName guest_shared_package_path -NotePropertyValue $guestSharedWinDbgPackage -Force
+$payload | Add-Member -NotePropertyName shared_symbol_root_prepared -NotePropertyValue $sharedSymbolRootPrepared -Force
+$payload | Add-Member -NotePropertyName shared_symbol_root_source -NotePropertyValue $sharedSymbolRootSource -Force
+$payload | Add-Member -NotePropertyName guest_shared_symbol_root -NotePropertyValue $guestSharedSymbolRoot -Force
 $payload | Add-Member -NotePropertyName shell_health_before -NotePropertyValue $shellBefore -Force
 $payload | Add-Member -NotePropertyName shell_health_ready -NotePropertyValue $shellReady -Force
 

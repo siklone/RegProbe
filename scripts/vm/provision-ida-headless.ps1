@@ -9,6 +9,9 @@ param(
     [string]$GuestInstallRoot = 'C:\Tools\IDA',
     [string]$GuestWorkRoot = 'C:\RegProbe-Diag\IDA',
     [string]$HostInstallerRoot = '',
+    [string]$HostInstallerPath = '',
+    [string]$HostSharedFolderPath = 'H:\Temp\vm-tooling-staging',
+    [string]$SharedFolderGuestName = 'vm-tooling-staging',
     [string]$OutputFile = ''
 )
 
@@ -110,11 +113,40 @@ function Resolve-HostIdaRoot {
     return $null
 }
 
+function Resolve-HostIdaInstaller {
+    param([string]$ExplicitPath)
+
+    if (-not [string]::IsNullOrWhiteSpace($ExplicitPath) -and (Test-Path $ExplicitPath)) {
+        return (Get-Item $ExplicitPath).FullName
+    }
+
+    foreach ($root in @(
+        'H:\Temp\idafree',
+        'C:\Users\Deniz\Downloads',
+        'C:\Users\Deniz\Desktop',
+        'H:\Temp'
+    )) {
+        if (-not (Test-Path $root)) {
+            continue
+        }
+
+        $match = Get-ChildItem -Path $root -Recurse -ErrorAction SilentlyContinue -Include 'IDA Freeware*_exe_*.exe','idafree*_windows.exe' |
+            Sort-Object LastWriteTimeUtc -Descending |
+            Select-Object -First 1
+        if ($match) {
+            return $match.FullName
+        }
+    }
+
+    return $null
+}
+
 $shellBefore = Wait-HealthyShell
 Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath, 'nogui') -IgnoreExitCode | Out-Null
 $shellReady = Wait-HealthyShell
 
 $hostIda = Resolve-HostIdaRoot -ExplicitRoot $HostInstallerRoot
+$hostIdaInstaller = Resolve-HostIdaInstaller -ExplicitPath $HostInstallerPath
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $hostRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("ida-provisioning-$stamp")
 $guestRoot = Join-Path $GuestWorkRoot ("ida-provisioning-$stamp")
@@ -136,23 +168,35 @@ param(
 $ErrorActionPreference = 'Stop'
 
 function Find-GuestIda {
-    $candidates = New-Object System.Collections.Generic.List[string]
+    $candidates = New-Object System.Collections.Generic.List[object]
     foreach ($path in @(
         (Join-Path $GuestInstallRoot 'idat64.exe'),
+        (Join-Path $GuestInstallRoot 'ida64.exe'),
+        (Join-Path (Join-Path $GuestInstallRoot 'Freeware') 'idat64.exe'),
+        (Join-Path (Join-Path $GuestInstallRoot 'Freeware') 'ida64.exe'),
         'C:\Program Files\IDA Pro\idat64.exe',
+        'C:\Program Files\IDA Pro\ida64.exe',
         'C:\Program Files\IDA Professional\idat64.exe',
-        'C:\Program Files\Hex-Rays\idat64.exe'
+        'C:\Program Files\IDA Professional\ida64.exe',
+        'C:\Program Files\Hex-Rays\idat64.exe',
+        'C:\Program Files\Hex-Rays\ida64.exe'
     )) {
         if (Test-Path $path) {
-            $candidates.Add($path)
+            $candidates.Add([pscustomobject]@{
+                path = $path
+                headless = [bool]($path -match 'idat64\.exe$')
+            })
         }
     }
 
     if ($candidates.Count -eq 0) {
-        $search = Get-ChildItem -Path 'C:\Program Files', 'C:\Tools' -Recurse -Filter 'idat64.exe' -ErrorAction SilentlyContinue | Select-Object -First 5
+        $search = Get-ChildItem -Path 'C:\Program Files', 'C:\Tools' -Recurse -Include 'idat64.exe','ida64.exe' -ErrorAction SilentlyContinue | Select-Object -First 10
         foreach ($item in @($search)) {
-            if ($item -and -not $candidates.Contains($item.FullName)) {
-                $candidates.Add($item.FullName)
+            if ($item) {
+                $candidates.Add([pscustomobject]@{
+                    path = $item.FullName
+                    headless = [bool]($item.FullName -match 'idat64\.exe$')
+                })
             }
         }
     }
@@ -161,7 +205,7 @@ function Find-GuestIda {
         return $null
     }
 
-    return $candidates[0]
+    return ($candidates | Sort-Object @{ Expression = 'headless'; Descending = $true }, path | Select-Object -First 1)
 }
 
 function Find-LicenseArtifacts {
@@ -182,14 +226,47 @@ function Find-LicenseArtifacts {
     return @($paths | Where-Object { Test-Path $_ })
 }
 
-$idaPath = Find-GuestIda
+$idaInfo = Find-GuestIda
+$idaPath = if ($idaInfo) { $idaInfo.path } else { $null }
 $licenses = Find-LicenseArtifacts -IdaExePath $idaPath
+$productName = $null
+$edition = 'unknown'
+$hexRaysDecompiler = $false
+$headlessAvailable = [bool]($idaInfo -and $idaInfo.headless)
+
+if ($idaPath -and (Test-Path $idaPath)) {
+    try {
+        $productName = (Get-Item $idaPath).VersionInfo.ProductName
+    }
+    catch {
+    }
+
+    if ($productName -match 'Freeware' -or $idaPath -match '\\Freeware\\') {
+        $edition = 'freeware'
+    }
+    elseif ($licenses.Count -gt 0) {
+        $edition = 'licensed'
+    }
+
+    $root = Split-Path -Parent $idaPath
+    if ($edition -eq 'freeware') {
+        $hexRaysDecompiler = $false
+    }
+    else {
+        $hexRaysDecompiler = [bool](Get-ChildItem -Path $root -Recurse -Filter 'hexx64.dll' -ErrorAction SilentlyContinue | Select-Object -First 1)
+    }
+}
 
 $payload = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
-    guest_idat64_path = $idaPath
+    guest_ida_path = $idaPath
+    guest_idat64_path = if ($headlessAvailable) { $idaPath } else { $null }
     guest_license_artifacts = @($licenses)
     license_present = (@($licenses).Count -gt 0)
+    product_name = $productName
+    edition = $edition
+    hex_rays_decompiler = $hexRaysDecompiler
+    headless_available = $headlessAvailable
 }
 
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $ResultPath) | Out-Null
@@ -221,8 +298,13 @@ $before = Invoke-GuestProbe
 $notes = New-Object System.Collections.Generic.List[string]
 $status = 'ready'
 $copiedFromHost = $false
-$guestIdaPath = $before.guest_idat64_path
+$installedFromSharedInstaller = $false
+$guestIdaPath = $before.guest_ida_path
 $licensePresent = [bool]$before.license_present
+$edition = $before.edition
+$productName = $before.product_name
+$hexRaysDecompiler = [bool]$before.hex_rays_decompiler
+$headlessAvailable = [bool]$before.headless_available
 
 if (-not $guestIdaPath) {
     if ($hostIda) {
@@ -236,8 +318,89 @@ if (-not $guestIdaPath) {
         $copiedFromHost = $true
         $notes.Add("Portable IDA root copied from host: $($hostIda.root)")
         $afterProbe = Invoke-GuestProbe
-        $guestIdaPath = $afterProbe.guest_idat64_path
+        $guestIdaPath = $afterProbe.guest_ida_path
         $licensePresent = [bool]$afterProbe.license_present
+        $edition = $afterProbe.edition
+        $productName = $afterProbe.product_name
+        $hexRaysDecompiler = [bool]$afterProbe.hex_rays_decompiler
+        $headlessAvailable = [bool]$afterProbe.headless_available
+    }
+    elseif ($hostIdaInstaller) {
+        New-Item -ItemType Directory -Path $HostSharedFolderPath -Force | Out-Null
+        $sharedInstaller = Join-Path $HostSharedFolderPath ([IO.Path]::GetFileName($hostIdaInstaller))
+        if (((Resolve-Path $hostIdaInstaller).Path) -ne ([IO.Path]::Combine((Resolve-Path (Split-Path -Parent $sharedInstaller)).Path, ([IO.Path]::GetFileName($sharedInstaller))))) {
+            Copy-Item -LiteralPath $hostIdaInstaller -Destination $sharedInstaller -Force
+        }
+        elseif (-not (Test-Path $sharedInstaller)) {
+            Copy-Item -LiteralPath $hostIdaInstaller -Destination $sharedInstaller -Force
+        }
+
+        $guestSharedInstaller = "\\vmware-host\Shared Folders\$SharedFolderGuestName\$([IO.Path]::GetFileName($sharedInstaller))"
+        $guestInstallerScript = Join-Path $guestRoot 'install-ida-freeware.ps1'
+        $hostInstallerScript = Join-Path $hostRoot 'install-ida-freeware.ps1'
+        $guestInstallResult = Join-Path $guestRoot 'install-result.json'
+        $hostInstallResult = Join-Path $hostRoot 'install-result.json'
+        $guestTargetRoot = Join-Path $GuestInstallRoot 'Freeware'
+
+        @'
+param(
+    [string]$InstallerPath,
+    [string]$InstallRoot,
+    [string]$ResultPath
+)
+$ErrorActionPreference = 'Stop'
+New-Item -ItemType Directory -Path (Split-Path -Parent $ResultPath) -Force | Out-Null
+$payload = [ordered]@{
+    installer_path = $InstallerPath
+    install_root = $InstallRoot
+    installer_visible = (Test-Path $InstallerPath)
+    exit_code = $null
+    status = 'not-run'
+    error = $null
+}
+try {
+    if (-not $payload.installer_visible) { throw 'shared installer not visible' }
+    $proc = Start-Process -FilePath $InstallerPath -ArgumentList @('--mode','unattended','--unattendedmodeui','none','--prefix',$InstallRoot) -Wait -PassThru
+    $payload.exit_code = $proc.ExitCode
+    $payload.status = if ($proc.ExitCode -eq 0) { 'installed' } else { 'failed' }
+}
+catch {
+    $payload.status = 'failed'
+    $payload.error = $_.Exception.Message
+}
+$payload | ConvertTo-Json -Depth 6 | Set-Content -Path $ResultPath -Encoding UTF8
+'@ | Set-Content -Path $hostInstallerScript -Encoding UTF8
+
+        Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'createDirectoryInGuest', $VmPath, $guestRoot) -IgnoreExitCode | Out-Null
+        Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostInstallerScript, $guestInstallerScript) | Out-Null
+        Invoke-Vmrun -Arguments @(
+            '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
+            'runProgramInGuest', $VmPath,
+            'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
+            '-NoProfile', '-ExecutionPolicy', 'Bypass',
+            '-File', $guestInstallerScript,
+            '-InstallerPath', $guestSharedInstaller,
+            '-InstallRoot', $guestTargetRoot,
+            '-ResultPath', $guestInstallResult
+        ) -IgnoreExitCode | Out-Null
+
+        Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestInstallResult, $hostInstallResult) -IgnoreExitCode | Out-Null
+        if (Test-Path $hostInstallResult) {
+            $installResult = Get-Content -Path $hostInstallResult -Raw | ConvertFrom-Json
+            $notes.Add("Shared installer status: $($installResult.status)")
+            if ($installResult.error) {
+                $notes.Add("Shared installer error: $($installResult.error)")
+            }
+        }
+
+        $installedFromSharedInstaller = $true
+        $afterProbe = Invoke-GuestProbe
+        $guestIdaPath = $afterProbe.guest_ida_path
+        $licensePresent = [bool]$afterProbe.license_present
+        $edition = $afterProbe.edition
+        $productName = $afterProbe.product_name
+        $hexRaysDecompiler = [bool]$afterProbe.hex_rays_decompiler
+        $headlessAvailable = [bool]$afterProbe.headless_available
     }
     else {
         $status = 'blocked-installer-missing'
@@ -245,11 +408,18 @@ if (-not $guestIdaPath) {
     }
 }
 
-if ($guestIdaPath -and -not $licensePresent) {
+if ($guestIdaPath -and $edition -eq 'freeware') {
+    $status = if ($headlessAvailable) { 'provisioned-freeware' } else { 'provisioned-freeware-gui-only' }
+    $notes.Add('IDA Freeware is installed in the guest. This is enough for string/xref/disassembly work, but Hex-Rays decompiler features remain unavailable.')
+    if (-not $headlessAvailable) {
+        $notes.Add('The freeware install exposes ida64.exe but not idat64.exe, so headless IDAPython automation is still blocked.')
+    }
+}
+elseif ($guestIdaPath -and -not $licensePresent) {
     $status = 'blocked-license-missing'
     $notes.Add('IDA binary path exists, but no local license artifact was detected under the resolved guest root.')
 }
-elseif ($guestIdaPath -and $status -eq 'ready' -and $copiedFromHost) {
+elseif ($guestIdaPath -and $status -eq 'ready' -and ($copiedFromHost -or $installedFromSharedInstaller)) {
     $status = 'provisioned'
 }
 
@@ -258,12 +428,19 @@ $payload = [ordered]@{
     vm_path = $VmPath
     vm_profile = $VmProfile
     guest_install_root = $GuestInstallRoot
-    guest_idat64_path = $guestIdaPath
+    guest_ida_path = $guestIdaPath
+    guest_idat64_path = if ($headlessAvailable) { $guestIdaPath } else { $null }
     status = $status
     license_present = $licensePresent
+    edition = $edition
+    product_name = $productName
+    hex_rays_decompiler = $hexRaysDecompiler
+    headless_available = $headlessAvailable
     host_installer_root = if ($hostIda) { $hostIda.root } else { $null }
     host_installer_source = if ($hostIda) { $hostIda.source } else { $null }
+    host_installer_path = $hostIdaInstaller
     copied_from_host = $copiedFromHost
+    installed_from_shared_installer = $installedFromSharedInstaller
     shell_health_before = $shellBefore
     shell_health_ready = $shellReady
     notes = @($notes)

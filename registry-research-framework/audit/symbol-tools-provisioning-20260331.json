@@ -1,38 +1,40 @@
 ﻿{
-    "generated_utc":  "2026-03-31T20:44:58.8478028Z",
-    "status":  "blocked-symchk-still-missing",
+    "generated_utc":  "2026-03-31T21:27:26.7971099Z",
+    "status":  "ready",
     "before":  {
                    "winget_available":  true,
-                   "symchk_path":  null
+                   "symchk_path":  "C:\\Tools\\SymbolTools\\symchk.exe"
                },
     "after":  {
                   "winget_available":  true,
-                  "symchk_path":  null
+                  "symchk_path":  "C:\\Tools\\SymbolTools\\symchk.exe"
               },
     "attempts":  [
 
                  ],
     "notes":  [
                   "Guest winget provisioning is disabled by default because the VM is treated as offline for this lane.",
-                  "Guest shared-package fallback is disabled for symbol provisioning because the current WinDbg package does not provide symchk.exe.",
-                  "No guest symchk.exe was found after the provisioning attempts."
+                  "Guest shared-package fallback is disabled for symbol provisioning because the current WinDbg package does not provide symchk.exe."
               ],
     "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
     "vm_profile":  "primary",
     "guest_install_root":  "C:\\Tools\\SymbolTools",
-    "host_fallback_root":  null,
-    "host_fallback_applied":  false,
+    "host_fallback_root":  "H:\\Temp\\winsdk-debuggers-x64\\Windows Kits\\10\\Debuggers\\x64",
+    "host_fallback_applied":  true,
     "host_offline_installer_path":  "H:\\Temp\\winget-downloads\\winsdk18362\\Windows SDK_10.0.18362.0_X86_exe_en-US.exe",
     "host_offline_installer_applied":  false,
     "host_offline_installer_exit_code":  null,
-    "host_layout_root":  "H:\\Temp\\winsdk18362-layout",
-    "host_layout_exit_code":  1618,
+    "host_layout_root":  null,
+    "host_layout_exit_code":  null,
     "host_windbg_package_path":  "H:\\Temp\\vm-tooling-staging\\WinDbg_1.2601.12001.0_X64_msix_en-US.msix",
     "shared_package_prepared":  true,
     "shared_package_source":  "H:\\Temp\\vm-tooling-staging\\WinDbg_1.2601.12001.0_X64_msix_en-US.msix",
     "guest_shared_package_path":  "\\\\vmware-host\\Shared Folders\\vm-tooling-staging\\WinDbg_1.2601.12001.0_X64_msix_en-US.msix",
+    "shared_symbol_root_prepared":  true,
+    "shared_symbol_root_source":  "H:\\Temp\\vm-tooling-staging\\symbol-tools-x64",
+    "guest_shared_symbol_root":  "\\\\vmware-host\\Shared Folders\\vm-tooling-staging\\symbol-tools-x64",
     "shell_health_before":  {
-                                "generated_utc":  "2026-03-31T20:44:49.3926796Z",
+                                "generated_utc":  "2026-03-31T21:27:05.0541830Z",
                                 "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
                                 "vm_running":  true,
                                 "tools_state":  "running",
@@ -47,7 +49,7 @@
                                            }
                             },
     "shell_health_ready":  {
-                               "generated_utc":  "2026-03-31T20:44:53.4101079Z",
+                               "generated_utc":  "2026-03-31T21:27:08.8456465Z",
                                "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
                                "vm_running":  true,
                                "tools_state":  "running",
