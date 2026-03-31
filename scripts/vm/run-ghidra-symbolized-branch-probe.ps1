@@ -137,7 +137,48 @@ if (-not $analyzeHeadless) {
     exit 0
 }
 
-$symchk = Get-Command symchk.exe -ErrorAction SilentlyContinue
+function Find-Symchk {
+    $direct = Get-Command symchk.exe -ErrorAction SilentlyContinue
+    if ($direct) {
+        return $direct.Source
+    }
+
+    $roots = New-Object System.Collections.Generic.List[string]
+    foreach ($path in @(
+        'C:\Tools\SymbolTools',
+        'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64',
+        'C:\Program Files\Windows Kits\10\Debuggers\x64',
+        'C:\Program Files\Debugging Tools for Windows (x64)',
+        'C:\Program Files\Debugging Tools for Windows'
+    )) {
+        if ((Test-Path $path) -and -not $roots.Contains($path)) {
+            $roots.Add($path)
+        }
+    }
+
+    foreach ($pkg in @(Get-AppxPackage -Name Microsoft.WinDbg* -ErrorAction SilentlyContinue)) {
+        if ($pkg.InstallLocation -and (Test-Path $pkg.InstallLocation) -and -not $roots.Contains($pkg.InstallLocation)) {
+            $roots.Add($pkg.InstallLocation)
+        }
+    }
+
+    foreach ($root in $roots) {
+        $candidate = Get-ChildItem -Path $root -Recurse -Filter 'symchk.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($candidate) {
+            return $candidate.FullName
+        }
+    }
+
+    return $null
+}
+
+$symchkPath = Find-Symchk
+if ($symchkPath) {
+    $symchk = @{ Source = $symchkPath }
+}
+else {
+    $symchk = $null
+}
 if (-not $symchk) {
     Write-Evidence -Status 'blocked-pdb-missing' -PdbLoaded $false -PdbSource $SymbolRoot -Failure 'symchk.exe is not installed in the guest environment.'
     exit 0

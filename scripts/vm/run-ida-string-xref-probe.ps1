@@ -31,6 +31,8 @@ $hostRoot = Join-Path $HostOutputRoot ("{0}-{1}" -f $OutputName, $stamp)
 $guestRoot = Join-Path $GuestOutputRoot ("{0}-{1}" -f $OutputName, $stamp)
 $hostScript = Join-Path $hostRoot 'export_branch_analysis.py'
 $guestScript = Join-Path $guestRoot 'export_branch_analysis.py'
+$hostState = Join-Path $hostRoot 'ida-state.json'
+$guestState = Join-Path $guestRoot 'ida-state.json'
 $hostEvidence = Join-Path $hostRoot 'evidence.json'
 $guestEvidence = Join-Path $guestRoot 'evidence.json'
 $patternPayload = ($Patterns | ForEach-Object { $_.Trim() } | Where-Object { $_ }) -join '|||'
@@ -64,21 +66,46 @@ function Write-BlockedEvidence {
 }
 
 Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath, 'nogui') -IgnoreExitCode | Out-Null
-$idaGuestPath = Join-Path $GuestIdaRoot 'idat64.exe'
-$idaCheck = Invoke-Vmrun -Arguments @(
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'createDirectoryInGuest', $VmPath, $guestRoot) -IgnoreExitCode | Out-Null
+
+$stateCommand = @"
+$paths = @(
+  (Join-Path '$GuestIdaRoot' 'idat64.exe'),
+  'C:\Program Files\IDA Pro\idat64.exe',
+  'C:\Program Files\IDA Professional\idat64.exe',
+  'C:\Program Files\Hex-Rays\idat64.exe'
+)
+$resolved = $paths | Where-Object { Test-Path $_ } | Select-Object -First 1
+if (-not $resolved) {
+  $resolved = (Get-ChildItem -Path 'C:\Program Files', 'C:\Tools' -Recurse -Filter 'idat64.exe' -ErrorAction SilentlyContinue | Select-Object -First 1 | ForEach-Object { $_.FullName })
+}
+[ordered]@{ guest_idat64_path = $resolved } | ConvertTo-Json -Depth 4 | Set-Content -Path '$guestState' -Encoding UTF8
+"@
+
+Invoke-Vmrun -Arguments @(
     '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
     'runProgramInGuest', $VmPath,
     'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
-    '-NoProfile', '-Command', "[Console]::Out.Write((Test-Path '$idaGuestPath').ToString().ToLowerInvariant())"
-) -IgnoreExitCode
+    '-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', $stateCommand
+) -IgnoreExitCode | Out-Null
+Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestState, $hostState) -IgnoreExitCode | Out-Null
 
-if ($idaCheck -notmatch 'true') {
+$idaGuestPath = $null
+if (Test-Path $hostState) {
+    try {
+        $state = Get-Content -Path $hostState -Raw | ConvertFrom-Json
+        $idaGuestPath = [string]$state.guest_idat64_path
+    }
+    catch {
+    }
+}
+
+if ([string]::IsNullOrWhiteSpace($idaGuestPath)) {
     Write-BlockedEvidence -Status 'blocked-ida-missing' -Reason 'idat64.exe was not found in the canonical guest IDA root.' | Out-Null
     Get-Content -Path $hostEvidence -Raw
     exit 0
 }
 
-Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'createDirectoryInGuest', $VmPath, $guestRoot) -IgnoreExitCode | Out-Null
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostScript, $guestScript) | Out-Null
 
 $guestCommand = @"

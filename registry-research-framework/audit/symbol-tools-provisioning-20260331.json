@@ -1,16 +1,44 @@
 ﻿{
-    "generated_utc":  "2026-03-31T19:23:33.7987695Z",
+    "generated_utc":  "2026-03-31T19:24:47.0190963Z",
+    "status":  "blocked-symchk-still-missing",
+    "before":  {
+                   "winget_available":  true,
+                   "symchk_path":  null
+               },
+    "after":  {
+                  "winget_available":  true,
+                  "symchk_path":  null
+              },
+    "attempts":  [
+                     {
+                         "package_id":  "Microsoft.WinDbg",
+                         "executed":  true,
+                         "exit_code":  -1978335217,
+                         "status":  "failed"
+                     },
+                     {
+                         "package_id":  "Microsoft.WindowsSDK.10.0.18362",
+                         "executed":  true,
+                         "exit_code":  -1978335217,
+                         "status":  "failed"
+                     },
+                     {
+                         "package_id":  "Microsoft.WindowsSDK.10.0.17134",
+                         "executed":  true,
+                         "exit_code":  -1978335217,
+                         "status":  "failed"
+                     }
+                 ],
+    "notes":  [
+                  "No guest symchk.exe was found after the provisioning attempts."
+              ],
     "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
     "vm_profile":  "primary",
-    "guest_install_root":  "C:\\Tools\\IDA",
-    "guest_idat64_path":  null,
-    "status":  "blocked-installer-missing",
-    "license_present":  false,
-    "host_installer_root":  null,
-    "host_installer_source":  null,
-    "copied_from_host":  false,
+    "guest_install_root":  "C:\\Tools\\SymbolTools",
+    "host_fallback_root":  null,
+    "host_fallback_applied":  false,
     "shell_health_before":  {
-                                "generated_utc":  "2026-03-31T19:23:24.9015961Z",
+                                "generated_utc":  "2026-03-31T19:24:12.0858972Z",
                                 "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
                                 "vm_running":  true,
                                 "tools_state":  "running",
@@ -25,7 +53,7 @@
                                            }
                             },
     "shell_health_ready":  {
-                               "generated_utc":  "2026-03-31T19:23:28.9405012Z",
+                               "generated_utc":  "2026-03-31T19:24:16.2363420Z",
                                "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
                                "vm_running":  true,
                                "tools_state":  "running",
@@ -38,8 +66,5 @@
                                               "ctfmon":  true,
                                               "app":  false
                                           }
-                           },
-    "notes":  [
-                  "No guest IDA installation was found and no host portable installer root was discovered."
-              ]
+                           }
 }
