@@ -257,7 +257,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="Margin" Value="0,0,0,12"/>
+        <Setter Property="Margin" Value="0,0,0,8"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
@@ -304,24 +304,24 @@
     </Style>
 
     <Style x:Key="StatusPillBorderStyle" TargetType="Border">
-        <Setter Property="Padding" Value="10,4"/>
-        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Padding" Value="8,3"/>
+        <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="#202020"/>
         <Setter Property="BorderBrush" Value="#414141"/>
     </Style>
 
     <Style x:Key="EvidencePillBorderStyle" TargetType="Border">
-        <Setter Property="Padding" Value="8,4"/>
-        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Padding" Value="8,3"/>
+        <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Background" Value="#29241D"/>
-        <Setter Property="BorderBrush" Value="#58482D"/>
+        <Setter Property="Background" Value="#1A1A1A"/>
+        <Setter Property="BorderBrush" Value="#333333"/>
     </Style>
 
     <Style x:Key="TierPillBorderStyle" TargetType="Border">
         <Setter Property="Padding" Value="7,2"/>
-        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="#202020"/>
         <Setter Property="BorderBrush" Value="#4A4A4A"/>
@@ -331,18 +331,18 @@
 
     <DataTemplate x:Key="ConfigurationTweakRowTemplate" DataType="{x:Type viewModels:TweakItemViewModel}">
         <Grid>
-            <Border x:Name="Card" Background="#171717" BorderBrush="#2A2A2A" BorderThickness="1" CornerRadius="10"/>
+            <Border x:Name="Card" Background="#171717" BorderBrush="#2A2A2A" BorderThickness="1"/>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="96"/>
                     <ColumnDefinition Width="112"/>
                 </Grid.ColumnDefinitions>
 
-                <Border x:Name="Stripe" Grid.Column="0" Background="#434343" CornerRadius="10,0,0,10"/>
+                <Border x:Name="Stripe" Grid.Column="0" Background="#434343"/>
 
-                <Grid Grid.Column="1" Margin="16,16,18,16">
+                <Grid Grid.Column="1" Margin="14,13,18,13">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -358,9 +358,14 @@
                               Style="{StaticResource RowCheckBoxStyle}"/>
 
                     <StackPanel Grid.Column="1">
-                        <WrapPanel Margin="0,0,0,6">
-                            <TextBlock Text="{Binding Name}" Foreground="#F4F4F4" FontSize="15" FontWeight="SemiBold" Margin="0,0,12,0"/>
-                            <Border Margin="0,0,6,6">
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}" Foreground="#F4F4F4" FontSize="15" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <Border Grid.Column="1" Margin="0,0,6,0">
                                 <Border.Style>
                                     <Style TargetType="Border" BasedOn="{StaticResource TierPillBorderStyle}">
                                         <Style.Triggers>
@@ -385,7 +390,7 @@
                                 </Border.Style>
                                 <TextBlock Text="{Binding EvidenceClassBadgeText}" Foreground="#EAEAEA" FontSize="10" FontWeight="SemiBold"/>
                             </Border>
-                            <Border>
+                            <Border Grid.Column="2">
                                 <Border.Style>
                                     <Style TargetType="Border" BasedOn="{StaticResource RiskPillBorderStyle}">
                                         <Style.Triggers>
@@ -406,7 +411,7 @@
                                 </Border.Style>
                                 <TextBlock Text="{Binding RiskBadgeText}" Foreground="#EAEAEA" FontSize="10" FontWeight="SemiBold"/>
                             </Border>
-                        </WrapPanel>
+                        </Grid>
 
                         <TextBlock Text="{Binding ConfigurationFriendlyDescription}"
                                    Foreground="#B8B8B8"
@@ -434,6 +439,7 @@
                                                FontWeight="Medium"
                                                Visibility="{Binding IsEvidenceConfirmed, Converter={StaticResource BoolToVisibility}}"/>
                                     <TextBlock Text="{Binding EvidenceStateText}"
+                                               Foreground="#A3A3A3"
                                                FontSize="10"
                                                FontWeight="Medium"/>
                                 </StackPanel>
@@ -479,18 +485,18 @@
 
     <DataTemplate x:Key="RepairsTweakRowTemplate" DataType="{x:Type viewModels:RepairsItemViewModel}">
         <Grid>
-            <Border x:Name="Card" Background="#171717" BorderBrush="#2A2A2A" BorderThickness="1" CornerRadius="10"/>
+            <Border x:Name="Card" Background="#171717" BorderBrush="#2A2A2A" BorderThickness="1"/>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="3"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="96"/>
                     <ColumnDefinition Width="112"/>
                 </Grid.ColumnDefinitions>
 
-                <Border x:Name="Stripe" Grid.Column="0" Background="#434343" CornerRadius="10,0,0,10"/>
+                <Border x:Name="Stripe" Grid.Column="0" Background="#434343"/>
 
-                <Grid Grid.Column="1" Margin="16,16,18,16">
+                <Grid Grid.Column="1" Margin="14,13,18,13">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -504,9 +510,14 @@
                     <CheckBox Grid.RowSpan="3" IsChecked="{Binding IsSelected, Mode=TwoWay}" Style="{StaticResource RowCheckBoxStyle}"/>
 
                     <StackPanel Grid.Column="1">
-                        <WrapPanel Margin="0,0,0,6">
-                            <TextBlock Text="{Binding Name}" Foreground="#F4F4F4" FontSize="15" FontWeight="SemiBold" Margin="0,0,12,0"/>
-                            <Border Margin="0,0,6,6">
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}" Foreground="#F4F4F4" FontSize="15" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <Border Grid.Column="1" Margin="0,0,6,0">
                                 <Border.Style>
                                     <Style TargetType="Border" BasedOn="{StaticResource TierPillBorderStyle}">
                                         <Style.Triggers>
@@ -527,7 +538,7 @@
                                 </Border.Style>
                                 <TextBlock Text="{Binding EvidenceClassBadgeText}" Foreground="#EAEAEA" FontSize="10" FontWeight="SemiBold"/>
                             </Border>
-                            <Border>
+                            <Border Grid.Column="2">
                                 <Border.Style>
                                     <Style TargetType="Border" BasedOn="{StaticResource RiskPillBorderStyle}">
                                         <Style.Triggers>
@@ -548,7 +559,7 @@
                                 </Border.Style>
                                 <TextBlock Text="{Binding RiskBadgeText}" Foreground="#EAEAEA" FontSize="10" FontWeight="SemiBold"/>
                             </Border>
-                        </WrapPanel>
+                        </Grid>
 
                         <TextBlock Text="{Binding FriendlyDescription}" Foreground="#B8B8B8" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
@@ -571,6 +582,7 @@
                                                FontWeight="Medium"
                                                Visibility="{Binding IsEvidenceConfirmed, Converter={StaticResource BoolToVisibility}}"/>
                                     <TextBlock Text="{Binding EvidenceStateText}"
+                                               Foreground="#A3A3A3"
                                                FontSize="10"
                                                FontWeight="Medium"/>
                                 </StackPanel>
@@ -612,3 +624,4 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 </ResourceDictionary>
+
