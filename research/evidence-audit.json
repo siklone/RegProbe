@@ -1,26 +1,26 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-30T20:12:00.931576Z",
+  "generated_utc": "2026-03-31T09:51:43.970628Z",
   "summary": {
-    "total_active_records": 254,
+    "total_active_records": 255,
     "class_counts": {
       "A": 248,
-      "B": 6
+      "B": 7
     },
     "lane_counts": {
       "official-policy": 236,
       "runtime": 6,
       "early-boot": 8,
-      "system": 4
+      "system": 5
     },
     "next_missing_layer_counts": {
       "none": 247,
-      "procmon": 2,
+      "procmon": 3,
       "ghidra": 1,
       "decision-gate": 3,
       "incident-review": 1
     },
-    "re_audit_required_count": 10
+    "re_audit_required_count": 11
   },
   "entries": [
     {
@@ -9686,6 +9686,55 @@
       "apply_allowed": false,
       "confidence": "high",
       "source_file": "research/records/system.executive-additional-worker-threads.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "system.executive-uuid-sequence-number",
+      "tweak_id": "system.executive-uuid-sequence-number",
+      "evidence_class": "B",
+      "lane": "system",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": true,
+      "ghidra_no_function_fallback": false,
+      "wpr": true,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "procmon",
+      "cross_layer_satisfied": true,
+      "layers_used": [
+        "static_ghidra",
+        "behavior_wpr"
+      ],
+      "tools_used": [
+        "etw",
+        "ghidra",
+        "wpr"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": true,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
+      "new_pipeline_version": "v3.1",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "medium",
+      "source_file": "research/records/system.executive-uuid-sequence-number.json",
       "incident_ids": []
     },
     {

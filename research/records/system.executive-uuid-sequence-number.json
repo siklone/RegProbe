@@ -1,0 +1,213 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.executive-uuid-sequence-number",
+  "tweak_id": "system.executive-uuid-sequence-number",
+  "record_status": "draft",
+  "summary": "Draft candidate package for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and a dedicated tools-hardened lightweight ETW follow-up still stayed a clean runtime no-hit. That keeps the lane at Class B with a runtime_no_read and trigger-context gate.",
+  "validation_proof": {
+    "source_url": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+    "exact_quote_or_path": "session-manager-executive-baseline.txt:5 shows `UuidSequenceNumber    REG_DWORD    0x1819f30` under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive.",
+    "key_found_on_page": true,
+    "notes": "The Session Manager Executive baseline export and the 96-key phase-0 existence batch agree that UuidSequenceNumber exists on the clean Win25H2Clean baseline."
+  },
+  "setting": {
+    "name": "Executive UUID Sequence Number",
+    "category": "System",
+    "area": "Session Manager Executive Registry",
+    "scope": "device",
+    "casual_explanation": "UuidSequenceNumber is a low-level Session Manager Executive value that appears to participate in early-boot UUID state handling.",
+    "why_people_change_it": "Researchers track it when studying Executive boot activity, UUID state handling, and adjacent low-level registry behavior under Session Manager Executive.",
+    "tradeoffs_overview": "The lane now has baseline existence, an exact current-build ntoskrnl string hit, bounded early-boot ETL proof that the value is active in the same path, and a dedicated lightweight runtime lane that still stayed no-hit. That is strong enough for a research-gated package, but not enough for Class A.",
+    "professional_notes": "Win25H2Clean exports confirm UuidSequenceNumber exists under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive with an observed baseline value of 0x1819f30 (25272112 decimal in the earlier baseline export and 25272111 in the later 96-key phase-0 live batch). Residual static triage then found an exact current-build Unicode string hit for UuidSequenceNumber in ntoskrnl.exe and no exact hit in smss.exe. A bounded host-side ETL review from the successful Session Manager Executive boot extract showed System (PID 4) querying and later setting UuidSequenceNumber during early boot, proving adjacent runtime activity in the intended path. A dedicated tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 then ran both short and split UUID / RPC / COM trigger profiles and still stayed a clean no-hit with exact_query_hits = 0 and path_line_count = 0. A later thread-burst variant also failed to beat that canonical result. Supporting ReactOS source review places UuidSequenceNumber under the Rpc path rather than as direct proof for the Executive worker-thread pair, which helps explain why the adjacent Executive ETL activity is interesting but not yet decisive enough for Class A.",
+    "targets": [
+      {
+        "target_id": "uuid-sequence-number",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "UuidSequenceNumber",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 25272111,
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current clean research baseline exposes a live UuidSequenceNumber DWORD under Session Manager Executive.",
+            "evidence_ids": [
+              "vm-session-manager-executive-phase0-20260329",
+              "vm-session-manager-executive-baseline-20260328"
+            ]
+          }
+        ],
+        "notes": "Track this as a separate research lane from the Executive worker-thread pair. Adjacent runtime activity exists, but direct current-build runtime proof is still missing."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The current app does not expose UuidSequenceNumber as a direct tweak or UI surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+      "states": [
+        {
+          "target_id": "uuid-sequence-number",
+          "state_kind": "value",
+          "value": 25272111,
+          "rationale": "Keep the observed baseline value while this lane remains research-only and runtime-gated."
+        }
+      ],
+      "notes": "Observed directly from the 96-key phase-0 live batch, with the earlier Session Manager Executive export providing the same path and a near-identical live value.",
+      "evidence_ids": [
+        "vm-session-manager-executive-phase0-20260329",
+        "vm-session-manager-executive-baseline-20260328"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-baseline",
+      "label": "Observed baseline",
+      "intended_for": [
+        "Registry research tracking",
+        "Session Manager Executive documentation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click apply surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "uuid-sequence-number",
+          "state_kind": "value",
+          "value": 25272111,
+          "rationale": "Track the observed baseline value without turning it into a shipped preset."
+        }
+      ],
+      "good_when": "You want the repo to track the live baseline and current evidence for this low-level Executive value.",
+      "bad_when": "You want a published tweak or a runtime-proven, user-facing control surface.",
+      "tradeoffs": [
+        "Preserves the observed baseline value.",
+        "Keeps the candidate research-only and non-actionable."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vm-session-manager-executive-phase0-20260329",
+        "static-executive-uuid-sequence-number-20260330"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "vm-session-manager-executive-baseline-20260328",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean Session Manager Executive baseline export",
+      "location": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg and evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+      "summary": "A clean VM baseline export confirmed UuidSequenceNumber exists under Session Manager\\Executive with a live DWORD value.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-executive-phase0-20260329",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The 96-key phase-0 live batch confirmed UuidSequenceNumber exists on the clean baseline with observed preview value 25272111.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-executive-uuid-sequence-number-20260330",
+      "kind": "decompilation",
+      "title": "Residual static triage for UuidSequenceNumber",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json and research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md",
+      "summary": "Residual value-exists triage found an exact current-build Unicode string hit for UuidSequenceNumber in ntoskrnl.exe and no exact hit in smss.exe.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-executive-etl-adjacent-20260328",
+      "kind": "etw-trace",
+      "title": "Bounded Executive ETL review with adjacent UuidSequenceNumber activity",
+      "location": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md",
+      "summary": "A bounded host-side ETL extract from the successful boot trace showed System (PID 4) querying and later setting UuidSequenceNumber during early boot in the Session Manager\\Executive path.",
+      "supports": [
+        "path",
+        "behavior",
+        "runtime-proof",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-executive-uuid-lightweight-runtime-20260330",
+      "kind": "etw-trace",
+      "title": "Tools-hardened lightweight ETW follow-up for UuidSequenceNumber",
+      "location": "evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json and evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json and research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md",
+      "summary": "The tools-hardened lightweight ETW lane completed cleanly on RegProbe-Baseline-ToolsHardened-20260330 and still returned a clean runtime no-hit for UuidSequenceNumber across both short and split trigger profiles.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-executive-uuid-thread-burst-20260330",
+      "kind": "inference",
+      "title": "Alternate thread-burst follow-up for UuidSequenceNumber",
+      "location": "research/notes/system-executive-uuid-sequence-number-thread-burst-20260330.md and registry-research-framework/audit/system-executive-uuid-sequence-number-thread-burst-20260330.json",
+      "summary": "A thread and process burst variant did not outperform the canonical clean no-hit lane and is kept only as a non-winning alternate trigger record.",
+      "supports": [
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "reactos-executive-uuid-adjacent-20260328",
+      "kind": "open-source-reference",
+      "title": "ReactOS adjacent context for UuidSequenceNumber",
+      "location": "evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md",
+      "summary": "Supporting ReactOS source review places UuidSequenceNumber under the Rpc path, which helps separate this adjacent value from direct proof for the Executive worker-thread pair.",
+      "supports": [
+        "behavior",
+        "dependency",
+        "version-scope"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "UuidSequenceNumber is backed by clean baseline existence, an exact current-build ntoskrnl string hit, bounded early-boot ETL evidence that the same value is active under Session Manager Executive, and a dedicated tools-hardened lightweight ETW lane that still stayed a clean runtime no-hit. That is enough for a strong research package, but not enough for Class A on the current VMware baseline.",
+    "blocking_issues": [
+      "runtime_no_read",
+      "trigger_context_unclear"
+    ]
+  },
+  "last_reviewed_utc": "2026-03-31T10:15:00Z"
+}

@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-30T20:12:34.150173Z",
+  "generated_utc": "2026-03-31T09:51:43.565225Z",
   "summary": {
-    "total_records": 308,
+    "total_records": 309,
     "class_counts": {
       "A": 248,
-      "B": 6,
+      "B": 7,
       "C": 0,
       "D": 0,
       "E": 54
@@ -13,7 +13,7 @@
     "action_state_counts": {
       "actionable": 241,
       "archived": 54,
-      "research-gated": 13
+      "research-gated": 14
     }
   },
   "classes": {
@@ -17527,6 +17527,67 @@
             "url": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt and research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
             "kind": "procmon-trace",
             "summary": "A shell-safe post-boot stress trigger lane combined service enumeration, event-log enumeration, CIM service export, and parallel service and file pressure on the clean RegProbe..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
+      "record_id": "system.executive-uuid-sequence-number",
+      "tweak_id": "system.executive-uuid-sequence-number",
+      "record_status": "draft",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "Baseline existence, exact ntoskrnl string evidence, and adjacent early-boot ETL activity exist, but the dedicated runtime lane still stayed no-hit and the exact trigger context remains unclear.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The Session Manager Executive baseline export and the 96-key phase-0 existence batch agree that UuidSequenceNumber exists on the clean Win25H2Clean baseline.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+            "kind": "validation-proof",
+            "summary": "session-manager-executive-baseline.txt:5 shows `UuidSequenceNumber    REG_DWORD    0x1819f30` under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive."
+          },
+          {
+            "title": "Residual static triage for UuidSequenceNumber",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json and research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md",
+            "kind": "decompilation",
+            "summary": "Residual value-exists triage found an exact current-build Unicode string hit for UuidSequenceNumber in ntoskrnl.exe and no exact hit in smss.exe."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "A clean VM baseline export confirmed UuidSequenceNumber exists under Session Manager\\Executive with a live DWORD value.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean Session Manager Executive baseline export",
+            "url": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg and evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+            "kind": "registry-observation",
+            "summary": "A clean VM baseline export confirmed UuidSequenceNumber exists under Session Manager\\Executive with a live DWORD value."
+          },
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key phase-0 live batch confirmed UuidSequenceNumber exists on the clean baseline with observed preview value 25272111."
           }
         ]
       },

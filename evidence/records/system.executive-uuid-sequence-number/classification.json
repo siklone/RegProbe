@@ -1,0 +1,23 @@
+{
+  "$schema": "registry-evidence-v3.1/classification",
+  "classification": {
+    "class": "B",
+    "pipeline_version": "v3.1",
+    "reason": "UuidSequenceNumber is backed by clean baseline existence, an exact current-build ntoskrnl string hit, bounded early-boot ETL evidence that the same value is active under Session Manager Executive, and a dedicated tools-hardened lightweight ETW lane that still stayed a clean runtime no-hit. That is enough for a strong research package, but not enough for Class A on the current VMware baseline.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "layer_count": 2,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": true,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "pending",
+    "next_missing_layer": "procmon"
+  }
+}

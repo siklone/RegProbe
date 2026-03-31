@@ -1,0 +1,23 @@
+{
+  "$schema": "registry-evidence-v3.1/metadata",
+  "tweak_id": "system.executive-uuid-sequence-number",
+  "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+  "value_name": "UuidSequenceNumber",
+  "value_type": "REG_DWORD",
+  "value_data_before": 25272111,
+  "value_data_after": 25272111,
+  "enrichment": {
+    "hive": "HKLM",
+    "suspected_layer": "kernel",
+    "boot_phase_relevant": true,
+    "acl_owner": null,
+    "acl_sddl": null,
+    "acl_user_readable": null,
+    "source": "repo_research",
+    "official_doc_exists": false,
+    "reactos_reference": false,
+    "geoff_chappell_reference": false,
+    "pdb_symbol_match": null,
+    "source_repositories": []
+  }
+}

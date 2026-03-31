@@ -47,6 +47,12 @@
       "evidence_class": "B",
       "reason_code": "runtime_no_read_path_context_unclear",
       "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit."
+    },
+    {
+      "record_id": "system.executive-uuid-sequence-number",
+      "evidence_class": "B",
+      "reason_code": "runtime_no_read_trigger_context_unclear",
+      "gating_reason": "Baseline existence, exact ntoskrnl string evidence, and adjacent early-boot ETL activity exist, but the dedicated runtime lane still stayed no-hit and the exact trigger context remains unclear."
     }
   ]
 }

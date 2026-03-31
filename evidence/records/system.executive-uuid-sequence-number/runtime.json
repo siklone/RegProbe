@@ -1,0 +1,38 @@
+{
+  "$schema": "registry-evidence-v3.1/runtime-evidence",
+  "runtime": {
+    "etw": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": true,
+      "trace_file": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md"
+    },
+    "procmon": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "trace_file": null
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: key is treated as kernel, Frida is not valid for this lane.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "source_evidence_ids": [
+    "vm-session-manager-executive-baseline-20260328",
+    "vm-session-manager-executive-phase0-20260329",
+    "vm-session-manager-executive-etl-adjacent-20260328",
+    "vm-executive-uuid-lightweight-runtime-20260330"
+  ]
+}

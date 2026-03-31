@@ -1,0 +1,23 @@
+{
+  "generated_utc": "2026-03-31T10:15:00Z",
+  "candidate_id": "system.executive-uuid-sequence-number",
+  "status": "packaged-as-b",
+  "classification": {
+    "evidence_class": "B",
+    "reason_code": "runtime_no_read_trigger_context_unclear",
+    "gating_reason": "Baseline existence, exact ntoskrnl string evidence, and adjacent early-boot ETL activity exist, but the dedicated runtime lane still stayed no-hit and the exact trigger context remains unclear."
+  },
+  "sources": {
+    "baseline_export": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+    "phase0_existence": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+    "static_triage": "evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json",
+    "adjacent_etl_review": "research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md",
+    "runtime_followup": "research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md",
+    "alternate_trigger": "research/notes/system-executive-uuid-sequence-number-thread-burst-20260330.md",
+    "package_note": "research/notes/system-executive-uuid-sequence-number-candidate-package-20260331.md"
+  },
+  "notes": [
+    "This package promotes the UUID lane from residual queue bookkeeping into a first-class research record.",
+    "The result is intentionally B rather than A because the current VMware runtime still does not show an exact live read."
+  ]
+}

@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 306 |
+| Total records | 309 |
 | Validated | 244 |
 | Deprecated | 54 |
 | Review required | 0 |
-| Records with V3.1 evidence roots | 18 |
-| Records with evidence | 306 |
+| Records with V3.1 evidence roots | 20 |
+| Records with evidence | 309 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 247 |
 | Class B | 4 |
-| Class C | 1 |
+| Class C | 4 |
 | Class E | 54 |
 
 ## Record index
@@ -78,6 +78,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `996a45b975762ceb94c99cffc36f106f56ed3e287366be3425ee9fdb79faa65f` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `453abb60e2f46d55c680a76faab4eca1f11d38d48ab38ae964a4f134352a7645` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `b103dfb5b2b112ed75d28ef9daebeaf2bb8fd9e0d1e5bf8796dd3eb4e29ea013` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
+| `policy.system.enable-virtualization` | draft | Class C | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `b211df1f3fac3223a2ab1bc65b0b78f3cbbc3311fbb0fe18a9398752bdfa6bfb` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 6 |
 | `power.control.class1-initial-unpark-count` | draft | Class A | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `9d21d604c1722a80af4c771d8dfa43b5397019b97dc9ad10fba7364450f26ab2` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 7 |
 | `power.control.hiber-file-size-percent` | draft | Class C | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `1bd5c31b152dec2c8edffdfc9ac45cd2123d41647a562df4f940a54b0c159ab3` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 4 |
 | `power.control.hibernate-enabled` | draft | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `6c21df45712ef4b051c4ef9ccdf72ca465dcfbec51781ed1c79e8b0234de2a4f` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 5 |
@@ -86,6 +87,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.mf-buffering-threshold` | draft | Class A | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `1269f0a19b1472b29cd03a650d32ae4225e2f02f1eb4b6efa9f86467ff539549` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 7 |
 | `power.control.perf-calculate-actual-utilization` | draft | Class A | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `fd43a45e38a2817c49f08897abb5a0fc61e91ad377f41225c60ef5c4062ce3c6` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 7 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | draft | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `b638842f7751a8955e18eb3b71db4638f83313cdf562ebc430b4656cbd23a8c9` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 7 |
+| `system.executive-uuid-sequence-number` | draft | Class C | `research/records/system.executive-uuid-sequence-number.json` | - | `42d17a9bcb4d75922e4f50353376a9e76910197017f254d7e91df697d83d8641` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 7 |
+| `system.io-allow-remote-dasd` | draft | Class C | `research/records/system.io-allow-remote-dasd.json` | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) | `55c461824f2e3e815866bb7d2a1686e01ec11e26a7e59d5b15239e7f54f742fe` | `a201a8c1d34674e2acf76d44363529c1f88c3d060989c54e093fe2452de97bc8` | 4 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `6ce0e5db2707ec9cbf72aa19ccf4a8e60cbfe2e7be762f6f1331aadfc5d5e150` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `4893acbb2b403e5e4019cb4a2a6b24eb9df08c9ca701abe536ee94bd2132f1f9` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
 | `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `bfa0e4a8a76f638ce108c59b6996e8effa2401ed3352af8d6a292f05a5535409` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 3 |
@@ -1837,6 +1840,47 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 ---
 
+### `policy.system.enable-virtualization`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/policy.system.enable-virtualization.json`
+- V3.1 evidence root: [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization)
+- Source SHA256: `b211df1f3fac3223a2ab1bc65b0b78f3cbbc3311fbb0fe18a9398752bdfa6bfb`
+- Proof SHA256: `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047`
+
+**Summary:** Draft candidate package for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. The same path-aware runtime lane on the secondary profile reproduced the no-hit result, so the lane remains Class B with a runtime_no_read and path-context gate rather than a single-VM artifact.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-security-doc` | `repo-doc` | Repo security notes for EnableVirtualization | [Docs/security/security.md](../Docs/security/security.md) |
+| `vm-policy-system-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `nohuto-uac-bootphase` | `decompilation` | Boot-phase UAC policy cluster lead | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) |
+| `static-policy-system-enable-virtualization-20260330` | `decompilation` | Path-aware static probe for EnableVirtualization | [evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json) and [evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md](../evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md) |
+| `vm-policy-system-enable-virtualization-runtime-20260330` | `etw-trace` | Path-aware lightweight ETW follow-up for EnableVirtualization | [evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json) |
+| `vm-policy-system-enable-virtualization-runtime-secondary-20260331` | `etw-trace` | Secondary-profile path-aware ETW replay for EnableVirtualization | [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json) and [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/security/security.md](../Docs/security/security.md) |
+| Exact quote / path | [Docs/security/security.md:105-110](../Docs/security/security.md:105-110) documents `EnableVirtualization` with 0 = disables data redirection and 1 = enables legacy file and registry virtualization. |
+| Notes | Phase-0 existence and repo security documentation agree on the current baseline value for EnableVirtualization. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | B |
+| Reason | current_blocker |
+| Priority | 1 |
+| New pipeline version | v3.1 |
+
+---
+
 ### `power.control.class1-initial-unpark-count`
 
 - Status: `draft`
@@ -2128,6 +2172,77 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:206](../Docs/power/power.md:206) shows `TimerRebaseThresholdOnDripsExit` with observed literal `60` in the repo power notes. |
 | Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for TimerRebaseThresholdOnDripsExit. App surfacing is tracked separately from evidence classification. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | B |
+| Reason | current_blocker |
+| Priority | 1 |
+| New pipeline version | v3.1 |
+
+---
+
+### `system.executive-uuid-sequence-number`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/system.executive-uuid-sequence-number.json`
+- Source SHA256: `42d17a9bcb4d75922e4f50353376a9e76910197017f254d7e91df697d83d8641`
+- Proof SHA256: `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef`
+
+**Summary:** Draft candidate package for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and a dedicated tools-hardened lightweight ETW follow-up still stayed a clean runtime no-hit. That keeps the lane at Class B with a runtime_no_read and trigger-context gate.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `vm-session-manager-executive-baseline-20260328` | `registry-observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) |
+| `vm-session-manager-executive-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-executive-uuid-sequence-number-20260330` | `decompilation` | Residual static triage for UuidSequenceNumber | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) |
+| `vm-session-manager-executive-etl-adjacent-20260328` | `etw-trace` | Bounded Executive ETL review with adjacent UuidSequenceNumber activity | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) |
+| `vm-executive-uuid-lightweight-runtime-20260330` | `etw-trace` | Tools-hardened lightweight ETW follow-up for UuidSequenceNumber | [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json) and [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json) and [research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md](notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md) |
+| `vm-executive-uuid-thread-burst-20260330` | `inference` | Alternate thread-burst follow-up for UuidSequenceNumber | [research/notes/system-executive-uuid-sequence-number-thread-burst-20260330.md](notes/system-executive-uuid-sequence-number-thread-burst-20260330.md) and [registry-research-framework/audit/system-executive-uuid-sequence-number-thread-burst-20260330.json](../registry-research-framework/audit/system-executive-uuid-sequence-number-thread-burst-20260330.json) |
+| `reactos-executive-uuid-adjacent-20260328` | `open-source-reference` | ReactOS adjacent context for UuidSequenceNumber | [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) |
+| Exact quote / path | session-manager-executive-baseline.txt:5 shows `UuidSequenceNumber    REG_DWORD    0x1819f30` under HKLM/SYSTEM/CurrentControlSet/Control/Session Manager/Executive. |
+| Notes | The Session Manager Executive baseline export and the 96-key phase-0 existence batch agree that UuidSequenceNumber exists on the clean Win25H2Clean baseline. |
+
+---
+
+### `system.io-allow-remote-dasd`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/system.io-allow-remote-dasd.json`
+- V3.1 evidence root: [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd)
+- Source SHA256: `55c461824f2e3e815866bb7d2a1686e01ec11e26a7e59d5b15239e7f54f742fe`
+- Proof SHA256: `a201a8c1d34674e2acf76d44363529c1f88c3d060989c54e093fe2452de97bc8`
+
+**Summary:** Draft candidate package for AllowRemoteDASD under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System. The clean Win25H2Clean baseline confirmed the live value, the path-aware static pass found an exact current-build ntoskrnl.exe value hit, and a naturally resolved current-build Ghidra export showed that the strongest code route opens the removable-storage policy path instead of the intended Session Manager I/O path. The tools-hardened path-aware ETW lane completed shell-safe with a real I/O burst but stayed a clean no-hit for the intended path. That keeps the lane at Class B with runtime_no_read and path-context uncertainty.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `vm-session-manager-io-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-session-manager-io-allow-remote-dasd-20260330` | `decompilation` | Path-aware static probe for AllowRemoteDASD | [evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json) and [evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md](../evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md) |
+| `vm-session-manager-io-allow-remote-dasd-runtime-20260330` | `etw-trace` | Path-aware lightweight ETW follow-up for AllowRemoteDASD | [evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json) |
+| `historical-collision-note-20260328` | `repo-doc` | Historical collision review for AllowRemoteDASD | [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| Exact quote / path | The 96-key phase-0 existence batch recorded `system.io-allow-remote-dasd` at HKLM/SYSTEM/CurrentControlSet/Control/Session Manager/I/O System with observed value 0. |
+| Notes | Phase-0 existence confirmed the intended registry path exists on the clean baseline before path-aware routing began. |
 
 **Re-audit**
 
