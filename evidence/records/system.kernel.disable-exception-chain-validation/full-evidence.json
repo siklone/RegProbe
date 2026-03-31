@@ -1,0 +1,183 @@
+{
+  "$schema": "registry-evidence-v3.1/full-evidence",
+  "record_id": "system.kernel.disable-exception-chain-validation",
+  "tweak_id": "system.kernel.disable-exception-chain-validation",
+  "metadata": {
+    "$schema": "registry-evidence-v3.1/metadata",
+    "tweak_id": "system.kernel.disable-exception-chain-validation",
+    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name": "DisableExceptionChainValidation",
+    "value_type": "REG_DWORD",
+    "value_data_before": null,
+    "value_data_after": null,
+    "enrichment": {
+      "hive": "HKLM",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "acl_owner": null,
+      "acl_sddl": null,
+      "acl_user_readable": null,
+      "source": "repo_research",
+      "official_doc_exists": false,
+      "reactos_reference": false,
+      "geoff_chappell_reference": false,
+      "pdb_symbol_match": null,
+      "source_repositories": []
+    }
+  },
+  "runtime": {
+    "etw": {
+      "executed": true,
+      "events_found": true,
+      "reading_process": null,
+      "reading_pid": null,
+      "operation": null,
+      "timestamp": null,
+      "boot_phase_included": true,
+      "trace_file": "evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json and research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md"
+    },
+    "procmon": {
+      "executed": false,
+      "events_found": false,
+      "reading_process": null,
+      "trace_file": null
+    },
+    "frida": {
+      "executed": false,
+      "skip_reason": "KERNEL_GUARD: key is treated as kernel, Frida is not valid for this lane.",
+      "result_valid": false
+    },
+    "dtrace": {
+      "executed": false,
+      "events_found": false,
+      "script_file": "registry-research-framework/tools/dtrace-registry-probe.d",
+      "output_file": null
+    }
+  },
+  "static": {
+    "bingrep": {
+      "executed": false,
+      "ascii_hits": 0,
+      "wide_hits": 0,
+      "hit_files": [],
+      "output_file": null
+    },
+    "floss": {
+      "executed": false,
+      "hits": 0,
+      "output_file": null
+    },
+    "capa": {
+      "executed": false,
+      "registry_read_capability": false,
+      "matched_rules": [],
+      "target_binary": null,
+      "output_file": null
+    },
+    "ghidra": {
+      "executed": true,
+      "trigger": "existing_record_evidence",
+      "pdb_loaded": false,
+      "pdb_source": null,
+      "string_xref_found": true,
+      "function_name": null,
+      "decompile_snippet": "Broad current-build static triage found an exact ntoskrnl.exe hit for DisableExceptionChainValidation inside the 21-value Session Manager Kernel batch.",
+      "call_graph_depth": null,
+      "output_file": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json and research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md",
+      "ghidra_no_function_fallback": false
+    }
+  },
+  "behavior": {
+    "typeperf": {
+      "executed": false,
+      "counter": null,
+      "before_average": null,
+      "after_average": null,
+      "delta_percent": null,
+      "sample_count": null,
+      "before_file": null,
+      "after_file": null
+    },
+    "wpr": {
+      "executed": true,
+      "boot_time_before_ms": null,
+      "boot_time_after_ms": null,
+      "cpu_delta": null,
+      "trace_file": "evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json and research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md"
+    },
+    "benchmark": {
+      "executed": false,
+      "summary": null,
+      "output_file": null
+    },
+    "registry_sideeffects": {
+      "executed": false,
+      "sideeffect_count": null,
+      "diff_file": null
+    }
+  },
+  "classification": {
+    "class": "A",
+    "pipeline_version": "v3.1",
+    "reason": "DisableExceptionChainValidation now has converged project evidence on the tools-hardened baseline: broad phase-0 existence, repo system notes, a current-build ntoskrnl static hit, and an exact early-boot runtime read from the single-reboot Session Manager Kernel ETW batch. The value remains research-only and not app-mapped, but that no longer blocks Class A.",
+    "cross_layer_satisfied": true,
+    "layers_used": [
+      "static_ghidra",
+      "behavior_wpr",
+      "runtime_reboot"
+    ],
+    "layer_count": 3,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_checks": {
+      "etw_executed": true,
+      "boot_phase_included": true,
+      "correct_tool_used": true,
+      "trigger_condition_tested": true
+    },
+    "class_ready_basis": "converged-vm",
+    "next_missing_layer": "none"
+  },
+  "timeline": [
+    {
+      "step": "bootstrap_record_load",
+      "timestamp": "2026-03-31T15:02:58.576150Z"
+    },
+    {
+      "step": "all",
+      "timestamp": "2026-03-31T15:02:58.576150Z"
+    },
+    {
+      "step": "classification",
+      "timestamp": "2026-03-31T15:02:58.576150Z"
+    },
+    {
+      "step": "last_reviewed",
+      "timestamp": "2026-03-31T17:20:00+03:00"
+    }
+  ],
+  "artifact_refs": [],
+  "research_record": "research/records/system.kernel.disable-exception-chain-validation.json",
+  "research_record_fallback": "research/records/system.kernel.disable-exception-chain-validation.review.json",
+  "re_audit": {
+    "is_re_audit": true,
+    "original_class": "A",
+    "original_evidence_tools": [
+      "ghidra",
+      "wpr",
+      "reboot"
+    ],
+    "original_cross_layer": true,
+    "original_pipeline_version": "pre-v3.1",
+    "re_audit_date": "2026-03-31T15:02:58.576150Z",
+    "re_audit_reason": "non_official_v31_reaudit",
+    "re_audit_priority": 1,
+    "new_tools_applied": [],
+    "new_cross_layer": true,
+    "new_class": "A",
+    "class_changed": false,
+    "frida_kernel_guard_applied": true,
+    "dead_flag_four_conditions_met": true,
+    "notes": "Bootstrapped from the current research record and evidence audit.",
+    "new_pipeline_version": "v3.1"
+  }
+}

@@ -25,6 +25,12 @@
       "gating_reason": "This record is cross-layer verified. Exact runtime reads now exist for both Executive worker-thread values, and app actionability stays separate from evidence class."
     },
     {
+      "record_id": "system.kernel.disable-exception-chain-validation",
+      "evidence_class": "A",
+      "reason_code": "cross_layer_verified_batch_runtime_hit",
+      "gating_reason": "This record is cross-layer verified. The Session Manager Kernel batch now has a current-build static hit and an exact early-boot runtime read for DisableExceptionChainValidation, and app actionability stays separate from evidence class."
+    },
+    {
       "record_id": "power.session-watchdog-timeouts",
       "evidence_class": "B",
       "reason_code": "vm_s1_only_limitation",

@@ -1,0 +1,29 @@
+{
+  "generated_utc": "2026-03-31T14:20:00Z",
+  "family": "session-manager-kernel",
+  "reason_code": "runtime_no_hit_residual_hold",
+  "source_runtime_batch": "registry-research-framework/audit/session-manager-kernel-batch-lightweight-runtime-20260331.json",
+  "candidate_ids": [
+    "system.kernel.always-track-io-boosting",
+    "system.kernel.disable-control-flow-guard-export-suppression",
+    "system.kernel.disable-light-weight-suspend",
+    "system.kernel.enable-per-cpu-clock-tick-scheduling",
+    "system.kernel.enable-tick-accumulation-from-accounting-periods",
+    "system.kernel.force-bugcheck-for-dpc-watchdog",
+    "system.kernel.force-foreground-boost-decay",
+    "system.kernel.force-idle-grace-period",
+    "system.kernel.force-parking-requested",
+    "system.kernel.global-timer-resolution-requests",
+    "system.kernel.hyper-start-disabled",
+    "system.kernel.interrupt-steering-flags",
+    "system.kernel.long-dpc-queue-threshold",
+    "system.kernel.long-dpc-runtime-threshold",
+    "system.kernel.max-dynamic-tick-duration",
+    "system.kernel.maximum-cooperative-idle-search-width",
+    "system.kernel.rebalance-min-priority",
+    "system.kernel.timer-check-flags",
+    "system.kernel.xstate-context-lookaside-per-proc-max-depth",
+    "system.kernel.enable-wer-user-reporting"
+  ],
+  "notes": "These Session Manager Kernel values had exact current-build string hits in the broad static triage but stayed runtime no-hit in the single-reboot tools-hardened ETW batch. Keep them in residual hold until a cleaner trigger or narrower family split exists."
+}

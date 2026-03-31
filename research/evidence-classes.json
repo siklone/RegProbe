@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-31T09:51:43.565225Z",
+  "generated_utc": "2026-03-31T15:03:09.003538Z",
   "summary": {
-    "total_records": 309,
+    "total_records": 310,
     "class_counts": {
-      "A": 248,
+      "A": 249,
       "B": 7,
       "C": 0,
       "D": 0,
@@ -13,7 +13,7 @@
     "action_state_counts": {
       "actionable": 241,
       "archived": 54,
-      "research-gated": 14
+      "research-gated": 15
     }
   },
   "classes": {
@@ -18986,6 +18986,67 @@
             "summary": "Matched 4 audit token(s) in win-registry."
           }
         ]
+      }
+    },
+    {
+      "record_id": "system.kernel.disable-exception-chain-validation",
+      "tweak_id": "system.kernel.disable-exception-chain-validation",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "This record is cross-layer verified. The Session Manager Kernel batch now has a current-build static hit and an exact early-boot runtime read for DisableExceptionChainValidation, and app actionability stays separate f...",
+      "confidence": "high",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "validated_semantics": {
+        "summary": "The repo system notes, the broad phase-0 existence batch, the current-build ntoskrnl static hit, and the single-reboot tools-hardened ETW batch all converge on the same Session Manager Kernel value.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/system/system.md",
+            "kind": "validation-proof",
+            "summary": "Docs/system/system.md:89 shows `\"DisableExceptionChainValidation\"; = 2; // PspSehValidationPolicy`."
+          },
+          {
+            "title": "Repo system notes for Session Manager Kernel values",
+            "url": "Docs/system/system.md",
+            "kind": "repo-doc",
+            "summary": "Repo system notes already track DisableExceptionChainValidation by name in the Session Manager Kernel block and tie it to `PspSehValidationPolicy`."
+          },
+          {
+            "title": "Broad targeted static triage for Session Manager Kernel candidates",
+            "url": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json and research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md",
+            "kind": "decompilation",
+            "summary": "Broad current-build static triage found an exact ntoskrnl.exe hit for DisableExceptionChainValidation inside the 21-value Session Manager Kernel batch."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key phase-0 live batch confirmed DisableExceptionChainValidation exists as a tracked value under Session Manager\\Kernel and is missing on the clean baseline.",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key phase-0 live batch confirmed DisableExceptionChainValidation exists as a tracked value under Session Manager\\Kernel and is missing on the clean baseline."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       }
     },
     {

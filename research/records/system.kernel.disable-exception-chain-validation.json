@@ -1,0 +1,191 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.kernel.disable-exception-chain-validation",
+  "tweak_id": "system.kernel.disable-exception-chain-validation",
+  "record_status": "validated",
+  "summary": "Validated cross-layer record for DisableExceptionChainValidation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. That is enough for Class A in this project even though the value remains research-only and not app-mapped.",
+  "validation_proof": {
+    "source_url": "Docs/system/system.md",
+    "exact_quote_or_path": "Docs/system/system.md:89 shows `\"DisableExceptionChainValidation\"; = 2; // PspSehValidationPolicy`.",
+    "key_found_on_page": true,
+    "notes": "The repo system notes, the broad phase-0 existence batch, the current-build ntoskrnl static hit, and the single-reboot tools-hardened ETW batch all converge on the same Session Manager Kernel value."
+  },
+  "setting": {
+    "name": "Disable Exception Chain Validation",
+    "category": "System",
+    "area": "Session Manager Kernel Registry",
+    "scope": "device",
+    "casual_explanation": "DisableExceptionChainValidation is a low-level Session Manager Kernel registry value tied to exception-chain policy handling during early boot.",
+    "why_people_change_it": "Researchers track it when studying kernel exception validation policy, boot-time registry reads, and low-level Session Manager Kernel behavior.",
+    "tradeoffs_overview": "This is an undocumented early-boot kernel-facing value. Cross-layer evidence is now strong enough for Class A inside this project, but it still stays research-only and non-actionable.",
+    "professional_notes": "The broad 96-key existence batch confirmed that DisableExceptionChainValidation lives under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel and is missing on the clean baseline. Repo system notes already list the value by name in the same kernel family. Broad targeted static triage on the current build then found an exact ntoskrnl.exe hit for DisableExceptionChainValidation. The final tools-hardened lightweight runtime batch used the single-VM hardened baseline, wrote all 21 Session Manager Kernel candidates together, rebooted once, stopped a boot registry trace, parsed the ETW payload inside the guest, and copied back only compact JSON summaries. That run produced exact RegQueryValue hits for DisableExceptionChainValidation with exact_query_hits = 4 while the other 20 sibling kernel candidates stayed no-hit. Within RegProbe, that existence + static current-build hit + exact runtime read is enough for Class A even without app mapping.",
+    "targets": [
+      {
+        "target_id": "disable-exception-chain-validation",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DisableExceptionChainValidation",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current tools-hardened research baseline leaves DisableExceptionChainValidation unset.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-phase0-20260329"
+            ]
+          },
+          {
+            "state_kind": "feature-dependent",
+            "value": 1,
+            "label": "Observed runtime probe value",
+            "meaning": "The runtime lane temporarily wrote DWORD 1 to confirm an exact early-boot read, but this does not yet claim a user-ready recommended preset.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-lightweight-runtime-20260331"
+            ]
+          }
+        ],
+        "notes": "Track this as a research-only early-boot kernel value. The runtime lane proved the value is read; it did not turn the value into a shipped tweak."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The current app does not expose DisableExceptionChainValidation as a tweak or UI surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+      "states": [
+        {
+          "target_id": "disable-exception-chain-validation",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the value unset while this lane remains documentation-only and non-actionable."
+        }
+      ],
+      "notes": "Observed directly from the broad 96-key phase-0 existence batch on the clean VM baseline.",
+      "evidence_ids": [
+        "vm-session-manager-kernel-phase0-20260329"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-baseline",
+      "label": "Observed baseline",
+      "intended_for": [
+        "Registry research tracking",
+        "Session Manager Kernel documentation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click tweak surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "disable-exception-chain-validation",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Track the observed baseline without publishing a non-default preset."
+        }
+      ],
+      "good_when": "You want to document the current baseline and evidence for this early-boot kernel value.",
+      "bad_when": "You want a supported Microsoft tuning surface or an end-user preset.",
+      "tradeoffs": [
+        "Preserves the observed baseline.",
+        "Keeps the lane research-only and non-actionable."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vm-session-manager-kernel-phase0-20260329",
+        "static-session-manager-kernel-targeted-string-20260331"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-session-manager-kernel-doc",
+      "kind": "repo-doc",
+      "title": "Repo system notes for Session Manager Kernel values",
+      "location": "Docs/system/system.md",
+      "summary": "Repo system notes already track DisableExceptionChainValidation by name in the Session Manager Kernel block and tie it to `PspSehValidationPolicy`.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-phase0-20260329",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The 96-key phase-0 live batch confirmed DisableExceptionChainValidation exists as a tracked value under Session Manager\\Kernel and is missing on the clean baseline.",
+      "supports": [
+        "path",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-session-manager-kernel-targeted-string-20260331",
+      "kind": "decompilation",
+      "title": "Broad targeted static triage for Session Manager Kernel candidates",
+      "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json and research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md",
+      "summary": "Broad current-build static triage found an exact ntoskrnl.exe hit for DisableExceptionChainValidation inside the 21-value Session Manager Kernel batch.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-lightweight-runtime-20260331",
+      "kind": "etw-trace",
+      "title": "Tools-hardened single-reboot ETW batch for Session Manager Kernel",
+      "location": "evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json and research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md",
+      "summary": "The tools-hardened Session Manager Kernel lightweight runtime batch wrote all 21 candidate values, rebooted once, parsed the ETW payload inside the guest, and captured exact RegQueryValue hits for DisableExceptionChainValidation with exact_query_hits = 4 while shell health stayed clean before and after the reboot.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "runtime-proof",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "DisableExceptionChainValidation now has converged project evidence on the tools-hardened baseline: broad phase-0 existence, repo system notes, a current-build ntoskrnl static hit, and an exact early-boot runtime read from the single-reboot Session Manager Kernel ETW batch. The value remains research-only and not app-mapped, but that no longer blocks Class A.",
+    "blocking_issues": []
+  },
+  "open_questions": [
+    "Does the value accept a broader semantic range than the temporary probe value used in the runtime lane?",
+    "Can a future dedicated Ghidra pass map the exact current-build call path behind the observed RegQueryValue hits?",
+    "How stable is the exact runtime read across other Windows builds and non-VM environments?"
+  ],
+  "tested_on": [
+    {
+      "environment": "VMware Workstation guest",
+      "os": "Windows 11 25H2",
+      "edition": "Win25H2Clean",
+      "notes": "The canonical runtime lane ran on RegProbe-Baseline-ToolsHardened-20260330 with a single reboot, guest-side tracerpt parsing, and compact summary copy-back."
+    }
+  ],
+  "last_reviewed_utc": "2026-03-31T17:20:00+03:00"
+}

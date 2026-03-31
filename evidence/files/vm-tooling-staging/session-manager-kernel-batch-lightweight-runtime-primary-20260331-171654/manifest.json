@@ -1,0 +1,200 @@
+﻿{
+    "generated_utc":  "2026-03-31T14:16:54.9265633Z",
+    "probe_name":  "session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "family":  "session-manager-kernel",
+    "candidate_count":  21,
+    "candidate_ids":  [
+                          "system.kernel.always-track-io-boosting",
+                          "system.kernel.disable-control-flow-guard-export-suppression",
+                          "system.kernel.disable-exception-chain-validation",
+                          "system.kernel.disable-light-weight-suspend",
+                          "system.kernel.enable-per-cpu-clock-tick-scheduling",
+                          "system.kernel.enable-tick-accumulation-from-accounting-periods",
+                          "system.kernel.force-bugcheck-for-dpc-watchdog",
+                          "system.kernel.force-foreground-boost-decay",
+                          "system.kernel.force-idle-grace-period",
+                          "system.kernel.force-parking-requested",
+                          "system.kernel.global-timer-resolution-requests",
+                          "system.kernel.hyper-start-disabled",
+                          "system.kernel.interrupt-steering-flags",
+                          "system.kernel.long-dpc-queue-threshold",
+                          "system.kernel.long-dpc-runtime-threshold",
+                          "system.kernel.max-dynamic-tick-duration",
+                          "system.kernel.maximum-cooperative-idle-search-width",
+                          "system.kernel.rebalance-min-priority",
+                          "system.kernel.timer-check-flags",
+                          "system.kernel.xstate-context-lookaside-per-proc-max-depth",
+                          "system.kernel.enable-wer-user-reporting"
+                      ],
+    "candidates":  [
+                       {
+                           "candidate_id":  "system.kernel.always-track-io-boosting",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "AlwaysTrackIoBoosting",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.disable-control-flow-guard-export-suppression",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "DisableControlFlowGuardExportSuppression",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.disable-exception-chain-validation",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "DisableExceptionChainValidation",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.disable-light-weight-suspend",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "DisableLightWeightSuspend",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.enable-per-cpu-clock-tick-scheduling",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "EnablePerCpuClockTickScheduling",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.enable-tick-accumulation-from-accounting-periods",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "EnableTickAccumulationFromAccountingPeriods",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-bugcheck-for-dpc-watchdog",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "ForceBugcheckForDpcWatchdog",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-foreground-boost-decay",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "ForceForegroundBoostDecay",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-idle-grace-period",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "ForceIdleGracePeriod",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-parking-requested",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "ForceParkingRequested",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.global-timer-resolution-requests",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "GlobalTimerResolutionRequests",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.hyper-start-disabled",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "HyperStartDisabled",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.interrupt-steering-flags",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "InterruptSteeringFlags",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.long-dpc-queue-threshold",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "LongDpcQueueThreshold",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.long-dpc-runtime-threshold",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "LongDpcRuntimeThreshold",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.max-dynamic-tick-duration",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "MaxDynamicTickDuration",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.maximum-cooperative-idle-search-width",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "MaximumCooperativeIdleSearchWidth",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.rebalance-min-priority",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "RebalanceMinPriority",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.timer-check-flags",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "TimerCheckFlags",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.xstate-context-lookaside-per-proc-max-depth",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "XStateContextLookasidePerProcMaxDepth",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "system.kernel.enable-wer-user-reporting",
+                           "family":  "session-manager-kernel",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                           "value_name":  "EnableWerUserReporting",
+                           "probe_value":  1
+                       }
+                   ]
+}

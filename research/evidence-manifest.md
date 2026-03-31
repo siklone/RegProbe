@@ -6,16 +6,16 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 309 |
-| Validated | 244 |
+| Total records | 310 |
+| Validated | 245 |
 | Deprecated | 54 |
 | Review required | 0 |
-| Records with V3.1 evidence roots | 20 |
-| Records with evidence | 309 |
+| Records with V3.1 evidence roots | 22 |
+| Records with evidence | 310 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 247 |
+| Class A | 248 |
 | Class B | 4 |
 | Class C | 4 |
 | Class E | 54 |
@@ -87,7 +87,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.mf-buffering-threshold` | draft | Class A | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `1269f0a19b1472b29cd03a650d32ae4225e2f02f1eb4b6efa9f86467ff539549` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 7 |
 | `power.control.perf-calculate-actual-utilization` | draft | Class A | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `fd43a45e38a2817c49f08897abb5a0fc61e91ad377f41225c60ef5c4062ce3c6` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 7 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | draft | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `b638842f7751a8955e18eb3b71db4638f83313cdf562ebc430b4656cbd23a8c9` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 7 |
-| `system.executive-uuid-sequence-number` | draft | Class C | `research/records/system.executive-uuid-sequence-number.json` | - | `42d17a9bcb4d75922e4f50353376a9e76910197017f254d7e91df697d83d8641` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 7 |
+| `system.executive-uuid-sequence-number` | draft | Class C | `research/records/system.executive-uuid-sequence-number.json` | [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number) | `42d17a9bcb4d75922e4f50353376a9e76910197017f254d7e91df697d83d8641` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 7 |
 | `system.io-allow-remote-dasd` | draft | Class C | `research/records/system.io-allow-remote-dasd.json` | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) | `55c461824f2e3e815866bb7d2a1686e01ec11e26a7e59d5b15239e7f54f742fe` | `a201a8c1d34674e2acf76d44363529c1f88c3d060989c54e093fe2452de97bc8` | 4 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `6ce0e5db2707ec9cbf72aa19ccf4a8e60cbfe2e7be762f6f1331aadfc5d5e150` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `4893acbb2b403e5e4019cb4a2a6b24eb9df08c9ca701abe536ee94bd2132f1f9` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
@@ -288,6 +288,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.graphics-tdr-limit-count` | validated | Class A | `research/records/system.graphics-tdr-limit-count.json` | - | `49fede850d9f0e8619290be6b82c09b41f8e47b29b263d7d8f3ea1cc752f60a6` | `2ee804bb7e64481a5a3773919722ff1ed630908069e4ca7331a0a4241447c3cb` | 2 |
 | `system.graphics-tdr-limit-time` | validated | Class A | `research/records/system.graphics-tdr-limit-time.json` | - | `cd204101c348369fc02e418d25f92c5a3f8cc27e2cd08ae30b4b3ea4f331f7eb` | `98cb2125e46af1775baf3f22861d238f5cc80bf0751096d96bcb21a6029cbcb2` | 2 |
 | `system.kernel-thread-dpc-enable` | validated | Class A | `research/records/system.kernel-thread-dpc-enable.json` | - | `290c2081dec4baafa6da6d4a76aab9676bbaf9bfd96c4940102ded4639e90c53` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
+| `system.kernel.disable-exception-chain-validation` | validated | Class A | `research/records/system.kernel.disable-exception-chain-validation.json` | [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation) | `879de2607fae2cff7e9462fa24a995c5fc7f6aa8b7041f564c12d5dcf7bb7375` | `6e8d2adff13d710dbd8a0ef85e5fc8f02232ccbdeb53f0a7fb83a1f9a50b047c` | 4 |
 | `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | - | `47c0a829b6fc24448406926566d901e4c603415821109065ab079399b9fca1ab` | `c0619f3693f675de46f32461a8a30756fb8e7d543bb9e445fce8ea14cb3526e1` | 4 |
 | `system.memory-disable-paging-executive` | validated | Class A | `research/records/system.memory-disable-paging-executive.json` | - | `d79f4b66b2fab8d2daba7901e94c6a3fefe9704bffcdb61f913235c16fa19208` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 4 |
 | `system.memory-large-system-cache-client` | validated | Class A | `research/records/system.memory-large-system-cache-client.review.json` | - | `c3a902a6873f40895ef36c8167af9869eef020487363d6b0c66dfe62fe488c96` | `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e` | 3 |
@@ -2189,6 +2190,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class C`
 - Source file: `research/records/system.executive-uuid-sequence-number.json`
+- V3.1 evidence root: [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number)
 - Source SHA256: `42d17a9bcb4d75922e4f50353376a9e76910197017f254d7e91df697d83d8641`
 - Proof SHA256: `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef`
 
@@ -2213,6 +2215,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) |
 | Exact quote / path | session-manager-executive-baseline.txt:5 shows `UuidSequenceNumber    REG_DWORD    0x1819f30` under HKLM/SYSTEM/CurrentControlSet/Control/Session Manager/Executive. |
 | Notes | The Session Manager Executive baseline export and the 96-key phase-0 existence batch agree that UuidSequenceNumber exists on the clean Win25H2Clean baseline. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | B |
+| Reason | current_blocker |
+| Priority | 1 |
+| New pipeline version | v3.1 |
 
 ---
 
@@ -8169,6 +8180,45 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs) |
 | Exact quote / path | A threaded DPC is a DPC that the system executes at IRQL equal to PASSIVE_LEVEL. Threaded DPCs are enabled by default, but you can disable them by setting the HKLM/System/CCS/Control/SessionManager/Kernel/ThreadDpcEnable registry key to zero. When threaded DPCs are disabled, they execute as ordinary DPCs. |
 | Notes | The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface, and the bounded VM suite confirms the `0` disable state can be exercised and restored back to the missing baseline. |
+
+---
+
+### `system.kernel.disable-exception-chain-validation`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/system.kernel.disable-exception-chain-validation.json`
+- V3.1 evidence root: [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation)
+- Source SHA256: `879de2607fae2cff7e9462fa24a995c5fc7f6aa8b7041f564c12d5dcf7bb7375`
+- Proof SHA256: `6e8d2adff13d710dbd8a0ef85e5fc8f02232ccbdeb53f0a7fb83a1f9a50b047c`
+
+**Summary:** Validated cross-layer record for DisableExceptionChainValidation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-session-manager-kernel-doc` | `repo-doc` | Repo system notes for Session Manager Kernel values | [Docs/system/system.md](../Docs/system/system.md) |
+| `vm-session-manager-kernel-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-session-manager-kernel-targeted-string-20260331` | `decompilation` | Broad targeted static triage for Session Manager Kernel candidates | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) and [research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md](notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md) |
+| `vm-session-manager-kernel-lightweight-runtime-20260331` | `etw-trace` | Tools-hardened single-reboot ETW batch for Session Manager Kernel | [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) and [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/system/system.md](../Docs/system/system.md) |
+| Exact quote / path | [Docs/system/system.md:89](../Docs/system/system.md:89) shows `"DisableExceptionChainValidation"; = 2; // PspSehValidationPolicy`. |
+| Notes | The repo system notes, the broad phase-0 existence batch, the current-build ntoskrnl static hit, and the single-reboot tools-hardened ETW batch all converge on the same Session Manager Kernel value. |
+
+**Re-audit**
+
+| Field | Value |
+| --- | --- |
+| Original class | A |
+| Reason | non_official_v31_reaudit |
+| Priority | 1 |
+| New pipeline version | v3.1 |
 
 ---
 

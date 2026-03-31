@@ -7,15 +7,15 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 
 | Field | Value |
 | --- | --- |
-| Total records | 309 |
-| Validated | 244 |
+| Total records | 310 |
+| Validated | 245 |
 | Deprecated | 54 |
 | Review required | 0 |
-| Records with evidence | 309 |
+| Records with evidence | 310 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 247 |
+| Class A | 248 |
 | Class B | 4 |
 | Class C | 4 |
 | Class E | 54 |
@@ -35,7 +35,7 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Power | 22 |
 | Privacy | 84 |
 | Security | 25 |
-| System | 78 |
+| System | 79 |
 | Visibility | 23 |
 
 ## Validated
@@ -25349,6 +25349,112 @@ Windows Internals references:
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
 | Why | Microsoft documents the exact path, says threaded DPCs are enabled by default, and states that setting the value to 0 disables them. The app writes 1 on that same path as an explicit enabled-state reset, and the bounded Win25H2Clean VM suite exercised the disable state and restored the missing baseline cleanly. That is enough to treat the app's explicit enabled-state reset as app-ready while still keeping it out of general-user presets. |
+
+---
+
+### `system.kernel.disable-exception-chain-validation`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `System` |
+| Area | `Session Manager Kernel Registry` |
+| Scope | `device` |
+| Source file | [research/records/system.kernel.disable-exception-chain-validation.json](records/system.kernel.disable-exception-chain-validation.json) |
+| V3.1 evidence root | [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation) |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated cross-layer record for DisableExceptionChainValidation under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | The current app does not expose DisableExceptionChainValidation as a tweak or UI surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `research-gated` |
+| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `disable-exception-chain-validation`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel` |
+| Value name | `DisableExceptionChainValidation` |
+| Value type | `REG_DWORD` |
+| Notes | Track this as a research-only early-boot kernel value. The runtime lane proved the value is read; it did not turn the value into a shipped tweak. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | Observed Win25H2Clean baseline | The current tools-hardened research baseline leaves DisableExceptionChainValidation unset. | vm-session-manager-kernel-phase0-20260329 |
+| `feature-dependent` | `1` | Observed runtime probe value | The runtime lane temporarily wrote DWORD 1 to confirm an exact early-boot read, but this does not yet claim a user-ready recommended preset. | vm-session-manager-kernel-lightweight-runtime-20260331 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-ToolsHardened-20260330 research baseline | disable-exception-chain-validation: missing None - Keep the value unset while this lane remains documentation-only and non-actionable. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Session Manager Kernel documentation'] | ['General users', 'One-click tweak surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-session-manager-kernel-doc` | `repo-doc` | `Current repo docs` | Repo system notes for Session Manager Kernel values | [Docs/system/system.md](../Docs/system/system.md) | `high` | path, value, behavior |
+| `vm-session-manager-kernel-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, default, version-scope |
+| `static-session-manager-kernel-targeted-string-20260331` | `decompilation` | `Our Ghidra decompilation` | Broad targeted static triage for Session Manager Kernel candidates | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) and [research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md](notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md) | `high` | path, value, version-scope |
+| `vm-session-manager-kernel-lightweight-runtime-20260331` | `etw-trace` | `unspecified` | Tools-hardened single-reboot ETW batch for Session Manager Kernel | [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) and [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) | `high` | path, value, behavior, runtime-proof, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/system/system.md](../Docs/system/system.md) |
+| Exact quote / path | [Docs/system/system.md:89](../Docs/system/system.md:89) shows `"DisableExceptionChainValidation"; = 2; // PspSehValidationPolicy`. |
+| Key found on page | `True` |
+| Notes | The repo system notes, the broad phase-0 existence batch, the current-build ntoskrnl static hit, and the single-reboot tools-hardened ETW batch all converge on the same Session Manager Kernel value. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | DisableExceptionChainValidation now has converged project evidence on the tools-hardened baseline: broad phase-0 existence, repo system notes, a current-build ntoskrnl static hit, and an exact early-boot runtime read from the single-reboot Session Manager Kernel ETW batch. The value remains research-only and not app-mapped, but that no longer blocks Class A. |
 
 ---
 

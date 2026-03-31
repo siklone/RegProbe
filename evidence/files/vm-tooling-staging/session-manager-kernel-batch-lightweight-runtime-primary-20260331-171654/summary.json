@@ -1,0 +1,97 @@
+﻿{
+    "generated_utc":  "2026-03-31T14:16:55.0214454Z",
+    "probe_name":  "session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654",
+    "family":  "session-manager-kernel",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "host_output_root":  "evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654",
+    "total_candidates":  21,
+    "candidate_ids":  [
+                          "system.kernel.always-track-io-boosting",
+                          "system.kernel.disable-control-flow-guard-export-suppression",
+                          "system.kernel.disable-exception-chain-validation",
+                          "system.kernel.disable-light-weight-suspend",
+                          "system.kernel.enable-per-cpu-clock-tick-scheduling",
+                          "system.kernel.enable-tick-accumulation-from-accounting-periods",
+                          "system.kernel.force-bugcheck-for-dpc-watchdog",
+                          "system.kernel.force-foreground-boost-decay",
+                          "system.kernel.force-idle-grace-period",
+                          "system.kernel.force-parking-requested",
+                          "system.kernel.global-timer-resolution-requests",
+                          "system.kernel.hyper-start-disabled",
+                          "system.kernel.interrupt-steering-flags",
+                          "system.kernel.long-dpc-queue-threshold",
+                          "system.kernel.long-dpc-runtime-threshold",
+                          "system.kernel.max-dynamic-tick-duration",
+                          "system.kernel.maximum-cooperative-idle-search-width",
+                          "system.kernel.rebalance-min-priority",
+                          "system.kernel.timer-check-flags",
+                          "system.kernel.xstate-context-lookaside-per-proc-max-depth",
+                          "system.kernel.enable-wer-user-reporting"
+                      ],
+    "shell_before":  {
+                         "generated_utc":  "2026-03-31T14:21:32.5003638Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-03-31T14:48:05.1551627Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "reboot_mode":  "soft",
+    "status":  "exact-hit",
+    "exact_hit_candidates":  [
+                                 "system.kernel.disable-exception-chain-validation"
+                             ],
+    "exact_line_only_candidates":  [
+
+                                   ],
+    "path_only_candidates":  [
+
+                             ],
+    "no_hit_candidates":  [
+                              "system.kernel.always-track-io-boosting",
+                              "system.kernel.disable-control-flow-guard-export-suppression",
+                              "system.kernel.disable-light-weight-suspend",
+                              "system.kernel.enable-per-cpu-clock-tick-scheduling",
+                              "system.kernel.enable-tick-accumulation-from-accounting-periods",
+                              "system.kernel.force-bugcheck-for-dpc-watchdog",
+                              "system.kernel.force-foreground-boost-decay",
+                              "system.kernel.force-idle-grace-period",
+                              "system.kernel.force-parking-requested",
+                              "system.kernel.global-timer-resolution-requests",
+                              "system.kernel.hyper-start-disabled",
+                              "system.kernel.interrupt-steering-flags",
+                              "system.kernel.long-dpc-queue-threshold",
+                              "system.kernel.long-dpc-runtime-threshold",
+                              "system.kernel.max-dynamic-tick-duration",
+                              "system.kernel.maximum-cooperative-idle-search-width",
+                              "system.kernel.rebalance-min-priority",
+                              "system.kernel.timer-check-flags",
+                              "system.kernel.xstate-context-lookaside-per-proc-max-depth",
+                              "system.kernel.enable-wer-user-reporting"
+                          ],
+    "errors":  [
+
+               ]
+}

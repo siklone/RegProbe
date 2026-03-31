@@ -1,20 +1,20 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-31T09:51:43.970628Z",
+  "generated_utc": "2026-03-31T15:03:08.759614Z",
   "summary": {
-    "total_active_records": 255,
+    "total_active_records": 256,
     "class_counts": {
-      "A": 248,
+      "A": 249,
       "B": 7
     },
     "lane_counts": {
       "official-policy": 236,
       "runtime": 6,
-      "early-boot": 8,
+      "early-boot": 9,
       "system": 5
     },
     "next_missing_layer_counts": {
-      "none": 247,
+      "none": 248,
       "procmon": 3,
       "ghidra": 1,
       "decision-gate": 3,
@@ -10067,6 +10067,57 @@
       "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/system.kernel-thread-dpc-enable.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "system.kernel.disable-exception-chain-validation",
+      "tweak_id": "system.kernel.disable-exception-chain-validation",
+      "evidence_class": "A",
+      "lane": "early-boot",
+      "class_ready_basis": "converged-vm",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": true,
+      "ghidra_no_function_fallback": false,
+      "wpr": true,
+      "benchmark": false,
+      "reboot_tested": true,
+      "incident_seen": false,
+      "next_missing_layer": "none",
+      "cross_layer_satisfied": true,
+      "layers_used": [
+        "static_ghidra",
+        "behavior_wpr",
+        "runtime_reboot"
+      ],
+      "tools_used": [
+        "etw",
+        "ghidra",
+        "wpr",
+        "reboot"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": true,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.1",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "high",
+      "source_file": "research/records/system.kernel.disable-exception-chain-validation.json",
       "incident_ids": []
     },
     {

@@ -1,0 +1,161 @@
+﻿{
+    "generated_utc":  "2026-03-31T14:47:58.6919094Z",
+    "family":  "session-manager-kernel",
+    "total_candidates":  21,
+    "csv_exists":  true,
+    "csv_line_count":  9557881,
+    "path_line_count":  0,
+    "exact_hit_count":  1,
+    "exact_line_only_count":  0,
+    "path_only_count":  0,
+    "no_hit_count":  20,
+    "candidates":  [
+                       {
+                           "candidate_id":  "system.kernel.always-track-io-boosting",
+                           "value_name":  "AlwaysTrackIoBoosting",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.disable-control-flow-guard-export-suppression",
+                           "value_name":  "DisableControlFlowGuardExportSuppression",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.disable-exception-chain-validation",
+                           "value_name":  "DisableExceptionChainValidation",
+                           "exact_line_count":  4,
+                           "exact_query_hits":  4,
+                           "status":  "exact-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.disable-light-weight-suspend",
+                           "value_name":  "DisableLightWeightSuspend",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.enable-per-cpu-clock-tick-scheduling",
+                           "value_name":  "EnablePerCpuClockTickScheduling",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.enable-tick-accumulation-from-accounting-periods",
+                           "value_name":  "EnableTickAccumulationFromAccountingPeriods",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-bugcheck-for-dpc-watchdog",
+                           "value_name":  "ForceBugcheckForDpcWatchdog",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-foreground-boost-decay",
+                           "value_name":  "ForceForegroundBoostDecay",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-idle-grace-period",
+                           "value_name":  "ForceIdleGracePeriod",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.force-parking-requested",
+                           "value_name":  "ForceParkingRequested",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.global-timer-resolution-requests",
+                           "value_name":  "GlobalTimerResolutionRequests",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.hyper-start-disabled",
+                           "value_name":  "HyperStartDisabled",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.interrupt-steering-flags",
+                           "value_name":  "InterruptSteeringFlags",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.long-dpc-queue-threshold",
+                           "value_name":  "LongDpcQueueThreshold",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.long-dpc-runtime-threshold",
+                           "value_name":  "LongDpcRuntimeThreshold",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.max-dynamic-tick-duration",
+                           "value_name":  "MaxDynamicTickDuration",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.maximum-cooperative-idle-search-width",
+                           "value_name":  "MaximumCooperativeIdleSearchWidth",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.rebalance-min-priority",
+                           "value_name":  "RebalanceMinPriority",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.timer-check-flags",
+                           "value_name":  "TimerCheckFlags",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.xstate-context-lookaside-per-proc-max-depth",
+                           "value_name":  "XStateContextLookasidePerProcMaxDepth",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       },
+                       {
+                           "candidate_id":  "system.kernel.enable-wer-user-reporting",
+                           "value_name":  "EnableWerUserReporting",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit"
+                       }
+                   ]
+}
