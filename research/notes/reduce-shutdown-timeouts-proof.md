@@ -15,5 +15,4 @@ Microsoft sources used to anchor the remaining current-user bundle:
 
 Source links:
 - https://learn.microsoft.com/en-us/windows/win32/api/restartmanager/ne-restartmanager-rm_shutdown_type
-- https://learn.microsoft.com/ja-jp/answers/questions/2188265/bat
 - https://learn.microsoft.com/en-us/answers/questions/4334365/how-to-find-the-app-preventing-shutdown

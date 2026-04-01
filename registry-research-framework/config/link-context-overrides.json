@@ -1831,6 +1831,46 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T16:45:00Z",
       "notes": "Manual review confirmed the NTFS MFT article directly documents NtfsMftZoneReservation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem with the documented range and default behavior used by this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/user-account-control-behavior-of-the-elevation-prompt-for-administrators-in-admin-approval-mode",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:20:00Z",
+      "notes": "Manual review confirmed this lead note uses the previous-versions security policy page only as background for the ConsentPromptBehaviorAdmin surface, which matches the page title and documented policy values."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/embedded/bb521398(v=winembedded.51)",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:20:00Z",
+      "notes": "Manual review confirmed this lead note uses the Windows Embedded page only as background for ClearPageFileAtShutdown, which matches the page's focus on clearing the pagefile during shutdown."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/mem/intune/device-protection/troubleshoot-bitlocker-policies",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:20:00Z",
+      "notes": "Manual review confirmed this lead note references the Intune BitLocker troubleshooting page only as BitLocker client-side background, which matches the page title and content."
+    },
+    {
+      "source_file": "research/records/visibility.hide-language-bar.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:20:00Z",
+      "notes": "Manual review confirmed the Microsoft Q&A thread is used narrowly for the ShowStatus = 3 hidden-state example under HKCU\\Software\\Microsoft\\CTF\\LangBar."
+    },
+    {
+      "source_file": "research/records/visibility.hide-language-bar.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:20:00Z",
+      "notes": "Manual review confirmed the Microsoft Q&A thread is cited only as an example showing ShowStatus = 3 for the hidden language-bar state, not as a broad platform contract."
     }
   ]
 }
