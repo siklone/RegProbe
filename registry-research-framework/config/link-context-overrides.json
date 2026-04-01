@@ -1447,6 +1447,198 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T14:40:00Z",
       "notes": "Manual review confirmed the WindowsAI Policy CSP page directly documents TurnOffWindowsCopilot with the same policy path, value name, and deprecation caveat used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-steps-recorder.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for DisableUAR matches the ADMX_AppCompat page, including the AppCompat policy path and the Turn off Steps Recorder description."
+    },
+    {
+      "source_file": "research/records/privacy.disable-steps-recorder.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the ADMX_AppCompat page directly documents AppCompatTurnOffUserActionRecord with DisableUAR under Software\\Policies\\Microsoft\\Windows\\AppCompat."
+    },
+    {
+      "source_file": "research/records/privacy.troubleshooter-dont-run.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the Troubleshooting Policy CSP entry for TroubleshootingAllowRecommendations, including the documented 0 through 5 values."
+    },
+    {
+      "source_file": "research/records/privacy.troubleshooter-dont-run.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-troubleshooting#troubleshooting-allowrecommendations",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the Troubleshooting Policy CSP page directly documents TroubleshootingAllowRecommendations under HKLM\\Software\\Policies\\Microsoft\\Windows\\Troubleshooting\\AllowRecommendations with the same six meanings used by this record."
+    },
+    {
+      "source_file": "research/records/developer.windows-dev-mode.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the Developer Mode page's Regedit method for AllowDevelopmentWithoutDevLicense = 1."
+    },
+    {
+      "source_file": "research/records/developer.windows-dev-mode.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the Developer Mode page directly documents HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense as the registry method for enabling the feature."
+    },
+    {
+      "source_file": "research/records/privacy.disable-diagnostic-data-viewer.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the System Policy CSP wording for DisableDiagnosticDataViewer, including the DataCollection path and 0/1 meanings."
+    },
+    {
+      "source_file": "research/records/privacy.disable-diagnostic-data-viewer.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the System Policy CSP page directly documents DisableDiagnosticDataViewer with the same DataCollection policy path, default, and allowed values used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-diagnostic-data-delete.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the System Policy CSP wording for DisableDeviceDelete, including the DataCollection path and 0/1 meanings."
+    },
+    {
+      "source_file": "research/records/privacy.disable-diagnostic-data-delete.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the System Policy CSP page directly documents DisableDeviceDelete with the same DataCollection policy path, default, and allowed values used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-onesettings-downloads.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the System Policy CSP wording for DisableOneSettingsDownloads, including the OneSettings behavior and default 0 / disabled 1 meanings."
+    },
+    {
+      "source_file": "research/records/privacy.disable-onesettings-downloads.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the System Policy CSP page directly documents DisableOneSettingsDownloads as the OneSettings control surface used by this record; the local ADMX remains the supporting source for the separate registry value-name row."
+    },
+    {
+      "source_file": "research/records/privacy.disable-wer.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-errorreporting#werdisable_2",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the ADMX_ErrorReporting page, including the Windows Error Reporting path, Disabled value name, and effect text."
+    },
+    {
+      "source_file": "research/records/privacy.disable-wer.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-errorreporting#werdisable_2",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the ADMX_ErrorReporting page directly documents WerDisable_2 with Software\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled and the same disabled behavior used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-local-security-questions.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the ADMX_CredUI page, including the Software\\Policies\\Microsoft\\Windows\\System path and NoLocalPasswordResetQuestions value name."
+    },
+    {
+      "source_file": "research/records/privacy.disable-local-security-questions.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the ADMX_CredUI page directly documents NoLocalPasswordResetQuestions with the same policy path, value name, and blocked-security-questions behavior used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-service-splitting.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed this deprecated record uses the svchost refactoring page only for feature-level service-splitting behavior and memory-threshold context, not as proof of the raw 0xFFFFFFFF override."
+    },
+    {
+      "source_file": "research/records/system.disable-service-splitting.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:10:00Z",
+      "notes": "Manual review confirmed the svchost refactoring page is a correct feature-level source for service splitting and memory-threshold behavior. The record still does not treat it as proof of the repo's 0xFFFFFFFF no-splitting preset."
+    },
+    {
+      "source_file": "research/records/privacy.disable-cli-telemetry.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:20:00Z",
+      "notes": "Manual review confirmed the validation proof uses this page narrowly for the documented POWERSHELL_TELEMETRY_OPTOUT variable and accepted opt-out values, not for the separate HKCU\\Environment path claim."
+    },
+    {
+      "source_file": "research/records/privacy.disable-cli-telemetry.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:20:00Z",
+      "notes": "Manual review confirmed the PowerShell environment-variables page directly documents POWERSHELL_TELEMETRY_OPTOUT and its true/yes/1 opt-out semantics, which is the exact limited use in this record."
+    },
+    {
+      "source_file": "research/records/network.smb-enable-multichannel.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/setconfiguration-msft-smbclientconfiguration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:20:00Z",
+      "notes": "Manual review confirmed the validation proof uses this page for the exact MSFT_SmbClientConfiguration SetConfiguration parameter named EnableMultiChannel."
+    },
+    {
+      "source_file": "research/records/network.smb-enable-multichannel.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/setconfiguration-msft-smbclientconfiguration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:20:00Z",
+      "notes": "Manual review confirmed the MSFT_SmbClientConfiguration SetConfiguration page directly documents EnableMultiChannel as the SMB client-side boolean configuration surface used by this record."
+    },
+    {
+      "source_file": "research/records/system.memory-clear-pagefile-at-shutdown.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:20:00Z",
+      "notes": "Manual review confirmed the security policy page directly documents the Clear virtual memory pagefile behavior, enabled/disabled states, default baseline, and shutdown slowdown tradeoff used by this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:20:00Z",
+      "notes": "Manual review confirmed this note references the Microsoft security policy page as a valid lead for ClearPageFileAtShutdown behavior and shutdown-cost tradeoffs."
     }
   ]
 }
