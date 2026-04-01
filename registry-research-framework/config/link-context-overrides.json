@@ -1927,6 +1927,118 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T17:40:00Z",
       "notes": "Manual review confirmed the slow SMB transfer article is used narrowly for Microsoft's documented Set-SmbServerConfiguration -EnableLeasing $false troubleshooting path."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the Azure VM firewall article only as background on the runtime SharedAccess firewall profile paths, which matches the page title and content."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/application-management/virtualization-apps-not-work-with-hyper-v",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the Hyper-V coexistence article as background for virtualization-based security and hypervisor-related surfaces, which matches the page title and content."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/tcpip-and-nbt-configuration-parameters",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the older TCP/IP and NBT configuration article only as historical background for classic TCP and NetBT registry behavior."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/rdp-error-general-troubleshooting",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the RDP troubleshooting page only as background for remote-desktop connectivity and sign-in surfaces."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-terminalservices-localsessionmanager-fdenytsconnections",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the unattended fDenyTSConnections page as background for the exact Remote Desktop value name and its documented 0 and 1 meanings."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/static-configuration-options-for-the-performance-state-engine",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the performance-state engine overview only as background for PerfBoostMode and adjacent power-setting surfaces."
+    },
+    {
+      "source_file": "research/records/system.kernel-dpc-watchdog-period.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed the DPC watchdog troubleshooting article is cited narrowly for the watchdog feature area and timeout behavior, not as a direct publication of the DpcWatchdogPeriod registry key."
+    },
+    {
+      "source_file": "research/records/network.disable-lltd.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/group-policy/network-disconnection-after-configuring-lltdio-rspndr-gpos",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed the LLTD group-policy troubleshooting article matches the record's use of EnableLLTDIO and EnableRspndr as documented policy-controlled LLTD surfaces."
+    },
+    {
+      "source_file": "research/records/system.memory-registry-quota-default.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches Microsoft's recommendation to delete RegistrySizeLimit or set it to 0 so Windows sizes the registry automatically."
+    },
+    {
+      "source_file": "research/records/system.memory-registry-quota-default.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed the RegistrySizeLimit troubleshooting article directly documents the Control\\RegistrySizeLimit surface and the automatic-sizing behavior when it is missing or set to 0."
+    },
+    {
+      "source_file": "research/records/network.disable-netbios.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-netbt-interfaces-interface-netbiosoptions",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed the unattended NetbiosOptions page directly documents the per-interface value name and the 0, 1, and 2 meanings used by this record."
+    },
+    {
+      "source_file": "research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed the SchedulingPolicy page is used narrowly for official heterogeneous scheduling value semantics adjacent to the repo's kernel DefaultDynamicHeteroCpuPolicy research."
+    },
+    {
+      "source_file": "research/records/explorer.disable-low-disk-space-warning.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the troubleshooting article's NoLowDiskSpaceChecks path and value 1 guidance."
+    },
+    {
+      "source_file": "research/records/explorer.disable-low-disk-space-warning.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:05:00Z",
+      "notes": "Manual review confirmed the French troubleshooting article directly includes the machine Explorer policy path and NoLowDiskSpaceChecks = 1 guidance used by this record."
     }
   ]
 }
