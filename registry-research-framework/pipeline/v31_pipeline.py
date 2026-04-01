@@ -422,7 +422,7 @@ def normalize_cross_verification(record: dict[str, Any]) -> dict[str, Any]:
             "parity_summary": payload.get("parity_summary"),
             "confidence": payload.get("confidence", "low"),
             "cross_conflict": payload.get("cross_conflict", False),
-            "notes": payload.get("notes", "No dedicated Ghidra+IDA comparison is attached to this record yet."),
+            "notes": payload.get("notes", "No dedicated Ghidra+IDA comparison is attached to this record yet. Ghidra remains the primary static lane; IDA is optional when a working automation-capable build is available."),
         }
     return {
         "executed": False,
@@ -439,7 +439,7 @@ def normalize_cross_verification(record: dict[str, Any]) -> dict[str, Any]:
         "parity_summary": "Ghidra function=<none>; IDA function=<none>; branch=insufficient; value_map=<none> vs <none>; verdict=review-only.",
         "confidence": "low",
         "cross_conflict": False,
-        "notes": "No dedicated Ghidra+IDA comparison is attached to this record yet.",
+        "notes": "No dedicated Ghidra+IDA comparison is attached to this record yet. Ghidra remains the primary static lane; IDA is optional when a working automation-capable build is available.",
     }
 
 

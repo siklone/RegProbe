@@ -44,7 +44,7 @@ Current remaining blocker:
 
 What changed:
 
-- The official IDA Free installer is now downloaded on the host and staged into the guest through the shared folder.
+- The official IDA Free installer is now downloaded on the host and can be staged into the guest from the host side.
 - The guest now has `C:\Tools\IDA\Freeware\ida64.exe`.
 - The freeware install is useful for interactive string/xref/disassembly review inside the VM.
 
@@ -52,7 +52,7 @@ Current blocker:
 
 - `idat64.exe` is still absent.
 - Hex-Rays decompiler is still absent.
-- So the original headless IDAPython lane remains blocked until a licensed/headless-capable build is supplied.
+- So the original headless IDAPython lane remains blocked until a licensed/headless-capable build is supplied, or until a real automation-capable acceptance state exists in the guest.
 
 ## Net result
 
@@ -61,4 +61,5 @@ The v3.2 pipeline is now more honest about the environment edge:
 - `symchk` and the Windows debugger tools are now downloaded on the host and available in the guest
 - the Ghidra pilot is no longer blocked by missing symbol tooling or guest internet assumptions
 - `IDA` is present in the guest, but only as Freeware GUI tooling
+- the production static pipeline should stay Ghidra-first; `IDA` is optional and only participates when a working automation-capable build is actually available
 - the remaining gap is no longer “can the tools exist in the VM?” but “can the static lane produce a bounded, symbol-backed branch mapping for the target record?”

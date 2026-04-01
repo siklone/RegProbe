@@ -22,6 +22,7 @@ Implication for the pipeline:
 - `run-ida-string-xref-probe.ps1` now treats `ida64.exe` as a real fallback candidate
 - but when batch mode is blocked by the guest acceptance state, the probe emits `blocked-license-not-accepted`
 - this keeps the Phase 3 lane honest: Freeware can remain available for manual GUI inspection, but it is not counted as operational headless cross-verification
+- until that acceptance blocker is genuinely cleared, `IDA` should be treated as pipeline-external and optional rather than as a required static lane
 
 Related audits:
 - `registry-research-framework/audit/ida-provisioning-20260401b.json`
