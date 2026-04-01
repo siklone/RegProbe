@@ -1,0 +1,20 @@
+﻿{
+    "binary":  "notepad.exe",
+    "probe":  "ida-freeware-batch-fallback",
+    "timestamp":  "2026-04-01T16:44:29.5001539Z",
+    "pdb_source":  null,
+    "pdb_loaded":  false,
+    "status":  "blocked-license-not-accepted",
+    "failure":  "ida64.exe is installed and licensed, but the guest has not accepted the IDA license/EULA state required for batch mode.",
+    "matches":  [
+
+                ],
+    "license_path":  "C:\\Tools\\IDA\\Freeware\\ida.hexlic",
+    "execution_mode":  "ida64-fallback",
+    "ida_path":  "C:\\Tools\\IDA\\Freeware\\ida64.exe",
+    "log_tail":  [
+                     "License not yet accepted, cannot run in batch mode -\u003e OK"
+                 ],
+    "ida_exit_code":  1
+}
+
