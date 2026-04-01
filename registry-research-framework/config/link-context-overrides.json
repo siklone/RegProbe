@@ -383,6 +383,350 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T11:10:00Z",
       "notes": "Manual review confirmed this note references the current Microsoft IPv6 configuration guidance in a way that matches the page content."
+    },
+    {
+      "source_file": "research/records/system.memory-nonpaged-pool-dynamic.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed the Microsoft Q&A page includes the exact quoted NonPagedPoolSize=0 line used as the default reset capture in this legacy record."
+    },
+    {
+      "source_file": "research/records/system.memory-nonpaged-pool-dynamic.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed this Q&A page is being used narrowly as a captured default-registry snapshot that includes NonPagedPoolSize=0, not as a broad modern memory-management specification."
+    },
+    {
+      "source_file": "research/records/system.memory-paged-pool-dynamic.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed the Microsoft Q&A page includes the exact quoted PagedPoolSize=0 line used as the default reset capture in this legacy record."
+    },
+    {
+      "source_file": "research/records/system.memory-paged-pool-dynamic.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed this Q&A page is being used narrowly as a captured default-registry snapshot that includes PagedPoolSize=0, not as a broad modern memory-management specification."
+    },
+    {
+      "source_file": "research/records/system.memory-nonpaged-pool-dynamic.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
+      "review_status": "reviewed_context_mismatch",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed the Memory Management Registry Keys page discusses current documented pool-limit surfaces but does not directly publish NonPagedPoolSize as a modern exact-fit source for this record."
+    },
+    {
+      "source_file": "research/records/system.memory-paged-pool-dynamic.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
+      "review_status": "reviewed_context_mismatch",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed the Memory Management Registry Keys page discusses current documented pool-limit surfaces but does not directly publish PagedPoolSize as a modern exact-fit source for this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed the note references this page as a broad memory-management lead rather than as an exact direct mapping for the legacy pool-size values."
+    },
+    {
+      "source_file": "research/records/system.disable-shortcut-arrow.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed the Microsoft Q&A answer includes the exact Shell Icons value 29 override and resource path quoted in the validation proof."
+    },
+    {
+      "source_file": "research/records/system.disable-shortcut-arrow.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/5515171/cannot-remove-shortcut-arrow-have-tried-tweaking-p",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed this Microsoft Q&A page is used as medium-strength product guidance for the exact Shell Icons value 29 shortcut-arrow override."
+    },
+    {
+      "source_file": "research/records/system.reduce-shutdown-timeouts.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/restartmanager/ne-restartmanager-rm_shutdown_type",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed the RM_SHUTDOWN_TYPE page is used narrowly for the documented relationship between forced shutdown behavior and the system timeout concepts, not as a direct registry-path source."
+    },
+    {
+      "source_file": "research/notes/reduce-shutdown-timeouts-proof.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/restartmanager/ne-restartmanager-rm_shutdown_type",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:35:00Z",
+      "notes": "Manual review confirmed the shutdown note references the Restart Manager page in a way that matches the page's forced-shutdown timeout discussion."
+    },
+    {
+      "source_file": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the GlobalFolderOptionsVista specification maps this Explorer option to the documented current-user Explorer settings surface."
+    },
+    {
+      "source_file": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the GlobalFolderOptionsVista specification maps this Explorer option to the documented current-user Explorer settings surface."
+    },
+    {
+      "source_file": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the GlobalFolderOptionsVista specification maps this Explorer option to the documented current-user Explorer settings surface."
+    },
+    {
+      "source_file": "research/records/explorer.show-drive-letters-first.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the GlobalFolderOptionsVista specification maps this Explorer option to the documented current-user Explorer settings surface."
+    },
+    {
+      "source_file": "research/records/explorer.show-file-extensions.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the GlobalFolderOptionsVista specification publishes the HideFileExt path and value name used as the official context source in this record."
+    },
+    {
+      "source_file": "research/records/explorer.show-hidden-files.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the GlobalFolderOptionsVista specification publishes the Hidden path and value name used as the official context source in this record."
+    },
+    {
+      "source_file": "research/records/explorer.show-info-tips.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the GlobalFolderOptionsVista specification maps this Explorer option to the documented current-user Explorer settings surface."
+    },
+    {
+      "source_file": "research/records/explorer.show-protected-operating-system-files.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the GlobalFolderOptionsVista specification maps this Explorer option to the documented current-user Explorer settings surface."
+    },
+    {
+      "source_file": "research/records/explorer.show-type-overlay.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the GlobalFolderOptionsVista specification maps this Explorer option to the documented current-user Explorer settings surface."
+    },
+    {
+      "source_file": "research/records/power.disable-windows-search.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page explicitly lists WSearch, its default start mode, its behavior, and that it is OK to disable."
+    },
+    {
+      "source_file": "research/records/power.disable-windows-search.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page explicitly lists WSearch, its default start mode, its behavior, and that it is OK to disable."
+    },
+    {
+      "source_file": "research/records/system.services.disable-bluetooth-audio-gateway.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-bluetooth-audio-gateway.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-bluetooth-support.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-bluetooth-support.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-bluetooth-user-service.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service family and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-bluetooth-user-service.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service family and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-connected-user-experiences.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-connected-user-experiences.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-print-device-configuration.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-print-notifications.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-print-notifications.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-print-scan-broker.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-print-spooler.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-print-spooler.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-print-workflow-user-service.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service family and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-print-workflow-user-service.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service family and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-sysmain.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-wap-push-routing.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-windows-error-reporting.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page lists the named service and the same start-mode disable guidance used by this record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-windows-search.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page explicitly lists WSearch, its default start mode, its behavior, and that it is OK to disable."
+    },
+    {
+      "source_file": "research/records/system.services.disable-windows-search.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T12:05:00Z",
+      "notes": "Manual review confirmed the IoT services page explicitly lists WSearch, its default start mode, its behavior, and that it is OK to disable."
     }
   ]
 }
