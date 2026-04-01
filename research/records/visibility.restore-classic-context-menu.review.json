@@ -4,7 +4,7 @@
   "record_id": "visibility.restore-classic-context-menu",
   "tweak_id": "visibility.restore-classic-context-menu",
   "record_status": "validated",
-  "summary": "The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 with an empty default value. Microsoft Q&A now documents the same registry workaround, so the record is validated.",
+  "summary": "The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 with an empty default value. A current Microsoft Q&A article shows the same command and revert path, but also notes that the workaround may be deprecated on newer 24H2-era builds, so this record treats it as a workaround rather than a stable Microsoft policy surface.",
   "setting": {
     "name": "Classic Context Menu on Windows 11",
     "category": "Visibility",
@@ -13,7 +13,7 @@
     "casual_explanation": "Windows 11 normally shows the newer compact context menu. This tweak restores the older, fuller context menu style.",
     "why_people_change_it": "People change it because they prefer the classic right-click menu with more commands visible immediately.",
     "tradeoffs_overview": "The classic menu can feel faster or more familiar, but the exact registry mapping remains a workaround rather than an official Microsoft policy setting.",
-    "professional_notes": "The current app writes HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 default = empty string. Microsoft Q&A now shows the same registry workaround by creating the CLSID key, adding InprocServer32, and leaving the default value blank. Removing the key reverts the change.",
+    "professional_notes": "The current app writes HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 default = empty string. A current Microsoft Q&A article shows the same registry command and the delete command used to restore the modern context menu. The same article also notes that the workaround has been reported as deprecated on newer 24H2-era builds, so this review treats it as a known workaround rather than a stable Microsoft policy surface.",
     "targets": [
       {
         "target_id": "classic-context-menu-clsid",
@@ -185,20 +185,20 @@
     }
   ],
   "decision": {
-    "confidence": "high",
+    "confidence": "medium",
     "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Microsoft Q&A documents the same CLSID workaround the app writes, and removing the key restores the stock Windows 11 context menu. The record matches the app and has a clean restore story.",
+    "why": "The app matches the same CLSID workaround command and delete path shown in the current Microsoft Q&A article, and the repo documents the restore story. This remains workaround evidence rather than a stable Microsoft policy contract because newer builds may no longer honor it consistently.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-21T00:00:00Z",
+  "last_reviewed_utc": "2026-04-01T00:00:00Z",
   "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/answers/questions/4375993/right-click-on-file-and-go-to-show-more-options",
-    "exact_quote_or_path": "reg add \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f /ve",
+    "source_url": "https://learn.microsoft.com/en-us/answers/questions/2287432/(article)-restore-old-right-click-context-menu-in?forum=windows-all&referrer=answers",
+    "exact_quote_or_path": "reg.exe add \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f /ve ; reg.exe delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\" /f",
     "key_found_on_page": true,
-    "notes": "Microsoft Q&A documents the CLSID workaround and the empty default value used to restore the classic context menu."
+    "notes": "The current Microsoft Q&A article shows the same add and delete commands used by the workaround. The same page also notes that this method has been reported as deprecated in 24H2, so the record treats it as workaround evidence rather than a guaranteed modern-build contract."
   }
 }

@@ -1,0 +1,212 @@
+{
+  "entries": [
+    {
+      "source_file": "research/records/system.enable-game-mode.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T09:00:00Z",
+      "notes": "Manual review confirmed the Microsoft Learn page documents Game Mode as a real Windows feature area. The record uses it only for feature-level proof, not for the AutoGameModeEnabled registry mapping."
+    },
+    {
+      "source_file": "research/records/system.disable-fullscreen-optimizations.review.json",
+      "source_kind": "official-doc",
+      "url": "https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T09:00:00Z",
+      "notes": "Manual review confirmed the support page directly documents the fullscreen/windowed-games feature area and user-facing toggle path. The record does not claim the page publishes the raw GameConfigStore tuple."
+    },
+    {
+      "source_file": "research/records/system.disable-restartable-apps.review.json",
+      "source_kind": "official-doc",
+      "url": "https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T09:00:00Z",
+      "notes": "Manual review confirmed the support material is used only for the user-facing Restart apps sign-in feature. The record relies on VM runtime proof for the RestartApps registry mapping, not on the support page for raw registry semantics."
+    },
+    {
+      "source_file": "research/records/system.priority-control.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T09:00:00Z",
+      "notes": "Manual review confirmed the Win32_OperatingSystem page is used narrowly for the path plus high-level WMI mapping to Win32PrioritySeparation, not for raw 0x26 bit semantics."
+    },
+    {
+      "source_file": "research/records/power.disable-network-power-saving.policy.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T09:00:00Z",
+      "notes": "Manual review confirmed the MMCSS page is used only for the SystemResponsiveness path plus rounding/clamping behavior. It is not used as proof of NetworkThrottlingIndex semantics."
+    },
+    {
+      "source_file": "research/records/power.disable-network-power-saving.policy.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T09:00:00Z",
+      "notes": "Manual review confirmed the validation proof points only to the SystemResponsiveness path plus rounding/clamping portion of the MMCSS page."
+    },
+    {
+      "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/2287432/(article)-restore-old-right-click-context-menu-in?forum=windows-all&referrer=answers",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T09:00:00Z",
+      "notes": "Manual review confirmed the Microsoft Q&A article contains the same add/delete CLSID workaround commands used in the record. The record still treats the workaround as potentially deprecated on newer 24H2-era builds."
+    },
+    {
+      "source_file": "research/records/developer.vscode-git-autofetch.json",
+      "source_kind": "official-doc",
+      "url": "https://code.visualstudio.com/docs/reference/default-settings",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the VS Code default settings reference is being used only to prove the documented git.autofetch settings surface, not the app's unrelated Explorer registry write."
+    },
+    {
+      "source_file": "research/records/developer.vscode-git-autofetch.json",
+      "source_kind": "official-doc",
+      "url": "https://code.visualstudio.com/docs/sourcecontrol/faq",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the Source Control FAQ explicitly discusses disabling autofetch through git.autofetch. The record uses this page for the VS Code setting only, not for the app's registry mapping."
+    },
+    {
+      "source_file": "research/records/developer.vscode-git-autofetch.json",
+      "source_kind": "validation_proof",
+      "url": "https://code.visualstudio.com/docs/sourcecontrol/faq",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the FAQ line about git.autofetch matches the validation proof claim in this deprecated record."
+    },
+    {
+      "source_file": "research/records/system.enable-hags.review.json",
+      "source_kind": "official-doc",
+      "url": "https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed Microsoft's DirectX post directly documents Hardware-Accelerated GPU Scheduling as a real Windows graphics feature and user-facing settings area. The record uses it for feature-level proof, not as the raw HwSchMode registry contract."
+    },
+    {
+      "source_file": "research/records/developer.docker-performance.review.json",
+      "source_kind": "official-doc",
+      "url": "https://docs.docker.com/desktop/settings-and-maintenance/settings/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed Docker's settings page documents the Windows settings-store.json location. The record uses this page for the supported file-backed settings surface rather than for registry semantics."
+    },
+    {
+      "source_file": "research/records/developer.docker-performance.review.json",
+      "source_kind": "official-doc",
+      "url": "https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/settings-reference/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed Docker's settings reference documents wslEngineEnabled as the WSL 2 engine setting. The record uses it for the documented file-backed Docker settings model."
+    },
+    {
+      "source_file": "research/records/developer.docker-performance.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/settings-reference/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the settings reference includes the WSL engine wording cited in the validation proof."
+    },
+    {
+      "source_file": "research/records/developer.python-path-fix.review.json",
+      "source_kind": "official-doc",
+      "url": "https://docs.python.org/3/using/windows.html",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed Python's Windows documentation explicitly points readers to Enable Win32 long paths or LongPathsEnabled=1 in the FileSystem registry key. The record uses this page for the Python workflow context."
+    },
+    {
+      "source_file": "research/records/developer.python-path-fix.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://docs.python.org/3/using/windows.html",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the exact quote in the validation proof matches the current Python Windows documentation wording about LongPathsEnabled."
+    },
+    {
+      "source_file": "research/records/developer.enable-windows-long-paths.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed Microsoft directly documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem and states that value 1 enables long paths for compatible applications."
+    },
+    {
+      "source_file": "research/records/developer.enable-windows-long-paths.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the current Microsoft path-length documentation for LongPathsEnabled."
+    },
+    {
+      "source_file": "research/records/developer.python-path-fix.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed Microsoft's long-path page is a correct exact-path and exact-value source for LongPathsEnabled in this record."
+    },
+    {
+      "source_file": "research/records/system.ntfs-enable-long-paths.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed Microsoft's long-path documentation matches this record's narrow claim: LongPathsEnabled is the documented Windows control for enabling long paths for compatible applications."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed this note references the same Microsoft long-path page in a way that matches the page content."
+    },
+    {
+      "source_file": "research/records/privacy.hide-recommended-personalized-sites-user.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the Start Policy CSP directly documents HideRecommendedPersonalizedSites, including user scope, Explorer policy path, and 0/1 meanings."
+    },
+    {
+      "source_file": "research/records/privacy.hide-recommended-personalized-sites.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the Start Policy CSP directly documents HideRecommendedPersonalizedSites, including device scope, Explorer policy path, and 0/1 meanings."
+    },
+    {
+      "source_file": "research/records/privacy.hide-recommended-section-user.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the Start Policy CSP directly documents HideRecommendedSection for user scope with the same Explorer policy path and 0/1 semantics used by the record."
+    },
+    {
+      "source_file": "research/records/privacy.hide-recommended-section.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the Start Policy CSP directly documents HideRecommendedSection for device scope with the same Explorer policy path and 0/1 semantics used by the record."
+    },
+    {
+      "source_file": "research/records/privacy.hide-recommended-section.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T10:30:00Z",
+      "notes": "Manual review confirmed the validation proof quote for HideRecommendedSection matches the current Start Policy CSP wording."
+    }
+  ]
+}

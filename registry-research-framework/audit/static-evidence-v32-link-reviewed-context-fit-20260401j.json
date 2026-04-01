@@ -1,0 +1,565 @@
+{
+  "entries": [
+    {
+      "url": "https://code.visualstudio.com/docs/reference/default-settings",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "URL resolved successfully.",
+      "status_code": 200,
+      "final_url": "https://code.visualstudio.com/docs/reference/default-settings",
+      "title": "Default settings reference",
+      "h1": "Default settings reference",
+      "snippet": "Explore Agentic Development - Visual Studio Code comes with a set of default settings that can be overridden by user or workspace settings. You can change the default settings by using the Settings editor or by editing the file directly. To view the list of default settings, run the command from the Command Palette ( ). This opens a read-only file named that contains all the default settings in JSON format. Your Privacy Choices Opt-Out Icon",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/developer.vscode-git-autofetch.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.vscode-git-autofetch",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the VS Code default settings reference is being used only to prove the documented git.autofetch settings surface, not the app's unrelated Explorer registry write."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/developer.vscode-git-autofetch.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.vscode-git-autofetch",
+          "value_name": "git.autofetch",
+          "registry_path": "%APPDATA%\\Code\\User\\settings.json"
+        }
+      ]
+    },
+    {
+      "url": "https://code.visualstudio.com/docs/sourcecontrol/faq",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "URL resolved successfully.",
+      "status_code": 200,
+      "final_url": "https://code.visualstudio.com/docs/sourcecontrol/faq",
+      "title": "Source Control FAQ",
+      "h1": "Source Control FAQ",
+      "snippet": "Explore Agentic Development - This topic answers frequently asked questions about using Git source control and GitHub in Visual Studio Code. Revert your last commit with the command. This will reset your branch to the state right before you did the commit, including all changes. The command is also available as menu in under on the top of the Source Control view. The command will prompt you for the new name. Added files listed in the can be unstaged with the icon or by drag-and-drop. To update t",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/developer.vscode-git-autofetch.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "developer.vscode-git-autofetch",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the FAQ line about git.autofetch matches the validation proof claim in this deprecated record."
+        },
+        {
+          "source_file": "research/records/developer.vscode-git-autofetch.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.vscode-git-autofetch",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the Source Control FAQ explicitly discusses disabling autofetch through git.autofetch. The record uses this page for the VS Code setting only, not for the app's registry mapping."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/developer.vscode-git-autofetch.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "developer.vscode-git-autofetch",
+          "value_name": "git.autofetch",
+          "registry_path": "%APPDATA%\\Code\\User\\settings.json"
+        },
+        {
+          "source_file": "research/records/developer.vscode-git-autofetch.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.vscode-git-autofetch",
+          "value_name": "git.autofetch",
+          "registry_path": "%APPDATA%\\Code\\User\\settings.json"
+        }
+      ]
+    },
+    {
+      "url": "https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "URL resolved successfully.",
+      "status_code": 200,
+      "final_url": "https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/",
+      "title": "Hardware Accelerated GPU Scheduling - DirectX Developer Blog",
+      "h1": "Hardware Accelerated GPU Scheduling",
+      "snippet": "You may have noticed a mysterious new optional feature called appear in the advanced graphics settings page with the Windows 10 May 2020 update. The purpose of this blog is to give some background on this new feature and how we are introducing it. It is intended for folks curious about Windows internals. Remaining on the cutting edge of hardware innovation has always been a critical aspect of our graphics platform. Hardware Accelerated GPU Scheduling enables more efficient GPU scheduling between",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/system.enable-hags.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.enable-hags",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed Microsoft's DirectX post directly documents Hardware-Accelerated GPU Scheduling as a real Windows graphics feature and user-facing settings area. The record uses it for feature-level proof, not as the raw HwSchMode registry contract."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/system.enable-hags.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.enable-hags",
+          "value_name": "HwSchMode",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        }
+      ]
+    },
+    {
+      "url": "https://docs.docker.com/desktop/settings-and-maintenance/settings/",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "URL resolved successfully.",
+      "status_code": 200,
+      "final_url": "https://docs.docker.com/desktop/settings-and-maintenance/settings/",
+      "title": "Change settings | Docker Docs",
+      "h1": "",
+      "snippet": "Get instant answers to your Docker questions. I can help with commands, concepts, troubleshooting, and best practices. Try asking: remaining in this thread. You've reached the maximum of questions per thread. For better answer quality, start a new thread. When enabled, Gordon considers the current page you're viewing to provide more relevant answers.",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/developer.docker-performance.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.docker-performance",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed Docker's settings page documents the Windows settings-store.json location. The record uses this page for the supported file-backed settings surface rather than for registry semantics."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/developer.docker-performance.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.docker-performance",
+          "value_name": "linuxVM.wslEngineEnabled.value",
+          "registry_path": "%APPDATA%\\Docker\\settings-store.json"
+        }
+      ]
+    },
+    {
+      "url": "https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/settings-reference/",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "URL resolved successfully.",
+      "status_code": 200,
+      "final_url": "https://docs.docker.com/enterprise/security/hardened-desktop/settings-management/settings-reference/",
+      "title": "Settings reference | Docker Docs",
+      "h1": "",
+      "snippet": "Get instant answers to your Docker questions. I can help with commands, concepts, troubleshooting, and best practices. Try asking: remaining in this thread. You've reached the maximum of questions per thread. For better answer quality, start a new thread. When enabled, Gordon considers the current page you're viewing to provide more relevant answers.",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/developer.docker-performance.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "developer.docker-performance",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the settings reference includes the WSL engine wording cited in the validation proof."
+        },
+        {
+          "source_file": "research/records/developer.docker-performance.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.docker-performance",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed Docker's settings reference documents wslEngineEnabled as the WSL 2 engine setting. The record uses it for the documented file-backed Docker settings model."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/developer.docker-performance.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "developer.docker-performance",
+          "value_name": "linuxVM.wslEngineEnabled.value",
+          "registry_path": "%APPDATA%\\Docker\\settings-store.json"
+        },
+        {
+          "source_file": "research/records/developer.docker-performance.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.docker-performance",
+          "value_name": "linuxVM.wslEngineEnabled.value",
+          "registry_path": "%APPDATA%\\Docker\\settings-store.json"
+        }
+      ]
+    },
+    {
+      "url": "https://docs.python.org/3/using/windows.html",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "URL resolved successfully.",
+      "status_code": 200,
+      "final_url": "https://docs.python.org/3/using/windows.html",
+      "title": "4. Using Python on Windows — Python 3.14.3 documentation",
+      "h1": "Using Python on Windows",
+      "snippet": "This document aims to give an overview of Windows-specific behaviour you should know about when using Python on Microsoft Windows. Unlike most Unix systems and services, Windows does not include a system supported installation of Python. Instead, Python can be obtained from a number of distributors, including directly from the CPython team. Each Python distribution will have its own benefits and drawbacks, however, consistency with other tools you are using is generally a worthwhile benefit. Bef",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/developer.python-path-fix.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "developer.python-path-fix",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the exact quote in the validation proof matches the current Python Windows documentation wording about LongPathsEnabled."
+        },
+        {
+          "source_file": "research/records/developer.python-path-fix.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.python-path-fix",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed Python's Windows documentation explicitly points readers to Enable Win32 long paths or LongPathsEnabled=1 in the FileSystem registry key. The record uses this page for the Python workflow context."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/developer.python-path-fix.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "developer.python-path-fix",
+          "value_name": "LongPathsEnabled",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem"
+        },
+        {
+          "source_file": "research/records/developer.python-path-fix.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.python-path-fix",
+          "value_name": "LongPathsEnabled",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem"
+        }
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/answers/questions/2287432/(article)-restore-old-right-click-context-menu-in?forum=windows-all&referrer=answers",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_but_mismatch",
+      "raw_reason": "Microsoft page resolved but title/H1/snippet did not match the claimed key/path.",
+      "status_code": 200,
+      "final_url": "https://learn.microsoft.com/en-us/answers/questions/2287432/(article)-restore-old-right-click-context-menu-in?forum=windows-all&referrer=answers",
+      "title": "[ARTICLE] Restore old Right-click Context menu in Windows 11 - Microsoft Q&A",
+      "h1": "[ARTICLE] Restore old Right-click Context menu in Windows 11",
+      "snippet": "This browser is no longer supported. Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support. Starting with Windows 11, the context menu in . However, the refreshed context menu shows fewer items compared to the Legacy Context menu. This article discusses how to restore the Legacy Context menu in Windows 11, which shows up by default. You can display the Legacy Right-Click Context menu by clicking \"Show more options\" at the end of the list or p",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "visibility.restore-classic-context-menu",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T09:00:00Z",
+          "notes": "Manual review confirmed the Microsoft Q&A article contains the same add/delete CLSID workaround commands used in the record. The record still treats the workaround as potentially deprecated on newer 24H2-era builds."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "visibility.restore-classic-context-menu",
+          "value_name": "",
+          "registry_path": "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32"
+        }
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "Microsoft page resolved and needs claim-to-page review.",
+      "status_code": 200,
+      "final_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start",
+      "title": "Start Policy CSP | Microsoft Learn",
+      "h1": "Policy CSP - Start",
+      "snippet": "This browser is no longer supported. Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support. Access to this page requires authorization. You can try or . Access to this page requires authorization. You can try . Important This CSP contains some settings that are under development and only applicable for . These settings are subject to change and may have dependencies on other features or services in preview. This policy controls the visibility",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/privacy.hide-recommended-personalized-sites-user.json",
+          "source_kind": "policy-csp",
+          "tweak_id": "privacy.hide-recommended-personalized-sites-user",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the Start Policy CSP directly documents HideRecommendedPersonalizedSites, including user scope, Explorer policy path, and 0/1 meanings."
+        },
+        {
+          "source_file": "research/records/privacy.hide-recommended-personalized-sites.json",
+          "source_kind": "policy-csp",
+          "tweak_id": "privacy.hide-recommended-personalized-sites",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the Start Policy CSP directly documents HideRecommendedPersonalizedSites, including device scope, Explorer policy path, and 0/1 meanings."
+        },
+        {
+          "source_file": "research/records/privacy.hide-recommended-section-user.json",
+          "source_kind": "policy-csp",
+          "tweak_id": "privacy.hide-recommended-section-user",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the Start Policy CSP directly documents HideRecommendedSection for user scope with the same Explorer policy path and 0/1 semantics used by the record."
+        },
+        {
+          "source_file": "research/records/privacy.hide-recommended-section.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "privacy.hide-recommended-section",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the validation proof quote for HideRecommendedSection matches the current Start Policy CSP wording."
+        },
+        {
+          "source_file": "research/records/privacy.hide-recommended-section.json",
+          "source_kind": "policy-csp",
+          "tweak_id": "privacy.hide-recommended-section",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the Start Policy CSP directly documents HideRecommendedSection for device scope with the same Explorer policy path and 0/1 semantics used by the record."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/privacy.hide-recommended-personalized-sites-user.json",
+          "source_kind": "policy-csp",
+          "tweak_id": "privacy.hide-recommended-personalized-sites-user",
+          "value_name": "HideRecommendedPersonalizedSites",
+          "registry_path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer"
+        },
+        {
+          "source_file": "research/records/privacy.hide-recommended-personalized-sites.json",
+          "source_kind": "policy-csp",
+          "tweak_id": "privacy.hide-recommended-personalized-sites",
+          "value_name": "HideRecommendedPersonalizedSites",
+          "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer"
+        },
+        {
+          "source_file": "research/records/privacy.hide-recommended-section-user.json",
+          "source_kind": "policy-csp",
+          "tweak_id": "privacy.hide-recommended-section-user",
+          "value_name": "HideRecommendedSection",
+          "registry_path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer"
+        },
+        {
+          "source_file": "research/records/privacy.hide-recommended-section.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "privacy.hide-recommended-section",
+          "value_name": "HideRecommendedSection",
+          "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer"
+        },
+        {
+          "source_file": "research/records/privacy.hide-recommended-section.json",
+          "source_kind": "policy-csp",
+          "tweak_id": "privacy.hide-recommended-section",
+          "value_name": "HideRecommendedSection",
+          "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer"
+        }
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "Microsoft page resolved and needs claim-to-page review.",
+      "status_code": 200,
+      "final_url": "https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/",
+      "title": "Game Mode - Win32 apps | Microsoft Learn",
+      "h1": "Game Mode",
+      "snippet": "This browser is no longer supported. Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support. Access to this page requires authorization. You can try or . Access to this page requires authorization. You can try . Overview of the Game Mode technology. To develop Game Mode, you need these headers: For programming guidance for this technology, see: Was this page helpful? Need help with this topic? Want to try using Ask Learn to clarify or guide yo",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/system.enable-game-mode.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.enable-game-mode",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T09:00:00Z",
+          "notes": "Manual review confirmed the Microsoft Learn page documents Game Mode as a real Windows feature area. The record uses it only for feature-level proof, not for the AutoGameModeEnabled registry mapping."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/system.enable-game-mode.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.enable-game-mode",
+          "value_name": "AutoGameModeEnabled",
+          "registry_path": "HKCU\\Software\\Microsoft\\GameBar"
+        }
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "Microsoft page resolved and needs claim-to-page review.",
+      "status_code": 200,
+      "final_url": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation",
+      "title": "Maximum Path Length Limitation - Win32 apps | Microsoft Learn",
+      "h1": "Maximum Path Length Limitation",
+      "snippet": "This browser is no longer supported. Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support. Access to this page requires authorization. You can try or . Access to this page requires authorization. You can try . In the Windows API (with some exceptions discussed in the following paragraphs), the maximum length for a path is , which is defined as 260 characters. A local path is structured in the following order: drive letter, colon, backslash, ",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/developer.enable-windows-long-paths.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "developer.enable-windows-long-paths",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed the validation proof quote matches the current Microsoft path-length documentation for LongPathsEnabled."
+        },
+        {
+          "source_file": "research/records/developer.enable-windows-long-paths.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.enable-windows-long-paths",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed Microsoft directly documents LongPathsEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem and states that value 1 enables long paths for compatible applications."
+        },
+        {
+          "source_file": "research/records/developer.python-path-fix.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.python-path-fix",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed Microsoft's long-path page is a correct exact-path and exact-value source for LongPathsEnabled in this record."
+        },
+        {
+          "source_file": "research/records/system.ntfs-enable-long-paths.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.ntfs-enable-long-paths",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed Microsoft's long-path documentation matches this record's narrow claim: LongPathsEnabled is the documented Windows control for enabling long paths for compatible applications."
+        },
+        {
+          "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T10:30:00Z",
+          "notes": "Manual review confirmed this note references the same Microsoft long-path page in a way that matches the page content."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/developer.enable-windows-long-paths.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "developer.enable-windows-long-paths",
+          "value_name": "LongPathsEnabled",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem"
+        },
+        {
+          "source_file": "research/records/developer.enable-windows-long-paths.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.enable-windows-long-paths",
+          "value_name": "LongPathsEnabled",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem"
+        },
+        {
+          "source_file": "research/records/developer.python-path-fix.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "developer.python-path-fix",
+          "value_name": "LongPathsEnabled",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem"
+        },
+        {
+          "source_file": "research/records/system.ntfs-enable-long-paths.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.ntfs-enable-long-paths",
+          "value_name": "LongPathsEnabled",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem"
+        },
+        {
+          "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "Microsoft page resolved and needs claim-to-page review.",
+      "status_code": 200,
+      "final_url": "https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952",
+      "title": "Optimizations for windowed games in Windows 11 - Microsoft Support",
+      "h1": "Optimizations for windowed games in Windows 11",
+      "snippet": "Optimizations for windowed games improves gaming performance for DirectX 10 and DirectX 11 games running in windowed and borderless windowed modes. It transitions compatible games from the legacy blt‑model presentation to the newer flip‑model, reducing frame latency and enabling modern gaming features such as Auto HDR and variable refresh rate on supported displays. Select the button, then choose . In , select and choose . Select and under , turn on the switch by . Restart your game. If you turn",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/system.disable-fullscreen-optimizations.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.disable-fullscreen-optimizations",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T09:00:00Z",
+          "notes": "Manual review confirmed the support page directly documents the fullscreen/windowed-games feature area and user-facing toggle path. The record does not claim the page publishes the raw GameConfigStore tuple."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/system.disable-fullscreen-optimizations.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.disable-fullscreen-optimizations",
+          "value_name": "GameDVR_FSEBehavior / GameDVR_FSEBehaviorMode / GameDVR_HonorUserFSEBehaviorMode / GameDVR_DXGIHonorFSEWindowsCompatible",
+          "registry_path": "HKCU\\System\\GameConfigStore"
+        }
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8",
+      "status": "reviewed_context_fit",
+      "reason": "All linked claims were manually reviewed and confirmed against the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "Microsoft page resolved and needs claim-to-page review.",
+      "status_code": 200,
+      "final_url": "https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8",
+      "title": "Sign-In Options in Windows - Microsoft Support",
+      "h1": "Sign-In Options in Windows",
+      "snippet": "You can access the sign-in options from the Settings app. In the Settings app on your Windows device,​​​​​​​ select > or use the following shortcut: ​​​​​​​ the availability of certain settings may vary based on the configuration of your device. Use to enable to sign in using face recognition, a fingerprint or a PIN, instead of a password. In this section you can also improve facial recognition or remove it.​​​​​ You can sign in to your account with a physical security key. . Sign in with an . I",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/system.disable-restartable-apps.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.disable-restartable-apps",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T09:00:00Z",
+          "notes": "Manual review confirmed the support material is used only for the user-facing Restart apps sign-in feature. The record relies on VM runtime proof for the RestartApps registry mapping, not on the support page for raw registry semantics."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/system.disable-restartable-apps.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.disable-restartable-apps",
+          "value_name": "RestartApps",
+          "registry_path": "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+        }
+      ]
+    }
+  ]
+}

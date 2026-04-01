@@ -16,11 +16,13 @@ from urllib.request import Request, urlopen
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 AUDIT_ROOT = REPO_ROOT / "registry-research-framework" / "audit"
+CONFIG_ROOT = REPO_ROOT / "registry-research-framework" / "config"
 RECORDS_ROOT = REPO_ROOT / "research" / "records"
 EVIDENCE_RECORDS_ROOT = REPO_ROOT / "evidence" / "records"
 RESEARCH_NOTES_ROOT = REPO_ROOT / "research" / "notes"
 AUDIT_NOTES_ROOT = REPO_ROOT / "registry-research-framework" / "audit"
 GHIDRA_ROOT = REPO_ROOT / "evidence" / "files" / "ghidra"
+LINK_REVIEW_OVERRIDES_PATH = CONFIG_ROOT / "link-context-overrides.json"
 
 SCAN_TARGETS = (
     RECORDS_ROOT,
@@ -100,6 +102,16 @@ class UrlReference:
     expected_tokens: list[str]
 
 
+@dataclass
+class LinkReviewOverride:
+    source_file: str
+    source_kind: str
+    url: str
+    review_status: str
+    reviewed_utc: str
+    notes: str
+
+
 def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
@@ -122,6 +134,37 @@ def write_text(path: Path, content: str) -> None:
 
 def repo_relative(path: Path) -> str:
     return str(path.relative_to(REPO_ROOT)).replace("\\", "/")
+
+
+def load_link_review_overrides() -> dict[tuple[str, str, str], LinkReviewOverride]:
+    if not LINK_REVIEW_OVERRIDES_PATH.exists():
+        return {}
+    try:
+        payload = json.loads(read_text(LINK_REVIEW_OVERRIDES_PATH))
+    except Exception:
+        return {}
+
+    overrides: dict[tuple[str, str, str], LinkReviewOverride] = {}
+    for item in payload.get("entries") or []:
+        if not isinstance(item, dict):
+            continue
+        source_file = str(item.get("source_file") or "").strip()
+        source_kind = str(item.get("source_kind") or "").strip()
+        url = str(item.get("url") or "").strip()
+        review_status = str(item.get("review_status") or "").strip()
+        reviewed_utc = str(item.get("reviewed_utc") or "").strip()
+        notes = str(item.get("notes") or "").strip()
+        if not source_file or not source_kind or not url or not review_status:
+            continue
+        overrides[(source_file, source_kind, url)] = LinkReviewOverride(
+            source_file=source_file,
+            source_kind=source_kind,
+            url=url,
+            review_status=review_status,
+            reviewed_utc=reviewed_utc,
+            notes=notes,
+        )
+    return overrides
 
 
 def normalize_token_text(value: str) -> str:
@@ -481,23 +524,67 @@ def run_link_audit(refs: list[UrlReference]) -> dict[str, Any]:
     for ref in refs:
         grouped[ref.url].append(ref)
 
+    overrides = load_link_review_overrides()
     results: list[dict[str, Any]] = []
     broken: list[dict[str, Any]] = []
     context_review: list[dict[str, Any]] = []
+    reviewed_fit: list[dict[str, Any]] = []
+    reviewed_mismatch: list[dict[str, Any]] = []
 
     for url in sorted(grouped):
         fetch_result = fetch_url(url)
-        status, reason = classify_link(url, fetch_result, grouped[url])
+        raw_status, raw_reason = classify_link(url, fetch_result, grouped[url])
+        status = raw_status
+        reason = raw_reason
+        review_matches: list[dict[str, Any]] = []
+        unresolved_review_refs: list[dict[str, Any]] = []
+        mismatch_review_refs: list[dict[str, Any]] = []
+
+        if raw_status in {"reachable_but_mismatch", "reachable_manual_review"}:
+            for ref in grouped[url]:
+                override = overrides.get((ref.source_file, ref.source_kind, url))
+                if not override:
+                    unresolved_review_refs.append(
+                        {
+                            "source_file": ref.source_file,
+                            "source_kind": ref.source_kind,
+                            "tweak_id": ref.tweak_id,
+                        }
+                    )
+                    continue
+                review_entry = {
+                    "source_file": ref.source_file,
+                    "source_kind": ref.source_kind,
+                    "tweak_id": ref.tweak_id,
+                    "review_status": override.review_status,
+                    "reviewed_utc": override.reviewed_utc,
+                    "notes": override.notes,
+                }
+                review_matches.append(review_entry)
+                if override.review_status == "reviewed_context_mismatch":
+                    mismatch_review_refs.append(review_entry)
+
+            if mismatch_review_refs:
+                status = "reviewed_context_mismatch"
+                reason = "Manual review confirmed at least one linked claim does not fit the page."
+            elif review_matches and not unresolved_review_refs and len(review_matches) == len(grouped[url]):
+                status = "reviewed_context_fit"
+                reason = "All linked claims were manually reviewed and confirmed against the page."
+
         entry = {
             "url": url,
             "status": status,
             "reason": reason,
+            "raw_status": raw_status,
+            "raw_reason": raw_reason,
             "status_code": fetch_result.get("status_code"),
             "final_url": fetch_result.get("final_url"),
             "title": fetch_result.get("title"),
             "h1": fetch_result.get("h1"),
             "snippet": fetch_result.get("snippet"),
             "error": fetch_result.get("error"),
+            "manual_reviews": review_matches,
+            "unresolved_review_sources": unresolved_review_refs,
             "sources": [
                 {
                     "source_file": ref.source_file,
@@ -512,8 +599,12 @@ def run_link_audit(refs: list[UrlReference]) -> dict[str, Any]:
         results.append(entry)
         if status == "broken_url":
             broken.append(entry)
-        elif status in {"reachable_but_mismatch", "reachable_manual_review"}:
+        elif status in {"reachable_but_mismatch", "reachable_manual_review", "reviewed_context_mismatch"}:
             context_review.append(entry)
+            if status == "reviewed_context_mismatch":
+                reviewed_mismatch.append(entry)
+        elif status == "reviewed_context_fit":
+            reviewed_fit.append(entry)
 
     return {
         "generated_utc": now_utc(),
@@ -521,9 +612,13 @@ def run_link_audit(refs: list[UrlReference]) -> dict[str, Any]:
         "unique_url_count": len(grouped),
         "broken_count": len(broken),
         "context_review_count": len(context_review),
+        "reviewed_context_fit_count": len(reviewed_fit),
+        "reviewed_context_mismatch_count": len(reviewed_mismatch),
         "results": results,
         "link_broken": broken,
         "link_context_review": context_review,
+        "link_reviewed_context_fit": reviewed_fit,
+        "link_reviewed_context_mismatch": reviewed_mismatch,
     }
 
 
@@ -611,6 +706,7 @@ def render_markdown_summary(
         f"- Unique URLs: {link_audit['unique_url_count']}",
         f"- Broken URLs: {link_audit['broken_count']}",
         f"- Context review URLs: {link_audit['context_review_count']}",
+        f"- Reviewed context-fit URLs: {link_audit['reviewed_context_fit_count']}",
         "",
         "## Priority queue",
         "",
@@ -668,6 +764,8 @@ def main() -> int:
         "unique_url_count": link_audit["unique_url_count"],
         "broken_url_count": link_audit["broken_count"],
         "context_review_count": link_audit["context_review_count"],
+        "reviewed_context_fit_count": link_audit["reviewed_context_fit_count"],
+        "reviewed_context_mismatch_count": link_audit["reviewed_context_mismatch_count"],
         "priority_count": len(priority_queue["entries"]),
     }
 
@@ -678,6 +776,8 @@ def main() -> int:
     write_json(AUDIT_ROOT / f"static-evidence-v32-link-audit-{args.stamp}.json", link_audit)
     write_json(AUDIT_ROOT / f"static-evidence-v32-link-broken-{args.stamp}.json", {"entries": link_audit["link_broken"]})
     write_json(AUDIT_ROOT / f"static-evidence-v32-link-context-review-{args.stamp}.json", {"entries": link_audit["link_context_review"]})
+    write_json(AUDIT_ROOT / f"static-evidence-v32-link-reviewed-context-fit-{args.stamp}.json", {"entries": link_audit["link_reviewed_context_fit"]})
+    write_json(AUDIT_ROOT / f"static-evidence-v32-link-reviewed-context-mismatch-{args.stamp}.json", {"entries": link_audit["link_reviewed_context_mismatch"]})
     write_json(AUDIT_ROOT / f"nohuto-priority-queue-{args.stamp}.json", priority_queue)
     write_text(AUDIT_ROOT / f"static-evidence-v32-summary-{args.stamp}.md", render_markdown_summary(ghidra_scan, link_audit, priority_queue))
     return 0

@@ -4,7 +4,7 @@
   "record_id": "system.enable-game-mode",
   "tweak_id": "system.enable-game-mode",
   "record_status": "validated",
-  "summary": "The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.",
+  "summary": "The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft's official Game Mode documentation here is feature-level rather than a raw registry contract.",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/gamemode_admin_probe.txt",
     "exact_quote_or_path": "gamemode_admin_probe.txt: \"7:52:45.6879293 PM\",\"SystemSettings.exe\",\"5512\",\"RegQueryValue\",\"HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled\",\"SUCCESS\",\"Type: REG_DWORD, Length: 4, Data: 1\". gamemode_admin_zero_probe.txt: \"7:54:41.9130012 PM\",\"SystemSettings.exe\",\"5512\",\"RegQueryValue\",\"HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled\",\"SUCCESS\",\"Type: REG_DWORD, Length: 4, Data: 0\".",
@@ -19,7 +19,7 @@
     "casual_explanation": "Game Mode is Windows' built-in gaming feature that tries to reduce interruptions and prioritize the current game. Most users either leave it on or benchmark it for a specific game.",
     "why_people_change_it": "People enable it when they want Windows to stay focused on a running game and reduce background interruptions like restart notifications.",
     "tradeoffs_overview": "Game Mode is a real Windows feature, but its exact impact can vary by game and system. The feature is official, and the registry mapping is now runtime-observed on this build even though Microsoft did not publish the raw key in the captured feature documentation.",
-    "professional_notes": "The repo research notes say toggling Game Mode in Settings switches HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled and that a missing value behaves like 1. Microsoft officially documents the Game Mode feature and its purpose. Guest-side Procmon on 2026-03-20 confirmed that the interactive Administrator profile's SystemSettings.exe reads AutoGameModeEnabled as a live setting on this build.",
+    "professional_notes": "The repo research notes say toggling Game Mode in Settings switches HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled and that a missing value behaves like 1. Microsoft officially documents Game Mode as a real Windows technology and feature area, even though the public page used here is feature-level rather than a registry contract. Guest-side Procmon on 2026-03-20 confirmed that the interactive Administrator profile's SystemSettings.exe reads AutoGameModeEnabled as a live setting on this build.",
     "targets": [
       {
         "target_id": "auto-game-mode-enabled",
@@ -154,9 +154,9 @@
     {
       "evidence_id": "ms-game-mode-feature",
       "kind": "official-doc",
-      "title": "Xbox Support: Use Game Mode while gaming on your Windows device",
-      "location": "https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc",
-      "summary": "Microsoft officially documents the Game Mode feature and its user-facing behavior, confirming that Game Mode is a real Windows control surface even though this page does not publish the raw registry key.",
+      "title": "Microsoft Learn: Game Mode",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/",
+      "summary": "Microsoft Learn documents Game Mode as a Windows technology and feature area, confirming that Game Mode is a real control surface even though this page does not publish the raw AutoGameModeEnabled registry key.",
       "supports": [
         "behavior",
         "side-effects",
