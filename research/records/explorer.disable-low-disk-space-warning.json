@@ -148,8 +148,8 @@
       "evidence_id": "ms-low-disk-warning-article",
       "kind": "official-doc",
       "title": "Microsoft Learn troubleshooting article for low disk space warnings",
-      "location": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft",
-      "summary": "Microsoft documents NoLowDiskSpaceChecks under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer with value 1 to turn off low disk space checks and warnings.",
+      "location": "https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted",
+      "summary": "A current Microsoft Learn troubleshooting article still includes NoLowDiskSpaceChecks under HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer with value 1 to turn off low disk space checks and warnings.",
       "supports": [
         "path",
         "value",
@@ -196,7 +196,7 @@
   "open_questions": [],
   "last_reviewed_utc": "2026-03-13T00:00:00Z",
   "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft",
+    "source_url": "https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted",
     "exact_quote_or_path": "Locate and select the following registry subkey: HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer. Enter NoLowDiskSpaceChecks and press Enter. Type 1 in the Value data box and select OK.",
     "key_found_on_page": true,
     "notes": "The official troubleshooting article documents the HKLM Explorer policy path and NoLowDiskSpaceChecks = 1 flow exactly. The app now writes the same machine-policy path."

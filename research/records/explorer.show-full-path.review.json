@@ -157,7 +157,7 @@
       "evidence_id": "ms-gppref-global-folder-options",
       "kind": "official-doc",
       "title": "Microsoft Open Specifications: GlobalFolderOptions",
-      "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a",
+      "location": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f",
       "summary": "Microsoft documents the FullPath Explorer preference under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState and states that 1 enables showing the full path while 0 disables it.",
       "supports": [
         "path",
@@ -219,7 +219,7 @@
   },
   "last_reviewed_utc": "2026-03-13T03:00:31+03:00",
   "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a",
+    "source_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f",
     "exact_quote_or_path": "Path: Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState; Value Name: FullPath; Description: Displays the full path to the folder. MUST be 1 to enable and 0 to disable.",
     "key_found_on_page": true,
     "notes": "Microsoft Open Specifications publishes the exact Explorer CabinetState path, FullPath value name, and 0/1 semantics. The app writes the documented enabled state under the same user-preference surface."

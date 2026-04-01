@@ -30,11 +30,17 @@ SCAN_TARGETS = (
 )
 
 URL_RE = re.compile(r"https?://[^\s\"'<>`]+", re.IGNORECASE)
+CAMEL_CASE_RE = re.compile(r"(?<=[a-z0-9])(?=[A-Z])")
 MICROSOFT_HOSTS = {
     "learn.microsoft.com",
     "support.microsoft.com",
     "techcommunity.microsoft.com",
 }
+GENERATED_AUDIT_PREFIXES = (
+    "static-evidence-v32-",
+    "nohuto-priority-queue-",
+    "nohuto-priority-v32-reaudit-",
+)
 
 PRIORITY_RECORDS: dict[str, dict[str, Any]] = {
     "system.priority-control": {
@@ -118,26 +124,76 @@ def repo_relative(path: Path) -> str:
     return str(path.relative_to(REPO_ROOT)).replace("\\", "/")
 
 
+def normalize_token_text(value: str) -> str:
+    return CAMEL_CASE_RE.sub(" ", value)
+
+
+def merge_tokens(*groups: list[str]) -> list[str]:
+    deduped: list[str] = []
+    seen: set[str] = set()
+    for group in groups:
+        for token in group:
+            lowered = token.lower()
+            if lowered in seen:
+                continue
+            seen.add(lowered)
+            deduped.append(token)
+    return deduped
+
+
+def tokenize_text(*parts: str | None) -> list[str]:
+    tokens: list[str] = []
+    for part in parts:
+        text = normalize_token_text(str(part or "").strip())
+        if not text:
+            continue
+        pieces = re.split(r"[^A-Za-z0-9]+", text)
+        tokens.extend(piece for piece in pieces if len(piece) >= 4)
+    return merge_tokens(tokens)
+
+
 def tokenize_expected(value_name: str | None, registry_path: str | None) -> list[str]:
     tokens: list[str] = []
     if value_name:
         tokens.append(value_name)
-        pieces = re.split(r"[^A-Za-z0-9]+", value_name)
+        pieces = re.split(r"[^A-Za-z0-9]+", normalize_token_text(value_name))
         tokens.extend(piece for piece in pieces if len(piece) >= 4)
     if registry_path:
+        tokens.append(registry_path)
         tail = registry_path.split("\\")[-1]
         tokens.append(tail)
-        pieces = re.split(r"[^A-Za-z0-9]+", tail)
+        pieces = re.split(r"[^A-Za-z0-9]+", normalize_token_text(tail))
         tokens.extend(piece for piece in pieces if len(piece) >= 4)
-    deduped: list[str] = []
-    seen: set[str] = set()
-    for token in tokens:
-        lowered = token.lower()
-        if lowered in seen:
+    return merge_tokens(tokens)
+
+
+def choose_target_context(targets: list[dict[str, Any]], *parts: str | None) -> tuple[str | None, str | None]:
+    probe_text = " ".join(normalize_token_text(str(part or "")) for part in parts).lower()
+    if not probe_text:
+        if len(targets) == 1 and isinstance(targets[0], dict):
+            return targets[0].get("value_name"), targets[0].get("path")
+        return None, None
+
+    for target in targets:
+        if not isinstance(target, dict):
             continue
-        seen.add(lowered)
-        deduped.append(token)
-    return deduped
+        value_name = target.get("value_name")
+        registry_path = target.get("path")
+        expected_tokens = tokenize_expected(value_name, registry_path)
+        if any(token.lower() in probe_text for token in expected_tokens if len(token) >= 4):
+            return value_name, registry_path
+
+    if len(targets) == 1 and isinstance(targets[0], dict):
+        return targets[0].get("value_name"), targets[0].get("path")
+    return None, None
+
+
+def should_skip_url_source(path: Path) -> bool:
+    try:
+        path.relative_to(AUDIT_ROOT)
+    except ValueError:
+        return False
+    return any(path.name.startswith(prefix) for prefix in GENERATED_AUDIT_PREFIXES)
 
 
 def extract_url_refs_from_json(path: Path) -> list[UrlReference]:
@@ -145,34 +201,38 @@ def extract_url_refs_from_json(path: Path) -> list[UrlReference]:
     payload = json.loads(read_text(path))
     tweak_id = str(payload.get("tweak_id") or payload.get("record_id") or "")
     targets = (payload.get("setting") or {}).get("targets") or []
-    first_target = targets[0] if targets else {}
-    value_name = first_target.get("value_name")
-    registry_path = first_target.get("path")
-
-    expected_tokens: list[str] = []
-    seen_tokens: set[str] = set()
-    for target in targets:
-        if not isinstance(target, dict):
-            continue
-        for token in tokenize_expected(target.get("value_name"), target.get("path")):
-            lowered = token.lower()
-            if lowered in seen_tokens:
-                continue
-            seen_tokens.add(lowered)
-            expected_tokens.append(token)
+    record_tokens = merge_tokens(
+        *[
+            tokenize_expected(target.get("value_name"), target.get("path"))
+            for target in targets
+            if isinstance(target, dict)
+        ]
+    )
 
     proof = payload.get("validation_proof") or {}
     source_url = str(proof.get("source_url") or "").strip()
     if source_url.startswith("http"):
+        proof_value_name, proof_registry_path = choose_target_context(
+            targets,
+            str(proof.get("exact_quote_or_path") or ""),
+            str(proof.get("notes") or ""),
+            source_url,
+        )
+        proof_tokens = merge_tokens(
+            tokenize_expected(proof_value_name, proof_registry_path),
+            tokenize_text(str(proof.get("exact_quote_or_path") or "")),
+        )
+        if not proof_tokens:
+            proof_tokens = record_tokens
         refs.append(
             UrlReference(
                 source_file=repo_relative(path),
                 source_kind="validation_proof",
                 tweak_id=tweak_id or None,
-                value_name=value_name,
-                registry_path=registry_path,
+                value_name=proof_value_name,
+                registry_path=proof_registry_path,
                 url=source_url,
-                expected_tokens=expected_tokens,
+                expected_tokens=proof_tokens,
             )
         )
 
@@ -182,15 +242,27 @@ def extract_url_refs_from_json(path: Path) -> list[UrlReference]:
         url = str(item.get("location") or item.get("url") or "").strip()
         if not url.startswith("http"):
             continue
+        item_value_name, item_registry_path = choose_target_context(
+            targets,
+            str(item.get("title") or ""),
+            str(item.get("summary") or ""),
+            url,
+        )
+        item_tokens = merge_tokens(
+            tokenize_expected(item_value_name, item_registry_path),
+            tokenize_text(str(item.get("title") or "")),
+        )
+        if not item_tokens:
+            item_tokens = record_tokens
         refs.append(
             UrlReference(
                 source_file=repo_relative(path),
                 source_kind=str(item.get("kind") or "evidence"),
                 tweak_id=tweak_id or None,
-                value_name=value_name,
-                registry_path=registry_path,
+                value_name=item_value_name,
+                registry_path=item_registry_path,
                 url=url,
-                expected_tokens=expected_tokens,
+                expected_tokens=item_tokens,
             )
         )
     return refs
@@ -299,6 +371,8 @@ def gather_url_references() -> list[UrlReference]:
     for root in SCAN_TARGETS:
         for path in sorted(root.rglob("*")):
             if not path.is_file():
+                continue
+            if should_skip_url_source(path):
                 continue
             if path.suffix.lower() == ".json":
                 try:
