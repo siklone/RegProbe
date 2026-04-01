@@ -1871,6 +1871,62 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T17:20:00Z",
       "notes": "Manual review confirmed the Microsoft Q&A thread is cited only as an example showing ShowStatus = 3 for the hidden language-bar state, not as a broad platform contract."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/registry-entry-control-tcp-acknowledgment-behavior",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:40:00Z",
+      "notes": "Manual review confirmed this lead note uses the TCP ACK troubleshooting article only as background on TcpAckFrequency-style networking surfaces, which matches the page title and content."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/description-tcp-features",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:40:00Z",
+      "notes": "Manual review confirmed this lead note uses the Windows TCP features article only as background on classic TCP behavior switches such as delayed ACK and keepalive behavior."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/modify-tcp-ip-maximum-retransmission-time-out",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:40:00Z",
+      "notes": "Manual review confirmed this lead note uses the retransmission timeout article only as background on TcpMaxDataRetransmissions-style networking behavior, which matches the page title and content."
+    },
+    {
+      "source_file": "research/records/system.bsod-disable-auto-reboot.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/memory-dump-file-options",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:40:00Z",
+      "notes": "Manual review confirmed the memory-dump troubleshooting article is used narrowly for the CrashControl AutoReboot additional-value listing under Startup and Recovery."
+    },
+    {
+      "source_file": "research/records/system.memory-paged-pool-dynamic.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:40:00Z",
+      "notes": "Manual review confirmed this older troubleshooting article is cited narrowly as legacy Microsoft guidance for PagedPoolSize behavior and server-side pool exhaustion workarounds."
+    },
+    {
+      "source_file": "research/records/network.disable-default-shares.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/problems-administrative-shares-missing",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:40:00Z",
+      "notes": "Manual review confirmed the administrative-shares troubleshooting article directly discusses AutoShareServer and AutoShareWks under LanmanServer\\Parameters and their effect on automatic share creation."
+    },
+    {
+      "source_file": "research/records/network.smb-disable-leasing.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/slow-smb-file-transfer",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T17:40:00Z",
+      "notes": "Manual review confirmed the slow SMB transfer article is used narrowly for Microsoft's documented Set-SmbServerConfiguration -EnableLeasing $false troubleshooting path."
     }
   ]
 }
