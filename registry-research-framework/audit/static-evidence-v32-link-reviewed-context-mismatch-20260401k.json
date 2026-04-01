@@ -1,0 +1,202 @@
+{
+  "entries": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "status": "reviewed_context_mismatch",
+      "reason": "Manual review confirmed at least one linked claim does not fit the page.",
+      "raw_status": "reachable_manual_review",
+      "raw_reason": "Microsoft page resolved and needs claim-to-page review.",
+      "status_code": 200,
+      "final_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "title": "Testing and Debugging TDR During Driver Development - Windows drivers | Microsoft Learn",
+      "h1": "Testing and debugging TDR during driver development",
+      "snippet": "This browser is no longer supported. Upgrade to Microsoft Edge to take advantage of the latest features, security updates, and technical support. Access to this page requires authorization. You can try or . Access to this page requires authorization. You can try . This article describes TDR (timeout detection and recovery) testing and debugging strategies for graphics display driver developers. The (WHLK) contains TDR-specific tests that driver developers can use for testing and debugging purpos",
+      "error": null,
+      "manual_reviews": [
+        {
+          "source_file": "research/records/system.graphics-disable-overlays.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-disable-overlays",
+          "review_status": "reviewed_context_mismatch",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the TDR registry page documents TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime, but it does not publish DisableOverlays. This remains a nearest-surface reference rather than a fit-for-claim source."
+        },
+        {
+          "source_file": "research/records/system.graphics-page-fault-debug-mode.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-page-fault-debug-mode",
+          "review_status": "reviewed_context_mismatch",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the TDR registry page does not publish PageFaultDebugMode. The record can keep the page as adjacent provenance, but not as a direct context-fit source."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-ddi-delay.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-ddi-delay",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the validation proof quote for TdrDdiDelay matches the current Microsoft TDR registry page."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-ddi-delay.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-ddi-delay",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the TDR page directly documents TdrDdiDelay with the exact GraphicsDrivers path and default value."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-delay.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-delay",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the validation proof quote for TdrDelay matches the current Microsoft TDR registry page."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-delay.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-delay",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the TDR page directly documents TdrDelay with the exact GraphicsDrivers path and the documented default of 2 seconds."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-level.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-level",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the validation proof quote for TdrLevel matches the current Microsoft TDR registry page."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-level.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-level",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the TDR page directly documents TdrLevel with the exact GraphicsDrivers path and the recovery-mode value table."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-limit-count.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-limit-count",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the validation proof quote for TdrLimitCount matches the current Microsoft TDR registry page."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-limit-count.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-limit-count",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the TDR page directly documents TdrLimitCount with the exact GraphicsDrivers path and documented default."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-limit-time.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-limit-time",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the validation proof quote for TdrLimitTime matches the current Microsoft TDR registry page."
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-limit-time.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-limit-time",
+          "review_status": "reviewed_context_fit",
+          "reviewed_utc": "2026-04-01T11:10:00Z",
+          "notes": "Manual review confirmed the TDR page directly documents TdrLimitTime with the exact GraphicsDrivers path and documented default."
+        }
+      ],
+      "unresolved_review_sources": [],
+      "sources": [
+        {
+          "source_file": "research/records/system.graphics-disable-overlays.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-disable-overlays",
+          "value_name": "DisableOverlays",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-page-fault-debug-mode.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-page-fault-debug-mode",
+          "value_name": "PageFaultDebugMode",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-ddi-delay.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-ddi-delay",
+          "value_name": "TdrDdiDelay",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-ddi-delay.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-ddi-delay",
+          "value_name": "TdrDdiDelay",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-delay.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-delay",
+          "value_name": "TdrDelay",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-delay.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-delay",
+          "value_name": "TdrDelay",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-level.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-level",
+          "value_name": "TdrLevel",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-level.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-level",
+          "value_name": "TdrLevel",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-limit-count.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-limit-count",
+          "value_name": "TdrLimitCount",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-limit-count.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-limit-count",
+          "value_name": "TdrLimitCount",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-limit-time.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "system.graphics-tdr-limit-time",
+          "value_name": "TdrLimitTime",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        },
+        {
+          "source_file": "research/records/system.graphics-tdr-limit-time.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.graphics-tdr-limit-time",
+          "value_name": "TdrLimitTime",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers"
+        }
+      ]
+    }
+  ]
+}

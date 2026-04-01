@@ -207,6 +207,182 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T10:30:00Z",
       "notes": "Manual review confirmed the validation proof quote for HideRecommendedSection matches the current Start Policy CSP wording."
+    },
+    {
+      "source_file": "research/records/system.graphics-disable-overlays.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_mismatch",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the TDR registry page documents TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime, but it does not publish DisableOverlays. This remains a nearest-surface reference rather than a fit-for-claim source."
+    },
+    {
+      "source_file": "research/records/system.graphics-page-fault-debug-mode.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_mismatch",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the TDR registry page does not publish PageFaultDebugMode. The record can keep the page as adjacent provenance, but not as a direct context-fit source."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-ddi-delay.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the TDR page directly documents TdrDdiDelay with the exact GraphicsDrivers path and default value."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-ddi-delay.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for TdrDdiDelay matches the current Microsoft TDR registry page."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-delay.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the TDR page directly documents TdrDelay with the exact GraphicsDrivers path and the documented default of 2 seconds."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-delay.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for TdrDelay matches the current Microsoft TDR registry page."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-level.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the TDR page directly documents TdrLevel with the exact GraphicsDrivers path and the recovery-mode value table."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-level.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for TdrLevel matches the current Microsoft TDR registry page."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-limit-count.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the TDR page directly documents TdrLimitCount with the exact GraphicsDrivers path and documented default."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-limit-count.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for TdrLimitCount matches the current Microsoft TDR registry page."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-limit-time.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the TDR page directly documents TdrLimitTime with the exact GraphicsDrivers path and documented default."
+    },
+    {
+      "source_file": "research/records/system.graphics-tdr-limit-time.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for TdrLimitTime matches the current Microsoft TDR registry page."
+    },
+    {
+      "source_file": "research/records/system.ntfs-disable-last-access.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed fsutil behavior directly documents disablelastaccess and the matching NtfsDisableLastAccessUpdate registry mapping."
+    },
+    {
+      "source_file": "research/records/system.ntfs-reset-memory-usage.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed fsutil behavior documents memoryusage and the matching NtfsMemoryUsage registry mapping."
+    },
+    {
+      "source_file": "research/records/system.ntfs-reset-memory-usage.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the validation proof for NtfsMemoryUsage matches the current fsutil behavior documentation."
+    },
+    {
+      "source_file": "research/records/system.ntfs-reset-mft-zone.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed fsutil behavior documents mftzone and its supported value range as the source used by this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the note references the current fsutil behavior page in a way that matches the documented NTFS controls."
+    },
+    {
+      "source_file": "research/records/network.disable-ipv6.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the IPv6 guidance directly documents DisabledComponents under Tcpip6\\Parameters and the 0xFF disable value."
+    },
+    {
+      "source_file": "research/records/network.disable-ipv6.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for disabling IPv6 matches the current Microsoft IPv6 guidance."
+    },
+    {
+      "source_file": "research/records/network.prefer-ipv4.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the IPv6 guidance directly documents DisabledComponents = 0x20 for preferring IPv4 over IPv6."
+    },
+    {
+      "source_file": "research/records/network.prefer-ipv4.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for preferring IPv4 matches the current Microsoft IPv6 guidance."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T11:10:00Z",
+      "notes": "Manual review confirmed this note references the current Microsoft IPv6 configuration guidance in a way that matches the page content."
     }
   ]
 }
