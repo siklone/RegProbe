@@ -1263,6 +1263,118 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T14:10:00Z",
       "notes": "Manual review confirmed this note references the PERFBOOSTMODE page as a broad lead for documented processor boost-mode surfaces in a way that matches the page contents."
+    },
+    {
+      "source_file": "research/records/developer.dotnet-telemetry-disable.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the validation proof quote for DOTNET_CLI_TELEMETRY_OPTOUT matches the current .NET CLI telemetry page."
+    },
+    {
+      "source_file": "research/records/developer.dotnet-telemetry-disable.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the .NET CLI telemetry page directly documents DOTNET_CLI_TELEMETRY_OPTOUT as the supported opt-out surface used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-cli-telemetry.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed this bundle uses the .NET CLI telemetry page only for the DOTNET_CLI_TELEMETRY_OPTOUT portion of the record."
+    },
+    {
+      "source_file": "research/records/system.ntfs-disable-8dot3.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the validation proof quote for NtfsDisable8dot3NameCreation and its 0/1/2/3 modes matches the current fsutil 8dot3name documentation."
+    },
+    {
+      "source_file": "research/records/system.ntfs-disable-8dot3.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the fsutil 8dot3name page directly documents NtfsDisable8dot3NameCreation and its supported modes, which is the exact surface used by this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed this note references the fsutil 8dot3name page as a broad lead for documented NTFS short-name controls in a way that matches the page contents."
+    },
+    {
+      "source_file": "research/records/network.smb-disable-leasing.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the validation proof quote for MSFT_SmbServerConfiguration.EnableLeasing matches the previous-versions Microsoft class page."
+    },
+    {
+      "source_file": "research/records/network.smb-disable-leasing.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the MSFT_SmbServerConfiguration page directly documents the EnableLeasing server property used by this record."
+    },
+    {
+      "source_file": "research/records/network.smb-enable-multichannel.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the MSFT_SmbServerConfiguration page directly documents the server-side EnableMultiChannel property referenced by this record, alongside the separate client surface."
+    },
+    {
+      "source_file": "research/records/network.optimize-smb.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the file-server tuning page is used narrowly for the SMB client cache and bandwidth-throttling tuning example cited by this deprecated bundle."
+    },
+    {
+      "source_file": "research/records/network.smb-increase-client-metadata-cache.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the validation proof quote for the SMB client metadata-cache tuning example matches the current file-server performance-tuning page."
+    },
+    {
+      "source_file": "research/records/network.smb-increase-client-metadata-cache.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the file-server tuning page directly documents the default and tuned SMB client metadata-cache values used by this record."
+    },
+    {
+      "source_file": "research/records/network.smb-enable-large-mtu.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the validation proof quote for DisableLargeMtu matches the current SMB file-server tuning page."
+    },
+    {
+      "source_file": "research/records/network.smb-enable-large-mtu.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:25:00Z",
+      "notes": "Manual review confirmed the SMB file-server tuning page directly documents DisableLargeMtu and its default-enabled behavior, which is the exact surface used by this record."
     }
   ]
 }
