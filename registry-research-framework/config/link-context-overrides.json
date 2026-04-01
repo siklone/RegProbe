@@ -2927,6 +2927,350 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T19:40:00Z",
       "notes": "Manual review confirmed the WindowsAI CSP page documents DisableAIDataAnalysis and the WindowsAI policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-auto-maintenance.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/compatibility/automatic-maintenance",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the Automatic Maintenance page is used only as feature-level context for MaintenanceDisabled and does not overclaim registry semantics beyond that feature surface."
+    },
+    {
+      "source_file": "research/records/system.disable-auto-maintenance.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the UWF page is used correctly because it explicitly ties MaintenanceDisabled to UWF behavior on the same registry path used by this record."
+    },
+    {
+      "source_file": "research/records/power.disable-fast-startup.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the HORM documentation as Microsoft evidence for the Session Manager HiberbootEnabled local Fast Startup surface."
+    },
+    {
+      "source_file": "research/records/power.disable-fast-startup.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the HORM page is used correctly for the local HiberbootEnabled on or off registry surface documented in this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/privacy/configure-windows-diagnostic-data-in-your-organization",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the diagnostic-data configuration page only as background for the DataCollection policy family."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/how-it-works",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the UAC overview page only as background for the UAC policy family."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the UAC settings page only as background for UAC registry surfaces under review."
+    },
+    {
+      "source_file": "research/records/security.uac-never-notify.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to Microsoft's registry-key settings section for EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop."
+    },
+    {
+      "source_file": "research/records/security.uac-never-notify.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed Microsoft's UAC registry-key settings section documents the exact path, values, and defaults used by this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/security/identity-protection/hello-for-business/configure",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the Windows Hello for Business configuration page only as background for later Hello policy research."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/configure",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the BitLocker configuration page only as background for BitLocker policy surfaces."
+    },
+    {
+      "source_file": "research/records/system.memory-disable-paging-executive.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters_v1",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed this API page is used honestly because it explicitly references DisablePagingExecutive on the same documented Memory Management path and frames it as temporary diagnosis guidance."
+    },
+    {
+      "source_file": "research/records/system.memory-registry-quota-default.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getsystemregistryquota",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the GetSystemRegistryQuota API page is used as supporting official context for the documented registry quota concept in this record."
+    },
+    {
+      "source_file": "research/records/system.reduce-shutdown-timeouts.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfow",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the SystemParametersInfoW page is used correctly for shutdown-timeout constants and system parameter concepts inside this historical audit-trail record."
+    },
+    {
+      "source_file": "research/records/performance.disable-animations.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-animationinfo",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the ANIMATIONINFO page documents iMinAnimate and fits the persisted backend interpretation used by this record."
+    },
+    {
+      "source_file": "research/records/peripheral.disable-sticky-keys-prompt.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-stickykeys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the STICKYKEYS structure page documents the flag meanings used by this record."
+    },
+    {
+      "source_file": "research/records/network.disable-netbios.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/settcpipnetbios-method-in-class-win32-networkadapterconfiguration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the SetTcpipNetbios method page for the per-adapter NetbiosOptions values used by this record."
+    },
+    {
+      "source_file": "research/records/network.disable-netbios.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/settcpipnetbios-method-in-class-win32-networkadapterconfiguration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the SetTcpipNetbios method page documents the exact 0, 1, and 2 values used for NetbiosOptions in this record."
+    },
+    {
+      "source_file": "research/records/system.memory-large-system-cache-client.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the Win32_OperatingSystem page is used honestly for the historical LargeSystemCache property mapping and obsolescence note."
+    },
+    {
+      "source_file": "research/records/system.priority-control.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the Win32_OperatingSystem page is used narrowly for the high-level WMI mapping to Win32PrioritySeparation, not for raw bitmask semantics."
+    },
+    {
+      "source_file": "research/records/system.bsod-disable-auto-reboot.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-osrecoveryconfiguration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the Win32_OSRecoveryConfiguration page maps AutoReboot directly to CrashControl and fits this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/dxtecharts/disabling-shortcut-keys-in-games",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the gaming accessibility page only as background for StickyKeys and related prompt behavior."
+    },
+    {
+      "source_file": "research/records/developer.ssh-agent-autostart.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to Microsoft's Run and RunOnce registry documentation for the supported autostart surface used by this record."
+    },
+    {
+      "source_file": "research/records/developer.ssh-agent-autostart.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed Microsoft's Run and RunOnce registry page documents the exact autostart contract used by this record."
+    },
+    {
+      "source_file": "research/records/developer.ssh-agent-autostart.review.json",
+      "source_kind": "official-doc",
+      "url": "https://man.openbsd.org/ssh-agent",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the OpenBSD ssh-agent page is used only to identify the ssh-agent program semantics, not as Windows registry proof."
+    },
+    {
+      "source_file": "research/records/system.disable-scheduled-tasks.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-start-page",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the Task Scheduler start page is used honestly as control-surface context in this deprecated audit-trail record."
+    },
+    {
+      "source_file": "research/records/developer.wsl2-memory.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/wsl/wsl-config",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to Microsoft's .wslconfig documentation for the [wsl2].memory setting."
+    },
+    {
+      "source_file": "research/records/developer.wsl2-memory.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/wsl/wsl-config",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the WSL configuration page documents the [wsl2] memory setting used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-app-suggestions.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the validation proof uses the VDI optimization page narrowly for the documented SystemPaneSuggestionsEnabled value under ContentDeliveryManager."
+    },
+    {
+      "source_file": "research/records/privacy.disable-app-suggestions.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the VDI optimization page is used correctly for the documented user-side SystemPaneSuggestionsEnabled setting in this record."
+    },
+    {
+      "source_file": "research/records/system.bsod-display-parameters.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the Microsoft Support article documenting DisplayParameters and its 0 and 1 meanings."
+    },
+    {
+      "source_file": "research/records/system.bsod-display-parameters.review.json",
+      "source_kind": "official-doc",
+      "url": "https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:05:00Z",
+      "notes": "Manual review confirmed the Microsoft Support article documents the exact DisplayParameters registry surface used by this record."
+    },
+    {
+      "source_file": "research/records/network.smb-encrypt-data.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed this troubleshoot page is used correctly because it explicitly documents EncryptData under LanmanServer for SMB encryption behavior."
+    },
+    {
+      "source_file": "research/records/network.smb-reject-unencrypted-access.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed this troubleshoot page is used correctly because it explicitly documents RejectUnencryptedAccess under LanmanServer for SMB encryption behavior."
+    },
+    {
+      "source_file": "research/records/developer.terminal-dev-mode.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed the record uses the Windows Terminal startup page only as product-level context while explicitly stating that no published registry contract was captured for DeveloperMode or EnableDebugTap."
+    },
+    {
+      "source_file": "research/records/developer.terminal-dev-mode.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed the Windows Terminal startup page is used honestly as feature-area context and not overstated as a registry contract."
+    },
+    {
+      "source_file": "research/records/system.kernel-disable-low-qos-timer-resolution.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed the timeBeginPeriod page is used narrowly as timer-resolution feature context while the record explicitly says Microsoft does not publish the DisableLowQosTimerResolution registry key."
+    },
+    {
+      "source_file": "research/records/system.kernel-disable-low-qos-timer-resolution.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/multimedia/timer-resolution",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed the timer-resolution page is used narrowly as timer-behavior context and not overstated as proof of the registry key."
+    },
+    {
+      "source_file": "research/records/system.memory-large-system-cache-client.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed the memory-limits page is used honestly as historical LargeSystemCache context rather than a modern tuning recommendation."
+    },
+    {
+      "source_file": "research/records/system.memory-nonpaged-pool-dynamic.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed the memory-limits page is used honestly to show that current published limits differ from the legacy NonPagedPoolSize surface used by this record."
+    },
+    {
+      "source_file": "research/records/power.disable-windows-search.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed the Windows Search indexing overview is used correctly as feature-area context for the WSearch service record."
+    },
+    {
+      "source_file": "research/records/system.services.disable-windows-search.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed the Windows Search indexing overview is used correctly as feature-area context for the WSearch service record."
+    },
+    {
+      "source_file": "research/records/system.memory-registry-quota-default.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-storage-space",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T20:20:00Z",
+      "notes": "Manual review confirmed the registry storage space page documents RegistrySizeLimit and fits the legacy quota reset semantics used by this record."
     }
   ]
 }
