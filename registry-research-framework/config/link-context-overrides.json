@@ -727,6 +727,446 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T12:05:00Z",
       "notes": "Manual review confirmed the IoT services page explicitly lists WSearch, its default start mode, its behavior, and that it is OK to disable."
+    },
+    {
+      "source_file": "research/records/notifications.disable-feedback-frequency.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the Windows privacy page directly documents NumberOfSIUFInPeriod under HKCU\\Software\\Microsoft\\Siuf\\Rules and includes the Never=0 mapping used by this record."
+    },
+    {
+      "source_file": "research/records/notifications.disable-feedback-frequency.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for NumberOfSIUFInPeriod matches the current Windows privacy page."
+    },
+    {
+      "source_file": "research/records/privacy.disable-app-launch-tracking.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the Windows privacy page directly documents Start_TrackProgs under Explorer\\Advanced and states that value 0 turns off app launch tracking."
+    },
+    {
+      "source_file": "research/records/privacy.disable-app-launch-tracking.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for Start_TrackProgs matches the current Windows privacy page."
+    },
+    {
+      "source_file": "research/records/privacy.disable-language-list-access.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the Windows privacy page documents HttpAcceptLanguageOptOut under the current-user International profile as the website language-list preference surface."
+    },
+    {
+      "source_file": "research/records/privacy.disable-language-list-access.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for HttpAcceptLanguageOptOut matches the current Windows privacy page."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed this note references the Windows privacy page as a broad lead for documented privacy and consent surfaces in a way that matches the page contents."
+    },
+    {
+      "source_file": "research/records/explorer.hide-empty-drives.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the shared Windows settings page lists hideDrivesWithNoMedia as a File Explorer setting and the record uses it only for the user-facing setting contract, with runtime proof carrying the raw registry read."
+    },
+    {
+      "source_file": "research/records/explorer.show-recent-items.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the shared Windows settings page lists showRecentlyUsedFiles as a File Explorer setting and the record uses it only for the user-facing feature contract, with runtime proof carrying the raw registry read."
+    },
+    {
+      "source_file": "research/records/explorer.show-status-bar.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the shared Windows settings page lists showStatusBar as a File Explorer setting and the record uses it only for the user-facing feature contract, with runtime proof carrying the raw registry read."
+    },
+    {
+      "source_file": "research/records/peripheral.autoplay-take-no-action.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the shared Windows settings page documents the AutoPlay handlers surface and MSTAKENOACTION mapping used by this record."
+    },
+    {
+      "source_file": "research/records/peripheral.autoplay-take-no-action.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for the AutoPlay handlers surface and MSTAKENOACTION mapping matches the current shared Windows settings page."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed this note references the shared Windows settings registry page as a broad lead for documented settings surfaces in a way that matches the page contents."
+    },
+    {
+      "source_file": "research/records/power.disable-network-power-saving.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed this deprecated bundle uses the MMCSS page only for the SystemResponsiveness path plus rounding and clamping behavior, not as proof of NetworkThrottlingIndex semantics."
+    },
+    {
+      "source_file": "research/records/power.optimize-gaming-network.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the MMCSS page directly documents the Games task plus the allowed task-profile fields this record uses as the official feature and value source."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed this note references the MMCSS page as a broad source for SystemResponsiveness and adjacent multimedia scheduler surfaces in a way that matches the page contents."
+    },
+    {
+      "source_file": "research/records/privacy.disable-location-consent.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-desktop/redirection-configure-location",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the Azure Virtual Desktop location-redirection page explicitly lists the CapabilityAccessManager ConsentStore packaged and NonPackaged location paths and the per-user Value field used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-location-consent.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-desktop/redirection-configure-location",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for the CapabilityAccessManager location ConsentStore paths matches the current Azure Virtual Desktop page."
+    },
+    {
+      "source_file": "research/records/privacy.disable-edge-search-suggestions.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the Edge policy page directly documents SearchSuggestEnabled under SOFTWARE\\Policies\\Microsoft\\Edge and the disable semantics used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-edge-search-suggestions.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for SearchSuggestEnabled matches the current Edge policy documentation."
+    },
+    {
+      "source_file": "research/records/privacy.disable-edge-search-suggestions.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/localprovidersenabled",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the Edge policy page directly documents LocalProvidersEnabled as the local-suggestions companion policy used by this bundle record."
+    },
+    {
+      "source_file": "research/records/security.threat-file-hash-logging.review.json",
+      "source_kind": "official-doc",
+      "url": "https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed this support article is used narrowly for ThreatFileHashLogging at the Windows Defender root policy path and the related event 1120 behavior, which matches the record's claim."
+    },
+    {
+      "source_file": "research/records/security.threat-file-hash-logging.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/indicator-file",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed this Defender page is used narrowly for the PE-file indicator and file-hash-computation context that the record cites, not as the raw ThreatFileHashLogging registry contract."
+    },
+    {
+      "source_file": "research/records/security.threat-file-hash-logging.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed this Defender demonstration page is used only as provenance for the Microsoft-supplied sample file referenced by the record's VM pass."
+    },
+    {
+      "source_file": "research/records/developer.nodejs-performance.json",
+      "source_kind": "official-doc",
+      "url": "https://nodejs.org/api/cli.html",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the Node.js CLI documentation directly covers NODE_OPTIONS and --max-old-space-size, which is exactly the narrow feature surface this record cites."
+    },
+    {
+      "source_file": "research/records/developer.nodejs-performance.json",
+      "source_kind": "validation_proof",
+      "url": "https://nodejs.org/api/cli.html",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for NODE_OPTIONS and --max-old-space-size matches the current Node.js CLI documentation."
+    },
+    {
+      "source_file": "research/records/privacy.disable-appcompat-engine.policy.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_AppCompat Policy CSP page documents the AppCompat policy family and the same device-scoped AppCompat policy surface this record uses."
+    },
+    {
+      "source_file": "research/records/privacy.disable-program-compatibility-assistant.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the validation proof quote for DisablePCA matches the current ADMX_AppCompat Policy CSP page."
+    },
+    {
+      "source_file": "research/records/privacy.disable-program-compatibility-assistant.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_AppCompat Policy CSP page directly documents the Turn off Program Compatibility Assistant policy and its DisablePCA mapping."
+    },
+    {
+      "source_file": "research/records/privacy.disable-switchback.policy.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_AppCompat Policy CSP page documents the SwitchBack policy family used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-lock-screen-changes.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_ControlPanelDisplay Policy CSP page documents the NoChangingLockScreen personalization policy used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-lock-screen-motion.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_ControlPanelDisplay Policy CSP page documents the AnimateLockScreenBackground personalization policy used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-lock-screen-slideshow.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_ControlPanelDisplay Policy CSP page documents the NoLockScreenSlideshow personalization policy used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-lock-screen.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_ControlPanelDisplay Policy CSP page directly documents NoLockScreen with the same policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/network.disable-llmnr.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the validation proof quote for EnableMulticast matches the current ADMX_DnsClient Policy CSP page."
+    },
+    {
+      "source_file": "research/records/network.disable-llmnr.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_DnsClient Policy CSP page directly documents the Turn off multicast name resolution policy and its EnableMulticast mapping."
+    },
+    {
+      "source_file": "research/records/network.disable-netbios-resolution.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_DnsClient Policy CSP page is an exact-fit source for the DNSClient policy family that includes the EnableNetbios control used by this record."
+    },
+    {
+      "source_file": "research/records/network.disable-smart-name-resolution.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the ADMX_DnsClient Policy CSP page directly documents the Smart Multi-Homed Name Resolution policy family used by this record."
+    },
+    {
+      "source_file": "research/records/network.smb-require-signing-client.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the validation proof quote for LanmanWorkstation signing values matches the current SMB signing overview page."
+    },
+    {
+      "source_file": "research/records/network.smb-require-signing-client.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the SMB signing overview page directly documents the LanmanWorkstation RequireSecuritySignature and EnableSecuritySignature values used by this record."
+    },
+    {
+      "source_file": "research/records/network.smb-require-signing-server.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the validation proof quote for LanmanServer signing values matches the current SMB signing overview page."
+    },
+    {
+      "source_file": "research/records/network.smb-require-signing-server.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:35:00Z",
+      "notes": "Manual review confirmed the SMB signing overview page directly documents the LanmanServer RequireSecuritySignature and EnableSecuritySignature values used by this record."
+    },
+    {
+      "source_file": "research/records/developer.dotnet-telemetry-disable.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the Win32_Environment class page is used narrowly as the official Windows storage model for persistent user environment variables such as HKCU\\Environment."
+    },
+    {
+      "source_file": "research/records/developer.nodejs-performance.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the Win32_Environment class page is used narrowly as the official Windows storage model for persistent machine environment variables under Session Manager\\Environment."
+    },
+    {
+      "source_file": "research/records/privacy.disable-cli-telemetry.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the Win32_Environment class page is used narrowly as the official Windows storage model for persistent current-user environment variables such as HKCU\\Environment."
+    },
+    {
+      "source_file": "research/records/system.reduce-shutdown-timeouts.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the Service Control Handler page directly documents WaitToKillServiceTimeout as the service shutdown timeout used during restart handling, which is the narrow claim this historical bundle retains."
+    },
+    {
+      "source_file": "research/records/system.wait-to-kill-service-timeout.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the Service Control Handler page directly documents WaitToKillServiceTimeout with the same Control path and shutdown-timeout semantics used by this record."
+    },
+    {
+      "source_file": "research/notes/wait-to-kill-service-timeout-validation-20260325.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed this note references the Service Control Handler page in a way that matches the documented WaitToKillServiceTimeout behavior."
+    },
+    {
+      "source_file": "research/records/explorer.taskbar-alignment-left.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the Windows 11 settings reference documents the TaskbarAl setting family and 0/1 alignment semantics. The record uses this page for feature-level context, while runtime proof carries the parent-key REG_DWORD backend."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed this note references the Windows 11 settings registry page as a broad lead for Windows 11 feature surfaces in a way that matches the page contents."
+    },
+    {
+      "source_file": "research/records/performance.disable-animations.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the SystemParametersInfo page directly documents SPI_GETANIMATION and SPI_SETANIMATION, which is the public Win32 feature surface this record cites."
+    },
+    {
+      "source_file": "research/records/performance.disable-menu-show-delay.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the SystemParametersInfo page directly documents SPI_GETMENUSHOWDELAY and SPI_SETMENUSHOWDELAY, which is the public Win32 feature surface this record cites."
+    },
+    {
+      "source_file": "research/records/peripheral.disable-sticky-keys-prompt.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfoa",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the SystemParametersInfo page directly documents SPI_GETSTICKYKEYS and SPI_SETSTICKYKEYS, which is the public Win32 feature surface this record cites."
+    },
+    {
+      "source_file": "research/records/privacy.disable-activity-history.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed the Privacy Policy CSP page directly documents the ActivityFeed policy family and the same policy-backed system surface used by this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T13:55:00Z",
+      "notes": "Manual review confirmed this note references the Privacy Policy CSP as a broad lead for documented app-privacy policy surfaces in a way that matches the page contents."
     }
   ]
 }
