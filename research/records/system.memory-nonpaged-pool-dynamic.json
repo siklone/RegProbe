@@ -117,19 +117,6 @@
       "strength": "medium"
     },
     {
-      "evidence_id": "ms-memory-management-registry-keys",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: Memory Management Registry Keys",
-      "location": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
-      "summary": "Microsoft's current published memory-management article documents NonPagedPoolLimit for 32-bit systems, but not NonPagedPoolSize as a current modern limit surface.",
-      "supports": [
-        "path",
-        "behavior",
-        "version-scope"
-      ],
-      "strength": "high"
-    },
-    {
       "evidence_id": "ms-memory-limits",
       "kind": "official-doc",
       "title": "Microsoft Learn: Memory Limits for Windows Releases",

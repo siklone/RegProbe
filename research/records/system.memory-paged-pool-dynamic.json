@@ -125,19 +125,6 @@
       "strength": "medium"
     },
     {
-      "evidence_id": "ms-memory-management-registry-keys",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: Memory Management Registry Keys",
-      "location": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys",
-      "summary": "Microsoft's current published memory-management article documents PagedPoolLimit for 32-bit systems, but not PagedPoolSize as a current modern limit surface.",
-      "supports": [
-        "path",
-        "behavior",
-        "version-scope"
-      ],
-      "strength": "high"
-    },
-    {
       "evidence_id": "ms-unable-allocate-paged-pool",
       "kind": "official-doc",
       "title": "Microsoft Learn: Unable to allocate memory from the system paged pool",

@@ -1492,9 +1492,6 @@ These links were manually fetched or confirmed from search results and are safe 
 
 ### Memory Management
 
-- Memory-management registry keys
-  - https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys
-
 - `DisablePagingExecutive`
   - https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference
   - Caveat: this is a real Microsoft primary source, but it is older and version-scoped and explicitly says systems with Windows 8 and higher do not need this registry change. Treat the key as documented legacy tracing guidance, not as an effective Windows 11 tweak.

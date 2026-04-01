@@ -142,19 +142,6 @@
   ],
   "evidence": [
     {
-      "evidence_id": "ms-tdr-registry-keys",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: TDR Registry Keys",
-      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
-      "summary": "Microsoft documents supported GraphicsDrivers debug keys such as TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime under HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers. This research pass used that page as the nearest official GraphicsDrivers override surface, but did not find DisableOverlays published there.",
-      "supports": [
-        "path",
-        "behavior",
-        "version-scope"
-      ],
-      "strength": "medium"
-    },
-    {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
       "title": "Current app implementation",

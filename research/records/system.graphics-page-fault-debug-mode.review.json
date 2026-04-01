@@ -142,19 +142,6 @@
   ],
   "evidence": [
     {
-      "evidence_id": "ms-tdr-registry-keys",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: TDR Registry Keys",
-      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
-      "summary": "Microsoft documents supported GraphicsDrivers debug keys such as TdrDelay, TdrDdiDelay, TdrLevel, TdrLimitCount, and TdrLimitTime. This research pass used the page as the nearest official GraphicsDrivers debug surface, but it does not publish PageFaultDebugMode.",
-      "supports": [
-        "path",
-        "behavior",
-        "version-scope"
-      ],
-      "strength": "medium"
-    },
-    {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
       "title": "Current app implementation",

@@ -142,19 +142,6 @@
   ],
   "evidence": [
     {
-      "evidence_id": "ms-dwm-registry-settings",
-      "kind": "official-doc",
-      "title": "Microsoft Learn: DWM Registry Settings",
-      "location": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
-      "summary": "Microsoft documents supported DWM registry overrides such as OverlayMinFPS on HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm. This research pass used that page as the nearest official DWM overlay surface, but did not find OverlayTestMode published there.",
-      "supports": [
-        "path",
-        "behavior",
-        "version-scope"
-      ],
-      "strength": "medium"
-    },
-    {
       "evidence_id": "app-system-registry-provider",
       "kind": "repo-code",
       "title": "Current app implementation",
