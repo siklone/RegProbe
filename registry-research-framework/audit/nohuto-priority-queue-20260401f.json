@@ -1,0 +1,33 @@
+{
+  "generated_utc": "2026-04-01T08:15:37.899263Z",
+  "entries": [
+    {
+      "tweak_id": "system.priority-control",
+      "priority": 1,
+      "reason": "Nohuto flagged Win32PrioritySeparation for overstated semantics and static-proof quality.",
+      "queued_from": "manual-override",
+      "link_statuses": [
+        "reachable_manual_review"
+      ],
+      "needs_pdb_reaudit": true,
+      "needs_doc_reaudit": false,
+      "resolution_status": "partial",
+      "remaining_actions": [
+        "pdb_static_reaudit"
+      ]
+    },
+    {
+      "tweak_id": "power.disable-network-power-saving.policy",
+      "priority": 1,
+      "reason": "Nohuto flagged SystemResponsiveness doc interpretation inside the network/MMCSS child record.",
+      "queued_from": "manual-override",
+      "link_statuses": [
+        "reachable_manual_review"
+      ],
+      "needs_pdb_reaudit": false,
+      "needs_doc_reaudit": false,
+      "resolution_status": "resolved",
+      "remaining_actions": []
+    }
+  ]
+}

@@ -212,12 +212,13 @@ def extract_url_refs_from_json(path: Path) -> list[UrlReference]:
     proof = payload.get("validation_proof") or {}
     source_url = str(proof.get("source_url") or "").strip()
     if source_url.startswith("http"):
-        proof_value_name, proof_registry_path = choose_target_context(
-            targets,
-            str(proof.get("exact_quote_or_path") or ""),
-            str(proof.get("notes") or ""),
-            source_url,
-        )
+        proof_value_name, proof_registry_path = choose_target_context(targets, str(proof.get("exact_quote_or_path") or ""))
+        if not proof_value_name and not proof_registry_path:
+            proof_value_name, proof_registry_path = choose_target_context(
+                targets,
+                str(proof.get("notes") or ""),
+                source_url,
+            )
         proof_tokens = merge_tokens(
             tokenize_expected(proof_value_name, proof_registry_path),
             tokenize_text(str(proof.get("exact_quote_or_path") or "")),
@@ -526,6 +527,21 @@ def run_link_audit(refs: list[UrlReference]) -> dict[str, Any]:
     }
 
 
+def load_priority_record(tweak_id: str) -> dict[str, Any]:
+    candidates = [
+        RECORDS_ROOT / f"{tweak_id}.json",
+        RECORDS_ROOT / f"{tweak_id}.review.json",
+    ]
+    for record_path in candidates:
+        if not record_path.exists():
+            continue
+        try:
+            return json.loads(read_text(record_path))
+        except Exception:
+            continue
+    return {}
+
+
 def build_priority_queue(ghidra_scan: dict[str, Any], link_audit: dict[str, Any]) -> dict[str, Any]:
     link_by_tweak: dict[str, list[str]] = defaultdict(list)
     for entry in link_audit.get("results") or []:
@@ -536,7 +552,29 @@ def build_priority_queue(ghidra_scan: dict[str, Any], link_audit: dict[str, Any]
 
     priority_entries: list[dict[str, Any]] = []
     for tweak_id, details in PRIORITY_RECORDS.items():
+        record_payload = load_priority_record(tweak_id)
         link_statuses = sorted(set(link_by_tweak.get(tweak_id, [])))
+        static_ghidra = ((record_payload.get("static_analysis") or {}).get("ghidra") or {}) if record_payload else {}
+        decision = record_payload.get("decision") or {}
+        has_bad_link = any(status in {"broken_url", "reachable_but_mismatch"} for status in link_statuses)
+        doc_source_present = bool(record_payload.get("doc_source"))
+        needs_doc_reaudit = has_bad_link or not doc_source_present
+        needs_pdb_reaudit = tweak_id == "system.priority-control" and static_ghidra.get("status") in {
+            "blocked-pdb-required",
+            "blocked-pdb-missing",
+        }
+        resolution_status = "resolved"
+        if needs_doc_reaudit and needs_pdb_reaudit:
+            resolution_status = "open"
+        elif needs_doc_reaudit or needs_pdb_reaudit:
+            resolution_status = "partial"
+        remaining_actions: list[str] = []
+        if needs_doc_reaudit:
+            remaining_actions.append("doc_reaudit")
+        if needs_pdb_reaudit:
+            remaining_actions.append("pdb_static_reaudit")
+        if decision.get("manual_review_required"):
+            remaining_actions.append("manual_record_review")
         priority_entries.append(
             {
                 "tweak_id": tweak_id,
@@ -544,8 +582,10 @@ def build_priority_queue(ghidra_scan: dict[str, Any], link_audit: dict[str, Any]
                 "reason": details["reason"],
                 "queued_from": "manual-override",
                 "link_statuses": link_statuses,
-                "needs_pdb_reaudit": tweak_id == "system.priority-control",
-                "needs_doc_reaudit": True,
+                "needs_pdb_reaudit": needs_pdb_reaudit,
+                "needs_doc_reaudit": needs_doc_reaudit,
+                "resolution_status": resolution_status,
+                "remaining_actions": remaining_actions,
             }
         )
     return {
@@ -574,12 +614,14 @@ def render_markdown_summary(
         "",
         "## Priority queue",
         "",
-        "| Tweak | Priority | Reason | Link statuses |",
-        "| --- | --- | --- | --- |",
+        "| Tweak | Priority | Status | Reason | Link statuses |",
+        "| --- | --- | --- | --- | --- |",
     ]
     for entry in priority_queue["entries"]:
         statuses = ", ".join(entry["link_statuses"]) if entry["link_statuses"] else "none"
-        lines.append(f"| {entry['tweak_id']} | {entry['priority']} | {entry['reason']} | {statuses} |")
+        lines.append(
+            f"| {entry['tweak_id']} | {entry['priority']} | {entry['resolution_status']} | {entry['reason']} | {statuses} |"
+        )
 
     lines.extend(
         [
