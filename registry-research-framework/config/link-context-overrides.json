@@ -2535,6 +2535,398 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T19:05:00Z",
       "notes": "Manual review confirmed this lead note uses the Update Policy CSP page only as background for update-management policy surfaces."
+    },
+    {
+      "source_file": "research/records/privacy.disable-appdeviceinventory.policy.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the AppDeviceInventory CSP page is used honestly as official existence context for the AppCompat inventory policy family while local ADMX and runtime proof carry the exact registry mapping."
+    },
+    {
+      "source_file": "research/records/system.disable-app-archiving.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowautomaticapparchiving",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the ApplicationManagement CSP page documents AllowAutomaticAppArchiving and is consistent with the Appx policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-game-recording-broadcasting.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the ApplicationManagement CSP page documents AllowGameDVR and the GameDVR policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/peripheral.disable-autoplay.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#disallowautoplayfornonvolumedevices",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the AutoPlay CSP page documents the NoAutoplayfornonVolume policy surface that this record bundles with TurnOffAutoPlay."
+    },
+    {
+      "source_file": "research/records/peripheral.disable-autoplay.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#turnoffautoplay",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the AutoPlay CSP page documents TurnOffAutoPlay and the NoDriveTypeAutoRun policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-resume.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Connectivity CSP page is used only as related managed-policy context for cross-device resume; the record explicitly keeps runtime proof separate from that policy surface."
+    },
+    {
+      "source_file": "research/records/privacy.disable-find-my-device.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the Experience CSP page for AllowFindMyDevice and the documented machine-policy mapping."
+    },
+    {
+      "source_file": "research/records/privacy.disable-find-my-device.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowfindmydevice",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents AllowFindMyDevice, its allowed values, and the policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-spotlight-desktop-collection.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowspotlightcollection",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents the allow-form Spotlight collection policy used as the official surface for this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-suggestions.policy.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed this child policy record uses the Experience CSP page correctly as the official third-party suggestion policy surface within the larger CloudContent audit trail."
+    },
+    {
+      "source_file": "research/records/visibility.disable-spotlight-third-party.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents the allow-form policy for third-party Spotlight suggestions and matches the policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-spotlight-features.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlight",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents the allow-form policy for Windows Spotlight features used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-spotlight-action-center.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonactioncenter",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents the Action Center Spotlight policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-spotlight-settings.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightonsettings",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents the Settings Spotlight policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-spotlight-welcome.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowsspotlightwindowswelcomeexperience",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents the allow-form Spotlight welcome experience policy used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-windows-tips.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the Experience CSP page for the Windows tips policy surface."
+    },
+    {
+      "source_file": "research/records/privacy.disable-windows-tips.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents AllowWindowsTips and the DisableSoftLanding policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/explorer.disable-taskbar-chat.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#configurechaticon",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents ConfigureChatIcon and the allowed values used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-consumer-account-content.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#disableconsumeraccountstatecontent",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents DisableConsumerAccountStateContent and the policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-feedback-notifications.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the Experience CSP page for the feedback-notification policy surface."
+    },
+    {
+      "source_file": "research/records/privacy.disable-feedback-notifications.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents DoNotShowFeedbackNotifications and the DataCollection policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-clipboard-history.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowclipboardhistory",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents AllowClipboardHistory and the System policy mapping used by this bundled clipboard record."
+    },
+    {
+      "source_file": "research/records/system.disable-clipboard-history.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#experience-allowcrossdeviceclipboard",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Experience CSP page documents AllowCrossDeviceClipboard as the second official policy surface bundled by this record."
+    },
+    {
+      "source_file": "research/records/privacy.block-microsoft-accounts.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#accounts_block_microsoft_accounts",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the LocalPoliciesSecurityOptions CSP page documents NoConnectedUser and the allowed values used by this record."
+    },
+    {
+      "source_file": "research/records/network.disable-plaintext-smb-passwords.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the LocalPoliciesSecurityOptions CSP page documents EnablePlainTextPassword and the LanmanWorkstation mapping used by this record."
+    },
+    {
+      "source_file": "research/records/network.require-ntlm-ssp-client-session-security.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the LocalPoliciesSecurityOptions CSP page for NTLMMinClientSec."
+    },
+    {
+      "source_file": "research/records/network.require-ntlm-ssp-client-session-security.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the LocalPoliciesSecurityOptions CSP page documents NTLMMinClientSec and the exact value family used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-message-sync.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the Messaging CSP page for AllowMessageSync."
+    },
+    {
+      "source_file": "research/records/privacy.disable-message-sync.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Messaging CSP page documents AllowMessageSync and the Messaging policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-widgets.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-newsandinterests#allowwidgets",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the NewsAndInterests CSP page documents AllowWidgets and the AllowNewsAndInterests policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/notifications.disable-tile.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-notifications#disallowtilenotification",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Notifications CSP page documents the tile-notification policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/security.disable-remote-assistance.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-remoteassistance",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the RemoteAssistance CSP page documents the Solicited Remote Assistance policy and the fAllowToGetHelp mapping used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-search-highlights-policy.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchhighlights",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Search CSP page documents AllowSearchHighlights and the EnableDynamicContentInWSB mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-online-tips.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the Settings CSP page for AllowOnlineTips."
+    },
+    {
+      "source_file": "research/records/privacy.disable-online-tips.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Settings CSP page documents AllowOnlineTips and the Explorer policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.hide-people-bar.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start#hidepeoplebar",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Start CSP page documents HidePeopleBar, its values, and the Explorer policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-storage-sense.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Storage CSP page documents AllowStorageSenseGlobal and the StorageSense policy family used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-storage-sense-temp-cleanup.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-storage#allowstoragesensetemporaryfilescleanup",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the Storage CSP page documents AllowStorageSenseTemporaryFilesCleanup and the StorageSense policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-device-name-telemetry.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the System CSP page for AllowDeviceNameInDiagnosticData."
+    },
+    {
+      "source_file": "research/records/privacy.disable-device-name-telemetry.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the System CSP page documents AllowDeviceNameInDiagnosticData and the DataCollection mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the System CSP page for AllowTelemetry, including the edition-limited value 0 guidance used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the System CSP page documents AllowTelemetry, its allowed values, and the edition scope used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-telemetry-change-notifications.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the System CSP page for DisableTelemetryOptInChangeNotification."
+    },
+    {
+      "source_file": "research/records/privacy.disable-telemetry-change-notifications.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the System CSP page documents the telemetry opt-in change notification policy and the DataCollection mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-telemetry-optin-ui.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the validation proof correctly points to the System CSP page for DisableTelemetryOptInSettingsUx."
+    },
+    {
+      "source_file": "research/records/privacy.disable-telemetry-optin-ui.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the System CSP page documents the telemetry opt-in settings UI policy and the DataCollection mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.limit-diagnostic-log-collection.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the System CSP page documents LimitDiagnosticLogCollection and the DataCollection policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.limit-dump-collection.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the System CSP page documents LimitDumpCollection and the DataCollection policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-recall.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:40:00Z",
+      "notes": "Manual review confirmed the WindowsAI CSP page documents DisableAIDataAnalysis and the WindowsAI policy surface used by this record."
     }
   ]
 }
