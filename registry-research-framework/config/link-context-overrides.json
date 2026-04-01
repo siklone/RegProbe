@@ -1671,6 +1671,38 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T15:40:00Z",
       "notes": "Manual review confirmed the corrected Microsoft page directly documents the Interactive logon: Don't display username at sign-in policy behavior and default state that this record cites."
+    },
+    {
+      "source_file": "research/records/security.hide-defender-exclusions-from-local-admins.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:00:00Z",
+      "notes": "Manual review confirmed the Defender exclusions page is used narrowly for the documented HideExclusionsFromLocalAdmins behavior note that exclusions remain in policy but can be hidden from local admins."
+    },
+    {
+      "source_file": "research/records/security.disable-system-mitigations.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/customize-exploit-protection",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:00:00Z",
+      "notes": "Manual review confirmed the exploit-protection page is used for the documented XML import/export, Windows Security, and ProcessMitigation management surface rather than for raw MitigationOptions blob semantics."
+    },
+    {
+      "source_file": "research/records/security.disable-wpbt.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:00:00Z",
+      "notes": "Manual review confirmed the Intune DFCI page is used only as the official Microsoft feature-level source for WPBT as a firmware-managed setting with Not configured, Enabled, and Disabled states, not as proof of the Session Manager registry mapping."
+    },
+    {
+      "source_file": "research/records/security.disable-windows-firewall.review.json",
+      "source_kind": "troubleshoot-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/windows/disable-guest-os-firewall-windows",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:00:00Z",
+      "notes": "Manual review confirmed the Azure troubleshooting page is used narrowly to show that the SharedAccess runtime firewall profile paths are real Windows surfaces, while the record's primary validated control remains the official Firewall CSP policy path."
     }
   ]
 }
