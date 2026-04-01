@@ -1375,6 +1375,78 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T14:25:00Z",
       "notes": "Manual review confirmed the SMB file-server tuning page directly documents DisableLargeMtu and its default-enabled behavior, which is the exact surface used by this record."
+    },
+    {
+      "source_file": "research/records/system.memory-disable-paging-executive.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:40:00Z",
+      "notes": "Manual review confirmed the validation proof quote for DisablePagingExecutive matches the current Kernel Trace Control API Reference page, including the Windows 8 and higher caveat."
+    },
+    {
+      "source_file": "research/records/system.memory-disable-paging-executive.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:40:00Z",
+      "notes": "Manual review confirmed the Kernel Trace Control API Reference page directly documents DisablePagingExecutive on the Memory Management path and explicitly states that newer Windows versions do not need the change."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:40:00Z",
+      "notes": "Manual review confirmed this note references the Kernel Trace Control API page as a broad lead for documented DisablePagingExecutive behavior in a way that matches the page contents."
+    },
+    {
+      "source_file": "research/records/network.disable-smb1.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:40:00Z",
+      "notes": "Manual review confirmed the validation proof quote for the LanmanServer SMB1 value matches the Microsoft SMBv1 guidance page."
+    },
+    {
+      "source_file": "research/records/network.disable-smb1.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:40:00Z",
+      "notes": "Manual review confirmed the SMBv1 guidance page directly documents the LanmanServer SMB1 registry value and its 0/1 semantics used by this record."
+    },
+    {
+      "source_file": "research/records/network.disable-smb2.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:40:00Z",
+      "notes": "Manual review confirmed the validation proof quote for the LanmanServer SMB2 value matches the Microsoft SMB protocol guidance page."
+    },
+    {
+      "source_file": "research/records/network.disable-smb2.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:40:00Z",
+      "notes": "Manual review confirmed the SMB protocol guidance page directly documents the LanmanServer SMB2 registry value and its 0/1 semantics used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-copilot.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:40:00Z",
+      "notes": "Manual review confirmed the validation proof quote for TurnOffWindowsCopilot matches the current WindowsAI Policy CSP page, including the deprecation note."
+    },
+    {
+      "source_file": "research/records/privacy.disable-copilot.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:40:00Z",
+      "notes": "Manual review confirmed the WindowsAI Policy CSP page directly documents TurnOffWindowsCopilot with the same policy path, value name, and deprecation caveat used by this record."
     }
   ]
 }
