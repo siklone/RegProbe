@@ -1743,6 +1743,94 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T16:20:00Z",
       "notes": "Manual review confirmed this note references the MS-GPSB ConsentPromptBehaviorAdmin protocol page as a valid lead for the exact Policies\\System value name and its documented DWORD meanings."
+    },
+    {
+      "source_file": "research/notes/reduce-shutdown-timeouts-proof.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/answers/questions/4334365/how-to-find-the-app-preventing-shutdown",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed this note uses the Microsoft Q&A page only as a lead about identifying the application that is blocking shutdown, which matches the page title and content."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/archive/blogs/dubaisec/bitlocker-aes-xts-new-encryption-type",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed this note references the archived Microsoft blog only as background on BitLocker AES-XTS, which matches the page title and content."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/archive/blogs/nettracer/things-that-you-may-want-to-know-about-tcp-keepalives",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed this note references the archived Microsoft networking blog as background on TCP keepalives, which matches the page title and content."
+    },
+    {
+      "source_file": "research/records/system.bsod-disable-auto-reboot.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the CrashControl guidance page, including AutoReboot default 1 and the explicit 0 disables automatic restart wording."
+    },
+    {
+      "source_file": "research/records/system.bsod-disable-auto-reboot.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/configure-system-failure-and-recovery-options",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed the system-failure page directly documents HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\AutoReboot, its default enabled state, and the troubleshooting meaning of setting it to 0."
+    },
+    {
+      "source_file": "research/records/privacy.disable-location-consent-system.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches the location troubleshooting page's exact CapabilityAccessManager consent-store path and Allow/Deny value names."
+    },
+    {
+      "source_file": "research/records/privacy.disable-location-consent-system.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed the timezone troubleshooting page is used narrowly for the documented machine-level CapabilityAccessManager location consent-store path and its Allow/Deny runtime values."
+    },
+    {
+      "source_file": "research/records/network.disable-default-shares.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed the validation proof matches the Microsoft guidance for removing administrative shares through AutoShareServer and AutoShareWks under LanmanServer\\Parameters."
+    },
+    {
+      "source_file": "research/records/network.disable-default-shares.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed the administrative-shares guidance directly documents AutoShareServer and AutoShareWks under LanmanServer\\Parameters and their use for disabling automatic share creation."
+    },
+    {
+      "source_file": "research/records/system.ntfs-reset-mft-zone.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed the validation proof matches the Microsoft NTFS article's NtfsMftZoneReservation path, valid 1 through 4 range, and default 1 behavior."
+    },
+    {
+      "source_file": "research/records/system.ntfs-reset-mft-zone.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:45:00Z",
+      "notes": "Manual review confirmed the NTFS MFT article directly documents NtfsMftZoneReservation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem with the documented range and default behavior used by this record."
     }
   ]
 }
