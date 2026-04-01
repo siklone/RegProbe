@@ -2223,6 +2223,318 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T18:40:00Z",
       "notes": "Manual review confirmed the Defender CSP page directly documents HideExclusionsFromLocalAdmins and the 0/not configured versus 1 behavior used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-application-telemetry.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffapplicationimpacttelemetry",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_AppCompat CSP page documents AppCompatTurnOffApplicationImpactTelemetry and its registry mapping to AITEnable under the AppCompat policy path used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.default-account-picture.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cpls#usedefaulttile",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_Cpls CSP page documents UseDefaultTile and the same Explorer policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/system.aero-shake.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-desktop",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_Desktop CSP page documents NoWindowMinimizingShortcuts and the user-scope Explorer policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-background-gp-updates.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#disablebackgroundpolicy",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_GroupPolicy CSP page documents DisableBackgroundPolicy and the DisableBkGndGroupPolicy registry mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-rsop-logging.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#rsoplogging",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_GroupPolicy CSP page documents RSoPLogging and the same System policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-store-open-with.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-icm#shellnousestoreopenwith_2",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_ICM CSP page documents the NoUseStoreOpenWith policy and the same Explorer policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/network.disable-lltd.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the validation proof is aligned with the ADMX_LinkLayerTopologyDiscovery CSP page and the LLTD policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/network.disable-lltd.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_LinkLayerTopologyDiscovery CSP page documents the LLTD policy family used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-windows-location-provider.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the validation proof matches the ADMX_LocationProviderAdm CSP page for DisableWindowsLocationProvider and its LocationAndSensors policy mapping."
+    },
+    {
+      "source_file": "research/records/privacy.disable-windows-location-provider.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_LocationProviderAdm CSP page documents DisableWindowsLocationProvider and the machine policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/system.verbose-status-messages.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_Logon CSP page documents VerboseStatus and the machine policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/visibility.disable-acrylic-logon.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_Logon CSP page is used correctly for the DisableAcrylicBackgroundOnLogon policy surface."
+    },
+    {
+      "source_file": "research/records/security.disable-defender-sample-submission.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-defender",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the Defender Policy CSP page documents the SubmitSamplesConsent policy family used by this record."
+    },
+    {
+      "source_file": "research/records/security.disable-defender-sample-submission.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_MicrosoftDefenderAntivirus CSP page documents the Spynet policy family used by this record."
+    },
+    {
+      "source_file": "research/records/security.enable-defender-maps-advanced-membership.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_MicrosoftDefenderAntivirus CSP page documents the SpyNetReporting policy family used by this record."
+    },
+    {
+      "source_file": "research/records/network.disable-default-shares.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-mss-legacy",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_MSS-legacy CSP page is used correctly for the AutoShare workstation and server administrative-share policy family."
+    },
+    {
+      "source_file": "research/records/privacy.disable-offline-files.policy.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-offlinefiles",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_OfflineFiles CSP page documents the NetCache policy family used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-pca-diagnostics.policy.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pca",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_pca CSP page documents the DisablePcaUI policy family used by this record."
+    },
+    {
+      "source_file": "research/records/system.reliability-timestamp-enabled.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the validation proof aligns with the ADMX_Reliability CSP page for TimeStampEnabled and its Reliability policy mapping."
+    },
+    {
+      "source_file": "research/records/system.reliability-timestamp-enabled.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_Reliability CSP page documents TimeStampEnabled and the policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-location-scripting.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the validation proof matches the ADMX_Sensors CSP page for DisableLocationScripting and the LocationAndSensors policy mapping."
+    },
+    {
+      "source_file": "research/records/privacy.disable-location-scripting.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_Sensors CSP page documents DisableLocationScripting and the policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-sensors.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the validation proof matches the ADMX_Sensors CSP page for DisableSensors and the LocationAndSensors policy mapping."
+    },
+    {
+      "source_file": "research/records/privacy.disable-sensors.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_Sensors CSP page documents DisableSensors and the policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-settingsync",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_SettingSync CSP page documents the SettingSync policy family used by this record."
+    },
+    {
+      "source_file": "research/records/system.disable-clipboard-redirection.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-terminalserver#ts_disableclipboardredirection",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_TerminalServer CSP page documents the fDisableClip policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-search-box-suggestions.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the validation proof matches the ADMX_WindowsExplorer CSP page for DisableSearchBoxSuggestions and its Explorer policy mapping."
+    },
+    {
+      "source_file": "research/records/privacy.disable-search-box-suggestions.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_WindowsExplorer CSP page documents DisableSearchBoxSuggestions and the user policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/power.disable-fast-startup.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wininit",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_WinInit CSP page is used correctly for the separate policy HiberbootEnabled surface and its fallback-to-local-setting behavior."
+    },
+    {
+      "source_file": "research/records/notifications.disable-lock-screen.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nolockscreentoastnotification",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_WPN CSP page documents NoLockScreenToastNotification and the PushNotifications policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/notifications.disable-mirroring.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#nonotificationmirroring",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_WPN CSP page documents NoNotificationMirroring and the PushNotifications policy mapping used by this record."
+    },
+    {
+      "source_file": "research/records/notifications.disable-toast.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-wpn#notoastnotification",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed the ADMX_WPN CSP page documents NoToastNotification and the PushNotifications policy mapping used by this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-printing2",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the ADMX_Printing2 CSP page only as background for printing policy surfaces."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-eventlogservice",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the EventLogService CSP page only as background for event log policy surfaces."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the LocalPoliciesSecurityOptions CSP page only as background for local security option policy surfaces."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-power",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the Power Policy CSP page only as background for official power-management policy surfaces."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-printers",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the Printers Policy CSP page only as background for printing policy surfaces."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the Search Policy CSP page only as background for search-related policy surfaces."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-update",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T19:05:00Z",
+      "notes": "Manual review confirmed this lead note uses the Update Policy CSP page only as background for update-management policy surfaces."
     }
   ]
 }
