@@ -199,7 +199,7 @@ Additional leads:
 
 Primary source to review:
 
-- https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services-using-mdm
+- https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy
 
 Reported mappings to verify:
 

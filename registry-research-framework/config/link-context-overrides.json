@@ -1167,6 +1167,102 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T13:55:00Z",
       "notes": "Manual review confirmed this note references the Privacy Policy CSP as a broad lead for documented app-privacy policy surfaces in a way that matches the page contents."
+    },
+    {
+      "source_file": "research/records/privacy.disable-cross-device-experiences.policy.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed the validation proof for EnableCdp matches the ADMX_GroupPolicy Policy CSP page."
+    },
+    {
+      "source_file": "research/records/privacy.disable-cross-device-experiences.policy.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed the ADMX_GroupPolicy Policy CSP page directly documents the EnableCdp device policy surface used by this record."
+    },
+    {
+      "source_file": "research/records/privacy.disable-cross-device-experiences.review.json",
+      "source_kind": "policy-csp",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed this deprecated bundle uses the ADMX_GroupPolicy page only for the documented EnableCdp child policy surface."
+    },
+    {
+      "source_file": "research/records/security.disable-windows-firewall.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed the validation proof paths for DomainProfile and StandardProfile EnableFirewall match the current Firewall CSP page."
+    },
+    {
+      "source_file": "research/records/security.disable-windows-firewall.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed the Firewall CSP page directly documents the EnableFirewall policy surface used by this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed this note references the Firewall CSP as a broad lead for documented firewall policy surfaces in a way that matches the page contents."
+    },
+    {
+      "source_file": "research/records/system.dwm-disable-mpo.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
+      "review_status": "reviewed_context_mismatch",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed the DWM registry page documents OverlayMinFPS and related supported DWM overrides, but it does not publish OverlayTestMode as a supported MPO control."
+    },
+    {
+      "source_file": "research/records/system.dwm-disable-overlay-min-fps.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for OverlayMinFPS matches the current DWM registry page."
+    },
+    {
+      "source_file": "research/records/system.dwm-disable-overlay-min-fps.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed the DWM registry page directly documents OverlayMinFPS with the same Dwm path and disable-check meaning used by this record."
+    },
+    {
+      "source_file": "research/records/power.optimize-cpu-boost.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed the validation proof quote for PERFBOOSTMODE index 2 matches the current Microsoft power-settings page."
+    },
+    {
+      "source_file": "research/records/power.optimize-cpu-boost.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed the PERFBOOSTMODE page directly documents the supported powercfg alias and index table used by this record."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T14:10:00Z",
+      "notes": "Manual review confirmed this note references the PERFBOOSTMODE page as a broad lead for documented processor boost-mode surfaces in a way that matches the page contents."
     }
   ]
 }
