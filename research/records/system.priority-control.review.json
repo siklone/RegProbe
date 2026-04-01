@@ -4,26 +4,141 @@
   "record_id": "system.priority-control",
   "tweak_id": "system.priority-control",
   "record_status": "validated",
-  "summary": "Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded rebooted benchmark runs. The raw 0x26 bitmask semantics remain repo interpretation rather than a modern Microsoft-published contract.",
+  "summary": "Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, bounded rebooted benchmark runs, and a bounded PDB-backed Ghidra pass on cimwin32.dll. The raw 0x26 bitmask semantics still remain repo interpretation rather than a modern Microsoft-published contract.",
   "doc_source": {
     "source_origin": "mixed",
     "primary_contract": "Microsoft's Win32_OperatingSystem documentation proves the Win32PrioritySeparation registry path and the high-level WMI mapping for ForegroundApplicationBoost, QuantumLength, and QuantumType.",
     "repo_interpretation": "The raw Win32PrioritySeparation bitmask interpretation for values such as 0x26 still comes from repo analysis and historical decompilation, not from a modern Microsoft page that publishes the exact bit semantics.",
-    "notes": "This re-audit keeps the Microsoft WMI contract separate from the repo-side raw scheduler interpretation."
+    "notes": "This re-audit keeps the Microsoft WMI contract separate from the repo-side raw scheduler interpretation and now anchors the current static lane to a bounded PDB-backed cimwin32.dll review."
   },
   "static_analysis": {
     "ghidra": {
-      "executed": false,
-      "status": "blocked-pdb-required",
-      "pdb_loaded": false,
-      "pdb_source": null,
+      "executed": true,
+      "status": "completed-symbolized-branch",
+      "pdb_loaded": true,
+      "pdb_source": "C:\\Tools\\Symbols\\system-priority-control-ghidra-v32",
       "binary": "cimwin32.dll",
-      "function_name": null,
-      "function_source": null,
-      "branch_analysis": [],
-      "effect_summary": "Legacy repo decomp exists for the read/write path, but no PDB-backed bounded v3.2 branch audit is attached to this record yet.",
-      "unclear": true,
-      "artifact_path": null
+      "function_name": "GetNTInfo; PutInstance",
+      "function_source": "pdb-symbol",
+      "function_confidence": "symbolized_branch",
+      "branch_analysis": [
+        {
+          "condition": "Win32PrioritySeparation branch in GetNTInfo",
+          "register_focus": [
+            "RAX",
+            "EAX",
+            "RSP",
+            "R8",
+            "RDX",
+            "RCX"
+          ],
+          "flag_focus": [
+            "ZF"
+          ],
+          "compare_condition": "18004666c  TEST EAX,EAX",
+          "jump_condition": "18004666e  JNZ 0x1800466ab",
+          "value_map": "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+          "branch_effect": "compare + conditional jump recovered in bounded context.",
+          "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+          "exception_review_required": false,
+          "exception_reason": "none",
+          "heuristic_score": 95,
+          "heuristic_reasons": [
+            "pdb-symbol present",
+            "compare+jump survived bounded symbolized review",
+            "compare/test anchor found",
+            "conditional jump found",
+            "value immediate found in bounded block",
+            "stack-relative context detected"
+          ],
+          "context_before": [
+            "18004663f  CALL qword ptr [0x1801434c0]",
+            "180046646  NOP dword ptr [RAX + RAX*0x1]",
+            "18004664b  TEST EAX,EAX",
+            "18004664d  JNZ 0x1800466ab",
+            "18004664f  LEA R8,[RSP + 0x20]"
+          ],
+          "context_after": [
+            "18004665b  LEA RCX,[RSP + 0x70]",
+            "180046660  CALL qword ptr [0x180143778]",
+            "180046667  NOP dword ptr [RAX + RAX*0x1]",
+            "18004666c  TEST EAX,EAX",
+            "18004666e  JNZ 0x1800466ab"
+          ],
+          "branch_snippet": [
+            "180046654  LEA RDX,[0x18016b568]",
+            "18004666c  TEST EAX,EAX",
+            "18004666e  JNZ 0x1800466ab",
+            "18004664d  JNZ 0x1800466ab",
+            "18004664b  TEST EAX,EAX"
+          ],
+          "effect_summary": "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+          "unclear": false
+        },
+        {
+          "condition": "Win32PrioritySeparation branch in PutInstance",
+          "register_focus": [
+            "RAX",
+            "EAX",
+            "RSP",
+            "R8",
+            "RDX",
+            "RCX"
+          ],
+          "flag_focus": [
+            "ZF"
+          ],
+          "compare_condition": "1800ca591  TEST EAX,EAX",
+          "jump_condition": "1800ca593  JNZ 0x1800ca629",
+          "value_map": "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+          "branch_effect": "compare + conditional jump recovered in bounded context.",
+          "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+          "exception_review_required": false,
+          "exception_reason": "none",
+          "heuristic_score": 95,
+          "heuristic_reasons": [
+            "pdb-symbol present",
+            "compare+jump survived bounded symbolized review",
+            "compare/test anchor found",
+            "conditional jump found",
+            "value immediate found in bounded block",
+            "stack-relative context detected"
+          ],
+          "context_before": [
+            "1800ca560  CALL qword ptr [0x1801434c0]",
+            "1800ca567  NOP dword ptr [RAX + RAX*0x1]",
+            "1800ca56c  TEST EAX,EAX",
+            "1800ca56e  JNZ 0x1800ca6dd",
+            "1800ca574  LEA R8,[RSP + 0x60]"
+          ],
+          "context_after": [
+            "1800ca580  LEA RCX,[RSP + 0x70]",
+            "1800ca585  CALL qword ptr [0x180143778]",
+            "1800ca58c  NOP dword ptr [RAX + RAX*0x1]",
+            "1800ca591  TEST EAX,EAX",
+            "1800ca593  JNZ 0x1800ca629"
+          ],
+          "branch_snippet": [
+            "1800ca579  LEA RDX,[0x18016b568]",
+            "1800ca591  TEST EAX,EAX",
+            "1800ca593  JNZ 0x1800ca629",
+            "1800ca56e  JNZ 0x1800ca6dd",
+            "1800ca56c  TEST EAX,EAX"
+          ],
+          "effect_summary": "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+          "unclear": false
+        }
+      ],
+      "heuristic_score": 95,
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare+jump survived bounded symbolized review",
+        "bounded branch output committed",
+        "stack-relative context detected"
+      ],
+      "effect_summary": "A bounded PDB-backed Ghidra pass on cimwin32.dll now attaches two committed Win32PrioritySeparation branch blocks in GetNTInfo and PutInstance without relying on long decompile prose.",
+      "unclear": false,
+      "artifact_path": "evidence/files/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136"
     },
     "ida": {
       "executed": false,
@@ -43,10 +158,18 @@
     "executed": false,
     "functions_match": null,
     "branches_match": null,
+    "ghidra_function": "GetNTInfo; PutInstance",
+    "ida_function": null,
+    "ghidra_function_confidence": "symbolized_branch",
+    "ida_function_confidence": null,
+    "ghidra_value_map": "value=1 participates in bounded GetNTInfo and PutInstance conditional blocks; opposite branches still need explicit review.",
+    "ida_value_map": null,
     "status": "insufficient",
+    "verdict": "ghidra-only-symbolized",
+    "parity_summary": "Ghidra now provides a bounded PDB-backed cimwin32.dll branch review for Win32PrioritySeparation, but IDA parity is still unavailable in this environment.",
     "confidence": "low",
     "cross_conflict": false,
-    "notes": "Cross-verification is pending until a PDB-backed Ghidra branch audit and an IDA headless pass exist for this record."
+    "notes": "Cross-verification is no longer blocked on Ghidra. A bounded PDB-backed Ghidra branch audit is attached, while IDA headless parity remains unavailable because the current VM still lacks the required Pro/headless toolchain."
   },
   "setting": {
     "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
@@ -56,7 +179,7 @@
     "casual_explanation": "This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak.",
     "why_people_change_it": "People change it when chasing old gaming or responsiveness advice, or when undoing manual scheduler tweaks from third-party guides.",
     "tradeoffs_overview": "Changing the value can alter how much extra runtime the foreground app gets and how scheduler quantums behave. The feature area is real and the current build runtime evidence is strong, but the exact raw bitmask semantics for 0x26 still do not come from a modern Microsoft publication.",
-    "professional_notes": "Microsoft's Win32_OperatingSystem documentation maps Win32PrioritySeparation to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl and exposes related high-level WMI properties such as ForegroundApplicationBoost, QuantumLength, and QuantumType. That page proves the path and the WMI-facing feature family, not the raw 0x26 bit semantics. Repo decompilation and historical notes still cover the raw bitmask interpretation, but this re-audit treats that interpretation as repo provenance. The Win25H2Clean VM then confirmed the current observed baseline value 2, the app profile 38 (0x26), and a clean restore back to 2 after real reboots. On 2026-03-26, a Procmon pass around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading Win32PrioritySeparation with Data: 2 and Data: 38 in separate reversible runs. That is strong enough to treat 2 and 38 as current observed states on this build, even though the exact raw 0x26 semantics remain repo interpretation rather than a Microsoft-published default.",
+    "professional_notes": "Microsoft's Win32_OperatingSystem documentation maps Win32PrioritySeparation to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl and exposes related high-level WMI properties such as ForegroundApplicationBoost, QuantumLength, and QuantumType. That page proves the path and the WMI-facing feature family, not the raw 0x26 bit semantics. A 2026-04-01 bounded PDB-backed Ghidra pass on cimwin32.dll now adds current-build static proof in the GetNTInfo and PutInstance paths without relying on long decompile prose. Repo decompilation and historical notes still cover the raw bitmask interpretation, but this re-audit treats that interpretation as repo provenance rather than primary static proof. The Win25H2Clean VM then confirmed the current observed baseline value 2, the app profile 38 (0x26), and a clean restore back to 2 after real reboots. On 2026-03-26, a Procmon pass around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading Win32PrioritySeparation with Data: 2 and Data: 38 in separate reversible runs. That is strong enough to treat 2 and 38 as current observed states on this build, even though the exact raw 0x26 semantics remain repo interpretation rather than a Microsoft-published default.",
     "targets": [
       {
         "target_id": "win32-priority-separation",
@@ -84,7 +207,6 @@
             "evidence_ids": [
               "app-system-registry-provider",
               "repo-system-doc-priority",
-              "repo-system-decomp-prioritycontrol",
               "procmon-priority-control-wmi-read",
               "vm-batch-probe-20260320-priority-control",
               "vm-manual-benchmark-20260324-priority-control"
@@ -190,10 +312,9 @@
       "evidence_ids": [
         "app-system-registry-provider",
         "repo-system-doc-priority",
-        "repo-system-decomp-prioritycontrol",
-        "procmon-priority-control-wmi-read",
-        "vm-batch-probe-20260320-priority-control",
-        "vm-manual-benchmark-20260324-priority-control"
+              "procmon-priority-control-wmi-read",
+              "vm-batch-probe-20260320-priority-control",
+              "vm-manual-benchmark-20260324-priority-control"
       ]
     }
   ],
@@ -228,12 +349,23 @@
     {
       "evidence_id": "repo-system-decomp-prioritycontrol",
       "kind": "decompilation",
-      "title": "Decompiled PriorityControl read/write path",
+      "title": "Historical repo decompilation for PriorityControl read/write path",
       "location": "Docs/system/assets/lsc-cimwin32.c",
-      "summary": "Repo decompilation shows a PriorityControl read/write path for Win32PrioritySeparation, but this is still repo static provenance rather than a PDB-backed v3.2 branch audit.",
+      "summary": "Historical repo decompilation shows a PriorityControl read/write path for Win32PrioritySeparation, but this remains secondary provenance after the bounded PDB-backed v3.2 Ghidra pass.",
       "supports": [
         "path",
-        "value",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "ghidra-symbolized-prioritycontrol-20260401",
+      "kind": "decompilation",
+      "title": "PDB-backed bounded Ghidra branch audit - cimwin32.dll",
+      "location": "evidence/files/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136",
+      "summary": "A v3.2 Ghidra pass on cimwin32.dll applied the PDB and recovered bounded Win32PrioritySeparation compare/jump blocks in GetNTInfo and PutInstance. The output stays branch-scoped and does not claim full raw 0x26 semantics.",
+      "supports": [
+        "path",
         "behavior"
       ],
       "strength": "high"
@@ -300,14 +432,14 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Win25H2Clean reversible proof, the later rebooted VM benchmark pass, and the wmiprvse.exe Procmon reads for both states are enough to treat 2 and 38 as current-build observed runtime states. This verdict does not rely on Microsoft publishing the raw 0x26 bitmask semantics.",
+    "why": "Win25H2Clean reversible proof, the later rebooted VM benchmark pass, the wmiprvse.exe Procmon reads for both states, and the bounded PDB-backed cimwin32.dll Ghidra pass are enough to treat 2 and 38 as current-build observed runtime states. This verdict still does not rely on Microsoft publishing the raw 0x26 bitmask semantics.",
     "blocking_issues": []
   },
   "open_questions": [
-    "Can a PDB-backed bounded branch audit replace the legacy repo decomp proof for Win32PrioritySeparation?",
+    "Can a future IDA parity pass confirm the same bounded GetNTInfo and PutInstance branch mapping once a Pro/headless toolchain is available?",
     "Can a modern Microsoft primary source for the exact raw Win32PrioritySeparation bitmask semantics be captured?"
   ],
-  "last_reviewed_utc": "2026-03-31T00:00:00Z",
+  "last_reviewed_utc": "2026-04-01T00:00:00Z",
   "validation_proof": {
     "source_url": "research/notes/priority-control-procmon-validation-20260326.md",
     "exact_quote_or_path": "prioritycontrol-state-2.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 2. prioritycontrol-state-38.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 38. priority-control-20260324-201011/summary.json: baseline=2, candidate=38, restore=2 with bounded CPU and memory runs.",

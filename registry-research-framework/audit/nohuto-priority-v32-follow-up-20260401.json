@@ -1,0 +1,46 @@
+{
+  "generated_utc": "2026-04-01T08:37:52.524550Z",
+  "entries": [
+    {
+      "tweak_id": "system.priority-control",
+      "priority": 1,
+      "pdb_loaded": true,
+      "ghidra_function": "GetNTInfo; PutInstance",
+      "ghidra_status": "completed-symbolized-branch",
+      "ida_function": null,
+      "ida_status": "blocked-ida-missing",
+      "branch_mapping": "value=1 participates in bounded GetNTInfo and PutInstance conditional blocks; opposite branches still need explicit review.",
+      "link_status": "reachable_manual_review",
+      "verdict": "A",
+      "resolution_status": "resolved",
+      "what_changed": [
+        "A bounded PDB-backed Ghidra artifact is now attached to the record.",
+        "The static lane no longer reports blocked-pdb-required.",
+        "Primary static proof now comes from current-build cimwin32.dll branch output rather than historical decomp prose.",
+        "Raw 0x26 semantics remain explicitly labeled as repo interpretation rather than Microsoft contract."
+      ]
+    },
+    {
+      "tweak_id": "power.disable-network-power-saving.policy",
+      "priority": 1,
+      "pdb_loaded": false,
+      "ghidra_function": null,
+      "ghidra_status": "not-run",
+      "ida_function": null,
+      "ida_status": "blocked-ida-missing",
+      "branch_mapping": "not required for the narrowed child verdict",
+      "link_status": "reachable_manual_review",
+      "verdict": "A",
+      "resolution_status": "resolved",
+      "what_changed": [
+        "The narrowed child record remains resolved.",
+        "SystemResponsiveness stays scoped to path plus rounding/clamping behavior only.",
+        "The unresolved NetworkThrottlingIndex claim remains outside this child record."
+      ]
+    }
+  ],
+  "scanner_outputs": {
+    "priority_queue": "registry-research-framework/audit/nohuto-priority-queue-20260401g.json",
+    "summary": "registry-research-framework/audit/static-evidence-v32-summary-20260401g.md"
+  }
+}
