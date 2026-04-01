@@ -1,937 +1,382 @@
-# Ghidra String/Xref Export
+# Ghidra Branch Review
 
-- Program: `/C:/Windows/System32/ResourcePolicyServer.dll`
-- Name: `ResourcePolicyServer.dll`
-- Probe: `resourcepolicysrv-fullscreen-ghidra`
-- Timestamp: `2026-03-26T18:19:46.895664300Z`
+- Program: `ResourcePolicyServer.dll`
+- Probe: `resourcepolicysrv-fullscreen-ghidra-branch-template-refresh`
+- Timestamp: `2026-04-01T04:51:44.553181300Z`
+- PDB source: `C:\Tools\Symbols\resourcepolicysrv-fullscreen-ghidra-branch-template-refresh`
 - Patterns: `GameDVR_FSEBehavior`, `GameDVR_FSEBehaviorMode`, `GameDVR_HonorUserFSEBehaviorMode`, `GameDVR_DXGIHonorFSEWindowsCompatible`, `GameConfigStore`
 
-## Pattern Summary
+## `GameDVR_FSEBehavior`
 
-### Pattern: `GameDVR_FSEBehavior`
-
-#### String @ `18001dcd8`
+### String @ `18001dcd8`
 
 `GameDVR_FSEBehavior`
 
-- Reference count: `0`
-- No direct references resolved by Ghidra
-
-#### String @ `18001dd00`
+### String @ `18001dd00`
 
 `GameDVR_FSEBehaviorMode`
 
-- Reference count: `0`
-- No direct references resolved by Ghidra
+## `GameDVR_FSEBehaviorMode`
 
-### Pattern: `GameDVR_FSEBehaviorMode`
-
-#### String @ `18001dd00`
+### String @ `18001dd00`
 
 `GameDVR_FSEBehaviorMode`
 
-- Reference count: `0`
-- No direct references resolved by Ghidra
+## `GameDVR_HonorUserFSEBehaviorMode`
 
-### Pattern: `GameDVR_HonorUserFSEBehaviorMode`
-
-#### String @ `18001de10`
+### String @ `18001de10`
 
 `GameDVR_HonorUserFSEBehaviorMode`
 
-- Reference count: `0`
-- No direct references resolved by Ghidra
+## `GameDVR_DXGIHonorFSEWindowsCompatible`
 
-### Pattern: `GameDVR_DXGIHonorFSEWindowsCompatible`
-
-#### String @ `18001de60`
+### String @ `18001de60`
 
 `GameDVR_DXGIHonorFSEWindowsCompatible`
 
-- Reference count: `0`
-- No direct references resolved by Ghidra
+## `GameConfigStore`
 
-### Pattern: `GameConfigStore`
-
-#### String @ `18001d730`
+### String @ `18001d730`
 
 `onecore\base\appmodel\resourcepolicy\gameconfigstore\server\gameconfigstorerpcserver.cpp`
 
-- Reference count: `29`
-- References:
-  - `1800074c1` in `FUN_180007400`
-  - `180006d19` in `FUN_180006c40`
-  - `1800060dc` in `FUN_18000606c`
-  - `180006136` in `FUN_18000606c`
-  - `1800061ad` in `FUN_18000606c`
-  - `1800078b7` in `FUN_180007884`
-  - `180007103` in `FUN_180007080`
-  - `180006943` in `FUN_1800068e0`
-  - `180007574` in `FUN_180007510`
-  - `1800071b9` in `FUN_180007140`
-  - `180006dce` in `FUN_180006d60`
-  - `180005e13` in `FUN_180005d9c`
-  - `... 17 more references omitted ...`
+- Function: `GcsSrv_ModifyGameConfig`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `1800074c1`
+- Register focus: `EAX`, `EBX`, `EDX`, `RCX`, `RBP`, `R8`, `RSP`
+- Flag focus: `SF`, `ZF`
+- Compare: `1800074b1  TEST EAX,EAX`
+- Jump: `1800074b3  JNS 0x1800074d0`
+- Value mapping: `value=1 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
 
-#### String @ `18001d790`
+```asm
+; context_before
+1800074af  MOV EBX,EAX
+1800074b1  TEST EAX,EAX
+1800074b3  JNS 0x1800074d0
+1800074b5  MOV EDX,0x17e
+1800074ba  MOV RCX,qword ptr [RBP + 0x398]
+; branch_snippet
+1800074c1  LEA R8,[0x18001d730]
+1800074b3  JNS 0x1800074d0
+1800074b1  TEST EAX,EAX
+; context_after
+1800074c8  MOV R9D,EBX
+1800074cb  CALL 0x180006678
+1800074d0  MOV RCX,qword ptr [RSP + 0x20]
+1800074d5  CALL 0x180005984
+1800074da  MOV EAX,EBX
+```
+
+- Function: `GcsSrv_GetGameConfigSizeForClientProcess`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `180006d19`
+- Register focus: `EAX`, `EBX`, `EDX`, `RCX`, `RBP`, `R8`
+- Flag focus: `SF`, `ZF`
+- Compare: `180006d0c  TEST EAX,EAX`
+- Jump: `180006d0e  JNS 0x180006d28`
+- Value mapping: `value=1 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
+
+```asm
+; context_before
+180006d0a  MOV EBX,EAX
+180006d0c  TEST EAX,EAX
+180006d0e  JNS 0x180006d28
+180006d10  MOV EDX,0x150
+180006d15  MOV RCX,qword ptr [RBP + 0x18]
+; branch_snippet
+180006d19  LEA R8,[0x18001d730]
+180006d0e  JNS 0x180006d28
+180006d0c  TEST EAX,EAX
+; context_after
+180006d20  MOV R9D,EAX
+180006d23  CALL 0x180006678
+180006d28  MOV RCX,qword ptr [RBP + -0x38]
+180006d2c  CALL 0x180005984
+180006d31  MOV EAX,EBX
+```
+
+- Function: `GetGameConfigStoreServer`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `1800060dc`
+- Register focus: `EAX`, `EBX`, `RCX`, `RBP`, `R8`, `EDX`, `ECX`
+- Flag focus: `SF`, `ZF`
+- Compare: `1800060d4  TEST EAX,EAX`
+- Jump: `1800060f0  JMP 0x180006191`
+- Value mapping: `value=1 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
+
+```asm
+; context_before
+1800060cd  CALL 0x18000ce90
+1800060d2  MOV EBX,EAX
+1800060d4  TEST EAX,EAX
+1800060d6  JNS 0x1800060f5
+1800060d8  MOV RCX,qword ptr [RBP + 0x28]
+; branch_snippet
+1800060dc  LEA R8,[0x18001d730]
+1800060f0  JMP 0x180006191
+1800060d6  JNS 0x1800060f5
+1800060d4  TEST EAX,EAX
+; context_after
+1800060e3  MOV R9D,EAX
+1800060e6  MOV EDX,0x62
+1800060eb  CALL 0x180006678
+1800060f0  JMP 0x180006191
+1800060f5  MOV ECX,0x28
+```
+
+- Function: `GetGameConfigStoreServer`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `180006136`
+- Register focus: `EAX`, `EBX`, `RCX`, `RBP`, `R8`, `EDX`, `RDI`
+- Flag focus: `SF`, `ZF`
+- Compare: `18000612e  TEST EAX,EAX`
+- Jump: `180006130  JNS 0x180006154`
+- Value mapping: `value=1 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
+
+```asm
+; context_before
+180006127  CALL 0x18000a630
+18000612c  MOV EBX,EAX
+18000612e  TEST EAX,EAX
+180006130  JNS 0x180006154
+180006132  MOV RCX,qword ptr [RBP + 0x28]
+; branch_snippet
+180006136  LEA R8,[0x18001d730]
+180006130  JNS 0x180006154
+18000612e  TEST EAX,EAX
+; context_after
+18000613d  MOV R9D,EAX
+180006140  MOV EDX,0x67
+180006145  CALL 0x180006678
+18000614a  MOV RCX,RDI
+18000614d  CALL 0x180005968
+```
+
+- Function: `GetGameConfigStoreServer`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `1800061ad`
+- Register focus: `EAX`, `EBX`, `RCX`, `RBP`, `R8`, `EDX`, `RDI`, `R14`
+- Flag focus: `SF`, `ZF`
+- Compare: `1800061a5  TEST EAX,EAX`
+- Jump: `1800061c1  JMP 0x1800061c6`
+- Value mapping: `value=1 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
+
+```asm
+; context_before
+18000619e  CALL 0x180008590
+1800061a3  MOV EBX,EAX
+1800061a5  TEST EAX,EAX
+1800061a7  JNS 0x1800061c3
+1800061a9  MOV RCX,qword ptr [RBP + 0x28]
+; branch_snippet
+1800061ad  LEA R8,[0x18001d730]
+1800061c1  JMP 0x1800061c6
+1800061a7  JNS 0x1800061c3
+1800061a5  TEST EAX,EAX
+; context_after
+1800061b4  MOV R9D,EAX
+1800061b7  MOV EDX,0x75
+1800061bc  CALL 0x180006678
+1800061c1  JMP 0x1800061c6
+1800061c3  MOV qword ptr [R14],RDI
+```
+
+- Function: `ShutdownGameConfigRpcServer`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `1800078b7`
+- Register focus: `EAX`, `EBX`, `EDX`, `RCX`, `RSP`, `R8`
+- Flag focus: `SF`, `ZF`
+- Compare: `1800078a9  TEST EAX,EAX`
+- Jump: `1800078d0  JMP 0x180007901`
+- Value mapping: `value=1 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
+
+```asm
+; context_before
+1800078a7  MOV EBX,EAX
+1800078a9  TEST EAX,EAX
+1800078ab  JNS 0x1800078d2
+1800078ad  MOV EDX,0xf8
+1800078b2  MOV RCX,qword ptr [RSP + 0x38]
+; branch_snippet
+1800078b7  LEA R8,[0x18001d730]
+1800078d0  JMP 0x180007901
+1800078ab  JNS 0x1800078d2
+1800078a9  TEST EAX,EAX
+; context_after
+1800078be  MOV R9D,EBX
+1800078c1  CALL 0x180006678
+1800078c6  LEA RCX,[RSP + 0x20]
+1800078cb  CALL 0x180005c60
+1800078d0  JMP 0x180007901
+```
+
+### String @ `18001d790`
 
 `gameConfigStoreManagement`
 
-- Reference count: `1`
-- References:
-  - `180005e47` in `FUN_180005d9c`
+- Function: `GcsSrv_Preamble`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `180005e47`
+- Register focus: `RCX`, `RBP`, `R8`, `RDX`, `EAX`, `RAX`
+- Flag focus: `ZF`, `SF`, `CF`, `OF`
+- Compare: `180005e5e  TEST EAX,EAX`
+- Jump: `180005e60  JNS 0x180005e7e`
+- Value mapping: `value=0 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
 
-#### String @ `18001d9c0`
+```asm
+; context_before
+180005e34  JMP 0x180005f23
+180005e39  CMP SIL,0x1
+180005e3d  JNZ 0x180005ea0
+180005e3f  MOV RCX,qword ptr [RBP + -0x28]
+180005e43  LEA R8,[RBP + -0x30]
+; branch_snippet
+180005e47  LEA RDX,[0x18001d790]
+180005e5e  TEST EAX,EAX
+180005e60  JNS 0x180005e7e
+180005e3d  JNZ 0x180005ea0
+180005e39  CMP SIL,0x1
+180005e34  JMP 0x180005f23
+; context_after
+180005e4e  MOV byte ptr [RBP + -0x30],0x0
+180005e52  CALL qword ptr [0x1800270a0]
+180005e59  NOP dword ptr [RAX + RAX*0x1]
+180005e5e  TEST EAX,EAX
+180005e60  JNS 0x180005e7e
+```
+
+### String @ `18001d9c0`
 
 `System\GameConfigStore\Parents`
 
-- Reference count: `1`
-- References:
-  - `180008a60` in `FUN_180008a60`
+- Function: `GetGameConfigStoreParentsPath`
+- Function source: `pdb-symbol`
+- Function confidence: `string_only_review`
+- Address: `180008a60`
+- Register focus: `EAX`, `RAX`, `RBP`, `RBX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `unclear`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `35`
+- Heuristic reasons: `pdb-symbol present | stack-relative context detected`
+- Effect: unclear - keep this as review-only until a PDB-backed branch mapping is available.
+- Unclear: `true`
 
-#### String @ `18001da00`
+```asm
+; context_before
+180008a31  RET
+180008a40  MOV EAX,0x80004001
+180008a45  RET
+180008a50  LEA RAX,[0x18001da00]
+180008a57  RET
+; branch_snippet
+180008a60  LEA RAX,[0x18001d9c0]
+; context_after
+180008a67  RET
+180008a70  LEA RAX,[0x18001da40]
+180008a77  RET
+180008a80  PUSH RBP
+180008a82  PUSH RBX
+```
+
+### String @ `18001da00`
 
 `System\GameConfigStore\Children`
 
-- Reference count: `1`
-- References:
-  - `180008a50` in `FUN_180008a50`
+- Function: `GetGameConfigStoreChildrenPath`
+- Function source: `pdb-symbol`
+- Function confidence: `string_only_review`
+- Address: `180008a50`
+- Register focus: `RBP`, `RBX`, `EAX`, `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `unclear`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `35`
+- Heuristic reasons: `pdb-symbol present | stack-relative context detected`
+- Effect: unclear - keep this as review-only until a PDB-backed branch mapping is available.
+- Unclear: `true`
 
-_Stopped after `4` matching strings for `GameConfigStore` to keep the export bounded._
-
-## Match Analysis
-
-## Match @ `1800074c1`
-
-- Function: `FUN_180007400`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
-/* WARNING: Function: _guard_dispatch_icall replaced with injection: guard_dispatch_icall */
-
-ulonglong FUN_180007400(RPC_BINDING_HANDLE param_1,undefined8 *param_2,undefined4 *param_3)
-
-{
-  longlong lVar1;
-  longlong *plVar2;
-  uint uVar3;
-  ulonglong uVar4;
-  undefined8 uVar5;
-  ulonglong uVar6;
-  undefined8 unaff_retaddr;
-  undefined1 auStack_498 [32];
-  undefined8 *local_478 [2];
-  longlong *local_468;
-  undefined4 uStack_460;
-  undefined4 uStack_45c;
-  undefined8 local_458;
-  undefined8 uStack_450;
-  undefined8 local_448;
-  undefined8 uStack_440;
-  undefined8 local_438;
-  undefined1 local_428 [1024];
-  ulonglong local_28;
-
-  local_28 = DAT_1800241c0 ^ (ulonglong)auStack_498;
-  local_468 = (longlong *)0x0;
-  local_478[0] = (undefined8 *)0x0;
-  uVar5 = CONCAT71((int7)((ulonglong)param_2 >> 8),1);
-  uVar4 = FUN_180005d9c(param_1,'\x01',local_478,(longlong *)&local_468);
-  uVar6 = uVar4 & 0xffffffff;
-  if ((int)uVar4 < 0) {
-    uVar3 = 0x175;
-  }
-  else {
-    local_438 = 0;
-    local_458 = 0;
-    uStack_450 = 0;
-    local_448 = 0;
-    uStack_440 = 0;
-    uVar4 = FUN_18000d0c4(param_3,uVar5,(undefined4 *)&local_458,local_428);
-    plVar2 = local_468;
-    uVar6 = uVar4 & 0xffffffff;
-    if ((int)uVar4 < 0) {
-      uVar3 = 0x17b;
-    }
-    else {
-      uStack_460 = *(undefined4 *)(param_2 + 1);
-      uStack_45c = *(undefined4 *)((longlong)param_2 + 0xc);
-      lVar1 = *local_468;
-      local_468 = (longlong *)*param_2;
-      uVar3 = (**(code **)(lVar1 + 0x10))(plVar2,&local_468,&local_458);
-      uVar6 = (ulonglong)uVar3;
-      if (-1 < (int)uVar3) goto LAB_1800074d0;
-      uVar3 = 0x17e;
-    }
-  }
-  FUN_180006678(unaff_retaddr,uVar3,
-// ... trimmed ...
+```asm
+; context_before
+180008a2f  POP RBP
+180008a30  POP RBX
+180008a31  RET
+180008a40  MOV EAX,0x80004001
+180008a45  RET
+; branch_snippet
+180008a50  LEA RAX,[0x18001da00]
+; context_after
+180008a57  RET
+180008a60  LEA RAX,[0x18001d9c0]
+180008a67  RET
+180008a70  LEA RAX,[0x18001da40]
+180008a77  RET
 ```
 
-## Match @ `180006d19`
+_Stopped after 4 matching strings to keep the export bounded._
 
-- Function: `FUN_180006c40`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
-/* WARNING: Function: _guard_dispatch_icall replaced with injection: guard_dispatch_icall */
-
-ulonglong FUN_180006c40(RPC_BINDING_HANDLE param_1,undefined8 param_2)
-
-{
-  longlong *plVar1;
-  uint uVar2;
-  ulonglong uVar3;
-  uint uVar4;
-  undefined8 unaff_retaddr;
-  undefined1 auStack_88 [48];
-  ulong local_58 [2];
-  undefined8 *local_50;
-  undefined8 local_48;
-  undefined4 uStack_40;
-  undefined4 uStack_3c;
-  undefined4 local_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 uStack_2c;
-  ulonglong local_28;
-
-  local_28 = DAT_1800241c0 ^ (ulonglong)auStack_88;
-  local_48 = (longlong *)0x0;
-  local_50 = (undefined8 *)0x0;
-  uVar3 = FUN_180005d9c(param_1,'\0',&local_50,&local_48);
-  uVar2 = (uint)uVar3;
-  uVar3 = uVar3 & 0xffffffff;
-  if ((int)uVar2 < 0) {
-    uVar4 = 0x141;
-  }
-  else {
-    local_58[0] = 0;
-    uVar2 = I_RpcBindingInqLocalClientPID(param_1,local_58);
-    plVar1 = local_48;
-    if (uVar2 != 0) {
-      if (0 < (int)uVar2) {
-        uVar2 = uVar2 & 0xffff | 0x80070000;
-      }
-      uVar3 = (ulonglong)uVar2;
-      goto LAB_180006d28;
-    }
-    local_38 = 0;
-    uStack_34 = 0;
-    uStack_30 = 0;
-    uStack_2c = 0;
-    uVar2 = (**(code **)(*local_48 + 0x20))(local_48,local_58[0],&local_38);
-    uVar3 = (ulonglong)uVar2;
-    if ((int)uVar2 < 0) {
-      uVar4 = 0x14d;
-    }
-    else {
-      local_48 = (longlong *)CONCAT44(uStack_34,local_38);
-      uStack_40 = uStack_30;
-      uStack_3c = uStack_2c;
-      uVar2 = (**(code **)(*plVar1 + 0x18))(plVar1,&local_48,0,param_2);
-      uVar3 = (ulonglong)uVar2;
-      if (-1 < (int)uVar2) goto LAB_180006d28;
-// ... trimmed ...
-```
-
-## Match @ `1800060dc`
-
-- Function: `FUN_18000606c`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-ulonglong FUN_18000606c(short *param_1,longlong *param_2)
-
-{
-  longlong lVar1;
-  uint uVar2;
-  longlong *plVar3;
-  ulonglong uVar4;
-  undefined8 *puVar5;
-  undefined8 *puVar6;
-  void *_Memory;
-  ulonglong uVar7;
-  undefined8 unaff_retaddr;
-  void *local_res8;
-  undefined8 *local_res18 [2];
-  short *local_38;
-  longlong local_30;
-
-  local_30 = -1;
-  do {
-    local_30 = local_30 + 1;
-  } while (param_1[local_30] != 0);
-  local_38 = param_1;
-  plVar3 = FUN_180005a3c(DAT_180024a20,(longlong *)&local_res8,(longlong *)&local_38);
-  if (*plVar3 == DAT_180024a20) {
-    local_res8 = (void *)0x0;
-    uVar4 = FUN_18000ce90(param_1,&local_res8);
-    uVar7 = uVar4 & 0xffffffff;
-    if ((int)(uint)uVar4 < 0) {
-      FUN_180006678(unaff_retaddr,0x62,
-                    "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                    ,(uint)uVar4);
-      _Memory = local_res8;
-    }
-    else {
-      puVar5 = FUN_180002654(0x28);
-      if (puVar5 == (undefined8 *)0x0) {
-        FUN_180005968((undefined8 *)0x0);
-        uVar7 = 0x8007000e;
-        _Memory = local_res8;
-      }
-      else {
-        *puVar5 = &PTR_FUN_18001a030;
-        puVar5[1] = 0;
-        puVar5[2] = 0;
-        puVar5[3] = 0;
-        puVar5[4] = 0;
-        puVar6 = puVar5;
-        uVar4 = FUN_18000a630((longlong)puVar5,param_1);
-        uVar7 = uVar4 & 0xffffffff;
-        if ((int)(uint)uVar4 < 0) {
-          FUN_180006678(unaff_retaddr,0x67,
-                        "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                        ,(uint)uVar4);
-          FUN_180005968(puVar5);
-          _Memory = local_res8;
-        }
-        else {
-          *param_2 = (longlong)puVar5;
-          local_res18[0] = puVar5;
-// ... trimmed ...
-```
-
-## Match @ `180006136`
-
-- Function: `FUN_18000606c`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-ulonglong FUN_18000606c(short *param_1,longlong *param_2)
-
-{
-  longlong lVar1;
-  uint uVar2;
-  longlong *plVar3;
-  ulonglong uVar4;
-  undefined8 *puVar5;
-  undefined8 *puVar6;
-  void *_Memory;
-  ulonglong uVar7;
-  undefined8 unaff_retaddr;
-  void *local_res8;
-  undefined8 *local_res18 [2];
-  short *local_38;
-  longlong local_30;
-
-  local_30 = -1;
-  do {
-    local_30 = local_30 + 1;
-  } while (param_1[local_30] != 0);
-  local_38 = param_1;
-  plVar3 = FUN_180005a3c(DAT_180024a20,(longlong *)&local_res8,(longlong *)&local_38);
-  if (*plVar3 == DAT_180024a20) {
-    local_res8 = (void *)0x0;
-    uVar4 = FUN_18000ce90(param_1,&local_res8);
-    uVar7 = uVar4 & 0xffffffff;
-    if ((int)(uint)uVar4 < 0) {
-      FUN_180006678(unaff_retaddr,0x62,
-                    "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                    ,(uint)uVar4);
-      _Memory = local_res8;
-    }
-    else {
-      puVar5 = FUN_180002654(0x28);
-      if (puVar5 == (undefined8 *)0x0) {
-        FUN_180005968((undefined8 *)0x0);
-        uVar7 = 0x8007000e;
-        _Memory = local_res8;
-      }
-      else {
-        *puVar5 = &PTR_FUN_18001a030;
-        puVar5[1] = 0;
-        puVar5[2] = 0;
-        puVar5[3] = 0;
-        puVar5[4] = 0;
-        puVar6 = puVar5;
-        uVar4 = FUN_18000a630((longlong)puVar5,param_1);
-        uVar7 = uVar4 & 0xffffffff;
-        if ((int)(uint)uVar4 < 0) {
-          FUN_180006678(unaff_retaddr,0x67,
-                        "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                        ,(uint)uVar4);
-          FUN_180005968(puVar5);
-          _Memory = local_res8;
-        }
-        else {
-          *param_2 = (longlong)puVar5;
-          local_res18[0] = puVar5;
-// ... trimmed ...
-```
-
-## Match @ `1800061ad`
-
-- Function: `FUN_18000606c`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-ulonglong FUN_18000606c(short *param_1,longlong *param_2)
-
-{
-  longlong lVar1;
-  uint uVar2;
-  longlong *plVar3;
-  ulonglong uVar4;
-  undefined8 *puVar5;
-  undefined8 *puVar6;
-  void *_Memory;
-  ulonglong uVar7;
-  undefined8 unaff_retaddr;
-  void *local_res8;
-  undefined8 *local_res18 [2];
-  short *local_38;
-  longlong local_30;
-
-  local_30 = -1;
-  do {
-    local_30 = local_30 + 1;
-  } while (param_1[local_30] != 0);
-  local_38 = param_1;
-  plVar3 = FUN_180005a3c(DAT_180024a20,(longlong *)&local_res8,(longlong *)&local_38);
-  if (*plVar3 == DAT_180024a20) {
-    local_res8 = (void *)0x0;
-    uVar4 = FUN_18000ce90(param_1,&local_res8);
-    uVar7 = uVar4 & 0xffffffff;
-    if ((int)(uint)uVar4 < 0) {
-      FUN_180006678(unaff_retaddr,0x62,
-                    "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                    ,(uint)uVar4);
-      _Memory = local_res8;
-    }
-    else {
-      puVar5 = FUN_180002654(0x28);
-      if (puVar5 == (undefined8 *)0x0) {
-        FUN_180005968((undefined8 *)0x0);
-        uVar7 = 0x8007000e;
-        _Memory = local_res8;
-      }
-      else {
-        *puVar5 = &PTR_FUN_18001a030;
-        puVar5[1] = 0;
-        puVar5[2] = 0;
-        puVar5[3] = 0;
-        puVar5[4] = 0;
-        puVar6 = puVar5;
-        uVar4 = FUN_18000a630((longlong)puVar5,param_1);
-        uVar7 = uVar4 & 0xffffffff;
-        if ((int)(uint)uVar4 < 0) {
-          FUN_180006678(unaff_retaddr,0x67,
-                        "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                        ,(uint)uVar4);
-          FUN_180005968(puVar5);
-          _Memory = local_res8;
-        }
-        else {
-          *param_2 = (longlong)puVar5;
-          local_res18[0] = puVar5;
-// ... trimmed ...
-```
-
-## Match @ `1800078b7`
-
-- Function: `FUN_180007884`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `33`
-
-```c
-uint FUN_180007884(void)
-
-{
-  uint uVar1;
-  undefined8 uVar2;
-  undefined8 *puVar3;
-  uint uVar4;
-  undefined8 unaff_retaddr;
-  undefined8 local_18 [2];
-
-  puVar3 = local_18;
-  FUN_180005be0(puVar3);
-  DAT_180024220 = 1;
-  uVar1 = FUN_180014f90(puVar3,(RPC_BINDING_VECTOR **)&DAT_18001b760);
-  if ((int)uVar1 < 0) {
-    uVar4 = 0xf8;
-  }
-  else {
-    uVar2 = FUN_180005cfc();
-    uVar1 = (uint)uVar2;
-    if (-1 < (int)uVar1) {
-      FUN_180005c60(local_18);
-      RtlDeleteCriticalSection(&DAT_1800249e0);
-      return uVar1;
-    }
-    uVar4 = 0xfb;
-  }
-  FUN_180006678(unaff_retaddr,uVar4,
-                "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                ,uVar1);
-  FUN_180005c60(local_18);
-  return uVar1;
-}
-```
-
-## Match @ `180007103`
-
-- Function: `FUN_180007080`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `42`
-
-```c
-/* WARNING: Function: _guard_dispatch_icall replaced with injection: guard_dispatch_icall */
-
-ulonglong FUN_180007080(RPC_BINDING_HANDLE param_1,undefined8 *param_2,undefined4 param_3,
-                       undefined8 param_4,undefined8 param_5)
-
-{
-  longlong lVar1;
-  longlong *plVar2;
-  uint uVar3;
-  ulonglong uVar4;
-  ulonglong uVar5;
-  undefined8 unaff_retaddr;
-  undefined8 *local_28 [2];
-  longlong *local_18;
-  undefined4 uStack_10;
-  undefined4 uStack_c;
-
-  local_18 = (longlong *)0x0;
-  local_28[0] = (undefined8 *)0x0;
-  uVar4 = FUN_180005d9c(param_1,'\x01',local_28,(longlong *)&local_18);
-  plVar2 = local_18;
-  uVar5 = uVar4 & 0xffffffff;
-  if ((int)uVar4 < 0) {
-    uVar3 = 0x208;
-  }
-  else {
-    uStack_10 = *(undefined4 *)(param_2 + 1);
-    uStack_c = *(undefined4 *)((longlong)param_2 + 0xc);
-    lVar1 = *local_18;
-    local_18 = (longlong *)*param_2;
-    uVar3 = (**(code **)(lVar1 + 0x40))(plVar2,&local_18,param_3,param_5,param_4);
-    uVar5 = (ulonglong)uVar3;
-    if (-1 < (int)uVar3) goto LAB_180007112;
-    uVar3 = 0x20a;
-  }
-  FUN_180006678(unaff_retaddr,uVar3,
-                "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                ,(uint)uVar5);
-LAB_180007112:
-  FUN_180005984(local_28[0]);
-  return uVar5;
-}
-```
-
-## Match @ `180006943`
-
-- Function: `FUN_1800068e0`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `32`
-
-```c
-/* WARNING: Function: _guard_dispatch_icall replaced with injection: guard_dispatch_icall */
-
-ulonglong FUN_1800068e0(RPC_BINDING_HANDLE param_1,undefined8 param_2,undefined8 param_3)
-
-{
-  uint uVar1;
-  ulonglong uVar2;
-  ulonglong uVar3;
-  undefined8 unaff_retaddr;
-  undefined8 *local_res20;
-  longlong *local_18 [2];
-
-  local_18[0] = (longlong *)0x0;
-  local_res20 = (undefined8 *)0x0;
-  uVar2 = FUN_180005d9c(param_1,'\x01',&local_res20,(longlong *)local_18);
-  uVar3 = uVar2 & 0xffffffff;
-  if ((int)uVar2 < 0) {
-    uVar1 = 0x1d4;
-  }
-  else {
-    uVar1 = (**(code **)(*local_18[0] + 0x30))(local_18[0],param_3,param_2);
-    uVar3 = (ulonglong)uVar1;
-    if (-1 < (int)uVar1) goto LAB_180006952;
-    uVar1 = 0x1d6;
-  }
-  FUN_180006678(unaff_retaddr,uVar1,
-                "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                ,(uint)uVar3);
-LAB_180006952:
-  FUN_180005984(local_res20);
-  return uVar3;
-}
-```
-
-## Match @ `180007574`
-
-- Function: `FUN_180007510`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `40`
-
-```c
-/* WARNING: Function: _guard_dispatch_icall replaced with injection: guard_dispatch_icall */
-
-ulonglong FUN_180007510(RPC_BINDING_HANDLE param_1,undefined4 *param_2)
-
-{
-  uint uVar1;
-  ulonglong uVar2;
-  ulonglong uVar3;
-  undefined8 unaff_retaddr;
-  undefined8 *local_res18;
-  longlong *local_res20;
-  undefined4 local_18;
-  undefined4 uStack_14;
-  undefined4 uStack_10;
-  undefined4 uStack_c;
-
-  local_res20 = (longlong *)0x0;
-  local_res18 = (undefined8 *)0x0;
-  uVar2 = FUN_180005d9c(param_1,'\x01',&local_res18,(longlong *)&local_res20);
-  uVar3 = uVar2 & 0xffffffff;
-  if ((int)uVar2 < 0) {
-    uVar1 = 0x19d;
-  }
-  else {
-    local_18 = *param_2;
-    uStack_14 = param_2[1];
-    uStack_10 = param_2[2];
-    uStack_c = param_2[3];
-    uVar1 = (**(code **)(*local_res20 + 8))(local_res20,&local_18);
-    uVar3 = (ulonglong)uVar1;
-    if (-1 < (int)uVar1) goto LAB_180007583;
-    uVar1 = 0x19f;
-  }
-  FUN_180006678(unaff_retaddr,uVar1,
-                "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                ,(uint)uVar3);
-LAB_180007583:
-  FUN_180005984(local_res18);
-  return uVar3;
-}
-```
-
-## Match @ `1800071b9`
-
-- Function: `FUN_180007140`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `42`
-
-```c
-/* WARNING: Function: _guard_dispatch_icall replaced with injection: guard_dispatch_icall */
-
-ulonglong FUN_180007140(RPC_BINDING_HANDLE param_1,undefined8 *param_2,undefined4 param_3,
-                       undefined8 param_4)
-
-{
-  longlong lVar1;
-  longlong *plVar2;
-  uint uVar3;
-  ulonglong uVar4;
-  ulonglong uVar5;
-  undefined8 unaff_retaddr;
-  undefined8 *local_28 [2];
-  longlong *local_18;
-  undefined4 uStack_10;
-  undefined4 uStack_c;
-
-  local_18 = (longlong *)0x0;
-  local_28[0] = (undefined8 *)0x0;
-  uVar4 = FUN_180005d9c(param_1,'\x01',local_28,(longlong *)&local_18);
-  plVar2 = local_18;
-  uVar5 = uVar4 & 0xffffffff;
-  if ((int)uVar4 < 0) {
-    uVar3 = 599;
-  }
-  else {
-    uStack_10 = *(undefined4 *)(param_2 + 1);
-    uStack_c = *(undefined4 *)((longlong)param_2 + 0xc);
-    lVar1 = *local_18;
-    local_18 = (longlong *)*param_2;
-    uVar3 = (**(code **)(lVar1 + 0x70))(plVar2,&local_18,param_3,param_4);
-    uVar5 = (ulonglong)uVar3;
-    if (-1 < (int)uVar3) goto LAB_1800071c8;
-    uVar3 = 0x259;
-  }
-  FUN_180006678(unaff_retaddr,uVar3,
-                "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                ,(uint)uVar5);
-LAB_1800071c8:
-  FUN_180005984(local_28[0]);
-  return uVar5;
-}
-```
-
-## Match @ `180006dce`
-
-- Function: `FUN_180006d60`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `36`
-
-```c
-/* WARNING: Function: _guard_dispatch_icall replaced with injection: guard_dispatch_icall */
-
-ulonglong FUN_180006d60(RPC_BINDING_HANDLE param_1,undefined8 param_2,undefined4 *param_3)
-
-{
-  uint uVar1;
-  ulonglong uVar2;
-  ulonglong uVar3;
-  undefined8 unaff_retaddr;
-  undefined8 *local_res20;
-  longlong *local_18 [2];
-
-  local_18[0] = (longlong *)0x0;
-  local_res20 = (undefined8 *)0x0;
-  uVar2 = FUN_180005d9c(param_1,'\x01',&local_res20,(longlong *)local_18);
-  uVar3 = uVar2 & 0xffffffff;
-  if ((int)uVar2 < 0) {
-    uVar1 = 0x1a9;
-  }
-  else {
-    *param_3 = 0;
-    param_3[1] = 0;
-    param_3[2] = 0;
-    param_3[3] = 0;
-    uVar1 = (**(code **)(*local_18[0] + 0x28))(local_18[0],param_2,param_3);
-    uVar3 = (ulonglong)uVar1;
-    if (-1 < (int)uVar1) goto LAB_180006ddd;
-    uVar1 = 0x1ae;
-  }
-  FUN_180006678(unaff_retaddr,uVar1,
-                "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                ,(uint)uVar3);
-LAB_180006ddd:
-  FUN_180005984(local_res20);
-  return uVar3;
-}
-```
-
-## Match @ `180005e13`
-
-- Function: `FUN_180005d9c`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-ulonglong FUN_180005d9c(RPC_BINDING_HANDLE param_1,char param_2,undefined8 *param_3,
-                       longlong *param_4)
-
-{
-  uint uVar1;
-  int iVar2;
-  undefined8 *puVar3;
-  ulonglong uVar4;
-  uint uVar5;
-  ulonglong uVar6;
-  undefined8 unaff_retaddr;
-  RPC_BINDING_HANDLE local_res8;
-  char local_48 [8];
-  HANDLE local_40;
-  short *local_38;
-  RPC_BINDING_HANDLE *local_30;
-  undefined1 local_28;
-
-  local_38 = (short *)0x0;
-  local_res8 = param_1;
-  uVar1 = RpcImpersonateClient(param_1);
-  uVar6 = (ulonglong)uVar1;
-  if (uVar1 != 0) {
-    if (0 < (int)uVar1) {
-      uVar6 = (ulonglong)(uVar1 & 0xffff | 0x80070000);
-    }
-    goto LAB_180005f23;
-  }
-  local_40 = (HANDLE)0x0;
-  local_30 = &local_res8;
-  local_28 = 1;
-  uVar1 = FUN_18000601c(&local_40);
-  if ((int)uVar1 < 0) {
-    uVar5 = 0xac;
-LAB_180005e0f:
-    FUN_180006678(unaff_retaddr,uVar5,
-                  "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                  ,uVar1);
-  }
-  else {
-    if (param_2 != '\x01') {
-LAB_180005ea0:
-      uVar1 = FUN_180005f4c(local_40,&local_38);
-      if (-1 < (int)uVar1) {
-        FUN_180005cb0(local_40);
-        FUN_180005c14(&local_30);
-        puVar3 = FUN_180002654(0x10);
-        if (puVar3 == (undefined8 *)0x0) {
-          *param_3 = 0;
-        }
-        else {
-          puVar3 = FUN_180005be0(puVar3);
-          *param_3 = puVar3;
-          if (puVar3 != (undefined8 *)0x0) {
-            uVar4 = FUN_18000606c(local_38,param_4);
-            uVar6 = uVar4 & 0xffffffff;
-            if ((int)(uint)uVar4 < 0) {
-              FUN_180006678(unaff_retaddr,0xc9,
-                            "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-// ... trimmed ...
-```
-
-## Match @ `180005e47`
-
-- Function: `FUN_180005d9c`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-ulonglong FUN_180005d9c(RPC_BINDING_HANDLE param_1,char param_2,undefined8 *param_3,
-                       longlong *param_4)
-
-{
-  uint uVar1;
-  int iVar2;
-  undefined8 *puVar3;
-  ulonglong uVar4;
-  uint uVar5;
-  ulonglong uVar6;
-  undefined8 unaff_retaddr;
-  RPC_BINDING_HANDLE local_res8;
-  char local_48 [8];
-  HANDLE local_40;
-  short *local_38;
-  RPC_BINDING_HANDLE *local_30;
-  undefined1 local_28;
-
-  local_38 = (short *)0x0;
-  local_res8 = param_1;
-  uVar1 = RpcImpersonateClient(param_1);
-  uVar6 = (ulonglong)uVar1;
-  if (uVar1 != 0) {
-    if (0 < (int)uVar1) {
-      uVar6 = (ulonglong)(uVar1 & 0xffff | 0x80070000);
-    }
-    goto LAB_180005f23;
-  }
-  local_40 = (HANDLE)0x0;
-  local_30 = &local_res8;
-  local_28 = 1;
-  uVar1 = FUN_18000601c(&local_40);
-  if ((int)uVar1 < 0) {
-    uVar5 = 0xac;
-LAB_180005e0f:
-    FUN_180006678(unaff_retaddr,uVar5,
-                  "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-                  ,uVar1);
-  }
-  else {
-    if (param_2 != '\x01') {
-LAB_180005ea0:
-      uVar1 = FUN_180005f4c(local_40,&local_38);
-      if (-1 < (int)uVar1) {
-        FUN_180005cb0(local_40);
-        FUN_180005c14(&local_30);
-        puVar3 = FUN_180002654(0x10);
-        if (puVar3 == (undefined8 *)0x0) {
-          *param_3 = 0;
-        }
-        else {
-          puVar3 = FUN_180005be0(puVar3);
-          *param_3 = puVar3;
-          if (puVar3 != (undefined8 *)0x0) {
-            uVar4 = FUN_18000606c(local_38,param_4);
-            uVar6 = uVar4 & 0xffffffff;
-            if ((int)(uint)uVar4 < 0) {
-              FUN_180006678(unaff_retaddr,0xc9,
-                            "onecore\\base\\appmodel\\resourcepolicy\\gameconfigstore\\server\\gameconfigstorerpcserver.cpp"
-// ... trimmed ...
-```
-
-## Match @ `180008a60`
-
-- Function: `FUN_180008a60`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `5`
-
-```c
-wchar_t * FUN_180008a60(void)
-
-{
-  return L"System\\GameConfigStore\\Parents";
-}
-```
-
-## Match @ `180008a50`
-
-- Function: `FUN_180008a50`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `5`
-
-```c
-wchar_t * FUN_180008a50(void)
-
-{
-  return L"System\\GameConfigStore\\Children";
-}
-```

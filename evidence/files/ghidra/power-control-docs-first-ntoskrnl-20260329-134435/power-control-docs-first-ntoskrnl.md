@@ -1,543 +1,333 @@
-# Ghidra String/Xref Export
+# Ghidra Branch Review
 
-- Program: `/C:/Windows/System32/ntoskrnl.exe`
-- Name: `ntoskrnl.exe`
-- Probe: `power-control-docs-first-ntoskrnl`
-- Timestamp: `2026-03-29T11:05:39.871860200Z`
+- Program: `ntoskrnl.exe`
+- Probe: `power-control-docs-first-ntoskrnl-branch-template-refresh`
+- Timestamp: `2026-04-01T04:35:51.554517300Z`
+- PDB source: `C:\Tools\Symbols\power-control-docs-first-ntoskrnl-branch-template-refresh`
 - Patterns: `Class1InitialUnparkCount`, `HibernateEnabled`, `HibernateEnabledDefault`, `LidReliabilityState`, `MfBufferingThreshold`, `PerfCalculateActualUtilization`, `TimerRebaseThresholdOnDripsExit`
 
-## Pattern Summary
+## `Class1InitialUnparkCount`
 
-### Pattern: `Class1InitialUnparkCount`
-
-#### String @ `140c6b248`
+### String @ `140c6b248`
 
 `Class1InitialUnparkCount`
 
-- Reference count: `1`
-- References:
-  - `140c64148` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c64148`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-### Pattern: `HibernateEnabled`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
 
-#### String @ `140028948`
+## `HibernateEnabled`
+
+### String @ `140028948`
 
 `HibernateEnabled`
 
-- Reference count: `1`
-- References:
-  - `140e07500` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140e07500`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-#### String @ `14004902b`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
+
+### String @ `14004902b`
 
 `HibernateEnabled`
 
-- Reference count: `0`
-- No direct references resolved by Ghidra
-
-#### String @ `140c6ada0`
+### String @ `140c6ada0`
 
 `HibernateEnabledDefault`
 
-- Reference count: `1`
-- References:
-  - `140c63728` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c63728`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-### Pattern: `HibernateEnabledDefault`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
 
-#### String @ `140c6ada0`
+## `HibernateEnabledDefault`
+
+### String @ `140c6ada0`
 
 `HibernateEnabledDefault`
 
-- Reference count: `1`
-- References:
-  - `140c63728` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c63728`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-### Pattern: `LidReliabilityState`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
 
-#### String @ `140028a00`
+## `LidReliabilityState`
+
+### String @ `140028a00`
 
 `LidReliabilityState`
 
-- Reference count: `2`
-- References:
-  - `1405cf133` in `FUN_1405cf0ec`
-  - `140747fd8` in `FUN_140747fb8`
+- Function: `PopLidReliabilityInit`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `1405cf133`
+- Register focus: `RBP`, `EAX`, `RDX`, `RCX`, `RAX`, `RSP`
+- Flag focus: `SF`, `ZF`
+- Compare: `1405cf12f  TEST EAX,EAX`
+- Jump: `1405cf131  JS 0x1405cf187`
+- Value mapping: `value=1 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
 
-### Pattern: `MfBufferingThreshold`
+```asm
+; context_before
+1405cf123  MOV DIL,0x1
+1405cf126  MOVUPS xmmword ptr [RBP + -0x20],XMM1
+1405cf12a  CALL 0x14073d560
+1405cf12f  TEST EAX,EAX
+1405cf131  JS 0x1405cf187
+; branch_snippet
+1405cf133  LEA RDX,[0x140028a00]
+1405cf131  JS 0x1405cf187
+1405cf12f  TEST EAX,EAX
+; context_after
+1405cf13a  LEA RCX,[RBP + -0x30]
+1405cf13e  CALL 0x14043ffa0
+1405cf143  MOV RCX,qword ptr [RBP + -0x40]
+1405cf147  LEA RAX,[RBP + -0x38]
+1405cf14b  MOV qword ptr [RSP + 0x28],RAX
+```
 
-#### String @ `140c6b548`
+- Function: `PopSaveLidReliabilityState`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `140747fd8`
+- Register focus: `RSP`, `EAX`, `RDX`, `RCX`, `RAX`
+- Flag focus: `SF`, `ZF`
+- Compare: `140747fd4  TEST EAX,EAX`
+- Jump: `140747fd6  JS 0x140748024`
+- Value mapping: `value=1 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
+
+```asm
+; context_before
+140747fc7  XORPS XMM0,XMM0
+140747fca  MOVUPS xmmword ptr [RSP + 0x30],XMM0
+140747fcf  CALL 0x14073d560
+140747fd4  TEST EAX,EAX
+140747fd6  JS 0x140748024
+; branch_snippet
+140747fd8  LEA RDX,[0x140028a00]
+140747fd6  JS 0x140748024
+140747fd4  TEST EAX,EAX
+; context_after
+140747fdf  LEA RCX,[RSP + 0x30]
+140747fe4  CALL 0x14043ffa0
+140747fe9  MOV RCX,qword ptr [RSP + 0x50]
+140747fee  LEA RAX,[0x140e0b3c8]
+140747ff5  MOV R9D,0x4
+```
+
+## `MfBufferingThreshold`
+
+### String @ `140c6b548`
 
 `MfBufferingThreshold`
 
-- Reference count: `1`
-- References:
-  - `140c63ed8` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c63ed8`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-### Pattern: `PerfCalculateActualUtilization`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
 
-#### String @ `140c6b2e0`
+## `PerfCalculateActualUtilization`
+
+### String @ `140c6b2e0`
 
 `PerfCalculateActualUtilization`
 
-- Reference count: `1`
-- References:
-  - `140c640b8` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c640b8`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-### Pattern: `TimerRebaseThresholdOnDripsExit`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
 
-#### String @ `140c6c980`
+## `TimerRebaseThresholdOnDripsExit`
+
+### String @ `140c6c980`
 
 `TimerRebaseThresholdOnDripsExit`
 
-- Reference count: `1`
-- References:
-  - `140c64ec8` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c64ec8`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-## Match Analysis
-
-## Unresolved Block @ `140c64148`
-
-- Function: `FUN_140c6413e`
-- Forced boundary: `true`
-- Naturally resolved: `false`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_140c6413e(undefined8 param_1,undefined8 param_2)
-
-{
-  char *pcVar1;
-  byte bVar2;
-  byte bVar3;
-  char cVar4;
-  int iVar5;
-  byte *in_RAX;
-  char *pcVar6;
-  char cVar7;
-  byte bVar8;
-  char cVar9;
-  longlong unaff_RBX;
-  longlong unaff_RSI;
-  longlong unaff_retaddr;
-
-  cVar4 = (char)((ulonglong)param_2 >> 8);
-  bVar8 = (byte)((ulonglong)param_1 >> 8);
-  cVar7 = (char)param_1;
-  bVar3 = (byte)in_RAX;
-  *in_RAX = *in_RAX + bVar3;
-  *(byte *)(unaff_RSI + 0x140c6) = *(byte *)(unaff_RSI + 0x140c6) | bVar8;
-  *in_RAX = *in_RAX + bVar3;
-  cVar9 = -0x3a;
-  iVar5 = (int)in_RAX;
-  *(int *)in_RAX = *(int *)in_RAX + iVar5;
-  *in_RAX = *in_RAX + bVar3;
-  *(int *)in_RAX = *(int *)in_RAX + iVar5;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *(byte *)(unaff_retaddr + 0x140c6) = *(byte *)(unaff_retaddr + 0x140c6) | bVar8;
-  bVar2 = *in_RAX;
-  *in_RAX = *in_RAX + bVar3;
-  pcVar1 = (char *)(CONCAT62((int6)((ulonglong)param_2 >> 0x10),CONCAT11(cVar4,0xc6)) + 0x140c6);
-  *pcVar1 = (*pcVar1 - cVar4) - CARRY1(bVar2,bVar3);
-  *in_RAX = *in_RAX + bVar3;
-  *(byte *)(unaff_RBX + -4) = bVar3;
-  *(int *)in_RAX = *(int *)in_RAX + iVar5;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-  *in_RAX = *in_RAX + bVar3;
-// ... trimmed ...
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
 ```
 
-## Unresolved Block @ `140e07500`
-
-- Function: `FUN_140e07510`
-- Forced boundary: `true`
-- Naturally resolved: `false`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `15`
-
-```c
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_140e07510(void)
-
-{
-  char in_AL;
-  undefined7 in_register_00000001;
-
-  *(char *)CONCAT71(in_register_00000001,in_AL) =
-       *(char *)CONCAT71(in_register_00000001,in_AL) + in_AL;
-  *(char *)CONCAT71(in_register_00000001,in_AL) =
-       *(char *)CONCAT71(in_register_00000001,in_AL) + in_AL;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
-}
-```
-
-## Unresolved Block @ `140c63728`
-
-- Function: `FUN_140c6371e`
-- Forced boundary: `true`
-- Naturally resolved: `false`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `49`
-
-```c
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_140c6371e(undefined8 param_1)
-
-{
-  char cVar1;
-  undefined4 in_EAX;
-  int iVar2;
-  undefined4 in_register_00000004;
-  longlong unaff_RSI;
-
-  *(char *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + (char)in_EAX;
-  *(byte *)(unaff_RSI + 0x140c6) = *(byte *)(unaff_RSI + 0x140c6) | (byte)((ulonglong)param_1 >> 8);
-  *(char *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + (char)in_EAX;
-  cVar1 = cRam800000000140c6ad;
-  iVar2 = CONCAT31((int3)((uint)in_EAX >> 8),cRam800000000140c6ad);
-  *(int *)CONCAT44(in_register_00000004,iVar2) =
-       *(int *)CONCAT44(in_register_00000004,iVar2) + iVar2;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-  *(char *)CONCAT44(in_register_00000004,iVar2) =
-       *(char *)CONCAT44(in_register_00000004,iVar2) + cVar1;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
-}
-```
-
-## Match @ `1405cf133`
-
-- Function: `FUN_1405cf0ec`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `44`
-
-```c
-/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
-
-void FUN_1405cf0ec(void)
-
-{
-  int iVar1;
-  bool bVar2;
-  undefined1 auStack_78 [32];
-  undefined4 local_58;
-  undefined4 *local_50;
-  longlong local_48;
-  undefined4 local_40 [2];
-  undefined8 local_38;
-  undefined8 uStack_30;
-  undefined8 local_28;
-  undefined8 uStack_20;
-  undefined4 local_18;
-  ulonglong local_10;
-
-  local_10 = DAT_140e0a580 ^ (ulonglong)auStack_78;
-  local_48 = 0;
-  local_40[0] = 0;
-  local_38 = 0;
-  uStack_30 = 0;
-  local_18 = 0;
-  bVar2 = true;
-  local_28 = 0;
-  uStack_20 = 0;
-  iVar1 = FUN_14073d560(0,&local_48);
-  if (-1 < iVar1) {
-    RtlInitUnicodeString(&local_38,L"LidReliabilityState");
-    local_50 = local_40;
-    local_58 = 0x14;
-    iVar1 = ZwQueryValueKey(local_48,&local_38,2,&local_28);
-    if (-1 < iVar1) {
-      bVar2 = uStack_20._4_1_ != '\0';
-    }
-    if (local_48 != 0) {
-      ZwClose(local_48);
-    }
-  }
-  FUN_140747ee0(bVar2);
-  return;
-}
-```
-
-## Match @ `140747fd8`
-
-- Function: `FUN_140747fb8`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `21`
-
-```c
-void FUN_140747fb8(void)
-
-{
-  int iVar1;
-  longlong local_res8 [4];
-  undefined8 local_18;
-  undefined8 uStack_10;
-
-  local_res8[0] = 0;
-  local_18 = 0;
-  uStack_10 = 0;
-  iVar1 = FUN_14073d560(0,local_res8);
-  if (-1 < iVar1) {
-    RtlInitUnicodeString(&local_18,L"LidReliabilityState");
-    ZwSetValueKey(local_res8[0],&local_18,0,4,&DAT_140e0b3c8,4);
-    if (local_res8[0] != 0) {
-      ZwClose(local_res8[0]);
-    }
-  }
-  return;
-}
-```
-
-## Unresolved Block @ `140c63ed8`
-
-- Function: `FUN_140c63ece`
-- Forced boundary: `true`
-- Naturally resolved: `false`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `41`
-
-```c
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_140c63ece(undefined8 param_1)
-
-{
-  char cVar1;
-  int *in_RAX;
-  byte bVar2;
-  longlong unaff_RSI;
-  int *unaff_retaddr;
-  undefined8 uStackX_8;
-
-  bVar2 = (byte)((ulonglong)param_1 >> 8);
-  cVar1 = (char)in_RAX;
-  *(char *)in_RAX = (char)*in_RAX + cVar1;
-  *(byte *)(unaff_RSI + 0x140c6) = *(byte *)(unaff_RSI + 0x140c6) | bVar2;
-  *(char *)in_RAX = (char)*in_RAX + cVar1;
-  *in_RAX = *in_RAX + (int)in_RAX;
-  *(char *)in_RAX = (char)*in_RAX + cVar1;
-  *unaff_retaddr = *unaff_retaddr + (int)unaff_retaddr;
-  cVar1 = (char)unaff_retaddr;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *(byte *)(uStackX_8 + 0x140c6) = *(byte *)(uStackX_8 + 0x140c6) | bVar2;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-  *unaff_retaddr = *unaff_retaddr + (int)unaff_retaddr;
-  *(char *)unaff_retaddr = (char)*unaff_retaddr + cVar1;
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
-}
-```
-
-## Unresolved Block @ `140c640b8`
-
-- Function: `FUN_140c640ae`
-- Forced boundary: `true`
-- Naturally resolved: `false`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Control flow encountered bad instruction data */
-/* WARNING: Instruction at (ram,0x000140c64133) overlaps instruction at (ram,0x000140c64132)
-    */
-
-void FUN_140c640ae(longlong param_1,longlong param_2)
-
-{
-  char *pcVar1;
-  byte bVar2;
-  char cVar3;
-  int iVar4;
-  int *in_RAX;
-  byte *pbVar5;
-  char *pcVar6;
-  longlong lVar7;
-  char cVar9;
-  byte bVar10;
-  longlong unaff_RBX;
-  longlong unaff_RSI;
-  longlong unaff_retaddr;
-  byte bVar8;
-
-  bVar10 = (byte)((ulonglong)param_2 >> 8);
-  while( true ) {
-    cVar3 = (char)in_RAX;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(byte *)(unaff_RSI + 0x140c6) =
-         *(byte *)(unaff_RSI + 0x140c6) | (byte)((ulonglong)param_1 >> 8);
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    lVar7 = param_1 + -1;
-    bVar8 = (byte)((ulonglong)lVar7 >> 8);
-    if (lVar7 == 0 || (char)*in_RAX == '\0') break;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(byte *)(unaff_RSI + 0x140c6) = *(byte *)(unaff_RSI + 0x140c6) | bVar8;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(byte *)(unaff_RBX + 0x140c6) = *(byte *)(unaff_RBX + 0x140c6) & bVar10;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    in_RAX = (int *)((ulonglong)in_RAX | 0x41);
-    *in_RAX = *in_RAX + (int)in_RAX;
-    cVar3 = (char)in_RAX;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-    *(char *)in_RAX = (char)*in_RAX + cVar3;
-// ... trimmed ...
-```
-
-## Unresolved Block @ `140c64ec8`
-
-- Function: `FUN_140c64ebe`
-- Forced boundary: `true`
-- Naturally resolved: `false`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Control flow encountered bad instruction data */
-
-void FUN_140c64ebe(ulonglong param_1,longlong param_2)
-
-{
-  byte bVar1;
-  byte bVar2;
-  char cVar3;
-  uint in_EAX;
-  undefined4 in_register_00000004;
-  byte bVar5;
-  longlong lVar4;
-  longlong unaff_RBX;
-  longlong unaff_RSI;
-
-  bVar2 = (byte)in_EAX;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  bVar5 = (byte)(param_1 >> 8);
-  *(byte *)(unaff_RSI + 0x140c6) = *(byte *)(unaff_RSI + 0x140c6) | bVar5;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(uint *)CONCAT44(in_register_00000004,in_EAX) =
-       *(int *)CONCAT44(in_register_00000004,in_EAX) + in_EAX;
-  bVar1 = *(byte *)CONCAT44(in_register_00000004,in_EAX);
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(char *)(unaff_RBX + -4) = (*(char *)(unaff_RBX + -4) - bVar2) - CARRY1(bVar1,bVar2);
-  *(uint *)CONCAT44(in_register_00000004,in_EAX) =
-       *(int *)CONCAT44(in_register_00000004,in_EAX) + in_EAX;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-  *(byte *)(unaff_RSI + 0x140c6) = *(byte *)(unaff_RSI + 0x140c6) | bVar5;
-  *(byte *)CONCAT44(in_register_00000004,in_EAX) =
-       *(char *)CONCAT44(in_register_00000004,in_EAX) + bVar2;
-// ... trimmed ...
-```

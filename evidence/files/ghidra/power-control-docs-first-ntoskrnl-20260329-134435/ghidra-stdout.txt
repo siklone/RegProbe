@@ -1,64 +1,62 @@
-INFO  Using log config file: jar:file:/C:/Tools/Ghidra/ghidra_12.0.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)
-INFO  Using log file: <local-path>
-INFO  Loading user preferences: <local-path>
-INFO  Searching for classes... (ClassSearcher)
-INFO  Class search complete (1280 ms) (ClassSearcher)
-INFO  Initializing SSL Context (DefaultSSLContextInitializer)
-INFO  Initializing Random Number Generator... (SecureRandomFactory)
-INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)
-INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)
-INFO  Starting cache cleanup: <local-path>
-INFO  Finished cache cleanup, estimated storage used: 0 (FileCacheMaintenanceDaemon)
-INFO  Headless startup complete (32618 ms) (AnalyzeHeadless)
-INFO  Class searcher loaded 58 extension points (18 false positives) (ClassSearcher)
+INFO  Using log config file: jar:file:/C:/Tools/Ghidra/ghidra_12.0.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\application.log (LoggingInitialization)  
+INFO  Loading user preferences: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (985 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (2686 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 58 extension points (18 false positives) (ClassSearcher)  
 INFO  HEADLESS Script Paths:
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-    <local-path>
-INFO  HEADLESS: execution starts (HeadlessAnalyzer)
-INFO  Creating temporary project: <local-path>
-INFO  Creating project: <local-path>
-INFO  REPORT: Processing input files:  (HeadlessAnalyzer)
-INFO       project: <local-path>
-INFO  IMPORTING: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
-INFO  Using Loader: Portable Executable (PE) (ProgramLoader)
-INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)
-INFO  Using Library Search Path: [., <local-path>
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\8051\ghidra_scripts
+    C:\Tools\GhidraV32Probes\power-control-docs-first-ntoskrnl-branch-template-refresh-20260401-072204\scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BSim\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PDB\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Jython\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FileFormats\ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating temporary project: C:\Tools\GhidraProjects\Probe_power_control_docs_first_ntoskrnl_branch_template_refresh (HeadlessAnalyzer)  
+INFO  Creating project: C:\Tools\GhidraProjects\Probe_power_control_docs_first_ntoskrnl_branch_template_refresh (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: C:\Tools\GhidraProjects\Probe_power_control_docs_first_ntoskrnl_branch_template_refresh (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)  
+INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)  
+INFO  Using Library Search Path: [., C:\Windows\SysWOW64, C:\Tools\Java\jdk-21.0.10+7\bin, C:\Windows\Sun\Java\bin, C:\Windows\system32, C:\Windows, C:\Windows\System32\Wbem, C:\Windows\System32\WindowsPowerShell\v1.0\, C:\Tools\Scripts, C:\Tools\Sysinternals, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit, C:\Tools\DotNetSDK\8.0.416, C:\Tools\WindowsTerminal\terminal-1.24.10621.0, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\, C:\Program Files\dotnet\, C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps, C:\Users\Administrator\.dotnet\tools] (ProgramLoader)  
 INFO  Additional info:
 Loading file:///C:/Windows/System32/ntoskrnl.exe?MD5=b37e6e677de4e6412c2020ab35be2322...
 ------------------------------------------------
 
 Searching 15 paths for library BOOTVID.DLL...
 Loading file:///C:/Windows/System32/BOOTVID.DLL?MD5=583f1fac9ba692ccf70bcd87d25f7dad...
-Created exports file: <local-path>
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\bootvid.exports
 Library not saved to project.
 ------------------------------------------------
 
 Searching 15 paths for library CI.DLL...
 Loading file:///C:/Windows/System32/ci.dll?MD5=b4b65a3c19251eb589050f6a6857763c...
 [ci.dll]: failed to create WEVTResource at 1800f37c8: Failed to resolve data length for WEVTResource
-Created exports file: <local-path>
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\ci.exports
 Library not saved to project.
 ------------------------------------------------
 
@@ -128,7 +126,7 @@ Library not found.
 
 Searching 15 paths for library KDCOM.DLL...
 Loading file:///C:/Windows/System32/kdcom.dll?MD5=23a7e41fe80788922ed4acab18ecd9e7...
-Created exports file: <local-path>
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\kdcom.exports
 Library not saved to project.
 ------------------------------------------------
 
@@ -139,21 +137,21 @@ Library not found.
 Searching 15 paths for library PSHED.DLL...
 Loading file:///C:/Windows/System32/PSHED.DLL?MD5=467d490720309451176caf5e0268a731...
 Index 5 out of bounds for length 5
-Created exports file: <local-path>
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\pshed.exports
 Library not saved to project.
 ------------------------------------------------
 
 Searching 15 paths for library SYMCRYPTK.DLL...
 Loading file:///C:/Windows/System32/symcryptk.dll?MD5=499c6a4eaba6b0e07ea3f0b6612cf7d2...
-Created exports file: <local-path>
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\symcryptk.exports
 Library not saved to project.
 ------------------------------------------------
 
-Applying cached symbols from SYMCRYPTK.DLL
-Applying cached symbols from PSHED.DLL
-Applying cached symbols from BOOTVID.DLL
-Applying cached symbols from KDCOM.DLL
-Applying cached symbols from CI.DLL
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\symcryptk.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\pshed.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\bootvid.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\kdcom.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\ci.exports
 Linking the External Programs of 'ntoskrnl.exe' to imported libraries...
   [EXT-MS-WIN-NTOS-PROCESSPARAMETERS-L1-1-0.DLL] -> not found in project
   [SYMCRYPTK.DLL] -> not found in project
@@ -179,73 +177,150 @@ Linking the External Programs of 'ntoskrnl.exe' to imported libraries...
   [EXT-MS-WIN-NTOS-GLOBMERGER-L1-1-0.DLL] -> not found in project
 ------------------------------------------------
 
- (ProgramLoader)
-INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)
-INFO  ANALYZING all memory and code: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
-WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: <local-path>
-WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: <local-path>
-INFO  Skipping PDB processing: failed to locate PDB file in configured locations (PdbUniversalAnalyzer)
-INFO  Use a script to set the PDB file location. I.e.,
-    PdbAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb")); or
-    PdbUniversalAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb"));
-Or set the symbol server search configuration using:    PdbPlugin.saveSymbolServerServiceConfig(...);
- This must be done using a pre-script (prior to analysis). (PdbUniversalAnalyzer)
-INFO  Packed database cache: <local-path>
-INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)
+ (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: SetPdbSymbolRepository.java 'C:\Tools\Symbols\power-control-docs-first-ntoskrnl-branch-template-refresh'  (HeadlessAnalyzer)  
+INFO  SCRIPT: C:\Tools\GhidraV32Probes\power-control-docs-first-ntoskrnl-branch-template-refresh-20260401-072204\scripts\SetPdbSymbolRepository.java (HeadlessAnalyzer)  
+ERROR PDB.Symbol Repository Path could not be found for this program. (SetPdbSymbolRepository)  
+INFO  SetPdbSymbolRepository.java> Configured PDB.Symbol Repository Path = C:\Tools\Symbols\power-control-docs-first-ntoskrnl-branch-template-refresh (GhidraScript)  
+INFO  SetPdbSymbolRepository.java> Configured explicit PDB file = C:\Tools\Symbols\power-control-docs-first-ntoskrnl-branch-template-refresh\ntkrnlmp.pdb\E6426A07C26E66F8EB8594621A7B273B1\ntkrnlmp.pdb (GhidraScript)  
+INFO  ANALYZING all memory and code: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+INFO  PDB analyzer parsing file: C:\Tools\Symbols\power-control-docs-first-ntoskrnl-branch-template-refresh\ntkrnlmp.pdb\E6426A07C26E66F8EB8594621A7B273B1\ntkrnlmp.pdb (PdbUniversalAnalyzer)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ETW_SILO_TRACING_BLOCK (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001199> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001189> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001184> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001155> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_0000114C> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001142> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001140> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_0000113C> (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KSCHEDULING_GROUP (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_DEVICE_OBJECT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ETW_APC_POOL (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ETW_STACK_TRACE_BLOCK (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_WMI_LOGGER_CONTEXT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MMSUPPORT_SHARED (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MMSUPPORT_FLAGS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_SLIST_ENTRY (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_HANDLE_TABLE_FREE_LIST (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_EPROCESS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KPRCB (CppCompositeType)  
+WARN  PDB UNION reconstruction failed to align /ntkrnlmp.pdb/<unnamed-tag_00001236> (CompositeTypeApplier)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ACPI_SRAT_ENTRY (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_INTERRUPT_TARGET (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_WHEA_RECOVERY_CONTEXT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KUSER_SHARED_DATA (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KPCR (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_GENERAL_LOOKASIDE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_KSHARED_READY_QUEUE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_SYMCRYPT_ENTROPY_ACCUMULATOR_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ENODE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MMPAGING_FILE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_VISIBLE_PARTITION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_SLABS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_ACCESS_LOG_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_PAGE_LISTS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_SEGMENTS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_NODE_SLAB_IDENTITY_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_NODE_FREE_PAGE_INFORMATION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_NODE_INFORMATION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_CORE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MMCLONE_DESCRIPTOR (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_AWEINFO (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_CM_KEY_NODE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_DBGKD_ANY_CONTROL_SET (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_DBGKD_CONTINUE2 (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_CC_PARTITION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_PRIVATE_VOLUME_CACHEMAP (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_HEAP_SEG_CONTEXT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_RTLP_HP_HEAP_GLOBALS (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_HEAP_VS_AFFINITY_SLOT (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_RTL_LOOKASIDE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_HEAP_UNPACKED_ENTRY (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_BLOB (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ALPC_COMPLETION_LIST_HEADER (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_IOP_IRP_EXTENSION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_POOL_LIMIT_TABLE_ENTRY (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_VF_TARGET_VERIFIED_DRIVER_DATA (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_VISIBLE_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_SYSTEM_TRIM_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PAGING_IO_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_IO_PAGE_STATE_CELL (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_IO_PAGE_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_ALIGNED_SLIST (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_STANDBY_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_PARTITION_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_SYSTEM_NODE_INFORMATION (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_HARDWARE_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_SYSTEM_IMAGE_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_MI_SECTION_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_VF_AVL_TABLE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_EX_POOL_HEAP_MANAGER_STATE (CppCompositeType)  
+WARN  PDB STRUCTURE reconstruction failed to align /ntkrnlmp.pdb/_ETW_WMITRACE_WORK (CppCompositeType)  
+INFO  resolveCount: 6568 (DefaultPdbApplicator)  
+INFO  conflictCount: 7 (DefaultPdbApplicator)  
+INFO  PDB Types and Main Symbols Processing Terminated Normally (DefaultPdbApplicator)  
+INFO  PDB Universal: scheduling PDB Function Internals Analysis (PdbUniversalAnalyzer)  
+WARN  Decompiling 14027a3c0, pcode error at 14027a736: Unable to resolve constructor at 14027a736 (DecompileCallback)  
+INFO  Packed database cache: C:\Users\Administrator\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)  
+ERROR Could not create Data at address 140e0e6a0 (DemangledVariable)  
+INFO  PDB Function Internals Processing Terminated Normally (DefaultPdbApplicator)  
+INFO  PDB Applicator Reporting (DefaultPdbApplicator)  
+INFO  ===Begin PdbApplicatorMetrics Report===
+Could not apply one or more instances of an unsupported PDB data type: StringIdMsType
+Could not apply one or more instances of an unsupported PDB data type: BuildInfoMsType
+Could not apply one or more instances of an unsupported PDB data type: FunctionIdMsType
+Could not apply one or more instances of an unsupported PDB symbol type: AnnotationMsSymbol
+Could not nest one or more instances of a PDB symbol type: AnnotationMsSymbol
+====End PdbApplicatorMetrics Report====
+ (PdbApplicatorMetrics)  
+INFO  PDB Applicator Reporting Terminated Normally (DefaultPdbApplicator)  
 INFO  -----------------------------------------------------
-    ASCII Strings                              2.243 secs
-    Apply Data Archives                        4.943 secs
-    Call Convention ID                         0.843 secs
-    Call-Fixup Installer                       0.273 secs
-    Create Address Tables                      2.198 secs
-    Create Address Tables - One Time           7.139 secs
-    Create Function                            1.752 secs
-    Data Reference                             3.856 secs
-    Decompiler Switch Analysis                89.896 secs
-    Demangler Microsoft                        0.436 secs
-    Disassemble                                0.169 secs
-    Disassemble Entry Points                  63.741 secs
-    Embedded Media                             0.127 secs
-    External Entry References                  0.054 secs
-    Function ID                               42.647 secs
-    Function Start Search                      0.378 secs
-    Non-Returning Functions - Discovered     421.755 secs
-    Non-Returning Functions - Known            0.100 secs
-    PDB Universal                              0.672 secs
-    Reference                                  4.784 secs
-    Scalar Operand References                 17.401 secs
-    Shared Return Calls                        4.565 secs
-    Stack                                    269.435 secs
-    Subroutine References                      2.887 secs
-    Subroutine References - One Time           0.008 secs
-    Windows x86 PE Exception Handling          0.170 secs
-    Windows x86 PE RTTI Analyzer               0.120 secs
-    Windows x86 Thread Environment Block (TEB) Analyzer     0.081 secs
-    WindowsResourceReference                   1.448 secs
-    x86 Constant Reference Analyzer          202.342 secs
+    ASCII Strings                              1.170 secs
+    Apply Data Archives                        0.757 secs
+    Call Convention ID                         0.837 secs
+    Call-Fixup Installer                       0.219 secs
+    Create Address Tables                      1.911 secs
+    Create Address Tables - One Time           5.849 secs
+    Create Function                            1.336 secs
+    Data Reference                             3.358 secs
+    Decompiler Switch Analysis               158.985 secs
+    Demangler Microsoft                        3.344 secs
+    Disassemble Entry Points                  57.289 secs
+    Disassemble Entry Points - One Time        0.120 secs
+    Embedded Media                             0.143 secs
+    External Entry References                  0.047 secs
+    Function ID                               16.449 secs
+    Function Start Search                      0.295 secs
+    Non-Returning Functions - Discovered      12.634 secs
+    Non-Returning Functions - Known            0.081 secs
+    PDB Universal                              7.757 secs
+    PDB Universal Function Internals           0.240 secs
+    PDB Universal Reporting                    0.002 secs
+    Reference                                  3.711 secs
+    Scalar Operand References                 15.317 secs
+    Shared Return Calls                        3.969 secs
+    Stack                                    270.225 secs
+    Subroutine References                      2.613 secs
+    Subroutine References - One Time           0.009 secs
+    Windows x86 PE Exception Handling          0.036 secs
+    Windows x86 PE RTTI Analyzer               0.122 secs
+    Windows x86 Thread Environment Block (TEB) Analyzer     0.024 secs
+    WindowsResourceReference                   0.517 secs
+    x86 Constant Reference Analyzer          212.464 secs
 -----------------------------------------------------
-     Total Time   1146 secs
+     Total Time   781 secs
 -----------------------------------------------------
- (AutoAnalysisManager)
-INFO  REPORT: Analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
-INFO  REPORT: Execute script: ExportStringXrefs.java '<local-path>
-INFO  SCRIPT: <local-path>
-INFO  ExportStringXrefs.java> MATCH 140c64148 <no function> -> fallback (GhidraScript)
-WARN  Decompiling 140c6413e, pcode error at 140c64208: Unable to resolve constructor at 140c64208 (DecompileCallback)
-INFO  ExportStringXrefs.java> MATCH 140e07500 <no function> -> fallback (GhidraScript)
-WARN  Decompiling 140e07510, pcode error at 140e07514: Unable to resolve constructor at 140e07514 (DecompileCallback)
-INFO  ExportStringXrefs.java> MATCH 140c63728 <no function> -> fallback (GhidraScript)
-WARN  Decompiling 140c6371e, pcode error at 140c63750: Unable to resolve constructor at 140c63750 (DecompileCallback)
-INFO  ExportStringXrefs.java> MATCH 1405cf133 in FUN_1405cf0ec (GhidraScript)
-INFO  ExportStringXrefs.java> MATCH 140747fd8 in FUN_140747fb8 (GhidraScript)
-INFO  ExportStringXrefs.java> MATCH 140c63ed8 <no function> -> fallback (GhidraScript)
-WARN  Decompiling 140c63ece, pcode error at 140c63f10: Unable to resolve constructor at 140c63f10 (DecompileCallback)
-INFO  ExportStringXrefs.java> MATCH 140c640b8 <no function> -> fallback (GhidraScript)
-WARN  Decompiling 140c640ae, pcode error at 140c64208: Unable to resolve constructor at 140c64208 (DecompileCallback)
-INFO  ExportStringXrefs.java> MATCH 140c64ec8 <no function> -> fallback (GhidraScript)
-WARN  Decompiling 140c64ebe, pcode error at 140c64f50: Unable to resolve constructor at 140c64f50 (DecompileCallback)
-INFO  ANALYZING changes made by post scripts: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
-INFO  REPORT: Post-analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)
-INFO  /ntoskrnl.exe: file created (Administrator) (LocalFileSystem)
-INFO  REPORT: Save succeeded for: /ntoskrnl.exe (Probe_power_control_docs_first_ntoskrnl:/ntoskrnl.exe) (HeadlessAnalyzer)
-INFO  REPORT: Import succeeded (HeadlessAnalyzer)
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: ExportBranchAnalysis.java 'C:\Tools\GhidraV32Probes\power-control-docs-first-ntoskrnl-branch-template-refresh-20260401-072204\ghidra-matches.md' 'C:\Tools\GhidraV32Probes\power-control-docs-first-ntoskrnl-branch-template-refresh-20260401-072204\evidence.json' 'power-control-docs-first-ntoskrnl-branch-template-refresh' 'C:\Tools\Symbols\power-control-docs-first-ntoskrnl-branch-template-refresh' 'Class1InitialUnparkCount' 'HibernateEnabled' 'HibernateEnabledDefault' 'LidReliabilityState' 'MfBufferingThreshold' 'PerfCalculateActualUtilization' 'TimerRebaseThresholdOnDripsExit'  (HeadlessAnalyzer)  
+INFO  SCRIPT: C:\Tools\GhidraV32Probes\power-control-docs-first-ntoskrnl-branch-template-refresh-20260401-072204\scripts\ExportBranchAnalysis.java (HeadlessAnalyzer)  
+INFO  ANALYZING changes made by post scripts: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  REPORT: Post-analysis succeeded for file: file:///C:/Windows/System32/ntoskrnl.exe (HeadlessAnalyzer)  
+INFO  /ntoskrnl.exe: file created (Administrator) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /ntoskrnl.exe (Probe_power_control_docs_first_ntoskrnl_branch_template_refresh:/ntoskrnl.exe) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

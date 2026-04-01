@@ -1,233 +1,233 @@
-# Ghidra String/Xref Export
+# Ghidra Branch Review
 
-- Program: `/C:/Windows/System32/ntoskrnl.exe`
-- Name: `ntoskrnl.exe`
-- Probe: `kernel-power-existing-ntoskrnl`
-- Timestamp: `2026-03-27T21:54:48.090218500Z`
+- Program: `ntoskrnl.exe`
+- Probe: `kernel-power-existing-ntoskrnl-branch-template-refresh-branch-template-refresh`
+- Timestamp: `2026-04-01T03:47:48.265287100Z`
+- PDB source: `C:\Tools\Symbols\kernel-power-existing-ntoskrnl-branch-template-refresh-branch-template-refresh`
 - Patterns: `WatchdogResumeTimeout`, `WatchdogSleepTimeout`, `AdditionalCriticalWorkerThreads`, `AdditionalDelayedWorkerThreads`, `UuidSequenceNumber`, `AllowRemoteDASD`
 
-## Pattern Summary
+## `WatchdogResumeTimeout`
 
-### Pattern: `WatchdogResumeTimeout`
-
-#### String @ `140c6a618`
+### String @ `140c6a618`
 
 `WatchdogResumeTimeout`
 
-- Reference count: `1`
-- References:
-  - `140c63608` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c63608`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-### Pattern: `WatchdogSleepTimeout`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
 
-#### String @ `140c6a648`
+## `WatchdogSleepTimeout`
+
+### String @ `140c6a648`
 
 `WatchdogSleepTimeout`
 
-- Reference count: `1`
-- References:
-  - `140c635d8` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c635d8`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-### Pattern: `AdditionalCriticalWorkerThreads`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
 
-#### String @ `140c6a210`
+## `AdditionalCriticalWorkerThreads`
+
+### String @ `140c6a210`
 
 `AdditionalCriticalWorkerThreads`
 
-- Reference count: `1`
-- References:
-  - `140c62b88` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c62b88`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-### Pattern: `AdditionalDelayedWorkerThreads`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
 
-#### String @ `140c6a1c8`
+## `AdditionalDelayedWorkerThreads`
+
+### String @ `140c6a1c8`
 
 `AdditionalDelayedWorkerThreads`
 
-- Reference count: `1`
-- References:
-  - `140c62bb8` in `<no function>`
+- Function: `<no function>`
+- Function source: `unresolved`
+- Function confidence: `string_only_review`
+- Address: `140c62bb8`
+- Register focus: `RAX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `trap/fault-adjacent block detected; control-flow may be misleading.`
+- Stack note: `no obvious stack-relative access in the bounded context.`
+- Exception gate: `trap-or-fault-adjacent instructions present; control-flow may be misleading.`
+- Heuristic score: `0`
+- Heuristic reasons: `exception/trap gate forced review-only`
+- Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
+- Unclear: `true`
 
-### Pattern: `UuidSequenceNumber`
+```asm
+; context_before
+140c618b1  HLT
+140c619a8  ADD byte ptr CS:[RAX],DH
+140c619ab  ADD byte ptr [RAX],AL
+140c619ad  ADD byte ptr [RAX],AL
+140c619af  ADD byte ptr [RAX],DL
+; branch_snippet
+140c619b1  INT1
+; context_after
+```
 
-#### String @ `1400387d8`
+## `UuidSequenceNumber`
+
+### String @ `1400387d8`
 
 `UuidSequenceNumber`
 
-- Reference count: `0`
-- No direct references resolved by Ghidra
+## `AllowRemoteDASD`
 
-### Pattern: `AllowRemoteDASD`
-
-#### String @ `1406b8040`
+### String @ `1406b8040`
 
 `AllowRemoteDASD`
 
-- Reference count: `2`
-- References:
-  - `1404cb643` in `FUN_1404cb634`
-  - `1404cb6b0` in `FUN_1404cb634`
-
-## Match Analysis
-
-## Unresolved Block @ `140c63608`
-
-- Function: `<no function>`
-- Forced boundary: `false`
-- Naturally resolved: `false`
-- Decompile success: `false`
-- Output kind: `disassembly`
-- Output lines: `1`
-
-```asm
-// no disassembly available in range
-```
-
-## Unresolved Block @ `140c635d8`
-
-- Function: `<no function>`
-- Forced boundary: `false`
-- Naturally resolved: `false`
-- Decompile success: `false`
-- Output kind: `disassembly`
-- Output lines: `1`
+- Function: `IopAllowRemoteDASD`
+- Function source: `pdb-symbol`
+- Function confidence: `string_only_review`
+- Address: `1404cb643`
+- Register focus: `RBX`, `RSP`, `RBP`, `EBX`, `RCX`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `unclear`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `35`
+- Heuristic reasons: `pdb-symbol present | stack-relative context detected`
+- Effect: unclear - keep this as review-only until a PDB-backed branch mapping is available.
+- Unclear: `true`
 
 ```asm
-// no disassembly available in range
+; context_before
+1404cb634  MOV qword ptr [RSP + 0x18],RBX
+1404cb639  PUSH RBP
+1404cb63a  MOV RBP,RSP
+1404cb63d  SUB RSP,0x40
+1404cb641  XOR EBX,EBX
+; branch_snippet
+1404cb643  LEA RCX,[0x1406b8040]
+; context_after
+1404cb64a  MOV qword ptr [RBP + 0x10],RBX
+1404cb64e  MOV qword ptr [RBP + 0x18],RBX
+1404cb652  CALL 0x1404fd750
+1404cb657  LEA RCX,[0x1406b7fa0]
+1404cb65e  MOV dword ptr [RBP + -0xc],EBX
 ```
 
-## Unresolved Block @ `140c62b88`
-
-- Function: `<no function>`
-- Forced boundary: `false`
-- Naturally resolved: `false`
-- Decompile success: `false`
-- Output kind: `disassembly`
-- Output lines: `1`
+- Function: `IopAllowRemoteDASD`
+- Function source: `pdb-symbol`
+- Function confidence: `symbolized_branch`
+- Address: `1404cb6b0`
+- Register focus: `EAX`, `RCX`, `RBP`, `R9`, `RDX`, `EBX`
+- Flag focus: `ZF`, `SF`, `CF`, `OF`
+- Compare: `1404cb6bc  TEST EAX,EAX`
+- Jump: `1404cb6be  JS 0x1404cb6e3`
+- Value mapping: `value=1 participates in this conditional block; opposite branch still needs explicit review.`
+- Branch effect: `compare + conditional jump recovered in bounded context.`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `95`
+- Heuristic reasons: `pdb-symbol present | compare+jump survived bounded symbolized review | compare/test anchor found | conditional jump found | value immediate found in bounded block | stack-relative context detected`
+- Effect: PDB-backed function identity, compare/jump structure, and a bounded value map are present.
+- Unclear: `false`
 
 ```asm
-// no disassembly available in range
+; context_before
+1404cb6a1  TEST EAX,EAX
+1404cb6a3  JS 0x1404cb6ec
+1404cb6a5  MOV RCX,qword ptr [RBP + 0x10]
+1404cb6a9  LEA R9,[RBP + 0x18]
+1404cb6ad  XOR R8D,R8D
+; branch_snippet
+1404cb6b0  LEA RDX,[0x1406b8040]
+1404cb6bc  TEST EAX,EAX
+1404cb6be  JS 0x1404cb6e3
+1404cb6c4  CMP dword ptr [RCX + 0xc],EBX
+1404cb6a3  JS 0x1404cb6ec
+1404cb6a1  TEST EAX,EAX
+; context_after
+1404cb6b7  CALL 0x1409b29dc
+1404cb6bc  TEST EAX,EAX
+1404cb6be  JS 0x1404cb6e3
+1404cb6c0  MOV RCX,qword ptr [RBP + 0x18]
+1404cb6c4  CMP dword ptr [RCX + 0xc],EBX
 ```
 
-## Unresolved Block @ `140c62bb8`
-
-- Function: `<no function>`
-- Forced boundary: `false`
-- Naturally resolved: `false`
-- Decompile success: `false`
-- Output kind: `disassembly`
-- Output lines: `1`
-
-```asm
-// no disassembly available in range
-```
-
-## Match @ `1404cb643`
-
-- Function: `FUN_1404cb634`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `43`
-
-```c
-bool FUN_1404cb634(void)
-
-{
-  int iVar1;
-  size_t sVar2;
-  ulonglong uVar3;
-  bool bVar4;
-  undefined8 local_res8;
-  longlong local_res10;
-  short local_18;
-  short local_16;
-  undefined4 local_14;
-  wchar_t *local_10;
-
-  bVar4 = false;
-  local_res8 = 0;
-  local_res10 = 0;
-  wcslen(L"AllowRemoteDASD");
-  local_14 = 0;
-  local_10 = L"\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices"
-  ;
-  sVar2 = wcslen(
-                L"\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices"
-                );
-  uVar3 = sVar2 * 2;
-  if (0xfffd < uVar3) {
-    uVar3 = 0xfffc;
-  }
-  local_18 = (short)uVar3;
-  local_16 = local_18 + 2;
-  iVar1 = FUN_140a74fb0(&local_res8,0,&local_18,0x20019,0);
-  if (-1 < iVar1) {
-    iVar1 = FUN_1409b29dc(local_res8,L"AllowRemoteDASD",0,&local_res10);
-    if (-1 < iVar1) {
-      if (*(int *)(local_res10 + 0xc) != 0) {
-        bVar4 = *(int *)((ulonglong)*(uint *)(local_res10 + 8) + local_res10) != 0;
-      }
-      ExFreePoolWithTag(local_res10,0);
-    }
-    ZwClose(local_res8);
-  }
-  return bVar4;
-}
-```
-
-## Match @ `1404cb6b0`
-
-- Function: `FUN_1404cb634`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `43`
-
-```c
-bool FUN_1404cb634(void)
-
-{
-  int iVar1;
-  size_t sVar2;
-  ulonglong uVar3;
-  bool bVar4;
-  undefined8 local_res8;
-  longlong local_res10;
-  short local_18;
-  short local_16;
-  undefined4 local_14;
-  wchar_t *local_10;
-
-  bVar4 = false;
-  local_res8 = 0;
-  local_res10 = 0;
-  wcslen(L"AllowRemoteDASD");
-  local_14 = 0;
-  local_10 = L"\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices"
-  ;
-  sVar2 = wcslen(
-                L"\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices"
-                );
-  uVar3 = sVar2 * 2;
-  if (0xfffd < uVar3) {
-    uVar3 = 0xfffc;
-  }
-  local_18 = (short)uVar3;
-  local_16 = local_18 + 2;
-  iVar1 = FUN_140a74fb0(&local_res8,0,&local_18,0x20019,0);
-  if (-1 < iVar1) {
-    iVar1 = FUN_1409b29dc(local_res8,L"AllowRemoteDASD",0,&local_res10);
-    if (-1 < iVar1) {
-      if (*(int *)(local_res10 + 0xc) != 0) {
-        bVar4 = *(int *)((ulonglong)*(uint *)(local_res10 + 8) + local_res10) != 0;
-      }
-      ExFreePoolWithTag(local_res10,0);
-    }
-    ZwClose(local_res8);
-  }
-  return bVar4;
-}
-```

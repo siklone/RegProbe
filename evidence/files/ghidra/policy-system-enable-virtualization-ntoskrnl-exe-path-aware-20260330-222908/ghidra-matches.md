@@ -1,476 +1,230 @@
-# Ghidra String/Xref Export
+# Ghidra Branch Review
 
-- Program: `/C:/Windows/System32/ntoskrnl.exe`
-- Name: `ntoskrnl.exe`
-- Probe: `policy-system-enable-virtualization-ntoskrnl-exe-path-aware`
-- Timestamp: `2026-03-30T19:55:28.038926200Z`
+- Program: `ntoskrnl.exe`
+- Probe: `policy-system-enable-virtualization-ntoskrnl-exe-path-aware-branch-template-refresh`
+- Timestamp: `2026-04-01T04:21:36.052901800Z`
+- PDB source: `C:\Tools\Symbols\policy-system-enable-virtualization-ntoskrnl-exe-path-aware-branch-template-refresh`
 - Patterns: `EnableVirtualization`, `EnableLUA`, `EnableInstallerDetection`
 
-## Pattern Summary
+## `EnableVirtualization`
 
-### Pattern: `EnableVirtualization`
-
-#### String @ `140adf610`
+### String @ `140adf610`
 
 `EnableVirtualization`
 
-- Reference count: `2`
-- References:
-  - `140761e9d` in `FUN_140761df8`
-  - `140761ead` in `FUN_140761df8`
+- Function: `PsBootPhaseComplete`
+- Function source: `pdb-symbol`
+- Function confidence: `string_only_review`
+- Address: `140761e9d`
+- Register focus: `R14`, `ESI`, `RAX`, `RBP`, `RSP`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `unclear`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `35`
+- Heuristic reasons: `pdb-symbol present | stack-relative context detected`
+- Effect: unclear - keep this as review-only until a PDB-backed branch mapping is available.
+- Unclear: `true`
 
-### Pattern: `EnableLUA`
+```asm
+; context_before
+140761e87  LEA ESI,[R14 + 0x30]
+140761e8b  LEA RAX,[0x140adf5f0]
+140761e92  MOV dword ptr [RBP + -0x54],R14D
+140761e96  MOV qword ptr [RBP + -0x28],RAX
+140761e9a  XORPS XMM0,XMM0
+; branch_snippet
+140761e9d  LEA RAX,[0x140adf610]
+; context_after
+140761ea4  MOV qword ptr [RSP + 0x70],0x980096
+140761ead  MOV qword ptr [RBP + -0x10],RAX
+140761eb1  LEA RAX,[0x140adf640]
+140761eb8  MOV qword ptr [RBP + 0x8],RAX
+140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0
+```
 
-#### String @ `140adf5f0`
+- Function: `PsBootPhaseComplete`
+- Function source: `pdb-symbol`
+- Function confidence: `string_only_review`
+- Address: `140761ead`
+- Register focus: `RBP`, `RAX`, `RSP`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `unclear`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `35`
+- Heuristic reasons: `pdb-symbol present | stack-relative context detected`
+- Effect: unclear - keep this as review-only until a PDB-backed branch mapping is available.
+- Unclear: `true`
+
+```asm
+; context_before
+140761e92  MOV dword ptr [RBP + -0x54],R14D
+140761e96  MOV qword ptr [RBP + -0x28],RAX
+140761e9a  XORPS XMM0,XMM0
+140761e9d  LEA RAX,[0x140adf610]
+140761ea4  MOV qword ptr [RSP + 0x70],0x980096
+; branch_snippet
+140761ead  MOV qword ptr [RBP + -0x10],RAX
+; context_after
+140761eb1  LEA RAX,[0x140adf640]
+140761eb8  MOV qword ptr [RBP + 0x8],RAX
+140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0
+140761ec0  MOV qword ptr [RBP + -0x80],0x30002e
+140761ec8  MOV dword ptr [RBP + -0x30],0x140012
+```
+
+## `EnableLUA`
+
+### String @ `140adf5f0`
 
 `EnableLUA`
 
-- Reference count: `2`
-- References:
-  - `140761e8b` in `FUN_140761df8`
-  - `140761e96` in `FUN_140761df8`
+- Function: `PsBootPhaseComplete`
+- Function source: `pdb-symbol`
+- Function confidence: `string_only_review`
+- Address: `140761e8b`
+- Register focus: `RDX`, `RAX`, `RBP`, `R14`, `ESI`, `RSP`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `unclear`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `35`
+- Heuristic reasons: `pdb-symbol present | stack-relative context detected`
+- Effect: unclear - keep this as review-only until a PDB-backed branch mapping is available.
+- Unclear: `true`
 
-### Pattern: `EnableInstallerDetection`
+```asm
+; context_before
+140761e71  LEA RDX,[0x140adf680]
+140761e78  LEA RAX,[0x140adf5c0]
+140761e7f  MOV dword ptr [RBP + -0x6c],R14D
+140761e83  MOV qword ptr [RBP + -0x78],RAX
+140761e87  LEA ESI,[R14 + 0x30]
+; branch_snippet
+140761e8b  LEA RAX,[0x140adf5f0]
+; context_after
+140761e92  MOV dword ptr [RBP + -0x54],R14D
+140761e96  MOV qword ptr [RBP + -0x28],RAX
+140761e9a  XORPS XMM0,XMM0
+140761e9d  LEA RAX,[0x140adf610]
+140761ea4  MOV qword ptr [RSP + 0x70],0x980096
+```
 
-#### String @ `140adf640`
+- Function: `PsBootPhaseComplete`
+- Function source: `pdb-symbol`
+- Function confidence: `string_only_review`
+- Address: `140761e96`
+- Register focus: `RBP`, `RAX`, `R14`, `ESI`, `RSP`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `unclear`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `35`
+- Heuristic reasons: `pdb-symbol present | stack-relative context detected`
+- Effect: unclear - keep this as review-only until a PDB-backed branch mapping is available.
+- Unclear: `true`
+
+```asm
+; context_before
+140761e7f  MOV dword ptr [RBP + -0x6c],R14D
+140761e83  MOV qword ptr [RBP + -0x78],RAX
+140761e87  LEA ESI,[R14 + 0x30]
+140761e8b  LEA RAX,[0x140adf5f0]
+140761e92  MOV dword ptr [RBP + -0x54],R14D
+; branch_snippet
+140761e96  MOV qword ptr [RBP + -0x28],RAX
+; context_after
+140761e9a  XORPS XMM0,XMM0
+140761e9d  LEA RAX,[0x140adf610]
+140761ea4  MOV qword ptr [RSP + 0x70],0x980096
+140761ead  MOV qword ptr [RBP + -0x10],RAX
+140761eb1  LEA RAX,[0x140adf640]
+```
+
+## `EnableInstallerDetection`
+
+### String @ `140adf640`
 
 `EnableInstallerDetection`
 
-- Reference count: `2`
-- References:
-  - `140761eb1` in `FUN_140761df8`
-  - `140761eb8` in `FUN_140761df8`
+- Function: `PsBootPhaseComplete`
+- Function source: `pdb-symbol`
+- Function confidence: `string_only_review`
+- Address: `140761eb1`
+- Register focus: `RAX`, `RBP`, `RSP`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `unclear`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `35`
+- Heuristic reasons: `pdb-symbol present | stack-relative context detected`
+- Effect: unclear - keep this as review-only until a PDB-backed branch mapping is available.
+- Unclear: `true`
 
-## Match Analysis
-
-## Match @ `140761e9d`
-
-- Function: `FUN_140761df8`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
-
-void FUN_140761df8(undefined8 param_1,undefined8 param_2,undefined8 param_3)
-
-{
-  byte *pbVar1;
-  bool bVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined8 uVar6;
-  longlong lVar7;
-  uint *puVar8;
-  uint uVar9;
-  undefined4 extraout_XMM0_Da;
-  undefined4 uVar11;
-  undefined1 auStack_148 [32];
-  undefined4 local_128;
-  undefined4 *local_120;
-  longlong local_108;
-  undefined4 local_100;
-  int local_fc;
-  undefined8 local_f8;
-  wchar_t *local_f0;
-  undefined8 local_e8;
-  wchar_t *local_e0;
-  undefined8 local_d8;
-  wchar_t *local_d0;
-  undefined8 local_c8;
-  wchar_t *local_c0;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined8 local_b0;
-  undefined8 *local_a8;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined8 local_98;
-  undefined8 uStack_90;
-  undefined8 local_88;
-  undefined8 uStack_80;
-  undefined4 local_78 [2];
-  wchar_t *local_70;
-  uint local_68 [2];
-  undefined4 local_60;
-  wchar_t *local_58;
-  undefined4 local_50;
-  undefined4 local_48;
-  wchar_t *local_40;
-  undefined4 local_38;
-  ulonglong local_28;
-  ulonglong uVar10;
-
-  local_28 = DAT_140e0a580 ^ (ulonglong)auStack_148;
-  uVar10 = 0;
-  local_f8 = 0x840082;
-  local_fc = 0;
-  local_f0 = L"\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\LsaInformation";
-  local_108 = 0;
-  local_e0 = L"UACInstalled";
-// ... trimmed ...
+```asm
+; context_before
+140761e96  MOV qword ptr [RBP + -0x28],RAX
+140761e9a  XORPS XMM0,XMM0
+140761e9d  LEA RAX,[0x140adf610]
+140761ea4  MOV qword ptr [RSP + 0x70],0x980096
+140761ead  MOV qword ptr [RBP + -0x10],RAX
+; branch_snippet
+140761eb1  LEA RAX,[0x140adf640]
+; context_after
+140761eb8  MOV qword ptr [RBP + 0x8],RAX
+140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0
+140761ec0  MOV qword ptr [RBP + -0x80],0x30002e
+140761ec8  MOV dword ptr [RBP + -0x30],0x140012
+140761ecf  MOV dword ptr [RBP + -0x20],R13D
 ```
 
-## Match @ `140761ead`
+- Function: `PsBootPhaseComplete`
+- Function source: `pdb-symbol`
+- Function confidence: `string_only_review`
+- Address: `140761eb8`
+- Register focus: `RAX`, `RSP`, `RBP`
+- Flag focus: `unclear`
+- Compare: `unclear`
+- Jump: `unclear`
+- Value mapping: `unclear`
+- Branch effect: `unclear`
+- Stack note: `stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.`
+- Exception gate: `none`
+- Heuristic score: `35`
+- Heuristic reasons: `pdb-symbol present | stack-relative context detected`
+- Effect: unclear - keep this as review-only until a PDB-backed branch mapping is available.
+- Unclear: `true`
 
-- Function: `FUN_140761df8`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
-
-void FUN_140761df8(undefined8 param_1,undefined8 param_2,undefined8 param_3)
-
-{
-  byte *pbVar1;
-  bool bVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined8 uVar6;
-  longlong lVar7;
-  uint *puVar8;
-  uint uVar9;
-  undefined4 extraout_XMM0_Da;
-  undefined4 uVar11;
-  undefined1 auStack_148 [32];
-  undefined4 local_128;
-  undefined4 *local_120;
-  longlong local_108;
-  undefined4 local_100;
-  int local_fc;
-  undefined8 local_f8;
-  wchar_t *local_f0;
-  undefined8 local_e8;
-  wchar_t *local_e0;
-  undefined8 local_d8;
-  wchar_t *local_d0;
-  undefined8 local_c8;
-  wchar_t *local_c0;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined8 local_b0;
-  undefined8 *local_a8;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined8 local_98;
-  undefined8 uStack_90;
-  undefined8 local_88;
-  undefined8 uStack_80;
-  undefined4 local_78 [2];
-  wchar_t *local_70;
-  uint local_68 [2];
-  undefined4 local_60;
-  wchar_t *local_58;
-  undefined4 local_50;
-  undefined4 local_48;
-  wchar_t *local_40;
-  undefined4 local_38;
-  ulonglong local_28;
-  ulonglong uVar10;
-
-  local_28 = DAT_140e0a580 ^ (ulonglong)auStack_148;
-  uVar10 = 0;
-  local_f8 = 0x840082;
-  local_fc = 0;
-  local_f0 = L"\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\LsaInformation";
-  local_108 = 0;
-  local_e0 = L"UACInstalled";
-// ... trimmed ...
+```asm
+; context_before
+140761e9a  XORPS XMM0,XMM0
+140761e9d  LEA RAX,[0x140adf610]
+140761ea4  MOV qword ptr [RSP + 0x70],0x980096
+140761ead  MOV qword ptr [RBP + -0x10],RAX
+140761eb1  LEA RAX,[0x140adf640]
+; branch_snippet
+140761eb8  MOV qword ptr [RBP + 0x8],RAX
+; context_after
+140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0
+140761ec0  MOV qword ptr [RBP + -0x80],0x30002e
+140761ec8  MOV dword ptr [RBP + -0x30],0x140012
+140761ecf  MOV dword ptr [RBP + -0x20],R13D
+140761ed3  MOV dword ptr [RBP + -0x18],0x2a0028
 ```
 
-## Match @ `140761e8b`
-
-- Function: `FUN_140761df8`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
-
-void FUN_140761df8(undefined8 param_1,undefined8 param_2,undefined8 param_3)
-
-{
-  byte *pbVar1;
-  bool bVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined8 uVar6;
-  longlong lVar7;
-  uint *puVar8;
-  uint uVar9;
-  undefined4 extraout_XMM0_Da;
-  undefined4 uVar11;
-  undefined1 auStack_148 [32];
-  undefined4 local_128;
-  undefined4 *local_120;
-  longlong local_108;
-  undefined4 local_100;
-  int local_fc;
-  undefined8 local_f8;
-  wchar_t *local_f0;
-  undefined8 local_e8;
-  wchar_t *local_e0;
-  undefined8 local_d8;
-  wchar_t *local_d0;
-  undefined8 local_c8;
-  wchar_t *local_c0;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined8 local_b0;
-  undefined8 *local_a8;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined8 local_98;
-  undefined8 uStack_90;
-  undefined8 local_88;
-  undefined8 uStack_80;
-  undefined4 local_78 [2];
-  wchar_t *local_70;
-  uint local_68 [2];
-  undefined4 local_60;
-  wchar_t *local_58;
-  undefined4 local_50;
-  undefined4 local_48;
-  wchar_t *local_40;
-  undefined4 local_38;
-  ulonglong local_28;
-  ulonglong uVar10;
-
-  local_28 = DAT_140e0a580 ^ (ulonglong)auStack_148;
-  uVar10 = 0;
-  local_f8 = 0x840082;
-  local_fc = 0;
-  local_f0 = L"\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\LsaInformation";
-  local_108 = 0;
-  local_e0 = L"UACInstalled";
-// ... trimmed ...
-```
-
-## Match @ `140761e96`
-
-- Function: `FUN_140761df8`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
-
-void FUN_140761df8(undefined8 param_1,undefined8 param_2,undefined8 param_3)
-
-{
-  byte *pbVar1;
-  bool bVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined8 uVar6;
-  longlong lVar7;
-  uint *puVar8;
-  uint uVar9;
-  undefined4 extraout_XMM0_Da;
-  undefined4 uVar11;
-  undefined1 auStack_148 [32];
-  undefined4 local_128;
-  undefined4 *local_120;
-  longlong local_108;
-  undefined4 local_100;
-  int local_fc;
-  undefined8 local_f8;
-  wchar_t *local_f0;
-  undefined8 local_e8;
-  wchar_t *local_e0;
-  undefined8 local_d8;
-  wchar_t *local_d0;
-  undefined8 local_c8;
-  wchar_t *local_c0;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined8 local_b0;
-  undefined8 *local_a8;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined8 local_98;
-  undefined8 uStack_90;
-  undefined8 local_88;
-  undefined8 uStack_80;
-  undefined4 local_78 [2];
-  wchar_t *local_70;
-  uint local_68 [2];
-  undefined4 local_60;
-  wchar_t *local_58;
-  undefined4 local_50;
-  undefined4 local_48;
-  wchar_t *local_40;
-  undefined4 local_38;
-  ulonglong local_28;
-  ulonglong uVar10;
-
-  local_28 = DAT_140e0a580 ^ (ulonglong)auStack_148;
-  uVar10 = 0;
-  local_f8 = 0x840082;
-  local_fc = 0;
-  local_f0 = L"\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\LsaInformation";
-  local_108 = 0;
-  local_e0 = L"UACInstalled";
-// ... trimmed ...
-```
-
-## Match @ `140761eb1`
-
-- Function: `FUN_140761df8`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
-
-void FUN_140761df8(undefined8 param_1,undefined8 param_2,undefined8 param_3)
-
-{
-  byte *pbVar1;
-  bool bVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined8 uVar6;
-  longlong lVar7;
-  uint *puVar8;
-  uint uVar9;
-  undefined4 extraout_XMM0_Da;
-  undefined4 uVar11;
-  undefined1 auStack_148 [32];
-  undefined4 local_128;
-  undefined4 *local_120;
-  longlong local_108;
-  undefined4 local_100;
-  int local_fc;
-  undefined8 local_f8;
-  wchar_t *local_f0;
-  undefined8 local_e8;
-  wchar_t *local_e0;
-  undefined8 local_d8;
-  wchar_t *local_d0;
-  undefined8 local_c8;
-  wchar_t *local_c0;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined8 local_b0;
-  undefined8 *local_a8;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined8 local_98;
-  undefined8 uStack_90;
-  undefined8 local_88;
-  undefined8 uStack_80;
-  undefined4 local_78 [2];
-  wchar_t *local_70;
-  uint local_68 [2];
-  undefined4 local_60;
-  wchar_t *local_58;
-  undefined4 local_50;
-  undefined4 local_48;
-  wchar_t *local_40;
-  undefined4 local_38;
-  ulonglong local_28;
-  ulonglong uVar10;
-
-  local_28 = DAT_140e0a580 ^ (ulonglong)auStack_148;
-  uVar10 = 0;
-  local_f8 = 0x840082;
-  local_fc = 0;
-  local_f0 = L"\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\LsaInformation";
-  local_108 = 0;
-  local_e0 = L"UACInstalled";
-// ... trimmed ...
-```
-
-## Match @ `140761eb8`
-
-- Function: `FUN_140761df8`
-- Forced boundary: `false`
-- Naturally resolved: `true`
-- Decompile success: `true`
-- Output kind: `decompile`
-- Output lines: `60`
-
-```c
-/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
-
-void FUN_140761df8(undefined8 param_1,undefined8 param_2,undefined8 param_3)
-
-{
-  byte *pbVar1;
-  bool bVar2;
-  undefined1 uVar3;
-  int iVar4;
-  int iVar5;
-  undefined8 uVar6;
-  longlong lVar7;
-  uint *puVar8;
-  uint uVar9;
-  undefined4 extraout_XMM0_Da;
-  undefined4 uVar11;
-  undefined1 auStack_148 [32];
-  undefined4 local_128;
-  undefined4 *local_120;
-  longlong local_108;
-  undefined4 local_100;
-  int local_fc;
-  undefined8 local_f8;
-  wchar_t *local_f0;
-  undefined8 local_e8;
-  wchar_t *local_e0;
-  undefined8 local_d8;
-  wchar_t *local_d0;
-  undefined8 local_c8;
-  wchar_t *local_c0;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined8 local_b0;
-  undefined8 *local_a8;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined8 local_98;
-  undefined8 uStack_90;
-  undefined8 local_88;
-  undefined8 uStack_80;
-  undefined4 local_78 [2];
-  wchar_t *local_70;
-  uint local_68 [2];
-  undefined4 local_60;
-  wchar_t *local_58;
-  undefined4 local_50;
-  undefined4 local_48;
-  wchar_t *local_40;
-  undefined4 local_38;
-  ulonglong local_28;
-  ulonglong uVar10;
-
-  local_28 = DAT_140e0a580 ^ (ulonglong)auStack_148;
-  uVar10 = 0;
-  local_f8 = 0x840082;
-  local_fc = 0;
-  local_f0 = L"\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\LsaInformation";
-  local_108 = 0;
-  local_e0 = L"UACInstalled";
-// ... trimmed ...
-```

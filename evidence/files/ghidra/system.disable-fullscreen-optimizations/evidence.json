@@ -1,148 +1,512 @@
 ﻿{
     "binary":  "ResourcePolicyServer.dll",
-    "probe":  "resourcepolicysrv-fullscreen-ghidra",
-    "timestamp":  "2026-03-26T18:19:46.895664300Z",
-    "ghidra_no_function_fallback":  false,
+    "probe":  "resourcepolicysrv-fullscreen-ghidra-branch-template-refresh",
+    "timestamp":  "2026-04-01T04:51:44.553181300Z",
+    "pdb_source":  "C:\\Tools\\Symbols\\resourcepolicysrv-fullscreen-ghidra-branch-template-refresh",
     "matches":  [
                     {
+                        "pattern":  "GameConfigStore",
                         "address":  "1800074c1",
-                        "function":  "FUN_180007400",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "GcsSrv_ModifyGameConfig",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "symbolized_branch",
+                        "unclear":  false,
+                        "value_map":  "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "1800074b1  TEST EAX,EAX",
+                        "jump_condition":  "1800074b3  JNS 0x1800074d0",
+                        "branch_effect":  "compare + conditional jump recovered in bounded context.",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  95,
+                        "effect_summary":  "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "compare+jump survived bounded symbolized review",
+                                                  "compare/test anchor found",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "EAX",
+                                               "EBX",
+                                               "EDX",
+                                               "RCX",
+                                               "RBP",
+                                               "R8",
+                                               "RSP"
+                                           ],
+                        "flag_focus":  [
+                                           "SF",
+                                           "ZF"
+                                       ],
+                        "context_before":  [
+                                               "1800074af  MOV EBX,EAX",
+                                               "1800074b1  TEST EAX,EAX",
+                                               "1800074b3  JNS 0x1800074d0",
+                                               "1800074b5  MOV EDX,0x17e",
+                                               "1800074ba  MOV RCX,qword ptr [RBP + 0x398]"
+                                           ],
+                        "branch_snippet":  [
+                                               "1800074c1  LEA R8,[0x18001d730]",
+                                               "1800074b3  JNS 0x1800074d0",
+                                               "1800074b1  TEST EAX,EAX"
+                                           ],
+                        "context_after":  [
+                                              "1800074c8  MOV R9D,EBX",
+                                              "1800074cb  CALL 0x180006678",
+                                              "1800074d0  MOV RCX,qword ptr [RSP + 0x20]",
+                                              "1800074d5  CALL 0x180005984",
+                                              "1800074da  MOV EAX,EBX"
+                                          ]
                     },
                     {
+                        "pattern":  "GameConfigStore",
                         "address":  "180006d19",
-                        "function":  "FUN_180006c40",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "GcsSrv_GetGameConfigSizeForClientProcess",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "symbolized_branch",
+                        "unclear":  false,
+                        "value_map":  "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "180006d0c  TEST EAX,EAX",
+                        "jump_condition":  "180006d0e  JNS 0x180006d28",
+                        "branch_effect":  "compare + conditional jump recovered in bounded context.",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  95,
+                        "effect_summary":  "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "compare+jump survived bounded symbolized review",
+                                                  "compare/test anchor found",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "EAX",
+                                               "EBX",
+                                               "EDX",
+                                               "RCX",
+                                               "RBP",
+                                               "R8"
+                                           ],
+                        "flag_focus":  [
+                                           "SF",
+                                           "ZF"
+                                       ],
+                        "context_before":  [
+                                               "180006d0a  MOV EBX,EAX",
+                                               "180006d0c  TEST EAX,EAX",
+                                               "180006d0e  JNS 0x180006d28",
+                                               "180006d10  MOV EDX,0x150",
+                                               "180006d15  MOV RCX,qword ptr [RBP + 0x18]"
+                                           ],
+                        "branch_snippet":  [
+                                               "180006d19  LEA R8,[0x18001d730]",
+                                               "180006d0e  JNS 0x180006d28",
+                                               "180006d0c  TEST EAX,EAX"
+                                           ],
+                        "context_after":  [
+                                              "180006d20  MOV R9D,EAX",
+                                              "180006d23  CALL 0x180006678",
+                                              "180006d28  MOV RCX,qword ptr [RBP + -0x38]",
+                                              "180006d2c  CALL 0x180005984",
+                                              "180006d31  MOV EAX,EBX"
+                                          ]
                     },
                     {
+                        "pattern":  "GameConfigStore",
                         "address":  "1800060dc",
-                        "function":  "FUN_18000606c",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "GetGameConfigStoreServer",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "symbolized_branch",
+                        "unclear":  false,
+                        "value_map":  "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "1800060d4  TEST EAX,EAX",
+                        "jump_condition":  "1800060f0  JMP 0x180006191",
+                        "branch_effect":  "compare + conditional jump recovered in bounded context.",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  95,
+                        "effect_summary":  "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "compare+jump survived bounded symbolized review",
+                                                  "compare/test anchor found",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "EAX",
+                                               "EBX",
+                                               "RCX",
+                                               "RBP",
+                                               "R8",
+                                               "EDX",
+                                               "ECX"
+                                           ],
+                        "flag_focus":  [
+                                           "SF",
+                                           "ZF"
+                                       ],
+                        "context_before":  [
+                                               "1800060cd  CALL 0x18000ce90",
+                                               "1800060d2  MOV EBX,EAX",
+                                               "1800060d4  TEST EAX,EAX",
+                                               "1800060d6  JNS 0x1800060f5",
+                                               "1800060d8  MOV RCX,qword ptr [RBP + 0x28]"
+                                           ],
+                        "branch_snippet":  [
+                                               "1800060dc  LEA R8,[0x18001d730]",
+                                               "1800060f0  JMP 0x180006191",
+                                               "1800060d6  JNS 0x1800060f5",
+                                               "1800060d4  TEST EAX,EAX"
+                                           ],
+                        "context_after":  [
+                                              "1800060e3  MOV R9D,EAX",
+                                              "1800060e6  MOV EDX,0x62",
+                                              "1800060eb  CALL 0x180006678",
+                                              "1800060f0  JMP 0x180006191",
+                                              "1800060f5  MOV ECX,0x28"
+                                          ]
                     },
                     {
+                        "pattern":  "GameConfigStore",
                         "address":  "180006136",
-                        "function":  "FUN_18000606c",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "GetGameConfigStoreServer",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "symbolized_branch",
+                        "unclear":  false,
+                        "value_map":  "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "18000612e  TEST EAX,EAX",
+                        "jump_condition":  "180006130  JNS 0x180006154",
+                        "branch_effect":  "compare + conditional jump recovered in bounded context.",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  95,
+                        "effect_summary":  "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "compare+jump survived bounded symbolized review",
+                                                  "compare/test anchor found",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "EAX",
+                                               "EBX",
+                                               "RCX",
+                                               "RBP",
+                                               "R8",
+                                               "EDX",
+                                               "RDI"
+                                           ],
+                        "flag_focus":  [
+                                           "SF",
+                                           "ZF"
+                                       ],
+                        "context_before":  [
+                                               "180006127  CALL 0x18000a630",
+                                               "18000612c  MOV EBX,EAX",
+                                               "18000612e  TEST EAX,EAX",
+                                               "180006130  JNS 0x180006154",
+                                               "180006132  MOV RCX,qword ptr [RBP + 0x28]"
+                                           ],
+                        "branch_snippet":  [
+                                               "180006136  LEA R8,[0x18001d730]",
+                                               "180006130  JNS 0x180006154",
+                                               "18000612e  TEST EAX,EAX"
+                                           ],
+                        "context_after":  [
+                                              "18000613d  MOV R9D,EAX",
+                                              "180006140  MOV EDX,0x67",
+                                              "180006145  CALL 0x180006678",
+                                              "18000614a  MOV RCX,RDI",
+                                              "18000614d  CALL 0x180005968"
+                                          ]
                     },
                     {
+                        "pattern":  "GameConfigStore",
                         "address":  "1800061ad",
-                        "function":  "FUN_18000606c",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "GetGameConfigStoreServer",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "symbolized_branch",
+                        "unclear":  false,
+                        "value_map":  "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "1800061a5  TEST EAX,EAX",
+                        "jump_condition":  "1800061c1  JMP 0x1800061c6",
+                        "branch_effect":  "compare + conditional jump recovered in bounded context.",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  95,
+                        "effect_summary":  "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "compare+jump survived bounded symbolized review",
+                                                  "compare/test anchor found",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "EAX",
+                                               "EBX",
+                                               "RCX",
+                                               "RBP",
+                                               "R8",
+                                               "EDX",
+                                               "RDI",
+                                               "R14"
+                                           ],
+                        "flag_focus":  [
+                                           "SF",
+                                           "ZF"
+                                       ],
+                        "context_before":  [
+                                               "18000619e  CALL 0x180008590",
+                                               "1800061a3  MOV EBX,EAX",
+                                               "1800061a5  TEST EAX,EAX",
+                                               "1800061a7  JNS 0x1800061c3",
+                                               "1800061a9  MOV RCX,qword ptr [RBP + 0x28]"
+                                           ],
+                        "branch_snippet":  [
+                                               "1800061ad  LEA R8,[0x18001d730]",
+                                               "1800061c1  JMP 0x1800061c6",
+                                               "1800061a7  JNS 0x1800061c3",
+                                               "1800061a5  TEST EAX,EAX"
+                                           ],
+                        "context_after":  [
+                                              "1800061b4  MOV R9D,EAX",
+                                              "1800061b7  MOV EDX,0x75",
+                                              "1800061bc  CALL 0x180006678",
+                                              "1800061c1  JMP 0x1800061c6",
+                                              "1800061c3  MOV qword ptr [R14],RDI"
+                                          ]
                     },
                     {
+                        "pattern":  "GameConfigStore",
                         "address":  "1800078b7",
-                        "function":  "FUN_180007884",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  33,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "ShutdownGameConfigRpcServer",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "symbolized_branch",
+                        "unclear":  false,
+                        "value_map":  "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "1800078a9  TEST EAX,EAX",
+                        "jump_condition":  "1800078d0  JMP 0x180007901",
+                        "branch_effect":  "compare + conditional jump recovered in bounded context.",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  95,
+                        "effect_summary":  "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "compare+jump survived bounded symbolized review",
+                                                  "compare/test anchor found",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "EAX",
+                                               "EBX",
+                                               "EDX",
+                                               "RCX",
+                                               "RSP",
+                                               "R8"
+                                           ],
+                        "flag_focus":  [
+                                           "SF",
+                                           "ZF"
+                                       ],
+                        "context_before":  [
+                                               "1800078a7  MOV EBX,EAX",
+                                               "1800078a9  TEST EAX,EAX",
+                                               "1800078ab  JNS 0x1800078d2",
+                                               "1800078ad  MOV EDX,0xf8",
+                                               "1800078b2  MOV RCX,qword ptr [RSP + 0x38]"
+                                           ],
+                        "branch_snippet":  [
+                                               "1800078b7  LEA R8,[0x18001d730]",
+                                               "1800078d0  JMP 0x180007901",
+                                               "1800078ab  JNS 0x1800078d2",
+                                               "1800078a9  TEST EAX,EAX"
+                                           ],
+                        "context_after":  [
+                                              "1800078be  MOV R9D,EBX",
+                                              "1800078c1  CALL 0x180006678",
+                                              "1800078c6  LEA RCX,[RSP + 0x20]",
+                                              "1800078cb  CALL 0x180005c60",
+                                              "1800078d0  JMP 0x180007901"
+                                          ]
                     },
                     {
-                        "address":  "180007103",
-                        "function":  "FUN_180007080",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  42,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
-                    },
-                    {
-                        "address":  "180006943",
-                        "function":  "FUN_1800068e0",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  32,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
-                    },
-                    {
-                        "address":  "180007574",
-                        "function":  "FUN_180007510",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  40,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
-                    },
-                    {
-                        "address":  "1800071b9",
-                        "function":  "FUN_180007140",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  42,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
-                    },
-                    {
-                        "address":  "180006dce",
-                        "function":  "FUN_180006d60",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  36,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
-                    },
-                    {
-                        "address":  "180005e13",
-                        "function":  "FUN_180005d9c",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
-                    },
-                    {
+                        "pattern":  "GameConfigStore",
                         "address":  "180005e47",
-                        "function":  "FUN_180005d9c",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "GcsSrv_Preamble",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "symbolized_branch",
+                        "unclear":  false,
+                        "value_map":  "value=0 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "180005e5e  TEST EAX,EAX",
+                        "jump_condition":  "180005e60  JNS 0x180005e7e",
+                        "branch_effect":  "compare + conditional jump recovered in bounded context.",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  95,
+                        "effect_summary":  "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "compare+jump survived bounded symbolized review",
+                                                  "compare/test anchor found",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "RCX",
+                                               "RBP",
+                                               "R8",
+                                               "RDX",
+                                               "EAX",
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "ZF",
+                                           "SF",
+                                           "CF",
+                                           "OF"
+                                       ],
+                        "context_before":  [
+                                               "180005e34  JMP 0x180005f23",
+                                               "180005e39  CMP SIL,0x1",
+                                               "180005e3d  JNZ 0x180005ea0",
+                                               "180005e3f  MOV RCX,qword ptr [RBP + -0x28]",
+                                               "180005e43  LEA R8,[RBP + -0x30]"
+                                           ],
+                        "branch_snippet":  [
+                                               "180005e47  LEA RDX,[0x18001d790]",
+                                               "180005e5e  TEST EAX,EAX",
+                                               "180005e60  JNS 0x180005e7e",
+                                               "180005e3d  JNZ 0x180005ea0",
+                                               "180005e39  CMP SIL,0x1",
+                                               "180005e34  JMP 0x180005f23"
+                                           ],
+                        "context_after":  [
+                                              "180005e4e  MOV byte ptr [RBP + -0x30],0x0",
+                                              "180005e52  CALL qword ptr [0x1800270a0]",
+                                              "180005e59  NOP dword ptr [RAX + RAX*0x1]",
+                                              "180005e5e  TEST EAX,EAX",
+                                              "180005e60  JNS 0x180005e7e"
+                                          ]
                     },
                     {
+                        "pattern":  "GameConfigStore",
                         "address":  "180008a60",
-                        "function":  "FUN_180008a60",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  5,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "GetGameConfigStoreParentsPath",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "unclear",
+                        "branch_effect":  "unclear",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  35,
+                        "effect_summary":  "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "EAX",
+                                               "RAX",
+                                               "RBP",
+                                               "RBX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "180008a31  RET",
+                                               "180008a40  MOV EAX,0x80004001",
+                                               "180008a45  RET",
+                                               "180008a50  LEA RAX,[0x18001da00]",
+                                               "180008a57  RET"
+                                           ],
+                        "branch_snippet":  [
+                                               "180008a60  LEA RAX,[0x18001d9c0]"
+                                           ],
+                        "context_after":  [
+                                              "180008a67  RET",
+                                              "180008a70  LEA RAX,[0x18001da40]",
+                                              "180008a77  RET",
+                                              "180008a80  PUSH RBP",
+                                              "180008a82  PUSH RBX"
+                                          ]
                     },
                     {
+                        "pattern":  "GameConfigStore",
                         "address":  "180008a50",
-                        "function":  "FUN_180008a50",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  5,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "GetGameConfigStoreChildrenPath",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "unclear",
+                        "branch_effect":  "unclear",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  35,
+                        "effect_summary":  "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "RBP",
+                                               "RBX",
+                                               "EAX",
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "180008a2f  POP RBP",
+                                               "180008a30  POP RBX",
+                                               "180008a31  RET",
+                                               "180008a40  MOV EAX,0x80004001",
+                                               "180008a45  RET"
+                                           ],
+                        "branch_snippet":  [
+                                               "180008a50  LEA RAX,[0x18001da00]"
+                                           ],
+                        "context_after":  [
+                                              "180008a57  RET",
+                                              "180008a60  LEA RAX,[0x18001d9c0]",
+                                              "180008a67  RET",
+                                              "180008a70  LEA RAX,[0x18001da40]",
+                                              "180008a77  RET"
+                                          ]
                     }
                 ],
     "exit_code":  0,
-    "status":  "completed",
-    "failure":  null,
     "markdown_exists":  true,
-    "run_log_exists":  true
+    "run_log_exists":  true,
+    "pdb_loaded":  true,
+    "pdb_verification_source":  "ghidra-run-log"
 }

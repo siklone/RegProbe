@@ -1,31 +1,58 @@
 ﻿{
     "binary":  "diagtrack.dll",
-    "probe":  "diagtrack-reliability-ghidra",
-    "timestamp":  "2026-03-26T17:37:34.225204900Z",
-    "ghidra_no_function_fallback":  true,
+    "probe":  "diagtrack-reliability-ghidra-branch-template-refresh",
+    "timestamp":  "2026-04-01T05:11:51.515354700Z",
+    "pdb_source":  "C:\\Tools\\Symbols\\diagtrack-reliability-ghidra-branch-template-refresh",
     "matches":  [
                     {
+                        "pattern":  "TimeStampInterval",
                         "address":  "18038fce0",
-                        "function":  "FUN_18038fce0",
-                        "forced_boundary":  true,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  false,
-                        "output_kind":  "decompile"
-                    },
-                    {
-                        "address":  "18026bfc0",
-                        "function":  "FUN_18026bfc0",
-                        "forced_boundary":  true,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  false,
-                        "output_kind":  "decompile"
+                        "function_name":  "_guard_dispatch_icall$thunk$10345483385596137414",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "180376010  JMP 0x18034a090",
+                        "branch_effect":  "trap/fault-adjacent block detected; control-flow may be misleading.",
+                        "stack_summary":  "no obvious stack-relative access in the bounded context.",
+                        "exception_review_required":  true,
+                        "exception_reason":  "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+                        "heuristic_score":  30,
+                        "effect_summary":  "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "exception/trap gate forced review-only"
+                                              ],
+                        "register_focus":  [
+                                               "RBX",
+                                               "RCX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "1803758bd  POP RBX",
+                                               "1803758be  JMP 0x180136910",
+                                               "1803758d0  LEA RCX,[0x180466840]",
+                                               "1803758d7  JMP 0x18008da14",
+                                               "180376000  INT3"
+                                           ],
+                        "branch_snippet":  [
+                                               "180376010  JMP 0x18034a090",
+                                               "1803758d7  JMP 0x18008da14",
+                                               "1803758be  JMP 0x180136910"
+                                           ],
+                        "context_after":  [
+
+                                          ]
                     }
                 ],
     "exit_code":  0,
-    "status":  "completed",
-    "failure":  null,
     "markdown_exists":  true,
-    "run_log_exists":  true
+    "run_log_exists":  true,
+    "pdb_loaded":  true,
+    "pdb_verification_source":  "ghidra-run-log"
 }

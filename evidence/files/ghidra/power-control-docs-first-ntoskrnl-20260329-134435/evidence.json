@@ -1,85 +1,397 @@
 ﻿{
     "binary":  "ntoskrnl.exe",
-    "probe":  "power-control-docs-first-ntoskrnl",
-    "timestamp":  "2026-03-29T11:05:39.871860200Z",
-    "ghidra_no_function_fallback":  true,
+    "probe":  "power-control-docs-first-ntoskrnl-branch-template-refresh",
+    "timestamp":  "2026-04-01T04:35:51.554517300Z",
+    "pdb_source":  "C:\\Tools\\Symbols\\power-control-docs-first-ntoskrnl-branch-template-refresh",
     "matches":  [
                     {
+                        "pattern":  "Class1InitialUnparkCount",
                         "address":  "140c64148",
-                        "function":  "FUN_140c6413e",
-                        "forced_boundary":  true,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  false,
-                        "output_kind":  "decompile"
+                        "function_name":  "\u003cno function\u003e",
+                        "function_source":  "unresolved",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "unclear",
+                        "branch_effect":  "trap/fault-adjacent block detected; control-flow may be misleading.",
+                        "stack_summary":  "no obvious stack-relative access in the bounded context.",
+                        "exception_review_required":  true,
+                        "exception_reason":  "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+                        "heuristic_score":  0,
+                        "effect_summary":  "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+                        "heuristic_reasons":  [
+                                                  "exception/trap gate forced review-only"
+                                              ],
+                        "register_focus":  [
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "140c618b1  HLT",
+                                               "140c619a8  ADD byte ptr CS:[RAX],DH",
+                                               "140c619ab  ADD byte ptr [RAX],AL",
+                                               "140c619ad  ADD byte ptr [RAX],AL",
+                                               "140c619af  ADD byte ptr [RAX],DL"
+                                           ],
+                        "branch_snippet":  [
+                                               "140c619b1  INT1"
+                                           ],
+                        "context_after":  [
+
+                                          ]
                     },
                     {
+                        "pattern":  "HibernateEnabled",
                         "address":  "140e07500",
-                        "function":  "FUN_140e07510",
-                        "forced_boundary":  true,
-                        "decompile_success":  true,
-                        "output_lines":  15,
-                        "naturally_resolved":  false,
-                        "output_kind":  "decompile"
+                        "function_name":  "\u003cno function\u003e",
+                        "function_source":  "unresolved",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "unclear",
+                        "branch_effect":  "trap/fault-adjacent block detected; control-flow may be misleading.",
+                        "stack_summary":  "no obvious stack-relative access in the bounded context.",
+                        "exception_review_required":  true,
+                        "exception_reason":  "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+                        "heuristic_score":  0,
+                        "effect_summary":  "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+                        "heuristic_reasons":  [
+                                                  "exception/trap gate forced review-only"
+                                              ],
+                        "register_focus":  [
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "140c618b1  HLT",
+                                               "140c619a8  ADD byte ptr CS:[RAX],DH",
+                                               "140c619ab  ADD byte ptr [RAX],AL",
+                                               "140c619ad  ADD byte ptr [RAX],AL",
+                                               "140c619af  ADD byte ptr [RAX],DL"
+                                           ],
+                        "branch_snippet":  [
+                                               "140c619b1  INT1"
+                                           ],
+                        "context_after":  [
+
+                                          ]
                     },
                     {
+                        "pattern":  "HibernateEnabled",
                         "address":  "140c63728",
-                        "function":  "FUN_140c6371e",
-                        "forced_boundary":  true,
-                        "decompile_success":  true,
-                        "output_lines":  49,
-                        "naturally_resolved":  false,
-                        "output_kind":  "decompile"
+                        "function_name":  "\u003cno function\u003e",
+                        "function_source":  "unresolved",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "unclear",
+                        "branch_effect":  "trap/fault-adjacent block detected; control-flow may be misleading.",
+                        "stack_summary":  "no obvious stack-relative access in the bounded context.",
+                        "exception_review_required":  true,
+                        "exception_reason":  "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+                        "heuristic_score":  0,
+                        "effect_summary":  "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+                        "heuristic_reasons":  [
+                                                  "exception/trap gate forced review-only"
+                                              ],
+                        "register_focus":  [
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "140c618b1  HLT",
+                                               "140c619a8  ADD byte ptr CS:[RAX],DH",
+                                               "140c619ab  ADD byte ptr [RAX],AL",
+                                               "140c619ad  ADD byte ptr [RAX],AL",
+                                               "140c619af  ADD byte ptr [RAX],DL"
+                                           ],
+                        "branch_snippet":  [
+                                               "140c619b1  INT1"
+                                           ],
+                        "context_after":  [
+
+                                          ]
                     },
                     {
+                        "pattern":  "HibernateEnabledDefault",
+                        "address":  "140c63728",
+                        "function_name":  "\u003cno function\u003e",
+                        "function_source":  "unresolved",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "unclear",
+                        "branch_effect":  "trap/fault-adjacent block detected; control-flow may be misleading.",
+                        "stack_summary":  "no obvious stack-relative access in the bounded context.",
+                        "exception_review_required":  true,
+                        "exception_reason":  "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+                        "heuristic_score":  0,
+                        "effect_summary":  "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+                        "heuristic_reasons":  [
+                                                  "exception/trap gate forced review-only"
+                                              ],
+                        "register_focus":  [
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "140c618b1  HLT",
+                                               "140c619a8  ADD byte ptr CS:[RAX],DH",
+                                               "140c619ab  ADD byte ptr [RAX],AL",
+                                               "140c619ad  ADD byte ptr [RAX],AL",
+                                               "140c619af  ADD byte ptr [RAX],DL"
+                                           ],
+                        "branch_snippet":  [
+                                               "140c619b1  INT1"
+                                           ],
+                        "context_after":  [
+
+                                          ]
+                    },
+                    {
+                        "pattern":  "LidReliabilityState",
                         "address":  "1405cf133",
-                        "function":  "FUN_1405cf0ec",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  44,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "PopLidReliabilityInit",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "symbolized_branch",
+                        "unclear":  false,
+                        "value_map":  "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "1405cf12f  TEST EAX,EAX",
+                        "jump_condition":  "1405cf131  JS 0x1405cf187",
+                        "branch_effect":  "compare + conditional jump recovered in bounded context.",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  95,
+                        "effect_summary":  "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "compare+jump survived bounded symbolized review",
+                                                  "compare/test anchor found",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "RBP",
+                                               "EAX",
+                                               "RDX",
+                                               "RCX",
+                                               "RAX",
+                                               "RSP"
+                                           ],
+                        "flag_focus":  [
+                                           "SF",
+                                           "ZF"
+                                       ],
+                        "context_before":  [
+                                               "1405cf123  MOV DIL,0x1",
+                                               "1405cf126  MOVUPS xmmword ptr [RBP + -0x20],XMM1",
+                                               "1405cf12a  CALL 0x14073d560",
+                                               "1405cf12f  TEST EAX,EAX",
+                                               "1405cf131  JS 0x1405cf187"
+                                           ],
+                        "branch_snippet":  [
+                                               "1405cf133  LEA RDX,[0x140028a00]",
+                                               "1405cf131  JS 0x1405cf187",
+                                               "1405cf12f  TEST EAX,EAX"
+                                           ],
+                        "context_after":  [
+                                              "1405cf13a  LEA RCX,[RBP + -0x30]",
+                                              "1405cf13e  CALL 0x14043ffa0",
+                                              "1405cf143  MOV RCX,qword ptr [RBP + -0x40]",
+                                              "1405cf147  LEA RAX,[RBP + -0x38]",
+                                              "1405cf14b  MOV qword ptr [RSP + 0x28],RAX"
+                                          ]
                     },
                     {
+                        "pattern":  "LidReliabilityState",
                         "address":  "140747fd8",
-                        "function":  "FUN_140747fb8",
-                        "forced_boundary":  false,
-                        "decompile_success":  true,
-                        "output_lines":  21,
-                        "naturally_resolved":  true,
-                        "output_kind":  "decompile"
+                        "function_name":  "PopSaveLidReliabilityState",
+                        "function_source":  "pdb-symbol",
+                        "function_confidence":  "symbolized_branch",
+                        "unclear":  false,
+                        "value_map":  "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+                        "compare_condition":  "140747fd4  TEST EAX,EAX",
+                        "jump_condition":  "140747fd6  JS 0x140748024",
+                        "branch_effect":  "compare + conditional jump recovered in bounded context.",
+                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+                        "exception_review_required":  false,
+                        "exception_reason":  "none",
+                        "heuristic_score":  95,
+                        "effect_summary":  "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+                        "heuristic_reasons":  [
+                                                  "pdb-symbol present",
+                                                  "compare+jump survived bounded symbolized review",
+                                                  "compare/test anchor found",
+                                                  "conditional jump found",
+                                                  "value immediate found in bounded block",
+                                                  "stack-relative context detected"
+                                              ],
+                        "register_focus":  [
+                                               "RSP",
+                                               "EAX",
+                                               "RDX",
+                                               "RCX",
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "SF",
+                                           "ZF"
+                                       ],
+                        "context_before":  [
+                                               "140747fc7  XORPS XMM0,XMM0",
+                                               "140747fca  MOVUPS xmmword ptr [RSP + 0x30],XMM0",
+                                               "140747fcf  CALL 0x14073d560",
+                                               "140747fd4  TEST EAX,EAX",
+                                               "140747fd6  JS 0x140748024"
+                                           ],
+                        "branch_snippet":  [
+                                               "140747fd8  LEA RDX,[0x140028a00]",
+                                               "140747fd6  JS 0x140748024",
+                                               "140747fd4  TEST EAX,EAX"
+                                           ],
+                        "context_after":  [
+                                              "140747fdf  LEA RCX,[RSP + 0x30]",
+                                              "140747fe4  CALL 0x14043ffa0",
+                                              "140747fe9  MOV RCX,qword ptr [RSP + 0x50]",
+                                              "140747fee  LEA RAX,[0x140e0b3c8]",
+                                              "140747ff5  MOV R9D,0x4"
+                                          ]
                     },
                     {
+                        "pattern":  "MfBufferingThreshold",
                         "address":  "140c63ed8",
-                        "function":  "FUN_140c63ece",
-                        "forced_boundary":  true,
-                        "decompile_success":  true,
-                        "output_lines":  41,
-                        "naturally_resolved":  false,
-                        "output_kind":  "decompile"
+                        "function_name":  "\u003cno function\u003e",
+                        "function_source":  "unresolved",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "unclear",
+                        "branch_effect":  "trap/fault-adjacent block detected; control-flow may be misleading.",
+                        "stack_summary":  "no obvious stack-relative access in the bounded context.",
+                        "exception_review_required":  true,
+                        "exception_reason":  "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+                        "heuristic_score":  0,
+                        "effect_summary":  "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+                        "heuristic_reasons":  [
+                                                  "exception/trap gate forced review-only"
+                                              ],
+                        "register_focus":  [
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "140c618b1  HLT",
+                                               "140c619a8  ADD byte ptr CS:[RAX],DH",
+                                               "140c619ab  ADD byte ptr [RAX],AL",
+                                               "140c619ad  ADD byte ptr [RAX],AL",
+                                               "140c619af  ADD byte ptr [RAX],DL"
+                                           ],
+                        "branch_snippet":  [
+                                               "140c619b1  INT1"
+                                           ],
+                        "context_after":  [
+
+                                          ]
                     },
                     {
+                        "pattern":  "PerfCalculateActualUtilization",
                         "address":  "140c640b8",
-                        "function":  "FUN_140c640ae",
-                        "forced_boundary":  true,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  false,
-                        "output_kind":  "decompile"
+                        "function_name":  "\u003cno function\u003e",
+                        "function_source":  "unresolved",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "unclear",
+                        "branch_effect":  "trap/fault-adjacent block detected; control-flow may be misleading.",
+                        "stack_summary":  "no obvious stack-relative access in the bounded context.",
+                        "exception_review_required":  true,
+                        "exception_reason":  "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+                        "heuristic_score":  0,
+                        "effect_summary":  "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+                        "heuristic_reasons":  [
+                                                  "exception/trap gate forced review-only"
+                                              ],
+                        "register_focus":  [
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "140c618b1  HLT",
+                                               "140c619a8  ADD byte ptr CS:[RAX],DH",
+                                               "140c619ab  ADD byte ptr [RAX],AL",
+                                               "140c619ad  ADD byte ptr [RAX],AL",
+                                               "140c619af  ADD byte ptr [RAX],DL"
+                                           ],
+                        "branch_snippet":  [
+                                               "140c619b1  INT1"
+                                           ],
+                        "context_after":  [
+
+                                          ]
                     },
                     {
+                        "pattern":  "TimerRebaseThresholdOnDripsExit",
                         "address":  "140c64ec8",
-                        "function":  "FUN_140c64ebe",
-                        "forced_boundary":  true,
-                        "decompile_success":  true,
-                        "output_lines":  60,
-                        "naturally_resolved":  false,
-                        "output_kind":  "decompile"
+                        "function_name":  "\u003cno function\u003e",
+                        "function_source":  "unresolved",
+                        "function_confidence":  "string_only_review",
+                        "unclear":  true,
+                        "value_map":  "unclear",
+                        "compare_condition":  "unclear",
+                        "jump_condition":  "unclear",
+                        "branch_effect":  "trap/fault-adjacent block detected; control-flow may be misleading.",
+                        "stack_summary":  "no obvious stack-relative access in the bounded context.",
+                        "exception_review_required":  true,
+                        "exception_reason":  "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+                        "heuristic_score":  0,
+                        "effect_summary":  "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+                        "heuristic_reasons":  [
+                                                  "exception/trap gate forced review-only"
+                                              ],
+                        "register_focus":  [
+                                               "RAX"
+                                           ],
+                        "flag_focus":  [
+                                           "unclear"
+                                       ],
+                        "context_before":  [
+                                               "140c618b1  HLT",
+                                               "140c619a8  ADD byte ptr CS:[RAX],DH",
+                                               "140c619ab  ADD byte ptr [RAX],AL",
+                                               "140c619ad  ADD byte ptr [RAX],AL",
+                                               "140c619af  ADD byte ptr [RAX],DL"
+                                           ],
+                        "branch_snippet":  [
+                                               "140c619b1  INT1"
+                                           ],
+                        "context_after":  [
+
+                                          ]
                     }
                 ],
     "exit_code":  0,
-    "status":  "completed",
-    "failure":  null,
     "markdown_exists":  true,
-    "run_log_exists":  true
+    "run_log_exists":  true,
+    "pdb_loaded":  true,
+    "pdb_verification_source":  "ghidra-run-log"
 }

@@ -56,6 +56,7 @@ $hostStderr = Join-Path $hostRoot 'ghidra-stderr.txt'
 $guestStderr = Join-Path $guestRoot 'ghidra-stderr.txt'
 $hostTargetBinary = Join-Path $hostRoot ([IO.Path]::GetFileName($TargetBinary))
 $hostSymbolCacheRoot = Join-Path $hostRoot 'symbol-cache'
+$hostSymbolCacheZip = Join-Path $hostRoot 'symbol-cache.zip'
 $hostSymchkLog = Join-Path $hostRoot 'symchk-host.log'
 $patternPayload = ($Patterns | ForEach-Object { $_.Trim() } | Where-Object { $_ }) -join '|||'
 
@@ -114,6 +115,10 @@ $ErrorActionPreference = 'Stop'
 New-Item -ItemType Directory -Path (Split-Path -Parent $MarkdownPath) -Force | Out-Null
 New-Item -ItemType Directory -Path $ProjectRoot -Force | Out-Null
 New-Item -ItemType Directory -Path $SymbolRoot -Force | Out-Null
+$tempRoot = Join-Path (Split-Path -Parent $MarkdownPath) 'temp'
+New-Item -ItemType Directory -Path $tempRoot -Force | Out-Null
+$env:TEMP = $tempRoot
+$env:TMP = $tempRoot
 
 function Write-Evidence {
     param(
@@ -222,6 +227,37 @@ function Invoke-Vmrun {
     return $output.Trim()
 }
 
+function Invoke-VmrunWithToolsRetry {
+    param(
+        [string[]]$Arguments,
+        [int]$TimeoutSeconds = 900,
+        [int]$RetryDelaySeconds = 15,
+        [switch]$IgnoreExitCode
+    )
+
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    do {
+        $output = & $VmrunPath @Arguments 2>&1 | Out-String
+        $exitCode = $LASTEXITCODE
+        if ($IgnoreExitCode -or $exitCode -eq 0) {
+            return $output.Trim()
+        }
+
+        $trimmed = $output.Trim()
+        $isToolsTransient = $trimmed -match 'VMware Tools are not running' -or
+            $trimmed -match 'VIX_E_TOOLS_NOT_RUNNING' -or
+            $trimmed -match 'VIX_E_TIMEOUT_WAITING_FOR_TOOLS'
+
+        if (-not $isToolsTransient -or (Get-Date) -ge $deadline) {
+            throw "vmrun failed ($exitCode): $trimmed"
+        }
+
+        Start-Sleep -Seconds $RetryDelaySeconds
+    } while ((Get-Date) -lt $deadline)
+
+    throw "vmrun timed out waiting for VMware Tools recovery."
+}
+
 function Resolve-SharedGuestPath {
     param(
         [Parameter(Mandatory = $true)]
@@ -299,31 +335,44 @@ if ($hostSymchkExit -ne 0) {
 
 $guestSymbolRoot = Join-Path $GuestSymbolRoot $OutputName
 $guestSharedSymbolCache = Resolve-SharedGuestPath -HostPath $hostSymbolCacheRoot -SharedRoot $HostSharedFolderPath -GuestShareName $SharedFolderGuestName
+$guestSymbolCacheZip = Join-Path $guestRoot 'symbol-cache.zip'
 $hostStageScript = Join-Path $hostRoot 'stage-symbol-cache.ps1'
 $guestStageScript = Join-Path $guestRoot 'stage-symbol-cache.ps1'
+$hostArchiveStageScript = Join-Path $hostRoot 'stage-symbol-cache-archive.ps1'
+$guestArchiveStageScript = Join-Path $guestRoot 'stage-symbol-cache-archive.ps1'
 $hostStageResult = Join-Path $hostRoot 'stage-symbol-cache.json'
 $guestStageResult = Join-Path $guestRoot 'stage-symbol-cache.json'
+$hostArchiveStageResult = Join-Path $hostRoot 'stage-symbol-cache-archive.json'
+$guestArchiveStageResult = Join-Path $guestRoot 'stage-symbol-cache-archive.json'
 
 @'
-param(
-    [string]$SourceRoot,
-    [string]$DestinationRoot,
-    [string]$ResultPath
-)
 $ErrorActionPreference = 'Stop'
+[string]$SourceRoot = '__SOURCE_ROOT__'
+[string]$SourceArchive = '__SOURCE_ARCHIVE__'
+[string]$DestinationRoot = '__DESTINATION_ROOT__'
+[string]$ResultPath = '__RESULT_PATH__'
 New-Item -ItemType Directory -Path (Split-Path -Parent $ResultPath) -Force | Out-Null
 $payload = [ordered]@{
     source_root = $SourceRoot
+    source_archive = $SourceArchive
     destination_root = $DestinationRoot
     source_visible = (Test-Path $SourceRoot)
+    archive_visible = if ([string]::IsNullOrWhiteSpace($SourceArchive)) { $false } else { Test-Path $SourceArchive }
     status = 'not-run'
     pdb_count = 0
     error = $null
 }
 try {
-    if (-not $payload.source_visible) { throw 'shared symbol cache is not visible in the guest' }
     New-Item -ItemType Directory -Path $DestinationRoot -Force | Out-Null
-    Copy-Item -Path (Join-Path $SourceRoot '*') -Destination $DestinationRoot -Recurse -Force
+    if ($payload.source_visible) {
+        Copy-Item -Path (Join-Path $SourceRoot '*') -Destination $DestinationRoot -Recurse -Force
+    }
+    elseif ($payload.archive_visible) {
+        Expand-Archive -Path $SourceArchive -DestinationPath $DestinationRoot -Force
+    }
+    else {
+        throw 'shared symbol cache is not visible in the guest and no direct archive fallback was provided'
+    }
     $payload.pdb_count = @(
         Get-ChildItem -Path $DestinationRoot -Recurse -Include '*.pdb','*.pd_' -ErrorAction SilentlyContinue
     ).Count
@@ -334,7 +383,10 @@ catch {
     $payload.error = $_.Exception.Message
 }
 $payload | ConvertTo-Json -Depth 6 | Set-Content -Path $ResultPath -Encoding UTF8
-'@ | Set-Content -Path $hostStageScript -Encoding UTF8
+'@.Replace('__SOURCE_ROOT__', $guestSharedSymbolCache).
+    Replace('__SOURCE_ARCHIVE__', '').
+    Replace('__DESTINATION_ROOT__', $guestSymbolRoot).
+    Replace('__RESULT_PATH__', $guestStageResult) | Set-Content -Path $hostStageScript -Encoding UTF8
 
 Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostStageScript, $guestStageScript) | Out-Null
 Invoke-Vmrun -Arguments @(
@@ -344,18 +396,73 @@ Invoke-Vmrun -Arguments @(
     '-NonInteractive',
     '-NoProfile',
     '-ExecutionPolicy', 'Bypass',
-    '-File', $guestStageScript,
-    '-SourceRoot', $guestSharedSymbolCache,
-    '-DestinationRoot', $guestSymbolRoot,
-    '-ResultPath', $guestStageResult
+    '-File', $guestStageScript
 ) -IgnoreExitCode | Out-Null
-Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestStageResult, $hostStageResult) -IgnoreExitCode | Out-Null
+Remove-Item -Path $hostStageResult -Force -ErrorAction SilentlyContinue
+Invoke-VmrunWithToolsRetry -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestStageResult, $hostStageResult) | Out-Null
 
 if (-not (Test-Path $hostStageResult)) {
     throw "Guest symbol-cache staging did not produce stage-symbol-cache.json."
 }
 
 $stagePayload = Get-Content -Path $hostStageResult -Raw | ConvertFrom-Json
+if ($stagePayload.status -ne 'staged') {
+    if (Test-Path $hostSymbolCacheZip) {
+        Remove-Item -Path $hostSymbolCacheZip -Force
+    }
+    Compress-Archive -Path (Join-Path $hostSymbolCacheRoot '*') -DestinationPath $hostSymbolCacheZip -Force
+    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostSymbolCacheZip, $guestSymbolCacheZip) | Out-Null
+    @'
+$ErrorActionPreference = 'Stop'
+[string]$SourceArchive = '__SOURCE_ARCHIVE__'
+[string]$DestinationRoot = '__DESTINATION_ROOT__'
+[string]$ResultPath = '__RESULT_PATH__'
+try {
+    New-Item -ItemType Directory -Path $DestinationRoot -Force | Out-Null
+    Expand-Archive -Path $SourceArchive -DestinationPath $DestinationRoot -Force
+    [ordered]@{
+        source_root = ''
+        source_archive = $SourceArchive
+        destination_root = $DestinationRoot
+        source_visible = $false
+        archive_visible = (Test-Path $SourceArchive)
+        status = if (@(Get-ChildItem -Path $DestinationRoot -Recurse -Include '*.pdb','*.pd_' -ErrorAction SilentlyContinue).Count -gt 0) { 'staged' } else { 'failed-no-pdb' }
+        pdb_count = @(Get-ChildItem -Path $DestinationRoot -Recurse -Include '*.pdb','*.pd_' -ErrorAction SilentlyContinue).Count
+        error = $null
+    } | ConvertTo-Json -Depth 6 | Set-Content -Path $ResultPath -Encoding UTF8
+}
+catch {
+    [ordered]@{
+        source_root = ''
+        source_archive = $SourceArchive
+        destination_root = $DestinationRoot
+        source_visible = $false
+        archive_visible = (Test-Path $SourceArchive)
+        status = 'failed'
+        pdb_count = 0
+        error = $_.Exception.Message
+    } | ConvertTo-Json -Depth 6 | Set-Content -Path $ResultPath -Encoding UTF8
+}
+'@.Replace('__SOURCE_ARCHIVE__', $guestSymbolCacheZip).
+        Replace('__DESTINATION_ROOT__', $guestSymbolRoot).
+        Replace('__RESULT_PATH__', $guestArchiveStageResult) | Set-Content -Path $hostArchiveStageScript -Encoding UTF8
+    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromHostToGuest', $VmPath, $hostArchiveStageScript, $guestArchiveStageScript) | Out-Null
+    Invoke-Vmrun -Arguments @(
+        '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
+        'runProgramInGuest', $VmPath,
+        'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',
+        '-NonInteractive',
+        '-NoProfile',
+        '-ExecutionPolicy', 'Bypass',
+        '-File', $guestArchiveStageScript
+    ) -IgnoreExitCode | Out-Null
+    Remove-Item -Path $hostArchiveStageResult -Force -ErrorAction SilentlyContinue
+    Invoke-VmrunWithToolsRetry -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $guestArchiveStageResult, $hostArchiveStageResult) | Out-Null
+    if (-not (Test-Path $hostArchiveStageResult)) {
+        throw "Guest symbol-cache archive fallback did not produce stage-symbol-cache-archive.json."
+    }
+    $stagePayload = Get-Content -Path $hostArchiveStageResult -Raw | ConvertFrom-Json
+}
 if ($stagePayload.status -ne 'staged') {
     throw "Guest symbol-cache staging failed: $($stagePayload.status) $($stagePayload.error)"
 }
@@ -399,7 +506,7 @@ foreach ($pair in @(
     @{ Guest = $guestStdout; Host = $hostStdout },
     @{ Guest = $guestStderr; Host = $hostStderr }
 )) {
-    Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $pair.Guest, $pair.Host) -IgnoreExitCode | Out-Null
+    Invoke-VmrunWithToolsRetry -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'CopyFileFromGuestToHost', $VmPath, $pair.Guest, $pair.Host) | Out-Null
 }
 
 foreach ($path in @($hostMarkdown, $hostRunLog, $hostStdout, $hostStderr)) {

@@ -1,0 +1,351 @@
+{
+  "entries": [
+    {
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": 404,
+      "final_url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "HTTP Error 404: Not Found",
+      "sources": [
+        {
+          "source_file": "research/records/explorer.show-full-path.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "explorer.show-full-path",
+          "value_name": "FullPath",
+          "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState"
+        },
+        {
+          "source_file": "research/records/explorer.show-full-path.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "explorer.show-full-path",
+          "value_name": "FullPath",
+          "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState"
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": 404,
+      "final_url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "HTTP Error 404: Not Found",
+      "sources": [
+        {
+          "source_file": "research/records/system.disable-auto-maintenance.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.disable-auto-maintenance",
+          "value_name": "MaintenanceDisabled",
+          "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance"
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": 404,
+      "final_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "HTTP Error 404: Not Found",
+      "sources": [
+        {
+          "source_file": "research/records/explorer.disable-low-disk-space-warning.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "explorer.disable-low-disk-space-warning",
+          "value_name": "NoLowDiskSpaceChecks",
+          "registry_path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer"
+        },
+        {
+          "source_file": "research/records/explorer.disable-low-disk-space-warning.json",
+          "source_kind": "official-doc",
+          "tweak_id": "explorer.disable-low-disk-space-warning",
+          "value_name": "NoLowDiskSpaceChecks",
+          "registry_path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer"
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": 404,
+      "final_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "HTTP Error 404: Not Found",
+      "sources": [
+        {
+          "source_file": "research/records/power.disable-cpu-idle-states.json",
+          "source_kind": "official-doc",
+          "tweak_id": "power.disable-cpu-idle-states",
+          "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+          "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power"
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cloudcontent",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": 404,
+      "final_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cloudcontent",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "HTTP Error 404: Not Found",
+      "sources": [
+        {
+          "source_file": "research/records/privacy.disable-suggestions.policy.review.json",
+          "source_kind": "validation_proof",
+          "tweak_id": "privacy.disable-suggestions.policy",
+          "value_name": "DisableThirdPartySuggestions",
+          "registry_path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent"
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowscopilot#turnoffwindowscopilot",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": 404,
+      "final_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowscopilot#turnoffwindowscopilot",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "HTTP Error 404: Not Found",
+      "sources": [
+        {
+          "source_file": "research/records/privacy.disable-copilot.json",
+          "source_kind": "policy-csp",
+          "tweak_id": "privacy.disable-copilot",
+          "value_name": "TurnOffWindowsCopilot",
+          "registry_path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot"
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": 404,
+      "final_url": "https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "HTTP Error 404: Not Found",
+      "sources": [
+        {
+          "source_file": "research/records/security.threat-file-hash-logging.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "security.threat-file-hash-logging",
+          "value_name": "ThreatFileHashLogging",
+          "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender"
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": 404,
+      "final_url": "https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "HTTP Error 404: Not Found",
+      "sources": [
+        {
+          "source_file": "research/records/system.disable-restartable-apps.review.json",
+          "source_kind": "official-doc",
+          "tweak_id": "system.disable-restartable-apps",
+          "value_name": "RestartApps",
+          "registry_path": "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://terminal.1.24.10621.0/TerminalApp.dll;",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": null,
+      "final_url": "https://terminal.1.24.10621.0/TerminalApp.dll;",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "[Errno 11001] getaddrinfo failed",
+      "sources": [
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260331.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        },
+        {
+          "source_file": "registry-research-framework/audit/static-evidence-v32-summary-20260401.md",
+          "source_kind": "text-reference",
+          "tweak_id": null,
+          "value_name": null,
+          "registry_path": null
+        }
+      ]
+    },
+    {
+      "url": "https://terminal.1.24.10621.0/TerminalApp.dll; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt",
+      "status": "broken_url",
+      "reason": "URL did not resolve cleanly.",
+      "status_code": null,
+      "final_url": "https://terminal.1.24.10621.0/TerminalApp.dll; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt",
+      "title": "",
+      "h1": "",
+      "snippet": "",
+      "error": "URL can't contain control characters. '/TerminalApp.dll; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt; evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt' (found at least ' ')",
+      "sources": [
+        {
+          "source_file": "research/records/developer.terminal-dev-mode.review.json",
+          "source_kind": "ghidra-headless",
+          "tweak_id": "developer.terminal-dev-mode",
+          "value_name": "DeveloperMode",
+          "registry_path": "HKCU\\Software\\Microsoft\\Windows Terminal"
+        }
+      ]
+    }
+  ]
+}
