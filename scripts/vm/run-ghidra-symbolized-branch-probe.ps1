@@ -28,10 +28,14 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $branchScriptSource = Join-Path $repoRoot 'scripts\vm\ghidra\ExportBranchAnalysis.java'
 $pdbScriptSource = Join-Path $repoRoot 'scripts\vm\ghidra\SetPdbSymbolRepository.java'
+$compactorScript = Join-Path $repoRoot 'scripts\compact_ghidra_branch_output.py'
 foreach ($source in @($branchScriptSource, $pdbScriptSource)) {
     if (-not (Test-Path $source)) {
         throw "Missing Ghidra v3.2 script: $source"
     }
+}
+if (-not (Test-Path $compactorScript)) {
+    throw "Missing Ghidra compactor script: $compactorScript"
 }
 
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
@@ -516,6 +520,12 @@ foreach ($path in @($hostMarkdown, $hostRunLog, $hostStdout, $hostStderr)) {
 if (-not (Test-Path $hostEvidence)) {
     throw "Guest Ghidra v3.2 probe did not produce evidence.json. See $hostRoot"
 }
+
+& python $compactorScript --evidence $hostEvidence --markdown $hostMarkdown | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    throw "Ghidra compactor failed for $hostRoot"
+}
+Normalize-TextArtifact -Path $hostMarkdown
 
 $evidencePayload = Get-Content -Path $hostEvidence -Raw | ConvertFrom-Json
 if (Test-Path $hostRunLog) {

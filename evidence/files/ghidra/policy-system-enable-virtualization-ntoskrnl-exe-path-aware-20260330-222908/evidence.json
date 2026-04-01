@@ -1,296 +1,205 @@
-﻿{
-    "binary":  "ntoskrnl.exe",
-    "probe":  "policy-system-enable-virtualization-ntoskrnl-exe-path-aware-branch-template-refresh",
-    "timestamp":  "2026-04-01T04:21:36.052901800Z",
-    "pdb_source":  "C:\\Tools\\Symbols\\policy-system-enable-virtualization-ntoskrnl-exe-path-aware-branch-template-refresh",
-    "matches":  [
-                    {
-                        "pattern":  "EnableVirtualization",
-                        "address":  "140761e9d",
-                        "function_name":  "PsBootPhaseComplete",
-                        "function_source":  "pdb-symbol",
-                        "function_confidence":  "string_only_review",
-                        "unclear":  true,
-                        "value_map":  "unclear",
-                        "compare_condition":  "unclear",
-                        "jump_condition":  "unclear",
-                        "branch_effect":  "unclear",
-                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
-                        "exception_review_required":  false,
-                        "exception_reason":  "none",
-                        "heuristic_score":  35,
-                        "effect_summary":  "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
-                        "heuristic_reasons":  [
-                                                  "pdb-symbol present",
-                                                  "stack-relative context detected"
-                                              ],
-                        "register_focus":  [
-                                               "R14",
-                                               "ESI",
-                                               "RAX",
-                                               "RBP",
-                                               "RSP"
-                                           ],
-                        "flag_focus":  [
-                                           "unclear"
-                                       ],
-                        "context_before":  [
-                                               "140761e87  LEA ESI,[R14 + 0x30]",
-                                               "140761e8b  LEA RAX,[0x140adf5f0]",
-                                               "140761e92  MOV dword ptr [RBP + -0x54],R14D",
-                                               "140761e96  MOV qword ptr [RBP + -0x28],RAX",
-                                               "140761e9a  XORPS XMM0,XMM0"
-                                           ],
-                        "branch_snippet":  [
-                                               "140761e9d  LEA RAX,[0x140adf610]"
-                                           ],
-                        "context_after":  [
-                                              "140761ea4  MOV qword ptr [RSP + 0x70],0x980096",
-                                              "140761ead  MOV qword ptr [RBP + -0x10],RAX",
-                                              "140761eb1  LEA RAX,[0x140adf640]",
-                                              "140761eb8  MOV qword ptr [RBP + 0x8],RAX",
-                                              "140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0"
-                                          ]
-                    },
-                    {
-                        "pattern":  "EnableVirtualization",
-                        "address":  "140761ead",
-                        "function_name":  "PsBootPhaseComplete",
-                        "function_source":  "pdb-symbol",
-                        "function_confidence":  "string_only_review",
-                        "unclear":  true,
-                        "value_map":  "unclear",
-                        "compare_condition":  "unclear",
-                        "jump_condition":  "unclear",
-                        "branch_effect":  "unclear",
-                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
-                        "exception_review_required":  false,
-                        "exception_reason":  "none",
-                        "heuristic_score":  35,
-                        "effect_summary":  "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
-                        "heuristic_reasons":  [
-                                                  "pdb-symbol present",
-                                                  "stack-relative context detected"
-                                              ],
-                        "register_focus":  [
-                                               "RBP",
-                                               "RAX",
-                                               "RSP"
-                                           ],
-                        "flag_focus":  [
-                                           "unclear"
-                                       ],
-                        "context_before":  [
-                                               "140761e92  MOV dword ptr [RBP + -0x54],R14D",
-                                               "140761e96  MOV qword ptr [RBP + -0x28],RAX",
-                                               "140761e9a  XORPS XMM0,XMM0",
-                                               "140761e9d  LEA RAX,[0x140adf610]",
-                                               "140761ea4  MOV qword ptr [RSP + 0x70],0x980096"
-                                           ],
-                        "branch_snippet":  [
-                                               "140761ead  MOV qword ptr [RBP + -0x10],RAX"
-                                           ],
-                        "context_after":  [
-                                              "140761eb1  LEA RAX,[0x140adf640]",
-                                              "140761eb8  MOV qword ptr [RBP + 0x8],RAX",
-                                              "140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0",
-                                              "140761ec0  MOV qword ptr [RBP + -0x80],0x30002e",
-                                              "140761ec8  MOV dword ptr [RBP + -0x30],0x140012"
-                                          ]
-                    },
-                    {
-                        "pattern":  "EnableLUA",
-                        "address":  "140761e8b",
-                        "function_name":  "PsBootPhaseComplete",
-                        "function_source":  "pdb-symbol",
-                        "function_confidence":  "string_only_review",
-                        "unclear":  true,
-                        "value_map":  "unclear",
-                        "compare_condition":  "unclear",
-                        "jump_condition":  "unclear",
-                        "branch_effect":  "unclear",
-                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
-                        "exception_review_required":  false,
-                        "exception_reason":  "none",
-                        "heuristic_score":  35,
-                        "effect_summary":  "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
-                        "heuristic_reasons":  [
-                                                  "pdb-symbol present",
-                                                  "stack-relative context detected"
-                                              ],
-                        "register_focus":  [
-                                               "RDX",
-                                               "RAX",
-                                               "RBP",
-                                               "R14",
-                                               "ESI",
-                                               "RSP"
-                                           ],
-                        "flag_focus":  [
-                                           "unclear"
-                                       ],
-                        "context_before":  [
-                                               "140761e71  LEA RDX,[0x140adf680]",
-                                               "140761e78  LEA RAX,[0x140adf5c0]",
-                                               "140761e7f  MOV dword ptr [RBP + -0x6c],R14D",
-                                               "140761e83  MOV qword ptr [RBP + -0x78],RAX",
-                                               "140761e87  LEA ESI,[R14 + 0x30]"
-                                           ],
-                        "branch_snippet":  [
-                                               "140761e8b  LEA RAX,[0x140adf5f0]"
-                                           ],
-                        "context_after":  [
-                                              "140761e92  MOV dword ptr [RBP + -0x54],R14D",
-                                              "140761e96  MOV qword ptr [RBP + -0x28],RAX",
-                                              "140761e9a  XORPS XMM0,XMM0",
-                                              "140761e9d  LEA RAX,[0x140adf610]",
-                                              "140761ea4  MOV qword ptr [RSP + 0x70],0x980096"
-                                          ]
-                    },
-                    {
-                        "pattern":  "EnableLUA",
-                        "address":  "140761e96",
-                        "function_name":  "PsBootPhaseComplete",
-                        "function_source":  "pdb-symbol",
-                        "function_confidence":  "string_only_review",
-                        "unclear":  true,
-                        "value_map":  "unclear",
-                        "compare_condition":  "unclear",
-                        "jump_condition":  "unclear",
-                        "branch_effect":  "unclear",
-                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
-                        "exception_review_required":  false,
-                        "exception_reason":  "none",
-                        "heuristic_score":  35,
-                        "effect_summary":  "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
-                        "heuristic_reasons":  [
-                                                  "pdb-symbol present",
-                                                  "stack-relative context detected"
-                                              ],
-                        "register_focus":  [
-                                               "RBP",
-                                               "RAX",
-                                               "R14",
-                                               "ESI",
-                                               "RSP"
-                                           ],
-                        "flag_focus":  [
-                                           "unclear"
-                                       ],
-                        "context_before":  [
-                                               "140761e7f  MOV dword ptr [RBP + -0x6c],R14D",
-                                               "140761e83  MOV qword ptr [RBP + -0x78],RAX",
-                                               "140761e87  LEA ESI,[R14 + 0x30]",
-                                               "140761e8b  LEA RAX,[0x140adf5f0]",
-                                               "140761e92  MOV dword ptr [RBP + -0x54],R14D"
-                                           ],
-                        "branch_snippet":  [
-                                               "140761e96  MOV qword ptr [RBP + -0x28],RAX"
-                                           ],
-                        "context_after":  [
-                                              "140761e9a  XORPS XMM0,XMM0",
-                                              "140761e9d  LEA RAX,[0x140adf610]",
-                                              "140761ea4  MOV qword ptr [RSP + 0x70],0x980096",
-                                              "140761ead  MOV qword ptr [RBP + -0x10],RAX",
-                                              "140761eb1  LEA RAX,[0x140adf640]"
-                                          ]
-                    },
-                    {
-                        "pattern":  "EnableInstallerDetection",
-                        "address":  "140761eb1",
-                        "function_name":  "PsBootPhaseComplete",
-                        "function_source":  "pdb-symbol",
-                        "function_confidence":  "string_only_review",
-                        "unclear":  true,
-                        "value_map":  "unclear",
-                        "compare_condition":  "unclear",
-                        "jump_condition":  "unclear",
-                        "branch_effect":  "unclear",
-                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
-                        "exception_review_required":  false,
-                        "exception_reason":  "none",
-                        "heuristic_score":  35,
-                        "effect_summary":  "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
-                        "heuristic_reasons":  [
-                                                  "pdb-symbol present",
-                                                  "stack-relative context detected"
-                                              ],
-                        "register_focus":  [
-                                               "RAX",
-                                               "RBP",
-                                               "RSP"
-                                           ],
-                        "flag_focus":  [
-                                           "unclear"
-                                       ],
-                        "context_before":  [
-                                               "140761e96  MOV qword ptr [RBP + -0x28],RAX",
-                                               "140761e9a  XORPS XMM0,XMM0",
-                                               "140761e9d  LEA RAX,[0x140adf610]",
-                                               "140761ea4  MOV qword ptr [RSP + 0x70],0x980096",
-                                               "140761ead  MOV qword ptr [RBP + -0x10],RAX"
-                                           ],
-                        "branch_snippet":  [
-                                               "140761eb1  LEA RAX,[0x140adf640]"
-                                           ],
-                        "context_after":  [
-                                              "140761eb8  MOV qword ptr [RBP + 0x8],RAX",
-                                              "140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0",
-                                              "140761ec0  MOV qword ptr [RBP + -0x80],0x30002e",
-                                              "140761ec8  MOV dword ptr [RBP + -0x30],0x140012",
-                                              "140761ecf  MOV dword ptr [RBP + -0x20],R13D"
-                                          ]
-                    },
-                    {
-                        "pattern":  "EnableInstallerDetection",
-                        "address":  "140761eb8",
-                        "function_name":  "PsBootPhaseComplete",
-                        "function_source":  "pdb-symbol",
-                        "function_confidence":  "string_only_review",
-                        "unclear":  true,
-                        "value_map":  "unclear",
-                        "compare_condition":  "unclear",
-                        "jump_condition":  "unclear",
-                        "branch_effect":  "unclear",
-                        "stack_summary":  "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
-                        "exception_review_required":  false,
-                        "exception_reason":  "none",
-                        "heuristic_score":  35,
-                        "effect_summary":  "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
-                        "heuristic_reasons":  [
-                                                  "pdb-symbol present",
-                                                  "stack-relative context detected"
-                                              ],
-                        "register_focus":  [
-                                               "RAX",
-                                               "RSP",
-                                               "RBP"
-                                           ],
-                        "flag_focus":  [
-                                           "unclear"
-                                       ],
-                        "context_before":  [
-                                               "140761e9a  XORPS XMM0,XMM0",
-                                               "140761e9d  LEA RAX,[0x140adf610]",
-                                               "140761ea4  MOV qword ptr [RSP + 0x70],0x980096",
-                                               "140761ead  MOV qword ptr [RBP + -0x10],RAX",
-                                               "140761eb1  LEA RAX,[0x140adf640]"
-                                           ],
-                        "branch_snippet":  [
-                                               "140761eb8  MOV qword ptr [RBP + 0x8],RAX"
-                                           ],
-                        "context_after":  [
-                                              "140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0",
-                                              "140761ec0  MOV qword ptr [RBP + -0x80],0x30002e",
-                                              "140761ec8  MOV dword ptr [RBP + -0x30],0x140012",
-                                              "140761ecf  MOV dword ptr [RBP + -0x20],R13D",
-                                              "140761ed3  MOV dword ptr [RBP + -0x18],0x2a0028"
-                                          ]
-                    }
-                ],
-    "exit_code":  0,
-    "markdown_exists":  true,
-    "run_log_exists":  true,
-    "pdb_loaded":  true,
-    "pdb_verification_source":  "ghidra-run-log"
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "policy-system-enable-virtualization-ntoskrnl-exe-path-aware-branch-template-refresh",
+  "timestamp": "2026-04-01T04:21:36.052901800Z",
+  "pdb_source": "C:\\Tools\\Symbols\\policy-system-enable-virtualization-ntoskrnl-exe-path-aware-branch-template-refresh",
+  "matches": [
+    {
+      "pattern": "EnableVirtualization",
+      "address": "140761e9d",
+      "function_name": "PsBootPhaseComplete",
+      "function_source": "pdb-symbol",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "unclear",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 35,
+      "effect_summary": "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "R14",
+        "ESI",
+        "RAX",
+        "RBP",
+        "RSP"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140761e87  LEA ESI,[R14 + 0x30]",
+        "140761e8b  LEA RAX,[0x140adf5f0]",
+        "140761e92  MOV dword ptr [RBP + -0x54],R14D",
+        "140761e96  MOV qword ptr [RBP + -0x28],RAX",
+        "140761e9a  XORPS XMM0,XMM0"
+      ],
+      "branch_snippet": [
+        "140761e9d  LEA RAX,[0x140adf610]"
+      ],
+      "context_after": [
+        "140761ea4  MOV qword ptr [RSP + 0x70],0x980096",
+        "140761ead  MOV qword ptr [RBP + -0x10],RAX",
+        "140761eb1  LEA RAX,[0x140adf640]",
+        "140761eb8  MOV qword ptr [RBP + 0x8],RAX",
+        "140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0"
+      ]
+    },
+    {
+      "pattern": "EnableLUA",
+      "address": "140761e8b",
+      "function_name": "PsBootPhaseComplete",
+      "function_source": "pdb-symbol",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "unclear",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 35,
+      "effect_summary": "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "RDX",
+        "RAX",
+        "RBP",
+        "R14",
+        "ESI",
+        "RSP"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140761e71  LEA RDX,[0x140adf680]",
+        "140761e78  LEA RAX,[0x140adf5c0]",
+        "140761e7f  MOV dword ptr [RBP + -0x6c],R14D",
+        "140761e83  MOV qword ptr [RBP + -0x78],RAX",
+        "140761e87  LEA ESI,[R14 + 0x30]"
+      ],
+      "branch_snippet": [
+        "140761e8b  LEA RAX,[0x140adf5f0]"
+      ],
+      "context_after": [
+        "140761e92  MOV dword ptr [RBP + -0x54],R14D",
+        "140761e96  MOV qword ptr [RBP + -0x28],RAX",
+        "140761e9a  XORPS XMM0,XMM0",
+        "140761e9d  LEA RAX,[0x140adf610]",
+        "140761ea4  MOV qword ptr [RSP + 0x70],0x980096"
+      ]
+    },
+    {
+      "pattern": "EnableInstallerDetection",
+      "address": "140761eb1",
+      "function_name": "PsBootPhaseComplete",
+      "function_source": "pdb-symbol",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "unclear",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 35,
+      "effect_summary": "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "RAX",
+        "RBP",
+        "RSP"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140761e96  MOV qword ptr [RBP + -0x28],RAX",
+        "140761e9a  XORPS XMM0,XMM0",
+        "140761e9d  LEA RAX,[0x140adf610]",
+        "140761ea4  MOV qword ptr [RSP + 0x70],0x980096",
+        "140761ead  MOV qword ptr [RBP + -0x10],RAX"
+      ],
+      "branch_snippet": [
+        "140761eb1  LEA RAX,[0x140adf640]"
+      ],
+      "context_after": [
+        "140761eb8  MOV qword ptr [RBP + 0x8],RAX",
+        "140761ebc  MOVUPS xmmword ptr [RBP + -0x40],XMM0",
+        "140761ec0  MOV qword ptr [RBP + -0x80],0x30002e",
+        "140761ec8  MOV dword ptr [RBP + -0x30],0x140012",
+        "140761ecf  MOV dword ptr [RBP + -0x20],R13D"
+      ]
+    }
+  ],
+  "exit_code": 0,
+  "markdown_exists": true,
+  "run_log_exists": true,
+  "pdb_loaded": true,
+  "pdb_verification_source": "ghidra-run-log",
+  "raw_match_count": 6,
+  "committed_match_count": 3,
+  "omitted_symbolized_count": 0,
+  "omitted_review_only_count": 3,
+  "omitted_unresolved_count": 0,
+  "compacted_for_commit": true,
+  "match_compaction": {
+    "version": 1,
+    "max_symbolized_per_pattern": 2,
+    "max_review_only_per_pattern": 1,
+    "patterns": [
+      {
+        "pattern": "EnableVirtualization",
+        "raw_match_count": 2,
+        "committed_match_count": 1,
+        "symbolized_kept_count": 0,
+        "review_only_kept_count": 1,
+        "omitted_symbolized_count": 0,
+        "omitted_review_only_count": 1,
+        "omitted_unresolved_count": 0,
+        "status": "kept",
+        "reason": "Lower-confidence or unresolved review-only hits were omitted from the committed surface."
+      },
+      {
+        "pattern": "EnableLUA",
+        "raw_match_count": 2,
+        "committed_match_count": 1,
+        "symbolized_kept_count": 0,
+        "review_only_kept_count": 1,
+        "omitted_symbolized_count": 0,
+        "omitted_review_only_count": 1,
+        "omitted_unresolved_count": 0,
+        "status": "kept",
+        "reason": "Lower-confidence or unresolved review-only hits were omitted from the committed surface."
+      },
+      {
+        "pattern": "EnableInstallerDetection",
+        "raw_match_count": 2,
+        "committed_match_count": 1,
+        "symbolized_kept_count": 0,
+        "review_only_kept_count": 1,
+        "omitted_symbolized_count": 0,
+        "omitted_review_only_count": 1,
+        "omitted_unresolved_count": 0,
+        "status": "kept",
+        "reason": "Lower-confidence or unresolved review-only hits were omitted from the committed surface."
+      }
+    ]
+  }
 }

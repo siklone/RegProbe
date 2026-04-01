@@ -4,7 +4,12 @@
 - Probe: `diagtrack-reliability-ghidra-branch-template-refresh`
 - Timestamp: `2026-04-01T05:11:51.515354700Z`
 - PDB source: `C:\Tools\Symbols\diagtrack-reliability-ghidra-branch-template-refresh`
-- Patterns: `addr:18038fce0`, `addr:18026bfc0`, `TimeStampInterval`
+- Patterns: `addr:18038fce0, addr:18026bfc0, TimeStampInterval`
+- Raw matches: `1`
+- Committed matches: `1`
+- Omitted additional symbolized branch hits: `0`
+- Omitted unresolved review hits: `0`
+- Omitted lower-confidence review hits: `0`
 
 ## `addr:18038fce0`
 
@@ -16,15 +21,12 @@ _No matching strings found._
 
 ## `TimeStampInterval`
 
-### String @ `1803b9778`
-
-`TimeStampInterval`
+### Branch @ `18038fce0`
 
 - Function: `_guard_dispatch_icall$thunk$10345483385596137414`
 - Function source: `pdb-symbol`
 - Function confidence: `string_only_review`
-- Address: `18038fce0`
-- Register focus: `RBX`, `RCX`
+- Register focus: `RBX, RCX`
 - Flag focus: `unclear`
 - Compare: `unclear`
 - Jump: `180376010  JMP 0x18034a090`
@@ -35,7 +37,7 @@ _No matching strings found._
 - Heuristic score: `30`
 - Heuristic reasons: `pdb-symbol present | conditional jump found | value immediate found in bounded block | exception/trap gate forced review-only`
 - Effect: unclear - exception-adjacent control flow needs manual review before any semantic claim.
-- Unclear: `true`
+- Unclear: `True`
 
 ```asm
 ; context_before
@@ -50,4 +52,3 @@ _No matching strings found._
 1803758be  JMP 0x180136910
 ; context_after
 ```
-

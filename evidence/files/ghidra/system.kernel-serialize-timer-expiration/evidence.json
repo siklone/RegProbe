@@ -1,52 +1,49 @@
-﻿{
-    "binary":  "ntoskrnl.exe",
-    "probe":  "kernel-serialize-timer-expiration-ghidra-branch-template-refresh",
-    "timestamp":  "2026-04-01T05:05:39.689851400Z",
-    "pdb_source":  "C:\\Tools\\Symbols\\kernel-serialize-timer-expiration-ghidra-branch-template-refresh",
-    "matches":  [
-                    {
-                        "pattern":  "SerializeTimerExpiration",
-                        "address":  "140c63068",
-                        "function_name":  "\u003cno function\u003e",
-                        "function_source":  "unresolved",
-                        "function_confidence":  "string_only_review",
-                        "unclear":  true,
-                        "value_map":  "unclear",
-                        "compare_condition":  "unclear",
-                        "jump_condition":  "unclear",
-                        "branch_effect":  "trap/fault-adjacent block detected; control-flow may be misleading.",
-                        "stack_summary":  "no obvious stack-relative access in the bounded context.",
-                        "exception_review_required":  true,
-                        "exception_reason":  "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
-                        "heuristic_score":  0,
-                        "effect_summary":  "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
-                        "heuristic_reasons":  [
-                                                  "exception/trap gate forced review-only"
-                                              ],
-                        "register_focus":  [
-                                               "RAX"
-                                           ],
-                        "flag_focus":  [
-                                           "unclear"
-                                       ],
-                        "context_before":  [
-                                               "140c618b1  HLT",
-                                               "140c619a8  ADD byte ptr CS:[RAX],DH",
-                                               "140c619ab  ADD byte ptr [RAX],AL",
-                                               "140c619ad  ADD byte ptr [RAX],AL",
-                                               "140c619af  ADD byte ptr [RAX],DL"
-                                           ],
-                        "branch_snippet":  [
-                                               "140c619b1  INT1"
-                                           ],
-                        "context_after":  [
-
-                                          ]
-                    }
-                ],
-    "exit_code":  0,
-    "markdown_exists":  true,
-    "run_log_exists":  true,
-    "pdb_loaded":  true,
-    "pdb_verification_source":  "ghidra-run-log"
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "kernel-serialize-timer-expiration-ghidra-branch-template-refresh",
+  "timestamp": "2026-04-01T05:05:39.689851400Z",
+  "pdb_source": "C:\\Tools\\Symbols\\kernel-serialize-timer-expiration-ghidra-branch-template-refresh",
+  "matches": [],
+  "exit_code": 0,
+  "markdown_exists": true,
+  "run_log_exists": true,
+  "pdb_loaded": true,
+  "pdb_verification_source": "ghidra-run-log",
+  "raw_match_count": 1,
+  "committed_match_count": 0,
+  "omitted_symbolized_count": 0,
+  "omitted_review_only_count": 0,
+  "omitted_unresolved_count": 1,
+  "compacted_for_commit": true,
+  "match_compaction": {
+    "version": 1,
+    "max_symbolized_per_pattern": 2,
+    "max_review_only_per_pattern": 1,
+    "patterns": [
+      {
+        "pattern": "addr:140c63068",
+        "raw_match_count": 0,
+        "committed_match_count": 0,
+        "symbolized_kept_count": 0,
+        "review_only_kept_count": 0,
+        "omitted_symbolized_count": 0,
+        "omitted_review_only_count": 0,
+        "omitted_unresolved_count": 0,
+        "status": "no-match",
+        "reason": "Committed output already satisfied the bounded branch-review format."
+      },
+      {
+        "pattern": "SerializeTimerExpiration",
+        "raw_match_count": 1,
+        "committed_match_count": 0,
+        "symbolized_kept_count": 0,
+        "review_only_kept_count": 0,
+        "omitted_symbolized_count": 0,
+        "omitted_review_only_count": 0,
+        "omitted_unresolved_count": 1,
+        "status": "review-only-omitted",
+        "reason": "Raw review-only hits existed, but no committed PDB-backed or named review block survived compaction."
+      }
+    ]
+  }
 }

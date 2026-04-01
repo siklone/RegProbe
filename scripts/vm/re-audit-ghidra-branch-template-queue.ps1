@@ -136,7 +136,7 @@ foreach ($entry in $entries) {
         $shellAfter = Wait-GuestReady
 
         $hostProbeRoot = Resolve-LatestProbeRoot -OutputName $runName
-        foreach ($fileName in @('evidence.json', 'ghidra-matches.md', 'ghidra-run.log', 'ghidra-stdout.txt', 'ghidra-stderr.txt')) {
+        foreach ($fileName in @('evidence.json', 'ghidra-matches.md', 'ghidra-run.log')) {
             $source = Join-Path $hostProbeRoot $fileName
             $destination = Join-Path $artifactDir $fileName
             if (Test-Path $source) {
