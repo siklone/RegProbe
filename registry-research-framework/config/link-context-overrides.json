@@ -1639,6 +1639,38 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T15:20:00Z",
       "notes": "Manual review confirmed this note references the Microsoft security policy page as a valid lead for ClearPageFileAtShutdown behavior and shutdown-cost tradeoffs."
+    },
+    {
+      "source_file": "research/records/network.smb-require-signing-client.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852186(v=ws.11)",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:40:00Z",
+      "notes": "Manual review confirmed the Microsoft network client signing policy page is used narrowly for the security-option behavior, default state, and tradeoff discussion around requiring SMB client signing."
+    },
+    {
+      "source_file": "research/records/network.smb-require-signing-server.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852239(v=ws.11)",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:40:00Z",
+      "notes": "Manual review confirmed the Microsoft network server signing policy page is used narrowly for the security-option behavior, default state, and tradeoff discussion around requiring SMB server signing."
+    },
+    {
+      "source_file": "research/records/privacy.hide-last-logged-in-user.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-do-not-display-last-user-name",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:40:00Z",
+      "notes": "Manual review confirmed the corrected Microsoft page directly documents the Interactive logon: Do not display last user name policy behavior and default state that this record cites."
+    },
+    {
+      "source_file": "research/records/privacy.hide-username-at-signin.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-dont-display-username-at-sign-in",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T15:40:00Z",
+      "notes": "Manual review confirmed the corrected Microsoft page directly documents the Interactive logon: Don't display username at sign-in policy behavior and default state that this record cites."
     }
   ]
 }
