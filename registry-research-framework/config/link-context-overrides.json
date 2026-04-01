@@ -1703,6 +1703,46 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T16:00:00Z",
       "notes": "Manual review confirmed the Azure troubleshooting page is used narrowly to show that the SharedAccess runtime firewall profile paths are real Windows surfaces, while the record's primary validated control remains the official Firewall CSP policy path."
+    },
+    {
+      "source_file": "research/records/privacy.disable-app-launch-tracking.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:20:00Z",
+      "notes": "Manual review confirmed the MS-GPPREF StartMenuVista page directly documents Start_TrackProgs under Explorer\\Advanced, which is the narrow path-level use in this record."
+    },
+    {
+      "source_file": "research/records/explorer.show-full-path.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:20:00Z",
+      "notes": "Manual review confirmed the validation proof matches the MS-GPPREF GlobalFolderOptions page's FullPath mapping and 0/1 title-bar behavior."
+    },
+    {
+      "source_file": "research/records/explorer.show-full-path.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:20:00Z",
+      "notes": "Manual review confirmed the MS-GPPREF GlobalFolderOptions page directly documents HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath and its 1=enable / 0=disable semantics."
+    },
+    {
+      "source_file": "research/records/network.smb-reject-unencrypted-access.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb2/a64e55aa-1152-48e4-8206-edd96444e7f7",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:20:00Z",
+      "notes": "Manual review confirmed the MS-SMB2 product-behavior appendix explicitly documents RejectUnencryptedAccess on the LanmanServer path, including the default TRUE behavior and the zero-to-false override."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpsb/341747f5-6b5d-4d30-85fc-fa1cc04038d4",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T16:20:00Z",
+      "notes": "Manual review confirmed this note references the MS-GPSB ConsentPromptBehaviorAdmin protocol page as a valid lead for the exact Policies\\System value name and its documented DWORD meanings."
     }
   ]
 }
