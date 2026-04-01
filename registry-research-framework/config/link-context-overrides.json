@@ -2127,6 +2127,102 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T18:25:00Z",
       "notes": "Manual review confirmed the WPR command-line page is cited narrowly for the documented disablepagingexecutive tracing option and its diagnostic-only scope."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/printing/troubleshoot-printing-scenarios",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed this lead note uses the printing troubleshooting page only as background for Spooler and printing-related service surfaces."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/bitlocker-csp",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed this lead note uses the BitLocker CSP page as background for official BitLocker management surfaces."
+    },
+    {
+      "source_file": "research/records/power.disable-network-power-saving.policy.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the task-offloading page directly documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters and its enabled versus disabled meanings."
+    },
+    {
+      "source_file": "research/records/power.disable-network-power-saving.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the task-offloading page is cited correctly for the exact DisableTaskOffload path and value semantics inside the deprecated mixed bundle."
+    },
+    {
+      "source_file": "research/records/cleanup.disable-reserved-storage.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-storage-reserve?view=windows-11",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches Microsoft's documented DISM /Get-ReservedStorageState and /Set-ReservedStorageState command surface."
+    },
+    {
+      "source_file": "research/records/cleanup.disable-reserved-storage.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism-storage-reserve?view=windows-11",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the DISM Storage reserve page directly documents the supported Reserved Storage command surface and the Enabled or Disabled state values."
+    },
+    {
+      "source_file": "research/records/cleanup.disable-reserved-storage.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/dism/dismgetreservedstoragestate-function?view=windows-11",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the DismGetReservedStorageState page reinforces the supported API-based read surface for Reserved Storage state."
+    },
+    {
+      "source_file": "research/records/network.smb-enable-multichannel.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/manage-smb-multichannel",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches Microsoft's statement that SMB Multichannel is enabled by default and the documented Set-SmbServerConfiguration and Set-SmbClientConfiguration surfaces."
+    },
+    {
+      "source_file": "research/records/network.smb-enable-multichannel.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/manage-smb-multichannel",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the Manage SMB Multichannel page is cited correctly for the official client and server EnableMultiChannel surfaces and the default-enabled state."
+    },
+    {
+      "source_file": "research/records/system.ntfs-disable-last-access.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches Microsoft's web-server tuning guidance that NtfsDisableLastAccessUpdate under FileSystem is set to 1 by default."
+    },
+    {
+      "source_file": "research/records/system.ntfs-disable-last-access.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the Performance Tuning Web Servers page directly documents NtfsDisableLastAccessUpdate under HKLM\\System\\CurrentControlSet\\Control\\FileSystem and its default value of 1."
+    },
+    {
+      "source_file": "research/records/security.hide-defender-exclusions-from-local-admins.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/defender-csp",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:40:00Z",
+      "notes": "Manual review confirmed the Defender CSP page directly documents HideExclusionsFromLocalAdmins and the 0/not configured versus 1 behavior used by this record."
     }
   ]
 }
