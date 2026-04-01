@@ -2039,6 +2039,94 @@
       "review_status": "reviewed_context_fit",
       "reviewed_utc": "2026-04-01T18:05:00Z",
       "notes": "Manual review confirmed the French troubleshooting article directly includes the machine Explorer policy path and NoLowDiskSpaceChecks = 1 guidance used by this record."
+    },
+    {
+      "source_file": "research/records/power.disable-modern-standby.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches Microsoft's statement that switching between Modern Standby and S3 is not supported without a complete OS reinstall."
+    },
+    {
+      "source_file": "research/records/power.disable-modern-standby.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the Modern Standby page is used narrowly to document the unsupported S3-versus-Modern-Standby switching story, not as proof for a supported registry toggle."
+    },
+    {
+      "source_file": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "source_kind": "text-reference",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed this lead note uses the powercfg command reference only as background for power and standby control surfaces."
+    },
+    {
+      "source_file": "research/records/system.kernel-dpc-watchdog-period.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kequerydpcwatchdoginformation",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the KeQueryDpcWatchdogInformation page is cited narrowly for the DPC watchdog feature area and watchdog timing semantics, not as a publication of the DpcWatchdogPeriod registry value."
+    },
+    {
+      "source_file": "research/records/system.ntfs-disable-last-access.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the AgeStore page is used narrowly for Microsoft's statement that last-access data is disabled by default on Vista and later and for the fsutil disablelastaccess examples."
+    },
+    {
+      "source_file": "research/records/audio.disable-beep.review.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches Microsoft's Services tree documentation for Start = 0x4 meaning Disabled."
+    },
+    {
+      "source_file": "research/records/audio.disable-beep.review.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the Services registry tree page directly documents Start values, including 0x4 meaning Disabled, which is the contract used by the Beep record."
+    },
+    {
+      "source_file": "research/records/system.kernel-thread-dpc-enable.json",
+      "source_kind": "validation_proof",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the validation proof quote matches Microsoft's exact ThreadDpcEnable path, default-enabled wording, and the statement that setting the value to 0 disables threaded DPCs."
+    },
+    {
+      "source_file": "research/records/system.kernel-thread-dpc-enable.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the threaded DPCs page directly documents HKLM\\System\\CCS\\Control\\SessionManager\\Kernel\\ThreadDpcEnable and its 0 = disabled behavior."
+    },
+    {
+      "source_file": "research/records/power.disable-cpu-idle-states.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/ppm-notifications",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the PPM Notifications page is used narrowly for the processor power-management and idle-state feature area, not as proof for the raw undocumented registry bundle."
+    },
+    {
+      "source_file": "research/records/system.memory-disable-paging-executive.json",
+      "source_kind": "official-doc",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/wpr-command-line-options",
+      "review_status": "reviewed_context_fit",
+      "reviewed_utc": "2026-04-01T18:25:00Z",
+      "notes": "Manual review confirmed the WPR command-line page is cited narrowly for the documented disablepagingexecutive tracing option and its diagnostic-only scope."
     }
   ]
 }
