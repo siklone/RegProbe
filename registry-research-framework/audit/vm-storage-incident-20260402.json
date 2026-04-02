@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2026-04-02T00:00:00Z",
+  "status": "storage-unsafe",
+  "family": "power-control",
+  "pattern": "mega-trigger",
+  "vm_path": "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+  "affected_drive": "H:",
+  "evidence": {
+    "vmware_error": {
+      "path": "H:\\Yedek\\VMs\\Win25H2Clean\\vmware.log",
+      "err_code": 1117,
+      "message": "The request could not be performed because of an I/O device error."
+    },
+    "host_event_log": {
+      "providers": [
+        "disk",
+        "Microsoft-Windows-Ntfs"
+      ],
+      "symptoms": [
+        "disk retry events",
+        "NTFS transaction log flush failure",
+        "volume H: I/O device error"
+      ]
+    },
+    "storage_context": {
+      "bus_type": "USB",
+      "device_model": "Generic SCSI Disk Device"
+    }
+  },
+  "impact": {
+    "runtime_evidence_trust": "blocked",
+    "recommended_status": "do-not-run-live-runtime-on-current-path"
+  },
+  "actions": [
+    "cancel VMware popup instead of continuing guest execution",
+    "run storage preflight before future runtime attempts",
+    "migrate VM to healthy local storage before resuming mega-trigger"
+  ]
+}

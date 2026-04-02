@@ -688,6 +688,44 @@ function Wait-TraceArtifactReady {
     }
 }
 
+function Resolve-TraceArtifactPath {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$PreferredPath
+    )
+
+    if (Test-Path -LiteralPath $PreferredPath) {
+        return [ordered]@{
+            path = $PreferredPath
+            source = 'preferred'
+        }
+    }
+
+    $parent = Split-Path -Parent $PreferredPath
+    $baseName = [System.IO.Path]::GetFileNameWithoutExtension($PreferredPath)
+    if ([string]::IsNullOrWhiteSpace($parent) -or -not (Test-Path -LiteralPath $parent)) {
+        return $null
+    }
+
+    $candidates = @(
+        Get-ChildItem -Path $parent -File -ErrorAction SilentlyContinue |
+            Where-Object {
+                $_.Name -like "$baseName*.etl*" -or
+                $_.Name -like '*.etl' -or
+                $_.Extension -like '.etl*'
+            } |
+            Sort-Object LastWriteTimeUtc -Descending
+    )
+    if (@($candidates).Count -eq 0) {
+        return $null
+    }
+
+    return [ordered]@{
+        path = $candidates[0].FullName
+        source = 'discovered'
+    }
+}
+
 function Get-TraceLinesFromCsv {
     if (-not (Test-Path -LiteralPath $csvPath)) {
         return @()
@@ -945,12 +983,21 @@ try {
     Stop-Trace
     Write-RunLog -Message 'trace-stopped'
 
-    $etlReadiness = Wait-TraceArtifactReady -Path $etlPath -TimeoutSeconds 45 -PollMilliseconds 1000 -StablePollsRequired 3
-    Write-RunLog -Message ("trace-artifact-ready ready={0} exists={1} length={2} stable_polls={3}" -f $etlReadiness.ready, $etlReadiness.exists, $etlReadiness.length, $etlReadiness.stable_polls)
+    $resolvedTrace = Resolve-TraceArtifactPath -PreferredPath $etlPath
+    if ($resolvedTrace) {
+        Write-RunLog -Message ("trace-artifact-path path={0} source={1}" -f $resolvedTrace.path, $resolvedTrace.source)
+    }
+    else {
+        Write-RunLog -Message ("trace-artifact-path path=missing source=none preferred={0}" -f $etlPath)
+    }
+
+    $traceArtifactPath = if ($resolvedTrace) { [string]$resolvedTrace.path } else { $etlPath }
+    $etlReadiness = Wait-TraceArtifactReady -Path $traceArtifactPath -TimeoutSeconds 45 -PollMilliseconds 1000 -StablePollsRequired 3
+    Write-RunLog -Message ("trace-artifact-ready ready={0} exists={1} length={2} stable_polls={3} path={4}" -f $etlReadiness.ready, $etlReadiness.exists, $etlReadiness.length, $etlReadiness.stable_polls, $traceArtifactPath)
 
     $traceLines = @()
     $parserSource = 'tracerpt-csv'
-    $tracerpt = Invoke-TracerptParse -TracePath $etlPath -CsvOutputPath $csvPath -Attempts 2 -TimeoutSeconds 180
+    $tracerpt = Invoke-TracerptParse -TracePath $traceArtifactPath -CsvOutputPath $csvPath -Attempts 2 -TimeoutSeconds 180
     if ($tracerpt.success) {
         $traceLines = Get-TraceLinesFromCsv
         Write-RunLog -Message ("trace-parsed parser=tracerpt attempt={0} csv_exists={1} csv_length={2}" -f $tracerpt.attempt, (Test-Path -LiteralPath $csvPath), $tracerpt.csv_length)
@@ -958,7 +1005,7 @@ try {
     else {
         $parserSource = 'etl-binary-fallback'
         Write-RunLog -Message ("trace-parse-fallback parser=etl-binary timed_out={0} exit_code={1} csv_exists={2}" -f $tracerpt.timed_out, $tracerpt.exit_code, $tracerpt.csv_exists)
-        $traceLines = Get-TraceLinesFromEtlBinary -Path $etlPath -Candidates $candidates
+        $traceLines = Get-TraceLinesFromEtlBinary -Path $traceArtifactPath -Candidates $candidates
         Write-RunLog -Message ("trace-parsed parser=etl-binary line_count={0}" -f @($traceLines).Count)
     }
 
@@ -978,6 +1025,8 @@ try {
         csv_line_count = $parsed.csv_line_count
         path_line_count = $parsed.path_line_count
         parser_source = $parsed.parser_source
+        etl_path = $traceArtifactPath
+        etl_path_source = if ($resolvedTrace) { [string]$resolvedTrace.source } else { 'missing' }
         etl_ready = [bool]$etlReadiness.ready
         etl_length = [int64]$etlReadiness.length
         tracerpt = $tracerpt
@@ -994,12 +1043,14 @@ try {
         family = 'power-control'
         pattern = 'mega-trigger'
         total_candidates = @($candidates).Count
-        etl_exists = [bool](Test-Path -LiteralPath $etlPath)
-        etl_length = if (Test-Path -LiteralPath $etlPath) { (Get-Item -LiteralPath $etlPath).Length } else { 0 }
+        etl_exists = [bool](Test-Path -LiteralPath $traceArtifactPath)
+        etl_length = if (Test-Path -LiteralPath $traceArtifactPath) { (Get-Item -LiteralPath $traceArtifactPath).Length } else { 0 }
         csv_exists = $parsed.csv_exists
         csv_line_count = $parsed.csv_line_count
         path_line_count = $parsed.path_line_count
         parser_source = $parsed.parser_source
+        etl_path = $traceArtifactPath
+        etl_path_source = if ($resolvedTrace) { [string]$resolvedTrace.source } else { 'missing' }
         etl_ready = [bool]$etlReadiness.ready
         tracerpt = $tracerpt
         exact_hit_count = @($exactHit).Count
