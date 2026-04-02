@@ -17,21 +17,26 @@ Date: `2026-04-02`
   - `timer_resolution_change`
   - `network_activity`
 
-## Current Blocker
+## Current Status
 
-The remaining blocker is post-trace parsing.
+The remaining VM survivability blocker is gone.
 
-Observed current behavior:
+Post-trace parsing has now been hardened in code:
 
-- `tracerpt` falls back with `exit_code = -2147024894`
-- the `Get-WinEvent -Path` fallback still does not produce terminal parsed output quickly enough
-- the host now reports this deterministically as a stalled `parsing` phase instead of stranding the VM in a broken state
+- the guest waits for the ETL to become stable after trace stop
+- `tracerpt` now retries with captured stderr instead of a single fire-and-forget call
+- the old `Get-WinEvent -Path` fallback has been replaced with a deterministic ETL binary token scan
+- guest error handling now writes placeholder `results.json` as well as terminal `summary.json`
+
+## Remaining Validation Gap
+
+This needs one more live VM rerun to confirm that the new parser path produces terminal `results.json` under the same pilot run that previously stalled in `parsing`.
 
 ## Why This Still Matters
 
 This is no longer a VM survivability problem.
 
-It is now a narrow ETL parsing problem:
+It was narrowed down to a post-trace ETL parsing problem:
 
 - the VM recovers cleanly
 - the runner does not leave stale `armed` probes behind
@@ -39,6 +44,6 @@ It is now a narrow ETL parsing problem:
 
 ## Next Follow-Up
 
-1. add an ETL readiness check after trace stop
-2. replace or harden the current fallback parser
-3. only after terminal `results.json` is reliable, widen beyond the 5-key pilot
+1. rerun the 5-key pilot against the hardened parser path
+2. if terminal `results.json` is now reliable, widen only after one more confirmatory pass
+3. only then widen beyond the 5-key pilot

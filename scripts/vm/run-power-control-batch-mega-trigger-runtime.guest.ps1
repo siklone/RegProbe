@@ -638,6 +638,56 @@ function Parse-Results {
     }
 }
 
+function Wait-TraceArtifactReady {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+        [int]$TimeoutSeconds = 60,
+        [int]$PollMilliseconds = 1000,
+        [int]$StablePollsRequired = 3
+    )
+
+    $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
+    $previousLength = -1L
+    $stablePolls = 0
+
+    while ((Get-Date) -lt $deadline) {
+        if (Test-Path -LiteralPath $Path) {
+            $item = Get-Item -LiteralPath $Path -ErrorAction SilentlyContinue
+            if ($item -and $item.Length -gt 0) {
+                if ($item.Length -eq $previousLength) {
+                    $stablePolls++
+                }
+                else {
+                    $previousLength = [int64]$item.Length
+                    $stablePolls = 1
+                }
+
+                if ($stablePolls -ge $StablePollsRequired) {
+                    return [ordered]@{
+                        ready = $true
+                        exists = $true
+                        length = [int64]$item.Length
+                        stable_polls = $stablePolls
+                        last_write_utc = $item.LastWriteTimeUtc.ToString('o')
+                    }
+                }
+            }
+        }
+
+        Start-Sleep -Milliseconds $PollMilliseconds
+    }
+
+    $finalItem = if (Test-Path -LiteralPath $Path) { Get-Item -LiteralPath $Path -ErrorAction SilentlyContinue } else { $null }
+    return [ordered]@{
+        ready = $false
+        exists = [bool]$finalItem
+        length = if ($finalItem) { [int64]$finalItem.Length } else { 0 }
+        stable_polls = $stablePolls
+        last_write_utc = if ($finalItem) { $finalItem.LastWriteTimeUtc.ToString('o') } else { $null }
+    }
+}
+
 function Get-TraceLinesFromCsv {
     if (-not (Test-Path -LiteralPath $csvPath)) {
         return @()
@@ -657,47 +707,131 @@ function Get-TraceLinesFromCsv {
     return @($lines)
 }
 
-function Get-TraceLinesFromEtl {
+function Get-BinaryMatchCount {
     param(
+        [byte[]]$Bytes,
+        [byte[]]$Pattern
+    )
+
+    if ($null -eq $Bytes -or $null -eq $Pattern -or $Pattern.Length -eq 0 -or $Bytes.Length -lt $Pattern.Length) {
+        return 0
+    }
+
+    $count = 0
+    for ($index = 0; $index -le ($Bytes.Length - $Pattern.Length); $index++) {
+        $matched = $true
+        for ($patternIndex = 0; $patternIndex -lt $Pattern.Length; $patternIndex++) {
+            if ($Bytes[$index + $patternIndex] -ne $Pattern[$patternIndex]) {
+                $matched = $false
+                break
+            }
+        }
+
+        if ($matched) {
+            $count++
+        }
+    }
+
+    return $count
+}
+
+function Get-TraceLinesFromEtlBinary {
+    param(
+        [Parameter(Mandatory = $true)]
         [string]$Path,
+        [Parameter(Mandatory = $true)]
+        [object[]]$Candidates
+    )
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        return @()
+    }
+
+    $bytes = [System.IO.File]::ReadAllBytes($Path)
+    $matches = New-Object System.Collections.Generic.List[string]
+    $pathToken = 'SYSTEM\CurrentControlSet\Control\Power'
+    $pathAscii = [System.Text.Encoding]::ASCII.GetBytes($pathToken)
+    $pathUnicode = [System.Text.Encoding]::Unicode.GetBytes($pathToken)
+    $pathMatchCount = (Get-BinaryMatchCount -Bytes $bytes -Pattern $pathAscii) + (Get-BinaryMatchCount -Bytes $bytes -Pattern $pathUnicode)
+    if ($pathMatchCount -gt 0) {
+        $matches.Add(("ETL_BINARY_MATCH path={0} count={1}" -f $pathToken, $pathMatchCount))
+    }
+
+    foreach ($candidate in $Candidates) {
+        $valueName = [string]$candidate.value_name
+        if ([string]::IsNullOrWhiteSpace($valueName)) {
+            continue
+        }
+
+        $ascii = [System.Text.Encoding]::ASCII.GetBytes($valueName)
+        $unicode = [System.Text.Encoding]::Unicode.GetBytes($valueName)
+        $matchCount = (Get-BinaryMatchCount -Bytes $bytes -Pattern $ascii) + (Get-BinaryMatchCount -Bytes $bytes -Pattern $unicode)
+        if ($matchCount -gt 0) {
+            $matches.Add(("ETL_BINARY_MATCH value={0} count={1}" -f $valueName, $matchCount))
+        }
+    }
+
+    return @($matches)
+}
+
+function Invoke-TracerptParse {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$TracePath,
+        [Parameter(Mandatory = $true)]
+        [string]$CsvOutputPath,
+        [int]$Attempts = 2,
         [int]$TimeoutSeconds = 180
     )
 
-    $job = Start-Job -ScriptBlock {
-        param([string]$TracePath)
+    $attemptLog = New-Object System.Collections.Generic.List[object]
+    for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
+        if (Test-Path -LiteralPath $CsvOutputPath) {
+            Remove-Item -LiteralPath $CsvOutputPath -Force -ErrorAction SilentlyContinue
+        }
 
-        $lines = New-Object System.Collections.Generic.List[string]
-        foreach ($event in Get-WinEvent -Path $TracePath -Oldest -ErrorAction Stop) {
-            $message = $null
-            try {
-                $message = $event.Message
-            }
-            catch {
-                $message = $null
-            }
+        $result = Invoke-CmdCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($TracePath, '-o', $CsvOutputPath, '-of', 'CSV', '-y') -TimeoutSeconds $TimeoutSeconds
+        $csvExists = Test-Path -LiteralPath $CsvOutputPath
+        $csvLength = if ($csvExists) { (Get-Item -LiteralPath $CsvOutputPath).Length } else { 0 }
+        $attemptLog.Add([ordered]@{
+                attempt = $attempt
+                exit_code = $result.exit_code
+                timed_out = $result.timed_out
+                csv_exists = $csvExists
+                csv_length = $csvLength
+                stderr = $result.stderr
+            })
 
-            if ([string]::IsNullOrWhiteSpace($message) -and $event.Properties) {
-                $message = (($event.Properties | ForEach-Object { $_.Value }) -join ' ')
-            }
-
-            if (-not [string]::IsNullOrWhiteSpace($message)) {
-                $lines.Add(([string]$message).Replace([Environment]::NewLine, ' '))
+        if (-not $result.timed_out -and $result.exit_code -eq 0 -and $csvExists -and $csvLength -gt 0) {
+            return [ordered]@{
+                success = $true
+                attempt = $attempt
+                exit_code = $result.exit_code
+                timed_out = $result.timed_out
+                csv_exists = $csvExists
+                csv_length = $csvLength
+                stdout = $result.stdout
+                stderr = $result.stderr
+                attempts = @($attemptLog)
             }
         }
 
-        return @($lines)
-    } -ArgumentList $Path
-
-    try {
-        if (-not (Wait-Job -Job $job -Timeout $TimeoutSeconds)) {
-            Stop-Job -Job $job -ErrorAction SilentlyContinue | Out-Null
-            throw "Get-WinEvent fallback timed out after $TimeoutSeconds seconds."
+        if ($attempt -lt $Attempts) {
+            Start-Sleep -Seconds 3
         }
-
-        return @(Receive-Job -Job $job -ErrorAction Stop)
     }
-    finally {
-        Remove-Job -Job $job -Force -ErrorAction SilentlyContinue | Out-Null
+
+    $lastAttempt = @($attemptLog)[@($attemptLog).Count - 1]
+    return [ordered]@{
+        success = $false
+        attempt = $lastAttempt.attempt
+        exit_code = $lastAttempt.exit_code
+        timed_out = $lastAttempt.timed_out
+        csv_exists = $lastAttempt.csv_exists
+        csv_length = $lastAttempt.csv_length
+        stdout = ''
+        stderr = $lastAttempt.stderr
+        attempts = @($attemptLog)
     }
 }
 
@@ -804,23 +938,28 @@ try {
     $state.current_trigger = $null
     $state.phase = 'parsing'
     Write-JsonFile -Path $StatePath -InputObject $state
+    Write-RunLog -Message 'parse-state-written'
+    Write-JsonFile -Path $SummaryPath -InputObject (New-RunningSummary -State $state -Candidates $candidates)
 
     Start-Sleep -Seconds 2
     Stop-Trace
     Write-RunLog -Message 'trace-stopped'
 
+    $etlReadiness = Wait-TraceArtifactReady -Path $etlPath -TimeoutSeconds 45 -PollMilliseconds 1000 -StablePollsRequired 3
+    Write-RunLog -Message ("trace-artifact-ready ready={0} exists={1} length={2} stable_polls={3}" -f $etlReadiness.ready, $etlReadiness.exists, $etlReadiness.length, $etlReadiness.stable_polls)
+
     $traceLines = @()
     $parserSource = 'tracerpt-csv'
-    $tracerpt = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($etlPath, '-o', $csvPath, '-of', 'CSV', '-y') -TimeoutSeconds 180
-    if (-not $tracerpt.timed_out -and $tracerpt.exit_code -eq 0 -and (Test-Path -LiteralPath $csvPath)) {
+    $tracerpt = Invoke-TracerptParse -TracePath $etlPath -CsvOutputPath $csvPath -Attempts 2 -TimeoutSeconds 180
+    if ($tracerpt.success) {
         $traceLines = Get-TraceLinesFromCsv
-        Write-RunLog -Message ("trace-parsed parser=tracerpt csv_exists={0}" -f (Test-Path -LiteralPath $csvPath))
+        Write-RunLog -Message ("trace-parsed parser=tracerpt attempt={0} csv_exists={1} csv_length={2}" -f $tracerpt.attempt, (Test-Path -LiteralPath $csvPath), $tracerpt.csv_length)
     }
     else {
-        $parserSource = 'get-winevent-fallback'
-        Write-RunLog -Message ("trace-parse-fallback parser=get-winevent timed_out={0} exit_code={1}" -f $tracerpt.timed_out, $tracerpt.exit_code)
-        $traceLines = Get-TraceLinesFromEtl -Path $etlPath -TimeoutSeconds 180
-        Write-RunLog -Message ("trace-parsed parser=get-winevent line_count={0}" -f @($traceLines).Count)
+        $parserSource = 'etl-binary-fallback'
+        Write-RunLog -Message ("trace-parse-fallback parser=etl-binary timed_out={0} exit_code={1} csv_exists={2}" -f $tracerpt.timed_out, $tracerpt.exit_code, $tracerpt.csv_exists)
+        $traceLines = Get-TraceLinesFromEtlBinary -Path $etlPath -Candidates $candidates
+        Write-RunLog -Message ("trace-parsed parser=etl-binary line_count={0}" -f @($traceLines).Count)
     }
 
     $parsed = Parse-Results -Candidates $candidates -Lines $traceLines -CsvExists (Test-Path -LiteralPath $csvPath) -ParserSource $parserSource
@@ -839,6 +978,9 @@ try {
         csv_line_count = $parsed.csv_line_count
         path_line_count = $parsed.path_line_count
         parser_source = $parsed.parser_source
+        etl_ready = [bool]$etlReadiness.ready
+        etl_length = [int64]$etlReadiness.length
+        tracerpt = $tracerpt
         exact_hit_count = @($exactHit).Count
         exact_line_only_count = @($exactLineOnly).Count
         path_only_count = @($pathOnly).Count
@@ -858,6 +1000,8 @@ try {
         csv_line_count = $parsed.csv_line_count
         path_line_count = $parsed.path_line_count
         parser_source = $parsed.parser_source
+        etl_ready = [bool]$etlReadiness.ready
+        tracerpt = $tracerpt
         exact_hit_count = @($exactHit).Count
         exact_line_only_count = @($exactLineOnly).Count
         path_only_count = @($pathOnly).Count
@@ -885,10 +1029,27 @@ catch {
         if ($state) {
             $state.phase = 'error'
             $state.error = $_.Exception.Message
+            $state.result_status = 'error'
             Write-JsonFile -Path $StatePath -InputObject $state
         }
     }
 
+    $errorCandidates = if ($candidates) {
+        @(
+            Parse-Results -Candidates $candidates -Lines @() -CsvExists (Test-Path -LiteralPath $csvPath) -ParserSource 'parser-error'
+        )[0].candidates
+    }
+    else {
+        @()
+    }
+    Write-JsonFile -Path $ResultsPath -InputObject ([ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        family = 'power-control'
+        pattern = 'mega-trigger'
+        parser_source = 'parser-error'
+        error = $_.Exception.Message
+        candidates = @($errorCandidates)
+    })
     Write-JsonFile -Path $SummaryPath -InputObject ([ordered]@{
         generated_utc = [DateTime]::UtcNow.ToString('o')
         family = 'power-control'
