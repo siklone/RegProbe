@@ -35,6 +35,27 @@ What changed to make it reliable:
 - the pilot lane now uses deterministic ETL binary fallback parsing instead of stalling in `tracerpt`
 - terminal completion now writes `summary.json` first so the host runner can observe terminal status without waiting on later artifact writes
 
+## WinDbg Escalation Status
+
+The next lane is now prepared, but not yet executable on this host:
+
+- `registry-research-framework/audit/power-control-windbg-boot-registry-trace-20260402.json`
+- `registry-research-framework/audit/configure-kernel-debug-baseline.json`
+- `registry-research-framework/audit/windbg-registry-watch.txt`
+
+What is now true for the `WinDbg` lane:
+
+- the secondary VM has a working debug baseline snapshot: `RegProbe-Baseline-Debug-20260402`
+- guest boot debugging is enabled
+- the VMX serial pipe is configured for `\\.\pipe\regprobe_debug`
+- the guest rebooted after `bcdedit` and returned to healthy shell state
+- the attach bundle is generated for the 5 persistent `no-hit` values
+
+What is still blocked:
+
+- no host debugger binary is installed right now (`windbg.exe`, `kd.exe`, and `cdb.exe` are all missing)
+- so the lane truthfully stays `blocked-windbg-missing` rather than pretending a trace ran
+
 ## Why This Still Matters
 
 This is now a usable runtime triage lane again:
@@ -46,6 +67,7 @@ This is now a usable runtime triage lane again:
 
 ## Next Follow-Up
 
-1. take the persistent 5-key `no-hit` set to the `WinDbg` lane
-2. only widen beyond the 5-key pilot after the `WinDbg` pass tells us whether these are early-boot reads or true dead/no-hit candidates
-3. if `WinDbg` still shows no read activity, keep them in the negative-evidence / dead-flag decision path
+1. install a host debugger (`WinDbg` or `kd`) and attach using the generated bundle
+2. run the `WinDbg` boot-time registry trace for the 5-key `no-hit` set
+3. only widen beyond the 5-key pilot after the `WinDbg` pass tells us whether these are early-boot reads or true dead/no-hit candidates
+4. if `WinDbg` still shows no read activity, keep them in the negative-evidence / dead-flag decision path

@@ -1,0 +1,34 @@
+﻿{
+    "generated_utc":  "2026-04-02T20:10:42.7473637Z",
+    "vm_profile":  "secondary",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+    "vm_running":  true,
+    "vm_started":  false,
+    "pipe_name":  "\\\\.\\pipe\\regprobe_debug",
+    "debug_port":  1,
+    "baud_rate":  115200,
+    "vmx_updated":  true,
+    "guest_boot_debug_updated":  true,
+    "guest_rebooted":  true,
+    "tools_state":  "running",
+    "shell_healthy":  true,
+    "shell_checks":  {
+                         "explorer":  true,
+                         "sihost":  true,
+                         "shellhost":  true,
+                         "ctfmon":  true
+                     },
+    "snapshot_created":  true,
+    "snapshot_name":  "RegProbe-Baseline-Debug-20260402",
+    "steps":  [
+                  "vmx-serial-pipe-configured",
+                  "vmtools-ready",
+                  "shell-healthy-before-bcdedit",
+                  "guest-bcdedit-debug-enabled",
+                  "guest-restart-requested",
+                  "vmtools-ready-after-restart",
+                  "shell-healthy-after-restart",
+                  "snapshot-created"
+              ],
+    "status":  "configured"
+}

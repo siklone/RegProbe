@@ -6,16 +6,26 @@
   "pilot_trigger_count": 8,
   "recovery_safe": true,
   "terminal_vm_state": "shell-healthy-after-restore",
-  "current_status": "confirmatory-rerun-succeeded-no-hit",
+  "current_status": "windbg-baseline-prepared-host-debugger-missing",
   "validated_runs": [
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json",
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json",
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json",
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json"
   ],
-  "blockers": [],
+  "blockers": [
+    "host-debugger-missing"
+  ],
+  "windbg_lane": {
+    "status": "blocked-windbg-missing",
+    "bundle": "registry-research-framework/audit/power-control-windbg-boot-registry-trace-20260402.json",
+    "baseline_prep": "registry-research-framework/audit/configure-kernel-debug-baseline.json",
+    "command_script": "registry-research-framework/audit/windbg-registry-watch.txt",
+    "debug_snapshot_name": "RegProbe-Baseline-Debug-20260402",
+    "vm_profile": "secondary"
+  },
   "next_actions": [
-    "take the persistent 5-key no-hit set to the WinDbg lane",
+    "install a host debugger and attach using the generated WinDbg bundle",
     "use WinDbg to decide early-boot-read versus true dead/no-hit",
     "only widen beyond the 5-key pilot after the WinDbg pass"
   ],

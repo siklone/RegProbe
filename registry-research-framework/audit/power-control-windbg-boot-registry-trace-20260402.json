@@ -1,0 +1,94 @@
+﻿{
+    "generated_utc":  "2026-04-02T20:27:03.6928977Z",
+    "tool":  "WinDbg",
+    "vm_profile":  "secondary",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+    "pipe_name":  "\\\\.\\pipe\\regprobe_debug",
+    "debug_snapshot_name":  "RegProbe-Baseline-Debug-20260402",
+    "collection_mode":  "evidence",
+    "rollback_pending":  true,
+    "runner_required":  true,
+    "key_count":  5,
+    "keys":  [
+                 "AllowAudioToEnableExecutionRequiredPowerRequests",
+                 "AllowSystemRequiredPowerRequests",
+                 "AlwaysComputeQosHints",
+                 "CoalescingFlushInterval",
+                 "IdleProcessorsRequireQosManagement"
+             ],
+    "command_script":  "registry-research-framework/audit/windbg-registry-watch.txt",
+    "log_path":  "C:\\RegProbe-Diag\\windbg-registry-trace.log",
+    "attach_mode":  "manual-kernel-debug",
+    "breakpoint_mode":  "all-cmpquery-postfilter",
+    "windbg_path":  null,
+    "windbg_command":  "windbg -k com:pipe,port=\\\\.\\pipe\\regprobe_debug,resets=0,reconnect -c \"$$\u003c \u003cREPO_ROOT\u003e\\registry-research-framework\\audit\\windbg-registry-watch.txt\"",
+    "status":  "blocked-windbg-missing",
+    "capture_status":  "staged",
+    "capture_artifacts":  [
+
+                          ],
+    "support_artifacts":  [
+                              {
+                                  "path":  "registry-research-framework/audit/windbg-registry-watch.txt",
+                                  "sha256":  "3215f9b8a3415c3acc23535dbea461429a70eec99881d9451abd295eca1148bf",
+                                  "size":  599,
+                                  "collected_utc":  "2026-04-02T20:10:41.3567661Z",
+                                  "exists":  true
+                              },
+                              {
+                                  "path":  "registry-research-framework/audit/configure-kernel-debug-baseline.json",
+                                  "sha256":  "1e7c8d072e200236db2f1b4945c16d7324e560b8d2af96b7f1e8739e66009fff",
+                                  "size":  1229,
+                                  "collected_utc":  "2026-04-02T20:27:03.5290324Z",
+                                  "exists":  true
+                              }
+                          ],
+    "host_debugger_status":  "missing",
+    "host_debugger_candidates":  [
+                                     "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_*",
+                                     "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\windbg.exe",
+                                     "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\kd.exe",
+                                     "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe",
+                                     "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.0.0.0_x64__8wekyb3d8bbwe\\windbg.exe"
+                                 ],
+    "baseline_prepare_status":  "configured",
+    "prep":  {
+                 "generated_utc":  "2026-04-02T20:10:42.7473637Z",
+                 "vm_profile":  "secondary",
+                 "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+                 "vm_running":  true,
+                 "vm_started":  false,
+                 "pipe_name":  "\\\\.\\pipe\\regprobe_debug",
+                 "debug_port":  1,
+                 "baud_rate":  115200,
+                 "vmx_updated":  true,
+                 "guest_boot_debug_updated":  true,
+                 "guest_rebooted":  true,
+                 "tools_state":  "running",
+                 "shell_healthy":  true,
+                 "shell_checks":  {
+                                      "explorer":  true,
+                                      "sihost":  true,
+                                      "shellhost":  true,
+                                      "ctfmon":  true
+                                  },
+                 "snapshot_created":  true,
+                 "snapshot_name":  "RegProbe-Baseline-Debug-20260402",
+                 "steps":  [
+                               "vmx-serial-pipe-configured",
+                               "vmtools-ready",
+                               "shell-healthy-before-bcdedit",
+                               "guest-bcdedit-debug-enabled",
+                               "guest-restart-requested",
+                               "vmtools-ready-after-restart",
+                               "shell-healthy-after-restart",
+                               "snapshot-created"
+                           ],
+                 "status":  "configured"
+             },
+    "notes":  [
+                  "Use this lane only after ETW mega-trigger leaves a no-hit hold queue.",
+                  "This command script logs all CmpQueryValueKey reads; post-filter the resulting log for the requested key names.",
+                  "WinDbg acts as the dead-flag final arbiter: ETW no-hit + WinDbg no-hit is the strongest dead-flag signal."
+              ]
+}
