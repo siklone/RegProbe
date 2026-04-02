@@ -9,4 +9,5 @@ public sealed record ElevatedHostRequest(
     ElevatedServiceRequest? ServiceRequest = null,
     ElevatedScheduledTaskRequest? ScheduledTaskRequest = null,
     ElevatedFileRequest? FileRequest = null,
-    ElevatedCommandRequest? CommandRequest = null);
+    ElevatedCommandRequest? CommandRequest = null,
+    string? SessionToken = null);

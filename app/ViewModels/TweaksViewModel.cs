@@ -104,11 +104,14 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 		_isElevated = ProcessElevation.IsElevated();
 		_elevatedHostExecutablePath = ElevatedHostLocator.GetExecutablePath();
 		_isElevatedHostAvailable = File.Exists(_elevatedHostExecutablePath);
+		var sessionToken = ElevatedHostDefaults.CreateSessionToken();
+		var parentProcessId = Process.GetCurrentProcess().Id;
 		var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
 		{
 			HostExecutablePath = _elevatedHostExecutablePath,
-			PipeName = ElevatedHostDefaults.GetPipeNameForProcess(Process.GetCurrentProcess().Id),
-			ParentProcessId = Process.GetCurrentProcess().Id
+			PipeName = ElevatedHostDefaults.GetPipeNameForProcess(parentProcessId, sessionToken),
+			ParentProcessId = parentProcessId,
+			SessionToken = sessionToken
 		});
         var machineLocalRegistryAccessor = new LocalRegistryAccessor();
         var elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);

@@ -9,14 +9,12 @@ namespace RegProbe.Infrastructure.Registry;
 public sealed class RegistryOwnershipScope : IDisposable
 {
     private readonly RegistryKey _key;
-    private readonly string _subKeyPath;
     private readonly RegistrySecurity _originalSecurity;
     private bool _disposed;
 
     public RegistryOwnershipScope(RegistryHive hive, RegistryView view, string subKeyPath)
     {
-        _subKeyPath = subKeyPath;
-        var baseKey = RegistryKey.OpenBaseKey(hive, view);
+        using var baseKey = RegistryKey.OpenBaseKey(hive, view);
 
         // Enable required privileges for ownership transfer
         using (var pm = new PrivilegeManager())
@@ -24,30 +22,45 @@ public sealed class RegistryOwnershipScope : IDisposable
             pm.EnablePrivilege(PrivilegeNames.TakeOwnership);
             pm.EnablePrivilege(PrivilegeNames.Restore);
         }
-        
-        // Open with TakeOwnership rights. If it fails even with privileges, let the exception bubble up.
-        _key = baseKey.OpenSubKey(subKeyPath, RegistryKeyPermissionCheck.ReadWriteSubTree, RegistryRights.TakeOwnership | RegistryRights.ChangePermissions | RegistryRights.ReadPermissions)
-               ?? throw new UnauthorizedAccessException($"Could not open key {subKeyPath} for ownership change.");
 
-        _originalSecurity = _key.GetAccessControl();
-        
-        TakeOwnership();
-        GrantFullControl();
+        var openedKey = baseKey.OpenSubKey(
+                            subKeyPath,
+                            RegistryKeyPermissionCheck.ReadWriteSubTree,
+                            RegistryRights.TakeOwnership | RegistryRights.ChangePermissions | RegistryRights.ReadPermissions)
+                        ?? throw new UnauthorizedAccessException($"Could not open key {subKeyPath} for ownership change.");
+
+        RegistrySecurity? originalSecurity = null;
+        try
+        {
+            originalSecurity = openedKey.GetAccessControl();
+            RegistryOwnershipMutationGuard.Execute(
+                () => TakeOwnership(openedKey),
+                () => GrantFullControl(openedKey),
+                () => openedKey.SetAccessControl(originalSecurity));
+
+            _key = openedKey;
+            _originalSecurity = originalSecurity;
+        }
+        catch
+        {
+            openedKey.Dispose();
+            throw;
+        }
     }
 
-    private void TakeOwnership()
+    private static void TakeOwnership(RegistryKey key)
     {
         var security = new RegistrySecurity();
         var adminSid = new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null);
         security.SetOwner(adminSid);
-        _key.SetAccessControl(security);
+        key.SetAccessControl(security);
     }
 
-    private void GrantFullControl()
+    private static void GrantFullControl(RegistryKey key)
     {
-        var security = _key.GetAccessControl();
+        var security = key.GetAccessControl();
         var adminSid = new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null);
-        
+
         var rule = new RegistryAccessRule(
             adminSid,
             RegistryRights.FullControl,
@@ -56,7 +69,7 @@ public sealed class RegistryOwnershipScope : IDisposable
             AccessControlType.Allow);
 
         security.ResetAccessRule(rule);
-        _key.SetAccessControl(security);
+        key.SetAccessControl(security);
     }
 
     public void Dispose()

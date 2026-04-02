@@ -22,13 +22,20 @@ public static class Program
     {
         var options = HostOptions.Parse(args);
         using var cts = new CancellationTokenSource();
-        LogHostDiagnostic($"Main start. Pipe='{options.PipeName}' ParentPid={options.ParentProcessId}");
+        LogHostDiagnostic($"Main start. Pipe='{options.PipeName}' ParentPid={options.ParentProcessId} DeveloperMode={options.EnableDeveloperCommands}");
 
         if (!IsProcessElevated())
         {
             LogHostDiagnostic("Startup aborted: process is not elevated.");
             Console.Error.WriteLine("ElevatedHost must run with administrator privileges.");
             return 5;
+        }
+
+        if (string.IsNullOrWhiteSpace(options.SessionToken))
+        {
+            LogHostDiagnostic("Startup aborted: session token is missing.");
+            Console.Error.WriteLine("ElevatedHost requires a session token.");
+            return 6;
         }
 
         if (options.ParentProcessId > 0)
@@ -38,7 +45,7 @@ public static class Program
 
         try
         {
-            await RunServerAsync(options.PipeName, cts.Token);
+            await RunServerAsync(options, cts.Token);
             LogHostDiagnostic("Server loop exited normally.");
             return 0;
         }
@@ -55,20 +62,20 @@ public static class Program
         }
     }
 
-    private static async Task RunServerAsync(string pipeName, CancellationToken ct)
+    private static async Task RunServerAsync(HostOptions options, CancellationToken ct)
     {
         var registryAccessor = new LocalRegistryAccessor();
         var serviceManager = new LocalServiceManager();
         var taskManager = new LocalScheduledTaskManager();
         var fileSystemAccessor = new LocalFileSystemAccessor();
-        var commandAllowlist = CommandAllowlist.CreateDefault();
+        var commandAllowlist = CommandAllowlist.CreateDefault(options.EnableDeveloperCommands);
         var commandRunner = new LocalCommandRunner();
 
         while (!ct.IsCancellationRequested)
         {
-            LogHostDiagnostic($"Creating pipe server for '{pipeName}'.");
-            using var server = CreatePipeServer(pipeName);
-            LogHostDiagnostic($"Pipe server created for '{pipeName}', waiting for connection.");
+            LogHostDiagnostic($"Creating pipe server for '{options.PipeName}'.");
+            using var server = CreatePipeServer(options.PipeName);
+            LogHostDiagnostic($"Pipe server created for '{options.PipeName}', waiting for connection.");
 
             try
             {
@@ -79,12 +86,19 @@ public static class Program
                 break;
             }
 
-            await HandleConnectionAsync(server, registryAccessor, serviceManager, taskManager, fileSystemAccessor, commandAllowlist, commandRunner, ct);
+            if (!IsClientConnectionAccepted(server, options.ParentProcessId, out var clientProcessId))
+            {
+                continue;
+            }
+
+            await HandleConnectionAsync(server, options, clientProcessId, registryAccessor, serviceManager, taskManager, fileSystemAccessor, commandAllowlist, commandRunner, ct);
         }
     }
 
     private static async Task HandleConnectionAsync(
         NamedPipeServerStream server,
+        HostOptions options,
+        int clientProcessId,
         IRegistryAccessor registryAccessor,
         IServiceManager serviceManager,
         IScheduledTaskManager taskManager,
@@ -97,6 +111,13 @@ public static class Program
         try
         {
             request = await PipeMessageSerializer.ReadAsync<ElevatedHostRequest>(server, ct);
+            if (!ElevatedHostSessionSecurity.IsSessionTokenAccepted(options.SessionToken, request.SessionToken))
+            {
+                LogHostDiagnostic($"Rejected connection due to invalid session token. ClientPid={clientProcessId}");
+                await PipeMessageSerializer.WriteAsync(server, CreateErrorResponse(request, "Elevated host session token mismatch."), ct);
+                return;
+            }
+
             var response = await HandleRequestAsync(
                 request,
                 registryAccessor,
@@ -295,6 +316,45 @@ public static class Program
         return security;
     }
 
+    private static bool IsClientConnectionAccepted(NamedPipeServerStream server, int expectedParentProcessId, out int clientProcessId)
+    {
+        clientProcessId = 0;
+        if (expectedParentProcessId <= 0)
+        {
+            return true;
+        }
+
+        if (!ElevatedHostSessionSecurity.TryGetClientProcessId(server, out clientProcessId))
+        {
+            LogHostDiagnostic("Rejected connection: could not resolve client PID.");
+            TryDisconnect(server);
+            return false;
+        }
+
+        if (!ElevatedHostSessionSecurity.IsClientProcessAccepted(expectedParentProcessId, clientProcessId))
+        {
+            LogHostDiagnostic($"Rejected connection: client PID {clientProcessId} did not match parent PID {expectedParentProcessId}.");
+            TryDisconnect(server);
+            return false;
+        }
+
+        return true;
+    }
+
+    private static void TryDisconnect(NamedPipeServerStream server)
+    {
+        try
+        {
+            if (server.IsConnected)
+            {
+                server.Disconnect();
+            }
+        }
+        catch
+        {
+        }
+    }
+
     private static void LogHostDiagnostic(string message)
     {
         try
@@ -364,7 +424,8 @@ public static class Program
                 request.RequestId,
                 false,
                 ex.Message,
-                null);
+                null,
+                ex.HResult);
         }
     }
 
@@ -589,11 +650,15 @@ public static class Program
     {
         public string PipeName { get; init; } = ElevatedHostDefaults.PipeName;
         public int ParentProcessId { get; init; }
+        public string SessionToken { get; init; } = string.Empty;
+        public bool EnableDeveloperCommands { get; init; }
 
         public static HostOptions Parse(string[] args)
         {
             var pipeName = ElevatedHostDefaults.PipeName;
             var parentPid = 0;
+            var sessionToken = string.Empty;
+            var enableDeveloperCommands = false;
 
             for (var i = 0; i < args.Length; i++)
             {
@@ -609,12 +674,22 @@ public static class Program
                         parentPid = parsed;
                     }
                 }
+                else if (string.Equals(arg, "--session-token", StringComparison.OrdinalIgnoreCase) && i + 1 < args.Length)
+                {
+                    sessionToken = args[++i];
+                }
+                else if (string.Equals(arg, "--developer-mode", StringComparison.OrdinalIgnoreCase))
+                {
+                    enableDeveloperCommands = true;
+                }
             }
 
             return new HostOptions
             {
                 PipeName = string.IsNullOrWhiteSpace(pipeName) ? ElevatedHostDefaults.PipeName : pipeName,
-                ParentProcessId = parentPid
+                ParentProcessId = parentPid,
+                SessionToken = sessionToken,
+                EnableDeveloperCommands = enableDeveloperCommands
             };
         }
     }

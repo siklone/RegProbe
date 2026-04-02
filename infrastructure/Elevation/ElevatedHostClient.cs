@@ -22,6 +22,10 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         {
             throw new ArgumentException("Pipe name is required.", nameof(options));
         }
+        if (string.IsNullOrWhiteSpace(_options.SessionToken))
+        {
+            throw new ArgumentException("Session token is required.", nameof(options));
+        }
     }
 
     public async Task<ElevatedHostResponse> SendAsync(ElevatedHostRequest request, CancellationToken ct)
@@ -101,6 +105,11 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         TimeSpan timeout,
         CancellationToken ct)
     {
+        var securedRequest = request with
+        {
+            SessionToken = _options.SessionToken
+        };
+
         using var pipe = new NamedPipeClientStream(
             ".",
             _options.PipeName,
@@ -110,7 +119,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         var timeoutMs = (int)Math.Max(1, timeout.TotalMilliseconds);
         await pipe.ConnectAsync(timeoutMs, ct);
 
-        await PipeMessageSerializer.WriteAsync(pipe, request, ct);
+        await PipeMessageSerializer.WriteAsync(pipe, securedRequest, ct);
         return await PipeMessageSerializer.ReadAsync<ElevatedHostResponse>(pipe, ct);
     }
 
@@ -215,6 +224,11 @@ public sealed class ElevatedHostClient : IElevatedHostClient
         if (_options.ParentProcessId > 0)
         {
             arguments += $" --parent-pid {_options.ParentProcessId}";
+        }
+        arguments += $" --session-token \"{_options.SessionToken}\"";
+        if (_options.EnableDeveloperCommands)
+        {
+            arguments += " --developer-mode";
         }
 
         LogToFile($"ElevatedHostClient: Starting host with arguments: {arguments}");

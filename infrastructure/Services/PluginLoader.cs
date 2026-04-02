@@ -13,6 +13,11 @@ public sealed class PluginLoader
     {
         var plugins = new List<ITweakPlugin>();
 
+        if (!PluginSecurityPolicy.DynamicLoadingEnabled)
+        {
+            return plugins;
+        }
+
         if (!Directory.Exists(pluginsDirectory))
         {
             return plugins;

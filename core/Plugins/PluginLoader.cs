@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +15,6 @@ public sealed class PluginLoader
 {
     private readonly string _pluginDirectory;
     private readonly Dictionary<string, LoadedPlugin> _loadedPlugins = new();
-    private readonly HashSet<string> _trustedPublishers = new();
 
     public PluginLoader(string pluginDirectory)
     {
@@ -30,6 +27,11 @@ public sealed class PluginLoader
     /// </summary>
     public async Task<IReadOnlyList<PluginInfo>> DiscoverPluginsAsync(CancellationToken ct)
     {
+        if (!PluginSecurityPolicy.DynamicLoadingEnabled)
+        {
+            return Array.Empty<PluginInfo>();
+        }
+
         var plugins = new List<PluginInfo>();
 
         var dllFiles = Directory.GetFiles(_pluginDirectory, "*.dll", SearchOption.AllDirectories);
@@ -85,6 +87,11 @@ public sealed class PluginLoader
     /// </summary>
     public async Task<IPlugin?> LoadPluginAsync(string pluginId, CancellationToken ct)
     {
+        if (!PluginSecurityPolicy.DynamicLoadingEnabled)
+        {
+            return null;
+        }
+
         if (_loadedPlugins.TryGetValue(pluginId, out var loaded))
         {
             return loaded.Instance;
@@ -153,9 +160,7 @@ public sealed class PluginLoader
     /// </summary>
     private bool VerifyDigitalSignature(string dllPath)
     {
-        // TODO: Implement Authenticode signature verification
-        // For now, just check file exists and has .dll extension
-        return File.Exists(dllPath) && Path.GetExtension(dllPath).Equals(".dll", StringComparison.OrdinalIgnoreCase);
+        return false;
     }
 
     /// <summary>
@@ -163,7 +168,7 @@ public sealed class PluginLoader
     /// </summary>
     public void AddTrustedPublisher(string publisherThumbprint)
     {
-        _trustedPublishers.Add(publisherThumbprint);
+        _ = publisherThumbprint;
     }
 
     /// <summary>

@@ -10,6 +10,8 @@ namespace RegProbe.Infrastructure.Elevation;
 
 public static class PipeMessageSerializer
 {
+    public const int MaxMessageBytes = 1024 * 1024;
+
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
@@ -28,6 +30,11 @@ public static class PipeMessageSerializer
         }
 
         var payload = JsonSerializer.SerializeToUtf8Bytes(message, JsonOptions);
+        if (payload.Length > MaxMessageBytes)
+        {
+            throw new InvalidDataException($"Pipe payload exceeds the maximum size of {MaxMessageBytes} bytes.");
+        }
+
         var lengthBuffer = new byte[sizeof(int)];
         BinaryPrimitives.WriteInt32LittleEndian(lengthBuffer, payload.Length);
 
@@ -49,6 +56,10 @@ public static class PipeMessageSerializer
         if (length <= 0)
         {
             throw new InvalidDataException("Invalid payload length.");
+        }
+        if (length > MaxMessageBytes)
+        {
+            throw new InvalidDataException($"Pipe payload exceeds the maximum size of {MaxMessageBytes} bytes.");
         }
 
         var payload = new byte[length];

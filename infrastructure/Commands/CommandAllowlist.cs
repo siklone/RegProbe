@@ -9,16 +9,18 @@ public sealed class CommandAllowlist
 {
     private readonly Dictionary<string, List<string[]>> _allowed;
     private readonly string _systemDirectory;
+    private readonly bool _allowUnsafeDeveloperCommands;
 
-    public CommandAllowlist(Dictionary<string, List<string[]>> allowed, string systemDirectory)
+    public CommandAllowlist(Dictionary<string, List<string[]>> allowed, string systemDirectory, bool allowUnsafeDeveloperCommands = false)
     {
         _allowed = allowed ?? throw new ArgumentNullException(nameof(allowed));
         _systemDirectory = string.IsNullOrWhiteSpace(systemDirectory)
             ? throw new ArgumentException("System directory is required.", nameof(systemDirectory))
             : Path.GetFullPath(systemDirectory);
+        _allowUnsafeDeveloperCommands = allowUnsafeDeveloperCommands;
     }
 
-    public static CommandAllowlist CreateDefault()
+    public static CommandAllowlist CreateDefault(bool allowUnsafeDeveloperCommands = false)
     {
         var systemDirectory = Environment.SystemDirectory;
         var powercfg = Path.Combine(systemDirectory, "powercfg.exe");
@@ -246,7 +248,7 @@ public sealed class CommandAllowlist
             }
         };
 
-        return new CommandAllowlist(allowed, systemDirectory);
+        return new CommandAllowlist(allowed, systemDirectory, allowUnsafeDeveloperCommands);
     }
 
     public bool IsAllowed(CommandRequest request, out string? reason)
@@ -270,15 +272,36 @@ public sealed class CommandAllowlist
             return false;
         }
 
-        if (Path.GetFileName(normalizedExecutable).Equals("reg.exe", StringComparison.OrdinalIgnoreCase)
-            && IsGeneralRegistryRequestAllowed(request.Arguments, out reason))
-        {
-            return true;
-        }
-
         if (!_allowed.TryGetValue(normalizedExecutable, out var allowedArguments))
         {
             reason = "Executable is not allowlisted.";
+            return false;
+        }
+
+        if (Path.GetFileName(normalizedExecutable).Equals("reg.exe", StringComparison.OrdinalIgnoreCase))
+        {
+            foreach (var args in allowedArguments)
+            {
+                if (ArgumentsMatch(args, request.Arguments))
+                {
+                    reason = null;
+                    return true;
+                }
+            }
+
+            if (IsGeneralRegistryQueryAllowed(request.Arguments, out reason))
+            {
+                return true;
+            }
+
+            if (_allowUnsafeDeveloperCommands && IsGeneralRegistryMutationAllowed(request.Arguments, out reason))
+            {
+                return true;
+            }
+
+            reason = _allowUnsafeDeveloperCommands
+                ? "Registry arguments are not allowlisted."
+                : "Registry mutations require explicit allowlisting.";
             return false;
         }
 
@@ -295,7 +318,32 @@ public sealed class CommandAllowlist
         return false;
     }
 
-    private static bool IsGeneralRegistryRequestAllowed(IReadOnlyList<string> arguments, out string? reason)
+    private static bool IsGeneralRegistryQueryAllowed(IReadOnlyList<string> arguments, out string? reason)
+    {
+        if (arguments.Count < 2)
+        {
+            reason = "Registry command arguments are incomplete.";
+            return false;
+        }
+
+        var operation = arguments[0];
+        if (!operation.Equals("query", StringComparison.OrdinalIgnoreCase))
+        {
+            reason = "Only reg query is generally allowed.";
+            return false;
+        }
+
+        if (!IsRegistryHivePath(arguments[1]))
+        {
+            reason = "Registry path must target a supported hive.";
+            return false;
+        }
+
+        reason = null;
+        return true;
+    }
+
+    private static bool IsGeneralRegistryMutationAllowed(IReadOnlyList<string> arguments, out string? reason)
     {
         if (arguments.Count < 2)
         {
@@ -305,10 +353,9 @@ public sealed class CommandAllowlist
 
         var operation = arguments[0];
         if (!operation.Equals("add", StringComparison.OrdinalIgnoreCase)
-            && !operation.Equals("delete", StringComparison.OrdinalIgnoreCase)
-            && !operation.Equals("query", StringComparison.OrdinalIgnoreCase))
+            && !operation.Equals("delete", StringComparison.OrdinalIgnoreCase))
         {
-            reason = "Only reg add/delete/query operations are allowed.";
+            reason = "Only reg add/delete mutations are allowed in developer mode.";
             return false;
         }
 

@@ -59,12 +59,15 @@ public sealed class TweakCatalogService : ITweakCatalog
         IsElevated = ProcessElevation.IsElevated();
         ElevatedHostPath = ElevatedHostLocator.GetExecutablePath();
         IsElevatedHostAvailable = File.Exists(ElevatedHostPath);
+        var sessionToken = ElevatedHostDefaults.CreateSessionToken();
+        var parentProcessId = Process.GetCurrentProcess().Id;
 
         var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
         {
             HostExecutablePath = ElevatedHostPath,
-            PipeName = ElevatedHostDefaults.GetPipeNameForProcess(Process.GetCurrentProcess().Id),
-            ParentProcessId = Process.GetCurrentProcess().Id
+            PipeName = ElevatedHostDefaults.GetPipeNameForProcess(parentProcessId, sessionToken),
+            ParentProcessId = parentProcessId,
+            SessionToken = sessionToken
         });
 
         var elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);

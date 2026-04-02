@@ -16,6 +16,8 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
     private const string System32RegExe = "reg.exe";
     private const string PoliciesPrefix = @"Software\Policies\";
     private const string LegacyPoliciesPrefix = @"Software\Microsoft\Windows\CurrentVersion\Policies\";
+    private const int HResultAccessDenied = unchecked((int)0x80070005);
+    private const int HResultPrivilegeNotHeld = unchecked((int)0x80070522);
     private readonly IElevatedHostClient _client;
     private readonly ElevatedCommandRunner _commandRunner;
 
@@ -61,19 +63,19 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
 
             await SendAsync(request, ct);
         }
-        catch (ElevatedHostException ex) when (IsAccessDeniedError(ex.Message))
+        catch (ElevatedHostException ex) when (IsAccessDeniedException(ex))
         {
             await RunRegAsync(BuildSetRequest(reference, value), ct);
         }
-        catch (UnauthorizedAccessException ex) when (IsAccessDeniedError(ex.Message))
+        catch (UnauthorizedAccessException ex) when (IsAccessDeniedException(ex))
         {
             await RunRegAsync(BuildSetRequest(reference, value), ct);
         }
-        catch (Win32Exception ex) when (IsAccessDeniedError(ex.Message))
+        catch (Win32Exception ex) when (IsAccessDeniedException(ex))
         {
             await RunRegAsync(BuildSetRequest(reference, value), ct);
         }
-        catch (Exception ex) when (ex is not OperationCanceledException && IsAccessDeniedError(ex.Message))
+        catch (Exception ex) when (ex is not OperationCanceledException && IsAccessDeniedException(ex))
         {
             await RunRegAsync(BuildSetRequest(reference, value), ct);
         }
@@ -97,19 +99,19 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
 
             await SendAsync(request, ct);
         }
-        catch (ElevatedHostException ex) when (IsAccessDeniedError(ex.Message))
+        catch (ElevatedHostException ex) when (IsAccessDeniedException(ex))
         {
             await RunRegAsync(BuildDeleteRequest(reference), ct, allowMissingDelete: true);
         }
-        catch (UnauthorizedAccessException ex) when (IsAccessDeniedError(ex.Message))
+        catch (UnauthorizedAccessException ex) when (IsAccessDeniedException(ex))
         {
             await RunRegAsync(BuildDeleteRequest(reference), ct, allowMissingDelete: true);
         }
-        catch (Win32Exception ex) when (IsAccessDeniedError(ex.Message))
+        catch (Win32Exception ex) when (IsAccessDeniedException(ex))
         {
             await RunRegAsync(BuildDeleteRequest(reference), ct, allowMissingDelete: true);
         }
-        catch (Exception ex) when (ex is not OperationCanceledException && IsAccessDeniedError(ex.Message))
+        catch (Exception ex) when (ex is not OperationCanceledException && IsAccessDeniedException(ex))
         {
             await RunRegAsync(BuildDeleteRequest(reference), ct, allowMissingDelete: true);
         }
@@ -141,7 +143,7 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
             var message = string.IsNullOrWhiteSpace(response.Error)
                 ? "Elevated host reported an error."
                 : response.Error;
-            throw new ElevatedHostException(message);
+            throw new ElevatedHostException(message, response.HResult);
         }
 
         return response;
@@ -173,17 +175,29 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
         throw new ElevatedHostException($"reg.exe failed ({result.ExitCode}): {errorText}".Trim());
     }
 
-    private static bool IsAccessDeniedError(string message)
+    private static bool IsAccessDeniedException(Exception ex)
     {
-        if (string.IsNullOrWhiteSpace(message))
+        if (ex is UnauthorizedAccessException)
         {
-            return false;
+            return true;
         }
 
-        return (message.Contains("access", StringComparison.OrdinalIgnoreCase)
-                && message.Contains("denied", StringComparison.OrdinalIgnoreCase))
-            || message.Contains("not allowed", StringComparison.OrdinalIgnoreCase)
-            || message.Contains("privileges or groups referenced", StringComparison.OrdinalIgnoreCase);
+        if (ex is Win32Exception win32)
+        {
+            return win32.NativeErrorCode is 5 or 1314;
+        }
+
+        if (ex is ElevatedHostException elevated && elevated.ErrorHResult.HasValue)
+        {
+            return IsAccessDeniedHResult(elevated.ErrorHResult.Value);
+        }
+
+        return IsAccessDeniedHResult(ex.HResult);
+    }
+
+    private static bool IsAccessDeniedHResult(int hresult)
+    {
+        return hresult == HResultAccessDenied || hresult == HResultPrivilegeNotHeld;
     }
 
     private static bool ShouldPreferCommandExecution(RegistryValueReference reference)
