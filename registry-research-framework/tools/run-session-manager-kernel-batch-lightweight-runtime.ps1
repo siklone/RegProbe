@@ -1,10 +1,10 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SnapshotName = '',
     [int]$PostBootSettleSeconds = 25
 )
@@ -799,3 +799,4 @@ Write-Output $repoSummaryPath
 if ($summary.status -eq 'error') {
     exit 1
 }
+

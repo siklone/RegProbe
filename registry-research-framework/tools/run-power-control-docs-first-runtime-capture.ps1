@@ -1,9 +1,9 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SnapshotName = '',
     [int]$PostBootSettleSeconds = 20
 )
@@ -24,3 +24,4 @@ if (-not (Test-Path $stepwiseScript)) {
     -PostBootSettleSeconds $PostBootSettleSeconds
 
 exit $LASTEXITCODE
+

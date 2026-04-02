@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$SourceVmProfile = 'primary',
     [string]$TargetVmProfile = 'secondary',
@@ -6,7 +6,7 @@ param(
     [string]$TargetVmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SourceSnapshotName = '',
     [string]$TargetSnapshotName = '',
     [ValidateSet('full', 'linked')]
@@ -464,3 +464,4 @@ finally {
 
 $audit | ConvertTo-Json -Depth 8 | Set-Content -Path $cloneAuditPath -Encoding UTF8
 Get-Content -Path $cloneAuditPath
+

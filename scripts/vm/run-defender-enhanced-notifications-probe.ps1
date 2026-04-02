@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [ValidateSet('baseline', 'reporting', 'securitycenter')]
     [string]$Mode = 'baseline',
@@ -9,7 +9,7 @@ param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptPath = 'C:\Tools\Scripts\defender-enhanced-notifications-probe.ps1',
     [string]$GuestOutputRoot = 'C:\Tools\Perf\Procmon'
@@ -99,3 +99,4 @@ foreach ($pair in @(
 }
 
 Write-Output $hostRoot
+

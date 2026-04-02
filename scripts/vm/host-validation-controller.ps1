@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
     [string]$TestId,
@@ -32,7 +32,7 @@ param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'codexvm',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SharedHostRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestWorkRoot = 'C:\Tools\ValidationController',
     [string]$SnapshotName
@@ -377,3 +377,4 @@ if ($measured.Count -gt 0) {
 }
 
 Write-ControllerFeedback -Kind 'next' -Message "Artifacts: $controllerRoot"
+

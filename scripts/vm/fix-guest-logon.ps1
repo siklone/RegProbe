@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 
 $machine = $env:COMPUTERNAME
 $winlogon = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
@@ -20,7 +20,7 @@ New-ItemProperty -Path $userList -Name 'Administrator' -PropertyType DWord -Valu
 New-ItemProperty -Path $winlogon -Name 'AutoAdminLogon' -PropertyType String -Value '1' -Force | Out-Null
 New-ItemProperty -Path $winlogon -Name 'ForceAutoLogon' -PropertyType String -Value '1' -Force | Out-Null
 New-ItemProperty -Path $winlogon -Name 'DefaultUserName' -PropertyType String -Value 'Administrator' -Force | Out-Null
-New-ItemProperty -Path $winlogon -Name 'DefaultPassword' -PropertyType String -Value 'CodexVm2026!' -Force | Out-Null
+New-ItemProperty -Path $winlogon -Name 'DefaultPassword' -PropertyType String -Value $env:REGPROBE_VM_GUEST_PASSWORD -Force | Out-Null
 New-ItemProperty -Path $winlogon -Name 'DefaultDomainName' -PropertyType String -Value $machine -Force | Out-Null
 Remove-ItemProperty -Path $winlogon -Name 'AutoLogonCount' -ErrorAction SilentlyContinue
 
@@ -36,3 +36,4 @@ New-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies
     auto_logon_count = (Get-ItemProperty $winlogon -ErrorAction SilentlyContinue).AutoLogonCount
     users = Get-LocalUser | Select-Object Name, Enabled, LastLogon
 } | ConvertTo-Json -Depth 5 | Out-File -Encoding utf8 'C:\Temp\guest-logon-fix-state.json'
+

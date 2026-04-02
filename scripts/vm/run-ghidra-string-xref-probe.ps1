@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
     [string]$TargetBinary,
@@ -12,7 +12,7 @@ param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging\ghidra-probes',
     [string]$GuestOutputRoot = 'C:\Tools\GhidraProbes',
     [string]$GuestProjectRoot = 'C:\Tools\GhidraProjects',
@@ -357,3 +357,4 @@ if ($null -eq $evidence.exit_code) {
 if ($evidence -and $evidence.exit_code -ne 0) {
     throw "Guest Ghidra probe failed with exit code $($evidence.exit_code). See $hostRunLog."
 }
+

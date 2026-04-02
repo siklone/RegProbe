@@ -1,10 +1,10 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$PublishZipPath = '',
     [string]$GuestPublishZipPath = 'C:\Tools\Inbound\app-publish.zip',
     [string]$GuestScriptPath = 'C:\Tools\Scripts\app-deploy.ps1',
@@ -220,3 +220,4 @@ if ($outputDir) {
 
 $result | ConvertTo-Json -Depth 8 | Set-Content -Path $OutputPath -Encoding UTF8
 Get-Content -Path $OutputPath
+

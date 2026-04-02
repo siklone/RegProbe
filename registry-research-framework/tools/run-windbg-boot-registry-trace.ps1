@@ -8,6 +8,8 @@ param(
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$PipeName = '\\.\pipe\regprobe_debug',
     [string]$DebugSnapshotName = 'RegProbe-Baseline-Debug-20260402',
+    [ValidateSet('evidence', 'operational')]
+    [string]$CollectionMode = 'evidence',
     [switch]$PrepareBaseline
 )
 
@@ -101,6 +103,8 @@ $payload = [ordered]@{
     vm_path = $VmPath
     pipe_name = $PipeName
     debug_snapshot_name = $DebugSnapshotName
+    collection_mode = $CollectionMode
+    rollback_pending = ($CollectionMode -eq 'evidence')
     key_count = @($Keys).Count
     keys = @($Keys | Sort-Object -Unique)
     command_script = Get-RepoDisplayPath -Path $commandScriptPath

@@ -1,9 +1,9 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SourceSnapshotName = 'RegProbe-Baseline-20260328',
     [string]$TargetSnapshotName = 'RegProbe-Baseline-Clean-20260329',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
@@ -503,3 +503,4 @@ if ($audit.status -ne 'ok') {
 }
 
 Write-Output $auditPath
+

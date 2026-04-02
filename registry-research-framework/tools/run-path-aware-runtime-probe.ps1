@@ -1,17 +1,23 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SnapshotName = '',
+    [ValidateSet('evidence', 'operational')]
+    [string]$CollectionMode = 'evidence',
     [string[]]$CandidateIds = @()
 )
 
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
+. (Join-Path $repoRoot 'scripts\vm\_vmrun-common.ps1')
+$guestCredential = Resolve-RegProbeVmCredential -GuestUser $GuestUser -GuestPassword $GuestPassword
+$GuestUser = $guestCredential.UserName
+$GuestPassword = $guestCredential.GetNetworkCredential().Password
 . (Join-Path $repoRoot 'scripts\vm\_resolve-vm-baseline.ps1')
 
 $vmProfileTag = Resolve-VmProfileTag -VmProfile $VmProfile
@@ -424,12 +430,7 @@ function Invoke-Vmrun {
         [switch]$IgnoreExitCode
     )
 
-    $output = & $VmrunPath @Arguments 2>&1 | Out-String
-    if (-not $IgnoreExitCode -and $LASTEXITCODE -ne 0) {
-        throw "vmrun failed ($LASTEXITCODE): $($output.Trim())"
-    }
-
-    return $output.Trim()
+    return Invoke-RegProbeVmrun -VmrunPath $VmrunPath -Arguments $Arguments -IgnoreExitCode:$IgnoreExitCode
 }
 
 function Wait-GuestReady {
@@ -629,6 +630,8 @@ $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
     probe_name = $probeName
     snapshot_name = $SnapshotName
+    collection_mode = $CollectionMode
+    rollback_pending = ($CollectionMode -eq 'evidence')
     host_output_root = "evidence/files/path-aware/$probeName"
     status = ''
     total_candidates = @($candidates).Count
@@ -768,3 +771,4 @@ Write-Json -Payload $summary -HostPath (Join-Path $hostWorkRoot 'summary.json') 
 Write-Json -Payload @($results.ToArray()) -HostPath (Join-Path $hostWorkRoot 'results.json') -RepoPath $repoResultsPath
 
 Write-Output $repoSummaryPath
+

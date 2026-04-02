@@ -1,9 +1,9 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
     [string]$GuestOutputRoot = 'C:\Tools\Perf\Procmon',
@@ -393,3 +393,4 @@ if (-not $shellHealth.shell_healthy) {
 } | ConvertTo-Json -Depth 5 | Set-Content -Path $hostSummaryPath -Encoding UTF8
 
 Write-Output $hostSummaryPath
+

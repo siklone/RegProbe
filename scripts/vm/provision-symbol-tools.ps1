@@ -1,11 +1,11 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmProfile = 'primary',
     [string]$ConfigPath = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$GuestInstallRoot = 'C:\Tools\SymbolTools',
     [string]$GuestWorkRoot = 'C:\RegProbe-Diag\SymbolTools',
     [bool]$EnableGuestWingetProvisioning = $false,
@@ -653,3 +653,4 @@ $payload | Add-Member -NotePropertyName shell_health_ready -NotePropertyValue $s
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $OutputFile) | Out-Null
 $payload | ConvertTo-Json -Depth 10 | Set-Content -Path $OutputFile -Encoding UTF8
 $payload | ConvertTo-Json -Depth 10
+

@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
     [string]$Needle,
@@ -12,7 +12,7 @@ param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging\string-search',
     [string]$GuestOutputRoot = 'C:\Tools\StringSearch'
 )
@@ -161,3 +161,4 @@ Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 
     json = $hostJson
     candidates = $Candidates
 } | ConvertTo-Json -Depth 6
+

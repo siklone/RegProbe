@@ -1,11 +1,11 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
     [string]$SessionId,
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestRootBase = 'C:\RegProbe-Diag',
     [string]$RecordId = 'power.disable-cpu-idle-states',
@@ -30,3 +30,4 @@ $common = @{
 & (Join-Path $PSScriptRoot 'run-cpu-idle-states-orchestration-step.ps1') -Step C2 @common
 & (Join-Path $PSScriptRoot 'run-cpu-idle-states-orchestration-step.ps1') -Step C3 @common
 & (Join-Path $PSScriptRoot 'run-cpu-idle-states-orchestration-step.ps1') -Step C4 @common
+

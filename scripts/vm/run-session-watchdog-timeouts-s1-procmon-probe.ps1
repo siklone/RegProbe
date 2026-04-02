@@ -1,9 +1,9 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
     [string]$GuestOutputRoot = 'C:\Tools\Perf\Procmon',
@@ -474,3 +474,4 @@ Write-Output $repoSummaryPath
 if ($timedOut) {
     exit 1
 }
+

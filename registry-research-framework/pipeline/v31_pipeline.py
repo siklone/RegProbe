@@ -16,6 +16,7 @@ if str(SCRIPTS_ROOT) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_ROOT))
 
 from research_path_lib import V31_EVIDENCE_ROOT, normalize_reference_text  # noqa: E402
+from artifact_metadata_lib import build_artifact_metadata  # noqa: E402
 from evidence_class_lib import (  # noqa: E402
     has_benchmark_evidence,
     has_ghidra_evidence,
@@ -33,7 +34,9 @@ RESEARCH_ROOT = REPO_ROOT / "research"
 RECORDS_DIR = RESEARCH_ROOT / "records"
 AUDIT_PATH = RESEARCH_ROOT / "evidence-audit.json"
 DEFAULT_QUEUE_PATH = REPO_ROOT / "registry-research-framework" / "audit" / "re-audit-queue.csv"
+RUNNER_COVERAGE_POLICY_PATH = REPO_ROOT / "registry-research-framework" / "config" / "runner-coverage-policy.json"
 PIPELINE_VERSION = "v3.2"
+PHYSICAL_CAPTURE_SUFFIXES = {".etl", ".pml", ".json", ".csv"}
 
 
 def now_utc() -> str:
@@ -139,11 +142,84 @@ def load_lane_result(manifest: dict[str, Any] | None) -> dict[str, Any] | None:
     return payload if isinstance(payload, dict) else None
 
 
-def lane_executed(manifest: dict[str, Any] | None) -> bool:
+def load_runner_coverage_policy() -> dict[str, Any]:
+    payload = load_json_if_exists(RUNNER_COVERAGE_POLICY_PATH)
+    return payload if isinstance(payload, dict) else {}
+
+
+def runner_required(audit: dict[str, Any]) -> bool:
+    policy = load_runner_coverage_policy()
+    required_layers = set(policy.get("required_layers") or [])
+    if str(audit.get("suspected_layer") or "") in required_layers:
+        return True
+    if bool(policy.get("required_when_boot_phase_relevant")) and bool(audit.get("boot_phase_relevant")):
+        return True
+    return False
+
+
+def normalize_capture_artifact(item: Any) -> dict[str, Any] | None:
+    if isinstance(item, str):
+        candidate = repo_relative_text(item)
+        if not candidate:
+            return None
+        item = {"path": candidate}
+    if not isinstance(item, dict):
+        return None
+    repo_ref = repo_relative_text(item.get("path") or item.get("filename"))
+    if not repo_ref:
+        return None
+    repo_path = repo_path_from_ref(repo_ref)
+    suffix = repo_path.suffix.lower() if repo_path else Path(repo_ref).suffix.lower()
+    return {
+        "path": repo_ref,
+        "exists": bool(repo_path and repo_path.exists()),
+        "placeholder": bool(str(item.get("placeholder")).lower() == "true") or suffix == ".md",
+        "kind": item.get("kind"),
+    }
+
+
+def manifest_capture_artifacts(manifest: dict[str, Any] | None) -> list[dict[str, Any]]:
     if not manifest:
-        return False
+        return []
+    normalized: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for raw in manifest.get("capture_artifacts") or []:
+        item = normalize_capture_artifact(raw)
+        if item and item["path"] not in seen:
+            seen.add(item["path"])
+            normalized.append(item)
+    for key in ("result_ref", "log_file"):
+        repo_ref = repo_relative_text(manifest.get(key))
+        if repo_ref and repo_ref not in seen:
+            seen.add(repo_ref)
+            item = normalize_capture_artifact({"path": repo_ref, "kind": key})
+            if item:
+                normalized.append(item)
+    return normalized
+
+
+def lane_capture_status(manifest: dict[str, Any] | None) -> str:
+    if not manifest:
+        return "missing-required-runner"
     status = str(manifest.get("status") or "").strip().lower()
-    return status not in {"", "staged"}
+    capture_status = str(manifest.get("capture_status") or "").strip().lower()
+    if status in {"", "staged"} or capture_status == "staged":
+        return "staged-without-capture"
+    physical_capture = any(
+        artifact["exists"]
+        and not artifact["placeholder"]
+        and Path(artifact["path"]).suffix.lower() in PHYSICAL_CAPTURE_SUFFIXES
+        for artifact in manifest_capture_artifacts(manifest)
+    )
+    if physical_capture:
+        return "runner-ok" if status in {"runner-ok", "invoked-runner", "captured"} else status
+    if status in {"runner-ok", "invoked-runner"} or capture_status in {"captured", "missing-capture"}:
+        return "missing-capture"
+    return status or capture_status or "missing-capture"
+
+
+def lane_executed(manifest: dict[str, Any] | None) -> bool:
+    return lane_capture_status(manifest) == "runner-ok"
 
 
 def lane_repo_ref(manifest: dict[str, Any] | None) -> str | None:
@@ -452,6 +528,8 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
     runtime_lane = load_lane_manifest(tweak_id, "runtime-lane.json")
     runtime_result = load_lane_result(runtime_lane)
     procmon_lane = load_lane_manifest(tweak_id, "procmon-lane.json")
+    runtime_lane_status = lane_capture_status(runtime_lane)
+    procmon_lane_status = lane_capture_status(procmon_lane)
 
     etw_trace_file = normalized_location(etw_item, "ETW trace")
     if isinstance(runtime_result, dict):
@@ -489,12 +567,22 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
                 "timestamp": (runtime_result or {}).get("generated_utc"),
                 "boot_phase_included": bool((runtime_result or {}).get("post_boot")) or (audit.get("boot_phase_relevant") and bool(audit.get("wpr") or audit.get("reboot_tested"))),
                 "trace_file": etw_trace_file,
+                "capture_status": runtime_lane_status,
+                "collection_mode": (runtime_lane or {}).get("collection_mode") or "evidence",
+                "runner_required": runner_required(audit),
+                "rollback_pending": bool((runtime_lane or {}).get("rollback_pending")),
+                "capture_artifacts": manifest_capture_artifacts(runtime_lane),
             },
             "procmon": {
                 "executed": procmon_item is not None or lane_executed(procmon_lane),
                 "events_found": procmon_item is not None or bool(procmon_lane and procmon_lane.get("exit_code") == 0),
                 "reading_process": None,
                 "trace_file": procmon_trace_file,
+                "capture_status": procmon_lane_status,
+                "collection_mode": (procmon_lane or {}).get("collection_mode") or "evidence",
+                "runner_required": runner_required(audit),
+                "rollback_pending": bool((procmon_lane or {}).get("rollback_pending")),
+                "capture_artifacts": manifest_capture_artifacts(procmon_lane),
             },
             "frida": {
                 "executed": False,
@@ -569,6 +657,7 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
     bench_item = next((item for item in behavior_items if item.get("kind") == "runtime-benchmark"), None)
     behavior_lane = load_lane_manifest(tweak_id, "behavior-lane.json")
     behavior_ref = lane_repo_ref(behavior_lane)
+    behavior_lane_status = lane_capture_status(behavior_lane)
     behavior_summary = bench_item.get("summary") if bench_item else None
     if behavior_summary is None and behavior_lane and behavior_lane.get("exit_code") not in (None, 0):
         behavior_summary = f"Runner failed with exit code {behavior_lane.get('exit_code')}. See {behavior_lane.get('log_file') or behavior_lane.get('output_file')}."
@@ -592,11 +681,17 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
                 "boot_time_after_ms": None,
                 "cpu_delta": None,
                 "trace_file": normalized_location(wpr_item, "WPR trace") or behavior_ref,
+                "capture_status": behavior_lane_status,
+                "collection_mode": (behavior_lane or {}).get("collection_mode") or "evidence",
+                "runner_required": runner_required(audit),
+                "rollback_pending": bool((behavior_lane or {}).get("rollback_pending")),
+                "capture_artifacts": manifest_capture_artifacts(behavior_lane),
             },
             "benchmark": {
                 "executed": bench_item is not None or lane_executed(behavior_lane),
                 "summary": behavior_summary,
                 "output_file": normalized_location(bench_item, "Benchmark output") or behavior_ref,
+                "capture_status": behavior_lane_status,
             },
             "registry_sideeffects": {
                 "executed": False,
@@ -719,6 +814,20 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
 def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
     checks = live_dead_flag_checks(record, audit)
     cross_block = normalize_cross_verification(record)
+    tweak_id = str(record.get("tweak_id") or "")
+    runtime_lane = load_lane_manifest(tweak_id, "runtime-lane.json")
+    procmon_lane = load_lane_manifest(tweak_id, "procmon-lane.json")
+    behavior_lane = load_lane_manifest(tweak_id, "behavior-lane.json")
+    runtime_required = runner_required(audit)
+    runtime_lane_raw_status = lane_capture_status(runtime_lane) if runtime_lane else "missing-required-runner"
+    if runtime_required and (not runtime_lane or runtime_lane.get("runner") is None):
+        runner_status = "missing-required-runner"
+    elif runtime_required and runtime_lane_raw_status not in {"runner-ok", "staged-without-capture", "missing-capture"}:
+        runner_status = "missing-capture"
+    elif runtime_required:
+        runner_status = runtime_lane_raw_status
+    else:
+        runner_status = runtime_lane_raw_status if runtime_lane else "not-required"
     return {
         "$schema": "registry-evidence-v3.2/classification",
         "classification": {
@@ -735,27 +844,71 @@ def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[
             "cross_verification": cross_block,
             "manual_review_required": bool(cross_block.get("cross_conflict")) or bool((record.get("decision") or {}).get("manual_review_required")),
             "doc_source": normalize_doc_source(record),
+            "runner_validation": {
+                "required": runtime_required,
+                "runtime_lane_status": runner_status,
+                "runtime_lane_status_raw": runtime_lane_raw_status,
+                "procmon_lane_status": lane_capture_status(procmon_lane) if procmon_lane else "not-required",
+                "behavior_lane_status": lane_capture_status(behavior_lane) if behavior_lane else "not-required",
+                "verdict": runner_status,
+            },
         },
     }
 
 
-def current_artifact_refs(tweak_id: str) -> list[dict[str, Any]]:
+def normalize_artifact_ref_item(item: Any, *, collected_utc: str | None = None) -> dict[str, Any] | None:
+    if isinstance(item, str):
+        item = {"path": item}
+    if not isinstance(item, dict):
+        return None
+    path_value = repo_relative_text(item.get("path") or item.get("filename")) or str(item.get("path") or item.get("filename") or item.get("id") or "").strip()
+    if not path_value:
+        return None
+    extra = {key: item.get(key) for key in ("id", "filename", "release_url", "exists", "placeholder", "kind") if key in item}
+    repo_ref = repo_relative_text(path_value)
+    if repo_ref:
+        return build_artifact_metadata(REPO_ROOT, repo_ref, collected_utc=collected_utc or item.get("collected_utc"), extra=extra)
+    return {
+        "path": path_value,
+        "sha256": None,
+        "size": None,
+        "collected_utc": collected_utc or item.get("collected_utc"),
+        **extra,
+    }
+
+
+def current_artifact_refs(tweak_id: str, audit: dict[str, Any]) -> list[dict[str, Any]]:
+    candidates: list[tuple[Any, str | None]] = []
     full_path = evidence_dir(tweak_id) / "full-evidence.json"
-    if not full_path.exists():
-        return []
-    payload = load_json(full_path)
-    raw_refs = payload.get("artifact_refs") or []
+    if full_path.exists():
+        payload = load_json(full_path)
+        for item in payload.get("artifact_refs") or []:
+            candidates.append((item, None))
+    for item in audit.get("artifact_refs") or []:
+        candidates.append((item, None))
+    for filename in ("runtime-lane.json", "procmon-lane.json", "behavior-lane.json"):
+        manifest = load_lane_manifest(tweak_id, filename)
+        if not manifest:
+            continue
+        collected = str(manifest.get("generated_utc") or "") or None
+        for key in ("result_ref", "log_file"):
+            repo_ref = repo_relative_text(manifest.get(key))
+            if repo_ref:
+                candidates.append(({"path": repo_ref, "id": Path(repo_ref).name}, collected))
+        for item in manifest_capture_artifacts(manifest):
+            candidates.append((item, collected))
+
     normalized: list[dict[str, Any]] = []
-    for item in raw_refs:
-        if isinstance(item, dict):
-            normalized.append(item)
-        elif isinstance(item, str) and item.strip():
-            normalized.append(
-                {
-                    "id": Path(item).name,
-                    "filename": item,
-                }
-            )
+    seen: set[str] = set()
+    for item, collected in candidates:
+        normalized_item = normalize_artifact_ref_item(item, collected_utc=collected)
+        if not normalized_item:
+            continue
+        path_key = str(normalized_item.get("path") or normalized_item.get("release_url") or "")
+        if not path_key or path_key in seen:
+            continue
+        seen.add(path_key)
+        normalized.append(normalized_item)
     return normalized
 
 
@@ -782,6 +935,7 @@ def render_verdict(record: dict[str, Any], audit: dict[str, Any], classification
         f"- Official doc: `{str(audit.get('official_doc_exists')).lower()}`",
         f"- Cross-layer: `{str(audit.get('cross_layer_satisfied')).lower()}`",
         f"- Cross verification: `{(classification['classification'].get('cross_verification') or {}).get('status', 'insufficient')}`",
+        f"- Runner validation: `{(classification['classification'].get('runner_validation') or {}).get('verdict', 'not-required')}`",
         f"- Layer set: `{', '.join(audit.get('layers_used') or []) or 'none'}`",
         f"- Tools: `{', '.join(audit.get('tools_used') or []) or 'none'}`",
         "",
@@ -795,7 +949,7 @@ def render_verdict(record: dict[str, Any], audit: dict[str, Any], classification
         lines.extend(["", "## Artifact refs", ""])
         for item in artifact_refs:
             if isinstance(item, dict):
-                lines.append(f"- `{item.get('id')}` -> {item.get('release_url') or item.get('filename')}")
+                lines.append(f"- `{item.get('id') or Path(str(item.get('path') or '')).name}` -> {item.get('release_url') or item.get('path') or item.get('filename')}")
             else:
                 lines.append(f"- `{item}`")
     return "\n".join(lines)
@@ -809,7 +963,7 @@ def build_full_evidence(record: dict[str, Any], audit: dict[str, Any], phase: st
     classification = build_classification(record, audit)
     re_audit = build_re_audit(record, audit)
     timeline = build_timeline(record, audit, phase)
-    artifact_refs = current_artifact_refs(str(record.get("tweak_id") or ""))
+    artifact_refs = current_artifact_refs(str(record.get("tweak_id") or ""), audit)
 
     payload: dict[str, Any] = {
         "$schema": "registry-evidence-v3.2/full-evidence",

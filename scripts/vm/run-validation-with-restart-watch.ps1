@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
     [string]$TestId,
@@ -28,7 +28,7 @@ param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SharedHostRoot = 'H:\Temp\vm-tooling-staging'
 )
 
@@ -136,3 +136,4 @@ if (Test-Path $statusPath) {
 }
 
 Get-Content -Path $logPath -Raw
+

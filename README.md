@@ -30,6 +30,47 @@ Static credibility was hardened in the v3.2 pass:
 - Nohuto priority records were re-audited first
 - `IDA` is optional today; `Ghidra + PDB` is the canonical static lane
 
+## Evidence Contract
+
+Wave 1 quality hardening changed what counts as evidence.
+
+- `full-evidence.json.artifact_refs` are structured objects, not loose strings
+- every physical artifact now carries `path`, `sha256`, `size`, and `collected_utc`
+- `staged` manifests are allowed as planning state, but they are not treated as captured evidence
+- runtime lanes that claim live capture must point to physical ETL/PML/JSON artifacts or they are downgraded to `missing-capture`
+- kernel, boot, and driver-facing records must finish with a real mapped runtime lane before they can count as executed evidence
+
+If you see a manifest without capture artifacts, treat it as orchestration metadata, not proof.
+
+## Collection Modes
+
+Research runners now expose an explicit collection mode:
+
+- `evidence`
+  default mode for research and audits
+- `operational`
+  only for flows where automatic rollback is intentionally allowed
+
+`evidence` mode is the safe default. In this mode:
+
+- automatic rollback is suppressed
+- pre-change and post-change exports are expected
+- manifests carry `rollback_pending = true` until a later explicit cleanup run
+
+`operational` mode keeps the older convenience behavior, but it is not the default for evidence collection.
+
+## VM Secret Handling
+
+Repo-tracked VM scripts no longer keep plaintext guest passwords.
+
+Credential resolution order is now:
+
+1. explicit credential input
+2. environment variables such as `REGPROBE_VM_GUEST_USER` and `REGPROBE_VM_GUEST_PASSWORD`
+3. a DPAPI-protected CLIXML credential file referenced outside the repo
+
+`vmrun` still consumes credentials at invocation time because that is a VMware CLI limitation. The repo now avoids storing or logging those secrets directly, and the shared VM helper masks them in runner output.
+
 ## Repo Shape
 
 ```text
@@ -67,6 +108,7 @@ Start here for the full flow:
 
 - [VM workflow](Docs/VM_WORKFLOW.md)
 - [Runtime escalation](Docs/RUNTIME_ESCALATION.md)
+- [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md)
 
 ## Research Escalation
 

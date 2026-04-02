@@ -14,6 +14,60 @@ RegProbe is both a desktop tweak app and a registry research workspace. Most use
 - SAFE tweaks stay reversible: `Detect -> Apply -> Verify -> Rollback`
 - do not casually rewrite historical evidence under `evidence/`, `research/`, or `Docs/`
 - this repo uses a `main`-only remote workflow
+- do not commit plaintext VM credentials
+- do not treat `staged` manifests as proof
+- do not touch [research/vm-incidents.json](H:/D/Dev/RegProbe/research/vm-incidents.json) unless the task explicitly targets incident logging
+
+## Evidence Contract
+
+Wave 1 quality hardening is now the repo baseline.
+
+- `full-evidence.json.artifact_refs` must be structured objects
+- every physical artifact must carry:
+  - `path`
+  - `sha256`
+  - `size`
+  - `collected_utc`
+- manifests may stay `staged`, but `staged` does not count as captured evidence
+- if a runtime lane claims capture and the referenced ETL/PML/JSON artifact does not exist, the lane is treated as `missing-capture`
+- kernel, boot, and driver records require a live mapped runtime lane with physical artifacts before they can finish green
+
+When in doubt, prefer honest `missing-capture`, `staged-without-capture`, or `missing-required-runner` statuses over optimistic prose.
+
+## Collection Modes and Rollback
+
+Research runners now accept `-CollectionMode evidence|operational`.
+
+- `evidence`
+  default for research, audits, and new runtime captures
+- `operational`
+  reserved for flows that intentionally keep automatic rollback
+
+In `evidence` mode:
+
+- automatic rollback should not fire
+- pre-change and post-change exports are expected
+- manifests must mark `rollback_pending = true` until an explicit rollback record exists
+
+If you later roll back an evidence run, preserve the adli zincir:
+
+- export before rollback
+- export after rollback
+- keep a diff record
+
+Do not silently revert and pretend nothing changed.
+
+## VM Credentials
+
+All repo-tracked VM scripts should resolve credentials through the shared helper under [scripts/vm/_vmrun-common.ps1](H:/D/Dev/RegProbe/scripts/vm/_vmrun-common.ps1).
+
+Resolution order:
+
+1. explicit credential input
+2. environment variables
+3. DPAPI-protected CLIXML credential file outside the repo
+
+Do not reintroduce hard-coded guest passwords in PowerShell scripts, notes, or example commands.
 
 ## Start Here
 
@@ -104,6 +158,8 @@ RegProbe's v3.2 pipeline is cross-layer. For undocumented keys, one tool is not 
   optional strengthening lane where supported
 - `WinDbg`
   last-resort boot and dead-flag arbiter for keys ETW still misses
+
+For `kernel`, `boot`, or `driver` suspected layers, at least one real runtime runner must complete with physical capture artifacts. A resolver-only or staged manifest is not enough.
 
 ### Static tools
 

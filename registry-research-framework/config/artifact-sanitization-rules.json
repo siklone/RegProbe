@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0",
+  "targets": [
+    "evidence",
+    "registry-research-framework/audit",
+    "research/notes",
+    "research/vm-incidents.json",
+    "registry-research-framework/config/vm-baselines.json"
+  ],
+  "rules": [
+    {
+      "id": "host-local-temp",
+      "type": "literal",
+      "pattern": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\",
+      "replacement": "%LOCALAPPDATA%\\Temp\\",
+      "targets": [
+        "evidence",
+        "registry-research-framework/audit",
+        "research/notes"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "local-vm-root",
+      "type": "literal",
+      "pattern": "H:\\Yedek\\VMs\\Win25H2Clean\\Win25H2.vmx",
+      "replacement": "<LOCAL_VM_ROOT>\\Win25H2Clean\\Win25H2.vmx",
+      "targets": [
+        "evidence",
+        "registry-research-framework/audit",
+        "research/notes",
+        "registry-research-framework/config/vm-baselines.json"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "host-staging-root",
+      "type": "literal",
+      "pattern": "H:\\Temp\\vm-tooling-staging\\",
+      "replacement": "<HOST_STAGING_ROOT>\\",
+      "targets": [
+        "evidence",
+        "registry-research-framework/audit",
+        "research/notes"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "repo-root",
+      "type": "literal",
+      "pattern": "H:\\D\\Dev\\RegProbe\\",
+      "replacement": "<REPO_ROOT>\\",
+      "targets": [
+        "evidence",
+        "registry-research-framework/audit",
+        "research/notes",
+        "research/vm-incidents.json"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "legacy-repo-root",
+      "type": "literal",
+      "pattern": "H:\\D\\Dev\\WPF-Windows-optimizer-with-safe-reversible-tweaks\\",
+      "replacement": "<LEGACY_REPO_ROOT>\\",
+      "targets": [
+        "evidence",
+        "registry-research-framework/audit",
+        "research/notes"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "guest-user-localappdata",
+      "type": "literal",
+      "pattern": "C:\\Users\\Administrator\\AppData\\Local\\",
+      "replacement": "%GUEST_USERPROFILE%\\AppData\\Local\\",
+      "targets": [
+        "evidence",
+        "registry-research-framework/audit",
+        "research/notes"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "guest-user-roaming",
+      "type": "literal",
+      "pattern": "C:\\Users\\Administrator\\AppData\\Roaming\\",
+      "replacement": "%GUEST_USERPROFILE%\\AppData\\Roaming\\",
+      "targets": [
+        "evidence",
+        "registry-research-framework/audit",
+        "research/notes"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "guest-user-root",
+      "type": "literal",
+      "pattern": "C:\\Users\\Administrator",
+      "replacement": "%GUEST_USERPROFILE%",
+      "targets": [
+        "evidence",
+        "registry-research-framework/audit",
+        "research/notes"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "generic-host-user-profile",
+      "type": "regex",
+      "pattern": "C:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Local\\\\",
+      "replacement": "%LOCALAPPDATA%\\\\",
+      "targets": [
+        "evidence",
+        "registry-research-framework/audit",
+        "research/notes"
+      ],
+      "enabled": true
+    }
+  ]
+}

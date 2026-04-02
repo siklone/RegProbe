@@ -1,10 +1,10 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$SnapshotName = ("baseline-{0}-shell-stable" -f (Get-Date -Format 'yyyyMMdd')),
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$OutputPath = ''
 )
 
@@ -48,3 +48,4 @@ if ($OutputPath) {
 }
 
 $result | ConvertTo-Json -Depth 5
+

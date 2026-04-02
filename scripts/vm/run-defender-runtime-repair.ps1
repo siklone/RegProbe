@@ -1,9 +1,9 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputPath = 'H:\Temp\vm-tooling-staging\defender-runtime-repair.json',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
     [string]$GuestOutputPath = 'C:\Tools\Perf\Procmon\defender-runtime-repair.json',
@@ -91,3 +91,4 @@ if ($guestRunFailed) {
 }
 
 Write-Output $HostOutputPath
+

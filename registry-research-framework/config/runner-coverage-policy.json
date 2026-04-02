@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "required_layers": [
+    "kernel",
+    "boot",
+    "driver"
+  ],
+  "required_when_boot_phase_relevant": true,
+  "required_runtime_lane": "runtime",
+  "optional_layers": [
+    "user-mode"
+  ]
+}

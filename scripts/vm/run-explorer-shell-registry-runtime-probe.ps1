@@ -1,9 +1,9 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\explorer-shell-registry-runtime',
     [Parameter(Mandatory = $true)]
@@ -514,3 +514,4 @@ Write-Output $repoSummaryPath
 if ($probeFailed) {
     exit 1
 }
+

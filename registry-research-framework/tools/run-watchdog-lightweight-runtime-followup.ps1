@@ -1,10 +1,10 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SnapshotName = ''
 )
 
@@ -364,3 +364,4 @@ catch {
 Write-Json $summary (Join-Path $hostWorkRoot 'summary.json') $repoSummaryPath
 Write-Json @($results.ToArray()) (Join-Path $hostWorkRoot 'results.json') $repoResultsPath
 Write-Output $repoSummaryPath
+

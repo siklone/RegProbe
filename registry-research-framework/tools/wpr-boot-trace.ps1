@@ -2,65 +2,16 @@
 param(
     [Parameter(Mandatory = $true)]
     [string]$OutputFile,
-    [string]$TweakId
+    [string]$TweakId,
+    [ValidateSet('evidence', 'operational')]
+    [string]$CollectionMode = 'evidence'
 )
 
 $resolver = Join-Path $PSScriptRoot '_resolve-tweak-runner.ps1'
 $runner = $null
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
-
-function Get-RepoDisplayPath {
-    param([string]$Path)
-
-    if ([string]::IsNullOrWhiteSpace($Path)) {
-        return $null
-    }
-
-    $full = [System.IO.Path]::GetFullPath($Path)
-    $repo = [System.IO.Path]::GetFullPath($repoRoot)
-    if ($full.StartsWith($repo, [System.StringComparison]::OrdinalIgnoreCase)) {
-        return $full.Substring($repo.Length).TrimStart('\').Replace('\', '/')
-    }
-
-    return $Path
-}
-
-function Sanitize-RunnerOutput {
-    param([string]$Text)
-
-    if ([string]::IsNullOrWhiteSpace($Text)) {
-        return ""
-    }
-
-    $sanitized = $Text
-    $repo = [System.IO.Path]::GetFullPath($repoRoot)
-    $repoPattern = [regex]::Escape($repo)
-    $sanitized = [regex]::Replace($sanitized, $repoPattern, "")
-    $sanitized = [regex]::Replace($sanitized, '(?im)(?<![A-Za-z0-9])[A-Z]:\\[^\r\n]+', '<local-path>')
-    return $sanitized.Trim()
-}
-
-function Get-RunnerResultRef {
-    param([string]$Text)
-
-    if ([string]::IsNullOrWhiteSpace($Text)) {
-        return $null
-    }
-
-    $repo = [System.IO.Path]::GetFullPath($repoRoot)
-    $repoPattern = [regex]::Escape($repo)
-    $normalizedText = [regex]::Replace($Text, $repoPattern, "")
-    $lines = $normalizedText -split "`r?`n" | ForEach-Object { $_.Trim() } | Where-Object { $_ }
-    [array]::Reverse($lines)
-    foreach ($line in $lines) {
-        $normalized = $line.TrimStart('\', '/') -replace '\\', '/'
-        if ($normalized -match '^(evidence|research|registry-research-framework)/') {
-            return $normalized
-        }
-    }
-
-    return $null
-}
+. (Join-Path $PSScriptRoot '_lane-manifest-lib.ps1')
+$coverage = Get-RunnerCoverageRequirement -TweakId $TweakId
 
 if ($TweakId) {
     $resolved = & $resolver -Lane behavior -TweakId $TweakId
@@ -75,6 +26,11 @@ $payload = [pscustomobject]@{
     tweak_id = $TweakId
     output_file = Get-RepoDisplayPath -Path $OutputFile
     status = if ($runner) { "invoked-runner" } else { "staged" }
+    collection_mode = $CollectionMode
+    rollback_pending = ($CollectionMode -eq 'evidence')
+    runner_required = [bool]$coverage.runner_required
+    capture_status = if ($runner) { 'missing-capture' } else { 'staged' }
+    capture_artifacts = @()
     runner = if ($runner) {
         [pscustomobject]@{
             script = $runner.script
@@ -90,6 +46,8 @@ $payload = [pscustomobject]@{
     else {
         "No tweak-specific WPR runner is mapped yet. This wrapper currently reserves the output contract."
     }
+    suspected_layer = $coverage.suspected_layer
+    boot_phase_relevant = [bool]$coverage.boot_phase_relevant
 }
 
 if ($runner) {
@@ -108,6 +66,8 @@ if ($runner) {
     }
     $sanitizedOutput = Sanitize-RunnerOutput -Text $output
     $sanitizedOutput | Set-Content -Path $logPath -Encoding utf8
+    $payload.capture_artifacts = @(Get-CaptureArtifactsFromPayload -ResultRef $resultRef -LogRef $payload.log_file)
+    $payload.capture_status = Get-CaptureStatus -Status $payload.status -CaptureArtifacts $payload.capture_artifacts
 }
 
 $payload | ConvertTo-Json -Depth 4 | Set-Content -Path $OutputFile -Encoding utf8

@@ -41,6 +41,11 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Cache .NET packages
         uses: actions/cache@v4
         with:
@@ -54,6 +59,12 @@ jobs:
 
       - name: Build solution
         run: dotnet build ${{ env.SOLUTION }} -c ${{ env.CONFIGURATION }} --no-restore
+
+      - name: Run Python pipeline tests
+        run: python -m unittest discover -s tests/python -p "test*.py"
+
+      - name: Run PowerShell pipeline smoke checks
+        run: pwsh -NoProfile -ExecutionPolicy Bypass -File tests/Invoke-PipelineQualitySmoke.ps1
 
       - name: Run tests
         run: dotnet test ${{ env.TEST_PROJECT }} -c ${{ env.CONFIGURATION }} --no-build --verbosity normal --logger trx --results-directory TestResults --collect:"XPlat Code Coverage"

@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
     [string]$TargetBinary,
@@ -12,7 +12,7 @@ param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging\ghidra-v32-probes',
     [string]$HostSdkRoot = 'H:\Temp\winsdk-debuggers-x64\Windows Kits\10\Debuggers\x64',
     [string]$HostSharedFolderPath = 'H:\Temp\vm-tooling-staging',
@@ -539,3 +539,4 @@ if (Test-Path $hostRunLog) {
 
 $evidencePayload | ConvertTo-Json -Depth 10 | Set-Content -Path $hostEvidence -Encoding UTF8
 $evidencePayload | ConvertTo-Json -Depth 10
+

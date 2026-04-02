@@ -1,10 +1,10 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$PipeName = '\\.\pipe\regprobe_debug',
     [int]$DebugPort = 1,
     [int]$BaudRate = 115200,
@@ -16,6 +16,9 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
+. (Join-Path $PSScriptRoot '_vmrun-common.ps1')
+$guestCredential = Resolve-RegProbeVmCredential -GuestUser $GuestUser -GuestPassword $GuestPassword
+$guestAuthArgs = Get-RegProbeVmrunAuthArguments -Credential $guestCredential
 $resolverPath = Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1'
 if (Test-Path -LiteralPath $resolverPath) {
     . $resolverPath
@@ -51,12 +54,7 @@ function Invoke-Vmrun {
         [switch]$IgnoreExitCode
     )
 
-    $output = & $VmrunPath @Arguments 2>&1 | Out-String
-    if (-not $IgnoreExitCode -and $LASTEXITCODE -ne 0) {
-        throw "vmrun failed ($LASTEXITCODE): $($output.Trim())"
-    }
-
-    return $output.Trim()
+    return Invoke-RegProbeVmrun -VmrunPath $VmrunPath -Arguments $Arguments -IgnoreExitCode:$IgnoreExitCode
 }
 
 function Test-VmRunning {
@@ -104,12 +102,13 @@ function Set-VmxKeyValue {
 function Invoke-GuestCmd {
     param([string]$Command)
 
-    Invoke-Vmrun -Arguments @(
-        '-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword,
+    Invoke-Vmrun -Arguments (@(
+        '-T', 'ws'
+    ) + $guestAuthArgs + @(
         'runProgramInGuest', $VmPath,
         'C:\Windows\System32\cmd.exe',
         '/c', $Command
-    ) | Out-Null
+    )) | Out-Null
 }
 
 $vmxPath = [System.IO.Path]::GetFullPath($VmPath)
@@ -180,3 +179,4 @@ if ($OutputPath) {
 }
 
 $result | ConvertTo-Json -Depth 8
+

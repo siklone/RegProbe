@@ -158,7 +158,7 @@ public sealed class ElevatedRegistryAccessorTests
     {
         var client = new RecordingClient
         {
-            RegistryResponseFactory = _ => throw new Win32Exception("Not all privileges or groups referenced are assigned to the caller."),
+            RegistryResponseFactory = _ => throw new Win32Exception(1314, "Not all privileges or groups referenced are assigned to the caller."),
             CommandResponseFactory = request => new ElevatedCommandResponse(
                 request.RequestId,
                 true,

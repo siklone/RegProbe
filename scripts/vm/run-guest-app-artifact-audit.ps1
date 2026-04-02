@@ -1,9 +1,9 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [ValidateSet('audit', 'cleanup')]
     [string]$Mode = 'audit',
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
@@ -152,3 +152,4 @@ if ($RequireClean) {
 }
 
 Write-Output $hostResultPath
+

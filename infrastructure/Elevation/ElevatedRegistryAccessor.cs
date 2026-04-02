@@ -184,7 +184,7 @@ public sealed class ElevatedRegistryAccessor : IRegistryAccessor
 
         if (ex is Win32Exception win32)
         {
-            return win32.NativeErrorCode is 5 or 1314;
+            return win32.NativeErrorCode is 5 or 1314 || IsAccessDeniedHResult(win32.HResult);
         }
 
         if (ex is ElevatedHostException elevated && elevated.ErrorHResult.HasValue)

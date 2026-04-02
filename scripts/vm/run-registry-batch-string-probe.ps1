@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
     [string]$ManifestPath,
@@ -7,7 +7,7 @@ param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = '',
     [string]$GuestOutputRoot = 'C:\Tools\ValidationController\batch-string-search',
     [string]$SnapshotName = '',
@@ -419,3 +419,4 @@ Write-Output $repoSummaryPath
 if ($probeFailed) {
     exit 1
 }
+

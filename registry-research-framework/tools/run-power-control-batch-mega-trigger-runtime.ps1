@@ -1,11 +1,13 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$SnapshotName = '',
+    [ValidateSet('evidence', 'operational')]
+    [string]$CollectionMode = 'evidence',
     [int]$PostBootSettleSeconds = 20,
     [int]$PollSeconds = 20,
     [int]$RunTimeoutSeconds = 5400,
@@ -16,6 +18,10 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
+. (Join-Path $repoRoot 'scripts\vm\_vmrun-common.ps1')
+$guestCredential = Resolve-RegProbeVmCredential -GuestUser $GuestUser -GuestPassword $GuestPassword
+$GuestUser = $guestCredential.UserName
+$GuestPassword = $guestCredential.GetNetworkCredential().Password
 $baselineResolver = Join-Path $repoRoot 'scripts\vm\_resolve-vm-baseline.ps1'
 $vmProfileTag = 'primary'
 $repoEvidenceBase = Join-Path $repoRoot 'evidence\files\vm-tooling-staging'
@@ -138,11 +144,7 @@ function ConvertTo-EncodedPowerShellCommand {
 
 function Invoke-Vmrun {
     param([string[]]$Arguments, [switch]$IgnoreExitCode)
-    $output = & $VmrunPath @Arguments 2>&1 | Out-String
-    if (-not $IgnoreExitCode -and $LASTEXITCODE -ne 0) {
-        throw "vmrun failed ($LASTEXITCODE): $($output.Trim())"
-    }
-    return $output.Trim()
+    return Invoke-RegProbeVmrun -VmrunPath $VmrunPath -Arguments $Arguments -IgnoreExitCode:$IgnoreExitCode
 }
 
 function Wait-VmPoweredOff {
@@ -616,6 +618,8 @@ $manifest = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
     probe_name = $probeName
     snapshot_name = $SnapshotName
+    collection_mode = $CollectionMode
+    rollback_pending = ($CollectionMode -eq 'evidence')
     family = 'power-control'
     pattern = 'mega-trigger'
     trigger_profile = 'pilot-safe-v1'
@@ -633,6 +637,8 @@ $summary = [ordered]@{
     family = 'power-control'
     pattern = 'mega-trigger'
     snapshot_name = $SnapshotName
+    collection_mode = $CollectionMode
+    rollback_pending = ($CollectionMode -eq 'evidence')
     trigger_profile = 'pilot-safe-v1'
     host_output_root = "evidence/files/vm-tooling-staging/$probeName"
     total_candidates = @($candidates).Count
@@ -793,8 +799,11 @@ catch {
 }
 finally {
     try {
-        Restore-HealthySnapshot
-        $summary.shell_after = Assert-ShellHealthy -Phase 'after-restore' -TimeoutSeconds 180
+        if ($CollectionMode -eq 'operational' -or $summary.status -eq 'boot-unsafe') {
+            Restore-HealthySnapshot
+            $summary.shell_after = Assert-ShellHealthy -Phase 'after-restore' -TimeoutSeconds 180
+            $summary.rollback_pending = $false
+        }
     }
     catch {
         $summary.errors += "Final recovery failed: $($_.Exception.Message)"
@@ -808,6 +817,8 @@ finally {
         probe_name = $probeName
         snapshot_name = $SnapshotName
         status = $summary.status
+        collection_mode = $CollectionMode
+        rollback_pending = [bool]$summary.rollback_pending
         summary_file = "evidence/files/vm-tooling-staging/$probeName/summary.json"
         results_file = "evidence/files/vm-tooling-staging/$probeName/results.json"
         manifest_file = "evidence/files/vm-tooling-staging/$probeName/manifest.json"
@@ -821,3 +832,4 @@ Write-Output $repoSummaryPath
 if ($summary.status -eq 'error') {
     exit 1
 }
+

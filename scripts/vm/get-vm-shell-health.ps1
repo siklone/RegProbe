@@ -1,23 +1,21 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$OutputPath = ''
 )
 
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot '_vmrun-common.ps1')
+$guestCredential = Resolve-RegProbeVmCredential -GuestUser $GuestUser -GuestPassword $GuestPassword
+$guestAuthArgs = Get-RegProbeVmrunAuthArguments -Credential $guestCredential
 
 function Invoke-Vmrun {
     param([string[]]$Arguments)
 
-    $output = & $VmrunPath @Arguments 2>&1 | Out-String
-    if ($LASTEXITCODE -ne 0) {
-        throw "vmrun failed ($LASTEXITCODE): $($output.Trim())"
-    }
-
-    return $output.Trim()
+    return Invoke-RegProbeVmrun -VmrunPath $VmrunPath -Arguments $Arguments
 }
 
 $runningList = Invoke-Vmrun -Arguments @('-T', 'ws', 'list')
@@ -38,7 +36,7 @@ $processQueryError = $null
 
 if ($vmRunning -and $toolsState -match 'running|installed') {
     try {
-        $processText = Invoke-Vmrun -Arguments @('-T', 'ws', '-gu', $GuestUser, '-gp', $GuestPassword, 'listProcessesInGuest', $VmPath)
+        $processText = Invoke-Vmrun -Arguments (@('-T', 'ws') + $guestAuthArgs + @('listProcessesInGuest', $VmPath))
     }
     catch {
         $processQueryError = $_.Exception.Message
@@ -68,3 +66,4 @@ if ($OutputPath) {
 }
 
 $result | ConvertTo-Json -Depth 5
+

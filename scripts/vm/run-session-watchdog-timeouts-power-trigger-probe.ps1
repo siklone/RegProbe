@@ -1,9 +1,9 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$HostOutputRoot = 'H:\Temp\vm-tooling-staging',
     [string]$GuestScriptRoot = 'C:\Tools\Scripts',
     [string]$GuestOutputRoot = 'C:\Tools\Perf\Procmon',
@@ -303,3 +303,4 @@ $summary | ConvertTo-Json -Depth 8 | Set-Content -Path $hostSummaryPath -Encodin
 $summary | ConvertTo-Json -Depth 8 | Set-Content -Path $repoSummaryPath -Encoding UTF8
 
 Write-Output $repoSummaryPath
+

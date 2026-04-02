@@ -1,8 +1,8 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$VmPath = 'H:\Yedek\VMs\Win25H2Clean\Win25H2.vmx',
     [string]$GuestUser = 'Administrator',
-    [string]$GuestPassword = 'CodexVm2026!',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
     [string]$GuestScriptPath = 'C:\Tools\Scripts\guest-validation-agent.ps1',
     [string]$SharedRootGuest = '\\vmware-host\Shared Folders\vm-tooling-staging'
@@ -50,3 +50,4 @@ try {
 }
 
 Write-Host 'Guest validation agent installed and scheduled task registered.'
+
