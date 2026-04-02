@@ -1198,7 +1198,12 @@ try {
     Write-RunLog -Message 'finalize-write-summary-complete'
     try {
         $state.phase = 'completed'
-        $state.result_status = $summary.status
+        if ($state.PSObject.Properties.Name -contains 'result_status') {
+            $state.result_status = $summary.status
+        }
+        else {
+            $state | Add-Member -NotePropertyName result_status -NotePropertyValue $summary.status
+        }
         Write-RunLog -Message 'finalize-write-state-start'
         Write-JsonFileDirect -Path $StatePath -InputObject $state
         Write-RunLog -Message 'finalize-write-state-complete'

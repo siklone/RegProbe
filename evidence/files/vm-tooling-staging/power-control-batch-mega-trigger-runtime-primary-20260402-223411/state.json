@@ -1,0 +1,84 @@
+﻿{
+    "generated_utc":  "2026-04-02T19:39:45.9025109Z",
+    "phase":  "parsing",
+    "pattern":  "mega-trigger",
+    "current_trigger":  null,
+    "trigger_log":  [
+                        {
+                            "name":  "cpu_stress",
+                            "start_utc":  "2026-04-02T19:47:26.5307740Z",
+                            "end_utc":  "2026-04-02T19:47:41.4982495Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "power_plan_and_requests",
+                            "start_utc":  "2026-04-02T19:47:41.5453913Z",
+                            "end_utc":  "2026-04-02T19:47:56.2279483Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "multi_thread_burst",
+                            "start_utc":  "2026-04-02T19:47:56.2464963Z",
+                            "end_utc":  "2026-04-02T19:48:28.4415951Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "disk_io_burst",
+                            "start_utc":  "2026-04-02T19:48:28.4611986Z",
+                            "end_utc":  "2026-04-02T19:48:28.7762894Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "process_spawn_burst",
+                            "start_utc":  "2026-04-02T19:48:28.8872212Z",
+                            "end_utc":  "2026-04-02T19:48:29.6776807Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "foreground_background_switch",
+                            "start_utc":  "2026-04-02T19:48:29.6918356Z",
+                            "end_utc":  "2026-04-02T19:48:42.9305031Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "timer_resolution_change",
+                            "start_utc":  "2026-04-02T19:48:42.9420187Z",
+                            "end_utc":  "2026-04-02T19:48:49.0560949Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "network_activity",
+                            "start_utc":  "2026-04-02T19:48:49.0693205Z",
+                            "end_utc":  "2026-04-02T19:49:00.2045306Z",
+                            "status":  "completed",
+                            "error":  null
+                        }
+                    ],
+    "remaining_triggers":  [
+
+                           ],
+    "baseline_values":  {
+                            "AllowAudioToEnableExecutionRequiredPowerRequests":  null,
+                            "AllowSystemRequiredPowerRequests":  null,
+                            "AlwaysComputeQosHints":  null,
+                            "CoalescingFlushInterval":  null,
+                            "IdleProcessorsRequireQosManagement":  null
+                        },
+    "candidate_values":  {
+                             "AllowAudioToEnableExecutionRequiredPowerRequests":  1,
+                             "AllowSystemRequiredPowerRequests":  1,
+                             "AlwaysComputeQosHints":  1,
+                             "CoalescingFlushInterval":  1,
+                             "IdleProcessorsRequireQosManagement":  1
+                         },
+    "apply_failures":  [
+
+                       ]
+}

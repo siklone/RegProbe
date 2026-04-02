@@ -25,6 +25,8 @@ The validated run is:
 
 - `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json`
 - `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json`
+- `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json`
+- `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json`
 
 What changed to make it reliable:
 
@@ -44,6 +46,6 @@ This is now a usable runtime triage lane again:
 
 ## Next Follow-Up
 
-1. repeat the same 5-key pilot once more as a confirmatory pass
-2. if the second pass also lands terminal `no-hit` or `hit` without regressions, widen carefully beyond the 5-key pilot
-3. take persistent no-hit leftovers to the `WinDbg` lane as the next escalation step
+1. take the persistent 5-key `no-hit` set to the `WinDbg` lane
+2. only widen beyond the 5-key pilot after the `WinDbg` pass tells us whether these are early-boot reads or true dead/no-hit candidates
+3. if `WinDbg` still shows no read activity, keep them in the negative-evidence / dead-flag decision path

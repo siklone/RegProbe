@@ -1,0 +1,33 @@
+{
+  "generated_utc": "2026-04-02T19:55:00Z",
+  "family": "power-control",
+  "pattern": "mega-trigger-v2",
+  "escalation_lane": "windbg-boot-registry-trace",
+  "reason": "double-terminal-no-hit-on-safe-pilot",
+  "source_runs": [
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json",
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json"
+  ],
+  "candidate_ids": [
+    "power.control.allow-audio-to-enable-execution-required-power-requests",
+    "power.control.allow-system-required-power-requests",
+    "power.control.always-compute-qos-hints",
+    "power.control.coalescing-flush-interval",
+    "power.control.idle-processors-require-qos-management"
+  ],
+  "value_names": [
+    "AllowAudioToEnableExecutionRequiredPowerRequests",
+    "AllowSystemRequiredPowerRequests",
+    "AlwaysComputeQosHints",
+    "CoalescingFlushInterval",
+    "IdleProcessorsRequireQosManagement"
+  ],
+  "windbg_targets": [
+    "AllowAudioToEnableExecutionRequiredPowerRequests",
+    "AllowSystemRequiredPowerRequests",
+    "AlwaysComputeQosHints",
+    "CoalescingFlushInterval",
+    "IdleProcessorsRequireQosManagement"
+  ],
+  "note": "These five values completed two terminal mega-trigger pilot runs with no runtime ETW or ETL binary hits. Next step is WinDbg boot-time registry tracing to separate early-boot reads from true dead/no-hit candidates."
+}

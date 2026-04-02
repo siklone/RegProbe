@@ -1,23 +1,37 @@
 {
-  "generated_utc": "2026-04-02T19:35:00Z",
+  "generated_utc": "2026-04-02T19:55:00Z",
   "family": "power-control",
   "pattern": "mega-trigger-v2",
   "pilot_candidate_count": 5,
   "pilot_trigger_count": 8,
   "recovery_safe": true,
   "terminal_vm_state": "shell-healthy-after-restore",
-  "current_status": "pilot-rerun-succeeded-no-hit",
+  "current_status": "confirmatory-rerun-succeeded-no-hit",
   "validated_runs": [
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json",
-    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json"
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json",
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json",
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json"
   ],
   "blockers": [],
   "next_actions": [
-    "repeat the 5-key pilot once as a confirmatory pass",
-    "if confirmatory pass stays terminal, widen carefully beyond the 5-key pilot",
-    "escalate persistent no-hit leftovers to the WinDbg lane"
+    "take the persistent 5-key no-hit set to the WinDbg lane",
+    "use WinDbg to decide early-boot-read versus true dead/no-hit",
+    "only widen beyond the 5-key pilot after the WinDbg pass"
   ],
   "pilot_outcome": {
+    "status": "no-hit",
+    "parser_source": "etl-binary-fallback",
+    "etl_path_source": "system32-trace-name",
+    "no_hit_candidate_ids": [
+      "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "power.control.allow-system-required-power-requests",
+      "power.control.always-compute-qos-hints",
+      "power.control.coalescing-flush-interval",
+      "power.control.idle-processors-require-qos-management"
+    ]
+  },
+  "confirmatory_outcome": {
     "status": "no-hit",
     "parser_source": "etl-binary-fallback",
     "etl_path_source": "system32-trace-name",
