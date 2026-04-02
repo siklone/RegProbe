@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.169314Z",
+  "record_id": "system.disable-game-dvr",
+  "tweak_id": "system.disable-game-dvr",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Duplicate retirement audit trail",
+      "url": "research/records/system.disable-game-recording-broadcasting.json",
+      "kind": "repo-doc",
+      "summary": "The official validated replacement for this retired duplicate is system.disable-game-recording-broadcasting, which uses the documented GameDVR policy surface."
+    }
+  ]
+}

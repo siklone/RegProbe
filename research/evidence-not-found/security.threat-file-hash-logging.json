@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.166304Z",
+  "record_id": "security.threat-file-hash-logging",
+  "tweak_id": "security.threat-file-hash-logging",
+  "evidence_class": "A",
+  "record_status": "validated",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "runtime_procmon",
+    "runtime_reboot",
+    "official_doc"
+  ],
+  "attempted_tools": [
+    "official-doc",
+    "procmon",
+    "reboot"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+  "links": [
+    {
+      "title": "Microsoft Support: March 2016 anti-malware platform update for Endpoint Protection clients",
+      "url": "https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa",
+      "kind": "official-doc",
+      "summary": "Microsoft Support publishes ThreatFileHashLogging = 1 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender as the Windows Defender Antivirus registry setting for SHA1 threat-file hash logging and says event 1120 is recorded when a threat file is detected and hash logging is enabled."
+    },
+    {
+      "title": "Microsoft Learn: Create indicators for files",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/indicator-file",
+      "kind": "official-doc",
+      "summary": "Microsoft says file-hash computation is enabled by the Defender Antivirus MpEngine policy 'Enable File Hash Computation' and notes that file indicators support PE files only."
+    },
+    {
+      "title": "Microsoft Support: March 2016 anti-malware platform update for Endpoint Protection clients",
+      "url": "https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa",
+      "kind": "official-doc",
+      "summary": "Microsoft documents event 1120 as the file-hash-logging event and says it is logged only when ThreatFileHashLogging is enabled."
+    },
+    {
+      "title": "Microsoft Learn: Demonstrate cloud-delivered protection",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection",
+      "kind": "official-doc",
+      "summary": "Microsoft publishes a password-protected BaFS Sample PE file for Defender cloud-protection demonstrations. The sample used in the VM pass extracted to a 123904-byte PE with SHA256 670b00e90a7c9eb7ac6674441551e7764a8364c26e44dcc92474a9abcfac4c04."
+    },
+    {
+      "title": "Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation",
+      "url": "Docs/security/assets/Windows-Defender.txt",
+      "kind": "repo-doc",
+      "summary": "The local dump mirrors show ThreatFileHashLogging on the Defender root path, EnableFileHashComputation on the Policy Manager alias, and the 25H2 trace mirror also shows the non-policy MpEngine surface."
+    },
+    {
+      "title": "Original high-risk snapshot had Defender disabled",
+      "url": "evidence/files/vm-tooling-staging/defender-runtime-repair.json",
+      "kind": "vm-test",
+      "summary": "The original high-risk snapshot had WinDefend and WdNisSvc set to Disabled and Get-MpComputerStatus reported 'Not running', which would have made Defender policy validation misleading until the VM was repaired."
+    }
+  ]
+}

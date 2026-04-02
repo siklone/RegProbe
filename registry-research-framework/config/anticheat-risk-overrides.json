@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "entries": {
+    "system.kernel.disable-exception-chain-validation": {
+      "anticheat_risk": "high",
+      "anticheat_details": "Disabling SEH chain validation changes a kernel-observed exploit mitigation and may be interpreted as hostile tampering by anti-cheat integrity checks.",
+      "gaming_safe": false
+    },
+    "policy.system.enable-virtualization": {
+      "anticheat_risk": "medium",
+      "anticheat_details": "Changing virtualization and VBS posture can affect kernel integrity surfaces and compatibility with some anti-cheat stacks.",
+      "gaming_safe": false
+    },
+    "power.disable-power-throttling": {
+      "anticheat_risk": "low",
+      "anticheat_details": "This is primarily a power-management change and is not expected to modify exploit mitigations or kernel integrity state.",
+      "gaming_safe": true
+    }
+  }
+}

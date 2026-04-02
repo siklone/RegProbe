@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.161800Z",
+  "record_id": "security.disable-wpbt",
+  "tweak_id": "security.disable-wpbt",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn DFCI WPBT setting reference",
+      "url": "https://learn.microsoft.com/en-us/intune/intune-service/configuration/device-firmware-configuration-interface-windows-settings",
+      "kind": "official-doc",
+      "summary": "Microsoft documents WPBT as a UEFI or DFCI managed feature with Not configured, Enabled, and Disabled states."
+    },
+    {
+      "title": "Repo security notes for WPBT",
+      "url": "Docs/security/security.md",
+      "kind": "repo-doc",
+      "summary": "The repo security notes track DisableWpbtExecution under Session Manager as the current implementation surface and cite community hardening references for the mapping."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\DisableWpbtExecution = 1 for the WPBT tweak."
+    },
+    {
+      "title": "nohuto regkit trace for Session Manager",
+      "url": "research/_source-mirrors/regkit/assets/traces/23H2.txt; research/_source-mirrors/regkit/assets/traces/24H2.txt; research/_source-mirrors/regkit/assets/traces/25H2.txt; research/_source-mirrors/win-registry/records/Session-Manager.txt",
+      "kind": "registry-observation",
+      "summary": "The raw registry traces list \\Registry\\Machine\\SYSTEM\\ControlSet001\\Control\\Session Manager : DisableWpbtExecution, corroborating the observed Session Manager path."
+    }
+  ]
+}

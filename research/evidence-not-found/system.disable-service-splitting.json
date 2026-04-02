@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.173824Z",
+  "record_id": "system.disable-service-splitting",
+  "tweak_id": "system.disable-service-splitting",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: Service host grouping in Windows 10",
+      "url": "https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring",
+      "kind": "official-doc",
+      "summary": "Microsoft documents svchost service refactoring, explains that service splitting depends on memory thresholds, and describes the general service-splitting behavior on modern Windows."
+    },
+    {
+      "title": "Repo system research notes for service splitting",
+      "url": "Docs/system/system.md",
+      "kind": "repo-doc",
+      "summary": "The repo documents the SvcHostSplitThresholdInKB path, describes the threshold behavior, and lists 0xFFFFFFFF as the applied no-splitting override."
+    },
+    {
+      "title": "Decompiled SCM configuration reader for service splitting",
+      "url": "Docs/system/assets/servicesplitting-ScReadSCMConfiguration.c",
+      "kind": "decompiled-pseudocode",
+      "summary": "The decompiled service-control-manager helper calls RegQueryValueExW for SvcHostSplitThresholdInKB under HKLM\\SYSTEM\\CurrentControlSet\\Control, showing the threshold is consumed by the svchost grouping logic."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes SvcHostSplitThresholdInKB = -1 (0xFFFFFFFF) for the current tweak."
+    }
+  ]
+}

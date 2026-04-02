@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.186877Z",
+  "record_id": "system.kernel-cache-aware-scheduling",
+  "tweak_id": "system.kernel-cache-aware-scheduling",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "nohuto mirror: kernel cache-aware scheduling value list",
+      "url": "research/_source-mirrors/win-config/system/desc.md",
+      "kind": "repo-doc",
+      "summary": "The mirrored kernel value list records \"CacheAwareScheduling\" = 47 and labels it with KiCacheAwareScheduling."
+    },
+    {
+      "title": "Repo system research notes for kernel registry values",
+      "url": "Docs/system/system.md",
+      "kind": "repo-doc",
+      "summary": "The repo documents CacheAwareScheduling = 47 as personal research and ties it to KiCacheAwareScheduling."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes CacheAwareScheduling = 47 for the current tweak."
+    }
+  ]
+}

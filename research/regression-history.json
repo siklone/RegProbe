@@ -1,0 +1,4967 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.148259Z",
+  "entries": [
+    {
+      "tweak_id": "audio.disable-beep",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "audio.disable-spatial-audio",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "audio.disable-system-sounds",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "audio.show-disconnected-devices",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-27T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "audio.show-hidden-devices",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-27T11:06:26Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "cleanup.disable-reserved-storage",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.docker-performance",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.dotnet-telemetry-disable",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.enable-windows-long-paths",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.nodejs-performance",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:32:25.0993203+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.powershell-execution",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.python-path-fix",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T18:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.ssh-agent-autostart",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.terminal-dev-mode",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.vs-intellisense-cache",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.vs-solution-load",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.vscode-git-autofetch",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-12T07:40:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.windows-dev-mode",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T07:47:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "developer.wsl2-memory",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T09:13:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.disable-low-disk-space-warning",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.disable-taskbar-chat",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.disable-taskbar-widgets",
+      "history": [
+        {
+          "build": "26100",
+          "default": "deprecated",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "deprecated",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.enable-explorer-compact-mode",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.hide-empty-drives",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T09:28:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T07:48:23+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T07:39:12+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-drive-letters-first",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T08:01:10+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-file-extensions",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T17:30:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-full-path",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:00:31+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-hidden-files",
+      "history": [
+        {
+          "build": "26100",
+          "default": 2,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T17:35:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 2,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-info-tips",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T07:34:22+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-protected-operating-system-files",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:45:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-recent-items",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T09:27:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-status-bar",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T09:10:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.show-type-overlay",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T09:12:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "explorer.taskbar-alignment-left",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T17:06:31+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-active-probing",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-default-shares",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:35:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-ipv6",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T02:32:46.1598415+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-llmnr",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T08:13:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-lltd",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-mdns",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-netbios-resolution",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T08:24:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-netbios",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-plaintext-smb-passwords",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:12:09+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-smart-name-resolution",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T08:28:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-smb1",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:25:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-smb2",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:31:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.disable-wifi-sense",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:37:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.enable-lltd-responder",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:43:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.enable-lltdio",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:41:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.optimize-smb",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.prefer-ipv4",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T02:34:07.7304266+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.require-ntlm-ssp-client-session-security",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-disable-leasing",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-enable-large-mtu",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:58:30Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-enable-multichannel",
+      "history": [
+        {
+          "build": "26100",
+          "default": true,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": true,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-enable-quic",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-encrypt-data",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-increase-client-metadata-cache",
+      "history": [
+        {
+          "build": "26100",
+          "default": 16,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 16,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-reject-unencrypted-access",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-require-dialect-3_1_1",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-require-signing-client",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:47:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-require-signing-server",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:51:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "network.smb-set-cipher-suite-order",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "notifications.disable-feedback-frequency",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "notifications.disable-lock-screen",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T08:33:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "notifications.disable-mirroring",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T08:38:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "notifications.disable-tile",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T08:42:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "notifications.disable-toast",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T09:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "performance.disable-animations",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "performance.disable-menu-show-delay",
+      "history": [
+        {
+          "build": "26100",
+          "default": "400",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "400",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "performance.disable-taskbar-animations",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "peripheral.autoplay-take-no-action",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "peripheral.disable-autoplay",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T18:10:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "peripheral.disable-sticky-keys-prompt",
+      "history": [
+        {
+          "build": "26100",
+          "default": "510",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "510",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "policy.system.enable-virtualization",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "B",
+          "last_reviewed_utc": "2026-03-31T08:21:42Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "B",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.control.class1-initial-unpark-count",
+      "history": [
+        {
+          "build": "26100",
+          "default": 64,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-30T00:05:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 64,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.control.hiber-file-size-percent",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "B",
+          "last_reviewed_utc": "2026-03-30T13:55:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "B",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.control.hibernate-enabled-default",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "B",
+          "last_reviewed_utc": "2026-03-29T21:45:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "B",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.control.hibernate-enabled",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-29T11:55:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.control.lid-reliability-state",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-29T11:55:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.control.mf-buffering-threshold",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-30T00:53:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.control.perf-calculate-actual-utilization",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-30T00:05:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
+      "history": [
+        {
+          "build": "26100",
+          "default": 60,
+          "class": "B",
+          "last_reviewed_utc": "2026-03-30T00:53:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "B",
+      "current_default": 60,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.disable-cpu-idle-states",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-29T02:20:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.disable-fast-startup",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T18:34:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.disable-modern-standby",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-25T08:10:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.disable-network-power-saving.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-31T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.disable-network-power-saving",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.disable-power-throttling",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:15:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.disable-windows-search",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:15:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.hide-hibernate-option",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:54:12.5883201+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.hide-lock-option",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:50:40.9899199+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.hide-sleep-option",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:52:37.0229425+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.optimize-cpu-boost",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.optimize-gaming-network",
+      "history": [
+        {
+          "build": "26100",
+          "default": 2,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 2,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.optimize-performance",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "power.session-watchdog-timeouts",
+      "history": [
+        {
+          "build": "26100",
+          "default": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+          "class": "B",
+          "last_reviewed_utc": "2026-03-30T10:41:21Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "B",
+      "current_default": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.block-microsoft-accounts",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T09:10:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.deny-app-access.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": "windows-default",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "windows-default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.deny-app-access",
+      "history": [
+        {
+          "build": "26100",
+          "default": "windows-default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "windows-default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-activity-history",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T09:15:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-advertising-id",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T17:50:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-app-diagnostics",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:45:22.0860678+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-app-launch-tracking",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T07:18:02Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-app-suggestions",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-appcompat-engine.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-appdeviceinventory.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-application-compatibility.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": "deprecated",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "deprecated",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-application-compatibility",
+      "history": [
+        {
+          "build": "26100",
+          "default": "windows-default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "windows-default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-application-compatibility.tasks",
+      "history": [
+        {
+          "build": "26100",
+          "default": "default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-application-telemetry",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T09:22:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-background-apps",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:43:39.9856620+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-biometrics-domain-logon",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:59:12.4633283+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-biometrics-logon",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:57:25.3102002+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-biometrics",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:55:44.8915752+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-camera",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:46:47.8894113+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-ceip",
+      "history": [
+        {
+          "build": "26100",
+          "default": "windows-default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "windows-default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-cli-telemetry",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-consumer-account-content",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T12:42:34.7172784+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-copilot",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-cross-device-experiences.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-cross-device-experiences",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-device-name-telemetry",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T13:21:47.8064758+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data-delete",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T13:39:09.6770515+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data-viewer",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T13:25:41.8070282+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-edge-search-suggestions",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T15:13:40.4233180+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-f1-help",
+      "history": [
+        {
+          "build": "26100",
+          "default": "present",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "present",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-feedback-notifications",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T13:18:10.1644837+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-file-history",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:04:56.8703898+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-find-my-device",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T13:52:31.0573715+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-font-providers",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:06:31.7575056+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-inking-typing-personalization",
+      "history": [
+        {
+          "build": "26100",
+          "default": "windows-default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "windows-default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-kms-activation-telemetry",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-language-list-access",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:36:20Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-local-security-questions",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T13:57:40.2504858+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-location-consent-system",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T03:10:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-location-consent",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T18:00:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-location-scripting",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T14:11:36.6972806+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-location-services",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:00:59.6788102+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-mdm-enrollment",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:00:59.6788102+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-message-sync",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T13:30:32.7900102+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-offline-files.binary",
+      "history": [
+        {
+          "build": "26100",
+          "default": "present",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "present",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-offline-files.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T19:10:41.8261076+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-offline-files",
+      "history": [
+        {
+          "build": "26100",
+          "default": "windows-default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "windows-default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-offline-files.services",
+      "history": [
+        {
+          "build": "26100",
+          "default": "default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-offline-files.tasks",
+      "history": [
+        {
+          "build": "26100",
+          "default": "default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-onesettings-downloads",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T14:41:27.2749969+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-online-tips",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T14:33:43.3708461+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-pca-diagnostics.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-phone-linking",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-program-compatibility-assistant",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-recall",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T19:36:19.8449566+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-reserved-storage",
+      "history": [
+        {
+          "build": "26100",
+          "default": "deprecated",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "deprecated",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-resume",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-rsop-logging",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-search-box-suggestions",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T14:55:09.6057576+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-search-history",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-sensors",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T14:14:01.2716386+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-sleep-study-diagnostics",
+      "history": [
+        {
+          "build": "26100",
+          "default": "windows-default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "windows-default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-steps-recorder",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T15:11:19.1409952+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-suggestions-cdm",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-suggestions.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-suggestions",
+      "history": [
+        {
+          "build": "26100",
+          "default": "windows-default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "windows-default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-switchback.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-telemetry-change-notifications",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T15:00:19.7365760+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-telemetry-optin-ui",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T15:05:03.3434487+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-wer",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T15:08:49.7390244+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-windows-location-provider",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T14:27:06.4267409+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-windows-tips",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T19:45:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-wmplayer-telemetry",
+      "history": [
+        {
+          "build": "26100",
+          "default": "windows-default",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "windows-default",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.hide-last-logged-in-user",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:21:59.0000000+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-personalized-sites-user",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:19:29.3085629+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-personalized-sites",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:17:57.1358753+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-section-user",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:13:30.1052626+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-section",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:12:07.5358609+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.hide-username-at-signin",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.limit-diagnostic-log-collection",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T19:59:10.6720406+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.limit-dump-collection",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:01:37.1486924+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T11:20:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.troubleshooter-dont-run",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "privacy.disable-sync-settings",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-defender-sample-submission",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T08:40:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-downloads-blocking",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:04:21.2349557+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-enhanced-defender-notifications",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T08:55:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-ntfs-encryption",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-p2p-updates",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T18:52:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-password-reveal",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-picture-password",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-remote-assistance",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T19:57:17.8070811+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-system-mitigations",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-system-restore",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-vbs",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-12T07:23:19Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-windows-firewall",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-windows-update.policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-windows-update",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-wpbt",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.disable-wu-driver-updates",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:43:20.0000000+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.enable-defender-maps-advanced-membership",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T08:40:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.enable-dynamic-lock",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.enable-sudo",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:25:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.hide-defender-exclusions-from-local-admins",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:05:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.powershell-unrestricted",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.threat-file-hash-logging",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T11:30:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.trusted-path-credential-prompting",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-11T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "security.uac-never-notify",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.aero-shake",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:06:48.3919056+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.bsod-disable-auto-reboot",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:08:54.2187340+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.bsod-display-parameters",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-app-archiving",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T19:51:42.0176899+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-auto-maintenance",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-11T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-background-gp-updates",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T19:43:33.3741864+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-clipboard-history",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T15:22:05.5259006+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-clipboard-redirection",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T15:25:49.0591858+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-fullscreen-optimizations",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-game-dvr",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-game-recording-broadcasting",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T19:54:30.6213142+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-jpeg-reduction",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-27T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-restartable-apps",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-scheduled-tasks",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-search-highlights-policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:37:01.2379374+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-search-highlights",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-search-remote-queries",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-24T22:15:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-search-web-results",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-service-splitting",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-shortcut-arrow",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-startup-delay",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-27T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-storage-sense-temp-cleanup",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:10:28.6818900+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-storage-sense",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:08:26.6324695+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.disable-store-open-with",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:12:39.1790212+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.dwm-disable-mpo",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.dwm-disable-overlay-min-fps",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:03:30Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.enable-game-mode",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-23T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.enable-hags",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-20T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.enable-indexing-encrypted-items",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:55:30Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.executive-additional-worker-threads",
+      "history": [
+        {
+          "build": "26100",
+          "default": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-30T09:38:14Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.executive-uuid-sequence-number",
+      "history": [
+        {
+          "build": "26100",
+          "default": 25272111,
+          "class": "B",
+          "last_reviewed_utc": "2026-03-31T10:15:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "B",
+      "current_default": 25272111,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.graphics-disable-overlays",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.graphics-page-fault-debug-mode",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.graphics-tdr-ddi-delay",
+      "history": [
+        {
+          "build": "26100",
+          "default": 5,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:10:30Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 5,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.graphics-tdr-delay",
+      "history": [
+        {
+          "build": "26100",
+          "default": 2,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:08:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 2,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.graphics-tdr-level",
+      "history": [
+        {
+          "build": "26100",
+          "default": 3,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:12:30Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 3,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.graphics-tdr-limit-count",
+      "history": [
+        {
+          "build": "26100",
+          "default": 5,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:14:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 5,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.graphics-tdr-limit-time",
+      "history": [
+        {
+          "build": "26100",
+          "default": 60,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:17:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 60,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.io-allow-remote-dasd",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "B",
+          "last_reviewed_utc": "2026-03-30T19:30:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "B",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-adjust-dpc-threshold",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-cache-aware-scheduling",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-default-dynamic-hetero-cpu-policy",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-22T11:19:19.559381Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-disable-low-qos-timer-resolution",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-dpc-queue-depth",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-dpc-watchdog-period",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-ideal-dpc-rate",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-minimum-dpc-rate",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-serialize-timer-expiration",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "E",
+          "last_reviewed_utc": "2026-03-21T07:42:45.369317Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel-thread-dpc-enable",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.kernel.disable-exception-chain-validation",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-31T17:20:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.memory-clear-pagefile-at-shutdown",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T00:49:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.memory-disable-paging-executive",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.memory-large-system-cache-client",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.memory-nonpaged-pool-dynamic",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.memory-paged-pool-dynamic",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.memory-registry-quota-default",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T18:44:00+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.ntfs-disable-8dot3",
+      "history": [
+        {
+          "build": "26100",
+          "default": 2,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:38:30.1171873+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 2,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.ntfs-disable-last-access",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:22:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.ntfs-enable-long-paths",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:34:02.4377701+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.ntfs-reset-memory-usage",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.ntfs-reset-mft-zone",
+      "history": [
+        {
+          "build": "26100",
+          "default": 1,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T01:20:30Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 1,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.priority-control",
+      "history": [
+        {
+          "build": "26100",
+          "default": 2,
+          "class": "A",
+          "last_reviewed_utc": "2026-04-01T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 2,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.reduce-shutdown-timeouts",
+      "history": [
+        {
+          "build": "26100",
+          "default": "20000",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-25T07:40:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "20000",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.reliability-timestamp-enabled",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-26T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-audio-gateway",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:25:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-support",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:25:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-user-service",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:35:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-connected-user-experiences",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Automatic",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:25:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "Automatic",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-print-device-configuration",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-print-notifications",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:25:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-print-scan-broker",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-print-spooler",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Automatic",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:25:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "Automatic",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-print-workflow-user-service",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-sysmain",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Automatic",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "Automatic",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-wap-push-routing",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Automatic",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "Automatic",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-windows-error-reporting",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "E",
+          "last_reviewed_utc": "2026-03-14T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "E",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.services.disable-windows-search",
+      "history": [
+        {
+          "build": "26100",
+          "default": "Manual",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T09:15:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "Manual",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.verbose-status-messages",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:31:28.9439482+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "system.wait-to-kill-service-timeout",
+      "history": [
+        {
+          "build": "26100",
+          "default": "5000",
+          "class": "A",
+          "last_reviewed_utc": "2026-03-25T07:40:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": "5000",
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.default-account-picture",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:39:16.2759098+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-acrylic-logon",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:31:17.9391409+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-common-control-animations",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T02:50:43+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-first-signin-animation",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:28:07.0501445+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-camera",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:32:33.0455208+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-changes",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:37:44.3907002+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-motion",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:35:59.8118130+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-slideshow",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:34:25.6329894+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:40:40.8295775+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-action-center",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:16:48.4391102+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-desktop-collection",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:23:21.9705499+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-features",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:20:26.6158930+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-settings",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:18:23.9251495+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-third-party",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:25:32.4359503+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-welcome",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:21:50.7186744+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-wcn-wizards",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:42:05.5484537+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-widgets",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:14:43.5557490+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.disable-window-animations",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:29:22.7863493+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.force-classic-control-panel",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-13T02:52:43+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.hide-language-bar",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-21T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.hide-most-used-apps",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T20:26:54.8725742+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": null,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.hide-people-bar",
+      "history": [
+        {
+          "build": "26100",
+          "default": 0,
+          "class": "A",
+          "last_reviewed_utc": "2026-03-12T21:28:41.5872918+03:00"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "A",
+      "current_default": 0,
+      "major_build_changed": false
+    },
+    {
+      "tweak_id": "visibility.restore-classic-context-menu",
+      "history": [
+        {
+          "build": "26100",
+          "default": null,
+          "class": "B",
+          "last_reviewed_utc": "2026-04-01T00:00:00Z"
+        }
+      ],
+      "revalidation_needed_on_major_update": true,
+      "current_build": "26100",
+      "current_class": "B",
+      "current_default": null,
+      "major_build_changed": false
+    }
+  ],
+  "revalidation_queue": []
+}

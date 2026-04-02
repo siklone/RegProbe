@@ -34,6 +34,25 @@ Wave 1 quality hardening is now the repo baseline.
 
 When in doubt, prefer honest `missing-capture`, `staged-without-capture`, or `missing-required-runner` statuses over optimistic prose.
 
+## Wave 2 Metadata
+
+New research output should preserve and reuse these surfaces instead of inventing local ad-hoc notes:
+
+- build freshness and revalidation metadata
+- interaction graph and tweak dependency data
+- anti-cheat / DRM advisory risk tags
+- reproducibility baseline manifest
+- negative-evidence publishing for archived and no-hit records
+
+Relevant files:
+
+- [interaction-graph.json](H:/D/Dev/RegProbe/registry-research-framework/config/interaction-graph.json)
+- [tweak-dependencies.json](H:/D/Dev/RegProbe/registry-research-framework/config/tweak-dependencies.json)
+- [anticheat-risk-overrides.json](H:/D/Dev/RegProbe/registry-research-framework/config/anticheat-risk-overrides.json)
+- [reproducibility-manifest.json](H:/D/Dev/RegProbe/registry-research-framework/config/reproducibility-manifest.json)
+- [regression-history.json](H:/D/Dev/RegProbe/research/regression-history.json)
+- [evidence-not-found](H:/D/Dev/RegProbe/research/evidence-not-found)
+
 ## Collection Modes and Rollback
 
 Research runners now accept `-CollectionMode evidence|operational`.

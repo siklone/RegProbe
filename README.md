@@ -42,6 +42,23 @@ Wave 1 quality hardening changed what counts as evidence.
 
 If you see a manifest without capture artifacts, treat it as orchestration metadata, not proof.
 
+## Wave 2 Additions
+
+The active research surface now also carries:
+
+- evidence freshness metadata keyed to tested Windows build
+- regression history for revalidation after major build changes
+- interaction graph and tweak dependency datasets
+- anti-cheat / DRM advisory risk tags where known
+- a reproducibility manifest for the current validation baseline
+- public negative-evidence packages for archived and no-hit records
+
+Useful entry points:
+
+- [Regression history](research/regression-history.json)
+- [Negative evidence index](research/evidence-not-found/index.json)
+- [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md)
+
 ## Collection Modes
 
 Research runners now expose an explicit collection mode:

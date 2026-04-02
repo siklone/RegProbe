@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.113152Z",
+  "record_id": "power.disable-network-power-saving",
+  "tweak_id": "power.disable-network-power-saving",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+      "kind": "official-doc",
+      "summary": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters, with 1 disabling task offloads and 0 enabling them."
+    },
+    {
+      "title": "Microsoft Learn: Multimedia Class Scheduler Service",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "kind": "official-doc",
+      "summary": "Microsoft documents SystemResponsiveness under the SystemProfile key and explains how the value is rounded and clamped."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/PowerTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10."
+    },
+    {
+      "title": "Repo power notes",
+      "url": "Docs/power/power.md",
+      "kind": "repo-doc",
+      "summary": "The repo tracks these values as power and network tuning observations, but this review did not elevate NetworkThrottlingIndex to a primary-source-backed Windows control."
+    }
+  ]
+}

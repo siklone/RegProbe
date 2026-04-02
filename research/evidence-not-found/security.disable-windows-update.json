@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.160798Z",
+  "record_id": "security.disable-windows-update",
+  "tweak_id": "security.disable-windows-update",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Local Microsoft ICM.admx mapping for DisableWindowsUpdateAccess",
+      "url": "evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx",
+      "kind": "official-doc",
+      "summary": "The local ADMX file maps DisableWindowsUpdateAccess with enabledValue 1 and disabledValue 0."
+    },
+    {
+      "title": "Local Microsoft WindowsUpdate.admx mapping",
+      "url": "evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx",
+      "kind": "official-doc",
+      "summary": "The local ADMX file documents NoAutoUpdate under the AU policy key and shows the official Enable/Disable mapping for Configure Automatic Updates."
+    },
+    {
+      "title": "Local Microsoft WindowsUpdate.adml help text",
+      "url": "evidence/files/external/c/PolicyDefinitions/en-US/WindowsUpdate.adml",
+      "kind": "official-doc",
+      "summary": "The local ADML help text explains DisableWindowsUpdateAccess, NoAutoUpdate, and the driver-exclusion policy, and clarifies that NoAutoUpdate = 1 prohibits Windows from searching for updates."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes DisableWindowsUpdateAccess = 1, NoAutoUpdate = 1, and three pause timestamp values under the UX settings path."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.185360Z",
+  "record_id": "system.kernel-adjust-dpc-threshold",
+  "tweak_id": "system.kernel-adjust-dpc-threshold",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Repo system research notes for kernel registry values",
+      "url": "Docs/system/system.md",
+      "kind": "repo-doc",
+      "summary": "The repo documents AdjustDpcThreshold = 20 as personal research and ties it to KiAdjustDpcThreshold."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes AdjustDpcThreshold = 20 for the current tweak."
+    },
+    {
+      "title": "Decompiled DPC threshold system-information handler",
+      "url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c",
+      "kind": "decompilation",
+      "summary": "The decompiled system-information setter populates KiAdjustDpcThreshold from the caller buffer, and the query path exports KiAdjustDpcThreshold back out, proving the kernel-side threshold is consumed and reported by system code."
+    }
+  ]
+}

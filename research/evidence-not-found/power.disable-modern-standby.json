@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.112152Z",
+  "record_id": "power.disable-modern-standby",
+  "tweak_id": "power.disable-modern-standby",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: What is Modern Standby",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/modern-standby",
+      "kind": "official-doc",
+      "summary": "Microsoft documents Modern Standby and states that switching between S3 and Modern Standby is not supported in Windows without a complete OS reinstall."
+    },
+    {
+      "title": "Former app implementation",
+      "url": "app/Services/TweakProviders/PowerTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The older app implementation wrote MSDisabled = 1 and ModernSleep\\EnabledActions = 0 before the tweak was removed from the live surface."
+    },
+    {
+      "title": "nohuto power trace for MSDisabled",
+      "url": "research/_source-mirrors/win-registry/records/Power.txt",
+      "kind": "registry-observation",
+      "summary": "Power.txt lists MSDisabled in the power values block, showing the same local registry family used by the current app implementation."
+    },
+    {
+      "title": "Repo power notes",
+      "url": "Docs/power/power.md",
+      "kind": "repo-doc",
+      "summary": "The repo tracks these registry values as power research, but this review did not promote them to a supported Microsoft transition mechanism."
+    }
+  ]
+}

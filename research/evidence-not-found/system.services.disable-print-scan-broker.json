@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.202926Z",
+  "record_id": "system.services.disable-print-scan-broker",
+  "tweak_id": "system.services.disable-print-scan-broker",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: Guidance on configuring system services - Print Scan Broker Service",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "kind": "official-doc",
+      "summary": "This Microsoft Learn services page remains the intended official guidance source for Print Scan Broker Service, but this review pass did not re-capture a machine-checkable exact row for `PrintScanBrokerService` from the live page. Treat it as historical guidance context until the exact service entry is captured again."
+    },
+    {
+      "title": "Local SCM snapshot - PrintScanBrokerService",
+      "url": "research/notes/service-snapshots/printscanbrokerservice-sc-qc-2026-03-14.txt",
+      "kind": "repo-doc",
+      "summary": "Checked-in `sc qc PrintScanBrokerService` snapshot from Microsoft Windows 11 Pro 10.0.26200 confirming the exact service identifier, display name, binary path, and current START_TYPE line on the review host. This proves the exact SCM control surface the app targets."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider disables the `PrintScanBrokerService` service through the batch service start-mode tweak."
+    }
+  ]
+}

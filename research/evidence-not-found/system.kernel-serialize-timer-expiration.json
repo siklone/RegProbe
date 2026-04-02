@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.195408Z",
+  "record_id": "system.kernel-serialize-timer-expiration",
+  "tweak_id": "system.kernel-serialize-timer-expiration",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Repo system research notes for kernel registry values",
+      "url": "Docs/system/system.md",
+      "kind": "repo-doc",
+      "summary": "The repo documents SerializeTimerExpiration = 1 and explains the behavior as personal research tied to KiSerializeTimerExpiration, including notes about 0, 1, and other values."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes SerializeTimerExpiration = 1 for the current tweak."
+    },
+    {
+      "title": "Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate",
+      "url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c and evidence/files/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md and evidence/files/ghidra/system.kernel-serialize-timer-expiration/evidence.json",
+      "kind": "decompilation",
+      "summary": "Nohuto's decompiled KeInitializeTimerTable mirror and our 25H2 Ghidra exports both point at the timer-serialization gate. The repo-backed fallback pass re-opened the unresolved 140c63068 block from the earlier xref, forced a temporary function boundary, and wrote the resulting decompile plus structured evidence.json into the canonical ghidra folder."
+    }
+  ]
+}

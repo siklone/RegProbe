@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.206964Z",
+  "record_id": "system.services.disable-wap-push-routing",
+  "tweak_id": "system.services.disable-wap-push-routing",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: Guidance on configuring system services - WAP Push Message Routing Service",
+      "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+      "kind": "official-doc",
+      "summary": "Microsoft lists WAP Push Message Routing Service `(dmwappushservice)` with start mode `Automatic` and marks it `No guidance`."
+    },
+    {
+      "title": "Local SCM snapshot - dmwappushservice",
+      "url": "research/notes/service-snapshots/dmwappushservice-sc-qc-2026-03-14.txt",
+      "kind": "repo-doc",
+      "summary": "Checked-in `sc qc dmwappushservice` snapshot from Microsoft Windows 11 Pro 10.0.26200 confirming the exact service identifier, display name, binary path, and current START_TYPE line on the review host. This proves the exact SCM control surface the app targets."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider disables the `dmwappushservice` service through the batch service start-mode tweak."
+    }
+  ]
+}

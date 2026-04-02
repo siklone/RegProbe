@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.109147Z",
+  "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
+  "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
+  "evidence_class": "B",
+  "record_status": "draft",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "runtime_procmon",
+    "static_ghidra",
+    "behavior_wpr",
+    "runtime_reboot"
+  ],
+  "attempted_tools": [
+    "etw",
+    "procmon",
+    "ghidra",
+    "ghidra_no_function_fallback",
+    "wpr",
+    "reboot"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated.",
+  "links": [
+    {
+      "title": "Repo power notes for docs-first power-control values",
+      "url": "Docs/power/power.md",
+      "kind": "repo-doc",
+      "summary": "Repo power notes contain an exact entry for TimerRebaseThresholdOnDripsExit, led by Docs/power/power.md:206."
+    },
+    {
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "kind": "registry-observation",
+      "summary": "The 96-key existence batch confirmed TimerRebaseThresholdOnDripsExit exists on the clean baseline with observed value 60."
+    },
+    {
+      "title": "Shared docs-first string triage for current-build ntoskrnl",
+      "url": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+      "kind": "repo-doc",
+      "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for TimerRebaseThresholdOnDripsExit."
+    },
+    {
+      "title": "Shared Ghidra xref batch for docs-first power-control values",
+      "url": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+      "kind": "decompilation",
+      "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for TimerRebaseThresholdOnDripsExit; some values resolved naturally while several remained forced-boundary fallback blocks."
+    },
+    {
+      "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values",
+      "url": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+      "kind": "procmon-trace",
+      "summary": "The guest-processed stepwise Procmon boot log completed shell-safe on RegProbe-Baseline-Clean-20260329 but did not capture an exact runtime read for TimerRebaseThresholdOnDripsExit."
+    },
+    {
+      "title": "Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values",
+      "url": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+      "kind": "procmon-trace",
+      "summary": "A guest-processed post-boot Procmon lane ran powercfg queries, powercfg /energy, CPU stress, and profile-specific follow-up commands on RegProbe-Baseline-Clean-20260329. It captured path-level Control\\\\Power activity but still did not capture an exact runtime read for TimerRebaseThresholdOnDripsExit."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.094567Z",
+  "record_id": "network.optimize-smb",
+  "tweak_id": "network.optimize-smb",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: Performance tuning for SMB file servers",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/",
+      "kind": "official-doc",
+      "summary": "Microsoft documents the SMB client cache lifetime and bandwidth throttling values, including defaults and a tuning example for higher-latency scenarios."
+    },
+    {
+      "title": "Current network tweak provider",
+      "url": "app/Services/TweakProviders/NetworkTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The current app writes DisableBandwidthThrottling = 1, FileInfoCacheLifetime = 30, and DirectoryCacheLifetime = 30."
+    }
+  ]
+}

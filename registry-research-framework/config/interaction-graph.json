@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "groups": [
+    {
+      "group_id": "hibernate-disable",
+      "label": "Hibernate Disable Chain",
+      "keys": [
+        "power.disable-fast-startup",
+        "power.control.hibernate-enabled",
+        "power.control.hibernate-enabled-default",
+        "power.control.hiber-file-size-percent"
+      ],
+      "interaction": "These keys interact as a single hibernate posture. Partial application can leave fast startup, hiberfile sizing, and UI exposure out of sync.",
+      "partial_risk": "Mixed hibernate state can leave the system in a confusing partially-disabled configuration and complicate boot troubleshooting.",
+      "recommended_validation": [
+        "powercfg-query",
+        "reboot-diff"
+      ]
+    },
+    {
+      "group_id": "scheduler-latency",
+      "label": "Scheduler and Latency Cluster",
+      "keys": [
+        "system.priority-control",
+        "power.optimize-cpu-boost",
+        "power.disable-power-throttling",
+        "power.disable-cpu-idle-states",
+        "system.kernel-serialize-timer-expiration"
+      ],
+      "interaction": "These tweaks influence scheduling, timer cadence, power boost, and latency heuristics. Their effect should be interpreted as a cluster rather than as isolated toggles.",
+      "partial_risk": "Applying only one value can create asymmetric power-versus-latency behavior and make benchmarks look inconsistent across runs.",
+      "recommended_validation": [
+        "mega-trigger-runtime",
+        "benchmark-before-after"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.110151Z",
+  "record_id": "power.disable-cpu-idle-states",
+  "tweak_id": "power.disable-cpu-idle-states",
+  "evidence_class": "A",
+  "record_status": "validated",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "static_ghidra",
+    "behavior_wpr",
+    "behavior_benchmark",
+    "runtime_reboot",
+    "official_doc"
+  ],
+  "attempted_tools": [
+    "official-doc",
+    "etw",
+    "ghidra",
+    "wpr",
+    "benchmark",
+    "reboot"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "This record is cross-layer verified. The project treats strong proof for undocumented raw registry surfaces as Class A even when app actionability stays separate.",
+  "links": [
+    {
+      "title": "Microsoft Learn: PPM Notifications",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/ppm-notifications",
+      "kind": "official-doc",
+      "summary": "Microsoft documents processor power-management notifications and idle-state behavior as a Windows kernel power-management feature area, but this source does not publish the raw registry bundle used by the app."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/PowerTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes DisableIdleStatesAtBoot, IdleStateTimeout, and ExitLatencyCheckEnabled under the Power key."
+    },
+    {
+      "title": "nohuto power trace for DisableIdleStatesAtBoot",
+      "url": "research/_source-mirrors/win-registry/records/Power.txt",
+      "kind": "registry-observation",
+      "summary": "Power.txt lists DisableIdleStatesAtBoot in the power values block, matching the first element of the app's raw idle-states bundle."
+    },
+    {
+      "title": "Win25H2Clean reversible probe for the CPU idle-state bundle",
+      "url": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
+      "kind": "vm-test",
+      "summary": "The current 25H2 VM baseline had all three values missing, the app bundle wrote DisableIdleStatesAtBoot=1, IdleStateTimeout=0, and ExitLatencyCheckEnabled=1, and the probe restored all three back to missing."
+    },
+    {
+      "title": "Repo power notes",
+      "url": "Docs/power/power.md",
+      "kind": "repo-doc",
+      "summary": "The repo tracks these power-manager values as research notes, but this review did not find a primary Microsoft registry mapping for publishing them as a validated preset."
+    },
+    {
+      "title": "Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes",
+      "url": "evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
+      "kind": "ghidra-trace",
+      "summary": "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.189387Z",
+  "record_id": "system.kernel-dpc-queue-depth",
+  "tweak_id": "system.kernel-dpc-queue-depth",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Repo system research notes for kernel registry values",
+      "url": "Docs/system/system.md",
+      "kind": "repo-doc",
+      "summary": "The repo documents DpcQueueDepth = 4 as personal research and ties it to KiMaximumDpcQueueDepth."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes DpcQueueDepth = 4 for the current tweak."
+    },
+    {
+      "title": "Decompiled DPC queue-depth system-information handler",
+      "url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/NtSetSystemInformation.c; research/_source-mirrors/decompiled-pseudocode/ntoskrnl/ExpQuerySystemInformation.c",
+      "kind": "decompilation",
+      "summary": "The decompiled system-information setter populates KiMaximumDpcQueueDepth from the caller buffer, and the query path exports KiMaximumDpcQueueDepth back out, proving the kernel queue depth is consumed and reported by system code."
+    }
+  ]
+}

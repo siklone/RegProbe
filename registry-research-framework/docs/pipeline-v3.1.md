@@ -159,3 +159,33 @@ Current execution order:
 3. source-enrichment cross-checks
 
 All three should write the same artifact metadata, collection mode, runner coverage, and sanitization-friendly outputs described above.
+
+## Wave 2 Metadata Layers
+
+The pipeline now also publishes second-order research metadata instead of keeping it implicit:
+
+- freshness
+  `os_build`, `evidence_collected_utc`, `revalidation_needed_on_major_update`, `expires_after_build`
+- reproducibility
+  baseline VM identity, snapshot name, and tracked tool context
+- interaction graph
+  grouped key clusters with partial-risk notes
+- tweak dependencies
+  `requires`, `conflicts_with`, `recommended_with`
+- anti-cheat risk
+  advisory-only risk tags for gaming and kernel integrity concerns
+- negative evidence
+  standardized packages for archived or no-hit records
+
+Generated surfaces:
+
+- [regression-history.json](H:/D/Dev/RegProbe/research/regression-history.json)
+- [evidence-not-found/index.json](H:/D/Dev/RegProbe/research/evidence-not-found/index.json)
+
+Behavior lanes can now distinguish:
+
+- `significant-change`
+- `no-demonstrated-change`
+- `insufficient`
+
+Non-significant benchmark deltas should not be written up as wins.

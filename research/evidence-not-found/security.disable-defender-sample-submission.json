@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.153772Z",
+  "record_id": "security.disable-defender-sample-submission",
+  "tweak_id": "security.disable-defender-sample-submission",
+  "evidence_class": "A",
+  "record_status": "validated",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "runtime_procmon",
+    "official_doc"
+  ],
+  "attempted_tools": [
+    "official-doc",
+    "procmon"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: Defender Policy CSP SubmitSamplesConsent",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-defender",
+      "kind": "official-doc",
+      "summary": "Microsoft maps SubmitSamplesConsent to HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and documents 0 = Always prompt, 1 = Send safe samples automatically, 2 = Never send, and 3 = Send all samples automatically."
+    },
+    {
+      "title": "Microsoft Learn: Block at First Sight dependency on sample submission",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus",
+      "kind": "official-doc",
+      "summary": "Microsoft states that if the sample-submission setting is 2 (Never send), the Block at First Sight feature will not function."
+    },
+    {
+      "title": "Local Defender sample-submission lead note",
+      "url": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "kind": "repo-doc",
+      "summary": "The local lead note tracks SubmitSamplesConsent on HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet with 0, 1, 2, and 3 as the documented values."
+    },
+    {
+      "title": "Windows Defender dump list includes SubmitSamplesConsent",
+      "url": "Docs/security/assets/Windows-Defender.txt",
+      "kind": "repo-doc",
+      "summary": "The local Defender dump list includes SubmitSamplesConsent under the Defender policy surfaces tracked from upstream registry material."
+    },
+    {
+      "title": "Win25H2Clean absent-value check for Defender sample submission",
+      "url": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+      "kind": "procmon-trace",
+      "summary": "In the clean high-risk snapshot run where only SpyNetReporting = 2 was written on the same Defender Spynet policy branch, SecurityHealthService.exe queried SubmitSamplesConsent and got NAME NOT FOUND."
+    },
+    {
+      "title": "Win25H2Clean Procmon read for SubmitSamplesConsent = 2",
+      "url": "evidence/files/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt",
+      "kind": "procmon-trace",
+      "summary": "After writing SubmitSamplesConsent = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
+    }
+  ]
+}

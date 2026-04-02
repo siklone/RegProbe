@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.133198Z",
+  "record_id": "privacy.disable-inking-typing-personalization",
+  "tweak_id": "privacy.disable-inking-typing-personalization",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Current privacy provider typing and ink bundle",
+      "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes AllowLinguisticDataCollection = 0 and two Windows Ink Workspace policy values set to 0."
+    },
+    {
+      "title": "Repo privacy docs for inking and typing personalization",
+      "url": "Docs/privacy/privacy.md",
+      "kind": "repo-doc",
+      "summary": "The repo docs enumerate AllowLinguisticDataCollection, AllowSuggestedAppsInWindowsInkWorkspace, and AllowWindowsInkWorkspace with explicit enabled and disabled values that match the current provider bundle."
+    }
+  ]
+}

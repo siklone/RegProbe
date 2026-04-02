@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "baseline_id": "regprobe-win25h2-tools-hardened",
+  "vm_name": "Win25H2Clean",
+  "os": "Windows 11",
+  "os_release": "25H2",
+  "os_build": "26100",
+  "baseline_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+  "vm_platform": "VMware Workstation",
+  "vm_platform_version": "17.5",
+  "vm_ram_mb": null,
+  "vm_cpus": null,
+  "windows_updates_installed": [],
+  "defender_version": null,
+  "tools": {
+    "procmon": null,
+    "ghidra": "11.3",
+    "windbg": null,
+    "strings": null,
+    "capa": null,
+    "floss": null
+  },
+  "notes": "Fields left null are not yet pinned in-repo and should be treated as baseline metadata that still needs environment capture."
+}

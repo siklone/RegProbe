@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.082532Z",
+  "record_id": "developer.vscode-git-autofetch",
+  "tweak_id": "developer.vscode-git-autofetch",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "VS Code documentation: Default settings reference",
+      "url": "https://code.visualstudio.com/docs/reference/default-settings",
+      "kind": "official-doc",
+      "summary": "VS Code documents git.autofetch in its settings reference as the supported control surface for background Git autofetch behavior."
+    },
+    {
+      "title": "VS Code documentation: Source Control FAQ",
+      "url": "https://code.visualstudio.com/docs/sourcecontrol/faq",
+      "kind": "official-doc",
+      "summary": "The FAQ explicitly says the auto fetch feature can be disabled with the git.autofetch setting."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes DisableGitAutofetch = 1 under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced."
+    }
+  ]
+}

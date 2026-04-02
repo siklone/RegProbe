@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.137702Z",
+  "record_id": "privacy.disable-offline-files.services",
+  "tweak_id": "privacy.disable-offline-files.services",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Existing Offline Files policy record",
+      "url": "research/records/privacy.disable-offline-files.policy.json",
+      "kind": "repo-doc",
+      "summary": "The core Offline Files feature policy is already documented separately."
+    },
+    {
+      "title": "Current privacy provider service bundle",
+      "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider disables the CSC and CscService services for the current sub-tweak."
+    },
+    {
+      "title": "Repo privacy docs for Offline Files service hardening",
+      "url": "Docs/privacy/privacy-verified.md",
+      "kind": "repo-doc",
+      "summary": "The repo docs list the Offline Files registry policy and the service commands Set-Service -Name \"CSC\" -StartupType Disabled and Set-Service -Name \"CscService\" -StartupType Disabled."
+    }
+  ]
+}

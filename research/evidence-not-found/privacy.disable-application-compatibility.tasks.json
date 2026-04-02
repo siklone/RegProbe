@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.124175Z",
+  "record_id": "privacy.disable-application-compatibility.tasks",
+  "tweak_id": "privacy.disable-application-compatibility.tasks",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Current privacy provider task bundle",
+      "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider disables six scheduled tasks in the Application Experience folder as one bundle."
+    }
+  ]
+}

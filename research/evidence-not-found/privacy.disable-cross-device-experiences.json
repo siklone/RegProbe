@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.128195Z",
+  "record_id": "privacy.disable-cross-device-experiences",
+  "tweak_id": "privacy.disable-cross-device-experiences",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft ADMX_GroupPolicy Policy CSP: EnableCDP",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp",
+      "kind": "policy-csp",
+      "summary": "Official documentation for the machine policy that controls whether the device can participate in continue experiences."
+    },
+    {
+      "title": "Local Microsoft GroupPolicy.admx EnableCDP mapping",
+      "url": "evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx",
+      "kind": "official-doc",
+      "summary": "The local ADMX file maps EnableCdp to Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp with enabledValue 1 and disabledValue 0."
+    },
+    {
+      "title": "Local Microsoft GroupPolicy.adml EnableCDP help text",
+      "url": "evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml",
+      "kind": "official-doc",
+      "summary": "The local ADML help text explains that enabling the policy allows continue experiences, disabling it blocks them, and the not-configured default depends on the Windows edition."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider mixes the official EnableCdp policy with user-side CDP registry values to model Off, My devices only, and Everyone nearby presets."
+    },
+    {
+      "title": "Decompiled Shared Experiences singleton",
+      "url": "Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c",
+      "kind": "decompiled-pseudocode",
+      "summary": "The decompiled Settings code loads NearShareChannelUserAuthzPolicy and RomeSdkChannelUserAuthzPolicy, then reads BluetoothLastDisabledNearShare and WifiLastDisabledNearShare from the CDP SettingsPage registry area."
+    },
+    {
+      "title": "Guest launch of CrossDeviceResume",
+      "url": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
+      "kind": "vm-test",
+      "summary": "Win25H2Clean guest Procmon capture shows CrossDeviceResume.exe launching from the MicrosoftWindows.Client.CBS app tile, confirming the runtime surface is present. This trigger did not surface the expected policy value names in the captured run, so it remains supporting evidence rather than a direct key-read proof."
+    }
+  ]
+}

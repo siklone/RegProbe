@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.101628Z",
+  "record_id": "policy.system.enable-virtualization",
+  "tweak_id": "policy.system.enable-virtualization",
+  "evidence_class": "B",
+  "record_status": "draft",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "static_ghidra",
+    "behavior_wpr"
+  ],
+  "attempted_tools": [
+    "etw",
+    "ghidra",
+    "wpr"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "medium",
+    "anticheat_details": "Changing virtualization and VBS posture can affect kernel integrity surfaces and compatibility with some anti-cheat stacks.",
+    "gaming_safe": false
+  },
+  "gating_reason": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe.",
+  "links": [
+    {
+      "title": "Repo security notes for EnableVirtualization",
+      "url": "Docs/security/security.md",
+      "kind": "repo-doc",
+      "summary": "Repo security notes document EnableVirtualization and its value meanings under the Policies\\System path."
+    },
+    {
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "kind": "registry-observation",
+      "summary": "The 96-key existence batch confirmed EnableVirtualization exists on the clean baseline with observed value 1."
+    },
+    {
+      "title": "Boot-phase UAC policy cluster lead",
+      "url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c",
+      "kind": "decompilation",
+      "summary": "The repo boot-phase source mirror references EnableLUA, EnableVirtualization, and EnableInstallerDetection under Policies\\System during boot-phase processing."
+    },
+    {
+      "title": "Path-aware static probe for EnableVirtualization",
+      "url": "evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json and evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
+      "kind": "decompilation",
+      "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit and kept EnableVirtualization, EnableLUA, and EnableInstallerDetection in the same naturally resolved function. The nearby VBS collision remained isolated to winload.exe."
+    },
+    {
+      "title": "Path-aware lightweight ETW follow-up for EnableVirtualization",
+      "url": "evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json and evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json",
+      "kind": "etw-trace",
+      "summary": "The tools-hardened path-aware ETW lane completed shell-safe and produced real ETL/CSV outputs, but still did not capture an exact runtime read or intended-path line for EnableVirtualization."
+    },
+    {
+      "title": "Secondary-profile path-aware ETW replay for EnableVirtualization",
+      "url": "evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json and evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json",
+      "kind": "etw-trace",
+      "summary": "The secondary-profile path-aware ETW replay completed shell-safe on Win25H2Clean-B and reproduced the same clean no-hit for the exact value name and intended path."
+    }
+  ]
+}

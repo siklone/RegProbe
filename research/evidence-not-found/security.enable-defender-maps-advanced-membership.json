@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.162799Z",
+  "record_id": "security.enable-defender-maps-advanced-membership",
+  "tweak_id": "security.enable-defender-maps-advanced-membership",
+  "evidence_class": "A",
+  "record_status": "validated",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "runtime_procmon",
+    "official_doc"
+  ],
+  "attempted_tools": [
+    "official-doc",
+    "procmon"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus",
+      "kind": "official-doc",
+      "summary": "Microsoft maps SpyNetReporting to HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and documents 0 = disabled, 1 = basic membership, and 2 = advanced membership. The page also notes that on modern Windows builds value 1 or 2 can enroll the device into advanced membership behavior."
+    },
+    {
+      "title": "Local Defender MAPS lead note",
+      "url": "research/notes/windows-11-settings-and-privacy-leads.md",
+      "kind": "repo-doc",
+      "summary": "The local lead note tracks SpyNetReporting on HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet with 0, 1, and 2 as the documented values."
+    },
+    {
+      "title": "Win25H2Clean Procmon baseline for Defender MAPS policy path",
+      "url": "evidence/files/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt",
+      "kind": "procmon-trace",
+      "summary": "On the clean high-risk snapshot, SecurityHealthService.exe opened HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and got NAME NOT FOUND, then fell back to HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting and read Data: 2."
+    },
+    {
+      "title": "Win25H2Clean Procmon read for SpyNetReporting = 2",
+      "url": "evidence/files/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
+      "kind": "procmon-trace",
+      "summary": "After writing SpyNetReporting = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
+    },
+    {
+      "title": "Current security provider MAPS membership write",
+      "url": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The app writes HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting = 2."
+    }
+  ]
+}

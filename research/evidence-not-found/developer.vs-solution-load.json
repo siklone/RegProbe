@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.081533Z",
+  "record_id": "developer.vs-solution-load",
+  "tweak_id": "developer.vs-solution-load",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: Optimize Visual Studio performance",
+      "url": "https://learn.microsoft.com/en-us/visualstudio/ide/optimize-visual-studio-performance",
+      "kind": "official-doc",
+      "summary": "Microsoft documents Visual Studio performance tuning and solution-loading guidance, but this research pass did not capture a primary registry contract for BackgroundAnalysis."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes BackgroundAnalysis = 0 under HKCU\\Software\\Microsoft\\VisualStudio\\SolutionLoading."
+    }
+  ]
+}

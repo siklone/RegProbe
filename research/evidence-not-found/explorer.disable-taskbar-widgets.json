@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.085532Z",
+  "record_id": "explorer.disable-taskbar-widgets",
+  "tweak_id": "explorer.disable-taskbar-widgets",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Widgets duplicate retirement audit trail",
+      "url": "research/records",
+      "kind": "repo-doc",
+      "summary": "explorer.disable-taskbar-widgets was retired on 2026-03-13 because the app already ships visibility.disable-widgets for the official Widgets policy surface. The old TaskbarDa parent-key write was removed from VisibilityTweakProvider.cs and this record now remains only as an audit trail."
+    }
+  ]
+}

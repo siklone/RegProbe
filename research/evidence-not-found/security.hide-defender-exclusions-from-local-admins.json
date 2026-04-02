@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.164799Z",
+  "record_id": "security.hide-defender-exclusions-from-local-admins",
+  "tweak_id": "security.hide-defender-exclusions-from-local-admins",
+  "evidence_class": "A",
+  "record_status": "validated",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "runtime_procmon",
+    "official_doc"
+  ],
+  "attempted_tools": [
+    "official-doc",
+    "procmon"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: Defender CSP HideExclusionsFromLocalAdmins",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/defender-csp",
+      "kind": "official-doc",
+      "summary": "Microsoft documents HideExclusionsFromLocalAdmins with 0 or not configured meaning exclusions stay visible to local admins and 1 meaning local admins can no longer view exclusions."
+    },
+    {
+      "title": "Microsoft Learn: Configure exclusions in Defender Antivirus",
+      "url": "https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus",
+      "kind": "official-doc",
+      "summary": "Microsoft notes that HideExclusionsFromLocalAdmins affects whether local admins can view exclusions and that the setting does not remove exclusions from policy storage."
+    },
+    {
+      "title": "Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins",
+      "url": "Docs/security/assets/Windows-Defender.txt",
+      "kind": "repo-doc",
+      "summary": "The local Defender dump list shows HideExclusionsFromLocalAdmins under both HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender and HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager."
+    },
+    {
+      "title": "Win25H2Clean baseline visibility with managed exclusion present",
+      "url": "evidence/files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json",
+      "kind": "vm-test",
+      "summary": "With both HideExclusionsFromLocalAdmins surfaces unset, a managed exclusion under the policy exclusions branch still appeared in Get-MpPreference and remained present in the managed policy hive."
+    },
+    {
+      "title": "Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1",
+      "url": "evidence/files/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt",
+      "kind": "procmon-trace",
+      "summary": "After writing HideExclusionsFromLocalAdmins = 1 on the root Defender policy path, wmiprvse.exe and powershell.exe both queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins and read Data: 1."
+    },
+    {
+      "title": "Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1",
+      "url": "evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json",
+      "kind": "vm-test",
+      "summary": "With the root policy path set to 1, the managed exclusion still existed on the policy exclusions branch, but Get-MpPreference returned 'N/A: Administrators are not allowed to view exclusions'."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.120665Z",
+  "record_id": "privacy.disable-application-compatibility",
+  "tweak_id": "privacy.disable-application-compatibility",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Existing AppCompat policy review record",
+      "url": "research/records/privacy.disable-application-compatibility.policy.review.json",
+      "kind": "repo-doc",
+      "summary": "The policy half of the composite is already documented as review-required."
+    },
+    {
+      "title": "Application Experience task review record",
+      "url": "research/records/privacy.disable-application-compatibility.tasks.review.json",
+      "kind": "repo-doc",
+      "summary": "The task half of the composite is tracked separately and also remains review-required."
+    },
+    {
+      "title": "Current privacy provider composite",
+      "url": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider exposes privacy.disable-application-compatibility as a composite of the policy and task sub-tweaks."
+    }
+  ]
+}

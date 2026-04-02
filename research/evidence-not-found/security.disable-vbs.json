@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.158794Z",
+  "record_id": "security.disable-vbs",
+  "tweak_id": "security.disable-vbs",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Local Microsoft DeviceGuard.admx mapping",
+      "url": "evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx",
+      "kind": "official-doc",
+      "summary": "The local ADMX file maps EnableVirtualizationBasedSecurity, HypervisorEnforcedCodeIntegrity, and LsaCfgFlags under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard and documents the numeric values the app uses."
+    },
+    {
+      "title": "Local Microsoft DeviceGuard.adml help text",
+      "url": "evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml",
+      "kind": "official-doc",
+      "summary": "The local ADML help text explains the disabled, enabled with UEFI lock, enabled without lock, and not configured behavior for HVCI and Credential Guard, including caveats about clearing persisted UEFI state."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes EnableVirtualizationBasedSecurity = 0, HypervisorEnforcedCodeIntegrity = 0, and LsaCfgFlags = 0 under the official Device Guard policy key."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "entries": {
+    "power.disable-fast-startup": {
+      "requires": [],
+      "conflicts_with": [],
+      "recommended_with": [
+        "power.control.hibernate-enabled",
+        "power.control.hibernate-enabled-default"
+      ],
+      "notes": "Fast startup changes are usually safest when reviewed next to the broader hibernate posture."
+    },
+    "power.hide-hibernate-option": {
+      "requires": [],
+      "conflicts_with": [],
+      "recommended_with": [
+        "power.disable-fast-startup",
+        "power.control.hibernate-enabled"
+      ],
+      "notes": "Hiding the UI option without changing the underlying hibernate state can be misleading."
+    },
+    "power.optimize-cpu-boost": {
+      "requires": [],
+      "conflicts_with": [],
+      "recommended_with": [
+        "power.disable-power-throttling"
+      ],
+      "notes": "Boost tuning is usually interpreted together with power throttling posture."
+    },
+    "cleanup.disable-reserved-storage": {
+      "requires": [],
+      "conflicts_with": [
+        "privacy.disable-reserved-storage"
+      ],
+      "recommended_with": [],
+      "notes": "Both records touch the same feature area and should not be described as independent wins."
+    }
+  }
+}

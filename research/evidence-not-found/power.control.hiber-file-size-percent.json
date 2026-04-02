@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.103629Z",
+  "record_id": "power.control.hiber-file-size-percent",
+  "tweak_id": "power.control.hiber-file-size-percent",
+  "evidence_class": "B",
+  "record_status": "draft",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "behavior_wpr"
+  ],
+  "attempted_tools": [
+    "etw",
+    "wpr"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Docs/static evidence is strong and the lightweight ETW lane surfaced exact HiberFileSizePercent lines, but the current VMware runtime still did not produce an exact live read.",
+  "links": [
+    {
+      "title": "Repo power notes for HiberFileSizePercent",
+      "url": "Docs/power/power.md",
+      "kind": "repo-doc",
+      "summary": "Repo power notes contain exact HiberFileSizePercent entries, including the note that the current baseline is 0 when hibernation is unsupported by default."
+    },
+    {
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "kind": "registry-observation",
+      "summary": "The 96-key existence batch confirmed HiberFileSizePercent exists on the clean baseline with observed value 0."
+    },
+    {
+      "title": "Residual value-exists string triage for HiberFileSizePercent",
+      "url": "evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json and research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md",
+      "kind": "repo-doc",
+      "summary": "Residual string triage found an exact current-build ntoskrnl.exe string hit for HiberFileSizePercent."
+    },
+    {
+      "title": "Tools-hardened lightweight ETW follow-up for HiberFileSizePercent",
+      "url": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json and research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md",
+      "kind": "etw-trace",
+      "summary": "The tools-hardened lightweight ETW lane surfaced exact HiberFileSizePercent lines on the current VMware baseline but did not capture an exact RegQueryValue hit."
+    }
+  ]
+}

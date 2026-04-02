@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.199929Z",
+  "record_id": "system.reduce-shutdown-timeouts",
+  "tweak_id": "system.reduce-shutdown-timeouts",
+  "evidence_class": "E",
+  "record_status": "deprecated",
+  "tested_build": "26100",
+  "negative_reason": "class-e",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [],
+  "attempted_tools": [],
+  "runtime_evidence_found": false,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: SystemParametersInfoW function",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-systemparametersinfow",
+      "kind": "official-doc",
+      "summary": "Microsoft documents the shutdown timeout concepts SPI_GETHUNGAPPTIMEOUT, SPI_GETWAITTOKILLTIMEOUT, and SPI_GETWAITTOKILLSERVICETIMEOUT with default values of 5000 ms, 5000 ms, and 20000 ms respectively."
+    },
+    {
+      "title": "Microsoft Learn: RM_SHUTDOWN_TYPE",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/restartmanager/ne-restartmanager-rm_shutdown_type",
+      "kind": "official-doc",
+      "summary": "Microsoft documents that forced shutdown timing for applications and services is tied to the hung app timeout and wait-to-kill service timeout system parameters."
+    },
+    {
+      "title": "Microsoft Learn: Service Control Handler Function",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function",
+      "kind": "official-doc",
+      "summary": "Microsoft directly documents HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout as the service shutdown timeout used during operating system restart and advises that services should not raise it on their own."
+    },
+    {
+      "title": "Repo system research notes for shutdown timeouts",
+      "url": "Docs/system/system.md",
+      "kind": "repo-doc",
+      "summary": "The repo documents the mixed timeout bundle, including HungAppTimeout = 1500, WaitToKillServiceTimeout = 2500, and a note that WaitToKillAppTimeout may no longer be used and WaitToKillTimeout is the more relevant concept."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The old app implementation wrote WaitToKillServiceTimeout = 2500, WaitToKillAppTimeout = 2500, HungAppTimeout = 1500, and AutoEndTasks = 1 as one bundle."
+    }
+  ]
+}

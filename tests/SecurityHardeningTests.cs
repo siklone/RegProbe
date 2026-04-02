@@ -161,9 +161,11 @@ public sealed class ElevatedHostSessionSecurityTests
     public void SessionTokenValidationRequiresExactMatch()
     {
         var token = ElevatedHostDefaults.CreateSessionToken();
+        var last = token[^1];
+        var altered = token[..^1] + (last == '0' ? "1" : "0");
 
         Assert.True(ElevatedHostSessionSecurity.IsSessionTokenAccepted(token, token));
-        Assert.False(ElevatedHostSessionSecurity.IsSessionTokenAccepted(token, token[..^1] + "0"));
+        Assert.False(ElevatedHostSessionSecurity.IsSessionTokenAccepted(token, altered));
     }
 
     [Fact]

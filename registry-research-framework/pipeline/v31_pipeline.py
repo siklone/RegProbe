@@ -17,6 +17,7 @@ if str(SCRIPTS_ROOT) not in sys.path:
 
 from research_path_lib import V31_EVIDENCE_ROOT, normalize_reference_text  # noqa: E402
 from artifact_metadata_lib import build_artifact_metadata  # noqa: E402
+from behavior_stats_lib import summarize_before_after  # noqa: E402
 from evidence_class_lib import (  # noqa: E402
     has_benchmark_evidence,
     has_ghidra_evidence,
@@ -28,6 +29,13 @@ from evidence_class_lib import (  # noqa: E402
     has_wpr_evidence,
     evidence_items,
     evidence_kind,
+)
+from wave2_research_lib import (  # noqa: E402
+    anticheat_risk_for_tweak,
+    dependency_entry_for_tweak,
+    evidence_freshness,
+    interaction_groups_for_tweak,
+    reproducibility_manifest,
 )
 
 RESEARCH_ROOT = REPO_ROOT / "research"
@@ -285,6 +293,7 @@ def collect_evidence(record: dict[str, Any], kinds: set[str]) -> list[dict[str, 
 def build_metadata(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
     target = first_target(record)
     provenance = record.get("provenance") or {}
+    repro_manifest = reproducibility_manifest()
     return {
         "$schema": "registry-evidence-v3.2/metadata",
         "tweak_id": record.get("tweak_id"),
@@ -306,6 +315,14 @@ def build_metadata(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
             "geoff_chappell_reference": False,
             "pdb_symbol_match": None,
             "source_repositories": provenance.get("source_repositories") or [],
+        },
+        "freshness": evidence_freshness(record, repro_manifest),
+        "reproducibility_manifest": {
+            "path": "registry-research-framework/config/reproducibility-manifest.json",
+            "baseline_id": repro_manifest.get("baseline_id"),
+            "vm_name": repro_manifest.get("vm_name"),
+            "os_build": repro_manifest.get("os_build"),
+            "baseline_snapshot": repro_manifest.get("baseline_snapshot"),
         },
         "doc_source": normalize_doc_source(record),
     }
@@ -650,17 +667,112 @@ def build_static(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any
     }
 
 
+def normalize_behavior_statistics_payload(payload: Any) -> dict[str, Any]:
+    if not isinstance(payload, dict):
+        return {
+            "before_mean": None,
+            "before_stdev": None,
+            "after_mean": None,
+            "after_stdev": None,
+            "sample_count": 0,
+            "p_value": None,
+            "significant": None,
+            "effect_size": None,
+            "confidence_interval_95": None,
+        }
+
+    if isinstance(payload.get("statistics"), dict):
+        payload = payload.get("statistics") or {}
+
+    if any(key in payload for key in ("before_samples", "after_samples")):
+        return summarize_before_after(payload.get("before_samples"), payload.get("after_samples"))
+
+    return {
+        "before_mean": payload.get("before_mean"),
+        "before_stdev": payload.get("before_stdev"),
+        "after_mean": payload.get("after_mean"),
+        "after_stdev": payload.get("after_stdev"),
+        "sample_count": payload.get("sample_count", 0),
+        "p_value": payload.get("p_value"),
+        "significant": payload.get("significant"),
+        "effect_size": payload.get("effect_size"),
+        "confidence_interval_95": payload.get("confidence_interval_95"),
+    }
+
+
+def extract_behavior_statistics(bench_item: dict[str, Any] | None, behavior_result: dict[str, Any] | None) -> dict[str, Any]:
+    candidates = [
+        bench_item.get("statistics") if isinstance(bench_item, dict) else None,
+        bench_item if isinstance(bench_item, dict) else None,
+        behavior_result.get("statistics") if isinstance(behavior_result, dict) else None,
+        behavior_result.get("summary") if isinstance(behavior_result, dict) else None,
+        behavior_result if isinstance(behavior_result, dict) else None,
+    ]
+    for candidate in candidates:
+        normalized = normalize_behavior_statistics_payload(candidate)
+        if normalized.get("sample_count") or normalized.get("before_mean") is not None or normalized.get("after_mean") is not None:
+            return normalized
+    return normalize_behavior_statistics_payload(None)
+
+
+def build_negative_evidence_profile(record: dict[str, Any], audit: dict[str, Any], classification: dict[str, Any]) -> dict[str, Any]:
+    text = json.dumps(
+        {
+            "summary": record.get("summary"),
+            "decision": record.get("decision"),
+            "evidence": record.get("evidence"),
+        },
+        ensure_ascii=False,
+    ).lower()
+    class_id = str(classification.get("class") or "")
+    eligible = class_id == "E" or any(
+        phrase in text
+        for phrase in (
+            "did not capture",
+            "no exact runtime read",
+            "not found",
+            "no supporting evidence",
+            "did not find",
+        )
+    )
+    reason = "archived-or-no-hit"
+    if class_id == "E":
+        reason = "class-e"
+    elif eligible:
+        reason = "runtime-or-source-no-hit"
+    else:
+        reason = "not-applicable"
+    return {
+        "eligible": eligible,
+        "reason": reason,
+        "attempted_layers": audit.get("layers_used") or [],
+        "attempted_tools": audit.get("tools_used") or [],
+        "tested_build": metadata_build_from_record(record),
+    }
+
+
+def metadata_build_from_record(record: dict[str, Any]) -> str | None:
+    return evidence_freshness(record, reproducibility_manifest()).get("os_build")
+
+
 def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
     tweak_id = str(record.get("tweak_id") or "")
     behavior_items = collect_evidence(record, {"wpr-trace", "etw-trace", "runtime-benchmark"})
     wpr_item = next((item for item in behavior_items if item.get("kind") in {"wpr-trace", "etw-trace"}), None)
     bench_item = next((item for item in behavior_items if item.get("kind") == "runtime-benchmark"), None)
     behavior_lane = load_lane_manifest(tweak_id, "behavior-lane.json")
+    behavior_result = load_lane_result(behavior_lane)
     behavior_ref = lane_repo_ref(behavior_lane)
     behavior_lane_status = lane_capture_status(behavior_lane)
     behavior_summary = bench_item.get("summary") if bench_item else None
     if behavior_summary is None and behavior_lane and behavior_lane.get("exit_code") not in (None, 0):
         behavior_summary = f"Runner failed with exit code {behavior_lane.get('exit_code')}. See {behavior_lane.get('log_file') or behavior_lane.get('output_file')}."
+    behavior_stats = extract_behavior_statistics(bench_item, behavior_result)
+    significance_verdict = "insufficient"
+    if behavior_stats.get("significant") is True:
+        significance_verdict = "significant-change"
+    elif behavior_stats.get("significant") is False:
+        significance_verdict = "no-demonstrated-change"
 
     return {
         "$schema": "registry-evidence-v3.2/behavior-evidence",
@@ -692,6 +804,8 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
                 "summary": behavior_summary,
                 "output_file": normalized_location(bench_item, "Benchmark output") or behavior_ref,
                 "capture_status": behavior_lane_status,
+                "statistics": behavior_stats,
+                "significance_verdict": significance_verdict,
             },
             "registry_sideeffects": {
                 "executed": False,
@@ -828,6 +942,8 @@ def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[
         runner_status = runtime_lane_raw_status
     else:
         runner_status = runtime_lane_raw_status if runtime_lane else "not-required"
+    behavior_block = build_behavior(record, audit)
+    benchmark = (behavior_block.get("behavior") or {}).get("benchmark") or {}
     return {
         "$schema": "registry-evidence-v3.2/classification",
         "classification": {
@@ -851,6 +967,10 @@ def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[
                 "procmon_lane_status": lane_capture_status(procmon_lane) if procmon_lane else "not-required",
                 "behavior_lane_status": lane_capture_status(behavior_lane) if behavior_lane else "not-required",
                 "verdict": runner_status,
+            },
+            "behavior_significance": {
+                "verdict": benchmark.get("significance_verdict", "insufficient"),
+                "statistics": benchmark.get("statistics"),
             },
         },
     }
@@ -964,11 +1084,12 @@ def build_full_evidence(record: dict[str, Any], audit: dict[str, Any], phase: st
     re_audit = build_re_audit(record, audit)
     timeline = build_timeline(record, audit, phase)
     artifact_refs = current_artifact_refs(str(record.get("tweak_id") or ""), audit)
+    tweak_id = str(record.get("tweak_id") or "")
 
     payload: dict[str, Any] = {
         "$schema": "registry-evidence-v3.2/full-evidence",
         "record_id": record.get("record_id"),
-        "tweak_id": record.get("tweak_id"),
+        "tweak_id": tweak_id,
         "metadata": metadata,
         "runtime": runtime["runtime"],
         "static": static["static"],
@@ -978,6 +1099,11 @@ def build_full_evidence(record: dict[str, Any], audit: dict[str, Any], phase: st
         "artifact_refs": artifact_refs,
         "doc_source": normalize_doc_source(record),
         "cross_verification": normalize_cross_verification(record),
+        "interaction_graph": interaction_groups_for_tweak(tweak_id),
+        "tweak_dependencies": dependency_entry_for_tweak(tweak_id),
+        "anticheat_risk": anticheat_risk_for_tweak(tweak_id),
+        "negative_evidence": build_negative_evidence_profile(record, audit, classification["classification"]),
+        "reproducibility": reproducibility_manifest(),
         "research_record": str(((RESEARCH_ROOT / "records") / f"{record.get('tweak_id')}.json").relative_to(REPO_ROOT)).replace("\\", "/"),
         "research_record_fallback": str(((RESEARCH_ROOT / "records") / f"{record.get('tweak_id')}.review.json").relative_to(REPO_ROOT)).replace("\\", "/"),
     }

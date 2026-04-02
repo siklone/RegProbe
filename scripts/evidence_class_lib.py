@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from wave2_research_lib import anticheat_risk_for_tweak, evidence_freshness
+
 REDACTED_USER = "<USER>"
 HOME_PATH = str(Path.home())
 HOME_PATH_FWD = HOME_PATH.replace("\\", "/")
@@ -753,11 +755,12 @@ def build_class_entry(
     gating_reason = truncate_text(build_gating_reason(class_id, record), 220)
     if override and override.get("gating_reason"):
         gating_reason = truncate_text(str(override["gating_reason"]), 220)
+    tweak_id = str(record.get("tweak_id") or "")
 
     return sanitize_value(
         {
             "record_id": record.get("record_id"),
-            "tweak_id": record.get("tweak_id"),
+            "tweak_id": tweak_id,
             "record_status": record.get("record_status"),
             "evidence_class": class_id,
             "class_label": definition["label"],
@@ -771,6 +774,8 @@ def build_class_entry(
             "confidence": decision.get("confidence"),
             "app_mapping_status": app_status,
             "restore_story_known": restore_story_known(record),
+            "tested_build": evidence_freshness(record).get("os_build"),
+            "anticheat_risk": anticheat_risk_for_tweak(tweak_id),
             "validated_semantics": build_validated_semantics_block(record),
             "runtime_proof": build_runtime_proof_block(record),
             "upstream_lineage": build_upstream_lineage_block(record, provenance_entry),

@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.083533Z",
+  "record_id": "developer.windows-dev-mode",
+  "tweak_id": "developer.windows-dev-mode",
+  "evidence_class": "A",
+  "record_status": "validated",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "runtime_procmon",
+    "official_doc"
+  ],
+  "attempted_tools": [
+    "official-doc",
+    "procmon"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+  "links": [
+    {
+      "title": "Microsoft Learn: Enable your device for development",
+      "url": "https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode",
+      "kind": "official-doc",
+      "summary": "Microsoft documents a Regedit method that creates HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense = 1 to enable Developer Mode."
+    },
+    {
+      "title": "Procmon capture - Developer settings search reads AppModelUnlock baseline",
+      "url": "evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.csv and evidence/files/procmon/developer.windows-dev-mode/devmode_probe2.txt",
+      "kind": "procmon-trace",
+      "summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving NAME NOT FOUND while the developer settings page was open. The same capture also confirmed the LongPathsEnabled read path on this build."
+    },
+    {
+      "title": "Local Microsoft AppxPackageManager.admx mapping",
+      "url": "evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx",
+      "kind": "official-doc",
+      "summary": "The local ADMX file maps the managed policy counterpart under Software\\Policies\\Microsoft\\Windows\\Appx with enabledValue 1 and disabledValue 0 for AllowDevelopmentWithoutDevLicense."
+    },
+    {
+      "title": "Local Microsoft AppxPackageManager.adml help text",
+      "url": "evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml",
+      "kind": "official-doc",
+      "summary": "The local ADML help text says enabling the setting allows development of packaged Microsoft Store apps and installing them directly from an IDE, and notes it works together with the 'Allow all trusted apps to install' policy."
+    },
+    {
+      "title": "Current app implementation",
+      "url": "app/Services/TweakProviders/DeveloperTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The provider writes AllowDevelopmentWithoutDevLicense = 1 under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock."
+    }
+  ]
+}

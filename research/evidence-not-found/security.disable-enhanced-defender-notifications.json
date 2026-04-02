@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-02T11:02:27.154771Z",
+  "record_id": "security.disable-enhanced-defender-notifications",
+  "tweak_id": "security.disable-enhanced-defender-notifications",
+  "evidence_class": "A",
+  "record_status": "validated",
+  "tested_build": "26100",
+  "negative_reason": "no-hit-or-insufficient-proof",
+  "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
+  "attempted_layers": [
+    "runtime_procmon",
+    "official_doc"
+  ],
+  "attempted_tools": [
+    "official-doc",
+    "procmon"
+  ],
+  "runtime_evidence_found": true,
+  "validation_proof_found": true,
+  "anticheat_risk": {
+    "anticheat_risk": "unknown",
+    "anticheat_details": null,
+    "gaming_safe": null
+  },
+  "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+  "links": [
+    {
+      "title": "WindowsDefenderSecurityCenter.admx enhanced notifications policy",
+      "url": "Docs/system/system.md",
+      "kind": "official-doc",
+      "summary": "Local ADMX notes show Notifications_DisableEnhancedNotifications under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications with enabled value 1 and disabled value 0."
+    },
+    {
+      "title": "WindowsDefender.admx reporting enhanced notifications policy",
+      "url": "Docs/system/system.md",
+      "kind": "official-doc",
+      "summary": "Local ADMX notes also show Reporting_DisableEnhancedNotifications under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting with enabled value 1 and disabled value 0."
+    },
+    {
+      "title": "Win25H2Clean Procmon baseline for Security Center notifications policy",
+      "url": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt",
+      "kind": "procmon-trace",
+      "summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME NOT FOUND. The same capture showed DisableNotifications = 1 already present on that branch."
+    },
+    {
+      "title": "Win25H2Clean Procmon enabled-state read for Security Center notifications policy",
+      "url": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt",
+      "kind": "procmon-trace",
+      "summary": "After writing DisableEnhancedNotifications = 1 on the Security Center Notifications policy path, SecurityHealthService.exe queried the same path and read Data: 1."
+    },
+    {
+      "title": "Win25H2Clean Procmon reporting-path alias check",
+      "url": "evidence/files/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt",
+      "kind": "procmon-trace",
+      "summary": "When only HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Reporting\\DisableEnhancedNotifications was set to 1, the Windows Security launch probe still showed SecurityHealthService.exe querying the Security Center Notifications policy path. This capture did not show a matching read from the Reporting path."
+    },
+    {
+      "title": "Current security provider enhanced notifications write",
+      "url": "app/Services/TweakProviders/SecurityTweakProvider.cs",
+      "kind": "repo-code",
+      "summary": "The app writes HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications = 1."
+    }
+  ]
+}
