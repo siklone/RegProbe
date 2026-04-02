@@ -25,6 +25,7 @@ $traceName = 'RegProbeMegaTrace'
 $etlPath = Join-Path $GuestRoot 'mega-trace.etl'
 $csvPath = Join-Path $GuestRoot 'mega-trace.csv'
 $runLogPath = Join-Path $GuestRoot 'guest-run.log'
+$script:activeTraceOutputPath = $null
 
 function Write-JsonFile {
     param(
@@ -70,6 +71,23 @@ function Write-JsonFile {
     }
 }
 
+function Write-JsonFileDirect {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+        [Parameter(Mandatory = $true)]
+        [object]$InputObject,
+        [int]$Depth = 12
+    )
+
+    $parent = Split-Path -Parent $Path
+    if (-not [string]::IsNullOrWhiteSpace($parent)) {
+        New-Item -ItemType Directory -Path $parent -Force | Out-Null
+    }
+
+    $InputObject | ConvertTo-Json -Depth $Depth | Set-Content -LiteralPath $Path -Encoding UTF8
+}
+
 function Read-JsonFile {
     param([string]$Path)
     if (-not (Test-Path -LiteralPath $Path)) {
@@ -108,7 +126,31 @@ function Write-RunLog {
     }
 
     $line = '{0} {1}' -f [DateTime]::UtcNow.ToString('o'), $Message
-    Add-Content -Path $runLogPath -Value $line -Encoding UTF8
+    for ($attempt = 1; $attempt -le 5; $attempt++) {
+        $stream = $null
+        $writer = $null
+        try {
+            $stream = [System.IO.FileStream]::new($runLogPath, [System.IO.FileMode]::Append, [System.IO.FileAccess]::Write, [System.IO.FileShare]::ReadWrite)
+            $writer = [System.IO.StreamWriter]::new($stream, [System.Text.UTF8Encoding]::new($false))
+            $writer.WriteLine($line)
+            $writer.Flush()
+            return
+        }
+        catch {
+            if ($attempt -eq 5) {
+                return
+            }
+            Start-Sleep -Milliseconds 100
+        }
+        finally {
+            if ($writer) {
+                $writer.Dispose()
+            }
+            elseif ($stream) {
+                $stream.Dispose()
+            }
+        }
+    }
 }
 
 function Invoke-CmdCapture {
@@ -290,6 +332,16 @@ function Start-Trace {
         throw "logman start failed for ${traceName}: stdout=$($start.stdout) stderr=$($start.stderr)"
     }
     Write-RunLog -Message ("trace-start-complete name={0}" -f $traceName)
+
+    $sessionOutput = Get-TraceSessionOutputLocation -TraceName $traceName
+    if ($sessionOutput) {
+        $script:activeTraceOutputPath = [string]$sessionOutput.path
+        Write-RunLog -Message ("trace-start-output path={0} source={1}" -f $sessionOutput.path, $sessionOutput.source)
+    }
+    else {
+        $script:activeTraceOutputPath = $null
+        Write-RunLog -Message ("trace-start-output path=unknown name={0}" -f $traceName)
+    }
 }
 
 function Stop-Trace {
@@ -688,6 +740,47 @@ function Wait-TraceArtifactReady {
     }
 }
 
+function Get-TraceSessionOutputLocation {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$TraceName
+    )
+
+    $query = Invoke-CmdCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @('query', $TraceName, '-ets') -TimeoutSeconds 30
+    if ($query.timed_out -or $query.exit_code -ne 0) {
+        return $null
+    }
+
+    $stdout = [string]$query.stdout
+    $outputLocation = $null
+    $rootPath = $null
+    foreach ($line in ($stdout -split "`r?`n")) {
+        if ($line -match '^\s*Output Location:\s+(.+?)\s*$') {
+            $outputLocation = $Matches[1].Trim()
+            continue
+        }
+        if ($line -match '^\s*Root Path:\s+(.+?)\s*$') {
+            $rootPath = $Matches[1].Trim()
+        }
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($outputLocation)) {
+        return [ordered]@{
+            path = $outputLocation
+            source = 'logman-query-output'
+        }
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($rootPath)) {
+        return [ordered]@{
+            path = (Join-Path $rootPath ("{0}.etl" -f $TraceName))
+            source = 'logman-query-root'
+        }
+    }
+
+    return $null
+}
+
 function Resolve-TraceArtifactPath {
     param(
         [Parameter(Mandatory = $true)]
@@ -701,28 +794,51 @@ function Resolve-TraceArtifactPath {
         }
     }
 
-    $parent = Split-Path -Parent $PreferredPath
-    $baseName = [System.IO.Path]::GetFileNameWithoutExtension($PreferredPath)
-    if ([string]::IsNullOrWhiteSpace($parent) -or -not (Test-Path -LiteralPath $parent)) {
-        return $null
+    if (-not [string]::IsNullOrWhiteSpace($script:activeTraceOutputPath)) {
+        if (Test-Path -LiteralPath $script:activeTraceOutputPath) {
+            return [ordered]@{
+                path = $script:activeTraceOutputPath
+                source = 'active-output'
+            }
+        }
     }
 
-    $candidates = @(
-        Get-ChildItem -Path $parent -File -ErrorAction SilentlyContinue |
-            Where-Object {
-                $_.Name -like "$baseName*.etl*" -or
-                $_.Name -like '*.etl' -or
-                $_.Extension -like '.etl*'
-            } |
-            Sort-Object LastWriteTimeUtc -Descending
-    )
-    if (@($candidates).Count -eq 0) {
-        return $null
+    foreach ($direct in @(
+            @{ Path = $script:activeTraceOutputPath; Source = 'active-output-hint' },
+            @{ Path = if (-not [string]::IsNullOrWhiteSpace($traceName)) { Join-Path 'C:\Windows\System32' ("{0}.etl" -f $traceName) } else { $null }; Source = 'system32-trace-name-hint' },
+            @{ Path = $PreferredPath; Source = 'preferred-hint' }
+        )) {
+        $candidatePath = [string]$direct.Path
+        if ([string]::IsNullOrWhiteSpace($candidatePath)) {
+            continue
+        }
+
+        if (Test-Path -LiteralPath $candidatePath) {
+            return [ordered]@{
+                path = $candidatePath
+                source = ($direct.Source -replace '-hint$', '')
+            }
+        }
+    }
+
+    $system32ByName = if (-not [string]::IsNullOrWhiteSpace($traceName)) { Join-Path 'C:\Windows\System32' ("{0}.etl" -f $traceName) } else { $null }
+    if (-not [string]::IsNullOrWhiteSpace($system32ByName)) {
+        return [ordered]@{
+            path = $system32ByName
+            source = 'system32-trace-name-hint'
+        }
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($script:activeTraceOutputPath)) {
+        return [ordered]@{
+            path = $script:activeTraceOutputPath
+            source = 'active-output-hint'
+        }
     }
 
     return [ordered]@{
-        path = $candidates[0].FullName
-        source = 'discovered'
+        path = $PreferredPath
+        source = 'preferred-hint'
     }
 }
 
@@ -996,26 +1112,32 @@ try {
     Write-RunLog -Message ("trace-artifact-ready ready={0} exists={1} length={2} stable_polls={3} path={4}" -f $etlReadiness.ready, $etlReadiness.exists, $etlReadiness.length, $etlReadiness.stable_polls, $traceArtifactPath)
 
     $traceLines = @()
-    $parserSource = 'tracerpt-csv'
-    $tracerpt = Invoke-TracerptParse -TracePath $traceArtifactPath -CsvOutputPath $csvPath -Attempts 2 -TimeoutSeconds 180
-    if ($tracerpt.success) {
-        $traceLines = Get-TraceLinesFromCsv
-        Write-RunLog -Message ("trace-parsed parser=tracerpt attempt={0} csv_exists={1} csv_length={2}" -f $tracerpt.attempt, (Test-Path -LiteralPath $csvPath), $tracerpt.csv_length)
+    $parserSource = 'etl-binary-fallback'
+    $tracerpt = [ordered]@{
+        success = $false
+        attempt = 0
+        exit_code = $null
+        timed_out = $false
+        csv_exists = $false
+        csv_length = 0
+        stdout = ''
+        stderr = 'skipped-for-binary-first-runtime-parser'
+        attempts = @()
     }
-    else {
-        $parserSource = 'etl-binary-fallback'
-        Write-RunLog -Message ("trace-parse-fallback parser=etl-binary timed_out={0} exit_code={1} csv_exists={2}" -f $tracerpt.timed_out, $tracerpt.exit_code, $tracerpt.csv_exists)
-        $traceLines = Get-TraceLinesFromEtlBinary -Path $traceArtifactPath -Candidates $candidates
-        Write-RunLog -Message ("trace-parsed parser=etl-binary line_count={0}" -f @($traceLines).Count)
-    }
+    Write-RunLog -Message 'trace-parse-start parser=etl-binary'
+    $traceLines = Get-TraceLinesFromEtlBinary -Path $traceArtifactPath -Candidates $candidates
+    Write-RunLog -Message ("trace-parsed parser=etl-binary line_count={0}" -f @($traceLines).Count)
 
     $parsed = Parse-Results -Candidates $candidates -Lines $traceLines -CsvExists (Test-Path -LiteralPath $csvPath) -ParserSource $parserSource
+    Write-RunLog -Message ("trace-results-parsed candidate_count={0}" -f @($parsed.candidates).Count)
     $exactHit = @($parsed.candidates | Where-Object { $_.status -eq 'exact-hit' })
     $exactLineOnly = @($parsed.candidates | Where-Object { $_.status -eq 'exact-line-no-query' })
     $pathOnly = @($parsed.candidates | Where-Object { $_.status -eq 'path-only-hit' })
     $noHit = @($parsed.candidates | Where-Object { $_.status -eq 'no-hit' })
     $triggerErrors = @($state.trigger_log | Where-Object { $_.status -eq 'error' })
+    Write-RunLog -Message ("trace-results-classified exact={0} exact_line={1} path_only={2} no_hit={3}" -f @($exactHit).Count, @($exactLineOnly).Count, @($pathOnly).Count, @($noHit).Count)
 
+    Write-RunLog -Message 'finalize-build-start'
     $results = [ordered]@{
         generated_utc = [DateTime]::UtcNow.ToString('o')
         family = 'power-control'
@@ -1063,14 +1185,35 @@ try {
         current_trigger = $null
         baseline_missing_count = @($state.baseline_values.PSObject.Properties | Where-Object { $null -eq $_.Value }).Count
         apply_failure_count = @($state.apply_failures).Count
+        exact_hit_candidates = @($exactHit | ForEach-Object { $_.candidate_id })
+        exact_line_only_candidates = @($exactLineOnly | ForEach-Object { $_.candidate_id })
+        path_only_candidates = @($pathOnly | ForEach-Object { $_.candidate_id })
+        no_hit_candidates = @($noHit | ForEach-Object { $_.candidate_id })
         status = if (@($exactHit).Count -gt 0) { 'exact-hit' } elseif (@($exactLineOnly).Count -gt 0) { 'exact-line-no-query' } elseif (@($pathOnly).Count -gt 0) { 'path-only-hit' } else { 'no-hit' }
     }
+    Write-RunLog -Message ("finalize-build-complete status={0}" -f $summary.status)
 
-    $state.phase = 'completed'
-    $state.result_status = $summary.status
-    Write-JsonFile -Path $StatePath -InputObject $state
-    Write-JsonFile -Path $ResultsPath -InputObject $results
-    Write-JsonFile -Path $SummaryPath -InputObject $summary
+    Write-RunLog -Message 'finalize-write-summary-start'
+    Write-JsonFileDirect -Path $SummaryPath -InputObject $summary
+    Write-RunLog -Message 'finalize-write-summary-complete'
+    try {
+        $state.phase = 'completed'
+        $state.result_status = $summary.status
+        Write-RunLog -Message 'finalize-write-state-start'
+        Write-JsonFileDirect -Path $StatePath -InputObject $state
+        Write-RunLog -Message 'finalize-write-state-complete'
+    }
+    catch {
+        Write-RunLog -Message ("finalize-write-state-error error={0}" -f $_.Exception.Message)
+    }
+    try {
+        Write-RunLog -Message 'finalize-write-results-start'
+        Write-JsonFileDirect -Path $ResultsPath -InputObject $results
+        Write-RunLog -Message 'finalize-write-results-complete'
+    }
+    catch {
+        Write-RunLog -Message ("finalize-write-results-error error={0}" -f $_.Exception.Message)
+    }
     Write-RunLog -Message ("phase-complete phase=run status={0}" -f $summary.status)
 }
 catch {

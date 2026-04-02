@@ -19,31 +19,31 @@ Date: `2026-04-02`
 
 ## Current Status
 
-The remaining VM survivability blocker is gone.
+The remaining VM survivability blocker is gone, and the pilot lane is now terminal.
 
-Post-trace parsing has now been hardened in code:
+The validated run is:
 
-- the guest waits for the ETL to become stable after trace stop
-- `tracerpt` now retries with captured stderr instead of a single fire-and-forget call
-- the old `Get-WinEvent -Path` fallback has been replaced with a deterministic ETL binary token scan
-- guest error handling now writes placeholder `results.json` as well as terminal `summary.json`
+- `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json`
+- `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json`
 
-## Remaining Validation Gap
+What changed to make it reliable:
 
-This needs one more live VM rerun to confirm that the new parser path produces terminal `results.json` under the same pilot run that previously stalled in `parsing`.
+- host storage preflight now blocks unsafe VM paths before runtime collection starts
+- the guest now resolves ETL output from `C:\Windows\System32\<TraceName>.etl` when `logman` ignores the requested output path
+- the pilot lane now uses deterministic ETL binary fallback parsing instead of stalling in `tracerpt`
+- terminal completion now writes `summary.json` first so the host runner can observe terminal status without waiting on later artifact writes
 
 ## Why This Still Matters
 
-This is no longer a VM survivability problem.
-
-It was narrowed down to a post-trace ETL parsing problem:
+This is now a usable runtime triage lane again:
 
 - the VM recovers cleanly
 - the runner does not leave stale `armed` probes behind
-- the trigger suite itself is viable
+- the trigger suite is viable
+- the pilot now finishes with a deterministic terminal outcome instead of stalling in `parsing`
 
 ## Next Follow-Up
 
-1. rerun the 5-key pilot against the hardened parser path
-2. if terminal `results.json` is now reliable, widen only after one more confirmatory pass
-3. only then widen beyond the 5-key pilot
+1. repeat the same 5-key pilot once more as a confirmatory pass
+2. if the second pass also lands terminal `no-hit` or `hit` without regressions, widen carefully beyond the 5-key pilot
+3. take persistent no-hit leftovers to the `WinDbg` lane as the next escalation step

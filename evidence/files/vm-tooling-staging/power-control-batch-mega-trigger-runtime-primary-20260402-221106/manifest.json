@@ -1,0 +1,70 @@
+﻿{
+    "generated_utc":  "2026-04-02T19:11:06.3824573Z",
+    "probe_name":  "power-control-batch-mega-trigger-runtime-primary-20260402-221106",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "collection_mode":  "operational",
+    "rollback_pending":  false,
+    "family":  "power-control",
+    "pattern":  "mega-trigger",
+    "trigger_profile":  "pilot-safe-v1",
+    "candidate_count":  5,
+    "candidate_ids":  [
+                          "power.control.allow-audio-to-enable-execution-required-power-requests",
+                          "power.control.allow-system-required-power-requests",
+                          "power.control.always-compute-qos-hints",
+                          "power.control.coalescing-flush-interval",
+                          "power.control.idle-processors-require-qos-management"
+                      ],
+    "triggers":  [
+                     "cpu_stress",
+                     "power_plan_and_requests",
+                     "multi_thread_burst",
+                     "disk_io_burst",
+                     "process_spawn_burst",
+                     "foreground_background_switch",
+                     "timer_resolution_change",
+                     "network_activity"
+                 ],
+    "candidates":  [
+                       {
+                           "candidate_id":  "power.control.allow-audio-to-enable-execution-required-power-requests",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "value_name":  "AllowAudioToEnableExecutionRequiredPowerRequests",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "power.control.allow-system-required-power-requests",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "value_name":  "AllowSystemRequiredPowerRequests",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "power.control.always-compute-qos-hints",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "value_name":  "AlwaysComputeQosHints",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "power.control.coalescing-flush-interval",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "value_name":  "CoalescingFlushInterval",
+                           "probe_value":  1
+                       },
+                       {
+                           "candidate_id":  "power.control.idle-processors-require-qos-management",
+                           "family":  "power-control",
+                           "route_bucket":  "docs-first-new-candidate",
+                           "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                           "value_name":  "IdleProcessorsRequireQosManagement",
+                           "probe_value":  1
+                       }
+                   ]
+}
