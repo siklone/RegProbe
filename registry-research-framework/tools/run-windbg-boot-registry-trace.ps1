@@ -78,10 +78,18 @@ function Resolve-DebuggerCandidate {
             $matches = Get-ChildItem -Path $candidate -ErrorAction SilentlyContinue | Sort-Object FullName -Descending
             foreach ($match in $matches) {
                 if ($match.PSIsContainer) {
-                    foreach ($leaf in @('windbg.exe', 'kd.exe', 'cdb.exe')) {
-                        $leafPath = Join-Path $match.FullName $leaf
-                        if (Test-Path -LiteralPath $leafPath) {
-                            return $leafPath
+                    foreach ($searchRoot in @(
+                            $match.FullName,
+                            (Join-Path $match.FullName 'amd64'),
+                            (Join-Path $match.FullName 'x64'),
+                            (Join-Path $match.FullName 'x86'),
+                            (Join-Path $match.FullName 'arm64')
+                        )) {
+                        foreach ($leaf in @('windbg.exe', 'kd.exe', 'cdb.exe')) {
+                            $leafPath = Join-Path $searchRoot $leaf
+                            if (Test-Path -LiteralPath $leafPath) {
+                                return $leafPath
+                            }
                         }
                     }
                 }
@@ -124,10 +132,10 @@ if ($PrepareBaseline) {
 
 $resolvedVmProfile = if ([string]::IsNullOrWhiteSpace($VmProfile)) { 'primary' } else { $VmProfile }
 $resolvedWindbgCommand = if ($resolvedWinDbg) {
-    ('"{0}" -k com:pipe,port={1},resets=0,reconnect -c "$$< {2}"' -f $resolvedWinDbg, $PipeName, $portableCommandScript)
+    ('"{0}" -k com:pipe,port={1},resets=0,reconnect -cfr {2}' -f $resolvedWinDbg, $PipeName, $portableCommandScript)
 }
 else {
-    ('windbg -k com:pipe,port={0},resets=0,reconnect -c "$$< {1}"' -f $PipeName, $portableCommandScript)
+    ('windbg -k com:pipe,port={0},resets=0,reconnect -cfr {1}' -f $PipeName, $portableCommandScript)
 }
 $baselinePrepStatus = if ($PrepareBaseline) {
     if (-not $baselinePrep) { 'missing' }

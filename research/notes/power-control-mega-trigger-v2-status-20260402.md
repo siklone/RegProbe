@@ -37,7 +37,7 @@ What changed to make it reliable:
 
 ## WinDbg Escalation Status
 
-The next lane is now prepared, but not yet executable on this host:
+The next lane is now prepared and host-side debugger installation is no longer the blocker:
 
 - `registry-research-framework/audit/power-control-windbg-boot-registry-trace-20260402.json`
 - `registry-research-framework/audit/configure-kernel-debug-baseline.json`
@@ -50,11 +50,15 @@ What is now true for the `WinDbg` lane:
 - the VMX serial pipe is configured for `\\.\pipe\regprobe_debug`
 - the guest rebooted after `bcdedit` and returned to healthy shell state
 - the attach bundle is generated for the 5 persistent `no-hit` values
+- `kd.exe` is now installed on the host and detected by the wrapper
 
-What is still blocked:
+What the first live execution showed:
 
-- no host debugger binary is installed right now (`windbg.exe`, `kd.exe`, and `cdb.exe` are all missing)
-- so the lane truthfully stays `blocked-windbg-missing` rather than pretending a trace ran
+- a real `kd` boot-trace session now connects to the guest kernel over the VMware pipe
+- the debugger reaches the target and shows `Kernel Debugger connection established`
+- but the guest then stops in a fatal system-error / debugger-break state before shell recovery
+- the current lane is therefore not a clean evidence pass yet; it is a `boot-unsafe` blocker under the present VM/debug configuration
+- after the failed execution, the VM had to be recovered manually by reverting to `RegProbe-Baseline-Debug-20260402`, removing a stale `.lck`, and starting it again
 
 ## Why This Still Matters
 
@@ -67,7 +71,7 @@ This is now a usable runtime triage lane again:
 
 ## Next Follow-Up
 
-1. install a host debugger (`WinDbg` or `kd`) and attach using the generated bundle
-2. run the `WinDbg` boot-time registry trace for the 5-key `no-hit` set
-3. only widen beyond the 5-key pilot after the `WinDbg` pass tells us whether these are early-boot reads or true dead/no-hit candidates
-4. if `WinDbg` still shows no read activity, keep them in the negative-evidence / dead-flag decision path
+1. harden the `kd` execution lane to classify `boot-unsafe` runs without leaving the VM unhealthy
+2. investigate why kernel debug enters a fatal system-error / break state under the current VMware serial-pipe setup
+3. only after a stable `kd` pass should the 5-key set move to early-boot-read vs true dead/no-hit decisioning
+4. keep widening on hold until the debug lane is stable

@@ -186,6 +186,21 @@ function Wait-ForVmToolsReady {
     throw "Timed out waiting for VMware Tools readiness after $TimeoutSeconds seconds."
 }
 
+function Wait-ForVmStopped {
+    param([int]$TimeoutSeconds)
+
+    $deadline = (Get-Date).AddSeconds([Math]::Max(30, $TimeoutSeconds))
+    do {
+        if (-not (Test-VmRunning)) {
+            return $true
+        }
+
+        Start-Sleep -Seconds $PollIntervalSeconds
+    } while ((Get-Date) -lt $deadline)
+
+    throw "Timed out waiting for the VM to stop after $TimeoutSeconds seconds."
+}
+
 function Wait-ForShellHealthy {
     param([int]$TimeoutSeconds)
 
@@ -228,6 +243,7 @@ $result = [ordered]@{
     vm_path = $vmxPath
     vm_running = $false
     vm_started = $false
+    vm_power_cycled = $false
     pipe_name = $PipeName
     debug_port = $DebugPort
     baud_rate = $BaudRate
@@ -238,6 +254,7 @@ $result = [ordered]@{
     shell_healthy = $false
     shell_checks = $null
     snapshot_created = $false
+    snapshot_existing = $false
     snapshot_name = $resolvedSnapshotName
     steps = @()
     status = 'staged'
@@ -245,6 +262,14 @@ $result = [ordered]@{
 
 try {
     $result.vm_running = Test-VmRunning
+
+    if (-not $SkipVmxUpdate -and $result.vm_running) {
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'stop', $vmxPath, 'hard') -IgnoreExitCode | Out-Null
+        Wait-ForVmStopped -TimeoutSeconds 180 | Out-Null
+        $result.vm_running = $false
+        $result.vm_power_cycled = $true
+        $result.steps += 'vm-stopped-for-vmx-edit'
+    }
 
     if (-not $SkipVmxUpdate) {
         Set-VmxKeyValue -Path $vmxPath -Key 'serial0.present' -Value 'TRUE'
@@ -295,9 +320,16 @@ try {
     }
 
     if (-not [string]::IsNullOrWhiteSpace($CreateSnapshotName)) {
-        Invoke-Vmrun -Arguments @('-T', 'ws', 'snapshot', $vmxPath, $CreateSnapshotName) | Out-Null
-        $result.snapshot_created = $true
-        $result.steps += 'snapshot-created'
+        $existingSnapshots = Invoke-Vmrun -Arguments @('-T', 'ws', 'listSnapshots', $vmxPath) -IgnoreExitCode
+        if ($existingSnapshots -match [regex]::Escape($CreateSnapshotName)) {
+            $result.snapshot_existing = $true
+            $result.steps += 'snapshot-already-present'
+        }
+        else {
+            Invoke-Vmrun -Arguments @('-T', 'ws', 'snapshot', $vmxPath, $CreateSnapshotName) | Out-Null
+            $result.snapshot_created = $true
+            $result.steps += 'snapshot-created'
+        }
     }
 
     $result.status = if ($result.vmx_updated -or $result.guest_boot_debug_updated -or $result.snapshot_created) {

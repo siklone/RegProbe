@@ -1,0 +1,23 @@
+{
+  "generated_utc": "2026-04-02T21:44:00Z",
+  "family": "power-control",
+  "lane": "windbg-boot-registry-trace",
+  "vm_profile": "secondary",
+  "vm_path": "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+  "bundle": "registry-research-framework/audit/power-control-windbg-boot-registry-trace-20260402.json",
+  "status": "boot-unsafe",
+  "host_debugger_status": "installed",
+  "kernel_connected": true,
+  "fatal_system_error_observed": true,
+  "shell_recovered_during_trace": false,
+  "console_log": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-001413/kd-console.log",
+  "session_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-001413/session.json",
+  "target_keys": [
+    "AllowAudioToEnableExecutionRequiredPowerRequests",
+    "AllowSystemRequiredPowerRequests",
+    "AlwaysComputeQosHints",
+    "CoalescingFlushInterval",
+    "IdleProcessorsRequireQosManagement"
+  ],
+  "note": "The first live kd boot-trace session successfully connected to the kernel over the VMware serial pipe, but the guest entered a fatal system-error / debugger-break state before shell recovery. The VM was later recovered manually by reverting to the debug snapshot and clearing a stale VMX lock."
+}

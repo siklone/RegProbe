@@ -1,5 +1,5 @@
 ﻿{
-    "generated_utc":  "2026-04-02T20:27:03.6928977Z",
+    "generated_utc":  "2026-04-02T21:07:14.5971906Z",
     "tool":  "WinDbg",
     "vm_profile":  "secondary",
     "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
@@ -20,9 +20,9 @@
     "log_path":  "C:\\RegProbe-Diag\\windbg-registry-trace.log",
     "attach_mode":  "manual-kernel-debug",
     "breakpoint_mode":  "all-cmpquery-postfilter",
-    "windbg_path":  null,
-    "windbg_command":  "windbg -k com:pipe,port=\\\\.\\pipe\\regprobe_debug,resets=0,reconnect -c \"$$\u003c \u003cREPO_ROOT\u003e\\registry-research-framework\\audit\\windbg-registry-watch.txt\"",
-    "status":  "blocked-windbg-missing",
+    "windbg_path":  "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\kd.exe",
+    "windbg_command":  "\"C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\kd.exe\" -k com:pipe,port=\\\\.\\pipe\\regprobe_debug,resets=0,reconnect -cfr \u003cREPO_ROOT\u003e\\registry-research-framework\\audit\\windbg-registry-watch.txt",
+    "status":  "ready-to-attach",
     "capture_status":  "staged",
     "capture_artifacts":  [
 
@@ -32,18 +32,18 @@
                                   "path":  "registry-research-framework/audit/windbg-registry-watch.txt",
                                   "sha256":  "3215f9b8a3415c3acc23535dbea461429a70eec99881d9451abd295eca1148bf",
                                   "size":  599,
-                                  "collected_utc":  "2026-04-02T20:10:41.3567661Z",
+                                  "collected_utc":  "2026-04-02T21:04:57.2257109Z",
                                   "exists":  true
                               },
                               {
                                   "path":  "registry-research-framework/audit/configure-kernel-debug-baseline.json",
-                                  "sha256":  "1e7c8d072e200236db2f1b4945c16d7324e560b8d2af96b7f1e8739e66009fff",
-                                  "size":  1229,
-                                  "collected_utc":  "2026-04-02T20:27:03.5290324Z",
+                                  "sha256":  "1b4082d379381e5734a038986ff82c3cd66d6be2c4e5f0b32a9a10ad6c23b2e3",
+                                  "size":  1386,
+                                  "collected_utc":  "2026-04-02T21:07:14.4773660Z",
                                   "exists":  true
                               }
                           ],
-    "host_debugger_status":  "missing",
+    "host_debugger_status":  "installed",
     "host_debugger_candidates":  [
                                      "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_*",
                                      "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\windbg.exe",
@@ -53,11 +53,12 @@
                                  ],
     "baseline_prepare_status":  "configured",
     "prep":  {
-                 "generated_utc":  "2026-04-02T20:10:42.7473637Z",
+                 "generated_utc":  "2026-04-02T21:04:58.6471135Z",
                  "vm_profile":  "secondary",
                  "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
                  "vm_running":  true,
-                 "vm_started":  false,
+                 "vm_started":  true,
+                 "vm_power_cycled":  true,
                  "pipe_name":  "\\\\.\\pipe\\regprobe_debug",
                  "debug_port":  1,
                  "baud_rate":  115200,
@@ -72,17 +73,20 @@
                                       "shellhost":  true,
                                       "ctfmon":  true
                                   },
-                 "snapshot_created":  true,
+                 "snapshot_created":  false,
+                 "snapshot_existing":  true,
                  "snapshot_name":  "RegProbe-Baseline-Debug-20260402",
                  "steps":  [
+                               "vm-stopped-for-vmx-edit",
                                "vmx-serial-pipe-configured",
+                               "vm-started-nogui",
                                "vmtools-ready",
                                "shell-healthy-before-bcdedit",
                                "guest-bcdedit-debug-enabled",
                                "guest-restart-requested",
                                "vmtools-ready-after-restart",
                                "shell-healthy-after-restart",
-                               "snapshot-created"
+                               "snapshot-already-present"
                            ],
                  "status":  "configured"
              },

@@ -31,5 +31,5 @@
   ],
   "windbg_bundle": "registry-research-framework/audit/power-control-windbg-boot-registry-trace-20260402.json",
   "debug_snapshot_name": "RegProbe-Baseline-Debug-20260402",
-  "note": "These five values completed two terminal mega-trigger pilot runs with no runtime ETW or ETL binary hits. The WinDbg boot-time registry-trace bundle and debug baseline are now prepared; actual trace collection remains blocked until a host debugger binary is installed."
+  "note": "These five values completed two terminal mega-trigger pilot runs with no runtime ETW or ETL binary hits. The host debugger and debug baseline are now ready, but the first live kd boot-trace session hit a boot-unsafe fatal-system-error / debugger-break state before shell recovery, so the WinDbg lane needs stabilization before it can arbitrate these values."
 }
