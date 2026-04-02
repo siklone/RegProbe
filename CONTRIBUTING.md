@@ -5,7 +5,7 @@ RegProbe is both a desktop tweak app and a registry research workspace. Most use
 - finding and validating Windows keys and values
 - strengthening evidence for an existing tweak
 - adding or updating a shipped tweak/provider
-- improving the v3.1 research pipeline, audit flow, or VM tooling
+- improving the v3.2 research pipeline, audit flow, or VM tooling
 
 ## Core Rules
 
@@ -24,6 +24,7 @@ Read these first:
 - [research/evidence-atlas.md](research/evidence-atlas.md)
 - [research/evidence-audit.json](research/evidence-audit.json)
 - [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
+- [Docs/RUNTIME_ESCALATION.md](Docs/RUNTIME_ESCALATION.md)
 - [Docs/SCRIPT_CATALOG.md](Docs/SCRIPT_CATALOG.md)
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
 - [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)
@@ -83,12 +84,14 @@ Community or imported research can help you discover a key, but it is not final 
 
 ## Tool Selection
 
-RegProbe's v3.1 pipeline is cross-layer. For undocumented keys, one tool is not enough.
+RegProbe's v3.2 pipeline is cross-layer. For undocumented keys, one tool is not enough.
 
 ### Runtime tools
 
 - `ETW`
   primary runtime trace lane
+- `safe mega-trigger runtime v2`
+  family-specific trigger escalation after plain ETW no-hit
 - `Procmon`
   supporting runtime lane, especially for visible user-mode reads
 - `WPR/WPA`
@@ -99,6 +102,8 @@ RegProbe's v3.1 pipeline is cross-layer. For undocumented keys, one tool is not 
   deeper stack or boot analysis when needed
 - `DTrace`
   optional strengthening lane where supported
+- `WinDbg`
+  last-resort boot and dead-flag arbiter for keys ETW still misses
 
 ### Static tools
 
@@ -109,6 +114,10 @@ RegProbe's v3.1 pipeline is cross-layer. For undocumented keys, one tool is not 
   for registry-read capability and semantic clues
 - `Ghidra + PDB`
   for string xrefs, branch logic, and decompilation
+- source-enrichment scan
+  `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK` cross-reference
+
+`IDA` is optional today. Do not block a record on IDA automation unless a working headless-capable build is actually available.
 
 ### Frida Kernel Guard
 
@@ -131,9 +140,9 @@ Use:
 
 - `registry-research-framework/pipeline/v31_pipeline.py`
 
-Use this when you want the orchestrated v3.1 flow instead of running each phase by hand.
+Use this when you want the orchestrated v3.2 flow instead of running each phase by hand.
 
-### Individual v3.1 phases
+### Individual v3.2 phases
 
 - `registry-research-framework/pipeline/faz0-enrichment.ps1`
 - `registry-research-framework/pipeline/faz1-runtime-trace.ps1`
@@ -153,9 +162,12 @@ Use this when you want the orchestrated v3.1 flow instead of running each phase 
 ### Runtime and static wrappers
 
 - `registry-research-framework/tools/etw-registry-trace.ps1`
+- `registry-research-framework/tools/run-power-control-batch-mega-trigger-runtime.ps1`
+- `registry-research-framework/tools/run-windbg-boot-registry-trace.ps1`
 - `registry-research-framework/tools/procmon-registry-trace.ps1`
 - `registry-research-framework/tools/ghidra-headless-analyze.ps1`
 - `registry-research-framework/tools/pdb-download.ps1`
+- `registry-research-framework/tools/run-source-enrichment-scan.ps1`
 - `registry-research-framework/tools/capa-scan.ps1`
 - `registry-research-framework/tools/floss-scan.ps1`
 - `registry-research-framework/tools/bingrep-scan.ps1`
@@ -168,6 +180,8 @@ Use this when you want the orchestrated v3.1 flow instead of running each phase 
 - `scripts/vm/ensure-shell-stable-snapshot.ps1`
 - `scripts/vm/get-vm-shell-health.ps1`
 - `scripts/vm/log-vm-incident.ps1`
+- `scripts/vm/configure-kernel-debug-baseline.ps1`
+- `scripts/vm/new-windbg-registry-watch-script.ps1`
 - `scripts/vm/app-launch-smoke.ps1`
 - `scripts/vm/host-validation-controller.ps1`
 - `scripts/vm/run-validation-with-restart-watch.ps1`
@@ -235,8 +249,10 @@ This decides whether Frida is allowed and whether boot ETW or WPR is required.
 Use `Win25H2Clean` for all live probing:
 
 - ETW first
+- if ETW stays weak or idle-only, move to the family-safe mega-trigger lane
 - Procmon as supporting evidence
 - WPR/WPA and `typeperf` when behavior matters
+- WinDbg only after the no-hit queue survives the cheaper runtime lanes
 - snapshot before risky runs
 - log incidents if shell, input, desktop, or graphics break
 
@@ -246,9 +262,18 @@ Use a layered approach:
 
 - strings/bin-grep/FLOSS to narrow the candidate binary
 - `capa` to confirm registry-read capability
+- source-enrichment scan to find external references and raise or lower runtime priority
 - Ghidra + PDB to map strings to functions and branch behavior
 
 If Ghidra logs a MATCH address or `<no function>`, follow it through the fallback lane. A log hit is the start of analysis, not the end.
+
+Nohuto guardrails are mandatory:
+
+- no committed `FUN_` / `DAT_` artifacts
+- no long decompile walls
+- bounded branch output only
+- if the branch meaning is not established, write `unclear`
+- external source references help, but they do not replace branch-backed Windows evidence
 
 ### 6. Write the result back into the repo
 

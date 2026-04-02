@@ -1,0 +1,96 @@
+{
+  "generated_note": "Environment variables in roots are expanded at runtime.",
+  "sources": [
+    {
+      "id": "reactos",
+      "label": "ReactOS",
+      "kind": "git-source",
+      "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\reactos",
+      "git_url": "https://github.com/reactos/reactos.git",
+      "patterns": [
+        "*.c",
+        "*.h",
+        "*.cpp",
+        "*.hpp"
+      ],
+      "enabled_by_default": false
+    },
+    {
+      "id": "wrk",
+      "label": "Windows Research Kernel",
+      "kind": "git-source",
+      "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\wrk-v1.2",
+      "git_url": "https://github.com/9176324/WRK-v1.2.git",
+      "patterns": [
+        "*.c",
+        "*.h",
+        "*.cpp",
+        "*.hpp"
+      ],
+      "enabled_by_default": false
+    },
+    {
+      "id": "systeminformer",
+      "label": "System Informer",
+      "kind": "git-source",
+      "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\systeminformer",
+      "git_url": "https://github.com/winsiderss/systeminformer.git",
+      "patterns": [
+        "*.c",
+        "*.h",
+        "*.cpp",
+        "*.hpp"
+      ],
+      "enabled_by_default": false
+    },
+    {
+      "id": "sandboxie",
+      "label": "Sandboxie",
+      "kind": "git-source",
+      "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\sandboxie",
+      "git_url": "https://github.com/sandboxie-plus/Sandboxie.git",
+      "patterns": [
+        "*.c",
+        "*.h",
+        "*.cpp",
+        "*.hpp"
+      ],
+      "enabled_by_default": false
+    },
+    {
+      "id": "wine",
+      "label": "Wine",
+      "kind": "git-source",
+      "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\wine",
+      "git_url": "https://github.com/wine-mirror/wine.git",
+      "patterns": [
+        "*.c",
+        "*.h",
+        "*.cpp",
+        "*.hpp"
+      ],
+      "enabled_by_default": false
+    },
+    {
+      "id": "admx",
+      "label": "Windows ADMX",
+      "kind": "local-source",
+      "root": "%WINDIR%\\PolicyDefinitions",
+      "patterns": [
+        "*.admx",
+        "*.adml"
+      ],
+      "enabled_by_default": true
+    },
+    {
+      "id": "wdk_headers",
+      "label": "Windows SDK/WDK Headers",
+      "kind": "local-source",
+      "root": "%ProgramFiles(x86)%\\Windows Kits\\10\\Include",
+      "patterns": [
+        "*.h"
+      ],
+      "enabled_by_default": true
+    }
+  ]
+}

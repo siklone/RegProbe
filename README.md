@@ -4,12 +4,12 @@
   <img src="assets/brand/regprobe-logo-full.png" alt="RegProbe logo" width="320">
 </p>
 
-RegProbe is a Windows desktop configuration shell plus a research workspace for evidence-backed tweak work. The app stays reversible and preview-first, while the repo keeps the proof trail: records, runtime captures, static analysis, audits, and VM orchestration.
+RegProbe is a Windows desktop configuration shell plus a research workspace for evidence-backed tweak work. The app stays reversible and preview-first, while the repo keeps the proof trail: records, runtime captures, static analysis, audits, source-enrichment passes, and VM orchestration.
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
 ![Shell](https://img.shields.io/badge/shell-WPF_MVVM-1f2937)
-![Research](https://img.shields.io/badge/research-v3.1_pipeline-c0392b)
+![Research](https://img.shields.io/badge/research-v3.2_pipeline-c0392b)
 ![License](https://img.shields.io/badge/license-MIT-22c55e)
 [![CI](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml/badge.svg)](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml)
 
@@ -23,6 +23,13 @@ Older surfaces such as the hardware dashboard, services browser, bloatware brows
 
 RegProbe stays preview-first and reversible. SAFE tweaks follow `Detect -> Apply -> Verify -> Rollback`, the app does not mutate the system on startup, and elevated work runs through `RegProbe.ElevatedHost` instead of the main process. Runtime validation happens in the VM, not on the host, and research classification is evidence-first, not folklore-first.
 
+Static credibility was hardened in the v3.2 pass:
+
+- committed Ghidra artifacts are PDB-backed and bounded
+- broken-link and ghidra-bloat queues are closed
+- Nohuto priority records were re-audited first
+- `IDA` is optional today; `Ghidra + PDB` is the canonical static lane
+
 ## Repo Shape
 
 ```text
@@ -35,7 +42,7 @@ cli/                         Command-line entry point
 tests/                       Unit and behavior tests
 research/                    Human-facing records, notes, audit outputs
 evidence/                    Bundles and imported runtime/static artifacts
-registry-research-framework/ v3.1 routing, phases, tools, manifests
+registry-research-framework/ v3.2 routing, phases, tools, manifests
 Docs/                        Workflow and contributor-facing docs
 scripts/                     Build, package, VM, and validation helpers
 ```
@@ -59,6 +66,24 @@ Current baseline policy:
 Start here for the full flow:
 
 - [VM workflow](Docs/VM_WORKFLOW.md)
+- [Runtime escalation](Docs/RUNTIME_ESCALATION.md)
+
+## Research Escalation
+
+Hard runtime cases no longer stop at `reboot and idle`.
+
+Current escalation order:
+
+1. targeted `ETW` / runtime trace
+2. safe mega-trigger runtime v2
+3. `WinDbg` boot registry trace for remaining no-hit keys
+4. source-enrichment cross-reference (`ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, `WDK`)
+
+Current runtime note:
+
+- the safe mega-trigger v2 runner now restores cleanly and completes the full 8-trigger pilot
+- the remaining follow-up is ETL parsing after trace stop
+- until that parser issue is closed, treat the lane as a safe pilot rather than a final classifier
 
 ## Scripts: What We Actually Use
 
@@ -67,7 +92,7 @@ The repo has a lot of PowerShell, but not all of it serves the same purpose.
 - everyday scripts
   build, package, clean, baseline maintenance, shell health, app smoke
 - active research scripts
-  current v3.1 runners and follow-up lanes
+  current v3.2 runners, escalation lanes, and follow-up lanes
 - historical reproducibility scripts
   older one-off runners kept because notes, audits, and evidence bundles still depend on them
 - regenerable clutter
@@ -125,6 +150,7 @@ pwsh -File scripts/publish_release.ps1
 
 - [Contributing](CONTRIBUTING.md)
 - [VM workflow](Docs/VM_WORKFLOW.md)
+- [Runtime escalation](Docs/RUNTIME_ESCALATION.md)
 - [Script catalog](Docs/SCRIPT_CATALOG.md)
 - [Tweak sources](Docs/TWEAK_SOURCES.md)
 - [Research readme](research/README.md)

@@ -1,0 +1,23 @@
+{
+  "generated_utc": "2026-04-02T04:30:00Z",
+  "family": "power-control",
+  "pattern": "mega-trigger-v2",
+  "pilot_candidate_count": 5,
+  "pilot_trigger_count": 8,
+  "recovery_safe": true,
+  "terminal_vm_state": "shell-healthy-after-restore",
+  "current_status": "parser-follow-up-required",
+  "validated_runs": [
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-recovery-primary-20260402-063907/summary.json",
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-064318/summary.json"
+  ],
+  "blockers": [
+    "tracerpt returned -2147024894 after trace stop",
+    "Get-WinEvent ETL fallback still did not produce terminal parsed results in the pilot run"
+  ],
+  "next_actions": [
+    "add ETL readiness wait before parser selection",
+    "replace or harden the ETL fallback parser",
+    "keep pilot scope at 5 keys until results.json is terminal and reliable"
+  ]
+}
