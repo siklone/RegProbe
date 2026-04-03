@@ -17,6 +17,8 @@ param(
     [string]$TryNoRxLoss = 'TRUE',
     [ValidateSet('auto', 'kd', 'cdb', 'windbg')]
     [string]$DebuggerFrontend = 'auto',
+    [ValidateSet('quiet', 'standard')]
+    [string]$DebuggerLaunchMode = 'quiet',
     [ValidateSet('bonc', 'b', 'none')]
     [string]$BreakOnConnectMode = 'bonc',
     [string]$DebugSnapshotName = 'RegProbe-Baseline-Debug-20260402',
@@ -200,7 +202,8 @@ $resolvedWindbgCommand = if ($resolvedWinDbg) {
         'b' { ' -b' }
         default { '' }
     }
-    ('"{0}"{1} -k com:pipe,port={2},resets=0,reconnect -cfr {3}' -f $resolvedWinDbg, $breakFlag, $PipeName, $portableCommandScript)
+    $launchFlag = if ($DebuggerLaunchMode -eq 'quiet') { ' -kqm' } else { '' }
+    ('"{0}"{1}{2} -k com:pipe,port={3},resets=0,reconnect -cfr {4}' -f $resolvedWinDbg, $launchFlag, $breakFlag, $PipeName, $portableCommandScript)
 }
 else {
     $breakFlag = switch ($BreakOnConnectMode) {
@@ -208,7 +211,8 @@ else {
         'b' { ' -b' }
         default { '' }
     }
-    ('windbg{0} -k com:pipe,port={1},resets=0,reconnect -cfr {2}' -f $breakFlag, $PipeName, $portableCommandScript)
+    $launchFlag = if ($DebuggerLaunchMode -eq 'quiet') { ' -kqm' } else { '' }
+    ('windbg{0}{1} -k com:pipe,port={2},resets=0,reconnect -cfr {3}' -f $launchFlag, $breakFlag, $PipeName, $portableCommandScript)
 }
 $baselinePrepStatus = if ($PrepareBaseline) {
     if (-not $baselinePrep) { 'missing' }
@@ -258,6 +262,7 @@ $payload = [ordered]@{
     log_path = $logPath
     attach_mode = 'manual-kernel-debug'
     debugger_frontend = if ($resolvedWinDbg) { [IO.Path]::GetFileNameWithoutExtension($resolvedWinDbg).ToLowerInvariant() } else { $DebuggerFrontend }
+    debugger_launch_mode = $DebuggerLaunchMode
     breakpoint_mode = $generatorOutput.mode
     runner_output_policy = 'raw+sanitized'
     windbg_semantic_ready = ($TraceProfile -like 'singlekey-*')

@@ -19,7 +19,8 @@
     "windbg-singlekey-transport-error",
     "windbg-guest-restart-roundtrip-unproven",
     "windbg-start-order-command-not-executed",
-    "windbg-reconnect-command-not-executed"
+    "windbg-reconnect-command-not-executed",
+    "windbg-named-pipe-contract-exhausted"
   ],
   "windbg_lane": {
     "status": "partial",
@@ -110,11 +111,20 @@
     "breakin_success_count": 0,
     "note": "Across the same guest-restart bonc/none/b and 3/10/20-second lead variants, host-side breakin-once injection also produced zero breakin successes and left every run attach-ok-command-not-executed."
   },
+  "guest_restart_pipe_launch_matrix": {
+    "status": "transport-partial",
+    "matrix_ref": "registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json",
+    "execution_ref": "registry-research-framework/audit/windbg-pipe-launch-execution-20260403.json",
+    "profile_count": 4,
+    "server_attach_ok_command_not_executed_count": 2,
+    "client_transport_error_count": 2,
+    "launch_mode_effect": "none-observed",
+    "note": "Server endpoint preserved kernel attach but not command execution; client endpoint degraded into direct transport_error; quiet versus standard launch mode did not change that result."
+  },
   "next_actions": [
-    "treat attach/start-order and reconnect-time command injection as characterized on the current guest-restart base",
-    "move next to pipe endpoint or debugger launch-mode experiments",
-    "treat queued roundtrip as proven but boot-unsafe until it lands in a healthy boot prompt",
-    "only widen beyond the 5-key pilot after the connected single-key WinDbg pass becomes terminal"
+    "treat attach/start-order, reconnect-time command injection, and named-pipe launch mode as characterized on the current guest-restart base",
+    "treat the current VMware named-pipe WinDbg contract as exhausted for classification-grade arbitration",
+    "do not widen beyond the 5-key pilot until the transport contract itself changes"
   ],
   "pilot_outcome": {
     "status": "no-hit",

@@ -949,8 +949,9 @@ $roundtripExecution = $null
 $requiresBreakinProfile = ($TraceProfile -like 'breakin-*')
 $requiresRoundtripProfile = ($TraceProfile -like 'roundtrip-*')
 $useColdBoot = ($bootMode -eq 'cold-boot') -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)
+$debuggerLaunchMode = if (-not [string]::IsNullOrWhiteSpace([string]$bundle.debugger_launch_mode)) { [string]$bundle.debugger_launch_mode } else { 'quiet' }
 $kdArgs = @()
-if (-not $useColdBoot) {
+if (($debuggerLaunchMode -eq 'quiet') -and -not $useColdBoot) {
     $kdArgs += '-kqm'
 }
 switch ($breakOnConnectMode) {
@@ -1186,6 +1187,10 @@ $postRestartRoundtripRequestCount = [int]$traceObservation.post_restart_roundtri
 $postRestartRoundtripSuccessCount = [int]$traceObservation.post_restart_roundtrip_success_count
 $effectiveRoundtripRequestCount = if ($bootMode -eq 'attach-after-shell') { $roundtripRequestCount } else { $postRestartRoundtripRequestCount }
 $effectiveRoundtripSuccessCount = if ($bootMode -eq 'attach-after-shell') { $roundtripSuccessCount } else { $postRestartRoundtripSuccessCount }
+$breakinDispatchCount = if ($breakinExecution) { [int]$breakinExecution.breakin_count } else { 0 }
+$roundtripDispatchCount = if ($roundtripExecution) { [int]$roundtripExecution.roundtrip_count } else { 0 }
+$breakinAttempted = ($breakinRequestCount -gt 0) -or ($breakinDispatchCount -gt 0)
+$roundtripAttempted = ($effectiveRoundtripRequestCount -gt 0) -or ($roundtripDispatchCount -gt 0)
 $resultStatus = if ($runError -and $fatalSystemErrorObserved) {
     'boot-unsafe'
 }
@@ -1334,15 +1339,18 @@ $results = [ordered]@{
     trace_profile = $TraceProfile
     boot_mode = $bootMode
     break_on_connect_mode = $breakOnConnectMode
+    debugger_launch_mode = $debuggerLaunchMode
     windbg_log_detected = $windbgLogDetected
     windbg_transport_state = $windbgTransportState
     windbg_semantic_ready = $windbgSemanticReady
     transport_score = $transportScore
     no_debuggee_waiting = $noDebuggeeWaiting
-    breakin_attempted = ($breakinRequestCount -gt 0)
+    breakin_attempted = $breakinAttempted
+    breakin_dispatched_count = $breakinDispatchCount
     breakin_request_count = $breakinRequestCount
     breakin_success_count = $breakinSuccessCount
-    roundtrip_attempted = ($effectiveRoundtripRequestCount -gt 0)
+    roundtrip_attempted = $roundtripAttempted
+    roundtrip_dispatched_count = $roundtripDispatchCount
     roundtrip_request_count = $roundtripRequestCount
     roundtrip_success_count = $roundtripSuccessCount
     post_restart_roundtrip_request_count = $postRestartRoundtripRequestCount
@@ -1399,15 +1407,18 @@ $summary = [ordered]@{
     trace_profile = $TraceProfile
     boot_mode = $bootMode
     break_on_connect_mode = $breakOnConnectMode
+    debugger_launch_mode = $debuggerLaunchMode
     windbg_log_detected = $windbgLogDetected
     windbg_transport_state = $windbgTransportState
     windbg_semantic_ready = $windbgSemanticReady
     transport_score = $transportScore
     no_debuggee_waiting = $noDebuggeeWaiting
-    breakin_attempted = ($breakinRequestCount -gt 0)
+    breakin_attempted = $breakinAttempted
+    breakin_dispatched_count = $breakinDispatchCount
     breakin_request_count = $breakinRequestCount
     breakin_success_count = $breakinSuccessCount
-    roundtrip_attempted = ($effectiveRoundtripRequestCount -gt 0)
+    roundtrip_attempted = $roundtripAttempted
+    roundtrip_dispatched_count = $roundtripDispatchCount
     roundtrip_request_count = $roundtripRequestCount
     roundtrip_success_count = $roundtripSuccessCount
     post_restart_roundtrip_request_count = $postRestartRoundtripRequestCount

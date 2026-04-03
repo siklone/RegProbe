@@ -193,6 +193,27 @@ So the blocker narrowed once more:
 - not host-side reconnect command injection alone
 - next phase should move to pipe endpoint or debugger launch-mode experiments
 
+Pipe/launch follow-up on the same guest-restart base:
+
+- profiles tested:
+  - `server + quiet`
+  - `server + standard`
+  - `client + quiet`
+  - `client + standard`
+- outcome:
+  - both `server` variants still reached `kernel_connected=true`
+  - both `server` variants still ended `attach-ok-command-not-executed`
+  - both `client` variants degraded into direct `transport_error`
+  - launch mode (`quiet` vs `standard`) did not materially change the result
+
+That gives the cleanest transport verdict so far:
+
+- the current VMware named-pipe contract is characterized
+- `server` endpoint preserves attach but not command execution
+- `client` endpoint breaks transport outright
+- this is no longer a parser/start-order/break-policy problem
+- any next WinDbg transport step must change the transport contract itself
+
 Canonical matrix outputs:
 
 - `registry-research-framework/audit/windbg-serial-config-matrix-20260403.json`
@@ -208,6 +229,9 @@ Canonical matrix outputs:
 - `registry-research-framework/audit/windbg-reconnect-command-matrix-20260403.json`
 - `registry-research-framework/audit/windbg-reconnect-command-execution-20260403.json`
 - `research/notes/windbg-reconnect-command-matrix-20260403.md`
+- `registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json`
+- `registry-research-framework/audit/windbg-pipe-launch-execution-20260403.json`
+- `research/notes/windbg-pipe-launch-matrix-20260403.md`
 
 ## Repo Truth
 
@@ -226,6 +250,6 @@ The current attach bundle has been corrected to public-symbol reality:
 
 ## Next Follow-Up
 
-1. move next to pipe endpoint or debugger launch-mode experiments on the winning `guest-restart` base
-2. only return to single-key arbiter revalidation after one guest-restart command roundtrip lands at a healthy prompt
-3. only after a reproducible connected single-key `WinDbg` pass should these 5 values move to early-boot-read vs true dead/no-hit decisioning
+1. treat the current VMware named-pipe WinDbg contract as characterized and exhausted for classification-grade arbitration
+2. only return to single-key arbiter revalidation after the transport contract itself changes
+3. until then, do not promote WinDbg no-hit/no-read conclusions for these 5 values

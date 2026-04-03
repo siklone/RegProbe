@@ -1,0 +1,57 @@
+﻿{
+    "generated_utc":  "2026-04-03T16:06:03.1994949Z",
+    "profiles":  [
+                     {
+                         "id":  "guest-restart-breakin-server-quiet",
+                         "debugger_frontend":  "kd",
+                         "debugger_launch_mode":  "quiet",
+                         "trace_profile":  "breakin-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "bonc",
+                         "debugger_attach_lead_seconds":  10,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE",
+                         "debug_snapshot_name":  "RegProbe-Debug-PipeLaunch-server-quiet-20260403"
+                     },
+                     {
+                         "id":  "guest-restart-breakin-server-standard",
+                         "debugger_frontend":  "kd",
+                         "debugger_launch_mode":  "standard",
+                         "trace_profile":  "breakin-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "bonc",
+                         "debugger_attach_lead_seconds":  10,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE",
+                         "debug_snapshot_name":  "RegProbe-Debug-PipeLaunch-server-standard-20260403"
+                     },
+                     {
+                         "id":  "guest-restart-breakin-client-quiet",
+                         "debugger_frontend":  "kd",
+                         "debugger_launch_mode":  "quiet",
+                         "trace_profile":  "breakin-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "bonc",
+                         "debugger_attach_lead_seconds":  10,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "client",
+                         "try_no_rx_loss":  "FALSE",
+                         "debug_snapshot_name":  "RegProbe-Debug-PipeLaunch-client-quiet-20260403"
+                     },
+                     {
+                         "id":  "guest-restart-breakin-client-standard",
+                         "debugger_frontend":  "kd",
+                         "debugger_launch_mode":  "standard",
+                         "trace_profile":  "breakin-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "bonc",
+                         "debugger_attach_lead_seconds":  10,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "client",
+                         "try_no_rx_loss":  "FALSE",
+                         "debug_snapshot_name":  "RegProbe-Debug-PipeLaunch-client-standard-20260403"
+                     }
+                 ]
+}

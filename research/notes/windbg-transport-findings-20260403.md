@@ -36,14 +36,24 @@ Date: `2026-04-03`
   - `6/6` still ended `attach_ok_command_not_executed`
   - `1/6` produced a fatal-break outlier on `none + lead20`
   - so the remaining blocker is now below both queued-script continuation and host-side reconnect command injection
+- A final pipe-and-launch matrix then closed the current VMware named-pipe envelope:
+  - `server + quiet` and `server + standard` still reached `kernel_connected=true`
+  - both server variants still ended `attach_ok_command_not_executed`
+  - `client + quiet` and `client + standard` both degraded into direct `transport_error`
+  - launch mode did not materially change the result
+  - so the current named-pipe contract is now characterized enough to stop spending cycles on it
 
 ## Practical Outcome
 
 - Do not widen the single-key WinDbg arbiter lane yet.
 - Do not interpret `attach-after-shell` as a successful live debug transport.
 - Treat `guest-restart` as the current best transport base, not `attach-after-shell`.
-- The next infrastructure phase should move to pipe endpoint and debugger launch-mode experiments.
-- The next concrete fix should target the transport layer below reconnect-time command delivery, not more parser churn or multi-key semantics.
+- Treat the current VMware named-pipe contract as characterized:
+  - `server` endpoint preserves attach but not command execution
+  - `client` endpoint collapses into `transport_error`
+  - `quiet` versus `standard` launch mode does not fix command execution
+- The next concrete fix is no longer inside parser syntax, start-order, break policy, reconnect-time command injection, or named-pipe launch mode.
+- Any next WinDbg transport step should change the transport contract itself, not just its current parameters.
 
 ## Evidence
 
@@ -59,3 +69,5 @@ Date: `2026-04-03`
 - start-order note: [windbg-start-order-matrix-20260403.md](C:\r\research\notes\windbg-start-order-matrix-20260403.md)
 - reconnect-command matrix: [windbg-reconnect-command-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-reconnect-command-matrix-20260403.json)
 - reconnect-command note: [windbg-reconnect-command-matrix-20260403.md](C:\r\research\notes\windbg-reconnect-command-matrix-20260403.md)
+- pipe-launch matrix: [windbg-pipe-launch-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-pipe-launch-matrix-20260403.json)
+- pipe-launch note: [windbg-pipe-launch-matrix-20260403.md](C:\r\research\notes\windbg-pipe-launch-matrix-20260403.md)

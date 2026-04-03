@@ -78,16 +78,26 @@
       "classification": "attach_ok_command_not_executed",
       "summary_ref": "registry-research-framework/audit/windbg-reconnect-command-matrix-20260403.json",
       "note": "A reconnect-command matrix using host-side breakin-once injection across the same bonc/none/b and 3/10/20-second lead variants also ended 6/6 as attach_ok_command_not_executed, with one fatal-break outlier and zero breakin successes."
+    },
+    {
+      "id": "pipe-launch-matrix-exhausted-current-contract",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "transport_partial",
+      "summary_ref": "registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json",
+      "note": "A final pipe-and-launch matrix showed server endpoint variants still attach but never execute a breakin successfully, while client endpoint variants collapse into direct transport_error; quiet versus standard launch mode made no material difference."
     }
   ],
   "conclusion": {
     "semantic_lane_ready": true,
     "transport_lane_ready": false,
-    "recommended_next_phase": "guest-restart-pipe-endpoint-launch-mode",
+    "recommended_next_phase": "outside-current-named-pipe-contract",
     "recommended_next_actions": [
       "Keep WinDbg single-key arbitration paused until a guest-restart profile can keep kernel connectivity and process command/breakin roundtrips reproducibly.",
-      "Treat both queued roundtrip and host-side reconnect command injection as characterized on the current guest-restart kd base.",
-      "Move next to pipe endpoint or debugger launch-mode variants, not more frontend churn.",
+      "Treat queued roundtrip, reconnect command injection, and pipe/launch mode on the current VMware named-pipe contract as characterized.",
+      "Within the current named-pipe contract, server endpoint preserves attach but not command execution, while client endpoint degrades into transport_error.",
+      "Do not spend more cycles on parser churn or key-specific filtering until the transport contract itself changes.",
       "Treat attach-after-shell as a no-debuggee observation path, and guest-restart as the current transport base candidate."
     ]
   }
