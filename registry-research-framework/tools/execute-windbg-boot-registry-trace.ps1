@@ -12,6 +12,8 @@ param(
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$CredentialFilePath = '',
+    [ValidateSet('full', 'minimal', 'symbols', 'probe', 'firsthit', 'symbolsearch', 'valuenames', 'conditional')]
+    [string]$TraceProfile = 'full',
     [int]$DebuggerAttachLeadSeconds = 10,
     [int]$ShellHealthTimeoutSeconds = 900,
     [int]$PostShellSettleSeconds = 20,
@@ -68,6 +70,61 @@ function New-ArtifactRef {
         collected_utc = if ($item) { $item.LastWriteTimeUtc.ToString('o') } else { $null }
         exists = [bool]$item
     }
+}
+
+function Resolve-TraceLogPath {
+    param([string]$PreferredPath)
+
+    if ([string]::IsNullOrWhiteSpace($PreferredPath)) {
+        return $null
+    }
+
+    $preferredFullPath = [System.IO.Path]::GetFullPath($PreferredPath)
+    if (Test-Path -LiteralPath $preferredFullPath) {
+        return $preferredFullPath
+    }
+
+    $directory = Split-Path -Parent $preferredFullPath
+    if (-not (Test-Path -LiteralPath $directory)) {
+        return $preferredFullPath
+    }
+
+    $stem = [System.IO.Path]::GetFileNameWithoutExtension($preferredFullPath)
+    $extension = [System.IO.Path]::GetExtension($preferredFullPath)
+    $match = Get-ChildItem -LiteralPath $directory -File -ErrorAction SilentlyContinue |
+        Where-Object { $_.Name -like ("{0}*{1}" -f $stem, $extension) } |
+        Sort-Object LastWriteTimeUtc -Descending |
+        Select-Object -First 1
+
+    if ($match) {
+        return $match.FullName
+    }
+
+    return $preferredFullPath
+}
+
+function Get-ConditionalHitLines {
+    param([string[]]$Lines)
+
+    $capturing = $false
+    $capturedLines = New-Object System.Collections.Generic.List[string]
+    foreach ($line in @($Lines)) {
+        if ($line -match 'REGPROBE_KEY_HIT_BEGIN') {
+            $capturing = $true
+            continue
+        }
+
+        if ($line -match 'REGPROBE_KEY_HIT_END') {
+            $capturing = $false
+            continue
+        }
+
+        if ($capturing) {
+            $capturedLines.Add($line.Trim()) | Out-Null
+        }
+    }
+
+    return @($capturedLines)
 }
 
 function Invoke-Vmrun {
@@ -176,6 +233,43 @@ function Request-GuestRestart {
     Invoke-Vmrun -Arguments (@('-T', 'ws') + $GuestAuthArgs + @('runProgramInGuest', $VmPath, 'C:\Windows\System32\shutdown.exe', '/r', '/t', '0', '/f')) -IgnoreExitCode | Out-Null
 }
 
+function Recover-DebugTargetVm {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$VmPath,
+        [Parameter(Mandatory = $true)]
+        [string]$SnapshotName
+    )
+
+    $vmDirectory = Split-Path -Parent $VmPath
+    $lockPath = Join-Path $vmDirectory ([IO.Path]::GetFileName($VmPath) + '.lck')
+    $steps = New-Object System.Collections.Generic.List[string]
+
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'stop', $VmPath, 'hard') -IgnoreExitCode | Out-Null
+    Start-Sleep -Seconds 5
+
+    if (-not (Test-VmRunning -VmPath $VmPath) -and (Test-Path -LiteralPath $lockPath)) {
+        Remove-Item -LiteralPath $lockPath -Recurse -Force -ErrorAction SilentlyContinue
+        $steps.Add('stale-lock-removed') | Out-Null
+    }
+
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $VmPath, $SnapshotName) | Out-Null
+    $steps.Add('reverted-to-debug-snapshot') | Out-Null
+
+    Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $VmPath, 'nogui') | Out-Null
+    $steps.Add('vm-started-nogui') | Out-Null
+
+    [void](Wait-ForVmToolsReady -VmPath $VmPath)
+    $shellSnapshot = Wait-ForShellHealthy -VmPath $VmPath -GuestAuthArgs $guestAuthArgs
+    $steps.Add('shell-healthy-after-recovery') | Out-Null
+
+    return [ordered]@{
+        recovered = $true
+        steps = @($steps)
+        shell_checks = $shellSnapshot.checks
+    }
+}
+
 $bundleFullPath = [System.IO.Path]::GetFullPath($BundlePath)
 if (-not (Test-Path -LiteralPath $bundleFullPath)) {
     throw "WinDbg bundle not found: $bundleFullPath"
@@ -218,6 +312,7 @@ $session = [ordered]@{
     collection_mode = $CollectionMode
     vm_path = $vmPath
     debugger_path = $hostDebuggerPath
+    trace_profile = $TraceProfile
     command_script = Get-RepoDisplayPath -Path $sessionCommandScriptPath
     console_log = Get-RepoDisplayPath -Path $consoleLogPath
     raw_log = Get-RepoDisplayPath -Path $traceLogPath
@@ -230,6 +325,99 @@ $commandLines = @(
         Where-Object { -not [string]::IsNullOrWhiteSpace($_) -and -not $_.StartsWith('$$') }
 )
 $escapedTraceLogPath = $traceLogPath.Replace('\', '\\')
+$registryWatchSymbol = 'nt!CmQueryValueKey'
+$conditionalComparisons = foreach ($key in ($keys | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)) {
+    'wcscmp((wchar_t*)poi(@rdx+8), L\"{0}\")==0' -f $key.Replace('\', '\\').Replace('"', '\"')
+}
+$conditionalExpression = if (@($conditionalComparisons).Count -gt 0) {
+    '@@c++(@rdx != 0 && poi(@rdx+8) != 0 && ({0}))' -f ([string]::Join(' || ', @($conditionalComparisons)))
+}
+else {
+    '0'
+}
+$conditionalBreakpointCommand = 'bs 0 ".if ({0}) {{ .echo REGPROBE_KEY_HIT_BEGIN; du poi(@rdx+8); .echo REGPROBE_KEY_HIT_END; }}; gc"' -f $conditionalExpression
+$modeCommandLines = switch ($TraceProfile) {
+    'minimal' {
+        @(
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_MINIMAL_BEGIN',
+            'g'
+        )
+    }
+    'symbols' {
+        @(
+            '.symfix',
+            '.reload /f',
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_SYMBOLS_BEGIN',
+            'g'
+        )
+    }
+    'probe' {
+        @(
+            '.symfix',
+            '.reload /f',
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_PROBE_BEGIN',
+            'bc *',
+            ('bu {0}' -f $registryWatchSymbol),
+            'bs 0 "gc"',
+            'g'
+        )
+    }
+    'firsthit' {
+        @(
+            '.symfix',
+            '.reload /f',
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_FIRSTHIT_BEGIN',
+            'bc *',
+            ('bu {0}' -f $registryWatchSymbol),
+            'bs 0 ".echo REGPROBE_FIRSTHIT_BREAK; r rcx; r rdx; r r8; r r9; dt nt!_UNICODE_STRING @rdx; du poi(@rdx+8); dt nt!_UNICODE_STRING @r9; du poi(@r9+8); .echo REGPROBE_FIRSTHIT_END; bc 0; gc"',
+            'g'
+        )
+    }
+    'symbolsearch' {
+        @(
+            '.symfix',
+            '.reload /f',
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_SYMBOLSEARCH_BEGIN',
+            'x nt!*CmpQuery*',
+            'x nt!*Cm*Query*Key*',
+            'x nt!*QueryValueKey*',
+            '.echo REGPROBE_SYMBOLSEARCH_END',
+            'g'
+        )
+    }
+    'valuenames' {
+        @(
+            '.symfix',
+            '.reload /f',
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_VALUENAMES_BEGIN',
+            'bc *',
+            ('bu {0}' -f $registryWatchSymbol),
+            'bs 0 ".echo REGPROBE_VALUE_BEGIN; du poi(@rdx+8); .echo REGPROBE_VALUE_END; gc"',
+            'g'
+        )
+    }
+    'conditional' {
+        @(
+            '.symfix',
+            '.reload /f',
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_CONDITIONAL_BEGIN',
+            'bc *',
+            ('bu {0}' -f $registryWatchSymbol),
+            $conditionalBreakpointCommand,
+            'g'
+        )
+    }
+    default {
+        $null
+    }
+}
 $rewroteLogOpen = $false
 $rewrittenCommandLines = foreach ($line in $commandLines) {
     if ($line -match '^\.logopen\s+/t\s+') {
@@ -241,14 +429,18 @@ $rewrittenCommandLines = foreach ($line in $commandLines) {
     }
 }
 if (-not $rewroteLogOpen) {
-    $rewrittenCommandLines = @($rewrittenCommandLines) + @('.logopen /t "{0}"' -f $escapedTraceLogPath)
+    $rewrittenCommandLines = @($rewrittenCommandLines) + @(( '.logopen /t "{0}"' -f $escapedTraceLogPath ))
+}
+if ($TraceProfile -ne 'full') {
+    $rewrittenCommandLines = $modeCommandLines
 }
 Set-Content -LiteralPath $sessionCommandScriptPath -Value $rewrittenCommandLines -Encoding ASCII
 
 $kdArgs = @(
     '-kqm',
+    '-bonc',
     '-k', ("com:pipe,port={0},resets=0,reconnect" -f ([string]$bundle.pipe_name)),
-    '-cf', $sessionCommandScriptPath,
+    '-cfr', $sessionCommandScriptPath,
     '-logo', $consoleLogPath
 )
 
@@ -256,6 +448,7 @@ $kdProcess = $null
 $shellSnapshot = $null
 $runError = $null
 $shellRecovered = $false
+$recovery = $null
 
 try {
     $kdProcess = Start-Process -FilePath $hostDebuggerPath -ArgumentList $kdArgs -WindowStyle Hidden -PassThru
@@ -294,14 +487,20 @@ finally {
     }
 }
 
-$analysisLogPath = if (Test-Path -LiteralPath $traceLogPath) { $traceLogPath } else { $consoleLogPath }
-$analysisSource = if (Test-Path -LiteralPath $traceLogPath) { 'script-log' } elseif (Test-Path -LiteralPath $consoleLogPath) { 'console-log-fallback' } else { 'missing' }
-$analysisText = if (Test-Path -LiteralPath $analysisLogPath) { Get-Content -LiteralPath $analysisLogPath -Raw -ErrorAction SilentlyContinue } else { '' }
+$resolvedTraceLogPath = Resolve-TraceLogPath -PreferredPath $traceLogPath
+$analysisLogPath = if (Test-Path -LiteralPath $resolvedTraceLogPath) { $resolvedTraceLogPath } else { $consoleLogPath }
+$analysisSource = if (Test-Path -LiteralPath $resolvedTraceLogPath) { 'script-log' } elseif (Test-Path -LiteralPath $consoleLogPath) { 'console-log-fallback' } else { 'missing' }
+$consoleText = if (Test-Path -LiteralPath $consoleLogPath) { Get-Content -LiteralPath $consoleLogPath -Raw -ErrorAction SilentlyContinue } else { '' }
+$analysisLines = if (Test-Path -LiteralPath $analysisLogPath) { @(Get-Content -LiteralPath $analysisLogPath -ErrorAction SilentlyContinue) } else { @() }
+$analysisText = if ($analysisLines.Count -gt 0) { [string]::Join([Environment]::NewLine, $analysisLines) } else { '' }
+$scriptExecutionObserved = ($analysisSource -eq 'script-log' -and -not [string]::IsNullOrWhiteSpace($analysisText)) -or ($analysisText -match 'REGPROBE_')
+$conditionalHitLines = if ($TraceProfile -eq 'conditional') { Get-ConditionalHitLines -Lines $analysisLines } else { @() }
 $perKeyResults = @()
 $totalHitKeys = 0
 if (Test-Path -LiteralPath $analysisLogPath) {
     foreach ($key in $keys) {
-        $matches = @(Select-String -LiteralPath $analysisLogPath -Pattern $key -SimpleMatch)
+        $matches = if ($TraceProfile -eq 'conditional') { @($conditionalHitLines | Where-Object { $_ -like "*$key*" }) } else { @(Select-String -LiteralPath $analysisLogPath -Pattern $key -SimpleMatch) }
+        $sampleLines = if ($TraceProfile -eq 'conditional') { @($matches | Select-Object -First 3 | ForEach-Object { [string]$_ }) } else { @($matches | Select-Object -First 3 | ForEach-Object { $_.Line.Trim() }) }
         if ($matches.Count -gt 0) {
             $totalHitKeys++
         }
@@ -309,13 +508,13 @@ if (Test-Path -LiteralPath $analysisLogPath) {
         $perKeyResults += [ordered]@{
             key = $key
             hit_count = $matches.Count
-            sample_lines = @($matches | Select-Object -First 3 | ForEach-Object { $_.Line.Trim() })
+            sample_lines = $sampleLines
         }
     }
 }
 
-$fatalSystemErrorObserved = $analysisText -match 'A fatal system error has occurred'
-$kernelConnected = $analysisText -match 'Kernel Debugger connection established'
+$fatalSystemErrorObserved = ($analysisText -match 'A fatal system error has occurred') -or ($consoleText -match 'A fatal system error has occurred')
+$kernelConnected = ($analysisText -match 'Kernel Debugger connection established') -or ($consoleText -match 'Kernel Debugger connection established')
 $resultStatus = if ($runError -and $fatalSystemErrorObserved) {
     'boot-unsafe'
 }
@@ -325,7 +524,10 @@ elseif ($runError) {
 elseif (-not (Test-Path -LiteralPath $analysisLogPath)) {
     'missing-log'
 }
-elseif ($analysisSource -eq 'console-log-fallback' -and $totalHitKeys -eq 0) {
+elseif (-not $scriptExecutionObserved) {
+    'connected-script-not-observed'
+}
+elseif ($totalHitKeys -eq 0) {
     'connected-no-target-hit'
 }
 elseif ($totalHitKeys -gt 0) {
@@ -333,6 +535,18 @@ elseif ($totalHitKeys -gt 0) {
 }
 else {
     'no-hit'
+}
+
+if ($resultStatus -eq 'boot-unsafe' -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)) {
+    try {
+        $recovery = Recover-DebugTargetVm -VmPath $vmPath -SnapshotName ([string]$bundle.debug_snapshot_name)
+    }
+    catch {
+        $recovery = [ordered]@{
+            recovered = $false
+            error = $_.Exception.Message
+        }
+    }
 }
 
 $results = [ordered]@{
@@ -344,22 +558,22 @@ $results = [ordered]@{
     key_count = @($keys).Count
     hit_key_count = $totalHitKeys
     analysis_source = $analysisSource
+    trace_log_path = if ($resolvedTraceLogPath) { Get-RepoDisplayPath -Path $resolvedTraceLogPath } else { $null }
+    trace_profile = $TraceProfile
     kernel_connected = $kernelConnected
     fatal_system_error_observed = $fatalSystemErrorObserved
     shell_recovered = $shellRecovered
+    script_execution_observed = $scriptExecutionObserved
     error = $runError
+    recovery = $recovery
     keys = $perKeyResults
     shell_checks = if ($shellSnapshot) { $shellSnapshot.checks } else { $null }
 }
 
 $captureArtifacts = @()
-foreach ($artifactPath in @($copiedTraceLogPath, $consoleLogPath, $resultsPath)) {
-    if ($artifactPath -eq $copiedTraceLogPath) {
-        continue
-    }
-}
-
-$captureArtifactPaths = @($traceLogPath, $consoleLogPath, $resultsPath, $sessionCommandScriptPath)
+$captureArtifactPaths = @($resolvedTraceLogPath, $consoleLogPath, $resultsPath, $sessionCommandScriptPath) |
+    Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+    Select-Object -Unique
 foreach ($artifactPath in $captureArtifactPaths) {
     if (Test-Path -LiteralPath $artifactPath) {
         $captureArtifacts += @(New-ArtifactRef -Path $artifactPath)
@@ -378,9 +592,12 @@ $summary = [ordered]@{
     key_count = @($keys).Count
     hit_key_count = $totalHitKeys
     analysis_source = $analysisSource
+    trace_log_path = if ($resolvedTraceLogPath) { Get-RepoDisplayPath -Path $resolvedTraceLogPath } else { $null }
+    trace_profile = $TraceProfile
     kernel_connected = $kernelConnected
     fatal_system_error_observed = $fatalSystemErrorObserved
     shell_recovered = $shellRecovered
+    script_execution_observed = $scriptExecutionObserved
     command_script = Get-RepoDisplayPath -Path $sessionCommandScriptPath
     capture_artifacts = $captureArtifacts
     bundle_ref = Get-RepoDisplayPath -Path $bundleFullPath
@@ -388,6 +605,9 @@ $summary = [ordered]@{
 }
 if ($runError) {
     $summary.error = $runError
+}
+if ($recovery) {
+    $summary.recovery = $recovery
 }
 
 Write-JsonFile -Path $resultsPath -InputObject $results
@@ -402,6 +622,9 @@ $session.summary_path = Get-RepoDisplayPath -Path $summaryPath
 $session.results_path = Get-RepoDisplayPath -Path $resultsPath
 if ($runError) {
     $session.error = $runError
+}
+if ($recovery) {
+    $session.recovery = $recovery
 }
 Write-JsonFile -Path $sessionPath -InputObject $session
 

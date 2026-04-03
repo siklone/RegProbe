@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-04-02T19:55:00Z",
+  "generated_utc": "2026-04-02T23:59:00Z",
   "family": "power-control",
   "pattern": "mega-trigger-v2",
   "pilot_candidate_count": 5,
   "pilot_trigger_count": 8,
   "recovery_safe": true,
   "terminal_vm_state": "shell-healthy-after-restore",
-  "current_status": "windbg-execution-connected-but-boot-unsafe",
+  "current_status": "windbg-cmquery-partial",
   "validated_runs": [
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json",
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json",
@@ -14,24 +14,30 @@
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json"
   ],
   "blockers": [
-    "windbg-boot-unsafe"
+    "windbg-conditional-filter-syntax",
+    "windbg-raw-watch-timeout"
   ],
   "windbg_lane": {
-    "status": "boot-unsafe",
+    "status": "partial",
     "bundle": "registry-research-framework/audit/power-control-windbg-boot-registry-trace-20260402.json",
     "baseline_prep": "registry-research-framework/audit/configure-kernel-debug-baseline.json",
     "command_script": "registry-research-framework/audit/windbg-registry-watch.txt",
     "debug_snapshot_name": "RegProbe-Baseline-Debug-20260402",
     "vm_profile": "secondary",
     "host_debugger_status": "installed",
-    "execution_console_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-001413/kd-console.log",
-    "fatal_system_error_observed": true,
+    "public_registry_symbol": "nt!CmQueryValueKey",
+    "value_name_argument": "@rdx",
+    "command_execution_observed": true,
+    "symbol_search_log": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-014256/windbg-registry-trace_59e0_2026-04-03_01-44-20-117.log",
+    "first_hit_log": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-014903/windbg-registry-trace_01ac_2026-04-03_01-50-38-815.log",
+    "raw_watch_results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-015149/results.json",
+    "conditional_watch_results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-023157/results.json",
     "vm_recovered": true
   },
   "next_actions": [
-    "stabilize the kd execution lane so it classifies boot-unsafe runs cleanly",
-    "investigate the fatal system error / debugger break under the current VMware serial-pipe configuration",
-    "only widen beyond the 5-key pilot after the WinDbg pass is stable"
+    "replace the failing bs/.if conditional command with a parser-safe filtered command form for nt!CmQueryValueKey",
+    "keep the WinDbg watch light enough that shell health returns without requiring a post-run recovery",
+    "only widen beyond the 5-key pilot after the filtered WinDbg pass becomes terminal"
   ],
   "pilot_outcome": {
     "status": "no-hit",

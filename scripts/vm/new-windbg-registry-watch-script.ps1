@@ -16,7 +16,7 @@ if (-not [string]::IsNullOrWhiteSpace($parent)) {
 
 $lines = New-Object System.Collections.Generic.List[string]
 $lines.Add('$$ RegProbe WinDbg boot registry watch script')
-$lines.Add('$$ This script logs all CmpQueryValueKey reads and relies on post-filtering for the target names below.')
+$lines.Add('$$ This script logs CmQueryValueKey value-name probes and relies on post-filtering for the target names below.')
 $lines.Add('.symfix')
 $lines.Add('.reload /f')
 $lines.Add(('.logopen /t "{0}"' -f $LogPath.Replace('\', '\\')))
@@ -25,7 +25,9 @@ foreach ($keyName in @($KeyNames | Where-Object { -not [string]::IsNullOrWhiteSp
     $lines.Add(('.echo {0}' -f $keyName))
 }
 $lines.Add('.echo REGPROBE_WATCH_KEYS_END')
-$lines.Add('bp nt!CmpQueryValueKey ".echo REGPROBE_CMPQUERY_BEGIN; du @r8; kb; .echo REGPROBE_CMPQUERY_END; gc"')
+$lines.Add('bc *')
+$lines.Add('bu nt!CmQueryValueKey')
+$lines.Add('bs 0 ".echo REGPROBE_VALUE_BEGIN; du poi(@rdx+8); .echo REGPROBE_VALUE_END; gc"')
 $lines.Add('g')
 
 Set-Content -Path $OutputPath -Value $lines -Encoding ASCII
@@ -35,5 +37,5 @@ Set-Content -Path $OutputPath -Value $lines -Encoding ASCII
     output_path = $OutputPath
     log_path = $LogPath
     key_count = @($KeyNames).Count
-    mode = 'all-cmpquery-postfilter'
+    mode = 'cmquery-valuename-postfilter'
 } | ConvertTo-Json -Depth 5

@@ -189,7 +189,7 @@ $payload = [ordered]@{
     prep = $baselinePrep
     notes = @(
         'Use this lane only after ETW mega-trigger leaves a no-hit hold queue.',
-        'This command script logs all CmpQueryValueKey reads; post-filter the resulting log for the requested key names.',
+        'This command script currently targets nt!CmQueryValueKey and logs value names from the UNICODE_STRING pointer in @rdx.',
         'WinDbg acts as the dead-flag final arbiter: ETW no-hit + WinDbg no-hit is the strongest dead-flag signal.'
     )
 }
