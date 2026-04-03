@@ -3,13 +3,21 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputFile,
     [string[]]$Keys = @(),
+    [string]$TargetKey = '',
     [string]$VmProfile = '',
     [string]$VmPath = '',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
+    [string]$GuestUser = 'Administrator',
+    [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
+    [string]$CredentialFilePath = '',
     [string]$PipeName = '\\.\pipe\regprobe_debug',
     [string]$DebugSnapshotName = 'RegProbe-Baseline-Debug-20260402',
     [ValidateSet('evidence', 'operational')]
     [string]$CollectionMode = 'evidence',
+    [ValidateSet('multi-postfilter', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
+    [string]$TraceProfile = 'multi-postfilter',
+    [int]$NoiseBudgetBytes = 262144,
+    [int]$RawHitLimit = 100,
     [switch]$PrepareBaseline
 )
 
@@ -52,7 +60,27 @@ $commandScriptPath = Join-Path $outputRoot 'windbg-registry-watch.txt'
 $commandScriptRef = Get-RepoDisplayPath -Path $commandScriptPath
 $portableCommandScript = ('<REPO_ROOT>\{0}' -f ($commandScriptRef -replace '/', '\'))
 $logPath = 'C:\RegProbe-Diag\windbg-registry-trace.log'
-$generatorOutput = & $generatorScript -KeyNames $Keys -OutputPath $commandScriptPath -LogPath $logPath | ConvertFrom-Json
+$resolvedKeys = @($Keys | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
+if (-not [string]::IsNullOrWhiteSpace($TargetKey)) {
+    $resolvedKeys = @($TargetKey)
+}
+if ($TraceProfile -like 'singlekey-*' -and $resolvedKeys.Count -ne 1) {
+    throw "TraceProfile '$TraceProfile' requires exactly one target key."
+}
+$resolvedTargetKey = if ($resolvedKeys.Count -eq 1) { [string]$resolvedKeys[0] } else { $null }
+$generatorArgs = @{
+    OutputPath = $commandScriptPath
+    LogPath = $logPath
+    TraceProfile = $TraceProfile
+    RawHitLimit = $RawHitLimit
+}
+if ($resolvedTargetKey) {
+    $generatorArgs.TargetKey = $resolvedTargetKey
+}
+elseif ($resolvedKeys.Count -gt 0) {
+    $generatorArgs.KeyNames = $resolvedKeys
+}
+$generatorOutput = & $generatorScript @generatorArgs | ConvertFrom-Json
 
 function New-ArtifactRef {
     param([string]$Path)
@@ -120,9 +148,15 @@ $resolvedWinDbg = Resolve-DebuggerCandidate -CandidatePaths $commonWinDbgPaths
 $baselinePrep = $null
 $baselinePrepPath = Join-Path $outputRoot 'configure-kernel-debug-baseline.json'
 if ($PrepareBaseline) {
-    $prepArgs = @('-VmPath', $VmPath, '-VmrunPath', $VmrunPath, '-PipeName', $PipeName, '-CreateSnapshotName', $DebugSnapshotName, '-OutputPath', $baselinePrepPath)
+    $prepArgs = @('-VmPath', $VmPath, '-VmrunPath', $VmrunPath, '-GuestUser', $GuestUser, '-PipeName', $PipeName, '-CreateSnapshotName', $DebugSnapshotName, '-OutputPath', $baselinePrepPath)
     if (-not [string]::IsNullOrWhiteSpace($VmProfile)) {
         $prepArgs += @('-VmProfile', $VmProfile)
+    }
+    if (-not [string]::IsNullOrWhiteSpace($GuestPassword)) {
+        $prepArgs += @('-GuestPassword', $GuestPassword)
+    }
+    if (-not [string]::IsNullOrWhiteSpace($CredentialFilePath)) {
+        $prepArgs += @('-CredentialFilePath', $CredentialFilePath)
     }
     & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $configureScript @prepArgs | Out-Null
     if (Test-Path -LiteralPath $baselinePrepPath) {
@@ -171,12 +205,17 @@ $payload = [ordered]@{
     collection_mode = $CollectionMode
     rollback_pending = ($CollectionMode -eq 'evidence')
     runner_required = $true
-    key_count = @($Keys).Count
-    keys = @($Keys | Sort-Object -Unique)
+    key_count = @($resolvedKeys).Count
+    keys = @($resolvedKeys)
+    target_key = $resolvedTargetKey
+    trace_profile = $TraceProfile
+    noise_budget_bytes = $NoiseBudgetBytes
+    raw_hit_limit = $RawHitLimit
     command_script = $commandScriptRef
     log_path = $logPath
     attach_mode = 'manual-kernel-debug'
     breakpoint_mode = $generatorOutput.mode
+    runner_output_policy = 'raw+sanitized'
     windbg_path = $resolvedWinDbg
     windbg_command = $resolvedWindbgCommand
     status = $resolvedStatus
@@ -189,7 +228,7 @@ $payload = [ordered]@{
     prep = $baselinePrep
     notes = @(
         'Use this lane only after ETW mega-trigger leaves a no-hit hold queue.',
-        'This command script currently targets nt!CmQueryValueKey and logs value names from the UNICODE_STRING pointer in @rdx.',
+        'This command script targets nt!CmQueryValueKey with parser-safe bu + bs 0 commands.',
         'WinDbg acts as the dead-flag final arbiter: ETW no-hit + WinDbg no-hit is the strongest dead-flag signal.'
     )
 }

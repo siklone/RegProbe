@@ -6,7 +6,7 @@
   "pilot_trigger_count": 8,
   "recovery_safe": true,
   "terminal_vm_state": "shell-healthy-after-restore",
-  "current_status": "windbg-cmquery-partial",
+  "current_status": "windbg-singlekey-transport-partial",
   "validated_runs": [
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json",
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json",
@@ -15,7 +15,8 @@
   ],
   "blockers": [
     "windbg-conditional-filter-syntax",
-    "windbg-raw-watch-timeout"
+    "windbg-raw-watch-timeout",
+    "windbg-singlekey-transport-error"
   ],
   "windbg_lane": {
     "status": "partial",
@@ -32,12 +33,18 @@
     "first_hit_log": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-014903/windbg-registry-trace_01ac_2026-04-03_01-50-38-815.log",
     "raw_watch_results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-015149/results.json",
     "conditional_watch_results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-023157/results.json",
+    "singlekey_bundle": "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
+    "singlekey_target": "AllowSystemRequiredPowerRequests",
+    "singlekey_bcd_proof": "registry-research-framework/audit/bcd-current-20260403.txt",
+    "singlekey_smoke_results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240/summary.json",
+    "singlekey_transport_status": "trace-error",
+    "singlekey_transport_failure": "host-cannot-communicate-with-target",
     "vm_recovered": true
   },
   "next_actions": [
-    "replace the failing bs/.if conditional command with a parser-safe filtered command form for nt!CmQueryValueKey",
+    "fix the cold-boot debugger transport failure for the single-key lane",
     "keep the WinDbg watch light enough that shell health returns without requiring a post-run recovery",
-    "only widen beyond the 5-key pilot after the filtered WinDbg pass becomes terminal"
+    "only widen beyond the 5-key pilot after the connected single-key WinDbg pass becomes terminal"
   ],
   "pilot_outcome": {
     "status": "no-hit",

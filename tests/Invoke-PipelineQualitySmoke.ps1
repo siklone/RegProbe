@@ -14,7 +14,10 @@ $parserTargets = @(
     'registry-research-framework\tools\run-power-control-batch-mega-trigger-runtime.ps1',
     'registry-research-framework\tools\run-path-aware-runtime-probe.ps1',
     'scripts\vm\get-vm-shell-health.ps1',
-    'scripts\vm\configure-kernel-debug-baseline.ps1'
+    'scripts\vm\configure-kernel-debug-baseline.ps1',
+    'scripts\vm\new-windbg-registry-watch-script.ps1',
+    'registry-research-framework\tools\run-windbg-boot-registry-trace.ps1',
+    'registry-research-framework\tools\execute-windbg-boot-registry-trace.ps1'
 )
 
 foreach ($relative in $parserTargets) {
@@ -98,6 +101,43 @@ try {
         $latest = Get-Content -LiteralPath $manifests[0].FullName -Raw | ConvertFrom-Json
         if ([int]$latest.changed_file_count -lt 1) {
             throw 'Sanitization config-driven dry-run did not detect expected change.'
+        }
+
+        $privateRunnerRoot = Join-Path $tempRepoRoot 'private-runner-output'
+        $oldPrivateRunnerRoot = $env:REGPROBE_PRIVATE_RUNNER_OUTPUT_ROOT
+        try {
+            $env:REGPROBE_PRIVATE_RUNNER_OUTPUT_ROOT = $privateRunnerRoot
+            . (Join-Path $repoRoot 'registry-research-framework\tools\_lane-manifest-lib.ps1')
+            $rawRunnerLog = Join-Path $tempRepoRoot 'runner.log'
+            Set-Content -LiteralPath $rawRunnerLog -Value 'vmrun -gp secret-value C:\Users\TestUser\AppData\Local\Temp\trace.log' -Encoding UTF8
+            $published = Publish-RunnerOutputArtifacts -Label 'smoke' -RawPath $rawRunnerLog -SanitizedOutputPath (Join-Path $tempRepoRoot 'runner.public.log')
+            if ($published.private_storage_status -ne 'copied' -or -not $published.public_sanitized_ref.exists) {
+                throw 'Runner output dual-publish failed.'
+            }
+            $sanitizedText = Get-Content -LiteralPath (Join-Path $tempRepoRoot 'runner.public.log') -Raw
+            if ($sanitizedText -match 'secret-value' -or $sanitizedText -match 'TestUser') {
+                throw 'Runner output sanitization failed.'
+            }
+        }
+        finally {
+            $env:REGPROBE_PRIVATE_RUNNER_OUTPUT_ROOT = $oldPrivateRunnerRoot
+        }
+
+        $baselineGuardPath = Join-Path $tempRepoRoot 'baseline-guard.json'
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm\configure-kernel-debug-baseline.ps1') -VmPath 'C:\Fake\Win25H2.vmx' -OutputPath $baselineGuardPath -GuestPassword 'unused' | Out-Null
+        $baselineGuard = Get-Content -LiteralPath $baselineGuardPath -Raw | ConvertFrom-Json
+        if ($baselineGuard.status -ne 'blocked-snapshot-gate') {
+            throw 'Kernel debug baseline snapshot gate did not block unsafe mutation.'
+        }
+
+        $windbgScriptPath = Join-Path $tempRepoRoot 'windbg-singlekey.txt'
+        $windbgGeneratorOutput = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm\new-windbg-registry-watch-script.ps1') -TargetKey 'AllowSystemRequiredPowerRequests' -TraceProfile 'singlekey-rawbounded' -OutputPath $windbgScriptPath | ConvertFrom-Json
+        if ($windbgGeneratorOutput.mode -ne 'singlekey-rawbounded' -or $windbgGeneratorOutput.target_key -ne 'AllowSystemRequiredPowerRequests') {
+            throw 'Single-key WinDbg generator contract failed.'
+        }
+        $windbgScriptText = Get-Content -LiteralPath $windbgScriptPath -Raw
+        if ($windbgScriptText -notmatch 'bu nt!CmQueryValueKey' -or $windbgScriptText -notmatch 'REGPROBE_TARGET\|AllowSystemRequiredPowerRequests') {
+            throw 'Single-key WinDbg script contents are incomplete.'
         }
     }
     finally {

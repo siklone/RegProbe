@@ -14,6 +14,8 @@ param(
     [int]$VmToolsTimeoutSeconds = 600,
     [int]$ShellHealthTimeoutSeconds = 1200,
     [int]$PollIntervalSeconds = 10,
+    [switch]$RevertDebugSettings,
+    [switch]$ForceWithoutSnapshot,
     [switch]$SkipVmxUpdate,
     [switch]$SkipGuestBootConfig
 )
@@ -21,8 +23,6 @@ param(
 $ErrorActionPreference = 'Stop'
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 . (Join-Path $PSScriptRoot '_vmrun-common.ps1')
-$guestCredential = Resolve-RegProbeVmCredential -GuestUser $GuestUser -GuestPassword $GuestPassword -CredentialFilePath $CredentialFilePath
-$guestAuthArgs = Get-RegProbeVmrunAuthArguments -Credential $guestCredential
 $resolverPath = Join-Path $PSScriptRoot '_resolve-vm-baseline.ps1'
 if (Test-Path -LiteralPath $resolverPath) {
     . $resolverPath
@@ -236,6 +236,7 @@ Start-Sleep -Milliseconds 250
 $vmxPath = [System.IO.Path]::GetFullPath($VmPath)
 $resolvedVmProfile = if ([string]::IsNullOrWhiteSpace($VmProfile)) { 'primary' } else { $VmProfile }
 $resolvedSnapshotName = if ([string]::IsNullOrWhiteSpace($CreateSnapshotName)) { $null } else { $CreateSnapshotName }
+$mutationRequested = (-not $SkipVmxUpdate) -or (-not $SkipGuestBootConfig) -or $RevertDebugSettings
 
 $result = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
@@ -256,9 +257,41 @@ $result = [ordered]@{
     snapshot_created = $false
     snapshot_existing = $false
     snapshot_name = $resolvedSnapshotName
+    snapshot_gate_enforced = $true
+    snapshot_gate_passed = $false
+    force_without_snapshot = [bool]$ForceWithoutSnapshot
+    revert_guard_requested = [bool]$RevertDebugSettings
+    revert_guard_applied = $false
+    guest_boot_debug_reverted = $false
+    vmx_serial_pipe_reverted = $false
     steps = @()
     status = 'staged'
 }
+
+if ($RevertDebugSettings -and $SkipGuestBootConfig) {
+    $result.status = 'blocked-invalid-revert-mode'
+    $result.error = 'RevertDebugSettings requires guest boot configuration access.'
+    if ($OutputPath) {
+        Write-JsonFile -Path $OutputPath -InputObject $result
+    }
+    $result | ConvertTo-Json -Depth 8
+    return
+}
+
+if ($mutationRequested -and [string]::IsNullOrWhiteSpace($resolvedSnapshotName) -and -not $ForceWithoutSnapshot) {
+    $result.status = 'blocked-snapshot-gate'
+    $result.error = 'Snapshot gate refused to mutate kernel debug settings without CreateSnapshotName. Pass -ForceWithoutSnapshot only for explicit emergency use.'
+    $result.steps += 'snapshot-gate-blocked'
+    if ($OutputPath) {
+        Write-JsonFile -Path $OutputPath -InputObject $result
+    }
+    $result | ConvertTo-Json -Depth 8
+    return
+}
+
+$result.snapshot_gate_passed = $true
+$guestCredential = Resolve-RegProbeVmCredential -GuestUser $GuestUser -GuestPassword $GuestPassword -CredentialFilePath $CredentialFilePath
+$guestAuthArgs = Get-RegProbeVmrunAuthArguments -Credential $guestCredential
 
 try {
     $result.vm_running = Test-VmRunning
@@ -272,13 +305,20 @@ try {
     }
 
     if (-not $SkipVmxUpdate) {
-        Set-VmxKeyValue -Path $vmxPath -Key 'serial0.present' -Value 'TRUE'
-        Set-VmxKeyValue -Path $vmxPath -Key 'serial0.fileType' -Value 'pipe'
-        Set-VmxKeyValue -Path $vmxPath -Key 'serial0.fileName' -Value $PipeName
-        Set-VmxKeyValue -Path $vmxPath -Key 'serial0.tryNoRxLoss' -Value 'TRUE'
-        Set-VmxKeyValue -Path $vmxPath -Key 'serial0.pipe.endPoint' -Value 'server'
+        if ($RevertDebugSettings) {
+            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.present' -Value 'FALSE'
+            $result.vmx_serial_pipe_reverted = $true
+            $result.steps += 'vmx-serial-pipe-disabled'
+        }
+        else {
+            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.present' -Value 'TRUE'
+            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.fileType' -Value 'pipe'
+            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.fileName' -Value $PipeName
+            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.tryNoRxLoss' -Value 'TRUE'
+            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.pipe.endPoint' -Value 'server'
+            $result.steps += 'vmx-serial-pipe-configured'
+        }
         $result.vmx_updated = $true
-        $result.steps += 'vmx-serial-pipe-configured'
     }
 
     if (-not $SkipGuestBootConfig) {
@@ -301,14 +341,22 @@ try {
         $result.shell_checks = $shellSnapshot.checks
         $result.steps += 'shell-healthy-before-bcdedit'
 
-        Invoke-GuestProgram -FilePath 'C:\Windows\System32\bcdedit.exe' -ArgumentList @('/debug', 'on')
-        Invoke-GuestProgram -FilePath 'C:\Windows\System32\bcdedit.exe' -ArgumentList @('/dbgsettings', 'serial', ("debugport:{0}" -f $DebugPort), ("baudrate:{0}" -f $BaudRate))
-        $result.guest_boot_debug_updated = $true
-        $result.steps += 'guest-bcdedit-debug-enabled'
+        if ($RevertDebugSettings) {
+            Invoke-GuestProgram -FilePath 'C:\Windows\System32\bcdedit.exe' -ArgumentList @('/debug', 'off')
+            $result.guest_boot_debug_reverted = $true
+            $result.revert_guard_applied = $true
+            $result.steps += 'guest-bcdedit-debug-disabled'
+        }
+        else {
+            Invoke-GuestProgram -FilePath 'C:\Windows\System32\bcdedit.exe' -ArgumentList @('/debug', 'on')
+            Invoke-GuestProgram -FilePath 'C:\Windows\System32\bcdedit.exe' -ArgumentList @('/dbgsettings', 'serial', ("debugport:{0}" -f $DebugPort), ("baudrate:{0}" -f $BaudRate))
+            $result.guest_boot_debug_updated = $true
+            $result.steps += 'guest-bcdedit-debug-enabled'
+        }
 
         Request-GuestRestartAsync
         $result.guest_rebooted = $true
-        $result.steps += 'guest-restart-requested'
+        $result.steps += if ($RevertDebugSettings) { 'guest-restart-requested-for-revert' } else { 'guest-restart-requested' }
         Start-Sleep -Seconds 10
 
         $result.tools_state = Wait-ForVmToolsReady -TimeoutSeconds $VmToolsTimeoutSeconds
@@ -332,7 +380,10 @@ try {
         }
     }
 
-    $result.status = if ($result.vmx_updated -or $result.guest_boot_debug_updated -or $result.snapshot_created) {
+    $result.status = if ($RevertDebugSettings -and ($result.guest_boot_debug_reverted -or $result.vmx_serial_pipe_reverted)) {
+        'reverted'
+    }
+    elseif ($result.vmx_updated -or $result.guest_boot_debug_updated -or $result.snapshot_created) {
         'configured'
     }
     else {
@@ -342,6 +393,32 @@ try {
 catch {
     $result.status = 'error'
     $result.error = $_.Exception.Message
+
+    if (-not $RevertDebugSettings -and $result.guest_boot_debug_updated -and -not $result.snapshot_created -and -not $result.snapshot_existing) {
+        try {
+            if (-not $result.vm_running) {
+                Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $vmxPath, 'nogui') -IgnoreExitCode | Out-Null
+                Start-Sleep -Seconds 5
+                $result.vm_running = Test-VmRunning
+            }
+
+            if ($result.vm_running) {
+                $result.tools_state = Wait-ForVmToolsReady -TimeoutSeconds $VmToolsTimeoutSeconds
+                $shellSnapshot = Wait-ForShellHealthy -TimeoutSeconds $ShellHealthTimeoutSeconds
+                $result.shell_healthy = [bool]$shellSnapshot.shell_healthy
+                $result.shell_checks = $shellSnapshot.checks
+                Invoke-GuestProgram -FilePath 'C:\Windows\System32\bcdedit.exe' -ArgumentList @('/debug', 'off')
+                $result.guest_boot_debug_reverted = $true
+                $result.revert_guard_applied = $true
+                $result.steps += 'revert-guard-debug-disabled'
+                Request-GuestRestartAsync
+                $result.steps += 'revert-guard-restart-requested'
+            }
+        }
+        catch {
+            $result.revert_guard_error = $_.Exception.Message
+        }
+    }
 }
 
 if ($OutputPath) {

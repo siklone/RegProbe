@@ -32,9 +32,96 @@ function Sanitize-RunnerOutput {
     $repo = [System.IO.Path]::GetFullPath($repoRoot)
     $repoPattern = [regex]::Escape($repo)
     $sanitized = [regex]::Replace($sanitized, $repoPattern, "")
-    $sanitized = [regex]::Replace($sanitized, '(?im)(-gp\\s+)(\\S+)', '$1<redacted>')
+    $sanitized = [regex]::Replace($sanitized, '(?im)(-gp\s+)(\S+)', '$1<redacted>')
     $sanitized = [regex]::Replace($sanitized, '(?im)(?<![A-Za-z0-9])[A-Z]:\\[^\r\n]+', '<local-path>')
     return $sanitized.Trim()
+}
+
+function New-LaneArtifactRef {
+    param(
+        [string]$Path,
+        [hashtable]$Extra = @{}
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Path)) {
+        return $null
+    }
+
+    $full = [System.IO.Path]::GetFullPath($Path)
+    $item = if (Test-Path -LiteralPath $full) { Get-Item -LiteralPath $full } else { $null }
+    $display = Get-RepoDisplayPath -Path $full
+
+    $payload = [ordered]@{
+        path = $display
+        sha256 = if ($item) { (Get-FileHash -LiteralPath $full -Algorithm SHA256).Hash.ToLowerInvariant() } else { $null }
+        size = if ($item) { [int64]$item.Length } else { $null }
+        collected_utc = if ($item) { $item.LastWriteTimeUtc.ToString('o') } else { $null }
+        exists = [bool]$item
+    }
+
+    foreach ($key in $Extra.Keys) {
+        $payload[$key] = $Extra[$key]
+    }
+
+    return $payload
+}
+
+function Publish-RunnerOutputArtifacts {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Label,
+        [string]$RawPath,
+        [string]$SanitizedOutputPath,
+        [string]$SanitizedText = '',
+        [string]$PrivateRoot = $env:REGPROBE_PRIVATE_RUNNER_OUTPUT_ROOT
+    )
+
+    $rawFullPath = if ([string]::IsNullOrWhiteSpace($RawPath)) { $null } else { [System.IO.Path]::GetFullPath($RawPath) }
+    $rawExists = -not [string]::IsNullOrWhiteSpace($rawFullPath) -and (Test-Path -LiteralPath $rawFullPath)
+    $resolvedSanitizedText = $SanitizedText
+    if ([string]::IsNullOrWhiteSpace($resolvedSanitizedText) -and $rawExists) {
+        $resolvedSanitizedText = Sanitize-RunnerOutput -Text (Get-Content -LiteralPath $rawFullPath -Raw -ErrorAction SilentlyContinue)
+    }
+
+    $sanitizedRef = $null
+    if (-not [string]::IsNullOrWhiteSpace($SanitizedOutputPath) -and -not [string]::IsNullOrWhiteSpace($resolvedSanitizedText)) {
+        $sanitizedParent = Split-Path -Parent $SanitizedOutputPath
+        if (-not [string]::IsNullOrWhiteSpace($sanitizedParent)) {
+            New-Item -ItemType Directory -Path $sanitizedParent -Force | Out-Null
+        }
+        Set-Content -LiteralPath $SanitizedOutputPath -Value $resolvedSanitizedText -Encoding UTF8
+        $sanitizedRef = New-LaneArtifactRef -Path $SanitizedOutputPath -Extra @{ visibility = 'public-sanitized' }
+    }
+
+    $privateStorageStatus = if ($rawExists) { 'not-configured' } else { 'source-missing' }
+    $privateRawRef = $null
+    if ($rawExists -and -not [string]::IsNullOrWhiteSpace($PrivateRoot)) {
+        try {
+            $privateRootFull = [System.IO.Path]::GetFullPath($PrivateRoot)
+            $privateLabel = ($Label -replace '[^A-Za-z0-9._-]+', '-').Trim('-')
+            if ([string]::IsNullOrWhiteSpace($privateLabel)) {
+                $privateLabel = 'runner-output'
+            }
+            $privateDir = Join-Path $privateRootFull (Get-Date -Format 'yyyyMMdd')
+            New-Item -ItemType Directory -Path $privateDir -Force | Out-Null
+            $privateLeaf = '{0}-{1}{2}' -f $privateLabel, ([guid]::NewGuid().ToString('N')), [System.IO.Path]::GetExtension($rawFullPath)
+            $privatePath = Join-Path $privateDir $privateLeaf
+            Copy-Item -LiteralPath $rawFullPath -Destination $privatePath -Force
+            $privateRawRef = New-LaneArtifactRef -Path $privatePath -Extra @{ visibility = 'private-raw' }
+            $privateStorageStatus = 'copied'
+        }
+        catch {
+            $privateStorageStatus = 'copy-failed'
+        }
+    }
+
+    return [ordered]@{
+        label = $Label
+        raw_source_path = $rawFullPath
+        private_storage_status = $privateStorageStatus
+        raw_private_ref = $privateRawRef
+        public_sanitized_ref = $sanitizedRef
+    }
 }
 
 function Get-RunnerResultRef {

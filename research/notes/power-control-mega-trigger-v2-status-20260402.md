@@ -62,6 +62,43 @@ The secondary VM was recovered after the heavy watch attempts and is healthy aga
 
 - `registry-research-framework/audit/configure-kernel-debug-baseline.json`
 
+## Single-Key WinDbg Lane
+
+The lane has now been narrowed to one key at a time to answer the earlier parser/bloat criticism more directly.
+
+What is now implemented:
+
+- `configure-kernel-debug-baseline.ps1` now enforces a snapshot gate and adds a revert guard path
+- runner outputs are now emitted as `raw + sanitized` pairs instead of only one public log surface
+- the `WinDbg` generator and executor now support:
+  - `singlekey-smoke`
+  - `singlekey-firsthit`
+  - `singlekey-rawbounded`
+- the first canonical bundle is now:
+  - `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`
+
+The first single-key target is:
+
+- `AllowSystemRequiredPowerRequests`
+
+Support proof that the current guest is still debug-enabled:
+
+- `registry-research-framework/audit/bcd-current-20260403.txt`
+
+Current outcome for the first single-key lane:
+
+- the lane is now parser-safe and low-noise at the script level
+- but the actual cold-boot attach still fails at transport level before target execution becomes trustworthy
+- the observed host-side failure is:
+  - `Failed to write breakin packet`
+  - `WARNING: The HOST cannot communicate with the TARGET!`
+
+That means:
+
+- this is **not** a valid `no-hit`
+- `AllowSystemRequiredPowerRequests` is still in `WinDbg` escalation, not yet classified by the final arbiter
+- the current blocker is debugger transport/reconnect, not parser syntax or documentation bloat
+
 ## Repo Truth
 
 These 5 no-hit candidates are still the active escalation set:
@@ -79,6 +116,6 @@ The current attach bundle has been corrected to public-symbol reality:
 
 ## Next Follow-Up
 
-1. replace the failing conditional `bs/.if` command with a parser-safe filtered command form for `nt!CmQueryValueKey`
+1. fix the cold-boot debugger transport failure for the single-key lane
 2. keep the watch lightweight enough that shell health returns without needing a post-run recovery
-3. only after a clean filtered `WinDbg` pass should these 5 values move to early-boot-read vs true dead/no-hit decisioning
+3. only after a real connected single-key `WinDbg` pass should these 5 values move to early-boot-read vs true dead/no-hit decisioning

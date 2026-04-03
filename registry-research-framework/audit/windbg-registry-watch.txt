@@ -1,16 +1,12 @@
 $$ RegProbe WinDbg boot registry watch script
-$$ This script logs CmQueryValueKey value-name probes and relies on post-filtering for the target names below.
+$$ This script targets nt!CmQueryValueKey using public symbols and parser-safe bu + bs 0 commands.
 .symfix
 .reload /f
 .logopen /t "C:\\RegProbe-Diag\\windbg-registry-trace.log"
-.echo REGPROBE_WATCH_KEYS_BEGIN
-.echo AllowAudioToEnableExecutionRequiredPowerRequests
-.echo AllowSystemRequiredPowerRequests
-.echo AlwaysComputeQosHints
-.echo CoalescingFlushInterval
-.echo IdleProcessorsRequireQosManagement
-.echo REGPROBE_WATCH_KEYS_END
+.echo REGPROBE_PROFILE|singlekey-rawbounded
+.echo REGPROBE_TARGET|AllowSystemRequiredPowerRequests
+.echo REGPROBE_RAW_HIT_LIMIT|100
 bc *
 bu nt!CmQueryValueKey
-bs 0 ".echo REGPROBE_VALUE_BEGIN; du poi(@rdx+8); .echo REGPROBE_VALUE_END; gc"
+bs 0 ".echo REGPROBE_VALUE_BEGIN; du poi(@rdx+8) L1; .echo REGPROBE_VALUE_END; gc"
 g

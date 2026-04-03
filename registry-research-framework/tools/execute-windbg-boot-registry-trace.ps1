@@ -12,17 +12,20 @@ param(
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$CredentialFilePath = '',
-    [ValidateSet('full', 'minimal', 'symbols', 'probe', 'firsthit', 'symbolsearch', 'valuenames', 'conditional')]
+    [ValidateSet('full', 'minimal', 'symbols', 'probe', 'firsthit', 'symbolsearch', 'valuenames', 'conditional', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
     [string]$TraceProfile = 'full',
     [int]$DebuggerAttachLeadSeconds = 10,
     [int]$ShellHealthTimeoutSeconds = 900,
     [int]$PostShellSettleSeconds = 20,
-    [int]$PollIntervalSeconds = 10
+    [int]$PollIntervalSeconds = 10,
+    [int]$NoiseBudgetBytes = 262144,
+    [int]$NoiseBudgetEventLimit = 100
 )
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 . (Join-Path $repoRoot 'scripts\vm\_vmrun-common.ps1')
+. (Join-Path $PSScriptRoot '_lane-manifest-lib.ps1')
 
 function Write-JsonFile {
     param(
@@ -54,22 +57,6 @@ function Get-RepoDisplayPath {
     }
 
     return $full
-}
-
-function New-ArtifactRef {
-    param([string]$Path)
-
-    $display = Get-RepoDisplayPath -Path $Path
-    $full = [System.IO.Path]::GetFullPath($Path)
-    $item = if (Test-Path -LiteralPath $full) { Get-Item -LiteralPath $full } else { $null }
-
-    return [ordered]@{
-        path = $display
-        sha256 = if ($item) { (Get-FileHash -LiteralPath $full -Algorithm SHA256).Hash.ToLowerInvariant() } else { $null }
-        size = if ($item) { [int64]$item.Length } else { $null }
-        collected_utc = if ($item) { $item.LastWriteTimeUtc.ToString('o') } else { $null }
-        exists = [bool]$item
-    }
 }
 
 function Resolve-TraceLogPath {
@@ -125,6 +112,158 @@ function Get-ConditionalHitLines {
     }
 
     return @($capturedLines)
+}
+
+function Get-MarkerBlocks {
+    param(
+        [string[]]$Lines,
+        [string]$BeginMarker,
+        [string]$EndMarker
+    )
+
+    $blocks = New-Object System.Collections.Generic.List[string]
+    $capturing = $false
+    $current = New-Object System.Collections.Generic.List[string]
+    foreach ($line in @($Lines)) {
+        if ($line -match [regex]::Escape($BeginMarker)) {
+            $capturing = $true
+            $current = New-Object System.Collections.Generic.List[string]
+            continue
+        }
+
+        if ($line -match [regex]::Escape($EndMarker)) {
+            if ($capturing) {
+                $blocks.Add(([string]::Join([Environment]::NewLine, @($current)))) | Out-Null
+            }
+            $capturing = $false
+            continue
+        }
+
+        if ($capturing) {
+            $current.Add($line.Trim()) | Out-Null
+        }
+    }
+
+    return @($blocks)
+}
+
+function Get-TraceObservation {
+    param(
+        [string]$PreferredTraceLogPath,
+        [string]$ConsoleLogPath,
+        [string]$TargetKey = ''
+    )
+
+    $resolvedTraceLogPath = Resolve-TraceLogPath -PreferredPath $PreferredTraceLogPath
+    $analysisLogPath = if (Test-Path -LiteralPath $resolvedTraceLogPath) { $resolvedTraceLogPath } elseif (Test-Path -LiteralPath $ConsoleLogPath) { $ConsoleLogPath } else { $null }
+    $analysisSource = if (Test-Path -LiteralPath $resolvedTraceLogPath) { 'script-log' } elseif (Test-Path -LiteralPath $ConsoleLogPath) { 'console-log-fallback' } else { 'missing' }
+    $analysisLines = if ($analysisLogPath) { @(Get-Content -LiteralPath $analysisLogPath -ErrorAction SilentlyContinue) } else { @() }
+    $analysisText = if ($analysisLines.Count -gt 0) { [string]::Join([Environment]::NewLine, $analysisLines) } else { '' }
+    $consoleText = if (Test-Path -LiteralPath $ConsoleLogPath) { Get-Content -LiteralPath $ConsoleLogPath -Raw -ErrorAction SilentlyContinue } else { '' }
+    $rawValueBlocks = Get-MarkerBlocks -Lines $analysisLines -BeginMarker 'REGPROBE_VALUE_BEGIN' -EndMarker 'REGPROBE_VALUE_END'
+    $firstHitBlocks = Get-MarkerBlocks -Lines $analysisLines -BeginMarker 'REGPROBE_FIRSTHIT_BEGIN' -EndMarker 'REGPROBE_FIRSTHIT_END'
+    $conditionalHitLines = Get-ConditionalHitLines -Lines $analysisLines
+    $targetMatches = @()
+    if (-not [string]::IsNullOrWhiteSpace($TargetKey)) {
+        $targetMatches = @($rawValueBlocks | Where-Object { $_ -like "*$TargetKey*" })
+        if ($conditionalHitLines.Count -gt 0) {
+            $targetMatches += @($conditionalHitLines | Where-Object { $_ -like "*$TargetKey*" })
+        }
+    }
+
+    return [ordered]@{
+        resolved_trace_log_path = $resolvedTraceLogPath
+        analysis_log_path = $analysisLogPath
+        analysis_source = $analysisSource
+        analysis_lines = $analysisLines
+        analysis_text = $analysisText
+        console_text = $consoleText
+        windbg_log_detected = [bool]$analysisLogPath
+        log_size_bytes = if ($analysisLogPath -and (Test-Path -LiteralPath $analysisLogPath)) { [int64](Get-Item -LiteralPath $analysisLogPath).Length } else { 0 }
+        raw_value_blocks = $rawValueBlocks
+        raw_value_event_count = @($rawValueBlocks).Count
+        firsthit_observed = @($firstHitBlocks).Count -gt 0
+        firsthit_blocks = $firstHitBlocks
+        conditional_hit_lines = $conditionalHitLines
+        host_filtered_hits = @($targetMatches).Count
+        host_filtered_samples = @($targetMatches | Select-Object -First 3)
+        script_execution_observed = (($analysisSource -eq 'script-log' -and -not [string]::IsNullOrWhiteSpace($analysisText)) -or ($analysisText -match 'REGPROBE_'))
+        transport_error = ($analysisText -match 'HOST cannot communicate with the TARGET|Failed to write breakin packet|Unable to get target version info') -or ($consoleText -match 'HOST cannot communicate with the TARGET|Failed to write breakin packet|Unable to get target version info')
+        breakpoint_unresolved = ($analysisText -match 'Could not resolve|deferred bp could not be resolved|unresolved breakpoint|Breakpoint [0-9]+ could not be resolved')
+        parser_invalid = ($analysisText -match 'Syntax error|Extra character error|Bad register|Couldn''t parse')
+        kernel_connected = ($analysisText -match 'Kernel Debugger connection established') -or ($consoleText -match 'Kernel Debugger connection established')
+        fatal_system_error_observed = ($analysisText -match 'A fatal system error has occurred') -or ($consoleText -match 'A fatal system error has occurred')
+    }
+}
+
+function Wait-ForDebuggerAwareBoot {
+    param(
+        [string]$VmPath,
+        [string[]]$GuestAuthArgs,
+        [string]$PreferredTraceLogPath,
+        [string]$ConsoleLogPath,
+        [string]$TargetKey = '',
+        [switch]$EnableNoiseBudget
+    )
+
+    $deadline = (Get-Date).AddSeconds([Math]::Max(60, $ShellHealthTimeoutSeconds))
+    $toolsState = $null
+    $shellSnapshot = $null
+    $observation = $null
+    $noiseBudgetExceeded = $false
+
+    do {
+        $observation = Get-TraceObservation -PreferredTraceLogPath $PreferredTraceLogPath -ConsoleLogPath $ConsoleLogPath -TargetKey $TargetKey
+        if ($EnableNoiseBudget -and (
+                (($NoiseBudgetBytes -gt 0) -and ($observation.log_size_bytes -ge $NoiseBudgetBytes)) -or
+                (($NoiseBudgetEventLimit -gt 0) -and ($observation.raw_value_event_count -ge $NoiseBudgetEventLimit))
+            )) {
+            $noiseBudgetExceeded = $true
+            break
+        }
+
+        $toolsState = Get-VmToolsState -VmPath $VmPath
+        if ($toolsState -match 'running|installed') {
+            $candidateShellSnapshot = Get-ShellHealthSnapshot -VmPath $VmPath -GuestAuthArgs $GuestAuthArgs
+            if ($candidateShellSnapshot.shell_healthy) {
+                $shellSnapshot = $candidateShellSnapshot
+                break
+            }
+        }
+
+        Start-Sleep -Seconds $PollIntervalSeconds
+    } while ((Get-Date) -lt $deadline)
+
+    if (-not $noiseBudgetExceeded -and [string]::IsNullOrWhiteSpace([string]$toolsState)) {
+        throw "Timed out waiting for VMware Tools readiness after $ShellHealthTimeoutSeconds seconds."
+    }
+
+    if (-not $noiseBudgetExceeded -and -not $shellSnapshot) {
+        throw "Timed out waiting for shell health after $ShellHealthTimeoutSeconds seconds."
+    }
+
+    if (-not $noiseBudgetExceeded -and $shellSnapshot) {
+        $settleDeadline = (Get-Date).AddSeconds([Math]::Max(0, $PostShellSettleSeconds))
+        while ((Get-Date) -lt $settleDeadline) {
+            $observation = Get-TraceObservation -PreferredTraceLogPath $PreferredTraceLogPath -ConsoleLogPath $ConsoleLogPath -TargetKey $TargetKey
+            if ($EnableNoiseBudget -and (
+                    (($NoiseBudgetBytes -gt 0) -and ($observation.log_size_bytes -ge $NoiseBudgetBytes)) -or
+                    (($NoiseBudgetEventLimit -gt 0) -and ($observation.raw_value_event_count -ge $NoiseBudgetEventLimit))
+                )) {
+                $noiseBudgetExceeded = $true
+                break
+            }
+
+            Start-Sleep -Seconds ([Math]::Min($PollIntervalSeconds, 5))
+        }
+    }
+
+    return [ordered]@{
+        tools_state = $toolsState
+        shell_snapshot = $shellSnapshot
+        observation = $observation
+        noise_budget_exceeded = $noiseBudgetExceeded
+    }
 }
 
 function Invoke-Vmrun {
@@ -288,7 +427,16 @@ $guestAuthArgs = Get-RegProbeVmrunAuthArguments -Credential $guestCredential
 $vmPath = [string]$bundle.vm_path
 $commandScriptPath = Join-Path $repoRoot ($bundle.command_script -replace '/', '\')
 $hostDebuggerPath = [string]$bundle.windbg_path
-$keys = @($bundle.keys)
+$keys = @($bundle.keys | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
+$targetKey = if (-not [string]::IsNullOrWhiteSpace([string]$bundle.target_key)) {
+    [string]$bundle.target_key
+}
+elseif ($keys.Count -eq 1) {
+    [string]$keys[0]
+}
+else {
+    $null
+}
 $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $sessionId = "windbg-boot-registry-trace-$timestamp"
 $sessionRoot = if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
@@ -313,6 +461,9 @@ $session = [ordered]@{
     vm_path = $vmPath
     debugger_path = $hostDebuggerPath
     trace_profile = $TraceProfile
+    target_key = $targetKey
+    noise_budget_bytes = $NoiseBudgetBytes
+    noise_budget_event_limit = $NoiseBudgetEventLimit
     command_script = Get-RepoDisplayPath -Path $sessionCommandScriptPath
     console_log = Get-RepoDisplayPath -Path $consoleLogPath
     raw_log = Get-RepoDisplayPath -Path $traceLogPath
@@ -414,6 +565,55 @@ $modeCommandLines = switch ($TraceProfile) {
             'g'
         )
     }
+    'singlekey-smoke' {
+        if ([string]::IsNullOrWhiteSpace($targetKey)) {
+            throw 'singlekey-smoke requires a single target key in the bundle.'
+        }
+        @(
+            '.symfix',
+            '.reload /f',
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            ('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile),
+            ('.echo REGPROBE_TARGET|{0}' -f $targetKey),
+            'bc *',
+            ('bu {0}' -f $registryWatchSymbol),
+            'bs 0 "gc"',
+            'g'
+        )
+    }
+    'singlekey-firsthit' {
+        if ([string]::IsNullOrWhiteSpace($targetKey)) {
+            throw 'singlekey-firsthit requires a single target key in the bundle.'
+        }
+        @(
+            '.symfix',
+            '.reload /f',
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            ('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile),
+            ('.echo REGPROBE_TARGET|{0}' -f $targetKey),
+            'bc *',
+            ('bu {0}' -f $registryWatchSymbol),
+            'bs 0 ".echo REGPROBE_FIRSTHIT_BEGIN; r rdx; dq @rdx L4; du poi(@rdx+8) L1; .echo REGPROBE_FIRSTHIT_END; qd"',
+            'g'
+        )
+    }
+    'singlekey-rawbounded' {
+        if ([string]::IsNullOrWhiteSpace($targetKey)) {
+            throw 'singlekey-rawbounded requires a single target key in the bundle.'
+        }
+        @(
+            '.symfix',
+            '.reload /f',
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            ('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile),
+            ('.echo REGPROBE_TARGET|{0}' -f $targetKey),
+            ('.echo REGPROBE_RAW_HIT_LIMIT|{0}' -f $NoiseBudgetEventLimit),
+            'bc *',
+            ('bu {0}' -f $registryWatchSymbol),
+            'bs 0 ".echo REGPROBE_VALUE_BEGIN; du poi(@rdx+8) L1; .echo REGPROBE_VALUE_END; gc"',
+            'g'
+        )
+    }
     default {
         $null
     }
@@ -436,21 +636,34 @@ if ($TraceProfile -ne 'full') {
 }
 Set-Content -LiteralPath $sessionCommandScriptPath -Value $rewrittenCommandLines -Encoding ASCII
 
-$kdArgs = @(
-    '-kqm',
+$kdProcess = $null
+$shellSnapshot = $null
+$runError = $null
+$shellRecovered = $false
+$recovery = $null
+$debuggerNoiseBudgetExceeded = $false
+$traceObservation = $null
+$useColdBoot = ($TraceProfile -like 'singlekey-*') -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)
+$kdArgs = @()
+if (-not $useColdBoot) {
+    $kdArgs += '-kqm'
+}
+$kdArgs += @(
     '-bonc',
     '-k', ("com:pipe,port={0},resets=0,reconnect" -f ([string]$bundle.pipe_name)),
     '-cfr', $sessionCommandScriptPath,
     '-logo', $consoleLogPath
 )
 
-$kdProcess = $null
-$shellSnapshot = $null
-$runError = $null
-$shellRecovered = $false
-$recovery = $null
-
 try {
+    if ($useColdBoot) {
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'stop', $vmPath, 'hard') -IgnoreExitCode | Out-Null
+        Start-Sleep -Seconds 5
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $vmPath, ([string]$bundle.debug_snapshot_name)) | Out-Null
+        $session.steps += 'reverted-to-debug-snapshot'
+        Write-JsonFile -Path $sessionPath -InputObject $session
+    }
+
     $kdProcess = Start-Process -FilePath $hostDebuggerPath -ArgumentList $kdArgs -WindowStyle Hidden -PassThru
     $session.status = 'debugger-started'
     $session.steps += 'debugger-started'
@@ -458,24 +671,40 @@ try {
 
     Start-Sleep -Seconds ([Math]::Max(3, $DebuggerAttachLeadSeconds))
 
-    Request-GuestRestart -VmPath $vmPath -GuestAuthArgs $guestAuthArgs
-    $session.status = 'guest-restart-requested'
-    $session.steps += 'guest-restart-requested'
+    if ($useColdBoot) {
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $vmPath, 'nogui') | Out-Null
+        $session.status = 'vm-cold-boot-requested'
+        $session.steps += 'vm-cold-boot-requested'
+    }
+    else {
+        Request-GuestRestart -VmPath $vmPath -GuestAuthArgs $guestAuthArgs
+        $session.status = 'guest-restart-requested'
+        $session.steps += 'guest-restart-requested'
+    }
     Write-JsonFile -Path $sessionPath -InputObject $session
 
-    Start-Sleep -Seconds 10
-    [void](Wait-ForVmToolsReady -VmPath $vmPath)
-    $session.steps += 'vmtools-ready-after-restart'
+    Start-Sleep -Seconds 5
+    $monitor = Wait-ForDebuggerAwareBoot -VmPath $vmPath -GuestAuthArgs $guestAuthArgs -PreferredTraceLogPath $traceLogPath -ConsoleLogPath $consoleLogPath -TargetKey $targetKey -EnableNoiseBudget:($TraceProfile -eq 'singlekey-rawbounded')
+    $traceObservation = $monitor.observation
+    $debuggerNoiseBudgetExceeded = [bool]$monitor.noise_budget_exceeded
+    if (-not [string]::IsNullOrWhiteSpace([string]$monitor.tools_state)) {
+        $session.steps += 'vmtools-ready-after-restart'
+    }
     Write-JsonFile -Path $sessionPath -InputObject $session
 
-    $shellSnapshot = Wait-ForShellHealthy -VmPath $vmPath -GuestAuthArgs $guestAuthArgs
-    $shellRecovered = $true
-    $session.status = 'shell-healthy'
-    $session.steps += 'shell-healthy-after-restart'
-    $session.shell_checks = $shellSnapshot.checks
-    Write-JsonFile -Path $sessionPath -InputObject $session
+    if ($monitor.shell_snapshot) {
+        $shellSnapshot = $monitor.shell_snapshot
+        $shellRecovered = $true
+        $session.status = 'shell-healthy'
+        $session.steps += 'shell-healthy-after-restart'
+        $session.shell_checks = $shellSnapshot.checks
+    }
+    elseif ($debuggerNoiseBudgetExceeded) {
+        $session.status = 'noise-budget-stop'
+        $session.steps += 'noise-budget-stop'
+    }
 
-    Start-Sleep -Seconds ([Math]::Max(5, $PostShellSettleSeconds))
+    Write-JsonFile -Path $sessionPath -InputObject $session
 }
 catch {
     $runError = $_.Exception.Message
@@ -487,51 +716,106 @@ finally {
     }
 }
 
-$resolvedTraceLogPath = Resolve-TraceLogPath -PreferredPath $traceLogPath
-$analysisLogPath = if (Test-Path -LiteralPath $resolvedTraceLogPath) { $resolvedTraceLogPath } else { $consoleLogPath }
-$analysisSource = if (Test-Path -LiteralPath $resolvedTraceLogPath) { 'script-log' } elseif (Test-Path -LiteralPath $consoleLogPath) { 'console-log-fallback' } else { 'missing' }
-$consoleText = if (Test-Path -LiteralPath $consoleLogPath) { Get-Content -LiteralPath $consoleLogPath -Raw -ErrorAction SilentlyContinue } else { '' }
-$analysisLines = if (Test-Path -LiteralPath $analysisLogPath) { @(Get-Content -LiteralPath $analysisLogPath -ErrorAction SilentlyContinue) } else { @() }
-$analysisText = if ($analysisLines.Count -gt 0) { [string]::Join([Environment]::NewLine, $analysisLines) } else { '' }
-$scriptExecutionObserved = ($analysisSource -eq 'script-log' -and -not [string]::IsNullOrWhiteSpace($analysisText)) -or ($analysisText -match 'REGPROBE_')
-$conditionalHitLines = if ($TraceProfile -eq 'conditional') { Get-ConditionalHitLines -Lines $analysisLines } else { @() }
+if (-not $traceObservation) {
+    $traceObservation = Get-TraceObservation -PreferredTraceLogPath $traceLogPath -ConsoleLogPath $consoleLogPath -TargetKey $targetKey
+}
+
+$resolvedTraceLogPath = $traceObservation.resolved_trace_log_path
+$analysisLogPath = $traceObservation.analysis_log_path
+$analysisSource = $traceObservation.analysis_source
+$consoleText = $traceObservation.console_text
+$analysisLines = @($traceObservation.analysis_lines)
+$analysisText = $traceObservation.analysis_text
+$scriptExecutionObserved = [bool]$traceObservation.script_execution_observed
 $perKeyResults = @()
 $totalHitKeys = 0
-if (Test-Path -LiteralPath $analysisLogPath) {
-    foreach ($key in $keys) {
-        $matches = if ($TraceProfile -eq 'conditional') { @($conditionalHitLines | Where-Object { $_ -like "*$key*" }) } else { @(Select-String -LiteralPath $analysisLogPath -Pattern $key -SimpleMatch) }
-        $sampleLines = if ($TraceProfile -eq 'conditional') { @($matches | Select-Object -First 3 | ForEach-Object { [string]$_ }) } else { @($matches | Select-Object -First 3 | ForEach-Object { $_.Line.Trim() }) }
-        if ($matches.Count -gt 0) {
-            $totalHitKeys++
-        }
+foreach ($key in $keys) {
+    $matches = if ($TraceProfile -eq 'conditional') {
+        @($traceObservation.conditional_hit_lines | Where-Object { $_ -like "*$key*" })
+    }
+    elseif ($TraceProfile -eq 'singlekey-rawbounded' -and $key -eq $targetKey) {
+        @($traceObservation.host_filtered_samples)
+    }
+    elseif ($TraceProfile -like 'singlekey-*') {
+        @()
+    }
+    else {
+        if ($analysisLogPath) { @(Select-String -LiteralPath $analysisLogPath -Pattern $key -SimpleMatch) } else { @() }
+    }
 
-        $perKeyResults += [ordered]@{
-            key = $key
-            hit_count = $matches.Count
-            sample_lines = $sampleLines
-        }
+    $sampleLines = if ($TraceProfile -eq 'conditional' -or $TraceProfile -eq 'singlekey-rawbounded') {
+        @($matches | Select-Object -First 3 | ForEach-Object { [string]$_ })
+    }
+    else {
+        @($matches | Select-Object -First 3 | ForEach-Object { $_.Line.Trim() })
+    }
+    $hitCount = if ($TraceProfile -eq 'singlekey-rawbounded' -and $key -eq $targetKey) {
+        [int]$traceObservation.host_filtered_hits
+    }
+    elseif ($TraceProfile -like 'singlekey-*') {
+        0
+    }
+    else {
+        @($matches).Count
+    }
+    if ($hitCount -gt 0) {
+        $totalHitKeys++
+    }
+
+    $perKeyResults += [ordered]@{
+        key = $key
+        hit_count = $hitCount
+        sample_lines = $sampleLines
     }
 }
 
-$fatalSystemErrorObserved = ($analysisText -match 'A fatal system error has occurred') -or ($consoleText -match 'A fatal system error has occurred')
-$kernelConnected = ($analysisText -match 'Kernel Debugger connection established') -or ($consoleText -match 'Kernel Debugger connection established')
+$fatalSystemErrorObserved = [bool]$traceObservation.fatal_system_error_observed
+$kernelConnected = [bool]$traceObservation.kernel_connected
+$transportError = [bool]$traceObservation.transport_error
+$breakpointUnresolved = [bool]$traceObservation.breakpoint_unresolved
+$parserInvalid = [bool]$traceObservation.parser_invalid
+$rawNoiseEventCount = [int]$traceObservation.raw_value_event_count
+$hostFilteredHits = [int]$traceObservation.host_filtered_hits
+$windbgLogDetected = [bool]$traceObservation.windbg_log_detected
+$firstHitObserved = [bool]$traceObservation.firsthit_observed
 $resultStatus = if ($runError -and $fatalSystemErrorObserved) {
     'boot-unsafe'
+}
+elseif ($parserInvalid) {
+    'blocked-parser-invalid'
+}
+elseif ($breakpointUnresolved) {
+    'breakpoint-unresolved'
+}
+elseif ($transportError) {
+    'trace-error'
+}
+elseif ($debuggerNoiseBudgetExceeded) {
+    'debugger-noise-budget-exceeded'
 }
 elseif ($runError) {
     'trace-error'
 }
-elseif (-not (Test-Path -LiteralPath $analysisLogPath)) {
+elseif (-not $windbgLogDetected) {
     'missing-log'
 }
 elseif (-not $scriptExecutionObserved) {
-    'connected-script-not-observed'
+    'script-not-executed'
 }
-elseif ($totalHitKeys -eq 0) {
-    'connected-no-target-hit'
+elseif ($TraceProfile -eq 'singlekey-smoke') {
+    if ($shellRecovered) { 'runner-ok' } else { 'connected-no-target-hit' }
 }
-elseif ($totalHitKeys -gt 0) {
+elseif ($TraceProfile -eq 'singlekey-firsthit') {
+    if ($firstHitObserved) { 'runner-ok' } else { 'connected-no-target-hit' }
+}
+elseif ($hostFilteredHits -gt 0) {
     'hit-detected'
+}
+elseif ($rawNoiseEventCount -gt 0) {
+    'connected-raw-noise-only'
+}
+elseif ($kernelConnected) {
+    'connected-no-target-hit'
 }
 else {
     'no-hit'
@@ -555,29 +839,45 @@ $results = [ordered]@{
     lane = 'windbg-boot-registry-trace'
     status = $resultStatus
     collection_mode = $CollectionMode
+    target_key = $targetKey
     key_count = @($keys).Count
     hit_key_count = $totalHitKeys
     analysis_source = $analysisSource
     trace_log_path = if ($resolvedTraceLogPath) { Get-RepoDisplayPath -Path $resolvedTraceLogPath } else { $null }
     trace_profile = $TraceProfile
+    windbg_log_detected = $windbgLogDetected
     kernel_connected = $kernelConnected
+    transport_error = $transportError
     fatal_system_error_observed = $fatalSystemErrorObserved
     shell_recovered = $shellRecovered
     script_execution_observed = $scriptExecutionObserved
+    breakpoint_set = ($scriptExecutionObserved -and -not $breakpointUnresolved)
+    breakpoint_unresolved = $breakpointUnresolved
+    parser_invalid = $parserInvalid
+    debugger_noise_budget_exceeded = $debuggerNoiseBudgetExceeded
+    raw_noise_event_count = $rawNoiseEventCount
+    host_filtered_hits = $hostFilteredHits
     error = $runError
     recovery = $recovery
     keys = $perKeyResults
     shell_checks = if ($shellSnapshot) { $shellSnapshot.checks } else { $null }
 }
 
-$captureArtifacts = @()
-$captureArtifactPaths = @($resolvedTraceLogPath, $consoleLogPath, $resultsPath, $sessionCommandScriptPath) |
-    Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
-    Select-Object -Unique
-foreach ($artifactPath in $captureArtifactPaths) {
-    if (Test-Path -LiteralPath $artifactPath) {
-        $captureArtifacts += @(New-ArtifactRef -Path $artifactPath)
-    }
+$traceRunnerOutput = if ($resolvedTraceLogPath -and (Test-Path -LiteralPath $resolvedTraceLogPath)) {
+    Publish-RunnerOutputArtifacts -Label 'windbg-trace-log' -RawPath $resolvedTraceLogPath -SanitizedOutputPath (Join-Path $sessionRoot 'windbg-registry-trace.public.log')
+}
+else {
+    $null
+}
+$consoleRunnerOutput = if (Test-Path -LiteralPath $consoleLogPath) {
+    Publish-RunnerOutputArtifacts -Label 'kd-console-log' -RawPath $consoleLogPath -SanitizedOutputPath (Join-Path $sessionRoot 'kd-console.public.log')
+}
+else {
+    $null
+}
+$results.runner_output = [ordered]@{
+    trace = $traceRunnerOutput
+    console = $consoleRunnerOutput
 }
 
 $summary = [ordered]@{
@@ -585,23 +885,36 @@ $summary = [ordered]@{
     family = 'power-control'
     lane = 'windbg-boot-registry-trace'
     status = $resultStatus
-    capture_status = if ($captureArtifacts.Count -gt 0) { 'captured' } else { 'missing-capture' }
+    capture_status = 'missing-capture'
     collection_mode = $CollectionMode
     vm_path = $vmPath
     debugger_path = $hostDebuggerPath
+    target_key = $targetKey
     key_count = @($keys).Count
     hit_key_count = $totalHitKeys
     analysis_source = $analysisSource
     trace_log_path = if ($resolvedTraceLogPath) { Get-RepoDisplayPath -Path $resolvedTraceLogPath } else { $null }
     trace_profile = $TraceProfile
+    windbg_log_detected = $windbgLogDetected
     kernel_connected = $kernelConnected
+    transport_error = $transportError
     fatal_system_error_observed = $fatalSystemErrorObserved
     shell_recovered = $shellRecovered
     script_execution_observed = $scriptExecutionObserved
+    breakpoint_set = ($scriptExecutionObserved -and -not $breakpointUnresolved)
+    breakpoint_unresolved = $breakpointUnresolved
+    parser_invalid = $parserInvalid
+    debugger_noise_budget_exceeded = $debuggerNoiseBudgetExceeded
+    raw_noise_event_count = $rawNoiseEventCount
+    host_filtered_hits = $hostFilteredHits
     command_script = Get-RepoDisplayPath -Path $sessionCommandScriptPath
-    capture_artifacts = $captureArtifacts
+    capture_artifacts = @()
+    runner_output = [ordered]@{
+        trace = $traceRunnerOutput
+        console = $consoleRunnerOutput
+    }
     bundle_ref = Get-RepoDisplayPath -Path $bundleFullPath
-    note = 'Boot trace executed through kd over the configured VMware serial pipe.'
+    note = 'Boot trace executed through kd over the configured VMware serial pipe with raw+sanitized runner-output handling.'
 }
 if ($runError) {
     $summary.error = $runError
@@ -611,9 +924,14 @@ if ($recovery) {
 }
 
 Write-JsonFile -Path $resultsPath -InputObject $results
-$summary.capture_artifacts = @(
-    $summary.capture_artifacts + @(New-ArtifactRef -Path $resultsPath)
-)
+$captureArtifacts = @(
+    @($traceRunnerOutput.public_sanitized_ref) +
+    @($consoleRunnerOutput.public_sanitized_ref) +
+    @(New-LaneArtifactRef -Path $resultsPath) +
+    @(New-LaneArtifactRef -Path $sessionCommandScriptPath)
+) | Where-Object { $_ }
+$summary.capture_artifacts = $captureArtifacts
+$summary.capture_status = if ($captureArtifacts.Count -gt 0) { 'captured' } else { 'missing-capture' }
 Write-JsonFile -Path $summaryPath -InputObject $summary
 
 $session.status = $resultStatus

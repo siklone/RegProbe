@@ -1,0 +1,42 @@
+{
+  "generated_utc": "2026-04-03T01:35:00Z",
+  "family": "power-control",
+  "lane": "windbg-singlekey",
+  "target_key": "AllowSystemRequiredPowerRequests",
+  "bundle": "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
+  "bcd_debug_proof": "registry-research-framework/audit/bcd-current-20260403.txt",
+  "profiles": [
+    {
+      "name": "singlekey-smoke",
+      "summary": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240/summary.json",
+      "status": "trace-error"
+    },
+    {
+      "name": "singlekey-firsthit",
+      "summary": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-042508/summary.json",
+      "status": "connected-no-target-hit"
+    },
+    {
+      "name": "singlekey-rawbounded",
+      "summary": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-042626/summary.json",
+      "status": "trace-error"
+    }
+  ],
+  "implemented_guards": {
+    "snapshot_gate": true,
+    "revert_guard": true,
+    "runner_output_policy": "raw+sanitized",
+    "singlekey_profiles": [
+      "singlekey-smoke",
+      "singlekey-firsthit",
+      "singlekey-rawbounded"
+    ]
+  },
+  "current_status": "transport-error",
+  "transport_error_signature": [
+    "Failed to write breakin packet",
+    "WARNING: The HOST cannot communicate with the TARGET!"
+  ],
+  "classification": "not-final",
+  "note": "The single-key lane is parser-safe and bounded, but the current cold-boot debugger transport is not yet reliable enough to treat the result as a final no-hit."
+}
