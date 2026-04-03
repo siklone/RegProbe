@@ -11,8 +11,14 @@ param(
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$CredentialFilePath = '',
     [string]$PipeName = '\\.\pipe\regprobe_debug',
+    [ValidateSet('server', 'client')]
+    [string]$PipeEndpoint = 'server',
+    [ValidateSet('TRUE', 'FALSE')]
+    [string]$TryNoRxLoss = 'TRUE',
     [ValidateSet('auto', 'kd', 'cdb', 'windbg')]
     [string]$DebuggerFrontend = 'auto',
+    [ValidateSet('bonc', 'b', 'none')]
+    [string]$BreakOnConnectMode = 'bonc',
     [string]$DebugSnapshotName = 'RegProbe-Baseline-Debug-20260402',
     [ValidateSet('evidence', 'operational')]
     [string]$CollectionMode = 'evidence',
@@ -171,7 +177,7 @@ $resolvedWinDbg = Resolve-DebuggerCandidate -CandidatePaths $commonWinDbgPaths -
 $baselinePrep = $null
 $baselinePrepPath = Join-Path $outputRoot 'configure-kernel-debug-baseline.json'
 if ($PrepareBaseline) {
-    $prepArgs = @('-VmPath', $VmPath, '-VmrunPath', $VmrunPath, '-GuestUser', $GuestUser, '-PipeName', $PipeName, '-CreateSnapshotName', $DebugSnapshotName, '-OutputPath', $baselinePrepPath)
+    $prepArgs = @('-VmPath', $VmPath, '-VmrunPath', $VmrunPath, '-GuestUser', $GuestUser, '-PipeName', $PipeName, '-PipeEndpoint', $PipeEndpoint, '-TryNoRxLoss', $TryNoRxLoss, '-CreateSnapshotName', $DebugSnapshotName, '-OutputPath', $baselinePrepPath)
     if (-not [string]::IsNullOrWhiteSpace($VmProfile)) {
         $prepArgs += @('-VmProfile', $VmProfile)
     }
@@ -189,10 +195,20 @@ if ($PrepareBaseline) {
 
 $resolvedVmProfile = if ([string]::IsNullOrWhiteSpace($VmProfile)) { 'primary' } else { $VmProfile }
 $resolvedWindbgCommand = if ($resolvedWinDbg) {
-    ('"{0}" -k com:pipe,port={1},resets=0,reconnect -cfr {2}' -f $resolvedWinDbg, $PipeName, $portableCommandScript)
+    $breakFlag = switch ($BreakOnConnectMode) {
+        'bonc' { ' -bonc' }
+        'b' { ' -b' }
+        default { '' }
+    }
+    ('"{0}"{1} -k com:pipe,port={2},resets=0,reconnect -cfr {3}' -f $resolvedWinDbg, $breakFlag, $PipeName, $portableCommandScript)
 }
 else {
-    ('windbg -k com:pipe,port={0},resets=0,reconnect -cfr {1}' -f $PipeName, $portableCommandScript)
+    $breakFlag = switch ($BreakOnConnectMode) {
+        'bonc' { ' -bonc' }
+        'b' { ' -b' }
+        default { '' }
+    }
+    ('windbg{0} -k com:pipe,port={1},resets=0,reconnect -cfr {2}' -f $breakFlag, $PipeName, $portableCommandScript)
 }
 $baselinePrepStatus = if ($PrepareBaseline) {
     if (-not $baselinePrep) { 'missing' }
@@ -224,6 +240,8 @@ $payload = [ordered]@{
     vm_profile = $resolvedVmProfile
     vm_path = $VmPath
     pipe_name = $PipeName
+    pipe_endpoint = $PipeEndpoint
+    try_no_rx_loss = $TryNoRxLoss
     debug_snapshot_name = $DebugSnapshotName
     collection_mode = $CollectionMode
     rollback_pending = ($CollectionMode -eq 'evidence')
@@ -233,6 +251,7 @@ $payload = [ordered]@{
     target_key = $resolvedTargetKey
     trace_profile = $TraceProfile
     boot_mode = $resolvedBootMode
+    break_on_connect_mode = $BreakOnConnectMode
     noise_budget_bytes = $NoiseBudgetBytes
     raw_hit_limit = $RawHitLimit
     command_script = $commandScriptRef

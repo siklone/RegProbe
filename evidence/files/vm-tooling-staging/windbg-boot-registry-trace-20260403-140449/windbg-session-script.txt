@@ -1,0 +1,5 @@
+.symfix
+.reload /f
+.logopen /t "C:\\r\\evidence\\files\\vm-tooling-staging\\windbg-boot-registry-trace-20260403-140449\\windbg-registry-trace.log"
+.echo REGPROBE_SYMBOLS_BEGIN
+g

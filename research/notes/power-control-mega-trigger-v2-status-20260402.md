@@ -99,6 +99,31 @@ That means:
 - `AllowSystemRequiredPowerRequests` is still in `WinDbg` escalation, not yet classified by the final arbiter
 - the current blocker is debugger transport/reconnect, not parser syntax or documentation bloat
 
+## Guest-Restart Serial Matrix
+
+The first focused serial-config matrix narrowed the transport issue further.
+
+What is now true:
+
+- `guest-restart` + `kd` reached `kernel_connected=true` in `4/4` tested variants
+- `3/4` variants finished `transport_ok`
+- the weakest variant so far was:
+  - `break_on_connect=none`
+  - `tryNoRxLoss=TRUE`
+  - outcome `transport_error`
+
+This shifts the blocker again:
+
+- the problem is no longer "guest-restart transport is generically broken"
+- the new blocker is reproducible command/break-in roundtrip on the winning `guest-restart` serial base
+- that is transport engineering, not key semantics
+
+Canonical matrix outputs:
+
+- `registry-research-framework/audit/windbg-serial-config-matrix-20260403.json`
+- `registry-research-framework/audit/windbg-serial-config-execution-20260403.json`
+- `research/notes/windbg-serial-config-matrix-20260403.md`
+
 ## Repo Truth
 
 These 5 no-hit candidates are still the active escalation set:
@@ -117,5 +142,5 @@ The current attach bundle has been corrected to public-symbol reality:
 ## Next Follow-Up
 
 1. fix the cold-boot debugger transport failure for the single-key lane
-2. keep the watch lightweight enough that shell health returns without needing a post-run recovery
-3. only after a real connected single-key `WinDbg` pass should these 5 values move to early-boot-read vs true dead/no-hit decisioning
+2. repeat the winning `guest-restart` serial variants and add break-in/command-roundtrip validation on that base
+3. only after a reproducible connected single-key `WinDbg` pass should these 5 values move to early-boot-read vs true dead/no-hit decisioning

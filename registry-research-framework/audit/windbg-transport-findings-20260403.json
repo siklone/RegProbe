@@ -2,7 +2,7 @@
   "generated_utc": "2026-04-03T09:45:00Z",
   "epic": "windbg-transport-hardening",
   "audit_date": "20260403",
-  "status": "transport-blocked",
+  "status": "transport-partial",
   "findings": [
     {
       "id": "attach-after-shell-no-debuggee",
@@ -33,16 +33,25 @@
         "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-123909/summary.json"
       ],
       "note": "CDB did not improve the VMware serial transport path; current runs failed before producing usable logs."
+    },
+    {
+      "id": "guest-restart-serial-config-partial-success",
+      "severity": "medium",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "transport_partial",
+      "summary_ref": "registry-research-framework/audit/windbg-serial-config-matrix-20260403.json",
+      "note": "A focused serial-config matrix reached kernel-connected guest-restart sessions in 4/4 variants and transport_ok in 3/4 variants, narrowing the blocker to reproducible command/breakin roundtrips rather than generic attach failure."
     }
   ],
   "conclusion": {
     "semantic_lane_ready": true,
     "transport_lane_ready": false,
-    "recommended_next_phase": "serial-config-matrix",
+    "recommended_next_phase": "guest-restart-command-roundtrip",
     "recommended_next_actions": [
-      "Keep WinDbg single-key arbitration paused until a boot-time profile can keep kernel connectivity without transport errors.",
-      "Move from frontend experiments to serial transport configuration variants and start-order experiments.",
-      "Treat attach-after-shell as a no-debuggee observation path, not as an arbiter-capable debug session."
+      "Keep WinDbg single-key arbitration paused until a guest-restart profile can keep kernel connectivity and process command/breakin roundtrips reproducibly.",
+      "Use the serial-config matrix to focus next on pipe endpoint and attach/start-order variants, not more frontend churn.",
+      "Treat attach-after-shell as a no-debuggee observation path, and guest-restart as the current transport base candidate."
     ]
   }
 }

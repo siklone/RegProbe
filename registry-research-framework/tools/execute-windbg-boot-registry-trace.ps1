@@ -607,6 +607,12 @@ elseif ($keys.Count -eq 1) {
 else {
     $null
 }
+$breakOnConnectMode = if (-not [string]::IsNullOrWhiteSpace([string]$bundle.break_on_connect_mode)) {
+    [string]$bundle.break_on_connect_mode
+}
+else {
+    'bonc'
+}
 $bootMode = if (-not [string]::IsNullOrWhiteSpace([string]$bundle.boot_mode)) {
     [string]$bundle.boot_mode
 }
@@ -641,6 +647,7 @@ $session = [ordered]@{
     debugger_path = $hostDebuggerPath
     trace_profile = $TraceProfile
     boot_mode = $bootMode
+    break_on_connect_mode = $breakOnConnectMode
     target_key = $targetKey
     noise_budget_bytes = $NoiseBudgetBytes
     noise_budget_event_limit = $NoiseBudgetEventLimit
@@ -870,8 +877,12 @@ $kdArgs = @()
 if (-not $useColdBoot) {
     $kdArgs += '-kqm'
 }
+switch ($breakOnConnectMode) {
+    'bonc' { $kdArgs += '-bonc' }
+    'b' { $kdArgs += '-b' }
+    default { }
+}
 $kdArgs += @(
-    '-bonc',
     '-k', ("com:pipe,port={0},resets=0,reconnect" -f ([string]$bundle.pipe_name)),
     '-cfr', $sessionCommandScriptPath,
     '-logo', $consoleLogPath
@@ -1191,6 +1202,7 @@ $results = [ordered]@{
     trace_log_path = if ($resolvedTraceLogPath) { Get-RepoDisplayPath -Path $resolvedTraceLogPath } else { $null }
     trace_profile = $TraceProfile
     boot_mode = $bootMode
+    break_on_connect_mode = $breakOnConnectMode
     windbg_log_detected = $windbgLogDetected
     windbg_transport_state = $windbgTransportState
     windbg_semantic_ready = $windbgSemanticReady
@@ -1249,6 +1261,7 @@ $summary = [ordered]@{
     trace_log_path = if ($resolvedTraceLogPath) { Get-RepoDisplayPath -Path $resolvedTraceLogPath } else { $null }
     trace_profile = $TraceProfile
     boot_mode = $bootMode
+    break_on_connect_mode = $breakOnConnectMode
     windbg_log_detected = $windbgLogDetected
     windbg_transport_state = $windbgTransportState
     windbg_semantic_ready = $windbgSemanticReady

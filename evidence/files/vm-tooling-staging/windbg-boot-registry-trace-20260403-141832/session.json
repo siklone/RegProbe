@@ -1,0 +1,32 @@
+﻿{
+    "generated_utc":  "2026-04-03T11:18:32.1350675Z",
+    "session_id":  "windbg-boot-registry-trace-20260403-141832",
+    "collection_mode":  "evidence",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+    "debugger_path":  "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\kd.exe",
+    "trace_profile":  "symbols",
+    "boot_mode":  "guest-restart",
+    "break_on_connect_mode":  "none",
+    "target_key":  null,
+    "noise_budget_bytes":  262144,
+    "noise_budget_event_limit":  100,
+    "command_script":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-141832/windbg-session-script.txt",
+    "console_log":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-141832/kd-console.log",
+    "raw_log":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-141832/windbg-registry-trace.log",
+    "status":  "trace-error",
+    "steps":  [
+                  "debugger-started",
+                  "guest-restart-requested",
+                  "vmtools-ready-after-restart",
+                  "shell-healthy-after-restart",
+                  "trace-finished"
+              ],
+    "shell_checks":  {
+                         "explorer":  true,
+                         "sihost":  true,
+                         "shellhost":  true,
+                         "ctfmon":  true
+                     },
+    "summary_path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-141832/summary.json",
+    "results_path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-141832/results.json"
+}

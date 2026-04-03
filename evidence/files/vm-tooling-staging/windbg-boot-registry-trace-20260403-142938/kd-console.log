@@ -1,0 +1,112 @@
+Opened log file 'C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-142938\kd-console.log'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.016 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.015 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29547.1002 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Opened \\.\pipe\regprobe_debug
+Waiting to reconnect...
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'
+Connected to Windows 10 26100 x64 target at (Fri Apr  3 14:29:39.268 2026 (UTC + 3:00)), ptr64 TRUE
+Kernel Debugger connection established.
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (4 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff805`d4e00000 PsLoadedModuleList = 0xfffff805`d5cf4e70
+Debug session time: Fri Apr  3 14:29:38.419 2026 (UTC + 3:00)
+System Uptime: 0 days 0:07:01.423
+Break instruction exception - code 80000003 (first chance)
+nt!DbgBreakPointWithStatus:
+fffff805`d52fa090 cc              int     3
+0: kd> .symfix
+0: kd> .reload /f
+Connected to Windows 10 26100 x64 target at (Fri Apr  3 14:29:44.657 2026 (UTC + 3:00)), ptr64 TRUE
+Loading Kernel Symbols
+...Unable to load image \SystemRoot\system32\mcupdate_AuthenticAMD.dll, Win32 error 0n2
+
+
+Press ctrl-c (cdb, kd, ntsd) or ctrl-break (windbg) to abort symbol loads that take too long.
+Run !sym noisy before .reload to track down problems loading symbols.
+
+...........Unable to load image \SystemRoot\System32\drivers\clipsp.sys, Win32 error 0n2
+....................................Unable to load image \SystemRoot\system32\DRIVERS\vsock.sys, Win32 error 0n2
+.Unable to load image \SystemRoot\System32\drivers\vmci.sys, Win32 error 0n2
+............
+.......................Unable to load image \SystemRoot\system32\DRIVERS\vmrawdsk.sys, Win32 error 0n2
+..................................Unable to load image \SystemRoot\System32\drivers\vmmouse.sys, Win32 error 0n2
+..Unable to load image \SystemRoot\System32\DriverStore\FileRepository\vm3d.inf_amd64_eba3f0b96d8538e4\vm3dmp_loader.sys, Win32 error 0n2
+.Unable to load image \SystemRoot\System32\DriverStore\FileRepository\vm3d.inf_amd64_eba3f0b96d8538e4\vm3dmp.sys, Win32 error 0n2
+....
+.....................................Unable to load image \SystemRoot\system32\DRIVERS\vmmemctl.sys, Win32 error 0n2
+....Unable to load image \SystemRoot\system32\drivers\peauth.sys, Win32 error 0n2
+...Unable to load image \SystemRoot\System32\drivers\wtd.sys, Win32 error 0n2
+.Unable to load image \SystemRoot\system32\DRIVERS\vmhgfs.sys, Win32 error 0n2
+..
+Loading User Symbols
+
+Loading unloaded module list
+...........
+
+************* Symbol Loading Error Summary **************
+Module name            Error
+mcupdate_AuthenticAMD  The system cannot find the file specified
+BOOTVID                The system cannot find the file specified
+clipsp                 The system cannot find the file specified
+pdc                    The system cannot find the file specified
+vsock                  The system cannot find the file specified
+vmci                   The system cannot find the file specified
+fileinfo               The system cannot find the file specified
+rdyboost               The system cannot find the file specified
+tbs                    The system cannot find the file specified
+UCPD                   The system cannot find the file specified
+vmrawdsk               The system cannot find the file specified
+BasicRender            The system cannot find the file specified
+csc                    The system cannot find the file specified
+npsvctrig              The system cannot find the file specified
+vmmouse                The system cannot find the file specified
+vm3dmp_loader          The system cannot find the file specified
+vm3dmp                 The system cannot find the file specified
+vpcivsp                The system cannot find the file specified
+vmmemctl               The system cannot find the file specified
+peauth                 The system cannot find the file specified
+wtd                    The system cannot find the file specified
+vmhgfs                 The system cannot find the file specified
+
+You can troubleshoot most symbol related issues by turning on symbol loading diagnostics (!sym noisy) and repeating the command that caused symbols to be loaded.
+You should also verify that your symbol search path (.sympath) is correct.
+0: kd> .logopen /t "C:\\r\\evidence\\files\\vm-tooling-staging\\windbg-boot-registry-trace-20260403-142938\\windbg-registry-trace.log"
+Closing open log file C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-142938\kd-console.log

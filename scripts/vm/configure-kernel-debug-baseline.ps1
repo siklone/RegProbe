@@ -7,6 +7,10 @@ param(
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$CredentialFilePath = '',
     [string]$PipeName = '\\.\pipe\regprobe_debug',
+    [ValidateSet('server', 'client')]
+    [string]$PipeEndpoint = 'server',
+    [ValidateSet('TRUE', 'FALSE')]
+    [string]$TryNoRxLoss = 'TRUE',
     [int]$DebugPort = 1,
     [int]$BaudRate = 115200,
     [string]$CreateSnapshotName = '',
@@ -246,6 +250,8 @@ $result = [ordered]@{
     vm_started = $false
     vm_power_cycled = $false
     pipe_name = $PipeName
+    pipe_endpoint = $PipeEndpoint
+    try_no_rx_loss = $TryNoRxLoss
     debug_port = $DebugPort
     baud_rate = $BaudRate
     vmx_updated = $false
@@ -314,8 +320,8 @@ try {
             Set-VmxKeyValue -Path $vmxPath -Key 'serial0.present' -Value 'TRUE'
             Set-VmxKeyValue -Path $vmxPath -Key 'serial0.fileType' -Value 'pipe'
             Set-VmxKeyValue -Path $vmxPath -Key 'serial0.fileName' -Value $PipeName
-            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.tryNoRxLoss' -Value 'TRUE'
-            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.pipe.endPoint' -Value 'server'
+            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.tryNoRxLoss' -Value $TryNoRxLoss
+            Set-VmxKeyValue -Path $vmxPath -Key 'serial0.pipe.endPoint' -Value $PipeEndpoint
             $result.steps += 'vmx-serial-pipe-configured'
         }
         $result.vmx_updated = $true

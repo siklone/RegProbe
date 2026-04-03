@@ -18,6 +18,7 @@ $parserTargets = @(
     'scripts\vm\new-windbg-registry-watch-script.ps1',
     'registry-research-framework\tools\run-windbg-boot-registry-trace.ps1',
     'registry-research-framework\tools\run-windbg-transport-matrix.ps1',
+    'registry-research-framework\tools\run-windbg-serial-config-matrix.ps1',
     'registry-research-framework\tools\execute-windbg-boot-registry-trace.ps1',
     'tests\Invoke-StagingInventorySmoke.ps1'
 )

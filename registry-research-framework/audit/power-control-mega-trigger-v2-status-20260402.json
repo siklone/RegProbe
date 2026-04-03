@@ -6,7 +6,7 @@
   "pilot_trigger_count": 8,
   "recovery_safe": true,
   "terminal_vm_state": "shell-healthy-after-restore",
-  "current_status": "windbg-singlekey-transport-partial",
+  "current_status": "windbg-transport-partial",
   "validated_runs": [
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json",
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json",
@@ -16,7 +16,8 @@
   "blockers": [
     "windbg-conditional-filter-syntax",
     "windbg-raw-watch-timeout",
-    "windbg-singlekey-transport-error"
+    "windbg-singlekey-transport-error",
+    "windbg-guest-restart-roundtrip-unproven"
   ],
   "windbg_lane": {
     "status": "partial",
@@ -41,9 +42,24 @@
     "singlekey_transport_failure": "host-cannot-communicate-with-target",
     "vm_recovered": true
   },
+  "serial_config_matrix": {
+    "status": "partial",
+    "matrix_ref": "registry-research-framework/audit/windbg-serial-config-matrix-20260403.json",
+    "execution_ref": "registry-research-framework/audit/windbg-serial-config-execution-20260403.json",
+    "profile_count": 4,
+    "kernel_connected_count": 4,
+    "transport_ok_count": 3,
+    "weak_variant": {
+      "id": "guest-restart-kd-none-rxloss-true",
+      "break_on_connect_mode": "none",
+      "try_no_rx_loss": "TRUE",
+      "status": "trace-error",
+      "windbg_transport_state": "transport_error"
+    }
+  },
   "next_actions": [
-    "fix the cold-boot debugger transport failure for the single-key lane",
-    "keep the WinDbg watch light enough that shell health returns without requiring a post-run recovery",
+    "repeat the strongest guest-restart serial variants and validate command/breakin roundtrip on that base",
+    "move next to pipe endpoint and attach/start-order experiments if guest-restart roundtrip is still unstable",
     "only widen beyond the 5-key pilot after the connected single-key WinDbg pass becomes terminal"
   ],
   "pilot_outcome": {

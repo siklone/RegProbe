@@ -1,0 +1,44 @@
+﻿{
+    "generated_utc":  "2026-04-03T11:45:16.8254899Z",
+    "epic":  "windbg-transport-hardening",
+    "phase":  "serial-config-matrix",
+    "audit_date":  "20260403",
+    "variants":  [
+                     {
+                         "id":  "guest-restart-kd-bonc-rxloss-true",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "symbols",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "bonc",
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "TRUE"
+                     },
+                     {
+                         "id":  "guest-restart-kd-none-rxloss-true",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "symbols",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "none",
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "TRUE"
+                     },
+                     {
+                         "id":  "guest-restart-kd-bonc-rxloss-false",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "symbols",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "bonc",
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE"
+                     },
+                     {
+                         "id":  "guest-restart-kd-none-rxloss-false",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "symbols",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "none",
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE"
+                     }
+                 ]
+}
