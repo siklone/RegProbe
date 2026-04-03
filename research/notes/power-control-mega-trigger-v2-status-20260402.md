@@ -155,6 +155,25 @@ So the lane just got more precise:
 - but the current attach/start-order lands us in the wrong stop state
 - the next fix is not parser syntax; it is attach/start-order plus break policy
 
+Start-order follow-up on the same guest-restart base:
+
+- profiles tested:
+  - `bonc` with lead `3`, `10`, `20`
+  - `none` with lead `10`, `20`
+  - `b` with lead `10`
+- outcome:
+  - `6/6` kept `kernel_connected=true`
+  - `6/6` kept `transport_error=false`
+  - `6/6` recovered shell health
+  - `0/6` produced any post-restart queued command roundtrip
+  - all `6/6` ended `attach-ok-command-not-executed`
+
+That narrows the blocker again:
+
+- current `guest-restart` attach lead timing is no longer the main unknown
+- current `bonc` / `none` / `b` break-policy variants are also not enough by themselves
+- the next phase should move to reconnect-time command injection or pipe endpoint experiments
+
 Canonical matrix outputs:
 
 - `registry-research-framework/audit/windbg-serial-config-matrix-20260403.json`
@@ -164,6 +183,9 @@ Canonical matrix outputs:
 - `evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-145133/summary.json`
 - `registry-research-framework/audit/windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json`
 - `evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/summary.json`
+- `registry-research-framework/audit/windbg-start-order-matrix-20260403.json`
+- `registry-research-framework/audit/windbg-start-order-execution-20260403.json`
+- `research/notes/windbg-start-order-matrix-20260403.md`
 
 ## Repo Truth
 
@@ -182,6 +204,6 @@ The current attach bundle has been corrected to public-symbol reality:
 
 ## Next Follow-Up
 
-1. fix the cold-boot debugger transport failure for the single-key lane
-2. repeat the winning `guest-restart` serial variants and add break-in/command-roundtrip validation on that base
+1. move next to reconnect-time command injection or pipe endpoint experiments on the winning `guest-restart` base
+2. only return to single-key arbiter revalidation after one guest-restart roundtrip lands at a healthy prompt
 3. only after a reproducible connected single-key `WinDbg` pass should these 5 values move to early-boot-read vs true dead/no-hit decisioning

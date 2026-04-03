@@ -25,14 +25,19 @@ Date: `2026-04-03`
   - post-restart queued commands **do** resume
   - but they resumed at a fatal-system-error break, not at a healthy boot-time prompt
   - the VM had to be recovered from snapshot afterward
+- A follow-up start-order matrix then narrowed the blocker again:
+  - `6/6` guest-restart variants preserved `kernel_connected=true`
+  - `6/6` also kept `transport_error=false` and `shell_recovered=true`
+  - but `0/6` produced any post-restart queued command roundtrip
+  - so attach lead timing and current `bonc`/`none`/`b` break-policy choices are not enough by themselves
 
 ## Practical Outcome
 
 - Do not widen the single-key WinDbg arbiter lane yet.
 - Do not interpret `attach-after-shell` as a successful live debug transport.
 - Treat `guest-restart` as the current best transport base, not `attach-after-shell`.
-- The next infrastructure phase should stay on `guest-restart` break-in/command-roundtrip validation plus pipe endpoint/start-order testing, not more key-specific RE.
-- The next concrete fix should target attach/start-order and break policy so queued commands land in a healthy boot prompt instead of a fatal-system-error stop.
+- The next infrastructure phase should move from generic start-order tuning to reconnect-time command injection and pipe endpoint experiments.
+- The next concrete fix should target how queued commands are reintroduced after reconnect, not more parser churn or multi-key semantics.
 
 ## Evidence
 
@@ -44,3 +49,5 @@ Date: `2026-04-03`
 - guest-restart breakin-once summary: [summary.json](C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-145133\summary.json)
 - guest-restart thin roundtrip bundle: [windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json)
 - guest-restart thin roundtrip summary: [summary.json](C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-154201\summary.json)
+- start-order matrix: [windbg-start-order-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-start-order-matrix-20260403.json)
+- start-order note: [windbg-start-order-matrix-20260403.md](C:\r\research\notes\windbg-start-order-matrix-20260403.md)

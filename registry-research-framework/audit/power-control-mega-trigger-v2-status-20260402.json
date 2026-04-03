@@ -17,7 +17,8 @@
     "windbg-conditional-filter-syntax",
     "windbg-raw-watch-timeout",
     "windbg-singlekey-transport-error",
-    "windbg-guest-restart-roundtrip-unproven"
+    "windbg-guest-restart-roundtrip-unproven",
+    "windbg-start-order-command-not-executed"
   ],
   "windbg_lane": {
     "status": "partial",
@@ -86,10 +87,21 @@
     "recovered_via_snapshot": true,
     "roundtrip_ready": false
   },
+  "guest_restart_start_order_matrix": {
+    "status": "attach-ok-command-not-executed",
+    "matrix_ref": "registry-research-framework/audit/windbg-start-order-matrix-20260403.json",
+    "execution_ref": "registry-research-framework/audit/windbg-start-order-execution-20260403.json",
+    "profile_count": 6,
+    "attach_ok_command_not_executed_count": 6,
+    "kernel_connected_count": 6,
+    "transport_error_count": 0,
+    "roundtrip_ready_count": 0,
+    "note": "Across bonc/none/b break policies and 3/10/20-second attach leads, every guest-restart run preserved connectivity and shell recovery but none executed a post-restart queued roundtrip."
+  },
   "next_actions": [
-    "keep the strongest guest-restart serial base and move next to attach/start-order plus break-policy experiments",
+    "treat attach/start-order as characterized on the current guest-restart base",
+    "move next to reconnect-time command injection or pipe endpoint experiments",
     "treat queued roundtrip as proven but boot-unsafe until it lands in a healthy boot prompt",
-    "move next to pipe endpoint experiments only after start-order variants are characterized",
     "only widen beyond the 5-key pilot after the connected single-key WinDbg pass becomes terminal"
   ],
   "pilot_outcome": {
