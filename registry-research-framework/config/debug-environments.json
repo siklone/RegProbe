@@ -27,6 +27,25 @@
       ]
     },
     {
+      "id": "vmware-debug-only",
+      "type": "vmware-workstation",
+      "role": "debug_arbiter_only",
+      "status": "fallback-planned",
+      "vm_name": "Win25H2DebugOnly",
+      "baseline_name": "RegProbe-Debug-VMwareOnly-Baseline-20260403",
+      "source_runtime_profile": "primary",
+      "source_runtime_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+      "transport_candidates": [
+        "named-pipe"
+      ],
+      "trial_policy": "short-transport-only",
+      "notes": [
+        "Use only if Hyper-V is not available on the current host.",
+        "This is a fresh debugger-first fallback VM, not a return to the frozen VMware WinDbg lane.",
+        "If the same transport blocker reproduces here, stop and move directly to Hyper-V prerequisites."
+      ]
+    },
+    {
       "id": "hyperv-debug",
       "type": "hyper-v",
       "role": "debug_arbiter_only",

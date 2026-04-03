@@ -95,16 +95,21 @@
     "vmware_lane_status": "known-blocked-frozen",
     "next_environment": "hyperv",
     "next_environment_status": "blocked-prereqs",
-    "recommended_next_phase": "prepare-hyperv-prereqs",
+    "immediate_fallback_environment": "vmware-debug-only",
+    "immediate_fallback_status": "ready-to-short-try",
+    "recommended_next_phase": "vmware-debug-only-short-try",
     "freeze_ref": "registry-research-framework/audit/windbg-vmware-freeze-20260403.json",
     "selection_ref": "registry-research-framework/audit/windbg-debug-environment-selection-20260403.json",
     "hyperv_setup_ref": "registry-research-framework/audit/windbg-hyperv-setup-20260403.json",
+    "vmware_debug_only_setup_ref": "registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json",
     "recommended_next_actions": [
-      "Keep WinDbg single-key arbitration paused until a new debugger-first environment is ready.",
+      "Keep WinDbg single-key arbitration paused on the frozen VMware lane.",
+      "If Hyper-V is still blocked on the current host, allow one short fresh VMware debug-only transport-first try.",
+      "If the same transport blocker reproduces on that fresh VMware debug-only VM, stop and move directly to Hyper-V prerequisites.",
       "Treat queued roundtrip, reconnect command injection, and pipe/launch mode on the current VMware named-pipe contract as characterized.",
       "Within the current named-pipe contract, server endpoint preserves attach but not command execution, while client endpoint degrades into transport_error.",
       "Do not spend more cycles on parser churn or key-specific filtering inside the frozen VMware named-pipe lane.",
-      "Prepare host Hyper-V prerequisites, then bring up a dedicated debug-arbiter VM before retrying single-key WinDbg arbitration."
+      "Prepare host Hyper-V prerequisites in parallel, then bring up a dedicated Hyper-V debug-arbiter VM if the fallback VMware debug-only try does not materially change transport behavior."
     ]
   }
 }

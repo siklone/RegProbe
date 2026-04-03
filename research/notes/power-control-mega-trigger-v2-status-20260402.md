@@ -338,3 +338,4 @@ Current debug-environment decision records:
 - [windbg-vmware-freeze-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-freeze-20260403.json)
 - [windbg-debug-environment-selection-20260403.json](C:\r\registry-research-framework\audit\windbg-debug-environment-selection-20260403.json)
 - [windbg-hyperv-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-hyperv-setup-20260403.json)
+- [windbg-vmware-debug-only-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-setup-20260403.json)

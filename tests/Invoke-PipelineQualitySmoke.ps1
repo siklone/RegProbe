@@ -26,6 +26,7 @@ $parserTargets = @(
     'registry-research-framework\tools\execute-windbg-boot-registry-trace.ps1',
     'scripts\vm-hyperv\test-hyperv-debug-feasibility.ps1',
     'scripts\vm-hyperv\new-hyperv-debug-baseline-plan.ps1',
+    'scripts\vm\new-vmware-debug-only-baseline-plan.ps1',
     'registry-research-framework\tools\windbg-hyperv\run-debug-environment-selection.ps1',
     'tests\Invoke-StagingInventorySmoke.ps1'
 )
@@ -162,14 +163,28 @@ try {
 
         $hypervFeasibilityPath = Join-Path $tempRepoRoot 'hyperv-feasibility.json'
         $hypervFeasibility = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm-hyperv\test-hyperv-debug-feasibility.ps1') -OutputPath $hypervFeasibilityPath | ConvertFrom-Json
-        if ($hypervFeasibility.selected -ne 'Hyper-V' -or @($hypervFeasibility.debug_environment_candidates).Count -lt 2) {
+        if ($hypervFeasibility.selected -ne 'Hyper-V' -or $hypervFeasibility.selected_long_term -ne 'Hyper-V' -or @($hypervFeasibility.debug_environment_candidates).Count -lt 2) {
             throw 'Hyper-V feasibility contract failed.'
+        }
+        if ($hypervFeasibility.selected_status -eq 'ready') {
+            if ($hypervFeasibility.selected_immediate -ne 'Hyper-V') {
+                throw 'Hyper-V feasibility immediate-selection contract failed for ready host.'
+            }
+        }
+        elseif ($hypervFeasibility.selected_immediate -ne 'VMware-debug-only') {
+            throw 'Hyper-V feasibility immediate-selection contract failed for blocked host.'
         }
 
         $hypervPlanPath = Join-Path $tempRepoRoot 'hyperv-plan.json'
         $hypervPlan = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm-hyperv\new-hyperv-debug-baseline-plan.ps1') -FeasibilityPath $hypervFeasibilityPath -OutputPath $hypervPlanPath | ConvertFrom-Json
         if ($hypervPlan.debug_environment -ne 'hyperv' -or $hypervPlan.vm_role -ne 'debug_arbiter_only') {
             throw 'Hyper-V baseline plan contract failed.'
+        }
+
+        $vmwareDebugOnlyPlanPath = Join-Path $tempRepoRoot 'vmware-debug-only-plan.json'
+        $vmwareDebugOnlyPlan = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm\new-vmware-debug-only-baseline-plan.ps1') -OutputPath $vmwareDebugOnlyPlanPath | ConvertFrom-Json
+        if ($vmwareDebugOnlyPlan.debug_environment -ne 'vmware-debug-only' -or $vmwareDebugOnlyPlan.vm_role -ne 'debug_arbiter_only' -or $vmwareDebugOnlyPlan.frozen_lane_return_allowed) {
+            throw 'VMware debug-only baseline plan contract failed.'
         }
     }
     finally {

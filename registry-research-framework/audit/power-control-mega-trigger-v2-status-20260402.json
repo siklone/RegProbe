@@ -32,6 +32,7 @@
     "freeze_ref": "registry-research-framework/audit/windbg-vmware-freeze-20260403.json",
     "selection_ref": "registry-research-framework/audit/windbg-debug-environment-selection-20260403.json",
     "hyperv_setup_ref": "registry-research-framework/audit/windbg-hyperv-setup-20260403.json",
+    "vmware_debug_only_setup_ref": "registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json",
     "current_environment_target": "hyperv",
     "current_environment_status": "blocked-prereqs",
     "host_debugger_status": "installed",
@@ -181,7 +182,9 @@
   },
   "next_actions": [
     "treat the current VMware named-pipe WinDbg lane as frozen for classification-grade arbitration",
-    "prepare Hyper-V host prerequisites and keep the new debug environment debugger-first",
+    "if Hyper-V remains blocked on the current host, allow one short fresh VMware debug-only transport-first try",
+    "if that fresh VMware debug-only try reproduces the same transport blocker, stop and move directly to Hyper-V prerequisites",
+    "prepare Hyper-V host prerequisites in parallel and keep the long-term debug environment debugger-first",
     "do not widen beyond the 5-key pilot until the debug transport contract itself changes",
     "use the refreshed source-enrichment priority queue to decide which non-pilot candidates deserve runtime or WinDbg spend first",
     "treat power.control.ttm-enabled as a boot-unsafe isolated candidate and keep it out of broader runtime batches",

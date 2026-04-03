@@ -1,8 +1,10 @@
 ﻿{
-    "generated_utc":  "2026-04-03T18:17:30.3701448Z",
+    "generated_utc":  "2026-04-03T18:35:33.7320416Z",
     "epic":  "windbg-new-debug-environment",
     "freeze_ref":  "registry-research-framework/audit/windbg-vmware-freeze-20260403.json",
     "feasibility_ref":  "evidence/files/vm-tooling-staging/windbg-debug-environment-selection-20260403/hyperv-feasibility.json",
+    "hyperv_setup_ref":  "registry-research-framework/audit/windbg-hyperv-setup-20260403.json",
+    "vmware_debug_only_setup_ref":  "registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json",
     "debug_environment_candidates":  [
                                          {
                                              "type":  "Hyper-V",
@@ -30,6 +32,11 @@
                                      ],
     "selected":  "Hyper-V",
     "selected_status":  "blocked-prereqs",
-    "selected_immediate":  "prepare-hyperv-prereqs",
-    "fallback_if_blocked":  "VMware-debug-only"
+    "selected_long_term":  "Hyper-V",
+    "selected_long_term_status":  "blocked-prereqs",
+    "selected_immediate":  "VMware-debug-only",
+    "selected_immediate_status":  "ready-short-try",
+    "selected_immediate_reason":  "Hyper-V is the preferred long-term debugger-first environment, but while host prerequisites remain blocked the next short debugger-first attempt should use a fresh VMware debug-only VM instead of the frozen lane.",
+    "fallback_if_blocked":  "VMware-debug-only",
+    "frozen_lane_return_allowed":  false
 }

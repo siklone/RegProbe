@@ -11,6 +11,10 @@ This repo now treats runtime research and debugger-first arbitration as two diff
   - planned debugger-first lane for WinDbg, kernel breakpoints, and early-boot arbiter work
   - target baseline: `RegProbe-Debug-HyperV-Baseline-20260403`
   - current host status: `blocked-prereqs`
+- `VMware debug-only fallback family`
+  - allowed only as a short debugger-first fallback if `Hyper-V` is still blocked on the current host
+  - target baseline: `RegProbe-Debug-VMwareOnly-Baseline-20260403`
+  - this is not the same thing as the frozen VMware WinDbg lane
 
 The current VMware WinDbg named-pipe lane is intentionally frozen as a historical transport finding, not the forward path for final arbiter work.
 
@@ -98,7 +102,9 @@ Current direction:
 
 - freeze the current VMware named-pipe WinDbg lane as `known-blocked-frozen`
 - keep the parser/public-symbol findings
-- move new debugger-first work toward a dedicated `Hyper-V` environment
+- prefer a dedicated `Hyper-V` environment for long-term arbiter work
+- if `Hyper-V` is currently blocked, allow one short fresh `VMware debug-only` transport-first try
+- if that short fallback reproduces the same transport blocker, stop and move directly to `Hyper-V` prerequisites
 
 Current decision artifacts:
 
@@ -106,6 +112,7 @@ Current decision artifacts:
 registry-research-framework/audit/windbg-vmware-freeze-20260403.json
 registry-research-framework/audit/windbg-debug-environment-selection-20260403.json
 registry-research-framework/audit/windbg-hyperv-setup-20260403.json
+registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json
 ```
 
 Current Hyper-V planning scripts:
@@ -113,6 +120,7 @@ Current Hyper-V planning scripts:
 ```text
 scripts/vm-hyperv/test-hyperv-debug-feasibility.ps1
 scripts/vm-hyperv/new-hyperv-debug-baseline-plan.ps1
+scripts/vm/new-vmware-debug-only-baseline-plan.ps1
 registry-research-framework/tools/windbg-hyperv/run-debug-environment-selection.ps1
 ```
 

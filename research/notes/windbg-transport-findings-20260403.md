@@ -59,14 +59,17 @@ Date: `2026-04-03`
 
 - The current VMware WinDbg lane is now intentionally frozen as `known-blocked-frozen`.
 - That freeze preserves the parser and symbol work instead of discarding it.
-- The preferred next environment is `Hyper-V`, not more retries inside the same VMware named-pipe envelope.
-- Current host status for that next environment is `blocked-prereqs`, so the immediate action is `prepare-hyperv-prereqs`.
+- The preferred long-term next environment is `Hyper-V`, not more retries inside the same VMware named-pipe envelope.
+- If `Hyper-V` is still blocked on the current host, one short fresh `VMware debug-only` try is allowed as a fallback.
+- That fallback is a new debugger-first VM, not a return to the frozen lane.
+- If the same transport blocker reproduces there, the repo should stop the VMware branch and move directly to `Hyper-V` prerequisites.
 
 Current decision records:
 
 - [windbg-vmware-freeze-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-freeze-20260403.json)
 - [windbg-debug-environment-selection-20260403.json](C:\r\registry-research-framework\audit\windbg-debug-environment-selection-20260403.json)
 - [windbg-hyperv-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-hyperv-setup-20260403.json)
+- [windbg-vmware-debug-only-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-setup-20260403.json)
 
 ## Evidence
 

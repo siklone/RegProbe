@@ -70,6 +70,8 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
   Phase 0 feasibility gate for a debugger-first `Hyper-V` environment
 - `scripts/vm-hyperv/new-hyperv-debug-baseline-plan.ps1`
   emits the planned baseline contract, checkpoint shape, and provisioning steps for the `Hyper-V` debug arbiter VM
+- `scripts/vm/new-vmware-debug-only-baseline-plan.ps1`
+  emits the short-lived fallback plan for a fresh VMware debug-only VM when `Hyper-V` is still blocked on the current host
 
 These `vm-hyperv` scripts are intentionally separate from the VMware runtime family. They exist to keep debugger transport engineering isolated from shell-safe runtime research.
 
@@ -162,7 +164,7 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
 - `registry-research-framework/tools/run-import-dynamic-resolution-probe.ps1`
   static sidecar for loader-style binaries where the normal import table is not enough
 - `registry-research-framework/tools/windbg-hyperv/run-debug-environment-selection.ps1`
-  freezes the current VMware WinDbg lane, runs the Hyper-V feasibility gate, and writes the first debugger-first environment selection package
+  freezes the current VMware WinDbg lane, runs the Hyper-V feasibility gate, and writes both the preferred `Hyper-V` plan and the short VMware debug-only fallback plan
 
 ### `Historical / Repro`
 

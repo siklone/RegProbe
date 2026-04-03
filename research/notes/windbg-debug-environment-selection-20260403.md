@@ -2,8 +2,9 @@
 
 - Date: `20260403`
 - Selected long-term target: `Hyper-V`
-- Selected status: `blocked-prereqs`
-- Immediate phase: `prepare-hyperv-prereqs`
+- Long-term status: `blocked-prereqs`
+- Immediate environment: `VMware-debug-only`
+- Immediate environment status: `ready-short-try`
 - Fallback if blocked: `VMware-debug-only`
 
 ## Host Signals
@@ -14,6 +15,7 @@
 
 ## Decision
 - Freeze the current VMware WinDbg lane as known blocked.
-- Treat Hyper-V as the debugger-first target environment.
-- Do not widen single-key WinDbg semantics again until the new environment transport is proven.
+- Treat Hyper-V as the preferred debugger-first target environment.
+- If Hyper-V prerequisites are still blocked, allow one short fresh VMware debug-only try instead of returning to the frozen lane.
+- If that short VMware debug-only try reproduces the same transport blocker, stop and move directly to Hyper-V prerequisites.
 

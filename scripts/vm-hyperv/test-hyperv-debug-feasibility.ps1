@@ -166,8 +166,18 @@ $selection = [ordered]@{
     )
     selected = 'Hyper-V'
     selected_status = if ($hyperVSupportedNow) { 'ready' } else { 'blocked-prereqs' }
-    selected_immediate = if ($hyperVSupportedNow) { 'Hyper-V' } else { 'prepare-hyperv-prereqs' }
+    selected_long_term = 'Hyper-V'
+    selected_long_term_status = if ($hyperVSupportedNow) { 'ready' } else { 'blocked-prereqs' }
+    selected_immediate = if ($hyperVSupportedNow) { 'Hyper-V' } else { 'VMware-debug-only' }
+    selected_immediate_status = if ($hyperVSupportedNow) { 'ready' } else { 'ready-short-try' }
+    selected_immediate_reason = if ($hyperVSupportedNow) {
+        'Hyper-V prerequisites are already available on this host.'
+    }
+    else {
+        'Hyper-V is the preferred long-term debugger-first environment, but while host prerequisites remain blocked the next short debugger-first attempt should use a fresh VMware debug-only VM instead of the frozen lane.'
+    }
     fallback_if_blocked = 'VMware-debug-only'
+    frozen_lane_return_allowed = $false
     host = [ordered]@{
         os_name = [string]$computerInfo.WindowsProductName
         os_version = [string]$computerInfo.WindowsVersion
