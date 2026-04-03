@@ -12,6 +12,7 @@ $parserTargets = @(
     'registry-research-framework\tools\procmon-registry-trace.ps1',
     'registry-research-framework\tools\wpr-boot-trace.ps1',
     'registry-research-framework\tools\run-power-control-batch-mega-trigger-runtime.ps1',
+    'registry-research-framework\tools\run-power-control-batch-mega-trigger-runtime-safe.ps1',
     'registry-research-framework\tools\run-path-aware-runtime-probe.ps1',
     'scripts\vm\get-vm-shell-health.ps1',
     'scripts\vm\configure-kernel-debug-baseline.ps1',

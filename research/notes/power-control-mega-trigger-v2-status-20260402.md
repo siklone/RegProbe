@@ -269,6 +269,47 @@ That means the repo now has two honest truths at once:
 - the current VMware named-pipe `WinDbg` contract is exhausted for classification-grade arbitration
 - the source-enrichment queue is now good enough to drive the next runtime spend instead of guessing
 
+## Enriched Runtime Follow-Up
+
+The first enriched runtime follow-up was also executed instead of being left as a paper queue.
+
+Combined second-wave pilot:
+
+- `power.control.hiberboot-enabled`
+- `power.control.msdisabled`
+- `power.control.ttm-enabled`
+
+Canonical combined run:
+
+- `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-192839/summary.json`
+- `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-192839/results.json`
+
+Combined outcome:
+
+- status `boot-unsafe`
+- failure point `restart-cycle-shell`
+- the run never reached trigger execution after reboot
+
+So this was not treated as a `no-hit`. It was treated as a safety result.
+
+Isolation follow-up then narrowed the culprit:
+
+- `power.control.hiberboot-enabled`
+  - `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-195806/summary.json`
+  - isolated result: `no-hit`
+- `power.control.msdisabled`
+  - `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-201139/summary.json`
+  - isolated result: `no-hit`
+- `power.control.ttm-enabled`
+  - `evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-202529/summary.json`
+  - isolated result: `boot-unsafe`
+
+That is the cleanest current verdict:
+
+- `TtmEnabled` is now an isolated `boot-unsafe` candidate under `DWORD=1`
+- `HiberbootEnabled` and `MSDisabled` are individually safe under `pilot-safe-v1`, but still `no-hit`
+- so the combined enriched pilot was not a generic family failure; it narrowed to a specific unsafe value
+
 ## Repo Truth
 
 These 5 no-hit candidates are still the active escalation set:
@@ -290,3 +331,4 @@ The current attach bundle has been corrected to public-symbol reality:
 2. only return to single-key arbiter revalidation after the transport contract itself changes
 3. until then, do not promote WinDbg no-hit/no-read conclusions for these 5 values
 4. use the refreshed source-enrichment priority queue to decide which non-pilot candidates get runtime or WinDbg time next
+5. keep `power.control.ttm-enabled` out of broad runtime batches and handle it only in isolated safety-first lanes

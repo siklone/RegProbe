@@ -1,0 +1,68 @@
+﻿{
+    "generated_utc":  "2026-04-03T16:58:06.4952575Z",
+    "probe_name":  "power-control-batch-mega-trigger-runtime-secondary-20260403-195806",
+    "family":  "power-control",
+    "pattern":  "mega-trigger",
+    "snapshot_name":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "collection_mode":  "evidence",
+    "rollback_pending":  true,
+    "trigger_profile":  "pilot-safe-v1",
+    "host_output_root":  "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-195806",
+    "total_candidates":  1,
+    "candidate_ids":  [
+                          "power.control.hiberboot-enabled"
+                      ],
+    "shell_before":  {
+                         "generated_utc":  "2026-04-03T17:00:47.9299986Z",
+                         "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+                         "vm_running":  true,
+                         "tools_state":  "running",
+                         "process_query_error":  null,
+                         "shell_healthy":  true,
+                         "checks":  {
+                                        "explorer":  true,
+                                        "sihost":  true,
+                                        "shellhost":  true,
+                                        "ctfmon":  true,
+                                        "app":  false
+                                    }
+                     },
+    "shell_after":  {
+                        "generated_utc":  "2026-04-03T16:59:38.6082065Z",
+                        "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+                        "vm_running":  true,
+                        "tools_state":  "running",
+                        "process_query_error":  null,
+                        "shell_healthy":  true,
+                        "checks":  {
+                                       "explorer":  true,
+                                       "sihost":  true,
+                                       "shellhost":  true,
+                                       "ctfmon":  true,
+                                       "app":  false
+                                   }
+                    },
+    "reboot_mode":  "soft",
+    "preflight_recovery_performed":  true,
+    "preflight_recovery_reasons":  [
+                                       "stale-probe:power-control-batch-mega-trigger-runtime-secondary-20260403-192839"
+                                   ],
+    "status":  "no-hit",
+    "exact_hit_candidates":  [
+
+                             ],
+    "exact_line_only_candidates":  [
+
+                                   ],
+    "path_only_candidates":  [
+
+                             ],
+    "no_hit_candidates":  [
+                              "power.control.hiberboot-enabled"
+                          ],
+    "trigger_count":  8,
+    "trigger_error_count":  0,
+    "errors":  [
+
+               ]
+}

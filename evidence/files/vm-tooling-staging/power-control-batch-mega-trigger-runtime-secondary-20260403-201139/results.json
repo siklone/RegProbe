@@ -1,0 +1,101 @@
+﻿{
+    "generated_utc":  "2026-04-03T17:24:28.4943020Z",
+    "family":  "power-control",
+    "pattern":  "mega-trigger",
+    "total_candidates":  1,
+    "csv_exists":  false,
+    "csv_line_count":  0,
+    "path_line_count":  0,
+    "parser_source":  "etl-binary-fallback",
+    "etl_path":  "C:\\Windows\\System32\\RegProbeerruntimesecondary20260403201139.etl",
+    "etl_path_source":  "system32-trace-name",
+    "etl_ready":  true,
+    "etl_length":  8192,
+    "tracerpt":  {
+                     "success":  false,
+                     "attempt":  0,
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "csv_exists":  false,
+                     "csv_length":  0,
+                     "stdout":  "",
+                     "stderr":  "skipped-for-binary-first-runtime-parser",
+                     "attempts":  [
+
+                                  ]
+                 },
+    "exact_hit_count":  0,
+    "exact_line_only_count":  0,
+    "path_only_count":  0,
+    "no_hit_count":  1,
+    "trigger_log":  [
+                        {
+                            "name":  "cpu_stress",
+                            "start_utc":  "2026-04-03T17:21:23.5911407Z",
+                            "end_utc":  "2026-04-03T17:21:37.9078492Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "power_plan_and_requests",
+                            "start_utc":  "2026-04-03T17:21:37.9527753Z",
+                            "end_utc":  "2026-04-03T17:21:54.9799991Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "multi_thread_burst",
+                            "start_utc":  "2026-04-03T17:21:54.9951927Z",
+                            "end_utc":  "2026-04-03T17:23:52.1567844Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "disk_io_burst",
+                            "start_utc":  "2026-04-03T17:23:52.1729636Z",
+                            "end_utc":  "2026-04-03T17:23:53.0526010Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "process_spawn_burst",
+                            "start_utc":  "2026-04-03T17:23:53.0713852Z",
+                            "end_utc":  "2026-04-03T17:23:53.9087528Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "foreground_background_switch",
+                            "start_utc":  "2026-04-03T17:23:53.9255706Z",
+                            "end_utc":  "2026-04-03T17:24:07.1712924Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "timer_resolution_change",
+                            "start_utc":  "2026-04-03T17:24:07.1823849Z",
+                            "end_utc":  "2026-04-03T17:24:13.4019086Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "network_activity",
+                            "start_utc":  "2026-04-03T17:24:13.4161756Z",
+                            "end_utc":  "2026-04-03T17:24:23.9976159Z",
+                            "status":  "completed",
+                            "error":  null
+                        }
+                    ],
+    "candidates":  [
+                       {
+                           "candidate_id":  "power.control.msdisabled",
+                           "value_name":  "MSDisabled",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit",
+                           "sample_lines":  [
+
+                                            ]
+                       }
+                   ]
+}

@@ -144,11 +144,43 @@
     ],
     "note": "The current five-key no-hit pilot still has zero source hits across ReactOS, WRK, System Informer, and ADMX, while other kernel candidates such as AdditionalCriticalWorkerThreads now have strong cross-source support."
   },
+  "enriched_runtime_pilot": {
+    "status": "partial",
+    "priority_queue_ref": "registry-research-framework/audit/source-enrichment-priority-queue-20260403.json",
+    "combined_summary_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-192839/summary.json",
+    "combined_results_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-192839/results.json",
+    "combined_candidate_ids": [
+      "power.control.hiberboot-enabled",
+      "power.control.msdisabled",
+      "power.control.ttm-enabled"
+    ],
+    "combined_status": "boot-unsafe",
+    "isolated_followup": {
+      "power.control.hiberboot-enabled": {
+        "summary_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-195806/summary.json",
+        "results_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-195806/results.json",
+        "status": "no-hit"
+      },
+      "power.control.msdisabled": {
+        "summary_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-201139/summary.json",
+        "results_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-201139/results.json",
+        "status": "no-hit"
+      },
+      "power.control.ttm-enabled": {
+        "summary_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-202529/summary.json",
+        "results_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-202529/results.json",
+        "status": "boot-unsafe"
+      }
+    },
+    "note": "The enriched three-key follow-up reproduced boot-unsafe as a combined set; isolation then showed HiberbootEnabled and MSDisabled are individually safe under the pilot-safe-v1 profile, while TtmEnabled alone reproduces boot-unsafe."
+  },
   "next_actions": [
     "treat attach/start-order, reconnect-time command injection, and named-pipe launch mode as characterized on the current guest-restart base",
     "treat the current VMware named-pipe WinDbg contract as exhausted for classification-grade arbitration",
     "do not widen beyond the 5-key pilot until the transport contract itself changes",
-    "use the refreshed source-enrichment priority queue to decide which non-pilot candidates deserve runtime or WinDbg spend first"
+    "use the refreshed source-enrichment priority queue to decide which non-pilot candidates deserve runtime or WinDbg spend first",
+    "treat power.control.ttm-enabled as a boot-unsafe isolated candidate and keep it out of broader runtime batches",
+    "treat power.control.hiberboot-enabled and power.control.msdisabled as safe-profile no-hit candidates that may still need more specific hibernate/power-state triggers later"
   ],
   "pilot_outcome": {
     "status": "no-hit",

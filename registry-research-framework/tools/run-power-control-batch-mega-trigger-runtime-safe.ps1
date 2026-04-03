@@ -3,6 +3,8 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$VmPath,
 
+    [string]$VmProfile = '',
+
     [ValidateSet('evidence', 'operational')]
     [string]$CollectionMode = 'evidence',
 
@@ -14,7 +16,11 @@ param(
 
     [string]$OutputRoot = '',
 
-    [string[]]$RunnerArguments = @()
+    [string[]]$RunnerArguments = @(),
+
+    [string[]]$CandidateIds = @(),
+
+    [switch]$RecoverOnly
 )
 
 $ErrorActionPreference = 'Stop'
@@ -145,4 +151,18 @@ if (-not (Test-Path -LiteralPath $runnerPath)) {
     throw "Mega-trigger runner was not found: $runnerPath"
 }
 
-& $runnerPath -VmPath $VmPath -CollectionMode $CollectionMode @RunnerArguments
+$runnerParams = @{
+    VmPath = $VmPath
+    CollectionMode = $CollectionMode
+}
+if (-not [string]::IsNullOrWhiteSpace($VmProfile)) {
+    $runnerParams['VmProfile'] = $VmProfile
+}
+if (@($CandidateIds).Count -gt 0) {
+    $runnerParams['CandidateIds'] = @($CandidateIds)
+}
+if ($RecoverOnly) {
+    $runnerParams['RecoverOnly'] = $true
+}
+
+& $runnerPath @runnerParams @RunnerArguments
