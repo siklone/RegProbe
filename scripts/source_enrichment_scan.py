@@ -208,6 +208,18 @@ def suggested_trigger(candidate: Dict[str, Any]) -> List[str]:
     return ["boot trace", "ETW mega-trigger", "bounded registry watch"]
 
 
+def enrichment_strength(weighted_score: int) -> str:
+    if weighted_score >= 6:
+        return "very-strong"
+    if weighted_score >= 4:
+        return "strong"
+    if weighted_score >= 2:
+        return "medium"
+    if weighted_score >= 1:
+        return "weak"
+    return "none"
+
+
 def score_candidate(candidate: Dict[str, Any], source_results: List[Dict[str, Any]]) -> Dict[str, Any]:
     route_bucket = candidate.get("route_bucket")
     suspected_layer = candidate.get("suspected_layer")
@@ -260,7 +272,11 @@ def score_candidate(candidate: Dict[str, Any], source_results: List[Dict[str, An
     if route_bucket == "research-only" and weighted_score <= 1:
         runtime_priority = "hold"
 
-    if suspected_layer in {"kernel", "boot", "driver"} and weighted_score <= 1:
+    if trigger_family == "power-request-simulation" and weighted_score >= 2:
+        suggested_bucket = "runtime"
+    elif suspected_layer in {"kernel", "boot", "driver"} and weighted_score >= 2:
+        suggested_bucket = "windbg"
+    elif suspected_layer in {"kernel", "boot", "driver"} and weighted_score <= 1:
         suggested_bucket = "windbg"
     elif trigger_family in {"power-request-simulation", "power-state-transition"}:
         suggested_bucket = "runtime"
@@ -282,6 +298,7 @@ def score_candidate(candidate: Dict[str, Any], source_results: List[Dict[str, An
         "source_hits": source_hits,
         "support_count": source_count,
         "enrichment_score": weighted_score,
+        "enrichment_strength": enrichment_strength(weighted_score),
         "trigger_family": trigger_family,
         "suggested_trigger_family": trigger_family,
         "suggested_trigger": trigger_suggestion,

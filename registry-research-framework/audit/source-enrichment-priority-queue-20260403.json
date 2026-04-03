@@ -1,0 +1,1163 @@
+﻿{
+    "generated_utc":  "2026-04-03T16:22:33.304074Z",
+    "output_root":  "C:\\r\\registry-research-framework\\enrichment\\outputs\\source-enrichment-20260403-192135",
+    "source_audit":  "C:\\r\\registry-research-framework\\audit\\source-enrichment-20260403-192135.json",
+    "high_priority_runtime":  [
+                                  {
+                                      "candidate_id":  "power.force-hibernate-disabled.policy",
+                                      "enrichment_score":  10,
+                                      "support_count":  4,
+                                      "suggested_trigger_family":  "power-request-simulation",
+                                      "suggested_trigger":  [
+                                                                "PowerCreateRequest(SystemRequired)",
+                                                                "PowerSetRequest(DisplayRequired)",
+                                                                "audio playback session"
+                                                            ],
+                                      "route_bucket":  "docs-first-new-candidate"
+                                  },
+                                  {
+                                      "candidate_id":  "power.control.hiberboot-enabled",
+                                      "enrichment_score":  7,
+                                      "support_count":  3,
+                                      "suggested_trigger_family":  "power-request-simulation",
+                                      "suggested_trigger":  [
+                                                                "PowerCreateRequest(SystemRequired)",
+                                                                "PowerSetRequest(DisplayRequired)",
+                                                                "audio playback session"
+                                                            ],
+                                      "route_bucket":  "docs-first-new-candidate"
+                                  },
+                                  {
+                                      "candidate_id":  "power.session.hiberboot-enabled",
+                                      "enrichment_score":  7,
+                                      "support_count":  3,
+                                      "suggested_trigger_family":  "power-request-simulation",
+                                      "suggested_trigger":  [
+                                                                "PowerCreateRequest(SystemRequired)",
+                                                                "PowerSetRequest(DisplayRequired)",
+                                                                "audio playback session"
+                                                            ],
+                                      "route_bucket":  "existing-covered"
+                                  },
+                                  {
+                                      "candidate_id":  "power.control.msdisabled",
+                                      "enrichment_score":  3,
+                                      "support_count":  1,
+                                      "suggested_trigger_family":  "power-request-simulation",
+                                      "suggested_trigger":  [
+                                                                "PowerCreateRequest(SystemRequired)",
+                                                                "PowerSetRequest(DisplayRequired)",
+                                                                "audio playback session"
+                                                            ],
+                                      "route_bucket":  "research-only"
+                                  },
+                                  {
+                                      "candidate_id":  "power.control.ttm-enabled",
+                                      "enrichment_score":  2,
+                                      "support_count":  1,
+                                      "suggested_trigger_family":  "power-request-simulation",
+                                      "suggested_trigger":  [
+                                                                "PowerCreateRequest(SystemRequired)",
+                                                                "PowerSetRequest(DisplayRequired)",
+                                                                "audio playback session"
+                                                            ],
+                                      "route_bucket":  "docs-first-new-candidate"
+                                  },
+                                  {
+                                      "candidate_id":  "power.throttling.power-throttling-off",
+                                      "enrichment_score":  2,
+                                      "support_count":  1,
+                                      "suggested_trigger_family":  "power-request-simulation",
+                                      "suggested_trigger":  [
+                                                                "PowerCreateRequest(SystemRequired)",
+                                                                "PowerSetRequest(DisplayRequired)",
+                                                                "audio playback session"
+                                                            ],
+                                      "route_bucket":  "existing-covered"
+                                  }
+                              ],
+    "high_priority_windbg":  [
+                                 {
+                                     "candidate_id":  "system.executive-additional-critical-worker-threads",
+                                     "enrichment_score":  6,
+                                     "support_count":  2,
+                                     "suggested_trigger_family":  "worker-thread-contention",
+                                     "suggested_trigger":  [
+                                                               "worker thread saturation",
+                                                               "mutex/mutant contention",
+                                                               "rapid process create/destroy"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.executive-additional-delayed-worker-threads",
+                                     "enrichment_score":  6,
+                                     "support_count":  2,
+                                     "suggested_trigger_family":  "worker-thread-contention",
+                                     "suggested_trigger":  [
+                                                               "worker thread saturation",
+                                                               "mutex/mutant contention",
+                                                               "rapid process create/destroy"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.executive-uuid-sequence-number",
+                                     "enrichment_score":  6,
+                                     "support_count":  2,
+                                     "suggested_trigger_family":  "general-registry-watch",
+                                     "suggested_trigger":  [
+                                                               "boot trace",
+                                                               "ETW mega-trigger",
+                                                               "bounded registry watch"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.timer-check-flags",
+                                     "enrichment_score":  3,
+                                     "support_count":  1,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.io-allow-remote-dasd",
+                                     "enrichment_score":  2,
+                                     "support_count":  1,
+                                     "suggested_trigger_family":  "general-registry-watch",
+                                     "suggested_trigger":  [
+                                                               "boot trace",
+                                                               "ETW mega-trigger",
+                                                               "bounded registry watch"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.disable-exception-chain-validation",
+                                     "enrichment_score":  2,
+                                     "support_count":  1,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.allow-audio-to-enable-execution-required-power-requests",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.allow-system-required-power-requests",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.always-compute-qos-hints",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.class1-initial-unpark-count",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.coalescing-flush-interval",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.coalescing-timer-interval",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "existing-covered"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.deep-io-coalescing-enabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "existing-covered"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.disable-display-burst-on-power-source-change",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.disable-idle-states-at-boot",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "existing-covered"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.disable-inbox-pep-generated-constraints",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.disable-vsync-latency-update",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.drips-sw-hw-divergence-enable-live-dump",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.enable-input-suppression",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.enable-minimal-hiber-file",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.energy-estimation-enabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "existing-covered"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.enforce-austerity-mode",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.event-processor-enabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "existing-covered"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.fx-accounting-telemetry-disabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.hetero-hgs-ee-perf-hints-independent-enabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.hetero-hgs-plus-disabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.hetero-multi-class-parking-enabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.hetero-multi-core-classes-enabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.hiber-file-size-percent",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "research-only"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.hibernate-enabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.hibernate-enabled-default",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.idle-processors-require-qos-management",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.ignore-cs-compliance-check",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.ipi-last-clock-owner-disable",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.lid-reliability-state",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.maximum-frequency-override",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.mf-buffering-threshold",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.perf-boost-at-guaranteed",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.perf-calculate-actual-utilization",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.perf-check-timer-implementation",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.po-fx-system-irp-wait-for-report-device-powered",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.power-watchdog-drv-set-monitor-timeout-msec",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.power-watchdog-dwm-sync-flush-timeout-msec",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.power-watchdog-po-callout-timeout-msec",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.power-watchdog-power-on-gdi-timeout-msec",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.power-watchdog-request-queue-timeout-msec",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.sleepstudy-accounting-enabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.standby-connectivity-grace-period",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.timer-rebase-threshold-on-drips-exit",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.control.win32k-callout-watchdog-timeout-seconds",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.customize-during-setup",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "power.modern-sleep.enable-ds-net-refresh",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "power.modern-sleep.enabled-actions",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "research-only"
+                                 },
+                                 {
+                                     "candidate_id":  "power.session-idle-scan-interval",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "power.session-power-setting-profile",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "power.session-skip-tick-override",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "power.session-watchdog-resume-timeout",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "power.session-watchdog-sleep-timeout",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "power.session-win32-callout-watchdog-bugcheck-enabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "power.session.sleep-study-disabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "research-only"
+                                 },
+                                 {
+                                     "candidate_id":  "power.source-settings-version",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.executive-force-enable-mutant-autoboost",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "worker-thread-contention",
+                                     "suggested_trigger":  [
+                                                               "worker thread saturation",
+                                                               "mutex/mutant contention",
+                                                               "rapid process create/destroy"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.executive-kernel-worker-test-flags",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "worker-thread-contention",
+                                     "suggested_trigger":  [
+                                                               "worker thread saturation",
+                                                               "mutex/mutant contention",
+                                                               "rapid process create/destroy"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.executive-maximum-kernel-worker-threads",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "worker-thread-contention",
+                                     "suggested_trigger":  [
+                                                               "worker thread saturation",
+                                                               "mutex/mutant contention",
+                                                               "rapid process create/destroy"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.executive-tickcount-rollover-delay",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.io-allow-load-crash-dump-driver",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "general-registry-watch",
+                                     "suggested_trigger":  [
+                                                               "boot trace",
+                                                               "ETW mega-trigger",
+                                                               "bounded registry watch"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.io-disable-disk-counters",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "general-registry-watch",
+                                     "suggested_trigger":  [
+                                                               "boot trace",
+                                                               "ETW mega-trigger",
+                                                               "bounded registry watch"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.io-enable-session-zero-access-check",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "general-registry-watch",
+                                     "suggested_trigger":  [
+                                                               "boot trace",
+                                                               "ETW mega-trigger",
+                                                               "bounded registry watch"
+                                                           ],
+                                     "route_bucket":  "net-new"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.always-track-io-boosting",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.disable-control-flow-guard-export-suppression",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.disable-light-weight-suspend",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.enable-per-cpu-clock-tick-scheduling",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.enable-tick-accumulation-from-accounting-periods",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.enable-wer-user-reporting",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.force-bugcheck-for-dpc-watchdog",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.force-foreground-boost-decay",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.force-idle-grace-period",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.force-parking-requested",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.global-timer-resolution-requests",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "power-request-simulation",
+                                     "suggested_trigger":  [
+                                                               "PowerCreateRequest(SystemRequired)",
+                                                               "PowerSetRequest(DisplayRequired)",
+                                                               "audio playback session"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.hyper-start-disabled",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.interrupt-steering-flags",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.long-dpc-queue-threshold",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.long-dpc-runtime-threshold",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.max-dynamic-tick-duration",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.maximum-cooperative-idle-search-width",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.rebalance-min-priority",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.serialize-timer-expiration",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "existing-covered"
+                                 },
+                                 {
+                                     "candidate_id":  "system.kernel.xstate-context-lookaside-per-proc-max-depth",
+                                     "enrichment_score":  0,
+                                     "support_count":  0,
+                                     "suggested_trigger_family":  "timer-dpc-stress",
+                                     "suggested_trigger":  [
+                                                               "high-resolution timer request",
+                                                               "multiple concurrent timers",
+                                                               "DPC-heavy workload"
+                                                           ],
+                                     "route_bucket":  "docs-first-new-candidate"
+                                 }
+                             ],
+    "low_priority_hold":  [
+                              {
+                                  "candidate_id":  "policy.system.enable-virtualization",
+                                  "enrichment_score":  2,
+                                  "support_count":  1,
+                                  "suggested_trigger_family":  "general-registry-watch",
+                                  "suggested_trigger":  [
+                                                            "boot trace",
+                                                            "ETW mega-trigger",
+                                                            "bounded registry watch"
+                                                        ],
+                                  "route_bucket":  "research-only"
+                              },
+                              {
+                                  "candidate_id":  "policy.enable-local-logon-sid",
+                                  "enrichment_score":  0,
+                                  "support_count":  0,
+                                  "suggested_trigger_family":  "general-registry-watch",
+                                  "suggested_trigger":  [
+                                                            "boot trace",
+                                                            "ETW mega-trigger",
+                                                            "bounded registry watch"
+                                                        ],
+                                  "route_bucket":  "net-new"
+                              }
+                          ]
+}

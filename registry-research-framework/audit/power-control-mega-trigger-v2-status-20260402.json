@@ -121,10 +121,34 @@
     "launch_mode_effect": "none-observed",
     "note": "Server endpoint preserved kernel attach but not command execution; client endpoint degraded into direct transport_error; quiet versus standard launch mode did not change that result."
   },
+  "source_enrichment": {
+    "status": "partial",
+    "audit_ref": "registry-research-framework/audit/source-enrichment-20260403-192135.json",
+    "priority_queue_ref": "registry-research-framework/audit/source-enrichment-priority-queue-20260403.json",
+    "enabled_sources": [
+      "reactos",
+      "wrk",
+      "systeminformer",
+      "admx"
+    ],
+    "missing_sources": [
+      "wdk_headers",
+      "geoff_chappell"
+    ],
+    "five_key_zero_support_candidate_ids": [
+      "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "power.control.allow-system-required-power-requests",
+      "power.control.always-compute-qos-hints",
+      "power.control.coalescing-flush-interval",
+      "power.control.idle-processors-require-qos-management"
+    ],
+    "note": "The current five-key no-hit pilot still has zero source hits across ReactOS, WRK, System Informer, and ADMX, while other kernel candidates such as AdditionalCriticalWorkerThreads now have strong cross-source support."
+  },
   "next_actions": [
     "treat attach/start-order, reconnect-time command injection, and named-pipe launch mode as characterized on the current guest-restart base",
     "treat the current VMware named-pipe WinDbg contract as exhausted for classification-grade arbitration",
-    "do not widen beyond the 5-key pilot until the transport contract itself changes"
+    "do not widen beyond the 5-key pilot until the transport contract itself changes",
+    "use the refreshed source-enrichment priority queue to decide which non-pilot candidates deserve runtime or WinDbg spend first"
   ],
   "pilot_outcome": {
     "status": "no-hit",

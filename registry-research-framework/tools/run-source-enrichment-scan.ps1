@@ -32,12 +32,15 @@ if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
 $outputLeaf = Split-Path -Leaf $OutputRoot
 $auditPath = Join-Path $repoRoot ("registry-research-framework\audit\{0}.json" -f $outputLeaf)
 $notePath = Join-Path $repoRoot ("research\notes\{0}.md" -f $outputLeaf)
+$dateToken = if ($outputLeaf -match '(\d{8})-\d{6}$') { $Matches[1] } else { Get-Date -Format 'yyyyMMdd' }
+$priorityAuditPath = Join-Path $repoRoot ("registry-research-framework\audit\source-enrichment-priority-queue-{0}.json" -f $dateToken)
 
 function Expand-SourceRoot {
     param([string]$Value)
     return [Environment]::ExpandEnvironmentVariables($Value)
 }
 
+$cloneFailures = @()
 if ($CloneMissing) {
     $config = Get-Content -LiteralPath $SourceConfig -Raw | ConvertFrom-Json
     $selectedSources = if (@($SourceIds).Count -gt 0) {
@@ -64,7 +67,13 @@ if ($CloneMissing) {
 
         & git clone --depth 1 $source.git_url $expandedRoot
         if ($LASTEXITCODE -ne 0) {
-            throw "git clone failed for $($source.id)"
+            $cloneFailures += [ordered]@{
+                id = $source.id
+                git_url = $source.git_url
+                root = $expandedRoot
+                exit_code = $LASTEXITCODE
+            }
+            Write-Warning "git clone failed for $($source.id); continuing with remaining sources"
         }
     }
 }
@@ -126,10 +135,57 @@ $audit = [ordered]@{
     }
     top_runtime_candidates = @($master.priority_queue.high_priority_runtime | Select-Object -First 10)
     top_windbg_candidates = @($master.priority_queue.high_priority_windbg | Select-Object -First 10)
+    clone_failures = @($cloneFailures)
 }
 
 $auditJson = $audit | ConvertTo-Json -Depth 8
 Set-Content -LiteralPath $auditPath -Value $auditJson -Encoding UTF8
+
+$candidateIndex = @{}
+foreach ($candidate in @($master.candidates)) {
+    $candidateIndex[[string]$candidate.candidate_id] = $candidate
+}
+
+$priorityAudit = [ordered]@{
+    generated_utc = $master.generated_utc
+    output_root = $master.output_root
+    source_audit = $auditPath
+    high_priority_runtime = @($master.priority_queue.high_priority_runtime | ForEach-Object {
+        $candidate = $candidateIndex[[string]$_]
+        [ordered]@{
+            candidate_id = $_
+            enrichment_score = $candidate.enrichment_score
+            support_count = $candidate.support_count
+            suggested_trigger_family = $candidate.suggested_trigger_family
+            suggested_trigger = @($candidate.suggested_trigger)
+            route_bucket = $candidate.route_bucket
+        }
+    })
+    high_priority_windbg = @($master.priority_queue.high_priority_windbg | ForEach-Object {
+        $candidate = $candidateIndex[[string]$_]
+        [ordered]@{
+            candidate_id = $_
+            enrichment_score = $candidate.enrichment_score
+            support_count = $candidate.support_count
+            suggested_trigger_family = $candidate.suggested_trigger_family
+            suggested_trigger = @($candidate.suggested_trigger)
+            route_bucket = $candidate.route_bucket
+        }
+    })
+    low_priority_hold = @($master.priority_queue.low_priority_hold | ForEach-Object {
+        $candidate = $candidateIndex[[string]$_]
+        [ordered]@{
+            candidate_id = $_
+            enrichment_score = $candidate.enrichment_score
+            support_count = $candidate.support_count
+            suggested_trigger_family = $candidate.suggested_trigger_family
+            suggested_trigger = @($candidate.suggested_trigger)
+            route_bucket = $candidate.route_bucket
+        }
+    })
+}
+$priorityAuditJson = $priorityAudit | ConvertTo-Json -Depth 8
+Set-Content -LiteralPath $priorityAuditPath -Value $priorityAuditJson -Encoding UTF8
 
 $noteLines = @(
     "# Source Enrichment Wave",
@@ -157,8 +213,16 @@ $noteLines += @(
     "- Runtime queue heads: ``$((@($master.priority_queue.high_priority_runtime) | Select-Object -First 5) -join ', ')``",
     "- WinDbg queue heads: ``$((@($master.priority_queue.high_priority_windbg) | Select-Object -First 5) -join ', ')``"
 )
+if (@($cloneFailures).Count -gt 0) {
+    $noteLines += @(
+        "",
+        "## Clone Failures"
+    )
+    $noteLines += @($cloneFailures | ForEach-Object { "- ``$($_.id)``: exit ``$($_.exit_code)``" })
+}
 
 Set-Content -LiteralPath $notePath -Value (($noteLines -join "`n") + "`n") -Encoding UTF8
 
 Write-Host $auditPath
 Write-Host $notePath
+Write-Host $priorityAuditPath

@@ -233,6 +233,42 @@ Canonical matrix outputs:
 - `registry-research-framework/audit/windbg-pipe-launch-execution-20260403.json`
 - `research/notes/windbg-pipe-launch-matrix-20260403.md`
 
+## Source-Enrichment Follow-Up
+
+The source-enrichment wave is now real instead of scaffold-only.
+
+What is now present:
+
+- `ReactOS`
+- `WRK`
+- `System Informer`
+- `ADMX`
+
+Current canonical outputs:
+
+- `registry-research-framework/audit/source-enrichment-20260403-192135.json`
+- `registry-research-framework/audit/source-enrichment-priority-queue-20260403.json`
+- `research/notes/source-enrichment-20260403-192135.md`
+
+What that changes:
+
+- the current 5-key no-hit pilot still has **zero** source support across:
+  - `ReactOS`
+  - `WRK`
+  - `System Informer`
+  - `ADMX`
+- so these five values are still valid `WinDbg` escalation candidates, but they are no longer just "runtime no-hit"; they are now "runtime no-hit + zero source support so far"
+- in parallel, other kernel candidates now have strong cross-source support and can be prioritized more confidently:
+  - `system.executive-additional-critical-worker-threads`
+  - `system.executive-additional-delayed-worker-threads`
+  - `system.executive-uuid-sequence-number`
+  - `power.control.hiberboot-enabled`
+
+That means the repo now has two honest truths at once:
+
+- the current VMware named-pipe `WinDbg` contract is exhausted for classification-grade arbitration
+- the source-enrichment queue is now good enough to drive the next runtime spend instead of guessing
+
 ## Repo Truth
 
 These 5 no-hit candidates are still the active escalation set:
@@ -253,3 +289,4 @@ The current attach bundle has been corrected to public-symbol reality:
 1. treat the current VMware named-pipe WinDbg contract as characterized and exhausted for classification-grade arbitration
 2. only return to single-key arbiter revalidation after the transport contract itself changes
 3. until then, do not promote WinDbg no-hit/no-read conclusions for these 5 values
+4. use the refreshed source-enrichment priority queue to decide which non-pilot candidates get runtime or WinDbg time next
