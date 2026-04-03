@@ -24,6 +24,9 @@ $parserTargets = @(
     'registry-research-framework\tools\run-windbg-reconnect-command-matrix.ps1',
     'registry-research-framework\tools\run-windbg-pipe-launch-matrix.ps1',
     'registry-research-framework\tools\execute-windbg-boot-registry-trace.ps1',
+    'scripts\vm-hyperv\test-hyperv-debug-feasibility.ps1',
+    'scripts\vm-hyperv\new-hyperv-debug-baseline-plan.ps1',
+    'registry-research-framework\tools\windbg-hyperv\run-debug-environment-selection.ps1',
     'tests\Invoke-StagingInventorySmoke.ps1'
 )
 
@@ -155,6 +158,18 @@ try {
         $inventoryJson = $inventoryResult | ConvertFrom-Json
         if ([int]$inventoryJson.directory_count -le 0 -or [int]$inventoryJson.file_count -le 0) {
             throw 'Staging inventory smoke produced invalid counts.'
+        }
+
+        $hypervFeasibilityPath = Join-Path $tempRepoRoot 'hyperv-feasibility.json'
+        $hypervFeasibility = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm-hyperv\test-hyperv-debug-feasibility.ps1') -OutputPath $hypervFeasibilityPath | ConvertFrom-Json
+        if ($hypervFeasibility.selected -ne 'Hyper-V' -or @($hypervFeasibility.debug_environment_candidates).Count -lt 2) {
+            throw 'Hyper-V feasibility contract failed.'
+        }
+
+        $hypervPlanPath = Join-Path $tempRepoRoot 'hyperv-plan.json'
+        $hypervPlan = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm-hyperv\new-hyperv-debug-baseline-plan.ps1') -FeasibilityPath $hypervFeasibilityPath -OutputPath $hypervPlanPath | ConvertFrom-Json
+        if ($hypervPlan.debug_environment -ne 'hyperv' -or $hypervPlan.vm_role -ne 'debug_arbiter_only') {
+            throw 'Hyper-V baseline plan contract failed.'
         }
     }
     finally {

@@ -1,6 +1,18 @@
 # VM Workflow
 
-Runtime validation for this repository happens in the `Win25H2Clean` VMware guest.
+This repo now treats runtime research and debugger-first arbitration as two different VM families.
+
+## VM Families
+
+- `VMware runtime family`
+  - current host lane for ETW, Procmon, WPR, shell-safe mega-trigger work, and general research automation
+  - canonical baseline: `RegProbe-Baseline-ToolsHardened-20260330`
+- `Hyper-V debug family`
+  - planned debugger-first lane for WinDbg, kernel breakpoints, and early-boot arbiter work
+  - target baseline: `RegProbe-Debug-HyperV-Baseline-20260403`
+  - current host status: `blocked-prereqs`
+
+The current VMware WinDbg named-pipe lane is intentionally frozen as a historical transport finding, not the forward path for final arbiter work.
 
 ## Rule
 
@@ -14,6 +26,7 @@ Runtime validation for this repository happens in the `Win25H2Clean` VMware gues
   - ETW collection
   - Ghidra headless analysis
 - Use the host only for source editing, docs, artifact review, and offline prep.
+- Keep WinDbg debugger-first experiments separate from the runtime VMware family.
 
 For the current script map, also see:
 
@@ -76,6 +89,32 @@ registry-research-framework/config/vm-baselines.json
 ```
 
 The checked-in `vm_path` is sanitized for public repo hygiene. Set it to your own local VMX path before you run VM automation on a fresh clone.
+
+## Debug-Arbiter Direction
+
+WinDbg work is no longer expected to share the same success envelope as the runtime VMware lanes.
+
+Current direction:
+
+- freeze the current VMware named-pipe WinDbg lane as `known-blocked-frozen`
+- keep the parser/public-symbol findings
+- move new debugger-first work toward a dedicated `Hyper-V` environment
+
+Current decision artifacts:
+
+```text
+registry-research-framework/audit/windbg-vmware-freeze-20260403.json
+registry-research-framework/audit/windbg-debug-environment-selection-20260403.json
+registry-research-framework/audit/windbg-hyperv-setup-20260403.json
+```
+
+Current Hyper-V planning scripts:
+
+```text
+scripts/vm-hyperv/test-hyperv-debug-feasibility.ps1
+scripts/vm-hyperv/new-hyperv-debug-baseline-plan.ps1
+registry-research-framework/tools/windbg-hyperv/run-debug-environment-selection.ps1
+```
 
 ## Defender Exclusion Rule
 

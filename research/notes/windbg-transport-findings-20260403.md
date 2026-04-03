@@ -55,6 +55,19 @@ Date: `2026-04-03`
 - The next concrete fix is no longer inside parser syntax, start-order, break policy, reconnect-time command injection, or named-pipe launch mode.
 - Any next WinDbg transport step should change the transport contract itself, not just its current parameters.
 
+## Freeze Outcome
+
+- The current VMware WinDbg lane is now intentionally frozen as `known-blocked-frozen`.
+- That freeze preserves the parser and symbol work instead of discarding it.
+- The preferred next environment is `Hyper-V`, not more retries inside the same VMware named-pipe envelope.
+- Current host status for that next environment is `blocked-prereqs`, so the immediate action is `prepare-hyperv-prereqs`.
+
+Current decision records:
+
+- [windbg-vmware-freeze-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-freeze-20260403.json)
+- [windbg-debug-environment-selection-20260403.json](C:\r\registry-research-framework\audit\windbg-debug-environment-selection-20260403.json)
+- [windbg-hyperv-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-hyperv-setup-20260403.json)
+
 ## Evidence
 
 - transport findings surface: [windbg-transport-findings-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-findings-20260403.json)

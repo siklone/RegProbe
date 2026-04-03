@@ -6,7 +6,7 @@
   "pilot_trigger_count": 8,
   "recovery_safe": true,
   "terminal_vm_state": "shell-healthy-after-restore",
-  "current_status": "windbg-transport-partial",
+  "current_status": "windbg-vmware-frozen-hyperv-blocked-prereqs",
   "validated_runs": [
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json",
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json",
@@ -14,21 +14,26 @@
     "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json"
   ],
   "blockers": [
-    "windbg-conditional-filter-syntax",
-    "windbg-raw-watch-timeout",
     "windbg-singlekey-transport-error",
     "windbg-guest-restart-roundtrip-unproven",
     "windbg-start-order-command-not-executed",
     "windbg-reconnect-command-not-executed",
-    "windbg-named-pipe-contract-exhausted"
+    "windbg-named-pipe-contract-exhausted",
+    "windbg-vmware-lane-frozen",
+    "hyperv-host-prereqs-blocked"
   ],
   "windbg_lane": {
-    "status": "partial",
+    "status": "frozen",
     "bundle": "registry-research-framework/audit/power-control-windbg-boot-registry-trace-20260402.json",
     "baseline_prep": "registry-research-framework/audit/configure-kernel-debug-baseline.json",
     "command_script": "registry-research-framework/audit/windbg-registry-watch.txt",
     "debug_snapshot_name": "RegProbe-Baseline-Debug-20260402",
     "vm_profile": "secondary",
+    "freeze_ref": "registry-research-framework/audit/windbg-vmware-freeze-20260403.json",
+    "selection_ref": "registry-research-framework/audit/windbg-debug-environment-selection-20260403.json",
+    "hyperv_setup_ref": "registry-research-framework/audit/windbg-hyperv-setup-20260403.json",
+    "current_environment_target": "hyperv",
+    "current_environment_status": "blocked-prereqs",
     "host_debugger_status": "installed",
     "public_registry_symbol": "nt!CmQueryValueKey",
     "value_name_argument": "@rdx",
@@ -175,9 +180,9 @@
     "note": "The enriched three-key follow-up reproduced boot-unsafe as a combined set; isolation then showed HiberbootEnabled and MSDisabled are individually safe under the pilot-safe-v1 profile, while TtmEnabled alone reproduces boot-unsafe."
   },
   "next_actions": [
-    "treat attach/start-order, reconnect-time command injection, and named-pipe launch mode as characterized on the current guest-restart base",
-    "treat the current VMware named-pipe WinDbg contract as exhausted for classification-grade arbitration",
-    "do not widen beyond the 5-key pilot until the transport contract itself changes",
+    "treat the current VMware named-pipe WinDbg lane as frozen for classification-grade arbitration",
+    "prepare Hyper-V host prerequisites and keep the new debug environment debugger-first",
+    "do not widen beyond the 5-key pilot until the debug transport contract itself changes",
     "use the refreshed source-enrichment priority queue to decide which non-pilot candidates deserve runtime or WinDbg spend first",
     "treat power.control.ttm-enabled as a boot-unsafe isolated candidate and keep it out of broader runtime batches",
     "treat power.control.hiberboot-enabled and power.control.msdisabled as safe-profile no-hit candidates that may still need more specific hibernate/power-state triggers later"

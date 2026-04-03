@@ -1,0 +1,35 @@
+﻿{
+    "generated_utc":  "2026-04-03T18:17:30.3701448Z",
+    "epic":  "windbg-new-debug-environment",
+    "freeze_ref":  "registry-research-framework/audit/windbg-vmware-freeze-20260403.json",
+    "feasibility_ref":  "evidence/files/vm-tooling-staging/windbg-debug-environment-selection-20260403/hyperv-feasibility.json",
+    "debug_environment_candidates":  [
+                                         {
+                                             "type":  "Hyper-V",
+                                             "supported":  false,
+                                             "readiness":  "blocked-prereqs",
+                                             "priority":  1,
+                                             "reason":  "Preferred long-term debugger-first environment, but host prerequisites are not complete yet.",
+                                             "blockers":  [
+                                                              "feature-disabled:Microsoft-Hyper-V",
+                                                              "feature-disabled:Microsoft-Hyper-V-Management-PowerShell",
+                                                              "module-missing:Hyper-V",
+                                                              "cmdlets-missing:Hyper-V"
+                                                          ]
+                                         },
+                                         {
+                                             "type":  "VMware-debug-only",
+                                             "supported":  true,
+                                             "readiness":  "ready",
+                                             "priority":  2,
+                                             "reason":  "Immediate fallback if Hyper-V remains unavailable, but keep it separate from runtime VMware lanes.",
+                                             "blockers":  [
+                                                              "named-pipe-contract-unreliable"
+                                                          ]
+                                         }
+                                     ],
+    "selected":  "Hyper-V",
+    "selected_status":  "blocked-prereqs",
+    "selected_immediate":  "prepare-hyperv-prereqs",
+    "fallback_if_blocked":  "VMware-debug-only"
+}

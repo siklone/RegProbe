@@ -64,6 +64,15 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
 - `scripts/vm/cleanup-guest-validation-artifacts.ps1`
   removes guest-side validation clutter
 
+### `Active Research / Planned Debug Environment`
+
+- `scripts/vm-hyperv/test-hyperv-debug-feasibility.ps1`
+  Phase 0 feasibility gate for a debugger-first `Hyper-V` environment
+- `scripts/vm-hyperv/new-hyperv-debug-baseline-plan.ps1`
+  emits the planned baseline contract, checkpoint shape, and provisioning steps for the `Hyper-V` debug arbiter VM
+
+These `vm-hyperv` scripts are intentionally separate from the VMware runtime family. They exist to keep debugger transport engineering isolated from shell-safe runtime research.
+
 ### `Active Research`
 
 - `scripts/vm/run-cpu-idle-states-runtime-probe.ps1`
@@ -152,6 +161,8 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
   current UUID-specific follow-up lane
 - `registry-research-framework/tools/run-import-dynamic-resolution-probe.ps1`
   static sidecar for loader-style binaries where the normal import table is not enough
+- `registry-research-framework/tools/windbg-hyperv/run-debug-environment-selection.ps1`
+  freezes the current VMware WinDbg lane, runs the Hyper-V feasibility gate, and writes the first debugger-first environment selection package
 
 ### `Historical / Repro`
 

@@ -327,8 +327,14 @@ The current attach bundle has been corrected to public-symbol reality:
 
 ## Next Follow-Up
 
-1. treat the current VMware named-pipe WinDbg contract as characterized and exhausted for classification-grade arbitration
-2. only return to single-key arbiter revalidation after the transport contract itself changes
-3. until then, do not promote WinDbg no-hit/no-read conclusions for these 5 values
-4. use the refreshed source-enrichment priority queue to decide which non-pilot candidates get runtime or WinDbg time next
+1. treat the current VMware named-pipe WinDbg lane as frozen for classification-grade arbiter work
+2. use the new debug-environment selection package to move future WinDbg work toward a dedicated `Hyper-V` debug VM
+3. until that environment exists, do not promote WinDbg no-hit/no-read conclusions for these 5 values
+4. use the refreshed source-enrichment priority queue to decide which non-pilot candidates get runtime time next
 5. keep `power.control.ttm-enabled` out of broad runtime batches and handle it only in isolated safety-first lanes
+
+Current debug-environment decision records:
+
+- [windbg-vmware-freeze-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-freeze-20260403.json)
+- [windbg-debug-environment-selection-20260403.json](C:\r\registry-research-framework\audit\windbg-debug-environment-selection-20260403.json)
+- [windbg-hyperv-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-hyperv-setup-20260403.json)

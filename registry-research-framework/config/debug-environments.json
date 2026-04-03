@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "generated_note": "Runtime VMware research lanes remain separate from debugger-first arbiter lanes.",
+  "environments": [
+    {
+      "id": "vmware-runtime",
+      "type": "vmware-workstation",
+      "role": "runtime_research",
+      "status": "active",
+      "vm_profile": "primary",
+      "baseline_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+      "notes": [
+        "Use for ETW, Procmon, WPR, and shell-safe mega-trigger runtime lanes.",
+        "Do not overload this family with classification-grade WinDbg transport expectations."
+      ]
+    },
+    {
+      "id": "vmware-debug-frozen",
+      "type": "vmware-workstation",
+      "role": "windbg_freeze_only",
+      "status": "frozen",
+      "vm_profile": "secondary",
+      "baseline_snapshot": "RegProbe-Baseline-Debug-20260402",
+      "notes": [
+        "Parser and public symbol discovery are solved here.",
+        "The current named-pipe transport contract is not reliable enough for final arbiter decisions."
+      ]
+    },
+    {
+      "id": "hyperv-debug",
+      "type": "hyper-v",
+      "role": "debug_arbiter_only",
+      "status": "planned",
+      "vm_name": "RegProbe-Debug-HyperV",
+      "baseline_name": "RegProbe-Debug-HyperV-Baseline-20260403",
+      "generation": 2,
+      "transport_candidates": [
+        "serial",
+        "kdnet"
+      ],
+      "checkpoint_contract": [
+        "clean",
+        "debug-enabled",
+        "transport-healthy",
+        "singlekey-ready"
+      ],
+      "default_storage_root": "%LOCALAPPDATA%\\RegProbe\\hyperv\\RegProbe-Debug-HyperV"
+    }
+  ]
+}
