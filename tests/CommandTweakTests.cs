@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Win32;
@@ -863,5 +864,53 @@ public sealed class CommandTweakTests
         writeRegistryAccessor.Verify(x => x.DeleteValueAsync(
             reference,
             It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task RegistryCommandBatchTweak_RollbackAsync_WhenSnapshotMissing_FailsWithoutDeletingValue()
+    {
+        var readRegistryAccessor = new Mock<IRegistryAccessor>(MockBehavior.Strict);
+        var writeRegistryAccessor = new Mock<IRegistryAccessor>(MockBehavior.Strict);
+        var reference = new RegistryValueReference(
+            RegistryHive.CurrentUser,
+            RegistryView.Default,
+            @"Software\Policies\Microsoft\Windows\Explorer",
+            "DisableSearchHistory");
+
+        readRegistryAccessor
+            .Setup(x => x.ReadValueAsync(reference, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new RegistryValueReadResult(false, null));
+
+        var tweak = new RegistryCommandBatchTweak(
+            "privacy.disable-search-history",
+            "Disable Search History",
+            "Prevents search history from being stored for this user.",
+            TweakRiskLevel.Safe,
+            new[]
+            {
+                new RegistryValueBatchEntry(
+                    RegistryHive.CurrentUser,
+                    @"Software\Policies\Microsoft\Windows\Explorer",
+                    "DisableSearchHistory",
+                    RegistryValueKind.DWord,
+                    1)
+            },
+            readRegistryAccessor.Object,
+            writeRegistryAccessor.Object);
+
+        var detectResult = await tweak.DetectAsync(CancellationToken.None);
+        Assert.Equal(TweakStatus.Detected, detectResult.Status);
+
+        var snapshotsField = typeof(RegistryCommandBatchTweak).GetField("_snapshots", BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.NotNull(snapshotsField);
+        var snapshots = Assert.IsAssignableFrom<System.Collections.IDictionary>(snapshotsField!.GetValue(tweak));
+        snapshots.Remove(reference);
+
+        var rollbackResult = await tweak.RollbackAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.Failed, rollbackResult.Status);
+        Assert.Contains("missing snapshot", rollbackResult.Message, StringComparison.OrdinalIgnoreCase);
+        writeRegistryAccessor.Verify(x => x.DeleteValueAsync(It.IsAny<RegistryValueReference>(), It.IsAny<CancellationToken>()), Times.Never);
+        writeRegistryAccessor.Verify(x => x.SetValueAsync(It.IsAny<RegistryValueReference>(), It.IsAny<RegistryValueData>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 }

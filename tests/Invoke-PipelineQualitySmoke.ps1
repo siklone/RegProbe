@@ -65,7 +65,7 @@ try {
         $sampleDir = Join-Path $tempRepoRoot 'sanitize-sample'
         New-Item -ItemType Directory -Path $sampleDir -Force | Out-Null
         $sampleFile = Join-Path $sampleDir 'sample.json'
-        Set-Content -LiteralPath $sampleFile -Value 'C:\Users\Deniz\AppData\Local\Temp\artifact.bin' -Encoding UTF8
+        Set-Content -LiteralPath $sampleFile -Value 'C:\Users\TestUser\AppData\Local\Temp\artifact.bin' -Encoding UTF8
 
         $configPath = Join-Path $tempRepoRoot 'sanitize-config.json'
         $tempRepoRelative = ("tests/{0}" -f (Split-Path -Leaf $tempRepoRoot))
@@ -78,9 +78,9 @@ try {
   "rules": [
     {
       "id": "temp",
-      "type": "literal",
-      "pattern": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\",
-      "replacement": "%LOCALAPPDATA%\\Temp\\",
+      "type": "regex",
+      "pattern": "C:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Local\\\\Temp\\\\",
+      "replacement": "%LOCALAPPDATA%\\\\Temp\\\\",
       "targets": [
         "$tempRepoRelative/sanitize-sample"
       ],
