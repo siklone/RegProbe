@@ -18,7 +18,8 @@
     "windbg-raw-watch-timeout",
     "windbg-singlekey-transport-error",
     "windbg-guest-restart-roundtrip-unproven",
-    "windbg-start-order-command-not-executed"
+    "windbg-start-order-command-not-executed",
+    "windbg-reconnect-command-not-executed"
   ],
   "windbg_lane": {
     "status": "partial",
@@ -98,9 +99,20 @@
     "roundtrip_ready_count": 0,
     "note": "Across bonc/none/b break policies and 3/10/20-second attach leads, every guest-restart run preserved connectivity and shell recovery but none executed a post-restart queued roundtrip."
   },
+  "guest_restart_reconnect_command_matrix": {
+    "status": "attach-ok-command-not-executed",
+    "matrix_ref": "registry-research-framework/audit/windbg-reconnect-command-matrix-20260403.json",
+    "execution_ref": "registry-research-framework/audit/windbg-reconnect-command-execution-20260403.json",
+    "profile_count": 6,
+    "attach_ok_command_not_executed_count": 6,
+    "kernel_connected_count": 6,
+    "fatal_break_count": 1,
+    "breakin_success_count": 0,
+    "note": "Across the same guest-restart bonc/none/b and 3/10/20-second lead variants, host-side breakin-once injection also produced zero breakin successes and left every run attach-ok-command-not-executed."
+  },
   "next_actions": [
-    "treat attach/start-order as characterized on the current guest-restart base",
-    "move next to reconnect-time command injection or pipe endpoint experiments",
+    "treat attach/start-order and reconnect-time command injection as characterized on the current guest-restart base",
+    "move next to pipe endpoint or debugger launch-mode experiments",
     "treat queued roundtrip as proven but boot-unsafe until it lands in a healthy boot prompt",
     "only widen beyond the 5-key pilot after the connected single-key WinDbg pass becomes terminal"
   ],

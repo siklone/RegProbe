@@ -1,0 +1,108 @@
+﻿{
+    "generated_utc":  "2026-04-03T13:50:12.9103334Z",
+    "family":  "power-control",
+    "lane":  "windbg-boot-registry-trace",
+    "status":  "attach-ok-command-not-executed",
+    "capture_status":  "captured",
+    "collection_mode":  "evidence",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+    "debugger_path":  "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\kd.exe",
+    "target_key":  null,
+    "key_count":  0,
+    "hit_key_count":  0,
+    "analysis_source":  "script-log",
+    "trace_log_path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-164727/windbg-registry-trace_6024_2026-04-03_16-47-34-560.log",
+    "trace_profile":  "breakin-once",
+    "boot_mode":  "guest-restart",
+    "break_on_connect_mode":  "bonc",
+    "windbg_log_detected":  true,
+    "windbg_transport_state":  "attach_ok_command_not_executed",
+    "windbg_semantic_ready":  false,
+    "transport_score":  4,
+    "no_debuggee_waiting":  false,
+    "breakin_attempted":  false,
+    "breakin_request_count":  0,
+    "breakin_success_count":  0,
+    "roundtrip_attempted":  false,
+    "roundtrip_request_count":  0,
+    "roundtrip_success_count":  0,
+    "post_restart_roundtrip_request_count":  0,
+    "post_restart_roundtrip_success_count":  0,
+    "roundtrip_ready":  false,
+    "kernel_connected":  true,
+    "transport_error":  false,
+    "fatal_system_error_observed":  false,
+    "shell_recovered":  true,
+    "script_execution_observed":  true,
+    "breakpoint_set":  true,
+    "breakpoint_unresolved":  false,
+    "parser_invalid":  false,
+    "debugger_noise_budget_exceeded":  false,
+    "raw_noise_event_count":  0,
+    "host_filtered_hits":  0,
+    "command_script":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-164727/windbg-session-script.txt",
+    "capture_artifacts":  [
+                              {
+                                  "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-164727/windbg-registry-trace.public.log",
+                                  "sha256":  "3109723b404438570c8ede9c9c66eaea38619604955ef87f57b1e9b03bfa265c",
+                                  "size":  1315,
+                                  "collected_utc":  "2026-04-03T13:50:12.8905699Z",
+                                  "exists":  true,
+                                  "visibility":  "public-sanitized"
+                              },
+                              {
+                                  "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-164727/kd-console.public.log",
+                                  "sha256":  "8a1b48884fcc7fe12ac9b964d47ee3b78f39245d50e0e4ae021d3bf51f0bb421",
+                                  "size":  2827,
+                                  "collected_utc":  "2026-04-03T13:50:12.9078212Z",
+                                  "exists":  true,
+                                  "visibility":  "public-sanitized"
+                              },
+                              {
+                                  "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-164727/results.json",
+                                  "sha256":  "f64c042bb70d66de0b43d2a706733203e584a0a82abe5ede97f564f85b330202",
+                                  "size":  4643,
+                                  "collected_utc":  "2026-04-03T13:50:12.9113365Z",
+                                  "exists":  true
+                              },
+                              {
+                                  "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-164727/windbg-session-script.txt",
+                                  "sha256":  "897b789068427f4df05a3fe3d8147e207be6886f91663a1d797860c34dc44777",
+                                  "size":  190,
+                                  "collected_utc":  "2026-04-03T13:47:27.4909952Z",
+                                  "exists":  true
+                              }
+                          ],
+    "runner_output":  {
+                          "trace":  {
+                                        "label":  "windbg-trace-log",
+                                        "raw_source_path":  "C:\\r\\evidence\\files\\vm-tooling-staging\\windbg-boot-registry-trace-20260403-164727\\windbg-registry-trace_6024_2026-04-03_16-47-34-560.log",
+                                        "private_storage_status":  "not-configured",
+                                        "raw_private_ref":  null,
+                                        "public_sanitized_ref":  {
+                                                                     "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-164727/windbg-registry-trace.public.log",
+                                                                     "sha256":  "3109723b404438570c8ede9c9c66eaea38619604955ef87f57b1e9b03bfa265c",
+                                                                     "size":  1315,
+                                                                     "collected_utc":  "2026-04-03T13:50:12.8905699Z",
+                                                                     "exists":  true,
+                                                                     "visibility":  "public-sanitized"
+                                                                 }
+                                    },
+                          "console":  {
+                                          "label":  "kd-console-log",
+                                          "raw_source_path":  "C:\\r\\evidence\\files\\vm-tooling-staging\\windbg-boot-registry-trace-20260403-164727\\kd-console.log",
+                                          "private_storage_status":  "not-configured",
+                                          "raw_private_ref":  null,
+                                          "public_sanitized_ref":  {
+                                                                       "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-164727/kd-console.public.log",
+                                                                       "sha256":  "8a1b48884fcc7fe12ac9b964d47ee3b78f39245d50e0e4ae021d3bf51f0bb421",
+                                                                       "size":  2827,
+                                                                       "collected_utc":  "2026-04-03T13:50:12.9078212Z",
+                                                                       "exists":  true,
+                                                                       "visibility":  "public-sanitized"
+                                                                   }
+                                      }
+                      },
+    "bundle_ref":  "registry-research-framework/audit/windbg-reconnect-command-bundle-guest-restart-breakin-bonc-lead3-20260403.json",
+    "note":  "Boot trace executed through kd over the configured VMware serial pipe with raw+sanitized runner-output handling."
+}

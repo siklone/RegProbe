@@ -69,17 +69,25 @@
       "classification": "attach_ok_command_not_executed",
       "summary_ref": "registry-research-framework/audit/windbg-start-order-matrix-20260403.json",
       "note": "A focused start-order matrix across bonc/none/b break policies and 3/10/20-second attach leads preserved kernel connectivity and shell recovery in every run, but none of the six variants produced a post-restart queued command roundtrip."
+    },
+    {
+      "id": "guest-restart-reconnect-command-no-breakin",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "attach_ok_command_not_executed",
+      "summary_ref": "registry-research-framework/audit/windbg-reconnect-command-matrix-20260403.json",
+      "note": "A reconnect-command matrix using host-side breakin-once injection across the same bonc/none/b and 3/10/20-second lead variants also ended 6/6 as attach_ok_command_not_executed, with one fatal-break outlier and zero breakin successes."
     }
   ],
   "conclusion": {
     "semantic_lane_ready": true,
     "transport_lane_ready": false,
-    "recommended_next_phase": "guest-restart-reconnect-command-injection",
+    "recommended_next_phase": "guest-restart-pipe-endpoint-launch-mode",
     "recommended_next_actions": [
       "Keep WinDbg single-key arbitration paused until a guest-restart profile can keep kernel connectivity and process command/breakin roundtrips reproducibly.",
-      "Use the current guest-restart kd base for breakin/command-roundtrip debugging before widening to more semantics.",
-      "Treat start-order as characterized for the current guest-restart kd base: it no longer looks like the primary blocker.",
-      "Move next to reconnect-time command injection or pipe endpoint variants, not more frontend churn.",
+      "Treat both queued roundtrip and host-side reconnect command injection as characterized on the current guest-restart kd base.",
+      "Move next to pipe endpoint or debugger launch-mode variants, not more frontend churn.",
       "Treat attach-after-shell as a no-debuggee observation path, and guest-restart as the current transport base candidate."
     ]
   }

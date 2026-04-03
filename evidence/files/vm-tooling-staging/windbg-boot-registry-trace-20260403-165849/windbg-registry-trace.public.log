@@ -1,0 +1,26 @@
+﻿Opened log file '<local-path>
+2: kd> .echo REGPROBE_ATTACH_BEGIN
+REGPROBE_ATTACH_BEGIN
+2: kd> .echo REGPROBE_ATTACH_READY
+REGPROBE_ATTACH_READY
+2: kd> g
+IoRetryAsMiniDump() failed, status: 0xc0000001!
+Shutdown occurred at (Fri Apr  3 17:00:44.477 2026 (UTC + 3:00))...unloading all symbol tables.
+Waiting to reconnect...
+Connected to Windows 10 26100 x64 target at (Fri Apr  3 17:01:06.061 2026 (UTC + 3:00)), ptr64 TRUE
+Kernel Debugger connection established.
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       srv*
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (1 procs) Free x64
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff805`d2c00000 PsLoadedModuleList = 0xfffff805`d3af4e70
+System Uptime: 0 days 0:00:00.000
+KDTARGET: Refreshing KD connection
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\uiomap
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\vmbusr
+DriverEntry failed 0xc035001e for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\l1vhlwf
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\NetworkPrivacyPolicy

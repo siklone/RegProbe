@@ -30,14 +30,20 @@ Date: `2026-04-03`
   - `6/6` also kept `transport_error=false` and `shell_recovered=true`
   - but `0/6` produced any post-restart queued command roundtrip
   - so attach lead timing and current `bonc`/`none`/`b` break-policy choices are not enough by themselves
+- A reconnect-command matrix then closed the next loophole:
+  - the same `6` guest-restart variants were rerun with host-side `breakin-once`
+  - `0/6` produced any breakin success
+  - `6/6` still ended `attach_ok_command_not_executed`
+  - `1/6` produced a fatal-break outlier on `none + lead20`
+  - so the remaining blocker is now below both queued-script continuation and host-side reconnect command injection
 
 ## Practical Outcome
 
 - Do not widen the single-key WinDbg arbiter lane yet.
 - Do not interpret `attach-after-shell` as a successful live debug transport.
 - Treat `guest-restart` as the current best transport base, not `attach-after-shell`.
-- The next infrastructure phase should move from generic start-order tuning to reconnect-time command injection and pipe endpoint experiments.
-- The next concrete fix should target how queued commands are reintroduced after reconnect, not more parser churn or multi-key semantics.
+- The next infrastructure phase should move to pipe endpoint and debugger launch-mode experiments.
+- The next concrete fix should target the transport layer below reconnect-time command delivery, not more parser churn or multi-key semantics.
 
 ## Evidence
 
@@ -51,3 +57,5 @@ Date: `2026-04-03`
 - guest-restart thin roundtrip summary: [summary.json](C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-154201\summary.json)
 - start-order matrix: [windbg-start-order-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-start-order-matrix-20260403.json)
 - start-order note: [windbg-start-order-matrix-20260403.md](C:\r\research\notes\windbg-start-order-matrix-20260403.md)
+- reconnect-command matrix: [windbg-reconnect-command-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-reconnect-command-matrix-20260403.json)
+- reconnect-command note: [windbg-reconnect-command-matrix-20260403.md](C:\r\research\notes\windbg-reconnect-command-matrix-20260403.md)
