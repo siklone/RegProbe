@@ -12,7 +12,7 @@ param(
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$CredentialFilePath = '',
-    [ValidateSet('full', 'minimal', 'symbols', 'attach-only', 'breakin-once', 'breakin-twice', 'breakin-delayed-10', 'breakin-delayed-30', 'probe', 'firsthit', 'symbolsearch', 'valuenames', 'conditional', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
+    [ValidateSet('full', 'minimal', 'symbols', 'attach-only', 'breakin-once', 'breakin-twice', 'breakin-delayed-10', 'breakin-delayed-30', 'roundtrip-once', 'probe', 'firsthit', 'symbolsearch', 'valuenames', 'conditional', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
     [string]$TraceProfile = 'full',
     [int]$DebuggerAttachLeadSeconds = 10,
     [int]$ShellHealthTimeoutSeconds = 900,
@@ -299,6 +299,23 @@ function Get-TraceObservation {
     $conditionalHitLines = Get-ConditionalHitLines -Lines $analysisLines
     $breakinRequestLines = @($analysisLines | Where-Object { $_ -match 'REGPROBE_BREAKIN_REQUEST\|' })
     $breakinSuccessLines = @($analysisLines | Where-Object { $_ -match 'REGPROBE_BREAKIN_OK\|' })
+    $roundtripRequestLines = @($analysisLines | Where-Object { $_ -match 'REGPROBE_ROUNDTRIP_REQUEST\|' })
+    $roundtripSuccessLines = @($analysisLines | Where-Object { $_ -match 'REGPROBE_ROUNDTRIP_OK\|' })
+    $restartBoundaryIndex = -1
+    for ($lineIndex = 0; $lineIndex -lt $analysisLines.Count; $lineIndex++) {
+        if ($analysisLines[$lineIndex] -match 'Shutdown occurred at|Waiting to reconnect\.\.\.') {
+            $restartBoundaryIndex = $lineIndex
+            break
+        }
+    }
+    $postRestartLines = if ($restartBoundaryIndex -ge 0 -and $restartBoundaryIndex -lt ($analysisLines.Count - 1)) {
+        @($analysisLines[($restartBoundaryIndex + 1)..($analysisLines.Count - 1)])
+    }
+    else {
+        @()
+    }
+    $postRestartRoundtripRequestLines = @($postRestartLines | Where-Object { $_ -match 'REGPROBE_ROUNDTRIP_REQUEST\|' })
+    $postRestartRoundtripSuccessLines = @($postRestartLines | Where-Object { $_ -match 'REGPROBE_ROUNDTRIP_OK\|' })
     $targetMatches = @()
     if (-not [string]::IsNullOrWhiteSpace($TargetKey)) {
         $targetMatches = @($rawValueBlocks | Where-Object { $_ -like "*$TargetKey*" })
@@ -332,6 +349,14 @@ function Get-TraceObservation {
         breakin_success_count = @($breakinSuccessLines).Count
         breakin_request_lines = @($breakinRequestLines)
         breakin_success_lines = @($breakinSuccessLines)
+        roundtrip_request_count = @($roundtripRequestLines).Count
+        roundtrip_success_count = @($roundtripSuccessLines).Count
+        roundtrip_request_lines = @($roundtripRequestLines)
+        roundtrip_success_lines = @($roundtripSuccessLines)
+        post_restart_roundtrip_request_count = @($postRestartRoundtripRequestLines).Count
+        post_restart_roundtrip_success_count = @($postRestartRoundtripSuccessLines).Count
+        post_restart_roundtrip_request_lines = @($postRestartRoundtripRequestLines)
+        post_restart_roundtrip_success_lines = @($postRestartRoundtripSuccessLines)
         conditional_hit_lines = $conditionalHitLines
         host_filtered_hits = @($targetMatches).Count
         host_filtered_samples = @($targetMatches | Select-Object -First 3)
@@ -357,6 +382,43 @@ function Wait-ForBreakinOutcome {
     do {
         $observation = Get-TraceObservation -PreferredTraceLogPath $PreferredTraceLogPath -ConsoleLogPath $ConsoleLogPath -TargetKey $TargetKey
         if ($observation.transport_error -or $observation.breakin_success_count -ge $ExpectedBreakinCount) {
+            return $observation
+        }
+
+        Start-Sleep -Seconds ([Math]::Min($PollIntervalSeconds, 5))
+    } while ((Get-Date) -lt $deadline)
+
+    return (Get-TraceObservation -PreferredTraceLogPath $PreferredTraceLogPath -ConsoleLogPath $ConsoleLogPath -TargetKey $TargetKey)
+}
+
+function Get-RoundtripProfileSpec {
+    param([string]$Profile)
+
+    switch ($Profile) {
+        'roundtrip-once' {
+            return [ordered]@{
+                roundtrip_count = 1
+            }
+        }
+        default {
+            return $null
+        }
+    }
+}
+
+function Wait-ForRoundtripOutcome {
+    param(
+        [string]$PreferredTraceLogPath,
+        [string]$ConsoleLogPath,
+        [string]$TargetKey = '',
+        [int]$ExpectedRoundtripCount = 1,
+        [int]$TimeoutSeconds = 45
+    )
+
+    $deadline = (Get-Date).AddSeconds([Math]::Max(10, $TimeoutSeconds))
+    do {
+        $observation = Get-TraceObservation -PreferredTraceLogPath $PreferredTraceLogPath -ConsoleLogPath $ConsoleLogPath -TargetKey $TargetKey
+        if ($observation.transport_error -or $observation.roundtrip_success_count -ge $ExpectedRoundtripCount) {
             return $observation
         }
 
@@ -731,6 +793,18 @@ $modeCommandLines = switch ($TraceProfile) {
             'g'
         )
     }
+    'roundtrip-once' {
+        @(
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            ('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile),
+            '.echo REGPROBE_ATTACH_BEGIN',
+            '.echo REGPROBE_ATTACH_READY',
+            'g',
+            '.echo REGPROBE_ROUNDTRIP_REQUEST|1',
+            '.echo REGPROBE_ROUNDTRIP_OK|1',
+            'g'
+        )
+    }
     'probe' {
         @(
             '.symfix',
@@ -871,7 +945,9 @@ $recovery = $null
 $debuggerNoiseBudgetExceeded = $false
 $traceObservation = $null
 $breakinExecution = $null
+$roundtripExecution = $null
 $requiresBreakinProfile = ($TraceProfile -like 'breakin-*')
+$requiresRoundtripProfile = ($TraceProfile -like 'roundtrip-*')
 $useColdBoot = ($bootMode -eq 'cold-boot') -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)
 $kdArgs = @()
 if (-not $useColdBoot) {
@@ -963,6 +1039,18 @@ try {
                     $session.shell_checks = $shellSnapshot.checks
                 }
             }
+            elseif ($requiresRoundtripProfile) {
+                $roundtripExecution = Get-RoundtripProfileSpec -Profile $TraceProfile
+                $session.roundtrip_execution = $roundtripExecution
+                $session.steps += ('roundtrip-profile-{0}-armed' -f $TraceProfile)
+                $traceObservation = Wait-ForRoundtripOutcome -PreferredTraceLogPath $traceLogPath -ConsoleLogPath $consoleLogPath -TargetKey $targetKey -ExpectedRoundtripCount ([int]$roundtripExecution.roundtrip_count)
+                $shellSnapshot = Get-ShellHealthSnapshot -VmPath $vmPath -GuestAuthArgs $guestAuthArgs
+                $shellRecovered = [bool]$shellSnapshot.shell_healthy
+                if ($shellRecovered) {
+                    $session.steps += 'shell-healthy-after-roundtrip'
+                    $session.shell_checks = $shellSnapshot.checks
+                }
+            }
         }
         elseif ($debuggerNoiseBudgetExceeded) {
             $session.status = 'noise-budget-stop'
@@ -993,6 +1081,18 @@ try {
                 $shellRecovered = [bool]$shellSnapshot.shell_healthy
                 if ($shellRecovered) {
                     $session.steps += 'shell-healthy-after-breakin'
+                    $session.shell_checks = $shellSnapshot.checks
+                }
+            }
+            elseif ($requiresRoundtripProfile) {
+                $roundtripExecution = Get-RoundtripProfileSpec -Profile $TraceProfile
+                $session.roundtrip_execution = $roundtripExecution
+                $session.steps += ('roundtrip-profile-{0}-armed' -f $TraceProfile)
+                $traceObservation = Wait-ForRoundtripOutcome -PreferredTraceLogPath $traceLogPath -ConsoleLogPath $consoleLogPath -TargetKey $targetKey -ExpectedRoundtripCount ([int]$roundtripExecution.roundtrip_count)
+                $shellSnapshot = Get-ShellHealthSnapshot -VmPath $vmPath -GuestAuthArgs $guestAuthArgs
+                $shellRecovered = [bool]$shellSnapshot.shell_healthy
+                if ($shellRecovered) {
+                    $session.steps += 'shell-healthy-after-roundtrip'
                     $session.shell_checks = $shellSnapshot.checks
                 }
             }
@@ -1080,6 +1180,12 @@ $windbgLogDetected = [bool]$traceObservation.windbg_log_detected
 $firstHitObserved = [bool]$traceObservation.firsthit_observed
 $breakinRequestCount = [int]$traceObservation.breakin_request_count
 $breakinSuccessCount = [int]$traceObservation.breakin_success_count
+$roundtripRequestCount = [int]$traceObservation.roundtrip_request_count
+$roundtripSuccessCount = [int]$traceObservation.roundtrip_success_count
+$postRestartRoundtripRequestCount = [int]$traceObservation.post_restart_roundtrip_request_count
+$postRestartRoundtripSuccessCount = [int]$traceObservation.post_restart_roundtrip_success_count
+$effectiveRoundtripRequestCount = if ($bootMode -eq 'attach-after-shell') { $roundtripRequestCount } else { $postRestartRoundtripRequestCount }
+$effectiveRoundtripSuccessCount = if ($bootMode -eq 'attach-after-shell') { $roundtripSuccessCount } else { $postRestartRoundtripSuccessCount }
 $resultStatus = if ($runError -and $fatalSystemErrorObserved) {
     'boot-unsafe'
 }
@@ -1113,6 +1219,13 @@ elseif ($TraceProfile -in @('minimal', 'symbols', 'attach-only')) {
 elseif ($TraceProfile -like 'breakin-*') {
     if ($breakinSuccessCount -gt 0) { 'runner-ok' }
     elseif ($breakinRequestCount -gt 0) { 'attach-ok-breakin-failed' }
+    elseif ($noDebuggeeWaiting) { 'attach-ok-no-debuggee' }
+    elseif ($shellRecovered) { 'attach-ok-command-not-executed' }
+    else { 'transport-unstable' }
+}
+elseif ($TraceProfile -like 'roundtrip-*') {
+    if ($effectiveRoundtripSuccessCount -gt 0) { 'runner-ok' }
+    elseif ($effectiveRoundtripRequestCount -gt 0) { 'attach-ok-roundtrip-missing' }
     elseif ($noDebuggeeWaiting) { 'attach-ok-no-debuggee' }
     elseif ($shellRecovered) { 'attach-ok-command-not-executed' }
     else { 'transport-unstable' }
@@ -1156,6 +1269,23 @@ elseif ($TraceProfile -like 'breakin-*') {
         'transport_unstable'
     }
 }
+elseif ($TraceProfile -like 'roundtrip-*') {
+    if ($effectiveRoundtripSuccessCount -gt 0 -and $shellRecovered) {
+        'transport_ok'
+    }
+    elseif ($effectiveRoundtripRequestCount -gt 0 -and $shellRecovered) {
+        'attach_ok_roundtrip_missing'
+    }
+    elseif ($noDebuggeeWaiting -and $shellRecovered) {
+        'attach_ok_no_debuggee'
+    }
+    elseif ($shellRecovered -and $scriptExecutionObserved) {
+        'attach_ok_command_not_executed'
+    }
+    else {
+        'transport_unstable'
+    }
+}
 elseif ($noDebuggeeWaiting -and $shellRecovered -and $scriptExecutionObserved) {
     'attach_ok_no_debuggee'
 }
@@ -1175,6 +1305,7 @@ if ($shellRecovered) { $transportScore++ }
 if ($kernelConnected -or $bootMode -eq 'attach-after-shell') { $transportScore++ }
 if (-not $transportError) { $transportScore++ }
 if ($breakinSuccessCount -gt 0) { $transportScore++ }
+if ($effectiveRoundtripSuccessCount -gt 0) { $transportScore++ }
 $windbgSemanticReady = ($TraceProfile -like 'singlekey-*')
 
 if ($resultStatus -eq 'boot-unsafe' -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)) {
@@ -1211,6 +1342,12 @@ $results = [ordered]@{
     breakin_attempted = ($breakinRequestCount -gt 0)
     breakin_request_count = $breakinRequestCount
     breakin_success_count = $breakinSuccessCount
+    roundtrip_attempted = ($effectiveRoundtripRequestCount -gt 0)
+    roundtrip_request_count = $roundtripRequestCount
+    roundtrip_success_count = $roundtripSuccessCount
+    post_restart_roundtrip_request_count = $postRestartRoundtripRequestCount
+    post_restart_roundtrip_success_count = $postRestartRoundtripSuccessCount
+    roundtrip_ready = ($effectiveRoundtripSuccessCount -gt 0)
     kernel_connected = $kernelConnected
     transport_error = $transportError
     fatal_system_error_observed = $fatalSystemErrorObserved
@@ -1270,6 +1407,12 @@ $summary = [ordered]@{
     breakin_attempted = ($breakinRequestCount -gt 0)
     breakin_request_count = $breakinRequestCount
     breakin_success_count = $breakinSuccessCount
+    roundtrip_attempted = ($effectiveRoundtripRequestCount -gt 0)
+    roundtrip_request_count = $roundtripRequestCount
+    roundtrip_success_count = $roundtripSuccessCount
+    post_restart_roundtrip_request_count = $postRestartRoundtripRequestCount
+    post_restart_roundtrip_success_count = $postRestartRoundtripSuccessCount
+    roundtrip_ready = ($effectiveRoundtripSuccessCount -gt 0)
     kernel_connected = $kernelConnected
     transport_error = $transportError
     fatal_system_error_observed = $fatalSystemErrorObserved

@@ -70,9 +70,26 @@
     "shell_recovered": true,
     "roundtrip_ready": false
   },
+  "guest_restart_roundtrip_probe": {
+    "status": "boot-unsafe",
+    "bundle_ref": "registry-research-framework/audit/windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json",
+    "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/summary.json",
+    "boot_mode": "guest-restart",
+    "trace_profile": "roundtrip-once",
+    "break_on_connect_mode": "bonc",
+    "try_no_rx_loss": "FALSE",
+    "kernel_connected": true,
+    "transport_error": false,
+    "post_restart_roundtrip_success_count": 2,
+    "fatal_system_error_observed": true,
+    "shell_recovered": false,
+    "recovered_via_snapshot": true,
+    "roundtrip_ready": false
+  },
   "next_actions": [
-    "repeat the strongest guest-restart serial variants and validate command/breakin roundtrip on that base",
-    "move next to pipe endpoint and attach/start-order experiments if guest-restart roundtrip is still unstable",
+    "keep the strongest guest-restart serial base and move next to attach/start-order plus break-policy experiments",
+    "treat queued roundtrip as proven but boot-unsafe until it lands in a healthy boot prompt",
+    "move next to pipe endpoint experiments only after start-order variants are characterized",
     "only widen beyond the 5-key pilot after the connected single-key WinDbg pass becomes terminal"
   ],
   "pilot_outcome": {

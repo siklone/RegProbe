@@ -5,7 +5,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputPath,
     [string]$LogPath = 'C:\RegProbe-Diag\windbg-registry-trace.log',
-    [ValidateSet('multi-postfilter', 'minimal', 'symbols', 'attach-only', 'breakin-once', 'breakin-twice', 'breakin-delayed-10', 'breakin-delayed-30', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
+    [ValidateSet('multi-postfilter', 'minimal', 'symbols', 'attach-only', 'breakin-once', 'breakin-twice', 'breakin-delayed-10', 'breakin-delayed-30', 'roundtrip-once', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
     [string]$TraceProfile = 'multi-postfilter',
     [int]$RawHitLimit = 100
 )
@@ -31,8 +31,10 @@ $resolvedTargetKey = if ($resolvedKeyNames.Count -eq 1) { [string]$resolvedKeyNa
 $lines = New-Object System.Collections.Generic.List[string]
 $lines.Add('$$ RegProbe WinDbg boot registry watch script')
 $lines.Add('$$ This script targets nt!CmQueryValueKey using public symbols and parser-safe bu + bs 0 commands.')
-$lines.Add('.symfix')
-$lines.Add('.reload /f')
+if ($TraceProfile -ne 'roundtrip-once') {
+    $lines.Add('.symfix')
+    $lines.Add('.reload /f')
+}
 $lines.Add(('.logopen /t "{0}"' -f $LogPath.Replace('\', '\\')))
 
 switch ($TraceProfile) {
@@ -76,6 +78,15 @@ switch ($TraceProfile) {
         $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
         $lines.Add('.echo REGPROBE_ATTACH_BEGIN')
         $lines.Add('.echo REGPROBE_ATTACH_READY')
+        $lines.Add('g')
+    }
+    'roundtrip-once' {
+        $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
+        $lines.Add('.echo REGPROBE_ATTACH_BEGIN')
+        $lines.Add('.echo REGPROBE_ATTACH_READY')
+        $lines.Add('g')
+        $lines.Add('.echo REGPROBE_ROUNDTRIP_REQUEST|1')
+        $lines.Add('.echo REGPROBE_ROUNDTRIP_OK|1')
         $lines.Add('g')
     }
     'singlekey-smoke' {

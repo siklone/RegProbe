@@ -22,7 +22,7 @@ param(
     [string]$DebugSnapshotName = 'RegProbe-Baseline-Debug-20260402',
     [ValidateSet('evidence', 'operational')]
     [string]$CollectionMode = 'evidence',
-    [ValidateSet('multi-postfilter', 'minimal', 'symbols', 'attach-only', 'breakin-once', 'breakin-twice', 'breakin-delayed-10', 'breakin-delayed-30', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
+    [ValidateSet('multi-postfilter', 'minimal', 'symbols', 'attach-only', 'breakin-once', 'breakin-twice', 'breakin-delayed-10', 'breakin-delayed-30', 'roundtrip-once', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
     [string]$TraceProfile = 'multi-postfilter',
     [ValidateSet('guest-restart', 'cold-boot', 'attach-after-shell')]
     [string]$BootMode = '',

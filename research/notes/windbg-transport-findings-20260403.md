@@ -21,6 +21,10 @@ Date: `2026-04-03`
 - The narrower question is now which `guest-restart` serial variant preserves command/break-in roundtrips reproducibly.
 - A direct `breakin-once` run on the strongest current base (`guest-restart` + `kd` + `bonc` + `tryNoRxLoss=FALSE`) still ended `attach_ok_command_not_executed`.
 - That means kernel connectivity is now the stronger part of the lane; command/break-in roundtrip is the remaining weak point.
+- A thinner `roundtrip-once` probe then proved something narrower:
+  - post-restart queued commands **do** resume
+  - but they resumed at a fatal-system-error break, not at a healthy boot-time prompt
+  - the VM had to be recovered from snapshot afterward
 
 ## Practical Outcome
 
@@ -28,6 +32,7 @@ Date: `2026-04-03`
 - Do not interpret `attach-after-shell` as a successful live debug transport.
 - Treat `guest-restart` as the current best transport base, not `attach-after-shell`.
 - The next infrastructure phase should stay on `guest-restart` break-in/command-roundtrip validation plus pipe endpoint/start-order testing, not more key-specific RE.
+- The next concrete fix should target attach/start-order and break policy so queued commands land in a healthy boot prompt instead of a fatal-system-error stop.
 
 ## Evidence
 
@@ -37,3 +42,5 @@ Date: `2026-04-03`
 - serial-config execution detail: [windbg-serial-config-execution-20260403.json](C:\r\registry-research-framework\audit\windbg-serial-config-execution-20260403.json)
 - guest-restart breakin-once bundle: [windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json)
 - guest-restart breakin-once summary: [summary.json](C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-145133\summary.json)
+- guest-restart thin roundtrip bundle: [windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json)
+- guest-restart thin roundtrip summary: [summary.json](C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-154201\summary.json)

@@ -51,6 +51,15 @@
       "classification": "attach_ok_command_not_executed",
       "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-145133/summary.json",
       "note": "A direct breakin-once probe on the strongest current guest-restart serial base kept kernel connectivity and shell health, but still failed to produce a real breakin/command roundtrip."
+    },
+    {
+      "id": "guest-restart-roundtrip-resumes-at-fatal-break",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "boot_unsafe",
+      "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/summary.json",
+      "note": "A thinner queued-command roundtrip probe proved that post-restart commands can resume, but they resumed only after a fatal system error break and required snapshot recovery."
     }
   ],
   "conclusion": {
@@ -60,7 +69,8 @@
     "recommended_next_actions": [
       "Keep WinDbg single-key arbitration paused until a guest-restart profile can keep kernel connectivity and process command/breakin roundtrips reproducibly.",
       "Use the current guest-restart kd base for breakin/command-roundtrip debugging before widening to more semantics.",
-      "If roundtrip is still weak, move next to pipe endpoint and attach/start-order variants, not more frontend churn.",
+      "Prioritize attach/start-order and break-policy variants so queued commands land in a healthy boot prompt instead of a fatal break.",
+      "If that still fails, move next to pipe endpoint variants, not more frontend churn.",
       "Treat attach-after-shell as a no-debuggee observation path, and guest-restart as the current transport base candidate."
     ]
   }

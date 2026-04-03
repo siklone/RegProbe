@@ -134,6 +134,27 @@ Direct follow-up on the strongest current base:
 
 That means the attach side is now stronger than before, but the real break-in command roundtrip is still not classification-grade.
 
+Thin queued-command follow-up:
+
+- profile:
+  - `guest-restart`
+  - `kd`
+  - `roundtrip-once`
+  - `break_on_connect=bonc`
+  - `tryNoRxLoss=FALSE`
+- outcome:
+  - post-restart queued commands resumed
+  - `post_restart_roundtrip_success_count=2`
+  - but they resumed at a fatal-system-error break
+  - final status `boot-unsafe`
+  - VM required snapshot recovery afterward
+
+So the lane just got more precise:
+
+- queued command continuation is **possible**
+- but the current attach/start-order lands us in the wrong stop state
+- the next fix is not parser syntax; it is attach/start-order plus break policy
+
 Canonical matrix outputs:
 
 - `registry-research-framework/audit/windbg-serial-config-matrix-20260403.json`
@@ -141,6 +162,8 @@ Canonical matrix outputs:
 - `research/notes/windbg-serial-config-matrix-20260403.md`
 - `registry-research-framework/audit/windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json`
 - `evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-145133/summary.json`
+- `registry-research-framework/audit/windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json`
+- `evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/summary.json`
 
 ## Repo Truth
 
