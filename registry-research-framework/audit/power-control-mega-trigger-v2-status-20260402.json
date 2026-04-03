@@ -57,6 +57,19 @@
       "windbg_transport_state": "transport_error"
     }
   },
+  "guest_restart_breakin_probe": {
+    "status": "attach-ok-command-not-executed",
+    "bundle_ref": "registry-research-framework/audit/windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json",
+    "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-145133/summary.json",
+    "boot_mode": "guest-restart",
+    "trace_profile": "breakin-once",
+    "break_on_connect_mode": "bonc",
+    "try_no_rx_loss": "FALSE",
+    "kernel_connected": true,
+    "transport_error": false,
+    "shell_recovered": true,
+    "roundtrip_ready": false
+  },
   "next_actions": [
     "repeat the strongest guest-restart serial variants and validate command/breakin roundtrip on that base",
     "move next to pipe endpoint and attach/start-order experiments if guest-restart roundtrip is still unstable",

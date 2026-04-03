@@ -118,11 +118,29 @@ This shifts the blocker again:
 - the new blocker is reproducible command/break-in roundtrip on the winning `guest-restart` serial base
 - that is transport engineering, not key semantics
 
+Direct follow-up on the strongest current base:
+
+- profile:
+  - `guest-restart`
+  - `kd`
+  - `breakin-once`
+  - `break_on_connect=bonc`
+  - `tryNoRxLoss=FALSE`
+- outcome:
+  - `kernel_connected=true`
+  - `transport_error=false`
+  - `shell_recovered=true`
+  - final status `attach-ok-command-not-executed`
+
+That means the attach side is now stronger than before, but the real break-in command roundtrip is still not classification-grade.
+
 Canonical matrix outputs:
 
 - `registry-research-framework/audit/windbg-serial-config-matrix-20260403.json`
 - `registry-research-framework/audit/windbg-serial-config-execution-20260403.json`
 - `research/notes/windbg-serial-config-matrix-20260403.md`
+- `registry-research-framework/audit/windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json`
+- `evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-145133/summary.json`
 
 ## Repo Truth
 

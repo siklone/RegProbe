@@ -42,6 +42,15 @@
       "classification": "transport_partial",
       "summary_ref": "registry-research-framework/audit/windbg-serial-config-matrix-20260403.json",
       "note": "A focused serial-config matrix reached kernel-connected guest-restart sessions in 4/4 variants and transport_ok in 3/4 variants, narrowing the blocker to reproducible command/breakin roundtrips rather than generic attach failure."
+    },
+    {
+      "id": "guest-restart-breakin-roundtrip-still-missing",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "attach_ok_command_not_executed",
+      "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-145133/summary.json",
+      "note": "A direct breakin-once probe on the strongest current guest-restart serial base kept kernel connectivity and shell health, but still failed to produce a real breakin/command roundtrip."
     }
   ],
   "conclusion": {
@@ -50,7 +59,8 @@
     "recommended_next_phase": "guest-restart-command-roundtrip",
     "recommended_next_actions": [
       "Keep WinDbg single-key arbitration paused until a guest-restart profile can keep kernel connectivity and process command/breakin roundtrips reproducibly.",
-      "Use the serial-config matrix to focus next on pipe endpoint and attach/start-order variants, not more frontend churn.",
+      "Use the current guest-restart kd base for breakin/command-roundtrip debugging before widening to more semantics.",
+      "If roundtrip is still weak, move next to pipe endpoint and attach/start-order variants, not more frontend churn.",
       "Treat attach-after-shell as a no-debuggee observation path, and guest-restart as the current transport base candidate."
     ]
   }
