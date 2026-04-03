@@ -14,8 +14,10 @@ param(
     [string]$DebugSnapshotName = 'RegProbe-Baseline-Debug-20260402',
     [ValidateSet('evidence', 'operational')]
     [string]$CollectionMode = 'evidence',
-    [ValidateSet('multi-postfilter', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
+    [ValidateSet('multi-postfilter', 'minimal', 'symbols', 'attach-only', 'breakin-once', 'breakin-twice', 'breakin-delayed-10', 'breakin-delayed-30', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
     [string]$TraceProfile = 'multi-postfilter',
+    [ValidateSet('guest-restart', 'cold-boot', 'attach-after-shell')]
+    [string]$BootMode = '',
     [int]$NoiseBudgetBytes = 262144,
     [int]$RawHitLimit = 100,
     [switch]$PrepareBaseline
@@ -68,6 +70,15 @@ if ($TraceProfile -like 'singlekey-*' -and $resolvedKeys.Count -ne 1) {
     throw "TraceProfile '$TraceProfile' requires exactly one target key."
 }
 $resolvedTargetKey = if ($resolvedKeys.Count -eq 1) { [string]$resolvedKeys[0] } else { $null }
+$resolvedBootMode = if (-not [string]::IsNullOrWhiteSpace($BootMode)) {
+    $BootMode
+}
+elseif ($TraceProfile -like 'singlekey-*') {
+    'cold-boot'
+}
+else {
+    'guest-restart'
+}
 $generatorArgs = @{
     OutputPath = $commandScriptPath
     LogPath = $logPath
@@ -209,6 +220,7 @@ $payload = [ordered]@{
     keys = @($resolvedKeys)
     target_key = $resolvedTargetKey
     trace_profile = $TraceProfile
+    boot_mode = $resolvedBootMode
     noise_budget_bytes = $NoiseBudgetBytes
     raw_hit_limit = $RawHitLimit
     command_script = $commandScriptRef
@@ -216,6 +228,8 @@ $payload = [ordered]@{
     attach_mode = 'manual-kernel-debug'
     breakpoint_mode = $generatorOutput.mode
     runner_output_policy = 'raw+sanitized'
+    windbg_semantic_ready = ($TraceProfile -like 'singlekey-*')
+    windbg_transport_state = 'staged'
     windbg_path = $resolvedWinDbg
     windbg_command = $resolvedWindbgCommand
     status = $resolvedStatus

@@ -12,7 +12,7 @@ param(
     [string]$GuestUser = 'Administrator',
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$CredentialFilePath = '',
-    [ValidateSet('full', 'minimal', 'symbols', 'probe', 'firsthit', 'symbolsearch', 'valuenames', 'conditional', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
+    [ValidateSet('full', 'minimal', 'symbols', 'attach-only', 'breakin-once', 'breakin-twice', 'breakin-delayed-10', 'breakin-delayed-30', 'probe', 'firsthit', 'symbolsearch', 'valuenames', 'conditional', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
     [string]$TraceProfile = 'full',
     [int]$DebuggerAttachLeadSeconds = 10,
     [int]$ShellHealthTimeoutSeconds = 900,
@@ -147,6 +147,140 @@ function Get-MarkerBlocks {
     return @($blocks)
 }
 
+function ConvertTo-QuotedArgumentString {
+    param([string[]]$Arguments)
+
+    $quoted = foreach ($argument in @($Arguments)) {
+        if ($null -eq $argument) {
+            '""'
+            continue
+        }
+
+        if ($argument -match '[\s"]') {
+            '"' + ($argument -replace '"', '\"') + '"'
+        }
+        else {
+            $argument
+        }
+    }
+
+    return [string]::Join(' ', @($quoted))
+}
+
+function Start-DebuggerProcess {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$FilePath,
+        [Parameter(Mandatory = $true)]
+        [string[]]$Arguments,
+        [switch]$RedirectStandardInput
+    )
+
+    $startInfo = New-Object System.Diagnostics.ProcessStartInfo
+    $startInfo.FileName = $FilePath
+    $startInfo.Arguments = ConvertTo-QuotedArgumentString -Arguments $Arguments
+    $startInfo.UseShellExecute = $false
+    $startInfo.CreateNoWindow = $true
+    $startInfo.WindowStyle = [System.Diagnostics.ProcessWindowStyle]::Hidden
+    $startInfo.RedirectStandardInput = $RedirectStandardInput.IsPresent
+
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $startInfo
+    [void]$process.Start()
+    return $process
+}
+
+function Get-BreakinProfileSpec {
+    param([string]$Profile)
+
+    switch ($Profile) {
+        'breakin-once' {
+            return [ordered]@{
+                breakin_count = 1
+                initial_delay_seconds = 0
+            }
+        }
+        'breakin-twice' {
+            return [ordered]@{
+                breakin_count = 2
+                initial_delay_seconds = 0
+            }
+        }
+        'breakin-delayed-10' {
+            return [ordered]@{
+                breakin_count = 1
+                initial_delay_seconds = 10
+            }
+        }
+        'breakin-delayed-30' {
+            return [ordered]@{
+                breakin_count = 1
+                initial_delay_seconds = 30
+            }
+        }
+        default {
+            return $null
+        }
+    }
+}
+
+function Send-DebuggerCommand {
+    param(
+        [Parameter(Mandatory = $true)]
+        [System.Diagnostics.Process]$Process,
+        [Parameter(Mandatory = $true)]
+        [string]$Command
+    )
+
+    if ($Process.HasExited) {
+        throw 'Debugger process exited before command dispatch.'
+    }
+
+    $Process.StandardInput.WriteLine($Command)
+    $Process.StandardInput.Flush()
+}
+
+function Invoke-DebuggerBreakinProfile {
+    param(
+        [Parameter(Mandatory = $true)]
+        [System.Diagnostics.Process]$Process,
+        [Parameter(Mandatory = $true)]
+        [string]$Profile
+    )
+
+    $spec = Get-BreakinProfileSpec -Profile $Profile
+    if (-not $spec) {
+        return $null
+    }
+
+    if ($spec.initial_delay_seconds -gt 0) {
+        Start-Sleep -Seconds $spec.initial_delay_seconds
+    }
+
+    $attempts = @()
+    for ($index = 1; $index -le [int]$spec.breakin_count; $index++) {
+        $attempts += [pscustomobject]@{
+            index = $index
+            requested_utc = [DateTime]::UtcNow.ToString('o')
+        }
+        Send-DebuggerCommand -Process $Process -Command ('.echo REGPROBE_BREAKIN_REQUEST|{0}' -f $index)
+        Send-DebuggerCommand -Process $Process -Command '.breakin'
+        Start-Sleep -Seconds 2
+        Send-DebuggerCommand -Process $Process -Command ('.echo REGPROBE_BREAKIN_OK|{0}' -f $index)
+        Send-DebuggerCommand -Process $Process -Command 'g'
+        if ($index -lt [int]$spec.breakin_count) {
+            Start-Sleep -Seconds 3
+        }
+    }
+
+    return [ordered]@{
+        profile = $Profile
+        breakin_count = [int]$spec.breakin_count
+        initial_delay_seconds = [int]$spec.initial_delay_seconds
+        attempts = @($attempts)
+    }
+}
+
 function Get-TraceObservation {
     param(
         [string]$PreferredTraceLogPath,
@@ -163,6 +297,8 @@ function Get-TraceObservation {
     $rawValueBlocks = Get-MarkerBlocks -Lines $analysisLines -BeginMarker 'REGPROBE_VALUE_BEGIN' -EndMarker 'REGPROBE_VALUE_END'
     $firstHitBlocks = Get-MarkerBlocks -Lines $analysisLines -BeginMarker 'REGPROBE_FIRSTHIT_BEGIN' -EndMarker 'REGPROBE_FIRSTHIT_END'
     $conditionalHitLines = Get-ConditionalHitLines -Lines $analysisLines
+    $breakinRequestLines = @($analysisLines | Where-Object { $_ -match 'REGPROBE_BREAKIN_REQUEST\|' })
+    $breakinSuccessLines = @($analysisLines | Where-Object { $_ -match 'REGPROBE_BREAKIN_OK\|' })
     $targetMatches = @()
     if (-not [string]::IsNullOrWhiteSpace($TargetKey)) {
         $targetMatches = @($rawValueBlocks | Where-Object { $_ -like "*$TargetKey*" })
@@ -184,6 +320,10 @@ function Get-TraceObservation {
         raw_value_event_count = @($rawValueBlocks).Count
         firsthit_observed = @($firstHitBlocks).Count -gt 0
         firsthit_blocks = $firstHitBlocks
+        breakin_request_count = @($breakinRequestLines).Count
+        breakin_success_count = @($breakinSuccessLines).Count
+        breakin_request_lines = @($breakinRequestLines)
+        breakin_success_lines = @($breakinSuccessLines)
         conditional_hit_lines = $conditionalHitLines
         host_filtered_hits = @($targetMatches).Count
         host_filtered_samples = @($targetMatches | Select-Object -First 3)
@@ -194,6 +334,28 @@ function Get-TraceObservation {
         kernel_connected = ($analysisText -match 'Kernel Debugger connection established') -or ($consoleText -match 'Kernel Debugger connection established')
         fatal_system_error_observed = ($analysisText -match 'A fatal system error has occurred') -or ($consoleText -match 'A fatal system error has occurred')
     }
+}
+
+function Wait-ForBreakinOutcome {
+    param(
+        [string]$PreferredTraceLogPath,
+        [string]$ConsoleLogPath,
+        [string]$TargetKey = '',
+        [int]$ExpectedBreakinCount = 1,
+        [int]$TimeoutSeconds = 45
+    )
+
+    $deadline = (Get-Date).AddSeconds([Math]::Max(10, $TimeoutSeconds))
+    do {
+        $observation = Get-TraceObservation -PreferredTraceLogPath $PreferredTraceLogPath -ConsoleLogPath $ConsoleLogPath -TargetKey $TargetKey
+        if ($observation.transport_error -or $observation.breakin_success_count -ge $ExpectedBreakinCount) {
+            return $observation
+        }
+
+        Start-Sleep -Seconds ([Math]::Min($PollIntervalSeconds, 5))
+    } while ((Get-Date) -lt $deadline)
+
+    return (Get-TraceObservation -PreferredTraceLogPath $PreferredTraceLogPath -ConsoleLogPath $ConsoleLogPath -TargetKey $TargetKey)
 }
 
 function Wait-ForDebuggerAwareBoot {
@@ -437,6 +599,15 @@ elseif ($keys.Count -eq 1) {
 else {
     $null
 }
+$bootMode = if (-not [string]::IsNullOrWhiteSpace([string]$bundle.boot_mode)) {
+    [string]$bundle.boot_mode
+}
+elseif ($TraceProfile -like 'singlekey-*' -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)) {
+    'cold-boot'
+}
+else {
+    'guest-restart'
+}
 $timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $sessionId = "windbg-boot-registry-trace-$timestamp"
 $sessionRoot = if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
@@ -461,6 +632,7 @@ $session = [ordered]@{
     vm_path = $vmPath
     debugger_path = $hostDebuggerPath
     trace_profile = $TraceProfile
+    boot_mode = $bootMode
     target_key = $targetKey
     noise_budget_bytes = $NoiseBudgetBytes
     noise_budget_event_limit = $NoiseBudgetEventLimit
@@ -501,6 +673,46 @@ $modeCommandLines = switch ($TraceProfile) {
             '.reload /f',
             ('.logopen /t "{0}"' -f $escapedTraceLogPath),
             '.echo REGPROBE_SYMBOLS_BEGIN',
+            'g'
+        )
+    }
+    'attach-only' {
+        @(
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_ATTACH_BEGIN',
+            '.echo REGPROBE_ATTACH_READY',
+            'g'
+        )
+    }
+    'breakin-once' {
+        @(
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_ATTACH_BEGIN',
+            '.echo REGPROBE_ATTACH_READY',
+            'g'
+        )
+    }
+    'breakin-twice' {
+        @(
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_ATTACH_BEGIN',
+            '.echo REGPROBE_ATTACH_READY',
+            'g'
+        )
+    }
+    'breakin-delayed-10' {
+        @(
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_ATTACH_BEGIN',
+            '.echo REGPROBE_ATTACH_READY',
+            'g'
+        )
+    }
+    'breakin-delayed-30' {
+        @(
+            ('.logopen /t "{0}"' -f $escapedTraceLogPath),
+            '.echo REGPROBE_ATTACH_BEGIN',
+            '.echo REGPROBE_ATTACH_READY',
             'g'
         )
     }
@@ -643,7 +855,9 @@ $shellRecovered = $false
 $recovery = $null
 $debuggerNoiseBudgetExceeded = $false
 $traceObservation = $null
-$useColdBoot = ($TraceProfile -like 'singlekey-*') -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)
+$breakinExecution = $null
+$requiresBreakinProfile = ($TraceProfile -like 'breakin-*')
+$useColdBoot = ($bootMode -eq 'cold-boot') -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)
 $kdArgs = @()
 if (-not $useColdBoot) {
     $kdArgs += '-kqm'
@@ -656,7 +870,20 @@ $kdArgs += @(
 )
 
 try {
-    if ($useColdBoot) {
+    if ($bootMode -eq 'attach-after-shell' -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)) {
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'stop', $vmPath, 'hard') -IgnoreExitCode | Out-Null
+        Start-Sleep -Seconds 5
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $vmPath, ([string]$bundle.debug_snapshot_name)) | Out-Null
+        $session.steps += 'reverted-to-debug-snapshot'
+        Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $vmPath, 'nogui') | Out-Null
+        $session.steps += 'vm-started-before-attach'
+        [void](Wait-ForVmToolsReady -VmPath $vmPath)
+        $preAttachShell = Wait-ForShellHealthy -VmPath $vmPath -GuestAuthArgs $guestAuthArgs
+        $session.steps += 'shell-healthy-before-attach'
+        $session.pre_attach_shell_checks = $preAttachShell.checks
+        Write-JsonFile -Path $sessionPath -InputObject $session
+    }
+    elseif ($useColdBoot) {
         Invoke-Vmrun -Arguments @('-T', 'ws', 'stop', $vmPath, 'hard') -IgnoreExitCode | Out-Null
         Start-Sleep -Seconds 5
         Invoke-Vmrun -Arguments @('-T', 'ws', 'revertToSnapshot', $vmPath, ([string]$bundle.debug_snapshot_name)) | Out-Null
@@ -664,14 +891,18 @@ try {
         Write-JsonFile -Path $sessionPath -InputObject $session
     }
 
-    $kdProcess = Start-Process -FilePath $hostDebuggerPath -ArgumentList $kdArgs -WindowStyle Hidden -PassThru
+    $kdProcess = Start-DebuggerProcess -FilePath $hostDebuggerPath -Arguments $kdArgs -RedirectStandardInput:$requiresBreakinProfile
     $session.status = 'debugger-started'
     $session.steps += 'debugger-started'
     Write-JsonFile -Path $sessionPath -InputObject $session
 
     Start-Sleep -Seconds ([Math]::Max(3, $DebuggerAttachLeadSeconds))
 
-    if ($useColdBoot) {
+    if ($bootMode -eq 'attach-after-shell') {
+        $session.status = 'attach-after-shell-active'
+        $session.steps += 'attach-after-shell-active'
+    }
+    elseif ($useColdBoot) {
         Invoke-Vmrun -Arguments @('-T', 'ws', 'start', $vmPath, 'nogui') | Out-Null
         $session.status = 'vm-cold-boot-requested'
         $session.steps += 'vm-cold-boot-requested'
@@ -684,24 +915,73 @@ try {
     Write-JsonFile -Path $sessionPath -InputObject $session
 
     Start-Sleep -Seconds 5
-    $monitor = Wait-ForDebuggerAwareBoot -VmPath $vmPath -GuestAuthArgs $guestAuthArgs -PreferredTraceLogPath $traceLogPath -ConsoleLogPath $consoleLogPath -TargetKey $targetKey -EnableNoiseBudget:($TraceProfile -eq 'singlekey-rawbounded')
-    $traceObservation = $monitor.observation
-    $debuggerNoiseBudgetExceeded = [bool]$monitor.noise_budget_exceeded
-    if (-not [string]::IsNullOrWhiteSpace([string]$monitor.tools_state)) {
-        $session.steps += 'vmtools-ready-after-restart'
-    }
-    Write-JsonFile -Path $sessionPath -InputObject $session
+    if ($bootMode -eq 'attach-after-shell') {
+        $settleDeadline = (Get-Date).AddSeconds([Math]::Max(5, $PostShellSettleSeconds))
+        do {
+            $traceObservation = Get-TraceObservation -PreferredTraceLogPath $traceLogPath -ConsoleLogPath $consoleLogPath -TargetKey $targetKey
+            if ((($NoiseBudgetBytes -gt 0) -and ($traceObservation.log_size_bytes -ge $NoiseBudgetBytes)) -or (($NoiseBudgetEventLimit -gt 0) -and ($traceObservation.raw_value_event_count -ge $NoiseBudgetEventLimit))) {
+                $debuggerNoiseBudgetExceeded = $true
+                break
+            }
+            Start-Sleep -Seconds ([Math]::Min($PollIntervalSeconds, 5))
+        } while ((Get-Date) -lt $settleDeadline)
 
-    if ($monitor.shell_snapshot) {
-        $shellSnapshot = $monitor.shell_snapshot
-        $shellRecovered = $true
-        $session.status = 'shell-healthy'
-        $session.steps += 'shell-healthy-after-restart'
-        $session.shell_checks = $shellSnapshot.checks
+        $shellSnapshot = Get-ShellHealthSnapshot -VmPath $vmPath -GuestAuthArgs $guestAuthArgs
+        if ($shellSnapshot.shell_healthy) {
+            $shellRecovered = $true
+            $session.status = 'shell-healthy'
+            $session.steps += 'shell-healthy-after-attach'
+            $session.shell_checks = $shellSnapshot.checks
+            if ($requiresBreakinProfile) {
+                $breakinExecution = Invoke-DebuggerBreakinProfile -Process $kdProcess -Profile $TraceProfile
+                $session.breakin_execution = $breakinExecution
+                $session.steps += ('breakin-profile-{0}-dispatched' -f $TraceProfile)
+                $traceObservation = Wait-ForBreakinOutcome -PreferredTraceLogPath $traceLogPath -ConsoleLogPath $consoleLogPath -TargetKey $targetKey -ExpectedBreakinCount ([int]$breakinExecution.breakin_count)
+                $shellSnapshot = Get-ShellHealthSnapshot -VmPath $vmPath -GuestAuthArgs $guestAuthArgs
+                $shellRecovered = [bool]$shellSnapshot.shell_healthy
+                if ($shellRecovered) {
+                    $session.steps += 'shell-healthy-after-breakin'
+                    $session.shell_checks = $shellSnapshot.checks
+                }
+            }
+        }
+        elseif ($debuggerNoiseBudgetExceeded) {
+            $session.status = 'noise-budget-stop'
+            $session.steps += 'noise-budget-stop'
+        }
     }
-    elseif ($debuggerNoiseBudgetExceeded) {
-        $session.status = 'noise-budget-stop'
-        $session.steps += 'noise-budget-stop'
+    else {
+        $monitor = Wait-ForDebuggerAwareBoot -VmPath $vmPath -GuestAuthArgs $guestAuthArgs -PreferredTraceLogPath $traceLogPath -ConsoleLogPath $consoleLogPath -TargetKey $targetKey -EnableNoiseBudget:($TraceProfile -eq 'singlekey-rawbounded')
+        $traceObservation = $monitor.observation
+        $debuggerNoiseBudgetExceeded = [bool]$monitor.noise_budget_exceeded
+        if (-not [string]::IsNullOrWhiteSpace([string]$monitor.tools_state)) {
+            $session.steps += 'vmtools-ready-after-restart'
+        }
+        Write-JsonFile -Path $sessionPath -InputObject $session
+
+        if ($monitor.shell_snapshot) {
+            $shellSnapshot = $monitor.shell_snapshot
+            $shellRecovered = $true
+            $session.status = 'shell-healthy'
+            $session.steps += 'shell-healthy-after-restart'
+            $session.shell_checks = $shellSnapshot.checks
+            if ($requiresBreakinProfile) {
+                $breakinExecution = Invoke-DebuggerBreakinProfile -Process $kdProcess -Profile $TraceProfile
+                $session.breakin_execution = $breakinExecution
+                $session.steps += ('breakin-profile-{0}-dispatched' -f $TraceProfile)
+                $traceObservation = Wait-ForBreakinOutcome -PreferredTraceLogPath $traceLogPath -ConsoleLogPath $consoleLogPath -TargetKey $targetKey -ExpectedBreakinCount ([int]$breakinExecution.breakin_count)
+                $shellSnapshot = Get-ShellHealthSnapshot -VmPath $vmPath -GuestAuthArgs $guestAuthArgs
+                $shellRecovered = [bool]$shellSnapshot.shell_healthy
+                if ($shellRecovered) {
+                    $session.steps += 'shell-healthy-after-breakin'
+                    $session.shell_checks = $shellSnapshot.checks
+                }
+            }
+        }
+        elseif ($debuggerNoiseBudgetExceeded) {
+            $session.status = 'noise-budget-stop'
+            $session.steps += 'noise-budget-stop'
+        }
     }
 
     Write-JsonFile -Path $sessionPath -InputObject $session
@@ -778,6 +1058,8 @@ $rawNoiseEventCount = [int]$traceObservation.raw_value_event_count
 $hostFilteredHits = [int]$traceObservation.host_filtered_hits
 $windbgLogDetected = [bool]$traceObservation.windbg_log_detected
 $firstHitObserved = [bool]$traceObservation.firsthit_observed
+$breakinRequestCount = [int]$traceObservation.breakin_request_count
+$breakinSuccessCount = [int]$traceObservation.breakin_success_count
 $resultStatus = if ($runError -and $fatalSystemErrorObserved) {
     'boot-unsafe'
 }
@@ -802,6 +1084,15 @@ elseif (-not $windbgLogDetected) {
 elseif (-not $scriptExecutionObserved) {
     'script-not-executed'
 }
+elseif ($TraceProfile -in @('minimal', 'symbols', 'attach-only')) {
+    if ($shellRecovered) { 'runner-ok' } else { 'transport-unstable' }
+}
+elseif ($TraceProfile -like 'breakin-*') {
+    if ($breakinSuccessCount -gt 0) { 'runner-ok' }
+    elseif ($breakinRequestCount -gt 0) { 'attach-ok-breakin-failed' }
+    elseif ($shellRecovered) { 'attach-ok-command-not-executed' }
+    else { 'transport-unstable' }
+}
 elseif ($TraceProfile -eq 'singlekey-smoke') {
     if ($shellRecovered) { 'runner-ok' } else { 'connected-no-target-hit' }
 }
@@ -820,6 +1111,41 @@ elseif ($kernelConnected) {
 else {
     'no-hit'
 }
+
+$windbgTransportState = if ($transportError -or $resultStatus -eq 'boot-unsafe') {
+    'transport_error'
+}
+elseif ($TraceProfile -like 'breakin-*') {
+    if ($breakinSuccessCount -gt 0 -and $shellRecovered) {
+        'transport_ok'
+    }
+    elseif ($breakinRequestCount -gt 0 -and $shellRecovered) {
+        'attach_ok_breakin_failed'
+    }
+    elseif ($shellRecovered -and $scriptExecutionObserved) {
+        'attach_ok_command_not_executed'
+    }
+    else {
+        'transport_unstable'
+    }
+}
+elseif ($shellRecovered -and $scriptExecutionObserved -and ($kernelConnected -or $bootMode -eq 'attach-after-shell')) {
+    'transport_ok'
+}
+elseif ($shellRecovered -and $scriptExecutionObserved) {
+    'transport_partial'
+}
+else {
+    'transport_unstable'
+}
+
+$transportScore = 0
+if ($scriptExecutionObserved) { $transportScore++ }
+if ($shellRecovered) { $transportScore++ }
+if ($kernelConnected -or $bootMode -eq 'attach-after-shell') { $transportScore++ }
+if (-not $transportError) { $transportScore++ }
+if ($breakinSuccessCount -gt 0) { $transportScore++ }
+$windbgSemanticReady = ($TraceProfile -like 'singlekey-*')
 
 if ($resultStatus -eq 'boot-unsafe' -and -not [string]::IsNullOrWhiteSpace([string]$bundle.debug_snapshot_name)) {
     try {
@@ -845,7 +1171,14 @@ $results = [ordered]@{
     analysis_source = $analysisSource
     trace_log_path = if ($resolvedTraceLogPath) { Get-RepoDisplayPath -Path $resolvedTraceLogPath } else { $null }
     trace_profile = $TraceProfile
+    boot_mode = $bootMode
     windbg_log_detected = $windbgLogDetected
+    windbg_transport_state = $windbgTransportState
+    windbg_semantic_ready = $windbgSemanticReady
+    transport_score = $transportScore
+    breakin_attempted = ($breakinRequestCount -gt 0)
+    breakin_request_count = $breakinRequestCount
+    breakin_success_count = $breakinSuccessCount
     kernel_connected = $kernelConnected
     transport_error = $transportError
     fatal_system_error_observed = $fatalSystemErrorObserved
@@ -895,7 +1228,14 @@ $summary = [ordered]@{
     analysis_source = $analysisSource
     trace_log_path = if ($resolvedTraceLogPath) { Get-RepoDisplayPath -Path $resolvedTraceLogPath } else { $null }
     trace_profile = $TraceProfile
+    boot_mode = $bootMode
     windbg_log_detected = $windbgLogDetected
+    windbg_transport_state = $windbgTransportState
+    windbg_semantic_ready = $windbgSemanticReady
+    transport_score = $transportScore
+    breakin_attempted = ($breakinRequestCount -gt 0)
+    breakin_request_count = $breakinRequestCount
+    breakin_success_count = $breakinSuccessCount
     kernel_connected = $kernelConnected
     transport_error = $transportError
     fatal_system_error_observed = $fatalSystemErrorObserved

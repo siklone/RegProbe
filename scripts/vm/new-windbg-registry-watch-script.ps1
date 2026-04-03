@@ -5,7 +5,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputPath,
     [string]$LogPath = 'C:\RegProbe-Diag\windbg-registry-trace.log',
-    [ValidateSet('multi-postfilter', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
+    [ValidateSet('multi-postfilter', 'minimal', 'symbols', 'attach-only', 'breakin-once', 'breakin-twice', 'breakin-delayed-10', 'breakin-delayed-30', 'singlekey-smoke', 'singlekey-firsthit', 'singlekey-rawbounded')]
     [string]$TraceProfile = 'multi-postfilter',
     [int]$RawHitLimit = 100
 )
@@ -36,6 +36,48 @@ $lines.Add('.reload /f')
 $lines.Add(('.logopen /t "{0}"' -f $LogPath.Replace('\', '\\')))
 
 switch ($TraceProfile) {
+    'minimal' {
+        $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
+        $lines.Add('.echo REGPROBE_ATTACH_BEGIN')
+        $lines.Add('.echo REGPROBE_ATTACH_READY')
+        $lines.Add('g')
+    }
+    'symbols' {
+        $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
+        $lines.Add('.echo REGPROBE_ATTACH_BEGIN')
+        $lines.Add('.echo REGPROBE_ATTACH_READY')
+        $lines.Add('g')
+    }
+    'attach-only' {
+        $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
+        $lines.Add('.echo REGPROBE_ATTACH_BEGIN')
+        $lines.Add('.echo REGPROBE_ATTACH_READY')
+        $lines.Add('g')
+    }
+    'breakin-once' {
+        $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
+        $lines.Add('.echo REGPROBE_ATTACH_BEGIN')
+        $lines.Add('.echo REGPROBE_ATTACH_READY')
+        $lines.Add('g')
+    }
+    'breakin-twice' {
+        $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
+        $lines.Add('.echo REGPROBE_ATTACH_BEGIN')
+        $lines.Add('.echo REGPROBE_ATTACH_READY')
+        $lines.Add('g')
+    }
+    'breakin-delayed-10' {
+        $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
+        $lines.Add('.echo REGPROBE_ATTACH_BEGIN')
+        $lines.Add('.echo REGPROBE_ATTACH_READY')
+        $lines.Add('g')
+    }
+    'breakin-delayed-30' {
+        $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
+        $lines.Add('.echo REGPROBE_ATTACH_BEGIN')
+        $lines.Add('.echo REGPROBE_ATTACH_READY')
+        $lines.Add('g')
+    }
     'singlekey-smoke' {
         $lines.Add(('.echo REGPROBE_PROFILE|{0}' -f $TraceProfile))
         $lines.Add(('.echo REGPROBE_TARGET|{0}' -f $resolvedTargetKey))
