@@ -1,0 +1,97 @@
+﻿{
+    "generated_utc":  "2026-04-03T01:48:22.674333Z",
+    "candidate_manifest":  "C:\\r\\registry-research-framework\\audit\\kernel-power-96-phase0-candidates-20260329.json",
+    "source_config":  "C:\\r\\registry-research-framework\\config\\source-enrichment-sources.json",
+    "output_root":  "C:\\r\\registry-research-framework\\enrichment\\outputs\\source-enrichment-20260403-044821",
+    "master_enrichment":  "C:\\r\\registry-research-framework\\enrichment\\outputs\\source-enrichment-20260403-044821\\master-enrichment.json",
+    "source_index":  "C:\\r\\registry-research-framework\\enrichment\\outputs\\source-enrichment-20260403-044821\\source-index.json",
+    "priority_queue":  "C:\\r\\registry-research-framework\\enrichment\\outputs\\source-enrichment-20260403-044821\\priority-queue.json",
+    "markdown_summary":  "C:\\r\\registry-research-framework\\enrichment\\outputs\\source-enrichment-20260403-044821\\master-enrichment.md",
+    "total_candidates":  96,
+    "total_sources":  6,
+    "route_counts":  {
+                         "existing-covered":  8,
+                         "research-only":  5,
+                         "docs-first-new-candidate":  63,
+                         "net-new":  20
+                     },
+    "trigger_family_counts":  {
+                                  "power-request-simulation":  63,
+                                  "timer-dpc-stress":  21,
+                                  "general-registry-watch":  7,
+                                  "worker-thread-contention":  5
+                              },
+    "sources":  [
+                    {
+                        "id":  "reactos",
+                        "exists":  false,
+                        "missing_reason":  "root-missing",
+                        "hit_count":  0,
+                        "candidate_hit_count":  0,
+                        "surface_group":  "source-code"
+                    },
+                    {
+                        "id":  "wrk",
+                        "exists":  false,
+                        "missing_reason":  "root-missing",
+                        "hit_count":  0,
+                        "candidate_hit_count":  0,
+                        "surface_group":  "source-code"
+                    },
+                    {
+                        "id":  "systeminformer",
+                        "exists":  false,
+                        "missing_reason":  "root-missing",
+                        "hit_count":  0,
+                        "candidate_hit_count":  0,
+                        "surface_group":  "source-code"
+                    },
+                    {
+                        "id":  "admx",
+                        "exists":  true,
+                        "missing_reason":  null,
+                        "hit_count":  13,
+                        "candidate_hit_count":  6,
+                        "surface_group":  "policy-templates"
+                    },
+                    {
+                        "id":  "wdk_headers",
+                        "exists":  false,
+                        "missing_reason":  "root-missing",
+                        "hit_count":  0,
+                        "candidate_hit_count":  0,
+                        "surface_group":  "headers"
+                    },
+                    {
+                        "id":  "geoff_chappell",
+                        "exists":  false,
+                        "missing_reason":  "root-missing",
+                        "hit_count":  0,
+                        "candidate_hit_count":  0,
+                        "surface_group":  "reference-cache"
+                    }
+                ],
+    "priority_queue_counts":  {
+                                  "high_priority_runtime":  4,
+                                  "high_priority_windbg":  89,
+                                  "low_priority_hold":  3
+                              },
+    "top_runtime_candidates":  [
+                                   "power.control.hiberboot-enabled",
+                                   "power.force-hibernate-disabled.policy",
+                                   "power.session.hiberboot-enabled",
+                                   "power.throttling.power-throttling-off"
+                               ],
+    "top_windbg_candidates":  [
+                                  "power.control.allow-audio-to-enable-execution-required-power-requests",
+                                  "power.control.allow-system-required-power-requests",
+                                  "power.control.always-compute-qos-hints",
+                                  "power.control.class1-initial-unpark-count",
+                                  "power.control.coalescing-flush-interval",
+                                  "power.control.coalescing-timer-interval",
+                                  "power.control.deep-io-coalescing-enabled",
+                                  "power.control.disable-display-burst-on-power-source-change",
+                                  "power.control.disable-idle-states-at-boot",
+                                  "power.control.disable-inbox-pep-generated-constraints"
+                              ]
+}

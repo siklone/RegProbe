@@ -1,0 +1,85 @@
+{
+  "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+  "family": "session-manager-power",
+  "suspected_layer": "kernel",
+  "boot_phase_relevant": true,
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+  "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+  "route_bucket": "net-new",
+  "route_note": "No trustworthy provider, record, or docs hit in the current source pass.",
+  "source_note": "research/notes/kernel-power-96-key-routing-20260327.md",
+  "source_hits": {
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 3,
+      "hits": [],
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "root-missing"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 3,
+      "hits": [],
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "root-missing"
+    },
+    "systeminformer": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 2,
+      "hits": [],
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer",
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "root-missing"
+    },
+    "admx": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 2,
+      "hits": [],
+      "root": "C:\\WINDOWS\\PolicyDefinitions",
+      "kind": "local-source",
+      "surface_group": "policy-templates",
+      "missing_reason": null
+    },
+    "wdk_headers": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 2,
+      "hits": [],
+      "root": "C:\\Program Files (x86)\\Windows Kits\\10\\Include",
+      "kind": "local-source",
+      "surface_group": "headers",
+      "missing_reason": "root-missing"
+    },
+    "geoff_chappell": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 2,
+      "hits": [],
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\geoff-chappell",
+      "kind": "reference-cache",
+      "surface_group": "reference-cache",
+      "missing_reason": "root-missing"
+    }
+  },
+  "support_count": 0,
+  "enrichment_score": 0,
+  "trigger_family": "power-request-simulation",
+  "suggested_trigger_family": "power-request-simulation",
+  "suggested_trigger": [
+    "PowerCreateRequest(SystemRequired)",
+    "PowerSetRequest(DisplayRequired)",
+    "audio playback session"
+  ],
+  "suggested_runtime_priority": "low",
+  "suggested_queue_bucket": "windbg",
+  "supporting_sources": []
+}

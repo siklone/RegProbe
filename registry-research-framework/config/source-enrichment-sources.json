@@ -4,51 +4,59 @@
     {
       "id": "reactos",
       "label": "ReactOS",
+      "surface_group": "source-code",
       "kind": "git-source",
       "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\reactos",
       "git_url": "https://github.com/reactos/reactos.git",
+      "enrichment_weight": 3,
       "patterns": [
         "*.c",
         "*.h",
         "*.cpp",
         "*.hpp"
       ],
-      "enabled_by_default": false
+      "enabled_by_default": true
     },
     {
       "id": "wrk",
       "label": "Windows Research Kernel",
+      "surface_group": "source-code",
       "kind": "git-source",
       "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\wrk-v1.2",
       "git_url": "https://github.com/9176324/WRK-v1.2.git",
+      "enrichment_weight": 3,
       "patterns": [
         "*.c",
         "*.h",
         "*.cpp",
         "*.hpp"
       ],
-      "enabled_by_default": false
+      "enabled_by_default": true
     },
     {
       "id": "systeminformer",
       "label": "System Informer",
+      "surface_group": "source-code",
       "kind": "git-source",
       "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\systeminformer",
       "git_url": "https://github.com/winsiderss/systeminformer.git",
+      "enrichment_weight": 2,
       "patterns": [
         "*.c",
         "*.h",
         "*.cpp",
         "*.hpp"
       ],
-      "enabled_by_default": false
+      "enabled_by_default": true
     },
     {
       "id": "sandboxie",
       "label": "Sandboxie",
+      "surface_group": "source-code",
       "kind": "git-source",
       "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\sandboxie",
       "git_url": "https://github.com/sandboxie-plus/Sandboxie.git",
+      "enrichment_weight": 1,
       "patterns": [
         "*.c",
         "*.h",
@@ -60,9 +68,11 @@
     {
       "id": "wine",
       "label": "Wine",
+      "surface_group": "source-code",
       "kind": "git-source",
       "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\wine",
       "git_url": "https://github.com/wine-mirror/wine.git",
+      "enrichment_weight": 1,
       "patterns": [
         "*.c",
         "*.h",
@@ -74,8 +84,10 @@
     {
       "id": "admx",
       "label": "Windows ADMX",
+      "surface_group": "policy-templates",
       "kind": "local-source",
       "root": "%WINDIR%\\PolicyDefinitions",
+      "enrichment_weight": 2,
       "patterns": [
         "*.admx",
         "*.adml"
@@ -85,10 +97,27 @@
     {
       "id": "wdk_headers",
       "label": "Windows SDK/WDK Headers",
+      "surface_group": "headers",
       "kind": "local-source",
       "root": "%ProgramFiles(x86)%\\Windows Kits\\10\\Include",
+      "enrichment_weight": 2,
       "patterns": [
         "*.h"
+      ],
+      "enabled_by_default": true
+    },
+    {
+      "id": "geoff_chappell",
+      "label": "Geoff Chappell",
+      "surface_group": "reference-cache",
+      "kind": "reference-cache",
+      "root": "%LOCALAPPDATA%\\RegProbe\\source-cache\\geoff-chappell",
+      "enrichment_weight": 2,
+      "patterns": [
+        "*.md",
+        "*.txt",
+        "*.html",
+        "*.json"
       ],
       "enabled_by_default": true
     }
