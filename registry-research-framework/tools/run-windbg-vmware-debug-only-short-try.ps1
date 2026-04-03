@@ -1,5 +1,6 @@
 [CmdletBinding()]
 param(
+    [string]$SourceVmProfile = 'primary',
     [string]$TargetVmPath = '',
     [string]$TargetVmName = 'Win25H2DebugOnly',
     [string]$VmrunPath = 'C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe',
@@ -112,6 +113,7 @@ $result = [ordered]@{
     status = if ($PlanOnly) { 'planned' } else { 'ready' }
     debug_environment = 'vmware-debug-only'
     debug_vm_name = if ([string]::IsNullOrWhiteSpace($TargetVmName)) { [string]$plan.debug_vm_name } else { $TargetVmName }
+    source_vm_profile = $SourceVmProfile
     debug_snapshot_name = $DebugSnapshotName
     frozen_lane_return_allowed = $false
     plan_ref = ("evidence/files/vm-tooling-staging/windbg-vmware-debug-only-short-try-{0}/vmware-debug-only-plan.json" -f $resolvedAuditDate)
@@ -149,11 +151,12 @@ else {
                 $TargetVmPath
             }
             else {
-                Resolve-DefaultTargetVmPath -SourcePath (Resolve-CanonicalVmPath -VmProfile 'primary') -TargetName $result.debug_vm_name
+                Resolve-DefaultTargetVmPath -SourcePath (Resolve-CanonicalVmPath -VmProfile $SourceVmProfile) -TargetName $result.debug_vm_name
             }
             if ($ProvisionVm) {
                 $provisionAuditPath = Join-Path $sessionRoot 'vmware-debug-only-provision.json'
                 $provisionArgs = @(
+                    '-SourceVmProfile', $SourceVmProfile,
                     '-TargetVmName', $result.debug_vm_name,
                     '-VmrunPath', $VmrunPath,
                     '-GuestUser', $GuestUser,
@@ -327,6 +330,7 @@ $noteLines = @(
     "- Date: ``$resolvedAuditDate``",
     "- Status: ``$($result.status)``",
     "- Branch status: ``$($result.branch_status)``",
+    "- Source profile: ``$($result.source_vm_profile)``",
     "- Frozen lane return allowed: ``$($result.frozen_lane_return_allowed)``",
     '',
     '## Sequence',

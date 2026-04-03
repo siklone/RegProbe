@@ -1,0 +1,30 @@
+﻿{
+    "generated_utc":  "2026-04-03T19:41:56.7366934Z",
+    "status":  "enabled-pending-restart",
+    "debug_environment":  "hyperv",
+    "phase":  "prereq-enable",
+    "restart_required":  true,
+    "reboot_pending":  true,
+    "no_restart_requested":  true,
+    "before_status":  "blocked-prereqs",
+    "after_status":  "blocked-prereqs",
+    "features_requested":  [
+                               "Microsoft-Hyper-V-All",
+                               "Microsoft-Hyper-V-Management-PowerShell"
+                           ],
+    "actions":  [
+                    {
+                        "feature":  "Microsoft-Hyper-V-All",
+                        "action":  "already-enabled",
+                        "restart_needed":  false
+                    },
+                    {
+                        "feature":  "Microsoft-Hyper-V-Management-PowerShell",
+                        "action":  "already-enabled",
+                        "restart_needed":  false
+                    }
+                ],
+    "before_ref":  "evidence/files/vm-tooling-staging/windbg-hyperv-prereqs-20260403/hyperv-feasibility-before.json",
+    "after_ref":  "evidence/files/vm-tooling-staging/windbg-hyperv-prereqs-20260403/hyperv-feasibility-after.json",
+    "next_step":  "host-reboot-required"
+}

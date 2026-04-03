@@ -124,6 +124,7 @@ scripts/vm-hyperv/new-hyperv-debug-baseline-plan.ps1
 scripts/vm/new-vmware-debug-only-baseline-plan.ps1
 scripts/vm/new-vmware-debug-only-vm.ps1
 registry-research-framework/tools/windbg-hyperv/run-debug-environment-selection.ps1
+registry-research-framework/tools/windbg-hyperv/enable-hyperv-debug-prereqs.ps1
 registry-research-framework/tools/run-windbg-vmware-debug-only-short-try.ps1
 ```
 

@@ -1,8 +1,9 @@
 ﻿# VMware Debug-Only Short Try
 
 - Date: `20260403`
-- Status: `planned`
-- Branch status: `planned`
+- Status: `error`
+- Branch status: `blocked`
+- Source profile: `secondary`
 - Frozen lane return allowed: `False`
 
 ## Sequence

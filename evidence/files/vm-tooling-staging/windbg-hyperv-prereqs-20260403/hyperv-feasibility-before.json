@@ -1,0 +1,110 @@
+﻿{
+    "generated_utc":  "2026-04-03T19:41:51.8098014Z",
+    "debug_environment_candidates":  [
+                                         {
+                                             "type":  "Hyper-V",
+                                             "supported":  false,
+                                             "readiness":  "blocked-prereqs",
+                                             "priority":  1,
+                                             "reason":  "Preferred long-term debugger-first environment, but host prerequisites are not complete yet.",
+                                             "blockers":  [
+                                                              "module-missing:Hyper-V",
+                                                              "cmdlets-missing:Hyper-V"
+                                                          ]
+                                         },
+                                         {
+                                             "type":  "VMware-debug-only",
+                                             "supported":  true,
+                                             "readiness":  "ready",
+                                             "priority":  2,
+                                             "reason":  "Immediate fallback if Hyper-V remains unavailable, but keep it separate from runtime VMware lanes.",
+                                             "blockers":  [
+                                                              "named-pipe-contract-unreliable"
+                                                          ]
+                                         }
+                                     ],
+    "selected":  "Hyper-V",
+    "selected_status":  "blocked-prereqs",
+    "selected_long_term":  "Hyper-V",
+    "selected_long_term_status":  "blocked-prereqs",
+    "selected_immediate":  "VMware-debug-only",
+    "selected_immediate_status":  "ready-short-try",
+    "selected_immediate_reason":  "Hyper-V is the preferred long-term debugger-first environment, but while host prerequisites remain blocked the next short debugger-first attempt should use a fresh VMware debug-only VM instead of the frozen lane.",
+    "fallback_if_blocked":  "VMware-debug-only",
+    "frozen_lane_return_allowed":  false,
+    "host":  {
+                 "os_name":  "Windows 10 Pro",
+                 "os_version":  "2009",
+                 "os_build":  "26200",
+                 "hypervisor_present":  true,
+                 "system_drive_free_bytes":  178353377280
+             },
+    "hyperv":  {
+                   "supported_now":  false,
+                   "readiness":  "blocked-prereqs",
+                   "features":  [
+                                    {
+                                        "name":  "Microsoft-Hyper-V",
+                                        "state":  "Enabled"
+                                    },
+                                    {
+                                        "name":  "Microsoft-Hyper-V-Management-PowerShell",
+                                        "state":  "Enabled"
+                                    },
+                                    {
+                                        "name":  "VirtualMachinePlatform",
+                                        "state":  "Enabled"
+                                    }
+                                ],
+                   "services":  [
+                                    {
+                                        "name":  "vmcompute",
+                                        "present":  true,
+                                        "status":  "Running",
+                                        "start_type":  "Manual"
+                                    },
+                                    {
+                                        "name":  "vmms",
+                                        "present":  false
+                                    },
+                                    {
+                                        "name":  "hns",
+                                        "present":  true,
+                                        "status":  "Running",
+                                        "start_type":  "Manual"
+                                    }
+                                ],
+                   "module_present":  false,
+                   "module_path":  null,
+                   "cmdlets":  [
+                                   {
+                                       "name":  "Get-VM",
+                                       "present":  false
+                                   },
+                                   {
+                                       "name":  "New-VM",
+                                       "present":  false
+                                   },
+                                   {
+                                       "name":  "Start-VM",
+                                       "present":  false
+                                   },
+                                   {
+                                       "name":  "Stop-VM",
+                                       "present":  false
+                                   },
+                                   {
+                                       "name":  "Checkpoint-VM",
+                                       "present":  false
+                                   }
+                               ],
+                   "virtual_machine_platform_enabled":  true
+               },
+    "debug_environment":  "hyperv",
+    "debug_vm_name":  "RegProbe-Debug-HyperV",
+    "debug_transport":  "serial",
+    "debug_baseline":  "RegProbe-Debug-HyperV-Baseline-20260403",
+    "transport_reliability":  "low",
+    "reproducible_runs":  0,
+    "vm_role":  "debug_arbiter_only"
+}

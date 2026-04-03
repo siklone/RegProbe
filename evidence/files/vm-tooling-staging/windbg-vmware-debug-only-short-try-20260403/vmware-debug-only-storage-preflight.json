@@ -1,0 +1,62 @@
+﻿{
+    "generated_utc":  "2026-04-03T19:41:45.0206850Z",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+    "vm_directory":  "H:\\Yedek\\VMs\\Win25H2Clean-B",
+    "status":  "warning",
+    "drive_context":  {
+                          "drive_letter":  "H",
+                          "volume":  {
+                                         "drive_letter":  "H",
+                                         "file_system":  "NTFS",
+                                         "health_status":  "Healthy",
+                                         "size":  1000202719232,
+                                         "size_remaining":  482385932288
+                                     },
+                          "disk":  {
+                                       "number":  3,
+                                       "friendly_name":  " Generic",
+                                       "serial_number":  "S32XJ9ADC04372      ",
+                                       "bus_type":  "USB",
+                                       "health_status":  "Healthy"
+                                   }
+                      },
+    "referenced_files":  [
+                             {
+                                 "kind":  "vmx-disk",
+                                 "source":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+                                 "path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2-target-cl1-000011.vmdk",
+                                 "exists":  true,
+                                 "readable":  true,
+                                 "size":  510001152,
+                                 "sample_bytes":  64,
+                                 "error":  null
+                             },
+                             {
+                                 "kind":  "vmdk-extent",
+                                 "source":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2-target-cl1-000011.vmdk",
+                                 "path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2-target-cl1.vmdk",
+                                 "exists":  true,
+                                 "readable":  true,
+                                 "size":  36873830400,
+                                 "sample_bytes":  64,
+                                 "error":  null
+                             }
+                         ],
+    "findings":  [
+                     {
+                         "severity":  "warning",
+                         "code":  "usb-backed-vm-volume",
+                         "message":  "VM is running from USB-backed storage on drive H:.",
+                         "path":  ""
+                     },
+                     {
+                         "severity":  "warning",
+                         "code":  "disk-event-query-failed",
+                         "message":  "No events were found that match the specified selection criteria.",
+                         "path":  ""
+                     }
+                 ],
+    "recent_events":  [
+
+                      ]
+}

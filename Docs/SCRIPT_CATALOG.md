@@ -167,6 +167,8 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   static sidecar for loader-style binaries where the normal import table is not enough
 - `registry-research-framework/tools/windbg-hyperv/run-debug-environment-selection.ps1`
   freezes the current VMware WinDbg lane, runs the Hyper-V feasibility gate, and writes both the preferred `Hyper-V` plan and the short VMware debug-only fallback plan
+- `registry-research-framework/tools/windbg-hyperv/enable-hyperv-debug-prereqs.ps1`
+  enables the host-side Hyper-V prerequisites with `NoRestart` support, records before/after feasibility, and leaves a canonical audit for the reboot boundary
 - `registry-research-framework/tools/run-windbg-vmware-debug-only-short-try.ps1`
   executes the one remaining controlled VMware debug-only branch: fresh provision, transport-first smoke, minimal attach matrix, and breakin smoke with stop-rule closure
 

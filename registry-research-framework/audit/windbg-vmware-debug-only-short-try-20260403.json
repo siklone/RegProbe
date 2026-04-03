@@ -1,13 +1,14 @@
 ﻿{
-    "generated_utc":  "2026-04-03T18:48:58.8415827Z",
+    "generated_utc":  "2026-04-03T19:40:55.8048060Z",
     "epic":  "windbg-vmware-debug-only-short-try",
-    "status":  "planned",
+    "status":  "error",
     "debug_environment":  "vmware-debug-only",
     "debug_vm_name":  "Win25H2DebugOnly",
+    "source_vm_profile":  "secondary",
     "debug_snapshot_name":  "RegProbe-Debug-VMwareOnly-Baseline-20260403",
     "frozen_lane_return_allowed":  false,
     "plan_ref":  "evidence/files/vm-tooling-staging/windbg-vmware-debug-only-short-try-20260403/vmware-debug-only-plan.json",
-    "provision_requested":  false,
+    "provision_requested":  true,
     "selected_profiles":  [
                               {
                                   "id":  "transport-smoke",
@@ -40,9 +41,11 @@
                        "command execution remains unreliable"
                    ],
     "branch_close_condition":  "repeat-current-transport-blocker",
-    "branch_status":  "planned",
+    "branch_status":  "blocked",
     "next_environment_if_closed":  "hyperv-prerequisites",
     "entries":  [
 
-                ]
+                ],
+    "provision_ref":  "evidence/files/vm-tooling-staging/windbg-vmware-debug-only-short-try-20260403/vmware-debug-only-provision.json",
+    "provision_status":  "error"
 }
