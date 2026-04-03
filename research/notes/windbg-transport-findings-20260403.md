@@ -63,6 +63,8 @@ Date: `2026-04-03`
 - If `Hyper-V` is still blocked on the current host, one short fresh `VMware debug-only` try is allowed as a fallback.
 - That fallback is a new debugger-first VM, not a return to the frozen lane.
 - If the same transport blocker reproduces there, the repo should stop the VMware branch and move directly to `Hyper-V` prerequisites.
+- The canonical short-try contract is now recorded here:
+  - [windbg-vmware-debug-only-short-try-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-short-try-20260403.json)
 
 Current decision records:
 
@@ -70,6 +72,7 @@ Current decision records:
 - [windbg-debug-environment-selection-20260403.json](C:\r\registry-research-framework\audit\windbg-debug-environment-selection-20260403.json)
 - [windbg-hyperv-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-hyperv-setup-20260403.json)
 - [windbg-vmware-debug-only-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-setup-20260403.json)
+- [windbg-vmware-debug-only-short-try-20260403.md](C:\r\research\notes\windbg-vmware-debug-only-short-try-20260403.md)
 
 ## Evidence
 

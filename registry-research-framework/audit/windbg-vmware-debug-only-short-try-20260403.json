@@ -1,0 +1,48 @@
+﻿{
+    "generated_utc":  "2026-04-03T18:48:58.8415827Z",
+    "epic":  "windbg-vmware-debug-only-short-try",
+    "status":  "planned",
+    "debug_environment":  "vmware-debug-only",
+    "debug_vm_name":  "Win25H2DebugOnly",
+    "debug_snapshot_name":  "RegProbe-Debug-VMwareOnly-Baseline-20260403",
+    "frozen_lane_return_allowed":  false,
+    "plan_ref":  "evidence/files/vm-tooling-staging/windbg-vmware-debug-only-short-try-20260403/vmware-debug-only-plan.json",
+    "provision_requested":  false,
+    "selected_profiles":  [
+                              {
+                                  "id":  "transport-smoke",
+                                  "phase":  "transport-smoke",
+                                  "trace_profile":  "minimal",
+                                  "boot_mode":  "guest-restart"
+                              },
+                              {
+                                  "id":  "minimal-attach-after-shell",
+                                  "phase":  "minimal-attach-matrix",
+                                  "trace_profile":  "minimal",
+                                  "boot_mode":  "attach-after-shell"
+                              },
+                              {
+                                  "id":  "minimal-cold-boot",
+                                  "phase":  "minimal-attach-matrix",
+                                  "trace_profile":  "minimal",
+                                  "boot_mode":  "cold-boot"
+                              },
+                              {
+                                  "id":  "breakin-smoke",
+                                  "phase":  "breakin-smoke",
+                                  "trace_profile":  "breakin-once",
+                                  "boot_mode":  "guest-restart"
+                              }
+                          ],
+    "stop_rules":  [
+                       "same transport blocker repeats",
+                       "same breakin packet error repeats",
+                       "command execution remains unreliable"
+                   ],
+    "branch_close_condition":  "repeat-current-transport-blocker",
+    "branch_status":  "planned",
+    "next_environment_if_closed":  "hyperv-prerequisites",
+    "entries":  [
+
+                ]
+}

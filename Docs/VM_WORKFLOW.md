@@ -15,6 +15,7 @@ This repo now treats runtime research and debugger-first arbitration as two diff
   - allowed only as a short debugger-first fallback if `Hyper-V` is still blocked on the current host
   - target baseline: `RegProbe-Debug-VMwareOnly-Baseline-20260403`
   - this is not the same thing as the frozen VMware WinDbg lane
+  - stop immediately if the same transport blocker, the same breakin-packet error, or unreliable command execution reproduces
 
 The current VMware WinDbg named-pipe lane is intentionally frozen as a historical transport finding, not the forward path for final arbiter work.
 
@@ -121,7 +122,9 @@ Current Hyper-V planning scripts:
 scripts/vm-hyperv/test-hyperv-debug-feasibility.ps1
 scripts/vm-hyperv/new-hyperv-debug-baseline-plan.ps1
 scripts/vm/new-vmware-debug-only-baseline-plan.ps1
+scripts/vm/new-vmware-debug-only-vm.ps1
 registry-research-framework/tools/windbg-hyperv/run-debug-environment-selection.ps1
+registry-research-framework/tools/run-windbg-vmware-debug-only-short-try.ps1
 ```
 
 ## Defender Exclusion Rule

@@ -27,7 +27,9 @@ $parserTargets = @(
     'scripts\vm-hyperv\test-hyperv-debug-feasibility.ps1',
     'scripts\vm-hyperv\new-hyperv-debug-baseline-plan.ps1',
     'scripts\vm\new-vmware-debug-only-baseline-plan.ps1',
+    'scripts\vm\new-vmware-debug-only-vm.ps1',
     'registry-research-framework\tools\windbg-hyperv\run-debug-environment-selection.ps1',
+    'registry-research-framework\tools\run-windbg-vmware-debug-only-short-try.ps1',
     'tests\Invoke-StagingInventorySmoke.ps1'
 )
 
@@ -185,6 +187,18 @@ try {
         $vmwareDebugOnlyPlan = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm\new-vmware-debug-only-baseline-plan.ps1') -OutputPath $vmwareDebugOnlyPlanPath | ConvertFrom-Json
         if ($vmwareDebugOnlyPlan.debug_environment -ne 'vmware-debug-only' -or $vmwareDebugOnlyPlan.vm_role -ne 'debug_arbiter_only' -or $vmwareDebugOnlyPlan.frozen_lane_return_allowed) {
             throw 'VMware debug-only baseline plan contract failed.'
+        }
+
+        $vmwareDebugOnlyProvisionPath = Join-Path $tempRepoRoot 'vmware-debug-only-provision.json'
+        $vmwareDebugOnlyProvision = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm\new-vmware-debug-only-vm.ps1') -PlanOnly -SourceVmPath 'C:\VMs\Win25H2Clean\Win25H2.vmx' -TargetVmName 'Win25H2DebugOnly' -TargetVmPath 'C:\VMs\Win25H2DebugOnly\Win25H2DebugOnly.vmx' -OutputPath $vmwareDebugOnlyProvisionPath | ConvertFrom-Json
+        if ($vmwareDebugOnlyProvision.debug_environment -ne 'vmware-debug-only' -or -not $vmwareDebugOnlyProvision.fresh_provision -or $vmwareDebugOnlyProvision.frozen_lane_return_allowed) {
+            throw 'VMware debug-only provision plan contract failed.'
+        }
+
+        $vmwareShortTryPath = Join-Path $tempRepoRoot 'vmware-debug-only-short-try.json'
+        $vmwareShortTry = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'registry-research-framework\tools\run-windbg-vmware-debug-only-short-try.ps1') -PlanOnly -AuditDate '20990101' | ConvertFrom-Json
+        if ($vmwareShortTry.debug_environment -ne 'vmware-debug-only' -or $vmwareShortTry.branch_status -ne 'planned' -or @($vmwareShortTry.selected_profiles).Count -lt 4) {
+            throw 'VMware debug-only short-try plan contract failed.'
         }
     }
     finally {
