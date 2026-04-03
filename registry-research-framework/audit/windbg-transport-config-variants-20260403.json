@@ -1,11 +1,12 @@
 ﻿{
-    "generated_utc":  "2026-04-03T03:00:21.0941684Z",
+    "generated_utc":  "2026-04-03T09:41:31.8593359Z",
     "epic":  "windbg-transport-hardening",
     "audit_date":  "20260403",
     "variants":  [
                      {
                          "id":  "minimal-cold-boot",
                          "phase":  "minimal-matrix",
+                         "debugger_frontend":  "kd",
                          "trace_profile":  "minimal",
                          "boot_mode":  "cold-boot",
                          "target_key":  null,
@@ -14,6 +15,7 @@
                      {
                          "id":  "minimal-attach-after-shell",
                          "phase":  "minimal-matrix",
+                         "debugger_frontend":  "kd",
                          "trace_profile":  "minimal",
                          "boot_mode":  "attach-after-shell",
                          "target_key":  null,
@@ -22,6 +24,7 @@
                      {
                          "id":  "symbols-guest-restart",
                          "phase":  "minimal-matrix",
+                         "debugger_frontend":  "kd",
                          "trace_profile":  "symbols",
                          "boot_mode":  "guest-restart",
                          "target_key":  null,
@@ -30,6 +33,7 @@
                      {
                          "id":  "attach-only-attach-after-shell",
                          "phase":  "breakin-matrix",
+                         "debugger_frontend":  "kd",
                          "trace_profile":  "attach-only",
                          "boot_mode":  "attach-after-shell",
                          "target_key":  null,
@@ -38,6 +42,7 @@
                      {
                          "id":  "breakin-once-attach-after-shell",
                          "phase":  "breakin-matrix",
+                         "debugger_frontend":  "kd",
                          "trace_profile":  "breakin-once",
                          "boot_mode":  "attach-after-shell",
                          "target_key":  null,
@@ -46,6 +51,7 @@
                      {
                          "id":  "breakin-twice-attach-after-shell",
                          "phase":  "breakin-matrix",
+                         "debugger_frontend":  "kd",
                          "trace_profile":  "breakin-twice",
                          "boot_mode":  "attach-after-shell",
                          "target_key":  null,
@@ -54,6 +60,7 @@
                      {
                          "id":  "breakin-delayed-10-attach-after-shell",
                          "phase":  "breakin-matrix",
+                         "debugger_frontend":  "kd",
                          "trace_profile":  "breakin-delayed-10",
                          "boot_mode":  "attach-after-shell",
                          "target_key":  null,
@@ -62,14 +69,34 @@
                      {
                          "id":  "breakin-delayed-30-attach-after-shell",
                          "phase":  "breakin-matrix",
+                         "debugger_frontend":  "kd",
                          "trace_profile":  "breakin-delayed-30",
                          "boot_mode":  "attach-after-shell",
                          "target_key":  null,
                          "semantic_ready":  false
                      },
                      {
+                         "id":  "symbols-guest-restart-cdb",
+                         "phase":  "frontend-matrix",
+                         "debugger_frontend":  "cdb",
+                         "trace_profile":  "symbols",
+                         "boot_mode":  "guest-restart",
+                         "target_key":  null,
+                         "semantic_ready":  false
+                     },
+                     {
+                         "id":  "minimal-cold-boot-cdb",
+                         "phase":  "frontend-matrix",
+                         "debugger_frontend":  "cdb",
+                         "trace_profile":  "minimal",
+                         "boot_mode":  "cold-boot",
+                         "target_key":  null,
+                         "semantic_ready":  false
+                     },
+                     {
                          "id":  "singlekey-smoke-cold-boot",
                          "phase":  "singlekey-smoke",
+                         "debugger_frontend":  "kd",
                          "trace_profile":  "singlekey-smoke",
                          "boot_mode":  "cold-boot",
                          "target_key":  "AllowSystemRequiredPowerRequests",

@@ -316,6 +316,14 @@ function Get-TraceObservation {
         console_text = $consoleText
         windbg_log_detected = [bool]$analysisLogPath
         log_size_bytes = if ($analysisLogPath -and (Test-Path -LiteralPath $analysisLogPath)) { [int64](Get-Item -LiteralPath $analysisLogPath).Length } else { 0 }
+        no_debuggee_waiting = (
+            ($analysisText -match 'Kernel Debug Target Status:\s+\[no_debuggee\]') -or
+            ($consoleText -match 'Kernel Debug Target Status:\s+\[no_debuggee\]') -or
+            (
+                (($analysisText -match 'Waiting to reconnect\.\.\.') -or ($consoleText -match 'Waiting to reconnect\.\.\.')) -and
+                -not (($analysisText -match 'Kernel Debugger connection established') -or ($consoleText -match 'Kernel Debugger connection established'))
+            )
+        )
         raw_value_blocks = $rawValueBlocks
         raw_value_event_count = @($rawValueBlocks).Count
         firsthit_observed = @($firstHitBlocks).Count -gt 0
@@ -1052,6 +1060,7 @@ foreach ($key in $keys) {
 $fatalSystemErrorObserved = [bool]$traceObservation.fatal_system_error_observed
 $kernelConnected = [bool]$traceObservation.kernel_connected
 $transportError = [bool]$traceObservation.transport_error
+$noDebuggeeWaiting = [bool]$traceObservation.no_debuggee_waiting
 $breakpointUnresolved = [bool]$traceObservation.breakpoint_unresolved
 $parserInvalid = [bool]$traceObservation.parser_invalid
 $rawNoiseEventCount = [int]$traceObservation.raw_value_event_count
@@ -1084,12 +1093,16 @@ elseif (-not $windbgLogDetected) {
 elseif (-not $scriptExecutionObserved) {
     'script-not-executed'
 }
+elseif ($noDebuggeeWaiting) {
+    'attach-ok-no-debuggee'
+}
 elseif ($TraceProfile -in @('minimal', 'symbols', 'attach-only')) {
     if ($shellRecovered) { 'runner-ok' } else { 'transport-unstable' }
 }
 elseif ($TraceProfile -like 'breakin-*') {
     if ($breakinSuccessCount -gt 0) { 'runner-ok' }
     elseif ($breakinRequestCount -gt 0) { 'attach-ok-breakin-failed' }
+    elseif ($noDebuggeeWaiting) { 'attach-ok-no-debuggee' }
     elseif ($shellRecovered) { 'attach-ok-command-not-executed' }
     else { 'transport-unstable' }
 }
@@ -1122,12 +1135,18 @@ elseif ($TraceProfile -like 'breakin-*') {
     elseif ($breakinRequestCount -gt 0 -and $shellRecovered) {
         'attach_ok_breakin_failed'
     }
+    elseif ($noDebuggeeWaiting -and $shellRecovered) {
+        'attach_ok_no_debuggee'
+    }
     elseif ($shellRecovered -and $scriptExecutionObserved) {
         'attach_ok_command_not_executed'
     }
     else {
         'transport_unstable'
     }
+}
+elseif ($noDebuggeeWaiting -and $shellRecovered -and $scriptExecutionObserved) {
+    'attach_ok_no_debuggee'
 }
 elseif ($shellRecovered -and $scriptExecutionObserved -and ($kernelConnected -or $bootMode -eq 'attach-after-shell')) {
     'transport_ok'
@@ -1176,6 +1195,7 @@ $results = [ordered]@{
     windbg_transport_state = $windbgTransportState
     windbg_semantic_ready = $windbgSemanticReady
     transport_score = $transportScore
+    no_debuggee_waiting = $noDebuggeeWaiting
     breakin_attempted = ($breakinRequestCount -gt 0)
     breakin_request_count = $breakinRequestCount
     breakin_success_count = $breakinSuccessCount
@@ -1233,6 +1253,7 @@ $summary = [ordered]@{
     windbg_transport_state = $windbgTransportState
     windbg_semantic_ready = $windbgSemanticReady
     transport_score = $transportScore
+    no_debuggee_waiting = $noDebuggeeWaiting
     breakin_attempted = ($breakinRequestCount -gt 0)
     breakin_request_count = $breakinRequestCount
     breakin_success_count = $breakinSuccessCount

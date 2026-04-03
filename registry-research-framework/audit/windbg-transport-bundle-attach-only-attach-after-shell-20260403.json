@@ -1,5 +1,5 @@
 ﻿{
-    "generated_utc":  "2026-04-03T02:49:39.1614873Z",
+    "generated_utc":  "2026-04-03T09:27:16.1334244Z",
     "tool":  "WinDbg",
     "vm_profile":  "secondary",
     "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
@@ -20,6 +20,7 @@
     "command_script":  "registry-research-framework/audit/windbg-registry-watch.txt",
     "log_path":  "C:\\RegProbe-Diag\\windbg-registry-trace.log",
     "attach_mode":  "manual-kernel-debug",
+    "debugger_frontend":  "kd",
     "breakpoint_mode":  "attach-only",
     "runner_output_policy":  "raw+sanitized",
     "windbg_semantic_ready":  false,
@@ -36,7 +37,7 @@
                                   "path":  "registry-research-framework/audit/windbg-registry-watch.txt",
                                   "sha256":  "07128608f7edfe972aad6f9e958fb315ccbeb86ea86734b9ccce4d08d62d3760",
                                   "size":  325,
-                                  "collected_utc":  "2026-04-03T02:49:39.1503296Z",
+                                  "collected_utc":  "2026-04-03T09:27:16.1283988Z",
                                   "exists":  true
                               },
                               {

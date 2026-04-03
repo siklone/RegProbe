@@ -1,5 +1,5 @@
 ﻿{
-    "generated_utc":  "2026-04-03T09:20:47.0239875Z",
+    "generated_utc":  "2026-04-03T09:39:09.5230442Z",
     "tool":  "WinDbg",
     "vm_profile":  "secondary",
     "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
@@ -13,20 +13,20 @@
 
              ],
     "target_key":  null,
-    "trace_profile":  "symbols",
-    "boot_mode":  "guest-restart",
+    "trace_profile":  "minimal",
+    "boot_mode":  "cold-boot",
     "noise_budget_bytes":  262144,
     "raw_hit_limit":  100,
     "command_script":  "registry-research-framework/audit/windbg-registry-watch.txt",
     "log_path":  "C:\\RegProbe-Diag\\windbg-registry-trace.log",
     "attach_mode":  "manual-kernel-debug",
-    "debugger_frontend":  "kd",
-    "breakpoint_mode":  "symbols",
+    "debugger_frontend":  "cdb",
+    "breakpoint_mode":  "minimal",
     "runner_output_policy":  "raw+sanitized",
     "windbg_semantic_ready":  false,
     "windbg_transport_state":  "staged",
-    "windbg_path":  "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\kd.exe",
-    "windbg_command":  "\"C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\kd.exe\" -k com:pipe,port=\\\\.\\pipe\\regprobe_debug,resets=0,reconnect -cfr \u003cREPO_ROOT\u003e\\registry-research-framework\\audit\\windbg-registry-watch.txt",
+    "windbg_path":  "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\cdb.exe",
+    "windbg_command":  "\"C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\cdb.exe\" -k com:pipe,port=\\\\.\\pipe\\regprobe_debug,resets=0,reconnect -cfr \u003cREPO_ROOT\u003e\\registry-research-framework\\audit\\windbg-registry-watch.txt",
     "status":  "ready-to-attach",
     "capture_status":  "staged",
     "capture_artifacts":  [
@@ -35,9 +35,9 @@
     "support_artifacts":  [
                               {
                                   "path":  "registry-research-framework/audit/windbg-registry-watch.txt",
-                                  "sha256":  "2292e2c06d35a6973d5669de5a47325e32060bd81a63dd354b7ed4500c50a209",
+                                  "sha256":  "02f63f9927a346da3e9ea1672d86969d379445c59065f4d9f8973d1c9b3c9d99",
                                   "size":  321,
-                                  "collected_utc":  "2026-04-03T09:20:47.0182263Z",
+                                  "collected_utc":  "2026-04-03T09:39:09.5179740Z",
                                   "exists":  true
                               },
                               {

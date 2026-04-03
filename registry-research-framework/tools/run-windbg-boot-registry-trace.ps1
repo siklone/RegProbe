@@ -11,6 +11,8 @@ param(
     [string]$GuestPassword = $env:REGPROBE_VM_GUEST_PASSWORD,
     [string]$CredentialFilePath = '',
     [string]$PipeName = '\\.\pipe\regprobe_debug',
+    [ValidateSet('auto', 'kd', 'cdb', 'windbg')]
+    [string]$DebuggerFrontend = 'auto',
     [string]$DebugSnapshotName = 'RegProbe-Baseline-Debug-20260402',
     [ValidateSet('evidence', 'operational')]
     [string]$CollectionMode = 'evidence',
@@ -110,7 +112,17 @@ function New-ArtifactRef {
 }
 
 function Resolve-DebuggerCandidate {
-    param([string[]]$CandidatePaths)
+    param(
+        [string[]]$CandidatePaths,
+        [string]$PreferredFrontend = 'auto'
+    )
+
+    $leafOrder = switch ($PreferredFrontend) {
+        'kd' { @('kd.exe', 'cdb.exe', 'windbg.exe') }
+        'cdb' { @('cdb.exe', 'kd.exe', 'windbg.exe') }
+        'windbg' { @('windbg.exe', 'kd.exe', 'cdb.exe') }
+        default { @('windbg.exe', 'kd.exe', 'cdb.exe') }
+    }
 
     foreach ($candidate in $CandidatePaths) {
         if ($candidate.Contains('*')) {
@@ -124,7 +136,7 @@ function Resolve-DebuggerCandidate {
                             (Join-Path $match.FullName 'x86'),
                             (Join-Path $match.FullName 'arm64')
                         )) {
-                        foreach ($leaf in @('windbg.exe', 'kd.exe', 'cdb.exe')) {
+                        foreach ($leaf in $leafOrder) {
                             $leafPath = Join-Path $searchRoot $leaf
                             if (Test-Path -LiteralPath $leafPath) {
                                 return $leafPath
@@ -154,7 +166,7 @@ $commonWinDbgPaths = @(
     'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\cdb.exe',
     'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.0.0.0_x64__8wekyb3d8bbwe\windbg.exe'
 )
-$resolvedWinDbg = Resolve-DebuggerCandidate -CandidatePaths $commonWinDbgPaths
+$resolvedWinDbg = Resolve-DebuggerCandidate -CandidatePaths $commonWinDbgPaths -PreferredFrontend $DebuggerFrontend
 
 $baselinePrep = $null
 $baselinePrepPath = Join-Path $outputRoot 'configure-kernel-debug-baseline.json'
@@ -226,6 +238,7 @@ $payload = [ordered]@{
     command_script = $commandScriptRef
     log_path = $logPath
     attach_mode = 'manual-kernel-debug'
+    debugger_frontend = if ($resolvedWinDbg) { [IO.Path]::GetFileNameWithoutExtension($resolvedWinDbg).ToLowerInvariant() } else { $DebuggerFrontend }
     breakpoint_mode = $generatorOutput.mode
     runner_output_policy = 'raw+sanitized'
     windbg_semantic_ready = ($TraceProfile -like 'singlekey-*')

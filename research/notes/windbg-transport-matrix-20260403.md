@@ -4,9 +4,9 @@ Date: `2026-04-03`
 
 ## Summary
 
-- executed profiles: `9`
+- executed profiles: `11`
 - stable profiles: `2`
-- unstable profiles: `7`
+- unstable profiles: `9`
 - break-in profiles: `4`
 - break-in success profiles: `0`
 
@@ -20,6 +20,8 @@ Date: `2026-04-03`
 - `breakin-twice-attach-after-shell` [breakin-matrix] -> status `attach-ok-command-not-executed`, transport `attach_ok_command_not_executed`, score `4`, breakin 0/0
 - `breakin-delayed-10-attach-after-shell` [breakin-matrix] -> status `attach-ok-command-not-executed`, transport `attach_ok_command_not_executed`, score `4`, breakin 0/0
 - `breakin-delayed-30-attach-after-shell` [breakin-matrix] -> status `attach-ok-command-not-executed`, transport `attach_ok_command_not_executed`, score `4`, breakin 0/0
+- `symbols-guest-restart-cdb` [frontend-matrix] -> status `missing-log`, transport `transport_unstable`, score `2`
+- `minimal-cold-boot-cdb` [frontend-matrix] -> status `missing-log`, transport `transport_unstable`, score `2`
 - `singlekey-smoke-cold-boot` [singlekey-smoke] -> status `trace-error`, transport `transport_error`, score `2`
 
 ## Follow-Up

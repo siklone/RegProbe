@@ -57,6 +57,7 @@ $profiles = @(
     [ordered]@{
         id = 'minimal-cold-boot'
         phase = 'minimal-matrix'
+        debugger_frontend = 'kd'
         trace_profile = 'minimal'
         boot_mode = 'cold-boot'
         target_key = $null
@@ -65,6 +66,7 @@ $profiles = @(
     [ordered]@{
         id = 'minimal-attach-after-shell'
         phase = 'minimal-matrix'
+        debugger_frontend = 'kd'
         trace_profile = 'minimal'
         boot_mode = 'attach-after-shell'
         target_key = $null
@@ -73,6 +75,7 @@ $profiles = @(
     [ordered]@{
         id = 'symbols-guest-restart'
         phase = 'minimal-matrix'
+        debugger_frontend = 'kd'
         trace_profile = 'symbols'
         boot_mode = 'guest-restart'
         target_key = $null
@@ -81,6 +84,7 @@ $profiles = @(
     [ordered]@{
         id = 'attach-only-attach-after-shell'
         phase = 'breakin-matrix'
+        debugger_frontend = 'kd'
         trace_profile = 'attach-only'
         boot_mode = 'attach-after-shell'
         target_key = $null
@@ -89,6 +93,7 @@ $profiles = @(
     [ordered]@{
         id = 'breakin-once-attach-after-shell'
         phase = 'breakin-matrix'
+        debugger_frontend = 'kd'
         trace_profile = 'breakin-once'
         boot_mode = 'attach-after-shell'
         target_key = $null
@@ -97,6 +102,7 @@ $profiles = @(
     [ordered]@{
         id = 'breakin-twice-attach-after-shell'
         phase = 'breakin-matrix'
+        debugger_frontend = 'kd'
         trace_profile = 'breakin-twice'
         boot_mode = 'attach-after-shell'
         target_key = $null
@@ -105,6 +111,7 @@ $profiles = @(
     [ordered]@{
         id = 'breakin-delayed-10-attach-after-shell'
         phase = 'breakin-matrix'
+        debugger_frontend = 'kd'
         trace_profile = 'breakin-delayed-10'
         boot_mode = 'attach-after-shell'
         target_key = $null
@@ -113,14 +120,34 @@ $profiles = @(
     [ordered]@{
         id = 'breakin-delayed-30-attach-after-shell'
         phase = 'breakin-matrix'
+        debugger_frontend = 'kd'
         trace_profile = 'breakin-delayed-30'
         boot_mode = 'attach-after-shell'
         target_key = $null
         semantic_ready = $false
     },
     [ordered]@{
+        id = 'symbols-guest-restart-cdb'
+        phase = 'frontend-matrix'
+        debugger_frontend = 'cdb'
+        trace_profile = 'symbols'
+        boot_mode = 'guest-restart'
+        target_key = $null
+        semantic_ready = $false
+    },
+    [ordered]@{
+        id = 'minimal-cold-boot-cdb'
+        phase = 'frontend-matrix'
+        debugger_frontend = 'cdb'
+        trace_profile = 'minimal'
+        boot_mode = 'cold-boot'
+        target_key = $null
+        semantic_ready = $false
+    },
+    [ordered]@{
         id = 'singlekey-smoke-cold-boot'
         phase = 'singlekey-smoke'
+        debugger_frontend = 'kd'
         trace_profile = 'singlekey-smoke'
         boot_mode = 'cold-boot'
         target_key = 'AllowSystemRequiredPowerRequests'
@@ -146,6 +173,7 @@ for ($index = 0; $index -lt $profiles.Count; $index++) {
         CollectionMode = $CollectionMode
         TraceProfile = $profile.trace_profile
         BootMode = $profile.boot_mode
+        DebuggerFrontend = $profile.debugger_frontend
         GuestUser = $GuestUser
         DebugSnapshotName = $DebugSnapshotName
     }
@@ -186,6 +214,7 @@ for ($index = 0; $index -lt $profiles.Count; $index++) {
         $entry = [ordered]@{
             id = $profile.id
             phase = $profile.phase
+            debugger_frontend = $profile.debugger_frontend
             trace_profile = $profile.trace_profile
             boot_mode = $profile.boot_mode
             target_key = $profile.target_key
@@ -219,6 +248,7 @@ for ($index = 0; $index -lt $profiles.Count; $index++) {
         [void]$executionEntries.Add([ordered]@{
             id = $profile.id
             phase = $profile.phase
+            debugger_frontend = $profile.debugger_frontend
             trace_profile = $profile.trace_profile
             boot_mode = $profile.boot_mode
             target_key = $profile.target_key

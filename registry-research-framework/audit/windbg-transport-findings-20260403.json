@@ -1,0 +1,48 @@
+{
+  "generated_utc": "2026-04-03T09:45:00Z",
+  "epic": "windbg-transport-hardening",
+  "audit_date": "20260403",
+  "status": "transport-blocked",
+  "findings": [
+    {
+      "id": "attach-after-shell-no-debuggee",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "attach-after-shell",
+      "classification": "attach_ok_no_debuggee",
+      "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-124230/summary.json",
+      "note": "Attach-after-shell remains in waiting-to-reconnect/no-debuggee state and does not produce a live kernel debuggee."
+    },
+    {
+      "id": "guest-restart-kd-transport-error",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "transport_error",
+      "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-122047/summary.json",
+      "note": "KD can reach a kernel-connected state during guest restart, but transport degrades into breakin/communication errors."
+    },
+    {
+      "id": "cdb-frontend-no-improvement",
+      "severity": "medium",
+      "frontend": "cdb",
+      "boot_mode": "guest-restart+cold-boot",
+      "classification": "transport_unstable",
+      "summary_refs": [
+        "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-123648/summary.json",
+        "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-123909/summary.json"
+      ],
+      "note": "CDB did not improve the VMware serial transport path; current runs failed before producing usable logs."
+    }
+  ],
+  "conclusion": {
+    "semantic_lane_ready": true,
+    "transport_lane_ready": false,
+    "recommended_next_phase": "serial-config-matrix",
+    "recommended_next_actions": [
+      "Keep WinDbg single-key arbitration paused until a boot-time profile can keep kernel connectivity without transport errors.",
+      "Move from frontend experiments to serial transport configuration variants and start-order experiments.",
+      "Treat attach-after-shell as a no-debuggee observation path, not as an arbiter-capable debug session."
+    ]
+  }
+}
