@@ -17,7 +17,8 @@ $parserTargets = @(
     'scripts\vm\configure-kernel-debug-baseline.ps1',
     'scripts\vm\new-windbg-registry-watch-script.ps1',
     'registry-research-framework\tools\run-windbg-boot-registry-trace.ps1',
-    'registry-research-framework\tools\execute-windbg-boot-registry-trace.ps1'
+    'registry-research-framework\tools\execute-windbg-boot-registry-trace.ps1',
+    'tests\Invoke-StagingInventorySmoke.ps1'
 )
 
 foreach ($relative in $parserTargets) {
@@ -138,6 +139,16 @@ try {
         $windbgScriptText = Get-Content -LiteralPath $windbgScriptPath -Raw
         if ($windbgScriptText -notmatch 'bu nt!CmQueryValueKey' -or $windbgScriptText -notmatch 'REGPROBE_TARGET\|AllowSystemRequiredPowerRequests') {
             throw 'Single-key WinDbg script contents are incomplete.'
+        }
+
+        $inventorySmokePath = Join-Path $repoRoot 'tests\Invoke-StagingInventorySmoke.ps1'
+        $inventoryResult = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $inventorySmokePath
+        if (-not $inventoryResult) {
+            throw 'Staging inventory smoke did not return a result.'
+        }
+        $inventoryJson = $inventoryResult | ConvertFrom-Json
+        if ([int]$inventoryJson.directory_count -le 0 -or [int]$inventoryJson.file_count -le 0) {
+            throw 'Staging inventory smoke produced invalid counts.'
         }
     }
     finally {
