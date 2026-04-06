@@ -1,0 +1,773 @@
+Opened log file 'C:\RegProbe-Diag\debugger-smoke\local-kd-hiber-disasm-20260406a\local-kd.log'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.047 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.000 seconds
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
+Connected to Windows 10 26100 x64 target at (Mon Apr  6 13:50:42.095 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff800`96c00000 PsLoadedModuleList = 0xfffff800`97af50c0
+Debug session time: Mon Apr  6 13:50:42.226 2026 (UTC - 7:00)
+System Uptime: 0 days 1:49:31.920
+lkd> .sympath C:\Tools\Symbols\local-kd-hiber-disasm-20260406a
+Symbol search path is: C:\Tools\Symbols\local-kd-hiber-disasm-20260406a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-hiber-disasm-20260406a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-hiber-disasm-20260406a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> dd nt!PopHiberFileSizePercent L1
+fffff800`97bc4074  00000000
+lkd> dd nt!PopHiberFileType L1
+fffff800`97bc4070  00000002
+lkd> dd nt!PopHiberEnabled L1
+fffff800`97bc5aff  00200501
+lkd> u nt!PopOpenHiberPersistedKey L0x120
+nt!PopOpenHiberPersistedKey:
+fffff800`972f9380 48895c2410      mov     qword ptr [rsp+10h],rbx
+fffff800`972f9385 4889742418      mov     qword ptr [rsp+18h],rsi
+fffff800`972f938a 48897c2420      mov     qword ptr [rsp+20h],rdi
+fffff800`972f938f 55              push    rbp
+fffff800`972f9390 488bec          mov     rbp,rsp
+fffff800`972f9393 4881ec80000000  sub     rsp,80h
+fffff800`972f939a 33c0            xor     eax,eax
+fffff800`972f939c 0f57c0          xorps   xmm0,xmm0
+fffff800`972f939f 2145ec          and     dword ptr [rbp-14h],eax
+fffff800`972f93a2 498bf8          mov     rdi,r8
+fffff800`972f93a5 8945d4          mov     dword ptr [rbp-2Ch],eax
+fffff800`972f93a8 8bf2            mov     esi,edx
+fffff800`972f93aa 2145d4          and     dword ptr [rbp-2Ch],eax
+fffff800`972f93ad 488bd9          mov     rbx,rcx
+fffff800`972f93b0 0f1145c0        movups  xmmword ptr [rbp-40h],xmm0
+fffff800`972f93b4 4885c9          test    rcx,rcx
+fffff800`972f93b7 0f8489000000    je      nt!PopOpenHiberPersistedKey+0xc6 (fffff800`972f9446)
+fffff800`972f93bd 488b15e43b8100  mov     rdx,qword ptr [nt!PopHibernatePersistedRegLocation (fffff800`97b0cfa8)]
+fffff800`972f93c4 4885d2          test    rdx,rdx
+fffff800`972f93c7 747d            je      nt!PopOpenHiberPersistedKey+0xc6 (fffff800`972f9446)
+fffff800`972f93c9 488309ff        or      qword ptr [rcx],0FFFFFFFFFFFFFFFFh
+fffff800`972f93cd 488d4dc0        lea     rcx,[rbp-40h]
+fffff800`972f93d1 e8caadd2ff      call    nt!RtlInitUnicodeString (fffff800`970241a0)
+fffff800`972f93d6 488365d800      and     qword ptr [rbp-28h],0
+fffff800`972f93db 488d45c0        lea     rax,[rbp-40h]
+fffff800`972f93df b906000200      mov     ecx,20006h
+fffff800`972f93e4 488945e0        mov     qword ptr [rbp-20h],rax
+fffff800`972f93e8 8bc6            mov     eax,esi
+fffff800`972f93ea c745d030000000  mov     dword ptr [rbp-30h],30h
+fffff800`972f93f1 23c1            and     eax,ecx
+fffff800`972f93f3 c745e840020000  mov     dword ptr [rbp-18h],240h
+fffff800`972f93fa 0f57c0          xorps   xmm0,xmm0
+fffff800`972f93fd 4c8d45d0        lea     r8,[rbp-30h]
+fffff800`972f9401 3bc1            cmp     eax,ecx
+fffff800`972f9403 8bd6            mov     edx,esi
+fffff800`972f9405 488bcb          mov     rcx,rbx
+fffff800`972f9408 f30f7f45f0      movdqu  xmmword ptr [rbp-10h],xmm0
+fffff800`972f940d 7527            jne     nt!PopOpenHiberPersistedKey+0xb6 (fffff800`972f9436)
+fffff800`972f940f 488364243000    and     qword ptr [rsp+30h],0
+fffff800`972f9415 4533c9          xor     r9d,r9d
+fffff800`972f9418 8364242800      and     dword ptr [rsp+28h],0
+fffff800`972f941d 488364242000    and     qword ptr [rsp+20h],0
+fffff800`972f9423 e888d3faff      call    nt!ZwCreateKey (fffff800`972a67b0)
+fffff800`972f9428 8bc8            mov     ecx,eax
+fffff800`972f942a c1f91f          sar     ecx,1Fh
+fffff800`972f942d 83e108          and     ecx,8
+fffff800`972f9430 85c0            test    eax,eax
+fffff800`972f9432 781c            js      nt!PopOpenHiberPersistedKey+0xd0 (fffff800`972f9450)
+fffff800`972f9434 eb21            jmp     nt!PopOpenHiberPersistedKey+0xd7 (fffff800`972f9457)
+fffff800`972f9436 e815d2faff      call    nt!ZwOpenKey (fffff800`972a6650)
+fffff800`972f943b 85c0            test    eax,eax
+fffff800`972f943d 7918            jns     nt!PopOpenHiberPersistedKey+0xd7 (fffff800`972f9457)
+fffff800`972f943f b909000000      mov     ecx,9
+fffff800`972f9444 eb0a            jmp     nt!PopOpenHiberPersistedKey+0xd0 (fffff800`972f9450)
+fffff800`972f9446 b907000000      mov     ecx,7
+fffff800`972f944b b80d0000c0      mov     eax,0C000000Dh
+fffff800`972f9450 4885ff          test    rdi,rdi
+fffff800`972f9453 7402            je      nt!PopOpenHiberPersistedKey+0xd7 (fffff800`972f9457)
+fffff800`972f9455 890f            mov     dword ptr [rdi],ecx
+fffff800`972f9457 4c8d9c2480000000 lea     r11,[rsp+80h]
+fffff800`972f945f 498b5b18        mov     rbx,qword ptr [r11+18h]
+fffff800`972f9463 498b7320        mov     rsi,qword ptr [r11+20h]
+fffff800`972f9467 498b7b28        mov     rdi,qword ptr [r11+28h]
+fffff800`972f946b 498be3          mov     rsp,r11
+fffff800`972f946e 5d              pop     rbp
+fffff800`972f946f c3              ret
+fffff800`972f9470 cc              int     3
+fffff800`972f9471 cc              int     3
+fffff800`972f9472 cc              int     3
+fffff800`972f9473 cc              int     3
+fffff800`972f9474 cc              int     3
+fffff800`972f9475 cc              int     3
+fffff800`972f9476 cc              int     3
+fffff800`972f9477 cc              int     3
+nt!PopDiagTraceSleepReliabilityDiagConfigUpdate:
+fffff800`972f9478 4881ec98000000  sub     rsp,98h
+fffff800`972f947f 488b053a127100  mov     rax,qword ptr [nt!_security_cookie (fffff800`97a0a6c0)]
+fffff800`972f9486 4833c4          xor     rax,rsp
+fffff800`972f9489 4889842480000000 mov     qword ptr [rsp+80h],rax
+fffff800`972f9491 833d58e2700005  cmp     dword ptr [nt!PopHiberPersistedRegValueDatabase+0x1f0 (fffff800`97a076f0)],5
+fffff800`972f9498 448ac1          mov     r8b,cl
+fffff800`972f949b 0f8681000000    jbe     nt!PopDiagTraceSleepReliabilityDiagConfigUpdate+0xaa (fffff800`972f9522)
+fffff800`972f94a1 48ba0000000000400000 mov rdx,400000000000h
+fffff800`972f94ab 488d0d3ee27000  lea     rcx,[nt!PopHiberPersistedRegValueDatabase+0x1f0 (fffff800`97a076f0)]
+fffff800`972f94b2 e839d6d2ff      call    nt!tlgKeywordOn (fffff800`97026af0)
+fffff800`972f94b7 84c0            test    al,al
+fffff800`972f94b9 7467            je      nt!PopDiagTraceSleepReliabilityDiagConfigUpdate+0xaa (fffff800`972f9522)
+fffff800`972f94bb 8364246c00      and     dword ptr [rsp+6Ch],0
+fffff800`972f94c0 488d442430      lea     rax,[rsp+30h]
+fffff800`972f94c5 8364247c00      and     dword ptr [rsp+7Ch],0
+fffff800`972f94ca 488d152d2295ff  lea     rdx,[nt!TraceLoggingMetadata+0x8a6e (fffff800`96c4b6fe)]
+fffff800`972f94d1 4889442460      mov     qword ptr [rsp+60h],rax
+fffff800`972f94d6 488d0d13e27000  lea     rcx,[nt!PopHiberPersistedRegValueDatabase+0x1f0 (fffff800`97a076f0)]
+fffff800`972f94dd 488d442438      lea     rax,[rsp+38h]
+fffff800`972f94e2 4488442430      mov     byte ptr [rsp+30h],r8b
+fffff800`972f94e7 4889442470      mov     qword ptr [rsp+70h],rax
+fffff800`972f94ec 4533c9          xor     r9d,r9d
+fffff800`972f94ef 488d442440      lea     rax,[rsp+40h]
+fffff800`972f94f4 c744246801000000 mov     dword ptr [rsp+68h],1
+fffff800`972f94fc 4889442428      mov     qword ptr [rsp+28h],rax
+fffff800`972f9501 4533c0          xor     r8d,r8d
+fffff800`972f9504 c744242004000000 mov     dword ptr [rsp+20h],4
+fffff800`972f950c 48c744243800000001 mov   qword ptr [rsp+38h],1000000h
+fffff800`972f9515 c744247808000000 mov     dword ptr [rsp+78h],8
+fffff800`972f951d e88e77c3ff      call    nt!tlgWriteTransfer_EtwWriteTransfer (fffff800`96f30cb0)
+fffff800`972f9522 488b8c2480000000 mov     rcx,qword ptr [rsp+80h]
+fffff800`972f952a 4833cc          xor     rcx,rsp
+fffff800`972f952d e8eec3faff      call    nt!_security_check_cookie (fffff800`972a5920)
+fffff800`972f9532 4881c498000000  add     rsp,98h
+fffff800`972f9539 c3              ret
+fffff800`972f953a cc              int     3
+fffff800`972f953b cc              int     3
+fffff800`972f953c cc              int     3
+fffff800`972f953d cc              int     3
+fffff800`972f953e cc              int     3
+fffff800`972f953f cc              int     3
+fffff800`972f9540 cc              int     3
+fffff800`972f9541 cc              int     3
+fffff800`972f9542 cc              int     3
+fffff800`972f9543 cc              int     3
+nt!PopNewWakeSource:
+fffff800`972f9544 4053            push    rbx
+fffff800`972f9546 4883ec20        sub     rsp,20h
+fffff800`972f954a ba70000000      mov     edx,70h
+fffff800`972f954f 8bd9            mov     ebx,ecx
+fffff800`972f9551 41b84d656d20    mov     r8d,206D654Dh
+fffff800`972f9557 8d4ad0          lea     ecx,[rdx-30h]
+fffff800`972f955a e8918b4700      call    nt!ExAllocatePool2 (fffff800`977720f0)
+fffff800`972f955f 4885c0          test    rax,rax
+fffff800`972f9562 7403            je      nt!PopNewWakeSource+0x23 (fffff800`972f9567)
+fffff800`972f9564 895810          mov     dword ptr [rax+10h],ebx
+fffff800`972f9567 4883c420        add     rsp,20h
+fffff800`972f956b 5b              pop     rbx
+fffff800`972f956c c3              ret
+fffff800`972f956d cc              int     3
+fffff800`972f956e cc              int     3
+fffff800`972f956f cc              int     3
+fffff800`972f9570 cc              int     3
+fffff800`972f9571 cc              int     3
+fffff800`972f9572 cc              int     3
+fffff800`972f9573 cc              int     3
+nt!MiExtendWorkingSetSwapPagefile:
+fffff800`972f9574 4883ec28        sub     rsp,28h
+fffff800`972f9578 4881c2ff7f0000  add     rdx,7FFFh
+fffff800`972f957f 458bc8          mov     r9d,r8d
+fffff800`972f9582 4881e20080ffff  and     rdx,0FFFFFFFFFFFF8000h
+fffff800`972f9589 4533c0          xor     r8d,r8d
+fffff800`972f958c e8a71ed7ff      call    nt!MiIssuePageExtendRequest (fffff800`9706b438)
+fffff800`972f9591 f7d8            neg     eax
+fffff800`972f9593 1bc0            sbb     eax,eax
+fffff800`972f9595 f7d0            not     eax
+fffff800`972f9597 25990000c0      and     eax,0C0000099h
+fffff800`972f959c 4883c428        add     rsp,28h
+fffff800`972f95a0 c3              ret
+fffff800`972f95a1 cc              int     3
+fffff800`972f95a2 cc              int     3
+fffff800`972f95a3 cc              int     3
+fffff800`972f95a4 cc              int     3
+fffff800`972f95a5 cc              int     3
+fffff800`972f95a6 cc              int     3
+fffff800`972f95a7 cc              int     3
+nt!MiHandleEnclaveFault:
+fffff800`972f95a8 4883ec28        sub     rsp,28h
+fffff800`972f95ac 8364243800      and     dword ptr [rsp+38h],0
+fffff800`972f95b1 4c8d442438      lea     r8,[rsp+38h]
+fffff800`972f95b6 ba02000000      mov     edx,2
+fffff800`972f95bb e87028c0ff      call    nt!MiObtainReferencedVadEx (fffff800`96efbe30)
+fffff800`972f95c0 488bc8          mov     rcx,rax
+fffff800`972f95c3 b8050000c0      mov     eax,0C0000005h
+fffff800`972f95c8 89442438        mov     dword ptr [rsp+38h],eax
+fffff800`972f95cc 4885c9          test    rcx,rcx
+fffff800`972f95cf 742e            je      nt!MiHandleEnclaveFault+0x57 (fffff800`972f95ff)
+fffff800`972f95d1 8b4130          mov     eax,dword ptr [rcx+30h]
+fffff800`972f95d4 250000200c      and     eax,0C200000h
+fffff800`972f95d9 3d00002008      cmp     eax,8200000h
+fffff800`972f95de 7516            jne     nt!MiHandleEnclaveFault+0x4e (fffff800`972f95f6)
+fffff800`972f95e0 8b4140          mov     eax,dword ptr [rcx+40h]
+fffff800`972f95e3 a801            test    al,1
+fffff800`972f95e5 740f            je      nt!MiHandleEnclaveFault+0x4e (fffff800`972f95f6)
+fffff800`972f95e7 8b4148          mov     eax,dword ptr [rcx+48h]
+fffff800`972f95ea a801            test    al,1
+fffff800`972f95ec 7408            je      nt!MiHandleEnclaveFault+0x4e (fffff800`972f95f6)
+fffff800`972f95ee c7442438a20400c0 mov     dword ptr [rsp+38h],0C00004A2h
+fffff800`972f95f6 e8351dbcff      call    nt!MiUnlockAndDereferenceVadShared (fffff800`96ebb330)
+fffff800`972f95fb 8b442438        mov     eax,dword ptr [rsp+38h]
+fffff800`972f95ff 4883c428        add     rsp,28h
+fffff800`972f9603 c3              ret
+fffff800`972f9604 cc              int     3
+fffff800`972f9605 cc              int     3
+fffff800`972f9606 cc              int     3
+fffff800`972f9607 cc              int     3
+fffff800`972f9608 cc              int     3
+fffff800`972f9609 cc              int     3
+fffff800`972f960a cc              int     3
+fffff800`972f960b cc              int     3
+nt!IopFreeReqAlternative:
+fffff800`972f960c 4885c9          test    rcx,rcx
+fffff800`972f960f 7469            je      nt!IopFreeReqAlternative+0x6e (fffff800`972f967a)
+fffff800`972f9611 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff800`972f9616 4889742410      mov     qword ptr [rsp+10h],rsi
+fffff800`972f961b 57              push    rdi
+fffff800`972f961c 4883ec20        sub     rsp,20h
+fffff800`972f9620 33f6            xor     esi,esi
+fffff800`972f9622 488bf9          mov     rdi,rcx
+fffff800`972f9625 397114          cmp     dword ptr [rcx+14h],esi
+fffff800`972f9628 7641            jbe     nt!IopFreeReqAlternative+0x5f (fffff800`972f966b)
+fffff800`972f962a 488b4cf718      mov     rcx,qword ptr [rdi+rsi*8+18h]
+fffff800`972f962f 488b5920        mov     rbx,qword ptr [rcx+20h]
+fffff800`972f9633 eb2a            jmp     nt!IopFreeReqAlternative+0x53 (fffff800`972f965f)
+fffff800`972f9635 48837b1000      cmp     qword ptr [rbx+10h],0
+fffff800`972f963a 7528            jne     nt!IopFreeReqAlternative+0x58 (fffff800`972f9664)
+fffff800`972f963c 488b4b40        mov     rcx,qword ptr [rbx+40h]
+fffff800`972f9640 4885c9          test    rcx,rcx
+fffff800`972f9643 740c            je      nt!IopFreeReqAlternative+0x45 (fffff800`972f9651)
+fffff800`972f9645 33d2            xor     edx,edx
+fffff800`972f9647 e884964700      call    nt!ExFreePoolWithTag (fffff800`97772cd0)
+fffff800`972f964c 4883634000      and     qword ptr [rbx+40h],0
+fffff800`972f9651 488bcb          mov     rcx,rbx
+fffff800`972f9654 33d2            xor     edx,edx
+fffff800`972f9656 488b5b20        mov     rbx,qword ptr [rbx+20h]
+fffff800`972f965a e871964700      call    nt!ExFreePoolWithTag (fffff800`97772cd0)
+fffff800`972f965f 4885db          test    rbx,rbx
+fffff800`972f9662 75d1            jne     nt!IopFreeReqAlternative+0x29 (fffff800`972f9635)
+fffff800`972f9664 ffc6            inc     esi
+fffff800`972f9666 3b7714          cmp     esi,dword ptr [rdi+14h]
+fffff800`972f9669 72bf            jb      nt!IopFreeReqAlternative+0x1e (fffff800`972f962a)
+fffff800`972f966b 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+fffff800`972f9670 488b742438      mov     rsi,qword ptr [rsp+38h]
+fffff800`972f9675 4883c420        add     rsp,20h
+fffff800`972f9679 5f              pop     rdi
+fffff800`972f967a c3              ret
+fffff800`972f967b cc              int     3
+fffff800`972f967c cc              int     3
+fffff800`972f967d cc              int     3
+fffff800`972f967e cc              int     3
+fffff800`972f967f cc              int     3
+fffff800`972f9680 cc              int     3
+fffff800`972f9681 cc              int     3
+fffff800`972f9682 cc              int     3
+fffff800`972f9683 cc              int     3
+nt!wil_details_EvaluateFeatureDependencies:
+fffff800`972f9684 4053            push    rbx
+fffff800`972f9686 4883ec20        sub     rsp,20h
+fffff800`972f968a 488364243000    and     qword ptr [rsp+30h],0
+fffff800`972f9690 488d0dd1179eff  lea     rcx,[nt!Feature_LearningModeSupport__private_descriptor (fffff800`96cdae68)]
+fffff800`972f9697 e8e848dcff      call    nt!wil_details_FeatureDescriptors_SkipPadding (fffff800`970bdf84)
+fffff800`972f969c 488bd0          mov     rdx,rax
+fffff800`972f969f 4885c0          test    rax,rax
+fffff800`972f96a2 7463            je      nt!wil_details_EvaluateFeatureDependencies+0x83 (fffff800`972f9707)
+fffff800`972f96a4 448b4c2430      mov     r9d,dword ptr [rsp+30h]
+fffff800`972f96a9 41ba80010000    mov     r10d,180h
+fffff800`972f96af 488b0a          mov     rcx,qword ptr [rdx]
+fffff800`972f96b2 448b01          mov     r8d,dword ptr [rcx]
+fffff800`972f96b5 410fbae009      bt      r8d,9
+fffff800`972f96ba 733a            jae     nt!wil_details_EvaluateFeatureDependencies+0x72 (fffff800`972f96f6)
+fffff800`972f96bc 33c9            xor     ecx,ecx
+fffff800`972f96be 4585c2          test    r10d,r8d
+fffff800`972f96c1 7508            jne     nt!wil_details_EvaluateFeatureDependencies+0x47 (fffff800`972f96cb)
+fffff800`972f96c3 384a1f          cmp     byte ptr [rdx+1Fh],cl
+fffff800`972f96c6 0f95c1          setne   cl
+fffff800`972f96c9 eb0e            jmp     nt!wil_details_EvaluateFeatureDependencies+0x55 (fffff800`972f96d9)
+fffff800`972f96cb 418bc0          mov     eax,r8d
+fffff800`972f96ce 4123c2          and     eax,r10d
+fffff800`972f96d1 3d00010000      cmp     eax,100h
+fffff800`972f96d6 0f94c1          sete    cl
+fffff800`972f96d9 418bc1          mov     eax,r9d
+fffff800`972f96dc c1e106          shl     ecx,6
+fffff800`972f96df 4183e040        and     r8d,40h
+fffff800`972f96e3 83e0bf          and     eax,0FFFFFFBFh
+fffff800`972f96e6 4433c1          xor     r8d,ecx
+fffff800`972f96e9 458bc8          mov     r9d,r8d
+fffff800`972f96ec 440bc8          or      r9d,eax
+fffff800`972f96ef 488b02          mov     rax,qword ptr [rdx]
+fffff800`972f96f2 f0443108        lock xor dword ptr [rax],r9d
+fffff800`972f96f6 488d4a38        lea     rcx,[rdx+38h]
+fffff800`972f96fa e88548dcff      call    nt!wil_details_FeatureDescriptors_SkipPadding (fffff800`970bdf84)
+fffff800`972f96ff 488bd0          mov     rdx,rax
+fffff800`972f9702 4885c0          test    rax,rax
+fffff800`972f9705 75a8            jne     nt!wil_details_EvaluateFeatureDependencies+0x2b (fffff800`972f96af)
+fffff800`972f9707 488d0d5a179eff  lea     rcx,[nt!Feature_LearningModeSupport__private_descriptor (fffff800`96cdae68)]
+fffff800`972f970e eb0f            jmp     nt!wil_details_EvaluateFeatureDependencies+0x9b (fffff800`972f971f)
+fffff800`972f9710 488b0b          mov     rcx,qword ptr [rbx]
+fffff800`972f9713 488bd3          mov     rdx,rbx
+fffff800`972f9716 e8b96e3b00      call    nt!wil_details_EvaluateFeatureDependencies_GetCachedFeatureEnabledState (fffff800`976b05d4)
+fffff800`972f971b 488d4b38        lea     rcx,[rbx+38h]
+fffff800`972f971f e86048dcff      call    nt!wil_details_FeatureDescriptors_SkipPadding (fffff800`970bdf84)
+fffff800`972f9724 488bd8          mov     rbx,rax
+fffff800`972f9727 4885c0          test    rax,rax
+fffff800`972f972a 75e4            jne     nt!wil_details_EvaluateFeatureDependencies+0x8c (fffff800`972f9710)
+fffff800`972f972c 4883c420        add     rsp,20h
+fffff800`972f9730 5b              pop     rbx
+fffff800`972f9731 c3              ret
+fffff800`972f9732 cc              int     3
+fffff800`972f9733 cc              int     3
+lkd> u nt!PopInitHiberPersistedRegValues L0x180
+nt!PopInitHiberPersistedRegValues:
+fffff800`9735282c 4c8bdc          mov     r11,rsp
+fffff800`9735282f 49895b10        mov     qword ptr [r11+10h],rbx
+fffff800`97352833 49897318        mov     qword ptr [r11+18h],rsi
+fffff800`97352837 57              push    rdi
+fffff800`97352838 4883ec40        sub     rsp,40h
+fffff800`9735283c 33db            xor     ebx,ebx
+fffff800`9735283e 498d4308        lea     rax,[r11+8]
+fffff800`97352842 498943e8        mov     qword ptr [r11-18h],rax
+fffff800`97352846 4c8d05436a8dff  lea     r8,[nt!PopControlVolatileRegKey (fffff800`96c29290)]
+fffff800`9735284d 895c2428        mov     dword ptr [rsp+28h],ebx
+fffff800`97352851 488d0d18678dff  lea     rcx,[nt!PopControlStateSepRegKeyId (fffff800`96c28f70)]
+fffff800`97352858 4533c9          xor     r9d,r9d
+fffff800`9735285b 49895bd8        mov     qword ptr [r11-28h],rbx
+fffff800`9735285f 33d2            xor     edx,edx
+fffff800`97352861 895c2450        mov     dword ptr [rsp+50h],ebx
+fffff800`97352865 e876982700      call    nt!RtlGetPersistedStateLocation (fffff800`975cc0e0)
+fffff800`9735286a 3d05000080      cmp     eax,80000005h
+fffff800`9735286f 740a            je      nt!PopInitHiberPersistedRegValues+0x4f (fffff800`9735287b)
+fffff800`97352871 bf010000c0      mov     edi,0C0000001h
+fffff800`97352876 e988000000      jmp     nt!PopInitHiberPersistedRegValues+0xd7 (fffff800`97352903)
+fffff800`9735287b 8b7c2450        mov     edi,dword ptr [rsp+50h]
+fffff800`9735287f b900010000      mov     ecx,100h
+fffff800`97352884 8bd7            mov     edx,edi
+fffff800`97352886 41b868696272    mov     r8d,72626968h
+fffff800`9735288c e85ff84100      call    nt!ExAllocatePool2 (fffff800`977720f0)
+fffff800`97352891 488bf0          mov     rsi,rax
+fffff800`97352894 4885c0          test    rax,rax
+fffff800`97352897 7507            jne     nt!PopInitHiberPersistedRegValues+0x74 (fffff800`973528a0)
+fffff800`97352899 bf9a0000c0      mov     edi,0C000009Ah
+fffff800`9735289e eb63            jmp     nt!PopInitHiberPersistedRegValues+0xd7 (fffff800`97352903)
+fffff800`973528a0 488d442450      lea     rax,[rsp+50h]
+fffff800`973528a5 4533c9          xor     r9d,r9d
+fffff800`973528a8 4889442430      mov     qword ptr [rsp+30h],rax
+fffff800`973528ad 4c8d05dc698dff  lea     r8,[nt!PopControlVolatileRegKey (fffff800`96c29290)]
+fffff800`973528b4 897c2428        mov     dword ptr [rsp+28h],edi
+fffff800`973528b8 488d0db1668dff  lea     rcx,[nt!PopControlStateSepRegKeyId (fffff800`96c28f70)]
+fffff800`973528bf 33d2            xor     edx,edx
+fffff800`973528c1 4889742420      mov     qword ptr [rsp+20h],rsi
+fffff800`973528c6 e815982700      call    nt!RtlGetPersistedStateLocation (fffff800`975cc0e0)
+fffff800`973528cb 8bf8            mov     edi,eax
+fffff800`973528cd 85c0            test    eax,eax
+fffff800`973528cf 7825            js      nt!PopInitHiberPersistedRegValues+0xca (fffff800`973528f6)
+fffff800`973528d1 488935d0a67b00  mov     qword ptr [nt!PopHibernatePersistedRegLocation (fffff800`97b0cfa8)],rsi
+fffff800`973528d8 488d35294c6b00  lea     rsi,[nt!PopHiberPersistedRegValueDatabase+0x8 (fffff800`97a07508)]
+fffff800`973528df 488b16          mov     rdx,qword ptr [rsi]
+fffff800`973528e2 8bcb            mov     ecx,ebx
+fffff800`973528e4 e8c7030000      call    nt!PopQueryHiberPersistedRegValue (fffff800`97352cb0)
+fffff800`973528e9 ffc3            inc     ebx
+fffff800`973528eb 488d7618        lea     rsi,[rsi+18h]
+fffff800`973528ef 83fb04          cmp     ebx,4
+fffff800`973528f2 72eb            jb      nt!PopInitHiberPersistedRegValues+0xb3 (fffff800`973528df)
+fffff800`973528f4 eb0d            jmp     nt!PopInitHiberPersistedRegValues+0xd7 (fffff800`97352903)
+fffff800`973528f6 ba68696272      mov     edx,72626968h
+fffff800`973528fb 488bce          mov     rcx,rsi
+fffff800`973528fe e8cd034200      call    nt!ExFreePoolWithTag (fffff800`97772cd0)
+fffff800`97352903 488b5c2458      mov     rbx,qword ptr [rsp+58h]
+fffff800`97352908 8bc7            mov     eax,edi
+fffff800`9735290a 488b742460      mov     rsi,qword ptr [rsp+60h]
+fffff800`9735290f 4883c440        add     rsp,40h
+fffff800`97352913 5f              pop     rdi
+fffff800`97352914 c3              ret
+fffff800`97352915 cc              int     3
+fffff800`97352916 cc              int     3
+fffff800`97352917 cc              int     3
+fffff800`97352918 cc              int     3
+fffff800`97352919 cc              int     3
+fffff800`9735291a cc              int     3
+fffff800`9735291b cc              int     3
+nt!PopInitializeHibernateGlobals:
+fffff800`9735291c 4055            push    rbp
+fffff800`9735291e 53              push    rbx
+fffff800`9735291f 56              push    rsi
+fffff800`97352920 57              push    rdi
+fffff800`97352921 4154            push    r12
+fffff800`97352923 488bec          mov     rbp,rsp
+fffff800`97352926 4883ec30        sub     rsp,30h
+fffff800`9735292a 83653800        and     dword ptr [rbp+38h],0
+fffff800`9735292e 33db            xor     ebx,ebx
+fffff800`97352930 c6453000        mov     byte ptr [rbp+30h],0
+fffff800`97352934 e8f3feffff      call    nt!PopInitHiberPersistedRegValues (fffff800`9735282c)
+fffff800`97352939 8d7b70          lea     edi,[rbx+70h]
+fffff800`9735293c 4533c0          xor     r8d,r8d
+fffff800`9735293f 8bcf            mov     ecx,edi
+fffff800`97352941 4c8d4d38        lea     r9,[rbp+38h]
+fffff800`97352945 33d2            xor     edx,edx
+fffff800`97352947 e88441f5ff      call    nt!ZwQuerySystemInformation (fffff800`972a6ad0)
+fffff800`9735294c 3d230000c0      cmp     eax,0C0000023h
+fffff800`97352951 755a            jne     nt!PopInitializeHibernateGlobals+0x91 (fffff800`973529ad)
+fffff800`97352953 8b5538          mov     edx,dword ptr [rbp+38h]
+fffff800`97352956 8d4b40          lea     ecx,[rbx+40h]
+fffff800`97352959 41b868696272    mov     r8d,72626968h
+fffff800`9735295f e88cf74100      call    nt!ExAllocatePool2 (fffff800`977720f0)
+fffff800`97352964 488bd8          mov     rbx,rax
+fffff800`97352967 4885c0          test    rax,rax
+fffff800`9735296a 7441            je      nt!PopInitializeHibernateGlobals+0x91 (fffff800`973529ad)
+fffff800`9735296c 448b4538        mov     r8d,dword ptr [rbp+38h]
+fffff800`97352970 4c8d4d38        lea     r9,[rbp+38h]
+fffff800`97352974 488bd0          mov     rdx,rax
+fffff800`97352977 8bcf            mov     ecx,edi
+fffff800`97352979 e85241f5ff      call    nt!ZwQuerySystemInformation (fffff800`972a6ad0)
+fffff800`9735297e 85c0            test    eax,eax
+fffff800`97352980 782b            js      nt!PopInitializeHibernateGlobals+0x91 (fffff800`973529ad)
+fffff800`97352982 8b4d38          mov     ecx,dword ptr [rbp+38h]
+fffff800`97352985 83c1fe          add     ecx,0FFFFFFFEh
+fffff800`97352988 894d38          mov     dword ptr [rbp+38h],ecx
+fffff800`9735298b 8bc1            mov     eax,ecx
+fffff800`9735298d 803b00          cmp     byte ptr [rbx],0
+fffff800`97352990 741b            je      nt!PopInitializeHibernateGlobals+0x91 (fffff800`973529ad)
+fffff800`97352992 394304          cmp     dword ptr [rbx+4],eax
+fffff800`97352995 7716            ja      nt!PopInitializeHibernateGlobals+0x91 (fffff800`973529ad)
+fffff800`97352997 4c8d4540        lea     r8,[rbp+40h]
+fffff800`9735299b c6050432870001  mov     byte ptr [nt!PopBootFromVHD (fffff800`97bc5ba6)],1
+fffff800`973529a2 8d5798          lea     edx,[rdi-68h]
+fffff800`973529a5 8d4f92          lea     ecx,[rdi-6Eh]
+fffff800`973529a8 e8c3a2ffff      call    nt!PoDisableSleepStates (fffff800`9734cc70)
+fffff800`973529ad 488d4d30        lea     rcx,[rbp+30h]
+fffff800`973529b1 e8f2040000      call    nt!PopValidateWinresume (fffff800`97352ea8)
+fffff800`973529b6 807d3000        cmp     byte ptr [rbp+30h],0
+fffff800`973529ba 7411            je      nt!PopInitializeHibernateGlobals+0xb1 (fffff800`973529cd)
+fffff800`973529bc ba08000000      mov     edx,8
+fffff800`973529c1 4c8d4540        lea     r8,[rbp+40h]
+fffff800`973529c5 8d4afc          lea     ecx,[rdx-4]
+fffff800`973529c8 e8a3a2ffff      call    nt!PoDisableSleepStates (fffff800`9734cc70)
+fffff800`973529cd 33f6            xor     esi,esi
+fffff800`973529cf 4c8d252ad68aff  lea     r12,[nt!HalpPciMmConfigWriteHandlers <PERF> (nt+0x0) (fffff800`96c00000)]
+fffff800`973529d6 33ff            xor     edi,edi
+fffff800`973529d8 4283bc274862fc0000 cmp   dword ptr [rdi+r12+0FC6248h],0
+fffff800`973529e1 741a            je      nt!PopInitializeHibernateGlobals+0xe1 (fffff800`973529fd)
+fffff800`973529e3 428b8c2718b6b300 mov     ecx,dword ptr [rdi+r12+0B3B618h]
+fffff800`973529eb 4c8d4540        lea     r8,[rbp+40h]
+fffff800`973529ef ba08000000      mov     edx,8
+fffff800`973529f4 e877a2ffff      call    nt!PoDisableSleepStates (fffff800`9734cc70)
+fffff800`973529f9 85c0            test    eax,eax
+fffff800`973529fb 7829            js      nt!PopInitializeHibernateGlobals+0x10a (fffff800`97352a26)
+fffff800`973529fd ffc6            inc     esi
+fffff800`973529ff 4883c704        add     rdi,4
+fffff800`97352a03 83fe02          cmp     esi,2
+fffff800`97352a06 72d0            jb      nt!PopInitializeHibernateGlobals+0xbc (fffff800`973529d8)
+fffff800`97352a08 4885db          test    rbx,rbx
+fffff800`97352a0b 740d            je      nt!PopInitializeHibernateGlobals+0xfe (fffff800`97352a1a)
+fffff800`97352a0d ba68696272      mov     edx,72626968h
+fffff800`97352a12 488bcb          mov     rcx,rbx
+fffff800`97352a15 e8b6024200      call    nt!ExFreePoolWithTag (fffff800`97772cd0)
+fffff800`97352a1a 4883c430        add     rsp,30h
+fffff800`97352a1e 415c            pop     r12
+fffff800`97352a20 5f              pop     rdi
+fffff800`97352a21 5e              pop     rsi
+fffff800`97352a22 5b              pop     rbx
+fffff800`97352a23 5d              pop     rbp
+fffff800`97352a24 c3              ret
+fffff800`97352a25 cc              int     3
+fffff800`97352a26 488364242800    and     qword ptr [rsp+28h],0
+fffff800`97352a2c baa0000000      mov     edx,0A0h
+fffff800`97352a31 488364242000    and     qword ptr [rsp+20h],0
+fffff800`97352a37 4533c9          xor     r9d,r9d
+fffff800`97352a3a b101            mov     cl,1
+fffff800`97352a3c 448d4270        lea     r8d,[rdx+70h]
+fffff800`97352a40 e8fb090000      call    nt!PoShutdownBugCheck (fffff800`97353440)
+fffff800`97352a45 cc              int     3
+fffff800`97352a46 cc              int     3
+fffff800`97352a47 cc              int     3
+fffff800`97352a48 cc              int     3
+fffff800`97352a49 cc              int     3
+fffff800`97352a4a cc              int     3
+fffff800`97352a4b cc              int     3
+nt!PopPreallocateHibernateMemory:
+fffff800`97352a4c 48895c2418      mov     qword ptr [rsp+18h],rbx
+fffff800`97352a51 55              push    rbp
+fffff800`97352a52 56              push    rsi
+fffff800`97352a53 57              push    rdi
+fffff800`97352a54 4154            push    r12
+fffff800`97352a56 4155            push    r13
+fffff800`97352a58 4156            push    r14
+fffff800`97352a5a 4157            push    r15
+fffff800`97352a5c 4881ec80000000  sub     rsp,80h
+fffff800`97352a63 488364242000    and     qword ptr [rsp+20h],0
+fffff800`97352a69 41b800900100    mov     r8d,19000h
+fffff800`97352a6f 833d7ac07a0002  cmp     dword ptr [nt!ExpBootEnvironmentInformation+0x10 (fffff800`97afeaf0)],2
+fffff800`97352a76 48c744242800100000 mov   qword ptr [rsp+28h],1000h
+fffff800`97352a7f 750b            jne     nt!PopPreallocateHibernateMemory+0x40 (fffff800`97352a8c)
+fffff800`97352a81 4c89442430      mov     qword ptr [rsp+30h],r8
+fffff800`97352a86 41b800a00100    mov     r8d,1A000h
+fffff800`97352a8c 33c9            xor     ecx,ecx
+fffff800`97352a8e e8a9afd1ff      call    nt!MmGetHighestPhysicalPage (fffff800`9706da3c)
+fffff800`97352a93 488d7820        lea     rdi,[rax+20h]
+fffff800`97352a97 4883e7e0        and     rdi,0FFFFFFFFFFFFFFE0h
+fffff800`97352a9b 483bf8          cmp     rdi,rax
+fffff800`97352a9e 0f82f1000000    jb      nt!PopPreallocateHibernateMemory+0x149 (fffff800`97352b95)
+fffff800`97352aa4 b8ffffffff      mov     eax,0FFFFFFFFh
+fffff800`97352aa9 483bf8          cmp     rdi,rax
+fffff800`97352aac 0f87e3000000    ja      nt!PopPreallocateHibernateMemory+0x149 (fffff800`97352b95)
+fffff800`97352ab2 8bd7            mov     edx,edi
+fffff800`97352ab4 c1ea03          shr     edx,3
+fffff800`97352ab7 418bc0          mov     eax,r8d
+fffff800`97352aba 4403c2          add     r8d,edx
+fffff800`97352abd 488944cc38      mov     qword ptr [rsp+rcx*8+38h],rax
+fffff800`97352ac2 48ffc1          inc     rcx
+fffff800`97352ac5 4883f902        cmp     rcx,2
+fffff800`97352ac9 7cec            jl      nt!PopPreallocateHibernateMemory+0x6b (fffff800`97352ab7)
+fffff800`97352acb 418bc0          mov     eax,r8d
+fffff800`97352ace bef8ffffff      mov     esi,0FFFFFFF8h
+fffff800`97352ad3 48898424c0000000 mov     qword ptr [rsp+0C0h],rax
+fffff800`97352adb 8d4207          lea     eax,[rdx+7]
+fffff800`97352ade 4103c0          add     eax,r8d
+fffff800`97352ae1 23c6            and     eax,esi
+fffff800`97352ae3 8bc8            mov     ecx,eax
+fffff800`97352ae5 48898c24c8000000 mov     qword ptr [rsp+0C8h],rcx
+fffff800`97352aed 8d98f7000000    lea     ebx,[rax+0F7h]
+fffff800`97352af3 23de            and     ebx,esi
+fffff800`97352af5 448beb          mov     r13d,ebx
+fffff800`97352af8 e84b08e8ff      call    nt!Feature_CrashDumpOneMBTransferSize__private_IsEnabledDeviceUsageNoInline (fffff800`971d3348)
+fffff800`97352afd f7d8            neg     eax
+fffff800`97352aff 1bc9            sbb     ecx,ecx
+fffff800`97352b01 81e180070000    and     ecx,780h
+fffff800`97352b07 8d81b0000000    lea     eax,[rcx+0B0h]
+fffff800`97352b0d 03c3            add     eax,ebx
+fffff800`97352b0f 833ddabf7a0002  cmp     dword ptr [nt!ExpBootEnvironmentInformation+0x10 (fffff800`97afeaf0)],2
+fffff800`97352b16 7508            jne     nt!PopPreallocateHibernateMemory+0xd4 (fffff800`97352b20)
+fffff800`97352b18 448bf0          mov     r14d,eax
+fffff800`97352b1b 83c038          add     eax,38h
+fffff800`97352b1e eb05            jmp     nt!PopPreallocateHibernateMemory+0xd9 (fffff800`97352b25)
+fffff800`97352b20 4c8b742460      mov     r14,qword ptr [rsp+60h]
+fffff800`97352b25 448bf8          mov     r15d,eax
+fffff800`97352b28 bb00010000      mov     ebx,100h
+fffff800`97352b2d 05af000000      add     eax,0AFh
+fffff800`97352b32 8bd3            mov     edx,ebx
+fffff800`97352b34 23c6            and     eax,esi
+fffff800`97352b36 b101            mov     cl,1
+fffff800`97352b38 448be0          mov     r12d,eax
+fffff800`97352b3b 8db03f100000    lea     esi,[rax+103Fh]
+fffff800`97352b41 b800f0ffff      mov     eax,0FFFFF000h
+fffff800`97352b46 23f0            and     esi,eax
+fffff800`97352b48 8bee            mov     ebp,esi
+fffff800`97352b4a e805c9fbff      call    nt!HvlAllocateHibernateResources (fffff800`9730f454)
+fffff800`97352b4f 85c0            test    eax,eax
+fffff800`97352b51 7847            js      nt!PopPreallocateHibernateMemory+0x14e (fffff800`97352b9a)
+fffff800`97352b53 b800f0ffff      mov     eax,0FFFFF000h
+fffff800`97352b58 81c6ff3f0000    add     esi,3FFFh
+fffff800`97352b5e 4823f0          and     rsi,rax
+fffff800`97352b61 41b868696272    mov     r8d,72626968h
+fffff800`97352b67 488bd6          mov     rdx,rsi
+fffff800`97352b6a 8bcb            mov     ecx,ebx
+fffff800`97352b6c e87ff54100      call    nt!ExAllocatePool2 (fffff800`977720f0)
+fffff800`97352b71 488bd8          mov     rbx,rax
+fffff800`97352b74 4885c0          test    rax,rax
+fffff800`97352b77 741c            je      nt!PopPreallocateHibernateMemory+0x149 (fffff800`97352b95)
+fffff800`97352b79 488bd6          mov     rdx,rsi
+fffff800`97352b7c 488bc8          mov     rcx,rax
+fffff800`97352b7f e87cab0900      call    nt!MmObtainChargesToLockPagedPool (fffff800`973ed700)
+fffff800`97352b84 85c0            test    eax,eax
+fffff800`97352b86 752e            jne     nt!PopPreallocateHibernateMemory+0x16a (fffff800`97352bb6)
+fffff800`97352b88 ba68696272      mov     edx,72626968h
+fffff800`97352b8d 488bcb          mov     rcx,rbx
+fffff800`97352b90 e83b014200      call    nt!ExFreePoolWithTag (fffff800`97772cd0)
+fffff800`97352b95 b89a0000c0      mov     eax,0C000009Ah
+fffff800`97352b9a 488b9c24d0000000 mov     rbx,qword ptr [rsp+0D0h]
+fffff800`97352ba2 4881c480000000  add     rsp,80h
+fffff800`97352ba9 415f            pop     r15
+fffff800`97352bab 415e            pop     r14
+fffff800`97352bad 415d            pop     r13
+fffff800`97352baf 415c            pop     r12
+fffff800`97352bb1 5f              pop     rdi
+fffff800`97352bb2 5e              pop     rsi
+fffff800`97352bb3 5d              pop     rbp
+fffff800`97352bb4 c3              ret
+fffff800`97352bb5 cc              int     3
+fffff800`97352bb6 488b4c2420      mov     rcx,qword ptr [rsp+20h]
+fffff800`97352bbb 8b152fbf7a00    mov     edx,dword ptr [nt!ExpBootEnvironmentInformation+0x10 (fffff800`97afeaf0)]
+fffff800`97352bc1 4803cb          add     rcx,rbx
+fffff800`97352bc4 48890dd5817b00  mov     qword ptr [nt!PopHiberInfo+0x60 (fffff800`97b0ada0)],rcx
+fffff800`97352bcb 488b4c2428      mov     rcx,qword ptr [rsp+28h]
+fffff800`97352bd0 4803cb          add     rcx,rbx
+fffff800`97352bd3 488935be817b00  mov     qword ptr [nt!PopHiberInfo+0x58 (fffff800`97b0ad98)],rsi
+fffff800`97352bda 48891daf817b00  mov     qword ptr [nt!PopHiberInfo+0x50 (fffff800`97b0ad90)],rbx
+fffff800`97352be1 48890dc0817b00  mov     qword ptr [nt!PopHiberInfo+0x68 (fffff800`97b0ada8)],rcx
+fffff800`97352be8 83fa02          cmp     edx,2
+fffff800`97352beb 7511            jne     nt!PopPreallocateHibernateMemory+0x1b2 (fffff800`97352bfe)
+fffff800`97352bed 488b4c2430      mov     rcx,qword ptr [rsp+30h]
+fffff800`97352bf2 4803cb          add     rcx,rbx
+fffff800`97352bf5 48890d0c827b00  mov     qword ptr [nt!PopHiberInfo+0xc8 (fffff800`97b0ae08)],rcx
+fffff800`97352bfc eb08            jmp     nt!PopPreallocateHibernateMemory+0x1ba (fffff800`97352c06)
+fffff800`97352bfe 48832502827b0000 and     qword ptr [nt!PopHiberInfo+0xc8 (fffff800`97b0ae08)],0
+fffff800`97352c06 488b4c2438      mov     rcx,qword ptr [rsp+38h]
+fffff800`97352c0b 488b8424c0000000 mov     rax,qword ptr [rsp+0C0h]
+fffff800`97352c13 4803cb          add     rcx,rbx
+fffff800`97352c16 4803c3          add     rax,rbx
+fffff800`97352c19 48890d98817b00  mov     qword ptr [nt!PopHiberInfo+0x78 (fffff800`97b0adb8)],rcx
+fffff800`97352c20 488b4c2440      mov     rcx,qword ptr [rsp+40h]
+fffff800`97352c25 4889059c817b00  mov     qword ptr [nt!PopHiberInfo+0x88 (fffff800`97b0adc8)],rax
+fffff800`97352c2c 4803cb          add     rcx,rbx
+fffff800`97352c2f 488b8424c8000000 mov     rax,qword ptr [rsp+0C8h]
+fffff800`97352c37 4803c3          add     rax,rbx
+fffff800`97352c3a 893d70817b00    mov     dword ptr [nt!PopHiberInfo+0x70 (fffff800`97b0adb0)],edi
+fffff800`97352c40 893d8a817b00    mov     dword ptr [nt!PopHiberInfo+0x90 (fffff800`97b0add0)],edi
+fffff800`97352c46 48890d8b817b00  mov     qword ptr [nt!PopHiberInfo+0x98 (fffff800`97b0add8)],rcx
+fffff800`97352c4d 893d6d817b00    mov     dword ptr [nt!PopHiberInfo+0x80 (fffff800`97b0adc0)],edi
+fffff800`97352c53 48890586817b00  mov     qword ptr [nt!PopHiberInfo+0xa0 (fffff800`97b0ade0)],rax
+fffff800`97352c5a 83fa02          cmp     edx,2
+fffff800`97352c5d 750d            jne     nt!PopPreallocateHibernateMemory+0x220 (fffff800`97352c6c)
+fffff800`97352c5f 498d041e        lea     rax,[r14+rbx]
+fffff800`97352c63 488905a6817b00  mov     qword ptr [nt!PopHiberInfo+0xd0 (fffff800`97b0ae10)],rax
+fffff800`97352c6a eb08            jmp     nt!PopPreallocateHibernateMemory+0x228 (fffff800`97352c74)
+fffff800`97352c6c 4883259c817b0000 and     qword ptr [nt!PopHiberInfo+0xd0 (fffff800`97b0ae10)],0
+fffff800`97352c74 498d041c        lea     rax,[r12+rbx]
+fffff800`97352c78 48890569817b00  mov     qword ptr [nt!PopHiberInfo+0xa8 (fffff800`97b0ade8)],rax
+fffff800`97352c7f 488d042b        lea     rax,[rbx+rbp]
+fffff800`97352c83 48890566817b00  mov     qword ptr [nt!PopHiberInfo+0xb0 (fffff800`97b0adf0)],rax
+fffff800`97352c8a 498d041f        lea     rax,[r15+rbx]
+fffff800`97352c8e 48890563817b00  mov     qword ptr [nt!PopHiberInfo+0xb8 (fffff800`97b0adf8)],rax
+fffff800`97352c95 4a8d042b        lea     rax,[rbx+r13]
+fffff800`97352c99 48890560817b00  mov     qword ptr [nt!PopHiberInfo+0xc0 (fffff800`97b0ae00)],rax
+fffff800`97352ca0 33c0            xor     eax,eax
+fffff800`97352ca2 e9f3feffff      jmp     nt!PopPreallocateHibernateMemory+0x14e (fffff800`97352b9a)
+fffff800`97352ca7 cc              int     3
+fffff800`97352ca8 cc              int     3
+fffff800`97352ca9 cc              int     3
+fffff800`97352caa cc              int     3
+fffff800`97352cab cc              int     3
+fffff800`97352cac cc              int     3
+fffff800`97352cad cc              int     3
+fffff800`97352cae cc              int     3
+fffff800`97352caf cc              int     3
+nt!PopQueryHiberPersistedRegValue:
+fffff800`97352cb0 48895c2418      mov     qword ptr [rsp+18h],rbx
+fffff800`97352cb5 55              push    rbp
+fffff800`97352cb6 56              push    rsi
+fffff800`97352cb7 57              push    rdi
+fffff800`97352cb8 4154            push    r12
+fffff800`97352cba 4156            push    r14
+fffff800`97352cbc 488bec          mov     rbp,rsp
+fffff800`97352cbf 4881ec80000000  sub     rsp,80h
+fffff800`97352cc6 488b05f3796b00  mov     rax,qword ptr [nt!_security_cookie (fffff800`97a0a6c0)]
+fffff800`97352ccd 4833c4          xor     rax,rsp
+fffff800`97352cd0 488945f0        mov     qword ptr [rbp-10h],rax
+fffff800`97352cd4 4863c1          movsxd  rax,ecx
+fffff800`97352cd7 0f57c0          xorps   xmm0,xmm0
+fffff800`97352cda 33c9            xor     ecx,ecx
+fffff800`97352cdc 4c8bf2          mov     r14,rdx
+fffff800`97352cdf 214dc0          and     dword ptr [rbp-40h],ecx
+fffff800`97352ce2 214db0          and     dword ptr [rbp-50h],ecx
+fffff800`97352ce5 894de8          mov     dword ptr [rbp-18h],ecx
+fffff800`97352ce8 4883c9ff        or      rcx,0FFFFFFFFFFFFFFFFh
+fffff800`97352cec 48894db8        mov     qword ptr [rbp-48h],rcx
+fffff800`97352cf0 0f1145d8        movups  xmmword ptr [rbp-28h],xmm0
+fffff800`97352cf4 0f1145c8        movups  xmmword ptr [rbp-38h],xmm0
+fffff800`97352cf8 83f803          cmp     eax,3
+fffff800`97352cfb 0f87e0000000    ja      nt!PopQueryHiberPersistedRegValue+0x131 (fffff800`97352de1)
+fffff800`97352d01 4885d2          test    rdx,rdx
+fffff800`97352d04 0f84d7000000    je      nt!PopQueryHiberPersistedRegValue+0x131 (fffff800`97352de1)
+fffff800`97352d0a 488d3440        lea     rsi,[rax+rax*2]
+fffff800`97352d0e 4533c0          xor     r8d,r8d
+fffff800`97352d11 4c8d25e8476b00  lea     r12,[nt!PopHiberPersistedRegValueDatabase (fffff800`97a07500)]
+fffff800`97352d18 ba19000200      mov     edx,20019h
+fffff800`97352d1d 418b7cf414      mov     edi,dword ptr [r12+rsi*8+14h]
+fffff800`97352d22 488d4db8        lea     rcx,[rbp-48h]
+fffff800`97352d26 e85566faff      call    nt!PopOpenHiberPersistedKey (fffff800`972f9380)
+fffff800`97352d2b 8bd8            mov     ebx,eax
+fffff800`97352d2d 85c0            test    eax,eax
+fffff800`97352d2f 0f88a6000000    js      nt!PopQueryHiberPersistedRegValue+0x12b (fffff800`97352ddb)
+fffff800`97352d35 498b14f4        mov     rdx,qword ptr [r12+rsi*8]
+fffff800`97352d39 488d4dc8        lea     rcx,[rbp-38h]
+fffff800`97352d3d e85e14cdff      call    nt!RtlInitUnicodeString (fffff800`970241a0)
+fffff800`97352d42 488b4db8        mov     rcx,qword ptr [rbp-48h]
+fffff800`97352d46 488d45c0        lea     rax,[rbp-40h]
+fffff800`97352d4a 4889442428      mov     qword ptr [rsp+28h],rax
+fffff800`97352d4f 4c8d4dd8        lea     r9,[rbp-28h]
+fffff800`97352d53 41b802000000    mov     r8d,2
+fffff800`97352d59 c744242014000000 mov     dword ptr [rsp+20h],14h
+fffff800`97352d61 488d55c8        lea     rdx,[rbp-38h]
+fffff800`97352d65 e88639f5ff      call    nt!ZwQueryValueKey (fffff800`972a66f0)
+fffff800`97352d6a 8bd8            mov     ebx,eax
+fffff800`97352d6c 3d340000c0      cmp     eax,0C0000034h
+fffff800`97352d71 753f            jne     nt!PopQueryHiberPersistedRegValue+0x102 (fffff800`97352db2)
+fffff800`97352d73 458b44f414      mov     r8d,dword ptr [r12+rsi*8+14h]
+fffff800`97352d78 488d55b0        lea     rdx,[rbp-50h]
+fffff800`97352d7c 498b0cf4        mov     rcx,qword ptr [r12+rsi*8]
+fffff800`97352d80 4533c9          xor     r9d,r9d
+fffff800`97352d83 4489442428      mov     dword ptr [rsp+28h],r8d
+fffff800`97352d88 834c2420ff      or      dword ptr [rsp+20h],0FFFFFFFFh
+fffff800`97352d8d e83aa6e7ff      call    nt!PopReadUlongPowerKey (fffff800`971cd3cc)
+fffff800`97352d92 8bd8            mov     ebx,eax
+fffff800`97352d94 85c0            test    eax,eax
+fffff800`97352d96 7805            js      nt!PopQueryHiberPersistedRegValue+0xed (fffff800`97352d9d)
+fffff800`97352d98 8b7db0          mov     edi,dword ptr [rbp-50h]
+fffff800`97352d9b eb07            jmp     nt!PopQueryHiberPersistedRegValue+0xf4 (fffff800`97352da4)
+fffff800`97352d9d 3d340000c0      cmp     eax,0C0000034h
+fffff800`97352da2 7537            jne     nt!PopQueryHiberPersistedRegValue+0x12b (fffff800`97352ddb)
+lkd> dqs nt!PopHibernatePersistedRegLocation L4
+fffff800`97b0cfa8  ffff930a`60da40f0
+fffff800`97b0cfb0  ffff930a`64ab8060
+fffff800`97b0cfb8  ffff930a`64ab6e40
+fffff800`97b0cfc0  00000000`00000000
+lkd> du poi(nt!PopHibernatePersistedRegLocation+0x8)
+ffff930a`64ab8060  "?."
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

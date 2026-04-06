@@ -1,0 +1,12 @@
+.sympath C:\Tools\Symbols\local-kd-hiber-disasm-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+dd nt!PopHiberFileSizePercent L1
+dd nt!PopHiberFileType L1
+dd nt!PopHiberEnabled L1
+u nt!PopOpenHiberPersistedKey L0x120
+u nt!PopInitHiberPersistedRegValues L0x180
+dqs nt!PopHibernatePersistedRegLocation L4
+du poi(nt!PopHibernatePersistedRegLocation+0x8)
+.echo REGPROBE_LOCALKD_END
+q

@@ -1,0 +1,7 @@
+.sympath C:\Tools\Symbols\local-kd-hiber-symbols-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopHiber*
+x nt!*HiberFile*
+.echo REGPROBE_LOCALKD_END
+q
