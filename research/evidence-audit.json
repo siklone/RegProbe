@@ -1,23 +1,22 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-03-31T18:56:05.176201Z",
+  "generated_utc": "2026-04-06T23:42:53.649829Z",
   "summary": {
-    "total_active_records": 256,
+    "total_active_records": 255,
     "class_counts": {
-      "A": 249,
+      "A": 248,
       "B": 7
     },
     "lane_counts": {
       "official-policy": 236,
-      "runtime": 6,
-      "early-boot": 9,
-      "system": 5
+      "runtime": 5,
+      "system": 5,
+      "early-boot": 9
     },
     "next_missing_layer_counts": {
       "none": 248,
-      "procmon": 3,
+      "decision-gate": 5,
       "ghidra": 1,
-      "decision-gate": 3,
       "incident-review": 1
     },
     "re_audit_required_count": 11
@@ -3317,25 +3316,27 @@
       "record_id": "policy.system.enable-virtualization",
       "tweak_id": "policy.system.enable-virtualization",
       "evidence_class": "B",
-      "lane": "runtime",
+      "lane": "system",
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "procmon",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_procmon",
         "static_ghidra",
         "behavior_wpr"
       ],
       "tools_used": [
         "etw",
+        "procmon",
         "ghidra",
         "wpr"
       ],
@@ -3372,7 +3373,7 @@
       "official_doc_exists": false,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
@@ -3389,7 +3390,6 @@
         "etw",
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "wpr",
         "reboot"
       ],
@@ -3424,7 +3424,7 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": false,
       "ghidra_no_function_fallback": false,
       "wpr": true,
@@ -3432,12 +3432,14 @@
       "reboot_tested": false,
       "incident_seen": false,
       "next_missing_layer": "ghidra",
-      "cross_layer_satisfied": false,
+      "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_procmon",
         "behavior_wpr"
       ],
       "tools_used": [
         "etw",
+        "procmon",
         "wpr"
       ],
       "boot_phase_relevant": true,
@@ -3451,7 +3453,7 @@
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; cross_layer_missing",
+      "re_audit_reason": "current_blocker",
       "original_class": "B",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
@@ -3473,7 +3475,7 @@
       "official_doc_exists": false,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
@@ -3490,7 +3492,6 @@
         "etw",
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "wpr",
         "reboot"
       ],
@@ -3527,7 +3528,7 @@
       "official_doc_exists": false,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
@@ -3542,7 +3543,6 @@
       "tools_used": [
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -3578,7 +3578,7 @@
       "official_doc_exists": false,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
@@ -3593,7 +3593,6 @@
       "tools_used": [
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -3629,7 +3628,7 @@
       "official_doc_exists": false,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
@@ -3646,7 +3645,6 @@
         "etw",
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "wpr",
         "reboot"
       ],
@@ -3683,7 +3681,7 @@
       "official_doc_exists": false,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
@@ -3700,7 +3698,6 @@
         "etw",
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "wpr",
         "reboot"
       ],
@@ -3737,7 +3734,7 @@
       "official_doc_exists": false,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
@@ -3754,7 +3751,6 @@
         "etw",
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "wpr",
         "reboot"
       ],
@@ -4292,7 +4288,7 @@
       "official_doc_exists": false,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
@@ -4309,7 +4305,6 @@
         "etw",
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "wpr",
         "reboot"
       ],
@@ -9646,7 +9641,7 @@
       "official_doc_exists": false,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
@@ -9662,7 +9657,6 @@
         "etw",
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "wpr"
       ],
       "boot_phase_relevant": true,
@@ -9696,21 +9690,23 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "procmon",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_procmon",
         "static_ghidra",
         "behavior_wpr"
       ],
       "tools_used": [
         "etw",
+        "procmon",
         "ghidra",
         "wpr"
       ],
@@ -9965,55 +9961,6 @@
       "apply_allowed": true,
       "confidence": "high",
       "source_file": "research/records/system.graphics-tdr-limit-time.json",
-      "incident_ids": []
-    },
-    {
-      "record_id": "system.io-allow-remote-dasd",
-      "tweak_id": "system.io-allow-remote-dasd",
-      "evidence_class": "B",
-      "lane": "system",
-      "class_ready_basis": "pending",
-      "official": false,
-      "official_doc_exists": false,
-      "procmon": false,
-      "ghidra": true,
-      "ghidra_no_function_fallback": false,
-      "wpr": true,
-      "benchmark": false,
-      "reboot_tested": false,
-      "incident_seen": false,
-      "next_missing_layer": "procmon",
-      "cross_layer_satisfied": true,
-      "layers_used": [
-        "static_ghidra",
-        "behavior_wpr"
-      ],
-      "tools_used": [
-        "etw",
-        "ghidra",
-        "wpr"
-      ],
-      "boot_phase_relevant": true,
-      "suspected_layer": "kernel",
-      "frida_kernel_guard_applied": true,
-      "dead_flag_checks": {
-        "etw_executed": true,
-        "boot_phase_included": true,
-        "correct_tool_used": true,
-        "trigger_condition_tested": true
-      },
-      "re_audit_required": true,
-      "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker",
-      "original_class": "B",
-      "original_pipeline_version": "pre-v3.1",
-      "new_pipeline_version": "v3.2",
-      "artifact_refs": [],
-      "app_mapping_status": "not-mapped",
-      "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "source_file": "research/records/system.io-allow-remote-dasd.json",
       "incident_ids": []
     },
     {
@@ -10637,7 +10584,7 @@
       "official": true,
       "official_doc_exists": true,
       "procmon": true,
-      "ghidra": false,
+      "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": true,
@@ -10647,6 +10594,7 @@
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
+        "static_ghidra",
         "behavior_wpr",
         "behavior_benchmark",
         "runtime_reboot",
@@ -10655,6 +10603,7 @@
       "tools_used": [
         "official-doc",
         "procmon",
+        "ghidra",
         "wpr",
         "benchmark",
         "reboot"
@@ -10692,7 +10641,7 @@
       "official_doc_exists": true,
       "procmon": true,
       "ghidra": true,
-      "ghidra_no_function_fallback": true,
+      "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
@@ -10709,7 +10658,6 @@
         "official-doc",
         "procmon",
         "ghidra",
-        "ghidra_no_function_fallback",
         "reboot"
       ],
       "boot_phase_relevant": false,
@@ -12172,9 +12120,9 @@
     {
       "record_id": "visibility.restore-classic-context-menu",
       "tweak_id": "visibility.restore-classic-context-menu",
-      "evidence_class": "A",
+      "evidence_class": "B",
       "lane": "official-policy",
-      "class_ready_basis": "official-doc",
+      "class_ready_basis": "pending",
       "official": true,
       "official_doc_exists": true,
       "procmon": false,
@@ -12201,17 +12149,17 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": true,
-      "confidence": "high",
+      "confidence": "medium",
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
       "incident_ids": []
     }
