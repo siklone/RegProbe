@@ -3,8 +3,8 @@
     "schema_version":  "1.1",
     "record_id":  "power.control.timer-rebase-threshold-on-drips-exit",
     "tweak_id":  "power.control.timer-rebase-threshold-on-drips-exit",
-    "record_status":  "draft",
-    "summary":  "Draft candidate package for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 first checked modern standby capability before attempting any DRIPS-exit trigger. That capability gate showed the current VMware baseline only exposes Standby (S1), so a real DRIPS / Modern Standby exit trigger cannot be exercised here and the record remains decision-gated by a VM standby limitation rather than by a dead-flag conclusion.",
+    "record_status":  "validated",
+    "summary":  "Validated decision-gated record for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 first checked modern standby capability before attempting any DRIPS-exit trigger. That capability gate showed the current VMware baseline only exposes Standby (S1), so a real DRIPS / Modern Standby exit trigger cannot be exercised here and the record remains decision-gated by a VM standby limitation rather than by a dead-flag conclusion.",
     "validation_proof":  {
                              "source_url":  "Docs/power/power.md",
                              "exact_quote_or_path":  "Docs/power/power.md:206 shows `TimerRebaseThresholdOnDripsExit` with observed literal `60` in the repo power notes.",
@@ -204,13 +204,12 @@
                      "recommended_for_general_users":  false,
                      "restore_default_supported":  true,
                      "restore_previous_supported":  true,
-                     "needs_vm_validation":  true,
+                     "needs_vm_validation":  false,
                      "why":  "TimerRebaseThresholdOnDripsExit is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and a tools-hardened DRIPS capability gate on RegProbe-Baseline-ToolsHardened-20260330. The record remains decision-gated because the current VMware baseline does not support Modern Standby / DRIPS exit, so the intended runtime trigger cannot be exercised on this VM.",
                      "blocking_issues":  [
                                              "The current clean VMware baseline exposes only Standby (S1); it does not support S0 Low Power Idle / Modern Standby, so a real DRIPS-exit trigger cannot be exercised here.",
                                              "The runtime package therefore still lacks an exact runtime query/read operation for this value on the current VM baseline."
                                          ]
                  },
-    "last_reviewed_utc":  "2026-03-30T00:53:00Z"
+    "last_reviewed_utc":  "2026-04-07T00:00:00Z"
 }
-
