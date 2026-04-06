@@ -9,7 +9,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputName,
 
-    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst', 'hiber-file-size-burst')]
+    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst', 'hiber-file-size-burst', 'watchdog-power-burst')]
     [string]$TriggerProfile = 'custom',
 
     [string]$PowerShellCommand = '',
@@ -198,6 +198,37 @@ catch {
 }
 finally {
     Remove-Item -Path 'C:\RegProbe-Diag\hiber-io-burst' -Recurse -Force -ErrorAction SilentlyContinue
+}
+'@
+        }
+        'watchdog-power-burst' {
+            return @'
+try {
+    $diagPath = 'C:\RegProbe-Diag\watchdog-power-burst'
+    New-Item -ItemType Directory -Path $diagPath -Force | Out-Null
+
+    cmd /c "tasklist /svc > `"$diagPath\tasklist.txt`"" | Out-Null
+    cmd /c "powercfg /q > `"$diagPath\powercfg-q.txt`"" | Out-Null
+    cmd /c "powercfg /a > `"$diagPath\powercfg-a.txt`"" | Out-Null
+    cmd /c "sc queryex Power > `"$diagPath\sc-power.txt`"" | Out-Null
+
+    Get-WinEvent -LogName 'System' -MaxEvents 120 |
+        Select-Object TimeCreated, Id, ProviderName, LevelDisplayName |
+        ConvertTo-Json -Depth 4 |
+        Set-Content -Path (Join-Path $diagPath 'system-events.json') -Encoding UTF8
+
+    1..4 | ForEach-Object {
+        try { cmd /c 'powercfg /q >nul 2>nul' | Out-Null } catch {}
+        try { cmd /c 'powercfg /a >nul 2>nul' | Out-Null } catch {}
+        Start-Sleep -Milliseconds 600
+    }
+
+    Start-Sleep -Seconds 5
+}
+catch {
+}
+finally {
+    Remove-Item -Path $diagPath -Recurse -Force -ErrorAction SilentlyContinue
 }
 '@
         }
