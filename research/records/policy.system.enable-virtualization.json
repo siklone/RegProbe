@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "policy.system.enable-virtualization",
   "tweak_id": "policy.system.enable-virtualization",
-  "record_status": "draft",
-  "summary": "Draft candidate package for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. The same path-aware runtime lane on the secondary profile reproduced the no-hit result, and a Linux KVM Procmon replay with a dedicated UAC/policy burst also produced a real CSV with zero matching lines. A KVM local-KD disassembly and string-dump follow-up on the running guest then showed the same current-build `PsBootPhaseComplete` cluster opening `\\Registry\\Machine\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` and staging `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection` directly. A later recovery-backed KVM Procmon replay reopened the elevated guest shell automatically and still returned zero intended-path or family hits. The lane therefore remains Class B with a runtime_no_read gate, but not with the earlier path-context or KVM operator-state doubt.",
+  "record_status": "validated",
+  "summary": "Validated decision-gated record for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. The same path-aware runtime lane on the secondary profile reproduced the no-hit result, and a Linux KVM Procmon replay with a dedicated UAC/policy burst also produced a real CSV with zero matching lines. A KVM local-KD disassembly and string-dump follow-up on the running guest then showed the same current-build `PsBootPhaseComplete` cluster opening `\\Registry\\Machine\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` and staging `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection` directly. A later recovery-backed KVM Procmon replay reopened the elevated guest shell automatically and still returned zero intended-path or family hits. The lane therefore remains Class B with a runtime_no_read gate, but not with the earlier path-context or KVM operator-state doubt.",
   "validation_proof": {
     "source_url": "Docs/security/security.md",
     "exact_quote_or_path": "Docs/security/security.md:105-110 documents `EnableVirtualization` with 0 = disables data redirection and 1 = enables legacy file and registry virtualization.",
@@ -238,11 +238,11 @@
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
-    "needs_vm_validation": true,
+    "needs_vm_validation": false,
     "why": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, shell-safe runtime follow-ups across multiple transports, and a KVM local-KD disassembly that confirms the live current-build `Policies\\System` path plus the adjacent `EnableLUA` / `EnableVirtualization` / `EnableInstallerDetection` family on the running guest. The primary ETW lane, the secondary ETW replay, and both KVM Procmon replays all still stayed a clean no-hit, so the record remains decision-gated at Class B for runtime attribution rather than path ambiguity.",
     "blocking_issues": [
       "runtime_no_read"
     ]
   },
-  "last_reviewed_utc": "2026-04-06T22:02:11Z"
+  "last_reviewed_utc": "2026-04-07T00:00:00Z"
 }

@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "system.executive-uuid-sequence-number",
   "tweak_id": "system.executive-uuid-sequence-number",
-  "record_status": "draft",
-  "summary": "Draft candidate package for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and later KVM local-KD follow-ups resolved both the live UUID symbol family and the current-build load/save path that opens a Session Manager Executive persisted-state location and queries or sets the `UuidSequenceNumber` value name. A deeper KVM local-KD value dump now also shows live current-build in-memory UUID state on the working guest: `ExpUuidSequenceNumber = 0x002caf0c`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0`. A later hardened-runner KVM Procmon replay then ensured an elevated guest shell, exported `240500` rows under the alternate Executive burst, and still returned zero `Session Manager\\Executive` or `UuidSequenceNumber` hits. Runtime ETW and KVM Procmon lanes therefore still stay clean no-hits, so the lane remains Class B with a runtime_no_read gate rather than a path-identity gate.",
+  "record_status": "validated",
+  "summary": "Validated decision-gated record for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and later KVM local-KD follow-ups resolved both the live UUID symbol family and the current-build load/save path that opens a Session Manager Executive persisted-state location and queries or sets the `UuidSequenceNumber` value name. A deeper KVM local-KD value dump now also shows live current-build in-memory UUID state on the working guest: `ExpUuidSequenceNumber = 0x002caf0c`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0`. A later hardened-runner KVM Procmon replay then ensured an elevated guest shell, exported `240500` rows under the alternate Executive burst, and still returned zero `Session Manager\\Executive` or `UuidSequenceNumber` hits. Runtime ETW and KVM Procmon lanes therefore still stay clean no-hits, so the lane remains Class B with a runtime_no_read gate rather than a path-identity gate.",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
     "exact_quote_or_path": "session-manager-executive-baseline.txt:5 shows `UuidSequenceNumber    REG_DWORD    0x1819f30` under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive.",
@@ -298,5 +298,5 @@
       "runtime_no_read"
     ]
   },
-  "last_reviewed_utc": "2026-04-07T08:27:07Z"
+  "last_reviewed_utc": "2026-04-07T00:00:00Z"
 }
