@@ -8,6 +8,7 @@ This repo now treats runtime research and debugger-first arbitration as two diff
   - current Linux host lane for Windows 11 guest bootstrap, Procmon, WPR/WPA/xperf, symbol staging, and Ghidra-backed follow-up work
   - canonical guest name on the active host: `regprobe-win11-25h2-session`
   - transport shape: `libvirt session` + `SPICE console` + `bootstrap ISO` + `HTTP guest bridge`
+  - debugger note: current KVM local KD is inspection-capable for symbol queries, disassembly, and memory/string reads, but the active local-debug contract does not yet support breakpoint or `g` run-control arbiter work
   - current host status: `active`
 - `VMware runtime family`
   - current host lane for ETW, Procmon, WPR, shell-safe mega-trigger work, and general research automation

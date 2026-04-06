@@ -6,7 +6,9 @@ param(
     [string]$UploadBaseUrl = '',
     [int]$TimeoutSeconds = 180,
     [string]$QuerySymbol = 'nt!CmQueryValueKey',
-    [string[]]$DebuggerCommands = @()
+    [string[]]$DebuggerCommands = @(),
+    [string]$TriggerPowerShellCommand = '',
+    [int]$TriggerDelaySeconds = 0
 )
 
 $ErrorActionPreference = 'Stop'
@@ -70,6 +72,8 @@ $summaryPath = Join-Path $OutputRoot 'summary.json'
 $stdoutPath = Join-Path $OutputRoot 'stdout.txt'
 $stderrPath = Join-Path $OutputRoot 'stderr.txt'
 $symchkLog = Join-Path $OutputRoot 'symchk.txt'
+$triggerStdoutPath = Join-Path $OutputRoot 'trigger.stdout.txt'
+$triggerStderrPath = Join-Path $OutputRoot 'trigger.stderr.txt'
 
 $kdPath = Find-FirstDebuggerTool -ToolName 'kd.exe'
 $symchkPath = Find-FirstDebuggerTool -ToolName 'symchk.exe'
@@ -118,6 +122,31 @@ $proc = Start-Process `
     -RedirectStandardError $stderrPath `
     -WindowStyle Hidden
 
+$triggerExecuted = $false
+$triggerExitCode = $null
+$triggerError = ''
+if (-not [string]::IsNullOrWhiteSpace($TriggerPowerShellCommand)) {
+    if ($TriggerDelaySeconds -gt 0) {
+        Start-Sleep -Seconds $TriggerDelaySeconds
+    }
+
+    try {
+        $triggerProc = Start-Process `
+            -FilePath 'powershell.exe' `
+            -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-Command', $TriggerPowerShellCommand) `
+            -PassThru `
+            -Wait `
+            -RedirectStandardOutput $triggerStdoutPath `
+            -RedirectStandardError $triggerStderrPath `
+            -WindowStyle Hidden
+        $triggerExecuted = $true
+        $triggerExitCode = $triggerProc.ExitCode
+    }
+    catch {
+        $triggerError = $_.Exception.Message
+    }
+}
+
 $completed = $proc.WaitForExit($TimeoutSeconds * 1000)
 $proc.Refresh()
 if (-not $completed) {
@@ -131,6 +160,8 @@ if (-not $completed) {
 $stdoutText = if (Test-Path $stdoutPath) { Get-Content -Path $stdoutPath -Raw -ErrorAction SilentlyContinue } else { '' }
 $logText = if (Test-Path $logPath) { Get-Content -Path $logPath -Raw -ErrorAction SilentlyContinue } else { '' }
 $combinedText = '{0}{1}{2}' -f $logText, [Environment]::NewLine, $stdoutText
+$breakpointCommandsPresent = @($effectiveCommands | Where-Object { $_ -match '^(bp|bu)\s+' }).Count -gt 0
+$runControlRequested = @($effectiveCommands | Where-Object { $_ -match '^g(\s|$)' }).Count -gt 0
 
 $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
@@ -142,11 +173,20 @@ $summary = [ordered]@{
     debugger_commands = @($DebuggerCommands)
     effective_commands = @($effectiveCommands)
     used_custom_commands = [bool]($DebuggerCommands -and $DebuggerCommands.Count -gt 0)
+    trigger_command_present = -not [string]::IsNullOrWhiteSpace($TriggerPowerShellCommand)
+    trigger_executed = $triggerExecuted
+    trigger_delay_seconds = $TriggerDelaySeconds
+    trigger_exit_code = $triggerExitCode
+    trigger_error = $triggerError
+    breakpoint_commands_present = $breakpointCommandsPresent
+    run_control_requested = $runControlRequested
     completed = $completed
     exit_code = if ($completed) { $proc.ExitCode } else { $null }
     attached = ($combinedText -match 'Connected to Windows')
     local_kernel_disabled = ($combinedText -match 'Local kernel debugging is disabled by default')
     symbol_reload_started = ($combinedText -match 'Loading Kernel Symbols')
+    breakpoint_supported = if ($breakpointCommandsPresent) { -not ($combinedText -match 'Operation not supported by current debuggee') } else { $null }
+    runnable_debuggee = if ($runControlRequested) { -not ($combinedText -match 'No runnable debuggees') } else { $null }
     query_symbol_seen = ($combinedText -match [regex]::Escape($QuerySymbol))
     command_file_exists = [bool](Test-Path $commandFile)
     log_exists = [bool](Test-Path $logPath)
@@ -154,6 +194,8 @@ $summary = [ordered]@{
     stderr_exists = [bool](Test-Path $stderrPath)
     symchk_log_exists = [bool](Test-Path -Path $symchkLog -PathType Leaf)
     symchk_log_is_directory = [bool](Test-Path -Path $symchkLog -PathType Container)
+    trigger_stdout_exists = [bool](Test-Path $triggerStdoutPath)
+    trigger_stderr_exists = [bool](Test-Path $triggerStderrPath)
     uploads = [ordered]@{}
 }
 
@@ -162,7 +204,9 @@ foreach ($entry in @(
     @{ key = 'log'; path = $logPath; name = ('{0}.log' -f $OutputName) },
     @{ key = 'stdout'; path = $stdoutPath; name = ('{0}.stdout.txt' -f $OutputName) },
     @{ key = 'stderr'; path = $stderrPath; name = ('{0}.stderr.txt' -f $OutputName) },
-    @{ key = 'symchk_log'; path = $symchkLog; name = ('{0}-symchk.txt' -f $OutputName) }
+    @{ key = 'symchk_log'; path = $symchkLog; name = ('{0}-symchk.txt' -f $OutputName) },
+    @{ key = 'trigger_stdout'; path = $triggerStdoutPath; name = ('{0}.trigger.stdout.txt' -f $OutputName) },
+    @{ key = 'trigger_stderr'; path = $triggerStderrPath; name = ('{0}.trigger.stderr.txt' -f $OutputName) }
 )) {
     $upload = Invoke-ArtifactUpload -Path $entry.path -RemoteName $entry.name
     if ($upload) {

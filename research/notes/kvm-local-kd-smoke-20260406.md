@@ -20,3 +20,4 @@ Operational note:
 
 Interpretation:
 - KVM is no longer limited to Procmon/Ghidra-only follow-ups. We now have a repeatable host-driven path for targeted local KD symbol queries against the live guest, which is the right next transport for Executive- and UUID-adjacent follow-up work.
+- A later breakpoint probe showed that the current local-KD contract is still inspect-only on this guest: symbol/disassembly/memory reads work, but `bp` and `g` are not supported by the current debuggee.

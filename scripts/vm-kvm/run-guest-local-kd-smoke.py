@@ -17,6 +17,28 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def resolve_trigger_profile(profile: str) -> str:
+    if profile == "uuid-rpc-com-burst":
+        return """1..80 | ForEach-Object {
+    [guid]::NewGuid() | Out-Null
+    try { [System.Runtime.InteropServices.Marshal]::GenerateGuidForType([type][string]) | Out-Null } catch {}
+    foreach ($progId in 'WScript.Shell','Shell.Application','Scripting.Dictionary') {
+        try {
+            $obj = New-Object -ComObject $progId
+            if ($obj) {
+                [void]$obj
+            }
+        }
+        catch {
+        }
+    }
+    try { Get-CimInstance Win32_ComputerSystemProduct | Select-Object -ExpandProperty UUID | Out-Null } catch {}
+    try { cmd /c wmic csproduct get uuid >nul 2>nul } catch {}
+    Start-Sleep -Milliseconds 150
+}"""
+    raise ValueError(f"Unsupported trigger profile: {profile}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-local-kd-smoke.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -32,6 +54,9 @@ def main() -> int:
     parser.add_argument("--output-name", required=True)
     parser.add_argument("--query-symbol", default="nt!CmQueryValueKey")
     parser.add_argument("--kd-command", action="append", default=[], help="Optional custom KD command(s) to run instead of the default x <query-symbol> probe.")
+    parser.add_argument("--trigger-command", default="", help="Optional PowerShell command to run while KD is attached.")
+    parser.add_argument("--trigger-profile", default="", help="Optional built-in trigger profile name.")
+    parser.add_argument("--trigger-delay-seconds", type=int, default=2)
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -45,10 +70,24 @@ def main() -> int:
     generated_name = f"guest-local-kd-smoke-{args.output_name}.ps1"
     generated_path = generated_dir / generated_name
 
+    if args.trigger_command and args.trigger_profile:
+        parser.error("--trigger-command and --trigger-profile are mutually exclusive")
+
+    trigger_command = args.trigger_command
+    if args.trigger_profile:
+        trigger_command = resolve_trigger_profile(args.trigger_profile)
+
     kd_command_args = ""
     if args.kd_command:
         quoted_commands = ", ".join(quote_ps(command) for command in args.kd_command)
         kd_command_args = f" -DebuggerCommands @({quoted_commands})"
+
+    trigger_args = ""
+    if trigger_command:
+        trigger_args = (
+            f" -TriggerPowerShellCommand {quote_ps(trigger_command)}"
+            f" -TriggerDelaySeconds {args.trigger_delay_seconds}"
+        )
 
     command_lines = [
         "$ErrorActionPreference = 'Stop'",
@@ -65,6 +104,7 @@ def main() -> int:
             f"-TimeoutSeconds {args.smoke_timeout_seconds} "
             f"-QuerySymbol {quote_ps(args.query_symbol)}"
             f"{kd_command_args}"
+            f"{trigger_args}"
         ),
     ]
     generated_path.write_text("\n".join(command_lines) + "\n", encoding="utf-8")

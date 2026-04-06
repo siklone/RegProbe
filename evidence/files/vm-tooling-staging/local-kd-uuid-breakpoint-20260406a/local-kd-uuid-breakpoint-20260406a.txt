@@ -1,0 +1,8 @@
+.sympath C:\Tools\Symbols\local-kd-uuid-breakpoint-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+bp nt!ExpUuidLoadSequenceNumber ".echo REGPROBE_BP_LOAD; kb; qd"
+bp nt!ExpUuidSaveSequenceNumber ".echo REGPROBE_BP_SAVE; kb; qd"
+g
+.echo REGPROBE_LOCALKD_END
+q
