@@ -8,6 +8,8 @@ import sys
 import time
 from pathlib import Path
 
+from guest_bridge import ensure_guest_bridge
+
 
 def quote_ps(value: str) -> str:
     return "'" + value.replace("'", "''") + "'"
@@ -45,6 +47,7 @@ def main() -> int:
     summary_path = upload_dir / f"{args.output_name}-summary.json"
     generated_dir = repo_root / "dist" / "kvm-generated"
     generated_dir.mkdir(parents=True, exist_ok=True)
+    ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
 
     guest_scripts_root = args.guest_scripts_root
     bridge = args.bridge_base_url.rstrip("/")

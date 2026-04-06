@@ -9,7 +9,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputName,
 
-    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst')]
+    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst', 'hiber-file-size-burst')]
     [string]$TriggerProfile = 'custom',
 
     [string]$PowerShellCommand = '',
@@ -173,6 +173,31 @@ catch {
 }
 finally {
     Remove-Item -Path $diagPath -Recurse -Force -ErrorAction SilentlyContinue
+}
+'@
+        }
+        'hiber-file-size-burst' {
+            return @'
+try {
+    $path = 'C:\RegProbe-Diag\hiber-io-burst'
+    New-Item -ItemType Directory -Path $path -Force | Out-Null
+
+    try { cmd /c 'powercfg /hibernate on' | Out-Null } catch {}
+    Start-Sleep -Milliseconds 300
+    try { cmd /c 'powercfg /hibernate off' | Out-Null } catch {}
+    Start-Sleep -Milliseconds 300
+    try { cmd /c 'powercfg /a' | Out-Null } catch {}
+
+    1..24 | ForEach-Object {
+        $filePath = Join-Path $path ('hiber' + $_ + '.bin')
+        $data = New-Object byte[] 2097152
+        [System.IO.File]::WriteAllBytes($filePath, $data)
+    }
+}
+catch {
+}
+finally {
+    Remove-Item -Path 'C:\RegProbe-Diag\hiber-io-burst' -Recurse -Force -ErrorAction SilentlyContinue
 }
 '@
         }
