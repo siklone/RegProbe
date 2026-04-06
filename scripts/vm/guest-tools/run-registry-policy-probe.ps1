@@ -9,7 +9,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputName,
 
-    [ValidateSet('custom', 'uuid-rpc-com-burst')]
+    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst')]
     [string]$TriggerProfile = 'custom',
 
     [string]$PowerShellCommand = '',
@@ -74,6 +74,60 @@ function Resolve-TriggerCommand {
 }
 '@
         }
+        'uac-policy-surface-burst' {
+            return @'
+foreach ($target in @("$env:SystemRoot\System32\ComputerDefaults.exe", "$env:SystemRoot\System32\fodhelper.exe")) {
+    try {
+        $proc = Start-Process -FilePath $target -PassThru -ErrorAction Stop
+        Start-Sleep -Seconds 4
+        if ($proc -and -not $proc.HasExited) {
+            Stop-Process -Id $proc.Id -Force -ErrorAction SilentlyContinue
+        }
+    }
+    catch {
+    }
+}
+
+try {
+    cmd /c gpupdate /target:computer /force >nul 2>nul
+}
+catch {
+}
+'@
+        }
+        'session-manager-io-raw-burst' {
+            return @'
+try {
+    $path = 'C:\RegProbe-Diag\io-session-manager'
+    New-Item -ItemType Directory -Path $path -Force | Out-Null
+    1..24 | ForEach-Object {
+        $filePath = Join-Path $path ("io" + $_ + '.bin')
+        $data = New-Object byte[] 1048576
+        [System.IO.File]::WriteAllBytes($filePath, $data)
+    }
+
+    try {
+        $stream = [System.IO.File]::Open('\\.\C:', [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
+        $buffer = New-Object byte[] 4096
+        $null = $stream.Read($buffer, 0, $buffer.Length)
+        $stream.Close()
+    }
+    catch {
+    }
+
+    cmd /c 'fsutil fsinfo ntfsInfo C:' | Out-Null
+    cmd /c 'fltmc volumes' | Out-Null
+    cmd /c 'mountvol' | Out-Null
+    Get-Volume | Out-Null
+    Get-Disk | Out-Null
+}
+catch {
+}
+finally {
+    Remove-Item -Path 'C:\RegProbe-Diag\io-session-manager' -Recurse -Force -ErrorAction SilentlyContinue
+}
+'@
+        }
         'custom' {
             if ([string]::IsNullOrWhiteSpace($CustomCommand)) {
                 throw 'PowerShellCommand is required when TriggerProfile=custom.'
@@ -104,15 +158,29 @@ $csvPath = Join-Path $OutputRoot ('{0}.csv' -f $OutputName)
 $hitsCsvPath = Join-Path $OutputRoot ('{0}.hits.csv' -f $OutputName)
 $summaryPath = Join-Path $OutputRoot 'run-summary.json'
 
-& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $probeScript `
-    -Mode capture `
-    -RegistryPath $RegistryPath `
-    -ValueName $ValueName `
-    -Prefix $OutputName `
-    -OutputDirectory $OutputRoot `
-    -PowerShellCommand $triggerCommand `
-    -MatchFragments $MatchFragments `
-    -ProcessNames $ProcessNames
+$probeArgs = @(
+    '-NoProfile',
+    '-ExecutionPolicy', 'Bypass',
+    '-File', $probeScript,
+    '-Mode', 'capture',
+    '-RegistryPath', $RegistryPath,
+    '-ValueName', $ValueName,
+    '-Prefix', $OutputName,
+    '-OutputDirectory', $OutputRoot,
+    '-PowerShellCommand', $triggerCommand
+)
+
+if (@($MatchFragments).Count -gt 0) {
+    $probeArgs += '-MatchFragments'
+    $probeArgs += @($MatchFragments)
+}
+
+if (@($ProcessNames).Count -gt 0) {
+    $probeArgs += '-ProcessNames'
+    $probeArgs += @($ProcessNames)
+}
+
+& powershell.exe @probeArgs
 
 $uploads = [ordered]@{}
 foreach ($entry in @(
