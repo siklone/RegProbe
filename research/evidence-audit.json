@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-06T23:42:53.649829Z",
+  "generated_utc": "2026-04-06T23:49:02.845795Z",
   "summary": {
     "total_active_records": 255,
     "class_counts": {
@@ -16,7 +16,7 @@
     "next_missing_layer_counts": {
       "none": 248,
       "decision-gate": 5,
-      "ghidra": 1,
+      "reboot-diff": 1,
       "incident-review": 1
     },
     "re_audit_required_count": 11
@@ -3425,21 +3425,23 @@
       "official": false,
       "official_doc_exists": false,
       "procmon": true,
-      "ghidra": false,
+      "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "reboot-diff",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
+        "static_ghidra",
         "behavior_wpr"
       ],
       "tools_used": [
         "etw",
         "procmon",
+        "ghidra",
         "wpr"
       ],
       "boot_phase_relevant": true,

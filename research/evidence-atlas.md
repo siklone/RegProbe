@@ -16,8 +16,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
-| Class B | 8 |
-| Class E | 54 |
+| Class B | 7 |
+| Class E | 55 |
 
 ## Category coverage
 
@@ -8932,7 +8932,7 @@ Windows Internals references:
 | Label | `Class B` |
 | Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | Docs/static evidence is strong and the lightweight ETW lane surfaced exact HiberFileSizePercent lines, but the current VMware runtime still did not produce an exact live read. |
+| Gating reason | Docs, current-build static evidence, and KVM local-KD now agree on the live Control\\Power path and HiberFileSizePercent state. Promotion stays decision-gated because repeated runtime lanes still do not show an exact... |
 
 **Sources**
 
@@ -11042,7 +11042,7 @@ Windows Internals references:
 | Label | `Class B` |
 | Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | Cross-layer evidence is strong, but the current S1-only VMware baseline still drops guest state before a decisive exact-value watchdog runtime lane can complete. |
+| Gating reason | Cross-layer evidence is strong, and KVM local-KD plus hardened Procmon power-burst replays now confirm the current-build watchdog path and state. Promotion still stays decision-gated because no runtime lane has produc... |
 
 **Sources**
 
@@ -19501,7 +19501,7 @@ Current writes
 | Label | `Class B` |
 | Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe. |
+| Gating reason | Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. Promotion stays decision-gated because those runtime lanes still show a clean no-hit for the exac... |
 
 **Sources**
 
@@ -25629,7 +25629,7 @@ Windows Internals references:
 | Label | `Class B` |
 | Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | Baseline existence, exact ntoskrnl string evidence, and adjacent early-boot ETL activity exist, but the dedicated runtime lane still stayed no-hit and the exact trigger context remains unclear. |
+| Gating reason | Baseline existence, KVM local-KD symbol and disassembly work, and multiple hardened runtime replays now make the current-build UUID path much clearer. Promotion still stays decision-gated because no runtime lane has c... |
 
 **Sources**
 
@@ -36958,7 +36958,7 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `deprecated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class E` |
 | Category | `System` |
 | Area | `Session Manager I/O Registry` |
 | Scope | `device` |
@@ -36982,10 +36982,10 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit. |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | Archived audit trail only. Keep this out of the normal tweak surface. |
 
 **Sources**
 

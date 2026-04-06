@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-02T11:02:27.148259Z",
+  "generated_utc": "2026-04-06T23:49:07.359614Z",
   "summary": {
     "total_records": 310,
     "class_counts": {
       "A": 248,
-      "B": 8,
+      "B": 7,
       "C": 0,
       "D": 0,
-      "E": 54
+      "E": 55
     },
     "action_state_counts": {
       "actionable": 240,
-      "archived": 54,
-      "research-gated": 16
+      "archived": 55,
+      "research-gated": 15
     }
   },
   "classes": {
@@ -6256,7 +6256,7 @@
     {
       "record_id": "policy.system.enable-virtualization",
       "tweak_id": "policy.system.enable-virtualization",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "B",
       "class_label": "Class B",
       "class_title": "Strong but Decision-Gated",
@@ -6265,7 +6265,7 @@
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe.",
+      "gating_reason": "Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. Promotion stays decision-gated because those runtime lanes still show a clean no-hit for the exac...",
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
@@ -6302,7 +6302,7 @@
       },
       "runtime_proof": {
         "summary": "The 96-key existence batch confirmed EnableVirtualization exists on the clean baseline with observed value 1.",
-        "needs_vm_validation": true,
+        "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
@@ -6310,6 +6310,18 @@
             "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
             "kind": "registry-observation",
             "summary": "The 96-key existence batch confirmed EnableVirtualization exists on the clean baseline with observed value 1."
+          },
+          {
+            "title": "Linux KVM Procmon replay for EnableVirtualization",
+            "url": "evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json and evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/host-review.json",
+            "kind": "procmon-trace",
+            "summary": "A dedicated KVM UAC/policy burst produced a real Procmon CSV with 300881 rows and still returned zero path or value-name matches for EnableVirtualization under Policies\\\\System."
+          },
+          {
+            "title": "Linux KVM local-KD disassembly for EnableVirtualization",
+            "url": "evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a.log and evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a.log and research/notes/policy-system-enable-virtualization-kvm-local-kd-disasm-follow-up-20260406.md",
+            "kind": "vm-test",
+            "summary": "A debugger-assisted KVM local-KD follow-up disassembled the live `PsBootPhaseComplete` cluster, confirmed a direct `Policies\\System` key-path literal on the running guest, and r..."
           }
         ]
       },
@@ -6323,7 +6335,7 @@
     {
       "record_id": "power.control.class1-initial-unpark-count",
       "tweak_id": "power.control.class1-initial-unpark-count",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "A",
       "class_label": "Class A",
       "class_title": "Cross-Layer Verified",
@@ -6402,7 +6414,7 @@
     {
       "record_id": "power.control.hiber-file-size-percent",
       "tweak_id": "power.control.hiber-file-size-percent",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "B",
       "class_label": "Class B",
       "class_title": "Strong but Decision-Gated",
@@ -6411,7 +6423,7 @@
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "Docs/static evidence is strong and the lightweight ETW lane surfaced exact HiberFileSizePercent lines, but the current VMware runtime still did not produce an exact live read.",
+      "gating_reason": "Docs, current-build static evidence, and KVM local-KD now agree on the live Control\\\\Power path and HiberFileSizePercent state. Promotion stays decision-gated because repeated runtime lanes still do not show an exact...",
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
@@ -6456,6 +6468,18 @@
             "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
             "kind": "registry-observation",
             "summary": "The 96-key existence batch confirmed HiberFileSizePercent exists on the clean baseline with observed value 0."
+          },
+          {
+            "title": "Linux KVM local-KD follow-up for HiberFileSizePercent",
+            "url": "evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a.log and evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a.log and evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a.log and research/notes/power-control-hiber-file-size-percent-kvm-local-kd-follow-up-20260406.md",
+            "kind": "vm-test",
+            "summary": "A debugger-assisted KVM local-KD follow-up resolved the live hibernation symbol family, showed `PopHiberFileSizePercent = 0` on the running guest, resolved `PopHibernatePersiste..."
+          },
+          {
+            "title": "Linux KVM Procmon runtime replay for HiberFileSizePercent",
+            "url": "evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c-summary.json and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c.txt and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/host-review.json and research/notes/power-control-hiber-file-size-percent-kvm-procmon-runtime-20260407.md",
+            "kind": "vm-test",
+            "summary": "A host-driven KVM Procmon replay produced a `267382`-row capture, surfaced adjacent live `Control\\Power` activity through `powercfg.exe` and `System`, but still returned zero di..."
           }
         ]
       },
@@ -6469,7 +6493,7 @@
     {
       "record_id": "power.control.hibernate-enabled-default",
       "tweak_id": "power.control.hibernate-enabled-default",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "B",
       "class_label": "Class B",
       "class_title": "Strong but Decision-Gated",
@@ -6515,7 +6539,7 @@
       },
       "runtime_proof": {
         "summary": "The 96-key existence batch confirmed HibernateEnabledDefault exists on the clean baseline with observed value 1.",
-        "needs_vm_validation": true,
+        "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
@@ -6548,7 +6572,7 @@
     {
       "record_id": "power.control.hibernate-enabled",
       "tweak_id": "power.control.hibernate-enabled",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "A",
       "class_label": "Class A",
       "class_title": "Cross-Layer Verified",
@@ -6621,7 +6645,7 @@
     {
       "record_id": "power.control.lid-reliability-state",
       "tweak_id": "power.control.lid-reliability-state",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "A",
       "class_label": "Class A",
       "class_title": "Cross-Layer Verified",
@@ -6694,7 +6718,7 @@
     {
       "record_id": "power.control.mf-buffering-threshold",
       "tweak_id": "power.control.mf-buffering-threshold",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "A",
       "class_label": "Class A",
       "class_title": "Cross-Layer Verified",
@@ -6773,7 +6797,7 @@
     {
       "record_id": "power.control.perf-calculate-actual-utilization",
       "tweak_id": "power.control.perf-calculate-actual-utilization",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "A",
       "class_label": "Class A",
       "class_title": "Cross-Layer Verified",
@@ -6852,7 +6876,7 @@
     {
       "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
       "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "B",
       "class_label": "Class B",
       "class_title": "Strong but Decision-Gated",
@@ -6898,7 +6922,7 @@
       },
       "runtime_proof": {
         "summary": "The 96-key existence batch confirmed TimerRebaseThresholdOnDripsExit exists on the clean baseline with observed value 60.",
-        "needs_vm_validation": true,
+        "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
@@ -8043,7 +8067,7 @@
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "Cross-layer evidence is strong, but the current S1-only VMware baseline still drops guest state before a decisive exact-value watchdog runtime lane can complete.",
+      "gating_reason": "Cross-layer evidence is strong, and KVM local-KD plus hardened Procmon power-burst replays now confirm the current-build watchdog path and state. Promotion still stays decision-gated because no runtime lane has produc...",
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
@@ -8088,6 +8112,18 @@
             "url": "evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg and evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt",
             "kind": "registry-observation",
             "summary": "A clean VM baseline export confirmed WatchdogResumeTimeout = 120 and WatchdogSleepTimeout = 300 under Session Manager\\Power, with adjacent PowerSettingProfile = 0."
+          },
+          {
+            "title": "Linux KVM local-KD value follow-up for the watchdog timeout pair",
+            "url": "evidence/files/vm-tooling-staging/local-kd-watchdog-values-20260407a/local-kd-watchdog-values-20260407a-summary.json and evidence/files/vm-tooling-staging/local-kd-watchdog-values-20260407a/local-kd-watchdog-values-20260407a.log and evidence/files/vm-tooling-staging/local-kd-watchdog-sleep-20260407a/local-kd-watchdog-sleep-20260407a-summary.json and evidence/files/vm-tooling-staging/local-kd-watchdog-sleep-20260407a/local-kd-watchdog-sleep-20260407a.log and research/notes/power-session-watchdog-timeouts-kvm-local-kd-follow-up-20260407.md",
+            "kind": "vm-test",
+            "summary": "A debugger-assisted KVM local-KD follow-up resolved the live watchdog globals on the running guest, read `PopWatchdogResumeTimeout = 120` and `PopWatchdogSleepTimeout = 300`, an..."
+          },
+          {
+            "title": "Linux KVM local-KD disassembly for the watchdog timeout path",
+            "url": "evidence/files/vm-tooling-staging/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a-summary.json and evidence/files/vm-tooling-staging/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a.log and research/notes/power-session-watchdog-timeouts-kvm-local-kd-disasm-follow-up-20260407.md",
+            "kind": "vm-test",
+            "summary": "A debugger-assisted KVM local-KD disassembly follow-up showed `PopComputeWatchdogTimeout` selecting directly between `PopWatchdogSleepTimeout` and `PopWatchdogResumeTimeout` on..."
           }
         ]
       },
@@ -18962,7 +18998,7 @@
     {
       "record_id": "system.executive-uuid-sequence-number",
       "tweak_id": "system.executive-uuid-sequence-number",
-      "record_status": "draft",
+      "record_status": "validated",
       "evidence_class": "B",
       "class_label": "Class B",
       "class_title": "Strong but Decision-Gated",
@@ -18971,7 +19007,7 @@
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "Baseline existence, exact ntoskrnl string evidence, and adjacent early-boot ETL activity exist, but the dedicated runtime lane still stayed no-hit and the exact trigger context remains unclear.",
+      "gating_reason": "Baseline existence, KVM local-KD symbol and disassembly work, and multiple hardened runtime replays now make the current-build UUID path much clearer. Promotion still stays decision-gated because no runtime lane has c...",
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
@@ -18997,6 +19033,12 @@
             "url": "evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json and research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md",
             "kind": "decompilation",
             "summary": "Residual value-exists triage found an exact current-build Unicode string hit for UuidSequenceNumber in ntoskrnl.exe and no exact hit in smss.exe."
+          },
+          {
+            "title": "KVM PDB-backed string replay for UuidSequenceNumber",
+            "url": "evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json and evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json and research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md",
+            "kind": "decompilation",
+            "summary": "KVM guest full-analysis replays confirmed the exact current-build ntoskrnl Unicode string for UuidSequenceNumber but still recovered zero direct or bounded indirect references i..."
           }
         ]
       },
@@ -19016,6 +19058,12 @@
             "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
             "kind": "registry-observation",
             "summary": "The 96-key phase-0 live batch confirmed UuidSequenceNumber exists on the clean baseline with observed preview value 25272111."
+          },
+          {
+            "title": "KVM Procmon UUID / RPC / COM replay for UuidSequenceNumber",
+            "url": "evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt and evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json and research/notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md",
+            "kind": "procmon-trace",
+            "summary": "A KVM Procmon replay of the UUID / RPC / COM trigger family exported 286763 rows on the working guest and still found zero `Session Manager\\Executive` or `UuidSequenceNumber` hits."
           }
         ]
       },
@@ -19598,17 +19646,17 @@
     {
       "record_id": "system.io-allow-remote-dasd",
       "tweak_id": "system.io-allow-remote-dasd",
-      "record_status": "draft",
-      "evidence_class": "B",
-      "class_label": "Class B",
-      "class_title": "Strong but Decision-Gated",
-      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
-      "show_in_app": true,
+      "record_status": "deprecated",
+      "evidence_class": "E",
+      "class_label": "Class E",
+      "class_title": "Archived / Audit Trail",
+      "class_description": "Deprecated, blocked, or historical audit-trail record. Keep it in research, not in the normal tweak surface.",
+      "show_in_app": false,
       "is_actionable": false,
-      "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit.",
-      "confidence": "medium",
+      "is_archived": true,
+      "action_state": "archived",
+      "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
+      "confidence": "high",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "tested_build": "26100",
@@ -19618,33 +19666,33 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "Phase-0 existence confirmed the intended registry path exists on the clean baseline before path-aware routing began.",
+        "summary": "The old Session Manager I/O baseline observation is still real, but the first-party policy doc now matches the current-build Ghidra and KVM local-KD route to the removable-storage policy family instead of the intended Session Manager I/O path.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage",
             "kind": "validation-proof",
-            "summary": "The 96-key phase-0 existence batch recorded `system.io-allow-remote-dasd` at HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System with observed value 0."
+            "summary": "The Microsoft Learn `ADMX_RemovableStorage Policy CSP` page maps `All Removable Storage: Allow direct access in remote sessions` to `Software\\Policies\\Microsoft\\Windows\\Removabl..."
+          },
+          {
+            "title": "Microsoft Learn ADMX_RemovableStorage mapping for AllowRemoteDASD",
+            "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage and research/notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md",
+            "kind": "official-doc",
+            "summary": "Microsoft Learn documents `AllowRemoteDASD` as the registry value for `All Removable Storage: Allow direct access in remote sessions`, mapped to `Software\\Policies\\Microsoft\\Win..."
           },
           {
             "title": "Path-aware static probe for AllowRemoteDASD",
             "url": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
             "kind": "decompilation",
             "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but the naturally resolved current-build Ghidra function opened the removable..."
-          },
-          {
-            "title": "Historical collision review for AllowRemoteDASD",
-            "url": "research/notes/kernel-power-existing-static-triage-20260328.md",
-            "kind": "repo-doc",
-            "summary": "Earlier triage had already flagged AllowRemoteDASD as a likely removable-storage-policy collision rather than clean Session Manager I/O coverage."
           }
         ]
       },
       "runtime_proof": {
         "summary": "The 96-key existence batch confirmed AllowRemoteDASD exists on the clean baseline at the intended Session Manager I/O path with observed value 0.",
-        "needs_vm_validation": true,
+        "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
           {
@@ -19652,6 +19700,18 @@
             "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
             "kind": "registry-observation",
             "summary": "The 96-key existence batch confirmed AllowRemoteDASD exists on the clean baseline at the intended Session Manager I/O path with observed value 0."
+          },
+          {
+            "title": "Linux KVM Procmon replay for AllowRemoteDASD",
+            "url": "evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json and evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/host-review.json",
+            "kind": "procmon-trace",
+            "summary": "A dedicated KVM raw-I/O burst produced a real Procmon CSV with 267176 rows and still returned zero lines containing the intended Session Manager I/O path, AllowRemoteDASD itself..."
+          },
+          {
+            "title": "Linux KVM local-KD live symbol query for AllowRemoteDASD",
+            "url": "evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json and evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log",
+            "kind": "vm-test",
+            "summary": "A debugger-assisted KVM local-KD follow-up attached to the live guest kernel, completed successfully, and resolved `nt!IopAllowRemoteDASD` at `fffff800`970cb370`, confirming the..."
           }
         ]
       },

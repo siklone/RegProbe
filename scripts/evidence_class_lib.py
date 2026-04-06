@@ -66,6 +66,14 @@ GHIDRA_EVIDENCE_KINDS = {
     "ghidra-trace",
 }
 
+DEBUGGER_STATIC_HINTS = (
+    "local-kd",
+    "debugger-assisted",
+    "disassembly",
+    "disasm",
+    "symbol family",
+)
+
 WPR_EVIDENCE_KINDS = {
     "wpr-trace",
     "etw-trace",
@@ -366,6 +374,13 @@ def has_ghidra_evidence(record: dict[str, Any]) -> bool:
     ghidra_block = static_tool_block(record, "ghidra")
     if ghidra_block:
         return static_tool_counts_as_evidence(ghidra_block)
+    for item in evidence_items(record):
+        text = " ".join(
+            str(item.get(field) or "")
+            for field in ("title", "summary", "location", "Title", "Summary", "Location")
+        ).lower()
+        if "local-kd" in text and any(hint in text for hint in DEBUGGER_STATIC_HINTS if hint != "local-kd"):
+            return True
     return bool(evidence_kinds(record) & GHIDRA_EVIDENCE_KINDS)
 
 
@@ -743,7 +758,8 @@ def build_class_entry(
     override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     class_id = derive_class_id(record)
-    if override and override.get("evidence_class") in CLASS_DEFINITIONS:
+    record_status = str(record.get("record_status") or "").strip().lower()
+    if record_status != "deprecated" and override and override.get("evidence_class") in CLASS_DEFINITIONS:
         class_id = str(override["evidence_class"])
 
     definition = CLASS_DEFINITIONS[class_id]

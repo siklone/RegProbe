@@ -16,8 +16,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
-| Class B | 8 |
-| Class E | 54 |
+| Class B | 7 |
+| Class E | 55 |
 
 ## Record index
 
@@ -61,7 +61,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.dwm-disable-mpo` | deprecated | Class E | `research/records/system.dwm-disable-mpo.review.json` | - | `32fa9f911975e9e19c322a6b12581d79b3ecc1083945f70c06f8c95308226b56` | `f3745b72e0b055875f9b24b24043570e5c11bb63ceeca90cc66de1cc09deb3c9` | 1 |
 | `system.graphics-disable-overlays` | deprecated | Class E | `research/records/system.graphics-disable-overlays.review.json` | - | `d94780a086be710b0da5f79f7c0f45bb5a588a40c537a6e3ae273900f737ff49` | `8f15970aff2d78b6c3dd62f093bbdd39593fd163cbbb35300d615fb71e0e7805` | 1 |
 | `system.graphics-page-fault-debug-mode` | deprecated | Class E | `research/records/system.graphics-page-fault-debug-mode.review.json` | - | `2a8da3cb5005905ee6b3e8f3ecd6daceca03aed01bb39c4845b5e840baf2b557` | `111bffdcff3d97884b5f6fc292e5e1bc15c42e3bf06f1cf956bd118902c12a6e` | 1 |
-| `system.io-allow-remote-dasd` | deprecated | Class B | `research/records/system.io-allow-remote-dasd.json` | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) | `a2c5d99896866e35338166b12063ee585c78425a4ddb9a452d566e07151d3b48` | `10ae916c1806162e9f83c010f60435a057ab7a01ec7676f3e49eef67d1d12212` | 9 |
+| `system.io-allow-remote-dasd` | deprecated | Class E | `research/records/system.io-allow-remote-dasd.json` | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) | `a2c5d99896866e35338166b12063ee585c78425a4ddb9a452d566e07151d3b48` | `10ae916c1806162e9f83c010f60435a057ab7a01ec7676f3e49eef67d1d12212` | 9 |
 | `system.kernel-adjust-dpc-threshold` | deprecated | Class E | `research/records/system.kernel-adjust-dpc-threshold.review.json` | - | `f3ef028ff9e922036cd6a662a27d0cd94249fa93600ce94423b4a1820d8596a2` | `5e6910c16d8ed41476c252be509122e1fd6584230b9c3402ac1022db58076e5b` | 3 |
 | `system.kernel-cache-aware-scheduling` | deprecated | Class E | `research/records/system.kernel-cache-aware-scheduling.review.json` | - | `7cab9de080ed9def418673ae8dcb632f8d590e5cdc5935f8300dbed1dc9db803` | `284c02a1380dca96c498180c789612f8046a56eafff1f0c594fbbe4321ef0efa` | 3 |
 | `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | Class E | `research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | - | `d4f9f4277b3995932e2b969e0805726c1942c1c670aba12c776a390d680e8897` | `20c661ce6cc44bf5a5ab6d4ad79ec05987028fdae02c0759a85174136470adaa` | 7 |
@@ -1381,7 +1381,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `system.io-allow-remote-dasd`
 
 - Status: `deprecated`
-- Evidence class: `Class B`
+- Evidence class: `Class E`
 - Source file: `research/records/system.io-allow-remote-dasd.json`
 - Evidence root: [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd)
 - Source SHA256: `a2c5d99896866e35338166b12063ee585c78425a4ddb9a452d566e07151d3b48`

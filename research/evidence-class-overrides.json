@@ -33,32 +33,26 @@
     {
       "record_id": "power.session-watchdog-timeouts",
       "evidence_class": "B",
-      "reason_code": "vm_s1_only_limitation",
-      "gating_reason": "Cross-layer evidence is strong, but the current S1-only VMware baseline still drops guest state before a decisive exact-value watchdog runtime lane can complete."
+      "reason_code": "runtime_no_read",
+      "gating_reason": "Cross-layer evidence is strong, and KVM local-KD plus hardened Procmon power-burst replays now confirm the current-build watchdog path and state. Promotion still stays decision-gated because no runtime lane has produced a decisive exact-value registry read for the watchdog pair."
     },
     {
       "record_id": "power.control.hiber-file-size-percent",
       "evidence_class": "B",
       "reason_code": "runtime_no_read",
-      "gating_reason": "Docs/static evidence is strong and the lightweight ETW lane surfaced exact HiberFileSizePercent lines, but the current VMware runtime still did not produce an exact live read."
+      "gating_reason": "Docs, current-build static evidence, and KVM local-KD now agree on the live Control\\\\Power path and HiberFileSizePercent state. Promotion stays decision-gated because repeated runtime lanes still do not show an exact live HiberFileSizePercent read."
     },
     {
       "record_id": "policy.system.enable-virtualization",
       "evidence_class": "B",
-      "reason_code": "runtime_no_read_path_context_unclear",
-      "gating_reason": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe."
-    },
-    {
-      "record_id": "system.io-allow-remote-dasd",
-      "evidence_class": "B",
-      "reason_code": "runtime_no_read_path_context_unclear",
-      "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit."
+      "reason_code": "runtime_no_read",
+      "gating_reason": "Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. Promotion stays decision-gated because those runtime lanes still show a clean no-hit for the exact EnableVirtualization read."
     },
     {
       "record_id": "system.executive-uuid-sequence-number",
       "evidence_class": "B",
-      "reason_code": "runtime_no_read_trigger_context_unclear",
-      "gating_reason": "Baseline existence, exact ntoskrnl string evidence, and adjacent early-boot ETL activity exist, but the dedicated runtime lane still stayed no-hit and the exact trigger context remains unclear."
+      "reason_code": "runtime_no_read",
+      "gating_reason": "Baseline existence, KVM local-KD symbol and disassembly work, and multiple hardened runtime replays now make the current-build UUID path much clearer. Promotion still stays decision-gated because no runtime lane has captured a direct UuidSequenceNumber read."
     }
   ]
 }
