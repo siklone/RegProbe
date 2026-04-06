@@ -1,0 +1,17 @@
+﻿MODE=capture
+REGISTRY_PATH=HKLM:\SYSTEM\CurrentControlSet\Control\Power
+VALUE_NAME=HiberFileSizePercent
+PML_EXISTS=True
+CSV_EXISTS=True
+HITSCSV_EXISTS=True
+MATCH_COUNT=8
+12:19:03.4066401 AM | powercfg.exe | RegCreateKey | HKLM\SYSTEM\CURRENTCONTROLSET\CONTROL\POWER | REPARSE | Desired Access: Read/Write
+12:19:03.4066604 AM | powercfg.exe | RegCreateKey | HKLM\System\CurrentControlSet\CONTROL\POWER | SUCCESS | Desired Access: Read/Write, Disposition: REG_OPENED_EXISTING_KEY
+12:19:03.4066748 AM | powercfg.exe | RegSetValue | HKLM\System\CurrentControlSet\Control\Power\HibernateEnabled | SUCCESS | Type: REG_DWORD, Length: 4, Data: 0
+12:19:03.4067340 AM | System | RegQueryValue | HKLM\System\CurrentControlSet\Control\Power\PowerButtonBugcheck | NAME NOT FOUND | Length: 20
+12:19:03.4067400 AM | System | RegQueryValue | HKLM\System\CurrentControlSet\Control\Power\OneSettingPowerButtonBugcheck | NAME NOT FOUND | Length: 20
+12:19:03.4067446 AM | System | RegQueryValue | HKLM\System\CurrentControlSet\Control\Power\PowerButtonLiveDump | NAME NOT FOUND | Length: 20
+12:19:03.4067486 AM | System | RegQueryValue | HKLM\System\CurrentControlSet\Control\Power\OneSettingPowerButtonLiveDump | NAME NOT FOUND | Length: 20
+12:19:03.4067610 AM | powercfg.exe | RegCloseKey | HKLM\System\CurrentControlSet\Control\Power | SUCCESS | 
+ORIGINAL={"path_exists":true,"value_exists":true,"value":0,"value_type":"System.Int32"}
+RESTORED={"path_exists":true,"value_exists":true,"value":0,"value_type":"System.Int32"}
