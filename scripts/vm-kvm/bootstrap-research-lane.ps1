@@ -113,6 +113,20 @@ function Copy-DirectoryContent {
     Copy-Item -Path (Join-Path $SourcePath '*') -Destination $DestinationPath -Recurse -Force
 }
 
+function Clear-ReadOnlyFiles {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    if (-not (Test-Path $Path)) {
+        return
+    }
+
+    Get-ChildItem -Path $Path -Recurse -Force -File -ErrorAction SilentlyContinue | ForEach-Object {
+        if ($_.IsReadOnly) {
+            $_.IsReadOnly = $false
+        }
+    }
+}
+
 function Add-MachinePathEntries {
     param([string[]]$Entries)
 
@@ -378,6 +392,9 @@ $result.steps['payload_copy'] = Invoke-Step -Name 'Copy guest tooling payload' -
     if ($missingScripts.Count -gt 0) {
         throw "Required guest tooling is still missing after payload staging: $($missingScripts -join ', ')"
     }
+
+    # Payload media can preserve read-only bits; clear them so later guest-side refreshes can overwrite scripts.
+    Clear-ReadOnlyFiles -Path $scriptsRoot
 
     @{
         guest_tools = $availableScripts
