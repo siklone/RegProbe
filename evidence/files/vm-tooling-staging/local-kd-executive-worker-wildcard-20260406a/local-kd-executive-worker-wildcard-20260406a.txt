@@ -1,0 +1,6 @@
+.sympath C:\Tools\Symbols\local-kd-executive-worker-wildcard-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!*Exp*Additional*Worker*
+.echo REGPROBE_LOCALKD_END
+q
