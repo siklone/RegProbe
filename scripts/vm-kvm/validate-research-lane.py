@@ -124,6 +124,7 @@ def main() -> int:
         repo_root / "scripts" / "vm-kvm" / "attach-bootstrap-iso.sh",
         repo_root / "scripts" / "vm-kvm" / "serve-guest-bridge.py",
         repo_root / "scripts" / "vm-kvm" / "type-to-guest.py",
+        repo_root / "scripts" / "vm-kvm" / "run-guest-registry-policy-probe.py",
         repo_root / "scripts" / "vm" / "guest-tools" / "run-ghidra-symbolized-probe.ps1",
         repo_root / "scripts" / "vm" / "guest-tools" / "run-ghidra-string-xref-probe.ps1",
         repo_root / "scripts" / "vm" / "guest-tools" / "run-registry-policy-probe.ps1",

@@ -6,6 +6,7 @@ For the Linux/KVM runtime family, the same research intent applies but the trans
 
 - host transport: `scripts/vm-kvm/serve-guest-bridge.py`
 - guest command injection: `scripts/vm-kvm/type-to-guest.py`
+- host-side quoted Procmon replay runner: `scripts/vm-kvm/run-guest-registry-policy-probe.py`
 - guest bootstrap payload: `scripts/vm-kvm/build-research-bootstrap-iso.sh`
 - host health audit: `scripts/vm-kvm/validate-research-lane.py`
 

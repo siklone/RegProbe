@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-04-06T13:34:16Z",
+  "generated_utc": "2026-04-06T14:22:00Z",
   "status": "ok",
   "blockers": [],
   "host_tools": {
@@ -44,7 +44,7 @@
   },
   "bootstrap_iso": {
     "build_ok": true,
-    "path": "/tmp/regprobe-kvm-validate-6_l5ib23/bootstrap.iso",
+    "path": "/tmp/regprobe-kvm-validate-h63eny6z/bootstrap.iso",
     "error": ""
   },
   "repo_files": {
@@ -61,6 +61,9 @@
       "exists": true
     },
     "scripts/vm-kvm/type-to-guest.py": {
+      "exists": true
+    },
+    "scripts/vm-kvm/run-guest-registry-policy-probe.py": {
       "exists": true
     },
     "scripts/vm/guest-tools/run-ghidra-symbolized-probe.ps1": {

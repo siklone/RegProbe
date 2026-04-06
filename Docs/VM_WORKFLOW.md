@@ -46,6 +46,7 @@ For the current KVM host-side transport map, see:
 - `scripts/vm-kvm/attach-bootstrap-iso.sh`
 - `scripts/vm-kvm/serve-guest-bridge.py`
 - `scripts/vm-kvm/type-to-guest.py`
+- `scripts/vm-kvm/run-guest-registry-policy-probe.py`
 
 For the current script map, also see:
 
@@ -217,6 +218,16 @@ cat registry-research-framework/audit/kvm-research-lane-health-latest.json
 ```
 
 Current expected `status` for a merge-ready KVM lane is `ok`.
+
+Quoted guest-side Procmon replay from the host:
+
+```bash
+python3 scripts/vm-kvm/run-guest-registry-policy-probe.py \
+  --registry-path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System' \
+  --value-name 'AllowRemoteDASD' \
+  --output-name 'allowremotedasd-procmon-kvm-test' \
+  --trigger-profile 'session-manager-io-raw-burst'
+```
 
 Minimal tooling smoke:
 
