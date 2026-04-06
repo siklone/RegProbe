@@ -1,10 +1,10 @@
-﻿{
+{
     "$schema":  "../setting-research.schema.json",
     "schema_version":  "1.1",
     "record_id":  "power.control.mf-buffering-threshold",
     "tweak_id":  "power.control.mf-buffering-threshold",
-    "record_status":  "draft",
-    "summary":  "Draft candidate package for MfBufferingThreshold under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for MfBufferingThreshold through the new disk I/O burst trigger. App surfacing remains a separate product decision from evidence classification.",
+    "record_status":  "validated",
+    "summary":  "Validated candidate package for MfBufferingThreshold under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for MfBufferingThreshold through the new disk I/O burst trigger. App surfacing remains a separate product decision from evidence classification.",
     "validation_proof":  {
                              "source_url":  "Docs/power/power.md",
                              "exact_quote_or_path":  "Docs/power/power.md:173 shows `MfBufferingThreshold` with observed literal `0` in the repo power notes.",
@@ -210,6 +210,5 @@
 
                                          ]
                  },
-    "last_reviewed_utc":  "2026-03-30T00:53:00Z"
+    "last_reviewed_utc":  "2026-04-06T23:19:17Z"
 }
-
