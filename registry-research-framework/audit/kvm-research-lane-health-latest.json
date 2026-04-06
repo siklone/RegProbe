@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-04-06T14:34:20Z",
+  "generated_utc": "2026-04-06T19:26:58Z",
   "status": "ok",
   "blockers": [],
   "host_tools": {
@@ -44,7 +44,7 @@
   },
   "bootstrap_iso": {
     "build_ok": true,
-    "path": "/tmp/regprobe-kvm-validate-j99zg8ig/bootstrap.iso",
+    "path": "/tmp/regprobe-kvm-validate-fcvrcn9b/bootstrap.iso",
     "error": ""
   },
   "repo_files": {
@@ -66,6 +66,9 @@
     "scripts/vm-kvm/run-guest-registry-policy-probe.py": {
       "exists": true
     },
+    "scripts/vm-kvm/run-guest-local-kd-smoke.py": {
+      "exists": true
+    },
     "scripts/vm/guest-tools/run-ghidra-symbolized-probe.ps1": {
       "exists": true
     },
@@ -73,6 +76,9 @@
       "exists": true
     },
     "scripts/vm/guest-tools/run-registry-policy-probe.ps1": {
+      "exists": true
+    },
+    "scripts/vm/guest-tools/run-local-kd-smoke.ps1": {
       "exists": true
     },
     "scripts/vm/guest-tools/procmon-safe.ps1": {
