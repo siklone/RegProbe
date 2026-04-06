@@ -693,8 +693,64 @@ $result.steps['tool_health'] = Invoke-Step -Name 'Run tool health smoke' -Action
     }
 
     $summary = Get-Content -Path $outputPath.Trim() -Raw | ConvertFrom-Json
+    $requiredTools = @(
+        'procmon',
+        'procmon_wrapper',
+        'wpr',
+        'wpa',
+        'xperf',
+        'dotnet',
+        'winsat',
+        'diskspd',
+        'ghidra_launcher',
+        'symchk',
+        'dbghelp'
+    )
+    $missingTools = @(
+        foreach ($toolName in $requiredTools) {
+            if (-not $summary.tools.$toolName.exists) {
+                $toolName
+            }
+        }
+    )
+
+    $requiredSmokes = @(
+        'dotnet_info',
+        'procmon',
+        'wpr',
+        'winsat_cpu',
+        'winsat_mem',
+        'diskspd',
+        'symchk_choice'
+    )
+    if (-not $SkipGhidra) {
+        $requiredSmokes += 'ghidra'
+    }
+
+    $failedSmokes = @(
+        foreach ($smokeName in $requiredSmokes) {
+            if (-not $summary.smokes.$smokeName.success) {
+                $smokeName
+            }
+        }
+    )
+
+    if ($missingTools.Count -gt 0 -or $failedSmokes.Count -gt 0) {
+        $parts = @()
+        if ($missingTools.Count -gt 0) {
+            $parts += "missing tools: $($missingTools -join ', ')"
+        }
+        if ($failedSmokes.Count -gt 0) {
+            $parts += "failed smokes: $($failedSmokes -join ', ')"
+        }
+
+        throw "Tool health smoke did not meet required checks: $($parts -join '; ')"
+    }
+
     @{
         output_path = $outputPath.Trim()
+        required_tools_missing = @($missingTools)
+        required_smokes_failed = @($failedSmokes)
         summary = $summary
     }
 }

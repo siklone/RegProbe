@@ -1,0 +1,115 @@
+{
+  "generated_utc": "2026-04-06T13:34:16Z",
+  "status": "ok",
+  "blockers": [],
+  "host_tools": {
+    "python3": {
+      "present": true,
+      "path": "/usr/bin/python3"
+    },
+    "curl": {
+      "present": true,
+      "path": "/usr/bin/curl"
+    },
+    "virsh": {
+      "present": true,
+      "path": "/usr/bin/virsh"
+    },
+    "qemu-img": {
+      "present": true,
+      "path": "/usr/bin/qemu-img"
+    },
+    "xorriso": {
+      "present": true,
+      "path": "/usr/bin/xorriso"
+    },
+    "bash": {
+      "present": true,
+      "path": "/usr/bin/bash"
+    }
+  },
+  "bridge": {
+    "healthy": true,
+    "url": "http://127.0.0.1:8766/healthz",
+    "status": "ok",
+    "error": ""
+  },
+  "vm": {
+    "defined": true,
+    "running": true,
+    "uri": "qemu:///session",
+    "name": "regprobe-win11-25h2-session",
+    "state": "running",
+    "error": ""
+  },
+  "bootstrap_iso": {
+    "build_ok": true,
+    "path": "/tmp/regprobe-kvm-validate-6_l5ib23/bootstrap.iso",
+    "error": ""
+  },
+  "repo_files": {
+    "scripts/vm-kvm/bootstrap-research-lane.ps1": {
+      "exists": true
+    },
+    "scripts/vm-kvm/build-research-bootstrap-iso.sh": {
+      "exists": true
+    },
+    "scripts/vm-kvm/attach-bootstrap-iso.sh": {
+      "exists": true
+    },
+    "scripts/vm-kvm/serve-guest-bridge.py": {
+      "exists": true
+    },
+    "scripts/vm-kvm/type-to-guest.py": {
+      "exists": true
+    },
+    "scripts/vm/guest-tools/run-ghidra-symbolized-probe.ps1": {
+      "exists": true
+    },
+    "scripts/vm/guest-tools/run-ghidra-string-xref-probe.ps1": {
+      "exists": true
+    },
+    "scripts/vm/guest-tools/run-registry-policy-probe.ps1": {
+      "exists": true
+    },
+    "scripts/vm/guest-tools/procmon-safe.ps1": {
+      "exists": true
+    },
+    "scripts/vm/registry-policy-probe.ps1": {
+      "exists": true
+    },
+    "scripts/vm/tool-health-smoke.ps1": {
+      "exists": true
+    }
+  },
+  "artifacts": {
+    "evidence/files/ghidra/allowremotedasd-kvm-20260406b/evidence.json": {
+      "exists": true
+    },
+    "evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json": {
+      "exists": true
+    },
+    "evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json": {
+      "exists": true
+    }
+  },
+  "lane_health": {
+    "artifact_dir": "evidence/files/vm-tooling-staging/kvm-tool-health-rerun-20260406b",
+    "bootstrap_summary_path": "evidence/files/vm-tooling-staging/kvm-tool-health-rerun-20260406b/bootstrap-summary.json",
+    "tool_health_summary_path": "evidence/files/vm-tooling-staging/kvm-tool-health-rerun-20260406b/tool-health.json",
+    "bootstrap_ok": true,
+    "tool_health_ok": true,
+    "bootstrap_failed_steps": [],
+    "missing_tools": [],
+    "failed_smokes": [],
+    "procmon_direct_1s": {
+      "exitcode": 0,
+      "exists": true,
+      "length": 20555920
+    },
+    "procmon_direct_5s": {
+      "exists": true,
+      "length": 104260380
+    }
+  }
+}

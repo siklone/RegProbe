@@ -4,6 +4,11 @@ This repo now treats runtime research and debugger-first arbitration as two diff
 
 ## VM Families
 
+- `KVM runtime family`
+  - current Linux host lane for Windows 11 guest bootstrap, Procmon, WPR/WPA/xperf, symbol staging, and Ghidra-backed follow-up work
+  - canonical guest name on the active host: `regprobe-win11-25h2-session`
+  - transport shape: `libvirt session` + `SPICE console` + `bootstrap ISO` + `HTTP guest bridge`
+  - current host status: `active`
 - `VMware runtime family`
   - current host lane for ETW, Procmon, WPR, shell-safe mega-trigger work, and general research automation
   - canonical baseline: `RegProbe-Baseline-ToolsHardened-20260330`
@@ -22,6 +27,7 @@ The current VMware WinDbg named-pipe lane is intentionally frozen as a historica
 ## Rule
 
 - Do not run live app validation on the host.
+- On Linux/KVM, keep the guest reachable through `virt-manager` or another visible SPICE console while the bridge/type-to-guest lane is active.
 - Keep the guest visible in VMware Workstation. Do not switch validation lanes to `nogui`.
 - Use the VM for:
   - live RegProbe runs
@@ -32,6 +38,14 @@ The current VMware WinDbg named-pipe lane is intentionally frozen as a historica
   - Ghidra headless analysis
 - Use the host only for source editing, docs, artifact review, and offline prep.
 - Keep WinDbg debugger-first experiments separate from the runtime VMware family.
+
+For the current KVM host-side transport map, see:
+
+- `scripts/vm-kvm/bootstrap-research-lane.ps1`
+- `scripts/vm-kvm/build-research-bootstrap-iso.sh`
+- `scripts/vm-kvm/attach-bootstrap-iso.sh`
+- `scripts/vm-kvm/serve-guest-bridge.py`
+- `scripts/vm-kvm/type-to-guest.py`
 
 For the current script map, also see:
 
@@ -195,6 +209,15 @@ registry-research-framework/audit/regprobe-baseline-tools-hardened-20260330.json
 
 ## Validation Smokes
 
+KVM runtime lane validation:
+
+```bash
+python3 scripts/vm-kvm/validate-research-lane.py
+cat registry-research-framework/audit/kvm-research-lane-health-latest.json
+```
+
+Current expected `status` for a merge-ready KVM lane is `ok`.
+
 Minimal tooling smoke:
 
 ```powershell
@@ -223,6 +246,21 @@ The canonical baseline is considered healthy only when:
 - `sihost.exe` is present
 - `ShellHost.exe` is present
 - `ctfmon.exe` is present
+
+The KVM runtime lane is considered healthy only when all of the following are true:
+
+- `bootstrap-research-lane.ps1` writes a summary with `status: ok`
+- required tool-health smokes are green for `dotnet_info`, `procmon`, `wpr`, `winsat_cpu`, `winsat_mem`, `diskspd`, and `symchk_choice`
+- host bridge health is `ok`
+- the libvirt guest is defined and running
+- the bootstrap ISO rebuild succeeds on the host
+- the current evidence set contains at least one symbolized Ghidra result and one live Procmon/runtime result
+
+Current KVM-specific runtime findings to preserve:
+
+- the Procmon smoke is stable with a `1s / 64 MiB` bounded window
+- the older `5s / 32 MiB` shape can overshoot the budget on the current Windows 11 guest
+- `ghidra` can be skipped inside the minimal tool-health rerun when the lane already has separate evidence-grade symbolized probes
 
 ## Stepwise WPR And Reboot Lanes
 

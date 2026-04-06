@@ -42,19 +42,35 @@ if ([string]::IsNullOrWhiteSpace($OutputName)) {
 }
 
 $outputPath = Join-Path $OutputDirectory $OutputName
+if (Test-Path $outputPath) {
+    Remove-Item -Path $outputPath -Force -ErrorAction SilentlyContinue
+}
+
 if ($TerminateExisting) {
     Stop-ProcmonProcess
 }
 
 try {
     & $procmon /AcceptEula /Quiet /Minimized /BackingFile $outputPath /Runtime ([Math]::Max($DurationSeconds, 1)) /Terminate | Out-Null
+    if (-not (Test-Path $outputPath)) {
+        throw "Procmon fast-path did not create $outputPath"
+    }
 }
 catch {
     # Older Procmon builds can reject one or more optional switches. Fall back to the
     # smallest reliable launch shape and terminate explicitly after the dwell window.
-    & $procmon /AcceptEula /Quiet /Minimized /BackingFile $outputPath | Out-Null
+    Stop-ProcmonProcess
+    $fallback = Start-Process -FilePath $procmon -ArgumentList @(
+        '/AcceptEula',
+        '/Quiet',
+        '/Minimized',
+        '/BackingFile', $outputPath
+    ) -PassThru -WindowStyle Hidden
     Start-Sleep -Seconds ([Math]::Max($DurationSeconds, 1))
     & $procmon /Terminate | Out-Null
+    if (-not $fallback.WaitForExit(15000)) {
+        Stop-ProcmonProcess
+    }
 }
 
 if (-not (Test-Path $outputPath)) {

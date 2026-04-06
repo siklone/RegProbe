@@ -167,8 +167,19 @@ $result.smokes['procmon'] = Invoke-Step {
     }
 
     $out = 'C:\Tools\Perf\Procmon\tool-health-procmon.pml'
-    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $toolMap.procmon_wrapper -DurationSeconds 5 -MaxMegabytes 32 -OutputDirectory 'C:\Tools\Perf\Procmon' -OutputName 'tool-health-procmon.pml' | Out-Null
-    [ordered]@{ success = [bool](Test-Path $out); output = $out }
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $toolMap.procmon_wrapper -DurationSeconds 1 -MaxMegabytes 64 -OutputDirectory 'C:\Tools\Perf\Procmon' -OutputName 'tool-health-procmon.pml' | Out-Null
+    $exitCode = $LASTEXITCODE
+    if ($exitCode -ne 0) {
+        throw "procmon-safe.ps1 failed with exit code $exitCode"
+    }
+
+    $fileInfo = Get-Item -Path $out -ErrorAction Stop
+    [ordered]@{
+        success = $fileInfo.Length -gt 0
+        output = $out
+        size_bytes = $fileInfo.Length
+        exit_code = $exitCode
+    }
 }
 
 $result.smokes['wpr'] = Invoke-Step {

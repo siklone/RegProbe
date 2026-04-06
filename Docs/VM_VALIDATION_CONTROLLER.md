@@ -2,6 +2,15 @@
 
 This document defines the controller/agent validation loop for runtime registry experiments in the `Win25H2Clean` VM.
 
+For the Linux/KVM runtime family, the same research intent applies but the transport is different:
+
+- host transport: `scripts/vm-kvm/serve-guest-bridge.py`
+- guest command injection: `scripts/vm-kvm/type-to-guest.py`
+- guest bootstrap payload: `scripts/vm-kvm/build-research-bootstrap-iso.sh`
+- host health audit: `scripts/vm-kvm/validate-research-lane.py`
+
+The current KVM lane does not depend on the VMware shared-folder controller loop. It stages guest scripts through the bootstrap ISO and uses the bridge for short command delivery, copy-back, and health evidence upload.
+
 ## Purpose
 
 Use the VM as a safe discovery environment for:
@@ -110,4 +119,4 @@ powershell -ExecutionPolicy Bypass -File .\scripts\vm\host-validation-controller
 - The guest agent is responsible for applying the value, waiting for idle, benchmarking, and restoring the baseline.
 - VM results are a discovery signal, not final truth for hardware-sensitive settings.
 - Promising candidates should still be rechecked on bare metal.
-
+- On KVM, keep the guest visible and prefer short, restartable guest commands; long monolithic typed payloads are more fragile than ISO-staged helpers plus bridge uploads.
