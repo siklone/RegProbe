@@ -125,7 +125,7 @@ public class ExportBranchAnalysis extends GhidraScript {
                         Reference ref = refs.next();
                         MatchEvidence evidence = buildEvidence(listing, ref.getFromAddress(), pattern);
                         matches.add(evidence);
-                        if ("symbolized_branch".equals(evidence.functionConfidence)) {
+                        if ("pdb-symbol".equals(evidence.functionSource)) {
                             pdbLoaded = true;
                         }
 

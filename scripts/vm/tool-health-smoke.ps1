@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-    [string]$OutputRoot = 'C:\Tools\ValidationController\smoke'
+    [string]$OutputRoot = 'C:\Tools\ValidationController\smoke',
+    [switch]$SkipGhidraSmoke
 )
 
 $ErrorActionPreference = 'Continue'
@@ -56,6 +57,52 @@ function Invoke-Capture {
     return $proc.ExitCode
 }
 
+function Get-DebuggerToolRoots {
+    $roots = New-Object 'System.Collections.Generic.List[string]'
+    foreach ($path in @(
+        'C:\Tools\SymbolTools',
+        'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64',
+        'C:\Program Files\Windows Kits\10\Debuggers\x64',
+        'C:\Program Files\Debugging Tools for Windows (x64)',
+        'C:\Program Files\Debugging Tools for Windows'
+    )) {
+        if (-not [string]::IsNullOrWhiteSpace($path) -and (Test-Path $path) -and -not $roots.Contains($path)) {
+            $roots.Add($path)
+        }
+    }
+
+    foreach ($pkg in @(Get-AppxPackage -Name Microsoft.WinDbg* -ErrorAction SilentlyContinue)) {
+        if ($pkg.InstallLocation -and (Test-Path $pkg.InstallLocation) -and -not $roots.Contains($pkg.InstallLocation)) {
+            $roots.Add($pkg.InstallLocation)
+        }
+    }
+
+    return @($roots)
+}
+
+function Find-FirstDebuggerTool {
+    param([Parameter(Mandatory = $true)][string]$ToolName)
+
+    $command = Get-Command $ToolName -ErrorAction SilentlyContinue
+    if ($command) {
+        return $command.Source
+    }
+
+    foreach ($root in Get-DebuggerToolRoots) {
+        $candidate = Get-ChildItem -Path $root -Recurse -Filter $ToolName -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($candidate) {
+            return $candidate.FullName
+        }
+    }
+
+    return ''
+}
+
+$symchkPath = Find-FirstDebuggerTool -ToolName 'symchk.exe'
+$dbghelpPath = Find-FirstDebuggerTool -ToolName 'dbghelp.dll'
+$windbgPath = Find-FirstDebuggerTool -ToolName 'windbg.exe'
+$ttdPath = Find-FirstDebuggerTool -ToolName 'ttd.exe'
+
 $toolMap = [ordered]@{
     procmon = 'C:\Tools\Sysinternals\Procmon64.exe'
     procmon_wrapper = 'C:\Tools\Scripts\procmon-safe.ps1'
@@ -66,11 +113,13 @@ $toolMap = [ordered]@{
     winsat = 'C:\Windows\System32\winsat.exe'
     diskspd = 'C:\Tools\Perf\diskspd.exe'
     ghidra_launcher = 'C:\Tools\Scripts\ghidra-headless.cmd'
+    symchk = $symchkPath
+    dbghelp = $dbghelpPath
 }
 
 $optionalToolMap = [ordered]@{
-    ttd = 'C:\Tools\Debuggers\ttd.exe'
-    windbg = 'C:\Tools\Debuggers\windbg.exe'
+    ttd = $ttdPath
+    windbg = $windbgPath
 }
 
 $result = [ordered]@{
@@ -85,14 +134,14 @@ $result = [ordered]@{
 foreach ($entry in $toolMap.GetEnumerator()) {
     $result.tools[$entry.Key] = [ordered]@{
         path = $entry.Value
-        exists = [bool](Test-Path $entry.Value)
+        exists = -not [string]::IsNullOrWhiteSpace($entry.Value) -and [bool](Test-Path $entry.Value)
     }
 }
 
 foreach ($entry in $optionalToolMap.GetEnumerator()) {
     $result.optional_tools[$entry.Key] = [ordered]@{
         path = $entry.Value
-        exists = [bool](Test-Path $entry.Value)
+        exists = -not [string]::IsNullOrWhiteSpace($entry.Value) -and [bool](Test-Path $entry.Value)
     }
 }
 
@@ -135,34 +184,43 @@ $result.smokes['wpr'] = Invoke-Step {
     [ordered]@{ success = [bool](Test-Path $etl); output = $etl }
 }
 
-$result.smokes['ghidra'] = Invoke-Step {
-    if (-not (Test-Path $toolMap.ghidra_launcher)) {
-        throw 'ghidra-headless.cmd not found'
+if ($SkipGhidraSmoke) {
+    $result.smokes['ghidra'] = [ordered]@{
+        success = $true
+        skipped = $true
+        reason = 'SkipGhidraSmoke'
     }
+}
+else {
+    $result.smokes['ghidra'] = Invoke-Step {
+        if (-not (Test-Path $toolMap.ghidra_launcher)) {
+            throw 'ghidra-headless.cmd not found'
+        }
 
-    $analyzeHeadless = Get-ChildItem -Path 'C:\Tools\Ghidra' -Recurse -Filter 'analyzeHeadless.bat' -ErrorAction SilentlyContinue | Select-Object -First 1
-    if (-not $analyzeHeadless) {
-        throw 'analyzeHeadless.bat not found'
-    }
+        $analyzeHeadless = Get-ChildItem -Path 'C:\Tools\Ghidra' -Recurse -Filter 'analyzeHeadless.bat' -ErrorAction SilentlyContinue | Select-Object -First 1
+        if (-not $analyzeHeadless) {
+            throw 'analyzeHeadless.bat not found'
+        }
 
-    $stdout = Join-Path $OutputRoot 'ghidra-import.txt'
-    $stderr = $stdout + '.stderr.txt'
-    $projectRoot = 'C:\Tools\GhidraProjects'
-    $smokeBinary = 'C:\Windows\System32\choice.exe'
-    New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
+        $stdout = Join-Path $OutputRoot 'ghidra-import.txt'
+        $stderr = $stdout + '.stderr.txt'
+        $projectRoot = 'C:\Tools\GhidraProjects'
+        $smokeBinary = 'C:\Windows\System32\choice.exe'
+        New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
 
-    $proc = Start-Process -FilePath $analyzeHeadless.FullName `
-        -ArgumentList @($projectRoot, 'ToolHealthProject', '-import', $smokeBinary, '-noanalysis', '-deleteProject') `
-        -PassThru -Wait -WindowStyle Hidden `
-        -RedirectStandardOutput $stdout `
-        -RedirectStandardError $stderr
+        $proc = Start-Process -FilePath $analyzeHeadless.FullName `
+            -ArgumentList @($projectRoot, 'ToolHealthProject', '-import', $smokeBinary, '-noanalysis', '-deleteProject') `
+            -PassThru -Wait -WindowStyle Hidden `
+            -RedirectStandardOutput $stdout `
+            -RedirectStandardError $stderr
 
-    $stdoutText = if (Test-Path $stdout) { Get-Content -Path $stdout -Raw } else { '' }
-    [ordered]@{
-        success = ($proc.ExitCode -eq 0) -and [bool](Test-Path $stdout) -and ($stdoutText -match 'Import succeeded')
-        output = $stdout
-        exit_code = $proc.ExitCode
-        target = $smokeBinary
+        $stdoutText = if (Test-Path $stdout) { Get-Content -Path $stdout -Raw } else { '' }
+        [ordered]@{
+            success = ($proc.ExitCode -eq 0) -and [bool](Test-Path $stdout) -and ($stdoutText -match 'Import succeeded')
+            output = $stdout
+            exit_code = $proc.ExitCode
+            target = $smokeBinary
+        }
     }
 }
 
@@ -204,6 +262,36 @@ $result.smokes['diskspd'] = Invoke-Step {
     [ordered]@{
         success = [bool](Test-Path $out)
         output = $out
+    }
+}
+
+$result.smokes['symchk_choice'] = Invoke-Step {
+    if (-not $toolMap.symchk -or -not (Test-Path $toolMap.symchk)) {
+        throw 'symchk.exe not found'
+    }
+
+    if (-not $toolMap.dbghelp -or -not (Test-Path $toolMap.dbghelp)) {
+        throw 'dbghelp.dll not found'
+    }
+
+    $smokeBinary = 'C:\Windows\System32\choice.exe'
+    $symbolRoot = Join-Path $OutputRoot 'symbol-cache\choice'
+    New-Item -ItemType Directory -Path $symbolRoot -Force | Out-Null
+
+    $out = Join-Path $OutputRoot 'symchk-choice.txt'
+    $exitCode = Invoke-Capture -FilePath $toolMap.symchk `
+        -ArgumentList @('/r', $smokeBinary, '/s', "SRV*$symbolRoot*https://msdl.microsoft.com/download/symbols") `
+        -StdoutPath $out `
+        -IgnoreExitCode
+
+    $pdb = Get-ChildItem -Path $symbolRoot -Recurse -Include '*.pdb', '*.pd_' -ErrorAction SilentlyContinue | Select-Object -First 1
+    [ordered]@{
+        success = ($exitCode -eq 0) -and [bool]$pdb
+        output = $out
+        exit_code = $exitCode
+        target = $smokeBinary
+        symbol_root = $symbolRoot
+        pdb = if ($pdb) { $pdb.FullName } else { '' }
     }
 }
 

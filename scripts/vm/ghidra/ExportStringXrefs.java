@@ -33,6 +33,8 @@ import ghidra.program.model.symbol.ReferenceManager;
 public class ExportStringXrefs extends GhidraScript {
     private static final int MAX_STRINGS_PER_PATTERN = 4;
     private static final int MAX_REFERENCES_PER_STRING = 12;
+    private static final int MAX_STRING_ADDRESS_SPAN = 0x80;
+    private static final int MAX_INDIRECT_DATA_ADDRESSES = 24;
     private static final int DECOMPILE_TIMEOUT_SECONDS = 20;
     private static final int MAX_DECOMPILE_LINES = 60;
     private static final int MAX_DISASSEMBLY_LINES = 120;
@@ -52,6 +54,11 @@ public class ExportStringXrefs extends GhidraScript {
         String outputKind = "none";
         String outputText = "// no output";
         String sectionTitle = "Match";
+    }
+
+    private static final class ResolvedReference {
+        Address referenceAddress;
+        String viaLabel;
     }
 
     @Override
@@ -136,34 +143,34 @@ public class ExportStringXrefs extends GhidraScript {
                     writer.printf("#### String @ `%s`%n%n", data.getAddress());
                     writer.printf("`%s`%n%n", escapeInlineCode(text));
 
-                    ReferenceIterator refs = refManager.getReferencesTo(data.getAddress());
-                    List<Reference> refList = new ArrayList<>();
-                    while (refs.hasNext()) {
-                        refList.add(refs.next());
-                    }
-
-                    writer.printf("- Reference count: `%d`%n", refList.size());
-                    if (refList.isEmpty()) {
-                        writer.printf("- No direct references resolved by Ghidra%n%n");
+                    List<ResolvedReference> resolvedRefs = collectResolvedReferences(listing, refManager, data);
+                    writer.printf("- Reference count: `%d`%n", resolvedRefs.size());
+                    if (resolvedRefs.isEmpty()) {
+                        writer.printf("- No direct or bounded indirect references resolved by Ghidra%n%n");
                         continue;
                     }
 
                     writer.printf("- References:%n");
                     int emittedReferences = 0;
-                    for (Reference ref : refList) {
+                    for (ResolvedReference resolved : resolvedRefs) {
                         if (emittedReferences >= MAX_REFERENCES_PER_STRING) {
                             break;
                         }
 
-                        Address referenceAddress = ref.getFromAddress();
+                        Address referenceAddress = resolved.referenceAddress;
                         Function function = listing.getFunctionContaining(referenceAddress);
                         String functionLabel = function == null ? "<no function>" : function.getName();
-                        writer.printf("  - `%s` in `%s`%n", referenceAddress, functionLabel);
+                        if (resolved.viaLabel == null || resolved.viaLabel.isBlank()) {
+                            writer.printf("  - `%s` in `%s`%n", referenceAddress, functionLabel);
+                        }
+                        else {
+                            writer.printf("  - `%s` in `%s` via `%s`%n", referenceAddress, functionLabel, resolved.viaLabel);
+                        }
                         matchMap.computeIfAbsent(referenceAddress.toString(), key -> resolveReferenceEvidence(listing, decompiler, referenceAddress));
                         emittedReferences++;
                     }
-                    if (refList.size() > emittedReferences) {
-                        writer.printf("  - `... %d more references omitted ...`%n", refList.size() - emittedReferences);
+                    if (resolvedRefs.size() > emittedReferences) {
+                        writer.printf("  - `... %d more references omitted ...`%n", resolvedRefs.size() - emittedReferences);
                     }
                     writer.printf("%n");
 
@@ -201,6 +208,100 @@ public class ExportStringXrefs extends GhidraScript {
         }
 
         writeEvidenceJson(evidenceFile, currentProgram.getName(), probeName, timestamp, matchMap.values());
+    }
+
+    private List<ResolvedReference> collectResolvedReferences(Listing listing, ReferenceManager refManager, Data data) {
+        LinkedHashMap<String, ResolvedReference> resolved = new LinkedHashMap<>();
+        LinkedHashSet<Address> indirectSeeds = new LinkedHashSet<>();
+
+        for (Address candidate : collectStringCandidateAddresses(data)) {
+            collectReferencesAtAddress(listing, refManager, candidate, null, resolved, indirectSeeds);
+        }
+
+        int scannedIndirect = 0;
+        for (Address indirectSeed : indirectSeeds) {
+            if (scannedIndirect >= MAX_INDIRECT_DATA_ADDRESSES) {
+                break;
+            }
+
+            collectReferencesAtAddress(
+                listing,
+                refManager,
+                indirectSeed,
+                "data@" + indirectSeed,
+                resolved,
+                null
+            );
+            scannedIndirect++;
+        }
+
+        return new ArrayList<>(resolved.values());
+    }
+
+    private List<Address> collectStringCandidateAddresses(Data data) {
+        LinkedHashSet<Address> addresses = new LinkedHashSet<>();
+        Address start = data.getAddress();
+        addresses.add(start);
+
+        int span = Math.max(1, Math.min(data.getLength(), MAX_STRING_ADDRESS_SPAN));
+        for (int i = 1; i < span; i++) {
+            try {
+                addresses.add(start.addNoWrap(i));
+            }
+            catch (Exception ex) {
+                break;
+            }
+        }
+
+        Data containing = currentProgram.getListing().getDataContaining(start);
+        if (containing != null) {
+            addresses.add(containing.getAddress());
+        }
+
+        Data parent = data.getParent();
+        while (parent != null) {
+            addresses.add(parent.getAddress());
+            parent = parent.getParent();
+        }
+
+        return new ArrayList<>(addresses);
+    }
+
+    private void collectReferencesAtAddress(
+        Listing listing,
+        ReferenceManager refManager,
+        Address target,
+        String viaLabel,
+        LinkedHashMap<String, ResolvedReference> resolved,
+        Set<Address> indirectSeeds
+    ) {
+        ReferenceIterator refs = refManager.getReferencesTo(target);
+        while (refs.hasNext()) {
+            Reference ref = refs.next();
+            Address fromAddress = ref.getFromAddress();
+            if (fromAddress == null) {
+                continue;
+            }
+
+            Instruction instruction = listing.getInstructionContaining(fromAddress);
+            if (instruction != null || listing.getFunctionContaining(fromAddress) != null) {
+                ResolvedReference resolvedReference = new ResolvedReference();
+                resolvedReference.referenceAddress = fromAddress;
+                resolvedReference.viaLabel = viaLabel;
+                resolved.putIfAbsent(fromAddress.toString(), resolvedReference);
+                continue;
+            }
+
+            if (indirectSeeds == null) {
+                continue;
+            }
+
+            indirectSeeds.add(fromAddress);
+            Data containingData = listing.getDataContaining(fromAddress);
+            if (containingData != null) {
+                indirectSeeds.add(containingData.getAddress());
+            }
+        }
     }
 
     private MatchEvidence resolveReferenceEvidence(Listing listing, DecompInterface decompiler, Address referenceAddress) {
