@@ -1,0 +1,7 @@
+.sympath C:\Tools\Symbols\local-kd-executive-values-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!*Exp*Additional*Worker*
+dd nt!ExpAdditionalDelayedWorkerThreads L2
+.echo REGPROBE_LOCALKD_END
+q

@@ -1,0 +1,52 @@
+﻿{
+    "generated_utc":  "2026-04-06T20:11:35.7047567Z",
+    "kd_path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\kd.exe",
+    "symchk_path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+    "symchk_exit_code":  0,
+    "symbol_root":  "C:\\Tools\\Symbols\\local-kd-executive-values-20260406a",
+    "query_symbol":  "nt!*Exp*Additional*Worker*",
+    "debugger_commands":  [
+                              "x nt!*Exp*Additional*Worker*",
+                              "dd nt!ExpAdditionalDelayedWorkerThreads L2"
+                          ],
+    "effective_commands":  [
+                               ".sympath C:\\Tools\\Symbols\\local-kd-executive-values-20260406a",
+                               ".reload /f nt",
+                               ".echo REGPROBE_LOCALKD_BEGIN",
+                               "x nt!*Exp*Additional*Worker*",
+                               "dd nt!ExpAdditionalDelayedWorkerThreads L2",
+                               ".echo REGPROBE_LOCALKD_END",
+                               "q"
+                           ],
+    "used_custom_commands":  true,
+    "completed":  true,
+    "exit_code":  null,
+    "attached":  true,
+    "local_kernel_disabled":  false,
+    "symbol_reload_started":  false,
+    "query_symbol_seen":  true,
+    "command_file_exists":  true,
+    "log_exists":  true,
+    "stdout_exists":  true,
+    "stderr_exists":  true,
+    "symchk_log_exists":  false,
+    "symchk_log_is_directory":  true,
+    "uploads":  {
+                    "command_file":  {
+                                         "path":  "C:\\RegProbe-Diag\\debugger-smoke\\local-kd-executive-values-20260406a\\local-kd.txt",
+                                         "uri":  "http://10.0.2.2:8766/local-kd-executive-values-20260406a.txt"
+                                     },
+                    "log":  {
+                                "path":  "C:\\RegProbe-Diag\\debugger-smoke\\local-kd-executive-values-20260406a\\local-kd.log",
+                                "uri":  "http://10.0.2.2:8766/local-kd-executive-values-20260406a.log"
+                            },
+                    "stdout":  {
+                                   "path":  "C:\\RegProbe-Diag\\debugger-smoke\\local-kd-executive-values-20260406a\\stdout.txt",
+                                   "uri":  "http://10.0.2.2:8766/local-kd-executive-values-20260406a.stdout.txt"
+                               },
+                    "stderr":  {
+                                   "path":  "C:\\RegProbe-Diag\\debugger-smoke\\local-kd-executive-values-20260406a\\stderr.txt",
+                                   "uri":  "http://10.0.2.2:8766/local-kd-executive-values-20260406a.stderr.txt"
+                               }
+                }
+}

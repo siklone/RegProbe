@@ -31,6 +31,7 @@ def main() -> int:
     parser.add_argument("--smoke-timeout-seconds", type=int, default=180)
     parser.add_argument("--output-name", required=True)
     parser.add_argument("--query-symbol", default="nt!CmQueryValueKey")
+    parser.add_argument("--kd-command", action="append", default=[], help="Optional custom KD command(s) to run instead of the default x <query-symbol> probe.")
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -43,6 +44,11 @@ def main() -> int:
     bridge = args.bridge_base_url.rstrip("/")
     generated_name = f"guest-local-kd-smoke-{args.output_name}.ps1"
     generated_path = generated_dir / generated_name
+
+    kd_command_args = ""
+    if args.kd_command:
+        quoted_commands = ", ".join(quote_ps(command) for command in args.kd_command)
+        kd_command_args = f" -DebuggerCommands @({quoted_commands})"
 
     command_lines = [
         "$ErrorActionPreference = 'Stop'",
@@ -58,6 +64,7 @@ def main() -> int:
             f"-UploadBaseUrl {quote_ps(bridge)} "
             f"-TimeoutSeconds {args.smoke_timeout_seconds} "
             f"-QuerySymbol {quote_ps(args.query_symbol)}"
+            f"{kd_command_args}"
         ),
     ]
     generated_path.write_text("\n".join(command_lines) + "\n", encoding="utf-8")

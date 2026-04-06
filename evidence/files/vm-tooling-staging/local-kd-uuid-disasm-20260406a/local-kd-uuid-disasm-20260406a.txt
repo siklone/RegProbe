@@ -1,0 +1,9 @@
+.sympath C:\Tools\Symbols\local-kd-uuid-disasm-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!*Exp*Uuid*
+uf nt!ExpUuidLoadSequenceNumber
+uf nt!ExpUuidSaveSequenceNumber
+uf nt!ExpUuidSaveSequenceNumberIf
+.echo REGPROBE_LOCALKD_END
+q

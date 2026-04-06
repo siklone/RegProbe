@@ -5,7 +5,8 @@ param(
     [string]$SymbolRoot = '',
     [string]$UploadBaseUrl = '',
     [int]$TimeoutSeconds = 180,
-    [string]$QuerySymbol = 'nt!CmQueryValueKey'
+    [string]$QuerySymbol = 'nt!CmQueryValueKey',
+    [string[]]$DebuggerCommands = @()
 )
 
 $ErrorActionPreference = 'Stop'
@@ -88,14 +89,25 @@ $symchkArgs = @(
 )
 $symchkProc = Start-Process -FilePath $symchkPath -ArgumentList $symchkArgs -PassThru -Wait -WindowStyle Hidden
 
-@(
+$effectiveCommands = @(
     ('.sympath {0}' -f $SymbolRoot)
     '.reload /f nt'
     '.echo REGPROBE_LOCALKD_BEGIN'
-    ('x {0}' -f $QuerySymbol)
+)
+
+if ($DebuggerCommands -and $DebuggerCommands.Count -gt 0) {
+    $effectiveCommands += $DebuggerCommands
+}
+elseif (-not [string]::IsNullOrWhiteSpace($QuerySymbol)) {
+    $effectiveCommands += ('x {0}' -f $QuerySymbol)
+}
+
+$effectiveCommands += @(
     '.echo REGPROBE_LOCALKD_END'
     'q'
-) | Set-Content -Path $commandFile -Encoding ASCII
+)
+
+$effectiveCommands | Set-Content -Path $commandFile -Encoding ASCII
 
 $kdArgs = @('-kl', '-cf', $commandFile, '-logo', $logPath)
 $proc = Start-Process `
@@ -127,6 +139,9 @@ $summary = [ordered]@{
     symchk_exit_code = $symchkProc.ExitCode
     symbol_root = $SymbolRoot
     query_symbol = $QuerySymbol
+    debugger_commands = @($DebuggerCommands)
+    effective_commands = @($effectiveCommands)
+    used_custom_commands = [bool]($DebuggerCommands -and $DebuggerCommands.Count -gt 0)
     completed = $completed
     exit_code = if ($completed) { $proc.ExitCode } else { $null }
     attached = ($combinedText -match 'Connected to Windows')
