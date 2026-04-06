@@ -9,7 +9,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputName,
 
-    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst')]
+    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst')]
     [string]$TriggerProfile = 'custom',
 
     [string]$PowerShellCommand = '',
@@ -128,6 +128,54 @@ finally {
 }
 '@
         }
+        'executive-worker-burst' {
+            return @'
+try {
+    $diagPath = 'C:\RegProbe-Diag\executive-worker-burst'
+    New-Item -ItemType Directory -Path $diagPath -Force | Out-Null
+
+    cmd /c "tasklist /svc > `"$diagPath\tasklist.txt`"" | Out-Null
+    cmd /c "sc query type= service state= all > `"$diagPath\sc-all.txt`"" | Out-Null
+    cmd /c "wevtutil el > `"$diagPath\event-logs.txt`"" | Out-Null
+
+    Get-CimInstance Win32_Service |
+        Select-Object Name,State,StartMode,ProcessId |
+        ConvertTo-Json -Depth 4 |
+        Set-Content -Path (Join-Path $diagPath 'cim-services.json') -Encoding UTF8
+
+    $jobs = 1..4 | ForEach-Object {
+        Start-Job -Name ('exec-stress-' + $_) -ScriptBlock {
+            $deadline = (Get-Date).AddSeconds(12)
+            while ((Get-Date) -lt $deadline) {
+                Get-CimInstance Win32_Service | Out-Null
+                Get-ChildItem 'C:\Windows\System32' -File | Select-Object -First 1200 | Out-Null
+                Get-WinEvent -LogName 'System' -MaxEvents 80 | Out-Null
+                Start-Sleep -Milliseconds 400
+            }
+        }
+    }
+
+    Wait-Job -Job $jobs | Out-Null
+    $jobs |
+        Select-Object Id,Name,State,HasMoreData |
+        ConvertTo-Json -Depth 4 |
+        Set-Content -Path (Join-Path $diagPath 'stress-jobs.json') -Encoding UTF8
+    Remove-Job -Job $jobs -Force
+
+    Get-WinEvent -LogName 'System' -MaxEvents 120 |
+        Select-Object TimeCreated,Id,ProviderName,LevelDisplayName |
+        ConvertTo-Json -Depth 4 |
+        Set-Content -Path (Join-Path $diagPath 'system-events.json') -Encoding UTF8
+
+    Start-Sleep -Seconds 5
+}
+catch {
+}
+finally {
+    Remove-Item -Path $diagPath -Recurse -Force -ErrorAction SilentlyContinue
+}
+'@
+        }
         'custom' {
             if ([string]::IsNullOrWhiteSpace($CustomCommand)) {
                 throw 'PowerShellCommand is required when TriggerProfile=custom.'
@@ -158,29 +206,24 @@ $csvPath = Join-Path $OutputRoot ('{0}.csv' -f $OutputName)
 $hitsCsvPath = Join-Path $OutputRoot ('{0}.hits.csv' -f $OutputName)
 $summaryPath = Join-Path $OutputRoot 'run-summary.json'
 
-$probeArgs = @(
-    '-NoProfile',
-    '-ExecutionPolicy', 'Bypass',
-    '-File', $probeScript,
-    '-Mode', 'capture',
-    '-RegistryPath', $RegistryPath,
-    '-ValueName', $ValueName,
-    '-Prefix', $OutputName,
-    '-OutputDirectory', $OutputRoot,
-    '-PowerShellCommand', $triggerCommand
-)
+$probeParams = @{
+    Mode = 'capture'
+    RegistryPath = $RegistryPath
+    ValueName = $ValueName
+    Prefix = $OutputName
+    OutputDirectory = $OutputRoot
+    PowerShellCommand = $triggerCommand
+}
 
 if (@($MatchFragments).Count -gt 0) {
-    $probeArgs += '-MatchFragments'
-    $probeArgs += @($MatchFragments)
+    $probeParams.MatchFragments = @($MatchFragments)
 }
 
 if (@($ProcessNames).Count -gt 0) {
-    $probeArgs += '-ProcessNames'
-    $probeArgs += @($ProcessNames)
+    $probeParams.ProcessNames = @($ProcessNames)
 }
 
-& powershell.exe @probeArgs
+& $probeScript @probeParams
 
 $uploads = [ordered]@{}
 foreach ($entry in @(

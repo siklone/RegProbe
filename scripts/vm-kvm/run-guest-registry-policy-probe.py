@@ -13,6 +13,10 @@ def quote_ps(value: str) -> str:
     return "'" + value.replace("'", "''") + "'"
 
 
+def quote_ps_array(values: list[str]) -> str:
+    return ", ".join(quote_ps(value) for value in values)
+
+
 def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
@@ -77,11 +81,11 @@ def main() -> int:
         quote_ps(bridge),
     ]
 
-    for fragment in args.match_fragment:
-        probe_command.extend(["-MatchFragments", quote_ps(fragment)])
+    if args.match_fragment:
+        probe_command.extend(["-MatchFragments", quote_ps_array(args.match_fragment)])
 
-    for process_name in args.process_name:
-        probe_command.extend(["-ProcessNames", quote_ps(process_name)])
+    if args.process_name:
+        probe_command.extend(["-ProcessNames", quote_ps_array(args.process_name)])
 
     command_lines.append(" ".join(probe_command))
     guest_script = "\n".join(command_lines) + "\n"
