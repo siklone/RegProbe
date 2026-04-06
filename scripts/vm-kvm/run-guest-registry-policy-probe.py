@@ -48,8 +48,30 @@ def main() -> int:
     generated_dir = repo_root / "dist" / "kvm-generated"
     generated_dir.mkdir(parents=True, exist_ok=True)
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
+    run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+            "--repo-root",
+            str(repo_root),
+            "--domain",
+            args.domain,
+            "--connect",
+            args.connect,
+            "--bridge-base-url",
+            args.bridge_base_url,
+            "--upload-dir",
+            str(upload_dir),
+            "--guest-scripts-root",
+            guest_scripts_root := args.guest_scripts_root,
+            "--delay-ms",
+            args.delay_ms,
+            "--marker-name",
+            f"{args.output_name}-admin-shell-ready",
+        ],
+        cwd=repo_root,
+    )
 
-    guest_scripts_root = args.guest_scripts_root
     bridge = args.bridge_base_url.rstrip("/")
     generated_name = f"guest-registry-probe-{args.output_name}.ps1"
     generated_path = generated_dir / generated_name

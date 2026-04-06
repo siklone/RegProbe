@@ -9,6 +9,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from guest_bridge import ensure_guest_bridge
+
 
 def run(cmd: list[str], cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
@@ -68,8 +70,12 @@ def main() -> int:
         "url": args.bridge_url,
         "status": "",
         "error": "",
+        "autostarted": False,
     }
+    bridge_base_url = args.bridge_url.removesuffix("/healthz")
     try:
+        bridge_info = ensure_guest_bridge(repo_root=repo_root, bridge_base_url=bridge_base_url, upload_root=Path("/tmp/regprobe-bridge"))
+        bridge["autostarted"] = bool(bridge_info.get("launched"))
         bridge_resp = run(["curl", "-fsS", args.bridge_url])
         bridge["healthy"] = bridge_resp.stdout.strip() == "ok"
         bridge["status"] = bridge_resp.stdout.strip()
@@ -123,6 +129,8 @@ def main() -> int:
         repo_root / "scripts" / "vm-kvm" / "build-research-bootstrap-iso.sh",
         repo_root / "scripts" / "vm-kvm" / "attach-bootstrap-iso.sh",
         repo_root / "scripts" / "vm-kvm" / "serve-guest-bridge.py",
+        repo_root / "scripts" / "vm-kvm" / "guest_bridge.py",
+        repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py",
         repo_root / "scripts" / "vm-kvm" / "type-to-guest.py",
         repo_root / "scripts" / "vm-kvm" / "run-guest-registry-policy-probe.py",
         repo_root / "scripts" / "vm-kvm" / "run-guest-local-kd-smoke.py",

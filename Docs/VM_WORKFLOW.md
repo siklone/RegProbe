@@ -46,6 +46,7 @@ For the current KVM host-side transport map, see:
 - `scripts/vm-kvm/build-research-bootstrap-iso.sh`
 - `scripts/vm-kvm/attach-bootstrap-iso.sh`
 - `scripts/vm-kvm/serve-guest-bridge.py`
+- `scripts/vm-kvm/ensure-guest-admin-shell.py`
 - `scripts/vm-kvm/type-to-guest.py`
 - `scripts/vm-kvm/run-guest-registry-policy-probe.py`
 
@@ -219,6 +220,8 @@ cat registry-research-framework/audit/kvm-research-lane-health-latest.json
 ```
 
 Current expected `status` for a merge-ready KVM lane is `ok`.
+
+The current host runners are also expected to recover a missing elevated guest PowerShell session automatically before staging KVM guest helpers.
 
 Quoted guest-side Procmon replay from the host:
 

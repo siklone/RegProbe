@@ -5,12 +5,14 @@ This document defines the controller/agent validation loop for runtime registry 
 For the Linux/KVM runtime family, the same research intent applies but the transport is different:
 
 - host transport: `scripts/vm-kvm/serve-guest-bridge.py`
+- host admin-shell recovery: `scripts/vm-kvm/ensure-guest-admin-shell.py`
 - guest command injection: `scripts/vm-kvm/type-to-guest.py`
 - host-side quoted Procmon replay runner: `scripts/vm-kvm/run-guest-registry-policy-probe.py`
 - guest bootstrap payload: `scripts/vm-kvm/build-research-bootstrap-iso.sh`
 - host health audit: `scripts/vm-kvm/validate-research-lane.py`
 
 The current KVM lane does not depend on the VMware shared-folder controller loop. It stages guest scripts through the bootstrap ISO and uses the bridge for short command delivery, copy-back, and health evidence upload.
+Current host runners also reopen an elevated guest PowerShell session on demand before they stage guest helpers, so the visible console no longer needs to be kept manually in an admin state between runs.
 
 ## Purpose
 
