@@ -1,0 +1,14 @@
+.sympath C:\Tools\Symbols\local-kd-enablevirtualization-strings-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+du 0xfffff800`976f2330
+du 0xfffff800`976f2250
+du 0xfffff800`976f2160
+du 0xfffff800`976f2180
+du 0xfffff800`976f22f0
+du 0xfffff800`976f2280
+du 0xfffff800`976f22b0
+du 0xfffff800`976f23f0
+du 0xfffff800`976f21b0
+.echo REGPROBE_LOCALKD_END
+q

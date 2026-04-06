@@ -1,0 +1,451 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.016 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.015 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Mon Apr  6 13:35:47.054 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff800`96c00000 PsLoadedModuleList = 0xfffff800`97af50c0
+Debug session time: Mon Apr  6 13:35:47.196 2026 (UTC - 7:00)
+System Uptime: 0 days 1:34:36.891
+lkd> .sympath C:\Tools\Symbols\local-kd-enablevirtualization-slice-20260406a
+Symbol search path is: C:\Tools\Symbols\local-kd-enablevirtualization-slice-20260406a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-enablevirtualization-slice-20260406a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-enablevirtualization-slice-20260406a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> u nt!PsBootPhaseComplete L0x180
+nt!PsBootPhaseComplete:
+fffff800`973717b8 488bc4          mov     rax,rsp
+fffff800`973717bb 48895808        mov     qword ptr [rax+8],rbx
+fffff800`973717bf 48897010        mov     qword ptr [rax+10h],rsi
+fffff800`973717c3 48897818        mov     qword ptr [rax+18h],rdi
+fffff800`973717c7 55              push    rbp
+fffff800`973717c8 4155            push    r13
+fffff800`973717ca 4156            push    r14
+fffff800`973717cc 488d68b8        lea     rbp,[rax-48h]
+fffff800`973717d0 4881ec30010000  sub     rsp,130h
+fffff800`973717d7 488b05e28e6900  mov     rax,qword ptr [nt!_security_cookie (fffff800`97a0a6c0)]
+fffff800`973717de 4833c4          xor     rax,rsp
+fffff800`973717e1 48894520        mov     qword ptr [rbp+20h],rax
+fffff800`973717e5 4533f6          xor     r14d,r14d
+fffff800`973717e8 48c744245082008400 mov   qword ptr [rsp+50h],840082h
+fffff800`973717f1 488d05680b3800  lea     rax,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f2360)]
+fffff800`973717f8 448974244c      mov     dword ptr [rsp+4Ch],r14d
+fffff800`973717fd 4889442458      mov     qword ptr [rsp+58h],rax
+fffff800`97371802 4c8d4c244c      lea     r9,[rsp+4Ch]
+fffff800`97371807 488d05e20b3800  lea     rax,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f23f0)]
+fffff800`9737180e 4c89742440      mov     qword ptr [rsp+40h],r14
+fffff800`97371813 4889442468      mov     qword ptr [rsp+68h],rax
+fffff800`97371818 458d6e01        lea     r13d,[r14+1]
+fffff800`9737181c 488d058d093800  lea     rax,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f21b0)]
+fffff800`97371823 48c744246018001a00 mov   qword ptr [rsp+60h],1A0018h
+fffff800`9737182c 4889442478      mov     qword ptr [rsp+78h],rax
+fffff800`97371831 488d15f80a3800  lea     rdx,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f2330)]
+fffff800`97371838 488d05110a3800  lea     rax,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f2250)]
+fffff800`9737183f 44897594        mov     dword ptr [rbp-6Ch],r14d
+fffff800`97371843 48894588        mov     qword ptr [rbp-78h],rax
+fffff800`97371847 418d7630        lea     esi,[r14+30h]
+fffff800`9737184b 488d050e093800  lea     rax,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f2160)]
+fffff800`97371852 448975ac        mov     dword ptr [rbp-54h],r14d
+fffff800`97371856 488945d8        mov     qword ptr [rbp-28h],rax
+fffff800`9737185a 0f57c0          xorps   xmm0,xmm0
+fffff800`9737185d 488d051c093800  lea     rax,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f2180)]
+fffff800`97371864 48c744247096009800 mov   qword ptr [rsp+70h],980096h
+fffff800`9737186d 488945f0        mov     qword ptr [rbp-10h],rax
+fffff800`97371871 488d05780a3800  lea     rax,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f22f0)]
+fffff800`97371878 48894508        mov     qword ptr [rbp+8],rax
+fffff800`9737187c 0f1145c0        movups  xmmword ptr [rbp-40h],xmm0
+fffff800`97371880 48c745802e003000 mov     qword ptr [rbp-80h],30002Eh
+fffff800`97371888 c745d012001400  mov     dword ptr [rbp-30h],140012h
+fffff800`9737188f 44896de0        mov     dword ptr [rbp-20h],r13d
+fffff800`97371893 c745e828002a00  mov     dword ptr [rbp-18h],2A0028h
+fffff800`9737189a c745f802000000  mov     dword ptr [rbp-8],2
+fffff800`973718a1 c7450030003200  mov     dword ptr [rbp],320030h
+fffff800`973718a8 c7451003000000  mov     dword ptr [rbp+10h],3
+fffff800`973718af 4489742448      mov     dword ptr [rsp+48h],r14d
+fffff800`973718b4 e847c10000      call    nt!RtlQueryImageFileExecutionOptions (fffff800`9737da00)
+fffff800`973718b9 85c0            test    eax,eax
+fffff800`973718bb 781c            js      nt!PsBootPhaseComplete+0x121 (fffff800`973718d9)
+fffff800`973718bd 443974244c      cmp     dword ptr [rsp+4Ch],r14d
+fffff800`973718c2 418bce          mov     ecx,r14d
+fffff800`973718c5 8b05d1728600    mov     eax,dword ptr [nt!PspGlobalFlags (fffff800`97bd8b9c)]
+fffff800`973718cb 0f95c1          setne   cl
+fffff800`973718ce 83e0fe          and     eax,0FFFFFFFEh
+fffff800`973718d1 0bc1            or      eax,ecx
+fffff800`973718d3 8905c3728600    mov     dword ptr [nt!PspGlobalFlags (fffff800`97bd8b9c)],eax
+fffff800`973718d9 4c8d0d38758600  lea     r9,[nt!PsDefaultLoaderThreads (fffff800`97bd8e18)]
+fffff800`973718e0 488d1599093800  lea     rdx,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f2280)]
+fffff800`973718e7 e814c10000      call    nt!RtlQueryImageFileExecutionOptions (fffff800`9737da00)
+fffff800`973718ec 4c8d0d21758600  lea     r9,[nt!PsNoRemoteThreadBeforeProcessInit (fffff800`97bd8e14)]
+fffff800`973718f3 488d15b6093800  lea     rdx,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f22b0)]
+fffff800`973718fa e801c10000      call    nt!RtlQueryImageFileExecutionOptions (fffff800`9737da00)
+fffff800`973718ff 488d442450      lea     rax,[rsp+50h]
+fffff800`97371904 410fb6de        movzx   ebx,r14b
+fffff800`97371908 0f57c0          xorps   xmm0,xmm0
+fffff800`9737190b 488945a0        mov     qword ptr [rbp-60h],rax
+fffff800`9737190f bf40020000      mov     edi,240h
+fffff800`97371914 897590          mov     dword ptr [rbp-70h],esi
+fffff800`97371917 4c8d4590        lea     r8,[rbp-70h]
+fffff800`9737191b 4c897598        mov     qword ptr [rbp-68h],r14
+fffff800`9737191f 418bd5          mov     edx,r13d
+fffff800`97371922 897da8          mov     dword ptr [rbp-58h],edi
+fffff800`97371925 488d4c2440      lea     rcx,[rsp+40h]
+fffff800`9737192a f30f7f45b0      movdqu  xmmword ptr [rbp-50h],xmm0
+fffff800`9737192f e81c4df3ff      call    nt!ZwOpenKey (fffff800`972a6650)
+fffff800`97371934 85c0            test    eax,eax
+fffff800`97371936 0f888b010000    js      nt!PsBootPhaseComplete+0x30f (fffff800`97371ac7)
+fffff800`9737193c 488b4c2440      mov     rcx,qword ptr [rsp+40h]
+fffff800`97371941 488d442448      lea     rax,[rsp+48h]
+fffff800`97371946 4889442428      mov     qword ptr [rsp+28h],rax
+fffff800`9737194b 4c8d4dc0        lea     r9,[rbp-40h]
+fffff800`9737194f 41b802000000    mov     r8d,2
+fffff800`97371955 c744242010000000 mov     dword ptr [rsp+20h],10h
+fffff800`9737195d 488d542460      lea     rdx,[rsp+60h]
+fffff800`97371962 e8894df3ff      call    nt!ZwQueryValueKey (fffff800`972a66f0)
+fffff800`97371967 85c0            test    eax,eax
+fffff800`97371969 7814            js      nt!PsBootPhaseComplete+0x1c7 (fffff800`9737197f)
+fffff800`9737196b 837dc404        cmp     dword ptr [rbp-3Ch],4
+fffff800`9737196f 750e            jne     nt!PsBootPhaseComplete+0x1c7 (fffff800`9737197f)
+fffff800`97371971 837dc804        cmp     dword ptr [rbp-38h],4
+fffff800`97371975 7508            jne     nt!PsBootPhaseComplete+0x1c7 (fffff800`9737197f)
+fffff800`97371977 443975cc        cmp     dword ptr [rbp-34h],r14d
+fffff800`9737197b 410f45dd        cmovne  ebx,r13d
+fffff800`9737197f 488b4c2440      mov     rcx,qword ptr [rsp+40h]
+fffff800`97371984 33d2            xor     edx,edx
+fffff800`97371986 e885111300      call    nt!ObCloseHandle (fffff800`974a2b10)
+fffff800`9737198b 4c89742440      mov     qword ptr [rsp+40h],r14
+fffff800`97371990 84db            test    bl,bl
+fffff800`97371992 0f842f010000    je      nt!PsBootPhaseComplete+0x30f (fffff800`97371ac7)
+fffff800`97371998 488d442470      lea     rax,[rsp+70h]
+fffff800`9737199d 897590          mov     dword ptr [rbp-70h],esi
+fffff800`973719a0 0f57c0          xorps   xmm0,xmm0
+fffff800`973719a3 488945a0        mov     qword ptr [rbp-60h],rax
+fffff800`973719a7 4c8d4590        lea     r8,[rbp-70h]
+fffff800`973719ab 4c897598        mov     qword ptr [rbp-68h],r14
+fffff800`973719af 418bd5          mov     edx,r13d
+fffff800`973719b2 897da8          mov     dword ptr [rbp-58h],edi
+fffff800`973719b5 488d4c2440      lea     rcx,[rsp+40h]
+fffff800`973719ba f30f7f45b0      movdqu  xmmword ptr [rbp-50h],xmm0
+fffff800`973719bf e88c4cf3ff      call    nt!ZwOpenKey (fffff800`972a6650)
+fffff800`973719c4 8bd8            mov     ebx,eax
+fffff800`973719c6 85c0            test    eax,eax
+fffff800`973719c8 7905            jns     nt!PsBootPhaseComplete+0x217 (fffff800`973719cf)
+fffff800`973719ca 4c89742440      mov     qword ptr [rsp+40h],r14
+fffff800`973719cf 418bfe          mov     edi,r14d
+fffff800`973719d2 488d75e0        lea     rsi,[rbp-20h]
+fffff800`973719d6 488b4c2440      mov     rcx,qword ptr [rsp+40h]
+fffff800`973719db 4885c9          test    rcx,rcx
+fffff800`973719de 7431            je      nt!PsBootPhaseComplete+0x259 (fffff800`97371a11)
+fffff800`973719e0 8bc7            mov     eax,edi
+fffff800`973719e2 4c8d4dc0        lea     r9,[rbp-40h]
+fffff800`973719e6 41b802000000    mov     r8d,2
+fffff800`973719ec 488d1440        lea     rdx,[rax+rax*2]
+fffff800`973719f0 488d45d0        lea     rax,[rbp-30h]
+fffff800`973719f4 488d14d0        lea     rdx,[rax+rdx*8]
+fffff800`973719f8 488d442448      lea     rax,[rsp+48h]
+fffff800`973719fd 4889442428      mov     qword ptr [rsp+28h],rax
+fffff800`97371a02 c744242010000000 mov     dword ptr [rsp+20h],10h
+fffff800`97371a0a e8e14cf3ff      call    nt!ZwQueryValueKey (fffff800`972a66f0)
+fffff800`97371a0f 8bd8            mov     ebx,eax
+fffff800`97371a11 85db            test    ebx,ebx
+fffff800`97371a13 7812            js      nt!PsBootPhaseComplete+0x26f (fffff800`97371a27)
+fffff800`97371a15 837dc404        cmp     dword ptr [rbp-3Ch],4
+fffff800`97371a19 750c            jne     nt!PsBootPhaseComplete+0x26f (fffff800`97371a27)
+fffff800`97371a1b 837dc804        cmp     dword ptr [rbp-38h],4
+fffff800`97371a1f 7506            jne     nt!PsBootPhaseComplete+0x26f (fffff800`97371a27)
+fffff800`97371a21 443975cc        cmp     dword ptr [rbp-34h],r14d
+fffff800`97371a25 7411            je      nt!PsBootPhaseComplete+0x280 (fffff800`97371a38)
+fffff800`97371a27 488b0dda258500  mov     rcx,qword ptr [nt!MmWriteableSharedUserData (fffff800`97bc4008)]
+fffff800`97371a2e 8b06            mov     eax,dword ptr [rsi]
+fffff800`97371a30 f00fab81f0020000 lock bts dword ptr [rcx+2F0h],eax
+fffff800`97371a38 4103fd          add     edi,r13d
+fffff800`97371a3b 4883c618        add     rsi,18h
+fffff800`97371a3f 83ff03          cmp     edi,3
+fffff800`97371a42 7292            jb      nt!PsBootPhaseComplete+0x21e (fffff800`973719d6)
+fffff800`97371a44 e81b31e7ff      call    nt!Feature_ShadowAdmin__private_IsEnabledDeviceUsageNoInline (fffff800`971e4b64)
+fffff800`97371a49 85c0            test    eax,eax
+fffff800`97371a4b 7469            je      nt!PsBootPhaseComplete+0x2fe (fffff800`97371ab6)
+fffff800`97371a4d 488b4c2440      mov     rcx,qword ptr [rsp+40h]
+fffff800`97371a52 4885c9          test    rcx,rcx
+fffff800`97371a55 7427            je      nt!PsBootPhaseComplete+0x2c6 (fffff800`97371a7e)
+fffff800`97371a57 488d442448      lea     rax,[rsp+48h]
+fffff800`97371a5c 41b802000000    mov     r8d,2
+fffff800`97371a62 4889442428      mov     qword ptr [rsp+28h],rax
+fffff800`97371a67 4c8d4dc0        lea     r9,[rbp-40h]
+fffff800`97371a6b 488d5580        lea     rdx,[rbp-80h]
+fffff800`97371a6f c744242010000000 mov     dword ptr [rsp+20h],10h
+fffff800`97371a77 e8744cf3ff      call    nt!ZwQueryValueKey (fffff800`972a66f0)
+fffff800`97371a7c 8bd8            mov     ebx,eax
+fffff800`97371a7e 85db            test    ebx,ebx
+fffff800`97371a80 7824            js      nt!PsBootPhaseComplete+0x2ee (fffff800`97371aa6)
+fffff800`97371a82 837dc404        cmp     dword ptr [rbp-3Ch],4
+fffff800`97371a86 751e            jne     nt!PsBootPhaseComplete+0x2ee (fffff800`97371aa6)
+fffff800`97371a88 837dc804        cmp     dword ptr [rbp-38h],4
+fffff800`97371a8c 7518            jne     nt!PsBootPhaseComplete+0x2ee (fffff800`97371aa6)
+fffff800`97371a8e 837dcc02        cmp     dword ptr [rbp-34h],2
+fffff800`97371a92 7512            jne     nt!PsBootPhaseComplete+0x2ee (fffff800`97371aa6)
+fffff800`97371a94 488b056d258500  mov     rax,qword ptr [nt!MmWriteableSharedUserData (fffff800`97bc4008)]
+fffff800`97371a9b f00fbaa8f00200000c lock bts dword ptr [rax+2F0h],0Ch
+fffff800`97371aa4 eb10            jmp     nt!PsBootPhaseComplete+0x2fe (fffff800`97371ab6)
+fffff800`97371aa6 488b055b258500  mov     rax,qword ptr [nt!MmWriteableSharedUserData (fffff800`97bc4008)]
+fffff800`97371aad f00fbaa8f00200000b lock bts dword ptr [rax+2F0h],0Bh
+fffff800`97371ab6 488b4c2440      mov     rcx,qword ptr [rsp+40h]
+fffff800`97371abb 4885c9          test    rcx,rcx
+fffff800`97371abe 7407            je      nt!PsBootPhaseComplete+0x30f (fffff800`97371ac7)
+fffff800`97371ac0 33d2            xor     edx,edx
+fffff800`97371ac2 e849101300      call    nt!ObCloseHandle (fffff800`974a2b10)
+fffff800`97371ac7 e8c8020000      call    nt!PspIsDfssEnabled (fffff800`97371d94)
+fffff800`97371acc 8805ed3f8500    mov     byte ptr [nt!PsCpuFairShareEnabled (fffff800`97bc5abf)],al
+fffff800`97371ad2 e88926d1ff      call    nt!SC_DEVICE::GetStoragePropertyPost (fffff800`97084160)
+fffff800`97371ad7 488bc8          mov     rcx,rax
+fffff800`97371ada e8a178bdff      call    nt!PsGetServerSiloGlobals (fffff800`96f49380)
+fffff800`97371adf 488bd8          mov     rbx,rax
+fffff800`97371ae2 e821290000      call    nt!PspQueryForwardersEnabled (fffff800`97374408)
+fffff800`97371ae7 8883f8030000    mov     byte ptr [rbx+3F8h],al
+fffff800`97371aed 8b05a9708600    mov     eax,dword ptr [nt!PspGlobalFlags (fffff800`97bd8b9c)]
+fffff800`97371af3 83e0f7          and     eax,0FFFFFFF7h
+fffff800`97371af6 83c804          or      eax,4
+fffff800`97371af9 89059d708600    mov     dword ptr [nt!PspGlobalFlags (fffff800`97bd8b9c)],eax
+fffff800`97371aff 488b4d20        mov     rcx,qword ptr [rbp+20h]
+fffff800`97371b03 4833cc          xor     rcx,rsp
+fffff800`97371b06 e8153ef3ff      call    nt!_security_check_cookie (fffff800`972a5920)
+fffff800`97371b0b 4c8d9c2430010000 lea     r11,[rsp+130h]
+fffff800`97371b13 498b5b20        mov     rbx,qword ptr [r11+20h]
+fffff800`97371b17 498b7328        mov     rsi,qword ptr [r11+28h]
+fffff800`97371b1b 498b7b30        mov     rdi,qword ptr [r11+30h]
+fffff800`97371b1f 498be3          mov     rsp,r11
+fffff800`97371b22 415e            pop     r14
+fffff800`97371b24 415d            pop     r13
+fffff800`97371b26 5d              pop     rbp
+fffff800`97371b27 c3              ret
+fffff800`97371b28 cc              int     3
+fffff800`97371b29 cc              int     3
+fffff800`97371b2a cc              int     3
+fffff800`97371b2b cc              int     3
+fffff800`97371b2c cc              int     3
+fffff800`97371b2d cc              int     3
+fffff800`97371b2e cc              int     3
+fffff800`97371b2f cc              int     3
+nt!PsLocateSystemDlls:
+fffff800`97371b30 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff800`97371b35 4889742410      mov     qword ptr [rsp+10h],rsi
+fffff800`97371b3a 57              push    rdi
+fffff800`97371b3b 4883ec30        sub     rsp,30h
+fffff800`97371b3f b906000000      mov     ecx,6
+fffff800`97371b44 e82755d8ff      call    nt!ExVerifySuite (fffff800`970f7070)
+fffff800`97371b49 84c0            test    al,al
+fffff800`97371b4b 740e            je      nt!PsLocateSystemDlls+0x2b (fffff800`97371b5b)
+fffff800`97371b4d 8b05bd728600    mov     eax,dword ptr [nt!PsEmbeddedNTMask (fffff800`97bd8e10)]
+fffff800`97371b53 a801            test    al,1
+fffff800`97371b55 0f85aa000000    jne     nt!PsLocateSystemDlls+0xd5 (fffff800`97371c05)
+fffff800`97371b5b 33c9            xor     ecx,ecx
+fffff800`97371b5d e8e2a2b0ff      call    nt!VslGetNestedPageProtectionFlags (fffff800`96e7be44)
+fffff800`97371b62 8bf0            mov     esi,eax
+fffff800`97371b64 488d1dc5558600  lea     rbx,[nt!PspSystemDlls (fffff800`97bd7130)]
+fffff800`97371b6b 83e604          and     esi,4
+fffff800`97371b6e 33ff            xor     edi,edi
+fffff800`97371b70 83ff06          cmp     edi,6
+fffff800`97371b73 0f8d8c000000    jge     nt!PsLocateSystemDlls+0xd5 (fffff800`97371c05)
+fffff800`97371b79 4c8b13          mov     r10,qword ptr [rbx]
+fffff800`97371b7c 4d85d2          test    r10,r10
+fffff800`97371b7f 7461            je      nt!PsLocateSystemDlls+0xb2 (fffff800`97371be2)
+fffff800`97371b81 418b4208        mov     eax,dword ptr [r10+8]
+fffff800`97371b85 a820            test    al,20h
+fffff800`97371b87 743a            je      nt!PsLocateSystemDlls+0x93 (fffff800`97371bc3)
+fffff800`97371b89 488b05a0558600  mov     rax,qword ptr [nt!PspSystemDlls (fffff800`97bd7130)]
+fffff800`97371b90 41b901000000    mov     r9d,1
+fffff800`97371b96 4533c0          xor     r8d,r8d
+fffff800`97371b99 498bd2          mov     rdx,r10
+fffff800`97371b9c 488b4838        mov     rcx,qword ptr [rax+38h]
+fffff800`97371ba0 49894a38        mov     qword ptr [r10+38h],rcx
+fffff800`97371ba4 65488b042588010000 mov   rax,qword ptr gs:[188h]
+fffff800`97371bad 488b88b8000000  mov     rcx,qword ptr [rax+0B8h]
+fffff800`97371bb4 e83fdc1800      call    nt!PspMapSystemDll (fffff800`974ff7f8)
+fffff800`97371bb9 85c0            test    eax,eax
+fffff800`97371bbb 7925            jns     nt!PsLocateSystemDlls+0xb2 (fffff800`97371be2)
+fffff800`97371bbd 48832300        and     qword ptr [rbx],0
+fffff800`97371bc1 eb1f            jmp     nt!PsLocateSystemDlls+0xb2 (fffff800`97371be2)
+fffff800`97371bc3 2410            and     al,10h
+fffff800`97371bc5 498bca          mov     rcx,r10
+fffff800`97371bc8 f6d8            neg     al
+fffff800`97371bca 1bd2            sbb     edx,edx
+fffff800`97371bcc 23d6            and     edx,esi
+fffff800`97371bce e89d020000      call    nt!PspLocateSystemDll (fffff800`97371e70)
+fffff800`97371bd3 85c0            test    eax,eax
+fffff800`97371bd5 790b            jns     nt!PsLocateSystemDlls+0xb2 (fffff800`97371be2)
+fffff800`97371bd7 488b0b          mov     rcx,qword ptr [rbx]
+fffff800`97371bda 8b5108          mov     edx,dword ptr [rcx+8]
+fffff800`97371bdd f6c201          test    dl,1
+fffff800`97371be0 7508            jne     nt!PsLocateSystemDlls+0xba (fffff800`97371bea)
+fffff800`97371be2 ffc7            inc     edi
+fffff800`97371be4 4883c308        add     rbx,8
+fffff800`97371be8 eb86            jmp     nt!PsLocateSystemDlls+0x40 (fffff800`97371b70)
+fffff800`97371bea 488364242000    and     qword ptr [rsp+20h],0
+fffff800`97371bf0 b96b000000      mov     ecx,6Bh
+fffff800`97371bf5 4c63cf          movsxd  r9,edi
+fffff800`97371bf8 4863d0          movsxd  rdx,eax
+fffff800`97371bfb 448d4197        lea     r8d,[rcx-69h]
+fffff800`97371bff e88c9dd8ff      call    nt!KeBugCheckEx (fffff800`970fb990)
+fffff800`97371c04 cc              int     3
+fffff800`97371c05 488b5c2440      mov     rbx,qword ptr [rsp+40h]
+fffff800`97371c0a 33c0            xor     eax,eax
+fffff800`97371c0c 488b742448      mov     rsi,qword ptr [rsp+48h]
+fffff800`97371c11 4883c430        add     rsp,30h
+fffff800`97371c15 5f              pop     rdi
+fffff800`97371c16 c3              ret
+fffff800`97371c17 cc              int     3
+fffff800`97371c18 cc              int     3
+fffff800`97371c19 cc              int     3
+fffff800`97371c1a cc              int     3
+fffff800`97371c1b cc              int     3
+fffff800`97371c1c cc              int     3
+fffff800`97371c1d cc              int     3
+fffff800`97371c1e cc              int     3
+fffff800`97371c1f cc              int     3
+nt!PspDfssConfigurationChangeHandler:
+fffff800`97371c20 4883ec28        sub     rsp,28h
+fffff800`97371c24 e88f2fe7ff      call    nt!PspReadDfssConfigurationValues (fffff800`971e4bb8)
+fffff800`97371c29 4883c428        add     rsp,28h
+fffff800`97371c2d c3              ret
+fffff800`97371c2e cc              int     3
+fffff800`97371c2f cc              int     3
+fffff800`97371c30 cc              int     3
+fffff800`97371c31 cc              int     3
+fffff800`97371c32 cc              int     3
+fffff800`97371c33 cc              int     3
+fffff800`97371c34 cc              int     3
+fffff800`97371c35 cc              int     3
+fffff800`97371c36 cc              int     3
+fffff800`97371c37 cc              int     3
+nt!PspInitializeProtectedProcessParameters:
+fffff800`97371c38 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff800`97371c3d 4889742410      mov     qword ptr [rsp+10h],rsi
+fffff800`97371c42 57              push    rdi
+fffff800`97371c43 4883ec30        sub     rsp,30h
+fffff800`97371c47 0f1081d0040000  movups  xmm0,xmmword ptr [rcx+4D0h]
+fffff800`97371c4e 488bf9          mov     rdi,rcx
+fffff800`97371c51 41b85073536c    mov     r8d,6C537350h
+fffff800`97371c57 f30f7f81c8030000 movdqu  xmmword ptr [rcx+3C8h],xmm0
+fffff800`97371c5f 0fb781d0040000  movzx   eax,word ptr [rcx+4D0h]
+fffff800`97371c66 0f1089d0040000  movups  xmm1,xmmword ptr [rcx+4D0h]
+fffff800`97371c6d 6683c02a        add     ax,2Ah
+fffff800`97371c71 6603c0          add     ax,ax
+fffff800`97371c74 668981d8030000  mov     word ptr [rcx+3D8h],ax
+fffff800`97371c7b 6683c002        add     ax,2
+fffff800`97371c7f 0fb7d0          movzx   edx,ax
+fffff800`97371c82 668991da030000  mov     word ptr [rcx+3DAh],dx
+fffff800`97371c89 b900010000      mov     ecx,100h
+fffff800`97371c8e f30f7f4c2420    movdqu  xmmword ptr [rsp+20h],xmm1
+fffff800`97371c94 e857044000      call    nt!ExAllocatePool2 (fffff800`977720f0)
+fffff800`97371c99 33f6            xor     esi,esi
+fffff800`97371c9b 488987e0030000  mov     qword ptr [rdi+3E0h],rax
+fffff800`97371ca2 488bd8          mov     rbx,rax
+fffff800`97371ca5 4885c0          test    rax,rax
+fffff800`97371ca8 750a            jne     nt!PspInitializeProtectedProcessParameters+0x7c (fffff800`97371cb4)
+fffff800`97371caa b89a0000c0      mov     eax,0C000009Ah
+fffff800`97371caf e9c6000000      jmp     nt!PspInitializeProtectedProcessParameters+0x142 (fffff800`97371d7a)
+fffff800`97371cb4 488b05e59a3c00  mov     rax,qword ptr [nt!PspPathVarString+0x8 (fffff800`9773b7a0)]
+fffff800`97371cbb f20f1000        movsd   xmm0,mmword ptr [rax]
+fffff800`97371cbf f20f1103        movsd   mmword ptr [rbx],xmm0
+fffff800`97371cc3 0fb74008        movzx   eax,word ptr [rax+8]
+fffff800`97371cc7 66894308        mov     word ptr [rbx+8],ax
+fffff800`97371ccb 4883c30a        add     rbx,0Ah
+fffff800`97371ccf 440fb787d0040000 movzx   r8d,word ptr [rdi+4D0h]
+fffff800`97371cd7 488bcb          mov     rcx,rbx
+fffff800`97371cda 488b97d8040000  mov     rdx,qword ptr [rdi+4D8h]
+fffff800`97371ce1 e85adff4ff      call    nt!memcpy (fffff800`972bfc40)
+fffff800`97371ce6 488b05c39a3c00  mov     rax,qword ptr [nt!PspSystem32String+0x8 (fffff800`9773b7b0)]
+fffff800`97371ced 0fb797d0040000  movzx   edx,word ptr [rdi+4D0h]
+fffff800`97371cf4 0f1000          movups  xmm0,xmmword ptr [rax]
+fffff800`97371cf7 0f11041a        movups  xmmword ptr [rdx+rbx],xmm0
+fffff800`97371cfb 0fb74010        movzx   eax,word ptr [rax+10h]
+fffff800`97371cff 6689441a10      mov     word ptr [rdx+rbx+10h],ax
+fffff800`97371d04 6689741a12      mov     word ptr [rdx+rbx+12h],si
+fffff800`97371d09 488b05c09a3c00  mov     rax,qword ptr [nt!PspSystemDriveString+0x8 (fffff800`9773b7d0)]
+fffff800`97371d10 0f1000          movups  xmm0,xmmword ptr [rax]
+fffff800`97371d13 0f11441a14      movups  xmmword ptr [rdx+rbx+14h],xmm0
+fffff800`97371d18 f20f104810      movsd   xmm1,mmword ptr [rax+10h]
+fffff800`97371d1d 488b442428      mov     rax,qword ptr [rsp+28h]
+fffff800`97371d22 f20f114c1a24    movsd   mmword ptr [rdx+rbx+24h],xmm1
+fffff800`97371d28 8b08            mov     ecx,dword ptr [rax]
+fffff800`97371d2a 894c1a2c        mov     dword ptr [rdx+rbx+2Ch],ecx
+fffff800`97371d2e 6689741a30      mov     word ptr [rdx+rbx+30h],si
+fffff800`97371d33 488b0d869a3c00  mov     rcx,qword ptr [nt!PspSystemRootString+0x8 (fffff800`9773b7c0)]
+fffff800`97371d3a 0f1001          movups  xmm0,xmmword ptr [rcx]
+fffff800`97371d3d 0f11441a32      movups  xmmword ptr [rdx+rbx+32h],xmm0
+fffff800`97371d42 8b4110          mov     eax,dword ptr [rcx+10h]
+fffff800`97371d45 89441a42        mov     dword ptr [rdx+rbx+42h],eax
+fffff800`97371d49 0fb74114        movzx   eax,word ptr [rcx+14h]
+fffff800`97371d4d 6689441a46      mov     word ptr [rdx+rbx+46h],ax
+fffff800`97371d52 4803da          add     rbx,rdx
+fffff800`97371d55 440fb787d0040000 movzx   r8d,word ptr [rdi+4D0h]
+fffff800`97371d5d 488b97d8040000  mov     rdx,qword ptr [rdi+4D8h]
+fffff800`97371d64 488d4b48        lea     rcx,[rbx+48h]
+fffff800`97371d68 e8d3def4ff      call    nt!memcpy (fffff800`972bfc40)
+fffff800`97371d6d 0fb787d0040000  movzx   eax,word ptr [rdi+4D0h]
+fffff800`97371d74 89740348        mov     dword ptr [rbx+rax+48h],esi
+fffff800`97371d78 33c0            xor     eax,eax
+fffff800`97371d7a 488b5c2440      mov     rbx,qword ptr [rsp+40h]
+fffff800`97371d7f 488b742448      mov     rsi,qword ptr [rsp+48h]
+fffff800`97371d84 4883c430        add     rsp,30h
+fffff800`97371d88 5f              pop     rdi
+fffff800`97371d89 c3              ret
+fffff800`97371d8a cc              int     3
+fffff800`97371d8b cc              int     3
+fffff800`97371d8c cc              int     3
+fffff800`97371d8d cc              int     3
+fffff800`97371d8e cc              int     3
+fffff800`97371d8f cc              int     3
+fffff800`97371d90 cc              int     3
+fffff800`97371d91 cc              int     3
+fffff800`97371d92 cc              int     3
+fffff800`97371d93 cc              int     3
+nt!PspIsDfssEnabled:
+fffff800`97371d94 48895c2418      mov     qword ptr [rsp+18h],rbx
+fffff800`97371d99 55              push    rbp
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
