@@ -4,7 +4,7 @@
   "record_id": "system.executive-uuid-sequence-number",
   "tweak_id": "system.executive-uuid-sequence-number",
   "record_status": "draft",
-  "summary": "Draft candidate package for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and a dedicated tools-hardened lightweight ETW follow-up still stayed a clean runtime no-hit. That keeps the lane at Class B with a runtime_no_read and trigger-context gate.",
+  "summary": "Draft candidate package for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and both the earlier lightweight ETW lane plus a later KVM Procmon UUID / RPC / COM replay still stayed clean runtime no-hits. That keeps the lane at Class B with a runtime_no_read and trigger-context gate.",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
     "exact_quote_or_path": "session-manager-executive-baseline.txt:5 shows `UuidSequenceNumber    REG_DWORD    0x1819f30` under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive.",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "UuidSequenceNumber is a low-level Session Manager Executive value that appears to participate in early-boot UUID state handling.",
     "why_people_change_it": "Researchers track it when studying Executive boot activity, UUID state handling, and adjacent low-level registry behavior under Session Manager Executive.",
-    "tradeoffs_overview": "The lane now has baseline existence, an exact current-build ntoskrnl string hit, KVM full-analysis replays that still failed to recover a direct or bounded indirect ntoskrnl code reference, bounded early-boot ETL proof that the value is active in the same path, and a dedicated lightweight runtime lane that still stayed no-hit. That is strong enough for a research-gated package, but not enough for Class A.",
-    "professional_notes": "Win25H2Clean exports confirm UuidSequenceNumber exists under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive with an observed baseline value of 0x1819f30 (25272112 decimal in the earlier baseline export and 25272111 in the later 96-key phase-0 live batch). Residual static triage then found an exact current-build Unicode string hit for UuidSequenceNumber in ntoskrnl.exe and no exact hit in smss.exe. A later KVM PDB-backed full-analysis replay confirmed the exact Unicode string at 140038cd8 in current-build ntoskrnl.exe, but still recovered zero direct references for that string in the analyzed program. A follow-up rerun with the updated bounded indirect string-reference search still recovered zero direct or bounded indirect references for that same string, which keeps the static lane at value-exists proof rather than a bounded code-path proof. A bounded host-side ETL review from the successful Session Manager Executive boot extract showed System (PID 4) querying and later setting UuidSequenceNumber during early boot, proving adjacent runtime activity in the intended path. A dedicated tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 then ran both short and split UUID / RPC / COM trigger profiles and still stayed a clean no-hit with exact_query_hits = 0 and path_line_count = 0. A later thread-burst variant also failed to beat that canonical result. Supporting ReactOS source review places UuidSequenceNumber under the Rpc path rather than as direct proof for the Executive worker-thread pair, which helps explain why the adjacent Executive ETL activity is interesting but not yet decisive enough for Class A.",
+    "tradeoffs_overview": "The lane now has baseline existence, an exact current-build ntoskrnl string hit, KVM full-analysis replays that still failed to recover a direct or bounded indirect ntoskrnl code reference, bounded early-boot ETL proof that the value is active in the same path, and multiple runtime lanes that still stayed no-hit. That is strong enough for a research-gated package, but not enough for Class A.",
+    "professional_notes": "Win25H2Clean exports confirm UuidSequenceNumber exists under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive with an observed baseline value of 0x1819f30 (25272112 decimal in the earlier baseline export and 25272111 in the later 96-key phase-0 live batch). Residual static triage then found an exact current-build Unicode string hit for UuidSequenceNumber in ntoskrnl.exe and no exact hit in smss.exe. A later KVM PDB-backed full-analysis replay confirmed the exact Unicode string at 140038cd8 in current-build ntoskrnl.exe, but still recovered zero direct references for that string in the analyzed program. A follow-up rerun with the updated bounded indirect string-reference search still recovered zero direct or bounded indirect references for that same string, which keeps the static lane at value-exists proof rather than a bounded code-path proof. A bounded host-side ETL review from the successful Session Manager Executive boot extract showed System (PID 4) querying and later setting UuidSequenceNumber during early boot, proving adjacent runtime activity in the intended path. A dedicated tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 then ran both short and split UUID / RPC / COM trigger profiles and still stayed a clean no-hit with exact_query_hits = 0 and path_line_count = 0. A later KVM Procmon replay on the working `regprobe-win11-25h2-session` guest reused the UUID / RPC / COM trigger family, exported 286763 Procmon rows, and still found zero `Session Manager\\Executive` or `UuidSequenceNumber` hits. That KVM runtime pass also observed a live value of 2928393 on the working guest, so it strengthens the runtime no-hit story without replacing the earlier clean-baseline exports. A later thread-burst variant also failed to beat the canonical no-hit result. Supporting ReactOS source review places UuidSequenceNumber under the Rpc path rather than as direct proof for the Executive worker-thread pair, which helps explain why the adjacent Executive ETL activity is interesting but not yet decisive enough for Class A.",
     "targets": [
       {
         "target_id": "uuid-sequence-number",
@@ -184,6 +184,19 @@
       "strength": "medium"
     },
     {
+      "evidence_id": "vm-executive-uuid-kvm-procmon-runtime-20260406",
+      "kind": "procmon-trace",
+      "title": "KVM Procmon UUID / RPC / COM replay for UuidSequenceNumber",
+      "location": "evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt and evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json and research/notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md",
+      "summary": "A KVM Procmon replay of the UUID / RPC / COM trigger family exported 286763 rows on the working guest and still found zero `Session Manager\\Executive` or `UuidSequenceNumber` hits.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "vm-executive-uuid-thread-burst-20260330",
       "kind": "inference",
       "title": "Alternate thread-burst follow-up for UuidSequenceNumber",
@@ -216,11 +229,11 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "UuidSequenceNumber is backed by clean baseline existence, an exact current-build ntoskrnl string hit, KVM full-analysis replays that still did not recover a direct or bounded indirect ntoskrnl code reference, bounded early-boot ETL evidence that the same value is active under Session Manager Executive, and a dedicated tools-hardened lightweight ETW lane that still stayed a clean runtime no-hit. That is enough for a strong research package, but not enough for Class A on the current VMware baseline.",
+    "why": "UuidSequenceNumber is backed by clean baseline existence, an exact current-build ntoskrnl string hit, KVM full-analysis replays that still did not recover a direct or bounded indirect ntoskrnl code reference, bounded early-boot ETL evidence that the same value is active under Session Manager Executive, and multiple runtime lanes that still stayed clean no-hits. That is enough for a strong research package, but not enough for Class A on the current VMware baseline.",
     "blocking_issues": [
       "runtime_no_read",
       "trigger_context_unclear"
     ]
   },
-  "last_reviewed_utc": "2026-04-06T12:50:00Z"
+  "last_reviewed_utc": "2026-04-06T13:00:00Z"
 }

@@ -12,6 +12,7 @@ mkdir -p "$payload_dir/guest-tools" "$payload_dir/repo-scripts/ghidra" "$(dirnam
 cp "$repo_root/scripts/vm-kvm/bootstrap-research-lane.ps1" "$payload_dir/"
 cp "$repo_root/scripts/vm/guest-tools/"* "$payload_dir/guest-tools/"
 cp "$repo_root/scripts/vm/apply-defender-tooling-exclusions.ps1" "$payload_dir/repo-scripts/"
+cp "$repo_root/scripts/vm/registry-policy-probe.ps1" "$payload_dir/repo-scripts/"
 cp "$repo_root/scripts/vm/tool-health-smoke.ps1" "$payload_dir/repo-scripts/"
 cp "$repo_root/scripts/vm/install-dotnet-desktop-runtime.ps1" "$payload_dir/repo-scripts/"
 cp "$repo_root/registry-research-framework/tools/pdb-download.ps1" "$payload_dir/repo-scripts/"
