@@ -238,6 +238,77 @@ def import_external_evidence(
     }
 
 
+def build_normalized_bundle_from_external_evidence(bundle: dict[str, Any]) -> dict[str, Any]:
+    run_id = str(bundle.get("run_id") or "")
+    generated_utc = str(bundle.get("generated_utc") or now_utc())
+    input_path = str(bundle.get("input_path") or "")
+    source_tool = str(bundle.get("source_tool") or "imported")
+    importer_name = str(bundle.get("importer_name") or "ExternalEvidenceImporter")
+
+    event_refs: list[str] = []
+    events: list[dict[str, Any]] = []
+    for observation in bundle.get("observations", []):
+        if not isinstance(observation, dict):
+            continue
+
+        hive, key_path = split_hive(str(observation.get("key_path") or ""))
+        evidence_refs = [
+            str(ref)
+            for ref in observation.get("evidence_refs", [])
+            if isinstance(ref, str) and ref.strip()
+        ]
+        for ref in evidence_refs:
+            if ref not in event_refs:
+                event_refs.append(ref)
+
+        observed_data = observation.get("observed_data")
+        if observed_data is None:
+            data_text = None
+        elif isinstance(observed_data, str):
+            data_text = observed_data
+        else:
+            data_text = json.dumps(observed_data, ensure_ascii=False, sort_keys=True)
+
+        events.append(
+            {
+                "run_id": run_id,
+                "source_tool": "imported",
+                "capture_phase": "runtime",
+                "process_name": None,
+                "pid": None,
+                "operation": "imported-observation",
+                "timestamp_utc": generated_utc,
+                "hive": hive,
+                "key_path": key_path,
+                "value_name": observation.get("value_name"),
+                "value_type": observation.get("value_type"),
+                "data_text": data_text,
+                "result": source_tool,
+                "evidence_refs": evidence_refs,
+            }
+        )
+
+    if input_path and input_path not in event_refs:
+        event_refs.append(input_path)
+
+    return {
+        "$schema": "registry-research-framework/schemas/normalized-registry-bundle.schema.json",
+        "run_id": run_id,
+        "source_tool": "imported",
+        "capture_phase": "runtime",
+        "generated_utc": generated_utc,
+        "normalizer_name": f"{importer_name}Adapter",
+        "input_path": input_path,
+        "status": "ok",
+        "error_kind": None,
+        "errors": [],
+        "event_count": len(events),
+        "filtered_event_count": len(events),
+        "evidence_refs": event_refs,
+        "events": events,
+    }
+
+
 def materialize_external_research_artifacts(bundle: dict[str, Any], output_root: Path) -> dict[str, str]:
     output_root.mkdir(parents=True, exist_ok=True)
     note_root = output_root / "note-stubs"
@@ -247,6 +318,9 @@ def materialize_external_research_artifacts(bundle: dict[str, Any], output_root:
 
     bundle_path = output_root / "external-evidence-bundle.json"
     bundle_path.write_text(json.dumps(bundle, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    normalized_bundle = build_normalized_bundle_from_external_evidence(bundle)
+    normalized_bundle_path = output_root / "normalized-registry-bundle.json"
+    normalized_bundle_path.write_text(json.dumps(normalized_bundle, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     queue_path = output_root / "candidate-queue.csv"
     with queue_path.open("w", encoding="utf-8", newline="") as handle:
@@ -262,6 +336,7 @@ def materialize_external_research_artifacts(bundle: dict[str, Any], output_root:
                 "note_stub",
                 "record_seed",
                 "bundle_path",
+                "normalized_bundle_path",
             ],
         )
         writer.writeheader()
@@ -269,8 +344,8 @@ def materialize_external_research_artifacts(bundle: dict[str, Any], output_root:
             candidate_id = str(observation["candidate_id"])
             note_path = note_root / f"{candidate_id}.md"
             seed_path = seed_root / f"{candidate_id}.json"
-            note_path.write_text(build_note_stub(observation, bundle_path), encoding="utf-8")
-            seed_path.write_text(json.dumps(build_record_seed(observation, bundle), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            note_path.write_text(build_note_stub(observation, bundle_path, normalized_bundle_path), encoding="utf-8")
+            seed_path.write_text(json.dumps(build_record_seed(observation, bundle, normalized_bundle_path), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             writer.writerow(
                 {
                     "candidate_id": candidate_id,
@@ -282,18 +357,20 @@ def materialize_external_research_artifacts(bundle: dict[str, Any], output_root:
                     "note_stub": note_path.as_posix(),
                     "record_seed": seed_path.as_posix(),
                     "bundle_path": bundle_path.as_posix(),
+                    "normalized_bundle_path": normalized_bundle_path.as_posix(),
                 }
             )
 
     return {
         "bundle_path": bundle_path.as_posix(),
+        "normalized_bundle_path": normalized_bundle_path.as_posix(),
         "candidate_queue": queue_path.as_posix(),
         "note_root": note_root.as_posix(),
         "record_seed_root": seed_root.as_posix(),
     }
 
 
-def build_note_stub(observation: dict[str, Any], bundle_path: Path) -> str:
+def build_note_stub(observation: dict[str, Any], bundle_path: Path, normalized_bundle_path: Path) -> str:
     return (
         f"# Imported Candidate: {observation['candidate_id']}\n\n"
         f"- Source tool: `{observation.get('source_tool')}`\n"
@@ -302,11 +379,12 @@ def build_note_stub(observation: dict[str, Any], bundle_path: Path) -> str:
         f"- Value type: `{observation.get('value_type')}`\n"
         f"- Confidence: `{observation.get('confidence')}`\n"
         f"- External bundle: `{bundle_path.as_posix()}`\n\n"
+        f"- Normalized bundle: `{normalized_bundle_path.as_posix()}`\n\n"
         "Needs documentation-first review before any record promotion or tweak ingestion.\n"
     )
 
 
-def build_record_seed(observation: dict[str, Any], bundle: dict[str, Any]) -> dict[str, Any]:
+def build_record_seed(observation: dict[str, Any], bundle: dict[str, Any], normalized_bundle_path: Path) -> dict[str, Any]:
     hive, key_path = split_hive(str(observation["key_path"]))
     return {
         "tweak_id": observation["candidate_id"],
@@ -327,6 +405,7 @@ def build_record_seed(observation: dict[str, Any], bundle: dict[str, Any]) -> di
         "evidence": {
             "external_bundle": bundle.get("input_path"),
             "bundle_run_id": bundle.get("run_id"),
+            "normalized_bundle_path": normalized_bundle_path.as_posix(),
             "evidence_refs": observation.get("evidence_refs", []),
         },
         "notes": [

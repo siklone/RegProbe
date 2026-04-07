@@ -10,7 +10,7 @@ This folder holds the v3.1 machine pipeline for undocumented registry research.
 - `config/` stores batch, routing, decision-tree defaults, and tweak-to-VM runner mappings.
 - `docs/` explains the v3.1 rules without changing the existing human-facing research record schema.
 - `schemas/normalized-registry-*.schema.json` defines the compact ETW/Procmon/imported registry event contract used by new runtime normalizers.
-- `tools/import-external-evidence.py` converts supported external exports into a normalized bundle plus candidate queue, note stubs, and record seeds without touching the tweak catalog.
+- `tools/import-external-evidence.py` converts supported external exports into an importer-specific bundle, a canonical `normalized-registry-bundle.json`, plus candidate queue, note stubs, and record seeds without touching the tweak catalog.
 - `winopt research validate-json-tweaks` emits a machine-readable invalid-definition report for JSON tweak batches without loading them into the app catalog.
 
 Canonical imported artifacts live under `evidence/files/`. The published research surface stays under `research/`.

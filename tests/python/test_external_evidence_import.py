@@ -52,11 +52,22 @@ class ExternalEvidenceImportTests(unittest.TestCase):
             self.assertEqual(bundle["source_tool"], "osquery")
             self.assertEqual(bundle["observation_count"], 1)
             self.assertTrue(Path(outputs["bundle_path"]).exists())
+            self.assertTrue(Path(outputs["normalized_bundle_path"]).exists())
             self.assertTrue(Path(outputs["candidate_queue"]).exists())
 
             queue_text = Path(outputs["candidate_queue"]).read_text(encoding="utf-8")
             self.assertIn("HideRecommendedSection", queue_text)
             self.assertIn("external-evidence-bundle.json", queue_text)
+            self.assertIn("normalized-registry-bundle.json", queue_text)
+
+            normalized_bundle = json.loads(Path(outputs["normalized_bundle_path"]).read_text(encoding="utf-8"))
+            self.assertEqual(normalized_bundle["source_tool"], "imported")
+            self.assertEqual(normalized_bundle["capture_phase"], "runtime")
+            self.assertEqual(normalized_bundle["event_count"], 1)
+            self.assertEqual(normalized_bundle["events"][0]["operation"], "imported-observation")
+            self.assertEqual(normalized_bundle["events"][0]["hive"], "HKLM")
+            self.assertEqual(normalized_bundle["events"][0]["key_path"], r"SOFTWARE\Policies\Microsoft\Windows\Explorer")
+            self.assertEqual(normalized_bundle["events"][0]["value_name"], "HideRecommendedSection")
 
             seed_root = Path(outputs["record_seed_root"])
             seeds = list(seed_root.glob("*.json"))
@@ -64,6 +75,7 @@ class ExternalEvidenceImportTests(unittest.TestCase):
             seed_payload = json.loads(seeds[0].read_text(encoding="utf-8"))
             self.assertEqual(seed_payload["status"], "imported-seed")
             self.assertEqual(seed_payload["setting"]["targets"][0]["hive"], "HKLM")
+            self.assertEqual(seed_payload["evidence"]["normalized_bundle_path"], outputs["normalized_bundle_path"])
 
 
 if __name__ == "__main__":
