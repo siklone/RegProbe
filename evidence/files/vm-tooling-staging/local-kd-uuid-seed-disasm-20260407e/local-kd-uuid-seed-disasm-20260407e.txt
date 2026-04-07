@@ -1,0 +1,9 @@
+.sympath C:\Tools\Symbols\local-kd-uuid-seed-disasm-20260407e
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!*Uuid*Seed*
+uf nt!NtSetUuidSeed
+uf nt!ZwSetUuidSeed
+uf nt!CmpUuidCreate
+.echo REGPROBE_LOCALKD_END
+q

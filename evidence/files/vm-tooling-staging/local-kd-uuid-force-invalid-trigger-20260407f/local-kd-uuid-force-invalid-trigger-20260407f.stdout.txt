@@ -1,0 +1,83 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.016 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.016 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 05:19:54.747 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff800`b6a00000 PsLoadedModuleList = 0xfffff800`b78f50c0
+Debug session time: Tue Apr  7 05:19:54.903 2026 (UTC - 7:00)
+System Uptime: 0 days 0:40:43.611
+lkd> .sympath C:\Tools\Symbols\local-kd-uuid-force-invalid-trigger-20260407f
+Symbol search path is: C:\Tools\Symbols\local-kd-uuid-force-invalid-trigger-20260407f
+Expanded Symbol search path is: c:\tools\symbols\local-kd-uuid-force-invalid-trigger-20260407f
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-uuid-force-invalid-trigger-20260407f
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> .echo REGPROBE_UUID_FORCE_BEFORE
+REGPROBE_UUID_FORCE_BEFORE
+lkd> dd nt!ExpUuidSequenceNumber L1
+fffff800`b79d7078  002caf1b
+lkd> db nt!ExpUuidSequenceNumberValid L1
+fffff800`b79d703c  01                                               .
+lkd> db nt!ExpUuidSequenceNumberNotSaved L1
+fffff800`b79d7014  00                                               .
+lkd> eb nt!ExpUuidSequenceNumberValid 00
+lkd> .echo REGPROBE_UUID_FORCE_ARMED
+REGPROBE_UUID_FORCE_ARMED
+lkd> db nt!ExpUuidSequenceNumberValid L1
+fffff800`b79d703c  00                                               .
+lkd> .sleep 12000
+lkd> .echo REGPROBE_UUID_FORCE_AFTER
+REGPROBE_UUID_FORCE_AFTER
+lkd> dd nt!ExpUuidSequenceNumber L1
+fffff800`b79d7078  002caf1c
+lkd> db nt!ExpUuidSequenceNumberValid L1
+fffff800`b79d703c  01                                               .
+lkd> db nt!ExpUuidSequenceNumberNotSaved L1
+fffff800`b79d7014  00                                               .
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

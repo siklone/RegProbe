@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T02:10:17.066740Z",
+  "generated_utc": "2026-04-07T02:25:52.460767Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 310,
@@ -91191,13 +91191,13 @@
         }
       },
       "source_file": "research/records/system.executive-uuid-sequence-number.json",
-      "source_file_sha256": "62c5f71dd6172064cf57c904afe7d21e2860f50a50bcbd9f95285be02b08ea32",
-      "source_file_size_bytes": 30896,
+      "source_file_sha256": "21c5d2ac14e73f83628d7d4751e1721c95323e4b56c86217e78217930d697c86",
+      "source_file_size_bytes": 35265,
       "name": "Executive UUID Sequence Number",
       "category": "System",
       "area": "Session Manager Executive Registry",
       "scope": "device",
-      "summary": "Validated decision-gated record for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and later KVM local-KD follow-ups resolved both the live UUID symbol family and the current-build load/save path that opens a Session Manager Executive persisted-state location and queries or sets the `UuidSequenceNumber` value name. A deeper KVM local-KD value dump also showed live current-build in-memory UUID state on the working guest, and a later trigger-state follow-up wrapped the existing UUID / RPC / COM burst between two local-KD snapshots but still observed no delta: `ExpUuidSequenceNumber = 0x002caf1b`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0` before and after the trigger. A subsequent API-level local-KD disassembly then showed that `ExUuidCreate` funnels into `ExpUuidGetValues`, `NtAllocateUuids` funnels into `ExpAllocateUuids`, and `ExpAllocateUuids` can update `ExpUuidSequenceNumber` and set `ExpUuidSequenceNumberNotSaved = 1` before `ExpUuidSaveSequenceNumberIf` runs. A later hardened-runner KVM Procmon replay then ensured an elevated guest shell, exported `240500` rows under the alternate Executive burst, and still returned zero `Session Manager\\Executive` or `UuidSequenceNumber` hits. Runtime ETW and KVM Procmon lanes therefore still stay clean no-hits, but the local-KD API path now points to direct UUID allocation APIs as the better next trigger family, so the lane remains Class B with a runtime_no_read gate rather than a path-identity gate.",
+      "summary": "Validated decision-gated record for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and later KVM local-KD follow-ups resolved both the live UUID symbol family and the current-build load/save path that opens a Session Manager Executive persisted-state location and queries or sets the `UuidSequenceNumber` value name. A deeper KVM local-KD value dump also showed live current-build in-memory UUID state on the working guest, and a later trigger-state follow-up wrapped the existing UUID / RPC / COM burst between two local-KD snapshots but still observed no delta: `ExpUuidSequenceNumber = 0x002caf1b`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0` before and after the trigger. A subsequent API-level local-KD disassembly then showed that `ExUuidCreate` funnels into `ExpUuidGetValues`, `NtAllocateUuids` funnels into `ExpAllocateUuids`, and `ExpAllocateUuids` can update `ExpUuidSequenceNumber` and set `ExpUuidSequenceNumberNotSaved = 1` before `ExpUuidSaveSequenceNumberIf` runs. A direct user-mode API trigger built around repeated `UuidCreateSequential` plus `NtAllocateUuids` calls then also completed cleanly and still produced no state delta in the same local-KD snapshot lane. A follow-up seed and Config Manager disassembly then showed `NtSetUuidSeed` as a privileged seed-write path with `SeAccessCheck` and cache updates, while `CmpUuidCreate` turned out to be only a retry wrapper around `ExUuidCreate`. A later forced-invalid local-KD follow-up then cleared `ExpUuidSequenceNumberValid` to `0`, reran the same direct API burst, and observed `ExpUuidSequenceNumber` advance from `0x002caf1b` to `0x002caf1c` while `ExpUuidSequenceNumberValid` returned to `1` and `ExpUuidSequenceNumberNotSaved` stayed `0`. A later hardened-runner KVM Procmon replay then ensured an elevated guest shell, exported `240500` rows under the alternate Executive burst, and still returned zero `Session Manager\\Executive` or `UuidSequenceNumber` hits. Runtime ETW and KVM Procmon lanes therefore still stay clean no-hits, but the lane now has a reproducible state-transition trigger once the live validity bit is cleared under local-KD, so the remaining gap is direct observation of the registry read rather than uncertainty about the current-build trigger surface.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -91205,7 +91205,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "UuidSequenceNumber is backed by clean baseline existence, an exact current-build ntoskrnl string hit, KVM full-analysis replays that still did not recover a direct or bounded indirect ntoskrnl code reference, bounded early-boot ETL evidence that the same value is active under Session Manager Executive, a live KVM local-KD wildcard that resolves the current-build UUID load/save/state symbol family in the running guest, a deeper local-KD disassembly that ties the current-build code path to a Session Manager Executive persisted-state location plus the exact `UuidSequenceNumber` value name, and live local-KD value snapshots that show populated current-build UUID state with `Valid = 1` and `NotSaved = 0` on the working guest. A later trigger-state follow-up showed that the existing UUID / RPC / COM burst does not move those observed state variables, while a subsequent API-level local-KD disassembly showed that `ExUuidCreate` and `NtAllocateUuids` are the current-build allocation paths that sit directly on top of the mutable UUID sequence-state machinery. Multiple runtime lanes still stayed clean no-hits across both ETW and KVM Procmon transport shapes, including a hardened-runner KVM Executive-burst replay that ensured an elevated guest shell automatically and still surfaced zero intended-path hits. That is enough for a strong research package, but not enough for Class A until the live runtime read is observed directly.",
+        "why": "UuidSequenceNumber is backed by clean baseline existence, an exact current-build ntoskrnl string hit, KVM full-analysis replays that still did not recover a direct or bounded indirect ntoskrnl code reference, bounded early-boot ETL evidence that the same value is active under Session Manager Executive, a live KVM local-KD wildcard that resolves the current-build UUID load/save/state symbol family in the running guest, a deeper local-KD disassembly that ties the current-build code path to a Session Manager Executive persisted-state location plus the exact `UuidSequenceNumber` value name, and live local-KD value snapshots that show populated current-build UUID state with `Valid = 1` and `NotSaved = 0` on the working guest. A later trigger-state follow-up showed that the existing UUID / RPC / COM burst does not move those observed state variables, a subsequent API-level local-KD disassembly showed that `ExUuidCreate` and `NtAllocateUuids` are the current-build allocation paths that sit directly on top of the mutable UUID sequence-state machinery, a direct API burst built from those same user-mode allocation calls still produced no state delta while the cache stayed valid, a seed / Config Manager follow-up showed that `NtSetUuidSeed` and `CmpUuidCreate` are adjacent non-winning surfaces rather than the missing reader proof, and a forced-invalid local-KD follow-up then showed that the same direct API burst does become a winning state-transition trigger once `ExpUuidSequenceNumberValid` is cleared first. Multiple runtime lanes still stayed clean no-hits across both ETW and KVM Procmon transport shapes, including a hardened-runner KVM Executive-burst replay that ensured an elevated guest shell automatically and still surfaced zero intended-path hits. That is enough for a strong research package, but not enough for Class A until the live runtime read is observed directly.",
         "blocking_issues": [
           "runtime_no_read"
         ]
@@ -91497,6 +91497,48 @@
           "supports": [
             "behavior",
             "risk",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-executive-uuid-kvm-local-kd-api-trigger-20260407",
+          "kind": "vm-test",
+          "title": "Linux KVM local-KD direct API trigger follow-up for UuidSequenceNumber",
+          "location": "evidence/files/vm-tooling-staging/local-kd-uuid-api-trigger-state-20260407d/local-kd-uuid-api-trigger-state-20260407d-summary.json and evidence/files/vm-tooling-staging/local-kd-uuid-api-trigger-state-20260407d/local-kd-uuid-api-trigger-state-20260407d.log and research/notes/system-executive-uuid-sequence-number-kvm-local-kd-api-trigger-follow-up-20260407.md",
+          "summary": "A debugger-assisted KVM local-KD follow-up ran repeated `UuidCreateSequential` and `NtAllocateUuids` calls from guest PowerShell with clean trigger exit code 0, but still observed no state delta: `ExpUuidSequenceNumber = 0x002caf1b`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0` before and after the direct API burst.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-executive-uuid-kvm-local-kd-seed-20260407",
+          "kind": "vm-test",
+          "title": "Linux KVM local-KD seed and Config Manager follow-up for UuidSequenceNumber",
+          "location": "evidence/files/vm-tooling-staging/local-kd-uuid-seed-disasm-20260407e/local-kd-uuid-seed-disasm-20260407e-summary.json and evidence/files/vm-tooling-staging/local-kd-uuid-seed-disasm-20260407e/local-kd-uuid-seed-disasm-20260407e.log and research/notes/system-executive-uuid-sequence-number-kvm-local-kd-seed-follow-up-20260407.md",
+          "summary": "A debugger-assisted KVM local-KD follow-up showed `NtSetUuidSeed` as a privileged seed-write path with `SeAccessCheck`, cache writes, and `ExpUuidCacheValid` updates, while `CmpUuidCreate` resolved as a retry wrapper around `ExUuidCreate` rather than a separate persisted-state reader for `UuidSequenceNumber`.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-executive-uuid-kvm-local-kd-force-invalid-20260407",
+          "kind": "vm-test",
+          "title": "Linux KVM local-KD forced-invalid trigger follow-up for UuidSequenceNumber",
+          "location": "evidence/files/vm-tooling-staging/local-kd-uuid-force-invalid-trigger-20260407f/local-kd-uuid-force-invalid-trigger-20260407f-summary.json and evidence/files/vm-tooling-staging/local-kd-uuid-force-invalid-trigger-20260407f/local-kd-uuid-force-invalid-trigger-20260407f.log and research/notes/system-executive-uuid-sequence-number-kvm-local-kd-force-invalid-follow-up-20260407.md",
+          "summary": "A debugger-assisted KVM local-KD follow-up forced `ExpUuidSequenceNumberValid` to `0`, reran the direct `UuidCreateSequential` plus `NtAllocateUuids` burst, and observed `ExpUuidSequenceNumber` advance from `0x002caf1b` to `0x002caf1c` while `ExpUuidSequenceNumberValid` returned to `1` and `ExpUuidSequenceNumberNotSaved` stayed `0`.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "runtime-proof",
             "version-scope"
           ],
           "origin": "VM test / probe"
