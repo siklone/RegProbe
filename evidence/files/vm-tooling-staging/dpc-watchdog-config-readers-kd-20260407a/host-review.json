@@ -8,6 +8,14 @@
       "function": "KeQueryDpcWatchdogConfiguration",
       "behavior": "Copies watchdog configuration fields into the output block only when the corresponding globals are non-zero."
     },
+    "validator_path": {
+      "function": "KiValidateDpcWatchdogConfiguration",
+      "behavior": "Backfills missing watchdog configuration fields from the live globals and validates ordering/range constraints before returning success."
+    },
+    "updater_path": {
+      "function": "KiUpdateProcessorDpcWatchdogConfiguration",
+      "behavior": "Delegates directly to KiApplyProcessorDpcLimits; it is not the seeding caller for the profile globals."
+    },
     "profile_fields": [
       "KeDpcWatchdogProfileSingleDpcThresholdMs",
       "KeDpcWatchdogProfileCumulativeDpcThresholdMs",
@@ -21,8 +29,8 @@
     ]
   },
   "interpretation": {
-    "current_state": "The current build has a real reader path for the DPC watchdog profile cluster, and that reader treats zero-valued globals as absent configuration fields.",
-    "remaining_gap": "A registry seeding or initializer path for the globals is still missing.",
-    "strength": "This upgrades the cluster from docs-plus-live-state conflict to a real reader-backed current-build lane."
+    "current_state": "The current build has both a reader and a validator path for the DPC watchdog profile cluster, and both treat the live globals as default/fallback configuration state.",
+    "remaining_gap": "A registry seeding or initializer path for the globals is still missing; KiUpdateProcessorDpcWatchdogConfiguration only delegates to KiApplyProcessorDpcLimits.",
+    "strength": "This upgrades the cluster from docs-plus-live-state conflict to a real reader-and-validator-backed current-build lane."
   }
 }
