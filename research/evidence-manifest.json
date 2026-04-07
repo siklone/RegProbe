@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T23:20:58.843207Z",
+  "generated_utc": "2026-04-07T23:30:58.193608Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 316,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T23:20:58.113335Z",
+      "generated_utc": "2026-04-07T23:30:57.377948Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18584,6 +18584,12 @@
               "url": "Docs/system/system.md",
               "kind": "repo-doc",
               "summary": "Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `Session Manager\\Kernel`."
+            },
+            {
+              "title": "Adjacent DPC scheduler records already prove NtSetSystemInformation setter/query lineage",
+              "url": "research/records/system.kernel-adjust-dpc-threshold.review.json and research/records/system.kernel-dpc-queue-depth.review.json",
+              "kind": "repo-doc",
+              "summary": "Existing deprecated DPC scheduler records already cite decompilation-backed proof that `NtSetSystemInformation` populates adjacent DPC globals like `KiAdjustDpcThreshold` and `K..."
             }
           ]
         },
@@ -18620,8 +18626,8 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-control-cluster.json",
-      "source_file_sha256": "352e329bf44ec1f7450d57045c1063ff2389f51785460abf81f99f3ae38d0ff5",
-      "source_file_size_bytes": 15619,
+      "source_file_sha256": "cceeb815b3ef07fd3f908d97b244fe8a3167b65d22793d97e06110aaee92e651",
+      "source_file_size_bytes": 17067,
       "name": "Session Manager Kernel DPC Watchdog Control Timeout Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Control Timeouts",
@@ -18634,7 +18640,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, concrete current-build reader/writer proof, a narrowed runtime caller story via `NtSetSystemInformation`, and direct live value reads that show the sampled control globals are zero on the running build. It is not ready for validation because no current-build persisted registry caller has been shown to feed values into the writer path and the live state conflicts with the repo-doc defaults.",
+        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, concrete current-build reader/writer proof, direct live value reads that show the sampled control globals are zero on the running build, and a narrowed runtime lineage that now aligns with existing `NtSetSystemInformation`-backed DPC scheduler records. It is not ready for validation because no current-build persisted registry caller has been shown to feed values into the writer path and the live state conflicts with the repo-doc defaults.",
         "blocking_issues": [
           "live-defaults-conflict-docs",
           "no-current-build-registry-seeding-path",
@@ -18875,6 +18881,20 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "repo-dpc-system-information-lineage-20260408",
+          "kind": "repo-doc",
+          "title": "Adjacent DPC scheduler records already prove NtSetSystemInformation setter/query lineage",
+          "location": "research/records/system.kernel-adjust-dpc-threshold.review.json and research/records/system.kernel-dpc-queue-depth.review.json",
+          "summary": "Existing deprecated DPC scheduler records already cite decompilation-backed proof that `NtSetSystemInformation` populates adjacent DPC globals like `KiAdjustDpcThreshold` and `KiMaximumDpcQueueDepth`, while the query path exports them back out. This narrows the watchdog writer interpretation to the same runtime system-information family.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "runtime-gate",
+            "version-scope"
+          ],
+          "origin": "Current repo docs"
         }
       ],
       "validation_proof": null,
@@ -18920,6 +18940,12 @@
               "url": "Docs/system/system.md",
               "kind": "repo-doc",
               "summary": "Repo docs list `DpcWatchdogProfileBufferSizeBytes = 266240`, `DpcWatchdogProfileCumulativeDpcThreshold = 110000`, `DpcWatchdogProfileOffset = 10000`, and `DpcWatchdogProfileSing..."
+            },
+            {
+              "title": "Adjacent DPC scheduler records already prove NtSetSystemInformation setter/query lineage",
+              "url": "research/records/system.kernel-adjust-dpc-threshold.review.json and research/records/system.kernel-dpc-queue-depth.review.json",
+              "kind": "repo-doc",
+              "summary": "Existing deprecated DPC scheduler records already cite decompilation-backed proof that `NtSetSystemInformation` populates adjacent DPC globals like `KiAdjustDpcThreshold` and `K..."
             }
           ]
         },
@@ -18956,8 +18982,8 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-profile-cluster.json",
-      "source_file_sha256": "ae25084900d3b62edc3f2877c8e8d0ad5e6193a0158d52ced391cdc18719d449",
-      "source_file_size_bytes": 20879,
+      "source_file_sha256": "ed099be85abe0734aee4a9f408cb26040489ecd439b0b7ff1578c97d23983164",
+      "source_file_size_bytes": 22200,
       "name": "Session Manager Kernel DPC Watchdog Profile Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Profile",
@@ -18970,7 +18996,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, a concrete current-build reader/validator/writer path, and now a narrowed caller story via `NtSetSystemInformation` plus `KiInitializeProcessor`. It is not ready for validation because the current build conflicts with the repo-doc defaults for most values and no current-build persisted registry seeding caller has yet been shown to feed values into the explicit writer path.",
+        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, a concrete current-build reader/validator/writer path, and a narrowed runtime lineage that now aligns with existing `NtSetSystemInformation`-backed DPC scheduler records. It is not ready for validation because the current build conflicts with the repo-doc defaults for most values and no current-build persisted registry seeding caller has yet been shown to feed values into the explicit writer path.",
         "blocking_issues": [
           "live-defaults-conflict-docs",
           "no-current-build-registry-seeding-path",
@@ -19271,6 +19297,20 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "repo-dpc-system-information-lineage-20260408",
+          "kind": "repo-doc",
+          "title": "Adjacent DPC scheduler records already prove NtSetSystemInformation setter/query lineage",
+          "location": "research/records/system.kernel-adjust-dpc-threshold.review.json and research/records/system.kernel-dpc-queue-depth.review.json",
+          "summary": "Existing deprecated DPC scheduler records already cite decompilation-backed proof that `NtSetSystemInformation` populates adjacent DPC globals like `KiAdjustDpcThreshold` and `KiMaximumDpcQueueDepth`, while the query path exports them back out. This narrows the watchdog writer interpretation to the same runtime system-information family.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "runtime-gate",
+            "version-scope"
+          ],
+          "origin": "Current repo docs"
         }
       ],
       "validation_proof": null,

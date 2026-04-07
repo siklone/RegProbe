@@ -13,7 +13,7 @@
     "casual_explanation": "This cluster appears to control several kernel DPC watchdog timing thresholds. The names and live current-build globals are now real on the running build, but they currently read as zero rather than matching the non-zero repo-doc defaults.",
     "why_people_change_it": "Kernel and latency researchers may inspect these values when investigating DPC watchdog thresholds, timeout behavior, or internal watchdog configuration APIs.",
     "tradeoffs_overview": "The cluster now has concrete current-build reader and writer proof, a narrowed runtime caller story, and direct live value reads that conflict with the repo-doc defaults. It should stay a draft research cluster, not a tweak candidate.",
-    "professional_notes": "Repo docs list three `Session Manager\\Kernel` DPC watchdog control timeout defaults: `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000`. Current-build KVM local-KD disassembly already proves that the corresponding globals are structurally real on the running build. `KeQueryDpcWatchdogConfiguration` reads `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` and only emits them when the globals are non-zero. `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and enforces ordering/range checks. `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the globals from caller-supplied validated input before downstream processor-limit assembly. A later PDB-backed Ghidra symbol-xref pass tightened the caller story by showing that `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while `KiInitializeProcessor` references the downstream `KiCreateDpcLimitsProcessorConfiguration` consumer. A dedicated live KVM local-KD value pass then closed the remaining live-state gap: `KeDpcTimeoutMs = 0`, `KeDpcSoftTimeoutMs = 0`, and `KeDpcCumulativeSoftTimeoutMs = 0` on the running current build, with control `KeDpcWatchdogPeriodMs = 0` as well. That makes the family a real current-build contradiction lane rather than a docs-only hold. The unresolved step is no longer missing live values, but a persisted `Session Manager\\Kernel` seeding caller above the explicit writer path, if such a caller exists on the current build.",
+    "professional_notes": "Repo docs list three `Session Manager\\Kernel` DPC watchdog control timeout defaults: `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000`. Current-build KVM local-KD disassembly already proves that the corresponding globals are structurally real on the running build. `KeQueryDpcWatchdogConfiguration` reads `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` and only emits them when the globals are non-zero. `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and enforces ordering/range checks. `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the globals from caller-supplied validated input before downstream processor-limit assembly. A later PDB-backed Ghidra symbol-xref pass tightened the caller story by showing that `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while `KiInitializeProcessor` references the downstream `KiCreateDpcLimitsProcessorConfiguration` consumer. Existing deprecated DPC scheduler records then narrowed that interpretation further: `AdjustDpcThreshold` and `DpcQueueDepth` already have decompilation-backed proof that adjacent DPC scheduler globals are populated from the `NtSetSystemInformation` setter buffer and exported back through the query path. That places the watchdog writer in a real runtime system-information lineage rather than a free-floating API guess. A dedicated live KVM local-KD value pass then closed the remaining live-state gap: `KeDpcTimeoutMs = 0`, `KeDpcSoftTimeoutMs = 0`, and `KeDpcCumulativeSoftTimeoutMs = 0` on the running current build, with control `KeDpcWatchdogPeriodMs = 0` as well. That makes the family a real current-build contradiction lane rather than a docs-only hold. The unresolved step is no longer missing live values or a generic caller, but a persisted `Session Manager\\Kernel` seeding caller above the explicit writer path, if such a caller exists on the current build.",
     "targets": [
       {
         "target_id": "dpc-timeout",
@@ -244,6 +244,19 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "repo-dpc-system-information-lineage-20260408",
+      "kind": "repo-doc",
+      "title": "Adjacent DPC scheduler records already prove NtSetSystemInformation setter/query lineage",
+      "location": "research/records/system.kernel-adjust-dpc-threshold.review.json and research/records/system.kernel-dpc-queue-depth.review.json",
+      "summary": "Existing deprecated DPC scheduler records already cite decompilation-backed proof that `NtSetSystemInformation` populates adjacent DPC globals like `KiAdjustDpcThreshold` and `KiMaximumDpcQueueDepth`, while the query path exports them back out. This narrows the watchdog writer interpretation to the same runtime system-information family.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -253,7 +266,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, concrete current-build reader/writer proof, a narrowed runtime caller story via `NtSetSystemInformation`, and direct live value reads that show the sampled control globals are zero on the running build. It is not ready for validation because no current-build persisted registry caller has been shown to feed values into the writer path and the live state conflicts with the repo-doc defaults.",
+    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, concrete current-build reader/writer proof, direct live value reads that show the sampled control globals are zero on the running build, and a narrowed runtime lineage that now aligns with existing `NtSetSystemInformation`-backed DPC scheduler records. It is not ready for validation because no current-build persisted registry caller has been shown to feed values into the writer path and the live state conflicts with the repo-doc defaults.",
     "manual_review_required": true,
     "blocking_issues": [
       "live-defaults-conflict-docs",
@@ -264,6 +277,7 @@
   },
   "open_questions": [
     "What current-build persisted registry caller feeds `Session Manager\\Kernel` DPC watchdog control values into `KeUpdateDpcWatchdogConfiguration`, if any?",
+    "Which exact `NtSetSystemInformation` arm / info-class reaches the watchdog writer path on this build?",
     "Are these values boot-seeded, runtime API-only, or conditionally initialized on demand?"
   ],
   "tested_on": [
