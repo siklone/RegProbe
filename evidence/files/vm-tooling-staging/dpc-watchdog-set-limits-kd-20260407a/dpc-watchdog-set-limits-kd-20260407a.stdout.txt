@@ -1,0 +1,153 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.032 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.015 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 12:29:46.913 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 12:29:47.122 2026 (UTC - 7:00)
+System Uptime: 0 days 7:11:10.861
+lkd> .sympath C:\Tools\Symbols\dpc-watchdog-set-limits-kd-20260407a
+Symbol search path is: C:\Tools\Symbols\dpc-watchdog-set-limits-kd-20260407a
+Expanded Symbol search path is: c:\tools\symbols\dpc-watchdog-set-limits-kd-20260407a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\dpc-watchdog-set-limits-kd-20260407a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!KiSetProcessorDpcLimits
+fffff806`e73b74a0 nt!KiSetProcessorDpcLimits (KiSetProcessorDpcLimits)
+lkd> uf nt!KiSetProcessorDpcLimits
+nt!KiSetProcessorDpcLimits:
+fffff806`e73b74a0 488bc4          mov     rax,rsp
+fffff806`e73b74a3 48895808        mov     qword ptr [rax+8],rbx
+fffff806`e73b74a7 48897010        mov     qword ptr [rax+10h],rsi
+fffff806`e73b74ab 48897818        mov     qword ptr [rax+18h],rdi
+fffff806`e73b74af 4c897020        mov     qword ptr [rax+20h],r14
+fffff806`e73b74b3 4157            push    r15
+fffff806`e73b74b5 4883ec20        sub     rsp,20h
+fffff806`e73b74b9 4d8bf9          mov     r15,r9
+fffff806`e73b74bc 498bf8          mov     rdi,r8
+fffff806`e73b74bf 4c8bf2          mov     r14,rdx
+fffff806`e73b74c2 488bd9          mov     rbx,rcx
+fffff806`e73b74c5 440f20c6        mov     rsi,cr8
+fffff806`e73b74c9 ba0d000000      mov     edx,0Dh
+fffff806`e73b74ce 440f22c2        mov     cr8,rdx
+fffff806`e73b74d2 833d37e8a00000  cmp     dword ptr [nt!KiIrqlFlags (fffff806`e7dc5d10)],0
+fffff806`e73b74d9 7408            je      nt!KiSetProcessorDpcLimits+0x43 (fffff806`e73b74e3)  Branch
+
+nt!KiSetProcessorDpcLimits+0x3b:
+fffff806`e73b74db 408ace          mov     cl,sil
+fffff806`e73b74de e8c9daf3ff      call    nt!KiRaiseIrqlProcessIrqlFlags (fffff806`e72f4fac)
+
+nt!KiSetProcessorDpcLimits+0x43:
+fffff806`e73b74e3 83a35c86000000  and     dword ptr [rbx+865Ch],0
+fffff806`e73b74ea 83a3ac83000000  and     dword ptr [rbx+83ACh],0
+fffff806`e73b74f1 418b06          mov     eax,dword ptr [r14]
+fffff806`e73b74f4 49832700        and     qword ptr [r15],0
+fffff806`e73b74f8 898360860000    mov     dword ptr [rbx+8660h],eax
+fffff806`e73b74fe 418b4604        mov     eax,dword ptr [r14+4]
+fffff806`e73b7502 8983a8830000    mov     dword ptr [rbx+83A8h],eax
+fffff806`e73b7508 418b4608        mov     eax,dword ptr [r14+8]
+fffff806`e73b750c 8983cc380000    mov     dword ptr [rbx+38CCh],eax
+fffff806`e73b7512 418b460c        mov     eax,dword ptr [r14+0Ch]
+fffff806`e73b7516 8983d8380000    mov     dword ptr [rbx+38D8h],eax
+fffff806`e73b751c 418b4610        mov     eax,dword ptr [r14+10h]
+fffff806`e73b7520 898340870000    mov     dword ptr [rbx+8740h],eax
+fffff806`e73b7526 418b4614        mov     eax,dword ptr [r14+14h]
+fffff806`e73b752a 8983b4830000    mov     dword ptr [rbx+83B4h],eax
+fffff806`e73b7530 488b83a88e0000  mov     rax,qword ptr [rbx+8EA8h]
+fffff806`e73b7537 483bf8          cmp     rdi,rax
+fffff806`e73b753a 7454            je      nt!KiSetProcessorDpcLimits+0xf0 (fffff806`e73b7590)  Branch
+
+nt!KiSetProcessorDpcLimits+0x9c:
+fffff806`e73b753c 83a32083000000  and     dword ptr [rbx+8320h],0
+fffff806`e73b7543 498907          mov     qword ptr [r15],rax
+fffff806`e73b7546 4889bba88e0000  mov     qword ptr [rbx+8EA8h],rdi
+fffff806`e73b754d 4885ff          test    rdi,rdi
+fffff806`e73b7550 7425            je      nt!KiSetProcessorDpcLimits+0xd7 (fffff806`e73b7577)  Branch
+
+nt!KiSetProcessorDpcLimits+0xb2:
+fffff806`e73b7552 418b4e18        mov     ecx,dword ptr [r14+18h]
+fffff806`e73b7556 ba00030000      mov     edx,300h
+fffff806`e73b755b 2bca            sub     ecx,edx
+fffff806`e73b755d 899324830000    mov     dword ptr [rbx+8324h],edx
+fffff806`e73b7563 8bc1            mov     eax,ecx
+fffff806`e73b7565 4803c7          add     rax,rdi
+fffff806`e73b7568 898bdc380000    mov     dword ptr [rbx+38DCh],ecx
+fffff806`e73b756e 48898318830000  mov     qword ptr [rbx+8318h],rax
+fffff806`e73b7575 eb16            jmp     nt!KiSetProcessorDpcLimits+0xed (fffff806`e73b758d)  Branch
+
+nt!KiSetProcessorDpcLimits+0xd7:
+fffff806`e73b7577 4883a31883000000 and     qword ptr [rbx+8318h],0
+fffff806`e73b757f 83a32483000000  and     dword ptr [rbx+8324h],0
+fffff806`e73b7586 83a3dc38000000  and     dword ptr [rbx+38DCh],0
+
+nt!KiSetProcessorDpcLimits+0xed:
+fffff806`e73b758d 488bc7          mov     rax,rdi
+
+nt!KiSetProcessorDpcLimits+0xf0:
+fffff806`e73b7590 488983b08e0000  mov     qword ptr [rbx+8EB0h],rax
+fffff806`e73b7597 833d72e7a00000  cmp     dword ptr [nt!KiIrqlFlags (fffff806`e7dc5d10)],0
+fffff806`e73b759e 740c            je      nt!KiSetProcessorDpcLimits+0x10c (fffff806`e73b75ac)  Branch
+
+nt!KiSetProcessorDpcLimits+0x100:
+fffff806`e73b75a0 440f20c1        mov     rcx,cr8
+fffff806`e73b75a4 408ad6          mov     dl,sil
+fffff806`e73b75a7 e89cd9f3ff      call    nt!KiLowerIrqlProcessIrqlFlags (fffff806`e72f4f48)
+
+nt!KiSetProcessorDpcLimits+0x10c:
+fffff806`e73b75ac 400fb6c6        movzx   eax,sil
+fffff806`e73b75b0 440f22c0        mov     cr8,rax
+fffff806`e73b75b4 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+fffff806`e73b75b9 33c0            xor     eax,eax
+fffff806`e73b75bb 488b742438      mov     rsi,qword ptr [rsp+38h]
+fffff806`e73b75c0 488b7c2440      mov     rdi,qword ptr [rsp+40h]
+fffff806`e73b75c5 4c8b742448      mov     r14,qword ptr [rsp+48h]
+fffff806`e73b75ca 4883c420        add     rsp,20h
+fffff806`e73b75ce 415f            pop     r15
+fffff806`e73b75d0 c3              ret
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

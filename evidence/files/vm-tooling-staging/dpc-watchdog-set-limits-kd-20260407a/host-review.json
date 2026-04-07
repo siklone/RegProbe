@@ -1,0 +1,23 @@
+{
+  "generated_utc": "2026-04-07T19:33:00Z",
+  "candidate": "system.kernel-dpc-watchdog-profile-cluster",
+  "guest": "regprobe-win11-25h2-session",
+  "bundle": "dpc-watchdog-set-limits-kd-20260407a",
+  "findings": {
+    "function": "KiSetProcessorDpcLimits",
+    "behavior": "Copies an already-built watchdog configuration block into per-processor state and swaps the auxiliary profile buffer pointer when needed.",
+    "writes": [
+      "PRCB/processor watchdog fields sourced from r14[0x00..0x14]",
+      "profile buffer metadata sourced from r14[0x18]"
+    ],
+    "non_findings": [
+      "No direct reads of KeDpcWatchdogProfile* globals",
+      "No direct registry read path"
+    ]
+  },
+  "interpretation": {
+    "current_state": "KiSetProcessorDpcLimits is also downstream from configuration assembly; it applies a prepared block but does not seed the globals.",
+    "remaining_gap": "The seeding path is now earlier than KiValidateDpcWatchdogConfiguration / KiApplyProcessorDpcLimits / KiSetProcessorDpcLimits.",
+    "strength": "This removes another plausible writer and pushes the search back toward boot/init configuration assembly."
+  }
+}

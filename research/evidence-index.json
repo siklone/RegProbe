@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T19:30:18.456979Z",
+  "generated_utc": "2026-04-07T19:32:35.623511Z",
   "summary": {
     "total_records": 315,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T19:30:18.188055Z",
+      "generated_utc": "2026-04-07T19:32:35.341336Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18907,6 +18907,19 @@
           "title": "Dedicated KVM local-KD disassembly excludes KiApplyProcessorDpcLimits as seeding caller",
           "location": "evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/dpc-watchdog-apply-limits-kd-20260407b.stdout.txt",
           "summary": "A dedicated current-build KD disassembly pass showed that `KiApplyProcessorDpcLimits` forwards an input configuration block to `KiSetProcessorDpcLimits` and does not directly read the watchdog profile globals.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-dpc-watchdog-set-limits-kd-20260407",
+          "kind": "vm-test",
+          "title": "Dedicated KVM local-KD disassembly excludes KiSetProcessorDpcLimits as seeding caller",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-set-limits-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-set-limits-kd-20260407a/dpc-watchdog-set-limits-kd-20260407a.stdout.txt",
+          "summary": "A dedicated current-build KD disassembly pass showed that `KiSetProcessorDpcLimits` copies a prepared watchdog configuration block into per-processor state but does not directly read the watchdog profile globals.",
           "strength": "medium",
           "supports": [
             "behavior",
