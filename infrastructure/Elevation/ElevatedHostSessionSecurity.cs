@@ -76,7 +76,13 @@ public static class ElevatedHostSessionSecurity
 
         var redacted = ReplaceSensitiveValue(
             text,
+            "(--pipe\\s+)(?:\"[^\"]*\"|'[^']*'|\\S+)");
+        redacted = ReplaceSensitiveValue(
+            redacted,
             "(--session-token\\s+)(?:\"[^\"]*\"|'[^']*'|\\S+)");
+        redacted = ReplaceSensitiveValue(
+            redacted,
+            "(\\bpipeName\\b\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|\\S+)");
         redacted = ReplaceSensitiveValue(
             redacted,
             "(\\bsessionToken\\b\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|\\S+)");

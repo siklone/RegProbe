@@ -171,8 +171,9 @@ public sealed class ElevatedHostSessionSecurityTests
     [Fact]
     public void RedactSensitiveText_MasksSessionTokens()
     {
-        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText("--pipe \"regprobe.pipe\" --session-token \"ABCDEF123456\" token=secret");
+        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText("--pipe \"regprobe.pipe.1234.ABCDEF\" --session-token \"ABCDEF123456\" token=secret");
 
+        Assert.DoesNotContain("regprobe.pipe.1234.ABCDEF", redacted, StringComparison.Ordinal);
         Assert.DoesNotContain("ABCDEF123456", redacted, StringComparison.Ordinal);
         Assert.DoesNotContain("secret", redacted, StringComparison.Ordinal);
         Assert.Contains("<redacted>", redacted, StringComparison.Ordinal);
@@ -195,9 +196,21 @@ public sealed class ElevatedHostSessionSecurityTests
     }
 
     [Fact]
+    public void RedactSensitiveText_MasksPipeBootstrapValues()
+    {
+        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText(
+            "--pipe RegProbe.ElevatedHost.4242.ABCDEF pipeName = \"RegProbe.ElevatedHost.4242.SECOND\"");
+
+        Assert.DoesNotContain("RegProbe.ElevatedHost.4242.ABCDEF", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("RegProbe.ElevatedHost.4242.SECOND", redacted, StringComparison.Ordinal);
+        Assert.Contains("--pipe <redacted>", redacted, StringComparison.Ordinal);
+        Assert.Contains("pipeName = \"<redacted>\"", redacted, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void RedactSensitiveText_DoesNotMaskUnrelatedTokenWords()
     {
-        var original = "--tokenizer enabled --api-token off --session-tokenized false";
+        var original = "--tokenizer enabled --api-token off --pipeline value --session-tokenized false";
 
         var redacted = ElevatedHostSessionSecurity.RedactSensitiveText(original);
 
