@@ -246,66 +246,166 @@ finally {
 }
 
 $probeScript = Join-Path $ScriptsRoot 'registry-policy-probe.ps1'
-if (-not (Test-Path $probeScript)) {
-    throw "registry-policy-probe.ps1 not found at $probeScript"
-}
-
 if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
     $OutputRoot = Join-Path 'C:\RegProbe-Diag\procmon' $OutputName
 }
 
-$triggerCommand = Resolve-TriggerCommand -Profile $TriggerProfile -CustomCommand $PowerShellCommand
 Ensure-Directory -Path $OutputRoot
 
 $txtPath = Join-Path $OutputRoot ('{0}.txt' -f $OutputName)
 $csvPath = Join-Path $OutputRoot ('{0}.csv' -f $OutputName)
 $hitsCsvPath = Join-Path $OutputRoot ('{0}.hits.csv' -f $OutputName)
+$probeStagePath = Join-Path $OutputRoot ('{0}.stage.json' -f $OutputName)
 $summaryPath = Join-Path $OutputRoot 'run-summary.json'
-
-$probeParams = @{
-    Mode = 'capture'
-    RegistryPath = $RegistryPath
-    ValueName = $ValueName
-    Prefix = $OutputName
-    OutputDirectory = $OutputRoot
-    PowerShellCommand = $triggerCommand
-}
-
-if (@($MatchFragments).Count -gt 0) {
-    $probeParams.MatchFragments = @($MatchFragments)
-}
-
-if (@($ProcessNames).Count -gt 0) {
-    $probeParams.ProcessNames = @($ProcessNames)
-}
-
-& $probeScript @probeParams
-
+$triggerCommand = $null
 $uploads = [ordered]@{}
-foreach ($entry in @(
-    @{ key = 'result'; path = $txtPath; name = ('{0}.txt' -f $OutputName) },
-    @{ key = 'hits_csv'; path = $hitsCsvPath; name = ('{0}.hits.csv' -f $OutputName) },
-    @{ key = 'csv'; path = $csvPath; name = ('{0}.csv' -f $OutputName) }
-)) {
-    $upload = Invoke-ArtifactUpload -Path $entry.path -RemoteName $entry.name
-    if ($upload) {
-        $uploads[$entry.key] = $upload
+$summaryUpload = $null
+$hadError = $false
+$errorKind = $null
+$errorMessage = $null
+$errorPosition = $null
+$probeStage = $null
+$resultErrorLine = $null
+
+try {
+    if (-not (Test-Path $probeScript)) {
+        throw "registry-policy-probe.ps1 not found at $probeScript"
+    }
+
+    $triggerCommand = Resolve-TriggerCommand -Profile $TriggerProfile -CustomCommand $PowerShellCommand
+
+    $probeParams = @{
+        Mode = 'capture'
+        RegistryPath = $RegistryPath
+        ValueName = $ValueName
+        Prefix = $OutputName
+        OutputDirectory = $OutputRoot
+        PowerShellCommand = $triggerCommand
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($UploadBaseUrl)) {
+        $probeParams.StageUploadUri = ('{0}/{1}' -f $UploadBaseUrl.TrimEnd('/'), ('{0}-probe-stage.json' -f $OutputName))
+    }
+
+    if (@($MatchFragments).Count -gt 0) {
+        $probeParams.MatchFragments = @($MatchFragments)
+    }
+
+    if (@($ProcessNames).Count -gt 0) {
+        $probeParams.ProcessNames = @($ProcessNames)
+    }
+
+    & $probeScript @probeParams
+}
+catch {
+    $hadError = $true
+    $errorKind = $_.Exception.GetType().FullName
+    $errorMessage = $_.Exception.Message
+    if ($_.InvocationInfo) {
+        $errorPosition = $_.InvocationInfo.PositionMessage
+    }
+}
+finally {
+    if (Test-Path $probeStagePath) {
+        try {
+            $probeStage = Get-Content -Path $probeStagePath -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
+        }
+        catch {
+            if (-not $hadError) {
+                $hadError = $true
+                $errorKind = 'probe-stage-parse-error'
+                $errorMessage = $_.Exception.Message
+                if ($_.InvocationInfo) {
+                    $errorPosition = $_.InvocationInfo.PositionMessage
+                }
+            }
+        }
+    }
+
+    if (Test-Path $txtPath) {
+        try {
+            $resultErrorLine = Get-Content -Path $txtPath -ErrorAction Stop |
+                Where-Object { $_ -like 'ERROR=*' } |
+                Select-Object -First 1
+        }
+        catch {
+        }
+    }
+
+    if (-not $hadError -and $probeStage -and $probeStage.status -eq 'error') {
+        $hadError = $true
+        $errorKind = 'probe-stage-error'
+        $errorMessage = if (-not [string]::IsNullOrWhiteSpace($probeStage.message)) {
+            [string]$probeStage.message
+        }
+        else {
+            'registry-policy-probe.ps1 reported an error stage.'
+        }
+    }
+
+    if (-not $hadError -and -not [string]::IsNullOrWhiteSpace($resultErrorLine)) {
+        $hadError = $true
+        $errorKind = 'probe-result-error'
+        $errorMessage = $resultErrorLine.Substring('ERROR='.Length)
+    }
+
+    foreach ($entry in @(
+        @{ key = 'result'; path = $txtPath; name = ('{0}.txt' -f $OutputName) },
+        @{ key = 'hits_csv'; path = $hitsCsvPath; name = ('{0}.hits.csv' -f $OutputName) },
+        @{ key = 'csv'; path = $csvPath; name = ('{0}.csv' -f $OutputName) }
+    )) {
+        try {
+            $upload = Invoke-ArtifactUpload -Path $entry.path -RemoteName $entry.name
+            if ($upload) {
+                $uploads[$entry.key] = $upload
+            }
+        }
+        catch {
+            $uploads[('{0}_upload_error' -f $entry.key)] = $_.Exception.Message
+        }
+    }
+
+    $summary = [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        registry_path = $RegistryPath
+        value_name = $ValueName
+        output_name = $OutputName
+        trigger_profile = $TriggerProfile
+        output_root = $OutputRoot
+        status = if ($hadError) { 'error' } else { 'ok' }
+        result_exists = [bool](Test-Path $txtPath)
+        csv_exists = [bool](Test-Path $csvPath)
+        hits_csv_exists = [bool](Test-Path $hitsCsvPath)
+        probe_stage_exists = [bool](Test-Path $probeStagePath)
+        probe_stage = if ($probeStage) { $probeStage.stage } else { $null }
+        probe_stage_status = if ($probeStage) { $probeStage.status } else { $null }
+        probe_stage_message = if ($probeStage) { $probeStage.message } else { $null }
+        result_error_line = $resultErrorLine
+        error_kind = $errorKind
+        error = $errorMessage
+        error_position = $errorPosition
+        uploads = $uploads
+    }
+
+    $summary | ConvertTo-Json -Depth 8 | Set-Content -Path $summaryPath -Encoding UTF8
+
+    try {
+        $summaryUpload = Invoke-ArtifactUpload -Path $summaryPath -RemoteName ('{0}-summary.json' -f $OutputName)
+    }
+    catch {
+        $summaryUpload = [ordered]@{
+            error = $_.Exception.Message
+        }
+    }
+
+    if ($summaryUpload) {
+        $summary['summary_upload'] = $summaryUpload
+        $summary | ConvertTo-Json -Depth 8 | Set-Content -Path $summaryPath -Encoding UTF8
     }
 }
 
-$summary = [ordered]@{
-    generated_utc = [DateTime]::UtcNow.ToString('o')
-    registry_path = $RegistryPath
-    value_name = $ValueName
-    output_name = $OutputName
-    trigger_profile = $TriggerProfile
-    output_root = $OutputRoot
-    result_exists = [bool](Test-Path $txtPath)
-    csv_exists = [bool](Test-Path $csvPath)
-    hits_csv_exists = [bool](Test-Path $hitsCsvPath)
-    uploads = $uploads
+if ($hadError) {
+    exit 1
 }
 
-$summary | ConvertTo-Json -Depth 8 | Set-Content -Path $summaryPath -Encoding UTF8
-Invoke-ArtifactUpload -Path $summaryPath -RemoteName ('{0}-summary.json' -f $OutputName) | Out-Null
 Write-Output $summaryPath
