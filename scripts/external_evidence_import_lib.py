@@ -379,6 +379,128 @@ def materialize_external_research_artifacts(
     }
 
 
+CONFIDENCE_ORDER = {
+    "Weak Lead": 0,
+    "Probable": 1,
+    "Strongly Supported": 2,
+    "Confirmed": 3,
+}
+
+
+def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
+    imported_root = imported_root.resolve()
+    entries_by_candidate: dict[str, dict[str, Any]] = {}
+    counts_by_source_tool: dict[str, int] = {}
+    counts_by_confidence: dict[str, int] = {}
+    queue_files: list[str] = []
+    import_count = 0
+
+    if imported_root.exists():
+        for queue_path in sorted(imported_root.glob("*/candidate-queue.csv")):
+            queue_files.append(queue_path.as_posix())
+            run_id = queue_path.parent.name
+            with queue_path.open("r", encoding="utf-8-sig", newline="") as handle:
+                for row in csv.DictReader(handle):
+                    candidate_id = str(row.get("candidate_id") or "").strip()
+                    if not candidate_id:
+                        continue
+
+                    import_count += 1
+                    source_tool = str(row.get("source_tool") or "").strip() or "unknown"
+                    confidence = str(row.get("confidence") or "").strip() or "Weak Lead"
+                    counts_by_source_tool[source_tool] = counts_by_source_tool.get(source_tool, 0) + 1
+                    counts_by_confidence[confidence] = counts_by_confidence.get(confidence, 0) + 1
+
+                    entry = entries_by_candidate.setdefault(
+                        candidate_id,
+                        {
+                            "candidate_id": candidate_id,
+                            "feature_area": str(row.get("feature_area") or "").strip() or "registry",
+                            "source_tools": set(),
+                            "key_paths": set(),
+                            "value_names": set(),
+                            "bundle_paths": set(),
+                            "normalized_bundle_paths": set(),
+                            "note_stub_paths": set(),
+                            "record_seed_paths": set(),
+                            "highest_confidence": confidence,
+                            "imports": [],
+                        },
+                    )
+
+                    entry["source_tools"].add(source_tool)
+                    if row.get("key_path"):
+                        entry["key_paths"].add(str(row["key_path"]))
+                    if row.get("value_name"):
+                        entry["value_names"].add(str(row["value_name"]))
+                    if row.get("bundle_path"):
+                        entry["bundle_paths"].add(str(row["bundle_path"]))
+                    if row.get("normalized_bundle_path"):
+                        entry["normalized_bundle_paths"].add(str(row["normalized_bundle_path"]))
+                    if row.get("note_stub"):
+                        entry["note_stub_paths"].add(str(row["note_stub"]))
+                    if row.get("record_seed"):
+                        entry["record_seed_paths"].add(str(row["record_seed"]))
+                    if CONFIDENCE_ORDER.get(confidence, -1) > CONFIDENCE_ORDER.get(entry["highest_confidence"], -1):
+                        entry["highest_confidence"] = confidence
+
+                    entry["imports"].append(
+                        {
+                            "run_id": run_id,
+                            "source_tool": source_tool,
+                            "key_path": row.get("key_path") or None,
+                            "value_name": row.get("value_name") or None,
+                            "confidence": confidence,
+                            "bundle_path": row.get("bundle_path") or None,
+                            "normalized_bundle_path": row.get("normalized_bundle_path") or None,
+                            "note_stub": row.get("note_stub") or None,
+                            "record_seed": row.get("record_seed") or None,
+                        }
+                    )
+
+    entries: list[dict[str, Any]] = []
+    for candidate_id in sorted(entries_by_candidate.keys()):
+        entry = entries_by_candidate[candidate_id]
+        imports = sorted(entry["imports"], key=lambda item: (str(item.get("run_id") or ""), str(item.get("source_tool") or "")))
+        entries.append(
+            {
+                "candidate_id": candidate_id,
+                "feature_area": entry["feature_area"],
+                "source_tools": sorted(entry["source_tools"]),
+                "key_paths": sorted(entry["key_paths"]),
+                "value_names": sorted(entry["value_names"]),
+                "highest_confidence": entry["highest_confidence"],
+                "bundle_paths": sorted(entry["bundle_paths"]),
+                "normalized_bundle_paths": sorted(entry["normalized_bundle_paths"]),
+                "note_stub_paths": sorted(entry["note_stub_paths"]),
+                "record_seed_paths": sorted(entry["record_seed_paths"]),
+                "import_count": len(imports),
+                "imports": imports,
+            }
+        )
+
+    return {
+        "schema_version": "1.0",
+        "generated_utc": now_utc(),
+        "backlog_type": "imported-candidates",
+        "source_import_root": imported_root.as_posix(),
+        "source_queue_files": queue_files,
+        "source_run_count": len(queue_files),
+        "candidate_count": len(entries),
+        "import_count": import_count,
+        "counts_by_source_tool": dict(sorted(counts_by_source_tool.items())),
+        "counts_by_confidence": dict(sorted(counts_by_confidence.items())),
+        "entries": entries,
+    }
+
+
+def write_imported_candidate_backlog(imported_root: Path, output_path: Path) -> Path:
+    backlog = build_imported_candidate_backlog(imported_root)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(backlog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return output_path
+
+
 def build_note_stub(observation: dict[str, Any], bundle_path: Path, normalized_bundle_path: Path) -> str:
     return (
         f"# Imported Candidate: {observation['candidate_id']}\n\n"

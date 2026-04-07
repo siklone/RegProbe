@@ -14,6 +14,7 @@ if str(SCRIPTS_ROOT) not in sys.path:
 from external_evidence_import_lib import (  # noqa: E402
     import_external_evidence,
     materialize_external_research_artifacts,
+    write_imported_candidate_backlog,
 )
 
 
@@ -41,9 +42,14 @@ def main() -> int:
     run_output_root = output_root / bundle["run_id"]
     run_evidence_root = evidence_root / bundle["run_id"]
     outputs = materialize_external_research_artifacts(bundle, run_output_root, bundle_root=run_evidence_root)
+    backlog_path = write_imported_candidate_backlog(
+        output_root,
+        REPO_ROOT / "research" / "imported-candidate-backlog.json",
+    )
     payload = {
         "bundle": bundle,
         "outputs": outputs,
+        "imported_candidate_backlog": backlog_path.as_posix(),
     }
     print(json.dumps(payload, ensure_ascii=False, indent=2))
     return 0
