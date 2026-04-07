@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
+from summary_contract_lib import apply_summary_contract, write_summary_contract
 
 
 def quote_ps(value: str) -> str:
@@ -255,7 +256,7 @@ def main() -> int:
                 active_summary_path = summary_path
 
         if active_summary_path is not None:
-            summary = json.loads(active_summary_path.read_text(encoding="utf-8-sig"))
+            summary = apply_summary_contract(json.loads(active_summary_path.read_text(encoding="utf-8-sig")))
             payload = {
                 "summary_arm_path": str(summary_arm_path),
                 "summary_path": str(active_summary_path),
@@ -272,6 +273,9 @@ def main() -> int:
                 "normalized_bundle_exists": summary.get("normalized_bundle_exists"),
                 "normalization_status": summary.get("normalization_status"),
                 "normalizer_name": summary.get("normalizer_name"),
+                "recovery_action": summary.get("recovery_action"),
+                "transport_blocker": summary.get("transport_blocker"),
+                "guest_health": summary.get("guest_health"),
             }
             print(json.dumps(payload, indent=2))
             if summary.get("status") == "error" or summary.get("normalization_status") not in {None, "ok"}:
@@ -281,7 +285,9 @@ def main() -> int:
         if stage_path.exists():
             stage = json.loads(stage_path.read_text(encoding="utf-8-sig"))
             if stage.get("status") == "error":
-                summary = {
+                summary = write_summary_contract(
+                    summary_path,
+                    {
                     "generated_utc": stage.get("generated_utc"),
                     "stage": "collect",
                     "registry_path": args.registry_path,
@@ -300,8 +306,12 @@ def main() -> int:
                     "normalized_bundle_exists": False,
                     "normalization_status": "error",
                     "normalizer_name": None,
-                }
-                summary_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+                    },
+                    default_error_kind="wpr-stage-error",
+                    default_recovery_action="inspect-wpr-stage",
+                    default_transport_blocker="stage-error",
+                    default_guest_health="degraded",
+                )
                 payload = {
                     "summary_arm_path": str(summary_arm_path),
                     "summary_path": str(summary_path),
@@ -310,6 +320,9 @@ def main() -> int:
                     "output_name": args.output_name,
                     "status": "error",
                     "error_kind": "wpr-stage-error",
+                    "recovery_action": summary.get("recovery_action"),
+                    "transport_blocker": summary.get("transport_blocker"),
+                    "guest_health": summary.get("guest_health"),
                     "error": stage.get("message"),
                     "stage_name": stage.get("stage"),
                     "summary_source": "stage-fallback",
@@ -318,17 +331,20 @@ def main() -> int:
                 return 1
         time.sleep(2)
 
-    print(
-        json.dumps(
-            {
-                "summary_arm_path": str(summary_arm_path),
-                "summary_path": str(summary_path),
-                "output_name": args.output_name,
-                "status": "timeout",
-            },
-            indent=2,
-        )
+    timeout_summary = write_summary_contract(
+        summary_path,
+        {
+            "summary_arm_path": str(summary_arm_path),
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "status": "timeout",
+        },
+        default_error_kind="runner-timeout",
+        default_recovery_action="rerun-wpr-boot-registry",
+        default_transport_blocker="timeout",
+        default_guest_health="unknown",
     )
+    print(json.dumps(timeout_summary, indent=2))
     return 2
 
 

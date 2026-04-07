@@ -13,6 +13,7 @@ For the Linux/KVM runtime family, the same research intent applies but the trans
 
 The current KVM lane does not depend on the VMware shared-folder controller loop. It stages guest scripts through the bootstrap ISO and uses the bridge for short command delivery, copy-back, and health evidence upload.
 Current host runners also reopen an elevated guest PowerShell session on demand before they stage guest helpers, so the visible console no longer needs to be kept manually in an admin state between runs.
+KVM host runners now treat `error_kind`, `recovery_action`, `transport_blocker`, and `guest_health` as mandatory summary fields even for synthesized timeout or stage-fallback summaries.
 
 ## Purpose
 

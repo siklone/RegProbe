@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
+from summary_contract_lib import apply_summary_contract, write_summary_contract
 
 
 def quote_ps(value: str) -> str:
@@ -238,7 +239,7 @@ def main() -> int:
     deadline = time.time() + args.timeout_seconds
     while time.time() < deadline:
         if summary_path.exists():
-            summary = json.loads(summary_path.read_text(encoding="utf-8-sig"))
+            summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
             payload = {
                 "summary_path": str(summary_path),
                 "output_name": args.output_name,
@@ -252,6 +253,9 @@ def main() -> int:
                 "probe_stage": summary.get("probe_stage"),
                 "probe_stage_status": summary.get("probe_stage_status"),
                 "error_kind": summary.get("error_kind"),
+                "recovery_action": summary.get("recovery_action"),
+                "transport_blocker": summary.get("transport_blocker"),
+                "guest_health": summary.get("guest_health"),
                 "error": summary.get("error"),
             }
             print(json.dumps(payload, indent=2))
@@ -268,7 +272,9 @@ def main() -> int:
                         result_error = line[len("ERROR=") :]
                         break
 
-                summary = {
+                summary = write_summary_contract(
+                    summary_path,
+                    {
                     "generated_utc": probe_stage.get("generated_utc"),
                     "registry_path": args.registry_path,
                     "value_name": args.value_name,
@@ -291,8 +297,12 @@ def main() -> int:
                     "error": result_error or probe_stage.get("message"),
                     "error_position": None,
                     "summary_source": "probe-stage-fallback",
-                }
-                summary_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+                    },
+                    default_error_kind="probe-stage-error",
+                    default_recovery_action="inspect-probe-stage",
+                    default_transport_blocker="probe-stage-error",
+                    default_guest_health="degraded",
+                )
                 payload = {
                     "summary_path": str(summary_path),
                     "output_name": args.output_name,
@@ -306,6 +316,9 @@ def main() -> int:
                     "probe_stage": probe_stage.get("stage"),
                     "probe_stage_status": probe_stage.get("status"),
                     "error_kind": "probe-stage-error",
+                    "recovery_action": summary.get("recovery_action"),
+                    "transport_blocker": summary.get("transport_blocker"),
+                    "guest_health": summary.get("guest_health"),
                     "error": result_error or probe_stage.get("message"),
                     "summary_source": "probe-stage-fallback",
                 }
@@ -313,17 +326,20 @@ def main() -> int:
                 return 1
         time.sleep(2)
 
-    print(
-        json.dumps(
-            {
-                "summary_path": str(summary_path),
-                "output_name": args.output_name,
-                "trigger_profile": args.trigger_profile,
-                "status": "timeout",
-            },
-            indent=2,
-        )
+    timeout_summary = write_summary_contract(
+        summary_path,
+        {
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "trigger_profile": args.trigger_profile,
+            "status": "timeout",
+        },
+        default_error_kind="runner-timeout",
+        default_recovery_action="rerun-registry-policy-probe",
+        default_transport_blocker="timeout",
+        default_guest_health="unknown",
     )
+    print(json.dumps(timeout_summary, indent=2))
     return 2
 
 

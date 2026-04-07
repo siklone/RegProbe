@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
+from summary_contract_lib import apply_summary_contract, write_summary_contract
 
 
 def quote_ps(value: str) -> str:
@@ -234,7 +235,7 @@ def main() -> int:
     )
 
     if wait_for_file(summary_path, args.timeout_seconds):
-        summary = json.loads(summary_path.read_text(encoding="utf-8-sig"))
+        summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
         payload = {
             "summary_arm_path": str(arm_summary_path),
             "summary_collect_path": str(collect_summary_path),
@@ -250,6 +251,9 @@ def main() -> int:
             "normalization_status": summary.get("normalization_status"),
             "normalizer_name": summary.get("normalizer_name"),
             "error_kind": summary.get("error_kind"),
+            "recovery_action": summary.get("recovery_action"),
+            "transport_blocker": summary.get("transport_blocker"),
+            "guest_health": summary.get("guest_health"),
             "error": summary.get("error"),
         }
         print(json.dumps(payload, indent=2))
@@ -257,18 +261,21 @@ def main() -> int:
             return 1
         return 0
 
-    print(
-        json.dumps(
-            {
-                "summary_arm_path": str(arm_summary_path),
-                "summary_collect_path": str(collect_summary_path),
-                "summary_path": str(summary_path),
-                "output_name": args.output_name,
-                "status": "timeout",
-            },
-            indent=2,
-        )
+    timeout_summary = write_summary_contract(
+        summary_path,
+        {
+            "summary_arm_path": str(arm_summary_path),
+            "summary_collect_path": str(collect_summary_path),
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "status": "timeout",
+        },
+        default_error_kind="runner-timeout",
+        default_recovery_action="rerun-procmon-bootlog",
+        default_transport_blocker="timeout",
+        default_guest_health="unknown",
     )
+    print(json.dumps(timeout_summary, indent=2))
     return 2
 
 
