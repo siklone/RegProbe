@@ -1,0 +1,9 @@
+.sympath C:\Tools\Symbols\dpc-watchdog-ntsetsysteminfo-class-kd-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!NtSetSystemInformation
+u nt!NtSetSystemInformation+0x1b40 L120
+u nt!NtSetSystemInformation+0x1b90 L80
+u nt!NtSetSystemInformation+0x1c40 L60
+.echo REGPROBE_LOCALKD_END
+q
