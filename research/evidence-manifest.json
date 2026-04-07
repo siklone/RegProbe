@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T19:41:41.458528Z",
+  "generated_utc": "2026-04-07T19:51:37.602412Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 315,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T19:41:40.725898Z",
+      "generated_utc": "2026-04-07T19:51:36.718381Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -13914,7 +13914,7 @@
           "gaming_safe": null
         },
         "validated_semantics": {
-          "summary": "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block.",
+          "summary": "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block; later KVM local-KD evidence showed the live current-build state is `0` and that `KeUpdateDpcWatchdogConfigurat...",
           "has_validation_proof": true,
           "has_semantics_evidence": true,
           "links": [
@@ -13939,10 +13939,17 @@
           ]
         },
         "runtime_proof": {
-          "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+          "summary": "Dedicated KVM local-KD work read `KeDpcWatchdogPeriodMs = 0` on the running current build, showed that `KeQueryDpcWatchdogConfiguration` only emits the field when the global is non-zero, and then showed that `KeUpdateDpcWatchdogConfiguration` is the explici...",
           "needs_vm_validation": false,
-          "has_runtime_evidence": false,
-          "links": []
+          "has_runtime_evidence": true,
+          "links": [
+            {
+              "title": "Current-build KVM local-KD shows live DpcWatchdogPeriod state plus reader/writer path",
+              "url": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json",
+              "kind": "vm-test",
+              "summary": "Dedicated KVM local-KD work read `KeDpcWatchdogPeriodMs = 0` on the running current build, showed that `KeQueryDpcWatchdogConfiguration` only emits the field when the global is..."
+            }
+          ]
         },
         "upstream_lineage": {
           "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -13975,13 +13982,13 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-period.review.json",
-      "source_file_sha256": "968305346ef6df3f84494711ae38d007f00c6c8b7b202d884967f5ed3b415944",
-      "source_file_size_bytes": 11982,
+      "source_file_sha256": "487364d97520f3485663985a0100c8964c4505a4cb61990ed06db98d86e43921",
+      "source_file_size_bytes": 14853,
       "name": "DPC Watchdog Period",
       "category": "System",
       "area": "Kernel / DPC Watchdog",
       "scope": "device",
-      "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, and the decompiled watchdog query path now shows the raw period value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+      "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM local-KD evidence tightened the current-build picture: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, and `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -13989,10 +13996,11 @@
         "restore_default_supported": false,
         "restore_previous_supported": false,
         "needs_vm_validation": false,
-        "why": "Microsoft clearly documents the DPC watchdog feature, but this research pass did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself.",
+        "why": "Microsoft clearly documents the DPC watchdog feature, but this research pass still did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself and the later current-build KD work now shows that the app baseline conflicts with live kernel state.",
         "blocking_issues": [
           "No primary Microsoft source for the DpcWatchdogPeriod registry value was captured in this research pass.",
-          "The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key."
+          "The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key.",
+          "The current app baseline 120000 conflicts with observed current-build `KeDpcWatchdogPeriodMs = 0`."
         ]
       },
       "app_current_implementation": {
@@ -14038,6 +14046,15 @@
                 "repo-system-doc-kernel",
                 "app-system-registry-provider"
               ]
+            },
+            {
+              "state_kind": "live-current-build-global",
+              "value": 0,
+              "label": "Live current-build kernel state",
+              "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogPeriodMs = 0` on the running current build.",
+              "evidence_ids": [
+                "vm-dpc-watchdog-period-current-build-kd-20260407"
+              ]
             }
           ]
         }
@@ -14056,7 +14073,8 @@
           ],
           "evidence_ids": [
             "ms-dpc-watchdog-information",
-            "repo-system-doc-kernel"
+            "repo-system-doc-kernel",
+            "vm-dpc-watchdog-period-current-build-kd-20260407"
           ]
         }
       ],
@@ -14115,7 +14133,8 @@
           "bad_when": "You need a validated Microsoft registry mapping.",
           "tradeoffs": [
             "The current app behavior is captured.",
-            "The exact registry semantics remain based on repo provenance rather than a captured primary source."
+            "The exact registry semantics remain based on repo provenance rather than a captured primary source.",
+            "The current app baseline conflicts with observed current-build kernel state."
           ],
           "apply_allowed": false,
           "notes": "Blocked until a primary Microsoft source for DpcWatchdogPeriod is captured.",
@@ -14212,15 +14231,30 @@
             "runtime-gate"
           ],
           "origin": "Nohuto's and our Ghidra decompilation"
+        },
+        {
+          "evidence_id": "vm-dpc-watchdog-period-current-build-kd-20260407",
+          "kind": "vm-test",
+          "title": "Current-build KVM local-KD shows live DpcWatchdogPeriod state plus reader/writer path",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json",
+          "summary": "Dedicated KVM local-KD work read `KeDpcWatchdogPeriodMs = 0` on the running current build, showed that `KeQueryDpcWatchdogConfiguration` only emits the field when the global is non-zero, and then showed that `KeUpdateDpcWatchdogConfiguration` is the explicit writer for the global.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "value",
+            "runtime-gate",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": {
         "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
         "exact_quote_or_path": "if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src | 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; }",
         "key_found_on_page": true,
-        "notes": "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block."
+        "notes": "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block; later KVM local-KD evidence showed the live current-build state is `0` and that `KeUpdateDpcWatchdogConfiguration` is the explicit writer path."
       },
-      "validation_proof_sha256": "50918c9775cf230fcfb42bd1b4fbdf60619c9870e00912e798dc04b9300be894",
+      "validation_proof_sha256": "caf8e59ea52f8c0784187875edca479290d13e5229afd771cbd3267ef71c42ee",
       "provenance": {
         "coverage_state": "repo-backed",
         "has_nohuto_evidence": true,

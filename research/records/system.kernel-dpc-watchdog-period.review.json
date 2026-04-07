@@ -4,7 +4,7 @@
   "record_id": "system.kernel-dpc-watchdog-period",
   "tweak_id": "system.kernel-dpc-watchdog-period",
   "record_status": "deprecated",
-  "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, and the decompiled watchdog query path now shows the raw period value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.",
+  "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM local-KD evidence tightened the current-build picture: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, and `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.",
   "setting": {
     "name": "DPC Watchdog Period",
     "category": "System",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "Windows has a watchdog that looks for deferred procedure calls that run too long and can trigger a system crash if the system stays stuck at high interrupt levels. This is a very low-level kernel safety mechanism, not a normal tweak.",
     "why_people_change_it": "People would only change it when reproducing kernel experiments, undoing manual registry changes, or doing specialized driver debugging.",
-    "tradeoffs_overview": "Changing watchdog timing can affect how quickly Windows decides a DPC path has stalled badly enough to stop the system. Because this research pass did not capture a primary Microsoft source for the exact registry key, the safe choice is to keep it in review.",
-    "professional_notes": "Microsoft documents that Windows implements a DPC watchdog timer and that a DPC_WATCHDOG_VIOLATION (0x133) bug check occurs if a DPC routine or a series of DPC routines runs too long. Microsoft also provides driver guidance for avoiding DPC watchdog timeouts in storport miniports. The decompiled watchdog query path shows KeDpcWatchdogPeriodMs being read into the configuration block, but this research pass still did not capture a primary Microsoft page that documents the registry value DpcWatchdogPeriod itself. The repo research notes list DpcWatchdogPeriod = 120000 and associate it with KeDpcWatchdogPeriodMs, so this record keeps the feature area documented but blocks validated publication of the registry mapping.",
+    "tradeoffs_overview": "Changing watchdog timing can affect how quickly Windows decides a DPC path has stalled badly enough to stop the system. This record now has stronger current-build kernel proof than before, but it still lacks a primary Microsoft source for the exact registry key and also conflicts with the app's 120000 baseline.",
+    "professional_notes": "Microsoft documents that Windows implements a DPC watchdog timer and that a DPC_WATCHDOG_VIOLATION (0x133) bug check occurs if a DPC routine or a series of DPC routines runs too long. Microsoft also provides driver guidance for avoiding DPC watchdog timeouts in storport miniports. Earlier decompilation already showed `KeDpcWatchdogPeriodMs` being read into the watchdog configuration block, but later KVM local-KD work tightened the current-build interpretation substantially. A dedicated live bundle read `KeDpcWatchdogPeriodMs = 0` on the running current build. A later KD disassembly pass then showed that `KeQueryDpcWatchdogConfiguration` only emits the period field when the global is non-zero, while `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates `KeDpcWatchdogPeriodMs` from caller-supplied validated input before `KiCreateDpcLimitsProcessorConfiguration` converts it into processor-local limits. That means the current app baseline `DpcWatchdogPeriod = 120000` is now in direct tension with live current-build state, not just unsupported by a primary Microsoft registry source. The record therefore stays deprecated: the registry mapping is still not primary-sourced, and the observed live default does not match the repo/app baseline.",
     "targets": [
       {
         "target_id": "dpc-watchdog-period",
@@ -41,6 +41,15 @@
             "evidence_ids": [
               "repo-system-doc-kernel",
               "app-system-registry-provider"
+            ]
+          },
+          {
+            "state_kind": "live-current-build-global",
+            "value": 0,
+            "label": "Live current-build kernel state",
+            "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogPeriodMs = 0` on the running current build.",
+            "evidence_ids": [
+              "vm-dpc-watchdog-period-current-build-kd-20260407"
             ]
           }
         ],
@@ -75,10 +84,11 @@
           "rationale": "Do not publish a validated watchdog-period baseline until the exact registry mapping is backed by a primary Microsoft source."
         }
       ],
-      "notes": "This keeps the low-level watchdog setting out of published presets until it is properly sourced.",
+      "notes": "This keeps the low-level watchdog setting out of published presets until it is properly sourced and reconciled with the current-build live kernel state.",
       "evidence_ids": [
         "ms-dpc-watchdog-information",
-        "repo-system-doc-kernel"
+        "repo-system-doc-kernel",
+        "vm-dpc-watchdog-period-current-build-kd-20260407"
       ]
     }
   ],
@@ -137,7 +147,8 @@
       "bad_when": "You need a validated Microsoft registry mapping.",
       "tradeoffs": [
         "The current app behavior is captured.",
-        "The exact registry semantics remain based on repo provenance rather than a captured primary source."
+        "The exact registry semantics remain based on repo provenance rather than a captured primary source.",
+        "The current app baseline conflicts with observed current-build kernel state."
       ],
       "apply_allowed": false,
       "notes": "Blocked until a primary Microsoft source for DpcWatchdogPeriod is captured.",
@@ -228,6 +239,20 @@
         "runtime-gate"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-dpc-watchdog-period-current-build-kd-20260407",
+      "kind": "vm-test",
+      "title": "Current-build KVM local-KD shows live DpcWatchdogPeriod state plus reader/writer path",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json",
+      "summary": "Dedicated KVM local-KD work read `KeDpcWatchdogPeriodMs = 0` on the running current build, showed that `KeQueryDpcWatchdogConfiguration` only emits the field when the global is non-zero, and then showed that `KeUpdateDpcWatchdogConfiguration` is the explicit writer for the global.",
+      "supports": [
+        "behavior",
+        "value",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -237,21 +262,23 @@
     "restore_default_supported": false,
     "restore_previous_supported": false,
     "needs_vm_validation": false,
-    "why": "Microsoft clearly documents the DPC watchdog feature, but this research pass did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself.",
+    "why": "Microsoft clearly documents the DPC watchdog feature, but this research pass still did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself and the later current-build KD work now shows that the app baseline conflicts with live kernel state.",
     "blocking_issues": [
       "No primary Microsoft source for the DpcWatchdogPeriod registry value was captured in this research pass.",
-      "The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key."
+      "The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key.",
+      "The current app baseline 120000 conflicts with observed current-build `KeDpcWatchdogPeriodMs = 0`."
     ]
   },
   "open_questions": [
     "Can a primary Microsoft source for DpcWatchdogPeriod be captured?",
-    "Should the app surface this only as an experimental kernel watchdog setting?"
+    "Should the app surface this only as an experimental kernel watchdog setting?",
+    "What caller, if any, feeds persisted registry data into `KeUpdateDpcWatchdogConfiguration` on the current build?"
   ],
-  "last_reviewed_utc": "2026-03-21T07:42:45.369317Z",
+  "last_reviewed_utc": "2026-04-07T19:55:00Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
     "exact_quote_or_path": "if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src | 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; }",
     "key_found_on_page": true,
-    "notes": "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block."
+    "notes": "Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block; later KVM local-KD evidence showed the live current-build state is `0` and that `KeUpdateDpcWatchdogConfiguration` is the explicit writer path."
   }
 }

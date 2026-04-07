@@ -73,7 +73,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.kernel-default-dynamic-hetero-cpu-policy` | deprecated | Class E | `research/records/system.kernel-default-dynamic-hetero-cpu-policy.review.json` | - | `d4f9f4277b3995932e2b969e0805726c1942c1c670aba12c776a390d680e8897` | `20c661ce6cc44bf5a5ab6d4ad79ec05987028fdae02c0759a85174136470adaa` | 7 |
 | `system.kernel-disable-low-qos-timer-resolution` | deprecated | Class E | `research/records/system.kernel-disable-low-qos-timer-resolution.review.json` | - | `508e14edd09d85702ec003d984bafa4abad8028ff6811be796810f1d69ae6f32` | `527d4e2f7c1cf28a173be68ad0935e8c3ce2ad60d0d3503c3d5cf3ba16de4762` | 5 |
 | `system.kernel-dpc-queue-depth` | deprecated | Class E | `research/records/system.kernel-dpc-queue-depth.review.json` | - | `e14fd672f2448de75816dd48d840f60e7c9834279b5f6f8b9ba689b995de5a0a` | `7956ab991794054437b4287a944a9a513ee19f592cb2d3b96e2f4a108349b20b` | 3 |
-| `system.kernel-dpc-watchdog-period` | deprecated | Class E | `research/records/system.kernel-dpc-watchdog-period.review.json` | - | `968305346ef6df3f84494711ae38d007f00c6c8b7b202d884967f5ed3b415944` | `50918c9775cf230fcfb42bd1b4fbdf60619c9870e00912e798dc04b9300be894` | 6 |
+| `system.kernel-dpc-watchdog-period` | deprecated | Class E | `research/records/system.kernel-dpc-watchdog-period.review.json` | - | `487364d97520f3485663985a0100c8964c4505a4cb61990ed06db98d86e43921` | `caf8e59ea52f8c0784187875edca479290d13e5229afd771cbd3267ef71c42ee` | 7 |
 | `system.kernel-ideal-dpc-rate` | deprecated | Class E | `research/records/system.kernel-ideal-dpc-rate.review.json` | - | `595a46c611fbc1a48c1b327d08f937f898d711fff3174c7a8299709a92aa6a6a` | `d01a67b9895785d163758d28753068ab0659ef56dfee572e23e8e53c426648d2` | 3 |
 | `system.kernel-minimum-dpc-rate` | deprecated | Class E | `research/records/system.kernel-minimum-dpc-rate.review.json` | - | `d7853f873e4c78f061bd0d6a07d2b6c27c77b9e6518740b09ab1b68822fb523c` | `1b4057c538c7e5d6fa6933ab7db5c9e6173a88b304e276203c1b54fad8b9e467` | 3 |
 | `system.kernel-serialize-timer-expiration` | deprecated | Class E | `research/records/system.kernel-serialize-timer-expiration.review.json` | - | `f43550085a406547abffa087884ebdabe493564e72d3e9b530faac08c7a0c1dd` | `ef40341c5402ebdc6e5f823c7ad36c0b9dd2b5f22a1604bd2d756c68a79abb2b` | 3 |
@@ -1584,10 +1584,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.kernel-dpc-watchdog-period.review.json`
-- Source SHA256: `968305346ef6df3f84494711ae38d007f00c6c8b7b202d884967f5ed3b415944`
-- Proof SHA256: `50918c9775cf230fcfb42bd1b4fbdf60619c9870e00912e798dc04b9300be894`
+- Source SHA256: `487364d97520f3485663985a0100c8964c4505a4cb61990ed06db98d86e43921`
+- Proof SHA256: `caf8e59ea52f8c0784187875edca479290d13e5229afd771cbd3267ef71c42ee`
 
-**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, and the decompiled watchdog query path now shows the raw period value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM local-KD evidence tightened the current-build picture: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, and `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.
 
 **Evidence**
 
@@ -1599,6 +1599,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-system-doc-kernel` | `repo-doc` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
 | `ghidra-dpc-watchdog-period-reader` | `decompilation` | Nohuto's and our Ghidra decompilation - Decompiled DPC watchdog configuration reader | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c) |
+| `vm-dpc-watchdog-period-current-build-kd-20260407` | `vm-test` | Current-build KVM local-KD shows live DpcWatchdogPeriod state plus reader/writer path | [evidence/files/vm/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-config-readers-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-update-config-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json) |
 
 **Validation proof**
 
@@ -1606,7 +1607,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c) |
 | Exact quote / path | if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src \| 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; } |
-| Notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block. |
+| Notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block; later KVM local-KD evidence showed the live current-build state is `0` and that `KeUpdateDpcWatchdogConfiguration` is the explicit writer path. |
 
 ---
 
