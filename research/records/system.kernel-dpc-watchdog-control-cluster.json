@@ -4,7 +4,7 @@
   "record_id": "system.kernel-dpc-watchdog-control-cluster",
   "tweak_id": "system.kernel-dpc-watchdog-control-cluster",
   "record_status": "draft",
-  "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM local-KD disassembly already proves that the corresponding globals are real reader and writer participants: `KeQueryDpcWatchdogConfiguration` reads them, `KiValidateDpcWatchdogConfiguration` backfills and validates them, and `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input. The family is real, but it still lacks dedicated live current-build value reads and a demonstrated persisted registry seeding caller.",
+  "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM local-KD disassembly already proves that the corresponding globals are real reader and writer participants: `KeQueryDpcWatchdogConfiguration` reads them, `KiValidateDpcWatchdogConfiguration` backfills and validates them, and `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input. A later PDB-backed Ghidra symbol-xref pass further narrowed the caller story by tying `KeUpdateDpcWatchdogConfiguration` to `NtSetSystemInformation`. The family is real, but it still lacks dedicated live current-build value reads and a demonstrated persisted registry seeding caller.",
   "setting": {
     "name": "Session Manager Kernel DPC Watchdog Control Timeout Cluster",
     "category": "System",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "This cluster appears to control several kernel DPC watchdog timing thresholds. The names are real on the current build, but the exact live default state for these three globals has not yet been directly read.",
     "why_people_change_it": "Kernel and latency researchers may inspect these values when investigating DPC watchdog thresholds, timeout behavior, or internal watchdog configuration APIs.",
-    "tradeoffs_overview": "The cluster now has concrete current-build reader and writer proof, but it still lacks dedicated live value reads and a registry seeding caller. It should stay a draft research cluster, not a tweak candidate.",
-    "professional_notes": "Repo docs list three `Session Manager\\Kernel` DPC watchdog control timeout defaults: `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000`. Current-build KVM local-KD disassembly already proves that the corresponding globals are structurally real on the running build. `KeQueryDpcWatchdogConfiguration` reads `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` and only emits them when the globals are non-zero. `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and enforces ordering/range checks. `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the globals from caller-supplied validated input before downstream processor-limit assembly. This is strong structural evidence for the family, but it still stops short of validated registry semantics because the live current-build values for these three globals have not yet been directly read and no caller has yet been shown to feed persisted `Session Manager\\Kernel` values into the writer path.",
+    "tradeoffs_overview": "The cluster now has concrete current-build reader and writer proof plus a narrowed runtime caller story, but it still lacks dedicated live value reads and a persisted registry seeding caller. It should stay a draft research cluster, not a tweak candidate.",
+    "professional_notes": "Repo docs list three `Session Manager\\Kernel` DPC watchdog control timeout defaults: `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000`. Current-build KVM local-KD disassembly already proves that the corresponding globals are structurally real on the running build. `KeQueryDpcWatchdogConfiguration` reads `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` and only emits them when the globals are non-zero. `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and enforces ordering/range checks. `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the globals from caller-supplied validated input before downstream processor-limit assembly. A later PDB-backed Ghidra symbol-xref pass tightened the caller story by showing that `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while `KiInitializeProcessor` references the downstream `KiCreateDpcLimitsProcessorConfiguration` consumer. This is strong structural evidence for the family, but it still stops short of validated registry semantics because the live current-build values for these three globals have not yet been directly read and no persisted `Session Manager\\Kernel` seeding caller has yet been shown above the writer path.",
     "targets": [
       {
         "target_id": "dpc-timeout",
@@ -190,6 +190,19 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-ghidra-caller-20260407",
+      "kind": "vm-test",
+      "title": "PDB-backed KVM Ghidra caller pass ties DPC watchdog writer to runtime API",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/evidence.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/ghidra-matches.md",
+      "summary": "A PDB-backed current-build Ghidra symbol-xref pass showed that `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while `KiInitializeProcessor` references the downstream `KiCreateDpcLimitsProcessorConfiguration` consumer.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -199,7 +212,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults plus concrete current-build reader and writer proof. It is not ready for validation because the live current-build values for these three globals have not yet been directly read and no current-build caller has been shown to feed persisted registry values into the writer path.",
+    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults plus concrete current-build reader/writer proof and now a narrowed runtime caller story via `NtSetSystemInformation`. It is not ready for validation because the live current-build values for these three globals have not yet been directly read and no current-build persisted registry caller has been shown to feed values into the writer path.",
     "manual_review_required": true,
     "blocking_issues": [
       "no-current-build-live-values",
@@ -210,7 +223,7 @@
   },
   "open_questions": [
     "What are the live current-build values of `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` on the running build?",
-    "What current-build caller feeds `Session Manager\\Kernel` DPC watchdog control values into `KeUpdateDpcWatchdogConfiguration`, if any?",
+    "What current-build persisted registry caller feeds `Session Manager\\Kernel` DPC watchdog control values into `KeUpdateDpcWatchdogConfiguration`, if any?",
     "Are these values boot-seeded, runtime API-only, or conditionally initialized on demand?"
   ],
   "tested_on": [
@@ -218,8 +231,8 @@
       "environment": "KVM local-KD structural follow-up",
       "os": "Windows 11 25H2",
       "build": "26200",
-      "notes": "Dedicated current-build KD disassembly proved the reader and writer path for the three control globals, but did not directly read their live values."
+      "notes": "Dedicated current-build KD disassembly proved the reader and writer path for the three control globals without directly reading their live values; later PDB-backed Ghidra tied the writer path to `NtSetSystemInformation`."
     }
   ],
-  "last_reviewed_utc": "2026-04-07T20:10:00Z"
+  "last_reviewed_utc": "2026-04-07T20:20:00Z"
 }

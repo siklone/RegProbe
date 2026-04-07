@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T19:56:04.230345Z",
+  "generated_utc": "2026-04-07T19:59:24.080220Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 316,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T19:56:03.395707Z",
+      "generated_utc": "2026-04-07T19:59:23.226301Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18603,6 +18603,12 @@
               "url": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/dpc-watchdog-update-config-kd-20260407a.stdout.txt",
               "kind": "vm-test",
               "summary": "A dedicated current-build KD disassembly pass showed that `KeUpdateDpcWatchdogConfiguration` validates caller input and writes `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpc..."
+            },
+            {
+              "title": "PDB-backed KVM Ghidra caller pass ties DPC watchdog writer to runtime API",
+              "url": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/evidence.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/ghidra-matches.md",
+              "kind": "vm-test",
+              "summary": "A PDB-backed current-build Ghidra symbol-xref pass showed that `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while `KiInitializeProcessor` references t..."
             }
           ]
         },
@@ -18614,13 +18620,13 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-control-cluster.json",
-      "source_file_sha256": "7a7e65e80aa905a9999c4185d533221627798414219df774333de87659e5c2e2",
-      "source_file_size_bytes": 11882,
+      "source_file_sha256": "79918b039aae3982f2db7eb6e487cd820a2620a43992c1510a604f4fd306fa64",
+      "source_file_size_bytes": 13404,
       "name": "Session Manager Kernel DPC Watchdog Control Timeout Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Control Timeouts",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM local-KD disassembly already proves that the corresponding globals are real reader and writer participants: `KeQueryDpcWatchdogConfiguration` reads them, `KiValidateDpcWatchdogConfiguration` backfills and validates them, and `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input. The family is real, but it still lacks dedicated live current-build value reads and a demonstrated persisted registry seeding caller.",
+      "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM local-KD disassembly already proves that the corresponding globals are real reader and writer participants: `KeQueryDpcWatchdogConfiguration` reads them, `KiValidateDpcWatchdogConfiguration` backfills and validates them, and `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input. A later PDB-backed Ghidra symbol-xref pass further narrowed the caller story by tying `KeUpdateDpcWatchdogConfiguration` to `NtSetSystemInformation`. The family is real, but it still lacks dedicated live current-build value reads and a demonstrated persisted registry seeding caller.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -18628,7 +18634,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults plus concrete current-build reader and writer proof. It is not ready for validation because the live current-build values for these three globals have not yet been directly read and no current-build caller has been shown to feed persisted registry values into the writer path.",
+        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults plus concrete current-build reader/writer proof and now a narrowed runtime caller story via `NtSetSystemInformation`. It is not ready for validation because the live current-build values for these three globals have not yet been directly read and no current-build persisted registry caller has been shown to feed values into the writer path.",
         "blocking_issues": [
           "no-current-build-live-values",
           "no-current-build-registry-seeding-path",
@@ -18813,6 +18819,20 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-dpc-watchdog-ghidra-caller-20260407",
+          "kind": "vm-test",
+          "title": "PDB-backed KVM Ghidra caller pass ties DPC watchdog writer to runtime API",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/evidence.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/ghidra-matches.md",
+          "summary": "A PDB-backed current-build Ghidra symbol-xref pass showed that `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while `KiInitializeProcessor` references the downstream `KiCreateDpcLimitsProcessorConfiguration` consumer.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "runtime-gate",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": null,
@@ -18894,13 +18914,13 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-profile-cluster.json",
-      "source_file_sha256": "60c1bc6867252255d1cb70198af2cfe4108264c31bb22f8bee272aab1a2e4150",
-      "source_file_size_bytes": 19654,
+      "source_file_sha256": "ae25084900d3b62edc3f2877c8e8d0ad5e6193a0158d52ced391cdc18719d449",
+      "source_file_size_bytes": 20879,
       "name": "Session Manager Kernel DPC Watchdog Profile Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Profile",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader, validator, and writer path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges, and `KeUpdateDpcWatchdogConfiguration` writes the globals from caller-supplied validated input. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
+      "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader, validator, and writer path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges, and `KeUpdateDpcWatchdogConfiguration` writes the globals from caller-supplied validated input. A later PDB-backed Ghidra symbol-xref pass narrowed the caller story further: `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while `KiInitializeProcessor` consumes `KiCreateDpcLimitsProcessorConfiguration`. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -18908,7 +18928,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, and a concrete current-build reader, validator, and writer path. It is not ready for validation because the current build conflicts with the repo-doc defaults for most values and no current-build caller has yet been shown to feed persisted registry values into the explicit writer path.",
+        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, a concrete current-build reader/validator/writer path, and now a narrowed caller story via `NtSetSystemInformation` plus `KiInitializeProcessor`. It is not ready for validation because the current build conflicts with the repo-doc defaults for most values and no current-build persisted registry seeding caller has yet been shown to feed values into the explicit writer path.",
         "blocking_issues": [
           "live-defaults-conflict-docs",
           "no-current-build-registry-seeding-path",
@@ -19188,6 +19208,20 @@
           "title": "Dedicated KVM local-KD disassembly shows explicit DPC watchdog writer path",
           "location": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/dpc-watchdog-update-config-kd-20260407a.stdout.txt",
           "summary": "A dedicated current-build KD disassembly pass showed that `KeUpdateDpcWatchdogConfiguration` validates caller input, writes the DPC watchdog globals under lock, applies the profile-buffer fallback, and then calls `KiCreateDpcLimitsProcessorConfiguration` to build the per-processor limits block.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "runtime-gate",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-dpc-watchdog-ghidra-caller-20260407",
+          "kind": "vm-test",
+          "title": "PDB-backed KVM Ghidra caller pass ties DPC watchdog writer to runtime API and init consumer",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/evidence.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/ghidra-matches.md",
+          "summary": "A PDB-backed current-build Ghidra symbol-xref pass showed that `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while both `KeUpdateDpcWatchdogConfiguration` and `KiInitializeProcessor` reference `KiCreateDpcLimitsProcessorConfiguration`.",
           "strength": "high",
           "supports": [
             "behavior",
