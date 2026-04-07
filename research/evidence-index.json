@@ -1,25 +1,25 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T18:57:54.360953Z",
+  "generated_utc": "2026-04-07T19:05:19.545260Z",
   "summary": {
-    "total_records": 313,
+    "total_records": 314,
     "validated": 255,
     "deprecated": 55,
     "review_required": 0,
-    "records_with_evidence": 313,
+    "records_with_evidence": 314,
     "records_without_evidence": 0,
-    "records_missing_validation_proof": 3,
+    "records_missing_validation_proof": 4,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
       "A": 248,
       "E": 55,
       "B": 7,
-      "D": 3
+      "D": 4
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T18:57:54.103936Z",
+      "generated_utc": "2026-04-07T19:05:19.255446Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18555,6 +18555,268 @@
             "behavior",
             "version-scope",
             "risk"
+          ],
+          "origin": "VM test / probe"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": null,
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+      "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+      "record_status": "draft",
+      "source_file": "research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json",
+      "name": "Force Bugcheck For DPC Watchdog",
+      "category": "System",
+      "area": "Session Manager Kernel DPC Watchdog",
+      "scope": "device",
+      "summary": "Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, and now has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`. The lane is real, but still lacks an exact runtime registry read or a dedicated current-build caller/seeding proof.",
+      "evidence_class": {
+        "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+        "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+        "record_status": "draft",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "low",
+        "app_mapping_status": "not-mapped",
+        "restore_story_known": true,
+        "tested_build": "26200",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "Repo docs assign `ForceBugcheckForDpcWatchdog = 0` and map it to `KiForceBugcheckForDpcWatchdog` under `Session Manager\\\\Kernel`.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo system docs assign ForceBugcheckForDpcWatchdog = 0",
+              "url": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
+              "kind": "repo-doc",
+              "summary": "Repo docs assign `ForceBugcheckForDpcWatchdog = 0` and map it to `KiForceBugcheckForDpcWatchdog` under `Session Manager\\\\Kernel`."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while `ForceBugcheckForDpcWatchdog` itself is absent.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": true,
+          "links": [
+            {
+              "title": "Observed baseline existence for ForceBugcheckForDpcWatchdog",
+              "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+              "kind": "registry-observation",
+              "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while `ForceBugcheckForDpcWatchdog` itself is absent."
+            },
+            {
+              "title": "Lightweight runtime batch wrote ForceBugcheckForDpcWatchdog = 1 and rebooted once",
+              "url": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
+              "kind": "vm-test",
+              "summary": "The tools-hardened lightweight runtime batch wrote `ForceBugcheckForDpcWatchdog = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candid..."
+            },
+            {
+              "title": "Dedicated KVM local-KD bundle resolves KiForceBugcheckForDpcWatchdog = 0",
+              "url": "evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/dpc-watchdog-force-bugcheck-kd-20260407a.stdout.txt",
+              "kind": "vm-test",
+              "summary": "A dedicated live KVM local-KD bundle resolved the DPC watchdog symbol cluster and directly read `nt!KiForceBugcheckForDpcWatchdog = 0` on the running current build."
+            }
+          ]
+        },
+        "upstream_lineage": {
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
+        }
+      },
+      "decision": {
+        "confidence": "low",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, current-build string hit, a real write-and-reboot runtime lane, and dedicated live current-build KD proof that the kernel global exists at value `0`. It is not ready for validation because the exact registry reader/caller path, exact runtime registry read, and non-default semantics remain unproven.",
+        "blocking_issues": [
+          "no-current-build-reader-path",
+          "runtime_no_read",
+          "no-doc-source-outside-repo",
+          "non-default-semantics-unproven"
+        ]
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "not currently shipped in the app",
+        "notes": "The app does not currently expose this kernel watchdog policy as a tweak surface.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "force-bugcheck-for-dpc-watchdog",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "ForceBugcheckForDpcWatchdog",
+          "value_type": "REG_DWORD",
+          "notes": "The lightweight runtime batch later wrote the value as `1` for one reboot, but did not produce an exact trace hit for this candidate. Dedicated KVM local-KD proof now also shows the running current-build global `KiForceBugcheckForDpcWatchdog = 0`.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Missing on observed baseline",
+              "meaning": "The parent path exists, but the value is absent on the observed clean baseline.",
+              "evidence_ids": [
+                "vm-session-manager-kernel-force-bugcheck-existence-20260329"
+              ]
+            },
+            {
+              "state_kind": "documented-default",
+              "value": 0,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs assign a default value of `0` and map it to `KiForceBugcheckForDpcWatchdog`.",
+              "evidence_ids": [
+                "repo-session-manager-kernel-force-bugcheck-doc-20260327"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Observed baseline registry state",
+          "applies_to": "Win25H2Clean observed baseline",
+          "states": [
+            {
+              "target_id": "force-bugcheck-for-dpc-watchdog",
+              "state_kind": "missing",
+              "value": null
+            }
+          ],
+          "evidence_ids": [
+            "vm-session-manager-kernel-force-bugcheck-existence-20260329"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "observed-default-missing",
+          "label": "Observed default-missing state",
+          "intended_for": [
+            "Research tracking",
+            "Future DPC-watchdog validation"
+          ],
+          "avoid_for": [
+            "General users",
+            "One-click tweak surfaces"
+          ],
+          "states": [
+            {
+              "target_id": "force-bugcheck-for-dpc-watchdog",
+              "state_kind": "missing",
+              "value": null
+            }
+          ],
+          "good_when": "You want to preserve the observed baseline until a tighter DPC-watchdog proof path exists.",
+          "bad_when": "You need a validated non-default recommendation or production tweak.",
+          "tradeoffs": [
+            "Preserves the observed baseline registry state.",
+            "Avoids inventing unsupported non-default semantics.",
+            "Keeps the next proof step focused on caller/reader validation rather than speculative mutation."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-session-manager-kernel-force-bugcheck-doc-20260327",
+            "vm-session-manager-kernel-force-bugcheck-existence-20260329",
+            "static-session-manager-kernel-force-bugcheck-string-20260331",
+            "vm-session-manager-kernel-force-bugcheck-runtime-20260331",
+            "vm-session-manager-kernel-force-bugcheck-kd-20260407"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-session-manager-kernel-force-bugcheck-doc-20260327",
+          "kind": "repo-doc",
+          "title": "Repo system docs assign ForceBugcheckForDpcWatchdog = 0",
+          "location": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
+          "summary": "Repo docs assign `ForceBugcheckForDpcWatchdog = 0` and map it to `KiForceBugcheckForDpcWatchdog` under `Session Manager\\\\Kernel`.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "default"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-force-bugcheck-existence-20260329",
+          "kind": "registry-observation",
+          "title": "Observed baseline existence for ForceBugcheckForDpcWatchdog",
+          "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+          "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while `ForceBugcheckForDpcWatchdog` itself is absent.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM registry observation"
+        },
+        {
+          "evidence_id": "static-session-manager-kernel-force-bugcheck-string-20260331",
+          "kind": "inference",
+          "title": "Current-build string hit for ForceBugcheckForDpcWatchdog",
+          "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+          "summary": "The broad current-build string batch found an exact Unicode hit for `ForceBugcheckForDpcWatchdog` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-force-bugcheck-runtime-20260331",
+          "kind": "vm-test",
+          "title": "Lightweight runtime batch wrote ForceBugcheckForDpcWatchdog = 1 and rebooted once",
+          "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
+          "summary": "The tools-hardened lightweight runtime batch wrote `ForceBugcheckForDpcWatchdog = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candidate in the compact runtime results.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "version-scope",
+            "risk"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-force-bugcheck-kd-20260407",
+          "kind": "vm-test",
+          "title": "Dedicated KVM local-KD bundle resolves KiForceBugcheckForDpcWatchdog = 0",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/dpc-watchdog-force-bugcheck-kd-20260407a.stdout.txt",
+          "summary": "A dedicated live KVM local-KD bundle resolved the DPC watchdog symbol cluster and directly read `nt!KiForceBugcheckForDpcWatchdog = 0` on the running current build.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "default",
+            "version-scope"
           ],
           "origin": "VM test / probe"
         }
