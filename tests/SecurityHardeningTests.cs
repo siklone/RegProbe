@@ -179,6 +179,32 @@ public sealed class ElevatedHostSessionSecurityTests
     }
 
     [Fact]
+    public void RedactSensitiveText_MasksUnquotedAndRepeatedTokens()
+    {
+        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText(
+            "--session-token ABCDEF123456 --session-token 'SECOND' SessionToken = \"THIRD\" token = fourth");
+
+        Assert.DoesNotContain("ABCDEF123456", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("SECOND", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("THIRD", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("fourth", redacted, StringComparison.Ordinal);
+        Assert.Contains("--session-token <redacted>", redacted, StringComparison.Ordinal);
+        Assert.Contains("--session-token '<redacted>'", redacted, StringComparison.Ordinal);
+        Assert.Contains("SessionToken = \"<redacted>\"", redacted, StringComparison.Ordinal);
+        Assert.Contains("token = <redacted>", redacted, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void RedactSensitiveText_DoesNotMaskUnrelatedTokenWords()
+    {
+        var original = "--tokenizer enabled --api-token off --session-tokenized false";
+
+        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText(original);
+
+        Assert.Equal(original, redacted);
+    }
+
+    [Fact]
     public void ClientProcessValidationRejectsUnexpectedPid()
     {
         Assert.True(ElevatedHostSessionSecurity.IsClientProcessAccepted(1234, 1234));

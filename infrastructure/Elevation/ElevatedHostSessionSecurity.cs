@@ -74,22 +74,48 @@ public static class ElevatedHostSessionSecurity
             return string.Empty;
         }
 
-        var redacted = Regex.Replace(
+        var redacted = ReplaceSensitiveValue(
             text,
-            "(--session-token\\s+\")([^\"]+)(\")",
-            "$1<redacted>$3",
-            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-        redacted = Regex.Replace(
+            "(--session-token\\s+)(?:\"[^\"]*\"|'[^']*'|\\S+)");
+        redacted = ReplaceSensitiveValue(
             redacted,
-            "(sessionToken=)([^\\s]+)",
-            "$1<redacted>",
-            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-        redacted = Regex.Replace(
+            "(\\bsessionToken\\b\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|\\S+)");
+        redacted = ReplaceSensitiveValue(
             redacted,
-            "(token=)([^\\s]+)",
-            "$1<redacted>",
-            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            "(\\btoken\\b\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|\\S+)");
         return redacted;
+    }
+
+    private static string ReplaceSensitiveValue(string text, string pattern)
+    {
+        return Regex.Replace(
+            text,
+            pattern,
+            static match =>
+            {
+                var prefix = match.Groups[1].Value;
+                var suffix = match.Value[prefix.Length..];
+                return prefix + RedactArgumentValuePreservingQuotes(suffix);
+            },
+            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+    }
+
+    private static string RedactArgumentValuePreservingQuotes(string value)
+    {
+        if (value.Length >= 2)
+        {
+            if (value[0] == '"' && value[^1] == '"')
+            {
+                return "\"<redacted>\"";
+            }
+
+            if (value[0] == '\'' && value[^1] == '\'')
+            {
+                return "'<redacted>'";
+            }
+        }
+
+        return "<redacted>";
     }
 
     [DllImport("kernel32.dll", SetLastError = true)]
