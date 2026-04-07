@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 315 |
+| Total records | 316 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 315 |
+| Records with evidence | 316 |
 | Records without evidence | 0 |
-| Records missing validation proof | 5 |
+| Records missing validation proof | 6 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
 | Class B | 7 |
-| Class D | 5 |
+| Class D | 6 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -87,6 +87,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.power-watchdog-timeout-cluster` | draft | Class D | `research/records/power.control.power-watchdog-timeout-cluster.json` | - | `43248b00792f0f9bfecbb053d4d3dbef8d59fd013233f6b41b7f1aa6bb700d68` |  | 4 |
 | `power.control.win32k-callout-watchdog-timeout-seconds` | draft | Class D | `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json` | - | `529e2adfa92ef2ef81910f7ced3f98c2de0f0652a0c7b3379a0e35e29dcce003` |  | 4 |
 | `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class D | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `9f225d3d01745832a87ae42eebbc4df923b193dde062b6e31650887d3e138a6f` |  | 7 |
+| `system.kernel-dpc-watchdog-control-cluster` | draft | Class D | `research/records/system.kernel-dpc-watchdog-control-cluster.json` | - | `7a7e65e80aa905a9999c4185d533221627798414219df774333de87659e5c2e2` |  | 3 |
 | `system.kernel-dpc-watchdog-profile-cluster` | draft | Class D | `research/records/system.kernel-dpc-watchdog-profile-cluster.json` | - | `60c1bc6867252255d1cb70198af2cfe4108264c31bb22f8bee272aab1a2e4150` |  | 6 |
 | `system.kernel.force-bugcheck-for-dpc-watchdog` | draft | Class D | `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json` | - | `ad03e9fc71c89ef34719a6f1c8631f543706ee97a9138953ec7e8bdad76e0aeb` |  | 5 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
@@ -1956,6 +1957,26 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-watchdog-win32-callout-kd-20260407` | `vm-test` | KVM local-KD disassembly for PopInvokeWin32CalloutWithWatchdog | [research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-follow-up-20260407.md](notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-follow-up-20260407.md) and [evidence/files/vm/watchdog-win32-callout-20260407a/host-review.json](../evidence/files/vm-tooling-staging/watchdog-win32-callout-20260407a/host-review.json) |
 | `ghidra-watchdog-win32-callout-20260407` | `vm-test` | KVM Ghidra full-analysis pass keeps the exact string but finds no bounded xrefs | [research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-ghidra-symbol-follow-up-20260407.md](notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-ghidra-symbol-follow-up-20260407.md) and [evidence/files/vm/watchdog-win32-callout-ghidra-20260407b/host-review.json](../evidence/files/vm-tooling-staging/watchdog-win32-callout-ghidra-20260407b/host-review.json) |
 | `vm-watchdog-win32-callout-seed-kd-20260407` | `vm-test` | KVM local-KD seeding sweep finds no current-build registry seeding caller | [research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-seed-follow-up-20260407.md](notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-seed-follow-up-20260407.md) and [evidence/files/vm/watchdog-win32-callout-seed-kd-20260407d/host-review.json](../evidence/files/vm-tooling-staging/watchdog-win32-callout-seed-kd-20260407d/host-review.json) |
+
+---
+
+### `system.kernel-dpc-watchdog-control-cluster`
+
+- Status: `draft`
+- Evidence class: `Class D`
+- Source file: `research/records/system.kernel-dpc-watchdog-control-cluster.json`
+- Source SHA256: `7a7e65e80aa905a9999c4185d533221627798414219df774333de87659e5c2e2`
+- Proof SHA256: ``
+
+**Summary:** Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM local-KD disassembly already proves that the corresponding globals are real reader and writer participants: `KeQueryDpcWatchdogConfiguration` reads them, `KiValidateDpcWatchdogConfiguration` backfills and validates them, and `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input. The family is real, but it still lacks dedicated live current-build value reads and a demonstrated persisted registry seeding caller.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-session-manager-kernel-dpc-watchdog-control-docs-20260407` | `repo-doc` | Repo system docs list explicit DPC watchdog control defaults | [Docs/system/system.md](../Docs/system/system.md) |
+| `vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407` | `vm-test` | Dedicated KVM local-KD disassembly shows DPC watchdog control reader and validator path | [evidence/files/vm/dpc-watchdog-config-readers-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-config-readers-kd-20260407a/dpc-watchdog-config-readers-kd-20260407a.stdout.txt](../evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/dpc-watchdog-config-readers-kd-20260407a.stdout.txt) |
+| `vm-session-manager-kernel-dpc-watchdog-update-config-kd-20260407` | `vm-test` | Dedicated KVM local-KD disassembly shows explicit DPC watchdog control writer path | [evidence/files/vm/dpc-watchdog-update-config-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-update-config-kd-20260407a/dpc-watchdog-update-config-kd-20260407a.stdout.txt](../evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/dpc-watchdog-update-config-kd-20260407a.stdout.txt) |
 
 ---
 

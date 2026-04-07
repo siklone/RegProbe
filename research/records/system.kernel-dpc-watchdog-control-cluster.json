@@ -1,0 +1,225 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.kernel-dpc-watchdog-control-cluster",
+  "tweak_id": "system.kernel-dpc-watchdog-control-cluster",
+  "record_status": "draft",
+  "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM local-KD disassembly already proves that the corresponding globals are real reader and writer participants: `KeQueryDpcWatchdogConfiguration` reads them, `KiValidateDpcWatchdogConfiguration` backfills and validates them, and `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input. The family is real, but it still lacks dedicated live current-build value reads and a demonstrated persisted registry seeding caller.",
+  "setting": {
+    "name": "Session Manager Kernel DPC Watchdog Control Timeout Cluster",
+    "category": "System",
+    "area": "Session Manager Kernel DPC Watchdog Control Timeouts",
+    "scope": "device",
+    "casual_explanation": "This cluster appears to control several kernel DPC watchdog timing thresholds. The names are real on the current build, but the exact live default state for these three globals has not yet been directly read.",
+    "why_people_change_it": "Kernel and latency researchers may inspect these values when investigating DPC watchdog thresholds, timeout behavior, or internal watchdog configuration APIs.",
+    "tradeoffs_overview": "The cluster now has concrete current-build reader and writer proof, but it still lacks dedicated live value reads and a registry seeding caller. It should stay a draft research cluster, not a tweak candidate.",
+    "professional_notes": "Repo docs list three `Session Manager\\Kernel` DPC watchdog control timeout defaults: `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000`. Current-build KVM local-KD disassembly already proves that the corresponding globals are structurally real on the running build. `KeQueryDpcWatchdogConfiguration` reads `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` and only emits them when the globals are non-zero. `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and enforces ordering/range checks. `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the globals from caller-supplied validated input before downstream processor-limit assembly. This is strong structural evidence for the family, but it still stops short of validated registry semantics because the live current-build values for these three globals have not yet been directly read and no caller has yet been shown to feed persisted `Session Manager\\Kernel` values into the writer path.",
+    "targets": [
+      {
+        "target_id": "dpc-timeout",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DPCTimeout",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "documented-default",
+            "value": 20000,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs attribute a 20000 ms default to `DPCTimeout`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-dpc-watchdog-control-docs-20260407"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "dpc-soft-timeout",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcSoftTimeout",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "documented-default",
+            "value": 20000,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs attribute a 20000 ms default to `DpcSoftTimeout`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-dpc-watchdog-control-docs-20260407"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "dpc-cumulative-soft-timeout",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcCumulativeSoftTimeout",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "documented-default",
+            "value": 120000,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs attribute a 120000 ms default to `DpcCumulativeSoftTimeout`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-dpc-watchdog-control-docs-20260407"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The app does not currently expose this DPC watchdog control timeout cluster as tweak surfaces.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Repo-documented control defaults",
+      "applies_to": "Repo system docs only; current-build live values for these three globals are not yet directly read",
+      "states": [
+        {
+          "target_id": "dpc-timeout",
+          "state_kind": "documented-default",
+          "value": 20000
+        },
+        {
+          "target_id": "dpc-soft-timeout",
+          "state_kind": "documented-default",
+          "value": 20000
+        },
+        {
+          "target_id": "dpc-cumulative-soft-timeout",
+          "state_kind": "documented-default",
+          "value": 120000
+        }
+      ],
+      "notes": "Current-build structural RE already proves the reader and writer path for the corresponding globals, but the live current-build values for these three fields have not yet been directly read.",
+      "evidence_ids": [
+        "repo-session-manager-kernel-dpc-watchdog-control-docs-20260407",
+        "vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407",
+        "vm-session-manager-kernel-dpc-watchdog-update-config-kd-20260407"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "docs-backed-control-cluster-hold",
+      "label": "Docs-backed control cluster hold",
+      "intended_for": [
+        "Research tracking",
+        "Future live-value capture",
+        "Future caller-chain analysis"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click tweak surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "dpc-timeout",
+          "state_kind": "documented-default",
+          "value": 20000
+        },
+        {
+          "target_id": "dpc-soft-timeout",
+          "state_kind": "documented-default",
+          "value": 20000
+        },
+        {
+          "target_id": "dpc-cumulative-soft-timeout",
+          "state_kind": "documented-default",
+          "value": 120000
+        }
+      ],
+      "good_when": "You want to preserve the repo-doc defaults together with the current-build reader and writer proof while waiting for dedicated live-value reads and a registry seeding caller.",
+      "bad_when": "You need validated live defaults or safe override semantics.",
+      "tradeoffs": [
+        "Preserves the strongest structural proof currently available for the family.",
+        "Avoids claiming undocumented live defaults for the current build.",
+        "Keeps the family in the RE queue without promoting speculative tweak values."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-session-manager-kernel-dpc-watchdog-control-docs-20260407",
+        "vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407",
+        "vm-session-manager-kernel-dpc-watchdog-update-config-kd-20260407"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-session-manager-kernel-dpc-watchdog-control-docs-20260407",
+      "kind": "repo-doc",
+      "title": "Repo system docs list explicit DPC watchdog control defaults",
+      "location": "Docs/system/system.md",
+      "summary": "Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `Session Manager\\Kernel`.",
+      "supports": [
+        "path",
+        "value",
+        "default"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD disassembly shows DPC watchdog control reader and validator path",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/dpc-watchdog-config-readers-kd-20260407a.stdout.txt",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KeQueryDpcWatchdogConfiguration` directly reads `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs`, while `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates the configuration.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-update-config-kd-20260407",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD disassembly shows explicit DPC watchdog control writer path",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/dpc-watchdog-update-config-kd-20260407a.stdout.txt",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KeUpdateDpcWatchdogConfiguration` validates caller input and writes `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` under lock before building the downstream processor limits block.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults plus concrete current-build reader and writer proof. It is not ready for validation because the live current-build values for these three globals have not yet been directly read and no current-build caller has been shown to feed persisted registry values into the writer path.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "no-current-build-live-values",
+      "no-current-build-registry-seeding-path",
+      "runtime_no_read",
+      "no-doc-source-outside-repo"
+    ]
+  },
+  "open_questions": [
+    "What are the live current-build values of `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` on the running build?",
+    "What current-build caller feeds `Session Manager\\Kernel` DPC watchdog control values into `KeUpdateDpcWatchdogConfiguration`, if any?",
+    "Are these values boot-seeded, runtime API-only, or conditionally initialized on demand?"
+  ],
+  "tested_on": [
+    {
+      "environment": "KVM local-KD structural follow-up",
+      "os": "Windows 11 25H2",
+      "build": "26200",
+      "notes": "Dedicated current-build KD disassembly proved the reader and writer path for the three control globals, but did not directly read their live values."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-07T20:10:00Z"
+}
