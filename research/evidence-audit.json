@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T12:27:02.586216Z",
+  "generated_utc": "2026-04-07T12:32:55.574560Z",
   "summary": {
     "total_active_records": 255,
     "class_counts": {
@@ -12137,15 +12137,17 @@
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_reboot",
         "official_doc"
       ],
       "tools_used": [
-        "official-doc"
+        "official-doc",
+        "reboot"
       ],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -12154,7 +12156,7 @@
         "etw_executed": false,
         "boot_phase_included": true,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
       "re_audit_required": true,
       "re_audit_priority": 1,

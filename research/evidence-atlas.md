@@ -32038,7 +32038,7 @@ Nohuto lineage references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 with an empty default value. A current Microsoft Q&A article shows the same command and revert path, but also notes that the workaround may be deprecated on newer 24H2-era builds, so this record treats it as a workaround rather than a stable Microsoft policy surface.
+**Summary:** The current app still matches the original Microsoft Q&A HKCU workaround for the Windows 11 classic context menu by creating HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 with an empty default value. That same Q&A thread is now internally contradictory on newer builds: some later replies say the workaround is deprecated in 24H2, while other later replies still report success when the command is run elevated and Explorer is restarted. Comment-level HKLM ownership/edit advice also appears in the thread, but this review keeps RegProbe on the lower-risk HKCU workaround and does not adopt the HKLM ownership path as canonical research.
 
 **Current implementation**
 
@@ -32127,7 +32127,7 @@ Nohuto lineage references:
 | Source | [https://learn.microsoft.com/en-us/answers/questions/2287432/(article](https://learn.microsoft.com/en-us/answers/questions/2287432/(article))-restore-old-right-click-context-menu-in?forum=windows-all&referrer=answers |
 | Exact quote / path | reg.exe add "HKCU/Software/Classes/CLSID/{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}/InprocServer32" /f /ve ; reg.exe delete "HKCU/Software/Classes/CLSID/{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f |
 | Key found on page | `True` |
-| Notes | The current Microsoft Q&A article shows the same add and delete commands used by the workaround. The same page also notes that this method has been reported as deprecated in 24H2, so the record treats it as workaround evidence rather than a guaranteed modern-build contract. |
+| Notes | The current Microsoft Q&A article still shows the original HKCU add and delete commands. Later comments on the same official thread are contradictory: some report the workaround is deprecated in 24H2, others still report success when run elevated and Explorer is restarted, and some suggest an HKLM ownership/edit path. RegProbe keeps the lower-risk HKCU workaround and does not adopt the HKLM ownership variant. |
 
 **Decision**
 
@@ -32138,7 +32138,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The app matches the same CLSID workaround command and delete path shown in the current Microsoft Q&A article, and the repo documents the restore story. This remains workaround evidence rather than a stable Microsoft policy contract because newer builds may no longer honor it consistently. |
+| Why | The app still matches the HKCU add/delete workaround shown in the current Microsoft Q&A article body, and the repo documents the restore story. The same official thread is now internally contradictory on newer 24H2-era behavior, and comment-level HKLM ownership/edit advice conflicts with the app's current low-risk HKCU mapping. This therefore remains workaround evidence rather than a stable Microsoft policy contract. |
 
 ---
 

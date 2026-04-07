@@ -332,7 +332,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `visibility.hide-language-bar` | validated | Class A | `research/records/visibility.hide-language-bar.review.json` | - | `6dc49e644c0a7236fe28fde21e90a33a01d1a8fab460a8d0a58ab9e5e2ad8652` | `5043261b6230867323aee06d67282216e128d92d362635400822562f4bde7888` | 4 |
 | `visibility.hide-most-used-apps` | validated | Class A | `research/records/visibility.hide-most-used-apps.json` | - | `c81619ff5759c42052a526b494d65c86436c18e429ca51b3fe648963ccefeada` | `463c0178bc1dc3a00a24cc1a6fd5227feefc809d0199b486f689974b1c904a94` | 4 |
 | `visibility.hide-people-bar` | validated | Class A | `research/records/visibility.hide-people-bar.json` | - | `881b46014c315468cb3ff603be4203e2894a41c21a8e6a670b69c7a803658ab2` | `818d6ebbc91b0ee67ef598ca3ba7c39640a6765ca9ee73e71bd5354ed249b61f` | 4 |
-| `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `4d8bd76ec817c45f8476a9d30cf13fe4ed0480610f3e292f8f60bb4b1adb2a90` | `9e7006ba1b255b894a18410e3994db10bb80115d8f954dae626331af5d572b68` | 3 |
+| `visibility.restore-classic-context-menu` | validated | Class B | `research/records/visibility.restore-classic-context-menu.review.json` | - | `5ef59e26b8769a15ea3b17304dadf375ca78501a93dba74f07a7a929ea0920fc` | `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078` | 3 |
 
 ## Per-record details
 
@@ -9529,10 +9529,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/visibility.restore-classic-context-menu.review.json`
-- Source SHA256: `4d8bd76ec817c45f8476a9d30cf13fe4ed0480610f3e292f8f60bb4b1adb2a90`
-- Proof SHA256: `9e7006ba1b255b894a18410e3994db10bb80115d8f954dae626331af5d572b68`
+- Source SHA256: `5ef59e26b8769a15ea3b17304dadf375ca78501a93dba74f07a7a929ea0920fc`
+- Proof SHA256: `5bbd595d14bc9a9a7b765bf44572a5b71f2d40ad57b37913afafd52f7bf94078`
 
-**Summary:** The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 with an empty default value. A current Microsoft Q&A article shows the same command and revert path, but also notes that the workaround may be deprecated on newer 24H2-era builds, so this record treats it as a workaround rather than a stable Microsoft policy surface.
+**Summary:** The current app still matches the original Microsoft Q&A HKCU workaround for the Windows 11 classic context menu by creating HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 with an empty default value. That same Q&A thread is now internally contradictory on newer builds: some later replies say the workaround is deprecated in 24H2, while other later replies still report success when the command is run elevated and Explorer is restarted. Comment-level HKLM ownership/edit advice also appears in the thread, but this review keeps RegProbe on the lower-risk HKCU workaround and does not adopt the HKLM ownership path as canonical research.
 
 **Evidence**
 
@@ -9548,6 +9548,6 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/answers/questions/2287432/(article](https://learn.microsoft.com/en-us/answers/questions/2287432/(article))-restore-old-right-click-context-menu-in?forum=windows-all&referrer=answers |
 | Exact quote / path | reg.exe add "HKCU/Software/Classes/CLSID/{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}/InprocServer32" /f /ve ; reg.exe delete "HKCU/Software/Classes/CLSID/{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f |
-| Notes | The current Microsoft Q&A article shows the same add and delete commands used by the workaround. The same page also notes that this method has been reported as deprecated in 24H2, so the record treats it as workaround evidence rather than a guaranteed modern-build contract. |
+| Notes | The current Microsoft Q&A article still shows the original HKCU add and delete commands. Later comments on the same official thread are contradictory: some report the workaround is deprecated in 24H2, others still report success when run elevated and Explorer is restarted, and some suggest an HKLM ownership/edit path. RegProbe keeps the lower-risk HKCU workaround and does not adopt the HKLM ownership variant. |
 
 ---
