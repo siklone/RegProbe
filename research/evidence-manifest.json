@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T19:22:27.768331Z",
+  "generated_utc": "2026-04-07T19:30:18.992062Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 315,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T19:22:26.916792Z",
+      "generated_utc": "2026-04-07T19:30:18.188055Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18569,6 +18569,12 @@
               "url": "evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/dpc-watchdog-config-readers-kd-20260407a.stdout.txt",
               "kind": "vm-test",
               "summary": "A dedicated current-build KD disassembly pass showed that `KeQueryDpcWatchdogConfiguration` directly reads the profile and control watchdog globals and only sets output bits / c..."
+            },
+            {
+              "title": "Dedicated KVM local-KD disassembly excludes KiApplyProcessorDpcLimits as seeding caller",
+              "url": "evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/dpc-watchdog-apply-limits-kd-20260407b.stdout.txt",
+              "kind": "vm-test",
+              "summary": "A dedicated current-build KD disassembly pass showed that `KiApplyProcessorDpcLimits` forwards an input configuration block to `KiSetProcessorDpcLimits` and does not directly re..."
             }
           ]
         },
@@ -18580,8 +18586,8 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-profile-cluster.json",
-      "source_file_sha256": "7b03916ff052c1a06d3ef1889d3c48a78563a7849c0bbb8dae8474738e995ced",
-      "source_file_size_bytes": 15770,
+      "source_file_sha256": "ea2188c93b06bd76f56c6b1c6e862525c616d2a62e52b4dc139d99a568ad4eba",
+      "source_file_size_bytes": 16803,
       "name": "Session Manager Kernel DPC Watchdog Profile Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Profile",
@@ -18838,6 +18844,19 @@
           "supports": [
             "behavior",
             "runtime-gate",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-dpc-watchdog-apply-limits-kd-20260407",
+          "kind": "vm-test",
+          "title": "Dedicated KVM local-KD disassembly excludes KiApplyProcessorDpcLimits as seeding caller",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/dpc-watchdog-apply-limits-kd-20260407b.stdout.txt",
+          "summary": "A dedicated current-build KD disassembly pass showed that `KiApplyProcessorDpcLimits` forwards an input configuration block to `KiSetProcessorDpcLimits` and does not directly read the watchdog profile globals.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
             "version-scope"
           ],
           "origin": "VM test / probe"

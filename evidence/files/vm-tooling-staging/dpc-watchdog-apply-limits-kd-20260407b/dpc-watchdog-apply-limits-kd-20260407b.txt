@@ -1,0 +1,7 @@
+.sympath C:\Tools\Symbols\dpc-watchdog-apply-limits-kd-20260407b
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!KiApplyProcessorDpcLimits
+uf nt!KiApplyProcessorDpcLimits
+.echo REGPROBE_LOCALKD_END
+q
