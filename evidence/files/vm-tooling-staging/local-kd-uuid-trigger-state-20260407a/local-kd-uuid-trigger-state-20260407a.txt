@@ -1,0 +1,14 @@
+.sympath C:\Tools\Symbols\local-kd-uuid-trigger-state-20260407a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+.echo REGPROBE_UUID_BEFORE
+dd nt!ExpUuidSequenceNumber L1
+db nt!ExpUuidSequenceNumberValid L1
+db nt!ExpUuidSequenceNumberNotSaved L1
+.sleep 8000
+.echo REGPROBE_UUID_AFTER
+dd nt!ExpUuidSequenceNumber L1
+db nt!ExpUuidSequenceNumberValid L1
+db nt!ExpUuidSequenceNumberNotSaved L1
+.echo REGPROBE_LOCALKD_END
+q
