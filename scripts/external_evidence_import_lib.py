@@ -496,6 +496,7 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
         )
 
     return {
+        "$schema": "registry-research-framework/schemas/imported-candidate-backlog.schema.json",
         "schema_version": "1.0",
         "generated_utc": now_utc(),
         "backlog_type": "imported-candidates",

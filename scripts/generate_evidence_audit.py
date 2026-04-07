@@ -33,6 +33,7 @@ from evidence_class_lib import (
     sanitize_value,
     suspected_layer,
 )
+from imported_candidate_backlog_lib import build_imported_candidate_backlog_summary
 from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, is_github_release_url, normalize_reference
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -345,6 +346,7 @@ def main() -> int:
             "lane_counts": dict(lane_counts),
             "next_missing_layer_counts": dict(missing_counts),
             "re_audit_required_count": sum(1 for entry in entries if entry.get("re_audit_required")),
+            "imported_candidate_backlog": build_imported_candidate_backlog_summary(),
         },
         "entries": entries,
     }

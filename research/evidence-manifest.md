@@ -18,6 +18,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Class A | 248 |
 | Class B | 7 |
 | Class E | 55 |
+| Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
+| Imported candidate count | 0 |
+| Imported observation count | 0 |
+| Imported source run count | 0 |
 
 ## Record index
 

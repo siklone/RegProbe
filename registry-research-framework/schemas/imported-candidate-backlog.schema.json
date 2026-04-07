@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/registry-research-framework/schemas/imported-candidate-backlog.schema.json",
+  "title": "Imported Candidate Backlog",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_utc",
+    "backlog_type",
+    "source_import_root",
+    "source_queue_files",
+    "source_run_count",
+    "candidate_count",
+    "import_count",
+    "counts_by_source_tool",
+    "counts_by_confidence",
+    "entries"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "type": "string", "const": "1.0" },
+    "generated_utc": { "type": "string" },
+    "backlog_type": { "type": "string", "const": "imported-candidates" },
+    "source_import_root": { "type": "string", "minLength": 1 },
+    "source_queue_files": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "source_run_count": { "type": "integer", "minimum": 0 },
+    "candidate_count": { "type": "integer", "minimum": 0 },
+    "import_count": { "type": "integer", "minimum": 0 },
+    "counts_by_source_tool": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "counts_by_confidence": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "feature_area",
+          "source_tools",
+          "key_paths",
+          "value_names",
+          "highest_confidence",
+          "bundle_paths",
+          "normalized_bundle_paths",
+          "note_stub_paths",
+          "record_seed_paths",
+          "import_count",
+          "imports"
+        ],
+        "properties": {
+          "candidate_id": { "type": "string", "minLength": 1 },
+          "feature_area": { "type": "string", "minLength": 1 },
+          "source_tools": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "key_paths": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "value_names": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "highest_confidence": {
+            "type": "string",
+            "enum": ["Confirmed", "Strongly Supported", "Probable", "Weak Lead"]
+          },
+          "bundle_paths": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "normalized_bundle_paths": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "note_stub_paths": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "record_seed_paths": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "import_count": { "type": "integer", "minimum": 0 },
+          "imports": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "run_id",
+                "source_tool",
+                "confidence"
+              ],
+              "properties": {
+                "run_id": { "type": "string", "minLength": 1 },
+                "source_tool": { "type": "string", "minLength": 1 },
+                "key_path": { "type": ["string", "null"] },
+                "value_name": { "type": ["string", "null"] },
+                "confidence": {
+                  "type": "string",
+                  "enum": ["Confirmed", "Strongly Supported", "Probable", "Weak Lead"]
+                },
+                "bundle_path": { "type": ["string", "null"] },
+                "normalized_bundle_path": { "type": ["string", "null"] },
+                "note_stub": { "type": ["string", "null"] },
+                "record_seed": { "type": ["string", "null"] }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

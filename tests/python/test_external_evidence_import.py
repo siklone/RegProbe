@@ -197,6 +197,10 @@ class ExternalEvidenceImportTests(unittest.TestCase):
             self.assertEqual(backlog["candidate_count"], 1)
             self.assertEqual(backlog["import_count"], 2)
             self.assertEqual(backlog["source_run_count"], 2)
+            self.assertEqual(
+                backlog["$schema"],
+                "registry-research-framework/schemas/imported-candidate-backlog.schema.json",
+            )
             self.assertEqual(backlog["counts_by_source_tool"]["osquery"], 1)
             self.assertEqual(backlog["counts_by_source_tool"]["regshot"], 1)
             self.assertEqual(backlog["entries"][0]["candidate_id"], "test-candidate")
