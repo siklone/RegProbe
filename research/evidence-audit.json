@@ -1,30 +1,30 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T18:53:28.838133Z",
+  "generated_utc": "2026-04-07T18:57:54.764111Z",
   "summary": {
-    "total_active_records": 257,
+    "total_active_records": 258,
     "class_counts": {
       "A": 248,
       "B": 7,
-      "D": 2
+      "D": 3
     },
     "lane_counts": {
       "official-policy": 236,
       "runtime": 5,
       "system": 6,
-      "early-boot": 10
+      "early-boot": 11
     },
     "next_missing_layer_counts": {
       "none": 248,
       "decision-gate": 6,
-      "validation-proof": 2,
+      "validation-proof": 3,
       "incident-review": 1
     },
     "re_audit_required_count": 11,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T18:53:28.216599Z",
+      "generated_utc": "2026-04-07T18:57:54.103936Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -3741,6 +3741,48 @@
       "apply_allowed": false,
       "confidence": "high",
       "source_file": "research/records/power.control.perf-calculate-actual-utilization.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "power.control.power-watchdog-timeout-cluster",
+      "tweak_id": "power.control.power-watchdog-timeout-cluster",
+      "evidence_class": "D",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
+      "layers_used": [],
+      "tools_used": [],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": false,
+        "correct_tool_used": true,
+        "trigger_condition_tested": false
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "source_file": "research/records/power.control.power-watchdog-timeout-cluster.json",
       "incident_ids": []
     },
     {

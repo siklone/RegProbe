@@ -1,26 +1,26 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T18:53:28.927936Z",
+  "generated_utc": "2026-04-07T18:57:54.856472Z",
   "source_index": "research/evidence-index.json",
   "summary": {
-    "total_records": 312,
+    "total_records": 313,
     "validated": 255,
     "deprecated": 55,
     "review_required": 0,
-    "records_with_evidence": 312,
+    "records_with_evidence": 313,
     "records_without_evidence": 0,
-    "records_missing_validation_proof": 2,
+    "records_missing_validation_proof": 3,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
       "A": 248,
       "E": 55,
       "B": 7,
-      "D": 2
+      "D": 3
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T18:53:28.216599Z",
+      "generated_utc": "2026-04-07T18:57:54.103936Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -29,7 +29,7 @@
       "counts_by_confidence": {},
       "counts_by_promotion_state": {}
     },
-    "records_with_source_hashes": 312,
+    "records_with_source_hashes": 313,
     "records_without_source_hashes": 0
   },
   "records": [
@@ -17618,6 +17618,388 @@
         ],
         "other_references": []
       },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "power.control.power-watchdog-timeout-cluster",
+      "tweak_id": "power.control.power-watchdog-timeout-cluster",
+      "record_status": "draft",
+      "evidence_class": {
+        "record_id": "power.control.power-watchdog-timeout-cluster",
+        "tweak_id": "power.control.power-watchdog-timeout-cluster",
+        "record_status": "draft",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "low",
+        "app_mapping_status": "not-mapped",
+        "restore_story_known": true,
+        "tested_build": "26200",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "Repo docs list five `Control\\\\Power` watchdog timeout defaults under `InitializePowerWatchdogTimeoutDefaults`: two 10000 ms values and three 30000 ms values.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo power docs list explicit PowerWatchdog timeout defaults",
+              "url": "Docs/power/power.md and research/notes/kernel-power-96-key-routing-20260327.md",
+              "kind": "repo-doc",
+              "summary": "Repo docs list five `Control\\\\Power` watchdog timeout defaults under `InitializePowerWatchdogTimeoutDefaults`: two 10000 ms values and three 30000 ms values."
+            },
+            {
+              "title": "Enrichment output converges on the same runtime family for all five values",
+              "url": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/power.control.power-watchdog-*-timeout-msec.json",
+              "kind": "repo-doc",
+              "summary": "Existing enrichment output routes all five values to the same next runtime family: `power-request-simulation`, low runtime priority, `windbg` queue."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` exists while all five `PowerWatchdog*TimeoutMsec` values are absent.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": true,
+          "links": [
+            {
+              "title": "Existence-first baseline for Control Power watchdog timeout cluster",
+              "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+              "kind": "registry-observation",
+              "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` exists while all five `PowerWatchdog*TimeoutMsec` values are absent."
+            }
+          ]
+        },
+        "upstream_lineage": {
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
+        }
+      },
+      "source_file": "research/records/power.control.power-watchdog-timeout-cluster.json",
+      "source_file_sha256": "43248b00792f0f9bfecbb053d4d3dbef8d59fd013233f6b41b7f1aa6bb700d68",
+      "source_file_size_bytes": 15460,
+      "name": "Control Power Watchdog Timeout Cluster",
+      "category": "Power",
+      "area": "Control Power Watchdog Defaults",
+      "scope": "device",
+      "summary": "Draft docs-first watchdog-default cluster record. The `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` `PowerWatchdog*TimeoutMsec` family has explicit repo-doc defaults under `InitializePowerWatchdogTimeoutDefaults`, but all five values are absent on the observed clean baseline and all five returned clean `no-hit` results in the broad current-build string batch. This keeps the cluster as a real research family, but still as a lower-priority docs-first hold rather than an active current-build RE lane.",
+      "decision": {
+        "confidence": "low",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults and a clean observed-baseline state. It is not ready for validation or tweak exposure because the current build still lacks a symbol/string/caller pivot for any of the five values.",
+        "blocking_issues": [
+          "no-current-build-string-or-symbol-hit",
+          "runtime_no_read",
+          "no-doc-source-outside-repo",
+          "non-default-semantics-unproven"
+        ]
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "not currently shipped in the app",
+        "notes": "The app does not currently expose this watchdog-default cluster as tweak surfaces.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "power-watchdog-drv-set-monitor-timeout-msec",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Missing on observed baseline",
+              "meaning": "The parent path exists, but the registry value is absent on the observed clean baseline.",
+              "evidence_ids": [
+                "vm-power-watchdog-timeout-cluster-existence-20260329"
+              ]
+            },
+            {
+              "state_kind": "documented-default",
+              "value": 10000,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs attribute a 10000 ms default to this value under InitializePowerWatchdogTimeoutDefaults.",
+              "evidence_ids": [
+                "repo-power-watchdog-timeout-cluster-docs-20260327"
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "power-watchdog-dwm-sync-flush-timeout-msec",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Missing on observed baseline",
+              "meaning": "The parent path exists, but the registry value is absent on the observed clean baseline.",
+              "evidence_ids": [
+                "vm-power-watchdog-timeout-cluster-existence-20260329"
+              ]
+            },
+            {
+              "state_kind": "documented-default",
+              "value": 30000,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs attribute a 30000 ms default to this value under InitializePowerWatchdogTimeoutDefaults.",
+              "evidence_ids": [
+                "repo-power-watchdog-timeout-cluster-docs-20260327"
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "power-watchdog-po-callout-timeout-msec",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Missing on observed baseline",
+              "meaning": "The parent path exists, but the registry value is absent on the observed clean baseline.",
+              "evidence_ids": [
+                "vm-power-watchdog-timeout-cluster-existence-20260329"
+              ]
+            },
+            {
+              "state_kind": "documented-default",
+              "value": 10000,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs attribute a 10000 ms default to this value under InitializePowerWatchdogTimeoutDefaults.",
+              "evidence_ids": [
+                "repo-power-watchdog-timeout-cluster-docs-20260327"
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "power-watchdog-power-on-gdi-timeout-msec",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Missing on observed baseline",
+              "meaning": "The parent path exists, but the registry value is absent on the observed clean baseline.",
+              "evidence_ids": [
+                "vm-power-watchdog-timeout-cluster-existence-20260329"
+              ]
+            },
+            {
+              "state_kind": "documented-default",
+              "value": 30000,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs attribute a 30000 ms default to this value under InitializePowerWatchdogTimeoutDefaults.",
+              "evidence_ids": [
+                "repo-power-watchdog-timeout-cluster-docs-20260327"
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "power-watchdog-request-queue-timeout-msec",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "PowerWatchdogRequestQueueTimeoutMsec",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Missing on observed baseline",
+              "meaning": "The parent path exists, but the registry value is absent on the observed clean baseline.",
+              "evidence_ids": [
+                "vm-power-watchdog-timeout-cluster-existence-20260329"
+              ]
+            },
+            {
+              "state_kind": "documented-default",
+              "value": 30000,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs attribute a 30000 ms default to this value under InitializePowerWatchdogTimeoutDefaults.",
+              "evidence_ids": [
+                "repo-power-watchdog-timeout-cluster-docs-20260327"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Observed baseline registry state",
+          "applies_to": "Win25H2Clean observed baseline",
+          "states": [
+            {
+              "target_id": "power-watchdog-drv-set-monitor-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            },
+            {
+              "target_id": "power-watchdog-dwm-sync-flush-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            },
+            {
+              "target_id": "power-watchdog-po-callout-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            },
+            {
+              "target_id": "power-watchdog-power-on-gdi-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            },
+            {
+              "target_id": "power-watchdog-request-queue-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            }
+          ],
+          "evidence_ids": [
+            "vm-power-watchdog-timeout-cluster-existence-20260329"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "observed-default-missing-cluster",
+          "label": "Observed default-missing cluster",
+          "intended_for": [
+            "Research tracking",
+            "Future family-level watchdog override validation"
+          ],
+          "avoid_for": [
+            "General users",
+            "One-click tweak surfaces"
+          ],
+          "states": [
+            {
+              "target_id": "power-watchdog-drv-set-monitor-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            },
+            {
+              "target_id": "power-watchdog-dwm-sync-flush-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            },
+            {
+              "target_id": "power-watchdog-po-callout-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            },
+            {
+              "target_id": "power-watchdog-power-on-gdi-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            },
+            {
+              "target_id": "power-watchdog-request-queue-timeout-msec",
+              "state_kind": "missing",
+              "value": null
+            }
+          ],
+          "good_when": "You want to preserve the observed baseline while waiting for a stronger current-build path-aware lead for the family.",
+          "bad_when": "You need a validated runtime mapping or safe override values.",
+          "tradeoffs": [
+            "Preserves the observed baseline registry state.",
+            "Avoids inventing unsupported non-default semantics.",
+            "Keeps the cluster parked until a stronger docs-backed or path-aware reason appears."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-power-watchdog-timeout-cluster-docs-20260327",
+            "vm-power-watchdog-timeout-cluster-existence-20260329",
+            "static-power-watchdog-timeout-cluster-nohit-20260331",
+            "enrichment-power-watchdog-timeout-cluster-20260403"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-power-watchdog-timeout-cluster-docs-20260327",
+          "kind": "repo-doc",
+          "title": "Repo power docs list explicit PowerWatchdog timeout defaults",
+          "location": "Docs/power/power.md and research/notes/kernel-power-96-key-routing-20260327.md",
+          "summary": "Repo docs list five `Control\\\\Power` watchdog timeout defaults under `InitializePowerWatchdogTimeoutDefaults`: two 10000 ms values and three 30000 ms values.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "default"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "vm-power-watchdog-timeout-cluster-existence-20260329",
+          "kind": "registry-observation",
+          "title": "Existence-first baseline for Control Power watchdog timeout cluster",
+          "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+          "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` exists while all five `PowerWatchdog*TimeoutMsec` values are absent.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM registry observation"
+        },
+        {
+          "evidence_id": "static-power-watchdog-timeout-cluster-nohit-20260331",
+          "kind": "inference",
+          "title": "Broad current-build string batch keeps PowerWatchdog timeout cluster in no-hit hold",
+          "location": "research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md and evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+          "summary": "All five `PowerWatchdog*TimeoutMsec` values returned clean `no-hit` results in the broad current-build string batch, which leaves the family without a current-build path-aware kernel pivot.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "version-scope",
+            "risk"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "enrichment-power-watchdog-timeout-cluster-20260403",
+          "kind": "repo-doc",
+          "title": "Enrichment output converges on the same runtime family for all five values",
+          "location": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/power.control.power-watchdog-*-timeout-msec.json",
+          "summary": "Existing enrichment output routes all five values to the same next runtime family: `power-request-simulation`, low runtime priority, `windbg` queue.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk"
+          ],
+          "origin": "Current repo docs"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
       "re_audit": null
