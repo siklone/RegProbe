@@ -15,8 +15,24 @@ except Exception:  # pragma: no cover - optional
     yaml = None
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
 def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def portable_path(value: Path | str) -> str:
+    path = Path(value)
+    try:
+        resolved = path.resolve()
+    except Exception:
+        return path.as_posix()
+
+    try:
+        return resolved.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return resolved.as_posix()
 
 
 def slugify(value: str) -> str:
@@ -361,21 +377,21 @@ def materialize_external_research_artifacts(
                     "key_path": observation.get("key_path"),
                     "value_name": observation.get("value_name"),
                     "confidence": observation.get("confidence"),
-                    "note_stub": note_path.as_posix(),
-                    "record_seed": seed_path.as_posix(),
-                    "bundle_path": bundle_path.as_posix(),
-                    "normalized_bundle_path": normalized_bundle_path.as_posix(),
+                    "note_stub": portable_path(note_path),
+                    "record_seed": portable_path(seed_path),
+                    "bundle_path": portable_path(bundle_path),
+                    "normalized_bundle_path": portable_path(normalized_bundle_path),
                 }
             )
 
     return {
-        "bundle_path": bundle_path.as_posix(),
-        "normalized_bundle_path": normalized_bundle_path.as_posix(),
-        "bundle_root": effective_bundle_root.as_posix(),
-        "candidate_queue": queue_path.as_posix(),
-        "note_root": note_root.as_posix(),
-        "record_seed_root": seed_root.as_posix(),
-        "artifact_root": output_root.as_posix(),
+        "bundle_path": portable_path(bundle_path),
+        "normalized_bundle_path": portable_path(normalized_bundle_path),
+        "bundle_root": portable_path(effective_bundle_root),
+        "candidate_queue": portable_path(queue_path),
+        "note_root": portable_path(note_root),
+        "record_seed_root": portable_path(seed_root),
+        "artifact_root": portable_path(output_root),
     }
 
 
@@ -397,7 +413,7 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
 
     if imported_root.exists():
         for queue_path in sorted(imported_root.glob("*/candidate-queue.csv")):
-            queue_files.append(queue_path.as_posix())
+            queue_files.append(portable_path(queue_path))
             run_id = queue_path.parent.name
             with queue_path.open("r", encoding="utf-8-sig", newline="") as handle:
                 for row in csv.DictReader(handle):
@@ -483,7 +499,7 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
         "schema_version": "1.0",
         "generated_utc": now_utc(),
         "backlog_type": "imported-candidates",
-        "source_import_root": imported_root.as_posix(),
+        "source_import_root": portable_path(imported_root),
         "source_queue_files": queue_files,
         "source_run_count": len(queue_files),
         "candidate_count": len(entries),
@@ -509,8 +525,8 @@ def build_note_stub(observation: dict[str, Any], bundle_path: Path, normalized_b
         f"- Value name: `{observation.get('value_name')}`\n"
         f"- Value type: `{observation.get('value_type')}`\n"
         f"- Confidence: `{observation.get('confidence')}`\n"
-        f"- External bundle: `{bundle_path.as_posix()}`\n\n"
-        f"- Normalized bundle: `{normalized_bundle_path.as_posix()}`\n\n"
+        f"- External bundle: `{portable_path(bundle_path)}`\n\n"
+        f"- Normalized bundle: `{portable_path(normalized_bundle_path)}`\n\n"
         "Needs documentation-first review before any record promotion or tweak ingestion.\n"
     )
 
@@ -536,7 +552,7 @@ def build_record_seed(observation: dict[str, Any], bundle: dict[str, Any], norma
         "evidence": {
             "external_bundle": bundle.get("input_path"),
             "bundle_run_id": bundle.get("run_id"),
-            "normalized_bundle_path": normalized_bundle_path.as_posix(),
+            "normalized_bundle_path": portable_path(normalized_bundle_path),
             "evidence_refs": observation.get("evidence_refs", []),
         },
         "notes": [
