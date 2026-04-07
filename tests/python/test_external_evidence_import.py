@@ -27,6 +27,33 @@ external_import = load_module("external_evidence_import_lib", SCRIPTS_ROOT / "ex
 
 
 class ExternalEvidenceImportTests(unittest.TestCase):
+    def test_velociraptor_yaml_import_detects_registry_hunter_rows(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            temp_root_path = Path(temp_root)
+            input_path = temp_root_path / "registry-hunter-export.yaml"
+            input_path.write_text(
+                "\n".join(
+                    [
+                        "rows:",
+                        "  - KeyPath: HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows\\\\Explorer",
+                        "    ValueName: HideRecommendedSection",
+                        "    Type: REG_DWORD",
+                        "    Data: 1",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            bundle = external_import.import_external_evidence(input_path, run_id="external-velociraptor-yaml")
+
+            self.assertEqual(bundle["source_tool"], "velociraptor")
+            self.assertEqual(bundle["observation_count"], 1)
+            observation = bundle["observations"][0]
+            self.assertEqual(observation["key_path"], r"HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer")
+            self.assertEqual(observation["value_name"], "HideRecommendedSection")
+            self.assertEqual(observation["value_type"], "REG_DWORD")
+
     def test_osquery_json_import_materializes_candidate_queue_and_seed(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             temp_root_path = Path(temp_root)
@@ -76,6 +103,30 @@ class ExternalEvidenceImportTests(unittest.TestCase):
             self.assertEqual(seed_payload["status"], "imported-seed")
             self.assertEqual(seed_payload["setting"]["targets"][0]["hive"], "HKLM")
             self.assertEqual(seed_payload["evidence"]["normalized_bundle_path"], outputs["normalized_bundle_path"])
+
+    def test_osquery_csv_import_detects_registry_rows(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            temp_root_path = Path(temp_root)
+            input_path = temp_root_path / "osquery-registry.csv"
+            input_path.write_text(
+                "\n".join(
+                    [
+                        "path,name,type,data",
+                        r"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced,HideFileExt,REG_DWORD,0",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            bundle = external_import.import_external_evidence(input_path, source_tool="osquery", run_id="external-osquery-csv")
+
+            self.assertEqual(bundle["source_tool"], "osquery")
+            self.assertEqual(bundle["observation_count"], 1)
+            observation = bundle["observations"][0]
+            self.assertEqual(observation["key_path"], r"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced")
+            self.assertEqual(observation["value_name"], "HideFileExt")
+            self.assertEqual(observation["observed_data"], "0")
 
     def test_materialize_external_research_artifacts_supports_split_bundle_root(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
@@ -207,6 +258,36 @@ class ExternalEvidenceImportTests(unittest.TestCase):
             self.assertEqual(backlog["entries"][0]["highest_confidence"], "Probable")
             self.assertEqual(backlog["entries"][0]["import_count"], 2)
             self.assertEqual(len(backlog["entries"][0]["normalized_bundle_paths"]), 2)
+
+    def test_regshot_structured_json_import_supports_non_text_exports(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            temp_root_path = Path(temp_root)
+            input_path = temp_root_path / "regshot-structured.json"
+            input_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "KeyPath": r"HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer",
+                            "ValueName": "HideRecommendedSection",
+                            "ValueType": "REG_DWORD",
+                            "Action": "Added",
+                            "Data": "1",
+                        }
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            bundle = external_import.import_external_evidence(input_path, source_tool="regshot", run_id="external-regshot-json")
+
+            self.assertEqual(bundle["source_tool"], "regshot")
+            self.assertEqual(bundle["observation_count"], 1)
+            observation = bundle["observations"][0]
+            self.assertEqual(observation["key_path"], r"HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer")
+            self.assertEqual(observation["value_name"], "HideRecommendedSection")
+            self.assertEqual(observation["value_type"], "REG_DWORD")
+            self.assertEqual(observation["observed_data"], "1")
 
 
 if __name__ == "__main__":

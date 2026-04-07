@@ -89,7 +89,14 @@ class VelociraptorRegistryHunterImporter(ExternalEvidenceImporter):
         name = input_path.name.lower()
         if "velociraptor" in name or "registry-hunter" in name:
             return True
-        return isinstance(payload, (list, dict)) and "velociraptor" in json.dumps(payload).lower()
+        if isinstance(payload, (list, dict)) and "velociraptor" in json.dumps(payload).lower():
+            return True
+        return any(
+            _looks_like_registry_path(key_path)
+            for row in _flatten_records(payload)
+            for key_path in [_first_value(row, "KeyPath", "Path", "FullPath", "RegistryPath", "OSPath")]
+            if key_path
+        )
 
     def import_observations(self, input_path: Path, payload: Any, run_id: str) -> list[ImportedCandidateObservation]:
         rows = list(_flatten_records(payload))
@@ -164,10 +171,26 @@ class RegshotImporter(ExternalEvidenceImporter):
 
     def can_import(self, input_path: Path, payload: Any) -> bool:
         name = input_path.name.lower()
-        return "regshot" in name or input_path.suffix.lower() in {".txt", ".log"}
+        if "regshot" in name or input_path.suffix.lower() in {".txt", ".log"}:
+            return True
+        return any(
+            _looks_like_registry_path(key_path)
+            for row in _flatten_records(payload)
+            for key_path in [
+                _first_value(row, "KeyPath", "Path", "FullPath", "RegistryPath", "RegKey", "Key"),
+            ]
+            if key_path
+        )
 
     def import_observations(self, input_path: Path, payload: Any, run_id: str) -> list[ImportedCandidateObservation]:
-        text = payload if isinstance(payload, str) else ""
+        observations: list[ImportedCandidateObservation] = []
+        if isinstance(payload, str):
+            observations.extend(self._import_text_lines(input_path, payload))
+        else:
+            observations.extend(self._import_structured_rows(input_path, payload))
+        return observations
+
+    def _import_text_lines(self, input_path: Path, text: str) -> list[ImportedCandidateObservation]:
         observations: list[ImportedCandidateObservation] = []
         for line in text.splitlines():
             match = re.search(r"(HKLM|HKCU|HKCR|HKU|HKCC)\\[^\r\n=]+", line, re.IGNORECASE)
@@ -190,6 +213,32 @@ class RegshotImporter(ExternalEvidenceImporter):
                     observed_data=line.strip(),
                     confidence="Weak Lead",
                     notes="Imported from Regshot diff text; requires corroboration.",
+                    evidence_refs=[input_path.as_posix()],
+                )
+            )
+        return observations
+
+    def _import_structured_rows(self, input_path: Path, payload: Any) -> list[ImportedCandidateObservation]:
+        observations: list[ImportedCandidateObservation] = []
+        for row in _flatten_records(payload):
+            key_path = _first_value(row, "KeyPath", "Path", "FullPath", "RegistryPath", "RegKey", "Key")
+            if not key_path or not _looks_like_registry_path(key_path):
+                continue
+            value_name = _first_value(row, "ValueName", "Name", "Value", "Entry")
+            candidate = build_candidate_id(key_path, value_name)
+            action = _first_value(row, "Action", "Change", "Operation", "DiffType")
+            observed_data = _first_value(row, "Data", "ValueData", "ObservedData", "NewValue", "After")
+            observations.append(
+                ImportedCandidateObservation(
+                    candidate_id=candidate,
+                    feature_area=infer_feature_area(key_path),
+                    source_tool=self.source_tool,
+                    key_path=normalize_key_path(key_path),
+                    value_name=value_name,
+                    value_type=_first_value(row, "Type", "ValueType", "DataType"),
+                    observed_data=observed_data or action or json.dumps(row, ensure_ascii=False, sort_keys=True),
+                    confidence="Weak Lead",
+                    notes="Imported from Regshot structured export; requires corroboration.",
                     evidence_refs=[input_path.as_posix()],
                 )
             )
@@ -564,7 +613,9 @@ def build_record_seed(observation: dict[str, Any], bundle: dict[str, Any], norma
 
 
 def normalize_key_path(key_path: str) -> str:
-    return key_path.replace("/", "\\").replace("HKEY_LOCAL_MACHINE", "HKLM").replace("HKEY_CURRENT_USER", "HKCU")
+    normalized = key_path.replace("/", "\\").replace("HKEY_LOCAL_MACHINE", "HKLM").replace("HKEY_CURRENT_USER", "HKCU")
+    normalized = re.sub(r"\\{2,}", r"\\", normalized)
+    return normalized
 
 
 def infer_feature_area(key_path: str) -> str:

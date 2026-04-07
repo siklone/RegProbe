@@ -13,6 +13,7 @@ This folder holds the v3.1 machine pipeline for undocumented registry research.
 - `schemas/imported-candidate-backlog.schema.json` defines the canonical aggregated queue published at `research/imported-candidate-backlog.json`.
 - `tools/import-external-evidence.py` converts supported external exports into an importer-specific bundle, a canonical `normalized-registry-bundle.json`, plus candidate queue, note stubs, and record seeds without touching the tweak catalog.
 - `tools/import-external-evidence.py --backlog-output ...` lets tests or sidecar tooling emit a temporary aggregated imported backlog without mutating the canonical published queue.
+- The built-in external adapter set currently covers Velociraptor/Registry Hunter JSON or YAML exports, osquery registry CSV or JSON exports, and Regshot text or structured diff exports.
 - `scripts/generate_imported_candidate_backlog.py` folds per-run imported candidate queues into `research/imported-candidate-backlog.json` so external leads are visible in one research queue.
 - `scripts/refresh_research_publish_surfaces.py` regenerates the canonical imported backlog plus evidence index/audit/manifest in dependency order.
 - `winopt research validate-json-tweaks` emits a machine-readable invalid-definition report for JSON tweak batches without loading them into the app catalog.
