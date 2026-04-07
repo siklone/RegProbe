@@ -7,7 +7,19 @@ namespace RegProbe.Infrastructure.RegistryResearch;
 
 public sealed class TraceEventEtlRegistryNormalizer : IRegistryTraceNormalizer
 {
+    private readonly Func<string, IEnumerable<RegistryTraceEventRecord>> _recordLoader;
+
     public string Name => nameof(TraceEventEtlRegistryNormalizer);
+
+    public TraceEventEtlRegistryNormalizer()
+        : this(LoadRecords)
+    {
+    }
+
+    internal TraceEventEtlRegistryNormalizer(Func<string, IEnumerable<RegistryTraceEventRecord>> recordLoader)
+    {
+        _recordLoader = recordLoader ?? throw new ArgumentNullException(nameof(recordLoader));
+    }
 
     public bool CanNormalize(string inputPath)
         => string.Equals(Path.GetExtension(inputPath), ".etl", StringComparison.OrdinalIgnoreCase);
@@ -25,25 +37,24 @@ public sealed class TraceEventEtlRegistryNormalizer : IRegistryTraceNormalizer
         try
         {
             var events = new List<NormalizedRegistryEvent>();
-            using var source = new ETWTraceEventSource(inputPath);
-            source.Dynamic.All += traceEvent =>
+            foreach (var record in _recordLoader(inputPath))
             {
-                if (!IsRegistryEvent(traceEvent))
+                if (!IsRegistryEvent(record))
                 {
-                    return;
+                    continue;
                 }
 
-                var operation = FirstNonEmpty(traceEvent.EventName, traceEvent.OpcodeName, traceEvent.TaskName) ?? "RegistryEvent";
+                var operation = FirstNonEmpty(record.EventName, record.OpcodeName, record.TaskName) ?? "RegistryEvent";
                 var rawPath = FirstNonEmpty(
-                    GetPayload(traceEvent, "KeyName"),
-                    GetPayload(traceEvent, "Key"),
-                    GetPayload(traceEvent, "KeyPath"),
-                    GetPayload(traceEvent, "Path"),
-                    GetPayload(traceEvent, "BaseName"));
+                    GetPayload(record, "KeyName"),
+                    GetPayload(record, "Key"),
+                    GetPayload(record, "KeyPath"),
+                    GetPayload(record, "Path"),
+                    GetPayload(record, "BaseName"));
                 var valueName = FirstNonEmpty(
-                    GetPayload(traceEvent, "ValueName"),
-                    GetPayload(traceEvent, "Value"),
-                    GetPayload(traceEvent, "Name"));
+                    GetPayload(record, "ValueName"),
+                    GetPayload(record, "Value"),
+                    GetPayload(record, "Name"));
                 var splitValue = string.IsNullOrWhiteSpace(valueName) && operation.Contains("Value", StringComparison.OrdinalIgnoreCase);
                 var parts = RegistryPathParser.Parse(rawPath, splitValue);
 
@@ -52,27 +63,26 @@ public sealed class TraceEventEtlRegistryNormalizer : IRegistryTraceNormalizer
                     RunId = request.RunId,
                     SourceTool = request.SourceTool,
                     CapturePhase = request.CapturePhase,
-                    ProcessName = traceEvent.ProcessName,
-                    Pid = traceEvent.ProcessID > 0 ? traceEvent.ProcessID : null,
+                    ProcessName = record.ProcessName,
+                    Pid = record.ProcessId > 0 ? record.ProcessId : null,
                     Operation = operation,
-                    TimestampUtc = traceEvent.TimeStamp.ToUniversalTime().ToString("O"),
+                    TimestampUtc = record.TimestampUtc?.ToUniversalTime().ToString("O"),
                     Hive = parts.Hive,
                     KeyPath = parts.KeyPath,
                     ValueName = valueName ?? parts.ValueName,
                     ValueType = FirstNonEmpty(
-                        GetPayload(traceEvent, "Type"),
-                        GetPayload(traceEvent, "ValueType")),
+                        GetPayload(record, "Type"),
+                        GetPayload(record, "ValueType")),
                     DataText = FirstNonEmpty(
-                        GetPayload(traceEvent, "Data"),
-                        GetPayload(traceEvent, "ValueData"),
-                        traceEvent.FormattedMessage),
+                        GetPayload(record, "Data"),
+                        GetPayload(record, "ValueData"),
+                        record.FormattedMessage),
                     Result = FirstNonEmpty(
-                        GetPayload(traceEvent, "Status"),
-                        GetPayload(traceEvent, "Result")),
+                        GetPayload(record, "Status"),
+                        GetPayload(record, "Result")),
                     EvidenceRefs = request.EvidenceRefs ?? []
                 });
-            };
-            source.Process();
+            }
 
             if (events.Count == 0)
             {
@@ -100,28 +110,56 @@ public sealed class TraceEventEtlRegistryNormalizer : IRegistryTraceNormalizer
         }
     }
 
-    private static bool IsRegistryEvent(TraceEvent traceEvent)
+    private static IEnumerable<RegistryTraceEventRecord> LoadRecords(string inputPath)
     {
-        var providerName = traceEvent.ProviderName ?? string.Empty;
-        var taskName = traceEvent.TaskName ?? string.Empty;
-        var eventName = traceEvent.EventName ?? string.Empty;
+        var records = new List<RegistryTraceEventRecord>();
+        using var source = new ETWTraceEventSource(inputPath);
+        source.Dynamic.All += traceEvent =>
+        {
+            var payloads = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
+            foreach (var payloadName in traceEvent.PayloadNames)
+            {
+                payloads[payloadName] = traceEvent.PayloadByName(payloadName)?.ToString();
+            }
+
+            records.Add(new RegistryTraceEventRecord
+            {
+                ProviderName = traceEvent.ProviderName,
+                TaskName = traceEvent.TaskName,
+                EventName = traceEvent.EventName,
+                OpcodeName = traceEvent.OpcodeName,
+                ProcessName = traceEvent.ProcessName,
+                ProcessId = traceEvent.ProcessID > 0 ? traceEvent.ProcessID : null,
+                TimestampUtc = new DateTimeOffset(traceEvent.TimeStamp.ToUniversalTime()),
+                FormattedMessage = traceEvent.FormattedMessage,
+                Payloads = payloads
+            });
+        };
+        source.Process();
+        return records;
+    }
+
+    private static bool IsRegistryEvent(RegistryTraceEventRecord record)
+    {
+        var providerName = record.ProviderName ?? string.Empty;
+        var taskName = record.TaskName ?? string.Empty;
+        var eventName = record.EventName ?? string.Empty;
         return providerName.Contains("Registry", StringComparison.OrdinalIgnoreCase)
             || taskName.Contains("Registry", StringComparison.OrdinalIgnoreCase)
             || eventName.Contains("Registry", StringComparison.OrdinalIgnoreCase)
             || providerName.Equals("Microsoft-Windows-Kernel-Registry", StringComparison.OrdinalIgnoreCase);
     }
 
-    private static string? GetPayload(TraceEvent traceEvent, string name)
+    private static string? GetPayload(RegistryTraceEventRecord record, string name)
     {
-        foreach (var payloadName in traceEvent.PayloadNames)
+        foreach (var payloadName in record.Payloads.Keys)
         {
             if (!string.Equals(payloadName, name, StringComparison.OrdinalIgnoreCase))
             {
                 continue;
             }
 
-            var payload = traceEvent.PayloadByName(payloadName);
-            return payload?.ToString();
+            return record.Payloads[payloadName];
         }
 
         return null;
