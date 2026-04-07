@@ -29,8 +29,10 @@ def build_imported_candidate_backlog_summary(path: Path | None = None) -> dict[s
             "candidate_count": 0,
             "import_count": 0,
             "source_run_count": 0,
+            "blocked_candidate_count": 0,
             "counts_by_source_tool": {},
             "counts_by_confidence": {},
+            "counts_by_promotion_state": {},
         }
 
     return {
@@ -40,6 +42,8 @@ def build_imported_candidate_backlog_summary(path: Path | None = None) -> dict[s
         "candidate_count": int(payload.get("candidate_count") or 0),
         "import_count": int(payload.get("import_count") or 0),
         "source_run_count": int(payload.get("source_run_count") or 0),
+        "blocked_candidate_count": int(payload.get("blocked_candidate_count") or 0),
         "counts_by_source_tool": payload.get("counts_by_source_tool") or {},
         "counts_by_confidence": payload.get("counts_by_confidence") or {},
+        "counts_by_promotion_state": payload.get("counts_by_promotion_state") or {},
     }

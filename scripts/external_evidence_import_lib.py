@@ -16,6 +16,11 @@ except Exception:  # pragma: no cover - optional
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+IMPORTED_PROMOTION_STATE = "blocked"
+IMPORTED_PROMOTION_BLOCKERS = (
+    "documentation-first-review",
+    "repo-native-proof",
+)
 
 
 def now_utc() -> str:
@@ -48,6 +53,15 @@ def split_hive(key_path: str) -> tuple[str | None, str]:
         if normalized == hive:
             return hive, ""
     return None, normalized
+
+
+def build_imported_promotion_gate() -> dict[str, Any]:
+    return {
+        "promotion_state": IMPORTED_PROMOTION_STATE,
+        "promotion_blockers": list(IMPORTED_PROMOTION_BLOCKERS),
+        "record_promotion_allowed": False,
+        "tweak_ingest_allowed": False,
+    }
 
 
 @dataclass(slots=True)
@@ -405,6 +419,10 @@ def materialize_external_research_artifacts(
                 "key_path",
                 "value_name",
                 "confidence",
+                "promotion_state",
+                "promotion_blockers",
+                "record_promotion_allowed",
+                "tweak_ingest_allowed",
                 "note_stub",
                 "record_seed",
                 "bundle_path",
@@ -414,6 +432,7 @@ def materialize_external_research_artifacts(
         writer.writeheader()
         for observation in bundle.get("observations", []):
             candidate_id = str(observation["candidate_id"])
+            promotion_gate = build_imported_promotion_gate()
             note_path = note_root / f"{candidate_id}.md"
             seed_path = seed_root / f"{candidate_id}.json"
             note_path.write_text(build_note_stub(observation, bundle_path, normalized_bundle_path), encoding="utf-8")
@@ -426,6 +445,10 @@ def materialize_external_research_artifacts(
                     "key_path": observation.get("key_path"),
                     "value_name": observation.get("value_name"),
                     "confidence": observation.get("confidence"),
+                    "promotion_state": promotion_gate["promotion_state"],
+                    "promotion_blockers": ";".join(promotion_gate["promotion_blockers"]),
+                    "record_promotion_allowed": str(promotion_gate["record_promotion_allowed"]).lower(),
+                    "tweak_ingest_allowed": str(promotion_gate["tweak_ingest_allowed"]).lower(),
                     "note_stub": portable_path(note_path),
                     "record_seed": portable_path(seed_path),
                     "bundle_path": portable_path(bundle_path),
@@ -457,6 +480,7 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
     entries_by_candidate: dict[str, dict[str, Any]] = {}
     counts_by_source_tool: dict[str, int] = {}
     counts_by_confidence: dict[str, int] = {}
+    counts_by_promotion_state: dict[str, int] = {}
     queue_files: list[str] = []
     import_count = 0
 
@@ -473,8 +497,17 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
                     import_count += 1
                     source_tool = str(row.get("source_tool") or "").strip() or "unknown"
                     confidence = str(row.get("confidence") or "").strip() or "Weak Lead"
+                    promotion_state = str(row.get("promotion_state") or IMPORTED_PROMOTION_STATE).strip() or IMPORTED_PROMOTION_STATE
+                    promotion_blockers = [
+                        blocker
+                        for blocker in str(row.get("promotion_blockers") or "").split(";")
+                        if blocker
+                    ] or list(IMPORTED_PROMOTION_BLOCKERS)
+                    record_promotion_allowed = str(row.get("record_promotion_allowed") or "").strip().lower() == "true"
+                    tweak_ingest_allowed = str(row.get("tweak_ingest_allowed") or "").strip().lower() == "true"
                     counts_by_source_tool[source_tool] = counts_by_source_tool.get(source_tool, 0) + 1
                     counts_by_confidence[confidence] = counts_by_confidence.get(confidence, 0) + 1
+                    counts_by_promotion_state[promotion_state] = counts_by_promotion_state.get(promotion_state, 0) + 1
 
                     entry = entries_by_candidate.setdefault(
                         candidate_id,
@@ -488,6 +521,10 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
                             "normalized_bundle_paths": set(),
                             "note_stub_paths": set(),
                             "record_seed_paths": set(),
+                            "promotion_state": promotion_state,
+                            "promotion_blockers": set(promotion_blockers),
+                            "record_promotion_allowed": record_promotion_allowed,
+                            "tweak_ingest_allowed": tweak_ingest_allowed,
                             "highest_confidence": confidence,
                             "imports": [],
                         },
@@ -506,6 +543,11 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
                         entry["note_stub_paths"].add(str(row["note_stub"]))
                     if row.get("record_seed"):
                         entry["record_seed_paths"].add(str(row["record_seed"]))
+                    entry["promotion_blockers"].update(promotion_blockers)
+                    entry["record_promotion_allowed"] = entry["record_promotion_allowed"] and record_promotion_allowed
+                    entry["tweak_ingest_allowed"] = entry["tweak_ingest_allowed"] and tweak_ingest_allowed
+                    if promotion_state == IMPORTED_PROMOTION_STATE or entry["promotion_state"] != IMPORTED_PROMOTION_STATE:
+                        entry["promotion_state"] = promotion_state
                     if CONFIDENCE_ORDER.get(confidence, -1) > CONFIDENCE_ORDER.get(entry["highest_confidence"], -1):
                         entry["highest_confidence"] = confidence
 
@@ -516,6 +558,10 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
                             "key_path": row.get("key_path") or None,
                             "value_name": row.get("value_name") or None,
                             "confidence": confidence,
+                            "promotion_state": promotion_state,
+                            "promotion_blockers": promotion_blockers,
+                            "record_promotion_allowed": record_promotion_allowed,
+                            "tweak_ingest_allowed": tweak_ingest_allowed,
                             "bundle_path": row.get("bundle_path") or None,
                             "normalized_bundle_path": row.get("normalized_bundle_path") or None,
                             "note_stub": row.get("note_stub") or None,
@@ -535,6 +581,10 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
                 "key_paths": sorted(entry["key_paths"]),
                 "value_names": sorted(entry["value_names"]),
                 "highest_confidence": entry["highest_confidence"],
+                "promotion_state": entry["promotion_state"],
+                "promotion_blockers": sorted(entry["promotion_blockers"]),
+                "record_promotion_allowed": entry["record_promotion_allowed"],
+                "tweak_ingest_allowed": entry["tweak_ingest_allowed"],
                 "bundle_paths": sorted(entry["bundle_paths"]),
                 "normalized_bundle_paths": sorted(entry["normalized_bundle_paths"]),
                 "note_stub_paths": sorted(entry["note_stub_paths"]),
@@ -556,6 +606,8 @@ def build_imported_candidate_backlog(imported_root: Path) -> dict[str, Any]:
         "import_count": import_count,
         "counts_by_source_tool": dict(sorted(counts_by_source_tool.items())),
         "counts_by_confidence": dict(sorted(counts_by_confidence.items())),
+        "counts_by_promotion_state": dict(sorted(counts_by_promotion_state.items())),
+        "blocked_candidate_count": sum(1 for entry in entries if entry["promotion_state"] == IMPORTED_PROMOTION_STATE),
         "entries": entries,
     }
 
@@ -568,6 +620,7 @@ def write_imported_candidate_backlog(imported_root: Path, output_path: Path) -> 
 
 
 def build_note_stub(observation: dict[str, Any], bundle_path: Path, normalized_bundle_path: Path) -> str:
+    promotion_gate = build_imported_promotion_gate()
     return (
         f"# Imported Candidate: {observation['candidate_id']}\n\n"
         f"- Source tool: `{observation.get('source_tool')}`\n"
@@ -575,6 +628,8 @@ def build_note_stub(observation: dict[str, Any], bundle_path: Path, normalized_b
         f"- Value name: `{observation.get('value_name')}`\n"
         f"- Value type: `{observation.get('value_type')}`\n"
         f"- Confidence: `{observation.get('confidence')}`\n"
+        f"- Promotion state: `{promotion_gate['promotion_state']}`\n"
+        f"- Promotion blockers: `{', '.join(promotion_gate['promotion_blockers'])}`\n"
         f"- External bundle: `{portable_path(bundle_path)}`\n\n"
         f"- Normalized bundle: `{portable_path(normalized_bundle_path)}`\n\n"
         "Needs documentation-first review before any record promotion or tweak ingestion.\n"
@@ -583,6 +638,7 @@ def build_note_stub(observation: dict[str, Any], bundle_path: Path, normalized_b
 
 def build_record_seed(observation: dict[str, Any], bundle: dict[str, Any], normalized_bundle_path: Path) -> dict[str, Any]:
     hive, key_path = split_hive(str(observation["key_path"]))
+    promotion_gate = build_imported_promotion_gate()
     return {
         "tweak_id": observation["candidate_id"],
         "status": "imported-seed",
@@ -605,6 +661,7 @@ def build_record_seed(observation: dict[str, Any], bundle: dict[str, Any], norma
             "normalized_bundle_path": portable_path(normalized_bundle_path),
             "evidence_refs": observation.get("evidence_refs", []),
         },
+        "promotion_gate": promotion_gate,
         "notes": [
             "Auto-generated external evidence seed.",
             "Imported evidence is corroboration or candidate seeding only; do not promote without repo-native proof.",

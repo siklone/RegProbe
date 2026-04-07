@@ -22,6 +22,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Imported candidate count | 0 |
 | Imported observation count | 0 |
 | Imported source run count | 0 |
+| Imported blocked candidate count | 0 |
 
 ## Record index
 

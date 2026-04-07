@@ -86,6 +86,7 @@ class ExternalEvidenceImportTests(unittest.TestCase):
             self.assertIn("HideRecommendedSection", queue_text)
             self.assertIn("external-evidence-bundle.json", queue_text)
             self.assertIn("normalized-registry-bundle.json", queue_text)
+            self.assertIn("documentation-first-review", queue_text)
 
             normalized_bundle = json.loads(Path(outputs["normalized_bundle_path"]).read_text(encoding="utf-8"))
             self.assertEqual(normalized_bundle["source_tool"], "imported")
@@ -103,6 +104,13 @@ class ExternalEvidenceImportTests(unittest.TestCase):
             self.assertEqual(seed_payload["status"], "imported-seed")
             self.assertEqual(seed_payload["setting"]["targets"][0]["hive"], "HKLM")
             self.assertEqual(seed_payload["evidence"]["normalized_bundle_path"], outputs["normalized_bundle_path"])
+            self.assertEqual(seed_payload["promotion_gate"]["promotion_state"], "blocked")
+            self.assertEqual(
+                seed_payload["promotion_gate"]["promotion_blockers"],
+                ["documentation-first-review", "repo-native-proof"],
+            )
+            self.assertFalse(seed_payload["promotion_gate"]["record_promotion_allowed"])
+            self.assertFalse(seed_payload["promotion_gate"]["tweak_ingest_allowed"])
 
     def test_osquery_csv_import_detects_registry_rows(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
@@ -254,8 +262,17 @@ class ExternalEvidenceImportTests(unittest.TestCase):
             )
             self.assertEqual(backlog["counts_by_source_tool"]["osquery"], 1)
             self.assertEqual(backlog["counts_by_source_tool"]["regshot"], 1)
+            self.assertEqual(backlog["counts_by_promotion_state"]["blocked"], 2)
+            self.assertEqual(backlog["blocked_candidate_count"], 1)
             self.assertEqual(backlog["entries"][0]["candidate_id"], "test-candidate")
             self.assertEqual(backlog["entries"][0]["highest_confidence"], "Probable")
+            self.assertEqual(backlog["entries"][0]["promotion_state"], "blocked")
+            self.assertEqual(
+                backlog["entries"][0]["promotion_blockers"],
+                ["documentation-first-review", "repo-native-proof"],
+            )
+            self.assertFalse(backlog["entries"][0]["record_promotion_allowed"])
+            self.assertFalse(backlog["entries"][0]["tweak_ingest_allowed"])
             self.assertEqual(backlog["entries"][0]["import_count"], 2)
             self.assertEqual(len(backlog["entries"][0]["normalized_bundle_paths"]), 2)
 

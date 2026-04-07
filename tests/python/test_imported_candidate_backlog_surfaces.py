@@ -43,8 +43,10 @@ class ImportedCandidateBacklogSurfaceTests(unittest.TestCase):
                         "source_run_count": 1,
                         "candidate_count": 2,
                         "import_count": 3,
+                        "blocked_candidate_count": 2,
                         "counts_by_source_tool": {"osquery": 2, "regshot": 1},
                         "counts_by_confidence": {"Probable": 2, "Weak Lead": 1},
+                        "counts_by_promotion_state": {"blocked": 3},
                         "entries": [],
                     }
                 )
@@ -57,8 +59,10 @@ class ImportedCandidateBacklogSurfaceTests(unittest.TestCase):
             self.assertEqual(summary["candidate_count"], 2)
             self.assertEqual(summary["import_count"], 3)
             self.assertEqual(summary["source_run_count"], 1)
+            self.assertEqual(summary["blocked_candidate_count"], 2)
             self.assertEqual(summary["counts_by_source_tool"]["osquery"], 2)
             self.assertEqual(summary["counts_by_confidence"]["Probable"], 2)
+            self.assertEqual(summary["counts_by_promotion_state"]["blocked"], 3)
 
     def test_render_md_emits_imported_candidate_backlog_rows(self) -> None:
         manifest = {
@@ -78,6 +82,7 @@ class ImportedCandidateBacklogSurfaceTests(unittest.TestCase):
                     "candidate_count": 4,
                     "import_count": 7,
                     "source_run_count": 3,
+                    "blocked_candidate_count": 4,
                 },
             },
             "records": [],
@@ -88,6 +93,7 @@ class ImportedCandidateBacklogSurfaceTests(unittest.TestCase):
         self.assertIn("Imported candidate count", rendered)
         self.assertIn("Imported observation count", rendered)
         self.assertIn("Imported source run count", rendered)
+        self.assertIn("Imported blocked candidate count", rendered)
         self.assertIn("research/imported-candidate-backlog.json", rendered)
 
 

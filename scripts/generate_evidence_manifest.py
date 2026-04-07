@@ -125,6 +125,7 @@ def render_md(manifest: dict[str, Any]) -> str:
                 ["Imported candidate count", str(imported_backlog.get("candidate_count", 0))],
                 ["Imported observation count", str(imported_backlog.get("import_count", 0))],
                 ["Imported source run count", str(imported_backlog.get("source_run_count", 0))],
+                ["Imported blocked candidate count", str(imported_backlog.get("blocked_candidate_count", 0))],
             ]
         )
     lines.extend(render_table(["Field", "Value"], rows))
