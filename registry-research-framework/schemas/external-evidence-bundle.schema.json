@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/registry-research-framework/schemas/external-evidence-bundle.schema.json",
+  "title": "External Evidence Bundle",
+  "type": "object",
+  "required": [
+    "run_id",
+    "generated_utc",
+    "source_tool",
+    "importer_name",
+    "input_path",
+    "observation_count",
+    "observations"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "generated_utc": { "type": "string" },
+    "source_tool": { "type": "string", "minLength": 1 },
+    "importer_name": { "type": "string", "minLength": 1 },
+    "input_path": { "type": "string", "minLength": 1 },
+    "observation_count": { "type": "integer", "minimum": 0 },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "candidate_id",
+          "feature_area",
+          "source_tool",
+          "key_path",
+          "confidence",
+          "evidence_refs"
+        ],
+        "properties": {
+          "candidate_id": { "type": "string", "minLength": 1 },
+          "feature_area": { "type": "string", "minLength": 1 },
+          "source_tool": { "type": "string", "minLength": 1 },
+          "key_path": { "type": "string", "minLength": 1 },
+          "value_name": { "type": ["string", "null"] },
+          "value_type": { "type": ["string", "null"] },
+          "observed_data": {},
+          "recommended_value": {},
+          "rollback_value": {},
+          "trigger_action": { "type": ["string", "null"] },
+          "required_privilege": { "type": ["string", "null"] },
+          "confidence": {
+            "type": "string",
+            "enum": ["Confirmed", "Strongly Supported", "Probable", "Weak Lead"]
+          },
+          "notes": { "type": ["string", "null"] },
+          "evidence_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

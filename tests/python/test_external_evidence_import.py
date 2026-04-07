@@ -1,0 +1,70 @@
+from __future__ import annotations
+
+import importlib.util
+import json
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SCRIPTS_ROOT = REPO_ROOT / "scripts"
+if str(SCRIPTS_ROOT) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_ROOT))
+
+
+def load_module(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec and spec.loader
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+external_import = load_module("external_evidence_import_lib", SCRIPTS_ROOT / "external_evidence_import_lib.py")
+
+
+class ExternalEvidenceImportTests(unittest.TestCase):
+    def test_osquery_json_import_materializes_candidate_queue_and_seed(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            temp_root_path = Path(temp_root)
+            input_path = temp_root_path / "osquery-registry.json"
+            input_path.write_text(
+                json.dumps(
+                    [
+                        {
+                            "path": r"HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer",
+                            "name": "HideRecommendedSection",
+                            "type": "REG_DWORD",
+                            "data": "1",
+                        }
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            bundle = external_import.import_external_evidence(input_path, source_tool="osquery", run_id="external-osquery-test")
+            outputs = external_import.materialize_external_research_artifacts(bundle, temp_root_path / "materialized")
+
+            self.assertEqual(bundle["source_tool"], "osquery")
+            self.assertEqual(bundle["observation_count"], 1)
+            self.assertTrue(Path(outputs["bundle_path"]).exists())
+            self.assertTrue(Path(outputs["candidate_queue"]).exists())
+
+            queue_text = Path(outputs["candidate_queue"]).read_text(encoding="utf-8")
+            self.assertIn("HideRecommendedSection", queue_text)
+            self.assertIn("external-evidence-bundle.json", queue_text)
+
+            seed_root = Path(outputs["record_seed_root"])
+            seeds = list(seed_root.glob("*.json"))
+            self.assertEqual(len(seeds), 1)
+            seed_payload = json.loads(seeds[0].read_text(encoding="utf-8"))
+            self.assertEqual(seed_payload["status"], "imported-seed")
+            self.assertEqual(seed_payload["setting"]["targets"][0]["hive"], "HKLM")
+
+
+if __name__ == "__main__":
+    unittest.main()

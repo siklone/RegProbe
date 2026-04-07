@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using RegProbe.App.Services;
 using RegProbe.Core;
 using RegProbe.Engine;
 using RegProbe.Infrastructure.Elevation;
+using RegProbe.Infrastructure.RegistryResearch;
 
 namespace RegProbe.CLI;
 
@@ -31,6 +34,7 @@ class Program
         rootCommand.AddCommand(CreateDnsCommand());
         rootCommand.AddCommand(CreateInfoCommand());
         rootCommand.AddCommand(CreateExportCommand());
+        rootCommand.AddCommand(CreateResearchCommand());
 
         return await rootCommand.InvokeAsync(args);
     }
@@ -498,6 +502,77 @@ class Program
         exportCommand.AddCommand(importSubCommand);
 
         return exportCommand;
+    }
+
+    static Command CreateResearchCommand()
+    {
+        var researchCommand = new Command("research", "Research automation helpers");
+
+        var normalizeCommand = new Command("normalize-registry-trace", "Normalize an ETL or Procmon CSV into a compact registry bundle.");
+        var formatOption = new Option<string>("--format", "Normalization format: etl or procmon-csv") { IsRequired = true };
+        var inputOption = new Option<string>("--input", "Input trace path") { IsRequired = true };
+        var outputOption = new Option<string>("--output", "Output normalized bundle path") { IsRequired = true };
+        var runIdOption = new Option<string>("--run-id", "Run identifier") { IsRequired = true };
+        var sourceToolOption = new Option<string>("--source-tool", () => "imported", "Source tool tag");
+        var capturePhaseOption = new Option<string>("--capture-phase", () => "runtime", "Capture phase tag");
+        var evidenceRefsOption = new Option<string[]>("--evidence-ref", () => Array.Empty<string>(), "Evidence reference(s)");
+        normalizeCommand.AddOption(formatOption);
+        normalizeCommand.AddOption(inputOption);
+        normalizeCommand.AddOption(outputOption);
+        normalizeCommand.AddOption(runIdOption);
+        normalizeCommand.AddOption(sourceToolOption);
+        normalizeCommand.AddOption(capturePhaseOption);
+        normalizeCommand.AddOption(evidenceRefsOption);
+        normalizeCommand.SetHandler(context =>
+        {
+            var format = context.ParseResult.GetValueForOption(formatOption) ?? string.Empty;
+            var input = context.ParseResult.GetValueForOption(inputOption) ?? string.Empty;
+            var output = context.ParseResult.GetValueForOption(outputOption) ?? string.Empty;
+            var runId = context.ParseResult.GetValueForOption(runIdOption) ?? string.Empty;
+            var sourceTool = context.ParseResult.GetValueForOption(sourceToolOption) ?? "imported";
+            var capturePhase = context.ParseResult.GetValueForOption(capturePhaseOption) ?? "runtime";
+            var evidenceRefs = context.ParseResult.GetValueForOption(evidenceRefsOption) ?? Array.Empty<string>();
+
+            try
+            {
+                IRegistryTraceNormalizer normalizer = format.Trim().ToLowerInvariant() switch
+                {
+                    "etl" => new TraceEventEtlRegistryNormalizer(),
+                    "procmon-csv" => new ProcmonCsvRegistryNormalizer(),
+                    _ => throw new InvalidOperationException($"Unsupported normalization format: {format}")
+                };
+
+                var bundle = normalizer.Normalize(new RegistryNormalizationRequest(
+                    input,
+                    runId,
+                    sourceTool,
+                    capturePhase,
+                    evidenceRefs));
+
+                var outputPath = Path.GetFullPath(output);
+                var outputDirectory = Path.GetDirectoryName(outputPath);
+                if (!string.IsNullOrWhiteSpace(outputDirectory))
+                {
+                    Directory.CreateDirectory(outputDirectory);
+                }
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                File.WriteAllText(outputPath, JsonSerializer.Serialize(bundle, options) + Environment.NewLine);
+                Console.WriteLine(outputPath);
+                context.ExitCode = string.Equals(bundle.Status, "ok", StringComparison.OrdinalIgnoreCase) ? 0 : 2;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                context.ExitCode = 1;
+            }
+        });
+        researchCommand.AddCommand(normalizeCommand);
+
+        return researchCommand;
     }
 
     private static bool TryParseRisk(string? value, out TweakRiskLevel risk)

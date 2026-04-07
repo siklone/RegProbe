@@ -260,6 +260,142 @@ function Get-PathMatchSummary {
     }
 }
 
+function Split-RegistryPath {
+    param(
+        [string]$Path,
+        [bool]$TreatLastSegmentAsValue = $false
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Path)) {
+        return [ordered]@{
+            hive = $null
+            key_path = $null
+            value_name = $null
+        }
+    }
+
+    $normalized = Normalize-RegistryPathForProcmon -Path $Path
+    $hive = $null
+    $remaining = $normalized
+    foreach ($candidate in @('HKLM', 'HKCU', 'HKCR', 'HKU', 'HKCC')) {
+        if ($normalized.StartsWith($candidate + '\', [System.StringComparison]::OrdinalIgnoreCase)) {
+            $hive = $candidate
+            $remaining = $normalized.Substring($candidate.Length + 1)
+            break
+        }
+        if ($normalized.Equals($candidate, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $hive = $candidate
+            $remaining = ''
+            break
+        }
+    }
+
+    if (-not $TreatLastSegmentAsValue -or [string]::IsNullOrWhiteSpace($remaining)) {
+        return [ordered]@{
+            hive = $hive
+            key_path = $remaining
+            value_name = $null
+        }
+    }
+
+    $separator = $remaining.LastIndexOf('\')
+    if ($separator -le 0 -or $separator -ge ($remaining.Length - 1)) {
+        return [ordered]@{
+            hive = $hive
+            key_path = $remaining
+            value_name = $null
+        }
+    }
+
+    return [ordered]@{
+        hive = $hive
+        key_path = $remaining.Substring(0, $separator)
+        value_name = $remaining.Substring($separator + 1)
+    }
+}
+
+function Parse-ProcmonDetail {
+    param([string]$Detail)
+
+    $valueType = $null
+    $dataText = $null
+    if (-not [string]::IsNullOrWhiteSpace($Detail)) {
+        foreach ($segment in $Detail -split ',') {
+            $trimmed = $segment.Trim()
+            if ($trimmed -like 'Type:*') {
+                $valueType = $trimmed.Substring('Type:'.Length).Trim()
+            }
+            elseif ($trimmed -like 'Data:*') {
+                $dataText = $trimmed.Substring('Data:'.Length).Trim()
+            }
+        }
+    }
+
+    return [ordered]@{
+        value_type = $valueType
+        data_text = if ($dataText) { $dataText } else { $Detail }
+    }
+}
+
+function Write-NormalizedProcmonBundle {
+    param(
+        [Parameter(Mandatory = $true)][string]$BundlePath,
+        [Parameter(Mandatory = $true)][string]$RunId,
+        [Parameter(Mandatory = $true)][string]$InputPath,
+        [Parameter(Mandatory = $true)][object[]]$Rows,
+        [Parameter(Mandatory = $true)][string]$CapturePhase,
+        [Parameter(Mandatory = $true)][string]$ValueName
+    )
+
+    $events = New-Object System.Collections.Generic.List[object]
+    foreach ($row in @($Rows)) {
+        $operation = [string]$row.Operation
+        $pathParts = Split-RegistryPath -Path ([string]$row.Path) -TreatLastSegmentAsValue:($operation -like '*Value*')
+        $detailParts = Parse-ProcmonDetail -Detail ([string]$row.Detail)
+        $parsedPid = 0
+        $pidValue = $null
+        if ([int]::TryParse([string]$row.PID, [ref]$parsedPid)) {
+            $pidValue = $parsedPid
+        }
+        $events.Add([ordered]@{
+            run_id = $RunId
+            source_tool = 'procmon'
+            capture_phase = $CapturePhase
+            process_name = [string]$row.'Process Name'
+            pid = $pidValue
+            operation = $operation
+            timestamp_utc = [string]$row.'Time of Day'
+            hive = $pathParts.hive
+            key_path = $pathParts.key_path
+            value_name = if ($pathParts.value_name) { $pathParts.value_name } else { $ValueName }
+            value_type = $detailParts.value_type
+            data_text = $detailParts.data_text
+            result = [string]$row.Result
+            evidence_refs = @($InputPath)
+        }) | Out-Null
+    }
+
+    $bundle = [ordered]@{
+        '$schema' = 'registry-research-framework/schemas/normalized-registry-bundle.schema.json'
+        run_id = $RunId
+        source_tool = 'procmon'
+        capture_phase = $CapturePhase
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        normalizer_name = 'GuestProcmonCsvRegistryNormalizer'
+        input_path = $InputPath
+        status = 'ok'
+        error_kind = $null
+        errors = @()
+        event_count = @($Rows).Count
+        filtered_event_count = @($events).Count
+        evidence_refs = @($InputPath, $BundlePath)
+        events = @($events)
+    }
+
+    $bundle | ConvertTo-Json -Depth 12 | Set-Content -Path $BundlePath -Encoding UTF8
+    return $bundle
+}
+
 if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
     $OutputRoot = Join-Path 'C:\RegProbe-Diag\procmon-bootlog' $OutputName
 }
@@ -276,6 +412,7 @@ $summaryPath = Join-Path $OutputRoot 'summary.json'
 $pmlPath = Join-Path $OutputRoot ($OutputName + '.pml')
 $csvPath = Join-Path $OutputRoot ($OutputName + '.csv')
 $hitsPath = Join-Path $OutputRoot ($OutputName + '.hits.csv')
+$normalizedBundlePath = Join-Path $OutputRoot ($OutputName + '.normalized.json')
 $normalizedProcmonPath = if ([string]::IsNullOrWhiteSpace($RegistryPath)) { $null } else { Normalize-RegistryPathForProcmon -Path $RegistryPath }
 
 if ($Stage -eq 'arm') {
@@ -287,7 +424,7 @@ if ($Stage -eq 'arm') {
         throw 'ValueName is required for arm.'
     }
 
-    foreach ($path in @($armSummaryPath, $collectSummaryPath, $summaryPath, $pmlPath, $csvPath, $hitsPath, $StateFile)) {
+    foreach ($path in @($armSummaryPath, $collectSummaryPath, $summaryPath, $pmlPath, $csvPath, $hitsPath, $StateFile, $normalizedBundlePath)) {
         if (Test-Path $path) {
             Remove-Item -Path $path -Force -ErrorAction SilentlyContinue
         }
@@ -311,6 +448,11 @@ if ($Stage -eq 'arm') {
         procmon_state_before = Get-ProcmonState
         commands = [ordered]@{}
         procmon_state_after = $null
+        status = 'ok'
+        error_kind = $null
+        recovery_action = 'none'
+        transport_blocker = 'none'
+        guest_health = 'stable'
         errors = @()
         uploads = [ordered]@{}
     }
@@ -384,18 +526,24 @@ $armCommands = $state.arm_commands
 $searchFragments = @($normalizedProcmonPath, $ValueName) + @($stateMatchFragments)
 $searchFragments = @($searchFragments | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique)
 
-$summary = [ordered]@{
-    generated_utc = [DateTime]::UtcNow.ToString('o')
-    stage = 'collect'
-    output_name = $OutputName
-    output_root = $OutputRoot
+    $summary = [ordered]@{
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        stage = 'collect'
+        output_name = $OutputName
+        output_root = $OutputRoot
     registry_path = $RegistryPath
     value_name = $ValueName
     procmon_path = $procmon
-    procmon_exists = [bool](Test-Path $procmon)
-    normalized_procmon_path = $normalizedProcmonPath
-    search_fragments = @($searchFragments)
-    process_names = @($stateProcessNames)
+        procmon_exists = [bool](Test-Path $procmon)
+        normalized_procmon_path = $normalizedProcmonPath
+        status = 'ok'
+        error_kind = $null
+        error = $null
+        recovery_action = 'none'
+        transport_blocker = 'none'
+        guest_health = 'stable'
+        search_fragments = @($searchFragments)
+        process_names = @($stateProcessNames)
     bootlog_enable_accepted = $true
     boot_time_utc_before = [string]$state.boot_time_utc_before
     boot_time_utc_after = Get-BootTimeUtc
@@ -406,6 +554,12 @@ $summary = [ordered]@{
     pml_exists = $false
     csv_exists = $false
     hits_exists = $false
+    normalized_bundle_path = $normalizedBundlePath
+    normalized_bundle_exists = $false
+    normalized_result_ref = $null
+    normalization_status = 'missing'
+    normalizer_name = 'GuestProcmonCsvRegistryNormalizer'
+    normalization_errors = @()
     pml_length = 0
     csv_length = 0
     csv_row_count = 0
@@ -471,15 +625,41 @@ if ($summary.boot_time_utc_before -and $summary.boot_time_utc_after) {
                     @($matchSummary.matches) | Export-Csv -Path $hitsPath -NoTypeInformation -Encoding UTF8
                 }
                 $summary.hits_exists = [bool](Test-Path $hitsPath)
+
+                try {
+                    $bundle = Write-NormalizedProcmonBundle -BundlePath $normalizedBundlePath -RunId $OutputName -InputPath $csvPath -Rows @($matchSummary.matches) -CapturePhase 'boot' -ValueName $ValueName
+                    $summary.normalized_bundle_exists = [bool](Test-Path $normalizedBundlePath)
+                    $summary.normalized_result_ref = if ($summary.normalized_bundle_exists) { $normalizedBundlePath } else { $null }
+                    $summary.normalization_status = [string]$bundle.status
+                }
+                catch {
+                    $summary.normalization_status = 'error'
+                    $summary.normalization_errors = @($_.Exception.Message)
+                }
             }
         }
     }
 }
 catch {
+    $summary.status = 'error'
+    $summary.error_kind = 'procmon-bootlog-collect-exception'
+    $summary.error = $_.Exception.Message
+    $summary.recovery_action = 'rerun-bootlog-capture'
+    $summary.transport_blocker = 'collect-exception'
+    $summary.guest_health = 'degraded'
     $summary.errors = @($summary.errors) + $_.Exception.Message
     if ($_.InvocationInfo) {
         $summary.errors = @($summary.errors) + $_.InvocationInfo.PositionMessage
     }
+}
+
+if ($summary.status -eq 'ok' -and $summary.normalization_status -ne 'ok') {
+    $summary.status = 'error'
+    $summary.error_kind = if ($summary.normalization_status -eq 'missing') { 'normalized-bundle-missing' } else { 'normalization-error' }
+    $summary.error = if (@($summary.normalization_errors).Count -gt 0) { (@($summary.normalization_errors) -join '; ') } else { 'Normalized bundle was not produced.' }
+    $summary.recovery_action = 'inspect-normalized-bundle'
+    $summary.transport_blocker = if ($summary.normalization_status -eq 'missing') { 'normalized-bundle-missing' } else { 'normalization-failed' }
+    $summary.guest_health = 'stable'
 }
 
 $summary.bootlog_candidates_after = Find-BootLogCandidates
@@ -490,7 +670,8 @@ Write-JsonFile -Path $summaryPath -Payload $summary
 foreach ($artifact in @(
     @{ key = 'summary_collect'; path = $collectSummaryPath; name = ($OutputName + '-summary-collect.json') },
     @{ key = 'summary'; path = $summaryPath; name = ($OutputName + '-summary.json') },
-    @{ key = 'hits'; path = $hitsPath; name = ($OutputName + '.hits.csv') }
+    @{ key = 'hits'; path = $hitsPath; name = ($OutputName + '.hits.csv') },
+    @{ key = 'normalized_bundle'; path = $normalizedBundlePath; name = ($OutputName + '.normalized.json') }
 )) {
     try {
         $upload = Invoke-ArtifactUpload -Path $artifact.path -RemoteName $artifact.name

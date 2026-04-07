@@ -246,13 +246,16 @@ def main() -> int:
                 "status": summary.get("status", "unknown"),
                 "csv_exists": summary.get("csv_exists"),
                 "hits_csv_exists": summary.get("hits_csv_exists"),
+                "normalized_bundle_exists": summary.get("normalized_bundle_exists"),
+                "normalization_status": summary.get("normalization_status"),
+                "normalizer_name": summary.get("normalizer_name"),
                 "probe_stage": summary.get("probe_stage"),
                 "probe_stage_status": summary.get("probe_stage_status"),
                 "error_kind": summary.get("error_kind"),
                 "error": summary.get("error"),
             }
             print(json.dumps(payload, indent=2))
-            if summary.get("status") == "error":
+            if summary.get("status") == "error" or summary.get("normalization_status") not in {None, "ok"}:
                 return 1
             return 0
 
@@ -276,6 +279,9 @@ def main() -> int:
                     "result_exists": True,
                     "csv_exists": False,
                     "hits_csv_exists": False,
+                    "normalized_bundle_exists": False,
+                    "normalization_status": "error",
+                    "normalizer_name": None,
                     "probe_stage_exists": True,
                     "probe_stage": probe_stage.get("stage"),
                     "probe_stage_status": probe_stage.get("status"),
@@ -294,6 +300,9 @@ def main() -> int:
                     "status": "error",
                     "csv_exists": False,
                     "hits_csv_exists": False,
+                    "normalized_bundle_exists": False,
+                    "normalization_status": "error",
+                    "normalizer_name": None,
                     "probe_stage": probe_stage.get("stage"),
                     "probe_stage_status": probe_stage.get("status"),
                     "error_kind": "probe-stage-error",

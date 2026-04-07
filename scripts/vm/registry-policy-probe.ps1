@@ -84,6 +84,143 @@ function Normalize-RegistryPathForProcmon {
     return $Path.Replace('HKLM:\', 'HKLM\').Replace('HKCU:\', 'HKCU\').Replace('HKCR:\', 'HKCR\').Replace('HKU:\', 'HKU\')
 }
 
+function Split-RegistryPath {
+    param(
+        [string]$Path,
+        [bool]$TreatLastSegmentAsValue = $false
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Path)) {
+        return [ordered]@{
+            hive = $null
+            key_path = $null
+            value_name = $null
+        }
+    }
+
+    $normalized = Normalize-RegistryPathForProcmon -Path $Path
+    $hive = $null
+    $remaining = $normalized
+    foreach ($candidate in @('HKLM', 'HKCU', 'HKCR', 'HKU', 'HKCC')) {
+        if ($normalized.StartsWith($candidate + '\', [System.StringComparison]::OrdinalIgnoreCase)) {
+            $hive = $candidate
+            $remaining = $normalized.Substring($candidate.Length + 1)
+            break
+        }
+        if ($normalized.Equals($candidate, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $hive = $candidate
+            $remaining = ''
+            break
+        }
+    }
+
+    if (-not $TreatLastSegmentAsValue -or [string]::IsNullOrWhiteSpace($remaining)) {
+        return [ordered]@{
+            hive = $hive
+            key_path = $remaining
+            value_name = $null
+        }
+    }
+
+    $separator = $remaining.LastIndexOf('\')
+    if ($separator -le 0 -or $separator -ge ($remaining.Length - 1)) {
+        return [ordered]@{
+            hive = $hive
+            key_path = $remaining
+            value_name = $null
+        }
+    }
+
+    return [ordered]@{
+        hive = $hive
+        key_path = $remaining.Substring(0, $separator)
+        value_name = $remaining.Substring($separator + 1)
+    }
+}
+
+function Parse-ProcmonDetail {
+    param([string]$Detail)
+
+    $valueType = $null
+    $dataText = $null
+    if (-not [string]::IsNullOrWhiteSpace($Detail)) {
+        foreach ($segment in $Detail -split ',') {
+            $trimmed = $segment.Trim()
+            if ($trimmed -like 'Type:*') {
+                $valueType = $trimmed.Substring('Type:'.Length).Trim()
+            }
+            elseif ($trimmed -like 'Data:*') {
+                $dataText = $trimmed.Substring('Data:'.Length).Trim()
+            }
+        }
+    }
+
+    return [ordered]@{
+        value_type = $valueType
+        data_text = if ($dataText) { $dataText } else { $Detail }
+    }
+}
+
+function Write-NormalizedProcmonBundle {
+    param(
+        [Parameter(Mandatory = $true)][string]$BundlePath,
+        [Parameter(Mandatory = $true)][string]$RunId,
+        [Parameter(Mandatory = $true)][object[]]$Rows,
+        [Parameter(Mandatory = $true)][string]$InputPath,
+        [Parameter(Mandatory = $true)][string]$RegistryPath,
+        [Parameter(Mandatory = $true)][string]$ValueName
+    )
+
+    $events = New-Object System.Collections.Generic.List[object]
+    foreach ($row in @($Rows)) {
+        $operation = [string]$row.Operation
+        $rawPath = [string]$row.Path
+        $pathParts = Split-RegistryPath -Path $rawPath -TreatLastSegmentAsValue:($operation -like '*Value*')
+        $detailParts = Parse-ProcmonDetail -Detail ([string]$row.Detail)
+        $parsedPid = 0
+        $pidValue = $null
+        if ([int]::TryParse([string]$row.PID, [ref]$parsedPid)) {
+            $pidValue = $parsedPid
+        }
+        $events.Add([ordered]@{
+            run_id = $RunId
+            source_tool = 'procmon'
+            capture_phase = 'runtime'
+            process_name = [string]$row.'Process Name'
+            pid = $pidValue
+            operation = $operation
+            timestamp_utc = [string]$row.'Time of Day'
+            hive = $pathParts.hive
+            key_path = $pathParts.key_path
+            value_name = if ($pathParts.value_name) { $pathParts.value_name } else { $ValueName }
+            value_type = $detailParts.value_type
+            data_text = $detailParts.data_text
+            result = [string]$row.Result
+            evidence_refs = @($InputPath)
+        }) | Out-Null
+    }
+
+    $bundle = [ordered]@{
+        '$schema' = 'registry-research-framework/schemas/normalized-registry-bundle.schema.json'
+        run_id = $RunId
+        source_tool = 'procmon'
+        capture_phase = 'runtime'
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        normalizer_name = 'GuestProcmonCsvRegistryNormalizer'
+        input_path = $InputPath
+        status = 'ok'
+        error_kind = $null
+        errors = @()
+        event_count = @($Rows).Count
+        filtered_event_count = @($events).Count
+        evidence_refs = @($InputPath, $BundlePath)
+        events = @($events)
+    }
+
+    $bundle | ConvertTo-Json -Depth 12 | Set-Content -Path $BundlePath -Encoding UTF8
+    return $bundle
+}
+
 function New-ProbePrefix {
     param(
         [string]$ConfiguredPrefix,
@@ -133,9 +270,12 @@ $csv = Join-Path $OutputDirectory "$effectivePrefix.csv"
 $hitsCsv = Join-Path $OutputDirectory "$effectivePrefix.hits.csv"
 $result = Join-Path $OutputDirectory "$effectivePrefix.txt"
 $stagePath = Join-Path $OutputDirectory "$effectivePrefix.stage.json"
+$normalizedBundle = Join-Path $OutputDirectory "$effectivePrefix.normalized.json"
 $normalizedProcmonPath = Normalize-RegistryPathForProcmon -Path $RegistryPath
 $original = $null
 $lines = New-Object System.Collections.Generic.List[string]
+$normalizedStatus = 'missing'
+$normalizedError = $null
 
 try {
     if ([string]::IsNullOrWhiteSpace($PowerShellCommand)) {
@@ -145,7 +285,7 @@ try {
     New-Item -ItemType Directory -Force -Path $OutputDirectory | Out-Null
     $original = Get-ValueState -Path $RegistryPath -Name $ValueName
 
-    foreach ($path in @($pml, $csv, $hitsCsv, $result, $stagePath)) {
+    foreach ($path in @($pml, $csv, $hitsCsv, $result, $stagePath, $normalizedBundle)) {
         if (Test-Path $path) {
             Remove-Item -Path $path -Force -ErrorAction SilentlyContinue
         }
@@ -226,6 +366,15 @@ try {
         if (@($matches).Count -gt 0) {
             $matches | Export-Csv -Path $hitsCsv -NoTypeInformation -Encoding UTF8
         }
+
+        try {
+            $bundle = Write-NormalizedProcmonBundle -BundlePath $normalizedBundle -RunId $effectivePrefix -Rows @($matches) -InputPath $csv -RegistryPath $RegistryPath -ValueName $ValueName
+            $normalizedStatus = [string]$bundle.status
+        }
+        catch {
+            $normalizedStatus = 'error'
+            $normalizedError = $_.Exception.Message
+        }
     }
 
     $lines.Add("MODE=$Mode")
@@ -234,6 +383,11 @@ try {
     $lines.Add("PML_EXISTS=" + (Test-Path $pml))
     $lines.Add("CSV_EXISTS=" + (Test-Path $csv))
     $lines.Add("HITSCSV_EXISTS=" + (Test-Path $hitsCsv))
+    $lines.Add("NORMALIZED_BUNDLE_EXISTS=" + (Test-Path $normalizedBundle))
+    $lines.Add("NORMALIZATION_STATUS=" + $normalizedStatus)
+    if ($normalizedError) {
+        $lines.Add("NORMALIZATION_ERROR=" + $normalizedError)
+    }
     $lines.Add("MATCH_COUNT=" + @($matches).Count)
     foreach ($match in $matches) {
         $lines.Add(('{0} | {1} | {2} | {3} | {4} | {5}' -f $match.'Time of Day', $match.'Process Name', $match.Operation, $match.Path, $match.Result, $match.Detail))

@@ -269,9 +269,12 @@ def main() -> int:
                 "etl_exists": summary.get("etl_exists"),
                 "csv_exists": summary.get("csv_exists"),
                 "hit_line_count": summary.get("hit_line_count"),
+                "normalized_bundle_exists": summary.get("normalized_bundle_exists"),
+                "normalization_status": summary.get("normalization_status"),
+                "normalizer_name": summary.get("normalizer_name"),
             }
             print(json.dumps(payload, indent=2))
-            if summary.get("status") == "error":
+            if summary.get("status") == "error" or summary.get("normalization_status") not in {None, "ok"}:
                 return 1
             return 0
 
@@ -294,6 +297,9 @@ def main() -> int:
                     "etl_exists": None,
                     "csv_exists": False,
                     "hit_line_count": 0,
+                    "normalized_bundle_exists": False,
+                    "normalization_status": "error",
+                    "normalizer_name": None,
                 }
                 summary_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
                 payload = {

@@ -241,12 +241,20 @@ def main() -> int:
             "summary_path": str(summary_path),
             "hits_path": str(hits_path),
             "output_name": args.output_name,
+            "status": summary.get("status"),
             "reboot_observed": summary.get("reboot_observed"),
             "csv_exists": summary.get("csv_exists"),
             "match_count": summary.get("match_count"),
             "csv_row_count": summary.get("csv_row_count"),
+            "normalized_bundle_exists": summary.get("normalized_bundle_exists"),
+            "normalization_status": summary.get("normalization_status"),
+            "normalizer_name": summary.get("normalizer_name"),
+            "error_kind": summary.get("error_kind"),
+            "error": summary.get("error"),
         }
         print(json.dumps(payload, indent=2))
+        if summary.get("status") == "error" or summary.get("normalization_status") not in {None, "ok"}:
+            return 1
         return 0
 
     print(

@@ -138,7 +138,7 @@ def load_lane_manifest(tweak_id: str, filename: str) -> dict[str, Any] | None:
 def load_lane_result(manifest: dict[str, Any] | None) -> dict[str, Any] | None:
     if not manifest:
         return None
-    result_ref = repo_relative_text(manifest.get("result_ref"))
+    result_ref = repo_relative_text(manifest.get("normalized_result_ref")) or repo_relative_text(manifest.get("result_ref"))
     if result_ref is None:
         log_path = repo_path_from_ref(manifest.get("log_file"))
         log_text = load_text_if_exists(log_path) if log_path else None
@@ -196,7 +196,7 @@ def manifest_capture_artifacts(manifest: dict[str, Any] | None) -> list[dict[str
         if item and item["path"] not in seen:
             seen.add(item["path"])
             normalized.append(item)
-    for key in ("result_ref", "log_file"):
+    for key in ("normalized_result_ref", "result_ref", "log_file"):
         repo_ref = repo_relative_text(manifest.get(key))
         if repo_ref and repo_ref not in seen:
             seen.add(repo_ref)
@@ -211,14 +211,28 @@ def lane_capture_status(manifest: dict[str, Any] | None) -> str:
         return "missing-required-runner"
     status = str(manifest.get("status") or "").strip().lower()
     capture_status = str(manifest.get("capture_status") or "").strip().lower()
+    normalization_status = str(manifest.get("normalization_status") or "").strip().lower()
+    has_normalization_contract = any(
+        key in manifest
+        for key in ("normalized_result_ref", "normalization_status", "normalizer_name", "normalization_errors")
+    )
     if status in {"", "staged"} or capture_status == "staged":
         return "staged-without-capture"
+    if has_normalization_contract:
+        if normalization_status in {"error", "failed"}:
+            return "normalization-error"
+        normalized_ref = repo_relative_text(manifest.get("normalized_result_ref"))
+        normalized_path = repo_path_from_ref(normalized_ref)
+        if normalized_ref and normalized_path and normalized_path.exists():
+            return "runner-ok" if status in {"runner-ok", "invoked-runner", "captured", "ok"} else status
     physical_capture = any(
         artifact["exists"]
         and not artifact["placeholder"]
         and Path(artifact["path"]).suffix.lower() in PHYSICAL_CAPTURE_SUFFIXES
         for artifact in manifest_capture_artifacts(manifest)
     )
+    if has_normalization_contract and physical_capture:
+        return "captured-without-normalization"
     if physical_capture:
         return "runner-ok" if status in {"runner-ok", "invoked-runner", "captured"} else status
     if status in {"runner-ok", "invoked-runner"} or capture_status in {"captured", "missing-capture"}:
@@ -233,7 +247,7 @@ def lane_executed(manifest: dict[str, Any] | None) -> bool:
 def lane_repo_ref(manifest: dict[str, Any] | None) -> str | None:
     if not manifest:
         return None
-    for key in ("result_ref", "log_file"):
+    for key in ("normalized_result_ref", "result_ref", "log_file"):
         candidate = repo_relative_text(manifest.get(key))
         if candidate:
             return candidate
@@ -545,6 +559,7 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
     runtime_lane = load_lane_manifest(tweak_id, "runtime-lane.json")
     runtime_result = load_lane_result(runtime_lane)
     procmon_lane = load_lane_manifest(tweak_id, "procmon-lane.json")
+    procmon_result = load_lane_result(procmon_lane)
     runtime_lane_status = lane_capture_status(runtime_lane)
     procmon_lane_status = lane_capture_status(procmon_lane)
 
@@ -588,6 +603,10 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
                 "collection_mode": (runtime_lane or {}).get("collection_mode") or "evidence",
                 "runner_required": runner_required(audit),
                 "rollback_pending": bool((runtime_lane or {}).get("rollback_pending")),
+                "normalized_result_ref": repo_relative_text((runtime_lane or {}).get("normalized_result_ref")) or repo_relative_text((runtime_result or {}).get("normalized_result_ref")),
+                "normalization_status": (runtime_lane or {}).get("normalization_status") or (runtime_result or {}).get("normalization_status"),
+                "normalizer_name": (runtime_lane or {}).get("normalizer_name") or (runtime_result or {}).get("normalizer_name"),
+                "normalization_errors": (runtime_lane or {}).get("normalization_errors") or (runtime_result or {}).get("normalization_errors") or [],
                 "capture_artifacts": manifest_capture_artifacts(runtime_lane),
             },
             "procmon": {
@@ -599,6 +618,10 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
                 "collection_mode": (procmon_lane or {}).get("collection_mode") or "evidence",
                 "runner_required": runner_required(audit),
                 "rollback_pending": bool((procmon_lane or {}).get("rollback_pending")),
+                "normalized_result_ref": repo_relative_text((procmon_lane or {}).get("normalized_result_ref")) or repo_relative_text((procmon_result or {}).get("normalized_result_ref")),
+                "normalization_status": (procmon_lane or {}).get("normalization_status") or (procmon_result or {}).get("normalization_status"),
+                "normalizer_name": (procmon_lane or {}).get("normalizer_name") or (procmon_result or {}).get("normalizer_name"),
+                "normalization_errors": (procmon_lane or {}).get("normalization_errors") or (procmon_result or {}).get("normalization_errors") or [],
                 "capture_artifacts": manifest_capture_artifacts(procmon_lane),
             },
             "frida": {

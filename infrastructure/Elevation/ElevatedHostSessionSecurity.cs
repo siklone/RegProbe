@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using System.IO.Pipes;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -64,6 +65,31 @@ public static class ElevatedHostSessionSecurity
     public static bool IsClientProcessAccepted(int expectedParentProcessId, int actualClientProcessId)
     {
         return expectedParentProcessId <= 0 || actualClientProcessId == expectedParentProcessId;
+    }
+
+    public static string RedactSensitiveText(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return string.Empty;
+        }
+
+        var redacted = Regex.Replace(
+            text,
+            "(--session-token\\s+\")([^\"]+)(\")",
+            "$1<redacted>$3",
+            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        redacted = Regex.Replace(
+            redacted,
+            "(sessionToken=)([^\\s]+)",
+            "$1<redacted>",
+            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        redacted = Regex.Replace(
+            redacted,
+            "(token=)([^\\s]+)",
+            "$1<redacted>",
+            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        return redacted;
     }
 
     [DllImport("kernel32.dll", SetLastError = true)]

@@ -127,6 +127,129 @@ function Invoke-NativeProcess {
     }
 }
 
+function Get-RowField {
+    param(
+        [Parameter(Mandatory = $true)]$Row,
+        [Parameter(Mandatory = $true)][string[]]$Names
+    )
+
+    foreach ($name in $Names) {
+        foreach ($property in $Row.PSObject.Properties) {
+            if ($property.Name -ieq $name -and $null -ne $property.Value -and -not [string]::IsNullOrWhiteSpace([string]$property.Value)) {
+                return [string]$property.Value
+            }
+        }
+    }
+
+    return $null
+}
+
+function Split-RegistryPath {
+    param(
+        [string]$Path,
+        [string]$FallbackPath,
+        [string]$FallbackValueName
+    )
+
+    $normalized = if ([string]::IsNullOrWhiteSpace($Path)) { $FallbackPath } else { $Path }
+    if ([string]::IsNullOrWhiteSpace($normalized)) {
+        return [ordered]@{
+            hive = $null
+            key_path = $null
+            value_name = $FallbackValueName
+        }
+    }
+
+    $working = $normalized.Replace('/', '\').Replace('HKLM:\', 'HKLM\').Replace('HKCU:\', 'HKCU\')
+    $hive = $null
+    $remaining = $working
+    foreach ($candidate in @('HKLM', 'HKCU', 'HKCR', 'HKU', 'HKCC')) {
+        if ($working.StartsWith($candidate + '\', [System.StringComparison]::OrdinalIgnoreCase)) {
+            $hive = $candidate
+            $remaining = $working.Substring($candidate.Length + 1)
+            break
+        }
+    }
+
+    return [ordered]@{
+        hive = $hive
+        key_path = $remaining
+        value_name = $FallbackValueName
+    }
+}
+
+function Write-NormalizedTracerptBundle {
+    param(
+        [Parameter(Mandatory = $true)][string]$BundlePath,
+        [Parameter(Mandatory = $true)][string]$RunId,
+        [Parameter(Mandatory = $true)][string]$CsvPath,
+        [Parameter(Mandatory = $true)][string[]]$SearchFragments,
+        [Parameter(Mandatory = $true)][string]$RegistryPath,
+        [Parameter(Mandatory = $true)][string]$ValueName
+    )
+
+    $events = New-Object System.Collections.Generic.List[object]
+    foreach ($row in Import-Csv -Path $CsvPath) {
+        $joined = ($row.PSObject.Properties | ForEach-Object { [string]$_.Value }) -join ' | '
+        $matched = $false
+        foreach ($fragment in $SearchFragments) {
+            if (-not [string]::IsNullOrWhiteSpace($fragment) -and $joined -like "*$fragment*") {
+                $matched = $true
+                break
+            }
+        }
+
+        if (-not $matched) {
+            continue
+        }
+
+        $pathParts = Split-RegistryPath -Path (Get-RowField -Row $row -Names @('KeyName', 'Path', 'Key Path')) -FallbackPath $RegistryPath -FallbackValueName $ValueName
+        $pidRaw = Get-RowField -Row $row -Names @('PID', 'Process ID')
+        $parsedPid = 0
+        $pidValue = $null
+        if (-not [string]::IsNullOrWhiteSpace($pidRaw) -and [int]::TryParse($pidRaw, [ref]$parsedPid)) {
+            $pidValue = $parsedPid
+        }
+
+        $events.Add([ordered]@{
+            run_id = $RunId
+            source_tool = 'wpr'
+            capture_phase = 'boot'
+            process_name = Get-RowField -Row $row -Names @('Process Name', 'ProcessName', 'Process')
+            pid = $pidValue
+            operation = (Get-RowField -Row $row -Names @('Event Name', 'Task Name', 'Opcode Name', 'EventName', 'Task'))
+            timestamp_utc = (Get-RowField -Row $row -Names @('Event Time', 'TimeCreated', 'Time Stamp', 'Timestamp', 'Time'))
+            hive = $pathParts.hive
+            key_path = $pathParts.key_path
+            value_name = $pathParts.value_name
+            value_type = Get-RowField -Row $row -Names @('Type', 'Value Type', 'Data Type')
+            data_text = $joined
+            result = Get-RowField -Row $row -Names @('Result', 'Status')
+            evidence_refs = @($CsvPath)
+        }) | Out-Null
+    }
+
+    $bundle = [ordered]@{
+        '$schema' = 'registry-research-framework/schemas/normalized-registry-bundle.schema.json'
+        run_id = $RunId
+        source_tool = 'wpr'
+        capture_phase = 'boot'
+        generated_utc = [DateTime]::UtcNow.ToString('o')
+        normalizer_name = 'GuestTracerptCsvRegistryNormalizer'
+        input_path = $CsvPath
+        status = 'ok'
+        error_kind = $null
+        errors = @()
+        event_count = @($events).Count
+        filtered_event_count = @($events).Count
+        evidence_refs = @($CsvPath, $BundlePath)
+        events = @($events)
+    }
+
+    $bundle | ConvertTo-Json -Depth 12 | Set-Content -Path $BundlePath -Encoding UTF8
+    return $bundle
+}
+
 if ([string]::IsNullOrWhiteSpace($OutputRoot)) {
     $OutputRoot = Join-Path 'C:\RegProbe-Diag\wpr-boot-registry' $OutputName
 }
@@ -143,6 +266,7 @@ $stagePath = Join-Path $OutputRoot 'stage.json'
 $etlPath = Join-Path $OutputRoot ($OutputName + '.etl')
 $csvPath = Join-Path $OutputRoot ($OutputName + '.csv')
 $hitsPath = Join-Path $OutputRoot ($OutputName + '.hits.txt')
+$normalizedBundlePath = Join-Path $OutputRoot ($OutputName + '.normalized.json')
 
 function Publish-Stage {
     param(
@@ -172,7 +296,7 @@ function Publish-Stage {
 }
 
 if ($Stage -eq 'arm') {
-    foreach ($path in @($summaryArmPath, $summaryPath, $stagePath, $etlPath, $csvPath, $hitsPath)) {
+    foreach ($path in @($summaryArmPath, $summaryPath, $stagePath, $etlPath, $csvPath, $hitsPath, $normalizedBundlePath)) {
         Remove-Item -Path $path -Force -ErrorAction SilentlyContinue
     }
 
@@ -185,6 +309,9 @@ if ($Stage -eq 'arm') {
         status = 'ok'
         error_kind = $null
         error = $null
+        recovery_action = 'none'
+        transport_blocker = 'none'
+        guest_health = 'stable'
         wpr_exists = [bool](Test-Path $wpr)
         tracerpt_exists = [bool](Test-Path $tracerpt)
         before_boot_time_utc = $null
@@ -273,6 +400,7 @@ $stagePath = Join-Path $OutputRoot 'stage.json'
 $etlPath = Join-Path $OutputRoot ($OutputName + '.etl')
 $csvPath = Join-Path $OutputRoot ($OutputName + '.csv')
 $hitsPath = Join-Path $OutputRoot ($OutputName + '.hits.txt')
+$normalizedBundlePath = Join-Path $OutputRoot ($OutputName + '.normalized.json')
 
 $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
@@ -283,6 +411,9 @@ $summary = [ordered]@{
     status = 'ok'
     error_kind = $null
     error = $null
+    recovery_action = 'none'
+    transport_blocker = 'none'
+    guest_health = 'stable'
     before_boot_time_utc = [string]$state.before_boot_time_utc
     after_boot_time_utc = Get-BootTimeUtc
     reboot_observed = $false
@@ -293,6 +424,12 @@ $summary = [ordered]@{
     etl_exists = $false
     csv_path = $csvPath
     csv_exists = $false
+    normalized_bundle_path = $normalizedBundlePath
+    normalized_bundle_exists = $false
+    normalized_result_ref = $null
+    normalization_status = 'missing'
+    normalizer_name = 'GuestTracerptCsvRegistryNormalizer'
+    normalization_errors = @()
     hit_line_count = 0
     fragment_hit_counts = [ordered]@{}
 }
@@ -373,6 +510,17 @@ try {
             $summary.hit_line_count = $hitLines.Count
             $summary['hits_path'] = $hitsPath
             $summary['hits_exists'] = [bool](Test-Path $hitsPath)
+
+            try {
+                $bundle = Write-NormalizedTracerptBundle -BundlePath $normalizedBundlePath -RunId $OutputName -CsvPath $csvPath -SearchFragments @($fragments) -RegistryPath ([string]$state.registry_path) -ValueName ([string]$state.value_name)
+                $summary.normalized_bundle_exists = [bool](Test-Path $normalizedBundlePath)
+                $summary.normalized_result_ref = if ($summary.normalized_bundle_exists) { $normalizedBundlePath } else { $null }
+                $summary.normalization_status = [string]$bundle.status
+            }
+            catch {
+                $summary.normalization_status = 'error'
+                $summary.normalization_errors = @($_.Exception.Message)
+            }
         }
     }
 }
@@ -380,12 +528,27 @@ catch {
     $summary.status = 'error'
     $summary.error_kind = 'collect-exception'
     $summary.error = $_.Exception.Message
+    $summary.recovery_action = 'rerun-wpr-collect'
+    $summary.transport_blocker = 'collect-exception'
+    $summary.guest_health = 'degraded'
+}
+
+if ($summary.status -eq 'ok' -and $summary.normalization_status -ne 'ok') {
+    $summary.status = 'error'
+    $summary.error_kind = if ($summary.normalization_status -eq 'missing') { 'normalized-bundle-missing' } else { 'normalization-error' }
+    $summary.error = if (@($summary.normalization_errors).Count -gt 0) { (@($summary.normalization_errors) -join '; ') } else { 'Normalized bundle was not produced.' }
+    $summary.recovery_action = 'inspect-normalized-bundle'
+    $summary.transport_blocker = if ($summary.normalization_status -eq 'missing') { 'normalized-bundle-missing' } else { 'normalization-failed' }
+    $summary.guest_health = 'stable'
 }
 
 Write-JsonFile -Path $summaryPath -Payload $summary
 Invoke-ArtifactUpload -Path $summaryPath -RemoteName ('{0}-summary.json' -f $OutputName) | Out-Null
 if (Test-Path $hitsPath) {
     Invoke-ArtifactUpload -Path $hitsPath -RemoteName ('{0}.hits.txt' -f $OutputName) | Out-Null
+}
+if (Test-Path $normalizedBundlePath) {
+    Invoke-ArtifactUpload -Path $normalizedBundlePath -RemoteName ('{0}.normalized.json' -f $OutputName) | Out-Null
 }
 Publish-Stage -StageName 'collect-complete' -Status $summary.status -Message $summary.error
 

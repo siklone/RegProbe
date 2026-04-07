@@ -255,6 +255,7 @@ Ensure-Directory -Path $OutputRoot
 $txtPath = Join-Path $OutputRoot ('{0}.txt' -f $OutputName)
 $csvPath = Join-Path $OutputRoot ('{0}.csv' -f $OutputName)
 $hitsCsvPath = Join-Path $OutputRoot ('{0}.hits.csv' -f $OutputName)
+$normalizedBundlePath = Join-Path $OutputRoot ('{0}.normalized.json' -f $OutputName)
 $probeStagePath = Join-Path $OutputRoot ('{0}.stage.json' -f $OutputName)
 $summaryPath = Join-Path $OutputRoot 'run-summary.json'
 $triggerCommand = $null
@@ -352,7 +353,8 @@ finally {
     foreach ($entry in @(
         @{ key = 'result'; path = $txtPath; name = ('{0}.txt' -f $OutputName) },
         @{ key = 'hits_csv'; path = $hitsCsvPath; name = ('{0}.hits.csv' -f $OutputName) },
-        @{ key = 'csv'; path = $csvPath; name = ('{0}.csv' -f $OutputName) }
+        @{ key = 'csv'; path = $csvPath; name = ('{0}.csv' -f $OutputName) },
+        @{ key = 'normalized_bundle'; path = $normalizedBundlePath; name = ('{0}.normalized.json' -f $OutputName) }
     )) {
         try {
             $upload = Invoke-ArtifactUpload -Path $entry.path -RemoteName $entry.name
@@ -363,6 +365,28 @@ finally {
         catch {
             $uploads[('{0}_upload_error' -f $entry.key)] = $_.Exception.Message
         }
+    }
+
+    $normalizedBundle = $null
+    if (Test-Path $normalizedBundlePath) {
+        try {
+            $normalizedBundle = Get-Content -Path $normalizedBundlePath -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
+        }
+        catch {
+            if (-not $hadError) {
+                $hadError = $true
+                $errorKind = 'normalized-bundle-parse-error'
+                $errorMessage = $_.Exception.Message
+            }
+        }
+    }
+
+    $normalizationStatus = if ($normalizedBundle) { [string]$normalizedBundle.status } elseif (Test-Path $normalizedBundlePath) { 'parse-error' } else { 'missing' }
+    $normalizationErrors = if ($normalizedBundle -and $normalizedBundle.errors) { @($normalizedBundle.errors) } elseif ($normalizedBundle -and $normalizedBundle.error_kind) { @([string]$normalizedBundle.error_kind) } else { @() }
+    if (-not $hadError -and ($normalizationStatus -ne 'ok' -or -not (Test-Path $normalizedBundlePath))) {
+        $hadError = $true
+        $errorKind = if ($normalizationStatus -eq 'missing') { 'normalized-bundle-missing' } else { 'normalization-error' }
+        $errorMessage = if ($normalizationErrors.Count -gt 0) { ($normalizationErrors -join '; ') } else { 'Normalized registry bundle was not produced.' }
     }
 
     $summary = [ordered]@{
@@ -376,6 +400,12 @@ finally {
         result_exists = [bool](Test-Path $txtPath)
         csv_exists = [bool](Test-Path $csvPath)
         hits_csv_exists = [bool](Test-Path $hitsCsvPath)
+        normalized_bundle_path = $normalizedBundlePath
+        normalized_bundle_exists = [bool](Test-Path $normalizedBundlePath)
+        normalized_result_ref = if (Test-Path $normalizedBundlePath) { $normalizedBundlePath } else { $null }
+        normalization_status = $normalizationStatus
+        normalizer_name = if ($normalizedBundle) { [string]$normalizedBundle.normalizer_name } else { 'GuestProcmonCsvRegistryNormalizer' }
+        normalization_errors = @($normalizationErrors)
         probe_stage_exists = [bool](Test-Path $probeStagePath)
         probe_stage = if ($probeStage) { $probeStage.stage } else { $null }
         probe_stage_status = if ($probeStage) { $probeStage.status } else { $null }
@@ -384,6 +414,9 @@ finally {
         error_kind = $errorKind
         error = $errorMessage
         error_position = $errorPosition
+        recovery_action = if ($hadError) { 'inspect-normalized-bundle' } else { 'none' }
+        transport_blocker = if ($normalizationStatus -eq 'missing') { 'normalized-bundle-missing' } elseif ($normalizationStatus -ne 'ok') { 'normalization-failed' } else { 'none' }
+        guest_health = if ($hadError) { 'degraded' } else { 'stable' }
         uploads = $uploads
     }
 

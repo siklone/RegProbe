@@ -169,6 +169,16 @@ public sealed class ElevatedHostSessionSecurityTests
     }
 
     [Fact]
+    public void RedactSensitiveText_MasksSessionTokens()
+    {
+        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText("--pipe \"regprobe.pipe\" --session-token \"ABCDEF123456\" token=secret");
+
+        Assert.DoesNotContain("ABCDEF123456", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("secret", redacted, StringComparison.Ordinal);
+        Assert.Contains("<redacted>", redacted, StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void ClientProcessValidationRejectsUnexpectedPid()
     {
         Assert.True(ElevatedHostSessionSecurity.IsClientProcessAccepted(1234, 1234));
