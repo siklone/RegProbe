@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T23:41:19.690700Z",
+  "generated_utc": "2026-04-07T23:54:25.957487Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 316,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T23:41:18.918116Z",
+      "generated_utc": "2026-04-07T23:54:25.217495Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18626,13 +18626,13 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-control-cluster.json",
-      "source_file_sha256": "57b574c7434dc7e6630ca5e45906ccef487957b09a9d6d832c5d9ad910ff6432",
-      "source_file_size_bytes": 18692,
+      "source_file_sha256": "9742d6402a63079b2ea86a8b44507f93491e0b3c72c2fc982e3631f69ecf167f",
+      "source_file_size_bytes": 20475,
       "name": "Session Manager Kernel DPC Watchdog Control Timeout Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Control Timeouts",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM evidence now proves the full structural lane plus live values: `KeQueryDpcWatchdogConfiguration` reads the corresponding globals, `KiValidateDpcWatchdogConfiguration` backfills and validates them, `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input, a PDB-backed Ghidra pass ties the writer to `NtSetSystemInformation`, a later class-focused live KD pass confirms the exact syscall call site plus admin-group gate and implies numeric arm `0xE4` from the dispatch chain, and a dedicated live value pass reads all three globals as `0` on the running build. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
+      "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM evidence now proves the full structural lane plus live values: `KeQueryDpcWatchdogConfiguration` reads the corresponding globals, `KiValidateDpcWatchdogConfiguration` backfills and validates them, `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input, a PDB-backed Ghidra pass ties the writer to `NtSetSystemInformation`, a later class-focused live KD pass confirms the exact syscall call site plus admin-group gate and implies numeric arm `0xE4` from the dispatch chain, a dedicated live value pass reads all three globals as `0` on the running build, and a canonical boot/init Ghidra follow-up shows that `KiInitDpcThresholds` preserves zero-valued control globals rather than forcing non-zero defaults. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -18909,6 +18909,20 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408",
+          "kind": "vm-test",
+          "title": "PDB-backed KVM Ghidra shows DPC watchdog boot/init normalization semantics",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/evidence.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md",
+          "summary": "A PDB-backed current-build Ghidra xref pass showed that `KiInitDpcThresholds` floors or clamps low non-zero DPC watchdog control values but allows zero-valued control globals to remain zero, which explains why the live current-build control cluster can stay zero without contradicting the structural init path.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": null,
@@ -18996,13 +19010,13 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-profile-cluster.json",
-      "source_file_sha256": "eea8087ca7cec174a732fb0cad9db406f8b71c4220cd39fdc8d2604a220b3155",
-      "source_file_size_bytes": 24053,
+      "source_file_sha256": "8a96d29401d251c46a886696066687bc6af13fee440be659e4f5db3af217ca69",
+      "source_file_size_bytes": 26106,
       "name": "Session Manager Kernel DPC Watchdog Profile Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Profile",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader, validator, and writer path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges, and `KeUpdateDpcWatchdogConfiguration` writes the globals from caller-supplied validated input. A later PDB-backed Ghidra symbol-xref pass narrowed the caller story further, and a class-focused live KD pass then confirmed the exact runtime edge `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, the admin-group gate, and a dispatch-chain inference that the writer arm is reached via numeric system-information arm `0xE4`. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
+      "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader, validator, and writer path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges, and `KeUpdateDpcWatchdogConfiguration` writes the globals from caller-supplied validated input. A later PDB-backed Ghidra symbol-xref pass narrowed the caller story further, a class-focused live KD pass then confirmed the exact runtime edge `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, the admin-group gate, and a dispatch-chain inference that the writer arm is reached via numeric system-information arm `0xE4`, and a canonical init-semantics Ghidra follow-up then showed that current-build legacy/profile backfill only activates under sentinel/non-zero prerequisites. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -19336,6 +19350,20 @@
           "supports": [
             "behavior",
             "runtime-gate",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408",
+          "kind": "vm-test",
+          "title": "PDB-backed KVM Ghidra shows DPC watchdog init and legacy profile derivation semantics",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/evidence.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md",
+          "summary": "A PDB-backed current-build Ghidra xref pass showed that `KiInitDpcThresholds` and `KiInitializeLegacyWatchdogProfileThresholds` normalize or derive profile values only under specific non-zero / sentinel prerequisites, which explains why the current build can keep most profile globals at `0` even while `KeDpcWatchdogProfileOffsetMs` stays at `10000`.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "default",
             "version-scope"
           ],
           "origin": "VM test / probe"

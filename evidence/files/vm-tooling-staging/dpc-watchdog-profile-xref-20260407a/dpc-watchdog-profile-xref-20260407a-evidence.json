@@ -1,0 +1,458 @@
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "dpc-watchdog-profile-xref-20260407a",
+  "timestamp": "2026-04-07T19:30:10.171013100Z",
+  "ghidra_no_function_fallback": false,
+  "matches": [
+    {
+      "address": "140c2855c",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileOffsetMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c60e2a",
+      "function": "KeInitSystem",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b5feb",
+      "function": "KiApplyDpcVerificationScaleSettings",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 15,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b5ff4",
+      "function": "KiApplyDpcVerificationScaleSettings",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 15,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b4c3c",
+      "function": "KiCreateDpcLimitsProcessorConfiguration",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c28188",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c281b1",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c281e2",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c281f3",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c28599",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c28607",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c28612",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c28629",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c60e23",
+      "function": "KeInitSystem",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b5ffa",
+      "function": "KiApplyDpcVerificationScaleSettings",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 15,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b6003",
+      "function": "KiApplyDpcVerificationScaleSettings",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 15,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b4c18",
+      "function": "KiCreateDpcLimitsProcessorConfiguration",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c281b7",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c281d7",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c281f9",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c28206",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c285a6",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c285d7",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c285e9",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c2863e",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140b565eb",
+      "function": "KiInitializeProcessor",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 34,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c2820c",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c28219",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c2823d",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c28644",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c2865e",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b4863",
+      "function": "KeQueryDpcWatchdogConfiguration",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b4ac5",
+      "function": "KeUpdateDpcWatchdogConfiguration",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b4af3",
+      "function": "KeUpdateDpcWatchdogConfiguration",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b4e8d",
+      "function": "KiValidateDpcWatchdogConfiguration",
+      "via_label": "symbol:KeDpcWatchdogProfileBufferSizeBytes",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c60e07",
+      "function": "KeInitSystem",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b5faf",
+      "function": "KiApplyDpcVerificationScaleSettings",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 15,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b5fb8",
+      "function": "KiApplyDpcVerificationScaleSettings",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 15,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b4bd0",
+      "function": "KiCreateDpcLimitsProcessorConfiguration",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c280f4",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c2810f",
+      "function": "KiInitDpcThresholds",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c2856c",
+      "function": "KiInitializeLegacyWatchdogProfileThresholds",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 45,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b488b",
+      "function": "KeQueryDpcWatchdogConfiguration",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b4a83",
+      "function": "KeUpdateDpcWatchdogConfiguration",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "1405b4e42",
+      "function": "KiValidateDpcWatchdogConfiguration",
+      "via_label": "symbol:KeDpcWatchdogPeriodMs",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    }
+  ]
+}
