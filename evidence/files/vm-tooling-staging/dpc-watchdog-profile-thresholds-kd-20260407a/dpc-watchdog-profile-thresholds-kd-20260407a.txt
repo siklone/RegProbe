@@ -1,0 +1,11 @@
+.sympath C:\Tools\Symbols\dpc-watchdog-profile-thresholds-kd-20260407a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!Ke*DpcWatchdogProfile*
+dd nt!KeDpcWatchdogProfileOffsetMs L1
+dd nt!KeDpcWatchdogProfileSingleDpcThresholdMs L1
+dd nt!KeDpcWatchdogProfileCumulativeDpcThresholdMs L1
+dd nt!KeDpcWatchdogProfileBufferSizeBytes L1
+dd nt!KeDpcWatchdogPeriodMs L1
+.echo REGPROBE_LOCALKD_END
+q

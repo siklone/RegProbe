@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 314 |
+| Total records | 315 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 314 |
+| Records with evidence | 315 |
 | Records without evidence | 0 |
-| Records missing validation proof | 4 |
+| Records missing validation proof | 5 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
 | Class B | 7 |
-| Class D | 4 |
+| Class D | 5 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -87,6 +87,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.power-watchdog-timeout-cluster` | draft | Class D | `research/records/power.control.power-watchdog-timeout-cluster.json` | - | `43248b00792f0f9bfecbb053d4d3dbef8d59fd013233f6b41b7f1aa6bb700d68` |  | 4 |
 | `power.control.win32k-callout-watchdog-timeout-seconds` | draft | Class D | `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json` | - | `529e2adfa92ef2ef81910f7ced3f98c2de0f0652a0c7b3379a0e35e29dcce003` |  | 4 |
 | `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class D | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `9f225d3d01745832a87ae42eebbc4df923b193dde062b6e31650887d3e138a6f` |  | 7 |
+| `system.kernel-dpc-watchdog-profile-cluster` | draft | Class D | `research/records/system.kernel-dpc-watchdog-profile-cluster.json` | - | `c0caa4d8b84cc677b1b492f25a82518b3f69c8f8cb619e2d57c662aa652e6257` |  | 2 |
 | `system.kernel.force-bugcheck-for-dpc-watchdog` | draft | Class D | `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json` | - | `ad03e9fc71c89ef34719a6f1c8631f543706ee97a9138953ec7e8bdad76e0aeb` |  | 5 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
@@ -1954,6 +1955,25 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-watchdog-win32-callout-kd-20260407` | `vm-test` | KVM local-KD disassembly for PopInvokeWin32CalloutWithWatchdog | [research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-follow-up-20260407.md](notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-follow-up-20260407.md) and [evidence/files/vm/watchdog-win32-callout-20260407a/host-review.json](../evidence/files/vm-tooling-staging/watchdog-win32-callout-20260407a/host-review.json) |
 | `ghidra-watchdog-win32-callout-20260407` | `vm-test` | KVM Ghidra full-analysis pass keeps the exact string but finds no bounded xrefs | [research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-ghidra-symbol-follow-up-20260407.md](notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-ghidra-symbol-follow-up-20260407.md) and [evidence/files/vm/watchdog-win32-callout-ghidra-20260407b/host-review.json](../evidence/files/vm-tooling-staging/watchdog-win32-callout-ghidra-20260407b/host-review.json) |
 | `vm-watchdog-win32-callout-seed-kd-20260407` | `vm-test` | KVM local-KD seeding sweep finds no current-build registry seeding caller | [research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-seed-follow-up-20260407.md](notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-seed-follow-up-20260407.md) and [evidence/files/vm/watchdog-win32-callout-seed-kd-20260407d/host-review.json](../evidence/files/vm-tooling-staging/watchdog-win32-callout-seed-kd-20260407d/host-review.json) |
+
+---
+
+### `system.kernel-dpc-watchdog-profile-cluster`
+
+- Status: `draft`
+- Evidence class: `Class D`
+- Source file: `research/records/system.kernel-dpc-watchdog-profile-cluster.json`
+- Source SHA256: `c0caa4d8b84cc677b1b492f25a82518b3f69c8f8cb619e2d57c662aa652e6257`
+- Proof SHA256: ``
+
+**Summary:** Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. A dedicated live KVM local-KD bundle now proves that the current build exports the matching `KeDpcWatchdogProfile*` globals, but only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407` | `repo-doc` | Repo system docs list explicit DpcWatchdogProfile defaults | [Docs/system/system.md](../Docs/system/system.md) |
+| `vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407` | `vm-test` | Dedicated KVM local-KD bundle reads live DPC watchdog profile globals | [evidence/files/vm/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt) |
 
 ---
 

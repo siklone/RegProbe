@@ -1,25 +1,25 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T19:05:19.545260Z",
+  "generated_utc": "2026-04-07T19:10:34.696619Z",
   "summary": {
-    "total_records": 314,
+    "total_records": 315,
     "validated": 255,
     "deprecated": 55,
     "review_required": 0,
-    "records_with_evidence": 314,
+    "records_with_evidence": 315,
     "records_without_evidence": 0,
-    "records_missing_validation_proof": 4,
+    "records_missing_validation_proof": 5,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
       "A": 248,
       "E": 55,
       "B": 7,
-      "D": 4
+      "D": 5
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T19:05:19.255446Z",
+      "generated_utc": "2026-04-07T19:10:34.411286Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18555,6 +18555,322 @@
             "behavior",
             "version-scope",
             "risk"
+          ],
+          "origin": "VM test / probe"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": null,
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "tweak_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "record_status": "draft",
+      "source_file": "research/records/system.kernel-dpc-watchdog-profile-cluster.json",
+      "name": "Session Manager Kernel DPC Watchdog Profile Cluster",
+      "category": "System",
+      "area": "Session Manager Kernel DPC Watchdog Profile",
+      "scope": "device",
+      "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. A dedicated live KVM local-KD bundle now proves that the current build exports the matching `KeDpcWatchdogProfile*` globals, but only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults.",
+      "evidence_class": {
+        "record_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "tweak_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "record_status": "draft",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "low",
+        "app_mapping_status": "not-mapped",
+        "restore_story_known": true,
+        "tested_build": "26200",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "Repo docs list `DpcWatchdogProfileBufferSizeBytes = 266240`, `DpcWatchdogProfileCumulativeDpcThreshold = 110000`, `DpcWatchdogProfileOffset = 10000`, and `DpcWatchdogProfileSingleDpcThreshold = 18333` under `Session Manager\\\\Kernel`.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo system docs list explicit DpcWatchdogProfile defaults",
+              "url": "Docs/system/system.md",
+              "kind": "repo-doc",
+              "summary": "Repo docs list `DpcWatchdogProfileBufferSizeBytes = 266240`, `DpcWatchdogProfileCumulativeDpcThreshold = 110000`, `DpcWatchdogProfileOffset = 10000`, and `DpcWatchdogProfileSing..."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "A dedicated live KVM local-KD bundle resolved the current-build `KeDpcWatchdogProfile*` symbol cluster and directly read `OffsetMs = 10000`, `SingleDpcThresholdMs = 0`, `CumulativeDpcThresholdMs = 0`, `BufferSizeBytes = 0`, plus control `KeDpcWatchdogPeriod...",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": true,
+          "links": [
+            {
+              "title": "Dedicated KVM local-KD bundle reads live DPC watchdog profile globals",
+              "url": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt",
+              "kind": "vm-test",
+              "summary": "A dedicated live KVM local-KD bundle resolved the current-build `KeDpcWatchdogProfile*` symbol cluster and directly read `OffsetMs = 10000`, `SingleDpcThresholdMs = 0`, `Cumulat..."
+            }
+          ]
+        },
+        "upstream_lineage": {
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
+        }
+      },
+      "decision": {
+        "confidence": "low",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults and dedicated current-build live kernel-state proof. It is not ready for validation because the current build conflicts with the repo-doc defaults for most values and the reader or initializer path is still unknown.",
+        "blocking_issues": [
+          "live-defaults-conflict-docs",
+          "no-current-build-reader-path",
+          "runtime_no_read",
+          "no-doc-source-outside-repo",
+          "conditional-initialization-unproven"
+        ]
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "not currently shipped in the app",
+        "notes": "The app does not currently expose this watchdog profile cluster as tweak surfaces.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "dpc-watchdog-profile-buffer-size-bytes",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "DpcWatchdogProfileBufferSizeBytes",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "documented-default",
+              "value": 266240,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs attribute a 266240-byte default to `DpcWatchdogProfileBufferSizeBytes`.",
+              "evidence_ids": [
+                "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407"
+              ]
+            },
+            {
+              "state_kind": "live-current-build-global",
+              "value": 0,
+              "label": "Live current-build kernel state",
+              "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogProfileBufferSizeBytes = 0` on the running current build.",
+              "evidence_ids": [
+                "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "dpc-watchdog-profile-cumulative-dpc-threshold",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "DpcWatchdogProfileCumulativeDpcThreshold",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "documented-default",
+              "value": 110000,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs attribute a 110000 ms default to `DpcWatchdogProfileCumulativeDpcThreshold`.",
+              "evidence_ids": [
+                "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407"
+              ]
+            },
+            {
+              "state_kind": "live-current-build-global",
+              "value": 0,
+              "label": "Live current-build kernel state",
+              "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogProfileCumulativeDpcThresholdMs = 0` on the running current build.",
+              "evidence_ids": [
+                "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "dpc-watchdog-profile-offset",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "DpcWatchdogProfileOffset",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "documented-default",
+              "value": 10000,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs attribute a 10000 ms default to `DpcWatchdogProfileOffset`.",
+              "evidence_ids": [
+                "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407"
+              ]
+            },
+            {
+              "state_kind": "live-current-build-global",
+              "value": 10000,
+              "label": "Live current-build kernel state",
+              "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogProfileOffsetMs = 10000` on the running current build.",
+              "evidence_ids": [
+                "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+              ]
+            }
+          ]
+        },
+        {
+          "target_id": "dpc-watchdog-profile-single-dpc-threshold",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "DpcWatchdogProfileSingleDpcThreshold",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "documented-default",
+              "value": 18333,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs attribute a 18333 ms default to `DpcWatchdogProfileSingleDpcThreshold`.",
+              "evidence_ids": [
+                "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407"
+              ]
+            },
+            {
+              "state_kind": "live-current-build-global",
+              "value": 0,
+              "label": "Live current-build kernel state",
+              "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogProfileSingleDpcThresholdMs = 0` on the running current build.",
+              "evidence_ids": [
+                "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Current-build live kernel state",
+          "applies_to": "KVM local-KD follow-up on Windows 11 25H2 current build",
+          "states": [
+            {
+              "target_id": "dpc-watchdog-profile-buffer-size-bytes",
+              "state_kind": "live-current-build-global",
+              "value": 0
+            },
+            {
+              "target_id": "dpc-watchdog-profile-cumulative-dpc-threshold",
+              "state_kind": "live-current-build-global",
+              "value": 0
+            },
+            {
+              "target_id": "dpc-watchdog-profile-offset",
+              "state_kind": "live-current-build-global",
+              "value": 10000
+            },
+            {
+              "target_id": "dpc-watchdog-profile-single-dpc-threshold",
+              "state_kind": "live-current-build-global",
+              "value": 0
+            }
+          ],
+          "evidence_ids": [
+            "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "live-current-build-contradiction-cluster",
+          "label": "Live current-build contradiction cluster",
+          "intended_for": [
+            "Research tracking",
+            "Future DPC watchdog initializer analysis"
+          ],
+          "avoid_for": [
+            "General users",
+            "One-click tweak surfaces"
+          ],
+          "states": [
+            {
+              "target_id": "dpc-watchdog-profile-buffer-size-bytes",
+              "state_kind": "live-current-build-global",
+              "value": 0
+            },
+            {
+              "target_id": "dpc-watchdog-profile-cumulative-dpc-threshold",
+              "state_kind": "live-current-build-global",
+              "value": 0
+            },
+            {
+              "target_id": "dpc-watchdog-profile-offset",
+              "state_kind": "live-current-build-global",
+              "value": 10000
+            },
+            {
+              "target_id": "dpc-watchdog-profile-single-dpc-threshold",
+              "state_kind": "live-current-build-global",
+              "value": 0
+            }
+          ],
+          "good_when": "You want to preserve the current-build contradiction as the primary fact while looking for the initializer or registry reader path.",
+          "bad_when": "You need safe override guidance or validated non-default semantics.",
+          "tradeoffs": [
+            "Preserves the strongest current-build proof available for the family.",
+            "Avoids claiming that repo-doc defaults are unconditional live defaults.",
+            "Keeps the family in a structural RE queue instead of promoting speculative tweak values."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407",
+            "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407",
+          "kind": "repo-doc",
+          "title": "Repo system docs list explicit DpcWatchdogProfile defaults",
+          "location": "Docs/system/system.md",
+          "summary": "Repo docs list `DpcWatchdogProfileBufferSizeBytes = 266240`, `DpcWatchdogProfileCumulativeDpcThreshold = 110000`, `DpcWatchdogProfileOffset = 10000`, and `DpcWatchdogProfileSingleDpcThreshold = 18333` under `Session Manager\\\\Kernel`.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "default"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407",
+          "kind": "vm-test",
+          "title": "Dedicated KVM local-KD bundle reads live DPC watchdog profile globals",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt",
+          "summary": "A dedicated live KVM local-KD bundle resolved the current-build `KeDpcWatchdogProfile*` symbol cluster and directly read `OffsetMs = 10000`, `SingleDpcThresholdMs = 0`, `CumulativeDpcThresholdMs = 0`, `BufferSizeBytes = 0`, plus control `KeDpcWatchdogPeriodMs = 0`.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "default",
+            "version-scope"
           ],
           "origin": "VM test / probe"
         }
