@@ -33,18 +33,24 @@ def main() -> int:
         default=str(REPO_ROOT / "evidence" / "files" / "external-imports"),
         help="Output root for canonical external/imported evidence bundles.",
     )
+    parser.add_argument(
+        "--backlog-output",
+        default=str(REPO_ROOT / "research" / "imported-candidate-backlog.json"),
+        help="Canonical output path for the aggregated imported candidate backlog.",
+    )
     args = parser.parse_args()
 
     input_path = Path(args.input).resolve()
     output_root = Path(args.output_root).resolve()
     evidence_root = Path(args.evidence_root).resolve()
+    backlog_output = Path(args.backlog_output).resolve()
     bundle = import_external_evidence(input_path, source_tool=args.source_tool, run_id=args.run_id)
     run_output_root = output_root / bundle["run_id"]
     run_evidence_root = evidence_root / bundle["run_id"]
     outputs = materialize_external_research_artifacts(bundle, run_output_root, bundle_root=run_evidence_root)
     backlog_path = write_imported_candidate_backlog(
         output_root,
-        REPO_ROOT / "research" / "imported-candidate-backlog.json",
+        backlog_output,
     )
     payload = {
         "bundle": bundle,
