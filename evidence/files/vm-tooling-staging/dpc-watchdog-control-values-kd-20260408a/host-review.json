@@ -1,0 +1,26 @@
+{
+  "output_name": "dpc-watchdog-control-values-kd-20260408a",
+  "generated_utc": "2026-04-08T00:22:00Z",
+  "status": "ok",
+  "kind": "local-kd-live-values",
+  "globals": {
+    "KeDpcTimeoutMs": 0,
+    "KeDpcSoftTimeoutMs": 0,
+    "KeDpcCumulativeSoftTimeoutMs": 0,
+    "KeDpcWatchdogPeriodMs": 0
+  },
+  "interpretation": {
+    "control_cluster_live_state": "all_zero",
+    "docs_conflict": true,
+    "notes": [
+      "All sampled DPC watchdog control globals read as zero on the running current build.",
+      "This conflicts with the non-zero repo-doc defaults for DPCTimeout, DpcSoftTimeout, and DpcCumulativeSoftTimeout.",
+      "The result narrows the remaining blocker to a persisted registry seeding caller above KeUpdateDpcWatchdogConfiguration."
+    ]
+  },
+  "source_artifacts": [
+    "summary.json",
+    "dpc-watchdog-control-values-kd-20260408a.log",
+    "dpc-watchdog-control-values-kd-20260408a.stdout.txt"
+  ]
+}
