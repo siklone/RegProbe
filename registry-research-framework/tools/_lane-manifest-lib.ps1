@@ -21,6 +21,39 @@ function Get-RepoDisplayPath {
     return $Path
 }
 
+function Get-RepoRefFromValue {
+    param($Value)
+
+    if ($null -eq $Value) {
+        return $null
+    }
+
+    $text = [string]$Value
+    if ([string]::IsNullOrWhiteSpace($text)) {
+        return $null
+    }
+
+    $trimmed = $text.Trim()
+    $normalized = $trimmed.TrimStart('\', '/') -replace '\\', '/'
+    if ($normalized -match '^(evidence|research|registry-research-framework)/') {
+        return $normalized
+    }
+
+    try {
+        $display = Get-RepoDisplayPath -Path $trimmed
+        if (-not [string]::IsNullOrWhiteSpace($display)) {
+            $normalizedDisplay = $display.TrimStart('\', '/') -replace '\\', '/'
+            if ($normalizedDisplay -match '^(evidence|research|registry-research-framework)/') {
+                return $normalizedDisplay
+            }
+        }
+    }
+    catch {
+    }
+
+    return $null
+}
+
 function Sanitize-RunnerOutput {
     param([string]$Text)
 
@@ -143,7 +176,78 @@ function Get-RunnerResultRef {
         }
     }
 
+    foreach ($propertyName in @('normalized_result_ref', 'result_ref', 'summary_path')) {
+        $match = [regex]::Match($normalizedText, ('"{0}"\s*:\s*"([^"]+)"' -f [regex]::Escape($propertyName)))
+        if ($match.Success) {
+            $candidate = Get-RepoRefFromValue -Value $match.Groups[1].Value
+            if ($candidate) {
+                return $candidate
+            }
+        }
+    }
+
     return $null
+}
+
+function Get-RunnerSummaryPayload {
+    param([string]$ResultRef)
+
+    $repoRef = Get-RepoRefFromValue -Value $ResultRef
+    if ([string]::IsNullOrWhiteSpace($repoRef)) {
+        return $null
+    }
+
+    $resultPath = Join-Path $repoRoot ($repoRef -replace '/', '\')
+    if (-not (Test-Path -LiteralPath $resultPath)) {
+        return $null
+    }
+
+    try {
+        return Get-Content -LiteralPath $resultPath -Raw | ConvertFrom-Json -ErrorAction Stop
+    }
+    catch {
+        return $null
+    }
+}
+
+function Get-RunnerNormalizationMetadata {
+    param([string]$ResultRef)
+
+    $metadata = [ordered]@{
+        normalized_result_ref = $null
+        normalization_status = $null
+        normalizer_name = $null
+        normalization_errors = @()
+        error_kind = $null
+        recovery_action = $null
+        transport_blocker = $null
+        guest_health = $null
+    }
+
+    $summary = Get-RunnerSummaryPayload -ResultRef $ResultRef
+    if (-not $summary) {
+        return $metadata
+    }
+
+    $metadata.normalized_result_ref = Get-RepoRefFromValue -Value $summary.normalized_result_ref
+    $metadata.normalizer_name = if ($summary.PSObject.Properties.Name -contains 'normalizer_name') { [string]$summary.normalizer_name } else { $null }
+    $metadata.normalization_status = if ($summary.PSObject.Properties.Name -contains 'normalization_status') { [string]$summary.normalization_status } else { $null }
+    $metadata.error_kind = if ($summary.PSObject.Properties.Name -contains 'error_kind') { [string]$summary.error_kind } else { $null }
+    $metadata.recovery_action = if ($summary.PSObject.Properties.Name -contains 'recovery_action') { [string]$summary.recovery_action } else { $null }
+    $metadata.transport_blocker = if ($summary.PSObject.Properties.Name -contains 'transport_blocker') { [string]$summary.transport_blocker } else { $null }
+    $metadata.guest_health = if ($summary.PSObject.Properties.Name -contains 'guest_health') { [string]$summary.guest_health } else { $null }
+
+    if ($summary.PSObject.Properties.Name -contains 'normalization_errors' -and $summary.normalization_errors) {
+        $metadata.normalization_errors = @($summary.normalization_errors | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    }
+    elseif ($summary.PSObject.Properties.Name -contains 'errors' -and $summary.errors) {
+        $metadata.normalization_errors = @($summary.errors | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    }
+    elseif ($summary.PSObject.Properties.Name -contains 'error' -and -not [string]::IsNullOrWhiteSpace([string]$summary.error)) {
+        $metadata.normalization_errors = @([string]$summary.error)
+    }
+
+    return $metadata
 }
 
 function Get-RunnerCoverageRequirement {
@@ -233,12 +337,29 @@ function Get-CaptureArtifactsFromPayload {
 function Get-CaptureStatus {
     param(
         [string]$Status,
-        [object[]]$CaptureArtifacts
+        [object[]]$CaptureArtifacts,
+        [string]$NormalizationStatus,
+        [string]$NormalizedResultRef
     )
 
     $normalizedStatus = [string]$Status
     if ($normalizedStatus -eq 'staged') {
         return 'staged'
+    }
+
+    $normalizedContractStatus = [string]$NormalizationStatus
+    if ($normalizedContractStatus -in @('error', 'failed', 'parse-error')) {
+        return 'normalization-error'
+    }
+
+    $normalizedResultPath = $null
+    $normalizedRepoRef = Get-RepoRefFromValue -Value $NormalizedResultRef
+    if (-not [string]::IsNullOrWhiteSpace($normalizedRepoRef)) {
+        $normalizedResultPath = Join-Path $repoRoot ($normalizedRepoRef -replace '/', '\')
+    }
+
+    if ($normalizedResultPath -and (Test-Path -LiteralPath $normalizedResultPath)) {
+        return 'captured'
     }
 
     $physicalArtifacts = @(
@@ -247,6 +368,10 @@ function Get-CaptureStatus {
     )
 
     if ($physicalArtifacts.Count -gt 0) {
+        if (-not [string]::IsNullOrWhiteSpace($normalizedContractStatus)) {
+            return 'captured-without-normalization'
+        }
+
         return 'captured'
     }
 

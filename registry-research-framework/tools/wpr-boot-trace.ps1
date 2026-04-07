@@ -66,8 +66,12 @@ if ($runner) {
     }
     $sanitizedOutput = Sanitize-RunnerOutput -Text $output
     $sanitizedOutput | Set-Content -Path $logPath -Encoding utf8
+    $runnerMetadata = Get-RunnerNormalizationMetadata -ResultRef $resultRef
+    foreach ($key in $runnerMetadata.Keys) {
+        $payload | Add-Member -NotePropertyName $key -NotePropertyValue $runnerMetadata[$key] -Force
+    }
     $payload.capture_artifacts = @(Get-CaptureArtifactsFromPayload -ResultRef $resultRef -LogRef $payload.log_file)
-    $payload.capture_status = Get-CaptureStatus -Status $payload.status -CaptureArtifacts $payload.capture_artifacts
+    $payload.capture_status = Get-CaptureStatus -Status $payload.status -CaptureArtifacts $payload.capture_artifacts -NormalizationStatus $payload.normalization_status -NormalizedResultRef $payload.normalized_result_ref
 }
 
 $payload | ConvertTo-Json -Depth 4 | Set-Content -Path $OutputFile -Encoding utf8

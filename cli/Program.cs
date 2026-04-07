@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using RegProbe.App.Services;
+using RegProbe.App.Services.TweakProviders;
 using RegProbe.Core;
 using RegProbe.Engine;
 using RegProbe.Infrastructure.Elevation;
@@ -572,7 +573,80 @@ class Program
         });
         researchCommand.AddCommand(normalizeCommand);
 
+        var validateJsonTweaksCommand = new Command("validate-json-tweaks", "Validate JSON tweak definitions and emit an invalid-definition report.");
+        var inputDirectoryOption = new Option<string>("--input-dir", "Directory containing JSON tweak definitions.") { IsRequired = true };
+        var reportOutputOption = new Option<string?>("--output", "Optional JSON report output path.");
+        validateJsonTweaksCommand.AddOption(inputDirectoryOption);
+        validateJsonTweaksCommand.AddOption(reportOutputOption);
+        validateJsonTweaksCommand.SetHandler(context =>
+        {
+            var inputDirectory = context.ParseResult.GetValueForOption(inputDirectoryOption) ?? string.Empty;
+            var reportOutput = context.ParseResult.GetValueForOption(reportOutputOption);
+
+            try
+            {
+                var fullInputDirectory = Path.GetFullPath(inputDirectory);
+                if (!Directory.Exists(fullInputDirectory))
+                {
+                    throw new DirectoryNotFoundException($"JSON tweak definition directory was not found: {fullInputDirectory}");
+                }
+
+                using var loader = new JsonTweakLoader(fullInputDirectory);
+                var report = BuildJsonTweakValidationReport(fullInputDirectory, loader);
+                var json = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine;
+
+                if (!string.IsNullOrWhiteSpace(reportOutput))
+                {
+                    var outputPath = Path.GetFullPath(reportOutput);
+                    var outputDirectory = Path.GetDirectoryName(outputPath);
+                    if (!string.IsNullOrWhiteSpace(outputDirectory))
+                    {
+                        Directory.CreateDirectory(outputDirectory);
+                    }
+
+                    File.WriteAllText(outputPath, json);
+                    Console.WriteLine(outputPath);
+                }
+                else
+                {
+                    Console.Write(json);
+                }
+
+                context.ExitCode = loader.ValidationIssues.Count == 0 ? 0 : 2;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                context.ExitCode = 1;
+            }
+        });
+        researchCommand.AddCommand(validateJsonTweaksCommand);
+
         return researchCommand;
+    }
+
+    private static object BuildJsonTweakValidationReport(string inputDirectory, JsonTweakLoader loader)
+    {
+        var issues = loader.ValidationIssues
+            .Select(issue => new
+            {
+                file_path = issue.FilePath,
+                code = issue.Code,
+                message = issue.Message,
+                entry_id = issue.EntryId
+            })
+            .ToArray();
+
+        return new
+        {
+            generated_utc = DateTime.UtcNow.ToString("o"),
+            input_directory = inputDirectory,
+            loaded_definition_count = loader.Count,
+            loaded_tweak_ids = loader.GetTweakIds().OrderBy(id => id, StringComparer.OrdinalIgnoreCase).ToArray(),
+            validation_issue_count = issues.Length,
+            validation_issues = issues,
+            status = issues.Length == 0 ? "ok" : "invalid-definitions-present"
+        };
     }
 
     private static bool TryParseRisk(string? value, out TweakRiskLevel risk)
