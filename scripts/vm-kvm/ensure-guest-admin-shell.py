@@ -8,6 +8,8 @@ import sys
 import time
 from pathlib import Path
 
+from summary_contract_lib import apply_summary_contract
+
 from guest_bridge import ensure_guest_bridge
 
 
@@ -124,11 +126,11 @@ def main() -> int:
     retry_deadline = time.time() + 20
     while time.time() < retry_deadline:
         if marker_file.exists():
-            payload = {
+            payload = apply_summary_contract({
                 "marker_path": str(marker_file),
                 "marker_name": marker_file.name,
                 "status": "ready-via-retry",
-            }
+            })
             print(json.dumps(payload, indent=2))
             return 0
         time.sleep(1)
@@ -140,22 +142,28 @@ def main() -> int:
     fallback_deadline = time.time() + 10
     while time.time() < fallback_deadline:
         if marker_file.exists():
-            payload = {
+            payload = apply_summary_contract({
                 "marker_path": str(marker_file),
                 "marker_name": marker_file.name,
                 "status": "ready-via-fallback",
-            }
+            })
             print(json.dumps(payload, indent=2))
             return 0
         time.sleep(1)
 
     print(
         json.dumps(
-            {
-                "marker_path": str(marker_file),
-                "marker_name": marker_file.name,
-                "status": "timeout",
-            },
+            apply_summary_contract(
+                {
+                    "marker_path": str(marker_file),
+                    "marker_name": marker_file.name,
+                    "status": "timeout",
+                },
+                default_error_kind="runner-timeout",
+                default_recovery_action="rerun-admin-shell-recovery",
+                default_transport_blocker="timeout",
+                default_guest_health="unknown",
+            ),
             indent=2,
         )
     )

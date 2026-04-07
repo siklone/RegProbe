@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
+from summary_contract_lib import apply_summary_contract, write_summary_contract
 
 
 def quote_ps(value: str) -> str:
@@ -237,29 +238,39 @@ def main() -> int:
     )
 
     if wait_for_file(summary_path, args.timeout_seconds):
-        summary = json.loads(summary_path.read_text(encoding="utf-8-sig"))
+        summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
         payload = {
             "summary_path": str(summary_path),
             "output_name": args.output_name,
             "registry_path": args.registry_path,
             "value_name": args.value_name,
+            "status": summary.get("status", "unknown"),
             "reboot_observed": summary.get("reboot_observed"),
+            "error_kind": summary.get("error_kind"),
+            "recovery_action": summary.get("recovery_action"),
+            "transport_blocker": summary.get("transport_blocker"),
+            "guest_health": summary.get("guest_health"),
         }
         print(json.dumps(payload, indent=2))
+        if summary.get("status") == "error":
+            return 1
         return 0 if summary.get("reboot_observed") else 3
 
-    print(
-        json.dumps(
-            {
-                "summary_path": str(summary_path),
-                "output_name": args.output_name,
-                "registry_path": args.registry_path,
-                "value_name": args.value_name,
-                "status": "timeout",
-            },
-            indent=2,
-        )
+    timeout_summary = write_summary_contract(
+        summary_path,
+        {
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "registry_path": args.registry_path,
+            "value_name": args.value_name,
+            "status": "timeout",
+        },
+        default_error_kind="runner-timeout",
+        default_recovery_action="rerun-reboot-observation",
+        default_transport_blocker="timeout",
+        default_guest_health="unknown",
     )
+    print(json.dumps(timeout_summary, indent=2))
     return 2
 
 

@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
+from summary_contract_lib import apply_summary_contract, write_summary_contract
 
 
 def quote_ps(value: str) -> str:
@@ -166,26 +167,35 @@ def main() -> int:
     deadline = time.time() + args.timeout_seconds
     while time.time() < deadline:
         if summary_path.exists():
+            summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
             payload = {
                 "summary_path": str(summary_path),
                 "output_name": args.output_name,
                 "query_symbol": args.query_symbol,
+                "status": summary.get("status", "unknown"),
+                "error_kind": summary.get("error_kind"),
+                "recovery_action": summary.get("recovery_action"),
+                "transport_blocker": summary.get("transport_blocker"),
+                "guest_health": summary.get("guest_health"),
             }
             print(json.dumps(payload, indent=2))
-            return 0
+            return 0 if summary.get("status") != "error" else 1
         time.sleep(2)
 
-    print(
-        json.dumps(
-            {
-                "summary_path": str(summary_path),
-                "output_name": args.output_name,
-                "query_symbol": args.query_symbol,
-                "status": "timeout",
-            },
-            indent=2,
-        )
+    timeout_summary = write_summary_contract(
+        summary_path,
+        {
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "query_symbol": args.query_symbol,
+            "status": "timeout",
+        },
+        default_error_kind="runner-timeout",
+        default_recovery_action="rerun-local-kd-smoke",
+        default_transport_blocker="timeout",
+        default_guest_health="unknown",
     )
+    print(json.dumps(timeout_summary, indent=2))
     return 2
 
 
