@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T00:47:59.266782Z",
+  "generated_utc": "2026-04-07T01:44:56.965350Z",
   "summary": {
     "total_records": 310,
     "class_counts": {
@@ -6265,7 +6265,7 @@
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. Promotion stays decision-gated because those runtime lanes still show a clean no-hit for the exac...",
+      "gating_reason": "Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. A KVM Procmon bootlog follow-up also completed a real reboot but showed the current guest refusin...",
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,

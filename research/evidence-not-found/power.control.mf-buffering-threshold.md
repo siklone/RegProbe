@@ -1,7 +1,7 @@
 # power.control.mf-buffering-threshold
 
 - Class: `A`
-- Record status: `draft`
+- Record status: `validated`
 - Tested build: `26100`
 - Reason: `no-hit-or-insufficient-proof`
 
@@ -10,7 +10,7 @@ This record remains negative evidence on build 26100: the repo did not produce e
 ## Attempted coverage
 
 - Layers: `runtime_procmon, static_ghidra, behavior_wpr, runtime_reboot`
-- Tools: `etw, procmon, ghidra, ghidra_no_function_fallback, wpr, reboot`
+- Tools: `etw, procmon, ghidra, wpr, reboot`
 
 ## Why it stays negative
 

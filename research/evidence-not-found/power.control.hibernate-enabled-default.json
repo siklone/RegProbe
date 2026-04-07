@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-02T11:02:27.104628Z",
+  "generated_utc": "2026-04-07T01:44:57.526306Z",
   "record_id": "power.control.hibernate-enabled-default",
   "tweak_id": "power.control.hibernate-enabled-default",
   "evidence_class": "B",
-  "record_status": "draft",
+  "record_status": "validated",
   "tested_build": "26100",
   "negative_reason": "no-hit-or-insufficient-proof",
   "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
@@ -18,7 +18,6 @@
     "etw",
     "procmon",
     "ghidra",
-    "ghidra_no_function_fallback",
     "wpr",
     "reboot"
   ],
@@ -29,7 +28,7 @@
     "anticheat_details": null,
     "gaming_safe": null
   },
-  "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline cannot exercise a real hibernation trigger (`vm_firmware_limitation`), so runtime promotion stays decision-gated.",
+  "gating_reason": "Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real hibernation trigger (`vm_firmware_limitation`): the older VMware lane and the newer KVM reboot observation both show h...",
   "links": [
     {
       "title": "Repo power notes for docs-first power-control values",

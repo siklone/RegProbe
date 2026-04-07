@@ -1,0 +1,61 @@
+﻿{
+    "generated_utc":  "2026-04-07T11:38:59.6284430Z",
+    "stage":  "arm",
+    "output_name":  "enablevirtualization-procmon-kvm-bootlog-20260407h",
+    "output_root":  "C:\\RegProbe-Diag\\procmon-bootlog\\enablevirtualization-procmon-kvm-bootlog-20260407h",
+    "registry_path":  "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "value_name":  "EnableVirtualization",
+    "procmon_path":  "C:\\Tools\\Sysinternals\\Procmon64.exe",
+    "procmon_exists":  true,
+    "normalized_procmon_path":  "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "match_fragments":  [
+                            "Policies\\System",
+                            "EnableLUA",
+                            "EnableVirtualization",
+                            "EnableInstallerDetection"
+                        ],
+    "process_names":  [
+                          "System",
+                          "smss.exe",
+                          "services.exe"
+                      ],
+    "boot_time_utc_before":  "2026-04-07T11:33:55.5000000Z",
+    "bootlog_candidates_before":  {
+
+                                  },
+    "removed_stale_bootlogs":  null,
+    "procmon_state_before":  {
+                                 "Logfile":  "C:\\RegProbe-Diag\\procmon\\watchdog-procmon-kvm-power-burst-20260407a\\watchdog-procmon-kvm-power-burst-20260407a.pml",
+                                 "SourcePath":  "",
+                                 "FlightRecorder":  0,
+                                 "RingBufferSize":  0,
+                                 "RingBufferMin":  0
+                             },
+    "commands":  {
+                     "direct_enable":  {
+                                           "exit_code":  1,
+                                           "stdout":  "",
+                                           "stderr":  "",
+                                           "output":  ""
+                                       },
+                     "minimized_enable":  {
+                                              "exit_code":  1,
+                                              "stdout":  "",
+                                              "stderr":  "",
+                                              "output":  ""
+                                          }
+                 },
+    "procmon_state_after":  {
+                                "Logfile":  "C:\\RegProbe-Diag\\procmon\\watchdog-procmon-kvm-power-burst-20260407a\\watchdog-procmon-kvm-power-burst-20260407a.pml",
+                                "SourcePath":  "",
+                                "FlightRecorder":  0,
+                                "RingBufferSize":  0,
+                                "RingBufferMin":  0
+                            },
+    "errors":  [
+
+               ],
+    "uploads":  {
+
+                }
+}

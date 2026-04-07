@@ -1,7 +1,7 @@
 # power.control.hibernate-enabled-default
 
 - Class: `B`
-- Record status: `draft`
+- Record status: `validated`
 - Tested build: `26100`
 - Reason: `no-hit-or-insufficient-proof`
 
@@ -10,11 +10,11 @@ This record remains negative evidence on build 26100: the repo did not produce e
 ## Attempted coverage
 
 - Layers: `runtime_procmon, static_ghidra, behavior_wpr, runtime_reboot`
-- Tools: `etw, procmon, ghidra, ghidra_no_function_fallback, wpr, reboot`
+- Tools: `etw, procmon, ghidra, wpr, reboot`
 
 ## Why it stays negative
 
-Cross-layer evidence is strong, but the clean VMware baseline cannot exercise a real hibernation trigger (`vm_firmware_limitation`), so runtime promotion stays decision-gated.
+Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real hibernation trigger (`vm_firmware_limitation`): the older VMware lane and the newer KVM reboot observation both show h...
 
 ## Attached references
 

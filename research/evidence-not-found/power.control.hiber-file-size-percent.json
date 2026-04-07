@@ -1,19 +1,25 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-02T11:02:27.103629Z",
+  "generated_utc": "2026-04-07T01:44:57.525753Z",
   "record_id": "power.control.hiber-file-size-percent",
   "tweak_id": "power.control.hiber-file-size-percent",
   "evidence_class": "B",
-  "record_status": "draft",
+  "record_status": "validated",
   "tested_build": "26100",
   "negative_reason": "no-hit-or-insufficient-proof",
   "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
   "attempted_layers": [
-    "behavior_wpr"
+    "runtime_procmon",
+    "static_ghidra",
+    "behavior_wpr",
+    "runtime_reboot"
   ],
   "attempted_tools": [
     "etw",
-    "wpr"
+    "procmon",
+    "ghidra",
+    "wpr",
+    "reboot"
   ],
   "runtime_evidence_found": true,
   "validation_proof_found": true,
@@ -22,7 +28,7 @@
     "anticheat_details": null,
     "gaming_safe": null
   },
-  "gating_reason": "Docs/static evidence is strong and the lightweight ETW lane surfaced exact HiberFileSizePercent lines, but the current VMware runtime still did not produce an exact live read.",
+  "gating_reason": "Docs, current-build static evidence, KVM local-KD, repeated runtime replays, and a reboot-backed KVM observation now agree on the live Control\\\\Power path and HiberFileSizePercent state. Promotion stays decision-gated...",
   "links": [
     {
       "title": "Repo power notes for HiberFileSizePercent",
@@ -47,6 +53,18 @@
       "url": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json and research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md",
       "kind": "etw-trace",
       "summary": "The tools-hardened lightweight ETW lane surfaced exact HiberFileSizePercent lines on the current VMware baseline but did not capture an exact RegQueryValue hit."
+    },
+    {
+      "title": "Linux KVM local-KD follow-up for HiberFileSizePercent",
+      "url": "evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a.log and evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a.log and evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a.log and research/notes/power-control-hiber-file-size-percent-kvm-local-kd-follow-up-20260406.md",
+      "kind": "vm-test",
+      "summary": "A debugger-assisted KVM local-KD follow-up resolved the live hibernation symbol family, showed `PopHiberFileSizePercent = 0` on the running guest, resolved `PopHibernatePersistedRegLocation` to `\\REGISTRY\\MACHINE\\SYSTEM\\CURRENTCONTROLSET\\CONTROL\\POWER`, and showed `PopQueryHiberPersistedRegValue` querying that path via `ZwQueryValueKey` with a `PopReadUlongPowerKey` fallback."
+    },
+    {
+      "title": "Linux KVM Procmon runtime replay for HiberFileSizePercent",
+      "url": "evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c-summary.json and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c.txt and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/host-review.json and research/notes/power-control-hiber-file-size-percent-kvm-procmon-runtime-20260407.md",
+      "kind": "vm-test",
+      "summary": "A host-driven KVM Procmon replay produced a `267382`-row capture, surfaced adjacent live `Control\\Power` activity through `powercfg.exe` and `System`, but still returned zero direct `HiberFileSizePercent` fragment hits."
     }
   ]
 }
