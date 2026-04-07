@@ -4,7 +4,7 @@
   "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
   "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
   "record_status": "draft",
-  "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a later current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and already appears as an adjacent sibling in the watchdog runtime package. The lane is strong enough for packaging as a draft research record, but it still lacks a current-build caller chain, exact live read proof, and any trustworthy non-default value semantics.",
+  "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a later current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and now has a direct KVM local-KD disassembly pass for `nt!PopInvokeWin32CalloutWithWatchdog`. That pass proved the named Win32 callout watchdog path uses `PopWin32kCalloutWatchdogTimeoutSeconds`, not `PopWin32CalloutWatchdogBugcheckEnabled`, while the bugcheck-enabled global itself currently reads as `0`. The lane is stronger and narrower, but it still lacks the true seeding caller chain, exact registry-read proof, and any trustworthy non-default value semantics.",
   "setting": {
     "name": "Win32 Callout Watchdog Bugcheck Enabled",
     "category": "Power",
@@ -13,7 +13,7 @@
     "casual_explanation": "This appears to be a low-level watchdog-related value under Session Manager Power. On the current clean baseline, the parent key exists but the value is not configured.",
     "why_people_change_it": "Kernel and power researchers may inspect this value when tracing watchdog behavior around Session Manager power initialization and callout handling.",
     "tradeoffs_overview": "The value is kernel-adjacent, boot-relevant, and currently unproven as an end-user tweak. Evidence is good enough to keep it in the research queue, but not good enough to apply or recommend. The next step is structural proof of the caller path, not a speculative write.",
-    "professional_notes": "The current repo evidence says `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power\\\\Win32CalloutWatchdogBugcheckEnabled` is absent by default on the clean baseline while the parent path exists. A later targeted current-build string batch found an exact Unicode hit in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD symbol sweep also resolved a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` global alongside `PopWatchdogInit`, `PopWatchdogResumeTimeout`, and `PopWatchdogSleepTimeout`, which makes this a real current-build watchdog-family symbol rather than a loose string-only lead. The lightweight watchdog runtime package also carried this value as an adjacent sibling while probing `WatchdogResumeTimeout` and `WatchdogSleepTimeout`, which makes it the strongest un-packaged watchdog sibling candidate. No current-build caller, explicit type contract, or runtime read proof has been established yet.",
+    "professional_notes": "The current repo evidence says `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power\\\\Win32CalloutWatchdogBugcheckEnabled` is absent by default on the clean baseline while the parent path exists. A later targeted current-build string batch found an exact Unicode hit in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD symbol sweep also resolved a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` global alongside `PopWatchdogInit`, `PopWatchdogResumeTimeout`, `PopWatchdogSleepTimeout`, and the named watchdog-family function `PopInvokeWin32CalloutWithWatchdog`, which makes this a real current-build watchdog-family lead rather than a loose string-only clue. A direct KVM local-KD follow-up then disassembled `PopInvokeWin32CalloutWithWatchdog` and showed that this path uses `PopWin32kCalloutWatchdogTimeoutSeconds`, builds a watchdog callback packet around `PopWin32CalloutWatchdogCallback`, calls `ZwPowerInformation`, and then invokes `PsInvokeWin32Callout`. The same pass read `PopWin32CalloutWatchdogBugcheckEnabled = 0` live, but did not show this named callout path reading that global. The lightweight watchdog runtime package also carried this value as an adjacent sibling while probing `WatchdogResumeTimeout` and `WatchdogSleepTimeout`, which keeps it as the strongest un-packaged watchdog sibling candidate. The current gap is now more precise: find the initialization or policy path that seeds the global, rather than continuing to treat `PopInvokeWin32CalloutWithWatchdog` as the likely reader.",
     "targets": [
       {
         "target_id": "win32-callout-watchdog-bugcheck-enabled",
@@ -85,14 +85,15 @@
       "tradeoffs": [
         "Preserves the observed baseline state.",
         "Avoids inventing unsupported non-default semantics.",
-        "Keeps the next proof step focused on current-build caller analysis."
+        "Keeps the next proof step focused on finding the earlier seeding path rather than re-probing the already-narrowed callout wrapper."
       ],
       "apply_allowed": false,
       "evidence_ids": [
         "vm-power-net-new-existence-20260328",
         "static-power-broad-string-20260331",
         "vm-watchdog-kd-symbol-sweep-20260407",
-        "vm-watchdog-lightweight-runtime-20260330"
+        "vm-watchdog-lightweight-runtime-20260330",
+        "vm-watchdog-win32-callout-kd-20260407"
       ]
     }
   ],
@@ -129,7 +130,7 @@
       "kind": "vm-test",
       "title": "KVM local-KD symbol sweep resolves PopWin32CalloutWatchdogBugcheckEnabled",
       "location": "evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log and evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json",
-      "summary": "A live KVM local-KD symbol sweep resolved `nt!PopWin32CalloutWatchdogBugcheckEnabled` together with `PopWatchdogInit`, `PopWatchdogResumeTimeout`, and `PopWatchdogSleepTimeout`, which confirms that the candidate is part of the current-build watchdog symbol family and not only a loose string hit.",
+      "summary": "A live KVM local-KD symbol sweep resolved `nt!PopWin32CalloutWatchdogBugcheckEnabled` together with `PopWatchdogInit`, `PopWatchdogResumeTimeout`, `PopWatchdogSleepTimeout`, and `PopInvokeWin32CalloutWithWatchdog`, which confirms that the candidate is part of the current-build watchdog symbol family and provides a named caller-like pivot for the next RE pass.",
       "supports": [
         "behavior",
         "version-scope",
@@ -149,6 +150,19 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-watchdog-win32-callout-kd-20260407",
+      "kind": "vm-test",
+      "title": "KVM local-KD disassembly for PopInvokeWin32CalloutWithWatchdog",
+      "location": "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-follow-up-20260407.md and evidence/files/vm-tooling-staging/watchdog-win32-callout-20260407a/host-review.json",
+      "summary": "A direct KVM local-KD pass showed that `PopInvokeWin32CalloutWithWatchdog` uses `PopWin32kCalloutWatchdogTimeoutSeconds`, `PopWin32CalloutWatchdogCallback`, `ZwPowerInformation`, and `PsInvokeWin32Callout`, while the live `PopWin32CalloutWatchdogBugcheckEnabled` global currently reads `0`. This narrows the lane by showing that the first named caller candidate is not the direct reader of the registry-backed bugcheck-enabled value.",
+      "supports": [
+        "behavior",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -158,17 +172,17 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is real enough for a schema-backed draft: it has baseline path/value evidence, a current-build kernel string hit, a live watchdog-family global on the current build, and adjacency to the already-validated watchdog timeout lane. It is not ready for a validated record because the current-build caller chain, exact runtime read, documented semantics, and safe non-default value mapping are still missing.",
+    "why": "The candidate is real enough for a schema-backed draft: it has baseline path/value evidence, a current-build kernel string hit, a live watchdog-family global on the current build, a named current-build function pivot, and now a direct KD disassembly proving that the obvious Win32 callout watchdog path is not the direct reader of this value. It is not ready for a validated record because the true seeding caller chain, exact registry-read proof, documented semantics, and safe non-default value mapping are still missing.",
     "manual_review_required": true,
     "blocking_issues": [
-      "no-current-build-caller",
+      "no-seeding-caller",
       "runtime_no_read",
       "no-doc-source",
       "non-default-semantics-unproven"
     ]
   },
   "open_questions": [
-    "Which current-build function reads Win32CalloutWatchdogBugcheckEnabled, if any?",
+    "Which earlier initialization or policy-loading path seeds PopWin32CalloutWatchdogBugcheckEnabled before PopInvokeWin32CalloutWithWatchdog runs?",
     "Is the value consumed in the same initialization or update path as WatchdogResumeTimeout and WatchdogSleepTimeout?",
     "Does a present REG_DWORD value act as a bugcheck enable flag, a policy override, or a legacy dead-path remnant?"
   ],
