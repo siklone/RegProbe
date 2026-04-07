@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T16:59:57.289813Z",
+  "generated_utc": "2026-04-07T17:02:20.937223Z",
   "summary": {
     "total_records": 311,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T16:59:57.048054Z",
+      "generated_utc": "2026-04-07T17:02:20.626646Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -17683,7 +17683,7 @@
       "category": "Power",
       "area": "Session Manager Power Watchdog Sibling",
       "scope": "device",
-      "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a later current-build Unicode string hit in `ntoskrnl.exe`, and already appears as an adjacent sibling in the watchdog runtime package. The lane is strong enough for packaging as a draft research record, but it still lacks a current-build caller chain, exact live read proof, and any trustworthy non-default value semantics.",
+      "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a later current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and already appears as an adjacent sibling in the watchdog runtime package. The lane is strong enough for packaging as a draft research record, but it still lacks a current-build caller chain, exact live read proof, and any trustworthy non-default value semantics.",
       "evidence_class": {
         "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
         "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
@@ -17724,6 +17724,12 @@
               "summary": "The clean baseline batch confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power` exists while `Win32CalloutWatchdogBugcheckEnabled` is absent by default."
             },
             {
+              "title": "KVM local-KD symbol sweep resolves PopWin32CalloutWatchdogBugcheckEnabled",
+              "url": "evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log and evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json",
+              "kind": "vm-test",
+              "summary": "A live KVM local-KD symbol sweep resolved `nt!PopWin32CalloutWatchdogBugcheckEnabled` together with `PopWatchdogInit`, `PopWatchdogResumeTimeout`, and `PopWatchdogSleepTimeout`,..."
+            },
+            {
               "title": "Lightweight watchdog runtime packaging kept the sibling in the active lane",
               "url": "evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/power-session-watchdog-timeouts/summary.json",
               "kind": "vm-test",
@@ -17745,7 +17751,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The candidate is real enough for a schema-backed draft: it has baseline path/value evidence, a current-build kernel string hit, and adjacency to the already-validated watchdog timeout lane. It is not ready for a validated record because the current-build caller chain, exact runtime read, documented semantics, and safe non-default value mapping are still missing.",
+        "why": "The candidate is real enough for a schema-backed draft: it has baseline path/value evidence, a current-build kernel string hit, a live watchdog-family global on the current build, and adjacency to the already-validated watchdog timeout lane. It is not ready for a validated record because the current-build caller chain, exact runtime read, documented semantics, and safe non-default value mapping are still missing.",
         "blocking_issues": [
           "no-current-build-caller",
           "runtime_no_read",
@@ -17820,12 +17826,14 @@
           "bad_when": "You need a validated non-default value or a safe public tweak.",
           "tradeoffs": [
             "Preserves the observed baseline state.",
-            "Avoids inventing unsupported non-default semantics."
+            "Avoids inventing unsupported non-default semantics.",
+            "Keeps the next proof step focused on current-build caller analysis."
           ],
           "apply_allowed": false,
           "evidence_ids": [
             "vm-power-net-new-existence-20260328",
             "static-power-broad-string-20260331",
+            "vm-watchdog-kd-symbol-sweep-20260407",
             "vm-watchdog-lightweight-runtime-20260330"
           ]
         }
@@ -17859,6 +17867,20 @@
             "version-scope"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-watchdog-kd-symbol-sweep-20260407",
+          "kind": "vm-test",
+          "title": "KVM local-KD symbol sweep resolves PopWin32CalloutWatchdogBugcheckEnabled",
+          "location": "evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log and evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json",
+          "summary": "A live KVM local-KD symbol sweep resolved `nt!PopWin32CalloutWatchdogBugcheckEnabled` together with `PopWatchdogInit`, `PopWatchdogResumeTimeout`, and `PopWatchdogSleepTimeout`, which confirms that the candidate is part of the current-build watchdog symbol family and not only a loose string hit.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "version-scope",
+            "risk"
+          ],
+          "origin": "VM test / probe"
         },
         {
           "evidence_id": "vm-watchdog-lightweight-runtime-20260330",
