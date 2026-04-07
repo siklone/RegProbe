@@ -81,9 +81,7 @@ def main() -> int:
         marker_file.unlink()
 
     elevate_command = "powershell -c Start-Process powershell -Verb RunAs"
-    ready_command = (
-        f"Invoke-WebRequest -UseBasicParsing -Method Put -Uri '{bridge}/{marker_file.name}' -Body 'ready'|Out-Null"
-    )
+    ready_command = f"iwr -UseBasicParsing -Method Put -Uri '{bridge}/{marker_file.name}' -Body 'ready'|Out-Null"
 
     send_key(args.connect, args.domain, "KEY_ESC")
     time.sleep(float(args.delay_ms) / 1000.0)
