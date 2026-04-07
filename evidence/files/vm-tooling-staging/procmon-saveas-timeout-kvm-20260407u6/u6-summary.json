@@ -1,0 +1,21 @@
+{
+  "generated_utc": "2026-04-07T11:39:12.9481647Z",
+  "registry_path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+  "value_name": "UuidSequenceNumber",
+  "output_name": "u6",
+  "trigger_profile": "custom",
+  "output_root": "C:\\RegProbe-Diag\\procmon\\u6",
+  "status": "error",
+  "result_exists": true,
+  "csv_exists": false,
+  "hits_csv_exists": false,
+  "probe_stage_exists": true,
+  "probe_stage": "exception",
+  "probe_stage_status": "error",
+  "probe_stage_message": "Procmon SaveAs timed out after 60 second(s).",
+  "result_error_line": "ERROR=System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 60 second(s).",
+  "error_kind": "probe-stage-error",
+  "error": "System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 60 second(s).",
+  "error_position": null,
+  "summary_source": "probe-stage-fallback"
+}
