@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T19:32:36.150499Z",
+  "generated_utc": "2026-04-07T19:41:41.458528Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 315,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T19:32:35.341336Z",
+      "generated_utc": "2026-04-07T19:41:40.725898Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18586,13 +18586,13 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-profile-cluster.json",
-      "source_file_sha256": "9f31bd601e38ddd1e4a031b357fc9aeb75d4f6996e789df5ea5f08db441b4286",
-      "source_file_size_bytes": 17871,
+      "source_file_sha256": "60c1bc6867252255d1cb70198af2cfe4108264c31bb22f8bee272aab1a2e4150",
+      "source_file_size_bytes": 19654,
       "name": "Session Manager Kernel DPC Watchdog Profile Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Profile",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader/validator path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, and `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults.",
+      "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader, validator, and writer path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges, and `KeUpdateDpcWatchdogConfiguration` writes the globals from caller-supplied validated input. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -18600,7 +18600,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, and a concrete current-build reader/validator path. It is not ready for validation because the current build conflicts with the repo-doc defaults for most values and the registry seeding or initializer path is still unknown.",
+        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, and a concrete current-build reader, validator, and writer path. It is not ready for validation because the current build conflicts with the repo-doc defaults for most values and no current-build caller has yet been shown to feed persisted registry values into the explicit writer path.",
         "blocking_issues": [
           "live-defaults-conflict-docs",
           "no-current-build-registry-seeding-path",
@@ -18870,6 +18870,20 @@
           "strength": "medium",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-dpc-watchdog-update-config-kd-20260407",
+          "kind": "vm-test",
+          "title": "Dedicated KVM local-KD disassembly shows explicit DPC watchdog writer path",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/dpc-watchdog-update-config-kd-20260407a.stdout.txt",
+          "summary": "A dedicated current-build KD disassembly pass showed that `KeUpdateDpcWatchdogConfiguration` validates caller input, writes the DPC watchdog globals under lock, applies the profile-buffer fallback, and then calls `KiCreateDpcLimitsProcessorConfiguration` to build the per-processor limits block.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "runtime-gate",
             "version-scope"
           ],
           "origin": "VM test / probe"

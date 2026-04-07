@@ -1,0 +1,34 @@
+{
+  "generated_utc": "2026-04-07T19:39:00Z",
+  "candidate": "system.kernel-dpc-watchdog-profile-cluster",
+  "guest": "regprobe-win11-25h2-session",
+  "bundle": "dpc-watchdog-update-config-kd-20260407a",
+  "findings": {
+    "writer_path": {
+      "function": "KeUpdateDpcWatchdogConfiguration",
+      "behavior": "Takes caller-supplied watchdog configuration, validates it via KiValidateDpcWatchdogConfiguration, then writes the resulting DPC watchdog globals under KiDpcWatchdogConfigurationLock."
+    },
+    "written_globals": [
+      "KeDpcTimeoutMs",
+      "KeDpcWatchdogPeriodMs",
+      "KeDpcSoftTimeoutMs",
+      "KeDpcCumulativeSoftTimeoutMs",
+      "KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "KeDpcWatchdogProfileBufferSizeBytes"
+    ],
+    "builder_path": {
+      "function": "KiCreateDpcLimitsProcessorConfiguration",
+      "behavior": "Builds the per-processor DPC watchdog configuration block from the already-written globals and converts milliseconds into tick-based limits."
+    },
+    "non_findings": [
+      "No direct registry read path in KeUpdateDpcWatchdogConfiguration",
+      "No direct registry read path in KiCreateDpcLimitsProcessorConfiguration"
+    ]
+  },
+  "interpretation": {
+    "current_state": "The current build has an explicit writer path for the DPC watchdog globals, but that writer consumes validated caller input rather than proving any Session Manager Kernel registry read.",
+    "remaining_gap": "The unresolved step is now narrower: identify whether any boot or runtime caller feeds persisted registry values into KeUpdateDpcWatchdogConfiguration.",
+    "strength": "This upgrades the lane from reader-plus-downstream exclusions to an explicit reader, validator, writer, and builder chain."
+  }
+}

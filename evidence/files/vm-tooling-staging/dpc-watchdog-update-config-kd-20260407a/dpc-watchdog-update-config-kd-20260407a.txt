@@ -1,0 +1,9 @@
+.sympath C:\Tools\Symbols\dpc-watchdog-update-config-kd-20260407a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!KeUpdateDpcWatchdogConfiguration
+uf nt!KeUpdateDpcWatchdogConfiguration
+x nt!KiCreateDpcLimitsProcessorConfiguration
+uf nt!KiCreateDpcLimitsProcessorConfiguration
+.echo REGPROBE_LOCALKD_END
+q
