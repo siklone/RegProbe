@@ -309,17 +309,24 @@ def build_normalized_bundle_from_external_evidence(bundle: dict[str, Any]) -> di
     }
 
 
-def materialize_external_research_artifacts(bundle: dict[str, Any], output_root: Path) -> dict[str, str]:
+def materialize_external_research_artifacts(
+    bundle: dict[str, Any],
+    output_root: Path,
+    *,
+    bundle_root: Path | None = None,
+) -> dict[str, str]:
     output_root.mkdir(parents=True, exist_ok=True)
+    effective_bundle_root = bundle_root or output_root
+    effective_bundle_root.mkdir(parents=True, exist_ok=True)
     note_root = output_root / "note-stubs"
     seed_root = output_root / "record-seeds"
     note_root.mkdir(parents=True, exist_ok=True)
     seed_root.mkdir(parents=True, exist_ok=True)
 
-    bundle_path = output_root / "external-evidence-bundle.json"
+    bundle_path = effective_bundle_root / "external-evidence-bundle.json"
     bundle_path.write_text(json.dumps(bundle, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     normalized_bundle = build_normalized_bundle_from_external_evidence(bundle)
-    normalized_bundle_path = output_root / "normalized-registry-bundle.json"
+    normalized_bundle_path = effective_bundle_root / "normalized-registry-bundle.json"
     normalized_bundle_path.write_text(json.dumps(normalized_bundle, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     queue_path = output_root / "candidate-queue.csv"
@@ -364,9 +371,11 @@ def materialize_external_research_artifacts(bundle: dict[str, Any], output_root:
     return {
         "bundle_path": bundle_path.as_posix(),
         "normalized_bundle_path": normalized_bundle_path.as_posix(),
+        "bundle_root": effective_bundle_root.as_posix(),
         "candidate_queue": queue_path.as_posix(),
         "note_root": note_root.as_posix(),
         "record_seed_root": seed_root.as_posix(),
+        "artifact_root": output_root.as_posix(),
     }
 
 

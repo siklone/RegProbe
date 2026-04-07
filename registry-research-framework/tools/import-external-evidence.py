@@ -25,14 +25,22 @@ def main() -> int:
     parser.add_argument(
         "--output-root",
         default=str(REPO_ROOT / "registry-research-framework" / "imported"),
-        help="Output root for normalized bundle, candidate queue, note stubs, and record seeds.",
+        help="Output root for candidate queue, note stubs, and record seeds.",
+    )
+    parser.add_argument(
+        "--evidence-root",
+        default=str(REPO_ROOT / "evidence" / "files" / "external-imports"),
+        help="Output root for canonical external/imported evidence bundles.",
     )
     args = parser.parse_args()
 
     input_path = Path(args.input).resolve()
     output_root = Path(args.output_root).resolve()
+    evidence_root = Path(args.evidence_root).resolve()
     bundle = import_external_evidence(input_path, source_tool=args.source_tool, run_id=args.run_id)
-    outputs = materialize_external_research_artifacts(bundle, output_root / bundle["run_id"])
+    run_output_root = output_root / bundle["run_id"]
+    run_evidence_root = evidence_root / bundle["run_id"]
+    outputs = materialize_external_research_artifacts(bundle, run_output_root, bundle_root=run_evidence_root)
     payload = {
         "bundle": bundle,
         "outputs": outputs,

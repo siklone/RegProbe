@@ -77,6 +77,49 @@ class ExternalEvidenceImportTests(unittest.TestCase):
             self.assertEqual(seed_payload["setting"]["targets"][0]["hive"], "HKLM")
             self.assertEqual(seed_payload["evidence"]["normalized_bundle_path"], outputs["normalized_bundle_path"])
 
+    def test_materialize_external_research_artifacts_supports_split_bundle_root(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            temp_root_path = Path(temp_root)
+            bundle = {
+                "$schema": "registry-research-framework/schemas/external-evidence-bundle.schema.json",
+                "run_id": "external-split-root-test",
+                "generated_utc": "2026-04-07T00:00:00Z",
+                "source_tool": "osquery",
+                "importer_name": "OsqueryRegistryImporter",
+                "input_path": (temp_root_path / "input.json").as_posix(),
+                "observation_count": 1,
+                "observations": [
+                    {
+                        "candidate_id": "test-candidate",
+                        "feature_area": "policy",
+                        "source_tool": "osquery",
+                        "key_path": r"HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer",
+                        "value_name": "HideRecommendedSection",
+                        "value_type": "REG_DWORD",
+                        "observed_data": "1",
+                        "recommended_value": None,
+                        "rollback_value": None,
+                        "trigger_action": None,
+                        "required_privilege": None,
+                        "confidence": "Probable",
+                        "notes": None,
+                        "evidence_refs": ["evidence/files/external/source.json"],
+                    }
+                ],
+            }
+
+            outputs = external_import.materialize_external_research_artifacts(
+                bundle,
+                temp_root_path / "imported",
+                bundle_root=temp_root_path / "evidence-files",
+            )
+
+            self.assertTrue(Path(outputs["bundle_path"]).exists())
+            self.assertTrue(Path(outputs["normalized_bundle_path"]).exists())
+            self.assertTrue(Path(outputs["candidate_queue"]).exists())
+            self.assertTrue(outputs["bundle_root"].endswith("/evidence-files"))
+            self.assertTrue(outputs["artifact_root"].endswith("/imported"))
+
 
 if __name__ == "__main__":
     unittest.main()
