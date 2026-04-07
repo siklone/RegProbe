@@ -569,7 +569,7 @@ def build_runtime(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, An
         etw_trace_file = (
             repo_relative_text(((runtime_result.get("wpr") or {}).get("repo_etl_placeholder")))
             or repo_relative_text(runtime_summary.get("repo_etl_placeholder"))
-            or repo_relative_text(runtime_lane.get("result_ref") if runtime_lane else None)
+            or lane_repo_ref(runtime_lane)
             or etw_trace_file
         )
     else:
@@ -904,17 +904,17 @@ def build_re_audit(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
     if lane_executed(runtime_lane):
         new_tools_applied.extend(["etw", "vm-runtime-runner"])
         runtime_state = "succeeded" if runtime_lane and runtime_lane.get("exit_code") == 0 else "failed"
-        runtime_ref = repo_relative_text(runtime_lane.get("result_ref") if runtime_lane else None) or repo_relative_text(runtime_lane.get("log_file") if runtime_lane else None)
+        runtime_ref = lane_repo_ref(runtime_lane)
         notes.append(f"Runtime lane {runtime_state}" + (f" ({runtime_ref})" if runtime_ref else ""))
     if lane_executed(procmon_lane):
         new_tools_applied.append("procmon")
         procmon_state = "succeeded" if procmon_lane and procmon_lane.get("exit_code") == 0 else "failed"
-        procmon_ref = repo_relative_text(procmon_lane.get("result_ref") if procmon_lane else None) or repo_relative_text(procmon_lane.get("log_file") if procmon_lane else None)
+        procmon_ref = lane_repo_ref(procmon_lane)
         notes.append(f"Procmon lane {procmon_state}" + (f" ({procmon_ref})" if procmon_ref else ""))
     if lane_executed(behavior_lane):
         new_tools_applied.extend(["wpr", "vm-benchmark-runner"])
         behavior_state = "succeeded" if behavior_lane and behavior_lane.get("exit_code") == 0 else "failed"
-        behavior_ref = repo_relative_text(behavior_lane.get("result_ref") if behavior_lane else None) or repo_relative_text(behavior_lane.get("log_file") if behavior_lane else None)
+        behavior_ref = lane_repo_ref(behavior_lane)
         notes.append(f"Behavior lane {behavior_state}" + (f" ({behavior_ref})" if behavior_ref else ""))
 
     checks = live_dead_flag_checks(record, audit)
@@ -1034,7 +1034,7 @@ def current_artifact_refs(tweak_id: str, audit: dict[str, Any]) -> list[dict[str
         if not manifest:
             continue
         collected = str(manifest.get("generated_utc") or "") or None
-        for key in ("result_ref", "log_file"):
+        for key in ("normalized_result_ref", "result_ref", "log_file"):
             repo_ref = repo_relative_text(manifest.get(key))
             if repo_ref:
                 candidates.append(({"path": repo_ref, "id": Path(repo_ref).name}, collected))

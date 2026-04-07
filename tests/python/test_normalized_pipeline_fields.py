@@ -60,6 +60,67 @@ class NormalizedPipelineFieldTests(unittest.TestCase):
             }
             self.assertEqual(v31_pipeline.lane_capture_status(manifest), "runner-ok")
 
+    def test_lane_repo_ref_prefers_normalized_result_ref(self) -> None:
+        manifest = {
+            "normalized_result_ref": "evidence/files/test/normalized.json",
+            "result_ref": "evidence/files/test/summary.json",
+            "log_file": "evidence/files/test/runner.log",
+        }
+        self.assertEqual(v31_pipeline.lane_repo_ref(manifest), "evidence/files/test/normalized.json")
+
+    def test_build_re_audit_notes_use_normalized_result_ref(self) -> None:
+        evidence_root = REPO_ROOT / "evidence" / "files"
+        with tempfile.TemporaryDirectory(dir=evidence_root) as temp_root:
+            temp_dir = Path(temp_root)
+            runtime_bundle = temp_dir / "runtime.normalized.json"
+            procmon_bundle = temp_dir / "procmon.normalized.json"
+            runtime_bundle.write_text('{"status":"ok"}\n', encoding="utf-8")
+            procmon_bundle.write_text('{"status":"ok"}\n', encoding="utf-8")
+
+            runtime_manifest = {
+                "status": "runner-ok",
+                "capture_status": "captured",
+                "exit_code": 0,
+                "normalized_result_ref": runtime_bundle.relative_to(REPO_ROOT).as_posix(),
+                "result_ref": temp_dir.joinpath("runtime.summary.json").relative_to(REPO_ROOT).as_posix(),
+            }
+            procmon_manifest = {
+                "status": "runner-ok",
+                "capture_status": "captured",
+                "exit_code": 0,
+                "normalized_result_ref": procmon_bundle.relative_to(REPO_ROOT).as_posix(),
+                "result_ref": temp_dir.joinpath("procmon.summary.json").relative_to(REPO_ROOT).as_posix(),
+            }
+
+            original_loader = v31_pipeline.load_lane_manifest
+            try:
+                def fake_load_lane_manifest(tweak_id: str, filename: str):
+                    mapping = {
+                        "runtime-lane.json": runtime_manifest,
+                        "procmon-lane.json": procmon_manifest,
+                        "behavior-lane.json": None,
+                    }
+                    return mapping.get(filename)
+
+                v31_pipeline.load_lane_manifest = fake_load_lane_manifest
+                record = {"tweak_id": "test.tweak", "decision": {}}
+                audit = {
+                    "re_audit_required": True,
+                    "tools_used": [],
+                    "cross_layer_satisfied": False,
+                    "frida_kernel_guard_applied": False,
+                    "evidence_class": "Class B",
+                    "re_audit_reason": "",
+                }
+
+                payload = v31_pipeline.build_re_audit(record, audit)
+                notes = payload["re_audit"]["notes"]
+                self.assertIn(runtime_bundle.relative_to(REPO_ROOT).as_posix(), notes)
+                self.assertIn(procmon_bundle.relative_to(REPO_ROOT).as_posix(), notes)
+                self.assertNotIn("runtime.summary.json", notes)
+            finally:
+                v31_pipeline.load_lane_manifest = original_loader
+
 
 if __name__ == "__main__":
     unittest.main()
