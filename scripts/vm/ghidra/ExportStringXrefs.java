@@ -29,9 +29,12 @@ import ghidra.program.model.mem.Memory;
 import ghidra.program.model.symbol.Reference;
 import ghidra.program.model.symbol.ReferenceIterator;
 import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
 
 public class ExportStringXrefs extends GhidraScript {
     private static final int MAX_STRINGS_PER_PATTERN = 4;
+    private static final int MAX_SYMBOLS_PER_PATTERN = 8;
     private static final int MAX_REFERENCES_PER_STRING = 12;
     private static final int MAX_STRING_ADDRESS_SPAN = 0x80;
     private static final int MAX_INDIRECT_DATA_ADDRESSES = 24;
@@ -46,6 +49,7 @@ public class ExportStringXrefs extends GhidraScript {
     private static final class MatchEvidence {
         String address;
         String functionName = "<no function>";
+        String viaLabel;
         boolean forcedBoundary;
         boolean decompileSuccess;
         int outputLines;
@@ -90,6 +94,7 @@ public class ExportStringXrefs extends GhidraScript {
 
         Listing listing = currentProgram.getListing();
         ReferenceManager refManager = currentProgram.getReferenceManager();
+        SymbolTable symbolTable = currentProgram.getSymbolTable();
 
         try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(markdownFile), StandardCharsets.UTF_8))) {
             writer.printf("# Ghidra String/Xref Export%n%n");
@@ -116,7 +121,64 @@ public class ExportStringXrefs extends GhidraScript {
 
                     println("MATCH " + directAddress + " from address seed");
                     writer.printf("- Address seed: `%s`%n%n", directAddress);
-                    matchMap.computeIfAbsent(directAddress.toString(), key -> resolveReferenceEvidence(listing, decompiler, directAddress));
+                    matchMap.computeIfAbsent(directAddress.toString(), key -> resolveReferenceEvidence(listing, decompiler, directAddress, "address-seed"));
+                    continue;
+                }
+
+                if (normalizedPattern.startsWith("sym:")) {
+                    String symbolText = pattern.substring(4).trim();
+                    List<Symbol> symbols = resolveGlobalSymbols(symbolTable, symbolText);
+                    if (symbols.isEmpty()) {
+                        writer.printf("_No global symbols found for `%s`._%n%n", pattern);
+                        continue;
+                    }
+
+                    int emittedSymbols = 0;
+                    for (Symbol symbol : symbols) {
+                        if (emittedSymbols >= MAX_SYMBOLS_PER_PATTERN) {
+                            writer.printf("_Stopped after `%d` symbol seeds for `%s` to keep the export bounded._%n%n",
+                                MAX_SYMBOLS_PER_PATTERN,
+                                pattern);
+                            break;
+                        }
+
+                        emittedSymbols++;
+                        writer.printf("#### Symbol @ `%s`%n%n", symbol.getAddress());
+                        writer.printf("- Symbol: `%s`%n", escapeInlineCode(symbol.getName()));
+                        writer.printf("- Type: `%s`%n%n", symbol.getSymbolType());
+
+                        List<ResolvedReference> resolvedRefs = collectResolvedReferencesForSymbol(listing, refManager, symbol);
+                        writer.printf("- Reference count: `%d`%n", resolvedRefs.size());
+                        if (resolvedRefs.isEmpty()) {
+                            writer.printf("- No direct or bounded indirect references resolved by Ghidra%n%n");
+                            continue;
+                        }
+
+                        writer.printf("- References:%n");
+                        int emittedReferences = 0;
+                        for (ResolvedReference resolved : resolvedRefs) {
+                            if (emittedReferences >= MAX_REFERENCES_PER_STRING) {
+                                break;
+                            }
+
+                            Address referenceAddress = resolved.referenceAddress;
+                            Function function = listing.getFunctionContaining(referenceAddress);
+                            String functionLabel = function == null ? "<no function>" : function.getName();
+                            if (resolved.viaLabel == null || resolved.viaLabel.isBlank()) {
+                                writer.printf("  - `%s` in `%s`%n", referenceAddress, functionLabel);
+                            }
+                            else {
+                                writer.printf("  - `%s` in `%s` via `%s`%n", referenceAddress, functionLabel, resolved.viaLabel);
+                            }
+                            String viaLabel = resolved.viaLabel;
+                            matchMap.computeIfAbsent(referenceAddress.toString(), key -> resolveReferenceEvidence(listing, decompiler, referenceAddress, viaLabel));
+                            emittedReferences++;
+                        }
+                        if (resolvedRefs.size() > emittedReferences) {
+                            writer.printf("  - `... %d more references omitted ...`%n", resolvedRefs.size() - emittedReferences);
+                        }
+                        writer.printf("%n");
+                    }
                     continue;
                 }
 
@@ -166,7 +228,8 @@ public class ExportStringXrefs extends GhidraScript {
                         else {
                             writer.printf("  - `%s` in `%s` via `%s`%n", referenceAddress, functionLabel, resolved.viaLabel);
                         }
-                        matchMap.computeIfAbsent(referenceAddress.toString(), key -> resolveReferenceEvidence(listing, decompiler, referenceAddress));
+                        String viaLabel = resolved.viaLabel;
+                        matchMap.computeIfAbsent(referenceAddress.toString(), key -> resolveReferenceEvidence(listing, decompiler, referenceAddress, viaLabel));
                         emittedReferences++;
                     }
                     if (resolvedRefs.size() > emittedReferences) {
@@ -195,6 +258,9 @@ public class ExportStringXrefs extends GhidraScript {
                 for (MatchEvidence match : matchMap.values()) {
                     writer.printf("## %s @ `%s`%n%n", match.sectionTitle, match.address);
                     writer.printf("- Function: `%s`%n", match.functionName);
+                    if (match.viaLabel != null && !match.viaLabel.isBlank()) {
+                        writer.printf("- Via: `%s`%n", match.viaLabel);
+                    }
                     writer.printf("- Forced boundary: `%s`%n", match.forcedBoundary);
                     writer.printf("- Naturally resolved: `%s`%n", match.naturallyResolved);
                     writer.printf("- Decompile success: `%s`%n", match.decompileSuccess);
@@ -233,6 +299,64 @@ public class ExportStringXrefs extends GhidraScript {
                 null
             );
             scannedIndirect++;
+        }
+
+        return new ArrayList<>(resolved.values());
+    }
+
+    private List<ResolvedReference> collectResolvedReferencesForSymbol(Listing listing, ReferenceManager refManager, Symbol symbol) {
+        LinkedHashMap<String, ResolvedReference> resolved = new LinkedHashMap<>();
+        LinkedHashSet<Address> indirectSeeds = new LinkedHashSet<>();
+        Address address = symbol.getAddress();
+        if (address == null) {
+            return new ArrayList<>();
+        }
+
+        collectReferencesAtAddress(listing, refManager, address, "symbol:" + symbol.getName(), resolved, indirectSeeds);
+
+        int scannedIndirect = 0;
+        for (Address indirectSeed : indirectSeeds) {
+            if (scannedIndirect >= MAX_INDIRECT_DATA_ADDRESSES) {
+                break;
+            }
+
+            collectReferencesAtAddress(
+                listing,
+                refManager,
+                indirectSeed,
+                "data@" + indirectSeed,
+                resolved,
+                null
+            );
+            scannedIndirect++;
+        }
+
+        return new ArrayList<>(resolved.values());
+    }
+
+    private List<Symbol> resolveGlobalSymbols(SymbolTable symbolTable, String symbolText) {
+        LinkedHashMap<String, Symbol> resolved = new LinkedHashMap<>();
+        String normalized = symbolText == null ? "" : symbolText.trim();
+        for (char separator : new char[] { '!', '\\', '/' }) {
+            if (normalized.indexOf(separator) >= 0) {
+                normalized = normalized.substring(normalized.lastIndexOf(separator) + 1).trim();
+            }
+        }
+
+        for (String candidateName : Arrays.asList(normalized, symbolText)) {
+            if (candidateName == null || candidateName.isBlank()) {
+                continue;
+            }
+
+            for (Symbol symbol : symbolTable.getGlobalSymbols(candidateName.trim())) {
+                Address address = symbol.getAddress();
+                if (address == null) {
+                    continue;
+                }
+
+                String key = symbol.getName() + "@" + address;
+                resolved.putIfAbsent(key, symbol);
+            }
         }
 
         return new ArrayList<>(resolved.values());
@@ -304,9 +428,10 @@ public class ExportStringXrefs extends GhidraScript {
         }
     }
 
-    private MatchEvidence resolveReferenceEvidence(Listing listing, DecompInterface decompiler, Address referenceAddress) {
+    private MatchEvidence resolveReferenceEvidence(Listing listing, DecompInterface decompiler, Address referenceAddress, String viaLabel) {
         MatchEvidence result = new MatchEvidence();
         result.address = referenceAddress.toString();
+        result.viaLabel = viaLabel;
 
         Function function = listing.getFunctionContaining(referenceAddress);
         result.sectionTitle = function == null ? "Unresolved Block" : "Match";
@@ -606,6 +731,7 @@ public class ExportStringXrefs extends GhidraScript {
                 writer.println("    {");
                 writer.println("      \"address\": " + jsonString(match.address) + ",");
                 writer.println("      \"function\": " + jsonString(match.functionName) + ",");
+                writer.println("      \"via_label\": " + jsonString(match.viaLabel) + ",");
                 writer.println("      \"forced_boundary\": " + match.forcedBoundary + ",");
                 writer.println("      \"decompile_success\": " + match.decompileSuccess + ",");
                 writer.println("      \"output_lines\": " + match.outputLines + ",");

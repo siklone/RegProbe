@@ -4,7 +4,7 @@
   "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
   "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
   "record_status": "draft",
-  "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a later current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and now has a direct KVM local-KD disassembly pass for `nt!PopInvokeWin32CalloutWithWatchdog`. That pass proved the named Win32 callout watchdog path uses `PopWin32kCalloutWatchdogTimeoutSeconds`, not `PopWin32CalloutWatchdogBugcheckEnabled`, while the bugcheck-enabled global itself currently reads as `0`. The lane is stronger and narrower, but it still lacks the true seeding caller chain, exact registry-read proof, and any trustworthy non-default value semantics.",
+  "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and now has both a canonical PDB-backed Ghidra structural pass and a broader KVM local-KD seeding sweep. Together they show a narrower result than the earlier draft wording: the current build still carries the sibling, the live global currently reads `0`, but the direct named wrapper path is not the reader, the canonical full-analysis Ghidra pass recovered no direct or bounded xrefs, and the wider watchdog/bugcheck symbol sweep did not reveal a current-build registry seeding caller. This keeps the record alive as an adjacent watchdog-family global with unproven registry semantics, not as the strongest next tweak candidate.",
   "setting": {
     "name": "Win32 Callout Watchdog Bugcheck Enabled",
     "category": "Power",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "This appears to be a low-level watchdog-related value under Session Manager Power. On the current clean baseline, the parent key exists but the value is not configured.",
     "why_people_change_it": "Kernel and power researchers may inspect this value when tracing watchdog behavior around Session Manager power initialization and callout handling.",
-    "tradeoffs_overview": "The value is kernel-adjacent, boot-relevant, and currently unproven as an end-user tweak. Evidence is good enough to keep it in the research queue, but not good enough to apply or recommend. The next step is structural proof of the caller path, not a speculative write.",
-    "professional_notes": "The current repo evidence says `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power\\\\Win32CalloutWatchdogBugcheckEnabled` is absent by default on the clean baseline while the parent path exists. A later targeted current-build string batch found an exact Unicode hit in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD symbol sweep also resolved a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` global alongside `PopWatchdogInit`, `PopWatchdogResumeTimeout`, `PopWatchdogSleepTimeout`, and the named watchdog-family function `PopInvokeWin32CalloutWithWatchdog`, which makes this a real current-build watchdog-family lead rather than a loose string-only clue. A direct KVM local-KD follow-up then disassembled `PopInvokeWin32CalloutWithWatchdog` and showed that this path uses `PopWin32kCalloutWatchdogTimeoutSeconds`, builds a watchdog callback packet around `PopWin32CalloutWatchdogCallback`, calls `ZwPowerInformation`, and then invokes `PsInvokeWin32Callout`. The same pass read `PopWin32CalloutWatchdogBugcheckEnabled = 0` live, but did not show this named callout path reading that global. The lightweight watchdog runtime package also carried this value as an adjacent sibling while probing `WatchdogResumeTimeout` and `WatchdogSleepTimeout`, which keeps it as the strongest un-packaged watchdog sibling candidate. The current gap is now more precise: find the initialization or policy path that seeds the global, rather than continuing to treat `PopInvokeWin32CalloutWithWatchdog` as the likely reader.",
+    "tradeoffs_overview": "The value is kernel-adjacent, boot-relevant, and still unproven as an end-user tweak. Evidence is good enough to keep it in the research queue as a watchdog-family adjacent global, but not good enough to apply, recommend, or even treat as the strongest next watchdog candidate without a real seeding or read path.",
+    "professional_notes": "The current repo evidence says `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power\\\\Win32CalloutWatchdogBugcheckEnabled` is absent by default on the clean baseline while the parent path exists. A later targeted current-build string batch found an exact Unicode hit in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD symbol sweep resolved a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` global alongside `PopWatchdogInit`, `PopWatchdogResumeTimeout`, `PopWatchdogSleepTimeout`, and `PopInvokeWin32CalloutWithWatchdog`, which proved the sibling still exists in the current watchdog-family symbol surface. A direct KVM local-KD follow-up then showed that `PopInvokeWin32CalloutWithWatchdog` uses `PopWin32kCalloutWatchdogTimeoutSeconds`, builds a watchdog callback packet around `PopWin32CalloutWatchdogCallback`, calls `ZwPowerInformation`, and then invokes `PsInvokeWin32Callout`; the same pass read `PopWin32CalloutWatchdogBugcheckEnabled = 0` live, but did not show that wrapper reading the target global. The new canonical PDB-backed Ghidra full-analysis pass confirmed that the exact value-name string still exists in `ntoskrnl.exe`, but recovered zero direct or bounded xrefs from that string. The new broader KVM local-KD seed sweep then widened the search across watchdog/bugcheck symbols and helper disassembly, but still did not reveal a target-specific setter, copy helper, or registry seeding caller for the global. The only proven current-build registry helper path in this neighborhood remains the generic power reader chain `PopReadUlongPowerKey -> PopReadRegKeyValue -> ZwOpenKey / ZwQueryValueKey`, and the directly observed timeout selector still reads `PopWatchdogSleepTimeout` and `PopWatchdogResumeTimeout`, not this sibling. The right interpretation is now narrower: this is an adjacent watchdog-family global with unproven registry semantics on the current build, not the strongest un-packaged watchdog tweak lead. Absent a new runtime or documentation lead, this sibling should stop taking priority over stronger watchdog lanes.",
     "targets": [
       {
         "target_id": "win32-callout-watchdog-bugcheck-enabled",
@@ -85,7 +85,7 @@
       "tradeoffs": [
         "Preserves the observed baseline state.",
         "Avoids inventing unsupported non-default semantics.",
-        "Keeps the next proof step focused on finding the earlier seeding path rather than re-probing the already-narrowed callout wrapper."
+        "Keeps the next proof step focused on proving a real current-build seeding path or explicitly retiring the sibling from escalation."
       ],
       "apply_allowed": false,
       "evidence_ids": [
@@ -93,7 +93,9 @@
         "static-power-broad-string-20260331",
         "vm-watchdog-kd-symbol-sweep-20260407",
         "vm-watchdog-lightweight-runtime-20260330",
-        "vm-watchdog-win32-callout-kd-20260407"
+        "vm-watchdog-win32-callout-kd-20260407",
+        "ghidra-watchdog-win32-callout-20260407",
+        "vm-watchdog-win32-callout-seed-kd-20260407"
       ]
     }
   ],
@@ -163,6 +165,32 @@
         "risk"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "ghidra-watchdog-win32-callout-20260407",
+      "kind": "vm-test",
+      "title": "KVM Ghidra full-analysis pass keeps the exact string but finds no bounded xrefs",
+      "location": "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-ghidra-symbol-follow-up-20260407.md and evidence/files/vm-tooling-staging/watchdog-win32-callout-ghidra-20260407b/host-review.json",
+      "summary": "A canonical PDB-backed Ghidra full-analysis pass on the current KVM build confirmed an exact `Win32CalloutWatchdogBugcheckEnabled` string at `140c7ba30`, but recovered zero direct or bounded references from it. This keeps the sibling structurally present while weakening claims that a current-build caller path is already known.",
+      "supports": [
+        "behavior",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-watchdog-win32-callout-seed-kd-20260407",
+      "kind": "vm-test",
+      "title": "KVM local-KD seeding sweep finds no current-build registry seeding caller",
+      "location": "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-seed-follow-up-20260407.md and evidence/files/vm-tooling-staging/watchdog-win32-callout-seed-kd-20260407d/host-review.json",
+      "summary": "A broader live KVM local-KD sweep across watchdog and bugcheck symbols kept `PopWin32CalloutWatchdogBugcheckEnabled` in the current-build symbol family and read the live value as `0`, but did not reveal a target-specific setter, copy helper, or registry seeding caller. The proven helper path in this neighborhood still belongs to the timeout/control globals, not the bugcheck-enabled sibling.",
+      "supports": [
+        "behavior",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -172,27 +200,27 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is real enough for a schema-backed draft: it has baseline path/value evidence, a current-build kernel string hit, a live watchdog-family global on the current build, a named current-build function pivot, and now a direct KD disassembly proving that the obvious Win32 callout watchdog path is not the direct reader of this value. It is not ready for a validated record because the true seeding caller chain, exact registry-read proof, documented semantics, and safe non-default value mapping are still missing.",
+    "why": "The candidate is still real enough for a schema-backed draft: it has baseline path/value evidence, a current-build kernel string hit, a live watchdog-family global on the current build, a direct KD disassembly proving that the obvious Win32 callout wrapper is not the direct reader, and a later broader KD seeding sweep plus canonical full-analysis Ghidra pass. Those later passes narrowed the claim instead of strengthening it: they did not find a current-build registry seeding path, exact registry-read proof, documented semantics, or safe non-default value mapping, so further escalation should wait for a new runtime or documentation lead.",
     "manual_review_required": true,
     "blocking_issues": [
-      "no-seeding-caller",
+      "no-current-build-registry-seeding-path",
       "runtime_no_read",
       "no-doc-source",
       "non-default-semantics-unproven"
     ]
   },
   "open_questions": [
-    "Which earlier initialization or policy-loading path seeds PopWin32CalloutWatchdogBugcheckEnabled before PopInvokeWin32CalloutWithWatchdog runs?",
-    "Is the value consumed in the same initialization or update path as WatchdogResumeTimeout and WatchdogSleepTimeout?",
-    "Does a present REG_DWORD value act as a bugcheck enable flag, a policy override, or a legacy dead-path remnant?"
+    "Is there any boot-only initialization path outside the observed watchdog/bugcheck symbol cluster that seeds PopWin32CalloutWatchdogBugcheckEnabled on the current build?",
+    "Is the sibling consumed through a legacy or dead path rather than the active timeout/control helper family?",
+    "Does a present REG_DWORD ever change behavior on build 26200, or is the value-name string only a residual artifact?"
   ],
   "tested_on": [
     {
       "environment": "VMware Win25H2Clean baseline and Linux KVM follow-up packaging",
       "os": "Windows 11 25H2",
       "build": "26200",
-      "notes": "Baseline existence and later watchdog sibling packaging came from the clean Windows research baselines; exact current-build caller proof still needs a KVM local-KD and Ghidra follow-up."
+      "notes": "Baseline existence and later watchdog sibling packaging came from the clean Windows research baselines; later KVM Ghidra and local-KD follow-ups narrowed the sibling into an adjacent watchdog-family global with no current-build registry seeding path yet proven."
     }
   ],
-  "last_reviewed_utc": "2026-04-07T16:58:20Z"
+  "last_reviewed_utc": "2026-04-07T18:22:43Z"
 }

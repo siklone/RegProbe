@@ -1,0 +1,392 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.031 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.031 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 11:11:32.075 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 11:11:32.351 2026 (UTC - 7:00)
+System Uptime: 0 days 5:52:56.090
+lkd> .sympath C:\Tools\Symbols\watchdog-win32-callout-seed-kd-20260407d
+Symbol search path is: C:\Tools\Symbols\watchdog-win32-callout-seed-kd-20260407d
+Expanded Symbol search path is: c:\tools\symbols\watchdog-win32-callout-seed-kd-20260407d
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\watchdog-win32-callout-seed-kd-20260407d
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!*Win32*Callout*Watchdog*
+fffff806`e755fa60 nt!PopWin32CalloutWatchdogCallback (PopWin32CalloutWatchdogCallback)
+fffff806`e7c0b518 nt!PopWin32kCalloutWatchdogTimeoutSeconds = <no type information>
+fffff806`e77bb330 nt!PopInvokeWin32CalloutWithWatchdog (PopInvokeWin32CalloutWithWatchdog)
+fffff806`e7dc5fa8 nt!PopWin32CalloutWatchdogBugcheckEnabled = <no type information>
+lkd> x nt!*Watchdog*Bugcheck*
+fffff806`e73a5494 nt!PnpWatchdogBugcheck (PnpWatchdogBugcheck)
+fffff806`e6e27848 nt!PnpWatchdogBugcheckRegName = <no type information>
+fffff806`e73cd0d8 nt!PopIrpWatchdogBugcheck (PopIrpWatchdogBugcheck)
+fffff806`e7d8bf38 nt!PnpWatchdogBugcheckConfig = <no type information>
+fffff806`e7dc5fa8 nt!PopWin32CalloutWatchdogBugcheckEnabled = <no type information>
+lkd> x nt!*Bugcheck*Watchdog*
+fffff806`e739f61c nt!IopAddBugcheckPnpWatchdogTriageData (IopAddBugcheckPnpWatchdogTriageData)
+fffff806`e7dc5e84 nt!KiForceBugcheckForDpcWatchdog = <no type information>
+lkd> x nt!*Win32*Bugcheck*
+fffff806`e7dc5fa8 nt!PopWin32CalloutWatchdogBugcheckEnabled = <no type information>
+lkd> uf nt!PopWatchdogInit
+nt!PopWatchdogInit:
+fffff806`e7a32e78 50              push    rax
+fffff806`e7a32e79 4c8b642440      mov     r12,qword ptr [rsp+40h]
+fffff806`e7a32e7e 4d85ff          test    r15,r15
+fffff806`e7a32e81 7408            je      nt!PopWatchdogInit+0x13 (fffff806`e7a32e8b)  Branch
+
+nt!PopWatchdogInit+0xb:
+fffff806`e7a32e83 498bcf          mov     rcx,r15
+fffff806`e7a32e86 e8d1f5fcff      call    nt!KiFilterFiberContext+0x22f2c (fffff806`e7a0245c)
+
+nt!PopWatchdogInit+0x13:
+fffff806`e7a32e8b 448bac24d0000000 mov     r13d,dword ptr [rsp+0D0h]
+fffff806`e7a32e93 4d85e4          test    r12,r12
+fffff806`e7a32e96 7408            je      nt!PopWatchdogInit+0x28 (fffff806`e7a32ea0)  Branch
+
+nt!PopWatchdogInit+0x20:
+fffff806`e7a32e98 498bcc          mov     rcx,r12
+fffff806`e7a32e9b e8bcf5fcff      call    nt!KiFilterFiberContext+0x22f2c (fffff806`e7a0245c)
+
+nt!PopWatchdogInit+0x28:
+fffff806`e7a32ea0 488b4c2458      mov     rcx,qword ptr [rsp+58h]
+fffff806`e7a32ea5 4885c9          test    rcx,rcx
+fffff806`e7a32ea8 7405            je      nt!PopWatchdogInit+0x37 (fffff806`e7a32eaf)  Branch
+
+nt!PopWatchdogInit+0x32:
+fffff806`e7a32eaa e8adf5fcff      call    nt!KiFilterFiberContext+0x22f2c (fffff806`e7a0245c)
+
+nt!PopWatchdogInit+0x37:
+fffff806`e7a32eaf 4d85f6          test    r14,r14
+fffff806`e7a32eb2 7408            je      nt!PopWatchdogInit+0x44 (fffff806`e7a32ebc)  Branch
+
+nt!PopWatchdogInit+0x3c:
+fffff806`e7a32eb4 498bce          mov     rcx,r14
+fffff806`e7a32eb7 e8a0f5fcff      call    nt!KiFilterFiberContext+0x22f2c (fffff806`e7a0245c)
+
+nt!PopWatchdogInit+0x44:
+fffff806`e7a32ebc 410fbae50b      bt      r13d,0Bh
+fffff806`e7a32ec1 7216            jb      nt!PopWatchdogInit+0x61 (fffff806`e7a32ed9)  Branch
+
+nt!PopWatchdogInit+0x4b:
+fffff806`e7a32ec3 488b4c2438      mov     rcx,qword ptr [rsp+38h]
+fffff806`e7a32ec8 4885c9          test    rcx,rcx
+fffff806`e7a32ecb 740c            je      nt!PopWatchdogInit+0x61 (fffff806`e7a32ed9)  Branch
+
+nt!PopWatchdogInit+0x55:
+fffff806`e7a32ecd 48ff15ec330900  call    qword ptr [nt! ?? ::EKOMKFNL::`string' <PERF> (nt+0xcc62c0) (fffff806`e7ac62c0)]
+fffff806`e7a32ed4 0f1f440000      nop     dword ptr [rax+rax]
+
+nt!PopWatchdogInit+0x61:
+fffff806`e7a32ed9 8bc7            mov     eax,edi
+fffff806`e7a32edb 4881c480000000  add     rsp,80h
+fffff806`e7a32ee2 415f            pop     r15
+fffff806`e7a32ee4 415e            pop     r14
+fffff806`e7a32ee6 415d            pop     r13
+fffff806`e7a32ee8 415c            pop     r12
+fffff806`e7a32eea 5f              pop     rdi
+fffff806`e7a32eeb 5e              pop     rsi
+fffff806`e7a32eec 5b              pop     rbx
+fffff806`e7a32eed c3              ret
+lkd> uf nt!PopComputeWatchdogTimeout
+nt!PopComputeWatchdogTimeout:
+fffff806`e72410d4 8b81bc000000    mov     eax,dword ptr [rcx+0BCh]
+fffff806`e72410da 85c0            test    eax,eax
+fffff806`e72410dc 740d            je      nt!PopComputeWatchdogTimeout+0x17 (fffff806`e72410eb)  Branch
+
+nt!PopComputeWatchdogTimeout+0xa:
+fffff806`e72410de 83f801          cmp     eax,1
+fffff806`e72410e1 7408            je      nt!PopComputeWatchdogTimeout+0x17 (fffff806`e72410eb)  Branch
+
+nt!PopComputeWatchdogTimeout+0xf:
+fffff806`e72410e3 8b05a32fb800    mov     eax,dword ptr [nt!PopWatchdogSleepTimeout (fffff806`e7dc408c)]
+fffff806`e72410e9 c3              ret
+
+nt!PopComputeWatchdogTimeout+0x17:
+fffff806`e72410eb 83b9c000000001  cmp     dword ptr [rcx+0C0h],1
+fffff806`e72410f2 75ef            jne     nt!PopComputeWatchdogTimeout+0xf (fffff806`e72410e3)  Branch
+
+nt!PopComputeWatchdogTimeout+0x20:
+fffff806`e72410f4 8b057630b800    mov     eax,dword ptr [nt!PopWatchdogResumeTimeout (fffff806`e7dc4170)]
+fffff806`e72410fa c3              ret
+lkd> uf nt!PopUpdatePowerActionWatchdogTimeouts
+nt!PopUpdatePowerActionWatchdogTimeouts:
+fffff806`e7553f7c 4883ec28        sub     rsp,28h
+fffff806`e7553f80 e83b2e3600      call    nt!PopIsDetailedSleepReliabilityDiagEnabled (fffff806`e78b6dc0)
+fffff806`e7553f85 84c0            test    al,al
+fffff806`e7553f87 7416            je      nt!PopUpdatePowerActionWatchdogTimeouts+0x23 (fffff806`e7553f9f)  Branch
+
+nt!PopUpdatePowerActionWatchdogTimeouts+0xd:
+fffff806`e7553f89 c705b51e87004a010000 mov dword ptr [nt!PopPowerActionTransitioningWatchdogTimeout (fffff806`e7dc5e48)],14Ah
+fffff806`e7553f93 c705a71e870096000000 mov dword ptr [nt!PopPowerActionResumingWatchdogTimeout (fffff806`e7dc5e44)],96h
+fffff806`e7553f9d eb18            jmp     nt!PopUpdatePowerActionWatchdogTimeouts+0x3b (fffff806`e7553fb7)  Branch
+
+nt!PopUpdatePowerActionWatchdogTimeouts+0x23:
+fffff806`e7553f9f 8b05ab038700    mov     eax,dword ptr [nt!PopPowerActionTransitioningWatchdogTimeoutDefault (fffff806`e7dc4350)]
+fffff806`e7553fa5 89059d1e8700    mov     dword ptr [nt!PopPowerActionTransitioningWatchdogTimeout (fffff806`e7dc5e48)],eax
+fffff806`e7553fab 8b059b038700    mov     eax,dword ptr [nt!PopPowerActionResumingWatchdogTimeoutDefault (fffff806`e7dc434c)]
+fffff806`e7553fb1 89058d1e8700    mov     dword ptr [nt!PopPowerActionResumingWatchdogTimeout (fffff806`e7dc5e44)],eax
+
+nt!PopUpdatePowerActionWatchdogTimeouts+0x3b:
+fffff806`e7553fb7 4883c428        add     rsp,28h
+fffff806`e7553fbb c3              ret
+lkd> uf nt!PopReadUlongPowerKey
+nt!PopReadUlongPowerKey:
+fffff806`e73cd3cc 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff806`e73cd3d1 4889742410      mov     qword ptr [rsp+10h],rsi
+fffff806`e73cd3d6 57              push    rdi
+fffff806`e73cd3d7 4883ec30        sub     rsp,30h
+fffff806`e73cd3db 418bf0          mov     esi,r8d
+fffff806`e73cd3de 4889542420      mov     qword ptr [rsp+20h],rdx
+fffff806`e73cd3e3 41b804000000    mov     r8d,4
+fffff806`e73cd3e9 488bda          mov     rbx,rdx
+fffff806`e73cd3ec 418bf9          mov     edi,r9d
+fffff806`e73cd3ef 488bd1          mov     rdx,rcx
+fffff806`e73cd3f2 458bc8          mov     r9d,r8d
+fffff806`e73cd3f5 488d0d94bea5ff  lea     rcx,[nt!PopControlVolatileRegKey (fffff806`e6e29290)]
+fffff806`e73cd3fc e823eeedff      call    nt!PopReadRegKeyValue (fffff806`e72ac224)
+fffff806`e73cd401 85c0            test    eax,eax
+fffff806`e73cd403 7904            jns     nt!PopReadUlongPowerKey+0x3d (fffff806`e73cd409)  Branch
+
+nt!PopReadUlongPowerKey+0x39:
+fffff806`e73cd405 8933            mov     dword ptr [rbx],esi
+fffff806`e73cd407 eb1f            jmp     nt!PopReadUlongPowerKey+0x5c (fffff806`e73cd428)  Branch
+
+nt!PopReadUlongPowerKey+0x3d:
+fffff806`e73cd409 8b0b            mov     ecx,dword ptr [rbx]
+fffff806`e73cd40b 3b4c2468        cmp     ecx,dword ptr [rsp+68h]
+fffff806`e73cd40f 7417            je      nt!PopReadUlongPowerKey+0x5c (fffff806`e73cd428)  Branch
+
+nt!PopReadUlongPowerKey+0x45:
+fffff806`e73cd411 3bcf            cmp     ecx,edi
+fffff806`e73cd413 7304            jae     nt!PopReadUlongPowerKey+0x4d (fffff806`e73cd419)  Branch
+
+nt!PopReadUlongPowerKey+0x49:
+fffff806`e73cd415 893b            mov     dword ptr [rbx],edi
+fffff806`e73cd417 eb0a            jmp     nt!PopReadUlongPowerKey+0x57 (fffff806`e73cd423)  Branch
+
+nt!PopReadUlongPowerKey+0x4d:
+fffff806`e73cd419 8b542460        mov     edx,dword ptr [rsp+60h]
+fffff806`e73cd41d 3bca            cmp     ecx,edx
+fffff806`e73cd41f 7607            jbe     nt!PopReadUlongPowerKey+0x5c (fffff806`e73cd428)  Branch
+
+nt!PopReadUlongPowerKey+0x55:
+fffff806`e73cd421 8913            mov     dword ptr [rbx],edx
+
+nt!PopReadUlongPowerKey+0x57:
+fffff806`e73cd423 b8320200c0      mov     eax,0C0000232h
+
+nt!PopReadUlongPowerKey+0x5c:
+fffff806`e73cd428 488b5c2440      mov     rbx,qword ptr [rsp+40h]
+fffff806`e73cd42d 488b742448      mov     rsi,qword ptr [rsp+48h]
+fffff806`e73cd432 4883c430        add     rsp,30h
+fffff806`e73cd436 5f              pop     rdi
+fffff806`e73cd437 c3              ret
+lkd> uf nt!PopReadRegKeyValue
+nt!PopReadRegKeyValue:
+fffff806`e72ac224 48895c2410      mov     qword ptr [rsp+10h],rbx
+fffff806`e72ac229 4889742418      mov     qword ptr [rsp+18h],rsi
+fffff806`e72ac22e 55              push    rbp
+fffff806`e72ac22f 57              push    rdi
+fffff806`e72ac230 4155            push    r13
+fffff806`e72ac232 4156            push    r14
+fffff806`e72ac234 4157            push    r15
+fffff806`e72ac236 488bec          mov     rbp,rsp
+fffff806`e72ac239 4881ec80000000  sub     rsp,80h
+fffff806`e72ac240 33c0            xor     eax,eax
+fffff806`e72ac242 48894dc0        mov     qword ptr [rbp-40h],rcx
+fffff806`e72ac246 2145e4          and     dword ptr [rbp-1Ch],eax
+fffff806`e72ac249 33ff            xor     edi,edi
+fffff806`e72ac24b 214530          and     dword ptr [rbp+30h],eax
+fffff806`e72ac24e 418bf1          mov     esi,r9d
+fffff806`e72ac251 482145b0        and     qword ptr [rbp-50h],rax
+fffff806`e72ac255 4d8bf0          mov     r14,r8
+fffff806`e72ac258 482145b8        and     qword ptr [rbp-48h],rax
+fffff806`e72ac25c 448d6802        lea     r13d,[rax+2]
+fffff806`e72ac260 8945cc          mov     dword ptr [rbp-34h],eax
+fffff806`e72ac263 4c8bfa          mov     r15,rdx
+fffff806`e72ac266 2145cc          and     dword ptr [rbp-34h],eax
+fffff806`e72ac269 4885c9          test    rcx,rcx
+fffff806`e72ac26c 7423            je      nt!PopReadRegKeyValue+0x6d (fffff806`e72ac291)  Branch
+
+nt!PopReadRegKeyValue+0x4a:
+fffff806`e72ac26e e85d3c0500      call    nt!wcslen (fffff806`e72ffed0)
+fffff806`e72ac273 4803c0          add     rax,rax
+fffff806`e72ac276 b9fcff0000      mov     ecx,0FFFCh
+fffff806`e72ac27b 483dfeff0000    cmp     rax,0FFFEh
+fffff806`e72ac281 480f43c1        cmovae  rax,rcx
+fffff806`e72ac285 668945b8        mov     word ptr [rbp-48h],ax
+fffff806`e72ac289 664103c5        add     ax,r13w
+fffff806`e72ac28d 668945ba        mov     word ptr [rbp-46h],ax
+
+nt!PopReadRegKeyValue+0x6d:
+fffff806`e72ac291 48217dd0        and     qword ptr [rbp-30h],rdi
+fffff806`e72ac295 488d45b8        lea     rax,[rbp-48h]
+fffff806`e72ac299 0f57c0          xorps   xmm0,xmm0
+fffff806`e72ac29c 488945d8        mov     qword ptr [rbp-28h],rax
+fffff806`e72ac2a0 4c8d45c8        lea     r8,[rbp-38h]
+fffff806`e72ac2a4 c745c830000000  mov     dword ptr [rbp-38h],30h
+fffff806`e72ac2ab ba19000200      mov     edx,20019h
+fffff806`e72ac2b0 c745e040020000  mov     dword ptr [rbp-20h],240h
+fffff806`e72ac2b7 488d4db0        lea     rcx,[rbp-50h]
+fffff806`e72ac2bb f30f7f45e8      movdqu  xmmword ptr [rbp-18h],xmm0
+fffff806`e72ac2c0 e88ba31f00      call    nt!ZwOpenKey (fffff806`e74a6650)
+fffff806`e72ac2c5 8bd8            mov     ebx,eax
+fffff806`e72ac2c7 85c0            test    eax,eax
+fffff806`e72ac2c9 0f898f722400    jns     nt!PopReadRegKeyValue+0x24733a (fffff806`e74f355e)  Branch
+
+nt!PopReadRegKeyValue+0xab:
+fffff806`e72ac2cf 488b4db0        mov     rcx,qword ptr [rbp-50h]
+fffff806`e72ac2d3 4885c9          test    rcx,rcx
+fffff806`e72ac2d6 7533            jne     nt!PopReadRegKeyValue+0xe7 (fffff806`e72ac30b)  Branch
+
+nt!PopReadRegKeyValue+0xb4:
+fffff806`e72ac2d8 4885ff          test    rdi,rdi
+fffff806`e72ac2db 751f            jne     nt!PopReadRegKeyValue+0xd8 (fffff806`e72ac2fc)  Branch
+
+nt!PopReadRegKeyValue+0xb9:
+fffff806`e72ac2dd 4c8d9c2480000000 lea     r11,[rsp+80h]
+fffff806`e72ac2e5 8bc3            mov     eax,ebx
+fffff806`e72ac2e7 498b5b38        mov     rbx,qword ptr [r11+38h]
+fffff806`e72ac2eb 498b7340        mov     rsi,qword ptr [r11+40h]
+fffff806`e72ac2ef 498be3          mov     rsp,r11
+fffff806`e72ac2f2 415f            pop     r15
+fffff806`e72ac2f4 415e            pop     r14
+fffff806`e72ac2f6 415d            pop     r13
+fffff806`e72ac2f8 5f              pop     rdi
+fffff806`e72ac2f9 5d              pop     rbp
+fffff806`e72ac2fa c3              ret
+
+nt!PopReadRegKeyValue+0xd8:
+fffff806`e72ac2fc ba54564550      mov     edx,50455654h
+fffff806`e72ac301 488bcf          mov     rcx,rdi
+fffff806`e72ac304 e8c7696c00      call    nt!ExFreePoolWithTag (fffff806`e7972cd0)
+fffff806`e72ac309 ebd2            jmp     nt!PopReadRegKeyValue+0xb9 (fffff806`e72ac2dd)  Branch
+
+nt!PopReadRegKeyValue+0xe7:
+fffff806`e72ac30b e8e0a21f00      call    nt!ZwClose (fffff806`e74a65f0)
+fffff806`e72ac310 ebc6            jmp     nt!PopReadRegKeyValue+0xb4 (fffff806`e72ac2d8)  Branch
+
+nt!PopReadRegKeyValue+0x24733a:
+fffff806`e74f355e 498bd7          mov     rdx,r15
+fffff806`e74f3561 488d4db8        lea     rcx,[rbp-48h]
+fffff806`e74f3565 e8360cd3ff      call    nt!RtlInitUnicodeString (fffff806`e72241a0)
+fffff806`e74f356a 488b4db0        mov     rcx,qword ptr [rbp-50h]
+fffff806`e74f356e 488d4530        lea     rax,[rbp+30h]
+fffff806`e74f3572 4889442428      mov     qword ptr [rsp+28h],rax
+fffff806`e74f3577 488d55b8        lea     rdx,[rbp-48h]
+fffff806`e74f357b 217c2420        and     dword ptr [rsp+20h],edi
+fffff806`e74f357f 4533c9          xor     r9d,r9d
+fffff806`e74f3582 458bc5          mov     r8d,r13d
+fffff806`e74f3585 e86631fbff      call    nt!ZwQueryValueKey (fffff806`e74a66f0)
+fffff806`e74f358a 41bf230000c0    mov     r15d,0C0000023h
+fffff806`e74f3590 8bd8            mov     ebx,eax
+fffff806`e74f3592 413bc7          cmp     eax,r15d
+fffff806`e74f3595 7549            jne     nt!PopReadRegKeyValue+0x2473bc (fffff806`e74f35e0)  Branch
+
+nt!PopReadRegKeyValue+0x247373:
+fffff806`e74f3597 8b5530          mov     edx,dword ptr [rbp+30h]
+fffff806`e74f359a b900010000      mov     ecx,100h
+fffff806`e74f359f 41b854564550    mov     r8d,50455654h
+fffff806`e74f35a5 e846eb4700      call    nt!ExAllocatePool2 (fffff806`e79720f0)
+fffff806`e74f35aa 488bf8          mov     rdi,rax
+fffff806`e74f35ad 4885c0          test    rax,rax
+fffff806`e74f35b0 7509            jne     nt!PopReadRegKeyValue+0x247397 (fffff806`e74f35bb)  Branch
+
+nt!PopReadRegKeyValue+0x24738e:
+fffff806`e74f35b2 418d5ff4        lea     ebx,[r15-0Ch]
+fffff806`e74f35b6 e9148ddbff      jmp     nt!PopReadRegKeyValue+0xab (fffff806`e72ac2cf)  Branch
+
+nt!PopReadRegKeyValue+0x247397:
+fffff806`e74f35bb 488b4db0        mov     rcx,qword ptr [rbp-50h]
+fffff806`e74f35bf 488d4530        lea     rax,[rbp+30h]
+fffff806`e74f35c3 4889442428      mov     qword ptr [rsp+28h],rax
+fffff806`e74f35c8 488d55b8        lea     rdx,[rbp-48h]
+fffff806`e74f35cc 8b4530          mov     eax,dword ptr [rbp+30h]
+fffff806`e74f35cf 4c8bcf          mov     r9,rdi
+fffff806`e74f35d2 458bc5          mov     r8d,r13d
+fffff806`e74f35d5 89442420        mov     dword ptr [rsp+20h],eax
+fffff806`e74f35d9 e81231fbff      call    nt!ZwQueryValueKey (fffff806`e74a66f0)
+fffff806`e74f35de 8bd8            mov     ebx,eax
+
+nt!PopReadRegKeyValue+0x2473bc:
+fffff806`e74f35e0 85db            test    ebx,ebx
+fffff806`e74f35e2 0f88e78cdbff    js      nt!PopReadRegKeyValue+0xab (fffff806`e72ac2cf)  Branch
+
+nt!PopReadRegKeyValue+0x2473c4:
+fffff806`e74f35e8 85f6            test    esi,esi
+fffff806`e74f35ea 740f            je      nt!PopReadRegKeyValue+0x2473d7 (fffff806`e74f35fb)  Branch
+
+nt!PopReadRegKeyValue+0x2473c8:
+fffff806`e74f35ec 397704          cmp     dword ptr [rdi+4],esi
+fffff806`e74f35ef 740a            je      nt!PopReadRegKeyValue+0x2473d7 (fffff806`e74f35fb)  Branch
+
+nt!PopReadRegKeyValue+0x2473cd:
+fffff806`e74f35f1 bb240000c0      mov     ebx,0C0000024h
+fffff806`e74f35f6 e9d48cdbff      jmp     nt!PopReadRegKeyValue+0xab (fffff806`e72ac2cf)  Branch
+
+nt!PopReadRegKeyValue+0x2473d7:
+fffff806`e74f35fb 8b4708          mov     eax,dword ptr [rdi+8]
+fffff806`e74f35fe 493bc6          cmp     rax,r14
+fffff806`e74f3601 7516            jne     nt!PopReadRegKeyValue+0x2473f5 (fffff806`e74f3619)  Branch
+
+nt!PopReadRegKeyValue+0x2473df:
+fffff806`e74f3603 488b4d50        mov     rcx,qword ptr [rbp+50h]
+fffff806`e74f3607 488d570c        lea     rdx,[rdi+0Ch]
+fffff806`e74f360b 4d8bc6          mov     r8,r14
+fffff806`e74f360e e82dc6fcff      call    nt!memcpy (fffff806`e74bfc40)
+fffff806`e74f3613 90              nop
+fffff806`e74f3614 e9b68cdbff      jmp     nt!PopReadRegKeyValue+0xab (fffff806`e72ac2cf)  Branch
+
+nt!PopReadRegKeyValue+0x2473f5:
+fffff806`e74f3619 418bdf          mov     ebx,r15d
+fffff806`e74f361c e9ae8cdbff      jmp     nt!PopReadRegKeyValue+0xab (fffff806`e72ac2cf)  Branch
+lkd> dd nt!PopWin32CalloutWatchdogBugcheckEnabled L1
+fffff806`e7dc5fa8  00000000
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

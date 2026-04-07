@@ -1,0 +1,15 @@
+.sympath C:\Tools\Symbols\watchdog-win32-callout-seed-kd-20260407d
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!*Win32*Callout*Watchdog*
+x nt!*Watchdog*Bugcheck*
+x nt!*Bugcheck*Watchdog*
+x nt!*Win32*Bugcheck*
+uf nt!PopWatchdogInit
+uf nt!PopComputeWatchdogTimeout
+uf nt!PopUpdatePowerActionWatchdogTimeouts
+uf nt!PopReadUlongPowerKey
+uf nt!PopReadRegKeyValue
+dd nt!PopWin32CalloutWatchdogBugcheckEnabled L1
+.echo REGPROBE_LOCALKD_END
+q
