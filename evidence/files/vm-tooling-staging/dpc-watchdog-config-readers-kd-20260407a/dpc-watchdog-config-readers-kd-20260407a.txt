@@ -1,0 +1,10 @@
+.sympath C:\Tools\Symbols\dpc-watchdog-config-readers-kd-20260407a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!KeQueryDpcWatchdogConfiguration
+uf nt!KeQueryDpcWatchdogConfiguration
+x nt!Ki*DpcWatchdogConfiguration*
+uf nt!KiValidateDpcWatchdogConfiguration
+uf nt!KiUpdateProcessorDpcWatchdogConfiguration
+.echo REGPROBE_LOCALKD_END
+q

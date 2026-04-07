@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T19:10:34.696619Z",
+  "generated_utc": "2026-04-07T19:15:30.097164Z",
   "summary": {
     "total_records": 315,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T19:10:34.411286Z",
+      "generated_utc": "2026-04-07T19:15:29.779542Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18578,7 +18578,7 @@
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Profile",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. A dedicated live KVM local-KD bundle now proves that the current build exports the matching `KeDpcWatchdogProfile*` globals, but only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults.",
+      "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. Dedicated live KVM local-KD bundles now prove both the mixed current-build global state and the real reader path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, and `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults.",
       "evidence_class": {
         "record_id": "system.kernel-dpc-watchdog-profile-cluster",
         "tweak_id": "system.kernel-dpc-watchdog-profile-cluster",
@@ -18624,6 +18624,12 @@
               "url": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt",
               "kind": "vm-test",
               "summary": "A dedicated live KVM local-KD bundle resolved the current-build `KeDpcWatchdogProfile*` symbol cluster and directly read `OffsetMs = 10000`, `SingleDpcThresholdMs = 0`, `Cumulat..."
+            },
+            {
+              "title": "Dedicated KVM local-KD disassembly shows KeQueryDpcWatchdogConfiguration reader gate",
+              "url": "evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/dpc-watchdog-config-readers-kd-20260407a.stdout.txt",
+              "kind": "vm-test",
+              "summary": "A dedicated current-build KD disassembly pass showed that `KeQueryDpcWatchdogConfiguration` directly reads the profile and control watchdog globals and only sets output bits / c..."
             }
           ]
         },
@@ -18644,7 +18650,7 @@
         "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults and dedicated current-build live kernel-state proof. It is not ready for validation because the current build conflicts with the repo-doc defaults for most values and the reader or initializer path is still unknown.",
         "blocking_issues": [
           "live-defaults-conflict-docs",
-          "no-current-build-reader-path",
+          "no-current-build-registry-seeding-path",
           "runtime_no_read",
           "no-doc-source-outside-repo",
           "conditional-initialization-unproven"
@@ -18831,7 +18837,7 @@
               "value": 0
             }
           ],
-          "good_when": "You want to preserve the current-build contradiction as the primary fact while looking for the initializer or registry reader path.",
+          "good_when": "You want to preserve the current-build contradiction and reader-gate semantics as the primary fact while looking for the initializer or registry reader path.",
           "bad_when": "You need safe override guidance or validated non-default semantics.",
           "tradeoffs": [
             "Preserves the strongest current-build proof available for the family.",
@@ -18841,7 +18847,8 @@
           "apply_allowed": false,
           "evidence_ids": [
             "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407",
-            "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+            "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407",
+            "vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407"
           ]
         }
       ],
@@ -18870,6 +18877,20 @@
           "supports": [
             "behavior",
             "default",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407",
+          "kind": "vm-test",
+          "title": "Dedicated KVM local-KD disassembly shows KeQueryDpcWatchdogConfiguration reader gate",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/dpc-watchdog-config-readers-kd-20260407a.stdout.txt",
+          "summary": "A dedicated current-build KD disassembly pass showed that `KeQueryDpcWatchdogConfiguration` directly reads the profile and control watchdog globals and only sets output bits / copies values when the globals are non-zero.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "runtime-gate",
             "version-scope"
           ],
           "origin": "VM test / probe"

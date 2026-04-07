@@ -4,7 +4,7 @@
   "record_id": "system.kernel-dpc-watchdog-profile-cluster",
   "tweak_id": "system.kernel-dpc-watchdog-profile-cluster",
   "record_status": "draft",
-  "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. A dedicated live KVM local-KD bundle now proves that the current build exports the matching `KeDpcWatchdogProfile*` globals, but only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults.",
+  "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. Dedicated live KVM local-KD bundles now prove both the mixed current-build global state and the real reader path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, and `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults.",
   "setting": {
     "name": "Session Manager Kernel DPC Watchdog Profile Cluster",
     "category": "System",
@@ -13,7 +13,7 @@
     "casual_explanation": "This cluster appears to control several DPC watchdog profiling thresholds inside the kernel. Current-build live state only agrees with the repo-doc default for the profile offset; the rest of the cluster currently reads as zero.",
     "why_people_change_it": "Kernel and latency researchers may inspect these values when investigating DPC watchdog profiling thresholds, triage capture behavior, or internal watchdog diagnostics.",
     "tradeoffs_overview": "The family now has real current-build kernel-state evidence, but that evidence conflicts with repo-doc defaults for most values. It should stay a draft research cluster, not a tweak candidate.",
-    "professional_notes": "Repo docs list four `Session Manager\\\\Kernel` DPC watchdog profile values with explicit defaults: `DpcWatchdogProfileBufferSizeBytes = 266240`, `DpcWatchdogProfileCumulativeDpcThreshold = 110000`, `DpcWatchdogProfileOffset = 10000`, and `DpcWatchdogProfileSingleDpcThreshold = 18333`. A dedicated live KVM local-KD bundle later resolved the current-build `KeDpcWatchdogProfile*` symbol cluster and directly read the running globals. The result is mixed: `KeDpcWatchdogProfileOffsetMs = 10000`, but `KeDpcWatchdogProfileSingleDpcThresholdMs = 0`, `KeDpcWatchdogProfileCumulativeDpcThresholdMs = 0`, and `KeDpcWatchdogProfileBufferSizeBytes = 0`. The same pass also read the nearby control global `KeDpcWatchdogPeriodMs = 0`, which is a useful contradiction against the older DpcWatchdogPeriod review lane that only proved the value is consumed when present. The next proof step is therefore not another docs pass; it is a current-build reader or initializer that explains why only the offset global matches the repo-doc default while the rest of the cluster stays zero.",
+    "professional_notes": "Repo docs list four `Session Manager\\\\Kernel` DPC watchdog profile values with explicit defaults: `DpcWatchdogProfileBufferSizeBytes = 266240`, `DpcWatchdogProfileCumulativeDpcThreshold = 110000`, `DpcWatchdogProfileOffset = 10000`, and `DpcWatchdogProfileSingleDpcThreshold = 18333`. A dedicated live KVM local-KD bundle later resolved the current-build `KeDpcWatchdogProfile*` symbol cluster and directly read the running globals. The result is mixed: `KeDpcWatchdogProfileOffsetMs = 10000`, but `KeDpcWatchdogProfileSingleDpcThresholdMs = 0`, `KeDpcWatchdogProfileCumulativeDpcThresholdMs = 0`, and `KeDpcWatchdogProfileBufferSizeBytes = 0`. The same pass also read the nearby control global `KeDpcWatchdogPeriodMs = 0`, which is a useful contradiction against the older DpcWatchdogPeriod review lane that only proved the value is consumed when present. A second current-build KD disassembly pass then showed that `KeQueryDpcWatchdogConfiguration` is the concrete reader for the profile and control globals, and that it only sets result bits / copies fields when the globals are non-zero. This means the observed zero values are not passive noise; they directly suppress configuration output in the current build. The next proof step is therefore narrower than before: find the initializer or registry reader that seeds these globals before `KeQueryDpcWatchdogConfiguration` consumes them.",
     "targets": [
       {
         "target_id": "dpc-watchdog-profile-buffer-size-bytes",
@@ -197,7 +197,7 @@
           "value": 0
         }
       ],
-      "good_when": "You want to preserve the current-build contradiction as the primary fact while looking for the initializer or registry reader path.",
+      "good_when": "You want to preserve the current-build contradiction and reader-gate semantics as the primary fact while looking for the initializer or registry reader path.",
       "bad_when": "You need safe override guidance or validated non-default semantics.",
       "tradeoffs": [
         "Preserves the strongest current-build proof available for the family.",
@@ -207,7 +207,8 @@
       "apply_allowed": false,
       "evidence_ids": [
         "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407",
-        "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+        "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407",
+        "vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407"
       ]
     }
   ],
@@ -237,6 +238,19 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD disassembly shows KeQueryDpcWatchdogConfiguration reader gate",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/dpc-watchdog-config-readers-kd-20260407a.stdout.txt",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KeQueryDpcWatchdogConfiguration` directly reads the profile and control watchdog globals and only sets output bits / copies values when the globals are non-zero.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -250,14 +264,14 @@
     "manual_review_required": true,
     "blocking_issues": [
       "live-defaults-conflict-docs",
-      "no-current-build-reader-path",
+      "no-current-build-registry-seeding-path",
       "runtime_no_read",
       "no-doc-source-outside-repo",
       "conditional-initialization-unproven"
     ]
   },
   "open_questions": [
-    "What current-build path initializes or reads `KeDpcWatchdogProfile*` from `Session Manager\\\\Kernel`, if any?",
+    "What current-build path initializes or seeds `KeDpcWatchdogProfile*` from `Session Manager\\\\Kernel`, if any?",
     "Why does `KeDpcWatchdogProfileOffsetMs` match the repo-doc default while the other profile globals remain zero?",
     "Are the zero-valued globals late-initialized only when a watchdog profiling mode is enabled, or are the repo-doc defaults speculative for this build?"
   ],
@@ -266,8 +280,8 @@
       "environment": "KVM local-KD follow-up",
       "os": "Windows 11 25H2",
       "build": "26200",
-      "notes": "Dedicated current-build KD proof read the live DPC watchdog profile globals and captured a mixed state: only `KeDpcWatchdogProfileOffsetMs` matched the repo-doc default."
+      "notes": "Dedicated current-build KD proof read the live DPC watchdog profile globals and then disassembled `KeQueryDpcWatchdogConfiguration`, which only emits profile fields when the globals are non-zero."
     }
   ],
-  "last_reviewed_utc": "2026-04-07T19:10:00Z"
+  "last_reviewed_utc": "2026-04-07T19:16:00Z"
 }

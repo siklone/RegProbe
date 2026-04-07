@@ -1,0 +1,485 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.016 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.031 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 12:13:59.034 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 12:13:59.179 2026 (UTC - 7:00)
+System Uptime: 0 days 6:55:22.917
+lkd> .sympath C:\Tools\Symbols\dpc-watchdog-config-readers-kd-20260407a
+Symbol search path is: C:\Tools\Symbols\dpc-watchdog-config-readers-kd-20260407a
+Expanded Symbol search path is: c:\tools\symbols\dpc-watchdog-config-readers-kd-20260407a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\dpc-watchdog-config-readers-kd-20260407a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!KeQueryDpcWatchdogConfiguration
+fffff806`e73b4764 nt!KeQueryDpcWatchdogConfiguration (KeQueryDpcWatchdogConfiguration)
+lkd> uf nt!KeQueryDpcWatchdogConfiguration
+nt!KeQueryDpcWatchdogConfiguration:
+fffff806`e73b4764 488bc4          mov     rax,rsp
+fffff806`e73b4767 48895808        mov     qword ptr [rax+8],rbx
+fffff806`e73b476b 48897010        mov     qword ptr [rax+10h],rsi
+fffff806`e73b476f 48897818        mov     qword ptr [rax+18h],rdi
+fffff806`e73b4773 4154            push    r12
+fffff806`e73b4775 4156            push    r14
+fffff806`e73b4777 4157            push    r15
+fffff806`e73b4779 4883ec40        sub     rsp,40h
+fffff806`e73b477d 418bf8          mov     edi,r8d
+fffff806`e73b4780 8bf2            mov     esi,edx
+fffff806`e73b4782 4c8bf9          mov     r15,rcx
+fffff806`e73b4785 0f57c0          xorps   xmm0,xmm0
+fffff806`e73b4788 0f1140c8        movups  xmmword ptr [rax-38h],xmm0
+fffff806`e73b478c 0f1140d8        movups  xmmword ptr [rax-28h],xmm0
+fffff806`e73b4790 4181e8e4000000  sub     r8d,0E4h
+fffff806`e73b4797 741f            je      nt!KeQueryDpcWatchdogConfiguration+0x54 (fffff806`e73b47b8)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x35:
+fffff806`e73b4799 4183f801        cmp     r8d,1
+fffff806`e73b479d 740a            je      nt!KeQueryDpcWatchdogConfiguration+0x45 (fffff806`e73b47a9)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x3b:
+fffff806`e73b479f bb0d0000c0      mov     ebx,0C000000Dh
+fffff806`e73b47a4 e960010000      jmp     nt!KeQueryDpcWatchdogConfiguration+0x1a5 (fffff806`e73b4909)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x45:
+fffff806`e73b47a9 83fe20          cmp     esi,20h
+fffff806`e73b47ac 750f            jne     nt!KeQueryDpcWatchdogConfiguration+0x59 (fffff806`e73b47bd)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x4a:
+fffff806`e73b47ae c744242002000000 mov     dword ptr [rsp+20h],2
+fffff806`e73b47b6 eb17            jmp     nt!KeQueryDpcWatchdogConfiguration+0x6b (fffff806`e73b47cf)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x54:
+fffff806`e73b47b8 83fe14          cmp     esi,14h
+fffff806`e73b47bb 740a            je      nt!KeQueryDpcWatchdogConfiguration+0x63 (fffff806`e73b47c7)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x59:
+fffff806`e73b47bd bb040000c0      mov     ebx,0C0000004h
+fffff806`e73b47c2 e942010000      jmp     nt!KeQueryDpcWatchdogConfiguration+0x1a5 (fffff806`e73b4909)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x63:
+fffff806`e73b47c7 c744242001000000 mov     dword ptr [rsp+20h],1
+
+nt!KeQueryDpcWatchdogConfiguration+0x6b:
+fffff806`e73b47cf 65488b042588010000 mov   rax,qword ptr gs:[188h]
+fffff806`e73b47d8 66ff88e4010000  dec     word ptr [rax+1E4h]
+fffff806`e73b47df 90              nop
+fffff806`e73b47e0 4533c0          xor     r8d,r8d
+fffff806`e73b47e3 33d2            xor     edx,edx
+fffff806`e73b47e5 4c8d254cdf9600  lea     r12,[nt!KiDpcWatchdogConfigurationLock (fffff806`e7d22738)]
+fffff806`e73b47ec 498bcc          mov     rcx,r12
+fffff806`e73b47ef e85cbad8ff      call    nt!KeAbPreAcquire (fffff806`e7140250)
+fffff806`e73b47f4 4c8bf0          mov     r14,rax
+fffff806`e73b47f7 33c0            xor     eax,eax
+fffff806`e73b47f9 448d4011        lea     r8d,[rax+11h]
+fffff806`e73b47fd f04c0fb10532df9600 lock cmpxchg qword ptr [nt!KiDpcWatchdogConfigurationLock (fffff806`e7d22738)],r8
+fffff806`e73b4806 7416            je      nt!KeQueryDpcWatchdogConfiguration+0xba (fffff806`e73b481e)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0xa4:
+fffff806`e73b4808 4d8bcc          mov     r9,r12
+fffff806`e73b480b 4d8bc6          mov     r8,r14
+fffff806`e73b480e 33d2            xor     edx,edx
+fffff806`e73b4810 498bcc          mov     rcx,r12
+fffff806`e73b4813 e8f4bcd8ff      call    nt!ExfAcquirePushLockSharedEx (fffff806`e714050c)
+fffff806`e73b4818 41b811000000    mov     r8d,11h
+
+nt!KeQueryDpcWatchdogConfiguration+0xba:
+fffff806`e73b481e 33db            xor     ebx,ebx
+fffff806`e73b4820 4d85f6          test    r14,r14
+fffff806`e73b4823 7405            je      nt!KeQueryDpcWatchdogConfiguration+0xc6 (fffff806`e73b482a)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0xc1:
+fffff806`e73b4825 41c6460a01      mov     byte ptr [r14+0Ah],1
+
+nt!KeQueryDpcWatchdogConfiguration+0xc6:
+fffff806`e73b482a 81efe4000000    sub     edi,0E4h
+fffff806`e73b4830 7445            je      nt!KeQueryDpcWatchdogConfiguration+0x113 (fffff806`e73b4877)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0xce:
+fffff806`e73b4832 83ff01          cmp     edi,1
+fffff806`e73b4835 0f858c000000    jne     nt!KeQueryDpcWatchdogConfiguration+0x163 (fffff806`e73b48c7)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0xd7:
+fffff806`e73b483b 8b05e7f7a000    mov     eax,dword ptr [nt!KeDpcWatchdogProfileSingleDpcThresholdMs (fffff806`e7dc4028)]
+fffff806`e73b4841 85c0            test    eax,eax
+fffff806`e73b4843 740a            je      nt!KeQueryDpcWatchdogConfiguration+0xeb (fffff806`e73b484f)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0xe1:
+fffff806`e73b4845 0fba6c24200c    bts     dword ptr [rsp+20h],0Ch
+fffff806`e73b484b 89442434        mov     dword ptr [rsp+34h],eax
+
+nt!KeQueryDpcWatchdogConfiguration+0xeb:
+fffff806`e73b484f 8b05cff7a000    mov     eax,dword ptr [nt!KeDpcWatchdogProfileCumulativeDpcThresholdMs (fffff806`e7dc4024)]
+fffff806`e73b4855 85c0            test    eax,eax
+fffff806`e73b4857 740a            je      nt!KeQueryDpcWatchdogConfiguration+0xff (fffff806`e73b4863)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0xf5:
+fffff806`e73b4859 0fba6c24200d    bts     dword ptr [rsp+20h],0Dh
+fffff806`e73b485f 89442438        mov     dword ptr [rsp+38h],eax
+
+nt!KeQueryDpcWatchdogConfiguration+0xff:
+fffff806`e73b4863 8b05dff7a000    mov     eax,dword ptr [nt!KeDpcWatchdogProfileBufferSizeBytes (fffff806`e7dc4048)]
+fffff806`e73b4869 85c0            test    eax,eax
+fffff806`e73b486b 740a            je      nt!KeQueryDpcWatchdogConfiguration+0x113 (fffff806`e73b4877)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x109:
+fffff806`e73b486d 0fba6c24200e    bts     dword ptr [rsp+20h],0Eh
+fffff806`e73b4873 8944243c        mov     dword ptr [rsp+3Ch],eax
+
+nt!KeQueryDpcWatchdogConfiguration+0x113:
+fffff806`e73b4877 8b05bbf7a000    mov     eax,dword ptr [nt!KeDpcTimeoutMs (fffff806`e7dc4038)]
+fffff806`e73b487d 85c0            test    eax,eax
+fffff806`e73b487f 740a            je      nt!KeQueryDpcWatchdogConfiguration+0x127 (fffff806`e73b488b)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x11d:
+fffff806`e73b4881 0fba6c242008    bts     dword ptr [rsp+20h],8
+fffff806`e73b4887 89442424        mov     dword ptr [rsp+24h],eax
+
+nt!KeQueryDpcWatchdogConfiguration+0x127:
+fffff806`e73b488b 8b059ff7a000    mov     eax,dword ptr [nt!KeDpcWatchdogPeriodMs (fffff806`e7dc4030)]
+fffff806`e73b4891 85c0            test    eax,eax
+fffff806`e73b4893 740a            je      nt!KeQueryDpcWatchdogConfiguration+0x13b (fffff806`e73b489f)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x131:
+fffff806`e73b4895 0fba6c242009    bts     dword ptr [rsp+20h],9
+fffff806`e73b489b 89442428        mov     dword ptr [rsp+28h],eax
+
+nt!KeQueryDpcWatchdogConfiguration+0x13b:
+fffff806`e73b489f 8b0d9bf7a000    mov     ecx,dword ptr [nt!KeDpcSoftTimeoutMs (fffff806`e7dc4040)]
+fffff806`e73b48a5 85c9            test    ecx,ecx
+fffff806`e73b48a7 740a            je      nt!KeQueryDpcWatchdogConfiguration+0x14f (fffff806`e73b48b3)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x145:
+fffff806`e73b48a9 0fba6c24200a    bts     dword ptr [rsp+20h],0Ah
+fffff806`e73b48af 894c242c        mov     dword ptr [rsp+2Ch],ecx
+
+nt!KeQueryDpcWatchdogConfiguration+0x14f:
+fffff806`e73b48b3 8b1583f7a000    mov     edx,dword ptr [nt!KeDpcCumulativeSoftTimeoutMs (fffff806`e7dc403c)]
+fffff806`e73b48b9 85d2            test    edx,edx
+fffff806`e73b48bb 740a            je      nt!KeQueryDpcWatchdogConfiguration+0x163 (fffff806`e73b48c7)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x159:
+fffff806`e73b48bd 0fba6c24200b    bts     dword ptr [rsp+20h],0Bh
+fffff806`e73b48c3 89542430        mov     dword ptr [rsp+30h],edx
+
+nt!KeQueryDpcWatchdogConfiguration+0x163:
+fffff806`e73b48c7 498bc0          mov     rax,r8
+fffff806`e73b48ca f0480fb11d65de9600 lock cmpxchg qword ptr [nt!KiDpcWatchdogConfigurationLock (fffff806`e7d22738)],rbx
+fffff806`e73b48d3 7408            je      nt!KeQueryDpcWatchdogConfiguration+0x179 (fffff806`e73b48dd)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x171:
+fffff806`e73b48d5 498bcc          mov     rcx,r12
+fffff806`e73b48d8 e82395caff      call    nt!ExfReleasePushLockShared (fffff806`e705de00)
+
+nt!KeQueryDpcWatchdogConfiguration+0x179:
+fffff806`e73b48dd 498bcc          mov     rcx,r12
+fffff806`e73b48e0 e87b67d0ff      call    nt!KeAbPostRelease (fffff806`e70bb060)
+fffff806`e73b48e5 65488b0c2588010000 mov   rcx,qword ptr gs:[188h]
+fffff806`e73b48ee e8cd4ccaff      call    nt!KiLeaveCriticalRegionUnsafe (fffff806`e70595c0)
+fffff806`e73b48f3 90              nop
+fffff806`e73b48f4 4c8bc6          mov     r8,rsi
+fffff806`e73b48f7 488d542420      lea     rdx,[rsp+20h]
+fffff806`e73b48fc 498bcf          mov     rcx,r15
+fffff806`e73b48ff e83cb31000      call    nt!memcpy (fffff806`e74bfc40)
+fffff806`e73b4904 90              nop
+fffff806`e73b4905 eb02            jmp     nt!KeQueryDpcWatchdogConfiguration+0x1a5 (fffff806`e73b4909)  Branch
+
+nt!KeQueryDpcWatchdogConfiguration+0x1a5:
+fffff806`e73b4909 8bc3            mov     eax,ebx
+fffff806`e73b490b 488b5c2460      mov     rbx,qword ptr [rsp+60h]
+fffff806`e73b4910 488b742468      mov     rsi,qword ptr [rsp+68h]
+fffff806`e73b4915 488b7c2470      mov     rdi,qword ptr [rsp+70h]
+fffff806`e73b491a 4883c440        add     rsp,40h
+fffff806`e73b491e 415f            pop     r15
+fffff806`e73b4920 415e            pop     r14
+fffff806`e73b4922 415c            pop     r12
+fffff806`e73b4924 c3              ret
+lkd> x nt!Ki*DpcWatchdogConfiguration*
+fffff806`e74ce94e nt!KiValidateDpcWatchdogConfiguration$filt$0 (void)
+fffff806`e7d22738 nt!KiDpcWatchdogConfigurationLock = <no type information>
+fffff806`e73b4d98 nt!KiValidateDpcWatchdogConfiguration (KiValidateDpcWatchdogConfiguration)
+fffff806`e73b4d80 nt!KiUpdateProcessorDpcWatchdogConfiguration (KiUpdateProcessorDpcWatchdogConfiguration)
+lkd> uf nt!KiValidateDpcWatchdogConfiguration
+nt!KiValidateDpcWatchdogConfiguration:
+fffff806`e73b4d98 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff806`e73b4d9d 57              push    rdi
+fffff806`e73b4d9e 4883ec20        sub     rsp,20h
+fffff806`e73b4da2 498bd9          mov     rbx,r9
+fffff806`e73b4da5 418bf8          mov     edi,r8d
+fffff806`e73b4da8 4181e8e4000000  sub     r8d,0E4h
+fffff806`e73b4daf 740b            je      nt!KiValidateDpcWatchdogConfiguration+0x24 (fffff806`e73b4dbc)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x19:
+fffff806`e73b4db1 4183f801        cmp     r8d,1
+fffff806`e73b4db5 7514            jne     nt!KiValidateDpcWatchdogConfiguration+0x33 (fffff806`e73b4dcb)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x1f:
+fffff806`e73b4db7 83fa20          cmp     edx,20h
+fffff806`e73b4dba eb03            jmp     nt!KiValidateDpcWatchdogConfiguration+0x27 (fffff806`e73b4dbf)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x24:
+fffff806`e73b4dbc 83fa14          cmp     edx,14h
+
+nt!KiValidateDpcWatchdogConfiguration+0x27:
+fffff806`e73b4dbf 740a            je      nt!KiValidateDpcWatchdogConfiguration+0x33 (fffff806`e73b4dcb)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x29:
+fffff806`e73b4dc1 b9040000c0      mov     ecx,0C0000004h
+fffff806`e73b4dc6 e97c010000      jmp     nt!KiValidateDpcWatchdogConfiguration+0x1af (fffff806`e73b4f47)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x33:
+fffff806`e73b4dcb 0f57c0          xorps   xmm0,xmm0
+fffff806`e73b4dce 410f1101        movups  xmmword ptr [r9],xmm0
+fffff806`e73b4dd2 410f114110      movups  xmmword ptr [r9+10h],xmm0
+fffff806`e73b4dd7 448bc2          mov     r8d,edx
+fffff806`e73b4dda 488bd1          mov     rdx,rcx
+fffff806`e73b4ddd 488bcb          mov     rcx,rbx
+fffff806`e73b4de0 e85bae1000      call    nt!memcpy (fffff806`e74bfc40)
+fffff806`e73b4de5 90              nop
+fffff806`e73b4de6 8b0b            mov     ecx,dword ptr [rbx]
+fffff806`e73b4de8 0fb6d1          movzx   edx,cl
+fffff806`e73b4deb 8d42ff          lea     eax,[rdx-1]
+fffff806`e73b4dee 83f801          cmp     eax,1
+fffff806`e73b4df1 7712            ja      nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x5b:
+fffff806`e73b4df3 81efe4000000    sub     edi,0E4h
+fffff806`e73b4df9 7414            je      nt!KiValidateDpcWatchdogConfiguration+0x77 (fffff806`e73b4e0f)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x63:
+fffff806`e73b4dfb 83ff01          cmp     edi,1
+fffff806`e73b4dfe 751c            jne     nt!KiValidateDpcWatchdogConfiguration+0x84 (fffff806`e73b4e1c)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x68:
+fffff806`e73b4e00 83fa02          cmp     edx,2
+fffff806`e73b4e03 7417            je      nt!KiValidateDpcWatchdogConfiguration+0x84 (fffff806`e73b4e1c)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x6d:
+fffff806`e73b4e05 b90d0000c0      mov     ecx,0C000000Dh
+fffff806`e73b4e0a e938010000      jmp     nt!KiValidateDpcWatchdogConfiguration+0x1af (fffff806`e73b4f47)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x77:
+fffff806`e73b4e0f 83fa01          cmp     edx,1
+fffff806`e73b4e12 75f1            jne     nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x7c:
+fffff806`e73b4e14 f7c100700000    test    ecx,7000h
+fffff806`e73b4e1a 75e9            jne     nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x84:
+fffff806`e73b4e1c 8bc1            mov     eax,ecx
+fffff806`e73b4e1e c1e808          shr     eax,8
+fffff806`e73b4e21 33d2            xor     edx,edx
+fffff806`e73b4e23 85c0            test    eax,eax
+fffff806`e73b4e25 74de            je      nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x8f:
+fffff806`e73b4e27 81f900800000    cmp     ecx,8000h
+fffff806`e73b4e2d 73d6            jae     nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x97:
+fffff806`e73b4e2f a801            test    al,1
+fffff806`e73b4e31 7509            jne     nt!KiValidateDpcWatchdogConfiguration+0xa4 (fffff806`e73b4e3c)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x9b:
+fffff806`e73b4e33 8b05fff1a000    mov     eax,dword ptr [nt!KeDpcTimeoutMs (fffff806`e7dc4038)]
+fffff806`e73b4e39 894304          mov     dword ptr [rbx+4],eax
+
+nt!KiValidateDpcWatchdogConfiguration+0xa4:
+fffff806`e73b4e3c 0fbae109        bt      ecx,9
+fffff806`e73b4e40 7209            jb      nt!KiValidateDpcWatchdogConfiguration+0xb3 (fffff806`e73b4e4b)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0xaa:
+fffff806`e73b4e42 8b05e8f1a000    mov     eax,dword ptr [nt!KeDpcWatchdogPeriodMs (fffff806`e7dc4030)]
+fffff806`e73b4e48 894308          mov     dword ptr [rbx+8],eax
+
+nt!KiValidateDpcWatchdogConfiguration+0xb3:
+fffff806`e73b4e4b 0fbae10a        bt      ecx,0Ah
+fffff806`e73b4e4f 7209            jb      nt!KiValidateDpcWatchdogConfiguration+0xc2 (fffff806`e73b4e5a)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0xb9:
+fffff806`e73b4e51 8b05e9f1a000    mov     eax,dword ptr [nt!KeDpcSoftTimeoutMs (fffff806`e7dc4040)]
+fffff806`e73b4e57 89430c          mov     dword ptr [rbx+0Ch],eax
+
+nt!KiValidateDpcWatchdogConfiguration+0xc2:
+fffff806`e73b4e5a 0fbae10b        bt      ecx,0Bh
+fffff806`e73b4e5e 7209            jb      nt!KiValidateDpcWatchdogConfiguration+0xd1 (fffff806`e73b4e69)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0xc8:
+fffff806`e73b4e60 8b05d6f1a000    mov     eax,dword ptr [nt!KeDpcCumulativeSoftTimeoutMs (fffff806`e7dc403c)]
+fffff806`e73b4e66 894310          mov     dword ptr [rbx+10h],eax
+
+nt!KiValidateDpcWatchdogConfiguration+0xd1:
+fffff806`e73b4e69 0fbae10c        bt      ecx,0Ch
+fffff806`e73b4e6d 7209            jb      nt!KiValidateDpcWatchdogConfiguration+0xe0 (fffff806`e73b4e78)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0xd7:
+fffff806`e73b4e6f 8b05b3f1a000    mov     eax,dword ptr [nt!KeDpcWatchdogProfileSingleDpcThresholdMs (fffff806`e7dc4028)]
+fffff806`e73b4e75 894314          mov     dword ptr [rbx+14h],eax
+
+nt!KiValidateDpcWatchdogConfiguration+0xe0:
+fffff806`e73b4e78 0fbae10d        bt      ecx,0Dh
+fffff806`e73b4e7c 7209            jb      nt!KiValidateDpcWatchdogConfiguration+0xef (fffff806`e73b4e87)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0xe6:
+fffff806`e73b4e7e 8b05a0f1a000    mov     eax,dword ptr [nt!KeDpcWatchdogProfileCumulativeDpcThresholdMs (fffff806`e7dc4024)]
+fffff806`e73b4e84 894318          mov     dword ptr [rbx+18h],eax
+
+nt!KiValidateDpcWatchdogConfiguration+0xef:
+fffff806`e73b4e87 0fbae10e        bt      ecx,0Eh
+fffff806`e73b4e8b 7209            jb      nt!KiValidateDpcWatchdogConfiguration+0xfe (fffff806`e73b4e96)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0xf5:
+fffff806`e73b4e8d 8b05b5f1a000    mov     eax,dword ptr [nt!KeDpcWatchdogProfileBufferSizeBytes (fffff806`e7dc4048)]
+fffff806`e73b4e93 89431c          mov     dword ptr [rbx+1Ch],eax
+
+nt!KiValidateDpcWatchdogConfiguration+0xfe:
+fffff806`e73b4e96 448b4304        mov     r8d,dword ptr [rbx+4]
+fffff806`e73b4e9a 418d40ff        lea     eax,[r8-1]
+fffff806`e73b4e9e 83f812          cmp     eax,12h
+fffff806`e73b4ea1 0f865effffff    jbe     nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x10f:
+fffff806`e73b4ea7 448b4b08        mov     r9d,dword ptr [rbx+8]
+fffff806`e73b4eab 418d41ff        lea     eax,[r9-1]
+fffff806`e73b4eaf 3dce070000      cmp     eax,7CEh
+fffff806`e73b4eb4 0f864bffffff    jbe     nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x122:
+fffff806`e73b4eba 8b4b0c          mov     ecx,dword ptr [rbx+0Ch]
+fffff806`e73b4ebd 85c9            test    ecx,ecx
+fffff806`e73b4ebf 7417            je      nt!KiValidateDpcWatchdogConfiguration+0x140 (fffff806`e73b4ed8)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x129:
+fffff806`e73b4ec1 83f914          cmp     ecx,14h
+fffff806`e73b4ec4 0f823bffffff    jb      nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x132:
+fffff806`e73b4eca 4585c0          test    r8d,r8d
+fffff806`e73b4ecd 7409            je      nt!KiValidateDpcWatchdogConfiguration+0x140 (fffff806`e73b4ed8)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x137:
+fffff806`e73b4ecf 413bc8          cmp     ecx,r8d
+fffff806`e73b4ed2 0f872dffffff    ja      nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x140:
+fffff806`e73b4ed8 8b4310          mov     eax,dword ptr [rbx+10h]
+fffff806`e73b4edb 85c0            test    eax,eax
+fffff806`e73b4edd 7419            je      nt!KiValidateDpcWatchdogConfiguration+0x160 (fffff806`e73b4ef8)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x147:
+fffff806`e73b4edf 3dd0070000      cmp     eax,7D0h
+fffff806`e73b4ee4 0f821bffffff    jb      nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x152:
+fffff806`e73b4eea 4585c9          test    r9d,r9d
+fffff806`e73b4eed 7409            je      nt!KiValidateDpcWatchdogConfiguration+0x160 (fffff806`e73b4ef8)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x157:
+fffff806`e73b4eef 413bc1          cmp     eax,r9d
+fffff806`e73b4ef2 0f870dffffff    ja      nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x160:
+fffff806`e73b4ef8 448b4314        mov     r8d,dword ptr [rbx+14h]
+fffff806`e73b4efc 4585c0          test    r8d,r8d
+fffff806`e73b4eff 7414            je      nt!KiValidateDpcWatchdogConfiguration+0x17d (fffff806`e73b4f15)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x169:
+fffff806`e73b4f01 85c9            test    ecx,ecx
+fffff806`e73b4f03 7507            jne     nt!KiValidateDpcWatchdogConfiguration+0x174 (fffff806`e73b4f0c)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x16d:
+fffff806`e73b4f05 8b4b04          mov     ecx,dword ptr [rbx+4]
+fffff806`e73b4f08 85c9            test    ecx,ecx
+fffff806`e73b4f0a 7409            je      nt!KiValidateDpcWatchdogConfiguration+0x17d (fffff806`e73b4f15)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x174:
+fffff806`e73b4f0c 443bc1          cmp     r8d,ecx
+fffff806`e73b4f0f 0f87f0feffff    ja      nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x17d:
+fffff806`e73b4f15 8b4b18          mov     ecx,dword ptr [rbx+18h]
+fffff806`e73b4f18 85c9            test    ecx,ecx
+fffff806`e73b4f1a 7413            je      nt!KiValidateDpcWatchdogConfiguration+0x197 (fffff806`e73b4f2f)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x184:
+fffff806`e73b4f1c 85c0            test    eax,eax
+fffff806`e73b4f1e 7507            jne     nt!KiValidateDpcWatchdogConfiguration+0x18f (fffff806`e73b4f27)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x188:
+fffff806`e73b4f20 418bc1          mov     eax,r9d
+fffff806`e73b4f23 85c0            test    eax,eax
+fffff806`e73b4f25 7408            je      nt!KiValidateDpcWatchdogConfiguration+0x197 (fffff806`e73b4f2f)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x18f:
+fffff806`e73b4f27 3bc8            cmp     ecx,eax
+fffff806`e73b4f29 0f87d6feffff    ja      nt!KiValidateDpcWatchdogConfiguration+0x6d (fffff806`e73b4e05)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x197:
+fffff806`e73b4f2f 8b431c          mov     eax,dword ptr [rbx+1Ch]
+fffff806`e73b4f32 ffc8            dec     eax
+fffff806`e73b4f34 b90d0000c0      mov     ecx,0C000000Dh
+fffff806`e73b4f39 3dfe1f0000      cmp     eax,1FFEh
+fffff806`e73b4f3e 0f46d1          cmovbe  edx,ecx
+fffff806`e73b4f41 8bca            mov     ecx,edx
+fffff806`e73b4f43 eb02            jmp     nt!KiValidateDpcWatchdogConfiguration+0x1af (fffff806`e73b4f47)  Branch
+
+nt!KiValidateDpcWatchdogConfiguration+0x1af:
+fffff806`e73b4f47 8bc1            mov     eax,ecx
+fffff806`e73b4f49 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+fffff806`e73b4f4e 4883c420        add     rsp,20h
+fffff806`e73b4f52 5f              pop     rdi
+fffff806`e73b4f53 c3              ret
+lkd> uf nt!KiUpdateProcessorDpcWatchdogConfiguration
+nt!KiUpdateProcessorDpcWatchdogConfiguration:
+fffff806`e73b4d80 4883ec28        sub     rsp,28h
+fffff806`e73b4d84 e8430e5a00      call    nt!KiApplyProcessorDpcLimits (fffff806`e7955bcc)
+fffff806`e73b4d89 4883c428        add     rsp,28h
+fffff806`e73b4d8d c3              ret
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
