@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T12:32:54.960287Z",
+  "generated_utc": "2026-04-07T12:50:03.307134Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 310,
@@ -48939,13 +48939,13 @@
         }
       },
       "source_file": "research/records/power.session-watchdog-timeouts.json",
-      "source_file_sha256": "d64dd1de853e495776578de33e3399221000fbf3fefd44b4460a78bab8465721",
-      "source_file_size_bytes": 30351,
+      "source_file_sha256": "14e9100467594ee7c31c33675ecd14ac2b99ebd8b85ef6f0d34d9a05ea319373",
+      "source_file_size_bytes": 33591,
       "name": "Session Manager Watchdog Timeouts",
       "category": "Power",
       "area": "Directed Power Watchdog Timeouts",
       "scope": "device",
-      "summary": "Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, a tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed, later Linux KVM local-KD follow-ups that first resolved the live watchdog globals plus the derived directed-power timeout globals and then disassembled the current-build watchdog selection path on the running guest, and a reusable Linux KVM Procmon power-burst replay that exported a real 260953-row CSV but still returned zero hits for the watchdog pair and adjacent Session Manager\\Power fragments. The pair remains Class B because the research package is now strong on path, state, current-build code flow, and repeated KVM runtime replay, but still lacks a decisive exact live registry-read lane for the watchdog values themselves.",
+      "summary": "Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits, earlier Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, a tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed, later Linux KVM local-KD follow-ups that first resolved the live watchdog globals plus the derived directed-power timeout globals, then disassembled the current-build watchdog selection path, and later identified the generic current-build power-manager registry helper family (`PopOpenPowerKey`, `PopReadRegKeyValue`) while remapping the older fallback xref offsets away from the watchdog lane and into unrelated PnP initialization code. A reusable Linux KVM Procmon power-burst replay still exported a real 260953-row CSV but returned zero hits for the watchdog pair and adjacent Session Manager\\Power fragments. The pair remains Class B because the research package is now strong on path, state, current-build code flow, helper surfaces, and repeated KVM runtime replay, but still lacks a decisive exact live registry-read lane for the watchdog values themselves.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -48953,10 +48953,10 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and Ghidra fallback artifacts, repo-side PoFx pseudocode, a successful reboot-verified boot trace, a host-side ETL registry review, multiple runtime attempts across Procmon and lightweight ETW, KVM local-KD follow-ups that confirm both the live watchdog and directed-power globals and the current-build watchdog selection code path, and a reusable Linux KVM Procmon power-burst replay that still exported a large zero-hit CSV. The current blocker is no longer uncertainty about the current-build state, the current-build code path, or whether KVM can replay the power-family trigger from the host. It is that no runtime trace lane has yet produced a reliable decisive exact-value registry-read capture for the watchdog pair.",
+        "why": "The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and earlier Ghidra fallback artifacts, repo-side PoFx pseudocode, a successful reboot-verified boot trace, a host-side ETL registry review, multiple runtime attempts across Procmon and lightweight ETW, KVM local-KD follow-ups that confirm both the live watchdog and directed-power globals, the current-build watchdog selection code path, and the generic current-build power-manager registry helper surface, plus a reusable Linux KVM Procmon power-burst replay that still exported a large zero-hit CSV. The current blocker is no longer uncertainty about the current-build state, the current-build code path, or which generic registry helper surface the power manager exposes. It is that no runtime trace lane has yet produced a reliable decisive exact-value registry-read capture for the watchdog pair, and the exact watchdog-specific caller into that helper surface is still unresolved.",
         "blocking_issues": [
           "The ETL review, the Procmon boot-log review, the targeted post-boot DcomLaunch/Power trigger, the newer tools-hardened lightweight ETW S1 follow-up, and the reusable Linux KVM Procmon power-burst replay still stop short of a decisive exact live read of WatchdogResumeTimeout and WatchdogSleepTimeout.",
-          "The newer KVM local-KD follow-ups confirm the live current-build watchdog state and watchdog-selection code path, but they still do not replace the missing exact registry-read trace lane."
+          "The newer KVM local-KD follow-ups now identify the generic current-build registry helper surface, but the exact watchdog-specific caller into that helper path is still unresolved and the old fallback xref offsets no longer count as trustworthy reader-side proof."
         ]
       },
       "app_current_implementation": {
@@ -49290,6 +49290,21 @@
             "version-scope"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-watchdog-kvm-local-kd-reg-helper-20260407",
+          "kind": "vm-test",
+          "title": "Linux KVM local-KD registry-helper follow-up for the watchdog timeout pair",
+          "location": "evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json and evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log and evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b-summary.json and evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b.log and evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c-summary.json and evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c.log and research/notes/power-session-watchdog-timeouts-kvm-local-kd-reg-helper-follow-up-20260407.md",
+          "summary": "A debugger-assisted KVM local-KD helper-family pass resolved `PopReadRegKeyValue`, `PopOpenPowerKey`, and `PopReadUlongPowerKey`, showed that `PopReadRegKeyValue` issues `ZwOpenKey` and `ZwQueryValueKey` on behalf of power-manager callers, showed that `PopOpenPowerKey` roots itself on `PopRegKey`, and remapped the older fallback watchdog xref offsets into unrelated PnP driver-init code rather than a watchdog reader.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "risk",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         },
         {
           "evidence_id": "kernel-power-existing-next-gate-20260328",

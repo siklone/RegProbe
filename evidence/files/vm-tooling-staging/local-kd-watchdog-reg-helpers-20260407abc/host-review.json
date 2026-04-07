@@ -1,0 +1,58 @@
+{
+  "generated_utc": "2026-04-07T12:50:00Z",
+  "candidate": "power.session-watchdog-timeouts",
+  "guest": "regprobe-win11-25h2-session",
+  "bundle": "local-kd-watchdog-reg-helpers-20260407abc",
+  "findings": {
+    "symbol_sweep": {
+      "power_key_helpers": [
+        "PopReadUlongPowerKey",
+        "PopOpenPowerKey"
+      ],
+      "registry_helpers": [
+        "PopReadRegKeyValue"
+      ],
+      "watchdog_globals": [
+        "PopWatchdogResumeTimeout",
+        "PopWatchdogSleepTimeout"
+      ],
+      "watchdog_reg_symbols": [],
+      "non_watchdog_reg_symbols": [
+        "PnpWatchdogFirstChanceRegName",
+        "PnpWatchdogBugcheckRegName",
+        "PnpWatchdogSecondChanceRegName"
+      ]
+    },
+    "reader_disasm": {
+      "PopReadRegKeyValue": [
+        "ZwOpenKey",
+        "RtlInitUnicodeString",
+        "ZwQueryValueKey"
+      ],
+      "PopOpenPowerKey": [
+        "PopOpenKey",
+        "PopRegKey"
+      ],
+      "watchdog_selection": [
+        "PopComputeWatchdogTimeout -> PopWatchdogSleepTimeout",
+        "PopComputeWatchdogTimeout -> PopWatchdogResumeTimeout"
+      ]
+    },
+    "xref_remap": {
+      "legacy_offsets": [
+        "nt+0xc635d8",
+        "nt+0xc63608"
+      ],
+      "resolved_to": [
+        "PipInitializeCoreDriversByGroup",
+        "PipInitializeEarlyLaunchDrivers"
+      ],
+      "watchdog_related": false
+    }
+  },
+  "interpretation": {
+    "current_state": "The watchdog lane now has a concrete current-build generic registry-reader surface, but still lacks the exact watchdog-specific caller.",
+    "remaining_gap": "Find the caller that passes WatchdogResumeTimeout / WatchdogSleepTimeout into PopReadRegKeyValue, or capture the exact read in a runtime trace.",
+    "downgraded_evidence": "The older Ghidra fallback offsets are not trustworthy watchdog proof on the current build."
+  }
+}

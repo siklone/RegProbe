@@ -1,0 +1,347 @@
+Opened log file 'C:\RegProbe-Diag\debugger-smoke\watchdog-xref-remap-20260407c\local-kd.log'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.015 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 05:43:04.919 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 05:43:05.042 2026 (UTC - 7:00)
+System Uptime: 0 days 0:24:28.783
+lkd> .sympath C:\Tools\Symbols\watchdog-xref-remap-20260407c
+Symbol search path is: C:\Tools\Symbols\watchdog-xref-remap-20260407c
+Expanded Symbol search path is: c:\tools\symbols\watchdog-xref-remap-20260407c
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\watchdog-xref-remap-20260407c
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> ln nt+0xc635d8
+Browse module
+Set bu breakpoint
+
+(fffff806`e7a6351c)   nt!PipInitializeCoreDriversByGroup+0xbc   |  (fffff806`e7a636c8)   nt!PipInitializeEarlyLaunchDrivers
+lkd> u nt+0xc635b0 L0x80
+nt!PipInitializeCoreDriversByGroup+0x94:
+fffff806`e7a635b0 243c            and     al,3Ch
+fffff806`e7a635b2 0f28cb          movaps  xmm1,xmm3
+fffff806`e7a635b5 0f10642430      movups  xmm4,xmmword ptr [rsp+30h]
+fffff806`e7a635ba 0f11442430      movups  xmmword ptr [rsp+30h],xmm0
+fffff806`e7a635bf f30f58c4        addss   xmm0,xmm4
+fffff806`e7a635c3 0fc6cb55        shufps  xmm1,xmm3,55h
+fffff806`e7a635c7 0f28d3          movaps  xmm2,xmm3
+fffff806`e7a635ca 0fc6d3aa        shufps  xmm2,xmm3,0AAh
+fffff806`e7a635ce 0fc6dbff        shufps  xmm3,xmm3,0FFh
+fffff806`e7a635d2 f30f11442430    movss   dword ptr [rsp+30h],xmm0
+fffff806`e7a635d8 0f28c4          movaps  xmm0,xmm4
+fffff806`e7a635db 0fc6c455        shufps  xmm0,xmm4,55h
+fffff806`e7a635df f30f58c8        addss   xmm1,xmm0
+fffff806`e7a635e3 0f28c4          movaps  xmm0,xmm4
+fffff806`e7a635e6 0fc6c4aa        shufps  xmm0,xmm4,0AAh
+fffff806`e7a635ea f30f58d0        addss   xmm2,xmm0
+fffff806`e7a635ee 0fc6e4ff        shufps  xmm4,xmm4,0FFh
+fffff806`e7a635f2 f30f58dc        addss   xmm3,xmm4
+fffff806`e7a635f6 f30f114c2434    movss   dword ptr [rsp+34h],xmm1
+fffff806`e7a635fc f30f11542438    movss   dword ptr [rsp+38h],xmm2
+fffff806`e7a63602 f30f115c243c    movss   dword ptr [rsp+3Ch],xmm3
+fffff806`e7a63608 0f10542430      movups  xmm2,xmmword ptr [rsp+30h]
+fffff806`e7a6360d 0f28c2          movaps  xmm0,xmm2
+fffff806`e7a63610 0f28ca          movaps  xmm1,xmm2
+fffff806`e7a63613 0fc6ca55        shufps  xmm1,xmm2,55h
+fffff806`e7a63617 f30f59c6        mulss   xmm0,xmm6
+fffff806`e7a6361b f30f59ce        mulss   xmm1,xmm6
+fffff806`e7a6361f f30f11442430    movss   dword ptr [rsp+30h],xmm0
+fffff806`e7a63625 0f28c2          movaps  xmm0,xmm2
+fffff806`e7a63628 0fc6c2aa        shufps  xmm0,xmm2,0AAh
+fffff806`e7a6362c 0fc6d2ff        shufps  xmm2,xmm2,0FFh
+fffff806`e7a63630 f30f59d6        mulss   xmm2,xmm6
+fffff806`e7a63634 f30f59c6        mulss   xmm0,xmm6
+fffff806`e7a63638 f30f114c2434    movss   dword ptr [rsp+34h],xmm1
+fffff806`e7a6363e f30f1154243c    movss   dword ptr [rsp+3Ch],xmm2
+fffff806`e7a63644 f30f11442438    movss   dword ptr [rsp+38h],xmm0
+fffff806`e7a6364a 0f10542430      movups  xmm2,xmmword ptr [rsp+30h]
+fffff806`e7a6364f 0f28c2          movaps  xmm0,xmm2
+fffff806`e7a63652 f30f11542450    movss   dword ptr [rsp+50h],xmm2
+fffff806`e7a63658 0f28ca          movaps  xmm1,xmm2
+fffff806`e7a6365b 0fc6c255        shufps  xmm0,xmm2,55h
+fffff806`e7a6365f 0fc6caaa        shufps  xmm1,xmm2,0AAh
+fffff806`e7a63663 0fc6d2ff        shufps  xmm2,xmm2,0FFh
+fffff806`e7a63667 f30f1154245c    movss   dword ptr [rsp+5Ch],xmm2
+fffff806`e7a6366d f30f11442454    movss   dword ptr [rsp+54h],xmm0
+fffff806`e7a63673 f30f114c2458    movss   dword ptr [rsp+58h],xmm1
+fffff806`e7a63679 e9e1000000      jmp     nt!PipInitializeEarlyLaunchDrivers+0x97 (fffff806`e7a6375f)
+fffff806`e7a6367e 0f28d3          movaps  xmm2,xmm3
+fffff806`e7a63681 0f28cb          movaps  xmm1,xmm3
+fffff806`e7a63684 f30f5917        mulss   xmm2,dword ptr [rdi]
+fffff806`e7a63688 0f28c7          movaps  xmm0,xmm7
+fffff806`e7a6368b 41bf34000000    mov     r15d,34h
+fffff806`e7a63691 f3410f5906      mulss   xmm0,dword ptr [r14]
+fffff806`e7a63696 f30f594f04      mulss   xmm1,dword ptr [rdi+4]
+fffff806`e7a6369b f30f595f08      mulss   xmm3,dword ptr [rdi+8]
+fffff806`e7a636a0 f3410f5ef2      divss   xmm6,xmm10
+fffff806`e7a636a5 f3410f59d0      mulss   xmm2,xmm8
+fffff806`e7a636aa f3410f59c8      mulss   xmm1,xmm8
+fffff806`e7a636af f30f58d0        addss   xmm2,xmm0
+fffff806`e7a636b3 f3410f59d8      mulss   xmm3,xmm8
+fffff806`e7a636b8 0f28c7          movaps  xmm0,xmm7
+fffff806`e7a636bb f3410f597e08    mulss   xmm7,dword ptr [r14+8]
+fffff806`e7a636c1 f3410f594604    mulss   xmm0,dword ptr [r14+4]
+fffff806`e7a636c7 f30f58df        addss   xmm3,xmm7
+fffff806`e7a636cb f30f59d6        mulss   xmm2,xmm6
+fffff806`e7a636cf f30f58c8        addss   xmm1,xmm0
+fffff806`e7a636d3 f30f11542450    movss   dword ptr [rsp+50h],xmm2
+fffff806`e7a636d9 f30f59de        mulss   xmm3,xmm6
+fffff806`e7a636dd f30f59ce        mulss   xmm1,xmm6
+fffff806`e7a636e1 f30f115c2458    movss   dword ptr [rsp+58h],xmm3
+fffff806`e7a636e7 f30f114c2454    movss   dword ptr [rsp+54h],xmm1
+fffff806`e7a636ed eb70            jmp     nt!PipInitializeEarlyLaunchDrivers+0x97 (fffff806`e7a6375f)
+fffff806`e7a636ef 0f28cf          movaps  xmm1,xmm7
+fffff806`e7a636f2 0f28c3          movaps  xmm0,xmm3
+fffff806`e7a636f5 f3410f590e      mulss   xmm1,dword ptr [r14]
+fffff806`e7a636fa 41bf23000000    mov     r15d,23h
+fffff806`e7a63700 f3410f597e04    mulss   xmm7,dword ptr [r14+4]
+fffff806`e7a63706 f30f5907        mulss   xmm0,dword ptr [rdi]
+fffff806`e7a6370a f30f595f04      mulss   xmm3,dword ptr [rdi+4]
+fffff806`e7a6370f f3410f5ef2      divss   xmm6,xmm10
+fffff806`e7a63714 f3410f59c0      mulss   xmm0,xmm8
+fffff806`e7a63719 f3410f59d8      mulss   xmm3,xmm8
+fffff806`e7a6371e f30f58c8        addss   xmm1,xmm0
+fffff806`e7a63722 f30f58fb        addss   xmm7,xmm3
+fffff806`e7a63726 f30f59ce        mulss   xmm1,xmm6
+fffff806`e7a6372a f30f59fe        mulss   xmm7,xmm6
+fffff806`e7a6372e f30f114c2450    movss   dword ptr [rsp+50h],xmm1
+fffff806`e7a63734 f30f117c2454    movss   dword ptr [rsp+54h],xmm7
+fffff806`e7a6373a eb23            jmp     nt!PipInitializeEarlyLaunchDrivers+0x97 (fffff806`e7a6375f)
+fffff806`e7a6373c f30f591f        mulss   xmm3,dword ptr [rdi]
+fffff806`e7a63740 41bf12000000    mov     r15d,12h
+fffff806`e7a63746 f3410f593e      mulss   xmm7,dword ptr [r14]
+fffff806`e7a6374b f3410f59d8      mulss   xmm3,xmm8
+fffff806`e7a63750 f30f58df        addss   xmm3,xmm7
+fffff806`e7a63754 f3410f5eda      divss   xmm3,xmm10
+fffff806`e7a63759 f30f115c2450    movss   dword ptr [rsp+50h],xmm3
+fffff806`e7a6375f 44897d98        mov     dword ptr [rbp-68h],r15d
+fffff806`e7a63763 0f28442450      movaps  xmm0,xmmword ptr [rsp+50h]
+fffff806`e7a63768 498d4d40        lea     rcx,[r13+40h]
+fffff806`e7a6376c 0f284c2460      movaps  xmm1,xmmword ptr [rsp+60h]
+fffff806`e7a63771 488d5590        lea     rdx,[rbp-70h]
+fffff806`e7a63775 410f114500      movups  xmmword ptr [r13],xmm0
+fffff806`e7a6377a 0f28442470      movaps  xmm0,xmmword ptr [rsp+70h]
+fffff806`e7a6377f 410f114d10      movups  xmmword ptr [r13+10h],xmm1
+fffff806`e7a63784 0f284d80        movaps  xmm1,xmmword ptr [rbp-80h]
+fffff806`e7a63788 410f114520      movups  xmmword ptr [r13+20h],xmm0
+fffff806`e7a6378d 410f114d30      movups  xmmword ptr [r13+30h],xmm1
+fffff806`e7a63792 e85db4d6ff      call    nt!WmipPrepareWnodeSI+0x44 (fffff806`e77cebf4)
+fffff806`e7a63797 488d4d90        lea     rcx,[rbp-70h]
+fffff806`e7a6379b 45897d48        mov     dword ptr [r13+48h],r15d
+fffff806`e7a6379f e83c25edff      call    nt!PiDevCfgEnforceDevicePolicy+0xc2dc8 (fffff806`e7935ce0)
+fffff806`e7a637a4 4c8d9c2410010000 lea     r11,[rsp+110h]
+fffff806`e7a637ac 410f2873f0      movaps  xmm6,xmmword ptr [r11-10h]
+fffff806`e7a637b1 410f287be0      movaps  xmm7,xmmword ptr [r11-20h]
+fffff806`e7a637b6 450f2843d0      movaps  xmm8,xmmword ptr [r11-30h]
+fffff806`e7a637bb 450f284bc0      movaps  xmm9,xmmword ptr [r11-40h]
+fffff806`e7a637c0 450f2853b0      movaps  xmm10,xmmword ptr [r11-50h]
+fffff806`e7a637c5 450f285ba0      movaps  xmm11,xmmword ptr [r11-60h]
+fffff806`e7a637ca 498be3          mov     rsp,r11
+fffff806`e7a637cd 415f            pop     r15
+fffff806`e7a637cf 415e            pop     r14
+fffff806`e7a637d1 415d            pop     r13
+fffff806`e7a637d3 5f              pop     rdi
+fffff806`e7a637d4 5e              pop     rsi
+fffff806`e7a637d5 5b              pop     rbx
+fffff806`e7a637d6 5d              pop     rbp
+fffff806`e7a637d7 c3              ret
+nt!PipInitializeDriverDependentDLLs:
+fffff806`e7a637d8 cc              int     3
+lkd> ln nt+0xc63608
+Browse module
+Set bu breakpoint
+
+(fffff806`e7a6351c)   nt!PipInitializeCoreDriversByGroup+0xec   |  (fffff806`e7a636c8)   nt!PipInitializeEarlyLaunchDrivers
+lkd> u nt+0xc635f0 L0x80
+nt!PipInitializeCoreDriversByGroup+0xd4:
+fffff806`e7a635f0 e4ff            in      al,0FFh
+fffff806`e7a635f2 f30f58dc        addss   xmm3,xmm4
+fffff806`e7a635f6 f30f114c2434    movss   dword ptr [rsp+34h],xmm1
+fffff806`e7a635fc f30f11542438    movss   dword ptr [rsp+38h],xmm2
+fffff806`e7a63602 f30f115c243c    movss   dword ptr [rsp+3Ch],xmm3
+fffff806`e7a63608 0f10542430      movups  xmm2,xmmword ptr [rsp+30h]
+fffff806`e7a6360d 0f28c2          movaps  xmm0,xmm2
+fffff806`e7a63610 0f28ca          movaps  xmm1,xmm2
+fffff806`e7a63613 0fc6ca55        shufps  xmm1,xmm2,55h
+fffff806`e7a63617 f30f59c6        mulss   xmm0,xmm6
+fffff806`e7a6361b f30f59ce        mulss   xmm1,xmm6
+fffff806`e7a6361f f30f11442430    movss   dword ptr [rsp+30h],xmm0
+fffff806`e7a63625 0f28c2          movaps  xmm0,xmm2
+fffff806`e7a63628 0fc6c2aa        shufps  xmm0,xmm2,0AAh
+fffff806`e7a6362c 0fc6d2ff        shufps  xmm2,xmm2,0FFh
+fffff806`e7a63630 f30f59d6        mulss   xmm2,xmm6
+fffff806`e7a63634 f30f59c6        mulss   xmm0,xmm6
+fffff806`e7a63638 f30f114c2434    movss   dword ptr [rsp+34h],xmm1
+fffff806`e7a6363e f30f1154243c    movss   dword ptr [rsp+3Ch],xmm2
+fffff806`e7a63644 f30f11442438    movss   dword ptr [rsp+38h],xmm0
+fffff806`e7a6364a 0f10542430      movups  xmm2,xmmword ptr [rsp+30h]
+fffff806`e7a6364f 0f28c2          movaps  xmm0,xmm2
+fffff806`e7a63652 f30f11542450    movss   dword ptr [rsp+50h],xmm2
+fffff806`e7a63658 0f28ca          movaps  xmm1,xmm2
+fffff806`e7a6365b 0fc6c255        shufps  xmm0,xmm2,55h
+fffff806`e7a6365f 0fc6caaa        shufps  xmm1,xmm2,0AAh
+fffff806`e7a63663 0fc6d2ff        shufps  xmm2,xmm2,0FFh
+fffff806`e7a63667 f30f1154245c    movss   dword ptr [rsp+5Ch],xmm2
+fffff806`e7a6366d f30f11442454    movss   dword ptr [rsp+54h],xmm0
+fffff806`e7a63673 f30f114c2458    movss   dword ptr [rsp+58h],xmm1
+fffff806`e7a63679 e9e1000000      jmp     nt!PipInitializeEarlyLaunchDrivers+0x97 (fffff806`e7a6375f)
+fffff806`e7a6367e 0f28d3          movaps  xmm2,xmm3
+fffff806`e7a63681 0f28cb          movaps  xmm1,xmm3
+fffff806`e7a63684 f30f5917        mulss   xmm2,dword ptr [rdi]
+fffff806`e7a63688 0f28c7          movaps  xmm0,xmm7
+fffff806`e7a6368b 41bf34000000    mov     r15d,34h
+fffff806`e7a63691 f3410f5906      mulss   xmm0,dword ptr [r14]
+fffff806`e7a63696 f30f594f04      mulss   xmm1,dword ptr [rdi+4]
+fffff806`e7a6369b f30f595f08      mulss   xmm3,dword ptr [rdi+8]
+fffff806`e7a636a0 f3410f5ef2      divss   xmm6,xmm10
+fffff806`e7a636a5 f3410f59d0      mulss   xmm2,xmm8
+fffff806`e7a636aa f3410f59c8      mulss   xmm1,xmm8
+fffff806`e7a636af f30f58d0        addss   xmm2,xmm0
+fffff806`e7a636b3 f3410f59d8      mulss   xmm3,xmm8
+fffff806`e7a636b8 0f28c7          movaps  xmm0,xmm7
+fffff806`e7a636bb f3410f597e08    mulss   xmm7,dword ptr [r14+8]
+fffff806`e7a636c1 f3410f594604    mulss   xmm0,dword ptr [r14+4]
+fffff806`e7a636c7 f30f58df        addss   xmm3,xmm7
+fffff806`e7a636cb f30f59d6        mulss   xmm2,xmm6
+fffff806`e7a636cf f30f58c8        addss   xmm1,xmm0
+fffff806`e7a636d3 f30f11542450    movss   dword ptr [rsp+50h],xmm2
+fffff806`e7a636d9 f30f59de        mulss   xmm3,xmm6
+fffff806`e7a636dd f30f59ce        mulss   xmm1,xmm6
+fffff806`e7a636e1 f30f115c2458    movss   dword ptr [rsp+58h],xmm3
+fffff806`e7a636e7 f30f114c2454    movss   dword ptr [rsp+54h],xmm1
+fffff806`e7a636ed eb70            jmp     nt!PipInitializeEarlyLaunchDrivers+0x97 (fffff806`e7a6375f)
+fffff806`e7a636ef 0f28cf          movaps  xmm1,xmm7
+fffff806`e7a636f2 0f28c3          movaps  xmm0,xmm3
+fffff806`e7a636f5 f3410f590e      mulss   xmm1,dword ptr [r14]
+fffff806`e7a636fa 41bf23000000    mov     r15d,23h
+fffff806`e7a63700 f3410f597e04    mulss   xmm7,dword ptr [r14+4]
+fffff806`e7a63706 f30f5907        mulss   xmm0,dword ptr [rdi]
+fffff806`e7a6370a f30f595f04      mulss   xmm3,dword ptr [rdi+4]
+fffff806`e7a6370f f3410f5ef2      divss   xmm6,xmm10
+fffff806`e7a63714 f3410f59c0      mulss   xmm0,xmm8
+fffff806`e7a63719 f3410f59d8      mulss   xmm3,xmm8
+fffff806`e7a6371e f30f58c8        addss   xmm1,xmm0
+fffff806`e7a63722 f30f58fb        addss   xmm7,xmm3
+fffff806`e7a63726 f30f59ce        mulss   xmm1,xmm6
+fffff806`e7a6372a f30f59fe        mulss   xmm7,xmm6
+fffff806`e7a6372e f30f114c2450    movss   dword ptr [rsp+50h],xmm1
+fffff806`e7a63734 f30f117c2454    movss   dword ptr [rsp+54h],xmm7
+fffff806`e7a6373a eb23            jmp     nt!PipInitializeEarlyLaunchDrivers+0x97 (fffff806`e7a6375f)
+fffff806`e7a6373c f30f591f        mulss   xmm3,dword ptr [rdi]
+fffff806`e7a63740 41bf12000000    mov     r15d,12h
+fffff806`e7a63746 f3410f593e      mulss   xmm7,dword ptr [r14]
+fffff806`e7a6374b f3410f59d8      mulss   xmm3,xmm8
+fffff806`e7a63750 f30f58df        addss   xmm3,xmm7
+fffff806`e7a63754 f3410f5eda      divss   xmm3,xmm10
+fffff806`e7a63759 f30f115c2450    movss   dword ptr [rsp+50h],xmm3
+fffff806`e7a6375f 44897d98        mov     dword ptr [rbp-68h],r15d
+fffff806`e7a63763 0f28442450      movaps  xmm0,xmmword ptr [rsp+50h]
+fffff806`e7a63768 498d4d40        lea     rcx,[r13+40h]
+fffff806`e7a6376c 0f284c2460      movaps  xmm1,xmmword ptr [rsp+60h]
+fffff806`e7a63771 488d5590        lea     rdx,[rbp-70h]
+fffff806`e7a63775 410f114500      movups  xmmword ptr [r13],xmm0
+fffff806`e7a6377a 0f28442470      movaps  xmm0,xmmword ptr [rsp+70h]
+fffff806`e7a6377f 410f114d10      movups  xmmword ptr [r13+10h],xmm1
+fffff806`e7a63784 0f284d80        movaps  xmm1,xmmword ptr [rbp-80h]
+fffff806`e7a63788 410f114520      movups  xmmword ptr [r13+20h],xmm0
+fffff806`e7a6378d 410f114d30      movups  xmmword ptr [r13+30h],xmm1
+fffff806`e7a63792 e85db4d6ff      call    nt!WmipPrepareWnodeSI+0x44 (fffff806`e77cebf4)
+fffff806`e7a63797 488d4d90        lea     rcx,[rbp-70h]
+fffff806`e7a6379b 45897d48        mov     dword ptr [r13+48h],r15d
+fffff806`e7a6379f e83c25edff      call    nt!PiDevCfgEnforceDevicePolicy+0xc2dc8 (fffff806`e7935ce0)
+fffff806`e7a637a4 4c8d9c2410010000 lea     r11,[rsp+110h]
+fffff806`e7a637ac 410f2873f0      movaps  xmm6,xmmword ptr [r11-10h]
+fffff806`e7a637b1 410f287be0      movaps  xmm7,xmmword ptr [r11-20h]
+fffff806`e7a637b6 450f2843d0      movaps  xmm8,xmmword ptr [r11-30h]
+fffff806`e7a637bb 450f284bc0      movaps  xmm9,xmmword ptr [r11-40h]
+fffff806`e7a637c0 450f2853b0      movaps  xmm10,xmmword ptr [r11-50h]
+fffff806`e7a637c5 450f285ba0      movaps  xmm11,xmmword ptr [r11-60h]
+fffff806`e7a637ca 498be3          mov     rsp,r11
+fffff806`e7a637cd 415f            pop     r15
+fffff806`e7a637cf 415e            pop     r14
+fffff806`e7a637d1 415d            pop     r13
+fffff806`e7a637d3 5f              pop     rdi
+fffff806`e7a637d4 5e              pop     rsi
+fffff806`e7a637d5 5b              pop     rbx
+fffff806`e7a637d6 5d              pop     rbp
+fffff806`e7a637d7 c3              ret
+nt!PipInitializeDriverDependentDLLs:
+fffff806`e7a637d8 cc              int     3
+fffff806`e7a637d9 cc              int     3
+fffff806`e7a637da cc              int     3
+fffff806`e7a637db cc              int     3
+fffff806`e7a637dc cc              int     3
+fffff806`e7a637dd cc              int     3
+fffff806`e7a637de cc              int     3
+fffff806`e7a637df cc              int     3
+fffff806`e7a637e0 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff806`e7a637e5 48896c2410      mov     qword ptr [rsp+10h],rbp
+fffff806`e7a637ea 4889742418      mov     qword ptr [rsp+18h],rsi
+fffff806`e7a637ef 57              push    rdi
+fffff806`e7a637f0 4883ec20        sub     rsp,20h
+fffff806`e7a637f4 498bf0          mov     rsi,r8
+fffff806`e7a637f7 488bea          mov     rbp,rdx
+fffff806`e7a637fa 488bd6          mov     rdx,rsi
+fffff806`e7a637fd 458bc1          mov     r8d,r9d
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

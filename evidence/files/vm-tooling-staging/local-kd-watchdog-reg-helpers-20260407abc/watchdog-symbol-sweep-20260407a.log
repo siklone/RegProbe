@@ -1,0 +1,528 @@
+Opened log file 'C:\RegProbe-Diag\debugger-smoke\watchdog-symbol-sweep-20260407a\local-kd.log'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.015 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.219 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 05:38:35.399 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 05:38:35.646 2026 (UTC - 7:00)
+System Uptime: 0 days 0:19:59.385
+lkd> .sympath C:\Tools\Symbols\watchdog-symbol-sweep-20260407a
+Symbol search path is: C:\Tools\Symbols\watchdog-symbol-sweep-20260407a
+Expanded Symbol search path is: c:\tools\symbols\watchdog-symbol-sweep-20260407a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\watchdog-symbol-sweep-20260407a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!Pop*Watchdog*
+fffff806`e755fa60 nt!PopWin32CalloutWatchdogCallback (PopWin32CalloutWatchdogCallback)
+fffff806`e7240f7c nt!PopEnableIrpWatchdog (PopEnableIrpWatchdog)
+fffff806`e7a3371c nt!PopDripsWatchdogInitialize (PopDripsWatchdogInitialize)
+fffff806`e73d3990 nt!PopPowerActionWatchdog (PopPowerActionWatchdog)
+fffff806`e770292c nt!PopArmIdlePhaseWatchdog (PopArmIdlePhaseWatchdog)
+fffff806`e755fe54 nt!PopDripsWatchdogCheckHwDivergence (PopDripsWatchdogCheckHwDivergence)
+fffff806`e6e22400 nt!POP_ETW_EVENT_IRP_WATCHDOG_TRIGGERED = <no type information>
+fffff806`e7a337fc nt!PopDripsWatchdogInitializeCallbackTimer (PopDripsWatchdogInitializeCallbackTimer)
+fffff806`e7dc5e48 nt!PopPowerActionTransitioningWatchdogTimeout = <no type information>
+fffff806`e72516a0 nt!PopFxEnableWorkOrderWatchdog (PopFxEnableWorkOrderWatchdog)
+fffff806`e7d07640 nt!PopPdcIdlePhaseWatchdogContext = <no type information>
+fffff806`e7c0b518 nt!PopWin32kCalloutWatchdogTimeoutSeconds = <no type information>
+fffff806`e71160b0 nt!PopFxDisableWorkOrderWatchdog (PopFxDisableWorkOrderWatchdog)
+fffff806`e7dc4170 nt!PopWatchdogResumeTimeout = <no type information>
+fffff806`e6e2a760 nt!PopBlackBoxPoPowerWatchdogGuid = <no type information>
+fffff806`e73d89f0 nt!PopWatchdogDpc (PopWatchdogDpc)
+fffff806`e754e118 nt!PopFxInvokeDripsWatchdogCallback (PopFxInvokeDripsWatchdogCallback)
+fffff806`e73cd0d8 nt!PopIrpWatchdogBugcheck (PopIrpWatchdogBugcheck)
+fffff806`e7258bdc nt!PopSetWatchdog (PopSetWatchdog)
+fffff806`e75664b0 nt!PopDripsWatchdogTakeAction (PopDripsWatchdogTakeAction)
+fffff806`e75663d8 nt!PopDeepSleepWatchdogTakeAction (PopDeepSleepWatchdogTakeAction)
+fffff806`e7dc434c nt!PopPowerActionResumingWatchdogTimeoutDefault = <no type information>
+fffff806`e7a32e78 nt!PopWatchdogInit (PopWatchdogInit)
+fffff806`e7258fa8 nt!PopUpdateWatchdogNoWorkersEvent (PopUpdateWatchdogNoWorkersEvent)
+fffff806`e7c0c340 nt!PopDripsWatchdogDebounceInterval = <no type information>
+fffff806`e72bce5c nt!PopSetPowerActionWatchdogState (PopSetPowerActionWatchdogState)
+fffff806`e7c0b380 nt!PopFxWatchdogWorkOrderTimeout = <no type information>
+fffff806`e72bf450 nt!PopIdlePhaseWatchdogCallback (PopIdlePhaseWatchdogCallback)
+fffff806`e729f5cc nt!PopDisableIrpWatchdog (PopDisableIrpWatchdog)
+fffff806`e788b370 nt!PopDripsWatchdogInvokeDeviceCallbacks (PopDripsWatchdogInvokeDeviceCallbacks)
+fffff806`e7dc5e44 nt!PopPowerActionResumingWatchdogTimeout = <no type information>
+fffff806`e755ff20 nt!PopDripsWatchdogDiagnosticWorker (PopDripsWatchdogDiagnosticWorker)
+fffff806`e7dc426c nt!PopDripsWatchdogTimeout = <no type information>
+fffff806`e73d89d0 nt!PopResolveWatchdogParam (PopResolveWatchdogParam)
+fffff806`e755fae0 nt!PopDripsWatchdogCallbackHandler (PopDripsWatchdogCallbackHandler)
+fffff806`e6e21c28 nt!POP_ETW_EVENT_CS_DRIPS_WATCHDOG = <no type information>
+fffff806`e7827d48 nt!PopDripsWatchdogStopWatchdog (PopDripsWatchdogStopWatchdog)
+fffff806`e7a32868 nt!PopCreateIdlePhaseWatchdog (PopCreateIdlePhaseWatchdog)
+fffff806`e73e11b0 nt!PopWatchdogDumpControlRoutine (PopWatchdogDumpControlRoutine)
+fffff806`e7c67400 nt!PopBsdPowerWatchdogArmed = <no type information>
+fffff806`e6e21ab0 nt!POP_ETW_EVENT_CS_DEEP_SLEEP_WATCHDOG = <no type information>
+fffff806`e7dc4324 nt!PopDripsWatchdogAction = <no type information>
+fffff806`e73d1080 nt!PopFxDirectedWorkOrderWatchdog (PopFxDirectedWorkOrderWatchdog)
+fffff806`e77bb330 nt!PopInvokeWin32CalloutWithWatchdog (PopInvokeWin32CalloutWithWatchdog)
+fffff806`e73d22f0 nt!PopFxWorkOrderWatchdog (PopFxWorkOrderWatchdog)
+fffff806`e72c8f64 nt!PopDripsWatchdogGetDeviceActiveTime (PopDripsWatchdogGetDeviceActiveTime)
+fffff806`e7d075f0 nt!PopWatchdogLock = <no type information>
+fffff806`e7d075e0 nt!PopWatchdogList = <no type information>
+fffff806`e7c67150 nt!PopBsdLastPowerWatchdogStage = <no type information>
+fffff806`e73cd0c0 nt!PopIrpWatchdog (PopIrpWatchdog)
+fffff806`e76b5444 nt!PopDripsWatchdogAcquireContextLock (PopDripsWatchdogAcquireContextLock)
+fffff806`e73d4728 nt!PopDiagTraceCsDripsWatchdog (PopDiagTraceCsDripsWatchdog)
+fffff806`e7dc408c nt!PopWatchdogSleepTimeout = <no type information>
+fffff806`e7dc4350 nt!PopPowerActionTransitioningWatchdogTimeoutDefault = <no type information>
+fffff806`e72b4040 nt!PopDripsWatchdogTimerCallback (PopDripsWatchdogTimerCallback)
+fffff806`e7c01ce0 nt!PopWatchdogDumpControlContext = <no type information>
+fffff806`e73d8a90 nt!PopWatchdogWorker (PopWatchdogWorker)
+fffff806`e7dc5fa8 nt!PopWin32CalloutWatchdogBugcheckEnabled = <no type information>
+fffff806`e77bc3c4 nt!PopResetIdlePhaseWatchdogDiagnosticContext (PopResetIdlePhaseWatchdogDiagnosticContext)
+fffff806`e72c998c nt!PopRecordPowerWatchdogBlackboxInformation (PopRecordPowerWatchdogBlackboxInformation)
+fffff806`e7c0b51c nt!PopPdcIdlePhaseDefaultWatchdogTimeoutSeconds = <no type information>
+fffff806`e755fc80 nt!PopDripsWatchdogCallbackWorker (PopDripsWatchdogCallbackWorker)
+fffff806`e7827db4 nt!PopDripsWatchdogStartWatchdog (PopDripsWatchdogStartWatchdog)
+fffff806`e7d07080 nt!PopDripsWatchdogContext = <no type information>
+fffff806`e72410d4 nt!PopComputeWatchdogTimeout (PopComputeWatchdogTimeout)
+fffff806`e7d0d040 nt!PopWatchdogTimerCount = <no type information>
+fffff806`e7131c98 nt!PopCompleteIrpWatchdog (PopCompleteIrpWatchdog)
+fffff806`e7827f14 nt!PopDripsWatchdogScheduleNextTimer (PopDripsWatchdogScheduleNextTimer)
+fffff806`e77bbe18 nt!PopDisarmIdlePhaseWatchdog (PopDisarmIdlePhaseWatchdog)
+fffff806`e7553f7c nt!PopUpdatePowerActionWatchdogTimeouts (PopUpdatePowerActionWatchdogTimeouts)
+fffff806`e73d30e8 nt!PopPowerSettingPendingUpdateWatchdog (PopPowerSettingPendingUpdateWatchdog)
+fffff806`e73d4520 nt!PopDiagTraceCsDeepSleepWatchdog (PopDiagTraceCsDeepSleepWatchdog)
+fffff806`e7560150 nt!PopDripsWatchdogUpdateMetrics (PopDripsWatchdogUpdateMetrics)
+fffff806`e6e23048 nt!POP_ETW_EVENT_CS_DRIPS_WATCHDOG_PERFTRACK = <no type information>
+fffff806`e795f790 nt!PopBuildDeviceNotifyListWatchdog (PopBuildDeviceNotifyListWatchdog)
+fffff806`e73d4918 nt!PopDiagTraceCsDripsWatchdogPerfTrack (PopDiagTraceCsDripsWatchdogPerfTrack)
+fffff806`e7560128 nt!PopDripsWatchdogStopTimer (PopDripsWatchdogStopTimer)
+fffff806`e7d07060 nt!PopDripsWatchdogDebounceTickInterval = <no type information>
+lkd> x nt!Pop*Power*Key*
+fffff806`e73cd3cc nt!PopReadUlongPowerKey (PopReadUlongPowerKey)
+fffff806`e6e28fa8 nt!PopPowerButtonStateSepRegKeyId = <no type information>
+fffff806`e72aa6fc nt!PopOpenPowerKey (PopOpenPowerKey)
+fffff806`e6e291f0 nt!PopShutdownPowerOffPolicyRegKey = <no type information>
+lkd> x nt!Pop*Persist*
+fffff806`e7c07500 nt!PopHiberPersistedRegValueDatabase = <no type information>
+fffff806`e73dae54 nt!PopAdaptivePersistSystemInitatedRebootState (PopAdaptivePersistSystemInitatedRebootState)
+fffff806`e7552cb0 nt!PopQueryHiberPersistedRegValue (PopQueryHiberPersistedRegValue)
+fffff806`e74f9380 nt!PopOpenHiberPersistedKey (PopOpenHiberPersistedKey)
+fffff806`e755282c nt!PopInitHiberPersistedRegValues (PopInitHiberPersistedRegValues)
+fffff806`e74f596c nt!PopSetHiberPersistedRegValue (PopSetHiberPersistedRegValue)
+fffff806`e7d0cfa8 nt!PopHibernatePersistedRegLocation = <no type information>
+fffff806`e7549570 nt!PopOpenPersistedRegistryKey (PopOpenPersistedRegistryKey)
+lkd> x nt!Pop*Session*
+fffff806`e77bb9c4 nt!PopAdaptiveGetConsoleSessionState (void)
+fffff806`e78b66b0 nt!PopDirectedDripsDiagNotifySessionStart (PopDirectedDripsDiagNotifySessionStart)
+fffff806`e78c7988 nt!PopPowerAggregatorForceSessionSwitch (PopPowerAggregatorForceSessionSwitch)
+fffff806`e6e14290 nt!POP_ETW_ADPM_SESSION_DISCONNECTED = <no type information>
+fffff806`e6e0b1a0 nt!PopSessionSpecificGuids = <no type information>
+fffff806`e78bc550 nt!PopSleepstudySnapModernStandbySessionData (PopSleepstudySnapModernStandbySessionData)
+fffff806`e78bdd04 nt!PopSleepstudyCaptureSessionStatistics (PopSleepstudyCaptureSessionStatistics)
+fffff806`e78505d8 nt!PopGetSessionId (PopGetSessionId)
+fffff806`e77bcc68 nt!PopStateIsSessionSpecific (PopStateIsSessionSpecific)
+fffff806`e77b9c8c nt!PopSendSessionInfo (PopSendSessionInfo)
+fffff806`e78cb1fc nt!PopSessionWinlogonNotification (PopSessionWinlogonNotification)
+fffff806`e76ae6c0 nt!PopWnfSprActiveSessionChangeCallback (PopWnfSprActiveSessionChangeCallback)
+fffff806`e7562088 nt!PopAdaptiveStandbySessionStart (PopAdaptiveStandbySessionStart)
+fffff806`e7559cb0 nt!PopPowerAggregatorSessionSwitchWorker (PopPowerAggregatorSessionSwitchWorker)
+fffff806`e78bb508 nt!PopPowerRequestNotifyUserSessionAttributed (PopPowerRequestNotifyUserSessionAttributed)
+fffff806`e7548f24 nt!PopSetupSprActiveSessionChangeNotification (PopSetupSprActiveSessionChangeNotification)
+fffff806`e6e21df8 nt!POP_ETW_ADPM_SESSION_CONNECTED = <no type information>
+fffff806`e755f23c nt!PopAdaptiveConsoleSessionOverrideTrigger (PopAdaptiveConsoleSessionOverrideTrigger)
+fffff806`e755f904 nt!PopSessionConnectionChangeV2 (PopSessionConnectionChangeV2)
+fffff806`e77ba66c nt!PopDiagTraceSessionState (PopDiagTraceSessionState)
+fffff806`e77ba66c nt!PopDiagTraceSessionStates (PopDiagTraceSessionStates)
+fffff806`e77ba5e8 nt!PopSessionDisconnected (PopSessionDisconnected)
+fffff806`e77ba88c nt!PopSetSessionDisplayStatus (PopSetSessionDisplayStatus)
+fffff806`e78b9ba4 nt!PopPowerRequestNotifyTtmSessionUninitialized (PopPowerRequestNotifyTtmSessionUninitialized)
+fffff806`e6e143f0 nt!POP_ETW_ADPM_SESSION_DISPLAY_STATE = <no type information>
+fffff806`e755f1bc nt!PopAdaptiveConsoleSessionOverrideClear (PopAdaptiveConsoleSessionOverrideClear)
+fffff806`e6e1c438 nt!POP_ETW_EVENT_SESSION_DISPLAY_ON = <no type information>
+fffff806`e755f844 nt!PopSessionConnectedV2 (PopSessionConnectedV2)
+fffff806`e77bb2a4 nt!PopAdaptiveGetSessionState (PopAdaptiveGetSessionState)
+fffff806`e6e21a58 nt!POP_ETW_ADPM_SESSION_UNLOCKED = <no type information>
+fffff806`e77b7cc0 nt!PopBlockSessionSwitch (PopBlockSessionSwitch)
+fffff806`e712d49c nt!PopQueryBootSessionStandbyActivationInfo (PopQueryBootSessionStandbyActivationInfo)
+fffff806`e756298c nt!PopAdaptiveStandbyTraceSessionSettings (PopAdaptiveStandbyTraceSessionSettings)
+fffff806`e7d07324 nt!PopConsoleSession = <no type information>
+fffff806`e7869608 nt!PopDirectedDripsSendSessionData (PopDirectedDripsSendSessionData)
+fffff806`e6e14320 nt!POP_ETW_ADPM_SESSION_INPUT_STATE = <no type information>
+fffff806`e72ad43c nt!PopDiagTraceSessionDisplayStateChange (PopDiagTraceSessionDisplayStateChange)
+fffff806`e7d073d0 nt!PopMaximumConnectionSessions = <no type information>
+fffff806`e6e22880 nt!POP_ETW_ADPM_SESSION_LOCKED = <no type information>
+fffff806`e77bb508 nt!PopDiagTraceAdaptiveSessionState (PopDiagTraceAdaptiveSessionState)
+fffff806`e7879e90 nt!PopSleepstudySendSessionChangeWnf (PopSleepstudySendSessionChangeWnf)
+fffff806`e7d09f60 nt!PopSleepstudySessionContext = <no type information>
+fffff806`e786967c nt!PopDirectedDripsDiagNotifySessionStop (PopDirectedDripsDiagNotifySessionStop)
+fffff806`e6e142d0 nt!POP_ETW_EVENT_ADAPTIVE_SESSION_STATE = <no type information>
+fffff806`e6e14270 nt!POP_ETW_ADPM_SESSION_CLOSED = <no type information>
+fffff806`e77bd368 nt!PopAdaptiveGetRemoteSessionState (PopAdaptiveGetRemoteSessionState)
+fffff806`e7893e70 nt!PopBroadcastSessionInfo (PopBroadcastSessionInfo)
+fffff806`e6e21e60 nt!POP_ETW_SYSTEM_SESSION_SWITCH = <no type information>
+fffff806`e78cb140 nt!PopSessionConnectionChange (PopSessionConnectionChange)
+fffff806`e78ac910 nt!PopSleepstudyStartNextSession (PopSleepstudyStartNextSession)
+fffff806`e78cb088 nt!PopSessionConnected (PopSessionConnected)
+fffff806`e77bc5c8 nt!PopSetSessionUserStatus (PopSetSessionUserStatus)
+fffff806`e75622d0 nt!PopAdaptiveStandbySessionStop (PopAdaptiveStandbySessionStop)
+fffff806`e78b8240 nt!PopPowerRequestNotifyTtmSessionInitialized (PopPowerRequestNotifyTtmSessionInitialized)
+fffff806`e7562800 nt!PopAdaptiveStandbyTraceSessionMetadata (PopAdaptiveStandbyTraceSessionMetadata)
+fffff806`e6e1c428 nt!POP_ETW_EVENT_SESSION_DISPLAY_OFF = <no type information>
+fffff806`e77bbd90 nt!PopProcessSessionDisplayStateChange (PopProcessSessionDisplayStateChange)
+fffff806`e788a9bc nt!PopDiagTraceSessionStateCounted (PopDiagTraceSessionStateCounted)
+fffff806`e77bb45c nt!PopAdaptiveGetSessionStateUnsafe (PopAdaptiveGetSessionStateUnsafe)
+fffff806`e7879cc8 nt!PopSleepstudySendSessionChangeEvent (PopSleepstudySendSessionChangeEvent)
+fffff806`e73d7a80 nt!PopPowerAggregatorSessionSwitchTimerCallback (PopPowerAggregatorSessionSwitchTimerCallback)
+fffff806`e7d0be80 nt!PopSessionSpecificLists = <no type information>
+fffff806`e77ba710 nt!PopFreeSessionState (PopFreeSessionState)
+fffff806`e6e14280 nt!POP_ETW_ADPM_SESSION_CREATED = <no type information>
+fffff806`e7d09f40 nt!PopSleepstudySessionLock = <no type information>
+fffff806`e7d06620 nt!PopDirectedDripsDiagSessionContext = <no type information>
+lkd> x nt!Pop*Reg*
+fffff806`e72ac224 nt!PopReadRegKeyValue (void)
+fffff806`e77bc414 nt!PopPowerAggregatorDiagTraceHandleIntent (void)
+fffff806`e77bd298 nt!PopPowerAggregatorAreTargetStatesEqual (void)
+fffff806`e77b84c8 nt!PopPowerAggregatorDetermineTargetSystemPowerState (void)
+fffff806`e72adefc nt!PopPlRegisterDevice (void)
+fffff806`e7705dbc nt!PopEtAggregateGet (void)
+fffff806`e77ba124 nt!PopPowerAggregatorDiagTraceEvent (PopPowerAggregatorDiagTraceEvent)
+fffff806`e7c07500 nt!PopHiberPersistedRegValueDatabase = <no type information>
+fffff806`e785909c nt!PopDiagTraceFxDeviceRegistration (PopDiagTraceFxDeviceRegistration)
+fffff806`e78a24d0 nt!PopPowerAggregatorDiagTraceSuspendResume (PopPowerAggregatorDiagTraceSuspendResume)
+fffff806`e6e14250 nt!POP_ETW_EVENT_POWER_AGGREGATOR_WORKER_START = <no type information>
+fffff806`e72a06f0 nt!PopPlRegisterComponent (PopPlRegisterComponent)
+fffff806`e6e1e410 nt!PopThermalLoggingDefaultRegKey = <no type information>
+fffff806`e78c7988 nt!PopPowerAggregatorForceSessionSwitch (PopPowerAggregatorForceSessionSwitch)
+fffff806`e78be960 nt!PopFxTracePerfRegistration (PopFxTracePerfRegistration)
+fffff806`e6e10e28 nt!POP_ETW_EVENT_REGISTERSYSTEMSTATE = <no type information>
+fffff806`e72ceeb4 nt!PopPluginRegisterCrashdumpDevice (PopPluginRegisterCrashdumpDevice)
+fffff806`e73d25f0 nt!PopPluginUnregisterDevice (PopPluginUnregisterDevice)
+fffff806`e7dc4320 nt!PopTimerRebaseThresholdRegValue = <no type information>
+fffff806`e74f7384 nt!PopPowerAggregatorNotifyDisplayPoweredOn (PopPowerAggregatorNotifyDisplayPoweredOn)
+fffff806`e755656c nt!PopDiagTraceFxPerfRegistration (PopDiagTraceFxPerfRegistration)
+fffff806`e7dc5f98 nt!PopHiberBootOptimizationEnabledReg = <no type information>
+fffff806`e6e10a30 nt!PopOneSettingPowerButtonLiveDumpRegName = <no type information>
+fffff806`e754c4d4 nt!PopRegisterCoolingExtensionProtection (PopRegisterCoolingExtensionProtection)
+fffff806`e73d7930 nt!PopPowerAggregatorDozeTimerCallback (PopPowerAggregatorDozeTimerCallback)
+fffff806`e6e141e8 nt!PopSystemPowerPolicyRegName = <no type information>
+fffff806`e7858dfc nt!PopFxTraceDeviceRegistration (PopFxTraceDeviceRegistration)
+fffff806`e7559cb0 nt!PopPowerAggregatorSessionSwitchWorker (PopPowerAggregatorSessionSwitchWorker)
+fffff806`e6e291b0 nt!PopShutdownPowerOffPolicyRegName = <no type information>
+fffff806`e6e1c658 nt!POP_ETW_EVENT_POWER_AGGREGATOR_PDC_SLEEP_TRANSITION = <no type information>
+fffff806`e7d09efc nt!PopPowerAggregatorRestrictedStandbyDozeTimeoutSeconds = <no type information>
+fffff806`e6e1c558 nt!POP_ETW_EVENT_PLUGIN_REGISTRATION = <no type information>
+fffff806`e7d09f08 nt!PopPowerAggregatorIdleDisabledPowerRequest = <no type information>
+fffff806`e7c074f0 nt!PopCoalRegistrationList = <no type information>
+fffff806`e6e29160 nt!PopHiberbootEnabledRegName = <no type information>
+fffff806`e78376a0 nt!PopPowerAggregatorHandleActiveIntent (PopPowerAggregatorHandleActiveIntent)
+fffff806`e7559ab0 nt!PopPowerAggregatorNotifySystemWake (PopPowerAggregatorNotifySystemWake)
+fffff806`e7896c70 nt!PopPepRegisterDevice (PopPepRegisterDevice)
+fffff806`e7563790 nt!PopBcdRegenerateResumeObject (PopBcdRegenerateResumeObject)
+fffff806`e6e22800 nt!POP_ETW_EVENT_PERFORMANCE_STATE_SET_REGISTRATION_RUNDOWN = <no type information>
+fffff806`e6e1a6d8 nt!POP_ETW_EVENT_COMPONENT_REGISTRATION_RUNDOWN = <no type information>
+fffff806`e75590f0 nt!PopPowerAggregatorAllowModernStandbyPromotion (PopPowerAggregatorAllowModernStandbyPromotion)
+fffff806`e6e10930 nt!PopOneSettingPowerButtonBugcheckRegName = <no type information>
+fffff806`e75598c0 nt!PopPowerAggregatorInvalidStateHandler (PopPowerAggregatorInvalidStateHandler)
+fffff806`e6e1e918 nt!POP_ETW_EVENT_PERFORMANCE_STATE_REGISTRATION_RUNDOWN = <no type information>
+fffff806`e77bc260 nt!PopPowerAggregatorRecordIntent (PopPowerAggregatorRecordIntent)
+fffff806`e6e1c388 nt!PopSimulateHiberBugcheckRegName = <no type information>
+fffff806`e7874bb4 nt!PopFxUnregisterDevice (PopFxUnregisterDevice)
+fffff806`e77025f8 nt!PopPowerAggregatorDisengageModernStandby (PopPowerAggregatorDisengageModernStandby)
+fffff806`e7552cb0 nt!PopQueryHiberPersistedRegValue (PopQueryHiberPersistedRegValue)
+fffff806`e7559514 nt!PopPowerAggregatorEngageModernStandby (PopPowerAggregatorEngageModernStandby)
+fffff806`e7702ee4 nt!PopPowerAggregatorDiagTraceInternalStateChange (PopPowerAggregatorDiagTraceInternalStateChange)
+fffff806`e7a6809c nt!PopPowerAggregatorInitialize (PopPowerAggregatorInitialize)
+fffff806`e6e10a70 nt!PopPowerButtonBugcheckRegName = <no type information>
+fffff806`e75596e0 nt!PopPowerAggregatorHandleModernStandbyIntent (PopPowerAggregatorHandleModernStandbyIntent)
+fffff806`e789b2f0 nt!PopPowerAggregatorNotifyPdcSleepTransition (PopPowerAggregatorNotifyPdcSleepTransition)
+fffff806`e77051dc nt!PopEtAggregateKeyCleanup (PopEtAggregateKeyCleanup)
+fffff806`e7702c54 nt!PopPowerAggregatorNotifyCsStateExited (PopPowerAggregatorNotifyCsStateExited)
+fffff806`e7551344 nt!PopFreeRegistration (PopFreeRegistration)
+fffff806`e73d0e90 nt!PopFxDeviceCriticalRegionLeave (PopFxDeviceCriticalRegionLeave)
+fffff806`e7559660 nt!PopPowerAggregatorGetCurrentTargetState (PopPowerAggregatorGetCurrentTargetState)
+fffff806`e72d1d78 nt!PopPlRegisterPowerPlane (PopPlRegisterPowerPlane)
+fffff806`e75597f0 nt!PopPowerAggregatorHandleSystemTransitionEndIntent (PopPowerAggregatorHandleSystemTransitionEndIntent)
+fffff806`e6e10a98 nt!PopPowerButtonLiveDumpRegName = <no type information>
+fffff806`e77bc0e8 nt!PopPowerAggregatorHandleIntentUnsafe (PopPowerAggregatorHandleIntentUnsafe)
+fffff806`e7d064a0 nt!PopDirectedDripsDiagTraceHandleRegistered = <no type information>
+fffff806`e7d088e0 nt!PopPowerAggregatorLock = <no type information>
+fffff806`e72d9a00 nt!PopPlUnregisterDevice (PopPlUnregisterDevice)
+fffff806`e7705254 nt!PopEtAggregateKeyCopy (PopEtAggregateKeyCopy)
+fffff806`e6e22278 nt!POP_ETW_EVENT_POWER_AGGREGATOR_DOZE_TIMER_ARMED = <no type information>
+fffff806`e75604c0 nt!PopAdaptiveStandbyCalculateBatteryRegion (PopAdaptiveStandbyCalculateBatteryRegion)
+fffff806`e77025b0 nt!PopPowerAggregatorModernStandbyExitStateHandler (PopPowerAggregatorModernStandbyExitStateHandler)
+fffff806`e7559b70 nt!PopPowerAggregatorScreenOffActiveToScreenOffStateHandler (PopPowerAggregatorScreenOffActiveToScreenOffStateHandler)
+fffff806`e7c0c3c0 nt!PopAdaptiveStandbyRegions = <no type information>
+fffff806`e7dc5f9c nt!PopAggressiveStandbyActionsRegValue = <no type information>
+fffff806`e6e0b300 nt!PopAdaptiveStandbyRegionStrings = <no type information>
+fffff806`e77060c4 nt!PopEtAggregateFind (PopEtAggregateFind)
+fffff806`e7859194 nt!PopDiagTraceFxComponentRegistration (PopDiagTraceFxComponentRegistration)
+fffff806`e7559a78 nt!PopPowerAggregatorNotifyResiliencyReached (PopPowerAggregatorNotifyResiliencyReached)
+fffff806`e73dc960 nt!PopPlCommitPowerPlaneRegistration (PopPlCommitPowerPlaneRegistration)
+fffff806`e7559af0 nt!PopPowerAggregatorPowerSettingCallback (PopPowerAggregatorPowerSettingCallback)
+fffff806`e73dc684 nt!PopFxAcpiRegisterDevice (PopFxAcpiRegisterDevice)
+fffff806`e7dd7d20 nt!PopPowerAggregatorIntentHandlers = <no type information>
+fffff806`e77055fc nt!PopEtEnergyTrackerUpdateAggregate (PopEtEnergyTrackerUpdateAggregate)
+fffff806`e7dc417c nt!PopHiberFileTypeReg = <no type information>
+fffff806`e6e1a6f8 nt!POP_ETW_EVENT_DEVICE_REGISTRATION_RUNDOWN = <no type information>
+fffff806`e7c675d4 nt!PopDiagSleepStudyHandleRegistered = <no type information>
+fffff806`e7559b90 nt!PopPowerAggregatorScreenOffEnterStateHandler (PopPowerAggregatorScreenOffEnterStateHandler)
+fffff806`e6e28fc0 nt!PopThermalLoggingVolatileRegKey = <no type information>
+fffff806`e7559de0 nt!PopPowerAggregatorSystemTransitionEnterStateHandler (PopPowerAggregatorSystemTransitionEnterStateHandler)
+fffff806`e7d0d1a0 nt!PopCoalRegistrationListLock = <no type information>
+fffff806`e77b9fd8 nt!PopPowerAggregatorInvokeStateMachine (PopPowerAggregatorInvokeStateMachine)
+fffff806`e7c674d0 nt!PopPoFxSystemIrpWaitForReportDevicePoweredReg = <no type information>
+fffff806`e75596b0 nt!PopPowerAggregatorHandleDirectedDripsIntent (PopPowerAggregatorHandleDirectedDripsIntent)
+fffff806`e77bd94c nt!PopPowerAggregatorAllocateLogEntry (PopPowerAggregatorAllocateLogEntry)
+fffff806`e73dbf60 nt!PopPepRegisterComponentPerfStates (PopPepRegisterComponentPerfStates)
+fffff806`e729a2b8 nt!PopDisksRegisteredForIdle (PopDisksRegisteredForIdle)
+fffff806`e6e1c1d0 nt!PopRegKey = <no type information>
+fffff806`e78a9580 nt!PopPowerAggregatorDisplayPoweringOnStateHandler (PopPowerAggregatorDisplayPoweringOnStateHandler)
+fffff806`e6e143d0 nt!POP_ETW_EVENT_POWER_AGGREGATOR_HANDLE_INTENT = <no type information>
+fffff806`e78beff8 nt!PopPdcRegister (PopPdcRegister)
+fffff806`e73d7960 nt!PopPowerAggregatorHandleResumeIntent (PopPowerAggregatorHandleResumeIntent)
+fffff806`e6e1c568 nt!POP_ETW_EVENT_PLUGIN_REGISTRATION_RUNDOWN = <no type information>
+fffff806`e755282c nt!PopInitHiberPersistedRegValues (PopInitHiberPersistedRegValues)
+fffff806`e7559d64 nt!PopPowerAggregatorSnapDiagnosticContext (PopPowerAggregatorSnapDiagnosticContext)
+fffff806`e77ba5ac nt!PopPowerAggregatorScheduleWorker (PopPowerAggregatorScheduleWorker)
+fffff806`e7874a30 nt!PopFxUnregisterDeviceOrWait (PopFxUnregisterDeviceOrWait)
+fffff806`e7d062b8 nt!PopFxAcpiPepRegistered = <no type information>
+fffff806`e74f596c nt!PopSetHiberPersistedRegValue (PopSetHiberPersistedRegValue)
+fffff806`e755939c nt!PopPowerAggregatorEngageAggressiveStandbyActions (PopPowerAggregatorEngageAggressiveStandbyActions)
+fffff806`e6e28f70 nt!PopControlStateSepRegKeyId = <no type information>
+fffff806`e77ba090 nt!PopPowerAggregatorDiagTraceHandlerInvoke (PopPowerAggregatorDiagTraceHandlerInvoke)
+fffff806`e74f9a60 nt!PopFxPlatformRegisterInterface (PopFxPlatformRegisterInterface)
+fffff806`e7c67611 nt!PopBatteryEtwRegistered = <no type information>
+fffff806`e74f53dc nt!PopPowerAggregatorEvaluateDozeTimers (PopPowerAggregatorEvaluateDozeTimers)
+fffff806`e7dc40fc nt!PopAllowHibernateReg = <no type information>
+fffff806`e6e28fa8 nt!PopPowerButtonStateSepRegKeyId = <no type information>
+fffff806`e6e1bf20 nt!PopHiberbootGroupPolicyRegKey = <no type information>
+fffff806`e788a7c0 nt!PopDiagTracePowerSettingRegistration (PopDiagTracePowerSettingRegistration)
+fffff806`e73dcd80 nt!PopPlRegisterDeviceIterator (PopPlRegisterDeviceIterator)
+fffff806`e78a2428 nt!PopPowerAggregatorNotifySuspendResume (PopPowerAggregatorNotifySuspendResume)
+fffff806`e754bc44 nt!PopRegisterTargetDeviceProtection (PopRegisterTargetDeviceProtection)
+fffff806`e73cd820 nt!PopRegisterEnergyEstimation (PopRegisterEnergyEstimation)
+fffff806`e7d0be60 nt!PopRegisteredPowerSettingCallbacks = <no type information>
+fffff806`e7d0c194 nt!PopCheckpointSystemSleepEnabledReg = <no type information>
+fffff806`e74f668c nt!PopPowerAggregatorDisengageDirectedDrips (PopPowerAggregatorDisengageDirectedDrips)
+fffff806`e7c675bd nt!PopTriggerDiagHandleRegistered = <no type information>
+fffff806`e789b3bc nt!PopPowerAggregatorDiagTracePdcSleepTransition (PopPowerAggregatorDiagTracePdcSleepTransition)
+fffff806`e7c675bc nt!PopDiagHandleRegistered = <no type information>
+fffff806`e755914c nt!PopPowerAggregatorDozeTimerArm (PopPowerAggregatorDozeTimerArm)
+fffff806`e6e1e8e0 nt!POP_ETW_EVENT_POWER_AGGREGATOR_DOZE_TIMER_DISARMED = <no type information>
+fffff806`e6e14240 nt!POP_ETW_EVENT_POWER_AGGREGATOR_WORKER_END = <no type information>
+fffff806`e73dc790 nt!PopFxAcpiUnregisterDevice (PopFxAcpiUnregisterDevice)
+fffff806`e6e291f0 nt!PopShutdownPowerOffPolicyRegKey = <no type information>
+fffff806`e74f5398 nt!PopPowerAggregatorNotifyAcDcStateChange (PopPowerAggregatorNotifyAcDcStateChange)
+fffff806`e7559060 nt!PopPowerAggregatorActiveToScreenOffStateHandler (PopPowerAggregatorActiveToScreenOffStateHandler)
+fffff806`e7d0cfa8 nt!PopHibernatePersistedRegLocation = <no type information>
+fffff806`e73d7a00 nt!PopPowerAggregatorHandleSuspendIntent (PopPowerAggregatorHandleSuspendIntent)
+fffff806`e7dc6248 nt!PopHiberForceDisabledReg = <no type information>
+fffff806`e74f555c nt!PopPowerAggregatorDiagTraceDozeTimerDisarmed (PopPowerAggregatorDiagTraceDozeTimerDisarmed)
+fffff806`e77050b0 nt!PopEtEnergyTrackerCleanupAggregates (PopEtEnergyTrackerCleanupAggregates)
+fffff806`e72c1bbc nt!PopThermalWriteShutdownToRegistry (PopThermalWriteShutdownToRegistry)
+fffff806`e74f54c4 nt!PopPowerAggregatorDozeTimerDisarm (PopPowerAggregatorDozeTimerDisarm)
+fffff806`e6e21850 nt!POP_ETW_EVENT_DEVICE_UNREGISTRATION = <no type information>
+fffff806`e754c8c8 nt!PopDirectedDripsQueryRegistryValues (PopDirectedDripsQueryRegistryValues)
+fffff806`e7880ea0 nt!PopPowerAggregatorVoidStateHandler (PopPowerAggregatorVoidStateHandler)
+fffff806`e74f5aac nt!PopPowerAggregatorDisengageAggressiveStandbyActions (PopPowerAggregatorDisengageAggressiveStandbyActions)
+fffff806`e6e14230 nt!POP_ETW_EVENT_POWER_AGGREGATOR_PDC_PHASES_EXITED = <no type information>
+fffff806`e72ad028 nt!PopUnregisterPowerSettingCallback (PopUnregisterPowerSettingCallback)
+fffff806`e7559f40 nt!PopPowerAggregatorTriggerAdaptiveAction (PopPowerAggregatorTriggerAdaptiveAction)
+fffff806`e7d08900 nt!PopPowerAggregatorContext = <no type information>
+fffff806`e7559914 nt!PopPowerAggregatorNotifyPdcPhaseState (PopPowerAggregatorNotifyPdcPhaseState)
+fffff806`e7d07680 nt!PopDelayedPdcRegistrationWorkItem = <no type information>
+fffff806`e7702bd0 nt!PopPowerAggregatorSetCurrentState (PopPowerAggregatorSetCurrentState)
+fffff806`e6e1df98 nt!POP_ETW_EVENT_POWER_AGGREGATOR_SUSPEND_RESUME = <no type information>
+fffff806`e77b9f50 nt!PopPowerAggregatorWorker (PopPowerAggregatorWorker)
+fffff806`e73d24f8 nt!PopPluginRegisterComponentPerfStates (PopPluginRegisterComponentPerfStates)
+fffff806`e6e1c358 nt!PopSimulateRegKey = <no type information>
+fffff806`e7dc428c nt!PopHiberEnabledDefaultReg = <no type information>
+fffff806`e77b8450 nt!PopPowerAggregatorHandleSystemTransitionIntent (PopPowerAggregatorHandleSystemTransitionIntent)
+fffff806`e7874d78 nt!PopPepUnregisterDevice (PopPepUnregisterDevice)
+fffff806`e7559e80 nt!PopPowerAggregatorSystemTransitionExitStateHandler (PopPowerAggregatorSystemTransitionExitStateHandler)
+fffff806`e7d09f10 nt!PopPowerAggregatorUmpoInitialized = <no type information>
+fffff806`e7702b80 nt!PopPowerAggregatorScreenOffActiveToActiveStateHandler (PopPowerAggregatorScreenOffActiveToActiveStateHandler)
+fffff806`e7702758 nt!PopPowerAggregatorEnterScreenOff (PopPowerAggregatorEnterScreenOff)
+fffff806`e6e14260 nt!POP_ETW_EVENT_POWER_AGGREGATOR_HANDLER_INVOKE = <no type information>
+fffff806`e7d09f00 nt!PopPowerAggregatorIdleDisabledPowerRequestTaken = <no type information>
+fffff806`e7dc4268 nt!PopHiberFileTypeDefaultReg = <no type information>
+fffff806`e77bc080 nt!PopPowerAggregatorHandleIntent (PopPowerAggregatorHandleIntent)
+fffff806`e7dc4110 nt!PopHiberEnabledReg = <no type information>
+fffff806`e73dbfe0 nt!PopPepStartDeviceUnregisterActivity (PopPepStartDeviceUnregisterActivity)
+fffff806`e75598b0 nt!PopPowerAggregatorHandleSystemTransitionStartIntent (PopPowerAggregatorHandleSystemTransitionStartIntent)
+fffff806`e72c3828 nt!PopPluginRegisterDevice (PopPluginRegisterDevice)
+fffff806`e72c36c0 nt!PopFxRegisterDeviceWithPep (PopFxRegisterDeviceWithPep)
+fffff806`e73d7a80 nt!PopPowerAggregatorSessionSwitchTimerCallback (PopPowerAggregatorSessionSwitchTimerCallback)
+fffff806`e7dc40e8 nt!PopHiberChecksummingEnabledReg = <no type information>
+fffff806`e6e1c3c0 nt!PopSimulateRegName = <no type information>
+fffff806`e7549570 nt!PopOpenPersistedRegistryKey (PopOpenPersistedRegistryKey)
+fffff806`e6e29268 nt!PopAwayModePolicyRegName = <no type information>
+fffff806`e6e1a708 nt!POP_ETW_EVENT_DEVICE_REGISTRATION = <no type information>
+fffff806`e6e28f80 nt!PopLidReliabilityStateRegName = <no type information>
+fffff806`e754ebf0 nt!PopFxRegisterDeviceWorker (PopFxRegisterDeviceWorker)
+fffff806`e77bd300 nt!PopPowerAggregatorIsAtTargetState (PopPowerAggregatorIsAtTargetState)
+fffff806`e6e1a6e8 nt!POP_ETW_EVENT_COMPONENT_REGISTRATION = <no type information>
+fffff806`e73dbd18 nt!PopPepPlatformStateRegistered (PopPepPlatformStateRegistered)
+fffff806`e6e22f60 nt!POP_ETW_EVENT_POWER_AGGREGATOR_DOZE_TIMER_TRIGGERED = <no type information>
+fffff806`e6e22d60 nt!POP_ETW_EVENT_PERFORMANCE_STATE_SET_REGISTRATION = <no type information>
+fffff806`e73dd244 nt!PopPlUnregisterComponent (PopPlUnregisterComponent)
+fffff806`e75565fc nt!PopDiagTraceFxPerfSetRegistration (PopDiagTraceFxPerfSetRegistration)
+fffff806`e77026e0 nt!PopPowerAggregatorScreenOffExitStateHandler (PopPowerAggregatorScreenOffExitStateHandler)
+fffff806`e6e11bb0 nt!POP_ETW_EVENT_POWER_AGGREGATOR_INTERNAL_STATE_CHANGE = <no type information>
+fffff806`e73d0e60 nt!PopFxDeviceCriticalRegionEnter (PopFxDeviceCriticalRegionEnter)
+fffff806`e7dd7ed0 nt!PopPowerAggregatorTargetStateContexts = <no type information>
+fffff806`e7130fec nt!PopDiagTraceRegisterSystemState (PopDiagTraceRegisterSystemState)
+fffff806`e754e534 nt!PopFxRegisterComponentPerfStates (PopFxRegisterComponentPerfStates)
+fffff806`e6e1e928 nt!POP_ETW_EVENT_PERFORMANCE_STATE_REGISTRATION = <no type information>
+fffff806`e7559220 nt!PopPowerAggregatorDozeTimerWorker (PopPowerAggregatorDozeTimerWorker)
+fffff806`e6e29290 nt!PopControlVolatileRegKey = <no type information>
+fffff806`e73d1a68 nt!PopFxRegisterPluginEx (PopFxRegisterPluginEx)
+fffff806`e7d09ef8 nt!PopPowerAggregatorOneWayEntry = <no type information>
+fffff806`e7d0d720 nt!PopFxDeviceRegisterHead = <no type information>
+fffff806`e75598d0 nt!PopPowerAggregatorModernStandbyEnterStateHandler (PopPowerAggregatorModernStandbyEnterStateHandler)
+fffff806`e754e950 nt!PopFxRegisterDevice (PopFxRegisterDevice)
+fffff806`e75563dc nt!PopDiagTraceFxDeviceUnregistration (PopDiagTraceFxDeviceUnregistration)
+fffff806`e7dc6258 nt!PopHiberbootEnabledReg = <no type information>
+fffff806`e6e29188 nt!PopUndockPolicyRegName = <no type information>
+fffff806`e6e29120 nt!PopProcessorThrottleLogIntervalRegKey = <no type information>
+fffff806`e755d450 nt!PopDelayedPdcRegistrationWorker (PopDelayedPdcRegistrationWorker)
+fffff806`e7d0d220 nt!PopCoalescingRegistration = <no type information>
+fffff806`e7704fac nt!PopEtAggregateKeyCopyFromProcess (PopEtAggregateKeyCopyFromProcess)
+fffff806`e7895f94 nt!PopDiagTraceFxPluginRegistration (PopDiagTraceFxPluginRegistration)
+lkd> x nt!Po*Watchdog*
+fffff806`e755fa60 nt!PopWin32CalloutWatchdogCallback (PopWin32CalloutWatchdogCallback)
+fffff806`e73d03d0 nt!PoFxRegisterDripsWatchdogCallback (PoFxRegisterDripsWatchdogCallback)
+fffff806`e7240f7c nt!PopEnableIrpWatchdog (PopEnableIrpWatchdog)
+fffff806`e7a3371c nt!PopDripsWatchdogInitialize (PopDripsWatchdogInitialize)
+fffff806`e7240d30 nt!PoQueryWatchdogTime (PoQueryWatchdogTime)
+fffff806`e73d3990 nt!PopPowerActionWatchdog (PopPowerActionWatchdog)
+fffff806`e770292c nt!PopArmIdlePhaseWatchdog (PopArmIdlePhaseWatchdog)
+fffff806`e755fe54 nt!PopDripsWatchdogCheckHwDivergence (PopDripsWatchdogCheckHwDivergence)
+fffff806`e6e22400 nt!POP_ETW_EVENT_IRP_WATCHDOG_TRIGGERED = <no type information>
+fffff806`e7a337fc nt!PopDripsWatchdogInitializeCallbackTimer (PopDripsWatchdogInitializeCallbackTimer)
+fffff806`e7dc5e48 nt!PopPowerActionTransitioningWatchdogTimeout = <no type information>
+fffff806`e72516a0 nt!PopFxEnableWorkOrderWatchdog (PopFxEnableWorkOrderWatchdog)
+fffff806`e7d07640 nt!PopPdcIdlePhaseWatchdogContext = <no type information>
+fffff806`e7c0b518 nt!PopWin32kCalloutWatchdogTimeoutSeconds = <no type information>
+fffff806`e71160b0 nt!PopFxDisableWorkOrderWatchdog (PopFxDisableWorkOrderWatchdog)
+fffff806`e7dc4170 nt!PopWatchdogResumeTimeout = <no type information>
+fffff806`e6e2a760 nt!PopBlackBoxPoPowerWatchdogGuid = <no type information>
+fffff806`e73d89f0 nt!PopWatchdogDpc (PopWatchdogDpc)
+fffff806`e754e118 nt!PopFxInvokeDripsWatchdogCallback (PopFxInvokeDripsWatchdogCallback)
+fffff806`e73cd0d8 nt!PopIrpWatchdogBugcheck (PopIrpWatchdogBugcheck)
+fffff806`e7258bdc nt!PopSetWatchdog (PopSetWatchdog)
+fffff806`e75664b0 nt!PopDripsWatchdogTakeAction (PopDripsWatchdogTakeAction)
+fffff806`e75663d8 nt!PopDeepSleepWatchdogTakeAction (PopDeepSleepWatchdogTakeAction)
+fffff806`e7dc434c nt!PopPowerActionResumingWatchdogTimeoutDefault = <no type information>
+fffff806`e7a32e78 nt!PopWatchdogInit (PopWatchdogInit)
+fffff806`e7258fa8 nt!PopUpdateWatchdogNoWorkersEvent (PopUpdateWatchdogNoWorkersEvent)
+fffff806`e7c0c340 nt!PopDripsWatchdogDebounceInterval = <no type information>
+fffff806`e72bce5c nt!PopSetPowerActionWatchdogState (PopSetPowerActionWatchdogState)
+fffff806`e7c0b380 nt!PopFxWatchdogWorkOrderTimeout = <no type information>
+fffff806`e72bf450 nt!PopIdlePhaseWatchdogCallback (PopIdlePhaseWatchdogCallback)
+fffff806`e729f5cc nt!PopDisableIrpWatchdog (PopDisableIrpWatchdog)
+fffff806`e788b370 nt!PopDripsWatchdogInvokeDeviceCallbacks (PopDripsWatchdogInvokeDeviceCallbacks)
+fffff806`e7dc5e44 nt!PopPowerActionResumingWatchdogTimeout = <no type information>
+fffff806`e755ff20 nt!PopDripsWatchdogDiagnosticWorker (PopDripsWatchdogDiagnosticWorker)
+fffff806`e7dc426c nt!PopDripsWatchdogTimeout = <no type information>
+fffff806`e73d89d0 nt!PopResolveWatchdogParam (PopResolveWatchdogParam)
+fffff806`e755fae0 nt!PopDripsWatchdogCallbackHandler (PopDripsWatchdogCallbackHandler)
+fffff806`e6e21c28 nt!POP_ETW_EVENT_CS_DRIPS_WATCHDOG = <no type information>
+fffff806`e7827d48 nt!PopDripsWatchdogStopWatchdog (PopDripsWatchdogStopWatchdog)
+fffff806`e7a32868 nt!PopCreateIdlePhaseWatchdog (PopCreateIdlePhaseWatchdog)
+fffff806`e73e11b0 nt!PopWatchdogDumpControlRoutine (PopWatchdogDumpControlRoutine)
+fffff806`e7c67400 nt!PopBsdPowerWatchdogArmed = <no type information>
+fffff806`e6e21ab0 nt!POP_ETW_EVENT_CS_DEEP_SLEEP_WATCHDOG = <no type information>
+fffff806`e7dc4324 nt!PopDripsWatchdogAction = <no type information>
+fffff806`e73d1080 nt!PopFxDirectedWorkOrderWatchdog (PopFxDirectedWorkOrderWatchdog)
+fffff806`e77bb330 nt!PopInvokeWin32CalloutWithWatchdog (PopInvokeWin32CalloutWithWatchdog)
+fffff806`e73d22f0 nt!PopFxWorkOrderWatchdog (PopFxWorkOrderWatchdog)
+fffff806`e72c8f64 nt!PopDripsWatchdogGetDeviceActiveTime (PopDripsWatchdogGetDeviceActiveTime)
+fffff806`e7d075f0 nt!PopWatchdogLock = <no type information>
+fffff806`e7d075e0 nt!PopWatchdogList = <no type information>
+fffff806`e7c67150 nt!PopBsdLastPowerWatchdogStage = <no type information>
+fffff806`e73cd0c0 nt!PopIrpWatchdog (PopIrpWatchdog)
+fffff806`e76b5444 nt!PopDripsWatchdogAcquireContextLock (PopDripsWatchdogAcquireContextLock)
+fffff806`e73d4728 nt!PopDiagTraceCsDripsWatchdog (PopDiagTraceCsDripsWatchdog)
+fffff806`e7dc408c nt!PopWatchdogSleepTimeout = <no type information>
+fffff806`e7dc4350 nt!PopPowerActionTransitioningWatchdogTimeoutDefault = <no type information>
+fffff806`e72b4040 nt!PopDripsWatchdogTimerCallback (PopDripsWatchdogTimerCallback)
+fffff806`e7c01ce0 nt!PopWatchdogDumpControlContext = <no type information>
+fffff806`e73d8a90 nt!PopWatchdogWorker (PopWatchdogWorker)
+fffff806`e7dc5fa8 nt!PopWin32CalloutWatchdogBugcheckEnabled = <no type information>
+fffff806`e77bc3c4 nt!PopResetIdlePhaseWatchdogDiagnosticContext (PopResetIdlePhaseWatchdogDiagnosticContext)
+fffff806`e72c998c nt!PopRecordPowerWatchdogBlackboxInformation (PopRecordPowerWatchdogBlackboxInformation)
+fffff806`e7c0b51c nt!PopPdcIdlePhaseDefaultWatchdogTimeoutSeconds = <no type information>
+fffff806`e755fc80 nt!PopDripsWatchdogCallbackWorker (PopDripsWatchdogCallbackWorker)
+fffff806`e7827db4 nt!PopDripsWatchdogStartWatchdog (PopDripsWatchdogStartWatchdog)
+fffff806`e7d07080 nt!PopDripsWatchdogContext = <no type information>
+fffff806`e72410d4 nt!PopComputeWatchdogTimeout (PopComputeWatchdogTimeout)
+fffff806`e7d0d040 nt!PopWatchdogTimerCount = <no type information>
+fffff806`e7131c98 nt!PopCompleteIrpWatchdog (PopCompleteIrpWatchdog)
+fffff806`e7827f14 nt!PopDripsWatchdogScheduleNextTimer (PopDripsWatchdogScheduleNextTimer)
+fffff806`e77bbe18 nt!PopDisarmIdlePhaseWatchdog (PopDisarmIdlePhaseWatchdog)
+fffff806`e7553f7c nt!PopUpdatePowerActionWatchdogTimeouts (PopUpdatePowerActionWatchdogTimeouts)
+fffff806`e73d30e8 nt!PopPowerSettingPendingUpdateWatchdog (PopPowerSettingPendingUpdateWatchdog)
+fffff806`e73d4520 nt!PopDiagTraceCsDeepSleepWatchdog (PopDiagTraceCsDeepSleepWatchdog)
+fffff806`e7560150 nt!PopDripsWatchdogUpdateMetrics (PopDripsWatchdogUpdateMetrics)
+fffff806`e6e23048 nt!POP_ETW_EVENT_CS_DRIPS_WATCHDOG_PERFTRACK = <no type information>
+fffff806`e795f790 nt!PopBuildDeviceNotifyListWatchdog (PopBuildDeviceNotifyListWatchdog)
+fffff806`e73d4918 nt!PopDiagTraceCsDripsWatchdogPerfTrack (PopDiagTraceCsDripsWatchdogPerfTrack)
+fffff806`e7560128 nt!PopDripsWatchdogStopTimer (PopDripsWatchdogStopTimer)
+fffff806`e7d07060 nt!PopDripsWatchdogDebounceTickInterval = <no type information>
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
