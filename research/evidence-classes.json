@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T00:17:44.577652Z",
+  "generated_utc": "2026-04-07T00:33:48.198174Z",
   "summary": {
     "total_records": 310,
     "class_counts": {
@@ -6502,7 +6502,7 @@
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline cannot exercise a real hibernation trigger (`vm_firmware_limitation`), so runtime promotion stays decision-gated.",
+      "gating_reason": "Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real hibernation trigger (`vm_firmware_limitation`): the older VMware lane and the newer KVM reboot observation both show h...",
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,

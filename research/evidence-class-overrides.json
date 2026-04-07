@@ -10,7 +10,7 @@
       "record_id": "power.control.hibernate-enabled-default",
       "evidence_class": "B",
       "reason_code": "vm_firmware_limitation",
-      "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline cannot exercise a real hibernation trigger (`vm_firmware_limitation`), so runtime promotion stays decision-gated."
+      "gating_reason": "Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real hibernation trigger (`vm_firmware_limitation`): the older VMware lane and the newer KVM reboot observation both show hibernation unavailable on the guest."
     },
     {
       "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
