@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T00:33:48.364417Z",
+  "generated_utc": "2026-04-07T00:47:59.390137Z",
   "summary": {
     "total_records": 310,
     "validated": 255,
@@ -44687,7 +44687,7 @@
       "category": "Power",
       "area": "Raw Power Manager Registry",
       "scope": "device",
-      "summary": "Validated decision-gated record for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 first checked modern standby capability before attempting any DRIPS-exit trigger. That capability gate showed the current VMware baseline only exposes Standby (S1), so a real DRIPS / Modern Standby exit trigger cannot be exercised here and the record remains decision-gated by a VM standby limitation rather than by a dead-flag conclusion.",
+      "summary": "Validated decision-gated record for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 first checked modern standby capability before attempting any DRIPS-exit trigger. That capability gate showed the older VMware baseline does not expose S0 Low Power Idle / Modern Standby. A newer KVM reboot observation then confirmed that TimerRebaseThresholdOnDripsExit stays `60` across a real reboot while `powercfg /a` still reports S0 Low Power Idle unavailable before and after boot. The record therefore remains decision-gated by a virtualized-baseline standby limitation rather than by a dead-flag conclusion.",
       "evidence_class": {
         "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
         "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
@@ -44700,7 +44700,7 @@
         "is_actionable": false,
         "is_archived": false,
         "action_state": "research-gated",
-        "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated.",
+        "gating_reason": "Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`): both the older VMware lane and the newer KVM reboot obs...",
         "confidence": "medium",
         "app_mapping_status": "not-mapped",
         "restore_story_known": true,
@@ -44774,10 +44774,10 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "TimerRebaseThresholdOnDripsExit is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and a tools-hardened DRIPS capability gate on RegProbe-Baseline-ToolsHardened-20260330. The record remains decision-gated because the current VMware baseline does not support Modern Standby / DRIPS exit, so the intended runtime trigger cannot be exercised on this VM.",
+        "why": "TimerRebaseThresholdOnDripsExit is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, a tools-hardened DRIPS capability gate on RegProbe-Baseline-ToolsHardened-20260330, and a host-driven KVM reboot observation. The KVM lane showed that the value persists at `60` across a real reboot while S0 Low Power Idle stays unavailable. The record remains decision-gated because the current virtualized baselines still do not support a real Modern Standby / DRIPS exit trigger.",
         "blocking_issues": [
-          "The current clean VMware baseline exposes only Standby (S1); it does not support S0 Low Power Idle / Modern Standby, so a real DRIPS-exit trigger cannot be exercised here.",
-          "The runtime package therefore still lacks an exact runtime query/read operation for this value on the current VM baseline."
+          "The current virtualized baselines do not support S0 Low Power Idle / Modern Standby, so a real DRIPS-exit trigger cannot be exercised here.",
+          "The runtime package therefore still lacks an exact runtime query/read operation for this value on the current VM baselines."
         ]
       },
       "app_current_implementation": {
@@ -44959,6 +44959,21 @@
             "version-scope"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-power-control-drips-kvm-reboot-20260407",
+          "kind": "vm-test",
+          "title": "Linux KVM reboot-backed observation for TimerRebaseThresholdOnDripsExit",
+          "location": "evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json and evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json and evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json and evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt and evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt and evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json and research/notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md",
+          "summary": "A host-driven KVM reboot observation confirmed a real guest boot-time advance while TimerRebaseThresholdOnDripsExit stayed `REG_DWORD 60` before and after reboot and `powercfg /a` continued to report that S0 Low Power Idle is unavailable.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": {

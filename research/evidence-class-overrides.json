@@ -16,7 +16,7 @@
       "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
       "evidence_class": "B",
       "reason_code": "vm_standby_limitation",
-      "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated."
+      "gating_reason": "Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`): both the older VMware lane and the newer KVM reboot observation show S0 Low Power Idle unavailable on the guest."
     },
     {
       "record_id": "system.executive-additional-worker-threads",

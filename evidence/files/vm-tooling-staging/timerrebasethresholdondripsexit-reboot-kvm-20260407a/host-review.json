@@ -1,0 +1,15 @@
+{
+  "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
+  "output_name": "timerrebasethresholdondripsexit-reboot-kvm-20260407a",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "TimerRebaseThresholdOnDripsExit",
+  "before_boot_time_utc": "2026-04-07T10:30:32.5000000Z",
+  "after_boot_time_utc": "2026-04-07T10:44:42.5000000Z",
+  "reboot_observed": true,
+  "before_value": 60,
+  "after_value": 60,
+  "value_preserved": true,
+  "before_s0_low_power_idle_available": false,
+  "after_s0_low_power_idle_available": false,
+  "summary": "A host-driven KVM reboot observation confirmed that TimerRebaseThresholdOnDripsExit persisted at 60 across a real guest reboot while powercfg /a continued to report that S0 Low Power Idle and hibernation are unavailable."
+}
