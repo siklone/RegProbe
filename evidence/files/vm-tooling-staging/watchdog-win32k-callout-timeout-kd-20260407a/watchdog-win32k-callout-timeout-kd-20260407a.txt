@@ -1,0 +1,8 @@
+.sympath C:\Tools\Symbols\watchdog-win32k-callout-timeout-kd-20260407a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!Pop*Win32*Callout*
+dd nt!PopWin32kCalloutWatchdogTimeoutSeconds L1
+uf nt!PopInvokeWin32CalloutWithWatchdog
+.echo REGPROBE_LOCALKD_END
+q

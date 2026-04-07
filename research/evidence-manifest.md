@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 311 |
+| Total records | 312 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 311 |
+| Records with evidence | 312 |
 | Records without evidence | 0 |
-| Records missing validation proof | 1 |
+| Records missing validation proof | 2 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
 | Class B | 7 |
-| Class D | 1 |
+| Class D | 2 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -84,6 +84,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `f45d02d04cc4faaaa5601d6bbbf6bacbd1318a39b52ef5f1a8f1f4f6fb8aca88` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
+| `power.control.win32k-callout-watchdog-timeout-seconds` | draft | Class D | `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json` | - | `529e2adfa92ef2ef81910f7ced3f98c2de0f0652a0c7b3379a0e35e29dcce003` |  | 4 |
 | `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class D | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `9f225d3d01745832a87ae42eebbc4df923b193dde062b6e31650887d3e138a6f` |  | 7 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
@@ -1885,6 +1886,27 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt](notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt) |
 | Exact quote / path | SERVICE_NAME: WerSvc \| START_TYPE : 4 DISABLED \| DISPLAY_NAME: Windows Error Reporting Service \| BINARY_PATH_NAME: [evidence/files/external/c/WINDOWS/System32/svchost.exe.md](../evidence/files/external/c/WINDOWS/System32/svchost.exe.md) -k WerSvcGroup |
 | Notes | The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker. |
+
+---
+
+### `power.control.win32k-callout-watchdog-timeout-seconds`
+
+- Status: `draft`
+- Evidence class: `Class D`
+- Source file: `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json`
+- Source SHA256: `529e2adfa92ef2ef81910f7ced3f98c2de0f0652a0c7b3379a0e35e29dcce003`
+- Proof SHA256: ``
+
+**Summary:** Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. This is a stronger current-build lead than the bugcheck-enabled sibling, but the exact registry seeding path and non-default override semantics are still unproven.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-key-routing-20260327` | `repo-doc` | Docs-first power routing lists Win32kCalloutWatchdogTimeoutSeconds | [research/notes/kernel-power-96-key-routing-20260327.md](notes/kernel-power-96-key-routing-20260327.md) |
+| `vm-power-control-win32k-callout-existence-20260329` | `registry-observation` | Existence-first baseline for Win32kCalloutWatchdogTimeoutSeconds | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-win32k-callout-string-20260331` | `inference` | Current-build string hit for Win32kCalloutWatchdogTimeoutSeconds | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
+| `vm-watchdog-win32k-callout-timeout-kd-20260407` | `vm-test` | KVM local-KD confirms live Win32k callout watchdog timeout global | [research/notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-local-kd-follow-up-20260407.md](notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-local-kd-follow-up-20260407.md) and [evidence/files/vm/watchdog-win32k-callout-timeout-kd-20260407a/host-review.json](../evidence/files/vm-tooling-staging/watchdog-win32k-callout-timeout-kd-20260407a/host-review.json) |
 
 ---
 

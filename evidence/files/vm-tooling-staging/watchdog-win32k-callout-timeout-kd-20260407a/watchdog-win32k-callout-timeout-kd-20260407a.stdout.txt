@@ -1,0 +1,171 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.032 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.031 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 11:51:10.027 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 11:51:10.145 2026 (UTC - 7:00)
+System Uptime: 0 days 6:32:33.884
+lkd> .sympath C:\Tools\Symbols\watchdog-win32k-callout-timeout-kd-20260407a
+Symbol search path is: C:\Tools\Symbols\watchdog-win32k-callout-timeout-kd-20260407a
+Expanded Symbol search path is: c:\tools\symbols\watchdog-win32k-callout-timeout-kd-20260407a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\watchdog-win32k-callout-timeout-kd-20260407a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!Pop*Win32*Callout*
+fffff806`e755fa60 nt!PopWin32CalloutWatchdogCallback (PopWin32CalloutWatchdogCallback)
+fffff806`e6e14430 nt!POP_ETW_EVENT_WIN32_STATE_CALLOUT_START = <no type information>
+fffff806`e7c0b518 nt!PopWin32kCalloutWatchdogTimeoutSeconds = <no type information>
+fffff806`e6e22a00 nt!POP_ETW_EVENT_WIN32_EVENT_CALLOUT_END = <no type information>
+fffff806`e78a9850 nt!PopDiagTraceDisplayBurstWin32kCallout (PopDiagTraceDisplayBurstWin32kCallout)
+fffff806`e77be358 nt!PopInvokeWin32Callout (PopInvokeWin32Callout)
+fffff806`e6e14410 nt!POP_ETW_EVENT_WIN32_EVENT_CALLOUT_START = <no type information>
+fffff806`e77bd01c nt!PopDiagTraceWin32kCalloutStart (PopDiagTraceWin32kCalloutStart)
+fffff806`e77bb330 nt!PopInvokeWin32CalloutWithWatchdog (PopInvokeWin32CalloutWithWatchdog)
+fffff806`e6e143a0 nt!POP_ETW_EVENT_WIN32_INFO_CALLOUT_END = <no type information>
+fffff806`e6e14420 nt!POP_ETW_EVENT_WIN32_STATE_CALLOUT_END = <no type information>
+fffff806`e7dc5fa8 nt!PopWin32CalloutWatchdogBugcheckEnabled = <no type information>
+fffff806`e77be528 nt!PopDiagTraceWin32kCalloutEnd (PopDiagTraceWin32kCalloutEnd)
+fffff806`e6e14350 nt!POP_ETW_EVENT_WIN32_INFO_CALLOUT_START = <no type information>
+lkd> dd nt!PopWin32kCalloutWatchdogTimeoutSeconds L1
+fffff806`e7c0b518  0000001e
+lkd> uf nt!PopInvokeWin32CalloutWithWatchdog
+nt!PopInvokeWin32CalloutWithWatchdog:
+fffff806`e77bb330 488bc4          mov     rax,rsp
+fffff806`e77bb333 48895808        mov     qword ptr [rax+8],rbx
+fffff806`e77bb337 48897010        mov     qword ptr [rax+10h],rsi
+fffff806`e77bb33b 48897818        mov     qword ptr [rax+18h],rdi
+fffff806`e77bb33f 4c896020        mov     qword ptr [rax+20h],r12
+fffff806`e77bb343 55              push    rbp
+fffff806`e77bb344 4156            push    r14
+fffff806`e77bb346 4157            push    r15
+fffff806`e77bb348 488d68a9        lea     rbp,[rax-57h]
+fffff806`e77bb34c 4881ec90000000  sub     rsp,90h
+fffff806`e77bb353 418bf0          mov     esi,r8d
+fffff806`e77bb356 4c8bf2          mov     r14,rdx
+fffff806`e77bb359 448bf9          mov     r15d,ecx
+fffff806`e77bb35c 41bc60000000    mov     r12d,60h
+fffff806`e77bb362 458bc4          mov     r8d,r12d
+fffff806`e77bb365 488d4ddf        lea     rcx,[rbp-21h]
+fffff806`e77bb369 33d2            xor     edx,edx
+fffff806`e77bb36b 498bd9          mov     rbx,r9
+fffff806`e77bb36e e88d57d0ff      call    nt!_memset_spec_plain (fffff806`e74c0b00)
+fffff806`e77bb373 488b7d7f        mov     rdi,qword ptr [rbp+7Fh]
+fffff806`e77bb377 4885ff          test    rdi,rdi
+fffff806`e77bb37a 756d            jne     nt!PopInvokeWin32CalloutWithWatchdog+0xb9 (fffff806`e77bb3e9)  Branch
+
+nt!PopInvokeWin32CalloutWithWatchdog+0x4c:
+fffff806`e77bb37c 4c8bcb          mov     r9,rbx
+fffff806`e77bb37f 448bc6          mov     r8d,esi
+fffff806`e77bb382 498bd6          mov     rdx,r14
+fffff806`e77bb385 418bcf          mov     ecx,r15d
+fffff806`e77bb388 e843faffff      call    nt!PsInvokeWin32Callout (fffff806`e77badd0)
+fffff806`e77bb38d 8bd8            mov     ebx,eax
+fffff806`e77bb38f 4885ff          test    rdi,rdi
+fffff806`e77bb392 7431            je      nt!PopInvokeWin32CalloutWithWatchdog+0x95 (fffff806`e77bb3c5)  Branch
+
+nt!PopInvokeWin32CalloutWithWatchdog+0x64:
+fffff806`e77bb394 4d8bc4          mov     r8,r12
+fffff806`e77bb397 488d4ddf        lea     rcx,[rbp-21h]
+fffff806`e77bb39b 33d2            xor     edx,edx
+fffff806`e77bb39d e85e57d0ff      call    nt!_memset_spec_plain (fffff806`e74c0b00)
+fffff806`e77bb3a2 8364242000      and     dword ptr [rsp+20h],0
+fffff806`e77bb3a7 488d55df        lea     rdx,[rbp-21h]
+fffff806`e77bb3ab 4533c9          xor     r9d,r9d
+fffff806`e77bb3ae c745df15000000  mov     dword ptr [rbp-21h],15h
+fffff806`e77bb3b5 458bc4          mov     r8d,r12d
+fffff806`e77bb3b8 48897de7        mov     qword ptr [rbp-19h],rdi
+fffff806`e77bb3bc 418d4957        lea     ecx,[r9+57h]
+fffff806`e77bb3c0 e82bbcceff      call    nt!ZwPowerInformation (fffff806`e74a6ff0)
+
+nt!PopInvokeWin32CalloutWithWatchdog+0x95:
+fffff806`e77bb3c5 4c8d9c2490000000 lea     r11,[rsp+90h]
+fffff806`e77bb3cd 8bc3            mov     eax,ebx
+fffff806`e77bb3cf 498b5b20        mov     rbx,qword ptr [r11+20h]
+fffff806`e77bb3d3 498b7328        mov     rsi,qword ptr [r11+28h]
+fffff806`e77bb3d7 498b7b30        mov     rdi,qword ptr [r11+30h]
+fffff806`e77bb3db 4d8b6338        mov     r12,qword ptr [r11+38h]
+fffff806`e77bb3df 498be3          mov     rsp,r11
+fffff806`e77bb3e2 415f            pop     r15
+fffff806`e77bb3e4 415e            pop     r14
+fffff806`e77bb3e6 5d              pop     rbp
+fffff806`e77bb3e7 c3              ret
+
+nt!PopInvokeWin32CalloutWithWatchdog+0xb9:
+fffff806`e77bb3e9 690525014500e8030000 imul eax,dword ptr [nt!PopWin32kCalloutWatchdogTimeoutSeconds (fffff806`e7c0b518)],3E8h
+fffff806`e77bb3f3 c745df15000000  mov     dword ptr [rbp-21h],15h
+fffff806`e77bb3fa 48897de7        mov     qword ptr [rbp-19h],rdi
+fffff806`e77bb3fe 8945ef          mov     dword ptr [rbp-11h],eax
+fffff806`e77bb401 4885db          test    rbx,rbx
+fffff806`e77bb404 7449            je      nt!PopInvokeWin32CalloutWithWatchdog+0x11f (fffff806`e77bb44f)  Branch
+
+nt!PopInvokeWin32CalloutWithWatchdog+0xd6:
+fffff806`e77bb406 8b03            mov     eax,dword ptr [rbx]
+fffff806`e77bb408 8945f3          mov     dword ptr [rbp-0Dh],eax
+
+nt!PopInvokeWin32CalloutWithWatchdog+0xdb:
+fffff806`e77bb40b 8364242000      and     dword ptr [rsp+20h],0
+fffff806`e77bb410 488d55df        lea     rdx,[rbp-21h]
+fffff806`e77bb414 c745f7a1010000  mov     dword ptr [rbp-9],1A1h
+fffff806`e77bb41b 4533c9          xor     r9d,r9d
+fffff806`e77bb41e 65488b042588010000 mov   rax,qword ptr gs:[188h]
+fffff806`e77bb427 458bc4          mov     r8d,r12d
+fffff806`e77bb42a 488945ff        mov     qword ptr [rbp-1],rax
+fffff806`e77bb42e 488d45df        lea     rax,[rbp-21h]
+fffff806`e77bb432 4889452f        mov     qword ptr [rbp+2Fh],rax
+fffff806`e77bb436 488d052346daff  lea     rax,[nt!PopWin32CalloutWatchdogCallback (fffff806`e755fa60)]
+fffff806`e77bb43d 418d4957        lea     ecx,[r9+57h]
+fffff806`e77bb441 48894527        mov     qword ptr [rbp+27h],rax
+fffff806`e77bb445 e8a6bbceff      call    nt!ZwPowerInformation (fffff806`e74a6ff0)
+fffff806`e77bb44a e92dffffff      jmp     nt!PopInvokeWin32CalloutWithWatchdog+0x4c (fffff806`e77bb37c)  Branch
+
+nt!PopInvokeWin32CalloutWithWatchdog+0x11f:
+fffff806`e77bb44f 834df3ff        or      dword ptr [rbp-0Dh],0FFFFFFFFh
+fffff806`e77bb453 ebb6            jmp     nt!PopInvokeWin32CalloutWithWatchdog+0xdb (fffff806`e77bb40b)  Branch
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

@@ -1,30 +1,30 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T18:25:52.940926Z",
+  "generated_utc": "2026-04-07T18:53:28.838133Z",
   "summary": {
-    "total_active_records": 256,
+    "total_active_records": 257,
     "class_counts": {
       "A": 248,
       "B": 7,
-      "D": 1
+      "D": 2
     },
     "lane_counts": {
       "official-policy": 236,
       "runtime": 5,
       "system": 6,
-      "early-boot": 9
+      "early-boot": 10
     },
     "next_missing_layer_counts": {
       "none": 248,
       "decision-gate": 6,
-      "incident-review": 1,
-      "validation-proof": 1
+      "validation-proof": 2,
+      "incident-review": 1
     },
     "re_audit_required_count": 11,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T18:25:52.132985Z",
+      "generated_utc": "2026-04-07T18:53:28.216599Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -3794,6 +3794,48 @@
       "apply_allowed": false,
       "confidence": "medium",
       "source_file": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+      "tweak_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+      "evidence_class": "D",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
+      "layers_used": [],
+      "tools_used": [],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": false,
+        "correct_tool_used": true,
+        "trigger_condition_tested": false
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "source_file": "research/records/power.control.win32k-callout-watchdog-timeout-seconds.json",
       "incident_ids": []
     },
     {
