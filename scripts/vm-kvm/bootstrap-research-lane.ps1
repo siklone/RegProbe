@@ -354,6 +354,7 @@ $result.steps['payload_copy'] = Invoke-Step -Name 'Copy guest tooling payload' -
         'registry-policy-probe.ps1',
         'run-ghidra-string-xref-probe.ps1',
         'run-ghidra-symbolized-probe.ps1',
+        'run-reboot-observation.ps1',
         'run-registry-policy-probe.ps1',
         'tool-health-smoke.ps1',
         'wpa.cmd',

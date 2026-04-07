@@ -1,0 +1,62 @@
+﻿{
+    "generated_utc":  "2026-04-07T10:13:32.1760975Z",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name":  "HiberFileSizePercent",
+    "output_name":  "hiberfilesizepercent-reboot-kvm-20260407b",
+    "output_root":  "C:\\RegProbe-Diag\\reboot-observation\\hiberfilesizepercent-reboot-kvm-20260407b",
+    "task_name":  "RegProbe-RebootObservation-hiberfilesizepercent-reboot-kvm-20260407b",
+    "before":  {
+                   "generated_utc":  "2026-04-07T10:09:12.7248430Z",
+                   "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                   "provider_path":  "Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                   "value_name":  "HiberFileSizePercent",
+                   "key_exists":  true,
+                   "value_exists":  true,
+                   "value_kind":  "DWord",
+                   "value":  0,
+                   "error":  null,
+                   "boot_time_utc":  "2026-04-07T10:01:16.5000000Z"
+               },
+    "after":  {
+                  "generated_utc":  "2026-04-07T10:13:31.9249914Z",
+                  "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                  "provider_path":  "Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                  "value_name":  "HiberFileSizePercent",
+                  "key_exists":  true,
+                  "value_exists":  true,
+                  "value_kind":  "DWord",
+                  "value":  0,
+                  "error":  null,
+                  "boot_time_utc":  "2026-04-07T10:09:21.5000000Z"
+              },
+    "before_powercfg_path":  "C:\\RegProbe-Diag\\reboot-observation\\hiberfilesizepercent-reboot-kvm-20260407b\\powercfg-a-before.txt",
+    "after_powercfg_path":  "C:\\RegProbe-Diag\\reboot-observation\\hiberfilesizepercent-reboot-kvm-20260407b\\powercfg-a-after.txt",
+    "reboot_observed":  true,
+    "value_changed":  true,
+    "value_preserved":  true,
+    "uploads":  {
+                    "before":  {
+                                   "path":  "C:\\RegProbe-Diag\\reboot-observation\\hiberfilesizepercent-reboot-kvm-20260407b\\before.json",
+                                   "uri":  "http://10.0.2.2:8766/hiberfilesizepercent-reboot-kvm-20260407b-before.json",
+                                   "attempts":  1
+                               },
+                    "after":  {
+                                  "path":  "C:\\RegProbe-Diag\\reboot-observation\\hiberfilesizepercent-reboot-kvm-20260407b\\after.json",
+                                  "uri":  "http://10.0.2.2:8766/hiberfilesizepercent-reboot-kvm-20260407b-after.json",
+                                  "attempts":  1
+                              },
+                    "powercfg_before":  {
+                                            "path":  "C:\\RegProbe-Diag\\reboot-observation\\hiberfilesizepercent-reboot-kvm-20260407b\\powercfg-a-before.txt",
+                                            "uri":  "http://10.0.2.2:8766/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt",
+                                            "attempts":  1
+                                        },
+                    "powercfg_after":  {
+                                           "path":  "C:\\RegProbe-Diag\\reboot-observation\\hiberfilesizepercent-reboot-kvm-20260407b\\powercfg-a-after.txt",
+                                           "uri":  "http://10.0.2.2:8766/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt",
+                                           "attempts":  1
+                                       }
+                },
+    "errors":  [
+
+               ]
+}

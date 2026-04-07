@@ -40,7 +40,7 @@
       "record_id": "power.control.hiber-file-size-percent",
       "evidence_class": "B",
       "reason_code": "runtime_no_read",
-      "gating_reason": "Docs, current-build static evidence, and KVM local-KD now agree on the live Control\\\\Power path and HiberFileSizePercent state. Promotion stays decision-gated because repeated runtime lanes still do not show an exact live HiberFileSizePercent read."
+      "gating_reason": "Docs, current-build static evidence, KVM local-KD, repeated runtime replays, and a reboot-backed KVM observation now agree on the live Control\\\\Power path and HiberFileSizePercent state. Promotion stays decision-gated because no runtime lane has produced a decisive exact live HiberFileSizePercent read."
     },
     {
       "record_id": "policy.system.enable-virtualization",

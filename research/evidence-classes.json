@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-06T23:49:07.359614Z",
+  "generated_utc": "2026-04-07T00:17:44.577652Z",
   "summary": {
     "total_records": 310,
     "class_counts": {
@@ -6423,7 +6423,7 @@
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "Docs, current-build static evidence, and KVM local-KD now agree on the live Control\\\\Power path and HiberFileSizePercent state. Promotion stays decision-gated because repeated runtime lanes still do not show an exact...",
+      "gating_reason": "Docs, current-build static evidence, KVM local-KD, repeated runtime replays, and a reboot-backed KVM observation now agree on the live Control\\\\Power path and HiberFileSizePercent state. Promotion stays decision-gated...",
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,

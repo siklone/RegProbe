@@ -110,6 +110,47 @@ def main() -> int:
             return 0
         time.sleep(1)
 
+    send_key(args.connect, args.domain, "KEY_ESC")
+    time.sleep(float(args.delay_ms) / 1000.0)
+    send_key(args.connect, args.domain, "KEY_LEFTMETA", "KEY_R")
+    time.sleep(max(args.launch_delay_seconds, 1.5))
+    type_text(repo_root, args.domain, args.connect, elevate_command, delay_ms=args.delay_ms, press_enter=True)
+
+    time.sleep(max(args.uac_delay_seconds, 2.0))
+    send_key(args.connect, args.domain, "KEY_LEFT")
+    time.sleep(0.2)
+    send_key(args.connect, args.domain, "KEY_ENTER")
+    time.sleep(max(args.launch_delay_seconds, 1.5))
+    type_text(repo_root, args.domain, args.connect, ready_command, delay_ms=args.delay_ms, press_enter=True)
+
+    retry_deadline = time.time() + 20
+    while time.time() < retry_deadline:
+        if marker_file.exists():
+            payload = {
+                "marker_path": str(marker_file),
+                "marker_name": marker_file.name,
+                "status": "ready-via-retry",
+            }
+            print(json.dumps(payload, indent=2))
+            return 0
+        time.sleep(1)
+
+    send_key(args.connect, args.domain, "KEY_ESC")
+    time.sleep(float(args.delay_ms) / 1000.0)
+    type_text(repo_root, args.domain, args.connect, ready_command, delay_ms=args.delay_ms, press_enter=True)
+
+    fallback_deadline = time.time() + 10
+    while time.time() < fallback_deadline:
+        if marker_file.exists():
+            payload = {
+                "marker_path": str(marker_file),
+                "marker_name": marker_file.name,
+                "status": "ready-via-fallback",
+            }
+            print(json.dumps(payload, indent=2))
+            return 0
+        time.sleep(1)
+
     print(
         json.dumps(
             {

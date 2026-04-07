@@ -1,0 +1,15 @@
+{
+  "record_id": "power.control.hiber-file-size-percent",
+  "output_name": "hiberfilesizepercent-reboot-kvm-20260407b",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "HiberFileSizePercent",
+  "before_boot_time_utc": "2026-04-07T10:01:16.5000000Z",
+  "after_boot_time_utc": "2026-04-07T10:09:21.5000000Z",
+  "reboot_observed": true,
+  "before_value": 0,
+  "after_value": 0,
+  "value_preserved": true,
+  "before_powercfg_hibernate_available": false,
+  "after_powercfg_hibernate_available": false,
+  "summary": "A host-driven KVM reboot observation confirmed that HiberFileSizePercent persisted at 0 across a real guest reboot while powercfg /a stayed hibernation-unsupported before and after boot."
+}
