@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T02:25:52.460767Z",
+  "generated_utc": "2026-04-07T02:37:19.832960Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 310,
@@ -91191,8 +91191,8 @@
         }
       },
       "source_file": "research/records/system.executive-uuid-sequence-number.json",
-      "source_file_sha256": "21c5d2ac14e73f83628d7d4751e1721c95323e4b56c86217e78217930d697c86",
-      "source_file_size_bytes": 35265,
+      "source_file_sha256": "8a5ac5b7ff45a7527a7018e8c309e0619db329ce4458b009cacc8819622c27d5",
+      "source_file_size_bytes": 36721,
       "name": "Executive UUID Sequence Number",
       "category": "System",
       "area": "Session Manager Executive Registry",
@@ -91539,6 +91539,20 @@
           "supports": [
             "behavior",
             "runtime-proof",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-executive-uuid-kvm-regstate-force-invalid-20260407",
+          "kind": "vm-test",
+          "title": "Linux KVM guest-side regstate follow-up for the forced-invalid UUID trigger",
+          "location": "evidence/files/vm-tooling-staging/uuidsequence-regstate-kvm-force-invalid-20260407h/uuidsequence-regstate-kvm-force-invalid-20260407h-summary.json and research/notes/system-executive-uuid-sequence-number-kvm-regstate-force-invalid-follow-up-20260407.md",
+          "summary": "A guest-side registry snapshot around the forced-invalid UUID trigger observed `UuidSequenceNumber` move from `0x2caf1d` to `0x2caf1e` (`delta = +1`) during the trigger window, but the paired local-KD wrapper stalled before uploading its final bundle, so the result is kept as corroboration rather than as a same-run kernel-plus-registry proof.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk",
             "version-scope"
           ],
           "origin": "VM test / probe"
