@@ -6,17 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 310 |
+| Total records | 311 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 310 |
+| Records with evidence | 311 |
 | Records without evidence | 0 |
-| Records missing validation proof | 0 |
+| Records missing validation proof | 1 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
 | Class B | 7 |
+| Class D | 1 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -83,6 +84,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `f45d02d04cc4faaaa5601d6bbbf6bacbd1318a39b52ef5f1a8f1f4f6fb8aca88` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
+| `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class D | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `d11f3f5173a2a470914025f85f81c25de99c33fb01796a9639a9a98bd6d4c56e` |  | 3 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
 | `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `43edcdbd0c4ea253fc61461681abc0fba6fd2a6654827d06d505f293078a14c9` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 3 |
@@ -1883,6 +1885,26 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt](notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt) |
 | Exact quote / path | SERVICE_NAME: WerSvc \| START_TYPE : 4 DISABLED \| DISPLAY_NAME: Windows Error Reporting Service \| BINARY_PATH_NAME: [evidence/files/external/c/WINDOWS/System32/svchost.exe.md](../evidence/files/external/c/WINDOWS/System32/svchost.exe.md) -k WerSvcGroup |
 | Notes | The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker. |
+
+---
+
+### `power.session-win32-callout-watchdog-bugcheck-enabled`
+
+- Status: `draft`
+- Evidence class: `Class D`
+- Source file: `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json`
+- Source SHA256: `d11f3f5173a2a470914025f85f81c25de99c33fb01796a9639a9a98bd6d4c56e`
+- Proof SHA256: ``
+
+**Summary:** Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a later current-build Unicode string hit in `ntoskrnl.exe`, and already appears as an adjacent sibling in the watchdog runtime package. The lane is strong enough for packaging as a draft research record, but it still lacks a current-build caller chain, exact live read proof, and any trustworthy non-default value semantics.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `vm-power-net-new-existence-20260328` | `registry-observation` | Net-new power existence probe for Session Manager Power siblings | [research/notes/kernel-power-net-new-existence-probe-20260328.md](notes/kernel-power-net-new-existence-probe-20260328.md) and [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-broad-string-20260331` | `inference` | Current-build string hit for Win32CalloutWatchdogBugcheckEnabled | [research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md](notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md) and [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
+| `vm-watchdog-lightweight-runtime-20260330` | `vm-test` | Lightweight watchdog runtime packaging kept the sibling in the active lane | [evidence/files/vm/watchdog-lightweight-runtime-20260330-131636/power-session-watchdog-timeouts/summary.json](../evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/power-session-watchdog-timeouts/summary.json) |
 
 ---
 

@@ -1,25 +1,26 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T15:36:41.458899Z",
+  "generated_utc": "2026-04-07T16:59:57.753491Z",
   "source_index": "research/evidence-index.json",
   "summary": {
-    "total_records": 310,
+    "total_records": 311,
     "validated": 255,
     "deprecated": 55,
     "review_required": 0,
-    "records_with_evidence": 310,
+    "records_with_evidence": 311,
     "records_without_evidence": 0,
-    "records_missing_validation_proof": 0,
+    "records_missing_validation_proof": 1,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
       "A": 248,
       "E": 55,
-      "B": 7
+      "B": 7,
+      "D": 1
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T15:36:40.784440Z",
+      "generated_utc": "2026-04-07T16:59:57.048054Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -28,7 +29,7 @@
       "counts_by_confidence": {},
       "counts_by_promotion_state": {}
     },
-    "records_with_source_hashes": 310,
+    "records_with_source_hashes": 311,
     "records_without_source_hashes": 0
   },
   "records": [
@@ -17617,6 +17618,216 @@
         ],
         "other_references": []
       },
+      "v31_evidence_root": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+      "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+      "record_status": "draft",
+      "evidence_class": {
+        "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+        "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+        "record_status": "draft",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "low",
+        "app_mapping_status": "not-mapped",
+        "restore_story_known": true,
+        "tested_build": "26200",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "No dedicated semantics proof block is attached yet.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": false,
+          "links": []
+        },
+        "runtime_proof": {
+          "summary": "The clean baseline batch confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power` exists while `Win32CalloutWatchdogBugcheckEnabled` is absent by default.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": true,
+          "links": [
+            {
+              "title": "Net-new power existence probe for Session Manager Power siblings",
+              "url": "research/notes/kernel-power-net-new-existence-probe-20260328.md and evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+              "kind": "registry-observation",
+              "summary": "The clean baseline batch confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power` exists while `Win32CalloutWatchdogBugcheckEnabled` is absent by default."
+            },
+            {
+              "title": "Lightweight watchdog runtime packaging kept the sibling in the active lane",
+              "url": "evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/power-session-watchdog-timeouts/summary.json",
+              "kind": "vm-test",
+              "summary": "The later watchdog runtime package listed `Win32CalloutWatchdogBugcheckEnabled` as an adjacent sibling while probing the validated watchdog timeout pair, which ties the candidat..."
+            }
+          ]
+        },
+        "upstream_lineage": {
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
+        }
+      },
+      "source_file": "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json",
+      "source_file_sha256": "d11f3f5173a2a470914025f85f81c25de99c33fb01796a9639a9a98bd6d4c56e",
+      "source_file_size_bytes": 8900,
+      "name": "Win32 Callout Watchdog Bugcheck Enabled",
+      "category": "Power",
+      "area": "Session Manager Power Watchdog Sibling",
+      "scope": "device",
+      "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a later current-build Unicode string hit in `ntoskrnl.exe`, and already appears as an adjacent sibling in the watchdog runtime package. The lane is strong enough for packaging as a draft research record, but it still lacks a current-build caller chain, exact live read proof, and any trustworthy non-default value semantics.",
+      "decision": {
+        "confidence": "low",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The candidate is real enough for a schema-backed draft: it has baseline path/value evidence, a current-build kernel string hit, and adjacency to the already-validated watchdog timeout lane. It is not ready for a validated record because the current-build caller chain, exact runtime read, documented semantics, and safe non-default value mapping are still missing.",
+        "blocking_issues": [
+          "no-current-build-caller",
+          "runtime_no_read",
+          "no-doc-source",
+          "non-default-semantics-unproven"
+        ]
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "not currently shipped in the app",
+        "notes": "The app does not currently expose this watchdog sibling as a tweak or supported UI surface.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "win32-callout-watchdog-bugcheck-enabled",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+          "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+          "value_type": "REG_DWORD",
+          "notes": "Non-default value semantics are not yet proven.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Not configured on clean baseline",
+              "meaning": "The parent key exists, but the value is absent by default on the observed baseline.",
+              "evidence_ids": [
+                "vm-power-net-new-existence-20260328"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Observed clean baseline",
+          "applies_to": "Win25H2Clean and later KVM follow-up packaging",
+          "states": [
+            {
+              "target_id": "win32-callout-watchdog-bugcheck-enabled",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "The parent path exists on the clean baseline, but the value itself is absent."
+            }
+          ],
+          "evidence_ids": [
+            "vm-power-net-new-existence-20260328"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "observed-default-missing",
+          "label": "Observed default-missing state",
+          "intended_for": [
+            "Research tracking",
+            "Future watchdog caller-chain validation"
+          ],
+          "avoid_for": [
+            "General users",
+            "One-click tweak surfaces"
+          ],
+          "states": [
+            {
+              "target_id": "win32-callout-watchdog-bugcheck-enabled",
+              "state_kind": "missing",
+              "value": null,
+              "rationale": "Keep the candidate in its observed baseline state until the runtime semantics are proven."
+            }
+          ],
+          "good_when": "You want to preserve the known baseline while building static and runtime proof.",
+          "bad_when": "You need a validated non-default value or a safe public tweak.",
+          "tradeoffs": [
+            "Preserves the observed baseline state.",
+            "Avoids inventing unsupported non-default semantics."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "vm-power-net-new-existence-20260328",
+            "static-power-broad-string-20260331",
+            "vm-watchdog-lightweight-runtime-20260330"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "vm-power-net-new-existence-20260328",
+          "kind": "registry-observation",
+          "title": "Net-new power existence probe for Session Manager Power siblings",
+          "location": "research/notes/kernel-power-net-new-existence-probe-20260328.md and evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+          "summary": "The clean baseline batch confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power` exists while `Win32CalloutWatchdogBugcheckEnabled` is absent by default.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM registry observation"
+        },
+        {
+          "evidence_id": "static-power-broad-string-20260331",
+          "kind": "inference",
+          "title": "Current-build string hit for Win32CalloutWatchdogBugcheckEnabled",
+          "location": "research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md and evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+          "summary": "The broad current-build string batch found an exact Unicode hit for `Win32CalloutWatchdogBugcheckEnabled` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`, which confirms that the current kernel still carries the value name.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-watchdog-lightweight-runtime-20260330",
+          "kind": "vm-test",
+          "title": "Lightweight watchdog runtime packaging kept the sibling in the active lane",
+          "location": "evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/power-session-watchdog-timeouts/summary.json",
+          "summary": "The later watchdog runtime package listed `Win32CalloutWatchdogBugcheckEnabled` as an adjacent sibling while probing the validated watchdog timeout pair, which ties the candidate to the active watchdog lane even though the exact runtime read still failed.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "behavior",
+            "risk"
+          ],
+          "origin": "VM test / probe"
+        }
+      ],
+      "validation_proof": null,
+      "validation_proof_sha256": null,
+      "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
       "re_audit": null
