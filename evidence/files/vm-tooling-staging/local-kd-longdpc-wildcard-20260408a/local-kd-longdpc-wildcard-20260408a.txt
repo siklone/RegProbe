@@ -1,0 +1,7 @@
+.sympath C:\Tools\Symbols\local-kd-longdpc-wildcard-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!KiLongDpc*
+.echo REGPROBE_LONGDPC_WILDCARD_DONE
+.echo REGPROBE_LOCALKD_END
+q

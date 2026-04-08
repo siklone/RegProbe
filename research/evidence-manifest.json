@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T02:36:14.500917Z",
+  "generated_utc": "2026-04-08T03:34:26.030723Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 317,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T02:36:13.818547Z",
+      "generated_utc": "2026-04-08T03:34:25.358357Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -19551,10 +19551,10 @@
               "summary": "The tools-hardened lightweight runtime lane explicitly armed both values from missing to `1`, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `sy..."
             },
             {
-              "title": "Dedicated KVM Procmon timer-dpc-stress replay reached guest execution but failed at Procmon S...",
-              "url": "evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a-summary.json and evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a/host-review.json",
+              "title": "KVM local-KD symbol sweep resolved the live Long-DPC threshold family",
+              "url": "evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a.log",
               "kind": "vm-test",
-              "summary": "A dedicated narrow replay for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` launched successfully in the guest and advanced to the Procmon export phase, bu..."
+              "summary": "A current-build KVM local-KD symbol sweep resolved `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, `KiLongDpcRuntimeThresholdCycles`, `KiEnterLongDpcProcessing`, `EtwTra..."
             }
           ]
         },
@@ -19566,13 +19566,13 @@
         }
       },
       "source_file": "research/records/system.kernel-long-dpc-threshold-cluster.json",
-      "source_file_sha256": "a230fca36180315e0cc29b12ee40d9527be3f75f7dad92787604f065626b0785",
-      "source_file_size_bytes": 18389,
+      "source_file_sha256": "3dc9069c7851a8fa3ae013ce1700c417011e27ffcac8fec2f31a250932a68d6e",
+      "source_file_size_bytes": 21346,
       "name": "Kernel Long DPC Threshold Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Scheduling",
       "scope": "device",
-      "summary": "Draft docs-first Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and both survived a broad lightweight runtime replay that explicitly armed them from missing to `1` for one reboot while still returning `no-hit`. Two later dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The narrow lane is therefore runtime-attempted but export-blocked rather than merely unrun.",
+      "summary": "Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The cluster is therefore live-state-confirmed but still export-blocked and caller-unresolved.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -19580,12 +19580,11 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, and two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export. It is not ready for validation because there is still no current-build caller, live value state, exact read capture, or primary Microsoft source for either value.",
+        "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, and two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export. It is not ready for validation because there is still no current-build caller, exact read capture, or primary Microsoft source for either value.",
         "blocking_issues": [
           "no-current-build-caller-path",
           "runtime_no_read",
           "no-doc-source-outside-repo",
-          "live-state-unproven",
           "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
         ]
       },
@@ -19795,6 +19794,34 @@
             "research-gap"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-kd-symbols-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD symbol sweep resolved the live Long-DPC threshold family",
+          "location": "evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a.log",
+          "summary": "A current-build KVM local-KD symbol sweep resolved `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, `KiLongDpcRuntimeThresholdCycles`, `KiEnterLongDpcProcessing`, `EtwTraceLongDpcDetectionEvent`, and `EtwTraceLongDpcMitigationEvent` in the live kernel.",
+          "strength": "high",
+          "supports": [
+            "value",
+            "version-scope",
+            "research-gap"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-kd-values-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD live values match the repo-doc Long-DPC defaults",
+          "location": "evidence/files/vm-tooling-staging/local-kd-longdpc-values-20260408a/local-kd-longdpc-values-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-longdpc-values-20260408a/local-kd-longdpc-values-20260408a.log",
+          "summary": "A current-build KVM local-KD value pass returned `KiLongDpcQueueThreshold = 3`, `KiLongDpcRuntimeThreshold = 100`, and `KiLongDpcRuntimeThresholdCycles = 0x493e0`, aligning the two primary live globals with the repo-doc defaults.",
+          "strength": "high",
+          "supports": [
+            "value",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         },
         {
           "evidence_id": "vm-session-manager-kernel-long-dpc-runtime-timerdpc-procmon-20260408",

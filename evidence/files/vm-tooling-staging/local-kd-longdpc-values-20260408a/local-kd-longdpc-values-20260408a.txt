@@ -1,0 +1,9 @@
+.sympath C:\Tools\Symbols\local-kd-longdpc-values-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!*LongDpc*
+dd nt!KiLongDpcQueueThreshold L2
+dd nt!KiLongDpcRuntimeThresholdCycles L1
+.echo REGPROBE_LONGDPC_VALUES_DONE
+.echo REGPROBE_LOCALKD_END
+q
