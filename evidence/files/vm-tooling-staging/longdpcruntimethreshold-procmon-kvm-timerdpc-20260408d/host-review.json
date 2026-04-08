@@ -1,0 +1,13 @@
+{
+  "run_id": "longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d",
+  "status": "error",
+  "error_kind": "probe-stage-error",
+  "transport_blocker": "probe-stage-error",
+  "guest_health": "degraded",
+  "summary_source": "probe-stage-fallback",
+  "probe_stage_raw": "exception",
+  "probe_stage_status_raw": "error",
+  "probe_stage_message_raw": "Procmon SaveAs timed out after 180 second(s).",
+  "error": "System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 180 second(s).",
+  "saveas_timeout_seconds": 180
+}
