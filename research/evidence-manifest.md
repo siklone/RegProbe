@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 312 |
+| Total records | 313 |
 | Validated | 245 |
 | Deprecated | 54 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 312 |
+| Records with evidence | 313 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 249 |
 | Class B | 7 |
-| Class C | 2 |
+| Class C | 3 |
 | Class E | 54 |
 
 ## Record index
@@ -88,6 +88,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.lid-reliability-state` | draft | Class A | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `de78b98f5ddb7704eef29828abb84265225420b4785d1a85f15b179cc2dea257` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 5 |
 | `power.control.mf-buffering-threshold` | draft | Class A | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `70c5b4ebfbdccb23da718bfa36b6fb24fe14e31a9ea544e5ddb89322eea43770` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 7 |
 | `power.control.perf-calculate-actual-utilization` | draft | Class A | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `fd43a45e38a2817c49f08897abb5a0fc61e91ad377f41225c60ef5c4062ce3c6` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 7 |
+| `power.control.power-request-override-subtree` | draft | Class C | `research/records/power.control.power-request-override-subtree.json` | - | `f3c81c10d8ce155ef5ba68aabd84190af311508a042271d7e01a2831e7fb56c4` | `5fb25bee4a665cd0884e3c2b187f972706622fa896cfe623506d9dc2da365f99` | 3 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | draft | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `fac7e7c91608b7bc6d4a7dd69024d9e7027e0a951d638ef24e026adae3d3d085` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 7 |
 | `system.executive-uuid-sequence-number` | draft | Class B | `research/records/system.executive-uuid-sequence-number.json` | [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number) | `42d17a9bcb4d75922e4f50353376a9e76910197017f254d7e91df697d83d8641` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 7 |
 | `system.io-allow-remote-dasd` | draft | Class B | `research/records/system.io-allow-remote-dasd.json` | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) | `55c461824f2e3e815866bb7d2a1686e01ec11e26a7e59d5b15239e7f54f742fe` | `a201a8c1d34674e2acf76d44363529c1f88c3d060989c54e093fe2452de97bc8` | 4 |
@@ -2220,6 +2221,34 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:181](../Docs/power/power.md:181) shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes. |
 | Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification. |
+
+---
+
+### `power.control.power-request-override-subtree`
+
+- Status: `draft`
+- Evidence class: `Class C`
+- Source file: `research/records/power.control.power-request-override-subtree.json`
+- Source SHA256: `f3c81c10d8ce155ef5ba68aabd84190af311508a042271d7e01a2831e7fb56c4`
+- Proof SHA256: `5fb25bee4a665cd0884e3c2b187f972706622fa896cfe623506d9dc2da365f99`
+
+**Summary:** Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, and a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup. The lane remains draft because exact leaf values, restore semantics, and a bounded static path are still unresolved.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `vm-power-request-override-root-dump-20260324` | `registry-observation` | Retained power-control root dump contains the PowerRequestOverride subtree | [evidence/files/vm/registry-dumps/power-control-root-20260324-210206/power-control-root.txt](../evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.txt) and [evidence/files/vm/registry-dumps/power-control-root-20260324-210206/power-control-root.reg](../evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.reg) |
+| `vm-power-request-override-runtime-audit-20260408` | `procmon-trace` | Retained runtime audit for the PowerRequestOverride subtree | [registry-research-framework/audit/power-request-override-runtime-audit-20260408.json](../registry-research-framework/audit/power-request-override-runtime-audit-20260408.json) and [registry-research-framework/audit/power-request-override-runtime-audit-20260408.md](../registry-research-framework/audit/power-request-override-runtime-audit-20260408.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv) and [research/notes/power-control-power-request-override-subtree-triage-20260408.md](notes/power-control-power-request-override-subtree-triage-20260408.md) |
+| `vm-power-request-override-kd-lineage-20260408` | `vm-test` | Retained wildcard local-KD lineage exposes the override family | [evidence/files/vm/local-kd-powerrequest-reglineage-20260408a/summary.json](../evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/summary.json) and [evidence/files/vm/local-kd-powerrequest-reglineage-20260408a/stdout.txt](../evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/stdout.txt) and [research/notes/power-control-power-request-override-subtree-triage-20260408.md](notes/power-control-power-request-override-subtree-triage-20260408.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [research/notes/power-control-power-request-override-subtree-triage-20260408.md](notes/power-control-power-request-override-subtree-triage-20260408.md) |
+| Exact quote / path | The retained root dump contains `HKLM/SYSTEM/CurrentControlSet/Control/Power/PowerRequestOverride`, the retained current-build path trace shows 15 subtree hits from `svchost.exe`, and the retained wildcard KD lineage exposes the override family. |
+| Notes | This proof establishes subtree existence plus live current-build access, but it does not yet resolve exact leaf-value semantics. |
 
 ---
 

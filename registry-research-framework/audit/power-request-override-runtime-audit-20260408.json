@@ -1,0 +1,119 @@
+{
+  "title": "PowerRequestOverride subtree runtime audit",
+  "generated_utc": "2026-04-08T19:05:00Z",
+  "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+  "source_artifacts": {
+    "path_hits": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv",
+    "root_dump": "evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.txt",
+    "kd_stdout": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/stdout.txt"
+  },
+  "root_subtree_present": false,
+  "runtime_hits": {
+    "count": 15,
+    "operations": {
+      "RegCloseKey": 3,
+      "RegOpenKey": 9,
+      "RegQueryKey": 3
+    },
+    "processes": {
+      "svchost.exe": 15
+    },
+    "paths": {
+      "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride": 12,
+      "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Driver": 1,
+      "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process": 1,
+      "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Service": 1
+    },
+    "results": {
+      "NAME NOT FOUND": 3,
+      "REPARSE": 3,
+      "SUCCESS": 9
+    },
+    "sample_rows": [
+      {
+        "time": "2:42:56.7126662 PM",
+        "process": "svchost.exe",
+        "pid": "984",
+        "operation": "RegOpenKey",
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+        "result": "REPARSE",
+        "detail": "Desired Access: Query Value"
+      },
+      {
+        "time": "2:42:56.7128736 PM",
+        "process": "svchost.exe",
+        "pid": "984",
+        "operation": "RegOpenKey",
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+        "result": "SUCCESS",
+        "detail": "Desired Access: Query Value"
+      },
+      {
+        "time": "2:42:56.7129005 PM",
+        "process": "svchost.exe",
+        "pid": "984",
+        "operation": "RegQueryKey",
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+        "result": "SUCCESS",
+        "detail": "Query: HandleTags, HandleTags: 0x0"
+      },
+      {
+        "time": "2:42:56.7129104 PM",
+        "process": "svchost.exe",
+        "pid": "984",
+        "operation": "RegOpenKey",
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Driver",
+        "result": "NAME NOT FOUND",
+        "detail": "Desired Access: Query Value, Set Value"
+      },
+      {
+        "time": "2:42:56.7129222 PM",
+        "process": "svchost.exe",
+        "pid": "984",
+        "operation": "RegCloseKey",
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+        "result": "SUCCESS",
+        "detail": ""
+      },
+      {
+        "time": "2:42:56.7129494 PM",
+        "process": "svchost.exe",
+        "pid": "984",
+        "operation": "RegOpenKey",
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+        "result": "REPARSE",
+        "detail": "Desired Access: Query Value"
+      },
+      {
+        "time": "2:42:56.7129569 PM",
+        "process": "svchost.exe",
+        "pid": "984",
+        "operation": "RegOpenKey",
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+        "result": "SUCCESS",
+        "detail": "Desired Access: Query Value"
+      },
+      {
+        "time": "2:42:56.7129722 PM",
+        "process": "svchost.exe",
+        "pid": "984",
+        "operation": "RegQueryKey",
+        "path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+        "result": "SUCCESS",
+        "detail": "Query: HandleTags, HandleTags: 0x0"
+      }
+    ]
+  },
+  "kd_override_symbols": [
+    "PopPowerRequestHandleRequestOverrideQueryResponse",
+    "PopPowerRequestOverrideInitialize",
+    "PopUmpoSendPowerRequestOverrideQuery",
+    "PopUmpoSendPowerRequestOverrideCleanup"
+  ],
+  "interpretation": [
+    "The retained root dump proves that Control\\Power\\PowerRequestOverride exists as a persisted subtree.",
+    "The retained current-build path-hits capture shows repeated svchost.exe access to the subtree root plus Driver, Process, and Service leaves.",
+    "The retained wildcard KD lineage exposes an override family around response handling, initialization, and UMPO override query/cleanup.",
+    "This is enough to open a dedicated runtime-backed subtree draft even though exact leaf values and a bounded Ghidra path are still unresolved."
+  ]
+}

@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T18:13:02.996667Z",
+  "generated_utc": "2026-04-08T18:21:02.315779Z",
   "summary": {
-    "total_records": 312,
+    "total_records": 313,
     "validated": 245,
     "deprecated": 54,
     "review_required": 0,
-    "records_with_evidence": 312,
+    "records_with_evidence": 313,
     "records_without_evidence": 0,
     "records_missing_validation_proof": 0,
     "deprecated_missing_validation_proof": 0,
@@ -14,7 +14,7 @@
       "A": 249,
       "E": 54,
       "B": 7,
-      "C": 2
+      "C": 3
     }
   },
   "records": [
@@ -20604,6 +20604,244 @@
       "provenance": null,
       "v31_evidence_root": "evidence/records/power.control.perf-calculate-actual-utilization",
       "v31_pipeline_version": "v3.1",
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "power.control.power-request-override-subtree",
+      "tweak_id": "power.control.power-request-override-subtree",
+      "record_status": "draft",
+      "source_file": "research/records/power.control.power-request-override-subtree.json",
+      "name": "Power Request Override Subtree",
+      "category": "Power",
+      "area": "Power Request Override Routing",
+      "scope": "device",
+      "summary": "Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, and a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup. The lane remains draft because exact leaf values, restore semantics, and a bounded static path are still unresolved.",
+      "evidence_class": {
+        "record_id": "power.control.power-request-override-subtree",
+        "tweak_id": "power.control.power-request-override-subtree",
+        "record_status": "draft",
+        "evidence_class": "C",
+        "class_label": "Class C",
+        "class_title": "Key Known, Runtime Layer Partial",
+        "class_description": "The key existence is solid and some values are known, but runtime convergence still needs a tighter trace, benchmark, or reboot story.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key is understood, but runtime convergence is still incomplete. App mapping is tracked separately.",
+        "confidence": "medium",
+        "app_mapping_status": "not-mapped",
+        "restore_story_known": true,
+        "tested_build": "26100",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "This proof establishes subtree existence plus live current-build access, but it does not yet resolve exact leaf-value semantics.",
+          "has_validation_proof": true,
+          "has_semantics_evidence": false,
+          "links": [
+            {
+              "title": "Validation proof source",
+              "url": "research/notes/power-control-power-request-override-subtree-triage-20260408.md",
+              "kind": "validation-proof",
+              "summary": "The retained root dump contains `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride`, the retained current-build path trace shows 15 subtree hits from `svchost.exe..."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "The retained root dump proves that HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride exists as a persisted subtree on the baseline capture.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": true,
+          "links": [
+            {
+              "title": "Retained power-control root dump contains the PowerRequestOverride subtree",
+              "url": "evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.txt and evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.reg",
+              "kind": "registry-observation",
+              "summary": "The retained root dump proves that HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride exists as a persisted subtree on the baseline capture."
+            },
+            {
+              "title": "Retained runtime audit for the PowerRequestOverride subtree",
+              "url": "registry-research-framework/audit/power-request-override-runtime-audit-20260408.json and registry-research-framework/audit/power-request-override-runtime-audit-20260408.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv and research/notes/power-control-power-request-override-subtree-triage-20260408.md",
+              "kind": "procmon-trace",
+              "summary": "The retained current-build runtime trace shows 15 subtree hits, all from svchost.exe, across the subtree root plus Driver, Process, and Service with a RegOpenKey / RegQueryKey /..."
+            },
+            {
+              "title": "Retained wildcard local-KD lineage exposes the override family",
+              "url": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/stdout.txt and research/notes/power-control-power-request-override-subtree-triage-20260408.md",
+              "kind": "vm-test",
+              "summary": "The retained wildcard local-KD pass exposes PopPowerRequestHandleRequestOverrideQueryResponse, PopPowerRequestOverrideInitialize, PopUmpoSendPowerRequestOverrideQuery, and PopUm..."
+            }
+          ]
+        },
+        "upstream_lineage": {
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
+        }
+      },
+      "decision": {
+        "confidence": "medium",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": false,
+        "restore_previous_supported": false,
+        "needs_vm_validation": true,
+        "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, and retained wildcard local-KD lineage on the current build. That is enough to open a standalone draft subtree lane, but not enough yet to claim exact leaf defaults, exact binding semantics, or a bounded static path.",
+        "blocking_issues": [
+          "Exact leaf values and semantics under PowerRequestOverride are still unresolved because the retained runtime trace currently shows root queries and NAME NOT FOUND probes on Driver, Process, and Service rather than stable leaf-value reads.",
+          "The current subtree lane does not yet have a dedicated bounded Ghidra path; the visible static lineage is still limited to wildcard local-KD symbols and adjacent execution-required follow-up notes.",
+          "The record does not yet have a reliable restore story beyond the observed retained subtree-presence snapshot."
+        ]
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "not currently shipped in the app",
+        "notes": "The app does not expose PowerRequestOverride as a supported tweak or browseable subtree surface.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "powerrequestoverride-subtree",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+          "value_name": "(subtree root, Driver, Process, Service)",
+          "value_type": "registry key subtree",
+          "notes": "Treat this as a subtree lane rather than as a single registry value.",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": "root subtree present; runtime probes on Driver/Process/Service",
+              "label": "Observed retained subtree state",
+              "meaning": "The retained dump and runtime trace prove the subtree root exists and is actively queried, but they do not yet resolve exact leaf values.",
+              "evidence_ids": [
+                "vm-power-request-override-root-dump-20260324",
+                "vm-power-request-override-runtime-audit-20260408"
+              ]
+            },
+            {
+              "state_kind": "feature-dependent",
+              "label": "Leaf semantics unresolved",
+              "meaning": "The current retained runtime capture probes Driver, Process, and Service but lands on NAME NOT FOUND for those leaves, so exact subtree content still appears trigger- or environment-dependent.",
+              "evidence_ids": [
+                "vm-power-request-override-runtime-audit-20260408",
+                "vm-power-request-override-kd-lineage-20260408"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Observed retained subtree state",
+          "applies_to": "Current retained baseline/root-dump and runtime-trace artifacts",
+          "states": [
+            {
+              "target_id": "powerrequestoverride-subtree",
+              "state_kind": "value",
+              "value": "root subtree present; runtime probes on Driver/Process/Service",
+              "rationale": "Track the currently retained subtree presence and runtime access pattern without claiming exact leaf defaults."
+            }
+          ],
+          "evidence_ids": [
+            "vm-power-request-override-root-dump-20260324",
+            "vm-power-request-override-runtime-audit-20260408"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "observed-retained-subtree",
+          "label": "Observed retained subtree",
+          "intended_for": [
+            "Registry research tracking",
+            "Power-request override lineage review"
+          ],
+          "avoid_for": [
+            "General users",
+            "One-click apply surfaces"
+          ],
+          "states": [
+            {
+              "target_id": "powerrequestoverride-subtree",
+              "state_kind": "value",
+              "value": "root subtree present; runtime probes on Driver/Process/Service",
+              "rationale": "Track the subtree as a research artifact without turning it into a shipped tweak."
+            }
+          ],
+          "good_when": "You want to document the retained subtree and current-build override-family lineage.",
+          "bad_when": "You need exact leaf semantics, a safe recommendation, or an app-ready toggle.",
+          "tradeoffs": [
+            "Preserves the retained subtree evidence.",
+            "Leaves leaf-value semantics unresolved."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "vm-power-request-override-root-dump-20260324",
+            "vm-power-request-override-runtime-audit-20260408",
+            "vm-power-request-override-kd-lineage-20260408"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "vm-power-request-override-root-dump-20260324",
+          "kind": "registry-observation",
+          "title": "Retained power-control root dump contains the PowerRequestOverride subtree",
+          "location": "evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.txt and evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.reg",
+          "summary": "The retained root dump proves that HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride exists as a persisted subtree on the baseline capture.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM registry observation"
+        },
+        {
+          "evidence_id": "vm-power-request-override-runtime-audit-20260408",
+          "kind": "procmon-trace",
+          "title": "Retained runtime audit for the PowerRequestOverride subtree",
+          "location": "registry-research-framework/audit/power-request-override-runtime-audit-20260408.json and registry-research-framework/audit/power-request-override-runtime-audit-20260408.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv and research/notes/power-control-power-request-override-subtree-triage-20260408.md",
+          "summary": "The retained current-build runtime trace shows 15 subtree hits, all from svchost.exe, across the subtree root plus Driver, Process, and Service with a RegOpenKey / RegQueryKey / RegCloseKey pattern.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
+        },
+        {
+          "evidence_id": "vm-power-request-override-kd-lineage-20260408",
+          "kind": "vm-test",
+          "title": "Retained wildcard local-KD lineage exposes the override family",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/stdout.txt and research/notes/power-control-power-request-override-subtree-triage-20260408.md",
+          "summary": "The retained wildcard local-KD pass exposes PopPowerRequestHandleRequestOverrideQueryResponse, PopPowerRequestOverrideInitialize, PopUmpoSendPowerRequestOverrideQuery, and PopUmpoSendPowerRequestOverrideCleanup on the current build.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        }
+      ],
+      "validation_proof": {
+        "source_url": "research/notes/power-control-power-request-override-subtree-triage-20260408.md",
+        "exact_quote_or_path": "The retained root dump contains `HKLM/SYSTEM/CurrentControlSet/Control/Power/PowerRequestOverride`, the retained current-build path trace shows 15 subtree hits from `svchost.exe`, and the retained wildcard KD lineage exposes the override family.",
+        "key_found_on_page": true,
+        "notes": "This proof establishes subtree existence plus live current-build access, but it does not yet resolve exact leaf-value semantics."
+      },
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": null,
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
       "artifact_refs": [],
       "re_audit": null
     },

@@ -1,24 +1,25 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T18:13:02.976953Z",
+  "generated_utc": "2026-04-08T18:21:02.028212Z",
   "summary": {
-    "total_active_records": 258,
+    "total_active_records": 259,
     "class_counts": {
       "A": 249,
       "B": 7,
-      "C": 2
+      "C": 3
     },
     "lane_counts": {
       "official-policy": 236,
       "runtime": 6,
-      "early-boot": 11,
+      "early-boot": 12,
       "system": 5
     },
     "next_missing_layer_counts": {
       "none": 249,
       "procmon": 3,
       "runtime-trace": 2,
-      "decision-gate": 4
+      "decision-gate": 4,
+      "ghidra": 1
     },
     "re_audit_required_count": 12
   },
@@ -3825,6 +3826,52 @@
       "apply_allowed": false,
       "confidence": "high",
       "source_file": "research/records/power.control.perf-calculate-actual-utilization.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "power.control.power-request-override-subtree",
+      "tweak_id": "power.control.power-request-override-subtree",
+      "evidence_class": "C",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": true,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "ghidra",
+      "cross_layer_satisfied": false,
+      "layers_used": [
+        "runtime_procmon"
+      ],
+      "tools_used": [
+        "procmon"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": false,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "medium",
+      "source_file": "research/records/power.control.power-request-override-subtree.json",
       "incident_ids": []
     },
     {
