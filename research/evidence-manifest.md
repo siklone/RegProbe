@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 316 |
+| Total records | 317 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 316 |
+| Records with evidence | 317 |
 | Records without evidence | 0 |
-| Records missing validation proof | 6 |
+| Records missing validation proof | 7 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
 | Class B | 7 |
-| Class D | 6 |
+| Class D | 7 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -89,6 +89,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class D | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `9f225d3d01745832a87ae42eebbc4df923b193dde062b6e31650887d3e138a6f` |  | 7 |
 | `system.kernel-dpc-watchdog-control-cluster` | draft | Class D | `research/records/system.kernel-dpc-watchdog-control-cluster.json` | - | `566664d4be7af88bd7c7b877a8da844f7ee3f87ea8e31b44aa7b01965ab63505` |  | 10 |
 | `system.kernel-dpc-watchdog-profile-cluster` | draft | Class D | `research/records/system.kernel-dpc-watchdog-profile-cluster.json` | - | `29eea49b72490c92b6fc8f4395f16ab0596fe08b17adacc54380ef4e5dcd8d74` |  | 11 |
+| `system.kernel-long-dpc-threshold-cluster` | draft | Class D | `research/records/system.kernel-long-dpc-threshold-cluster.json` | - | `98949d45a503e08dd3e627b9efa964cca852f287e179845e436f23aed871cb00` |  | 5 |
 | `system.kernel.force-bugcheck-for-dpc-watchdog` | draft | Class D | `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json` | - | `ad03e9fc71c89ef34719a6f1c8631f543706ee97a9138953ec7e8bdad76e0aeb` |  | 5 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
@@ -2016,6 +2017,28 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-session-manager-kernel-dpc-watchdog-ntsetsysinfo-kd-20260408` | `vm-test` | Dedicated KVM local-KD confirms exact NtSetSystemInformation callsite, admin gate, and inferred numeric arm | [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log) |
 | `vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408` | `vm-test` | PDB-backed KVM Ghidra shows DPC watchdog init and legacy profile derivation semantics | [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/evidence.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/evidence.json) and [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md) |
 | `vm-session-manager-kernel-dpc-watchdog-query-lineage-kd-20260408` | `vm-test` | Dedicated KVM local-KD confirms exact NtQuerySystemInformation wrapper into ExpQuerySystemInformation | [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log) |
+
+---
+
+### `system.kernel-long-dpc-threshold-cluster`
+
+- Status: `draft`
+- Evidence class: `Class D`
+- Source file: `research/records/system.kernel-long-dpc-threshold-cluster.json`
+- Source SHA256: `98949d45a503e08dd3e627b9efa964cca852f287e179845e436f23aed871cb00`
+- Proof SHA256: ``
+
+**Summary:** Draft docs-first Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and both stayed `no-hit` in the broad lightweight runtime replay. This keeps the family real and current-build-relevant, but still below the line for aggressive RE until a stronger caller, symbol, or live state clue appears.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-session-manager-kernel-long-dpc-threshold-docs-20260327` | `repo-doc` | Repo system docs assign LongDpcQueueThreshold = 3 and LongDpcRuntimeThreshold = 100 | [Docs/system/system.md](../Docs/system/system.md) and [research/notes/kernel-power-96-key-routing-20260327.md](notes/kernel-power-96-key-routing-20260327.md) |
+| `vm-session-manager-kernel-long-dpc-threshold-existence-20260329` | `registry-observation` | Observed baseline existence for LongDpcQueueThreshold and LongDpcRuntimeThreshold | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-session-manager-kernel-long-dpc-threshold-string-20260331` | `inference` | Current-build string hits for LongDpcQueueThreshold and LongDpcRuntimeThreshold | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
+| `vm-session-manager-kernel-long-dpc-threshold-runtime-20260331` | `vm-test` | Lightweight runtime batch kept both LongDpc thresholds in residual no-hit hold | [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) |
+| `source-enrichment-session-manager-kernel-long-dpc-threshold-20260403` | `analysis-output` | Source-enrichment keeps both LongDpc thresholds as docs-first new candidates | [registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-queue-threshold.json](../registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-queue-threshold.json) and [registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-runtime-threshold.json](../registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-runtime-threshold.json) |
 
 ---
 

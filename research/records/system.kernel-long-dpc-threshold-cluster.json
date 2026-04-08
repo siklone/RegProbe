@@ -1,0 +1,240 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.kernel-long-dpc-threshold-cluster",
+  "tweak_id": "system.kernel-long-dpc-threshold-cluster",
+  "record_status": "draft",
+  "summary": "Draft docs-first Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and both stayed `no-hit` in the broad lightweight runtime replay. This keeps the family real and current-build-relevant, but still below the line for aggressive RE until a stronger caller, symbol, or live state clue appears.",
+  "setting": {
+    "name": "Kernel Long DPC Threshold Cluster",
+    "category": "System",
+    "area": "Session Manager Kernel DPC Scheduling",
+    "scope": "device",
+    "casual_explanation": "This cluster appears to expose low-level thresholds for what the kernel considers a long DPC queue condition and a long DPC runtime condition. It is kernel-adjacent and not a normal user setting.",
+    "why_people_change_it": "Kernel researchers may inspect these values when investigating DPC latency behavior, watchdog escalation, or undocumented scheduler-tuning guides.",
+    "tradeoffs_overview": "The cluster has explicit repo-doc defaults, clean baseline state, exact current-build string hits, and a broad runtime no-hit lane. It is strong enough for a schema-backed draft, but still too weak for a published tweak or a recommended non-default configuration.",
+    "professional_notes": "Repo docs list `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` under `Session Manager\\\\Kernel`, mapped to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`. The kernel-power routing pass already grouped both values inside the `Session Manager\\\\Kernel` docs cluster. The observed clean baseline later confirmed that the parent key exists while both values are absent. The targeted current-build string batch then found exact Unicode hits for both values in `ntoskrnl.exe`, which is stronger than a pure docs-only lead and enough to keep the family out of raw backlog. The later lightweight runtime replay wrote the broader `Session Manager\\\\Kernel` family, rebooted once, and still left both values in the residual `no-hit` hold. Existing source-enrichment outputs converge on the same low-priority next lane for both values: `timer-dpc-stress`, `windbg` queue, with no stronger source-code or header corroboration. This cluster therefore belongs in the canonical research set, but as a docs-first DPC sibling family rather than an actively promoted tweak lane.",
+    "targets": [
+      {
+        "target_id": "long-dpc-queue-threshold",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "LongDpcQueueThreshold",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Missing on observed baseline",
+            "meaning": "The parent key exists, but the value is absent on the observed clean baseline.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-long-dpc-threshold-existence-20260329"
+            ]
+          },
+          {
+            "state_kind": "documented-default",
+            "value": 3,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs assign `LongDpcQueueThreshold = 3` and map it to `KiLongDpcQueueThreshold`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-long-dpc-threshold-docs-20260327"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "long-dpc-runtime-threshold",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "LongDpcRuntimeThreshold",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Missing on observed baseline",
+            "meaning": "The parent key exists, but the value is absent on the observed clean baseline.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-long-dpc-threshold-existence-20260329"
+            ]
+          },
+          {
+            "state_kind": "documented-default",
+            "value": 100,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs assign `LongDpcRuntimeThreshold = 100` and map it to `KiLongDpcRuntimeThreshold`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-long-dpc-threshold-docs-20260327"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The app does not currently expose either long-DPC threshold as a tweak surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed baseline registry state",
+      "applies_to": "Win25H2Clean observed baseline",
+      "states": [
+        {
+          "target_id": "long-dpc-queue-threshold",
+          "state_kind": "missing",
+          "value": null
+        },
+        {
+          "target_id": "long-dpc-runtime-threshold",
+          "state_kind": "missing",
+          "value": null
+        }
+      ],
+      "notes": "Observed registry baseline only. Repo docs separately describe likely built-in defaults for both values.",
+      "evidence_ids": [
+        "vm-session-manager-kernel-long-dpc-threshold-existence-20260329"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-default-missing-cluster",
+      "label": "Observed default-missing cluster",
+      "intended_for": [
+        "Research tracking",
+        "Future DPC-threshold validation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click tweak surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "long-dpc-queue-threshold",
+          "state_kind": "missing",
+          "value": null
+        },
+        {
+          "target_id": "long-dpc-runtime-threshold",
+          "state_kind": "missing",
+          "value": null
+        }
+      ],
+      "good_when": "You want to preserve the observed baseline while keeping both DPC threshold siblings in the research queue.",
+      "bad_when": "You need a validated non-default recommendation or a demonstrated runtime reader path.",
+      "tradeoffs": [
+        "Preserves the observed baseline registry state.",
+        "Acknowledges that both values are current-build-relevant strings in `ntoskrnl.exe`.",
+        "Keeps the next proof step focused on caller or live-value discovery instead of speculative mutation."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-session-manager-kernel-long-dpc-threshold-docs-20260327",
+        "vm-session-manager-kernel-long-dpc-threshold-existence-20260329",
+        "static-session-manager-kernel-long-dpc-threshold-string-20260331",
+        "vm-session-manager-kernel-long-dpc-threshold-runtime-20260331",
+        "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-session-manager-kernel-long-dpc-threshold-docs-20260327",
+      "kind": "repo-doc",
+      "title": "Repo system docs assign LongDpcQueueThreshold = 3 and LongDpcRuntimeThreshold = 100",
+      "location": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
+      "summary": "Repo docs list both values under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` and map them to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`.",
+      "supports": [
+        "path",
+        "value",
+        "default"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-existence-20260329",
+      "kind": "registry-observation",
+      "title": "Observed baseline existence for LongDpcQueueThreshold and LongDpcRuntimeThreshold",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while both `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` are absent.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-session-manager-kernel-long-dpc-threshold-string-20260331",
+      "kind": "inference",
+      "title": "Current-build string hits for LongDpcQueueThreshold and LongDpcRuntimeThreshold",
+      "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+      "summary": "The broad current-build string batch found exact Unicode hits for both value names in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`, with no supporting hits in the adjacent `smss.exe`, `winload.exe`, or `ci.dll` probes.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-runtime-20260331",
+      "kind": "vm-test",
+      "title": "Lightweight runtime batch kept both LongDpc thresholds in residual no-hit hold",
+      "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
+      "summary": "The tools-hardened lightweight runtime lane wrote the broader `Session Manager\\\\Kernel` family, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `system.kernel.long-dpc-runtime-threshold` in the residual `no-hit` hold.",
+      "supports": [
+        "behavior",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403",
+      "kind": "analysis-output",
+      "title": "Source-enrichment keeps both LongDpc thresholds as docs-first new candidates",
+      "location": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-queue-threshold.json and registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-runtime-threshold.json",
+      "summary": "Source-enrichment assigns both values the same low-support docs-first route bucket and converges on the same suggested next runtime family: `timer-dpc-stress`, low priority, `windbg` queue.",
+      "supports": [
+        "research-gap",
+        "version-scope"
+      ],
+      "strength": "medium"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, and a real runtime replay that still left both values in no-hit hold. It is not ready for validation because there is still no current-build caller, live value state, or primary Microsoft source for either value.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "no-current-build-caller-path",
+      "runtime_no_read",
+      "no-doc-source-outside-repo",
+      "live-state-unproven"
+    ]
+  },
+  "open_questions": [
+    "Which current-build caller, if any, seeds or reads `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold` from `Session Manager\\\\Kernel`?",
+    "Are the repo-doc defaults built-in live defaults, boot-only overrides, or stale mappings from an older build family?",
+    "Would a targeted `timer-dpc-stress` or debugger-assisted lane surface live state or a real query/set path for either value?"
+  ],
+  "tested_on": [
+    {
+      "environment": "Win25H2Clean observed baseline and VMware lightweight runtime batch",
+      "os": "Windows 11 25H2",
+      "build": "26200",
+      "notes": "The lane currently combines baseline existence, exact current-build string hits, and a broad write-and-reboot runtime pass that still left both values in the residual no-hit hold."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-08T00:45:52Z"
+}
