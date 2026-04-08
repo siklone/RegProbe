@@ -1,0 +1,10 @@
+.sympath C:\Tools\Symbols\local-kd-allowsystemrequired-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopPowerRequestConvertSystemToExecution
+dd nt!PopPowerRequestConvertSystemToExecution L1
+x nt!*PowerRequest*Execution*
+x nt!*AllowSystemRequired*
+.echo REGPROBE_ALLOWSYSTEMREQ_DONE
+.echo REGPROBE_LOCALKD_END
+q

@@ -1,25 +1,25 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T04:45:48.036652Z",
+  "generated_utc": "2026-04-08T04:53:26.112535Z",
   "summary": {
-    "total_records": 320,
+    "total_records": 321,
     "validated": 255,
     "deprecated": 55,
     "review_required": 0,
-    "records_with_evidence": 320,
+    "records_with_evidence": 321,
     "records_without_evidence": 0,
-    "records_missing_validation_proof": 10,
+    "records_missing_validation_proof": 11,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
       "A": 248,
       "E": 55,
       "B": 7,
-      "D": 10
+      "D": 11
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T04:45:47.666561Z",
+      "generated_utc": "2026-04-08T04:53:25.867921Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -17779,6 +17779,279 @@
       "re_audit": null
     },
     {
+      "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "record_status": "draft",
+      "source_file": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
+      "name": "Allow Audio To Enable Execution Required Power Requests",
+      "category": "Power",
+      "area": "Control Power Requests",
+      "scope": "device",
+      "summary": "Draft Control Power record. `AllowAudioToEnableExecutionRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. A later KVM local-KD wildcard sweep for the sibling system-required lane also surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, but did not read its value. The lane is strong enough for a schema-backed draft, but still lacks live current-build state, a current-build reader or seeding path, and an exact runtime registry read.",
+      "evidence_class": {
+        "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+        "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+        "record_status": "draft",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "low",
+        "app_mapping_status": "not-mapped",
+        "restore_story_known": true,
+        "tested_build": "26200",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "Repo docs assign `AllowAudioToEnableExecutionRequiredPowerRequests = 1` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` and map it to `PopPowerRequestActiveAudioEnablesExecutionRequired`.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo power docs assign AllowAudioToEnableExecutionRequiredPowerRequests = 1",
+              "url": "Docs/power/power.md and research/notes/kernel-power-96-key-routing-20260327.md",
+              "kind": "repo-doc",
+              "summary": "Repo docs assign `AllowAudioToEnableExecutionRequiredPowerRequests = 1` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` and map it to `PopPowerRequestActiveAudioEnablesE..."
+            },
+            {
+              "title": "Repo guest tooling now exposes a named power-request-simulation harness",
+              "url": "scripts/vm/guest-tools/run-registry-policy-probe.ps1 and scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1",
+              "kind": "repo-code",
+              "summary": "The generic Procmon guest tool now exposes `TriggerProfile = power-request-simulation`, and the mega-trigger runtime surface now exposes the matching `power_request_simulation`..."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` exists while `AllowAudioToEnableExecutionRequiredPowerRequests` itself is absent.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": true,
+          "links": [
+            {
+              "title": "Observed baseline existence for AllowAudioToEnableExecutionRequiredPowerRequests",
+              "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+              "kind": "registry-observation",
+              "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` exists while `AllowAudioToEnableExecutionRequiredPowerRequests` itself is absent."
+            },
+            {
+              "title": "Sibling KVM local-KD wildcard sweep surfaces PopPowerRequestActiveAudioEnablesExecutionRequired",
+              "url": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log",
+              "kind": "vm-test",
+              "summary": "The sibling system-required KVM local-KD wildcard sweep resolved the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, which strengthens current-build contin..."
+            }
+          ]
+        },
+        "upstream_lineage": {
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
+        }
+      },
+      "decision": {
+        "confidence": "low",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, and a matching repo-native trigger harness. It is not ready for validation because live current-build state, the exact registry reader/caller path, and an exact runtime registry read remain unproven.",
+        "blocking_issues": [
+          "no-live-current-build-state",
+          "no-current-build-reader-path",
+          "no-primary-current-build-doc"
+        ]
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "not currently shipped in the app",
+        "notes": "The app does not currently expose this Control Power audio power-request policy as a tweak surface.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "allow-audio-to-enable-execution-required-power-requests",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+          "value_type": "REG_DWORD",
+          "notes": "A sibling KVM local-KD wildcard sweep surfaced `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, but no direct live value read or narrow replay result is retained yet.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Missing on observed baseline",
+              "meaning": "The parent key exists, but the value is absent on the observed clean baseline.",
+              "evidence_ids": [
+                "vm-power-control-allow-audio-to-enable-execution-required-power-requests-existence-20260329"
+              ]
+            },
+            {
+              "state_kind": "documented-default",
+              "value": 1,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs assign `AllowAudioToEnableExecutionRequiredPowerRequests = 1` and map it to `PopPowerRequestActiveAudioEnablesExecutionRequired`.",
+              "evidence_ids": [
+                "repo-power-control-allow-audio-to-enable-execution-required-power-requests-doc-20260327"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Observed baseline registry state",
+          "applies_to": "Win25H2Clean observed baseline",
+          "states": [
+            {
+              "target_id": "allow-audio-to-enable-execution-required-power-requests",
+              "state_kind": "missing",
+              "value": null
+            }
+          ],
+          "evidence_ids": [
+            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-existence-20260329"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "observed-default-missing",
+          "label": "Observed default-missing state",
+          "intended_for": [
+            "Research tracking",
+            "Future power-request validation"
+          ],
+          "avoid_for": [
+            "General users",
+            "One-click tweak surfaces"
+          ],
+          "states": [
+            {
+              "target_id": "allow-audio-to-enable-execution-required-power-requests",
+              "state_kind": "missing",
+              "value": null
+            }
+          ],
+          "good_when": "You want to preserve the observed baseline until a tighter current-build power-request proof path exists.",
+          "bad_when": "You need a validated non-default recommendation or production tweak.",
+          "tradeoffs": [
+            "Preserves the observed baseline registry state.",
+            "Avoids inventing unsupported non-default semantics.",
+            "Keeps the next proof step focused on narrow power-request replay and reader or seed validation rather than speculative mutation."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-power-control-allow-audio-to-enable-execution-required-power-requests-doc-20260327",
+            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-existence-20260329",
+            "static-power-control-allow-audio-to-enable-execution-required-power-requests-string-20260331",
+            "analysis-power-control-allow-audio-to-enable-execution-required-power-requests-enrichment-20260403",
+            "repo-power-control-allow-audio-to-enable-execution-required-power-requests-trigger-20260408",
+            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-symbol-20260408"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-power-control-allow-audio-to-enable-execution-required-power-requests-doc-20260327",
+          "kind": "repo-doc",
+          "title": "Repo power docs assign AllowAudioToEnableExecutionRequiredPowerRequests = 1",
+          "location": "Docs/power/power.md and research/notes/kernel-power-96-key-routing-20260327.md",
+          "summary": "Repo docs assign `AllowAudioToEnableExecutionRequiredPowerRequests = 1` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` and map it to `PopPowerRequestActiveAudioEnablesExecutionRequired`.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "default"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-existence-20260329",
+          "kind": "registry-observation",
+          "title": "Observed baseline existence for AllowAudioToEnableExecutionRequiredPowerRequests",
+          "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+          "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` exists while `AllowAudioToEnableExecutionRequiredPowerRequests` itself is absent.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM registry observation"
+        },
+        {
+          "evidence_id": "static-power-control-allow-audio-to-enable-execution-required-power-requests-string-20260331",
+          "kind": "inference",
+          "title": "Current-build string hit for AllowAudioToEnableExecutionRequiredPowerRequests",
+          "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+          "summary": "The broad current-build string batch found an exact Unicode hit for `AllowAudioToEnableExecutionRequiredPowerRequests` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "analysis-power-control-allow-audio-to-enable-execution-required-power-requests-enrichment-20260403",
+          "kind": "analysis-output",
+          "title": "Source-enrichment keeps AllowAudioToEnableExecutionRequiredPowerRequests as a docs-first kernel candidate with a power-request trigger family",
+          "location": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/power.control.allow-audio-to-enable-execution-required-power-requests.json",
+          "summary": "Source-enrichment kept the value in the canonical queue as a docs-first `Control\\\\Power` candidate and suggested `power-request-simulation` as the next runtime family, with `PowerCreateRequest(SystemRequired)`, `PowerSetRequest(DisplayRequired)`, and audio playback as concrete trigger primitives.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "research-gap"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "repo-power-control-allow-audio-to-enable-execution-required-power-requests-trigger-20260408",
+          "kind": "repo-code",
+          "title": "Repo guest tooling now exposes a named power-request-simulation harness",
+          "location": "scripts/vm/guest-tools/run-registry-policy-probe.ps1 and scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1",
+          "summary": "The generic Procmon guest tool now exposes `TriggerProfile = power-request-simulation`, and the mega-trigger runtime surface now exposes the matching `power_request_simulation` alias, both using the same `PowerCreateRequest(SystemRequired/DisplayRequired/AwayMode)` primitive family recommended by source-enrichment.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "research-gap"
+          ],
+          "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-symbol-20260408",
+          "kind": "vm-test",
+          "title": "Sibling KVM local-KD wildcard sweep surfaces PopPowerRequestActiveAudioEnablesExecutionRequired",
+          "location": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log",
+          "summary": "The sibling system-required KVM local-KD wildcard sweep resolved the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, which strengthens current-build continuity for the mapped audio candidate even though no direct value read was taken.",
+          "strength": "medium",
+          "supports": [
+            "value",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": null,
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
       "record_id": "power.control.allow-system-required-power-requests",
       "tweak_id": "power.control.allow-system-required-power-requests",
       "record_status": "draft",
@@ -17787,7 +18060,7 @@
       "category": "Power",
       "area": "Control Power Requests",
       "scope": "device",
-      "summary": "Draft Control Power record. `AllowSystemRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. The lane is strong enough for a schema-backed draft, but still lacks live current-build state, a current-build reader or seeding path, and an exact runtime registry read.",
+      "summary": "Draft Control Power record. `AllowSystemRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. A later KVM local-KD pass then resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, which aligns with the repo-doc default. The lane is strong enough for a schema-backed draft, but still lacks a current-build reader or seeding path and an exact runtime registry read.",
       "evidence_class": {
         "record_id": "power.control.allow-system-required-power-requests",
         "tweak_id": "power.control.allow-system-required-power-requests",
@@ -17839,6 +18112,12 @@
               "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
               "kind": "registry-observation",
               "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` exists while `AllowSystemRequiredPowerRequests` itself is absent."
+            },
+            {
+              "title": "KVM local-KD resolves live PopPowerRequestConvertSystemToExecution = 1",
+              "url": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log",
+              "kind": "vm-test",
+              "summary": "A retained KVM local-KD pass resolved `nt!PopPowerRequestConvertSystemToExecution` and read its live value as `1`. The same wildcard sweep also resolved the sibling symbol `nt!P..."
             }
           ]
         },
@@ -17856,9 +18135,8 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, and a matching repo-native trigger harness. It is not ready for validation because live current-build state, the exact registry reader/caller path, and an exact runtime registry read remain unproven.",
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, and a live KVM local-KD value that aligns with the repo-doc default. It is not ready for validation because the exact registry reader/caller path and an exact runtime registry read remain unproven.",
         "blocking_issues": [
-          "no-live-current-build-state",
           "no-current-build-reader-path",
           "no-primary-current-build-doc"
         ]
@@ -17876,7 +18154,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "AllowSystemRequiredPowerRequests",
           "value_type": "REG_DWORD",
-          "notes": "No dedicated live KD or narrow replay result is retained yet.",
+          "notes": "A later retained KVM local-KD pass resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, but no exact registry reader or narrow replay result is retained yet.",
           "allowed_values": [
             {
               "state_kind": "missing",
@@ -17946,7 +18224,8 @@
             "vm-power-control-allow-system-required-power-requests-existence-20260329",
             "static-power-control-allow-system-required-power-requests-string-20260331",
             "analysis-power-control-allow-system-required-power-requests-enrichment-20260403",
-            "repo-power-control-allow-system-required-power-requests-trigger-20260408"
+            "repo-power-control-allow-system-required-power-requests-trigger-20260408",
+            "vm-power-control-allow-system-required-power-requests-kd-20260408"
           ]
         }
       ],
@@ -18019,6 +18298,20 @@
             "research-gap"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-power-control-allow-system-required-power-requests-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD resolves live PopPowerRequestConvertSystemToExecution = 1",
+          "location": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log",
+          "summary": "A retained KVM local-KD pass resolved `nt!PopPowerRequestConvertSystemToExecution` and read its live value as `1`. The same wildcard sweep also resolved the sibling symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, but did not read its value.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": null,
