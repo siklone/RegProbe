@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 318 |
+| Total records | 319 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 318 |
+| Records with evidence | 319 |
 | Records without evidence | 0 |
-| Records missing validation proof | 8 |
+| Records missing validation proof | 9 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
 | Class B | 7 |
-| Class D | 8 |
+| Class D | 9 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -89,8 +89,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class D | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `9f225d3d01745832a87ae42eebbc4df923b193dde062b6e31650887d3e138a6f` |  | 7 |
 | `system.kernel-dpc-watchdog-control-cluster` | draft | Class D | `research/records/system.kernel-dpc-watchdog-control-cluster.json` | - | `566664d4be7af88bd7c7b877a8da844f7ee3f87ea8e31b44aa7b01965ab63505` |  | 10 |
 | `system.kernel-dpc-watchdog-profile-cluster` | draft | Class D | `research/records/system.kernel-dpc-watchdog-profile-cluster.json` | - | `29eea49b72490c92b6fc8f4395f16ab0596fe08b17adacc54380ef4e5dcd8d74` |  | 11 |
-| `system.kernel-long-dpc-threshold-cluster` | draft | Class D | `research/records/system.kernel-long-dpc-threshold-cluster.json` | - | `2b269c7f761ce8fe318e793f2c03bf451101295d87fcd941b982ff552b0853cd` |  | 11 |
+| `system.kernel-long-dpc-threshold-cluster` | draft | Class D | `research/records/system.kernel-long-dpc-threshold-cluster.json` | - | `099acc329149e8a560e7513128f0f5a4e138061b6b3f53a8df3945a1c5bfbe88` |  | 12 |
 | `system.kernel.force-bugcheck-for-dpc-watchdog` | draft | Class D | `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json` | - | `ad03e9fc71c89ef34719a6f1c8631f543706ee97a9138953ec7e8bdad76e0aeb` |  | 5 |
+| `system.kernel.global-timer-resolution-requests` | draft | Class D | `research/records/system.kernel.global-timer-resolution-requests.json` | - | `4f6bf952a53cfe85f5caaadc251dd9eccad6c2832736d46e391eac809af0d4ef` |  | 6 |
 | `system.kernel.timer-check-flags` | draft | Class D | `research/records/system.kernel.timer-check-flags.json` | - | `77dad43afedb5cfe5267e4d33d2266dd6f4c42668d4b8f756267a8efe2834826` |  | 6 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
@@ -2026,10 +2027,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class D`
 - Source file: `research/records/system.kernel-long-dpc-threshold-cluster.json`
-- Source SHA256: `2b269c7f761ce8fe318e793f2c03bf451101295d87fcd941b982ff552b0853cd`
+- Source SHA256: `099acc329149e8a560e7513128f0f5a4e138061b6b3f53a8df3945a1c5bfbe88`
 - Proof SHA256: ``
 
-**Summary:** Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while still failing to surface a direct symbolized read of the retained `KiLongDpc*` globals. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The cluster is therefore live-state-confirmed and consumer-lineage-narrowed, but still export-blocked and direct-read-unresolved.
+**Summary:** Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while a later PDB-backed Ghidra xref pass directly resolved `KiLongDpcQueueThreshold` references in `KiExecuteAllDpcs` and `KeInitSystem`. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The cluster is therefore live-state-confirmed and current-build lineage-confirmed, but still export-blocked and still lacks a direct current-build read site for `KiLongDpcRuntimeThreshold` or a persisted registry seeding path.
 
 **Evidence**
 
@@ -2044,6 +2045,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-session-manager-kernel-long-dpc-threshold-kd-symbols-20260408` | `vm-test` | KVM local-KD symbol sweep resolved the live Long-DPC threshold family | [evidence/files/vm/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a-summary.json](../evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a-summary.json) and [evidence/files/vm/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a.log](../evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a.log) |
 | `vm-session-manager-kernel-long-dpc-threshold-kd-values-20260408` | `vm-test` | KVM local-KD live values match the repo-doc Long-DPC defaults | [evidence/files/vm/local-kd-longdpc-values-20260408a/local-kd-longdpc-values-20260408a-summary.json](../evidence/files/vm-tooling-staging/local-kd-longdpc-values-20260408a/local-kd-longdpc-values-20260408a-summary.json) and [evidence/files/vm/local-kd-longdpc-values-20260408a/local-kd-longdpc-values-20260408a.log](../evidence/files/vm-tooling-staging/local-kd-longdpc-values-20260408a/local-kd-longdpc-values-20260408a.log) |
 | `vm-session-manager-kernel-long-dpc-threshold-kd-consumer-20260408` | `vm-test` | KVM local-KD consumer pass narrows the live Long-DPC lineage to KiEnterLongDpcProcessing and ETW mitigation | [evidence/files/vm/local-kd-longdpc-consumer-20260408a/local-kd-longdpc-consumer-20260408a-summary.json](../evidence/files/vm-tooling-staging/local-kd-longdpc-consumer-20260408a/local-kd-longdpc-consumer-20260408a-summary.json) and [evidence/files/vm/local-kd-longdpc-consumer-20260408a/local-kd-longdpc-consumer-20260408a.log](../evidence/files/vm-tooling-staging/local-kd-longdpc-consumer-20260408a/local-kd-longdpc-consumer-20260408a.log) |
+| `static-session-manager-kernel-long-dpc-threshold-ghidra-queue-xref-20260408` | `analysis-output` | PDB-backed Ghidra xrefs resolve KiLongDpcQueueThreshold in KiExecuteAllDpcs and KeInitSystem | [evidence/files/vm/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-summary.json](../evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-summary.json) and [evidence/files/vm/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-evidence.json](../evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-evidence.json) and [evidence/files/vm/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-ghidra-matches.md](../evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-ghidra-matches.md) |
 | `vm-session-manager-kernel-long-dpc-runtime-timerdpc-procmon-20260408` | `vm-test` | Dedicated KVM Procmon timer-dpc-stress replay reached guest execution but failed at Procmon SaveAs | [evidence/files/vm/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a-summary.json](../evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a-summary.json) and [evidence/files/vm/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a/host-review.json](../evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a/host-review.json) |
 | `vm-session-manager-kernel-long-dpc-runtime-timerdpc-procmon-retry-20260408` | `vm-test` | Dedicated KVM Procmon timer-dpc-stress retry still ended in Procmon SaveAs timeout after widened export budget | [evidence/files/vm/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d-summary.json,](../evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d-summary.json,) [evidence/files/vm/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d-probe-stage.json,](../evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d-probe-stage.json,) and [evidence/files/vm/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/host-review.json](../evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/host-review.json) |
 
@@ -2068,6 +2070,29 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `static-session-manager-kernel-force-bugcheck-string-20260331` | `inference` | Current-build string hit for ForceBugcheckForDpcWatchdog | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
 | `vm-session-manager-kernel-force-bugcheck-runtime-20260331` | `vm-test` | Lightweight runtime batch wrote ForceBugcheckForDpcWatchdog = 1 and rebooted once | [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) |
 | `vm-session-manager-kernel-force-bugcheck-kd-20260407` | `vm-test` | Dedicated KVM local-KD bundle resolves KiForceBugcheckForDpcWatchdog = 0 | [evidence/files/vm/dpc-watchdog-force-bugcheck-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-force-bugcheck-kd-20260407a/dpc-watchdog-force-bugcheck-kd-20260407a.stdout.txt](../evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/dpc-watchdog-force-bugcheck-kd-20260407a.stdout.txt) |
+
+---
+
+### `system.kernel.global-timer-resolution-requests`
+
+- Status: `draft`
+- Evidence class: `Class D`
+- Source file: `research/records/system.kernel.global-timer-resolution-requests.json`
+- Source SHA256: `4f6bf952a53cfe85f5caaadc251dd9eccad6c2832736d46e391eac809af0d4ef`
+- Proof SHA256: ``
+
+**Summary:** Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and a current-build reader or seeding path.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-session-manager-kernel-global-timer-resolution-requests-doc-20260327` | `repo-doc` | Repo system docs assign GlobalTimerResolutionRequests = 0 | [Docs/system/system.md](../Docs/system/system.md) and [research/notes/kernel-power-96-key-routing-20260327.md](notes/kernel-power-96-key-routing-20260327.md) |
+| `vm-session-manager-kernel-global-timer-resolution-requests-existence-20260329` | `registry-observation` | Observed baseline existence for GlobalTimerResolutionRequests | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-session-manager-kernel-global-timer-resolution-requests-string-20260331` | `inference` | Current-build string hit for GlobalTimerResolutionRequests | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
+| `analysis-session-manager-kernel-global-timer-resolution-requests-enrichment-20260403` | `analysis-output` | Source-enrichment keeps GlobalTimerResolutionRequests as a docs-first kernel candidate with a power-request trigger family | [registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.global-timer-resolution-requests.json](../registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.global-timer-resolution-requests.json) |
+| `vm-session-manager-kernel-global-timer-resolution-requests-runtime-20260331` | `vm-test` | Lightweight runtime batch wrote GlobalTimerResolutionRequests = 1 and rebooted once | [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) |
+| `vm-session-manager-kernel-global-timer-resolution-requests-kd-20260408` | `vm-test` | KVM local-KD live value matches the repo-doc GlobalTimerResolutionRequests default | [evidence/files/vm/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a-summary.json](../evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a-summary.json) and [evidence/files/vm/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a.log](../evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a.log) |
 
 ---
 

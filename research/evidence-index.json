@@ -1,25 +1,25 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T04:19:51.219361Z",
+  "generated_utc": "2026-04-08T04:32:43.504540Z",
   "summary": {
-    "total_records": 318,
+    "total_records": 319,
     "validated": 255,
     "deprecated": 55,
     "review_required": 0,
-    "records_with_evidence": 318,
+    "records_with_evidence": 319,
     "records_without_evidence": 0,
-    "records_missing_validation_proof": 8,
+    "records_missing_validation_proof": 9,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
       "A": 248,
       "E": 55,
       "B": 7,
-      "D": 8
+      "D": 9
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T04:19:50.930049Z",
+      "generated_utc": "2026-04-08T04:32:43.191334Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -19554,7 +19554,7 @@
       "category": "System",
       "area": "Session Manager Kernel DPC Scheduling",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while still failing to surface a direct symbolized read of the retained `KiLongDpc*` globals. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The cluster is therefore live-state-confirmed and consumer-lineage-narrowed, but still export-blocked and direct-read-unresolved.",
+      "summary": "Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while a later PDB-backed Ghidra xref pass directly resolved `KiLongDpcQueueThreshold` references in `KiExecuteAllDpcs` and `KeInitSystem`. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The cluster is therefore live-state-confirmed and current-build lineage-confirmed, but still export-blocked and still lacks a direct current-build read site for `KiLongDpcRuntimeThreshold` or a persisted registry seeding path.",
       "evidence_class": {
         "record_id": "system.kernel-long-dpc-threshold-cluster",
         "tweak_id": "system.kernel-long-dpc-threshold-cluster",
@@ -19635,9 +19635,9 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a bounded current-build consumer pass that narrows the lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent`, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, and two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export. It is not ready for validation because there is still no direct threshold read site, no exact read capture, and no primary Microsoft source for either value.",
+        "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a bounded current-build consumer pass that narrows adjacent lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent`, a direct PDB-backed Ghidra xref for `KiLongDpcQueueThreshold` in `KiExecuteAllDpcs` and `KeInitSystem`, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, and two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export. It is not ready for validation because `KiLongDpcRuntimeThreshold` still lacks a direct current-build read site, no exact read capture exists, and there is still no primary Microsoft source for either value.",
         "blocking_issues": [
-          "no-direct-threshold-read-site",
+          "long-dpc-runtime-threshold-direct-read-still-unresolved",
           "runtime_no_read",
           "no-doc-source-outside-repo",
           "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
@@ -19891,6 +19891,20 @@
             "research-gap"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "static-session-manager-kernel-long-dpc-threshold-ghidra-queue-xref-20260408",
+          "kind": "analysis-output",
+          "title": "PDB-backed Ghidra xrefs resolve KiLongDpcQueueThreshold in KiExecuteAllDpcs and KeInitSystem",
+          "location": "evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-summary.json and evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-evidence.json and evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-ghidra-matches.md",
+          "summary": "A current-build PDB-backed Ghidra export resolved three naturally-resolved references to `KiLongDpcQueueThreshold`: one in `KiExecuteAllDpcs` and two in `KeInitSystem`, tightening the queue-threshold side from adjacent ETW lineage to a direct consumer/init xref while still leaving the runtime-threshold read site unresolved.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope",
+            "research-gap"
+          ],
+          "origin": "unspecified"
         },
         {
           "evidence_id": "vm-session-manager-kernel-long-dpc-runtime-timerdpc-procmon-20260408",
@@ -20177,6 +20191,280 @@
           "strength": "high",
           "supports": [
             "behavior",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        }
+      ],
+      "validation_proof": null,
+      "doc_source": null,
+      "static_analysis": null,
+      "cross_verification": null,
+      "provenance": null,
+      "v31_evidence_root": null,
+      "v31_pipeline_version": null,
+      "artifact_refs": [],
+      "re_audit": null
+    },
+    {
+      "record_id": "system.kernel.global-timer-resolution-requests",
+      "tweak_id": "system.kernel.global-timer-resolution-requests",
+      "record_status": "draft",
+      "source_file": "research/records/system.kernel.global-timer-resolution-requests.json",
+      "name": "Global Timer Resolution Requests",
+      "category": "System",
+      "area": "Session Manager Kernel Timer Resolution",
+      "scope": "device",
+      "summary": "Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and a current-build reader or seeding path.",
+      "evidence_class": {
+        "record_id": "system.kernel.global-timer-resolution-requests",
+        "tweak_id": "system.kernel.global-timer-resolution-requests",
+        "record_status": "draft",
+        "evidence_class": "D",
+        "class_label": "Class D",
+        "class_title": "Key Known, Value Semantics Unknown",
+        "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+        "show_in_app": true,
+        "is_actionable": false,
+        "is_archived": false,
+        "action_state": "research-gated",
+        "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+        "confidence": "low",
+        "app_mapping_status": "not-mapped",
+        "restore_story_known": true,
+        "tested_build": "26200",
+        "anticheat_risk": {
+          "anticheat_risk": "unknown",
+          "anticheat_details": null,
+          "gaming_safe": null
+        },
+        "validated_semantics": {
+          "summary": "Repo docs assign `GlobalTimerResolutionRequests = 0` and map it to `KiGlobalTimerResolutionRequests` under `Session Manager\\\\Kernel`.",
+          "has_validation_proof": false,
+          "has_semantics_evidence": true,
+          "links": [
+            {
+              "title": "Repo system docs assign GlobalTimerResolutionRequests = 0",
+              "url": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
+              "kind": "repo-doc",
+              "summary": "Repo docs assign `GlobalTimerResolutionRequests = 0` and map it to `KiGlobalTimerResolutionRequests` under `Session Manager\\\\Kernel`."
+            }
+          ]
+        },
+        "runtime_proof": {
+          "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while `GlobalTimerResolutionRequests` itself is absent.",
+          "needs_vm_validation": true,
+          "has_runtime_evidence": true,
+          "links": [
+            {
+              "title": "Observed baseline existence for GlobalTimerResolutionRequests",
+              "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+              "kind": "registry-observation",
+              "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while `GlobalTimerResolutionRequests` itself is absent."
+            },
+            {
+              "title": "Lightweight runtime batch wrote GlobalTimerResolutionRequests = 1 and rebooted once",
+              "url": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
+              "kind": "vm-test",
+              "summary": "The tools-hardened lightweight runtime batch wrote `GlobalTimerResolutionRequests = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific cand..."
+            },
+            {
+              "title": "KVM local-KD live value matches the repo-doc GlobalTimerResolutionRequests default",
+              "url": "evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a.log",
+              "kind": "vm-test",
+              "summary": "A current-build KVM local-KD pass resolved `nt!KiGlobalTimerResolutionRequests` and returned `0`, aligning the live kernel with the repo-doc default."
+            }
+          ]
+        },
+        "upstream_lineage": {
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
+        }
+      },
+      "decision": {
+        "confidence": "low",
+        "apply_allowed": false,
+        "recommended_for_general_users": false,
+        "restore_default_supported": true,
+        "restore_previous_supported": true,
+        "needs_vm_validation": true,
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a live current-build KD value that matches the repo-doc default, a concrete enrichment-recommended trigger family, and a real write-and-reboot runtime lane. It is not ready for validation because the exact registry reader/caller path, any persisted seeding path, and an exact runtime registry read remain unproven.",
+        "blocking_issues": [
+          "no-current-build-reader-path",
+          "runtime_no_read",
+          "no-primary-current-build-doc"
+        ]
+      },
+      "app_current_implementation": {
+        "status": "not-mapped",
+        "provider_source": "not currently shipped in the app",
+        "notes": "The app does not currently expose this kernel timer-resolution policy as a tweak surface.",
+        "writes": []
+      },
+      "targets": [
+        {
+          "target_id": "global-timer-resolution-requests",
+          "location_kind": "registry",
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "value_name": "GlobalTimerResolutionRequests",
+          "value_type": "REG_DWORD",
+          "notes": "The lightweight runtime batch later wrote the value as `1` for one reboot, but did not produce an exact trace hit for this candidate.",
+          "allowed_values": [
+            {
+              "state_kind": "missing",
+              "label": "Missing on observed baseline",
+              "meaning": "The parent path exists, but the value is absent on the observed clean baseline.",
+              "evidence_ids": [
+                "vm-session-manager-kernel-global-timer-resolution-requests-existence-20260329"
+              ]
+            },
+            {
+              "state_kind": "documented-default",
+              "value": 0,
+              "label": "Repo-documented default",
+              "meaning": "Repo docs assign a default value of `0` and map it to `KiGlobalTimerResolutionRequests`.",
+              "evidence_ids": [
+                "repo-session-manager-kernel-global-timer-resolution-requests-doc-20260327"
+              ]
+            }
+          ]
+        }
+      ],
+      "windows_defaults": [
+        {
+          "label": "Observed baseline registry state",
+          "applies_to": "Win25H2Clean observed baseline",
+          "states": [
+            {
+              "target_id": "global-timer-resolution-requests",
+              "state_kind": "missing",
+              "value": null
+            }
+          ],
+          "evidence_ids": [
+            "vm-session-manager-kernel-global-timer-resolution-requests-existence-20260329"
+          ]
+        }
+      ],
+      "recommended_profiles": [
+        {
+          "profile_id": "observed-default-missing",
+          "label": "Observed default-missing state",
+          "intended_for": [
+            "Research tracking",
+            "Future timer-resolution validation"
+          ],
+          "avoid_for": [
+            "General users",
+            "One-click tweak surfaces"
+          ],
+          "states": [
+            {
+              "target_id": "global-timer-resolution-requests",
+              "state_kind": "missing",
+              "value": null
+            }
+          ],
+          "good_when": "You want to preserve the observed baseline until a tighter current-build timer-resolution proof path exists.",
+          "bad_when": "You need a validated non-default recommendation or production tweak.",
+          "tradeoffs": [
+            "Preserves the observed baseline registry state.",
+            "Avoids inventing unsupported non-default semantics.",
+            "Keeps the next proof step focused on live state and reader/seed validation rather than speculative mutation."
+          ],
+          "apply_allowed": false,
+          "evidence_ids": [
+            "repo-session-manager-kernel-global-timer-resolution-requests-doc-20260327",
+            "vm-session-manager-kernel-global-timer-resolution-requests-existence-20260329",
+            "static-session-manager-kernel-global-timer-resolution-requests-string-20260331",
+            "analysis-session-manager-kernel-global-timer-resolution-requests-enrichment-20260403",
+            "vm-session-manager-kernel-global-timer-resolution-requests-runtime-20260331"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "repo-session-manager-kernel-global-timer-resolution-requests-doc-20260327",
+          "kind": "repo-doc",
+          "title": "Repo system docs assign GlobalTimerResolutionRequests = 0",
+          "location": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
+          "summary": "Repo docs assign `GlobalTimerResolutionRequests = 0` and map it to `KiGlobalTimerResolutionRequests` under `Session Manager\\\\Kernel`.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "default"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-global-timer-resolution-requests-existence-20260329",
+          "kind": "registry-observation",
+          "title": "Observed baseline existence for GlobalTimerResolutionRequests",
+          "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+          "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while `GlobalTimerResolutionRequests` itself is absent.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "default",
+            "version-scope"
+          ],
+          "origin": "VM registry observation"
+        },
+        {
+          "evidence_id": "static-session-manager-kernel-global-timer-resolution-requests-string-20260331",
+          "kind": "inference",
+          "title": "Current-build string hit for GlobalTimerResolutionRequests",
+          "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+          "summary": "The broad current-build string batch found an exact Unicode hit for `GlobalTimerResolutionRequests` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe` and no adjacent hits in the supporting `smss.exe`, `winload.exe`, or `ci.dll` probes.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "analysis-session-manager-kernel-global-timer-resolution-requests-enrichment-20260403",
+          "kind": "analysis-output",
+          "title": "Source-enrichment keeps GlobalTimerResolutionRequests as a docs-first kernel candidate with a power-request trigger family",
+          "location": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.global-timer-resolution-requests.json",
+          "summary": "Source-enrichment kept the value in the canonical queue as a docs-first `Session Manager\\\\Kernel` candidate and suggested `power-request-simulation` as the next runtime family, with `PowerCreateRequest(SystemRequired)`, `PowerSetRequest(DisplayRequired)`, and audio playback as concrete trigger primitives.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "research-gap"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-global-timer-resolution-requests-runtime-20260331",
+          "kind": "vm-test",
+          "title": "Lightweight runtime batch wrote GlobalTimerResolutionRequests = 1 and rebooted once",
+          "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
+          "summary": "The tools-hardened lightweight runtime batch wrote `GlobalTimerResolutionRequests = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candidate in the compact runtime results.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "version-scope",
+            "risk"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-global-timer-resolution-requests-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD live value matches the repo-doc GlobalTimerResolutionRequests default",
+          "location": "evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a.log",
+          "summary": "A current-build KVM local-KD pass resolved `nt!KiGlobalTimerResolutionRequests` and returned `0`, aligning the live kernel with the repo-doc default.",
+          "strength": "high",
+          "supports": [
+            "value",
             "default",
             "version-scope"
           ],
