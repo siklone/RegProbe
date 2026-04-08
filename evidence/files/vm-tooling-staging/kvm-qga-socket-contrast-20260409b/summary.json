@@ -1,0 +1,12 @@
+{
+  "bundle_id": "kvm-qga-socket-contrast-20260409b",
+  "domain": "regprobe-win11-25h2-session",
+  "generated_at": "2026-04-09T00:00:00Z",
+  "focus": "Compare host-side connect behavior between the live libvirt-managed qga socket and a temporary QEMU chardev socket created inside the same VM process.",
+  "findings": [
+    "The live libvirt-managed qga socket path still returns ConnectionRefusedError(111, 'Connection refused') on direct host-side AF_UNIX connect.",
+    "A temporary QEMU socket chardev created via QMP chardev-add at /tmp/regprobe-qga-socktest.sock accepts a direct host-side AF_UNIX connection successfully in the same running qemu-system-x86_64 process.",
+    "query-chardev shows both charchannel1 and codextest as disconnected unix socket backends with server=on.",
+    "Therefore the persistent attach failure is not a generic host-to-QEMU unix socket limitation in this VM session; it is specific to the libvirt-managed qga/virtserial channel path or its associated runtime state."
+  ]
+}
