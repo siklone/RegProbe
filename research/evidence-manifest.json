@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T09:43:11.998591Z",
+  "generated_utc": "2026-04-08T11:53:22.712352Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 321,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T09:43:11.295211Z",
+      "generated_utc": "2026-04-08T11:53:21.987080Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -17804,8 +17804,8 @@
         }
       },
       "source_file": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
-      "source_file_sha256": "8575b25824e080ce7a7124250b04cb69f7e8fcf76f64a908d1756d25dc3906ab",
-      "source_file_size_bytes": 17801,
+      "source_file_sha256": "a69a6de4c1a395c504931ba0331b470b470e18f1fb008154dfa4841296ebe285",
+      "source_file_size_bytes": 19171,
       "name": "Allow Audio To Enable Execution Required Power Requests",
       "category": "Power",
       "area": "Control Power Requests",
@@ -17910,7 +17910,8 @@
             "repo-power-control-allow-audio-to-enable-execution-required-power-requests-trigger-20260408",
             "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-symbol-20260408",
             "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-value-20260408",
-            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-reader-20260408"
+            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-reader-20260408",
+            "vm-power-control-execution-required-setting-lineage-kd-20260408"
           ]
         }
       ],
@@ -18023,6 +18024,19 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-setting-lineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD wildcard pass narrows execution-required setting lineage",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log",
+          "summary": "A retained KVM local-KD wildcard pass showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family. This narrows the visible lineage to callback/init surfaces rather than a demonstrated registry reader.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": null,
@@ -18110,8 +18124,8 @@
         }
       },
       "source_file": "research/records/power.control.allow-system-required-power-requests.json",
-      "source_file_sha256": "5f9f5a68559dda9588c462d749b0339f22daf40c3fa5c2ff65ed5c6594c45f44",
-      "source_file_size_bytes": 16026,
+      "source_file_sha256": "bdd65311778af1154a1b1e9c273243641b461305b0c668d5eb536c4bf2bc9462",
+      "source_file_size_bytes": 17396,
       "name": "Allow System Required Power Requests",
       "category": "Power",
       "area": "Control Power Requests",
@@ -18215,7 +18229,8 @@
             "analysis-power-control-allow-system-required-power-requests-enrichment-20260403",
             "repo-power-control-allow-system-required-power-requests-trigger-20260408",
             "vm-power-control-allow-system-required-power-requests-kd-20260408",
-            "vm-power-control-allow-system-required-power-requests-kd-reader-20260408"
+            "vm-power-control-allow-system-required-power-requests-kd-reader-20260408",
+            "vm-power-control-execution-required-setting-lineage-kd-20260408"
           ]
         }
       ],
@@ -18309,6 +18324,19 @@
           "title": "KVM local-KD disassembly shows current-build consumers for PopPowerRequestConvertSystemToExecution",
           "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log",
           "summary": "A retained KVM local-KD disassembly pass showed direct reads of `nt!PopPowerRequestConvertSystemToExecution` in `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`. The same pass also showed `nt!PopPowerRequestExecutionRequiredSettingCallback` chaining into `PopPowerRequestHandleExecutionmentUpdate`.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-setting-lineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD wildcard pass narrows execution-required setting lineage",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log",
+          "summary": "A retained KVM local-KD wildcard pass showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family. This narrows the visible lineage to callback/init surfaces rather than a demonstrated registry reader.",
           "strength": "high",
           "supports": [
             "behavior",

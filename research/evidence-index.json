@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T09:43:11.538718Z",
+  "generated_utc": "2026-04-08T11:53:22.255347Z",
   "summary": {
     "total_records": 321,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T09:43:11.295211Z",
+      "generated_utc": "2026-04-08T11:53:21.987080Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -17960,7 +17960,8 @@
             "repo-power-control-allow-audio-to-enable-execution-required-power-requests-trigger-20260408",
             "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-symbol-20260408",
             "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-value-20260408",
-            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-reader-20260408"
+            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-reader-20260408",
+            "vm-power-control-execution-required-setting-lineage-kd-20260408"
           ]
         }
       ],
@@ -18067,6 +18068,19 @@
           "title": "KVM local-KD disassembly shows current-build consumer for PopPowerRequestActiveAudioEnablesExecutionRequired",
           "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log",
           "summary": "A retained KVM local-KD disassembly pass showed `nt!PopPowerRequestEvaluateExecutionRequiredStatus` directly comparing `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` against the caller-supplied execution-required state. The same pass also showed `nt!PopPowerRequestExecutionRequiredSettingCallback` chaining into the broader execution-required reader family.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-setting-lineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD wildcard pass narrows execution-required setting lineage",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log",
+          "summary": "A retained KVM local-KD wildcard pass showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family. This narrows the visible lineage to callback/init surfaces rather than a demonstrated registry reader.",
           "strength": "high",
           "supports": [
             "behavior",
@@ -18266,7 +18280,8 @@
             "analysis-power-control-allow-system-required-power-requests-enrichment-20260403",
             "repo-power-control-allow-system-required-power-requests-trigger-20260408",
             "vm-power-control-allow-system-required-power-requests-kd-20260408",
-            "vm-power-control-allow-system-required-power-requests-kd-reader-20260408"
+            "vm-power-control-allow-system-required-power-requests-kd-reader-20260408",
+            "vm-power-control-execution-required-setting-lineage-kd-20260408"
           ]
         }
       ],
@@ -18360,6 +18375,19 @@
           "title": "KVM local-KD disassembly shows current-build consumers for PopPowerRequestConvertSystemToExecution",
           "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log",
           "summary": "A retained KVM local-KD disassembly pass showed direct reads of `nt!PopPowerRequestConvertSystemToExecution` in `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`. The same pass also showed `nt!PopPowerRequestExecutionRequiredSettingCallback` chaining into `PopPowerRequestHandleExecutionmentUpdate`.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-setting-lineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD wildcard pass narrows execution-required setting lineage",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log",
+          "summary": "A retained KVM local-KD wildcard pass showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family. This narrows the visible lineage to callback/init surfaces rather than a demonstrated registry reader.",
           "strength": "high",
           "supports": [
             "behavior",

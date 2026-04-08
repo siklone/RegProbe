@@ -15,6 +15,7 @@
 - A later KVM local-KD pass resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`.
 - The same wildcard KD sweep also surfaced the sibling symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, but did not read its value.
 - A later current-build KVM local-KD disassembly pass then showed direct reads of `nt!PopPowerRequestConvertSystemToExecution` inside `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`.
+- A later wildcard lineage pass then showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family.
 
 ## Source artifacts
 
@@ -29,6 +30,8 @@
 - `evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a-summary.json`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log`
+- `evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a-summary.json`
+- `evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log`
 
 ## Interpretation
 
@@ -40,6 +43,7 @@
   - repo-native `power-request-simulation` harness
   - live KVM local-KD value `PopPowerRequestConvertSystemToExecution = 1`
   - direct current-build consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`
+  - current-build callback/init lineage anchored by `PopPowerRequestExecutionRequiredSettingCallback`
 - narrowed conclusion:
   - `AllowSystemRequiredPowerRequests` is stronger than a pure docs-first backlog item
   - the value belongs in the canonical research set as a power-request draft
@@ -47,5 +51,5 @@
   - a registry seeding caller from `Control\Power`
   - whether the named power-request harness surfaces an exact-read lane
 - next proof path:
-  - pivot from the now-confirmed reader family to a registry seeding path for `PopPowerRequestConvertSystemToExecution`
+  - pivot from the now-confirmed callback/init family to a registry seeding path for `PopPowerRequestConvertSystemToExecution`
   - take a narrow `power-request-simulation` replay instead of a broad family batch
