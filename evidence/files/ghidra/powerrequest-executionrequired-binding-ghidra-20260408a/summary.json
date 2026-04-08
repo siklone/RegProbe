@@ -1,0 +1,36 @@
+﻿{
+    "generated_utc":  "2026-04-08T14:01:09.1213539Z",
+    "binary_path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+    "output_name":  "powerrequest-executionrequired-binding-ghidra-20260408a",
+    "project_name":  "Probe_powerrequest_executionrequired_binding_ghidra_20260408a",
+    "symbol_root":  "C:\\Tools\\Symbols\\powerrequest-executionrequired-binding-ghidra-20260408a",
+    "output_root":  "C:\\RegProbe-Diag\\ghidra\\powerrequest-executionrequired-binding-ghidra-20260408a",
+    "symchk_path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+    "symchk_exit_code":  0,
+    "staged_pdb_count":  2,
+    "staged_pdb_sample":  [
+                              "C:\\Tools\\Symbols\\powerrequest-executionrequired-binding-ghidra-20260408a\\ntkrnlmp.pdb",
+                              "C:\\Tools\\Symbols\\powerrequest-executionrequired-binding-ghidra-20260408a\\ntkrnlmp.pdb\\24DE61DB3A27C5B383DFF181CB51F7E11\\ntkrnlmp.pdb"
+                          ],
+    "ghidra_exit_code":  0,
+    "no_analysis":  false,
+    "match_count":  1,
+    "uploads":  {
+                    "evidence":  {
+                                     "path":  "C:\\RegProbe-Diag\\ghidra\\powerrequest-executionrequired-binding-ghidra-20260408a\\evidence.json",
+                                     "uri":  "http://10.0.2.2:8766/powerrequest-executionrequired-binding-ghidra-20260408a-evidence.json"
+                                 },
+                    "markdown":  {
+                                     "path":  "C:\\RegProbe-Diag\\ghidra\\powerrequest-executionrequired-binding-ghidra-20260408a\\ghidra-matches.md",
+                                     "uri":  "http://10.0.2.2:8766/powerrequest-executionrequired-binding-ghidra-20260408a-ghidra-matches.md"
+                                 },
+                    "symchk_log":  {
+                                       "path":  "C:\\RegProbe-Diag\\ghidra\\powerrequest-executionrequired-binding-ghidra-20260408a\\symchk.txt",
+                                       "uri":  "http://10.0.2.2:8766/powerrequest-executionrequired-binding-ghidra-20260408a-symchk.txt"
+                                   },
+                    "run_log":  {
+                                    "path":  "C:\\RegProbe-Diag\\ghidra\\powerrequest-executionrequired-binding-ghidra-20260408a\\ghidra-run.log",
+                                    "uri":  "http://10.0.2.2:8766/powerrequest-executionrequired-binding-ghidra-20260408a-ghidra-run.log"
+                                }
+                }
+}

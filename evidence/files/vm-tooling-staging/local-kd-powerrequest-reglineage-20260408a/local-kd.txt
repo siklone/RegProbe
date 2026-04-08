@@ -1,0 +1,10 @@
+.sympath C:\Tools\Symbols\local-kd-powerrequest-reglineage-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!*PowerRequest*Reg*
+x nt!*PowerRequest*Callback*
+x nt!*ExecutionRequired*
+x nt!*PowerRequest*Setting*
+x nt!*PowerRequest*Override*
+.echo REGPROBE_LOCALKD_END
+q

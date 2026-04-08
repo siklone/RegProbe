@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T14:04:37.562626Z",
+  "generated_utc": "2026-04-08T14:11:29.650951Z",
   "summary": {
     "total_records": 312,
     "validated": 245,
@@ -17634,7 +17634,7 @@
       "category": "Power",
       "area": "Execution-Required Power Request Controls",
       "scope": "device",
-      "summary": "Draft candidate package for AllowAudioToEnableExecutionRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, and a new retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API. The candidate remains research-only because the current-build live state, exact registration/binding path, and any earlier Control\\Power seeding path are still unresolved in this checkout.",
+      "summary": "Draft candidate package for AllowAudioToEnableExecutionRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a new wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. The candidate remains research-only because the current-build live state and any earlier Control\\Power seeding path are still unresolved in this checkout.",
       "evidence_class": {
         "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
         "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
@@ -17721,10 +17721,11 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "AllowAudioToEnableExecutionRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, and a retained local-KD view of the generic power-setting query/store layer. The record remains draft because this checkout still lacks a candidate-specific live current-build state read, an exact callback/binding site, and a proven Control\\Power seeding path into the visible power-setting configuration objects.",
+        "why": "AllowAudioToEnableExecutionRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, a retained local-KD view of the generic power-setting query/store layer, and a retained wildcard/symbolized binding follow-up. The record remains draft because the visible current-build setting callback story is timeout-specific, the wildcard lineage exposes no `*PowerRequest*Reg*` helper, and the Control\\Power seeding path into the visible power-setting configuration objects is still unresolved.",
         "blocking_issues": [
           "The clean baseline leaves AllowAudioToEnableExecutionRequiredPowerRequests absent, so this checkout still lacks a direct live current-build state read for the candidate itself.",
           "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects is still unresolved.",
+          "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowAudioToEnableExecutionRequiredPowerRequests binding site.",
           "The shared mega-trigger runtime lane armed the candidate but recovered without an exact runtime read."
         ]
       },
@@ -17837,7 +17838,9 @@
           "apply_allowed": false,
           "evidence_ids": [
             "repo-power-doc",
-            "vm-power-control-mega-trigger-runtime-20260401"
+            "vm-power-control-mega-trigger-runtime-20260401",
+            "vm-power-control-execution-required-reglineage-kd-20260408",
+            "ghidra-power-control-execution-required-binding-20260408"
           ]
         }
       ],
@@ -17912,6 +17915,34 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-reglineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD wildcard lineage shows no visible PowerRequest Reg helper and only a timeout-specific setting callback",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/local-kd.log and research/notes/power-control-execution-required-binding-kvm-follow-up-20260408.md",
+          "summary": "The retained wildcard KD pass returned no `nt!*PowerRequest*Reg*` symbols, resolved only `PopPowerRequestExecutionRequiredSettingCallback` under `nt!*PowerRequest*Setting*`, and showed the visible execution-required family through timeout, callback, override, and audio symbols rather than an obvious registry-binding helper.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "ghidra-power-control-execution-required-binding-20260408",
+          "kind": "decompilation",
+          "title": "Symbol-seeded Ghidra binding probe resolves only the timeout-specific execution-required callback",
+          "location": "evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md and research/notes/power-control-execution-required-binding-kvm-follow-up-20260408.md",
+          "summary": "The symbol-seeded Ghidra probe on PopPowerRequestExecutionRequiredSettingCallback and GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT naturally resolved only the callback itself, found no direct or bounded indirect references to the callback symbol, and decompiled a timeout-specific handler that updates PopExecutionRequiredTimeout rather than an exact AllowAudioToEnableExecutionRequiredPowerRequests binding site.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk",
+            "version-scope"
+          ],
+          "origin": "Our Ghidra decompilation"
         }
       ],
       "validation_proof": {
@@ -17938,7 +17969,7 @@
       "category": "Power",
       "area": "Execution-Required Power Request Controls",
       "scope": "device",
-      "summary": "Draft candidate package for AllowSystemRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, and a new retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API. The candidate remains research-only because the current-build live state, exact registration/binding path, and any earlier Control\\Power seeding path are still unresolved in this checkout.",
+      "summary": "Draft candidate package for AllowSystemRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a new wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. The candidate remains research-only because the current-build live state and any earlier Control\\Power seeding path are still unresolved in this checkout.",
       "evidence_class": {
         "record_id": "power.control.allow-system-required-power-requests",
         "tweak_id": "power.control.allow-system-required-power-requests",
@@ -18025,10 +18056,11 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "AllowSystemRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, and a retained local-KD view of the generic power-setting query/store layer. The record remains draft because this checkout still lacks a candidate-specific live current-build state read, an exact callback/binding site, and a proven Control\\Power seeding path into the visible power-setting configuration objects.",
+        "why": "AllowSystemRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, a retained local-KD view of the generic power-setting query/store layer, and a retained wildcard/symbolized binding follow-up. The record remains draft because the visible current-build setting callback story is timeout-specific, the wildcard lineage exposes no `*PowerRequest*Reg*` helper, and the Control\\Power seeding path into the visible power-setting configuration objects is still unresolved.",
         "blocking_issues": [
           "The clean baseline leaves AllowSystemRequiredPowerRequests absent, so this checkout still lacks a direct live current-build state read for the candidate itself.",
           "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects is still unresolved.",
+          "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowSystemRequiredPowerRequests binding site.",
           "The shared mega-trigger runtime lane armed the candidate but recovered without an exact runtime read."
         ]
       },
@@ -18141,7 +18173,9 @@
           "apply_allowed": false,
           "evidence_ids": [
             "repo-power-doc",
-            "vm-power-control-mega-trigger-runtime-20260401"
+            "vm-power-control-mega-trigger-runtime-20260401",
+            "vm-power-control-execution-required-reglineage-kd-20260408",
+            "ghidra-power-control-execution-required-binding-20260408"
           ]
         }
       ],
@@ -18216,6 +18250,34 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-reglineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD wildcard lineage shows no visible PowerRequest Reg helper and only a timeout-specific setting callback",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/local-kd.log and research/notes/power-control-execution-required-binding-kvm-follow-up-20260408.md",
+          "summary": "The retained wildcard KD pass returned no `nt!*PowerRequest*Reg*` symbols, resolved only `PopPowerRequestExecutionRequiredSettingCallback` under `nt!*PowerRequest*Setting*`, and showed the visible execution-required family through timeout, callback, override, and audio symbols rather than an obvious registry-binding helper.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "ghidra-power-control-execution-required-binding-20260408",
+          "kind": "decompilation",
+          "title": "Symbol-seeded Ghidra binding probe resolves only the timeout-specific execution-required callback",
+          "location": "evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md and research/notes/power-control-execution-required-binding-kvm-follow-up-20260408.md",
+          "summary": "The symbol-seeded Ghidra probe on PopPowerRequestExecutionRequiredSettingCallback and GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT naturally resolved only the callback itself, found no direct or bounded indirect references to the callback symbol, and decompiled a timeout-specific handler that updates PopExecutionRequiredTimeout rather than an exact AllowSystemRequiredPowerRequests binding site.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk",
+            "version-scope"
+          ],
+          "origin": "Our Ghidra decompilation"
         }
       ],
       "validation_proof": {

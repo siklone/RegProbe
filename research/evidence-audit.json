@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T14:04:37.924099Z",
+  "generated_utc": "2026-04-08T14:11:30.038100Z",
   "summary": {
     "total_active_records": 258,
     "class_counts": {
@@ -17,7 +17,8 @@
     "next_missing_layer_counts": {
       "none": 248,
       "procmon": 3,
-      "ghidra": 3,
+      "reboot-diff": 2,
+      "ghidra": 1,
       "decision-gate": 3,
       "incident-review": 1
     },
@@ -3372,19 +3373,21 @@
       "official": false,
       "official_doc_exists": false,
       "procmon": true,
-      "ghidra": false,
+      "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
-      "cross_layer_satisfied": false,
+      "next_missing_layer": "reboot-diff",
+      "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon"
+        "runtime_procmon",
+        "static_ghidra"
       ],
       "tools_used": [
-        "procmon"
+        "procmon",
+        "ghidra"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
@@ -3397,7 +3400,7 @@
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.2",
@@ -3418,19 +3421,21 @@
       "official": false,
       "official_doc_exists": false,
       "procmon": true,
-      "ghidra": false,
+      "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
-      "cross_layer_satisfied": false,
+      "next_missing_layer": "reboot-diff",
+      "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon"
+        "runtime_procmon",
+        "static_ghidra"
       ],
       "tools_used": [
-        "procmon"
+        "procmon",
+        "ghidra"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
@@ -3443,7 +3448,7 @@
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.2",
