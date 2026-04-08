@@ -1,0 +1,39 @@
+{
+  "artifact_id": "kvm-qga-openpath-runtime-diagnose-20260409a",
+  "captured_on": "2026-04-09",
+  "domain": "regprobe-win11-25h2-session",
+  "scope": "execution-required KVM guest-control open-path diagnosis",
+  "findings": [
+    {
+      "step": "guest_openpath_probe",
+      "command": "powershell -ExecutionPolicy Bypass -File C:\\RegProbe-Diag\\bootstrap\\diagnose-qga-vioserial-path.ps1",
+      "guest_result": "The new guest-side probe enumerated VioSerialPort instance IDs through PnPUtil and Control\\\\DeviceClasses, then proved `\\\\.\\Global\\org.qemu.guest_agent.0` is openable with CreateFile. It also showed the exact registry-derived `...&02...` interface path is openable, while the sibling `...&01...` path returns access denied and the naive `\\\\.\\Global\\vport0p2` / `\\\\.\\vport0p2` aliases remain missing."
+    },
+    {
+      "step": "service_running_still_disconnected",
+      "command": "sc start QEMU-GA; sc query QEMU-GA; virsh qemu-agent-command ...; virsh qemu-monitor-command ... --hmp 'info chardev'",
+      "guest_result": "QEMU-GA reached `RUNNING` in the guest after the open-path probe.",
+      "host_result": "Host-side `guest-ping` still failed with `QEMU guest agent is not available due to an error`, and HMP still showed the qga chardev as `disconnected`."
+    },
+    {
+      "step": "foreground_exact_path_launch",
+      "command": "powershell -ExecutionPolicy Bypass -File C:\\RegProbe-Diag\\bootstrap\\run-qga-on-open-vioserial-path.ps1",
+      "guest_result": "The launcher selected the openable `...&02...` DeviceClasses path from the probe output and started `qemu-ga.exe -v -m virtio-serial -p <exact path>` into the same continuous `debug: dispatch` foreground loop seen in earlier alias-based repros.",
+      "host_result": "Even under the exact openable `...&02...` path, `guest-ping` still returned `QEMU guest agent is not available due to an error` and HMP still reported `disconnected`."
+    }
+  ],
+  "screenshots": [
+    "regprobe-qga-openpath-results.png",
+    "regprobe-qga-service-running.png",
+    "regprobe-qga-exact-openpath-foreground.png"
+  ],
+  "host_artifacts": [
+    "guest-ping-after-openpath.txt",
+    "info-chardev-after-openpath.txt"
+  ],
+  "scripts": [
+    "scripts/vm/diagnose-qga-vioserial-path.ps1",
+    "scripts/vm/run-qga-on-open-vioserial-path.ps1"
+  ],
+  "conclusion": "The remaining KVM guest-control blocker is no longer Windows virtio-serial path resolution. The default qga alias and the exact `...&02...` DeviceClasses-derived interface path are both openable inside the guest, yet host-side qga control still stays in the same disconnected/error state. The unresolved layer is now post-open qga runtime/protocol or libvirt/KVM handshake behavior rather than path discovery."
+}
