@@ -51,6 +51,21 @@ public sealed class TweakItemViewModelTests
         Assert.Contains("Detect started.", viewModel.TerminalOutput);
     }
 
+    [Fact]
+    public async Task RunDetectAsync_Truncates_Very_Large_Batch_Details()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new VerboseBatchDetectTweak();
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        await viewModel.RunDetectAsync(CancellationToken.None);
+
+        Assert.True(viewModel.HasBatchDetails);
+        Assert.Equal(200, viewModel.BatchDetails.Count);
+        Assert.Contains("50 more hidden", viewModel.BatchSummaryLine);
+        Assert.Equal("Mixed", viewModel.CurrentValue);
+    }
+
     private sealed class RecordingLogger : IAppLogger
     {
         public void Log(LogLevel level, string message, Exception? exception = null)
@@ -117,6 +132,38 @@ public sealed class TweakItemViewModelTests
 
         public Task<TweakResult> DetectAsync(CancellationToken ct)
             => Task.FromResult(new TweakResult(TweakStatus.Applied, "Applied", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> ApplyAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Applied, "Applied", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> VerifyAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Verified, "Verified", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> RollbackAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.RolledBack, "Rolled back", DateTimeOffset.UtcNow));
+    }
+
+    private sealed class VerboseBatchDetectTweak : ITweak
+    {
+        public string Id => "power.verbose-batch-test";
+        public string Name => "Verbose batch";
+        public string Description => "Verbose batch";
+        public TweakRiskLevel Risk => TweakRiskLevel.Safe;
+        public bool RequiresElevation => false;
+
+        public Task<TweakResult> DetectAsync(CancellationToken ct)
+        {
+            var lines = new List<string> { "Detected. Current state: Mixed." , "Entries:" };
+            for (var index = 0; index < 250; index++)
+            {
+                lines.Add($"Value{index:D3}: 0 -> 1");
+            }
+
+            return Task.FromResult(new TweakResult(
+                TweakStatus.Detected,
+                string.Join(Environment.NewLine, lines),
+                DateTimeOffset.UtcNow));
+        }
 
         public Task<TweakResult> ApplyAsync(CancellationToken ct)
             => Task.FromResult(new TweakResult(TweakStatus.Applied, "Applied", DateTimeOffset.UtcNow));

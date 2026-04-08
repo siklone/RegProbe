@@ -26,6 +26,7 @@ namespace RegProbe.App.ViewModels;
 public sealed class TweakItemViewModel : ViewModelBase
 {
     private const string PublicResearchGateExplanation = "Evidence pending";
+    private const int MaxBatchDetailLines = 200;
     private static readonly SolidColorBrush AppliedStatusBrush = CreateFrozenBrush("#A3BE8C");
     private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#666666");
     private static readonly SolidColorBrush NotAppliedStatusBorderBrush = CreateFrozenBrush("#333333");
@@ -2672,7 +2673,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void TryUpdateBatchDetailsFromMessage(string message)
     {
-        if (!TryExtractBatchDetails(message, out var title, out var lines))
+        if (!TryExtractBatchDetails(message, out var title, out var lines, out var omittedLineCount))
         {
             ClearBatchDetails();
             return;
@@ -2685,7 +2686,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             _batchDetails.Add(line);
         }
 
-        BatchSummaryLine = BuildBatchSummary(title, lines);
+        BatchSummaryLine = BuildBatchSummary(title, lines, omittedLineCount);
     }
 
     private void ClearBatchDetails()
@@ -2700,10 +2701,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         BatchSummaryLine = string.Empty;
     }
 
-    private static bool TryExtractBatchDetails(string message, out string title, out List<string> lines)
+    private static bool TryExtractBatchDetails(string message, out string title, out List<string> lines, out int omittedLineCount)
     {
         lines = new List<string>();
         title = string.Empty;
+        omittedLineCount = 0;
 
         var markers = new[]
         {
@@ -2728,12 +2730,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             }
 
             var detailText = message[start..];
-            var parsedLines = detailText
-                .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(line => line.Trim())
-                .Where(line => line.Length > 0)
-                .Select(line => line.StartsWith("-", StringComparison.Ordinal) ? line : $"- {line}")
-                .ToList();
+            var parsedLines = ExtractBatchLines(detailText, MaxBatchDetailLines, out var totalLineCount);
 
             if (parsedLines.Count == 0)
             {
@@ -2742,13 +2739,40 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             title = markerTitle;
             lines = parsedLines;
+            omittedLineCount = Math.Max(0, totalLineCount - parsedLines.Count);
             return true;
         }
 
         return false;
     }
 
-    private static string BuildBatchSummary(string title, IReadOnlyList<string> lines)
+    private static List<string> ExtractBatchLines(string detailText, int maxLines, out int totalLineCount)
+    {
+        totalLineCount = 0;
+        var result = new List<string>(Math.Min(maxLines, 16));
+
+        using var reader = new StringReader(detailText);
+        while (reader.ReadLine() is { } rawLine)
+        {
+            var trimmed = rawLine.Trim();
+            if (trimmed.Length == 0)
+            {
+                continue;
+            }
+
+            totalLineCount++;
+            if (result.Count >= maxLines)
+            {
+                continue;
+            }
+
+            result.Add(trimmed.StartsWith("-", StringComparison.Ordinal) ? trimmed : $"- {trimmed}");
+        }
+
+        return result;
+    }
+
+    private static string BuildBatchSummary(string title, IReadOnlyList<string> lines, int omittedLineCount)
     {
         if (lines.Count == 0)
         {
@@ -2836,6 +2860,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         if (unknown > 0)
         {
             parts.Add($"{unknown} unknown");
+        }
+
+        if (omittedLineCount > 0)
+        {
+            parts.Add($"{omittedLineCount} more hidden");
         }
 
         return string.Join(" / ", parts);
