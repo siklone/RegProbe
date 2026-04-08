@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T00:48:14.563205Z",
+  "generated_utc": "2026-04-08T00:50:29.702173Z",
   "summary": {
     "total_records": 317,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T00:48:14.293315Z",
+      "generated_utc": "2026-04-08T00:50:29.458242Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -19554,7 +19554,7 @@
       "category": "System",
       "area": "Session Manager Kernel DPC Scheduling",
       "scope": "device",
-      "summary": "Draft docs-first Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and both stayed `no-hit` in the broad lightweight runtime replay. This keeps the family real and current-build-relevant, but still below the line for aggressive RE until a stronger caller, symbol, or live state clue appears.",
+      "summary": "Draft docs-first Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and both survived a broad lightweight runtime replay that explicitly armed them from missing to `1` for one reboot while still returning `no-hit`. This keeps the family real and current-build-relevant, but still below the line for aggressive RE until a stronger caller, symbol, or live state clue appears.",
       "evidence_class": {
         "record_id": "system.kernel-long-dpc-threshold-cluster",
         "tweak_id": "system.kernel-long-dpc-threshold-cluster",
@@ -19605,7 +19605,7 @@
               "title": "Lightweight runtime batch kept both LongDpc thresholds in residual no-hit hold",
               "url": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
               "kind": "vm-test",
-              "summary": "The tools-hardened lightweight runtime lane wrote the broader `Session Manager\\\\Kernel` family, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `..."
+              "summary": "The tools-hardened lightweight runtime lane explicitly armed both values from missing to `1`, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `sy..."
             }
           ]
         },
@@ -19623,7 +19623,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, and a real runtime replay that still left both values in no-hit hold. It is not ready for validation because there is still no current-build caller, live value state, or primary Microsoft source for either value.",
+        "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, and a real runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold. It is not ready for validation because there is still no current-build caller, live value state, or primary Microsoft source for either value.",
         "blocking_issues": [
           "no-current-build-caller-path",
           "runtime_no_read",
@@ -19802,7 +19802,7 @@
           "kind": "vm-test",
           "title": "Lightweight runtime batch kept both LongDpc thresholds in residual no-hit hold",
           "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
-          "summary": "The tools-hardened lightweight runtime lane wrote the broader `Session Manager\\\\Kernel` family, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `system.kernel.long-dpc-runtime-threshold` in the residual `no-hit` hold.",
+          "summary": "The tools-hardened lightweight runtime lane explicitly armed both values from missing to `1`, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `system.kernel.long-dpc-runtime-threshold` in the residual `no-hit` hold.",
           "strength": "medium",
           "supports": [
             "behavior",
