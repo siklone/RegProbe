@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import socket
 import shutil
 import subprocess
 import xml.etree.ElementTree as ET
@@ -51,6 +52,18 @@ def run_command(*args: str) -> dict:
     }
 
 
+def try_socket_connect(path: str | None) -> dict | None:
+    if not path:
+        return None
+    try:
+        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
+            sock.settimeout(2.0)
+            sock.connect(path)
+        return {"path": path, "ok": True, "error": ""}
+    except OSError as exc:
+        return {"path": path, "ok": False, "error": str(exc)}
+
+
 def main() -> int:
     runner_config = load_json(RUNNER_CONFIG_PATH)
     runtime_runners = runner_config.get("runtime") or {}
@@ -78,6 +91,21 @@ def main() -> int:
         if virsh_path
         else None
     )
+    query_chardev = (
+        run_command(virsh_path, "qemu-monitor-command", DOMAIN_NAME, "--pretty", '{"execute":"query-chardev"}')
+        if virsh_path
+        else None
+    )
+    info_qtree = (
+        run_command(virsh_path, "qemu-monitor-command", DOMAIN_NAME, "--hmp", "info qtree")
+        if virsh_path
+        else None
+    )
+    info_chardev = (
+        run_command(virsh_path, "qemu-monitor-command", DOMAIN_NAME, "--hmp", "info chardev")
+        if virsh_path
+        else None
+    )
 
     domain_running = False
     cdrom_source = None
@@ -86,6 +114,11 @@ def main() -> int:
     channel_names: list[str] = []
     spice_channel_name = None
     serial_console_path = None
+    qga_socket_path = None
+    qga_frontend_open = None
+    qga_filename = None
+    qga_qtree_line = None
+    monitor_socket_path = None
 
     if dumpxml and dumpxml["ok"]:
         root = ET.fromstring(dumpxml["stdout"])
@@ -109,6 +142,9 @@ def main() -> int:
                 channel_names.append(name)
             if name == "org.qemu.guest_agent.0":
                 has_qemu_agent_channel = True
+                source = channel.find("./source")
+                if source is not None:
+                    qga_socket_path = source.get("path")
             if name == "com.redhat.spice.0":
                 spice_channel_name = name
 
@@ -119,6 +155,28 @@ def main() -> int:
                 source = console.find("./source")
                 if source is not None:
                     serial_console_path = source.get("path")
+
+    monitor_socket_path = f"/home/rai/.config/libvirt/qemu/lib/domain-1-regprobe-win11-25h2-/monitor.sock"
+
+    if query_chardev and query_chardev["ok"]:
+        try:
+            returned = json.loads(query_chardev["stdout"]).get("return") or []
+            qga_entry = next((entry for entry in returned if entry.get("label") == "charchannel1"), None)
+            if qga_entry:
+                qga_frontend_open = qga_entry.get("frontend-open")
+                qga_filename = qga_entry.get("filename")
+        except json.JSONDecodeError:
+            pass
+
+    if info_qtree and info_qtree["ok"]:
+        for line in info_qtree["stdout"].splitlines():
+            stripped = line.strip()
+            if stripped.startswith("port 2,"):
+                qga_qtree_line = stripped
+                break
+
+    qga_socket_connect = try_socket_connect(qga_socket_path)
+    monitor_socket_connect = try_socket_connect(monitor_socket_path)
 
     controller_is_vmrun_backed = "vmrun.exe" in controller_script_text and "\\vmware-host\\Shared Folders" not in controller_script_text
     controller_doc_is_shared_folder = "shared-folder controller workspace" in controller_doc_text.lower()
@@ -145,15 +203,26 @@ def main() -> int:
         "has_qemu_agent_channel": has_qemu_agent_channel,
         "channel_names": channel_names,
         "guest_ping": guest_ping,
+        "query_chardev": query_chardev,
+        "info_qtree": info_qtree,
+        "info_chardev": info_chardev,
+        "qga_socket_path": qga_socket_path,
+        "qga_socket_connect": qga_socket_connect,
+        "monitor_socket_path": monitor_socket_path,
+        "monitor_socket_connect": monitor_socket_connect,
+        "qga_frontend_open": qga_frontend_open,
+        "qga_filename": qga_filename,
+        "qga_qtree_line": qga_qtree_line,
         "qemu_guest_agent_configured": has_qemu_agent_channel and bool(guest_ping and guest_ping["ok"]),
         "spice_channel_name": spice_channel_name,
         "serial_console_path": serial_console_path,
         "bootstrap_iso_path": cdrom_source,
         "bootstrap_iso_exists_on_host": cdrom_exists,
         "conclusion": (
-            "The execution-required runtime lane is repo-native and ready, but the active KVM guest-control surface is not. "
-            "The runner and controller tooling remain VMware/vmrun-oriented, the live libvirt domain now exposes the qemu guest agent channel, "
-            "guest-ping still fails with 'QEMU guest agent is not connected', and the restored bootstrap ISO only closes the media gap by providing manual in-guest bootstrap plus an optional qemu guest agent installer."
+            "The execution-required runtime lane is repo-native and ready, but the active KVM guest-control surface is still failing before a usable qga frontend attach. "
+            "The live domain exposes the qemu guest-agent channel, yet `query-chardev` keeps `charchannel1` at `frontend-open=false`, `info qtree` keeps the qga port at `guest off, host off`, "
+            "and a direct host-side connect to the qga unix socket returns connection refused even while the monitor socket remains connectable. "
+            "The remaining blocker is therefore a host/libvirt/QEMU-side attach or accept failure on the qga channel, not missing runner plumbing or simple Windows path discovery."
         ),
     }
     write_json(OUTPUT_JSON, payload)
@@ -172,6 +241,10 @@ def main() -> int:
         f"- libvirt domain running: `{domain_running}`",
         f"- qemu guest agent channel present: `{has_qemu_agent_channel}`",
         f"- qemu guest agent ping ok: `{bool(guest_ping and guest_ping['ok'])}`",
+        f"- qga frontend-open: `{qga_frontend_open}`",
+        f"- qga qtree state: `{qga_qtree_line}`",
+        f"- qga unix socket connectable: `{bool(qga_socket_connect and qga_socket_connect['ok'])}`",
+        f"- monitor socket connectable: `{bool(monitor_socket_connect and monitor_socket_connect['ok'])}`",
         f"- Bootstrap ISO exists on host: `{cdrom_exists}`",
         "",
         "## Details",
@@ -186,13 +259,19 @@ def main() -> int:
             f"- Channel names: `{channel_names}`",
             f"- Serial console path: `{serial_console_path}`",
             f"- Guest ping stderr: `{(guest_ping or {}).get('stderr') or (guest_ping or {}).get('stdout') or 'n/a'}`",
+            f"- query-chardev filename: `{qga_filename}`",
+            f"- qga socket path: `{qga_socket_path}`",
+            f"- qga socket connect error: `{(qga_socket_connect or {}).get('error') or 'n/a'}`",
+            f"- monitor socket path: `{monitor_socket_path}`",
+            f"- monitor socket connect error: `{(monitor_socket_connect or {}).get('error') or 'n/a'}`",
             f"- Bootstrap ISO path: `{cdrom_source}`",
             "",
             "## Interpretation",
             "",
             "- The remaining execution-required runtime-trace gap is no longer runner design or candidate selection.",
-            "- The repo-side narrow lane exists, the qemu guest-agent channel is now attached, but live guest execution on the current KVM session is still blocked by guest-side agent/service state rather than by missing research plumbing.",
-            "- The next decisive step is either to restore a usable guest-control surface on KVM or to run the narrow path-aware lane on a vmrun-capable host environment.",
+            "- The repo-side narrow lane exists, the qemu guest-agent channel is attached in XML/QEMU, but the live socket still does not expose a usable qga frontend attachment.",
+            "- The current evidence points earlier than generic protocol noise: the qga chardev stays `frontend-open=false`, the virtserial port stays `guest off, host off`, and even direct host-side socket connect is refused while the monitor socket stays healthy.",
+            "- The next decisive step is to debug the host/libvirt/QEMU-side qga attach path, or to run the same narrow lane on a vmrun-capable environment that bypasses this KVM guest-control failure.",
         ]
     )
     write_text(OUTPUT_MD, "\n".join(lines))

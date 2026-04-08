@@ -38,7 +38,19 @@ Lock the remaining execution-required runtime-trace gap to the actual KVM guest-
    - `sc stop QEMU-GA` changes host-side `guest-ping` back to `Guest agent is not responding: QEMU guest agent is not connected`
    - `qemu-ga.exe -v -p \\.\Global\org.qemu.guest_agent.0` then brings `guest-ping` back to `QEMU guest agent is not available due to an error`
    - the foreground console prints continuous `debug: dispatch` lines instead of a simple open-path failure
+12. A new host-side socket-state audit shows the qga channel still fails before a usable frontend attach:
+   - `virsh qemu-monitor-command ... --pretty '{"execute":"query-chardev"}'` keeps `charchannel1` at `frontend-open=false`
+   - `virsh qemu-monitor-command ... --hmp 'info qtree'` keeps the qga port at `port 2, guest off, host off`
+   - the healthy control case remains visible because the spice channel reports `guest on, host on`
+13. The host-side unix sockets also split cleanly:
+   - direct Python `AF_UNIX` connect to the libvirt monitor socket succeeds
+   - the qga unix socket at `/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/org.qemu.guest_agent.0` returns `Connection refused`
+   - so the remaining KVM guest-control issue is no longer just "guest-ping returns an error"; the host-side qga socket itself still does not accept a usable client path
+14. Official QEMU interoperability docs make that host-side split more meaningful:
+   - the QMP reference defines `frontend-open` as whether the frontend device attached to a chardev backend is in open or closed state
+   - the QGA protocol reference says a client only begins real wire synchronization after initial connection, via `guest-sync-delimited` / `guest-sync`
+   - because the retained host-side qga socket already fails at `connect()` with `Connection refused`, the current KVM blocker sits before guest-agent protocol sync rather than inside the later JSON command phase
 
 ## Interpretation
 
-The remaining gap for `AllowSystemRequiredPowerRequests` and `AllowAudioToEnableExecutionRequiredPowerRequests` is now environment-gated rather than runner-missing. The repo has a narrow path-aware runtime lane for both records, the qemu guest-agent channel is attached on the active KVM session, the bootstrap ISO is restored, the guest-local installer can optionally bootstrap the Windows qemu guest agent, and a live keystroke fallback now exists for the focused KVM desktop. The blocker is now narrower than simple missing install/service state: after qga MSI install, visible `VIOSERIALPORT` devices, guest-tools MSI install, reboot, and even a direct foreground `qemu-ga.exe -v -p \\.\Global\org.qemu.guest_agent.0` launch, host-side `guest-ping` still returns `QEMU guest agent is not available due to an error`. On the current host, the next decisive step is either to debug that guest-side qga runtime/protocol fault further or to execute the same narrow lane from a vmrun-capable environment.
+The remaining gap for `AllowSystemRequiredPowerRequests` and `AllowAudioToEnableExecutionRequiredPowerRequests` is still environment-gated rather than runner-missing, but the blocker is now narrower than a generic guest-side qga fault. The repo has a narrow path-aware runtime lane for both records, the qemu guest-agent channel is attached on the active KVM session, the bootstrap ISO is restored, the guest-local installer can optionally bootstrap the Windows qemu guest agent, and a live keystroke fallback now exists for the focused KVM desktop. After qga MSI install, visible `VIOSERIALPORT` devices, guest-tools MSI install, reboot, and even direct foreground qga launches, the live host-side state still collapses to `frontend-open=false`, `port 2, guest off, host off`, and a `Connection refused` qga unix socket while the monitor socket remains healthy. On the current host, the next decisive step is therefore to debug the host/libvirt/QEMU-side qga attach path rather than to keep treating the issue as missing runtime-runner plumbing or a simple Windows-side protocol exception.
