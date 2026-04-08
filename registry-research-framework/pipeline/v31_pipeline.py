@@ -307,6 +307,46 @@ def parse_registry_sideeffect_report_text(text: str | None) -> dict[str, Any]:
     }
 
 
+def parse_registry_sideeffect_state_payload(payload: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not isinstance(payload, dict):
+        return None
+
+    baseline_values = payload.get("baseline_values")
+    candidate_values = payload.get("candidate_values")
+    if not isinstance(baseline_values, dict) or not isinstance(candidate_values, dict):
+        return None
+
+    value_names = set(baseline_values) | set(candidate_values)
+    if not value_names:
+        return None
+
+    counts = {
+        "added_keys": 0,
+        "removed_keys": 0,
+        "added_values": 0,
+        "removed_values": 0,
+        "modified_values": 0,
+        "unchanged_values": 0,
+    }
+    for value_name in value_names:
+        before_value = baseline_values.get(value_name)
+        after_value = candidate_values.get(value_name)
+        if before_value is None and after_value is not None:
+            counts["added_values"] += 1
+        elif before_value is not None and after_value is None:
+            counts["removed_values"] += 1
+        elif before_value != after_value:
+            counts["modified_values"] += 1
+        else:
+            counts["unchanged_values"] += 1
+
+    return {
+        "format": "state-semantic-registry",
+        "counts": counts,
+        "sideeffect_count": counts["added_values"] + counts["removed_values"] + counts["modified_values"],
+    }
+
+
 def extract_registry_sideeffects(behavior_lane: dict[str, Any] | None, behavior_result: dict[str, Any] | None, behavior_ref: str | None) -> dict[str, Any]:
     result = {
         "executed": False,
@@ -339,13 +379,44 @@ def extract_registry_sideeffects(behavior_lane: dict[str, Any] | None, behavior_
                 result["summary_counts"] = counts
             return result
 
+    state_refs: list[str] = []
+    for candidate in candidate_dicts:
+        for key in ("state_file", "state_path"):
+            repo_ref = repo_relative_text(candidate.get(key))
+            if repo_ref and repo_ref not in state_refs:
+                state_refs.append(repo_ref)
+        summary_ref = repo_relative_text(candidate.get("summary_file"))
+        if summary_ref and summary_ref.endswith("/summary.json"):
+            state_ref = (Path(summary_ref).parent / "state.json").as_posix()
+            if state_ref not in state_refs:
+                state_refs.append(state_ref)
+    behavior_repo_ref = repo_relative_text(behavior_ref)
+    if behavior_repo_ref:
+        if behavior_repo_ref.endswith("/summary.json"):
+            state_ref = (Path(behavior_repo_ref).parent / "state.json").as_posix()
+            if state_ref not in state_refs:
+                state_refs.append(state_ref)
+        elif behavior_repo_ref.endswith("/state.json") and behavior_repo_ref not in state_refs:
+            state_refs.append(behavior_repo_ref)
+
+    for state_ref in state_refs:
+        state_payload = load_json_if_exists(REPO_ROOT / state_ref)
+        parsed_state = parse_registry_sideeffect_state_payload(state_payload)
+        if parsed_state is None:
+            continue
+        result["executed"] = True
+        result["sideeffect_count"] = parsed_state["sideeffect_count"]
+        result["diff_file"] = normalize_repo_ref_location(state_ref, title="Registry sideeffect state")
+        result["format"] = parsed_state["format"]
+        result["summary_counts"] = parsed_state["counts"]
+        return result
+
     candidate_refs: list[str] = []
     for candidate in candidate_dicts:
         for key in ("diff_file", "sideeffect_diff_file", "result_ref"):
             repo_ref = repo_relative_text(candidate.get(key))
             if repo_ref and repo_ref not in candidate_refs:
                 candidate_refs.append(repo_ref)
-    behavior_repo_ref = repo_relative_text(behavior_ref)
     if behavior_repo_ref and Path(behavior_repo_ref).suffix.lower() in {".txt", ".md", ".log"} and behavior_repo_ref not in candidate_refs:
         candidate_refs.append(behavior_repo_ref)
 

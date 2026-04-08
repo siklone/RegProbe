@@ -146,6 +146,37 @@ class RegistrySideeffectPipelineTests(unittest.TestCase):
             self.assertIn("3019", str(payload["summary_counts"]["unchanged_values"]))
             self.assertIn(repo_ref, payload["diff_file"])
 
+    def test_extract_registry_sideeffects_reads_sibling_state_json(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT / "evidence" / "files") as temp_root:
+            temp_path = Path(temp_root)
+            summary_path = temp_path / "summary.json"
+            state_path = temp_path / "state.json"
+            summary_path.write_text('{"status":"runner-ok"}\n', encoding="utf-8")
+            state_path.write_text(
+                (
+                    "{\n"
+                    '  "baseline_values": {"AddedValue": null, "ModifiedValue": 1, "RemovedValue": 4, "UnchangedValue": 8},\n'
+                    '  "candidate_values": {"AddedValue": 1, "ModifiedValue": 2, "RemovedValue": null, "UnchangedValue": 8}\n'
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            payload = v31_pipeline.extract_registry_sideeffects(
+                None,
+                None,
+                summary_path.relative_to(REPO_ROOT).as_posix(),
+            )
+
+            self.assertTrue(payload["executed"])
+            self.assertEqual(payload["format"], "state-semantic-registry")
+            self.assertEqual(payload["sideeffect_count"], 3)
+            self.assertEqual(payload["summary_counts"]["added_values"], 1)
+            self.assertEqual(payload["summary_counts"]["modified_values"], 1)
+            self.assertEqual(payload["summary_counts"]["removed_values"], 1)
+            self.assertEqual(payload["summary_counts"]["unchanged_values"], 1)
+            self.assertIn("state.json", payload["diff_file"])
+
 
 if __name__ == "__main__":
     unittest.main()
