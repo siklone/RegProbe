@@ -4,7 +4,7 @@
   "record_id": "system.kernel-dpc-watchdog-period",
   "tweak_id": "system.kernel-dpc-watchdog-period",
   "record_status": "deprecated",
-  "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM local-KD evidence tightened the current-build picture: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, and `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.",
+  "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM current-build evidence tightened the picture sharply: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input, a class-focused live KD pass now ties that writer to an admin-gated `NtSetSystemInformation` arm inferred as numeric `0xE4`, and a later Ghidra init-semantics pass shows that zero-valued watchdog globals can survive current-build initialization. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.",
   "setting": {
     "name": "DPC Watchdog Period",
     "category": "System",
@@ -13,7 +13,7 @@
     "casual_explanation": "Windows has a watchdog that looks for deferred procedure calls that run too long and can trigger a system crash if the system stays stuck at high interrupt levels. This is a very low-level kernel safety mechanism, not a normal tweak.",
     "why_people_change_it": "People would only change it when reproducing kernel experiments, undoing manual registry changes, or doing specialized driver debugging.",
     "tradeoffs_overview": "Changing watchdog timing can affect how quickly Windows decides a DPC path has stalled badly enough to stop the system. This record now has stronger current-build kernel proof than before, but it still lacks a primary Microsoft source for the exact registry key and also conflicts with the app's 120000 baseline.",
-    "professional_notes": "Microsoft documents that Windows implements a DPC watchdog timer and that a DPC_WATCHDOG_VIOLATION (0x133) bug check occurs if a DPC routine or a series of DPC routines runs too long. Microsoft also provides driver guidance for avoiding DPC watchdog timeouts in storport miniports. Earlier decompilation already showed `KeDpcWatchdogPeriodMs` being read into the watchdog configuration block, but later KVM local-KD work tightened the current-build interpretation substantially. A dedicated live bundle read `KeDpcWatchdogPeriodMs = 0` on the running current build. A later KD disassembly pass then showed that `KeQueryDpcWatchdogConfiguration` only emits the period field when the global is non-zero, while `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates `KeDpcWatchdogPeriodMs` from caller-supplied validated input before `KiCreateDpcLimitsProcessorConfiguration` converts it into processor-local limits. That means the current app baseline `DpcWatchdogPeriod = 120000` is now in direct tension with live current-build state, not just unsupported by a primary Microsoft registry source. The record therefore stays deprecated: the registry mapping is still not primary-sourced, and the observed live default does not match the repo/app baseline.",
+    "professional_notes": "Microsoft documents that Windows implements a DPC watchdog timer and that a DPC_WATCHDOG_VIOLATION (0x133) bug check occurs if a DPC routine or a series of DPC routines runs too long. Microsoft also provides driver guidance for avoiding DPC watchdog timeouts in storport miniports. Earlier decompilation already showed `KeDpcWatchdogPeriodMs` being read into the watchdog configuration block, but later KVM current-build work tightened the interpretation substantially. A dedicated live bundle read `KeDpcWatchdogPeriodMs = 0` on the running current build. A later KD disassembly pass then showed that `KeQueryDpcWatchdogConfiguration` only emits the period field when the global is non-zero, while `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates `KeDpcWatchdogPeriodMs` from caller-supplied validated input before `KiCreateDpcLimitsProcessorConfiguration` converts it into processor-local limits. A later class-focused live KD pass then confirmed the exact runtime writer edge at `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, showed that the writer arm is admin-gated via `SeAliasAdminsSid` membership and `RtlCheckTokenMembership`, and exposed dispatch arithmetic that implies numeric system-information arm `0xE4`. A later PDB-backed Ghidra init-semantics pass then showed that `KiInitDpcThresholds` preserves zero-valued watchdog globals unless they are already non-zero and too small, which means the observed live zero period is structurally compatible with current-build initialization rather than just an unexplained contradiction. That leaves the current app baseline `DpcWatchdogPeriod = 120000` in direct tension with live current-build state and with the current-build init/runtime story, not merely unsupported by a primary Microsoft registry source. The record therefore stays deprecated: the registry mapping is still not primary-sourced, the observed live default does not match the repo/app baseline, and the now-confirmed runtime writer path still lacks a proven persisted registry seeding caller.",
     "targets": [
       {
         "target_id": "dpc-watchdog-period",
@@ -253,6 +253,32 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-dpc-watchdog-period-ntsetsysinfo-kd-20260408",
+      "kind": "vm-test",
+      "title": "Current-build KVM local-KD ties DPC watchdog writer to a privileged NtSetSystemInformation arm",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log",
+      "summary": "A class-focused live KVM local-KD pass confirmed `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, showed that the branch is gated by `SeAliasAdminsSid` membership via `RtlCheckTokenMembership`, and exposed dispatch arithmetic that implies numeric writer arm `0xE4`.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-dpc-watchdog-period-init-ghidra-20260408",
+      "kind": "vm-test",
+      "title": "PDB-backed KVM Ghidra shows current-build init semantics preserve zero watchdog globals",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md",
+      "summary": "A PDB-backed current-build Ghidra pass showed that `KiInitDpcThresholds` only clamps low non-zero watchdog values and therefore allows `KeDpcWatchdogPeriodMs = 0` to survive initialization, instead of forcing a non-zero default.",
+      "supports": [
+        "behavior",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -262,19 +288,21 @@
     "restore_default_supported": false,
     "restore_previous_supported": false,
     "needs_vm_validation": false,
-    "why": "Microsoft clearly documents the DPC watchdog feature, but this research pass still did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself and the later current-build KD work now shows that the app baseline conflicts with live kernel state.",
+    "why": "Microsoft clearly documents the DPC watchdog feature, but this research pass still did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself and the later current-build KD/Ghidra work now shows that the app baseline conflicts with both live kernel state and the current-build init/runtime writer story.",
     "blocking_issues": [
       "No primary Microsoft source for the DpcWatchdogPeriod registry value was captured in this research pass.",
       "The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key.",
-      "The current app baseline 120000 conflicts with observed current-build `KeDpcWatchdogPeriodMs = 0`."
+      "The current app baseline 120000 conflicts with observed current-build `KeDpcWatchdogPeriodMs = 0`.",
+      "The current-build runtime writer is now tied to a privileged `NtSetSystemInformation` arm while no persisted registry seeding caller has been shown."
     ]
   },
   "open_questions": [
     "Can a primary Microsoft source for DpcWatchdogPeriod be captured?",
     "Should the app surface this only as an experimental kernel watchdog setting?",
-    "What caller, if any, feeds persisted registry data into `KeUpdateDpcWatchdogConfiguration` on the current build?"
+    "What caller, if any, feeds persisted registry data into `KeUpdateDpcWatchdogConfiguration` on the current build?",
+    "Does inferred numeric system-information arm `0xE4` have a stable public/current-build class name?"
   ],
-  "last_reviewed_utc": "2026-04-07T19:55:00Z",
+  "last_reviewed_utc": "2026-04-08T01:40:00Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c",
     "exact_quote_or_path": "if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src | 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; }",

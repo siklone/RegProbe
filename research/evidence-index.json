@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-07T23:54:25.472267Z",
+  "generated_utc": "2026-04-08T00:04:12.887853Z",
   "summary": {
     "total_records": 316,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-07T23:54:25.217495Z",
+      "generated_utc": "2026-04-08T00:04:12.493855Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -13937,7 +13937,7 @@
       "category": "System",
       "area": "Kernel / DPC Watchdog",
       "scope": "device",
-      "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM local-KD evidence tightened the current-build picture: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, and `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.",
+      "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM current-build evidence tightened the picture sharply: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input, a class-focused live KD pass now ties that writer to an admin-gated `NtSetSystemInformation` arm inferred as numeric `0xE4`, and a later Ghidra init-semantics pass shows that zero-valued watchdog globals can survive current-build initialization. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.",
       "evidence_class": {
         "record_id": "system.kernel-dpc-watchdog-period",
         "tweak_id": "system.kernel-dpc-watchdog-period",
@@ -13995,6 +13995,18 @@
               "url": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json",
               "kind": "vm-test",
               "summary": "Dedicated KVM local-KD work read `KeDpcWatchdogPeriodMs = 0` on the running current build, showed that `KeQueryDpcWatchdogConfiguration` only emits the field when the global is..."
+            },
+            {
+              "title": "Current-build KVM local-KD ties DPC watchdog writer to a privileged NtSetSystemInformation arm",
+              "url": "evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log",
+              "kind": "vm-test",
+              "summary": "A class-focused live KVM local-KD pass confirmed `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, showed that the branch is gated by `SeAliasAdminsSid` membe..."
+            },
+            {
+              "title": "PDB-backed KVM Ghidra shows current-build init semantics preserve zero watchdog globals",
+              "url": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md",
+              "kind": "vm-test",
+              "summary": "A PDB-backed current-build Ghidra pass showed that `KiInitDpcThresholds` only clamps low non-zero watchdog values and therefore allows `KeDpcWatchdogPeriodMs = 0` to survive ini..."
             }
           ]
         },
@@ -14035,11 +14047,12 @@
         "restore_default_supported": false,
         "restore_previous_supported": false,
         "needs_vm_validation": false,
-        "why": "Microsoft clearly documents the DPC watchdog feature, but this research pass still did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself and the later current-build KD work now shows that the app baseline conflicts with live kernel state.",
+        "why": "Microsoft clearly documents the DPC watchdog feature, but this research pass still did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself and the later current-build KD/Ghidra work now shows that the app baseline conflicts with both live kernel state and the current-build init/runtime writer story.",
         "blocking_issues": [
           "No primary Microsoft source for the DpcWatchdogPeriod registry value was captured in this research pass.",
           "The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key.",
-          "The current app baseline 120000 conflicts with observed current-build `KeDpcWatchdogPeriodMs = 0`."
+          "The current app baseline 120000 conflicts with observed current-build `KeDpcWatchdogPeriodMs = 0`.",
+          "The current-build runtime writer is now tied to a privileged `NtSetSystemInformation` arm while no persisted registry seeding caller has been shown."
         ]
       },
       "app_current_implementation": {
@@ -14282,6 +14295,34 @@
             "behavior",
             "value",
             "runtime-gate",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-dpc-watchdog-period-ntsetsysinfo-kd-20260408",
+          "kind": "vm-test",
+          "title": "Current-build KVM local-KD ties DPC watchdog writer to a privileged NtSetSystemInformation arm",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log",
+          "summary": "A class-focused live KVM local-KD pass confirmed `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, showed that the branch is gated by `SeAliasAdminsSid` membership via `RtlCheckTokenMembership`, and exposed dispatch arithmetic that implies numeric writer arm `0xE4`.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "runtime-gate",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-dpc-watchdog-period-init-ghidra-20260408",
+          "kind": "vm-test",
+          "title": "PDB-backed KVM Ghidra shows current-build init semantics preserve zero watchdog globals",
+          "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md",
+          "summary": "A PDB-backed current-build Ghidra pass showed that `KiInitDpcThresholds` only clamps low non-zero watchdog values and therefore allows `KeDpcWatchdogPeriodMs = 0` to survive initialization, instead of forcing a non-zero default.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "default",
             "version-scope"
           ],
           "origin": "VM test / probe"
