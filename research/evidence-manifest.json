@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T03:34:26.030723Z",
+  "generated_utc": "2026-04-08T04:06:59.079990Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 317,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T03:34:25.358357Z",
+      "generated_utc": "2026-04-08T04:06:58.333905Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -19566,13 +19566,13 @@
         }
       },
       "source_file": "research/records/system.kernel-long-dpc-threshold-cluster.json",
-      "source_file_sha256": "3dc9069c7851a8fa3ae013ce1700c417011e27ffcac8fec2f31a250932a68d6e",
-      "source_file_size_bytes": 21346,
+      "source_file_sha256": "2b269c7f761ce8fe318e793f2c03bf451101295d87fcd941b982ff552b0853cd",
+      "source_file_size_bytes": 24054,
       "name": "Kernel Long DPC Threshold Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Scheduling",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The cluster is therefore live-state-confirmed but still export-blocked and caller-unresolved.",
+      "summary": "Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while still failing to surface a direct symbolized read of the retained `KiLongDpc*` globals. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The cluster is therefore live-state-confirmed and consumer-lineage-narrowed, but still export-blocked and direct-read-unresolved.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -19580,9 +19580,9 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, and two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export. It is not ready for validation because there is still no current-build caller, exact read capture, or primary Microsoft source for either value.",
+        "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a bounded current-build consumer pass that narrows the lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent`, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, and two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export. It is not ready for validation because there is still no direct threshold read site, no exact read capture, and no primary Microsoft source for either value.",
         "blocking_issues": [
-          "no-current-build-caller-path",
+          "no-direct-threshold-read-site",
           "runtime_no_read",
           "no-doc-source-outside-repo",
           "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
@@ -19820,6 +19820,20 @@
             "value",
             "default",
             "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-kd-consumer-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD consumer pass narrows the live Long-DPC lineage to KiEnterLongDpcProcessing and ETW mitigation",
+          "location": "evidence/files/vm-tooling-staging/local-kd-longdpc-consumer-20260408a/local-kd-longdpc-consumer-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-longdpc-consumer-20260408a/local-kd-longdpc-consumer-20260408a.log",
+          "summary": "A current-build full-function KVM local-KD consumer pass showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while the same retained bundle still exposed no direct symbolized read of `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, or `KiLongDpcRuntimeThresholdCycles`. The adjacent ETW helpers looked like event-packaging code rather than the threshold reader itself.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope",
+            "research-gap"
           ],
           "origin": "VM test / probe"
         },
