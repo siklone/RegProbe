@@ -24,6 +24,80 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def try_probe_stage_fallback(
+    *,
+    summary_path: Path,
+    probe_stage_path: Path,
+    result_path: Path,
+    args: argparse.Namespace,
+) -> tuple[dict[str, object], dict[str, object]] | None:
+    if not probe_stage_path.exists():
+        return None
+
+    probe_stage = json.loads(probe_stage_path.read_text(encoding="utf-8-sig"))
+    if probe_stage.get("status") != "error":
+        return None
+
+    result_error = None
+    if result_path.exists():
+        for line in result_path.read_text(encoding="utf-8-sig", errors="replace").splitlines():
+            if line.startswith("ERROR="):
+                result_error = line[len("ERROR=") :]
+                break
+
+    summary = write_summary_contract(
+        summary_path,
+        {
+            "generated_utc": probe_stage.get("generated_utc"),
+            "registry_path": args.registry_path,
+            "value_name": args.value_name,
+            "output_name": args.output_name,
+            "trigger_profile": args.trigger_profile,
+            "output_root": rf"C:\RegProbe-Diag\procmon\{args.output_name}",
+            "status": "error",
+            "result_exists": result_path.exists(),
+            "csv_exists": False,
+            "hits_csv_exists": False,
+            "normalized_bundle_exists": False,
+            "normalization_status": "error",
+            "normalizer_name": None,
+            "probe_stage_exists": True,
+            "probe_stage": probe_stage.get("stage"),
+            "probe_stage_status": probe_stage.get("status"),
+            "probe_stage_message": probe_stage.get("message"),
+            "result_error_line": f"ERROR={result_error}" if result_error else None,
+            "error_kind": "probe-stage-error",
+            "error": result_error or probe_stage.get("message"),
+            "error_position": None,
+            "summary_source": "probe-stage-fallback",
+        },
+        default_error_kind="probe-stage-error",
+        default_recovery_action="inspect-probe-stage",
+        default_transport_blocker="probe-stage-error",
+        default_guest_health="degraded",
+    )
+    payload = {
+        "summary_path": str(summary_path),
+        "output_name": args.output_name,
+        "trigger_profile": args.trigger_profile,
+        "status": "error",
+        "csv_exists": False,
+        "hits_csv_exists": False,
+        "normalized_bundle_exists": False,
+        "normalization_status": "error",
+        "normalizer_name": None,
+        "probe_stage": probe_stage.get("stage"),
+        "probe_stage_status": probe_stage.get("status"),
+        "error_kind": "probe-stage-error",
+        "recovery_action": summary.get("recovery_action"),
+        "transport_blocker": summary.get("transport_blocker"),
+        "guest_health": summary.get("guest_health"),
+        "error": result_error or probe_stage.get("message"),
+        "summary_source": "probe-stage-fallback",
+    }
+    return summary, payload
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-registry-policy-probe.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -39,6 +113,7 @@ def main() -> int:
     parser.add_argument("--value-name", required=True)
     parser.add_argument("--output-name", required=True)
     parser.add_argument("--trigger-profile", required=True)
+    parser.add_argument("--saveas-timeout-seconds", type=int, default=60)
     parser.add_argument("--powershell-command", default="")
     parser.add_argument("--match-fragment", action="append", default=[])
     parser.add_argument("--process-name", action="append", default=[])
@@ -148,6 +223,8 @@ def main() -> int:
         quote_ps(args.output_name),
         "-TriggerProfile",
         quote_ps(args.trigger_profile),
+        "-SaveAsTimeoutSeconds",
+        str(args.saveas_timeout_seconds),
         "-ScriptsRoot",
         quote_ps(guest_scripts_root),
         "-UploadBaseUrl",
@@ -236,7 +313,8 @@ def main() -> int:
         cwd=repo_root,
     )
 
-    deadline = time.time() + args.timeout_seconds
+    effective_timeout_seconds = max(args.timeout_seconds, args.saveas_timeout_seconds + 120)
+    deadline = time.time() + effective_timeout_seconds
     while time.time() < deadline:
         if summary_path.exists():
             summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
@@ -244,6 +322,9 @@ def main() -> int:
                 "summary_path": str(summary_path),
                 "output_name": args.output_name,
                 "trigger_profile": args.trigger_profile,
+                "timeout_seconds": args.timeout_seconds,
+                "effective_timeout_seconds": effective_timeout_seconds,
+                "saveas_timeout_seconds": args.saveas_timeout_seconds,
                 "status": summary.get("status", "unknown"),
                 "csv_exists": summary.get("csv_exists"),
                 "hits_csv_exists": summary.get("hits_csv_exists"),
@@ -263,67 +344,29 @@ def main() -> int:
                 return 1
             return 0
 
-        if probe_stage_path.exists() and result_path.exists():
-            probe_stage = json.loads(probe_stage_path.read_text(encoding="utf-8-sig"))
-            if probe_stage.get("status") == "error":
-                result_error = None
-                for line in result_path.read_text(encoding="utf-8-sig", errors="replace").splitlines():
-                    if line.startswith("ERROR="):
-                        result_error = line[len("ERROR=") :]
-                        break
+        fallback = try_probe_stage_fallback(
+            summary_path=summary_path,
+            probe_stage_path=probe_stage_path,
+            result_path=result_path,
+            args=args,
+        )
+        if fallback is not None:
+            _summary, payload = fallback
+            print(json.dumps(payload, indent=2))
+            return 1
+        time.sleep(2)
 
-                summary = write_summary_contract(
-                    summary_path,
-                    {
-                    "generated_utc": probe_stage.get("generated_utc"),
-                    "registry_path": args.registry_path,
-                    "value_name": args.value_name,
-                    "output_name": args.output_name,
-                    "trigger_profile": args.trigger_profile,
-                    "output_root": rf"C:\RegProbe-Diag\procmon\{args.output_name}",
-                    "status": "error",
-                    "result_exists": True,
-                    "csv_exists": False,
-                    "hits_csv_exists": False,
-                    "normalized_bundle_exists": False,
-                    "normalization_status": "error",
-                    "normalizer_name": None,
-                    "probe_stage_exists": True,
-                    "probe_stage": probe_stage.get("stage"),
-                    "probe_stage_status": probe_stage.get("status"),
-                    "probe_stage_message": probe_stage.get("message"),
-                    "result_error_line": f"ERROR={result_error}" if result_error else None,
-                    "error_kind": "probe-stage-error",
-                    "error": result_error or probe_stage.get("message"),
-                    "error_position": None,
-                    "summary_source": "probe-stage-fallback",
-                    },
-                    default_error_kind="probe-stage-error",
-                    default_recovery_action="inspect-probe-stage",
-                    default_transport_blocker="probe-stage-error",
-                    default_guest_health="degraded",
-                )
-                payload = {
-                    "summary_path": str(summary_path),
-                    "output_name": args.output_name,
-                    "trigger_profile": args.trigger_profile,
-                    "status": "error",
-                    "csv_exists": False,
-                    "hits_csv_exists": False,
-                    "normalized_bundle_exists": False,
-                    "normalization_status": "error",
-                    "normalizer_name": None,
-                    "probe_stage": probe_stage.get("stage"),
-                    "probe_stage_status": probe_stage.get("status"),
-                    "error_kind": "probe-stage-error",
-                    "recovery_action": summary.get("recovery_action"),
-                    "transport_blocker": summary.get("transport_blocker"),
-                    "guest_health": summary.get("guest_health"),
-                    "error": result_error or probe_stage.get("message"),
-                    "summary_source": "probe-stage-fallback",
-                }
-                print(json.dumps(payload, indent=2))
-                return 1
+    for _ in range(5):
+        fallback = try_probe_stage_fallback(
+            summary_path=summary_path,
+            probe_stage_path=probe_stage_path,
+            result_path=result_path,
+            args=args,
+        )
+        if fallback is not None:
+            _summary, payload = fallback
+            print(json.dumps(payload, indent=2))
+            return 1
         time.sleep(2)
 
     timeout_summary = write_summary_contract(
@@ -332,6 +375,9 @@ def main() -> int:
             "summary_path": str(summary_path),
             "output_name": args.output_name,
             "trigger_profile": args.trigger_profile,
+            "timeout_seconds": args.timeout_seconds,
+            "effective_timeout_seconds": effective_timeout_seconds,
+            "saveas_timeout_seconds": args.saveas_timeout_seconds,
             "status": "timeout",
         },
         default_error_kind="runner-timeout",

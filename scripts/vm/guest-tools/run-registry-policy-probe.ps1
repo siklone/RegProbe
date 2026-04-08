@@ -12,6 +12,8 @@ param(
     [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst', 'hiber-file-size-burst', 'watchdog-power-burst', 'timer-dpc-stress')]
     [string]$TriggerProfile = 'custom',
 
+    [int]$SaveAsTimeoutSeconds = 60,
+
     [string]$PowerShellCommand = '',
     [string]$ScriptsRoot = 'C:\Tools\Scripts',
     [string]$OutputRoot = '',
@@ -356,6 +358,7 @@ try {
         Prefix = $OutputName
         OutputDirectory = $OutputRoot
         PowerShellCommand = $triggerCommand
+        SaveAsTimeoutSeconds = $SaveAsTimeoutSeconds
     }
 
     if (-not [string]::IsNullOrWhiteSpace($UploadBaseUrl)) {
