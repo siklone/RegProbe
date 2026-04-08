@@ -134,6 +134,14 @@ python3 scripts/vm/ensure-kvm-qga-channel.py --emit-json
 
 If that reports `present_after=true` but `guest_agent_connected=false`, the channel exists and the remaining gap is the Windows guest-agent install/service inside the guest.
 
+When the guest is already logged in but host-side guest control is still missing, there is also a last-resort keystroke helper:
+
+```bash
+printf 'echo ok\n' | python3 scripts/vm/send-kvm-text.py
+```
+
+Use it carefully. It types into the focused guest window via `virsh send-key`, so it is only appropriate for controlled recovery/bootstrap work on the active KVM desktop.
+
 Use this as a manual recovery/bootstrap surface for KVM. The repo controller itself still assumes `vmrun` and the shared-folder model.
 
 ## Run A Test

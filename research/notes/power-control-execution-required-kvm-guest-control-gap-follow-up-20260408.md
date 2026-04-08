@@ -28,7 +28,13 @@ Lock the remaining execution-required runtime-trace gap to the actual KVM guest-
    - it can seed guest-local files under `C:\Tools\Scripts` and `C:\Tools\ValidationController`
    - it can optionally install/start the Windows qemu guest agent
    - it still does not by itself provide host-side guest exec or result copy-back
+9. A live guest-side bootstrap attempt now exists on the active desktop:
+   - `scripts/vm/send-kvm-text.py` can type into the focused guest window through `virsh send-key`
+   - the live attempt installed the official qga MSI, confirmed a `QEMU-GA` service in `RUNNING` state, confirmed visible `VIOSERIALPORT` devices, installed the official `virtio-win-gt-x64.msi`, and rebooted
+10. The remaining guest-control failure mode is now stronger and narrower than before:
+   - `virsh qemu-agent-command regprobe-win11-25h2-session '{"execute":"guest-ping"}'`
+   - now returns `QEMU guest agent is not available due to an error`
 
 ## Interpretation
 
-The remaining gap for `AllowSystemRequiredPowerRequests` and `AllowAudioToEnableExecutionRequiredPowerRequests` is now environment-gated rather than runner-missing. The repo has a narrow path-aware runtime lane for both records, the qemu guest-agent channel is attached on the active KVM session, the bootstrap ISO is restored, and the guest-local installer can optionally bootstrap the Windows qemu guest agent. The blocker is now narrower: guest-side qemu guest agent install/service state plus the still-vmrun-oriented legacy controller surface. On the current host, the next decisive step is either to finish guest-side qga bootstrap and verify `guest-ping`, or to execute the same narrow lane from a vmrun-capable environment.
+The remaining gap for `AllowSystemRequiredPowerRequests` and `AllowAudioToEnableExecutionRequiredPowerRequests` is now environment-gated rather than runner-missing. The repo has a narrow path-aware runtime lane for both records, the qemu guest-agent channel is attached on the active KVM session, the bootstrap ISO is restored, the guest-local installer can optionally bootstrap the Windows qemu guest agent, and a live keystroke fallback now exists for the focused KVM desktop. The blocker is now narrower than simple missing install/service state: after qga MSI install, visible `VIOSERIALPORT` devices, guest-tools MSI install, and reboot, host-side `guest-ping` still returns `QEMU guest agent is not available due to an error`. On the current host, the next decisive step is either to debug that guest-side qga runtime/protocol fault further or to execute the same narrow lane from a vmrun-capable environment.
