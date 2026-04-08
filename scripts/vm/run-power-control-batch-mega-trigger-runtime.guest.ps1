@@ -545,7 +545,11 @@ public static class RegProbeUser32 {
     }
 }
 
-function Invoke-TimerResolutionTrigger {
+function Ensure-RegProbeTimerApi {
+    if ('RegProbeTimerApi' -as [type]) {
+        return
+    }
+
     Add-Type @"
 using System;
 using System.Runtime.InteropServices;
@@ -558,6 +562,10 @@ public static class RegProbeTimerApi {
     public static extern uint timeEndPeriod(uint uPeriod);
 }
 "@
+}
+
+function Invoke-TimerResolutionTrigger {
+    Ensure-RegProbeTimerApi
 
     $grantedResolution = 0
     [RegProbeTimerApi]::NtSetTimerResolution(5000, $true, [ref]$grantedResolution) | Out-Null
@@ -570,6 +578,66 @@ public static class RegProbeTimerApi {
         }
     }
     finally {
+        [RegProbeTimerApi]::timeEndPeriod(1) | Out-Null
+        $releasedResolution = 0
+        [RegProbeTimerApi]::NtSetTimerResolution(5000, $false, [ref]$releasedResolution) | Out-Null
+    }
+}
+
+function Invoke-TimerDpcStressTrigger {
+    Ensure-RegProbeTimerApi
+
+    $grantedResolution = 0
+    [RegProbeTimerApi]::NtSetTimerResolution(5000, $true, [ref]$grantedResolution) | Out-Null
+    [RegProbeTimerApi]::timeBeginPeriod(1) | Out-Null
+
+    $timers = @()
+    $jobs = @()
+    try {
+        $callback = [System.Threading.TimerCallback]{
+            param($state)
+            $iterations = 64
+            if ($state -is [int]) {
+                $iterations = [Math]::Max([int]$state, 16)
+            }
+
+            for ($index = 0; $index -lt $iterations; $index++) {
+                [Math]::Sqrt(12345.6789) | Out-Null
+            }
+        }
+
+        foreach ($periodMs in @(5, 7, 11, 13, 17, 19, 23, 29)) {
+            $timers += [System.Threading.Timer]::new($callback, 64, 0, $periodMs)
+        }
+
+        $coreCount = [Math]::Min([Environment]::ProcessorCount, 4)
+        $jobs = 1..$coreCount | ForEach-Object {
+            Start-Job -ScriptBlock {
+                $end = (Get-Date).AddSeconds(8)
+                while ((Get-Date) -lt $end) {
+                    for ($index = 0; $index -lt 2048; $index++) {
+                        [Math]::Sqrt(54321.1234) | Out-Null
+                    }
+                    Start-Sleep -Milliseconds 2
+                }
+            }
+        }
+
+        $deadline = (Get-Date).AddSeconds(8)
+        while ((Get-Date) -lt $deadline) {
+            Start-Sleep -Milliseconds 100
+        }
+    }
+    finally {
+        foreach ($timer in @($timers)) {
+            if ($timer) {
+                $timer.Dispose()
+            }
+        }
+
+        $jobs | Stop-Job -ErrorAction SilentlyContinue | Out-Null
+        $jobs | Remove-Job -Force -ErrorAction SilentlyContinue | Out-Null
+
         [RegProbeTimerApi]::timeEndPeriod(1) | Out-Null
         $releasedResolution = 0
         [RegProbeTimerApi]::NtSetTimerResolution(5000, $false, [ref]$releasedResolution) | Out-Null
@@ -1070,6 +1138,7 @@ try {
         process_spawn_burst = { Invoke-ProcessBurstTrigger }
         foreground_background_switch = { Invoke-ForegroundSwitchTrigger }
         timer_resolution_change = { Invoke-TimerResolutionTrigger }
+        timer_dpc_stress = { Invoke-TimerDpcStressTrigger }
         network_activity = { Invoke-NetworkTrigger }
     }
 

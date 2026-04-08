@@ -2,14 +2,16 @@
 
 ## Summary
 
-- The `LongDpcQueueThreshold` / `LongDpcRuntimeThreshold` cluster no longer lacks a concrete repo-native next trigger surface.
-- The nearest reusable primitive already exists in the guest runtime tooling:
+- The `LongDpcQueueThreshold` / `LongDpcRuntimeThreshold` cluster now has a dedicated repo-native `timer-dpc-stress` harness, not just an abstract trigger recommendation.
+- The guest runtime tooling now exposes:
   - `scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1`
-  - `Invoke-TimerResolutionTrigger`
-- That helper directly exercises:
+  - `Invoke-TimerDpcStressTrigger`
+- The new dedicated trigger layers:
   - `NtSetTimerResolution(5000, true/false, ...)`
   - `timeBeginPeriod(1)` / `timeEndPeriod(1)`
-  - a short CPU loop with repeated `Start-Sleep -Milliseconds 25`
+  - eight concurrent `System.Threading.Timer` instances with short periods
+  - bounded multi-core CPU jobs with short sleeps to keep a timer/DPC-heavy cadence
+- The older `Invoke-TimerResolutionTrigger` remains as the base primitive.
 - This aligns with the source-enrichment recommendation for the cluster:
   - `trigger_family = timer-dpc-stress`
   - `suggested_trigger = ["high-resolution timer request", "multiple concurrent timers", "DPC-heavy workload"]`
@@ -26,13 +28,11 @@
 ## Interpretation
 
 - new proof gained:
-  - the repo already contains a reusable high-resolution timer primitive instead of a purely abstract trigger recommendation
+  - the repo now contains a dedicated `timer-dpc-stress` trigger instead of only a reusable timer-resolution primitive
   - the enrichment guidance and the guest trigger surface now point in the same direction
 - narrowed conclusion:
-  - the next runtime lane for `LongDpc*Threshold` does not need a net-new trigger family design
-  - it does still need a dedicated harness that adds the missing two pieces beyond `Invoke-TimerResolutionTrigger`:
-    - multiple concurrent timers
-    - a more obviously DPC-heavy workload
+  - the next runtime lane for `LongDpc*Threshold` does not need a net-new trigger family design or a new guest harness
+  - the remaining gap is no longer harness design; it is execution and evidence capture
 - next proof path:
-  - build a small dedicated `timer-dpc-stress` guest trigger by reusing `Invoke-TimerResolutionTrigger` as the base primitive
-  - then replay the `Session Manager\Kernel` long-DPC cluster under that narrower trigger instead of the broader kernel batch
+  - replay the `Session Manager\Kernel` long-DPC cluster under `timer_dpc_stress` instead of the broader kernel batch
+  - keep the lane narrow and preserve the existing broad batch as supporting evidence only
