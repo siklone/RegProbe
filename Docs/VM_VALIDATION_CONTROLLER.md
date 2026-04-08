@@ -114,6 +114,26 @@ That guest-local installer:
 - creates a local launch helper
 - does **not** register the startup task unless you pass `-RegisterStartupTask`
 
+If you also have a Windows qemu guest agent installer on the host, include it when building:
+
+```bash
+python3 scripts/vm/build-kvm-bootstrap-iso.py --qga-installer /absolute/path/to/qemu-ga-x86_64.msi
+```
+
+Then inside the guest you can run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install-guest-validation-agent-local.ps1 -InstallQemuGuestAgent
+```
+
+From the Linux host you can also verify that the libvirt domain exposes the qemu guest-agent channel:
+
+```bash
+python3 scripts/vm/ensure-kvm-qga-channel.py --emit-json
+```
+
+If that reports `present_after=true` but `guest_agent_connected=false`, the channel exists and the remaining gap is the Windows guest-agent install/service inside the guest.
+
 Use this as a manual recovery/bootstrap surface for KVM. The repo controller itself still assumes `vmrun` and the shared-folder model.
 
 ## Run A Test

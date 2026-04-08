@@ -14,6 +14,7 @@ RUNNER_CONFIG_PATH = REPO_ROOT / "registry-research-framework" / "config" / "twe
 RUNTIME_PROBE_PATH = REPO_ROOT / "registry-research-framework" / "tools" / "run-path-aware-runtime-probe.ps1"
 CONTROLLER_DOC_PATH = REPO_ROOT / "Docs" / "VM_VALIDATION_CONTROLLER.md"
 CONTROLLER_SCRIPT_PATH = REPO_ROOT / "scripts" / "vm" / "host-validation-controller.ps1"
+ENSURE_QGA_PATH = REPO_ROOT / "scripts" / "vm" / "ensure-kvm-qga-channel.py"
 OUTPUT_BASENAME = "execution-required-kvm-guest-control-gap-20260408"
 OUTPUT_JSON = REPO_ROOT / "registry-research-framework" / "audit" / f"{OUTPUT_BASENAME}.json"
 OUTPUT_MD = REPO_ROOT / "registry-research-framework" / "audit" / f"{OUTPUT_BASENAME}.md"
@@ -82,6 +83,7 @@ def main() -> int:
     cdrom_source = None
     cdrom_exists = False
     has_qemu_agent_channel = False
+    channel_names: list[str] = []
     spice_channel_name = None
     serial_console_path = None
 
@@ -103,9 +105,11 @@ def main() -> int:
             if target is None:
                 continue
             name = target.get("name")
+            if name:
+                channel_names.append(name)
             if name == "org.qemu.guest_agent.0":
                 has_qemu_agent_channel = True
-            if name:
+            if name == "com.redhat.spice.0":
                 spice_channel_name = name
 
         console = root.find("./devices/console")
@@ -130,6 +134,7 @@ def main() -> int:
         "runtime_probe_source": RUNTIME_PROBE_PATH.relative_to(REPO_ROOT).as_posix(),
         "controller_doc_source": CONTROLLER_DOC_PATH.relative_to(REPO_ROOT).as_posix(),
         "controller_script_source": CONTROLLER_SCRIPT_PATH.relative_to(REPO_ROOT).as_posix(),
+        "ensure_qga_source": ENSURE_QGA_PATH.relative_to(REPO_ROOT).as_posix(),
         "runtime_probe_is_vmrun_backed": all(record["runner_is_vmrun_backed"] for record in runtime_runner_records),
         "controller_doc_uses_shared_folder_model": controller_doc_is_shared_folder,
         "controller_script_uses_vmrun": controller_script_uses_vmrun,
@@ -138,6 +143,7 @@ def main() -> int:
         "dumpxml_ok": bool(dumpxml and dumpxml["ok"]),
         "domain_running": domain_running,
         "has_qemu_agent_channel": has_qemu_agent_channel,
+        "channel_names": channel_names,
         "guest_ping": guest_ping,
         "qemu_guest_agent_configured": has_qemu_agent_channel and bool(guest_ping and guest_ping["ok"]),
         "spice_channel_name": spice_channel_name,
@@ -146,8 +152,8 @@ def main() -> int:
         "bootstrap_iso_exists_on_host": cdrom_exists,
         "conclusion": (
             "The execution-required runtime lane is repo-native and ready, but the active KVM guest-control surface is not. "
-            "The runner and controller tooling remain VMware/vmrun-oriented, the live libvirt domain exposes no qemu guest agent channel, "
-            "guest-ping fails with 'QEMU guest agent is not configured', and the restored bootstrap ISO currently provides only manual in-guest bootstrap."
+            "The runner and controller tooling remain VMware/vmrun-oriented, the live libvirt domain now exposes the qemu guest agent channel, "
+            "guest-ping still fails with 'QEMU guest agent is not connected', and the restored bootstrap ISO only closes the media gap by providing manual in-guest bootstrap plus an optional qemu guest agent installer."
         ),
     }
     write_json(OUTPUT_JSON, payload)
@@ -177,6 +183,7 @@ def main() -> int:
         )
     lines.extend(
         [
+            f"- Channel names: `{channel_names}`",
             f"- Serial console path: `{serial_console_path}`",
             f"- Guest ping stderr: `{(guest_ping or {}).get('stderr') or (guest_ping or {}).get('stdout') or 'n/a'}`",
             f"- Bootstrap ISO path: `{cdrom_source}`",
@@ -184,7 +191,7 @@ def main() -> int:
             "## Interpretation",
             "",
             "- The remaining execution-required runtime-trace gap is no longer runner design or candidate selection.",
-            "- The repo-side narrow lane exists, but live guest execution on the current KVM session is blocked by environment shape rather than by missing research plumbing.",
+            "- The repo-side narrow lane exists, the qemu guest-agent channel is now attached, but live guest execution on the current KVM session is still blocked by guest-side agent/service state rather than by missing research plumbing.",
             "- The next decisive step is either to restore a usable guest-control surface on KVM or to run the narrow path-aware lane on a vmrun-capable host environment.",
         ]
     )

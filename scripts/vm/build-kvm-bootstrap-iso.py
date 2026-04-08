@@ -39,9 +39,11 @@ Manual guest steps
    powershell -ExecutionPolicy Bypass -File .\\install-guest-validation-agent-local.ps1
 4. This installs files under C:\\Tools\\Scripts and prepares C:\\Tools\\ValidationController.
 5. It does not register the startup task by default. Add -RegisterStartupTask only when a config workflow exists.
+6. If the ISO also contains a qemu guest agent installer, run:
+   powershell -ExecutionPolicy Bypass -File .\\install-guest-validation-agent-local.ps1 -InstallQemuGuestAgent
 
 Notes
-- This ISO does not include a Windows qemu guest agent installer.
+- A qemu guest agent installer is optional and can be injected at build time.
 - The current repo controller stack still assumes vmrun/shared-folder orchestration.
 """
 
@@ -49,6 +51,12 @@ Notes
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build the RegProbe KVM bootstrap ISO.")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT, help="Output ISO path.")
+    parser.add_argument(
+        "--qga-installer",
+        type=Path,
+        default=None,
+        help="Optional Windows qemu guest agent installer to include on the ISO.",
+    )
     parser.add_argument(
         "--extra",
         action="append",
@@ -92,6 +100,16 @@ def main() -> int:
     write_text(STAGING_DIR / "README.txt", README_TEXT)
 
     extras: list[str] = []
+    qga_installer_rel = None
+    if args.qga_installer:
+        qga_path = args.qga_installer.expanduser()
+        if not qga_path.exists():
+            raise FileNotFoundError(f"QEMU guest agent installer not found: {qga_path}")
+        qga_target = STAGING_DIR / "extras" / qga_path.name
+        copy_file(qga_path, qga_target)
+        qga_installer_rel = qga_target.relative_to(STAGING_DIR).as_posix()
+        extras.append(qga_installer_rel)
+
     for raw in args.extra:
         extra_path = Path(raw).expanduser()
         if not extra_path.exists():
@@ -108,6 +126,7 @@ def main() -> int:
             for path in STAGING_DIR.rglob("*")
             if path.is_file()
         ),
+        "qga_installer_included": qga_installer_rel,
         "extras_included": extras,
     }
     write_text(STAGING_DIR / "manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2))

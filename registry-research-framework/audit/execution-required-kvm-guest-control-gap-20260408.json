@@ -1,6 +1,6 @@
 {
   "title": "Execution-required KVM guest-control gap audit",
-  "generated_utc": "2026-04-08T20:12:42.690368Z",
+  "generated_utc": "2026-04-08T20:23:56.058255Z",
   "domain_name": "regprobe-win11-25h2-session",
   "target_tweak_ids": [
     "power.control.allow-system-required-power-requests",
@@ -30,6 +30,7 @@
   "runtime_probe_source": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
   "controller_doc_source": "Docs/VM_VALIDATION_CONTROLLER.md",
   "controller_script_source": "scripts/vm/host-validation-controller.ps1",
+  "ensure_qga_source": "scripts/vm/ensure-kvm-qga-channel.py",
   "runtime_probe_is_vmrun_backed": true,
   "controller_doc_uses_shared_folder_model": true,
   "controller_script_uses_vmrun": true,
@@ -41,13 +42,17 @@
       "regprobe-win11-25h2-session"
     ],
     "returncode": 0,
-    "stdout": "Id:             1\nName:           regprobe-win11-25h2-session\nUUID:           7e6673dc-8181-4136-bf27-fa4c1d306212\nOS Type:        hvm\nState:          running\nCPU(s):         4\nCPU time:       43880.7s\nMax memory:     8388608 KiB\nUsed memory:    8388608 KiB\nPersistent:     yes\nAutostart:      disable\nAutostart Once: disable\nManaged save:   no\nSecurity model: none\nSecurity DOI:   0",
+    "stdout": "Id:             1\nName:           regprobe-win11-25h2-session\nUUID:           7e6673dc-8181-4136-bf27-fa4c1d306212\nOS Type:        hvm\nState:          running\nCPU(s):         4\nCPU time:       43990.1s\nMax memory:     8388608 KiB\nUsed memory:    8388608 KiB\nPersistent:     yes\nAutostart:      disable\nAutostart Once: disable\nManaged save:   no\nSecurity model: none\nSecurity DOI:   0",
     "stderr": "",
     "ok": true
   },
   "dumpxml_ok": true,
   "domain_running": true,
-  "has_qemu_agent_channel": false,
+  "has_qemu_agent_channel": true,
+  "channel_names": [
+    "com.redhat.spice.0",
+    "org.qemu.guest_agent.0"
+  ],
   "guest_ping": {
     "argv": [
       "/usr/bin/virsh",
@@ -57,7 +62,7 @@
     ],
     "returncode": 1,
     "stdout": "",
-    "stderr": "error: argument unsupported: QEMU guest agent is not configured",
+    "stderr": "error: Guest agent is not responding: QEMU guest agent is not connected",
     "ok": false
   },
   "qemu_guest_agent_configured": false,
@@ -65,5 +70,5 @@
   "serial_console_path": "/dev/pts/4",
   "bootstrap_iso_path": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/dist/regprobe-kvm-bootstrap.iso",
   "bootstrap_iso_exists_on_host": true,
-  "conclusion": "The execution-required runtime lane is repo-native and ready, but the active KVM guest-control surface is not. The runner and controller tooling remain VMware/vmrun-oriented, the live libvirt domain exposes no qemu guest agent channel, guest-ping fails with 'QEMU guest agent is not configured', and the restored bootstrap ISO currently provides only manual in-guest bootstrap."
+  "conclusion": "The execution-required runtime lane is repo-native and ready, but the active KVM guest-control surface is not. The runner and controller tooling remain VMware/vmrun-oriented, the live libvirt domain now exposes the qemu guest agent channel, guest-ping still fails with 'QEMU guest agent is not connected', and the restored bootstrap ISO only closes the media gap by providing manual in-guest bootstrap plus an optional qemu guest agent installer."
 }
