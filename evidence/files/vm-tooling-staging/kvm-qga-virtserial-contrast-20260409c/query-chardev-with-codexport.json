@@ -1,0 +1,45 @@
+{
+  "return": [
+    {
+      "frontend-open": true,
+      "filename": "unix:/home/rai/.config/libvirt/qemu/lib/domain-1-regprobe-win11-25h2-/monitor.sock,server=on",
+      "label": "charmonitor"
+    },
+    {
+      "frontend-open": true,
+      "filename": "spicevmc",
+      "label": "charredir1"
+    },
+    {
+      "frontend-open": true,
+      "filename": "pty:/dev/pts/4",
+      "label": "charserial0"
+    },
+    {
+      "frontend-open": true,
+      "filename": "disconnected:unix:/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/org.qemu.guest_agent.0,server=on",
+      "label": "charchannel1"
+    },
+    {
+      "frontend-open": false,
+      "filename": "disconnected:unix:/tmp/regprobe-qga-porttest.sock,server=on",
+      "label": "codexportch"
+    },
+    {
+      "frontend-open": false,
+      "filename": "unix:/run/user/1000/libvirt/qemu/run/swtpm/1-regprobe-win11-25h2--swtpm.sock",
+      "label": "chrtpm"
+    },
+    {
+      "frontend-open": true,
+      "filename": "spicevmc",
+      "label": "charchannel0"
+    },
+    {
+      "frontend-open": true,
+      "filename": "spicevmc",
+      "label": "charredir0"
+    }
+  ],
+  "id": "libvirt-133133"
+}
