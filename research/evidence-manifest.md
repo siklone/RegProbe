@@ -15,8 +15,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 248 |
-| Class B | 8 |
+| Class A | 249 |
+| Class B | 7 |
 | Class C | 2 |
 | Class E | 54 |
 
@@ -82,7 +82,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.allow-audio-to-enable-execution-required-power-requests` | draft | Class C | `research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json` | - | `dc3b14074cc9ef57f3d18280bc7999306bb01272b7b1d5f69433f46c9298101e` | `816d3c7ba4f71dd370da6fceeac84c50a3d4e3bc0c1247aa5d7d08dc56c17587` | 15 |
 | `power.control.allow-system-required-power-requests` | draft | Class C | `research/records/power.control.allow-system-required-power-requests.json` | - | `104665065da787de0e1e36ce55199edc4592dab9a288bed534390965f9fde35f` | `bf418bd80a5e1c6b07f22a12d85f21593e5e717ecbf5a606ccf6f49d5c7b0a36` | 15 |
 | `power.control.class1-initial-unpark-count` | draft | Class A | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `9d21d604c1722a80af4c771d8dfa43b5397019b97dc9ad10fba7364450f26ab2` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 7 |
-| `power.control.hiber-file-size-percent` | draft | Class B | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `1bd5c31b152dec2c8edffdfc9ac45cd2123d41647a562df4f940a54b0c159ab3` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 4 |
+| `power.control.hiber-file-size-percent` | draft | Class A | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `d4231786a26d2f3cd662143f9e7a5c538d899eb37ef8378d8d5914af50d4a9e6` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 5 |
 | `power.control.hibernate-enabled` | draft | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `6c21df45712ef4b051c4ef9ccdf72ca465dcfbec51781ed1c79e8b0234de2a4f` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 5 |
 | `power.control.hibernate-enabled-default` | draft | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `ce0aebb6df77d3943dc557a592acdfc11a17d0cef77e4fe8ba8cab46b65c26ff` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 8 |
 | `power.control.lid-reliability-state` | draft | Class A | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `de78b98f5ddb7704eef29828abb84265225420b4785d1a85f15b179cc2dea257` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 5 |
@@ -1997,13 +1997,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.hiber-file-size-percent`
 
 - Status: `draft`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/power.control.hiber-file-size-percent.json`
 - Evidence root: [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent)
-- Source SHA256: `1bd5c31b152dec2c8edffdfc9ac45cd2123d41647a562df4f940a54b0c159ab3`
+- Source SHA256: `d4231786a26d2f3cd662143f9e7a5c538d899eb37ef8378d8d5914af50d4a9e6`
 - Proof SHA256: `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4`
 
-**Summary:** Draft candidate package for HiberFileSizePercent under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the residual string triage found an exact current-build ntoskrnl.exe hit, and the tools-hardened lightweight ETW follow-up surfaced exact runtime lines but not an exact runtime read. That keeps the lane at Class B with a runtime_no_read gate.
+**Summary:** Draft candidate package for HiberFileSizePercent under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the residual string triage found an exact current-build ntoskrnl.exe hit, the repo power notes preserve the IDA-derived `PopHiberFileSizePercent` symbol note, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for HiberFileSizePercent. App surfacing remains a separate product decision from evidence classification.
 
 **Evidence**
 
@@ -2012,7 +2012,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-power-doc` | `repo-doc` | Repo power notes for HiberFileSizePercent | [Docs/power/power.md](../Docs/power/power.md) |
 | `vm-power-control-phase0-20260329` | `registry-observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
 | `static-power-control-residual-string-20260330` | `repo-doc` | Residual value-exists string triage for HiberFileSizePercent | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) |
-| `vm-power-control-hiber-runtime-20260330` | `etw-trace` | Tools-hardened lightweight ETW follow-up for HiberFileSizePercent | [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json) and [research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md](notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md) |
+| `ghidra-power-control-hiber-file-size-percent-20260408` | `decompilation` | IDA-derived static naming note for HiberFileSizePercent | [Docs/power/power.md:149](../Docs/power/power.md:149) and [research/notes/power-control-hiber-file-size-percent-stepwise-follow-up-20260408.md](notes/power-control-hiber-file-size-percent-stepwise-follow-up-20260408.md) |
+| `vm-power-control-stepwise-runtime-20260329` | `procmon-trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for HiberFileSizePercent | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv) and [registry-research-framework/audit/hiber-file-size-percent-stepwise-runtime-audit-20260408.json](../registry-research-framework/audit/hiber-file-size-percent-stepwise-runtime-audit-20260408.json) and [research/notes/power-control-hiber-file-size-percent-stepwise-follow-up-20260408.md](notes/power-control-hiber-file-size-percent-stepwise-follow-up-20260408.md) |
 
 **Validation proof**
 

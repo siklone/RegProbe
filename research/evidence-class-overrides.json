@@ -38,9 +38,9 @@
     },
     {
       "record_id": "power.control.hiber-file-size-percent",
-      "evidence_class": "B",
-      "reason_code": "runtime_no_read",
-      "gating_reason": "Docs/static evidence is strong and the lightweight ETW lane surfaced exact HiberFileSizePercent lines, but the current VMware runtime still did not produce an exact live read."
+      "evidence_class": "A",
+      "reason_code": "cross_layer_verified_runtime_triggered_lane",
+      "gating_reason": "This record is cross-layer verified. A rebooted stepwise Procmon boot trace now preserves an exact HiberFileSizePercent runtime read, and app actionability stays separate from evidence class."
     },
     {
       "record_id": "policy.system.enable-virtualization",

@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-02T11:02:27.148259Z",
+  "generated_utc": "2026-04-08T18:05:23.613377Z",
   "summary": {
-    "total_records": 310,
+    "total_records": 312,
     "class_counts": {
-      "A": 248,
-      "B": 8,
-      "C": 0,
+      "A": 249,
+      "B": 7,
+      "C": 2,
       "D": 0,
       "E": 54
     },
     "action_state_counts": {
       "actionable": 240,
       "archived": 54,
-      "research-gated": 16
+      "research-gated": 18
     }
   },
   "classes": {
@@ -6321,6 +6321,164 @@
       }
     },
     {
+      "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Runtime Layer Partial",
+      "class_description": "The key existence is solid and some values are known, but runtime convergence still needs a tighter trace, benchmark, or reboot story.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but runtime convergence is still incomplete. App mapping is tracked separately.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The repo power notes provide the exact candidate name, literal value, and intended symbol mapping, but they do not by themselves prove current-build runtime seeding semantics.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:96 shows `AllowAudioToEnableExecutionRequiredPowerRequests` = 1 and maps it to `PopPowerRequestActiveAudioEnablesExecutionRequired`."
+          },
+          {
+            "title": "Repo power notes for execution-required power-request controls",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain an exact entry for AllowAudioToEnableExecutionRequiredPowerRequests, led by Docs/power/power.md:96, and map it to PopPowerRequestActiveAudioEnablesExecu..."
+          },
+          {
+            "title": "Targeted current-build string batch for power-control candidates",
+            "url": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+            "kind": "repo-doc",
+            "summary": "The targeted current-build string batch found an exact Unicode ntoskrnl.exe hit for AllowAudioToEnableExecutionRequiredPowerRequests and did not require secondary binaries to ex..."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed the parent Control\\\\Power path exists while AllowAudioToEnableExecutionRequiredPowerRequests itself is absent on the clean baseline.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed the parent Control\\\\Power path exists while AllowAudioToEnableExecutionRequiredPowerRequests itself is absent on the clean baseline."
+          },
+          {
+            "title": "Shared mega-trigger runtime lane for execution-required power-request candidates",
+            "url": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-232214/results.json and evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-232214/state.json",
+            "kind": "procmon-trace",
+            "summary": "The shared mega-trigger runtime lane armed candidate value 1 for AllowAudioToEnableExecutionRequiredPowerRequests and ran the power-plan-and-requests trigger family, but the cap..."
+          },
+          {
+            "title": "KVM local-KD confirms the execution-required globals are live and set to 1",
+            "url": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd.log and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd.log and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
+            "kind": "vm-test",
+            "summary": "Retained local-KD live-state passes show `nt!PopPowerRequestConvertSystemToExecution = 1` and `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1` on the current build, a..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
+      "record_id": "power.control.allow-system-required-power-requests",
+      "tweak_id": "power.control.allow-system-required-power-requests",
+      "record_status": "draft",
+      "evidence_class": "C",
+      "class_label": "Class C",
+      "class_title": "Key Known, Runtime Layer Partial",
+      "class_description": "The key existence is solid and some values are known, but runtime convergence still needs a tighter trace, benchmark, or reboot story.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key is understood, but runtime convergence is still incomplete. App mapping is tracked separately.",
+      "confidence": "medium",
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The repo power notes provide the exact candidate name, literal value, and intended symbol mapping, but they do not by themselves prove current-build runtime seeding semantics.",
+        "has_validation_proof": true,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:98 shows `AllowSystemRequiredPowerRequests` = 1 and maps it to `PopPowerRequestConvertSystemToExecution`."
+          },
+          {
+            "title": "Repo power notes for execution-required power-request controls",
+            "url": "Docs/power/power.md",
+            "kind": "repo-doc",
+            "summary": "Repo power notes contain an exact entry for AllowSystemRequiredPowerRequests, led by Docs/power/power.md:98, and map it to PopPowerRequestConvertSystemToExecution with literal v..."
+          },
+          {
+            "title": "Targeted current-build string batch for power-control candidates",
+            "url": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+            "kind": "repo-doc",
+            "summary": "The targeted current-build string batch found an exact Unicode ntoskrnl.exe hit for AllowSystemRequiredPowerRequests and did not require secondary binaries to explain the name."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "The 96-key existence batch confirmed the parent Control\\\\Power path exists while AllowSystemRequiredPowerRequests itself is absent on the clean baseline.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "kind": "registry-observation",
+            "summary": "The 96-key existence batch confirmed the parent Control\\\\Power path exists while AllowSystemRequiredPowerRequests itself is absent on the clean baseline."
+          },
+          {
+            "title": "Shared mega-trigger runtime lane for execution-required power-request candidates",
+            "url": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-232214/results.json and evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-232214/state.json",
+            "kind": "procmon-trace",
+            "summary": "The shared mega-trigger runtime lane armed candidate value 1 for AllowSystemRequiredPowerRequests and ran the power-plan-and-requests trigger family, but the capture recovered i..."
+          },
+          {
+            "title": "KVM local-KD confirms the execution-required globals are live and set to 1",
+            "url": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd.log and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd.log and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
+            "kind": "vm-test",
+            "summary": "Retained local-KD live-state passes show `nt!PopPowerRequestConvertSystemToExecution = 1` and `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1` on the current build, a..."
+          }
+        ]
+      },
+      "upstream_lineage": {
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
+      }
+    },
+    {
       "record_id": "power.control.class1-initial-unpark-count",
       "tweak_id": "power.control.class1-initial-unpark-count",
       "record_status": "draft",
@@ -6403,16 +6561,16 @@
       "record_id": "power.control.hiber-file-size-percent",
       "tweak_id": "power.control.hiber-file-size-percent",
       "record_status": "draft",
-      "evidence_class": "B",
-      "class_label": "Class B",
-      "class_title": "Strong but Decision-Gated",
-      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "Docs/static evidence is strong and the lightweight ETW lane surfaced exact HiberFileSizePercent lines, but the current VMware runtime still did not produce an exact live read.",
-      "confidence": "medium",
+      "gating_reason": "This record is cross-layer verified. A rebooted stepwise Procmon boot trace now preserves an exact HiberFileSizePercent runtime read, and app actionability stays separate from evidence class.",
+      "confidence": "high",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "tested_build": "26100",
@@ -6456,6 +6614,12 @@
             "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
             "kind": "registry-observation",
             "summary": "The 96-key existence batch confirmed HiberFileSizePercent exists on the clean baseline with observed value 0."
+          },
+          {
+            "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for HiberFileSizePercent",
+            "url": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv and registry-research-framework/audit/hiber-file-size-percent-stepwise-runtime-audit-20260408.json and research/notes/power-control-hiber-file-size-percent-stepwise-follow-up-20260408.md",
+            "kind": "procmon-trace",
+            "summary": "The guest-processed stepwise Procmon boot log completed shell-safe on RegProbe-Baseline-Clean-20260329, soft-rebooted the VM, and captured an exact `RegQueryValue SUCCESS` for H..."
           }
         ]
       },
