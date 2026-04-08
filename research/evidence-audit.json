@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T00:21:10.664706Z",
+  "generated_utc": "2026-04-08T00:38:10.272628Z",
   "summary": {
     "total_active_records": 261,
     "class_counts": {
@@ -9,10 +9,10 @@
       "D": 6
     },
     "lane_counts": {
-      "official-policy": 236,
+      "official-policy": 237,
       "runtime": 5,
       "system": 6,
-      "early-boot": 14
+      "early-boot": 13
     },
     "next_missing_layer_counts": {
       "none": 248,
@@ -24,7 +24,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T00:21:10.001227Z",
+      "generated_utc": "2026-04-08T00:38:09.652556Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -10118,10 +10118,10 @@
       "record_id": "system.kernel-dpc-watchdog-control-cluster",
       "tweak_id": "system.kernel-dpc-watchdog-control-cluster",
       "evidence_class": "D",
-      "lane": "early-boot",
+      "lane": "official-policy",
       "class_ready_basis": "pending",
-      "official": false,
-      "official_doc_exists": false,
+      "official": true,
+      "official_doc_exists": true,
       "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
@@ -10130,11 +10130,13 @@
       "reboot_tested": false,
       "incident_seen": false,
       "next_missing_layer": "validation-proof",
-      "cross_layer_satisfied": false,
+      "cross_layer_satisfied": true,
       "layers_used": [
-        "static_ghidra"
+        "static_ghidra",
+        "official_doc"
       ],
       "tools_used": [
+        "official-doc",
         "ghidra"
       ],
       "boot_phase_relevant": true,
@@ -10148,7 +10150,7 @@
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.2",

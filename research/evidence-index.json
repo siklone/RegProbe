@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T00:21:10.264724Z",
+  "generated_utc": "2026-04-08T00:38:09.895978Z",
   "summary": {
     "total_records": 316,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T00:21:10.001227Z",
+      "generated_utc": "2026-04-08T00:38:09.652556Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -13937,7 +13937,7 @@
       "category": "System",
       "area": "Kernel / DPC Watchdog",
       "scope": "device",
-      "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM current-build evidence tightened the picture sharply: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input, a class-focused live KD pass now ties that writer to an admin-gated `NtSetSystemInformation` arm inferred as numeric `0xE4`, a later query-side KD pass confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, and a later Ghidra init-semantics pass shows that zero-valued watchdog globals can survive current-build initialization. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.",
+      "summary": "Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\DpcWatchdogPeriod = 120000, but later KVM current-build evidence tightened the picture sharply: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input, a class-focused live KD pass now ties that writer to an admin-gated `NtSetSystemInformation` arm inferred as numeric `0xE4`, a later query-side KD pass confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, Microsoft still documents `KeQueryDpcWatchdogInformation` plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a later Ghidra init-semantics pass shows that zero-valued watchdog globals can survive current-build initialization. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.",
       "evidence_class": {
         "record_id": "system.kernel-dpc-watchdog-period",
         "tweak_id": "system.kernel-dpc-watchdog-period",
@@ -14223,6 +14223,20 @@
             "behavior",
             "side-effects",
             "risk"
+          ],
+          "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "ms-kdpc-watchdog-information-struct",
+          "kind": "official-doc",
+          "title": "Microsoft Learn: KDPC_WATCHDOG_INFORMATION structure",
+          "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_kdpc_watchdog_information",
+          "summary": "Microsoft documents the public DPC watchdog result structure and explicitly states that `DpcTimeLimit` is `0` when DPC time-out has been disabled and `DpcWatchdogLimit` is `0` when the DPC watchdog has been disabled.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "default",
+            "version-scope"
           ],
           "origin": "Microsoft official doc"
         },
@@ -18668,7 +18682,7 @@
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Control Timeouts",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM evidence now proves the full structural lane plus live values: `KeQueryDpcWatchdogConfiguration` reads the corresponding globals, `KiValidateDpcWatchdogConfiguration` backfills and validates them, `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input, a PDB-backed Ghidra pass ties the writer to `NtSetSystemInformation`, a later class-focused live KD pass confirms the exact syscall call site plus admin-group gate and implies numeric arm `0xE4` from the dispatch chain, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, a dedicated live value pass reads all three globals as `0` on the running build, and a canonical boot/init Ghidra follow-up shows that `KiInitDpcThresholds` preserves zero-valued control globals rather than forcing non-zero defaults. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
+      "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM evidence now proves the full structural lane plus live values: `KeQueryDpcWatchdogConfiguration` reads the corresponding globals, `KiValidateDpcWatchdogConfiguration` backfills and validates them, `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input, a PDB-backed Ghidra pass ties the writer to `NtSetSystemInformation`, a later class-focused live KD pass confirms the exact syscall call site plus admin-group gate and implies numeric arm `0xE4` from the dispatch chain, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, a dedicated live value pass reads all three globals as `0` on the running build, Microsoft still documents the public `KeQueryDpcWatchdogInformation` API plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a canonical boot/init Ghidra follow-up shows that `KiInitDpcThresholds` preserves zero-valued control globals rather than forcing non-zero defaults. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
       "evidence_class": {
         "record_id": "system.kernel-dpc-watchdog-control-cluster",
         "tweak_id": "system.kernel-dpc-watchdog-control-cluster",
@@ -18749,7 +18763,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, concrete current-build reader/writer proof, direct live value reads that show the sampled control globals are zero on the running build, a live-KD confirmed privileged `NtSetSystemInformation` writer callsite, and a live-KD confirmed outer query wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`. It is not ready for validation because no current-build persisted registry caller has been shown to feed values into the writer path, the exact inner query arm still has not been isolated, and the live state conflicts with the repo-doc defaults.",
+        "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, concrete current-build reader/writer proof, direct live value reads that show the sampled control globals are zero on the running build, a live-KD confirmed privileged `NtSetSystemInformation` writer callsite, a live-KD confirmed outer query wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`, and Microsoft-documented public zero-as-disabled watchdog semantics. It is not ready for validation because no current-build persisted registry caller has been shown to feed values into the writer path, the exact inner query arm still has not been isolated, and the live state still conflicts with the repo-doc defaults.",
         "blocking_issues": [
           "live-defaults-conflict-docs",
           "no-current-build-registry-seeding-path",
@@ -19004,6 +19018,20 @@
             "version-scope"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "ms-kdpc-watchdog-information-struct",
+          "kind": "official-doc",
+          "title": "Microsoft Learn: KDPC_WATCHDOG_INFORMATION structure",
+          "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_kdpc_watchdog_information",
+          "summary": "Microsoft documents the public DPC watchdog output structure and explicitly states that `DpcTimeLimit` is `0` when DPC time-out has been disabled and `DpcWatchdogLimit` is `0` when the DPC watchdog has been disabled. This does not prove the registry path, but it gives the live zero-valued control cluster a documented disabled-state-compatible interpretation.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "default",
+            "version-scope"
+          ],
+          "origin": "Microsoft official doc"
         },
         {
           "evidence_id": "vm-session-manager-kernel-dpc-watchdog-ntsetsysinfo-kd-20260408",
