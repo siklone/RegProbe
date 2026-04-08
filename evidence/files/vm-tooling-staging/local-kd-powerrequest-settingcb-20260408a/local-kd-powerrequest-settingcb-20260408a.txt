@@ -1,0 +1,9 @@
+.sympath C:\Tools\Symbols\local-kd-powerrequest-settingcb-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopPowerRequestExecutionRequiredSettingCallback
+uf nt!PopPowerRequestExecutionRequiredSettingCallback
+x nt!*PowerRequest*Register*
+x nt!*ExecutionRequired*Timeout*
+.echo REGPROBE_LOCALKD_END
+q
