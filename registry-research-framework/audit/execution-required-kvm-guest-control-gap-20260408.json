@@ -1,0 +1,69 @@
+{
+  "title": "Execution-required KVM guest-control gap audit",
+  "generated_utc": "2026-04-08T19:59:29.860399Z",
+  "domain_name": "regprobe-win11-25h2-session",
+  "target_tweak_ids": [
+    "power.control.allow-system-required-power-requests",
+    "power.control.allow-audio-to-enable-execution-required-power-requests"
+  ],
+  "runtime_runner_records": [
+    {
+      "tweak_id": "power.control.allow-system-required-power-requests",
+      "runner_script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "runner_args": [
+        "-CandidateIds",
+        "power.control.allow-system-required-power-requests"
+      ],
+      "runner_is_vmrun_backed": true
+    },
+    {
+      "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "runner_script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "runner_args": [
+        "-CandidateIds",
+        "power.control.allow-audio-to-enable-execution-required-power-requests"
+      ],
+      "runner_is_vmrun_backed": true
+    }
+  ],
+  "runner_config_source": "registry-research-framework/config/tweak-vm-runners.json",
+  "runtime_probe_source": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+  "controller_doc_source": "Docs/VM_VALIDATION_CONTROLLER.md",
+  "controller_script_source": "scripts/vm/host-validation-controller.ps1",
+  "runtime_probe_is_vmrun_backed": true,
+  "controller_doc_uses_shared_folder_model": true,
+  "controller_script_uses_vmrun": true,
+  "virsh_available": true,
+  "dominfo": {
+    "argv": [
+      "/usr/bin/virsh",
+      "dominfo",
+      "regprobe-win11-25h2-session"
+    ],
+    "returncode": 0,
+    "stdout": "Id:             1\nName:           regprobe-win11-25h2-session\nUUID:           7e6673dc-8181-4136-bf27-fa4c1d306212\nOS Type:        hvm\nState:          running\nCPU(s):         4\nCPU time:       43762.6s\nMax memory:     8388608 KiB\nUsed memory:    8388608 KiB\nPersistent:     yes\nAutostart:      disable\nAutostart Once: disable\nManaged save:   no\nSecurity model: none\nSecurity DOI:   0",
+    "stderr": "",
+    "ok": true
+  },
+  "dumpxml_ok": true,
+  "domain_running": true,
+  "has_qemu_agent_channel": false,
+  "guest_ping": {
+    "argv": [
+      "/usr/bin/virsh",
+      "qemu-agent-command",
+      "regprobe-win11-25h2-session",
+      "{\"execute\":\"guest-ping\"}"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "error: argument unsupported: QEMU guest agent is not configured",
+    "ok": false
+  },
+  "qemu_guest_agent_configured": false,
+  "spice_channel_name": "com.redhat.spice.0",
+  "serial_console_path": "/dev/pts/4",
+  "bootstrap_iso_path": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/dist/regprobe-kvm-bootstrap.iso",
+  "bootstrap_iso_exists_on_host": false,
+  "conclusion": "The execution-required runtime lane is repo-native and ready, but the active KVM guest-control surface is not. The runner and controller tooling remain VMware/vmrun-oriented, the live libvirt domain exposes no qemu guest agent channel, guest-ping fails with 'QEMU guest agent is not configured', and the attached bootstrap ISO path is missing on the current host checkout."
+}
