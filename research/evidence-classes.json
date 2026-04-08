@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T18:48:26.193015Z",
+  "generated_utc": "2026-04-08T18:53:18.105557Z",
   "summary": {
     "total_records": 313,
     "class_counts": {
@@ -7025,7 +7025,7 @@
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "The key is understood, but runtime convergence is still incomplete. App mapping is tracked separately.",
+      "gating_reason": "The subtree now has retained runtime access, override-family lineage, and bounded adjacent static context, but exact Driver/Process/Service leaf semantics and a safe restore story are still unresolved.",
       "confidence": "medium",
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
@@ -7038,13 +7038,19 @@
       "validated_semantics": {
         "summary": "This proof establishes subtree existence plus live current-build access, but it does not yet resolve exact leaf-value semantics.",
         "has_validation_proof": true,
-        "has_semantics_evidence": false,
+        "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
             "url": "research/notes/power-control-power-request-override-subtree-triage-20260408.md",
             "kind": "validation-proof",
             "summary": "The retained root dump contains `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride`, the retained current-build path trace shows 15 subtree hits from `svchost.exe..."
+          },
+          {
+            "title": "Retained adjacent static context for the power-request override family",
+            "url": "evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/evidence.json and evidence/files/ghidra/powerrequest-executionrequired-binding-ghidra-20260408a/ghidra-matches.md and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and research/notes/power-control-power-request-override-subtree-static-context-follow-up-20260408.md",
+            "kind": "decompilation",
+            "summary": "Retained Ghidra and local-KD query/store analysis now provide bounded current-build static context around the same power-request family: the only naturally resolved setting call..."
           }
         ]
       },

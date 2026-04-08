@@ -61,6 +61,13 @@
       "evidence_class": "B",
       "reason_code": "runtime_no_read_trigger_context_unclear",
       "gating_reason": "Baseline existence, exact ntoskrnl string evidence, and adjacent early-boot ETL activity exist, but the dedicated runtime lane still stayed no-hit and the exact trigger context remains unclear."
+    },
+    {
+      "record_id": "power.control.power-request-override-subtree",
+      "evidence_class": "C",
+      "reason_code": "leaf_semantics_unresolved_after_static_context",
+      "gating_reason": "The subtree now has retained runtime access, override-family lineage, and bounded adjacent static context, but exact Driver/Process/Service leaf semantics and a safe restore story are still unresolved.",
+      "next_missing_layer_override": "decision-gate"
     }
   ]
 }
