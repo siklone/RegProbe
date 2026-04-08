@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T01:54:11.263198Z",
+  "generated_utc": "2026-04-08T01:56:53.395629Z",
   "summary": {
     "total_records": 317,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T01:54:11.036996Z",
+      "generated_utc": "2026-04-08T01:56:53.160673Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -19590,9 +19590,9 @@
             },
             {
               "title": "Repo guest tooling now exposes a dedicated timer-dpc-stress harness",
-              "url": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1 and scripts/source_enrichment_scan.py",
+              "url": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1, scripts/vm/guest-tools/run-registry-policy-probe.ps1, and scripts/source_enrichment_scan.py",
               "kind": "repo-code",
-              "summary": "The guest mega-trigger runtime script now exposes `timer_dpc_stress`, which layers `NtSetTimerResolution`, `timeBeginPeriod`, concurrent short-period timers, and bounded CPU bur..."
+              "summary": "The guest mega-trigger runtime script now exposes `timer_dpc_stress`, and the generic Procmon guest tool now exposes `TriggerProfile = timer-dpc-stress`; both align directly wit..."
             }
           ]
         },
@@ -19836,8 +19836,8 @@
           "evidence_id": "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408",
           "kind": "repo-code",
           "title": "Repo guest tooling now exposes a dedicated timer-dpc-stress harness",
-          "location": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1 and scripts/source_enrichment_scan.py",
-          "summary": "The guest mega-trigger runtime script now exposes `timer_dpc_stress`, which layers `NtSetTimerResolution`, `timeBeginPeriod`, concurrent short-period timers, and bounded CPU burst jobs, aligning directly with the enrichment recommendation for `timer-dpc-stress` triggers.",
+          "location": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1, scripts/vm/guest-tools/run-registry-policy-probe.ps1, and scripts/source_enrichment_scan.py",
+          "summary": "The guest mega-trigger runtime script now exposes `timer_dpc_stress`, and the generic Procmon guest tool now exposes `TriggerProfile = timer-dpc-stress`; both align directly with the enrichment recommendation for `timer-dpc-stress` triggers by combining timer-resolution changes, concurrent timers, and DPC-heavy workload.",
           "strength": "medium",
           "supports": [
             "behavior",
