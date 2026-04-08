@@ -1,0 +1,260 @@
+{
+  "title": "Execution-required mega-trigger runtime retry audit",
+  "generated_utc": "2026-04-08T16:20:00Z",
+  "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "target_candidates": [
+    "power.control.allow-audio-to-enable-execution-required-power-requests",
+    "power.control.allow-system-required-power-requests"
+  ],
+  "summary_glob": "power-control-batch-mega-trigger-runtime-primary-*/summary.json",
+  "run_count": 10,
+  "armed_pair_run_count": 10,
+  "summary_status_counts": {
+    "aborted-recovered": 10
+  },
+  "candidate_status_counts": {
+    "aborted-recovered": 20
+  },
+  "runs": [
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260401-225635",
+      "generated_utc": "2026-04-01T20:21:23.6117819Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-225635/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-225635/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-225635/state.json"
+    },
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260401-232214",
+      "generated_utc": "2026-04-01T20:47:57.3265939Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-232214/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-232214/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-232214/state.json"
+    },
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260401-234542",
+      "generated_utc": "2026-04-01T23:39:55.6210866Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-234542/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-234542/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-234542/state.json"
+    },
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260402-024017",
+      "generated_utc": "2026-04-02T00:49:19.3150719Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-024017/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-024017/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-024017/state.json"
+    },
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260402-034940",
+      "generated_utc": "2026-04-02T01:30:38.2865569Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-034940/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-034940/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-034940/state.json"
+    },
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260402-043108",
+      "generated_utc": "2026-04-02T02:19:08.2322997Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-043108/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-043108/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-043108/state.json"
+    },
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260402-051919",
+      "generated_utc": "2026-04-02T02:59:52.0770120Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-051919/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-051919/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-051919/state.json"
+    },
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260402-060001",
+      "generated_utc": "2026-04-02T03:43:10.9485760Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-060001/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-060001/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-060001/state.json"
+    },
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260402-064318",
+      "generated_utc": "2026-04-02T11:53:52.8463434Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-064318/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-064318/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-064318/state.json"
+    },
+    {
+      "probe_name": "power-control-batch-mega-trigger-runtime-primary-20260402-144724",
+      "generated_utc": "2026-04-02T12:33:29.3716839Z",
+      "summary_status": "aborted-recovered",
+      "pair_statuses": {
+        "power.control.allow-audio-to-enable-execution-required-power-requests": "aborted-recovered",
+        "power.control.allow-system-required-power-requests": "aborted-recovered"
+      },
+      "exact_query_hits": 0,
+      "exact_line_count": 0,
+      "value_transitions": {
+        "AllowAudioToEnableExecutionRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        },
+        "AllowSystemRequiredPowerRequests": {
+          "before": null,
+          "after": 1
+        }
+      },
+      "summary_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-144724/summary.json",
+      "results_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-144724/results.json",
+      "state_file": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-144724/state.json"
+    }
+  ]
+}
