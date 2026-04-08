@@ -1,0 +1,39 @@
+{
+  "artifact_id": "kvm-qga-runtime-handshake-diagnose-20260409a",
+  "captured_on": "2026-04-09",
+  "domain": "regprobe-win11-25h2-session",
+  "scope": "execution-required KVM guest-control qga runtime-handshake diagnosis",
+  "findings": [
+    {
+      "step": "guest_runtime_probe",
+      "command": "powershell -ExecutionPolicy Bypass -File C:\\RegProbe-Diag\\bootstrap\\diagnose-qga-runtime-handshake.ps1",
+      "guest_result": "The new guest-side runtime diagnoser stopped existing qga processes, relaunched qga on the exact openable `...&02...` path with `-v -l`, and confirmed the selected path plus a live process."
+    },
+    {
+      "step": "guest_log_signal",
+      "command": "qga runtime logfile tail",
+      "guest_result": "The retained console capture shows the qga logfile tail collapsing to repeated `debug: dispatch` entries rather than an explicit open-path or startup error."
+    },
+    {
+      "step": "windows_event_signal",
+      "command": "Get-WinEvent application scan inside diagnose-qga-runtime-handshake.ps1",
+      "guest_result": "The same retained console capture ends with `=== APPLICATION EVENTS ===` followed by `NO_RECENT_MATCHING_EVENTS`."
+    },
+    {
+      "step": "host_post_probe_state",
+      "command": "virsh qemu-agent-command ... guest-ping ; virsh qemu-monitor-command ... --hmp 'info chardev'",
+      "host_result": "After the runtime-handshake probe, host-side `guest-ping` still returned `Guest agent is not responding: QEMU guest agent is not connected` and HMP still reported the qga chardev as `disconnected`."
+    }
+  ],
+  "screenshots": [
+    "regprobe-qga-runtime-handshake-results.png"
+  ],
+  "host_artifacts": [
+    "guest-ping-after-runtime-handshake.txt",
+    "info-chardev-after-runtime-handshake.txt"
+  ],
+  "scripts": [
+    "scripts/vm/diagnose-qga-runtime-handshake.ps1"
+  ],
+  "conclusion": "The remaining KVM guest-control blocker now looks like a silent post-launch qga stall rather than path discovery. On the guest, the exact-path runtime probe only surfaces repeated `debug: dispatch` log lines and no recent matching Windows Application events, while the host still sees the qga channel as disconnected."
+}
