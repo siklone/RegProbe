@@ -4,7 +4,7 @@
   "record_id": "system.kernel-long-dpc-threshold-cluster",
   "tweak_id": "system.kernel-long-dpc-threshold-cluster",
   "record_status": "draft",
-  "summary": "Draft docs-first Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and both stayed `no-hit` in the broad lightweight runtime replay. This keeps the family real and current-build-relevant, but still below the line for aggressive RE until a stronger caller, symbol, or live state clue appears.",
+  "summary": "Draft docs-first Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and both survived a broad lightweight runtime replay that explicitly armed them from missing to `1` for one reboot while still returning `no-hit`. This keeps the family real and current-build-relevant, but still below the line for aggressive RE until a stronger caller, symbol, or live state clue appears.",
   "setting": {
     "name": "Kernel Long DPC Threshold Cluster",
     "category": "System",
@@ -13,7 +13,7 @@
     "casual_explanation": "This cluster appears to expose low-level thresholds for what the kernel considers a long DPC queue condition and a long DPC runtime condition. It is kernel-adjacent and not a normal user setting.",
     "why_people_change_it": "Kernel researchers may inspect these values when investigating DPC latency behavior, watchdog escalation, or undocumented scheduler-tuning guides.",
     "tradeoffs_overview": "The cluster has explicit repo-doc defaults, clean baseline state, exact current-build string hits, and a broad runtime no-hit lane. It is strong enough for a schema-backed draft, but still too weak for a published tweak or a recommended non-default configuration.",
-    "professional_notes": "Repo docs list `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` under `Session Manager\\\\Kernel`, mapped to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`. The kernel-power routing pass already grouped both values inside the `Session Manager\\\\Kernel` docs cluster. The observed clean baseline later confirmed that the parent key exists while both values are absent. The targeted current-build string batch then found exact Unicode hits for both values in `ntoskrnl.exe`, which is stronger than a pure docs-only lead and enough to keep the family out of raw backlog. The later lightweight runtime replay wrote the broader `Session Manager\\\\Kernel` family, rebooted once, and still left both values in the residual `no-hit` hold. Existing source-enrichment outputs converge on the same low-priority next lane for both values: `timer-dpc-stress`, `windbg` queue, with no stronger source-code or header corroboration. This cluster therefore belongs in the canonical research set, but as a docs-first DPC sibling family rather than an actively promoted tweak lane.",
+    "professional_notes": "Repo docs list `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` under `Session Manager\\\\Kernel`, mapped to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`. The kernel-power routing pass already grouped both values inside the `Session Manager\\\\Kernel` docs cluster. The observed clean baseline later confirmed that the parent key exists while both values are absent. The targeted current-build string batch then found exact Unicode hits for both values in `ntoskrnl.exe`, which is stronger than a pure docs-only lead and enough to keep the family out of raw backlog. The later lightweight runtime replay explicitly armed both values from `null` to `1`, rebooted once, and still left both values in the residual `no-hit` hold, which is more informative than a generic no-hit because it demonstrates that a simple present-and-nonzero mutation did not surface a trace hit in that broad lane. Existing source-enrichment outputs converge on the same low-priority next lane for both values: `timer-dpc-stress`, `windbg` queue, with no stronger source-code or header corroboration. This cluster therefore belongs in the canonical research set, but as a docs-first DPC sibling family rather than an actively promoted tweak lane.",
     "targets": [
       {
         "target_id": "long-dpc-queue-threshold",
@@ -186,7 +186,7 @@
       "kind": "vm-test",
       "title": "Lightweight runtime batch kept both LongDpc thresholds in residual no-hit hold",
       "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
-      "summary": "The tools-hardened lightweight runtime lane wrote the broader `Session Manager\\\\Kernel` family, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `system.kernel.long-dpc-runtime-threshold` in the residual `no-hit` hold.",
+      "summary": "The tools-hardened lightweight runtime lane explicitly armed both values from missing to `1`, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `system.kernel.long-dpc-runtime-threshold` in the residual `no-hit` hold.",
       "supports": [
         "behavior",
         "version-scope",
@@ -214,7 +214,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, and a real runtime replay that still left both values in no-hit hold. It is not ready for validation because there is still no current-build caller, live value state, or primary Microsoft source for either value.",
+      "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, and a real runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold. It is not ready for validation because there is still no current-build caller, live value state, or primary Microsoft source for either value.",
     "manual_review_required": true,
     "blocking_issues": [
       "no-current-build-caller-path",
@@ -233,7 +233,7 @@
       "environment": "Win25H2Clean observed baseline and VMware lightweight runtime batch",
       "os": "Windows 11 25H2",
       "build": "26200",
-      "notes": "The lane currently combines baseline existence, exact current-build string hits, and a broad write-and-reboot runtime pass that still left both values in the residual no-hit hold."
+      "notes": "The lane currently combines baseline existence, exact current-build string hits, and a broad write-and-reboot runtime pass that explicitly armed both values from missing to `1` while still leaving them in the residual no-hit hold."
     }
   ],
   "last_reviewed_utc": "2026-04-08T00:45:52Z"
