@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -140,6 +141,7 @@ class RegistrySideeffectDiffTests(unittest.TestCase):
             before_path = temp_path / "before.reg"
             after_path = temp_path / "after.reg"
             output_path = temp_path / "nested" / "diff.txt"
+            output_json_path = temp_path / "nested" / "diff.json"
 
             write_reg(
                 before_path,
@@ -157,15 +159,66 @@ class RegistrySideeffectDiffTests(unittest.TestCase):
             )
 
             exit_code = registry_sideeffect_diff.main(
-                ["--before", str(before_path), "--after", str(after_path), "--output", str(output_path)]
+                [
+                    "--before",
+                    str(before_path),
+                    "--after",
+                    str(after_path),
+                    "--output",
+                    str(output_path),
+                    "--output-json",
+                    str(output_json_path),
+                ]
             )
 
             self.assertEqual(exit_code, 0)
             self.assertTrue(output_path.exists())
+            self.assertTrue(output_json_path.exists())
             self.assertIn(
                 '- [HKEY_LOCAL_MACHINE\\Software\\Example] Enabled | dword:00000000 -> dword:00000001',
                 output_path.read_text(encoding="utf-8"),
             )
+            payload = json.loads(output_json_path.read_text(encoding="utf-8"))
+            self.assertEqual(payload["detected_format"], "semantic-registry")
+            self.assertEqual(payload["summary_counts"]["modified_values"], 1)
+            self.assertEqual(payload["summary_counts"]["added_values"], 0)
+
+    def test_build_diff_payload_returns_machine_readable_counts(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            temp_path = Path(temp_root)
+            before_path = temp_path / "before.txt"
+            after_path = temp_path / "after.txt"
+
+            before_path.write_text(
+                "\n".join(
+                    [
+                        "HKEY_LOCAL_MACHINE\\Software\\Example",
+                        "    Enabled    REG_DWORD    0x1",
+                        "    Name    REG_SZ    Example",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            after_path.write_text(
+                "\n".join(
+                    [
+                        "HKEY_LOCAL_MACHINE\\Software\\Example",
+                        "    Enabled    REG_DWORD    0x1",
+                        "    Name    REG_SZ    Example updated",
+                        "    Path    REG_EXPAND_SZ    @%SystemRoot%",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            payload = registry_sideeffect_diff.build_diff_payload(before_path, after_path)
+
+            self.assertEqual(payload["detected_format"], "semantic-registry")
+            self.assertEqual(payload["summary_counts"]["added_values"], 1)
+            self.assertEqual(payload["summary_counts"]["modified_values"], 1)
+            self.assertEqual(payload["summary_counts"]["removed_values"], 0)
 
     def test_registry_dump_text_compares_semantically(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:

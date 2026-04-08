@@ -1,0 +1,69 @@
+{
+  "title": "Semantic sideeffect regression audit",
+  "generated_at_utc": "2026-04-08T16:55:49Z",
+  "pairs": [
+    {
+      "id": "session-manager-power-baseline-cross-format",
+      "label": "Session Manager Power baseline (.reg vs .txt)",
+      "before": "evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg",
+      "after": "evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt",
+      "naive_line_counts": {
+        "before_lines": 49,
+        "after_lines": 15,
+        "ignored_before_noise_lines": 3,
+        "ignored_after_noise_lines": 3,
+        "added_lines": 15,
+        "removed_lines": 49
+      },
+      "semantic_diff": {
+        "detected_format": "semantic-registry",
+        "before_format": "registry-export",
+        "after_format": "registry-dump-text",
+        "summary_counts": {
+          "before_keys": 1,
+          "after_keys": 1,
+          "added_keys": 0,
+          "removed_keys": 0,
+          "before_values": 14,
+          "after_values": 14,
+          "added_values": 0,
+          "removed_values": 0,
+          "modified_values": 0,
+          "unchanged_values": 14
+        }
+      }
+    },
+    {
+      "id": "power-control-root-cross-format",
+      "label": "Power Control root dump (.reg vs .txt)",
+      "before": "evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.reg",
+      "after": "evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.txt",
+      "naive_line_counts": {
+        "before_lines": 9988,
+        "after_lines": 4287,
+        "ignored_before_noise_lines": 1270,
+        "ignored_after_noise_lines": 1271,
+        "added_lines": 4287,
+        "removed_lines": 9988
+      },
+      "semantic_diff": {
+        "detected_format": "semantic-registry",
+        "before_format": "registry-export",
+        "after_format": "registry-dump-text",
+        "summary_counts": {
+          "before_keys": 1268,
+          "after_keys": 1268,
+          "added_keys": 0,
+          "removed_keys": 0,
+          "before_values": 3019,
+          "after_values": 3019,
+          "added_values": 0,
+          "removed_values": 0,
+          "modified_values": 0,
+          "unchanged_values": 3019
+        }
+      }
+    }
+  ],
+  "conclusion": "Cross-format registry exports and dump text can produce large naive line churn while representing the same registry state. Semantic diff collapses those pairs back to zero modified values."
+}

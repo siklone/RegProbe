@@ -135,6 +135,10 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
 - `registry-research-framework/tools/pdb-download.ps1`
 - `registry-research-framework/tools/registry-sideeffect-diff.ps1`
   compact semantic key/value diff for `.reg` exports and registry-dump text, with a bounded summary fallback for generic text inputs
+- `registry-research-framework/tools/registry_sideeffect_diff.py`
+  host-verifiable semantic diff twin with optional machine-readable JSON output
+- `scripts/audit_registry_sideeffect_regressions.py`
+  generates repo-native regression audits that compare naive line churn against semantic registry diff counts on known artifact pairs
 - `registry-research-framework/tools/_resolve-tweak-runner.ps1`
   generic building blocks used by multiple lanes
 

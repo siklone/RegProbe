@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import codecs
+import json
 import re
 import sys
 from collections import Counter
@@ -291,7 +292,7 @@ def format_modified_value_entry(entry: dict[str, str]) -> str:
     )
 
 
-def build_diff_report(before_path: Path, after_path: Path, max_entries_per_section: int = 200) -> str:
+def build_diff_payload(before_path: Path, after_path: Path) -> dict[str, object]:
     before_text = read_registry_text(before_path)
     after_text = read_registry_text(after_path)
 
@@ -301,13 +302,6 @@ def build_diff_report(before_path: Path, after_path: Path, max_entries_per_secti
     after_is_dump = test_is_registry_dump_text(after_text)
     before_is_semantic = before_is_export or before_is_dump
     after_is_semantic = after_is_export or after_is_dump
-
-    lines = [
-        "Registry sideeffect diff",
-        f"Before: {before_path}",
-        f"After:  {after_path}",
-        f"Max entries per section: {max_entries_per_section}",
-    ]
 
     if before_is_semantic and after_is_semantic:
         before_format = "registry-export" if before_is_export else "registry-dump-text"
@@ -361,91 +355,162 @@ def build_diff_report(before_path: Path, after_path: Path, max_entries_per_secti
 
         unchanged_values = len(all_value_ids) - len(added_values) - len(removed_values) - len(modified_values)
 
+        return {
+            "title": "Registry sideeffect diff",
+            "before_path": str(before_path),
+            "after_path": str(after_path),
+            "detected_format": "semantic-registry",
+            "before_format": before_format,
+            "after_format": after_format,
+            "summary_counts": {
+                "before_keys": len(before["Keys"]),
+                "after_keys": len(after["Keys"]),
+                "added_keys": len(added_keys),
+                "removed_keys": len(removed_keys),
+                "before_values": len(before["Values"]),
+                "after_values": len(after["Values"]),
+                "added_values": len(added_values),
+                "removed_values": len(removed_values),
+                "modified_values": len(modified_values),
+                "unchanged_values": unchanged_values,
+            },
+            "sections": {
+                "added_keys": sorted(added_keys, key=lambda item: item["KeyPath"]),
+                "removed_keys": sorted(removed_keys, key=lambda item: item["KeyPath"]),
+                "added_values": sorted(added_values, key=lambda item: (item["KeyPath"], item["ValueName"])),
+                "removed_values": sorted(removed_values, key=lambda item: (item["KeyPath"], item["ValueName"])),
+                "modified_values": sorted(modified_values, key=lambda item: (item["KeyPath"], item["ValueName"])),
+            },
+        }
+
+    line_diff = get_line_summary_diff(before_text, after_text)
+    added_line_count = sum(int(item["Count"]) for item in line_diff["Added"])
+    removed_line_count = sum(int(item["Count"]) for item in line_diff["Removed"])
+
+    return {
+        "title": "Registry sideeffect diff",
+        "before_path": str(before_path),
+        "after_path": str(after_path),
+        "detected_format": "generic-text",
+        "before_format": "generic-text",
+        "after_format": "generic-text",
+        "summary_counts": {
+            "before_lines": line_diff["BeforeLineCount"],
+            "after_lines": line_diff["AfterLineCount"],
+            "ignored_before_noise_lines": line_diff["IgnoredBeforeNoise"],
+            "ignored_after_noise_lines": line_diff["IgnoredAfterNoise"],
+            "added_lines": added_line_count,
+            "removed_lines": removed_line_count,
+        },
+        "sections": {
+            "added_line_samples": sorted(line_diff["Added"], key=lambda item: (-int(item["Count"]), str(item["Line"]))),
+            "removed_line_samples": sorted(line_diff["Removed"], key=lambda item: (-int(item["Count"]), str(item["Line"]))),
+        },
+        "notes": [
+            "semantic registry diff was skipped because one or both inputs do not look like supported registry exports or registry dump text.",
+            "common registry noise lines are excluded from the generic text summary.",
+        ],
+    }
+
+
+def build_diff_report(before_path: Path, after_path: Path, max_entries_per_section: int = 200) -> str:
+    payload = build_diff_payload(before_path, after_path)
+
+    lines = [
+        str(payload["title"]),
+        f"Before: {before_path}",
+        f"After:  {after_path}",
+        f"Max entries per section: {max_entries_per_section}",
+    ]
+
+    detected_format = str(payload["detected_format"])
+    before_format = str(payload["before_format"])
+    after_format = str(payload["after_format"])
+    counts = dict(payload["summary_counts"])
+    sections = dict(payload["sections"])
+
+    if detected_format == "semantic-registry":
         lines.extend(
             [
                 f"Detected format: semantic-registry ({before_format} -> {after_format})",
                 "",
                 "Summary counts",
-                f"- before_keys: {len(before['Keys'])}",
-                f"- after_keys: {len(after['Keys'])}",
-                f"- added_keys: {len(added_keys)}",
-                f"- removed_keys: {len(removed_keys)}",
-                f"- before_values: {len(before['Values'])}",
-                f"- after_values: {len(after['Values'])}",
-                f"- added_values: {len(added_values)}",
-                f"- removed_values: {len(removed_values)}",
-                f"- modified_values: {len(modified_values)}",
-                f"- unchanged_values: {unchanged_values}",
+                f"- before_keys: {counts['before_keys']}",
+                f"- after_keys: {counts['after_keys']}",
+                f"- added_keys: {counts['added_keys']}",
+                f"- removed_keys: {counts['removed_keys']}",
+                f"- before_values: {counts['before_values']}",
+                f"- after_values: {counts['after_values']}",
+                f"- added_values: {counts['added_values']}",
+                f"- removed_values: {counts['removed_values']}",
+                f"- modified_values: {counts['modified_values']}",
+                f"- unchanged_values: {counts['unchanged_values']}",
             ]
         )
 
         add_section(
             lines,
             "Added keys",
-            sorted(added_keys, key=lambda item: item["KeyPath"]),
+            list(sections["added_keys"]),
             lambda item: f'- [{item["KeyPath"]}]',
             max_entries_per_section,
         )
         add_section(
             lines,
             "Removed keys",
-            sorted(removed_keys, key=lambda item: item["KeyPath"]),
+            list(sections["removed_keys"]),
             lambda item: f'- [{item["KeyPath"]}]',
             max_entries_per_section,
         )
         add_section(
             lines,
             "Added values",
-            sorted(added_values, key=lambda item: (item["KeyPath"], item["ValueName"])),
+            list(sections["added_values"]),
             format_value_entry,
             max_entries_per_section,
         )
         add_section(
             lines,
             "Removed values",
-            sorted(removed_values, key=lambda item: (item["KeyPath"], item["ValueName"])),
+            list(sections["removed_values"]),
             format_value_entry,
             max_entries_per_section,
         )
         add_section(
             lines,
             "Modified values",
-            sorted(modified_values, key=lambda item: (item["KeyPath"], item["ValueName"])),
+            list(sections["modified_values"]),
             format_modified_value_entry,
             max_entries_per_section,
         )
     else:
-        line_diff = get_line_summary_diff(before_text, after_text)
-        added_line_count = sum(int(item["Count"]) for item in line_diff["Added"])
-        removed_line_count = sum(int(item["Count"]) for item in line_diff["Removed"])
-
         lines.extend(
             [
                 "Detected format: generic-text",
                 "",
                 "Summary counts",
-                f"- before_lines: {line_diff['BeforeLineCount']}",
-                f"- after_lines: {line_diff['AfterLineCount']}",
-                f"- ignored_before_noise_lines: {line_diff['IgnoredBeforeNoise']}",
-                f"- ignored_after_noise_lines: {line_diff['IgnoredAfterNoise']}",
-                f"- added_lines: {added_line_count}",
-                f"- removed_lines: {removed_line_count}",
-                "- note: semantic registry diff was skipped because one or both inputs do not look like supported registry exports or registry dump text.",
-                "- note: common registry noise lines are excluded from the generic text summary.",
+                f"- before_lines: {counts['before_lines']}",
+                f"- after_lines: {counts['after_lines']}",
+                f"- ignored_before_noise_lines: {counts['ignored_before_noise_lines']}",
+                f"- ignored_after_noise_lines: {counts['ignored_after_noise_lines']}",
+                f"- added_lines: {counts['added_lines']}",
+                f"- removed_lines: {counts['removed_lines']}",
             ]
         )
+        for note in payload.get("notes", []):
+            lines.append(f"- note: {note}")
 
         add_section(
             lines,
             "Added line samples",
-            sorted(line_diff["Added"], key=lambda item: (-int(item["Count"]), str(item["Line"]))),
+            list(sections["added_line_samples"]),
             lambda item: f"- ({item['Count']}x) {shorten_text(str(item['Line']))}",
             max_entries_per_section,
         )
         add_section(
             lines,
             "Removed line samples",
-            sorted(line_diff["Removed"], key=lambda item: (-int(item["Count"]), str(item["Line"]))),
+            list(sections["removed_line_samples"]),
             lambda item: f"- ({item['Count']}x) {shorten_text(str(item['Line']))}",
             max_entries_per_section,
         )
@@ -458,6 +523,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--before", required=True, type=Path)
     parser.add_argument("--after", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--output-json", type=Path)
     parser.add_argument("--max-entries", type=int, default=200)
     return parser.parse_args(argv)
 
@@ -465,8 +531,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     report = build_diff_report(args.before, args.after, max_entries_per_section=args.max_entries)
+    payload = build_diff_payload(args.before, args.after)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(report, encoding="utf-8")
+    if args.output_json is not None:
+        args.output_json.parent.mkdir(parents=True, exist_ok=True)
+        args.output_json.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     return 0
 
 
