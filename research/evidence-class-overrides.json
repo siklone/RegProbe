@@ -52,7 +52,8 @@
       "record_id": "system.io-allow-remote-dasd",
       "evidence_class": "B",
       "reason_code": "runtime_no_read_path_context_unclear",
-      "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit."
+      "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit.",
+      "next_missing_layer_override": "decision-gate"
     },
     {
       "record_id": "system.executive-uuid-sequence-number",

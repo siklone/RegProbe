@@ -261,13 +261,16 @@ def main() -> int:
         record_id = str(record.get("record_id") or record.get("tweak_id") or "")
         incidents = incident_map.get(record_id, [])
         incident_seen = bool(incidents)
+        override = overrides.get(record_id)
         class_entry = build_class_entry(
             record,
             provenance_entry=provenance_map.get(record_id),
-            override=overrides.get(record_id),
+            override=override,
         )
         lane = determine_evidence_lane(record)
         next_layer = next_missing_layer(record, incident_seen=incident_seen)
+        if override and override.get("next_missing_layer_override"):
+            next_layer = str(override["next_missing_layer_override"])
         official = has_official_evidence(record)
         class_id = class_entry["evidence_class"]
         checks = dead_flag_checks(record_id, record)
