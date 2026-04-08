@@ -1,0 +1,236 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.control.allow-system-required-power-requests",
+  "tweak_id": "power.control.allow-system-required-power-requests",
+  "record_status": "draft",
+  "summary": "Draft candidate package for AllowSystemRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, and a new retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API. The candidate remains research-only because the current-build live state, exact registration/binding path, and any earlier Control\\Power seeding path are still unresolved in this checkout.",
+  "validation_proof": {
+    "source_url": "Docs/power/power.md",
+    "exact_quote_or_path": "Docs/power/power.md:98 shows `AllowSystemRequiredPowerRequests` = 1 and maps it to `PopPowerRequestConvertSystemToExecution`.",
+    "key_found_on_page": true,
+    "notes": "The repo power notes provide the exact candidate name, literal value, and intended symbol mapping, but they do not by themselves prove current-build runtime seeding semantics."
+  },
+  "setting": {
+    "name": "Allow System Required Power Requests",
+    "category": "Power",
+    "area": "Execution-Required Power Request Controls",
+    "scope": "device",
+    "casual_explanation": "This low-level Control\\Power value appears to influence whether system-required power requests are converted into execution-required behavior inside the kernel power-request subsystem.",
+    "why_people_change_it": "Researchers track it when they want to understand how execution-required power requests are enabled, overridden, or collapsed into runtime power-request behavior.",
+    "tradeoffs_overview": "The candidate now has enough docs, static, and debugger evidence for a real draft package, but the visible current-build power-setting query/store layer looks in-memory and callback-driven, so the decisive question is earlier seeding rather than the visible query/set code path.",
+    "professional_notes": "The Win25H2Clean 96-key phase-0 existence batch confirmed that HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power exists while AllowSystemRequiredPowerRequests itself is absent on the clean baseline. Repo power notes document an exact literal of 1 and map the setting to PopPowerRequestConvertSystemToExecution. The targeted string batch on the current build found an exact Unicode hit in C:\\Windows\\System32\\ntoskrnl.exe for the value name. A shared mega-trigger runtime lane then armed candidate value 1 for AllowSystemRequiredPowerRequests but the Procmon export recovered in an aborted state and did not yield an exact read. The new retained local-KD power-setting query/store pass disassembled PopQueryPowerSettingUlong, PopGetPowerSettingValue, and PopSetPowerSettingValue. In the retained path, the generic power-setting subsystem acquires PopSettingLock, resolves configuration objects through PopFindPowerSettingConfiguration, updates PopPowerSettingChangeStamp, walks PopRegisteredPowerSettingCallbacks, and schedules PopSetNotificationWork without a visible registry API. That evidence narrows the open question: if this candidate is still registry-backed on the current build, the Control\\Power seeding must occur earlier than the visible generic query/store layer.",
+    "targets": [
+      {
+        "target_id": "allowsystemrequiredpowerrequests",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "AllowSystemRequiredPowerRequests",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current clean baseline leaves AllowSystemRequiredPowerRequests absent while the parent Control\\\\Power key exists.",
+            "evidence_ids": [
+              "vm-power-control-phase0-20260329"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Repo-noted enabled literal",
+            "meaning": "Repo power notes and the mega-trigger runtime candidate arm both treat 1 as the enabled value for this control, but the live current-build state is still unresolved in this checkout.",
+            "evidence_ids": [
+              "repo-power-doc",
+              "vm-power-control-mega-trigger-runtime-20260401"
+            ]
+          }
+        ],
+        "notes": "This is a raw kernel-facing execution-required control, not a published end-user tweak."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The current app does not expose AllowSystemRequiredPowerRequests as a supported tweak or UI surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current clean baseline used by the 96-key phase-0 existence batch",
+      "states": [
+        {
+          "target_id": "allowsystemrequiredpowerrequests",
+          "state_kind": "missing",
+          "rationale": "Keep the value absent on baseline until a stronger current-build seeding proof exists."
+        }
+      ],
+      "notes": "The candidate remains absent on the clean baseline even though repo docs and trigger arms point at an enabled literal of 1.",
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-baseline",
+      "label": "Observed baseline",
+      "intended_for": [
+        "Registry research tracking",
+        "Kernel power-request documentation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click apply surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "allowsystemrequiredpowerrequests",
+          "state_kind": "missing",
+          "rationale": "Track the current baseline absence without inventing a shipped preset."
+        }
+      ],
+      "good_when": "You want the repo to preserve what the clean baseline actually exposes right now.",
+      "bad_when": "You want a claimed live default or a supported tuning profile.",
+      "tradeoffs": [
+        "Matches the observed clean baseline.",
+        "Leaves the runtime seeding question open."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329"
+      ]
+    },
+    {
+      "profile_id": "repo-noted-enabled-literal",
+      "label": "Repo-noted enabled literal",
+      "intended_for": [
+        "Advanced research packaging"
+      ],
+      "avoid_for": [
+        "General users",
+        "Published presets"
+      ],
+      "states": [
+        {
+          "target_id": "allowsystemrequiredpowerrequests",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Track the documented enabled literal without claiming the current build actually seeds it from registry on this baseline."
+        }
+      ],
+      "good_when": "You are comparing docs, trigger arms, and kernel symbol names while treating the value as research-only.",
+      "bad_when": "You need a validated current-build live read or a safe recommendation.",
+      "tradeoffs": [
+        "Preserves the repo-noted enabled literal.",
+        "Still lacks a resolved current-build registry seeding path."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-power-doc",
+        "vm-power-control-mega-trigger-runtime-20260401"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power notes for execution-required power-request controls",
+      "location": "Docs/power/power.md",
+      "summary": "Repo power notes contain an exact entry for AllowSystemRequiredPowerRequests, led by Docs/power/power.md:98, and map it to PopPowerRequestConvertSystemToExecution with literal value 1.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-phase0-20260329",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The 96-key existence batch confirmed the parent Control\\\\Power path exists while AllowSystemRequiredPowerRequests itself is absent on the clean baseline.",
+      "supports": [
+        "path",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-power-control-targeted-string-20260331",
+      "kind": "repo-doc",
+      "title": "Targeted current-build string batch for power-control candidates",
+      "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+      "summary": "The targeted current-build string batch found an exact Unicode ntoskrnl.exe hit for AllowSystemRequiredPowerRequests and did not require secondary binaries to explain the name.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-mega-trigger-runtime-20260401",
+      "kind": "procmon-trace",
+      "title": "Shared mega-trigger runtime lane for execution-required power-request candidates",
+      "location": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-232214/results.json and evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260401-232214/state.json",
+      "summary": "The shared mega-trigger runtime lane armed candidate value 1 for AllowSystemRequiredPowerRequests and ran the power-plan-and-requests trigger family, but the capture recovered in aborted state and did not produce an exact read.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power-control-execution-required-powersetting-query-kd-20260408",
+      "kind": "vm-test",
+      "title": "KVM local-KD disassembly shows in-memory generic power-setting query/store layer",
+      "location": "evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/host-review.json and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/local-kd.log and research/notes/power-control-execution-required-powersetting-query-kvm-local-kd-follow-up-20260408.md",
+      "summary": "Retained local-KD disassembly shows PopQueryPowerSettingUlong and PopGetPowerSettingValue resolving data through PopFindPowerSettingConfiguration under PopSettingLock, while the visible PopSetPowerSettingValue path updates PopPowerSettingChangeStamp and walks PopRegisteredPowerSettingCallbacks without a visible registry API in the retained path.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "AllowSystemRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, and a retained local-KD view of the generic power-setting query/store layer. The record remains draft because this checkout still lacks a candidate-specific live current-build state read, an exact callback/binding site, and a proven Control\\Power seeding path into the visible power-setting configuration objects.",
+    "blocking_issues": [
+      "The clean baseline leaves AllowSystemRequiredPowerRequests absent, so this checkout still lacks a direct live current-build state read for the candidate itself.",
+      "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects is still unresolved.",
+      "The shared mega-trigger runtime lane armed the candidate but recovered without an exact runtime read."
+    ]
+  },
+  "open_questions": [
+    "Are Control\\Power values for the execution-required pair seeded earlier into PopFindPowerSettingConfiguration objects, or is the modern current-build family entirely in-memory and runtime-driven?"
+  ],
+  "tested_on": [
+    {
+      "environment": "Win25H2Clean 96-key phase-0 existence batch",
+      "os": "Windows 11",
+      "notes": "Confirmed the Control\\\\Power parent key exists while AllowSystemRequiredPowerRequests is absent on baseline."
+    },
+    {
+      "environment": "KVM local-KD power-setting query/store pass",
+      "os": "Windows 11",
+      "notes": "Retained local-KD disassembly completed for PopQueryPowerSettingUlong, PopGetPowerSettingValue, and PopSetPowerSettingValue; see local-kd-powersetting-query-20260408a."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-08T14:15:00Z"
+}

@@ -7,17 +7,17 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 
 | Field | Value |
 | --- | --- |
-| Total records | 310 |
+| Total records | 312 |
 | Validated | 245 |
 | Deprecated | 54 |
 | Review required | 0 |
-| Records with evidence | 310 |
+| Records with evidence | 312 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
-| Class B | 4 |
-| Class C | 4 |
+| Class B | 8 |
+| Class C | 2 |
 | Class E | 54 |
 
 ## Category coverage
@@ -32,7 +32,7 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Notifications | 5 |
 | Performance | 3 |
 | Peripheral | 3 |
-| Power | 22 |
+| Power | 24 |
 | Privacy | 84 |
 | Security | 25 |
 | System | 79 |
@@ -1807,7 +1807,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft](https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft) | `high` | path, value, behavior |
+| `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | [https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted](https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted) | `high` | path, value, behavior |
 | `dump-25h2-policies-explorer-nolowdiskspacechecks` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for NoLowDiskSpaceChecks | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -1815,7 +1815,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft](https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/low-disk-space-error-due-to-full-mft) |
+| Source | [https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted](https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted) |
 | Exact quote / path | Locate and select the following registry subkey: HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Windows/CurrentVersion/Policies/Explorer. Enter NoLowDiskSpaceChecks and press Enter. Type 1 in the Value data box and select OK. |
 | Key found on page | `True` |
 | Notes | The official troubleshooting article documents the HKLM Explorer policy path and NoLowDiskSpaceChecks = 1 flow exactly. The app now writes the same machine-policy path. |
@@ -2761,7 +2761,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-gppref-global-folder-options` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptions | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a) | `high` | path, value, allowed-values, behavior |
+| `ms-gppref-global-folder-options` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptions | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f) | `high` | path, value, allowed-values, behavior |
 | `dump-hkcu25h2-explorer-cabinetstate-fullpath` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for FullPath | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo source note for explorer.show-full-path | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
@@ -2770,7 +2770,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1b851616-4af6-4646-b741-9300b3348b5a) |
+| Source | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f) |
 | Exact quote / path | Path: Software/Microsoft/Windows/CurrentVersion/Explorer/CabinetState; Value Name: FullPath; Description: Displays the full path to the folder. MUST be 1 to enable and 0 to disable. |
 | Key found on page | `True` |
 | Notes | Microsoft Open Specifications publishes the exact Explorer CabinetState path, FullPath value name, and 0/1 semantics. The app writes the documented enabled state under the same user-preference surface. |
@@ -8798,7 +8798,7 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Processor Idle Behavior` |
 | Scope | `device` |
@@ -8828,10 +8828,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
 | Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Gating reason | This record is cross-layer verified. The project treats strong proof for undocumented raw registry surfaces as Class A even when app actionability stays separate. |
 
 **Sources**
 
@@ -8893,7 +8893,7 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-cpu-idle-states` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to Processor Idle States | [https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-processor-idle-states) | `high` | behavior, side-effects, version-scope, app-mismatch |
+| `ms-cpu-idle-states` | `official-doc` | `Microsoft official doc` | Microsoft Learn: PPM Notifications | [https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/ppm-notifications](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/ppm-notifications) | `high` | behavior, side-effects, version-scope, app-mismatch |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, value, behavior |
 | `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | [evidence/files/vm/cpu_idle_probe.json](../evidence/files/vm-tooling-staging/cpu_idle_probe.json) | `high` | path, value, behavior, rollback |
@@ -10171,7 +10171,7 @@ Windows Internals references:
 | Label | `Class B` |
 | Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion. |
+| Gating reason | Cross-layer evidence is strong, but the current S1-only VMware baseline still drops guest state before a decisive exact-value watchdog runtime lane can complete. |
 
 **Sources**
 
@@ -12517,7 +12517,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-admx-windowscopilot-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowscopilot#turnoffwindowscopilot](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowscopilot#turnoffwindowscopilot) | `high` | path, value, allowed-values, default, behavior, version-scope |
+| `ms-admx-windowscopilot-turnoff` | `policy-csp` | `Microsoft policy CSP` | Microsoft ADMX_WindowsCopilot Policy CSP: TurnOffWindowsCopilot | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot) | `high` | path, value, allowed-values, default, behavior, version-scope |
 | `local-windowscopilot-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx](../evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
@@ -16484,7 +16484,7 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cloudcontent](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-cloudcontent) |
+| Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight) |
 | Exact quote / path | HKCU/Software/Policies/Microsoft/Windows/CloudContent |
 | Key found on page | `True` |
 | Notes | The local CloudContent.admx/adml mappings anchor the three official policy values. The deprecated parent audit trail keeps the opaque ContentDeliveryManager IDs separate from this child record. |
@@ -17334,7 +17334,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-security-option-hide-last-user` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852264(v=ws.11](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852264(v=ws.11)) | `high` | behavior, default, side-effects, version-scope |
+| `ms-security-option-hide-last-user` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display last user name | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-do-not-display-last-user-name](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-do-not-display-last-user-name) | `high` | behavior, default, side-effects, version-scope |
 | `local-security-registry-last-user` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, ui-mapping |
 | `local-security-defaults-last-user` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
@@ -17935,7 +17935,7 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-security-option-hide-username-signin` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852277(v=ws.11](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj852277(v=ws.11)) | `high` | behavior, side-effects, version-scope |
+| `ms-security-option-hide-username-signin` | `official-doc` | `Microsoft official doc` | Microsoft security policy setting: Interactive logon: Do not display username at sign-in | [https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-dont-display-username-at-sign-in](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/interactive-logon-dont-display-username-at-sign-in) | `high` | behavior, side-effects, version-scope |
 | `local-security-registry-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows security option registry mapping | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, ui-mapping |
 | `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
@@ -21081,7 +21081,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-file-hash-root-registry` | `official-doc` | `Microsoft official doc` | Microsoft Support: March 2016 anti-malware platform update for Endpoint Protection clients | [https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa](https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa) | `high` | path, value, behavior, version-scope |
 | `ms-defender-enable-file-hash-computation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Create indicators for files | [https://learn.microsoft.com/en-us/defender-endpoint/indicator-file](https://learn.microsoft.com/en-us/defender-endpoint/indicator-file) | `high` | path, value, behavior, tradeoff |
-| `ms-defender-file-hash-event1120` | `official-doc` | `Microsoft official doc` | Microsoft support: Troubleshoot Microsoft Defender Antivirus settings | [https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d](https://support.microsoft.com/en-au/topic/troubleshoot-microsoft-defender-antivirus-settings-9dd824c2-44cf-85a7-bbe1-e0d6ddb8786d) | `high` | behavior, value |
+| `ms-defender-file-hash-event1120` | `official-doc` | `Microsoft official doc` | Microsoft Support: March 2016 anti-malware platform update for Endpoint Protection clients | [https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa](https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa) | `high` | behavior, value |
 | `ms-defender-cloud-demo-sample` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Demonstrate cloud-delivered protection | [https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection](https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection) | `high` | behavior, path |
 | `repo-defender-threat-file-hash-dumps` | `repo-doc` | `Current repo docs` | Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path, value |
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
@@ -22017,7 +22017,7 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | [https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/automatic-maintenance) | `high` | behavior, default, version-scope |
+| `ms-automatic-maintenance-overview` | `official-doc` | `Microsoft official doc` | Microsoft Automatic Maintenance overview | [https://learn.microsoft.com/en-us/windows/compatibility/automatic-maintenance](https://learn.microsoft.com/en-us/windows/compatibility/automatic-maintenance) | `high` | behavior, default, version-scope |
 | `ms-uwf-maintenance-disabled` | `official-doc` | `Microsoft official doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | [https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable](https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable) | `high` | path, value, behavior, default |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Automatic maintenance override | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
@@ -22927,7 +22927,7 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-support-restart-apps` | `official-doc` | `Microsoft official doc` | Microsoft support article for the Restart apps sign-in feature | [https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d](https://support.microsoft.com/en-us/windows/configure-windows-to-automate-startup-of-apps-when-you-sign-in-4c95407c-6451-49bc-9c2c-799aafac486d) | `medium` | behavior, default, side-effects, version-scope |
+| `ms-support-restart-apps` | `official-doc` | `Microsoft official doc` | Microsoft support article for the Restart apps sign-in feature | [https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8](https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8) | `medium` | behavior, default, side-effects, version-scope |
 | `runtime-restartapps-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - RestartApps registry mapping | [evidence/files/vm/restartapps_toggle_out.txt](../evidence/files/vm-tooling-staging/restartapps_toggle_out.txt) | `high` | value, behavior, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
@@ -24124,7 +24124,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft did not publish the raw registry key in the feature documentation captured here.
+**Summary:** The current app writes HKCU\Software\Microsoft\GameBar\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft's official Game Mode documentation here is feature-level rather than a raw registry contract.
 
 **Current implementation**
 
@@ -24209,7 +24209,7 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Xbox Support: Use Game Mode while gaming on your Windows device | [https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc](https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc) | `high` | behavior, side-effects, version-scope |
+| `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Game Mode | [https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/](https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/) | `high` | behavior, side-effects, version-scope |
 | `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [evidence/files/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/files/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [evidence/files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](../evidence/files/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) | `high` | path, value, behavior, ui-mapping, version-scope |
 | `repo-system-decomp-game-mode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) | `medium` | path, value, behavior, ui-mapping |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
@@ -24524,7 +24524,7 @@ Windows Internals references:
 | Label | `Class A` |
 | Title | Cross-Layer Verified |
 | Action state | `research-gated` |
-| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+| Gating reason | This record is cross-layer verified. Exact runtime reads now exist for both Executive worker-thread values, and app actionability stays separate from evidence class. |
 
 **Sources**
 
@@ -25384,7 +25384,7 @@ Windows Internals references:
 | Label | `Class A` |
 | Title | Cross-Layer Verified |
 | Action state | `research-gated` |
-| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+| Gating reason | This record is cross-layer verified. The Session Manager Kernel batch now has a current-build static hit and an exact early-boot runtime read for DisableExceptionChainValidation, and app actionability stays separate f... |
 
 **Sources**
 
@@ -25937,7 +25937,6 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-memory-management-qna-nonpaged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) | `medium` | path, value, default, behavior |
-| `ms-memory-management-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Management Registry Keys | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys](https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys) | `high` | path, behavior, version-scope |
 | `ms-memory-limits` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases) | `high` | behavior, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
@@ -26063,7 +26062,6 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-memory-management-qna-paged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) | `medium` | path, value, default, behavior |
-| `ms-memory-management-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Management Registry Keys | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys](https://learn.microsoft.com/en-us/windows/win32/memory/memory-management-registry-keys) | `high` | path, behavior, version-scope |
 | `ms-unable-allocate-paged-pool` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool) | `high` | path, value, behavior, risk, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 
@@ -26867,7 +26865,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, and bounded rebooted benchmark runs. The raw 0x26 bitmask semantics remain repo interpretation rather than a modern Microsoft-published contract.
+**Summary:** Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, bounded rebooted benchmark runs, and a bounded PDB-backed Ghidra pass on cimwin32.dll. The raw 0x26 bitmask semantics still remain repo interpretation rather than a modern Microsoft-published contract.
 
 **Current implementation**
 
@@ -26934,7 +26932,7 @@ Windows Internals references:
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `value` | `2` | Observed Win25H2Clean baseline | The current 25H2 VM baseline read back Win32PrioritySeparation = 2 before the app profile was applied. This is an observed runtime state, not a claim about the full raw bitmask semantics. | procmon-priority-control-wmi-read, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
-| `value` | `38` | Observed app profile | The current app writes 38 (0x26), and the Win25H2Clean VM confirmed that observed state under real rebooted runs. This record does not claim that Microsoft publishes the full raw 0x26 bit semantics. | app-system-registry-provider, repo-system-doc-priority, repo-system-decomp-prioritycontrol, procmon-priority-control-wmi-read, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
+| `value` | `38` | Observed app profile | The current app writes 38 (0x26), and the Win25H2Clean VM confirmed that observed state under real rebooted runs. This record does not claim that Microsoft publishes the full raw 0x26 bit semantics. | app-system-registry-provider, repo-system-doc-priority, procmon-priority-control-wmi-read, vm-batch-probe-20260320-priority-control, vm-manual-benchmark-20260324-priority-control |
 
 **Windows defaults**
 
@@ -26955,7 +26953,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) | `high` | path, behavior, version-scope, risk |
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
-| `repo-system-decomp-prioritycontrol` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) | `high` | path, value, behavior |
+| `repo-system-decomp-prioritycontrol` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Historical repo decompilation for PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) | `medium` | path, behavior |
+| `ghidra-symbolized-prioritycontrol-20260401` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - PDB-backed bounded Ghidra branch audit - cimwin32.dll | [evidence/files/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136](../evidence/files/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136) | `high` | path, behavior |
 | `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt](../evidence/files/procmon/system.priority-control/prioritycontrol-state-2.txt) and [evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](../evidence/files/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt](../evidence/files/procmon/system.priority-control/prioritycontrol-state-38.txt) and [evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](../evidence/files/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
@@ -26979,7 +26978,7 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Win25H2Clean reversible proof, the later rebooted VM benchmark pass, and the wmiprvse.exe Procmon reads for both states are enough to treat 2 and 38 as current-build observed runtime states. This verdict does not rely on Microsoft publishing the raw 0x26 bitmask semantics. |
+| Why | Win25H2Clean reversible proof, the later rebooted VM benchmark pass, the wmiprvse.exe Procmon reads for both states, and the bounded PDB-backed cimwin32.dll Ghidra pass are enough to treat 2 and 38 as current-build observed runtime states. This verdict still does not rely on Microsoft publishing the raw 0x26 bitmask semantics. |
 
 ---
 
@@ -27978,7 +27977,7 @@ Windows Internals references:
 | Source | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | Exact quote / path | Windows Search (WSearch) \| Manual \| OK to disable \| Provides content indexing, property caching, and search results for files, e-mail, and other content. |
 | Key found on page | `True` |
-| Notes | The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt) |
+| Notes | The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.) |
 
 **Decision**
 
@@ -30907,17 +30906,17 @@ Nohuto lineage references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class A` |
+| Evidence class | `Class B` |
 | Category | `Visibility` |
 | Area | `Explorer Context Menu` |
 | Scope | `user` |
 | Source file | [research/records/visibility.restore-classic-context-menu.review.json](records/visibility.restore-classic-context-menu.review.json) |
 | V3.1 evidence root | - |
 | Apply allowed | `True` |
-| Confidence | `high` |
+| Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 with an empty default value. Microsoft Q&A now documents the same registry workaround, so the record is validated.
+**Summary:** The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 with an empty default value. A current Microsoft Q&A article shows the same command and revert path, but also notes that the workaround may be deprecated on newer 24H2-era builds, so this record treats it as a workaround rather than a stable Microsoft policy surface.
 
 **Current implementation**
 
@@ -30937,10 +30936,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class A` |
-| Title | Cross-Layer Verified |
-| Action state | `actionable` |
-| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
+| Action state | `research-gated` |
+| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
 
 **Sources**
 
@@ -31003,10 +31002,10 @@ Nohuto lineage references:
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/answers/questions/4375993/right-click-on-file-and-go-to-show-more-options](https://learn.microsoft.com/en-us/answers/questions/4375993/right-click-on-file-and-go-to-show-more-options) |
-| Exact quote / path | reg add "HKCU/Software/Classes/CLSID/{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}/InprocServer32" /f /ve |
+| Source | [https://learn.microsoft.com/en-us/answers/questions/2287432/(article](https://learn.microsoft.com/en-us/answers/questions/2287432/(article))-restore-old-right-click-context-menu-in?forum=windows-all&referrer=answers |
+| Exact quote / path | reg.exe add "HKCU/Software/Classes/CLSID/{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}/InprocServer32" /f /ve ; reg.exe delete "HKCU/Software/Classes/CLSID/{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f |
 | Key found on page | `True` |
-| Notes | Microsoft Q&A documents the CLSID workaround and the empty default value used to restore the classic context menu. |
+| Notes | The current Microsoft Q&A article shows the same add and delete commands used by the workaround. The same page also notes that this method has been reported as deprecated in 24H2, so the record treats it as workaround evidence rather than a guaranteed modern-build contract. |
 
 **Decision**
 
@@ -31017,7 +31016,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Microsoft Q&A documents the same CLSID workaround the app writes, and removing the key restores the stock Windows 11 context menu. The record matches the app and has a clean restore story. |
+| Why | The app matches the same CLSID workaround command and delete path shown in the current Microsoft Q&A article, and the repo documents the restore story. This remains workaround evidence rather than a stable Microsoft policy contract because newer builds may no longer honor it consistently. |
 
 ---
 
@@ -31380,7 +31379,7 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | [https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup) | `medium` | behavior, app-mismatch |
-| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [https://terminal.1.24.10621.0/TerminalApp.dll;](https://terminal.1.24.10621.0/TerminalApp.dll;) [evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/files/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
 | `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | [evidence/files/host/terminal-launch.etl.md](../evidence/files/host-temp/terminal-launch.etl.md) | `low` | behavior, process-tree, startup-context |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -35558,7 +35557,6 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-dwm-registry-settings` | `official-doc` | `Microsoft official doc` | Microsoft Learn: DWM Registry Settings | [https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values](https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values) | `medium` | path, behavior, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -35688,7 +35686,6 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: TDR Registry Keys | [https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys](https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys) | `medium` | path, behavior, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -35818,7 +35815,6 @@ Windows Internals references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `ms-tdr-registry-keys` | `official-doc` | `Microsoft official doc` | Microsoft Learn: TDR Registry Keys | [https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys](https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys) | `medium` | path, behavior, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -37553,7 +37549,7 @@ Windows Internals references:
 | Source | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | Exact quote / path | Print Workflow (PrintWorkflowUserSvc) \| Manual \| No guidance \| Provides support for Print Workflow applications. If you turn off this service, some printing functions might not work successfully. |
 | Key found on page | `True` |
-| Notes | The official Learn services page documents the base per-user service family as PrintWorkflowUserSvc, but the recommendation is No guidance, not OK to disable. A companion SCM snapshot is checked in at [research/notes/service-snapshots/printworkflowusersvc_7598c-sc-qc-2026-03-14.txt.](notes/service-snapshots/printworkflowusersvc_7598c-sc-qc-2026-03-14.txt) |
+| Notes | The official Learn services page documents the base per-user service family as PrintWorkflowUserSvc, but the recommendation is No guidance, not OK to disable. A companion SCM snapshot is checked in at [research/notes/service-snapshots/printworkflowusersvc_7598c-sc-qc-2026-03-14.txt.](notes/service-snapshots/printworkflowusersvc_7598c-sc-qc-2026-03-14.txt.) |
 
 **Decision**
 
