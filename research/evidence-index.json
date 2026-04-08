@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T18:05:24.213749Z",
+  "generated_utc": "2026-04-08T18:13:02.996667Z",
   "summary": {
     "total_records": 312,
     "validated": 245,
@@ -50039,7 +50039,7 @@
       "category": "Power",
       "area": "Directed Power Watchdog Timeouts",
       "scope": "device",
-      "summary": "Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, and a new tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed. The pair remains Class B because the current VMware baseline is S1-only and still does not provide a reliable decisive runtime path for the exact watchdog values.",
+      "summary": "Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, a tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed, and an incident review that closes the older boot-trace failures as historical baseline or guest-control noise. The pair remains Class B because the current VMware baseline is S1-only and still does not provide a reliable decisive runtime path for the exact watchdog values.",
       "evidence_class": {
         "record_id": "power.session-watchdog-timeouts",
         "tweak_id": "power.session-watchdog-timeouts",
@@ -50403,6 +50403,19 @@
           "title": "Tools-hardened lightweight ETW S1 follow-up for the watchdog lane",
           "location": "evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/summary.json and evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/results.json and research/notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md",
           "summary": "A tools-hardened lightweight ETW follow-up retried the watchdog lane with split trace phases on RegProbe-Baseline-ToolsHardened-20260330. The VM still exposed only S1, and the guest dropped out during the sleep transition before a usable exact-value ETW bundle could be completed.",
+          "strength": "high",
+          "supports": [
+            "risk",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-watchdog-incident-review-20260408",
+          "kind": "vm-incident",
+          "title": "Incident review for older watchdog timeout boot-trace failures",
+          "location": "research/vm-incidents.json and research/notes/power-session-watchdog-timeouts-incident-review-20260408.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json and evidence/files/vm-tooling-staging/watchdog-procmon-bootlog-20260328-131306/summary.json and evidence/files/vm-tooling-staging/watchdog-power-trigger-20260328-141804/summary.json",
+          "summary": "The older watchdog incidents are reviewed as historical baseline or guest-control failures. Later retained reruns on the same family completed successfully, producing a shell-safe boot trace, a working Procmon boot-log capture, and a shell-safe post-boot trigger package. The remaining blocker is the S1-only environment, not an unresolved incident hold.",
           "strength": "high",
           "supports": [
             "risk",
