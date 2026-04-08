@@ -124,7 +124,7 @@ function Convert-RegistryData {
     }
 
     if ($trimmed -match '^"(.*)"$') {
-        $value = $Matches[1] -replace '\\"', '"' -replace '\\\\', '\'
+        $value = ($Matches[1] -replace '\\"', '"' -replace '\\\\', '\').TrimEnd()
         return [pscustomobject]@{
             ValueType = 'string'
             DataText  = $value
@@ -132,15 +132,149 @@ function Convert-RegistryData {
     }
 
     if ($trimmed -match '^(?<type>hex(?:\([0-9a-fA-F]+\))?|dword|qword):(?<data>.*)$') {
+        $normalizedType = $Matches['type'].ToLowerInvariant()
+        $normalizedData = $Matches['data'].Trim()
+
+        if ($normalizedType -eq 'hex(2)') {
+            $pieces = @($normalizedData -split ',' | ForEach-Object { $_.Trim().ToLowerInvariant() } | Where-Object { $_ })
+            try {
+                $bytes = New-Object byte[] ($pieces.Count)
+                for ($i = 0; $i -lt $pieces.Count; $i++) {
+                    $bytes[$i] = [Convert]::ToByte($pieces[$i], 16)
+                }
+
+                $decoded = [System.Text.Encoding]::Unicode.GetString($bytes).TrimEnd([char]0).TrimEnd()
+                return [pscustomobject]@{
+                    ValueType = 'expand_sz'
+                    DataText  = $decoded
+                }
+            }
+            catch {
+            }
+        }
+
+        if ($normalizedType -eq 'hex(7)') {
+            $pieces = @($normalizedData -split ',' | ForEach-Object { $_.Trim().ToLowerInvariant() } | Where-Object { $_ })
+            try {
+                $bytes = New-Object byte[] ($pieces.Count)
+                for ($i = 0; $i -lt $pieces.Count; $i++) {
+                    $bytes[$i] = [Convert]::ToByte($pieces[$i], 16)
+                }
+
+                $decoded = [System.Text.Encoding]::Unicode.GetString($bytes).TrimEnd([char]0)
+                $parts = @($decoded -split [string][char]0 | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+                return [pscustomobject]@{
+                    ValueType = 'multi_sz'
+                    DataText  = ($parts -join ';')
+                }
+            }
+            catch {
+            }
+        }
+
+        if ($normalizedType -eq 'hex') {
+            $pieces = @($normalizedData -split ',' | ForEach-Object { $_.Trim().ToLowerInvariant() } | Where-Object { $_ })
+            return [pscustomobject]@{
+                ValueType = 'hex'
+                DataText  = ($pieces -join ',')
+            }
+        }
+
         return [pscustomobject]@{
-            ValueType = $Matches['type'].ToLowerInvariant()
-            DataText  = $Matches['data'].Trim().ToLowerInvariant()
+            ValueType = $normalizedType
+            DataText  = $normalizedData.ToLowerInvariant()
         }
     }
 
     return [pscustomobject]@{
         ValueType = 'raw'
         DataText  = $trimmed
+    }
+}
+
+function Convert-RegistryDumpData {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ValueType,
+        [Parameter(Mandatory = $true)]
+        [string]$RawData
+    )
+
+    $normalizedType = $ValueType.Trim().ToUpperInvariant()
+    $trimmed = $RawData.Trim()
+
+    switch ($normalizedType) {
+        { $_ -in @('REG_DWORD', 'REG_DWORD_LITTLE_ENDIAN') } {
+            $token = if ([string]::IsNullOrWhiteSpace($trimmed)) { '0' } else { ($trimmed -split '\s+')[0] }
+            $number = if ($token.StartsWith('0x', [System.StringComparison]::OrdinalIgnoreCase)) {
+                [Convert]::ToUInt32($token.Substring(2), 16)
+            }
+            else {
+                [Convert]::ToUInt32($token, 10)
+            }
+
+            return [pscustomobject]@{
+                ValueType = 'dword'
+                DataText  = ('{0:x8}' -f $number)
+            }
+        }
+
+        'REG_QWORD' {
+            $token = if ([string]::IsNullOrWhiteSpace($trimmed)) { '0' } else { ($trimmed -split '\s+')[0] }
+            $number = if ($token.StartsWith('0x', [System.StringComparison]::OrdinalIgnoreCase)) {
+                [Convert]::ToUInt64($token.Substring(2), 16)
+            }
+            else {
+                [Convert]::ToUInt64($token, 10)
+            }
+
+            return [pscustomobject]@{
+                ValueType = 'qword'
+                DataText  = ('{0:x16}' -f $number)
+            }
+        }
+
+        'REG_SZ' {
+            return [pscustomobject]@{
+                ValueType = 'string'
+                DataText  = $trimmed.TrimEnd()
+            }
+        }
+
+        'REG_EXPAND_SZ' {
+            return [pscustomobject]@{
+                ValueType = 'expand_sz'
+                DataText  = $trimmed.TrimEnd()
+            }
+        }
+
+        'REG_MULTI_SZ' {
+            return [pscustomobject]@{
+                ValueType = 'multi_sz'
+                DataText  = ($trimmed -replace '\s*;\s*', ';')
+            }
+        }
+
+        { $_ -in @('REG_BINARY', 'REG_NONE') } {
+            $pieces = @($trimmed -split '[\s,]+' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | ForEach-Object { $_.ToLowerInvariant() })
+            if ($pieces.Count -eq 1 -and $pieces[0] -match '^[0-9a-fA-F]+$' -and ($pieces[0].Length % 2) -eq 0) {
+                $blob = $pieces[0]
+                $pieces = New-Object System.Collections.Generic.List[string]
+                for ($i = 0; $i -lt $blob.Length; $i += 2) {
+                    $pieces.Add($blob.Substring($i, 2).ToLowerInvariant())
+                }
+            }
+
+            return [pscustomobject]@{
+                ValueType = 'hex'
+                DataText  = ($pieces -join ',')
+            }
+        }
+    }
+
+    return [pscustomobject]@{
+        ValueType = $normalizedType.ToLowerInvariant()
+        DataText  = ($trimmed -replace '\s+', ' ')
     }
 }
 
@@ -275,15 +409,14 @@ function Parse-RegistryDumpText {
         }
 
         $valueName = $Matches['name'].Trim()
-        $valueType = $Matches['type'].Trim().ToLowerInvariant()
-        $dataText = $Matches['data'].Trim()
+        $data = Convert-RegistryDumpData -ValueType $Matches['type'] -RawData $Matches['data']
         $entryId = Get-ValueEntryId -KeyPath $currentKey -ValueName $valueName
 
         $values[$entryId] = [pscustomobject]@{
             KeyPath   = $currentKey
             ValueName = $valueName
-            ValueType = $valueType
-            DataText  = $dataText
+            ValueType = $data.ValueType
+            DataText  = $data.DataText
         }
     }
 
