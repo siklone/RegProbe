@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T00:50:30.176960Z",
+  "generated_utc": "2026-04-08T01:11:14.271601Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 317,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T00:50:29.458242Z",
+      "generated_utc": "2026-04-08T01:11:13.593649Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -19524,6 +19524,12 @@
               "url": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
               "kind": "repo-doc",
               "summary": "Repo docs list both values under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` and map them to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`."
+            },
+            {
+              "title": "Repo guest tooling already exposes a reusable timer-resolution trigger primitive",
+              "url": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1 and scripts/source_enrichment_scan.py",
+              "kind": "repo-code",
+              "summary": "The repo already contains `Invoke-TimerResolutionTrigger`, which directly calls `NtSetTimerResolution` and `timeBeginPeriod`, and this aligns with the enrichment recommendation..."
             }
           ]
         },
@@ -19554,8 +19560,8 @@
         }
       },
       "source_file": "research/records/system.kernel-long-dpc-threshold-cluster.json",
-      "source_file_sha256": "b0a9bdaa8158f1c63c98f782088501bfcbfdf3d7974cc5ac102faec72f9bc2b5",
-      "source_file_size_bytes": 13207,
+      "source_file_sha256": "42b8f609580add477d4b26e7af83f508488008a04c654624bbca1752608b81d7",
+      "source_file_size_bytes": 14719,
       "name": "Kernel Long DPC Threshold Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Scheduling",
@@ -19573,7 +19579,8 @@
           "no-current-build-caller-path",
           "runtime_no_read",
           "no-doc-source-outside-repo",
-          "live-state-unproven"
+          "live-state-unproven",
+          "no-dedicated-timer-dpc-stress-harness"
         ]
       },
       "app_current_implementation": {
@@ -19694,7 +19701,8 @@
             "vm-session-manager-kernel-long-dpc-threshold-existence-20260329",
             "static-session-manager-kernel-long-dpc-threshold-string-20260331",
             "vm-session-manager-kernel-long-dpc-threshold-runtime-20260331",
-            "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403"
+            "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403",
+            "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408"
           ]
         }
       ],
@@ -19768,6 +19776,19 @@
             "version-scope"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408",
+          "kind": "repo-code",
+          "title": "Repo guest tooling already exposes a reusable timer-resolution trigger primitive",
+          "location": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1 and scripts/source_enrichment_scan.py",
+          "summary": "The repo already contains `Invoke-TimerResolutionTrigger`, which directly calls `NtSetTimerResolution` and `timeBeginPeriod`, and this aligns with the enrichment recommendation that the next lane should use `timer-dpc-stress` triggers such as high-resolution timer requests and DPC-heavy workload.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "research-gap"
+          ],
+          "origin": "Current repo code"
         }
       ],
       "validation_proof": null,
