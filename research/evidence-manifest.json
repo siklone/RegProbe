@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T14:20:23.294008Z",
+  "generated_utc": "2026-04-08T14:32:24.582818Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 312,
@@ -17657,13 +17657,13 @@
         }
       },
       "source_file": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
-      "source_file_sha256": "5193f46976f0abb6155051d1bbcdad7db0b9e3fcf6475170290bc4ab86ee9a4c",
-      "source_file_size_bytes": 23283,
+      "source_file_sha256": "51996de2068daf3181c1e238655a819e16a132e3a657f7816bb2e93f7ffd8e09",
+      "source_file_size_bytes": 25691,
       "name": "Allow Audio To Enable Execution Required Power Requests",
       "category": "Power",
       "area": "Execution-Required Power Request Controls",
       "scope": "device",
-      "summary": "Draft candidate package for AllowAudioToEnableExecutionRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. New retained live-state and direct-reader passes now confirm `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1` and show `PopPowerRequestEvaluateExecutionRequiredStatus` reading that global on the current build. The candidate remains research-only because the earlier Control\\Power seeding path is still unresolved.",
+      "summary": "Draft candidate package for AllowAudioToEnableExecutionRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. New retained live-state and direct-reader passes now confirm `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1` and show `PopPowerRequestEvaluateExecutionRequiredStatus` reading that global on the current build. A retained broad lightweight runtime lane also wrote the pair from baseline-missing to candidate value `1`, completed a real soft reboot, and still returned `no-hit` for the pair after reboot. The candidate remains research-only because the earlier Control\\Power seeding path and an exact post-boot read are still unresolved.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -17671,11 +17671,11 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "AllowAudioToEnableExecutionRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, retained local-KD proof that `PopPowerRequestActiveAudioEnablesExecutionRequired = 1`, a direct current-build reader in `PopPowerRequestEvaluateExecutionRequiredStatus`, a retained local-KD view of the generic power-setting query/store layer, and retained wildcard/symbolized binding follow-ups. The record remains draft because the visible current-build story is still callback-, timer-, and in-memory-state driven, while the earlier Control\\Power seeding path into that state remains unresolved.",
+        "why": "AllowAudioToEnableExecutionRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, retained local-KD proof that `PopPowerRequestActiveAudioEnablesExecutionRequired = 1`, a direct current-build reader in `PopPowerRequestEvaluateExecutionRequiredStatus`, a retained local-KD view of the generic power-setting query/store layer, retained wildcard/symbolized binding follow-ups, and a retained broad soft-reboot runtime lane that still returns `no-hit` after reboot. The record remains draft because the visible current-build story is still callback-, timer-, and in-memory-state driven, while the earlier Control\\Power seeding path into that state and any exact rebooted read remain unresolved.",
         "blocking_issues": [
           "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects or execution-required globals is still unresolved.",
           "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowAudioToEnableExecutionRequiredPowerRequests binding site.",
-          "The lane still lacks a reboot or early-boot diff proving whether the absent Control\\Power value is materialized during initialization.",
+          "A retained broad soft-reboot lane now exists, but it still produced only batch-level `no-hit` rather than an exact post-boot read for AllowAudioToEnableExecutionRequiredPowerRequests.",
           "The shared mega-trigger runtime lane armed the candidate but recovered without an exact registry read."
         ]
       },
@@ -17792,6 +17792,7 @@
             "vm-power-control-mega-trigger-runtime-20260401",
             "vm-power-control-execution-required-live-kd-20260408",
             "vm-power-control-execution-required-reader-kd-20260408",
+            "vm-power-control-execution-required-reboot-batch-20260331",
             "vm-power-control-execution-required-reglineage-kd-20260408",
             "ghidra-power-control-execution-required-binding-20260408",
             "ghidra-power-control-execution-required-readers-20260408"
@@ -17879,6 +17880,20 @@
           "strength": "high",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-reboot-batch-20260331",
+          "kind": "vm-test",
+          "title": "KVM lightweight runtime lane rebooted the execution-required pair and still returned no-hit after reboot",
+          "location": "evidence/files/vm-tooling-staging/power-control-batch-lightweight-runtime-primary-20260331-191300/summary.json and evidence/files/vm-tooling-staging/power-control-batch-lightweight-runtime-primary-20260331-191300/results.json and evidence/files/vm-tooling-staging/power-control-batch-lightweight-runtime-primary-20260331-191300/state.json and research/notes/power-control-execution-required-reboot-diff-follow-up-20260408.md",
+          "summary": "A retained broad lightweight runtime lane armed `AllowSystemRequiredPowerRequests` and `AllowAudioToEnableExecutionRequiredPowerRequests` from baseline-missing to candidate value `1`, completed a real `reboot_mode=soft` cycle with healthy shell state before and after reboot, and still returned `no-hit` for both pair members in the post-boot batch result.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk",
             "version-scope"
           ],
           "origin": "VM test / probe"
@@ -18035,13 +18050,13 @@
         }
       },
       "source_file": "research/records/power.control.allow-system-required-power-requests.json",
-      "source_file_sha256": "2abd9f17285a55b419bdd6af7a156437344cf5ae192006c5e11f6f4a22941345",
-      "source_file_size_bytes": 22797,
+      "source_file_sha256": "8e94b68a546aa06618bf60a5aa7e6dd1dfef68cf0f6aae2f0d208bd9cca0054f",
+      "source_file_size_bytes": 25189,
       "name": "Allow System Required Power Requests",
       "category": "Power",
       "area": "Execution-Required Power Request Controls",
       "scope": "device",
-      "summary": "Draft candidate package for AllowSystemRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. New retained live-state and direct-reader passes now confirm `nt!PopPowerRequestConvertSystemToExecution = 1` and show `PopPowerRequestHandleExecutionEnablementUpdate` reading that global on the current build. The candidate remains research-only because the earlier Control\\Power seeding path is still unresolved.",
+      "summary": "Draft candidate package for AllowSystemRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. New retained live-state and direct-reader passes now confirm `nt!PopPowerRequestConvertSystemToExecution = 1` and show `PopPowerRequestHandleExecutionEnablementUpdate` reading that global on the current build. A retained broad lightweight runtime lane also wrote the pair from baseline-missing to candidate value `1`, completed a real soft reboot, and still returned `no-hit` for the pair after reboot. The candidate remains research-only because the earlier Control\\Power seeding path and an exact post-boot read are still unresolved.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -18049,11 +18064,11 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "AllowSystemRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, retained local-KD proof that `PopPowerRequestConvertSystemToExecution = 1`, a direct current-build reader in `PopPowerRequestHandleExecutionEnablementUpdate`, a retained local-KD view of the generic power-setting query/store layer, and retained wildcard/symbolized binding follow-ups. The record remains draft because the visible current-build story is still callback-, timer-, and in-memory-state driven, while the earlier Control\\Power seeding path into that state remains unresolved.",
+        "why": "AllowSystemRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, retained local-KD proof that `PopPowerRequestConvertSystemToExecution = 1`, a direct current-build reader in `PopPowerRequestHandleExecutionEnablementUpdate`, a retained local-KD view of the generic power-setting query/store layer, retained wildcard/symbolized binding follow-ups, and a retained broad soft-reboot runtime lane that still returns `no-hit` after reboot. The record remains draft because the visible current-build story is still callback-, timer-, and in-memory-state driven, while the earlier Control\\Power seeding path into that state and any exact rebooted read remain unresolved.",
         "blocking_issues": [
           "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects or execution-required globals is still unresolved.",
           "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowSystemRequiredPowerRequests binding site.",
-          "The lane still lacks a reboot or early-boot diff proving whether the absent Control\\Power value is materialized during initialization.",
+          "A retained broad soft-reboot lane now exists, but it still produced only batch-level `no-hit` rather than an exact post-boot read for AllowSystemRequiredPowerRequests.",
           "The shared mega-trigger runtime lane armed the candidate but recovered without an exact registry read."
         ]
       },
@@ -18170,6 +18185,7 @@
             "vm-power-control-mega-trigger-runtime-20260401",
             "vm-power-control-execution-required-live-kd-20260408",
             "vm-power-control-execution-required-reader-kd-20260408",
+            "vm-power-control-execution-required-reboot-batch-20260331",
             "vm-power-control-execution-required-reglineage-kd-20260408",
             "ghidra-power-control-execution-required-binding-20260408",
             "ghidra-power-control-execution-required-readers-20260408"
@@ -18257,6 +18273,20 @@
           "strength": "high",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-reboot-batch-20260331",
+          "kind": "vm-test",
+          "title": "KVM lightweight runtime lane rebooted the execution-required pair and still returned no-hit after reboot",
+          "location": "evidence/files/vm-tooling-staging/power-control-batch-lightweight-runtime-primary-20260331-191300/summary.json and evidence/files/vm-tooling-staging/power-control-batch-lightweight-runtime-primary-20260331-191300/results.json and evidence/files/vm-tooling-staging/power-control-batch-lightweight-runtime-primary-20260331-191300/state.json and research/notes/power-control-execution-required-reboot-diff-follow-up-20260408.md",
+          "summary": "A retained broad lightweight runtime lane armed `AllowSystemRequiredPowerRequests` and `AllowAudioToEnableExecutionRequiredPowerRequests` from baseline-missing to candidate value `1`, completed a real `reboot_mode=soft` cycle with healthy shell state before and after reboot, and still returned `no-hit` for both pair members in the post-boot batch result.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk",
             "version-scope"
           ],
           "origin": "VM test / probe"
