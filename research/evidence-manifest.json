@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T12:01:08.467767Z",
+  "generated_utc": "2026-04-08T12:09:06.436285Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 321,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T12:01:07.765886Z",
+      "generated_utc": "2026-04-08T12:09:05.710166Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -17804,13 +17804,13 @@
         }
       },
       "source_file": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
-      "source_file_sha256": "15189c497a2d6c771ddc9c57d5b1a71f91867e240312f85f392b40b2adf234b6",
-      "source_file_size_bytes": 20993,
+      "source_file_sha256": "bc75d49be673ff32d2df0cc382c3acda1053019ff64702aa5ae24f752af2d7af",
+      "source_file_size_bytes": 23256,
       "name": "Allow Audio To Enable Execution Required Power Requests",
       "category": "Power",
       "area": "Control Power Requests",
       "scope": "device",
-      "summary": "Draft Control Power record. `AllowAudioToEnableExecutionRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. Later KVM local-KD passes first surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and then resolved its live current-build value as `1`, aligning the running kernel with the repo-doc default. A later current-build disassembly pass then showed a direct consumer in `nt!PopPowerRequestEvaluateExecutionRequiredStatus`. The lane is strong enough for a schema-backed draft, but still lacks a registry seeding path and an exact runtime registry read.",
+      "summary": "Draft Control Power record. `AllowAudioToEnableExecutionRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. Later KVM local-KD passes first surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and then resolved its live current-build value as `1`, aligning the running kernel with the repo-doc default. A later current-build disassembly pass then showed a direct consumer in `nt!PopPowerRequestEvaluateExecutionRequiredStatus`. A later UMPO follow-up then showed `nt!PopUmpoSendPowerRequestOverrideQuery` packaging requester state and dispatching `nt!PopUmpoSendPowerMessage`, keeping the visible family callback/init/UMPO-query centric. The lane is strong enough for a schema-backed draft, but still lacks a registry seeding path and an exact runtime registry read.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -17818,7 +17818,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, and direct current-build callback/reader disassembly. It is not ready for validation because no current-build registry seeding path has been demonstrated and an exact runtime registry read remains unresolved.",
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, and a visible UMPO override-query lineage. It is not ready for validation because no current-build registry seeding path has been demonstrated and an exact runtime registry read remains unresolved.",
         "blocking_issues": [
           "no-current-build-registry-seeding-path",
           "no-primary-current-build-doc"
@@ -17837,7 +17837,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
           "value_type": "REG_DWORD",
-          "notes": "Later retained KVM local-KD passes surfaced `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, read its live value as `1`, and showed a direct consumer in `PopPowerRequestEvaluateExecutionRequiredStatus`, but no registry seeding path or narrow replay result is retained yet.",
+          "notes": "Later retained KVM local-KD passes surfaced `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, read its live value as `1`, showed a direct consumer in `PopPowerRequestEvaluateExecutionRequiredStatus`, and then showed `PopPowerRequestOverrideInitialize -> PopUmpoSendPowerRequestOverrideQuery -> PopUmpoSendPowerMessage`, but no registry seeding path or narrow replay result is retained yet.",
           "allowed_values": [
             {
               "state_kind": "missing",
@@ -18051,6 +18051,19 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-umpo-lineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD disassembly shows UMPO override-query lineage without a visible registry read",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a.log",
+          "summary": "A retained KVM local-KD follow-up showed `PopUmpoSendPowerRequestOverrideQuery` calling `PoStoreRequester`, allocating an `Umpo`-tagged buffer, and dispatching `PopUmpoSendPowerMessage`. The same wildcard pass exposed `PopUmpoSendPowerRequestCreate`, `PopUmpoSendPowerRequestAction`, and `PopUmpoSendPowerRequestOverrideCleanup`, keeping the visible lineage callback/init/UMPO-query centric rather than registry-backed.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": null,
@@ -18138,13 +18151,13 @@
         }
       },
       "source_file": "research/records/power.control.allow-system-required-power-requests.json",
-      "source_file_sha256": "648c9a19f884d8f43330e2b64bce5399d3d5528a5817997b4233d66a6f31be4f",
-      "source_file_size_bytes": 19281,
+      "source_file_sha256": "84c37d6015e803b36a9fd3df8df1f30673af0a01e650793f711a247605cd795f",
+      "source_file_size_bytes": 21544,
       "name": "Allow System Required Power Requests",
       "category": "Power",
       "area": "Control Power Requests",
       "scope": "device",
-      "summary": "Draft Control Power record. `AllowSystemRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. A later KVM local-KD pass then resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, which aligns with the repo-doc default. A later current-build disassembly pass then showed direct consumers in `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`. The lane is strong enough for a schema-backed draft, but still lacks a registry seeding path and an exact runtime registry read.",
+      "summary": "Draft Control Power record. `AllowSystemRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. A later KVM local-KD pass then resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, which aligns with the repo-doc default. A later current-build disassembly pass then showed direct consumers in `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`. A later UMPO follow-up then showed `nt!PopUmpoSendPowerRequestOverrideQuery` packaging requester state and dispatching `nt!PopUmpoSendPowerMessage`, keeping the visible family callback/init/UMPO-query centric. The lane is strong enough for a schema-backed draft, but still lacks a registry seeding path and an exact runtime registry read.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -18152,7 +18165,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, and direct current-build callback/reader disassembly. It is not ready for validation because no current-build registry seeding path has been demonstrated and an exact runtime registry read remains unresolved.",
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, and a visible UMPO override-query lineage. It is not ready for validation because no current-build registry seeding path has been demonstrated and an exact runtime registry read remains unresolved.",
         "blocking_issues": [
           "no-current-build-registry-seeding-path",
           "no-primary-current-build-doc"
@@ -18171,7 +18184,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "AllowSystemRequiredPowerRequests",
           "value_type": "REG_DWORD",
-          "notes": "Later retained KVM local-KD passes resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, showed direct consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`, and showed an init/override path without a visible registry read, but no registry seeding path or narrow replay result is retained yet.",
+          "notes": "Later retained KVM local-KD passes resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, showed direct consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`, showed an init/override path without a visible registry read, and then showed `PopPowerRequestOverrideInitialize -> PopUmpoSendPowerRequestOverrideQuery -> PopUmpoSendPowerMessage`, but no registry seeding path or narrow replay result is retained yet.",
           "allowed_values": [
             {
               "state_kind": "missing",
@@ -18365,6 +18378,19 @@
           "title": "KVM local-KD disassembly shows init and override path without a visible registry read",
           "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log",
           "summary": "A retained KVM local-KD disassembly pass showed `PopPowerRequestInitialize` only zeroing per-object fields, while `PopPowerRequestOverrideInitialize` iterated `PopPowerRequestObjectList` and called `PopUmpoSendPowerRequestOverrideQuery`. The visible init/override path did not expose a registry read.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-umpo-lineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD disassembly shows UMPO override-query lineage without a visible registry read",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a.log",
+          "summary": "A retained KVM local-KD follow-up showed `PopUmpoSendPowerRequestOverrideQuery` calling `PoStoreRequester`, allocating an `Umpo`-tagged buffer, and dispatching `PopUmpoSendPowerMessage`. The same wildcard pass exposed `PopUmpoSendPowerRequestCreate`, `PopUmpoSendPowerRequestAction`, and `PopUmpoSendPowerRequestOverrideCleanup`, keeping the visible lineage callback/init/UMPO-query centric rather than registry-backed.",
           "strength": "high",
           "supports": [
             "behavior",

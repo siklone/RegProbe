@@ -1,0 +1,133 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.016 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.015 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Wed Apr  8 05:04:40.816 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Wed Apr  8 05:04:40.945 2026 (UTC - 7:00)
+System Uptime: 0 days 23:46:04.684
+lkd> .sympath C:\Tools\Symbols\local-kd-powerrequest-umpo-20260408a
+Symbol search path is: C:\Tools\Symbols\local-kd-powerrequest-umpo-20260408a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-powerrequest-umpo-20260408a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-powerrequest-umpo-20260408a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!PopUmpoSendPowerRequestOverrideQuery
+fffff806`e7131678 nt!PopUmpoSendPowerRequestOverrideQuery (PopUmpoSendPowerRequestOverrideQuery)
+lkd> uf nt!PopUmpoSendPowerRequestOverrideQuery
+nt!PopUmpoSendPowerRequestOverrideQuery:
+fffff806`e7131678 488bc4          mov     rax,rsp
+fffff806`e713167b 48895810        mov     qword ptr [rax+10h],rbx
+fffff806`e713167f 48896818        mov     qword ptr [rax+18h],rbp
+fffff806`e7131683 48897020        mov     qword ptr [rax+20h],rsi
+fffff806`e7131687 57              push    rdi
+fffff806`e7131688 4883ec20        sub     rsp,20h
+fffff806`e713168c 4883600800      and     qword ptr [rax+8],0
+fffff806`e7131691 4c8d4008        lea     r8,[rax+8]
+fffff806`e7131695 488bf1          mov     rsi,rcx
+fffff806`e7131698 41b101          mov     r9b,1
+fffff806`e713169b 488b4960        mov     rcx,qword ptr [rcx+60h]
+fffff806`e713169f 33d2            xor     edx,edx
+fffff806`e71316a1 e88e000000      call    nt!PoStoreRequester (fffff806`e7131734)
+fffff806`e71316a6 488b6c2430      mov     rbp,qword ptr [rsp+30h]
+fffff806`e71316ab 41b8556d706f    mov     r8d,6F706D55h
+fffff806`e71316b1 b900010000      mov     ecx,100h
+fffff806`e71316b6 488d5510        lea     rdx,[rbp+10h]
+fffff806`e71316ba e8310a8400      call    nt!ExAllocatePool2 (fffff806`e79720f0)
+fffff806`e71316bf 488bf8          mov     rdi,rax
+fffff806`e71316c2 4885c0          test    rax,rax
+fffff806`e71316c5 7460            je      nt!PopUmpoSendPowerRequestOverrideQuery+0xaf (fffff806`e7131727)  Branch
+
+nt!PopUmpoSendPowerRequestOverrideQuery+0x4f:
+fffff806`e71316c7 488b4e60        mov     rcx,qword ptr [rsi+60h]
+fffff806`e71316cb 488d5010        lea     rdx,[rax+10h]
+fffff806`e71316cf 41b101          mov     r9b,1
+fffff806`e71316d2 4c8d442430      lea     r8,[rsp+30h]
+fffff806`e71316d7 e858000000      call    nt!PoStoreRequester (fffff806`e7131734)
+fffff806`e71316dc 8bd8            mov     ebx,eax
+fffff806`e71316de 85c0            test    eax,eax
+fffff806`e71316e0 7820            js      nt!PopUmpoSendPowerRequestOverrideQuery+0x8a (fffff806`e7131702)  Branch
+
+nt!PopUmpoSendPowerRequestOverrideQuery+0x6a:
+fffff806`e71316e2 c70708000000    mov     dword ptr [rdi],8
+fffff806`e71316e8 488d5510        lea     rdx,[rbp+10h]
+fffff806`e71316ec 8b4624          mov     eax,dword ptr [rsi+24h]
+fffff806`e71316ef 4533c9          xor     r9d,r9d
+fffff806`e71316f2 4533c0          xor     r8d,r8d
+fffff806`e71316f5 894708          mov     dword ptr [rdi+8],eax
+fffff806`e71316f8 488bcf          mov     rcx,rdi
+fffff806`e71316fb e890020000      call    nt!PopUmpoSendPowerMessage (fffff806`e7131990)
+fffff806`e7131700 8bd8            mov     ebx,eax
+
+nt!PopUmpoSendPowerRequestOverrideQuery+0x8a:
+fffff806`e7131702 ba556d706f      mov     edx,6F706D55h
+fffff806`e7131707 488bcf          mov     rcx,rdi
+fffff806`e713170a e8c1158400      call    nt!ExFreePoolWithTag (fffff806`e7972cd0)
+
+nt!PopUmpoSendPowerRequestOverrideQuery+0x97:
+fffff806`e713170f 488b6c2440      mov     rbp,qword ptr [rsp+40h]
+fffff806`e7131714 8bc3            mov     eax,ebx
+fffff806`e7131716 488b5c2438      mov     rbx,qword ptr [rsp+38h]
+fffff806`e713171b 488b742448      mov     rsi,qword ptr [rsp+48h]
+fffff806`e7131720 4883c420        add     rsp,20h
+fffff806`e7131724 5f              pop     rdi
+fffff806`e7131725 c3              ret
+
+nt!PopUmpoSendPowerRequestOverrideQuery+0xaf:
+fffff806`e7131727 bb9a0000c0      mov     ebx,0C000009Ah
+fffff806`e713172c ebe1            jmp     nt!PopUmpoSendPowerRequestOverrideQuery+0x97 (fffff806`e713170f)  Branch
+lkd> x nt!*Umpo*PowerRequest*
+fffff806`e755d040 nt!PopUmpoSendPowerRequestAction (PopUmpoSendPowerRequestAction)
+fffff806`e77bac40 nt!PopUmpoSendPowerRequestOverrideCleanup (PopUmpoSendPowerRequestOverrideCleanup)
+fffff806`e7866258 nt!PopUmpoSendPowerRequestCreate (PopUmpoSendPowerRequestCreate)
+fffff806`e7131678 nt!PopUmpoSendPowerRequestOverrideQuery (PopUmpoSendPowerRequestOverrideQuery)
+lkd> x nt!*Umpo*Override*
+fffff806`e77bac40 nt!PopUmpoSendPowerRequestOverrideCleanup (PopUmpoSendPowerRequestOverrideCleanup)
+fffff806`e7131678 nt!PopUmpoSendPowerRequestOverrideQuery (PopUmpoSendPowerRequestOverrideQuery)
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
