@@ -1,0 +1,224 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.kernel.timer-check-flags",
+  "tweak_id": "system.kernel.timer-check-flags",
+  "record_status": "draft",
+  "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass now also resolves `nt!KeTimerCheckFlags` on the running current build and reads its live value as `1`. The lane is therefore live-state-confirmed, but still lacks an exact runtime registry read and a current-build reader or seeding path.",
+  "setting": {
+    "name": "Timer Check Flags",
+    "category": "System",
+    "area": "Session Manager Kernel Timer Diagnostics",
+    "scope": "device",
+    "casual_explanation": "This appears to be a kernel-level Session Manager setting tied to timer-check behavior. It is kernel-adjacent and is being tracked as a research candidate, not a user-facing tweak.",
+    "why_people_change_it": "Kernel researchers may inspect this value when investigating timer bookkeeping, timer-free validation behavior, or undocumented kernel timer diagnostics.",
+    "tradeoffs_overview": "The value has a stronger than usual docs-first evidence chain because it has repo docs, baseline state, exact current-build string presence, WRK semantic source hits, a real write-and-reboot runtime lane, and now dedicated live current-build KD state. It is still too weak for a published tweak because the exact current-build reader path and exact runtime registry read remain unresolved.",
+    "professional_notes": "Repo docs assign `TimerCheckFlags = 1` under `Session Manager\\\\Kernel` and map it to `KeTimerCheckFlags`. The observed clean baseline later confirmed that the parent key exists while the value itself is absent. The broad current-build string batch found an exact Unicode hit for `TimerCheckFlags` in `ntoskrnl.exe`. Later source-enrichment over the WRK cache added stronger semantic support than a raw string hit: it retained `extern ULONG KeTimerCheckFlags;`, `ULONG KeTimerCheckFlags = KE_TIMER_CHECK_FREES;`, and a timer-object branch `if ((KeTimerCheckFlags & KE_TIMER_CHECK_FREES) == 0) {`, which strongly suggests the repo-doc default of `1` corresponds to the timer-free check bit being enabled in older kernel source. A later tools-hardened lightweight runtime lane wrote all 21 `Session Manager\\\\Kernel` batch values, including `TimerCheckFlags = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candidate in the ETW-derived query surface. A dedicated KVM local-KD follow-up then resolved `nt!KeTimerCheckFlags` and directly read its live current-build value as `1`, which aligns with both the repo-doc default and the older WRK initializer. The next proof step is no longer symbol existence or live state; it is a current-build reader or seeding path that explains whether the registry value is still an active override on modern builds.",
+    "targets": [
+      {
+        "target_id": "timer-check-flags",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "TimerCheckFlags",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Missing on observed baseline",
+            "meaning": "The parent path exists, but the value is absent on the observed clean baseline.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-timer-check-flags-existence-20260329"
+            ]
+          },
+          {
+            "state_kind": "documented-default",
+            "value": 1,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs assign a default value of `1` and map it to `KeTimerCheckFlags`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-timer-check-flags-doc-20260327"
+            ]
+          }
+        ],
+        "notes": "The lightweight runtime batch later wrote the value as `1` for one reboot, but did not produce an exact trace hit for this candidate. A dedicated KVM local-KD follow-up now also shows the live current-build global `KeTimerCheckFlags = 1`."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The app does not currently expose this kernel timer diagnostic policy as a tweak surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed baseline registry state",
+      "applies_to": "Win25H2Clean observed baseline",
+      "states": [
+        {
+          "target_id": "timer-check-flags",
+          "state_kind": "missing",
+          "value": null
+        }
+      ],
+      "notes": "Observed registry baseline only. Repo docs separately describe a likely built-in default of `1`.",
+      "evidence_ids": [
+        "vm-session-manager-kernel-timer-check-flags-existence-20260329"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-default-missing",
+      "label": "Observed default-missing state",
+      "intended_for": [
+        "Research tracking",
+        "Future timer-diagnostic validation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click tweak surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "timer-check-flags",
+          "state_kind": "missing",
+          "value": null
+        }
+      ],
+      "good_when": "You want to preserve the observed baseline until a tighter current-build timer-check proof path exists.",
+      "bad_when": "You need a validated non-default recommendation or production tweak.",
+      "tradeoffs": [
+        "Preserves the observed baseline registry state.",
+        "Avoids inventing unsupported non-default semantics.",
+        "Keeps the next proof step focused on live state and reader/seed validation rather than speculative mutation."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-session-manager-kernel-timer-check-flags-doc-20260327",
+        "vm-session-manager-kernel-timer-check-flags-existence-20260329",
+        "static-session-manager-kernel-timer-check-flags-string-20260331",
+        "analysis-session-manager-kernel-timer-check-flags-wrk-20260403",
+        "vm-session-manager-kernel-timer-check-flags-runtime-20260331"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-session-manager-kernel-timer-check-flags-doc-20260327",
+      "kind": "repo-doc",
+      "title": "Repo system docs assign TimerCheckFlags = 1",
+      "location": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
+      "summary": "Repo docs assign `TimerCheckFlags = 1` and map it to `KeTimerCheckFlags` under `Session Manager\\\\Kernel`.",
+      "supports": [
+        "path",
+        "value",
+        "default"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-timer-check-flags-existence-20260329",
+      "kind": "registry-observation",
+      "title": "Observed baseline existence for TimerCheckFlags",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while `TimerCheckFlags` itself is absent.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-session-manager-kernel-timer-check-flags-string-20260331",
+      "kind": "inference",
+      "title": "Current-build string hit for TimerCheckFlags",
+      "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+      "summary": "The broad current-build string batch found an exact Unicode hit for `TimerCheckFlags` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe` and no adjacent hits in the supporting `smss.exe`, `winload.exe`, or `ci.dll` probes.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "analysis-session-manager-kernel-timer-check-flags-wrk-20260403",
+      "kind": "analysis-output",
+      "title": "WRK source-enrichment retains KeTimerCheckFlags initialization and bit-test semantics",
+      "location": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json",
+      "summary": "The later source-enrichment pass retained WRK-backed hits for `extern ULONG KeTimerCheckFlags;`, `ULONG KeTimerCheckFlags = KE_TIMER_CHECK_FREES;`, and `if ((KeTimerCheckFlags & KE_TIMER_CHECK_FREES) == 0) {`, which strongly supports the repo-doc default of `1` as a timer-check bit-enabled state.",
+      "supports": [
+        "default",
+        "behavior",
+        "research-gap"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-timer-check-flags-runtime-20260331",
+      "kind": "vm-test",
+      "title": "Lightweight runtime batch wrote TimerCheckFlags = 1 and rebooted once",
+      "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
+      "summary": "The tools-hardened lightweight runtime batch wrote `TimerCheckFlags = 1`, rebooted once, preserved shell health, and still returned `no-hit` for this specific candidate in the compact runtime results.",
+      "supports": [
+        "behavior",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-timer-check-flags-kd-20260408",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD bundle resolves KeTimerCheckFlags = 1",
+      "location": "evidence/files/vm-tooling-staging/local-kd-timercheckflags-20260408a/local-kd-timercheckflags-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-timercheckflags-20260408a/local-kd-timercheckflags-20260408a.log",
+      "summary": "A dedicated live KVM local-KD bundle resolved `nt!KeTimerCheckFlags` and directly read the running current-build value as `1`.",
+      "supports": [
+        "behavior",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, current-build string hit, WRK-backed semantic source evidence, a real write-and-reboot runtime lane, and dedicated live current-build KD proof that `KeTimerCheckFlags = 1`. It is not ready for validation because the exact registry reader/caller path and exact runtime registry read remain unproven.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "no-current-build-reader-path",
+      "runtime_no_read",
+      "no-primary-current-build-doc",
+      "non-default-semantics-unproven"
+    ]
+  },
+  "open_questions": [
+    "What current-build path reads or seeds `KeTimerCheckFlags` from `Session Manager\\\\Kernel`, if any?",
+    "Does a present `REG_DWORD = 1` alter timer-check behavior only at boot or also post-boot?",
+    "Is the WRK `KE_TIMER_CHECK_FREES` mapping still semantically accurate on modern current builds?"
+  ],
+  "tested_on": [
+    {
+      "environment": "Win25H2Clean observed baseline and VMware lightweight runtime batch",
+      "os": "Windows 11 25H2",
+      "build": "26200",
+      "notes": "The lane currently combines baseline existence, exact current-build string presence, WRK semantic source retention, and a write-and-reboot runtime attempt that left the candidate in `no-hit` hold."
+    },
+    {
+      "environment": "KVM local-KD live guest session",
+      "os": "Windows 11",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "Current-build live local-KD resolved `nt!KeTimerCheckFlags` and directly read its value as `1`."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-08T04:24:00Z"
+}

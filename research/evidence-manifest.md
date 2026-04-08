@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 317 |
+| Total records | 318 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 317 |
+| Records with evidence | 318 |
 | Records without evidence | 0 |
-| Records missing validation proof | 7 |
+| Records missing validation proof | 8 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
 | Class B | 7 |
-| Class D | 7 |
+| Class D | 8 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -91,6 +91,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.kernel-dpc-watchdog-profile-cluster` | draft | Class D | `research/records/system.kernel-dpc-watchdog-profile-cluster.json` | - | `29eea49b72490c92b6fc8f4395f16ab0596fe08b17adacc54380ef4e5dcd8d74` |  | 11 |
 | `system.kernel-long-dpc-threshold-cluster` | draft | Class D | `research/records/system.kernel-long-dpc-threshold-cluster.json` | - | `2b269c7f761ce8fe318e793f2c03bf451101295d87fcd941b982ff552b0853cd` |  | 11 |
 | `system.kernel.force-bugcheck-for-dpc-watchdog` | draft | Class D | `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json` | - | `ad03e9fc71c89ef34719a6f1c8631f543706ee97a9138953ec7e8bdad76e0aeb` |  | 5 |
+| `system.kernel.timer-check-flags` | draft | Class D | `research/records/system.kernel.timer-check-flags.json` | - | `77dad43afedb5cfe5267e4d33d2266dd6f4c42668d4b8f756267a8efe2834826` |  | 6 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `2e8053f4aeab4f0243766f5a9e162a63718ad28531ca0c67596f809d321c3a9a` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 4 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `38d95a78250ad13246ba60ac4b5d00aaf60f1a112c9d6ec1a833e46ead952460` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 4 |
 | `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `43edcdbd0c4ea253fc61461681abc0fba6fd2a6654827d06d505f293078a14c9` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 3 |
@@ -2067,6 +2068,29 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `static-session-manager-kernel-force-bugcheck-string-20260331` | `inference` | Current-build string hit for ForceBugcheckForDpcWatchdog | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
 | `vm-session-manager-kernel-force-bugcheck-runtime-20260331` | `vm-test` | Lightweight runtime batch wrote ForceBugcheckForDpcWatchdog = 1 and rebooted once | [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) |
 | `vm-session-manager-kernel-force-bugcheck-kd-20260407` | `vm-test` | Dedicated KVM local-KD bundle resolves KiForceBugcheckForDpcWatchdog = 0 | [evidence/files/vm/dpc-watchdog-force-bugcheck-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-force-bugcheck-kd-20260407a/dpc-watchdog-force-bugcheck-kd-20260407a.stdout.txt](../evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/dpc-watchdog-force-bugcheck-kd-20260407a.stdout.txt) |
+
+---
+
+### `system.kernel.timer-check-flags`
+
+- Status: `draft`
+- Evidence class: `Class D`
+- Source file: `research/records/system.kernel.timer-check-flags.json`
+- Source SHA256: `77dad43afedb5cfe5267e4d33d2266dd6f4c42668d4b8f756267a8efe2834826`
+- Proof SHA256: ``
+
+**Summary:** Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass now also resolves `nt!KeTimerCheckFlags` on the running current build and reads its live value as `1`. The lane is therefore live-state-confirmed, but still lacks an exact runtime registry read and a current-build reader or seeding path.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-session-manager-kernel-timer-check-flags-doc-20260327` | `repo-doc` | Repo system docs assign TimerCheckFlags = 1 | [Docs/system/system.md](../Docs/system/system.md) and [research/notes/kernel-power-96-key-routing-20260327.md](notes/kernel-power-96-key-routing-20260327.md) |
+| `vm-session-manager-kernel-timer-check-flags-existence-20260329` | `registry-observation` | Observed baseline existence for TimerCheckFlags | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-session-manager-kernel-timer-check-flags-string-20260331` | `inference` | Current-build string hit for TimerCheckFlags | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
+| `analysis-session-manager-kernel-timer-check-flags-wrk-20260403` | `analysis-output` | WRK source-enrichment retains KeTimerCheckFlags initialization and bit-test semantics | [registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json](../registry-research-framework/enrichment/outputs/source-enrichment-20260403-192135/master-enrichment.json) |
+| `vm-session-manager-kernel-timer-check-flags-runtime-20260331` | `vm-test` | Lightweight runtime batch wrote TimerCheckFlags = 1 and rebooted once | [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) |
+| `vm-session-manager-kernel-timer-check-flags-kd-20260408` | `vm-test` | Dedicated KVM local-KD bundle resolves KeTimerCheckFlags = 1 | [evidence/files/vm/local-kd-timercheckflags-20260408a/local-kd-timercheckflags-20260408a-summary.json](../evidence/files/vm-tooling-staging/local-kd-timercheckflags-20260408a/local-kd-timercheckflags-20260408a-summary.json) and [evidence/files/vm/local-kd-timercheckflags-20260408a/local-kd-timercheckflags-20260408a.log](../evidence/files/vm-tooling-staging/local-kd-timercheckflags-20260408a/local-kd-timercheckflags-20260408a.log) |
 
 ---
 

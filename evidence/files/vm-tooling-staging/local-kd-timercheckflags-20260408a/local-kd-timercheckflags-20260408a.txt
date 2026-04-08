@@ -1,0 +1,8 @@
+.sympath C:\Tools\Symbols\local-kd-timercheckflags-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!KeTimerCheckFlags
+dd nt!KeTimerCheckFlags L1
+.echo REGPROBE_TIMERCHECKFLAGS_DONE
+.echo REGPROBE_LOCALKD_END
+q
