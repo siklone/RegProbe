@@ -1,0 +1,31 @@
+{
+  "artifact_id": "kvm-qga-foreground-diagnose-20260408a",
+  "captured_on": "2026-04-08",
+  "domain": "regprobe-win11-25h2-session",
+  "scope": "execution-required KVM guest-control diagnosis",
+  "findings": [
+    {
+      "step": "stop_service",
+      "command": "sc stop QEMU-GA",
+      "guest_result": "service reached STOP_PENDING and then STOPPED in the visible console",
+      "host_result": "guest-ping changed to `Guest agent is not responding: QEMU guest agent is not connected`"
+    },
+    {
+      "step": "foreground_launch",
+      "command": "qemu-ga.exe -v -p \\\\.\\Global\\org.qemu.guest_agent.0",
+      "guest_result": "foreground console printed repeated `debug: dispatch` lines",
+      "host_result": "guest-ping changed back to `QEMU guest agent is not available due to an error`"
+    },
+    {
+      "step": "namespace_probe",
+      "command": "powershell -NoLogo -Command \"Test-Path '\\\\.\\Global\\org.qemu.guest_agent.0'; Test-Path '\\\\.\\Global\\com.redhat.spice.0'\"",
+      "guest_result": "both probes returned `Access is denied` followed by `False`"
+    }
+  ],
+  "screenshots": [
+    "regprobe-qga-stop2.png",
+    "regprobe-qga-foreground2.png",
+    "regprobe-qga-testpath.png"
+  ],
+  "conclusion": "The post-bootstrap blocker persists even when qga is launched directly in the foreground on the expected guest-agent path. The failure is therefore narrower than missing installation or a broken Windows service wrapper."
+}
