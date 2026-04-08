@@ -71,5 +71,81 @@ class PipelineCaptureStatusTests(unittest.TestCase):
         self.assertFalse(v31_pipeline.runner_required({"suspected_layer": "user-mode", "boot_phase_relevant": False}))
 
 
+class RegistrySideeffectPipelineTests(unittest.TestCase):
+    def test_parse_registry_sideeffect_report_text_prefers_value_counts(self) -> None:
+        report = "\n".join(
+            [
+                "Registry sideeffect diff",
+                "Detected format: semantic-registry (registry-export -> registry-dump-text)",
+                "Summary counts",
+                "- added_keys: 1",
+                "- removed_keys: 1",
+                "- added_values: 3",
+                "- removed_values: 2",
+                "- modified_values: 1",
+                "- unchanged_values: 7",
+            ]
+        )
+
+        payload = v31_pipeline.parse_registry_sideeffect_report_text(report)
+
+        self.assertEqual(payload["format"], "semantic-registry")
+        self.assertEqual(payload["sideeffect_count"], 6)
+        self.assertEqual(payload["counts"]["added_keys"], 1)
+        self.assertEqual(payload["counts"]["modified_values"], 1)
+
+    def test_parse_registry_sideeffect_report_text_uses_generic_line_counts(self) -> None:
+        report = "\n".join(
+            [
+                "Registry sideeffect diff",
+                "Detected format: generic-text",
+                "Summary counts",
+                "- added_lines: 12",
+                "- removed_lines: 8",
+            ]
+        )
+
+        payload = v31_pipeline.parse_registry_sideeffect_report_text(report)
+
+        self.assertEqual(payload["format"], "generic-text")
+        self.assertEqual(payload["sideeffect_count"], 20)
+        self.assertEqual(payload["counts"]["added_lines"], 12)
+
+    def test_extract_registry_sideeffects_reads_diff_report_file(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT / "registry-research-framework" / "audit") as temp_root:
+            temp_path = Path(temp_root)
+            report_path = temp_path / "sideeffect-report.txt"
+            report_path.write_text(
+                "\n".join(
+                    [
+                        "Registry sideeffect diff",
+                        "Detected format: semantic-registry (registry-export -> registry-dump-text)",
+                        "Summary counts",
+                        "- added_keys: 0",
+                        "- removed_keys: 0",
+                        "- added_values: 0",
+                        "- removed_values: 0",
+                        "- modified_values: 0",
+                        "- unchanged_values: 3019",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            repo_ref = report_path.relative_to(REPO_ROOT).as_posix()
+
+            payload = v31_pipeline.extract_registry_sideeffects(
+                {"diff_file": repo_ref},
+                None,
+                None,
+            )
+
+            self.assertTrue(payload["executed"])
+            self.assertEqual(payload["sideeffect_count"], 0)
+            self.assertEqual(payload["format"], "semantic-registry")
+            self.assertIn("3019", str(payload["summary_counts"]["unchanged_values"]))
+            self.assertIn(repo_ref, payload["diff_file"])
+
+
 if __name__ == "__main__":
     unittest.main()
