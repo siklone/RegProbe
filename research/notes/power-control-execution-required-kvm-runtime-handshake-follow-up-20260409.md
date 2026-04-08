@@ -16,7 +16,11 @@ Probe the post-open qga failure mode more directly after path discovery was clos
 4. Host-side qga control still does not recover:
    - after the runtime-handshake probe, `guest-ping` returned `Guest agent is not responding: QEMU guest agent is not connected`
    - HMP `info chardev` still reported the qga channel as `disconnected`
+5. Upstream qga source also makes the retained logfile signal less optimistic than it first looks:
+   - `qga/channel-win32.c` logs `g_debug("dispatch")` inside `ga_channel_dispatch()`
+   - that callback runs after the Windows watch source becomes ready through the normal `prepare/check/dispatch` cycle
+   - so repeated `debug: dispatch` is evidence that the main-loop callback is alive, not proof that the host-side qga handshake succeeded
 
 ## Interpretation
 
-The KVM qga blocker is now narrower than a generic runtime/protocol failure, but it is also quieter than expected from inside Windows. After path discovery was closed, the next retained probe still does not surface a new Windows event-log explanation or a crisp qga startup error. The guest-side signal currently collapses to repeated `debug: dispatch` lines with no fresh matching Application events, while the host continues to see a disconnected qga channel. The remaining issue therefore looks like a silent post-launch qga stall or libvirt/KVM-side handshake failure rather than a missing path or a clear Windows-side runtime exception.
+The KVM qga blocker is now narrower than a generic runtime/protocol failure, but it is also quieter than expected from inside Windows. After path discovery was closed, the next retained probe still does not surface a new Windows event-log explanation or a crisp qga startup error. The guest-side signal currently collapses to repeated `debug: dispatch` lines with no fresh matching Application events, and upstream qga source says those `dispatch` lines only prove the Windows GLib watch callback is cycling, not that host-side guest-agent negotiation succeeded. The host continues to see a disconnected qga channel. The remaining issue therefore looks like a silent post-launch qga stall or libvirt/KVM-side handshake failure rather than a missing path or a clear Windows-side runtime exception.
