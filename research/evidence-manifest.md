@@ -6,18 +6,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 319 |
+| Total records | 320 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 319 |
+| Records with evidence | 320 |
 | Records without evidence | 0 |
-| Records missing validation proof | 9 |
+| Records missing validation proof | 10 |
 | Deprecated missing validation proof | 0 |
 | Class A | 248 |
 | Class B | 7 |
-| Class D | 9 |
+| Class D | 10 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -84,6 +84,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `f45d02d04cc4faaaa5601d6bbbf6bacbd1318a39b52ef5f1a8f1f4f6fb8aca88` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `a9c1bf72aff1344998c40660114164bd9cd227532b71596add3199eeaf2b4045` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `e920c554f7b4add5325a179d2df511c65d7cf12140e051b712dd7bb504ee2d18` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
+| `power.control.allow-system-required-power-requests` | draft | Class D | `research/records/power.control.allow-system-required-power-requests.json` | - | `829d5c9800715a91def8d0756992325a3dc9bd056961b72dba5368480af165ec` |  | 5 |
 | `power.control.power-watchdog-timeout-cluster` | draft | Class D | `research/records/power.control.power-watchdog-timeout-cluster.json` | - | `43248b00792f0f9bfecbb053d4d3dbef8d59fd013233f6b41b7f1aa6bb700d68` |  | 4 |
 | `power.control.win32k-callout-watchdog-timeout-seconds` | draft | Class D | `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json` | - | `529e2adfa92ef2ef81910f7ced3f98c2de0f0652a0c7b3379a0e35e29dcce003` |  | 4 |
 | `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class D | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `9f225d3d01745832a87ae42eebbc4df923b193dde062b6e31650887d3e138a6f` |  | 7 |
@@ -1898,6 +1899,28 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [research/notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt](notes/service-snapshots/wersvc-sc-qc-2026-03-14.txt) |
 | Exact quote / path | SERVICE_NAME: WerSvc \| START_TYPE : 4 DISABLED \| DISPLAY_NAME: Windows Error Reporting Service \| BINARY_PATH_NAME: [evidence/files/external/c/WINDOWS/System32/svchost.exe.md](../evidence/files/external/c/WINDOWS/System32/svchost.exe.md) -k WerSvcGroup |
 | Notes | The local SCM snapshot proves the exact service identity and control surface on the review host. Microsoft's official guidance evidence remains the basis for the `Don't disable` blocker. |
+
+---
+
+### `power.control.allow-system-required-power-requests`
+
+- Status: `draft`
+- Evidence class: `Class D`
+- Source file: `research/records/power.control.allow-system-required-power-requests.json`
+- Source SHA256: `829d5c9800715a91def8d0756992325a3dc9bd056961b72dba5368480af165ec`
+- Proof SHA256: ``
+
+**Summary:** Draft Control Power record. `AllowSystemRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. The lane is strong enough for a schema-backed draft, but still lacks live current-build state, a current-build reader or seeding path, and an exact runtime registry read.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-control-allow-system-required-power-requests-doc-20260327` | `repo-doc` | Repo power docs assign AllowSystemRequiredPowerRequests = 1 | [Docs/power/power.md](../Docs/power/power.md) and [research/notes/kernel-power-96-key-routing-20260327.md](notes/kernel-power-96-key-routing-20260327.md) |
+| `vm-power-control-allow-system-required-power-requests-existence-20260329` | `registry-observation` | Observed baseline existence for AllowSystemRequiredPowerRequests | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) |
+| `static-power-control-allow-system-required-power-requests-string-20260331` | `inference` | Current-build string hit for AllowSystemRequiredPowerRequests | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) |
+| `analysis-power-control-allow-system-required-power-requests-enrichment-20260403` | `analysis-output` | Source-enrichment keeps AllowSystemRequiredPowerRequests as a docs-first kernel candidate with a power-request trigger family | [registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/power.control.allow-system-required-power-requests.json](../registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/power.control.allow-system-required-power-requests.json) |
+| `repo-power-control-allow-system-required-power-requests-trigger-20260408` | `repo-code` | Repo guest tooling now exposes a named power-request-simulation harness | scripts/vm/guest-tools/run-registry-policy-probe.ps1 and scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1 |
 
 ---
 
