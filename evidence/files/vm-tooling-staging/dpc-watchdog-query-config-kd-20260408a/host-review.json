@@ -1,0 +1,20 @@
+{
+  "run_id": "dpc-watchdog-query-config-kd-20260408a",
+  "status": "ok",
+  "completed": true,
+  "query_symbol": "nt!ExpQuerySystemInformation",
+  "confirmed_edges": [
+    "NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation"
+  ],
+  "resolved_symbols": [
+    "nt!NtQuerySystemInformation",
+    "nt!ExpQuerySystemInformation"
+  ],
+  "negative_results": [
+    "No symbolized KeQueryDpcWatchdogConfiguration callsite appeared in the captured ExpQuerySystemInformation L400 dispatch slice."
+  ],
+  "notes": [
+    "This canonicalizes the exact outer query wrapper for the DPC watchdog configuration lane on the current build.",
+    "The remaining query-side blocker is now the inner ExpQuerySystemInformation arm, not the existence of a live query lineage."
+  ]
+}

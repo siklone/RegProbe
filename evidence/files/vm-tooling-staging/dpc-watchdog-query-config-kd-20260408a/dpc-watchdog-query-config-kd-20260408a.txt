@@ -1,0 +1,9 @@
+.sympath C:\Tools\Symbols\dpc-watchdog-query-config-kd-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!NtQuerySystemInformation
+x nt!ExpQuerySystemInformation
+u nt!NtQuerySystemInformation L120
+u nt!ExpQuerySystemInformation L400
+.echo REGPROBE_LOCALKD_END
+q
