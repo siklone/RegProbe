@@ -13,7 +13,7 @@
     "casual_explanation": "This cluster appears to expose low-level thresholds for what the kernel considers a long DPC queue condition and a long DPC runtime condition. It is kernel-adjacent and not a normal user setting.",
     "why_people_change_it": "Kernel researchers may inspect these values when investigating DPC latency behavior, watchdog escalation, or undocumented scheduler-tuning guides.",
     "tradeoffs_overview": "The cluster has explicit repo-doc defaults, clean baseline state, exact current-build string hits, and a broad runtime no-hit lane. It is strong enough for a schema-backed draft, but still too weak for a published tweak or a recommended non-default configuration.",
-    "professional_notes": "Repo docs list `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` under `Session Manager\\\\Kernel`, mapped to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`. The kernel-power routing pass already grouped both values inside the `Session Manager\\\\Kernel` docs cluster. The observed clean baseline later confirmed that the parent key exists while both values are absent. The targeted current-build string batch then found exact Unicode hits for both values in `ntoskrnl.exe`, which is stronger than a pure docs-only lead and enough to keep the family out of raw backlog. The later lightweight runtime replay explicitly armed both values from `null` to `1`, rebooted once, and still left both values in the residual `no-hit` hold, which is more informative than a generic no-hit because it demonstrates that a simple present-and-nonzero mutation did not surface a trace hit in that broad lane. Existing source-enrichment outputs converge on the same low-priority next lane for both values: `timer-dpc-stress`, `windbg` queue, with no stronger source-code or header corroboration. This cluster therefore belongs in the canonical research set, but as a docs-first DPC sibling family rather than an actively promoted tweak lane.",
+    "professional_notes": "Repo docs list `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` under `Session Manager\\\\Kernel`, mapped to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`. The kernel-power routing pass already grouped both values inside the `Session Manager\\\\Kernel` docs cluster. The observed clean baseline later confirmed that the parent key exists while both values are absent. The targeted current-build string batch then found exact Unicode hits for both values in `ntoskrnl.exe`, which is stronger than a pure docs-only lead and enough to keep the family out of raw backlog. The later lightweight runtime replay explicitly armed both values from `null` to `1`, rebooted once, and still left both values in the residual `no-hit` hold, which is more informative than a generic no-hit because it demonstrates that a simple present-and-nonzero mutation did not surface a trace hit in that broad lane. Existing source-enrichment outputs converge on the same low-priority next lane for both values: `timer-dpc-stress`, `windbg` queue. A follow-up repo scan then identified the nearest reusable guest trigger surface already in-tree: `Invoke-TimerResolutionTrigger` inside `scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1`, which directly exercises `NtSetTimerResolution` and `timeBeginPeriod`. That does not fully close the trigger gap, but it means the next proof step is now concrete: build a dedicated `timer-dpc-stress` harness on top of that primitive rather than inventing a trigger family from scratch. This cluster therefore belongs in the canonical research set, but as a docs-first DPC sibling family rather than an actively promoted tweak lane.",
     "targets": [
       {
         "target_id": "long-dpc-queue-threshold",
@@ -136,7 +136,8 @@
         "vm-session-manager-kernel-long-dpc-threshold-existence-20260329",
         "static-session-manager-kernel-long-dpc-threshold-string-20260331",
         "vm-session-manager-kernel-long-dpc-threshold-runtime-20260331",
-        "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403"
+        "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403",
+        "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408"
       ]
     }
   ],
@@ -205,6 +206,18 @@
         "version-scope"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408",
+      "kind": "repo-code",
+      "title": "Repo guest tooling already exposes a reusable timer-resolution trigger primitive",
+      "location": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1 and scripts/source_enrichment_scan.py",
+      "summary": "The repo already contains `Invoke-TimerResolutionTrigger`, which directly calls `NtSetTimerResolution` and `timeBeginPeriod`, and this aligns with the enrichment recommendation that the next lane should use `timer-dpc-stress` triggers such as high-resolution timer requests and DPC-heavy workload.",
+      "supports": [
+        "behavior",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -220,13 +233,15 @@
       "no-current-build-caller-path",
       "runtime_no_read",
       "no-doc-source-outside-repo",
-      "live-state-unproven"
+      "live-state-unproven",
+      "no-dedicated-timer-dpc-stress-harness"
     ]
   },
   "open_questions": [
     "Which current-build caller, if any, seeds or reads `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold` from `Session Manager\\\\Kernel`?",
     "Are the repo-doc defaults built-in live defaults, boot-only overrides, or stale mappings from an older build family?",
-    "Would a targeted `timer-dpc-stress` or debugger-assisted lane surface live state or a real query/set path for either value?"
+    "Would a targeted `timer-dpc-stress` or debugger-assisted lane surface live state or a real query/set path for either value?",
+    "Is `Invoke-TimerResolutionTrigger` alone enough to perturb the `KiLongDpc*Threshold` lane, or does the dedicated harness need concurrent timers and a stronger DPC-heavy load?"
   ],
   "tested_on": [
     {
