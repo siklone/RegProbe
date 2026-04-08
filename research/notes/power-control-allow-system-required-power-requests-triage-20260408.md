@@ -16,6 +16,7 @@
 - The same wildcard KD sweep also surfaced the sibling symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, but did not read its value.
 - A later current-build KVM local-KD disassembly pass then showed direct reads of `nt!PopPowerRequestConvertSystemToExecution` inside `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`.
 - A later wildcard lineage pass then showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family.
+- A later init/override disassembly pass then showed `PopPowerRequestInitialize` only zeroing fields and `PopPowerRequestOverrideInitialize` iterating `PopPowerRequestObjectList` before calling `PopUmpoSendPowerRequestOverrideQuery`, without a visible registry read.
 
 ## Source artifacts
 
@@ -32,6 +33,8 @@
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a-summary.json`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log`
+- `evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a-summary.json`
+- `evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log`
 
 ## Interpretation
 
@@ -44,6 +47,7 @@
   - live KVM local-KD value `PopPowerRequestConvertSystemToExecution = 1`
   - direct current-build consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`
   - current-build callback/init lineage anchored by `PopPowerRequestExecutionRequiredSettingCallback`
+  - visible init/override path still does not show a registry read
 - narrowed conclusion:
   - `AllowSystemRequiredPowerRequests` is stronger than a pure docs-first backlog item
   - the value belongs in the canonical research set as a power-request draft

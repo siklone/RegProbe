@@ -16,6 +16,7 @@
 - A later direct KVM local-KD pass then resolved live current-build `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1`.
 - A later current-build KVM local-KD disassembly pass then showed `nt!PopPowerRequestEvaluateExecutionRequiredStatus` directly comparing `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` against the caller-supplied execution-required state.
 - A later wildcard lineage pass then showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family.
+- A later init/override disassembly pass then showed `PopPowerRequestInitialize` only zeroing fields and `PopPowerRequestOverrideInitialize` iterating `PopPowerRequestObjectList` before calling `PopUmpoSendPowerRequestOverrideQuery`, without a visible registry read.
 
 ## Source artifacts
 
@@ -33,6 +34,8 @@
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd-powerrequest-reader-20260408a.log`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a-summary.json`
 - `evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log`
+- `evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a-summary.json`
+- `evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log`
 
 ## Interpretation
 
@@ -46,6 +49,7 @@
   - live KVM local-KD value `PopPowerRequestActiveAudioEnablesExecutionRequired = 1`
   - direct current-build consumer read in `PopPowerRequestEvaluateExecutionRequiredStatus`
   - current-build callback/init lineage anchored by `PopPowerRequestExecutionRequiredSettingCallback`
+  - visible init/override path still does not show a registry read
 - narrowed conclusion:
   - `AllowAudioToEnableExecutionRequiredPowerRequests` is stronger than a pure docs-first backlog item
   - the value belongs in the canonical research set as a power-request draft

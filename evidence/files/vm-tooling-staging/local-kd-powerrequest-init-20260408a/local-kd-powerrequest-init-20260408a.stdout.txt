@@ -1,0 +1,114 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.015 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.016 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Wed Apr  8 04:56:03.075 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Wed Apr  8 04:56:03.192 2026 (UTC - 7:00)
+System Uptime: 0 days 23:37:26.931
+lkd> .sympath C:\Tools\Symbols\local-kd-powerrequest-init-20260408a
+Symbol search path is: C:\Tools\Symbols\local-kd-powerrequest-init-20260408a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-powerrequest-init-20260408a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-powerrequest-init-20260408a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!PopPowerRequestInitialize
+fffff806`e7a2de8c nt!PopPowerRequestInitialize (PopPowerRequestInitialize)
+lkd> uf nt!PopPowerRequestInitialize
+nt!PopPowerRequestInitialize:
+fffff806`e7a2de8c 48ff1505f30a00  call    qword ptr [nt! ?? ::EKOMKFNL::`string' <PERF> (nt+0xcdd198) (fffff806`e7add198)]
+fffff806`e7a2de93 0f1f440000      nop     dword ptr [rax+rax]
+fffff806`e7a2de98 4883a79800000000 and     qword ptr [rdi+98h],0
+fffff806`e7a2dea0 4883a7a000000000 and     qword ptr [rdi+0A0h],0
+fffff806`e7a2dea8 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+fffff806`e7a2dead 4883c420        add     rsp,20h
+fffff806`e7a2deb1 5f              pop     rdi
+fffff806`e7a2deb2 c3              ret
+lkd> x nt!PopPowerRequestOverrideInitialize
+fffff806`e7549db4 nt!PopPowerRequestOverrideInitialize (PopPowerRequestOverrideInitialize)
+lkd> uf nt!PopPowerRequestOverrideInitialize
+nt!PopPowerRequestOverrideInitialize:
+fffff806`e7549db4 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff806`e7549db9 57              push    rdi
+fffff806`e7549dba 4883ec20        sub     rsp,20h
+fffff806`e7549dbe 33c9            xor     ecx,ecx
+fffff806`e7549dc0 e83b683000      call    nt!PopAcquirePowerRequestPushLock (fffff806`e7850600)
+fffff806`e7549dc5 488b1da4427c00  mov     rbx,qword ptr [nt!PopPowerRequestObjectList (fffff806`e7d0e070)]
+fffff806`e7549dcc 488d3d9d427c00  lea     rdi,[nt!PopPowerRequestObjectList (fffff806`e7d0e070)]
+fffff806`e7549dd3 eb14            jmp     nt!PopPowerRequestOverrideInitialize+0x35 (fffff806`e7549de9)  Branch
+
+nt!PopPowerRequestOverrideInitialize+0x21:
+fffff806`e7549dd5 80bb9800000000  cmp     byte ptr [rbx+98h],0
+fffff806`e7549ddc 7508            jne     nt!PopPowerRequestOverrideInitialize+0x32 (fffff806`e7549de6)  Branch
+
+nt!PopPowerRequestOverrideInitialize+0x2a:
+fffff806`e7549dde 488bcb          mov     rcx,rbx
+fffff806`e7549de1 e89278beff      call    nt!PopUmpoSendPowerRequestOverrideQuery (fffff806`e7131678)
+
+nt!PopPowerRequestOverrideInitialize+0x32:
+fffff806`e7549de6 488b1b          mov     rbx,qword ptr [rbx]
+
+nt!PopPowerRequestOverrideInitialize+0x35:
+fffff806`e7549de9 483bdf          cmp     rbx,rdi
+fffff806`e7549dec 75e7            jne     nt!PopPowerRequestOverrideInitialize+0x21 (fffff806`e7549dd5)  Branch
+
+nt!PopPowerRequestOverrideInitialize+0x3a:
+fffff806`e7549dee 488d0d5b427c00  lea     rcx,[nt!PopPowerRequestLock (fffff806`e7d0e050)]
+fffff806`e7549df5 e8cec0c6ff      call    nt!PopReleaseRwLock (fffff806`e71b5ec8)
+fffff806`e7549dfa 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+fffff806`e7549dff 4883c420        add     rsp,20h
+fffff806`e7549e03 5f              pop     rdi
+fffff806`e7549e04 c3              ret
+lkd> x nt!*RegisterPowerSetting*
+fffff806`e7876b70 nt!PoUnregisterPowerSettingCallback (void)
+fffff806`e7567938 nt!SSHSupportRegisterPowerSettingCallback (SSHSupportRegisterPowerSettingCallback)
+fffff806`e72ad028 nt!PopUnregisterPowerSettingCallback (PopUnregisterPowerSettingCallback)
+fffff806`e756796c nt!SSHSupportUnregisterPowerSettingCallback (SSHSupportUnregisterPowerSettingCallback)
+fffff806`e786b150 nt!PoRegisterPowerSettingCallback (PoRegisterPowerSettingCallback)
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

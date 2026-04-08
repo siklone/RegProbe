@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "This appears to be a kernel-adjacent Control Power setting tied to how the power manager treats system-required power requests. It is being tracked as a research candidate, not a user-facing tweak.",
     "why_people_change_it": "Kernel and power researchers may inspect this value when investigating how system-required power requests are converted, honored, or suppressed under undocumented power-policy flows.",
-    "tradeoffs_overview": "The value now has a stronger evidence chain because it has repo docs, observed baseline state, an exact current-build string hit, a retained enrichment recommendation, a repo-native trigger harness, a live current-build KVM local-KD value that matches the repo-doc default, and direct current-build consumer disassembly. It is still too weak for a published tweak because the registry seeding path and an exact runtime registry read remain unresolved.",
-    "professional_notes": "Repo power docs assign `AllowSystemRequiredPowerRequests = 1` under `Control\\\\Power` and map it to `PopPowerRequestConvertSystemToExecution`. The power routing note later kept the value inside the `Control\\\\Power` docs cluster. The observed clean baseline then confirmed that the parent `Control\\\\Power` path exists while the value itself is absent. A later targeted current-build string batch found an exact Unicode hit for `AllowSystemRequiredPowerRequests` in `ntoskrnl.exe`, which is stronger than a pure docs-only mention and enough to keep the value out of raw backlog. Source-enrichment later retained the candidate in the canonical queue with `power-request-simulation` as the suggested trigger family, specifically `PowerCreateRequest(SystemRequired)`, `PowerSetRequest(DisplayRequired)`, and an audio playback session. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile plus a matching mega-trigger runtime alias, closing the old trigger-design gap before the first dedicated narrow replay. A later KVM local-KD pass then resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, which matches the repo-doc default and also surfaced the sibling symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` in the same wildcard sweep. A later current-build disassembly pass then showed direct reads of `nt!PopPowerRequestConvertSystemToExecution` inside `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`, while `nt!PopPowerRequestExecutionRequiredSettingCallback` chained into that same reader family through `PopPowerRequestHandleExecutionmentUpdate`. A later wildcard lineage pass then showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family. The next proof step is no longer a generic reader hunt; it is whether any registry seeding path still feeds this callback/init family on modern builds.",
+    "tradeoffs_overview": "The value now has a stronger evidence chain because it has repo docs, observed baseline state, an exact current-build string hit, a retained enrichment recommendation, a repo-native trigger harness, a live current-build KVM local-KD value that matches the repo-doc default, and direct current-build consumer disassembly. It is still too weak for a published tweak because no current-build registry seeding path has been demonstrated and an exact runtime registry read remains unresolved.",
+    "professional_notes": "Repo power docs assign `AllowSystemRequiredPowerRequests = 1` under `Control\\\\Power` and map it to `PopPowerRequestConvertSystemToExecution`. The power routing note later kept the value inside the `Control\\\\Power` docs cluster. The observed clean baseline then confirmed that the parent `Control\\\\Power` path exists while the value itself is absent. A later targeted current-build string batch found an exact Unicode hit for `AllowSystemRequiredPowerRequests` in `ntoskrnl.exe`, which is stronger than a pure docs-only mention and enough to keep the value out of raw backlog. Source-enrichment later retained the candidate in the canonical queue with `power-request-simulation` as the suggested trigger family, specifically `PowerCreateRequest(SystemRequired)`, `PowerSetRequest(DisplayRequired)`, and an audio playback session. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile plus a matching mega-trigger runtime alias, closing the old trigger-design gap before the first dedicated narrow replay. A later KVM local-KD pass then resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, which matches the repo-doc default and also surfaced the sibling symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` in the same wildcard sweep. A later current-build disassembly pass then showed direct reads of `nt!PopPowerRequestConvertSystemToExecution` inside `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`, while `nt!PopPowerRequestExecutionRequiredSettingCallback` chained into that same reader family through `PopPowerRequestHandleExecutionmentUpdate`. A later wildcard lineage pass then showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family. A later init/override disassembly pass then showed `PopPowerRequestInitialize` only zeroing per-object fields and `PopPowerRequestOverrideInitialize` iterating `PopPowerRequestObjectList` before calling `PopUmpoSendPowerRequestOverrideQuery`, which is useful because it still did not expose a registry read in the visible current-build init path. The next proof step is no longer a generic reader hunt; it is whether any registry seeding path still feeds this callback/init family on modern builds.",
     "targets": [
       {
         "target_id": "allow-system-required-power-requests",
@@ -41,7 +41,7 @@
             ]
           }
         ],
-        "notes": "Later retained KVM local-KD passes resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1` and showed direct consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`, but no registry seeding path or narrow replay result is retained yet."
+        "notes": "Later retained KVM local-KD passes resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, showed direct consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`, and showed an init/override path without a visible registry read, but no registry seeding path or narrow replay result is retained yet."
       }
     ]
   },
@@ -103,7 +103,8 @@
         "repo-power-control-allow-system-required-power-requests-trigger-20260408",
         "vm-power-control-allow-system-required-power-requests-kd-20260408",
         "vm-power-control-allow-system-required-power-requests-kd-reader-20260408",
-        "vm-power-control-execution-required-setting-lineage-kd-20260408"
+        "vm-power-control-execution-required-setting-lineage-kd-20260408",
+        "vm-power-control-execution-required-init-lineage-kd-20260408"
       ]
     }
   ],
@@ -208,6 +209,18 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-execution-required-init-lineage-kd-20260408",
+      "kind": "vm-test",
+      "title": "KVM local-KD disassembly shows init and override path without a visible registry read",
+      "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log",
+      "summary": "A retained KVM local-KD disassembly pass showed `PopPowerRequestInitialize` only zeroing per-object fields, while `PopPowerRequestOverrideInitialize` iterated `PopPowerRequestObjectList` and called `PopUmpoSendPowerRequestOverrideQuery`. The visible init/override path did not expose a registry read.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -217,7 +230,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, and direct current-build reader disassembly. It is not ready for validation because the registry seeding path and an exact runtime registry read remain unproven.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, and direct current-build callback/reader disassembly. It is not ready for validation because no current-build registry seeding path has been demonstrated and an exact runtime registry read remains unresolved.",
     "manual_review_required": true,
     "blocking_issues": [
       "no-current-build-registry-seeding-path",
@@ -247,7 +260,13 @@
       "os": "Windows 11 24H2",
       "build": "26100.1.amd64fre.ge_release.240331-1435",
       "notes": "A retained KVM local-KD disassembly pass showed `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired` directly reading `nt!PopPowerRequestConvertSystemToExecution`."
+    },
+    {
+      "environment": "KVM local-KD init/override disassembly pass",
+      "os": "Windows 11 24H2",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "A retained KVM local-KD disassembly pass showed `PopPowerRequestInitialize` only zeroing fields and `PopPowerRequestOverrideInitialize` iterating `PopPowerRequestObjectList` before calling `PopUmpoSendPowerRequestOverrideQuery`."
     }
   ],
-  "last_reviewed_utc": "2026-04-08T11:55:00Z"
+  "last_reviewed_utc": "2026-04-08T12:05:00Z"
 }

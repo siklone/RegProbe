@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T11:53:22.712352Z",
+  "generated_utc": "2026-04-08T12:01:08.467767Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 321,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T11:53:21.987080Z",
+      "generated_utc": "2026-04-08T12:01:07.765886Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -17804,8 +17804,8 @@
         }
       },
       "source_file": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
-      "source_file_sha256": "a69a6de4c1a395c504931ba0331b470b470e18f1fb008154dfa4841296ebe285",
-      "source_file_size_bytes": 19171,
+      "source_file_sha256": "15189c497a2d6c771ddc9c57d5b1a71f91867e240312f85f392b40b2adf234b6",
+      "source_file_size_bytes": 20993,
       "name": "Allow Audio To Enable Execution Required Power Requests",
       "category": "Power",
       "area": "Control Power Requests",
@@ -17818,7 +17818,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, and direct current-build reader disassembly. It is not ready for validation because the registry seeding path and an exact runtime registry read remain unproven.",
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, and direct current-build callback/reader disassembly. It is not ready for validation because no current-build registry seeding path has been demonstrated and an exact runtime registry read remains unresolved.",
         "blocking_issues": [
           "no-current-build-registry-seeding-path",
           "no-primary-current-build-doc"
@@ -17911,7 +17911,8 @@
             "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-symbol-20260408",
             "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-value-20260408",
             "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-reader-20260408",
-            "vm-power-control-execution-required-setting-lineage-kd-20260408"
+            "vm-power-control-execution-required-setting-lineage-kd-20260408",
+            "vm-power-control-execution-required-init-lineage-kd-20260408"
           ]
         }
       ],
@@ -18037,6 +18038,19 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-init-lineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD disassembly shows init and override path without a visible registry read",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log",
+          "summary": "A retained KVM local-KD disassembly pass showed `PopPowerRequestInitialize` only zeroing per-object fields, while `PopPowerRequestOverrideInitialize` iterated `PopPowerRequestObjectList` and called `PopUmpoSendPowerRequestOverrideQuery`. The visible init/override path did not expose a registry read.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": null,
@@ -18124,8 +18138,8 @@
         }
       },
       "source_file": "research/records/power.control.allow-system-required-power-requests.json",
-      "source_file_sha256": "bdd65311778af1154a1b1e9c273243641b461305b0c668d5eb536c4bf2bc9462",
-      "source_file_size_bytes": 17396,
+      "source_file_sha256": "648c9a19f884d8f43330e2b64bce5399d3d5528a5817997b4233d66a6f31be4f",
+      "source_file_size_bytes": 19281,
       "name": "Allow System Required Power Requests",
       "category": "Power",
       "area": "Control Power Requests",
@@ -18138,7 +18152,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, and direct current-build reader disassembly. It is not ready for validation because the registry seeding path and an exact runtime registry read remain unproven.",
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, and direct current-build callback/reader disassembly. It is not ready for validation because no current-build registry seeding path has been demonstrated and an exact runtime registry read remains unresolved.",
         "blocking_issues": [
           "no-current-build-registry-seeding-path",
           "no-primary-current-build-doc"
@@ -18157,7 +18171,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "AllowSystemRequiredPowerRequests",
           "value_type": "REG_DWORD",
-          "notes": "Later retained KVM local-KD passes resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1` and showed direct consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`, but no registry seeding path or narrow replay result is retained yet.",
+          "notes": "Later retained KVM local-KD passes resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, showed direct consumer reads in `PopPowerRequestHandleExecutionEnablementUpdate` and `PopPowerRequestCallbackExecutionRequired`, and showed an init/override path without a visible registry read, but no registry seeding path or narrow replay result is retained yet.",
           "allowed_values": [
             {
               "state_kind": "missing",
@@ -18230,7 +18244,8 @@
             "repo-power-control-allow-system-required-power-requests-trigger-20260408",
             "vm-power-control-allow-system-required-power-requests-kd-20260408",
             "vm-power-control-allow-system-required-power-requests-kd-reader-20260408",
-            "vm-power-control-execution-required-setting-lineage-kd-20260408"
+            "vm-power-control-execution-required-setting-lineage-kd-20260408",
+            "vm-power-control-execution-required-init-lineage-kd-20260408"
           ]
         }
       ],
@@ -18337,6 +18352,19 @@
           "title": "KVM local-KD wildcard pass narrows execution-required setting lineage",
           "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-settinglineage-20260408a/local-kd-powerrequest-settinglineage-20260408a.log",
           "summary": "A retained KVM local-KD wildcard pass showed that the current build exposes only one `*PowerRequest*Setting*` symbol, `nt!PopPowerRequestExecutionRequiredSettingCallback`, alongside `PopPowerRequestInitialize`, `PopPowerRequestOverrideInitialize`, and the `PopExecutionRequiredTimeout` family. This narrows the visible lineage to callback/init surfaces rather than a demonstrated registry reader.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-init-lineage-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD disassembly shows init and override path without a visible registry read",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-init-20260408a/local-kd-powerrequest-init-20260408a.log",
+          "summary": "A retained KVM local-KD disassembly pass showed `PopPowerRequestInitialize` only zeroing per-object fields, while `PopPowerRequestOverrideInitialize` iterated `PopPowerRequestObjectList` and called `PopUmpoSendPowerRequestOverrideQuery`. The visible init/override path did not expose a registry read.",
           "strength": "high",
           "supports": [
             "behavior",
