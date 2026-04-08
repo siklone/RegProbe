@@ -134,6 +134,7 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
 - `registry-research-framework/tools/ghidra-headless-analyze.ps1`
 - `registry-research-framework/tools/pdb-download.ps1`
 - `registry-research-framework/tools/registry-sideeffect-diff.ps1`
+  compact semantic key/value diff for `.reg` exports and registry-dump text, with a bounded summary fallback for generic text inputs
 - `registry-research-framework/tools/_resolve-tweak-runner.ps1`
   generic building blocks used by multiple lanes
 
