@@ -17,10 +17,13 @@ Lock the remaining execution-required runtime-trace gap to the actual KVM guest-
 5. The active libvirt domain does not expose a qemu guest agent control surface:
    - `virsh qemu-agent-command regprobe-win11-25h2-session '{"execute":"guest-ping"}'`
    - returned `argument unsupported: QEMU guest agent is not configured`
-6. The current domain XML also points to a missing bootstrap ISO path on the host checkout:
+6. The current domain XML points to a bootstrap ISO path that is now restored on the host checkout:
    - `/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/dist/regprobe-kvm-bootstrap.iso`
-   - host file absent during this audit
+   - the rebuilt ISO now exists and carries a guest-local installer plus validation-agent payloads
+7. The restored ISO is still only a manual bootstrap surface:
+   - it can seed guest-local files under `C:\Tools\Scripts` and `C:\Tools\ValidationController`
+   - it does not by itself provide host-side guest exec or result copy-back
 
 ## Interpretation
 
-The remaining gap for `AllowSystemRequiredPowerRequests` and `AllowAudioToEnableExecutionRequiredPowerRequests` is now environment-gated rather than runner-missing. The repo has a narrow path-aware runtime lane for both records, but the active KVM session cannot be driven through qemu guest agent, and the legacy controller surface still assumes VMware Tools and `vmrun`. On the current host, the next decisive step is either to restore a usable KVM guest-control/bootstrap surface or to execute the narrow lane from a vmrun-capable environment.
+The remaining gap for `AllowSystemRequiredPowerRequests` and `AllowAudioToEnableExecutionRequiredPowerRequests` is now environment-gated rather than runner-missing. The repo has a narrow path-aware runtime lane for both records, the bootstrap ISO is restored, and a guest-local installer now exists, but the active KVM session still cannot be driven through qemu guest agent and the legacy controller surface still assumes VMware Tools and `vmrun`. On the current host, the next decisive step is either to add a real host-side KVM guest-control surface or to execute the narrow lane from a vmrun-capable environment.

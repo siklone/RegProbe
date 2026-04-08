@@ -89,6 +89,33 @@ This:
 - copies the guest agent to `C:\Tools\Scripts\guest-validation-agent.ps1`
 - registers the `RegProbeValidationAgent` startup task
 
+## KVM Manual Bootstrap
+
+When VMware `vmrun` guest control is unavailable, build the KVM bootstrap ISO on the host:
+
+```bash
+python3 scripts/vm/build-kvm-bootstrap-iso.py
+```
+
+This restores:
+
+- `dist/regprobe-kvm-bootstrap.iso`
+
+Inside the Windows guest, mount the ISO and run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install-guest-validation-agent-local.ps1
+```
+
+That guest-local installer:
+
+- copies `guest-validation-agent.ps1` and `request-guest-restart.ps1` into `C:\Tools\Scripts`
+- prepares `C:\Tools\ValidationController`
+- creates a local launch helper
+- does **not** register the startup task unless you pass `-RegisterStartupTask`
+
+Use this as a manual recovery/bootstrap surface for KVM. The repo controller itself still assumes `vmrun` and the shared-folder model.
+
 ## Run A Test
 
 Example:
@@ -110,4 +137,3 @@ powershell -ExecutionPolicy Bypass -File .\scripts\vm\host-validation-controller
 - The guest agent is responsible for applying the value, waiting for idle, benchmarking, and restoring the baseline.
 - VM results are a discovery signal, not final truth for hardware-sensitive settings.
 - Promising candidates should still be rechecked on bare metal.
-

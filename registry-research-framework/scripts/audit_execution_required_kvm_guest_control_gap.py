@@ -147,7 +147,7 @@ def main() -> int:
         "conclusion": (
             "The execution-required runtime lane is repo-native and ready, but the active KVM guest-control surface is not. "
             "The runner and controller tooling remain VMware/vmrun-oriented, the live libvirt domain exposes no qemu guest agent channel, "
-            "guest-ping fails with 'QEMU guest agent is not configured', and the attached bootstrap ISO path is missing on the current host checkout."
+            "guest-ping fails with 'QEMU guest agent is not configured', and the restored bootstrap ISO currently provides only manual in-guest bootstrap."
         ),
     }
     write_json(OUTPUT_JSON, payload)

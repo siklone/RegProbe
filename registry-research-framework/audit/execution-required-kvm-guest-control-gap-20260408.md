@@ -11,7 +11,7 @@ Date: 2026-04-08
 - libvirt domain running: `True`
 - qemu guest agent channel present: `False`
 - qemu guest agent ping ok: `False`
-- Bootstrap ISO exists on host: `False`
+- Bootstrap ISO exists on host: `True`
 
 ## Details
 
