@@ -1,0 +1,24 @@
+167-      <address type='pci' domain='0x0000' bus='0x00' slot='0x1f' function='0x2'/>
+168-    </controller>
+169:    <controller type='virtio-serial' index='0'>
+170:      <alias name='virtio-serial0'/>
+171-      <address type='pci' domain='0x0000' bus='0x03' slot='0x00' function='0x0'/>
+172-    </controller>
+--
+192-      <target type='virtio' name='com.redhat.spice.0' state='connected'/>
+193-      <alias name='channel0'/>
+194:      <address type='virtio-serial' controller='0' bus='0' port='1'/>
+195-    </channel>
+196-    <channel type='unix'>
+197:      <source mode='bind' path='/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/org.qemu.guest_agent.0'/>
+198:      <target type='virtio' name='org.qemu.guest_agent.0' state='disconnected'/>
+199:      <alias name='channel1'/>
+200:      <address type='virtio-serial' controller='0' bus='0' port='2'/>
+201-    </channel>
+202-    <input type='tablet' bus='usb'>
+--
+230-    <redirdev bus='usb' type='spicevmc'>
+231-      <alias name='redir0'/>
+232:      <address type='usb' bus='0' port='2'/>
+233-    </redirdev>
+234-    <redirdev bus='usb' type='spicevmc'>

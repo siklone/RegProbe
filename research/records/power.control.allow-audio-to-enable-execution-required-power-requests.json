@@ -142,6 +142,7 @@
         "vm-power-control-execution-required-powersetting-trace-callback-20260408",
         "vm-power-control-execution-required-kvm-guest-control-gap-20260408",
         "vm-power-control-execution-required-kvm-qga-foreground-20260408",
+        "vm-power-control-execution-required-kvm-vioserial-path-20260409",
         "vm-power-control-execution-required-reglineage-kd-20260408",
         "ghidra-power-control-execution-required-binding-20260408",
         "ghidra-power-control-execution-required-readers-20260408"
@@ -367,6 +368,19 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-execution-required-kvm-vioserial-path-20260409",
+      "kind": "vm-test",
+      "title": "Live KVM vioser path diagnosis shows the qga port is not exposed through the expected guest-side aliases",
+      "location": "evidence/files/vm-tooling-staging/kvm-qga-vioserial-path-diagnose-20260409a/summary.json and evidence/files/vm-tooling-staging/kvm-qga-vioserial-path-diagnose-20260409a/info-chardev.txt and evidence/files/vm-tooling-staging/kvm-qga-vioserial-path-diagnose-20260409a/domain-channel-snippet.txt and evidence/files/vm-tooling-staging/kvm-qga-vioserial-path-diagnose-20260409a/regprobe-robocopy-qga.png and evidence/files/vm-tooling-staging/kvm-qga-vioserial-path-diagnose-20260409a/regprobe-qga-query-state.png and evidence/files/vm-tooling-staging/kvm-qga-vioserial-path-diagnose-20260409a/regprobe-vioser-script-result.png and evidence/files/vm-tooling-staging/kvm-qga-vioserial-path-diagnose-20260409a/regprobe-vport0p2-noglobal.png and evidence/files/vm-tooling-staging/kvm-qga-vioserial-path-diagnose-20260409a/regprobe-interface-candidates-wide.png and research/notes/power-control-execution-required-kvm-vioserial-path-follow-up-20260409.md",
+      "summary": "A live KVM follow-up replaced the stale qga payload with the modern 2025 binaries, confirmed the Windows service can still reach `RUNNING`, and then narrowed the blocker further: host HMP still reports the qga chardev as `disconnected`, the guest exposes `vport0p1` and `vport0p2` `VIOSERIALPORT` children, but `Test-Path` and direct `qemu-ga.exe -v -m virtio-serial -p ...` launches on `\\\\.\\Global\\org.qemu.guest_agent.0`, `\\\\.\\Global\\vport0p2`, and `\\\\.\\vport0p2` all fail at the open-path step while `Control\\DeviceClasses` only exposes an encoded interface entry for the `...&02` child.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -376,7 +390,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "AllowAudioToEnableExecutionRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, retained local-KD proof that `PopPowerRequestActiveAudioEnablesExecutionRequired = 1`, a direct current-build reader in `PopPowerRequestEvaluateExecutionRequiredStatus`, a retained local-KD view of the generic power-setting query/store layer, retained wildcard/symbolized binding follow-ups, a retained broad soft-reboot runtime lane that still returns `no-hit` after reboot, a retained retry audit showing 10 mega-trigger runtime attempts all ending `aborted-recovered`, a retained path audit showing only adjacent `PowerRequestOverride` activity in the visible runtime CSV layer, a new alignment audit that ties that adjacent subtree back to the current-build override family, a new trace-callback audit showing the visible generic setter registering `PopTracePowerSettingChange` rather than an exact pair binding, and a refreshed host-side KVM guest-control audit showing the remaining narrow runtime lane is now blocked by a guest-side qga runtime/protocol failure after live bootstrap rather than by missing repo plumbing. A new live foreground repro strengthens that blocker again: stopping `QEMU-GA` reverts host-side `guest-ping` to `not connected`, while launching `qemu-ga.exe -v -p \\\\.\\Global\\org.qemu.guest_agent.0` directly still yields `QEMU guest agent is not available due to an error`. The restored bootstrap ISO removes the missing-media issue and the guest now reaches a stronger post-bootstrap state, but that still does not restore live host-side execution on its own.",
+    "why": "AllowAudioToEnableExecutionRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, retained local-KD proof that `PopPowerRequestActiveAudioEnablesExecutionRequired = 1`, a direct current-build reader in `PopPowerRequestEvaluateExecutionRequiredStatus`, a retained local-KD view of the generic power-setting query/store layer, retained wildcard/symbolized binding follow-ups, a retained broad soft-reboot runtime lane that still returns `no-hit` after reboot, a retained retry audit showing 10 mega-trigger runtime attempts all ending `aborted-recovered`, a retained path audit showing only adjacent `PowerRequestOverride` activity in the visible runtime CSV layer, a new alignment audit that ties that adjacent subtree back to the current-build override family, a new trace-callback audit showing the visible generic setter registering `PopTracePowerSettingChange` rather than an exact pair binding, and a refreshed host-side KVM guest-control audit showing the remaining narrow runtime lane is now blocked by a guest-side qga runtime/protocol failure after live bootstrap rather than by missing repo plumbing. A new live foreground repro strengthened that blocker by showing the failure survives an explicit expected-port launch, and a new vioser-path diagnosis narrows it further again: after copying the modern qga payload in place, host HMP still reports the qga chardev as `disconnected`, the guest exposes `vport0p1` and `vport0p2` child devices, but `org.qemu.guest_agent.0`, `\\\\.\\Global\\vport0p2`, and `\\\\.\\vport0p2` all fail the open-path step, so the unresolved layer is now Windows virtio-serial path resolution rather than generic qga installation or service state. The restored bootstrap ISO removes the missing-media issue and the guest now reaches a stronger post-bootstrap state, but that still does not restore live host-side execution on its own.",
     "blocking_issues": [
       "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects or execution-required globals is still unresolved.",
       "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowAudioToEnableExecutionRequiredPowerRequests binding site.",

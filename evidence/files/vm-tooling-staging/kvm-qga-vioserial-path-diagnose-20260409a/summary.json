@@ -1,0 +1,46 @@
+{
+  "artifact_id": "kvm-qga-vioserial-path-diagnose-20260409a",
+  "captured_on": "2026-04-09",
+  "domain": "regprobe-win11-25h2-session",
+  "scope": "execution-required KVM guest-control vioser path diagnosis",
+  "findings": [
+    {
+      "step": "modern_payload_copy",
+      "command": "robocopy \"C:\\RegProbe-Diag\\bootstrap\\qga-modern\" \"C:\\Program Files\\qemu-ga\" /E /R:1 /W:1",
+      "guest_result": "13 modern qga payload files were copied in place, including a 4.3 MB qemu-ga.exe"
+    },
+    {
+      "step": "service_and_channel_state",
+      "command": "sc query QEMU-GA; sc qc QEMU-GA; virsh qemu-monitor-command ... --hmp 'info chardev'",
+      "guest_result": "QEMU-GA reached RUNNING with binary path `\"C:\\Program Files\\qemu-ga\\qemu-ga.exe\" -d`",
+      "host_result": "the libvirt qga chardev still showed `disconnected` for `org.qemu.guest_agent.0`"
+    },
+    {
+      "step": "guest_vioser_inventory",
+      "command": "powershell -File C:\\RegProbe-Diag\\bootstrap\\qga-vioser-dump.ps1",
+      "guest_result": "the guest exposed `vport0p1` and `vport0p2` VIOSERIALPORT child devices, and XML mapping still tied qga to port 2"
+    },
+    {
+      "step": "path_probes",
+      "command": "Test-Path and direct qemu-ga launches on org.qemu.guest_agent.0 / vport0p2 aliases",
+      "guest_result": "`\\\\.\\Global\\org.qemu.guest_agent.0`, `\\\\.\\Global\\vport0p2`, and `\\\\.\\vport0p2` all failed namespace probes or direct qga opens with `critical: error opening path`"
+    },
+    {
+      "step": "deviceclasses_mapping",
+      "command": "powershell -File C:\\RegProbe-Diag\\bootstrap\\qga-deviceclasses-dump.ps1 and qga-interface-candidates.ps1",
+      "guest_result": "Control\\\\DeviceClasses contains an encoded interface entry for the `...&02` VioSerialPort child, but the naive org.qemu / vport aliases are not directly openable on this guest"
+    }
+  ],
+  "screenshots": [
+    "regprobe-robocopy-qga.png",
+    "regprobe-qga-query-state.png",
+    "regprobe-vioser-script-result.png",
+    "regprobe-vport0p2-noglobal.png",
+    "regprobe-interface-candidates-wide.png"
+  ],
+  "host_artifacts": [
+    "info-chardev.txt",
+    "domain-channel-snippet.txt"
+  ],
+  "conclusion": "The remaining guest-control blocker is now narrower than a generic qga runtime fault. On the active KVM stack, the guest-agent channel exists in libvirt and the guest exposes VIOSERIALPORT children, but the expected org.qemu / vport aliases do not resolve to an openable Windows path for qemu-ga."
+}
