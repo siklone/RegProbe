@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T04:32:43.504540Z",
+  "generated_utc": "2026-04-08T04:40:16.143975Z",
   "summary": {
     "total_records": 319,
     "validated": 255,
@@ -19,7 +19,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T04:32:43.191334Z",
+      "generated_utc": "2026-04-08T04:40:15.775608Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -20216,7 +20216,7 @@
       "category": "System",
       "area": "Session Manager Kernel Timer Resolution",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and a current-build reader or seeding path.",
+      "summary": "Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`, while a later repo-native follow-up added an explicit `power-request-simulation` harness to both the generic Procmon guest tool and the mega-trigger runtime surface. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and a current-build reader or seeding path.",
       "evidence_class": {
         "record_id": "system.kernel.global-timer-resolution-requests",
         "tweak_id": "system.kernel.global-timer-resolution-requests",
@@ -20249,6 +20249,12 @@
               "url": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
               "kind": "repo-doc",
               "summary": "Repo docs assign `GlobalTimerResolutionRequests = 0` and map it to `KiGlobalTimerResolutionRequests` under `Session Manager\\\\Kernel`."
+            },
+            {
+              "title": "Repo guest tooling now exposes a named power-request-simulation harness",
+              "url": "scripts/vm/guest-tools/run-registry-policy-probe.ps1 and scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1",
+              "kind": "repo-code",
+              "summary": "The generic Procmon guest tool now exposes `TriggerProfile = power-request-simulation`, and the mega-trigger runtime surface now exposes the matching `power_request_simulation`..."
             }
           ]
         },
@@ -20291,7 +20297,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a live current-build KD value that matches the repo-doc default, a concrete enrichment-recommended trigger family, and a real write-and-reboot runtime lane. It is not ready for validation because the exact registry reader/caller path, any persisted seeding path, and an exact runtime registry read remain unproven.",
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a live current-build KD value that matches the repo-doc default, a concrete enrichment-recommended trigger family that is now mirrored by a repo-native harness, and a real write-and-reboot runtime lane. It is not ready for validation because the exact registry reader/caller path, any persisted seeding path, and an exact runtime registry read remain unproven.",
         "blocking_issues": [
           "no-current-build-reader-path",
           "runtime_no_read",
@@ -20373,7 +20379,7 @@
           "tradeoffs": [
             "Preserves the observed baseline registry state.",
             "Avoids inventing unsupported non-default semantics.",
-            "Keeps the next proof step focused on live state and reader/seed validation rather than speculative mutation."
+            "Keeps the next proof step focused on narrow power-request replay and reader/seed validation rather than speculative mutation."
           ],
           "apply_allowed": false,
           "evidence_ids": [
@@ -20381,6 +20387,7 @@
             "vm-session-manager-kernel-global-timer-resolution-requests-existence-20260329",
             "static-session-manager-kernel-global-timer-resolution-requests-string-20260331",
             "analysis-session-manager-kernel-global-timer-resolution-requests-enrichment-20260403",
+            "repo-session-manager-kernel-global-timer-resolution-requests-trigger-20260408",
             "vm-session-manager-kernel-global-timer-resolution-requests-runtime-20260331"
           ]
         }
@@ -20441,6 +20448,19 @@
             "research-gap"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "repo-session-manager-kernel-global-timer-resolution-requests-trigger-20260408",
+          "kind": "repo-code",
+          "title": "Repo guest tooling now exposes a named power-request-simulation harness",
+          "location": "scripts/vm/guest-tools/run-registry-policy-probe.ps1 and scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1",
+          "summary": "The generic Procmon guest tool now exposes `TriggerProfile = power-request-simulation`, and the mega-trigger runtime surface now exposes the matching `power_request_simulation` alias, both using the same `PowerCreateRequest(SystemRequired/DisplayRequired/AwayMode)` primitive family that source-enrichment recommended for `GlobalTimerResolutionRequests`.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "research-gap"
+          ],
+          "origin": "Current repo code"
         },
         {
           "evidence_id": "vm-session-manager-kernel-global-timer-resolution-requests-runtime-20260331",

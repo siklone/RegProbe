@@ -1133,6 +1133,7 @@ try {
     $triggerMap = @{
         cpu_stress = { Invoke-CpuStressTrigger }
         power_plan_and_requests = { Invoke-PowerPlanTrigger }
+        power_request_simulation = { Invoke-PowerPlanTrigger }
         multi_thread_burst = { Invoke-ThreadBurstTrigger }
         disk_io_burst = { Invoke-DiskIoTrigger }
         process_spawn_burst = { Invoke-ProcessBurstTrigger }

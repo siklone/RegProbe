@@ -12,6 +12,7 @@
   - `PowerCreateRequest(SystemRequired)`
   - `PowerSetRequest(DisplayRequired)`
   - audio playback session
+- A later repo-native follow-up added that trigger family as a named harness in both the generic Procmon guest tool and the mega-trigger runtime surface.
 - The earlier tools-hardened lightweight runtime batch wrote the value as `1`, rebooted once, preserved shell health, and still produced `no-hit` runtime output for this specific value.
 
 ## Source artifacts
@@ -25,6 +26,8 @@
 - `evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/state.json`
 - `evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json`
 - `registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.global-timer-resolution-requests.json`
+- `scripts/vm/guest-tools/run-registry-policy-probe.ps1`
+- `scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1`
 
 ## Interpretation
 
@@ -34,13 +37,14 @@
   - exact current-build kernel string hit
   - live current-build KD state `KiGlobalTimerResolutionRequests = 0`
   - concrete enrichment-recommended trigger family
+  - repo-native `power-request-simulation` harness
   - runtime write-and-reboot lane with no exact read
 - narrowed conclusion:
   - `GlobalTimerResolutionRequests` is stronger than a pure docs-first backlog item
   - the value belongs in the canonical research set as a live-state-confirmed timer-resolution kernel draft
 - still unresolved:
   - a current-build reader or seeding caller
-  - whether the suggested power-request trigger family can surface a narrower exact-read lane
+  - whether the named `power-request-simulation` harness can surface a narrower exact-read lane
 - next proof path:
-  - pivot from the now-resolved live state to a narrow `power-request-simulation` runtime lane
+  - pivot from the now-resolved live state to a narrow `power-request-simulation` runtime lane using the new named harness
   - isolate a current-build reader or seeding caller for `KiGlobalTimerResolutionRequests`

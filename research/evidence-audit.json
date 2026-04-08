@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T04:32:43.925552Z",
+  "generated_utc": "2026-04-08T04:40:16.627688Z",
   "summary": {
     "total_active_records": 264,
     "class_counts": {
@@ -24,7 +24,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T04:32:43.191334Z",
+      "generated_utc": "2026-04-08T04:40:15.775608Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -10414,7 +10414,7 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": false,
       "ghidra_no_function_fallback": false,
       "wpr": false,
@@ -10424,9 +10424,11 @@
       "next_missing_layer": "validation-proof",
       "cross_layer_satisfied": false,
       "layers_used": [
+        "runtime_procmon",
         "runtime_reboot"
       ],
       "tools_used": [
+        "procmon",
         "reboot"
       ],
       "boot_phase_relevant": true,

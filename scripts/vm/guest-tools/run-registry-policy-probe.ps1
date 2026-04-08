@@ -9,7 +9,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputName,
 
-    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst', 'hiber-file-size-burst', 'watchdog-power-burst', 'timer-dpc-stress')]
+    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst', 'hiber-file-size-burst', 'watchdog-power-burst', 'power-request-simulation', 'timer-dpc-stress')]
     [string]$TriggerProfile = 'custom',
 
     [int]$SaveAsTimeoutSeconds = 60,
@@ -231,6 +231,74 @@ catch {
 }
 finally {
     Remove-Item -Path $diagPath -Recurse -Force -ErrorAction SilentlyContinue
+}
+'@
+        }
+        'power-request-simulation' {
+            return @'
+Add-Type @"
+using System;
+using System.Runtime.InteropServices;
+public static class RegProbePowerRequest {
+    [DllImport("kernel32.dll", SetLastError=true)]
+    public static extern IntPtr PowerCreateRequest(ref REASON_CONTEXT Context);
+    [DllImport("kernel32.dll", SetLastError=true)]
+    public static extern bool PowerSetRequest(IntPtr PowerRequest, int RequestType);
+    [DllImport("kernel32.dll", SetLastError=true)]
+    public static extern bool PowerClearRequest(IntPtr PowerRequest, int RequestType);
+    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
+    public struct REASON_CONTEXT {
+        public uint Version;
+        public uint Flags;
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string SimpleReasonString;
+    }
+}
+"@
+
+try {
+    $diagPath = 'C:\RegProbe-Diag\power-request-simulation'
+    New-Item -ItemType Directory -Path $diagPath -Force | Out-Null
+
+    cmd /c "powercfg /requests > `"$diagPath\powercfg-requests-before.txt`"" | Out-Null
+    cmd /c "powercfg /requestsoverride > `"$diagPath\powercfg-requestsoverride.txt`"" | Out-Null
+    cmd /c "powercfg /energy /duration 5 /output `"$diagPath\energy-report.html`" >nul 2>nul" | Out-Null
+
+    $ctx = New-Object RegProbePowerRequest+REASON_CONTEXT
+    $ctx.Version = 0
+    $ctx.Flags = 1
+    $ctx.SimpleReasonString = 'RegProbe power-request simulation'
+    $request = [RegProbePowerRequest]::PowerCreateRequest([ref]$ctx)
+
+    if ($request -ne [IntPtr]::Zero) {
+        foreach ($kind in @(0, 1, 3)) {
+            [RegProbePowerRequest]::PowerSetRequest($request, $kind) | Out-Null
+            Start-Sleep -Seconds 2
+            cmd /c "powercfg /requests > `"$diagPath\powercfg-requests-kind-$kind.txt`"" | Out-Null
+        }
+
+        foreach ($kind in @(0, 1, 3)) {
+            [RegProbePowerRequest]::PowerClearRequest($request, $kind) | Out-Null
+        }
+    }
+
+    try {
+        1..3 | ForEach-Object {
+            $player = New-Object System.Media.SoundPlayer
+            Start-Sleep -Milliseconds 250
+            $player.Dispose()
+        }
+    }
+    catch {
+    }
+
+    cmd /c "powercfg /requests > `"$diagPath\powercfg-requests-after.txt`"" | Out-Null
+    Start-Sleep -Seconds 4
+}
+catch {
+}
+finally {
+    Remove-Item -Path 'C:\RegProbe-Diag\power-request-simulation' -Recurse -Force -ErrorAction SilentlyContinue
 }
 '@
         }
