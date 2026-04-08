@@ -94,6 +94,27 @@ class RunnerConfigTests(unittest.TestCase):
         self.assertIn("power.control.allow-audio-to-enable-execution-required-power-requests", source)
         self.assertIn("execution-required-power-requests-short", source)
 
+    def test_all_runtime_trace_records_have_runtime_runner_mapping(self) -> None:
+        audit_path = REPO_ROOT / "research" / "evidence-audit.json"
+        config_path = REPO_ROOT / "registry-research-framework" / "config" / "tweak-vm-runners.json"
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        runtime = config["runtime"]
+
+        runtime_trace_ids = sorted(
+            entry["tweak_id"]
+            for entry in audit["entries"]
+            if entry.get("next_missing_layer") == "runtime-trace"
+        )
+        self.assertEqual(
+            runtime_trace_ids,
+            [
+                "power.control.allow-audio-to-enable-execution-required-power-requests",
+                "power.control.allow-system-required-power-requests",
+            ],
+        )
+        self.assertTrue(all(tweak_id in runtime for tweak_id in runtime_trace_ids))
+
 
 class RegistrySideeffectPipelineTests(unittest.TestCase):
     def test_parse_registry_sideeffect_report_text_prefers_value_counts(self) -> None:

@@ -1,0 +1,38 @@
+{
+  "title": "Runtime-trace runner readiness audit",
+  "generated_utc": "2026-04-08T22:35:00Z",
+  "audit_source": "research/evidence-audit.json",
+  "runner_config_source": "registry-research-framework/config/tweak-vm-runners.json",
+  "runtime_trace_record_count": 2,
+  "mapped_runtime_runner_count": 2,
+  "all_runtime_trace_records_mapped": true,
+  "unmapped_tweak_ids": [],
+  "records": [
+    {
+      "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "evidence_class": "C",
+      "lane": "early-boot",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "runner_mapped": true,
+      "runner_script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "runner_args": [
+        "-CandidateIds",
+        "power.control.allow-audio-to-enable-execution-required-power-requests"
+      ]
+    },
+    {
+      "tweak_id": "power.control.allow-system-required-power-requests",
+      "evidence_class": "C",
+      "lane": "early-boot",
+      "suspected_layer": "kernel",
+      "boot_phase_relevant": true,
+      "runner_mapped": true,
+      "runner_script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "runner_args": [
+        "-CandidateIds",
+        "power.control.allow-system-required-power-requests"
+      ]
+    }
+  ]
+}
