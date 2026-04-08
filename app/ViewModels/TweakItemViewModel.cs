@@ -27,6 +27,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 {
     private const string PublicResearchGateExplanation = "Evidence pending";
     private const int MaxBatchDetailLines = 200;
+    private const int MaxDisplayMessageLength = 1024;
     private static readonly SolidColorBrush AppliedStatusBrush = CreateFrozenBrush("#A3BE8C");
     private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#666666");
     private static readonly SolidColorBrush NotAppliedStatusBorderBrush = CreateFrozenBrush("#333333");
@@ -1266,7 +1267,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private static string CoalesceMessage(TweakAction action, TweakStatus status, string message)
     {
-        return string.IsNullOrWhiteSpace(message) ? FormatStatusMessage(action, status) : message;
+        return string.IsNullOrWhiteSpace(message)
+            ? FormatStatusMessage(action, status)
+            : CondenseMessageForDisplay(message);
     }
 
     private static string FormatStepLogLine(TweakAction action, TweakStatus status, string message)
@@ -2868,6 +2871,35 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
 
         return string.Join(" / ", parts);
+    }
+
+    private static string CondenseMessageForDisplay(string message)
+    {
+        var trimmed = message.Trim();
+        if (trimmed.Length == 0)
+        {
+            return string.Empty;
+        }
+
+        foreach (var marker in new[] { "\nEntries:", "\nValues:", "\nServices:", "\nTasks:" })
+        {
+            var markerIndex = trimmed.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
+            if (markerIndex > 0)
+            {
+                var headline = trimmed[..markerIndex].Trim();
+                if (headline.Length > 0)
+                {
+                    return headline;
+                }
+            }
+        }
+
+        if (trimmed.Length <= MaxDisplayMessageLength)
+        {
+            return trimmed;
+        }
+
+        return $"{trimmed[..MaxDisplayMessageLength].TrimEnd()}...";
     }
 
     private static bool TryEvaluateArrowMatch(string line, out bool isMatch)

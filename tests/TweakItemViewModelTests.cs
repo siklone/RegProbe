@@ -64,6 +64,8 @@ public sealed class TweakItemViewModelTests
         Assert.Equal(200, viewModel.BatchDetails.Count);
         Assert.Contains("50 more hidden", viewModel.BatchSummaryLine);
         Assert.Equal("Mixed", viewModel.CurrentValue);
+        Assert.DoesNotContain("Entries:", viewModel.StatusMessage);
+        Assert.DoesNotContain("Value249", viewModel.StatusMessage);
     }
 
     private sealed class RecordingLogger : IAppLogger
