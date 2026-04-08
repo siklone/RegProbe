@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T04:53:26.573646Z",
+  "generated_utc": "2026-04-08T09:37:46.573883Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 321,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T04:53:25.867921Z",
+      "generated_utc": "2026-04-08T09:37:45.826548Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -17787,6 +17787,12 @@
               "url": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log",
               "kind": "vm-test",
               "summary": "The sibling system-required KVM local-KD wildcard sweep resolved the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, which strengthens current-build contin..."
+            },
+            {
+              "title": "KVM local-KD resolves live PopPowerRequestActiveAudioEnablesExecutionRequired = 1",
+              "url": "evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd-allowaudio-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd-allowaudio-20260408a.log",
+              "kind": "vm-test",
+              "summary": "A retained KVM local-KD pass resolved `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and read its live value as `1`. The same wildcard sweep also reconfirmed the broade..."
             }
           ]
         },
@@ -17798,13 +17804,13 @@
         }
       },
       "source_file": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
-      "source_file_sha256": "dd1b5fa6fecef3aebd9966831c97f0770942a82549fe78cce096266d5364a348",
-      "source_file_size_bytes": 14593,
+      "source_file_sha256": "7dbb69aba62665312c451a34b7cb721ddf25eed3699569d23f6d72d4b1c9b3da",
+      "source_file_size_bytes": 15675,
       "name": "Allow Audio To Enable Execution Required Power Requests",
       "category": "Power",
       "area": "Control Power Requests",
       "scope": "device",
-      "summary": "Draft Control Power record. `AllowAudioToEnableExecutionRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. A later KVM local-KD wildcard sweep for the sibling system-required lane also surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, but did not read its value. The lane is strong enough for a schema-backed draft, but still lacks live current-build state, a current-build reader or seeding path, and an exact runtime registry read.",
+      "summary": "Draft Control Power record. `AllowAudioToEnableExecutionRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. Later KVM local-KD passes first surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and then resolved its live current-build value as `1`, aligning the running kernel with the repo-doc default. The lane is strong enough for a schema-backed draft, but still lacks a current-build reader or seeding path and an exact runtime registry read.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -17812,9 +17818,8 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, and a matching repo-native trigger harness. It is not ready for validation because live current-build state, the exact registry reader/caller path, and an exact runtime registry read remain unproven.",
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, and a live KVM local-KD value that aligns with the repo-doc default. It is not ready for validation because the exact registry reader/caller path and an exact runtime registry read remain unproven.",
         "blocking_issues": [
-          "no-live-current-build-state",
           "no-current-build-reader-path",
           "no-primary-current-build-doc"
         ]
@@ -17832,7 +17837,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
           "value_type": "REG_DWORD",
-          "notes": "A sibling KVM local-KD wildcard sweep surfaced `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, but no direct live value read or narrow replay result is retained yet.",
+          "notes": "Later retained KVM local-KD passes surfaced `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and read its live value as `1`, but no exact registry reader or narrow replay result is retained yet.",
           "allowed_values": [
             {
               "state_kind": "missing",
@@ -17903,7 +17908,8 @@
             "static-power-control-allow-audio-to-enable-execution-required-power-requests-string-20260331",
             "analysis-power-control-allow-audio-to-enable-execution-required-power-requests-enrichment-20260403",
             "repo-power-control-allow-audio-to-enable-execution-required-power-requests-trigger-20260408",
-            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-symbol-20260408"
+            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-symbol-20260408",
+            "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-value-20260408"
           ]
         }
       ],
@@ -17986,6 +17992,20 @@
           "strength": "medium",
           "supports": [
             "value",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-kd-value-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD resolves live PopPowerRequestActiveAudioEnablesExecutionRequired = 1",
+          "location": "evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd-allowaudio-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd-allowaudio-20260408a.log",
+          "summary": "A retained KVM local-KD pass resolved `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and read its live value as `1`. The same wildcard sweep also reconfirmed the broader execution-required power-request symbol family in the running kernel.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "default",
             "version-scope"
           ],
           "origin": "VM test / probe"

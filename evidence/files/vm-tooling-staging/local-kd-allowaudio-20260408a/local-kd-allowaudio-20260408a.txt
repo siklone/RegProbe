@@ -1,0 +1,8 @@
+.sympath C:\Tools\Symbols\local-kd-allowaudio-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopPowerRequestActiveAudioEnablesExecutionRequired
+dd nt!PopPowerRequestActiveAudioEnablesExecutionRequired L1
+x nt!*PowerRequest*Execution*
+.echo REGPROBE_LOCALKD_END
+q

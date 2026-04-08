@@ -12,7 +12,8 @@
   - `PowerSetRequest(DisplayRequired)`
   - audio playback session
 - A later repo-native follow-up exposed that same trigger family as a named harness in both the generic Procmon guest tool and the mega-trigger runtime surface.
-- A later sibling KVM local-KD wildcard sweep surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`, but did not read its live value.
+- A later sibling KVM local-KD wildcard sweep surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`.
+- A later direct KVM local-KD pass then resolved live current-build `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1`.
 
 ## Source artifacts
 
@@ -24,6 +25,8 @@
 - `scripts/vm/guest-tools/run-registry-policy-probe.ps1`
 - `scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1`
 - `evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.log`
+- `evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd-allowaudio-20260408a-summary.json`
+- `evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd-allowaudio-20260408a.log`
 
 ## Interpretation
 
@@ -34,13 +37,13 @@
   - concrete enrichment-recommended trigger family
   - repo-native `power-request-simulation` harness
   - sibling KVM local-KD wildcard visibility for the mapped current-build symbol
+  - live KVM local-KD value `PopPowerRequestActiveAudioEnablesExecutionRequired = 1`
 - narrowed conclusion:
   - `AllowAudioToEnableExecutionRequiredPowerRequests` is stronger than a pure docs-first backlog item
   - the value belongs in the canonical research set as a power-request draft
 - still unresolved:
-  - live current-build state
   - a current-build reader or seeding caller
   - whether the named power-request harness surfaces an exact-read lane
 - next proof path:
-  - take a dedicated KVM local-KD live-state pass for the current-build `PopPowerRequestActiveAudioEnablesExecutionRequired` mapping
-  - then pivot to a narrow `power-request-simulation` replay instead of a broad family batch
+  - pivot from the now-confirmed live state to a reader or seeding path for `PopPowerRequestActiveAudioEnablesExecutionRequired`
+  - then take a narrow `power-request-simulation` replay instead of a broad family batch

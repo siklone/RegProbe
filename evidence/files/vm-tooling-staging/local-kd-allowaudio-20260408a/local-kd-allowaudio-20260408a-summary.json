@@ -1,0 +1,65 @@
+﻿{
+    "generated_utc":  "2026-04-08T09:36:20.9063123Z",
+    "kd_path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\kd.exe",
+    "symchk_path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+    "symchk_exit_code":  0,
+    "symbol_root":  "C:\\Tools\\Symbols\\local-kd-allowaudio-20260408a",
+    "query_symbol":  "nt!CmQueryValueKey",
+    "debugger_commands":  [
+                              "x nt!PopPowerRequestActiveAudioEnablesExecutionRequired",
+                              "dd nt!PopPowerRequestActiveAudioEnablesExecutionRequired L1",
+                              "x nt!*PowerRequest*Execution*"
+                          ],
+    "effective_commands":  [
+                               ".sympath C:\\Tools\\Symbols\\local-kd-allowaudio-20260408a",
+                               ".reload /f nt",
+                               ".echo REGPROBE_LOCALKD_BEGIN",
+                               "x nt!PopPowerRequestActiveAudioEnablesExecutionRequired",
+                               "dd nt!PopPowerRequestActiveAudioEnablesExecutionRequired L1",
+                               "x nt!*PowerRequest*Execution*",
+                               ".echo REGPROBE_LOCALKD_END",
+                               "q"
+                           ],
+    "used_custom_commands":  true,
+    "trigger_command_present":  false,
+    "trigger_executed":  false,
+    "trigger_delay_seconds":  0,
+    "trigger_exit_code":  null,
+    "trigger_error":  "",
+    "breakpoint_commands_present":  false,
+    "run_control_requested":  false,
+    "completed":  true,
+    "exit_code":  null,
+    "attached":  true,
+    "local_kernel_disabled":  false,
+    "symbol_reload_started":  false,
+    "breakpoint_supported":  null,
+    "runnable_debuggee":  null,
+    "query_symbol_seen":  false,
+    "command_file_exists":  true,
+    "log_exists":  true,
+    "stdout_exists":  true,
+    "stderr_exists":  true,
+    "symchk_log_exists":  false,
+    "symchk_log_is_directory":  true,
+    "trigger_stdout_exists":  false,
+    "trigger_stderr_exists":  false,
+    "uploads":  {
+                    "command_file":  {
+                                         "path":  "C:\\RegProbe-Diag\\debugger-smoke\\local-kd-allowaudio-20260408a\\local-kd.txt",
+                                         "uri":  "http://10.0.2.2:8766/local-kd-allowaudio-20260408a.txt"
+                                     },
+                    "log":  {
+                                "path":  "C:\\RegProbe-Diag\\debugger-smoke\\local-kd-allowaudio-20260408a\\local-kd.log",
+                                "uri":  "http://10.0.2.2:8766/local-kd-allowaudio-20260408a.log"
+                            },
+                    "stdout":  {
+                                   "path":  "C:\\RegProbe-Diag\\debugger-smoke\\local-kd-allowaudio-20260408a\\stdout.txt",
+                                   "uri":  "http://10.0.2.2:8766/local-kd-allowaudio-20260408a.stdout.txt"
+                               },
+                    "stderr":  {
+                                   "path":  "C:\\RegProbe-Diag\\debugger-smoke\\local-kd-allowaudio-20260408a\\stderr.txt",
+                                   "uri":  "http://10.0.2.2:8766/local-kd-allowaudio-20260408a.stderr.txt"
+                               }
+                }
+}
