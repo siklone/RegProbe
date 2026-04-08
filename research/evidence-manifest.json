@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T14:11:30.129840Z",
+  "generated_utc": "2026-04-08T14:20:23.294008Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 312,
@@ -17642,10 +17642,10 @@
               "summary": "The shared mega-trigger runtime lane armed candidate value 1 for AllowAudioToEnableExecutionRequiredPowerRequests and ran the power-plan-and-requests trigger family, but the cap..."
             },
             {
-              "title": "KVM local-KD disassembly shows in-memory generic power-setting query/store layer",
-              "url": "evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/host-review.json and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/local-kd.log and research/notes/power-control-execution-required-powersetting-query-kvm-local-kd-follow-up-20260408.md",
+              "title": "KVM local-KD confirms the execution-required globals are live and set to 1",
+              "url": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd.log and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd.log and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
               "kind": "vm-test",
-              "summary": "Retained local-KD disassembly shows PopQueryPowerSettingUlong and PopGetPowerSettingValue resolving data through PopFindPowerSettingConfiguration under PopSettingLock, while the..."
+              "summary": "Retained local-KD live-state passes show `nt!PopPowerRequestConvertSystemToExecution = 1` and `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1` on the current build, a..."
             }
           ]
         },
@@ -17657,13 +17657,13 @@
         }
       },
       "source_file": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
-      "source_file_sha256": "91f090846fd50983ee6e35701e9c13b33c91e7f85b849612c7c87fc8b1d28fcf",
-      "source_file_size_bytes": 18317,
+      "source_file_sha256": "5193f46976f0abb6155051d1bbcdad7db0b9e3fcf6475170290bc4ab86ee9a4c",
+      "source_file_size_bytes": 23283,
       "name": "Allow Audio To Enable Execution Required Power Requests",
       "category": "Power",
       "area": "Execution-Required Power Request Controls",
       "scope": "device",
-      "summary": "Draft candidate package for AllowAudioToEnableExecutionRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a new wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. The candidate remains research-only because the current-build live state and any earlier Control\\Power seeding path are still unresolved in this checkout.",
+      "summary": "Draft candidate package for AllowAudioToEnableExecutionRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. New retained live-state and direct-reader passes now confirm `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1` and show `PopPowerRequestEvaluateExecutionRequiredStatus` reading that global on the current build. The candidate remains research-only because the earlier Control\\Power seeding path is still unresolved.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -17671,12 +17671,12 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "AllowAudioToEnableExecutionRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, a retained local-KD view of the generic power-setting query/store layer, and a retained wildcard/symbolized binding follow-up. The record remains draft because the visible current-build setting callback story is timeout-specific, the wildcard lineage exposes no `*PowerRequest*Reg*` helper, and the Control\\Power seeding path into the visible power-setting configuration objects is still unresolved.",
+        "why": "AllowAudioToEnableExecutionRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, retained local-KD proof that `PopPowerRequestActiveAudioEnablesExecutionRequired = 1`, a direct current-build reader in `PopPowerRequestEvaluateExecutionRequiredStatus`, a retained local-KD view of the generic power-setting query/store layer, and retained wildcard/symbolized binding follow-ups. The record remains draft because the visible current-build story is still callback-, timer-, and in-memory-state driven, while the earlier Control\\Power seeding path into that state remains unresolved.",
         "blocking_issues": [
-          "The clean baseline leaves AllowAudioToEnableExecutionRequiredPowerRequests absent, so this checkout still lacks a direct live current-build state read for the candidate itself.",
-          "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects is still unresolved.",
+          "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects or execution-required globals is still unresolved.",
           "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowAudioToEnableExecutionRequiredPowerRequests binding site.",
-          "The shared mega-trigger runtime lane armed the candidate but recovered without an exact runtime read."
+          "The lane still lacks a reboot or early-boot diff proving whether the absent Control\\Power value is materialized during initialization.",
+          "The shared mega-trigger runtime lane armed the candidate but recovered without an exact registry read."
         ]
       },
       "app_current_implementation": {
@@ -17706,10 +17706,11 @@
               "state_kind": "value",
               "value": 1,
               "label": "Repo-noted enabled literal",
-              "meaning": "Repo power notes and the mega-trigger runtime candidate arm both treat 1 as the enabled value for this control, but the live current-build state is still unresolved in this checkout.",
+              "meaning": "Repo power notes, the mega-trigger runtime candidate arm, and retained local-KD live-state proof all line up on 1 as the enabled current-build in-memory literal for this control.",
               "evidence_ids": [
                 "repo-power-doc",
-                "vm-power-control-mega-trigger-runtime-20260401"
+                "vm-power-control-mega-trigger-runtime-20260401",
+                "vm-power-control-execution-required-live-kd-20260408"
               ]
             }
           ]
@@ -17789,8 +17790,11 @@
           "evidence_ids": [
             "repo-power-doc",
             "vm-power-control-mega-trigger-runtime-20260401",
+            "vm-power-control-execution-required-live-kd-20260408",
+            "vm-power-control-execution-required-reader-kd-20260408",
             "vm-power-control-execution-required-reglineage-kd-20260408",
-            "ghidra-power-control-execution-required-binding-20260408"
+            "ghidra-power-control-execution-required-binding-20260408",
+            "ghidra-power-control-execution-required-readers-20260408"
           ]
         }
       ],
@@ -17853,6 +17857,33 @@
           "origin": "VM Procmon trace"
         },
         {
+          "evidence_id": "vm-power-control-execution-required-live-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD confirms the execution-required globals are live and set to 1",
+          "location": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd.log and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd.log and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
+          "summary": "Retained local-KD live-state passes show `nt!PopPowerRequestConvertSystemToExecution = 1` and `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1` on the current build, aligning the visible in-memory state with the repo-doc literal of 1 for the execution-required pair.",
+          "strength": "high",
+          "supports": [
+            "value",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-reader-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD disassembly confirms direct current-build readers for the execution-required globals",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd.log and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
+          "summary": "Retained local-KD disassembly shows `PopPowerRequestHandleExecutionEnablementUpdate` directly comparing `PopPowerRequestConvertSystemToExecution` against zero before it calls `PopPowerRequestEvaluateExecutionRequiredStatus`, while `PopPowerRequestEvaluateExecutionRequiredStatus` directly reads `PopPowerRequestActiveAudioEnablesExecutionRequired` and `PopExecutionRequiredTimeout`.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
           "evidence_id": "vm-power-control-execution-required-powersetting-query-kd-20260408",
           "kind": "vm-test",
           "title": "KVM local-KD disassembly shows in-memory generic power-setting query/store layer",
@@ -17890,6 +17921,19 @@
           "supports": [
             "behavior",
             "risk",
+            "version-scope"
+          ],
+          "origin": "Our Ghidra decompilation"
+        },
+        {
+          "evidence_id": "ghidra-power-control-execution-required-readers-20260408",
+          "kind": "decompilation",
+          "title": "Symbol-seeded Ghidra corroborates the execution-required timeout and evaluation readers",
+          "location": "evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/evidence.json and evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
+          "summary": "The retained symbol-seeded Ghidra pass naturally resolved `PopPowerRequestEvaluateExecutionRequiredStatus`, `PopPowerRequestSetExecutionRequiredTimeoutTimer`, and `PopPowerRequestExecutionRequiredSettingCallback` through `PopExecutionRequiredTimeout`, structurally corroborating the current-build reader path around execution-required evaluation and timeout handling.",
+          "strength": "high",
+          "supports": [
+            "behavior",
             "version-scope"
           ],
           "origin": "Our Ghidra decompilation"
@@ -17976,10 +18020,10 @@
               "summary": "The shared mega-trigger runtime lane armed candidate value 1 for AllowSystemRequiredPowerRequests and ran the power-plan-and-requests trigger family, but the capture recovered i..."
             },
             {
-              "title": "KVM local-KD disassembly shows in-memory generic power-setting query/store layer",
-              "url": "evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/host-review.json and evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/local-kd.log and research/notes/power-control-execution-required-powersetting-query-kvm-local-kd-follow-up-20260408.md",
+              "title": "KVM local-KD confirms the execution-required globals are live and set to 1",
+              "url": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd.log and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd.log and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
               "kind": "vm-test",
-              "summary": "Retained local-KD disassembly shows PopQueryPowerSettingUlong and PopGetPowerSettingValue resolving data through PopFindPowerSettingConfiguration under PopSettingLock, while the..."
+              "summary": "Retained local-KD live-state passes show `nt!PopPowerRequestConvertSystemToExecution = 1` and `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1` on the current build, a..."
             }
           ]
         },
@@ -17991,13 +18035,13 @@
         }
       },
       "source_file": "research/records/power.control.allow-system-required-power-requests.json",
-      "source_file_sha256": "a353b6f4c337977cdb9dc3ad09707b1ad144d046725fd44f85ce1376c69b9b85",
-      "source_file_size_bytes": 17876,
+      "source_file_sha256": "2abd9f17285a55b419bdd6af7a156437344cf5ae192006c5e11f6f4a22941345",
+      "source_file_size_bytes": 22797,
       "name": "Allow System Required Power Requests",
       "category": "Power",
       "area": "Execution-Required Power Request Controls",
       "scope": "device",
-      "summary": "Draft candidate package for AllowSystemRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a new wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. The candidate remains research-only because the current-build live state and any earlier Control\\Power seeding path are still unresolved in this checkout.",
+      "summary": "Draft candidate package for AllowSystemRequiredPowerRequests under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean phase-0 batch confirmed the parent key exists while the value is absent on baseline, the repo power notes carry an exact docs hit with literal 1, the targeted current-build string batch found an exact ntoskrnl.exe Unicode hit, the shared mega-trigger runtime lane armed candidate value 1 but recovered without an exact hit, a retained local-KD disassembly pass shows the visible generic power-setting query/store layer operating through PopFindPowerSettingConfiguration, PopPowerSettingChangeStamp, and PopRegisteredPowerSettingCallbacks rather than a visible registry API, and a wildcard KD plus symbol-seeded Ghidra follow-up shows no visible `*PowerRequest*Reg*` helper while the only naturally resolved setting callback is the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback`. New retained live-state and direct-reader passes now confirm `nt!PopPowerRequestConvertSystemToExecution = 1` and show `PopPowerRequestHandleExecutionEnablementUpdate` reading that global on the current build. The candidate remains research-only because the earlier Control\\Power seeding path is still unresolved.",
       "decision": {
         "confidence": "medium",
         "apply_allowed": false,
@@ -18005,12 +18049,12 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "AllowSystemRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, a retained local-KD view of the generic power-setting query/store layer, and a retained wildcard/symbolized binding follow-up. The record remains draft because the visible current-build setting callback story is timeout-specific, the wildcard lineage exposes no `*PowerRequest*Reg*` helper, and the Control\\Power seeding path into the visible power-setting configuration objects is still unresolved.",
+        "why": "AllowSystemRequiredPowerRequests now has exact repo-doc coverage, clean-baseline absence proof, current-build ntoskrnl string corroboration, a real trigger arm, retained local-KD proof that `PopPowerRequestConvertSystemToExecution = 1`, a direct current-build reader in `PopPowerRequestHandleExecutionEnablementUpdate`, a retained local-KD view of the generic power-setting query/store layer, and retained wildcard/symbolized binding follow-ups. The record remains draft because the visible current-build story is still callback-, timer-, and in-memory-state driven, while the earlier Control\\Power seeding path into that state remains unresolved.",
         "blocking_issues": [
-          "The clean baseline leaves AllowSystemRequiredPowerRequests absent, so this checkout still lacks a direct live current-build state read for the candidate itself.",
-          "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects is still unresolved.",
+          "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects or execution-required globals is still unresolved.",
           "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowSystemRequiredPowerRequests binding site.",
-          "The shared mega-trigger runtime lane armed the candidate but recovered without an exact runtime read."
+          "The lane still lacks a reboot or early-boot diff proving whether the absent Control\\Power value is materialized during initialization.",
+          "The shared mega-trigger runtime lane armed the candidate but recovered without an exact registry read."
         ]
       },
       "app_current_implementation": {
@@ -18040,10 +18084,11 @@
               "state_kind": "value",
               "value": 1,
               "label": "Repo-noted enabled literal",
-              "meaning": "Repo power notes and the mega-trigger runtime candidate arm both treat 1 as the enabled value for this control, but the live current-build state is still unresolved in this checkout.",
+              "meaning": "Repo power notes, the mega-trigger runtime candidate arm, and retained local-KD live-state proof all line up on 1 as the enabled current-build in-memory literal for this control.",
               "evidence_ids": [
                 "repo-power-doc",
-                "vm-power-control-mega-trigger-runtime-20260401"
+                "vm-power-control-mega-trigger-runtime-20260401",
+                "vm-power-control-execution-required-live-kd-20260408"
               ]
             }
           ]
@@ -18123,8 +18168,11 @@
           "evidence_ids": [
             "repo-power-doc",
             "vm-power-control-mega-trigger-runtime-20260401",
+            "vm-power-control-execution-required-live-kd-20260408",
+            "vm-power-control-execution-required-reader-kd-20260408",
             "vm-power-control-execution-required-reglineage-kd-20260408",
-            "ghidra-power-control-execution-required-binding-20260408"
+            "ghidra-power-control-execution-required-binding-20260408",
+            "ghidra-power-control-execution-required-readers-20260408"
           ]
         }
       ],
@@ -18187,6 +18235,33 @@
           "origin": "VM Procmon trace"
         },
         {
+          "evidence_id": "vm-power-control-execution-required-live-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD confirms the execution-required globals are live and set to 1",
+          "location": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd.log and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd.log and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
+          "summary": "Retained local-KD live-state passes show `nt!PopPowerRequestConvertSystemToExecution = 1` and `nt!PopPowerRequestActiveAudioEnablesExecutionRequired = 1` on the current build, aligning the visible in-memory state with the repo-doc literal of 1 for the execution-required pair.",
+          "strength": "high",
+          "supports": [
+            "value",
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-control-execution-required-reader-kd-20260408",
+          "kind": "vm-test",
+          "title": "KVM local-KD disassembly confirms direct current-build readers for the execution-required globals",
+          "location": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/summary.json and evidence/files/vm-tooling-staging/local-kd-powerrequest-reader-20260408a/local-kd.log and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
+          "summary": "Retained local-KD disassembly shows `PopPowerRequestHandleExecutionEnablementUpdate` directly comparing `PopPowerRequestConvertSystemToExecution` against zero before it calls `PopPowerRequestEvaluateExecutionRequiredStatus`, while `PopPowerRequestEvaluateExecutionRequiredStatus` directly reads `PopPowerRequestActiveAudioEnablesExecutionRequired` and `PopExecutionRequiredTimeout`.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
           "evidence_id": "vm-power-control-execution-required-powersetting-query-kd-20260408",
           "kind": "vm-test",
           "title": "KVM local-KD disassembly shows in-memory generic power-setting query/store layer",
@@ -18224,6 +18299,19 @@
           "supports": [
             "behavior",
             "risk",
+            "version-scope"
+          ],
+          "origin": "Our Ghidra decompilation"
+        },
+        {
+          "evidence_id": "ghidra-power-control-execution-required-readers-20260408",
+          "kind": "decompilation",
+          "title": "Symbol-seeded Ghidra corroborates the execution-required timeout and evaluation readers",
+          "location": "evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/evidence.json and evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md and research/notes/power-control-execution-required-live-reader-kvm-follow-up-20260408.md",
+          "summary": "The retained symbol-seeded Ghidra pass naturally resolved `PopPowerRequestEvaluateExecutionRequiredStatus`, `PopPowerRequestSetExecutionRequiredTimeoutTimer`, and `PopPowerRequestExecutionRequiredSettingCallback` through `PopExecutionRequiredTimeout`, structurally corroborating the current-build reader path around execution-required evaluation and timeout handling.",
+          "strength": "high",
+          "supports": [
+            "behavior",
             "version-scope"
           ],
           "origin": "Our Ghidra decompilation"

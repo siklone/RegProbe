@@ -1,0 +1,13 @@
+.sympath C:\Tools\Symbols\local-kd-powerrequest-reader-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopPowerRequestEvaluateExecutionRequiredStatus
+uf nt!PopPowerRequestEvaluateExecutionRequiredStatus
+x nt!PopPowerRequestHandleExecutionEnablementUpdate
+uf nt!PopPowerRequestHandleExecutionEnablementUpdate
+x nt!PopPowerRequestExecutionRequiredSettingCallback
+uf nt!PopPowerRequestExecutionRequiredSettingCallback
+x nt!PopPowerRequestCallbackExecutionRequired
+uf nt!PopPowerRequestCallbackExecutionRequired
+.echo REGPROBE_LOCALKD_END
+q
