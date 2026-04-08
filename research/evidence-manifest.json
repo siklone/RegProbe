@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T01:11:14.271601Z",
+  "generated_utc": "2026-04-08T01:54:11.723426Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 317,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T01:11:13.593649Z",
+      "generated_utc": "2026-04-08T01:54:11.036996Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -19526,10 +19526,10 @@
               "summary": "Repo docs list both values under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` and map them to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`."
             },
             {
-              "title": "Repo guest tooling already exposes a reusable timer-resolution trigger primitive",
+              "title": "Repo guest tooling now exposes a dedicated timer-dpc-stress harness",
               "url": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1 and scripts/source_enrichment_scan.py",
               "kind": "repo-code",
-              "summary": "The repo already contains `Invoke-TimerResolutionTrigger`, which directly calls `NtSetTimerResolution` and `timeBeginPeriod`, and this aligns with the enrichment recommendation..."
+              "summary": "The guest mega-trigger runtime script now exposes `timer_dpc_stress`, which layers `NtSetTimerResolution`, `timeBeginPeriod`, concurrent short-period timers, and bounded CPU bur..."
             }
           ]
         },
@@ -19560,8 +19560,8 @@
         }
       },
       "source_file": "research/records/system.kernel-long-dpc-threshold-cluster.json",
-      "source_file_sha256": "42b8f609580add477d4b26e7af83f508488008a04c654624bbca1752608b81d7",
-      "source_file_size_bytes": 14719,
+      "source_file_sha256": "812ed02ac26aa22b1437602cd2e729d4ca295988b853e0de9f3cc84627da0925",
+      "source_file_size_bytes": 14747,
       "name": "Kernel Long DPC Threshold Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Scheduling",
@@ -19580,7 +19580,7 @@
           "runtime_no_read",
           "no-doc-source-outside-repo",
           "live-state-unproven",
-          "no-dedicated-timer-dpc-stress-harness"
+          "dedicated-timer-dpc-stress-lane-unrun"
         ]
       },
       "app_current_implementation": {
@@ -19780,9 +19780,9 @@
         {
           "evidence_id": "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408",
           "kind": "repo-code",
-          "title": "Repo guest tooling already exposes a reusable timer-resolution trigger primitive",
+          "title": "Repo guest tooling now exposes a dedicated timer-dpc-stress harness",
           "location": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1 and scripts/source_enrichment_scan.py",
-          "summary": "The repo already contains `Invoke-TimerResolutionTrigger`, which directly calls `NtSetTimerResolution` and `timeBeginPeriod`, and this aligns with the enrichment recommendation that the next lane should use `timer-dpc-stress` triggers such as high-resolution timer requests and DPC-heavy workload.",
+          "summary": "The guest mega-trigger runtime script now exposes `timer_dpc_stress`, which layers `NtSetTimerResolution`, `timeBeginPeriod`, concurrent short-period timers, and bounded CPU burst jobs, aligning directly with the enrichment recommendation for `timer-dpc-stress` triggers.",
           "strength": "medium",
           "supports": [
             "behavior",
