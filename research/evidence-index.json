@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T18:21:02.315779Z",
+  "generated_utc": "2026-04-08T18:30:53.066806Z",
   "summary": {
     "total_records": 313,
     "validated": 245,
@@ -21174,7 +21174,7 @@
       "category": "System",
       "area": "Session Manager Executive Registry",
       "scope": "device",
-      "summary": "Draft candidate package for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and a dedicated tools-hardened lightweight ETW follow-up still stayed a clean runtime no-hit. That keeps the lane at Class B with a runtime_no_read and trigger-context gate.",
+      "summary": "Draft candidate package for UuidSequenceNumber under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, a retained clean-baseline Procmon boot-log lane captured the same Executive family but still returned MATCH_COUNT=0 for UuidSequenceNumber, and a dedicated tools-hardened lightweight ETW follow-up also stayed a clean runtime no-hit. That keeps the lane at Class B with a runtime_no_read and trigger-context gate rather than a missing-Procmon gap.",
       "evidence_class": {
         "record_id": "system.executive-uuid-sequence-number",
         "tweak_id": "system.executive-uuid-sequence-number",
@@ -21232,6 +21232,12 @@
               "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
               "kind": "registry-observation",
               "summary": "The 96-key phase-0 live batch confirmed UuidSequenceNumber exists on the clean baseline with observed preview value 25272111."
+            },
+            {
+              "title": "Clean-baseline Procmon boot-log review for the Executive family",
+              "url": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/executive-worker-threads-procmon-bootlog.pml.md and research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md and research/notes/system-executive-uuid-sequence-number-procmon-bootlog-follow-up-20260408.md",
+              "kind": "procmon-trace",
+              "summary": "A retained clean-baseline Procmon boot-log lane captured a real boot-log PML and CSV for the same Session Manager Executive family, but the filtered view still returned MATCH_CO..."
             }
           ]
         },
@@ -21249,7 +21255,7 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "UuidSequenceNumber is backed by clean baseline existence, an exact current-build ntoskrnl string hit, bounded early-boot ETL evidence that the same value is active under Session Manager Executive, and a dedicated tools-hardened lightweight ETW lane that still stayed a clean runtime no-hit. That is enough for a strong research package, but not enough for Class A on the current VMware baseline.",
+        "why": "UuidSequenceNumber is backed by clean baseline existence, an exact current-build ntoskrnl string hit, bounded early-boot ETL evidence that the same value is active under Session Manager Executive, a retained clean-baseline Procmon boot-log capture that still returned MATCH_COUNT=0 for the value, and a dedicated tools-hardened lightweight ETW lane that also stayed a clean runtime no-hit. That is enough for a strong research package, but not enough for Class A on the current VMware baseline.",
         "blocking_issues": [
           "runtime_no_read",
           "trigger_context_unclear"
@@ -21393,6 +21399,20 @@
             "version-scope"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-session-manager-executive-procmon-bootlog-20260328",
+          "kind": "procmon-trace",
+          "title": "Clean-baseline Procmon boot-log review for the Executive family",
+          "location": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/executive-worker-threads-procmon-bootlog.pml.md and research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md and research/notes/system-executive-uuid-sequence-number-procmon-bootlog-follow-up-20260408.md",
+          "summary": "A retained clean-baseline Procmon boot-log lane captured a real boot-log PML and CSV for the same Session Manager Executive family, but the filtered view still returned MATCH_COUNT=0 for UuidSequenceNumber.",
+          "strength": "medium",
+          "supports": [
+            "behavior",
+            "risk",
+            "version-scope"
+          ],
+          "origin": "VM Procmon trace"
         },
         {
           "evidence_id": "vm-executive-uuid-lightweight-runtime-20260330",

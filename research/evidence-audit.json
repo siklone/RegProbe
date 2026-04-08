@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-08T18:21:02.028212Z",
+  "generated_utc": "2026-04-08T18:30:52.757556Z",
   "summary": {
     "total_active_records": 259,
     "class_counts": {
@@ -16,9 +16,9 @@
     },
     "next_missing_layer_counts": {
       "none": 249,
-      "procmon": 3,
+      "procmon": 2,
       "runtime-trace": 2,
-      "decision-gate": 4,
+      "decision-gate": 5,
       "ghidra": 1
     },
     "re_audit_required_count": 12
@@ -9840,21 +9840,23 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "procmon",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_procmon",
         "static_ghidra",
         "behavior_wpr"
       ],
       "tools_used": [
         "etw",
+        "procmon",
         "ghidra",
         "wpr"
       ],
