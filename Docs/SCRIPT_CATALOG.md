@@ -152,7 +152,7 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
   current watchdog follow-up lane
 - `registry-research-framework/tools/run-path-aware-static-probe.ps1`
 - `registry-research-framework/tools/run-path-aware-runtime-probe.ps1`
-  current path-aware residual-candidate pair
+  current path-aware residual-candidate lane, including the narrow execution-required runtime pair
 - `registry-research-framework/tools/run-executive-uuid-sequence-number-lightweight-runtime-followup.ps1`
   current UUID-specific follow-up lane
 - `registry-research-framework/tools/run-import-dynamic-resolution-probe.ps1`

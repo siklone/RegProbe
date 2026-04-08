@@ -59,6 +59,26 @@ $candidates = @(
         collision_path_fragment = 'SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD'
         short_trigger_profile = 'session-manager-io-raw-io-short'
         split_trigger_profile = 'session-manager-io-raw-io-only'
+    },
+    [ordered]@{
+        candidate_id = 'power.control.allow-system-required-power-requests'
+        label = 'power-control-allow-system-required-power-requests'
+        family = 'power-control-execution-required'
+        registry_path_fragment = 'SYSTEM\\CurrentControlSet\\Control\\Power'
+        value_name = 'AllowSystemRequiredPowerRequests'
+        collision_path_fragment = 'SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride'
+        short_trigger_profile = 'execution-required-power-requests-short'
+        split_trigger_profile = 'execution-required-power-requests-only'
+    },
+    [ordered]@{
+        candidate_id = 'power.control.allow-audio-to-enable-execution-required-power-requests'
+        label = 'power-control-allow-audio-to-enable-execution-required-power-requests'
+        family = 'power-control-execution-required'
+        registry_path_fragment = 'SYSTEM\\CurrentControlSet\\Control\\Power'
+        value_name = 'AllowAudioToEnableExecutionRequiredPowerRequests'
+        collision_path_fragment = 'SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride'
+        short_trigger_profile = 'execution-required-power-requests-short'
+        split_trigger_profile = 'execution-required-power-requests-only'
     }
 )
 
@@ -208,6 +228,86 @@ function Invoke-SessionManagerIoBurst {
     return @($failures)
 }
 
+function Invoke-ExecutionRequiredPowerRequestBurst {
+    $failures = @()
+    $original = $null
+    try {
+        $original = Get-ActiveSchemeGuid
+    }
+    catch {
+    }
+
+    try {
+        & powercfg /requests 2>$null | Out-Null
+        & powercfg /requestsoverride 2>$null | Out-Null
+        & powercfg /setactive SCHEME_MIN 2>$null | Out-Null
+        Start-Sleep -Seconds 2
+        & powercfg /setactive SCHEME_BALANCED 2>$null | Out-Null
+        Start-Sleep -Seconds 2
+
+        Add-Type @"
+using System;
+using System.Runtime.InteropServices;
+public static class RegProbePowerRequest {
+    [DllImport("kernel32.dll", SetLastError=true)]
+    public static extern IntPtr PowerCreateRequest(ref REASON_CONTEXT Context);
+    [DllImport("kernel32.dll", SetLastError=true)]
+    public static extern bool PowerSetRequest(IntPtr PowerRequest, int RequestType);
+    [DllImport("kernel32.dll", SetLastError=true)]
+    public static extern bool PowerClearRequest(IntPtr PowerRequest, int RequestType);
+    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
+    public struct REASON_CONTEXT {
+        public uint Version;
+        public uint Flags;
+        [MarshalAs(UnmanagedType.LPWStr)]
+        public string SimpleReasonString;
+    }
+}
+"@
+
+        $ctx = New-Object RegProbePowerRequest+REASON_CONTEXT
+        $ctx.Version = 0
+        $ctx.Flags = 1
+        $ctx.SimpleReasonString = 'RegProbe path-aware execution-required trigger'
+        $request = [RegProbePowerRequest]::PowerCreateRequest([ref]$ctx)
+        if ($request -ne [IntPtr]::Zero) {
+            foreach ($kind in @(0, 1, 3)) {
+                [RegProbePowerRequest]::PowerSetRequest($request, $kind) | Out-Null
+                Start-Sleep -Seconds 1
+                & powercfg /requests 2>$null | Out-Null
+            }
+            foreach ($kind in @(0, 1, 3)) {
+                [RegProbePowerRequest]::PowerClearRequest($request, $kind) | Out-Null
+            }
+        }
+        else {
+            $failures += [ordered]@{
+                command = 'PowerCreateRequest'
+                exit_code = 1
+                stdout = ''
+                stderr = 'PowerCreateRequest returned NULL.'
+            }
+        }
+
+        & powercfg /requests 2>$null | Out-Null
+    }
+    catch {
+        $failures += [ordered]@{
+            command = 'execution-required-power-request-burst'
+            exit_code = 1
+            stdout = ''
+            stderr = $_.Exception.Message
+        }
+    }
+    finally {
+        if (-not [string]::IsNullOrWhiteSpace($original)) {
+            & powercfg /setactive $original 2>$null | Out-Null
+        }
+    }
+
+    return @($failures)
+}
+
 function Invoke-TriggerProfile {
     param([string]$Profile)
 
@@ -216,6 +316,8 @@ function Invoke-TriggerProfile {
         'uac-policy-surface-only' { return @(Invoke-UacSurfaceBurst) }
         'session-manager-io-raw-io-short' { return @(Invoke-SessionManagerIoBurst) }
         'session-manager-io-raw-io-only' { return @(Invoke-SessionManagerIoBurst) }
+        'execution-required-power-requests-short' { return @(Invoke-ExecutionRequiredPowerRequestBurst) }
+        'execution-required-power-requests-only' { return @(Invoke-ExecutionRequiredPowerRequestBurst) }
         default { throw "Unknown trigger profile: $Profile" }
     }
 }
@@ -771,4 +873,3 @@ Write-Json -Payload $summary -HostPath (Join-Path $hostWorkRoot 'summary.json') 
 Write-Json -Payload @($results.ToArray()) -HostPath (Join-Path $hostWorkRoot 'results.json') -RepoPath $repoResultsPath
 
 Write-Output $repoSummaryPath
-

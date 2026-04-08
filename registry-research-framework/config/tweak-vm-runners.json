@@ -96,6 +96,20 @@
         "-SettleSeconds",
         "20"
       ]
+    },
+    "power.control.allow-system-required-power-requests": {
+      "script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "args": [
+        "-CandidateIds",
+        "power.control.allow-system-required-power-requests"
+      ]
+    },
+    "power.control.allow-audio-to-enable-execution-required-power-requests": {
+      "script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "args": [
+        "-CandidateIds",
+        "power.control.allow-audio-to-enable-execution-required-power-requests"
+      ]
     }
   },
   "procmon": {

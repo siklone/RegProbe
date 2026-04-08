@@ -11,6 +11,14 @@ RegProbe now uses an escalation model for hard runtime cases instead of treating
 
 Use the cheaper lane first and move to the more expensive lane only when the earlier one stays inconclusive.
 
+For the execution-required power-request pair, prefer the narrow path-aware ETW lane before rerunning the broad mega-trigger pilot:
+
+- `registry-research-framework/tools/run-path-aware-runtime-probe.ps1`
+- runner mappings in `registry-research-framework/config/tweak-vm-runners.json`
+- targets:
+  - `power.control.allow-system-required-power-requests`
+  - `power.control.allow-audio-to-enable-execution-required-power-requests`
+
 ## Safe Mega-Trigger Runtime v2
 
 The current power-control runtime pilot is a recovery-first orchestration lane:
@@ -54,6 +62,7 @@ Status today:
 - the guest gets through all eight pilot triggers
 - the remaining blocker is ETL parsing after trace stop
 - until that parser issue is closed, treat this lane as `pilot / follow-up`, not final classification
+- for the execution-required pair specifically, treat this broad lane as fallback once the narrow path-aware ETW lane has been tried
 
 ## WinDbg Dead-Flag Arbiter
 

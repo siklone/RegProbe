@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -69,6 +70,29 @@ class PipelineCaptureStatusTests(unittest.TestCase):
         self.assertTrue(v31_pipeline.runner_required({"suspected_layer": "kernel", "boot_phase_relevant": False}))
         self.assertTrue(v31_pipeline.runner_required({"suspected_layer": "user-mode", "boot_phase_relevant": True}))
         self.assertFalse(v31_pipeline.runner_required({"suspected_layer": "user-mode", "boot_phase_relevant": False}))
+
+
+class RunnerConfigTests(unittest.TestCase):
+    def test_execution_required_pair_uses_path_aware_runtime_runner(self) -> None:
+        config_path = REPO_ROOT / "registry-research-framework" / "config" / "tweak-vm-runners.json"
+        payload = json.loads(config_path.read_text(encoding="utf-8"))
+        runtime = payload["runtime"]
+
+        for tweak_id in (
+            "power.control.allow-system-required-power-requests",
+            "power.control.allow-audio-to-enable-execution-required-power-requests",
+        ):
+            entry = runtime[tweak_id]
+            self.assertEqual(entry["script"], "registry-research-framework/tools/run-path-aware-runtime-probe.ps1")
+            self.assertEqual(entry["args"], ["-CandidateIds", tweak_id])
+
+    def test_path_aware_runtime_probe_declares_execution_required_candidates(self) -> None:
+        script_path = REPO_ROOT / "registry-research-framework" / "tools" / "run-path-aware-runtime-probe.ps1"
+        source = script_path.read_text(encoding="utf-8")
+
+        self.assertIn("power.control.allow-system-required-power-requests", source)
+        self.assertIn("power.control.allow-audio-to-enable-execution-required-power-requests", source)
+        self.assertIn("execution-required-power-requests-short", source)
 
 
 class RegistrySideeffectPipelineTests(unittest.TestCase):
