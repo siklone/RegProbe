@@ -1206,8 +1206,8 @@ function Get-TraceLinesFromXml {
         exists = $true
         event_count = $eventCount
         line_count = @($lines).Count
-        element_name_counts = @(& $toCountSummary $elementCounts)
-        data_name_counts = @(& $toCountSummary $dataNameCounts)
+        element_name_counts = @(& $toCountSummary -Map $elementCounts)
+        data_name_counts = @(& $toCountSummary -Map $dataNameCounts)
         sample_events = @($sampleEvents)
     }
 
