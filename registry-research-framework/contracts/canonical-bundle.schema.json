@@ -10,6 +10,9 @@
     "feature_area",
     "discovery_source",
     "discovery_reason",
+    "observed_default",
+    "recommended_value",
+    "rollback_value",
     "execution_context",
     "promotion_state",
     "promotion_blockers",
@@ -20,6 +23,7 @@
     "verification_environment",
     "negative_evidence",
     "before_after",
+    "source_enrichment",
     "bench_results"
   ],
   "properties": {
@@ -31,6 +35,9 @@
     "key_path": {"type": ["string", "null"]},
     "value_name": {"type": ["string", "null"]},
     "value_type": {"type": ["string", "null"]},
+    "observed_default": {"type": ["object", "null"]},
+    "recommended_value": {"type": ["object", "null"]},
+    "rollback_value": {"type": ["object", "null"]},
     "execution_context": {
       "$ref": "./execution-context.schema.json"
     },
@@ -54,8 +61,15 @@
     "verification_environment": {"type": "object"},
     "negative_evidence": {"type": "object"},
     "before_after": {"type": "object"},
+    "source_enrichment": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
     "bench_results": {"type": "object"},
     "score_breakdown": {"type": "object"},
+    "documentation_status": {"type": "object"},
+    "evidence_status": {"type": "object"},
+    "rollback_status": {"type": "object"},
     "verification_context": {"type": "object"}
   }
 }

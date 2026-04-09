@@ -182,5 +182,291 @@
     "dead_flag_four_conditions_met": true,
     "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704/summary.json); incident reviewed and cleared on baseline-20260327-regprobe-visible-shell-stable.",
     "new_pipeline_version": "v3.1"
+  },
+  "schema_version": "1.0",
+  "candidate_id": "performance.disable-taskbar-animations",
+  "feature_area": "Explorer Taskbar Animation Flags",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "TaskbarAnimations",
+  "value_type": "REG_DWORD",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Windows baseline observed in guest",
+    "label": "Windows baseline observed in guest",
+    "applies_to": "Windows user profiles exposing TaskbarAnimations",
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Guest baseline on Win25H2Clean was 0 and the reversible probe restored it to 0.",
+    "evidence_ids": [
+      "runtime-taskbar-animations-registry-diff",
+      "procmon-taskbar-animations-registry-read"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "disable-taskbar-animations",
+    "label": "Disable Taskbar Animations",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Set TaskbarAnimations=0 to disable taskbar animations.",
+    "evidence_ids": [
+      "runtime-taskbar-animations-registry-diff",
+      "procmon-taskbar-animations-registry-read",
+      "ghidra-taskbar-taskbaranimations",
+      "app-performance-provider"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Windows baseline observed in guest",
+    "label": "Windows baseline observed in guest",
+    "applies_to": "Windows user profiles exposing TaskbarAnimations",
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Guest baseline on Win25H2Clean was 0 and the reversible probe restored it to 0.",
+    "evidence_ids": [
+      "runtime-taskbar-animations-registry-diff",
+      "procmon-taskbar-animations-registry-read"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "promoted",
+  "promotion_blockers": [],
+  "record_promotion_allowed": true,
+  "tweak_ingest_allowed": true,
+  "tweak_origin": "legacy-curated",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "performance.disable-taskbar-animations",
+    "record_id": "performance.disable-taskbar-animations",
+    "tweak_id": "performance.disable-taskbar-animations",
+    "tweak_origin": "legacy-curated",
+    "promotion_state": "promoted",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": true,
+    "apply_allowed": true,
+    "app_mapping_status": "matches-research",
+    "next_missing_layer": "none",
+    "debug_override_allowed": false,
+    "last_evaluated_at": "2026-04-09T01:27:55.020830Z",
+    "score_breakdown": {
+      "static_evidence_strength": 4,
+      "runtime_evidence_strength": 4,
+      "rollback_clarity": 5,
+      "blast_radius": 2,
+      "tweak_suitability": 5,
+      "privilege_complexity": 4,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 5,
+      "overall_score": 4.22,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": false,
+      "confidence": "high"
+    },
+    "evidence_status": {
+      "evidence_count": 6,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": true,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": true
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Windows baseline observed in guest",
+        "label": "Windows baseline observed in guest",
+        "applies_to": "Windows user profiles exposing TaskbarAnimations",
+        "state_kind": "value",
+        "value": 0,
+        "rationale": "Guest baseline on Win25H2Clean was 0 and the reversible probe restored it to 0.",
+        "evidence_ids": [
+          "runtime-taskbar-animations-registry-diff",
+          "procmon-taskbar-animations-registry-read"
+        ],
+        "rollback_strategy": "restore_default"
+      }
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-26T00:00:00Z",
+      "stale_age_days": 14
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-26T00:00:00Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-26T00:00:00Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {},
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "ghidra-taskbar-taskbaranimations",
+      "kind": "ghidra-headless",
+      "title": "Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path",
+      "location": "evidence/files/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "summary": "A headless Ghidra pass on Taskbar.dll found the TaskbarAnimations string and decompiled a function that reads SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations through Ordinal_123 after checking taskbar animation state with SystemParametersInfoW. That gives direct code-side proof that the taskbar consumes this flag on this build.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-provenance-performance-disable-taskbar-animations",
+      "kind": "repo-doc",
+      "title": "Repo source note for performance.disable-taskbar-animations",
+      "location": "Docs/tweaks/tweak-provenance.json",
+      "supports": [
+        "path",
+        "value",
+        "ui-mapping"
+      ],
+      "summary": "The repo source note links TaskbarAnimations to upstream nohuto research and marks the tweak as repo-backed.",
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "research/notes/taskbar-animations-procmon-validation-20260326.md",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "The reversible probe confirmed the 0 / 1 mapping, Procmon showed explorer.exe reading both states on Win25H2Clean, and a Ghidra pass on Taskbar.dll exposed a code-side read of TaskbarAnimations from Explorer\\Advanced.",
+      "strength": "high"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "executed": false,
+    "summary": null,
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 4,
+    "runtime_evidence_strength": 4,
+    "rollback_clarity": 5,
+    "blast_radius": 2,
+    "tweak_suitability": 5,
+    "privilege_complexity": 4,
+    "build_specificity": 5,
+    "sibling_expansion_value": 4,
+    "bench_priority": 5,
+    "overall_score": 4.22,
+    "next_missing_layer": "none"
+  },
+  "documentation_status": {
+    "record_status": "validated",
+    "has_validation_proof": true,
+    "has_official_evidence": false,
+    "confidence": "high"
+  },
+  "evidence_status": {
+    "evidence_count": 6,
+    "next_missing_layer": "none",
+    "has_procmon_evidence": true,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": true
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Windows baseline observed in guest",
+      "label": "Windows baseline observed in guest",
+      "applies_to": "Windows user profiles exposing TaskbarAnimations",
+      "state_kind": "value",
+      "value": 0,
+      "rationale": "Guest baseline on Win25H2Clean was 0 and the reversible probe restored it to 0.",
+      "evidence_ids": [
+        "runtime-taskbar-animations-registry-diff",
+        "procmon-taskbar-animations-registry-read"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "verification_context": {
+    "record_id": "performance.disable-taskbar-animations",
+    "tweak_id": "performance.disable-taskbar-animations",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
   }
 }

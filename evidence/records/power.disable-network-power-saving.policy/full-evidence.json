@@ -221,5 +221,291 @@
     "notes": "This child record is currently doc-driven. No dedicated Ghidra+IDA parity artifact is attached yet."
   },
   "research_record": "research/records/power.disable-network-power-saving.policy.json",
-  "research_record_fallback": "research/records/power.disable-network-power-saving.policy.review.json"
+  "research_record_fallback": "research/records/power.disable-network-power-saving.policy.review.json",
+  "schema_version": "1.0",
+  "candidate_id": "power.disable-network-power-saving.policy",
+  "feature_area": "TCP/IP offload + MMCSS policy",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+  "value_name": "DisableTaskOffload",
+  "value_type": "REG_DWORD",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Documented offload baseline and MMCSS rules",
+    "label": "Documented offload baseline and MMCSS rules",
+    "applies_to": "Windows systems where DisableTaskOffload follows Microsoft's documented baseline and SystemResponsiveness is interpreted using Microsoft's MMCSS rules",
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Microsoft lists 0 as the enabled baseline.",
+    "evidence_ids": [
+      "ms-task-offload",
+      "ms-mmcss"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "windows-default",
+    "label": "Windows default",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Keep the documented task-offload enabled baseline.",
+    "evidence_ids": [
+      "ms-task-offload",
+      "ms-mmcss"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Documented offload baseline and MMCSS rules",
+    "label": "Documented offload baseline and MMCSS rules",
+    "applies_to": "Windows systems where DisableTaskOffload follows Microsoft's documented baseline and SystemResponsiveness is interpreted using Microsoft's MMCSS rules",
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Microsoft lists 0 as the enabled baseline.",
+    "evidence_ids": [
+      "ms-task-offload",
+      "ms-mmcss"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "promoted",
+  "promotion_blockers": [],
+  "record_promotion_allowed": true,
+  "tweak_ingest_allowed": true,
+  "tweak_origin": "legacy-curated",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "power.disable-network-power-saving.policy",
+    "record_id": "power.disable-network-power-saving.policy",
+    "tweak_id": "power.disable-network-power-saving.policy",
+    "tweak_origin": "legacy-curated",
+    "promotion_state": "promoted",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": true,
+    "apply_allowed": true,
+    "app_mapping_status": "matches-research",
+    "next_missing_layer": "none",
+    "debug_override_allowed": false,
+    "last_evaluated_at": "2026-04-09T01:27:55.031796Z",
+    "score_breakdown": {
+      "static_evidence_strength": 5,
+      "runtime_evidence_strength": 1,
+      "rollback_clarity": 5,
+      "blast_radius": 2,
+      "tweak_suitability": 5,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 5,
+      "overall_score": 3.89,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": true,
+      "confidence": "high"
+    },
+    "evidence_status": {
+      "evidence_count": 3,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": false,
+      "has_ghidra_evidence": false,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": false
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Documented offload baseline and MMCSS rules",
+        "label": "Documented offload baseline and MMCSS rules",
+        "applies_to": "Windows systems where DisableTaskOffload follows Microsoft's documented baseline and SystemResponsiveness is interpreted using Microsoft's MMCSS rules",
+        "state_kind": "value",
+        "value": 0,
+        "rationale": "Microsoft lists 0 as the enabled baseline.",
+        "evidence_ids": [
+          "ms-task-offload",
+          "ms-mmcss"
+        ],
+        "rollback_strategy": "restore_default"
+      }
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-31T00:00:00Z",
+      "stale_age_days": 9
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-31T00:00:00Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-31T00:00:00Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {},
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "ms-task-offload",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "summary": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters, with 1 disabling task offloads and 0 enabling them.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-mmcss",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Multimedia Class Scheduler Service",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "allowed-values"
+      ],
+      "summary": "Microsoft documents SystemResponsiveness under the SystemProfile key and explains the rounding/clamping behavior. This record uses that page for the path and value-handling rules, not as proof of NetworkThrottlingIndex semantics.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail.",
+      "strength": "high"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "executed": false,
+    "summary": null,
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 5,
+    "runtime_evidence_strength": 1,
+    "rollback_clarity": 5,
+    "blast_radius": 2,
+    "tweak_suitability": 5,
+    "privilege_complexity": 3,
+    "build_specificity": 5,
+    "sibling_expansion_value": 4,
+    "bench_priority": 5,
+    "overall_score": 3.89,
+    "next_missing_layer": "none"
+  },
+  "documentation_status": {
+    "record_status": "validated",
+    "has_validation_proof": true,
+    "has_official_evidence": true,
+    "confidence": "high"
+  },
+  "evidence_status": {
+    "evidence_count": 3,
+    "next_missing_layer": "none",
+    "has_procmon_evidence": false,
+    "has_ghidra_evidence": false,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": false
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Documented offload baseline and MMCSS rules",
+      "label": "Documented offload baseline and MMCSS rules",
+      "applies_to": "Windows systems where DisableTaskOffload follows Microsoft's documented baseline and SystemResponsiveness is interpreted using Microsoft's MMCSS rules",
+      "state_kind": "value",
+      "value": 0,
+      "rationale": "Microsoft lists 0 as the enabled baseline.",
+      "evidence_ids": [
+        "ms-task-offload",
+        "ms-mmcss"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "verification_context": {
+    "record_id": "power.disable-network-power-saving.policy",
+    "tweak_id": "power.disable-network-power-saving.policy",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
+  }
 }

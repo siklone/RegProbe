@@ -206,5 +206,277 @@
     "dead_flag_four_conditions_met": true,
     "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json)",
     "new_pipeline_version": "v3.1"
+  },
+  "schema_version": "1.0",
+  "candidate_id": "audio.show-disconnected-devices",
+  "feature_area": "Sound Control Panel DeviceCpl Flags",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+  "value_name": "ShowDisconnectedDevices",
+  "value_type": "REG_DWORD",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Default state not captured",
+    "label": "Default state not captured",
+    "applies_to": "Classic Sound control panel profiles where the value is absent",
+    "state_kind": "unknown",
+    "value": null,
+    "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+    "evidence_ids": [
+      "procmon-audio-show-disconnected-devices",
+      "runtime-audio-show-disconnected-devices-v31"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "show-disconnected-audio-devices",
+    "label": "Show disconnected audio devices",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": 1,
+    "rationale": "Set the runtime-observed preference to the show-disconnected state that the Sound control panel reads on this build.",
+    "evidence_ids": [
+      "procmon-audio-show-disconnected-devices",
+      "app-audio-provider",
+      "runtime-audio-show-disconnected-devices-v31"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Default state not captured",
+    "label": "Default state not captured",
+    "applies_to": "Classic Sound control panel profiles where the value is absent",
+    "state_kind": "unknown",
+    "value": null,
+    "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+    "evidence_ids": [
+      "procmon-audio-show-disconnected-devices",
+      "runtime-audio-show-disconnected-devices-v31"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "promoted",
+  "promotion_blockers": [],
+  "record_promotion_allowed": true,
+  "tweak_ingest_allowed": true,
+  "tweak_origin": "legacy-curated",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "audio.show-disconnected-devices",
+    "record_id": "audio.show-disconnected-devices",
+    "tweak_id": "audio.show-disconnected-devices",
+    "tweak_origin": "legacy-curated",
+    "promotion_state": "promoted",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": true,
+    "apply_allowed": true,
+    "app_mapping_status": "matches-research",
+    "next_missing_layer": "none",
+    "debug_override_allowed": false,
+    "last_evaluated_at": "2026-04-09T01:27:55.016913Z",
+    "score_breakdown": {
+      "static_evidence_strength": 4,
+      "runtime_evidence_strength": 3,
+      "rollback_clarity": 5,
+      "blast_radius": 4,
+      "tweak_suitability": 5,
+      "privilege_complexity": 4,
+      "build_specificity": 5,
+      "sibling_expansion_value": 2,
+      "bench_priority": 3,
+      "overall_score": 3.89,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": false,
+      "confidence": "high"
+    },
+    "evidence_status": {
+      "evidence_count": 4,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": true,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": false
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Default state not captured",
+        "label": "Default state not captured",
+        "applies_to": "Classic Sound control panel profiles where the value is absent",
+        "state_kind": "unknown",
+        "value": null,
+        "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+        "evidence_ids": [
+          "procmon-audio-show-disconnected-devices",
+          "runtime-audio-show-disconnected-devices-v31"
+        ],
+        "rollback_strategy": "restore_default"
+      }
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-27T00:00:00Z",
+      "stale_age_days": 13
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-27T00:00:00Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-27T00:00:00Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {},
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "ghidra-mmsys-devicecpl-flags",
+      "kind": "ghidra-headless",
+      "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
+      "location": "evidence/files/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "summary": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "research/notes/audio-show-disconnected-devices-v31-reaudit-20260327.md",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "The record-specific v3.1 re-audit note consolidates the existing Procmon and Ghidra proof with the 2026-03-27 runtime-runner summary. The class-driving proof remains the Procmon plus Ghidra convergence; the runtime lane is recorded as supplemental rollback and VM-safety evidence.",
+      "strength": "high"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "executed": false,
+    "summary": null,
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 4,
+    "runtime_evidence_strength": 3,
+    "rollback_clarity": 5,
+    "blast_radius": 4,
+    "tweak_suitability": 5,
+    "privilege_complexity": 4,
+    "build_specificity": 5,
+    "sibling_expansion_value": 2,
+    "bench_priority": 3,
+    "overall_score": 3.89,
+    "next_missing_layer": "none"
+  },
+  "documentation_status": {
+    "record_status": "validated",
+    "has_validation_proof": true,
+    "has_official_evidence": false,
+    "confidence": "high"
+  },
+  "evidence_status": {
+    "evidence_count": 4,
+    "next_missing_layer": "none",
+    "has_procmon_evidence": true,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": false
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Default state not captured",
+      "label": "Default state not captured",
+      "applies_to": "Classic Sound control panel profiles where the value is absent",
+      "state_kind": "unknown",
+      "value": null,
+      "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+      "evidence_ids": [
+        "procmon-audio-show-disconnected-devices",
+        "runtime-audio-show-disconnected-devices-v31"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "verification_context": {
+    "record_id": "audio.show-disconnected-devices",
+    "tweak_id": "audio.show-disconnected-devices",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
   }
 }

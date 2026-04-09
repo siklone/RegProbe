@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-09T01:08:43.883210Z",
+  "generated_utc": "2026-04-09T01:28:05.461439Z",
   "summary": {
     "total_active_records": 259,
     "class_counts": {
@@ -19,9 +19,10 @@
       "decision-gate": 10
     },
     "promotion_state_counts": {
-      "promoted": 241,
-      "blocked": 10,
-      "promotion-eligible": 8
+      "promoted": 237,
+      "blocked": 11,
+      "promotion-eligible": 8,
+      "revalidation-pending": 3
     },
     "re_audit_required_count": 12
   },
@@ -75,7 +76,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -84,7 +85,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -310,7 +311,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 5,
@@ -319,7 +320,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -376,7 +377,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -385,7 +386,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.33,
+        "overall_score": 3.44,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -442,7 +443,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -451,7 +452,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -510,7 +511,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -519,7 +520,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -576,7 +577,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -585,7 +586,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -642,7 +643,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -651,7 +652,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -708,7 +709,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -717,7 +718,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -774,7 +775,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -783,7 +784,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -842,7 +843,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -851,7 +852,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -908,7 +909,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -917,7 +918,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.33,
+        "overall_score": 3.44,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -978,7 +979,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -987,7 +988,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1044,7 +1045,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1053,7 +1054,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1110,7 +1111,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1119,7 +1120,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1257,7 +1258,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1266,7 +1267,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1327,7 +1328,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1336,7 +1337,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1397,7 +1398,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1406,7 +1407,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1467,7 +1468,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1476,7 +1477,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1537,7 +1538,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1546,7 +1547,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1603,7 +1604,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1612,7 +1613,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1673,7 +1674,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1682,7 +1683,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1743,7 +1744,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1752,7 +1753,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1813,7 +1814,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1822,7 +1823,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1883,7 +1884,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1892,7 +1893,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1953,7 +1954,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -1962,7 +1963,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2023,7 +2024,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -2032,7 +2033,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2093,7 +2094,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -2102,7 +2103,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2159,7 +2160,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2168,7 +2169,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2225,7 +2226,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2234,7 +2235,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2291,7 +2292,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2300,7 +2301,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2357,7 +2358,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2366,7 +2367,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2423,7 +2424,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2432,7 +2433,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2489,7 +2490,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2498,7 +2499,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2555,7 +2556,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2564,7 +2565,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2621,7 +2622,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2630,7 +2631,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2687,7 +2688,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2696,7 +2697,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2753,7 +2754,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2762,7 +2763,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2819,7 +2820,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2828,7 +2829,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2885,7 +2886,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2894,7 +2895,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -2951,7 +2952,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -2960,7 +2961,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3017,7 +3018,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3026,7 +3027,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3083,7 +3084,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3092,7 +3093,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3149,7 +3150,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3158,7 +3159,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3215,7 +3216,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3224,7 +3225,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3281,7 +3282,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3290,7 +3291,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3347,7 +3348,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3356,7 +3357,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3413,7 +3414,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3422,7 +3423,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3479,7 +3480,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3488,7 +3489,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3545,7 +3546,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3554,7 +3555,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3611,7 +3612,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3620,7 +3621,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3677,7 +3678,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3686,7 +3687,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3743,7 +3744,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3752,7 +3753,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3809,7 +3810,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3818,7 +3819,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3875,7 +3876,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3884,7 +3885,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -3941,7 +3942,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -3950,7 +3951,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4007,7 +4008,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -4016,7 +4017,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4073,7 +4074,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -4082,7 +4083,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4139,7 +4140,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -4148,7 +4149,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4205,7 +4206,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -4214,7 +4215,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4271,7 +4272,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -4280,7 +4281,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4337,7 +4338,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -4346,7 +4347,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4403,7 +4404,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -4412,7 +4413,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4547,7 +4548,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -4556,7 +4557,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4613,7 +4614,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -4622,7 +4623,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4679,7 +4680,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -4688,7 +4689,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -4745,8 +4746,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "runtime_no_read",
-        "path_context_unclear"
+        "documentation-first-review",
+        "path_context_unclear",
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -4818,14 +4820,15 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects or execution-required globals is still unresolved.",
-        "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowAudioToEnableExecutionRequiredPowerRequests binding site.",
+        "A retained alignment audit now links those adjacent runtime hits to the visible current-build override family rather than to an exact execution-required pair read, which strengthens the case that the missing layer is earlier seeding or a narrower exact-read lane.",
         "A retained broad soft-reboot lane now exists, but it still produced only batch-level `no-hit` rather than an exact post-boot read for AllowAudioToEnableExecutionRequiredPowerRequests.",
         "A retained retry audit over 10 mega-trigger runtime attempts shows the trigger family is no longer missing; it repeatedly arms the pair from baseline-missing to `1` but still exits `aborted-recovered` without an exact registry read for AllowAudioToEnableExecutionRequiredPowerRequests.",
-        "The only retained current-build runtime `path-hits.csv` capture shows adjacent `Control\\Power\\PowerRequestOverride` accesses by `svchost.exe` and zero exact path hits for AllowAudioToEnableExecutionRequiredPowerRequests itself.",
-        "A retained alignment audit now links those adjacent runtime hits to the visible current-build override family rather than to an exact execution-required pair read, which strengthens the case that the missing layer is earlier seeding or a narrower exact-read lane.",
         "A retained trace-callback audit shows the visible generic `PopSetPowerSettingValue` callback registration targets `PopTracePowerSettingChange`, not an exact execution-required pair binding site.",
-        "The dedicated narrow runtime lane is already mapped, and the active KVM session has the qemu guest-agent channel attached. Live bootstrap installed qga plus guest-tools, `QEMU-GA` can be started, the default alias `\\\\.\\Global\\org.qemu.guest_agent.0` is openable, and the exact DeviceClasses-derived `...&02...` path is also openable, but host-side `guest-ping` still fails with `QEMU guest agent is not available due to an error` and HMP still reports the qga chardev as `disconnected`. Even a foreground `qemu-ga.exe -v -m virtio-serial -p <exact ...&02... path>` launch reproduces the same failure, and the later runtime-handshake probe adds only repeated `debug: dispatch` log lines plus no recent matching Application events. A same-process socket-contrast probe then showed a temporary QMP socket backend in the same live qemu process accepts host-side AF_UNIX connects while the live qga socket still returns `ConnectionRefusedError(111, 'Connection refused')`. A later attached-virtserial contrast showed the same thing one layer closer to qga: a hot-added `virtserialport` on port 16 accepts a host-side AF_UNIX connection while the live qga channel on port 2 still refuses one. A same-directory socket contrast then showed the libvirt qemu `run/channel` directory itself is not the cause: a temporary socket backend in that same directory accepts a host-side connection while the live qga socket beside it still refuses one. A later guest-state contrast then showed the raw refusal survives both service states: stopping `QEMU-GA` flips `guest-ping` to `QEMU guest agent is not connected` and `info qtree` to `guest off, host off`, yet the same direct host-side socket connect still refuses; starting the service again restores `guest on, host off` plus the stronger error state with the same refusal. A later listener-state snapshot then showed the qga path is not simply unbound on the host either: `ss` and `lsof` both show it as a qemu-owned `LISTEN` socket, but direct host-side connect still returns `ConnectionRefusedError(111, 'Connection refused')`, while the sibling qemu monitor socket on the same pid returns `BlockingIOError(11, 'Resource temporarily unavailable')`. A later live libvirt-channel contrast then showed the refusal is not generic to libvirt-managed unix `virtio` channels either: a temporary `virsh attach-device --live` channel creates a host-connectable socket immediately on the same running domain, while the live qga socket still refuses. The repo controller stack therefore remains environment-gated by qga-specific libvirt/QEMU integration or handshake behavior rather than by missing path discovery, simple listener absence, guest open state, or generic libvirt unix channel behavior."
+        "The dedicated narrow runtime lane is already mapped, and the active KVM session has the qemu guest-agent channel attached. Live bootstrap installed qga plus guest-tools, `QEMU-GA` can be started, the default alias `\\\\.\\Global\\org.qemu.guest_agent.0` is openable, and the exact DeviceClasses-derived `...&02...` path is also openable, but host-side `guest-ping` still fails with `QEMU guest agent is not available due to an error` and HMP still reports the qga chardev as `disconnected`. Even a foreground `qemu-ga.exe -v -m virtio-serial -p <exact ...&02... path>` launch reproduces the same failure, and the later runtime-handshake probe adds only repeated `debug: dispatch` log lines plus no recent matching Application events. A same-process socket-contrast probe then showed a temporary QMP socket backend in the same live qemu process accepts host-side AF_UNIX connects while the live qga socket still returns `ConnectionRefusedError(111, 'Connection refused')`. A later attached-virtserial contrast showed the same thing one layer closer to qga: a hot-added `virtserialport` on port 16 accepts a host-side AF_UNIX connection while the live qga channel on port 2 still refuses one. A same-directory socket contrast then showed the libvirt qemu `run/channel` directory itself is not the cause: a temporary socket backend in that same directory accepts a host-side connection while the live qga socket beside it still refuses one. A later guest-state contrast then showed the raw refusal survives both service states: stopping `QEMU-GA` flips `guest-ping` to `QEMU guest agent is not connected` and `info qtree` to `guest off, host off`, yet the same direct host-side socket connect still refuses; starting the service again restores `guest on, host off` plus the stronger error state with the same refusal. A later listener-state snapshot then showed the qga path is not simply unbound on the host either: `ss` and `lsof` both show it as a qemu-owned `LISTEN` socket, but direct host-side connect still returns `ConnectionRefusedError(111, 'Connection refused')`, while the sibling qemu monitor socket on the same pid returns `BlockingIOError(11, 'Resource temporarily unavailable')`. A later live libvirt-channel contrast then showed the refusal is not generic to libvirt-managed unix `virtio` channels either: a temporary `virsh attach-device --live` channel creates a host-connectable socket immediately on the same running domain, while the live qga socket still refuses. The repo controller stack therefore remains environment-gated by qga-specific libvirt/QEMU integration or handshake behavior rather than by missing path discovery, simple listener absence, guest open state, or generic libvirt unix channel behavior.",
+        "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowAudioToEnableExecutionRequiredPowerRequests binding site.",
+        "The only retained current-build runtime `path-hits.csv` capture shows adjacent `Control\\Power\\PowerRequestOverride` accesses by `svchost.exe` and zero exact path hits for AllowAudioToEnableExecutionRequiredPowerRequests itself.",
+        "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects or execution-required globals is still unresolved.",
+        "documentation-first-review"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -4897,14 +4900,15 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects or execution-required globals is still unresolved.",
-        "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowSystemRequiredPowerRequests binding site.",
+        "A retained alignment audit now links those adjacent runtime hits to the visible current-build override family rather than to an exact execution-required pair read, which strengthens the case that the missing layer is earlier seeding or a narrower exact-read lane.",
         "A retained broad soft-reboot lane now exists, but it still produced only batch-level `no-hit` rather than an exact post-boot read for AllowSystemRequiredPowerRequests.",
         "A retained retry audit over 10 mega-trigger runtime attempts shows the trigger family is no longer missing; it repeatedly arms the pair from baseline-missing to `1` but still exits `aborted-recovered` without an exact registry read for AllowSystemRequiredPowerRequests.",
-        "The only retained current-build runtime `path-hits.csv` capture shows adjacent `Control\\Power\\PowerRequestOverride` accesses by `svchost.exe` and zero exact path hits for AllowSystemRequiredPowerRequests itself.",
-        "A retained alignment audit now links those adjacent runtime hits to the visible current-build override family rather than to an exact execution-required pair read, which strengthens the case that the missing layer is earlier seeding or a narrower exact-read lane.",
         "A retained trace-callback audit shows the visible generic `PopSetPowerSettingValue` callback registration targets `PopTracePowerSettingChange`, not an exact execution-required pair binding site.",
-        "The dedicated narrow runtime lane is already mapped, and the active KVM session has the qemu guest-agent channel attached. Live bootstrap installed qga plus guest-tools, `QEMU-GA` can be started, the default alias `\\\\.\\Global\\org.qemu.guest_agent.0` is openable, and the exact DeviceClasses-derived `...&02...` path is also openable, but host-side `guest-ping` still fails with `QEMU guest agent is not available due to an error` and HMP still reports the qga chardev as `disconnected`. Even a foreground `qemu-ga.exe -v -m virtio-serial -p <exact ...&02... path>` launch reproduces the same failure, and the later runtime-handshake probe adds only repeated `debug: dispatch` log lines plus no recent matching Application events. A same-process socket-contrast probe then showed a temporary QMP socket backend in the same live qemu process accepts host-side AF_UNIX connects while the live qga socket still returns `ConnectionRefusedError(111, 'Connection refused')`. A later attached-virtserial contrast showed the same thing one layer closer to qga: a hot-added `virtserialport` on port 16 accepts a host-side AF_UNIX connection while the live qga channel on port 2 still refuses one. A same-directory socket contrast then showed the libvirt qemu `run/channel` directory itself is not the cause: a temporary socket backend in that same directory accepts a host-side connection while the live qga socket beside it still refuses one. A later guest-state contrast then showed the raw refusal survives both service states: stopping `QEMU-GA` flips `guest-ping` to `QEMU guest agent is not connected` and `info qtree` to `guest off, host off`, yet the same direct host-side socket connect still refuses; starting the service again restores `guest on, host off` plus the stronger error state with the same refusal. A later listener-state snapshot then showed the qga path is not simply unbound on the host either: `ss` and `lsof` both show it as a qemu-owned `LISTEN` socket, but direct host-side connect still returns `ConnectionRefusedError(111, 'Connection refused')`, while the sibling qemu monitor socket on the same pid returns `BlockingIOError(11, 'Resource temporarily unavailable')`. A later live libvirt-channel contrast then showed the refusal is not generic to libvirt-managed unix `virtio` channels either: a temporary `virsh attach-device --live` channel creates a host-connectable socket immediately on the same running domain, while the live qga socket still refuses. The repo controller stack therefore remains environment-gated by qga-specific libvirt/QEMU integration or handshake behavior rather than by missing path discovery, simple listener absence, guest open state, or generic libvirt unix channel behavior."
+        "The dedicated narrow runtime lane is already mapped, and the active KVM session has the qemu guest-agent channel attached. Live bootstrap installed qga plus guest-tools, `QEMU-GA` can be started, the default alias `\\\\.\\Global\\org.qemu.guest_agent.0` is openable, and the exact DeviceClasses-derived `...&02...` path is also openable, but host-side `guest-ping` still fails with `QEMU guest agent is not available due to an error` and HMP still reports the qga chardev as `disconnected`. Even a foreground `qemu-ga.exe -v -m virtio-serial -p <exact ...&02... path>` launch reproduces the same failure, and the later runtime-handshake probe adds only repeated `debug: dispatch` log lines plus no recent matching Application events. A same-process socket-contrast probe then showed a temporary QMP socket backend in the same live qemu process accepts host-side AF_UNIX connects while the live qga socket still returns `ConnectionRefusedError(111, 'Connection refused')`. A later attached-virtserial contrast showed the same thing one layer closer to qga: a hot-added `virtserialport` on port 16 accepts a host-side AF_UNIX connection while the live qga channel on port 2 still refuses one. A same-directory socket contrast then showed the libvirt qemu `run/channel` directory itself is not the cause: a temporary socket backend in that same directory accepts a host-side connection while the live qga socket beside it still refuses one. A later guest-state contrast then showed the raw refusal survives both service states: stopping `QEMU-GA` flips `guest-ping` to `QEMU guest agent is not connected` and `info qtree` to `guest off, host off`, yet the same direct host-side socket connect still refuses; starting the service again restores `guest on, host off` plus the stronger error state with the same refusal. A later listener-state snapshot then showed the qga path is not simply unbound on the host either: `ss` and `lsof` both show it as a qemu-owned `LISTEN` socket, but direct host-side connect still returns `ConnectionRefusedError(111, 'Connection refused')`, while the sibling qemu monitor socket on the same pid returns `BlockingIOError(11, 'Resource temporarily unavailable')`. A later live libvirt-channel contrast then showed the refusal is not generic to libvirt-managed unix `virtio` channels either: a temporary `virsh attach-device --live` channel creates a host-connectable socket immediately on the same running domain, while the live qga socket still refuses. The repo controller stack therefore remains environment-gated by qga-specific libvirt/QEMU integration or handshake behavior rather than by missing path discovery, simple listener absence, guest open state, or generic libvirt unix channel behavior.",
+        "The only naturally resolved setting callback is tied to GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT and PopExecutionRequiredTimeout rather than to an exact AllowSystemRequiredPowerRequests binding site.",
+        "The only retained current-build runtime `path-hits.csv` capture shows adjacent `Control\\Power\\PowerRequestOverride` accesses by `svchost.exe` and zero exact path hits for AllowSystemRequiredPowerRequests itself.",
+        "The visible generic power-setting query/store layer is in-memory and callback-driven, but the earlier Control\\Power seeding path into PopFindPowerSettingConfiguration objects or execution-required globals is still unresolved.",
+        "documentation-first-review"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -4982,7 +4986,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -4991,7 +4995,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -5125,13 +5129,14 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "The current VMware baseline does not support hibernation, so a real hibernation trigger is not available for runtime ETW validation on this VM.",
         "The current clean-baseline runtime package still does not contain an exact runtime query/read operation for this value.",
-        "The current VMware baseline does not support hibernation, so a real hibernation trigger is not available for runtime ETW validation on this VM."
+        "documentation-first-review"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -5140,7 +5145,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.67,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -5201,7 +5206,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -5210,7 +5215,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -5271,7 +5276,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -5280,7 +5285,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -5344,7 +5349,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -5353,7 +5358,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -5417,7 +5422,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -5426,7 +5431,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -5483,8 +5488,9 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "Exact leaf values and semantics under PowerRequestOverride are still unresolved because the retained runtime trace currently shows root queries and NAME NOT FOUND probes on Driver, Process, and Service rather than stable leaf-value reads.",
+        "The record does not yet have a reliable restore story beyond the observed retained subtree-presence snapshot.",
         "The retained static context is still adjacent rather than leaf-specific: it narrows the override family around timeout-specific and generic power-setting surfaces, but it does not yet bind Driver, Process, or Service leaves to a naturally resolved direct-reading function.",
-        "The record does not yet have a reliable restore story beyond the observed retained subtree-presence snapshot."
+        "documentation-first-review"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -5560,12 +5566,13 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "The current clean VMware baseline exposes only Standby (S1); it does not support S0 Low Power Idle / Modern Standby, so a real DRIPS-exit trigger cannot be exercised here.",
-        "The runtime package therefore still lacks an exact runtime query/read operation for this value on the current VM baseline."
+        "The runtime package therefore still lacks an exact runtime query/read operation for this value on the current VM baseline.",
+        "documentation-first-review"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -5574,7 +5581,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.67,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -5637,7 +5644,7 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "decision-gate"
+        "documentation-first-review"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -5794,7 +5801,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -5803,7 +5810,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -5860,7 +5867,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -5869,7 +5876,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -5926,7 +5933,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -5935,7 +5942,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6202,7 +6209,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -6211,7 +6218,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6268,7 +6275,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -6277,7 +6284,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6339,7 +6346,8 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "The ETL review, the Procmon boot-log review, the targeted post-boot DcomLaunch/Power trigger, and the newer tools-hardened lightweight ETW S1 follow-up still stop short of a decisive exact live read of WatchdogResumeTimeout and WatchdogSleepTimeout.",
-        "The current Win25H2Clean VMware baseline only exposes Standby (S1), and repeated S1-specific follow-ups still fail by dropping guest ops or guest shell state before the decisive runtime bundle can complete."
+        "The current Win25H2Clean VMware baseline only exposes Standby (S1), and repeated S1-specific follow-ups still fail by dropping guest ops or guest shell state before the decisive runtime bundle can complete.",
+        "documentation-first-review"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6417,7 +6425,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -6426,7 +6434,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6483,7 +6491,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -6492,7 +6500,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6549,7 +6557,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -6558,7 +6566,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6615,7 +6623,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -6624,7 +6632,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6681,7 +6689,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -6690,7 +6698,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6749,7 +6757,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -6758,7 +6766,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6815,7 +6823,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -6824,7 +6832,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6883,7 +6891,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -6892,7 +6900,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -6951,7 +6959,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -6960,7 +6968,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7017,7 +7025,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7026,7 +7034,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7083,7 +7091,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7092,7 +7100,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7149,7 +7157,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7158,7 +7166,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7215,7 +7223,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7224,7 +7232,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7281,7 +7289,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7290,7 +7298,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7347,7 +7355,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7356,7 +7364,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7413,7 +7421,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7422,7 +7430,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7479,7 +7487,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7488,7 +7496,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7545,7 +7553,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7554,7 +7562,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7679,7 +7687,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7688,7 +7696,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -7883,7 +7891,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -7892,7 +7900,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -8019,7 +8027,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -8028,7 +8036,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -8289,7 +8297,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -8298,7 +8306,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -8423,7 +8431,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -8432,7 +8440,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -8489,7 +8497,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -8498,7 +8506,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -8555,7 +8563,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -8564,7 +8572,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -8621,7 +8629,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -8630,7 +8638,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -8823,7 +8831,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -8832,7 +8840,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -9163,7 +9171,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -9172,7 +9180,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -9299,7 +9307,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -9308,7 +9316,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -9365,7 +9373,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -9374,7 +9382,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -9705,7 +9713,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -9714,7 +9722,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -9773,7 +9781,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -9782,7 +9790,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -9839,7 +9847,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -9848,7 +9856,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -9973,7 +9981,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -9982,7 +9990,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10107,7 +10115,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10116,7 +10124,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10173,7 +10181,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10182,7 +10190,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10239,7 +10247,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10248,7 +10256,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10305,7 +10313,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10314,7 +10322,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10371,7 +10379,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10380,7 +10388,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10437,7 +10445,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10446,7 +10454,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10503,7 +10511,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10512,7 +10520,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10569,7 +10577,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10578,7 +10586,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10771,7 +10779,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10780,7 +10788,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10837,7 +10845,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
@@ -10846,7 +10854,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10905,7 +10913,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -10914,7 +10922,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -10971,7 +10979,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -10980,7 +10988,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11039,7 +11047,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11048,7 +11056,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11107,7 +11115,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11116,7 +11124,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11173,7 +11181,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11182,7 +11190,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11239,7 +11247,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11248,7 +11256,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11305,7 +11313,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11314,7 +11322,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11371,7 +11379,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11380,7 +11388,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11437,7 +11445,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11446,7 +11454,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11503,7 +11511,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11512,7 +11520,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11569,7 +11577,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11578,7 +11586,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11635,7 +11643,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11644,7 +11652,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11701,7 +11709,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11710,7 +11718,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11769,7 +11777,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11778,7 +11786,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11835,7 +11843,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11844,7 +11852,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11901,7 +11909,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11910,7 +11918,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -11969,7 +11977,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -11978,7 +11986,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12035,7 +12043,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12044,7 +12052,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12105,7 +12113,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12114,7 +12122,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12168,10 +12176,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12309,7 +12319,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12318,7 +12328,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12377,7 +12387,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12386,7 +12396,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12443,7 +12453,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12452,7 +12462,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12509,7 +12519,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12518,7 +12528,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12570,12 +12580,14 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12584,7 +12596,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12641,7 +12653,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12650,7 +12662,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12707,7 +12719,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12716,7 +12728,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12773,7 +12785,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12782,7 +12794,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -12909,7 +12921,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -12918,7 +12930,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13048,7 +13060,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13057,7 +13069,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 4.11,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13114,7 +13126,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13123,7 +13135,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13180,7 +13192,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13189,7 +13201,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13246,7 +13258,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13255,7 +13267,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13314,7 +13326,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13323,7 +13335,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13414,7 +13426,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 2,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13423,7 +13435,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.22,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13484,7 +13496,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13493,7 +13505,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13550,7 +13562,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13559,7 +13571,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13616,7 +13628,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13625,7 +13637,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13682,7 +13694,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13691,7 +13703,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13818,7 +13830,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13827,7 +13839,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -13884,7 +13896,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -13893,7 +13905,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14023,13 +14035,14 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "documentation-first-review",
         "runtime_no_read",
         "trigger_context_unclear"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14038,7 +14051,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.56,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -14095,7 +14108,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14104,7 +14117,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14161,7 +14174,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14170,7 +14183,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14227,7 +14240,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14236,7 +14249,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14293,7 +14306,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14302,7 +14315,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14359,7 +14372,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14368,7 +14381,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14425,8 +14438,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "runtime_no_read",
-        "path_context_unclear"
+        "documentation-first-review",
+        "path_context_unclear",
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -14504,7 +14518,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14513,7 +14527,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.11,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14575,7 +14589,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14584,7 +14598,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14641,7 +14655,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14650,7 +14664,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14709,7 +14723,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14718,7 +14732,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14770,12 +14784,14 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14784,7 +14800,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14841,7 +14857,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14850,7 +14866,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14907,7 +14923,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14916,7 +14932,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -14973,7 +14989,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -14982,7 +14998,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15039,7 +15055,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15048,7 +15064,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15105,7 +15121,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15114,7 +15130,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15171,7 +15187,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15180,7 +15196,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15237,7 +15253,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15246,7 +15262,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15303,7 +15319,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15312,7 +15328,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15517,7 +15533,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15526,7 +15542,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15583,7 +15599,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15592,7 +15608,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15649,7 +15665,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15658,7 +15674,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15715,7 +15731,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15724,7 +15740,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15781,7 +15797,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15790,7 +15806,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15847,7 +15863,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15856,7 +15872,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15913,7 +15929,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15922,7 +15938,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15979,7 +15995,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -15988,7 +16004,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16047,7 +16063,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -16056,7 +16072,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16113,7 +16129,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16122,7 +16138,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16179,7 +16195,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16188,7 +16204,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16245,7 +16261,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16254,7 +16270,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16311,7 +16327,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16320,7 +16336,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16377,7 +16393,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16386,7 +16402,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16443,7 +16459,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16452,7 +16468,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16509,7 +16525,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16518,7 +16534,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16575,7 +16591,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16584,7 +16600,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16641,7 +16657,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16650,7 +16666,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16707,7 +16723,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16716,7 +16732,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16773,7 +16789,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16782,7 +16798,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16839,7 +16855,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16848,7 +16864,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16905,7 +16921,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16914,7 +16930,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -16971,7 +16987,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -16980,7 +16996,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -17037,7 +17053,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -17046,7 +17062,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -17103,7 +17119,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -17112,7 +17128,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -17169,7 +17185,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -17178,7 +17194,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -17235,7 +17251,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -17244,7 +17260,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -17301,7 +17317,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -17310,7 +17326,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -17371,7 +17387,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -17380,7 +17396,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -17437,7 +17453,7 @@
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -17446,7 +17462,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -17566,12 +17582,14 @@
       "apply_allowed": true,
       "confidence": "medium",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
-      "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "schema-incomplete"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
@@ -17580,7 +17598,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.56,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",

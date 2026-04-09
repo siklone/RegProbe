@@ -179,5 +179,308 @@
     "dead_flag_four_conditions_met": true,
     "notes": "Bootstrapped from the current research record, evidence audit, and a secondary-profile replay of the path-aware runtime lane.",
     "new_pipeline_version": "v3.1"
+  },
+  "schema_version": "1.0",
+  "candidate_id": "policy.system.enable-virtualization",
+  "feature_area": "Policy System Registry",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+  "value_name": "EnableVirtualization",
+  "value_type": "REG_DWORD",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+    "state_kind": "value",
+    "value": 1,
+    "rationale": "Keep the observed baseline while this policy-system value remains in research packaging only.",
+    "evidence_ids": [
+      "vm-policy-system-phase0-20260329"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "observed-baseline",
+    "label": "Observed baseline",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": 1,
+    "rationale": "Track the observed baseline value without turning it into a shipped preset.",
+    "evidence_ids": [
+      "vm-policy-system-phase0-20260329",
+      "static-policy-system-enable-virtualization-20260330"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+    "state_kind": "value",
+    "value": 1,
+    "rationale": "Keep the observed baseline while this policy-system value remains in research packaging only.",
+    "evidence_ids": [
+      "vm-policy-system-phase0-20260329"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "blocked",
+  "promotion_blockers": [
+    "documentation-first-review",
+    "path_context_unclear",
+    "runtime_no_read"
+  ],
+  "record_promotion_allowed": false,
+  "tweak_ingest_allowed": false,
+  "tweak_origin": "research-derived",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "policy.system.enable-virtualization",
+    "record_id": "policy.system.enable-virtualization",
+    "tweak_id": "policy.system.enable-virtualization",
+    "tweak_origin": "research-derived",
+    "promotion_state": "blocked",
+    "promotion_blockers": [
+      "documentation-first-review",
+      "path_context_unclear",
+      "runtime_no_read"
+    ],
+    "record_promotion_allowed": false,
+    "tweak_ingest_allowed": false,
+    "apply_allowed": false,
+    "app_mapping_status": "not-mapped",
+    "next_missing_layer": "decision-gate",
+    "debug_override_allowed": true,
+    "last_evaluated_at": "2026-04-09T01:27:55.021717Z",
+    "score_breakdown": {
+      "static_evidence_strength": 4,
+      "runtime_evidence_strength": 2,
+      "rollback_clarity": 5,
+      "blast_radius": 3,
+      "tweak_suitability": 2,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 3,
+      "overall_score": 3.44,
+      "next_missing_layer": "decision-gate"
+    },
+    "documentation_status": {
+      "record_status": "draft",
+      "has_validation_proof": true,
+      "has_official_evidence": false,
+      "confidence": "medium"
+    },
+    "evidence_status": {
+      "evidence_count": 6,
+      "next_missing_layer": "decision-gate",
+      "has_procmon_evidence": false,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": false
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Observed Win25H2Clean baseline",
+        "label": "Observed Win25H2Clean baseline",
+        "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+        "state_kind": "value",
+        "value": 1,
+        "rationale": "Keep the observed baseline while this policy-system value remains in research packaging only.",
+        "evidence_ids": [
+          "vm-policy-system-phase0-20260329"
+        ],
+        "rollback_strategy": "restore_default"
+      }
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-31T08:21:42Z",
+      "stale_age_days": 8
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-31T08:21:42Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-31T08:21:42Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {},
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "repo-security-doc",
+      "kind": "repo-doc",
+      "title": "Repo security notes for EnableVirtualization",
+      "location": "Docs/security/security.md",
+      "supports": [
+        "path",
+        "value",
+        "allowed-values",
+        "behavior"
+      ],
+      "summary": "Repo security notes document EnableVirtualization and its value meanings under the Policies\\System path.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "nohuto-uac-bootphase",
+      "kind": "decompilation",
+      "title": "Boot-phase UAC policy cluster lead",
+      "location": "research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c",
+      "supports": [
+        "path",
+        "behavior",
+        "dependency"
+      ],
+      "summary": "The repo boot-phase source mirror references EnableLUA, EnableVirtualization, and EnableInstallerDetection under Policies\\System during boot-phase processing.",
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "static-policy-system-enable-virtualization-20260330",
+      "kind": "decompilation",
+      "title": "Path-aware static probe for EnableVirtualization",
+      "location": "evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json and evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit and kept EnableVirtualization, EnableLUA, and EnableInstallerDetection in the same naturally resolved function. The nearby VBS collision remained isolated to winload.exe.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "Docs/security/security.md",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "Phase-0 existence and repo security documentation agree on the current baseline value for EnableVirtualization.",
+      "strength": "high"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "executed": false,
+    "summary": null,
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 4,
+    "runtime_evidence_strength": 2,
+    "rollback_clarity": 5,
+    "blast_radius": 3,
+    "tweak_suitability": 2,
+    "privilege_complexity": 3,
+    "build_specificity": 5,
+    "sibling_expansion_value": 4,
+    "bench_priority": 3,
+    "overall_score": 3.44,
+    "next_missing_layer": "decision-gate"
+  },
+  "documentation_status": {
+    "record_status": "draft",
+    "has_validation_proof": true,
+    "has_official_evidence": false,
+    "confidence": "medium"
+  },
+  "evidence_status": {
+    "evidence_count": 6,
+    "next_missing_layer": "decision-gate",
+    "has_procmon_evidence": false,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": false
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+      "state_kind": "value",
+      "value": 1,
+      "rationale": "Keep the observed baseline while this policy-system value remains in research packaging only.",
+      "evidence_ids": [
+        "vm-policy-system-phase0-20260329"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "verification_context": {
+    "record_id": "policy.system.enable-virtualization",
+    "tweak_id": "policy.system.enable-virtualization",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
   }
 }

@@ -18,11 +18,11 @@ from research_v36_lib import (
     PROMOTION_AUDIT_LOG_PATH,
     PROMOTION_GATES_PATH,
     append_jsonl,
-    derive_promotion_state,
+    evaluate_candidate_gate,
     load_json,
     load_records,
     now_utc,
-    score_candidate,
+    validate_gate_result,
     write_json,
 )
 
@@ -44,12 +44,20 @@ def main() -> int:
     audit_map = load_audit_entries()
     entries: list[dict] = []
     state_counts: Counter[str] = Counter()
+    invalid_entries: list[dict] = []
 
     for record in load_records():
         record_id = str(record.get("record_id") or record.get("tweak_id") or "")
         audit = audit_map.get(record_id, {})
-        gate = derive_promotion_state(record, audit)
-        gate["score_breakdown"] = score_candidate(record, audit)
+        gate = evaluate_candidate_gate(record, audit)
+        validation_errors = validate_gate_result(gate)
+        if validation_errors:
+            invalid_entries.append(
+                {
+                    "candidate_id": gate.get("candidate_id"),
+                    "errors": validation_errors,
+                }
+            )
         state_counts[gate["promotion_state"]] += 1
         entries.append(gate)
         append_jsonl(
@@ -64,6 +72,7 @@ def main() -> int:
                 "schema_compatibility_mode": gate["schema_compatibility_mode"],
                 "tweak_origin": gate["tweak_origin"],
                 "score_breakdown": gate["score_breakdown"],
+                "verification_context": gate.get("verification_context"),
             },
         )
 
@@ -74,7 +83,14 @@ def main() -> int:
         "summary": {
             "total_records": len(entries),
             "promotion_state_counts": dict(state_counts),
+            "invalid_gate_entries": len(invalid_entries),
+            "exit_criteria": {
+                "has_promotion_eligible": state_counts.get("promotion-eligible", 0) > 0,
+                "has_blocked": state_counts.get("blocked", 0) > 0,
+                "has_revalidation_pending": state_counts.get("revalidation-pending", 0) > 0,
+            },
         },
+        "invalid_entries": invalid_entries,
         "entries": sorted(entries, key=lambda item: str(item.get("tweak_id") or item.get("candidate_id") or "")),
     }
     write_json(PROMOTION_GATES_PATH, payload)
@@ -84,7 +100,14 @@ def main() -> int:
     else:
         print(f"Wrote {PROMOTION_GATES_PATH}")
         print(json.dumps(payload["summary"], ensure_ascii=False, indent=2))
-    return 0
+    exit_criteria = payload["summary"]["exit_criteria"]
+    ok = (
+        not invalid_entries
+        and exit_criteria["has_promotion_eligible"]
+        and exit_criteria["has_blocked"]
+        and exit_criteria["has_revalidation_pending"]
+    )
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":

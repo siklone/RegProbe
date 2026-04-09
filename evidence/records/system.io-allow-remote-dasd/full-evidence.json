@@ -177,5 +177,293 @@
     "dead_flag_four_conditions_met": true,
     "notes": "Bootstrapped from the current research record and evidence audit.",
     "new_pipeline_version": "v3.1"
+  },
+  "schema_version": "1.0",
+  "candidate_id": "system.io-allow-remote-dasd",
+  "feature_area": "Session Manager I/O Registry",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+  "value_name": "AllowRemoteDASD",
+  "value_type": "REG_DWORD",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Keep the observed baseline while the intended path remains research-only and unresolved.",
+    "evidence_ids": [
+      "vm-session-manager-io-phase0-20260329"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "observed-baseline",
+    "label": "Observed baseline",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Track the observed baseline value without turning it into a shipped preset.",
+    "evidence_ids": [
+      "vm-session-manager-io-phase0-20260329",
+      "static-session-manager-io-allow-remote-dasd-20260330"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Keep the observed baseline while the intended path remains research-only and unresolved.",
+    "evidence_ids": [
+      "vm-session-manager-io-phase0-20260329"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "blocked",
+  "promotion_blockers": [
+    "documentation-first-review",
+    "path_context_unclear",
+    "runtime_no_read"
+  ],
+  "record_promotion_allowed": false,
+  "tweak_ingest_allowed": false,
+  "tweak_origin": "research-derived",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "system.io-allow-remote-dasd",
+    "record_id": "system.io-allow-remote-dasd",
+    "tweak_id": "system.io-allow-remote-dasd",
+    "tweak_origin": "research-derived",
+    "promotion_state": "blocked",
+    "promotion_blockers": [
+      "documentation-first-review",
+      "path_context_unclear",
+      "runtime_no_read"
+    ],
+    "record_promotion_allowed": false,
+    "tweak_ingest_allowed": false,
+    "apply_allowed": false,
+    "app_mapping_status": "not-mapped",
+    "next_missing_layer": "decision-gate",
+    "debug_override_allowed": true,
+    "last_evaluated_at": "2026-04-09T01:27:55.037656Z",
+    "score_breakdown": {
+      "static_evidence_strength": 4,
+      "runtime_evidence_strength": 2,
+      "rollback_clarity": 5,
+      "blast_radius": 2,
+      "tweak_suitability": 2,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 5,
+      "overall_score": 3.56,
+      "next_missing_layer": "decision-gate"
+    },
+    "documentation_status": {
+      "record_status": "draft",
+      "has_validation_proof": true,
+      "has_official_evidence": false,
+      "confidence": "medium"
+    },
+    "evidence_status": {
+      "evidence_count": 4,
+      "next_missing_layer": "decision-gate",
+      "has_procmon_evidence": false,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": false
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Observed Win25H2Clean baseline",
+        "label": "Observed Win25H2Clean baseline",
+        "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+        "state_kind": "value",
+        "value": 0,
+        "rationale": "Keep the observed baseline while the intended path remains research-only and unresolved.",
+        "evidence_ids": [
+          "vm-session-manager-io-phase0-20260329"
+        ],
+        "rollback_strategy": "restore_default"
+      }
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-30T19:30:00Z",
+      "stale_age_days": 9
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-30T19:30:00Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-30T19:30:00Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {},
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "static-session-manager-io-allow-remote-dasd-20260330",
+      "kind": "decompilation",
+      "title": "Path-aware static probe for AllowRemoteDASD",
+      "location": "evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json and evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "summary": "The path-aware static pass found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but the naturally resolved current-build Ghidra function opened the removable-storage policy path rather than the intended Session Manager I/O path.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "historical-collision-note-20260328",
+      "kind": "repo-doc",
+      "title": "Historical collision review for AllowRemoteDASD",
+      "location": "research/notes/kernel-power-existing-static-triage-20260328.md",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "summary": "Earlier triage had already flagged AllowRemoteDASD as a likely removable-storage-policy collision rather than clean Session Manager I/O coverage.",
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "Phase-0 existence confirmed the intended registry path exists on the clean baseline before path-aware routing began.",
+      "strength": "high"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "executed": false,
+    "summary": null,
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 4,
+    "runtime_evidence_strength": 2,
+    "rollback_clarity": 5,
+    "blast_radius": 2,
+    "tweak_suitability": 2,
+    "privilege_complexity": 3,
+    "build_specificity": 5,
+    "sibling_expansion_value": 4,
+    "bench_priority": 5,
+    "overall_score": 3.56,
+    "next_missing_layer": "decision-gate"
+  },
+  "documentation_status": {
+    "record_status": "draft",
+    "has_validation_proof": true,
+    "has_official_evidence": false,
+    "confidence": "medium"
+  },
+  "evidence_status": {
+    "evidence_count": 4,
+    "next_missing_layer": "decision-gate",
+    "has_procmon_evidence": false,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": false
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+      "state_kind": "value",
+      "value": 0,
+      "rationale": "Keep the observed baseline while the intended path remains research-only and unresolved.",
+      "evidence_ids": [
+        "vm-session-manager-io-phase0-20260329"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "verification_context": {
+    "record_id": "system.io-allow-remote-dasd",
+    "tweak_id": "system.io-allow-remote-dasd",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
   }
 }

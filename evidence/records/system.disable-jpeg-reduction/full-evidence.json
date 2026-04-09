@@ -181,5 +181,317 @@
     "dead_flag_four_conditions_met": true,
     "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json)",
     "new_pipeline_version": "v3.1"
+  },
+  "schema_version": "1.0",
+  "candidate_id": "system.disable-jpeg-reduction",
+  "feature_area": "Desktop Wallpaper Import Behavior",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKCU\\Control Panel\\Desktop",
+  "value_name": "JPEGImportQuality",
+  "value_type": "REG_DWORD",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Observed fallback baseline",
+    "label": "Observed fallback baseline",
+    "applies_to": "Current builds where JPEGImportQuality is left unset and the wallpaper transcode path falls back to its internal default",
+    "state_kind": "missing",
+    "value": null,
+    "rationale": "Leave JPEGImportQuality unset and let the current wallpaper import path fall back to 85.",
+    "evidence_ids": [
+      "repo-system-doc-jpeg",
+      "repo-system-decomp-jpegtranscode",
+      "vm-batch-probe-20260320-disable-jpeg-reduction",
+      "runtime-jpegimportquality-v31-20260327"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "current-app-profile",
+    "label": "Current app profile",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": 100,
+    "rationale": "Observed app write used as the current max-quality wallpaper profile.",
+    "evidence_ids": [
+      "repo-system-doc-jpeg",
+      "repo-system-decomp-jpegtranscode",
+      "procmon-jpegimportquality-explorer-read",
+      "ghidra-shell32-jpegimportquality",
+      "app-system-provider",
+      "vm-batch-probe-20260320-disable-jpeg-reduction",
+      "runtime-jpegimportquality-v31-20260327"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Observed fallback baseline",
+    "label": "Observed fallback baseline",
+    "applies_to": "Current builds where JPEGImportQuality is left unset and the wallpaper transcode path falls back to its internal default",
+    "state_kind": "missing",
+    "value": null,
+    "rationale": "Leave JPEGImportQuality unset and let the current wallpaper import path fall back to 85.",
+    "evidence_ids": [
+      "repo-system-doc-jpeg",
+      "repo-system-decomp-jpegtranscode",
+      "vm-batch-probe-20260320-disable-jpeg-reduction",
+      "runtime-jpegimportquality-v31-20260327"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "promoted",
+  "promotion_blockers": [],
+  "record_promotion_allowed": true,
+  "tweak_ingest_allowed": true,
+  "tweak_origin": "legacy-curated",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "system.disable-jpeg-reduction",
+    "record_id": "system.disable-jpeg-reduction",
+    "tweak_id": "system.disable-jpeg-reduction",
+    "tweak_origin": "legacy-curated",
+    "promotion_state": "promoted",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": true,
+    "apply_allowed": true,
+    "app_mapping_status": "matches-research",
+    "next_missing_layer": "none",
+    "debug_override_allowed": false,
+    "last_evaluated_at": "2026-04-09T01:27:55.034070Z",
+    "score_breakdown": {
+      "static_evidence_strength": 4,
+      "runtime_evidence_strength": 3,
+      "rollback_clarity": 5,
+      "blast_radius": 2,
+      "tweak_suitability": 5,
+      "privilege_complexity": 4,
+      "build_specificity": 5,
+      "sibling_expansion_value": 2,
+      "bench_priority": 5,
+      "overall_score": 3.89,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": false,
+      "confidence": "high"
+    },
+    "evidence_status": {
+      "evidence_count": 7,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": true,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": false
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Observed fallback baseline",
+        "label": "Observed fallback baseline",
+        "applies_to": "Current builds where JPEGImportQuality is left unset and the wallpaper transcode path falls back to its internal default",
+        "state_kind": "missing",
+        "value": null,
+        "rationale": "Leave JPEGImportQuality unset and let the current wallpaper import path fall back to 85.",
+        "evidence_ids": [
+          "repo-system-doc-jpeg",
+          "repo-system-decomp-jpegtranscode",
+          "vm-batch-probe-20260320-disable-jpeg-reduction",
+          "runtime-jpegimportquality-v31-20260327"
+        ],
+        "rollback_strategy": "restore_default"
+      }
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-27T00:00:00Z",
+      "stale_age_days": 13
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-27T00:00:00Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-27T00:00:00Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {},
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "repo-system-doc-jpeg",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for wallpaper JPEG import quality",
+      "location": "Docs/system/system.md",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "summary": "The repo documents JPEGImportQuality behavior, including a fallback of 85 and a clamp range of 60..100, based on code analysis rather than a primary Microsoft registry publication.",
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-system-decomp-jpegtranscode",
+      "kind": "decompilation",
+      "title": "Decompiled wallpaper transcode path for JPEGImportQuality",
+      "location": "Docs/system/assets/jpeg-TranscodeImage.c",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "summary": "The decompiled transcode path reads HKCU\\Control Panel\\Desktop\\JPEGImportQuality, falls back to 85 when missing, clamps the number into the 60..100 range, and passes the final value into the JPEG encoder as ImageQuality.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ghidra-shell32-jpegimportquality",
+      "kind": "ghidra-headless",
+      "title": "Our Ghidra decompilation - shell32 JPEGImportQuality transcode path",
+      "location": "evidence/files/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "summary": "A headless Ghidra pass on shell32.dll found the JPEGImportQuality string and exported the xref into FUN_1800bf050, the shell transcode path that handles JPEG wallpaper import quality. That gives direct code-side proof on this build.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "research/notes/jpeg-import-quality-validation-20260326.md",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof, and the 2026-03-27 v3.1 runtime lane adds a fresh wallpaper-apply trace with clean shell recovery.",
+      "strength": "high"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "executed": false,
+    "summary": null,
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 4,
+    "runtime_evidence_strength": 3,
+    "rollback_clarity": 5,
+    "blast_radius": 2,
+    "tweak_suitability": 5,
+    "privilege_complexity": 4,
+    "build_specificity": 5,
+    "sibling_expansion_value": 2,
+    "bench_priority": 5,
+    "overall_score": 3.89,
+    "next_missing_layer": "none"
+  },
+  "documentation_status": {
+    "record_status": "validated",
+    "has_validation_proof": true,
+    "has_official_evidence": false,
+    "confidence": "high"
+  },
+  "evidence_status": {
+    "evidence_count": 7,
+    "next_missing_layer": "none",
+    "has_procmon_evidence": true,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": false
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed fallback baseline",
+      "label": "Observed fallback baseline",
+      "applies_to": "Current builds where JPEGImportQuality is left unset and the wallpaper transcode path falls back to its internal default",
+      "state_kind": "missing",
+      "value": null,
+      "rationale": "Leave JPEGImportQuality unset and let the current wallpaper import path fall back to 85.",
+      "evidence_ids": [
+        "repo-system-doc-jpeg",
+        "repo-system-decomp-jpegtranscode",
+        "vm-batch-probe-20260320-disable-jpeg-reduction",
+        "runtime-jpegimportquality-v31-20260327"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "verification_context": {
+    "record_id": "system.disable-jpeg-reduction",
+    "tweak_id": "system.disable-jpeg-reduction",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
   }
 }

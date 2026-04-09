@@ -43,6 +43,11 @@
     "next_missing_layer": {"type": "string"},
     "debug_override_allowed": {"type": "boolean"},
     "score_breakdown": {"type": "object"},
+    "documentation_status": {"type": "object"},
+    "evidence_status": {"type": "object"},
+    "rollback_status": {"type": "object"},
+    "bench_status": {"type": "object"},
+    "verification_context": {"type": "object"},
     "last_evaluated_at": {"type": "string", "format": "date-time"}
   }
 }

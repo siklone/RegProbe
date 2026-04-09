@@ -40,9 +40,20 @@ class PromotionStateTests(unittest.TestCase):
             "record_id": "example.promoted",
             "tweak_id": "example.promoted",
             "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
             "decision": {
                 "apply_allowed": True,
                 "confidence": "high",
+                "restore_default_supported": True,
             },
             "app_current_implementation": {
                 "status": "matches-research",
@@ -65,6 +76,16 @@ class PromotionStateTests(unittest.TestCase):
             "record_id": "example.blocked",
             "tweak_id": "example.blocked",
             "record_status": "draft",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
             "decision": {
                 "apply_allowed": False,
                 "confidence": "medium",
@@ -82,7 +103,7 @@ class PromotionStateTests(unittest.TestCase):
         gate = research_v36_lib.derive_promotion_state(record, audit)
 
         self.assertEqual(gate["promotion_state"], "blocked")
-        self.assertEqual(gate["promotion_blockers"], ["runtime-trace"])
+        self.assertEqual(gate["promotion_blockers"], ["no-runtime-proof"])
         self.assertEqual(gate["tweak_origin"], "research-derived")
         self.assertTrue(gate["debug_override_allowed"])
 
@@ -119,6 +140,104 @@ class PromotionStateTests(unittest.TestCase):
         self.assertIn("overall_score", score)
         self.assertGreater(score["overall_score"], 0)
         self.assertEqual(score["next_missing_layer"], "none")
+
+    def test_repo_code_only_static_evidence_scores_low(self) -> None:
+        record = {
+            "record_id": "example.repo-code",
+            "tweak_id": "example.repo-code",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {"apply_allowed": True, "confidence": "medium"},
+            "evidence": [
+                {
+                    "kind": "repo-code",
+                    "supports": ["path", "value", "ui-mapping"],
+                    "summary": "The provider writes Enabled = 1 for the current tweak.",
+                }
+            ],
+        }
+
+        score = research_v36_lib.score_candidate(record, {"next_missing_layer": "none"})
+
+        self.assertEqual(score["static_evidence_strength"], 1)
+
+    def test_string_reference_ghidra_claim_does_not_score_as_strong_static(self) -> None:
+        record = {
+            "record_id": "example.string-xref",
+            "tweak_id": "example.string-xref",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {"apply_allowed": False, "confidence": "medium"},
+            "evidence": [
+                {
+                    "kind": "ghidra-headless",
+                    "supports": ["path", "string-reference", "version-scope"],
+                    "summary": "A string/xref lead found the registry text but did not recover a caller chain or API semantics.",
+                }
+            ],
+        }
+
+        score = research_v36_lib.score_candidate(record, {"next_missing_layer": "none"})
+
+        self.assertEqual(score["static_evidence_strength"], 2)
+
+    def test_old_verified_record_enters_revalidation_pending(self) -> None:
+        record = {
+            "record_id": "example.revalidation",
+            "tweak_id": "example.revalidation",
+            "record_status": "validated",
+            "last_reviewed_utc": "2026-03-01T00:00:00Z",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": True,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "app_current_implementation": {
+                "status": "matches-research",
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(
+            record,
+            {"next_missing_layer": "none"},
+            {"behavior": {}, "negative_evidence": {}, "reproducibility": {}},
+            evaluated_at="2026-04-09T00:00:00Z",
+        )
+
+        self.assertEqual(gate["promotion_state"], "revalidation-pending")
+        self.assertEqual(gate["promotion_blockers"], ["stale-evidence"])
 
 
 class GapAnalysisTests(unittest.TestCase):
@@ -299,6 +418,12 @@ class CanonicalBundleProjectionTests(unittest.TestCase):
         self.assertEqual(payload["before_after"]["value_added"], 1)
         self.assertEqual(payload["before_after"]["value_changed"], 1)
         self.assertIn("score_breakdown", payload)
+        self.assertEqual(payload["discovery_source"], "imported_record")
+        self.assertEqual(payload["discovery_reason"], "existing_research")
+        self.assertIn("observed_default", payload)
+        self.assertIn("recommended_value", payload)
+        self.assertIn("rollback_value", payload)
+        self.assertIn("source_enrichment", payload)
 
 
 if __name__ == "__main__":

@@ -6,12 +6,14 @@ import re
 import subprocess
 import xml.etree.ElementTree as ET
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
 from evidence_class_lib import (
     bool_value,
+    evidence_items,
+    evidence_kind,
     extract_app_status,
     has_benchmark_evidence,
     has_ghidra_evidence,
@@ -65,6 +67,44 @@ SUPPORTED_SCHEMA_VERSIONS = {"1.0"}
 EVALUATOR_VERSION = "3.6.0"
 DEFAULT_BACKEND_ID = "rai-linux-vm"
 CURRENT_SCHEMA_VERSION = "1.0"
+STALE_REVALIDATION_DAYS = 28
+STRONG_STATIC_SUPPORTS = {
+    "allowed-values",
+    "behavior",
+    "runtime-read",
+    "value semantics",
+    "kernel-derivation",
+}
+WEAK_STATIC_SUPPORTS = {
+    "string-reference",
+    "binary-scan",
+    "open-question",
+}
+STRONG_STATIC_KINDS = {
+    "official-doc",
+    "policy-csp",
+    "troubleshoot-doc",
+    "decompilation",
+    "decompiled-pseudocode",
+    "pdb-symbolized",
+}
+WEAK_STATIC_KINDS = {
+    "repo-code",
+    "json-definition",
+    "source-code",
+}
+SOURCE_ENRICHMENT_KINDS = {
+    "official-doc",
+    "policy-csp",
+    "troubleshoot-doc",
+    "repo-doc",
+    "decompilation",
+    "decompiled-pseudocode",
+    "ghidra-headless",
+    "ghidra-trace",
+    "open-source-reference",
+    "inference",
+}
 
 DEFAULT_CAPABILITIES = {
     "registry_read": False,
@@ -87,6 +127,20 @@ DEFAULT_REQUIRED_CAPABILITIES_BY_LANE = {
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def parse_utc(value: str | None) -> datetime | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    normalized = text.replace("Z", "+00:00")
+    try:
+        parsed = datetime.fromisoformat(normalized)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
 
 
 def load_json(path: Path) -> Any:
@@ -287,6 +341,9 @@ def validate_canonical_bundle(payload: dict[str, Any]) -> list[str]:
         "feature_area",
         "discovery_source",
         "discovery_reason",
+        "observed_default",
+        "recommended_value",
+        "rollback_value",
         "execution_context",
         "promotion_state",
         "promotion_blockers",
@@ -297,6 +354,7 @@ def validate_canonical_bundle(payload: dict[str, Any]) -> list[str]:
         "verification_environment",
         "negative_evidence",
         "before_after",
+        "source_enrichment",
         "bench_results",
     )
     for field in required:
@@ -361,6 +419,153 @@ def discovery_seed_from_record(record: dict[str, Any]) -> dict[str, Any]:
         "seed_reference": f"research/records/{Path(record_id).name}.json",
         "required_followup": next_missing_layer(record),
         "execution_context": default_execution_context(),
+    }
+
+
+def _first_state_block(collection: Any) -> dict[str, Any]:
+    if not isinstance(collection, list):
+        return {}
+    for item in collection:
+        if not isinstance(item, dict):
+            continue
+        for state in item.get("states") or []:
+            if isinstance(state, dict):
+                return {
+                    "profile_id": item.get("profile_id") or item.get("label"),
+                    "label": item.get("label"),
+                    "applies_to": item.get("applies_to"),
+                    "good_when": item.get("good_when"),
+                    "bad_when": item.get("bad_when"),
+                    "state": state,
+                    "evidence_ids": item.get("evidence_ids") or [],
+                }
+    return {}
+
+
+def _state_projection(block: dict[str, Any], source: str) -> dict[str, Any] | None:
+    if not block:
+        return None
+    state = block.get("state") or {}
+    return {
+        "source": source,
+        "profile_id": block.get("profile_id"),
+        "label": block.get("label"),
+        "applies_to": block.get("applies_to"),
+        "state_kind": state.get("state_kind"),
+        "value": state.get("value"),
+        "rationale": state.get("rationale"),
+        "evidence_ids": block.get("evidence_ids") or [],
+    }
+
+
+def observed_default_projection(record: dict[str, Any]) -> dict[str, Any] | None:
+    return _state_projection(_first_state_block(record.get("windows_defaults")), "windows_defaults")
+
+
+def recommended_value_projection(record: dict[str, Any]) -> dict[str, Any] | None:
+    profiles = record.get("recommended_profiles") or []
+    if isinstance(profiles, list):
+        preferred = [item for item in profiles if isinstance(item, dict) and bool(item.get("apply_allowed"))]
+        if preferred:
+            return _state_projection(_first_state_block(preferred), "recommended_profiles")
+    return _state_projection(_first_state_block(record.get("recommended_profiles")), "recommended_profiles")
+
+
+def rollback_value_projection(record: dict[str, Any]) -> dict[str, Any] | None:
+    default_state = observed_default_projection(record)
+    if default_state:
+        return {
+            **default_state,
+            "rollback_strategy": "restore_default",
+        }
+    decision = record.get("decision") or {}
+    if bool_value(decision.get("restore_previous_supported")):
+        return {
+            "source": "decision",
+            "rollback_strategy": "restore_previous",
+            "supported": True,
+        }
+    if bool_value(decision.get("restore_default_supported")):
+        return {
+            "source": "decision",
+            "rollback_strategy": "restore_default",
+            "supported": True,
+        }
+    return {
+        "source": "decision",
+        "rollback_strategy": "unknown",
+        "supported": False,
+    }
+
+
+def source_enrichment_projection(record: dict[str, Any]) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for item in evidence_items(record):
+        kind = evidence_kind(item)
+        if kind not in SOURCE_ENRICHMENT_KINDS:
+            continue
+        items.append(
+            {
+                "evidence_id": item.get("evidence_id"),
+                "kind": kind,
+                "title": item.get("title"),
+                "location": item.get("location"),
+                "supports": item.get("supports") or [],
+                "summary": item.get("summary"),
+                "strength": item.get("strength"),
+            }
+        )
+    proof = record.get("validation_proof") or {}
+    if isinstance(proof, dict) and any(proof.get(field) for field in ("source_url", "exact_quote_or_path", "notes")):
+        items.append(
+            {
+                "evidence_id": "validation-proof",
+                "kind": "validation-proof",
+                "title": "Validation proof",
+                "location": proof.get("source_url"),
+                "supports": ["path", "behavior"],
+                "summary": proof.get("notes") or proof.get("exact_quote_or_path"),
+                "strength": "high" if proof.get("key_found_on_page") else "medium",
+            }
+        )
+    return items
+
+
+def documentation_status_projection(record: dict[str, Any]) -> dict[str, Any]:
+    decision = record.get("decision") or {}
+    return {
+        "record_status": record.get("record_status"),
+        "has_validation_proof": bool(record.get("validation_proof")),
+        "has_official_evidence": has_official_evidence(record),
+        "confidence": decision.get("confidence"),
+    }
+
+
+def evidence_status_projection(record: dict[str, Any], audit: dict[str, Any] | None = None) -> dict[str, Any]:
+    audit = audit or {}
+    return {
+        "evidence_count": len(evidence_items(record)),
+        "next_missing_layer": str(audit.get("next_missing_layer") or next_missing_layer(record) or "none"),
+        "has_procmon_evidence": has_procmon_evidence(record),
+        "has_ghidra_evidence": has_ghidra_evidence(record),
+        "has_benchmark_evidence": has_benchmark_evidence(record),
+        "has_reboot_evidence": has_reboot_evidence(record),
+    }
+
+
+def rollback_status_projection(record: dict[str, Any]) -> dict[str, Any]:
+    decision = record.get("decision") or {}
+    rollback_value = rollback_value_projection(record)
+    declared = bool_value(decision.get("restore_default_supported")) or bool_value(decision.get("restore_previous_supported"))
+    verified = restore_story_known(record)
+    failure_reason = None if verified else "rollback-unverified"
+    return {
+        "rollback_declared": declared,
+        "rollback_executed": False,
+        "rollback_verified": verified,
+        "rollback_verification_method": "record-restore-story" if verified else "missing",
+        "rollback_failure_reason": failure_reason,
+        "rollback_value": rollback_value,
     }
 
 
@@ -508,13 +713,59 @@ def score_candidate(record: dict[str, Any], audit: dict[str, Any] | None = None)
     current_build = str((reproducibility_manifest() or {}).get("os_build") or "").strip()
     stale_build = bool(tested_build and current_build and tested_build != current_build)
 
-    static_evidence_strength = 1
-    if has_official_evidence(record) and has_ghidra_evidence(record):
-        static_evidence_strength = 5
-    elif has_official_evidence(record) or has_ghidra_evidence(record):
-        static_evidence_strength = 4
-    elif record.get("evidence"):
-        static_evidence_strength = 2
+    static_items = [
+        item
+        for item in evidence_items(record)
+        if evidence_kind(item) not in {
+            "procmon-trace",
+            "runtime-diff",
+            "runtime-trace",
+            "vm-test",
+            "registry-observation",
+            "wpr-trace",
+            "etw-trace",
+            "runtime-benchmark",
+        }
+    ]
+    static_strengths: list[int] = []
+    for item in static_items:
+        kind = evidence_kind(item)
+        supports = {str(value) for value in (item.get("supports") or []) if value}
+        summary = str(item.get("summary") or "").lower()
+        if kind in WEAK_STATIC_KINDS:
+            static_strengths.append(1)
+            continue
+        if supports & WEAK_STATIC_SUPPORTS or "string/xref" in summary or "string reference" in summary or "xref" in summary or "raw-memory scan" in summary:
+            static_strengths.append(2)
+            continue
+        strong_semantics = bool(supports & STRONG_STATIC_SUPPORTS) or any(
+            needle in summary
+            for needle in (
+                "caller chain",
+                "api semantic",
+                "reads and writes",
+                "reads ",
+                " writes ",
+                "query",
+                "decompiled the functions",
+                "maps ",
+                "derived from",
+                "shgetvaluew",
+                "shsetvaluew",
+            )
+        )
+        if kind in STRONG_STATIC_KINDS and strong_semantics:
+            static_strengths.append(5 if kind in {"official-doc", "policy-csp", "troubleshoot-doc"} else 4)
+            continue
+        if kind in {"ghidra-headless", "ghidra-trace", "pdb-symbolized"}:
+            static_strengths.append(4 if strong_semantics else 2)
+            continue
+        if kind in {"repo-doc", "open-source-reference", "inference"}:
+            static_strengths.append(3 if strong_semantics else 2)
+            continue
+        static_strengths.append(2)
+
+    static_evidence_strength = max(static_strengths) if static_strengths else 1
 
     runtime_hits = sum(
         1
@@ -579,84 +830,16 @@ def score_candidate(record: dict[str, Any], audit: dict[str, Any] | None = None)
     }
 
 
-def derive_promotion_state(record: dict[str, Any], audit: dict[str, Any] | None = None) -> dict[str, Any]:
-    audit = audit or {}
-    decision = record.get("decision") or {}
-    app_status = extract_app_status(record)
-    tweak_origin = derive_tweak_origin(record)
-    missing_layer = str(audit.get("next_missing_layer") or next_missing_layer(record))
-    blockers = [str(item) for item in (decision.get("blocking_issues") or []) if item]
-    compatibility_mode = "native" if CURRENT_SCHEMA_VERSION in SUPPORTED_SCHEMA_VERSIONS else "unsupported"
-    record_status = str(record.get("record_status") or "").strip().lower()
-    freshness = evidence_freshness(record, reproducibility_manifest())
-    tested_build = str(freshness.get("os_build") or "").strip()
-    current_build = str((reproducibility_manifest() or {}).get("os_build") or "").strip()
-    stale_build = bool(tested_build and current_build and tested_build != current_build)
-
-    if record_status == "deprecated":
-        state = "rejected"
-        blockers = blockers or ["deprecated-record"]
-    elif CURRENT_SCHEMA_VERSION not in SUPPORTED_SCHEMA_VERSIONS:
-        state = "blocked"
-        blockers = blockers or ["schema-version-unsupported"]
-    elif blockers:
-        state = "blocked"
-    elif missing_layer in {"archived"}:
-        state = "rejected"
-        blockers = ["archived"]
-    elif missing_layer not in {"none", ""}:
-        state = "blocked"
-        blockers = blockers or [missing_layer]
-    elif stale_build:
-        state = "revalidation-pending"
-        blockers = ["stale-evidence"]
-    elif bool_value(decision.get("apply_allowed")) and app_status == "matches-research" and tweak_origin == "legacy-curated":
-        state = "promoted"
-    else:
-        state = "promotion-eligible"
-
-    return {
-        "schema_version": CURRENT_SCHEMA_VERSION,
-        "evaluator_version": EVALUATOR_VERSION,
-        "supported_schema_versions": sorted(SUPPORTED_SCHEMA_VERSIONS),
-        "schema_compatibility_mode": compatibility_mode,
-        "candidate_id": str(record.get("record_id") or record.get("tweak_id") or ""),
-        "record_id": str(record.get("record_id") or record.get("tweak_id") or ""),
-        "tweak_id": str(record.get("tweak_id") or record.get("record_id") or ""),
-        "tweak_origin": tweak_origin,
-        "promotion_state": state,
-        "promotion_blockers": blockers,
-        "record_promotion_allowed": state in {"promotion-eligible", "promoted", "revalidation-pending"},
-        "tweak_ingest_allowed": state == "promoted",
-        "apply_allowed": bool_value(decision.get("apply_allowed")),
-        "app_mapping_status": app_status,
-        "next_missing_layer": missing_layer or "none",
-        "debug_override_allowed": tweak_origin == "research-derived",
-        "last_evaluated_at": now_utc(),
-    }
-
-
-def before_after_projection(full_evidence: dict[str, Any]) -> dict[str, Any]:
-    sideeffects = ((full_evidence.get("behavior") or {}).get("registry_sideeffects") or {}) if isinstance(full_evidence, dict) else {}
-    counts = sideeffects.get("summary_counts") or {}
-    return {
-        "format": sideeffects.get("format"),
-        "diff_file": sideeffects.get("diff_file"),
-        "key_added": counts.get("added_keys", 0),
-        "key_deleted": counts.get("removed_keys", 0),
-        "value_added": counts.get("added_values", 0),
-        "value_deleted": counts.get("removed_values", 0),
-        "value_changed": counts.get("modified_values", 0),
-        "unchanged_values": counts.get("unchanged_values", 0),
-    }
-
-
-def bench_results_projection(full_evidence: dict[str, Any]) -> dict[str, Any]:
+def bench_results_projection(full_evidence: dict[str, Any], record: dict[str, Any] | None = None, audit: dict[str, Any] | None = None) -> dict[str, Any]:
     benchmark = ((full_evidence.get("behavior") or {}).get("benchmark") or {}) if isinstance(full_evidence, dict) else {}
     reproducibility = full_evidence.get("reproducibility") or {}
+    audit = audit or {}
+    record = record or {}
+    next_layer = str(audit.get("next_missing_layer") or next_missing_layer(record) or "none")
+    bench_required = next_layer in {"wpr-or-benchmark", "runtime-benchmark"}
     return {
         "bench_tier": "vm" if reproducibility.get("vm_name") else "unknown",
-        "bench_required": bool(benchmark.get("executed")),
+        "bench_required": bench_required,
         "bench_vm_capable": True,
         "bench_bare_metal_required": False,
         "executed": bool(benchmark.get("executed")),
@@ -679,12 +862,7 @@ def verification_environment_projection(record: dict[str, Any], full_evidence: d
 
 
 def discovery_projection(record: dict[str, Any]) -> tuple[str, str]:
-    proof = record.get("validation_proof") or {}
-    if proof.get("source_url"):
-        return "existing-record", "Compat import from validated research records with preserved validation proof."
-    if record.get("evidence"):
-        return "existing-record", "Compat import from existing record evidence without a dedicated validation proof URL."
-    return "existing-record", "Compat import from an authoring record with incomplete provenance."
+    return "imported_record", "existing_research"
 
 
 def candidate_identity(record: dict[str, Any]) -> tuple[str, str]:
@@ -693,13 +871,160 @@ def candidate_identity(record: dict[str, Any]) -> tuple[str, str]:
     return record_id, tweak_id
 
 
+def _gate_layer_blockers(next_layer: str) -> list[str]:
+    mapping = {
+        "decision-gate": ["documentation-first-review"],
+        "runtime-trace": ["no-runtime-proof"],
+        "procmon": ["no-runtime-proof"],
+        "wpr-or-benchmark": ["bench-not-run"],
+        "runtime-benchmark": ["bench-not-run"],
+        "ghidra": ["no-runtime-proof"],
+        "early-boot": ["no-runtime-proof"],
+    }
+    return list(mapping.get(next_layer, [next_layer])) if next_layer not in {"", "none"} else []
+
+
+def evaluate_candidate_gate(
+    record: dict[str, Any],
+    audit: dict[str, Any] | None = None,
+    full_evidence: dict[str, Any] | None = None,
+    *,
+    backend_id: str = DEFAULT_BACKEND_ID,
+    evaluated_at: str | None = None,
+) -> dict[str, Any]:
+    audit = audit or {}
+    full_evidence = full_evidence or {}
+    decision = record.get("decision") or {}
+    app_status = extract_app_status(record)
+    tweak_origin = derive_tweak_origin(record)
+    missing_layer = str(audit.get("next_missing_layer") or next_missing_layer(record))
+    compatibility_mode = "native" if CURRENT_SCHEMA_VERSION in SUPPORTED_SCHEMA_VERSIONS else "unsupported"
+    record_status = str(record.get("record_status") or "").strip().lower()
+    freshness = evidence_freshness(record, reproducibility_manifest())
+    tested_build = str(freshness.get("os_build") or "").strip()
+    current_build = str((reproducibility_manifest() or {}).get("os_build") or "").strip()
+    stale_build = bool(tested_build and current_build and tested_build != current_build)
+    evaluation_time = parse_utc(evaluated_at) or datetime.now(timezone.utc)
+    last_verified_at = parse_utc(str(record.get("last_reviewed_utc") or ""))
+    stale_age = bool(last_verified_at and (evaluation_time - last_verified_at) >= timedelta(days=STALE_REVALIDATION_DAYS))
+    rollback_status = rollback_status_projection(record)
+    bench_results = bench_results_projection(full_evidence, record, audit)
+    score_breakdown = score_candidate(record, audit)
+    documentation_status = documentation_status_projection(record)
+    evidence_status = evidence_status_projection(record, audit)
+
+    blockers = [str(item) for item in (decision.get("blocking_issues") or []) if item]
+    blocker_set = set(blockers)
+
+    target = primary_target(record)
+    if CURRENT_SCHEMA_VERSION not in SUPPORTED_SCHEMA_VERSIONS:
+        blocker_set.add("schema-version-unsupported")
+    if record_status == "deprecated":
+        blocker_set.add("deprecated-record")
+    if record_status == "archived" or missing_layer == "archived":
+        blocker_set.add("archived")
+    if not target.get("path") or not target.get("value_name") or not target.get("value_type"):
+        blocker_set.add("schema-incomplete")
+    if bool_value(decision.get("apply_allowed")) and not rollback_status.get("rollback_verified"):
+        blocker_set.add("rollback-unverified")
+    if bench_results.get("bench_required") and not bench_results.get("executed"):
+        blocker_set.add("bench-not-run")
+    blocker_set.update(_gate_layer_blockers(missing_layer))
+
+    hard_blockers = sorted(
+        blocker
+        for blocker in blocker_set
+        if blocker not in {"stale-evidence"}
+    )
+    stale_revalidation = stale_build or stale_age
+
+    if record_status == "deprecated" or "archived" in blocker_set:
+        state = "rejected"
+    elif "schema-version-unsupported" in blocker_set:
+        state = "blocked"
+    elif hard_blockers:
+        state = "blocked"
+    elif stale_revalidation:
+        state = "revalidation-pending"
+    elif bool_value(decision.get("apply_allowed")) and app_status == "matches-research" and tweak_origin == "legacy-curated":
+        state = "promoted"
+    else:
+        state = "promotion-eligible"
+
+    promotion_blockers = hard_blockers
+    if state == "revalidation-pending":
+        promotion_blockers = ["stale-evidence"]
+    elif state == "rejected" and "deprecated-record" in blocker_set:
+        promotion_blockers = ["deprecated-record"]
+
+    return {
+        "schema_version": CURRENT_SCHEMA_VERSION,
+        "evaluator_version": EVALUATOR_VERSION,
+        "supported_schema_versions": sorted(SUPPORTED_SCHEMA_VERSIONS),
+        "schema_compatibility_mode": compatibility_mode,
+        "candidate_id": str(record.get("record_id") or record.get("tweak_id") or ""),
+        "record_id": str(record.get("record_id") or record.get("tweak_id") or ""),
+        "tweak_id": str(record.get("tweak_id") or record.get("record_id") or ""),
+        "tweak_origin": tweak_origin,
+        "promotion_state": state,
+        "promotion_blockers": promotion_blockers,
+        "record_promotion_allowed": state in {"promotion-eligible", "promoted", "revalidation-pending"},
+        "tweak_ingest_allowed": state == "promoted",
+        "apply_allowed": bool_value(decision.get("apply_allowed")),
+        "app_mapping_status": app_status,
+        "next_missing_layer": missing_layer or "none",
+        "debug_override_allowed": tweak_origin == "research-derived",
+        "last_evaluated_at": now_utc(),
+        "score_breakdown": score_breakdown,
+        "documentation_status": documentation_status,
+        "evidence_status": evidence_status,
+        "rollback_status": rollback_status,
+        "bench_status": bench_results,
+        "verification_context": {
+            "backend_id": backend_id,
+            "current_build": current_build,
+            "tested_build": tested_build,
+            "last_verified_at": record.get("last_reviewed_utc"),
+            "stale_age_days": (evaluation_time - last_verified_at).days if last_verified_at else None,
+        },
+    }
+
+
+def derive_promotion_state(record: dict[str, Any], audit: dict[str, Any] | None = None) -> dict[str, Any]:
+    return evaluate_candidate_gate(
+        record,
+        audit,
+        {
+            "behavior": {},
+            "negative_evidence": {},
+            "reproducibility": reproducibility_manifest(),
+        },
+    )
+
+
+def before_after_projection(full_evidence: dict[str, Any]) -> dict[str, Any]:
+    sideeffects = ((full_evidence.get("behavior") or {}).get("registry_sideeffects") or {}) if isinstance(full_evidence, dict) else {}
+    counts = sideeffects.get("summary_counts") or {}
+    return {
+        "format": sideeffects.get("format"),
+        "diff_file": sideeffects.get("diff_file"),
+        "key_added": counts.get("added_keys", 0),
+        "key_deleted": counts.get("removed_keys", 0),
+        "value_added": counts.get("added_values", 0),
+        "value_deleted": counts.get("removed_values", 0),
+        "value_changed": counts.get("modified_values", 0),
+        "unchanged_values": counts.get("unchanged_values", 0),
+    }
 def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], full_evidence: dict[str, Any], backend_id: str = DEFAULT_BACKEND_ID) -> dict[str, Any]:
     record_id, tweak_id = candidate_identity(record)
     target = primary_target(record)
-    gate = derive_promotion_state(record, audit)
+    gate = evaluate_candidate_gate(record, audit, full_evidence, backend_id=backend_id)
     execution_context = default_execution_context(backend_id)
     discovery_source, discovery_reason = discovery_projection(record)
     freshness = evidence_freshness(record, reproducibility_manifest())
+    rollback_status = rollback_status_projection(record)
+    before_after = before_after_projection(full_evidence)
+    bench_results = bench_results_projection(full_evidence, record, audit)
 
     return {
         "schema_version": CURRENT_SCHEMA_VERSION,
@@ -710,6 +1035,9 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
         "key_path": target.get("path"),
         "value_name": target.get("value_name"),
         "value_type": target.get("value_type"),
+        "observed_default": observed_default_projection(record),
+        "recommended_value": recommended_value_projection(record),
+        "rollback_value": rollback_status.get("rollback_value"),
         "execution_context": execution_context,
         "promotion_state": gate["promotion_state"],
         "promotion_blockers": gate["promotion_blockers"],
@@ -721,9 +1049,13 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
         "last_verified_at": record.get("last_reviewed_utc"),
         "verification_environment": verification_environment_projection(record, full_evidence, execution_context),
         "negative_evidence": full_evidence.get("negative_evidence") or {},
-        "before_after": before_after_projection(full_evidence),
-        "bench_results": bench_results_projection(full_evidence),
-        "score_breakdown": score_candidate(record, audit),
+        "before_after": before_after,
+        "source_enrichment": source_enrichment_projection(record),
+        "bench_results": bench_results,
+        "score_breakdown": gate["score_breakdown"],
+        "documentation_status": gate["documentation_status"],
+        "evidence_status": gate["evidence_status"],
+        "rollback_status": rollback_status,
         "verification_context": {
             "record_id": record_id,
             "tweak_id": tweak_id,

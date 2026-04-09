@@ -225,5 +225,317 @@
     "notes": "Cross-verification is pending until a PDB-backed Ghidra branch audit and an IDA headless pass exist for this record."
   },
   "research_record": "research/records/system.priority-control.json",
-  "research_record_fallback": "research/records/system.priority-control.review.json"
+  "research_record_fallback": "research/records/system.priority-control.review.json",
+  "schema_version": "1.0",
+  "candidate_id": "system.priority-control",
+  "feature_area": "Scheduler / Priority Control",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+  "value_name": "Win32PrioritySeparation",
+  "value_type": "REG_DWORD",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current 25H2 builds where the live baseline still reads back 2 before the app profile is applied",
+    "state_kind": "value",
+    "value": 2,
+    "rationale": "Use the current observed 25H2 VM baseline value.",
+    "evidence_ids": [
+      "vm-batch-probe-20260320-priority-control",
+      "vm-manual-benchmark-20260324-priority-control"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "current-app-profile",
+    "label": "Current app profile",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": 38,
+    "rationale": "Use the app's observed 0x26 foreground scheduling profile.",
+    "evidence_ids": [
+      "app-system-registry-provider",
+      "repo-system-doc-priority",
+      "procmon-priority-control-wmi-read",
+      "vm-batch-probe-20260320-priority-control",
+      "vm-manual-benchmark-20260324-priority-control"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current 25H2 builds where the live baseline still reads back 2 before the app profile is applied",
+    "state_kind": "value",
+    "value": 2,
+    "rationale": "Use the current observed 25H2 VM baseline value.",
+    "evidence_ids": [
+      "vm-batch-probe-20260320-priority-control",
+      "vm-manual-benchmark-20260324-priority-control"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "promoted",
+  "promotion_blockers": [],
+  "record_promotion_allowed": true,
+  "tweak_ingest_allowed": true,
+  "tweak_origin": "legacy-curated",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "system.priority-control",
+    "record_id": "system.priority-control",
+    "tweak_id": "system.priority-control",
+    "tweak_origin": "legacy-curated",
+    "promotion_state": "promoted",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": true,
+    "apply_allowed": true,
+    "app_mapping_status": "matches-research",
+    "next_missing_layer": "none",
+    "debug_override_allowed": false,
+    "last_evaluated_at": "2026-04-09T01:27:55.039162Z",
+    "score_breakdown": {
+      "static_evidence_strength": 5,
+      "runtime_evidence_strength": 5,
+      "rollback_clarity": 5,
+      "blast_radius": 2,
+      "tweak_suitability": 5,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 5,
+      "overall_score": 4.33,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": true,
+      "confidence": "high"
+    },
+    "evidence_status": {
+      "evidence_count": 8,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": true,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": true,
+      "has_reboot_evidence": true
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Observed Win25H2Clean baseline",
+        "label": "Observed Win25H2Clean baseline",
+        "applies_to": "Current 25H2 builds where the live baseline still reads back 2 before the app profile is applied",
+        "state_kind": "value",
+        "value": 2,
+        "rationale": "Use the current observed 25H2 VM baseline value.",
+        "evidence_ids": [
+          "vm-batch-probe-20260320-priority-control",
+          "vm-manual-benchmark-20260324-priority-control"
+        ],
+        "rollback_strategy": "restore_default"
+      }
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-04-01T00:00:00Z",
+      "stale_age_days": 8
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-04-01T00:00:00Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-04-01T00:00:00Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {},
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "ms-win32-operatingsystem-priority",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: Win32_OperatingSystem class",
+      "location": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope",
+        "risk"
+      ],
+      "summary": "Microsoft maps ForegroundApplicationBoost, QuantumLength, and QuantumType to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation. The page proves the path and high-level WMI contract, but it does not publish the exact raw 0x26 bitmask used by the app.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-system-doc-priority",
+      "kind": "repo-doc",
+      "title": "Repo system research notes for Win32PrioritySeparation",
+      "location": "Docs/system/system.md",
+      "supports": [
+        "value",
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "summary": "The repo documents the raw bitmask interpretation for Win32PrioritySeparation and discusses values such as 0x18, 0x24, and 0x26, but this is repo provenance rather than a primary Microsoft publication.",
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-system-decomp-prioritycontrol",
+      "kind": "decompilation",
+      "title": "Historical repo decompilation for PriorityControl read/write path",
+      "location": "Docs/system/assets/lsc-cimwin32.c",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "Historical repo decompilation shows a PriorityControl read/write path for Win32PrioritySeparation, but this remains secondary provenance after the bounded PDB-backed v3.2 Ghidra pass.",
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "ghidra-symbolized-prioritycontrol-20260401",
+      "kind": "decompilation",
+      "title": "PDB-backed bounded Ghidra branch audit - cimwin32.dll",
+      "location": "evidence/files/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "A v3.2 Ghidra pass on cimwin32.dll applied the PDB and recovered bounded Win32PrioritySeparation compare/jump blocks in GetNTInfo and PutInstance. The output stays branch-scoped and does not claim full raw 0x26 semantics.",
+      "strength": "high"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "research/notes/priority-control-procmon-validation-20260326.md",
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "The 2026-03-26 Procmon pass adds direct wmiprvse.exe reads for both observed states. The earlier rebooted VM benchmark pass still covers baseline 2, candidate 38, restore 2, and bounded CPU/memory measurements on the same build.",
+      "strength": "high"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "executed": false,
+    "summary": null,
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 5,
+    "runtime_evidence_strength": 5,
+    "rollback_clarity": 5,
+    "blast_radius": 2,
+    "tweak_suitability": 5,
+    "privilege_complexity": 3,
+    "build_specificity": 5,
+    "sibling_expansion_value": 4,
+    "bench_priority": 5,
+    "overall_score": 4.33,
+    "next_missing_layer": "none"
+  },
+  "documentation_status": {
+    "record_status": "validated",
+    "has_validation_proof": true,
+    "has_official_evidence": true,
+    "confidence": "high"
+  },
+  "evidence_status": {
+    "evidence_count": 8,
+    "next_missing_layer": "none",
+    "has_procmon_evidence": true,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": true,
+    "has_reboot_evidence": true
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current 25H2 builds where the live baseline still reads back 2 before the app profile is applied",
+      "state_kind": "value",
+      "value": 2,
+      "rationale": "Use the current observed 25H2 VM baseline value.",
+      "evidence_ids": [
+        "vm-batch-probe-20260320-priority-control",
+        "vm-manual-benchmark-20260324-priority-control"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "verification_context": {
+    "record_id": "system.priority-control",
+    "tweak_id": "system.priority-control",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
+  }
 }
