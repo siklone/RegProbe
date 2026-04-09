@@ -40,6 +40,8 @@ def build_validation_summary(
     missing_docs_count = 0
 
     for record in records:
+        if str(record.get("record_status") or "").strip().lower() == "deprecated":
+            continue
         candidate_id = str(record.get("record_id") or record.get("tweak_id") or "")
         audit = audit_map.get(candidate_id, {})
         gate = gate_map.get(candidate_id, {})

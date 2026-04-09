@@ -24,7 +24,13 @@
       "promotion-eligible": 8,
       "revalidation-pending": 3
     },
-    "re_audit_required_count": 12
+    "re_audit_required_count": 12,
+    "total": 259,
+    "promoted": 237,
+    "blocked": 11,
+    "revalidation_pending": 3,
+    "stale": 3,
+    "gate_health": "green"
   },
   "entries": [
     {
@@ -22009,5 +22015,38 @@
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
       "incident_ids": []
     }
-  ]
+  ],
+  "blocker_breakdown": {
+    "ambiguous-value-semantics": 2,
+    "documentation-first-review": 10,
+    "no-runtime-proof": 3,
+    "record-blocker": 25,
+    "schema-incomplete": 1,
+    "stale-evidence": 3,
+    "trigger_context_unclear": 1
+  },
+  "stale_records": [
+    {
+      "candidate_id": "security.trusted-path-credential-prompting",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "system.disable-auto-maintenance",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "system.memory-large-system-cache-client",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    }
+  ],
+  "conflict_records": [],
+  "missing_docs_records": [],
+  "rollback_unverified_records": [],
+  "bench_pending_records": []
 }

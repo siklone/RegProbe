@@ -13,3 +13,16 @@ This folder holds the v3.1 machine pipeline for undocumented registry research.
 Canonical imported artifacts live under `evidence/files/`. The published research surface stays under `research/`.
 
 `faz1` and `faz3` stay bootstrap-only by default. Pass `-ExecuteTools` when you want the phase wrapper to call the mapped VM runner for that tweak. `faz1` can now emit both ETW and Procmon lane manifests.
+
+<!-- BEGIN:RESEARCH_HEALTH -->
+## Research Health
+
+| Metric | Value |
+|--------|-------|
+| Promoted | 237 |
+| Blocked | 11 |
+| Revalidation Pending | 3 |
+| Gate Health | 🟢 green |
+| Schema Complete | 100% |
+| Missing Docs | 0 |
+<!-- END:RESEARCH_HEALTH -->

@@ -866,9 +866,10 @@ def documentation_quality_projection(
         rollback_status = rollback_status_projection(record)
 
     issues: list[str] = []
+    value_name = target.get("value_name")
     if not target.get("path"):
         issues.append("missing-key-path")
-    if not target.get("value_name"):
+    if value_name is None:
         issues.append("missing-value-name")
     if not target.get("value_type"):
         issues.append("missing-value-type")
@@ -889,7 +890,7 @@ def documentation_quality_projection(
         "documentation_quality_pass": not issues,
         "documentation_issues": issues,
         "documented_behavior": bool(record.get("validation_proof")) and bool(source_enrichment),
-        "has_value_context": bool(target.get("path") and target.get("value_name") and target.get("value_type")),
+        "has_value_context": bool(target.get("path") and value_name is not None and target.get("value_type")),
         "has_default_context": bool(observed_default_projection(record)),
         "has_recommended_context": bool(recommended_value_projection(record)),
         "has_rollback_context": bool(rollback_status.get("rollback_value")) or bool(blockers & ROLLBACK_BLOCKERS),
