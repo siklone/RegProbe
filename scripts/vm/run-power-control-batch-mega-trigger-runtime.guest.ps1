@@ -1186,25 +1186,25 @@ function Get-TraceLinesFromXml {
         line_count = @($lines).Count
         element_name_counts = @(
             $elementCounts.GetEnumerator() |
-                Sort-Object -Property @{ Expression = 'Value'; Descending = $true }, @{ Expression = 'Name'; Descending = $false } |
-                Select-Object -First 20 |
                 ForEach-Object {
-                    [ordered]@{
+                    [pscustomobject]@{
                         name = [string]$_.Name
                         count = [int]$_.Value
                     }
-                }
+                } |
+                Sort-Object -Property count -Descending |
+                Select-Object -First 20
         )
         data_name_counts = @(
             $dataNameCounts.GetEnumerator() |
-                Sort-Object -Property @{ Expression = 'Value'; Descending = $true }, @{ Expression = 'Name'; Descending = $false } |
-                Select-Object -First 20 |
                 ForEach-Object {
-                    [ordered]@{
+                    [pscustomobject]@{
                         name = [string]$_.Name
                         count = [int]$_.Value
                     }
-                }
+                } |
+                Sort-Object -Property count -Descending |
+                Select-Object -First 20
         )
         sample_events = @($sampleEvents)
     }
