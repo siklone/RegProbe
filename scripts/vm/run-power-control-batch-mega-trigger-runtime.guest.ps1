@@ -290,10 +290,11 @@ function Start-Trace {
     Write-RunLog -Message ("trace-create-start name={0}" -f $traceName)
     $create = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @(
         'create', 'trace', $traceName,
-        '-p', 'Microsoft-Windows-Kernel-Registry',
+        '-p', 'Microsoft-Windows-Kernel-Registry', '0xFFFF', '5',
         '-o', $etlPath,
         '-bs', '64',
-        '-nb', '64', '256'
+        '-nb', '32', '64',
+        '-ets'
     ) -TimeoutSeconds 90
     if ($create.timed_out) {
         throw "logman create timed out for trace session $traceName."
@@ -302,16 +303,7 @@ function Start-Trace {
         throw "logman create failed for ${traceName}: stdout=$($create.stdout) stderr=$($create.stderr)"
     }
     Write-RunLog -Message ("trace-create-complete name={0}" -f $traceName)
-
-    Write-RunLog -Message ("trace-start-begin name={0}" -f $traceName)
-    $start = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @('start', $traceName, '-ets') -TimeoutSeconds 90
-    if ($start.timed_out) {
-        throw "logman start timed out for trace session $traceName."
-    }
-    if ($start.exit_code -ne 0) {
-        throw "logman start failed for ${traceName}: stdout=$($start.stdout) stderr=$($start.stderr)"
-    }
-    Write-RunLog -Message ("trace-start-complete name={0}" -f $traceName)
+    Write-RunLog -Message ("trace-start-complete name={0} source=create-ets" -f $traceName)
 }
 
 function Stop-Trace {
@@ -328,10 +320,12 @@ function Stop-Trace {
     Write-RunLog -Message ("trace-delete-begin name={0}" -f $traceName)
     $delete = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @('delete', $traceName) -TimeoutSeconds 60
     if ($delete.timed_out) {
-        throw "logman delete timed out for trace session $traceName."
+        Write-RunLog -Message ("trace-delete-timeout name={0}" -f $traceName)
+        return
     }
     if ($delete.exit_code -ne 0) {
-        throw "logman delete failed for ${traceName}: stdout=$($delete.stdout) stderr=$($delete.stderr)"
+        Write-RunLog -Message ("trace-delete-nonzero name={0} exit_code={1}" -f $traceName, $delete.exit_code)
+        return
     }
     Write-RunLog -Message ("trace-delete-complete name={0}" -f $traceName)
 }
