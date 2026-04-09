@@ -239,6 +239,102 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["promotion_state"], "revalidation-pending")
         self.assertEqual(gate["promotion_blockers"], ["stale-evidence"])
 
+    def test_apply_allowed_with_unverified_rollback_sets_rollback_unverified_blocker(self) -> None:
+        record = {
+            "record_id": "example.rollback-unverified",
+            "tweak_id": "example.rollback-unverified",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": True,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "app_current_implementation": {
+                "status": "matches-research",
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(
+            record,
+            {"next_missing_layer": "none"},
+            {
+                "behavior": {},
+                "negative_evidence": {},
+                "rollback_verification": {
+                    "rollback_declared": True,
+                    "rollback_executed": False,
+                    "rollback_verified": False,
+                    "rollback_verification_method": "state_diff",
+                    "rollback_failure_reason": "rollback-not-executed",
+                },
+            },
+        )
+
+        self.assertEqual(gate["promotion_state"], "blocked")
+        self.assertIn("rollback-unverified", gate["promotion_blockers"])
+
+    def test_restore_mismatch_sets_rollback_failed_blocker(self) -> None:
+        record = {
+            "record_id": "example.rollback-failed",
+            "tweak_id": "example.rollback-failed",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": True,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "app_current_implementation": {
+                "status": "matches-research",
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(
+            record,
+            {"next_missing_layer": "none"},
+            {
+                "behavior": {},
+                "negative_evidence": {},
+                "rollback_verification": {
+                    "rollback_declared": True,
+                    "rollback_executed": True,
+                    "rollback_verified": False,
+                    "rollback_verification_method": "state_diff",
+                    "rollback_failure_reason": "rollback-state-mismatch",
+                },
+            },
+        )
+
+        self.assertEqual(gate["promotion_state"], "blocked")
+        self.assertIn("rollback-failed", gate["promotion_blockers"])
+
 
 class GapAnalysisTests(unittest.TestCase):
     def test_gap_analysis_emits_hkcu_and_policy_analogs(self) -> None:
@@ -408,6 +504,20 @@ class CanonicalBundleProjectionTests(unittest.TestCase):
                 },
             },
             "negative_evidence": {"eligible": True},
+            "rollback_verification": {
+                "rollback_declared": True,
+                "rollback_executed": True,
+                "rollback_verified": True,
+                "rollback_verification_method": "state_diff",
+                "rollback_failure_reason": None,
+            },
+            "structured_diff": {
+                "key_added": [],
+                "key_deleted": [],
+                "value_added": [{"key_path": "HKLM\\Software\\Example", "value_name": "Added", "after_value": 1}],
+                "value_deleted": [],
+                "value_changed": [{"key_path": "HKLM\\Software\\Example", "value_name": "Enabled", "before_value": 0, "after_value": 1}],
+            },
             "reproducibility": {"vm_name": "Win25H2Clean", "baseline_snapshot": "snap"},
         }
 
@@ -424,6 +534,8 @@ class CanonicalBundleProjectionTests(unittest.TestCase):
         self.assertIn("recommended_value", payload)
         self.assertIn("rollback_value", payload)
         self.assertIn("source_enrichment", payload)
+        self.assertEqual(len(payload["before_after"]["value_added_entries"]), 1)
+        self.assertEqual(payload["rollback_status"]["rollback_verification_method"], "state_diff")
 
 
 if __name__ == "__main__":

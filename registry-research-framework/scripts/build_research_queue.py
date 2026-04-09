@@ -14,10 +14,10 @@ if str(SCRIPTS_ROOT) not in sys.path:
 from research_v36_lib import (
     CURRENT_SCHEMA_VERSION,
     DEFAULT_BACKEND_ID,
+    DISCOVERY_EVENTS_PATH,
     DISCOVERY_ROOT,
     GAP_ANALYSIS_SUMMARY_PATH,
     QUEUE_ROOT,
-    append_discovery_candidates,
     build_queue_entry,
     capability_status,
     default_execution_context,
@@ -55,8 +55,19 @@ def load_runner_config() -> dict:
     return load_json(Path("registry-research-framework/config/tweak-vm-runners.json"))
 
 
-def append_discovery_events(candidates: list[dict]) -> None:
-    append_discovery_candidates(candidates)
+def load_runtime_discovery_candidates() -> list[dict]:
+    if not DISCOVERY_EVENTS_PATH.exists():
+        return []
+    results: list[dict] = []
+    for line in DISCOVERY_EVENTS_PATH.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        payload = json.loads(line)
+        source = str(payload.get("discovery_source") or "")
+        if source in {"existing-record", "ai-gap-analysis"}:
+            continue
+        results.append(payload)
+    return results
 
 
 def queue_entries_from_records(records: list[dict], audit_map: dict[str, dict], runner_config: dict, backend_manifest: dict) -> list[dict]:
@@ -123,6 +134,27 @@ def queue_entries_from_gaps(records: list[dict]) -> list[dict]:
     return entries
 
 
+def queue_entries_from_runtime_discovery(candidates: list[dict]) -> list[dict]:
+    entries: list[dict] = []
+    for candidate in candidates:
+        accepted, reasons = triage_candidate(candidate)
+        state = "triaged" if accepted else "discarded"
+        blockers = [] if accepted else [f"triage:{reason}" for reason in reasons]
+        entry = build_queue_entry(
+            candidate,
+            state=state,
+            blockers=blockers,
+            required_capabilities=[],
+            next_lane="scoring" if accepted else "discarded",
+            linked_record_id=None,
+            gate_result=None,
+        )
+        if not accepted:
+            entry["discard_reason"] = reasons
+        entries.append(entry)
+    return entries
+
+
 def validate_entries(entries: list[dict]) -> list[dict]:
     valid: list[dict] = []
     for entry in entries:
@@ -145,13 +177,13 @@ def main() -> int:
     audit_map = load_audit_entries()
     runner_config = load_runner_config()
     backend_manifest = load_backend_capabilities(DEFAULT_BACKEND_ID)
+    runtime_discovery_candidates = load_runtime_discovery_candidates()
 
     queue_entries = validate_entries(
         queue_entries_from_records(records, audit_map, runner_config, backend_manifest)
         + queue_entries_from_gaps(records)
+        + queue_entries_from_runtime_discovery(runtime_discovery_candidates)
     )
-
-    append_discovery_events(queue_entries)
 
     payload = {
         "schema_version": CURRENT_SCHEMA_VERSION,

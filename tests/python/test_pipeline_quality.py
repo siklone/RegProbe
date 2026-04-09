@@ -215,6 +215,8 @@ class RegistrySideeffectPipelineTests(unittest.TestCase):
             self.assertEqual(payload["summary_counts"]["modified_values"], 1)
             self.assertEqual(payload["summary_counts"]["removed_values"], 1)
             self.assertEqual(payload["summary_counts"]["unchanged_values"], 1)
+            self.assertEqual(len(payload["structured_diff"]["value_added"]), 1)
+            self.assertEqual(len(payload["structured_diff"]["value_changed"]), 1)
             self.assertIn("state.json", payload["diff_file"])
 
 

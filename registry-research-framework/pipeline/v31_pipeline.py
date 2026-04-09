@@ -329,15 +329,32 @@ def parse_registry_sideeffect_state_payload(payload: dict[str, Any] | None) -> d
         "modified_values": 0,
         "unchanged_values": 0,
     }
+    structured_diff = {
+        "key_added": [],
+        "key_deleted": [],
+        "value_added": [],
+        "value_deleted": [],
+        "value_changed": [],
+    }
     for value_name in value_names:
         before_value = baseline_values.get(value_name)
         after_value = candidate_values.get(value_name)
         if before_value is None and after_value is not None:
             counts["added_values"] += 1
+            structured_diff["value_added"].append({"key_path": "__root__", "value_name": value_name, "after_value": after_value})
         elif before_value is not None and after_value is None:
             counts["removed_values"] += 1
+            structured_diff["value_deleted"].append({"key_path": "__root__", "value_name": value_name, "before_value": before_value})
         elif before_value != after_value:
             counts["modified_values"] += 1
+            structured_diff["value_changed"].append(
+                {
+                    "key_path": "__root__",
+                    "value_name": value_name,
+                    "before_value": before_value,
+                    "after_value": after_value,
+                }
+            )
         else:
             counts["unchanged_values"] += 1
 
@@ -345,6 +362,7 @@ def parse_registry_sideeffect_state_payload(payload: dict[str, Any] | None) -> d
         "format": "state-semantic-registry",
         "counts": counts,
         "sideeffect_count": counts["added_values"] + counts["removed_values"] + counts["modified_values"],
+        "structured_diff": structured_diff,
     }
 
 
@@ -355,6 +373,7 @@ def extract_registry_sideeffects(behavior_lane: dict[str, Any] | None, behavior_
         "diff_file": None,
         "format": None,
         "summary_counts": {},
+        "structured_diff": None,
     }
 
     candidate_dicts: list[dict[str, Any]] = []
@@ -378,6 +397,8 @@ def extract_registry_sideeffects(behavior_lane: dict[str, Any] | None, behavior_
             counts = candidate.get("summary_counts")
             if isinstance(counts, dict):
                 result["summary_counts"] = counts
+            if isinstance(candidate.get("structured_diff"), dict):
+                result["structured_diff"] = candidate.get("structured_diff")
             return result
 
     state_refs: list[str] = []
@@ -410,6 +431,7 @@ def extract_registry_sideeffects(behavior_lane: dict[str, Any] | None, behavior_
         result["diff_file"] = normalize_repo_ref_location(state_ref, title="Registry sideeffect state")
         result["format"] = parsed_state["format"]
         result["summary_counts"] = parsed_state["counts"]
+        result["structured_diff"] = parsed_state.get("structured_diff")
         return result
 
     candidate_refs: list[str] = []
@@ -1015,6 +1037,7 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
                 "diff_file": sideeffects["diff_file"],
                 "format": sideeffects["format"],
                 "summary_counts": sideeffects["summary_counts"],
+                "structured_diff": sideeffects.get("structured_diff"),
             },
         },
         "source_evidence_ids": [item.get("evidence_id") for item in behavior_items if item.get("evidence_id")],

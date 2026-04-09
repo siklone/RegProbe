@@ -569,6 +569,31 @@ def rollback_status_projection(record: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def rollback_verification_projection(full_evidence: dict[str, Any], record: dict[str, Any]) -> dict[str, Any]:
+    fallback = rollback_status_projection(record)
+    candidates = [
+        full_evidence.get("rollback_verification"),
+        (full_evidence.get("behavior") or {}).get("rollback_verification"),
+        (full_evidence.get("runtime") or {}).get("rollback_verification"),
+    ]
+    payload = next((item for item in candidates if isinstance(item, dict) and item), None)
+    if not payload:
+        return fallback
+
+    rollback_value = fallback.get("rollback_value")
+    return {
+        "rollback_declared": bool_value(payload.get("rollback_declared")) if payload.get("rollback_declared") is not None else fallback.get("rollback_declared"),
+        "rollback_executed": bool_value(payload.get("rollback_executed")) if payload.get("rollback_executed") is not None else fallback.get("rollback_executed"),
+        "rollback_verified": bool_value(payload.get("rollback_verified")) if payload.get("rollback_verified") is not None else fallback.get("rollback_verified"),
+        "rollback_verification_method": payload.get("rollback_verification_method") or fallback.get("rollback_verification_method"),
+        "rollback_failure_reason": payload.get("rollback_failure_reason"),
+        "rollback_value": rollback_value,
+        "state_changed": payload.get("state_changed"),
+        "apply_diff": payload.get("apply_diff"),
+        "restore_diff": payload.get("restore_diff"),
+    }
+
+
 def _heuristic_gap(candidate_id: str, gap_type: str, key_path: str, seed_reference: str, feature_area: str) -> dict[str, Any]:
     return {
         "schema_version": CURRENT_SCHEMA_VERSION,
@@ -907,7 +932,7 @@ def evaluate_candidate_gate(
     evaluation_time = parse_utc(evaluated_at) or datetime.now(timezone.utc)
     last_verified_at = parse_utc(str(record.get("last_reviewed_utc") or ""))
     stale_age = bool(last_verified_at and (evaluation_time - last_verified_at) >= timedelta(days=STALE_REVALIDATION_DAYS))
-    rollback_status = rollback_status_projection(record)
+    rollback_status = rollback_verification_projection(full_evidence, record)
     bench_results = bench_results_projection(full_evidence, record, audit)
     score_breakdown = score_candidate(record, audit)
     documentation_status = documentation_status_projection(record)
@@ -925,7 +950,10 @@ def evaluate_candidate_gate(
         blocker_set.add("archived")
     if not target.get("path") or not target.get("value_name") or not target.get("value_type"):
         blocker_set.add("schema-incomplete")
-    if bool_value(decision.get("apply_allowed")) and not rollback_status.get("rollback_verified"):
+    rollback_failure_reason = str(rollback_status.get("rollback_failure_reason") or "")
+    if rollback_failure_reason == "rollback-state-mismatch":
+        blocker_set.add("rollback-failed")
+    elif bool_value(decision.get("apply_allowed")) and not rollback_status.get("rollback_verified"):
         blocker_set.add("rollback-unverified")
     if bench_results.get("bench_required") and not bench_results.get("executed"):
         blocker_set.add("bench-not-run")
@@ -1005,6 +1033,12 @@ def derive_promotion_state(record: dict[str, Any], audit: dict[str, Any] | None 
 def before_after_projection(full_evidence: dict[str, Any]) -> dict[str, Any]:
     sideeffects = ((full_evidence.get("behavior") or {}).get("registry_sideeffects") or {}) if isinstance(full_evidence, dict) else {}
     counts = sideeffects.get("summary_counts") or {}
+    structured_diff = (
+        full_evidence.get("structured_diff")
+        or sideeffects.get("structured_diff")
+        or ((full_evidence.get("behavior") or {}).get("structured_diff"))
+        or {}
+    )
     return {
         "format": sideeffects.get("format"),
         "diff_file": sideeffects.get("diff_file"),
@@ -1014,7 +1048,14 @@ def before_after_projection(full_evidence: dict[str, Any]) -> dict[str, Any]:
         "value_deleted": counts.get("removed_values", 0),
         "value_changed": counts.get("modified_values", 0),
         "unchanged_values": counts.get("unchanged_values", 0),
+        "key_added_entries": structured_diff.get("key_added") or [],
+        "key_deleted_entries": structured_diff.get("key_deleted") or [],
+        "value_added_entries": structured_diff.get("value_added") or [],
+        "value_deleted_entries": structured_diff.get("value_deleted") or [],
+        "value_changed_entries": structured_diff.get("value_changed") or [],
     }
+
+
 def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], full_evidence: dict[str, Any], backend_id: str = DEFAULT_BACKEND_ID) -> dict[str, Any]:
     record_id, tweak_id = candidate_identity(record)
     target = primary_target(record)
@@ -1022,7 +1063,7 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
     execution_context = default_execution_context(backend_id)
     discovery_source, discovery_reason = discovery_projection(record)
     freshness = evidence_freshness(record, reproducibility_manifest())
-    rollback_status = rollback_status_projection(record)
+    rollback_status = rollback_verification_projection(full_evidence, record)
     before_after = before_after_projection(full_evidence)
     bench_results = bench_results_projection(full_evidence, record, audit)
 
@@ -1056,6 +1097,7 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
         "documentation_status": gate["documentation_status"],
         "evidence_status": gate["evidence_status"],
         "rollback_status": rollback_status,
+        "rollback_verification": rollback_status,
         "verification_context": {
             "record_id": record_id,
             "tweak_id": tweak_id,
