@@ -1179,7 +1179,7 @@ function Get-TraceLinesFromXml {
         line_count = @($lines).Count
         element_name_counts = @(
             $elementCounts.GetEnumerator() |
-                Sort-Object Value -Descending, Name |
+                Sort-Object -Property @{ Expression = 'Value'; Descending = $true }, @{ Expression = 'Name'; Descending = $false } |
                 Select-Object -First 20 |
                 ForEach-Object {
                     [ordered]@{
@@ -1190,7 +1190,7 @@ function Get-TraceLinesFromXml {
         )
         data_name_counts = @(
             $dataNameCounts.GetEnumerator() |
-                Sort-Object Value -Descending, Name |
+                Sort-Object -Property @{ Expression = 'Value'; Descending = $true }, @{ Expression = 'Name'; Descending = $false } |
                 Select-Object -First 20 |
                 ForEach-Object {
                     [ordered]@{
