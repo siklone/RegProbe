@@ -5,19 +5,40 @@ param(
 
     [string]$GuestRoot = $(Split-Path -Parent (Split-Path -Parent $PSScriptRoot)),
 
+    [string]$ScratchRoot = 'C:\RegProbe-Diag',
+
     [switch]$ForceManifestRefresh
 )
 
 $ErrorActionPreference = 'Stop'
 
-$batchRoot = Join-Path $GuestRoot 'batch-mega-trigger'
-$payloadPath = Join-Path $GuestRoot 'scripts\vm\run-power-control-batch-mega-trigger-runtime.guest.ps1'
+function Resolve-FullPath {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    try {
+        return (Convert-Path -LiteralPath $Path)
+    }
+    catch {
+        return [System.IO.Path]::GetFullPath((Join-Path (Get-Location) $Path))
+    }
+}
+
+$repoRoot = Resolve-FullPath -Path $GuestRoot
+$traceRoot = if ([System.IO.Path]::IsPathRooted($ScratchRoot)) {
+    $ScratchRoot
+}
+else {
+    [System.IO.Path]::GetFullPath((Join-Path $repoRoot $ScratchRoot))
+}
+
+$batchRoot = Join-Path $traceRoot 'batch-mega-trigger'
+$payloadPath = Join-Path $repoRoot 'scripts\vm\run-power-control-batch-mega-trigger-runtime.guest.ps1'
 $manifestPath = Join-Path $batchRoot 'manifest.json'
 $statePath = Join-Path $batchRoot 'state.json'
 $summaryPath = Join-Path $batchRoot 'summary.json'
 $resultsPath = Join-Path $batchRoot 'results.json'
-$phase0Path = Join-Path $GuestRoot 'registry-research-framework\audit\kernel-power-96-phase0-candidates-20260329.json'
-$hitQueuePath = Join-Path $GuestRoot 'registry-research-framework\audit\kernel-power-96-broad-targeted-string-hit-queue-20260331.json'
+$phase0Path = Join-Path $repoRoot 'registry-research-framework\audit\kernel-power-96-phase0-candidates-20260329.json'
+$hitQueuePath = Join-Path $repoRoot 'registry-research-framework\audit\kernel-power-96-broad-targeted-string-hit-queue-20260331.json'
 
 $defaultCandidateIds = @(
     'power.control.allow-audio-to-enable-execution-required-power-requests',
@@ -150,20 +171,21 @@ if ($manifestNeedsRefresh) {
 }
 
 Write-Host "Phase: $Phase"
-Write-Host "RepoRoot: $GuestRoot"
+Write-Host "RepoRoot: $repoRoot"
+Write-Host "TraceRoot: $traceRoot"
 Write-Host "BatchRoot: $batchRoot"
 Write-Host "PayloadPath: $payloadPath"
 Write-Host "ManifestPath: $manifestPath"
 Write-Host "StatePath: $statePath"
 Write-Host "SummaryPath: $summaryPath"
 Write-Host "ResultsPath: $resultsPath"
-Write-Host "TracePath: $(Join-Path $GuestRoot 'mega-trace.etl')"
+Write-Host "TracePath: $(Join-Path $traceRoot 'mega-trace.etl')"
 
 & powershell -NoProfile -ExecutionPolicy Bypass -File `
     $payloadPath `
     -Phase $Phase `
     -ManifestPath $manifestPath `
-    -GuestRoot $GuestRoot `
+    -GuestRoot $traceRoot `
     -StatePath $statePath `
     -SummaryPath $summaryPath `
     -ResultsPath $resultsPath

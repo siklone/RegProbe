@@ -217,6 +217,70 @@ function Invoke-ProcessNoCapture {
     }
 }
 
+function Get-FreeBytesForPath {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    try {
+        $root = [System.IO.Path]::GetPathRoot([System.IO.Path]::GetFullPath($Path))
+        if ([string]::IsNullOrWhiteSpace($root)) {
+            return $null
+        }
+
+        $drive = New-Object System.IO.DriveInfo($root)
+        return [int64]$drive.AvailableFreeSpace
+    }
+    catch {
+        return $null
+    }
+}
+
+function Get-TraceBufferProfile {
+    param([Parameter(Mandatory = $true)][string]$TracePath)
+
+    $freeBytes = Get-FreeBytesForPath -Path $TracePath
+    if ($null -ne $freeBytes -and $freeBytes -lt 2GB) {
+        return [ordered]@{
+            free_bytes = $freeBytes
+            buffer_size_kb = 16
+            min_buffers = 2
+            max_buffers = 4
+            mode = 'low-space'
+        }
+    }
+
+    return [ordered]@{
+        free_bytes = $freeBytes
+        buffer_size_kb = 64
+        min_buffers = 32
+        max_buffers = 64
+        mode = 'default'
+    }
+}
+
+function Remove-TraceParserScratch {
+    param([Parameter(Mandatory = $true)][string]$Mode)
+
+    if ($Mode -ne 'low-space') {
+        return
+    }
+
+    foreach ($path in @($csvPath, $xmlPath)) {
+        if (-not (Test-Path -LiteralPath $path)) {
+            continue
+        }
+
+        $length = 0
+        try {
+            $length = (Get-Item -LiteralPath $path).Length
+        }
+        catch {
+        }
+
+        Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
+        Write-RunLog -Message ("trace-parser-scratch-removed mode={0} path={1} length={2}" -f $Mode, $path, $length)
+    }
+}
+
 function Get-BaselineValues {
     param([object[]]$Candidates)
 
@@ -288,13 +352,15 @@ function Start-Trace {
         }
     }
 
+    $profile = Get-TraceBufferProfile -TracePath $etlPath
+    Write-RunLog -Message ("trace-buffer-profile mode={0} free_bytes={1} bs={2} nb_min={3} nb_max={4}" -f $profile.mode, $profile.free_bytes, $profile.buffer_size_kb, $profile.min_buffers, $profile.max_buffers)
     Write-RunLog -Message ("trace-create-start name={0}" -f $traceName)
     $create = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @(
         'create', 'trace', $traceName,
         '-p', 'Microsoft-Windows-Kernel-Registry', '0xFFFF', '5',
         '-o', $etlPath,
-        '-bs', '64',
-        '-nb', '32', '64',
+        '-bs', [string]$profile.buffer_size_kb,
+        '-nb', [string]$profile.min_buffers, [string]$profile.max_buffers,
         '-ets'
     ) -TimeoutSeconds 90
     if ($create.timed_out) {
@@ -305,6 +371,7 @@ function Start-Trace {
     }
     Write-RunLog -Message ("trace-create-complete name={0}" -f $traceName)
     Write-RunLog -Message ("trace-start-complete name={0} source=create-ets" -f $traceName)
+    return $profile
 }
 
 function Stop-Trace {
@@ -1147,7 +1214,7 @@ try {
     Write-JsonFile -Path $SummaryPath -InputObject (New-RunningSummary -State $state -Candidates $candidates)
     Write-RunLog -Message 'run-summary-written'
 
-    Start-Trace
+    $traceProfile = Start-Trace
     Write-RunLog -Message 'trace-started'
     Start-Sleep -Seconds 2
 
@@ -1201,14 +1268,47 @@ try {
     Write-RunLog -Message ("trace-artifact-ready ready={0} exists={1} length={2} stable_polls={3} path={4}" -f $etlReadiness.ready, $etlReadiness.exists, $etlReadiness.length, $etlReadiness.stable_polls, $traceArtifactPath)
 
     $traceLines = @()
-    $parserSource = 'tracerpt-csv'
+    $parserSource = if ($traceProfile.mode -eq 'low-space') { 'tracerpt-xml-primary' } else { 'tracerpt-csv' }
     $xmlTracerpt = $null
-    $tracerpt = Invoke-TracerptParse -TracePath $traceArtifactPath -CsvOutputPath $csvPath -Attempts 2 -TimeoutSeconds 180
-    if ($tracerpt.success) {
-        $traceLines = Get-TraceLinesFromCsv
-        Write-RunLog -Message ("trace-parsed parser=tracerpt attempt={0} csv_exists={1} csv_length={2}" -f $tracerpt.attempt, (Test-Path -LiteralPath $csvPath), $tracerpt.csv_length)
-        $csvProbe = Parse-Results -Candidates $candidates -Lines $traceLines -CsvExists (Test-Path -LiteralPath $csvPath) -ParserSource $parserSource
-        if (($csvProbe.csv_line_count -eq 0 -and $csvProbe.path_line_count -eq 0) -or (@($csvProbe.candidates | Where-Object { $_.exact_line_count -gt 0 -or $_.exact_query_hits -gt 0 }).Count -eq 0 -and $tracerpt.csv_length -gt 0)) {
+    $tracerpt = [ordered]@{
+        success = $false
+        attempt = 0
+        exit_code = $null
+        timed_out = $false
+        csv_exists = $false
+        csv_length = 0
+        stdout = ''
+        stderr = ''
+        attempts = @()
+    }
+
+    if ($traceProfile.mode -eq 'low-space') {
+        $xmlTracerpt = Invoke-TracerptXmlParse -TracePath $traceArtifactPath -XmlOutputPath $xmlPath -Attempts 2 -TimeoutSeconds 420
+        if ($xmlTracerpt.success) {
+            $traceLines = Get-TraceLinesFromXml -Path $xmlPath
+            if (@($traceLines).Count -gt 0) {
+                Write-RunLog -Message ("trace-parsed parser=tracerpt-xml-primary attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
+            }
+        }
+    }
+    else {
+        $tracerpt = Invoke-TracerptParse -TracePath $traceArtifactPath -CsvOutputPath $csvPath -Attempts 2 -TimeoutSeconds 180
+        if ($tracerpt.success) {
+            $traceLines = Get-TraceLinesFromCsv
+            Write-RunLog -Message ("trace-parsed parser=tracerpt attempt={0} csv_exists={1} csv_length={2}" -f $tracerpt.attempt, (Test-Path -LiteralPath $csvPath), $tracerpt.csv_length)
+            $csvProbe = Parse-Results -Candidates $candidates -Lines $traceLines -CsvExists (Test-Path -LiteralPath $csvPath) -ParserSource $parserSource
+            if (($csvProbe.csv_line_count -eq 0 -and $csvProbe.path_line_count -eq 0) -or (@($csvProbe.candidates | Where-Object { $_.exact_line_count -gt 0 -or $_.exact_query_hits -gt 0 }).Count -eq 0 -and $tracerpt.csv_length -gt 0)) {
+                $xmlTracerpt = Invoke-TracerptXmlParse -TracePath $traceArtifactPath -XmlOutputPath $xmlPath -Attempts 2 -TimeoutSeconds 180
+                if ($xmlTracerpt.success) {
+                    $traceLines = Get-TraceLinesFromXml -Path $xmlPath
+                    if (@($traceLines).Count -gt 0) {
+                        $parserSource = 'tracerpt-xml-fallback'
+                        Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
+                    }
+                }
+            }
+        }
+        else {
             $xmlTracerpt = Invoke-TracerptXmlParse -TracePath $traceArtifactPath -XmlOutputPath $xmlPath -Attempts 2 -TimeoutSeconds 180
             if ($xmlTracerpt.success) {
                 $traceLines = Get-TraceLinesFromXml -Path $xmlPath
@@ -1216,16 +1316,6 @@ try {
                     $parserSource = 'tracerpt-xml-fallback'
                     Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
                 }
-            }
-        }
-    }
-    else {
-        $xmlTracerpt = Invoke-TracerptXmlParse -TracePath $traceArtifactPath -XmlOutputPath $xmlPath -Attempts 2 -TimeoutSeconds 180
-        if ($xmlTracerpt.success) {
-            $traceLines = Get-TraceLinesFromXml -Path $xmlPath
-            if (@($traceLines).Count -gt 0) {
-                $parserSource = 'tracerpt-xml-fallback'
-                Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
             }
         }
     }
@@ -1243,6 +1333,7 @@ try {
     $pathOnly = @($parsed.candidates | Where-Object { $_.status -eq 'path-only-hit' })
     $noHit = @($parsed.candidates | Where-Object { $_.status -eq 'no-hit' })
     $triggerErrors = @($state.trigger_log | Where-Object { $_.status -eq 'error' })
+    Remove-TraceParserScratch -Mode $traceProfile.mode
 
     $results = [ordered]@{
         generated_utc = [DateTime]::UtcNow.ToString('o')
@@ -1253,6 +1344,7 @@ try {
         csv_line_count = $parsed.csv_line_count
         path_line_count = $parsed.path_line_count
         parser_source = $parsed.parser_source
+        trace_buffer_profile = $traceProfile
         etl_path = $traceArtifactPath
         etl_path_source = if ($resolvedTrace) { [string]$resolvedTrace.source } else { 'missing' }
         etl_ready = [bool]$etlReadiness.ready
