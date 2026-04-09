@@ -1179,33 +1179,35 @@ function Get-TraceLinesFromXml {
         $reader.Close()
     }
 
+    $toCountSummary = {
+        param($Map)
+
+        if ($Map -isnot [System.Collections.IDictionary]) {
+            return @()
+        }
+
+        $rows = New-Object System.Collections.Generic.List[object]
+        foreach ($key in $Map.Keys) {
+            $rows.Add([pscustomobject]@{
+                    name = [string]$key
+                    count = [int]$Map[$key]
+                })
+        }
+
+        return @(
+            $rows |
+                Sort-Object -Property count -Descending |
+                Select-Object -First 20
+        )
+    }
+
     $script:XmlTraceDiagnostics = [ordered]@{
         path = $Path
         exists = $true
         event_count = $eventCount
         line_count = @($lines).Count
-        element_name_counts = @(
-            $elementCounts.GetEnumerator() |
-                ForEach-Object {
-                    [pscustomobject]@{
-                        name = [string]$_.Name
-                        count = [int]$_.Value
-                    }
-                } |
-                Sort-Object -Property count -Descending |
-                Select-Object -First 20
-        )
-        data_name_counts = @(
-            $dataNameCounts.GetEnumerator() |
-                ForEach-Object {
-                    [pscustomobject]@{
-                        name = [string]$_.Name
-                        count = [int]$_.Value
-                    }
-                } |
-                Sort-Object -Property count -Descending |
-                Select-Object -First 20
-        )
+        element_name_counts = @(& $toCountSummary $elementCounts)
+        data_name_counts = @(& $toCountSummary $dataNameCounts)
         sample_events = @($sampleEvents)
     }
 
