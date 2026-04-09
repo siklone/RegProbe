@@ -1179,39 +1179,75 @@ function Get-TraceLinesFromXml {
         $reader.Close()
     }
 
-    $toCountSummary = {
-        param($Map)
+    try {
+        $toCountSummary = {
+            param($Map)
 
-        if ($Map -isnot [System.Collections.IDictionary]) {
-            return @()
+            if ($Map -isnot [System.Collections.IDictionary]) {
+                return @()
+            }
+
+            $rows = New-Object System.Collections.Generic.List[object]
+            foreach ($key in $Map.Keys) {
+                $rows.Add([pscustomobject]@{
+                        name = [string]$key
+                        count = [int]$Map[$key]
+                    })
+            }
+
+            return @(
+                $rows |
+                    Sort-Object -Property count -Descending |
+                    Select-Object -First 20
+            )
         }
 
-        $rows = New-Object System.Collections.Generic.List[object]
-        foreach ($key in $Map.Keys) {
-            $rows.Add([pscustomobject]@{
-                    name = [string]$key
-                    count = [int]$Map[$key]
-                })
+        $script:XmlTraceDiagnostics = [ordered]@{
+            path = $Path
+            exists = $true
+            event_count = $eventCount
+            line_count = @($lines).Count
+            element_name_counts = @(& $toCountSummary -Map $elementCounts)
+            data_name_counts = @(& $toCountSummary -Map $dataNameCounts)
+            sample_events = @($sampleEvents)
         }
-
-        return @(
-            $rows |
-                Sort-Object -Property count -Descending |
-                Select-Object -First 20
-        )
     }
-
-    $script:XmlTraceDiagnostics = [ordered]@{
-        path = $Path
-        exists = $true
-        event_count = $eventCount
-        line_count = @($lines).Count
-        element_name_counts = @(& $toCountSummary -Map $elementCounts)
-        data_name_counts = @(& $toCountSummary -Map $dataNameCounts)
-        sample_events = @($sampleEvents)
+    catch {
+        $script:XmlTraceDiagnostics = [ordered]@{
+            path = $Path
+            exists = $true
+            event_count = $eventCount
+            line_count = @($lines).Count
+            element_name_counts = @()
+            data_name_counts = @()
+            sample_events = @()
+            diagnostics_error = $_.Exception.Message
+        }
+        Write-RunLog -Message ("trace-xml-diagnostics-error error={0}" -f $_.Exception.Message)
     }
 
     return @($lines)
+}
+
+function Write-XmlDiagnosticsZeroLines {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ParserName
+    )
+
+    if (-not $script:XmlTraceDiagnostics) {
+        return
+    }
+
+    try {
+        Write-JsonFile -Path $parserDiagnosticsPath -InputObject $script:XmlTraceDiagnostics
+        $topElement = if (@($script:XmlTraceDiagnostics.element_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.element_name_counts)[0].name } else { 'none' }
+        $topData = if (@($script:XmlTraceDiagnostics.data_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.data_name_counts)[0].name } else { 'none' }
+        Write-RunLog -Message ("trace-xml-zero-lines parser={0} event_count={1} top_element={2} top_data={3}" -f $ParserName, $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
+    }
+    catch {
+        Write-RunLog -Message ("trace-xml-diagnostics-write-error parser={0} error={1}" -f $ParserName, $_.Exception.Message)
+    }
 }
 
 function Get-BinaryMatchCount {
@@ -1487,10 +1523,7 @@ try {
                 Write-RunLog -Message ("trace-parsed parser=tracerpt-xml-primary attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
             }
             elseif ($script:XmlTraceDiagnostics) {
-                Write-JsonFile -Path $parserDiagnosticsPath -InputObject $script:XmlTraceDiagnostics
-                $topElement = if (@($script:XmlTraceDiagnostics.element_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.element_name_counts)[0].name } else { 'none' }
-                $topData = if (@($script:XmlTraceDiagnostics.data_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.data_name_counts)[0].name } else { 'none' }
-                Write-RunLog -Message ("trace-xml-zero-lines parser=tracerpt-xml-primary event_count={0} top_element={1} top_data={2}" -f $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
+                Write-XmlDiagnosticsZeroLines -ParserName 'tracerpt-xml-primary'
             }
         }
         else {
@@ -1512,10 +1545,7 @@ try {
                         Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
                     }
                     elseif ($script:XmlTraceDiagnostics) {
-                        Write-JsonFile -Path $parserDiagnosticsPath -InputObject $script:XmlTraceDiagnostics
-                        $topElement = if (@($script:XmlTraceDiagnostics.element_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.element_name_counts)[0].name } else { 'none' }
-                        $topData = if (@($script:XmlTraceDiagnostics.data_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.data_name_counts)[0].name } else { 'none' }
-                        Write-RunLog -Message ("trace-xml-zero-lines parser=tracerpt-xml-fallback event_count={0} top_element={1} top_data={2}" -f $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
+                        Write-XmlDiagnosticsZeroLines -ParserName 'tracerpt-xml-fallback'
                     }
                 }
                 else {
@@ -1532,10 +1562,7 @@ try {
                     Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
                 }
                 elseif ($script:XmlTraceDiagnostics) {
-                    Write-JsonFile -Path $parserDiagnosticsPath -InputObject $script:XmlTraceDiagnostics
-                    $topElement = if (@($script:XmlTraceDiagnostics.element_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.element_name_counts)[0].name } else { 'none' }
-                    $topData = if (@($script:XmlTraceDiagnostics.data_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.data_name_counts)[0].name } else { 'none' }
-                    Write-RunLog -Message ("trace-xml-zero-lines parser=tracerpt-xml-fallback event_count={0} top_element={1} top_data={2}" -f $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
+                    Write-XmlDiagnosticsZeroLines -ParserName 'tracerpt-xml-fallback'
                 }
             }
             else {
