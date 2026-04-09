@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using RegProbe.App.Utilities;
-using RegProbe.App.ViewModels;
 
 namespace RegProbe.App.Services;
 
@@ -247,18 +246,18 @@ public sealed class TweakPromotionGateCatalogService
         return decision;
     }
 
-    public void Apply(IEnumerable<TweakItemViewModel> tweaks)
+    public void Apply<T>(IEnumerable<T> tweaks) where T : class
     {
         ArgumentNullException.ThrowIfNull(tweaks);
 
         foreach (var tweak in tweaks)
         {
-            if (tweak is null || string.IsNullOrWhiteSpace(tweak.Id))
+            if (!TryCreateApplyTarget(tweak, out var tweakId, out var applyResearchPromotionGate))
             {
                 continue;
             }
 
-            tweak.ApplyResearchPromotionGate(ResolveOrFallback(tweak.Id));
+            applyResearchPromotionGate(ResolveOrFallback(tweakId));
         }
     }
 
@@ -384,6 +383,37 @@ public sealed class TweakPromotionGateCatalogService
                     LastKnownGoodBuild = entry.FreshnessStatus.LastKnownGoodBuild,
                 },
         };
+    }
+
+    private static bool TryCreateApplyTarget<T>(
+        T tweak,
+        out string tweakId,
+        out Action<TweakPromotionGateEntry> applyResearchPromotionGate) where T : class
+    {
+        tweakId = string.Empty;
+        applyResearchPromotionGate = static _ => { };
+
+        if (tweak is null)
+        {
+            return false;
+        }
+
+        var tweakType = tweak.GetType();
+        var idProperty = tweakType.GetProperty("Id");
+        if (idProperty?.GetValue(tweak) is not string id || string.IsNullOrWhiteSpace(id))
+        {
+            return false;
+        }
+
+        var applyMethod = tweakType.GetMethod("ApplyResearchPromotionGate", [typeof(TweakPromotionGateEntry)]);
+        if (applyMethod is null)
+        {
+            return false;
+        }
+
+        tweakId = id;
+        applyResearchPromotionGate = entry => applyMethod.Invoke(tweak, [entry]);
+        return true;
     }
 
     private void AppendMutationAuditLog(string action, TweakMutationDecision decision, bool contributorMode)

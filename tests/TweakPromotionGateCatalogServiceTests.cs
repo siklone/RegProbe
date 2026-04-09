@@ -118,6 +118,18 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         Assert.Contains("rollback-unverified", decision.Warnings);
     }
 
+    [Fact]
+    public void Apply_Uses_GenericConsumerShape()
+    {
+        var service = new TweakPromotionGateCatalogService(_docsRoot);
+        var consumer = new FakePromotionGateConsumer { Id = "power.test-gate" };
+
+        service.Apply([consumer]);
+
+        Assert.NotNull(consumer.LastAppliedGate);
+        Assert.Equal("blocked", consumer.LastAppliedGate!.PromotionState);
+    }
+
     public void Dispose()
     {
         try
@@ -129,6 +141,18 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         }
         catch
         {
+        }
+    }
+
+    private sealed class FakePromotionGateConsumer
+    {
+        public string Id { get; init; } = string.Empty;
+
+        public TweakPromotionGateEntry? LastAppliedGate { get; private set; }
+
+        public void ApplyResearchPromotionGate(TweakPromotionGateEntry gate)
+        {
+            LastAppliedGate = gate;
         }
     }
 }
