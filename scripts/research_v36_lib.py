@@ -2658,15 +2658,28 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
     tracerpt = str(parser_commands.get("tracerpt") or "tracerpt")
     xml_output = etl_path.with_suffix(".etl.xml")
     command = [tracerpt, str(etl_path), "-o", str(xml_output), "-of", "XML"]
+
+    def use_existing_xml_sidecar(note: str) -> dict[str, Any]:
+        output["status"] = "parsed-sidecar-xml"
+        output["notes"].append(note)
+        output["xml_output"] = normalize_repo_relative_path(str(xml_output.relative_to(REPO_ROOT)))
+        output["registry_touches"] = extract_registry_touches_from_tracerpt_xml(xml_output, provider_guid=provider_guid)
+        output["normalized_touch_count"] = len(output["registry_touches"])
+        return output
+
     try:
         completed = subprocess.run(command, capture_output=True, text=True, check=False)
     except FileNotFoundError:
+        if xml_output.exists():
+            return use_existing_xml_sidecar("tracerpt.exe is not available in this environment; parsed existing XML sidecar.")
         output["status"] = "parser-unavailable"
         output["notes"].append("tracerpt.exe is not available in this environment.")
         return output
 
     output["notes"].append((completed.stdout or completed.stderr or "").strip())
     if completed.returncode != 0:
+        if xml_output.exists():
+            return use_existing_xml_sidecar("tracerpt returned a non-zero exit code; parsed existing XML sidecar.")
         output["status"] = "parser-failed"
         return output
 

@@ -622,6 +622,55 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertFalse(inventory["entries"][0]["parsed"])
         self.assertEqual(inventory["entries"][0]["parse_reason"], "placeholder-markdown-only")
 
+    def test_parse_etl_registry_touches_uses_existing_xml_sidecar_when_tracerpt_missing(self) -> None:
+        xml_payload = """<?xml version="1.0" encoding="utf-8"?>
+<Events>
+  <Event>
+    <System>
+      <Provider Guid="{AE53722E-C863-11D2-8659-00C04FA321A1}" />
+      <EventID>10</EventID>
+      <Execution ProcessID="4242" />
+    </System>
+    <EventData>
+      <Data Name="KeyName">\\REGISTRY\\MACHINE\\System\\CurrentControlSet\\Control\\Power</Data>
+      <Data Name="ValueName">AllowSystemRequiredPowerRequests</Data>
+      <Data Name="ProcessName">svchost.exe</Data>
+      <Data Name="Operation">QueryValueKey</Data>
+    </EventData>
+  </Event>
+</Events>
+"""
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_dir:
+            base = Path(temp_dir)
+            etl_path = base / "sample.etl"
+            xml_path = base / "sample.etl.xml"
+            etl_path.write_bytes(b"ETL")
+            xml_path.write_text(xml_payload, encoding="utf-8")
+
+            original_loader = research_v36_lib.load_etl_parser_config
+
+            def fake_config() -> dict[str, object]:
+                return {
+                    "default_parser": "tracerpt",
+                    "provider_guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+                    "parser_commands": {"tracerpt": "/definitely/missing/tracerpt.exe"},
+                }
+
+            research_v36_lib.load_etl_parser_config = fake_config
+            try:
+                parsed = research_v36_lib.parse_etl_registry_touches(
+                    etl_path,
+                    parser="tracerpt",
+                    provider_guid="{AE53722E-C863-11D2-8659-00C04FA321A1}",
+                )
+            finally:
+                research_v36_lib.load_etl_parser_config = original_loader
+
+        self.assertEqual(parsed["status"], "parsed-sidecar-xml")
+        self.assertEqual(parsed["normalized_touch_count"], 1)
+        self.assertIn("parsed existing XML sidecar", " ".join(parsed["notes"]))
+        self.assertEqual(parsed["registry_touches"][0]["key_path"], "HKLM\\System\\CurrentControlSet\\Control\\Power")
+
 
 class CanonicalBundleProjectionTests(unittest.TestCase):
     def test_projection_contains_required_top_level_contract_fields(self) -> None:
