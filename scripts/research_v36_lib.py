@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import re
 import subprocess
+import xml.etree.ElementTree as ET
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -29,6 +32,12 @@ QUEUE_ROOT = FRAMEWORK_ROOT / "queue"
 AUDIT_ROOT = FRAMEWORK_ROOT / "audit"
 PROMOTION_GATES_PATH = RESEARCH_ROOT / "promotion-gates.json"
 PROMOTION_AUDIT_LOG_PATH = AUDIT_ROOT / "promotion-audit-log.jsonl"
+DISCOVERY_EVENTS_PATH = DISCOVERY_ROOT / "discovery-events.jsonl"
+ETL_CORPUS_INVENTORY_PATH = DISCOVERY_ROOT / "etl-corpus-inventory.json"
+ETL_REGISTRY_DISCOVERY_PATH = DISCOVERY_ROOT / "etl-registry-discovery.json"
+GAP_ANALYSIS_SUMMARY_PATH = AUDIT_ROOT / "gap-analysis-summary.json"
+ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser-config.json"
+LEGACY_ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser.json"
 
 QUEUE_STATES = {
     "discovered",
@@ -113,6 +122,28 @@ def load_records() -> list[dict[str, Any]]:
     return [load_json(path) for path in list_records()]
 
 
+def load_etl_parser_config() -> dict[str, Any]:
+    payload = load_json_if_exists(ETL_PARSER_CONFIG_PATH)
+    if isinstance(payload, dict):
+        return payload
+    payload = load_json_if_exists(LEGACY_ETL_PARSER_CONFIG_PATH)
+    if isinstance(payload, dict):
+        return payload
+    return {
+        "schema_version": CURRENT_SCHEMA_VERSION,
+        "default_parser": "tracerpt",
+        "provider_guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+        "parser_commands": {
+            "tracerpt": "tracerpt",
+        },
+        "inventory_patterns": [
+            "evidence/**/*.etl",
+            "evidence/**/*.etl.md",
+        ],
+        "include_placeholder_markdown": True,
+    }
+
+
 def load_backend_capabilities(backend_id: str = DEFAULT_BACKEND_ID) -> dict[str, Any]:
     path = BACKENDS_ROOT / f"{backend_id}.capabilities.json"
     payload = load_json_if_exists(path)
@@ -184,6 +215,42 @@ def validate_discovery_candidate(payload: dict[str, Any]) -> list[str]:
     if not any(payload.get(field) for field in ("key_path", "value_name", "registry_clue")):
         errors.append("key_path|value_name|registry_clue")
     return errors
+
+
+def serialize_discovery_event(candidate: dict[str, Any]) -> dict[str, Any]:
+    payload = dict(candidate)
+    payload.setdefault("recorded_utc", now_utc())
+    return payload
+
+
+def existing_discovery_candidate_ids(path: Path = DISCOVERY_EVENTS_PATH) -> set[str]:
+    if not path.exists():
+        return set()
+    ids: set[str] = set()
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            payload = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        candidate_id = str(payload.get("candidate_id") or "").strip()
+        if candidate_id:
+            ids.add(candidate_id)
+    return ids
+
+
+def append_discovery_candidates(candidates: list[dict[str, Any]], path: Path = DISCOVERY_EVENTS_PATH) -> int:
+    seen = existing_discovery_candidate_ids(path)
+    appended = 0
+    for candidate in candidates:
+        candidate_id = str(candidate.get("candidate_id") or "").strip()
+        if not candidate_id or candidate_id in seen:
+            continue
+        append_jsonl(path, serialize_discovery_event(candidate))
+        seen.add(candidate_id)
+        appended += 1
+    return appended
 
 
 def validate_queue_entry(payload: dict[str, Any]) -> list[str]:
@@ -356,6 +423,54 @@ def gap_analysis_candidates(records: list[dict[str, Any]]) -> list[dict[str, Any
                 results.append(_heuristic_gap(gap_id, "missing_sibling_branch", sibling_key, seed_reference, feature_area))
 
     return results
+
+
+def triage_candidate(candidate: dict[str, Any]) -> tuple[bool, list[str]]:
+    reasons: list[str] = []
+    for field in ("discovery_source", "feature_area", "required_followup"):
+        if not str(candidate.get(field) or "").strip():
+            reasons.append(f"missing:{field}")
+    if not any(str(candidate.get(field) or "").strip() for field in ("key_path", "value_name", "registry_clue")):
+        reasons.append("missing:registry-clue")
+    key_path = str(candidate.get("key_path") or "").strip()
+    if key_path and not (
+        key_path.startswith("HK")
+        or key_path.startswith("\\REGISTRY\\")
+        or key_path.startswith("HKEY_")
+    ):
+        reasons.append("invalid:key_path")
+    return (len(reasons) == 0), reasons
+
+
+def summarize_gap_analysis(entries: list[dict[str, Any]]) -> dict[str, Any]:
+    gap_entries = [entry for entry in entries if str(entry.get("discovery_source") or "") == "ai-gap-analysis"]
+    discard_reasons: Counter[str] = Counter()
+    gap_types: Counter[str] = Counter()
+    triaged = 0
+    discarded = 0
+    for entry in gap_entries:
+        gap_types[str(entry.get("discovery_reason") or "unknown")] += 1
+        state = str(entry.get("state") or "")
+        if state == "discarded":
+            discarded += 1
+            for reason in entry.get("discard_reason") or []:
+                discard_reasons[str(reason)] += 1
+        elif state == "triaged":
+            triaged += 1
+    return {
+        "generated_utc": now_utc(),
+        "total_generated": len(gap_entries),
+        "triaged": triaged,
+        "discarded": discarded,
+        "top_discard_reasons": [
+            {"reason": reason, "count": count}
+            for reason, count in discard_reasons.most_common(10)
+        ],
+        "top_gap_types": [
+            {"gap_type": gap_type, "count": count}
+            for gap_type, count in gap_types.most_common(10)
+        ],
+    }
 
 
 def capability_status(required_capabilities: list[str], backend_manifest: dict[str, Any]) -> tuple[list[str], list[str]]:
@@ -644,10 +759,318 @@ def summarize_queue(entries: list[dict[str, Any]]) -> dict[str, Any]:
 
 def discover_etl_files() -> list[str]:
     results: list[str] = []
-    for path in (REPO_ROOT / "evidence").rglob("*"):
-        if path.is_file() and path.suffix.lower() == ".etl":
+    for path in (REPO_ROOT / "evidence").rglob("*.etl"):
+        if path.is_file():
             results.append(normalize_repo_relative_path(str(path.relative_to(REPO_ROOT))))
-    return sorted(results)
+    return sorted(set(results))
+
+
+def discover_etl_artifacts() -> list[dict[str, Any]]:
+    artifacts: list[dict[str, Any]] = []
+    for path in (REPO_ROOT / "evidence").rglob("*"):
+        if not path.is_file():
+            continue
+        lower_name = path.name.lower()
+        if ".etl" not in lower_name:
+            continue
+        repo_ref = normalize_repo_relative_path(str(path.relative_to(REPO_ROOT)))
+        is_placeholder = lower_name.endswith(".etl.md")
+        artifacts.append(
+            {
+                "path": repo_ref,
+                "size": path.stat().st_size,
+                "is_placeholder": is_placeholder,
+                "estimated_source": infer_etl_source(repo_ref),
+                "actual_etl_path": None if is_placeholder else repo_ref,
+            }
+        )
+    artifacts.sort(key=lambda item: str(item["path"]))
+    return artifacts
+
+
+def infer_etl_source(repo_ref: str) -> str:
+    lowered = repo_ref.lower()
+    if "mega-trigger" in lowered:
+        return "mega-trigger"
+    if "lightweight-runtime" in lowered:
+        return "lightweight-runtime"
+    if "boottrace" in lowered or "watchdog-timeouts-boot" in lowered:
+        return "boot-trace"
+    if "trigger-etw" in lowered:
+        return "trigger-etw"
+    if "runtime" in lowered:
+        return "runtime-probe"
+    if "host-temp" in lowered or "terminal-launch" in lowered:
+        return "manual-trace"
+    return "unknown"
+
+
+def build_etl_corpus_inventory(
+    artifacts: list[dict[str, Any]],
+    parse_results: list[dict[str, Any]] | None = None,
+    parser_name: str | None = None,
+    provider_guid: str | None = None,
+) -> dict[str, Any]:
+    parse_results = parse_results or []
+    parse_map = {
+        str(item.get("etl_path") or ""): item
+        for item in parse_results
+        if isinstance(item, dict) and item.get("etl_path")
+    }
+    entries: list[dict[str, Any]] = []
+    source_counts: Counter[str] = Counter()
+    parsed_count = 0
+    physical_count = 0
+    placeholder_count = 0
+
+    for artifact in artifacts:
+        repo_ref = str(artifact.get("path") or "")
+        actual_etl_path = artifact.get("actual_etl_path")
+        estimated_source = str(artifact.get("estimated_source") or "unknown")
+        source_counts[estimated_source] += 1
+        parse_result = parse_map.get(str(actual_etl_path or ""))
+        is_placeholder = bool(artifact.get("is_placeholder"))
+        if is_placeholder:
+            placeholder_count += 1
+        if actual_etl_path:
+            physical_count += 1
+
+        if parse_result:
+            parse_status = str(parse_result.get("status") or "not-parsed")
+            parse_reason = next(
+                (str(note).strip() for note in (parse_result.get("notes") or []) if str(note).strip()),
+                None,
+            )
+            parsed = parse_status == "parsed"
+            xml_output = parse_result.get("xml_output")
+            normalized_touch_count = int(parse_result.get("normalized_touch_count") or 0)
+        elif is_placeholder:
+            parse_status = "not-parsed"
+            parse_reason = "placeholder-markdown-only"
+            parsed = False
+            xml_output = None
+            normalized_touch_count = 0
+        elif actual_etl_path:
+            parse_status = "not-parsed"
+            parse_reason = "not-attempted"
+            parsed = False
+            xml_output = None
+            normalized_touch_count = 0
+        else:
+            parse_status = "not-parsed"
+            parse_reason = "missing-raw-etl"
+            parsed = False
+            xml_output = None
+            normalized_touch_count = 0
+
+        if parsed:
+            parsed_count += 1
+
+        entries.append(
+            {
+                "path": repo_ref,
+                "size_bytes": int(artifact.get("size") or 0),
+                "estimated_source": estimated_source,
+                "is_placeholder": is_placeholder,
+                "actual_etl_path": actual_etl_path,
+                "parsed": parsed,
+                "parse_status": parse_status,
+                "parse_reason": parse_reason,
+                "xml_output": xml_output,
+                "normalized_touch_count": normalized_touch_count,
+            }
+        )
+
+    return {
+        "schema_version": CURRENT_SCHEMA_VERSION,
+        "generated_utc": now_utc(),
+        "parser": parser_name,
+        "provider_guid": provider_guid,
+        "summary": {
+            "total_artifacts": len(entries),
+            "physical_etl_count": physical_count,
+            "placeholder_only_count": placeholder_count,
+            "parsed_count": parsed_count,
+            "source_counts": dict(source_counts),
+        },
+        "entries": entries,
+    }
+
+
+def _normalize_registry_path(text: str | None) -> str | None:
+    if not text:
+        return None
+    normalized = str(text).strip().replace("/", "\\")
+    normalized = re.sub(r"\s+", " ", normalized)
+    if not normalized:
+        return None
+    replacements = {
+        "HKEY_LOCAL_MACHINE\\": "HKLM\\",
+        "HKEY_CURRENT_USER\\": "HKCU\\",
+        "HKEY_CLASSES_ROOT\\": "HKCR\\",
+        "HKEY_USERS\\": "HKU\\",
+        "\\REGISTRY\\MACHINE\\": "HKLM\\",
+        "\\REGISTRY\\USER\\": "HKU\\",
+    }
+    upper = normalized.upper()
+    for source, target in replacements.items():
+        if upper.startswith(source.upper()):
+            normalized = target + normalized[len(source):]
+            break
+    return normalized if normalized.startswith(("HKLM\\", "HKCU\\", "HKCR\\", "HKU\\")) else None
+
+
+def _guess_registry_operation(text_blob: str) -> str | None:
+    operation_map = {
+        "setvalue": "RegSetValue",
+        "queryvalue": "RegQueryValue",
+        "openkey": "RegOpenKey",
+        "createkey": "RegCreateKey",
+        "deletevalue": "RegDeleteValue",
+        "deletekey": "RegDeleteKey",
+        "closekey": "RegCloseKey",
+    }
+    lowered = text_blob.lower()
+    for needle, operation in operation_map.items():
+        if needle in lowered:
+            return operation
+    return None
+
+
+def _feature_area_from_key_path(key_path: str | None, fallback_source: str) -> str:
+    path = str(key_path or "").lower()
+    if "\\control\\power" in path:
+        return "Power"
+    if "\\policies\\system" in path or "\\currentversion\\policies\\system" in path:
+        return "System"
+    if "\\explorer" in path:
+        return "Explorer"
+    if "\\windows defender" in path or "\\defender" in path:
+        return "Security"
+    if "\\audio" in path or "\\multimedia" in path:
+        return "Audio"
+    return fallback_source.replace("-", " ").title()
+
+
+def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: str | None = None) -> list[dict[str, Any]]:
+    if not xml_path.exists():
+        return []
+
+    provider_guid = str(provider_guid or "").strip("{}").lower()
+    try:
+        tree = ET.parse(xml_path)
+    except ET.ParseError:
+        return []
+
+    touches: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str, str]] = set()
+
+    for event in tree.iter():
+        if not str(event.tag).lower().endswith("event"):
+            continue
+
+        provider = ""
+        event_id = ""
+        process_name = ""
+        process_id = ""
+        key_path = None
+        value_name = None
+        text_parts: list[str] = []
+
+        for child in event.iter():
+            tag = str(child.tag).lower()
+            text_value = (child.text or "").strip()
+            if text_value:
+                text_parts.append(text_value)
+            if tag.endswith("provider"):
+                provider = (
+                    child.attrib.get("Guid")
+                    or child.attrib.get("GUID")
+                    or child.attrib.get("Name")
+                    or provider
+                )
+            elif tag.endswith("eventid"):
+                event_id = text_value or event_id
+            elif tag.endswith("execution"):
+                process_id = child.attrib.get("ProcessID") or process_id
+            elif tag.endswith("data"):
+                name = str(child.attrib.get("Name") or "").lower()
+                if name in {"keyname", "pathname", "path", "keypath"}:
+                    key_path = _normalize_registry_path(text_value) or key_path
+                elif name in {"valuename", "value", "name"} and text_value and "\\" not in text_value:
+                    value_name = text_value
+                elif name in {"processname", "image"}:
+                    process_name = text_value or process_name
+
+        text_blob = " ".join(part for part in text_parts if part)
+        if not key_path:
+            match = re.search(
+                r"(HKLM|HKCU|HKCR|HKU|HKEY_LOCAL_MACHINE|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_USERS|\\\\REGISTRY\\\\MACHINE|\\\\REGISTRY\\\\USER)\\\\[^\r\n\"<>]+",
+                text_blob,
+                flags=re.IGNORECASE,
+            )
+            if match:
+                key_path = _normalize_registry_path(match.group(0))
+
+        provider_match = False
+        if provider_guid:
+            provider_match = provider_guid in provider.lower().strip("{}")
+        operation = _guess_registry_operation(text_blob)
+        if not key_path and not provider_match:
+            continue
+
+        touch = {
+            "event_id": event_id or None,
+            "provider": provider or None,
+            "provider_guid_matched": provider_match,
+            "process_name": process_name or None,
+            "process_id": process_id or None,
+            "operation": operation or "registry-touch",
+            "key_path": key_path,
+            "value_name": value_name,
+            "raw_excerpt": text_blob[:400],
+        }
+        dedupe_key = (
+            str(touch.get("operation") or ""),
+            str(touch.get("key_path") or ""),
+            str(touch.get("value_name") or ""),
+            str(touch.get("process_name") or ""),
+        )
+        if dedupe_key in seen:
+            continue
+        seen.add(dedupe_key)
+        touches.append(touch)
+
+    return touches
+
+
+def etl_touch_candidates(parse_result: dict[str, Any], backend_id: str = DEFAULT_BACKEND_ID) -> list[dict[str, Any]]:
+    etl_path = str(parse_result.get("etl_path") or "")
+    feature_source = infer_etl_source(etl_path)
+    candidates: list[dict[str, Any]] = []
+    for touch in parse_result.get("registry_touches") or []:
+        key_path = touch.get("key_path")
+        value_name = touch.get("value_name")
+        operation = touch.get("operation") or "registry-touch"
+        digest = hashlib.sha1(f"{etl_path}|{operation}|{key_path}|{value_name}".encode("utf-8")).hexdigest()[:16]
+        candidates.append(
+            {
+                "schema_version": CURRENT_SCHEMA_VERSION,
+                "candidate_id": f"etl::{digest}",
+                "discovery_source": "etl-registry-touch",
+                "discovery_reason": "registry_touch_extracted",
+                "feature_area": _feature_area_from_key_path(key_path, feature_source),
+                "key_path": key_path,
+                "value_name": value_name,
+                "value_type": None,
+                "registry_clue": f"{operation} via {touch.get('process_name') or 'unknown-process'}",
+                "initial_confidence": "medium" if touch.get("provider_guid_matched") else "low",
+                "seed_reference": etl_path,
+                "required_followup": "triage",
+                "execution_context": default_execution_context(backend_id),
+            }
+        )
+    return candidates
 
 
 def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provider_guid: str = "{AE53722E-C863-11D2-8659-00C04FA321A1}") -> dict[str, Any]:
@@ -670,7 +1093,14 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
         output["notes"].append("ETL file not found.")
         return output
 
-    tracerpt = "tracerpt.exe"
+    if etl_path.suffix.lower() != ".etl":
+        output["status"] = "skipped-non-etl"
+        output["notes"].append("Only physical .etl files can be parsed.")
+        return output
+
+    config = load_etl_parser_config()
+    parser_commands = config.get("parser_commands") or {}
+    tracerpt = str(parser_commands.get("tracerpt") or "tracerpt")
     xml_output = etl_path.with_suffix(".etl.xml")
     command = [tracerpt, str(etl_path), "-o", str(xml_output), "-of", "XML"]
     try:
@@ -687,4 +1117,6 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
 
     output["status"] = "parsed"
     output["xml_output"] = normalize_repo_relative_path(str(xml_output.relative_to(REPO_ROOT)))
+    output["registry_touches"] = extract_registry_touches_from_tracerpt_xml(xml_output, provider_guid=provider_guid)
+    output["normalized_touch_count"] = len(output["registry_touches"])
     return output

@@ -15,8 +15,9 @@ from research_v36_lib import (
     CURRENT_SCHEMA_VERSION,
     DEFAULT_BACKEND_ID,
     DISCOVERY_ROOT,
+    GAP_ANALYSIS_SUMMARY_PATH,
     QUEUE_ROOT,
-    append_jsonl,
+    append_discovery_candidates,
     build_queue_entry,
     capability_status,
     default_execution_context,
@@ -26,16 +27,17 @@ from research_v36_lib import (
     load_backend_capabilities,
     load_json,
     load_records,
-    required_capabilities_for_runner_entry,
     score_candidate,
+    summarize_gap_analysis,
     summarize_queue,
+    triage_candidate,
     validate_discovery_candidate,
     validate_queue_entry,
+    required_capabilities_for_runner_entry,
     write_json,
 )
 
 
-DISCOVERY_EVENTS_PATH = DISCOVERY_ROOT / "discovery-events.jsonl"
 QUEUE_PATH = QUEUE_ROOT / "research-queue.json"
 
 
@@ -53,38 +55,8 @@ def load_runner_config() -> dict:
     return load_json(Path("registry-research-framework/config/tweak-vm-runners.json"))
 
 
-def existing_discovery_ids() -> set[str]:
-    if not DISCOVERY_EVENTS_PATH.exists():
-        return set()
-    ids: set[str] = set()
-    for line in DISCOVERY_EVENTS_PATH.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        payload = json.loads(line)
-        candidate_id = str(payload.get("candidate_id") or "")
-        if candidate_id:
-            ids.add(candidate_id)
-    return ids
-
-
 def append_discovery_events(candidates: list[dict]) -> None:
-    seen = existing_discovery_ids()
-    for candidate in candidates:
-        candidate_id = str(candidate.get("candidate_id") or "")
-        if not candidate_id or candidate_id in seen:
-            continue
-        append_jsonl(
-            DISCOVERY_EVENTS_PATH,
-            {
-                "schema_version": CURRENT_SCHEMA_VERSION,
-                "candidate_id": candidate_id,
-                "discovery_source": candidate.get("discovery_source"),
-                "discovery_reason": candidate.get("discovery_reason"),
-                "seed_reference": candidate.get("seed_reference"),
-                "recorded_utc": candidate.get("updated_utc") or candidate.get("last_evaluated_at"),
-            },
-        )
-        seen.add(candidate_id)
+    append_discovery_candidates(candidates)
 
 
 def queue_entries_from_records(records: list[dict], audit_map: dict[str, dict], runner_config: dict, backend_manifest: dict) -> list[dict]:
@@ -133,15 +105,20 @@ def queue_entries_from_records(records: list[dict], audit_map: dict[str, dict], 
 def queue_entries_from_gaps(records: list[dict]) -> list[dict]:
     entries: list[dict] = []
     for candidate in gap_analysis_candidates(records):
+        accepted, reasons = triage_candidate(candidate)
+        state = "triaged" if accepted else "discarded"
+        blockers = [] if accepted else [f"triage:{reason}" for reason in reasons]
         entry = build_queue_entry(
             candidate,
-            state="discovered",
-            blockers=[],
+            state=state,
+            blockers=blockers,
             required_capabilities=[],
-            next_lane="triage",
+            next_lane="scoring" if accepted else "discarded",
             linked_record_id=None,
             gate_result=None,
         )
+        if not accepted:
+            entry["discard_reason"] = reasons
         entries.append(entry)
     return entries
 
@@ -182,9 +159,11 @@ def main() -> int:
         "backend_id": DEFAULT_BACKEND_ID,
         "execution_context": default_execution_context(DEFAULT_BACKEND_ID),
         "summary": summarize_queue(queue_entries),
+        "gap_analysis_summary": summarize_gap_analysis(queue_entries),
         "entries": sorted(queue_entries, key=lambda item: (str(item.get("state") or ""), str(item.get("candidate_id") or ""))),
     }
     write_json(QUEUE_PATH, payload)
+    write_json(GAP_ANALYSIS_SUMMARY_PATH, payload["gap_analysis_summary"])
 
     if args.emit_json:
         print(json.dumps(payload["summary"], ensure_ascii=False, indent=2))

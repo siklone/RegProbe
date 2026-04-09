@@ -148,6 +148,99 @@ class GapAnalysisTests(unittest.TestCase):
         self.assertIn("missing_hkcu_analog", reasons)
         self.assertIn("missing_policy_analog", reasons)
 
+    def test_gap_analysis_summary_counts_triaged_and_discarded(self) -> None:
+        entries = [
+            {
+                "candidate_id": "gap::one",
+                "discovery_source": "ai-gap-analysis",
+                "discovery_reason": "missing_hkcu_analog",
+                "state": "triaged",
+            },
+            {
+                "candidate_id": "gap::two",
+                "discovery_source": "ai-gap-analysis",
+                "discovery_reason": "missing_policy_analog",
+                "state": "discarded",
+                "discard_reason": ["triage:missing:feature_area"],
+            },
+        ]
+
+        summary = research_v36_lib.summarize_gap_analysis(entries)
+
+        self.assertEqual(summary["total_generated"], 2)
+        self.assertEqual(summary["triaged"], 1)
+        self.assertEqual(summary["discarded"], 1)
+        self.assertEqual(summary["top_gap_types"][0]["gap_type"], "missing_hkcu_analog")
+        self.assertEqual(summary["top_discard_reasons"][0]["reason"], "triage:missing:feature_area")
+
+    def test_triage_candidate_rejects_non_registry_path(self) -> None:
+        accepted, reasons = research_v36_lib.triage_candidate(
+            {
+                "discovery_source": "ai-gap-analysis",
+                "feature_area": "Power",
+                "required_followup": "triage",
+                "key_path": "C:\\Temp\\NotRegistry",
+            }
+        )
+
+        self.assertFalse(accepted)
+        self.assertIn("invalid:key_path", reasons)
+
+
+class EtlDiscoveryTests(unittest.TestCase):
+    def test_extract_registry_touches_from_tracerpt_xml_normalizes_key_path(self) -> None:
+        xml_payload = """<?xml version="1.0" encoding="utf-8"?>
+<Events>
+  <Event>
+    <System>
+      <Provider Guid="{AE53722E-C863-11D2-8659-00C04FA321A1}" />
+      <EventID>10</EventID>
+      <Execution ProcessID="4242" />
+    </System>
+    <EventData>
+      <Data Name="KeyName">\\REGISTRY\\MACHINE\\System\\CurrentControlSet\\Control\\Power</Data>
+      <Data Name="ValueName">AllowSystemRequiredPowerRequests</Data>
+      <Data Name="ProcessName">svchost.exe</Data>
+      <Data Name="Operation">QueryValueKey</Data>
+    </EventData>
+  </Event>
+</Events>
+"""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            xml_path = Path(temp_dir) / "sample.etl.xml"
+            xml_path.write_text(xml_payload, encoding="utf-8")
+
+            touches = research_v36_lib.extract_registry_touches_from_tracerpt_xml(
+                xml_path,
+                provider_guid="{AE53722E-C863-11D2-8659-00C04FA321A1}",
+            )
+
+        self.assertEqual(len(touches), 1)
+        self.assertEqual(touches[0]["key_path"], "HKLM\\System\\CurrentControlSet\\Control\\Power")
+        self.assertEqual(touches[0]["value_name"], "AllowSystemRequiredPowerRequests")
+        self.assertEqual(touches[0]["operation"], "RegQueryValue")
+
+    def test_build_etl_corpus_inventory_marks_placeholder_reason(self) -> None:
+        inventory = research_v36_lib.build_etl_corpus_inventory(
+            [
+                {
+                    "path": "evidence/files/example/sample.etl.md",
+                    "size": 123,
+                    "is_placeholder": True,
+                    "estimated_source": "manual-trace",
+                    "actual_etl_path": None,
+                }
+            ],
+            parse_results=[],
+            parser_name="tracerpt",
+            provider_guid="{AE53722E-C863-11D2-8659-00C04FA321A1}",
+        )
+
+        self.assertEqual(inventory["summary"]["total_artifacts"], 1)
+        self.assertEqual(inventory["summary"]["placeholder_only_count"], 1)
+        self.assertFalse(inventory["entries"][0]["parsed"])
+        self.assertEqual(inventory["entries"][0]["parse_reason"], "placeholder-markdown-only")
+
 
 class CanonicalBundleProjectionTests(unittest.TestCase):
     def test_projection_contains_required_top_level_contract_fields(self) -> None:

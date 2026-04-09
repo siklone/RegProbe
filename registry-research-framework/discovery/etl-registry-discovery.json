@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-09T01:19:09.148784Z",
+  "parser": "tracerpt",
+  "provider_guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "etl_count": 0,
+  "inventory_summary": {
+    "total_artifacts": 35,
+    "physical_etl_count": 0,
+    "placeholder_only_count": 35,
+    "parsed_count": 0,
+    "source_counts": {
+      "manual-trace": 1,
+      "runtime-probe": 13,
+      "unknown": 6,
+      "trigger-etw": 7,
+      "boot-trace": 8
+    }
+  },
+  "candidate_count": 0,
+  "discarded_candidate_count": 0,
+  "appended_event_count": 0,
+  "discovery_candidates": [],
+  "discarded_candidates": [],
+  "results": []
+}
