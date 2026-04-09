@@ -96,6 +96,28 @@ function Read-TextOrEmpty {
     return ([string]$raw).Trim()
 }
 
+function Set-ObjectPropertyValue {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object]$InputObject,
+        [Parameter(Mandatory = $true)]
+        [string]$Name,
+        $Value
+    )
+
+    if ($null -eq $InputObject) {
+        return
+    }
+
+    $property = $InputObject.PSObject.Properties[$Name]
+    if ($property) {
+        $property.Value = $Value
+        return
+    }
+
+    $InputObject | Add-Member -NotePropertyName $Name -NotePropertyValue $Value
+}
+
 function Write-RunLog {
     param(
         [Parameter(Mandatory = $true)]
@@ -1078,9 +1100,9 @@ catch {
     if (Test-Path -LiteralPath $StatePath) {
         $state = Read-JsonFile -Path $StatePath
         if ($state) {
-            $state.phase = 'error'
-            $state.error = $_.Exception.Message
-            $state.result_status = 'error'
+            Set-ObjectPropertyValue -InputObject $state -Name 'phase' -Value 'error'
+            Set-ObjectPropertyValue -InputObject $state -Name 'error' -Value $_.Exception.Message
+            Set-ObjectPropertyValue -InputObject $state -Name 'result_status' -Value 'error'
             Write-JsonFile -Path $StatePath -InputObject $state
         }
     }
