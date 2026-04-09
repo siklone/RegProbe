@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -138,6 +139,7 @@ public sealed class TweakPromotionGateCatalogService
     }
 
     public TweakPromotionGateCatalog Catalog => _catalog;
+    public string? LastMutationAuditError { get; private set; }
 
     public IEnumerable<TweakPromotionGateEntry> ListBlocked(string? reason = null)
     {
@@ -412,9 +414,12 @@ public sealed class TweakPromotionGateCatalogService
             };
 
             File.AppendAllText(path, JsonSerializer.Serialize(payload, JsonOptions) + Environment.NewLine);
+            LastMutationAuditError = null;
         }
-        catch
+        catch (Exception ex)
         {
+            LastMutationAuditError = ex.Message;
+            Debug.WriteLine($"TweakPromotionGateCatalogService: failed to append mutation audit log: {ex}");
         }
     }
 

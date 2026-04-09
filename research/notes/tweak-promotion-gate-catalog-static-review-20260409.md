@@ -20,9 +20,10 @@ Bu review hostta `dotnet` bulunmadigi icin compile/test yerine static code revie
 
 ## Residual risk
 
-- [TweakPromotionGateCatalogService.cs](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/app/Services/TweakPromotionGateCatalogService.cs):387
-  `AppendMutationAuditLog` write path'i tum exception'lari yutup sessizce devam ediyor.
-  Bu bilincli best-effort davranis olabilir, ama audit dosyasi yazilamazsa override kaydi sessizce kaybolabilir.
+- [TweakPromotionGateCatalogService.cs](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/app/Services/TweakPromotionGateCatalogService.cs):388
+  `AppendMutationAuditLog` path'i hala best-effort, ama artik failure tamamen sessiz degil:
+  hata `LastMutationAuditError` icinde tutuluyor ve `Debug.WriteLine(...)` ile debug channel'a yaziliyor.
+  Buna ragmen hostta audit write failure'i UI'ya veya CLI surface'ine henuz aktif olarak tasinmiyor.
 - Hostta `dotnet` olmadigi icin bu turda compile-time veya runtime C# proof alinmadi.
 
 ## Practical conclusion
