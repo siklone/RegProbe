@@ -8,7 +8,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-from research_v36_lib import CURRENT_SCHEMA_VERSION, append_discovery_candidates, default_execution_context, now_utc
+from research_v36_lib import CURRENT_SCHEMA_VERSION, append_discovery_candidates, build_sku_awareness_for_key_path, default_execution_context, now_utc
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -232,6 +232,7 @@ def build_discovery_candidates_from_runtime_events(
     backend_id: str = "rai-linux-vm",
 ) -> list[dict[str, Any]]:
     candidates: list[dict[str, Any]] = []
+    execution_context = default_execution_context(backend_id)
     for event in events:
         digest = hashlib.sha1(
             f"{trace_source}|{event.get('key_path')}|{event.get('value_name')}|{event.get('operation_family')}".encode("utf-8")
@@ -250,7 +251,8 @@ def build_discovery_candidates_from_runtime_events(
                 "initial_confidence": event.get("value_extraction_confidence") or "low",
                 "seed_reference": seed_reference,
                 "required_followup": "triage",
-                "execution_context": default_execution_context(backend_id),
+                "execution_context": execution_context,
+                **build_sku_awareness_for_key_path(event.get("key_path"), execution_context, backend_id),
             }
         )
     return candidates

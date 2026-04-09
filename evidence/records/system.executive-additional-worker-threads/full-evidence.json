@@ -256,7 +256,7 @@
     "app_mapping_status": "not-mapped",
     "next_missing_layer": "none",
     "debug_override_allowed": true,
-    "last_evaluated_at": "2026-04-09T01:27:55.035949Z",
+    "last_evaluated_at": "2026-04-09T01:58:29.551703Z",
     "score_breakdown": {
       "static_evidence_strength": 4,
       "runtime_evidence_strength": 3,
@@ -314,12 +314,46 @@
       "statistics": null,
       "significance_verdict": null
     },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "etw",
+        "procmon",
+        "ghidra",
+        "wpr"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "behavior_wpr"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-30T09:38:14Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-30T09:38:14Z"
+      }
+    },
     "verification_context": {
       "backend_id": "rai-linux-vm",
       "current_build": "26100",
       "tested_build": "26100",
       "last_verified_at": "2026-03-30T09:38:14Z",
-      "stale_age_days": 9
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
     }
   },
   "evidence_freshness": {
@@ -331,6 +365,8 @@
   "last_verified_at": "2026-03-30T09:38:14Z",
   "verification_environment": {
     "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
     "vm_name": null,
     "baseline_snapshot": null,
     "backend_id": "rai-linux-vm",
@@ -342,7 +378,23 @@
       "isolation": "vm"
     }
   },
-  "negative_evidence": {},
+  "negative_evidence": {
+    "attempted_tools": [
+      "etw",
+      "procmon",
+      "ghidra",
+      "wpr"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
   "before_after": {
     "format": null,
     "diff_file": null,
@@ -351,7 +403,12 @@
     "value_added": 0,
     "value_deleted": 0,
     "value_changed": 0,
-    "unchanged_values": 0
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
   },
   "source_enrichment": [
     {
@@ -366,7 +423,8 @@
         "version-scope"
       ],
       "summary": "The current-build ntoskrnl.exe pass found exact string hits for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     },
     {
       "evidence_id": "kernel-power-existing-static-probe-20260328",
@@ -378,7 +436,8 @@
         "version-scope"
       ],
       "summary": "The first static probe confirmed exact Unicode hits in ntoskrnl.exe for the Executive worker-thread pair and no exact hits in smss.exe.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "kernel-power-existing-next-gate-20260328",
@@ -390,7 +449,8 @@
         "version-scope"
       ],
       "summary": "The 2026-03-28 intake review kept the Executive worker-thread pair active as the second next-gate lane after the stronger watchdog pair.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "reactos-executive-worker-threads-hypothesis-20260328",
@@ -402,7 +462,8 @@
         "version-scope"
       ],
       "summary": "Official ReactOS source contains both Executive worker-thread value names, matching internal worker-thread variables, and code that clamps and adds the additional counts to delayed and critical worker-thread totals. The same source also places UuidSequenceNumber under the Rpc registry path, which helps separate that adjacent lane from the Executive pair.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "validation-proof",
@@ -414,7 +475,8 @@
         "behavior"
       ],
       "summary": "This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, current-build ntoskrnl string and Ghidra fallback evidence, and a tools-hardened lightweight ETW runtime lane that produced exact live reads for both values. It is strong enough for Class A while still leaving app actionability off.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     }
   ],
   "bench_results": {
@@ -482,5 +544,52 @@
     ],
     "schema_compatibility_mode": "native",
     "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current Win25H2Clean baseline with the Session Manager Executive key populated",
+      "state_kind": "value",
+      "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+      "rationale": "Leave the currently observed Executive worker-thread pair unchanged until a stronger semantic map exists.",
+      "evidence_ids": [
+        "vm-session-manager-executive-baseline-20260328"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-30T09:38:14Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-30T09:38:14Z"
+    }
   }
 }

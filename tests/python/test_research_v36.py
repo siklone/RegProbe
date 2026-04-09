@@ -239,6 +239,50 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["promotion_state"], "revalidation-pending")
         self.assertEqual(gate["promotion_blockers"], ["stale-evidence"])
 
+    def test_stale_promoted_record_by_build_drift_enters_revalidation_pending(self) -> None:
+        record = {
+            "record_id": "example.stale-build",
+            "tweak_id": "example.stale-build",
+            "record_status": "validated",
+            "tested_on": [
+                {"environment": "vm", "os": "Windows 11", "build": "26097"},
+            ],
+            "last_reviewed_utc": "2026-04-08T00:00:00Z",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": True,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "app_current_implementation": {
+                "status": "matches-research",
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(
+            record,
+            {"next_missing_layer": "none"},
+            {"behavior": {}, "negative_evidence": {}, "reproducibility": {}},
+            evaluated_at="2026-04-09T00:00:00Z",
+        )
+
+        self.assertEqual(gate["promotion_state"], "revalidation-pending")
+        self.assertEqual(gate["freshness_status"]["stale_reason"], "build-drift-threshold")
+        self.assertEqual(gate["promotion_blockers"], ["stale-evidence"])
+
     def test_apply_allowed_with_unverified_rollback_sets_rollback_unverified_blocker(self) -> None:
         record = {
             "record_id": "example.rollback-unverified",
@@ -335,6 +379,66 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["promotion_state"], "blocked")
         self.assertIn("rollback-failed", gate["promotion_blockers"])
 
+    def test_negative_evidence_functional_no_effect_blocks_candidate(self) -> None:
+        record = {
+            "record_id": "example.functional-no-effect",
+            "tweak_id": "example.functional-no-effect",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": True,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "app_current_implementation": {
+                "status": "not-mapped",
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(
+            record,
+            {"next_missing_layer": "none", "tools_used": ["procmon"], "layers_used": ["runtime"]},
+            {
+                "behavior": {
+                    "registry_sideeffects": {
+                        "executed": True,
+                        "sideeffect_count": 0,
+                        "summary_counts": {
+                            "added_keys": 0,
+                            "removed_keys": 0,
+                            "added_values": 0,
+                            "removed_values": 0,
+                            "modified_values": 0,
+                            "unchanged_values": 1,
+                        },
+                    }
+                },
+                "negative_evidence": {
+                    "eligible": True,
+                    "reason": "runtime-or-source-no-hit",
+                    "attempted_tools": ["procmon"],
+                    "attempted_layers": ["runtime"],
+                },
+            },
+        )
+
+        self.assertEqual(gate["promotion_state"], "blocked")
+        self.assertIn("functional-no-effect", gate["promotion_blockers"])
+        self.assertLessEqual(gate["score_breakdown"]["runtime_evidence_strength"], 1)
+
 
 class GapAnalysisTests(unittest.TestCase):
     def test_gap_analysis_emits_hkcu_and_policy_analogs(self) -> None:
@@ -400,6 +504,68 @@ class GapAnalysisTests(unittest.TestCase):
 
         self.assertFalse(accepted)
         self.assertIn("invalid:key_path", reasons)
+
+    def test_sibling_discovery_only_triggers_for_promotable_states(self) -> None:
+        self.assertTrue(research_v36_lib.should_trigger_sibling_discovery({"promotion_state": "promotion-eligible"}))
+        self.assertTrue(research_v36_lib.should_trigger_sibling_discovery({"promotion_state": "promoted"}))
+        self.assertFalse(research_v36_lib.should_trigger_sibling_discovery({"promotion_state": "blocked"}))
+        self.assertFalse(research_v36_lib.should_trigger_sibling_discovery({"state": "scored"}))
+
+    def test_sibling_expansion_emits_controlled_candidates(self) -> None:
+        records = [
+            {
+                "record_id": "example.promoted",
+                "tweak_id": "example.promoted",
+                "record_status": "validated",
+                "setting": {
+                    "area": "Example",
+                    "targets": [
+                        {
+                            "path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+                            "value_name": "Enabled",
+                            "value_type": "REG_DWORD",
+                        }
+                    ],
+                },
+                "decision": {
+                    "apply_allowed": True,
+                    "confidence": "high",
+                    "restore_default_supported": True,
+                },
+                "app_current_implementation": {"status": "matches-research"},
+                "validation_proof": {"exact_quote_or_path": "Docs/example.md:1"},
+            },
+            {
+                "record_id": "example.blocked",
+                "tweak_id": "example.blocked",
+                "record_status": "draft",
+                "setting": {
+                    "area": "Example",
+                    "targets": [
+                        {
+                            "path": "HKLM\\Software\\Blocked",
+                            "value_name": "Enabled",
+                            "value_type": "REG_DWORD",
+                        }
+                    ],
+                },
+                "decision": {"apply_allowed": False, "confidence": "medium"},
+                "app_current_implementation": {"status": "not-mapped"},
+                "validation_proof": {"exact_quote_or_path": "Docs/example.md:1"},
+            },
+        ]
+
+        candidates = research_v36_lib.sibling_expansion_candidates(
+            records,
+            {"example.blocked": {"next_missing_layer": "runtime-trace"}},
+            {"example.promoted": {"promotion_state": "promoted"}},
+        )
+        reasons = {item["discovery_reason"] for item in candidates}
+        sources = {item["discovery_source"] for item in candidates}
+
+        self.assertIn("sibling_expansion", sources)
+        self.assertIn("missing_hkcu_analog", reasons)
+        self.assertIn("missing_policy_analog", reasons)
 
 
 class EtlDiscoveryTests(unittest.TestCase):
@@ -536,6 +702,11 @@ class CanonicalBundleProjectionTests(unittest.TestCase):
         self.assertIn("source_enrichment", payload)
         self.assertEqual(len(payload["before_after"]["value_added_entries"]), 1)
         self.assertEqual(payload["rollback_status"]["rollback_verification_method"], "state_diff")
+        self.assertEqual(payload["os_build"], "26100")
+        self.assertIn("os_edition", payload)
+        self.assertIn("architecture", payload)
+        self.assertEqual(payload["elevation_context"], "elevated")
+        self.assertEqual(payload["machine_user_scope"], "machine")
 
 
 if __name__ == "__main__":

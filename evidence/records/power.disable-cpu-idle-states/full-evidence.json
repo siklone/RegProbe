@@ -246,7 +246,7 @@
     "app_mapping_status": "matches-research",
     "next_missing_layer": "decision-gate",
     "debug_override_allowed": false,
-    "last_evaluated_at": "2026-04-09T01:27:55.030673Z",
+    "last_evaluated_at": "2026-04-09T01:58:29.546067Z",
     "score_breakdown": {
       "static_evidence_strength": 5,
       "runtime_evidence_strength": 4,
@@ -306,12 +306,50 @@
       "statistics": null,
       "significance_verdict": null
     },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "official-doc",
+        "etw",
+        "ghidra",
+        "wpr",
+        "benchmark",
+        "reboot"
+      ],
+      "attempted_layers": [
+        "static_ghidra",
+        "behavior_wpr",
+        "behavior_benchmark",
+        "runtime_reboot",
+        "official_doc"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-29T02:20:00+03:00",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-29T02:20:00+03:00"
+      }
+    },
     "verification_context": {
       "backend_id": "rai-linux-vm",
       "current_build": "26100",
       "tested_build": "26100",
       "last_verified_at": "2026-03-29T02:20:00+03:00",
-      "stale_age_days": 11
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
     }
   },
   "evidence_freshness": {
@@ -323,6 +361,8 @@
   "last_verified_at": "2026-03-29T02:20:00+03:00",
   "verification_environment": {
     "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
     "vm_name": null,
     "baseline_snapshot": null,
     "backend_id": "rai-linux-vm",
@@ -334,7 +374,27 @@
       "isolation": "vm"
     }
   },
-  "negative_evidence": {},
+  "negative_evidence": {
+    "attempted_tools": [
+      "official-doc",
+      "etw",
+      "ghidra",
+      "wpr",
+      "benchmark",
+      "reboot"
+    ],
+    "attempted_layers": [
+      "static_ghidra",
+      "behavior_wpr",
+      "behavior_benchmark",
+      "runtime_reboot",
+      "official_doc"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
   "before_after": {
     "format": null,
     "diff_file": null,
@@ -343,7 +403,12 @@
     "value_added": 0,
     "value_deleted": 0,
     "value_changed": 0,
-    "unchanged_values": 0
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
   },
   "source_enrichment": [
     {
@@ -358,7 +423,8 @@
         "app-mismatch"
       ],
       "summary": "Microsoft documents processor power-management notifications and idle-state behavior as a Windows kernel power-management feature area, but this source does not publish the raw registry bundle used by the app.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "repo-power-doc",
@@ -370,7 +436,8 @@
         "app-mismatch"
       ],
       "summary": "The repo tracks these power-manager values as research notes, but this review did not find a primary Microsoft registry mapping for publishing them as a validated preset.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "ghidra-cpu-idle-no-match-20260327",
@@ -382,7 +449,8 @@
         "open-question"
       ],
       "summary": "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "validation-proof",
@@ -394,7 +462,8 @@
         "behavior"
       ],
       "summary": "Guest VM probes captured the exact before, after, and restored registry bundle, and the excluded-baseline stepwise runtime package completed apply, reboot, WPR, ETL existence, host copy-back, and restore verification on RegProbe-Baseline-20260328. That removes the earlier ETL-materialization blocker from the runtime lane. The remaining issue is not execution or reversibility; it is whether this raw bundle should be published as a supported app surface.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     }
   ],
   "bench_results": {
@@ -464,5 +533,54 @@
     ],
     "schema_compatibility_mode": "native",
     "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current 25H2 builds where the raw CPU idle-state bundle is left unset",
+      "state_kind": "missing",
+      "value": null,
+      "rationale": "Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior.",
+      "evidence_ids": [
+        "ms-cpu-idle-states",
+        "repo-power-doc",
+        "vm-cpu-idle-bundle-probe"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-29T02:20:00+03:00",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-29T02:20:00+03:00"
+    }
   }
 }

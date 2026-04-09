@@ -33,7 +33,7 @@ from evidence_class_lib import (
     sanitize_value,
     suspected_layer,
 )
-from research_v36_lib import PROMOTION_GATES_PATH, load_json_if_exists
+from research_v36_lib import PROMOTION_GATES_PATH, build_sku_awareness, default_execution_context, load_json_if_exists
 from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, is_github_release_url, normalize_reference
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -129,6 +129,45 @@ def load_v31_full_evidence(record_id: str) -> dict[str, Any] | None:
         return None
     payload = load_json(path)
     return payload if isinstance(payload, dict) else None
+
+
+def audit_surface_from_gate(record: dict[str, Any], promotion_gate: dict[str, Any], full_evidence: dict[str, Any] | None) -> dict[str, Any]:
+    full_evidence = full_evidence or {}
+    freshness_status = promotion_gate.get("freshness_status") or {}
+    rollback_status = promotion_gate.get("rollback_status") or {}
+    bench_status = promotion_gate.get("bench_status") or {}
+    negative_status = promotion_gate.get("negative_evidence_status") or {}
+    verification_context = promotion_gate.get("verification_context") or {}
+    build_sku = full_evidence.get("build_sku_awareness") or build_sku_awareness(record, default_execution_context())
+    conflict_reason = negative_status.get("conflict_reason")
+    if not conflict_reason and "conflicting-sources" in (promotion_gate.get("promotion_blockers") or []):
+        conflict_reason = "conflicting-sources"
+    return {
+        "stale_reason": freshness_status.get("stale_reason"),
+        "last_known_good_build": freshness_status.get("last_known_good_build") or verification_context.get("tested_build"),
+        "revalidation_need": "required" if freshness_status.get("revalidation_needed") else "none",
+        "rollback_verification_status": (
+            "verified"
+            if rollback_status.get("rollback_verified")
+            else "failed"
+            if rollback_status.get("rollback_failure_reason") == "rollback-state-mismatch"
+            else "unverified"
+        ),
+        "bench_status": (
+            "failed-safety"
+            if "bench-failed-safety" in (negative_status.get("signals") or [])
+            else "executed"
+            if bench_status.get("executed")
+            else "not-run"
+        ),
+        "conflict_reason": conflict_reason,
+        "last_known_good_verification_context": freshness_status.get("last_known_good_verification_context") or verification_context,
+        "os_build": build_sku.get("os_build"),
+        "os_edition": build_sku.get("os_edition"),
+        "architecture": build_sku.get("architecture"),
+        "elevation_context": build_sku.get("elevation_context"),
+        "machine_user_scope": build_sku.get("machine_user_scope"),
+    }
 
 
 def re_audit_completed(record_id: str, class_id: str, official: bool) -> bool:
@@ -292,6 +331,8 @@ def main() -> int:
         official = has_official_evidence(record)
         class_id = class_entry["evidence_class"]
         promotion_gate = promotion_gate_map.get(record_id) or {}
+        full_evidence = load_v31_full_evidence(record_id)
+        audit_surface = audit_surface_from_gate(record, promotion_gate, full_evidence)
         checks = dead_flag_checks(record_id, record)
         audit_required = re_audit_required(class_id, official, record_id, record, incident_seen)
         class_counts[class_entry["evidence_class"]] += 1
@@ -355,6 +396,18 @@ def main() -> int:
                     "score_breakdown": promotion_gate.get("score_breakdown"),
                     "schema_compatibility_mode": promotion_gate.get("schema_compatibility_mode"),
                     "evaluator_version": promotion_gate.get("evaluator_version"),
+                    "stale_reason": audit_surface.get("stale_reason"),
+                    "last_known_good_build": audit_surface.get("last_known_good_build"),
+                    "revalidation_need": audit_surface.get("revalidation_need"),
+                    "rollback_verification_status": audit_surface.get("rollback_verification_status"),
+                    "bench_status": audit_surface.get("bench_status"),
+                    "conflict_reason": audit_surface.get("conflict_reason"),
+                    "last_known_good_verification_context": audit_surface.get("last_known_good_verification_context"),
+                    "os_build": audit_surface.get("os_build"),
+                    "os_edition": audit_surface.get("os_edition"),
+                    "architecture": audit_surface.get("architecture"),
+                    "elevation_context": audit_surface.get("elevation_context"),
+                    "machine_user_scope": audit_surface.get("machine_user_scope"),
                     "source_file": str(path.relative_to(REPO_ROOT)).replace("\\", "/"),
                     "incident_ids": list(
                         dict.fromkeys(

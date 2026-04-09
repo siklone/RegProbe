@@ -265,7 +265,7 @@
     "app_mapping_status": "not-mapped",
     "next_missing_layer": "decision-gate",
     "debug_override_allowed": true,
-    "last_evaluated_at": "2026-04-09T01:27:55.036868Z",
+    "last_evaluated_at": "2026-04-09T01:58:29.552835Z",
     "score_breakdown": {
       "static_evidence_strength": 3,
       "runtime_evidence_strength": 3,
@@ -324,12 +324,46 @@
       "statistics": null,
       "significance_verdict": null
     },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "etw",
+        "procmon",
+        "ghidra",
+        "wpr"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "behavior_wpr"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-04-08T19:40:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-04-08T19:40:00Z"
+      }
+    },
     "verification_context": {
       "backend_id": "rai-linux-vm",
       "current_build": "26100",
       "tested_build": "26100",
       "last_verified_at": "2026-04-08T19:40:00Z",
-      "stale_age_days": 0
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
     }
   },
   "evidence_freshness": {
@@ -341,6 +375,8 @@
   "last_verified_at": "2026-04-08T19:40:00Z",
   "verification_environment": {
     "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
     "vm_name": null,
     "baseline_snapshot": null,
     "backend_id": "rai-linux-vm",
@@ -352,7 +388,23 @@
       "isolation": "vm"
     }
   },
-  "negative_evidence": {},
+  "negative_evidence": {
+    "attempted_tools": [
+      "etw",
+      "procmon",
+      "ghidra",
+      "wpr"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
   "before_after": {
     "format": null,
     "diff_file": null,
@@ -361,7 +413,12 @@
     "value_added": 0,
     "value_deleted": 0,
     "value_changed": 0,
-    "unchanged_values": 0
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
   },
   "source_enrichment": [
     {
@@ -375,7 +432,8 @@
         "version-scope"
       ],
       "summary": "Residual value-exists triage found an exact current-build Unicode string hit for UuidSequenceNumber in ntoskrnl.exe and no exact hit in smss.exe.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     },
     {
       "evidence_id": "vm-executive-uuid-thread-burst-20260330",
@@ -387,7 +445,8 @@
         "version-scope"
       ],
       "summary": "A thread and process burst variant did not outperform the canonical clean no-hit lane and is kept only as a non-winning alternate trigger record.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "reactos-executive-uuid-adjacent-20260328",
@@ -400,7 +459,8 @@
         "version-scope"
       ],
       "summary": "Supporting ReactOS source review places UuidSequenceNumber under the Rpc path, which helps separate this adjacent value from direct proof for the Executive worker-thread pair.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "validation-proof",
@@ -412,7 +472,8 @@
         "behavior"
       ],
       "summary": "The Session Manager Executive baseline export and the 96-key phase-0 existence batch agree that UuidSequenceNumber exists on the clean Win25H2Clean baseline.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     }
   ],
   "bench_results": {
@@ -481,5 +542,53 @@
     ],
     "schema_compatibility_mode": "native",
     "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+      "state_kind": "value",
+      "value": 25272111,
+      "rationale": "Keep the observed baseline value while this lane remains research-only and runtime-gated.",
+      "evidence_ids": [
+        "vm-session-manager-executive-phase0-20260329",
+        "vm-session-manager-executive-baseline-20260328"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-04-08T19:40:00Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-04-08T19:40:00Z"
+    }
   }
 }

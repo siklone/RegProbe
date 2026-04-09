@@ -264,7 +264,7 @@
     "app_mapping_status": "matches-research",
     "next_missing_layer": "none",
     "debug_override_allowed": false,
-    "last_evaluated_at": "2026-04-09T01:27:55.020830Z",
+    "last_evaluated_at": "2026-04-09T01:58:29.535370Z",
     "score_breakdown": {
       "static_evidence_strength": 4,
       "runtime_evidence_strength": 4,
@@ -323,12 +323,48 @@
       "statistics": null,
       "significance_verdict": null
     },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "etw",
+        "procmon",
+        "ghidra",
+        "wpr",
+        "reboot"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "behavior_wpr",
+        "runtime_reboot"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-26T00:00:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-26T00:00:00Z"
+      }
+    },
     "verification_context": {
       "backend_id": "rai-linux-vm",
       "current_build": "26100",
       "tested_build": "26100",
       "last_verified_at": "2026-03-26T00:00:00Z",
-      "stale_age_days": 14
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
     }
   },
   "evidence_freshness": {
@@ -340,6 +376,8 @@
   "last_verified_at": "2026-03-26T00:00:00Z",
   "verification_environment": {
     "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
     "vm_name": null,
     "baseline_snapshot": null,
     "backend_id": "rai-linux-vm",
@@ -351,7 +389,25 @@
       "isolation": "vm"
     }
   },
-  "negative_evidence": {},
+  "negative_evidence": {
+    "attempted_tools": [
+      "etw",
+      "procmon",
+      "ghidra",
+      "wpr",
+      "reboot"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr",
+      "runtime_reboot"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
   "before_after": {
     "format": null,
     "diff_file": null,
@@ -360,7 +416,12 @@
     "value_added": 0,
     "value_deleted": 0,
     "value_changed": 0,
-    "unchanged_values": 0
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
   },
   "source_enrichment": [
     {
@@ -374,7 +435,8 @@
         "ui-mapping"
       ],
       "summary": "A headless Ghidra pass on Taskbar.dll found the TaskbarAnimations string and decompiled a function that reads SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarAnimations through Ordinal_123 after checking taskbar animation state with SystemParametersInfoW. That gives direct code-side proof that the taskbar consumes this flag on this build.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     },
     {
       "evidence_id": "repo-provenance-performance-disable-taskbar-animations",
@@ -387,7 +449,8 @@
         "ui-mapping"
       ],
       "summary": "The repo source note links TaskbarAnimations to upstream nohuto research and marks the tweak as repo-backed.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "validation-proof",
@@ -399,7 +462,8 @@
         "behavior"
       ],
       "summary": "The reversible probe confirmed the 0 / 1 mapping, Procmon showed explorer.exe reading both states on Win25H2Clean, and a Ghidra pass on Taskbar.dll exposed a code-side read of TaskbarAnimations from Explorer\\Advanced.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     }
   ],
   "bench_results": {
@@ -468,5 +532,53 @@
     ],
     "schema_compatibility_mode": "native",
     "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "user",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "user"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Windows baseline observed in guest",
+      "label": "Windows baseline observed in guest",
+      "applies_to": "Windows user profiles exposing TaskbarAnimations",
+      "state_kind": "value",
+      "value": 0,
+      "rationale": "Guest baseline on Win25H2Clean was 0 and the reversible probe restored it to 0.",
+      "evidence_ids": [
+        "runtime-taskbar-animations-registry-diff",
+        "procmon-taskbar-animations-registry-read"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-26T00:00:00Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-26T00:00:00Z"
+    }
   }
 }

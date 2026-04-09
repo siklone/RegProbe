@@ -21,11 +21,12 @@ from research_v36_lib import (
     build_queue_entry,
     capability_status,
     default_execution_context,
-    derive_promotion_state,
     discovery_seed_from_record,
+    evaluate_candidate_gate,
     gap_analysis_candidates,
     load_backend_capabilities,
     load_json,
+    load_json_if_exists,
     load_records,
     score_candidate,
     summarize_gap_analysis,
@@ -35,6 +36,7 @@ from research_v36_lib import (
     validate_queue_entry,
     required_capabilities_for_runner_entry,
     write_json,
+    sibling_expansion_candidates,
 )
 
 
@@ -53,6 +55,12 @@ def load_audit_entries() -> dict[str, dict]:
 
 def load_runner_config() -> dict:
     return load_json(Path("registry-research-framework/config/tweak-vm-runners.json"))
+
+
+def load_full_evidence(tweak_id: str) -> dict:
+    path = REPO_ROOT / "evidence" / "records" / tweak_id / "full-evidence.json"
+    payload = load_json_if_exists(path)
+    return payload if isinstance(payload, dict) else {}
 
 
 def load_runtime_discovery_candidates() -> list[dict]:
@@ -75,8 +83,9 @@ def queue_entries_from_records(records: list[dict], audit_map: dict[str, dict], 
     for record in records:
         seed = discovery_seed_from_record(record)
         audit = audit_map.get(str(record.get("record_id") or record.get("tweak_id") or ""), {})
-        gate = derive_promotion_state(record, audit)
-        gate["score_breakdown"] = score_candidate(record, audit)
+        full_evidence = load_full_evidence(str(record.get("record_id") or record.get("tweak_id") or ""))
+        gate = evaluate_candidate_gate(record, audit, full_evidence)
+        gate["score_breakdown"] = score_candidate(record, audit, full_evidence)
         runner_lane = "runtime"
         next_layer = gate.get("next_missing_layer") or "decision-gate"
         if next_layer == "procmon":
@@ -155,6 +164,27 @@ def queue_entries_from_runtime_discovery(candidates: list[dict]) -> list[dict]:
     return entries
 
 
+def queue_entries_from_sibling_discovery(records: list[dict], audit_map: dict[str, dict], gate_map: dict[str, dict]) -> list[dict]:
+    entries: list[dict] = []
+    for candidate in sibling_expansion_candidates(records, audit_map, gate_map):
+        accepted, reasons = triage_candidate(candidate)
+        state = "triaged" if accepted else "discarded"
+        blockers = [] if accepted else [f"triage:{reason}" for reason in reasons]
+        entry = build_queue_entry(
+            candidate,
+            state=state,
+            blockers=blockers,
+            required_capabilities=[],
+            next_lane="triage" if accepted else "discarded",
+            linked_record_id=None,
+            gate_result=None,
+        )
+        if not accepted:
+            entry["discard_reason"] = reasons
+        entries.append(entry)
+    return entries
+
+
 def validate_entries(entries: list[dict]) -> list[dict]:
     valid: list[dict] = []
     for entry in entries:
@@ -179,9 +209,17 @@ def main() -> int:
     backend_manifest = load_backend_capabilities(DEFAULT_BACKEND_ID)
     runtime_discovery_candidates = load_runtime_discovery_candidates()
 
+    record_entries = queue_entries_from_records(records, audit_map, runner_config, backend_manifest)
+    gate_map = {
+        str(entry.get("linked_record_id") or entry.get("record_id") or entry.get("candidate_id") or ""): (entry.get("last_evaluator_result") or {})
+        for entry in record_entries
+        if str(entry.get("linked_record_id") or entry.get("record_id") or entry.get("candidate_id") or "")
+    }
+
     queue_entries = validate_entries(
-        queue_entries_from_records(records, audit_map, runner_config, backend_manifest)
+        record_entries
         + queue_entries_from_gaps(records)
+        + queue_entries_from_sibling_discovery(records, audit_map, gate_map)
         + queue_entries_from_runtime_discovery(runtime_discovery_candidates)
     )
 

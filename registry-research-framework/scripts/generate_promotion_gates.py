@@ -20,6 +20,7 @@ from research_v36_lib import (
     append_jsonl,
     evaluate_candidate_gate,
     load_json,
+    load_json_if_exists,
     load_records,
     now_utc,
     validate_gate_result,
@@ -36,6 +37,12 @@ def load_audit_entries() -> dict[str, dict]:
     }
 
 
+def load_full_evidence(tweak_id: str) -> dict:
+    path = REPO_ROOT / "evidence" / "records" / tweak_id / "full-evidence.json"
+    payload = load_json_if_exists(path)
+    return payload if isinstance(payload, dict) else {}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate compact promotion gates from research records.")
     parser.add_argument("--emit-json", action="store_true", help="Print summary JSON.")
@@ -49,7 +56,7 @@ def main() -> int:
     for record in load_records():
         record_id = str(record.get("record_id") or record.get("tweak_id") or "")
         audit = audit_map.get(record_id, {})
-        gate = evaluate_candidate_gate(record, audit)
+        gate = evaluate_candidate_gate(record, audit, load_full_evidence(record_id))
         validation_errors = validate_gate_result(gate)
         if validation_errors:
             invalid_entries.append(

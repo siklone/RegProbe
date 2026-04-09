@@ -240,7 +240,7 @@
     "app_mapping_status": "matches-research",
     "next_missing_layer": "none",
     "debug_override_allowed": false,
-    "last_evaluated_at": "2026-04-09T01:27:55.040196Z",
+    "last_evaluated_at": "2026-04-09T01:58:29.557075Z",
     "score_breakdown": {
       "static_evidence_strength": 5,
       "runtime_evidence_strength": 3,
@@ -299,12 +299,47 @@
       "statistics": null,
       "significance_verdict": null
     },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "official-doc",
+        "procmon",
+        "ghidra",
+        "reboot"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "runtime_reboot",
+        "official_doc"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-26T00:00:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-26T00:00:00Z"
+      }
+    },
     "verification_context": {
       "backend_id": "rai-linux-vm",
       "current_build": "26100",
       "tested_build": "26100",
       "last_verified_at": "2026-03-26T00:00:00Z",
-      "stale_age_days": 14
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
     }
   },
   "evidence_freshness": {
@@ -316,6 +351,8 @@
   "last_verified_at": "2026-03-26T00:00:00Z",
   "verification_environment": {
     "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
     "vm_name": null,
     "baseline_snapshot": null,
     "backend_id": "rai-linux-vm",
@@ -327,7 +364,24 @@
       "isolation": "vm"
     }
   },
-  "negative_evidence": {},
+  "negative_evidence": {
+    "attempted_tools": [
+      "official-doc",
+      "procmon",
+      "ghidra",
+      "reboot"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "runtime_reboot",
+      "official_doc"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
   "before_after": {
     "format": null,
     "diff_file": null,
@@ -336,7 +390,12 @@
     "value_added": 0,
     "value_deleted": 0,
     "value_changed": 0,
-    "unchanged_values": 0
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
   },
   "source_enrichment": [
     {
@@ -351,7 +410,8 @@
         "version-scope"
       ],
       "summary": "Microsoft maps Enable Persistent Time Stamp directly to Software\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled and documents the enabled, disabled, and not-configured behavior, including that the schedule is controlled by Timestamp Interval.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "repo-system-doc-reliability-timestamp",
@@ -364,7 +424,8 @@
         "behavior"
       ],
       "summary": "The repo note describes TimeStampEnabled / TimeStampInterval and documents the Reliability registry path used by the timestamping behavior.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "repo-system-decomp-reliability-timestamp",
@@ -377,7 +438,8 @@
         "behavior"
       ],
       "summary": "The decompiled function reads TimeStampEnabled from the policy Reliability path first, returns 0 when it is disabled, then reads TimeStampInterval and caps it at 86400 seconds before falling back to the current-version Reliability path.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     },
     {
       "evidence_id": "ghidra-diagtrack-reliability-20260326",
@@ -390,7 +452,8 @@
         "open-question"
       ],
       "summary": "Our 25H2 Ghidra exports on diagtrack.dll now include the original string/xref lead plus an address-seeded fallback pass for the unresolved blocks at 18038fce0 and 18026bfc0, which keeps the current-build DiagTrack path in repo evidence even though the exact registry read is still not visible in Procmon.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "validation-proof",
@@ -402,7 +465,8 @@
         "behavior"
       ],
       "summary": "The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval in diagtrack.dll, re-opened the unresolved DiagTrack blocks with an address-seeded Ghidra fallback pass, and captured the same adjacent Reliability\\PBR read in both the DiagTrack restart pass and the later hidden structured Procmon pass.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     }
   ],
   "bench_results": {
@@ -471,5 +535,53 @@
     ],
     "schema_compatibility_mode": "native",
     "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Windows managed default",
+      "label": "Windows managed default",
+      "applies_to": "Systems where this dataset has not yet published an explicit Reliability timestamp policy",
+      "state_kind": "missing",
+      "value": null,
+      "rationale": "Leave the policy unset and let Windows use its normal reliability timestamp behavior.",
+      "evidence_ids": [
+        "ms-admx-reliability-persistent-timestamp",
+        "repo-system-decomp-reliability-timestamp"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-26T00:00:00Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-26T00:00:00Z"
+    }
   }
 }

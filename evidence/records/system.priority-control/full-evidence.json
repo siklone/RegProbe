@@ -308,7 +308,7 @@
     "app_mapping_status": "matches-research",
     "next_missing_layer": "none",
     "debug_override_allowed": false,
-    "last_evaluated_at": "2026-04-09T01:27:55.039162Z",
+    "last_evaluated_at": "2026-04-09T01:58:29.555929Z",
     "score_breakdown": {
       "static_evidence_strength": 5,
       "runtime_evidence_strength": 5,
@@ -367,12 +367,51 @@
       "statistics": null,
       "significance_verdict": null
     },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "official-doc",
+        "procmon",
+        "ghidra",
+        "wpr",
+        "benchmark",
+        "reboot"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "behavior_wpr",
+        "behavior_benchmark",
+        "runtime_reboot",
+        "official_doc"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-04-01T00:00:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-04-01T00:00:00Z"
+      }
+    },
     "verification_context": {
       "backend_id": "rai-linux-vm",
       "current_build": "26100",
       "tested_build": "26100",
       "last_verified_at": "2026-04-01T00:00:00Z",
-      "stale_age_days": 8
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
     }
   },
   "evidence_freshness": {
@@ -384,6 +423,8 @@
   "last_verified_at": "2026-04-01T00:00:00Z",
   "verification_environment": {
     "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
     "vm_name": null,
     "baseline_snapshot": null,
     "backend_id": "rai-linux-vm",
@@ -395,7 +436,28 @@
       "isolation": "vm"
     }
   },
-  "negative_evidence": {},
+  "negative_evidence": {
+    "attempted_tools": [
+      "official-doc",
+      "procmon",
+      "ghidra",
+      "wpr",
+      "benchmark",
+      "reboot"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr",
+      "behavior_benchmark",
+      "runtime_reboot",
+      "official_doc"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
   "before_after": {
     "format": null,
     "diff_file": null,
@@ -404,7 +466,12 @@
     "value_added": 0,
     "value_deleted": 0,
     "value_changed": 0,
-    "unchanged_values": 0
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
   },
   "source_enrichment": [
     {
@@ -419,7 +486,8 @@
         "risk"
       ],
       "summary": "Microsoft maps ForegroundApplicationBoost, QuantumLength, and QuantumType to HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation. The page proves the path and high-level WMI contract, but it does not publish the exact raw 0x26 bitmask used by the app.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "repo-system-doc-priority",
@@ -432,7 +500,8 @@
         "app-mismatch"
       ],
       "summary": "The repo documents the raw bitmask interpretation for Win32PrioritySeparation and discusses values such as 0x18, 0x24, and 0x26, but this is repo provenance rather than a primary Microsoft publication.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "repo-system-decomp-prioritycontrol",
@@ -444,7 +513,8 @@
         "behavior"
       ],
       "summary": "Historical repo decompilation shows a PriorityControl read/write path for Win32PrioritySeparation, but this remains secondary provenance after the bounded PDB-backed v3.2 Ghidra pass.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "api_semantics"
     },
     {
       "evidence_id": "ghidra-symbolized-prioritycontrol-20260401",
@@ -456,7 +526,8 @@
         "behavior"
       ],
       "summary": "A v3.2 Ghidra pass on cimwin32.dll applied the PDB and recovered bounded Win32PrioritySeparation compare/jump blocks in GetNTInfo and PutInstance. The output stays branch-scoped and does not claim full raw 0x26 semantics.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     },
     {
       "evidence_id": "validation-proof",
@@ -468,7 +539,44 @@
         "behavior"
       ],
       "summary": "The 2026-03-26 Procmon pass adds direct wmiprvse.exe reads for both observed states. The earlier rebooted VM benchmark pass still covers baseline 2, candidate 38, restore 2, and bounded CPU/memory measurements on the same build.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
+    },
+    {
+      "evidence_id": "static-ghidra",
+      "kind": "ghidra-enrichment",
+      "title": "GHIDRA static enrichment",
+      "location": "evidence/files/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136",
+      "supports": [
+        "api_semantics"
+      ],
+      "summary": "A bounded PDB-backed Ghidra pass on cimwin32.dll now attaches two committed Win32PrioritySeparation branch blocks in GetNTInfo and PutInstance without relying on long decompile prose.",
+      "strength": "high",
+      "clue_type": "caller_chain",
+      "symbol_clue": "GetNTInfo; PutInstance",
+      "xref": "18004666c  TEST EAX,EAX | 1800ca591  TEST EAX,EAX",
+      "caller_chain": "Win32PrioritySeparation branch in GetNTInfo | Win32PrioritySeparation branch in PutInstance",
+      "wrapper_name": "GetNTInfo; PutInstance",
+      "decompiled_interpretation": "A bounded PDB-backed Ghidra pass on cimwin32.dll now attaches two committed Win32PrioritySeparation branch blocks in GetNTInfo and PutInstance without relying on long decompile prose.",
+      "confidence": "high"
+    },
+    {
+      "evidence_id": "static-ida",
+      "kind": "ida-enrichment",
+      "title": "IDA static enrichment",
+      "location": null,
+      "supports": [
+        "legacy_behavior_hint"
+      ],
+      "summary": "IDA headless cross-verification is not provisioned for this record yet.",
+      "strength": "low",
+      "clue_type": "legacy_behavior_hint",
+      "symbol_clue": null,
+      "xref": null,
+      "caller_chain": null,
+      "wrapper_name": null,
+      "decompiled_interpretation": "IDA headless cross-verification is not provisioned for this record yet.",
+      "confidence": "low"
     }
   ],
   "bench_results": {
@@ -537,5 +645,53 @@
     ],
     "schema_compatibility_mode": "native",
     "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current 25H2 builds where the live baseline still reads back 2 before the app profile is applied",
+      "state_kind": "value",
+      "value": 2,
+      "rationale": "Use the current observed 25H2 VM baseline value.",
+      "evidence_ids": [
+        "vm-batch-probe-20260320-priority-control",
+        "vm-manual-benchmark-20260324-priority-control"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-04-01T00:00:00Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-04-01T00:00:00Z"
+    }
   }
 }

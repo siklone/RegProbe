@@ -270,7 +270,7 @@
     "app_mapping_status": "matches-research",
     "next_missing_layer": "none",
     "debug_override_allowed": false,
-    "last_evaluated_at": "2026-04-09T01:27:55.034070Z",
+    "last_evaluated_at": "2026-04-09T01:58:29.549485Z",
     "score_breakdown": {
       "static_evidence_strength": 4,
       "runtime_evidence_strength": 3,
@@ -331,12 +331,46 @@
       "statistics": null,
       "significance_verdict": null
     },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "etw",
+        "procmon",
+        "ghidra",
+        "wpr"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "behavior_wpr"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-27T00:00:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-27T00:00:00Z"
+      }
+    },
     "verification_context": {
       "backend_id": "rai-linux-vm",
       "current_build": "26100",
       "tested_build": "26100",
       "last_verified_at": "2026-03-27T00:00:00Z",
-      "stale_age_days": 13
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
     }
   },
   "evidence_freshness": {
@@ -348,6 +382,8 @@
   "last_verified_at": "2026-03-27T00:00:00Z",
   "verification_environment": {
     "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
     "vm_name": null,
     "baseline_snapshot": null,
     "backend_id": "rai-linux-vm",
@@ -359,7 +395,23 @@
       "isolation": "vm"
     }
   },
-  "negative_evidence": {},
+  "negative_evidence": {
+    "attempted_tools": [
+      "etw",
+      "procmon",
+      "ghidra",
+      "wpr"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
   "before_after": {
     "format": null,
     "diff_file": null,
@@ -368,7 +420,12 @@
     "value_added": 0,
     "value_deleted": 0,
     "value_changed": 0,
-    "unchanged_values": 0
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
   },
   "source_enrichment": [
     {
@@ -384,7 +441,8 @@
         "app-mismatch"
       ],
       "summary": "The repo documents JPEGImportQuality behavior, including a fallback of 85 and a clamp range of 60..100, based on code analysis rather than a primary Microsoft registry publication.",
-      "strength": "medium"
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "repo-system-decomp-jpegtranscode",
@@ -397,7 +455,8 @@
         "behavior"
       ],
       "summary": "The decompiled transcode path reads HKCU\\Control Panel\\Desktop\\JPEGImportQuality, falls back to 85 when missing, clamps the number into the 60..100 range, and passes the final value into the JPEG encoder as ImageQuality.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     },
     {
       "evidence_id": "ghidra-shell32-jpegimportquality",
@@ -410,7 +469,8 @@
         "behavior"
       ],
       "summary": "A headless Ghidra pass on shell32.dll found the JPEGImportQuality string and exported the xref into FUN_1800bf050, the shell transcode path that handles JPEG wallpaper import quality. That gives direct code-side proof on this build.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "legacy_behavior_hint"
     },
     {
       "evidence_id": "validation-proof",
@@ -422,7 +482,8 @@
         "behavior"
       ],
       "summary": "The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof, and the 2026-03-27 v3.1 runtime lane adds a fresh wallpaper-apply trace with clean shell recovery.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     }
   ],
   "bench_results": {
@@ -493,5 +554,55 @@
     ],
     "schema_compatibility_mode": "native",
     "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "user",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "user"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed fallback baseline",
+      "label": "Observed fallback baseline",
+      "applies_to": "Current builds where JPEGImportQuality is left unset and the wallpaper transcode path falls back to its internal default",
+      "state_kind": "missing",
+      "value": null,
+      "rationale": "Leave JPEGImportQuality unset and let the current wallpaper import path fall back to 85.",
+      "evidence_ids": [
+        "repo-system-doc-jpeg",
+        "repo-system-decomp-jpegtranscode",
+        "vm-batch-probe-20260320-disable-jpeg-reduction",
+        "runtime-jpegimportquality-v31-20260327"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-27T00:00:00Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-27T00:00:00Z"
+    }
   }
 }

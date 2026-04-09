@@ -267,7 +267,7 @@
     "app_mapping_status": "not-mapped",
     "next_missing_layer": "decision-gate",
     "debug_override_allowed": true,
-    "last_evaluated_at": "2026-04-09T01:27:55.025675Z",
+    "last_evaluated_at": "2026-04-09T01:58:29.540689Z",
     "score_breakdown": {
       "static_evidence_strength": 3,
       "runtime_evidence_strength": 4,
@@ -325,12 +325,48 @@
       "statistics": null,
       "significance_verdict": null
     },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "etw",
+        "procmon",
+        "ghidra",
+        "wpr",
+        "reboot"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "behavior_wpr",
+        "runtime_reboot"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-29T21:45:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-29T21:45:00Z"
+      }
+    },
     "verification_context": {
       "backend_id": "rai-linux-vm",
       "current_build": "26100",
       "tested_build": "26100",
       "last_verified_at": "2026-03-29T21:45:00Z",
-      "stale_age_days": 10
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
     }
   },
   "evidence_freshness": {
@@ -342,6 +378,8 @@
   "last_verified_at": "2026-03-29T21:45:00Z",
   "verification_environment": {
     "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
     "vm_name": null,
     "baseline_snapshot": null,
     "backend_id": "rai-linux-vm",
@@ -353,7 +391,25 @@
       "isolation": "vm"
     }
   },
-  "negative_evidence": {},
+  "negative_evidence": {
+    "attempted_tools": [
+      "etw",
+      "procmon",
+      "ghidra",
+      "wpr",
+      "reboot"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr",
+      "runtime_reboot"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
   "before_after": {
     "format": null,
     "diff_file": null,
@@ -362,7 +418,12 @@
     "value_added": 0,
     "value_deleted": 0,
     "value_changed": 0,
-    "unchanged_values": 0
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
   },
   "source_enrichment": [
     {
@@ -377,7 +438,8 @@
         "version-scope"
       ],
       "summary": "Repo power notes contain an exact entry for HibernateEnabledDefault, led by Docs/power/power.md:154.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "default_behavior_hint"
     },
     {
       "evidence_id": "static-power-control-string-20260329",
@@ -390,7 +452,8 @@
         "version-scope"
       ],
       "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for HibernateEnabledDefault.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "default_behavior_hint"
     },
     {
       "evidence_id": "ghidra-power-control-docs-first-20260329",
@@ -404,7 +467,8 @@
         "version-scope"
       ],
       "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for HibernateEnabledDefault; some values resolved naturally while several remained forced-boundary fallback blocks.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     },
     {
       "evidence_id": "validation-proof",
@@ -416,7 +480,8 @@
         "behavior"
       ],
       "summary": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for HibernateEnabledDefault. App surfacing is tracked separately from evidence classification.",
-      "strength": "high"
+      "strength": "high",
+      "clue_type": "api_semantics"
     }
   ],
   "bench_results": {
@@ -484,5 +549,52 @@
     ],
     "schema_compatibility_mode": "native",
     "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-Clean-20260329 research baseline",
+      "state_kind": "value",
+      "value": 1,
+      "rationale": "Keep the currently observed baseline value (1) while this raw control stays in research packaging only.",
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-29T21:45:00Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-29T21:45:00Z"
+    }
   }
 }

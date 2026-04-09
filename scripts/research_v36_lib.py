@@ -32,6 +32,7 @@ BACKENDS_ROOT = FRAMEWORK_ROOT / "config" / "backends"
 DISCOVERY_ROOT = FRAMEWORK_ROOT / "discovery"
 QUEUE_ROOT = FRAMEWORK_ROOT / "queue"
 AUDIT_ROOT = FRAMEWORK_ROOT / "audit"
+ENRICHMENT_ROOT = FRAMEWORK_ROOT / "enrichment"
 PROMOTION_GATES_PATH = RESEARCH_ROOT / "promotion-gates.json"
 PROMOTION_AUDIT_LOG_PATH = AUDIT_ROOT / "promotion-audit-log.jsonl"
 DISCOVERY_EVENTS_PATH = DISCOVERY_ROOT / "discovery-events.jsonl"
@@ -40,6 +41,7 @@ ETL_REGISTRY_DISCOVERY_PATH = DISCOVERY_ROOT / "etl-registry-discovery.json"
 GAP_ANALYSIS_SUMMARY_PATH = AUDIT_ROOT / "gap-analysis-summary.json"
 ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser-config.json"
 LEGACY_ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser.json"
+ENRICHMENT_CACHE_PATH = ENRICHMENT_ROOT / "enrichment-cache.jsonl"
 
 QUEUE_STATES = {
     "discovered",
@@ -68,6 +70,7 @@ EVALUATOR_VERSION = "3.6.0"
 DEFAULT_BACKEND_ID = "rai-linux-vm"
 CURRENT_SCHEMA_VERSION = "1.0"
 STALE_REVALIDATION_DAYS = 28
+STALE_BUILD_THRESHOLD = 2
 STRONG_STATIC_SUPPORTS = {
     "allowed-values",
     "behavior",
@@ -104,6 +107,14 @@ SOURCE_ENRICHMENT_KINDS = {
     "ghidra-trace",
     "open-source-reference",
     "inference",
+}
+ENRICHMENT_CLUE_TYPES = {
+    "caller_chain",
+    "api_semantics",
+    "default_behavior_hint",
+    "privilege_hint",
+    "sibling_path_hint",
+    "legacy_behavior_hint",
 }
 
 DEFAULT_CAPABILITIES = {
@@ -168,6 +179,27 @@ def append_jsonl(path: Path, entry: dict[str, Any]) -> None:
         handle.write("\n")
 
 
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    entries: list[dict[str, Any]] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        payload = json.loads(line)
+        if isinstance(payload, dict):
+            entries.append(payload)
+    return entries
+
+
+def write_jsonl(path: Path, entries: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        for entry in entries:
+            handle.write(json.dumps(entry, ensure_ascii=False))
+            handle.write("\n")
+
+
 def list_records() -> list[Path]:
     return sorted((RESEARCH_ROOT / "records").glob("*.json"))
 
@@ -215,6 +247,50 @@ def default_execution_context(backend_id: str = DEFAULT_BACKEND_ID) -> dict[str,
         "privilege": payload.get("execution_context", {}).get("privilege", "user"),
         "isolation": payload.get("execution_context", {}).get("isolation", "vm" if payload.get("type") == "vm" else "none"),
     }
+
+
+def parse_build_number(value: Any) -> int | None:
+    text = str(value or "").strip()
+    match = re.search(r"\d+", text)
+    if not match:
+        return None
+    return int(match.group(0))
+
+
+def builds_since(current_build: Any, tested_build: Any) -> int | None:
+    current = parse_build_number(current_build)
+    tested = parse_build_number(tested_build)
+    if current is None or tested is None:
+        return None
+    return max(0, current - tested)
+
+
+def machine_user_scope_for_key_path(key_path: str | None) -> str:
+    path = str(key_path or "").upper()
+    if path.startswith("HKCU\\") or path.startswith("HKU\\"):
+        return "user"
+    return "machine"
+
+
+def build_sku_awareness_for_key_path(
+    key_path: str | None,
+    execution_context: dict[str, Any] | None = None,
+    backend_id: str = DEFAULT_BACKEND_ID,
+) -> dict[str, Any]:
+    execution_context = execution_context or default_execution_context(backend_id)
+    manifest = reproducibility_manifest()
+    backend = load_backend_capabilities(backend_id)
+    return {
+        "os_build": str(manifest.get("os_build") or "") or None,
+        "os_edition": str(manifest.get("os_edition") or backend.get("os_edition") or "unknown"),
+        "architecture": str(manifest.get("architecture") or backend.get("architecture") or "unknown"),
+        "elevation_context": str(execution_context.get("privilege") or "user"),
+        "machine_user_scope": machine_user_scope_for_key_path(key_path),
+    }
+
+
+def build_sku_awareness(record: dict[str, Any], execution_context: dict[str, Any], backend_id: str = DEFAULT_BACKEND_ID) -> dict[str, Any]:
+    return build_sku_awareness_for_key_path(primary_target(record).get("path"), execution_context, backend_id)
 
 
 def validate_execution_context(payload: dict[str, Any]) -> list[str]:
@@ -404,6 +480,7 @@ def discovery_seed_from_record(record: dict[str, Any]) -> dict[str, Any]:
     validation_proof = record.get("validation_proof") or {}
     feature_area = record_feature_area(record)
     record_id = str(record.get("record_id") or record.get("tweak_id") or "")
+    execution_context = default_execution_context()
     return {
         "schema_version": CURRENT_SCHEMA_VERSION,
         "candidate_id": record_id,
@@ -418,7 +495,8 @@ def discovery_seed_from_record(record: dict[str, Any]) -> dict[str, Any]:
         "initial_confidence": str((record.get("decision") or {}).get("confidence") or "unknown"),
         "seed_reference": f"research/records/{Path(record_id).name}.json",
         "required_followup": next_missing_layer(record),
-        "execution_context": default_execution_context(),
+        "execution_context": execution_context,
+        **build_sku_awareness(record, execution_context),
     }
 
 
@@ -498,6 +576,157 @@ def rollback_value_projection(record: dict[str, Any]) -> dict[str, Any] | None:
     }
 
 
+def infer_enrichment_clue_type(*, supports: list[Any] | None = None, summary: str | None = None, kind: str | None = None) -> str:
+    support_set = {str(item).strip().lower() for item in (supports or []) if item}
+    lowered = str(summary or "").lower()
+    lowered_kind = str(kind or "").lower()
+    if "caller_chain" in support_set or "caller chain" in lowered:
+        return "caller_chain"
+    if "api_semantics" in support_set or "api semantics" in lowered or "decompiled" in lowered or lowered_kind in {"pdb-symbolized", "decompilation", "decompiled-pseudocode"}:
+        return "api_semantics"
+    if "default" in lowered or "default_behavior" in support_set:
+        return "default_behavior_hint"
+    if "privilege" in lowered or "privilege" in support_set:
+        return "privilege_hint"
+    if "sibling" in lowered or "analog" in lowered or "sibling_path" in support_set:
+        return "sibling_path_hint"
+    return "legacy_behavior_hint"
+
+
+def _range_from_exact_path(text: str | None) -> list[int] | None:
+    value = str(text or "").strip()
+    match = re.search(r":(\d+)(?:-(\d+))?$", value)
+    if not match:
+        return None
+    start = int(match.group(1))
+    end = int(match.group(2) or start)
+    return [start, end]
+
+
+def _confidence_from_static_block(block: dict[str, Any]) -> str:
+    confidence = str(block.get("function_confidence") or "").strip()
+    if confidence in {"symbolized_branch", "high"}:
+        return "high"
+    if confidence in {"string_only_review", "medium"}:
+        return "medium"
+    return "low"
+
+
+def static_enrichment_projection(record: dict[str, Any]) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    static_analysis = record.get("static_analysis") or {}
+    if not isinstance(static_analysis, dict):
+        return items
+    for tool_name in ("ghidra", "ida"):
+        block = static_analysis.get(tool_name) or {}
+        if not isinstance(block, dict) or not block:
+            continue
+        branch_analysis = block.get("branch_analysis") or []
+        caller_chain = " | ".join(
+            str(item.get("condition") or item.get("effect_summary") or "")
+            for item in branch_analysis
+            if isinstance(item, dict) and (item.get("condition") or item.get("effect_summary"))
+        ) or None
+        xref = " | ".join(
+            str(item.get("compare_condition") or item.get("jump_condition") or "")
+            for item in branch_analysis
+            if isinstance(item, dict) and (item.get("compare_condition") or item.get("jump_condition"))
+        ) or None
+        items.append(
+            {
+                "evidence_id": f"static-{tool_name}",
+                "kind": f"{tool_name}-enrichment",
+                "title": f"{tool_name.upper()} static enrichment",
+                "location": block.get("artifact_path"),
+                "supports": ["api_semantics"] if caller_chain or xref else ["legacy_behavior_hint"],
+                "summary": block.get("effect_summary"),
+                "strength": _confidence_from_static_block(block),
+                "clue_type": infer_enrichment_clue_type(
+                    supports=["caller_chain"] if caller_chain else ["api_semantics"] if xref else ["legacy_behavior_hint"],
+                    summary=block.get("effect_summary"),
+                    kind=tool_name,
+                ),
+                "symbol_clue": block.get("function_name"),
+                "xref": xref,
+                "caller_chain": caller_chain,
+                "wrapper_name": block.get("function_name"),
+                "decompiled_interpretation": block.get("effect_summary"),
+                "confidence": _confidence_from_static_block(block),
+            }
+        )
+    return items
+
+
+def build_enrichment_cache_entries(record: dict[str, Any]) -> list[dict[str, Any]]:
+    record_id = str(record.get("record_id") or record.get("tweak_id") or "")
+    entries: list[dict[str, Any]] = []
+    validation_proof = record.get("validation_proof") or {}
+    if isinstance(validation_proof, dict) and any(validation_proof.get(field) for field in ("source_url", "exact_quote_or_path", "notes")):
+        entries.append(
+            {
+                "record_id": record_id,
+                "source": "validation-proof",
+                "query_term": record_id,
+                "hit_file": validation_proof.get("source_url") or validation_proof.get("exact_quote_or_path"),
+                "line_range": _range_from_exact_path(validation_proof.get("exact_quote_or_path")),
+                "clue_type": infer_enrichment_clue_type(supports=["api_semantics"], summary=validation_proof.get("notes"), kind="validation-proof"),
+                "cached_at": now_utc(),
+            }
+        )
+    for item in evidence_items(record):
+        kind = evidence_kind(item)
+        if kind not in SOURCE_ENRICHMENT_KINDS:
+            continue
+        entries.append(
+            {
+                "record_id": record_id,
+                "source": kind,
+                "query_term": item.get("title") or record_id,
+                "hit_file": item.get("location"),
+                "line_range": _range_from_exact_path(item.get("location") or item.get("summary")),
+                "clue_type": infer_enrichment_clue_type(supports=item.get("supports") or [], summary=item.get("summary"), kind=kind),
+                "cached_at": now_utc(),
+            }
+        )
+    for item in static_enrichment_projection(record):
+        entries.append(
+            {
+                "record_id": record_id,
+                "source": item.get("kind"),
+                "query_term": item.get("wrapper_name") or record_id,
+                "hit_file": item.get("location") or item.get("symbol_clue"),
+                "line_range": None,
+                "clue_type": item.get("clue_type"),
+                "cached_at": now_utc(),
+            }
+        )
+    return entries
+
+
+def write_enrichment_cache(entries: list[dict[str, Any]], path: Path = ENRICHMENT_CACHE_PATH) -> None:
+    deduped: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str, str]] = set()
+    for entry in entries:
+        clue_type = str(entry.get("clue_type") or "legacy_behavior_hint")
+        if clue_type not in ENRICHMENT_CLUE_TYPES:
+            continue
+        key = (
+            str(entry.get("record_id") or ""),
+            str(entry.get("source") or ""),
+            str(entry.get("query_term") or ""),
+            str(entry.get("hit_file") or ""),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(entry)
+    write_jsonl(path, deduped)
+
+
+def load_enrichment_cache(path: Path = ENRICHMENT_CACHE_PATH) -> list[dict[str, Any]]:
+    return [entry for entry in load_jsonl(path) if str(entry.get("clue_type") or "") in ENRICHMENT_CLUE_TYPES]
+
+
 def source_enrichment_projection(record: dict[str, Any]) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
     for item in evidence_items(record):
@@ -513,6 +742,7 @@ def source_enrichment_projection(record: dict[str, Any]) -> list[dict[str, Any]]
                 "supports": item.get("supports") or [],
                 "summary": item.get("summary"),
                 "strength": item.get("strength"),
+                "clue_type": infer_enrichment_clue_type(supports=item.get("supports") or [], summary=item.get("summary"), kind=kind),
             }
         )
     proof = record.get("validation_proof") or {}
@@ -526,8 +756,10 @@ def source_enrichment_projection(record: dict[str, Any]) -> list[dict[str, Any]]
                 "supports": ["path", "behavior"],
                 "summary": proof.get("notes") or proof.get("exact_quote_or_path"),
                 "strength": "high" if proof.get("key_found_on_page") else "medium",
+                "clue_type": infer_enrichment_clue_type(supports=["api_semantics"], summary=proof.get("notes"), kind="validation-proof"),
             }
         )
+    items.extend(static_enrichment_projection(record))
     return items
 
 
@@ -550,6 +782,44 @@ def evidence_status_projection(record: dict[str, Any], audit: dict[str, Any] | N
         "has_ghidra_evidence": has_ghidra_evidence(record),
         "has_benchmark_evidence": has_benchmark_evidence(record),
         "has_reboot_evidence": has_reboot_evidence(record),
+    }
+
+
+def freshness_status_projection(
+    record: dict[str, Any],
+    execution_context: dict[str, Any],
+    *,
+    evaluated_at: str | None = None,
+) -> dict[str, Any]:
+    freshness = evidence_freshness(record, reproducibility_manifest())
+    tested_build = str(freshness.get("os_build") or "").strip()
+    current_build = str((reproducibility_manifest() or {}).get("os_build") or "").strip()
+    build_delta = builds_since(current_build, tested_build)
+    evaluation_time = parse_utc(evaluated_at) or datetime.now(timezone.utc)
+    last_verified_at = parse_utc(str(record.get("last_reviewed_utc") or ""))
+    stale_age = bool(last_verified_at and (evaluation_time - last_verified_at) >= timedelta(days=STALE_REVALIDATION_DAYS))
+    stale_build = build_delta is not None and build_delta >= STALE_BUILD_THRESHOLD
+    stale_reason = None
+    if stale_build and stale_age:
+        stale_reason = "build-drift-and-age-threshold"
+    elif stale_build:
+        stale_reason = "build-drift-threshold"
+    elif stale_age:
+        stale_reason = "verification-age-threshold"
+    return {
+        "status": "stale" if stale_reason else "fresh",
+        "revalidation_needed": bool(stale_reason),
+        "stale_reason": stale_reason,
+        "last_known_good_build": tested_build or None,
+        "current_build": current_build or None,
+        "builds_since": build_delta,
+        "last_verified_at": record.get("last_reviewed_utc"),
+        "last_known_good_verification_context": {
+            "backend_id": execution_context.get("backend_id"),
+            "tested_build": tested_build or None,
+            "current_build": current_build or None,
+            "last_verified_at": record.get("last_reviewed_utc"),
+        },
     }
 
 
@@ -594,7 +864,72 @@ def rollback_verification_projection(full_evidence: dict[str, Any], record: dict
     }
 
 
+def negative_evidence_projection(
+    full_evidence: dict[str, Any],
+    record: dict[str, Any],
+    audit: dict[str, Any] | None = None,
+    rollback_status: dict[str, Any] | None = None,
+    bench_results: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    audit = audit or {}
+    base = dict(full_evidence.get("negative_evidence") or {})
+    attempted_tools = [str(item) for item in (base.get("attempted_tools") or audit.get("tools_used") or []) if item]
+    attempted_layers = [str(item) for item in (base.get("attempted_layers") or audit.get("layers_used") or []) if item]
+    signals: list[str] = [str(item) for item in (base.get("signals") or []) if item]
+    runtime_negative = bool(base.get("eligible")) or bool(base.get("reason") not in {None, "", "not-applicable"})
+
+    if runtime_negative and "procmon" in attempted_tools and not has_procmon_evidence(record) and "procmon-no-hit" not in signals:
+        signals.append("procmon-no-hit")
+    debugger_attempted = any(item in {"debugger", "windbg"} for item in attempted_tools)
+    if runtime_negative and "etw" in attempted_tools and debugger_attempted and not has_wpr_evidence(record) and "etw-no-hit-debugger-no-call" not in signals:
+        signals.append("etw-no-hit-debugger-no-call")
+
+    sideeffects = ((full_evidence.get("behavior") or {}).get("registry_sideeffects") or {})
+    sideeffect_count = sideeffects.get("sideeffect_count")
+    if bool_value((record.get("decision") or {}).get("apply_allowed")) and sideeffects.get("executed") and isinstance(sideeffect_count, int) and sideeffect_count == 0 and "functional-no-effect" not in signals:
+        signals.append("functional-no-effect")
+
+    rollback_status = rollback_status or rollback_verification_projection(full_evidence, record)
+    if rollback_status.get("rollback_failure_reason") == "rollback-state-mismatch" and "rollback-restore-mismatch" not in signals:
+        signals.append("rollback-restore-mismatch")
+
+    bench_results = bench_results or {}
+    bench_summary = str(bench_results.get("summary") or "").lower()
+    if (
+        bench_results.get("executed")
+        and (
+            bench_results.get("safety_status") == "failed"
+            or bench_results.get("safety_verdict") == "failed-safety"
+            or "failed safety" in bench_summary
+            or "safety fail" in bench_summary
+        )
+        and "bench-failed-safety" not in signals
+    ):
+        signals.append("bench-failed-safety")
+
+    strong_signals = {"etw-no-hit-debugger-no-call", "functional-no-effect", "rollback-restore-mismatch", "bench-failed-safety"}
+    signal_strength = "strong" if any(item in strong_signals for item in signals) else "medium" if signals else "none"
+    conflict_reason = None
+    if "functional-no-effect" in signals:
+        conflict_reason = "state-change-expected-but-diff-empty"
+    elif "rollback-restore-mismatch" in signals:
+        conflict_reason = "rollback-restore-mismatch"
+    elif "bench-failed-safety" in signals:
+        conflict_reason = "safety-bench-failed"
+
+    return {
+        **base,
+        "attempted_tools": attempted_tools,
+        "attempted_layers": attempted_layers,
+        "signals": signals,
+        "signal_strength": signal_strength,
+        "runtime_negative": runtime_negative or bool(signals),
+        "conflict_reason": conflict_reason,
+    }
+
+
 def _heuristic_gap(candidate_id: str, gap_type: str, key_path: str, seed_reference: str, feature_area: str) -> dict[str, Any]:
+    execution_context = default_execution_context()
     return {
         "schema_version": CURRENT_SCHEMA_VERSION,
         "candidate_id": candidate_id,
@@ -608,7 +943,8 @@ def _heuristic_gap(candidate_id: str, gap_type: str, key_path: str, seed_referen
         "initial_confidence": "low",
         "seed_reference": seed_reference,
         "required_followup": "triage",
-        "execution_context": default_execution_context(),
+        "execution_context": execution_context,
+        **build_sku_awareness_for_key_path(key_path, execution_context),
     }
 
 
@@ -724,8 +1060,9 @@ def required_capabilities_for_runner_entry(lane_name: str, tweak_id: str, runner
     return list(DEFAULT_REQUIRED_CAPABILITIES_BY_LANE.get(lane_name, []))
 
 
-def score_candidate(record: dict[str, Any], audit: dict[str, Any] | None = None) -> dict[str, Any]:
+def score_candidate(record: dict[str, Any], audit: dict[str, Any] | None = None, full_evidence: dict[str, Any] | None = None) -> dict[str, Any]:
     audit = audit or {}
+    full_evidence = full_evidence or {}
     decision = record.get("decision") or {}
     tweak_id = str(record.get("tweak_id") or record.get("record_id") or "")
     target = primary_target(record)
@@ -736,7 +1073,7 @@ def score_candidate(record: dict[str, Any], audit: dict[str, Any] | None = None)
     freshness = evidence_freshness(record, reproducibility_manifest())
     tested_build = str(freshness.get("os_build") or "").strip()
     current_build = str((reproducibility_manifest() or {}).get("os_build") or "").strip()
-    stale_build = bool(tested_build and current_build and tested_build != current_build)
+    stale_build = (builds_since(current_build, tested_build) or 0) >= STALE_BUILD_THRESHOLD
 
     static_items = [
         item
@@ -802,7 +1139,9 @@ def score_candidate(record: dict[str, Any], audit: dict[str, Any] | None = None)
         )
         if present
     )
-    runtime_evidence_strength = min(5, max(1, runtime_hits + 1))
+    negative_evidence = negative_evidence_projection(full_evidence, record, audit)
+    negative_penalty = 2 if negative_evidence.get("signal_strength") == "strong" else 1 if negative_evidence.get("signal_strength") == "medium" else 0
+    runtime_evidence_strength = min(5, max(1, runtime_hits + 1 - negative_penalty))
 
     rollback_clarity = 5 if restore_story_known(record) else 2
 
@@ -877,8 +1216,11 @@ def bench_results_projection(full_evidence: dict[str, Any], record: dict[str, An
 def verification_environment_projection(record: dict[str, Any], full_evidence: dict[str, Any], execution_context: dict[str, Any]) -> dict[str, Any]:
     freshness = evidence_freshness(record, reproducibility_manifest())
     reproducibility = full_evidence.get("reproducibility") or {}
+    build_sku = build_sku_awareness(record, execution_context)
     return {
         "os_build": freshness.get("os_build"),
+        "os_edition": build_sku.get("os_edition"),
+        "architecture": build_sku.get("architecture"),
         "vm_name": reproducibility.get("vm_name"),
         "baseline_snapshot": reproducibility.get("baseline_snapshot"),
         "backend_id": execution_context.get("backend_id"),
@@ -925,16 +1267,15 @@ def evaluate_candidate_gate(
     missing_layer = str(audit.get("next_missing_layer") or next_missing_layer(record))
     compatibility_mode = "native" if CURRENT_SCHEMA_VERSION in SUPPORTED_SCHEMA_VERSIONS else "unsupported"
     record_status = str(record.get("record_status") or "").strip().lower()
+    execution_context = default_execution_context(backend_id)
     freshness = evidence_freshness(record, reproducibility_manifest())
+    freshness_status = freshness_status_projection(record, execution_context, evaluated_at=evaluated_at)
     tested_build = str(freshness.get("os_build") or "").strip()
     current_build = str((reproducibility_manifest() or {}).get("os_build") or "").strip()
-    stale_build = bool(tested_build and current_build and tested_build != current_build)
-    evaluation_time = parse_utc(evaluated_at) or datetime.now(timezone.utc)
-    last_verified_at = parse_utc(str(record.get("last_reviewed_utc") or ""))
-    stale_age = bool(last_verified_at and (evaluation_time - last_verified_at) >= timedelta(days=STALE_REVALIDATION_DAYS))
     rollback_status = rollback_verification_projection(full_evidence, record)
     bench_results = bench_results_projection(full_evidence, record, audit)
-    score_breakdown = score_candidate(record, audit)
+    negative_evidence = negative_evidence_projection(full_evidence, record, audit, rollback_status, bench_results)
+    score_breakdown = score_candidate(record, audit, full_evidence)
     documentation_status = documentation_status_projection(record)
     evidence_status = evidence_status_projection(record, audit)
 
@@ -955,6 +1296,12 @@ def evaluate_candidate_gate(
         blocker_set.add("rollback-failed")
     elif bool_value(decision.get("apply_allowed")) and not rollback_status.get("rollback_verified"):
         blocker_set.add("rollback-unverified")
+    if "functional-no-effect" in (negative_evidence.get("signals") or []):
+        blocker_set.add("functional-no-effect")
+    if "bench-failed-safety" in (negative_evidence.get("signals") or []):
+        blocker_set.add("bench-failed-safety")
+    if any(signal in {"procmon-no-hit", "etw-no-hit-debugger-no-call"} for signal in (negative_evidence.get("signals") or [])):
+        blocker_set.add("no-runtime-proof")
     if bench_results.get("bench_required") and not bench_results.get("executed"):
         blocker_set.add("bench-not-run")
     blocker_set.update(_gate_layer_blockers(missing_layer))
@@ -964,7 +1311,7 @@ def evaluate_candidate_gate(
         for blocker in blocker_set
         if blocker not in {"stale-evidence"}
     )
-    stale_revalidation = stale_build or stale_age
+    stale_revalidation = bool(freshness_status.get("revalidation_needed"))
 
     if record_status == "deprecated" or "archived" in blocker_set:
         state = "rejected"
@@ -1008,12 +1355,16 @@ def evaluate_candidate_gate(
         "evidence_status": evidence_status,
         "rollback_status": rollback_status,
         "bench_status": bench_results,
+        "negative_evidence_status": negative_evidence,
+        "freshness_status": freshness_status,
         "verification_context": {
             "backend_id": backend_id,
             "current_build": current_build,
             "tested_build": tested_build,
             "last_verified_at": record.get("last_reviewed_utc"),
-            "stale_age_days": (evaluation_time - last_verified_at).days if last_verified_at else None,
+            "stale_reason": freshness_status.get("stale_reason"),
+            "revalidation_needed": freshness_status.get("revalidation_needed"),
+            "last_known_good_build": freshness_status.get("last_known_good_build"),
         },
     }
 
@@ -1066,6 +1417,8 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
     rollback_status = rollback_verification_projection(full_evidence, record)
     before_after = before_after_projection(full_evidence)
     bench_results = bench_results_projection(full_evidence, record, audit)
+    build_sku = build_sku_awareness(record, execution_context, backend_id)
+    negative_evidence = negative_evidence_projection(full_evidence, record, audit, rollback_status, bench_results)
 
     return {
         "schema_version": CURRENT_SCHEMA_VERSION,
@@ -1085,11 +1438,17 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
         "record_promotion_allowed": gate["record_promotion_allowed"],
         "tweak_ingest_allowed": gate["tweak_ingest_allowed"],
         "tweak_origin": gate["tweak_origin"],
+        "os_build": build_sku.get("os_build"),
+        "os_edition": build_sku.get("os_edition"),
+        "architecture": build_sku.get("architecture"),
+        "elevation_context": build_sku.get("elevation_context"),
+        "machine_user_scope": build_sku.get("machine_user_scope"),
+        "build_sku_awareness": build_sku,
         "gate_result": gate,
         "evidence_freshness": freshness,
         "last_verified_at": record.get("last_reviewed_utc"),
         "verification_environment": verification_environment_projection(record, full_evidence, execution_context),
-        "negative_evidence": full_evidence.get("negative_evidence") or {},
+        "negative_evidence": negative_evidence,
         "before_after": before_after,
         "source_enrichment": source_enrichment_projection(record),
         "bench_results": bench_results,
@@ -1098,6 +1457,7 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
         "evidence_status": gate["evidence_status"],
         "rollback_status": rollback_status,
         "rollback_verification": rollback_status,
+        "freshness_status": gate.get("freshness_status"),
         "verification_context": {
             "record_id": record_id,
             "tweak_id": tweak_id,
@@ -1108,7 +1468,104 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
     }
 
 
+def should_trigger_sibling_discovery(candidate: dict[str, Any]) -> bool:
+    state = str(candidate.get("promotion_state") or candidate.get("state") or "").strip()
+    return state in {"promotion-eligible", "promoted"}
+
+
+def sibling_expansion_candidates(
+    records: list[dict[str, Any]],
+    audit_map: dict[str, dict[str, Any]] | None = None,
+    gate_map: dict[str, dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    audit_map = audit_map or {}
+    gate_map = gate_map or {}
+    discovered_paths: set[str] = set()
+    emitted_ids: set[str] = set()
+    results: list[dict[str, Any]] = []
+
+    for record in records:
+        seed = discovery_seed_from_record(record)
+        key_path = str(seed.get("key_path") or "").strip()
+        if key_path:
+            discovered_paths.add(key_path)
+
+    def emit_candidate(record: dict[str, Any], key_path: str, reason: str) -> None:
+        if not key_path or key_path in discovered_paths:
+            return
+        candidate_id = f"sibling::{reason}::{key_path}"
+        if candidate_id in emitted_ids:
+            return
+        emitted_ids.add(candidate_id)
+        execution_context = default_execution_context()
+        results.append(
+            {
+                "schema_version": CURRENT_SCHEMA_VERSION,
+                "candidate_id": candidate_id,
+                "discovery_source": "sibling_expansion",
+                "discovery_reason": reason,
+                "feature_area": record_feature_area(record),
+                "key_path": key_path,
+                "value_name": None,
+                "value_type": None,
+                "registry_clue": f"sibling expansion from {record.get('record_id') or record.get('tweak_id')}",
+                "initial_confidence": "low",
+                "seed_reference": f"research/records/{record.get('record_id') or record.get('tweak_id')}.json",
+                "required_followup": "triage",
+                "execution_context": execution_context,
+                **build_sku_awareness_for_key_path(key_path, execution_context),
+            }
+        )
+
+    for record in records:
+        record_id = str(record.get("record_id") or record.get("tweak_id") or "")
+        gate = gate_map.get(record_id) or derive_promotion_state(record, audit_map.get(record_id, {}))
+        if not should_trigger_sibling_discovery(gate):
+            continue
+        key_path = str(primary_target(record).get("path") or "").strip()
+        if not key_path:
+            continue
+
+        if key_path.startswith("HKLM\\"):
+            emit_candidate(record, key_path.replace("HKLM\\", "HKCU\\", 1), "missing_hkcu_analog")
+        elif key_path.startswith("HKCU\\"):
+            emit_candidate(record, key_path.replace("HKCU\\", "HKLM\\", 1), "missing_hklm_analog")
+
+        if "CurrentVersion" in key_path:
+            emit_candidate(record, key_path.replace("CurrentVersion", "Policies"), "missing_policy_analog")
+        if "\\Policies\\" in key_path:
+            emit_candidate(record, key_path.replace("\\Policies\\", "\\CurrentVersion\\"), "missing_currentversion_analog")
+
+        parent = "\\".join(part for part in key_path.split("\\")[:-1] if part)
+        if parent and not key_path.endswith("\\Policies"):
+            emit_candidate(record, f"{parent}\\Policies", "missing_sibling_branch")
+
+        services_match = re.search(r"(HKLM\\System\\CurrentControlSet\\Services\\[^\\]+)(?:\\.*)?$", key_path, flags=re.IGNORECASE)
+        if services_match:
+            service_root = services_match.group(1)
+            if not key_path.lower().endswith("\\parameters"):
+                emit_candidate(record, f"{service_root}\\Parameters", "service_backed_branch")
+
+        relation_match = re.search(r"HKCR\\(CLSID|AppID|Interface)\\(\{[^\\]+\})", key_path, flags=re.IGNORECASE)
+        if relation_match:
+            relation_kind = relation_match.group(1).upper()
+            guid = relation_match.group(2)
+            for sibling_kind in ("CLSID", "AppID", "Interface"):
+                if sibling_kind == relation_kind:
+                    continue
+                emit_candidate(record, f"HKCR\\{sibling_kind}\\{guid}", "com_relation")
+
+    return results
+
+
 def build_queue_entry(candidate: dict[str, Any], state: str, blockers: list[str] | None = None, required_capabilities: list[str] | None = None, next_lane: str | None = None, linked_record_id: str | None = None, gate_result: dict[str, Any] | None = None) -> dict[str, Any]:
+    build_sku = {
+        "os_build": candidate.get("os_build"),
+        "os_edition": candidate.get("os_edition"),
+        "architecture": candidate.get("architecture"),
+        "elevation_context": candidate.get("elevation_context"),
+        "machine_user_scope": candidate.get("machine_user_scope"),
+    }
     return {
         **candidate,
         "state": state,
@@ -1117,6 +1574,8 @@ def build_queue_entry(candidate: dict[str, Any], state: str, blockers: list[str]
         "next_lane": next_lane or candidate.get("required_followup") or "triage",
         "linked_record_id": linked_record_id,
         "last_evaluator_result": gate_result,
+        "build_sku_awareness": build_sku,
+        **build_sku,
         "updated_utc": now_utc(),
     }
 
