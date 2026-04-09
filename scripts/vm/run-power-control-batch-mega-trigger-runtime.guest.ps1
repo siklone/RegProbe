@@ -24,6 +24,7 @@ $ErrorActionPreference = 'Stop'
 $traceName = 'RegProbeMegaTrace'
 $etlPath = Join-Path $GuestRoot 'mega-trace.etl'
 $csvPath = Join-Path $GuestRoot 'mega-trace.csv'
+$xmlPath = Join-Path $GuestRoot 'mega-trace.xml'
 $runLogPath = Join-Path $GuestRoot 'guest-run.log'
 
 function Write-JsonFile {
@@ -281,7 +282,7 @@ function Get-ActiveSchemeGuid {
 
 function Start-Trace {
     Stop-TraceBestEffort
-    foreach ($path in @($etlPath, $csvPath)) {
+    foreach ($path in @($etlPath, $csvPath, $xmlPath)) {
         if (Test-Path -LiteralPath $path) {
             Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
         }
@@ -761,6 +762,194 @@ function Get-TraceLinesFromCsv {
     return @($lines)
 }
 
+function Normalize-RegistryPathToken {
+    param([string]$Value)
+
+    if ([string]::IsNullOrWhiteSpace($Value)) {
+        return $null
+    }
+
+    $normalized = [string]$Value
+    $normalized = $normalized -replace '^\\\\REGISTRY\\\\MACHINE', 'HKLM'
+    $normalized = $normalized -replace '^\\\\REGISTRY\\\\USER', 'HKU'
+    $normalized = $normalized -replace '^HKEY_LOCAL_MACHINE', 'HKLM'
+    $normalized = $normalized -replace '^HKEY_CURRENT_USER', 'HKCU'
+    $normalized = $normalized -replace '^HKEY_CLASSES_ROOT', 'HKCR'
+    $normalized = $normalized -replace '^HKEY_USERS', 'HKU'
+    return $normalized
+}
+
+function Normalize-RegistryOperationToken {
+    param([string]$Value)
+
+    $text = [string]$Value
+    if ([string]::IsNullOrWhiteSpace($text)) {
+        return $null
+    }
+
+    if ($text -match 'RegQueryValue|QueryValueKey|CmpQueryValueKey|NtQueryValueKey') {
+        return 'RegQueryValue'
+    }
+    if ($text -match 'RegSetValue|SetValueKey|CmpSetValueKey|NtSetValueKey') {
+        return 'RegSetValue'
+    }
+    if ($text -match 'RegCreateKey|CreateKey|NtCreateKey') {
+        return 'RegCreateKey'
+    }
+    if ($text -match 'RegDeleteValue|DeleteValueKey|NtDeleteValueKey') {
+        return 'RegDeleteValue'
+    }
+    if ($text -match 'RegDeleteKey|DeleteKey|NtDeleteKey') {
+        return 'RegDeleteKey'
+    }
+
+    return $text
+}
+
+function Invoke-TracerptXmlParse {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$TracePath,
+        [Parameter(Mandatory = $true)]
+        [string]$XmlOutputPath,
+        [int]$Attempts = 2,
+        [int]$TimeoutSeconds = 180
+    )
+
+    $attemptLog = @()
+    for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
+        if (Test-Path -LiteralPath $XmlOutputPath) {
+            Remove-Item -LiteralPath $XmlOutputPath -Force -ErrorAction SilentlyContinue
+        }
+
+        $result = Invoke-CmdCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($TracePath, '-o', $XmlOutputPath, '-of', 'XML', '-y') -TimeoutSeconds $TimeoutSeconds
+        $xmlExists = Test-Path -LiteralPath $XmlOutputPath
+        $xmlLength = if ($xmlExists) { (Get-Item -LiteralPath $XmlOutputPath).Length } else { 0 }
+        $attemptLog += ,([pscustomobject][ordered]@{
+                attempt = $attempt
+                exit_code = $result.exit_code
+                timed_out = $result.timed_out
+                xml_exists = $xmlExists
+                xml_length = $xmlLength
+                stderr = $result.stderr
+            })
+
+        if (-not $result.timed_out -and $result.exit_code -eq 0 -and $xmlExists -and $xmlLength -gt 0) {
+            return [ordered]@{
+                success = $true
+                attempt = $attempt
+                exit_code = $result.exit_code
+                timed_out = $result.timed_out
+                xml_exists = $xmlExists
+                xml_length = $xmlLength
+                stdout = $result.stdout
+                stderr = $result.stderr
+                attempts = @($attemptLog)
+            }
+        }
+
+        if ($attempt -lt $Attempts) {
+            Start-Sleep -Seconds 3
+        }
+    }
+
+    $lastAttempt = @($attemptLog)[@($attemptLog).Count - 1]
+    return [ordered]@{
+        success = $false
+        attempt = $lastAttempt.attempt
+        exit_code = $lastAttempt.exit_code
+        timed_out = $lastAttempt.timed_out
+        xml_exists = $lastAttempt.xml_exists
+        xml_length = $lastAttempt.xml_length
+        stdout = ''
+        stderr = $lastAttempt.stderr
+        attempts = @($attemptLog)
+    }
+}
+
+function Get-TraceLinesFromXml {
+    param([string]$Path)
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        return @()
+    }
+
+    try {
+        $xml = New-Object System.Xml.XmlDocument
+        $xml.Load($Path)
+    }
+    catch {
+        return @()
+    }
+
+    $lines = New-Object System.Collections.Generic.List[string]
+    $events = $xml.SelectNodes('//*[local-name()="Event"]')
+    foreach ($event in @($events)) {
+        $provider = $null
+        $eventId = $null
+        $processName = $null
+        $operation = $null
+        $keyPath = $null
+        $valueName = $null
+
+        $providerNode = $event.SelectSingleNode('.//*[local-name()="Provider"]')
+        if ($providerNode) {
+            $guidAttr = $providerNode.Attributes['Guid']
+            $nameAttr = $providerNode.Attributes['Name']
+            if ($guidAttr) {
+                $provider = [string]$guidAttr.Value
+            }
+            if ([string]::IsNullOrWhiteSpace($provider)) {
+                if ($nameAttr) {
+                    $provider = [string]$nameAttr.Value
+                }
+            }
+        }
+
+        $eventIdNode = $event.SelectSingleNode('.//*[local-name()="EventID"]')
+        if ($eventIdNode) {
+            $eventId = [string]$eventIdNode.InnerText
+        }
+
+        $dataNodes = $event.SelectNodes('.//*[local-name()="Data"]')
+        foreach ($node in @($dataNodes)) {
+            $nameAttr = $node.Attributes['Name']
+            $name = if ($nameAttr) { [string]$nameAttr.Value } else { '' }
+            $value = [string]$node.InnerText
+            switch -Regex ($name) {
+                '^(KeyName|PathName|Path|KeyPath)$' {
+                    $keyPath = Normalize-RegistryPathToken -Value $value
+                }
+                '^(ValueName|Value|Name)$' {
+                    if (-not [string]::IsNullOrWhiteSpace($value) -and $value -notmatch '\\') {
+                        $valueName = $value
+                    }
+                }
+                '^(ProcessName|Image)$' {
+                    $processName = $value
+                }
+                '^(Operation)$' {
+                    $operation = Normalize-RegistryOperationToken -Value $value
+                }
+            }
+        }
+
+        $parts = New-Object System.Collections.Generic.List[string]
+        if (-not [string]::IsNullOrWhiteSpace($provider)) { $parts.Add(("provider={0}" -f $provider)) }
+        if (-not [string]::IsNullOrWhiteSpace($eventId)) { $parts.Add(("event_id={0}" -f $eventId)) }
+        if (-not [string]::IsNullOrWhiteSpace($processName)) { $parts.Add(("process={0}" -f $processName)) }
+        if (-not [string]::IsNullOrWhiteSpace($operation)) { $parts.Add(("operation={0}" -f $operation)) }
+        if (-not [string]::IsNullOrWhiteSpace($keyPath)) { $parts.Add(("key={0}" -f $keyPath)) }
+        if (-not [string]::IsNullOrWhiteSpace($valueName)) { $parts.Add(("value={0}" -f $valueName)) }
+
+        if ($parts.Count -gt 0) {
+            $lines.Add(($parts -join ' '))
+        }
+    }
+
+    return @($lines)
+}
+
 function Get-BinaryMatchCount {
     param(
         [byte[]]$Bytes,
@@ -915,7 +1104,7 @@ $triggerNames = @($manifest.triggers)
 
 try {
     if ($Phase -eq 'arm') {
-        foreach ($path in @($etlPath, $csvPath, $SummaryPath, $ResultsPath)) {
+        foreach ($path in @($etlPath, $csvPath, $xmlPath, $SummaryPath, $ResultsPath)) {
             if (Test-Path -LiteralPath $path) {
                 Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
             }
@@ -1013,12 +1202,35 @@ try {
 
     $traceLines = @()
     $parserSource = 'tracerpt-csv'
+    $xmlTracerpt = $null
     $tracerpt = Invoke-TracerptParse -TracePath $traceArtifactPath -CsvOutputPath $csvPath -Attempts 2 -TimeoutSeconds 180
     if ($tracerpt.success) {
         $traceLines = Get-TraceLinesFromCsv
         Write-RunLog -Message ("trace-parsed parser=tracerpt attempt={0} csv_exists={1} csv_length={2}" -f $tracerpt.attempt, (Test-Path -LiteralPath $csvPath), $tracerpt.csv_length)
+        $csvProbe = Parse-Results -Candidates $candidates -Lines $traceLines -CsvExists (Test-Path -LiteralPath $csvPath) -ParserSource $parserSource
+        if (($csvProbe.csv_line_count -eq 0 -and $csvProbe.path_line_count -eq 0) -or (@($csvProbe.candidates | Where-Object { $_.exact_line_count -gt 0 -or $_.exact_query_hits -gt 0 }).Count -eq 0 -and $tracerpt.csv_length -gt 0)) {
+            $xmlTracerpt = Invoke-TracerptXmlParse -TracePath $traceArtifactPath -XmlOutputPath $xmlPath -Attempts 2 -TimeoutSeconds 180
+            if ($xmlTracerpt.success) {
+                $traceLines = Get-TraceLinesFromXml -Path $xmlPath
+                if (@($traceLines).Count -gt 0) {
+                    $parserSource = 'tracerpt-xml-fallback'
+                    Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
+                }
+            }
+        }
     }
     else {
+        $xmlTracerpt = Invoke-TracerptXmlParse -TracePath $traceArtifactPath -XmlOutputPath $xmlPath -Attempts 2 -TimeoutSeconds 180
+        if ($xmlTracerpt.success) {
+            $traceLines = Get-TraceLinesFromXml -Path $xmlPath
+            if (@($traceLines).Count -gt 0) {
+                $parserSource = 'tracerpt-xml-fallback'
+                Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
+            }
+        }
+    }
+
+    if (@($traceLines).Count -eq 0) {
         $parserSource = 'etl-binary-fallback'
         Write-RunLog -Message ("trace-parse-fallback parser=etl-binary timed_out={0} exit_code={1} csv_exists={2}" -f $tracerpt.timed_out, $tracerpt.exit_code, $tracerpt.csv_exists)
         $traceLines = Get-TraceLinesFromEtlBinary -Path $traceArtifactPath -Candidates $candidates
