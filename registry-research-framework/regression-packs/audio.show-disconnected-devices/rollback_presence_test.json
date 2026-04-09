@@ -1,0 +1,29 @@
+{
+  "pass": true,
+  "rollback_value_present": true,
+  "rollback_blocker_present": false,
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Default state not captured",
+      "label": "Default state not captured",
+      "applies_to": "Classic Sound control panel profiles where the value is absent",
+      "state_kind": "unknown",
+      "value": null,
+      "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+      "evidence_ids": [
+        "procmon-audio-show-disconnected-devices",
+        "runtime-audio-show-disconnected-devices-v31"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
+  }
+}

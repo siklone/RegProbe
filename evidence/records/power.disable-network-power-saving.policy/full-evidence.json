@@ -301,7 +301,7 @@
     "app_mapping_status": "matches-research",
     "next_missing_layer": "none",
     "debug_override_allowed": false,
-    "last_evaluated_at": "2026-04-09T01:58:29.547120Z",
+    "last_evaluated_at": "2026-04-09T03:33:00.225792Z",
     "score_breakdown": {
       "static_evidence_strength": 5,
       "runtime_evidence_strength": 1,
@@ -319,7 +319,14 @@
       "record_status": "validated",
       "has_validation_proof": true,
       "has_official_evidence": true,
-      "confidence": "high"
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
     },
     "evidence_status": {
       "evidence_count": 3,
@@ -348,13 +355,20 @@
           "ms-mmcss"
         ],
         "rollback_strategy": "restore_default"
-      }
+      },
+      "state_changed": null,
+      "apply_diff": null,
+      "restore_diff": null
     },
     "bench_status": {
       "bench_tier": "unknown",
       "bench_required": false,
       "bench_vm_capable": true,
       "bench_bare_metal_required": false,
+      "feature_area_group": "default",
+      "profiles": [
+        "functional_throughput"
+      ],
       "executed": false,
       "summary": null,
       "statistics": null,
@@ -371,6 +385,14 @@
       "signal_strength": "none",
       "runtime_negative": false,
       "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
     },
     "freshness_status": {
       "status": "fresh",
@@ -452,6 +474,8 @@
       "kind": "official-doc",
       "title": "Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading",
       "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+      "reference_type": "url",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
       "supports": [
         "path",
         "value",
@@ -467,6 +491,8 @@
       "kind": "official-doc",
       "title": "Microsoft Learn: Multimedia Class Scheduler Service",
       "location": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "reference_type": "url",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
       "supports": [
         "path",
         "value",
@@ -482,6 +508,8 @@
       "kind": "validation-proof",
       "title": "Validation proof",
       "location": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+      "reference_type": "url",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
       "supports": [
         "path",
         "behavior"
@@ -532,6 +560,10 @@
     "bench_required": false,
     "bench_vm_capable": true,
     "bench_bare_metal_required": false,
+    "feature_area_group": "default",
+    "profiles": [
+      "functional_throughput"
+    ],
     "executed": false,
     "summary": null,
     "statistics": null,
@@ -554,7 +586,14 @@
     "record_status": "validated",
     "has_validation_proof": true,
     "has_official_evidence": true,
-    "confidence": "high"
+    "confidence": "high",
+    "documentation_quality_pass": true,
+    "documentation_issues": [],
+    "documented_behavior": true,
+    "has_value_context": true,
+    "has_default_context": true,
+    "has_recommended_context": true,
+    "has_rollback_context": true
   },
   "evidence_status": {
     "evidence_count": 3,
@@ -583,7 +622,10 @@
         "ms-mmcss"
       ],
       "rollback_strategy": "restore_default"
-    }
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
   },
   "verification_context": {
     "record_id": "power.disable-network-power-saving.policy",
@@ -625,7 +667,10 @@
         "ms-mmcss"
       ],
       "rollback_strategy": "restore_default"
-    }
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
   },
   "freshness_status": {
     "status": "fresh",
@@ -641,5 +686,13 @@
       "current_build": "26100",
       "last_verified_at": "2026-03-31T00:00:00Z"
     }
+  },
+  "url_validation": {
+    "checked_url_count": 0,
+    "reachable_url_count": 0,
+    "dead_link_count": 0,
+    "dead_links": [],
+    "checked_urls": [],
+    "status": "not-run"
   }
 }

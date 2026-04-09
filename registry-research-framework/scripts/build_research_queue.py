@@ -28,6 +28,7 @@ from research_v36_lib import (
     load_json,
     load_json_if_exists,
     load_records,
+    load_url_validation_report,
     score_candidate,
     summarize_gap_analysis,
     summarize_queue,
@@ -78,13 +79,20 @@ def load_runtime_discovery_candidates() -> list[dict]:
     return results
 
 
-def queue_entries_from_records(records: list[dict], audit_map: dict[str, dict], runner_config: dict, backend_manifest: dict) -> list[dict]:
+def queue_entries_from_records(
+    records: list[dict],
+    audit_map: dict[str, dict],
+    runner_config: dict,
+    backend_manifest: dict,
+    url_validation_map: dict[str, dict],
+) -> list[dict]:
     entries: list[dict] = []
     for record in records:
         seed = discovery_seed_from_record(record)
         audit = audit_map.get(str(record.get("record_id") or record.get("tweak_id") or ""), {})
-        full_evidence = load_full_evidence(str(record.get("record_id") or record.get("tweak_id") or ""))
-        gate = evaluate_candidate_gate(record, audit, full_evidence)
+        record_id = str(record.get("record_id") or record.get("tweak_id") or "")
+        full_evidence = load_full_evidence(record_id)
+        gate = evaluate_candidate_gate(record, audit, full_evidence, url_validation_status=url_validation_map.get(record_id))
         gate["score_breakdown"] = score_candidate(record, audit, full_evidence)
         runner_lane = "runtime"
         next_layer = gate.get("next_missing_layer") or "decision-gate"
@@ -207,9 +215,10 @@ def main() -> int:
     audit_map = load_audit_entries()
     runner_config = load_runner_config()
     backend_manifest = load_backend_capabilities(DEFAULT_BACKEND_ID)
+    url_validation_map = load_url_validation_report()
     runtime_discovery_candidates = load_runtime_discovery_candidates()
 
-    record_entries = queue_entries_from_records(records, audit_map, runner_config, backend_manifest)
+    record_entries = queue_entries_from_records(records, audit_map, runner_config, backend_manifest, url_validation_map)
     gate_map = {
         str(entry.get("linked_record_id") or entry.get("record_id") or entry.get("candidate_id") or ""): (entry.get("last_evaluator_result") or {})
         for entry in record_entries

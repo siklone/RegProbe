@@ -246,7 +246,7 @@
     "app_mapping_status": "matches-research",
     "next_missing_layer": "decision-gate",
     "debug_override_allowed": false,
-    "last_evaluated_at": "2026-04-09T01:58:29.546067Z",
+    "last_evaluated_at": "2026-04-09T03:33:00.224538Z",
     "score_breakdown": {
       "static_evidence_strength": 5,
       "runtime_evidence_strength": 4,
@@ -264,7 +264,14 @@
       "record_status": "validated",
       "has_validation_proof": true,
       "has_official_evidence": true,
-      "confidence": "high"
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
     },
     "evidence_status": {
       "evidence_count": 12,
@@ -294,13 +301,20 @@
           "vm-cpu-idle-bundle-probe"
         ],
         "rollback_strategy": "restore_default"
-      }
+      },
+      "state_changed": null,
+      "apply_diff": null,
+      "restore_diff": null
     },
     "bench_status": {
       "bench_tier": "unknown",
       "bench_required": false,
       "bench_vm_capable": true,
       "bench_bare_metal_required": false,
+      "feature_area_group": "default",
+      "profiles": [
+        "functional_throughput"
+      ],
       "executed": true,
       "summary": "Runner failed with exit code 1. See evidence/records/power.disable-cpu-idle-states/behavior-lane.log.",
       "statistics": null,
@@ -326,6 +340,14 @@
       "signal_strength": "none",
       "runtime_negative": false,
       "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
     },
     "freshness_status": {
       "status": "fresh",
@@ -416,6 +438,8 @@
       "kind": "official-doc",
       "title": "Microsoft Learn: PPM Notifications",
       "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/ppm-notifications",
+      "reference_type": "url",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/ppm-notifications",
       "supports": [
         "behavior",
         "side-effects",
@@ -431,6 +455,8 @@
       "kind": "repo-doc",
       "title": "Repo power notes",
       "location": "Docs/power/power.md",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "ui-mapping",
         "app-mismatch"
@@ -444,6 +470,8 @@
       "kind": "ghidra-trace",
       "title": "Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes",
       "location": "evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "version-scope",
         "open-question"
@@ -457,6 +485,8 @@
       "kind": "validation-proof",
       "title": "Validation proof",
       "location": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "path",
         "behavior"
@@ -471,6 +501,10 @@
     "bench_required": false,
     "bench_vm_capable": true,
     "bench_bare_metal_required": false,
+    "feature_area_group": "default",
+    "profiles": [
+      "functional_throughput"
+    ],
     "executed": true,
     "summary": "Runner failed with exit code 1. See evidence/records/power.disable-cpu-idle-states/behavior-lane.log.",
     "statistics": null,
@@ -493,7 +527,14 @@
     "record_status": "validated",
     "has_validation_proof": true,
     "has_official_evidence": true,
-    "confidence": "high"
+    "confidence": "high",
+    "documentation_quality_pass": true,
+    "documentation_issues": [],
+    "documented_behavior": true,
+    "has_value_context": true,
+    "has_default_context": true,
+    "has_recommended_context": true,
+    "has_rollback_context": true
   },
   "evidence_status": {
     "evidence_count": 12,
@@ -523,7 +564,10 @@
         "vm-cpu-idle-bundle-probe"
       ],
       "rollback_strategy": "restore_default"
-    }
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
   },
   "verification_context": {
     "record_id": "power.disable-cpu-idle-states",
@@ -566,7 +610,10 @@
         "vm-cpu-idle-bundle-probe"
       ],
       "rollback_strategy": "restore_default"
-    }
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
   },
   "freshness_status": {
     "status": "fresh",
@@ -582,5 +629,13 @@
       "current_build": "26100",
       "last_verified_at": "2026-03-29T02:20:00+03:00"
     }
+  },
+  "url_validation": {
+    "checked_url_count": 0,
+    "reachable_url_count": 0,
+    "dead_link_count": 0,
+    "dead_links": [],
+    "checked_urls": [],
+    "status": "not-run"
   }
 }

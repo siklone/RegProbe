@@ -258,7 +258,7 @@
     "app_mapping_status": "matches-research",
     "next_missing_layer": "none",
     "debug_override_allowed": false,
-    "last_evaluated_at": "2026-04-09T01:58:29.533278Z",
+    "last_evaluated_at": "2026-04-09T03:33:00.209244Z",
     "score_breakdown": {
       "static_evidence_strength": 4,
       "runtime_evidence_strength": 2,
@@ -276,7 +276,14 @@
       "record_status": "validated",
       "has_validation_proof": true,
       "has_official_evidence": false,
-      "confidence": "high"
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
     },
     "evidence_status": {
       "evidence_count": 3,
@@ -304,13 +311,20 @@
           "procmon-audio-show-hidden-devices"
         ],
         "rollback_strategy": "restore_default"
-      }
+      },
+      "state_changed": null,
+      "apply_diff": null,
+      "restore_diff": null
     },
     "bench_status": {
       "bench_tier": "unknown",
       "bench_required": false,
       "bench_vm_capable": true,
       "bench_bare_metal_required": false,
+      "feature_area_group": "default",
+      "profiles": [
+        "functional_throughput"
+      ],
       "executed": false,
       "summary": null,
       "statistics": null,
@@ -330,6 +344,14 @@
       "signal_strength": "none",
       "runtime_negative": false,
       "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
     },
     "freshness_status": {
       "status": "fresh",
@@ -414,6 +436,8 @@
       "kind": "ghidra-headless",
       "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
       "location": "evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "path",
         "behavior",
@@ -428,6 +452,8 @@
       "kind": "validation-proof",
       "title": "Validation proof",
       "location": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "path",
         "behavior"
@@ -442,6 +468,10 @@
     "bench_required": false,
     "bench_vm_capable": true,
     "bench_bare_metal_required": false,
+    "feature_area_group": "default",
+    "profiles": [
+      "functional_throughput"
+    ],
     "executed": false,
     "summary": null,
     "statistics": null,
@@ -464,7 +494,14 @@
     "record_status": "validated",
     "has_validation_proof": true,
     "has_official_evidence": false,
-    "confidence": "high"
+    "confidence": "high",
+    "documentation_quality_pass": true,
+    "documentation_issues": [],
+    "documented_behavior": true,
+    "has_value_context": true,
+    "has_default_context": true,
+    "has_recommended_context": true,
+    "has_rollback_context": true
   },
   "evidence_status": {
     "evidence_count": 3,
@@ -492,7 +529,10 @@
         "procmon-audio-show-hidden-devices"
       ],
       "rollback_strategy": "restore_default"
-    }
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
   },
   "verification_context": {
     "record_id": "audio.show-hidden-devices",
@@ -533,7 +573,10 @@
         "procmon-audio-show-hidden-devices"
       ],
       "rollback_strategy": "restore_default"
-    }
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
   },
   "freshness_status": {
     "status": "fresh",
@@ -549,5 +592,13 @@
       "current_build": "26100",
       "last_verified_at": "2026-03-27T11:06:26Z"
     }
+  },
+  "url_validation": {
+    "checked_url_count": 0,
+    "reachable_url_count": 0,
+    "dead_link_count": 0,
+    "dead_links": [],
+    "checked_urls": [],
+    "status": "not-run"
   }
 }

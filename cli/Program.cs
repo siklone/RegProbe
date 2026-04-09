@@ -131,16 +131,22 @@ class Program
         var applyOption = new Option<bool>("--apply", "Actually apply changes (default: dry-run)");
         var noVerifyOption = new Option<bool>("--no-verify", "Skip verify step after apply");
         var noRollbackOption = new Option<bool>("--no-rollback", "Do not rollback on failure");
+        var overrideOption = new Option<bool>("--override", "Allow contributor/debug override for gated research-derived candidates");
+        var overrideReasonOption = new Option<string?>("--reason", "Optional reason for a contributor/debug override");
         applyCommand.AddArgument(tweakIdArg);
         applyCommand.AddOption(applyOption);
         applyCommand.AddOption(noVerifyOption);
         applyCommand.AddOption(noRollbackOption);
+        applyCommand.AddOption(overrideOption);
+        applyCommand.AddOption(overrideReasonOption);
         applyCommand.SetHandler(async context =>
         {
             var tweakId = context.ParseResult.GetValueForArgument(tweakIdArg);
             var apply = context.ParseResult.GetValueForOption(applyOption);
             var noVerify = context.ParseResult.GetValueForOption(noVerifyOption);
             var noRollback = context.ParseResult.GetValueForOption(noRollbackOption);
+            var overrideRequested = context.ParseResult.GetValueForOption(overrideOption);
+            var overrideReason = context.ParseResult.GetValueForOption(overrideReasonOption);
 
             var catalog = new TweakCatalogService();
             var promotionGateCatalog = new TweakPromotionGateCatalogService();
@@ -152,7 +158,8 @@ class Program
                 return;
             }
 
-            if (!EnsureCanRunTweak(catalog, tweak, promotionGateCatalog, out var error))
+            var applyDecision = promotionGateCatalog.EvaluateApplyRequest(tweakId, overrideRequested, overrideReason);
+            if (!EnsureCanRunTweak(catalog, tweak, promotionGateCatalog, applyDecision, out var error))
             {
                 Console.WriteLine(error);
                 context.ExitCode = 2;
@@ -180,12 +187,18 @@ class Program
         var revertCommand = new Command("revert", "Rollback a tweak (default: dry-run)");
         var revertIdArg = new Argument<string>("tweak-id", "ID of the tweak to revert");
         var revertApplyOption = new Option<bool>("--apply", "Actually rollback changes (default: dry-run)");
+        var revertOverrideOption = new Option<bool>("--override", "Allow contributor/debug override for gated research-derived candidates");
+        var revertOverrideReasonOption = new Option<string?>("--reason", "Optional reason for a contributor/debug override");
         revertCommand.AddArgument(revertIdArg);
         revertCommand.AddOption(revertApplyOption);
+        revertCommand.AddOption(revertOverrideOption);
+        revertCommand.AddOption(revertOverrideReasonOption);
         revertCommand.SetHandler(async context =>
         {
             var tweakId = context.ParseResult.GetValueForArgument(revertIdArg);
             var apply = context.ParseResult.GetValueForOption(revertApplyOption);
+            var overrideRequested = context.ParseResult.GetValueForOption(revertOverrideOption);
+            var overrideReason = context.ParseResult.GetValueForOption(revertOverrideReasonOption);
 
             var catalog = new TweakCatalogService();
             var promotionGateCatalog = new TweakPromotionGateCatalogService();
@@ -197,11 +210,17 @@ class Program
                 return;
             }
 
-            if (!EnsureCanRunTweak(catalog, tweak, promotionGateCatalog, out var error))
+            var rollbackDecision = promotionGateCatalog.EvaluateRollbackRequest(tweakId, overrideRequested, overrideReason);
+            if (!EnsureCanRunTweak(catalog, tweak, promotionGateCatalog, rollbackDecision, out var error))
             {
                 Console.WriteLine(error);
                 context.ExitCode = 2;
                 return;
+            }
+
+            foreach (var warning in rollbackDecision.Warnings)
+            {
+                Console.WriteLine($"Warning: {warning}");
             }
 
             Console.WriteLine($"Tweak: {tweak.Id} - {tweak.Name}");
@@ -312,84 +331,111 @@ class Program
         staleCommand.SetHandler(() =>
         {
             var catalog = new TweakPromotionGateCatalogService();
-            foreach (var entry in catalog.Catalog.Entries
-                         .Where(entry => string.Equals(entry.PromotionState, "revalidation-pending", StringComparison.OrdinalIgnoreCase)
-                                         || entry.PromotionBlockers.Any(blocker => string.Equals(blocker, "stale-evidence", StringComparison.OrdinalIgnoreCase)))
-                         .OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase))
+            foreach (var entry in catalog.ListRevalidationPending())
             {
                 Console.WriteLine($"{entry.TweakId} -> {entry.GatingReason}");
             }
         });
         researchCommand.AddCommand(staleCommand);
 
-        var regressionCommand = new Command("generate-regression-pack", "Generate a compact regression pack for a candidate");
-        var regressionIdArg = new Argument<string>("candidate-id", "Record or tweak id");
-        var outputOption = new Option<string?>("--output", "Optional output JSON path");
+        var revalidationCommand = new Command("show-revalidation-pending", "List candidates explicitly marked revalidation-pending");
+        revalidationCommand.SetHandler(() =>
+        {
+            var catalog = new TweakPromotionGateCatalogService();
+            foreach (var entry in catalog.ListRevalidationPending()
+                         .Where(entry => string.Equals(entry.PromotionState, "revalidation-pending", StringComparison.OrdinalIgnoreCase)))
+            {
+                Console.WriteLine($"{entry.TweakId} -> {entry.GatingReason}");
+            }
+        });
+        researchCommand.AddCommand(revalidationCommand);
+
+        var validateBatchCommand = new Command("validate-batch", "Validate invalid, undocumented, blocked, or missing-doc candidates");
+        var undocumentedOption = new Option<bool>("--undocumented", "Only show undocumented candidates");
+        var invalidOption = new Option<bool>("--invalid", "Only show invalid/schema-failing candidates");
+        var blockedStateOption = new Option<bool>("--blocked-state", "Only show blocked candidates");
+        var missingDocsOption = new Option<bool>("--missing-docs", "Only show documentation-quality failures");
+        validateBatchCommand.AddOption(undocumentedOption);
+        validateBatchCommand.AddOption(invalidOption);
+        validateBatchCommand.AddOption(blockedStateOption);
+        validateBatchCommand.AddOption(missingDocsOption);
+        validateBatchCommand.SetHandler(context =>
+        {
+            var args = new List<string>();
+            if (context.ParseResult.GetValueForOption(undocumentedOption))
+            {
+                args.Add("--undocumented");
+            }
+            if (context.ParseResult.GetValueForOption(invalidOption))
+            {
+                args.Add("--invalid");
+            }
+            if (context.ParseResult.GetValueForOption(blockedStateOption))
+            {
+                args.Add("--blocked-state");
+            }
+            if (context.ParseResult.GetValueForOption(missingDocsOption))
+            {
+                args.Add("--missing-docs");
+            }
+            args.Add("--emit-json");
+            context.ExitCode = RunResearchPythonScript("validate_research_batch.py", args);
+        });
+        researchCommand.AddCommand(validateBatchCommand);
+
+        var regressionCommand = new Command("generate-regression-pack", "Generate a regression pack for one candidate or all promotable candidates");
+        var regressionIdArg = new Argument<string?>("candidate-id", () => null, "Record or tweak id");
+        var regressionAllOption = new Option<bool>("--all", "Generate regression packs for all promotable candidates");
+        var regressionStateOption = new Option<string[]>("--state", "Restrict --all to one or more promotion states")
+        {
+            AllowMultipleArgumentsPerToken = true
+        };
+        var regressionLimitOption = new Option<int?>("--limit", "Optional max candidate count for --all");
+        var outputRootOption = new Option<string?>("--output-root", "Optional output root directory");
         regressionCommand.AddArgument(regressionIdArg);
-        regressionCommand.AddOption(outputOption);
+        regressionCommand.AddOption(regressionAllOption);
+        regressionCommand.AddOption(regressionStateOption);
+        regressionCommand.AddOption(regressionLimitOption);
+        regressionCommand.AddOption(outputRootOption);
         regressionCommand.SetHandler(context =>
         {
             var candidateId = context.ParseResult.GetValueForArgument(regressionIdArg);
-            var output = context.ParseResult.GetValueForOption(outputOption);
-            var catalog = new TweakPromotionGateCatalogService();
-            if (!catalog.TryResolve(candidateId, out var entry))
+            var allCandidates = context.ParseResult.GetValueForOption(regressionAllOption);
+            var states = context.ParseResult.GetValueForOption(regressionStateOption) ?? Array.Empty<string>();
+            var limit = context.ParseResult.GetValueForOption(regressionLimitOption);
+            var outputRoot = context.ParseResult.GetValueForOption(outputRootOption);
+            if (!allCandidates && string.IsNullOrWhiteSpace(candidateId))
             {
-                Console.WriteLine($"Candidate not found in promotion-gates.json: {candidateId}");
+                Console.WriteLine("Provide <candidate-id> or use --all.");
                 context.ExitCode = 1;
                 return;
             }
-
-            var auditEntry = FindEvidenceAuditEntry(candidateId);
-            var fullEvidence = LoadFullEvidence(entry.RecordId, entry.TweakId);
-            var outputPath = ResolveRegressionPackOutput(candidateId, output);
-            Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
-
-            var pack = new Dictionary<string, object?>
+            var args = new List<string>();
+            if (!string.IsNullOrWhiteSpace(candidateId))
             {
-                ["generated_utc"] = DateTimeOffset.UtcNow.ToString("O"),
-                ["candidate_id"] = entry.CandidateId,
-                ["record_id"] = entry.RecordId,
-                ["tweak_id"] = entry.TweakId,
-                ["schema_test"] = new
-                {
-                    promotion_gate_present = true,
-                    evaluator_version = entry.EvaluatorVersion,
-                    schema_compatibility_mode = entry.SchemaCompatibilityMode,
-                },
-                ["gate_test"] = new
-                {
-                    entry.TweakOrigin,
-                    entry.PromotionState,
-                    entry.PromotionBlockers,
-                    entry.RecordPromotionAllowed,
-                    entry.TweakIngestAllowed,
-                    entry.DebugOverrideAllowed,
-                },
-                ["docs_test"] = new
-                {
-                    audit_entry_present = auditEntry is not null,
-                    next_missing_layer = auditEntry?.GetValueOrDefault("next_missing_layer"),
-                    evidence_class = auditEntry?.GetValueOrDefault("evidence_class"),
-                },
-                ["before_after_test"] = new
-                {
-                    full_evidence_present = fullEvidence is not null,
-                    before_after = fullEvidence?["before_after"],
-                },
-                ["rollback_test"] = new
-                {
-                    restore_story_known = auditEntry?.GetValueOrDefault("restore_story_known"),
-                },
-                ["bench_profile_test"] = new
-                {
-                    score_breakdown = entry.ScoreBreakdown,
-                    bench_results = fullEvidence?["bench_results"],
-                },
-            };
-
-            File.WriteAllText(outputPath, JsonSerializer.Serialize(pack, JsonOptions));
-            Console.WriteLine(outputPath);
-            context.ExitCode = 0;
+                args.Add(candidateId);
+            }
+            if (allCandidates)
+            {
+                args.Add("--all");
+            }
+            foreach (var state in states.Where(state => !string.IsNullOrWhiteSpace(state)))
+            {
+                args.Add("--state");
+                args.Add(state);
+            }
+            if (limit is int max)
+            {
+                args.Add("--limit");
+                args.Add(max.ToString());
+            }
+            if (!string.IsNullOrWhiteSpace(outputRoot))
+            {
+                args.Add("--output-root");
+                args.Add(outputRoot);
+            }
+            args.Add("--emit-json");
+            context.ExitCode = RunResearchPythonScript("generate_regression_pack.py", args);
         });
         researchCommand.AddCommand(regressionCommand);
 
@@ -707,17 +753,17 @@ class Program
         Console.WriteLine($"  {step.Action}: {step.Result.Status} - {step.Result.Message}");
     }
 
-    private static bool EnsureCanRunTweak(ITweakCatalog catalog, ITweak tweak, TweakPromotionGateCatalogService promotionGateCatalog, out string error)
+    private static bool EnsureCanRunTweak(
+        ITweakCatalog catalog,
+        ITweak tweak,
+        TweakPromotionGateCatalogService promotionGateCatalog,
+        TweakMutationDecision mutationDecision,
+        out string error)
     {
         error = string.Empty;
-        var promotionGate = promotionGateCatalog.ResolveOrFallback(tweak.Id);
-        var mutationAllowed =
-            string.Equals(promotionGate.TweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(promotionGate.PromotionState, "promoted", StringComparison.OrdinalIgnoreCase)
-            || (ContributorMode.IsEnabled && promotionGate.DebugOverrideAllowed);
-
-        if (!mutationAllowed)
+        if (!mutationDecision.Allowed)
         {
+            var promotionGate = promotionGateCatalog.ResolveOrFallback(tweak.Id);
             error = $"Tweak is gated by research promotion state '{promotionGate.PromotionState}'. {promotionGate.GatingReason}";
             return false;
         }
@@ -774,6 +820,84 @@ class Program
 
         var docsPath = Path.Combine(AppContext.BaseDirectory, "Docs", relativePath.Replace('/', Path.DirectorySeparatorChar));
         return File.Exists(docsPath) ? docsPath : null;
+    }
+
+    private static int RunResearchPythonScript(string scriptName, IEnumerable<string> args)
+    {
+        var repoRoot = TryFindRepoRoot();
+        if (string.IsNullOrWhiteSpace(repoRoot))
+        {
+            Console.WriteLine("Could not locate the repository root for research automation.");
+            return 1;
+        }
+
+        var scriptPath = Path.Combine(
+            repoRoot,
+            "registry-research-framework",
+            "scripts",
+            scriptName.Replace('/', Path.DirectorySeparatorChar));
+        if (!File.Exists(scriptPath))
+        {
+            Console.WriteLine($"Research script not found: {scriptPath}");
+            return 1;
+        }
+
+        var launchers = new (string FileName, string[] Prefix)[]
+        {
+            ("python3", Array.Empty<string>()),
+            ("python", Array.Empty<string>()),
+            ("py", new[] { "-3" }),
+        };
+
+        foreach (var launcher in launchers)
+        {
+            try
+            {
+                using var process = new Process();
+                process.StartInfo = new ProcessStartInfo
+                {
+                    FileName = launcher.FileName,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WorkingDirectory = repoRoot,
+                };
+
+                foreach (var prefix in launcher.Prefix)
+                {
+                    process.StartInfo.ArgumentList.Add(prefix);
+                }
+
+                process.StartInfo.ArgumentList.Add(scriptPath);
+                foreach (var arg in args)
+                {
+                    process.StartInfo.ArgumentList.Add(arg);
+                }
+
+                process.Start();
+                var stdout = process.StandardOutput.ReadToEnd();
+                var stderr = process.StandardError.ReadToEnd();
+                process.WaitForExit();
+
+                if (!string.IsNullOrWhiteSpace(stdout))
+                {
+                    Console.WriteLine(stdout.TrimEnd());
+                }
+                if (!string.IsNullOrWhiteSpace(stderr))
+                {
+                    Console.Error.WriteLine(stderr.TrimEnd());
+                }
+
+                return process.ExitCode;
+            }
+            catch
+            {
+            }
+        }
+
+        Console.WriteLine("No supported Python launcher was available (python3, python, py -3).");
+        return 1;
     }
 
     private static Dictionary<string, object?>? FindEvidenceAuditEntry(string candidateId)

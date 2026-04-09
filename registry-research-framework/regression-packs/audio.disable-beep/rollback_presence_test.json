@@ -1,0 +1,26 @@
+{
+  "pass": true,
+  "rollback_value_present": true,
+  "rollback_blocker_present": false,
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Windows service baseline observed in guest",
+      "label": "Windows service baseline observed in guest",
+      "applies_to": "Windows systems exposing the Beep driver key",
+      "state_kind": "value",
+      "value": 1,
+      "rationale": "Guest baseline on Win25H2Clean was Start=1 and the reversible probe restored it to that value.",
+      "evidence_ids": [
+        "ms-services-registry-tree",
+        "runtime-beep-registry-diff"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  }
+}

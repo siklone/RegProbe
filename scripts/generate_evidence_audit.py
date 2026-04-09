@@ -109,7 +109,10 @@ def load_v31_artifact_refs(record_id: str) -> list[dict[str, Any]]:
     if not path.exists():
         return []
 
-    payload = load_json(path)
+    try:
+        payload = load_json(path)
+    except Exception:
+        return []
     artifact_refs = payload.get("artifact_refs") or []
     valid_refs: list[dict[str, Any]] = []
     for item in artifact_refs:
@@ -127,7 +130,10 @@ def load_v31_full_evidence(record_id: str) -> dict[str, Any] | None:
     path = v31_full_evidence_path(record_id)
     if not path.exists():
         return None
-    payload = load_json(path)
+    try:
+        payload = load_json(path)
+    except Exception:
+        return None
     return payload if isinstance(payload, dict) else None
 
 
@@ -137,6 +143,7 @@ def audit_surface_from_gate(record: dict[str, Any], promotion_gate: dict[str, An
     rollback_status = promotion_gate.get("rollback_status") or {}
     bench_status = promotion_gate.get("bench_status") or {}
     negative_status = promotion_gate.get("negative_evidence_status") or {}
+    url_validation = promotion_gate.get("url_validation_status") or {}
     verification_context = promotion_gate.get("verification_context") or {}
     build_sku = full_evidence.get("build_sku_awareness") or build_sku_awareness(record, default_execution_context())
     conflict_reason = negative_status.get("conflict_reason")
@@ -161,6 +168,7 @@ def audit_surface_from_gate(record: dict[str, Any], promotion_gate: dict[str, An
             else "not-run"
         ),
         "conflict_reason": conflict_reason,
+        "dead_link_count": url_validation.get("dead_link_count") or 0,
         "last_known_good_verification_context": freshness_status.get("last_known_good_verification_context") or verification_context,
         "os_build": build_sku.get("os_build"),
         "os_edition": build_sku.get("os_edition"),

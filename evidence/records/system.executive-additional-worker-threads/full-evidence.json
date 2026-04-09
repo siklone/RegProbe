@@ -256,7 +256,7 @@
     "app_mapping_status": "not-mapped",
     "next_missing_layer": "none",
     "debug_override_allowed": true,
-    "last_evaluated_at": "2026-04-09T01:58:29.551703Z",
+    "last_evaluated_at": "2026-04-09T03:33:00.231275Z",
     "score_breakdown": {
       "static_evidence_strength": 4,
       "runtime_evidence_strength": 3,
@@ -274,7 +274,14 @@
       "record_status": "validated",
       "has_validation_proof": true,
       "has_official_evidence": false,
-      "confidence": "high"
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
     },
     "evidence_status": {
       "evidence_count": 10,
@@ -302,13 +309,20 @@
           "vm-session-manager-executive-baseline-20260328"
         ],
         "rollback_strategy": "restore_default"
-      }
+      },
+      "state_changed": null,
+      "apply_diff": null,
+      "restore_diff": null
     },
     "bench_status": {
       "bench_tier": "unknown",
       "bench_required": false,
       "bench_vm_capable": true,
       "bench_bare_metal_required": false,
+      "feature_area_group": "default",
+      "profiles": [
+        "functional_throughput"
+      ],
       "executed": false,
       "summary": null,
       "statistics": null,
@@ -330,6 +344,14 @@
       "signal_strength": "none",
       "runtime_negative": false,
       "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
     },
     "freshness_status": {
       "status": "fresh",
@@ -416,6 +438,8 @@
       "kind": "decompilation",
       "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",
       "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "path",
         "value",
@@ -431,6 +455,8 @@
       "kind": "inference",
       "title": "Kernel power static probe summary for existing Session Manager candidates",
       "location": "registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json and research/notes/kernel-power-existing-static-triage-20260328.md",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "path",
         "version-scope"
@@ -444,6 +470,8 @@
       "kind": "inference",
       "title": "Kernel power next-gate intake summary",
       "location": "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json and research/notes/kernel-power-next-gate-ghidra-review-20260328.md",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "risk",
         "version-scope"
@@ -457,6 +485,8 @@
       "kind": "open-source-reference",
       "title": "ReactOS semantic hypothesis for the Executive worker-thread pair",
       "location": "evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md and evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "behavior",
         "version-scope"
@@ -470,6 +500,8 @@
       "kind": "validation-proof",
       "title": "Validation proof",
       "location": "research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md",
+      "reference_type": "path",
+      "url": null,
       "supports": [
         "path",
         "behavior"
@@ -484,6 +516,10 @@
     "bench_required": false,
     "bench_vm_capable": true,
     "bench_bare_metal_required": false,
+    "feature_area_group": "default",
+    "profiles": [
+      "functional_throughput"
+    ],
     "executed": false,
     "summary": null,
     "statistics": null,
@@ -506,7 +542,14 @@
     "record_status": "validated",
     "has_validation_proof": true,
     "has_official_evidence": false,
-    "confidence": "high"
+    "confidence": "high",
+    "documentation_quality_pass": true,
+    "documentation_issues": [],
+    "documented_behavior": true,
+    "has_value_context": true,
+    "has_default_context": true,
+    "has_recommended_context": true,
+    "has_rollback_context": true
   },
   "evidence_status": {
     "evidence_count": 10,
@@ -534,7 +577,10 @@
         "vm-session-manager-executive-baseline-20260328"
       ],
       "rollback_strategy": "restore_default"
-    }
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
   },
   "verification_context": {
     "record_id": "system.executive-additional-worker-threads",
@@ -575,7 +621,10 @@
         "vm-session-manager-executive-baseline-20260328"
       ],
       "rollback_strategy": "restore_default"
-    }
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
   },
   "freshness_status": {
     "status": "fresh",
@@ -591,5 +640,13 @@
       "current_build": "26100",
       "last_verified_at": "2026-03-30T09:38:14Z"
     }
+  },
+  "url_validation": {
+    "checked_url_count": 0,
+    "reachable_url_count": 0,
+    "dead_link_count": 0,
+    "dead_links": [],
+    "checked_urls": [],
+    "status": "not-run"
   }
 }

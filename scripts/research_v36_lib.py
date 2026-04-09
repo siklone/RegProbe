@@ -4,6 +4,8 @@ import hashlib
 import json
 import re
 import subprocess
+import urllib.error
+import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter
 from datetime import datetime, timedelta, timezone
@@ -33,6 +35,7 @@ DISCOVERY_ROOT = FRAMEWORK_ROOT / "discovery"
 QUEUE_ROOT = FRAMEWORK_ROOT / "queue"
 AUDIT_ROOT = FRAMEWORK_ROOT / "audit"
 ENRICHMENT_ROOT = FRAMEWORK_ROOT / "enrichment"
+REGRESSION_PACKS_ROOT = FRAMEWORK_ROOT / "regression-packs"
 PROMOTION_GATES_PATH = RESEARCH_ROOT / "promotion-gates.json"
 PROMOTION_AUDIT_LOG_PATH = AUDIT_ROOT / "promotion-audit-log.jsonl"
 DISCOVERY_EVENTS_PATH = DISCOVERY_ROOT / "discovery-events.jsonl"
@@ -42,6 +45,9 @@ GAP_ANALYSIS_SUMMARY_PATH = AUDIT_ROOT / "gap-analysis-summary.json"
 ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser-config.json"
 LEGACY_ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser.json"
 ENRICHMENT_CACHE_PATH = ENRICHMENT_ROOT / "enrichment-cache.jsonl"
+BENCH_PROFILE_MAP_PATH = FRAMEWORK_ROOT / "config" / "bench-profile-map.json"
+URL_VALIDATION_REPORT_PATH = AUDIT_ROOT / "url-validation-report.json"
+MUTATION_AUDIT_LOG_PATH = AUDIT_ROOT / "mutation-override-audit-log.jsonl"
 
 QUEUE_STATES = {
     "discovered",
@@ -116,6 +122,17 @@ ENRICHMENT_CLUE_TYPES = {
     "sibling_path_hint",
     "legacy_behavior_hint",
 }
+ROLLBACK_BLOCKERS = {"rollback-unverified", "rollback-failed"}
+MCP_METHOD_NAMES = (
+    "get_candidate_by_key_path",
+    "list_blocked_candidates",
+    "score_candidate_by_id",
+    "evaluate_candidate_by_id",
+    "get_evidence_bundle",
+    "list_revalidation_pending_candidates",
+    "apply_candidate",
+    "rollback_candidate",
+)
 
 DEFAULT_CAPABILITIES = {
     "registry_read": False,
@@ -206,6 +223,58 @@ def list_records() -> list[Path]:
 
 def load_records() -> list[dict[str, Any]]:
     return [load_json(path) for path in list_records()]
+
+
+def load_audit_entries(path: Path | None = None) -> dict[str, dict[str, Any]]:
+    payload = load_json_if_exists(path or (RESEARCH_ROOT / "evidence-audit.json"))
+    if not isinstance(payload, dict):
+        return {}
+    return {
+        str(entry.get("record_id") or entry.get("tweak_id") or ""): entry
+        for entry in payload.get("entries") or []
+        if isinstance(entry, dict) and str(entry.get("record_id") or entry.get("tweak_id") or "").strip()
+    }
+
+
+def load_promotion_gate_catalog(path: Path | None = None) -> dict[str, Any]:
+    payload = load_json_if_exists(path or PROMOTION_GATES_PATH)
+    return payload if isinstance(payload, dict) else {"entries": [], "summary": {}}
+
+
+def load_promotion_gate_map(path: Path | None = None) -> dict[str, dict[str, Any]]:
+    payload = load_promotion_gate_catalog(path)
+    result: dict[str, dict[str, Any]] = {}
+    for entry in payload.get("entries") or []:
+        if not isinstance(entry, dict):
+            continue
+        for key_name in ("candidate_id", "record_id", "tweak_id"):
+            key = str(entry.get(key_name) or "").strip()
+            if key and key not in result:
+                result[key] = entry
+    return result
+
+
+def record_map(records: list[dict[str, Any]] | None = None) -> dict[str, dict[str, Any]]:
+    records = records or load_records()
+    result: dict[str, dict[str, Any]] = {}
+    for record in records:
+        for key_name in ("record_id", "tweak_id"):
+            key = str(record.get(key_name) or "").strip()
+            if key and key not in result:
+                result[key] = record
+    return result
+
+
+def load_full_evidence_bundle(candidate_id: str, path_root: Path | None = None) -> dict[str, Any]:
+    base = path_root or (REPO_ROOT / "evidence" / "records")
+    path = base / candidate_id / "full-evidence.json"
+    payload = load_json_if_exists(path)
+    return payload if isinstance(payload, dict) else {}
+
+
+def load_bench_profile_map(path: Path | None = None) -> dict[str, Any]:
+    payload = load_json_if_exists(path or BENCH_PROFILE_MAP_PATH)
+    return payload if isinstance(payload, dict) else {"schema_version": CURRENT_SCHEMA_VERSION, "entries": {}}
 
 
 def load_etl_parser_config() -> dict[str, Any]:
@@ -612,6 +681,17 @@ def _confidence_from_static_block(block: dict[str, Any]) -> str:
     return "low"
 
 
+def is_http_url(value: Any) -> bool:
+    return bool(re.match(r"^https?://", str(value or "").strip(), re.IGNORECASE))
+
+
+def enrichment_reference_projection(location: Any) -> tuple[str, str | None]:
+    normalized = str(location or "").strip()
+    if is_http_url(normalized):
+        return "url", normalized
+    return "path", None
+
+
 def static_enrichment_projection(record: dict[str, Any]) -> list[dict[str, Any]]:
     items: list[dict[str, Any]] = []
     static_analysis = record.get("static_analysis") or {}
@@ -733,12 +813,16 @@ def source_enrichment_projection(record: dict[str, Any]) -> list[dict[str, Any]]
         kind = evidence_kind(item)
         if kind not in SOURCE_ENRICHMENT_KINDS:
             continue
+        location = item.get("location")
+        reference_type, url = enrichment_reference_projection(location)
         items.append(
             {
                 "evidence_id": item.get("evidence_id"),
                 "kind": kind,
                 "title": item.get("title"),
-                "location": item.get("location"),
+                "location": location,
+                "reference_type": reference_type,
+                "url": url,
                 "supports": item.get("supports") or [],
                 "summary": item.get("summary"),
                 "strength": item.get("strength"),
@@ -747,12 +831,15 @@ def source_enrichment_projection(record: dict[str, Any]) -> list[dict[str, Any]]
         )
     proof = record.get("validation_proof") or {}
     if isinstance(proof, dict) and any(proof.get(field) for field in ("source_url", "exact_quote_or_path", "notes")):
+        reference_type, url = enrichment_reference_projection(proof.get("source_url"))
         items.append(
             {
                 "evidence_id": "validation-proof",
                 "kind": "validation-proof",
                 "title": "Validation proof",
                 "location": proof.get("source_url"),
+                "reference_type": reference_type,
+                "url": url,
                 "supports": ["path", "behavior"],
                 "summary": proof.get("notes") or proof.get("exact_quote_or_path"),
                 "strength": "high" if proof.get("key_found_on_page") else "medium",
@@ -763,13 +850,65 @@ def source_enrichment_projection(record: dict[str, Any]) -> list[dict[str, Any]]
     return items
 
 
-def documentation_status_projection(record: dict[str, Any]) -> dict[str, Any]:
+def documentation_quality_projection(
+    record: dict[str, Any],
+    full_evidence: dict[str, Any] | None = None,
+    gate: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    full_evidence = full_evidence or {}
+    gate = gate or {}
+    target = primary_target(record)
+    source_enrichment = full_evidence.get("source_enrichment")
+    if not isinstance(source_enrichment, list):
+        source_enrichment = source_enrichment_projection(record)
+    rollback_status = full_evidence.get("rollback_status")
+    if not isinstance(rollback_status, dict):
+        rollback_status = rollback_status_projection(record)
+
+    issues: list[str] = []
+    if not target.get("path"):
+        issues.append("missing-key-path")
+    if not target.get("value_name"):
+        issues.append("missing-value-name")
+    if not target.get("value_type"):
+        issues.append("missing-value-type")
+    if not observed_default_projection(record):
+        issues.append("missing-observed-default")
+    if not recommended_value_projection(record):
+        issues.append("missing-recommended-value")
+    if not record.get("validation_proof"):
+        issues.append("missing-validation-proof")
+    if not source_enrichment:
+        issues.append("missing-source-enrichment")
+
+    blockers = {str(item) for item in (gate.get("promotion_blockers") or []) if item}
+    if not rollback_status.get("rollback_value") and not (blockers & ROLLBACK_BLOCKERS):
+        issues.append("missing-rollback-context")
+
+    return {
+        "documentation_quality_pass": not issues,
+        "documentation_issues": issues,
+        "documented_behavior": bool(record.get("validation_proof")) and bool(source_enrichment),
+        "has_value_context": bool(target.get("path") and target.get("value_name") and target.get("value_type")),
+        "has_default_context": bool(observed_default_projection(record)),
+        "has_recommended_context": bool(recommended_value_projection(record)),
+        "has_rollback_context": bool(rollback_status.get("rollback_value")) or bool(blockers & ROLLBACK_BLOCKERS),
+    }
+
+
+def documentation_status_projection(
+    record: dict[str, Any],
+    full_evidence: dict[str, Any] | None = None,
+    gate: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     decision = record.get("decision") or {}
+    quality = documentation_quality_projection(record, full_evidence, gate)
     return {
         "record_status": record.get("record_status"),
         "has_validation_proof": bool(record.get("validation_proof")),
         "has_official_evidence": has_official_evidence(record),
         "confidence": decision.get("confidence"),
+        **quality,
     }
 
 
@@ -925,6 +1064,152 @@ def negative_evidence_projection(
         "signal_strength": signal_strength,
         "runtime_negative": runtime_negative or bool(signals),
         "conflict_reason": conflict_reason,
+    }
+
+
+def url_references_from_source_enrichment(items: list[dict[str, Any]] | None) -> list[dict[str, Any]]:
+    references: list[dict[str, Any]] = []
+    for item in items or []:
+        if not isinstance(item, dict):
+            continue
+        url = str(item.get("url") or "").strip()
+        location = str(item.get("location") or "").strip()
+        if not url and is_http_url(location):
+            url = location
+        if not url:
+            continue
+        references.append(
+            {
+                "evidence_id": item.get("evidence_id"),
+                "kind": item.get("kind"),
+                "title": item.get("title"),
+                "url": url,
+            }
+        )
+    return references
+
+
+def is_url_reachable(url: str, timeout: float = 5.0) -> tuple[bool, int | None, str | None]:
+    request = urllib.request.Request(url, method="HEAD")
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            status = getattr(response, "status", None)
+            return bool(status is None or status < 400), status, None
+    except urllib.error.HTTPError as exc:
+        if exc.code == 405:
+            fallback = urllib.request.Request(url, method="GET")
+            try:
+                with urllib.request.urlopen(fallback, timeout=timeout) as response:
+                    status = getattr(response, "status", None)
+                    return bool(status is None or status < 400), status, None
+            except Exception as inner_exc:  # pragma: no cover - defensive fallback
+                return False, getattr(inner_exc, "code", None), str(inner_exc)
+        return False, exc.code, str(exc)
+    except Exception as exc:  # pragma: no cover - network variability
+        return False, None, str(exc)
+
+
+def validate_candidate_urls(
+    record: dict[str, Any],
+    full_evidence: dict[str, Any] | None = None,
+    *,
+    checker: Any = None,
+    timeout: float = 5.0,
+) -> dict[str, Any]:
+    full_evidence = full_evidence or {}
+    checker = checker or is_url_reachable
+    source_enrichment = full_evidence.get("source_enrichment")
+    if not isinstance(source_enrichment, list):
+        source_enrichment = source_enrichment_projection(record)
+
+    checked: list[dict[str, Any]] = []
+    dead_links: list[dict[str, Any]] = []
+    for reference in url_references_from_source_enrichment(source_enrichment):
+        reachable, status_code, error = checker(reference["url"], timeout=timeout)
+        item = {
+            **reference,
+            "reachable": reachable,
+            "status_code": status_code,
+            "error": error,
+        }
+        checked.append(item)
+        if not reachable:
+            dead_links.append(item)
+
+    return {
+        "checked_url_count": len(checked),
+        "reachable_url_count": sum(1 for item in checked if item["reachable"]),
+        "dead_link_count": len(dead_links),
+        "dead_links": dead_links,
+        "checked_urls": checked,
+        "status": "dead-link" if dead_links else "ok" if checked else "not-run",
+    }
+
+
+def load_url_validation_report(path: Path | None = None) -> dict[str, dict[str, Any]]:
+    payload = load_json_if_exists(path or URL_VALIDATION_REPORT_PATH)
+    if not isinstance(payload, dict):
+        return {}
+    result: dict[str, dict[str, Any]] = {}
+    for entry in payload.get("entries") or []:
+        if not isinstance(entry, dict):
+            continue
+        for key_name in ("candidate_id", "record_id", "tweak_id"):
+            key = str(entry.get(key_name) or "").strip()
+            if key and key not in result:
+                result[key] = entry
+    return result
+
+
+def url_validation_status_projection(
+    record: dict[str, Any],
+    full_evidence: dict[str, Any] | None = None,
+    report_map: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    full_evidence = full_evidence or {}
+    payload = full_evidence.get("url_validation")
+    if isinstance(payload, dict) and payload:
+        return payload
+    report_map = report_map or load_url_validation_report()
+    for key_name in ("record_id", "tweak_id"):
+        key = str(record.get(key_name) or "").strip()
+        if key and key in report_map:
+            return report_map[key]
+    return {
+        "checked_url_count": 0,
+        "reachable_url_count": 0,
+        "dead_link_count": 0,
+        "dead_links": [],
+        "checked_urls": [],
+        "status": "not-run",
+    }
+
+
+def infer_bench_profile_group(feature_area: str) -> str:
+    area = str(feature_area or "").strip().lower()
+    if any(token in area for token in ("scheduler", "priority")):
+        return "scheduler"
+    if any(token in area for token in ("service", "maintenance", "watchdog")):
+        return "service"
+    if any(token in area for token in ("display", "graphics")):
+        return "display"
+    if any(token in area for token in ("network", "dns")):
+        return "network"
+    if "power" in area:
+        return "power"
+    return "default"
+
+
+def bench_profile_projection(record: dict[str, Any]) -> dict[str, Any]:
+    payload = load_bench_profile_map()
+    entries = payload.get("entries") or {}
+    feature_area_group = infer_bench_profile_group(record_feature_area(record))
+    entry = entries.get(feature_area_group) or entries.get("default") or {}
+    return {
+        "feature_area_group": feature_area_group,
+        "profiles": list(entry.get("profiles") or []),
+        "bench_vm_capable": entry.get("bench_vm_capable", True),
+        "bare_metal_required_for_perf_claim": bool(entry.get("bare_metal_required_for_perf_claim")),
     }
 
 
@@ -1201,11 +1486,14 @@ def bench_results_projection(full_evidence: dict[str, Any], record: dict[str, An
     record = record or {}
     next_layer = str(audit.get("next_missing_layer") or next_missing_layer(record) or "none")
     bench_required = next_layer in {"wpr-or-benchmark", "runtime-benchmark"}
+    bench_profile = bench_profile_projection(record)
     return {
         "bench_tier": "vm" if reproducibility.get("vm_name") else "unknown",
         "bench_required": bench_required,
-        "bench_vm_capable": True,
-        "bench_bare_metal_required": False,
+        "bench_vm_capable": bench_profile.get("bench_vm_capable"),
+        "bench_bare_metal_required": bench_profile.get("bare_metal_required_for_perf_claim"),
+        "feature_area_group": bench_profile.get("feature_area_group"),
+        "profiles": bench_profile.get("profiles"),
         "executed": bool(benchmark.get("executed")),
         "summary": benchmark.get("summary"),
         "statistics": benchmark.get("statistics"),
@@ -1258,6 +1546,7 @@ def evaluate_candidate_gate(
     *,
     backend_id: str = DEFAULT_BACKEND_ID,
     evaluated_at: str | None = None,
+    url_validation_status: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     audit = audit or {}
     full_evidence = full_evidence or {}
@@ -1276,8 +1565,12 @@ def evaluate_candidate_gate(
     bench_results = bench_results_projection(full_evidence, record, audit)
     negative_evidence = negative_evidence_projection(full_evidence, record, audit, rollback_status, bench_results)
     score_breakdown = score_candidate(record, audit, full_evidence)
-    documentation_status = documentation_status_projection(record)
     evidence_status = evidence_status_projection(record, audit)
+    url_validation = (
+        dict(url_validation_status)
+        if isinstance(url_validation_status, dict)
+        else url_validation_status_projection(record, full_evidence)
+    )
 
     blockers = [str(item) for item in (decision.get("blocking_issues") or []) if item]
     blocker_set = set(blockers)
@@ -1302,9 +1595,17 @@ def evaluate_candidate_gate(
         blocker_set.add("bench-failed-safety")
     if any(signal in {"procmon-no-hit", "etw-no-hit-debugger-no-call"} for signal in (negative_evidence.get("signals") or [])):
         blocker_set.add("no-runtime-proof")
+    if int(url_validation.get("dead_link_count") or 0) > 0:
+        blocker_set.add("dead-link")
     if bench_results.get("bench_required") and not bench_results.get("executed"):
         blocker_set.add("bench-not-run")
     blocker_set.update(_gate_layer_blockers(missing_layer))
+
+    documentation_status = documentation_status_projection(
+        record,
+        full_evidence,
+        {"promotion_blockers": sorted(blocker_set)},
+    )
 
     hard_blockers = sorted(
         blocker
@@ -1356,6 +1657,7 @@ def evaluate_candidate_gate(
         "rollback_status": rollback_status,
         "bench_status": bench_results,
         "negative_evidence_status": negative_evidence,
+        "url_validation_status": url_validation,
         "freshness_status": freshness_status,
         "verification_context": {
             "backend_id": backend_id,
@@ -1407,10 +1709,23 @@ def before_after_projection(full_evidence: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], full_evidence: dict[str, Any], backend_id: str = DEFAULT_BACKEND_ID) -> dict[str, Any]:
+def canonical_bundle_projection(
+    record: dict[str, Any],
+    audit: dict[str, Any],
+    full_evidence: dict[str, Any],
+    backend_id: str = DEFAULT_BACKEND_ID,
+    *,
+    url_validation_status: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     record_id, tweak_id = candidate_identity(record)
     target = primary_target(record)
-    gate = evaluate_candidate_gate(record, audit, full_evidence, backend_id=backend_id)
+    gate = evaluate_candidate_gate(
+        record,
+        audit,
+        full_evidence,
+        backend_id=backend_id,
+        url_validation_status=url_validation_status,
+    )
     execution_context = default_execution_context(backend_id)
     discovery_source, discovery_reason = discovery_projection(record)
     freshness = evidence_freshness(record, reproducibility_manifest())
@@ -1419,6 +1734,8 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
     bench_results = bench_results_projection(full_evidence, record, audit)
     build_sku = build_sku_awareness(record, execution_context, backend_id)
     negative_evidence = negative_evidence_projection(full_evidence, record, audit, rollback_status, bench_results)
+    documentation_status = documentation_status_projection(record, full_evidence, gate)
+    url_validation = gate.get("url_validation_status") or url_validation_status_projection(record, full_evidence)
 
     return {
         "schema_version": CURRENT_SCHEMA_VERSION,
@@ -1449,11 +1766,12 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
         "last_verified_at": record.get("last_reviewed_utc"),
         "verification_environment": verification_environment_projection(record, full_evidence, execution_context),
         "negative_evidence": negative_evidence,
+        "url_validation": url_validation,
         "before_after": before_after,
         "source_enrichment": source_enrichment_projection(record),
         "bench_results": bench_results,
         "score_breakdown": gate["score_breakdown"],
-        "documentation_status": gate["documentation_status"],
+        "documentation_status": documentation_status,
         "evidence_status": gate["evidence_status"],
         "rollback_status": rollback_status,
         "rollback_verification": rollback_status,
@@ -1465,6 +1783,409 @@ def canonical_bundle_projection(record: dict[str, Any], audit: dict[str, Any], f
             "schema_compatibility_mode": gate["schema_compatibility_mode"],
             "evaluator_version": gate["evaluator_version"],
         },
+    }
+
+
+def normalized_gate_snapshot(gate: dict[str, Any]) -> dict[str, Any]:
+    payload = json.loads(json.dumps(gate))
+    payload.pop("last_evaluated_at", None)
+    return payload
+
+
+def before_after_parse_test_projection(full_evidence: dict[str, Any]) -> dict[str, Any]:
+    payload = before_after_projection(full_evidence)
+    required_lists = (
+        "key_added_entries",
+        "key_deleted_entries",
+        "value_added_entries",
+        "value_deleted_entries",
+        "value_changed_entries",
+    )
+    required_counts = (
+        "key_added",
+        "key_deleted",
+        "value_added",
+        "value_deleted",
+        "value_changed",
+        "unchanged_values",
+    )
+    errors: list[str] = []
+    for key in required_counts:
+        if not isinstance(payload.get(key), int):
+            errors.append(f"invalid-count:{key}")
+    for key in required_lists:
+        if not isinstance(payload.get(key), list):
+            errors.append(f"invalid-list:{key}")
+    return {
+        "pass": not errors,
+        "errors": errors,
+        "before_after": payload,
+    }
+
+
+def rollback_presence_test_projection(gate: dict[str, Any], full_evidence: dict[str, Any], record: dict[str, Any]) -> dict[str, Any]:
+    rollback_status = (full_evidence.get("rollback_status") or gate.get("rollback_status") or rollback_verification_projection(full_evidence, record) or {})
+    blockers = {str(item) for item in (gate.get("promotion_blockers") or []) if item}
+    rollback_value_present = rollback_status.get("rollback_value") is not None
+    rollback_blocker_present = bool(blockers & ROLLBACK_BLOCKERS)
+    return {
+        "pass": rollback_value_present or rollback_blocker_present,
+        "rollback_value_present": rollback_value_present,
+        "rollback_blocker_present": rollback_blocker_present,
+        "rollback_status": rollback_status,
+    }
+
+
+def rollback_verification_test_projection(gate: dict[str, Any], full_evidence: dict[str, Any], record: dict[str, Any]) -> dict[str, Any]:
+    rollback_status = (full_evidence.get("rollback_status") or gate.get("rollback_status") or rollback_verification_projection(full_evidence, record) or {})
+    rollback_verified = rollback_status.get("rollback_verified")
+    defined = isinstance(rollback_verified, bool)
+    return {
+        "pass": defined,
+        "rollback_declared": rollback_status.get("rollback_declared"),
+        "rollback_executed": rollback_status.get("rollback_executed"),
+        "rollback_verified": rollback_verified,
+        "rollback_failure_reason": rollback_status.get("rollback_failure_reason"),
+    }
+
+
+def bench_profile_consistency_test_projection(gate: dict[str, Any], full_evidence: dict[str, Any], record: dict[str, Any]) -> dict[str, Any]:
+    expected = bench_profile_projection(record)
+    actual = (full_evidence.get("bench_results") or gate.get("bench_status") or bench_results_projection(full_evidence, record, {})) or {}
+    profiles_match = list(actual.get("profiles") or []) == list(expected.get("profiles") or [])
+    vm_match = actual.get("bench_vm_capable") == expected.get("bench_vm_capable")
+    bare_match = bool(actual.get("bench_bare_metal_required")) == bool(expected.get("bare_metal_required_for_perf_claim"))
+    group_match = str(actual.get("feature_area_group") or "") == str(expected.get("feature_area_group") or "")
+    return {
+        "pass": profiles_match and vm_match and bare_match and group_match,
+        "expected": expected,
+        "actual": {
+            "feature_area_group": actual.get("feature_area_group"),
+            "profiles": actual.get("profiles"),
+            "bench_vm_capable": actual.get("bench_vm_capable"),
+            "bench_bare_metal_required": actual.get("bench_bare_metal_required"),
+        },
+    }
+
+
+def build_regression_pack(record: dict[str, Any], audit: dict[str, Any], full_evidence: dict[str, Any], gate: dict[str, Any] | None = None) -> dict[str, dict[str, Any]]:
+    url_validation = url_validation_status_projection(record, full_evidence)
+    gate = gate or evaluate_candidate_gate(record, audit, full_evidence, url_validation_status=url_validation)
+    bundle = canonical_bundle_projection(record, audit, full_evidence, url_validation_status=url_validation)
+    schema_errors = validate_canonical_bundle(bundle)
+    first_gate = normalized_gate_snapshot(gate)
+    second_gate = normalized_gate_snapshot(
+        evaluate_candidate_gate(record, audit, full_evidence, url_validation_status=url_validation)
+    )
+    docs_status = documentation_status_projection(record, full_evidence, gate)
+    before_after_test = before_after_parse_test_projection(full_evidence)
+    rollback_presence = rollback_presence_test_projection(gate, full_evidence, record)
+    rollback_verification = rollback_verification_test_projection(gate, full_evidence, record)
+    bench_consistency = bench_profile_consistency_test_projection(gate, full_evidence, record)
+    return {
+        "schema_test.json": {
+            "pass": not schema_errors,
+            "errors": schema_errors,
+            "schema_version": bundle.get("schema_version"),
+            "candidate_id": bundle.get("candidate_id"),
+        },
+        "gate_test.json": {
+            "pass": first_gate == second_gate,
+            "first": first_gate,
+            "second": second_gate,
+        },
+        "docs_test.json": docs_status,
+        "before_after_parse_test.json": before_after_test,
+        "rollback_presence_test.json": rollback_presence,
+        "rollback_verification_test.json": rollback_verification,
+        "bench_profile_consistency_test.json": bench_consistency,
+    }
+
+
+def candidate_regression_pack_dir(candidate_id: str, root: Path | None = None) -> Path:
+    sanitized = str(candidate_id).replace("\\", "__").replace("/", "__")
+    return (root or REGRESSION_PACKS_ROOT) / sanitized
+
+
+def write_regression_pack(candidate_id: str, pack: dict[str, dict[str, Any]], root: Path | None = None) -> Path:
+    output_dir = candidate_regression_pack_dir(candidate_id, root)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for name, payload in pack.items():
+        write_json(output_dir / name, payload)
+    return output_dir
+
+
+def resolve_record(candidate_id: str, records: list[dict[str, Any]] | None = None) -> dict[str, Any] | None:
+    return record_map(records).get(candidate_id)
+
+
+def get_evidence_bundle(candidate_id: str, records: list[dict[str, Any]] | None = None, audit_map: dict[str, dict[str, Any]] | None = None) -> dict[str, Any] | None:
+    record = resolve_record(candidate_id, records)
+    if not record:
+        return None
+    audit_map = audit_map or load_audit_entries()
+    full_evidence = load_full_evidence_bundle(str(record.get("record_id") or record.get("tweak_id") or ""))
+    return canonical_bundle_projection(record, audit_map.get(candidate_id, {}), full_evidence)
+
+
+def get_candidate_by_key_path(key_path: str, records: list[dict[str, Any]] | None = None) -> dict[str, Any] | None:
+    key_path = str(key_path or "").strip().lower()
+    if not key_path:
+        return None
+    records = records or load_records()
+    audit_map = load_audit_entries()
+    for record in records:
+        target_path = str(primary_target(record).get("path") or "").strip().lower()
+        if target_path != key_path:
+            continue
+        record_id = str(record.get("record_id") or record.get("tweak_id") or "")
+        full_evidence = load_full_evidence_bundle(record_id)
+        return canonical_bundle_projection(record, audit_map.get(record_id, {}), full_evidence)
+    return None
+
+
+def score_candidate_by_id(candidate_id: str, records: list[dict[str, Any]] | None = None, audit_map: dict[str, dict[str, Any]] | None = None) -> dict[str, Any] | None:
+    record = resolve_record(candidate_id, records)
+    if not record:
+        return None
+    audit_map = audit_map or load_audit_entries()
+    full_evidence = load_full_evidence_bundle(str(record.get("record_id") or record.get("tweak_id") or ""))
+    return score_candidate(record, audit_map.get(candidate_id, {}), full_evidence)
+
+
+def evaluate_candidate_by_id(candidate_id: str, records: list[dict[str, Any]] | None = None, audit_map: dict[str, dict[str, Any]] | None = None) -> dict[str, Any] | None:
+    record = resolve_record(candidate_id, records)
+    if not record:
+        return None
+    audit_map = audit_map or load_audit_entries()
+    full_evidence = load_full_evidence_bundle(str(record.get("record_id") or record.get("tweak_id") or ""))
+    return evaluate_candidate_gate(record, audit_map.get(candidate_id, {}), full_evidence)
+
+
+def list_blocked_candidates(reason_type: str | None = None, gate_map: dict[str, dict[str, Any]] | None = None) -> list[dict[str, Any]]:
+    gate_map = gate_map or load_promotion_gate_map()
+    entries = [entry for entry in gate_map.values() if str(entry.get("promotion_state") or "") == "blocked"]
+    if reason_type:
+        lowered = reason_type.lower()
+        entries = [
+            entry
+            for entry in entries
+            if any(lowered in str(blocker).lower() for blocker in (entry.get("promotion_blockers") or []))
+        ]
+    return sorted(entries, key=lambda item: str(item.get("tweak_id") or item.get("candidate_id") or ""))
+
+
+def list_revalidation_pending_candidates(gate_map: dict[str, dict[str, Any]] | None = None) -> list[dict[str, Any]]:
+    gate_map = gate_map or load_promotion_gate_map()
+    entries = [
+        entry for entry in gate_map.values()
+        if str(entry.get("promotion_state") or "") == "revalidation-pending"
+    ]
+    return sorted(entries, key=lambda item: str(item.get("tweak_id") or item.get("candidate_id") or ""))
+
+
+def append_mutation_audit_log(entry: dict[str, Any], path: Path | None = None) -> None:
+    append_jsonl(path or MUTATION_AUDIT_LOG_PATH, entry)
+
+
+def evaluate_apply_request(
+    candidate_id: str,
+    *,
+    override: bool = False,
+    reason: str | None = None,
+    contributor_mode: bool = False,
+    gate_map: dict[str, dict[str, Any]] | None = None,
+    audit_path: Path | None = None,
+) -> dict[str, Any]:
+    gate_map = gate_map or load_promotion_gate_map()
+    entry = gate_map.get(candidate_id)
+    if not entry:
+        return {
+            "allowed": False,
+            "candidate_id": candidate_id,
+            "message": "candidate-not-found",
+            "override_used": False,
+        }
+
+    promoted = str(entry.get("promotion_state") or "") == "promoted"
+    legacy = str(entry.get("tweak_origin") or "") == "legacy-curated"
+    override_allowed = override and contributor_mode and bool(entry.get("debug_override_allowed"))
+    allowed = legacy or promoted or override_allowed
+    override_used = not (legacy or promoted) and override_allowed
+    message = (
+        "apply-allowed"
+        if allowed and not override_used
+        else "apply-override-allowed"
+        if allowed
+        else f"promotion-state:{entry.get('promotion_state')}"
+    )
+    payload = {
+        "allowed": allowed,
+        "candidate_id": candidate_id,
+        "promotion_state": entry.get("promotion_state"),
+        "override_requested": override,
+        "override_used": override_used,
+        "override_reason": reason or "",
+        "contributor_mode": contributor_mode,
+        "message": message,
+        "entry": entry,
+    }
+    if override:
+        append_mutation_audit_log(
+            {
+                "timestamp_utc": now_utc(),
+                "action": "apply",
+                "candidate_id": candidate_id,
+                "promotion_state": entry.get("promotion_state"),
+                "override_requested": True,
+                "override_used": override_used,
+                "override_reason": reason or "unspecified",
+                "contributor_mode": contributor_mode,
+                "allowed": allowed,
+                "message": message,
+            },
+            audit_path,
+        )
+    return payload
+
+
+def apply_candidate(
+    candidate_id: str,
+    *,
+    override: bool = False,
+    reason: str | None = None,
+    contributor_mode: bool = False,
+    gate_map: dict[str, dict[str, Any]] | None = None,
+    audit_path: Path | None = None,
+) -> dict[str, Any]:
+    return evaluate_apply_request(
+        candidate_id,
+        override=override,
+        reason=reason,
+        contributor_mode=contributor_mode,
+        gate_map=gate_map,
+        audit_path=audit_path,
+    )
+
+
+def rollback_candidate(
+    candidate_id: str,
+    *,
+    override: bool = False,
+    reason: str | None = None,
+    contributor_mode: bool = False,
+    gate_map: dict[str, dict[str, Any]] | None = None,
+    audit_path: Path | None = None,
+) -> dict[str, Any]:
+    decision = evaluate_apply_request(
+        candidate_id,
+        override=override,
+        reason=reason,
+        contributor_mode=contributor_mode,
+        gate_map=gate_map,
+        audit_path=None,
+    )
+    if not decision.get("allowed"):
+        return {**decision, "action": "rollback", "warnings": []}
+
+    entry = dict(decision.get("entry") or {})
+    rollback_status = dict(entry.get("rollback_status") or {})
+    declared = bool(rollback_status.get("rollback_declared"))
+    executed = bool(rollback_status.get("rollback_executed"))
+    verified = bool(rollback_status.get("rollback_verified"))
+    warnings: list[str] = []
+    allowed = True
+    message = "rollback-allowed"
+
+    if not declared and not executed and str(entry.get("tweak_origin") or "") != "legacy-curated":
+        allowed = False
+        message = "rollback-not-declared"
+    else:
+        if declared and not executed:
+            warnings.append("rollback-declared-but-not-executed")
+        if not verified:
+            warnings.append("rollback-unverified")
+
+    if override or warnings:
+        append_mutation_audit_log(
+            {
+                "timestamp_utc": now_utc(),
+                "action": "rollback",
+                "candidate_id": candidate_id,
+                "promotion_state": entry.get("promotion_state"),
+                "override_requested": override,
+                "override_used": bool(decision.get("override_used")),
+                "override_reason": reason or "unspecified",
+                "contributor_mode": contributor_mode,
+                "allowed": allowed,
+                "message": message,
+                "warnings": warnings,
+            },
+            audit_path,
+        )
+
+    return {
+        **decision,
+        "allowed": allowed,
+        "action": "rollback",
+        "message": message,
+        "warnings": warnings,
+        "rollback_status": rollback_status,
+    }
+
+
+def core_cli_surface_status(cli_source_text: str | None = None) -> dict[str, Any]:
+    if cli_source_text is None:
+        cli_path = REPO_ROOT / "cli" / "Program.cs"
+        cli_source_text = cli_path.read_text(encoding="utf-8") if cli_path.exists() else ""
+    required_tokens = [
+        "list-blocked",
+        "show-stale",
+        "show-revalidation-pending",
+        "generate-regression-pack",
+        "validate-batch",
+        "apply",
+        "rollback",
+    ]
+    missing = [token for token in required_tokens if token not in cli_source_text]
+    return {
+        "pass": not missing,
+        "missing_commands": missing,
+    }
+
+
+def check_mcp_readiness(promotion_catalog: dict[str, Any] | None = None, cli_source_text: str | None = None) -> dict[str, Any]:
+    promotion_catalog = promotion_catalog or load_promotion_gate_catalog()
+    summary = promotion_catalog.get("summary") or {}
+    entries = promotion_catalog.get("entries") or []
+    version_aware = bool(
+        entries
+        and all(
+            isinstance(entry, dict)
+            and entry.get("supported_schema_versions")
+            and entry.get("schema_compatibility_mode") in {"native", "compatibility"}
+            for entry in entries[: min(10, len(entries))]
+        )
+    )
+    methods_ready = all(callable(globals().get(name)) for name in MCP_METHOD_NAMES)
+    cli_status = core_cli_surface_status(cli_source_text)
+    status_checks = {
+        "schema_version_stable": str(CURRENT_SCHEMA_VERSION).startswith("1."),
+        "gate_evaluator_version_aware": version_aware,
+        "has_promoted": int((summary.get("promotion_state_counts") or {}).get("promoted", 0)) >= 1,
+        "has_blocked": int((summary.get("promotion_state_counts") or {}).get("blocked", 0)) >= 1,
+        "has_revalidation_pending": int((summary.get("promotion_state_counts") or {}).get("revalidation-pending", 0)) >= 1,
+        "core_cli_green": bool(cli_status.get("pass")),
+        "ci_gate_metrics_green": int(summary.get("invalid_gate_entries", 0)) == 0,
+        "mcp_methods_present": methods_ready,
+    }
+    ready = all(status_checks.values())
+    return {
+        "status": "MCP_READY" if ready else "MCP_BLOCKED",
+        "checks": status_checks,
+        "missing_cli_commands": cli_status.get("missing_commands"),
+        "supported_methods": list(MCP_METHOD_NAMES),
+        "promotion_state_counts": summary.get("promotion_state_counts") or {},
     }
 
 

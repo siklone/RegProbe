@@ -37,6 +37,34 @@ public sealed class TweakPromotionScoreBreakdown
     public int BenchPriority { get; set; }
 }
 
+public sealed class TweakRollbackGateStatus
+{
+    public bool RollbackDeclared { get; set; }
+    public bool RollbackExecuted { get; set; }
+    public bool RollbackVerified { get; set; }
+    public string RollbackVerificationMethod { get; set; } = string.Empty;
+    public string? RollbackFailureReason { get; set; }
+}
+
+public sealed class TweakFreshnessGateStatus
+{
+    public string Status { get; set; } = string.Empty;
+    public bool RevalidationNeeded { get; set; }
+    public string? StaleReason { get; set; }
+    public string? LastKnownGoodBuild { get; set; }
+}
+
+public sealed class TweakMutationDecision
+{
+    public bool Allowed { get; set; }
+    public bool OverrideRequested { get; set; }
+    public bool OverrideUsed { get; set; }
+    public string OverrideReason { get; set; } = string.Empty;
+    public string Message { get; set; } = string.Empty;
+    public List<string> Warnings { get; set; } = new();
+    public TweakPromotionGateEntry Entry { get; set; } = new();
+}
+
 public sealed class TweakPromotionGateEntry
 {
     public string CandidateId { get; set; } = string.Empty;
@@ -54,6 +82,8 @@ public sealed class TweakPromotionGateEntry
     public string SchemaCompatibilityMode { get; set; } = string.Empty;
     public string EvaluatorVersion { get; set; } = string.Empty;
     public TweakPromotionScoreBreakdown? ScoreBreakdown { get; set; }
+    public TweakRollbackGateStatus? RollbackStatus { get; set; }
+    public TweakFreshnessGateStatus? FreshnessStatus { get; set; }
 
     public string GatingReason =>
         !string.IsNullOrWhiteSpace(NextMissingLayer) && !string.Equals(NextMissingLayer, "none", StringComparison.OrdinalIgnoreCase)
@@ -84,6 +114,7 @@ public sealed class TweakPromotionGateEntry
 public sealed class TweakPromotionGateCatalogService
 {
     private const string CatalogPath = "research/promotion-gates.json";
+    private const string MutationAuditLogPath = "registry-research-framework/audit/mutation-override-audit-log.jsonl";
     private readonly string? _docsRoot;
     private readonly string? _repoRoot;
     private readonly TweakPromotionGateCatalog _catalog;
@@ -107,6 +138,112 @@ public sealed class TweakPromotionGateCatalogService
     }
 
     public TweakPromotionGateCatalog Catalog => _catalog;
+
+    public IEnumerable<TweakPromotionGateEntry> ListBlocked(string? reason = null)
+    {
+        var entries = _catalog.Entries
+            .Where(entry => string.Equals(entry.PromotionState, "blocked", StringComparison.OrdinalIgnoreCase));
+
+        if (string.IsNullOrWhiteSpace(reason))
+        {
+            return entries.OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase);
+        }
+
+        return entries
+            .Where(entry => entry.PromotionBlockers.Any(blocker => blocker.Contains(reason, StringComparison.OrdinalIgnoreCase)))
+            .OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase);
+    }
+
+    public IEnumerable<TweakPromotionGateEntry> ListRevalidationPending()
+    {
+        return _catalog.Entries
+            .Where(entry => string.Equals(entry.PromotionState, "revalidation-pending", StringComparison.OrdinalIgnoreCase)
+                            || (entry.FreshnessStatus?.RevalidationNeeded ?? false))
+            .OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase);
+    }
+
+    public TweakMutationDecision EvaluateApplyRequest(string tweakId, bool overrideRequested = false, string? overrideReason = null, bool? contributorMode = null)
+    {
+        var entry = ResolveOrFallback(tweakId);
+        var contributorModeEnabled = contributorMode ?? ContributorMode.IsEnabled;
+        var allowedWithoutOverride =
+            string.Equals(entry.TweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(entry.PromotionState, "promoted", StringComparison.OrdinalIgnoreCase);
+        var overrideUsed =
+            !allowedWithoutOverride
+            && overrideRequested
+            && contributorModeEnabled
+            && entry.DebugOverrideAllowed;
+
+        var decision = new TweakMutationDecision
+        {
+            Allowed = allowedWithoutOverride || overrideUsed,
+            OverrideRequested = overrideRequested,
+            OverrideUsed = overrideUsed,
+            OverrideReason = overrideReason?.Trim() ?? string.Empty,
+            Message = allowedWithoutOverride
+                ? "apply-allowed"
+                : overrideUsed
+                    ? "apply-override-allowed"
+                    : $"promotion-state:{entry.PromotionState}",
+            Entry = entry,
+        };
+
+        if (overrideRequested)
+        {
+            AppendMutationAuditLog("apply", decision, contributorModeEnabled);
+        }
+
+        return decision;
+    }
+
+    public TweakMutationDecision EvaluateRollbackRequest(string tweakId, bool overrideRequested = false, string? overrideReason = null, bool? contributorMode = null)
+    {
+        var decision = EvaluateApplyRequest(tweakId, overrideRequested, overrideReason, contributorMode);
+        decision.Message = decision.Allowed ? "rollback-allowed" : decision.Message;
+
+        if (!decision.Allowed)
+        {
+            return decision;
+        }
+
+        var rollback = decision.Entry.RollbackStatus;
+        if (rollback is null && !string.Equals(decision.Entry.TweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase))
+        {
+            decision.Allowed = false;
+            decision.Message = "rollback-not-declared";
+            return decision;
+        }
+
+        if (rollback is not null)
+        {
+            if (!rollback.RollbackDeclared && !rollback.RollbackExecuted
+                && !string.Equals(decision.Entry.TweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase))
+            {
+                decision.Allowed = false;
+                decision.Message = "rollback-not-declared";
+            }
+            else
+            {
+                if (rollback.RollbackDeclared && !rollback.RollbackExecuted)
+                {
+                    decision.Warnings.Add("rollback-declared-but-not-executed");
+                }
+
+                if (!rollback.RollbackVerified)
+                {
+                    decision.Warnings.Add("rollback-unverified");
+                }
+            }
+        }
+
+        if (overrideRequested || decision.Warnings.Count > 0)
+        {
+            AppendMutationAuditLog("rollback", decision, contributorMode ?? ContributorMode.IsEnabled);
+        }
+
+        return decision;
+    }
 
     public void Apply(IEnumerable<TweakItemViewModel> tweaks)
     {
@@ -225,7 +362,60 @@ public sealed class TweakPromotionGateCatalogService
                     SiblingExpansionValue = entry.ScoreBreakdown.SiblingExpansionValue,
                     BenchPriority = entry.ScoreBreakdown.BenchPriority,
                 },
+            RollbackStatus = entry.RollbackStatus is null
+                ? null
+                : new TweakRollbackGateStatus
+                {
+                    RollbackDeclared = entry.RollbackStatus.RollbackDeclared,
+                    RollbackExecuted = entry.RollbackStatus.RollbackExecuted,
+                    RollbackVerified = entry.RollbackStatus.RollbackVerified,
+                    RollbackVerificationMethod = entry.RollbackStatus.RollbackVerificationMethod,
+                    RollbackFailureReason = entry.RollbackStatus.RollbackFailureReason,
+                },
+            FreshnessStatus = entry.FreshnessStatus is null
+                ? null
+                : new TweakFreshnessGateStatus
+                {
+                    Status = entry.FreshnessStatus.Status,
+                    RevalidationNeeded = entry.FreshnessStatus.RevalidationNeeded,
+                    StaleReason = entry.FreshnessStatus.StaleReason,
+                    LastKnownGoodBuild = entry.FreshnessStatus.LastKnownGoodBuild,
+                },
         };
+    }
+
+    private void AppendMutationAuditLog(string action, TweakMutationDecision decision, bool contributorMode)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(_repoRoot))
+            {
+                return;
+            }
+
+            var path = Path.Combine(_repoRoot, MutationAuditLogPath.Replace('/', Path.DirectorySeparatorChar));
+            Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+            var payload = new
+            {
+                timestamp_utc = DateTimeOffset.UtcNow.ToString("O"),
+                action,
+                candidate_id = decision.Entry.CandidateId,
+                tweak_id = decision.Entry.TweakId,
+                promotion_state = decision.Entry.PromotionState,
+                override_requested = decision.OverrideRequested,
+                override_used = decision.OverrideUsed,
+                override_reason = string.IsNullOrWhiteSpace(decision.OverrideReason) ? "unspecified" : decision.OverrideReason,
+                contributor_mode = contributorMode,
+                allowed = decision.Allowed,
+                message = decision.Message,
+                warnings = decision.Warnings,
+            };
+
+            File.AppendAllText(path, JsonSerializer.Serialize(payload, JsonOptions) + Environment.NewLine);
+        }
+        catch
+        {
+        }
     }
 
     private string ResolvePath(string? path)
