@@ -844,7 +844,7 @@ function Invoke-TracerptParse {
         [int]$TimeoutSeconds = 180
     )
 
-    $attemptLog = New-Object System.Collections.Generic.List[object]
+    $attemptLog = @()
     for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
         if (Test-Path -LiteralPath $CsvOutputPath) {
             Remove-Item -LiteralPath $CsvOutputPath -Force -ErrorAction SilentlyContinue
@@ -853,7 +853,7 @@ function Invoke-TracerptParse {
         $result = Invoke-CmdCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($TracePath, '-o', $CsvOutputPath, '-of', 'CSV', '-y') -TimeoutSeconds $TimeoutSeconds
         $csvExists = Test-Path -LiteralPath $CsvOutputPath
         $csvLength = if ($csvExists) { (Get-Item -LiteralPath $CsvOutputPath).Length } else { 0 }
-        $attemptLog.Add([ordered]@{
+        $attemptLog += ,([pscustomobject][ordered]@{
                 attempt = $attempt
                 exit_code = $result.exit_code
                 timed_out = $result.timed_out
