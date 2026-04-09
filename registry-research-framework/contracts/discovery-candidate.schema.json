@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/contracts/discovery-candidate.schema.json",
+  "title": "Discovery Candidate",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "discovery_source",
+    "discovery_reason",
+    "feature_area",
+    "initial_confidence",
+    "seed_reference",
+    "required_followup",
+    "execution_context"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "candidate_id": {"type": "string", "minLength": 1},
+    "record_id": {"type": ["string", "null"]},
+    "discovery_source": {"type": "string", "minLength": 1},
+    "discovery_reason": {"type": "string", "minLength": 1},
+    "feature_area": {"type": "string", "minLength": 1},
+    "key_path": {"type": ["string", "null"]},
+    "value_name": {"type": ["string", "null"]},
+    "value_type": {"type": ["string", "null"]},
+    "registry_clue": {"type": ["string", "null"]},
+    "initial_confidence": {"type": "string", "minLength": 1},
+    "seed_reference": {"type": "string", "minLength": 1},
+    "required_followup": {"type": "string", "minLength": 1},
+    "execution_context": {
+      "$ref": "./execution-context.schema.json"
+    }
+  },
+  "anyOf": [
+    {"required": ["key_path"]},
+    {"required": ["value_name"]},
+    {"required": ["registry_clue"]}
+  ]
+}

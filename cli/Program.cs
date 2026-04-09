@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using RegProbe.App.Services;
+using RegProbe.App.Utilities;
 using RegProbe.Core;
 using RegProbe.Engine;
 using RegProbe.Infrastructure.Elevation;
@@ -18,6 +21,12 @@ namespace RegProbe.CLI;
 /// </summary>
 class Program
 {
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        WriteIndented = true
+    };
+
     static async Task<int> Main(string[] args)
     {
         var rootCommand = new RootCommand("RegProbe CLI - System optimization tool")
@@ -31,6 +40,7 @@ class Program
         rootCommand.AddCommand(CreateDnsCommand());
         rootCommand.AddCommand(CreateInfoCommand());
         rootCommand.AddCommand(CreateExportCommand());
+        rootCommand.AddCommand(CreateResearchCommand());
 
         return await rootCommand.InvokeAsync(args);
     }
@@ -133,6 +143,7 @@ class Program
             var noRollback = context.ParseResult.GetValueForOption(noRollbackOption);
 
             var catalog = new TweakCatalogService();
+            var promotionGateCatalog = new TweakPromotionGateCatalogService();
             var tweak = catalog.FindById(tweakId);
             if (tweak == null)
             {
@@ -141,7 +152,7 @@ class Program
                 return;
             }
 
-            if (!EnsureCanRunTweak(catalog, tweak, out var error))
+            if (!EnsureCanRunTweak(catalog, tweak, promotionGateCatalog, out var error))
             {
                 Console.WriteLine(error);
                 context.ExitCode = 2;
@@ -177,6 +188,7 @@ class Program
             var apply = context.ParseResult.GetValueForOption(revertApplyOption);
 
             var catalog = new TweakCatalogService();
+            var promotionGateCatalog = new TweakPromotionGateCatalogService();
             var tweak = catalog.FindById(tweakId);
             if (tweak == null)
             {
@@ -185,7 +197,7 @@ class Program
                 return;
             }
 
-            if (!EnsureCanRunTweak(catalog, tweak, out var error))
+            if (!EnsureCanRunTweak(catalog, tweak, promotionGateCatalog, out var error))
             {
                 Console.WriteLine(error);
                 context.ExitCode = 2;
@@ -219,6 +231,169 @@ class Program
         tweakCommand.AddCommand(revertCommand);
 
         return tweakCommand;
+    }
+
+    static Command CreateResearchCommand()
+    {
+        var researchCommand = new Command("research", "Inspect research-derived promotion and gate state");
+
+        var scoreCommand = new Command("score-candidate", "Show the score breakdown for a candidate");
+        var scoreIdArg = new Argument<string>("candidate-id", "Record or tweak id");
+        scoreCommand.AddArgument(scoreIdArg);
+        scoreCommand.SetHandler(context =>
+        {
+            var candidateId = context.ParseResult.GetValueForArgument(scoreIdArg);
+            var catalog = new TweakPromotionGateCatalogService();
+            if (!catalog.TryResolve(candidateId, out var entry))
+            {
+                Console.WriteLine($"Candidate not found in promotion-gates.json: {candidateId}");
+                context.ExitCode = 1;
+                return;
+            }
+
+            Console.WriteLine(JsonSerializer.Serialize(new
+            {
+                entry.CandidateId,
+                entry.RecordId,
+                entry.TweakId,
+                entry.TweakOrigin,
+                entry.PromotionState,
+                entry.ScoreBreakdown,
+            }, JsonOptions));
+            context.ExitCode = 0;
+        });
+        researchCommand.AddCommand(scoreCommand);
+
+        var evaluateCommand = new Command("evaluate-gate", "Show the gate evaluation for a candidate");
+        var evaluateIdArg = new Argument<string>("candidate-id", "Record or tweak id");
+        evaluateCommand.AddArgument(evaluateIdArg);
+        evaluateCommand.SetHandler(context =>
+        {
+            var candidateId = context.ParseResult.GetValueForArgument(evaluateIdArg);
+            var catalog = new TweakPromotionGateCatalogService();
+            if (!catalog.TryResolve(candidateId, out var entry))
+            {
+                Console.WriteLine($"Candidate not found in promotion-gates.json: {candidateId}");
+                context.ExitCode = 1;
+                return;
+            }
+
+            Console.WriteLine(JsonSerializer.Serialize(entry, JsonOptions));
+            context.ExitCode = 0;
+        });
+        researchCommand.AddCommand(evaluateCommand);
+
+        var blockedCommand = new Command("list-blocked", "List blocked candidates");
+        var reasonOption = new Option<string?>("--reason", "Only show blockers matching this reason");
+        blockedCommand.AddOption(reasonOption);
+        blockedCommand.SetHandler(context =>
+        {
+            var reason = context.ParseResult.GetValueForOption(reasonOption);
+            var catalog = new TweakPromotionGateCatalogService();
+            var entries = catalog.Catalog.Entries
+                .Where(entry => string.Equals(entry.PromotionState, "blocked", StringComparison.OrdinalIgnoreCase));
+
+            if (!string.IsNullOrWhiteSpace(reason))
+            {
+                entries = entries.Where(entry => entry.PromotionBlockers.Any(blocker =>
+                    blocker.Contains(reason, StringComparison.OrdinalIgnoreCase)));
+            }
+
+            foreach (var entry in entries.OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase))
+            {
+                Console.WriteLine($"{entry.TweakId} [{entry.TweakOrigin}] -> {entry.PromotionState} :: {entry.GatingReason}");
+            }
+
+            context.ExitCode = 0;
+        });
+        researchCommand.AddCommand(blockedCommand);
+
+        var staleCommand = new Command("show-stale", "List candidates waiting for revalidation");
+        staleCommand.SetHandler(() =>
+        {
+            var catalog = new TweakPromotionGateCatalogService();
+            foreach (var entry in catalog.Catalog.Entries
+                         .Where(entry => string.Equals(entry.PromotionState, "revalidation-pending", StringComparison.OrdinalIgnoreCase)
+                                         || entry.PromotionBlockers.Any(blocker => string.Equals(blocker, "stale-evidence", StringComparison.OrdinalIgnoreCase)))
+                         .OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase))
+            {
+                Console.WriteLine($"{entry.TweakId} -> {entry.GatingReason}");
+            }
+        });
+        researchCommand.AddCommand(staleCommand);
+
+        var regressionCommand = new Command("generate-regression-pack", "Generate a compact regression pack for a candidate");
+        var regressionIdArg = new Argument<string>("candidate-id", "Record or tweak id");
+        var outputOption = new Option<string?>("--output", "Optional output JSON path");
+        regressionCommand.AddArgument(regressionIdArg);
+        regressionCommand.AddOption(outputOption);
+        regressionCommand.SetHandler(context =>
+        {
+            var candidateId = context.ParseResult.GetValueForArgument(regressionIdArg);
+            var output = context.ParseResult.GetValueForOption(outputOption);
+            var catalog = new TweakPromotionGateCatalogService();
+            if (!catalog.TryResolve(candidateId, out var entry))
+            {
+                Console.WriteLine($"Candidate not found in promotion-gates.json: {candidateId}");
+                context.ExitCode = 1;
+                return;
+            }
+
+            var auditEntry = FindEvidenceAuditEntry(candidateId);
+            var fullEvidence = LoadFullEvidence(entry.RecordId, entry.TweakId);
+            var outputPath = ResolveRegressionPackOutput(candidateId, output);
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
+
+            var pack = new Dictionary<string, object?>
+            {
+                ["generated_utc"] = DateTimeOffset.UtcNow.ToString("O"),
+                ["candidate_id"] = entry.CandidateId,
+                ["record_id"] = entry.RecordId,
+                ["tweak_id"] = entry.TweakId,
+                ["schema_test"] = new
+                {
+                    promotion_gate_present = true,
+                    evaluator_version = entry.EvaluatorVersion,
+                    schema_compatibility_mode = entry.SchemaCompatibilityMode,
+                },
+                ["gate_test"] = new
+                {
+                    entry.TweakOrigin,
+                    entry.PromotionState,
+                    entry.PromotionBlockers,
+                    entry.RecordPromotionAllowed,
+                    entry.TweakIngestAllowed,
+                    entry.DebugOverrideAllowed,
+                },
+                ["docs_test"] = new
+                {
+                    audit_entry_present = auditEntry is not null,
+                    next_missing_layer = auditEntry?.GetValueOrDefault("next_missing_layer"),
+                    evidence_class = auditEntry?.GetValueOrDefault("evidence_class"),
+                },
+                ["before_after_test"] = new
+                {
+                    full_evidence_present = fullEvidence is not null,
+                    before_after = fullEvidence?["before_after"],
+                },
+                ["rollback_test"] = new
+                {
+                    restore_story_known = auditEntry?.GetValueOrDefault("restore_story_known"),
+                },
+                ["bench_profile_test"] = new
+                {
+                    score_breakdown = entry.ScoreBreakdown,
+                    bench_results = fullEvidence?["bench_results"],
+                },
+            };
+
+            File.WriteAllText(outputPath, JsonSerializer.Serialize(pack, JsonOptions));
+            Console.WriteLine(outputPath);
+            context.ExitCode = 0;
+        });
+        researchCommand.AddCommand(regressionCommand);
+
+        return researchCommand;
     }
 
     /// <summary>
@@ -532,9 +707,21 @@ class Program
         Console.WriteLine($"  {step.Action}: {step.Result.Status} - {step.Result.Message}");
     }
 
-    private static bool EnsureCanRunTweak(ITweakCatalog catalog, ITweak tweak, out string error)
+    private static bool EnsureCanRunTweak(ITweakCatalog catalog, ITweak tweak, TweakPromotionGateCatalogService promotionGateCatalog, out string error)
     {
         error = string.Empty;
+        var promotionGate = promotionGateCatalog.ResolveOrFallback(tweak.Id);
+        var mutationAllowed =
+            string.Equals(promotionGate.TweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(promotionGate.PromotionState, "promoted", StringComparison.OrdinalIgnoreCase)
+            || (ContributorMode.IsEnabled && promotionGate.DebugOverrideAllowed);
+
+        if (!mutationAllowed)
+        {
+            error = $"Tweak is gated by research promotion state '{promotionGate.PromotionState}'. {promotionGate.GatingReason}";
+            return false;
+        }
+
         if (!tweak.RequiresElevation)
         {
             return true;
@@ -553,5 +740,110 @@ class Program
         error = $"Tweak requires elevation, but ElevatedHost was not found at: {catalog.ElevatedHostPath}. " +
                 $"Build RegProbe.ElevatedHost or set {ElevatedHostDefaults.OverridePathEnvVar}.";
         return false;
+    }
+
+    private static string? TryFindRepoRoot()
+    {
+        var current = new DirectoryInfo(Directory.GetCurrentDirectory());
+        for (var depth = 0; depth < 8 && current is not null; depth++)
+        {
+            if (Directory.Exists(Path.Combine(current.FullName, ".git"))
+                || File.Exists(Path.Combine(current.FullName, "RegProbe.sln"))
+                || File.Exists(Path.Combine(current.FullName, "RegProbe.slnx")))
+            {
+                return current.FullName;
+            }
+
+            current = current.Parent;
+        }
+
+        return null;
+    }
+
+    private static string? ResolveResearchPath(string relativePath)
+    {
+        var repoRoot = TryFindRepoRoot();
+        if (!string.IsNullOrWhiteSpace(repoRoot))
+        {
+            var repoPath = Path.Combine(repoRoot, relativePath.Replace('/', Path.DirectorySeparatorChar));
+            if (File.Exists(repoPath))
+            {
+                return repoPath;
+            }
+        }
+
+        var docsPath = Path.Combine(AppContext.BaseDirectory, "Docs", relativePath.Replace('/', Path.DirectorySeparatorChar));
+        return File.Exists(docsPath) ? docsPath : null;
+    }
+
+    private static Dictionary<string, object?>? FindEvidenceAuditEntry(string candidateId)
+    {
+        var path = ResolveResearchPath(Path.Combine("research", "evidence-audit.json"));
+        if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
+        {
+            return null;
+        }
+
+        using var document = JsonDocument.Parse(File.ReadAllText(path));
+        if (!document.RootElement.TryGetProperty("entries", out var entries) || entries.ValueKind != JsonValueKind.Array)
+        {
+            return null;
+        }
+
+        foreach (var entry in entries.EnumerateArray())
+        {
+            var recordId = entry.TryGetProperty("record_id", out var recordIdProp) ? recordIdProp.GetString() : null;
+            var tweakId = entry.TryGetProperty("tweak_id", out var tweakIdProp) ? tweakIdProp.GetString() : null;
+            if (!string.Equals(recordId, candidateId, StringComparison.OrdinalIgnoreCase)
+                && !string.Equals(tweakId, candidateId, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            return JsonSerializer.Deserialize<Dictionary<string, object?>>(entry.GetRawText(), JsonOptions);
+        }
+
+        return null;
+    }
+
+    private static Dictionary<string, object?>? LoadFullEvidence(string recordId, string tweakId)
+    {
+        var repoRoot = TryFindRepoRoot();
+        if (string.IsNullOrWhiteSpace(repoRoot))
+        {
+            return null;
+        }
+
+        var candidateIds = new[] { recordId, tweakId }
+            .Where(value => !string.IsNullOrWhiteSpace(value))
+            .Distinct(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var candidateId in candidateIds)
+        {
+            var path = Path.Combine(repoRoot, "evidence", "records", candidateId, "full-evidence.json");
+
+            if (File.Exists(path))
+            {
+                return JsonSerializer.Deserialize<Dictionary<string, object?>>(File.ReadAllText(path), JsonOptions);
+            }
+        }
+
+        return null;
+    }
+
+    private static string ResolveRegressionPackOutput(string candidateId, string? requestedOutput)
+    {
+        if (!string.IsNullOrWhiteSpace(requestedOutput))
+        {
+            return Path.GetFullPath(requestedOutput);
+        }
+
+        var repoRoot = TryFindRepoRoot();
+        if (!string.IsNullOrWhiteSpace(repoRoot))
+        {
+            return Path.Combine(repoRoot, "research", "regression-packs", $"{candidateId}.json");
+        }
+
+        return Path.GetFullPath($"{candidateId}.regression-pack.json");
     }
 }

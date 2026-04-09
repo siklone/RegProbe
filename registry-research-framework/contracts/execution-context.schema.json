@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/contracts/execution-context.schema.json",
+  "title": "Execution Context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "backend_id",
+    "type",
+    "os",
+    "privilege",
+    "isolation"
+  ],
+  "properties": {
+    "backend_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "enum": ["local", "vm", "remote"]
+    },
+    "os": {
+      "enum": ["windows", "linux-with-vm", "windows-runner"]
+    },
+    "privilege": {
+      "enum": ["user", "elevated", "system"]
+    },
+    "isolation": {
+      "enum": ["none", "vm", "container"]
+    }
+  }
+}

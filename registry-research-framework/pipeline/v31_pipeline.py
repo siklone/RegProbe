@@ -38,6 +38,7 @@ from wave2_research_lib import (  # noqa: E402
     interaction_groups_for_tweak,
     reproducibility_manifest,
 )
+from research_v36_lib import canonical_bundle_projection  # noqa: E402
 
 RESEARCH_ROOT = REPO_ROOT / "research"
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -1175,6 +1176,11 @@ def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[
                 "verdict": benchmark.get("significance_verdict", "insufficient"),
                 "statistics": benchmark.get("statistics"),
             },
+            "gate_result": canonical_bundle_projection(record, audit, {
+                "behavior": behavior_block.get("behavior") or {},
+                "negative_evidence": build_negative_evidence_profile(record, audit, {}),
+                "reproducibility": reproducibility_manifest(),
+            }).get("gate_result"),
         },
     }
 
@@ -1312,6 +1318,7 @@ def build_full_evidence(record: dict[str, Any], audit: dict[str, Any], phase: st
     }
     if re_audit:
         payload["re_audit"] = re_audit["re_audit"]
+    payload.update(canonical_bundle_projection(record, audit, payload))
     return payload
 
 

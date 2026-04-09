@@ -108,6 +108,11 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _evidenceClassGatingReason = "Evidence pending";
     private bool _isEvidenceClassActionable;
     private bool _showInApp = true;
+    private string _tweakOrigin = "legacy-curated";
+    private string _promotionState = "promoted";
+    private string _promotionGatingReason = string.Empty;
+    private bool _isPromotionActionable = true;
+    private bool _debugOverrideAllowed;
     private string _validatedSemanticsSummary = string.Empty;
     private string _validatedSemanticsSource = string.Empty;
     private string _runtimeProofSummary = string.Empty;
@@ -571,9 +576,9 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         get
         {
-            if (!IsEvidenceClassActionable)
+            if (!IsMutationAllowed)
             {
-                return EvidenceClassGatingReason;
+                return PublicMutationGatingReason;
             }
 
             if (_tweak is not IChoiceTweak choiceTweak || string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceLabel))
@@ -976,7 +981,41 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool ShowInApp => _showInApp;
 
-    public bool IsResearchGated => ShowInApp && !IsEvidenceClassActionable;
+    public string TweakOrigin => _tweakOrigin;
+
+    public string PromotionState => _promotionState;
+
+    public string PromotionGatingReason => _promotionGatingReason;
+
+    public bool IsResearchDerived => string.Equals(_tweakOrigin, "research-derived", StringComparison.OrdinalIgnoreCase);
+
+    public bool IsPromotionActionable => _isPromotionActionable;
+
+    public bool CanDebugOverridePromotionGate => ContributorMode.IsEnabled && _debugOverrideAllowed;
+
+    public bool IsMutationAllowed => IsEvidenceClassActionable && (IsPromotionActionable || CanDebugOverridePromotionGate);
+
+    public string PublicMutationGatingReason
+    {
+        get
+        {
+            if (!IsEvidenceClassActionable)
+            {
+                return PublicEvidenceClassGatingReason;
+            }
+
+            if (IsMutationAllowed)
+            {
+                return string.Empty;
+            }
+
+            return ContributorMode.IsEnabled
+                ? PromotionGatingReason
+                : PublicResearchGateExplanation;
+        }
+    }
+
+    public bool IsResearchGated => ShowInApp && !IsMutationAllowed;
 
     public bool HasEvidenceClass => !string.IsNullOrWhiteSpace(_evidenceClassId);
 
@@ -998,23 +1037,23 @@ public sealed class TweakItemViewModel : ViewModelBase
         _ => ClassEBackgroundBrush
     };
 
-    public string ConfigurationPrimaryActionTooltip => IsEvidenceClassActionable
+    public string ConfigurationPrimaryActionTooltip => IsMutationAllowed
         ? "Apply this setting."
-        : PublicEvidenceClassGatingReason;
+        : PublicMutationGatingReason;
 
-    public string ConfigurationRollbackActionTooltip => IsEvidenceClassActionable
+    public string ConfigurationRollbackActionTooltip => IsMutationAllowed
         ? "Restore the value from before you changed this setting."
-        : PublicEvidenceClassGatingReason;
+        : PublicMutationGatingReason;
 
-    public string PrimaryActionTooltip => IsEvidenceClassActionable
+    public string PrimaryActionTooltip => IsMutationAllowed
         ? "Run this action."
-        : PublicEvidenceClassGatingReason;
+        : PublicMutationGatingReason;
 
-    public string RollbackActionTooltip => IsEvidenceClassActionable
+    public string RollbackActionTooltip => IsMutationAllowed
         ? "Restore the previous value captured before you ran this action."
-        : PublicEvidenceClassGatingReason;
+        : PublicMutationGatingReason;
 
-    public string ResearchGateMessage => IsEvidenceClassActionable ? string.Empty : "Evidence pending";
+    public string ResearchGateMessage => IsMutationAllowed ? string.Empty : PublicResearchGateExplanation;
 
     public bool HasResearchGateMessage => !string.IsNullOrWhiteSpace(ResearchGateMessage);
 
@@ -1144,6 +1183,23 @@ public sealed class TweakItemViewModel : ViewModelBase
         RaiseEvidenceClassificationChanged();
     }
 
+    public void ApplyResearchPromotionGate(TweakPromotionGateEntry? entry)
+    {
+        entry ??= TweakPromotionGateEntry.CreateFallback(Id);
+
+        _tweakOrigin = string.IsNullOrWhiteSpace(entry.TweakOrigin) ? "legacy-curated" : entry.TweakOrigin;
+        _promotionState = string.IsNullOrWhiteSpace(entry.PromotionState) ? "promoted" : entry.PromotionState;
+        _isPromotionActionable =
+            string.Equals(_tweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(_promotionState, "promoted", StringComparison.OrdinalIgnoreCase);
+        _debugOverrideAllowed = entry.DebugOverrideAllowed;
+        _promotionGatingReason = string.IsNullOrWhiteSpace(entry.GatingReason)
+            ? "Promotion pending."
+            : entry.GatingReason;
+
+        RaisePromotionGateChanged();
+    }
+
     private void RaiseEvidenceClassificationChanged()
     {
         OnPropertyChanged(nameof(EvidenceClassId));
@@ -1158,6 +1214,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(EvidenceClassGatingReason));
         OnPropertyChanged(nameof(IsEvidenceClassActionable));
         OnPropertyChanged(nameof(ShowInApp));
+        OnPropertyChanged(nameof(IsMutationAllowed));
         OnPropertyChanged(nameof(IsResearchGated));
         OnPropertyChanged(nameof(HasEvidenceClass));
         OnPropertyChanged(nameof(EvidenceClassBrush));
@@ -1178,6 +1235,28 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(UpstreamLineageSource));
         OnPropertyChanged(nameof(HasUpstreamLineage));
         OnPropertyChanged(nameof(HasEvidenceProofBoxes));
+        OnPropertyChanged(nameof(RestoreDefaultTooltip));
+        OnPropertyChanged(nameof(PublicMutationGatingReason));
+        UpdateCommandStates();
+    }
+
+    private void RaisePromotionGateChanged()
+    {
+        OnPropertyChanged(nameof(TweakOrigin));
+        OnPropertyChanged(nameof(PromotionState));
+        OnPropertyChanged(nameof(PromotionGatingReason));
+        OnPropertyChanged(nameof(IsResearchDerived));
+        OnPropertyChanged(nameof(IsPromotionActionable));
+        OnPropertyChanged(nameof(CanDebugOverridePromotionGate));
+        OnPropertyChanged(nameof(IsMutationAllowed));
+        OnPropertyChanged(nameof(PublicMutationGatingReason));
+        OnPropertyChanged(nameof(IsResearchGated));
+        OnPropertyChanged(nameof(ConfigurationPrimaryActionTooltip));
+        OnPropertyChanged(nameof(ConfigurationRollbackActionTooltip));
+        OnPropertyChanged(nameof(PrimaryActionTooltip));
+        OnPropertyChanged(nameof(RollbackActionTooltip));
+        OnPropertyChanged(nameof(ResearchGateMessage));
+        OnPropertyChanged(nameof(HasResearchGateMessage));
         OnPropertyChanged(nameof(RestoreDefaultTooltip));
         UpdateCommandStates();
     }
@@ -1864,7 +1943,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private bool CanMutate()
     {
-        return !IsRunning && !IsBulkLocked && IsEvidenceClassActionable;
+        return !IsRunning && !IsBulkLocked && IsMutationAllowed;
     }
 
     private bool CanCancel()

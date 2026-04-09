@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "entries": {
+    "scheduler": {
+      "profiles": ["boot_time_relative", "latency_relative"],
+      "bench_vm_capable": "partial",
+      "bare_metal_required_for_perf_claim": true
+    },
+    "service": {
+      "profiles": ["service_startup", "functional_throughput"],
+      "bench_vm_capable": true,
+      "bare_metal_required_for_perf_claim": false
+    },
+    "display": {
+      "profiles": ["display_pipeline_timing"],
+      "bench_vm_capable": false,
+      "bare_metal_required_for_perf_claim": true
+    },
+    "network": {
+      "profiles": ["connection_latency_relative", "functional_throughput"],
+      "bench_vm_capable": "partial",
+      "bare_metal_required_for_perf_claim": true
+    },
+    "power": {
+      "profiles": ["boot_time_relative", "functional_throughput"],
+      "bench_vm_capable": true,
+      "bare_metal_required_for_perf_claim": false
+    },
+    "default": {
+      "profiles": ["functional_throughput"],
+      "bench_vm_capable": true,
+      "bare_metal_required_for_perf_claim": false
+    }
+  }
+}

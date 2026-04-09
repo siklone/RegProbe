@@ -13,6 +13,7 @@ from evidence_class_lib import (
     load_overrides,
     load_provenance_map,
 )
+from research_v36_lib import PROMOTION_GATES_PATH
 from research_path_lib import REPO_ROOT, RESEARCH_ROOT
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -21,9 +22,25 @@ OVERRIDES_PATH = RESEARCH_ROOT / "evidence-class-overrides.json"
 OUTPUT_PATH = RESEARCH_ROOT / "evidence-classes.json"
 
 
+def load_promotion_gate_map(path: Path) -> dict[str, dict]:
+    if not path.exists():
+        return {}
+    payload = load_json(path)
+    result: dict[str, dict] = {}
+    for entry in payload.get("entries") or []:
+        if not isinstance(entry, dict):
+            continue
+        for key_name in ("record_id", "tweak_id", "candidate_id"):
+            key = str(entry.get(key_name) or "").strip()
+            if key and key not in result:
+                result[key] = entry
+    return result
+
+
 def main() -> int:
     provenance_map = load_provenance_map(PROVENANCE_PATH)
     overrides = load_overrides(OVERRIDES_PATH)
+    promotion_gates = load_promotion_gate_map(PROMOTION_GATES_PATH)
 
     entries: list[dict] = []
     class_counts: Counter[str] = Counter()
@@ -37,6 +54,14 @@ def main() -> int:
             provenance_entry=provenance_map.get(key),
             override=overrides.get(key),
         )
+        promotion_gate = promotion_gates.get(key) or {}
+        entry["tweak_origin"] = promotion_gate.get("tweak_origin")
+        entry["promotion_state"] = promotion_gate.get("promotion_state")
+        entry["promotion_blockers"] = promotion_gate.get("promotion_blockers") or []
+        entry["record_promotion_allowed"] = promotion_gate.get("record_promotion_allowed")
+        entry["tweak_ingest_allowed"] = promotion_gate.get("tweak_ingest_allowed")
+        entry["debug_override_allowed"] = promotion_gate.get("debug_override_allowed")
+        entry["score_breakdown"] = promotion_gate.get("score_breakdown") or {}
         class_counts[entry["evidence_class"]] += 1
         action_counts[entry["action_state"]] += 1
         entries.append(entry)

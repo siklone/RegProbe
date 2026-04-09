@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using RegProbe.App.Services;
 using RegProbe.App.ViewModels;
 using RegProbe.Core;
 using RegProbe.Engine;
@@ -66,6 +67,48 @@ public sealed class TweakItemViewModelTests
         Assert.Equal("Mixed", viewModel.CurrentValue);
         Assert.DoesNotContain("Entries:", viewModel.StatusMessage);
         Assert.DoesNotContain("Value249", viewModel.StatusMessage);
+    }
+
+    [Fact]
+    public void ResearchDerivedBlockedPromotionGate_DisablesMutation()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("power.blocked-gate-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+        });
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "blocked",
+            PromotionBlockers = new List<string> { "runtime-trace" },
+            RecordPromotionAllowed = false,
+            TweakIngestAllowed = false,
+            ApplyAllowed = false,
+            AppMappingStatus = "not-mapped",
+            NextMissingLayer = "runtime-trace",
+            DebugOverrideAllowed = false,
+        });
+
+        Assert.True(viewModel.IsEvidenceClassActionable);
+        Assert.False(viewModel.IsMutationAllowed);
+        Assert.True(viewModel.IsResearchGated);
+        Assert.Equal("blocked", viewModel.PromotionState);
     }
 
     private sealed class RecordingLogger : IAppLogger

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/contracts/gate-result.schema.json",
+  "title": "Gate Result",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "evaluator_version",
+    "supported_schema_versions",
+    "schema_compatibility_mode",
+    "candidate_id",
+    "promotion_state",
+    "promotion_blockers"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "evaluator_version": {"type": "string", "minLength": 1},
+    "supported_schema_versions": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "schema_compatibility_mode": {
+      "enum": ["native", "compatibility", "unsupported"]
+    },
+    "candidate_id": {"type": "string", "minLength": 1},
+    "record_id": {"type": ["string", "null"]},
+    "tweak_id": {"type": ["string", "null"]},
+    "tweak_origin": {
+      "enum": ["legacy-curated", "research-derived"]
+    },
+    "promotion_state": {
+      "enum": ["blocked", "promotion-eligible", "promoted", "revalidation-pending", "rejected"]
+    },
+    "promotion_blockers": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "record_promotion_allowed": {"type": "boolean"},
+    "tweak_ingest_allowed": {"type": "boolean"},
+    "apply_allowed": {"type": "boolean"},
+    "app_mapping_status": {"type": "string"},
+    "next_missing_layer": {"type": "string"},
+    "debug_override_allowed": {"type": "boolean"},
+    "score_breakdown": {"type": "object"},
+    "last_evaluated_at": {"type": "string", "format": "date-time"}
+  }
+}

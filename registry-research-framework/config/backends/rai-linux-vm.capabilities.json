@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "backend_id": "rai-linux-vm",
+  "type": "vm",
+  "os": "linux-with-vm",
+  "guest_os": "windows-11-25h2",
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "capabilities": {
+    "registry_read": true,
+    "registry_write": true,
+    "reboot": true,
+    "snapshot_restore": true,
+    "etw_capture": true,
+    "procmon_capture": true,
+    "debugger_attach": false,
+    "bench_run": true,
+    "bench_bare_metal": false
+  }
+}

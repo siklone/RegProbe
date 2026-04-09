@@ -33,6 +33,7 @@ from evidence_class_lib import (
     sanitize_value,
     suspected_layer,
 )
+from research_v36_lib import PROMOTION_GATES_PATH, load_json_if_exists
 from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, is_github_release_url, normalize_reference
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -58,6 +59,21 @@ def load_incident_map(path: Path) -> dict[str, list[dict[str, Any]]]:
             if not key:
                 continue
             result.setdefault(key, []).append(incident)
+    return result
+
+
+def load_promotion_gate_map(path: Path) -> dict[str, dict[str, Any]]:
+    payload = load_json_if_exists(path)
+    if not isinstance(payload, dict):
+        return {}
+    result: dict[str, dict[str, Any]] = {}
+    for entry in payload.get("entries") or []:
+        if not isinstance(entry, dict):
+            continue
+        for key_name in ("record_id", "tweak_id", "candidate_id"):
+            key = str(entry.get(key_name) or "").strip()
+            if key and key not in result:
+                result[key] = entry
     return result
 
 
@@ -247,11 +263,13 @@ def main() -> int:
     provenance_map = load_provenance_map(PROVENANCE_PATH)
     overrides = load_overrides(OVERRIDES_PATH)
     incident_map = load_incident_map(INCIDENTS_PATH)
+    promotion_gate_map = load_promotion_gate_map(PROMOTION_GATES_PATH)
 
     entries: list[dict[str, Any]] = []
     class_counts: Counter[str] = Counter()
     lane_counts: Counter[str] = Counter()
     missing_counts: Counter[str] = Counter()
+    promotion_state_counts: Counter[str] = Counter()
 
     for path in sorted(RECORDS_DIR.glob("*.json")):
         record = load_json(path)
@@ -273,11 +291,13 @@ def main() -> int:
             next_layer = str(override["next_missing_layer_override"])
         official = has_official_evidence(record)
         class_id = class_entry["evidence_class"]
+        promotion_gate = promotion_gate_map.get(record_id) or {}
         checks = dead_flag_checks(record_id, record)
         audit_required = re_audit_required(class_id, official, record_id, record, incident_seen)
         class_counts[class_entry["evidence_class"]] += 1
         lane_counts[lane] += 1
         missing_counts[next_layer] += 1
+        promotion_state_counts[str(promotion_gate.get("promotion_state") or "unknown")] += 1
 
         if class_entry["evidence_class"] == "A":
             if has_official_evidence(record):
@@ -327,6 +347,14 @@ def main() -> int:
                     "restore_story_known": restore_story_known(record),
                     "apply_allowed": (record.get("decision") or {}).get("apply_allowed"),
                     "confidence": (record.get("decision") or {}).get("confidence"),
+                    "tweak_origin": promotion_gate.get("tweak_origin"),
+                    "promotion_state": promotion_gate.get("promotion_state"),
+                    "promotion_blockers": promotion_gate.get("promotion_blockers"),
+                    "record_promotion_allowed": promotion_gate.get("record_promotion_allowed"),
+                    "tweak_ingest_allowed": promotion_gate.get("tweak_ingest_allowed"),
+                    "score_breakdown": promotion_gate.get("score_breakdown"),
+                    "schema_compatibility_mode": promotion_gate.get("schema_compatibility_mode"),
+                    "evaluator_version": promotion_gate.get("evaluator_version"),
                     "source_file": str(path.relative_to(REPO_ROOT)).replace("\\", "/"),
                     "incident_ids": list(
                         dict.fromkeys(
@@ -347,6 +375,7 @@ def main() -> int:
             "class_counts": dict(class_counts),
             "lane_counts": dict(lane_counts),
             "next_missing_layer_counts": dict(missing_counts),
+            "promotion_state_counts": dict(promotion_state_counts),
             "re_audit_required_count": sum(1 for entry in entries if entry.get("re_audit_required")),
         },
         "entries": entries,

@@ -443,7 +443,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private List<TweakItemViewModel> GetAllActionableFilteredTweaks()
     {
         return TweaksView.Cast<TweakItemViewModel>()
-            .Where(item => item.IsEvidenceClassActionable)
+            .Where(item => item.IsMutationAllowed)
             .ToList();
     }
 
@@ -455,7 +455,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private List<TweakItemViewModel> GetSelectedActionableTweaks()
     {
         return Tweaks
-            .Where(t => t.IsSelected && t.IsEvidenceClassActionable)
+            .Where(t => t.IsSelected && t.IsMutationAllowed)
             .ToList();
     }
 
@@ -468,6 +468,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         else if (e.PropertyName == nameof(TweakItemViewModel.IsRunning))
         {
             _commandCoordinator.NotifyTweakRunningChanged();
+        }
+        else if (e.PropertyName is nameof(TweakItemViewModel.IsMutationAllowed)
+                 or nameof(TweakItemViewModel.IsResearchGated)
+                 or nameof(TweakItemViewModel.ShowInApp))
+        {
+            _commandCoordinator.NotifyFilterStateChanged();
+            RefreshSummaryStats();
         }
         else if (e.PropertyName is nameof(TweakItemViewModel.IsApplied)
                  or nameof(TweakItemViewModel.AppliedStatus)

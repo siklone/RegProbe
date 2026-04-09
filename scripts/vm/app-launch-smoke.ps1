@@ -66,11 +66,13 @@ try {
     $exe = Join-Path $AppRoot 'RegProbe.App.exe'
     $docsRoot = Join-Path $AppRoot 'Docs'
     $evidenceClasses = Join-Path $docsRoot 'research\evidence-classes.json'
+    $promotionGates = Join-Path $docsRoot 'research\promotion-gates.json'
     $tweakCatalog = Join-Path $docsRoot 'tweaks\tweak-catalog.html'
 
     $result.executable = $exe
     $result.docs_root_exists = [bool](Test-Path $docsRoot)
     $result.evidence_classes_exists = [bool](Test-Path $evidenceClasses)
+    $result.promotion_gates_exists = [bool](Test-Path $promotionGates)
     $result.tweak_catalog_exists = [bool](Test-Path $tweakCatalog)
 
     if (-not (Test-Path $exe)) {
