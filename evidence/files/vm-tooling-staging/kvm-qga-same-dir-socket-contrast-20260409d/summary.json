@@ -1,0 +1,11 @@
+{
+  "bundle_id": "kvm-qga-same-dir-socket-contrast-20260409d",
+  "domain": "regprobe-win11-25h2-session",
+  "focus": "Compare host-side connect behavior between the live qga socket and a temporary unix socket backend created in the same libvirt channel directory.",
+  "findings": [
+    "A temporary QMP chardev socket created at /run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/codex.same-dir.sock accepted a direct host-side AF_UNIX connection successfully.",
+    "The live qga socket at /run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/org.qemu.guest_agent.0 still returned ConnectionRefusedError(111, 'Connection refused') on the same direct host-side connect pattern.",
+    "That means the libvirt qemu run/channel directory itself is not the source of the persistent refusal.",
+    "The remaining failure is specific to the live qga channel state or qga integration path, not to the host path prefix or directory placement."
+  ]
+}
