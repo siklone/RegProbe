@@ -26,6 +26,8 @@ $etlPath = Join-Path $GuestRoot 'mega-trace.etl'
 $csvPath = Join-Path $GuestRoot 'mega-trace.csv'
 $xmlPath = Join-Path $GuestRoot 'mega-trace.xml'
 $runLogPath = Join-Path $GuestRoot 'guest-run.log'
+$parserDiagnosticsPath = Join-Path (Split-Path -Parent $ResultsPath) 'parser-diagnostics.json'
+$script:XmlTraceDiagnostics = $null
 
 function Write-JsonFile {
     param(
@@ -938,10 +940,23 @@ function Get-TraceLinesFromXml {
     param([string]$Path)
 
     if (-not (Test-Path -LiteralPath $Path)) {
+        $script:XmlTraceDiagnostics = [ordered]@{
+            path = $Path
+            exists = $false
+            event_count = 0
+            line_count = 0
+            element_name_counts = @()
+            data_name_counts = @()
+            sample_events = @()
+        }
         return @()
     }
 
     $lines = New-Object System.Collections.Generic.List[string]
+    $elementCounts = @{}
+    $dataNameCounts = @{}
+    $sampleEvents = New-Object System.Collections.Generic.List[object]
+    $eventCount = 0
     $settings = New-Object System.Xml.XmlReaderSettings
     $settings.IgnoreComments = $true
     $settings.IgnoreWhitespace = $true
@@ -988,6 +1003,7 @@ function Get-TraceLinesFromXml {
                             & $flushEvent
                         }
 
+                        $eventCount++
                         $provider = $null
                         $eventId = $null
                         $processName = $null
@@ -1005,6 +1021,19 @@ function Get-TraceLinesFromXml {
                         $provider = $reader.GetAttribute('Guid')
                         if ([string]::IsNullOrWhiteSpace($provider)) {
                             $provider = $reader.GetAttribute('Name')
+                        }
+                        continue
+                    }
+                    'Execution' {
+                        if (-not $inEvent) {
+                            continue
+                        }
+
+                        if ([string]::IsNullOrWhiteSpace($processName)) {
+                            $processId = [string]$reader.GetAttribute('ProcessID')
+                            if (-not [string]::IsNullOrWhiteSpace($processId)) {
+                                $processName = "pid:$processId"
+                            }
                         }
                         continue
                     }
@@ -1026,20 +1055,85 @@ function Get-TraceLinesFromXml {
                         }
 
                         $name = [string]$reader.GetAttribute('Name')
+                        if (-not [string]::IsNullOrWhiteSpace($name)) {
+                            if (-not $dataNameCounts.ContainsKey($name)) {
+                                $dataNameCounts[$name] = 0
+                            }
+                            $dataNameCounts[$name]++
+                        }
                         $value = [string]$reader.ReadElementContentAsString()
                         switch -Regex ($name) {
-                            '^(KeyName|PathName|Path|KeyPath)$' {
+                            '^(KeyName|PathName|Path|KeyPath|BaseName|CompleteName)$' {
                                 $keyPath = Normalize-RegistryPathToken -Value $value
                             }
-                            '^(ValueName|Value|Name)$' {
+                            '^(ValueName|Value)$' {
                                 if (-not [string]::IsNullOrWhiteSpace($value) -and $value -notmatch '\\') {
                                     $valueName = $value
+                                }
+                            }
+                            '^(RelativeName)$' {
+                                if (-not [string]::IsNullOrWhiteSpace($value)) {
+                                    if ($value -match '\\') {
+                                        if ([string]::IsNullOrWhiteSpace($keyPath)) {
+                                            $keyPath = Normalize-RegistryPathToken -Value $value
+                                        }
+                                    }
+                                    else {
+                                        $valueName = $value
+                                    }
                                 }
                             }
                             '^(ProcessName|Image)$' {
                                 $processName = $value
                             }
-                            '^(Operation)$' {
+                            '^(Operation|EventName|OpcodeName)$' {
+                                $operation = Normalize-RegistryOperationToken -Value $value
+                            }
+                        }
+                        continue
+                    }
+                    default {
+                        if (-not $inEvent) {
+                            continue
+                        }
+
+                        $elementName = [string]$reader.LocalName
+                        if (-not [string]::IsNullOrWhiteSpace($elementName)) {
+                            if (-not $elementCounts.ContainsKey($elementName)) {
+                                $elementCounts[$elementName] = 0
+                            }
+                            $elementCounts[$elementName]++
+                        }
+                        if ($elementName -notmatch '^(KeyName|PathName|Path|KeyPath|BaseName|CompleteName|ValueName|Value|RelativeName|ProcessName|Image|Operation|EventName|OpcodeName)$') {
+                            continue
+                        }
+
+                        $value = [string]$reader.ReadElementContentAsString()
+                        switch -Regex ($elementName) {
+                            '^(KeyName|PathName|Path|KeyPath|BaseName|CompleteName)$' {
+                                $keyPath = Normalize-RegistryPathToken -Value $value
+                            }
+                            '^(ValueName|Value)$' {
+                                if (-not [string]::IsNullOrWhiteSpace($value) -and $value -notmatch '\\') {
+                                    $valueName = $value
+                                }
+                            }
+                            '^(RelativeName)$' {
+                                if (-not [string]::IsNullOrWhiteSpace($value)) {
+                                    if ($value -match '\\') {
+                                        if ([string]::IsNullOrWhiteSpace($keyPath)) {
+                                            $keyPath = Normalize-RegistryPathToken -Value $value
+                                        }
+                                    }
+                                    else {
+                                        $valueName = $value
+                                    }
+                                }
+                            }
+                            '^(ProcessName|Image)$' {
+                                $processName = $value
+                            }
+                            '^(Operation|EventName|OpcodeName)$' {
                                 $operation = Normalize-RegistryOperationToken -Value $value
                             }
                         }
@@ -1049,6 +1143,16 @@ function Get-TraceLinesFromXml {
             }
 
             if ($reader.NodeType -eq [System.Xml.XmlNodeType]::EndElement -and $reader.LocalName -eq 'Event') {
+                if ($sampleEvents.Count -lt 5) {
+                    $sampleEvents.Add([pscustomobject][ordered]@{
+                            provider = $provider
+                            event_id = $eventId
+                            process = $processName
+                            operation = $operation
+                            key = $keyPath
+                            value = $valueName
+                        })
+                }
                 & $flushEvent
                 $provider = $null
                 $eventId = $null
@@ -1066,6 +1170,36 @@ function Get-TraceLinesFromXml {
     }
     finally {
         $reader.Close()
+    }
+
+    $script:XmlTraceDiagnostics = [ordered]@{
+        path = $Path
+        exists = $true
+        event_count = $eventCount
+        line_count = @($lines).Count
+        element_name_counts = @(
+            $elementCounts.GetEnumerator() |
+                Sort-Object Value -Descending, Name |
+                Select-Object -First 20 |
+                ForEach-Object {
+                    [ordered]@{
+                        name = [string]$_.Name
+                        count = [int]$_.Value
+                    }
+                }
+        )
+        data_name_counts = @(
+            $dataNameCounts.GetEnumerator() |
+                Sort-Object Value -Descending, Name |
+                Select-Object -First 20 |
+                ForEach-Object {
+                    [ordered]@{
+                        name = [string]$_.Name
+                        count = [int]$_.Value
+                    }
+                }
+        )
+        sample_events = @($sampleEvents)
     }
 
     return @($lines)
@@ -1225,7 +1359,7 @@ $triggerNames = @($manifest.triggers)
 
 try {
     if ($Phase -eq 'arm') {
-        foreach ($path in @($etlPath, $csvPath, $xmlPath, $SummaryPath, $ResultsPath)) {
+        foreach ($path in @($etlPath, $csvPath, $xmlPath, $SummaryPath, $ResultsPath, $parserDiagnosticsPath)) {
             if (Test-Path -LiteralPath $path) {
                 Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
             }
@@ -1343,6 +1477,12 @@ try {
             if (@($traceLines).Count -gt 0) {
                 Write-RunLog -Message ("trace-parsed parser=tracerpt-xml-primary attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
             }
+            elseif ($script:XmlTraceDiagnostics) {
+                Write-JsonFile -Path $parserDiagnosticsPath -InputObject $script:XmlTraceDiagnostics
+                $topElement = if (@($script:XmlTraceDiagnostics.element_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.element_name_counts)[0].name } else { 'none' }
+                $topData = if (@($script:XmlTraceDiagnostics.data_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.data_name_counts)[0].name } else { 'none' }
+                Write-RunLog -Message ("trace-xml-zero-lines parser=tracerpt-xml-primary event_count={0} top_element={1} top_data={2}" -f $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
+            }
         }
     }
     else {
@@ -1359,6 +1499,12 @@ try {
                         $parserSource = 'tracerpt-xml-fallback'
                         Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
                     }
+                    elseif ($script:XmlTraceDiagnostics) {
+                        Write-JsonFile -Path $parserDiagnosticsPath -InputObject $script:XmlTraceDiagnostics
+                        $topElement = if (@($script:XmlTraceDiagnostics.element_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.element_name_counts)[0].name } else { 'none' }
+                        $topData = if (@($script:XmlTraceDiagnostics.data_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.data_name_counts)[0].name } else { 'none' }
+                        Write-RunLog -Message ("trace-xml-zero-lines parser=tracerpt-xml-fallback event_count={0} top_element={1} top_data={2}" -f $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
+                    }
                 }
             }
         }
@@ -1369,6 +1515,12 @@ try {
                 if (@($traceLines).Count -gt 0) {
                     $parserSource = 'tracerpt-xml-fallback'
                     Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
+                }
+                elseif ($script:XmlTraceDiagnostics) {
+                    Write-JsonFile -Path $parserDiagnosticsPath -InputObject $script:XmlTraceDiagnostics
+                    $topElement = if (@($script:XmlTraceDiagnostics.element_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.element_name_counts)[0].name } else { 'none' }
+                    $topData = if (@($script:XmlTraceDiagnostics.data_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.data_name_counts)[0].name } else { 'none' }
+                    Write-RunLog -Message ("trace-xml-zero-lines parser=tracerpt-xml-fallback event_count={0} top_element={1} top_data={2}" -f $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
                 }
             }
         }
