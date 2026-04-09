@@ -246,6 +246,7 @@ function Get-TraceBufferProfile {
             buffer_size_kb = 16
             min_buffers = 2
             max_buffers = 4
+            max_file_mb = 16
             mode = 'low-space'
         }
     }
@@ -255,6 +256,7 @@ function Get-TraceBufferProfile {
         buffer_size_kb = 64
         min_buffers = 32
         max_buffers = 64
+        max_file_mb = 256
         mode = 'default'
     }
 }
@@ -355,7 +357,7 @@ function Start-Trace {
     }
 
     $profile = Get-TraceBufferProfile -TracePath $etlPath
-    Write-RunLog -Message ("trace-buffer-profile mode={0} free_bytes={1} bs={2} nb_min={3} nb_max={4}" -f $profile.mode, $profile.free_bytes, $profile.buffer_size_kb, $profile.min_buffers, $profile.max_buffers)
+    Write-RunLog -Message ("trace-buffer-profile mode={0} free_bytes={1} bs={2} nb_min={3} nb_max={4} max_mb={5}" -f $profile.mode, $profile.free_bytes, $profile.buffer_size_kb, $profile.min_buffers, $profile.max_buffers, $profile.max_file_mb)
     Write-RunLog -Message ("trace-create-start name={0}" -f $traceName)
     $create = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @(
         'create', 'trace', $traceName,
@@ -363,6 +365,8 @@ function Start-Trace {
         '-o', $etlPath,
         '-bs', [string]$profile.buffer_size_kb,
         '-nb', [string]$profile.min_buffers, [string]$profile.max_buffers,
+        '-f', 'bincirc',
+        '-max', [string]$profile.max_file_mb,
         '-ets'
     ) -TimeoutSeconds 90
     if ($create.timed_out) {
@@ -891,7 +895,10 @@ function Invoke-TracerptXmlParse {
             Remove-Item -LiteralPath $XmlOutputPath -Force -ErrorAction SilentlyContinue
         }
 
-        $result = Invoke-CmdCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($TracePath, '-lr', '-o', $XmlOutputPath, '-of', 'XML', '-y') -TimeoutSeconds $TimeoutSeconds
+        # `tracerpt -lr -of XML` succeeds interactively on this guest, while the
+        # captured variant has intermittently returned a false failure with no output.
+        # Use the simpler no-capture path here and judge success by exit code + file.
+        $result = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($TracePath, '-lr', '-o', $XmlOutputPath, '-of', 'XML', '-y') -TimeoutSeconds $TimeoutSeconds
         $xmlExists = Test-Path -LiteralPath $XmlOutputPath
         $xmlLength = if ($xmlExists) { (Get-Item -LiteralPath $XmlOutputPath).Length } else { 0 }
         $attemptLog += ,([pscustomobject][ordered]@{
@@ -1484,6 +1491,9 @@ try {
                 Write-RunLog -Message ("trace-xml-zero-lines parser=tracerpt-xml-primary event_count={0} top_element={1} top_data={2}" -f $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
             }
         }
+        else {
+            Write-RunLog -Message ("trace-xml-failed parser=tracerpt-xml-primary timed_out={0} exit_code={1} xml_exists={2} xml_length={3}" -f $xmlTracerpt.timed_out, $xmlTracerpt.exit_code, $xmlTracerpt.xml_exists, $xmlTracerpt.xml_length)
+        }
     }
     else {
         $tracerpt = Invoke-TracerptParse -TracePath $traceArtifactPath -CsvOutputPath $csvPath -Attempts 2 -TimeoutSeconds 180
@@ -1506,6 +1516,9 @@ try {
                         Write-RunLog -Message ("trace-xml-zero-lines parser=tracerpt-xml-fallback event_count={0} top_element={1} top_data={2}" -f $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
                     }
                 }
+                else {
+                    Write-RunLog -Message ("trace-xml-failed parser=tracerpt-xml-fallback timed_out={0} exit_code={1} xml_exists={2} xml_length={3}" -f $xmlTracerpt.timed_out, $xmlTracerpt.exit_code, $xmlTracerpt.xml_exists, $xmlTracerpt.xml_length)
+                }
             }
         }
         else {
@@ -1522,6 +1535,9 @@ try {
                     $topData = if (@($script:XmlTraceDiagnostics.data_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.data_name_counts)[0].name } else { 'none' }
                     Write-RunLog -Message ("trace-xml-zero-lines parser=tracerpt-xml-fallback event_count={0} top_element={1} top_data={2}" -f $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
                 }
+            }
+            else {
+                Write-RunLog -Message ("trace-xml-failed parser=tracerpt-xml-fallback timed_out={0} exit_code={1} xml_exists={2} xml_length={3}" -f $xmlTracerpt.timed_out, $xmlTracerpt.exit_code, $xmlTracerpt.xml_exists, $xmlTracerpt.xml_length)
             }
         }
     }
