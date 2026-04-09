@@ -891,7 +891,7 @@ function Invoke-TracerptXmlParse {
             Remove-Item -LiteralPath $XmlOutputPath -Force -ErrorAction SilentlyContinue
         }
 
-        $result = Invoke-CmdCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($TracePath, '-o', $XmlOutputPath, '-of', 'XML', '-y') -TimeoutSeconds $TimeoutSeconds
+        $result = Invoke-CmdCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($TracePath, '-lr', '-o', $XmlOutputPath, '-of', 'XML', '-y') -TimeoutSeconds $TimeoutSeconds
         $xmlExists = Test-Path -LiteralPath $XmlOutputPath
         $xmlLength = if ($xmlExists) { (Get-Item -LiteralPath $XmlOutputPath).Length } else { 0 }
         $attemptLog += ,([pscustomobject][ordered]@{
