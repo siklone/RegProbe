@@ -941,64 +941,29 @@ function Get-TraceLinesFromXml {
         return @()
     }
 
+    $lines = New-Object System.Collections.Generic.List[string]
+    $settings = New-Object System.Xml.XmlReaderSettings
+    $settings.IgnoreComments = $true
+    $settings.IgnoreWhitespace = $true
+
     try {
-        $xml = New-Object System.Xml.XmlDocument
-        $xml.Load($Path)
+        $reader = [System.Xml.XmlReader]::Create($Path, $settings)
     }
     catch {
         return @()
     }
 
-    $lines = New-Object System.Collections.Generic.List[string]
-    $events = $xml.SelectNodes('//*[local-name()="Event"]')
-    foreach ($event in @($events)) {
-        $provider = $null
-        $eventId = $null
-        $processName = $null
-        $operation = $null
-        $keyPath = $null
-        $valueName = $null
+    $provider = $null
+    $eventId = $null
+    $processName = $null
+    $operation = $null
+    $keyPath = $null
+    $valueName = $null
+    $inEvent = $false
 
-        $providerNode = $event.SelectSingleNode('.//*[local-name()="Provider"]')
-        if ($providerNode) {
-            $guidAttr = $providerNode.Attributes['Guid']
-            $nameAttr = $providerNode.Attributes['Name']
-            if ($guidAttr) {
-                $provider = [string]$guidAttr.Value
-            }
-            if ([string]::IsNullOrWhiteSpace($provider)) {
-                if ($nameAttr) {
-                    $provider = [string]$nameAttr.Value
-                }
-            }
-        }
-
-        $eventIdNode = $event.SelectSingleNode('.//*[local-name()="EventID"]')
-        if ($eventIdNode) {
-            $eventId = [string]$eventIdNode.InnerText
-        }
-
-        $dataNodes = $event.SelectNodes('.//*[local-name()="Data"]')
-        foreach ($node in @($dataNodes)) {
-            $nameAttr = $node.Attributes['Name']
-            $name = if ($nameAttr) { [string]$nameAttr.Value } else { '' }
-            $value = [string]$node.InnerText
-            switch -Regex ($name) {
-                '^(KeyName|PathName|Path|KeyPath)$' {
-                    $keyPath = Normalize-RegistryPathToken -Value $value
-                }
-                '^(ValueName|Value|Name)$' {
-                    if (-not [string]::IsNullOrWhiteSpace($value) -and $value -notmatch '\\') {
-                        $valueName = $value
-                    }
-                }
-                '^(ProcessName|Image)$' {
-                    $processName = $value
-                }
-                '^(Operation)$' {
-                    $operation = Normalize-RegistryOperationToken -Value $value
-                }
-            }
+    $flushEvent = {
+        if (-not $inEvent) {
+            return
         }
 
         $parts = New-Object System.Collections.Generic.List[string]
@@ -1012,6 +977,95 @@ function Get-TraceLinesFromXml {
         if ($parts.Count -gt 0) {
             $lines.Add(($parts -join ' '))
         }
+    }
+
+    try {
+        while ($reader.Read()) {
+            if ($reader.NodeType -eq [System.Xml.XmlNodeType]::Element) {
+                switch ($reader.LocalName) {
+                    'Event' {
+                        if ($inEvent) {
+                            & $flushEvent
+                        }
+
+                        $provider = $null
+                        $eventId = $null
+                        $processName = $null
+                        $operation = $null
+                        $keyPath = $null
+                        $valueName = $null
+                        $inEvent = $true
+                        continue
+                    }
+                    'Provider' {
+                        if (-not $inEvent) {
+                            continue
+                        }
+
+                        $provider = $reader.GetAttribute('Guid')
+                        if ([string]::IsNullOrWhiteSpace($provider)) {
+                            $provider = $reader.GetAttribute('Name')
+                        }
+                        continue
+                    }
+                    'EventID' {
+                        if ($inEvent) {
+                            $eventId = [string]$reader.ReadElementContentAsString()
+                        }
+                        continue
+                    }
+                    'Opcode' {
+                        if ($inEvent) {
+                            $operation = Normalize-RegistryOperationToken -Value ([string]$reader.ReadElementContentAsString())
+                        }
+                        continue
+                    }
+                    'Data' {
+                        if (-not $inEvent) {
+                            continue
+                        }
+
+                        $name = [string]$reader.GetAttribute('Name')
+                        $value = [string]$reader.ReadElementContentAsString()
+                        switch -Regex ($name) {
+                            '^(KeyName|PathName|Path|KeyPath)$' {
+                                $keyPath = Normalize-RegistryPathToken -Value $value
+                            }
+                            '^(ValueName|Value|Name)$' {
+                                if (-not [string]::IsNullOrWhiteSpace($value) -and $value -notmatch '\\') {
+                                    $valueName = $value
+                                }
+                            }
+                            '^(ProcessName|Image)$' {
+                                $processName = $value
+                            }
+                            '^(Operation)$' {
+                                $operation = Normalize-RegistryOperationToken -Value $value
+                            }
+                        }
+                        continue
+                    }
+                }
+            }
+
+            if ($reader.NodeType -eq [System.Xml.XmlNodeType]::EndElement -and $reader.LocalName -eq 'Event') {
+                & $flushEvent
+                $provider = $null
+                $eventId = $null
+                $processName = $null
+                $operation = $null
+                $keyPath = $null
+                $valueName = $null
+                $inEvent = $false
+            }
+        }
+
+        if ($inEvent) {
+            & $flushEvent
+        }
+    }
+    finally {
+        $reader.Close()
     }
 
     return @($lines)
@@ -1387,7 +1441,7 @@ try {
     }
 
     $state.phase = 'completed'
-    $state.result_status = $summary.status
+    Set-ObjectPropertyValue -InputObject $state -Name 'result_status' -Value $summary.status
     Write-JsonFile -Path $StatePath -InputObject $state
     Write-JsonFile -Path $ResultsPath -InputObject $results
     Write-JsonFile -Path $SummaryPath -InputObject $summary
