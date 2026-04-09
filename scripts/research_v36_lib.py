@@ -2599,6 +2599,62 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
     return touches
 
 
+def extract_registry_touches_from_sidecar_json(json_path: Path, provider_guid: str | None = None) -> list[dict[str, Any]]:
+    if not json_path.exists():
+        return []
+
+    try:
+        payload = json.loads(json_path.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return []
+
+    touches = payload.get("registry_touches") if isinstance(payload, dict) else payload
+    if not isinstance(touches, list):
+        return []
+
+    provider_guid = str(provider_guid or "").strip("{}").lower()
+    normalized: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str, str]] = set()
+
+    for raw in touches:
+        if not isinstance(raw, dict):
+            continue
+        provider = str(raw.get("provider") or "")
+        operation = _guess_registry_operation(str(raw.get("operation") or "")) or str(raw.get("operation") or "registry-touch")
+        key_path = _normalize_registry_path(str(raw.get("key_path") or "")) or None
+        value_name = str(raw.get("value_name") or "") or None
+        process_name = str(raw.get("process_name") or "") or None
+        process_id = str(raw.get("process_id") or "") or None
+        event_id = str(raw.get("event_id") or "") or None
+        provider_match = bool(provider_guid and provider_guid in provider.lower().strip("{}"))
+        if not key_path and not provider_match:
+            continue
+
+        touch = {
+            "event_id": event_id,
+            "provider": provider or None,
+            "provider_guid_matched": provider_match,
+            "process_name": process_name,
+            "process_id": process_id,
+            "operation": operation or "registry-touch",
+            "key_path": key_path,
+            "value_name": value_name,
+            "raw_excerpt": str(raw.get("raw_excerpt") or "")[:400],
+        }
+        dedupe_key = (
+            str(touch.get("operation") or ""),
+            str(touch.get("key_path") or ""),
+            str(touch.get("value_name") or ""),
+            str(touch.get("process_name") or ""),
+        )
+        if dedupe_key in seen:
+            continue
+        seen.add(dedupe_key)
+        normalized.append(touch)
+
+    return normalized
+
+
 def etl_touch_candidates(parse_result: dict[str, Any], backend_id: str = DEFAULT_BACKEND_ID) -> list[dict[str, Any]]:
     etl_path = str(parse_result.get("etl_path") or "")
     feature_source = infer_etl_source(etl_path)
@@ -2657,6 +2713,7 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
     parser_commands = config.get("parser_commands") or {}
     tracerpt = str(parser_commands.get("tracerpt") or "tracerpt")
     xml_output = etl_path.with_suffix(".etl.xml")
+    touch_sidecar = etl_path.with_suffix(".etl.registry-touches.json")
     command = [tracerpt, str(etl_path), "-o", str(xml_output), "-of", "XML"]
 
     def use_existing_xml_sidecar(note: str) -> dict[str, Any]:
@@ -2667,11 +2724,21 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
         output["normalized_touch_count"] = len(output["registry_touches"])
         return output
 
+    def use_existing_touch_sidecar(note: str) -> dict[str, Any]:
+        output["status"] = "parsed-sidecar-json"
+        output["notes"].append(note)
+        output["touch_sidecar_output"] = normalize_repo_relative_path(str(touch_sidecar.relative_to(REPO_ROOT)))
+        output["registry_touches"] = extract_registry_touches_from_sidecar_json(touch_sidecar, provider_guid=provider_guid)
+        output["normalized_touch_count"] = len(output["registry_touches"])
+        return output
+
     try:
         completed = subprocess.run(command, capture_output=True, text=True, check=False)
     except FileNotFoundError:
         if xml_output.exists():
             return use_existing_xml_sidecar("tracerpt.exe is not available in this environment; parsed existing XML sidecar.")
+        if touch_sidecar.exists():
+            return use_existing_touch_sidecar("tracerpt.exe is not available in this environment; parsed existing touch sidecar.")
         output["status"] = "parser-unavailable"
         output["notes"].append("tracerpt.exe is not available in this environment.")
         return output
@@ -2680,6 +2747,8 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
     if completed.returncode != 0:
         if xml_output.exists():
             return use_existing_xml_sidecar("tracerpt returned a non-zero exit code; parsed existing XML sidecar.")
+        if touch_sidecar.exists():
+            return use_existing_touch_sidecar("tracerpt returned a non-zero exit code; parsed existing touch sidecar.")
         output["status"] = "parser-failed"
         return output
 

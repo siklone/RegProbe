@@ -671,6 +671,53 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertIn("parsed existing XML sidecar", " ".join(parsed["notes"]))
         self.assertEqual(parsed["registry_touches"][0]["key_path"], "HKLM\\System\\CurrentControlSet\\Control\\Power")
 
+    def test_parse_etl_registry_touches_uses_touch_sidecar_when_tracerpt_missing(self) -> None:
+        payload = {
+            "generated_utc": "2026-04-09T00:00:00Z",
+            "parser_source": "tracerpt-xml-primary",
+            "touch_count": 1,
+            "registry_touches": [
+                {
+                    "provider": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+                    "event_id": "10",
+                    "process_name": "svchost.exe",
+                    "operation": "QueryValueKey",
+                    "key_path": "HKLM\\System\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                }
+            ],
+        }
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_dir:
+            base = Path(temp_dir)
+            etl_path = base / "sample.etl"
+            sidecar_path = base / "sample.etl.registry-touches.json"
+            etl_path.write_bytes(b"ETL")
+            sidecar_path.write_text(json.dumps(payload), encoding="utf-8")
+
+            original_loader = research_v36_lib.load_etl_parser_config
+
+            def fake_config() -> dict[str, object]:
+                return {
+                    "default_parser": "tracerpt",
+                    "provider_guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+                    "parser_commands": {"tracerpt": "/definitely/missing/tracerpt.exe"},
+                }
+
+            research_v36_lib.load_etl_parser_config = fake_config
+            try:
+                parsed = research_v36_lib.parse_etl_registry_touches(
+                    etl_path,
+                    parser="tracerpt",
+                    provider_guid="{AE53722E-C863-11D2-8659-00C04FA321A1}",
+                )
+            finally:
+                research_v36_lib.load_etl_parser_config = original_loader
+
+        self.assertEqual(parsed["status"], "parsed-sidecar-json")
+        self.assertEqual(parsed["normalized_touch_count"], 1)
+        self.assertIn("parsed existing touch sidecar", " ".join(parsed["notes"]))
+        self.assertEqual(parsed["registry_touches"][0]["value_name"], "AllowSystemRequiredPowerRequests")
+
 
 class CanonicalBundleProjectionTests(unittest.TestCase):
     def test_projection_contains_required_top_level_contract_fields(self) -> None:
