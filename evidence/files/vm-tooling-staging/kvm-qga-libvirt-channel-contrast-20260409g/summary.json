@@ -1,0 +1,11 @@
+{
+  "bundle_id": "kvm-qga-libvirt-channel-contrast-20260409g",
+  "domain": "regprobe-win11-25h2-session",
+  "focus": "Compare the live qga socket against a temporary libvirt-managed unix virtio channel attached through virsh on the same running domain.",
+  "findings": [
+    "A temporary libvirt-managed unix channel named `org.codex.libvirttest.0` attached successfully on the live domain and appeared as `channel2` on `port 3, guest off, host off`.",
+    "That temporary libvirt-managed channel created `/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/codex.libvirttest.sock`, and direct host-side AF_UNIX connect to that socket returned `CONNECT_OK`.",
+    "At the same moment, the live qga socket `/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/org.qemu.guest_agent.0` still returned `ConnectionRefusedError(111, 'Connection refused')`.",
+    "After detach, the temporary channel socket disappeared cleanly, while the live qga socket remained."
+  ]
+}

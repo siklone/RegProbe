@@ -1,0 +1,12 @@
+191:    <channel type='spicevmc'>
+193:      <alias name='channel0'/>
+195:    </channel>
+196:    <channel type='unix'>
+197:      <source mode='bind' path='/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/org.qemu.guest_agent.0'/>
+199:      <alias name='channel1'/>
+201:    </channel>
+202:    <channel type='unix'>
+203:      <source mode='bind' path='/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/codex.libvirttest.sock'/>
+204:      <target type='virtio' name='org.codex.libvirttest.0'/>
+205:      <alias name='channel2'/>
+207:    </channel>

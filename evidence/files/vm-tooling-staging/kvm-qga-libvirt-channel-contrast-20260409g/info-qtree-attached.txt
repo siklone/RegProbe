@@ -1,0 +1,8 @@
+691:                  dev: virtserialport, id "channel2"
+694:                    name = "org.codex.libvirttest.0"
+695:                    port 3, guest off, host off, throttle off
+696:                  dev: virtserialport, id "channel1"
+699:                    name = "org.qemu.guest_agent.0"
+700:                    port 2, guest on, host off, throttle off
+701:                  dev: virtserialport, id "channel0"
+705:                    port 1, guest on, host on, throttle off
