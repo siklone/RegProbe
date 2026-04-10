@@ -9,6 +9,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter
 from datetime import datetime, timedelta, timezone
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -44,6 +45,7 @@ ETL_REGISTRY_DISCOVERY_PATH = DISCOVERY_ROOT / "etl-registry-discovery.json"
 GAP_ANALYSIS_SUMMARY_PATH = AUDIT_ROOT / "gap-analysis-summary.json"
 ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser-config.json"
 LEGACY_ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser.json"
+ETL_FEATURE_AREA_MAP_PATH = FRAMEWORK_ROOT / "config" / "etl-feature-area-map.json"
 ENRICHMENT_CACHE_PATH = ENRICHMENT_ROOT / "enrichment-cache.jsonl"
 BENCH_PROFILE_MAP_PATH = FRAMEWORK_ROOT / "config" / "bench-profile-map.json"
 URL_VALIDATION_REPORT_PATH = AUDIT_ROOT / "url-validation-report.json"
@@ -296,6 +298,38 @@ def load_etl_parser_config() -> dict[str, Any]:
             "evidence/**/*.etl.md",
         ],
         "include_placeholder_markdown": True,
+    }
+
+
+@lru_cache(maxsize=1)
+def load_etl_feature_area_map() -> dict[str, Any]:
+    payload = load_json_if_exists(ETL_FEATURE_AREA_MAP_PATH)
+    if not isinstance(payload, dict):
+        return {"version": CURRENT_SCHEMA_VERSION, "normalize_case": True, "prefix_map": []}
+
+    normalize_case = bool(payload.get("normalize_case", True))
+    raw_prefix_map = payload.get("prefix_map")
+    entries: list[dict[str, str]] = []
+    if isinstance(raw_prefix_map, list):
+        for raw_entry in raw_prefix_map:
+            if not isinstance(raw_entry, dict):
+                continue
+            prefix = str(raw_entry.get("prefix") or "").strip().replace("/", "\\")
+            feature_area = str(raw_entry.get("feature_area") or "").strip()
+            if not prefix or not feature_area:
+                continue
+            entries.append(
+                {
+                    "prefix": prefix.lower() if normalize_case else prefix,
+                    "feature_area": feature_area,
+                }
+            )
+
+    entries.sort(key=lambda item: len(item["prefix"]), reverse=True)
+    return {
+        "version": str(payload.get("version") or CURRENT_SCHEMA_VERSION),
+        "normalize_case": normalize_case,
+        "prefix_map": entries,
     }
 
 
@@ -2582,6 +2616,20 @@ def _registry_operation_for_event(event_id: str | None, text_blob: str) -> str:
     return mapped or guessed or "registry-touch"
 
 
+def _resolve_etl_feature_area_from_prefix_map(key_path: str | None) -> str | None:
+    path = str(key_path or "").strip().replace("/", "\\")
+    if not path:
+        return None
+
+    config = load_etl_feature_area_map()
+    normalized = path.lower() if config.get("normalize_case") else path
+    for entry in config.get("prefix_map") or []:
+        prefix = str(entry.get("prefix") or "")
+        if prefix and normalized.startswith(prefix):
+            return str(entry.get("feature_area") or "") or None
+    return None
+
+
 def _feature_area_from_key_path(key_path: str | None, fallback_source: str) -> str:
     path = str(key_path or "").lower()
     if "\\control\\power" in path:
@@ -2594,6 +2642,9 @@ def _feature_area_from_key_path(key_path: str | None, fallback_source: str) -> s
         return "Security"
     if "\\audio" in path or "\\multimedia" in path:
         return "Audio"
+    configured = _resolve_etl_feature_area_from_prefix_map(key_path)
+    if configured:
+        return configured
     return fallback_source.replace("-", " ").title()
 
 

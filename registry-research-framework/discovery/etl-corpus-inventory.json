@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-09T01:19:09.147033Z",
+  "generated_utc": "2026-04-10T21:55:14.005546Z",
   "parser": "tracerpt",
   "provider_guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
   "summary": {
-    "total_artifacts": 35,
-    "physical_etl_count": 0,
+    "total_artifacts": 37,
+    "physical_etl_count": 2,
     "placeholder_only_count": 35,
-    "parsed_count": 0,
+    "parsed_count": 1,
     "source_counts": {
       "manual-trace": 1,
       "runtime-probe": 13,
-      "unknown": 6,
+      "unknown": 8,
       "trigger-etw": 7,
       "boot-trace": 8
     }
@@ -172,6 +172,30 @@
       "parse_reason": "placeholder-markdown-only",
       "xml_output": null,
       "normalized_touch_count": 0
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/kvm-mega-trace-20260409/mega-trace.etl",
+      "size_bytes": 16777216,
+      "estimated_source": "unknown",
+      "is_placeholder": false,
+      "actual_etl_path": "evidence/files/vm-tooling-staging/kvm-mega-trace-20260409/mega-trace.etl",
+      "parsed": false,
+      "parse_status": "parser-unavailable",
+      "parse_reason": "tracerpt.exe is not available in this environment.",
+      "xml_output": null,
+      "normalized_touch_count": 0
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/kvm-mega-trace-20260410/mega-trace.etl",
+      "size_bytes": 108724224,
+      "estimated_source": "unknown",
+      "is_placeholder": false,
+      "actual_etl_path": "evidence/files/vm-tooling-staging/kvm-mega-trace-20260410/mega-trace.etl",
+      "parsed": true,
+      "parse_status": "parsed-sidecar-xml",
+      "parse_reason": "tracerpt.exe is not available in this environment; parsed existing XML sidecar.",
+      "xml_output": "evidence/files/vm-tooling-staging/kvm-mega-trace-20260410/mega-trace.xml",
+      "normalized_touch_count": 11674
     },
     {
       "path": "evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-trigger-etw.etl.md",
