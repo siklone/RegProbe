@@ -46,6 +46,7 @@ GAP_ANALYSIS_SUMMARY_PATH = AUDIT_ROOT / "gap-analysis-summary.json"
 ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser-config.json"
 LEGACY_ETL_PARSER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etl-parser.json"
 ETL_FEATURE_AREA_MAP_PATH = FRAMEWORK_ROOT / "config" / "etl-feature-area-map.json"
+ETL_TRIAGE_RULES_PATH = FRAMEWORK_ROOT / "config" / "etl-triage-rules.json"
 ENRICHMENT_CACHE_PATH = ENRICHMENT_ROOT / "enrichment-cache.jsonl"
 BENCH_PROFILE_MAP_PATH = FRAMEWORK_ROOT / "config" / "bench-profile-map.json"
 URL_VALIDATION_REPORT_PATH = AUDIT_ROOT / "url-validation-report.json"
@@ -330,6 +331,35 @@ def load_etl_feature_area_map() -> dict[str, Any]:
         "version": str(payload.get("version") or CURRENT_SCHEMA_VERSION),
         "normalize_case": normalize_case,
         "prefix_map": entries,
+    }
+
+
+@lru_cache(maxsize=1)
+def load_etl_triage_rules() -> dict[str, Any]:
+    payload = load_json_if_exists(ETL_TRIAGE_RULES_PATH)
+    if not isinstance(payload, dict):
+        return {"version": CURRENT_SCHEMA_VERSION, "discard_rules": []}
+
+    rules: list[dict[str, str]] = []
+    for raw_rule in payload.get("discard_rules") or []:
+        if not isinstance(raw_rule, dict):
+            continue
+        rule = str(raw_rule.get("rule") or "").strip()
+        description = str(raw_rule.get("description") or "").strip()
+        condition = str(raw_rule.get("condition") or "").strip()
+        if not rule:
+            continue
+        rules.append(
+            {
+                "rule": rule,
+                "description": description,
+                "condition": condition,
+            }
+        )
+
+    return {
+        "version": str(payload.get("version") or CURRENT_SCHEMA_VERSION),
+        "discard_rules": rules,
     }
 
 
@@ -1325,6 +1355,8 @@ def triage_candidate(candidate: dict[str, Any]) -> tuple[bool, list[str]]:
         or key_path.startswith("HKEY_")
     ):
         reasons.append("invalid:key_path")
+    if str(candidate.get("discovery_source") or "") == "etl-registry-touch":
+        reasons.extend(f"etl:{reason}" for reason in _etl_triage_reasons(candidate))
     return (len(reasons) == 0), reasons
 
 
@@ -2630,6 +2662,51 @@ def _resolve_etl_feature_area_from_prefix_map(key_path: str | None) -> str | Non
     return None
 
 
+def _etl_candidate_operation(candidate: dict[str, Any]) -> str:
+    operation = str(candidate.get("operation") or "").strip()
+    if operation:
+        return operation
+    registry_clue = str(candidate.get("registry_clue") or "").strip()
+    if not registry_clue:
+        return ""
+    return registry_clue.split(" via ")[0].strip()
+
+
+def _registry_key_path_depth(key_path: str | None) -> int:
+    return len([segment for segment in str(key_path or "").split("\\") if segment])
+
+
+def _etl_triage_reasons(candidate: dict[str, Any]) -> list[str]:
+    config = load_etl_triage_rules()
+    operation = _etl_candidate_operation(candidate)
+    key_path = str(candidate.get("key_path") or "").strip()
+    key_path_lower = key_path.lower()
+    value_name = str(candidate.get("value_name") or "").strip()
+    value_data = str(candidate.get("value_data") or "").strip()
+    depth = _registry_key_path_depth(key_path)
+    reasons: list[str] = []
+
+    for entry in config.get("discard_rules") or []:
+        rule = str(entry.get("rule") or "").strip()
+        matched = False
+        if rule == "open-close-only":
+            matched = operation in {"OpenKey", "CloseKey", "RegOpenKey", "RegCloseKey"} and not value_name
+        elif rule == "shallow-path":
+            matched = depth <= 3
+        elif rule == "package-registration-churn":
+            matched = "packagedcom" in key_path_lower or "activatableclassid" in key_path_lower
+        elif rule == "no-signal":
+            matched = operation == "RegQueryValue" and not value_name and not value_data
+        elif rule == "cryptography-oid-noise":
+            matched = "cryptography\\oid" in key_path_lower
+        elif rule == "windowsselfhost-fid-noise":
+            matched = "windowsselfhost\\fids" in key_path_lower
+        if matched:
+            reasons.append(rule)
+
+    return reasons
+
+
 def _feature_area_from_key_path(key_path: str | None, fallback_source: str) -> str:
     path = str(key_path or "").lower()
     if "\\control\\power" in path:
@@ -2873,6 +2950,8 @@ def etl_touch_candidates(parse_result: dict[str, Any], backend_id: str = DEFAULT
                 "key_path": key_path,
                 "value_name": value_name,
                 "value_type": None,
+                "value_data": touch.get("value_data"),
+                "operation": operation,
                 "registry_clue": f"{operation} via {touch.get('process_name') or 'unknown-process'}",
                 "initial_confidence": "medium" if touch.get("provider_guid_matched") else "low",
                 "seed_reference": etl_path,

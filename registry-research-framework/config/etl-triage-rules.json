@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "discard_rules": [
+    {
+      "rule": "open-close-only",
+      "description": "Pure OpenKey/CloseKey without write or value",
+      "condition": "operation in [RegOpenKey, RegCloseKey] and no value_name"
+    },
+    {
+      "rule": "shallow-path",
+      "description": "Path depth <= 3, too generic",
+      "condition": "key_path depth <= 3"
+    },
+    {
+      "rule": "package-registration-churn",
+      "description": "PackagedCom/ActivatableClassId noise",
+      "condition": "key_path contains PackagedCom or ActivatableClassId"
+    },
+    {
+      "rule": "no-signal",
+      "description": "No value_name, no value_data, read-only",
+      "condition": "operation == RegQueryValue and no value_name and no value_data"
+    },
+    {
+      "rule": "cryptography-oid-noise",
+      "description": "OID registration churn",
+      "condition": "key_path contains Cryptography\\OID"
+    },
+    {
+      "rule": "windowsselfhost-fid-noise",
+      "description": "FID churn, not actionable",
+      "condition": "key_path contains WindowsSelfhost\\FIDs"
+    }
+  ]
+}
