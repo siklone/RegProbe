@@ -25,9 +25,11 @@ $traceName = 'RegProbeMegaTrace'
 $etlPath = Join-Path $GuestRoot 'mega-trace.etl'
 $csvPath = Join-Path $GuestRoot 'mega-trace.csv'
 $xmlPath = Join-Path $GuestRoot 'mega-trace.xml'
+$traceTouchExportPath = Join-Path $GuestRoot 'mega-trace.etl.registry-touches.json'
 $runLogPath = Join-Path $GuestRoot 'guest-run.log'
 $parserDiagnosticsPath = Join-Path (Split-Path -Parent $ResultsPath) 'parser-diagnostics.json'
 $script:XmlTraceDiagnostics = $null
+$script:XmlTraceTouchRecords = @()
 
 function Write-JsonFile {
     param(
@@ -283,6 +285,21 @@ function Remove-TraceParserScratch {
         Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
         Write-RunLog -Message ("trace-parser-scratch-removed mode={0} path={1} length={2}" -f $Mode, $path, $length)
     }
+}
+
+function Write-TraceTouchExport {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][object[]]$Touches,
+        [Parameter(Mandatory = $true)][string]$ParserSource
+    )
+
+    Write-JsonFile -Path $Path -InputObject ([ordered]@{
+            generated_utc = [DateTime]::UtcNow.ToString('o')
+            parser_source = $ParserSource
+            touch_count = @($Touches).Count
+            registry_touches = @($Touches)
+        })
 }
 
 function Get-BaselineValues {
@@ -947,6 +964,7 @@ function Get-TraceLinesFromXml {
     param([string]$Path)
 
     if (-not (Test-Path -LiteralPath $Path)) {
+        $script:XmlTraceTouchRecords = @()
         $script:XmlTraceDiagnostics = [ordered]@{
             path = $Path
             exists = $false
@@ -960,6 +978,8 @@ function Get-TraceLinesFromXml {
     }
 
     $lines = New-Object System.Collections.Generic.List[string]
+    $touchRecords = New-Object System.Collections.Generic.List[object]
+    $touchSeen = @{}
     $elementCounts = @{}
     $dataNameCounts = @{}
     $sampleEvents = New-Object System.Collections.Generic.List[object]
@@ -972,6 +992,7 @@ function Get-TraceLinesFromXml {
         $reader = [System.Xml.XmlReader]::Create($Path, $settings)
     }
     catch {
+        $script:XmlTraceTouchRecords = @()
         return @()
     }
 
@@ -998,6 +1019,19 @@ function Get-TraceLinesFromXml {
 
         if ($parts.Count -gt 0) {
             $lines.Add(($parts -join ' '))
+        }
+
+        $dedupeKey = "{0}|{1}|{2}|{3}" -f $operation, $keyPath, $valueName, $processName
+        if (-not $touchSeen.ContainsKey($dedupeKey)) {
+            $touchSeen[$dedupeKey] = $true
+            $touchRecords.Add([pscustomobject][ordered]@{
+                    provider = $provider
+                    event_id = $eventId
+                    process_name = $processName
+                    operation = $operation
+                    key_path = $keyPath
+                    value_name = $valueName
+                })
         }
     }
 
@@ -1178,6 +1212,8 @@ function Get-TraceLinesFromXml {
     finally {
         $reader.Close()
     }
+
+    $script:XmlTraceTouchRecords = @($touchRecords.ToArray())
 
     try {
         $toCountSummary = {
@@ -1404,7 +1440,7 @@ $triggerNames = @($manifest.triggers)
 
 try {
     if ($Phase -eq 'arm') {
-        foreach ($path in @($etlPath, $csvPath, $xmlPath, $SummaryPath, $ResultsPath, $parserDiagnosticsPath)) {
+        foreach ($path in @($etlPath, $csvPath, $xmlPath, $traceTouchExportPath, $SummaryPath, $ResultsPath, $parserDiagnosticsPath)) {
             if (Test-Path -LiteralPath $path) {
                 Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
             }
@@ -1584,6 +1620,10 @@ try {
     $pathOnly = @($parsed.candidates | Where-Object { $_.status -eq 'path-only-hit' })
     $noHit = @($parsed.candidates | Where-Object { $_.status -eq 'no-hit' })
     $triggerErrors = @($state.trigger_log | Where-Object { $_.status -eq 'error' })
+    if (@($script:XmlTraceTouchRecords).Count -gt 0) {
+        Write-TraceTouchExport -Path $traceTouchExportPath -Touches @($script:XmlTraceTouchRecords) -ParserSource $parserSource
+        Write-RunLog -Message ("trace-touch-export path={0} touch_count={1}" -f $traceTouchExportPath, @($script:XmlTraceTouchRecords).Count)
+    }
     Remove-TraceParserScratch -Mode $traceProfile.mode
 
     $results = [ordered]@{
@@ -1600,6 +1640,7 @@ try {
         etl_path_source = if ($resolvedTrace) { [string]$resolvedTrace.source } else { 'missing' }
         etl_ready = [bool]$etlReadiness.ready
         etl_length = [int64]$etlReadiness.length
+        touch_export_path = if (Test-Path -LiteralPath $traceTouchExportPath) { $traceTouchExportPath } else { $null }
         tracerpt = $tracerpt
         exact_hit_count = @($exactHit).Count
         exact_line_only_count = @($exactLineOnly).Count
@@ -1623,6 +1664,7 @@ try {
         etl_path = $traceArtifactPath
         etl_path_source = if ($resolvedTrace) { [string]$resolvedTrace.source } else { 'missing' }
         etl_ready = [bool]$etlReadiness.ready
+        touch_export_exists = [bool](Test-Path -LiteralPath $traceTouchExportPath)
         tracerpt = $tracerpt
         exact_hit_count = @($exactHit).Count
         exact_line_only_count = @($exactLineOnly).Count
@@ -1645,12 +1687,27 @@ try {
     Write-RunLog -Message ("phase-complete phase=run status={0}" -f $summary.status)
 }
 catch {
+    $positionMessage = $null
+    try {
+        $positionMessage = $_.InvocationInfo.PositionMessage
+    }
+    catch {
+    }
+    $scriptStack = $null
+    try {
+        $scriptStack = $_.ScriptStackTrace
+    }
+    catch {
+    }
+
     Stop-TraceBestEffort
     if (Test-Path -LiteralPath $StatePath) {
         $state = Read-JsonFile -Path $StatePath
         if ($state) {
             Set-ObjectPropertyValue -InputObject $state -Name 'phase' -Value 'error'
             Set-ObjectPropertyValue -InputObject $state -Name 'error' -Value $_.Exception.Message
+            Set-ObjectPropertyValue -InputObject $state -Name 'error_position' -Value $positionMessage
+            Set-ObjectPropertyValue -InputObject $state -Name 'error_stack' -Value $scriptStack
             Set-ObjectPropertyValue -InputObject $state -Name 'result_status' -Value 'error'
             Write-JsonFile -Path $StatePath -InputObject $state
         }
@@ -1670,6 +1727,8 @@ catch {
         pattern = 'mega-trigger'
         parser_source = 'parser-error'
         error = $_.Exception.Message
+        error_position = $positionMessage
+        error_stack = $scriptStack
         candidates = @($errorCandidates)
     })
     Write-JsonFile -Path $SummaryPath -InputObject ([ordered]@{
@@ -1678,8 +1737,9 @@ catch {
         pattern = 'mega-trigger'
         status = 'error'
         error = $_.Exception.Message
+        error_position = $positionMessage
     })
-    Write-RunLog -Message ("phase-error phase={0} error={1}" -f $Phase, $_.Exception.Message)
+    Write-RunLog -Message ("phase-error phase={0} error={1} position={2}" -f $Phase, $_.Exception.Message, $positionMessage)
     throw
 }
 finally {
