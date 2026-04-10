@@ -1213,7 +1213,7 @@ function Get-TraceLinesFromXml {
         $reader.Close()
     }
 
-    $script:XmlTraceTouchRecords = @($touchRecords.ToArray())
+    $script:XmlTraceTouchRecords = @($touchRecords | ForEach-Object { $_ })
 
     try {
         $toCountSummary = {
