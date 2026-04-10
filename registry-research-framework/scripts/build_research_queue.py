@@ -31,6 +31,7 @@ from research_v36_lib import (
     load_records,
     load_url_validation_report,
     score_candidate,
+    score_etl_candidate,
     summarize_gap_analysis,
     summarize_queue,
     triage_candidate,
@@ -193,6 +194,8 @@ def queue_entries_from_runtime_discovery(candidates: list[dict]) -> list[dict]:
             linked_record_id=None,
             gate_result=None,
         )
+        if accepted and str(candidate.get("discovery_source") or "") == "etl-registry-touch":
+            entry["score"] = score_etl_candidate(candidate)
         if not accepted:
             entry["discard_reason"] = reasons
         entries.append(entry)

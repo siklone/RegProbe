@@ -249,6 +249,35 @@ class DiscoveryQueueAdapterTests(unittest.TestCase):
         self.assertEqual(entries[1]["state"], "discarded")
         self.assertIn("invalid:key_path", entries[1]["discard_reason"])
 
+    def test_etl_runtime_discovery_entries_receive_score(self) -> None:
+        candidates = [
+            {
+                "schema_version": research_v36_lib.CURRENT_SCHEMA_VERSION,
+                "candidate_id": "etl::scored",
+                "discovery_source": "etl-registry-touch",
+                "discovery_reason": "registry_touch_extracted",
+                "feature_area": "Security",
+                "key_path": "HKLM\\Software\\Microsoft\\Windows Defender",
+                "value_name": "DisableRealtimeMonitoring",
+                "value_type": "REG_DWORD",
+                "value_data": "1",
+                "operation": "RegSetValue",
+                "registry_clue": "RegSetValue via pid:100",
+                "initial_confidence": "medium",
+                "seed_reference": "tests/runtime",
+                "required_followup": "triage",
+                "execution_context": research_v36_lib.default_execution_context(),
+            }
+        ]
+
+        entries = build_research_queue.queue_entries_from_runtime_discovery(candidates)
+
+        self.assertEqual(entries[0]["state"], "triaged")
+        self.assertEqual(entries[0]["next_lane"], "scoring")
+        self.assertIn("score", entries[0])
+        self.assertEqual(entries[0]["score"]["profile"], "etl-runtime-v1")
+        self.assertGreaterEqual(entries[0]["score"]["total"], 0.5)
+
 
 if __name__ == "__main__":
     unittest.main()

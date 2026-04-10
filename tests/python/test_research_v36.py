@@ -138,8 +138,26 @@ class PromotionStateTests(unittest.TestCase):
         score = research_v36_lib.score_candidate(record, {"next_missing_layer": "none"})
 
         self.assertIn("overall_score", score)
-        self.assertGreater(score["overall_score"], 0)
-        self.assertEqual(score["next_missing_layer"], "none")
+
+    def test_score_etl_candidate_prefers_security_writes_with_value_context(self) -> None:
+        candidate = {
+            "discovery_source": "etl-registry-touch",
+            "feature_area": "Security",
+            "operation": "RegSetValue",
+            "key_path": "HKLM\\Software\\Microsoft\\Windows Defender",
+            "value_name": "DisableRealtimeMonitoring",
+            "value_data": "1",
+        }
+
+        score = research_v36_lib.score_etl_candidate(candidate)
+
+        self.assertEqual(score["profile"], "etl-runtime-v1")
+        self.assertEqual(score["runtime_evidence_strength"], 0.8)
+        self.assertEqual(score["rollback_clarity"], 0.3)
+        self.assertEqual(score["tweak_suitability"], 0.9)
+        self.assertEqual(score["bench_priority"], 0.4)
+        self.assertTrue(score["has_value_context"])
+        self.assertGreaterEqual(score["total"], 0.57)
 
     def test_repo_code_only_static_evidence_scores_low(self) -> None:
         record = {

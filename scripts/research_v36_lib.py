@@ -155,6 +155,27 @@ DEFAULT_REQUIRED_CAPABILITIES_BY_LANE = {
     "behavior": ["bench_run"],
 }
 
+ETL_SCORE_AREA_WEIGHTS = {
+    "Security": 0.9,
+    "Networking": 0.8,
+    "Policy": 0.8,
+    "System": 0.7,
+    "Power": 0.7,
+    "Services": 0.6,
+    "Explorer": 0.5,
+    "UserProfile": 0.4,
+    "Platform": 0.3,
+    "Unknown": 0.1,
+}
+
+ETL_SCORE_COMPONENT_WEIGHTS = {
+    "static_evidence_strength": 0.15,
+    "runtime_evidence_strength": 0.35,
+    "rollback_clarity": 0.20,
+    "tweak_suitability": 0.20,
+    "bench_priority": 0.10,
+}
+
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
@@ -1546,6 +1567,55 @@ def score_candidate(record: dict[str, Any], audit: dict[str, Any] | None = None,
     }
 
 
+def _etl_candidate_has_value_context(candidate: dict[str, Any]) -> bool:
+    for field in ("value_name", "value_data"):
+        value = candidate.get(field)
+        if value is None:
+            continue
+        if isinstance(value, str):
+            if value.strip():
+                return True
+            continue
+        return True
+    return False
+
+
+def score_etl_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
+    operation = _etl_candidate_operation(candidate)
+    has_value = _etl_candidate_has_value_context(candidate)
+    feature_area = str(candidate.get("feature_area") or "Unknown")
+
+    if operation in {"RegSetValue", "SetValueKey", "RegCreateKey", "CreateKey"} and has_value:
+        runtime_evidence_strength = 0.8
+    elif operation in {"RegSetValue", "SetValueKey", "RegCreateKey", "CreateKey"}:
+        runtime_evidence_strength = 0.5
+    elif operation == "RegQueryValue" and has_value:
+        runtime_evidence_strength = 0.4
+    else:
+        runtime_evidence_strength = 0.2
+
+    components = {
+        "static_evidence_strength": 0.1,
+        "runtime_evidence_strength": runtime_evidence_strength,
+        "rollback_clarity": 0.3,
+        "tweak_suitability": ETL_SCORE_AREA_WEIGHTS.get(feature_area, 0.1),
+        "bench_priority": 0.4,
+    }
+    total = round(
+        sum(components[name] * ETL_SCORE_COMPONENT_WEIGHTS[name] for name in ETL_SCORE_COMPONENT_WEIGHTS),
+        3,
+    )
+
+    return {
+        "profile": "etl-runtime-v1",
+        "feature_area": feature_area,
+        "operation": operation or "unknown",
+        "has_value_context": has_value,
+        **components,
+        "total": total,
+    }
+
+
 def bench_results_projection(full_evidence: dict[str, Any], record: dict[str, Any] | None = None, audit: dict[str, Any] | None = None) -> dict[str, Any]:
     benchmark = ((full_evidence.get("behavior") or {}).get("benchmark") or {}) if isinstance(full_evidence, dict) else {}
     reproducibility = full_evidence.get("reproducibility") or {}
@@ -2645,7 +2715,7 @@ def _registry_parent_path(path: str | None) -> str | None:
 def _registry_operation_for_event(event_id: str | None, text_blob: str) -> str:
     mapped = REGISTRY_XML_EVENT_ID_MAP.get(str(event_id or ""))
     guessed = _guess_registry_operation(text_blob or "")
-    return mapped or guessed or "registry-touch"
+    return guessed or mapped or "registry-touch"
 
 
 def _resolve_etl_feature_area_from_prefix_map(key_path: str | None) -> str | None:
