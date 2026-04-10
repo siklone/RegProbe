@@ -30,6 +30,26 @@
       "rule": "windowsselfhost-fid-noise",
       "description": "FID churn, not actionable",
       "condition": "key_path contains WindowsSelfhost\\FIDs"
+    },
+    {
+      "rule": "wbem-tracing-noise",
+      "description": "WBEM tracing provider runtime churn",
+      "condition": "key_path contains WBEM\\Tracing\\Providers"
+    },
+    {
+      "rule": "taskcache-dynamic-noise",
+      "description": "TaskCache runtime state, not tweak signal",
+      "condition": "key_path contains TaskCache\\Tasks and value_name == DynamicInfo"
+    },
+    {
+      "rule": "timestamp-value-noise",
+      "description": "Transient timestamp values, no tweak signal",
+      "condition": "value_name in [StartTime, LastDownloadTime, LastWriteTime, LastAccessTime]"
+    },
+    {
+      "rule": "diagtrack-noise",
+      "description": "Telemetry/DiagTrack runtime state",
+      "condition": "key_path contains DiagTrack"
     }
   ]
 }

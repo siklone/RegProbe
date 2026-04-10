@@ -523,6 +523,28 @@ class GapAnalysisTests(unittest.TestCase):
         self.assertFalse(accepted)
         self.assertIn("invalid:key_path", reasons)
 
+    def test_triage_candidate_rejects_etl_runtime_noise_families(self) -> None:
+        accepted, reasons = research_v36_lib.triage_candidate(
+            {
+                "schema_version": research_v36_lib.CURRENT_SCHEMA_VERSION,
+                "candidate_id": "etl::noise",
+                "discovery_source": "etl-registry-touch",
+                "discovery_reason": "registry_touch_extracted",
+                "feature_area": "System",
+                "key_path": "HKLM\\Software\\Microsoft\\WBEM\\Tracing\\Providers\\WMIPingProvider @ root\\CIMV2",
+                "value_name": "LastDownloadTime",
+                "registry_clue": "RegSetValue via pid:100",
+                "initial_confidence": "medium",
+                "seed_reference": "tests/runtime",
+                "required_followup": "triage",
+                "execution_context": research_v36_lib.default_execution_context(),
+            }
+        )
+
+        self.assertFalse(accepted)
+        self.assertIn("etl:wbem-tracing-noise", reasons)
+        self.assertIn("etl:timestamp-value-noise", reasons)
+
     def test_sibling_discovery_only_triggers_for_promotable_states(self) -> None:
         self.assertTrue(research_v36_lib.should_trigger_sibling_discovery({"promotion_state": "promotion-eligible"}))
         self.assertTrue(research_v36_lib.should_trigger_sibling_discovery({"promotion_state": "promoted"}))

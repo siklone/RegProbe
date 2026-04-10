@@ -2752,6 +2752,7 @@ def _etl_triage_reasons(candidate: dict[str, Any]) -> list[str]:
     key_path = str(candidate.get("key_path") or "").strip()
     key_path_lower = key_path.lower()
     value_name = str(candidate.get("value_name") or "").strip()
+    value_name_lower = value_name.lower()
     value_data = str(candidate.get("value_data") or "").strip()
     depth = _registry_key_path_depth(key_path)
     reasons: list[str] = []
@@ -2771,6 +2772,14 @@ def _etl_triage_reasons(candidate: dict[str, Any]) -> list[str]:
             matched = "cryptography\\oid" in key_path_lower
         elif rule == "windowsselfhost-fid-noise":
             matched = "windowsselfhost\\fids" in key_path_lower
+        elif rule == "wbem-tracing-noise":
+            matched = "wbem\\tracing\\providers" in key_path_lower
+        elif rule == "taskcache-dynamic-noise":
+            matched = "taskcache\\tasks" in key_path_lower and value_name_lower == "dynamicinfo"
+        elif rule == "timestamp-value-noise":
+            matched = value_name_lower in {"starttime", "lastdownloadtime", "lastwritetime", "lastaccesstime"}
+        elif rule == "diagtrack-noise":
+            matched = "diagtrack" in key_path_lower
         if matched:
             reasons.append(rule)
 
