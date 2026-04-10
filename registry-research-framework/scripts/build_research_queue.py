@@ -16,6 +16,7 @@ from research_v36_lib import (
     DEFAULT_BACKEND_ID,
     DISCOVERY_EVENTS_PATH,
     DISCOVERY_ROOT,
+    ETL_REGISTRY_DISCOVERY_PATH,
     GAP_ANALYSIS_SUMMARY_PATH,
     QUEUE_ROOT,
     build_queue_entry,
@@ -65,9 +66,28 @@ def load_full_evidence(tweak_id: str) -> dict:
 
 
 def load_runtime_discovery_candidates() -> list[dict]:
-    if not DISCOVERY_EVENTS_PATH.exists():
-        return []
     results: list[dict] = []
+    seen_ids: set[str] = set()
+    etl_snapshot_present = False
+
+    snapshot_payload = load_json_if_exists(ETL_REGISTRY_DISCOVERY_PATH)
+    if isinstance(snapshot_payload, dict):
+        for candidate in snapshot_payload.get("discovery_candidates") or []:
+            if not isinstance(candidate, dict):
+                continue
+            source = str(candidate.get("discovery_source") or "")
+            if source != "etl-registry-touch":
+                continue
+            candidate_id = str(candidate.get("candidate_id") or "").strip()
+            if candidate_id and candidate_id in seen_ids:
+                continue
+            if candidate_id:
+                seen_ids.add(candidate_id)
+            results.append(candidate)
+            etl_snapshot_present = True
+
+    if not DISCOVERY_EVENTS_PATH.exists():
+        return results
     for line in DISCOVERY_EVENTS_PATH.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
@@ -75,6 +95,13 @@ def load_runtime_discovery_candidates() -> list[dict]:
         source = str(payload.get("discovery_source") or "")
         if source in {"existing-record", "ai-gap-analysis"}:
             continue
+        if source == "etl-registry-touch" and etl_snapshot_present:
+            continue
+        candidate_id = str(payload.get("candidate_id") or "").strip()
+        if candidate_id and candidate_id in seen_ids:
+            continue
+        if candidate_id:
+            seen_ids.add(candidate_id)
         results.append(payload)
     return results
 

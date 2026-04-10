@@ -2326,7 +2326,7 @@ def discover_etl_artifacts() -> list[dict[str, Any]]:
         if not path.is_file():
             continue
         lower_name = path.name.lower()
-        if ".etl" not in lower_name:
+        if not (lower_name.endswith(".etl") or lower_name.endswith(".etl.md")):
             continue
         repo_ref = normalize_repo_relative_path(str(path.relative_to(REPO_ROOT)))
         is_placeholder = lower_name.endswith(".etl.md")
@@ -2396,7 +2396,7 @@ def build_etl_corpus_inventory(
                 (str(note).strip() for note in (parse_result.get("notes") or []) if str(note).strip()),
                 None,
             )
-            parsed = parse_status == "parsed"
+            parsed = parse_status.startswith("parsed")
             xml_output = parse_result.get("xml_output")
             normalized_touch_count = int(parse_result.get("normalized_touch_count") or 0)
         elif is_placeholder:
@@ -2452,7 +2452,7 @@ def build_etl_corpus_inventory(
     }
 
 
-def _normalize_registry_path(text: str | None) -> str | None:
+def _normalize_registry_context_path(text: str | None) -> str | None:
     if not text:
         return None
     normalized = str(text).strip().replace("/", "\\")
@@ -2472,6 +2472,13 @@ def _normalize_registry_path(text: str | None) -> str | None:
         if upper.startswith(source.upper()):
             normalized = target + normalized[len(source):]
             break
+    return normalized.rstrip("\\") if normalized not in {"HKLM\\", "HKCU\\", "HKCR\\", "HKU\\"} else normalized.rstrip("\\")
+
+
+def _normalize_registry_path(text: str | None) -> str | None:
+    normalized = _normalize_registry_context_path(text)
+    if not normalized:
+        return None
     return normalized if normalized.startswith(("HKLM\\", "HKCU\\", "HKCR\\", "HKU\\")) else None
 
 
@@ -2490,6 +2497,89 @@ def _guess_registry_operation(text_blob: str) -> str | None:
         if needle in lowered:
             return operation
     return None
+
+
+REGISTRY_XML_EVENT_ID_MAP = {
+    "1": "RegCreateKey",
+    "2": "OpenKey",
+    "3": "RegDeleteKey",
+    "4": "QueryKey",
+    "5": "RegSetValue",
+    "6": "RegDeleteValue",
+    "7": "RegQueryValue",
+    "8": "EnumerateKey",
+    "9": "EnumerateValueKey",
+    "10": "QueryMultipleValueKey",
+    "11": "SetInformationKey",
+    "12": "FlushKey",
+    "13": "CloseKey",
+    "14": "QuerySecurityKey",
+}
+
+
+def _xml_local_name(tag: str) -> str:
+    return str(tag).rsplit("}", 1)[-1]
+
+
+def _xml_text_or_attribute(element: ET.Element) -> str:
+    text_value = "".join(element.itertext()).strip()
+    if text_value:
+        return text_value
+    for attribute_name in ("Value", "value", "FormattedValue", "formattedValue", "Text", "text"):
+        attribute_value = str(element.attrib.get(attribute_name) or "").strip()
+        if attribute_value:
+            return attribute_value
+    return ""
+
+
+def _normalize_registry_relative_path(text: str | None) -> str | None:
+    normalized = _normalize_registry_context_path(text)
+    if not normalized:
+        return None
+    normalized = normalized.strip("\\")
+    return normalized or None
+
+
+def _is_registry_path_rooted(text: str | None) -> bool:
+    candidate = str(text or "").strip()
+    if not candidate:
+        return False
+    upper = candidate.upper()
+    return upper.startswith(
+        (
+            "HKLM\\",
+            "HKCU\\",
+            "HKCR\\",
+            "HKU\\",
+            "HKEY_",
+            "\\REGISTRY\\",
+        )
+    )
+
+
+def _combine_registry_path(base_path: str | None, relative_path: str | None) -> str | None:
+    if not relative_path:
+        return _normalize_registry_context_path(base_path)
+    if _is_registry_path_rooted(relative_path):
+        return _normalize_registry_context_path(relative_path)
+    normalized_base = _normalize_registry_context_path(base_path)
+    normalized_relative = _normalize_registry_relative_path(relative_path)
+    if not normalized_base or not normalized_relative:
+        return None
+    return _normalize_registry_context_path(f"{normalized_base.rstrip(chr(92))}\\{normalized_relative}")
+
+
+def _registry_parent_path(path: str | None) -> str | None:
+    normalized = _normalize_registry_context_path(path)
+    if not normalized or "\\" not in normalized:
+        return None
+    return normalized.rsplit("\\", 1)[0]
+
+
+def _registry_operation_for_event(event_id: str | None, text_blob: str) -> str:
+    mapped = REGISTRY_XML_EVENT_ID_MAP.get(str(event_id or ""))
+    guessed = _guess_registry_operation(text_blob or "")
+    return mapped or guessed or "registry-touch"
 
 
 def _feature_area_from_key_path(key_path: str | None, fallback_source: str) -> str:
@@ -2513,65 +2603,118 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
 
     provider_guid = str(provider_guid or "").strip("{}").lower()
     try:
-        tree = ET.parse(xml_path)
+        iterator = ET.iterparse(xml_path, events=("end",))
     except ET.ParseError:
         return []
 
     touches: list[dict[str, Any]] = []
-    seen: set[tuple[str, str, str, str]] = set()
+    seen: set[tuple[str, str, str]] = set()
+    open_key_paths: dict[str, str] = {}
 
-    for event in tree.iter():
-        if not str(event.tag).lower().endswith("event"):
+    for _, event in iterator:
+        if _xml_local_name(event.tag).lower() != "event":
             continue
 
         provider = ""
         event_id = ""
-        process_name = ""
         process_id = ""
         key_path = None
         value_name = None
-        text_parts: list[str] = []
+        event_data: dict[str, str] = {}
 
-        for child in event.iter():
-            tag = str(child.tag).lower()
-            text_value = (child.text or "").strip()
-            if text_value:
-                text_parts.append(text_value)
-            if tag.endswith("provider"):
-                provider = (
-                    child.attrib.get("Guid")
-                    or child.attrib.get("GUID")
-                    or child.attrib.get("Name")
-                    or provider
-                )
-            elif tag.endswith("eventid"):
-                event_id = text_value or event_id
-            elif tag.endswith("execution"):
-                process_id = child.attrib.get("ProcessID") or process_id
-            elif tag.endswith("data"):
-                name = str(child.attrib.get("Name") or "").lower()
-                if name in {"keyname", "pathname", "path", "keypath"}:
-                    key_path = _normalize_registry_path(text_value) or key_path
-                elif name in {"valuename", "value", "name"} and text_value and "\\" not in text_value:
-                    value_name = text_value
-                elif name in {"processname", "image"}:
-                    process_name = text_value or process_name
+        for child in event:
+            tag = _xml_local_name(child.tag).lower()
+            if tag == "system":
+                for system_child in child:
+                    system_tag = _xml_local_name(system_child.tag).lower()
+                    if system_tag == "provider":
+                        provider = (
+                            system_child.attrib.get("Guid")
+                            or system_child.attrib.get("GUID")
+                            or system_child.attrib.get("Name")
+                            or provider
+                        )
+                    elif system_tag == "eventid":
+                        event_id = _xml_text_or_attribute(system_child) or event_id
+                    elif system_tag == "execution":
+                        process_id = system_child.attrib.get("ProcessID") or process_id
+            elif tag == "eventdata":
+                for data_child in child:
+                    if _xml_local_name(data_child.tag).lower() != "data":
+                        continue
+                    name = str(data_child.attrib.get("Name") or "").strip()
+                    if not name:
+                        continue
+                    event_data[name] = _xml_text_or_attribute(data_child)
 
-        text_blob = " ".join(part for part in text_parts if part)
-        if not key_path:
-            match = re.search(
-                r"(HKLM|HKCU|HKCR|HKU|HKEY_LOCAL_MACHINE|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_USERS|\\\\REGISTRY\\\\MACHINE|\\\\REGISTRY\\\\USER)\\\\[^\r\n\"<>]+",
-                text_blob,
-                flags=re.IGNORECASE,
+        key_object = (
+            event_data.get("KeyObject")
+            or event_data.get("KeyHandle")
+            or event_data.get("Key")
+        )
+        base_object = event_data.get("BaseObject") or event_data.get("BaseHandle")
+        key_name = event_data.get("KeyName") or event_data.get("PathName") or event_data.get("Path")
+        base_name = event_data.get("BaseName")
+        relative_name = event_data.get("RelativeName")
+        value_name = event_data.get("ValueName") or None
+        process_name = event_data.get("ProcessName") or event_data.get("Image") or (f"pid:{process_id}" if process_id else None)
+
+        raw_excerpt = "; ".join(
+            f"{name}={value}"
+            for name, value in event_data.items()
+            if value
+        )[:400]
+        text_blob = " ".join(
+            part
+            for part in [
+                provider,
+                event_id,
+                REGISTRY_XML_EVENT_ID_MAP.get(event_id, ""),
+                raw_excerpt,
+            ]
+            if part
+        )
+
+        context_key_path = None
+        base_path = _normalize_registry_context_path(base_name) or _normalize_registry_context_path(key_name)
+        inherited_base_path = base_path or (open_key_paths.get(base_object) if base_object else None)
+        if event_id in {"1", "2"}:
+            context_key_path = (
+                _combine_registry_path(inherited_base_path, relative_name)
+                or base_path
+                or (open_key_paths.get(key_object) if key_object else None)
             )
-            if match:
-                key_path = _normalize_registry_path(match.group(0))
+            status_text = str(event_data.get("Status") or "").strip().lower()
+            if context_key_path and key_object and status_text in {"", "0", "0x0"}:
+                open_key_paths[key_object] = context_key_path
+                if base_object and base_object not in open_key_paths:
+                    parent_path = _registry_parent_path(context_key_path)
+                    if parent_path:
+                        open_key_paths[base_object] = parent_path
+        else:
+            context_key_path = (
+                (open_key_paths.get(key_object) if key_object else None)
+                or _normalize_registry_context_path(key_name)
+                or _combine_registry_path(inherited_base_path, relative_name)
+            )
+            if not context_key_path:
+                match = re.search(
+                    r"(HKLM|HKCU|HKCR|HKU|HKEY_LOCAL_MACHINE|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_USERS|\\\\REGISTRY\\\\MACHINE|\\\\REGISTRY\\\\USER)\\\\[^\r\n\"<>]+",
+                    text_blob,
+                    flags=re.IGNORECASE,
+                )
+                if match:
+                    context_key_path = _normalize_registry_context_path(match.group(0))
+        key_path = _normalize_registry_path(context_key_path)
 
         provider_match = False
         if provider_guid:
             provider_match = provider_guid in provider.lower().strip("{}")
-        operation = _guess_registry_operation(text_blob)
+        operation = _registry_operation_for_event(event_id, text_blob)
         if not key_path and not provider_match:
+            if event_id == "13" and key_object:
+                open_key_paths.pop(key_object, None)
+            event.clear()
             continue
 
         touch = {
@@ -2583,18 +2726,23 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
             "operation": operation or "registry-touch",
             "key_path": key_path,
             "value_name": value_name,
-            "raw_excerpt": text_blob[:400],
+            "raw_excerpt": raw_excerpt or text_blob[:400],
         }
         dedupe_key = (
             str(touch.get("operation") or ""),
             str(touch.get("key_path") or ""),
             str(touch.get("value_name") or ""),
-            str(touch.get("process_name") or ""),
         )
         if dedupe_key in seen:
+            if event_id == "13" and key_object:
+                open_key_paths.pop(key_object, None)
+            event.clear()
             continue
         seen.add(dedupe_key)
         touches.append(touch)
+        if event_id == "13" and key_object:
+            open_key_paths.pop(key_object, None)
+        event.clear()
 
     return touches
 
@@ -2713,14 +2861,22 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
     parser_commands = config.get("parser_commands") or {}
     tracerpt = str(parser_commands.get("tracerpt") or "tracerpt")
     xml_output = etl_path.with_suffix(".etl.xml")
+    legacy_xml_output = etl_path.with_suffix(".xml")
     touch_sidecar = etl_path.with_suffix(".etl.registry-touches.json")
     command = [tracerpt, str(etl_path), "-o", str(xml_output), "-of", "XML"]
 
-    def use_existing_xml_sidecar(note: str) -> dict[str, Any]:
+    def resolve_existing_xml_sidecar() -> Path | None:
+        if xml_output.exists():
+            return xml_output
+        if legacy_xml_output.exists():
+            return legacy_xml_output
+        return None
+
+    def use_existing_xml_sidecar(note: str, xml_sidecar_path: Path) -> dict[str, Any]:
         output["status"] = "parsed-sidecar-xml"
         output["notes"].append(note)
-        output["xml_output"] = normalize_repo_relative_path(str(xml_output.relative_to(REPO_ROOT)))
-        output["registry_touches"] = extract_registry_touches_from_tracerpt_xml(xml_output, provider_guid=provider_guid)
+        output["xml_output"] = normalize_repo_relative_path(str(xml_sidecar_path.relative_to(REPO_ROOT)))
+        output["registry_touches"] = extract_registry_touches_from_tracerpt_xml(xml_sidecar_path, provider_guid=provider_guid)
         output["normalized_touch_count"] = len(output["registry_touches"])
         return output
 
@@ -2735,8 +2891,9 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
     try:
         completed = subprocess.run(command, capture_output=True, text=True, check=False)
     except FileNotFoundError:
-        if xml_output.exists():
-            return use_existing_xml_sidecar("tracerpt.exe is not available in this environment; parsed existing XML sidecar.")
+        existing_xml_sidecar = resolve_existing_xml_sidecar()
+        if existing_xml_sidecar:
+            return use_existing_xml_sidecar("tracerpt.exe is not available in this environment; parsed existing XML sidecar.", existing_xml_sidecar)
         if touch_sidecar.exists():
             return use_existing_touch_sidecar("tracerpt.exe is not available in this environment; parsed existing touch sidecar.")
         output["status"] = "parser-unavailable"
@@ -2745,8 +2902,9 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
 
     output["notes"].append((completed.stdout or completed.stderr or "").strip())
     if completed.returncode != 0:
-        if xml_output.exists():
-            return use_existing_xml_sidecar("tracerpt returned a non-zero exit code; parsed existing XML sidecar.")
+        existing_xml_sidecar = resolve_existing_xml_sidecar()
+        if existing_xml_sidecar:
+            return use_existing_xml_sidecar("tracerpt returned a non-zero exit code; parsed existing XML sidecar.", existing_xml_sidecar)
         if touch_sidecar.exists():
             return use_existing_touch_sidecar("tracerpt returned a non-zero exit code; parsed existing touch sidecar.")
         output["status"] = "parser-failed"
