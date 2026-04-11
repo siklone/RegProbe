@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-11T23:08:00Z",
+  "analysis_kind": "host-side-pe-init-descriptor-binding",
+  "binary": "/tmp/regprobe-kernel-upload/uploads/ntoskrnl.exe",
+  "image_base": "0x140000000",
+  "target": {
+    "candidate_id": "system.kernel.timer-check-flags",
+    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name": "TimerCheckFlags",
+    "live_symbol": "nt!KeTimerCheckFlags"
+  },
+  "string_hit": {
+    "string": "TimerCheckFlags",
+    "encoding": "utf-16-le",
+    "file_offset": "0xBF4BF8",
+    "rva": "0xC7BBF8",
+    "va": "0x140C7BBF8",
+    "section": "INIT"
+  },
+  "descriptor_pointer_refs": [
+    {
+      "kind": "va64",
+      "file_offset": "0xBED8D8",
+      "rva": "0xC748D8",
+      "va": "0x140C748D8",
+      "section": "INIT",
+      "points_to": "0x140C7BBF8"
+    }
+  ],
+  "descriptor_row": {
+    "file_offset": "0xBED8D8",
+    "rva": "0xC748D8",
+    "va": "0x140C748D8",
+    "section": "INIT",
+    "fields": [
+      {
+        "offset": "+0x00",
+        "value": "0x140C7BBF8",
+        "interpretation": "value_name_pointer",
+        "decoded": "TimerCheckFlags"
+      },
+      {
+        "offset": "+0x08",
+        "value": "0x140E0B080",
+        "interpretation": "target_global_pointer",
+        "decoded": "KeTimerCheckFlags"
+      },
+      {
+        "offset": "+0x10",
+        "value": "0x0000000000000000",
+        "interpretation": "reserved_or_flags"
+      },
+      {
+        "offset": "+0x18",
+        "value": "0x0000000000000000",
+        "interpretation": "reserved_or_terminator"
+      }
+    ],
+    "nearest_key_context": {
+      "file_offset": "0xBED8B8",
+      "rva": "0xC748B8",
+      "va": "0x140C748B8",
+      "key_path_pointer": "0x140C7A670",
+      "decoded_key_path": "Session Manager\\Kernel"
+    }
+  },
+  "live_kd_alignment": {
+    "artifact": "evidence/files/vm-tooling-staging/local-kd-timercheckflags-20260408a/local-kd-timercheckflags-20260408a.stdout.txt",
+    "live_kernel_base": "0xfffff806e6e00000",
+    "live_symbol_va": "0xfffff806e7c0b080",
+    "live_symbol_rva": "0xE0B080",
+    "static_descriptor_target_va": "0x140E0B080",
+    "static_descriptor_target_rva": "0xE0B080",
+    "live_value": "0x00000001"
+  },
+  "rip_relative_instruction_refs": {
+    "raw_file_offset_scan": 0,
+    "correct_va_scan": 0,
+    "note": "No direct RIP-relative code reference to the string was found. The current-build binding is through an INIT descriptor row that points at the value-name string and the KeTimerCheckFlags global."
+  },
+  "interpretation": "Current-build ntoskrnl.exe contains an INIT descriptor row binding the Session Manager\\Kernel TimerCheckFlags value-name string to the same RVA used by the live nt!KeTimerCheckFlags global observed through KVM local-KD. This closes the static/xref layer for the record while leaving exact runtime registry trace evidence unresolved."
+}
