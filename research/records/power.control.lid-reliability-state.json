@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "power.control.lid-reliability-state",
   "tweak_id": "power.control.lid-reliability-state",
-  "record_status": "draft",
-  "summary": "Draft candidate package for LidReliabilityState under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for LidReliabilityState. App surfacing remains a separate product decision from evidence classification.",
+  "record_status": "validated",
+  "summary": "Validated candidate package for LidReliabilityState under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for LidReliabilityState. App surfacing remains a separate product decision from evidence classification.",
   "validation_proof": {
     "source_url": "Docs/power/power.md",
     "exact_quote_or_path": "Docs/power/power.md:170 shows `LidReliabilityState` with observed literal `1` in the repo power notes.",
@@ -180,5 +180,5 @@
     "why": "LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-29T11:55:00Z"
+  "last_reviewed_utc": "2026-04-06T23:19:17Z"
 }

@@ -2,6 +2,19 @@
 
 This document defines the controller/agent validation loop for runtime registry experiments in the `Win25H2Clean` VM.
 
+For the Linux/KVM runtime family, the same research intent applies but the transport is different:
+
+- host transport: `scripts/vm-kvm/serve-guest-bridge.py`
+- host admin-shell recovery: `scripts/vm-kvm/ensure-guest-admin-shell.py`
+- guest command injection: `scripts/vm-kvm/type-to-guest.py`
+- host-side quoted Procmon replay runner: `scripts/vm-kvm/run-guest-registry-policy-probe.py`
+- guest bootstrap payload: `scripts/vm-kvm/build-research-bootstrap-iso.sh`
+- host health audit: `scripts/vm-kvm/validate-research-lane.py`
+
+The current KVM lane does not depend on the VMware shared-folder controller loop. It stages guest scripts through the bootstrap ISO and uses the bridge for short command delivery, copy-back, and health evidence upload.
+Current host runners also reopen an elevated guest PowerShell session on demand before they stage guest helpers, so the visible console no longer needs to be kept manually in an admin state between runs.
+KVM host runners now treat `error_kind`, `recovery_action`, `transport_blocker`, and `guest_health` as mandatory summary fields even for synthesized timeout or stage-fallback summaries.
+
 ## Purpose
 
 Use the VM as a safe discovery environment for:
@@ -89,61 +102,6 @@ This:
 - copies the guest agent to `C:\Tools\Scripts\guest-validation-agent.ps1`
 - registers the `RegProbeValidationAgent` startup task
 
-## KVM Manual Bootstrap
-
-When VMware `vmrun` guest control is unavailable, build the KVM bootstrap ISO on the host:
-
-```bash
-python3 scripts/vm/build-kvm-bootstrap-iso.py
-```
-
-This restores:
-
-- `dist/regprobe-kvm-bootstrap.iso`
-
-Inside the Windows guest, mount the ISO and run:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\install-guest-validation-agent-local.ps1
-```
-
-That guest-local installer:
-
-- copies `guest-validation-agent.ps1` and `request-guest-restart.ps1` into `C:\Tools\Scripts`
-- prepares `C:\Tools\ValidationController`
-- creates a local launch helper
-- does **not** register the startup task unless you pass `-RegisterStartupTask`
-
-If you also have a Windows qemu guest agent installer on the host, include it when building:
-
-```bash
-python3 scripts/vm/build-kvm-bootstrap-iso.py --qga-installer /absolute/path/to/qemu-ga-x86_64.msi
-```
-
-Then inside the guest you can run:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\install-guest-validation-agent-local.ps1 -InstallQemuGuestAgent
-```
-
-From the Linux host you can also verify that the libvirt domain exposes the qemu guest-agent channel:
-
-```bash
-python3 scripts/vm/ensure-kvm-qga-channel.py --emit-json
-```
-
-If that reports `present_after=true` but `guest_agent_connected=false`, the channel exists and the remaining gap is the Windows guest-agent install/service inside the guest.
-
-When the guest is already logged in but host-side guest control is still missing, there is also a last-resort keystroke helper:
-
-```bash
-printf 'echo ok\n' | python3 scripts/vm/send-kvm-text.py
-```
-
-Use it carefully. It types into the focused guest window via `virsh send-key`, so it is only appropriate for controlled recovery/bootstrap work on the active KVM desktop.
-
-Use this as a manual recovery/bootstrap surface for KVM. The repo controller itself still assumes `vmrun` and the shared-folder model.
-
 ## Run A Test
 
 Example:
@@ -165,3 +123,4 @@ powershell -ExecutionPolicy Bypass -File .\scripts\vm\host-validation-controller
 - The guest agent is responsible for applying the value, waiting for idle, benchmarking, and restoring the baseline.
 - VM results are a discovery signal, not final truth for hardware-sensitive settings.
 - Promising candidates should still be rechecked on bare metal.
+- On KVM, keep the guest visible and prefer short, restartable guest commands; long monolithic typed payloads are more fragile than ISO-staged helpers plus bridge uploads.

@@ -12,9 +12,25 @@ $parserTargets = @(
     'registry-research-framework\tools\procmon-registry-trace.ps1',
     'registry-research-framework\tools\wpr-boot-trace.ps1',
     'registry-research-framework\tools\run-power-control-batch-mega-trigger-runtime.ps1',
+    'registry-research-framework\tools\run-power-control-batch-mega-trigger-runtime-safe.ps1',
     'registry-research-framework\tools\run-path-aware-runtime-probe.ps1',
     'scripts\vm\get-vm-shell-health.ps1',
-    'scripts\vm\configure-kernel-debug-baseline.ps1'
+    'scripts\vm\configure-kernel-debug-baseline.ps1',
+    'scripts\vm\new-windbg-registry-watch-script.ps1',
+    'registry-research-framework\tools\run-windbg-boot-registry-trace.ps1',
+    'registry-research-framework\tools\run-windbg-transport-matrix.ps1',
+    'registry-research-framework\tools\run-windbg-serial-config-matrix.ps1',
+    'registry-research-framework\tools\run-windbg-start-order-matrix.ps1',
+    'registry-research-framework\tools\run-windbg-reconnect-command-matrix.ps1',
+    'registry-research-framework\tools\run-windbg-pipe-launch-matrix.ps1',
+    'registry-research-framework\tools\execute-windbg-boot-registry-trace.ps1',
+    'scripts\vm-hyperv\test-hyperv-debug-feasibility.ps1',
+    'scripts\vm-hyperv\new-hyperv-debug-baseline-plan.ps1',
+    'scripts\vm\new-vmware-debug-only-baseline-plan.ps1',
+    'scripts\vm\new-vmware-debug-only-vm.ps1',
+    'registry-research-framework\tools\windbg-hyperv\run-debug-environment-selection.ps1',
+    'registry-research-framework\tools\run-windbg-vmware-debug-only-short-try.ps1',
+    'tests\Invoke-StagingInventorySmoke.ps1'
 )
 
 foreach ($relative in $parserTargets) {
@@ -65,7 +81,7 @@ try {
         $sampleDir = Join-Path $tempRepoRoot 'sanitize-sample'
         New-Item -ItemType Directory -Path $sampleDir -Force | Out-Null
         $sampleFile = Join-Path $sampleDir 'sample.json'
-        Set-Content -LiteralPath $sampleFile -Value 'C:\Users\Deniz\AppData\Local\Temp\artifact.bin' -Encoding UTF8
+        Set-Content -LiteralPath $sampleFile -Value 'C:\Users\TestUser\AppData\Local\Temp\artifact.bin' -Encoding UTF8
 
         $configPath = Join-Path $tempRepoRoot 'sanitize-config.json'
         $tempRepoRelative = ("tests/{0}" -f (Split-Path -Leaf $tempRepoRoot))
@@ -78,9 +94,9 @@ try {
   "rules": [
     {
       "id": "temp",
-      "type": "literal",
-      "pattern": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\",
-      "replacement": "%LOCALAPPDATA%\\Temp\\",
+      "type": "regex",
+      "pattern": "C:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Local\\\\Temp\\\\",
+      "replacement": "%LOCALAPPDATA%\\\\Temp\\\\",
       "targets": [
         "$tempRepoRelative/sanitize-sample"
       ],
@@ -98,6 +114,91 @@ try {
         $latest = Get-Content -LiteralPath $manifests[0].FullName -Raw | ConvertFrom-Json
         if ([int]$latest.changed_file_count -lt 1) {
             throw 'Sanitization config-driven dry-run did not detect expected change.'
+        }
+
+        $privateRunnerRoot = Join-Path $tempRepoRoot 'private-runner-output'
+        $oldPrivateRunnerRoot = $env:REGPROBE_PRIVATE_RUNNER_OUTPUT_ROOT
+        try {
+            $env:REGPROBE_PRIVATE_RUNNER_OUTPUT_ROOT = $privateRunnerRoot
+            . (Join-Path $repoRoot 'registry-research-framework\tools\_lane-manifest-lib.ps1')
+            $rawRunnerLog = Join-Path $tempRepoRoot 'runner.log'
+            Set-Content -LiteralPath $rawRunnerLog -Value 'vmrun -gp secret-value C:\Users\TestUser\AppData\Local\Temp\trace.log' -Encoding UTF8
+            $published = Publish-RunnerOutputArtifacts -Label 'smoke' -RawPath $rawRunnerLog -SanitizedOutputPath (Join-Path $tempRepoRoot 'runner.public.log')
+            if ($published.private_storage_status -ne 'copied' -or -not $published.public_sanitized_ref.exists) {
+                throw 'Runner output dual-publish failed.'
+            }
+            $sanitizedText = Get-Content -LiteralPath (Join-Path $tempRepoRoot 'runner.public.log') -Raw
+            if ($sanitizedText -match 'secret-value' -or $sanitizedText -match 'TestUser') {
+                throw 'Runner output sanitization failed.'
+            }
+        }
+        finally {
+            $env:REGPROBE_PRIVATE_RUNNER_OUTPUT_ROOT = $oldPrivateRunnerRoot
+        }
+
+        $baselineGuardPath = Join-Path $tempRepoRoot 'baseline-guard.json'
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm\configure-kernel-debug-baseline.ps1') -VmPath 'C:\Fake\Win25H2.vmx' -OutputPath $baselineGuardPath -GuestPassword 'unused' | Out-Null
+        $baselineGuard = Get-Content -LiteralPath $baselineGuardPath -Raw | ConvertFrom-Json
+        if ($baselineGuard.status -ne 'blocked-snapshot-gate') {
+            throw 'Kernel debug baseline snapshot gate did not block unsafe mutation.'
+        }
+
+        $windbgScriptPath = Join-Path $tempRepoRoot 'windbg-singlekey.txt'
+        $windbgGeneratorOutput = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm\new-windbg-registry-watch-script.ps1') -TargetKey 'AllowSystemRequiredPowerRequests' -TraceProfile 'singlekey-rawbounded' -OutputPath $windbgScriptPath | ConvertFrom-Json
+        if ($windbgGeneratorOutput.mode -ne 'singlekey-rawbounded' -or $windbgGeneratorOutput.target_key -ne 'AllowSystemRequiredPowerRequests') {
+            throw 'Single-key WinDbg generator contract failed.'
+        }
+        $windbgScriptText = Get-Content -LiteralPath $windbgScriptPath -Raw
+        if ($windbgScriptText -notmatch 'bu nt!CmQueryValueKey' -or $windbgScriptText -notmatch 'REGPROBE_TARGET\|AllowSystemRequiredPowerRequests') {
+            throw 'Single-key WinDbg script contents are incomplete.'
+        }
+
+        $inventorySmokePath = Join-Path $repoRoot 'tests\Invoke-StagingInventorySmoke.ps1'
+        $inventoryResult = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $inventorySmokePath
+        if (-not $inventoryResult) {
+            throw 'Staging inventory smoke did not return a result.'
+        }
+        $inventoryJson = $inventoryResult | ConvertFrom-Json
+        if ([int]$inventoryJson.directory_count -le 0 -or [int]$inventoryJson.file_count -le 0) {
+            throw 'Staging inventory smoke produced invalid counts.'
+        }
+
+        $hypervFeasibilityPath = Join-Path $tempRepoRoot 'hyperv-feasibility.json'
+        $hypervFeasibility = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm-hyperv\test-hyperv-debug-feasibility.ps1') -OutputPath $hypervFeasibilityPath | ConvertFrom-Json
+        if ($hypervFeasibility.selected -ne 'Hyper-V' -or $hypervFeasibility.selected_long_term -ne 'Hyper-V' -or @($hypervFeasibility.debug_environment_candidates).Count -lt 2) {
+            throw 'Hyper-V feasibility contract failed.'
+        }
+        if ($hypervFeasibility.selected_status -eq 'ready') {
+            if ($hypervFeasibility.selected_immediate -ne 'Hyper-V') {
+                throw 'Hyper-V feasibility immediate-selection contract failed for ready host.'
+            }
+        }
+        elseif ($hypervFeasibility.selected_immediate -ne 'VMware-debug-only') {
+            throw 'Hyper-V feasibility immediate-selection contract failed for blocked host.'
+        }
+
+        $hypervPlanPath = Join-Path $tempRepoRoot 'hyperv-plan.json'
+        $hypervPlan = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm-hyperv\new-hyperv-debug-baseline-plan.ps1') -FeasibilityPath $hypervFeasibilityPath -OutputPath $hypervPlanPath | ConvertFrom-Json
+        if ($hypervPlan.debug_environment -ne 'hyperv' -or $hypervPlan.vm_role -ne 'debug_arbiter_only') {
+            throw 'Hyper-V baseline plan contract failed.'
+        }
+
+        $vmwareDebugOnlyPlanPath = Join-Path $tempRepoRoot 'vmware-debug-only-plan.json'
+        $vmwareDebugOnlyPlan = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm\new-vmware-debug-only-baseline-plan.ps1') -OutputPath $vmwareDebugOnlyPlanPath | ConvertFrom-Json
+        if ($vmwareDebugOnlyPlan.debug_environment -ne 'vmware-debug-only' -or $vmwareDebugOnlyPlan.vm_role -ne 'debug_arbiter_only' -or $vmwareDebugOnlyPlan.frozen_lane_return_allowed) {
+            throw 'VMware debug-only baseline plan contract failed.'
+        }
+
+        $vmwareDebugOnlyProvisionPath = Join-Path $tempRepoRoot 'vmware-debug-only-provision.json'
+        $vmwareDebugOnlyProvision = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'scripts\vm\new-vmware-debug-only-vm.ps1') -PlanOnly -SourceVmPath 'C:\VMs\Win25H2Clean\Win25H2.vmx' -TargetVmName 'Win25H2DebugOnly' -TargetVmPath 'C:\VMs\Win25H2DebugOnly\Win25H2DebugOnly.vmx' -OutputPath $vmwareDebugOnlyProvisionPath | ConvertFrom-Json
+        if ($vmwareDebugOnlyProvision.debug_environment -ne 'vmware-debug-only' -or -not $vmwareDebugOnlyProvision.fresh_provision -or $vmwareDebugOnlyProvision.frozen_lane_return_allowed) {
+            throw 'VMware debug-only provision plan contract failed.'
+        }
+
+        $vmwareShortTryPath = Join-Path $tempRepoRoot 'vmware-debug-only-short-try.json'
+        $vmwareShortTry = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'registry-research-framework\tools\run-windbg-vmware-debug-only-short-try.ps1') -PlanOnly -AuditDate '20990101' | ConvertFrom-Json
+        if ($vmwareShortTry.debug_environment -ne 'vmware-debug-only' -or $vmwareShortTry.branch_status -ne 'planned' -or @($vmwareShortTry.selected_profiles).Count -lt 4) {
+            throw 'VMware debug-only short-try plan contract failed.'
         }
     }
     finally {

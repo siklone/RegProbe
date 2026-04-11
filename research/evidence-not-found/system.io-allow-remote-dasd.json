@@ -1,22 +1,15 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-02T11:02:27.184855Z",
+  "generated_utc": "2026-04-07T01:54:28.084902Z",
   "record_id": "system.io-allow-remote-dasd",
   "tweak_id": "system.io-allow-remote-dasd",
-  "evidence_class": "B",
-  "record_status": "draft",
+  "evidence_class": "E",
+  "record_status": "deprecated",
   "tested_build": "26100",
-  "negative_reason": "no-hit-or-insufficient-proof",
+  "negative_reason": "class-e",
   "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
-  "attempted_layers": [
-    "static_ghidra",
-    "behavior_wpr"
-  ],
-  "attempted_tools": [
-    "etw",
-    "ghidra",
-    "wpr"
-  ],
+  "attempted_layers": [],
+  "attempted_tools": [],
   "runtime_evidence_found": true,
   "validation_proof_found": true,
   "anticheat_risk": {
@@ -24,13 +17,19 @@
     "anticheat_details": null,
     "gaming_safe": null
   },
-  "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit.",
+  "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
   "links": [
     {
       "title": "Win25H2Clean 96-key phase-0 existence batch",
       "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
       "kind": "registry-observation",
       "summary": "The 96-key existence batch confirmed AllowRemoteDASD exists on the clean baseline at the intended Session Manager I/O path with observed value 0."
+    },
+    {
+      "title": "Microsoft Learn ADMX_RemovableStorage mapping for AllowRemoteDASD",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage and research/notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md",
+      "kind": "official-doc",
+      "summary": "Microsoft Learn documents `AllowRemoteDASD` as the registry value for `All Removable Storage: Allow direct access in remote sessions`, mapped to `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices`."
     },
     {
       "title": "Path-aware static probe for AllowRemoteDASD",
@@ -49,6 +48,12 @@
       "url": "research/notes/kernel-power-existing-static-triage-20260328.md",
       "kind": "repo-doc",
       "summary": "Earlier triage had already flagged AllowRemoteDASD as a likely removable-storage-policy collision rather than clean Session Manager I/O coverage."
+    },
+    {
+      "title": "Linux KVM Procmon replay for AllowRemoteDASD",
+      "url": "evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json and evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/host-review.json",
+      "kind": "procmon-trace",
+      "summary": "A dedicated KVM raw-I/O burst produced a real Procmon CSV with 267176 rows and still returned zero lines containing the intended Session Manager I/O path, AllowRemoteDASD itself, or the RemovableStorageDevices collision path."
     }
   ]
 }

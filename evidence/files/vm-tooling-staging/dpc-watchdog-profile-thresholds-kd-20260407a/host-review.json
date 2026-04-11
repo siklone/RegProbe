@@ -1,0 +1,27 @@
+{
+  "generated_utc": "2026-04-07T19:10:00Z",
+  "candidate": "system.kernel-dpc-watchdog-profile-cluster",
+  "guest": "regprobe-win11-25h2-session",
+  "bundle": "dpc-watchdog-profile-thresholds-kd-20260407a",
+  "findings": {
+    "live_state": {
+      "KeDpcWatchdogProfileOffsetMs": 10000,
+      "KeDpcWatchdogProfileSingleDpcThresholdMs": 0,
+      "KeDpcWatchdogProfileCumulativeDpcThresholdMs": 0,
+      "KeDpcWatchdogProfileBufferSizeBytes": 0,
+      "KeDpcWatchdogPeriodMs": 0
+    },
+    "symbol_cluster": [
+      "KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "KeDpcWatchdogProfileGlobalTriageBlock",
+      "KeDpcWatchdogProfileBufferSizeBytes",
+      "KeDpcWatchdogProfileOffsetMs",
+      "KeDpcWatchdogProfileCumulativeDpcThresholdMs"
+    ]
+  },
+  "interpretation": {
+    "current_state": "The running current build keeps a live DPC watchdog profile cluster, but only KeDpcWatchdogProfileOffsetMs matches the repo-doc default while the other profile globals and the KeDpcWatchdogPeriodMs control read as 0.",
+    "remaining_gap": "Identify the current-build reader or initializer that explains whether the zeroed globals are conditional, late-initialized, or evidence that the repo-doc defaults are not unconditional live defaults.",
+    "strength": "This is stronger than docs-only evidence because it directly proves a current-build live-state conflict inside the watchdog profile cluster."
+  }
+}

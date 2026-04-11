@@ -1,0 +1,25 @@
+﻿Opened log file '<local-path>
+0: kd> .echo REGPROBE_ATTACH_BEGIN
+REGPROBE_ATTACH_BEGIN
+0: kd> .echo REGPROBE_ATTACH_READY
+REGPROBE_ATTACH_READY
+0: kd> g
+Shutdown occurred at (Fri Apr  3 16:53:22.936 2026 (UTC + 3:00))...unloading all symbol tables.
+Waiting to reconnect...
+Connected to Windows 10 26100 x64 target at (Fri Apr  3 16:53:43.491 2026 (UTC + 3:00)), ptr64 TRUE
+Kernel Debugger connection established.
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       srv*
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (1 procs) Free x64
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`9c000000 PsLoadedModuleList = 0xfffff806`9cef4e70
+System Uptime: 0 days 0:00:00.000
+KDTARGET: Refreshing KD connection
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\uiomap
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\vmbusr
+DriverEntry failed 0xc035001e for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\l1vhlwf
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\NetworkPrivacyPolicy

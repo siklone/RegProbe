@@ -1,0 +1,81 @@
+﻿{
+    "generated_utc":  "2026-04-03T13:55:55.0833584Z",
+    "family":  "power-control",
+    "lane":  "windbg-boot-registry-trace",
+    "status":  "attach-ok-command-not-executed",
+    "collection_mode":  "evidence",
+    "target_key":  null,
+    "key_count":  0,
+    "hit_key_count":  0,
+    "analysis_source":  "script-log",
+    "trace_log_path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-165258/windbg-registry-trace_4968_2026-04-03_16-53-05-153.log",
+    "trace_profile":  "breakin-once",
+    "boot_mode":  "guest-restart",
+    "break_on_connect_mode":  "bonc",
+    "windbg_log_detected":  true,
+    "windbg_transport_state":  "attach_ok_command_not_executed",
+    "windbg_semantic_ready":  false,
+    "transport_score":  4,
+    "no_debuggee_waiting":  false,
+    "breakin_attempted":  false,
+    "breakin_request_count":  0,
+    "breakin_success_count":  0,
+    "roundtrip_attempted":  false,
+    "roundtrip_request_count":  0,
+    "roundtrip_success_count":  0,
+    "post_restart_roundtrip_request_count":  0,
+    "post_restart_roundtrip_success_count":  0,
+    "roundtrip_ready":  false,
+    "kernel_connected":  true,
+    "transport_error":  false,
+    "fatal_system_error_observed":  false,
+    "shell_recovered":  true,
+    "script_execution_observed":  true,
+    "breakpoint_set":  true,
+    "breakpoint_unresolved":  false,
+    "parser_invalid":  false,
+    "debugger_noise_budget_exceeded":  false,
+    "raw_noise_event_count":  0,
+    "host_filtered_hits":  0,
+    "error":  null,
+    "recovery":  null,
+    "keys":  [
+
+             ],
+    "shell_checks":  {
+                         "explorer":  true,
+                         "sihost":  true,
+                         "shellhost":  true,
+                         "ctfmon":  true
+                     },
+    "runner_output":  {
+                          "trace":  {
+                                        "label":  "windbg-trace-log",
+                                        "raw_source_path":  "C:\\r\\evidence\\files\\vm-tooling-staging\\windbg-boot-registry-trace-20260403-165258\\windbg-registry-trace_4968_2026-04-03_16-53-05-153.log",
+                                        "private_storage_status":  "not-configured",
+                                        "raw_private_ref":  null,
+                                        "public_sanitized_ref":  {
+                                                                     "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-165258/windbg-registry-trace.public.log",
+                                                                     "sha256":  "e558f6835ed47f817f2a49d135d8d1d87996080c09ba9d073117a4aad812ea7d",
+                                                                     "size":  1315,
+                                                                     "collected_utc":  "2026-04-03T13:55:55.0854567Z",
+                                                                     "exists":  true,
+                                                                     "visibility":  "public-sanitized"
+                                                                 }
+                                    },
+                          "console":  {
+                                          "label":  "kd-console-log",
+                                          "raw_source_path":  "C:\\r\\evidence\\files\\vm-tooling-staging\\windbg-boot-registry-trace-20260403-165258\\kd-console.log",
+                                          "private_storage_status":  "not-configured",
+                                          "raw_private_ref":  null,
+                                          "public_sanitized_ref":  {
+                                                                       "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-165258/kd-console.public.log",
+                                                                       "sha256":  "a55acd442c6a6000ac6270a4da6ec86673549921e6f6cb166cba06b1d6ba8ac4",
+                                                                       "size":  2827,
+                                                                       "collected_utc":  "2026-04-03T13:55:55.0896372Z",
+                                                                       "exists":  true,
+                                                                       "visibility":  "public-sanitized"
+                                                                   }
+                                      }
+                      }
+}

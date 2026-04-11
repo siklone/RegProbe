@@ -1,0 +1,5 @@
+﻿ERROR=System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 60 second(s).
+AT=At C:\RegProbe-Diag\bootstrap\registry-policy-probe.ps1:177 char:9
++         throw "Procmon SaveAs timed out after $SaveAsTimeoutSeconds s ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RESTORED={"path_exists":true,"value_exists":true,"value":2928414,"value_type":"System.Int32"}

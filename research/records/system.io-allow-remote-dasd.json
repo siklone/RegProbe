@@ -3,23 +3,23 @@
   "schema_version": "1.1",
   "record_id": "system.io-allow-remote-dasd",
   "tweak_id": "system.io-allow-remote-dasd",
-  "record_status": "draft",
-  "summary": "Draft candidate package for AllowRemoteDASD under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System. The clean Win25H2Clean baseline confirmed the live value, the path-aware static pass found an exact current-build ntoskrnl.exe value hit, and a naturally resolved current-build Ghidra export showed that the strongest code route opens the removable-storage policy path instead of the intended Session Manager I/O path. The tools-hardened path-aware ETW lane completed shell-safe with a real I/O burst but stayed a clean no-hit for the intended path. That keeps the lane at Class B with runtime_no_read and path-context uncertainty.",
+  "record_status": "deprecated",
+  "summary": "Deprecated audit trail for the legacy Session Manager I/O `AllowRemoteDASD` candidate. The clean Win25H2Clean baseline confirmed that a same-named value exists under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System`, but the strongest current-build evidence no longer points there. The path-aware static pass, live KVM local-KD disassembly of `nt!IopAllowRemoteDASD`, and current Microsoft Learn policy mapping all resolve `AllowRemoteDASD` to `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices` instead. Repeated ETW and KVM Procmon runtime lanes also stayed clean no-hits for the intended Session Manager I/O path. The repo now keeps this record as a historical collision trail rather than a live tweak candidate.",
   "validation_proof": {
-    "source_url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
-    "exact_quote_or_path": "The 96-key phase-0 existence batch recorded `system.io-allow-remote-dasd` at HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System with observed value 0.",
+    "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage",
+    "exact_quote_or_path": "The Microsoft Learn `ADMX_RemovableStorage Policy CSP` page maps `All Removable Storage: Allow direct access in remote sessions` to `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices` with registry value name `AllowRemoteDASD`.",
     "key_found_on_page": true,
-    "notes": "Phase-0 existence confirmed the intended registry path exists on the clean baseline before path-aware routing began."
+    "notes": "The old Session Manager I/O baseline observation is still real, but the first-party policy doc now matches the current-build Ghidra and KVM local-KD route to the removable-storage policy family instead of the intended Session Manager I/O path."
   },
   "setting": {
     "name": "Allow Remote DASD",
     "category": "System",
     "area": "Session Manager I/O Registry",
     "scope": "device",
-    "casual_explanation": "Allow Remote DASD is a low-level Session Manager I/O value that appears related to raw disk access policy.",
-    "why_people_change_it": "Researchers track it when studying removable storage policy overlap and low-level I/O access behavior.",
-    "tradeoffs_overview": "The lane now has baseline existence, an exact current-build value-name hit, a decisive current-build Ghidra route to a removable-storage policy path, and a shell-safe intended-path ETW runtime lane that stayed no-hit.",
-    "professional_notes": "Phase-0 existence confirmed AllowRemoteDASD on the live Win25H2Clean baseline with preview value 0 under Session Manager I/O System. The path-aware static pass over the narrowed binary set found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but no exact intended path-context string in the narrowed exact-string scan. The decisive current-build Ghidra export then showed the naturally resolved ntoskrnl.exe function opening \\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices and querying AllowRemoteDASD there. A tools-hardened path-aware ETW lane then ran both short and split I/O-burst traces against the intended Session Manager I/O path on RegProbe-Baseline-ToolsHardened-20260330. It produced real ETL/CSV outputs, kept shell health clean, and still returned a clean no-hit for both the exact value name and the intended path.",
+    "casual_explanation": "A same-named `AllowRemoteDASD` value appears under Session Manager I/O on the clean baseline, but the live current-build evidence points to the removable-storage policy family instead.",
+    "why_people_change_it": "Researchers look at it when chasing low-level raw-disk or removable-storage policy behavior, especially when older tweak lists or registry dumps surface the same value name in more than one place.",
+    "tradeoffs_overview": "The current-build evidence stack now converges on a collision story rather than an active Session Manager I/O tweak. The old baseline value exists, but the strongest static, live-kernel, and first-party policy evidence all point to the removable-storage policy key instead.",
+    "professional_notes": "Phase-0 existence confirmed AllowRemoteDASD on the live Win25H2Clean baseline with preview value 0 under Session Manager I/O System. The path-aware static pass over the narrowed binary set found an exact current-build ntoskrnl.exe value hit for AllowRemoteDASD, but no exact intended path-context string in the narrowed exact-string scan. The decisive current-build Ghidra export then showed the naturally resolved ntoskrnl.exe function opening \\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices and querying AllowRemoteDASD there. A tools-hardened path-aware ETW lane then ran both short and split I/O-burst traces against the intended Session Manager I/O path on RegProbe-Baseline-ToolsHardened-20260330. It produced real ETL/CSV outputs, kept shell health clean, and still returned a clean no-hit for both the exact value name and the intended path. A Linux KVM Procmon replay then ran a raw I/O burst, produced a real 267176-line CSV, and still returned zero lines containing the intended Session Manager I/O path, AllowRemoteDASD itself, or the removable-storage collision path. A debugger-assisted KVM local-KD follow-up then attached to the live guest kernel, resolved `nt!IopAllowRemoteDASD` directly, and returned the current-build symbol address without timing out. A deeper local-KD disassembly and string-dump follow-up on the same guest then showed `IopAllowRemoteDASD` calling `IopOpenRegistryKey` and `IopGetRegistryValue`, with its live path literal resolving to `\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices` and its live value-name literal resolving to `AllowRemoteDASD`. Microsoft Learn now documents that same value name as the removable-storage policy setting `All Removable Storage: Allow direct access in remote sessions`, mapped to `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices`. Taken together, the active current-build route is no longer meaningfully ambiguous: the historical Session Manager I/O value remains an observed baseline artifact, but the live control surface resolves to the removable-storage policy family instead.",
     "targets": [
       {
         "target_id": "allow-remote-dasd",
@@ -38,7 +38,7 @@
             ]
           }
         ],
-        "notes": "The intended Session Manager I/O value exists, but the strongest current-build static route points at a removable-storage policy path rather than the intended path."
+        "notes": "The intended Session Manager I/O value exists as a historical baseline artifact, but the strongest current-build static, live-kernel, and first-party policy evidence point at the removable-storage policy path instead."
       }
     ]
   },
@@ -57,7 +57,7 @@
           "target_id": "allow-remote-dasd",
           "state_kind": "value",
           "value": 0,
-          "rationale": "Keep the observed baseline while the intended path remains research-only and unresolved."
+          "rationale": "Keep the observed baseline only as a historical artifact; it is not treated as the current-build active control surface."
         }
       ],
       "notes": "Observed directly from the 96-key phase-0 existence batch on Win25H2Clean.",
@@ -86,11 +86,11 @@
           "rationale": "Track the observed baseline value without turning it into a shipped preset."
         }
       ],
-      "good_when": "You want the repo to track the live baseline and current evidence for this disputed low-level I/O value.",
-      "bad_when": "You want a cleanly attributed, runtime-proven control surface.",
+      "good_when": "You want the repo to preserve the original baseline observation without overstating it as a live tweak.",
+      "bad_when": "You want a current-build active control surface for `AllowRemoteDASD` under Session Manager I/O.",
       "tradeoffs": [
         "Preserves the observed baseline value.",
-        "Keeps the candidate research-only and non-actionable."
+        "Keeps the candidate as historical collision evidence rather than a live tweak."
       ],
       "apply_allowed": false,
       "evidence_ids": [
@@ -110,6 +110,20 @@
         "path",
         "value",
         "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ms-removable-storage-allow-remote-dasd-20260407",
+      "kind": "official-doc",
+      "title": "Microsoft Learn ADMX_RemovableStorage mapping for AllowRemoteDASD",
+      "location": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage and research/notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md",
+      "summary": "Microsoft Learn documents `AllowRemoteDASD` as the registry value for `All Removable Storage: Allow direct access in remote sessions`, mapped to `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices`.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
         "version-scope"
       ],
       "strength": "high"
@@ -152,20 +166,68 @@
         "risk"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-io-allow-remote-dasd-kvm-procmon-20260406",
+      "kind": "procmon-trace",
+      "title": "Linux KVM Procmon replay for AllowRemoteDASD",
+      "location": "evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json and evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/host-review.json",
+      "summary": "A dedicated KVM raw-I/O burst produced a real Procmon CSV with 267176 rows and still returned zero lines containing the intended Session Manager I/O path, AllowRemoteDASD itself, or the RemovableStorageDevices collision path.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-io-allow-remote-dasd-kvm-local-kd-20260406",
+      "kind": "vm-test",
+      "title": "Linux KVM local-KD live symbol query for AllowRemoteDASD",
+      "location": "evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json and evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log",
+      "summary": "A debugger-assisted KVM local-KD follow-up attached to the live guest kernel, completed successfully, and resolved `nt!IopAllowRemoteDASD` at `fffff800`970cb370`, confirming the current-build symbol in the running guest.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-io-allow-remote-dasd-kvm-local-kd-disasm-20260406",
+      "kind": "vm-test",
+      "title": "Linux KVM local-KD disassembly for AllowRemoteDASD",
+      "location": "evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log and evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log and research/notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md",
+      "summary": "A debugger-assisted KVM local-KD disassembly follow-up showed `IopAllowRemoteDASD` calling `IopOpenRegistryKey` and `IopGetRegistryValue`, then resolved the live key-path literal to `\\REGISTRY\\MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\RemovableStorageDevices` and the live value-name literal to `AllowRemoteDASD`.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-io-allow-remote-dasd-kvm-procmon-recovery-20260407",
+      "kind": "procmon-trace",
+      "title": "Linux KVM recovery-backed Procmon replay for AllowRemoteDASD",
+      "location": "evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json and evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt and evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json and research/notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md",
+      "summary": "A hardened KVM Procmon replay reopened the elevated guest shell automatically, produced a 235794-row CSV, and still returned zero lines containing the intended Session Manager I/O path, `AllowRemoteDASD`, or the RemovableStorageDevices collision path.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": false,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "AllowRemoteDASD is backed by phase-0 baseline existence, an exact current-build ntoskrnl value-name hit, a naturally resolved current-build Ghidra route to the removable-storage policy path, and a shell-safe intended-path ETW lane that remained a clean no-hit. That is enough to keep the candidate visible, but not enough to treat the intended Session Manager I/O path as cross-layer verified.",
-    "blocking_issues": [
-      "runtime_no_read",
-      "path_context_unclear"
-    ]
+    "needs_vm_validation": false,
+    "why": "The old Session Manager I/O value is still worth preserving as a baseline observation, but the strongest current-build evidence no longer supports it as the active control surface. The current-build Ghidra route, the live KVM local-KD disassembly of `IopAllowRemoteDASD`, and the Microsoft Learn ADMX_RemovableStorage mapping all converge on `Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\\AllowRemoteDASD`. Repeated ETW and KVM Procmon lanes also stayed no-hit for the intended Session Manager I/O path. That is enough to retire this Session Manager candidate as a historical collision trail instead of keeping it in the live draft set.",
+    "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-30T19:30:00Z"
+  "last_reviewed_utc": "2026-04-07T00:00:00Z"
 }

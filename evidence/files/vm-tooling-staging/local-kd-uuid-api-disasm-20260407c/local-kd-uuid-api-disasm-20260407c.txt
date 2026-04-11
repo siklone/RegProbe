@@ -1,0 +1,8 @@
+.sympath C:\Tools\Symbols\local-kd-uuid-api-disasm-20260407c
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+uf nt!ExUuidCreate
+uf nt!NtAllocateUuids
+uf nt!ExpAllocateUuids
+.echo REGPROBE_LOCALKD_END
+q

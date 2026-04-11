@@ -1,0 +1,115 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.015 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.063 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 12:27:38.542 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 12:27:38.779 2026 (UTC - 7:00)
+System Uptime: 0 days 7:09:02.518
+lkd> .sympath C:\Tools\Symbols\dpc-watchdog-apply-limits-kd-20260407b
+Symbol search path is: C:\Tools\Symbols\dpc-watchdog-apply-limits-kd-20260407b
+Expanded Symbol search path is: c:\tools\symbols\dpc-watchdog-apply-limits-kd-20260407b
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\dpc-watchdog-apply-limits-kd-20260407b
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!KiApplyProcessorDpcLimits
+fffff806`e7955bcc nt!KiApplyProcessorDpcLimits (KiApplyProcessorDpcLimits)
+lkd> uf nt!KiApplyProcessorDpcLimits
+nt!KiApplyProcessorDpcLimits:
+fffff806`e7955bcc 48895c2410      mov     qword ptr [rsp+10h],rbx
+fffff806`e7955bd1 57              push    rdi
+fffff806`e7955bd2 4883ec20        sub     rsp,20h
+fffff806`e7955bd6 488364243000    and     qword ptr [rsp+30h],0
+fffff806`e7955bdc 488bda          mov     rbx,rdx
+fffff806`e7955bdf 8b4218          mov     eax,dword ptr [rdx+18h]
+fffff806`e7955be2 488bf9          mov     rdi,rcx
+fffff806`e7955be5 4c8b81a88e0000  mov     r8,qword ptr [rcx+8EA8h]
+fffff806`e7955bec 39421c          cmp     dword ptr [rdx+1Ch],eax
+fffff806`e7955bef 741e            je      nt!KiApplyProcessorDpcLimits+0x43 (fffff806`e7955c0f)  Branch
+
+nt!KiApplyProcessorDpcLimits+0x25:
+fffff806`e7955bf1 85c0            test    eax,eax
+fffff806`e7955bf3 7417            je      nt!KiApplyProcessorDpcLimits+0x40 (fffff806`e7955c0c)  Branch
+
+nt!KiApplyProcessorDpcLimits+0x29:
+fffff806`e7955bf5 8bd0            mov     edx,eax
+fffff806`e7955bf7 b940000000      mov     ecx,40h
+fffff806`e7955bfc 41b84b695750    mov     r8d,5057694Bh
+fffff806`e7955c02 e8e9c40100      call    nt!ExAllocatePool2 (fffff806`e79720f0)
+fffff806`e7955c07 4c8bc0          mov     r8,rax
+fffff806`e7955c0a eb03            jmp     nt!KiApplyProcessorDpcLimits+0x43 (fffff806`e7955c0f)  Branch
+
+nt!KiApplyProcessorDpcLimits+0x40:
+fffff806`e7955c0c 4533c0          xor     r8d,r8d
+
+nt!KiApplyProcessorDpcLimits+0x43:
+fffff806`e7955c0f 4c8d4c2430      lea     r9,[rsp+30h]
+fffff806`e7955c14 488bd3          mov     rdx,rbx
+fffff806`e7955c17 488bcf          mov     rcx,rdi
+fffff806`e7955c1a e88118a6ff      call    nt!KiSetProcessorDpcLimits (fffff806`e73b74a0)
+fffff806`e7955c1f 8bd8            mov     ebx,eax
+fffff806`e7955c21 85c0            test    eax,eax
+fffff806`e7955c23 7814            js      nt!KiApplyProcessorDpcLimits+0x6d (fffff806`e7955c39)  Branch
+
+nt!KiApplyProcessorDpcLimits+0x59:
+fffff806`e7955c25 488b4c2430      mov     rcx,qword ptr [rsp+30h]
+fffff806`e7955c2a 4885c9          test    rcx,rcx
+fffff806`e7955c2d 740a            je      nt!KiApplyProcessorDpcLimits+0x6d (fffff806`e7955c39)  Branch
+
+nt!KiApplyProcessorDpcLimits+0x63:
+fffff806`e7955c2f ba4b695750      mov     edx,5057694Bh
+fffff806`e7955c34 e897d00100      call    nt!ExFreePoolWithTag (fffff806`e7972cd0)
+
+nt!KiApplyProcessorDpcLimits+0x6d:
+fffff806`e7955c39 8bc3            mov     eax,ebx
+fffff806`e7955c3b 488b5c2438      mov     rbx,qword ptr [rsp+38h]
+fffff806`e7955c40 4883c420        add     rsp,20h
+fffff806`e7955c44 5f              pop     rdi
+fffff806`e7955c45 c3              ret
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

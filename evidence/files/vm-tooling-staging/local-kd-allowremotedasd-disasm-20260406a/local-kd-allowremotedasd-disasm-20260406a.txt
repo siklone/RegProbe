@@ -1,0 +1,6 @@
+.sympath C:\Tools\Symbols\local-kd-allowremotedasd-disasm-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+uf nt!IopAllowRemoteDASD
+.echo REGPROBE_LOCALKD_END
+q

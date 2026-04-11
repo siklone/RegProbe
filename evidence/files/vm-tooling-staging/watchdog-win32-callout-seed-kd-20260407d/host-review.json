@@ -1,0 +1,46 @@
+{
+  "generated_utc": "2026-04-07T18:22:43Z",
+  "candidate": "power.session-win32-callout-watchdog-bugcheck-enabled",
+  "guest": "regprobe-win11-25h2-session",
+  "bundle": "watchdog-win32-callout-seed-kd-20260407d",
+  "findings": {
+    "symbol_cluster": {
+      "target_global": "PopWin32CalloutWatchdogBugcheckEnabled",
+      "adjacent_watchdog_symbols": [
+        "PopWin32CalloutWatchdogCallback",
+        "PopWin32kCalloutWatchdogTimeoutSeconds",
+        "PopInvokeWin32CalloutWithWatchdog"
+      ],
+      "bugcheck_watchdog_symbols": [
+        "PnpWatchdogBugcheck",
+        "PnpWatchdogBugcheckRegName",
+        "PopIrpWatchdogBugcheck",
+        "PnpWatchdogBugcheckConfig",
+        "KiForceBugcheckForDpcWatchdog"
+      ]
+    },
+    "live_state": {
+      "PopWin32CalloutWatchdogBugcheckEnabled": 0
+    },
+    "disassembly": {
+      "PopComputeWatchdogTimeout_reads": [
+        "PopWatchdogSleepTimeout",
+        "PopWatchdogResumeTimeout"
+      ],
+      "PopUpdatePowerActionWatchdogTimeouts_reads_target_global": false,
+      "PopReadUlongPowerKey_calls": [
+        "PopReadRegKeyValue"
+      ],
+      "PopReadRegKeyValue_calls": [
+        "ZwOpenKey",
+        "RtlInitUnicodeString",
+        "ZwQueryValueKey"
+      ]
+    }
+  },
+  "interpretation": {
+    "current_state": "The live watchdog/bugcheck symbol sweep did not reveal a target-specific setter, copy helper, or registry-seeding caller for PopWin32CalloutWatchdogBugcheckEnabled on the current build.",
+    "remaining_gap": "Either a boot-only initialization path outside the observed symbol cluster seeds this value, or the global is a legacy/adjacent watchdog-family artifact with no active registry semantics on this build.",
+    "downgrade_signal": "The current proof is strong enough to replace the softer no-seeding-caller blocker with a stricter no-current-build-registry-seeding-path conclusion."
+  }
+}

@@ -1,0 +1,110 @@
+﻿{
+    "generated_utc":  "2026-04-06T13:29:12.8383821Z",
+    "machine":  "DESKTOP-AHPV0FV",
+    "user":  "rai",
+    "tools":  {
+                  "procmon":  {
+                                  "path":  "C:\\Tools\\Sysinternals\\Procmon64.exe",
+                                  "exists":  true
+                              },
+                  "procmon_wrapper":  {
+                                          "path":  "C:\\RegProbe-Diag\\bootstrap\\procmon-safe.ps1",
+                                          "exists":  true
+                                      },
+                  "wpr":  {
+                              "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\wpr.exe",
+                              "exists":  true
+                          },
+                  "wpa":  {
+                              "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\wpa.exe",
+                              "exists":  true
+                          },
+                  "xperf":  {
+                                "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\xperf.exe",
+                                "exists":  true
+                            },
+                  "dotnet":  {
+                                 "path":  "C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe",
+                                 "exists":  true
+                             },
+                  "winsat":  {
+                                 "path":  "C:\\Windows\\System32\\winsat.exe",
+                                 "exists":  true
+                             },
+                  "diskspd":  {
+                                  "path":  "C:\\Tools\\Perf\\diskspd.exe",
+                                  "exists":  true
+                              },
+                  "ghidra_launcher":  {
+                                          "path":  "C:\\Tools\\Scripts\\ghidra-headless.cmd",
+                                          "exists":  true
+                                      },
+                  "symchk":  {
+                                 "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+                                 "exists":  true
+                             },
+                  "dbghelp":  {
+                                  "path":  "C:\\WINDOWS\\system32\\dbghelp.dll",
+                                  "exists":  true
+                              },
+                  "aida64":  {
+                                 "path":  "",
+                                 "exists":  false
+                             }
+              },
+    "optional_tools":  {
+                           "ttd":  {
+                                       "path":  "",
+                                       "exists":  false
+                                   },
+                           "windbg":  {
+                                          "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\windbg.exe",
+                                          "exists":  true
+                                      }
+                       },
+    "smokes":  {
+                   "dotnet_info":  {
+                                       "success":  true,
+                                       "output":  "C:\\RegProbe-Diag\\tool-health-rerun\\dotnet-info.txt"
+                                   },
+                   "procmon":  {
+                                   "success":  true,
+                                   "output":  "C:\\Tools\\Perf\\Procmon\\tool-health-procmon.pml",
+                                   "size_bytes":  19158348,
+                                   "exit_code":  0
+                               },
+                   "wpr":  {
+                               "success":  true,
+                               "output":  "C:\\RegProbe-Diag\\tool-health-rerun\\tool-health-wpr.etl"
+                           },
+                   "ghidra":  {
+                                  "success":  true,
+                                  "skipped":  true,
+                                  "reason":  "SkipGhidraSmoke"
+                              },
+                   "winsat_cpu":  {
+                                      "success":  true,
+                                      "output":  "C:\\RegProbe-Diag\\tool-health-rerun\\winsat-cpu.txt"
+                                  },
+                   "winsat_mem":  {
+                                      "success":  true,
+                                      "output":  "C:\\RegProbe-Diag\\tool-health-rerun\\winsat-mem.txt"
+                                  },
+                   "diskspd":  {
+                                   "success":  true,
+                                   "output":  "C:\\RegProbe-Diag\\tool-health-rerun\\diskspd.txt"
+                               },
+                   "symchk_choice":  {
+                                         "success":  true,
+                                         "output":  "C:\\RegProbe-Diag\\tool-health-rerun\\symchk-choice.txt",
+                                         "exit_code":  0,
+                                         "target":  "C:\\Windows\\System32\\choice.exe",
+                                         "symbol_root":  "C:\\RegProbe-Diag\\tool-health-rerun\\symbol-cache\\choice",
+                                         "pdb":  "C:\\RegProbe-Diag\\tool-health-rerun\\symbol-cache\\choice\\choice.pdb"
+                                     },
+                   "aida64_visibility":  {
+                                             "success":  false,
+                                             "output":  ""
+                                         }
+               }
+}

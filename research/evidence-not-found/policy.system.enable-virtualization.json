@@ -1,21 +1,25 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-02T11:02:27.101628Z",
+  "generated_utc": "2026-04-07T01:54:28.039963Z",
   "record_id": "policy.system.enable-virtualization",
   "tweak_id": "policy.system.enable-virtualization",
   "evidence_class": "B",
-  "record_status": "draft",
+  "record_status": "validated",
   "tested_build": "26100",
   "negative_reason": "no-hit-or-insufficient-proof",
   "statement": "This record remains negative evidence on build 26100: the repo did not produce enough supporting proof to promote it into a normal actionable surface.",
   "attempted_layers": [
+    "runtime_procmon",
     "static_ghidra",
-    "behavior_wpr"
+    "behavior_wpr",
+    "runtime_reboot"
   ],
   "attempted_tools": [
     "etw",
+    "procmon",
     "ghidra",
-    "wpr"
+    "wpr",
+    "reboot"
   ],
   "runtime_evidence_found": true,
   "validation_proof_found": true,
@@ -24,7 +28,7 @@
     "anticheat_details": "Changing virtualization and VBS posture can affect kernel integrity surfaces and compatibility with some anti-cheat stacks.",
     "gaming_safe": false
   },
-  "gating_reason": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe.",
+  "gating_reason": "Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. A KVM Procmon bootlog follow-up also completed a real reboot but showed the current guest refusin...",
   "links": [
     {
       "title": "Repo security notes for EnableVirtualization",

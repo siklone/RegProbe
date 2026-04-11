@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from evidence_class_lib import build_class_entry, load_overrides, load_provenance_map as load_provenance_entries
+from imported_candidate_backlog_lib import build_imported_candidate_backlog_summary
 from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, normalize_reference, normalize_reference_text
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -368,6 +369,7 @@ def main() -> int:
             "records_missing_validation_proof": validation_proof_missing,
             "deprecated_missing_validation_proof": deprecated_without_validation_proof,
             "class_counts": dict(class_counts),
+            "imported_candidate_backlog": build_imported_candidate_backlog_summary(),
         },
         "records": sorted(records, key=lambda item: (item["record_status"], item["record_id"] or "")),
     }

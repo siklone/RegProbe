@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "power.control.hiber-file-size-percent",
   "tweak_id": "power.control.hiber-file-size-percent",
-  "record_status": "draft",
-  "summary": "Draft candidate package for HiberFileSizePercent under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the residual string triage found an exact current-build ntoskrnl.exe hit, the repo power notes preserve the IDA-derived `PopHiberFileSizePercent` symbol note, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for HiberFileSizePercent. App surfacing remains a separate product decision from evidence classification.",
+  "record_status": "validated",
+  "summary": "Validated decision-gated record for HiberFileSizePercent under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the residual string triage found an exact current-build ntoskrnl.exe hit, and the tools-hardened lightweight ETW follow-up surfaced exact runtime lines but not an exact runtime read. A later KVM local-KD follow-up then resolved the live hibernation symbol family, confirmed the current-build `Control\\Power` registry path through `PopOpenHiberPersistedKey` and `PopQueryHiberPersistedRegValue`, and showed `PopHiberFileSizePercent = 0` on the running guest. Dedicated and recovery-backed KVM Procmon replays then captured real `Control\\Power` activity through `powercfg.exe` and the `System` process, but still surfaced zero direct `HiberFileSizePercent` hits. A later host-driven KVM reboot observation finally closed the reboot gap by confirming a real boot-time advance while `HiberFileSizePercent` stayed `0` and `powercfg /a` stayed hibernation-unsupported before and after reboot. That leaves the lane at Class B with a pure runtime_no_read gate rather than reboot uncertainty.",
   "validation_proof": {
     "source_url": "Docs/power/power.md",
     "exact_quote_or_path": "Docs/power/power.md:149 shows `HiberFileSizePercent` with the note that the literal is set to 0 by default on LTSC IoT Enterprise 2024 when hibernation is unsupported by default.",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "Hiber File Size Percent is a low-level power-manager value under the main Power key that appears to relate to hibernation file sizing behavior.",
     "why_people_change_it": "Researchers track this value when studying hibernation support, hiberfil sizing, and adjacent power-manager behavior.",
-    "tradeoffs_overview": "The lane now has clean baseline existence, exact docs and static hits, a decompilation-derived internal symbol note, and an exact boot-time runtime read from the retained stepwise Procmon boot trace.",
-    "professional_notes": "Win25H2Clean phase-0 existence confirmed HiberFileSizePercent on the live baseline with preview value 0. The docs-first static triage tied the value to exact repo documentation hits, led by Docs/power/power.md:149, and the residual string batch found an exact current-build hit in C:\\Windows\\System32\\ntoskrnl.exe. The same repo power notes preserve the IDA-derived internal symbol note `PopHiberFileSizePercent` for this value. A retained guest-processed stepwise Procmon boot trace on RegProbe-Baseline-Clean-20260329 then showed `smss.exe` performing an exact `RegQueryValue SUCCESS` on HKLM\\System\\CurrentControlSet\\Control\\Power\\HiberFileSizePercent with data 0 during the rebooted boot cycle. That stronger retained runtime proof supersedes the later lightweight ETW no-query lane as the best runtime layer for this candidate.",
+    "tradeoffs_overview": "The lane now has a clean baseline value, exact docs and static hits, a runtime ETW lane that surfaced exact value-name lines, a live KVM local-KD inspection that confirms the current-build `Control\\Power` path plus a running `PopHiberFileSizePercent = 0` state, repeated KVM Procmon replays that capture real live `Control\\Power` traffic, and a reboot-backed KVM observation that proves the value persists across a real guest reboot. It still lacks an exact runtime `HiberFileSizePercent` read, so the remaining gate is runtime attribution rather than reboot uncertainty.",
+    "professional_notes": "Win25H2Clean phase-0 existence confirmed HiberFileSizePercent on the live baseline with preview value 0. The residual docs-first static triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:149. The shared residual string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe. The tools-hardened lightweight ETW follow-up reran the candidate on RegProbe-Baseline-ToolsHardened-20260330 with a multi-trigger profile that combined hibernate toggle attempts, `powercfg /a`, and a file-I/O burst. That lane surfaced exact HiberFileSizePercent lines but still did not capture an exact RegQueryValue hit, so the candidate remained decision-gated at Class B. A later debugger-assisted KVM local-KD follow-up then resolved a coherent live hibernation symbol family including `PopHiberFileSizePercent`, `PopSetHiberFileSize`, `PopAdjustHiberFile`, `PopOpenHiberPersistedKey`, and `PopQueryHiberPersistedRegValue`. The same live guest run showed `PopHiberFileSizePercent = 0`, `PopHiberFileType = 2`, and `PopHiberEnabled = 0x00200501`. A string-dump follow-up resolved `PopHibernatePersistedRegLocation` to `\\REGISTRY\\MACHINE\\SYSTEM\\CURRENTCONTROLSET\\CONTROL\\POWER`, while the matching disassembly showed `PopOpenHiberPersistedKey` loading that path, building a Unicode string, and opening or creating the target key. The companion `PopQueryHiberPersistedRegValue` path then opened the same persisted key, queried a value through `ZwQueryValueKey`, and on `STATUS_OBJECT_NAME_NOT_FOUND` fell back to `PopReadUlongPowerKey`. A later KVM Procmon runtime replay with a dedicated `hiber-file-size-burst` produced a `267382`-row capture, surfaced adjacent live `Control\\Power` activity through `powercfg.exe` and `System`, and still returned `0` `HiberFileSizePercent` fragment hits. A recovery-backed rerun then explicitly started from a closed elevated guest shell, reopened that shell through the hardened host runner, produced a fresh `245402`-row capture, reproduced the same adjacent-only `Control\\Power` activity through `powercfg.exe`, and still returned `0` direct `HiberFileSizePercent` fragment hits. A later host-driven KVM reboot observation then confirmed a real boot-time advance from `2026-04-07T10:01:16.5000000Z` to `2026-04-07T10:09:21.5000000Z` while `HiberFileSizePercent` remained `REG_DWORD 0` before and after reboot and `powercfg /a` remained hibernation-unsupported. That closes the reboot-diff story and leaves only the lack of a decisive exact live registry-read proof.",
     "targets": [
       {
         "target_id": "hiberfilesizepercent",
@@ -143,44 +143,84 @@
       "strength": "high"
     },
     {
-      "evidence_id": "ghidra-power-control-hiber-file-size-percent-20260408",
-      "kind": "decompilation",
-      "title": "IDA-derived static naming note for HiberFileSizePercent",
-      "location": "Docs/power/power.md:149 and research/notes/power-control-hiber-file-size-percent-stepwise-follow-up-20260408.md",
-      "summary": "The repo power notes preserve the IDA-derived internal symbol name `PopHiberFileSizePercent` alongside the registry value, which provides a reviewable decompilation-derived static naming layer for the same control.",
+      "evidence_id": "vm-power-control-hiber-runtime-20260330",
+      "kind": "etw-trace",
+      "title": "Tools-hardened lightweight ETW follow-up for HiberFileSizePercent",
+      "location": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json and research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md",
+      "summary": "The tools-hardened lightweight ETW lane surfaced exact HiberFileSizePercent lines on the current VMware baseline but did not capture an exact RegQueryValue hit.",
       "supports": [
-        "path",
-        "value",
         "behavior",
+        "risk",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "medium"
     },
     {
-      "evidence_id": "vm-power-control-stepwise-runtime-20260329",
-      "kind": "procmon-trace",
-      "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for HiberFileSizePercent",
-      "location": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv and registry-research-framework/audit/hiber-file-size-percent-stepwise-runtime-audit-20260408.json and research/notes/power-control-hiber-file-size-percent-stepwise-follow-up-20260408.md",
-      "summary": "The guest-processed stepwise Procmon boot log completed shell-safe on RegProbe-Baseline-Clean-20260329, soft-rebooted the VM, and captured an exact `RegQueryValue SUCCESS` for HiberFileSizePercent from smss.exe during early boot.",
+      "evidence_id": "vm-power-control-hiber-kvm-local-kd-20260406",
+      "kind": "vm-test",
+      "title": "Linux KVM local-KD follow-up for HiberFileSizePercent",
+      "location": "evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a.log and evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a.log and evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a.log and research/notes/power-control-hiber-file-size-percent-kvm-local-kd-follow-up-20260406.md",
+      "summary": "A debugger-assisted KVM local-KD follow-up resolved the live hibernation symbol family, showed `PopHiberFileSizePercent = 0` on the running guest, resolved `PopHibernatePersistedRegLocation` to `\\REGISTRY\\MACHINE\\SYSTEM\\CURRENTCONTROLSET\\CONTROL\\POWER`, and showed `PopQueryHiberPersistedRegValue` querying that path via `ZwQueryValueKey` with a `PopReadUlongPowerKey` fallback.",
       "supports": [
         "path",
         "value",
-        "runtime-proof",
         "behavior",
         "version-scope"
       ],
-      "strength": "high"
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power-control-hiber-kvm-procmon-runtime-20260407",
+      "kind": "vm-test",
+      "title": "Linux KVM Procmon runtime replay for HiberFileSizePercent",
+      "location": "evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c-summary.json and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c.txt and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/host-review.json and research/notes/power-control-hiber-file-size-percent-kvm-procmon-runtime-20260407.md",
+      "summary": "A host-driven KVM Procmon replay produced a `267382`-row capture, surfaced adjacent live `Control\\Power` activity through `powercfg.exe` and `System`, but still returned zero direct `HiberFileSizePercent` fragment hits.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power-control-hiber-kvm-procmon-recovery-20260407",
+      "kind": "vm-test",
+      "title": "Linux KVM recovery-backed Procmon replay for HiberFileSizePercent",
+      "location": "evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json and research/notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md",
+      "summary": "A hardened KVM Procmon replay reopened the elevated guest shell automatically, produced a `245402`-row capture, reproduced adjacent `Control\\Power` activity through `powercfg.exe`, and still returned zero direct `HiberFileSizePercent` fragment hits.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power-control-hiber-kvm-reboot-observation-20260407",
+      "kind": "vm-test",
+      "title": "Linux KVM reboot-backed observation for HiberFileSizePercent",
+      "location": "evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json and evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json and evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json and evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt and evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt and evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json and research/notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md",
+      "summary": "A host-driven KVM reboot observation confirmed a real guest boot-time advance while HiberFileSizePercent stayed `REG_DWORD 0` before and after reboot and `powercfg /a` remained hibernation-unsupported on both sides of the reboot.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
-    "confidence": "high",
+    "confidence": "medium",
     "apply_allowed": false,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "HiberFileSizePercent now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, a reviewable decompilation-derived `PopHiberFileSizePercent` naming note, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
-    "blocking_issues": []
+    "why": "HiberFileSizePercent now has a real docs/static/runtime package on RegProbe-Baseline-ToolsHardened-20260330 plus a KVM local-KD follow-up that confirms the live current-build `Control\\Power` path and a running `PopHiberFileSizePercent = 0` state. Repeated KVM Procmon replays also captured real adjacent `Control\\Power` activity, and a host-driven KVM reboot observation now proves that the value persists at `0` across a real guest reboot while hibernation remains unavailable. The runtime lanes still did not produce an exact live `HiberFileSizePercent` read, so the record stays decision-gated at Class B for runtime attribution rather than reboot, path, or state uncertainty.",
+    "blocking_issues": [
+      "runtime_no_read"
+    ]
   },
-  "last_reviewed_utc": "2026-04-08T18:20:00Z"
+  "last_reviewed_utc": "2026-04-07T00:00:00Z"
 }

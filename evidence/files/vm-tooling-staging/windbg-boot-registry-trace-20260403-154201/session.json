@@ -1,0 +1,39 @@
+﻿{
+    "generated_utc":  "2026-04-03T12:42:01.1557012Z",
+    "session_id":  "windbg-boot-registry-trace-20260403-154201",
+    "collection_mode":  "evidence",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+    "debugger_path":  "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\kd.exe",
+    "trace_profile":  "roundtrip-once",
+    "boot_mode":  "guest-restart",
+    "break_on_connect_mode":  "bonc",
+    "target_key":  null,
+    "noise_budget_bytes":  262144,
+    "noise_budget_event_limit":  100,
+    "command_script":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/windbg-session-script.txt",
+    "console_log":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/kd-console.log",
+    "raw_log":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/windbg-registry-trace.log",
+    "status":  "boot-unsafe",
+    "steps":  [
+                  "debugger-started",
+                  "guest-restart-requested",
+                  "trace-finished"
+              ],
+    "summary_path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/summary.json",
+    "results_path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/results.json",
+    "error":  "Timed out waiting for shell health after 240 seconds.",
+    "recovery":  {
+                     "recovered":  true,
+                     "steps":  [
+                                   "reverted-to-debug-snapshot",
+                                   "vm-started-nogui",
+                                   "shell-healthy-after-recovery"
+                               ],
+                     "shell_checks":  {
+                                          "explorer":  true,
+                                          "sihost":  true,
+                                          "shellhost":  true,
+                                          "ctfmon":  true
+                                      }
+                 }
+}

@@ -1,0 +1,61 @@
+Opened log file 'C:\\r\\evidence\\files\\vm-tooling-staging\\windbg-boot-registry-trace-20260403-154201\\windbg-registry-trace_6048_2026-04-03_15-42-07-776.log'
+0: kd> .echo REGPROBE_PROFILE|roundtrip-once
+REGPROBE_PROFILE|roundtrip-once
+0: kd> .echo REGPROBE_ATTACH_BEGIN
+REGPROBE_ATTACH_BEGIN
+0: kd> .echo REGPROBE_ATTACH_READY
+REGPROBE_ATTACH_READY
+0: kd> g
+[SC-CLIENT] !! Service timeout: Service VMTools, PID 0x00000c78, OpCode 0x0000000f, Timeout 0x00007530 took 34281 msec !!
+Shutdown occurred at (Fri Apr  3 15:43:02.880 2026 (UTC + 3:00))...unloading all symbol tables.
+Waiting to reconnect...
+Connected to Windows 10 26100 x64 target at (Fri Apr  3 15:43:31.284 2026 (UTC + 3:00)), ptr64 TRUE
+Kernel Debugger connection established.
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       srv*
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (1 procs) Free x64
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`77c00000 PsLoadedModuleList = 0xfffff806`78af4e70
+System Uptime: 0 days 0:00:00.000
+KDTARGET: Refreshing KD connection
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\uiomap
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\vmbusr
+KDTARGET: Refreshing KD connection
+Break instruction exception - code 80000003 (first chance)
+
+A fatal system error has occurred.
+Debugger entered on first try; Bugcheck callbacks have not been invoked.
+
+A fatal system error has occurred.
+
+For analysis of this file, run !analyze -v
+nt!DbgBreakPointWithStatus:
+fffff806`780fa090 cc              int     3
+1: kd> .echo REGPROBE_ROUNDTRIP_REQUEST|1
+REGPROBE_ROUNDTRIP_REQUEST|1
+1: kd> .echo REGPROBE_ROUNDTRIP_OK|1
+REGPROBE_ROUNDTRIP_OK|1
+1: kd> g
+Shutdown occurred at (Fri Apr  3 15:44:51.239 2026 (UTC + 3:00))...unloading all symbol tables.
+Waiting to reconnect...
+Connected to Windows 10 26100 x64 target at (Fri Apr  3 15:45:11.905 2026 (UTC + 3:00)), ptr64 TRUE
+Kernel Debugger connection established.
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       srv*
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (1 procs) Free x64
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff807`98400000 PsLoadedModuleList = 0xfffff807`992f4e70
+System Uptime: 0 days 0:00:00.000
+KDTARGET: Refreshing KD connection
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\uiomap
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\vmbusr
+DriverEntry failed 0xc035001e for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\l1vhlwf
+DriverEntry failed 0xc00000bb for driver \REGISTRY\MACHINE\SYSTEM\ControlSet001\Services\NetworkPrivacyPolicy

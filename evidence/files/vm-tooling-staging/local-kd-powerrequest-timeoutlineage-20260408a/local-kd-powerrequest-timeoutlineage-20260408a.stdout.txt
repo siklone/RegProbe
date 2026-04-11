@@ -1,0 +1,125 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.015 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.110 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Wed Apr  8 05:20:45.246 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Wed Apr  8 05:20:45.637 2026 (UTC - 7:00)
+System Uptime: 1 days 0:02:09.376
+lkd> .sympath C:\Tools\Symbols\local-kd-powerrequest-timeoutlineage-20260408a
+Symbol search path is: C:\Tools\Symbols\local-kd-powerrequest-timeoutlineage-20260408a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-powerrequest-timeoutlineage-20260408a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-powerrequest-timeoutlineage-20260408a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!*ExecutionRequiredTimeout*
+fffff806`e7d0e0a0 nt!PopPowerRequestExecutionRequiredTimeoutTimer = <no type information>
+fffff806`e7549e0c nt!PopPowerRequestSetExecutionRequiredTimeoutTimer (PopPowerRequestSetExecutionRequiredTimeoutTimer)
+fffff806`e73cda10 nt!PopPowerRequestExecutionRequiredTimeoutCallback (PopPowerRequestExecutionRequiredTimeoutCallback)
+fffff806`e7dd70b0 nt!PopExecutionRequiredTimeout = <no type information>
+fffff806`e7549ca0 nt!PopPowerRequestExecutionRequiredTimeoutWorker (PopPowerRequestExecutionRequiredTimeoutWorker)
+lkd> uf nt!PopPowerRequestSetExecutionRequiredTimeoutTimer
+nt!PopPowerRequestSetExecutionRequiredTimeoutTimer:
+fffff806`e7549e0c 4883ec38        sub     rsp,38h
+fffff806`e7549e10 4533c0          xor     r8d,r8d
+fffff806`e7549e13 44380569427c00  cmp     byte ptr [nt!PopExecutionRequiredContext+0x3 (fffff806`e7d0e083)],r8b
+fffff806`e7549e1a 7458            je      nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x68 (fffff806`e7549e74)  Branch
+
+nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x10:
+fffff806`e7549e1c 4439058dd28800  cmp     dword ptr [nt!PopExecutionRequiredTimeout (fffff806`e7dd70b0)],r8d
+fffff806`e7549e23 744f            je      nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x68 (fffff806`e7549e74)  Branch
+
+nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x19:
+fffff806`e7549e25 48b90800000080f7ffff mov rcx,0FFFFF78000000008h
+fffff806`e7549e2f 488b09          mov     rcx,qword ptr [rcx]
+fffff806`e7549e32 8b0578d28800    mov     eax,dword ptr [nt!PopExecutionRequiredTimeout (fffff806`e7dd70b0)]
+fffff806`e7549e38 482b0d49427c00  sub     rcx,qword ptr [nt!PopExecutionRequiredContext+0x8 (fffff806`e7d0e088)]
+fffff806`e7549e3f 4869d080969800  imul    rdx,rax,989680h
+fffff806`e7549e46 483bca          cmp     rcx,rdx
+fffff806`e7549e49 7207            jb      nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x46 (fffff806`e7549e52)  Branch
+
+nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x3f:
+fffff806`e7549e4b ba80969800      mov     edx,989680h
+fffff806`e7549e50 eb03            jmp     nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x49 (fffff806`e7549e55)  Branch
+
+nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x46:
+fffff806`e7549e52 482bd1          sub     rdx,rcx
+
+nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x49:
+fffff806`e7549e55 48834c2428ff    or      qword ptr [rsp+28h],0FFFFFFFFFFFFFFFFh
+fffff806`e7549e5b 4c8d4c2420      lea     r9,[rsp+20h]
+fffff806`e7549e60 48f7da          neg     rdx
+fffff806`e7549e63 4c89442420      mov     qword ptr [rsp+20h],r8
+fffff806`e7549e68 488d0d31427c00  lea     rcx,[nt!PopPowerRequestExecutionRequiredTimeoutTimer (fffff806`e7d0e0a0)]
+fffff806`e7549e6f e82c82c7ff      call    nt!KeSetTimer2 (fffff806`e71c20a0)
+
+nt!PopPowerRequestSetExecutionRequiredTimeoutTimer+0x68:
+fffff806`e7549e74 4883c438        add     rsp,38h
+fffff806`e7549e78 c3              ret
+lkd> uf nt!PopPowerRequestExecutionRequiredTimeoutCallback
+nt!PopPowerRequestExecutionRequiredTimeoutCallback:
+fffff806`e73cda10 4883ec28        sub     rsp,28h
+fffff806`e73cda14 ba01000000      mov     edx,1
+fffff806`e73cda19 488d0d08079400  lea     rcx,[nt!PopPowerRequestExecutionRequiredTimeoutTimer+0x88 (fffff806`e7d0e128)]
+fffff806`e73cda20 e8539aecff      call    nt!PopQueueWorkItem (fffff806`e7297478)
+fffff806`e73cda25 4883c428        add     rsp,28h
+fffff806`e73cda29 c3              ret
+lkd> uf nt!PopPowerRequestExecutionRequiredTimeoutWorker
+nt!PopPowerRequestExecutionRequiredTimeoutWorker:
+fffff806`e7549ca0 4883ec28        sub     rsp,28h
+fffff806`e7549ca4 b101            mov     cl,1
+fffff806`e7549ca6 e855693000      call    nt!PopAcquirePowerRequestPushLock (fffff806`e7850600)
+fffff806`e7549cab e83c202f00      call    nt!PopPowerRequestHandleExecutionEnablementUpdate (fffff806`e783bcec)
+fffff806`e7549cb0 488d0d71447c00  lea     rcx,[nt!PopPowerRequestExecutionRequiredTimeoutTimer+0x88 (fffff806`e7d0e128)]
+fffff806`e7549cb7 e898b0d5ff      call    nt!PopOkayToQueueNextWorkItem (fffff806`e72a4d54)
+fffff806`e7549cbc 488d0d8d437c00  lea     rcx,[nt!PopPowerRequestLock (fffff806`e7d0e050)]
+fffff806`e7549cc3 e800c2c6ff      call    nt!PopReleaseRwLock (fffff806`e71b5ec8)
+fffff806`e7549cc8 4883c428        add     rsp,28h
+fffff806`e7549ccc c3              ret
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

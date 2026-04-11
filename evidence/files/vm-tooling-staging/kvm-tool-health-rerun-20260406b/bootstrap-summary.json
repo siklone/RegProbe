@@ -1,0 +1,285 @@
+﻿{
+    "generated_utc":  "2026-04-06T07:06:36.3369892Z",
+    "payload_root":  "d:/.",
+    "tool_root":  "C:\\Tools",
+    "diag_root":  "C:\\RegProbe-Diag",
+    "is_admin":  true,
+    "steps":  {
+                  "payload_copy":  {
+                                       "success":  true,
+                                       "guest_tools":  [
+                                                           "apply-defender-tooling-exclusions.ps1",
+                                                           "ghidra-headless.cmd",
+                                                           "install-dotnet-desktop-runtime.ps1",
+                                                           "pdb-download.ps1",
+                                                           "procmon-safe.ps1",
+                                                           "tool-health-smoke.ps1",
+                                                           "wpa.cmd",
+                                                           "wpr.cmd",
+                                                           "wpr-start-general.cmd",
+                                                           "wpr-stop.cmd",
+                                                           "xperf.cmd"
+                                                       ],
+                                       "reused_existing_payload":  false,
+                                       "warnings":  [
+
+                                                    ]
+                                   },
+                  "defender":  {
+                                   "success":  true,
+                                   "generated_utc":  "2026-04-06T07:06:39.3209968Z",
+                                   "mode":  "apply",
+                                   "exclusion_paths_requested":  [
+                                                                     "C:\\Tools",
+                                                                     "C:\\RegProbe-Diag"
+                                                                 ],
+                                   "exclusion_processes_requested":  [
+                                                                         "powershell.exe",
+                                                                         "Procmon64.exe",
+                                                                         "wpr.exe",
+                                                                         "wpa.exe",
+                                                                         "xperf.exe",
+                                                                         "java.exe",
+                                                                         "javaw.exe",
+                                                                         "diskspd.exe",
+                                                                         "winsat.exe",
+                                                                         "RegProbe.App.exe",
+                                                                         "RegProbe.ElevatedHost.exe"
+                                                                     ],
+                                   "execution_policy_requested":  "RemoteSigned",
+                                   "applied_paths":  [
+
+                                                     ],
+                                   "applied_processes":  [
+
+                                                         ],
+                                   "before":  {
+                                                  "exclusion_paths":  [
+                                                                          "C:\\RegProbe-Diag",
+                                                                          "C:\\Tools"
+                                                                      ],
+                                                  "exclusion_processes":  [
+                                                                              "diskspd.exe",
+                                                                              "java.exe",
+                                                                              "javaw.exe",
+                                                                              "powershell.exe",
+                                                                              "Procmon64.exe",
+                                                                              "RegProbe.App.exe",
+                                                                              "RegProbe.ElevatedHost.exe",
+                                                                              "winsat.exe",
+                                                                              "wpa.exe",
+                                                                              "wpr.exe",
+                                                                              "xperf.exe"
+                                                                          ],
+                                                  "execution_policy":  {
+                                                                           "MachinePolicy":  "Undefined",
+                                                                           "UserPolicy":  "Undefined",
+                                                                           "Process":  "Bypass",
+                                                                           "CurrentUser":  "Undefined",
+                                                                           "LocalMachine":  "RemoteSigned"
+                                                                       }
+                                              },
+                                   "after":  {
+                                                 "exclusion_paths":  [
+                                                                         "C:\\RegProbe-Diag",
+                                                                         "C:\\Tools"
+                                                                     ],
+                                                 "exclusion_processes":  [
+                                                                             "diskspd.exe",
+                                                                             "java.exe",
+                                                                             "javaw.exe",
+                                                                             "powershell.exe",
+                                                                             "Procmon64.exe",
+                                                                             "RegProbe.App.exe",
+                                                                             "RegProbe.ElevatedHost.exe",
+                                                                             "winsat.exe",
+                                                                             "wpa.exe",
+                                                                             "wpr.exe",
+                                                                             "xperf.exe"
+                                                                         ],
+                                                 "execution_policy":  {
+                                                                          "MachinePolicy":  "Undefined",
+                                                                          "UserPolicy":  "Undefined",
+                                                                          "Process":  "Bypass",
+                                                                          "CurrentUser":  "Undefined",
+                                                                          "LocalMachine":  "RemoteSigned"
+                                                                      }
+                                             },
+                                   "status":  "ok",
+                                   "errors":  [
+
+                                              ]
+                               },
+                  "procmon":  {
+                                  "success":  true,
+                                  "procmon_path":  "C:\\Tools\\Sysinternals\\Procmon64.exe",
+                                  "archive":  "C:\\Tools\\Inbound\\ProcessMonitor.zip"
+                              },
+                  "dotnet_sdk":  {
+                                     "success":  true,
+                                     "dotnet_path":  "C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe",
+                                     "version":  "8.0.416"
+                                 },
+                  "diskspd":  {
+                                  "success":  true,
+                                  "archive":  "C:\\Tools\\Inbound\\DiskSpd.ZIP",
+                                  "diskspd_path":  "C:\\Tools\\Perf\\diskspd.exe"
+                              },
+                  "java":  {
+                               "success":  true,
+                               "java_home":  "C:\\Tools\\Java\\jdk-21.0.10+7",
+                               "archive":  "C:\\Tools\\Inbound\\temurin-jdk.zip"
+                           },
+                  "ghidra":  {
+                                 "success":  true,
+                                 "skipped":  true
+                             },
+                  "wpt":  {
+                              "success":  true,
+                              "wpr":  "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\wpr.exe",
+                              "xperf":  "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\xperf.exe",
+                              "wpa":  "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\wpa.exe"
+                          },
+                  "symbol_tools":  {
+                                       "success":  true,
+                                       "windbg":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\windbg.exe",
+                                       "winget_available":  false,
+                                       "attempts":  [
+
+                                                    ],
+                                       "symchk":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+                                       "dbghelp":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\dbghelp.dll"
+                                   },
+                  "environment":  {
+                                      "success":  true,
+                                      "path_entries":  [
+                                                           "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\",
+                                                           "C:\\Tools\\Scripts",
+                                                           "C:\\Tools\\Sysinternals",
+                                                           "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit",
+                                                           "C:\\Tools\\Java\\jdk-21.0.10+7",
+                                                           "C:\\Tools\\DotNetSDK\\8.0.416",
+                                                           "C:\\Tools\\Perf",
+                                                           "C:\\Tools\\Java\\jdk-21.0.10+7\\bin"
+                                                       ],
+                                      "java_home":  "C:\\Tools\\Java\\jdk-21.0.10+7",
+                                      "ghidra_home":  "C:\\Tools\\Ghidra\\ghidra_12.0.4_PUBLIC"
+                                  },
+                  "tool_health":  {
+                                      "success":  true,
+                                      "summary":  {
+                                                      "generated_utc":  "2026-04-06T07:08:41.5170690Z",
+                                                      "machine":  "DESKTOP-AHPV0FV",
+                                                      "user":  "rai",
+                                                      "tools":  {
+                                                                    "procmon":  {
+                                                                                    "path":  "C:\\Tools\\Sysinternals\\Procmon64.exe",
+                                                                                    "exists":  true
+                                                                                },
+                                                                    "procmon_wrapper":  {
+                                                                                            "path":  "C:\\Tools\\Scripts\\procmon-safe.ps1",
+                                                                                            "exists":  true
+                                                                                        },
+                                                                    "wpr":  {
+                                                                                "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\wpr.exe",
+                                                                                "exists":  true
+                                                                            },
+                                                                    "wpa":  {
+                                                                                "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\wpa.exe",
+                                                                                "exists":  true
+                                                                            },
+                                                                    "xperf":  {
+                                                                                  "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\xperf.exe",
+                                                                                  "exists":  true
+                                                                              },
+                                                                    "dotnet":  {
+                                                                                   "path":  "C:\\Tools\\DotNetSDK\\8.0.416\\dotnet.exe",
+                                                                                   "exists":  true
+                                                                               },
+                                                                    "winsat":  {
+                                                                                   "path":  "C:\\Windows\\System32\\winsat.exe",
+                                                                                   "exists":  true
+                                                                               },
+                                                                    "diskspd":  {
+                                                                                    "path":  "C:\\Tools\\Perf\\diskspd.exe",
+                                                                                    "exists":  true
+                                                                                },
+                                                                    "ghidra_launcher":  {
+                                                                                            "path":  "C:\\Tools\\Scripts\\ghidra-headless.cmd",
+                                                                                            "exists":  true
+                                                                                        },
+                                                                    "symchk":  {
+                                                                                   "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+                                                                                   "exists":  true
+                                                                               },
+                                                                    "dbghelp":  {
+                                                                                    "path":  "C:\\WINDOWS\\system32\\dbghelp.dll",
+                                                                                    "exists":  true
+                                                                                },
+                                                                    "aida64":  {
+                                                                                   "path":  "",
+                                                                                   "exists":  false
+                                                                               }
+                                                                },
+                                                      "optional_tools":  {
+                                                                             "ttd":  {
+                                                                                         "path":  "",
+                                                                                         "exists":  false
+                                                                                     },
+                                                                             "windbg":  {
+                                                                                            "path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\windbg.exe",
+                                                                                            "exists":  true
+                                                                                        }
+                                                                         },
+                                                      "smokes":  {
+                                                                     "dotnet_info":  {
+                                                                                         "success":  true,
+                                                                                         "output":  "C:\\Tools\\ValidationController\\smoke\\dotnet-info.txt"
+                                                                                     },
+                                                                     "procmon":  {
+                                                                                     "success":  false,
+                                                                                     "output":  "C:\\Tools\\Perf\\Procmon\\tool-health-procmon.pml"
+                                                                                 },
+                                                                     "wpr":  {
+                                                                                 "success":  true,
+                                                                                 "output":  "C:\\Tools\\ValidationController\\smoke\\tool-health-wpr.etl"
+                                                                             },
+                                                                     "ghidra":  {
+                                                                                    "success":  true,
+                                                                                    "skipped":  true,
+                                                                                    "reason":  "SkipGhidraSmoke"
+                                                                                },
+                                                                     "winsat_cpu":  {
+                                                                                        "success":  true,
+                                                                                        "output":  "C:\\Tools\\ValidationController\\smoke\\winsat-cpu.txt"
+                                                                                    },
+                                                                     "winsat_mem":  {
+                                                                                        "success":  true,
+                                                                                        "output":  "C:\\Tools\\ValidationController\\smoke\\winsat-mem.txt"
+                                                                                    },
+                                                                     "diskspd":  {
+                                                                                     "success":  true,
+                                                                                     "output":  "C:\\Tools\\ValidationController\\smoke\\diskspd.txt"
+                                                                                 },
+                                                                     "symchk_choice":  {
+                                                                                           "success":  true,
+                                                                                           "output":  "C:\\Tools\\ValidationController\\smoke\\symchk-choice.txt",
+                                                                                           "exit_code":  0,
+                                                                                           "target":  "C:\\Windows\\System32\\choice.exe",
+                                                                                           "symbol_root":  "C:\\Tools\\ValidationController\\smoke\\symbol-cache\\choice",
+                                                                                           "pdb":  "C:\\Tools\\ValidationController\\smoke\\symbol-cache\\choice\\choice.pdb"
+                                                                                       },
+                                                                     "aida64_visibility":  {
+                                                                                               "success":  false,
+                                                                                               "output":  ""
+                                                                                           }
+                                                                 }
+                                                  },
+                                      "output_path":  "C:\\Tools\\ValidationController\\smoke\\tool-health.json"
+                                  }
+              },
+    "status":  "ok",
+    "failed_steps":  [
+
+                     ]
+}

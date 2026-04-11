@@ -1,0 +1,9 @@
+.sympath C:\Tools\Symbols\local-kd-powerrequest-umpo-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopUmpoSendPowerRequestOverrideQuery
+uf nt!PopUmpoSendPowerRequestOverrideQuery
+x nt!*Umpo*PowerRequest*
+x nt!*Umpo*Override*
+.echo REGPROBE_LOCALKD_END
+q

@@ -1,0 +1,10 @@
+.sympath C:\Tools\Symbols\local-kd-powerrequest-init-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopPowerRequestInitialize
+uf nt!PopPowerRequestInitialize
+x nt!PopPowerRequestOverrideInitialize
+uf nt!PopPowerRequestOverrideInitialize
+x nt!*RegisterPowerSetting*
+.echo REGPROBE_LOCALKD_END
+q

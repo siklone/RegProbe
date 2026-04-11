@@ -34,6 +34,7 @@ from evidence_class_lib import (
     suspected_layer,
 )
 from research_v36_lib import PROMOTION_GATES_PATH, build_sku_awareness, default_execution_context, load_json_if_exists
+from imported_candidate_backlog_lib import build_imported_candidate_backlog_summary
 from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, is_github_release_url, normalize_reference
 
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -438,6 +439,7 @@ def main() -> int:
             "next_missing_layer_counts": dict(missing_counts),
             "promotion_state_counts": dict(promotion_state_counts),
             "re_audit_required_count": sum(1 for entry in entries if entry.get("re_audit_required")),
+            "imported_candidate_backlog": build_imported_candidate_backlog_summary(),
         },
         "entries": entries,
     }

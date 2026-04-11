@@ -10,9 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using RegProbe.App.Services;
 using RegProbe.App.Utilities;
+using RegProbe.App.Services.TweakProviders;
 using RegProbe.Core;
 using RegProbe.Engine;
 using RegProbe.Infrastructure.Elevation;
+using RegProbe.Infrastructure.RegistryResearch;
 
 namespace RegProbe.CLI;
 
@@ -720,6 +722,150 @@ class Program
         exportCommand.AddCommand(importSubCommand);
 
         return exportCommand;
+    }
+
+    static Command CreateResearchCommand()
+    {
+        var researchCommand = new Command("research", "Research automation helpers");
+
+        var normalizeCommand = new Command("normalize-registry-trace", "Normalize an ETL or Procmon CSV into a compact registry bundle.");
+        var formatOption = new Option<string>("--format", "Normalization format: etl or procmon-csv") { IsRequired = true };
+        var inputOption = new Option<string>("--input", "Input trace path") { IsRequired = true };
+        var outputOption = new Option<string>("--output", "Output normalized bundle path") { IsRequired = true };
+        var runIdOption = new Option<string>("--run-id", "Run identifier") { IsRequired = true };
+        var sourceToolOption = new Option<string>("--source-tool", () => "imported", "Source tool tag");
+        var capturePhaseOption = new Option<string>("--capture-phase", () => "runtime", "Capture phase tag");
+        var evidenceRefsOption = new Option<string[]>("--evidence-ref", () => Array.Empty<string>(), "Evidence reference(s)");
+        normalizeCommand.AddOption(formatOption);
+        normalizeCommand.AddOption(inputOption);
+        normalizeCommand.AddOption(outputOption);
+        normalizeCommand.AddOption(runIdOption);
+        normalizeCommand.AddOption(sourceToolOption);
+        normalizeCommand.AddOption(capturePhaseOption);
+        normalizeCommand.AddOption(evidenceRefsOption);
+        normalizeCommand.SetHandler(context =>
+        {
+            var format = context.ParseResult.GetValueForOption(formatOption) ?? string.Empty;
+            var input = context.ParseResult.GetValueForOption(inputOption) ?? string.Empty;
+            var output = context.ParseResult.GetValueForOption(outputOption) ?? string.Empty;
+            var runId = context.ParseResult.GetValueForOption(runIdOption) ?? string.Empty;
+            var sourceTool = context.ParseResult.GetValueForOption(sourceToolOption) ?? "imported";
+            var capturePhase = context.ParseResult.GetValueForOption(capturePhaseOption) ?? "runtime";
+            var evidenceRefs = context.ParseResult.GetValueForOption(evidenceRefsOption) ?? Array.Empty<string>();
+
+            try
+            {
+                IRegistryTraceNormalizer normalizer = format.Trim().ToLowerInvariant() switch
+                {
+                    "etl" => new TraceEventEtlRegistryNormalizer(),
+                    "procmon-csv" => new ProcmonCsvRegistryNormalizer(),
+                    _ => throw new InvalidOperationException($"Unsupported normalization format: {format}")
+                };
+
+                var bundle = normalizer.Normalize(new RegistryNormalizationRequest(
+                    input,
+                    runId,
+                    sourceTool,
+                    capturePhase,
+                    evidenceRefs));
+
+                var outputPath = Path.GetFullPath(output);
+                var outputDirectory = Path.GetDirectoryName(outputPath);
+                if (!string.IsNullOrWhiteSpace(outputDirectory))
+                {
+                    Directory.CreateDirectory(outputDirectory);
+                }
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+                File.WriteAllText(outputPath, JsonSerializer.Serialize(bundle, options) + Environment.NewLine);
+                Console.WriteLine(outputPath);
+                context.ExitCode = string.Equals(bundle.Status, "ok", StringComparison.OrdinalIgnoreCase) ? 0 : 2;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                context.ExitCode = 1;
+            }
+        });
+        researchCommand.AddCommand(normalizeCommand);
+
+        var validateJsonTweaksCommand = new Command("validate-json-tweaks", "Validate JSON tweak definitions and emit an invalid-definition report.");
+        var inputDirectoryOption = new Option<string>("--input-dir", "Directory containing JSON tweak definitions.") { IsRequired = true };
+        var reportOutputOption = new Option<string?>("--output", "Optional JSON report output path.");
+        validateJsonTweaksCommand.AddOption(inputDirectoryOption);
+        validateJsonTweaksCommand.AddOption(reportOutputOption);
+        validateJsonTweaksCommand.SetHandler(context =>
+        {
+            var inputDirectory = context.ParseResult.GetValueForOption(inputDirectoryOption) ?? string.Empty;
+            var reportOutput = context.ParseResult.GetValueForOption(reportOutputOption);
+
+            try
+            {
+                var fullInputDirectory = Path.GetFullPath(inputDirectory);
+                if (!Directory.Exists(fullInputDirectory))
+                {
+                    throw new DirectoryNotFoundException($"JSON tweak definition directory was not found: {fullInputDirectory}");
+                }
+
+                using var loader = new JsonTweakLoader(fullInputDirectory);
+                var report = BuildJsonTweakValidationReport(fullInputDirectory, loader);
+                var json = JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true }) + Environment.NewLine;
+
+                if (!string.IsNullOrWhiteSpace(reportOutput))
+                {
+                    var outputPath = Path.GetFullPath(reportOutput);
+                    var outputDirectory = Path.GetDirectoryName(outputPath);
+                    if (!string.IsNullOrWhiteSpace(outputDirectory))
+                    {
+                        Directory.CreateDirectory(outputDirectory);
+                    }
+
+                    File.WriteAllText(outputPath, json);
+                    Console.WriteLine(outputPath);
+                }
+                else
+                {
+                    Console.Write(json);
+                }
+
+                context.ExitCode = loader.ValidationIssues.Count == 0 ? 0 : 2;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                context.ExitCode = 1;
+            }
+        });
+        researchCommand.AddCommand(validateJsonTweaksCommand);
+
+        return researchCommand;
+    }
+
+    private static object BuildJsonTweakValidationReport(string inputDirectory, JsonTweakLoader loader)
+    {
+        var issues = loader.ValidationIssues
+            .Select(issue => new
+            {
+                file_path = issue.FilePath,
+                code = issue.Code,
+                message = issue.Message,
+                entry_id = issue.EntryId
+            })
+            .ToArray();
+
+        return new
+        {
+            generated_utc = DateTime.UtcNow.ToString("o"),
+            input_directory = inputDirectory,
+            loaded_definition_count = loader.Count,
+            loaded_tweak_ids = loader.GetTweakIds().OrderBy(id => id, StringComparer.OrdinalIgnoreCase).ToArray(),
+            validation_issue_count = issues.Length,
+            validation_issues = issues,
+            status = issues.Length == 0 ? "ok" : "invalid-definitions-present"
+        };
     }
 
     private static bool TryParseRisk(string? value, out TweakRiskLevel risk)

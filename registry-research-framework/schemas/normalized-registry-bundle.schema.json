@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/registry-research-framework/schemas/normalized-registry-bundle.schema.json",
+  "title": "Normalized Registry Bundle",
+  "type": "object",
+  "required": [
+    "run_id",
+    "source_tool",
+    "capture_phase",
+    "generated_utc",
+    "normalizer_name",
+    "input_path",
+    "status",
+    "event_count",
+    "filtered_event_count",
+    "evidence_refs",
+    "events"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "source_tool": {
+      "type": "string",
+      "enum": ["etw", "wpr", "procmon", "sysmon", "imported"]
+    },
+    "capture_phase": {
+      "type": "string",
+      "enum": ["boot", "postboot", "reboot", "runtime"]
+    },
+    "generated_utc": { "type": "string" },
+    "normalizer_name": { "type": "string", "minLength": 1 },
+    "input_path": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "enum": ["ok", "error"] },
+    "error_kind": { "type": ["string", "null"] },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "event_count": { "type": "integer", "minimum": 0 },
+    "filtered_event_count": { "type": "integer", "minimum": 0 },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "https://regprobe.local/registry-research-framework/schemas/normalized-registry-event.schema.json"
+      }
+    }
+  },
+  "additionalProperties": false
+}

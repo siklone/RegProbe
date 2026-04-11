@@ -1,0 +1,8 @@
+.logopen /t "C:\\r\\evidence\\files\\vm-tooling-staging\\windbg-boot-registry-trace-20260403-162338\\windbg-registry-trace.log"
+.echo REGPROBE_PROFILE|roundtrip-once
+.echo REGPROBE_ATTACH_BEGIN
+.echo REGPROBE_ATTACH_READY
+g
+.echo REGPROBE_ROUNDTRIP_REQUEST|1
+.echo REGPROBE_ROUNDTRIP_OK|1
+g

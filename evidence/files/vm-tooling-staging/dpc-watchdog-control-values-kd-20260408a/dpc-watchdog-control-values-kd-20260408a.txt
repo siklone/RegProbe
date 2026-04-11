@@ -1,0 +1,13 @@
+.sympath C:\Tools\Symbols\dpc-watchdog-control-values-kd-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!KeDpcTimeoutMs
+dd nt!KeDpcTimeoutMs L1
+x nt!KeDpcSoftTimeoutMs
+dd nt!KeDpcSoftTimeoutMs L1
+x nt!KeDpcCumulativeSoftTimeoutMs
+dd nt!KeDpcCumulativeSoftTimeoutMs L1
+x nt!KeDpcWatchdogPeriodMs
+dd nt!KeDpcWatchdogPeriodMs L1
+.echo REGPROBE_LOCALKD_END
+q

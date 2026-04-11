@@ -30,6 +30,7 @@ $runLogPath = Join-Path $GuestRoot 'guest-run.log'
 $parserDiagnosticsPath = Join-Path (Split-Path -Parent $ResultsPath) 'parser-diagnostics.json'
 $script:XmlTraceDiagnostics = $null
 $script:XmlTraceTouchRecords = @()
+$script:activeTraceOutputPath = $null
 
 function Write-JsonFile {
     param(
@@ -73,6 +74,23 @@ function Write-JsonFile {
             Remove-Item -LiteralPath $tempPath -Force -ErrorAction SilentlyContinue
         }
     }
+}
+
+function Write-JsonFileDirect {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+        [Parameter(Mandatory = $true)]
+        [object]$InputObject,
+        [int]$Depth = 12
+    )
+
+    $parent = Split-Path -Parent $Path
+    if (-not [string]::IsNullOrWhiteSpace($parent)) {
+        New-Item -ItemType Directory -Path $parent -Force | Out-Null
+    }
+
+    $InputObject | ConvertTo-Json -Depth $Depth | Set-Content -LiteralPath $Path -Encoding UTF8
 }
 
 function Read-JsonFile {
@@ -135,7 +153,31 @@ function Write-RunLog {
     }
 
     $line = '{0} {1}' -f [DateTime]::UtcNow.ToString('o'), $Message
-    Add-Content -Path $runLogPath -Value $line -Encoding UTF8
+    for ($attempt = 1; $attempt -le 5; $attempt++) {
+        $stream = $null
+        $writer = $null
+        try {
+            $stream = [System.IO.FileStream]::new($runLogPath, [System.IO.FileMode]::Append, [System.IO.FileAccess]::Write, [System.IO.FileShare]::ReadWrite)
+            $writer = [System.IO.StreamWriter]::new($stream, [System.Text.UTF8Encoding]::new($false))
+            $writer.WriteLine($line)
+            $writer.Flush()
+            return
+        }
+        catch {
+            if ($attempt -eq 5) {
+                return
+            }
+            Start-Sleep -Milliseconds 100
+        }
+        finally {
+            if ($writer) {
+                $writer.Dispose()
+            }
+            elseif ($stream) {
+                $stream.Dispose()
+            }
+        }
+    }
 }
 
 function Invoke-CmdCapture {
@@ -394,6 +436,15 @@ function Start-Trace {
     }
     Write-RunLog -Message ("trace-create-complete name={0}" -f $traceName)
     Write-RunLog -Message ("trace-start-complete name={0} source=create-ets" -f $traceName)
+    $sessionOutput = Get-TraceSessionOutputLocation -TraceName $traceName
+    if ($sessionOutput) {
+        $script:activeTraceOutputPath = [string]$sessionOutput.path
+        Write-RunLog -Message ("trace-start-output path={0} source={1}" -f $sessionOutput.path, $sessionOutput.source)
+    }
+    else {
+        $script:activeTraceOutputPath = $null
+        Write-RunLog -Message ("trace-start-output path=unknown name={0}" -f $traceName)
+    }
     return $profile
 }
 
@@ -600,7 +651,11 @@ public static class RegProbeUser32 {
     }
 }
 
-function Invoke-TimerResolutionTrigger {
+function Ensure-RegProbeTimerApi {
+    if ('RegProbeTimerApi' -as [type]) {
+        return
+    }
+
     Add-Type @"
 using System;
 using System.Runtime.InteropServices;
@@ -613,6 +668,10 @@ public static class RegProbeTimerApi {
     public static extern uint timeEndPeriod(uint uPeriod);
 }
 "@
+}
+
+function Invoke-TimerResolutionTrigger {
+    Ensure-RegProbeTimerApi
 
     $grantedResolution = 0
     [RegProbeTimerApi]::NtSetTimerResolution(5000, $true, [ref]$grantedResolution) | Out-Null
@@ -625,6 +684,66 @@ public static class RegProbeTimerApi {
         }
     }
     finally {
+        [RegProbeTimerApi]::timeEndPeriod(1) | Out-Null
+        $releasedResolution = 0
+        [RegProbeTimerApi]::NtSetTimerResolution(5000, $false, [ref]$releasedResolution) | Out-Null
+    }
+}
+
+function Invoke-TimerDpcStressTrigger {
+    Ensure-RegProbeTimerApi
+
+    $grantedResolution = 0
+    [RegProbeTimerApi]::NtSetTimerResolution(5000, $true, [ref]$grantedResolution) | Out-Null
+    [RegProbeTimerApi]::timeBeginPeriod(1) | Out-Null
+
+    $timers = @()
+    $jobs = @()
+    try {
+        $callback = [System.Threading.TimerCallback]{
+            param($state)
+            $iterations = 64
+            if ($state -is [int]) {
+                $iterations = [Math]::Max([int]$state, 16)
+            }
+
+            for ($index = 0; $index -lt $iterations; $index++) {
+                [Math]::Sqrt(12345.6789) | Out-Null
+            }
+        }
+
+        foreach ($periodMs in @(5, 7, 11, 13, 17, 19, 23, 29)) {
+            $timers += [System.Threading.Timer]::new($callback, 64, 0, $periodMs)
+        }
+
+        $coreCount = [Math]::Min([Environment]::ProcessorCount, 4)
+        $jobs = 1..$coreCount | ForEach-Object {
+            Start-Job -ScriptBlock {
+                $end = (Get-Date).AddSeconds(8)
+                while ((Get-Date) -lt $end) {
+                    for ($index = 0; $index -lt 2048; $index++) {
+                        [Math]::Sqrt(54321.1234) | Out-Null
+                    }
+                    Start-Sleep -Milliseconds 2
+                }
+            }
+        }
+
+        $deadline = (Get-Date).AddSeconds(8)
+        while ((Get-Date) -lt $deadline) {
+            Start-Sleep -Milliseconds 100
+        }
+    }
+    finally {
+        foreach ($timer in @($timers)) {
+            if ($timer) {
+                $timer.Dispose()
+            }
+        }
+
+        $jobs | Stop-Job -ErrorAction SilentlyContinue | Out-Null
+        $jobs | Remove-Job -Force -ErrorAction SilentlyContinue | Out-Null
+
         [RegProbeTimerApi]::timeEndPeriod(1) | Out-Null
         $releasedResolution = 0
         [RegProbeTimerApi]::NtSetTimerResolution(5000, $false, [ref]$releasedResolution) | Out-Null
@@ -795,6 +914,47 @@ function Wait-TraceArtifactReady {
     }
 }
 
+function Get-TraceSessionOutputLocation {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$TraceName
+    )
+
+    $query = Invoke-CmdCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @('query', $TraceName, '-ets') -TimeoutSeconds 30
+    if ($query.timed_out -or $query.exit_code -ne 0) {
+        return $null
+    }
+
+    $stdout = [string]$query.stdout
+    $outputLocation = $null
+    $rootPath = $null
+    foreach ($line in ($stdout -split "`r?`n")) {
+        if ($line -match '^\s*Output Location:\s+(.+?)\s*$') {
+            $outputLocation = $Matches[1].Trim()
+            continue
+        }
+        if ($line -match '^\s*Root Path:\s+(.+?)\s*$') {
+            $rootPath = $Matches[1].Trim()
+        }
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($outputLocation)) {
+        return [ordered]@{
+            path = $outputLocation
+            source = 'logman-query-output'
+        }
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($rootPath)) {
+        return [ordered]@{
+            path = (Join-Path $rootPath ("{0}.etl" -f $TraceName))
+            source = 'logman-query-root'
+        }
+    }
+
+    return $null
+}
+
 function Resolve-TraceArtifactPath {
     param(
         [Parameter(Mandatory = $true)]
@@ -808,28 +968,56 @@ function Resolve-TraceArtifactPath {
         }
     }
 
-    $parent = Split-Path -Parent $PreferredPath
-    $baseName = [System.IO.Path]::GetFileNameWithoutExtension($PreferredPath)
-    if ([string]::IsNullOrWhiteSpace($parent) -or -not (Test-Path -LiteralPath $parent)) {
-        return $null
+    $system32ByName = if (-not [string]::IsNullOrWhiteSpace($traceName)) { Join-Path 'C:\Windows\System32' ("{0}.etl" -f $traceName) } else { $null }
+
+    if (-not [string]::IsNullOrWhiteSpace($script:activeTraceOutputPath) -and (Test-Path -LiteralPath $script:activeTraceOutputPath)) {
+        return [ordered]@{
+            path = $script:activeTraceOutputPath
+            source = 'active-output'
+        }
     }
 
-    $candidates = @(
-        Get-ChildItem -Path $parent -File -ErrorAction SilentlyContinue |
-            Where-Object {
-                $_.Name -like "$baseName*.etl*" -or
-                $_.Name -like '*.etl' -or
-                $_.Extension -like '.etl*'
-            } |
-            Sort-Object LastWriteTimeUtc -Descending
-    )
-    if (@($candidates).Count -eq 0) {
-        return $null
+    foreach ($direct in @(
+            @{ Path = $script:activeTraceOutputPath; Source = 'active-output-hint' },
+            @{ Path = $system32ByName; Source = 'system32-trace-name-hint' },
+            @{ Path = $PreferredPath; Source = 'preferred-hint' }
+        )) {
+        $candidatePath = [string]$direct.Path
+        if ([string]::IsNullOrWhiteSpace($candidatePath)) {
+            continue
+        }
+
+        if (Test-Path -LiteralPath $candidatePath) {
+            return [ordered]@{
+                path = $candidatePath
+                source = ($direct.Source -replace '-hint$', '')
+            }
+        }
+    }
+
+    $parent = Split-Path -Parent $PreferredPath
+    $baseName = [System.IO.Path]::GetFileNameWithoutExtension($PreferredPath)
+    if (-not [string]::IsNullOrWhiteSpace($parent) -and (Test-Path -LiteralPath $parent)) {
+        $candidates = @(
+            Get-ChildItem -Path $parent -File -ErrorAction SilentlyContinue |
+                Where-Object {
+                    $_.Name -like "$baseName*.etl*" -or
+                    $_.Name -like '*.etl' -or
+                    $_.Extension -like '.etl*'
+                } |
+                Sort-Object LastWriteTimeUtc -Descending
+        )
+        if (@($candidates).Count -gt 0) {
+            return [ordered]@{
+                path = $candidates[0].FullName
+                source = 'discovered'
+            }
+        }
     }
 
     return [ordered]@{
-        path = $candidates[0].FullName
-        source = 'discovered'
+        path = $PreferredPath
+        source = 'preferred-hint'
     }
 }
 
@@ -1490,11 +1678,13 @@ try {
     $triggerMap = @{
         cpu_stress = { Invoke-CpuStressTrigger }
         power_plan_and_requests = { Invoke-PowerPlanTrigger }
+        power_request_simulation = { Invoke-PowerPlanTrigger }
         multi_thread_burst = { Invoke-ThreadBurstTrigger }
         disk_io_burst = { Invoke-DiskIoTrigger }
         process_spawn_burst = { Invoke-ProcessBurstTrigger }
         foreground_background_switch = { Invoke-ForegroundSwitchTrigger }
         timer_resolution_change = { Invoke-TimerResolutionTrigger }
+        timer_dpc_stress = { Invoke-TimerDpcStressTrigger }
         network_activity = { Invoke-NetworkTrigger }
     }
 
@@ -1615,6 +1805,7 @@ try {
     }
 
     $parsed = Parse-Results -Candidates $candidates -Lines $traceLines -CsvExists (Test-Path -LiteralPath $csvPath) -ParserSource $parserSource
+    Write-RunLog -Message ("trace-results-parsed candidate_count={0}" -f @($parsed.candidates).Count)
     $exactHit = @($parsed.candidates | Where-Object { $_.status -eq 'exact-hit' })
     $exactLineOnly = @($parsed.candidates | Where-Object { $_.status -eq 'exact-line-no-query' })
     $pathOnly = @($parsed.candidates | Where-Object { $_.status -eq 'path-only-hit' })
@@ -1624,8 +1815,10 @@ try {
         Write-TraceTouchExport -Path $traceTouchExportPath -Touches @($script:XmlTraceTouchRecords) -ParserSource $parserSource
         Write-RunLog -Message ("trace-touch-export path={0} touch_count={1}" -f $traceTouchExportPath, @($script:XmlTraceTouchRecords).Count)
     }
+    Write-RunLog -Message ("trace-results-classified exact={0} exact_line={1} path_only={2} no_hit={3}" -f @($exactHit).Count, @($exactLineOnly).Count, @($pathOnly).Count, @($noHit).Count)
     Remove-TraceParserScratch -Mode $traceProfile.mode
 
+    Write-RunLog -Message 'finalize-build-start'
     $results = [ordered]@{
         generated_utc = [DateTime]::UtcNow.ToString('o')
         family = 'power-control'
@@ -1676,14 +1869,35 @@ try {
         current_trigger = $null
         baseline_missing_count = @($state.baseline_values.PSObject.Properties | Where-Object { $null -eq $_.Value }).Count
         apply_failure_count = @($state.apply_failures).Count
+        exact_hit_candidates = @($exactHit | ForEach-Object { $_.candidate_id })
+        exact_line_only_candidates = @($exactLineOnly | ForEach-Object { $_.candidate_id })
+        path_only_candidates = @($pathOnly | ForEach-Object { $_.candidate_id })
+        no_hit_candidates = @($noHit | ForEach-Object { $_.candidate_id })
         status = if (@($exactHit).Count -gt 0) { 'exact-hit' } elseif (@($exactLineOnly).Count -gt 0) { 'exact-line-no-query' } elseif (@($pathOnly).Count -gt 0) { 'path-only-hit' } else { 'no-hit' }
     }
+    Write-RunLog -Message ("finalize-build-complete status={0}" -f $summary.status)
 
-    $state.phase = 'completed'
-    Set-ObjectPropertyValue -InputObject $state -Name 'result_status' -Value $summary.status
-    Write-JsonFile -Path $StatePath -InputObject $state
-    Write-JsonFile -Path $ResultsPath -InputObject $results
-    Write-JsonFile -Path $SummaryPath -InputObject $summary
+    Write-RunLog -Message 'finalize-write-summary-start'
+    Write-JsonFileDirect -Path $SummaryPath -InputObject $summary
+    Write-RunLog -Message 'finalize-write-summary-complete'
+    try {
+        Set-ObjectPropertyValue -InputObject $state -Name 'phase' -Value 'completed'
+        Set-ObjectPropertyValue -InputObject $state -Name 'result_status' -Value $summary.status
+        Write-RunLog -Message 'finalize-write-state-start'
+        Write-JsonFileDirect -Path $StatePath -InputObject $state
+        Write-RunLog -Message 'finalize-write-state-complete'
+    }
+    catch {
+        Write-RunLog -Message ("finalize-write-state-error error={0}" -f $_.Exception.Message)
+    }
+    try {
+        Write-RunLog -Message 'finalize-write-results-start'
+        Write-JsonFileDirect -Path $ResultsPath -InputObject $results
+        Write-RunLog -Message 'finalize-write-results-complete'
+    }
+    catch {
+        Write-RunLog -Message ("finalize-write-results-error error={0}" -f $_.Exception.Message)
+    }
     Write-RunLog -Message ("phase-complete phase=run status={0}" -f $summary.status)
 }
 catch {

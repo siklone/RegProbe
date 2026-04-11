@@ -1,0 +1,7 @@
+.sympath C:\Tools\Symbols\local-kd-hiber-strings-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+du poi(nt!PopHibernatePersistedRegLocation)
+u nt!PopQueryHiberPersistedRegValue L0x140
+.echo REGPROBE_LOCALKD_END
+q

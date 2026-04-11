@@ -1,0 +1,579 @@
+[
+  {
+    "id": "reactos",
+    "label": "ReactOS",
+    "surface_group": "source-code",
+    "kind": "git-source",
+    "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+    "exists": true,
+    "missing_reason": null,
+    "weight": 3,
+    "files_scanned": 16201,
+    "hit_count": 32,
+    "candidate_hit_count": 7,
+    "candidate_hits": [
+      {
+        "candidate_id": "power.force-hibernate-disabled.policy",
+        "family": "power-force-hibernate-disabled",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+        "value_name": "Policy",
+        "hit_count": 8,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\base\\applications\\calc\\winmain.c",
+            "line_number": 1405,
+            "value_name": "Policy",
+            "content": "/* Check for user policy and area string valid */"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\base\\ctf\\msutb\\msutb.cpp",
+            "line_number": 75,
+            "value_name": "Policy",
+            "content": "BOOL g_fPolicyDisableCloseButton = FALSE;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\base\\ctf\\msutb\\msutb.cpp",
+            "line_number": 76,
+            "value_name": "Policy",
+            "content": "BOOL g_fPolicyEnableLanguagebarInFullscreen = FALSE;"
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.executive-uuid-sequence-number",
+        "family": "session-manager-executive",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "UuidSequenceNumber",
+        "hit_count": 8,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\ntoskrnl\\ex\\uuid.c",
+            "line_number": 37,
+            "value_name": "UuidSequenceNumber",
+            "content": "ULONG ExpUuidSequenceNumber = 0;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\ntoskrnl\\ex\\uuid.c",
+            "line_number": 38,
+            "value_name": "UuidSequenceNumber",
+            "content": "BOOLEAN ExpUuidSequenceNumberValid;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\ntoskrnl\\ex\\uuid.c",
+            "line_number": 39,
+            "value_name": "UuidSequenceNumber",
+            "content": "BOOLEAN ExpUuidSequenceNumberNotSaved = FALSE;"
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.executive-additional-critical-worker-threads",
+        "family": "session-manager-executive",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "AdditionalCriticalWorkerThreads",
+        "hit_count": 5,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\ntoskrnl\\config\\cmdata.c",
+            "line_number": 491,
+            "value_name": "AdditionalCriticalWorkerThreads",
+            "content": "L\"AdditionalCriticalWorkerThreads\","
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\ntoskrnl\\ex\\work.c",
+            "line_number": 36,
+            "value_name": "AdditionalCriticalWorkerThreads",
+            "content": "ULONG ExpAdditionalCriticalWorkerThreads;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\ntoskrnl\\ex\\work.c",
+            "line_number": 543,
+            "value_name": "AdditionalCriticalWorkerThreads",
+            "content": "ExpAdditionalCriticalWorkerThreads ="
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.executive-additional-delayed-worker-threads",
+        "family": "session-manager-executive",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "AdditionalDelayedWorkerThreads",
+        "hit_count": 5,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\ntoskrnl\\config\\cmdata.c",
+            "line_number": 498,
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "content": "L\"AdditionalDelayedWorkerThreads\","
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\ntoskrnl\\ex\\work.c",
+            "line_number": 37,
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "content": "ULONG ExpAdditionalDelayedWorkerThreads;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\ntoskrnl\\ex\\work.c",
+            "line_number": 541,
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "content": "ExpAdditionalDelayedWorkerThreads ="
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.control.msdisabled",
+        "family": "power-control",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "MSDisabled",
+        "hit_count": 4,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\dll\\win32\\kernel32\\client\\appcache.c",
+            "line_number": 18,
+            "value_name": "MSDisabled",
+            "content": "ULONG g_ShimsDisabled = -1;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\dll\\win32\\kernel32\\client\\appcache.c",
+            "line_number": 57,
+            "value_name": "MSDisabled",
+            "content": "if (g_ShimsDisabled == -1)"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\dll\\win32\\kernel32\\client\\appcache.c",
+            "line_number": 131,
+            "value_name": "MSDisabled",
+            "content": "g_ShimsDisabled = DisableShims;"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.control.hiberboot-enabled",
+        "family": "power-control",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "HiberbootEnabled",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\dll\\win32\\msgina\\shutdown.c",
+            "line_number": 860,
+            "value_name": "HiberbootEnabled",
+            "content": "// \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power\" value \"HiberbootEnabled\""
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.session.hiberboot-enabled",
+        "family": "session-manager-power",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "value_name": "HiberbootEnabled",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos\\dll\\win32\\msgina\\shutdown.c",
+            "line_number": 860,
+            "value_name": "HiberbootEnabled",
+            "content": "// \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power\" value \"HiberbootEnabled\""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "wrk",
+    "label": "Windows Research Kernel",
+    "surface_group": "source-code",
+    "kind": "git-source",
+    "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+    "exists": true,
+    "missing_reason": null,
+    "weight": 3,
+    "files_scanned": 656,
+    "hit_count": 27,
+    "candidate_hit_count": 5,
+    "candidate_hits": [
+      {
+        "candidate_id": "power.force-hibernate-disabled.policy",
+        "family": "power-force-hibernate-disabled",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+        "value_name": "Policy",
+        "hit_count": 8,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\exinit.c",
+            "line_number": 501,
+            "value_name": "Policy",
+            "content": "// Bypass policy manager and pass directly to SetSystemPowerState"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\sysinfo.c",
+            "line_number": 147,
+            "value_name": "Policy",
+            "content": "ExpGetUILanguagePolicy ("
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\sysinfo.c",
+            "line_number": 149,
+            "value_name": "Policy",
+            "content": "OUT LANGID *PolicyUILanguageId"
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.executive-uuid-sequence-number",
+        "family": "session-manager-executive",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "UuidSequenceNumber",
+        "hit_count": 8,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\uuid.c",
+            "line_number": 40,
+            "value_name": "UuidSequenceNumber",
+            "content": "#define RPC_SEQUENCE_NUMBER_NAME L\"UuidSequenceNumber\""
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\uuid.c",
+            "line_number": 92,
+            "value_name": "UuidSequenceNumber",
+            "content": "ULONG                       ExpUuidSequenceNumber = 0;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\uuid.c",
+            "line_number": 93,
+            "value_name": "UuidSequenceNumber",
+            "content": "BOOLEAN                     ExpUuidSequenceNumberValid = FALSE;"
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.executive-additional-critical-worker-threads",
+        "family": "session-manager-executive",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "AdditionalCriticalWorkerThreads",
+        "hit_count": 4,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\worker.c",
+            "line_number": 111,
+            "value_name": "AdditionalCriticalWorkerThreads",
+            "content": "ULONG ExpAdditionalCriticalWorkerThreads;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\worker.c",
+            "line_number": 350,
+            "value_name": "AdditionalCriticalWorkerThreads",
+            "content": "if (ExpAdditionalCriticalWorkerThreads > MAX_ADDITIONAL_THREADS) {"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\worker.c",
+            "line_number": 351,
+            "value_name": "AdditionalCriticalWorkerThreads",
+            "content": "ExpAdditionalCriticalWorkerThreads = MAX_ADDITIONAL_THREADS;"
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.executive-additional-delayed-worker-threads",
+        "family": "session-manager-executive",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "AdditionalDelayedWorkerThreads",
+        "hit_count": 4,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\worker.c",
+            "line_number": 112,
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "content": "ULONG ExpAdditionalDelayedWorkerThreads;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\worker.c",
+            "line_number": 354,
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "content": "if (ExpAdditionalDelayedWorkerThreads > MAX_ADDITIONAL_THREADS) {"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ex\\worker.c",
+            "line_number": 355,
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "content": "ExpAdditionalDelayedWorkerThreads = MAX_ADDITIONAL_THREADS;"
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.kernel.timer-check-flags",
+        "family": "session-manager-kernel",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "TimerCheckFlags",
+        "hit_count": 3,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\inc\\ke.h",
+            "line_number": 4590,
+            "value_name": "TimerCheckFlags",
+            "content": "extern ULONG KeTimerCheckFlags;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ke\\timerobj.c",
+            "line_number": 29,
+            "value_name": "TimerCheckFlags",
+            "content": "ULONG KeTimerCheckFlags = KE_TIMER_CHECK_FREES;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2\\WRK-v1.2\\base\\ntos\\ke\\timerobj.c",
+            "line_number": 474,
+            "value_name": "TimerCheckFlags",
+            "content": "if ((KeTimerCheckFlags & KE_TIMER_CHECK_FREES) == 0) {"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "systeminformer",
+    "label": "System Informer",
+    "surface_group": "source-code",
+    "kind": "git-source",
+    "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer",
+    "exists": true,
+    "missing_reason": null,
+    "weight": 2,
+    "files_scanned": 880,
+    "hit_count": 12,
+    "candidate_hit_count": 5,
+    "candidate_hits": [
+      {
+        "candidate_id": "power.force-hibernate-disabled.policy",
+        "family": "power-force-hibernate-disabled",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+        "value_name": "Policy",
+        "hit_count": 8,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer\\kphlib\\include\\kphapi.h",
+            "line_number": 490,
+            "value_name": "Policy",
+            "content": "typedef struct _KPH_RATE_LIMIT_POLICY"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer\\kphlib\\include\\kphapi.h",
+            "line_number": 495,
+            "value_name": "Policy",
+            "content": "} KPH_RATE_LIMIT_POLICY, *PKPH_RATE_LIMIT_POLICY;"
+          },
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer\\kphlib\\include\\kphapi.h",
+            "line_number": 496,
+            "value_name": "Policy",
+            "content": "typedef const KPH_RATE_LIMIT_POLICY* PCKPH_RATE_LIMIT_POLICY;"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.control.hiberboot-enabled",
+        "family": "power-control",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "HiberbootEnabled",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer\\phnt\\include\\ntpoapi.h",
+            "line_number": 79,
+            "value_name": "HiberbootEnabled",
+            "content": "#define SystemHiberbootState 65                         // out: BOOLEAN // effective HiberbootEnabled state"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.control.ttm-enabled",
+        "family": "power-control",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "TtmEnabled",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer\\phnt\\include\\ntpoapi.h",
+            "line_number": 868,
+            "value_name": "TtmEnabled",
+            "content": "BOOLEAN TtmEnabled;"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.session.hiberboot-enabled",
+        "family": "session-manager-power",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "value_name": "HiberbootEnabled",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer\\phnt\\include\\ntpoapi.h",
+            "line_number": 79,
+            "value_name": "HiberbootEnabled",
+            "content": "#define SystemHiberbootState 65                         // out: BOOLEAN // effective HiberbootEnabled state"
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.kernel.disable-exception-chain-validation",
+        "family": "session-manager-kernel",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DisableExceptionChainValidation",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer\\phnt\\include\\ntpsapi.h",
+            "line_number": 879,
+            "value_name": "DisableExceptionChainValidation",
+            "content": "ULONG DisableExceptionChainValidation : 1; // MEM_EXECUTE_OPTION_DISABLE_EXCEPTION_CHAIN_VALIDATION"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "admx",
+    "label": "Windows ADMX",
+    "surface_group": "policy-templates",
+    "kind": "local-source",
+    "root": "C:\\WINDOWS\\PolicyDefinitions",
+    "exists": true,
+    "missing_reason": null,
+    "weight": 2,
+    "files_scanned": 447,
+    "hit_count": 13,
+    "candidate_hit_count": 6,
+    "candidate_hits": [
+      {
+        "candidate_id": "power.force-hibernate-disabled.policy",
+        "family": "power-force-hibernate-disabled",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+        "value_name": "Policy",
+        "hit_count": 8,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+            "line_number": 3,
+            "value_name": "Policy",
+            "content": "<policyDefinitions xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" revision=\"1.0\" schemaVersion=\"1.0\" xmlns=\"http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions\">"
+          },
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+            "line_number": 4,
+            "value_name": "Policy",
+            "content": "<policyNamespaces>"
+          },
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+            "line_number": 7,
+            "value_name": "Policy",
+            "content": "</policyNamespaces>"
+          }
+        ]
+      },
+      {
+        "candidate_id": "policy.system.enable-virtualization",
+        "family": "policy-system",
+        "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+        "value_name": "EnableVirtualization",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\DeviceGuard.admx",
+            "line_number": 23,
+            "value_name": "EnableVirtualization",
+            "content": "valueName=\"EnableVirtualizationBasedSecurity\">"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.control.hiberboot-enabled",
+        "family": "power-control",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "HiberbootEnabled",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\WinInit.admx",
+            "line_number": 35,
+            "value_name": "HiberbootEnabled",
+            "content": "<policy name=\"Hiberboot\" class=\"Machine\" displayName=\"$(string.Hiberboot)\" explainText=\"$(string.Hiberboot_Help)\" key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"HiberbootEnabled\">"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.session.hiberboot-enabled",
+        "family": "session-manager-power",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "value_name": "HiberbootEnabled",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\WinInit.admx",
+            "line_number": 35,
+            "value_name": "HiberbootEnabled",
+            "content": "<policy name=\"Hiberboot\" class=\"Machine\" displayName=\"$(string.Hiberboot)\" explainText=\"$(string.Hiberboot_Help)\" key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"HiberbootEnabled\">"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.throttling.power-throttling-off",
+        "family": "power-throttling",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+        "value_name": "PowerThrottlingOff",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\Power.admx",
+            "line_number": 667,
+            "value_name": "PowerThrottlingOff",
+            "content": "<policy name=\"PowerThrottlingTurnOff\" class=\"Machine\" displayName=\"$(string.PowerThrottlingTurnOff)\" explainText=\"$(string.PowerThrottlingTurnOffExplain)\" key=\"System\\CurrentControlSet\\Control\\Power\\PowerThrottling\" valueName=\"PowerThrottlingOff\">"
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.io-allow-remote-dasd",
+        "family": "session-manager-io",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+        "value_name": "AllowRemoteDASD",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\RemovableStorage.admx",
+            "line_number": 409,
+            "value_name": "AllowRemoteDASD",
+            "content": "<policy name=\"Removable_Remote_Allow_Access\" class=\"Machine\" displayName=\"$(string.Removable_Remote_Allow_Access)\" explainText=\"$(string.Removable_Remote_Allow_Access_help)\" key=\"Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\" valueName=\"AllowRemoteDASD\">"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "wdk_headers",
+    "label": "Windows SDK/WDK Headers",
+    "surface_group": "headers",
+    "kind": "local-source",
+    "root": "C:\\Program Files (x86)\\Windows Kits\\10\\Include",
+    "exists": false,
+    "missing_reason": "root-missing",
+    "weight": 2,
+    "files_scanned": 0,
+    "hit_count": 0,
+    "candidate_hit_count": 0,
+    "candidate_hits": []
+  },
+  {
+    "id": "geoff_chappell",
+    "label": "Geoff Chappell",
+    "surface_group": "reference-cache",
+    "kind": "reference-cache",
+    "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\geoff-chappell",
+    "exists": false,
+    "missing_reason": "root-missing",
+    "weight": 2,
+    "files_scanned": 0,
+    "hit_count": 0,
+    "candidate_hit_count": 0,
+    "candidate_hits": []
+  }
+]

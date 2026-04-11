@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/registry-research-framework/schemas/normalized-registry-event.schema.json",
+  "title": "Normalized Registry Event",
+  "type": "object",
+  "required": [
+    "run_id",
+    "source_tool",
+    "capture_phase",
+    "operation",
+    "evidence_refs"
+  ],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "source_tool": {
+      "type": "string",
+      "enum": ["etw", "wpr", "procmon", "sysmon", "imported"]
+    },
+    "capture_phase": {
+      "type": "string",
+      "enum": ["boot", "postboot", "reboot", "runtime"]
+    },
+    "process_name": { "type": ["string", "null"] },
+    "pid": { "type": ["integer", "null"] },
+    "operation": { "type": "string", "minLength": 1 },
+    "timestamp_utc": { "type": ["string", "null"] },
+    "hive": { "type": ["string", "null"] },
+    "key_path": { "type": ["string", "null"] },
+    "value_name": { "type": ["string", "null"] },
+    "value_type": { "type": ["string", "null"] },
+    "data_text": { "type": ["string", "null"] },
+    "result": { "type": ["string", "null"] },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

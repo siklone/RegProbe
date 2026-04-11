@@ -1,0 +1,116 @@
+{
+  "generated_utc": "2026-04-03T09:45:00Z",
+  "epic": "windbg-transport-hardening",
+  "audit_date": "20260403",
+  "status": "transport-partial",
+  "findings": [
+    {
+      "id": "attach-after-shell-no-debuggee",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "attach-after-shell",
+      "classification": "attach_ok_no_debuggee",
+      "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-124230/summary.json",
+      "note": "Attach-after-shell remains in waiting-to-reconnect/no-debuggee state and does not produce a live kernel debuggee."
+    },
+    {
+      "id": "guest-restart-kd-transport-error",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "transport_error",
+      "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-122047/summary.json",
+      "note": "KD can reach a kernel-connected state during guest restart, but transport degrades into breakin/communication errors."
+    },
+    {
+      "id": "cdb-frontend-no-improvement",
+      "severity": "medium",
+      "frontend": "cdb",
+      "boot_mode": "guest-restart+cold-boot",
+      "classification": "transport_unstable",
+      "summary_refs": [
+        "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-123648/summary.json",
+        "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-123909/summary.json"
+      ],
+      "note": "CDB did not improve the VMware serial transport path; current runs failed before producing usable logs."
+    },
+    {
+      "id": "guest-restart-serial-config-partial-success",
+      "severity": "medium",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "transport_partial",
+      "summary_ref": "registry-research-framework/audit/windbg-serial-config-matrix-20260403.json",
+      "note": "A focused serial-config matrix reached kernel-connected guest-restart sessions in 4/4 variants and transport_ok in 3/4 variants, narrowing the blocker to reproducible command/breakin roundtrips rather than generic attach failure."
+    },
+    {
+      "id": "guest-restart-breakin-roundtrip-still-missing",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "attach_ok_command_not_executed",
+      "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-145133/summary.json",
+      "note": "A direct breakin-once probe on the strongest current guest-restart serial base kept kernel connectivity and shell health, but still failed to produce a real breakin/command roundtrip."
+    },
+    {
+      "id": "guest-restart-roundtrip-resumes-at-fatal-break",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "boot_unsafe",
+      "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/summary.json",
+      "note": "A thinner queued-command roundtrip probe proved that post-restart commands can resume, but they resumed only after a fatal system error break and required snapshot recovery."
+    },
+    {
+      "id": "guest-restart-start-order-no-roundtrip",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "attach_ok_command_not_executed",
+      "summary_ref": "registry-research-framework/audit/windbg-start-order-matrix-20260403.json",
+      "note": "A focused start-order matrix across bonc/none/b break policies and 3/10/20-second attach leads preserved kernel connectivity and shell recovery in every run, but none of the six variants produced a post-restart queued command roundtrip."
+    },
+    {
+      "id": "guest-restart-reconnect-command-no-breakin",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "attach_ok_command_not_executed",
+      "summary_ref": "registry-research-framework/audit/windbg-reconnect-command-matrix-20260403.json",
+      "note": "A reconnect-command matrix using host-side breakin-once injection across the same bonc/none/b and 3/10/20-second lead variants also ended 6/6 as attach_ok_command_not_executed, with one fatal-break outlier and zero breakin successes."
+    },
+    {
+      "id": "pipe-launch-matrix-exhausted-current-contract",
+      "severity": "high",
+      "frontend": "kd",
+      "boot_mode": "guest-restart",
+      "classification": "transport_partial",
+      "summary_ref": "registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json",
+      "note": "A final pipe-and-launch matrix showed server endpoint variants still attach but never execute a breakin successfully, while client endpoint variants collapse into direct transport_error; quiet versus standard launch mode made no material difference."
+    }
+  ],
+  "conclusion": {
+    "semantic_lane_ready": true,
+    "transport_lane_ready": false,
+    "vmware_lane_status": "known-blocked-frozen",
+    "next_environment": "hyperv",
+    "next_environment_status": "blocked-prereqs",
+    "immediate_fallback_environment": "vmware-debug-only",
+    "immediate_fallback_status": "ready-to-short-try",
+    "recommended_next_phase": "vmware-debug-only-short-try",
+    "freeze_ref": "registry-research-framework/audit/windbg-vmware-freeze-20260403.json",
+    "selection_ref": "registry-research-framework/audit/windbg-debug-environment-selection-20260403.json",
+    "hyperv_setup_ref": "registry-research-framework/audit/windbg-hyperv-setup-20260403.json",
+    "vmware_debug_only_setup_ref": "registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json",
+    "vmware_debug_only_short_try_ref": "registry-research-framework/audit/windbg-vmware-debug-only-short-try-20260403.json",
+    "recommended_next_actions": [
+      "Keep WinDbg single-key arbitration paused on the frozen VMware lane.",
+      "If Hyper-V is still blocked on the current host, allow one short fresh VMware debug-only transport-first try.",
+      "If the same transport blocker reproduces on that fresh VMware debug-only VM, stop and move directly to Hyper-V prerequisites.",
+      "Treat queued roundtrip, reconnect command injection, and pipe/launch mode on the current VMware named-pipe contract as characterized.",
+      "Within the current named-pipe contract, server endpoint preserves attach but not command execution, while client endpoint degrades into transport_error.",
+      "Do not spend more cycles on parser churn or key-specific filtering inside the frozen VMware named-pipe lane.",
+      "Prepare host Hyper-V prerequisites in parallel, then bring up a dedicated Hyper-V debug-arbiter VM if the fallback VMware debug-only try does not materially change transport behavior."
+    ]
+  }
+}

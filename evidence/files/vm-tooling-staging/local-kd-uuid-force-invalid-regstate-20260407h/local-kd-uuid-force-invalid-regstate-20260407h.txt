@@ -1,0 +1,17 @@
+.sympath C:\Tools\Symbols\local-kd-uuid-force-invalid-regstate-20260407h
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+.echo REGPROBE_UUID_FORCE_RS_BEFORE
+dd nt!ExpUuidSequenceNumber L1
+db nt!ExpUuidSequenceNumberValid L1
+db nt!ExpUuidSequenceNumberNotSaved L1
+eb nt!ExpUuidSequenceNumberValid 00
+.echo REGPROBE_UUID_FORCE_RS_ARMED
+db nt!ExpUuidSequenceNumberValid L1
+.sleep 20000
+.echo REGPROBE_UUID_FORCE_RS_AFTER
+dd nt!ExpUuidSequenceNumber L1
+db nt!ExpUuidSequenceNumberValid L1
+db nt!ExpUuidSequenceNumberNotSaved L1
+.echo REGPROBE_LOCALKD_END
+q

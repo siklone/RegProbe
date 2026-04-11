@@ -1,0 +1,6 @@
+.sympath C:\Tools\Symbols\local-kd-kvm-20260406g
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!CmQueryValueKey
+.echo REGPROBE_LOCALKD_END
+q

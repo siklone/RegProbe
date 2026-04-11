@@ -1,0 +1,26 @@
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "executive-worker-addrseed-kvm-20260406c",
+  "timestamp": "2026-04-06T11:13:19.765415900Z",
+  "ghidra_no_function_fallback": false,
+  "matches": [
+    {
+      "address": "140c62b88",
+      "function": "IopInitializeSystemDrivers",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140c62bb8",
+      "function": "IopInitializeSystemDrivers",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 60,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+﻿{
+    "generated_utc":  "2026-04-07T10:46:17.6457400Z",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name":  "TimerRebaseThresholdOnDripsExit",
+    "output_name":  "timerrebasethresholdondripsexit-reboot-kvm-20260407a",
+    "output_root":  "C:\\RegProbe-Diag\\reboot-observation\\timerrebasethresholdondripsexit-reboot-kvm-20260407a",
+    "task_name":  "RegProbe-RebootObservation-timerrebasethresholdondripsexit-reboot-kvm-20260407a",
+    "before":  {
+                   "generated_utc":  "2026-04-07T10:44:33.5517626Z",
+                   "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                   "provider_path":  "Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                   "value_name":  "TimerRebaseThresholdOnDripsExit",
+                   "key_exists":  true,
+                   "value_exists":  true,
+                   "value_kind":  "DWord",
+                   "value":  60,
+                   "error":  null,
+                   "boot_time_utc":  "2026-04-07T10:30:32.5000000Z"
+               },
+    "after":  {
+                  "generated_utc":  "2026-04-07T10:46:17.4007627Z",
+                  "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                  "provider_path":  "Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                  "value_name":  "TimerRebaseThresholdOnDripsExit",
+                  "key_exists":  true,
+                  "value_exists":  true,
+                  "value_kind":  "DWord",
+                  "value":  60,
+                  "error":  null,
+                  "boot_time_utc":  "2026-04-07T10:44:42.5000000Z"
+              },
+    "before_powercfg_path":  "C:\\RegProbe-Diag\\reboot-observation\\timerrebasethresholdondripsexit-reboot-kvm-20260407a\\powercfg-a-before.txt",
+    "after_powercfg_path":  "C:\\RegProbe-Diag\\reboot-observation\\timerrebasethresholdondripsexit-reboot-kvm-20260407a\\powercfg-a-after.txt",
+    "reboot_observed":  true,
+    "value_changed":  true,
+    "value_preserved":  true,
+    "uploads":  {
+                    "before":  {
+                                   "path":  "C:\\RegProbe-Diag\\reboot-observation\\timerrebasethresholdondripsexit-reboot-kvm-20260407a\\before.json",
+                                   "uri":  "http://10.0.2.2:8766/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json",
+                                   "attempts":  1
+                               },
+                    "after":  {
+                                  "path":  "C:\\RegProbe-Diag\\reboot-observation\\timerrebasethresholdondripsexit-reboot-kvm-20260407a\\after.json",
+                                  "uri":  "http://10.0.2.2:8766/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json",
+                                  "attempts":  1
+                              },
+                    "powercfg_before":  {
+                                            "path":  "C:\\RegProbe-Diag\\reboot-observation\\timerrebasethresholdondripsexit-reboot-kvm-20260407a\\powercfg-a-before.txt",
+                                            "uri":  "http://10.0.2.2:8766/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt",
+                                            "attempts":  1
+                                        },
+                    "powercfg_after":  {
+                                           "path":  "C:\\RegProbe-Diag\\reboot-observation\\timerrebasethresholdondripsexit-reboot-kvm-20260407a\\powercfg-a-after.txt",
+                                           "uri":  "http://10.0.2.2:8766/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt",
+                                           "attempts":  1
+                                       }
+                },
+    "errors":  [
+
+               ]
+}

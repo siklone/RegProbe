@@ -1,0 +1,92 @@
+# WinDbg Transport Findings
+
+Date: `2026-04-03`
+
+## Core Finding
+
+- `attach-after-shell` is not an arbiter-capable attach path right now.
+- The corrected one-off run reclassified it as `attach_ok_no_debuggee`.
+- In practice this means the debugger process opens the pipe and stays in `Waiting to reconnect...` without a live kernel debuggee.
+- A first serial-config matrix narrowed the real transport problem:
+  - `guest-restart` + `kd` now reaches a live kernel connection in `4/4` tested variants
+  - `3/4` variants finished `transport_ok`
+  - the weakest variant so far is `break_on_connect=none` + `tryNoRxLoss=TRUE`
+
+## What We Learned
+
+- `kd` + `guest-restart` can briefly reach `Kernel Debugger connection established`, but the session still degrades into transport failure.
+- `kd` + `attach-after-shell` preserves VM shell health, but that path is only a `no_debuggee` waiting state.
+- `cdb` did not improve the situation; the first two frontend trials ended as `missing-log` / `transport_unstable`.
+- The serial-config sweep shows the transport problem is no longer "any guest restart is broken".
+- The narrower question is now which `guest-restart` serial variant preserves command/break-in roundtrips reproducibly.
+- A direct `breakin-once` run on the strongest current base (`guest-restart` + `kd` + `bonc` + `tryNoRxLoss=FALSE`) still ended `attach_ok_command_not_executed`.
+- That means kernel connectivity is now the stronger part of the lane; command/break-in roundtrip is the remaining weak point.
+- A thinner `roundtrip-once` probe then proved something narrower:
+  - post-restart queued commands **do** resume
+  - but they resumed at a fatal-system-error break, not at a healthy boot-time prompt
+  - the VM had to be recovered from snapshot afterward
+- A follow-up start-order matrix then narrowed the blocker again:
+  - `6/6` guest-restart variants preserved `kernel_connected=true`
+  - `6/6` also kept `transport_error=false` and `shell_recovered=true`
+  - but `0/6` produced any post-restart queued command roundtrip
+  - so attach lead timing and current `bonc`/`none`/`b` break-policy choices are not enough by themselves
+- A reconnect-command matrix then closed the next loophole:
+  - the same `6` guest-restart variants were rerun with host-side `breakin-once`
+  - `0/6` produced any breakin success
+  - `6/6` still ended `attach_ok_command_not_executed`
+  - `1/6` produced a fatal-break outlier on `none + lead20`
+  - so the remaining blocker is now below both queued-script continuation and host-side reconnect command injection
+- A final pipe-and-launch matrix then closed the current VMware named-pipe envelope:
+  - `server + quiet` and `server + standard` still reached `kernel_connected=true`
+  - both server variants still ended `attach_ok_command_not_executed`
+  - `client + quiet` and `client + standard` both degraded into direct `transport_error`
+  - launch mode did not materially change the result
+  - so the current named-pipe contract is now characterized enough to stop spending cycles on it
+
+## Practical Outcome
+
+- Do not widen the single-key WinDbg arbiter lane yet.
+- Do not interpret `attach-after-shell` as a successful live debug transport.
+- Treat `guest-restart` as the current best transport base, not `attach-after-shell`.
+- Treat the current VMware named-pipe contract as characterized:
+  - `server` endpoint preserves attach but not command execution
+  - `client` endpoint collapses into `transport_error`
+  - `quiet` versus `standard` launch mode does not fix command execution
+- The next concrete fix is no longer inside parser syntax, start-order, break policy, reconnect-time command injection, or named-pipe launch mode.
+- Any next WinDbg transport step should change the transport contract itself, not just its current parameters.
+
+## Freeze Outcome
+
+- The current VMware WinDbg lane is now intentionally frozen as `known-blocked-frozen`.
+- That freeze preserves the parser and symbol work instead of discarding it.
+- The preferred long-term next environment is `Hyper-V`, not more retries inside the same VMware named-pipe envelope.
+- If `Hyper-V` is still blocked on the current host, one short fresh `VMware debug-only` try is allowed as a fallback.
+- That fallback is a new debugger-first VM, not a return to the frozen lane.
+- If the same transport blocker reproduces there, the repo should stop the VMware branch and move directly to `Hyper-V` prerequisites.
+- The canonical short-try contract is now recorded here:
+  - [windbg-vmware-debug-only-short-try-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-short-try-20260403.json)
+
+Current decision records:
+
+- [windbg-vmware-freeze-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-freeze-20260403.json)
+- [windbg-debug-environment-selection-20260403.json](C:\r\registry-research-framework\audit\windbg-debug-environment-selection-20260403.json)
+- [windbg-hyperv-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-hyperv-setup-20260403.json)
+- [windbg-vmware-debug-only-setup-20260403.json](C:\r\registry-research-framework\audit\windbg-vmware-debug-only-setup-20260403.json)
+- [windbg-vmware-debug-only-short-try-20260403.md](C:\r\research\notes\windbg-vmware-debug-only-short-try-20260403.md)
+
+## Evidence
+
+- transport findings surface: [windbg-transport-findings-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-findings-20260403.json)
+- transport matrix baseline: [windbg-transport-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-matrix-20260403.json)
+- serial-config matrix: [windbg-serial-config-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-serial-config-matrix-20260403.json)
+- serial-config execution detail: [windbg-serial-config-execution-20260403.json](C:\r\registry-research-framework\audit\windbg-serial-config-execution-20260403.json)
+- guest-restart breakin-once bundle: [windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json)
+- guest-restart breakin-once summary: [summary.json](C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-145133\summary.json)
+- guest-restart thin roundtrip bundle: [windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json](C:\r\registry-research-framework\audit\windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json)
+- guest-restart thin roundtrip summary: [summary.json](C:\r\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-154201\summary.json)
+- start-order matrix: [windbg-start-order-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-start-order-matrix-20260403.json)
+- start-order note: [windbg-start-order-matrix-20260403.md](C:\r\research\notes\windbg-start-order-matrix-20260403.md)
+- reconnect-command matrix: [windbg-reconnect-command-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-reconnect-command-matrix-20260403.json)
+- reconnect-command note: [windbg-reconnect-command-matrix-20260403.md](C:\r\research\notes\windbg-reconnect-command-matrix-20260403.md)
+- pipe-launch matrix: [windbg-pipe-launch-matrix-20260403.json](C:\r\registry-research-framework\audit\windbg-pipe-launch-matrix-20260403.json)
+- pipe-launch note: [windbg-pipe-launch-matrix-20260403.md](C:\r\research\notes\windbg-pipe-launch-matrix-20260403.md)

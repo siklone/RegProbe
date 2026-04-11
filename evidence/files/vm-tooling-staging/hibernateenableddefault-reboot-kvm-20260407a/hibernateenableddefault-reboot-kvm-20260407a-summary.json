@@ -1,0 +1,62 @@
+﻿{
+    "generated_utc":  "2026-04-07T10:32:07.2521465Z",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name":  "HibernateEnabledDefault",
+    "output_name":  "hibernateenableddefault-reboot-kvm-20260407a",
+    "output_root":  "C:\\RegProbe-Diag\\reboot-observation\\hibernateenableddefault-reboot-kvm-20260407a",
+    "task_name":  "RegProbe-RebootObservation-hibernateenableddefault-reboot-kvm-20260407a",
+    "before":  {
+                   "generated_utc":  "2026-04-07T10:30:24.5937930Z",
+                   "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                   "provider_path":  "Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                   "value_name":  "HibernateEnabledDefault",
+                   "key_exists":  true,
+                   "value_exists":  true,
+                   "value_kind":  "DWord",
+                   "value":  1,
+                   "error":  null,
+                   "boot_time_utc":  "2026-04-07T10:19:17.5000000Z"
+               },
+    "after":  {
+                  "generated_utc":  "2026-04-07T10:32:07.0108754Z",
+                  "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                  "provider_path":  "Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                  "value_name":  "HibernateEnabledDefault",
+                  "key_exists":  true,
+                  "value_exists":  true,
+                  "value_kind":  "DWord",
+                  "value":  1,
+                  "error":  null,
+                  "boot_time_utc":  "2026-04-07T10:30:32.5000000Z"
+              },
+    "before_powercfg_path":  "C:\\RegProbe-Diag\\reboot-observation\\hibernateenableddefault-reboot-kvm-20260407a\\powercfg-a-before.txt",
+    "after_powercfg_path":  "C:\\RegProbe-Diag\\reboot-observation\\hibernateenableddefault-reboot-kvm-20260407a\\powercfg-a-after.txt",
+    "reboot_observed":  true,
+    "value_changed":  true,
+    "value_preserved":  true,
+    "uploads":  {
+                    "before":  {
+                                   "path":  "C:\\RegProbe-Diag\\reboot-observation\\hibernateenableddefault-reboot-kvm-20260407a\\before.json",
+                                   "uri":  "http://10.0.2.2:8766/hibernateenableddefault-reboot-kvm-20260407a-before.json",
+                                   "attempts":  1
+                               },
+                    "after":  {
+                                  "path":  "C:\\RegProbe-Diag\\reboot-observation\\hibernateenableddefault-reboot-kvm-20260407a\\after.json",
+                                  "uri":  "http://10.0.2.2:8766/hibernateenableddefault-reboot-kvm-20260407a-after.json",
+                                  "attempts":  1
+                              },
+                    "powercfg_before":  {
+                                            "path":  "C:\\RegProbe-Diag\\reboot-observation\\hibernateenableddefault-reboot-kvm-20260407a\\powercfg-a-before.txt",
+                                            "uri":  "http://10.0.2.2:8766/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-before.txt",
+                                            "attempts":  1
+                                        },
+                    "powercfg_after":  {
+                                           "path":  "C:\\RegProbe-Diag\\reboot-observation\\hibernateenableddefault-reboot-kvm-20260407a\\powercfg-a-after.txt",
+                                           "uri":  "http://10.0.2.2:8766/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-after.txt",
+                                           "attempts":  1
+                                       }
+                },
+    "errors":  [
+
+               ]
+}

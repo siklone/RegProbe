@@ -1,0 +1,352 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+from guest_bridge import ensure_guest_bridge
+from summary_contract_lib import apply_summary_contract, write_summary_contract
+
+
+def quote_ps(value: str) -> str:
+    return "'" + value.replace("'", "''") + "'"
+
+
+def quote_ps_array(values: list[str]) -> str:
+    return ", ".join(quote_ps(value) for value in values)
+
+
+def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
+
+
+def wait_for_file(path: Path, timeout_seconds: int) -> bool:
+    deadline = time.time() + timeout_seconds
+    while time.time() < deadline:
+        if path.exists():
+            return True
+        time.sleep(2)
+    return path.exists()
+
+
+def build_guest_launcher(guest_scripts_root: str, bridge: str, generated_name: str) -> str:
+    return "\n".join(
+        [
+            f"New-Item -ItemType Directory -Path {quote_ps(guest_scripts_root)} -Force | Out-Null",
+            (
+                f"Invoke-WebRequest -UseBasicParsing -Uri "
+                f"{quote_ps(bridge + '/dist/kvm-generated/' + generated_name)} "
+                f"-OutFile {quote_ps(guest_scripts_root + '\\\\' + generated_name)}"
+            ),
+            f"powershell -NoProfile -ExecutionPolicy Bypass -File {quote_ps(guest_scripts_root + '\\\\' + generated_name)}",
+        ]
+    )
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Stage and run a WPR boot-registry capture inside the KVM guest.")
+    parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
+    parser.add_argument("--domain", default="regprobe-win11-25h2-session")
+    parser.add_argument("--connect", default="qemu:///session")
+    parser.add_argument("--bridge-base-url", default="http://10.0.2.2:8766")
+    parser.add_argument("--upload-dir", default="/tmp/regprobe-bridge")
+    parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
+    parser.add_argument("--delay-ms", default="18")
+    parser.add_argument("--wake-key", default="KEY_ENTER")
+    parser.add_argument("--prepare-timeout-seconds", type=int, default=180)
+    parser.add_argument("--timeout-seconds", type=int, default=420)
+    parser.add_argument("--reboot-settle-seconds", type=int, default=45)
+    parser.add_argument("--host-reboot-mode", choices=["reboot", "reset"], default="reboot")
+    parser.add_argument("--registry-path", required=True)
+    parser.add_argument("--value-name", required=True)
+    parser.add_argument("--output-name", required=True)
+    parser.add_argument("--match-fragment", action="append", default=[])
+    args = parser.parse_args()
+
+    repo_root = Path(args.repo_root).resolve()
+    upload_dir = Path(args.upload_dir).resolve()
+    upload_dir.mkdir(parents=True, exist_ok=True)
+    summary_arm_path = upload_dir / f"{args.output_name}-summary-arm.json"
+    summary_path = upload_dir / f"{args.output_name}-summary.json"
+    stage_path = upload_dir / f"{args.output_name}-stage.json"
+    legacy_summary_path = upload_dir / "wpr-boot-registry-summary.json"
+    hits_path = upload_dir / f"{args.output_name}.hits.txt"
+    for path in (summary_arm_path, summary_path, stage_path, legacy_summary_path, hits_path):
+        if path.exists():
+            path.unlink()
+
+    generated_dir = repo_root / "dist" / "kvm-generated"
+    generated_dir.mkdir(parents=True, exist_ok=True)
+
+    ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
+    run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+            "--repo-root",
+            str(repo_root),
+            "--domain",
+            args.domain,
+            "--connect",
+            args.connect,
+            "--bridge-base-url",
+            args.bridge_base_url,
+            "--upload-dir",
+            str(upload_dir),
+            "--guest-scripts-root",
+            guest_scripts_root := args.guest_scripts_root,
+            "--delay-ms",
+            args.delay_ms,
+            "--marker-name",
+            f"{args.output_name}-wpr-arm-ready",
+        ],
+        cwd=repo_root,
+    )
+
+    bridge = args.bridge_base_url.rstrip("/")
+    arm_name = f"guest-wpr-boot-registry-arm-{args.output_name}.ps1"
+    arm_path = generated_dir / arm_name
+    arm_lines = [
+        "$ErrorActionPreference = 'Stop'",
+        f"New-Item -ItemType Directory -Path {quote_ps(guest_scripts_root)} -Force | Out-Null",
+        (
+            f"Invoke-WebRequest -UseBasicParsing -Uri "
+            f"{quote_ps(bridge + '/scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1')} "
+            f"-OutFile {quote_ps(guest_scripts_root + r'\\run-wpr-boot-registry-probe.ps1')}"
+        ),
+    ]
+    arm_command = [
+        "&",
+        quote_ps(guest_scripts_root + r"\run-wpr-boot-registry-probe.ps1"),
+        "-Stage",
+        quote_ps("arm"),
+        "-RegistryPath",
+        quote_ps(args.registry_path),
+        "-ValueName",
+        quote_ps(args.value_name),
+        "-OutputName",
+        quote_ps(args.output_name),
+        "-UploadBaseUrl",
+        quote_ps(bridge),
+    ]
+    if args.match_fragment:
+        arm_command.extend(["-MatchFragments", quote_ps_array(args.match_fragment)])
+    arm_lines.append(" ".join(arm_command))
+    arm_path.write_text("\n".join(arm_lines) + "\n", encoding="utf-8")
+
+    run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+            args.domain,
+            "--connect",
+            args.connect,
+            "--delay-ms",
+            args.delay_ms,
+            "--wake-key",
+            args.wake_key,
+            "--enter",
+            build_guest_launcher(guest_scripts_root, bridge, arm_name),
+        ],
+        cwd=repo_root,
+    )
+
+    if not wait_for_file(summary_arm_path, args.prepare_timeout_seconds):
+        print(
+            json.dumps(
+                {
+                    "summary_arm_path": str(summary_arm_path),
+                    "output_name": args.output_name,
+                    "status": "prepare-timeout",
+                },
+                indent=2,
+            )
+        )
+        return 2
+
+    summary_arm = json.loads(summary_arm_path.read_text(encoding="utf-8-sig"))
+    if summary_arm.get("status") == "error":
+        payload = {
+            "summary_arm_path": str(summary_arm_path),
+            "output_name": args.output_name,
+            "status": "error",
+            "error_kind": summary_arm.get("error_kind"),
+            "error": summary_arm.get("error"),
+            "stage": "arm",
+        }
+        print(json.dumps(payload, indent=2))
+        return 1
+
+    run(["virsh", "-c", args.connect, args.host_reboot_mode, args.domain], cwd=repo_root)
+    time.sleep(args.reboot_settle_seconds)
+
+    run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+            "--repo-root",
+            str(repo_root),
+            "--domain",
+            args.domain,
+            "--connect",
+            args.connect,
+            "--bridge-base-url",
+            args.bridge_base_url,
+            "--upload-dir",
+            str(upload_dir),
+            "--guest-scripts-root",
+            guest_scripts_root,
+            "--delay-ms",
+            args.delay_ms,
+            "--marker-name",
+            f"{args.output_name}-wpr-collect-ready",
+        ],
+        cwd=repo_root,
+    )
+
+    state_file = rf"C:\RegProbe-Diag\wpr-boot-registry\{args.output_name}\state.json"
+    collect_name = f"guest-wpr-boot-registry-collect-{args.output_name}.ps1"
+    collect_path = generated_dir / collect_name
+    collect_lines = [
+        "$ErrorActionPreference = 'Stop'",
+        f"New-Item -ItemType Directory -Path {quote_ps(guest_scripts_root)} -Force | Out-Null",
+        (
+            f"Invoke-WebRequest -UseBasicParsing -Uri "
+            f"{quote_ps(bridge + '/scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1')} "
+            f"-OutFile {quote_ps(guest_scripts_root + r'\\run-wpr-boot-registry-probe.ps1')}"
+        ),
+        (
+            f"& {quote_ps(guest_scripts_root + r'\\run-wpr-boot-registry-probe.ps1')} "
+            f"-Stage collect "
+            f"-StateFile {quote_ps(state_file)}"
+        ),
+    ]
+    collect_path.write_text("\n".join(collect_lines) + "\n", encoding="utf-8")
+
+    run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+            args.domain,
+            "--connect",
+            args.connect,
+            "--delay-ms",
+            args.delay_ms,
+            "--wake-key",
+            args.wake_key,
+            "--enter",
+            build_guest_launcher(guest_scripts_root, bridge, collect_name),
+        ],
+        cwd=repo_root,
+    )
+
+    deadline = time.time() + args.timeout_seconds
+    while time.time() < deadline:
+        active_summary_path = None
+        if summary_path.exists():
+            active_summary_path = summary_path
+        elif legacy_summary_path.exists():
+            legacy_summary = json.loads(legacy_summary_path.read_text(encoding="utf-8-sig"))
+            if legacy_summary.get("output_name") == args.output_name:
+                summary_path.write_text(json.dumps(legacy_summary, indent=2) + "\n", encoding="utf-8")
+                active_summary_path = summary_path
+
+        if active_summary_path is not None:
+            summary = apply_summary_contract(json.loads(active_summary_path.read_text(encoding="utf-8-sig")))
+            payload = {
+                "summary_arm_path": str(summary_arm_path),
+                "summary_path": str(active_summary_path),
+                "stage_path": str(stage_path),
+                "hits_path": str(hits_path),
+                "output_name": args.output_name,
+                "status": summary.get("status", "unknown"),
+                "error_kind": summary.get("error_kind"),
+                "error": summary.get("error"),
+                "reboot_observed": summary.get("reboot_observed"),
+                "etl_exists": summary.get("etl_exists"),
+                "csv_exists": summary.get("csv_exists"),
+                "hit_line_count": summary.get("hit_line_count"),
+                "normalized_bundle_exists": summary.get("normalized_bundle_exists"),
+                "normalization_status": summary.get("normalization_status"),
+                "normalizer_name": summary.get("normalizer_name"),
+                "recovery_action": summary.get("recovery_action"),
+                "transport_blocker": summary.get("transport_blocker"),
+                "guest_health": summary.get("guest_health"),
+            }
+            print(json.dumps(payload, indent=2))
+            if summary.get("status") == "error" or summary.get("normalization_status") not in {None, "ok"}:
+                return 1
+            return 0
+
+        if stage_path.exists():
+            stage = json.loads(stage_path.read_text(encoding="utf-8-sig"))
+            if stage.get("status") == "error":
+                summary = write_summary_contract(
+                    summary_path,
+                    {
+                    "generated_utc": stage.get("generated_utc"),
+                    "stage": "collect",
+                    "registry_path": args.registry_path,
+                    "value_name": args.value_name,
+                    "output_name": args.output_name,
+                    "status": "error",
+                    "error_kind": "wpr-stage-error",
+                    "error": stage.get("message"),
+                    "summary_source": "stage-fallback",
+                    "stage_name": stage.get("stage"),
+                    "stage_status": stage.get("status"),
+                    "reboot_observed": None,
+                    "etl_exists": None,
+                    "csv_exists": False,
+                    "hit_line_count": 0,
+                    "normalized_bundle_exists": False,
+                    "normalization_status": "error",
+                    "normalizer_name": None,
+                    },
+                    default_error_kind="wpr-stage-error",
+                    default_recovery_action="inspect-wpr-stage",
+                    default_transport_blocker="stage-error",
+                    default_guest_health="degraded",
+                )
+                payload = {
+                    "summary_arm_path": str(summary_arm_path),
+                    "summary_path": str(summary_path),
+                    "stage_path": str(stage_path),
+                    "hits_path": str(hits_path),
+                    "output_name": args.output_name,
+                    "status": "error",
+                    "error_kind": "wpr-stage-error",
+                    "recovery_action": summary.get("recovery_action"),
+                    "transport_blocker": summary.get("transport_blocker"),
+                    "guest_health": summary.get("guest_health"),
+                    "error": stage.get("message"),
+                    "stage_name": stage.get("stage"),
+                    "summary_source": "stage-fallback",
+                }
+                print(json.dumps(payload, indent=2))
+                return 1
+        time.sleep(2)
+
+    timeout_summary = write_summary_contract(
+        summary_path,
+        {
+            "summary_arm_path": str(summary_arm_path),
+            "summary_path": str(summary_path),
+            "output_name": args.output_name,
+            "status": "timeout",
+        },
+        default_error_kind="runner-timeout",
+        default_recovery_action="rerun-wpr-boot-registry",
+        default_transport_blocker="timeout",
+        default_guest_health="unknown",
+    )
+    print(json.dumps(timeout_summary, indent=2))
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

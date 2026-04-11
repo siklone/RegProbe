@@ -1,0 +1,119 @@
+Opened log file 'C:\RegProbe-Diag\debugger-smoke\local-kd-watchdog-disasm-20260407a\local-kd.log'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.015 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.016 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 02:04:08.186 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff804`eb000000 PsLoadedModuleList = 0xfffff804`ebef50c0
+Debug session time: Tue Apr  7 02:04:08.306 2026 (UTC - 7:00)
+System Uptime: 0 days 1:55:35.009
+lkd> .sympath C:\Tools\Symbols\local-kd-watchdog-disasm-20260407a
+Symbol search path is: C:\Tools\Symbols\local-kd-watchdog-disasm-20260407a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-watchdog-disasm-20260407a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-watchdog-disasm-20260407a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!PopUpdatePowerActionWatchdogTimeouts
+fffff804`eb753f7c nt!PopUpdatePowerActionWatchdogTimeouts (PopUpdatePowerActionWatchdogTimeouts)
+lkd> uf nt!PopUpdatePowerActionWatchdogTimeouts
+nt!PopUpdatePowerActionWatchdogTimeouts:
+fffff804`eb753f7c 4883ec28        sub     rsp,28h
+fffff804`eb753f80 e83b2e3600      call    nt!PopIsDetailedSleepReliabilityDiagEnabled (fffff804`ebab6dc0)
+fffff804`eb753f85 84c0            test    al,al
+fffff804`eb753f87 7416            je      nt!PopUpdatePowerActionWatchdogTimeouts+0x23 (fffff804`eb753f9f)  Branch
+
+nt!PopUpdatePowerActionWatchdogTimeouts+0xd:
+fffff804`eb753f89 c705b51e87004a010000 mov dword ptr [nt!PopPowerActionTransitioningWatchdogTimeout (fffff804`ebfc5e48)],14Ah
+fffff804`eb753f93 c705a71e870096000000 mov dword ptr [nt!PopPowerActionResumingWatchdogTimeout (fffff804`ebfc5e44)],96h
+fffff804`eb753f9d eb18            jmp     nt!PopUpdatePowerActionWatchdogTimeouts+0x3b (fffff804`eb753fb7)  Branch
+
+nt!PopUpdatePowerActionWatchdogTimeouts+0x23:
+fffff804`eb753f9f 8b05ab038700    mov     eax,dword ptr [nt!PopPowerActionTransitioningWatchdogTimeoutDefault (fffff804`ebfc4350)]
+fffff804`eb753fa5 89059d1e8700    mov     dword ptr [nt!PopPowerActionTransitioningWatchdogTimeout (fffff804`ebfc5e48)],eax
+fffff804`eb753fab 8b059b038700    mov     eax,dword ptr [nt!PopPowerActionResumingWatchdogTimeoutDefault (fffff804`ebfc434c)]
+fffff804`eb753fb1 89058d1e8700    mov     dword ptr [nt!PopPowerActionResumingWatchdogTimeout (fffff804`ebfc5e44)],eax
+
+nt!PopUpdatePowerActionWatchdogTimeouts+0x3b:
+fffff804`eb753fb7 4883c428        add     rsp,28h
+fffff804`eb753fbb c3              ret
+lkd> uf nt!PopComputeWatchdogTimeout
+nt!PopComputeWatchdogTimeout:
+fffff804`eb4410d4 8b81bc000000    mov     eax,dword ptr [rcx+0BCh]
+fffff804`eb4410da 85c0            test    eax,eax
+fffff804`eb4410dc 740d            je      nt!PopComputeWatchdogTimeout+0x17 (fffff804`eb4410eb)  Branch
+
+nt!PopComputeWatchdogTimeout+0xa:
+fffff804`eb4410de 83f801          cmp     eax,1
+fffff804`eb4410e1 7408            je      nt!PopComputeWatchdogTimeout+0x17 (fffff804`eb4410eb)  Branch
+
+nt!PopComputeWatchdogTimeout+0xf:
+fffff804`eb4410e3 8b05a32fb800    mov     eax,dword ptr [nt!PopWatchdogSleepTimeout (fffff804`ebfc408c)]
+fffff804`eb4410e9 c3              ret
+
+nt!PopComputeWatchdogTimeout+0x17:
+fffff804`eb4410eb 83b9c000000001  cmp     dword ptr [rcx+0C0h],1
+fffff804`eb4410f2 75ef            jne     nt!PopComputeWatchdogTimeout+0xf (fffff804`eb4410e3)  Branch
+
+nt!PopComputeWatchdogTimeout+0x20:
+fffff804`eb4410f4 8b057630b800    mov     eax,dword ptr [nt!PopWatchdogResumeTimeout (fffff804`ebfc4170)]
+fffff804`eb4410fa c3              ret
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

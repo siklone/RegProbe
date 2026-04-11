@@ -1,0 +1,69 @@
+﻿Opened log file '\evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-170321\kd-console.log'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.015 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29547.1002 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Opened \\.\pipe\regprobe_debug
+Waiting to reconnect...
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+NatVis script successfully loaded from '<local-path>
+Connected to Windows 10 26100 x64 target at (Fri Apr  3 17:03:36.049 2026 (UTC + 3:00)), ptr64 TRUE
+Kernel Debugger connection established.
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (4 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff805`d2c00000 PsLoadedModuleList = 0xfffff805`d3af4e70
+Debug session time: Fri Apr  3 17:03:35.354 2026 (UTC + 3:00)
+System Uptime: 0 days 0:01:52.835
+Shutdown occurred at (Fri Apr  3 17:03:42.867 2026 (UTC + 3:00))...unloading all symbol tables.
+Waiting to reconnect...
+Connected to Windows 10 26100 x64 target at (Fri Apr  3 17:04:03.399 2026 (UTC + 3:00)), ptr64 TRUE
+Kernel Debugger connection established.
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       srv*
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (1 procs) Free x64
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff801`76a00000 PsLoadedModuleList = 0xfffff801`778f4e70
+System Uptime: 0 days 0:00:00.000
+nt!DebugService2+0x5:
+fffff801`76efa0e5 cc              int     3
+kd> .logopen /t "<local-path>
+Closing open log file \evidence\files\vm-tooling-staging\windbg-boot-registry-trace-20260403-170321\kd-console.log

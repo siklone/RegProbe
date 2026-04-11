@@ -1,0 +1,101 @@
+﻿{
+    "generated_utc":  "2026-04-03T17:10:47.7161566Z",
+    "family":  "power-control",
+    "pattern":  "mega-trigger",
+    "total_candidates":  1,
+    "csv_exists":  false,
+    "csv_line_count":  0,
+    "path_line_count":  0,
+    "parser_source":  "etl-binary-fallback",
+    "etl_path":  "C:\\Windows\\System32\\RegProbeerruntimesecondary20260403195806.etl",
+    "etl_path_source":  "system32-trace-name",
+    "etl_ready":  true,
+    "etl_length":  8192,
+    "tracerpt":  {
+                     "success":  false,
+                     "attempt":  0,
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "csv_exists":  false,
+                     "csv_length":  0,
+                     "stdout":  "",
+                     "stderr":  "skipped-for-binary-first-runtime-parser",
+                     "attempts":  [
+
+                                  ]
+                 },
+    "exact_hit_count":  0,
+    "exact_line_only_count":  0,
+    "path_only_count":  0,
+    "no_hit_count":  1,
+    "trigger_log":  [
+                        {
+                            "name":  "cpu_stress",
+                            "start_utc":  "2026-04-03T17:09:27.1232871Z",
+                            "end_utc":  "2026-04-03T17:09:42.6808588Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "power_plan_and_requests",
+                            "start_utc":  "2026-04-03T17:09:42.7559975Z",
+                            "end_utc":  "2026-04-03T17:09:57.4358887Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "multi_thread_burst",
+                            "start_utc":  "2026-04-03T17:09:57.4506098Z",
+                            "end_utc":  "2026-04-03T17:10:09.3355515Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "disk_io_burst",
+                            "start_utc":  "2026-04-03T17:10:09.3487367Z",
+                            "end_utc":  "2026-04-03T17:10:09.5840910Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "process_spawn_burst",
+                            "start_utc":  "2026-04-03T17:10:09.6002157Z",
+                            "end_utc":  "2026-04-03T17:10:10.3518795Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "foreground_background_switch",
+                            "start_utc":  "2026-04-03T17:10:10.3720325Z",
+                            "end_utc":  "2026-04-03T17:10:25.6629427Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "timer_resolution_change",
+                            "start_utc":  "2026-04-03T17:10:25.6751092Z",
+                            "end_utc":  "2026-04-03T17:10:31.8136512Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "network_activity",
+                            "start_utc":  "2026-04-03T17:10:31.8262372Z",
+                            "end_utc":  "2026-04-03T17:10:43.0886445Z",
+                            "status":  "completed",
+                            "error":  null
+                        }
+                    ],
+    "candidates":  [
+                       {
+                           "candidate_id":  "power.control.hiberboot-enabled",
+                           "value_name":  "HiberbootEnabled",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit",
+                           "sample_lines":  [
+
+                                            ]
+                       }
+                   ]
+}

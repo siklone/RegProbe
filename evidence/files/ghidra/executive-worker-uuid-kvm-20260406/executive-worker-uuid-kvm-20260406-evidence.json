@@ -1,0 +1,85 @@
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "executive-worker-uuid-kvm-20260406",
+  "timestamp": "2026-04-06T09:57:25.854091700Z",
+  "pdb_source": "C:\\Tools\\Symbols\\executive-worker-uuid-kvm-20260406",
+  "pdb_loaded": false,
+  "matches": [
+    {
+      "pattern": "AdditionalCriticalWorkerThreads",
+      "address": "140c73f78",
+      "function_name": "<no function>",
+      "function_source": "unresolved",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "trap/fault-adjacent block detected; control-flow may be misleading.",
+      "stack_summary": "no obvious stack-relative access in the bounded context.",
+      "exception_review_required": true,
+      "exception_reason": "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+      "heuristic_score": 0,
+      "effect_summary": "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+      "heuristic_reasons": [
+        "exception/trap gate forced review-only"
+      ],
+      "register_focus": [
+        "EAX",
+        "RAX"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140c71630  OR EAX,0xa00",
+        "140c71635  ADD AH,CL",
+        "140c71637  INT3",
+        "140c71640  AND byte ptr [RAX],AL",
+        "140c71642  ADD byte ptr [RAX],AL"
+      ],
+      "branch_snippet": [
+        "140c71644  INT3"
+      ],
+      "context_after": []
+    },
+    {
+      "pattern": "AdditionalDelayedWorkerThreads",
+      "address": "140c73fa8",
+      "function_name": "<no function>",
+      "function_source": "unresolved",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "trap/fault-adjacent block detected; control-flow may be misleading.",
+      "stack_summary": "no obvious stack-relative access in the bounded context.",
+      "exception_review_required": true,
+      "exception_reason": "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+      "heuristic_score": 0,
+      "effect_summary": "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+      "heuristic_reasons": [
+        "exception/trap gate forced review-only"
+      ],
+      "register_focus": [
+        "EAX",
+        "RAX"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140c71630  OR EAX,0xa00",
+        "140c71635  ADD AH,CL",
+        "140c71637  INT3",
+        "140c71640  AND byte ptr [RAX],AL",
+        "140c71642  ADD byte ptr [RAX],AL"
+      ],
+      "branch_snippet": [
+        "140c71644  INT3"
+      ],
+      "context_after": []
+    }
+  ]
+}

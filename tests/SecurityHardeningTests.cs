@@ -169,6 +169,55 @@ public sealed class ElevatedHostSessionSecurityTests
     }
 
     [Fact]
+    public void RedactSensitiveText_MasksSessionTokens()
+    {
+        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText("--pipe \"regprobe.pipe.1234.ABCDEF\" --session-token \"ABCDEF123456\" token=secret");
+
+        Assert.DoesNotContain("regprobe.pipe.1234.ABCDEF", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("ABCDEF123456", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("secret", redacted, StringComparison.Ordinal);
+        Assert.Contains("<redacted>", redacted, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void RedactSensitiveText_MasksUnquotedAndRepeatedTokens()
+    {
+        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText(
+            "--session-token ABCDEF123456 --session-token 'SECOND' SessionToken = \"THIRD\" token = fourth");
+
+        Assert.DoesNotContain("ABCDEF123456", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("SECOND", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("THIRD", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("fourth", redacted, StringComparison.Ordinal);
+        Assert.Contains("--session-token <redacted>", redacted, StringComparison.Ordinal);
+        Assert.Contains("--session-token '<redacted>'", redacted, StringComparison.Ordinal);
+        Assert.Contains("SessionToken = \"<redacted>\"", redacted, StringComparison.Ordinal);
+        Assert.Contains("token = <redacted>", redacted, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void RedactSensitiveText_MasksPipeBootstrapValues()
+    {
+        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText(
+            "--pipe RegProbe.ElevatedHost.4242.ABCDEF pipeName = \"RegProbe.ElevatedHost.4242.SECOND\"");
+
+        Assert.DoesNotContain("RegProbe.ElevatedHost.4242.ABCDEF", redacted, StringComparison.Ordinal);
+        Assert.DoesNotContain("RegProbe.ElevatedHost.4242.SECOND", redacted, StringComparison.Ordinal);
+        Assert.Contains("--pipe <redacted>", redacted, StringComparison.Ordinal);
+        Assert.Contains("pipeName = \"<redacted>\"", redacted, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void RedactSensitiveText_DoesNotMaskUnrelatedTokenWords()
+    {
+        var original = "--tokenizer enabled --api-token off --pipeline value --session-tokenized false";
+
+        var redacted = ElevatedHostSessionSecurity.RedactSensitiveText(original);
+
+        Assert.Equal(original, redacted);
+    }
+
+    [Fact]
     public void ClientProcessValidationRejectsUnexpectedPid()
     {
         Assert.True(ElevatedHostSessionSecurity.IsClientProcessAccepted(1234, 1234));

@@ -64,6 +64,19 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
 - `scripts/vm/cleanup-guest-validation-artifacts.ps1`
   removes guest-side validation clutter
 
+### `Active Research / Planned Debug Environment`
+
+- `scripts/vm-hyperv/test-hyperv-debug-feasibility.ps1`
+  Phase 0 feasibility gate for a debugger-first `Hyper-V` environment
+- `scripts/vm-hyperv/new-hyperv-debug-baseline-plan.ps1`
+  emits the planned baseline contract, checkpoint shape, and provisioning steps for the `Hyper-V` debug arbiter VM
+- `scripts/vm/new-vmware-debug-only-baseline-plan.ps1`
+  emits the short-lived fallback plan for a fresh VMware debug-only VM when `Hyper-V` is still blocked on the current host
+- `scripts/vm/new-vmware-debug-only-vm.ps1`
+  performs the fresh debugger-first VMware fallback provision with storage/safe-path guards and baseline debug configuration
+
+These `vm-hyperv` scripts are intentionally separate from the VMware runtime family. They exist to keep debugger transport engineering isolated from shell-safe runtime research.
+
 ### `Active Research`
 
 - `scripts/vm/run-cpu-idle-states-runtime-probe.ps1`
@@ -157,6 +170,12 @@ Today, the practical "unused" bucket is mostly generated local output, not sourc
   current UUID-specific follow-up lane
 - `registry-research-framework/tools/run-import-dynamic-resolution-probe.ps1`
   static sidecar for loader-style binaries where the normal import table is not enough
+- `registry-research-framework/tools/windbg-hyperv/run-debug-environment-selection.ps1`
+  freezes the current VMware WinDbg lane, runs the Hyper-V feasibility gate, and writes both the preferred `Hyper-V` plan and the short VMware debug-only fallback plan
+- `registry-research-framework/tools/windbg-hyperv/enable-hyperv-debug-prereqs.ps1`
+  enables the host-side Hyper-V prerequisites with `NoRestart` support, records before/after feasibility, and leaves a canonical audit for the reboot boundary
+- `registry-research-framework/tools/run-windbg-vmware-debug-only-short-try.ps1`
+  executes the one remaining controlled VMware debug-only branch: fresh provision, transport-first smoke, minimal attach matrix, and breakin smoke with stop-rule closure
 
 ### `Historical / Repro`
 

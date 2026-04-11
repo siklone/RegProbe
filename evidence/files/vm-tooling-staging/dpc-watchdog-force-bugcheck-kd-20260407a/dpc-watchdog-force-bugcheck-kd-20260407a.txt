@@ -1,0 +1,7 @@
+.sympath C:\Tools\Symbols\dpc-watchdog-force-bugcheck-kd-20260407a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!Ki*DpcWatchdog*
+dd nt!KiForceBugcheckForDpcWatchdog L1
+.echo REGPROBE_LOCALKD_END
+q

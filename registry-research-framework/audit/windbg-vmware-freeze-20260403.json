@@ -1,0 +1,15 @@
+﻿{
+    "generated_utc":  "2026-04-03T18:17:30.3660027Z",
+    "environment":  "vmware",
+    "lane":  "windbg",
+    "status":  "known-blocked-frozen",
+    "semantic_ready":  true,
+    "parser_ready":  true,
+    "public_registry_symbol":  "nt!CmQueryValueKey",
+    "value_name_argument":  "@rdx",
+    "transport_contract":  "unreliable",
+    "freeze_reason":  "The current VMware named-pipe contract cannot deliver classification-grade command/breakin roundtrips.",
+    "transport_findings_ref":  "registry-research-framework/audit/windbg-transport-findings-20260403.json",
+    "next_environment":  "hyperv",
+    "next_phase":  "debug-environment-selection"
+}

@@ -270,12 +270,26 @@ public sealed class RegistryCommandBatchTweak : ITweak
         {
             foreach (var entry in _entries)
             {
-                if (!_snapshots.TryGetValue(entry.Reference, out var snapshot)
-                    || !snapshot.Exists
-                    || snapshot.Value is null)
+                if (!_snapshots.TryGetValue(entry.Reference, out var snapshot))
+                {
+                    return new TweakResult(
+                        TweakStatus.Failed,
+                        $"Rollback refused: missing snapshot for '{entry.Reference.ValueName}'. Run Detect first.",
+                        DateTimeOffset.UtcNow);
+                }
+
+                if (!snapshot.Exists)
                 {
                     await _writeRegistryAccessor.DeleteValueAsync(entry.Reference, ct);
                     continue;
+                }
+
+                if (snapshot.Value is null)
+                {
+                    return new TweakResult(
+                        TweakStatus.Failed,
+                        $"Rollback refused: snapshot value missing for '{entry.Reference.ValueName}'.",
+                        DateTimeOffset.UtcNow);
                 }
 
                 await _writeRegistryAccessor.SetValueAsync(entry.Reference, snapshot.Value, ct);

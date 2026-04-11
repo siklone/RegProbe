@@ -1,0 +1,8 @@
+.sympath C:\Tools\Symbols\local-kd-globaltimerres-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!KiGlobalTimerResolutionRequests
+dd nt!KiGlobalTimerResolutionRequests L1
+.echo REGPROBE_GLOBALTIMERRES_DONE
+.echo REGPROBE_LOCALKD_END
+q

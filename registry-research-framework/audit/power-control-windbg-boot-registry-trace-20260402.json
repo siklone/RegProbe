@@ -1,0 +1,61 @@
+﻿{
+    "generated_utc":  "2026-04-02T23:58:19.3812934Z",
+    "tool":  "WinDbg",
+    "vm_profile":  "secondary",
+    "vm_path":  "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+    "pipe_name":  "\\\\.\\pipe\\regprobe_debug",
+    "debug_snapshot_name":  "RegProbe-Baseline-Debug-20260402",
+    "collection_mode":  "evidence",
+    "rollback_pending":  true,
+    "runner_required":  true,
+    "key_count":  5,
+    "keys":  [
+                 "AllowAudioToEnableExecutionRequiredPowerRequests",
+                 "AllowSystemRequiredPowerRequests",
+                 "AlwaysComputeQosHints",
+                 "CoalescingFlushInterval",
+                 "IdleProcessorsRequireQosManagement"
+             ],
+    "command_script":  "registry-research-framework/audit/windbg-registry-watch.txt",
+    "log_path":  "C:\\RegProbe-Diag\\windbg-registry-trace.log",
+    "attach_mode":  "manual-kernel-debug",
+    "breakpoint_mode":  "cmquery-valuename-postfilter",
+    "windbg_path":  "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\kd.exe",
+    "windbg_command":  "\"C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.2603.20001.0_x64__8wekyb3d8bbwe\\amd64\\kd.exe\" -k com:pipe,port=\\\\.\\pipe\\regprobe_debug,resets=0,reconnect -cfr \u003cREPO_ROOT\u003e\\registry-research-framework\\audit\\windbg-registry-watch.txt",
+    "status":  "ready-to-attach",
+    "capture_status":  "staged",
+    "capture_artifacts":  [
+
+                          ],
+    "support_artifacts":  [
+                              {
+                                  "path":  "registry-research-framework/audit/windbg-registry-watch.txt",
+                                  "sha256":  "d347561692c6113d7720698eec7e967dc8e721c155e30d7075ce74c9e424c3bf",
+                                  "size":  615,
+                                  "collected_utc":  "2026-04-02T23:58:19.2280420Z",
+                                  "exists":  true
+                              },
+                              {
+                                  "path":  "registry-research-framework/audit/configure-kernel-debug-baseline.json",
+                                  "sha256":  "d4f7ff150d9681e107641e5de35e8ad587e4d75c47f97b54595ed4f15482176c",
+                                  "size":  1386,
+                                  "collected_utc":  "2026-04-02T23:54:43.1965604Z",
+                                  "exists":  true
+                              }
+                          ],
+    "host_debugger_status":  "installed",
+    "host_debugger_candidates":  [
+                                     "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_*",
+                                     "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\windbg.exe",
+                                     "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\kd.exe",
+                                     "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\cdb.exe",
+                                     "C:\\Program Files\\WindowsApps\\Microsoft.WinDbg_1.0.0.0_x64__8wekyb3d8bbwe\\windbg.exe"
+                                 ],
+    "baseline_prepare_status":  "not-requested",
+    "prep":  null,
+    "notes":  [
+                  "Use this lane only after ETW mega-trigger leaves a no-hit hold queue.",
+                  "This command script currently targets nt!CmQueryValueKey and logs value names from the UNICODE_STRING pointer in @rdx.",
+                  "WinDbg acts as the dead-flag final arbiter: ETW no-hit + WinDbg no-hit is the strongest dead-flag signal."
+              ]
+}

@@ -1,0 +1,5 @@
+﻿"Time of Day","Process Name","PID","Operation","Path","Result","Detail"
+"1:19:12.4899025 AM","powercfg.exe","4260","RegCreateKey","HKLM\SYSTEM\CURRENTCONTROLSET\CONTROL\POWER","REPARSE","Desired Access: Read/Write"
+"1:19:12.4899201 AM","powercfg.exe","4260","RegCreateKey","HKLM\System\CurrentControlSet\CONTROL\POWER","SUCCESS","Desired Access: Read/Write, Disposition: REG_OPENED_EXISTING_KEY"
+"1:19:12.4899331 AM","powercfg.exe","4260","RegSetValue","HKLM\System\CurrentControlSet\Control\Power\HibernateEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0"
+"1:19:12.4899510 AM","powercfg.exe","4260","RegCloseKey","HKLM\System\CurrentControlSet\Control\Power","SUCCESS",""

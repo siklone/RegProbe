@@ -1,0 +1,281 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.016 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.015 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Mon Apr  6 13:09:39.176 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff800`96c00000 PsLoadedModuleList = 0xfffff800`97af50c0
+Debug session time: Mon Apr  6 13:09:39.304 2026 (UTC - 7:00)
+System Uptime: 0 days 1:08:28.998
+lkd> .sympath C:\Tools\Symbols\local-kd-uuid-disasm-20260406a
+Symbol search path is: C:\Tools\Symbols\local-kd-uuid-disasm-20260406a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-uuid-disasm-20260406a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-uuid-disasm-20260406a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!*Exp*Uuid*
+fffff800`974e8ec4 nt!ExpAllocateUuids (void)
+fffff800`96c38d00 nt!ExpUuidSeedGenericMapping = <no type information>
+fffff800`974eaa2c nt!ExpUuidGetValues (ExpUuidGetValues)
+fffff800`973c0cd4 nt!ExpUuidSaveSequenceNumber (ExpUuidSaveSequenceNumber)
+fffff800`97bd7014 nt!ExpUuidSequenceNumberNotSaved = <no type information>
+fffff800`97bd7248 nt!ExpUuidCachedValues = <no type information>
+fffff800`97bd71d0 nt!ExpUuidLastTimeAllocated = <no type information>
+fffff800`97bd7078 nt!ExpUuidSequenceNumber = <no type information>
+fffff800`96c0bb20 nt!ExpUuidSequenceNumberRegName = <no type information>
+fffff800`97bd70ac nt!ExpUuidTimeSequenceNumber = <no type information>
+fffff800`97bd703c nt!ExpUuidSequenceNumberValid = <no type information>
+fffff800`97a682f0 nt!ExpUuidLock = <no type information>
+fffff800`9768b754 nt!ExpUuidSaveSequenceNumberIf (ExpUuidSaveSequenceNumberIf)
+fffff800`973c0b68 nt!ExpUuidLoadSequenceNumber (ExpUuidLoadSequenceNumber)
+fffff800`97bd7007 nt!ExpUuidCacheValid = <no type information>
+lkd> uf nt!ExpUuidLoadSequenceNumber
+nt!ExpUuidLoadSequenceNumber:
+fffff800`973c0b68 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff800`973c0b6d 55              push    rbp
+fffff800`973c0b6e 488dac2440feffff lea     rbp,[rsp-1C0h]
+fffff800`973c0b76 4881ecc0020000  sub     rsp,2C0h
+fffff800`973c0b7d 488b053c9b6400  mov     rax,qword ptr [nt!_security_cookie (fffff800`97a0a6c0)]
+fffff800`973c0b84 4833c4          xor     rax,rsp
+fffff800`973c0b87 488985b0010000  mov     qword ptr [rbp+1B0h],rax
+fffff800`973c0b8e 33c0            xor     eax,eax
+fffff800`973c0b90 488d4db0        lea     rcx,[rbp-50h]
+fffff800`973c0b94 21442440        and     dword ptr [rsp+40h],eax
+fffff800`973c0b98 0f57c0          xorps   xmm0,xmm0
+fffff800`973c0b9b 4821442448      and     qword ptr [rsp+48h],rax
+fffff800`973c0ba0 bbfe010000      mov     ebx,1FEh
+fffff800`973c0ba5 448bc3          mov     r8d,ebx
+fffff800`973c0ba8 4889442470      mov     qword ptr [rsp+70h],rax
+fffff800`973c0bad 33d2            xor     edx,edx
+fffff800`973c0baf 89442478        mov     dword ptr [rsp+78h],eax
+fffff800`973c0bb3 0f11442450      movups  xmmword ptr [rsp+50h],xmm0
+fffff800`973c0bb8 0f11442460      movups  xmmword ptr [rsp+60h],xmm0
+fffff800`973c0bbd 0f114580        movups  xmmword ptr [rbp-80h],xmm0
+fffff800`973c0bc1 e83affefff      call    nt!_memset_spec_plain (fffff800`972c0b00)
+fffff800`973c0bc6 488364243000    and     qword ptr [rsp+30h],0
+fffff800`973c0bcc 488d45b0        lea     rax,[rbp-50h]
+fffff800`973c0bd0 895c2428        mov     dword ptr [rsp+28h],ebx
+fffff800`973c0bd4 4c8d05b5573300  lea     r8,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f6390)]
+fffff800`973c0bdb 4533c9          xor     r9d,r9d
+fffff800`973c0bde 4889442420      mov     qword ptr [rsp+20h],rax
+fffff800`973c0be3 33d2            xor     edx,edx
+fffff800`973c0be5 488d0d44583300  lea     rcx,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f6430)]
+fffff800`973c0bec e8efb42000      call    nt!RtlGetPersistedStateLocation (fffff800`975cc0e0)
+fffff800`973c0bf1 8bd8            mov     ebx,eax
+fffff800`973c0bf3 85c0            test    eax,eax
+fffff800`973c0bf5 0f889e000000    js      nt!ExpUuidLoadSequenceNumber+0x131 (fffff800`973c0c99)  Branch
+
+nt!ExpUuidLoadSequenceNumber+0x93:
+fffff800`973c0bfb 488d55b0        lea     rdx,[rbp-50h]
+fffff800`973c0bff 488d4d80        lea     rcx,[rbp-80h]
+fffff800`973c0c03 e89835c6ff      call    nt!RtlInitUnicodeString (fffff800`970241a0)
+fffff800`973c0c08 488364245800    and     qword ptr [rsp+58h],0
+fffff800`973c0c0e 488d4580        lea     rax,[rbp-80h]
+fffff800`973c0c12 0f57c0          xorps   xmm0,xmm0
+fffff800`973c0c15 4889442460      mov     qword ptr [rsp+60h],rax
+fffff800`973c0c1a 4c8d442450      lea     r8,[rsp+50h]
+fffff800`973c0c1f c744245030000000 mov     dword ptr [rsp+50h],30h
+fffff800`973c0c27 ba00000080      mov     edx,80000000h
+fffff800`973c0c2c c744246840020000 mov     dword ptr [rsp+68h],240h
+fffff800`973c0c34 488d4c2448      lea     rcx,[rsp+48h]
+fffff800`973c0c39 f30f7f442470    movdqu  xmmword ptr [rsp+70h],xmm0
+fffff800`973c0c3f e80c5aeeff      call    nt!ZwOpenKey (fffff800`972a6650)
+fffff800`973c0c44 8bd8            mov     ebx,eax
+fffff800`973c0c46 85c0            test    eax,eax
+fffff800`973c0c48 784f            js      nt!ExpUuidLoadSequenceNumber+0x131 (fffff800`973c0c99)  Branch
+
+nt!ExpUuidLoadSequenceNumber+0xe2:
+fffff800`973c0c4a 488b4c2448      mov     rcx,qword ptr [rsp+48h]
+fffff800`973c0c4f 488d442440      lea     rax,[rsp+40h]
+fffff800`973c0c54 4889442428      mov     qword ptr [rsp+28h],rax
+fffff800`973c0c59 4c8d4d90        lea     r9,[rbp-70h]
+fffff800`973c0c5d 41b802000000    mov     r8d,2
+fffff800`973c0c63 c744242014000000 mov     dword ptr [rsp+20h],14h
+fffff800`973c0c6b 488d15aeae84ff  lea     rdx,[nt!ExpUuidSequenceNumberRegName (fffff800`96c0bb20)]
+fffff800`973c0c72 e8795aeeff      call    nt!ZwQueryValueKey (fffff800`972a66f0)
+fffff800`973c0c77 8bd8            mov     ebx,eax
+fffff800`973c0c79 85c0            test    eax,eax
+fffff800`973c0c7b 781c            js      nt!ExpUuidLoadSequenceNumber+0x131 (fffff800`973c0c99)  Branch
+
+nt!ExpUuidLoadSequenceNumber+0x115:
+fffff800`973c0c7d 837d9404        cmp     dword ptr [rbp-6Ch],4
+fffff800`973c0c81 7511            jne     nt!ExpUuidLoadSequenceNumber+0x12c (fffff800`973c0c94)  Branch
+
+nt!ExpUuidLoadSequenceNumber+0x11b:
+fffff800`973c0c83 837d9804        cmp     dword ptr [rbp-68h],4
+fffff800`973c0c87 750b            jne     nt!ExpUuidLoadSequenceNumber+0x12c (fffff800`973c0c94)  Branch
+
+nt!ExpUuidLoadSequenceNumber+0x121:
+fffff800`973c0c89 8b459c          mov     eax,dword ptr [rbp-64h]
+fffff800`973c0c8c 8905e6638100    mov     dword ptr [nt!ExpUuidSequenceNumber (fffff800`97bd7078)],eax
+fffff800`973c0c92 eb05            jmp     nt!ExpUuidLoadSequenceNumber+0x131 (fffff800`973c0c99)  Branch
+
+nt!ExpUuidLoadSequenceNumber+0x12c:
+fffff800`973c0c94 bb010000c0      mov     ebx,0C0000001h
+
+nt!ExpUuidLoadSequenceNumber+0x131:
+fffff800`973c0c99 488b4c2448      mov     rcx,qword ptr [rsp+48h]
+fffff800`973c0c9e 4885c9          test    rcx,rcx
+fffff800`973c0ca1 7405            je      nt!ExpUuidLoadSequenceNumber+0x140 (fffff800`973c0ca8)  Branch
+
+nt!ExpUuidLoadSequenceNumber+0x13b:
+fffff800`973c0ca3 e84859eeff      call    nt!ZwClose (fffff800`972a65f0)
+
+nt!ExpUuidLoadSequenceNumber+0x140:
+fffff800`973c0ca8 8bc3            mov     eax,ebx
+fffff800`973c0caa 488b8db0010000  mov     rcx,qword ptr [rbp+1B0h]
+fffff800`973c0cb1 4833cc          xor     rcx,rsp
+fffff800`973c0cb4 e8674ceeff      call    nt!_security_check_cookie (fffff800`972a5920)
+fffff800`973c0cb9 488b9c24d0020000 mov     rbx,qword ptr [rsp+2D0h]
+fffff800`973c0cc1 4881c4c0020000  add     rsp,2C0h
+fffff800`973c0cc8 5d              pop     rbp
+fffff800`973c0cc9 c3              ret
+lkd> uf nt!ExpUuidSaveSequenceNumber
+nt!ExpUuidSaveSequenceNumber:
+fffff800`973c0cd4 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff800`973c0cd9 55              push    rbp
+fffff800`973c0cda 488dac2460feffff lea     rbp,[rsp-1A0h]
+fffff800`973c0ce2 4881eca0020000  sub     rsp,2A0h
+fffff800`973c0ce9 488b05d0996400  mov     rax,qword ptr [nt!_security_cookie (fffff800`97a0a6c0)]
+fffff800`973c0cf0 4833c4          xor     rax,rsp
+fffff800`973c0cf3 48898590010000  mov     qword ptr [rbp+190h],rax
+fffff800`973c0cfa 8b0578638100    mov     eax,dword ptr [nt!ExpUuidSequenceNumber (fffff800`97bd7078)]
+fffff800`973c0d00 488d4d90        lea     rcx,[rbp-70h]
+fffff800`973c0d04 0f57c0          xorps   xmm0,xmm0
+fffff800`973c0d07 89442440        mov     dword ptr [rsp+40h],eax
+fffff800`973c0d0b 33c0            xor     eax,eax
+fffff800`973c0d0d bbfe010000      mov     ebx,1FEh
+fffff800`973c0d12 4821442448      and     qword ptr [rsp+48h],rax
+fffff800`973c0d17 448bc3          mov     r8d,ebx
+fffff800`973c0d1a 33d2            xor     edx,edx
+fffff800`973c0d1c 4889442470      mov     qword ptr [rsp+70h],rax
+fffff800`973c0d21 89442478        mov     dword ptr [rsp+78h],eax
+fffff800`973c0d25 0f11442450      movups  xmmword ptr [rsp+50h],xmm0
+fffff800`973c0d2a 0f11442460      movups  xmmword ptr [rsp+60h],xmm0
+fffff800`973c0d2f 0f114580        movups  xmmword ptr [rbp-80h],xmm0
+fffff800`973c0d33 e8c8fdefff      call    nt!_memset_spec_plain (fffff800`972c0b00)
+fffff800`973c0d38 488364243000    and     qword ptr [rsp+30h],0
+fffff800`973c0d3e 488d4590        lea     rax,[rbp-70h]
+fffff800`973c0d42 895c2428        mov     dword ptr [rsp+28h],ebx
+fffff800`973c0d46 4c8d0543563300  lea     r8,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f6390)]
+fffff800`973c0d4d 4533c9          xor     r9d,r9d
+fffff800`973c0d50 4889442420      mov     qword ptr [rsp+20h],rax
+fffff800`973c0d55 33d2            xor     edx,edx
+fffff800`973c0d57 488d0dd2563300  lea     rcx,[nt! ?? ::NNGAKEGL::`string' (fffff800`976f6430)]
+fffff800`973c0d5e e87db32000      call    nt!RtlGetPersistedStateLocation (fffff800`975cc0e0)
+fffff800`973c0d63 8bd8            mov     ebx,eax
+fffff800`973c0d65 85c0            test    eax,eax
+fffff800`973c0d67 787a            js      nt!ExpUuidSaveSequenceNumber+0x10f (fffff800`973c0de3)  Branch
+
+nt!ExpUuidSaveSequenceNumber+0x95:
+fffff800`973c0d69 488d5590        lea     rdx,[rbp-70h]
+fffff800`973c0d6d 488d4d80        lea     rcx,[rbp-80h]
+fffff800`973c0d71 e82a34c6ff      call    nt!RtlInitUnicodeString (fffff800`970241a0)
+fffff800`973c0d76 488364245800    and     qword ptr [rsp+58h],0
+fffff800`973c0d7c 488d4580        lea     rax,[rbp-80h]
+fffff800`973c0d80 0f57c0          xorps   xmm0,xmm0
+fffff800`973c0d83 4889442460      mov     qword ptr [rsp+60h],rax
+fffff800`973c0d88 4c8d442450      lea     r8,[rsp+50h]
+fffff800`973c0d8d c744245030000000 mov     dword ptr [rsp+50h],30h
+fffff800`973c0d95 ba000000c0      mov     edx,0C0000000h
+fffff800`973c0d9a c744246840020000 mov     dword ptr [rsp+68h],240h
+fffff800`973c0da2 488d4c2448      lea     rcx,[rsp+48h]
+fffff800`973c0da7 f30f7f442470    movdqu  xmmword ptr [rsp+70h],xmm0
+fffff800`973c0dad e89e58eeff      call    nt!ZwOpenKey (fffff800`972a6650)
+fffff800`973c0db2 8bd8            mov     ebx,eax
+fffff800`973c0db4 85c0            test    eax,eax
+fffff800`973c0db6 782b            js      nt!ExpUuidSaveSequenceNumber+0x10f (fffff800`973c0de3)  Branch
+
+nt!ExpUuidSaveSequenceNumber+0xe4:
+fffff800`973c0db8 488b4c2448      mov     rcx,qword ptr [rsp+48h]
+fffff800`973c0dbd 488d442440      lea     rax,[rsp+40h]
+fffff800`973c0dc2 41b904000000    mov     r9d,4
+fffff800`973c0dc8 488d1551ad84ff  lea     rdx,[nt!ExpUuidSequenceNumberRegName (fffff800`96c0bb20)]
+fffff800`973c0dcf 44894c2428      mov     dword ptr [rsp+28h],r9d
+fffff800`973c0dd4 4533c0          xor     r8d,r8d
+fffff800`973c0dd7 4889442420      mov     qword ptr [rsp+20h],rax
+fffff800`973c0ddc e82f62eeff      call    nt!ZwSetValueKey (fffff800`972a7010)
+fffff800`973c0de1 8bd8            mov     ebx,eax
+
+nt!ExpUuidSaveSequenceNumber+0x10f:
+fffff800`973c0de3 488b4c2448      mov     rcx,qword ptr [rsp+48h]
+fffff800`973c0de8 4885c9          test    rcx,rcx
+fffff800`973c0deb 7405            je      nt!ExpUuidSaveSequenceNumber+0x11e (fffff800`973c0df2)  Branch
+
+nt!ExpUuidSaveSequenceNumber+0x119:
+fffff800`973c0ded e8fe57eeff      call    nt!ZwClose (fffff800`972a65f0)
+
+nt!ExpUuidSaveSequenceNumber+0x11e:
+fffff800`973c0df2 8bc3            mov     eax,ebx
+fffff800`973c0df4 488b8d90010000  mov     rcx,qword ptr [rbp+190h]
+fffff800`973c0dfb 4833cc          xor     rcx,rsp
+fffff800`973c0dfe e81d4beeff      call    nt!_security_check_cookie (fffff800`972a5920)
+fffff800`973c0e03 488b9c24b0020000 mov     rbx,qword ptr [rsp+2B0h]
+fffff800`973c0e0b 4881c4a0020000  add     rsp,2A0h
+fffff800`973c0e12 5d              pop     rbp
+fffff800`973c0e13 c3              ret
+lkd> uf nt!ExpUuidSaveSequenceNumberIf
+nt!ExpUuidSaveSequenceNumberIf:
+fffff800`9768b754 4883ec28        sub     rsp,28h
+fffff800`9768b758 33c0            xor     eax,eax
+fffff800`9768b75a 803db3b8540001  cmp     byte ptr [nt!ExpUuidSequenceNumberNotSaved (fffff800`97bd7014)],1
+fffff800`9768b761 7406            je      nt!ExpUuidSaveSequenceNumberIf+0x15 (fffff800`9768b769)  Branch
+
+nt!ExpUuidSaveSequenceNumberIf+0xf:
+fffff800`9768b763 4883c428        add     rsp,28h
+fffff800`9768b767 c3              ret
+
+nt!ExpUuidSaveSequenceNumberIf+0x15:
+fffff800`9768b769 e86655d3ff      call    nt!ExpUuidSaveSequenceNumber (fffff800`973c0cd4)
+fffff800`9768b76e 85c0            test    eax,eax
+fffff800`9768b770 78f1            js      nt!ExpUuidSaveSequenceNumberIf+0xf (fffff800`9768b763)  Branch
+
+nt!ExpUuidSaveSequenceNumberIf+0x1e:
+fffff800`9768b772 c6059bb8540000  mov     byte ptr [nt!ExpUuidSequenceNumberNotSaved (fffff800`97bd7014)],0
+fffff800`9768b779 ebe8            jmp     nt!ExpUuidSaveSequenceNumberIf+0xf (fffff800`9768b763)  Branch
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

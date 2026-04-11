@@ -1,0 +1,26 @@
+{
+  "generated_utc": "2026-04-07T18:22:43Z",
+  "candidate": "power.session-win32-callout-watchdog-bugcheck-enabled",
+  "guest": "regprobe-win11-25h2-session",
+  "bundle": "watchdog-win32-callout-ghidra-20260407b",
+  "findings": {
+    "pdb_full_analysis": {
+      "ghidra_exit_code": 0,
+      "no_analysis": false,
+      "staged_pdb_count": 2,
+      "exact_string_hit": "140c7ba30",
+      "exact_string_text": "Win32CalloutWatchdogBugcheckEnabled",
+      "exact_string_reference_count": 0,
+      "resolved_matches": 0
+    },
+    "structural_result": {
+      "current_build_string_present": true,
+      "direct_or_bounded_xref_found": false
+    }
+  },
+  "interpretation": {
+    "current_state": "The current build still carries the exact value-name string in ntoskrnl.exe, but the canonical PDB-backed full-analysis pass did not recover a direct or bounded reference path from that string.",
+    "remaining_gap": "Find a concrete current-build caller or seed path that ties the sibling to PopReadRegKeyValue or another watchdog-family registry helper.",
+    "downgrade_signal": "The structural pass supports keeping the record as a watchdog-family adjacent lead, not a registry-proven watchdog setting."
+  }
+}

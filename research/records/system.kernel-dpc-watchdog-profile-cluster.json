@@ -1,0 +1,392 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.kernel-dpc-watchdog-profile-cluster",
+  "tweak_id": "system.kernel-dpc-watchdog-profile-cluster",
+  "record_status": "draft",
+  "summary": "Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader, validator, and writer path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges, and `KeUpdateDpcWatchdogConfiguration` writes the globals from caller-supplied validated input. A later PDB-backed Ghidra symbol-xref pass narrowed the caller story further, a class-focused live KD pass then confirmed the exact runtime edge `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, the admin-group gate, and a dispatch-chain inference that the writer arm is reached via numeric system-information arm `0xE4`, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, and a canonical init-semantics Ghidra follow-up then showed that current-build legacy/profile backfill only activates under sentinel/non-zero prerequisites. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
+  "setting": {
+    "name": "Session Manager Kernel DPC Watchdog Profile Cluster",
+    "category": "System",
+    "area": "Session Manager Kernel DPC Watchdog Profile",
+    "scope": "device",
+    "casual_explanation": "This cluster appears to control several DPC watchdog profiling thresholds inside the kernel. Current-build live state only agrees with the repo-doc default for the profile offset; the rest of the cluster currently reads as zero.",
+    "why_people_change_it": "Kernel and latency researchers may inspect these values when investigating DPC watchdog profiling thresholds, triage capture behavior, or internal watchdog diagnostics.",
+    "tradeoffs_overview": "The family now has real current-build kernel-state evidence, conflicting repo-doc defaults for most values, and a live-KD confirmed privileged runtime caller. It should stay a draft research cluster, not a tweak candidate.",
+    "professional_notes": "Repo docs list four `Session Manager\\\\Kernel` DPC watchdog profile values with explicit defaults: `DpcWatchdogProfileBufferSizeBytes = 266240`, `DpcWatchdogProfileCumulativeDpcThreshold = 110000`, `DpcWatchdogProfileOffset = 10000`, and `DpcWatchdogProfileSingleDpcThreshold = 18333`. A dedicated live KVM local-KD bundle later resolved the current-build `KeDpcWatchdogProfile*` symbol cluster and directly read the running globals. The result is mixed: `KeDpcWatchdogProfileOffsetMs = 10000`, but `KeDpcWatchdogProfileSingleDpcThresholdMs = 0`, `KeDpcWatchdogProfileCumulativeDpcThresholdMs = 0`, and `KeDpcWatchdogProfileBufferSizeBytes = 0`. The same pass also read the nearby control global `KeDpcWatchdogPeriodMs = 0`, which is a useful contradiction against the older DpcWatchdogPeriod review lane that only proved the value is consumed when present. A second current-build KD disassembly pass then showed that `KeQueryDpcWatchdogConfiguration` is the concrete reader for the profile and control globals, and that it only sets result bits / copies fields when the globals are non-zero. The same disassembly bundle also showed that `KiValidateDpcWatchdogConfiguration` backfills missing fields from those globals and applies ordering/range checks, which gives the zero values direct default/fallback semantics in the current build rather than leaving them as uninterpreted noise. `KiUpdateProcessorDpcWatchdogConfiguration` is not the seeding caller; it only delegates to `KiApplyProcessorDpcLimits`. A later dedicated KD pass then showed that `KiApplyProcessorDpcLimits` itself is also downstream only: it forwards an already-built configuration block into `KiSetProcessorDpcLimits` and does not read the watchdog globals directly. A subsequent KD pass narrowed the chain one more step: `KiSetProcessorDpcLimits` copies fields from that prepared block into per-processor watchdog state and swaps the auxiliary profile buffer pointer when needed, but it still does not seed the globals. The dedicated writer pass then closed the writer question: `KeUpdateDpcWatchdogConfiguration` is the explicit current-build writer for the DPC watchdog globals. A later PDB-backed Ghidra symbol-xref pass tightened the caller picture again by showing that `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while `KiInitializeProcessor` references `KiCreateDpcLimitsProcessorConfiguration`. Existing deprecated DPC scheduler records then narrowed that interpretation further by already proving that adjacent DPC controls such as `AdjustDpcThreshold` and `DpcQueueDepth` are populated from the `NtSetSystemInformation` setter buffer and exported back through the query path. A later class-focused live KD pass then confirmed the exact current-build syscall edge at `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, showed that the branch is gated by `SeAliasAdminsSid` membership via `RtlCheckTokenMembership`, and exposed the surrounding dispatch arithmetic. In that live dispatch window, the watchdog writer arm is reached after `ecx = ebx - 0xE0`, `sub ecx,1`, `sub ecx,1`, and `sub ecx,2` land on `je NtSetSystemInformation+0x1b95`, which implies `ebx == 0xE4` for the watchdog writer arm. That `0xE4` result is a live-disassembly inference about the numeric system-information arm, not a confirmed public class name. A later dedicated query-side KD pass then confirmed the exact outer wrapper edge `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` on the same current build, but the captured `ExpQuerySystemInformation` slice still did not isolate a symbolized `KeQueryDpcWatchdogConfiguration` callsite. That narrows the query-side gap from `no live query lineage` to `inner ExpQuerySystemInformation watchdog arm unresolved`. A newly-canonical PDB-backed Ghidra init-semantics pass then added the missing current-build explanation for the mixed live profile state. `KiInitDpcThresholds` only clamps low non-zero control/profile inputs and deliberately lets zero-valued globals remain zero, while `KiInitializeLegacyWatchdogProfileThresholds` only derives profile thresholds and buffer size when legacy sentinel values `0xffffffff` are present and prerequisite control globals are non-zero. This means the current build has a coherent structural path where `KeDpcWatchdogProfileOffsetMs = 10000` can coexist with zero-valued profile thresholds and buffer size without implying a failed parser or a broken live read. That means the unresolved step is no longer a generic missing caller, privilege gate, or unexplained mixed state, but a narrower persisted-registry seeding caller, the exact inner `ExpQuerySystemInformation` query arm, plus the public/current-build class name, if any, for inferred numeric arm `0xE4` above a now-plausible runtime system-information lineage.",
+    "targets": [
+      {
+        "target_id": "dpc-watchdog-profile-buffer-size-bytes",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileBufferSizeBytes",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "documented-default",
+            "value": 266240,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs attribute a 266240-byte default to `DpcWatchdogProfileBufferSizeBytes`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407"
+            ]
+          },
+          {
+            "state_kind": "live-current-build-global",
+            "value": 0,
+            "label": "Live current-build kernel state",
+            "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogProfileBufferSizeBytes = 0` on the running current build.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "dpc-watchdog-profile-cumulative-dpc-threshold",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileCumulativeDpcThreshold",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "documented-default",
+            "value": 110000,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs attribute a 110000 ms default to `DpcWatchdogProfileCumulativeDpcThreshold`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407"
+            ]
+          },
+          {
+            "state_kind": "live-current-build-global",
+            "value": 0,
+            "label": "Live current-build kernel state",
+            "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogProfileCumulativeDpcThresholdMs = 0` on the running current build.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "dpc-watchdog-profile-offset",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileOffset",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "documented-default",
+            "value": 10000,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs attribute a 10000 ms default to `DpcWatchdogProfileOffset`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407"
+            ]
+          },
+          {
+            "state_kind": "live-current-build-global",
+            "value": 10000,
+            "label": "Live current-build kernel state",
+            "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogProfileOffsetMs = 10000` on the running current build.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "dpc-watchdog-profile-single-dpc-threshold",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileSingleDpcThreshold",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "documented-default",
+            "value": 18333,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs attribute a 18333 ms default to `DpcWatchdogProfileSingleDpcThreshold`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407"
+            ]
+          },
+          {
+            "state_kind": "live-current-build-global",
+            "value": 0,
+            "label": "Live current-build kernel state",
+            "meaning": "Dedicated KVM local-KD read `KeDpcWatchdogProfileSingleDpcThresholdMs = 0` on the running current build.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The app does not currently expose this watchdog profile cluster as tweak surfaces.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Current-build live kernel state",
+      "applies_to": "KVM local-KD follow-up on Windows 11 25H2 current build",
+      "states": [
+        {
+          "target_id": "dpc-watchdog-profile-buffer-size-bytes",
+          "state_kind": "live-current-build-global",
+          "value": 0
+        },
+        {
+          "target_id": "dpc-watchdog-profile-cumulative-dpc-threshold",
+          "state_kind": "live-current-build-global",
+          "value": 0
+        },
+        {
+          "target_id": "dpc-watchdog-profile-offset",
+          "state_kind": "live-current-build-global",
+          "value": 10000
+        },
+        {
+          "target_id": "dpc-watchdog-profile-single-dpc-threshold",
+          "state_kind": "live-current-build-global",
+          "value": 0
+        }
+      ],
+      "notes": "Current-build live kernel globals, not a registry export. This state conflicts with most repo-doc defaults for the family.",
+      "evidence_ids": [
+        "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "live-current-build-contradiction-cluster",
+      "label": "Live current-build contradiction cluster",
+      "intended_for": [
+        "Research tracking",
+        "Future DPC watchdog initializer analysis"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click tweak surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "dpc-watchdog-profile-buffer-size-bytes",
+          "state_kind": "live-current-build-global",
+          "value": 0
+        },
+        {
+          "target_id": "dpc-watchdog-profile-cumulative-dpc-threshold",
+          "state_kind": "live-current-build-global",
+          "value": 0
+        },
+        {
+          "target_id": "dpc-watchdog-profile-offset",
+          "state_kind": "live-current-build-global",
+          "value": 10000
+        },
+        {
+          "target_id": "dpc-watchdog-profile-single-dpc-threshold",
+          "state_kind": "live-current-build-global",
+          "value": 0
+        }
+      ],
+      "good_when": "You want to preserve the current-build contradiction and reader-gate semantics as the primary fact while looking for the initializer or registry reader path.",
+      "bad_when": "You need safe override guidance or validated non-default semantics.",
+      "tradeoffs": [
+        "Preserves the strongest current-build proof available for the family.",
+        "Avoids claiming that repo-doc defaults are unconditional live defaults.",
+        "Keeps the family in a structural RE queue instead of promoting speculative tweak values."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407",
+        "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407",
+        "vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-session-manager-kernel-dpc-watchdog-profile-docs-20260407",
+      "kind": "repo-doc",
+      "title": "Repo system docs list explicit DpcWatchdogProfile defaults",
+      "location": "Docs/system/system.md",
+      "summary": "Repo docs list `DpcWatchdogProfileBufferSizeBytes = 266240`, `DpcWatchdogProfileCumulativeDpcThreshold = 110000`, `DpcWatchdogProfileOffset = 10000`, and `DpcWatchdogProfileSingleDpcThreshold = 18333` under `Session Manager\\\\Kernel`.",
+      "supports": [
+        "path",
+        "value",
+        "default"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-profile-kd-20260407",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD bundle reads live DPC watchdog profile globals",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt",
+      "summary": "A dedicated live KVM local-KD bundle resolved the current-build `KeDpcWatchdogProfile*` symbol cluster and directly read `OffsetMs = 10000`, `SingleDpcThresholdMs = 0`, `CumulativeDpcThresholdMs = 0`, `BufferSizeBytes = 0`, plus control `KeDpcWatchdogPeriodMs = 0`.",
+      "supports": [
+        "behavior",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-config-reader-kd-20260407",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD disassembly shows DPC watchdog reader and validator path",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/dpc-watchdog-config-readers-kd-20260407a.stdout.txt",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KeQueryDpcWatchdogConfiguration` directly reads the profile and control watchdog globals and only sets output bits / copies values when the globals are non-zero, while `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates range constraints.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-apply-limits-kd-20260407",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD disassembly excludes KiApplyProcessorDpcLimits as seeding caller",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-apply-limits-kd-20260407b/dpc-watchdog-apply-limits-kd-20260407b.stdout.txt",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KiApplyProcessorDpcLimits` forwards an input configuration block to `KiSetProcessorDpcLimits` and does not directly read the watchdog profile globals.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-set-limits-kd-20260407",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD disassembly excludes KiSetProcessorDpcLimits as seeding caller",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-set-limits-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-set-limits-kd-20260407a/dpc-watchdog-set-limits-kd-20260407a.stdout.txt",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KiSetProcessorDpcLimits` copies a prepared watchdog configuration block into per-processor state but does not directly read the watchdog profile globals.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-update-config-kd-20260407",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD disassembly shows explicit DPC watchdog writer path",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/dpc-watchdog-update-config-kd-20260407a.stdout.txt",
+      "summary": "A dedicated current-build KD disassembly pass showed that `KeUpdateDpcWatchdogConfiguration` validates caller input, writes the DPC watchdog globals under lock, applies the profile-buffer fallback, and then calls `KiCreateDpcLimitsProcessorConfiguration` to build the per-processor limits block.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-ghidra-caller-20260407",
+      "kind": "vm-test",
+      "title": "PDB-backed KVM Ghidra caller pass ties DPC watchdog writer to runtime API and init consumer",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/evidence.json and evidence/files/vm-tooling-staging/dpc-watchdog-update-config-ghidra-20260407a/ghidra-matches.md",
+      "summary": "A PDB-backed current-build Ghidra symbol-xref pass showed that `NtSetSystemInformation` references `KeUpdateDpcWatchdogConfiguration`, while both `KeUpdateDpcWatchdogConfiguration` and `KiInitializeProcessor` reference `KiCreateDpcLimitsProcessorConfiguration`.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-dpc-system-information-lineage-20260408",
+      "kind": "repo-doc",
+      "title": "Adjacent DPC scheduler records already prove NtSetSystemInformation setter/query lineage",
+      "location": "research/records/system.kernel-adjust-dpc-threshold.review.json and research/records/system.kernel-dpc-queue-depth.review.json",
+      "summary": "Existing deprecated DPC scheduler records already cite decompilation-backed proof that `NtSetSystemInformation` populates adjacent DPC globals like `KiAdjustDpcThreshold` and `KiMaximumDpcQueueDepth`, while the query path exports them back out. This narrows the watchdog writer interpretation to the same runtime system-information family.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-ntsetsysinfo-kd-20260408",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD confirms exact NtSetSystemInformation callsite, admin gate, and inferred numeric arm",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log",
+      "summary": "A dedicated live KVM local-KD pass confirmed the direct edge `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, showed that the branch is guarded by `SeAliasAdminsSid` membership via `RtlCheckTokenMembership`, and exposed the surrounding dispatch arithmetic that implies numeric arm `0xE4` for the watchdog writer path.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-init-ghidra-20260408",
+      "kind": "vm-test",
+      "title": "PDB-backed KVM Ghidra shows DPC watchdog init and legacy profile derivation semantics",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/evidence.json and evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md",
+      "summary": "A PDB-backed current-build Ghidra xref pass showed that `KiInitDpcThresholds` and `KiInitializeLegacyWatchdogProfileThresholds` normalize or derive profile values only under specific non-zero / sentinel prerequisites, which explains why the current build can keep most profile globals at `0` even while `KeDpcWatchdogProfileOffsetMs` stays at `10000`.",
+      "supports": [
+        "behavior",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-dpc-watchdog-query-lineage-kd-20260408",
+      "kind": "vm-test",
+      "title": "Dedicated KVM local-KD confirms exact NtQuerySystemInformation wrapper into ExpQuerySystemInformation",
+      "location": "evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log",
+      "summary": "A dedicated live KVM local-KD pass confirmed `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` on the running build and captured a larger `ExpQuerySystemInformation` dispatch slice, but that slice did not yet isolate a symbolized `KeQueryDpcWatchdogConfiguration` callsite.",
+      "supports": [
+        "behavior",
+        "runtime-gate",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, a concrete current-build reader/validator/writer path, a live-KD confirmed privileged `NtSetSystemInformation` writer callsite, and a live-KD confirmed outer query wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`. It is not ready for validation because the current build conflicts with the repo-doc defaults for most values, the exact inner query arm still has not been isolated, and no current-build persisted registry seeding caller has yet been shown to feed values into the explicit writer path.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "live-defaults-conflict-docs",
+      "no-current-build-registry-seeding-path",
+      "runtime_no_read",
+      "no-doc-source-outside-repo",
+      "conditional-initialization-unproven"
+    ]
+  },
+  "open_questions": [
+    "What current-build persisted registry caller feeds `Session Manager\\\\Kernel` DPC watchdog profile values into `KeUpdateDpcWatchdogConfiguration`, if any?",
+    "Which exact `ExpQuerySystemInformation` arm reaches `KeQueryDpcWatchdogConfiguration` on this build?",
+    "Does inferred numeric system-information arm `0xE4` have a stable public/current-build class name on this build?",
+    "Why does `KeDpcWatchdogProfileOffsetMs` match the repo-doc default while the other profile globals remain zero?",
+    "Does any boot/init path invoke `KeUpdateDpcWatchdogConfiguration` with persisted settings, or is `NtSetSystemInformation` the only currently-proven caller surface?",
+    "Are the repo-doc non-zero values describing a legacy sentinel/backfill path rather than unconditional live defaults for this build?"
+  ],
+  "tested_on": [
+    {
+      "environment": "KVM local-KD follow-up",
+      "os": "Windows 11 25H2",
+      "build": "26200",
+      "notes": "Dedicated current-build KD proof read the live DPC watchdog profile globals, disassembled `KeQueryDpcWatchdogConfiguration` plus `KiValidateDpcWatchdogConfiguration`, showed that `KeUpdateDpcWatchdogConfiguration` is the explicit writer while `KiCreateDpcLimitsProcessorConfiguration` builds the downstream processor configuration block, later PDB-backed Ghidra tied the writer path to `NtSetSystemInformation` plus `KiInitializeProcessor`, a class-focused live KD pass narrowed the numeric arm to inferred `0xE4`, a dedicated live query-side KD pass confirmed the exact outer wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`, and a later Ghidra init-semantics pass explained how current-build initialization can preserve the mixed `10000/0/0/0` profile state."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-08T03:10:00Z"
+}

@@ -1,0 +1,184 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+  "tweak_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+  "record_status": "draft",
+  "summary": "Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. This is a stronger current-build lead than the bugcheck-enabled sibling, but the exact registry seeding path and non-default override semantics are still unproven.",
+  "setting": {
+    "name": "Win32k Callout Watchdog Timeout Seconds",
+    "category": "Power",
+    "area": "Control Power Watchdog Sibling",
+    "scope": "device",
+    "casual_explanation": "This appears to be a low-level power-manager watchdog timeout for Win32k callouts. On the observed clean baseline the registry value is not configured, but the running kernel still keeps an in-memory default.",
+    "why_people_change_it": "Kernel and power researchers may inspect this value when tracing Win32k callout watchdog behavior and watchdog packet timing in the power manager.",
+    "tradeoffs_overview": "The value is kernel-adjacent, not user-facing, and only partially understood. Current-build usage is real and direct, but the exact registry seeding path and safe non-default semantics are still missing.",
+    "professional_notes": "The repo docs-first power routing pass already listed `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\\\\Win32kCalloutWatchdogTimeoutSeconds` as a new candidate. A later existence-first pass on the observed clean baseline confirmed that the `Control\\\\Power` path exists while the value itself is absent. A later targeted current-build string batch found an exact Unicode hit for `Win32kCalloutWatchdogTimeoutSeconds` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD follow-up then resolved the live current-build watchdog-family cluster around `PopInvokeWin32CalloutWithWatchdog` and directly read `PopWin32kCalloutWatchdogTimeoutSeconds = 0x1e` (`30`). The same pass disassembled `PopInvokeWin32CalloutWithWatchdog` and showed a direct `imul` against the global by `1000`, followed by the watchdog packet path through `ZwPowerInformation` and the surrounding Win32 callout path. That is materially stronger than a string-only or sibling-only clue: the running kernel is actively consuming the global even though the registry value is missing on the observed baseline. The main open question is whether the registry value is an optional override on top of a built-in 30-second default, or whether a boot-only helper still seeds the same global from `Control\\\\Power` when present.",
+    "targets": [
+      {
+        "target_id": "win32k-callout-watchdog-timeout-seconds",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Not configured on observed baseline",
+            "meaning": "The parent `Control\\Power` path exists, but the value is absent on the observed clean baseline.",
+            "evidence_ids": [
+              "vm-power-control-win32k-callout-existence-20260329"
+            ]
+          }
+        ],
+        "notes": "The running kernel currently keeps a live default-like value of `30` seconds even when the registry value is missing."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The app does not currently expose this watchdog timeout sibling as a tweak or supported UI surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed baseline registry state",
+      "applies_to": "Win25H2Clean and later KVM follow-up packaging",
+      "states": [
+        {
+          "target_id": "win32k-callout-watchdog-timeout-seconds",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The parent `Control\\Power` path exists, but the registry value is absent on the observed clean baseline."
+        }
+      ],
+      "notes": "This is a baseline registry observation, not a Microsoft default contract. The running kernel still kept the corresponding global at 30 seconds on the same build.",
+      "evidence_ids": [
+        "vm-power-control-win32k-callout-existence-20260329",
+        "vm-watchdog-win32k-callout-timeout-kd-20260407"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-default-missing",
+      "label": "Observed default-missing state",
+      "intended_for": [
+        "Research tracking",
+        "Future watchdog override validation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click tweak surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "win32k-callout-watchdog-timeout-seconds",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the candidate in its observed baseline state until registry seeding and non-default override semantics are proven."
+        }
+      ],
+      "good_when": "You want to preserve the known baseline while validating whether the registry value overrides the built-in 30-second kernel default.",
+      "bad_when": "You need a validated non-default timeout recommendation.",
+      "tradeoffs": [
+        "Preserves the observed baseline registry state.",
+        "Avoids inventing unsupported non-default semantics.",
+        "Keeps the next proof step focused on override semantics rather than on whether the current-build caller path is real."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-power-key-routing-20260327",
+        "vm-power-control-win32k-callout-existence-20260329",
+        "static-power-win32k-callout-string-20260331",
+        "vm-watchdog-win32k-callout-timeout-kd-20260407"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-power-key-routing-20260327",
+      "kind": "repo-doc",
+      "title": "Docs-first power routing lists Win32kCalloutWatchdogTimeoutSeconds",
+      "location": "research/notes/kernel-power-96-key-routing-20260327.md",
+      "summary": "The docs-first power routing pass listed `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\\\\Win32kCalloutWatchdogTimeoutSeconds` as a new candidate under the Control Power cluster.",
+      "supports": [
+        "path",
+        "value"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power-control-win32k-callout-existence-20260329",
+      "kind": "registry-observation",
+      "title": "Existence-first baseline for Win32kCalloutWatchdogTimeoutSeconds",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` exists while `Win32kCalloutWatchdogTimeoutSeconds` itself is absent.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-power-win32k-callout-string-20260331",
+      "kind": "inference",
+      "title": "Current-build string hit for Win32kCalloutWatchdogTimeoutSeconds",
+      "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+      "summary": "The targeted current-build string batch found an exact Unicode hit for `Win32kCalloutWatchdogTimeoutSeconds` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-watchdog-win32k-callout-timeout-kd-20260407",
+      "kind": "vm-test",
+      "title": "KVM local-KD confirms live Win32k callout watchdog timeout global",
+      "location": "research/notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-local-kd-follow-up-20260407.md and evidence/files/vm-tooling-staging/watchdog-win32k-callout-timeout-kd-20260407a/host-review.json",
+      "summary": "A live KVM local-KD pass read `PopWin32kCalloutWatchdogTimeoutSeconds = 30` and disassembled `PopInvokeWin32CalloutWithWatchdog`, which directly multiplies the global by `1000` before issuing the watchdog packet through `ZwPowerInformation` and then returning to `PsInvokeWin32Callout`.",
+      "supports": [
+        "behavior",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The candidate is strong enough for a schema-backed draft because the path/value clue, current-build string hit, and direct current-build caller consumption are all real. It is not ready for a validated record because the exact registry seeding path, non-default override semantics, and safe rollback behavior for a present value are still unproven.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "no-current-build-registry-seeding-path",
+      "runtime_no_read",
+      "no-doc-source",
+      "non-default-semantics-unproven"
+    ]
+  },
+  "open_questions": [
+    "Does a present `REG_DWORD` override the built-in 30-second current-build default for the global?",
+    "Which power-manager helper seeds `PopWin32kCalloutWatchdogTimeoutSeconds` when the registry value is present, if any?",
+    "Does changing the value alter only the `ZwPowerInformation` watchdog packet timeout, or are there additional sibling code paths that consume the same global?"
+  ],
+  "tested_on": [
+    {
+      "environment": "Win25H2Clean baseline and Linux KVM follow-up packaging",
+      "os": "Windows 11 25H2",
+      "build": "26200",
+      "notes": "Baseline registry state came from the clean baseline existence pass; current-build caller proof came from a later live KVM local-KD follow-up."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-07T18:52:30Z"
+}

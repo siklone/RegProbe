@@ -1,0 +1,14 @@
+{
+  "generated_utc": "2026-04-07T11:45:30Z",
+  "output_name": "u7",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+  "value_name": "UuidSequenceNumber",
+  "trigger_kind": "uuid-api-burst",
+  "summary_source": "probe-stage-fallback",
+  "probe_stage": "exception",
+  "probe_stage_status": "error",
+  "error_kind": "probe-stage-error",
+  "error": "System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 60 second(s).",
+  "csv_exists": false,
+  "hits_csv_exists": false
+}

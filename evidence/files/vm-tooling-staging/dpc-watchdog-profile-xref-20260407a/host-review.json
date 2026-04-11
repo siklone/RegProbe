@@ -1,0 +1,25 @@
+{
+  "run_id": "dpc-watchdog-profile-xref-20260407a",
+  "status": "ok",
+  "ghidra_exit_code": 0,
+  "symbol_scope": [
+    "KeDpcWatchdogProfileOffsetMs",
+    "KeDpcWatchdogProfileSingleDpcThresholdMs",
+    "KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+    "KeDpcWatchdogProfileBufferSizeBytes",
+    "KeDpcWatchdogPeriodMs"
+  ],
+  "key_functions": [
+    "KiInitDpcThresholds",
+    "KiInitializeLegacyWatchdogProfileThresholds",
+    "KeInitSystem",
+    "KiCreateDpcLimitsProcessorConfiguration",
+    "KeQueryDpcWatchdogConfiguration",
+    "KeUpdateDpcWatchdogConfiguration"
+  ],
+  "interpretation": [
+    "KiInitDpcThresholds structurally normalizes the DPC watchdog control/profile cluster but preserves zero-valued control globals.",
+    "KiInitializeLegacyWatchdogProfileThresholds derives profile thresholds only when legacy sentinel values 0xffffffff are present and prerequisite control globals are non-zero.",
+    "This is current-build boot/init semantics evidence, not persisted registry seeding proof."
+  ]
+}

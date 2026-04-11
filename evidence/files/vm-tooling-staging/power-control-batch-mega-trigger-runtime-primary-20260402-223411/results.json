@@ -1,0 +1,141 @@
+﻿{
+    "generated_utc":  "2026-04-02T19:49:04.5801634Z",
+    "family":  "power-control",
+    "pattern":  "mega-trigger",
+    "total_candidates":  5,
+    "csv_exists":  false,
+    "csv_line_count":  0,
+    "path_line_count":  0,
+    "parser_source":  "etl-binary-fallback",
+    "etl_path":  "C:\\Windows\\System32\\RegProbeggerruntimeprimary20260402223411.etl",
+    "etl_path_source":  "system32-trace-name",
+    "etl_ready":  true,
+    "etl_length":  8192,
+    "tracerpt":  {
+                     "success":  false,
+                     "attempt":  0,
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "csv_exists":  false,
+                     "csv_length":  0,
+                     "stdout":  "",
+                     "stderr":  "skipped-for-binary-first-runtime-parser",
+                     "attempts":  [
+
+                                  ]
+                 },
+    "exact_hit_count":  0,
+    "exact_line_only_count":  0,
+    "path_only_count":  0,
+    "no_hit_count":  5,
+    "trigger_log":  [
+                        {
+                            "name":  "cpu_stress",
+                            "start_utc":  "2026-04-02T19:47:26.5307740Z",
+                            "end_utc":  "2026-04-02T19:47:41.4982495Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "power_plan_and_requests",
+                            "start_utc":  "2026-04-02T19:47:41.5453913Z",
+                            "end_utc":  "2026-04-02T19:47:56.2279483Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "multi_thread_burst",
+                            "start_utc":  "2026-04-02T19:47:56.2464963Z",
+                            "end_utc":  "2026-04-02T19:48:28.4415951Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "disk_io_burst",
+                            "start_utc":  "2026-04-02T19:48:28.4611986Z",
+                            "end_utc":  "2026-04-02T19:48:28.7762894Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "process_spawn_burst",
+                            "start_utc":  "2026-04-02T19:48:28.8872212Z",
+                            "end_utc":  "2026-04-02T19:48:29.6776807Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "foreground_background_switch",
+                            "start_utc":  "2026-04-02T19:48:29.6918356Z",
+                            "end_utc":  "2026-04-02T19:48:42.9305031Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "timer_resolution_change",
+                            "start_utc":  "2026-04-02T19:48:42.9420187Z",
+                            "end_utc":  "2026-04-02T19:48:49.0560949Z",
+                            "status":  "completed",
+                            "error":  null
+                        },
+                        {
+                            "name":  "network_activity",
+                            "start_utc":  "2026-04-02T19:48:49.0693205Z",
+                            "end_utc":  "2026-04-02T19:49:00.2045306Z",
+                            "status":  "completed",
+                            "error":  null
+                        }
+                    ],
+    "candidates":  [
+                       {
+                           "candidate_id":  "power.control.allow-audio-to-enable-execution-required-power-requests",
+                           "value_name":  "AllowAudioToEnableExecutionRequiredPowerRequests",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit",
+                           "sample_lines":  [
+
+                                            ]
+                       },
+                       {
+                           "candidate_id":  "power.control.allow-system-required-power-requests",
+                           "value_name":  "AllowSystemRequiredPowerRequests",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit",
+                           "sample_lines":  [
+
+                                            ]
+                       },
+                       {
+                           "candidate_id":  "power.control.always-compute-qos-hints",
+                           "value_name":  "AlwaysComputeQosHints",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit",
+                           "sample_lines":  [
+
+                                            ]
+                       },
+                       {
+                           "candidate_id":  "power.control.coalescing-flush-interval",
+                           "value_name":  "CoalescingFlushInterval",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit",
+                           "sample_lines":  [
+
+                                            ]
+                       },
+                       {
+                           "candidate_id":  "power.control.idle-processors-require-qos-management",
+                           "value_name":  "IdleProcessorsRequireQosManagement",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "no-hit",
+                           "sample_lines":  [
+
+                                            ]
+                       }
+                   ]
+}

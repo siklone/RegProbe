@@ -1,0 +1,193 @@
+{
+  "candidate_id": "power.force-hibernate-disabled.policy",
+  "family": "power-force-hibernate-disabled",
+  "suspected_layer": "kernel",
+  "boot_phase_relevant": true,
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+  "value_name": "Policy",
+  "route_bucket": "docs-first-new-candidate",
+  "route_note": "Policy token is generic; require exact-path existence before stronger routing.",
+  "source_note": "research/notes/kernel-power-96-key-routing-20260327.md",
+  "source_hits": {
+    "reactos": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 3,
+      "hits": [],
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "root-missing"
+    },
+    "wrk": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 3,
+      "hits": [],
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "root-missing"
+    },
+    "systeminformer": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 2,
+      "hits": [],
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer",
+      "kind": "git-source",
+      "surface_group": "source-code",
+      "missing_reason": "root-missing"
+    },
+    "admx": {
+      "found": true,
+      "hit_count": 8,
+      "weight": 2,
+      "hits": [
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 3,
+          "value_name": "Policy",
+          "content": "<policyDefinitions xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" revision=\"1.0\" schemaVersion=\"1.0\" xmlns=\"http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions\">"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 4,
+          "value_name": "Policy",
+          "content": "<policyNamespaces>"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 7,
+          "value_name": "Policy",
+          "content": "</policyNamespaces>"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 15,
+          "value_name": "Policy",
+          "content": "<policy name=\"DisableAccountNotifications\" class=\"User\" displayName=\"$(string.DisableAccountNotifications)\" explainText=\"$(string.DisableAccountNotificationsExplain)\" key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\AccountNotifications\" valueName=\"DisableAccountNotifications\">"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 24,
+          "value_name": "Policy",
+          "content": "</policy>"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 26,
+          "value_name": "Policy",
+          "content": "</policyDefinitions>"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\ActiveXInstallService.admx",
+          "line_number": 3,
+          "value_name": "Policy",
+          "content": "<policyDefinitions xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" revision=\"1.0\" schemaVersion=\"1.0\" xmlns=\"http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions\">"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\ActiveXInstallService.admx",
+          "line_number": 4,
+          "value_name": "Policy",
+          "content": "<policyNamespaces>"
+        }
+      ],
+      "root": "C:\\WINDOWS\\PolicyDefinitions",
+      "kind": "local-source",
+      "surface_group": "policy-templates",
+      "missing_reason": null
+    },
+    "wdk_headers": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 2,
+      "hits": [],
+      "root": "C:\\Program Files (x86)\\Windows Kits\\10\\Include",
+      "kind": "local-source",
+      "surface_group": "headers",
+      "missing_reason": "root-missing"
+    },
+    "geoff_chappell": {
+      "found": false,
+      "hit_count": 0,
+      "weight": 2,
+      "hits": [],
+      "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\geoff-chappell",
+      "kind": "reference-cache",
+      "surface_group": "reference-cache",
+      "missing_reason": "root-missing"
+    }
+  },
+  "support_count": 1,
+  "enrichment_score": 2,
+  "trigger_family": "power-request-simulation",
+  "suggested_trigger_family": "power-request-simulation",
+  "suggested_trigger": [
+    "PowerCreateRequest(SystemRequired)",
+    "PowerSetRequest(DisplayRequired)",
+    "audio playback session"
+  ],
+  "suggested_runtime_priority": "high",
+  "suggested_queue_bucket": "runtime",
+  "supporting_sources": [
+    {
+      "source_id": "admx",
+      "label": "Windows ADMX",
+      "surface_group": "policy-templates",
+      "kind": "local-source",
+      "weight": 2,
+      "hit_count": 8,
+      "hits": [
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 3,
+          "value_name": "Policy",
+          "content": "<policyDefinitions xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" revision=\"1.0\" schemaVersion=\"1.0\" xmlns=\"http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions\">"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 4,
+          "value_name": "Policy",
+          "content": "<policyNamespaces>"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 7,
+          "value_name": "Policy",
+          "content": "</policyNamespaces>"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 15,
+          "value_name": "Policy",
+          "content": "<policy name=\"DisableAccountNotifications\" class=\"User\" displayName=\"$(string.DisableAccountNotifications)\" explainText=\"$(string.DisableAccountNotificationsExplain)\" key=\"SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\AccountNotifications\" valueName=\"DisableAccountNotifications\">"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 24,
+          "value_name": "Policy",
+          "content": "</policy>"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+          "line_number": 26,
+          "value_name": "Policy",
+          "content": "</policyDefinitions>"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\ActiveXInstallService.admx",
+          "line_number": 3,
+          "value_name": "Policy",
+          "content": "<policyDefinitions xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" revision=\"1.0\" schemaVersion=\"1.0\" xmlns=\"http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions\">"
+        },
+        {
+          "file": "C:\\WINDOWS\\PolicyDefinitions\\ActiveXInstallService.admx",
+          "line_number": 4,
+          "value_name": "Policy",
+          "content": "<policyNamespaces>"
+        }
+      ]
+    }
+  ]
+}

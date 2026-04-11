@@ -1,0 +1,15 @@
+{
+  "record_id": "power.control.hibernate-enabled-default",
+  "output_name": "hibernateenableddefault-reboot-kvm-20260407a",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "HibernateEnabledDefault",
+  "before_boot_time_utc": "2026-04-07T10:19:17.5000000Z",
+  "after_boot_time_utc": "2026-04-07T10:30:32.5000000Z",
+  "reboot_observed": true,
+  "before_value": 1,
+  "after_value": 1,
+  "value_preserved": true,
+  "before_powercfg_hibernate_available": false,
+  "after_powercfg_hibernate_available": false,
+  "summary": "A host-driven KVM reboot observation confirmed that HibernateEnabledDefault persisted at 1 across a real guest reboot while powercfg /a stayed hibernation-unsupported before and after boot."
+}

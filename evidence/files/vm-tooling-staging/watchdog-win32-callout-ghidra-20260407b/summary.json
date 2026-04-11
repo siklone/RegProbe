@@ -1,0 +1,36 @@
+﻿{
+    "generated_utc":  "2026-04-07T18:12:17.4062778Z",
+    "binary_path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+    "output_name":  "watchdog-win32-callout-ghidra-20260407b",
+    "project_name":  "Probe_watchdog_win32_callout_ghidra_20260407b",
+    "symbol_root":  "C:\\Tools\\Symbols\\watchdog-win32-callout-ghidra-20260407b",
+    "output_root":  "C:\\RegProbe-Diag\\ghidra\\watchdog-win32-callout-ghidra-20260407b",
+    "symchk_path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+    "symchk_exit_code":  0,
+    "staged_pdb_count":  2,
+    "staged_pdb_sample":  [
+                              "C:\\Tools\\Symbols\\watchdog-win32-callout-ghidra-20260407b\\ntkrnlmp.pdb",
+                              "C:\\Tools\\Symbols\\watchdog-win32-callout-ghidra-20260407b\\ntkrnlmp.pdb\\24DE61DB3A27C5B383DFF181CB51F7E11\\ntkrnlmp.pdb"
+                          ],
+    "ghidra_exit_code":  0,
+    "no_analysis":  false,
+    "match_count":  0,
+    "uploads":  {
+                    "evidence":  {
+                                     "path":  "C:\\RegProbe-Diag\\ghidra\\watchdog-win32-callout-ghidra-20260407b\\evidence.json",
+                                     "uri":  "http://10.0.2.2:8766/watchdog-win32-callout-ghidra-20260407b-evidence.json"
+                                 },
+                    "markdown":  {
+                                     "path":  "C:\\RegProbe-Diag\\ghidra\\watchdog-win32-callout-ghidra-20260407b\\ghidra-matches.md",
+                                     "uri":  "http://10.0.2.2:8766/watchdog-win32-callout-ghidra-20260407b-ghidra-matches.md"
+                                 },
+                    "symchk_log":  {
+                                       "path":  "C:\\RegProbe-Diag\\ghidra\\watchdog-win32-callout-ghidra-20260407b\\symchk.txt",
+                                       "uri":  "http://10.0.2.2:8766/watchdog-win32-callout-ghidra-20260407b-symchk.txt"
+                                   },
+                    "run_log":  {
+                                    "path":  "C:\\RegProbe-Diag\\ghidra\\watchdog-win32-callout-ghidra-20260407b\\ghidra-run.log",
+                                    "uri":  "http://10.0.2.2:8766/watchdog-win32-callout-ghidra-20260407b-ghidra-run.log"
+                                }
+                }
+}

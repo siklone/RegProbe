@@ -1,0 +1,23 @@
+{
+  "generated_utc": "2026-04-07T19:05:00Z",
+  "candidate": "system.kernel.force-bugcheck-for-dpc-watchdog",
+  "guest": "regprobe-win11-25h2-session",
+  "bundle": "dpc-watchdog-force-bugcheck-kd-20260407a",
+  "findings": {
+    "live_state": {
+      "KiForceBugcheckForDpcWatchdog": 0
+    },
+    "symbol_cluster": [
+      "KiValidateDpcWatchdogConfiguration",
+      "KiUpdateProcessorDpcWatchdogConfiguration",
+      "KiDpcWatchdog",
+      "KiDeferredDpcWatchdogViolation",
+      "KiForceBugcheckForDpcWatchdog"
+    ]
+  },
+  "interpretation": {
+    "current_state": "The running current-build kernel exports KiForceBugcheckForDpcWatchdog and its live value is 0, which aligns with the repo-doc default.",
+    "remaining_gap": "A dedicated current-build registry reader or seeding caller for ForceBugcheckForDpcWatchdog is still unproven.",
+    "strength": "This is stronger than docs-plus-string evidence because it proves the live current-build global state directly on KVM."
+  }
+}

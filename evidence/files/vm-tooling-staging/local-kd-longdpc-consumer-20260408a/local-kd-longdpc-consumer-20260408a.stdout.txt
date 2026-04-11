@@ -1,0 +1,541 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.047 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.031 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 21:02:20.736 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 21:02:20.933 2026 (UTC - 7:00)
+System Uptime: 0 days 15:43:44.671
+lkd> .sympath C:\Tools\Symbols\local-kd-longdpc-consumer-20260408a
+Symbol search path is: C:\Tools\Symbols\local-kd-longdpc-consumer-20260408a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-longdpc-consumer-20260408a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-longdpc-consumer-20260408a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> uf nt!KiEnterLongDpcProcessing
+nt!KiEnterLongDpcProcessing:
+fffff806`e7098aa4 4889542410      mov     qword ptr [rsp+10h],rdx
+fffff806`e7098aa9 55              push    rbp
+fffff806`e7098aaa 53              push    rbx
+fffff806`e7098aab 56              push    rsi
+fffff806`e7098aac 57              push    rdi
+fffff806`e7098aad 4154            push    r12
+fffff806`e7098aaf 4155            push    r13
+fffff806`e7098ab1 4156            push    r14
+fffff806`e7098ab3 4157            push    r15
+fffff806`e7098ab5 488bec          mov     rbp,rsp
+fffff806`e7098ab8 4883ec58        sub     rsp,58h
+fffff806`e7098abc 4532e4          xor     r12b,r12b
+fffff806`e7098abf 4c8bea          mov     r13,rdx
+fffff806`e7098ac2 488bf1          mov     rsi,rcx
+fffff806`e7098ac5 483b9138380000  cmp     rdx,qword ptr [rcx+3838h]
+fffff806`e7098acc 0f8408030000    je      nt!KiEnterLongDpcProcessing+0x336 (fffff806`e7098dda)  Branch
+
+nt!KiEnterLongDpcProcessing+0x2e:
+fffff806`e7098ad2 65488b0c2520000000 mov   rcx,qword ptr gs:[20h]
+fffff806`e7098adb 4c8b81b88e0000  mov     r8,qword ptr [rcx+8EB8h]
+fffff806`e7098ae2 4d85c0          test    r8,r8
+fffff806`e7098ae5 0f85f3020000    jne     nt!KiEnterLongDpcProcessing+0x33a (fffff806`e7098dde)  Branch
+
+nt!KiEnterLongDpcProcessing+0x47:
+fffff806`e7098aeb fb              sti
+fffff806`e7098aec 488b7e38        mov     rdi,qword ptr [rsi+38h]
+fffff806`e7098af0 33c9            xor     ecx,ecx
+fffff806`e7098af2 488bde          mov     rbx,rsi
+fffff806`e7098af5 0fb63f          movzx   edi,byte ptr [rdi]
+fffff806`e7098af8 8bc7            mov     eax,edi
+fffff806`e7098afa 488975e0        mov     qword ptr [rbp-20h],rsi
+fffff806`e7098afe c1e807          shr     eax,7
+fffff806`e7098b01 85c0            test    eax,eax
+fffff806`e7098b03 0f45c8          cmovne  ecx,eax
+fffff806`e7098b06 4883e3fe        and     rbx,0FFFFFFFFFFFFFFFEh
+fffff806`e7098b0a 8bc1            mov     eax,ecx
+fffff806`e7098b0c 4533c0          xor     r8d,r8d
+fffff806`e7098b0f 480bd8          or      rbx,rax
+fffff806`e7098b12 33d2            xor     edx,edx
+fffff806`e7098b14 48895dd8        mov     qword ptr [rbp-28h],rbx
+fffff806`e7098b18 85c9            test    ecx,ecx
+fffff806`e7098b1a 0f8475020000    je      nt!KiEnterLongDpcProcessing+0x2f1 (fffff806`e7098d95)  Branch
+
+nt!KiEnterLongDpcProcessing+0x7c:
+fffff806`e7098b20 83f901          cmp     ecx,1
+fffff806`e7098b23 750e            jne     nt!KiEnterLongDpcProcessing+0x8f (fffff806`e7098b33)  Branch
+
+nt!KiEnterLongDpcProcessing+0x81:
+fffff806`e7098b25 488b86588e0000  mov     rax,qword ptr [rsi+8E58h]
+fffff806`e7098b2c 0fb610          movzx   edx,byte ptr [rax]
+fffff806`e7098b2f 4c8d4008        lea     r8,[rax+8]
+
+nt!KiEnterLongDpcProcessing+0x8f:
+fffff806`e7098b33 498bc8          mov     rcx,r8
+fffff806`e7098b36 e845030000      call    nt!KiAcquireMultiplePrcbLocks (fffff806`e7098e80)
+fffff806`e7098b3b 488b4638        mov     rax,qword ptr [rsi+38h]
+fffff806`e7098b3f 403238          xor     dil,byte ptr [rax]
+fffff806`e7098b42 0f88be020000    js      nt!KiEnterLongDpcProcessing+0x362 (fffff806`e7098e06)  Branch
+
+nt!KiEnterLongDpcProcessing+0xa4:
+fffff806`e7098b48 8b86ec000000    mov     eax,dword ptr [rsi+0ECh]
+fffff806`e7098b4e b900080000      mov     ecx,800h
+fffff806`e7098b53 85c1            test    ecx,eax
+fffff806`e7098b55 7508            jne     nt!KiEnterLongDpcProcessing+0xbb (fffff806`e7098b5f)  Branch
+
+nt!KiEnterLongDpcProcessing+0xb3:
+fffff806`e7098b57 0bc1            or      eax,ecx
+fffff806`e7098b59 8986ec000000    mov     dword ptr [rsi+0ECh],eax
+
+nt!KiEnterLongDpcProcessing+0xbb:
+fffff806`e7098b5f 4c3b6e18        cmp     r13,qword ptr [rsi+18h]
+fffff806`e7098b63 741f            je      nt!KiEnterLongDpcProcessing+0xe0 (fffff806`e7098b84)  Branch
+
+nt!KiEnterLongDpcProcessing+0xc1:
+fffff806`e7098b65 488b8638380000  mov     rax,qword ptr [rsi+3838h]
+fffff806`e7098b6c 4885c0          test    rax,rax
+fffff806`e7098b6f 7413            je      nt!KiEnterLongDpcProcessing+0xe0 (fffff806`e7098b84)  Branch
+
+nt!KiEnterLongDpcProcessing+0xcd:
+fffff806`e7098b71 4c3be8          cmp     r13,rax
+fffff806`e7098b74 740e            je      nt!KiEnterLongDpcProcessing+0xe0 (fffff806`e7098b84)  Branch
+
+nt!KiEnterLongDpcProcessing+0xd2:
+fffff806`e7098b76 4180bdc300000010 cmp     byte ptr [r13+0C3h],10h
+fffff806`e7098b7e 0f8d38020000    jge     nt!KiEnterLongDpcProcessing+0x318 (fffff806`e7098dbc)  Branch
+
+nt!KiEnterLongDpcProcessing+0xe0:
+fffff806`e7098b84 32c0            xor     al,al
+
+nt!KiEnterLongDpcProcessing+0xe2:
+fffff806`e7098b86 488b4e10        mov     rcx,qword ptr [rsi+10h]
+fffff806`e7098b8a 440fb6f8        movzx   r15d,al
+fffff806`e7098b8e 488b8638380000  mov     rax,qword ptr [rsi+3838h]
+fffff806`e7098b95 4503ff          add     r15d,r15d
+fffff806`e7098b98 48894df0        mov     qword ptr [rbp-10h],rcx
+fffff806`e7098b9c 418bff          mov     edi,r15d
+fffff806`e7098b9f 4885c0          test    rax,rax
+fffff806`e7098ba2 0f8470010000    je      nt!KiEnterLongDpcProcessing+0x274 (fffff806`e7098d18)  Branch
+
+nt!KiEnterLongDpcProcessing+0x104:
+fffff806`e7098ba8 483bc8          cmp     rcx,rax
+fffff806`e7098bab 0f8467010000    je      nt!KiEnterLongDpcProcessing+0x274 (fffff806`e7098d18)  Branch
+
+nt!KiEnterLongDpcProcessing+0x10d:
+fffff806`e7098bb1 4885c9          test    rcx,rcx
+fffff806`e7098bb4 7407            je      nt!KiEnterLongDpcProcessing+0x119 (fffff806`e7098bbd)  Branch
+
+nt!KiEnterLongDpcProcessing+0x112:
+fffff806`e7098bb6 448aa1c3000000  mov     r12b,byte ptr [rcx+0C3h]
+
+nt!KiEnterLongDpcProcessing+0x119:
+fffff806`e7098bbd 4c8bb6e8370000  mov     r14,qword ptr [rsi+37E8h]
+fffff806`e7098bc4 33d2            xor     edx,edx
+fffff806`e7098bc6 4883656000      and     qword ptr [rbp+60h],0
+fffff806`e7098bcb 498bce          mov     rcx,r14
+fffff806`e7098bce 41b8f0000000    mov     r8d,0F0h
+fffff806`e7098bd4 e8277f4200      call    nt!_memset_spec_plain (fffff806`e74c0b00)
+fffff806`e7098bd9 4533c0          xor     r8d,r8d
+fffff806`e7098bdc 488d55d8        lea     rdx,[rbp-28h]
+fffff806`e7098be0 498bce          mov     rcx,r14
+fffff806`e7098be3 e868c1fbff      call    nt!KiStartRescheduleContext (fffff806`e7054d50)
+fffff806`e7098be8 488b9638380000  mov     rdx,qword ptr [rsi+3838h]
+fffff806`e7098bef 488d4560        lea     rax,[rbp+60h]
+fffff806`e7098bf3 4533c9          xor     r9d,r9d
+fffff806`e7098bf6 4889442420      mov     qword ptr [rsp+20h],rax
+fffff806`e7098bfb 4c8bc6          mov     r8,rsi
+fffff806`e7098bfe 498bce          mov     rcx,r14
+fffff806`e7098c01 e80a030000      call    nt!KiScheduleThreadToRescheduleContext (fffff806`e7098f10)
+fffff806`e7098c06 83e001          and     eax,1
+fffff806`e7098c09 8d0c8500000000  lea     ecx,[rax*4]
+fffff806`e7098c10 410bcf          or      ecx,r15d
+fffff806`e7098c13 894d58          mov     dword ptr [rbp+58h],ecx
+fffff806`e7098c16 85c0            test    eax,eax
+fffff806`e7098c18 0f85ff010000    jne     nt!KiEnterLongDpcProcessing+0x379 (fffff806`e7098e1d)  Branch
+
+nt!KiEnterLongDpcProcessing+0x17a:
+fffff806`e7098c1e bf00000000      mov     edi,0
+fffff806`e7098c23 32d2            xor     dl,dl
+fffff806`e7098c25 f705e5ced20000040000 test dword ptr [nt!PerfGlobalGroupMask+0x14 (fffff806`e7dc5b14)],400h
+fffff806`e7098c2f 8d4702          lea     eax,[rdi+2]
+fffff806`e7098c32 0f45f8          cmovne  edi,eax
+fffff806`e7098c35 4533ff          xor     r15d,r15d
+fffff806`e7098c38 413816          cmp     byte ptr [r14],dl
+fffff806`e7098c3b 763b            jbe     nt!KiEnterLongDpcProcessing+0x1d4 (fffff806`e7098c78)  Branch
+
+nt!KiEnterLongDpcProcessing+0x199:
+fffff806`e7098c3d 448aea          mov     r13b,dl
+
+nt!KiEnterLongDpcProcessing+0x19c:
+fffff806`e7098c40 418bcf          mov     ecx,r15d
+fffff806`e7098c43 4c8d4d60        lea     r9,[rbp+60h]
+fffff806`e7098c47 4883c102        add     rcx,2
+fffff806`e7098c4b 448bc7          mov     r8d,edi
+fffff806`e7098c4e 488bd6          mov     rdx,rsi
+fffff806`e7098c51 4a8d0cb9        lea     rcx,[rcx+r15*4]
+fffff806`e7098c55 498d0cce        lea     rcx,[r14+rcx*8]
+fffff806`e7098c59 e8b2080000      call    nt!KiCommitRescheduleContextEntry (fffff806`e7099510)
+fffff806`e7098c5e 440ae8          or      r13b,al
+fffff806`e7098c61 41ffc7          inc     r15d
+fffff806`e7098c64 410fb606        movzx   eax,byte ptr [r14]
+fffff806`e7098c68 443bf8          cmp     r15d,eax
+fffff806`e7098c6b 72d3            jb      nt!KiEnterLongDpcProcessing+0x19c (fffff806`e7098c40)  Branch
+
+nt!KiEnterLongDpcProcessing+0x1c9:
+fffff806`e7098c6d 44886d48        mov     byte ptr [rbp+48h],r13b
+fffff806`e7098c71 8a5548          mov     dl,byte ptr [rbp+48h]
+fffff806`e7098c74 4c8b6d50        mov     r13,qword ptr [rbp+50h]
+
+nt!KiEnterLongDpcProcessing+0x1d4:
+fffff806`e7098c78 41837e0801      cmp     dword ptr [r14+8],1
+fffff806`e7098c7d 751b            jne     nt!KiEnterLongDpcProcessing+0x1f6 (fffff806`e7098c9a)  Branch
+
+nt!KiEnterLongDpcProcessing+0x1db:
+fffff806`e7098c7f 498b4610        mov     rax,qword ptr [r14+10h]
+fffff806`e7098c83 488b88588e0000  mov     rcx,qword ptr [rax+8E58h]
+fffff806`e7098c8a 8a4101          mov     al,byte ptr [rcx+1]
+fffff806`e7098c8d fec0            inc     al
+fffff806`e7098c8f 884101          mov     byte ptr [rcx+1],al
+fffff806`e7098c92 3a01            cmp     al,byte ptr [rcx]
+fffff806`e7098c94 7204            jb      nt!KiEnterLongDpcProcessing+0x1f6 (fffff806`e7098c9a)  Branch
+
+nt!KiEnterLongDpcProcessing+0x1f2:
+fffff806`e7098c96 c6410100        mov     byte ptr [rcx+1],0
+
+nt!KiEnterLongDpcProcessing+0x1f6:
+fffff806`e7098c9a 0fb6fa          movzx   edi,dl
+fffff806`e7098c9d 488bcb          mov     rcx,rbx
+fffff806`e7098ca0 83e701          and     edi,1
+fffff806`e7098ca3 4883e1fe        and     rcx,0FFFFFFFFFFFFFFFEh
+fffff806`e7098ca7 c1e703          shl     edi,3
+fffff806`e7098caa 4533c0          xor     r8d,r8d
+fffff806`e7098cad 0b7d58          or      edi,dword ptr [rbp+58h]
+fffff806`e7098cb0 33d2            xor     edx,edx
+fffff806`e7098cb2 83cf01          or      edi,1
+fffff806`e7098cb5 48894d50        mov     qword ptr [rbp+50h],rcx
+fffff806`e7098cb9 83e301          and     ebx,1
+fffff806`e7098cbc 0f84ec000000    je      nt!KiEnterLongDpcProcessing+0x30a (fffff806`e7098dae)  Branch
+
+nt!KiEnterLongDpcProcessing+0x21e:
+fffff806`e7098cc2 83fb01          cmp     ebx,1
+fffff806`e7098cc5 7515            jne     nt!KiEnterLongDpcProcessing+0x238 (fffff806`e7098cdc)  Branch
+
+nt!KiEnterLongDpcProcessing+0x223:
+fffff806`e7098cc7 488b81588e0000  mov     rax,qword ptr [rcx+8E58h]
+fffff806`e7098cce 4c8b81588e0000  mov     r8,qword ptr [rcx+8E58h]
+fffff806`e7098cd5 4983c008        add     r8,8
+fffff806`e7098cd9 0fb610          movzx   edx,byte ptr [rax]
+
+nt!KiEnterLongDpcProcessing+0x238:
+fffff806`e7098cdc 85d2            test    edx,edx
+fffff806`e7098cde 7413            je      nt!KiEnterLongDpcProcessing+0x24f (fffff806`e7098cf3)  Branch
+
+nt!KiEnterLongDpcProcessing+0x23c:
+fffff806`e7098ce0 8d42ff          lea     eax,[rdx-1]
+fffff806`e7098ce3 498b0cc0        mov     rcx,qword ptr [r8+rax*8]
+fffff806`e7098ce7 8bd0            mov     edx,eax
+fffff806`e7098ce9 f04883613000    lock and qword ptr [rcx+30h],0
+fffff806`e7098cef 85c0            test    eax,eax
+fffff806`e7098cf1 75ed            jne     nt!KiEnterLongDpcProcessing+0x23c (fffff806`e7098ce0)  Branch
+
+nt!KiEnterLongDpcProcessing+0x24f:
+fffff806`e7098cf3 33db            xor     ebx,ebx
+fffff806`e7098cf5 48895dd8        mov     qword ptr [rbp-28h],rbx
+fffff806`e7098cf9 83ff08          cmp     edi,8
+fffff806`e7098cfc 0f832c010000    jae     nt!KiEnterLongDpcProcessing+0x38a (fffff806`e7098e2e)  Branch
+
+nt!KiEnterLongDpcProcessing+0x25e:
+fffff806`e7098d02 48395d60        cmp     qword ptr [rbp+60h],rbx
+fffff806`e7098d06 0f8485000000    je      nt!KiEnterLongDpcProcessing+0x2ed (fffff806`e7098d91)  Branch
+
+nt!KiEnterLongDpcProcessing+0x268:
+fffff806`e7098d0c 488d5560        lea     rdx,[rbp+60h]
+fffff806`e7098d10 488bce          mov     rcx,rsi
+fffff806`e7098d13 e808060000      call    nt!KiReadyDeferredReadyList (fffff806`e7099320)
+
+nt!KiEnterLongDpcProcessing+0x274:
+fffff806`e7098d18 8bf7            mov     esi,edi
+fffff806`e7098d1a 4885db          test    rbx,rbx
+fffff806`e7098d1d 7472            je      nt!KiEnterLongDpcProcessing+0x2ed (fffff806`e7098d91)  Branch
+
+nt!KiEnterLongDpcProcessing+0x27b:
+fffff806`e7098d1f 488bcb          mov     rcx,rbx
+fffff806`e7098d22 4533c0          xor     r8d,r8d
+fffff806`e7098d25 4883e1fe        and     rcx,0FFFFFFFFFFFFFFFEh
+fffff806`e7098d29 33d2            xor     edx,edx
+fffff806`e7098d2b 48894de8        mov     qword ptr [rbp-18h],rcx
+fffff806`e7098d2f 83e301          and     ebx,1
+fffff806`e7098d32 746f            je      nt!KiEnterLongDpcProcessing+0x2ff (fffff806`e7098da3)  Branch
+
+nt!KiEnterLongDpcProcessing+0x290:
+fffff806`e7098d34 83fb01          cmp     ebx,1
+fffff806`e7098d37 7515            jne     nt!KiEnterLongDpcProcessing+0x2aa (fffff806`e7098d4e)  Branch
+
+nt!KiEnterLongDpcProcessing+0x295:
+fffff806`e7098d39 488b81588e0000  mov     rax,qword ptr [rcx+8E58h]
+fffff806`e7098d40 4c8b81588e0000  mov     r8,qword ptr [rcx+8E58h]
+fffff806`e7098d47 4983c008        add     r8,8
+fffff806`e7098d4b 0fb610          movzx   edx,byte ptr [rax]
+
+nt!KiEnterLongDpcProcessing+0x2aa:
+fffff806`e7098d4e 85d2            test    edx,edx
+fffff806`e7098d50 7413            je      nt!KiEnterLongDpcProcessing+0x2c1 (fffff806`e7098d65)  Branch
+
+nt!KiEnterLongDpcProcessing+0x2ae:
+fffff806`e7098d52 8d42ff          lea     eax,[rdx-1]
+fffff806`e7098d55 498b0cc0        mov     rcx,qword ptr [r8+rax*8]
+fffff806`e7098d59 8bd0            mov     edx,eax
+fffff806`e7098d5b f04883613000    lock and qword ptr [rcx+30h],0
+fffff806`e7098d61 85c0            test    eax,eax
+fffff806`e7098d63 75ed            jne     nt!KiEnterLongDpcProcessing+0x2ae (fffff806`e7098d52)  Branch
+
+nt!KiEnterLongDpcProcessing+0x2c1:
+fffff806`e7098d65 fa              cli
+fffff806`e7098d66 f70594cdd20000000400 test dword ptr [nt!PerfGlobalGroupMask+0x4 (fffff806`e7dc5b04)],40000h
+fffff806`e7098d70 0f85c9000000    jne     nt!KiEnterLongDpcProcessing+0x39b (fffff806`e7098e3f)  Branch
+
+nt!KiEnterLongDpcProcessing+0x2d2:
+fffff806`e7098d76 d1ee            shr     esi,1
+fffff806`e7098d78 4080e601        and     sil,1
+fffff806`e7098d7c 408ac6          mov     al,sil
+
+nt!KiEnterLongDpcProcessing+0x2db:
+fffff806`e7098d7f 4883c458        add     rsp,58h
+fffff806`e7098d83 415f            pop     r15
+fffff806`e7098d85 415e            pop     r14
+fffff806`e7098d87 415d            pop     r13
+fffff806`e7098d89 415c            pop     r12
+fffff806`e7098d8b 5f              pop     rdi
+fffff806`e7098d8c 5e              pop     rsi
+fffff806`e7098d8d 5b              pop     rbx
+fffff806`e7098d8e 5d              pop     rbp
+fffff806`e7098d8f c3              ret
+
+nt!KiEnterLongDpcProcessing+0x2ed:
+fffff806`e7098d91 8bf7            mov     esi,edi
+fffff806`e7098d93 ebd0            jmp     nt!KiEnterLongDpcProcessing+0x2c1 (fffff806`e7098d65)  Branch
+
+nt!KiEnterLongDpcProcessing+0x2f1:
+fffff806`e7098d95 4c8d45e0        lea     r8,[rbp-20h]
+fffff806`e7098d99 ba01000000      mov     edx,1
+fffff806`e7098d9e e990fdffff      jmp     nt!KiEnterLongDpcProcessing+0x8f (fffff806`e7098b33)  Branch
+
+nt!KiEnterLongDpcProcessing+0x2ff:
+fffff806`e7098da3 4c8d45e8        lea     r8,[rbp-18h]
+fffff806`e7098da7 ba01000000      mov     edx,1
+fffff806`e7098dac eba4            jmp     nt!KiEnterLongDpcProcessing+0x2ae (fffff806`e7098d52)  Branch
+
+nt!KiEnterLongDpcProcessing+0x30a:
+fffff806`e7098dae 4c8d4550        lea     r8,[rbp+50h]
+fffff806`e7098db2 ba01000000      mov     edx,1
+fffff806`e7098db7 e924ffffff      jmp     nt!KiEnterLongDpcProcessing+0x23c (fffff806`e7098ce0)  Branch
+
+nt!KiEnterLongDpcProcessing+0x318:
+fffff806`e7098dbc 498b9540020000  mov     rdx,qword ptr [r13+240h]
+fffff806`e7098dc3 488bce          mov     rcx,rsi
+fffff806`e7098dc6 e885efffff      call    nt!KiAffinityContainsProcessorsOtherThanSelf (fffff806`e7097d50)
+fffff806`e7098dcb 85c0            test    eax,eax
+fffff806`e7098dcd 0f84b1fdffff    je      nt!KiEnterLongDpcProcessing+0xe0 (fffff806`e7098b84)  Branch
+
+nt!KiEnterLongDpcProcessing+0x32f:
+fffff806`e7098dd3 b001            mov     al,1
+fffff806`e7098dd5 e9acfdffff      jmp     nt!KiEnterLongDpcProcessing+0xe2 (fffff806`e7098b86)  Branch
+
+nt!KiEnterLongDpcProcessing+0x336:
+fffff806`e7098dda 32c0            xor     al,al
+fffff806`e7098ddc eba1            jmp     nt!KiEnterLongDpcProcessing+0x2db (fffff806`e7098d7f)  Branch
+
+nt!KiEnterLongDpcProcessing+0x33a:
+fffff806`e7098dde 410f0d08        prefetchw [r8]
+fffff806`e7098de2 418b00          mov     eax,dword ptr [r8]
+
+nt!KiEnterLongDpcProcessing+0x341:
+fffff806`e7098de5 8bd0            mov     edx,eax
+fffff806`e7098de7 0fbaf215        btr     edx,15h
+fffff806`e7098deb f0410fb110      lock cmpxchg dword ptr [r8],edx
+fffff806`e7098df0 75f3            jne     nt!KiEnterLongDpcProcessing+0x341 (fffff806`e7098de5)  Branch
+
+nt!KiEnterLongDpcProcessing+0x34e:
+fffff806`e7098df2 0fbae015        bt      eax,15h
+fffff806`e7098df6 0f83effcffff    jae     nt!KiEnterLongDpcProcessing+0x47 (fffff806`e7098aeb)  Branch
+
+nt!KiEnterLongDpcProcessing+0x358:
+fffff806`e7098dfc e80756fcff      call    nt!KiRemoveSystemWorkPriorityKick (fffff806`e705e408)
+fffff806`e7098e01 e9e5fcffff      jmp     nt!KiEnterLongDpcProcessing+0x47 (fffff806`e7098aeb)  Branch
+
+nt!KiEnterLongDpcProcessing+0x362:
+fffff806`e7098e06 4c8d45d8        lea     r8,[rbp-28h]
+fffff806`e7098e0a 33d2            xor     edx,edx
+fffff806`e7098e0c 488bce          mov     rcx,rsi
+fffff806`e7098e0f e894392300      call    nt!KiAcquirePrcbLocksForPreemptionAttemptSlowPath (fffff806`e72cc7a8)
+fffff806`e7098e14 488b5dd8        mov     rbx,qword ptr [rbp-28h]
+fffff806`e7098e18 e92bfdffff      jmp     nt!KiEnterLongDpcProcessing+0xa4 (fffff806`e7098b48)  Branch
+
+nt!KiEnterLongDpcProcessing+0x379:
+fffff806`e7098e1d 488d5560        lea     rdx,[rbp+60h]
+fffff806`e7098e21 498bce          mov     rcx,r14
+fffff806`e7098e24 e897f8ffff      call    nt!KiSearchForNewThreadsForRescheduleContext (fffff806`e70986c0)
+fffff806`e7098e29 e9f0fdffff      jmp     nt!KiEnterLongDpcProcessing+0x17a (fffff806`e7098c1e)  Branch
+
+nt!KiEnterLongDpcProcessing+0x38a:
+fffff806`e7098e2e 4533ff          xor     r15d,r15d
+fffff806`e7098e31 41381e          cmp     byte ptr [r14],bl
+fffff806`e7098e34 0f87d2b04300    ja      nt!KiEnterLongDpcProcessing+0x43b468 (fffff806`e74d3f0c)  Branch
+
+nt!KiEnterLongDpcProcessing+0x396:
+fffff806`e7098e3a e9f6b04300      jmp     nt!KiEnterLongDpcProcessing+0x43b491 (fffff806`e74d3f35)  Branch
+
+nt!KiEnterLongDpcProcessing+0x39b:
+fffff806`e7098e3f 40f6c703        test    dil,3
+fffff806`e7098e43 0f842dffffff    je      nt!KiEnterLongDpcProcessing+0x2d2 (fffff806`e7098d76)  Branch
+
+nt!KiEnterLongDpcProcessing+0x3a5:
+fffff806`e7098e49 458a85c3000000  mov     r8b,byte ptr [r13+0C3h]
+fffff806`e7098e50 8bce            mov     ecx,esi
+fffff806`e7098e52 488b55f0        mov     rdx,qword ptr [rbp-10h]
+fffff806`e7098e56 4080e701        and     dil,1
+fffff806`e7098e5a d1e9            shr     ecx,1
+fffff806`e7098e5c 458acc          mov     r9b,r12b
+fffff806`e7098e5f 80e101          and     cl,1
+fffff806`e7098e62 884c2428        mov     byte ptr [rsp+28h],cl
+fffff806`e7098e66 498bcd          mov     rcx,r13
+fffff806`e7098e69 40887c2420      mov     byte ptr [rsp+20h],dil
+fffff806`e7098e6e e8394d3b00      call    nt!EtwTraceLongDpcMitigationEvent (fffff806`e744dbac)
+fffff806`e7098e73 e9fefeffff      jmp     nt!KiEnterLongDpcProcessing+0x2d2 (fffff806`e7098d76)  Branch
+
+nt!KiEnterLongDpcProcessing+0x43b468:
+fffff806`e74d3f0c 418bcf          mov     ecx,r15d
+fffff806`e74d3f0f 4533c9          xor     r9d,r9d
+fffff806`e74d3f12 4883c102        add     rcx,2
+fffff806`e74d3f16 4533c0          xor     r8d,r8d
+fffff806`e74d3f19 488bd6          mov     rdx,rsi
+fffff806`e74d3f1c 4a8d0cb9        lea     rcx,[rcx+r15*4]
+fffff806`e74d3f20 498d0cce        lea     rcx,[r14+rcx*8]
+fffff806`e74d3f24 e8c73abcff      call    nt!KiCompleteRescheduleContextEntry (fffff806`e70979f0)
+fffff806`e74d3f29 410fb606        movzx   eax,byte ptr [r14]
+fffff806`e74d3f2d 41ffc7          inc     r15d
+fffff806`e74d3f30 443bf8          cmp     r15d,eax
+fffff806`e74d3f33 72d7            jb      nt!KiEnterLongDpcProcessing+0x43b468 (fffff806`e74d3f0c)  Branch
+
+nt!KiEnterLongDpcProcessing+0x43b491:
+fffff806`e74d3f35 488d8ed8350000  lea     rcx,[rsi+35D8h]
+fffff806`e74d3f3c e88fbdc4ff      call    nt!KiFlushSoftwareInterruptBatch (fffff806`e711fcd0)
+fffff806`e74d3f41 90              nop
+fffff806`e74d3f42 e9bb4dbcff      jmp     nt!KiEnterLongDpcProcessing+0x25e (fffff806`e7098d02)  Branch
+lkd> uf nt!EtwTraceLongDpcDetectionEvent
+nt!EtwTraceLongDpcDetectionEvent:
+fffff806`e72246b8 4c8bdc          mov     r11,rsp
+fffff806`e72246bb 4883ec58        sub     rsp,58h
+fffff806`e72246bf 488b05fa5f9e00  mov     rax,qword ptr [nt!_security_cookie (fffff806`e7c0a6c0)]
+fffff806`e72246c6 4833c4          xor     rax,rsp
+fffff806`e72246c9 4889442448      mov     qword ptr [rsp+48h],rax
+fffff806`e72246ce 498363d800      and     qword ptr [r11-28h],0
+fffff806`e72246d3 33c0            xor     eax,eax
+fffff806`e72246d5 6689442435      mov     word ptr [rsp+35h],ax
+fffff806`e72246da 41b9760f0000    mov     r9d,0F76h
+fffff806`e72246e0 88442437        mov     byte ptr [rsp+37h],al
+fffff806`e72246e4 41b800000420    mov     r8d,20040000h
+fffff806`e72246ea 498d43d8        lea     rax,[r11-28h]
+fffff806`e72246ee 894c2430        mov     dword ptr [rsp+30h],ecx
+fffff806`e72246f2 498943e0        mov     qword ptr [r11-20h],rax
+fffff806`e72246f6 498d4be0        lea     rcx,[r11-20h]
+fffff806`e72246fa 8364244400      and     dword ptr [rsp+44h],0
+fffff806`e72246ff 88542434        mov     byte ptr [rsp+34h],dl
+fffff806`e7224703 ba01000000      mov     edx,1
+fffff806`e7224708 c744244008000000 mov     dword ptr [rsp+40h],8
+fffff806`e7224710 c7442420020a5000 mov     dword ptr [rsp+20h],500A02h
+fffff806`e7224718 e8630ae3ff      call    nt!EtwTraceKernelEvent (fffff806`e7055180)
+fffff806`e722471d 488b4c2448      mov     rcx,qword ptr [rsp+48h]
+fffff806`e7224722 4833cc          xor     rcx,rsp
+fffff806`e7224725 e8f6112800      call    nt!_security_check_cookie (fffff806`e74a5920)
+fffff806`e722472a 4883c458        add     rsp,58h
+fffff806`e722472e c3              ret
+lkd> uf nt!EtwTraceLongDpcMitigationEvent
+nt!EtwTraceLongDpcMitigationEvent:
+fffff806`e744dbac 4055            push    rbp
+fffff806`e744dbae 488bec          mov     rbp,rsp
+fffff806`e744dbb1 4883ec60        sub     rsp,60h
+fffff806`e744dbb5 488b0504cb7b00  mov     rax,qword ptr [nt!_security_cookie (fffff806`e7c0a6c0)]
+fffff806`e744dbbc 4833c4          xor     rax,rsp
+fffff806`e744dbbf 488945f0        mov     qword ptr [rbp-10h],rax
+fffff806`e744dbc3 8b8110050000    mov     eax,dword ptr [rcx+510h]
+fffff806`e744dbc9 8945d0          mov     dword ptr [rbp-30h],eax
+fffff806`e744dbcc 4885d2          test    rdx,rdx
+fffff806`e744dbcf 740b            je      nt!EtwTraceLongDpcMitigationEvent+0x30 (fffff806`e744dbdc)  Branch
+
+nt!EtwTraceLongDpcMitigationEvent+0x25:
+fffff806`e744dbd1 8b8210050000    mov     eax,dword ptr [rdx+510h]
+fffff806`e744dbd7 8945d4          mov     dword ptr [rbp-2Ch],eax
+fffff806`e744dbda eb04            jmp     nt!EtwTraceLongDpcMitigationEvent+0x34 (fffff806`e744dbe0)  Branch
+
+nt!EtwTraceLongDpcMitigationEvent+0x30:
+fffff806`e744dbdc 834dd4ff        or      dword ptr [rbp-2Ch],0FFFFFFFFh
+
+nt!EtwTraceLongDpcMitigationEvent+0x34:
+fffff806`e744dbe0 8a4530          mov     al,byte ptr [rbp+30h]
+fffff806`e744dbe3 488d4de0        lea     rcx,[rbp-20h]
+fffff806`e744dbe7 8365ec00        and     dword ptr [rbp-14h],0
+fffff806`e744dbeb ba01000000      mov     edx,1
+fffff806`e744dbf0 8845da          mov     byte ptr [rbp-26h],al
+fffff806`e744dbf3 8a4538          mov     al,byte ptr [rbp+38h]
+fffff806`e744dbf6 8845db          mov     byte ptr [rbp-25h],al
+fffff806`e744dbf9 488d45d0        lea     rax,[rbp-30h]
+fffff806`e744dbfd 448845d8        mov     byte ptr [rbp-28h],r8b
+fffff806`e744dc01 41b800000420    mov     r8d,20040000h
+fffff806`e744dc07 44884dd9        mov     byte ptr [rbp-27h],r9b
+fffff806`e744dc0b 41b9770f0000    mov     r9d,0F77h
+fffff806`e744dc11 488945e0        mov     qword ptr [rbp-20h],rax
+fffff806`e744dc15 c745e80c000000  mov     dword ptr [rbp-18h],0Ch
+fffff806`e744dc1c c7442420020a5000 mov     dword ptr [rsp+20h],500A02h
+fffff806`e744dc24 e85775c0ff      call    nt!EtwTraceKernelEvent (fffff806`e7055180)
+fffff806`e744dc29 488b4df0        mov     rcx,qword ptr [rbp-10h]
+fffff806`e744dc2d 4833cc          xor     rcx,rsp
+fffff806`e744dc30 e8eb7c0500      call    nt!_security_check_cookie (fffff806`e74a5920)
+fffff806`e744dc35 4883c460        add     rsp,60h
+fffff806`e744dc39 5d              pop     rbp
+fffff806`e744dc3a c3              ret
+lkd> .echo REGPROBE_LONGDPC_CONSUMER_DONE
+REGPROBE_LONGDPC_CONSUMER_DONE
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

@@ -3,8 +3,8 @@
     "schema_version":  "1.1",
     "record_id":  "power.control.hibernate-enabled-default",
     "tweak_id":  "power.control.hibernate-enabled-default",
-    "record_status":  "draft",
-    "summary":  "Draft candidate package for HibernateEnabledDefault under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for HibernateEnabledDefault. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for HibernateEnabledDefault. A later trigger-based ETW follow-up then confirmed the current VMware firmware does not support hibernation, so a real hibernation trigger could not be exercised on this baseline. The new guest-return ETW lane materialized the trace inside the guest and returned a compact summary without copy-back, but it still only reached an exact line without an exact query read.",
+    "record_status":  "validated",
+    "summary":  "Validated decision-gated record for HibernateEnabledDefault under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for HibernateEnabledDefault. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for HibernateEnabledDefault. Later ETW follow-ups confirmed that the virtualized guest still cannot exercise a real hibernation trigger, and a newer KVM reboot observation showed that HibernateEnabledDefault stays `1` across a real reboot while `powercfg /a` remains hibernation-unsupported before and after boot. The lane therefore remains decision-gated by an environment limitation rather than by path uncertainty.",
     "validation_proof":  {
                              "source_url":  "Docs/power/power.md",
                              "exact_quote_or_path":  "Docs/power/power.md:154 shows `HibernateEnabledDefault` with observed literal `1` in the repo power notes.",
@@ -18,8 +18,8 @@
                     "scope":  "device",
                     "casual_explanation":  "Hibernate Enabled Default is a low-level power-manager registry value under the main Power key.",
                     "why_people_change_it":  "Researchers track this value when comparing default hibernation policy behavior against the current live hibernation state.",
-                    "tradeoffs_overview":  "Cross-layer evidence is strong, but the current clean-baseline runtime package still lacks an exact runtime read for this raw power-manager value and the VM firmware does not support a real hibernation trigger.",
-                    "professional_notes":  "Win25H2Clean phase-0 existence confirmed HibernateEnabledDefault on the live baseline with preview value 1. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:154. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. A guest-processed stepwise Procmon boot log was then rerun from RegProbe-Baseline-Clean-20260329. It completed shell-safe and copied back the guest-processed summary and filtered CSV outputs, but it still did not capture an exact runtime read for HibernateEnabledDefault on the current baseline. A second guest-processed post-boot Procmon trigger batch then ran from RegProbe-Baseline-Clean-20260329 using powercfg queries, powercfg /energy, CPU stress jobs, and profile-specific follow-up commands. That lane produced guest-processed summaries and filtered hit CSVs, but it still did not capture an exact runtime read for HibernateEnabledDefault on the current baseline. A later trigger-based ETW follow-up showed that `powercfg /hibernate on` returns `The request is not supported` on the current VMware firmware, so the intended hibernation trigger cannot be exercised on this VM baseline. The new guest-return ETW lane then completed fully inside the guest, returned a compact JSON summary through VMware guest variables, and confirmed one exact line hit in the ETW CSV, but still no exact query/read operation for HibernateEnabledDefault.",
+                    "tradeoffs_overview":  "Cross-layer evidence is strong, but the current runtime package still lacks an exact runtime read for this raw power-manager value and the virtualized guest does not expose a real hibernation trigger. KVM reboot observation now confirms that the value remains stable across a real reboot while hibernation stays unavailable.",
+                    "professional_notes":  "Win25H2Clean phase-0 existence confirmed HibernateEnabledDefault on the live baseline with preview value 1. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:154. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. A guest-processed stepwise Procmon boot log was then rerun from RegProbe-Baseline-Clean-20260329. It completed shell-safe and copied back the guest-processed summary and filtered CSV outputs, but it still did not capture an exact runtime read for HibernateEnabledDefault on the current baseline. A second guest-processed post-boot Procmon trigger batch then ran from RegProbe-Baseline-Clean-20260329 using powercfg queries, powercfg /energy, CPU stress jobs, and profile-specific follow-up commands. That lane produced guest-processed summaries and filtered hit CSVs, but it still did not capture an exact runtime read for HibernateEnabledDefault on the current baseline. A later trigger-based ETW follow-up showed that `powercfg /hibernate on` returns `The request is not supported` on the current VMware firmware, so the intended hibernation trigger cannot be exercised on that VM baseline. The guest-return ETW lane then completed fully inside the guest, returned a compact JSON summary through VMware guest variables, and confirmed one exact line hit in the ETW CSV, but still no exact query/read operation for HibernateEnabledDefault. A later host-driven KVM reboot observation then confirmed a real boot-time advance from `2026-04-07T10:19:17.5000000Z` to `2026-04-07T10:30:32.5000000Z` while HibernateEnabledDefault remained `REG_DWORD 1` before and after reboot and `powercfg /a` continued to report that hibernation is unsupported. That strengthens the evidence that the blocker is a genuine environment limitation across virtualized baselines, not just an older VMware-specific transport gap.",
                     "targets":  [
                                     {
                                         "target_id":  "hibernateenableddefault",
@@ -209,6 +209,20 @@
                                           "version-scope"
                                       ],
                          "strength":  "medium"
+                     },
+                     {
+                         "evidence_id":  "vm-power-control-hibernate-default-kvm-reboot-20260407",
+                         "kind":  "vm-test",
+                         "title":  "Linux KVM reboot-backed observation for HibernateEnabledDefault",
+                         "location":  "evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-summary.json and evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-before.json and evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-after.json and evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-before.txt and evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-after.txt and evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/host-review.json and research/notes/power-control-hibernate-enabled-default-kvm-reboot-follow-up-20260407.md",
+                         "summary":  "A host-driven KVM reboot observation confirmed a real guest boot-time advance while HibernateEnabledDefault stayed `REG_DWORD 1` before and after reboot and `powercfg /a` remained hibernation-unsupported on both sides of the reboot.",
+                         "supports":  [
+                                          "path",
+                                          "value",
+                                          "behavior",
+                                          "version-scope"
+                                      ],
+                         "strength":  "medium"
                      }
                  ],
     "decision":  {
@@ -217,13 +231,12 @@
                      "recommended_for_general_users":  false,
                      "restore_default_supported":  true,
                      "restore_previous_supported":  true,
-                     "needs_vm_validation":  true,
-                     "why":  "HibernateEnabledDefault is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, a second guest-processed post-boot Procmon trigger batch, and a guest-return ETW follow-up. The ETW guest-return lane produced an exact line hit, but the current VMware firmware still does not support a real hibernation transition, so the record remains decision-gated by an environment limitation rather than by a dead-flag conclusion.",
+                     "needs_vm_validation":  false,
+                     "why":  "HibernateEnabledDefault is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, a second guest-processed post-boot Procmon trigger batch, a guest-return ETW follow-up, and a host-driven KVM reboot observation. The ETW lane produced an exact line hit, and the KVM reboot lane showed that the value persists at `1` across a real reboot while hibernation remains unavailable. The record therefore stays decision-gated by an environment limitation rather than by a dead-flag conclusion.",
                      "blocking_issues":  [
                                              "The current clean-baseline runtime package still does not contain an exact runtime query/read operation for this value.",
-                                             "The current VMware baseline does not support hibernation, so a real hibernation trigger is not available for runtime ETW validation on this VM."
+                                             "The current virtualized baselines do not support hibernation, so a real hibernation trigger is not available for runtime ETW validation on these VMs."
                                          ]
                  },
-    "last_reviewed_utc":  "2026-03-29T21:45:00Z"
+    "last_reviewed_utc":  "2026-04-07T00:00:00Z"
 }
-

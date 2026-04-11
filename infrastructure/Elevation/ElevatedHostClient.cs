@@ -231,7 +231,7 @@ public sealed class ElevatedHostClient : IElevatedHostClient
             arguments += " --developer-mode";
         }
 
-        LogToFile($"ElevatedHostClient: Starting host with arguments: {arguments}");
+        LogToFile($"ElevatedHostClient: Starting host with arguments: {ElevatedHostSessionSecurity.RedactSensitiveText(arguments)}");
         var startInfo = new ProcessStartInfo
         {
             FileName = _options.HostExecutablePath,

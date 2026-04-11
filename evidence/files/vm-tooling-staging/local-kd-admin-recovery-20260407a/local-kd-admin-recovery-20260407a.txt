@@ -1,0 +1,6 @@
+.sympath C:\Tools\Symbols\local-kd-admin-recovery-20260407a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!CmQueryValueKey
+.echo REGPROBE_LOCALKD_END
+q

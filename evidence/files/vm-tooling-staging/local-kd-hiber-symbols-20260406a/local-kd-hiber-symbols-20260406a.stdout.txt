@@ -1,0 +1,134 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.016 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.031 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Mon Apr  6 13:49:32.153 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff800`96c00000 PsLoadedModuleList = 0xfffff800`97af50c0
+Debug session time: Mon Apr  6 13:49:32.303 2026 (UTC - 7:00)
+System Uptime: 0 days 1:48:21.998
+lkd> .sympath C:\Tools\Symbols\local-kd-hiber-symbols-20260406a
+Symbol search path is: C:\Tools\Symbols\local-kd-hiber-symbols-20260406a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-hiber-symbols-20260406a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-hiber-symbols-20260406a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!PopHiber*
+fffff800`97a07500 nt!PopHiberPersistedRegValueDatabase = <no type information>
+fffff800`97bc5aff nt!PopHiberEnabled = <no type information>
+fffff800`97bc4074 nt!PopHiberFileSizePercent = <no type information>
+fffff800`97bc5f98 nt!PopHiberBootOptimizationEnabledReg = <no type information>
+fffff800`977691f0 nt!PopHiberCheckForDebugBreak (PopHiberCheckForDebugBreak)
+fffff800`976b38b0 nt!PopHibernateEvaluation (PopHibernateEvaluation)
+fffff800`97bc4070 nt!PopHiberFileType = <no type information>
+fffff800`97b0cfa0 nt!PopHibernateInProgress = <no type information>
+fffff800`96c29160 nt!PopHiberbootEnabledRegName = <no type information>
+fffff800`97b0cfc0 nt!PopHibernateDiagnosticInfo = <no type information>
+fffff800`97b0cfb0 nt!PopHibernateRevocationCheckWnfSubscription = <no type information>
+fffff800`9775d2b8 nt!PopHiberPeekRangeTable (PopHiberPeekRangeTable)
+fffff800`97b0cf90 nt!PopHiberResumeXhciHandoffSkip = <no type information>
+fffff800`97bc5b64 nt!PopHiberSkipMemoryMapValidation = <no type information>
+fffff800`97b0cfb8 nt!PopHibernatePolicyWnfSubscription = <no type information>
+fffff800`97bc4680 nt!PopHiberFileBucket = <no type information>
+fffff800`97a677a9 nt!PopHiberBootForceMonitorOff = <no type information>
+fffff800`9776e970 nt!PopHiberCheckResume (PopHiberCheckResume)
+fffff800`97a275c0 nt!PopHibernateSystemContext = <no type information>
+fffff800`97bc417c nt!PopHiberFileTypeReg = <no type information>
+fffff800`9773b618 nt!PopHiberForceDisabledReasonMap = <no type information>
+fffff800`97b0a8e0 nt!PopHibernationErrorSubstitutionString = <no type information>
+fffff800`97b0ad40 nt!PopHiberInfo = <no type information>
+fffff800`9775d55c nt!PopHiberWriteBootFreePageMap (PopHiberWriteBootFreePageMap)
+fffff800`96c03150 nt!PopHiberLogInfo = <no type information>
+fffff800`96c1bf20 nt!PopHiberbootGroupPolicyRegKey = <no type information>
+fffff800`9775d0c0 nt!PopHiberChecksumHiberFileData (PopHiberChecksumHiberFileData)
+fffff800`97b0cfa8 nt!PopHibernatePersistedRegLocation = <no type information>
+fffff800`97bc6248 nt!PopHiberForceDisabledReg = <no type information>
+fffff800`973524bc nt!PopHiberInitializeResources (PopHiberInitializeResources)
+fffff800`97bc428c nt!PopHiberEnabledDefaultReg = <no type information>
+fffff800`9775d290 nt!PopHiberNotificationMarkBootPhaseCallback (PopHiberNotificationMarkBootPhaseCallback)
+fffff800`9775d230 nt!PopHiberNotificationDiscardMemoryCallback (PopHiberNotificationDiscardMemoryCallback)
+fffff800`97bc4268 nt!PopHiberFileTypeDefaultReg = <no type information>
+fffff800`97bc4110 nt!PopHiberEnabledReg = <no type information>
+fffff800`97bc40e8 nt!PopHiberChecksummingEnabledReg = <no type information>
+fffff800`97a0b500 nt!PopHibernatePowerStateHandlerType = <no type information>
+fffff800`97b0cf9c nt!PopHibernateHvMinloopEnabled = <no type information>
+fffff800`9775d260 nt!PopHiberNotificationDiscardPhysicalMemoryCallback (PopHiberNotificationDiscardPhysicalMemoryCallback)
+fffff800`97bc6258 nt!PopHiberbootEnabledReg = <no type information>
+fffff800`9775d304 nt!PopHiberReadChecksums (PopHiberReadChecksums)
+fffff800`9782eb0c nt!PopHiberEvaluateSkippingMemoryMapValidation (PopHiberEvaluateSkippingMemoryMapValidation)
+lkd> x nt!*HiberFile*
+fffff800`97678484 nt!PopSanityCheckHiberFile (PopSanityCheckHiberFile)
+fffff800`97bc4074 nt!PopHiberFileSizePercent = <no type information>
+fffff800`97bc4070 nt!PopHiberFileType = <no type information>
+fffff800`97352424 nt!PopEnlargeHiberFile (PopEnlargeHiberFile)
+fffff800`972fa3e4 nt!PopSetHiberFileSize (PopSetHiberFileSize)
+fffff800`9775fd84 nt!PopDiagTraceZeroHiberFile (PopDiagTraceZeroHiberFile)
+fffff800`97357914 nt!PopDiagTraceSetHiberFileFailurePoint (PopDiagTraceSetHiberFileFailurePoint)
+fffff800`97678220 nt!PopSetHiberFileMcb (PopSetHiberFileMcb)
+fffff800`976b3950 nt!PopEnableHiberFile (PopEnableHiberFile)
+fffff800`97b0cf98 nt!PopEnableMinimalHiberFile = <no type information>
+fffff800`9735333c nt!PopZeroHiberFile (PopZeroHiberFile)
+fffff800`97bc4680 nt!PopHiberFileBucket = <no type information>
+fffff800`97351aa8 nt!PopAdjustHiberFile (PopAdjustHiberFile)
+fffff800`97678054 nt!PopResizeHiberFile (PopResizeHiberFile)
+fffff800`97bc417c nt!PopHiberFileTypeReg = <no type information>
+fffff800`976b1180 nt!PopReadPagesFromHiberFile (PopReadPagesFromHiberFile)
+fffff800`976782bc nt!PopValidateHiberFileSize (PopValidateHiberFileSize)
+fffff800`9775d0c0 nt!PopHiberChecksumHiberFileData (PopHiberChecksumHiberFileData)
+fffff800`97351b58 nt!PopCalculateHiberFileSize (PopCalculateHiberFileSize)
+fffff800`9775fda0 nt!PopDiagTraceZeroHiberFileEnd (PopDiagTraceZeroHiberFileEnd)
+fffff800`97b0bd70 nt!PoHiberFileRoot = <no type information>
+fffff800`97b0cf94 nt!PopForceMinimalHiberFile = <no type information>
+fffff800`97351c50 nt!PopClearHiberFileSignature (PopClearHiberFileSignature)
+fffff800`9735229c nt!PopCreateHiberFileSecurityDescriptor (PopCreateHiberFileSecurityDescriptor)
+fffff800`97bc4268 nt!PopHiberFileTypeDefaultReg = <no type information>
+fffff800`96c22e70 nt!POP_ETW_EVENT_ZEROHIBERFILE_START = <no type information>
+fffff800`96c20d38 nt!POP_ETW_EVENT_ZEROHIBERFILE_STOP = <no type information>
+fffff800`97351d30 nt!PopCreateHiberFile (PopCreateHiberFile)
+fffff800`972f9bcc nt!PopSetHiberFileType (PopSetHiberFileType)
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

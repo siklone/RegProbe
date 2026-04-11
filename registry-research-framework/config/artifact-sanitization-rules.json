@@ -9,10 +9,10 @@
   ],
   "rules": [
     {
-      "id": "host-local-temp",
-      "type": "literal",
-      "pattern": "C:\\Users\\Deniz\\AppData\\Local\\Temp\\",
-      "replacement": "%LOCALAPPDATA%\\Temp\\",
+      "id": "host-local-temp-generic",
+      "type": "regex",
+      "pattern": "C:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Local\\\\Temp\\\\",
+      "replacement": "%LOCALAPPDATA%\\\\Temp\\\\",
       "targets": [
         "evidence",
         "registry-research-framework/audit",

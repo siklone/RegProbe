@@ -1,0 +1,128 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.016 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.031 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Mon Apr  6 13:28:20.249 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff800`96c00000 PsLoadedModuleList = 0xfffff800`97af50c0
+Debug session time: Mon Apr  6 13:28:20.423 2026 (UTC - 7:00)
+System Uptime: 0 days 1:27:10.120
+lkd> .sympath C:\Tools\Symbols\local-kd-allowremotedasd-disasm-20260406a
+Symbol search path is: C:\Tools\Symbols\local-kd-allowremotedasd-disasm-20260406a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-allowremotedasd-disasm-20260406a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-allowremotedasd-disasm-20260406a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> uf nt!IopAllowRemoteDASD
+nt!IopAllowRemoteDASD:
+fffff800`970cb370 48895c2418      mov     qword ptr [rsp+18h],rbx
+fffff800`970cb375 55              push    rbp
+fffff800`970cb376 488bec          mov     rbp,rsp
+fffff800`970cb379 4883ec40        sub     rsp,40h
+fffff800`970cb37d 33db            xor     ebx,ebx
+fffff800`970cb37f 488d0dba7f1f00  lea     rcx,[nt! ?? ::FNODOBFM::`string' (fffff800`972c3340)]
+fffff800`970cb386 48895d10        mov     qword ptr [rbp+10h],rbx
+fffff800`970cb38a 48895d18        mov     qword ptr [rbp+18h],rbx
+fffff800`970cb38e e83d4b0300      call    nt!wcslen (fffff800`970ffed0)
+fffff800`970cb393 488d0d067f1f00  lea     rcx,[nt! ?? ::FNODOBFM::`string' (fffff800`972c32a0)]
+fffff800`970cb39a 895df4          mov     dword ptr [rbp-0Ch],ebx
+fffff800`970cb39d 48894df8        mov     qword ptr [rbp-8],rcx
+fffff800`970cb3a1 e82a4b0300      call    nt!wcslen (fffff800`970ffed0)
+fffff800`970cb3a6 4803c0          add     rax,rax
+fffff800`970cb3a9 885c2420        mov     byte ptr [rsp+20h],bl
+fffff800`970cb3ad 483dfeff0000    cmp     rax,0FFFEh
+fffff800`970cb3b3 4c8d45f0        lea     r8,[rbp-10h]
+fffff800`970cb3b7 b9fcff0000      mov     ecx,0FFFCh
+fffff800`970cb3bc 41b919000200    mov     r9d,20019h
+fffff800`970cb3c2 480f43c1        cmovae  rax,rcx
+fffff800`970cb3c6 33d2            xor     edx,edx
+fffff800`970cb3c8 668945f0        mov     word ptr [rbp-10h],ax
+fffff800`970cb3cc 488d4d10        lea     rcx,[rbp+10h]
+fffff800`970cb3d0 6683c002        add     ax,2
+fffff800`970cb3d4 668945f2        mov     word ptr [rbp-0Eh],ax
+fffff800`970cb3d8 e863bf5a00      call    nt!IopOpenRegistryKey (fffff800`97677340)
+fffff800`970cb3dd 85c0            test    eax,eax
+fffff800`970cb3df 7847            js      nt!IopAllowRemoteDASD+0xb8 (fffff800`970cb428)  Branch
+
+nt!IopAllowRemoteDASD+0x71:
+fffff800`970cb3e1 488b4d10        mov     rcx,qword ptr [rbp+10h]
+fffff800`970cb3e5 4c8d4d18        lea     r9,[rbp+18h]
+fffff800`970cb3e9 4533c0          xor     r8d,r8d
+fffff800`970cb3ec 488d154d7f1f00  lea     rdx,[nt! ?? ::FNODOBFM::`string' (fffff800`972c3340)]
+fffff800`970cb3f3 e864f94f00      call    nt!IopGetRegistryValue (fffff800`975cad5c)
+fffff800`970cb3f8 85c0            test    eax,eax
+fffff800`970cb3fa 7823            js      nt!IopAllowRemoteDASD+0xaf (fffff800`970cb41f)  Branch
+
+nt!IopAllowRemoteDASD+0x8c:
+fffff800`970cb3fc 488b4d18        mov     rcx,qword ptr [rbp+18h]
+fffff800`970cb400 39590c          cmp     dword ptr [rcx+0Ch],ebx
+fffff800`970cb403 7413            je      nt!IopAllowRemoteDASD+0xa8 (fffff800`970cb418)  Branch
+
+nt!IopAllowRemoteDASD+0x95:
+fffff800`970cb405 8b4108          mov     eax,dword ptr [rcx+8]
+fffff800`970cb408 448d4301        lea     r8d,[rbx+1]
+fffff800`970cb40c 0fb6d3          movzx   edx,bl
+fffff800`970cb40f 391c08          cmp     dword ptr [rax+rcx],ebx
+fffff800`970cb412 410f45d0        cmovne  edx,r8d
+fffff800`970cb416 8ada            mov     bl,dl
+
+nt!IopAllowRemoteDASD+0xa8:
+fffff800`970cb418 33d2            xor     edx,edx
+fffff800`970cb41a e8b1786a00      call    nt!ExFreePoolWithTag (fffff800`97772cd0)
+
+nt!IopAllowRemoteDASD+0xaf:
+fffff800`970cb41f 488b4d10        mov     rcx,qword ptr [rbp+10h]
+fffff800`970cb423 e8c8b11d00      call    nt!ZwClose (fffff800`972a65f0)
+
+nt!IopAllowRemoteDASD+0xb8:
+fffff800`970cb428 8ac3            mov     al,bl
+fffff800`970cb42a 488b5c2460      mov     rbx,qword ptr [rsp+60h]
+fffff800`970cb42f 4883c440        add     rsp,40h
+fffff800`970cb433 5d              pop     rbp
+fffff800`970cb434 c3              ret
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

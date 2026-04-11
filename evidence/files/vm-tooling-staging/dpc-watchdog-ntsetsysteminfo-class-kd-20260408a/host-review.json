@@ -1,0 +1,21 @@
+{
+  "run_id": "dpc-watchdog-ntsetsysteminfo-class-kd-20260408a",
+  "status": "ok",
+  "completed": true,
+  "query_symbol": "nt!NtSetSystemInformation",
+  "confirmed_edges": [
+    "NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration"
+  ],
+  "guards": [
+    "SeAliasAdminsSid membership via RtlCheckTokenMembership"
+  ],
+  "inferences": [
+    {
+      "kind": "numeric-system-information-arm",
+      "value": "0xE4",
+      "basis": "live dispatch arithmetic around NtSetSystemInformation+0x1b95",
+      "confidence": "medium",
+      "note": "This is a live-disassembly inference, not a confirmed public SYSTEM_INFORMATION_CLASS name."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+﻿{
+    "generated_utc":  "2026-04-03T18:17:30.3344306Z",
+    "status":  "blocked-prereqs",
+    "debug_environment":  "hyperv",
+    "debug_vm_name":  "RegProbe-Debug-HyperV",
+    "debug_transport":  "serial",
+    "debug_transport_candidates":  [
+                                       "serial",
+                                       "kdnet"
+                                   ],
+    "debug_baseline":  "RegProbe-Debug-HyperV-Baseline-20260403",
+    "transport_reliability":  "low",
+    "reproducible_runs":  0,
+    "vm_role":  "debug_arbiter_only",
+    "generation":  2,
+    "storage_root":  "%LOCALAPPDATA%\\RegProbe\\hyperv\\RegProbe-Debug-HyperV",
+    "storage_root_resolution":  "expand-at-provision-time",
+    "required_features":  [
+                              "Microsoft-Hyper-V",
+                              "Microsoft-Hyper-V-Management-PowerShell"
+                          ],
+    "checkpoint_contract":  [
+                                "clean",
+                                "debug-enabled",
+                                "transport-healthy",
+                                "singlekey-ready"
+                            ],
+    "provisioning_steps":  [
+                               "Enable Microsoft-Hyper-V and Microsoft-Hyper-V-Management-PowerShell on the host.",
+                               "Reboot the host so Hyper-V cmdlets and services are fully available.",
+                               "Create a Generation 2 VM named RegProbe-Debug-HyperV under the configured storage root.",
+                               "Keep the VM debugger-first and minimal; do not reuse the runtime VMware scratch surface.",
+                               "Enable kernel debugging and record a clean checkpoint plus debug-enabled checkpoint.",
+                               "Bring up serial transport first; if it is still unreliable, evaluate KDNET as the fallback transport.",
+                               "Do not run single-key arbiter semantics until transport smoke is reproducible in two consecutive runs."
+                           ],
+    "vm_role_split":  {
+                          "vmware":  "runtime_research",
+                          "hyperv":  "debug_arbiter_only"
+                      },
+    "feasibility_ref":  "evidence/files/vm-tooling-staging/windbg-debug-environment-selection-20260403/hyperv-feasibility.json"
+}

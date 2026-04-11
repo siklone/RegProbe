@@ -1,0 +1,56 @@
+{
+  "generated_utc": "2026-04-02T23:59:00Z",
+  "family": "power-control",
+  "lane": "windbg-boot-registry-trace",
+  "vm_profile": "secondary",
+  "vm_path": "H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx",
+  "status": "partial",
+  "bundle": "registry-research-framework/audit/power-control-windbg-boot-registry-trace-20260402.json",
+  "command_execution_fix": {
+    "cfr_enabled": true,
+    "bonc_enabled": true,
+    "suffix_trace_log_resolution": true
+  },
+  "validated_findings": [
+    {
+      "name": "public-symbol-search",
+      "status": "captured",
+      "artifact": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-014256/windbg-registry-trace_59e0_2026-04-03_01-44-20-117.log",
+      "note": "Public symbols expose nt!CmQueryValueKey, nt!CmQueryValueKeyCallout, nt!NtQueryValueKey, and nt!ZwQueryValueKey."
+    },
+    {
+      "name": "cmquery-first-hit-shape",
+      "status": "captured",
+      "artifact": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-014903/windbg-registry-trace_01ac_2026-04-03_01-50-38-815.log",
+      "note": "CmQueryValueKey is reachable and the queried value name is provided through the UNICODE_STRING pointer in @rdx."
+    }
+  ],
+  "heavy_watch_attempts": [
+    {
+      "profile": "valuenames",
+      "status": "trace-error",
+      "results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-015149/results.json",
+      "trace_log": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-015149/windbg-registry-trace_15a0_2026-04-03_01-53-15-118.log",
+      "target_hits": 0,
+      "note": "Raw value-name logging produced a large log and no target-name hits, but shell health did not recover before timeout."
+    },
+    {
+      "profile": "conditional",
+      "status": "trace-error",
+      "results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-023157/results.json",
+      "trace_log": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-023157/windbg-registry-trace_4100_2026-04-03_02-33-27-931.log",
+      "target_hits": 0,
+      "note": "The bs/.if/@@c++ filtered command still fails to parse cleanly, so no real REGPROBE_KEY_HIT blocks were emitted."
+    }
+  ],
+  "recovery": {
+    "status": "completed",
+    "artifact": "registry-research-framework/audit/configure-kernel-debug-baseline.json",
+    "note": "The secondary VM was restored to a shell-healthy debug baseline after the heavy watch attempts."
+  },
+  "next_actions": [
+    "replace the failing conditional command with a parser-safe WinDbg filter form for nt!CmQueryValueKey",
+    "keep filtering lightweight enough that shell health returns without timeout",
+    "only use WinDbg as the final dead-flag arbiter after the filtered watch becomes terminal"
+  ]
+}

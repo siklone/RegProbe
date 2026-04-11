@@ -1,0 +1,460 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.031 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.016 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 10:09:58.304 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 10:09:58.440 2026 (UTC - 7:00)
+System Uptime: 0 days 4:51:22.179
+lkd> .sympath C:\Tools\Symbols\watchdog-win32-callout-20260407a
+Symbol search path is: C:\Tools\Symbols\watchdog-win32-callout-20260407a
+Expanded Symbol search path is: c:\tools\symbols\watchdog-win32-callout-20260407a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\watchdog-win32-callout-20260407a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!Pop*Win32Callout*
+fffff806`e755fa60 nt!PopWin32CalloutWatchdogCallback (PopWin32CalloutWatchdogCallback)
+fffff806`e77be358 nt!PopInvokeWin32Callout (PopInvokeWin32Callout)
+fffff806`e77bb330 nt!PopInvokeWin32CalloutWithWatchdog (PopInvokeWin32CalloutWithWatchdog)
+fffff806`e7dc5fa8 nt!PopWin32CalloutWatchdogBugcheckEnabled = <no type information>
+lkd> uf nt!PopInvokeWin32CalloutWithWatchdog
+nt!PopInvokeWin32CalloutWithWatchdog:
+fffff806`e77bb330 488bc4          mov     rax,rsp
+fffff806`e77bb333 48895808        mov     qword ptr [rax+8],rbx
+fffff806`e77bb337 48897010        mov     qword ptr [rax+10h],rsi
+fffff806`e77bb33b 48897818        mov     qword ptr [rax+18h],rdi
+fffff806`e77bb33f 4c896020        mov     qword ptr [rax+20h],r12
+fffff806`e77bb343 55              push    rbp
+fffff806`e77bb344 4156            push    r14
+fffff806`e77bb346 4157            push    r15
+fffff806`e77bb348 488d68a9        lea     rbp,[rax-57h]
+fffff806`e77bb34c 4881ec90000000  sub     rsp,90h
+fffff806`e77bb353 418bf0          mov     esi,r8d
+fffff806`e77bb356 4c8bf2          mov     r14,rdx
+fffff806`e77bb359 448bf9          mov     r15d,ecx
+fffff806`e77bb35c 41bc60000000    mov     r12d,60h
+fffff806`e77bb362 458bc4          mov     r8d,r12d
+fffff806`e77bb365 488d4ddf        lea     rcx,[rbp-21h]
+fffff806`e77bb369 33d2            xor     edx,edx
+fffff806`e77bb36b 498bd9          mov     rbx,r9
+fffff806`e77bb36e e88d57d0ff      call    nt!_memset_spec_plain (fffff806`e74c0b00)
+fffff806`e77bb373 488b7d7f        mov     rdi,qword ptr [rbp+7Fh]
+fffff806`e77bb377 4885ff          test    rdi,rdi
+fffff806`e77bb37a 756d            jne     nt!PopInvokeWin32CalloutWithWatchdog+0xb9 (fffff806`e77bb3e9)  Branch
+
+nt!PopInvokeWin32CalloutWithWatchdog+0x4c:
+fffff806`e77bb37c 4c8bcb          mov     r9,rbx
+fffff806`e77bb37f 448bc6          mov     r8d,esi
+fffff806`e77bb382 498bd6          mov     rdx,r14
+fffff806`e77bb385 418bcf          mov     ecx,r15d
+fffff806`e77bb388 e843faffff      call    nt!PsInvokeWin32Callout (fffff806`e77badd0)
+fffff806`e77bb38d 8bd8            mov     ebx,eax
+fffff806`e77bb38f 4885ff          test    rdi,rdi
+fffff806`e77bb392 7431            je      nt!PopInvokeWin32CalloutWithWatchdog+0x95 (fffff806`e77bb3c5)  Branch
+
+nt!PopInvokeWin32CalloutWithWatchdog+0x64:
+fffff806`e77bb394 4d8bc4          mov     r8,r12
+fffff806`e77bb397 488d4ddf        lea     rcx,[rbp-21h]
+fffff806`e77bb39b 33d2            xor     edx,edx
+fffff806`e77bb39d e85e57d0ff      call    nt!_memset_spec_plain (fffff806`e74c0b00)
+fffff806`e77bb3a2 8364242000      and     dword ptr [rsp+20h],0
+fffff806`e77bb3a7 488d55df        lea     rdx,[rbp-21h]
+fffff806`e77bb3ab 4533c9          xor     r9d,r9d
+fffff806`e77bb3ae c745df15000000  mov     dword ptr [rbp-21h],15h
+fffff806`e77bb3b5 458bc4          mov     r8d,r12d
+fffff806`e77bb3b8 48897de7        mov     qword ptr [rbp-19h],rdi
+fffff806`e77bb3bc 418d4957        lea     ecx,[r9+57h]
+fffff806`e77bb3c0 e82bbcceff      call    nt!ZwPowerInformation (fffff806`e74a6ff0)
+
+nt!PopInvokeWin32CalloutWithWatchdog+0x95:
+fffff806`e77bb3c5 4c8d9c2490000000 lea     r11,[rsp+90h]
+fffff806`e77bb3cd 8bc3            mov     eax,ebx
+fffff806`e77bb3cf 498b5b20        mov     rbx,qword ptr [r11+20h]
+fffff806`e77bb3d3 498b7328        mov     rsi,qword ptr [r11+28h]
+fffff806`e77bb3d7 498b7b30        mov     rdi,qword ptr [r11+30h]
+fffff806`e77bb3db 4d8b6338        mov     r12,qword ptr [r11+38h]
+fffff806`e77bb3df 498be3          mov     rsp,r11
+fffff806`e77bb3e2 415f            pop     r15
+fffff806`e77bb3e4 415e            pop     r14
+fffff806`e77bb3e6 5d              pop     rbp
+fffff806`e77bb3e7 c3              ret
+
+nt!PopInvokeWin32CalloutWithWatchdog+0xb9:
+fffff806`e77bb3e9 690525014500e8030000 imul eax,dword ptr [nt!PopWin32kCalloutWatchdogTimeoutSeconds (fffff806`e7c0b518)],3E8h
+fffff806`e77bb3f3 c745df15000000  mov     dword ptr [rbp-21h],15h
+fffff806`e77bb3fa 48897de7        mov     qword ptr [rbp-19h],rdi
+fffff806`e77bb3fe 8945ef          mov     dword ptr [rbp-11h],eax
+fffff806`e77bb401 4885db          test    rbx,rbx
+fffff806`e77bb404 7449            je      nt!PopInvokeWin32CalloutWithWatchdog+0x11f (fffff806`e77bb44f)  Branch
+
+nt!PopInvokeWin32CalloutWithWatchdog+0xd6:
+fffff806`e77bb406 8b03            mov     eax,dword ptr [rbx]
+fffff806`e77bb408 8945f3          mov     dword ptr [rbp-0Dh],eax
+
+nt!PopInvokeWin32CalloutWithWatchdog+0xdb:
+fffff806`e77bb40b 8364242000      and     dword ptr [rsp+20h],0
+fffff806`e77bb410 488d55df        lea     rdx,[rbp-21h]
+fffff806`e77bb414 c745f7a1010000  mov     dword ptr [rbp-9],1A1h
+fffff806`e77bb41b 4533c9          xor     r9d,r9d
+fffff806`e77bb41e 65488b042588010000 mov   rax,qword ptr gs:[188h]
+fffff806`e77bb427 458bc4          mov     r8d,r12d
+fffff806`e77bb42a 488945ff        mov     qword ptr [rbp-1],rax
+fffff806`e77bb42e 488d45df        lea     rax,[rbp-21h]
+fffff806`e77bb432 4889452f        mov     qword ptr [rbp+2Fh],rax
+fffff806`e77bb436 488d052346daff  lea     rax,[nt!PopWin32CalloutWatchdogCallback (fffff806`e755fa60)]
+fffff806`e77bb43d 418d4957        lea     ecx,[r9+57h]
+fffff806`e77bb441 48894527        mov     qword ptr [rbp+27h],rax
+fffff806`e77bb445 e8a6bbceff      call    nt!ZwPowerInformation (fffff806`e74a6ff0)
+fffff806`e77bb44a e92dffffff      jmp     nt!PopInvokeWin32CalloutWithWatchdog+0x4c (fffff806`e77bb37c)  Branch
+
+nt!PopInvokeWin32CalloutWithWatchdog+0x11f:
+fffff806`e77bb44f 834df3ff        or      dword ptr [rbp-0Dh],0FFFFFFFFh
+fffff806`e77bb453 ebb6            jmp     nt!PopInvokeWin32CalloutWithWatchdog+0xdb (fffff806`e77bb40b)  Branch
+lkd> dd nt!PopWin32CalloutWatchdogBugcheckEnabled L1
+fffff806`e7dc5fa8  00000000
+lkd> ln nt!PopInvokeWin32CalloutWithWatchdog
+Browse module
+Set bu breakpoint
+
+(fffff806`e77bb330)   nt!PopInvokeWin32CalloutWithWatchdog   |  (fffff806`e77bb45c)   nt!PopAdaptiveGetSessionStateUnsafe
+Exact matches:
+lkd> u nt!PopInvokeWin32CalloutWithWatchdog L0x120
+nt!PopInvokeWin32CalloutWithWatchdog:
+fffff806`e77bb330 488bc4          mov     rax,rsp
+fffff806`e77bb333 48895808        mov     qword ptr [rax+8],rbx
+fffff806`e77bb337 48897010        mov     qword ptr [rax+10h],rsi
+fffff806`e77bb33b 48897818        mov     qword ptr [rax+18h],rdi
+fffff806`e77bb33f 4c896020        mov     qword ptr [rax+20h],r12
+fffff806`e77bb343 55              push    rbp
+fffff806`e77bb344 4156            push    r14
+fffff806`e77bb346 4157            push    r15
+fffff806`e77bb348 488d68a9        lea     rbp,[rax-57h]
+fffff806`e77bb34c 4881ec90000000  sub     rsp,90h
+fffff806`e77bb353 418bf0          mov     esi,r8d
+fffff806`e77bb356 4c8bf2          mov     r14,rdx
+fffff806`e77bb359 448bf9          mov     r15d,ecx
+fffff806`e77bb35c 41bc60000000    mov     r12d,60h
+fffff806`e77bb362 458bc4          mov     r8d,r12d
+fffff806`e77bb365 488d4ddf        lea     rcx,[rbp-21h]
+fffff806`e77bb369 33d2            xor     edx,edx
+fffff806`e77bb36b 498bd9          mov     rbx,r9
+fffff806`e77bb36e e88d57d0ff      call    nt!_memset_spec_plain (fffff806`e74c0b00)
+fffff806`e77bb373 488b7d7f        mov     rdi,qword ptr [rbp+7Fh]
+fffff806`e77bb377 4885ff          test    rdi,rdi
+fffff806`e77bb37a 756d            jne     nt!PopInvokeWin32CalloutWithWatchdog+0xb9 (fffff806`e77bb3e9)
+fffff806`e77bb37c 4c8bcb          mov     r9,rbx
+fffff806`e77bb37f 448bc6          mov     r8d,esi
+fffff806`e77bb382 498bd6          mov     rdx,r14
+fffff806`e77bb385 418bcf          mov     ecx,r15d
+fffff806`e77bb388 e843faffff      call    nt!PsInvokeWin32Callout (fffff806`e77badd0)
+fffff806`e77bb38d 8bd8            mov     ebx,eax
+fffff806`e77bb38f 4885ff          test    rdi,rdi
+fffff806`e77bb392 7431            je      nt!PopInvokeWin32CalloutWithWatchdog+0x95 (fffff806`e77bb3c5)
+fffff806`e77bb394 4d8bc4          mov     r8,r12
+fffff806`e77bb397 488d4ddf        lea     rcx,[rbp-21h]
+fffff806`e77bb39b 33d2            xor     edx,edx
+fffff806`e77bb39d e85e57d0ff      call    nt!_memset_spec_plain (fffff806`e74c0b00)
+fffff806`e77bb3a2 8364242000      and     dword ptr [rsp+20h],0
+fffff806`e77bb3a7 488d55df        lea     rdx,[rbp-21h]
+fffff806`e77bb3ab 4533c9          xor     r9d,r9d
+fffff806`e77bb3ae c745df15000000  mov     dword ptr [rbp-21h],15h
+fffff806`e77bb3b5 458bc4          mov     r8d,r12d
+fffff806`e77bb3b8 48897de7        mov     qword ptr [rbp-19h],rdi
+fffff806`e77bb3bc 418d4957        lea     ecx,[r9+57h]
+fffff806`e77bb3c0 e82bbcceff      call    nt!ZwPowerInformation (fffff806`e74a6ff0)
+fffff806`e77bb3c5 4c8d9c2490000000 lea     r11,[rsp+90h]
+fffff806`e77bb3cd 8bc3            mov     eax,ebx
+fffff806`e77bb3cf 498b5b20        mov     rbx,qword ptr [r11+20h]
+fffff806`e77bb3d3 498b7328        mov     rsi,qword ptr [r11+28h]
+fffff806`e77bb3d7 498b7b30        mov     rdi,qword ptr [r11+30h]
+fffff806`e77bb3db 4d8b6338        mov     r12,qword ptr [r11+38h]
+fffff806`e77bb3df 498be3          mov     rsp,r11
+fffff806`e77bb3e2 415f            pop     r15
+fffff806`e77bb3e4 415e            pop     r14
+fffff806`e77bb3e6 5d              pop     rbp
+fffff806`e77bb3e7 c3              ret
+fffff806`e77bb3e8 cc              int     3
+fffff806`e77bb3e9 690525014500e8030000 imul eax,dword ptr [nt!PopWin32kCalloutWatchdogTimeoutSeconds (fffff806`e7c0b518)],3E8h
+fffff806`e77bb3f3 c745df15000000  mov     dword ptr [rbp-21h],15h
+fffff806`e77bb3fa 48897de7        mov     qword ptr [rbp-19h],rdi
+fffff806`e77bb3fe 8945ef          mov     dword ptr [rbp-11h],eax
+fffff806`e77bb401 4885db          test    rbx,rbx
+fffff806`e77bb404 7449            je      nt!PopInvokeWin32CalloutWithWatchdog+0x11f (fffff806`e77bb44f)
+fffff806`e77bb406 8b03            mov     eax,dword ptr [rbx]
+fffff806`e77bb408 8945f3          mov     dword ptr [rbp-0Dh],eax
+fffff806`e77bb40b 8364242000      and     dword ptr [rsp+20h],0
+fffff806`e77bb410 488d55df        lea     rdx,[rbp-21h]
+fffff806`e77bb414 c745f7a1010000  mov     dword ptr [rbp-9],1A1h
+fffff806`e77bb41b 4533c9          xor     r9d,r9d
+fffff806`e77bb41e 65488b042588010000 mov   rax,qword ptr gs:[188h]
+fffff806`e77bb427 458bc4          mov     r8d,r12d
+fffff806`e77bb42a 488945ff        mov     qword ptr [rbp-1],rax
+fffff806`e77bb42e 488d45df        lea     rax,[rbp-21h]
+fffff806`e77bb432 4889452f        mov     qword ptr [rbp+2Fh],rax
+fffff806`e77bb436 488d052346daff  lea     rax,[nt!PopWin32CalloutWatchdogCallback (fffff806`e755fa60)]
+fffff806`e77bb43d 418d4957        lea     ecx,[r9+57h]
+fffff806`e77bb441 48894527        mov     qword ptr [rbp+27h],rax
+fffff806`e77bb445 e8a6bbceff      call    nt!ZwPowerInformation (fffff806`e74a6ff0)
+fffff806`e77bb44a e92dffffff      jmp     nt!PopInvokeWin32CalloutWithWatchdog+0x4c (fffff806`e77bb37c)
+fffff806`e77bb44f 834df3ff        or      dword ptr [rbp-0Dh],0FFFFFFFFh
+fffff806`e77bb453 ebb6            jmp     nt!PopInvokeWin32CalloutWithWatchdog+0xdb (fffff806`e77bb40b)
+fffff806`e77bb455 cc              int     3
+fffff806`e77bb456 cc              int     3
+fffff806`e77bb457 cc              int     3
+fffff806`e77bb458 cc              int     3
+fffff806`e77bb459 cc              int     3
+fffff806`e77bb45a cc              int     3
+fffff806`e77bb45b cc              int     3
+nt!PopAdaptiveGetSessionStateUnsafe:
+fffff806`e77bb45c 488bc4          mov     rax,rsp
+fffff806`e77bb45f 48895818        mov     qword ptr [rax+18h],rbx
+fffff806`e77bb463 48897020        mov     qword ptr [rax+20h],rsi
+fffff806`e77bb467 57              push    rdi
+fffff806`e77bb468 4883ec50        sub     rsp,50h
+fffff806`e77bb46c 83600800        and     dword ptr [rax+8],0
+fffff806`e77bb470 498bf8          mov     rdi,r8
+fffff806`e77bb473 83601000        and     dword ptr [rax+10h],0
+fffff806`e77bb477 488bf2          mov     rsi,rdx
+fffff806`e77bb47a 390dd8be5400    cmp     dword ptr [nt!PopAdaptiveContext+0x18 (fffff806`e7d07358)],ecx
+fffff806`e77bb480 8bd9            mov     ebx,ecx
+fffff806`e77bb482 7566            jne     nt!PopAdaptiveGetSessionStateUnsafe+0x8e (fffff806`e77bb4ea)
+fffff806`e77bb484 83f9ff          cmp     ecx,0FFFFFFFFh
+fffff806`e77bb487 7461            je      nt!PopAdaptiveGetSessionStateUnsafe+0x8e (fffff806`e77bb4ea)
+fffff806`e77bb489 488d4008        lea     rax,[rax+8]
+fffff806`e77bb48d 4c8d4c2468      lea     r9,[rsp+68h]
+fffff806`e77bb492 4889442420      mov     qword ptr [rsp+20h],rax
+fffff806`e77bb497 e828050000      call    nt!PopAdaptiveGetConsoleSessionState (fffff806`e77bb9c4)
+fffff806`e77bb49c 8b442460        mov     eax,dword ptr [rsp+60h]
+fffff806`e77bb4a0 8bcb            mov     ecx,ebx
+fffff806`e77bb4a2 448b4e18        mov     r9d,dword ptr [rsi+18h]
+fffff806`e77bb4a6 4c8b4610        mov     r8,qword ptr [rsi+10h]
+fffff806`e77bb4aa 488b16          mov     rdx,qword ptr [rsi]
+fffff806`e77bb4ad 89442448        mov     dword ptr [rsp+48h],eax
+fffff806`e77bb4b1 8b4704          mov     eax,dword ptr [rdi+4]
+fffff806`e77bb4b4 89442440        mov     dword ptr [rsp+40h],eax
+fffff806`e77bb4b8 8b442468        mov     eax,dword ptr [rsp+68h]
+fffff806`e77bb4bc 89442438        mov     dword ptr [rsp+38h],eax
+fffff806`e77bb4c0 8a470c          mov     al,byte ptr [rdi+0Ch]
+fffff806`e77bb4c3 88442430        mov     byte ptr [rsp+30h],al
+fffff806`e77bb4c7 8b4708          mov     eax,dword ptr [rdi+8]
+fffff806`e77bb4ca 89442428        mov     dword ptr [rsp+28h],eax
+fffff806`e77bb4ce 8b07            mov     eax,dword ptr [rdi]
+fffff806`e77bb4d0 89442420        mov     dword ptr [rsp+20h],eax
+fffff806`e77bb4d4 e82f000000      call    nt!PopDiagTraceAdaptiveSessionState (fffff806`e77bb508)
+fffff806`e77bb4d9 488b5c2470      mov     rbx,qword ptr [rsp+70h]
+fffff806`e77bb4de 488b742478      mov     rsi,qword ptr [rsp+78h]
+fffff806`e77bb4e3 4883c450        add     rsp,50h
+fffff806`e77bb4e7 5f              pop     rdi
+fffff806`e77bb4e8 c3              ret
+fffff806`e77bb4e9 cc              int     3
+fffff806`e77bb4ea 488d442460      lea     rax,[rsp+60h]
+fffff806`e77bb4ef 4c8d4c2468      lea     r9,[rsp+68h]
+fffff806`e77bb4f4 4889442420      mov     qword ptr [rsp+20h],rax
+fffff806`e77bb4f9 e86a1e0000      call    nt!PopAdaptiveGetRemoteSessionState (fffff806`e77bd368)
+fffff806`e77bb4fe eb9c            jmp     nt!PopAdaptiveGetSessionStateUnsafe+0x40 (fffff806`e77bb49c)
+fffff806`e77bb500 cc              int     3
+fffff806`e77bb501 cc              int     3
+fffff806`e77bb502 cc              int     3
+fffff806`e77bb503 cc              int     3
+fffff806`e77bb504 cc              int     3
+fffff806`e77bb505 cc              int     3
+fffff806`e77bb506 cc              int     3
+fffff806`e77bb507 cc              int     3
+nt!PopDiagTraceAdaptiveSessionState:
+fffff806`e77bb508 488bc4          mov     rax,rsp
+fffff806`e77bb50b 48895820        mov     qword ptr [rax+20h],rbx
+fffff806`e77bb50f 4c894018        mov     qword ptr [rax+18h],r8
+fffff806`e77bb513 48895010        mov     qword ptr [rax+10h],rdx
+fffff806`e77bb517 894808          mov     dword ptr [rax+8],ecx
+fffff806`e77bb51a 55              push    rbp
+fffff806`e77bb51b 488d68d1        lea     rbp,[rax-2Fh]
+fffff806`e77bb51f 4881ecf0000000  sub     rsp,0F0h
+fffff806`e77bb526 488b0593f14400  mov     rax,qword ptr [nt!_security_cookie (fffff806`e7c0a6c0)]
+fffff806`e77bb52d 4833c4          xor     rax,rsp
+fffff806`e77bb530 48894517        mov     qword ptr [rbp+17h],rax
+fffff806`e77bb534 803d81c04a0000  cmp     byte ptr [nt!PopDiagHandleRegistered (fffff806`e7c675bc)],0
+fffff806`e77bb53b 418bd9          mov     ebx,r9d
+fffff806`e77bb53e 0f84f7000000    je      nt!PopDiagTraceAdaptiveSessionState+0x133 (fffff806`e77bb63b)
+fffff806`e77bb544 488b0d8df05400  mov     rcx,qword ptr [nt!PopDiagHandle (fffff806`e7d0a5d8)]
+fffff806`e77bb54b 488d157e8d65ff  lea     rdx,[nt!POP_ETW_EVENT_ADAPTIVE_SESSION_STATE (fffff806`e6e142d0)]
+fffff806`e77bb552 e879668eff      call    nt!EtwEventEnabled (fffff806`e70a1bd0)
+fffff806`e77bb557 84c0            test    al,al
+fffff806`e77bb559 0f84dc000000    je      nt!PopDiagTraceAdaptiveSessionState+0x133 (fffff806`e77bb63b)
+fffff806`e77bb55f 0fb64567        movzx   eax,byte ptr [rbp+67h]
+fffff806`e77bb563 488d15668d65ff  lea     rdx,[nt!POP_ETW_EVENT_ADAPTIVE_SESSION_STATE (fffff806`e6e142d0)]
+fffff806`e77bb56a 83658300        and     dword ptr [rbp-7Dh],0
+fffff806`e77bb56e 41b804000000    mov     r8d,4
+fffff806`e77bb574 83659300        and     dword ptr [rbp-6Dh],0
+fffff806`e77bb578 8365a300        and     dword ptr [rbp-5Dh],0
+fffff806`e77bb57c 8365b300        and     dword ptr [rbp-4Dh],0
+fffff806`e77bb580 8365c300        and     dword ptr [rbp-3Dh],0
+fffff806`e77bb584 418d4804        lea     ecx,[r8+4]
+fffff806`e77bb588 8365d300        and     dword ptr [rbp-2Dh],0
+fffff806`e77bb58c 458d4806        lea     r9d,[r8+6]
+fffff806`e77bb590 8365e300        and     dword ptr [rbp-1Dh],0
+fffff806`e77bb594 8365f300        and     dword ptr [rbp-0Dh],0
+fffff806`e77bb598 83650300        and     dword ptr [rbp+3],0
+fffff806`e77bb59c 83651300        and     dword ptr [rbp+13h],0
+fffff806`e77bb5a0 89442434        mov     dword ptr [rsp+34h],eax
+fffff806`e77bb5a4 488d4537        lea     rax,[rbp+37h]
+fffff806`e77bb5a8 4889442440      mov     qword ptr [rsp+40h],rax
+fffff806`e77bb5ad 488d453f        lea     rax,[rbp+3Fh]
+fffff806`e77bb5b1 48894587        mov     qword ptr [rbp-79h],rax
+fffff806`e77bb5b5 488d4547        lea     rax,[rbp+47h]
+fffff806`e77bb5b9 48894597        mov     qword ptr [rbp-69h],rax
+fffff806`e77bb5bd 488d442430      lea     rax,[rsp+30h]
+fffff806`e77bb5c2 488945a7        mov     qword ptr [rbp-59h],rax
+fffff806`e77bb5c6 488d4557        lea     rax,[rbp+57h]
+fffff806`e77bb5ca 488945b7        mov     qword ptr [rbp-49h],rax
+fffff806`e77bb5ce 488d455f        lea     rax,[rbp+5Fh]
+fffff806`e77bb5d2 488945c7        mov     qword ptr [rbp-39h],rax
+fffff806`e77bb5d6 488d442434      lea     rax,[rsp+34h]
+fffff806`e77bb5db 488945d7        mov     qword ptr [rbp-29h],rax
+fffff806`e77bb5df 488d456f        lea     rax,[rbp+6Fh]
+fffff806`e77bb5e3 488945e7        mov     qword ptr [rbp-19h],rax
+fffff806`e77bb5e7 488d4577        lea     rax,[rbp+77h]
+fffff806`e77bb5eb 488945f7        mov     qword ptr [rbp-9],rax
+fffff806`e77bb5ef 488d457f        lea     rax,[rbp+7Fh]
+fffff806`e77bb5f3 48894507        mov     qword ptr [rbp+7],rax
+fffff806`e77bb5f7 488d442440      lea     rax,[rsp+40h]
+fffff806`e77bb5fc 4489442448      mov     dword ptr [rsp+48h],r8d
+fffff806`e77bb601 894d8f          mov     dword ptr [rbp-71h],ecx
+fffff806`e77bb604 894d9f          mov     dword ptr [rbp-61h],ecx
+fffff806`e77bb607 488b0dcaef5400  mov     rcx,qword ptr [nt!PopDiagHandle (fffff806`e7d0a5d8)]
+fffff806`e77bb60e 448945af        mov     dword ptr [rbp-51h],r8d
+fffff806`e77bb612 448945bf        mov     dword ptr [rbp-41h],r8d
+fffff806`e77bb616 448945cf        mov     dword ptr [rbp-31h],r8d
+fffff806`e77bb61a 448945df        mov     dword ptr [rbp-21h],r8d
+fffff806`e77bb61e 448945ef        mov     dword ptr [rbp-11h],r8d
+fffff806`e77bb622 448945ff        mov     dword ptr [rbp-1],r8d
+fffff806`e77bb626 4489450f        mov     dword ptr [rbp+0Fh],r8d
+fffff806`e77bb62a 4533c0          xor     r8d,r8d
+fffff806`e77bb62d 4889442420      mov     qword ptr [rsp+20h],rax
+fffff806`e77bb632 895c2430        mov     dword ptr [rsp+30h],ebx
+fffff806`e77bb636 e8750ba6ff      call    nt!EtwWrite (fffff806`e721c1b0)
+fffff806`e77bb63b 488b4d17        mov     rcx,qword ptr [rbp+17h]
+fffff806`e77bb63f 4833cc          xor     rcx,rsp
+fffff806`e77bb642 e8d9a2ceff      call    nt!_security_check_cookie (fffff806`e74a5920)
+fffff806`e77bb647 488b9c2418010000 mov     rbx,qword ptr [rsp+118h]
+fffff806`e77bb64f 4881c4f0000000  add     rsp,0F0h
+fffff806`e77bb656 5d              pop     rbp
+fffff806`e77bb657 c3              ret
+fffff806`e77bb658 cc              int     3
+fffff806`e77bb659 cc              int     3
+fffff806`e77bb65a cc              int     3
+fffff806`e77bb65b cc              int     3
+fffff806`e77bb65c cc              int     3
+fffff806`e77bb65d cc              int     3
+fffff806`e77bb65e cc              int     3
+fffff806`e77bb65f cc              int     3
+nt!PopNotifyConsoleUserPresent:
+fffff806`e77bb660 48895c2418      mov     qword ptr [rsp+18h],rbx
+fffff806`e77bb665 4889742420      mov     qword ptr [rsp+20h],rsi
+fffff806`e77bb66a 55              push    rbp
+fffff806`e77bb66b 57              push    rdi
+fffff806`e77bb66c 4154            push    r12
+fffff806`e77bb66e 4156            push    r14
+fffff806`e77bb670 4157            push    r15
+fffff806`e77bb672 488d6c24c0      lea     rbp,[rsp-40h]
+fffff806`e77bb677 4881ec40010000  sub     rsp,140h
+fffff806`e77bb67e 488b053bf04400  mov     rax,qword ptr [nt!_security_cookie (fffff806`e7c0a6c0)]
+fffff806`e77bb685 4833c4          xor     rax,rsp
+fffff806`e77bb688 48894530        mov     qword ptr [rbp+30h],rax
+fffff806`e77bb68c 33c0            xor     eax,eax
+fffff806`e77bb68e 83cbff          or      ebx,0FFFFFFFFh
+fffff806`e77bb691 803d90a1540000  cmp     byte ptr [nt!PsWin32CalloutsEstablished (fffff806`e7d05828)],0
+fffff806`e77bb698 0f57c0          xorps   xmm0,xmm0
+fffff806`e77bb69b 89442439        mov     dword ptr [rsp+39h],eax
+fffff806`e77bb69f 8bf2            mov     esi,edx
+fffff806`e77bb6a1 89442438        mov     dword ptr [rsp+38h],eax
+fffff806`e77bb6a5 448ae1          mov     r12b,cl
+fffff806`e77bb6a8 894590          mov     dword ptr [rbp-70h],eax
+fffff806`e77bb6ab 8bc3            mov     eax,ebx
+fffff806`e77bb6ad 0f11442460      movups  xmmword ptr [rsp+60h],xmm0
+fffff806`e77bb6b2 895c2430        mov     dword ptr [rsp+30h],ebx
+fffff806`e77bb6b6 0f11442470      movups  xmmword ptr [rsp+70h],xmm0
+fffff806`e77bb6bb 0f114580        movups  xmmword ptr [rbp-80h],xmm0
+fffff806`e77bb6bf 0f84f9010000    je      nt!PopNotifyConsoleUserPresent+0x25e (fffff806`e77bb8be)
+fffff806`e77bb6c5 e8c63aa7ff      call    nt!RtlGetActiveConsoleId (fffff806`e722f190)
+fffff806`e77bb6ca 89442430        mov     dword ptr [rsp+30h],eax
+fffff806`e77bb6ce 3bc3            cmp     eax,ebx
+fffff806`e77bb6d0 0f84fc010000    je      nt!PopNotifyConsoleUserPresent+0x272 (fffff806`e77bb8d2)
+fffff806`e77bb6d6 e80d070000      call    nt!TtmIsEnabled (fffff806`e77bbde8)
+fffff806`e77bb6db 84c0            test    al,al
+fffff806`e77bb6dd 0f85e2010000    jne     nt!PopNotifyConsoleUserPresent+0x265 (fffff806`e77bb8c5)
+fffff806`e77bb6e3 83658800        and     dword ptr [rbp-78h],0
+fffff806`e77bb6e7 488d4da0        lea     rcx,[rbp-60h]
+fffff806`e77bb6eb 4883659000      and     qword ptr [rbp-70h],0
+fffff806`e77bb6f0 bf01000000      mov     edi,1
+fffff806`e77bb6f5 88442474        mov     byte ptr [rsp+74h],al
+fffff806`e77bb6f9 33d2            xor     edx,edx
+fffff806`e77bb6fb 488d442438      lea     rax,[rsp+38h]
+fffff806`e77bb700 4488642438      mov     byte ptr [rsp+38h],r12b
+fffff806`e77bb705 8974243c        mov     dword ptr [rsp+3Ch],esi
+fffff806`e77bb709 448d475f        lea     r8d,[rdi+5Fh]
+fffff806`e77bb70d 897c2470        mov     dword ptr [rsp+70h],edi
+fffff806`e77bb711 c744247808000000 mov     dword ptr [rsp+78h],8
+fffff806`e77bb719 48894580        mov     qword ptr [rbp-80h],rax
+fffff806`e77bb71d e8de53d0ff      call    nt!_memset_spec_plain (fffff806`e74c0b00)
+fffff806`e77bb722 4533ff          xor     r15d,r15d
+fffff806`e77bb725 4533f6          xor     r14d,r14d
+fffff806`e77bb728 4c217c2450      and     qword ptr [rsp+50h],r15
+fffff806`e77bb72d e82eea1a00      call    nt!PopIsStateTransitionBlockingThread (fffff806`e796a160)
+fffff806`e77bb732 8ad8            mov     bl,al
+fffff806`e77bb734 488d542460      lea     rdx,[rsp+60h]
+fffff806`e77bb739 488d442430      lea     rax,[rsp+30h]
+fffff806`e77bb73e 448acf          mov     r9b,dil
+fffff806`e77bb741 448bc7          mov     r8d,edi
+fffff806`e77bb744 4889442420      mov     qword ptr [rsp+20h],rax
+fffff806`e77bb749 8d4f04          lea     ecx,[rdi+4]
+fffff806`e77bb74c e8cb180000      call    nt!PopDiagTraceWin32kCalloutStart (fffff806`e77bd01c)
+fffff806`e77bb751 84db            test    bl,bl
+fffff806`e77bb753 752c            jne     nt!PopNotifyConsoleUserPresent+0x121 (fffff806`e77bb781)
+fffff806`e77bb755 4c8d4c2450      lea     r9,[rsp+50h]
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

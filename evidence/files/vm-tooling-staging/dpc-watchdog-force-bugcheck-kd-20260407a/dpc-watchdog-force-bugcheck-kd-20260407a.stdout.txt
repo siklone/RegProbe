@@ -1,0 +1,78 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.015 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.188 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 12:01:15.230 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 12:01:15.370 2026 (UTC - 7:00)
+System Uptime: 0 days 6:42:39.109
+lkd> .sympath C:\Tools\Symbols\dpc-watchdog-force-bugcheck-kd-20260407a
+Symbol search path is: C:\Tools\Symbols\dpc-watchdog-force-bugcheck-kd-20260407a
+Expanded Symbol search path is: c:\tools\symbols\dpc-watchdog-force-bugcheck-kd-20260407a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\dpc-watchdog-force-bugcheck-kd-20260407a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!Ki*DpcWatchdog*
+fffff806`e74ce94e nt!KiValidateDpcWatchdogConfiguration$filt$0 (void)
+fffff806`e7d22738 nt!KiDpcWatchdogConfigurationLock = <no type information>
+fffff806`e73c6ef0 nt!KiDpcWatchdog (KiDpcWatchdog)
+fffff806`e73b4d98 nt!KiValidateDpcWatchdogConfiguration (KiValidateDpcWatchdogConfiguration)
+fffff806`e7d0fb90 nt!KiDeferredDpcWatchdogActivePrcb = <no type information>
+fffff806`e73b4d80 nt!KiUpdateProcessorDpcWatchdogConfiguration (KiUpdateProcessorDpcWatchdogConfiguration)
+fffff806`e7dc5e84 nt!KiForceBugcheckForDpcWatchdog = <no type information>
+fffff806`e724787c nt!KiDeferDpcWatchdogViolation (KiDeferDpcWatchdogViolation)
+fffff806`e72f9918 nt!KiResetGlobalDpcWatchdogProfiler (KiResetGlobalDpcWatchdogProfiler)
+fffff806`e74ab420 nt!KiDeferredDpcWatchdogViolation (KiDeferredDpcWatchdogViolation)
+fffff806`e709d7d0 nt!KiDpcWatchdogCounterReset (KiDpcWatchdogCounterReset)
+fffff806`e713a484 nt!KiProcessDeferredDpcWatchdogViolation (KiProcessDeferredDpcWatchdogViolation)
+fffff806`e73c6420 nt!KiInvokeDeferredDpcWatchdogViolation (KiInvokeDeferredDpcWatchdogViolation)
+fffff806`e7247624 nt!KiDpcWatchdogCaptureStack (KiDpcWatchdogCaptureStack)
+lkd> dd nt!KiForceBugcheckForDpcWatchdog L1
+fffff806`e7dc5e84  00000000
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

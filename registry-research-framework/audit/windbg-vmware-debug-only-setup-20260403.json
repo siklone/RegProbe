@@ -1,0 +1,34 @@
+﻿{
+    "generated_utc":  "2026-04-03T18:35:33.7213462Z",
+    "status":  "ready-to-short-try",
+    "debug_environment":  "vmware-debug-only",
+    "debug_vm_name":  "Win25H2DebugOnly",
+    "debug_transport":  "named-pipe",
+    "debug_transport_candidates":  [
+                                       "named-pipe"
+                                   ],
+    "debug_baseline":  "RegProbe-Debug-VMwareOnly-Baseline-20260403",
+    "transport_reliability":  "unknown",
+    "reproducible_runs":  0,
+    "vm_role":  "debug_arbiter_only",
+    "source_runtime_profile":  "primary",
+    "source_vm_name":  "Win25H2Clean",
+    "source_vm_path":  "\u003cresolve-from-vm-baselines:primary\u003e",
+    "source_vm_path_resolution":  "resolve-at-provision-time",
+    "source_snapshot":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "trial_policy":  "short-transport-only",
+    "frozen_lane_return_allowed":  false,
+    "stop_condition":  "repeat-current-transport-blocker",
+    "role_split":  {
+                       "vmware_runtime":  "runtime_research",
+                       "vmware_debug_only":  "debug_arbiter_only_short_try",
+                       "hyperv":  "preferred_long_term_debug_arbiter"
+                   },
+    "provisioning_steps":  [
+                               "Clone from the runtime VMware baseline into a fresh debug-only VM instead of reusing the frozen WinDbg lane.",
+                               "Keep the new VM debugger-first and minimal; do not copy runtime scratch or mega-trigger tooling clutter into it.",
+                               "Enable only the transport and shell-health helpers needed for a short WinDbg transport try.",
+                               "Run a short transport-only smoke before any single-key semantic lane.",
+                               "If the current VMware transport blocker reproduces, stop the VMware branch and move directly to Hyper-V prerequisites."
+                           ]
+}

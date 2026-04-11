@@ -1,0 +1,50 @@
+﻿{
+    "generated_utc":  "2026-04-03T16:54:49.9060570Z",
+    "family":  "power-control",
+    "pattern":  "mega-trigger",
+    "total_candidates":  3,
+    "csv_exists":  false,
+    "csv_line_count":  0,
+    "path_line_count":  0,
+    "exact_hit_count":  0,
+    "exact_line_only_count":  0,
+    "path_only_count":  0,
+    "no_hit_count":  0,
+    "boot_unsafe_count":  3,
+    "aborted_recovered_count":  0,
+    "trigger_log":  [
+
+                    ],
+    "candidates":  [
+                       {
+                           "candidate_id":  "power.control.hiberboot-enabled",
+                           "value_name":  "HiberbootEnabled",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "boot-unsafe",
+                           "sample_lines":  [
+
+                                            ]
+                       },
+                       {
+                           "candidate_id":  "power.control.msdisabled",
+                           "value_name":  "MSDisabled",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "boot-unsafe",
+                           "sample_lines":  [
+
+                                            ]
+                       },
+                       {
+                           "candidate_id":  "power.control.ttm-enabled",
+                           "value_name":  "TtmEnabled",
+                           "exact_line_count":  0,
+                           "exact_query_hits":  0,
+                           "status":  "boot-unsafe",
+                           "sample_lines":  [
+
+                                            ]
+                       }
+                   ]
+}

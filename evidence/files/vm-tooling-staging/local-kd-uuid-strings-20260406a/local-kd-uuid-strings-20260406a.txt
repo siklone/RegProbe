@@ -1,0 +1,8 @@
+.sympath C:\Tools\Symbols\local-kd-uuid-strings-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+du 0xfffff800`976f6390
+du 0xfffff800`976f6430
+du nt!ExpUuidSequenceNumberRegName
+.echo REGPROBE_LOCALKD_END
+q

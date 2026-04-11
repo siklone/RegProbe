@@ -1,0 +1,7 @@
+.sympath C:\Tools\Symbols\local-kd-allowremotedasd-strings-20260406a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+du 0xfffff800`972c32a0
+du 0xfffff800`972c3340
+.echo REGPROBE_LOCALKD_END
+q

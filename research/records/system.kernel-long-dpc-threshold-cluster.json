@@ -1,0 +1,345 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "system.kernel-long-dpc-threshold-cluster",
+  "tweak_id": "system.kernel-long-dpc-threshold-cluster",
+  "record_status": "draft",
+  "summary": "Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while a later PDB-backed Ghidra xref pass directly resolved `KiLongDpcQueueThreshold` references in `KiExecuteAllDpcs` and `KeInitSystem`. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The cluster is therefore live-state-confirmed and current-build lineage-confirmed, but still export-blocked and still lacks a direct current-build read site for `KiLongDpcRuntimeThreshold` or a persisted registry seeding path.",
+  "setting": {
+    "name": "Kernel Long DPC Threshold Cluster",
+    "category": "System",
+    "area": "Session Manager Kernel DPC Scheduling",
+    "scope": "device",
+    "casual_explanation": "This cluster appears to expose low-level thresholds for what the kernel considers a long DPC queue condition and a long DPC runtime condition. It is kernel-adjacent and not a normal user setting.",
+    "why_people_change_it": "Kernel researchers may inspect these values when investigating DPC latency behavior, watchdog escalation, or undocumented scheduler-tuning guides.",
+    "tradeoffs_overview": "The cluster now has explicit repo-doc defaults, clean baseline state, exact current-build string hits, live current-build kernel values, a bounded current-build consumer-lineage proof, a direct PDB-backed xref for `KiLongDpcQueueThreshold`, and a broad runtime no-hit lane. It is strong enough for a schema-backed draft, but still too weak for a published tweak or a recommended non-default configuration because the direct current-build read site for `KiLongDpcRuntimeThreshold` and any persisted registry path remain unresolved.",
+    "professional_notes": "Repo docs list `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` under `Session Manager\\\\Kernel`, mapped to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`. The kernel-power routing pass already grouped both values inside the `Session Manager\\\\Kernel` docs cluster. The observed clean baseline later confirmed that the parent key exists while both values are absent. The targeted current-build string batch then found exact Unicode hits for both values in `ntoskrnl.exe`, which is stronger than a pure docs-only lead and enough to keep the family out of raw backlog. A later KVM local-KD wildcard pass then resolved the live current-build family symbols `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, `KiLongDpcRuntimeThresholdCycles`, `KiEnterLongDpcProcessing`, `EtwTraceLongDpcDetectionEvent`, and `EtwTraceLongDpcMitigationEvent`. The dedicated value pass then showed `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, exactly matching the repo-doc defaults, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. That removes the old `live-state-unproven` blocker and narrows the open question from 'are the repo defaults even live?' to 'what exact current-build consumer path reaches them and is any persisted registry seeding path still present?'. A later full-function KVM local-KD consumer pass then disassembled `KiEnterLongDpcProcessing`, `EtwTraceLongDpcDetectionEvent`, and `EtwTraceLongDpcMitigationEvent`. That retained bundle showed a concrete live call from `KiEnterLongDpcProcessing` into `EtwTraceLongDpcMitigationEvent`, but no direct symbolized operand referencing `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, or `KiLongDpcRuntimeThresholdCycles`. The adjacent ETW helpers also behaved like telemetry packaging rather than the threshold reader itself: `EtwTraceLongDpcDetectionEvent` reduced to a thin `EtwTraceKernelEvent` wrapper, while `EtwTraceLongDpcMitigationEvent` read caller-supplied `+0x510` fields instead of the threshold globals. A later PDB-backed Ghidra xref export then resolved `KiLongDpcQueueThreshold` directly in current-build `KiExecuteAllDpcs` and `KeInitSystem`, with all three references naturally resolved and decompile-backed. That upgrades the queue-threshold side from adjacent ETW-only lineage to a direct consumer/init xref, but it does not yet resolve a corresponding direct current-build read site for `KiLongDpcRuntimeThreshold` or any persisted registry seeding path. The later lightweight runtime replay explicitly armed both values from `null` to `1`, rebooted once, and still left both values in the residual `no-hit` hold, which is more informative than a generic no-hit because it demonstrates that a simple present-and-nonzero mutation did not surface a trace hit in that broad lane. Existing source-enrichment outputs converge on the same low-priority next lane for both values: `timer-dpc-stress`, `windbg` queue. A follow-up repo scan first identified `Invoke-TimerResolutionTrigger` as the nearest reusable primitive, the guest mega-trigger runtime script then gained a dedicated `timer_dpc_stress` harness that layers `NtSetTimerResolution`, `timeBeginPeriod`, concurrent short-period `System.Threading.Timer` instances, and bounded CPU burst jobs, and the generic Procmon guest tool now exposes the same lane as `TriggerProfile = timer-dpc-stress`. A dedicated KVM Procmon replay for `LongDpcRuntimeThreshold` then reached live guest execution under that narrow trigger profile, but failed during Procmon export with `Procmon SaveAs timed out after 60 second(s)`, leaving `csv_exists = false`, `normalized_bundle_exists = false`, and `guest_health = degraded`. After the host wrapper was hardened so its outer deadline exceeded the SaveAs budget, a second canonical replay widened `SaveAsTimeoutSeconds` to `180` and still failed at the same Procmon export phase with `Procmon SaveAs timed out after 180 second(s)`. That means the trigger-design gap is closed and the narrow lane has been attempted twice with deterministic export-timeout outcomes; the current blocker is specifically Procmon export reliability plus missing direct runtime-threshold or registry proof. This cluster therefore belongs in the canonical research set, but as a live-state-confirmed DPC sibling family rather than an actively promoted tweak lane.",
+    "targets": [
+      {
+        "target_id": "long-dpc-queue-threshold",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "LongDpcQueueThreshold",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Missing on observed baseline",
+            "meaning": "The parent key exists, but the value is absent on the observed clean baseline.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-long-dpc-threshold-existence-20260329"
+            ]
+          },
+          {
+            "state_kind": "documented-default",
+            "value": 3,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs assign `LongDpcQueueThreshold = 3` and map it to `KiLongDpcQueueThreshold`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-long-dpc-threshold-docs-20260327"
+            ]
+          }
+        ]
+      },
+      {
+        "target_id": "long-dpc-runtime-threshold",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "LongDpcRuntimeThreshold",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Missing on observed baseline",
+            "meaning": "The parent key exists, but the value is absent on the observed clean baseline.",
+            "evidence_ids": [
+              "vm-session-manager-kernel-long-dpc-threshold-existence-20260329"
+            ]
+          },
+          {
+            "state_kind": "documented-default",
+            "value": 100,
+            "label": "Repo-documented default",
+            "meaning": "Repo docs assign `LongDpcRuntimeThreshold = 100` and map it to `KiLongDpcRuntimeThreshold`.",
+            "evidence_ids": [
+              "repo-session-manager-kernel-long-dpc-threshold-docs-20260327"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The app does not currently expose either long-DPC threshold as a tweak surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed baseline registry state",
+      "applies_to": "Win25H2Clean observed baseline",
+      "states": [
+        {
+          "target_id": "long-dpc-queue-threshold",
+          "state_kind": "missing",
+          "value": null
+        },
+        {
+          "target_id": "long-dpc-runtime-threshold",
+          "state_kind": "missing",
+          "value": null
+        }
+      ],
+      "notes": "Observed registry baseline only. Repo docs separately describe likely built-in defaults for both values.",
+      "evidence_ids": [
+        "vm-session-manager-kernel-long-dpc-threshold-existence-20260329"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-default-missing-cluster",
+      "label": "Observed default-missing cluster",
+      "intended_for": [
+        "Research tracking",
+        "Future DPC-threshold validation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click tweak surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "long-dpc-queue-threshold",
+          "state_kind": "missing",
+          "value": null
+        },
+        {
+          "target_id": "long-dpc-runtime-threshold",
+          "state_kind": "missing",
+          "value": null
+        }
+      ],
+      "good_when": "You want to preserve the observed baseline while keeping both DPC threshold siblings in the research queue.",
+      "bad_when": "You need a validated non-default recommendation or a demonstrated runtime reader path.",
+      "tradeoffs": [
+        "Preserves the observed baseline registry state.",
+        "Acknowledges that both values are current-build-relevant strings in `ntoskrnl.exe`.",
+        "Keeps the next proof step focused on caller or live-value discovery instead of speculative mutation."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-session-manager-kernel-long-dpc-threshold-docs-20260327",
+        "vm-session-manager-kernel-long-dpc-threshold-existence-20260329",
+        "static-session-manager-kernel-long-dpc-threshold-string-20260331",
+        "vm-session-manager-kernel-long-dpc-threshold-runtime-20260331",
+        "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403",
+        "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-session-manager-kernel-long-dpc-threshold-docs-20260327",
+      "kind": "repo-doc",
+      "title": "Repo system docs assign LongDpcQueueThreshold = 3 and LongDpcRuntimeThreshold = 100",
+      "location": "Docs/system/system.md and research/notes/kernel-power-96-key-routing-20260327.md",
+      "summary": "Repo docs list both values under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` and map them to `KiLongDpcQueueThreshold` and `KiLongDpcRuntimeThreshold`.",
+      "supports": [
+        "path",
+        "value",
+        "default"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-existence-20260329",
+      "kind": "registry-observation",
+      "title": "Observed baseline existence for LongDpcQueueThreshold and LongDpcRuntimeThreshold",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The observed clean baseline confirmed that `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` exists while both `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` are absent.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-session-manager-kernel-long-dpc-threshold-string-20260331",
+      "kind": "inference",
+      "title": "Current-build string hits for LongDpcQueueThreshold and LongDpcRuntimeThreshold",
+      "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+      "summary": "The broad current-build string batch found exact Unicode hits for both value names in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`, with no supporting hits in the adjacent `smss.exe`, `winload.exe`, or `ci.dll` probes.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-runtime-20260331",
+      "kind": "vm-test",
+      "title": "Lightweight runtime batch kept both LongDpc thresholds in residual no-hit hold",
+      "location": "research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json",
+      "summary": "The tools-hardened lightweight runtime lane explicitly armed both values from missing to `1`, rebooted once, and still kept both `system.kernel.long-dpc-queue-threshold` and `system.kernel.long-dpc-runtime-threshold` in the residual `no-hit` hold.",
+      "supports": [
+        "behavior",
+        "version-scope",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "source-enrichment-session-manager-kernel-long-dpc-threshold-20260403",
+      "kind": "analysis-output",
+      "title": "Source-enrichment keeps both LongDpc thresholds as docs-first new candidates",
+      "location": "registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-queue-threshold.json and registry-research-framework/enrichment/outputs/source-enrichment-20260403-044821/per-key/system.kernel.long-dpc-runtime-threshold.json",
+      "summary": "Source-enrichment assigns both values the same low-support docs-first route bucket and converges on the same suggested next runtime family: `timer-dpc-stress`, low priority, `windbg` queue.",
+      "supports": [
+        "research-gap",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "repo-session-manager-kernel-long-dpc-threshold-trigger-20260408",
+      "kind": "repo-code",
+      "title": "Repo guest tooling now exposes a dedicated timer-dpc-stress harness",
+      "location": "scripts/vm/run-power-control-batch-mega-trigger-runtime.guest.ps1, scripts/vm/guest-tools/run-registry-policy-probe.ps1, and scripts/source_enrichment_scan.py",
+      "summary": "The guest mega-trigger runtime script now exposes `timer_dpc_stress`, and the generic Procmon guest tool now exposes `TriggerProfile = timer-dpc-stress`; both align directly with the enrichment recommendation for `timer-dpc-stress` triggers by combining timer-resolution changes, concurrent timers, and DPC-heavy workload.",
+      "supports": [
+        "behavior",
+        "research-gap"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-kd-symbols-20260408",
+      "kind": "vm-test",
+      "title": "KVM local-KD symbol sweep resolved the live Long-DPC threshold family",
+      "location": "evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-longdpc-wildcard-20260408a/local-kd-longdpc-wildcard-20260408a.log",
+      "summary": "A current-build KVM local-KD symbol sweep resolved `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, `KiLongDpcRuntimeThresholdCycles`, `KiEnterLongDpcProcessing`, `EtwTraceLongDpcDetectionEvent`, and `EtwTraceLongDpcMitigationEvent` in the live kernel.",
+      "supports": [
+        "value",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-kd-values-20260408",
+      "kind": "vm-test",
+      "title": "KVM local-KD live values match the repo-doc Long-DPC defaults",
+      "location": "evidence/files/vm-tooling-staging/local-kd-longdpc-values-20260408a/local-kd-longdpc-values-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-longdpc-values-20260408a/local-kd-longdpc-values-20260408a.log",
+      "summary": "A current-build KVM local-KD value pass returned `KiLongDpcQueueThreshold = 3`, `KiLongDpcRuntimeThreshold = 100`, and `KiLongDpcRuntimeThresholdCycles = 0x493e0`, aligning the two primary live globals with the repo-doc defaults.",
+      "supports": [
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-kd-consumer-20260408",
+      "kind": "vm-test",
+      "title": "KVM local-KD consumer pass narrows the live Long-DPC lineage to KiEnterLongDpcProcessing and ETW mitigation",
+      "location": "evidence/files/vm-tooling-staging/local-kd-longdpc-consumer-20260408a/local-kd-longdpc-consumer-20260408a-summary.json and evidence/files/vm-tooling-staging/local-kd-longdpc-consumer-20260408a/local-kd-longdpc-consumer-20260408a.log",
+      "summary": "A current-build full-function KVM local-KD consumer pass showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while the same retained bundle still exposed no direct symbolized read of `KiLongDpcQueueThreshold`, `KiLongDpcRuntimeThreshold`, or `KiLongDpcRuntimeThresholdCycles`. The adjacent ETW helpers looked like event-packaging code rather than the threshold reader itself.",
+      "supports": [
+        "behavior",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-session-manager-kernel-long-dpc-threshold-ghidra-queue-xref-20260408",
+      "kind": "analysis-output",
+      "title": "PDB-backed Ghidra xrefs resolve KiLongDpcQueueThreshold in KiExecuteAllDpcs and KeInitSystem",
+      "location": "evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-summary.json and evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-evidence.json and evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-ghidra-matches.md",
+      "summary": "A current-build PDB-backed Ghidra export resolved three naturally-resolved references to `KiLongDpcQueueThreshold`: one in `KiExecuteAllDpcs` and two in `KeInitSystem`, tightening the queue-threshold side from adjacent ETW lineage to a direct consumer/init xref while still leaving the runtime-threshold read site unresolved.",
+      "supports": [
+        "behavior",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-runtime-timerdpc-procmon-20260408",
+      "kind": "vm-test",
+      "title": "Dedicated KVM Procmon timer-dpc-stress replay reached guest execution but failed at Procmon SaveAs",
+      "location": "evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a-summary.json and evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a/host-review.json",
+      "summary": "A dedicated narrow replay for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` launched successfully in the guest and advanced to the Procmon export phase, but failed with `Procmon SaveAs timed out after 60 second(s)`, producing no CSV or normalized bundle.",
+      "supports": [
+        "behavior",
+        "research-gap",
+        "risk"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-runtime-timerdpc-procmon-retry-20260408",
+      "kind": "vm-test",
+      "title": "Dedicated KVM Procmon timer-dpc-stress retry still ended in Procmon SaveAs timeout after widened export budget",
+      "location": "evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d-summary.json, evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d-probe-stage.json, and evidence/files/vm-tooling-staging/longdpcruntimethreshold-procmon-kvm-timerdpc-20260408d/host-review.json",
+      "summary": "A second canonical dedicated replay widened `SaveAsTimeoutSeconds` from `60` to `180` and also widened the host wrapper deadline beyond the SaveAs budget, but still failed to produce a CSV or normalized bundle. The resulting summary now resolves deterministically as `probe-stage-error` with `Procmon SaveAs timed out after 180 second(s)`, tightening the blocker from a simple unrun lane to a specific Procmon export timeout under the narrow trigger.",
+      "supports": [
+        "behavior",
+        "research-gap",
+        "risk"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a bounded current-build consumer pass that narrows adjacent lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent`, a direct PDB-backed Ghidra xref for `KiLongDpcQueueThreshold` in `KiExecuteAllDpcs` and `KeInitSystem`, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, and two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export. It is not ready for validation because `KiLongDpcRuntimeThreshold` still lacks a direct current-build read site, no exact read capture exists, and there is still no primary Microsoft source for either value.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "long-dpc-runtime-threshold-direct-read-still-unresolved",
+      "runtime_no_read",
+      "no-doc-source-outside-repo",
+      "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
+    ]
+  },
+  "open_questions": [
+    "Which exact current-build instruction or helper reads `KiLongDpcRuntimeThreshold`, now that `KiLongDpcQueueThreshold` is directly xref-resolved in `KiExecuteAllDpcs` and `KeInitSystem` while the ETW mitigation path has been narrowed as adjacent lineage?",
+    "Are the repo-doc defaults unconditional built-in live defaults, or boot-only values that just happen to match the current session state?",
+    "Would a targeted debugger-assisted lane surface a real query/set path for either value now that live state is confirmed?",
+    "Can the dedicated `timer-dpc-stress` lane be hardened past the current Procmon SaveAs timeout so it produces a CSV or normalized bundle?",
+    "Once export is stable, does the dedicated narrow trigger surface a current-build query or read path for either value, or does the lane stay no-hit even under the narrower trigger?"
+  ],
+  "tested_on": [
+    {
+      "environment": "Win25H2Clean observed baseline and VMware lightweight runtime batch",
+      "os": "Windows 11 25H2",
+      "build": "26200",
+      "notes": "The lane currently combines baseline existence, exact current-build string hits, and a broad write-and-reboot runtime pass that explicitly armed both values from missing to `1` while still leaving them in the residual no-hit hold."
+    },
+    {
+      "environment": "KVM local-KD live guest session",
+      "os": "Windows 11",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "Current-build live local-KD resolved the Long-DPC symbol family, returned `KiLongDpcQueueThreshold = 3`, `KiLongDpcRuntimeThreshold = 100`, and `KiLongDpcRuntimeThresholdCycles = 0x493e0`, and later narrowed an adjacent consumer lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent` without exposing a direct symbolized runtime-threshold read."
+    },
+    {
+      "environment": "KVM guest PDB-backed Ghidra export",
+      "os": "Windows 11",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "A PDB-backed Ghidra xref export resolved three natural references to `KiLongDpcQueueThreshold`, one in `KiExecuteAllDpcs` and two in `KeInitSystem`, which upgrades the queue-threshold side from adjacent ETW lineage to a direct consumer/init xref while still leaving the runtime-threshold reader unresolved."
+    }
+  ],
+  "last_reviewed_utc": "2026-04-08T14:18:00Z"
+}

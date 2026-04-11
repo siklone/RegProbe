@@ -1,23 +1,218 @@
 {
-  "generated_utc": "2026-04-02T04:30:00Z",
+  "generated_utc": "2026-04-02T23:59:00Z",
   "family": "power-control",
   "pattern": "mega-trigger-v2",
   "pilot_candidate_count": 5,
   "pilot_trigger_count": 8,
   "recovery_safe": true,
   "terminal_vm_state": "shell-healthy-after-restore",
-  "current_status": "parser-hardening-implemented-awaiting-rerun",
+  "current_status": "windbg-vmware-frozen-hyperv-blocked-prereqs",
   "validated_runs": [
-    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-recovery-primary-20260402-063907/summary.json",
-    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-064318/summary.json"
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/summary.json",
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-221106/results.json",
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json",
+    "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json"
   ],
   "blockers": [
-    "live VM rerun still needed to confirm the hardened parser path writes terminal results.json",
-    "pilot scope should stay at 5 keys until the rerun confirms deterministic parse completion"
+    "windbg-singlekey-transport-error",
+    "windbg-guest-restart-roundtrip-unproven",
+    "windbg-start-order-command-not-executed",
+    "windbg-reconnect-command-not-executed",
+    "windbg-named-pipe-contract-exhausted",
+    "windbg-vmware-lane-frozen",
+    "hyperv-host-prereqs-blocked"
   ],
+  "windbg_lane": {
+    "status": "frozen",
+    "bundle": "registry-research-framework/audit/power-control-windbg-boot-registry-trace-20260402.json",
+    "baseline_prep": "registry-research-framework/audit/configure-kernel-debug-baseline.json",
+    "command_script": "registry-research-framework/audit/windbg-registry-watch.txt",
+    "debug_snapshot_name": "RegProbe-Baseline-Debug-20260402",
+    "vm_profile": "secondary",
+    "freeze_ref": "registry-research-framework/audit/windbg-vmware-freeze-20260403.json",
+    "selection_ref": "registry-research-framework/audit/windbg-debug-environment-selection-20260403.json",
+    "hyperv_setup_ref": "registry-research-framework/audit/windbg-hyperv-setup-20260403.json",
+    "vmware_debug_only_setup_ref": "registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json",
+    "vmware_debug_only_short_try_ref": "registry-research-framework/audit/windbg-vmware-debug-only-short-try-20260403.json",
+    "current_environment_target": "hyperv",
+    "current_environment_status": "blocked-prereqs",
+    "host_debugger_status": "installed",
+    "public_registry_symbol": "nt!CmQueryValueKey",
+    "value_name_argument": "@rdx",
+    "command_execution_observed": true,
+    "symbol_search_log": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-014256/windbg-registry-trace_59e0_2026-04-03_01-44-20-117.log",
+    "first_hit_log": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-014903/windbg-registry-trace_01ac_2026-04-03_01-50-38-815.log",
+    "raw_watch_results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-015149/results.json",
+    "conditional_watch_results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-023157/results.json",
+    "singlekey_bundle": "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
+    "singlekey_target": "AllowSystemRequiredPowerRequests",
+    "singlekey_bcd_proof": "registry-research-framework/audit/bcd-current-20260403.txt",
+    "singlekey_smoke_results": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240/summary.json",
+    "singlekey_transport_status": "trace-error",
+    "singlekey_transport_failure": "host-cannot-communicate-with-target",
+    "vm_recovered": true
+  },
+  "serial_config_matrix": {
+    "status": "partial",
+    "matrix_ref": "registry-research-framework/audit/windbg-serial-config-matrix-20260403.json",
+    "execution_ref": "registry-research-framework/audit/windbg-serial-config-execution-20260403.json",
+    "profile_count": 4,
+    "kernel_connected_count": 4,
+    "transport_ok_count": 3,
+    "weak_variant": {
+      "id": "guest-restart-kd-none-rxloss-true",
+      "break_on_connect_mode": "none",
+      "try_no_rx_loss": "TRUE",
+      "status": "trace-error",
+      "windbg_transport_state": "transport_error"
+    }
+  },
+  "guest_restart_breakin_probe": {
+    "status": "attach-ok-command-not-executed",
+    "bundle_ref": "registry-research-framework/audit/windbg-transport-bundle-guest-restart-breakin-once-kd-bonc-rxloss-false-20260403.json",
+    "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-145133/summary.json",
+    "boot_mode": "guest-restart",
+    "trace_profile": "breakin-once",
+    "break_on_connect_mode": "bonc",
+    "try_no_rx_loss": "FALSE",
+    "kernel_connected": true,
+    "transport_error": false,
+    "shell_recovered": true,
+    "roundtrip_ready": false
+  },
+  "guest_restart_roundtrip_probe": {
+    "status": "boot-unsafe",
+    "bundle_ref": "registry-research-framework/audit/windbg-transport-bundle-guest-restart-roundtrip-once-thin-kd-bonc-rxloss-false-20260403.json",
+    "summary_ref": "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-154201/summary.json",
+    "boot_mode": "guest-restart",
+    "trace_profile": "roundtrip-once",
+    "break_on_connect_mode": "bonc",
+    "try_no_rx_loss": "FALSE",
+    "kernel_connected": true,
+    "transport_error": false,
+    "post_restart_roundtrip_success_count": 2,
+    "fatal_system_error_observed": true,
+    "shell_recovered": false,
+    "recovered_via_snapshot": true,
+    "roundtrip_ready": false
+  },
+  "guest_restart_start_order_matrix": {
+    "status": "attach-ok-command-not-executed",
+    "matrix_ref": "registry-research-framework/audit/windbg-start-order-matrix-20260403.json",
+    "execution_ref": "registry-research-framework/audit/windbg-start-order-execution-20260403.json",
+    "profile_count": 6,
+    "attach_ok_command_not_executed_count": 6,
+    "kernel_connected_count": 6,
+    "transport_error_count": 0,
+    "roundtrip_ready_count": 0,
+    "note": "Across bonc/none/b break policies and 3/10/20-second attach leads, every guest-restart run preserved connectivity and shell recovery but none executed a post-restart queued roundtrip."
+  },
+  "guest_restart_reconnect_command_matrix": {
+    "status": "attach-ok-command-not-executed",
+    "matrix_ref": "registry-research-framework/audit/windbg-reconnect-command-matrix-20260403.json",
+    "execution_ref": "registry-research-framework/audit/windbg-reconnect-command-execution-20260403.json",
+    "profile_count": 6,
+    "attach_ok_command_not_executed_count": 6,
+    "kernel_connected_count": 6,
+    "fatal_break_count": 1,
+    "breakin_success_count": 0,
+    "note": "Across the same guest-restart bonc/none/b and 3/10/20-second lead variants, host-side breakin-once injection also produced zero breakin successes and left every run attach-ok-command-not-executed."
+  },
+  "guest_restart_pipe_launch_matrix": {
+    "status": "transport-partial",
+    "matrix_ref": "registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json",
+    "execution_ref": "registry-research-framework/audit/windbg-pipe-launch-execution-20260403.json",
+    "profile_count": 4,
+    "server_attach_ok_command_not_executed_count": 2,
+    "client_transport_error_count": 2,
+    "launch_mode_effect": "none-observed",
+    "note": "Server endpoint preserved kernel attach but not command execution; client endpoint degraded into direct transport_error; quiet versus standard launch mode did not change that result."
+  },
+  "source_enrichment": {
+    "status": "partial",
+    "audit_ref": "registry-research-framework/audit/source-enrichment-20260403-192135.json",
+    "priority_queue_ref": "registry-research-framework/audit/source-enrichment-priority-queue-20260403.json",
+    "enabled_sources": [
+      "reactos",
+      "wrk",
+      "systeminformer",
+      "admx"
+    ],
+    "missing_sources": [
+      "wdk_headers",
+      "geoff_chappell"
+    ],
+    "five_key_zero_support_candidate_ids": [
+      "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "power.control.allow-system-required-power-requests",
+      "power.control.always-compute-qos-hints",
+      "power.control.coalescing-flush-interval",
+      "power.control.idle-processors-require-qos-management"
+    ],
+    "note": "The current five-key no-hit pilot still has zero source hits across ReactOS, WRK, System Informer, and ADMX, while other kernel candidates such as AdditionalCriticalWorkerThreads now have strong cross-source support."
+  },
+  "enriched_runtime_pilot": {
+    "status": "partial",
+    "priority_queue_ref": "registry-research-framework/audit/source-enrichment-priority-queue-20260403.json",
+    "combined_summary_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-192839/summary.json",
+    "combined_results_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-192839/results.json",
+    "combined_candidate_ids": [
+      "power.control.hiberboot-enabled",
+      "power.control.msdisabled",
+      "power.control.ttm-enabled"
+    ],
+    "combined_status": "boot-unsafe",
+    "isolated_followup": {
+      "power.control.hiberboot-enabled": {
+        "summary_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-195806/summary.json",
+        "results_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-195806/results.json",
+        "status": "no-hit"
+      },
+      "power.control.msdisabled": {
+        "summary_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-201139/summary.json",
+        "results_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-201139/results.json",
+        "status": "no-hit"
+      },
+      "power.control.ttm-enabled": {
+        "summary_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-202529/summary.json",
+        "results_ref": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-secondary-20260403-202529/results.json",
+        "status": "boot-unsafe"
+      }
+    },
+    "note": "The enriched three-key follow-up reproduced boot-unsafe as a combined set; isolation then showed HiberbootEnabled and MSDisabled are individually safe under the pilot-safe-v1 profile, while TtmEnabled alone reproduces boot-unsafe."
+  },
   "next_actions": [
-    "rerun the 5-key pilot against the new ETL readiness and binary fallback logic",
-    "confirm guest writes terminal summary.json and results.json without stalling in parsing",
-    "keep pilot scope at 5 keys until results.json is terminal and reliable"
-  ]
+    "treat the current VMware named-pipe WinDbg lane as frozen for classification-grade arbitration",
+    "if Hyper-V remains blocked on the current host, allow one short fresh VMware debug-only transport-first try",
+    "if that fresh VMware debug-only try reproduces the same transport blocker, stop and move directly to Hyper-V prerequisites",
+    "prepare Hyper-V host prerequisites in parallel and keep the long-term debug environment debugger-first",
+    "do not widen beyond the 5-key pilot until the debug transport contract itself changes",
+    "use the refreshed source-enrichment priority queue to decide which non-pilot candidates deserve runtime or WinDbg spend first",
+    "treat power.control.ttm-enabled as a boot-unsafe isolated candidate and keep it out of broader runtime batches",
+    "treat power.control.hiberboot-enabled and power.control.msdisabled as safe-profile no-hit candidates that may still need more specific hibernate/power-state triggers later"
+  ],
+  "pilot_outcome": {
+    "status": "no-hit",
+    "parser_source": "etl-binary-fallback",
+    "etl_path_source": "system32-trace-name",
+    "no_hit_candidate_ids": [
+      "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "power.control.allow-system-required-power-requests",
+      "power.control.always-compute-qos-hints",
+      "power.control.coalescing-flush-interval",
+      "power.control.idle-processors-require-qos-management"
+    ]
+  },
+  "confirmatory_outcome": {
+    "status": "no-hit",
+    "parser_source": "etl-binary-fallback",
+    "etl_path_source": "system32-trace-name",
+    "no_hit_candidate_ids": [
+      "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "power.control.allow-system-required-power-requests",
+      "power.control.always-compute-qos-hints",
+      "power.control.coalescing-flush-interval",
+      "power.control.idle-processors-require-qos-management"
+    ]
+  }
 }

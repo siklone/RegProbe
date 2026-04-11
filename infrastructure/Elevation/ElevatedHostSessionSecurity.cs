@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using System.IO.Pipes;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -64,6 +65,63 @@ public static class ElevatedHostSessionSecurity
     public static bool IsClientProcessAccepted(int expectedParentProcessId, int actualClientProcessId)
     {
         return expectedParentProcessId <= 0 || actualClientProcessId == expectedParentProcessId;
+    }
+
+    public static string RedactSensitiveText(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return string.Empty;
+        }
+
+        var redacted = ReplaceSensitiveValue(
+            text,
+            "(--pipe\\s+)(?:\"[^\"]*\"|'[^']*'|\\S+)");
+        redacted = ReplaceSensitiveValue(
+            redacted,
+            "(--session-token\\s+)(?:\"[^\"]*\"|'[^']*'|\\S+)");
+        redacted = ReplaceSensitiveValue(
+            redacted,
+            "(\\bpipeName\\b\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|\\S+)");
+        redacted = ReplaceSensitiveValue(
+            redacted,
+            "(\\bsessionToken\\b\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|\\S+)");
+        redacted = ReplaceSensitiveValue(
+            redacted,
+            "(\\btoken\\b\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|\\S+)");
+        return redacted;
+    }
+
+    private static string ReplaceSensitiveValue(string text, string pattern)
+    {
+        return Regex.Replace(
+            text,
+            pattern,
+            static match =>
+            {
+                var prefix = match.Groups[1].Value;
+                var suffix = match.Value[prefix.Length..];
+                return prefix + RedactArgumentValuePreservingQuotes(suffix);
+            },
+            RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+    }
+
+    private static string RedactArgumentValuePreservingQuotes(string value)
+    {
+        if (value.Length >= 2)
+        {
+            if (value[0] == '"' && value[^1] == '"')
+            {
+                return "\"<redacted>\"";
+            }
+
+            if (value[0] == '\'' && value[^1] == '\'')
+            {
+                return "'<redacted>'";
+            }
+        }
+
+        return "<redacted>";
     }
 
     [DllImport("kernel32.dll", SetLastError = true)]

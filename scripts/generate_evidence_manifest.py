@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from imported_candidate_backlog_lib import build_imported_candidate_backlog_summary
 from research_path_lib import REPO_ROOT, RESEARCH_ROOT, file_sha256, linkify_reference_text
 
 INDEX_PATH = RESEARCH_ROOT / "evidence-index.json"
@@ -116,6 +117,17 @@ def render_md(manifest: dict[str, Any]) -> str:
     for class_id in ["A", "B", "C", "D", "E"]:
         if class_id in class_counts:
             rows.append([f"Class {class_id}", str(class_counts[class_id])])
+    imported_backlog = summary.get("imported_candidate_backlog") or {}
+    if imported_backlog.get("exists"):
+        rows.extend(
+            [
+                ["Imported candidate backlog", linkify_reference_text(imported_backlog.get("path"), MD_OUTPUT_PATH)],
+                ["Imported candidate count", str(imported_backlog.get("candidate_count", 0))],
+                ["Imported observation count", str(imported_backlog.get("import_count", 0))],
+                ["Imported source run count", str(imported_backlog.get("source_run_count", 0))],
+                ["Imported blocked candidate count", str(imported_backlog.get("blocked_candidate_count", 0))],
+            ]
+        )
     lines.extend(render_table(["Field", "Value"], rows))
     lines.append("")
     lines.append("## Record index")
@@ -227,6 +239,7 @@ def main() -> int:
         "summary": index.get("summary", {}),
         "records": sorted(manifest_records, key=lambda item: (item["record_status"] or "", item["record_id"] or "")),
     }
+    manifest["summary"]["imported_candidate_backlog"] = build_imported_candidate_backlog_summary()
     manifest["summary"]["records_with_source_hashes"] = sum(1 for record in manifest["records"] if record.get("source_file_sha256"))
     manifest["summary"]["records_without_source_hashes"] = sum(1 for record in manifest["records"] if not record.get("source_file_sha256"))
 

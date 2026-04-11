@@ -1,0 +1,46 @@
+﻿{
+    "generated_utc":  "2026-04-03T19:40:57.0156197Z",
+    "status":  "error",
+    "debug_environment":  "vmware-debug-only",
+    "vm_role":  "debug_arbiter_only",
+    "source_vm_profile":  "secondary",
+    "source_vm_path":  "\u003cresolve-from-vm-baselines:secondary\u003e",
+    "source_snapshot":  "RegProbe-Baseline-ToolsHardened-20260330",
+    "target_vm_name":  "Win25H2DebugOnly",
+    "target_vm_path":  "\u003cderived-next-to-source-runtime-root\u003e/Win25H2DebugOnly/Win25H2DebugOnly.vmx",
+    "target_vm_path_resolution":  "derived-from-source-runtime-root",
+    "debug_snapshot_name":  "RegProbe-Debug-VMwareOnly-Baseline-20260403",
+    "pipe_name":  "\\\\.\\pipe\\regprobe_debug_vmware_debugonly",
+    "pipe_endpoint":  "server",
+    "try_no_rx_loss":  "FALSE",
+    "clone_type":  "full",
+    "replace_existing":  true,
+    "fresh_provision":  true,
+    "frozen_lane_return_allowed":  false,
+    "storage_preflight":  {
+                              "status":  "warning",
+                              "findings":  [
+                                               {
+                                                   "severity":  "warning",
+                                                   "code":  "usb-backed-vm-volume",
+                                                   "message":  "VM is running from USB-backed storage on drive H:.",
+                                                   "path":  ""
+                                               },
+                                               {
+                                                   "severity":  "warning",
+                                                   "code":  "disk-event-query-failed",
+                                                   "message":  "No events were found that match the specified selection criteria.",
+                                                   "path":  ""
+                                               }
+                                           ]
+                          },
+    "configure_baseline_ref":  null,
+    "steps":  [
+                  "storage-preflight",
+                  "fresh-clone-from-runtime-baseline",
+                  "guest-ready-check",
+                  "configure-kernel-debug-baseline",
+                  "debug-snapshot-created"
+              ],
+    "error":  "vmrun failed (-1): -T ws clone H:\\Yedek\\VMs\\Win25H2Clean-B\\Win25H2Clean-B.vmx H:\\Yedek\\VMs\\Win25H2DebugOnly\\Win25H2DebugOnly.vmx full -snapshot=RegProbe-Baseline-ToolsHardened-20260330 -cloneName=Win25H2DebugOnly :: Error: The virtual machine should not be powered on. It is already running."
+}

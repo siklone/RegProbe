@@ -1,0 +1,8 @@
+.sympath C:\Tools\Symbols\local-kd-uuid-values-20260406b
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+dd nt!ExpUuidSequenceNumber L1
+db nt!ExpUuidSequenceNumberValid L1
+db nt!ExpUuidSequenceNumberNotSaved L1
+.echo REGPROBE_LOCALKD_END
+q

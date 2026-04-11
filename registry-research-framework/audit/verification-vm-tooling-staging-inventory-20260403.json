@@ -1,0 +1,122 @@
+﻿{
+    "generated_utc":  "2026-04-03T01:47:18.9477778Z",
+    "inventory_root":  "evidence/files/vm-tooling-staging",
+    "directory_count":  187,
+    "file_count":  641,
+    "group_counts":  {
+                         "windbg-boot-registry-trace":  {
+                                                            "count":  27,
+                                                            "newest":  "2026-04-03T01:33:41.0536138Z",
+                                                            "oldest":  "2026-04-02T21:13:23.2788974Z"
+                                                        },
+                         "power-control-batch-mega-trigger-runtime-primary":  {
+                                                                                  "count":  10,
+                                                                                  "newest":  "2026-04-03T00:02:52.4482897Z",
+                                                                                  "oldest":  "2026-04-03T00:02:52.4387751Z"
+                                                                              },
+                         "power-control-batch-mega-trigger-runtime-storage-preflight":  {
+                                                                                            "count":  10,
+                                                                                            "newest":  "2026-04-02T19:34:10.7660246Z",
+                                                                                            "oldest":  "2026-04-02T14:25:08.6197166Z"
+                                                                                        },
+                         "cpu-idle":  {
+                                          "count":  18,
+                                          "newest":  "2026-04-02T14:13:23.0461115Z",
+                                          "oldest":  "2026-04-02T14:13:23.0218463Z"
+                                      },
+                         "other":  {
+                                       "count":  122,
+                                       "newest":  "2026-04-03T00:02:52.4557985Z",
+                                       "oldest":  "2026-04-02T14:13:23.0198468Z"
+                                   }
+                     },
+    "latest_items":  [
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240/session.json",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:33:41.0561224Z",
+                             "size":  1693
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240",
+                             "kind":  "directory",
+                             "last_write_utc":  "2026-04-03T01:33:41.0536138Z",
+                             "size":  null
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240/summary.json",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:33:41.0536138Z",
+                             "size":  4701
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240/results.json",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:33:41.0358890Z",
+                             "size":  2942
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240/kd-console.public.log",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:33:40.9589880Z",
+                             "size":  1468
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240/kd-console.log",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:32:53.3400555Z",
+                             "size":  1469
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-043240/windbg-session-script.txt",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:32:40.7457603Z",
+                             "size":  289
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-042626/session.json",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:27:25.5244588Z",
+                             "size":  1693
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-042626",
+                             "kind":  "directory",
+                             "last_write_utc":  "2026-04-03T01:27:25.5219456Z",
+                             "size":  null
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-042626/summary.json",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:27:25.5219456Z",
+                             "size":  4670
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-042626/results.json",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:27:25.5067600Z",
+                             "size":  2911
+                         },
+                         {
+                             "path":  "evidence/files/vm-tooling-staging/windbg-boot-registry-trace-20260403-042626/kd-console.public.log",
+                             "kind":  "file",
+                             "last_write_utc":  "2026-04-03T01:27:25.4163829Z",
+                             "size":  1468
+                         }
+                     ],
+    "age_buckets":  {
+                        "older_than_7_days":  1,
+                        "older_than_14_days":  1,
+                        "older_than_30_days":  1
+                    },
+    "cleanup_review_candidates":  [
+
+                                  ],
+    "protected_refs":  [
+                           "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
+                           "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json",
+                           "registry-research-framework/audit/power-control-mega-trigger-v2-status-20260402.json",
+                           "registry-research-framework/audit/configure-kernel-debug-baseline.json",
+                           "registry-research-framework/audit/bcd-current-20260403.txt"
+                       ]
+}

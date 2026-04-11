@@ -1,0 +1,22 @@
+{
+  "generated_utc": "2026-04-07T12:25:00Z",
+  "candidate": "system.executive-uuid-sequence-number",
+  "guest": "regprobe-win11-25h2-session",
+  "runs": [
+    {
+      "output_name": "uuidsequence-wpr-boot-kvm-20260407c",
+      "arm_profile": "Power+Registry",
+      "summary_arm": "c-summary-arm.json",
+      "stage": "c-stage.json"
+    },
+    {
+      "output_name": "uuidsequence-wpr-boot-kvm-20260407d",
+      "arm_profile": "Power+Registry",
+      "summary_arm": "d-summary-arm.json",
+      "stage": "d-stage.json"
+    }
+  ],
+  "result": "wpr addboot failed before boot capture on both reruns",
+  "recovery_fix": "ensure-guest-admin-shell.py now uses iwr for ready-marker upload, which removed the previous Request/Invoke-WebRequest truncation failure",
+  "blocker": "wpr-addboot-nonzero-exit"
+}

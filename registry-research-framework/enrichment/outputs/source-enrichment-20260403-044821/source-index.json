@@ -1,0 +1,189 @@
+[
+  {
+    "id": "reactos",
+    "label": "ReactOS",
+    "surface_group": "source-code",
+    "kind": "git-source",
+    "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\reactos",
+    "exists": false,
+    "missing_reason": "root-missing",
+    "weight": 3,
+    "files_scanned": 0,
+    "hit_count": 0,
+    "candidate_hit_count": 0,
+    "candidate_hits": []
+  },
+  {
+    "id": "wrk",
+    "label": "Windows Research Kernel",
+    "surface_group": "source-code",
+    "kind": "git-source",
+    "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
+    "exists": false,
+    "missing_reason": "root-missing",
+    "weight": 3,
+    "files_scanned": 0,
+    "hit_count": 0,
+    "candidate_hit_count": 0,
+    "candidate_hits": []
+  },
+  {
+    "id": "systeminformer",
+    "label": "System Informer",
+    "surface_group": "source-code",
+    "kind": "git-source",
+    "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\systeminformer",
+    "exists": false,
+    "missing_reason": "root-missing",
+    "weight": 2,
+    "files_scanned": 0,
+    "hit_count": 0,
+    "candidate_hit_count": 0,
+    "candidate_hits": []
+  },
+  {
+    "id": "admx",
+    "label": "Windows ADMX",
+    "surface_group": "policy-templates",
+    "kind": "local-source",
+    "root": "C:\\WINDOWS\\PolicyDefinitions",
+    "exists": true,
+    "missing_reason": null,
+    "weight": 2,
+    "files_scanned": 447,
+    "hit_count": 13,
+    "candidate_hit_count": 6,
+    "candidate_hits": [
+      {
+        "candidate_id": "power.force-hibernate-disabled.policy",
+        "family": "power-force-hibernate-disabled",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+        "value_name": "Policy",
+        "hit_count": 8,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+            "line_number": 3,
+            "value_name": "Policy",
+            "content": "<policyDefinitions xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" revision=\"1.0\" schemaVersion=\"1.0\" xmlns=\"http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions\">"
+          },
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+            "line_number": 4,
+            "value_name": "Policy",
+            "content": "<policyNamespaces>"
+          },
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\AccountNotifications.admx",
+            "line_number": 7,
+            "value_name": "Policy",
+            "content": "</policyNamespaces>"
+          }
+        ]
+      },
+      {
+        "candidate_id": "policy.system.enable-virtualization",
+        "family": "policy-system",
+        "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+        "value_name": "EnableVirtualization",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\DeviceGuard.admx",
+            "line_number": 23,
+            "value_name": "EnableVirtualization",
+            "content": "valueName=\"EnableVirtualizationBasedSecurity\">"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.control.hiberboot-enabled",
+        "family": "power-control",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "HiberbootEnabled",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\WinInit.admx",
+            "line_number": 35,
+            "value_name": "HiberbootEnabled",
+            "content": "<policy name=\"Hiberboot\" class=\"Machine\" displayName=\"$(string.Hiberboot)\" explainText=\"$(string.Hiberboot_Help)\" key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"HiberbootEnabled\">"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.session.hiberboot-enabled",
+        "family": "session-manager-power",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "value_name": "HiberbootEnabled",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\WinInit.admx",
+            "line_number": 35,
+            "value_name": "HiberbootEnabled",
+            "content": "<policy name=\"Hiberboot\" class=\"Machine\" displayName=\"$(string.Hiberboot)\" explainText=\"$(string.Hiberboot_Help)\" key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"HiberbootEnabled\">"
+          }
+        ]
+      },
+      {
+        "candidate_id": "power.throttling.power-throttling-off",
+        "family": "power-throttling",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+        "value_name": "PowerThrottlingOff",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\Power.admx",
+            "line_number": 667,
+            "value_name": "PowerThrottlingOff",
+            "content": "<policy name=\"PowerThrottlingTurnOff\" class=\"Machine\" displayName=\"$(string.PowerThrottlingTurnOff)\" explainText=\"$(string.PowerThrottlingTurnOffExplain)\" key=\"System\\CurrentControlSet\\Control\\Power\\PowerThrottling\" valueName=\"PowerThrottlingOff\">"
+          }
+        ]
+      },
+      {
+        "candidate_id": "system.io-allow-remote-dasd",
+        "family": "session-manager-io",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+        "value_name": "AllowRemoteDASD",
+        "hit_count": 1,
+        "sample_hits": [
+          {
+            "file": "C:\\WINDOWS\\PolicyDefinitions\\RemovableStorage.admx",
+            "line_number": 409,
+            "value_name": "AllowRemoteDASD",
+            "content": "<policy name=\"Removable_Remote_Allow_Access\" class=\"Machine\" displayName=\"$(string.Removable_Remote_Allow_Access)\" explainText=\"$(string.Removable_Remote_Allow_Access_help)\" key=\"Software\\Policies\\Microsoft\\Windows\\RemovableStorageDevices\" valueName=\"AllowRemoteDASD\">"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "wdk_headers",
+    "label": "Windows SDK/WDK Headers",
+    "surface_group": "headers",
+    "kind": "local-source",
+    "root": "C:\\Program Files (x86)\\Windows Kits\\10\\Include",
+    "exists": false,
+    "missing_reason": "root-missing",
+    "weight": 2,
+    "files_scanned": 0,
+    "hit_count": 0,
+    "candidate_hit_count": 0,
+    "candidate_hits": []
+  },
+  {
+    "id": "geoff_chappell",
+    "label": "Geoff Chappell",
+    "surface_group": "reference-cache",
+    "kind": "reference-cache",
+    "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\geoff-chappell",
+    "exists": false,
+    "missing_reason": "root-missing",
+    "weight": 2,
+    "files_scanned": 0,
+    "hit_count": 0,
+    "candidate_hit_count": 0,
+    "candidate_hits": []
+  }
+]

@@ -1,0 +1,79 @@
+﻿{
+    "generated_utc":  "2026-04-07T18:11:33.7577142Z",
+    "kd_path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\kd.exe",
+    "symchk_path":  "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+    "symchk_exit_code":  0,
+    "symbol_root":  "C:\\Tools\\Symbols\\watchdog-win32-callout-seed-kd-20260407d",
+    "query_symbol":  "nt!CmQueryValueKey",
+    "debugger_commands":  [
+                              "x nt!*Win32*Callout*Watchdog*",
+                              "x nt!*Watchdog*Bugcheck*",
+                              "x nt!*Bugcheck*Watchdog*",
+                              "x nt!*Win32*Bugcheck*",
+                              "uf nt!PopWatchdogInit",
+                              "uf nt!PopComputeWatchdogTimeout",
+                              "uf nt!PopUpdatePowerActionWatchdogTimeouts",
+                              "uf nt!PopReadUlongPowerKey",
+                              "uf nt!PopReadRegKeyValue",
+                              "dd nt!PopWin32CalloutWatchdogBugcheckEnabled L1"
+                          ],
+    "effective_commands":  [
+                               ".sympath C:\\Tools\\Symbols\\watchdog-win32-callout-seed-kd-20260407d",
+                               ".reload /f nt",
+                               ".echo REGPROBE_LOCALKD_BEGIN",
+                               "x nt!*Win32*Callout*Watchdog*",
+                               "x nt!*Watchdog*Bugcheck*",
+                               "x nt!*Bugcheck*Watchdog*",
+                               "x nt!*Win32*Bugcheck*",
+                               "uf nt!PopWatchdogInit",
+                               "uf nt!PopComputeWatchdogTimeout",
+                               "uf nt!PopUpdatePowerActionWatchdogTimeouts",
+                               "uf nt!PopReadUlongPowerKey",
+                               "uf nt!PopReadRegKeyValue",
+                               "dd nt!PopWin32CalloutWatchdogBugcheckEnabled L1",
+                               ".echo REGPROBE_LOCALKD_END",
+                               "q"
+                           ],
+    "used_custom_commands":  true,
+    "trigger_command_present":  false,
+    "trigger_executed":  false,
+    "trigger_delay_seconds":  0,
+    "trigger_exit_code":  null,
+    "trigger_error":  "",
+    "breakpoint_commands_present":  false,
+    "run_control_requested":  false,
+    "completed":  true,
+    "exit_code":  null,
+    "attached":  true,
+    "local_kernel_disabled":  false,
+    "symbol_reload_started":  false,
+    "breakpoint_supported":  null,
+    "runnable_debuggee":  null,
+    "query_symbol_seen":  false,
+    "command_file_exists":  true,
+    "log_exists":  true,
+    "stdout_exists":  true,
+    "stderr_exists":  true,
+    "symchk_log_exists":  false,
+    "symchk_log_is_directory":  true,
+    "trigger_stdout_exists":  false,
+    "trigger_stderr_exists":  false,
+    "uploads":  {
+                    "command_file":  {
+                                         "path":  "C:\\RegProbe-Diag\\debugger-smoke\\watchdog-win32-callout-seed-kd-20260407d\\local-kd.txt",
+                                         "uri":  "http://10.0.2.2:8766/watchdog-win32-callout-seed-kd-20260407d.txt"
+                                     },
+                    "log":  {
+                                "path":  "C:\\RegProbe-Diag\\debugger-smoke\\watchdog-win32-callout-seed-kd-20260407d\\local-kd.log",
+                                "uri":  "http://10.0.2.2:8766/watchdog-win32-callout-seed-kd-20260407d.log"
+                            },
+                    "stdout":  {
+                                   "path":  "C:\\RegProbe-Diag\\debugger-smoke\\watchdog-win32-callout-seed-kd-20260407d\\stdout.txt",
+                                   "uri":  "http://10.0.2.2:8766/watchdog-win32-callout-seed-kd-20260407d.stdout.txt"
+                               },
+                    "stderr":  {
+                                   "path":  "C:\\RegProbe-Diag\\debugger-smoke\\watchdog-win32-callout-seed-kd-20260407d\\stderr.txt",
+                                   "uri":  "http://10.0.2.2:8766/watchdog-win32-callout-seed-kd-20260407d.stderr.txt"
+                               }
+                }
+}

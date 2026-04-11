@@ -1,0 +1,9 @@
+.sympath C:\Tools\Symbols\local-kd-longdpc-consumer-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+uf nt!KiEnterLongDpcProcessing
+uf nt!EtwTraceLongDpcDetectionEvent
+uf nt!EtwTraceLongDpcMitigationEvent
+.echo REGPROBE_LONGDPC_CONSUMER_DONE
+.echo REGPROBE_LOCALKD_END
+q

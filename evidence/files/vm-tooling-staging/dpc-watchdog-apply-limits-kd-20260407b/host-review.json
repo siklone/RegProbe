@@ -1,0 +1,21 @@
+{
+  "generated_utc": "2026-04-07T19:31:00Z",
+  "candidate": "system.kernel-dpc-watchdog-profile-cluster",
+  "guest": "regprobe-win11-25h2-session",
+  "bundle": "dpc-watchdog-apply-limits-kd-20260407b",
+  "findings": {
+    "function": "KiApplyProcessorDpcLimits",
+    "behavior": "Takes an input configuration block, optionally allocates a buffer when profile sizes differ, and forwards the request to KiSetProcessorDpcLimits.",
+    "non_findings": [
+      "No direct reads of KeDpcWatchdogProfileSingleDpcThresholdMs",
+      "No direct reads of KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+      "No direct reads of KeDpcWatchdogProfileBufferSizeBytes",
+      "No direct registry read path"
+    ]
+  },
+  "interpretation": {
+    "current_state": "KiApplyProcessorDpcLimits is part of the downstream application path, not the seeding caller for the watchdog profile globals.",
+    "remaining_gap": "The next likely path is KiSetProcessorDpcLimits or an earlier boot/init reader that populates the input configuration block.",
+    "strength": "This removes one plausible but incorrect writer candidate from the seeding search."
+  }
+}

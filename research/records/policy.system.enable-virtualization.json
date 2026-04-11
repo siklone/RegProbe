@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "policy.system.enable-virtualization",
   "tweak_id": "policy.system.enable-virtualization",
-  "record_status": "draft",
-  "summary": "Draft candidate package for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. The same path-aware runtime lane on the secondary profile reproduced the no-hit result, so the lane remains Class B with a runtime_no_read and path-context gate rather than a single-VM artifact.",
+  "record_status": "validated",
+  "summary": "Validated decision-gated record for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. The same path-aware runtime lane on the secondary profile reproduced the no-hit result, and a Linux KVM Procmon replay with a dedicated UAC/policy burst also produced a real CSV with zero matching lines. A KVM local-KD disassembly and string-dump follow-up on the running guest then showed the same current-build `PsBootPhaseComplete` cluster opening `\\Registry\\Machine\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` and staging `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection` directly. A later recovery-backed KVM Procmon replay reopened the elevated guest shell automatically and still returned zero intended-path or family hits. A follow-up KVM Procmon bootlog probe then completed a real reboot cycle, but Procmon returned exit code 1 for both `/EnableBootLogging` variants, left Procmon state unchanged, and skipped bootlog conversion with no PML or CSV. The lane therefore remains Class B with a runtime_no_read gate, but not with the earlier path-context, KVM operator-state, or missing-bootlog-coverage doubt.",
   "validation_proof": {
     "source_url": "Docs/security/security.md",
     "exact_quote_or_path": "Docs/security/security.md:105-110 documents `EnableVirtualization` with 0 = disables data redirection and 1 = enables legacy file and registry virtualization.",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "Enable Virtualization controls legacy UAC file and registry virtualization under the Policies\\System branch.",
     "why_people_change_it": "Researchers track it when studying legacy app compatibility, UAC virtualization, and adjacent policy-system behavior.",
-    "tradeoffs_overview": "The lane now has exact docs, phase-0 existence, exact current-build static hits, and shell-safe path-aware runtime ETW lanes on both primary and secondary profiles. Both runtime lanes still stayed no-hit, so the current-build route to the intended live read remains decision-gated.",
-    "professional_notes": "Phase-0 existence confirmed EnableVirtualization on the live Win25H2Clean baseline with preview value 1. The repo security notes document the value and meanings in Docs/security/security.md. The path-aware static pass over the narrowed binary set found an exact EnableVirtualization hit in ntoskrnl.exe, plus exact adjacent EnableLUA and EnableInstallerDetection hits in the same binary, while the VBS collision remained isolated to winload.exe through EnableVirtualizationBasedSecurity. The current-build Ghidra export kept EnableVirtualization, EnableLUA, and EnableInstallerDetection in the same naturally resolved ntoskrnl.exe function. A tools-hardened path-aware ETW lane then ran short and split policy/UAC bursts on RegProbe-Baseline-ToolsHardened-20260330 and produced real ETL/CSV outputs, but it still returned a clean no-hit for both the exact value name and the intended path. A secondary-profile replay on Win25H2Clean-B reproduced the same shell-safe no-hit, so the blocker is now cross-profile and not a single-VM transport quirk.",
+    "tradeoffs_overview": "The lane now has exact docs, phase-0 existence, exact current-build static hits, shell-safe runtime follow-ups across ETW and repeated KVM Procmon transports, a failed-but-informative KVM Procmon bootlog attempt, and a live KVM local-KD inspection that confirms the current-build policy-family path directly. The primary ETW lane, the secondary ETW replay, and both KVM Procmon replays stayed no-hit, while the KVM bootlog probe showed that the current guest does not accept Procmon boot logging at all, so the current-build route to the intended live read remains decision-gated even though the path itself is no longer ambiguous.",
+    "professional_notes": "Phase-0 existence confirmed EnableVirtualization on the live Win25H2Clean baseline with preview value 1. The repo security notes document the value and meanings in Docs/security/security.md. The path-aware static pass over the narrowed binary set found an exact EnableVirtualization hit in ntoskrnl.exe, plus exact adjacent EnableLUA and EnableInstallerDetection hits in the same binary, while the VBS collision remained isolated to winload.exe through EnableVirtualizationBasedSecurity. The current-build Ghidra export kept EnableVirtualization, EnableLUA, and EnableInstallerDetection in the same naturally resolved ntoskrnl.exe function. A tools-hardened path-aware ETW lane then ran short and split policy/UAC bursts on RegProbe-Baseline-ToolsHardened-20260330 and produced real ETL/CSV outputs, but it still returned a clean no-hit for both the exact value name and the intended path. A secondary-profile replay on Win25H2Clean-B reproduced the same shell-safe no-hit. A Linux KVM Procmon replay then ran a dedicated UAC/policy burst, produced a real 300881-line CSV, and still returned zero path or value matches for EnableVirtualization. A debugger-assisted KVM local-KD follow-up then attached to the live guest kernel, disassembled `PsBootPhaseComplete`, and showed a current-build `ZwOpenKey` / `ZwQueryValueKey` cluster loading the live key-path literal `\\Registry\\Machine\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` together with adjacent live value-name literals `EnableLUA`, `EnableVirtualization`, `EnableInstallerDetection`, `TypeOfAdminApprovalMode`, `UACInstalled`, and `DevOverrideEnable`. A later recovery-backed KVM Procmon replay explicitly started from a closed elevated guest shell, reopened that shell through the hardened host runner, produced a fresh 228130-line CSV, and still returned zero lines containing `Policies\\System`, `EnableVirtualization`, `EnableLUA`, or `EnableInstallerDetection`. A follow-up KVM Procmon bootlog probe then completed a real reboot cycle, but the current guest returned exit code 1 for both direct and minimized `/EnableBootLogging`, left Procmon state pointed at the prior runtime logfile, and skipped bootlog conversion with no PML or CSV to review. The blocker is therefore now cross-profile and cross-transport runtime attribution rather than uncertainty about which registry path the current-build boot-phase code targets, whether the KVM operator state was incomplete, or whether KVM Procmon boot logging simply had not been tried.",
     "targets": [
       {
         "target_id": "enable-virtualization",
@@ -190,6 +190,59 @@
         "version-scope"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-policy-system-enable-virtualization-kvm-procmon-20260406",
+      "kind": "procmon-trace",
+      "title": "Linux KVM Procmon replay for EnableVirtualization",
+      "location": "evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json and evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/host-review.json",
+      "summary": "A dedicated KVM UAC/policy burst produced a real Procmon CSV with 300881 rows and still returned zero path or value-name matches for EnableVirtualization under Policies\\\\System.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-policy-system-enable-virtualization-kvm-local-kd-20260406",
+      "kind": "vm-test",
+      "title": "Linux KVM local-KD disassembly for EnableVirtualization",
+      "location": "evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a.log and evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a.log and research/notes/policy-system-enable-virtualization-kvm-local-kd-disasm-follow-up-20260406.md",
+      "summary": "A debugger-assisted KVM local-KD follow-up disassembled the live `PsBootPhaseComplete` cluster, confirmed a direct `Policies\\System` key-path literal on the running guest, and resolved adjacent live value-name literals including `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection`.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-policy-system-enable-virtualization-kvm-procmon-recovery-20260407",
+      "kind": "procmon-trace",
+      "title": "Linux KVM recovery-backed Procmon replay for EnableVirtualization",
+      "location": "evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json and evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt and evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json and research/notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md",
+      "summary": "A hardened KVM Procmon replay reopened the elevated guest shell automatically, produced a 228130-row CSV, and still returned zero lines containing `Policies\\System`, `EnableVirtualization`, `EnableLUA`, or `EnableInstallerDetection`.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-policy-system-enable-virtualization-kvm-procmon-bootlog-20260407",
+      "kind": "vm-test",
+      "title": "Linux KVM Procmon bootlog probe for EnableVirtualization",
+      "location": "evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json and evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json and evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json and research/notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md",
+      "summary": "A host-driven KVM Procmon bootlog probe completed a real reboot cycle, but the current guest returned exit code 1 for both `/EnableBootLogging` variants, left Procmon state unchanged, and skipped conversion with no PML, CSV, or filtered hits.",
+      "supports": [
+        "behavior",
+        "risk",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -198,12 +251,11 @@
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, and shell-safe path-aware ETW runtime lanes on both primary and secondary profiles. Both runtime lanes still stayed a clean no-hit and the family still carries a nearby VBS collision in winload.exe, so the record remains decision-gated at Class B.",
+    "needs_vm_validation": false,
+    "why": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, shell-safe runtime follow-ups across multiple transports, a KVM bootlog probe that completed a real reboot but showed `/EnableBootLogging` is not accepted on the current guest, and a KVM local-KD disassembly that confirms the live current-build `Policies\\System` path plus the adjacent `EnableLUA` / `EnableVirtualization` / `EnableInstallerDetection` family on the running guest. The primary ETW lane, the secondary ETW replay, and both KVM Procmon replays all still stayed a clean no-hit, and the bootlog transport did not come up either, so the record remains decision-gated at Class B for runtime attribution rather than path ambiguity.",
     "blocking_issues": [
-      "runtime_no_read",
-      "path_context_unclear"
+      "runtime_no_read"
     ]
   },
-  "last_reviewed_utc": "2026-03-31T08:21:42Z"
+  "last_reviewed_utc": "2026-04-07T00:00:00Z"
 }

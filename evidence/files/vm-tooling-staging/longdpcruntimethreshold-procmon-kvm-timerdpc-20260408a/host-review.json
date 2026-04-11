@@ -1,0 +1,14 @@
+{
+  "run_id": "longdpcruntimethreshold-procmon-kvm-timerdpc-20260408a",
+  "status": "error",
+  "error_kind": "probe-stage-error",
+  "transport_blocker": "probe-stage-error",
+  "guest_health": "degraded",
+  "probe_stage": "exception",
+  "normalization_status": "error",
+  "csv_exists": false,
+  "normalized_bundle_exists": false,
+  "error": "System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 60 second(s).",
+  "launcher_stage": "invoke-wrapper",
+  "probe_stage_raw": "exception"
+}

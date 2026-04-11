@@ -1,10 +1,34 @@
 # VM Workflow
 
-Runtime validation for this repository happens in the `Win25H2Clean` VMware guest.
+This repo now treats runtime research and debugger-first arbitration as two different VM families.
+
+## VM Families
+
+- `KVM runtime family`
+  - current Linux host lane for Windows 11 guest bootstrap, Procmon, WPR/WPA/xperf, symbol staging, and Ghidra-backed follow-up work
+  - canonical guest name on the active host: `regprobe-win11-25h2-session`
+  - transport shape: `libvirt session` + `SPICE console` + `bootstrap ISO` + `HTTP guest bridge`
+  - debugger note: current KVM local KD is inspection-capable for symbol queries, disassembly, and memory/string reads, but the active local-debug contract does not yet support breakpoint or `g` run-control arbiter work
+  - current host status: `active`
+- `VMware runtime family`
+  - current host lane for ETW, Procmon, WPR, shell-safe mega-trigger work, and general research automation
+  - canonical baseline: `RegProbe-Baseline-ToolsHardened-20260330`
+- `Hyper-V debug family`
+  - planned debugger-first lane for WinDbg, kernel breakpoints, and early-boot arbiter work
+  - target baseline: `RegProbe-Debug-HyperV-Baseline-20260403`
+  - current host status: `blocked-prereqs`
+- `VMware debug-only fallback family`
+  - allowed only as a short debugger-first fallback if `Hyper-V` is still blocked on the current host
+  - target baseline: `RegProbe-Debug-VMwareOnly-Baseline-20260403`
+  - this is not the same thing as the frozen VMware WinDbg lane
+  - stop immediately if the same transport blocker, the same breakin-packet error, or unreliable command execution reproduces
+
+The current VMware WinDbg named-pipe lane is intentionally frozen as a historical transport finding, not the forward path for final arbiter work.
 
 ## Rule
 
 - Do not run live app validation on the host.
+- On Linux/KVM, keep the guest reachable through `virt-manager` or another visible SPICE console while the bridge/type-to-guest lane is active.
 - Keep the guest visible in VMware Workstation. Do not switch validation lanes to `nogui`.
 - Use the VM for:
   - live RegProbe runs
@@ -14,6 +38,17 @@ Runtime validation for this repository happens in the `Win25H2Clean` VMware gues
   - ETW collection
   - Ghidra headless analysis
 - Use the host only for source editing, docs, artifact review, and offline prep.
+- Keep WinDbg debugger-first experiments separate from the runtime VMware family.
+
+For the current KVM host-side transport map, see:
+
+- `scripts/vm-kvm/bootstrap-research-lane.ps1`
+- `scripts/vm-kvm/build-research-bootstrap-iso.sh`
+- `scripts/vm-kvm/attach-bootstrap-iso.sh`
+- `scripts/vm-kvm/serve-guest-bridge.py`
+- `scripts/vm-kvm/ensure-guest-admin-shell.py`
+- `scripts/vm-kvm/type-to-guest.py`
+- `scripts/vm-kvm/run-guest-registry-policy-probe.py`
 
 For the current script map, also see:
 
@@ -76,6 +111,39 @@ registry-research-framework/config/vm-baselines.json
 ```
 
 The checked-in `vm_path` is sanitized for public repo hygiene. Set it to your own local VMX path before you run VM automation on a fresh clone.
+
+## Debug-Arbiter Direction
+
+WinDbg work is no longer expected to share the same success envelope as the runtime VMware lanes.
+
+Current direction:
+
+- freeze the current VMware named-pipe WinDbg lane as `known-blocked-frozen`
+- keep the parser/public-symbol findings
+- prefer a dedicated `Hyper-V` environment for long-term arbiter work
+- if `Hyper-V` is currently blocked, allow one short fresh `VMware debug-only` transport-first try
+- if that short fallback reproduces the same transport blocker, stop and move directly to `Hyper-V` prerequisites
+
+Current decision artifacts:
+
+```text
+registry-research-framework/audit/windbg-vmware-freeze-20260403.json
+registry-research-framework/audit/windbg-debug-environment-selection-20260403.json
+registry-research-framework/audit/windbg-hyperv-setup-20260403.json
+registry-research-framework/audit/windbg-vmware-debug-only-setup-20260403.json
+```
+
+Current Hyper-V planning scripts:
+
+```text
+scripts/vm-hyperv/test-hyperv-debug-feasibility.ps1
+scripts/vm-hyperv/new-hyperv-debug-baseline-plan.ps1
+scripts/vm/new-vmware-debug-only-baseline-plan.ps1
+scripts/vm/new-vmware-debug-only-vm.ps1
+registry-research-framework/tools/windbg-hyperv/run-debug-environment-selection.ps1
+registry-research-framework/tools/windbg-hyperv/enable-hyperv-debug-prereqs.ps1
+registry-research-framework/tools/run-windbg-vmware-debug-only-short-try.ps1
+```
 
 ## Defender Exclusion Rule
 
@@ -144,6 +212,27 @@ registry-research-framework/audit/regprobe-baseline-tools-hardened-20260330.json
 
 ## Validation Smokes
 
+KVM runtime lane validation:
+
+```bash
+python3 scripts/vm-kvm/validate-research-lane.py
+cat registry-research-framework/audit/kvm-research-lane-health-latest.json
+```
+
+Current expected `status` for a merge-ready KVM lane is `ok`.
+
+The current host runners are also expected to recover a missing elevated guest PowerShell session automatically before staging KVM guest helpers.
+
+Quoted guest-side Procmon replay from the host:
+
+```bash
+python3 scripts/vm-kvm/run-guest-registry-policy-probe.py \
+  --registry-path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System' \
+  --value-name 'AllowRemoteDASD' \
+  --output-name 'allowremotedasd-procmon-kvm-test' \
+  --trigger-profile 'session-manager-io-raw-burst'
+```
+
 Minimal tooling smoke:
 
 ```powershell
@@ -172,6 +261,21 @@ The canonical baseline is considered healthy only when:
 - `sihost.exe` is present
 - `ShellHost.exe` is present
 - `ctfmon.exe` is present
+
+The KVM runtime lane is considered healthy only when all of the following are true:
+
+- `bootstrap-research-lane.ps1` writes a summary with `status: ok`
+- required tool-health smokes are green for `dotnet_info`, `procmon`, `wpr`, `winsat_cpu`, `winsat_mem`, `diskspd`, and `symchk_choice`
+- host bridge health is `ok`
+- the libvirt guest is defined and running
+- the bootstrap ISO rebuild succeeds on the host
+- the current evidence set contains at least one symbolized Ghidra result and one live Procmon/runtime result
+
+Current KVM-specific runtime findings to preserve:
+
+- the Procmon smoke is stable with a `1s / 64 MiB` bounded window
+- the older `5s / 32 MiB` shape can overshoot the budget on the current Windows 11 guest
+- `ghidra` can be skipped inside the minimal tool-health rerun when the lane already has separate evidence-grade symbolized probes
 
 ## Stepwise WPR And Reboot Lanes
 

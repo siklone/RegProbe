@@ -1,7 +1,7 @@
 # policy.system.enable-virtualization
 
 - Class: `B`
-- Record status: `draft`
+- Record status: `validated`
 - Tested build: `26100`
 - Reason: `no-hit-or-insufficient-proof`
 
@@ -9,12 +9,12 @@ This record remains negative evidence on build 26100: the repo did not produce e
 
 ## Attempted coverage
 
-- Layers: `static_ghidra, behavior_wpr`
-- Tools: `etw, ghidra, wpr`
+- Layers: `runtime_procmon, static_ghidra, behavior_wpr, runtime_reboot`
+- Tools: `etw, procmon, ghidra, wpr, reboot`
 
 ## Why it stays negative
 
-Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe.
+Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. A KVM Procmon bootlog follow-up also completed a real reboot but showed the current guest refusin...
 
 ## Attached references
 

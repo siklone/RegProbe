@@ -1,0 +1,32 @@
+{
+  "generated_utc": "2026-04-07T18:52:30Z",
+  "candidate": "power.control.win32k-callout-watchdog-timeout-seconds",
+  "guest": "regprobe-win11-25h2-session",
+  "bundle": "watchdog-win32k-callout-timeout-kd-20260407a",
+  "findings": {
+    "live_state": {
+      "PopWin32kCalloutWatchdogTimeoutSeconds": 30
+    },
+    "caller_path": {
+      "function": "PopInvokeWin32CalloutWithWatchdog",
+      "usage": "imul eax, dword ptr [nt!PopWin32kCalloutWatchdogTimeoutSeconds], 1000",
+      "downstream": [
+        "ZwPowerInformation",
+        "PsInvokeWin32Callout",
+        "PopWin32CalloutWatchdogCallback"
+      ]
+    },
+    "symbol_cluster": [
+      "PopWin32CalloutWatchdogCallback",
+      "PopWin32kCalloutWatchdogTimeoutSeconds",
+      "PopInvokeWin32Callout",
+      "PopInvokeWin32CalloutWithWatchdog",
+      "PopWin32CalloutWatchdogBugcheckEnabled"
+    ]
+  },
+  "interpretation": {
+    "current_state": "The current build keeps a live 30-second Win32k callout watchdog timeout global even when the registry value is absent on the observed baseline.",
+    "remaining_gap": "Prove the registry seeding path for this global or determine that the 30-second value is a built-in default with optional registry override semantics.",
+    "strength": "This is a stronger watchdog sibling than the bugcheck-enabled value because the live current-build caller path directly consumes the global."
+  }
+}

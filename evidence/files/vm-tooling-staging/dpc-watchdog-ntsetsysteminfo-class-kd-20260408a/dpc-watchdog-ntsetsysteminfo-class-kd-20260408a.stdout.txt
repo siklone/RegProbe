@@ -1,0 +1,583 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.016 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Tue Apr  7 16:35:40.612 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Tue Apr  7 16:35:40.732 2026 (UTC - 7:00)
+System Uptime: 0 days 11:17:04.471
+lkd> .sympath C:\Tools\Symbols\dpc-watchdog-ntsetsysteminfo-class-kd-20260408a
+Symbol search path is: C:\Tools\Symbols\dpc-watchdog-ntsetsysteminfo-class-kd-20260408a
+Expanded Symbol search path is: c:\tools\symbols\dpc-watchdog-ntsetsysteminfo-class-kd-20260408a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\dpc-watchdog-ntsetsysteminfo-class-kd-20260408a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!NtSetSystemInformation
+fffff806`e78e1300 nt!NtSetSystemInformation (NtSetSystemInformation)
+lkd> u nt!NtSetSystemInformation+0x1b40 L120
+nt!NtSetSystemInformation+0x1b40:
+fffff806`e78e2e40 498bce          mov     rcx,r14
+fffff806`e78e2e43 e84c1cb3ff      call    nt!VfVolatileSetDifRuleClass (fffff806`e7414a94)
+fffff806`e78e2e48 e9b3010000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2e4d 498bd7          mov     rdx,r15
+fffff806`e78e2e50 458ac4          mov     r8b,r12b
+fffff806`e78e2e53 498bce          mov     rcx,r14
+fffff806`e78e2e56 e8a516b7ff      call    nt!ExPoolSetLimit (fffff806`e7454500)
+fffff806`e78e2e5b e9a0010000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2e60 b8e9000000      mov     eax,0E9h
+fffff806`e78e2e65 3bd8            cmp     ebx,eax
+fffff806`e78e2e67 0f8fbc000000    jg      nt!NtSetSystemInformation+0x1c29 (fffff806`e78e2f29)
+fffff806`e78e2e6d 0f84a6000000    je      nt!NtSetSystemInformation+0x1c19 (fffff806`e78e2f19)
+fffff806`e78e2e73 8bcb            mov     ecx,ebx
+fffff806`e78e2e75 81e9e0000000    sub     ecx,0E0h
+fffff806`e78e2e7b 747d            je      nt!NtSetSystemInformation+0x1bfa (fffff806`e78e2efa)
+fffff806`e78e2e7d 83e901          sub     ecx,1
+fffff806`e78e2e80 7478            je      nt!NtSetSystemInformation+0x1bfa (fffff806`e78e2efa)
+fffff806`e78e2e82 83e901          sub     ecx,1
+fffff806`e78e2e85 744c            je      nt!NtSetSystemInformation+0x1bd3 (fffff806`e78e2ed3)
+fffff806`e78e2e87 83e902          sub     ecx,2
+fffff806`e78e2e8a 7409            je      nt!NtSetSystemInformation+0x1b95 (fffff806`e78e2e95)
+fffff806`e78e2e8c 83f901          cmp     ecx,1
+fffff806`e78e2e8f 0f85ffeaffff    jne     nt!NtSetSystemInformation+0x694 (fffff806`e78e1994)
+fffff806`e78e2e95 4088742431      mov     byte ptr [rsp+31h],sil
+fffff806`e78e2e9a 4c8d442431      lea     r8,[rsp+31h]
+fffff806`e78e2e9f 488b15b25b4f00  mov     rdx,qword ptr [nt!SeAliasAdminsSid (fffff806`e7dd8a58)]
+fffff806`e78e2ea6 33c9            xor     ecx,ecx
+fffff806`e78e2ea8 e873e998ff      call    nt!RtlCheckTokenMembership (fffff806`e7271820)
+fffff806`e78e2ead 85c0            test    eax,eax
+fffff806`e78e2eaf 0f88ba000000    js      nt!NtSetSystemInformation+0x1c6f (fffff806`e78e2f6f)
+fffff806`e78e2eb5 4038742431      cmp     byte ptr [rsp+31h],sil
+fffff806`e78e2eba 0f84af000000    je      nt!NtSetSystemInformation+0x1c6f (fffff806`e78e2f6f)
+fffff806`e78e2ec0 448bc3          mov     r8d,ebx
+fffff806`e78e2ec3 418bd7          mov     edx,r15d
+fffff806`e78e2ec6 498bce          mov     rcx,r14
+fffff806`e78e2ec9 e8ca1aadff      call    nt!KeUpdateDpcWatchdogConfiguration (fffff806`e73b4998)
+fffff806`e78e2ece e92d010000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2ed3 418ad4          mov     dl,r12b
+fffff806`e78e2ed6 488b0d935b4f00  mov     rcx,qword ptr [nt!SeDebugPrivilege (fffff806`e7dd8a70)]
+fffff806`e78e2edd e8ae0fd7ff      call    nt!SeSinglePrivilegeCheck (fffff806`e7653e90)
+fffff806`e78e2ee2 84c0            test    al,al
+fffff806`e78e2ee4 0f8485000000    je      nt!NtSetSystemInformation+0x1c6f (fffff806`e78e2f6f)
+fffff806`e78e2eea 4585ff          test    r15d,r15d
+fffff806`e78e2eed 0f94c1          sete    cl
+fffff806`e78e2ef0 e877900a00      call    nt!VfPtGenerateTraceInformation (fffff806`e798bf6c)
+fffff806`e78e2ef5 e906010000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2efa 488b051f1a4200  mov     rax,qword ptr [nt!SeCiCallbacks+0xa0 (fffff806`e7d04920)]
+fffff806`e78e2f01 4885c0          test    rax,rax
+fffff806`e78e2f04 0f84dcebffff    je      nt!NtSetSystemInformation+0x7e6 (fffff806`e78e1ae6)
+fffff806`e78e2f0a 458bc7          mov     r8d,r15d
+fffff806`e78e2f0d 8bcb            mov     ecx,ebx
+fffff806`e78e2f0f e86cb80d00      call    nt!KscpCfgDispatchUserCallTargetEsSmep (fffff806`e79be780)
+fffff806`e78e2f14 e9e7000000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2f19 418bd7          mov     edx,r15d
+fffff806`e78e2f1c 498bce          mov     rcx,r14
+fffff806`e78e2f1f e89432c5ff      call    nt!PnpIommuBlockUnblockDevice (fffff806`e75361b8)
+fffff806`e78e2f24 e9d7000000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2f29 81ebeb000000    sub     ebx,0EBh
+fffff806`e78e2f2f 0f84b5000000    je      nt!NtSetSystemInformation+0x1cea (fffff806`e78e2fea)
+fffff806`e78e2f35 83eb08          sub     ebx,8
+fffff806`e78e2f38 0f84a8ebffff    je      nt!NtSetSystemInformation+0x7e6 (fffff806`e78e1ae6)
+fffff806`e78e2f3e 83eb02          sub     ebx,2
+fffff806`e78e2f41 744d            je      nt!NtSetSystemInformation+0x1c90 (fffff806`e78e2f90)
+fffff806`e78e2f43 83fb01          cmp     ebx,1
+fffff806`e78e2f46 0f8548eaffff    jne     nt!NtSetSystemInformation+0x694 (fffff806`e78e1994)
+fffff806`e78e2f4c 4183ff04        cmp     r15d,4
+fffff806`e78e2f50 740a            je      nt!NtSetSystemInformation+0x1c5c (fffff806`e78e2f5c)
+fffff806`e78e2f52 b8040000c0      mov     eax,0C0000004h
+fffff806`e78e2f57 e9a8000000      jmp     nt!NtSetSystemInformation+0x1d04 (fffff806`e78e3004)
+fffff806`e78e2f5c 418ad4          mov     dl,r12b
+fffff806`e78e2f5f 488b0d0a5b4f00  mov     rcx,qword ptr [nt!SeDebugPrivilege (fffff806`e7dd8a70)]
+fffff806`e78e2f66 e8250fd7ff      call    nt!SeSinglePrivilegeCheck (fffff806`e7653e90)
+fffff806`e78e2f6b 84c0            test    al,al
+fffff806`e78e2f6d 750a            jne     nt!NtSetSystemInformation+0x1c79 (fffff806`e78e2f79)
+fffff806`e78e2f6f b8610000c0      mov     eax,0C0000061h
+fffff806`e78e2f74 e98b000000      jmp     nt!NtSetSystemInformation+0x1d04 (fffff806`e78e3004)
+fffff806`e78e2f79 418b06          mov     eax,dword ptr [r14]
+fffff806`e78e2f7c 89842478010000  mov     dword ptr [rsp+178h],eax
+fffff806`e78e2f83 8905a32e4e00    mov     dword ptr [nt!PspBreakOnContextUnwindFailure (fffff806`e7dc5e2c)],eax
+fffff806`e78e2f89 e9c0e9ffff      jmp     nt!NtSetSystemInformation+0x64e (fffff806`e78e194e)
+fffff806`e78e2f8e eb74            jmp     nt!NtSetSystemInformation+0x1d04 (fffff806`e78e3004)
+fffff806`e78e2f90 4183ff04        cmp     r15d,4
+fffff806`e78e2f94 0f85d2ecffff    jne     nt!NtSetSystemInformation+0x96c (fffff806`e78e1c6c)
+fffff806`e78e2f9a 418ad4          mov     dl,r12b
+fffff806`e78e2f9d 488b0dcc5a4f00  mov     rcx,qword ptr [nt!SeDebugPrivilege (fffff806`e7dd8a70)]
+fffff806`e78e2fa4 e8e70ed7ff      call    nt!SeSinglePrivilegeCheck (fffff806`e7653e90)
+fffff806`e78e2fa9 84c0            test    al,al
+fffff806`e78e2fab 7507            jne     nt!NtSetSystemInformation+0x1cb4 (fffff806`e78e2fb4)
+fffff806`e78e2fad bf610000c0      mov     edi,0C0000061h
+fffff806`e78e2fb2 eb4e            jmp     nt!NtSetSystemInformation+0x1d02 (fffff806`e78e3002)
+fffff806`e78e2fb4 418b06          mov     eax,dword ptr [r14]
+fffff806`e78e2fb7 898424e8000000  mov     dword ptr [rsp+0E8h],eax
+fffff806`e78e2fbe 8d889f0f0000    lea     ecx,[rax+0F9Fh]
+fffff806`e78e2fc4 48b877be9f1a2fdd2406 mov rax,624DD2F1A9FBE77h
+fffff806`e78e2fce 48f7e1          mul     rax,rcx
+fffff806`e78e2fd1 482bca          sub     rcx,rdx
+fffff806`e78e2fd4 48d1e9          shr     rcx,1
+fffff806`e78e2fd7 4803ca          add     rcx,rdx
+fffff806`e78e2fda 48c1e90b        shr     rcx,0Bh
+fffff806`e78e2fde 890d08bd4000    mov     dword ptr [nt!ExResourceTimeoutCount (fffff806`e7ceecec)],ecx
+fffff806`e78e2fe4 eb1c            jmp     nt!NtSetSystemInformation+0x1d02 (fffff806`e78e3002)
+fffff806`e78e2fe6 8bf8            mov     edi,eax
+fffff806`e78e2fe8 eb18            jmp     nt!NtSetSystemInformation+0x1d02 (fffff806`e78e3002)
+fffff806`e78e2fea 4889742420      mov     qword ptr [rsp+20h],rsi
+fffff806`e78e2fef 4533c9          xor     r9d,r9d
+fffff806`e78e2ff2 458ac4          mov     r8b,r12b
+fffff806`e78e2ff5 418bd7          mov     edx,r15d
+fffff806`e78e2ff8 498bce          mov     rcx,r14
+fffff806`e78e2ffb e8fcbac2ff      call    nt!HvlQuerySetBootPagesInfo (fffff806`e750eafc)
+fffff806`e78e3000 8bf8            mov     edi,eax
+fffff806`e78e3002 8bc7            mov     eax,edi
+fffff806`e78e3004 488b8c24b0040000 mov     rcx,qword ptr [rsp+4B0h]
+fffff806`e78e300c 4833cc          xor     rcx,rsp
+fffff806`e78e300f e80c29bcff      call    nt!_security_check_cookie (fffff806`e74a5920)
+fffff806`e78e3014 4881c4c0040000  add     rsp,4C0h
+fffff806`e78e301b 415f            pop     r15
+fffff806`e78e301d 415e            pop     r14
+fffff806`e78e301f 415d            pop     r13
+fffff806`e78e3021 415c            pop     r12
+fffff806`e78e3023 5f              pop     rdi
+fffff806`e78e3024 5e              pop     rsi
+fffff806`e78e3025 5b              pop     rbx
+fffff806`e78e3026 c3              ret
+fffff806`e78e3027 cc              int     3
+fffff806`e78e3028 e8c381dbff      call    nt!ExRaiseDatatypeMisalignment (fffff806`e769b1f0)
+fffff806`e78e302d 90              nop
+fffff806`e78e302e e8bd81dbff      call    nt!ExRaiseDatatypeMisalignment (fffff806`e769b1f0)
+fffff806`e78e3033 90              nop
+fffff806`e78e3034 e8b781dbff      call    nt!ExRaiseDatatypeMisalignment (fffff806`e769b1f0)
+fffff806`e78e3039 90              nop
+fffff806`e78e303a cc              int     3
+fffff806`e78e303b cc              int     3
+fffff806`e78e303c cc              int     3
+fffff806`e78e303d cc              int     3
+fffff806`e78e303e cc              int     3
+fffff806`e78e303f cc              int     3
+fffff806`e78e3040 cc              int     3
+fffff806`e78e3041 cc              int     3
+fffff806`e78e3042 cc              int     3
+fffff806`e78e3043 cc              int     3
+fffff806`e78e3044 cc              int     3
+fffff806`e78e3045 cc              int     3
+fffff806`e78e3046 cc              int     3
+fffff806`e78e3047 cc              int     3
+fffff806`e78e3048 cc              int     3
+fffff806`e78e3049 cc              int     3
+fffff806`e78e304a cc              int     3
+fffff806`e78e304b cc              int     3
+fffff806`e78e304c cc              int     3
+fffff806`e78e304d cc              int     3
+fffff806`e78e304e cc              int     3
+fffff806`e78e304f cc              int     3
+nt!NtQueryWnfStateNameInformation:
+fffff806`e78e3050 4c8bdc          mov     r11,rsp
+fffff806`e78e3053 49895b08        mov     qword ptr [r11+8],rbx
+fffff806`e78e3057 49897318        mov     qword ptr [r11+18h],rsi
+fffff806`e78e305b 4d894b20        mov     qword ptr [r11+20h],r9
+fffff806`e78e305f 89542410        mov     dword ptr [rsp+10h],edx
+fffff806`e78e3063 57              push    rdi
+fffff806`e78e3064 4154            push    r12
+fffff806`e78e3066 4155            push    r13
+fffff806`e78e3068 4156            push    r14
+fffff806`e78e306a 4157            push    r15
+fffff806`e78e306c 4881ec90000000  sub     rsp,90h
+fffff806`e78e3073 498bf1          mov     rsi,r9
+fffff806`e78e3076 4d8be0          mov     r12,r8
+fffff806`e78e3079 448bf2          mov     r14d,edx
+fffff806`e78e307c 4983639800      and     qword ptr [r11-68h],0
+fffff806`e78e3081 498363b800      and     qword ptr [r11-48h],0
+fffff806`e78e3086 65488b042588010000 mov   rax,qword ptr gs:[188h]
+fffff806`e78e308f 66ff88e4010000  dec     word ptr [rax+1E4h]
+fffff806`e78e3096 90              nop
+fffff806`e78e3097 65488b042588010000 mov   rax,qword ptr gs:[188h]
+fffff806`e78e30a0 448ab832020000  mov     r15b,byte ptr [rax+232h]
+fffff806`e78e30a7 44887c2430      mov     byte ptr [rsp+30h],r15b
+fffff806`e78e30ac 498363b000      and     qword ptr [r11-50h],0
+fffff806`e78e30b1 498363a800      and     qword ptr [r11-58h],0
+fffff806`e78e30b6 4983639000      and     qword ptr [r11-70h],0
+fffff806`e78e30bb 8364243c00      and     dword ptr [rsp+3Ch],0
+fffff806`e78e30c0 0f57c0          xorps   xmm0,xmm0
+fffff806`e78e30c3 0f11442478      movups  xmmword ptr [rsp+78h],xmm0
+fffff806`e78e30c8 458ac7          mov     r8b,r15b
+fffff806`e78e30cb 498d5398        lea     rdx,[r11-68h]
+fffff806`e78e30cf e8ac80dcff      call    nt!ExpCaptureWnfStateName (fffff806`e76ab180)
+fffff806`e78e30d4 8bf8            mov     edi,eax
+fffff806`e78e30d6 89442434        mov     dword ptr [rsp+34h],eax
+fffff806`e78e30da 85c0            test    eax,eax
+fffff806`e78e30dc 0f8862020000    js      nt!NtQueryWnfStateNameInformation+0x2f4 (fffff806`e78e3344)
+fffff806`e78e30e2 488b5c2450      mov     rbx,qword ptr [rsp+50h]
+fffff806`e78e30e7 488bc3          mov     rax,rbx
+fffff806`e78e30ea 48c1e804        shr     rax,4
+fffff806`e78e30ee 83e003          and     eax,3
+fffff806`e78e30f1 89442458        mov     dword ptr [rsp+58h],eax
+fffff806`e78e30f5 488bcb          mov     rcx,rbx
+fffff806`e78e30f8 48c1e906        shr     rcx,6
+fffff806`e78e30fc 83e10f          and     ecx,0Fh
+fffff806`e78e30ff 894c243c        mov     dword ptr [rsp+3Ch],ecx
+fffff806`e78e3103 488d442478      lea     rax,[rsp+78h]
+fffff806`e78e3108 4889442420      mov     qword ptr [rsp+20h],rax
+fffff806`e78e310d 4c8d4c2470      lea     r9,[rsp+70h]
+fffff806`e78e3112 458ac7          mov     r8b,r15b
+fffff806`e78e3115 498bd4          mov     rdx,r12
+fffff806`e78e3118 e8539ef0ff      call    nt!ExpWnfCaptureScopeInstanceId (fffff806`e77ecf70)
+fffff806`e78e311d 8bf8            mov     edi,eax
+fffff806`e78e311f 89442434        mov     dword ptr [rsp+34h],eax
+fffff806`e78e3123 85c0            test    eax,eax
+fffff806`e78e3125 0f8819020000    js      nt!NtQueryWnfStateNameInformation+0x2f4 (fffff806`e78e3344)
+fffff806`e78e312b 418bce          mov     ecx,r14d
+fffff806`e78e312e 4585f6          test    r14d,r14d
+fffff806`e78e3131 7418            je      nt!NtQueryWnfStateNameInformation+0xfb (fffff806`e78e314b)
+fffff806`e78e3133 83e901          sub     ecx,1
+fffff806`e78e3136 7413            je      nt!NtQueryWnfStateNameInformation+0xfb (fffff806`e78e314b)
+fffff806`e78e3138 83f901          cmp     ecx,1
+fffff806`e78e313b 740e            je      nt!NtQueryWnfStateNameInformation+0xfb (fffff806`e78e314b)
+fffff806`e78e313d bf030000c0      mov     edi,0C0000003h
+fffff806`e78e3142 897c2434        mov     dword ptr [rsp+34h],edi
+fffff806`e78e3146 e9f9010000      jmp     nt!NtQueryWnfStateNameInformation+0x2f4 (fffff806`e78e3344)
+fffff806`e78e314b 41b804000000    mov     r8d,4
+fffff806`e78e3151 44398424e0000000 cmp     dword ptr [rsp+0E0h],r8d
+fffff806`e78e3159 730e            jae     nt!NtQueryWnfStateNameInformation+0x119 (fffff806`e78e3169)
+fffff806`e78e315b bf0d0000c0      mov     edi,0C000000Dh
+fffff806`e78e3160 897c2434        mov     dword ptr [rsp+34h],edi
+fffff806`e78e3164 e9db010000      jmp     nt!NtQueryWnfStateNameInformation+0x2f4 (fffff806`e78e3344)
+fffff806`e78e3169 4584ff          test    r15b,r15b
+fffff806`e78e316c 7410            je      nt!NtQueryWnfStateNameInformation+0x12e (fffff806`e78e317e)
+fffff806`e78e316e 8b9424e0000000  mov     edx,dword ptr [rsp+0E0h]
+fffff806`e78e3175 488bce          mov     rcx,rsi
+fffff806`e78e3178 e813d4ddff      call    nt!ProbeForWrite (fffff806`e76c0590)
+fffff806`e78e317d 90              nop
+fffff806`e78e317e be01000000      mov     esi,1
+fffff806`e78e3183 4585f6          test    r14d,r14d
+fffff806`e78e3186 7517            jne     nt!NtQueryWnfStateNameInformation+0x14f (fffff806`e78e319f)
+fffff806`e78e3188 89742440        mov     dword ptr [rsp+40h],esi
+fffff806`e78e318c 4d85e4          test    r12,r12
+fffff806`e78e318f 7413            je      nt!NtQueryWnfStateNameInformation+0x154 (fffff806`e78e31a4)
+fffff806`e78e3191 bf0d0000c0      mov     edi,0C000000Dh
+fffff806`e78e3196 897c2434        mov     dword ptr [rsp+34h],edi
+fffff806`e78e319a e99d010000      jmp     nt!NtQueryWnfStateNameInformation+0x2ec (fffff806`e78e333c)
+fffff806`e78e319f 8364244000      and     dword ptr [rsp+40h],0
+fffff806`e78e31a4 4584ff          test    r15b,r15b
+fffff806`e78e31a7 7424            je      nt!NtQueryWnfStateNameInformation+0x17d (fffff806`e78e31cd)
+fffff806`e78e31a9 4585f6          test    r14d,r14d
+fffff806`e78e31ac 741f            je      nt!NtQueryWnfStateNameInformation+0x17d (fffff806`e78e31cd)
+fffff806`e78e31ae 4533ed          xor     r13d,r13d
+fffff806`e78e31b1 4d85e4          test    r12,r12
+fffff806`e78e31b4 741a            je      nt!NtQueryWnfStateNameInformation+0x180 (fffff806`e78e31d0)
+fffff806`e78e31b6 488bcb          mov     rcx,rbx
+fffff806`e78e31b9 e866b6dcff      call    nt!ExpWnfCheckCrossScopeAccess (fffff806`e76ae824)
+fffff806`e78e31be 8bf8            mov     edi,eax
+fffff806`e78e31c0 89442434        mov     dword ptr [rsp+34h],eax
+fffff806`e78e31c4 85c0            test    eax,eax
+fffff806`e78e31c6 7908            jns     nt!NtQueryWnfStateNameInformation+0x180 (fffff806`e78e31d0)
+fffff806`e78e31c8 e96f010000      jmp     nt!NtQueryWnfStateNameInformation+0x2ec (fffff806`e78e333c)
+fffff806`e78e31cd 448bee          mov     r13d,esi
+fffff806`e78e31d0 4533e4          xor     r12d,r12d
+fffff806`e78e31d3 4585ed          test    r13d,r13d
+fffff806`e78e31d6 750f            jne     nt!NtQueryWnfStateNameInformation+0x197 (fffff806`e78e31e7)
+fffff806`e78e31d8 418d46ff        lea     eax,[r14-1]
+fffff806`e78e31dc 418d4c2402      lea     ecx,[r12+2]
+fffff806`e78e31e1 3bc6            cmp     eax,esi
+fffff806`e78e31e3 440f46e1        cmovbe  r12d,ecx
+fffff806`e78e31e7 4533c0          xor     r8d,r8d
+fffff806`e78e31ea 4584ff          test    r15b,r15b
+fffff806`e78e31ed 7509            jne     nt!NtQueryWnfStateNameInformation+0x1a8 (fffff806`e78e31f8)
+fffff806`e78e31ef 488b15ba284e00  mov     rdx,qword ptr [nt!PsInitialSystemProcess (fffff806`e7dc5ab0)]
+fffff806`e78e31f6 eb1f            jmp     nt!NtQueryWnfStateNameInformation+0x1c7 (fffff806`e78e3217)
+fffff806`e78e31f8 65488b042588010000 mov   rax,qword ptr gs:[188h]
+fffff806`e78e3201 488b90b8000000  mov     rdx,qword ptr [rax+0B8h]
+fffff806`e78e3208 488b5c2450      mov     rbx,qword ptr [rsp+50h]
+fffff806`e78e320d 4439442440      cmp     dword ptr [rsp+40h],r8d
+fffff806`e78e3212 7503            jne     nt!NtQueryWnfStateNameInformation+0x1c7 (fffff806`e78e3217)
+fffff806`e78e3214 4c8bc0          mov     r8,rax
+fffff806`e78e3217 488b442470      mov     rax,qword ptr [rsp+70h]
+fffff806`e78e321c 4889442420      mov     qword ptr [rsp+20h],rax
+fffff806`e78e3221 448b4c243c      mov     r9d,dword ptr [rsp+3Ch]
+fffff806`e78e3226 488d4c2460      lea     rcx,[rsp+60h]
+fffff806`e78e322b e8309edcff      call    nt!ExpWnfResolveScopeInstance (fffff806`e76ad060)
+fffff806`e78e3230 8bf8            mov     edi,eax
+fffff806`e78e3232 89442434        mov     dword ptr [rsp+34h],eax
+fffff806`e78e3236 85c0            test    eax,eax
+fffff806`e78e3238 0f88fe000000    js      nt!NtQueryWnfStateNameInformation+0x2ec (fffff806`e78e333c)
+fffff806`e78e323e 4c8d442448      lea     r8,[rsp+48h]
+fffff806`e78e3243 488bd3          mov     rdx,rbx
+fffff806`e78e3246 488b4c2460      mov     rcx,qword ptr [rsp+60h]
+fffff806`e78e324b e84078dcff      call    nt!ExpWnfLookupNameInstance (fffff806`e76aaa90)
+fffff806`e78e3250 8bf8            mov     edi,eax
+fffff806`e78e3252 89442434        mov     dword ptr [rsp+34h],eax
+fffff806`e78e3256 3d340000c0      cmp     eax,0C0000034h
+fffff806`e78e325b 7532            jne     nt!NtQueryWnfStateNameInformation+0x23f (fffff806`e78e328f)
+lkd> u nt!NtSetSystemInformation+0x1b90 L80
+nt!NtSetSystemInformation+0x1b90:
+fffff806`e78e2e90 85ff            test    edi,edi
+fffff806`e78e2e92 ea              ???
+fffff806`e78e2e93 ff              ???
+fffff806`e78e2e94 ff4088          inc     dword ptr [rax-78h]
+fffff806`e78e2e97 7424            je      nt!NtSetSystemInformation+0x1bbd (fffff806`e78e2ebd)
+fffff806`e78e2e99 314c8d44        xor     dword ptr [rbp+rcx*4+44h],ecx
+fffff806`e78e2e9d 2431            and     al,31h
+fffff806`e78e2e9f 488b15b25b4f00  mov     rdx,qword ptr [nt!SeAliasAdminsSid (fffff806`e7dd8a58)]
+fffff806`e78e2ea6 33c9            xor     ecx,ecx
+fffff806`e78e2ea8 e873e998ff      call    nt!RtlCheckTokenMembership (fffff806`e7271820)
+fffff806`e78e2ead 85c0            test    eax,eax
+fffff806`e78e2eaf 0f88ba000000    js      nt!NtSetSystemInformation+0x1c6f (fffff806`e78e2f6f)
+fffff806`e78e2eb5 4038742431      cmp     byte ptr [rsp+31h],sil
+fffff806`e78e2eba 0f84af000000    je      nt!NtSetSystemInformation+0x1c6f (fffff806`e78e2f6f)
+fffff806`e78e2ec0 448bc3          mov     r8d,ebx
+fffff806`e78e2ec3 418bd7          mov     edx,r15d
+fffff806`e78e2ec6 498bce          mov     rcx,r14
+fffff806`e78e2ec9 e8ca1aadff      call    nt!KeUpdateDpcWatchdogConfiguration (fffff806`e73b4998)
+fffff806`e78e2ece e92d010000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2ed3 418ad4          mov     dl,r12b
+fffff806`e78e2ed6 488b0d935b4f00  mov     rcx,qword ptr [nt!SeDebugPrivilege (fffff806`e7dd8a70)]
+fffff806`e78e2edd e8ae0fd7ff      call    nt!SeSinglePrivilegeCheck (fffff806`e7653e90)
+fffff806`e78e2ee2 84c0            test    al,al
+fffff806`e78e2ee4 0f8485000000    je      nt!NtSetSystemInformation+0x1c6f (fffff806`e78e2f6f)
+fffff806`e78e2eea 4585ff          test    r15d,r15d
+fffff806`e78e2eed 0f94c1          sete    cl
+fffff806`e78e2ef0 e877900a00      call    nt!VfPtGenerateTraceInformation (fffff806`e798bf6c)
+fffff806`e78e2ef5 e906010000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2efa 488b051f1a4200  mov     rax,qword ptr [nt!SeCiCallbacks+0xa0 (fffff806`e7d04920)]
+fffff806`e78e2f01 4885c0          test    rax,rax
+fffff806`e78e2f04 0f84dcebffff    je      nt!NtSetSystemInformation+0x7e6 (fffff806`e78e1ae6)
+fffff806`e78e2f0a 458bc7          mov     r8d,r15d
+fffff806`e78e2f0d 8bcb            mov     ecx,ebx
+fffff806`e78e2f0f e86cb80d00      call    nt!KscpCfgDispatchUserCallTargetEsSmep (fffff806`e79be780)
+fffff806`e78e2f14 e9e7000000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2f19 418bd7          mov     edx,r15d
+fffff806`e78e2f1c 498bce          mov     rcx,r14
+fffff806`e78e2f1f e89432c5ff      call    nt!PnpIommuBlockUnblockDevice (fffff806`e75361b8)
+fffff806`e78e2f24 e9d7000000      jmp     nt!NtSetSystemInformation+0x1d00 (fffff806`e78e3000)
+fffff806`e78e2f29 81ebeb000000    sub     ebx,0EBh
+fffff806`e78e2f2f 0f84b5000000    je      nt!NtSetSystemInformation+0x1cea (fffff806`e78e2fea)
+fffff806`e78e2f35 83eb08          sub     ebx,8
+fffff806`e78e2f38 0f84a8ebffff    je      nt!NtSetSystemInformation+0x7e6 (fffff806`e78e1ae6)
+fffff806`e78e2f3e 83eb02          sub     ebx,2
+fffff806`e78e2f41 744d            je      nt!NtSetSystemInformation+0x1c90 (fffff806`e78e2f90)
+fffff806`e78e2f43 83fb01          cmp     ebx,1
+fffff806`e78e2f46 0f8548eaffff    jne     nt!NtSetSystemInformation+0x694 (fffff806`e78e1994)
+fffff806`e78e2f4c 4183ff04        cmp     r15d,4
+fffff806`e78e2f50 740a            je      nt!NtSetSystemInformation+0x1c5c (fffff806`e78e2f5c)
+fffff806`e78e2f52 b8040000c0      mov     eax,0C0000004h
+fffff806`e78e2f57 e9a8000000      jmp     nt!NtSetSystemInformation+0x1d04 (fffff806`e78e3004)
+fffff806`e78e2f5c 418ad4          mov     dl,r12b
+fffff806`e78e2f5f 488b0d0a5b4f00  mov     rcx,qword ptr [nt!SeDebugPrivilege (fffff806`e7dd8a70)]
+fffff806`e78e2f66 e8250fd7ff      call    nt!SeSinglePrivilegeCheck (fffff806`e7653e90)
+fffff806`e78e2f6b 84c0            test    al,al
+fffff806`e78e2f6d 750a            jne     nt!NtSetSystemInformation+0x1c79 (fffff806`e78e2f79)
+fffff806`e78e2f6f b8610000c0      mov     eax,0C0000061h
+fffff806`e78e2f74 e98b000000      jmp     nt!NtSetSystemInformation+0x1d04 (fffff806`e78e3004)
+fffff806`e78e2f79 418b06          mov     eax,dword ptr [r14]
+fffff806`e78e2f7c 89842478010000  mov     dword ptr [rsp+178h],eax
+fffff806`e78e2f83 8905a32e4e00    mov     dword ptr [nt!PspBreakOnContextUnwindFailure (fffff806`e7dc5e2c)],eax
+fffff806`e78e2f89 e9c0e9ffff      jmp     nt!NtSetSystemInformation+0x64e (fffff806`e78e194e)
+fffff806`e78e2f8e eb74            jmp     nt!NtSetSystemInformation+0x1d04 (fffff806`e78e3004)
+fffff806`e78e2f90 4183ff04        cmp     r15d,4
+fffff806`e78e2f94 0f85d2ecffff    jne     nt!NtSetSystemInformation+0x96c (fffff806`e78e1c6c)
+fffff806`e78e2f9a 418ad4          mov     dl,r12b
+fffff806`e78e2f9d 488b0dcc5a4f00  mov     rcx,qword ptr [nt!SeDebugPrivilege (fffff806`e7dd8a70)]
+fffff806`e78e2fa4 e8e70ed7ff      call    nt!SeSinglePrivilegeCheck (fffff806`e7653e90)
+fffff806`e78e2fa9 84c0            test    al,al
+fffff806`e78e2fab 7507            jne     nt!NtSetSystemInformation+0x1cb4 (fffff806`e78e2fb4)
+fffff806`e78e2fad bf610000c0      mov     edi,0C0000061h
+fffff806`e78e2fb2 eb4e            jmp     nt!NtSetSystemInformation+0x1d02 (fffff806`e78e3002)
+fffff806`e78e2fb4 418b06          mov     eax,dword ptr [r14]
+fffff806`e78e2fb7 898424e8000000  mov     dword ptr [rsp+0E8h],eax
+fffff806`e78e2fbe 8d889f0f0000    lea     ecx,[rax+0F9Fh]
+fffff806`e78e2fc4 48b877be9f1a2fdd2406 mov rax,624DD2F1A9FBE77h
+fffff806`e78e2fce 48f7e1          mul     rax,rcx
+fffff806`e78e2fd1 482bca          sub     rcx,rdx
+fffff806`e78e2fd4 48d1e9          shr     rcx,1
+fffff806`e78e2fd7 4803ca          add     rcx,rdx
+fffff806`e78e2fda 48c1e90b        shr     rcx,0Bh
+fffff806`e78e2fde 890d08bd4000    mov     dword ptr [nt!ExResourceTimeoutCount (fffff806`e7ceecec)],ecx
+fffff806`e78e2fe4 eb1c            jmp     nt!NtSetSystemInformation+0x1d02 (fffff806`e78e3002)
+fffff806`e78e2fe6 8bf8            mov     edi,eax
+fffff806`e78e2fe8 eb18            jmp     nt!NtSetSystemInformation+0x1d02 (fffff806`e78e3002)
+fffff806`e78e2fea 4889742420      mov     qword ptr [rsp+20h],rsi
+fffff806`e78e2fef 4533c9          xor     r9d,r9d
+fffff806`e78e2ff2 458ac4          mov     r8b,r12b
+fffff806`e78e2ff5 418bd7          mov     edx,r15d
+fffff806`e78e2ff8 498bce          mov     rcx,r14
+fffff806`e78e2ffb e8fcbac2ff      call    nt!HvlQuerySetBootPagesInfo (fffff806`e750eafc)
+fffff806`e78e3000 8bf8            mov     edi,eax
+fffff806`e78e3002 8bc7            mov     eax,edi
+fffff806`e78e3004 488b8c24b0040000 mov     rcx,qword ptr [rsp+4B0h]
+fffff806`e78e300c 4833cc          xor     rcx,rsp
+fffff806`e78e300f e80c29bcff      call    nt!_security_check_cookie (fffff806`e74a5920)
+fffff806`e78e3014 4881c4c0040000  add     rsp,4C0h
+fffff806`e78e301b 415f            pop     r15
+fffff806`e78e301d 415e            pop     r14
+fffff806`e78e301f 415d            pop     r13
+fffff806`e78e3021 415c            pop     r12
+fffff806`e78e3023 5f              pop     rdi
+fffff806`e78e3024 5e              pop     rsi
+fffff806`e78e3025 5b              pop     rbx
+fffff806`e78e3026 c3              ret
+fffff806`e78e3027 cc              int     3
+fffff806`e78e3028 e8c381dbff      call    nt!ExRaiseDatatypeMisalignment (fffff806`e769b1f0)
+fffff806`e78e302d 90              nop
+fffff806`e78e302e e8bd81dbff      call    nt!ExRaiseDatatypeMisalignment (fffff806`e769b1f0)
+fffff806`e78e3033 90              nop
+fffff806`e78e3034 e8b781dbff      call    nt!ExRaiseDatatypeMisalignment (fffff806`e769b1f0)
+fffff806`e78e3039 90              nop
+fffff806`e78e303a cc              int     3
+fffff806`e78e303b cc              int     3
+fffff806`e78e303c cc              int     3
+fffff806`e78e303d cc              int     3
+fffff806`e78e303e cc              int     3
+fffff806`e78e303f cc              int     3
+fffff806`e78e3040 cc              int     3
+fffff806`e78e3041 cc              int     3
+fffff806`e78e3042 cc              int     3
+fffff806`e78e3043 cc              int     3
+fffff806`e78e3044 cc              int     3
+fffff806`e78e3045 cc              int     3
+fffff806`e78e3046 cc              int     3
+fffff806`e78e3047 cc              int     3
+fffff806`e78e3048 cc              int     3
+fffff806`e78e3049 cc              int     3
+lkd> u nt!NtSetSystemInformation+0x1c40 L60
+nt!NtSetSystemInformation+0x1c40:
+fffff806`e78e2f40 02744d83        add     dh,byte ptr [rbp+rcx*2-7Dh]
+fffff806`e78e2f44 fb              sti
+fffff806`e78e2f45 010f            add     dword ptr [rdi],ecx
+fffff806`e78e2f47 8548ea          test    dword ptr [rax-16h],ecx
+fffff806`e78e2f4a ff              ???
+fffff806`e78e2f4b ff4183          inc     dword ptr [rcx-7Dh]
+fffff806`e78e2f4e ff0474          inc     dword ptr [rsp+rsi*2]
+fffff806`e78e2f51 0ab8040000c0    or      bh,byte ptr [rax-3FFFFFFCh]
+fffff806`e78e2f57 e9a8000000      jmp     nt!NtSetSystemInformation+0x1d04 (fffff806`e78e3004)
+fffff806`e78e2f5c 418ad4          mov     dl,r12b
+fffff806`e78e2f5f 488b0d0a5b4f00  mov     rcx,qword ptr [nt!SeDebugPrivilege (fffff806`e7dd8a70)]
+fffff806`e78e2f66 e8250fd7ff      call    nt!SeSinglePrivilegeCheck (fffff806`e7653e90)
+fffff806`e78e2f6b 84c0            test    al,al
+fffff806`e78e2f6d 750a            jne     nt!NtSetSystemInformation+0x1c79 (fffff806`e78e2f79)
+fffff806`e78e2f6f b8610000c0      mov     eax,0C0000061h
+fffff806`e78e2f74 e98b000000      jmp     nt!NtSetSystemInformation+0x1d04 (fffff806`e78e3004)
+fffff806`e78e2f79 418b06          mov     eax,dword ptr [r14]
+fffff806`e78e2f7c 89842478010000  mov     dword ptr [rsp+178h],eax
+fffff806`e78e2f83 8905a32e4e00    mov     dword ptr [nt!PspBreakOnContextUnwindFailure (fffff806`e7dc5e2c)],eax
+fffff806`e78e2f89 e9c0e9ffff      jmp     nt!NtSetSystemInformation+0x64e (fffff806`e78e194e)
+fffff806`e78e2f8e eb74            jmp     nt!NtSetSystemInformation+0x1d04 (fffff806`e78e3004)
+fffff806`e78e2f90 4183ff04        cmp     r15d,4
+fffff806`e78e2f94 0f85d2ecffff    jne     nt!NtSetSystemInformation+0x96c (fffff806`e78e1c6c)
+fffff806`e78e2f9a 418ad4          mov     dl,r12b
+fffff806`e78e2f9d 488b0dcc5a4f00  mov     rcx,qword ptr [nt!SeDebugPrivilege (fffff806`e7dd8a70)]
+fffff806`e78e2fa4 e8e70ed7ff      call    nt!SeSinglePrivilegeCheck (fffff806`e7653e90)
+fffff806`e78e2fa9 84c0            test    al,al
+fffff806`e78e2fab 7507            jne     nt!NtSetSystemInformation+0x1cb4 (fffff806`e78e2fb4)
+fffff806`e78e2fad bf610000c0      mov     edi,0C0000061h
+fffff806`e78e2fb2 eb4e            jmp     nt!NtSetSystemInformation+0x1d02 (fffff806`e78e3002)
+fffff806`e78e2fb4 418b06          mov     eax,dword ptr [r14]
+fffff806`e78e2fb7 898424e8000000  mov     dword ptr [rsp+0E8h],eax
+fffff806`e78e2fbe 8d889f0f0000    lea     ecx,[rax+0F9Fh]
+fffff806`e78e2fc4 48b877be9f1a2fdd2406 mov rax,624DD2F1A9FBE77h
+fffff806`e78e2fce 48f7e1          mul     rax,rcx
+fffff806`e78e2fd1 482bca          sub     rcx,rdx
+fffff806`e78e2fd4 48d1e9          shr     rcx,1
+fffff806`e78e2fd7 4803ca          add     rcx,rdx
+fffff806`e78e2fda 48c1e90b        shr     rcx,0Bh
+fffff806`e78e2fde 890d08bd4000    mov     dword ptr [nt!ExResourceTimeoutCount (fffff806`e7ceecec)],ecx
+fffff806`e78e2fe4 eb1c            jmp     nt!NtSetSystemInformation+0x1d02 (fffff806`e78e3002)
+fffff806`e78e2fe6 8bf8            mov     edi,eax
+fffff806`e78e2fe8 eb18            jmp     nt!NtSetSystemInformation+0x1d02 (fffff806`e78e3002)
+fffff806`e78e2fea 4889742420      mov     qword ptr [rsp+20h],rsi
+fffff806`e78e2fef 4533c9          xor     r9d,r9d
+fffff806`e78e2ff2 458ac4          mov     r8b,r12b
+fffff806`e78e2ff5 418bd7          mov     edx,r15d
+fffff806`e78e2ff8 498bce          mov     rcx,r14
+fffff806`e78e2ffb e8fcbac2ff      call    nt!HvlQuerySetBootPagesInfo (fffff806`e750eafc)
+fffff806`e78e3000 8bf8            mov     edi,eax
+fffff806`e78e3002 8bc7            mov     eax,edi
+fffff806`e78e3004 488b8c24b0040000 mov     rcx,qword ptr [rsp+4B0h]
+fffff806`e78e300c 4833cc          xor     rcx,rsp
+fffff806`e78e300f e80c29bcff      call    nt!_security_check_cookie (fffff806`e74a5920)
+fffff806`e78e3014 4881c4c0040000  add     rsp,4C0h
+fffff806`e78e301b 415f            pop     r15
+fffff806`e78e301d 415e            pop     r14
+fffff806`e78e301f 415d            pop     r13
+fffff806`e78e3021 415c            pop     r12
+fffff806`e78e3023 5f              pop     rdi
+fffff806`e78e3024 5e              pop     rsi
+fffff806`e78e3025 5b              pop     rbx
+fffff806`e78e3026 c3              ret
+fffff806`e78e3027 cc              int     3
+fffff806`e78e3028 e8c381dbff      call    nt!ExRaiseDatatypeMisalignment (fffff806`e769b1f0)
+fffff806`e78e302d 90              nop
+fffff806`e78e302e e8bd81dbff      call    nt!ExRaiseDatatypeMisalignment (fffff806`e769b1f0)
+fffff806`e78e3033 90              nop
+fffff806`e78e3034 e8b781dbff      call    nt!ExRaiseDatatypeMisalignment (fffff806`e769b1f0)
+fffff806`e78e3039 90              nop
+fffff806`e78e303a cc              int     3
+fffff806`e78e303b cc              int     3
+fffff806`e78e303c cc              int     3
+fffff806`e78e303d cc              int     3
+fffff806`e78e303e cc              int     3
+fffff806`e78e303f cc              int     3
+fffff806`e78e3040 cc              int     3
+fffff806`e78e3041 cc              int     3
+fffff806`e78e3042 cc              int     3
+fffff806`e78e3043 cc              int     3
+fffff806`e78e3044 cc              int     3
+fffff806`e78e3045 cc              int     3
+fffff806`e78e3046 cc              int     3
+fffff806`e78e3047 cc              int     3
+fffff806`e78e3048 cc              int     3
+fffff806`e78e3049 cc              int     3
+fffff806`e78e304a cc              int     3
+fffff806`e78e304b cc              int     3
+fffff806`e78e304c cc              int     3
+fffff806`e78e304d cc              int     3
+fffff806`e78e304e cc              int     3
+fffff806`e78e304f cc              int     3
+nt!NtQueryWnfStateNameInformation:
+fffff806`e78e3050 4c8bdc          mov     r11,rsp
+fffff806`e78e3053 49895b08        mov     qword ptr [r11+8],rbx
+fffff806`e78e3057 49897318        mov     qword ptr [r11+18h],rsi
+fffff806`e78e305b 4d894b20        mov     qword ptr [r11+20h],r9
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

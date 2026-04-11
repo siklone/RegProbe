@@ -1,0 +1,71 @@
+﻿{
+    "generated_utc":  "2026-04-03T13:38:09.4983310Z",
+    "profiles":  [
+                     {
+                         "id":  "guest-restart-roundtrip-bonc-lead3",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "roundtrip-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "bonc",
+                         "debugger_attach_lead_seconds":  3,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE"
+                     },
+                     {
+                         "id":  "guest-restart-roundtrip-bonc-lead10",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "roundtrip-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "bonc",
+                         "debugger_attach_lead_seconds":  10,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE"
+                     },
+                     {
+                         "id":  "guest-restart-roundtrip-bonc-lead20",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "roundtrip-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "bonc",
+                         "debugger_attach_lead_seconds":  20,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE"
+                     },
+                     {
+                         "id":  "guest-restart-roundtrip-none-lead10",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "roundtrip-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "none",
+                         "debugger_attach_lead_seconds":  10,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE"
+                     },
+                     {
+                         "id":  "guest-restart-roundtrip-none-lead20",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "roundtrip-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "none",
+                         "debugger_attach_lead_seconds":  20,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE"
+                     },
+                     {
+                         "id":  "guest-restart-roundtrip-b-lead10",
+                         "debugger_frontend":  "kd",
+                         "trace_profile":  "roundtrip-once",
+                         "boot_mode":  "guest-restart",
+                         "break_on_connect_mode":  "b",
+                         "debugger_attach_lead_seconds":  10,
+                         "shell_health_timeout_seconds":  240,
+                         "pipe_endpoint":  "server",
+                         "try_no_rx_loss":  "FALSE"
+                     }
+                 ]
+}
