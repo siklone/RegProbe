@@ -4,7 +4,7 @@
   "record_id": "system.kernel.disable-exception-chain-validation",
   "tweak_id": "system.kernel.disable-exception-chain-validation",
   "record_status": "validated",
-  "summary": "Validated cross-layer record for DisableExceptionChainValidation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. That is enough for Class A in this project even though the value remains research-only and not app-mapped.",
+  "summary": "Validated cross-layer record for DisableExceptionChainValidation under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. A later source-enrichment follow-up on public `systeminformer/phnt` headers then added a small but useful corroboration by surfacing the `DisableExceptionChainValidation` execution-option bit in `ntpsapi.h`. That is enough for Class A in this project even though the value remains research-only and not app-mapped.",
   "validation_proof": {
     "source_url": "Docs/system/system.md",
     "exact_quote_or_path": "Docs/system/system.md:89 shows `\"DisableExceptionChainValidation\"; = 2; // PspSehValidationPolicy`.",
@@ -19,7 +19,7 @@
     "casual_explanation": "DisableExceptionChainValidation is a low-level Session Manager Kernel registry value tied to exception-chain policy handling during early boot.",
     "why_people_change_it": "Researchers track it when studying kernel exception validation policy, boot-time registry reads, and low-level Session Manager Kernel behavior.",
     "tradeoffs_overview": "This is an undocumented early-boot kernel-facing value. Cross-layer evidence is now strong enough for Class A inside this project, but it still stays research-only and non-actionable.",
-    "professional_notes": "The broad 96-key existence batch confirmed that DisableExceptionChainValidation lives under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel and is missing on the clean baseline. Repo system notes already list the value by name in the same kernel family. Broad targeted static triage on the current build then found an exact ntoskrnl.exe hit for DisableExceptionChainValidation. The final tools-hardened lightweight runtime batch used the single-VM hardened baseline, wrote all 21 Session Manager Kernel candidates together, rebooted once, stopped a boot registry trace, parsed the ETW payload inside the guest, and copied back only compact JSON summaries. That run produced exact RegQueryValue hits for DisableExceptionChainValidation with exact_query_hits = 4 while the other 20 sibling kernel candidates stayed no-hit. Within RegProbe, that existence + static current-build hit + exact runtime read is enough for Class A even without app mapping.",
+    "professional_notes": "The broad 96-key existence batch confirmed that DisableExceptionChainValidation lives under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel and is missing on the clean baseline. Repo system notes already list the value by name in the same kernel family. Broad targeted static triage on the current build then found an exact ntoskrnl.exe hit for DisableExceptionChainValidation. The final tools-hardened lightweight runtime batch used the single-VM hardened baseline, wrote all 21 Session Manager Kernel candidates together, rebooted once, stopped a boot registry trace, parsed the ETW payload inside the guest, and copied back only compact JSON summaries. That run produced exact RegQueryValue hits for DisableExceptionChainValidation with exact_query_hits = 4 while the other 20 sibling kernel candidates stayed no-hit. A later source-enrichment follow-up over a shallow `winsiderss/systeminformer` clone then surfaced `ULONG DisableExceptionChainValidation : 1; // MEM_EXECUTE_OPTION_DISABLE_EXCEPTION_CHAIN_VALIDATION` in `phnt/include/ntpsapi.h`, which is not a primary Microsoft contract but does corroborate that the same semantic bit remains exposed through a public NT-style header surface. Within RegProbe, that existence + static current-build hit + exact runtime read is enough for Class A even without app mapping.",
     "targets": [
       {
         "target_id": "disable-exception-chain-validation",
@@ -162,6 +162,19 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "source-enrichment-disable-exception-chain-validation-20260412",
+      "kind": "analysis-output",
+      "title": "System Informer source-enrichment follow-up for DisableExceptionChainValidation",
+      "location": "registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json and research/notes/source-enrichment-systeminformer-follow-up-20260412.md",
+      "summary": "A source-enrichment follow-up over `winsiderss/systeminformer` found `DisableExceptionChainValidation` in `phnt/include/ntpsapi.h` as the `MEM_EXECUTE_OPTION_DISABLE_EXCEPTION_CHAIN_VALIDATION` bit, adding a lightweight public-header corroboration layer to the existing runtime and static proof.",
+      "supports": [
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -187,5 +200,5 @@
       "notes": "The canonical runtime lane ran on RegProbe-Baseline-ToolsHardened-20260330 with a single reboot, guest-side tracerpt parsing, and compact summary copy-back."
     }
   ],
-  "last_reviewed_utc": "2026-03-31T17:20:00+03:00"
+  "last_reviewed_utc": "2026-04-12T01:33:00+03:00"
 }

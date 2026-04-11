@@ -4,7 +4,7 @@
   "record_id": "power.disable-fast-startup",
   "tweak_id": "power.disable-fast-startup",
   "record_status": "validated",
-  "summary": "Disables the local Fast Startup setting by writing HiberbootEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This is the documented local on/off surface for Fast Startup. A separate policy value, HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\HiberbootEnabled, only forces Fast Startup on and does not provide a symmetric disable path. The app previously wrote HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\HiberbootEnabled, which is not the authoritative local Fast Startup toggle; both app surfaces now align to the Session Manager path.",
+  "summary": "Disables the local Fast Startup setting by writing HiberbootEnabled under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power. This is the documented local on/off surface for Fast Startup. A separate policy value, HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\HiberbootEnabled, only forces Fast Startup on and does not provide a symmetric disable path. The app previously wrote HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\HiberbootEnabled, which is not the authoritative local Fast Startup toggle; both app surfaces now align to the Session Manager path. A later source-enrichment follow-up on the public System Informer `phnt` headers then added a lightweight current-build corroboration layer by surfacing `SystemHiberbootState` with an explicit `effective HiberbootEnabled state` comment in `ntpoapi.h`.",
   "setting": {
     "name": "Fast Startup (Hiberboot)",
     "category": "Power",
@@ -13,7 +13,7 @@
     "casual_explanation": "Fast Startup stores part of the system state during shutdown so the next boot can be faster. Some people disable it to avoid dual-boot, driver, or wake issues.",
     "why_people_change_it": "People turn it off when they want cleaner full shutdown behavior, better compatibility with dual-boot setups, or less weirdness around hibernation-related resume behavior.",
     "tradeoffs_overview": "Turning Fast Startup off can solve compatibility problems, but boot may take longer on some systems. On systems where startup speed matters more than shutdown correctness, leaving it enabled can be preferable.",
-    "professional_notes": "Official Microsoft guidance documents the local Fast Startup switch at HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled, where 0 disables Fast Startup and 1 enables it. The separate WinInit policy HiberbootEnabled under HKLM\\Software\\Policies\\Microsoft\\Windows\\System is not a disable surface: if that policy is disabled or not configured, Windows uses the local setting instead. nohuto reverse-engineering agrees that PopReadHiberbootGroupPolicy (policy path) overrides PopReadHiberbootPolicy (Session Manager path). On the validation host, HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\HiberbootEnabled=0 while HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled=1, reinforcing that the Control\\Power value is not the authoritative local Fast Startup toggle.",
+    "professional_notes": "Official Microsoft guidance documents the local Fast Startup switch at HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled, where 0 disables Fast Startup and 1 enables it. The separate WinInit policy HiberbootEnabled under HKLM\\Software\\Policies\\Microsoft\\Windows\\System is not a disable surface: if that policy is disabled or not configured, Windows uses the local setting instead. nohuto reverse-engineering agrees that PopReadHiberbootGroupPolicy (policy path) overrides PopReadHiberbootPolicy (Session Manager path). On the validation host, HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\HiberbootEnabled=0 while HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled=1, reinforcing that the Control\\Power value is not the authoritative local Fast Startup toggle. A later source-enrichment follow-up over a shallow `winsiderss/systeminformer` clone then found `SystemHiberbootState` in `phnt/include/ntpoapi.h` with the inline comment `effective HiberbootEnabled state`, which is not primary Microsoft documentation but does add a lightweight public-header corroboration that the current-build family is still represented in public NT-style interfaces.",
     "targets": [
       {
         "target_id": "hiberboot-enabled",
@@ -217,6 +217,19 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "source-enrichment-hiberboot-header-20260412",
+      "kind": "analysis-output",
+      "title": "System Informer source-enrichment follow-up for HiberbootEnabled",
+      "location": "registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json and research/notes/source-enrichment-systeminformer-follow-up-20260412.md",
+      "summary": "A source-enrichment follow-up over `winsiderss/systeminformer` found `SystemHiberbootState` in `phnt/include/ntpoapi.h` with the inline comment `effective HiberbootEnabled state`, giving a lightweight public-header corroboration for the HiberbootEnabled family.",
+      "supports": [
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -230,7 +243,7 @@
     "blocking_issues": []
   },
   "open_questions": [],
-  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
+  "last_reviewed_utc": "2026-04-12T01:33:00+03:00",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm",
     "exact_quote_or_path": "To disable fast startup, set the following registry value: Key: HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power Name: HiberbootEnabled Type: DWORD Value: 0 (0 = Disabled, 1 = Enabled)",
