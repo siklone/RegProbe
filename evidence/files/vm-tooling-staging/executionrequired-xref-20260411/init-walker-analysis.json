@@ -1,0 +1,61 @@
+{
+  "analysis_id": "executionrequired-init-walker-20260411",
+  "analysis_kind": "host-side-static-disassembly",
+  "collected_on": "2026-04-11",
+  "binary": "ntoskrnl.exe",
+  "table_address": "0x140C72E30",
+  "walker_address": "0x140C48AB8",
+  "walker_wrappers": [
+    {
+      "call_site": "0x140C483EF",
+      "mode_flag_r8b": 0,
+      "notes": "Base init call from the primary wrapper."
+    },
+    {
+      "call_site": "0x140C48414",
+      "mode_flag_r8b": 1,
+      "notes": "Secondary wrapper call while iterating an object list."
+    }
+  ],
+  "helpers": {
+    "subkey_lookup": {
+      "address": "0x1407E334C",
+      "notes": "Builds a UNICODE_STRING from the row key string and forwards it into the child-entry search helper at 0x1407E3394."
+    },
+    "value_lookup": {
+      "address": "0x14086A794",
+      "notes": "Adds 0x24 to the located key object and calls 0x14086C510."
+    },
+    "value_lookup_inner": {
+      "address": "0x14086C510",
+      "notes": "Case-insensitively compares the requested UTF-16 value name against entry strings and returns STATUS_OBJECT_NAME_NOT_FOUND with out index -1 on miss."
+    },
+    "value_copy": {
+      "address": "0x140C4CB20",
+      "notes": "Copies the located value blob into the target pointer supplied by the row."
+    }
+  },
+  "target_rows": [
+    {
+      "row_address": "0x140C76250",
+      "key_name": "Power",
+      "value_name": "AllowSystemRequiredPowerRequests",
+      "target_global": "0x140FD7114",
+      "target_symbol": "nt!PopPowerRequestConvertSystemToExecution"
+    },
+    {
+      "row_address": "0x140C76280",
+      "key_name": "Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "target_global": "0x140FD71A0",
+      "target_symbol": "nt!PopPowerRequestActiveAudioEnablesExecutionRequired"
+    }
+  ],
+  "inference": "The unlabeled INIT walker at 0x140C48AB8 appears to be the current-build static registry seeding path for the execution-required pair under Control\\\\Power.",
+  "confidence": "high",
+  "limitations": [
+    "The walker is not symbol-resolved.",
+    "No primary Microsoft document names this routine.",
+    "No exact runtime registry read has been captured yet."
+  ]
+}
