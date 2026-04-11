@@ -46,6 +46,7 @@ class SourceEnrichmentTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             windir = Path(temp_root) / "WindowsRoot"
             override = Path(temp_root) / "override" / "admx"
+            override.mkdir(parents=True)
             with patch.dict(
                 source_enrichment_scan.os.environ,
                 {
@@ -57,6 +58,15 @@ class SourceEnrichmentTests(unittest.TestCase):
                 expanded = source_enrichment_scan.expand_root(r"%WINDIR%\PolicyDefinitions", source_id="admx")
 
             self.assertEqual(expanded, override)
+
+    def test_expand_root_uses_source_specific_fallback_when_env_root_missing(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            fallback = Path(temp_root) / "fallback" / "admx"
+            fallback.mkdir(parents=True)
+            with patch.dict(source_enrichment_scan.SOURCE_ROOT_FALLBACKS, {"admx": [fallback]}, clear=False):
+                expanded = source_enrichment_scan.expand_root(r"%WINDIR%\PolicyDefinitions", source_id="admx")
+
+            self.assertEqual(expanded, fallback)
 
     def test_score_candidate_tracks_weighted_support_and_trigger_family(self) -> None:
         candidate = {

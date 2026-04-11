@@ -22,8 +22,13 @@ DEFAULT_WEIGHTS = {
     "geoff_chappell": 2,
 }
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
 WINDOWS_ENVVAR_PATTERN = re.compile(r"%([^%]+)%")
 VALUE_TOKEN_TEMPLATE = r"(?<![a-z0-9_]){token}(?![a-z0-9_])"
+SOURCE_ROOT_FALLBACKS = {
+    "admx": [REPO_ROOT / "evidence" / "files" / "external" / "c"],
+    "wdk_headers": [REPO_ROOT / "evidence" / "files" / "external" / "c" / "Windows Kits" / "10" / "Include"],
+}
 GENERIC_VALUE_NAMES = {
     "default",
     "enabled",
@@ -135,6 +140,20 @@ def _source_root_override(source_id: str | None) -> str | None:
     return None
 
 
+def _source_root_fallback(source_id: str | None) -> Path | None:
+    normalized = _normalize_source_id(source_id)
+    if not normalized:
+        return None
+
+    for candidate in SOURCE_ROOT_FALLBACKS.get(source_id or "", []):
+        if candidate.exists():
+            return candidate
+    for candidate in SOURCE_ROOT_FALLBACKS.get(normalized.lower(), []):
+        if candidate.exists():
+            return candidate
+    return None
+
+
 def _normalize_path_separators(value: str) -> str:
     normalized = value.strip().strip('"')
     if os.sep == "/":
@@ -155,7 +174,14 @@ def expand_root(value: str | None, source_id: str | None = None) -> Path | None:
     expanded = _normalize_path_separators(expanded)
     if not expanded:
         return None
-    return Path(expanded)
+    expanded_path = Path(expanded)
+    if expanded_path.exists():
+        return expanded_path
+
+    fallback = _source_root_fallback(source_id)
+    if fallback is not None:
+        return fallback
+    return expanded_path
 
 
 def matches_patterns(name: str, patterns: List[str]) -> bool:
