@@ -227,7 +227,7 @@
     "blocking_issues": []
   },
   "open_questions": [],
-  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration",
     "exact_quote_or_path": "`MSFT_SmbServerConfiguration` includes `boolean EnableLeasing;` and the property description says `Controls whether leasing will be enabled.` Complementary Microsoft troubleshooting guidance says `Leasing is an integral part of the SMB protocol` and shows `Set-SmbServerConfiguration -EnableLeasing $false` as the supported disable method.",

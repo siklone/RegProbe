@@ -369,7 +369,7 @@
     "why": "Microsoft Edge officially documents SearchSuggestEnabled and LocalProvidersEnabled under Software\\Policies\\Microsoft\\Edge with 0 as the disabled state, and the local MicrosoftEdge.admx file confirms the legacy ShowSearchSuggestionsGlobal mapping under Software\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes with disabledValue 0. The app writes those exact disabled values for all three policy surfaces.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T15:13:40.4233180+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled",
     "exact_quote_or_path": "If you disable this policy, web search suggestions are never used, however local history and local favorites suggestions still appear. ... Registry settings: Path (Mandatory): SOFTWARE\\Policies\\Microsoft\\Edge ... Value name: SearchSuggestEnabled ... Value type: REG_DWORD.",

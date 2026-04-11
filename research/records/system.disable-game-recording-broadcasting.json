@@ -223,7 +223,7 @@
     "why": "The local Microsoft GameDVR.admx file explicitly defines AllowGameDVR under Software\\Policies\\Microsoft\\Windows\\GameDVR with valueName AllowGameDVR, and the paired ADML help text states that disabling the setting prevents Windows Game Recording while enabled or not configured allows recording and broadcasting. The app writes that documented disabled state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T19:54:30.6213142+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx",
     "exact_quote_or_path": "<policy name=\"AllowGameDVR\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\GameDVR\" valueName=\"AllowGameDVR\">",

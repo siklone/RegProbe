@@ -221,7 +221,7 @@
     "why": "Local Microsoft FileSys policy files document the exact machine registry surface and the long-path behavior. The app writes the documented enabled value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T21:34:02.4377701+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx",
     "exact_quote_or_path": "<policy name=\"LongPathsEnabled\" class=\"Machine\" ... key=\"System\\CurrentControlSet\\Control\\FileSystem\" valueName=\"LongPathsEnabled\">; FileSys.adml: Enabling Win32 long paths will allow manifested win32 applications and packaged Microsoft Store applications to access paths beyond the normal 260 character limit.",

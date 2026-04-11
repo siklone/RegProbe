@@ -217,7 +217,7 @@
     "why": "Microsoft documents the exact registry value and meaning used by the app, including the default enabled behavior for large MTU, and the app writes that documented state with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T00:58:30Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server",
     "exact_quote_or_path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu. Large MTU is enabled by default. You can prevent connections to file shares that don't support large MTU by setting this parameter to 1.",

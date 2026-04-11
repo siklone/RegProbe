@@ -4,7 +4,7 @@
   "record_id": "privacy.disable-program-compatibility-assistant",
   "tweak_id": "privacy.disable-program-compatibility-assistant",
   "record_status": "validated",
-  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "summary": "Device policy for turning Program Compatibility Assistant (PCA) off. The correct registry value is DisablePCA under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat, documented by Microsoft Learn ADMX_AppCompat and local AppCompat.admx. The app implementation was corrected on 2026-03-13 to use DisablePCA=1 instead of the previously mismatched DisablePcaUI diagnostics policy, and Procmon confirmed the runtime write.",
   "setting": {
     "name": "Disable Program Compatibility Assistant",

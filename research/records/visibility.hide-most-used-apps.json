@@ -226,7 +226,7 @@
     "why": "The local Microsoft StartMenu.admx file explicitly defines the ShowOrHideMostUsedApps enum policy under Software\\Policies\\Microsoft\\Windows\\Explorer and the app writes the documented force-hide value of 2.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T20:26:54.8725742+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
     "exact_quote_or_path": "<policy name=\"ShowOrHideMostUsedApps\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\"> ... <enum id=\"ShowOrHideMostUsedAppsDropdown\" valueName=\"ShowOrHideMostUsedApps\" required=\"true\">",

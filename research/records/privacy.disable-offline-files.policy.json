@@ -221,7 +221,7 @@
     "why": "The local Microsoft OfflineFiles.admx file explicitly defines Pol_Enabled under Software\\Policies\\Microsoft\\Windows\\NetCache with valueName Enabled, enabledValue 1, and disabledValue 0, which matches the app's policy write.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T19:10:41.8261076+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx",
     "exact_quote_or_path": "<policy name=\"Pol_Enabled\" ... key=\"Software\\Policies\\Microsoft\\Windows\\NetCache\" valueName=\"Enabled\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",

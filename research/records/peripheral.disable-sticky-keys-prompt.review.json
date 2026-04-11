@@ -181,7 +181,7 @@
     "why": "The Sticky Keys feature semantics are documented through the Win32 accessibility API, and the runtime diff shows the app's Flags = \"506\" write landing on the same persisted backend that SPI_SETSTICKYKEYS produces on this build. The value model, app mapping, and rollback story line up cleanly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/missing/stickykeys-spi-diff-20260314-json.md",
     "exact_quote_or_path": "after_hotkey_on: API flags 510, registry Flags = \"510\". after_hotkey_off: API flags 506, registry Flags = \"506\". restored: API flags 506, registry Flags = \"506\".",
