@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "This cluster appears to define multiple watchdog timeout defaults inside the power manager. The values are documented in repo notes, but they are not present in the observed clean registry baseline.",
     "why_people_change_it": "Kernel and power researchers may inspect these values when investigating watchdog timeout behavior around driver monitor, DWM sync flush, Po callouts, power-on GDI, and request queue paths.",
-    "tradeoffs_overview": "The cluster has explicit doc defaults and clean baseline evidence, but it still lacks a current-build structural pivot. It should stay in the research queue as a family hold, not a tweak candidate.",
-    "professional_notes": "The repo docs list five `Control\\\\Power` watchdog defaults under `InitializePowerWatchdogTimeoutDefaults`: `PowerWatchdogDrvSetMonitorTimeoutMsec = 10000`, `PowerWatchdogDwmSyncFlushTimeoutMsec = 30000`, `PowerWatchdogPoCalloutTimeoutMsec = 10000`, `PowerWatchdogPowerOnGdiTimeoutMsec = 30000`, and `PowerWatchdogRequestQueueTimeoutMsec = 30000`. The docs-first power routing pass already grouped them as new `Control\\\\Power` candidates. The observed clean baseline existence pass later confirmed that the parent `Control\\\\Power` path exists while all five registry values are absent. The broad current-build string batch then returned clean `no-hit` results for all five values, which is stronger than a vague unknown but still weaker than a real current-build symbol or caller clue. Existing enrichment output already converges on the same next runtime family for all five values: `power-request-simulation`, low runtime priority, `windbg` queue. The cluster therefore deserves a schema-backed draft, but not immediate deep RE escalation until a stronger current-build path-aware lead appears.",
+    "tradeoffs_overview": "The cluster has explicit doc defaults and clean baseline evidence, but it still lacks a current-build structural pivot. It is now on an intentional Ghidra/static hold because the current-build kernel image has no exact `PowerWatchdogTimeout` string match; it should stay in the research queue as a family hold, not a tweak candidate.",
+    "professional_notes": "The repo docs list five `Control\\\\Power` watchdog defaults under `InitializePowerWatchdogTimeoutDefaults`: `PowerWatchdogDrvSetMonitorTimeoutMsec = 10000`, `PowerWatchdogDwmSyncFlushTimeoutMsec = 30000`, `PowerWatchdogPoCalloutTimeoutMsec = 10000`, `PowerWatchdogPowerOnGdiTimeoutMsec = 30000`, and `PowerWatchdogRequestQueueTimeoutMsec = 30000`. The docs-first power routing pass already grouped them as new `Control\\\\Power` candidates. The observed clean baseline existence pass later confirmed that the parent `Control\\\\Power` path exists while all five registry values are absent. The broad current-build string batch then returned clean `no-hit` results for all five values, which is stronger than a vague unknown but still weaker than a real current-build symbol or caller clue. A later targeted host-side `ntoskrnl.exe` check also found no exact `PowerWatchdogTimeout` string; retained watchdog Ghidra artifacts are adjacent DPC/profile or Win32 callout evidence, not a direct reader/seeding path for this five-value `Control\\\\Power` cluster. Existing enrichment output already converges on the same next runtime family for all five values: `power-request-simulation`, low runtime priority, `windbg` queue. The cluster therefore deserves a schema-backed draft, but it is intentionally held until a targeted binary probe or new runtime trace provides a stronger current-build path-aware lead.",
     "targets": [
       {
         "target_id": "power-watchdog-drv-set-monitor-timeout-msec",
@@ -289,7 +289,7 @@
       "kind": "inference",
       "title": "Broad current-build string batch keeps PowerWatchdog timeout cluster in no-hit hold",
       "location": "research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md and evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
-      "summary": "All five `PowerWatchdog*TimeoutMsec` values returned clean `no-hit` results in the broad current-build string batch, which leaves the family without a current-build path-aware kernel pivot.",
+      "summary": "All five `PowerWatchdog*TimeoutMsec` values returned clean `no-hit` results in the broad current-build string batch, and a later targeted `ntoskrnl.exe` check found no exact `PowerWatchdogTimeout` string. This leaves the family without a current-build path-aware kernel pivot.",
       "supports": [
         "behavior",
         "version-scope",
@@ -317,17 +317,18 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults and a clean observed-baseline state. It is not ready for validation or tweak exposure because the current build still lacks a symbol/string/caller pivot for any of the five values.",
+    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults and a clean observed-baseline state. It is not ready for validation or tweak exposure because the current build still lacks a direct symbol/string/caller pivot for any of the five values; this is an intentional Ghidra/static hold until a targeted binary probe or new trace appears.",
     "manual_review_required": true,
     "blocking_issues": [
       "no-current-build-string-or-symbol-hit",
+      "intentional-ghidra-hold",
       "runtime_no_read",
       "no-doc-source-outside-repo",
       "non-default-semantics-unproven"
     ]
   },
   "open_questions": [
-    "Which current-build helper, if any, reads or seeds these five watchdog timeout values?",
+    "Can a targeted binary probe or new runtime trace find a direct current-build pivot for any of the five `PowerWatchdog*TimeoutMsec` values?",
     "Are the repo-doc defaults built-in kernel defaults, optional registry overrides, or both?",
     "Which of the five values is the best first runtime pivot for a future `power-request-simulation` lane?"
   ],
@@ -339,5 +340,5 @@
       "notes": "The family currently has baseline + docs + no-hit structural evidence only; no canonical current-build runtime lane has been opened yet."
     }
   ],
-  "last_reviewed_utc": "2026-04-07T18:58:00Z"
+  "last_reviewed_utc": "2026-04-12T02:24:00+03:00"
 }

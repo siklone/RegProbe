@@ -19,6 +19,7 @@
       "Exact leaf values and semantics under PowerRequestOverride are still unresolved because the retained runtime trace currently shows root queries and NAME NOT FOUND probes on Driver, Process, and Service rather than stable leaf-value reads.": 1,
       "The record does not yet have a reliable restore story beyond the observed retained subtree-presence snapshot.": 1,
       "The retained static context is still adjacent rather than leaf-specific: it narrows the override family around timeout-specific and generic power-setting surfaces, but it does not yet bind Driver, Process, or Service leaves to a naturally resolved direct-reading function.": 1,
+      "intentional-ghidra-hold": 1,
       "no-current-build-string-or-symbol-hit": 1,
       "no-doc-source-outside-repo": 5,
       "no-runtime-proof": 5,
@@ -12216,6 +12217,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "intentional-ghidra-hold",
         "no-current-build-string-or-symbol-hit",
         "no-doc-source-outside-repo",
         "no-runtime-proof",
