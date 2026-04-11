@@ -106,9 +106,16 @@
       "trace_file": null
     },
     "benchmark": {
-      "executed": false,
-      "summary": null,
-      "output_file": null
+      "executed": true,
+      "summary": "VM functional safety bench passed: PerfCalculateActualUtilization was changed from the observed baseline 1 to DWORD 0, critical services and recent event logs stayed healthy, and rollback restored the baseline value 1.",
+      "output_file": "evidence/records/power.control.perf-calculate-actual-utilization/bench-results/power.control.perf-calculate-actual-utilization-vm-functional.json",
+      "bench_tier": "vm",
+      "bench_profile": "functional",
+      "safety_passed": true,
+      "safety_status": "passed",
+      "bench_environment": "windows-11-25h2-vm",
+      "bench_measurement_reliability": "functional",
+      "executed_at": "2026-04-10T18:55:13.8910803-07:00"
     },
     "registry_sideeffects": {
       "executed": false,
@@ -585,11 +592,41 @@
     "elevation_context": "elevated",
     "machine_user_scope": "machine"
   },
+  "reproducibility": {
+    "vm_name": "windows-11-25h2-vm",
+    "domain": "regprobe-win11-25h2-session",
+    "baseline_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+    "bench_script": "registry-research-framework/scripts/vm/run-safety-bench-guest.ps1",
+    "bench_wrapper": "registry-research-framework/scripts/vm/run-safety-bench-power-control-low-risk-batch.guest.ps1"
+  },
+  "bench_results": {
+    "candidate_id": "power.control.perf-calculate-actual-utilization",
+    "bench_tier": "vm",
+    "bench_profile": "functional",
+    "apply_value": 0,
+    "apply_type": "REG_DWORD",
+    "rollback_method": "restore-baseline",
+    "safety_passed": true,
+    "safety_status": "passed",
+    "boot_success": true,
+    "shell_usable": true,
+    "services_healthy": true,
+    "event_log_clean": true,
+    "rollback_executed": true,
+    "rollback_verified": true,
+    "rollback_failure_reason": null,
+    "bench_environment": "windows-11-25h2-vm",
+    "bench_measurement_reliability": "functional",
+    "output_file": "evidence/records/power.control.perf-calculate-actual-utilization/bench-results/power.control.perf-calculate-actual-utilization-vm-functional.json",
+    "executed_at": "2026-04-10T18:55:13.8910803-07:00",
+    "apply_verified": true,
+    "state_changed": true
+  },
   "rollback_verification": {
     "rollback_declared": true,
-    "rollback_executed": false,
+    "rollback_executed": true,
     "rollback_verified": true,
-    "rollback_verification_method": "record-restore-story",
+    "rollback_verification_method": "vm-safety-bench-restore-baseline",
     "rollback_failure_reason": null,
     "rollback_value": {
       "source": "windows_defaults",
@@ -604,9 +641,31 @@
       ],
       "rollback_strategy": "restore_default"
     },
-    "state_changed": null,
-    "apply_diff": null,
-    "restore_diff": null
+    "state_changed": true,
+    "apply_diff": {
+      "before": {
+        "exists": true,
+        "value": 1,
+        "value_kind": "DWord"
+      },
+      "after": {
+        "exists": true,
+        "value": 0,
+        "value_kind": "DWord"
+      }
+    },
+    "restore_diff": {
+      "before": {
+        "exists": true,
+        "value": 0,
+        "value_kind": "DWord"
+      },
+      "after": {
+        "exists": true,
+        "value": 1,
+        "value_kind": "DWord"
+      }
+    }
   },
   "freshness_status": {
     "status": "fresh",
