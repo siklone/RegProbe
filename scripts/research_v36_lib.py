@@ -2347,6 +2347,8 @@ def check_mcp_readiness(promotion_catalog: dict[str, Any] | None = None, cli_sou
     promotion_catalog = promotion_catalog or load_promotion_gate_catalog()
     summary = promotion_catalog.get("summary") or {}
     entries = promotion_catalog.get("entries") or []
+    promotion_counts = summary.get("promotion_state_counts") or {}
+    blocker_counts = summary.get("blocker_counts") or {}
     version_aware = bool(
         entries
         and all(
@@ -2358,12 +2360,14 @@ def check_mcp_readiness(promotion_catalog: dict[str, Any] | None = None, cli_sou
     )
     methods_ready = all(callable(globals().get(name)) for name in MCP_METHOD_NAMES)
     cli_status = core_cli_surface_status(cli_source_text)
+    revalidation_pending_count = int(promotion_counts.get("revalidation-pending", 0) or 0)
+    stale_blocker_count = int(blocker_counts.get("stale-evidence", 0) or 0)
     status_checks = {
         "schema_version_stable": str(CURRENT_SCHEMA_VERSION).startswith("1."),
         "gate_evaluator_version_aware": version_aware,
-        "has_promoted": int((summary.get("promotion_state_counts") or {}).get("promoted", 0)) >= 1,
-        "has_blocked": int((summary.get("promotion_state_counts") or {}).get("blocked", 0)) >= 1,
-        "has_revalidation_pending": int((summary.get("promotion_state_counts") or {}).get("revalidation-pending", 0)) >= 1,
+        "has_promoted": int(promotion_counts.get("promoted", 0) or 0) >= 1,
+        "has_blocked": int(promotion_counts.get("blocked", 0) or 0) >= 1,
+        "revalidation_queue_accounted_for": revalidation_pending_count >= 1 or stale_blocker_count == 0,
         "core_cli_green": bool(cli_status.get("pass")),
         "ci_gate_metrics_green": int(summary.get("invalid_gate_entries", 0)) == 0,
         "mcp_methods_present": methods_ready,

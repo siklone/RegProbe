@@ -323,6 +323,42 @@ class McpReadinessTests(unittest.TestCase):
 
         self.assertEqual(payload["status"], "MCP_READY")
 
+    def test_mcp_readiness_accepts_empty_revalidation_queue_when_no_stale_backlog(self) -> None:
+        catalog = {
+            "summary": {
+                "promotion_state_counts": {
+                    "promoted": 5,
+                    "blocked": 1,
+                    "revalidation-pending": 0,
+                },
+                "blocker_counts": {
+                    "stale-evidence": 0,
+                },
+                "invalid_gate_entries": 0,
+            },
+            "entries": [
+                {
+                    "supported_schema_versions": ["1.0"],
+                    "schema_compatibility_mode": "native",
+                }
+            ],
+        }
+        cli_surface = "\n".join(
+            [
+                "list-blocked",
+                "show-stale",
+                "show-revalidation-pending",
+                "generate-regression-pack",
+                "validate-batch",
+                "apply",
+                "rollback",
+            ]
+        )
+
+        payload = research_v36_lib.check_mcp_readiness(catalog, cli_surface)
+
+        self.assertEqual(payload["status"], "MCP_READY")
+
 
 if __name__ == "__main__":
     unittest.main()
