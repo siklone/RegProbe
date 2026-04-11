@@ -1,13 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-11T22:42:05.755823Z",
+  "generated_utc": "2026-04-11T22:50:25.882339Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
       "A": 249,
-      "B": 8,
-      "C": 2,
-      "D": 9
+      "B": 17,
+      "C": 2
     },
     "lane_counts": {
       "official-policy": 240,
@@ -17,17 +16,17 @@
     },
     "next_missing_layer_counts": {
       "none": 248,
-      "decision-gate": 9,
-      "validation-proof": 9,
-      "reboot-diff": 1,
-      "incident-review": 1
+      "decision-gate": 11,
+      "ghidra": 5,
+      "reboot-diff": 2,
+      "incident-review": 1,
+      "procmon": 1
     },
     "promotion_state_counts": {
       "promoted": 247,
-      "blocked": 20,
-      "unknown": 1
+      "blocked": 21
     },
-    "re_audit_required_count": 12,
+    "re_audit_required_count": 21,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
@@ -6039,7 +6038,7 @@
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -6048,7 +6047,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -6063,7 +6062,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T16:30:00+03:00"
+        "last_verified_at": "2026-04-12T01:03:00+03:00"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -6891,7 +6890,7 @@
     {
       "record_id": "power.control.power-watchdog-timeout-cluster",
       "tweak_id": "power.control.power-watchdog-timeout-cluster",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
@@ -6903,7 +6902,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "ghidra",
       "cross_layer_satisfied": false,
       "layers_used": [],
       "tools_used": [],
@@ -6916,11 +6915,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -6932,9 +6931,9 @@
       "promotion_blockers": [
         "no-current-build-string-or-symbol-hit",
         "no-doc-source-outside-repo",
+        "no-runtime-proof",
         "non-default-semantics-unproven",
-        "runtime_no_read",
-        "validation-proof"
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6949,7 +6948,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "ghidra"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -7110,21 +7109,43 @@
       "restore_story_known": true,
       "apply_allowed": false,
       "confidence": "low",
-      "tweak_origin": null,
-      "promotion_state": null,
-      "promotion_blockers": null,
-      "record_promotion_allowed": null,
-      "tweak_ingest_allowed": null,
-      "score_breakdown": null,
-      "schema_compatibility_mode": null,
-      "evaluator_version": null,
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "No primary current-build Microsoft documentation has been found for this exact value.",
+        "The current build does not yet have an exact naturally resolved consumer or registry-read path for TtmEnabled.",
+        "The current runtime lane marks TtmEnabled as boot-unsafe under DWORD 1 on the isolated pilot profile.",
+        "reboot-diff"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 2,
+        "tweak_suitability": 2,
+        "privilege_complexity": 3,
+        "build_specificity": 5,
+        "sibling_expansion_value": 4,
+        "bench_priority": 5,
+        "overall_score": 3.33,
+        "next_missing_layer": "reboot-diff"
+      },
+      "schema_compatibility_mode": "native",
+      "evaluator_version": "3.6.0",
       "stale_reason": null,
-      "last_known_good_build": null,
+      "last_known_good_build": "26100",
       "revalidation_need": "none",
-      "rollback_verification_status": "unverified",
+      "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
-      "last_known_good_verification_context": {},
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-04-12T01:47:00+03:00"
+      },
       "os_build": "26100",
       "os_edition": "Professional",
       "architecture": "x64",
@@ -7136,7 +7157,7 @@
     {
       "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
       "tweak_id": "power.control.win32k-callout-watchdog-timeout-seconds",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
@@ -7148,7 +7169,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "ghidra",
       "cross_layer_satisfied": false,
       "layers_used": [],
       "tools_used": [],
@@ -7161,11 +7182,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -7177,9 +7198,9 @@
       "promotion_blockers": [
         "no-current-build-registry-seeding-path",
         "no-doc-source",
+        "no-runtime-proof",
         "non-default-semantics-unproven",
-        "runtime_no_read",
-        "validation-proof"
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -7194,7 +7215,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.22,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "ghidra"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -7405,7 +7426,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-11T05:09:52.494780Z"
+        "last_verified_at": "2026-04-12T01:33:00+03:00"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8195,7 +8216,7 @@
     {
       "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
       "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "system",
       "class_ready_basis": "pending",
       "official": false,
@@ -8207,7 +8228,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "procmon",
       "cross_layer_satisfied": false,
       "layers_used": [
         "static_ghidra"
@@ -8224,11 +8245,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -8240,9 +8261,9 @@
       "promotion_blockers": [
         "no-current-build-registry-seeding-path",
         "no-doc-source",
+        "no-runtime-proof",
         "non-default-semantics-unproven",
-        "runtime_no_read",
-        "validation-proof"
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -8257,7 +8278,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "procmon"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18317,7 +18338,7 @@
     {
       "record_id": "system.kernel-dpc-watchdog-control-cluster",
       "tweak_id": "system.kernel-dpc-watchdog-control-cluster",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "official-policy",
       "class_ready_basis": "pending",
       "official": true,
@@ -18329,7 +18350,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
         "static_ghidra",
@@ -18348,11 +18369,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -18362,11 +18383,11 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "documentation-first-review",
         "live-defaults-conflict-docs",
         "no-current-build-registry-seeding-path",
         "no-doc-source-outside-repo",
-        "runtime_no_read",
-        "validation-proof"
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18381,7 +18402,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.56,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18408,7 +18429,7 @@
     {
       "record_id": "system.kernel-dpc-watchdog-profile-cluster",
       "tweak_id": "system.kernel-dpc-watchdog-profile-cluster",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
@@ -18420,7 +18441,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "reboot-diff",
       "cross_layer_satisfied": false,
       "layers_used": [
         "static_ghidra"
@@ -18437,11 +18458,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -18455,8 +18476,8 @@
         "live-defaults-conflict-docs",
         "no-current-build-registry-seeding-path",
         "no-doc-source-outside-repo",
-        "runtime_no_read",
-        "validation-proof"
+        "reboot-diff",
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18471,7 +18492,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "reboot-diff"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18498,7 +18519,7 @@
     {
       "record_id": "system.kernel-long-dpc-threshold-cluster",
       "tweak_id": "system.kernel-long-dpc-threshold-cluster",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
@@ -18510,7 +18531,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "ghidra",
       "cross_layer_satisfied": false,
       "layers_used": [
         "runtime_procmon",
@@ -18529,11 +18550,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -18545,9 +18566,9 @@
       "promotion_blockers": [
         "long-dpc-runtime-threshold-direct-read-still-unresolved",
         "no-doc-source-outside-repo",
+        "no-runtime-proof",
         "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
-        "runtime_no_read",
-        "validation-proof"
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18562,7 +18583,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.44,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "ghidra"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18754,7 +18775,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-31T17:20:00+03:00"
+        "last_verified_at": "2026-04-12T01:33:00+03:00"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18767,7 +18788,7 @@
     {
       "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
       "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
@@ -18779,7 +18800,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "ghidra",
       "cross_layer_satisfied": false,
       "layers_used": [
         "runtime_reboot"
@@ -18796,11 +18817,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -18812,9 +18833,9 @@
       "promotion_blockers": [
         "no-current-build-reader-path",
         "no-doc-source-outside-repo",
+        "no-runtime-proof",
         "non-default-semantics-unproven",
-        "runtime_no_read",
-        "validation-proof"
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18829,7 +18850,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "ghidra"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18856,7 +18877,7 @@
     {
       "record_id": "system.kernel.global-timer-resolution-requests",
       "tweak_id": "system.kernel.global-timer-resolution-requests",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "official-policy",
       "class_ready_basis": "pending",
       "official": true,
@@ -18868,7 +18889,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -18889,11 +18910,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -18903,15 +18924,15 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "documentation-first-review",
         "no-current-build-reader-path",
         "no-primary-current-build-doc",
-        "runtime_no_read",
-        "validation-proof"
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 2,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -18920,8 +18941,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.44,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.78,
+        "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18935,7 +18956,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-08T05:02:00Z"
+        "last_verified_at": "2026-04-12T01:04:47+03:00"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18948,7 +18969,7 @@
     {
       "record_id": "system.kernel.timer-check-flags",
       "tweak_id": "system.kernel.timer-check-flags",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
@@ -18960,7 +18981,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "ghidra",
       "cross_layer_satisfied": false,
       "layers_used": [
         "runtime_reboot"
@@ -18977,11 +18998,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -18993,9 +19014,9 @@
       "promotion_blockers": [
         "no-current-build-reader-path",
         "no-primary-current-build-doc",
+        "no-runtime-proof",
         "non-default-semantics-unproven",
-        "runtime_no_read",
-        "validation-proof"
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -19010,7 +19031,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "ghidra"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",

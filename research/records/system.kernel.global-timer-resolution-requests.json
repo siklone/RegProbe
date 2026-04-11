@@ -5,6 +5,12 @@
   "tweak_id": "system.kernel.global-timer-resolution-requests",
   "record_status": "draft",
   "summary": "Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. Adjacent Microsoft docs later documented the public timer-resolution contract, including system-wide `ExSetTimerResolution` behavior and the Windows 10 2004+ change that `timeBeginPeriod` no longer globally affects unrelated processes, but no current Microsoft page has been found that names this exact internal registry seed. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`, while a later repo-native follow-up added an explicit `power-request-simulation` harness to both the generic Procmon guest tool and the mega-trigger runtime surface. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and a current-build reader or seeding path.",
+  "validation_proof": {
+    "source_url": "Docs/system/system.md",
+    "exact_quote_or_path": "Docs/system/system.md assigns `GlobalTimerResolutionRequests = 0` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later KD plus official timer-resolution docs keep the family grounded in a real current-build timer-resolution lane.",
+    "key_found_on_page": true,
+    "notes": "The record now has repo-doc naming, public timer-resolution family context, and a live current-build KD read of `KiGlobalTimerResolutionRequests = 0`; the unresolved part is still the exact registry reader or seeding path."
+  },
   "doc_source": {
     "source_origin": "mixed",
     "primary_contract": "Microsoft documents the public timer-resolution feature family through `ExSetTimerResolution`, multimedia timer guidance, and the Windows 10 2004+ `timeBeginPeriod` behavior change, but does not document `GlobalTimerResolutionRequests` as a named registry setting.",

@@ -5,6 +5,12 @@
   "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
   "record_status": "draft",
   "summary": "Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, and now has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`. The lane is real, but still lacks an exact runtime registry read or a dedicated current-build caller/seeding proof.",
+  "validation_proof": {
+    "source_url": "Docs/system/system.md",
+    "exact_quote_or_path": "Docs/system/system.md assigns `ForceBugcheckForDpcWatchdog = 0` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later baseline, string, runtime, and live KD follow-ups keep the same value on the current-build research lane.",
+    "key_found_on_page": true,
+    "notes": "This is enough to document the record as a real current-build candidate; the remaining blocker is exact reader/seeding proof rather than missing validation structure."
+  },
   "setting": {
     "name": "Force Bugcheck For DPC Watchdog",
     "category": "System",

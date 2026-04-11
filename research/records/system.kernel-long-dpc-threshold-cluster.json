@@ -5,6 +5,12 @@
   "tweak_id": "system.kernel-long-dpc-threshold-cluster",
   "record_status": "draft",
   "summary": "Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while a later PDB-backed Ghidra xref pass directly resolved `KiLongDpcQueueThreshold` references in `KiExecuteAllDpcs` and `KeInitSystem`. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. The cluster is therefore live-state-confirmed and current-build lineage-confirmed, but still export-blocked and still lacks a direct current-build read site for `KiLongDpcRuntimeThreshold` or a persisted registry seeding path.",
+  "validation_proof": {
+    "source_url": "Docs/system/system.md",
+    "exact_quote_or_path": "Docs/system/system.md lists `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later runtime/KD/Ghidra follow-ups keep the same threshold family on the current-build lane.",
+    "key_found_on_page": true,
+    "notes": "Repo docs, baseline/string evidence, and later current-build follow-ups are enough to validate the research record structure even though the exact live reader/default story is still unresolved."
+  },
   "setting": {
     "name": "Kernel Long DPC Threshold Cluster",
     "category": "System",

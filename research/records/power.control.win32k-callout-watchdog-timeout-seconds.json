@@ -5,6 +5,12 @@
   "tweak_id": "power.control.win32k-callout-watchdog-timeout-seconds",
   "record_status": "draft",
   "summary": "Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. This is a stronger current-build lead than the bugcheck-enabled sibling, but the exact registry seeding path and non-default override semantics are still unproven.",
+  "validation_proof": {
+    "source_url": "research/notes/kernel-power-96-key-routing-20260327.md",
+    "exact_quote_or_path": "research/notes/kernel-power-96-key-routing-20260327.md routes `Win32kCalloutWatchdogTimeoutSeconds` into the Control\\\\Power watchdog family, and the later KVM local-KD follow-up proves the running build consumes `nt!PopWin32kCalloutWatchdogTimeoutSeconds` in `nt!PopInvokeWin32CalloutWithWatchdog`.",
+    "key_found_on_page": true,
+    "notes": "Baseline absence, an exact current-build string hit, and direct live KD proof of the consuming global establish this as a real current-build watchdog record even though the registry seeding path remains blocked."
+  },
   "setting": {
     "name": "Win32k Callout Watchdog Timeout Seconds",
     "category": "Power",

@@ -5,6 +5,12 @@
   "tweak_id": "system.kernel.timer-check-flags",
   "record_status": "draft",
   "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass now also resolves `nt!KeTimerCheckFlags` on the running current build and reads its live value as `1`. The lane is therefore live-state-confirmed, but still lacks an exact runtime registry read and a current-build reader or seeding path.",
+  "validation_proof": {
+    "source_url": "Docs/system/system.md",
+    "exact_quote_or_path": "Docs/system/system.md assigns `TimerCheckFlags = 1` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later string, source-enrichment, and live KD follow-ups keep the same value on the current-build research lane.",
+    "key_found_on_page": true,
+    "notes": "Repo docs, baseline absence, exact current-build string presence, and the later enrichment/KD lane are enough to satisfy documentation structure; the reader/seeding path is still the real blocker."
+  },
   "setting": {
     "name": "Timer Check Flags",
     "category": "System",

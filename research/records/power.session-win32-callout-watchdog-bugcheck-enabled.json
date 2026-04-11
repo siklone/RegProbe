@@ -5,6 +5,12 @@
   "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
   "record_status": "draft",
   "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and now has both a canonical PDB-backed Ghidra structural pass and a broader KVM local-KD seeding sweep. Together they show a narrower result than the earlier draft wording: the current build still carries the sibling, the live global currently reads `0`, but the direct named wrapper path is not the reader, the canonical full-analysis Ghidra pass recovered no direct or bounded xrefs, and the wider watchdog/bugcheck symbol sweep did not reveal a current-build registry seeding caller. This keeps the record alive as an adjacent watchdog-family global with unproven registry semantics, not as the strongest next tweak candidate.",
+  "validation_proof": {
+    "source_url": "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+    "exact_quote_or_path": "research/notes/kernel-power-net-new-existence-probe-20260328.md plus the later watchdog KD/Ghidra follow-ups keep `Win32CalloutWatchdogBugcheckEnabled` inside the same `Session Manager\\\\Power` watchdog sibling family as the validated timeout pair.",
+    "key_found_on_page": true,
+    "notes": "Observed baseline absence, an exact current-build string hit, a live watchdog-family global, and retained KD/Ghidra context are enough to document the sibling lane even though direct registry semantics remain unresolved."
+  },
   "setting": {
     "name": "Win32 Callout Watchdog Bugcheck Enabled",
     "category": "Power",

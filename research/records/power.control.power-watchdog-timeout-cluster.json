@@ -5,6 +5,12 @@
   "tweak_id": "power.control.power-watchdog-timeout-cluster",
   "record_status": "draft",
   "summary": "Draft docs-first watchdog-default cluster record. The `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power` `PowerWatchdog*TimeoutMsec` family has explicit repo-doc defaults under `InitializePowerWatchdogTimeoutDefaults`, but all five values are absent on the observed clean baseline and all five returned clean `no-hit` results in the broad current-build string batch. This keeps the cluster as a real research family, but still as a lower-priority docs-first hold rather than an active current-build RE lane.",
+  "validation_proof": {
+    "source_url": "Docs/power/power.md",
+    "exact_quote_or_path": "Docs/power/power.md lists the `InitializePowerWatchdogTimeoutDefaults` family for `PowerWatchdogDrvSetMonitorTimeoutMsec`, `PowerWatchdogDwmSyncFlushTimeoutMsec`, `PowerWatchdogPoCalloutTimeoutMsec`, `PowerWatchdogPowerOnGdiTimeoutMsec`, and `PowerWatchdogRequestQueueTimeoutMsec` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`.",
+    "key_found_on_page": true,
+    "notes": "Repo docs, clean-baseline absence, and the later current-build no-hit string pass converge on a real watchdog-default family even though the exact modern reader path is still unresolved."
+  },
   "setting": {
     "name": "Control Power Watchdog Timeout Cluster",
     "category": "Power",

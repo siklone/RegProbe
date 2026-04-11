@@ -5,6 +5,12 @@
   "tweak_id": "system.kernel-dpc-watchdog-control-cluster",
   "record_status": "draft",
   "summary": "Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM evidence now proves the full structural lane plus live values: `KeQueryDpcWatchdogConfiguration` reads the corresponding globals, `KiValidateDpcWatchdogConfiguration` backfills and validates them, `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input, a PDB-backed Ghidra pass ties the writer to `NtSetSystemInformation`, a later class-focused live KD pass confirms the exact syscall call site plus admin-group gate and implies numeric arm `0xE4` from the dispatch chain, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, a dedicated live value pass reads all three globals as `0` on the running build, Microsoft still documents the public `KeQueryDpcWatchdogInformation` API plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a canonical boot/init Ghidra follow-up shows that `KiInitDpcThresholds` preserves zero-valued control globals rather than forcing non-zero defaults. The family is real, but the current build does not support treating the repo-doc values as unconditional live defaults or as proven registry-seeded state.",
+  "validation_proof": {
+    "source_url": "Docs/system/system.md",
+    "exact_quote_or_path": "Docs/system/system.md lists `DPCTimeout`, `DpcSoftTimeout`, and `DpcCumulativeSoftTimeout` under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, and later KD/Ghidra follow-ups resolve the matching current-build globals, reader path, and explicit writer path.",
+    "key_found_on_page": true,
+    "notes": "This cluster now has both repo-doc naming and concrete current-build KD/Ghidra proof; the blocker is no longer whether the family exists, but whether repo-doc defaults are still registry-seeded live defaults on modern builds."
+  },
   "setting": {
     "name": "Session Manager Kernel DPC Watchdog Control Timeout Cluster",
     "category": "System",
