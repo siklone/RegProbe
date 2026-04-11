@@ -35,9 +35,44 @@ $notePath = Join-Path $repoRoot ("research\notes\{0}.md" -f $outputLeaf)
 $dateToken = if ($outputLeaf -match '(\d{8})-\d{6}$') { $Matches[1] } else { Get-Date -Format 'yyyyMMdd' }
 $priorityAuditPath = Join-Path $repoRoot ("registry-research-framework\audit\source-enrichment-priority-queue-{0}.json" -f $dateToken)
 
+function Get-SourceRootOverride {
+    param([string]$SourceId)
+
+    if ([string]::IsNullOrWhiteSpace($SourceId)) {
+        return $null
+    }
+
+    $normalized = (($SourceId.ToUpperInvariant() -replace '[^A-Z0-9]+', '_').Trim('_'))
+    if ([string]::IsNullOrWhiteSpace($normalized)) {
+        return $null
+    }
+
+    foreach ($envName in @("REGPROBE_SOURCE_ROOT_{0}" -f $normalized, "REGPROBE_{0}_ROOT" -f $normalized)) {
+        $override = [Environment]::GetEnvironmentVariable($envName)
+        if (-not [string]::IsNullOrWhiteSpace($override)) {
+            return $override
+        }
+    }
+
+    return $null
+}
+
 function Expand-SourceRoot {
-    param([string]$Value)
-    return [Environment]::ExpandEnvironmentVariables($Value)
+    param(
+        [string]$Value,
+        [string]$SourceId = ''
+    )
+
+    $rawValue = Get-SourceRootOverride -SourceId $SourceId
+    if ([string]::IsNullOrWhiteSpace($rawValue)) {
+        $rawValue = $Value
+    }
+
+    if ([string]::IsNullOrWhiteSpace($rawValue)) {
+        return $null
+    }
+
+    return [Environment]::ExpandEnvironmentVariables($rawValue)
 }
 
 $cloneFailures = @()
@@ -55,7 +90,7 @@ if ($CloneMissing) {
             continue
         }
 
-        $expandedRoot = Expand-SourceRoot -Value ([string]$source.root)
+        $expandedRoot = Expand-SourceRoot -Value ([string]$source.root) -SourceId ([string]$source.id)
         if (Test-Path -LiteralPath $expandedRoot) {
             continue
         }
