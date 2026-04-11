@@ -151,6 +151,10 @@ class SourceEnrichmentTests(unittest.TestCase):
                 '<policy name="Autorun" valueName="Policy" key="Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer">',
                 encoding="utf-8",
             )
+            (root / "Distractor.admx").write_text(
+                '<policy name="OtherPowerPolicy" valueName="Policy" key="System\\\\CurrentControlSet\\\\Control\\\\Power\\\\OtherSetting">',
+                encoding="utf-8",
+            )
             (root / "Power.admx").write_text(
                 '<policy name="ForceHibernateDisabled" valueName="Policy" key="System\\\\CurrentControlSet\\\\Control\\\\Power\\\\ForceHibernateDisabled">',
                 encoding="utf-8",
@@ -216,6 +220,40 @@ class SourceEnrichmentTests(unittest.TestCase):
 
             self.assertEqual(result["candidate_hit_count"], 1)
             self.assertEqual(result["hit_count"], 1)
+
+    def test_scan_source_does_not_match_longer_prefix_values(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            root = Path(temp_root)
+            (root / "DeviceGuard.admx").write_text(
+                '<policy name="VirtualizationBasedSecurity" valueName="EnableVirtualizationBasedSecurity" key="Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System">',
+                encoding="utf-8",
+            )
+
+            source = {
+                "id": "admx",
+                "label": "Windows ADMX",
+                "surface_group": "policy-templates",
+                "kind": "local-source",
+                "root": str(root),
+                "patterns": ["*.admx"],
+                "enrichment_weight": 2,
+            }
+            candidates = [
+                {
+                    "candidate_id": "policy.system.enable-virtualization",
+                    "family": "policy-system",
+                    "suspected_layer": "policy",
+                    "boot_phase_relevant": False,
+                    "registry_path": r"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\SYSTEM",
+                    "value_name": "EnableVirtualization",
+                    "route_bucket": "research-only",
+                }
+            ]
+
+            result = source_enrichment_scan.scan_source(source, candidates)
+
+            self.assertEqual(result["candidate_hit_count"], 0)
+            self.assertEqual(result["hit_count"], 0)
 
 
 if __name__ == "__main__":

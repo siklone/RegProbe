@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-11T22:21:02.863124Z",
+  "source_id": "admx",
+  "source_label": "Windows ADMX",
+  "source_root": "evidence/files/external/c",
+  "source_root_override_env": "REGPROBE_SOURCE_ROOT_ADMX",
+  "candidate_manifest": "registry-research-framework/audit/kernel-power-96-phase0-candidates-20260329.json",
+  "source_config": "registry-research-framework/config/source-enrichment-sources.json",
+  "scanner": "scripts/source_enrichment_scan.py",
+  "scan_scope": {
+    "total_candidates": 96,
+    "total_sources": 1,
+    "files_scanned": 121,
+    "hit_count": 1,
+    "candidate_hit_count": 1
+  },
+  "scanner_quality_notes": [
+    "The Linux host now supports Windows-style %VAR% expansion and source-specific root overrides.",
+    "Generic value names require the most specific registry leaf to appear in the file before hits are counted.",
+    "Value-name matches now require token boundaries, so prefix collisions like EnableVirtualization vs EnableVirtualizationBasedSecurity no longer count."
+  ],
+  "supported_candidates": [
+    {
+      "candidate_id": "power.throttling.power-throttling-off",
+      "enrichment_score": 2,
+      "suggested_queue_bucket": "runtime",
+      "suggested_runtime_priority": "medium",
+      "hit": {
+        "file": "evidence/files/external/c/Windows/PolicyDefinitions/Power.admx",
+        "line_number": 667,
+        "value_name": "PowerThrottlingOff",
+        "content": "<policy name=\"PowerThrottlingTurnOff\" class=\"Machine\" displayName=\"$(string.PowerThrottlingTurnOff)\" explainText=\"$(string.PowerThrottlingTurnOffExplain)\" key=\"System\\CurrentControlSet\\Control\\Power\\PowerThrottling\" valueName=\"PowerThrottlingOff\">"
+      }
+    }
+  ],
+  "explicit_no_support": [
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "support_count": 0,
+      "hit_count": 0
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "support_count": 0,
+      "hit_count": 0
+    }
+  ],
+  "environment_notes": [
+    "A repo-local ADMX mirror is present under evidence/files/external/c.",
+    "No local Windows SDK/WDK headers mirror was found on this Linux host during the follow-up."
+  ],
+  "next_actions": [
+    "Acquire a local WDK headers root and rerun the scan with REGPROBE_SOURCE_ROOT_WDK_HEADERS.",
+    "Keep the execution-required pair on the static/runtime lane because local ADMX adds no exact support."
+  ]
+}

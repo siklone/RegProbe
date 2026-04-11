@@ -23,6 +23,7 @@ DEFAULT_WEIGHTS = {
 }
 
 WINDOWS_ENVVAR_PATTERN = re.compile(r"%([^%]+)%")
+VALUE_TOKEN_TEMPLATE = r"(?<![a-z0-9_]){token}(?![a-z0-9_])"
 GENERIC_VALUE_NAMES = {
     "default",
     "enabled",
@@ -35,6 +36,21 @@ GENERIC_VALUE_NAMES = {
     "status",
     "type",
     "value",
+}
+GENERIC_REGISTRY_TERMS = {
+    "control",
+    "currentcontrolset",
+    "currentversion",
+    "hkey_local_machine",
+    "hklm",
+    "hkcu",
+    "hku",
+    "machine",
+    "microsoft",
+    "policies",
+    "software",
+    "system",
+    "windows",
 }
 
 
@@ -155,7 +171,7 @@ def registry_context_terms(candidate: Dict[str, Any]) -> List[str]:
     if len(parts) <= 2:
         return parts
 
-    tail = parts[2:]
+    tail = [part for part in parts[2:] if part not in GENERIC_REGISTRY_TERMS]
     terms: List[str] = []
     for part in tail[-3:]:
         if part not in terms:
@@ -163,9 +179,20 @@ def registry_context_terms(candidate: Dict[str, Any]) -> List[str]:
     return terms
 
 
+def primary_context_term(candidate: Dict[str, Any]) -> str | None:
+    terms = registry_context_terms(candidate)
+    if not terms:
+        return None
+    return terms[-1]
+
+
 def requires_context_match(value_name: str) -> bool:
     lowered = value_name.lower()
     return lowered in GENERIC_VALUE_NAMES or len(lowered) <= 6
+
+
+def value_name_pattern(value_name: str) -> re.Pattern[str]:
+    return re.compile(VALUE_TOKEN_TEMPLATE.format(token=re.escape(value_name.lower())))
 
 
 def count_source_weight(source: Dict[str, Any]) -> int:
@@ -202,7 +229,9 @@ def scan_source(source: Dict[str, Any], candidates: List[Dict[str, Any]], max_hi
             "candidate_id": item["candidate_id"],
             "value_name": item["value_name"],
             "lowered_value": item["value_name"].lower(),
+            "value_pattern": value_name_pattern(item["value_name"]),
             "context_terms": registry_context_terms(item),
+            "primary_context_term": primary_context_term(item),
             "requires_context": requires_context_match(item["value_name"]),
         }
         for item in candidates
@@ -220,15 +249,15 @@ def scan_source(source: Dict[str, Any], candidates: List[Dict[str, Any]], max_hi
                 file_lower = "".join(lines).lower()
                 eligible = []
                 for item in lowered:
-                    if item["requires_context"] and item["context_terms"]:
-                        if not any(term in file_lower for term in item["context_terms"]):
+                    if item["requires_context"] and item["primary_context_term"]:
+                        if item["primary_context_term"] not in file_lower:
                             continue
                     eligible.append(item)
 
                 for line_number, line in enumerate(lines, start=1):
                     line_lower = line.lower()
                     for item in eligible:
-                        if item["lowered_value"] not in line_lower:
+                        if not item["value_pattern"].search(line_lower):
                             continue
                         bucket = result["hits_by_candidate"].setdefault(item["candidate_id"], [])
                         if len(bucket) >= max_hits_per_key:
