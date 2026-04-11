@@ -5,6 +5,12 @@
   "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
   "record_status": "draft",
   "summary": "Draft Control Power record. `AllowAudioToEnableExecutionRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. Later KVM local-KD passes first surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and then resolved its live current-build value as `1`, aligning the running kernel with the repo-doc default. A later static INIT-table follow-up then showed a current-build `ntoskrnl.exe` descriptor entry under `Power` that binds `AllowAudioToEnableExecutionRequiredPowerRequests` to the exact global later resolved by local KD as `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`. A later current-build disassembly pass then showed a direct consumer in `nt!PopPowerRequestEvaluateExecutionRequiredStatus`. Later follow-ups then showed `nt!PopUmpoSendPowerRequestOverrideQuery` packaging requester state for `nt!PopUmpoSendPowerMessage`, `nt!PopPowerRequestExecutionRequiredSettingCallback` staying timeout-setting specific by updating `nt!PopExecutionRequiredTimeout`, the timeout timer/worker chain feeding back into `nt!PopPowerRequestHandleExecutionEnablementUpdate`, the broader override-response plus callback-worker path staying queue and PDC driven with no visible `*PowerRequest*Reg*` symbol, and a generic power-setting callback subsystem around `PoRegisterPowerSettingCallback` and `PopInitializePowerSettingCallbacks`. A later host-side objdump follow-up then showed an unlabeled current-build `INIT` walker at `0x140C48AB8` uniquely consuming the broader `Power` descriptor table, passing row key and value names through subkey and value-lookup helpers before copying payload into the paired target global. The lane is strong enough for a schema-backed draft, but it still lacks a primary current-build doc and an exact runtime registry read.",
+  "validation_proof": {
+    "source_url": "research/notes/power-control-execution-required-init-walker-static-follow-up-20260411.md",
+    "exact_quote_or_path": "research/notes/power-control-execution-required-init-walker-static-follow-up-20260411.md:17-18 ties `Power` + `AllowAudioToEnableExecutionRequiredPowerRequests` to `0x140FD71A0` and the retained KD symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` while the same note documents the unlabeled current-build `INIT` walker at `0x140C48AB8` as the table consumer.",
+    "key_found_on_page": true,
+    "notes": "Repo docs, the retained KD value read, the current-build Ghidra reader family, the exact INIT-table binding, the recovered host-side init walker, and the retained soft-reboot ETW no-hit lane now converge on the same execution-required audio policy. The remaining blocker is documentation/supportability, not whether the current build carries a registry-backed seeding path."
+  },
   "setting": {
     "name": "Allow Audio To Enable Execution Required Power Requests",
     "category": "Power",
@@ -320,6 +326,31 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "static-power-control-allow-audio-to-enable-execution-required-power-requests-ghidra-20260408",
+      "kind": "decompilation",
+      "title": "Current-build Ghidra corroborates the execution-required reader family for the audio policy global",
+      "location": "evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/summary.json and evidence/files/ghidra/powerrequest-executionrequired-ghidra-20260408a/ghidra-matches.md",
+      "summary": "A retained symbol-seeded Ghidra pass on the current-build `ntoskrnl.exe` corroborated the execution-required reader family around `PopPowerRequestEvaluateExecutionRequiredStatus`, `PopPowerRequestSetExecutionRequiredTimeoutTimer`, and the timeout-setting path. It does not show a symbolized registry reader, but it does keep the audio policy global inside a direct current-build consumer chain.",
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-allow-audio-to-enable-execution-required-power-requests-megatrigger-etw-20260402",
+      "kind": "etw-trace",
+      "title": "Retained soft-reboot mega-trigger ETW batch kept the audio execution-required policy in the runtime lane",
+      "location": "evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/summary.json and evidence/files/vm-tooling-staging/power-control-batch-mega-trigger-runtime-primary-20260402-223411/results.json",
+      "summary": "A retained soft-reboot 8-trigger mega-trace batch completed guest-side parsing successfully on the hardened baseline and kept `AllowAudioToEnableExecutionRequiredPowerRequests` in the runtime lane with `status = no-hit` and `exact_query_hits = 0`. This does not prove an exact registry read, but it does provide a clean ETW reboot attempt and bounds the remaining gap to a narrower execution-required seeding/read path.",
+      "supports": [
+        "behavior",
+        "runtime-proof",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -329,7 +360,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, a visible UMPO override-query lineage, a timeout-setting callback disassembly, a retained timeout timer/worker chain, a retained override-response plus callback-worker follow-up that still exposed no visible `*PowerRequest*Reg*` symbol, a retained generic power-setting callback subsystem pass around `PoRegisterPowerSettingCallback`, a later current-build INIT-table binding that maps the exact value name to the KD-resolved target global, and a later host-side disassembly follow-up that statically recovers the generic init walker feeding that table. It is not ready for validation because that seeding path is still unlabeled and documentation-light, and an exact runtime registry read remains unresolved.",
+    "why": "The candidate is now stronger than a raw draft because it has repo-doc semantics, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, a retained Ghidra reader-family corroboration, a retained soft-reboot ETW attempt, a visible UMPO override-query lineage, a timeout-setting callback disassembly, a retained timeout timer/worker chain, a retained override-response plus callback-worker follow-up that still exposed no visible `*PowerRequest*Reg*` symbol, a retained generic power-setting callback subsystem pass around `PoRegisterPowerSettingCallback`, a later current-build INIT-table binding that maps the exact value name to the KD-resolved target global, and a later host-side disassembly follow-up that statically recovers the generic init walker feeding that table. It remains decision-gated because the seeding path is still unlabeled and not backed by a primary current-build Microsoft doc, and an exact runtime registry read remains unresolved.",
     "manual_review_required": true,
     "blocking_issues": [
       "no-primary-current-build-doc"
@@ -402,5 +433,5 @@
       "notes": "A retained KVM local-KD wildcard pass exposed `PopInitializePowerSettingCallbacks`, `PoRegisterPowerSettingCallback`, and the broader power-setting callback subsystem while `x nt!*ExecutionRequired*Setting*` still returned only `PopPowerRequestExecutionRequiredSettingCallback`."
     }
   ],
-  "last_reviewed_utc": "2026-04-08T13:00:00Z"
+  "last_reviewed_utc": "2026-04-12T16:30:00+03:00"
 }
