@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-12T01:43:00+03:00",
+  "source_inputs": [
+    "registry-research-framework/audit/source-enrichment-local-admx-follow-up-20260412.json",
+    "registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json"
+  ],
+  "mapping_summary": {
+    "existing_record_mappings": 4,
+    "orphan_candidates": 1
+  },
+  "existing_record_mappings": [
+    {
+      "candidate_id": "power.throttling.power-throttling-off",
+      "mapped_record_id": "power.disable-power-throttling",
+      "mapping_reason": "Exact ADMX-backed path/value hit already matches the shipped Power Throttling record.",
+      "source_evidence": [
+        "registry-research-framework/audit/source-enrichment-local-admx-follow-up-20260412.json"
+      ]
+    },
+    {
+      "candidate_id": "power.session.hiberboot-enabled",
+      "mapped_record_id": "power.disable-fast-startup",
+      "mapping_reason": "The existing Fast Startup record already uses the authoritative Session Manager Power HiberbootEnabled path.",
+      "source_evidence": [
+        "registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json"
+      ]
+    },
+    {
+      "candidate_id": "power.control.hiberboot-enabled",
+      "mapped_record_id": "power.disable-fast-startup",
+      "mapping_reason": "The control-path candidate is a non-authoritative sibling surface, but the record already documents why Session Manager Power is the canonical Fast Startup toggle and why Control\\\\Power diverges.",
+      "source_evidence": [
+        "registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json"
+      ]
+    },
+    {
+      "candidate_id": "system.kernel.disable-exception-chain-validation",
+      "mapped_record_id": "system.kernel.disable-exception-chain-validation",
+      "mapping_reason": "The candidate already has a validated record; source-enrichment only adds corroboration.",
+      "source_evidence": [
+        "registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json"
+      ]
+    }
+  ],
+  "orphan_candidates": [
+    {
+      "candidate_id": "power.control.ttm-enabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TtmEnabled",
+      "route_bucket": "docs-first-new-candidate",
+      "source_enrichment": {
+        "enrichment_score": 2,
+        "suggested_queue_bucket": "runtime",
+        "suggested_runtime_priority": "high",
+        "supporting_hit": {
+          "file": "/tmp/regprobe-source-cache/systeminformer/phnt/include/ntpoapi.h",
+          "line_number": 868,
+          "content": "BOOLEAN TtmEnabled;"
+        }
+      },
+      "notes": [
+        "Docs/power/power.md already mentions TtmEnabled.",
+        "The candidate is present in the kernel-power 96 manifest but has no current research/records entry and no queue entry."
+      ],
+      "recommended_next_action": "Materialize a draft research record before spending more runtime or WinDbg budget."
+    }
+  ],
+  "execution_required_pair_status": [
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "source_support": "none"
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "source_support": "none"
+    }
+  ]
+}
