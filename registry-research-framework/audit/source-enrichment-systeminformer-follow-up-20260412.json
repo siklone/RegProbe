@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-11T22:29:58Z",
+  "source_id": "systeminformer",
+  "source_label": "System Informer",
+  "source_root": "/tmp/regprobe-source-cache/systeminformer",
+  "source_root_override_env": "REGPROBE_SOURCE_ROOT_SYSTEMINFORMER",
+  "candidate_manifest": "registry-research-framework/audit/kernel-power-96-phase0-candidates-20260329.json",
+  "source_config": "registry-research-framework/config/source-enrichment-sources.json",
+  "scanner": "scripts/source_enrichment_scan.py",
+  "scan_scope": {
+    "total_candidates": 96,
+    "total_sources": 1,
+    "files_scanned": 881,
+    "hit_count": 4,
+    "candidate_hit_count": 4
+  },
+  "environment_notes": [
+    "A shallow clone of winsiderss/systeminformer was created under /tmp/regprobe-source-cache/systeminformer.",
+    "The clone includes phnt/include/ntpoapi.h, which served as the main header surface for the follow-up."
+  ],
+  "supported_candidates": [
+    {
+      "candidate_id": "power.control.hiberboot-enabled",
+      "enrichment_score": 2,
+      "suggested_queue_bucket": "runtime",
+      "suggested_runtime_priority": "medium",
+      "hit": {
+        "file": "/tmp/regprobe-source-cache/systeminformer/phnt/include/ntpoapi.h",
+        "line_number": 79,
+        "value_name": "HiberbootEnabled",
+        "content": "#define SystemHiberbootState 65                         // out: BOOLEAN // effective HiberbootEnabled state"
+      }
+    },
+    {
+      "candidate_id": "power.session.hiberboot-enabled",
+      "enrichment_score": 2,
+      "suggested_queue_bucket": "runtime",
+      "suggested_runtime_priority": "medium",
+      "hit": {
+        "file": "/tmp/regprobe-source-cache/systeminformer/phnt/include/ntpoapi.h",
+        "line_number": 79,
+        "value_name": "HiberbootEnabled",
+        "content": "#define SystemHiberbootState 65                         // out: BOOLEAN // effective HiberbootEnabled state"
+      }
+    },
+    {
+      "candidate_id": "power.control.ttm-enabled",
+      "enrichment_score": 2,
+      "suggested_queue_bucket": "runtime",
+      "suggested_runtime_priority": "medium",
+      "hit": {
+        "file": "/tmp/regprobe-source-cache/systeminformer/phnt/include/ntpoapi.h",
+        "line_number": 868,
+        "value_name": "TtmEnabled",
+        "content": "BOOLEAN TtmEnabled;"
+      }
+    },
+    {
+      "candidate_id": "system.kernel.disable-exception-chain-validation",
+      "enrichment_score": 2,
+      "suggested_queue_bucket": "windbg",
+      "suggested_runtime_priority": "medium",
+      "hit": {
+        "file": "/tmp/regprobe-source-cache/systeminformer/phnt/include/ntpsapi.h",
+        "line_number": 879,
+        "value_name": "DisableExceptionChainValidation",
+        "content": "ULONG DisableExceptionChainValidation : 1; // MEM_EXECUTE_OPTION_DISABLE_EXCEPTION_CHAIN_VALIDATION"
+      }
+    }
+  ],
+  "explicit_no_support": [
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "support_count": 0,
+      "hit_count": 0
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "support_count": 0,
+      "hit_count": 0
+    }
+  ],
+  "takeaways": [
+    "System Informer/phnt is a useful header-like enrichment source for a small subset of power and kernel candidates.",
+    "The execution-required pair still has no direct source-enrichment support from this header surface.",
+    "The source-enrichment precision tightening removed the earlier generic-token false positives seen in historical outputs."
+  ]
+}
