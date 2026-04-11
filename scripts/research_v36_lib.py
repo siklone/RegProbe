@@ -1125,6 +1125,7 @@ def negative_evidence_projection(
         and (
             bench_results.get("safety_status") == "failed"
             or bench_results.get("safety_verdict") == "failed-safety"
+            or bench_results.get("safety_passed") is False
             or "failed safety" in bench_summary
             or "safety fail" in bench_summary
         )
@@ -1617,25 +1618,65 @@ def score_etl_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
 
 
 def bench_results_projection(full_evidence: dict[str, Any], record: dict[str, Any] | None = None, audit: dict[str, Any] | None = None) -> dict[str, Any]:
-    benchmark = ((full_evidence.get("behavior") or {}).get("benchmark") or {}) if isinstance(full_evidence, dict) else {}
+    behavior = (full_evidence.get("behavior") or {}) if isinstance(full_evidence, dict) else {}
+    benchmark = (behavior.get("benchmark") or {}) if isinstance(behavior, dict) else {}
+    explicit_results = (full_evidence.get("bench_results") or {}) if isinstance(full_evidence, dict) else {}
     reproducibility = full_evidence.get("reproducibility") or {}
     audit = audit or {}
     record = record or {}
     next_layer = str(audit.get("next_missing_layer") or next_missing_layer(record) or "none")
     bench_required = next_layer in {"wpr-or-benchmark", "runtime-benchmark"}
     bench_profile = bench_profile_projection(record)
-    return {
-        "bench_tier": "vm" if reproducibility.get("vm_name") else "unknown",
+
+    def first_present(name: str) -> Any:
+        if isinstance(explicit_results, dict) and name in explicit_results:
+            return explicit_results.get(name)
+        if isinstance(benchmark, dict) and name in benchmark:
+            return benchmark.get(name)
+        return None
+
+    safety_passed_raw = first_present("safety_passed")
+    safety_passed = None if safety_passed_raw is None else bool_value(safety_passed_raw)
+    safety_status = first_present("safety_status")
+    if safety_status is None and safety_passed is not None:
+        safety_status = "passed" if safety_passed else "failed"
+    executed = bool_value(first_present("executed")) or safety_passed is not None
+    bench_tier = first_present("bench_tier") or ("vm" if reproducibility.get("vm_name") else "unknown")
+
+    result = {
+        "bench_tier": bench_tier,
         "bench_required": bench_required,
         "bench_vm_capable": bench_profile.get("bench_vm_capable"),
         "bench_bare_metal_required": bench_profile.get("bare_metal_required_for_perf_claim"),
         "feature_area_group": bench_profile.get("feature_area_group"),
         "profiles": bench_profile.get("profiles"),
-        "executed": bool(benchmark.get("executed")),
-        "summary": benchmark.get("summary"),
-        "statistics": benchmark.get("statistics"),
-        "significance_verdict": benchmark.get("significance_verdict"),
+        "executed": executed,
+        "summary": first_present("summary"),
+        "statistics": first_present("statistics"),
+        "significance_verdict": first_present("significance_verdict"),
     }
+
+    optional_fields = {
+        "safety_passed": safety_passed,
+        "safety_status": safety_status,
+        "boot_success": first_present("boot_success"),
+        "shell_usable": first_present("shell_usable"),
+        "services_healthy": first_present("services_healthy"),
+        "event_log_clean": first_present("event_log_clean"),
+        "apply_verified": first_present("apply_verified"),
+        "rollback_executed": first_present("rollback_executed"),
+        "rollback_verified": first_present("rollback_verified"),
+        "rollback_failure_reason": first_present("rollback_failure_reason"),
+        "bench_environment": first_present("bench_environment"),
+        "bench_measurement_reliability": first_present("bench_measurement_reliability"),
+        "output_file": first_present("output_file"),
+        "executed_at": first_present("executed_at"),
+    }
+    for key, value in optional_fields.items():
+        if value is not None:
+            result[key] = value
+
+    return result
 
 
 def verification_environment_projection(record: dict[str, Any], full_evidence: dict[str, Any], execution_context: dict[str, Any]) -> dict[str, Any]:

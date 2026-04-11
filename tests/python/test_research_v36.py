@@ -397,6 +397,107 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["promotion_state"], "blocked")
         self.assertIn("rollback-failed", gate["promotion_blockers"])
 
+    def test_vm_safety_bench_projection_surfaces_passed_result(self) -> None:
+        record = {
+            "record_id": "example.vm-safety",
+            "tweak_id": "example.vm-safety",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+        full_evidence = {
+            "bench_results": {
+                "bench_tier": "vm",
+                "bench_profile": "functional",
+                "safety_passed": True,
+                "boot_success": True,
+                "shell_usable": True,
+                "services_healthy": True,
+                "event_log_clean": True,
+                "rollback_executed": True,
+                "rollback_verified": True,
+                "bench_measurement_reliability": "functional",
+                "executed_at": "2026-04-10T17:10:25.9167605-07:00",
+            },
+            "reproducibility": {"vm_name": "windows-11-25h2-vm"},
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "none"}, full_evidence)
+
+        self.assertTrue(gate["bench_status"]["executed"])
+        self.assertEqual(gate["bench_status"]["bench_tier"], "vm")
+        self.assertTrue(gate["bench_status"]["safety_passed"])
+        self.assertEqual(gate["bench_status"]["safety_status"], "passed")
+        self.assertEqual(gate["bench_status"]["bench_measurement_reliability"], "functional")
+        self.assertNotIn("bench-failed-safety", gate["promotion_blockers"])
+
+    def test_failed_vm_safety_bench_blocks_candidate(self) -> None:
+        record = {
+            "record_id": "example.vm-safety-failed",
+            "tweak_id": "example.vm-safety-failed",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": True,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "app_current_implementation": {
+                "status": "matches-research",
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+        full_evidence = {
+            "bench_results": {
+                "bench_tier": "vm",
+                "safety_passed": False,
+                "rollback_executed": True,
+                "rollback_verified": False,
+                "rollback_failure_reason": "post-delete-state-mismatch",
+            },
+            "rollback_verification": {
+                "rollback_declared": True,
+                "rollback_executed": True,
+                "rollback_verified": True,
+                "rollback_verification_method": "state_diff",
+            },
+            "reproducibility": {"vm_name": "windows-11-25h2-vm"},
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "none"}, full_evidence)
+
+        self.assertEqual(gate["bench_status"]["safety_status"], "failed")
+        self.assertIn("bench-failed-safety", gate["promotion_blockers"])
+
     def test_negative_evidence_functional_no_effect_blocks_candidate(self) -> None:
         record = {
             "record_id": "example.functional-no-effect",

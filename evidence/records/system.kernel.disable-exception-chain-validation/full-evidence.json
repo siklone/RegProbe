@@ -106,9 +106,16 @@
       "trace_file": "evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json and research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md"
     },
     "benchmark": {
-      "executed": false,
-      "summary": null,
-      "output_file": null
+      "executed": true,
+      "summary": "VM functional safety bench passed: DisableExceptionChainValidation DWORD 1 was applied, critical services and recent event logs stayed healthy, and rollback deleted the value back to the missing baseline.",
+      "output_file": "evidence/records/system.kernel.disable-exception-chain-validation/bench-results/system.kernel.disable-exception-chain-validation-vm-functional.json",
+      "bench_tier": "vm",
+      "bench_profile": "functional",
+      "safety_passed": true,
+      "safety_status": "passed",
+      "bench_environment": "windows-11-25h2-vm",
+      "bench_measurement_reliability": "functional",
+      "executed_at": "2026-04-10T17:10:25.9167605-07:00"
     },
     "registry_sideeffects": {
       "executed": false,
@@ -574,11 +581,39 @@
     "elevation_context": "elevated",
     "machine_user_scope": "machine"
   },
+  "reproducibility": {
+    "vm_name": "windows-11-25h2-vm",
+    "domain": "regprobe-win11-25h2-session",
+    "baseline_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+    "bench_script": "registry-research-framework/scripts/vm/run-safety-bench-guest.ps1"
+  },
+  "bench_results": {
+    "candidate_id": "system.kernel.disable-exception-chain-validation",
+    "bench_tier": "vm",
+    "bench_profile": "functional",
+    "apply_value": 1,
+    "apply_type": "REG_DWORD",
+    "rollback_method": "delete",
+    "safety_passed": true,
+    "safety_status": "passed",
+    "boot_success": true,
+    "shell_usable": true,
+    "services_healthy": true,
+    "event_log_clean": true,
+    "rollback_executed": true,
+    "rollback_verified": true,
+    "rollback_failure_reason": null,
+    "bench_environment": "windows-11-25h2-vm",
+    "bench_measurement_reliability": "functional",
+    "output_file": "evidence/records/system.kernel.disable-exception-chain-validation/bench-results/system.kernel.disable-exception-chain-validation-vm-functional.json",
+    "executed_at": "2026-04-10T17:10:25.9167605-07:00",
+    "apply_verified": true
+  },
   "rollback_verification": {
     "rollback_declared": true,
-    "rollback_executed": false,
+    "rollback_executed": true,
     "rollback_verified": true,
-    "rollback_verification_method": "record-restore-story",
+    "rollback_verification_method": "vm-safety-bench-delete",
     "rollback_failure_reason": null,
     "rollback_value": {
       "source": "windows_defaults",
@@ -593,9 +628,31 @@
       ],
       "rollback_strategy": "restore_default"
     },
-    "state_changed": null,
-    "apply_diff": null,
-    "restore_diff": null
+    "state_changed": true,
+    "apply_diff": {
+      "before": {
+        "exists": false,
+        "value": null,
+        "value_kind": null
+      },
+      "after": {
+        "exists": true,
+        "value": 1,
+        "value_kind": "DWord"
+      }
+    },
+    "restore_diff": {
+      "before": {
+        "exists": true,
+        "value": 1,
+        "value_kind": "DWord"
+      },
+      "after": {
+        "exists": false,
+        "value": null,
+        "value_kind": null
+      }
+    }
   },
   "freshness_status": {
     "status": "fresh",

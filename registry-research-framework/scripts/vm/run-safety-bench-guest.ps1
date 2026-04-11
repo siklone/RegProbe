@@ -11,6 +11,7 @@ param(
     [string]$BenchTier = 'vm',
     [string]$BenchProfile = 'functional',
     [string]$BenchEnvironment = 'windows-11-25h2-vm',
+    [string]$BenchMeasurementReliability = 'functional',
     [string]$OutputPath = 'registry-research-framework\bench-results\system.kernel.disable-exception-chain-validation-vm-functional.json'
 )
 
@@ -109,6 +110,7 @@ $benchResult = [ordered]@{
     rollback_verified = $null
     rollback_failure_reason = $null
     bench_environment = $BenchEnvironment
+    bench_measurement_reliability = $BenchMeasurementReliability
     executed_at = $null
     apply_verified = $null
     baseline_state = $null
