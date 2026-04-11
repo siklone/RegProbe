@@ -23,6 +23,19 @@ DEFAULT_WEIGHTS = {
 }
 
 WINDOWS_ENVVAR_PATTERN = re.compile(r"%([^%]+)%")
+GENERIC_VALUE_NAMES = {
+    "default",
+    "enabled",
+    "flags",
+    "mode",
+    "name",
+    "options",
+    "policy",
+    "state",
+    "status",
+    "type",
+    "value",
+}
 
 
 def load_json(path: Path):
@@ -133,6 +146,28 @@ def matches_patterns(name: str, patterns: List[str]) -> bool:
     return any(fnmatch.fnmatch(name, pattern) for pattern in patterns)
 
 
+def registry_context_terms(candidate: Dict[str, Any]) -> List[str]:
+    registry_path = (candidate.get("registry_path") or "").strip("\\")
+    if not registry_path:
+        return []
+
+    parts = [part.lower() for part in registry_path.split("\\") if part]
+    if len(parts) <= 2:
+        return parts
+
+    tail = parts[2:]
+    terms: List[str] = []
+    for part in tail[-3:]:
+        if part not in terms:
+            terms.append(part)
+    return terms
+
+
+def requires_context_match(value_name: str) -> bool:
+    lowered = value_name.lower()
+    return lowered in GENERIC_VALUE_NAMES or len(lowered) <= 6
+
+
 def count_source_weight(source: Dict[str, Any]) -> int:
     weight = source.get("enrichment_weight")
     if isinstance(weight, int):
@@ -162,7 +197,16 @@ def scan_source(source: Dict[str, Any], candidates: List[Dict[str, Any]], max_hi
         result["missing_reason"] = "root-missing"
         return result
 
-    lowered = [(item["candidate_id"], item["value_name"], item["value_name"].lower()) for item in candidates]
+    lowered = [
+        {
+            "candidate_id": item["candidate_id"],
+            "value_name": item["value_name"],
+            "lowered_value": item["value_name"].lower(),
+            "context_terms": registry_context_terms(item),
+            "requires_context": requires_context_match(item["value_name"]),
+        }
+        for item in candidates
+    ]
     for file_path in root.rglob("*"):
         if not file_path.is_file():
             continue
@@ -172,19 +216,28 @@ def scan_source(source: Dict[str, Any], candidates: List[Dict[str, Any]], max_hi
         result["files_scanned"] += 1
         try:
             with file_path.open("r", encoding="utf-8", errors="ignore") as handle:
-                for line_number, line in enumerate(handle, start=1):
-                    line_lower = line.lower()
-                    for candidate_id, value_name, lowered_value in lowered:
-                        if lowered_value not in line_lower:
+                lines = list(handle)
+                file_lower = "".join(lines).lower()
+                eligible = []
+                for item in lowered:
+                    if item["requires_context"] and item["context_terms"]:
+                        if not any(term in file_lower for term in item["context_terms"]):
                             continue
-                        bucket = result["hits_by_candidate"].setdefault(candidate_id, [])
+                    eligible.append(item)
+
+                for line_number, line in enumerate(lines, start=1):
+                    line_lower = line.lower()
+                    for item in eligible:
+                        if item["lowered_value"] not in line_lower:
+                            continue
+                        bucket = result["hits_by_candidate"].setdefault(item["candidate_id"], [])
                         if len(bucket) >= max_hits_per_key:
                             continue
                         bucket.append(
                             {
                                 "file": str(file_path),
                                 "line_number": line_number,
-                                "value_name": value_name,
+                                "value_name": item["value_name"],
                                 "content": line.strip(),
                             }
                         )

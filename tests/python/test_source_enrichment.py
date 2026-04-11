@@ -144,6 +144,79 @@ class SourceEnrichmentTests(unittest.TestCase):
             self.assertFalse(result["exists"])
             self.assertEqual(result["missing_reason"], "root-missing")
 
+    def test_scan_source_requires_registry_context_for_generic_value_names(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            root = Path(temp_root)
+            (root / "AutoPlay.admx").write_text(
+                '<policy name="Autorun" valueName="Policy" key="Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer">',
+                encoding="utf-8",
+            )
+            (root / "Power.admx").write_text(
+                '<policy name="ForceHibernateDisabled" valueName="Policy" key="System\\\\CurrentControlSet\\\\Control\\\\Power\\\\ForceHibernateDisabled">',
+                encoding="utf-8",
+            )
+
+            source = {
+                "id": "admx",
+                "label": "Windows ADMX",
+                "surface_group": "policy-templates",
+                "kind": "local-source",
+                "root": str(root),
+                "patterns": ["*.admx"],
+                "enrichment_weight": 2,
+            }
+            candidates = [
+                {
+                    "candidate_id": "power.force-hibernate-disabled.policy",
+                    "family": "power-force-hibernate-disabled",
+                    "suspected_layer": "kernel",
+                    "boot_phase_relevant": True,
+                    "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power\ForceHibernateDisabled",
+                    "value_name": "Policy",
+                    "route_bucket": "docs-first-new-candidate",
+                }
+            ]
+
+            result = source_enrichment_scan.scan_source(source, candidates)
+            hits = result["hits_by_candidate"]["power.force-hibernate-disabled.policy"]
+
+            self.assertEqual(len(hits), 1)
+            self.assertTrue(hits[0]["file"].endswith("Power.admx"))
+
+    def test_scan_source_keeps_exact_hits_for_non_generic_value_names(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            root = Path(temp_root)
+            (root / "Power.admx").write_text(
+                '<policy name="PowerThrottlingTurnOff" valueName="PowerThrottlingOff" key="System\\\\CurrentControlSet\\\\Control\\\\Power\\\\PowerThrottling">',
+                encoding="utf-8",
+            )
+
+            source = {
+                "id": "admx",
+                "label": "Windows ADMX",
+                "surface_group": "policy-templates",
+                "kind": "local-source",
+                "root": str(root),
+                "patterns": ["*.admx"],
+                "enrichment_weight": 2,
+            }
+            candidates = [
+                {
+                    "candidate_id": "power.throttling.power-throttling-off",
+                    "family": "power-throttling",
+                    "suspected_layer": "kernel",
+                    "boot_phase_relevant": True,
+                    "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling",
+                    "value_name": "PowerThrottlingOff",
+                    "route_bucket": "existing-covered",
+                }
+            ]
+
+            result = source_enrichment_scan.scan_source(source, candidates)
+
+            self.assertEqual(result["candidate_hit_count"], 1)
+            self.assertEqual(result["hit_count"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
