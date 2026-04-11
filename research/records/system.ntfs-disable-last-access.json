@@ -215,7 +215,7 @@
     "why": "Microsoft documents the exact registry path, values, and modern default direction for this NTFS control, and the app writes the documented disabled state with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T01:22:00Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/",
     "exact_quote_or_path": "The system-global switch NtfsDisableLastAccessUpdate (REG_DWORD) 1 is located under HKLM\\System\\CurrentControlSet\\Control\\FileSystem and is set by default to 1.",

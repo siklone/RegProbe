@@ -1,0 +1,35 @@
+{
+  "date": "2026-04-08",
+  "path_hits_artifact": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/path-hits.csv",
+  "wildcard_lineage_artifact": "evidence/files/vm-tooling-staging/local-kd-powerrequest-reglineage-20260408a/stdout.txt",
+  "root_dump_artifact": "evidence/files/vm-tooling-staging/registry-dumps/power-control-root-20260324-210206/power-control-root.txt",
+  "override_path_hits": {
+    "count": 15,
+    "processes": {
+      "svchost.exe": 15
+    },
+    "operations": {
+      "RegCloseKey": 3,
+      "RegOpenKey": 9,
+      "RegQueryKey": 3
+    },
+    "paths": {
+      "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride": 12,
+      "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Driver": 1,
+      "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process": 1,
+      "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Service": 1
+    }
+  },
+  "override_symbols_present": {
+    "PopPowerRequestHandleRequestOverrideQueryResponse": true,
+    "PopPowerRequestOverrideInitialize": true,
+    "PopUmpoSendPowerRequestOverrideQuery": true,
+    "PopUmpoSendPowerRequestOverrideCleanup": true
+  },
+  "baseline_root_contains_override_subtree": false,
+  "interpretation": [
+    "The retained runtime path-hit capture shows adjacent registry activity under Control\\Power\\PowerRequestOverride.",
+    "The retained wildcard KD lineage evidence independently shows a current-build override family with HandleRequestOverrideQueryResponse, OverrideInitialize, UMPO override query, and override cleanup helpers.",
+    "The retained power-control root dump also contains the PowerRequestOverride subtree, so the visible runtime path hits align with an already-proven override lineage rather than with exact reads of the execution-required pair values."
+  ]
+}

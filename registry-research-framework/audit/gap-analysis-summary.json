@@ -1,0 +1,26 @@
+{
+  "generated_utc": "2026-04-11T05:10:18.669764Z",
+  "total_generated": 179,
+  "triaged": 172,
+  "discarded": 7,
+  "top_discard_reasons": [
+    {
+      "reason": "invalid:key_path",
+      "count": 7
+    }
+  ],
+  "top_gap_types": [
+    {
+      "gap_type": "missing_hkcu_analog",
+      "count": 86
+    },
+    {
+      "gap_type": "missing_sibling_branch",
+      "count": 68
+    },
+    {
+      "gap_type": "missing_policy_analog",
+      "count": 25
+    }
+  ]
+}

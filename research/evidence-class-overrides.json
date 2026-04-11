@@ -10,13 +10,13 @@
       "record_id": "power.control.hibernate-enabled-default",
       "evidence_class": "B",
       "reason_code": "vm_firmware_limitation",
-      "gating_reason": "Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real hibernation trigger (`vm_firmware_limitation`): the older VMware lane and the newer KVM reboot observation both show hibernation unavailable on the guest."
+      "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline cannot exercise a real hibernation trigger (`vm_firmware_limitation`), so runtime promotion stays decision-gated."
     },
     {
       "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
       "evidence_class": "B",
       "reason_code": "vm_standby_limitation",
-      "gating_reason": "Cross-layer evidence is strong, but the current virtualized baselines still cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`): both the older VMware lane and the newer KVM reboot observation show S0 Low Power Idle unavailable on the guest."
+      "gating_reason": "Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated."
     },
     {
       "record_id": "system.executive-additional-worker-threads",
@@ -33,26 +33,55 @@
     {
       "record_id": "power.session-watchdog-timeouts",
       "evidence_class": "B",
-      "reason_code": "runtime_no_read",
-      "gating_reason": "Cross-layer evidence is strong, and KVM local-KD plus hardened Procmon power-burst replays now confirm the current-build watchdog path and state. Promotion still stays decision-gated because no runtime lane has produced a decisive exact-value registry read for the watchdog pair."
+      "reason_code": "vm_s1_only_limitation",
+      "gating_reason": "Cross-layer evidence is strong, but the current S1-only VMware baseline still drops guest state before a decisive exact-value watchdog runtime lane can complete."
     },
     {
       "record_id": "power.control.hiber-file-size-percent",
-      "evidence_class": "B",
-      "reason_code": "runtime_no_read",
-      "gating_reason": "Docs, current-build static evidence, KVM local-KD, repeated runtime replays, and a reboot-backed KVM observation now agree on the live Control\\\\Power path and HiberFileSizePercent state. Promotion stays decision-gated because no runtime lane has produced a decisive exact live HiberFileSizePercent read."
+      "evidence_class": "A",
+      "reason_code": "cross_layer_verified_runtime_triggered_lane",
+      "gating_reason": "This record is cross-layer verified. A rebooted stepwise Procmon boot trace now preserves an exact HiberFileSizePercent runtime read, and app actionability stays separate from evidence class."
     },
     {
       "record_id": "policy.system.enable-virtualization",
       "evidence_class": "B",
-      "reason_code": "runtime_no_read",
-      "gating_reason": "Current-build routing is now clarified by KVM local-KD disassembly and repeated runtime replays across ETW and Procmon. A KVM Procmon bootlog follow-up also completed a real reboot but showed the current guest refusing `/EnableBootLogging`, so promotion stays decision-gated because no runtime transport has captured the exact EnableVirtualization read."
+      "reason_code": "runtime_no_read_path_context_unclear",
+      "gating_reason": "Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe.",
+      "next_missing_layer_override": "decision-gate"
+    },
+    {
+      "record_id": "system.io-allow-remote-dasd",
+      "evidence_class": "B",
+      "reason_code": "runtime_no_read_path_context_unclear",
+      "gating_reason": "The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit.",
+      "next_missing_layer_override": "decision-gate"
     },
     {
       "record_id": "system.executive-uuid-sequence-number",
       "evidence_class": "B",
-      "reason_code": "runtime_no_read",
-      "gating_reason": "Baseline existence, KVM local-KD symbol and disassembly work, and multiple hardened runtime replays now make the current-build UUID path much clearer. Promotion still stays decision-gated because no runtime lane has captured a direct UuidSequenceNumber read."
+      "reason_code": "runtime_no_read_trigger_context_unclear",
+      "gating_reason": "Baseline existence, exact ntoskrnl string evidence, and adjacent early-boot ETL activity exist, but the dedicated runtime lane still stayed no-hit and the exact trigger context remains unclear."
+    },
+    {
+      "record_id": "power.control.power-request-override-subtree",
+      "evidence_class": "C",
+      "reason_code": "leaf_semantics_unresolved_after_static_context",
+      "gating_reason": "The subtree now has retained runtime access, override-family lineage, and bounded adjacent static context, but exact Driver/Process/Service leaf semantics and a safe restore story are still unresolved.",
+      "next_missing_layer_override": "decision-gate"
+    },
+    {
+      "record_id": "power.control.allow-system-required-power-requests",
+      "evidence_class": "C",
+      "reason_code": "kvm_guest_control_surface_missing",
+      "gating_reason": "The execution-required pair now has a dedicated narrow runtime runner, the active KVM session exposes the qemu guest-agent channel, live bootstrap has installed qga plus guest-tools in the guest, and the guest now carries a modern qga payload plus visible `vport0p1`/`vport0p2` children. Later probes proved both `\\\\.\\Global\\org.qemu.guest_agent.0` and the exact `...&02...` DeviceClasses-derived path are openable in the guest, yet restarting `QEMU-GA` or launching qga directly on that exact path still leaves host-side `guest-ping` in an error/disconnected state. The newest runtime-handshake probe adds only repeated `debug: dispatch` log lines and no recent matching Application events, so the remaining blocker is now a silent post-launch qga stall or libvirt/KVM handshake failure on KVM while the repo controller stack remains vmrun-backed.",
+      "next_missing_layer_override": "decision-gate"
+    },
+    {
+      "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "evidence_class": "C",
+      "reason_code": "kvm_guest_control_surface_missing",
+      "gating_reason": "The execution-required pair now has a dedicated narrow runtime runner, the active KVM session exposes the qemu guest-agent channel, live bootstrap has installed qga plus guest-tools in the guest, and the guest now carries a modern qga payload plus visible `vport0p1`/`vport0p2` children. Later probes proved both `\\\\.\\Global\\org.qemu.guest_agent.0` and the exact `...&02...` DeviceClasses-derived path are openable in the guest, yet restarting `QEMU-GA` or launching qga directly on that exact path still leaves host-side `guest-ping` in an error/disconnected state. The newest runtime-handshake probe adds only repeated `debug: dispatch` log lines and no recent matching Application events, so the remaining blocker is now a silent post-launch qga stall or libvirt/KVM handshake failure on KVM while the repo controller stack remains vmrun-backed.",
+      "next_missing_layer_override": "decision-gate"
     }
   ]
 }

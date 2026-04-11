@@ -240,7 +240,7 @@
     "why": "Microsoft documents AllowMessageSync directly in the Messaging Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync with 0 as blocked and 1 as the default allowed state. The app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T13:30:32.7900102+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync",
     "exact_quote_or_path": "Default Value 1; Allowed values: 0 Message sync isn't allowed and can't be changed by the user. 1 (Default) Message sync is allowed. The user can change this setting. Group policy mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\Messaging; Registry Value Name AllowMessageSync.",

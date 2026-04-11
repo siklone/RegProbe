@@ -249,7 +249,7 @@
     "why": "The local Microsoft TerminalServer.admx file explicitly defines fDisableClip under SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services with enabledValue 1 and disabledValue 0, which matches the app's device-policy write.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T15:25:49.0591858+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/TerminalServer.admx",
     "exact_quote_or_path": "<policy name=\"TS_CLIENT_CLIPBOARD\" ... key=\"SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\" valueName=\"fDisableClip\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",

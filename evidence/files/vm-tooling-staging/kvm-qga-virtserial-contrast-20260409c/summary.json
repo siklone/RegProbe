@@ -1,0 +1,11 @@
+{
+  "bundle_id": "kvm-qga-virtserial-contrast-20260409c",
+  "domain": "regprobe-win11-25h2-session",
+  "focus": "Compare host-side connect behavior between the live qga virtserial channel and a temporary attached virtserialport inside the same VM process.",
+  "findings": [
+    "A temporary attached virtserialport named org.codex.porttest.0 on port 16 accepted a direct host-side AF_UNIX connection through /tmp/regprobe-qga-porttest.sock.",
+    "The live qga channel org.qemu.guest_agent.0 on port 2 still returned ConnectionRefusedError(111, 'Connection refused') on direct host-side AF_UNIX connect.",
+    "info qtree showed the temporary codexport port at 'guest off, host off' while the live qga port remained 'guest on, host off'.",
+    "This means the persistent refusal is not a generic host-to-QEMU unix socket problem and not a generic virtserialport-attached socket problem either; it is specific to the live qga channel state or qga integration path."
+  ]
+}

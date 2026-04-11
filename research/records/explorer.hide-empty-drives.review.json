@@ -64,7 +64,24 @@
       }
     ]
   },
-  "windows_defaults": [],
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean user baseline",
+      "applies_to": "Current user profile on the Win25H2Clean validation VM before the reversible Procmon probe",
+      "states": [
+        {
+          "target_id": "explorer-hidedriveswithnomedia-flag",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The validation proof notes that the baseline value was absent and was restored to the absent state after the runtime probe."
+        }
+      ],
+      "notes": "This record treats the missing-value baseline as the observed default for the validated VM profile, while the documented runtime states remain 0 and 1.",
+      "evidence_ids": [
+        "procmon-hidedriveswithnomedia-runtime"
+      ]
+    }
+  ],
   "recommended_profiles": [
     {
       "profile_id": "hide-empty-drives",

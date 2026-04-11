@@ -147,6 +147,11 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
 - `registry-research-framework/tools/ghidra-headless-analyze.ps1`
 - `registry-research-framework/tools/pdb-download.ps1`
 - `registry-research-framework/tools/registry-sideeffect-diff.ps1`
+  compact semantic key/value diff for `.reg` exports and registry-dump text, with a bounded summary fallback for generic text inputs
+- `registry-research-framework/tools/registry_sideeffect_diff.py`
+  host-verifiable semantic diff twin with optional machine-readable JSON output
+- `scripts/audit_registry_sideeffect_regressions.py`
+  generates repo-native regression audits that compare naive line churn against semantic registry diff counts on known artifact pairs
 - `registry-research-framework/tools/_resolve-tweak-runner.ps1`
   generic building blocks used by multiple lanes
 
@@ -160,7 +165,7 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   current watchdog follow-up lane
 - `registry-research-framework/tools/run-path-aware-static-probe.ps1`
 - `registry-research-framework/tools/run-path-aware-runtime-probe.ps1`
-  current path-aware residual-candidate pair
+  current path-aware residual-candidate lane, including the narrow execution-required runtime pair
 - `registry-research-framework/tools/run-executive-uuid-sequence-number-lightweight-runtime-followup.ps1`
   current UUID-specific follow-up lane
 - `registry-research-framework/tools/run-import-dynamic-resolution-probe.ps1`

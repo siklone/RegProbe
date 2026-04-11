@@ -1,0 +1,98 @@
+{
+  "candidate_id": "system.executive-additional-worker-threads",
+  "bench_tier": "vm",
+  "bench_profile": "functional",
+  "apply_value": {
+    "AdditionalCriticalWorkerThreads": 1,
+    "AdditionalDelayedWorkerThreads": 1
+  },
+  "apply_type": "REG_DWORD pair",
+  "rollback_method": "restore-baseline",
+  "safety_passed": true,
+  "boot_success": true,
+  "shell_usable": true,
+  "services_healthy": true,
+  "event_log_clean": true,
+  "rollback_executed": true,
+  "rollback_verified": true,
+  "rollback_failure_reason": null,
+  "bench_environment": "windows-11-25h2-vm",
+  "bench_measurement_reliability": "functional",
+  "executed_at": "2026-04-10T19:10:23.0850589-07:00",
+  "apply_verified": true,
+  "state_changed": true,
+  "baseline_state": {
+    "AdditionalCriticalWorkerThreads": {
+      "exists": true,
+      "value": 0,
+      "value_kind": "DWord"
+    },
+    "AdditionalDelayedWorkerThreads": {
+      "exists": true,
+      "value": 0,
+      "value_kind": "DWord"
+    }
+  },
+  "applied_state": {
+    "AdditionalCriticalWorkerThreads": {
+      "exists": true,
+      "value": 1,
+      "value_kind": "DWord"
+    },
+    "AdditionalDelayedWorkerThreads": {
+      "exists": true,
+      "value": 1,
+      "value_kind": "DWord"
+    }
+  },
+  "restored_state": {
+    "AdditionalCriticalWorkerThreads": {
+      "exists": true,
+      "value": 0,
+      "value_kind": "DWord"
+    },
+    "AdditionalDelayedWorkerThreads": {
+      "exists": true,
+      "value": 0,
+      "value_kind": "DWord"
+    }
+  },
+  "value_results": [
+    {
+      "value_name": "AdditionalCriticalWorkerThreads",
+      "apply_value": 1,
+      "apply_verified": true,
+      "state_changed": true
+    },
+    {
+      "value_name": "AdditionalDelayedWorkerThreads",
+      "apply_value": 1,
+      "apply_verified": true,
+      "state_changed": true
+    }
+  ],
+  "service_statuses": [
+    {
+      "Name": "EventLog",
+      "Status": 4,
+      "StartType": 2
+    },
+    {
+      "Name": "LanmanWorkstation",
+      "Status": 4,
+      "StartType": 2
+    },
+    {
+      "Name": "RpcSs",
+      "Status": 4,
+      "StartType": 2
+    },
+    {
+      "Name": "Schedule",
+      "Status": 4,
+      "StartType": 2
+    }
+  ],
+  "critical_event_count": 0,
+  "critical_events": []
+}

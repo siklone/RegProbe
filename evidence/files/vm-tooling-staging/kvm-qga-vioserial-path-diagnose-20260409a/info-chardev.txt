@@ -1,0 +1,7 @@
+charchannel1: filename=disconnected:unix:/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/org.qemu.guest_agent.0,server=on
+charredir0: filename=spicevmc
+chrtpm: filename=unix:/run/user/1000/libvirt/qemu/run/swtpm/1-regprobe-win11-25h2--swtpm.sock
+charredir1: filename=spicevmc
+charchannel0: filename=spicevmc
+charserial0: filename=pty:/dev/pts/4
+charmonitor: filename=unix:/home/rai/.config/libvirt/qemu/lib/domain-1-regprobe-win11-25h2-/monitor.sock,server=on

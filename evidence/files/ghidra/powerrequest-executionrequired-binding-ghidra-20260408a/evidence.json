@@ -1,0 +1,18 @@
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "powerrequest-executionrequired-binding-ghidra-20260408a",
+  "timestamp": "2026-04-08T14:01:06.835108300Z",
+  "ghidra_no_function_fallback": false,
+  "matches": [
+    {
+      "address": "140aacfae",
+      "function": "PopPowerRequestExecutionRequiredSettingCallback",
+      "via_label": "symbol:GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 23,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    }
+  ]
+}

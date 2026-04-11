@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -69,6 +70,154 @@ class PipelineCaptureStatusTests(unittest.TestCase):
         self.assertTrue(v31_pipeline.runner_required({"suspected_layer": "kernel", "boot_phase_relevant": False}))
         self.assertTrue(v31_pipeline.runner_required({"suspected_layer": "user-mode", "boot_phase_relevant": True}))
         self.assertFalse(v31_pipeline.runner_required({"suspected_layer": "user-mode", "boot_phase_relevant": False}))
+
+
+class RunnerConfigTests(unittest.TestCase):
+    def test_execution_required_pair_uses_path_aware_runtime_runner(self) -> None:
+        config_path = REPO_ROOT / "registry-research-framework" / "config" / "tweak-vm-runners.json"
+        payload = json.loads(config_path.read_text(encoding="utf-8"))
+        runtime = payload["runtime"]
+
+        for tweak_id in (
+            "power.control.allow-system-required-power-requests",
+            "power.control.allow-audio-to-enable-execution-required-power-requests",
+        ):
+            entry = runtime[tweak_id]
+            self.assertEqual(entry["script"], "registry-research-framework/tools/run-path-aware-runtime-probe.ps1")
+            self.assertEqual(entry["args"], ["-CandidateIds", tweak_id])
+
+    def test_path_aware_runtime_probe_declares_execution_required_candidates(self) -> None:
+        script_path = REPO_ROOT / "registry-research-framework" / "tools" / "run-path-aware-runtime-probe.ps1"
+        source = script_path.read_text(encoding="utf-8")
+
+        self.assertIn("power.control.allow-system-required-power-requests", source)
+        self.assertIn("power.control.allow-audio-to-enable-execution-required-power-requests", source)
+        self.assertIn("execution-required-power-requests-short", source)
+
+    def test_execution_required_runtime_runner_mapping_survives_decision_gate_closure(self) -> None:
+        audit_path = REPO_ROOT / "research" / "evidence-audit.json"
+        config_path = REPO_ROOT / "registry-research-framework" / "config" / "tweak-vm-runners.json"
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        runtime = config["runtime"]
+
+        runtime_trace_ids = sorted(
+            entry["tweak_id"]
+            for entry in audit["entries"]
+            if entry.get("next_missing_layer") == "runtime-trace"
+        )
+        self.assertEqual(runtime_trace_ids, [])
+        self.assertIn("power.control.allow-audio-to-enable-execution-required-power-requests", runtime)
+        self.assertIn("power.control.allow-system-required-power-requests", runtime)
+
+
+class RegistrySideeffectPipelineTests(unittest.TestCase):
+    def test_parse_registry_sideeffect_report_text_prefers_value_counts(self) -> None:
+        report = "\n".join(
+            [
+                "Registry sideeffect diff",
+                "Detected format: semantic-registry (registry-export -> registry-dump-text)",
+                "Summary counts",
+                "- added_keys: 1",
+                "- removed_keys: 1",
+                "- added_values: 3",
+                "- removed_values: 2",
+                "- modified_values: 1",
+                "- unchanged_values: 7",
+            ]
+        )
+
+        payload = v31_pipeline.parse_registry_sideeffect_report_text(report)
+
+        self.assertEqual(payload["format"], "semantic-registry")
+        self.assertEqual(payload["sideeffect_count"], 6)
+        self.assertEqual(payload["counts"]["added_keys"], 1)
+        self.assertEqual(payload["counts"]["modified_values"], 1)
+
+    def test_parse_registry_sideeffect_report_text_uses_generic_line_counts(self) -> None:
+        report = "\n".join(
+            [
+                "Registry sideeffect diff",
+                "Detected format: generic-text",
+                "Summary counts",
+                "- added_lines: 12",
+                "- removed_lines: 8",
+            ]
+        )
+
+        payload = v31_pipeline.parse_registry_sideeffect_report_text(report)
+
+        self.assertEqual(payload["format"], "generic-text")
+        self.assertEqual(payload["sideeffect_count"], 20)
+        self.assertEqual(payload["counts"]["added_lines"], 12)
+
+    def test_extract_registry_sideeffects_reads_diff_report_file(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT / "registry-research-framework" / "audit") as temp_root:
+            temp_path = Path(temp_root)
+            report_path = temp_path / "sideeffect-report.txt"
+            report_path.write_text(
+                "\n".join(
+                    [
+                        "Registry sideeffect diff",
+                        "Detected format: semantic-registry (registry-export -> registry-dump-text)",
+                        "Summary counts",
+                        "- added_keys: 0",
+                        "- removed_keys: 0",
+                        "- added_values: 0",
+                        "- removed_values: 0",
+                        "- modified_values: 0",
+                        "- unchanged_values: 3019",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            repo_ref = report_path.relative_to(REPO_ROOT).as_posix()
+
+            payload = v31_pipeline.extract_registry_sideeffects(
+                {"diff_file": repo_ref},
+                None,
+                None,
+            )
+
+            self.assertTrue(payload["executed"])
+            self.assertEqual(payload["sideeffect_count"], 0)
+            self.assertEqual(payload["format"], "semantic-registry")
+            self.assertIn("3019", str(payload["summary_counts"]["unchanged_values"]))
+            self.assertIn(repo_ref, payload["diff_file"])
+
+    def test_extract_registry_sideeffects_reads_sibling_state_json(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT / "evidence" / "files") as temp_root:
+            temp_path = Path(temp_root)
+            summary_path = temp_path / "summary.json"
+            state_path = temp_path / "state.json"
+            summary_path.write_text('{"status":"runner-ok"}\n', encoding="utf-8")
+            state_path.write_text(
+                (
+                    "{\n"
+                    '  "baseline_values": {"AddedValue": null, "ModifiedValue": 1, "RemovedValue": 4, "UnchangedValue": 8},\n'
+                    '  "candidate_values": {"AddedValue": 1, "ModifiedValue": 2, "RemovedValue": null, "UnchangedValue": 8}\n'
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            payload = v31_pipeline.extract_registry_sideeffects(
+                None,
+                None,
+                summary_path.relative_to(REPO_ROOT).as_posix(),
+            )
+
+            self.assertTrue(payload["executed"])
+            self.assertEqual(payload["format"], "state-semantic-registry")
+            self.assertEqual(payload["sideeffect_count"], 3)
+            self.assertEqual(payload["summary_counts"]["added_values"], 1)
+            self.assertEqual(payload["summary_counts"]["modified_values"], 1)
+            self.assertEqual(payload["summary_counts"]["removed_values"], 1)
+            self.assertEqual(payload["summary_counts"]["unchanged_values"], 1)
+            self.assertEqual(len(payload["structured_diff"]["value_added"]), 1)
+            self.assertEqual(len(payload["structured_diff"]["value_changed"]), 1)
+            self.assertIn("state.json", payload["diff_file"])
 
 
 if __name__ == "__main__":

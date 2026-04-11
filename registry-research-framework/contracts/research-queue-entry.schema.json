@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/contracts/research-queue-entry.schema.json",
+  "title": "Research Queue Entry",
+  "allOf": [
+    {
+      "$ref": "./discovery-candidate.schema.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "state",
+        "blockers",
+        "required_capabilities",
+        "next_lane",
+        "updated_utc"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "discovered",
+            "triaged",
+            "scored",
+            "blocked",
+            "promotion-eligible",
+            "promoted",
+            "revalidation-pending",
+            "rejected",
+            "discarded"
+          ]
+        },
+        "blockers": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "required_capabilities": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "next_lane": {
+          "type": "string",
+          "minLength": 1
+        },
+        "linked_record_id": {
+          "type": ["string", "null"]
+        },
+        "last_evaluator_result": {
+          "type": ["object", "null"]
+        },
+        "updated_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  ]
+}

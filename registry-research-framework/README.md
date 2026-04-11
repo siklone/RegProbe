@@ -9,21 +9,20 @@ This folder holds the v3.1 machine pipeline for undocumented registry research.
 - `audit/` generates the retroactive re-audit queue and report.
 - `config/` stores batch, routing, decision-tree defaults, and tweak-to-VM runner mappings.
 - `docs/` explains the v3.1 rules without changing the existing human-facing research record schema.
-- `schemas/normalized-registry-*.schema.json` defines the compact ETW/Procmon/imported registry event contract used by new runtime normalizers.
-- `schemas/imported-candidate-backlog.schema.json` defines the canonical aggregated queue published at `research/imported-candidate-backlog.json`.
-- `tools/import-external-evidence.py` converts supported external exports into an importer-specific bundle, a canonical `normalized-registry-bundle.json`, plus candidate queue, note stubs, and record seeds without touching the tweak catalog.
-- `tools/import-external-evidence.py --backlog-output ...` lets tests or sidecar tooling emit a temporary aggregated imported backlog without mutating the canonical published queue.
-- The built-in external adapter set currently covers Velociraptor/Registry Hunter JSON or YAML exports, osquery registry CSV or JSON exports, and Regshot text or structured diff exports.
-- `scripts/generate_imported_candidate_backlog.py` folds per-run imported candidate queues into `research/imported-candidate-backlog.json` so external leads are visible in one research queue.
-- Imported candidate queues, note stubs, and record seeds now carry machine-readable promotion gates. Imported evidence remains `blocked` for record promotion and tweak ingestion until documentation-first review and repo-native proof are added.
-- `scripts/refresh_research_publish_surfaces.py` regenerates the canonical imported backlog plus evidence index/audit/manifest in dependency order.
-- `winopt research validate-json-tweaks` emits a machine-readable invalid-definition report for JSON tweak batches without loading them into the app catalog.
 
 Canonical imported artifacts live under `evidence/files/`. The published research surface stays under `research/`.
-Published summary surfaces now carry imported backlog telemetry through `research/evidence-index.json`, `research/evidence-manifest.json`, and `research/evidence-audit.json`.
-Published backlog summaries also expose blocked imported-candidate counts so external corroboration stays visible without accidentally looking promotion-ready.
 
 `faz1` and `faz3` stay bootstrap-only by default. Pass `-ExecuteTools` when you want the phase wrapper to call the mapped VM runner for that tweak. `faz1` can now emit both ETW and Procmon lane manifests.
 
-Runtime lanes should now prefer `summary.json` + normalized bundle over raw ETL/PML/CSV. Raw capture files stay off-git or helper-only whenever possible.
-Wrapper manifests should carry `normalized_result_ref`, `normalization_status`, `normalizer_name`, and `normalization_errors` whenever a mapped runner produces a normalized bundle.
+<!-- BEGIN:RESEARCH_HEALTH -->
+## Research Health
+
+| Metric | Value |
+|--------|-------|
+| Promoted | 248 |
+| Blocked | 11 |
+| Revalidation Pending | 0 |
+| Gate Health | 🟢 green |
+| Schema Complete | 100% |
+| Missing Docs | 0 |
+<!-- END:RESEARCH_HEALTH -->

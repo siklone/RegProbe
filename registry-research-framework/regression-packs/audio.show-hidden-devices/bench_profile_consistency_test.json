@@ -1,0 +1,19 @@
+{
+  "pass": true,
+  "expected": {
+    "feature_area_group": "default",
+    "profiles": [
+      "functional_throughput"
+    ],
+    "bench_vm_capable": true,
+    "bare_metal_required_for_perf_claim": false
+  },
+  "actual": {
+    "feature_area_group": "default",
+    "profiles": [
+      "functional_throughput"
+    ],
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false
+  }
+}

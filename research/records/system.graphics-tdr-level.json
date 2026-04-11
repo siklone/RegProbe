@@ -173,7 +173,7 @@
     "why": "Microsoft documents the exact path, allowed values, and default value, and the app writes that documented default as a reset-to-baseline action with a clean rollback story.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T01:12:30Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys",
     "exact_quote_or_path": "KeyPath : HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\GraphicsDrivers; KeyValue : TdrLevel; ValueType : REG_DWORD; TdrLevelOff (0) Detection disabled ... TdrLevelRecover (3) Recover on timeout (default value).",

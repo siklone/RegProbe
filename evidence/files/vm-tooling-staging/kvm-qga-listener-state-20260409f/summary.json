@@ -1,0 +1,11 @@
+{
+  "bundle_id": "kvm-qga-listener-state-20260409f",
+  "domain": "regprobe-win11-25h2-session",
+  "focus": "Check whether the live qga socket is simply missing a host listener or whether it is already present as a qemu-owned listening socket when direct host-side connect still fails.",
+  "findings": [
+    "Host-side `ss -xlpn` shows the live qga path `/run/user/1000/libvirt/qemu/run/channel/1-regprobe-win11-25h2-/org.qemu.guest_agent.0` as `LISTEN` under `qemu-system-x86` pid 8704 fd 107.",
+    "A matching `lsof -U -a -p 8704` snapshot also shows the same live qga path as `type=STREAM (LISTEN)` under the same qemu process, while the sibling monitor socket is simultaneously present under that same pid.",
+    "Direct host-side AF_UNIX connect to the live qga path still returns `ConnectionRefusedError(111, 'Connection refused')` even though the socket is visible as a qemu-owned `LISTEN` endpoint.",
+    "Direct host-side connect to the sibling qemu monitor socket does not return `ConnectionRefusedError(111, 'Connection refused')`; it instead returns `BlockingIOError(11, 'Resource temporarily unavailable')`, so the qga path is failing differently from another live qemu-owned listening socket on the same process."
+  ]
+}

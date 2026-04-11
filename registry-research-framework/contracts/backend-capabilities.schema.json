@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/contracts/backend-capabilities.schema.json",
+  "title": "Backend Capabilities",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "backend_id",
+    "type",
+    "os",
+    "capabilities",
+    "execution_context"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "backend_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "enum": ["local", "vm", "remote"]
+    },
+    "os": {
+      "enum": ["windows", "linux-with-vm", "windows-runner"]
+    },
+    "guest_os": {
+      "type": ["string", "null"]
+    },
+    "execution_context": {
+      "$ref": "./execution-context.schema.json"
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registry_read",
+        "registry_write",
+        "reboot",
+        "snapshot_restore",
+        "etw_capture",
+        "procmon_capture",
+        "debugger_attach",
+        "bench_run",
+        "bench_bare_metal"
+      ],
+      "properties": {
+        "registry_read": {"type": "boolean"},
+        "registry_write": {"type": "boolean"},
+        "reboot": {"type": "boolean"},
+        "snapshot_restore": {"type": "boolean"},
+        "etw_capture": {"type": "boolean"},
+        "procmon_capture": {"type": "boolean"},
+        "debugger_attach": {"type": "boolean"},
+        "bench_run": {"type": "boolean"},
+        "bench_bare_metal": {"type": "boolean"}
+      }
+    }
+  }
+}

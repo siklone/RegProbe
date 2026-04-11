@@ -240,7 +240,7 @@
     "why": "Microsoft documents DisableWindowsLocationProvider directly in the ADMX_LocationProviderAdm Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider. The same page describes that enabling the policy turns off the Windows Location Provider for the computer, and the app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T14:27:06.4267409+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider",
     "exact_quote_or_path": "This policy setting turns off the Windows Location Provider feature for this computer. If you enable this policy setting, the Windows Location Provider feature will be turned off, and all programs on this computer won't be able to use the Windows Location Provider feature. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\LocationAndSensors; Registry Value Name DisableWindowsLocationProvider.",

@@ -64,7 +64,24 @@
       }
     ]
   },
-  "windows_defaults": [],
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean user baseline",
+      "applies_to": "Current user profile on the Win25H2Clean validation VM before the reversible Procmon probe",
+      "states": [
+        {
+          "target_id": "explorer-showrecent-flag",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "The validation proof notes that the VM user baseline was 0 and was restored to 0 after the runtime probe."
+        }
+      ],
+      "notes": "This record treats ShowRecent = 0 as the observed validation baseline while still documenting both runtime-consumed states.",
+      "evidence_ids": [
+        "procmon-showrecent-runtime"
+      ]
+    }
+  ],
   "recommended_profiles": [
     {
       "profile_id": "show-recent-items",

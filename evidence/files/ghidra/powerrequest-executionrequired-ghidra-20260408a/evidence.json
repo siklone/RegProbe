@@ -1,0 +1,68 @@
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "powerrequest-executionrequired-ghidra-20260408a",
+  "timestamp": "2026-04-08T12:27:51.746378600Z",
+  "ghidra_no_function_fallback": false,
+  "matches": [
+    {
+      "address": "140aacfae",
+      "function": "PopPowerRequestExecutionRequiredSettingCallback",
+      "via_label": "symbol:GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 23,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140a3bd2f",
+      "function": "PopPowerRequestEvaluateExecutionRequiredStatus",
+      "via_label": "symbol:PopExecutionRequiredTimeout",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 21,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140a3bd71",
+      "function": "PopPowerRequestEvaluateExecutionRequiredStatus",
+      "via_label": "symbol:PopExecutionRequiredTimeout",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 21,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140749e1c",
+      "function": "PopPowerRequestSetExecutionRequiredTimeoutTimer",
+      "via_label": "symbol:PopExecutionRequiredTimeout",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 24,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140749e32",
+      "function": "PopPowerRequestSetExecutionRequiredTimeoutTimer",
+      "via_label": "symbol:PopExecutionRequiredTimeout",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 24,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    },
+    {
+      "address": "140aacfe4",
+      "function": "PopPowerRequestExecutionRequiredSettingCallback",
+      "via_label": "symbol:PopExecutionRequiredTimeout",
+      "forced_boundary": false,
+      "decompile_success": true,
+      "output_lines": 23,
+      "naturally_resolved": true,
+      "output_kind": "decompile"
+    }
+  ]
+}

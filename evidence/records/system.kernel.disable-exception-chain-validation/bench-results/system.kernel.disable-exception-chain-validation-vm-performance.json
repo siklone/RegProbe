@@ -1,0 +1,25 @@
+{
+  "candidate_id": "system.kernel.disable-exception-chain-validation",
+  "bench_tier": "vm",
+  "bench_profile": "performance",
+  "bench_measurement_reliability": "relative",
+  "measurement_profile": "system",
+  "measurement_components": [
+    "service-query-ms",
+    "registry-query-ms"
+  ],
+  "sample_count": 3,
+  "apply_value": 1,
+  "apply_type": "REG_DWORD",
+  "rollback_method": "delete",
+  "bench_environment": "windows-11-25h2-vm",
+  "bench_bare_metal_pending": true,
+  "baseline_median_ms": 6.942,
+  "applied_median_ms": 12.769,
+  "delta_ms": 5.827,
+  "delta_pct": 83.938,
+  "rollback_verified": true,
+  "executed_at": "2026-04-10T21:51:00-07:00",
+  "output_file": "evidence/records/system.kernel.disable-exception-chain-validation/bench-results/system.kernel.disable-exception-chain-validation-vm-performance.json",
+  "rollback_failure_reason": null
+}

@@ -1,0 +1,269 @@
+{
+  "pass": true,
+  "first": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "audio.disable-beep",
+    "record_id": "audio.disable-beep",
+    "tweak_id": "audio.disable-beep",
+    "tweak_origin": "legacy-curated",
+    "promotion_state": "promoted",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": true,
+    "apply_allowed": true,
+    "app_mapping_status": "matches-research",
+    "next_missing_layer": "none",
+    "debug_override_allowed": false,
+    "score_breakdown": {
+      "static_evidence_strength": 5,
+      "runtime_evidence_strength": 1,
+      "rollback_clarity": 5,
+      "blast_radius": 4,
+      "tweak_suitability": 5,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 3,
+      "overall_score": 3.89,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": true,
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
+    },
+    "evidence_status": {
+      "evidence_count": 4,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": false,
+      "has_ghidra_evidence": false,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": false
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Windows service baseline observed in guest",
+        "label": "Windows service baseline observed in guest",
+        "applies_to": "Windows systems exposing the Beep driver key",
+        "state_kind": "value",
+        "value": 1,
+        "rationale": "Guest baseline on Win25H2Clean was Start=1 and the reversible probe restored it to that value.",
+        "evidence_ids": [
+          "ms-services-registry-tree",
+          "runtime-beep-registry-diff"
+        ],
+        "rollback_strategy": "restore_default"
+      }
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "feature_area_group": "default",
+      "profiles": [
+        "functional_throughput"
+      ],
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "official-doc"
+      ],
+      "attempted_layers": [
+        "official_doc"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-20T00:00:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-20T00:00:00Z"
+      }
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-20T00:00:00Z",
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
+    }
+  },
+  "second": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "audio.disable-beep",
+    "record_id": "audio.disable-beep",
+    "tweak_id": "audio.disable-beep",
+    "tweak_origin": "legacy-curated",
+    "promotion_state": "promoted",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": true,
+    "apply_allowed": true,
+    "app_mapping_status": "matches-research",
+    "next_missing_layer": "none",
+    "debug_override_allowed": false,
+    "score_breakdown": {
+      "static_evidence_strength": 5,
+      "runtime_evidence_strength": 1,
+      "rollback_clarity": 5,
+      "blast_radius": 4,
+      "tweak_suitability": 5,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 3,
+      "overall_score": 3.89,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": true,
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
+    },
+    "evidence_status": {
+      "evidence_count": 4,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": false,
+      "has_ghidra_evidence": false,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": false
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Windows service baseline observed in guest",
+        "label": "Windows service baseline observed in guest",
+        "applies_to": "Windows systems exposing the Beep driver key",
+        "state_kind": "value",
+        "value": 1,
+        "rationale": "Guest baseline on Win25H2Clean was Start=1 and the reversible probe restored it to that value.",
+        "evidence_ids": [
+          "ms-services-registry-tree",
+          "runtime-beep-registry-diff"
+        ],
+        "rollback_strategy": "restore_default"
+      }
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "feature_area_group": "default",
+      "profiles": [
+        "functional_throughput"
+      ],
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "official-doc"
+      ],
+      "attempted_layers": [
+        "official_doc"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-20T00:00:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-20T00:00:00Z"
+      }
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-20T00:00:00Z",
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
+    }
+  }
+}

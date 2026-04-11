@@ -1,0 +1,574 @@
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.031 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.109 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+Connected to Windows 10 26100 x64 target at (Wed Apr  8 06:52:55.653 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Wed Apr  8 06:52:55.984 2026 (UTC - 7:00)
+System Uptime: 1 days 1:34:19.724
+lkd> .sympath C:\Tools\Symbols\local-kd-powersetting-query-20260408a
+Symbol search path is: C:\Tools\Symbols\local-kd-powersetting-query-20260408a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-powersetting-query-20260408a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-powersetting-query-20260408a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> uf nt!PopQueryPowerSettingUlong
+nt!PopQueryPowerSettingUlong:
+fffff806`e78b4520 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff806`e78b4525 4889742410      mov     qword ptr [rsp+10h],rsi
+fffff806`e78b452a 48897c2418      mov     qword ptr [rsp+18h],rdi
+fffff806`e78b452f 4156            push    r14
+fffff806`e78b4531 4883ec20        sub     rsp,20h
+fffff806`e78b4535 488bd9          mov     rbx,rcx
+fffff806`e78b4538 498bf0          mov     rsi,r8
+fffff806`e78b453b 488d0d1e8c4500  lea     rcx,[nt!PopSettingLock (fffff806`e7d0d160)]
+fffff806`e78b4542 4c8bf2          mov     r14,rdx
+fffff806`e78b4545 33ff            xor     edi,edi
+fffff806`e78b4547 e804a388ff      call    nt!ExAcquireFastMutex (fffff806`e713e850)
+fffff806`e78b454c 83caff          or      edx,0FFFFFFFFh
+fffff806`e78b454f 488bcb          mov     rcx,rbx
+fffff806`e78b4552 e85987f0ff      call    nt!PopFindPowerSettingConfiguration (fffff806`e77bccb0)
+fffff806`e78b4557 4c8bc8          mov     r9,rax
+fffff806`e78b455a 4885c0          test    rax,rax
+fffff806`e78b455d 742c            je      nt!PopQueryPowerSettingUlong+0x6b (fffff806`e78b458b)  Branch
+
+nt!PopQueryPowerSettingUlong+0x3f:
+fffff806`e78b455f 488b4040        mov     rax,qword ptr [rax+40h]
+fffff806`e78b4563 4885c0          test    rax,rax
+fffff806`e78b4566 7423            je      nt!PopQueryPowerSettingUlong+0x6b (fffff806`e78b458b)  Branch
+
+nt!PopQueryPowerSettingUlong+0x48:
+fffff806`e78b4568 83780404        cmp     dword ptr [rax+4],4
+fffff806`e78b456c 721d            jb      nt!PopQueryPowerSettingUlong+0x6b (fffff806`e78b458b)  Branch
+
+nt!PopQueryPowerSettingUlong+0x4e:
+fffff806`e78b456e 8b400c          mov     eax,dword ptr [rax+0Ch]
+fffff806`e78b4571 418906          mov     dword ptr [r14],eax
+fffff806`e78b4574 498b4148        mov     rax,qword ptr [r9+48h]
+fffff806`e78b4578 4885c0          test    rax,rax
+fffff806`e78b457b 740e            je      nt!PopQueryPowerSettingUlong+0x6b (fffff806`e78b458b)  Branch
+
+nt!PopQueryPowerSettingUlong+0x5d:
+fffff806`e78b457d 83780404        cmp     dword ptr [rax+4],4
+fffff806`e78b4581 7208            jb      nt!PopQueryPowerSettingUlong+0x6b (fffff806`e78b458b)  Branch
+
+nt!PopQueryPowerSettingUlong+0x63:
+fffff806`e78b4583 8b400c          mov     eax,dword ptr [rax+0Ch]
+fffff806`e78b4586 40b701          mov     dil,1
+fffff806`e78b4589 8906            mov     dword ptr [rsi],eax
+
+nt!PopQueryPowerSettingUlong+0x6b:
+fffff806`e78b458b 488d0dce8b4500  lea     rcx,[nt!PopSettingLock (fffff806`e7d0d160)]
+fffff806`e78b4592 e8d99e86ff      call    nt!ExReleaseFastMutex (fffff806`e711e470)
+fffff806`e78b4597 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+fffff806`e78b459c 408ac7          mov     al,dil
+fffff806`e78b459f 488b7c2440      mov     rdi,qword ptr [rsp+40h]
+fffff806`e78b45a4 488b742438      mov     rsi,qword ptr [rsp+38h]
+fffff806`e78b45a9 4883c420        add     rsp,20h
+fffff806`e78b45ad 415e            pop     r14
+fffff806`e78b45af c3              ret
+lkd> uf nt!PopGetPowerSettingValue
+nt!PopGetPowerSettingValue:
+fffff806`e729172c 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff806`e7291731 4889742410      mov     qword ptr [rsp+10h],rsi
+fffff806`e7291736 57              push    rdi
+fffff806`e7291737 4883ec20        sub     rsp,20h
+fffff806`e729173b 488bd9          mov     rbx,rcx
+fffff806`e729173e 498bf1          mov     rsi,r9
+fffff806`e7291741 488d0d18baa700  lea     rcx,[nt!PopSettingLock (fffff806`e7d0d160)]
+fffff806`e7291748 418bf8          mov     edi,r8d
+fffff806`e729174b e800d1eaff      call    nt!ExAcquireFastMutex (fffff806`e713e850)
+fffff806`e7291750 83ff01          cmp     edi,1
+fffff806`e7291753 488bcb          mov     rcx,rbx
+fffff806`e7291756 0f473defa2a700  cmova   edi,dword ptr [nt!PopPowerSettingValues+0xec (fffff806`e7d0ba4c)]
+fffff806`e729175d 83caff          or      edx,0FFFFFFFFh
+fffff806`e7291760 e84bb55200      call    nt!PopFindPowerSettingConfiguration (fffff806`e77bccb0)
+fffff806`e7291765 33db            xor     ebx,ebx
+fffff806`e7291767 4885c0          test    rax,rax
+fffff806`e729176a 7457            je      nt!PopGetPowerSettingValue+0x97 (fffff806`e72917c3)  Branch
+
+nt!PopGetPowerSettingValue+0x40:
+fffff806`e729176c 4c63cf          movsxd  r9,edi
+fffff806`e729176f 4a8b54c840      mov     rdx,qword ptr [rax+r9*8+40h]
+fffff806`e7291774 4885d2          test    rdx,rdx
+fffff806`e7291777 744a            je      nt!PopGetPowerSettingValue+0x97 (fffff806`e72917c3)  Branch
+
+nt!PopGetPowerSettingValue+0x4d:
+fffff806`e7291779 8b5204          mov     edx,dword ptr [rdx+4]
+fffff806`e729177c 488b4c2458      mov     rcx,qword ptr [rsp+58h]
+fffff806`e7291781 8911            mov     dword ptr [rcx],edx
+fffff806`e7291783 39542450        cmp     dword ptr [rsp+50h],edx
+fffff806`e7291787 7233            jb      nt!PopGetPowerSettingValue+0x90 (fffff806`e72917bc)  Branch
+
+nt!PopGetPowerSettingValue+0x5d:
+fffff806`e7291789 448bc2          mov     r8d,edx
+fffff806`e729178c 488bce          mov     rcx,rsi
+fffff806`e729178f 4a8b54c840      mov     rdx,qword ptr [rax+r9*8+40h]
+fffff806`e7291794 4883c20c        add     rdx,0Ch
+fffff806`e7291798 e8a3e42200      call    nt!memcpy (fffff806`e74bfc40)
+
+nt!PopGetPowerSettingValue+0x71:
+fffff806`e729179d 488d0dbcb9a700  lea     rcx,[nt!PopSettingLock (fffff806`e7d0d160)]
+fffff806`e72917a4 e8c7cce8ff      call    nt!ExReleaseFastMutex (fffff806`e711e470)
+fffff806`e72917a9 488b742438      mov     rsi,qword ptr [rsp+38h]
+fffff806`e72917ae 8bc3            mov     eax,ebx
+fffff806`e72917b0 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+fffff806`e72917b5 4883c420        add     rsp,20h
+fffff806`e72917b9 5f              pop     rdi
+fffff806`e72917ba c3              ret
+
+nt!PopGetPowerSettingValue+0x90:
+fffff806`e72917bc bb060200c0      mov     ebx,0C0000206h
+fffff806`e72917c1 ebda            jmp     nt!PopGetPowerSettingValue+0x71 (fffff806`e729179d)  Branch
+
+nt!PopGetPowerSettingValue+0x97:
+fffff806`e72917c3 bb0d0000c0      mov     ebx,0C000000Dh
+fffff806`e72917c8 ebd3            jmp     nt!PopGetPowerSettingValue+0x71 (fffff806`e729179d)  Branch
+lkd> uf nt!PopSetPowerSettingValue
+nt!PopSetPowerSettingValue:
+fffff806`e77bc864 48895c2410      mov     qword ptr [rsp+10h],rbx
+fffff806`e77bc869 4489442418      mov     dword ptr [rsp+18h],r8d
+fffff806`e77bc86e 48894c2408      mov     qword ptr [rsp+8],rcx
+fffff806`e77bc873 55              push    rbp
+fffff806`e77bc874 56              push    rsi
+fffff806`e77bc875 57              push    rdi
+fffff806`e77bc876 4154            push    r12
+fffff806`e77bc878 4155            push    r13
+fffff806`e77bc87a 4156            push    r14
+fffff806`e77bc87c 4157            push    r15
+fffff806`e77bc87e 4883ec70        sub     rsp,70h
+fffff806`e77bc882 33c0            xor     eax,eax
+fffff806`e77bc884 458be9          mov     r13d,r9d
+fffff806`e77bc887 448af0          mov     r14b,al
+fffff806`e77bc88a 88442441        mov     byte ptr [rsp+41h],al
+fffff806`e77bc88e 8bea            mov     ebp,edx
+fffff806`e77bc890 4489742444      mov     dword ptr [rsp+44h],r14d
+fffff806`e77bc895 4c8be1          mov     r12,rcx
+fffff806`e77bc898 418bd1          mov     edx,r9d
+fffff806`e77bc89b 41b850536574    mov     r8d,74655350h
+fffff806`e77bc8a1 88442442        mov     byte ptr [rsp+42h],al
+fffff806`e77bc8a5 b900010000      mov     ecx,100h
+fffff806`e77bc8aa 8bf0            mov     esi,eax
+fffff806`e77bc8ac e83f581b00      call    nt!ExAllocatePool2 (fffff806`e79720f0)
+fffff806`e77bc8b1 4889442450      mov     qword ptr [rsp+50h],rax
+fffff806`e77bc8b6 4c8bf8          mov     r15,rax
+fffff806`e77bc8b9 4885c0          test    rax,rax
+fffff806`e77bc8bc 0f8411010000    je      nt!PopSetPowerSettingValue+0x16f (fffff806`e77bc9d3)  Branch
+
+nt!PopSetPowerSettingValue+0x5e:
+fffff806`e77bc8c2 33c9            xor     ecx,ecx
+fffff806`e77bc8c4 e88fe9a0ff      call    nt!PopIncrementPowerSettingPendingUpdates (fffff806`e71cb258)
+fffff806`e77bc8c9 488b9424d0000000 mov     rdx,qword ptr [rsp+0D0h]
+fffff806`e77bc8d1 458bc5          mov     r8d,r13d
+fffff806`e77bc8d4 498bcf          mov     rcx,r15
+fffff806`e77bc8d7 e86433d0ff      call    nt!memcpy (fffff806`e74bfc40)
+fffff806`e77bc8dc 4d8bc7          mov     r8,r15
+fffff806`e77bc8df 418bd5          mov     edx,r13d
+fffff806`e77bc8e2 498bcc          mov     rcx,r12
+fffff806`e77bc8e5 e84e040000      call    nt!PopValidatePowerSettingData (fffff806`e77bcd38)
+fffff806`e77bc8ea 498bcc          mov     rcx,r12
+fffff806`e77bc8ed e876030000      call    nt!PopStateIsSessionSpecific (fffff806`e77bcc68)
+fffff806`e77bc8f2 488d0d67085500  lea     rcx,[nt!PopSettingLock (fffff806`e7d0d160)]
+fffff806`e77bc8f9 88442440        mov     byte ptr [rsp+40h],al
+fffff806`e77bc8fd e84e1f98ff      call    nt!ExAcquireFastMutex (fffff806`e713e850)
+fffff806`e77bc902 8bd5            mov     edx,ebp
+fffff806`e77bc904 498bcc          mov     rcx,r12
+fffff806`e77bc907 e8a4030000      call    nt!PopFindPowerSettingConfiguration (fffff806`e77bccb0)
+fffff806`e77bc90c 4889442460      mov     qword ptr [rsp+60h],rax
+fffff806`e77bc911 488bd8          mov     rbx,rax
+fffff806`e77bc914 4885c0          test    rax,rax
+fffff806`e77bc917 0f84f7010000    je      nt!PopSetPowerSettingValue+0x2b0 (fffff806`e77bcb14)  Branch
+
+nt!PopSetPowerSettingValue+0xb9:
+fffff806`e77bc91d 33ed            xor     ebp,ebp
+
+nt!PopSetPowerSettingValue+0xbb:
+fffff806`e77bc91f 48638424c0000000 movsxd  rax,dword ptr [rsp+0C0h]
+fffff806`e77bc927 458bc5          mov     r8d,r13d
+fffff806`e77bc92a 498bd7          mov     rdx,r15
+fffff806`e77bc92d 4889442458      mov     qword ptr [rsp+58h],rax
+fffff806`e77bc932 4c8b64c340      mov     r12,qword ptr [rbx+rax*8+40h]
+fffff806`e77bc937 498bcc          mov     rcx,r12
+fffff806`e77bc93a e8fd100000      call    nt!PopArePowerSettingsEqual (fffff806`e77bda3c)
+fffff806`e77bc93f 84c0            test    al,al
+fffff806`e77bc941 0f8493000000    je      nt!PopSetPowerSettingValue+0x176 (fffff806`e77bc9da)  Branch
+
+nt!PopSetPowerSettingValue+0xe3:
+fffff806`e77bc947 8bfd            mov     edi,ebp
+
+nt!PopSetPowerSettingValue+0xe5:
+fffff806`e77bc949 4c8ba424b0000000 mov     r12,qword ptr [rsp+0B0h]
+
+nt!PopSetPowerSettingValue+0xed:
+fffff806`e77bc951 488d0d08085500  lea     rcx,[nt!PopSettingLock (fffff806`e7d0d160)]
+fffff806`e77bc958 e8131b96ff      call    nt!ExReleaseFastMutex (fffff806`e711e470)
+fffff806`e77bc95d 40386c2441      cmp     byte ptr [rsp+41h],bpl
+fffff806`e77bc962 0f85b4020000    jne     nt!PopSetPowerSettingValue+0x3b8 (fffff806`e77bcc1c)  Branch
+
+nt!PopSetPowerSettingValue+0x104:
+fffff806`e77bc968 ba50536574      mov     edx,74655350h
+fffff806`e77bc96d 498bcf          mov     rcx,r15
+fffff806`e77bc970 e85b631b00      call    nt!ExFreePoolWithTag (fffff806`e7972cd0)
+fffff806`e77bc975 833d2ced540003  cmp     dword ptr [nt!PopOsInitPhase (fffff806`e7d0b6a8)],3
+fffff806`e77bc97c 7233            jb      nt!PopSetPowerSettingValue+0x14d (fffff806`e77bc9b1)  Branch
+
+nt!PopSetPowerSettingValue+0x11a:
+fffff806`e77bc97e 40386c2442      cmp     byte ptr [rsp+42h],bpl
+fffff806`e77bc983 0f85b1020000    jne     nt!PopSetPowerSettingValue+0x3d6 (fffff806`e77bcc3a)  Branch
+
+nt!PopSetPowerSettingValue+0x125:
+fffff806`e77bc989 4584f6          test    r14b,r14b
+fffff806`e77bc98c 7414            je      nt!PopSetPowerSettingValue+0x13e (fffff806`e77bc9a2)  Branch
+
+nt!PopSetPowerSettingValue+0x12a:
+fffff806`e77bc98e b901000000      mov     ecx,1
+fffff806`e77bc993 e8c0e8a0ff      call    nt!PopIncrementPowerSettingPendingUpdates (fffff806`e71cb258)
+fffff806`e77bc998 b920000000      mov     ecx,20h
+fffff806`e77bc99d e8b663a3ff      call    nt!PopSetNotificationWork (fffff806`e71f2d58)
+
+nt!PopSetPowerSettingValue+0x13e:
+fffff806`e77bc9a2 4084f6          test    sil,sil
+fffff806`e77bc9a5 740a            je      nt!PopSetPowerSettingValue+0x14d (fffff806`e77bc9b1)  Branch
+
+nt!PopSetPowerSettingValue+0x143:
+fffff806`e77bc9a7 b980000000      mov     ecx,80h
+fffff806`e77bc9ac e8a763a3ff      call    nt!PopSetNotificationWork (fffff806`e71f2d58)
+
+nt!PopSetPowerSettingValue+0x14d:
+fffff806`e77bc9b1 33c9            xor     ecx,ecx
+fffff806`e77bc9b3 e890eaa0ff      call    nt!PopDecrementPowerSettingPendingUpdates (fffff806`e71cb448)
+fffff806`e77bc9b8 8bc7            mov     eax,edi
+
+nt!PopSetPowerSettingValue+0x156:
+fffff806`e77bc9ba 488b9c24b8000000 mov     rbx,qword ptr [rsp+0B8h]
+fffff806`e77bc9c2 4883c470        add     rsp,70h
+fffff806`e77bc9c6 415f            pop     r15
+fffff806`e77bc9c8 415e            pop     r14
+fffff806`e77bc9ca 415d            pop     r13
+fffff806`e77bc9cc 415c            pop     r12
+fffff806`e77bc9ce 5f              pop     rdi
+fffff806`e77bc9cf 5e              pop     rsi
+fffff806`e77bc9d0 5d              pop     rbp
+fffff806`e77bc9d1 c3              ret
+
+nt!PopSetPowerSettingValue+0x16f:
+fffff806`e77bc9d3 b89a0000c0      mov     eax,0C000009Ah
+fffff806`e77bc9d8 ebe0            jmp     nt!PopSetPowerSettingValue+0x156 (fffff806`e77bc9ba)  Branch
+
+nt!PopSetPowerSettingValue+0x176:
+fffff806`e77bc9da 488b442458      mov     rax,qword ptr [rsp+58h]
+fffff806`e77bc9df 4c8d7340        lea     r14,[rbx+40h]
+fffff806`e77bc9e3 488b7c2450      mov     rdi,qword ptr [rsp+50h]
+fffff806`e77bc9e8 bb01000000      mov     ebx,1
+fffff806`e77bc9ed 448afd          mov     r15b,bpl
+
+nt!PopSetPowerSettingValue+0x18c:
+fffff806`e77bc9f0 483be8          cmp     rbp,rax
+fffff806`e77bc9f3 742c            je      nt!PopSetPowerSettingValue+0x1bd (fffff806`e77bca21)  Branch
+
+nt!PopSetPowerSettingValue+0x191:
+fffff806`e77bc9f5 4885f6          test    rsi,rsi
+fffff806`e77bc9f8 751c            jne     nt!PopSetPowerSettingValue+0x1b2 (fffff806`e77bca16)  Branch
+
+nt!PopSetPowerSettingValue+0x196:
+fffff806`e77bc9fa 498b0e          mov     rcx,qword ptr [r14]
+fffff806`e77bc9fd 458bc5          mov     r8d,r13d
+fffff806`e77bca00 488bd7          mov     rdx,rdi
+fffff806`e77bca03 e834100000      call    nt!PopArePowerSettingsEqual (fffff806`e77bda3c)
+fffff806`e77bca08 84c0            test    al,al
+fffff806`e77bca0a 488b442458      mov     rax,qword ptr [rsp+58h]
+fffff806`e77bca0f 7405            je      nt!PopSetPowerSettingValue+0x1b2 (fffff806`e77bca16)  Branch
+
+nt!PopSetPowerSettingValue+0x1ad:
+fffff806`e77bca11 498b36          mov     rsi,qword ptr [r14]
+fffff806`e77bca14 011e            add     dword ptr [rsi],ebx
+
+nt!PopSetPowerSettingValue+0x1b2:
+fffff806`e77bca16 4d3926          cmp     qword ptr [r14],r12
+fffff806`e77bca19 450fb6ff        movzx   r15d,r15b
+fffff806`e77bca1d 440f44fb        cmove   r15d,ebx
+
+nt!PopSetPowerSettingValue+0x1bd:
+fffff806`e77bca21 4803eb          add     rbp,rbx
+fffff806`e77bca24 4983c608        add     r14,8
+fffff806`e77bca28 4883fd03        cmp     rbp,3
+fffff806`e77bca2c 7cc2            jl      nt!PopSetPowerSettingValue+0x18c (fffff806`e77bc9f0)  Branch
+
+nt!PopSetPowerSettingValue+0x1ca:
+fffff806`e77bca2e 488b5c2460      mov     rbx,qword ptr [rsp+60h]
+fffff806`e77bca33 33ed            xor     ebp,ebp
+fffff806`e77bca35 8bfd            mov     edi,ebp
+fffff806`e77bca37 4885f6          test    rsi,rsi
+fffff806`e77bca3a 754b            jne     nt!PopSetPowerSettingValue+0x223 (fffff806`e77bca87)  Branch
+
+nt!PopSetPowerSettingValue+0x1d8:
+fffff806`e77bca3c 418d550c        lea     edx,[r13+0Ch]
+fffff806`e77bca40 b900010000      mov     ecx,100h
+fffff806`e77bca45 41b850536574    mov     r8d,74655350h
+fffff806`e77bca4b e8a0561b00      call    nt!ExAllocatePool2 (fffff806`e79720f0)
+fffff806`e77bca50 488bf0          mov     rsi,rax
+fffff806`e77bca53 4885c0          test    rax,rax
+fffff806`e77bca56 0f84a4000000    je      nt!PopSetPowerSettingValue+0x29c (fffff806`e77bcb00)  Branch
+
+nt!PopSetPowerSettingValue+0x1f8:
+fffff806`e77bca5c 8d4d01          lea     ecx,[rbp+1]
+fffff806`e77bca5f 44896804        mov     dword ptr [rax+4],r13d
+fffff806`e77bca63 8908            mov     dword ptr [rax],ecx
+
+nt!PopSetPowerSettingValue+0x201:
+fffff806`e77bca65 8bc1            mov     eax,ecx
+fffff806`e77bca67 f00fc105eda94a00 lock xadd dword ptr [nt!PopPowerSettingChangeStamp (fffff806`e7c6745c)],eax
+fffff806`e77bca6f 03c1            add     eax,ecx
+fffff806`e77bca71 74f2            je      nt!PopSetPowerSettingValue+0x201 (fffff806`e77bca65)  Branch
+
+nt!PopSetPowerSettingValue+0x20f:
+fffff806`e77bca73 488b542450      mov     rdx,qword ptr [rsp+50h]
+fffff806`e77bca78 488d4e0c        lea     rcx,[rsi+0Ch]
+fffff806`e77bca7c 4d8bc5          mov     r8,r13
+fffff806`e77bca7f 894608          mov     dword ptr [rsi+8],eax
+fffff806`e77bca82 e8b931d0ff      call    nt!memcpy (fffff806`e74bfc40)
+
+nt!PopSetPowerSettingValue+0x223:
+fffff806`e77bca87 4d85e4          test    r12,r12
+fffff806`e77bca8a 740d            je      nt!PopSetPowerSettingValue+0x235 (fffff806`e77bca99)  Branch
+
+nt!PopSetPowerSettingValue+0x228:
+fffff806`e77bca8c 4584ff          test    r15b,r15b
+fffff806`e77bca8f 7445            je      nt!PopSetPowerSettingValue+0x272 (fffff806`e77bcad6)  Branch
+
+nt!PopSetPowerSettingValue+0x22d:
+fffff806`e77bca91 498bcc          mov     rcx,r12
+fffff806`e77bca94 e8db130000      call    nt!PopUnreferencePowerSetting (fffff806`e77bde74)
+
+nt!PopSetPowerSettingValue+0x235:
+fffff806`e77bca99 488b442458      mov     rax,qword ptr [rsp+58h]
+fffff806`e77bca9e 448b742444      mov     r14d,dword ptr [rsp+44h]
+fffff806`e77bcaa3 488974c340      mov     qword ptr [rbx+rax*8+40h],rsi
+fffff806`e77bcaa8 8b8424c0000000  mov     eax,dword ptr [rsp+0C0h]
+fffff806`e77bcaaf 390597ef5400    cmp     dword ptr [nt!PopPowerSettingValues+0xec (fffff806`e7d0ba4c)],eax
+fffff806`e77bcab5 b801000000      mov     eax,1
+fffff806`e77bcaba 7435            je      nt!PopSetPowerSettingValue+0x28d (fffff806`e77bcaf1)  Branch
+
+nt!PopSetPowerSettingValue+0x258:
+fffff806`e77bcabc 396b38          cmp     dword ptr [rbx+38h],ebp
+fffff806`e77bcabf 7505            jne     nt!PopSetPowerSettingValue+0x262 (fffff806`e77bcac6)  Branch
+
+nt!PopSetPowerSettingValue+0x25d:
+fffff806`e77bcac1 396b3c          cmp     dword ptr [rbx+3Ch],ebp
+fffff806`e77bcac4 7449            je      nt!PopSetPowerSettingValue+0x2ab (fffff806`e77bcb0f)  Branch
+
+nt!PopSetPowerSettingValue+0x262:
+fffff806`e77bcac6 094334          or      dword ptr [rbx+34h],eax
+fffff806`e77bcac9 408af0          mov     sil,al
+
+nt!PopSetPowerSettingValue+0x268:
+fffff806`e77bcacc 4c8b7c2450      mov     r15,qword ptr [rsp+50h]
+fffff806`e77bcad1 e973feffff      jmp     nt!PopSetPowerSettingValue+0xe5 (fffff806`e77bc949)  Branch
+
+nt!PopSetPowerSettingValue+0x272:
+fffff806`e77bcad6 488d5310        lea     rdx,[rbx+10h]
+fffff806`e77bcada 488b02          mov     rax,qword ptr [rdx]
+
+nt!PopSetPowerSettingValue+0x279:
+fffff806`e77bcadd 483bc2          cmp     rax,rdx
+fffff806`e77bcae0 74af            je      nt!PopSetPowerSettingValue+0x22d (fffff806`e77bca91)  Branch
+
+nt!PopSetPowerSettingValue+0x27e:
+fffff806`e77bcae2 4c396048        cmp     qword ptr [rax+48h],r12
+fffff806`e77bcae6 7504            jne     nt!PopSetPowerSettingValue+0x288 (fffff806`e77bcaec)  Branch
+
+nt!PopSetPowerSettingValue+0x284:
+fffff806`e77bcae8 48896848        mov     qword ptr [rax+48h],rbp
+
+nt!PopSetPowerSettingValue+0x288:
+fffff806`e77bcaec 488b00          mov     rax,qword ptr [rax]
+fffff806`e77bcaef ebec            jmp     nt!PopSetPowerSettingValue+0x279 (fffff806`e77bcadd)  Branch
+
+nt!PopSetPowerSettingValue+0x28d:
+fffff806`e77bcaf1 40386c2440      cmp     byte ptr [rsp+40h],bpl
+fffff806`e77bcaf6 450fb6f6        movzx   r14d,r14b
+fffff806`e77bcafa 440f44f0        cmove   r14d,eax
+fffff806`e77bcafe ebbc            jmp     nt!PopSetPowerSettingValue+0x258 (fffff806`e77bcabc)  Branch
+
+nt!PopSetPowerSettingValue+0x29c:
+fffff806`e77bcb00 448b742444      mov     r14d,dword ptr [rsp+44h]
+fffff806`e77bcb05 bf9a0000c0      mov     edi,0C000009Ah
+fffff806`e77bcb0a 408af5          mov     sil,bpl
+fffff806`e77bcb0d ebbd            jmp     nt!PopSetPowerSettingValue+0x268 (fffff806`e77bcacc)  Branch
+
+nt!PopSetPowerSettingValue+0x2ab:
+fffff806`e77bcb0f 408af7          mov     sil,dil
+fffff806`e77bcb12 ebb8            jmp     nt!PopSetPowerSettingValue+0x268 (fffff806`e77bcacc)  Branch
+
+nt!PopSetPowerSettingValue+0x2b0:
+fffff806`e77bcb14 ba58000000      mov     edx,58h
+fffff806`e77bcb19 b900010000      mov     ecx,100h
+fffff806`e77bcb1e 41b850536574    mov     r8d,74655350h
+fffff806`e77bcb24 e8c7551b00      call    nt!ExAllocatePool2 (fffff806`e79720f0)
+fffff806`e77bcb29 4889442460      mov     qword ptr [rsp+60h],rax
+fffff806`e77bcb2e 488bd8          mov     rbx,rax
+fffff806`e77bcb31 4885c0          test    rax,rax
+fffff806`e77bcb34 0f84d6000000    je      nt!PopSetPowerSettingValue+0x3ac (fffff806`e77bcc10)  Branch
+
+nt!PopSetPowerSettingValue+0x2d6:
+fffff806`e77bcb3a 410f100424      movups  xmm0,xmmword ptr [r12]
+fffff806`e77bcb3f 498bcc          mov     rcx,r12
+fffff806`e77bcb42 f30f7f4020      movdqu  xmmword ptr [rax+20h],xmm0
+fffff806`e77bcb47 e8a8fcffff      call    nt!PopGetListHead (fffff806`e77bc7f4)
+fffff806`e77bcb4c 4c8d4310        lea     r8,[rbx+10h]
+fffff806`e77bcb50 4c8bd0          mov     r10,rax
+fffff806`e77bcb53 4d894008        mov     qword ptr [r8+8],r8
+fffff806`e77bcb57 4d8900          mov     qword ptr [r8],r8
+fffff806`e77bcb5a 4038742440      cmp     byte ptr [rsp+40h],sil
+fffff806`e77bcb5f 7566            jne     nt!PopSetPowerSettingValue+0x363 (fffff806`e77bcbc7)  Branch
+
+nt!PopSetPowerSettingValue+0x2fd:
+fffff806`e77bcb61 488b0df8f25400  mov     rcx,qword ptr [nt!PopRegisteredPowerSettingCallbacks (fffff806`e7d0be60)]
+fffff806`e77bcb68 4c8d1df1f25400  lea     r11,[nt!PopRegisteredPowerSettingCallbacks (fffff806`e7d0be60)]
+
+nt!PopSetPowerSettingValue+0x30b:
+fffff806`e77bcb6f 493bcb          cmp     rcx,r11
+fffff806`e77bcb72 7450            je      nt!PopSetPowerSettingValue+0x360 (fffff806`e77bcbc4)  Branch
+
+nt!PopSetPowerSettingValue+0x310:
+fffff806`e77bcb74 4c8d09          lea     r9,[rcx]
+fffff806`e77bcb77 488b09          mov     rcx,qword ptr [rcx]
+fffff806`e77bcb7a 498b5124        mov     rdx,qword ptr [r9+24h]
+fffff806`e77bcb7e 492b1424        sub     rdx,qword ptr [r12]
+fffff806`e77bcb82 7509            jne     nt!PopSetPowerSettingValue+0x329 (fffff806`e77bcb8d)  Branch
+
+nt!PopSetPowerSettingValue+0x320:
+fffff806`e77bcb84 498b512c        mov     rdx,qword ptr [r9+2Ch]
+fffff806`e77bcb88 492b542408      sub     rdx,qword ptr [r12+8]
+
+nt!PopSetPowerSettingValue+0x329:
+fffff806`e77bcb8d 4885d2          test    rdx,rdx
+fffff806`e77bcb90 75dd            jne     nt!PopSetPowerSettingValue+0x30b (fffff806`e77bcb6f)  Branch
+
+nt!PopSetPowerSettingValue+0x32e:
+fffff806`e77bcb92 488b4108        mov     rax,qword ptr [rcx+8]
+fffff806`e77bcb96 483908          cmp     qword ptr [rax],rcx
+fffff806`e77bcb99 7538            jne     nt!PopSetPowerSettingValue+0x36f (fffff806`e77bcbd3)  Branch
+
+nt!PopSetPowerSettingValue+0x337:
+fffff806`e77bcb9b 488b5008        mov     rdx,qword ptr [rax+8]
+fffff806`e77bcb9f 483902          cmp     qword ptr [rdx],rax
+fffff806`e77bcba2 752f            jne     nt!PopSetPowerSettingValue+0x36f (fffff806`e77bcbd3)  Branch
+
+nt!PopSetPowerSettingValue+0x340:
+fffff806`e77bcba4 48895108        mov     qword ptr [rcx+8],rdx
+fffff806`e77bcba8 48890a          mov     qword ptr [rdx],rcx
+fffff806`e77bcbab 498b5008        mov     rdx,qword ptr [r8+8]
+fffff806`e77bcbaf 4c3902          cmp     qword ptr [rdx],r8
+fffff806`e77bcbb2 751f            jne     nt!PopSetPowerSettingValue+0x36f (fffff806`e77bcbd3)  Branch
+
+nt!PopSetPowerSettingValue+0x350:
+fffff806`e77bcbb4 4c8900          mov     qword ptr [rax],r8
+fffff806`e77bcbb7 48895008        mov     qword ptr [rax+8],rdx
+fffff806`e77bcbbb 488902          mov     qword ptr [rdx],rax
+fffff806`e77bcbbe 49894008        mov     qword ptr [r8+8],rax
+fffff806`e77bcbc2 ebab            jmp     nt!PopSetPowerSettingValue+0x30b (fffff806`e77bcb6f)  Branch
+
+nt!PopSetPowerSettingValue+0x360:
+fffff806`e77bcbc4 83cdff          or      ebp,0FFFFFFFFh
+
+nt!PopSetPowerSettingValue+0x363:
+fffff806`e77bcbc7 896b30          mov     dword ptr [rbx+30h],ebp
+fffff806`e77bcbca 498b4208        mov     rax,qword ptr [r10+8]
+fffff806`e77bcbce 4c3910          cmp     qword ptr [rax],r10
+fffff806`e77bcbd1 7407            je      nt!PopSetPowerSettingValue+0x376 (fffff806`e77bcbda)  Branch
+
+nt!PopSetPowerSettingValue+0x36f:
+fffff806`e77bcbd3 b903000000      mov     ecx,3
+fffff806`e77bcbd8 cd29            int     29h
+
+nt!PopSetPowerSettingValue+0x376:
+fffff806`e77bcbda 48894308        mov     qword ptr [rbx+8],rax
+fffff806`e77bcbde 33ed            xor     ebp,ebp
+fffff806`e77bcbe0 4c8913          mov     qword ptr [rbx],r10
+fffff806`e77bcbe3 488918          mov     qword ptr [rax],rbx
+fffff806`e77bcbe6 b801000000      mov     eax,1
+fffff806`e77bcbeb 49895a08        mov     qword ptr [r10+8],rbx
+fffff806`e77bcbef 392d6ba84a00    cmp     dword ptr [nt!PopPopPowerSettingSetChangeNotification (fffff806`e7c67460)],ebp
+fffff806`e77bcbf5 88442441        mov     byte ptr [rsp+41h],al
+fffff806`e77bcbf9 750c            jne     nt!PopSetPowerSettingValue+0x3a3 (fffff806`e77bcc07)  Branch
+
+nt!PopSetPowerSettingValue+0x397:
+fffff806`e77bcbfb 392d63a84a00    cmp     dword ptr [nt!PopPopPowerSettingSetChangeNotification+0x4 (fffff806`e7c67464)],ebp
+fffff806`e77bcc01 0f8418fdffff    je      nt!PopSetPowerSettingValue+0xbb (fffff806`e77bc91f)  Branch
+
+nt!PopSetPowerSettingValue+0x3a3:
+fffff806`e77bcc07 88442442        mov     byte ptr [rsp+42h],al
+fffff806`e77bcc0b e90ffdffff      jmp     nt!PopSetPowerSettingValue+0xbb (fffff806`e77bc91f)  Branch
+
+nt!PopSetPowerSettingValue+0x3ac:
+fffff806`e77bcc10 bf9a0000c0      mov     edi,0C000009Ah
+fffff806`e77bcc15 33ed            xor     ebp,ebp
+fffff806`e77bcc17 e935fdffff      jmp     nt!PopSetPowerSettingValue+0xed (fffff806`e77bc951)  Branch
+
+nt!PopSetPowerSettingValue+0x3b8:
+fffff806`e77bcc1c 4533c9          xor     r9d,r9d
+fffff806`e77bcc1f 48896c2420      mov     qword ptr [rsp+20h],rbp
+fffff806`e77bcc24 4c8d05b5b80700  lea     r8,[nt!PopTracePowerSettingChange (fffff806`e78384e0)]
+fffff806`e77bcc2b 498bd4          mov     rdx,r12
+fffff806`e77bcc2e 33c9            xor     ecx,ecx
+fffff806`e77bcc30 e81be50a00      call    nt!PoRegisterPowerSettingCallback (fffff806`e786b150)
+fffff806`e77bcc35 e92efdffff      jmp     nt!PopSetPowerSettingValue+0x104 (fffff806`e77bc968)  Branch
+
+nt!PopSetPowerSettingValue+0x3d6:
+fffff806`e77bcc3a 896c2430        mov     dword ptr [rsp+30h],ebp
+fffff806`e77bcc3e 488d0d1ba84a00  lea     rcx,[nt!PopPopPowerSettingSetChangeNotification (fffff806`e7c67460)]
+fffff806`e77bcc45 896c2428        mov     dword ptr [rsp+28h],ebp
+fffff806`e77bcc49 4533c9          xor     r9d,r9d
+fffff806`e77bcc4c 4533c0          xor     r8d,r8d
+fffff806`e77bcc4f 48896c2420      mov     qword ptr [rsp+20h],rbp
+fffff806`e77bcc54 33d2            xor     edx,edx
+fffff806`e77bcc56 e8d5d3ceff      call    nt!ZwUpdateWnfStateData (fffff806`e74aa030)
+fffff806`e77bcc5b e929fdffff      jmp     nt!PopSetPowerSettingValue+0x125 (fffff806`e77bc989)  Branch
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

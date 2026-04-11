@@ -213,7 +213,7 @@
     "why": "The local Microsoft Desktop.admx file explicitly defines NoWindowMinimizingShortcuts under Software\\Policies\\Microsoft\\Windows\\Explorer with enabledValue 1 and disabledValue 0, and the paired ADML help text states that enabling the policy prevents windows from being minimized or restored when the active window is shaken. The app writes that documented enabled-policy state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T20:06:48.3919056+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Desktop.admx",
     "exact_quote_or_path": "<policy name=\"NoWindowMinimizingShortcuts\" class=\"User\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"NoWindowMinimizingShortcuts\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> <disabledValue><decimal value=\"0\" /></disabledValue>",

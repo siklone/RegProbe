@@ -1,0 +1,41 @@
+{
+  "artifact_id": "kvm-qga-service-state-diagnose-20260409a",
+  "captured_on": "2026-04-09",
+  "domain": "regprobe-win11-25h2-session",
+  "scope": "execution-required KVM qga reboot service-state diagnosis",
+  "findings": [
+    {
+      "step": "post_reboot_service_state",
+      "command": "sc query QEMU-GA",
+      "guest_result": "The first retained post-reboot admin-console query showed `STATE : 1 STOPPED` with `WIN32_EXIT_CODE : 1067 (0x42b)`."
+    },
+    {
+      "step": "manual_service_restart",
+      "command": "sc start QEMU-GA; sc query QEMU-GA",
+      "guest_result": "A manual restart moved the service through `START_PENDING` and then to `STATE : 4 RUNNING`."
+    },
+    {
+      "step": "host_state_after_manual_restart",
+      "command": "virsh qemu-agent-command ...; virsh qemu-monitor-command ... --pretty '{\"execute\":\"query-chardev\"}'; virsh qemu-monitor-command ... --hmp 'info qtree'; direct AF_UNIX connect",
+      "guest_result": "The guest-side service stayed running after the manual restart.",
+      "host_result": "`query-chardev` changed `charchannel1` to `frontend-open=true`, `info qtree` changed the qga port to `guest on, host off`, but `guest-ping` still returned `QEMU guest agent is not available due to an error` and direct host-side connect to the qga unix socket still returned `Connection refused`."
+    },
+    {
+      "step": "system_event_log",
+      "command": "wevtutil qe System /c:20 /rd:true /f:text | findstr /i QEMU",
+      "guest_result": "The retained System log query returned `The QEMU Guest Agent service terminated unexpectedly. It has done this 1 time(s).`"
+    }
+  ],
+  "screenshots": [
+    "regprobe-qga-service-stopped-after-reboot.png",
+    "regprobe-qga-service-running-after-manual-start.png",
+    "regprobe-qga-systemlog-after-crash.png"
+  ],
+  "host_artifacts": [
+    "guest-ping-after-manual-start.txt",
+    "query-chardev-after-manual-start.json",
+    "info-qtree-after-manual-start.txt",
+    "socket-connect-after-manual-start.txt"
+  ],
+  "conclusion": "The KVM qga blocker is now explicitly two-stage: a fresh reboot leaves the Windows `QEMU-GA` service stopped with exit code 1067 and a matching unexpected-termination System log entry, while a manual service restart only recovers the guest side to `frontend-open=true` / `guest on, host off` without restoring a usable host-side attach path."
+}

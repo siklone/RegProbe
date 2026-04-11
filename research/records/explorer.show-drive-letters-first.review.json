@@ -64,7 +64,24 @@
       }
     ]
   },
-  "windows_defaults": [],
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean user baseline",
+      "applies_to": "Current user profile on the Win25H2Clean validation VM before the reversible Procmon probe",
+      "states": [
+        {
+          "target_id": "explorer-showdrivelettersfirst-flag",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "The validation proof notes that the baseline value was absent and was restored to the absent state after the runtime probe."
+        }
+      ],
+      "notes": "This record keeps the observed missing-value baseline alongside the documented 0/1 semantics that Explorer consumes at runtime.",
+      "evidence_ids": [
+        "procmon-showdrivelettersfirst-runtime"
+      ]
+    }
+  ],
   "recommended_profiles": [
     {
       "profile_id": "show-drive-letters-first",

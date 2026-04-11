@@ -57,10 +57,15 @@ if (Test-Path $docsSource) {
 }
 
 $evidenceClassesSource = Join-Path $repoRoot "research\evidence-classes.json"
+$promotionGatesSource = Join-Path $repoRoot "research\promotion-gates.json"
 $evidenceClassesTargetDir = Join-Path $docsTarget "research"
 if (Test-Path $evidenceClassesSource) {
     New-Item -ItemType Directory -Path $evidenceClassesTargetDir -Force | Out-Null
     Copy-Item -Force $evidenceClassesSource (Join-Path $evidenceClassesTargetDir "evidence-classes.json")
+}
+if (Test-Path $promotionGatesSource) {
+    New-Item -ItemType Directory -Path $evidenceClassesTargetDir -Force | Out-Null
+    Copy-Item -Force $promotionGatesSource (Join-Path $evidenceClassesTargetDir "promotion-gates.json")
 }
 
 # Ensure ElevatedHost is present in publish output

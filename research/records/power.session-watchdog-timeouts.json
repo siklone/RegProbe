@@ -11,6 +11,14 @@
     "key_found_on_page": true,
     "notes": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, and a newer tools-hardened lightweight ETW follow-up. All of them confirm the candidate surface is real, but the current VMware environment still does not produce a decisive exact live read of WatchdogResumeTimeout or WatchdogSleepTimeout."
   },
+  "etl_corroboration": {
+    "source": "kvm-mega-trace-20260410",
+    "signal": "SystemPowerPolicy write detected via ETL registry touch",
+    "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\Power",
+    "value_name": "SystemPowerPolicy",
+    "operation": "RegSetValue",
+    "confidence": "corroborating"
+  },
   "setting": {
     "name": "Session Manager Watchdog Timeouts",
     "category": "Power",

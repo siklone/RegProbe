@@ -214,7 +214,7 @@
     "why": "The local Microsoft StartMenu.admx file explicitly defines HideRecommendedSection under Software\\Policies\\Microsoft\\Windows\\Explorer with class=\"Both\", which means the same policy surface is valid for user scope as well as device scope. The official Start Policy CSP provides the 0/1 semantics, and the app writes that documented current-user hide value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T20:13:30.1052626+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/StartMenu.admx",
     "exact_quote_or_path": "<policy name=\"HideRecommendedSection\" class=\"Both\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Explorer\" valueName=\"HideRecommendedSection\">",

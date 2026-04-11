@@ -1,0 +1,11 @@
+{
+  "bundle_id": "kvm-qga-guest-state-contrast-20260409e",
+  "domain": "regprobe-win11-25h2-session",
+  "focus": "Check whether the persistent host-side qga socket refusal changes when the Windows QEMU-GA service flips the live qga port between guest-on and guest-off states.",
+  "findings": [
+    "Before the stop request, `guest-ping` returned `QEMU guest agent is not available due to an error`, `info qtree` showed the live qga port at `guest on, host off`, and direct AF_UNIX connect to the live qga socket still returned `ConnectionRefusedError(111, 'Connection refused')`.",
+    "After stopping `QEMU-GA`, `guest-ping` fell back to `QEMU guest agent is not connected` and `info qtree` changed the live qga port to `guest off, host off`, but the same direct AF_UNIX connect still returned `ConnectionRefusedError(111, 'Connection refused')`.",
+    "After starting `QEMU-GA` again, `guest-ping` returned to `QEMU guest agent is not available due to an error` and `info qtree` returned to `guest on, host off`, while direct AF_UNIX connect still returned `ConnectionRefusedError(111, 'Connection refused')`.",
+    "The persistent host-side refusal therefore survives both guest-on and guest-off states and is no longer explained by the guest side merely having the port open."
+  ]
+}

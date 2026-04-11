@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -37,6 +38,7 @@ from wave2_research_lib import (  # noqa: E402
     interaction_groups_for_tweak,
     reproducibility_manifest,
 )
+from research_v36_lib import canonical_bundle_projection  # noqa: E402
 
 RESEARCH_ROOT = REPO_ROOT / "research"
 RECORDS_DIR = RESEARCH_ROOT / "records"
@@ -72,6 +74,12 @@ def load_text_if_exists(path: Path) -> str | None:
     if not path.exists():
         return None
     return path.read_text(encoding="utf-8-sig")
+
+
+def normalize_repo_ref_location(repo_ref: str | None, title: str) -> str | None:
+    if not repo_ref:
+        return None
+    return normalize_reference_text(repo_ref, title=title)
 
 
 def load_record(tweak_id: str) -> dict[str, Any]:
@@ -261,6 +269,221 @@ def normalized_location(item: dict[str, Any] | None, title: str) -> str | None:
     if not location:
         return None
     return normalize_reference_text(location, title=title)
+
+
+def parse_registry_sideeffect_report_text(text: str | None) -> dict[str, Any]:
+    if not text:
+        return {
+            "format": None,
+            "counts": {},
+            "sideeffect_count": None,
+        }
+
+    counts: dict[str, int] = {}
+    format_name: str | None = None
+
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+
+        format_match = re.match(r"^Detected format:\s*(?P<format>.+)$", line)
+        if format_match:
+            value = format_match.group("format").strip()
+            if value.startswith("semantic-registry"):
+                format_name = "semantic-registry"
+            elif value.startswith("generic-text"):
+                format_name = "generic-text"
+            else:
+                format_name = value
+            continue
+
+        count_match = re.match(r"^-\s*(?P<name>[a-z_]+):\s*(?P<value>\d+)$", line)
+        if count_match:
+            counts[count_match.group("name")] = int(count_match.group("value"))
+
+    sideeffect_count: int | None = None
+    semantic_value_total = (
+        counts.get("added_values", 0)
+        + counts.get("removed_values", 0)
+        + counts.get("modified_values", 0)
+    )
+    if semantic_value_total > 0 or any(key in counts for key in ("added_values", "removed_values", "modified_values")):
+        sideeffect_count = semantic_value_total
+    elif any(key in counts for key in ("added_keys", "removed_keys")):
+        sideeffect_count = counts.get("added_keys", 0) + counts.get("removed_keys", 0)
+    elif any(key in counts for key in ("added_lines", "removed_lines")):
+        sideeffect_count = counts.get("added_lines", 0) + counts.get("removed_lines", 0)
+
+    return {
+        "format": format_name,
+        "counts": counts,
+        "sideeffect_count": sideeffect_count,
+    }
+
+
+def parse_registry_sideeffect_state_payload(payload: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not isinstance(payload, dict):
+        return None
+
+    baseline_values = payload.get("baseline_values")
+    candidate_values = payload.get("candidate_values")
+    if not isinstance(baseline_values, dict) or not isinstance(candidate_values, dict):
+        return None
+
+    value_names = set(baseline_values) | set(candidate_values)
+    if not value_names:
+        return None
+
+    counts = {
+        "added_keys": 0,
+        "removed_keys": 0,
+        "added_values": 0,
+        "removed_values": 0,
+        "modified_values": 0,
+        "unchanged_values": 0,
+    }
+    structured_diff = {
+        "key_added": [],
+        "key_deleted": [],
+        "value_added": [],
+        "value_deleted": [],
+        "value_changed": [],
+    }
+    for value_name in value_names:
+        before_value = baseline_values.get(value_name)
+        after_value = candidate_values.get(value_name)
+        if before_value is None and after_value is not None:
+            counts["added_values"] += 1
+            structured_diff["value_added"].append({"key_path": "__root__", "value_name": value_name, "after_value": after_value})
+        elif before_value is not None and after_value is None:
+            counts["removed_values"] += 1
+            structured_diff["value_deleted"].append({"key_path": "__root__", "value_name": value_name, "before_value": before_value})
+        elif before_value != after_value:
+            counts["modified_values"] += 1
+            structured_diff["value_changed"].append(
+                {
+                    "key_path": "__root__",
+                    "value_name": value_name,
+                    "before_value": before_value,
+                    "after_value": after_value,
+                }
+            )
+        else:
+            counts["unchanged_values"] += 1
+
+    return {
+        "format": "state-semantic-registry",
+        "counts": counts,
+        "sideeffect_count": counts["added_values"] + counts["removed_values"] + counts["modified_values"],
+        "structured_diff": structured_diff,
+    }
+
+
+def extract_registry_sideeffects(behavior_lane: dict[str, Any] | None, behavior_result: dict[str, Any] | None, behavior_ref: str | None) -> dict[str, Any]:
+    result = {
+        "executed": False,
+        "sideeffect_count": None,
+        "diff_file": None,
+        "format": None,
+        "summary_counts": {},
+        "structured_diff": None,
+    }
+
+    candidate_dicts: list[dict[str, Any]] = []
+    if isinstance(behavior_result, dict):
+        registry_sideeffects = behavior_result.get("registry_sideeffects")
+        if isinstance(registry_sideeffects, dict):
+            candidate_dicts.append(registry_sideeffects)
+        candidate_dicts.append(behavior_result)
+    if isinstance(behavior_lane, dict):
+        candidate_dicts.append(behavior_lane)
+
+    for candidate in candidate_dicts:
+        sideeffect_count = candidate.get("sideeffect_count")
+        if isinstance(sideeffect_count, int):
+            result["executed"] = True
+            result["sideeffect_count"] = sideeffect_count
+            diff_ref = repo_relative_text(candidate.get("diff_file") or candidate.get("sideeffect_diff_file"))
+            result["diff_file"] = normalize_repo_ref_location(diff_ref, title="Registry sideeffect diff")
+            if isinstance(candidate.get("format"), str):
+                result["format"] = str(candidate["format"])
+            counts = candidate.get("summary_counts")
+            if isinstance(counts, dict):
+                result["summary_counts"] = counts
+            if isinstance(candidate.get("structured_diff"), dict):
+                result["structured_diff"] = candidate.get("structured_diff")
+            return result
+
+    state_refs: list[str] = []
+    for candidate in candidate_dicts:
+        for key in ("state_file", "state_path"):
+            repo_ref = repo_relative_text(candidate.get(key))
+            if repo_ref and repo_ref not in state_refs:
+                state_refs.append(repo_ref)
+        summary_ref = repo_relative_text(candidate.get("summary_file"))
+        if summary_ref and summary_ref.endswith("/summary.json"):
+            state_ref = (Path(summary_ref).parent / "state.json").as_posix()
+            if state_ref not in state_refs:
+                state_refs.append(state_ref)
+    behavior_repo_ref = repo_relative_text(behavior_ref)
+    if behavior_repo_ref:
+        if behavior_repo_ref.endswith("/summary.json"):
+            state_ref = (Path(behavior_repo_ref).parent / "state.json").as_posix()
+            if state_ref not in state_refs:
+                state_refs.append(state_ref)
+        elif behavior_repo_ref.endswith("/state.json") and behavior_repo_ref not in state_refs:
+            state_refs.append(behavior_repo_ref)
+
+    for state_ref in state_refs:
+        state_payload = load_json_if_exists(REPO_ROOT / state_ref)
+        parsed_state = parse_registry_sideeffect_state_payload(state_payload)
+        if parsed_state is None:
+            continue
+        result["executed"] = True
+        result["sideeffect_count"] = parsed_state["sideeffect_count"]
+        result["diff_file"] = normalize_repo_ref_location(state_ref, title="Registry sideeffect state")
+        result["format"] = parsed_state["format"]
+        result["summary_counts"] = parsed_state["counts"]
+        result["structured_diff"] = parsed_state.get("structured_diff")
+        return result
+
+    candidate_refs: list[str] = []
+    for candidate in candidate_dicts:
+        for key in ("diff_file", "sideeffect_diff_file", "result_ref"):
+            repo_ref = repo_relative_text(candidate.get(key))
+            if repo_ref and repo_ref not in candidate_refs:
+                candidate_refs.append(repo_ref)
+    if behavior_repo_ref and Path(behavior_repo_ref).suffix.lower() in {".txt", ".md", ".log"} and behavior_repo_ref not in candidate_refs:
+        candidate_refs.append(behavior_repo_ref)
+
+    for repo_ref in candidate_refs:
+        report_text = load_text_if_exists(REPO_ROOT / repo_ref)
+        parsed = parse_registry_sideeffect_report_text(report_text)
+        if parsed["sideeffect_count"] is None and parsed["format"] is None:
+            continue
+        result["executed"] = True
+        result["sideeffect_count"] = parsed["sideeffect_count"]
+        result["diff_file"] = normalize_repo_ref_location(repo_ref, title="Registry sideeffect diff")
+        result["format"] = parsed["format"]
+        result["summary_counts"] = parsed["counts"]
+        return result
+
+    for candidate in candidate_dicts:
+        for key in ("summary", "diff_summary", "registry_sideeffects_report"):
+            inline_text = candidate.get(key)
+            if not isinstance(inline_text, str) or "Registry sideeffect diff" not in inline_text:
+                continue
+            parsed = parse_registry_sideeffect_report_text(inline_text)
+            if parsed["sideeffect_count"] is None and parsed["format"] is None:
+                continue
+            result["executed"] = True
+            result["sideeffect_count"] = parsed["sideeffect_count"]
+            result["format"] = parsed["format"]
+            result["summary_counts"] = parsed["counts"]
+            return result
+
+    return result
 
 
 def first_target(record: dict[str, Any]) -> dict[str, Any]:
@@ -787,6 +1010,7 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
     behavior_result = load_lane_result(behavior_lane)
     behavior_ref = lane_repo_ref(behavior_lane)
     behavior_lane_status = lane_capture_status(behavior_lane)
+    sideeffects = extract_registry_sideeffects(behavior_lane, behavior_result, behavior_ref)
     behavior_summary = bench_item.get("summary") if bench_item else None
     if behavior_summary is None and behavior_lane and behavior_lane.get("exit_code") not in (None, 0):
         behavior_summary = f"Runner failed with exit code {behavior_lane.get('exit_code')}. See {behavior_lane.get('log_file') or behavior_lane.get('output_file')}."
@@ -831,9 +1055,12 @@ def build_behavior(record: dict[str, Any], audit: dict[str, Any]) -> dict[str, A
                 "significance_verdict": significance_verdict,
             },
             "registry_sideeffects": {
-                "executed": False,
-                "sideeffect_count": None,
-                "diff_file": None,
+                "executed": sideeffects["executed"],
+                "sideeffect_count": sideeffects["sideeffect_count"],
+                "diff_file": sideeffects["diff_file"],
+                "format": sideeffects["format"],
+                "summary_counts": sideeffects["summary_counts"],
+                "structured_diff": sideeffects.get("structured_diff"),
             },
         },
         "source_evidence_ids": [item.get("evidence_id") for item in behavior_items if item.get("evidence_id")],
@@ -995,6 +1222,11 @@ def build_classification(record: dict[str, Any], audit: dict[str, Any]) -> dict[
                 "verdict": benchmark.get("significance_verdict", "insufficient"),
                 "statistics": benchmark.get("statistics"),
             },
+            "gate_result": canonical_bundle_projection(record, audit, {
+                "behavior": behavior_block.get("behavior") or {},
+                "negative_evidence": build_negative_evidence_profile(record, audit, {}),
+                "reproducibility": reproducibility_manifest(),
+            }).get("gate_result"),
         },
     }
 
@@ -1132,6 +1364,7 @@ def build_full_evidence(record: dict[str, Any], audit: dict[str, Any], phase: st
     }
     if re_audit:
         payload["re_audit"] = re_audit["re_audit"]
+    payload.update(canonical_bundle_projection(record, audit, payload))
     return payload
 
 

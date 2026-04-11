@@ -222,7 +222,7 @@
     "why": "The local Microsoft AppxPackageManager.admx file explicitly defines AllowAutomaticAppArchiving under Software\\Policies\\Microsoft\\Windows\\Appx with valueName AllowAutomaticAppArchiving, and the paired ADML help text states that disabled means the system will not archive any apps while not configured follows the default behavior. The app writes that documented disabled-state value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T19:51:42.0176899+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx",
     "exact_quote_or_path": "<policy name=\"AllowAutomaticAppArchiving\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\Appx\" valueName=\"AllowAutomaticAppArchiving\">",

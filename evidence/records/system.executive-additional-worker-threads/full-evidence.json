@@ -89,14 +89,32 @@
   },
   "behavior": {
     "typeperf": {
-      "executed": false,
-      "counter": null,
-      "before_average": null,
-      "after_average": null,
-      "delta_percent": null,
-      "sample_count": null,
-      "before_file": null,
-      "after_file": null
+      "executed": true,
+      "counter": "vm-relative-system-latency-ms",
+      "before_average": 6.19,
+      "after_average": 3.749,
+      "before_median_ms": 6.19,
+      "after_median_ms": 3.749,
+      "delta_percent": -39.435,
+      "delta_ms": -2.441,
+      "sample_count": 3,
+      "aggregation": "median",
+      "measurement_profile": "system",
+      "measurement_components": [
+        "service-query-ms",
+        "registry-query-ms"
+      ],
+      "bench_tier": "vm",
+      "bench_profile": "performance",
+      "bench_environment": "windows-11-25h2-vm",
+      "bench_measurement_reliability": "relative",
+      "bench_bare_metal_pending": true,
+      "rollback_verified": true,
+      "summary": "VM perf bench (relative) for system.executive-additional-worker-threads measured a median of 6.19 ms before apply and 3.749 ms after apply (delta -2.441 ms / -39.435%). Rollback verified; bare-metal perf validation is still pending.",
+      "before_file": "evidence/records/system.executive-additional-worker-threads/bench-results/system.executive-additional-worker-threads-vm-performance.json",
+      "after_file": "evidence/records/system.executive-additional-worker-threads/bench-results/system.executive-additional-worker-threads-vm-performance.json",
+      "output_file": "evidence/records/system.executive-additional-worker-threads/bench-results/system.executive-additional-worker-threads-vm-performance.json",
+      "executed_at": "2026-04-10T21:51:00-07:00"
     },
     "wpr": {
       "executed": true,
@@ -106,9 +124,16 @@
       "trace_file": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md"
     },
     "benchmark": {
-      "executed": false,
-      "summary": null,
-      "output_file": null
+      "executed": true,
+      "summary": "VM functional safety bench passed: AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads were changed from the observed baseline 0/0 to DWORD 1/1, critical services and recent event logs stayed healthy, and rollback restored both baseline values to 0.",
+      "output_file": "evidence/records/system.executive-additional-worker-threads/bench-results/system.executive-additional-worker-threads-vm-functional.json",
+      "bench_tier": "vm",
+      "bench_profile": "functional",
+      "safety_passed": true,
+      "safety_status": "passed",
+      "bench_environment": "windows-11-25h2-vm",
+      "bench_measurement_reliability": "functional",
+      "executed_at": "2026-04-10T19:10:23.0850589-07:00"
     },
     "registry_sideeffects": {
       "executed": false,
@@ -153,6 +178,10 @@
     {
       "step": "last_reviewed",
       "timestamp": "2026-03-30T09:38:14Z"
+    },
+    {
+      "step": "vm_perf_bench",
+      "timestamp": "2026-04-10T21:51:00-07:00"
     }
   ],
   "artifact_refs": [],
@@ -179,5 +208,573 @@
     "dead_flag_four_conditions_met": true,
     "notes": "Bootstrapped from the current research record and evidence audit.",
     "new_pipeline_version": "v3.1"
+  },
+  "schema_version": "1.0",
+  "candidate_id": "system.executive-additional-worker-threads",
+  "feature_area": "Session Manager Executive Worker Threads",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+  "value_name": "AdditionalCriticalWorkerThreads / AdditionalDelayedWorkerThreads",
+  "value_type": "REG_DWORD pair",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current Win25H2Clean baseline with the Session Manager Executive key populated",
+    "state_kind": "value",
+    "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+    "rationale": "Leave the currently observed Executive worker-thread pair unchanged until a stronger semantic map exists.",
+    "evidence_ids": [
+      "vm-session-manager-executive-baseline-20260328"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "observed-baseline",
+    "label": "Observed baseline",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+    "rationale": "Keep the pair at the current observed baseline while evidence gathering continues.",
+    "evidence_ids": [
+      "vm-session-manager-executive-baseline-20260328"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current Win25H2Clean baseline with the Session Manager Executive key populated",
+    "state_kind": "value",
+    "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+    "rationale": "Leave the currently observed Executive worker-thread pair unchanged until a stronger semantic map exists.",
+    "evidence_ids": [
+      "vm-session-manager-executive-baseline-20260328"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "promotion-eligible",
+  "promotion_blockers": [],
+  "record_promotion_allowed": true,
+  "tweak_ingest_allowed": false,
+  "tweak_origin": "research-derived",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "system.executive-additional-worker-threads",
+    "record_id": "system.executive-additional-worker-threads",
+    "tweak_id": "system.executive-additional-worker-threads",
+    "tweak_origin": "research-derived",
+    "promotion_state": "promotion-eligible",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": false,
+    "apply_allowed": false,
+    "app_mapping_status": "not-mapped",
+    "next_missing_layer": "none",
+    "debug_override_allowed": true,
+    "last_evaluated_at": "2026-04-09T03:33:00.231275Z",
+    "score_breakdown": {
+      "static_evidence_strength": 4,
+      "runtime_evidence_strength": 3,
+      "rollback_clarity": 5,
+      "blast_radius": 2,
+      "tweak_suitability": 2,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 5,
+      "overall_score": 3.67,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": false,
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
+    },
+    "evidence_status": {
+      "evidence_count": 10,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": true,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": false
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Observed Win25H2Clean baseline",
+        "label": "Observed Win25H2Clean baseline",
+        "applies_to": "Current Win25H2Clean baseline with the Session Manager Executive key populated",
+        "state_kind": "value",
+        "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+        "rationale": "Leave the currently observed Executive worker-thread pair unchanged until a stronger semantic map exists.",
+        "evidence_ids": [
+          "vm-session-manager-executive-baseline-20260328"
+        ],
+        "rollback_strategy": "restore_default"
+      },
+      "state_changed": null,
+      "apply_diff": null,
+      "restore_diff": null
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "feature_area_group": "default",
+      "profiles": [
+        "functional_throughput"
+      ],
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "etw",
+        "procmon",
+        "ghidra",
+        "wpr"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "behavior_wpr"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-30T09:38:14Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-30T09:38:14Z"
+      }
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-30T09:38:14Z",
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-30T09:38:14Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-30T09:38:14Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {
+    "attempted_tools": [
+      "etw",
+      "procmon",
+      "ghidra",
+      "wpr"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
+      "kind": "decompilation",
+      "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",
+      "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "summary": "The current-build ntoskrnl.exe pass found exact string hits for AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads and preserved forced-boundary fallback artifacts at 140c62b88 and 140c62bb8.",
+      "strength": "high",
+      "clue_type": "api_semantics"
+    },
+    {
+      "evidence_id": "kernel-power-existing-static-probe-20260328",
+      "kind": "inference",
+      "title": "Kernel power static probe summary for existing Session Manager candidates",
+      "location": "registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json and research/notes/kernel-power-existing-static-triage-20260328.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "version-scope"
+      ],
+      "summary": "The first static probe confirmed exact Unicode hits in ntoskrnl.exe for the Executive worker-thread pair and no exact hits in smss.exe.",
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "kernel-power-existing-next-gate-20260328",
+      "kind": "inference",
+      "title": "Kernel power next-gate intake summary",
+      "location": "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json and research/notes/kernel-power-next-gate-ghidra-review-20260328.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "risk",
+        "version-scope"
+      ],
+      "summary": "The 2026-03-28 intake review kept the Executive worker-thread pair active as the second next-gate lane after the stronger watchdog pair.",
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "reactos-executive-worker-threads-hypothesis-20260328",
+      "kind": "open-source-reference",
+      "title": "ReactOS semantic hypothesis for the Executive worker-thread pair",
+      "location": "evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md and evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "behavior",
+        "version-scope"
+      ],
+      "summary": "Official ReactOS source contains both Executive worker-thread value names, matching internal worker-thread variables, and code that clamps and adds the additional counts to delayed and critical worker-thread totals. The same source also places UuidSequenceNumber under the Rpc registry path, which helps separate that adjacent lane from the Executive pair.",
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "This proof anchors the Executive worker-thread pair to a real clean-baseline export, a bounded boot-time runtime extract, current-build ntoskrnl string and Ghidra fallback evidence, and a tools-hardened lightweight ETW runtime lane that produced exact live reads for both values. It is strong enough for Class A while still leaving app actionability off.",
+      "strength": "high",
+      "clue_type": "api_semantics"
+    }
+  ],
+  "reproducibility": {
+    "vm_name": "windows-11-25h2-vm",
+    "domain": "regprobe-win11-25h2-session",
+    "baseline_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+    "bench_script": "registry-research-framework/scripts/vm/run-safety-bench-executive-worker-threads.guest.ps1",
+    "bench_wrapper": "registry-research-framework/scripts/vm/run-safety-bench-executive-worker-threads.guest.ps1",
+    "perf_bench_script": "registry-research-framework/scripts/vm/run-perf-bench-guest.ps1",
+    "perf_bench_wrapper": "registry-research-framework/scripts/vm/run-perf-bench-promoted-batch.guest.ps1"
+  },
+  "bench_results": {
+    "candidate_id": "system.executive-additional-worker-threads",
+    "bench_tier": "vm",
+    "bench_profile": "functional",
+    "apply_value": {
+      "AdditionalCriticalWorkerThreads": 1,
+      "AdditionalDelayedWorkerThreads": 1
+    },
+    "apply_type": "REG_DWORD pair",
+    "rollback_method": "restore-baseline",
+    "safety_passed": true,
+    "safety_status": "passed",
+    "boot_success": true,
+    "shell_usable": true,
+    "services_healthy": true,
+    "event_log_clean": true,
+    "rollback_executed": true,
+    "rollback_verified": true,
+    "rollback_failure_reason": null,
+    "bench_environment": "windows-11-25h2-vm",
+    "bench_measurement_reliability": "functional",
+    "output_file": "evidence/records/system.executive-additional-worker-threads/bench-results/system.executive-additional-worker-threads-vm-functional.json",
+    "executed_at": "2026-04-10T19:10:23.0850589-07:00",
+    "apply_verified": true,
+    "state_changed": true
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 4,
+    "runtime_evidence_strength": 3,
+    "rollback_clarity": 5,
+    "blast_radius": 2,
+    "tweak_suitability": 2,
+    "privilege_complexity": 3,
+    "build_specificity": 5,
+    "sibling_expansion_value": 4,
+    "bench_priority": 5,
+    "overall_score": 3.67,
+    "next_missing_layer": "none"
+  },
+  "documentation_status": {
+    "record_status": "validated",
+    "has_validation_proof": true,
+    "has_official_evidence": false,
+    "confidence": "high",
+    "documentation_quality_pass": true,
+    "documentation_issues": [],
+    "documented_behavior": true,
+    "has_value_context": true,
+    "has_default_context": true,
+    "has_recommended_context": true,
+    "has_rollback_context": true
+  },
+  "evidence_status": {
+    "evidence_count": 10,
+    "next_missing_layer": "none",
+    "has_procmon_evidence": true,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": false
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current Win25H2Clean baseline with the Session Manager Executive key populated",
+      "state_kind": "value",
+      "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+      "rationale": "Leave the currently observed Executive worker-thread pair unchanged until a stronger semantic map exists.",
+      "evidence_ids": [
+        "vm-session-manager-executive-baseline-20260328"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
+  },
+  "verification_context": {
+    "record_id": "system.executive-additional-worker-threads",
+    "tweak_id": "system.executive-additional-worker-threads",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": true,
+    "rollback_verified": true,
+    "rollback_verification_method": "vm-safety-bench-restore-baseline",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current Win25H2Clean baseline with the Session Manager Executive key populated",
+      "state_kind": "value",
+      "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+      "rationale": "Leave the currently observed Executive worker-thread pair unchanged until a stronger semantic map exists.",
+      "evidence_ids": [
+        "vm-session-manager-executive-baseline-20260328"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": true,
+    "apply_diff": {
+      "before": {
+        "AdditionalCriticalWorkerThreads": {
+          "exists": true,
+          "value": 0,
+          "value_kind": "DWord"
+        },
+        "AdditionalDelayedWorkerThreads": {
+          "exists": true,
+          "value": 0,
+          "value_kind": "DWord"
+        }
+      },
+      "after": {
+        "AdditionalCriticalWorkerThreads": {
+          "exists": true,
+          "value": 1,
+          "value_kind": "DWord"
+        },
+        "AdditionalDelayedWorkerThreads": {
+          "exists": true,
+          "value": 1,
+          "value_kind": "DWord"
+        }
+      }
+    },
+    "restore_diff": {
+      "before": {
+        "AdditionalCriticalWorkerThreads": {
+          "exists": true,
+          "value": 1,
+          "value_kind": "DWord"
+        },
+        "AdditionalDelayedWorkerThreads": {
+          "exists": true,
+          "value": 1,
+          "value_kind": "DWord"
+        }
+      },
+      "after": {
+        "AdditionalCriticalWorkerThreads": {
+          "exists": true,
+          "value": 0,
+          "value_kind": "DWord"
+        },
+        "AdditionalDelayedWorkerThreads": {
+          "exists": true,
+          "value": 0,
+          "value_kind": "DWord"
+        }
+      }
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-30T09:38:14Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-30T09:38:14Z"
+    }
+  },
+  "url_validation": {
+    "checked_url_count": 0,
+    "reachable_url_count": 0,
+    "dead_link_count": 0,
+    "dead_links": [],
+    "checked_urls": [],
+    "status": "not-run"
+  },
+  "perf_bench_results": {
+    "candidate_id": "system.executive-additional-worker-threads",
+    "bench_tier": "vm",
+    "bench_profile": "performance",
+    "bench_measurement_reliability": "relative",
+    "measurement_profile": "system",
+    "measurement_components": [
+      "service-query-ms",
+      "registry-query-ms"
+    ],
+    "sample_count": 3,
+    "apply_value": {
+      "AdditionalCriticalWorkerThreads": 1,
+      "AdditionalDelayedWorkerThreads": 1
+    },
+    "apply_type": "REG_DWORD pair",
+    "rollback_method": "restore-baseline",
+    "bench_environment": "windows-11-25h2-vm",
+    "bench_bare_metal_pending": true,
+    "baseline_median_ms": 6.19,
+    "applied_median_ms": 3.749,
+    "delta_ms": -2.441,
+    "delta_pct": -39.435,
+    "rollback_verified": true,
+    "executed_at": "2026-04-10T21:51:00-07:00",
+    "output_file": "evidence/records/system.executive-additional-worker-threads/bench-results/system.executive-additional-worker-threads-vm-performance.json",
+    "rollback_failure_reason": null
   }
 }

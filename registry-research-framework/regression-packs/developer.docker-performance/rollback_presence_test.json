@@ -1,0 +1,26 @@
+{
+  "pass": true,
+  "rollback_value_present": true,
+  "rollback_blocker_present": false,
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Docker default",
+      "label": "Docker default",
+      "applies_to": "Windows developer machines where Docker Desktop's WSL backend setting is not explicitly configured",
+      "state_kind": "missing",
+      "value": null,
+      "rationale": "Leave Docker to its default backend behavior when the settings file does not explicitly enable the WSL engine.",
+      "evidence_ids": [
+        "docker-settings-file-doc",
+        "docker-wsl-backend-doc"
+      ],
+      "rollback_strategy": "restore_default"
+    }
+  }
+}

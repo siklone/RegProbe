@@ -159,5 +159,483 @@
   ],
   "artifact_refs": [],
   "research_record": "research/records/power.disable-cpu-idle-states.json",
-  "research_record_fallback": "research/records/power.disable-cpu-idle-states.review.json"
+  "research_record_fallback": "research/records/power.disable-cpu-idle-states.review.json",
+  "schema_version": "1.0",
+  "candidate_id": "power.disable-cpu-idle-states",
+  "feature_area": "Processor Idle Behavior",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+  "value_type": "REG_DWORD bundle",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current 25H2 builds where the raw CPU idle-state bundle is left unset",
+    "state_kind": "missing",
+    "value": null,
+    "rationale": "Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior.",
+    "evidence_ids": [
+      "ms-cpu-idle-states",
+      "repo-power-doc",
+      "vm-cpu-idle-bundle-probe"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "windows-default",
+    "label": "Windows default",
+    "applies_to": null,
+    "state_kind": "missing",
+    "value": null,
+    "rationale": "Keep the raw CPU idle-state bundle unset and stay on the current observed baseline.",
+    "evidence_ids": [
+      "ms-cpu-idle-states",
+      "repo-power-doc",
+      "vm-cpu-idle-bundle-probe"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current 25H2 builds where the raw CPU idle-state bundle is left unset",
+    "state_kind": "missing",
+    "value": null,
+    "rationale": "Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior.",
+    "evidence_ids": [
+      "ms-cpu-idle-states",
+      "repo-power-doc",
+      "vm-cpu-idle-bundle-probe"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "blocked",
+  "promotion_blockers": [
+    "documentation-first-review"
+  ],
+  "record_promotion_allowed": false,
+  "tweak_ingest_allowed": false,
+  "tweak_origin": "legacy-curated",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "power.disable-cpu-idle-states",
+    "record_id": "power.disable-cpu-idle-states",
+    "tweak_id": "power.disable-cpu-idle-states",
+    "tweak_origin": "legacy-curated",
+    "promotion_state": "blocked",
+    "promotion_blockers": [
+      "documentation-first-review"
+    ],
+    "record_promotion_allowed": false,
+    "tweak_ingest_allowed": false,
+    "apply_allowed": false,
+    "app_mapping_status": "matches-research",
+    "next_missing_layer": "decision-gate",
+    "debug_override_allowed": false,
+    "last_evaluated_at": "2026-04-09T03:33:00.224538Z",
+    "score_breakdown": {
+      "static_evidence_strength": 5,
+      "runtime_evidence_strength": 4,
+      "rollback_clarity": 5,
+      "blast_radius": 2,
+      "tweak_suitability": 3,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 5,
+      "overall_score": 4.0,
+      "next_missing_layer": "decision-gate"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": true,
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
+    },
+    "evidence_status": {
+      "evidence_count": 12,
+      "next_missing_layer": "decision-gate",
+      "has_procmon_evidence": false,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": true,
+      "has_reboot_evidence": true
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Observed Win25H2Clean baseline",
+        "label": "Observed Win25H2Clean baseline",
+        "applies_to": "Current 25H2 builds where the raw CPU idle-state bundle is left unset",
+        "state_kind": "missing",
+        "value": null,
+        "rationale": "Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior.",
+        "evidence_ids": [
+          "ms-cpu-idle-states",
+          "repo-power-doc",
+          "vm-cpu-idle-bundle-probe"
+        ],
+        "rollback_strategy": "restore_default"
+      },
+      "state_changed": null,
+      "apply_diff": null,
+      "restore_diff": null
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "feature_area_group": "default",
+      "profiles": [
+        "functional_throughput"
+      ],
+      "executed": true,
+      "summary": "Runner failed with exit code 1. See evidence/records/power.disable-cpu-idle-states/behavior-lane.log.",
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "official-doc",
+        "etw",
+        "ghidra",
+        "wpr",
+        "benchmark",
+        "reboot"
+      ],
+      "attempted_layers": [
+        "static_ghidra",
+        "behavior_wpr",
+        "behavior_benchmark",
+        "runtime_reboot",
+        "official_doc"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-29T02:20:00+03:00",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-29T02:20:00+03:00"
+      }
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-29T02:20:00+03:00",
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-29T02:20:00+03:00",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-29T02:20:00+03:00",
+  "verification_environment": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {
+    "attempted_tools": [
+      "official-doc",
+      "etw",
+      "ghidra",
+      "wpr",
+      "benchmark",
+      "reboot"
+    ],
+    "attempted_layers": [
+      "static_ghidra",
+      "behavior_wpr",
+      "behavior_benchmark",
+      "runtime_reboot",
+      "official_doc"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "ms-cpu-idle-states",
+      "kind": "official-doc",
+      "title": "Microsoft Learn: PPM Notifications",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/ppm-notifications",
+      "reference_type": "url",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/ppm-notifications",
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope",
+        "app-mismatch"
+      ],
+      "summary": "Microsoft documents processor power-management notifications and idle-state behavior as a Windows kernel power-management feature area, but this source does not publish the raw registry bundle used by the app.",
+      "strength": "high",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power notes",
+      "location": "Docs/power/power.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "ui-mapping",
+        "app-mismatch"
+      ],
+      "summary": "The repo tracks these power-manager values as research notes, but this review did not find a primary Microsoft registry mapping for publishing them as a validated preset.",
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "ghidra-cpu-idle-no-match-20260327",
+      "kind": "ghidra-trace",
+      "title": "Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes",
+      "location": "evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md and evidence/files/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "version-scope",
+        "open-question"
+      ],
+      "summary": "Two current-build ntoskrnl.exe probes looked for the registry names and for the internal pseudocode names tracked in the repo notes. Both came back with no matching strings or xrefs, so this pass did not produce a current-build kernel decompilation lead for the bundle.",
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "evidence/files/vm-tooling-staging/cpu_idle_probe.json",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "Guest VM probes captured the exact before, after, and restored registry bundle, and the excluded-baseline stepwise runtime package completed apply, reboot, WPR, ETL existence, host copy-back, and restore verification on RegProbe-Baseline-20260328. That removes the earlier ETL-materialization blocker from the runtime lane. The remaining issue is not execution or reversibility; it is whether this raw bundle should be published as a supported app surface.",
+      "strength": "high",
+      "clue_type": "api_semantics"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "feature_area_group": "default",
+    "profiles": [
+      "functional_throughput"
+    ],
+    "executed": true,
+    "summary": "Runner failed with exit code 1. See evidence/records/power.disable-cpu-idle-states/behavior-lane.log.",
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 5,
+    "runtime_evidence_strength": 4,
+    "rollback_clarity": 5,
+    "blast_radius": 2,
+    "tweak_suitability": 3,
+    "privilege_complexity": 3,
+    "build_specificity": 5,
+    "sibling_expansion_value": 4,
+    "bench_priority": 5,
+    "overall_score": 4.0,
+    "next_missing_layer": "decision-gate"
+  },
+  "documentation_status": {
+    "record_status": "validated",
+    "has_validation_proof": true,
+    "has_official_evidence": true,
+    "confidence": "high",
+    "documentation_quality_pass": true,
+    "documentation_issues": [],
+    "documented_behavior": true,
+    "has_value_context": true,
+    "has_default_context": true,
+    "has_recommended_context": true,
+    "has_rollback_context": true
+  },
+  "evidence_status": {
+    "evidence_count": 12,
+    "next_missing_layer": "decision-gate",
+    "has_procmon_evidence": false,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": true,
+    "has_reboot_evidence": true
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current 25H2 builds where the raw CPU idle-state bundle is left unset",
+      "state_kind": "missing",
+      "value": null,
+      "rationale": "Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior.",
+      "evidence_ids": [
+        "ms-cpu-idle-states",
+        "repo-power-doc",
+        "vm-cpu-idle-bundle-probe"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
+  },
+  "verification_context": {
+    "record_id": "power.disable-cpu-idle-states",
+    "tweak_id": "power.disable-cpu-idle-states",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current 25H2 builds where the raw CPU idle-state bundle is left unset",
+      "state_kind": "missing",
+      "value": null,
+      "rationale": "Leave the raw CPU idle-state bundle unset and let Windows manage processor idle behavior.",
+      "evidence_ids": [
+        "ms-cpu-idle-states",
+        "repo-power-doc",
+        "vm-cpu-idle-bundle-probe"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-29T02:20:00+03:00",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-29T02:20:00+03:00"
+    }
+  },
+  "url_validation": {
+    "checked_url_count": 0,
+    "reachable_url_count": 0,
+    "dead_link_count": 0,
+    "dead_links": [],
+    "checked_urls": [],
+    "status": "not-run"
+  }
 }

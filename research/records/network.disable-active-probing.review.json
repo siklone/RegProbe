@@ -214,7 +214,7 @@
     "why": "The NoActiveProbe policy is backed by exact Microsoft ADMX and ADML proof, and the app now writes only that documented machine-policy surface. The tweak is reversible and publishable, but it is not recommended for general users because it can make Windows connectivity detection less accurate.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-13T00:00:00Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx",
     "exact_quote_or_path": "<policy name=\"NoActiveProbe\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\" valueName=\"NoActiveProbe\">; ICM.adml: This policy setting turns off the active tests performed by the Windows Network Connectivity Status Indicator (NCSI) to determine whether your computer is connected to the Internet or to a more limited network.",

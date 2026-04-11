@@ -80,9 +80,9 @@ public sealed class RepairsItemViewModel : ViewModelBase, IDisposable
 
     public string PrimaryActionTooltip => _source.PrimaryActionTooltip;
 
-    public string RunRepairTooltip => _source.IsEvidenceClassActionable
+    public string RunRepairTooltip => _source.IsMutationAllowed
         ? "Run this repair."
-        : _source.PublicEvidenceClassGatingReason;
+        : _source.PublicMutationGatingReason;
 
     public bool IsAdvancedRisk => _source.IsAdvancedRisk;
 
@@ -126,8 +126,8 @@ public sealed class RepairsItemViewModel : ViewModelBase, IDisposable
             OnPropertyChanged(nameof(RepairsActionButtonText));
         }
 
-        if (e.PropertyName is nameof(TweakItemViewModel.IsEvidenceClassActionable)
-            or nameof(TweakItemViewModel.PublicEvidenceClassGatingReason))
+        if (e.PropertyName is nameof(TweakItemViewModel.IsMutationAllowed)
+            or nameof(TweakItemViewModel.PublicMutationGatingReason))
         {
             OnPropertyChanged(nameof(RunRepairTooltip));
         }

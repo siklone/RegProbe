@@ -1,0 +1,34 @@
+{
+  "artifact_id": "kvm-qga-autostart-recovery-20260409b",
+  "captured_on": "2026-04-09",
+  "domain": "regprobe-win11-25h2-session",
+  "scope": "execution-required KVM qga later-reboot autostart recovery check",
+  "findings": [
+    {
+      "step": "later_reboot_guest_state",
+      "command": "sc qc QEMU-GA; sc query QEMU-GA",
+      "guest_result": "A later retained reboot showed the service still configured as `START_TYPE : 2 AUTO_START` and already in `STATE : 4 RUNNING`."
+    },
+    {
+      "step": "host_state_after_autostart_reboot",
+      "command": "virsh qemu-agent-command ...; virsh qemu-monitor-command ... --pretty '{\"execute\":\"query-chardev\"}'; virsh qemu-monitor-command ... --hmp 'info qtree'; direct AF_UNIX connect",
+      "host_result": "Despite the later automatic service recovery, `guest-ping` still returned `QEMU guest agent is not available due to an error`, `query-chardev` still showed `frontend-open=true`, `info qtree` still showed `guest on, host off`, and direct host-side connect to the qga unix socket still returned `Connection refused`."
+    },
+    {
+      "step": "virtqemud_journal",
+      "command": "journalctl --since '15 minutes ago' | rg 'failed to connect to agent socket|Cannot connect to QEMU guest agent|available due to an error|not connected'",
+      "host_result": "The retained host journal now also contains `virtqemud` lines for `failed to connect to agent socket: Connection refused` and `Cannot connect to QEMU guest agent for regprobe-win11-25h2-session`, matching the direct socket probe."
+    }
+  ],
+  "screenshots": [
+    "regprobe-qga-autostart-running-after-reboot.png"
+  ],
+  "host_artifacts": [
+    "guest-ping-after-autostart-reboot.txt",
+    "query-chardev-after-autostart-reboot.json",
+    "info-qtree-after-autostart-reboot.txt",
+    "socket-connect-after-autostart-reboot.txt",
+    "virtqemud-journal-after-autostart-reboot.txt"
+  ],
+  "conclusion": "The earlier boot-time qga service crash is retained but no longer looks deterministic. A later reboot recovered the Windows service under ordinary `AUTO_START`, yet the host-side attach failure persisted unchanged."
+}

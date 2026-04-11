@@ -40,7 +40,7 @@ public sealed class WorkspaceActionCoordinator : IDisposable
             return false;
         }
 
-        return getTweaks().Any(item => item.IsEvidenceClassActionable);
+        return getTweaks().Any(item => item.IsMutationAllowed);
     }
 
     public async Task RunBulkAsync(

@@ -251,7 +251,7 @@
     "why": "Microsoft documents DoNotShowFeedbackNotifications directly in the Experience Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\DataCollection\\DoNotShowFeedbackNotifications with 0 as the default not-disabled state and 1 as disabled. The app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T13:18:10.1644837+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications",
     "exact_quote_or_path": "Registry Key Name Software\\Policies\\Microsoft\\Windows\\DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled.",

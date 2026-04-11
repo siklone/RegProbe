@@ -1,0 +1,21 @@
+{
+  "run_id": "local-kd-powersetting-query-20260408a",
+  "generated_utc": "2026-04-08T14:15:00Z",
+  "completed": true,
+  "attached": true,
+  "summary_ref": "evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/summary.json",
+  "command_ref": "evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/local-kd.txt",
+  "log_ref": "evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/local-kd.log",
+  "stdout_ref": "evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/stdout.txt",
+  "stderr_ref": "evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/stderr.txt",
+  "debugger_commands": [
+    "uf nt!PopQueryPowerSettingUlong",
+    "uf nt!PopGetPowerSettingValue",
+    "uf nt!PopSetPowerSettingValue"
+  ],
+  "highlights": [
+    "PopQueryPowerSettingUlong acquires PopSettingLock, calls PopFindPowerSettingConfiguration, reads DWORD payloads from configuration slots, and releases the fast mutex with no visible registry API in the retained disassembly.",
+    "PopGetPowerSettingValue likewise acquires PopSettingLock, resolves a configuration entry through PopFindPowerSettingConfiguration, copies the value blob with memcpy, and releases the lock without a visible registry call in the retained path.",
+    "The visible PopSetPowerSettingValue path allocates PSeT-tagged buffers, validates input, updates in-memory setting blobs, increments PopPowerSettingChangeStamp, walks PopRegisteredPowerSettingCallbacks, and schedules PopSetNotificationWork. The retained path did not expose a visible registry API."
+  ]
+}

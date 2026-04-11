@@ -217,7 +217,7 @@
     "why": "The local Microsoft Logon.admx file explicitly defines EnableFirstLogonAnimation under Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System with enabledValue 1 and disabledValue 0, and the app writes the documented disabled value.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-12T20:28:07.0501445+03:00",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx",
     "exact_quote_or_path": "<policy name=\"EnableFirstLogonAnimation\" class=\"Machine\" ... key=\"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" valueName=\"EnableFirstLogonAnimation\">",

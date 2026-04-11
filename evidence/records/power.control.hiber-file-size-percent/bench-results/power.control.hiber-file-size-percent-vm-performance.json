@@ -1,0 +1,25 @@
+{
+  "candidate_id": "power.control.hiber-file-size-percent",
+  "bench_tier": "vm",
+  "bench_profile": "performance",
+  "bench_measurement_reliability": "relative",
+  "measurement_profile": "power",
+  "measurement_components": [
+    "service-query-ms",
+    "boot-event-query-ms"
+  ],
+  "sample_count": 3,
+  "apply_value": 1,
+  "apply_type": "REG_DWORD",
+  "rollback_method": "restore-baseline",
+  "bench_environment": "windows-11-25h2-vm",
+  "bench_bare_metal_pending": true,
+  "baseline_median_ms": 10.514,
+  "applied_median_ms": 10.751,
+  "delta_ms": 0.237,
+  "delta_pct": 2.254,
+  "rollback_verified": true,
+  "executed_at": "2026-04-10T21:51:00-07:00",
+  "output_file": "evidence/records/power.control.hiber-file-size-percent/bench-results/power.control.hiber-file-size-percent-vm-performance.json",
+  "rollback_failure_reason": null
+}

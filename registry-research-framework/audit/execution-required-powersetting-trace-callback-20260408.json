@@ -1,0 +1,16 @@
+{
+  "date": "2026-04-08",
+  "source_artifact": "evidence/files/vm-tooling-staging/local-kd-powersetting-query-20260408a/stdout.txt",
+  "counts": {
+    "PopFindPowerSettingConfiguration": 3,
+    "PopSetNotificationWork": 2,
+    "PoRegisterPowerSettingCallback": 1,
+    "PopTracePowerSettingChange": 1
+  },
+  "trace_registration_present": true,
+  "interpretation": [
+    "The retained generic power-setting setter path visibly resolves configuration objects, schedules notification work, and performs a callback registration.",
+    "That explicit callback registration targets PopTracePowerSettingChange rather than an execution-required pair-specific callback.",
+    "This further narrows the visible generic power-setting layer: the retained current-build setter path still does not expose an exact binding site for AllowSystemRequiredPowerRequests or AllowAudioToEnableExecutionRequiredPowerRequests."
+  ]
+}

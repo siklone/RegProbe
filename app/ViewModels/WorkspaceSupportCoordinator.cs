@@ -9,6 +9,7 @@ public sealed class WorkspaceSupportCoordinator
     private readonly TweakDocumentationLinker _documentationLinker = new();
     private readonly TweakProvenanceCatalogService _provenanceCatalogService = new();
     private readonly TweakEvidenceClassCatalogService _evidenceClassCatalogService = new();
+    private readonly TweakPromotionGateCatalogService _promotionGateCatalogService = new();
 
     public void ApplyCatalogs(IEnumerable<TweakItemViewModel> tweaks)
     {
@@ -16,5 +17,6 @@ public sealed class WorkspaceSupportCoordinator
         _documentationLinker.Apply(tweakList);
         _provenanceCatalogService.Apply(tweakList);
         _evidenceClassCatalogService.Apply(tweakList);
+        _promotionGateCatalogService.Apply(tweakList);
     }
 }

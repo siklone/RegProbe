@@ -2,6 +2,21 @@
   "runtime": {
     "performance.disable-taskbar-animations": {
       "script": "scripts/vm/run-explorer-shell-registry-runtime-probe.ps1",
+      "required_capabilities": [
+        "registry_read",
+        "registry_write"
+      ],
+      "supported_backend_types": [
+        "local",
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": [
         "-RecordId",
         "performance.disable-taskbar-animations",
@@ -23,6 +38,21 @@
     },
     "audio.show-disconnected-devices": {
       "script": "scripts/vm/run-audio-devicecpl-runtime-probe.ps1",
+      "required_capabilities": [
+        "registry_read",
+        "registry_write"
+      ],
+      "supported_backend_types": [
+        "local",
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": [
         "-RecordId",
         "audio.show-disconnected-devices",
@@ -36,6 +66,21 @@
     },
     "audio.show-hidden-devices": {
       "script": "scripts/vm/run-audio-devicecpl-runtime-probe.ps1",
+      "required_capabilities": [
+        "registry_read",
+        "registry_write"
+      ],
+      "supported_backend_types": [
+        "local",
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": [
         "-RecordId",
         "audio.show-hidden-devices",
@@ -49,6 +94,21 @@
     },
     "explorer.enable-explorer-compact-mode": {
       "script": "scripts/vm/run-explorer-compact-mode-runtime-probe.ps1",
+      "required_capabilities": [
+        "registry_read",
+        "registry_write"
+      ],
+      "supported_backend_types": [
+        "local",
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": [
         "-RecordId",
         "explorer.enable-explorer-compact-mode",
@@ -58,6 +118,21 @@
     },
     "system.disable-jpeg-reduction": {
       "script": "scripts/vm/run-jpeg-import-quality-runtime-probe.ps1",
+      "required_capabilities": [
+        "registry_read",
+        "registry_write"
+      ],
+      "supported_backend_types": [
+        "local",
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": [
         "-RecordId",
         "system.disable-jpeg-reduction",
@@ -67,6 +142,22 @@
     },
     "power.disable-cpu-idle-states": {
       "script": "scripts/vm/run-cpu-idle-states-runtime-probe.ps1",
+      "required_capabilities": [
+        "registry_read",
+        "registry_write",
+        "reboot"
+      ],
+      "supported_backend_types": [
+        "local",
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": [
         "-RecordId",
         "power.disable-cpu-idle-states",
@@ -76,6 +167,21 @@
     },
     "system.disable-startup-delay": {
       "script": "scripts/vm/run-explorer-shell-registry-runtime-probe.ps1",
+      "required_capabilities": [
+        "registry_read",
+        "registry_write"
+      ],
+      "supported_backend_types": [
+        "local",
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": [
         "-RecordId",
         "system.disable-startup-delay",
@@ -96,25 +202,125 @@
         "-SettleSeconds",
         "20"
       ]
+    },
+    "power.control.allow-system-required-power-requests": {
+      "script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "required_capabilities": [
+        "registry_read",
+        "registry_write",
+        "etw_capture"
+      ],
+      "supported_backend_types": [
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
+      "args": [
+        "-CandidateIds",
+        "power.control.allow-system-required-power-requests"
+      ]
+    },
+    "power.control.allow-audio-to-enable-execution-required-power-requests": {
+      "script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "required_capabilities": [
+        "registry_read",
+        "registry_write",
+        "etw_capture"
+      ],
+      "supported_backend_types": [
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
+      "args": [
+        "-CandidateIds",
+        "power.control.allow-audio-to-enable-execution-required-power-requests"
+      ]
     }
   },
   "procmon": {
     "security.threat-file-hash-logging": {
       "script": "scripts/vm/run-defender-threat-file-hash-probe.ps1",
+      "required_capabilities": [
+        "procmon_capture",
+        "registry_read"
+      ],
+      "supported_backend_types": [
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": []
     },
     "system.disable-fullscreen-optimizations": {
       "script": "scripts/vm/run-fullscreen-optimizations-probe.ps1",
+      "required_capabilities": [
+        "procmon_capture",
+        "registry_read"
+      ],
+      "supported_backend_types": [
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": []
     },
     "system.reliability-timestamp-enabled": {
       "script": "scripts/vm/run-reliability-timestamp-probe.ps1",
+      "required_capabilities": [
+        "procmon_capture",
+        "registry_read"
+      ],
+      "supported_backend_types": [
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": []
     }
   },
   "behavior": {
     "power.disable-cpu-idle-states": {
       "script": "scripts/vm/run-cpu-idle-states-benchmark.ps1",
+      "required_capabilities": [
+        "bench_run",
+        "reboot"
+      ],
+      "supported_backend_types": [
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": [
         "-RecordId",
         "power.disable-cpu-idle-states",
@@ -124,6 +330,20 @@
     },
     "system.disable-startup-delay": {
       "script": "scripts/vm/run-startup-delay-wpr-trace.ps1",
+      "required_capabilities": [
+        "bench_run",
+        "etw_capture"
+      ],
+      "supported_backend_types": [
+        "vm",
+        "remote"
+      ],
+      "execution_context_defaults": {
+        "type": "vm",
+        "os": "linux-with-vm",
+        "privilege": "elevated",
+        "isolation": "vm"
+      },
       "args": []
     }
   }

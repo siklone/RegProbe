@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using RegProbe.App.Services;
 using RegProbe.App.ViewModels;
 using RegProbe.Core;
 using RegProbe.Engine;
@@ -49,6 +50,65 @@ public sealed class TweakItemViewModelTests
         Assert.True(viewModel.ShowTerminal);
         Assert.True(viewModel.HasTerminalOutput);
         Assert.Contains("Detect started.", viewModel.TerminalOutput);
+    }
+
+    [Fact]
+    public async Task RunDetectAsync_Truncates_Very_Large_Batch_Details()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new VerboseBatchDetectTweak();
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        await viewModel.RunDetectAsync(CancellationToken.None);
+
+        Assert.True(viewModel.HasBatchDetails);
+        Assert.Equal(200, viewModel.BatchDetails.Count);
+        Assert.Contains("50 more hidden", viewModel.BatchSummaryLine);
+        Assert.Equal("Mixed", viewModel.CurrentValue);
+        Assert.DoesNotContain("Entries:", viewModel.StatusMessage);
+        Assert.DoesNotContain("Value249", viewModel.StatusMessage);
+    }
+
+    [Fact]
+    public void ResearchDerivedBlockedPromotionGate_DisablesMutation()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("power.blocked-gate-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+        });
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "blocked",
+            PromotionBlockers = new List<string> { "runtime-trace" },
+            RecordPromotionAllowed = false,
+            TweakIngestAllowed = false,
+            ApplyAllowed = false,
+            AppMappingStatus = "not-mapped",
+            NextMissingLayer = "runtime-trace",
+            DebugOverrideAllowed = false,
+        });
+
+        Assert.True(viewModel.IsEvidenceClassActionable);
+        Assert.False(viewModel.IsMutationAllowed);
+        Assert.True(viewModel.IsResearchGated);
+        Assert.Equal("blocked", viewModel.PromotionState);
     }
 
     private sealed class RecordingLogger : IAppLogger
@@ -117,6 +177,38 @@ public sealed class TweakItemViewModelTests
 
         public Task<TweakResult> DetectAsync(CancellationToken ct)
             => Task.FromResult(new TweakResult(TweakStatus.Applied, "Applied", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> ApplyAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Applied, "Applied", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> VerifyAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.Verified, "Verified", DateTimeOffset.UtcNow));
+
+        public Task<TweakResult> RollbackAsync(CancellationToken ct)
+            => Task.FromResult(new TweakResult(TweakStatus.RolledBack, "Rolled back", DateTimeOffset.UtcNow));
+    }
+
+    private sealed class VerboseBatchDetectTweak : ITweak
+    {
+        public string Id => "power.verbose-batch-test";
+        public string Name => "Verbose batch";
+        public string Description => "Verbose batch";
+        public TweakRiskLevel Risk => TweakRiskLevel.Safe;
+        public bool RequiresElevation => false;
+
+        public Task<TweakResult> DetectAsync(CancellationToken ct)
+        {
+            var lines = new List<string> { "Detected. Current state: Mixed." , "Entries:" };
+            for (var index = 0; index < 250; index++)
+            {
+                lines.Add($"Value{index:D3}: 0 -> 1");
+            }
+
+            return Task.FromResult(new TweakResult(
+                TweakStatus.Detected,
+                string.Join(Environment.NewLine, lines),
+                DateTimeOffset.UtcNow));
+        }
 
         public Task<TweakResult> ApplyAsync(CancellationToken ct)
             => Task.FromResult(new TweakResult(TweakStatus.Applied, "Applied", DateTimeOffset.UtcNow));

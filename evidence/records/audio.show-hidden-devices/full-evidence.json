@@ -180,5 +180,425 @@
     "dead_flag_four_conditions_met": true,
     "notes": "Runtime lane succeeded (evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showhiddendevices-20260327-103758/summary.json). Procmon proof remains carry-forward evidence summarized in research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md because the raw PML is off-git.",
     "new_pipeline_version": "v3.1"
+  },
+  "schema_version": "1.0",
+  "candidate_id": "audio.show-hidden-devices",
+  "feature_area": "Sound Control Panel DeviceCpl Flags",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+  "value_name": "ShowHiddenDevices",
+  "value_type": "REG_DWORD",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Default state not captured",
+    "label": "Default state not captured",
+    "applies_to": "Classic Sound control panel profiles where the value is absent",
+    "state_kind": "unknown",
+    "value": null,
+    "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+    "evidence_ids": [
+      "procmon-audio-show-hidden-devices"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "show-hidden-audio-devices",
+    "label": "Show hidden audio devices",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": 1,
+    "rationale": "Set the runtime-observed preference to the show-hidden state that the Sound control panel reads on this build.",
+    "evidence_ids": [
+      "procmon-audio-show-hidden-devices",
+      "app-audio-provider"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Default state not captured",
+    "label": "Default state not captured",
+    "applies_to": "Classic Sound control panel profiles where the value is absent",
+    "state_kind": "unknown",
+    "value": null,
+    "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+    "evidence_ids": [
+      "procmon-audio-show-hidden-devices"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "promoted",
+  "promotion_blockers": [],
+  "record_promotion_allowed": true,
+  "tweak_ingest_allowed": true,
+  "tweak_origin": "legacy-curated",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "audio.show-hidden-devices",
+    "record_id": "audio.show-hidden-devices",
+    "tweak_id": "audio.show-hidden-devices",
+    "tweak_origin": "legacy-curated",
+    "promotion_state": "promoted",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": true,
+    "apply_allowed": true,
+    "app_mapping_status": "matches-research",
+    "next_missing_layer": "none",
+    "debug_override_allowed": false,
+    "last_evaluated_at": "2026-04-09T03:33:00.209244Z",
+    "score_breakdown": {
+      "static_evidence_strength": 4,
+      "runtime_evidence_strength": 2,
+      "rollback_clarity": 5,
+      "blast_radius": 4,
+      "tweak_suitability": 5,
+      "privilege_complexity": 4,
+      "build_specificity": 5,
+      "sibling_expansion_value": 2,
+      "bench_priority": 3,
+      "overall_score": 3.78,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": false,
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
+    },
+    "evidence_status": {
+      "evidence_count": 3,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": true,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": false
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Default state not captured",
+        "label": "Default state not captured",
+        "applies_to": "Classic Sound control panel profiles where the value is absent",
+        "state_kind": "unknown",
+        "value": null,
+        "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+        "evidence_ids": [
+          "procmon-audio-show-hidden-devices"
+        ],
+        "rollback_strategy": "restore_default"
+      },
+      "state_changed": null,
+      "apply_diff": null,
+      "restore_diff": null
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "feature_area_group": "default",
+      "profiles": [
+        "functional_throughput"
+      ],
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "etw",
+        "procmon",
+        "ghidra"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-27T11:06:26Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-27T11:06:26Z"
+      }
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-27T11:06:26Z",
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-27T11:06:26Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-27T11:06:26Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {
+    "attempted_tools": [
+      "etw",
+      "procmon",
+      "ghidra"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "ghidra-mmsys-devicecpl-flags",
+      "kind": "ghidra-headless",
+      "title": "Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers",
+      "location": "evidence/files/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "summary": "A headless Ghidra pass on mmsys.cpl decompiled the functions that call SHGetValueW and SHSetValueW for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices and ShowDisconnectedDevices. That gives direct code-side proof that the classic Sound control panel reads and writes these DeviceCpl flags.",
+      "strength": "high",
+      "clue_type": "api_semantics"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "This v3.1 re-audit keeps the normalized Procmon hit summary in a record-scoped note because the checked-in Procmon markdown files are only placeholders for the off-git raw PML. The same note also ties the runtime summary and Ghidra export back to the record.",
+      "strength": "high",
+      "clue_type": "api_semantics"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "feature_area_group": "default",
+    "profiles": [
+      "functional_throughput"
+    ],
+    "executed": false,
+    "summary": null,
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 4,
+    "runtime_evidence_strength": 2,
+    "rollback_clarity": 5,
+    "blast_radius": 4,
+    "tweak_suitability": 5,
+    "privilege_complexity": 4,
+    "build_specificity": 5,
+    "sibling_expansion_value": 2,
+    "bench_priority": 3,
+    "overall_score": 3.78,
+    "next_missing_layer": "none"
+  },
+  "documentation_status": {
+    "record_status": "validated",
+    "has_validation_proof": true,
+    "has_official_evidence": false,
+    "confidence": "high",
+    "documentation_quality_pass": true,
+    "documentation_issues": [],
+    "documented_behavior": true,
+    "has_value_context": true,
+    "has_default_context": true,
+    "has_recommended_context": true,
+    "has_rollback_context": true
+  },
+  "evidence_status": {
+    "evidence_count": 3,
+    "next_missing_layer": "none",
+    "has_procmon_evidence": true,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": false
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Default state not captured",
+      "label": "Default state not captured",
+      "applies_to": "Classic Sound control panel profiles where the value is absent",
+      "state_kind": "unknown",
+      "value": null,
+      "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+      "evidence_ids": [
+        "procmon-audio-show-hidden-devices"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
+  },
+  "verification_context": {
+    "record_id": "audio.show-hidden-devices",
+    "tweak_id": "audio.show-hidden-devices",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "user",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "user"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Default state not captured",
+      "label": "Default state not captured",
+      "applies_to": "Classic Sound control panel profiles where the value is absent",
+      "state_kind": "unknown",
+      "value": null,
+      "rationale": "This pass validated the 0 and 1 states through Procmon, but it did not capture the absent-value default.",
+      "evidence_ids": [
+        "procmon-audio-show-hidden-devices"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-27T11:06:26Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-27T11:06:26Z"
+    }
+  },
+  "url_validation": {
+    "checked_url_count": 0,
+    "reachable_url_count": 0,
+    "dead_link_count": 0,
+    "dead_links": [],
+    "checked_urls": [],
+    "status": "not-run"
   }
 }

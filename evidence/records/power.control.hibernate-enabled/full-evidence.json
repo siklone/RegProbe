@@ -89,14 +89,32 @@
   },
   "behavior": {
     "typeperf": {
-      "executed": false,
-      "counter": null,
-      "before_average": null,
-      "after_average": null,
-      "delta_percent": null,
-      "sample_count": null,
-      "before_file": null,
-      "after_file": null
+      "executed": true,
+      "counter": "vm-relative-power-latency-ms",
+      "before_average": 10.61,
+      "after_average": 10.574,
+      "before_median_ms": 10.61,
+      "after_median_ms": 10.574,
+      "delta_percent": -0.339,
+      "delta_ms": -0.036,
+      "sample_count": 3,
+      "aggregation": "median",
+      "measurement_profile": "power",
+      "measurement_components": [
+        "service-query-ms",
+        "boot-event-query-ms"
+      ],
+      "bench_tier": "vm",
+      "bench_profile": "performance",
+      "bench_environment": "windows-11-25h2-vm",
+      "bench_measurement_reliability": "relative",
+      "bench_bare_metal_pending": true,
+      "rollback_verified": true,
+      "summary": "VM perf bench (relative) for power.control.hibernate-enabled measured a median of 10.61 ms before apply and 10.574 ms after apply (delta -0.036 ms / -0.339%). Rollback verified; bare-metal perf validation is still pending.",
+      "before_file": "evidence/records/power.control.hibernate-enabled/bench-results/power.control.hibernate-enabled-vm-performance.json",
+      "after_file": "evidence/records/power.control.hibernate-enabled/bench-results/power.control.hibernate-enabled-vm-performance.json",
+      "output_file": "evidence/records/power.control.hibernate-enabled/bench-results/power.control.hibernate-enabled-vm-performance.json",
+      "executed_at": "2026-04-10T21:51:00-07:00"
     },
     "wpr": {
       "executed": false,
@@ -106,9 +124,16 @@
       "trace_file": null
     },
     "benchmark": {
-      "executed": false,
-      "summary": null,
-      "output_file": null
+      "executed": true,
+      "summary": "VM functional safety bench passed: HibernateEnabled was changed from the observed baseline 0 to DWORD 1, critical services and recent event logs stayed healthy, C:\\hiberfil.sys remained absent before and after the run, and rollback restored the baseline value 0.",
+      "output_file": "evidence/records/power.control.hibernate-enabled/bench-results/power.control.hibernate-enabled-vm-functional.json",
+      "bench_tier": "vm",
+      "bench_profile": "functional",
+      "safety_passed": true,
+      "safety_status": "passed",
+      "bench_environment": "windows-11-25h2-vm",
+      "bench_measurement_reliability": "functional",
+      "executed_at": "2026-04-10T19:17:38.8447218-07:00"
     },
     "registry_sideeffects": {
       "executed": false,
@@ -153,6 +178,10 @@
     {
       "step": "last_reviewed",
       "timestamp": "2026-03-29T11:55:00Z"
+    },
+    {
+      "step": "vm_perf_bench",
+      "timestamp": "2026-04-10T21:51:00-07:00"
     }
   ],
   "artifact_refs": [],
@@ -179,5 +208,546 @@
     "dead_flag_four_conditions_met": false,
     "notes": "Bootstrapped from the current research record and evidence audit.",
     "new_pipeline_version": "v3.1"
+  },
+  "schema_version": "1.0",
+  "candidate_id": "power.control.hibernate-enabled",
+  "feature_area": "Raw Power Manager Registry",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "HibernateEnabled",
+  "value_type": "REG_DWORD",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current RegProbe-Baseline-Clean-20260329 research baseline",
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Keep the currently observed baseline value (0) while this raw control stays in research packaging only.",
+    "evidence_ids": [
+      "vm-power-control-phase0-20260329"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "observed-baseline",
+    "label": "Observed baseline",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Track the observed baseline value without turning it into a shipped preset.",
+    "evidence_ids": [
+      "vm-power-control-phase0-20260329",
+      "ghidra-power-control-docs-first-20260329"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current RegProbe-Baseline-Clean-20260329 research baseline",
+    "state_kind": "value",
+    "value": 0,
+    "rationale": "Keep the currently observed baseline value (0) while this raw control stays in research packaging only.",
+    "evidence_ids": [
+      "vm-power-control-phase0-20260329"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "promotion-eligible",
+  "promotion_blockers": [],
+  "record_promotion_allowed": true,
+  "tweak_ingest_allowed": false,
+  "tweak_origin": "research-derived",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "power.control.hibernate-enabled",
+    "record_id": "power.control.hibernate-enabled",
+    "tweak_id": "power.control.hibernate-enabled",
+    "tweak_origin": "research-derived",
+    "promotion_state": "promotion-eligible",
+    "promotion_blockers": [],
+    "record_promotion_allowed": true,
+    "tweak_ingest_allowed": false,
+    "apply_allowed": false,
+    "app_mapping_status": "not-mapped",
+    "next_missing_layer": "none",
+    "debug_override_allowed": true,
+    "last_evaluated_at": "2026-04-09T03:33:00.216694Z",
+    "score_breakdown": {
+      "static_evidence_strength": 3,
+      "runtime_evidence_strength": 3,
+      "rollback_clarity": 5,
+      "blast_radius": 2,
+      "tweak_suitability": 2,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 5,
+      "overall_score": 3.56,
+      "next_missing_layer": "none"
+    },
+    "documentation_status": {
+      "record_status": "draft",
+      "has_validation_proof": true,
+      "has_official_evidence": false,
+      "confidence": "high",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
+    },
+    "evidence_status": {
+      "evidence_count": 5,
+      "next_missing_layer": "none",
+      "has_procmon_evidence": true,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": true
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Observed Win25H2Clean baseline",
+        "label": "Observed Win25H2Clean baseline",
+        "applies_to": "Current RegProbe-Baseline-Clean-20260329 research baseline",
+        "state_kind": "value",
+        "value": 0,
+        "rationale": "Keep the currently observed baseline value (0) while this raw control stays in research packaging only.",
+        "evidence_ids": [
+          "vm-power-control-phase0-20260329"
+        ],
+        "rollback_strategy": "restore_default"
+      },
+      "state_changed": null,
+      "apply_diff": null,
+      "restore_diff": null
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "feature_area_group": "power",
+      "profiles": [
+        "boot_time_relative",
+        "functional_throughput"
+      ],
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "procmon",
+        "ghidra",
+        "reboot"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "runtime_reboot"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-03-29T11:55:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-03-29T11:55:00Z"
+      }
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-03-29T11:55:00Z",
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-03-29T11:55:00Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-03-29T11:55:00Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {
+    "attempted_tools": [
+      "procmon",
+      "ghidra",
+      "reboot"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "runtime_reboot"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power notes for docs-first power-control values",
+      "location": "Docs/power/power.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "summary": "Repo power notes contain an exact entry for HibernateEnabled, led by Docs/power/power.md:154.",
+      "strength": "high",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "static-power-control-string-20260329",
+      "kind": "repo-doc",
+      "title": "Shared docs-first string triage for current-build ntoskrnl",
+      "location": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "summary": "Shared string triage found an exact current-build ntoskrnl.exe string hit for HibernateEnabled.",
+      "strength": "high",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "ghidra-power-control-docs-first-20260329",
+      "kind": "decompilation",
+      "title": "Shared Ghidra xref batch for docs-first power-control values",
+      "location": "evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "summary": "The shared ntoskrnl Ghidra batch produced a reviewable string/xref artifact set for HibernateEnabled; some values resolved naturally while several remained forced-boundary fallback blocks.",
+      "strength": "high",
+      "clue_type": "api_semantics"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "Docs/power/power.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for HibernateEnabled. App surfacing is tracked separately from evidence classification.",
+      "strength": "high",
+      "clue_type": "api_semantics"
+    }
+  ],
+  "reproducibility": {
+    "vm_name": "windows-11-25h2-vm",
+    "domain": "regprobe-win11-25h2-session",
+    "baseline_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+    "bench_script": "registry-research-framework/scripts/vm/run-safety-bench-guest.ps1",
+    "bench_wrapper": "registry-research-framework/scripts/vm/run-safety-bench-hibernate-enabled.guest.ps1",
+    "snapshot_attempt": {
+      "attempted": true,
+      "method": "virsh internal snapshot",
+      "result": "unsupported-pflash-qcow2-nvram-required"
+    },
+    "perf_bench_script": "registry-research-framework/scripts/vm/run-perf-bench-guest.ps1",
+    "perf_bench_wrapper": "registry-research-framework/scripts/vm/run-perf-bench-promoted-batch.guest.ps1"
+  },
+  "bench_results": {
+    "candidate_id": "power.control.hibernate-enabled",
+    "bench_tier": "vm",
+    "bench_profile": "functional",
+    "apply_value": 1,
+    "apply_type": "REG_DWORD",
+    "rollback_method": "restore-baseline",
+    "safety_passed": true,
+    "safety_status": "passed",
+    "boot_success": true,
+    "shell_usable": true,
+    "services_healthy": true,
+    "event_log_clean": true,
+    "rollback_executed": true,
+    "rollback_verified": true,
+    "rollback_failure_reason": null,
+    "bench_environment": "windows-11-25h2-vm",
+    "bench_measurement_reliability": "functional",
+    "output_file": "evidence/records/power.control.hibernate-enabled/bench-results/power.control.hibernate-enabled-vm-functional.json",
+    "executed_at": "2026-04-10T19:17:38.8447218-07:00",
+    "apply_verified": true,
+    "state_changed": true,
+    "hiberfile_sideeffects_clean": true
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 3,
+    "runtime_evidence_strength": 3,
+    "rollback_clarity": 5,
+    "blast_radius": 2,
+    "tweak_suitability": 2,
+    "privilege_complexity": 3,
+    "build_specificity": 5,
+    "sibling_expansion_value": 4,
+    "bench_priority": 5,
+    "overall_score": 3.56,
+    "next_missing_layer": "none"
+  },
+  "documentation_status": {
+    "record_status": "draft",
+    "has_validation_proof": true,
+    "has_official_evidence": false,
+    "confidence": "high",
+    "documentation_quality_pass": true,
+    "documentation_issues": [],
+    "documented_behavior": true,
+    "has_value_context": true,
+    "has_default_context": true,
+    "has_recommended_context": true,
+    "has_rollback_context": true
+  },
+  "evidence_status": {
+    "evidence_count": 5,
+    "next_missing_layer": "none",
+    "has_procmon_evidence": true,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": true
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-Clean-20260329 research baseline",
+      "state_kind": "value",
+      "value": 0,
+      "rationale": "Keep the currently observed baseline value (0) while this raw control stays in research packaging only.",
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
+  },
+  "verification_context": {
+    "record_id": "power.control.hibernate-enabled",
+    "tweak_id": "power.control.hibernate-enabled",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": true,
+    "rollback_verified": true,
+    "rollback_verification_method": "vm-safety-bench-restore-baseline",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-Clean-20260329 research baseline",
+      "state_kind": "value",
+      "value": 0,
+      "rationale": "Keep the currently observed baseline value (0) while this raw control stays in research packaging only.",
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": true,
+    "apply_diff": {
+      "before": {
+        "exists": true,
+        "value": 0,
+        "value_kind": "DWord"
+      },
+      "after": {
+        "exists": true,
+        "value": 1,
+        "value_kind": "DWord"
+      }
+    },
+    "restore_diff": {
+      "before": {
+        "exists": true,
+        "value": 1,
+        "value_kind": "DWord"
+      },
+      "after": {
+        "exists": true,
+        "value": 0,
+        "value_kind": "DWord"
+      }
+    },
+    "sideeffect_diff": {
+      "hiberfile_before": {
+        "exists": false,
+        "length": null,
+        "last_write_time_utc": null
+      },
+      "hiberfile_after": {
+        "exists": false,
+        "length": null,
+        "last_write_time_utc": null
+      },
+      "hiberfile_sideeffects_clean": true
+    }
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-03-29T11:55:00Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-03-29T11:55:00Z"
+    }
+  },
+  "url_validation": {
+    "checked_url_count": 0,
+    "reachable_url_count": 0,
+    "dead_link_count": 0,
+    "dead_links": [],
+    "checked_urls": [],
+    "status": "not-run"
+  },
+  "perf_bench_results": {
+    "candidate_id": "power.control.hibernate-enabled",
+    "bench_tier": "vm",
+    "bench_profile": "performance",
+    "bench_measurement_reliability": "relative",
+    "measurement_profile": "power",
+    "measurement_components": [
+      "service-query-ms",
+      "boot-event-query-ms"
+    ],
+    "sample_count": 3,
+    "apply_value": 1,
+    "apply_type": "REG_DWORD",
+    "rollback_method": "restore-baseline",
+    "bench_environment": "windows-11-25h2-vm",
+    "bench_bare_metal_pending": true,
+    "baseline_median_ms": 10.61,
+    "applied_median_ms": 10.574,
+    "delta_ms": -0.036,
+    "delta_pct": -0.339,
+    "rollback_verified": true,
+    "executed_at": "2026-04-10T21:51:00-07:00",
+    "output_file": "evidence/records/power.control.hibernate-enabled/bench-results/power.control.hibernate-enabled-vm-performance.json",
+    "rollback_failure_reason": null
   }
 }

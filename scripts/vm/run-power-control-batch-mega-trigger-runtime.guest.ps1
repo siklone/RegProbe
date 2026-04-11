@@ -24,7 +24,12 @@ $ErrorActionPreference = 'Stop'
 $traceName = 'RegProbeMegaTrace'
 $etlPath = Join-Path $GuestRoot 'mega-trace.etl'
 $csvPath = Join-Path $GuestRoot 'mega-trace.csv'
+$xmlPath = Join-Path $GuestRoot 'mega-trace.xml'
+$traceTouchExportPath = Join-Path $GuestRoot 'mega-trace.etl.registry-touches.json'
 $runLogPath = Join-Path $GuestRoot 'guest-run.log'
+$parserDiagnosticsPath = Join-Path (Split-Path -Parent $ResultsPath) 'parser-diagnostics.json'
+$script:XmlTraceDiagnostics = $null
+$script:XmlTraceTouchRecords = @()
 $script:activeTraceOutputPath = $null
 
 function Write-JsonFile {
@@ -112,6 +117,28 @@ function Read-TextOrEmpty {
         return ''
     }
     return ([string]$raw).Trim()
+}
+
+function Set-ObjectPropertyValue {
+    param(
+        [Parameter(Mandatory = $true)]
+        [object]$InputObject,
+        [Parameter(Mandatory = $true)]
+        [string]$Name,
+        $Value
+    )
+
+    if ($null -eq $InputObject) {
+        return
+    }
+
+    $property = $InputObject.PSObject.Properties[$Name]
+    if ($property) {
+        $property.Value = $Value
+        return
+    }
+
+    $InputObject | Add-Member -NotePropertyName $Name -NotePropertyValue $Value
 }
 
 function Write-RunLog {
@@ -236,6 +263,87 @@ function Invoke-ProcessNoCapture {
     }
 }
 
+function Get-FreeBytesForPath {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    try {
+        $root = [System.IO.Path]::GetPathRoot([System.IO.Path]::GetFullPath($Path))
+        if ([string]::IsNullOrWhiteSpace($root)) {
+            return $null
+        }
+
+        $drive = New-Object System.IO.DriveInfo($root)
+        return [int64]$drive.AvailableFreeSpace
+    }
+    catch {
+        return $null
+    }
+}
+
+function Get-TraceBufferProfile {
+    param([Parameter(Mandatory = $true)][string]$TracePath)
+
+    $freeBytes = Get-FreeBytesForPath -Path $TracePath
+    if ($null -ne $freeBytes -and $freeBytes -lt 2GB) {
+        return [ordered]@{
+            free_bytes = $freeBytes
+            buffer_size_kb = 16
+            min_buffers = 2
+            max_buffers = 4
+            max_file_mb = 16
+            mode = 'low-space'
+        }
+    }
+
+    return [ordered]@{
+        free_bytes = $freeBytes
+        buffer_size_kb = 64
+        min_buffers = 32
+        max_buffers = 64
+        max_file_mb = 256
+        mode = 'default'
+    }
+}
+
+function Remove-TraceParserScratch {
+    param([Parameter(Mandatory = $true)][string]$Mode)
+
+    if ($Mode -ne 'low-space') {
+        return
+    }
+
+    foreach ($path in @($csvPath, $xmlPath)) {
+        if (-not (Test-Path -LiteralPath $path)) {
+            continue
+        }
+
+        $length = 0
+        try {
+            $length = (Get-Item -LiteralPath $path).Length
+        }
+        catch {
+        }
+
+        Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
+        Write-RunLog -Message ("trace-parser-scratch-removed mode={0} path={1} length={2}" -f $Mode, $path, $length)
+    }
+}
+
+function Write-TraceTouchExport {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][object[]]$Touches,
+        [Parameter(Mandatory = $true)][string]$ParserSource
+    )
+
+    Write-JsonFile -Path $Path -InputObject ([ordered]@{
+            generated_utc = [DateTime]::UtcNow.ToString('o')
+            parser_source = $ParserSource
+            touch_count = @($Touches).Count
+            registry_touches = @($Touches)
+        })
+}
+
 function Get-BaselineValues {
     param([object[]]$Candidates)
 
@@ -301,19 +409,24 @@ function Get-ActiveSchemeGuid {
 
 function Start-Trace {
     Stop-TraceBestEffort
-    foreach ($path in @($etlPath, $csvPath)) {
+    foreach ($path in @($etlPath, $csvPath, $xmlPath)) {
         if (Test-Path -LiteralPath $path) {
             Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
         }
     }
 
+    $profile = Get-TraceBufferProfile -TracePath $etlPath
+    Write-RunLog -Message ("trace-buffer-profile mode={0} free_bytes={1} bs={2} nb_min={3} nb_max={4} max_mb={5}" -f $profile.mode, $profile.free_bytes, $profile.buffer_size_kb, $profile.min_buffers, $profile.max_buffers, $profile.max_file_mb)
     Write-RunLog -Message ("trace-create-start name={0}" -f $traceName)
     $create = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @(
         'create', 'trace', $traceName,
-        '-p', 'Microsoft-Windows-Kernel-Registry',
+        '-p', 'Microsoft-Windows-Kernel-Registry', '0xFFFF', '5',
         '-o', $etlPath,
-        '-bs', '64',
-        '-nb', '64', '256'
+        '-bs', [string]$profile.buffer_size_kb,
+        '-nb', [string]$profile.min_buffers, [string]$profile.max_buffers,
+        '-f', 'bincirc',
+        '-max', [string]$profile.max_file_mb,
+        '-ets'
     ) -TimeoutSeconds 90
     if ($create.timed_out) {
         throw "logman create timed out for trace session $traceName."
@@ -322,17 +435,7 @@ function Start-Trace {
         throw "logman create failed for ${traceName}: stdout=$($create.stdout) stderr=$($create.stderr)"
     }
     Write-RunLog -Message ("trace-create-complete name={0}" -f $traceName)
-
-    Write-RunLog -Message ("trace-start-begin name={0}" -f $traceName)
-    $start = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @('start', $traceName, '-ets') -TimeoutSeconds 90
-    if ($start.timed_out) {
-        throw "logman start timed out for trace session $traceName."
-    }
-    if ($start.exit_code -ne 0) {
-        throw "logman start failed for ${traceName}: stdout=$($start.stdout) stderr=$($start.stderr)"
-    }
-    Write-RunLog -Message ("trace-start-complete name={0}" -f $traceName)
-
+    Write-RunLog -Message ("trace-start-complete name={0} source=create-ets" -f $traceName)
     $sessionOutput = Get-TraceSessionOutputLocation -TraceName $traceName
     if ($sessionOutput) {
         $script:activeTraceOutputPath = [string]$sessionOutput.path
@@ -342,6 +445,7 @@ function Start-Trace {
         $script:activeTraceOutputPath = $null
         Write-RunLog -Message ("trace-start-output path=unknown name={0}" -f $traceName)
     }
+    return $profile
 }
 
 function Stop-Trace {
@@ -358,10 +462,12 @@ function Stop-Trace {
     Write-RunLog -Message ("trace-delete-begin name={0}" -f $traceName)
     $delete = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\logman.exe' -Arguments @('delete', $traceName) -TimeoutSeconds 60
     if ($delete.timed_out) {
-        throw "logman delete timed out for trace session $traceName."
+        Write-RunLog -Message ("trace-delete-timeout name={0}" -f $traceName)
+        return
     }
     if ($delete.exit_code -ne 0) {
-        throw "logman delete failed for ${traceName}: stdout=$($delete.stdout) stderr=$($delete.stderr)"
+        Write-RunLog -Message ("trace-delete-nonzero name={0} exit_code={1}" -f $traceName, $delete.exit_code)
+        return
     }
     Write-RunLog -Message ("trace-delete-complete name={0}" -f $traceName)
 }
@@ -862,18 +968,18 @@ function Resolve-TraceArtifactPath {
         }
     }
 
-    if (-not [string]::IsNullOrWhiteSpace($script:activeTraceOutputPath)) {
-        if (Test-Path -LiteralPath $script:activeTraceOutputPath) {
-            return [ordered]@{
-                path = $script:activeTraceOutputPath
-                source = 'active-output'
-            }
+    $system32ByName = if (-not [string]::IsNullOrWhiteSpace($traceName)) { Join-Path 'C:\Windows\System32' ("{0}.etl" -f $traceName) } else { $null }
+
+    if (-not [string]::IsNullOrWhiteSpace($script:activeTraceOutputPath) -and (Test-Path -LiteralPath $script:activeTraceOutputPath)) {
+        return [ordered]@{
+            path = $script:activeTraceOutputPath
+            source = 'active-output'
         }
     }
 
     foreach ($direct in @(
             @{ Path = $script:activeTraceOutputPath; Source = 'active-output-hint' },
-            @{ Path = if (-not [string]::IsNullOrWhiteSpace($traceName)) { Join-Path 'C:\Windows\System32' ("{0}.etl" -f $traceName) } else { $null }; Source = 'system32-trace-name-hint' },
+            @{ Path = $system32ByName; Source = 'system32-trace-name-hint' },
             @{ Path = $PreferredPath; Source = 'preferred-hint' }
         )) {
         $candidatePath = [string]$direct.Path
@@ -889,18 +995,23 @@ function Resolve-TraceArtifactPath {
         }
     }
 
-    $system32ByName = if (-not [string]::IsNullOrWhiteSpace($traceName)) { Join-Path 'C:\Windows\System32' ("{0}.etl" -f $traceName) } else { $null }
-    if (-not [string]::IsNullOrWhiteSpace($system32ByName)) {
-        return [ordered]@{
-            path = $system32ByName
-            source = 'system32-trace-name-hint'
-        }
-    }
-
-    if (-not [string]::IsNullOrWhiteSpace($script:activeTraceOutputPath)) {
-        return [ordered]@{
-            path = $script:activeTraceOutputPath
-            source = 'active-output-hint'
+    $parent = Split-Path -Parent $PreferredPath
+    $baseName = [System.IO.Path]::GetFileNameWithoutExtension($PreferredPath)
+    if (-not [string]::IsNullOrWhiteSpace($parent) -and (Test-Path -LiteralPath $parent)) {
+        $candidates = @(
+            Get-ChildItem -Path $parent -File -ErrorAction SilentlyContinue |
+                Where-Object {
+                    $_.Name -like "$baseName*.etl*" -or
+                    $_.Name -like '*.etl' -or
+                    $_.Extension -like '.etl*'
+                } |
+                Sort-Object LastWriteTimeUtc -Descending
+        )
+        if (@($candidates).Count -gt 0) {
+            return [ordered]@{
+                path = $candidates[0].FullName
+                source = 'discovered'
+            }
         }
     }
 
@@ -927,6 +1038,440 @@ function Get-TraceLinesFromCsv {
     }
 
     return @($lines)
+}
+
+function Normalize-RegistryPathToken {
+    param([string]$Value)
+
+    if ([string]::IsNullOrWhiteSpace($Value)) {
+        return $null
+    }
+
+    $normalized = [string]$Value
+    $normalized = $normalized -replace '^\\\\REGISTRY\\\\MACHINE', 'HKLM'
+    $normalized = $normalized -replace '^\\\\REGISTRY\\\\USER', 'HKU'
+    $normalized = $normalized -replace '^HKEY_LOCAL_MACHINE', 'HKLM'
+    $normalized = $normalized -replace '^HKEY_CURRENT_USER', 'HKCU'
+    $normalized = $normalized -replace '^HKEY_CLASSES_ROOT', 'HKCR'
+    $normalized = $normalized -replace '^HKEY_USERS', 'HKU'
+    return $normalized
+}
+
+function Normalize-RegistryOperationToken {
+    param([string]$Value)
+
+    $text = [string]$Value
+    if ([string]::IsNullOrWhiteSpace($text)) {
+        return $null
+    }
+
+    if ($text -match 'RegQueryValue|QueryValueKey|CmpQueryValueKey|NtQueryValueKey') {
+        return 'RegQueryValue'
+    }
+    if ($text -match 'RegSetValue|SetValueKey|CmpSetValueKey|NtSetValueKey') {
+        return 'RegSetValue'
+    }
+    if ($text -match 'RegCreateKey|CreateKey|NtCreateKey') {
+        return 'RegCreateKey'
+    }
+    if ($text -match 'RegDeleteValue|DeleteValueKey|NtDeleteValueKey') {
+        return 'RegDeleteValue'
+    }
+    if ($text -match 'RegDeleteKey|DeleteKey|NtDeleteKey') {
+        return 'RegDeleteKey'
+    }
+
+    return $text
+}
+
+function Invoke-TracerptXmlParse {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$TracePath,
+        [Parameter(Mandatory = $true)]
+        [string]$XmlOutputPath,
+        [int]$Attempts = 2,
+        [int]$TimeoutSeconds = 180
+    )
+
+    $attemptLog = @()
+    for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
+        if (Test-Path -LiteralPath $XmlOutputPath) {
+            Remove-Item -LiteralPath $XmlOutputPath -Force -ErrorAction SilentlyContinue
+        }
+
+        # `tracerpt -lr -of XML` succeeds interactively on this guest, while the
+        # captured variant has intermittently returned a false failure with no output.
+        # Use the simpler no-capture path here and judge success by exit code + file.
+        $result = Invoke-ProcessNoCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($TracePath, '-lr', '-o', $XmlOutputPath, '-of', 'XML', '-y') -TimeoutSeconds $TimeoutSeconds
+        $xmlExists = Test-Path -LiteralPath $XmlOutputPath
+        $xmlLength = if ($xmlExists) { (Get-Item -LiteralPath $XmlOutputPath).Length } else { 0 }
+        $attemptLog += ,([pscustomobject][ordered]@{
+                attempt = $attempt
+                exit_code = $result.exit_code
+                timed_out = $result.timed_out
+                xml_exists = $xmlExists
+                xml_length = $xmlLength
+                stderr = $result.stderr
+            })
+
+        if (-not $result.timed_out -and $result.exit_code -eq 0 -and $xmlExists -and $xmlLength -gt 0) {
+            return [ordered]@{
+                success = $true
+                attempt = $attempt
+                exit_code = $result.exit_code
+                timed_out = $result.timed_out
+                xml_exists = $xmlExists
+                xml_length = $xmlLength
+                stdout = $result.stdout
+                stderr = $result.stderr
+                attempts = @($attemptLog)
+            }
+        }
+
+        if ($attempt -lt $Attempts) {
+            Start-Sleep -Seconds 3
+        }
+    }
+
+    $lastAttempt = @($attemptLog)[@($attemptLog).Count - 1]
+    return [ordered]@{
+        success = $false
+        attempt = $lastAttempt.attempt
+        exit_code = $lastAttempt.exit_code
+        timed_out = $lastAttempt.timed_out
+        xml_exists = $lastAttempt.xml_exists
+        xml_length = $lastAttempt.xml_length
+        stdout = ''
+        stderr = $lastAttempt.stderr
+        attempts = @($attemptLog)
+    }
+}
+
+function Get-TraceLinesFromXml {
+    param([string]$Path)
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        $script:XmlTraceTouchRecords = @()
+        $script:XmlTraceDiagnostics = [ordered]@{
+            path = $Path
+            exists = $false
+            event_count = 0
+            line_count = 0
+            element_name_counts = @()
+            data_name_counts = @()
+            sample_events = @()
+        }
+        return @()
+    }
+
+    $lines = New-Object System.Collections.Generic.List[string]
+    $touchRecords = New-Object System.Collections.Generic.List[object]
+    $touchSeen = @{}
+    $elementCounts = @{}
+    $dataNameCounts = @{}
+    $sampleEvents = New-Object System.Collections.Generic.List[object]
+    $eventCount = 0
+    $settings = New-Object System.Xml.XmlReaderSettings
+    $settings.IgnoreComments = $true
+    $settings.IgnoreWhitespace = $true
+
+    try {
+        $reader = [System.Xml.XmlReader]::Create($Path, $settings)
+    }
+    catch {
+        $script:XmlTraceTouchRecords = @()
+        return @()
+    }
+
+    $provider = $null
+    $eventId = $null
+    $processName = $null
+    $operation = $null
+    $keyPath = $null
+    $valueName = $null
+    $inEvent = $false
+
+    $flushEvent = {
+        if (-not $inEvent) {
+            return
+        }
+
+        $parts = New-Object System.Collections.Generic.List[string]
+        if (-not [string]::IsNullOrWhiteSpace($provider)) { $parts.Add(("provider={0}" -f $provider)) }
+        if (-not [string]::IsNullOrWhiteSpace($eventId)) { $parts.Add(("event_id={0}" -f $eventId)) }
+        if (-not [string]::IsNullOrWhiteSpace($processName)) { $parts.Add(("process={0}" -f $processName)) }
+        if (-not [string]::IsNullOrWhiteSpace($operation)) { $parts.Add(("operation={0}" -f $operation)) }
+        if (-not [string]::IsNullOrWhiteSpace($keyPath)) { $parts.Add(("key={0}" -f $keyPath)) }
+        if (-not [string]::IsNullOrWhiteSpace($valueName)) { $parts.Add(("value={0}" -f $valueName)) }
+
+        if ($parts.Count -gt 0) {
+            $lines.Add(($parts -join ' '))
+        }
+
+        $dedupeKey = "{0}|{1}|{2}|{3}" -f $operation, $keyPath, $valueName, $processName
+        if (-not $touchSeen.ContainsKey($dedupeKey)) {
+            $touchSeen[$dedupeKey] = $true
+            $touchRecords.Add([pscustomobject][ordered]@{
+                    provider = $provider
+                    event_id = $eventId
+                    process_name = $processName
+                    operation = $operation
+                    key_path = $keyPath
+                    value_name = $valueName
+                })
+        }
+    }
+
+    try {
+        while ($reader.Read()) {
+            if ($reader.NodeType -eq [System.Xml.XmlNodeType]::Element) {
+                switch ($reader.LocalName) {
+                    'Event' {
+                        if ($inEvent) {
+                            & $flushEvent
+                        }
+
+                        $eventCount++
+                        $provider = $null
+                        $eventId = $null
+                        $processName = $null
+                        $operation = $null
+                        $keyPath = $null
+                        $valueName = $null
+                        $inEvent = $true
+                        continue
+                    }
+                    'Provider' {
+                        if (-not $inEvent) {
+                            continue
+                        }
+
+                        $provider = $reader.GetAttribute('Guid')
+                        if ([string]::IsNullOrWhiteSpace($provider)) {
+                            $provider = $reader.GetAttribute('Name')
+                        }
+                        continue
+                    }
+                    'Execution' {
+                        if (-not $inEvent) {
+                            continue
+                        }
+
+                        if ([string]::IsNullOrWhiteSpace($processName)) {
+                            $processId = [string]$reader.GetAttribute('ProcessID')
+                            if (-not [string]::IsNullOrWhiteSpace($processId)) {
+                                $processName = "pid:$processId"
+                            }
+                        }
+                        continue
+                    }
+                    'EventID' {
+                        if ($inEvent) {
+                            $eventId = [string]$reader.ReadElementContentAsString()
+                        }
+                        continue
+                    }
+                    'Opcode' {
+                        if ($inEvent) {
+                            $operation = Normalize-RegistryOperationToken -Value ([string]$reader.ReadElementContentAsString())
+                        }
+                        continue
+                    }
+                    'Data' {
+                        if (-not $inEvent) {
+                            continue
+                        }
+
+                        $name = [string]$reader.GetAttribute('Name')
+                        if (-not [string]::IsNullOrWhiteSpace($name)) {
+                            if (-not $dataNameCounts.ContainsKey($name)) {
+                                $dataNameCounts[$name] = 0
+                            }
+                            $dataNameCounts[$name]++
+                        }
+                        $value = [string]$reader.ReadElementContentAsString()
+                        switch -Regex ($name) {
+                            '^(KeyName|PathName|Path|KeyPath|BaseName|CompleteName)$' {
+                                $keyPath = Normalize-RegistryPathToken -Value $value
+                            }
+                            '^(ValueName|Value)$' {
+                                if (-not [string]::IsNullOrWhiteSpace($value) -and $value -notmatch '\\') {
+                                    $valueName = $value
+                                }
+                            }
+                            '^(RelativeName)$' {
+                                if (-not [string]::IsNullOrWhiteSpace($value)) {
+                                    if ($value -match '\\') {
+                                        if ([string]::IsNullOrWhiteSpace($keyPath)) {
+                                            $keyPath = Normalize-RegistryPathToken -Value $value
+                                        }
+                                    }
+                                    else {
+                                        $valueName = $value
+                                    }
+                                }
+                            }
+                            '^(ProcessName|Image)$' {
+                                $processName = $value
+                            }
+                            '^(Operation|EventName|OpcodeName)$' {
+                                $operation = Normalize-RegistryOperationToken -Value $value
+                            }
+                        }
+                        continue
+                    }
+                    default {
+                        if (-not $inEvent) {
+                            continue
+                        }
+
+                        $elementName = [string]$reader.LocalName
+                        if (-not [string]::IsNullOrWhiteSpace($elementName)) {
+                            if (-not $elementCounts.ContainsKey($elementName)) {
+                                $elementCounts[$elementName] = 0
+                            }
+                            $elementCounts[$elementName]++
+                        }
+                        if ($elementName -notmatch '^(KeyName|PathName|Path|KeyPath|BaseName|CompleteName|ValueName|Value|RelativeName|ProcessName|Image|Operation|EventName|OpcodeName)$') {
+                            continue
+                        }
+
+                        $value = [string]$reader.ReadElementContentAsString()
+                        switch -Regex ($elementName) {
+                            '^(KeyName|PathName|Path|KeyPath|BaseName|CompleteName)$' {
+                                $keyPath = Normalize-RegistryPathToken -Value $value
+                            }
+                            '^(ValueName|Value)$' {
+                                if (-not [string]::IsNullOrWhiteSpace($value) -and $value -notmatch '\\') {
+                                    $valueName = $value
+                                }
+                            }
+                            '^(RelativeName)$' {
+                                if (-not [string]::IsNullOrWhiteSpace($value)) {
+                                    if ($value -match '\\') {
+                                        if ([string]::IsNullOrWhiteSpace($keyPath)) {
+                                            $keyPath = Normalize-RegistryPathToken -Value $value
+                                        }
+                                    }
+                                    else {
+                                        $valueName = $value
+                                    }
+                                }
+                            }
+                            '^(ProcessName|Image)$' {
+                                $processName = $value
+                            }
+                            '^(Operation|EventName|OpcodeName)$' {
+                                $operation = Normalize-RegistryOperationToken -Value $value
+                            }
+                        }
+                        continue
+                    }
+                }
+            }
+
+            if ($reader.NodeType -eq [System.Xml.XmlNodeType]::EndElement -and $reader.LocalName -eq 'Event') {
+                if ($sampleEvents.Count -lt 5) {
+                    $sampleEvents.Add([pscustomobject][ordered]@{
+                            provider = $provider
+                            event_id = $eventId
+                            process = $processName
+                            operation = $operation
+                            key = $keyPath
+                            value = $valueName
+                        })
+                }
+                & $flushEvent
+                $provider = $null
+                $eventId = $null
+                $processName = $null
+                $operation = $null
+                $keyPath = $null
+                $valueName = $null
+                $inEvent = $false
+            }
+        }
+
+        if ($inEvent) {
+            & $flushEvent
+        }
+    }
+    finally {
+        $reader.Close()
+    }
+
+    $script:XmlTraceTouchRecords = @($touchRecords | ForEach-Object { $_ })
+
+    try {
+        $toCountSummary = {
+            param($Map)
+
+            if ($Map -isnot [System.Collections.IDictionary]) {
+                return @()
+            }
+
+            $rows = New-Object System.Collections.Generic.List[object]
+            foreach ($key in $Map.Keys) {
+                $rows.Add([pscustomobject]@{
+                        name = [string]$key
+                        count = [int]$Map[$key]
+                    })
+            }
+
+            return @(
+                $rows |
+                    Sort-Object -Property count -Descending |
+                    Select-Object -First 20
+            )
+        }
+
+        $script:XmlTraceDiagnostics = [ordered]@{
+            path = $Path
+            exists = $true
+            event_count = $eventCount
+            line_count = @($lines).Count
+            element_name_counts = @($toCountSummary.InvokeReturnAsIs($elementCounts))
+            data_name_counts = @($toCountSummary.InvokeReturnAsIs($dataNameCounts))
+            sample_events = @($sampleEvents)
+        }
+    }
+    catch {
+        $script:XmlTraceDiagnostics = [ordered]@{
+            path = $Path
+            exists = $true
+            event_count = $eventCount
+            line_count = @($lines).Count
+            element_name_counts = @()
+            data_name_counts = @()
+            sample_events = @()
+            diagnostics_error = $_.Exception.Message
+        }
+        Write-RunLog -Message ("trace-xml-diagnostics-error error={0}" -f $_.Exception.Message)
+    }
+
+    return @($lines)
+}
+
+function Write-XmlDiagnosticsZeroLines {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$ParserName
+    )
+
+    if (-not $script:XmlTraceDiagnostics) {
+        return
+    }
+
+    try {
+        Write-JsonFile -Path $parserDiagnosticsPath -InputObject $script:XmlTraceDiagnostics
+        $topElement = if (@($script:XmlTraceDiagnostics.element_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.element_name_counts)[0].name } else { 'none' }
+        $topData = if (@($script:XmlTraceDiagnostics.data_name_counts).Count -gt 0) { [string]@($script:XmlTraceDiagnostics.data_name_counts)[0].name } else { 'none' }
+        Write-RunLog -Message ("trace-xml-zero-lines parser={0} event_count={1} top_element={2} top_data={3}" -f $ParserName, $script:XmlTraceDiagnostics.event_count, $topElement, $topData)
+    }
+    catch {
+        Write-RunLog -Message ("trace-xml-diagnostics-write-error parser={0} error={1}" -f $ParserName, $_.Exception.Message)
+    }
 }
 
 function Get-BinaryMatchCount {
@@ -1006,7 +1551,7 @@ function Invoke-TracerptParse {
         [int]$TimeoutSeconds = 180
     )
 
-    $attemptLog = New-Object System.Collections.Generic.List[object]
+    $attemptLog = @()
     for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
         if (Test-Path -LiteralPath $CsvOutputPath) {
             Remove-Item -LiteralPath $CsvOutputPath -Force -ErrorAction SilentlyContinue
@@ -1015,7 +1560,7 @@ function Invoke-TracerptParse {
         $result = Invoke-CmdCapture -FilePath 'C:\Windows\System32\tracerpt.exe' -Arguments @($TracePath, '-o', $CsvOutputPath, '-of', 'CSV', '-y') -TimeoutSeconds $TimeoutSeconds
         $csvExists = Test-Path -LiteralPath $CsvOutputPath
         $csvLength = if ($csvExists) { (Get-Item -LiteralPath $CsvOutputPath).Length } else { 0 }
-        $attemptLog.Add([ordered]@{
+        $attemptLog += ,([pscustomobject][ordered]@{
                 attempt = $attempt
                 exit_code = $result.exit_code
                 timed_out = $result.timed_out
@@ -1083,7 +1628,7 @@ $triggerNames = @($manifest.triggers)
 
 try {
     if ($Phase -eq 'arm') {
-        foreach ($path in @($etlPath, $csvPath, $SummaryPath, $ResultsPath)) {
+        foreach ($path in @($etlPath, $csvPath, $xmlPath, $traceTouchExportPath, $SummaryPath, $ResultsPath, $parserDiagnosticsPath)) {
             if (Test-Path -LiteralPath $path) {
                 Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
             }
@@ -1126,7 +1671,7 @@ try {
     Write-JsonFile -Path $SummaryPath -InputObject (New-RunningSummary -State $state -Candidates $candidates)
     Write-RunLog -Message 'run-summary-written'
 
-    Start-Trace
+    $traceProfile = Start-Trace
     Write-RunLog -Message 'trace-started'
     Start-Sleep -Seconds 2
 
@@ -1182,7 +1727,8 @@ try {
     Write-RunLog -Message ("trace-artifact-ready ready={0} exists={1} length={2} stable_polls={3} path={4}" -f $etlReadiness.ready, $etlReadiness.exists, $etlReadiness.length, $etlReadiness.stable_polls, $traceArtifactPath)
 
     $traceLines = @()
-    $parserSource = 'etl-binary-fallback'
+    $parserSource = if ($traceProfile.mode -eq 'low-space') { 'tracerpt-xml-primary' } else { 'tracerpt-csv' }
+    $xmlTracerpt = $null
     $tracerpt = [ordered]@{
         success = $false
         attempt = 0
@@ -1191,12 +1737,72 @@ try {
         csv_exists = $false
         csv_length = 0
         stdout = ''
-        stderr = 'skipped-for-binary-first-runtime-parser'
+        stderr = ''
         attempts = @()
     }
-    Write-RunLog -Message 'trace-parse-start parser=etl-binary'
-    $traceLines = Get-TraceLinesFromEtlBinary -Path $traceArtifactPath -Candidates $candidates
-    Write-RunLog -Message ("trace-parsed parser=etl-binary line_count={0}" -f @($traceLines).Count)
+
+    if ($traceProfile.mode -eq 'low-space') {
+        $xmlTracerpt = Invoke-TracerptXmlParse -TracePath $traceArtifactPath -XmlOutputPath $xmlPath -Attempts 2 -TimeoutSeconds 420
+        if ($xmlTracerpt.success) {
+            $traceLines = Get-TraceLinesFromXml -Path $xmlPath
+            if (@($traceLines).Count -gt 0) {
+                Write-RunLog -Message ("trace-parsed parser=tracerpt-xml-primary attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
+            }
+            elseif ($script:XmlTraceDiagnostics) {
+                Write-XmlDiagnosticsZeroLines -ParserName 'tracerpt-xml-primary'
+            }
+        }
+        else {
+            Write-RunLog -Message ("trace-xml-failed parser=tracerpt-xml-primary timed_out={0} exit_code={1} xml_exists={2} xml_length={3}" -f $xmlTracerpt.timed_out, $xmlTracerpt.exit_code, $xmlTracerpt.xml_exists, $xmlTracerpt.xml_length)
+        }
+    }
+    else {
+        $tracerpt = Invoke-TracerptParse -TracePath $traceArtifactPath -CsvOutputPath $csvPath -Attempts 2 -TimeoutSeconds 180
+        if ($tracerpt.success) {
+            $traceLines = Get-TraceLinesFromCsv
+            Write-RunLog -Message ("trace-parsed parser=tracerpt attempt={0} csv_exists={1} csv_length={2}" -f $tracerpt.attempt, (Test-Path -LiteralPath $csvPath), $tracerpt.csv_length)
+            $csvProbe = Parse-Results -Candidates $candidates -Lines $traceLines -CsvExists (Test-Path -LiteralPath $csvPath) -ParserSource $parserSource
+            if (($csvProbe.csv_line_count -eq 0 -and $csvProbe.path_line_count -eq 0) -or (@($csvProbe.candidates | Where-Object { $_.exact_line_count -gt 0 -or $_.exact_query_hits -gt 0 }).Count -eq 0 -and $tracerpt.csv_length -gt 0)) {
+                $xmlTracerpt = Invoke-TracerptXmlParse -TracePath $traceArtifactPath -XmlOutputPath $xmlPath -Attempts 2 -TimeoutSeconds 180
+                if ($xmlTracerpt.success) {
+                    $traceLines = Get-TraceLinesFromXml -Path $xmlPath
+                    if (@($traceLines).Count -gt 0) {
+                        $parserSource = 'tracerpt-xml-fallback'
+                        Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
+                    }
+                    elseif ($script:XmlTraceDiagnostics) {
+                        Write-XmlDiagnosticsZeroLines -ParserName 'tracerpt-xml-fallback'
+                    }
+                }
+                else {
+                    Write-RunLog -Message ("trace-xml-failed parser=tracerpt-xml-fallback timed_out={0} exit_code={1} xml_exists={2} xml_length={3}" -f $xmlTracerpt.timed_out, $xmlTracerpt.exit_code, $xmlTracerpt.xml_exists, $xmlTracerpt.xml_length)
+                }
+            }
+        }
+        else {
+            $xmlTracerpt = Invoke-TracerptXmlParse -TracePath $traceArtifactPath -XmlOutputPath $xmlPath -Attempts 2 -TimeoutSeconds 180
+            if ($xmlTracerpt.success) {
+                $traceLines = Get-TraceLinesFromXml -Path $xmlPath
+                if (@($traceLines).Count -gt 0) {
+                    $parserSource = 'tracerpt-xml-fallback'
+                    Write-RunLog -Message ("trace-parsed parser=tracerpt-xml attempt={0} xml_length={1} line_count={2}" -f $xmlTracerpt.attempt, $xmlTracerpt.xml_length, @($traceLines).Count)
+                }
+                elseif ($script:XmlTraceDiagnostics) {
+                    Write-XmlDiagnosticsZeroLines -ParserName 'tracerpt-xml-fallback'
+                }
+            }
+            else {
+                Write-RunLog -Message ("trace-xml-failed parser=tracerpt-xml-fallback timed_out={0} exit_code={1} xml_exists={2} xml_length={3}" -f $xmlTracerpt.timed_out, $xmlTracerpt.exit_code, $xmlTracerpt.xml_exists, $xmlTracerpt.xml_length)
+            }
+        }
+    }
+
+    if (@($traceLines).Count -eq 0) {
+        $parserSource = 'etl-binary-fallback'
+        Write-RunLog -Message ("trace-parse-fallback parser=etl-binary timed_out={0} exit_code={1} csv_exists={2}" -f $tracerpt.timed_out, $tracerpt.exit_code, $tracerpt.csv_exists)
+        $traceLines = Get-TraceLinesFromEtlBinary -Path $traceArtifactPath -Candidates $candidates
+        Write-RunLog -Message ("trace-parsed parser=etl-binary line_count={0}" -f @($traceLines).Count)
+    }
 
     $parsed = Parse-Results -Candidates $candidates -Lines $traceLines -CsvExists (Test-Path -LiteralPath $csvPath) -ParserSource $parserSource
     Write-RunLog -Message ("trace-results-parsed candidate_count={0}" -f @($parsed.candidates).Count)
@@ -1205,7 +1811,12 @@ try {
     $pathOnly = @($parsed.candidates | Where-Object { $_.status -eq 'path-only-hit' })
     $noHit = @($parsed.candidates | Where-Object { $_.status -eq 'no-hit' })
     $triggerErrors = @($state.trigger_log | Where-Object { $_.status -eq 'error' })
+    if (@($script:XmlTraceTouchRecords).Count -gt 0) {
+        Write-TraceTouchExport -Path $traceTouchExportPath -Touches @($script:XmlTraceTouchRecords) -ParserSource $parserSource
+        Write-RunLog -Message ("trace-touch-export path={0} touch_count={1}" -f $traceTouchExportPath, @($script:XmlTraceTouchRecords).Count)
+    }
     Write-RunLog -Message ("trace-results-classified exact={0} exact_line={1} path_only={2} no_hit={3}" -f @($exactHit).Count, @($exactLineOnly).Count, @($pathOnly).Count, @($noHit).Count)
+    Remove-TraceParserScratch -Mode $traceProfile.mode
 
     Write-RunLog -Message 'finalize-build-start'
     $results = [ordered]@{
@@ -1217,10 +1828,12 @@ try {
         csv_line_count = $parsed.csv_line_count
         path_line_count = $parsed.path_line_count
         parser_source = $parsed.parser_source
+        trace_buffer_profile = $traceProfile
         etl_path = $traceArtifactPath
         etl_path_source = if ($resolvedTrace) { [string]$resolvedTrace.source } else { 'missing' }
         etl_ready = [bool]$etlReadiness.ready
         etl_length = [int64]$etlReadiness.length
+        touch_export_path = if (Test-Path -LiteralPath $traceTouchExportPath) { $traceTouchExportPath } else { $null }
         tracerpt = $tracerpt
         exact_hit_count = @($exactHit).Count
         exact_line_only_count = @($exactLineOnly).Count
@@ -1244,6 +1857,7 @@ try {
         etl_path = $traceArtifactPath
         etl_path_source = if ($resolvedTrace) { [string]$resolvedTrace.source } else { 'missing' }
         etl_ready = [bool]$etlReadiness.ready
+        touch_export_exists = [bool](Test-Path -LiteralPath $traceTouchExportPath)
         tracerpt = $tracerpt
         exact_hit_count = @($exactHit).Count
         exact_line_only_count = @($exactLineOnly).Count
@@ -1267,13 +1881,8 @@ try {
     Write-JsonFileDirect -Path $SummaryPath -InputObject $summary
     Write-RunLog -Message 'finalize-write-summary-complete'
     try {
-        $state.phase = 'completed'
-        if ($state.PSObject.Properties.Name -contains 'result_status') {
-            $state.result_status = $summary.status
-        }
-        else {
-            $state | Add-Member -NotePropertyName result_status -NotePropertyValue $summary.status
-        }
+        Set-ObjectPropertyValue -InputObject $state -Name 'phase' -Value 'completed'
+        Set-ObjectPropertyValue -InputObject $state -Name 'result_status' -Value $summary.status
         Write-RunLog -Message 'finalize-write-state-start'
         Write-JsonFileDirect -Path $StatePath -InputObject $state
         Write-RunLog -Message 'finalize-write-state-complete'
@@ -1292,13 +1901,28 @@ try {
     Write-RunLog -Message ("phase-complete phase=run status={0}" -f $summary.status)
 }
 catch {
+    $positionMessage = $null
+    try {
+        $positionMessage = $_.InvocationInfo.PositionMessage
+    }
+    catch {
+    }
+    $scriptStack = $null
+    try {
+        $scriptStack = $_.ScriptStackTrace
+    }
+    catch {
+    }
+
     Stop-TraceBestEffort
     if (Test-Path -LiteralPath $StatePath) {
         $state = Read-JsonFile -Path $StatePath
         if ($state) {
-            $state.phase = 'error'
-            $state.error = $_.Exception.Message
-            $state.result_status = 'error'
+            Set-ObjectPropertyValue -InputObject $state -Name 'phase' -Value 'error'
+            Set-ObjectPropertyValue -InputObject $state -Name 'error' -Value $_.Exception.Message
+            Set-ObjectPropertyValue -InputObject $state -Name 'error_position' -Value $positionMessage
+            Set-ObjectPropertyValue -InputObject $state -Name 'error_stack' -Value $scriptStack
+            Set-ObjectPropertyValue -InputObject $state -Name 'result_status' -Value 'error'
             Write-JsonFile -Path $StatePath -InputObject $state
         }
     }
@@ -1317,6 +1941,8 @@ catch {
         pattern = 'mega-trigger'
         parser_source = 'parser-error'
         error = $_.Exception.Message
+        error_position = $positionMessage
+        error_stack = $scriptStack
         candidates = @($errorCandidates)
     })
     Write-JsonFile -Path $SummaryPath -InputObject ([ordered]@{
@@ -1325,8 +1951,9 @@ catch {
         pattern = 'mega-trigger'
         status = 'error'
         error = $_.Exception.Message
+        error_position = $positionMessage
     })
-    Write-RunLog -Message ("phase-error phase={0} error={1}" -f $Phase, $_.Exception.Message)
+    Write-RunLog -Message ("phase-error phase={0} error={1} position={2}" -f $Phase, $_.Exception.Message, $positionMessage)
     throw
 }
 finally {

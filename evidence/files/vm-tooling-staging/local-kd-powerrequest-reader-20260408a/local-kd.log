@@ -1,0 +1,271 @@
+Opened log file 'C:\RegProbe-Diag\debugger-smoke\local-kd-powerrequest-reader-20260408a\local-kd.log'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+   EnableRedirectToChakraJsProvider : false
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.016 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.031 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 30
+
+Microsoft (R) Windows Debugger Version 10.0.28000.1721 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'
+Connected to Windows 10 26100 x64 target at (Wed Apr  8 02:40:34.319 2026 (UTC - 7:00)), ptr64 TRUE
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Kernel Version 26100 MP (2 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Edition build lab: 26100.1.amd64fre.ge_release.240331-1435
+Kernel base = 0xfffff806`e6e00000 PsLoadedModuleList = 0xfffff806`e7cf50c0
+Debug session time: Wed Apr  8 02:40:34.437 2026 (UTC - 7:00)
+System Uptime: 0 days 21:21:58.176
+lkd> .sympath C:\Tools\Symbols\local-kd-powerrequest-reader-20260408a
+Symbol search path is: C:\Tools\Symbols\local-kd-powerrequest-reader-20260408a
+Expanded Symbol search path is: c:\tools\symbols\local-kd-powerrequest-reader-20260408a
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Tools\Symbols\local-kd-powerrequest-reader-20260408a
+lkd> .reload /f nt
+lkd> .echo REGPROBE_LOCALKD_BEGIN
+REGPROBE_LOCALKD_BEGIN
+lkd> x nt!PopPowerRequestEvaluateExecutionRequiredStatus
+fffff806`e783bd2c nt!PopPowerRequestEvaluateExecutionRequiredStatus (PopPowerRequestEvaluateExecutionRequiredStatus)
+lkd> uf nt!PopPowerRequestEvaluateExecutionRequiredStatus
+nt!PopPowerRequestEvaluateExecutionRequiredStatus:
+fffff806`e783bd2c 4533c0          xor     r8d,r8d
+fffff806`e783bd2f 4439057ab35900  cmp     dword ptr [nt!PopExecutionRequiredTimeout (fffff806`e7dd70b0)],r8d
+fffff806`e783bd36 7461            je      nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x6d (fffff806`e783bd99)  Branch
+
+nt!PopPowerRequestEvaluateExecutionRequiredStatus+0xc:
+fffff806`e783bd38 44380544234d00  cmp     byte ptr [nt!PopExecutionRequiredContext+0x3 (fffff806`e7d0e083)],r8b
+fffff806`e783bd3f 7508            jne     nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x1d (fffff806`e783bd49)  Branch
+
+nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x15:
+fffff806`e783bd41 41b801000000    mov     r8d,1
+fffff806`e783bd47 eb50            jmp     nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x6d (fffff806`e783bd99)  Branch
+
+nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x1d:
+fffff806`e783bd49 44390550b45900  cmp     dword ptr [nt!PopPowerRequestActiveAudioEnablesExecutionRequired (fffff806`e7dd71a0)],r8d
+fffff806`e783bd50 7409            je      nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x2f (fffff806`e783bd5b)  Branch
+
+nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x26:
+fffff806`e783bd52 44380529234d00  cmp     byte ptr [nt!PopExecutionRequiredContext+0x2 (fffff806`e7d0e082)],r8b
+fffff806`e783bd59 75e6            jne     nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x15 (fffff806`e783bd41)  Branch
+
+nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x2f:
+fffff806`e783bd5b 4438051f234d00  cmp     byte ptr [nt!PopExecutionRequiredContext+0x1 (fffff806`e7d0e081)],r8b
+fffff806`e783bd62 75dd            jne     nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x15 (fffff806`e783bd41)  Branch
+
+nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x38:
+fffff806`e783bd64 48ba0800000080f7ffff mov rdx,0FFFFF78000000008h
+fffff806`e783bd6e 488b12          mov     rdx,qword ptr [rdx]
+fffff806`e783bd71 8b0539b35900    mov     eax,dword ptr [nt!PopExecutionRequiredTimeout (fffff806`e7dd70b0)]
+fffff806`e783bd77 482b150a234d00  sub     rdx,qword ptr [nt!PopExecutionRequiredContext+0x8 (fffff806`e7d0e088)]
+fffff806`e783bd7e 4869c880969800  imul    rcx,rax,989680h
+fffff806`e783bd85 410fb6c0        movzx   eax,r8b
+fffff806`e783bd89 41b801000000    mov     r8d,1
+fffff806`e783bd8f 483bd1          cmp     rdx,rcx
+fffff806`e783bd92 410f42c0        cmovb   eax,r8d
+fffff806`e783bd96 448ac0          mov     r8b,al
+
+nt!PopPowerRequestEvaluateExecutionRequiredStatus+0x6d:
+fffff806`e783bd99 418ac0          mov     al,r8b
+fffff806`e783bd9c c3              ret
+lkd> x nt!PopPowerRequestHandleExecutionEnablementUpdate
+fffff806`e783bcec nt!PopPowerRequestHandleExecutionEnablementUpdate (PopPowerRequestHandleExecutionEnablementUpdate)
+lkd> uf nt!PopPowerRequestHandleExecutionEnablementUpdate
+nt!PopPowerRequestHandleExecutionEnablementUpdate:
+fffff806`e783bcec 4883ec28        sub     rsp,28h
+fffff806`e783bcf0 833d1db4590000  cmp     dword ptr [nt!PopPowerRequestConvertSystemToExecution (fffff806`e7dd7114)],0
+fffff806`e783bcf7 b80a000000      mov     eax,0Ah
+fffff806`e783bcfc 448d48fe        lea     r9d,[rax-2]
+fffff806`e783bd00 440f45c8        cmovne  r9d,eax
+fffff806`e783bd04 e823000000      call    nt!PopPowerRequestEvaluateExecutionRequiredStatus (fffff806`e783bd2c)
+fffff806`e783bd09 418bc9          mov     ecx,r9d
+fffff806`e783bd0c 84c0            test    al,al
+fffff806`e783bd0e 750d            jne     nt!PopPowerRequestHandleExecutionEnablementUpdate+0x31 (fffff806`e783bd1d)  Branch
+
+nt!PopPowerRequestHandleExecutionEnablementUpdate+0x24:
+fffff806`e783bd10 33d2            xor     edx,edx
+fffff806`e783bd12 e885a8a7ff      call    nt!PopPowerRequestRevokeRequests (fffff806`e72b659c)
+
+nt!PopPowerRequestHandleExecutionEnablementUpdate+0x2b:
+fffff806`e783bd17 4883c428        add     rsp,28h
+fffff806`e783bd1b c3              ret
+
+nt!PopPowerRequestHandleExecutionEnablementUpdate+0x31:
+fffff806`e783bd1d e88e8fa7ff      call    nt!PopPowerRequestUnrevokeRequests (fffff806`e72b4cb0)
+fffff806`e783bd22 ebf3            jmp     nt!PopPowerRequestHandleExecutionEnablementUpdate+0x2b (fffff806`e783bd17)  Branch
+lkd> x nt!PopPowerRequestExecutionRequiredSettingCallback
+fffff806`e78acf80 nt!PopPowerRequestExecutionRequiredSettingCallback (PopPowerRequestExecutionRequiredSettingCallback)
+lkd> uf nt!PopPowerRequestExecutionRequiredSettingCallback
+nt!PopPowerRequestExecutionRequiredSettingCallback:
+fffff806`e78acf80 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff806`e78acf85 48896c2410      mov     qword ptr [rsp+10h],rbp
+fffff806`e78acf8a 4889742418      mov     qword ptr [rsp+18h],rsi
+fffff806`e78acf8f 57              push    rdi
+fffff806`e78acf90 4883ec20        sub     rsp,20h
+fffff806`e78acf94 488bf1          mov     rsi,rcx
+fffff806`e78acf97 418be8          mov     ebp,r8d
+fffff806`e78acf9a 488d0daf104600  lea     rcx,[nt!PopPowerRequestLock (fffff806`e7d0e050)]
+fffff806`e78acfa1 488bfa          mov     rdi,rdx
+fffff806`e78acfa4 bb0d0000c0      mov     ebx,0C000000Dh
+fffff806`e78acfa9 e826b497ff      call    nt!PopAcquireRwLockExclusive (fffff806`e72283d4)
+fffff806`e78acfae 4c8b0da31557ff  mov     r9,qword ptr [nt!GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT (fffff806`e6e1e558)]
+fffff806`e78acfb5 4c2b0e          sub     r9,qword ptr [rsi]
+fffff806`e78acfb8 750b            jne     nt!PopPowerRequestExecutionRequiredSettingCallback+0x45 (fffff806`e78acfc5)  Branch
+
+nt!PopPowerRequestExecutionRequiredSettingCallback+0x3a:
+fffff806`e78acfba 4c8b0d9f1557ff  mov     r9,qword ptr [nt!GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT+0x8 (fffff806`e6e1e560)]
+fffff806`e78acfc1 4c2b4e08        sub     r9,qword ptr [rsi+8]
+
+nt!PopPowerRequestExecutionRequiredSettingCallback+0x45:
+fffff806`e78acfc5 4d85c9          test    r9,r9
+fffff806`e78acfc8 752c            jne     nt!PopPowerRequestExecutionRequiredSettingCallback+0x76 (fffff806`e78acff6)  Branch
+
+nt!PopPowerRequestExecutionRequiredSettingCallback+0x4a:
+fffff806`e78acfca 83fd04          cmp     ebp,4
+fffff806`e78acfcd 7527            jne     nt!PopPowerRequestExecutionRequiredSettingCallback+0x76 (fffff806`e78acff6)  Branch
+
+nt!PopPowerRequestExecutionRequiredSettingCallback+0x4f:
+fffff806`e78acfcf 4885ff          test    rdi,rdi
+fffff806`e78acfd2 7422            je      nt!PopPowerRequestExecutionRequiredSettingCallback+0x76 (fffff806`e78acff6)  Branch
+
+nt!PopPowerRequestExecutionRequiredSettingCallback+0x54:
+fffff806`e78acfd4 33d2            xor     edx,edx
+fffff806`e78acfd6 488d0dc3104600  lea     rcx,[nt!PopPowerRequestExecutionRequiredTimeoutTimer (fffff806`e7d0e0a0)]
+fffff806`e78acfdd e87e3991ff      call    nt!KeCancelTimer2 (fffff806`e71c0960)
+fffff806`e78acfe2 8b07            mov     eax,dword ptr [rdi]
+fffff806`e78acfe4 8905c6a05200    mov     dword ptr [nt!PopExecutionRequiredTimeout (fffff806`e7dd70b0)],eax
+fffff806`e78acfea e81dcec9ff      call    nt!PopPowerRequestSetExecutionRequiredTimeoutTimer (fffff806`e7549e0c)
+fffff806`e78acfef e8f8ecf8ff      call    nt!PopPowerRequestHandleExecutionEnablementUpdate (fffff806`e783bcec)
+fffff806`e78acff4 33db            xor     ebx,ebx
+
+nt!PopPowerRequestExecutionRequiredSettingCallback+0x76:
+fffff806`e78acff6 488d0d53104600  lea     rcx,[nt!PopPowerRequestLock (fffff806`e7d0e050)]
+fffff806`e78acffd e8c68e90ff      call    nt!PopReleaseRwLock (fffff806`e71b5ec8)
+fffff806`e78ad002 488b6c2438      mov     rbp,qword ptr [rsp+38h]
+fffff806`e78ad007 8bc3            mov     eax,ebx
+fffff806`e78ad009 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+fffff806`e78ad00e 488b742440      mov     rsi,qword ptr [rsp+40h]
+fffff806`e78ad013 4883c420        add     rsp,20h
+fffff806`e78ad017 5f              pop     rdi
+fffff806`e78ad018 c3              ret
+lkd> x nt!PopPowerRequestCallbackExecutionRequired
+fffff806`e7827260 nt!PopPowerRequestCallbackExecutionRequired (PopPowerRequestCallbackExecutionRequired)
+lkd> uf nt!PopPowerRequestCallbackExecutionRequired
+nt!PopPowerRequestCallbackExecutionRequired:
+fffff806`e7827260 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff806`e7827265 4889742410      mov     qword ptr [rsp+10h],rsi
+fffff806`e782726a 57              push    rdi
+fffff806`e782726b 4883ec20        sub     rsp,20h
+fffff806`e782726f 418af8          mov     dil,r8b
+fffff806`e7827272 83fa03          cmp     edx,3
+fffff806`e7827275 7574            jne     nt!PopPowerRequestCallbackExecutionRequired+0x8b (fffff806`e78272eb)  Branch
+
+nt!PopPowerRequestCallbackExecutionRequired+0x17:
+fffff806`e7827277 8a0502fe5a00    mov     al,byte ptr [nt!PopPowerRequestPdcNotifiedExecutionRequired (fffff806`e7dd707f)]
+fffff806`e782727d 8d5aff          lea     ebx,[rdx-1]
+fffff806`e7827280 488d35f8fd5a00  lea     rsi,[nt!PopPowerRequestPdcNotifiedExecutionRequired (fffff806`e7dd707f)]
+
+nt!PopPowerRequestCallbackExecutionRequired+0x27:
+fffff806`e7827287 488b15f2024400  mov     rdx,qword ptr [nt!PoPdcCallbacks+0xa0 (fffff806`e7c67580)]
+fffff806`e782728e 4885d2          test    rdx,rdx
+fffff806`e7827291 7413            je      nt!PopPowerRequestCallbackExecutionRequired+0x46 (fffff806`e78272a6)  Branch
+
+nt!PopPowerRequestCallbackExecutionRequired+0x33:
+fffff806`e7827293 403ac7          cmp     al,dil
+fffff806`e7827296 740e            je      nt!PopPowerRequestCallbackExecutionRequired+0x46 (fffff806`e78272a6)  Branch
+
+nt!PopPowerRequestCallbackExecutionRequired+0x38:
+fffff806`e7827298 408acf          mov     cl,dil
+fffff806`e782729b 488bc2          mov     rax,rdx
+fffff806`e782729e e8dd741900      call    nt!KscpCfgDispatchUserCallTargetEsSmep (fffff806`e79be780)
+fffff806`e78272a3 40883e          mov     byte ptr [rsi],dil
+
+nt!PopPowerRequestCallbackExecutionRequired+0x46:
+fffff806`e78272a6 e8050a1400      call    nt!PopAcquirePolicyLock (fffff806`e7967cb0)
+fffff806`e78272ab 8b05df4a4e00    mov     eax,dword ptr [nt!PopSIdle+0x10 (fffff806`e7d0bd90)]
+fffff806`e78272b1 4084ff          test    dil,dil
+fffff806`e78272b4 7555            jne     nt!PopPowerRequestCallbackExecutionRequired+0xab (fffff806`e782730b)  Branch
+
+nt!PopPowerRequestCallbackExecutionRequired+0x56:
+fffff806`e78272b6 f7d3            not     ebx
+fffff806`e78272b8 23c3            and     eax,ebx
+
+nt!PopPowerRequestCallbackExecutionRequired+0x5a:
+fffff806`e78272ba 8905d04a4e00    mov     dword ptr [nt!PopSIdle+0x10 (fffff806`e7d0bd90)],eax
+fffff806`e78272c0 85c0            test    eax,eax
+fffff806`e78272c2 750c            jne     nt!PopPowerRequestCallbackExecutionRequired+0x70 (fffff806`e78272d0)  Branch
+
+nt!PopPowerRequestCallbackExecutionRequired+0x64:
+fffff806`e78272c4 8b05be4a4e00    mov     eax,dword ptr [nt!PopSIdle+0x8 (fffff806`e7d0bd88)]
+fffff806`e78272ca 8905e04a4e00    mov     dword ptr [nt!PopSIdle+0x30 (fffff806`e7d0bdb0)],eax
+
+nt!PopPowerRequestCallbackExecutionRequired+0x70:
+fffff806`e78272d0 e843000000      call    nt!PopCheckResiliencyScenarios (fffff806`e7827318)
+fffff806`e78272d5 e8260a1400      call    nt!PopReleasePolicyLock (fffff806`e7967d00)
+fffff806`e78272da 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+fffff806`e78272df 488b742438      mov     rsi,qword ptr [rsp+38h]
+fffff806`e78272e4 4883c420        add     rsp,20h
+fffff806`e78272e8 5f              pop     rdi
+fffff806`e78272e9 c3              ret
+
+nt!PopPowerRequestCallbackExecutionRequired+0x8b:
+fffff806`e78272eb 833d22fe5a0000  cmp     dword ptr [nt!PopPowerRequestConvertSystemToExecution (fffff806`e7dd7114)],0
+fffff806`e78272f2 488d3585fd5a00  lea     rsi,[nt!PopPowerRequestPdcNotifiedSystemRequired (fffff806`e7dd707e)]
+fffff806`e78272f9 bb01000000      mov     ebx,1
+fffff806`e78272fe 74a6            je      nt!PopPowerRequestCallbackExecutionRequired+0x46 (fffff806`e78272a6)  Branch
+
+nt!PopPowerRequestCallbackExecutionRequired+0xa0:
+fffff806`e7827300 8a0578fd5a00    mov     al,byte ptr [nt!PopPowerRequestPdcNotifiedSystemRequired (fffff806`e7dd707e)]
+fffff806`e7827306 e97cffffff      jmp     nt!PopPowerRequestCallbackExecutionRequired+0x27 (fffff806`e7827287)  Branch
+
+nt!PopPowerRequestCallbackExecutionRequired+0xab:
+fffff806`e782730b 0bc3            or      eax,ebx
+fffff806`e782730d ebab            jmp     nt!PopPowerRequestCallbackExecutionRequired+0x5a (fffff806`e78272ba)  Branch
+lkd> .echo REGPROBE_LOCALKD_END
+REGPROBE_LOCALKD_END
+lkd> q
+quit:
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\Visualizers\winrt.natvis'

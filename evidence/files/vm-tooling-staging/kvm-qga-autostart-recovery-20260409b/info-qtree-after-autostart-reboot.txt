@@ -1,0 +1,11 @@
+                x-disable-legacy-check = false
+                bus: virtio-serial0.0
+                  type virtio-serial-bus
+                  dev: virtserialport, id "channel1"
+                    chardev = "charchannel1"
+                    nr = 2 (0x2)
+                    name = "org.qemu.guest_agent.0"
+                    port 2, guest on, host off, throttle off
+                  dev: virtserialport, id "channel0"
+                    chardev = "charchannel0"
+                    nr = 1 (0x1)

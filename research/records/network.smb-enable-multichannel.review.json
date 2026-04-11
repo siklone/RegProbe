@@ -296,7 +296,7 @@
     "blocking_issues": []
   },
   "open_questions": [],
-  "last_reviewed_utc": "2026-03-14T00:00:00Z",
+  "last_reviewed_utc": "2026-04-11T05:09:52.494780Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/manage-smb-multichannel",
     "exact_quote_or_path": "Manage SMB Multichannel: `Because SMB Multichannel is enabled by default` and `Set-SmbServerConfiguration -EnableMultiChannel $false` / `Set-SmbClientConfiguration -EnableMultiChannel $false`; MSFT_SmbServerConfiguration: `EnableMultiChannel ... Controls whether SMB Multichannel is enabled for this server.`; SetConfiguration method of MSFT_SmbClientConfiguration: `EnableMultiChannel [in] Enable the use of multiple physical network interfaces.`",

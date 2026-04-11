@@ -181,5 +181,496 @@
     "dead_flag_four_conditions_met": true,
     "notes": "Bootstrapped from the current research record and evidence audit.",
     "new_pipeline_version": "v3.1"
+  },
+  "schema_version": "1.0",
+  "candidate_id": "power.session-watchdog-timeouts",
+  "feature_area": "Directed Power Watchdog Timeouts",
+  "discovery_source": "imported_record",
+  "discovery_reason": "existing_research",
+  "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+  "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
+  "value_type": "REG_DWORD pair",
+  "observed_default": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current Win25H2Clean baseline with the Session Manager Power key populated",
+    "state_kind": "value",
+    "value": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+    "rationale": "Leave the currently observed watchdog timeout pair unchanged until a stronger supported mapping exists.",
+    "evidence_ids": [
+      "vm-session-manager-power-baseline-20260328",
+      "vm-watchdog-boot-trace-20260328"
+    ]
+  },
+  "recommended_value": {
+    "source": "recommended_profiles",
+    "profile_id": "observed-baseline",
+    "label": "Observed baseline",
+    "applies_to": null,
+    "state_kind": "value",
+    "value": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+    "rationale": "Keep the pair at the current observed baseline while evidence gathering continues.",
+    "evidence_ids": [
+      "vm-session-manager-power-baseline-20260328",
+      "vm-watchdog-boot-trace-20260328"
+    ]
+  },
+  "rollback_value": {
+    "source": "windows_defaults",
+    "profile_id": "Observed Win25H2Clean baseline",
+    "label": "Observed Win25H2Clean baseline",
+    "applies_to": "Current Win25H2Clean baseline with the Session Manager Power key populated",
+    "state_kind": "value",
+    "value": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+    "rationale": "Leave the currently observed watchdog timeout pair unchanged until a stronger supported mapping exists.",
+    "evidence_ids": [
+      "vm-session-manager-power-baseline-20260328",
+      "vm-watchdog-boot-trace-20260328"
+    ],
+    "rollback_strategy": "restore_default"
+  },
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "promotion_state": "blocked",
+  "promotion_blockers": [
+    "The ETL review, the Procmon boot-log review, the targeted post-boot DcomLaunch/Power trigger, and the newer tools-hardened lightweight ETW S1 follow-up still stop short of a decisive exact live read of WatchdogResumeTimeout and WatchdogSleepTimeout.",
+    "The current Win25H2Clean VMware baseline only exposes Standby (S1), and repeated S1-specific follow-ups still fail by dropping guest ops or guest shell state before the decisive runtime bundle can complete.",
+    "documentation-first-review"
+  ],
+  "record_promotion_allowed": false,
+  "tweak_ingest_allowed": false,
+  "tweak_origin": "research-derived",
+  "gate_result": {
+    "schema_version": "1.0",
+    "evaluator_version": "3.6.0",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "candidate_id": "power.session-watchdog-timeouts",
+    "record_id": "power.session-watchdog-timeouts",
+    "tweak_id": "power.session-watchdog-timeouts",
+    "tweak_origin": "research-derived",
+    "promotion_state": "blocked",
+    "promotion_blockers": [
+      "The ETL review, the Procmon boot-log review, the targeted post-boot DcomLaunch/Power trigger, and the newer tools-hardened lightweight ETW S1 follow-up still stop short of a decisive exact live read of WatchdogResumeTimeout and WatchdogSleepTimeout.",
+      "The current Win25H2Clean VMware baseline only exposes Standby (S1), and repeated S1-specific follow-ups still fail by dropping guest ops or guest shell state before the decisive runtime bundle can complete.",
+      "documentation-first-review"
+    ],
+    "record_promotion_allowed": false,
+    "tweak_ingest_allowed": false,
+    "apply_allowed": false,
+    "app_mapping_status": "not-mapped",
+    "next_missing_layer": "decision-gate",
+    "debug_override_allowed": true,
+    "last_evaluated_at": "2026-04-09T03:33:00.227310Z",
+    "score_breakdown": {
+      "static_evidence_strength": 4,
+      "runtime_evidence_strength": 4,
+      "rollback_clarity": 5,
+      "blast_radius": 2,
+      "tweak_suitability": 2,
+      "privilege_complexity": 3,
+      "build_specificity": 5,
+      "sibling_expansion_value": 4,
+      "bench_priority": 5,
+      "overall_score": 3.78,
+      "next_missing_layer": "decision-gate"
+    },
+    "documentation_status": {
+      "record_status": "validated",
+      "has_validation_proof": true,
+      "has_official_evidence": false,
+      "confidence": "medium",
+      "documentation_quality_pass": true,
+      "documentation_issues": [],
+      "documented_behavior": true,
+      "has_value_context": true,
+      "has_default_context": true,
+      "has_recommended_context": true,
+      "has_rollback_context": true
+    },
+    "evidence_status": {
+      "evidence_count": 14,
+      "next_missing_layer": "decision-gate",
+      "has_procmon_evidence": true,
+      "has_ghidra_evidence": true,
+      "has_benchmark_evidence": false,
+      "has_reboot_evidence": true
+    },
+    "rollback_status": {
+      "rollback_declared": true,
+      "rollback_executed": false,
+      "rollback_verified": true,
+      "rollback_verification_method": "record-restore-story",
+      "rollback_failure_reason": null,
+      "rollback_value": {
+        "source": "windows_defaults",
+        "profile_id": "Observed Win25H2Clean baseline",
+        "label": "Observed Win25H2Clean baseline",
+        "applies_to": "Current Win25H2Clean baseline with the Session Manager Power key populated",
+        "state_kind": "value",
+        "value": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+        "rationale": "Leave the currently observed watchdog timeout pair unchanged until a stronger supported mapping exists.",
+        "evidence_ids": [
+          "vm-session-manager-power-baseline-20260328",
+          "vm-watchdog-boot-trace-20260328"
+        ],
+        "rollback_strategy": "restore_default"
+      },
+      "state_changed": null,
+      "apply_diff": null,
+      "restore_diff": null
+    },
+    "bench_status": {
+      "bench_tier": "unknown",
+      "bench_required": false,
+      "bench_vm_capable": true,
+      "bench_bare_metal_required": false,
+      "feature_area_group": "service",
+      "profiles": [
+        "service_startup",
+        "functional_throughput"
+      ],
+      "executed": false,
+      "summary": null,
+      "statistics": null,
+      "significance_verdict": null
+    },
+    "negative_evidence_status": {
+      "attempted_tools": [
+        "etw",
+        "procmon",
+        "ghidra",
+        "wpr",
+        "reboot"
+      ],
+      "attempted_layers": [
+        "runtime_procmon",
+        "static_ghidra",
+        "behavior_wpr",
+        "runtime_reboot"
+      ],
+      "signals": [],
+      "signal_strength": "none",
+      "runtime_negative": false,
+      "conflict_reason": null
+    },
+    "url_validation_status": {
+      "checked_url_count": 0,
+      "reachable_url_count": 0,
+      "dead_link_count": 0,
+      "dead_links": [],
+      "checked_urls": [],
+      "status": "not-run"
+    },
+    "freshness_status": {
+      "status": "fresh",
+      "revalidation_needed": false,
+      "stale_reason": null,
+      "last_known_good_build": "26100",
+      "current_build": "26100",
+      "builds_since": 0,
+      "last_verified_at": "2026-04-08T18:45:00Z",
+      "last_known_good_verification_context": {
+        "backend_id": "rai-linux-vm",
+        "tested_build": "26100",
+        "current_build": "26100",
+        "last_verified_at": "2026-04-08T18:45:00Z"
+      }
+    },
+    "verification_context": {
+      "backend_id": "rai-linux-vm",
+      "current_build": "26100",
+      "tested_build": "26100",
+      "last_verified_at": "2026-04-08T18:45:00Z",
+      "stale_reason": null,
+      "revalidation_needed": false,
+      "last_known_good_build": "26100"
+    }
+  },
+  "evidence_freshness": {
+    "os_build": "26100",
+    "evidence_collected_utc": "2026-04-08T18:45:00Z",
+    "revalidation_needed_on_major_update": true,
+    "expires_after_build": null
+  },
+  "last_verified_at": "2026-04-08T18:45:00Z",
+  "verification_environment": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "vm_name": null,
+    "baseline_snapshot": null,
+    "backend_id": "rai-linux-vm",
+    "execution_context": {
+      "backend_id": "rai-linux-vm",
+      "type": "vm",
+      "os": "linux-with-vm",
+      "privilege": "elevated",
+      "isolation": "vm"
+    }
+  },
+  "negative_evidence": {
+    "attempted_tools": [
+      "etw",
+      "procmon",
+      "ghidra",
+      "wpr",
+      "reboot"
+    ],
+    "attempted_layers": [
+      "runtime_procmon",
+      "static_ghidra",
+      "behavior_wpr",
+      "runtime_reboot"
+    ],
+    "signals": [],
+    "signal_strength": "none",
+    "runtime_negative": false,
+    "conflict_reason": null
+  },
+  "before_after": {
+    "format": null,
+    "diff_file": null,
+    "key_added": 0,
+    "key_deleted": 0,
+    "value_added": 0,
+    "value_deleted": 0,
+    "value_changed": 0,
+    "unchanged_values": 0,
+    "key_added_entries": [],
+    "key_deleted_entries": [],
+    "value_added_entries": [],
+    "value_deleted_entries": [],
+    "value_changed_entries": []
+  },
+  "source_enrichment": [
+    {
+      "evidence_id": "ghidra-watchdog-nextgate-ntoskrnl-20260328",
+      "kind": "decompilation",
+      "title": "Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair",
+      "location": "evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/files/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "summary": "The current-build ntoskrnl.exe pass found exact string hits for WatchdogResumeTimeout and WatchdogSleepTimeout and preserved reviewable fallback artifacts for the next-gate watchdog lane.",
+      "strength": "high",
+      "clue_type": "api_semantics"
+    },
+    {
+      "evidence_id": "repo-pofx-pseudocode-watchdog",
+      "kind": "repo-doc",
+      "title": "Repo PoFxInitPowerManagement pseudocode lead",
+      "location": "Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c and research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "behavior",
+        "side-effects",
+        "version-scope"
+      ],
+      "summary": "The repo-side pseudocode ties PopWatchdogResumeTimeout and PopWatchdogSleepTimeout to the directed power-up and directed power-down watchdog timeout globals, giving the pair a subsystem-level semantic lead.",
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "kernel-power-existing-next-gate-20260328",
+      "kind": "inference",
+      "title": "Kernel power next-gate intake summary",
+      "location": "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json and research/notes/kernel-power-next-gate-ghidra-review-20260328.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "version-scope",
+        "risk"
+      ],
+      "summary": "The 2026-03-28 intake review ranked the watchdog pair above the Executive worker-thread values because the baseline existence, exact string hits, and Ghidra artifacts were already stronger.",
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
+    },
+    {
+      "evidence_id": "validation-proof",
+      "kind": "validation-proof",
+      "title": "Validation proof",
+      "location": "research/notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "behavior"
+      ],
+      "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, and a newer tools-hardened lightweight ETW follow-up. All of them confirm the candidate surface is real, but the current VMware environment still does not produce a decisive exact live read of WatchdogResumeTimeout or WatchdogSleepTimeout.",
+      "strength": "high",
+      "clue_type": "api_semantics"
+    },
+    {
+      "evidence_id": "vm-watchdog-megatrace-adjacent-session-manager-power-20260410",
+      "kind": "inference",
+      "title": "2026-04-10 ETL adjacent SystemPowerPolicy corroboration",
+      "location": "registry-research-framework/audit/power-session-watchdog-timeouts-etl-link-20260410.json and evidence/files/vm-tooling-staging/kvm-mega-trace-20260410/mega-trace.etl",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "summary": "The 16MB circular mega-trace independently reproduced adjacent Session Manager\\Power activity by System (PID 4) through a SystemPowerPolicy write. That strengthens the existing power-family correlation already seen in the earlier ETL and Procmon boot-log reviews, but it still does not provide an exact watchdog-pair read.",
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
+    }
+  ],
+  "bench_results": {
+    "bench_tier": "unknown",
+    "bench_required": false,
+    "bench_vm_capable": true,
+    "bench_bare_metal_required": false,
+    "feature_area_group": "service",
+    "profiles": [
+      "service_startup",
+      "functional_throughput"
+    ],
+    "executed": false,
+    "summary": null,
+    "statistics": null,
+    "significance_verdict": null
+  },
+  "score_breakdown": {
+    "static_evidence_strength": 4,
+    "runtime_evidence_strength": 4,
+    "rollback_clarity": 5,
+    "blast_radius": 2,
+    "tweak_suitability": 2,
+    "privilege_complexity": 3,
+    "build_specificity": 5,
+    "sibling_expansion_value": 4,
+    "bench_priority": 5,
+    "overall_score": 3.78,
+    "next_missing_layer": "decision-gate"
+  },
+  "documentation_status": {
+    "record_status": "validated",
+    "has_validation_proof": true,
+    "has_official_evidence": false,
+    "confidence": "medium",
+    "documentation_quality_pass": true,
+    "documentation_issues": [],
+    "documented_behavior": true,
+    "has_value_context": true,
+    "has_default_context": true,
+    "has_recommended_context": true,
+    "has_rollback_context": true
+  },
+  "evidence_status": {
+    "evidence_count": 14,
+    "next_missing_layer": "decision-gate",
+    "has_procmon_evidence": true,
+    "has_ghidra_evidence": true,
+    "has_benchmark_evidence": false,
+    "has_reboot_evidence": true
+  },
+  "rollback_status": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current Win25H2Clean baseline with the Session Manager Power key populated",
+      "state_kind": "value",
+      "value": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+      "rationale": "Leave the currently observed watchdog timeout pair unchanged until a stronger supported mapping exists.",
+      "evidence_ids": [
+        "vm-session-manager-power-baseline-20260328",
+        "vm-watchdog-boot-trace-20260328"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
+  },
+  "verification_context": {
+    "record_id": "power.session-watchdog-timeouts",
+    "tweak_id": "power.session-watchdog-timeouts",
+    "supported_schema_versions": [
+      "1.0"
+    ],
+    "schema_compatibility_mode": "native",
+    "evaluator_version": "3.6.0"
+  },
+  "os_build": "26100",
+  "os_edition": "Professional",
+  "architecture": "x64",
+  "elevation_context": "elevated",
+  "machine_user_scope": "machine",
+  "build_sku_awareness": {
+    "os_build": "26100",
+    "os_edition": "Professional",
+    "architecture": "x64",
+    "elevation_context": "elevated",
+    "machine_user_scope": "machine"
+  },
+  "rollback_verification": {
+    "rollback_declared": true,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_verification_method": "record-restore-story",
+    "rollback_failure_reason": null,
+    "rollback_value": {
+      "source": "windows_defaults",
+      "profile_id": "Observed Win25H2Clean baseline",
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current Win25H2Clean baseline with the Session Manager Power key populated",
+      "state_kind": "value",
+      "value": "WatchdogResumeTimeout=120;WatchdogSleepTimeout=300",
+      "rationale": "Leave the currently observed watchdog timeout pair unchanged until a stronger supported mapping exists.",
+      "evidence_ids": [
+        "vm-session-manager-power-baseline-20260328",
+        "vm-watchdog-boot-trace-20260328"
+      ],
+      "rollback_strategy": "restore_default"
+    },
+    "state_changed": null,
+    "apply_diff": null,
+    "restore_diff": null
+  },
+  "freshness_status": {
+    "status": "fresh",
+    "revalidation_needed": false,
+    "stale_reason": null,
+    "last_known_good_build": "26100",
+    "current_build": "26100",
+    "builds_since": 0,
+    "last_verified_at": "2026-04-08T18:45:00Z",
+    "last_known_good_verification_context": {
+      "backend_id": "rai-linux-vm",
+      "tested_build": "26100",
+      "current_build": "26100",
+      "last_verified_at": "2026-04-08T18:45:00Z"
+    }
+  },
+  "url_validation": {
+    "checked_url_count": 0,
+    "reachable_url_count": 0,
+    "dead_link_count": 0,
+    "dead_links": [],
+    "checked_urls": [],
+    "status": "not-run"
   }
 }

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://regprobe.local/contracts/canonical-bundle.schema.json",
+  "title": "Canonical Bundle",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "feature_area",
+    "discovery_source",
+    "discovery_reason",
+    "observed_default",
+    "recommended_value",
+    "rollback_value",
+    "execution_context",
+    "promotion_state",
+    "promotion_blockers",
+    "record_promotion_allowed",
+    "tweak_ingest_allowed",
+    "evidence_freshness",
+    "last_verified_at",
+    "verification_environment",
+    "negative_evidence",
+    "before_after",
+    "source_enrichment",
+    "bench_results"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "candidate_id": {"type": "string", "minLength": 1},
+    "feature_area": {"type": "string", "minLength": 1},
+    "discovery_source": {"type": "string", "minLength": 1},
+    "discovery_reason": {"type": "string", "minLength": 1},
+    "key_path": {"type": ["string", "null"]},
+    "value_name": {"type": ["string", "null"]},
+    "value_type": {"type": ["string", "null"]},
+    "observed_default": {"type": ["object", "null"]},
+    "recommended_value": {"type": ["object", "null"]},
+    "rollback_value": {"type": ["object", "null"]},
+    "execution_context": {
+      "$ref": "./execution-context.schema.json"
+    },
+    "promotion_state": {
+      "enum": ["blocked", "promotion-eligible", "promoted", "revalidation-pending", "rejected"]
+    },
+    "promotion_blockers": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "record_promotion_allowed": {"type": "boolean"},
+    "tweak_ingest_allowed": {"type": "boolean"},
+    "tweak_origin": {
+      "enum": ["legacy-curated", "research-derived"]
+    },
+    "gate_result": {
+      "$ref": "./gate-result.schema.json"
+    },
+    "evidence_freshness": {"type": "object"},
+    "last_verified_at": {"type": ["string", "null"]},
+    "verification_environment": {"type": "object"},
+    "negative_evidence": {"type": "object"},
+    "before_after": {"type": "object"},
+    "source_enrichment": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "bench_results": {"type": "object"},
+    "score_breakdown": {"type": "object"},
+    "documentation_status": {"type": "object"},
+    "evidence_status": {"type": "object"},
+    "rollback_status": {"type": "object"},
+    "verification_context": {"type": "object"}
+  }
+}

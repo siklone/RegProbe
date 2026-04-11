@@ -1,0 +1,8 @@
+.sympath C:\Tools\Symbols\local-kd-powersetting-query-20260408a
+.reload /f nt
+.echo REGPROBE_LOCALKD_BEGIN
+uf nt!PopQueryPowerSettingUlong
+uf nt!PopGetPowerSettingValue
+uf nt!PopSetPowerSettingValue
+.echo REGPROBE_LOCALKD_END
+q
