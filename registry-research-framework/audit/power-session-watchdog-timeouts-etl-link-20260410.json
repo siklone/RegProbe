@@ -1,0 +1,20 @@
+{
+  "lane_label": "power.session-watchdog-timeouts",
+  "generated_utc": "2026-04-10T21:06:56.904762Z",
+  "status": "etl-megatrace-adjacent-linked",
+  "linked_record_id": "power.session-watchdog-timeouts",
+  "etl_candidate_id": "etl::623f8c641b38a700",
+  "source_trace": "evidence/files/vm-tooling-staging/kvm-mega-trace-20260410/mega-trace.etl",
+  "discovery_snapshot": "registry-research-framework/discovery/etl-registry-discovery.json",
+  "discovery_events": "registry-research-framework/discovery/discovery-events.jsonl",
+  "operation": "RegSetValue",
+  "reading_process": "System (PID 4)",
+  "key_path": "HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\Power",
+  "value_name": "SystemPowerPolicy",
+  "classification": "adjacent-session-manager-power-corroboration",
+  "existing_related_evidence_ids": [
+    "vm-watchdog-etl-registry-review-20260328",
+    "vm-watchdog-procmon-bootlog-20260328"
+  ],
+  "conclusion": "The 2026-04-10 16MB circular mega-trace independently reproduced adjacent Session Manager\\Power activity by System (PID 4) through a SystemPowerPolicy write. That reinforces the existing power-family correlation already seen in the earlier ETL and Procmon boot-log reviews, but it still does not provide an exact live read of WatchdogResumeTimeout or WatchdogSleepTimeout."
+}

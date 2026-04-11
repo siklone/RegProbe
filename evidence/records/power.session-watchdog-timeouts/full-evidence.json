@@ -514,6 +514,22 @@
       "summary": "The runtime story now includes the ETL review, the Procmon boot-log review, a targeted post-boot DcomLaunch/Power trigger, two older S1-specific Procmon attempts, and a newer tools-hardened lightweight ETW follow-up. All of them confirm the candidate surface is real, but the current VMware environment still does not produce a decisive exact live read of WatchdogResumeTimeout or WatchdogSleepTimeout.",
       "strength": "high",
       "clue_type": "api_semantics"
+    },
+    {
+      "evidence_id": "vm-watchdog-megatrace-adjacent-session-manager-power-20260410",
+      "kind": "inference",
+      "title": "2026-04-10 ETL adjacent SystemPowerPolicy corroboration",
+      "location": "registry-research-framework/audit/power-session-watchdog-timeouts-etl-link-20260410.json and evidence/files/vm-tooling-staging/kvm-mega-trace-20260410/mega-trace.etl",
+      "reference_type": "path",
+      "url": null,
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "summary": "The 16MB circular mega-trace independently reproduced adjacent Session Manager\\Power activity by System (PID 4) through a SystemPowerPolicy write. That strengthens the existing power-family correlation already seen in the earlier ETL and Procmon boot-log reviews, but it still does not provide an exact watchdog-pair read.",
+      "strength": "medium",
+      "clue_type": "legacy_behavior_hint"
     }
   ],
   "bench_results": {
