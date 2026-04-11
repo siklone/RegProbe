@@ -1,0 +1,18 @@
+{
+    "ntoskrnl_path":  "C:\\Windows\\System32\\ntoskrnl.exe",
+    "collected_utc":  "2026-04-11T15:59:36.0779723Z",
+    "guest_root":  "C:\\Users\\rai",
+    "output_path":  "C:\\Users\\rai\\evidence\\files\\vm-tooling-staging\\executionrequired-xref-20260411",
+    "string_hits":  [
+                        {
+                            "string":  "AllowAudioToEnableExecutionRequiredPowerRequests",
+                            "offset":  "0xBF6530",
+                            "offset_decimal":  12543280
+                        },
+                        {
+                            "string":  "AllowSystemRequiredPowerRequests",
+                            "offset":  "0xBF65E0",
+                            "offset_decimal":  12543456
+                        }
+                    ]
+}

@@ -1,0 +1,46 @@
+{
+  "collected_utc": "2026-04-11T16:02:09Z",
+  "binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
+  "binary_source_copy": "/tmp/regprobe-kernel-upload/uploads/ntoskrnl.exe",
+  "table_slice": {
+    "table_start_file_offset": "0xBEF1E8",
+    "table_start_va": "0x140C761E8",
+    "entry_stride_bytes": 48,
+    "common_key_string": {
+      "value": "Power",
+      "va": "0x140C7BB60"
+    }
+  },
+  "relevant_entries": [
+    {
+      "entry_index": 2,
+      "entry_file_offset": "0xBEF248",
+      "key_path": "Power",
+      "value_name": "AllowSystemRequiredPowerRequests",
+      "value_name_va": "0x140C7D5E0",
+      "value_name_file_offset": "0xBF65E0",
+      "target_global_va": "0x140FD7114",
+      "target_global_symbol_match": "nt!PopPowerRequestConvertSystemToExecution",
+      "symbol_match_source": "evidence/files/vm-tooling-staging/local-kd-allowsystemrequired-20260408a/local-kd-allowsystemrequired-20260408a.stdout.txt"
+    },
+    {
+      "entry_index": 3,
+      "entry_file_offset": "0xBEF278",
+      "key_path": "Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "value_name_va": "0x140C7D530",
+      "value_name_file_offset": "0xBF6530",
+      "target_global_va": "0x140FD71A0",
+      "target_global_symbol_match": "nt!PopPowerRequestActiveAudioEnablesExecutionRequired",
+      "symbol_match_source": "evidence/files/vm-tooling-staging/local-kd-allowaudio-20260408a/local-kd-allowaudio-20260408a.stdout.txt"
+    }
+  ],
+  "adjacent_power_values": [
+    "TtmEnabled",
+    "DeepIoCoalescingEnabled",
+    "CheckPowerSourceAfterRtcWakeTime",
+    "Power\\ModernSleep",
+    "Power\\PowerThrottling"
+  ],
+  "conclusion": "Current-build ntoskrnl.exe contains an INIT-time descriptor slice that binds the two execution-required registry value names under Control\\Power to exact kernel globals. The exact reader/caller function is still unresolved."
+}
