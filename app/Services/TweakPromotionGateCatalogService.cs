@@ -91,7 +91,9 @@ public sealed class TweakPromotionGateEntry
             : PromotionBlockers.Count > 0
                 ? $"Promotion blocked by {string.Join(", ", PromotionBlockers)}."
                 : string.Equals(PromotionState, "promoted", StringComparison.OrdinalIgnoreCase)
-                    ? "Promoted for apply/rollback."
+                    ? TweakIngestAllowed
+                        ? "Promoted for apply/rollback."
+                        : "Promoted for research tracking; app ingest disabled."
                     : $"Promotion state: {PromotionState}.";
 
     public static TweakPromotionGateEntry CreateFallback(string tweakId) => new()
@@ -169,7 +171,7 @@ public sealed class TweakPromotionGateCatalogService
         var contributorModeEnabled = contributorMode ?? ContributorMode.IsEnabled;
         var allowedWithoutOverride =
             string.Equals(entry.TweakOrigin, "legacy-curated", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(entry.PromotionState, "promoted", StringComparison.OrdinalIgnoreCase);
+            || entry.TweakIngestAllowed;
         var overrideUsed =
             !allowedWithoutOverride
             && overrideRequested

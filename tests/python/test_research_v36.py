@@ -107,6 +107,67 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["tweak_origin"], "research-derived")
         self.assertTrue(gate["debug_override_allowed"])
 
+    def test_research_derived_vm_safety_pass_promotes_record_without_ingest(self) -> None:
+        record = {
+            "record_id": "example.vm-promoted",
+            "tweak_id": "example.vm-promoted",
+            "record_status": "draft",
+            "setting": {
+                "area": "Power",
+                "targets": [
+                    {
+                        "path": "HKLM\\System\\CurrentControlSet\\Control\\Power",
+                        "value_name": "ExampleValue",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "app_current_implementation": {
+                "status": "not-mapped",
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(
+            record,
+            {"next_missing_layer": "none"},
+            {
+                "behavior": {
+                    "benchmark": {
+                        "executed": True,
+                        "safety_passed": True,
+                    }
+                },
+                "bench_results": {
+                    "executed": True,
+                    "safety_passed": True,
+                    "rollback_verified": True,
+                },
+                "rollback_verification": {
+                    "rollback_declared": True,
+                    "rollback_executed": True,
+                    "rollback_verified": True,
+                    "rollback_verification_method": "vm-safety-bench-restore-baseline",
+                    "rollback_failure_reason": None,
+                },
+                "negative_evidence": {},
+                "reproducibility": {"vm_name": "windows-11-25h2-vm"},
+            },
+            evaluated_at="2026-04-11T00:00:00Z",
+        )
+
+        self.assertEqual(gate["promotion_state"], "promoted")
+        self.assertFalse(gate["tweak_ingest_allowed"])
+        self.assertTrue(gate["record_promotion_allowed"])
+
     def test_score_breakdown_is_deterministic_and_contains_overall_score(self) -> None:
         record = {
             "record_id": "example.scored",

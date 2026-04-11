@@ -23,10 +23,10 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
               "evaluator_version": "3.6.0",
               "generated_utc": "2026-04-09T12:00:00Z",
               "summary": {
-                "total_records": 2,
+                "total_records": 3,
                 "promotion_state_counts": {
                   "blocked": 1,
-                  "promoted": 1
+                  "promoted": 2
                 }
               },
               "entries": [
@@ -71,6 +71,22 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                     "rollback_verification_method": "state_diff",
                     "rollback_failure_reason": "rollback-state-mismatch"
                   }
+                },
+                {
+                  "candidate_id": "power.promoted-record-only",
+                  "record_id": "power.promoted-record-only",
+                  "tweak_id": "power.promoted-record-only",
+                  "tweak_origin": "research-derived",
+                  "promotion_state": "promoted",
+                  "promotion_blockers": [],
+                  "record_promotion_allowed": true,
+                  "tweak_ingest_allowed": false,
+                  "apply_allowed": false,
+                  "app_mapping_status": "not-mapped",
+                  "next_missing_layer": "none",
+                  "debug_override_allowed": true,
+                  "schema_compatibility_mode": "native",
+                  "evaluator_version": "3.6.0"
                 }
               ]
             }
@@ -104,6 +120,17 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         var allowed = service.EvaluateApplyRequest("power.test-gate", overrideRequested: true, overrideReason: "debug", contributorMode: true);
         Assert.True(allowed.Allowed);
         Assert.True(allowed.OverrideUsed);
+    }
+
+    [Fact]
+    public void ApplyRequest_RejectsPromotedResearchRecordWhenIngestIsDisabled()
+    {
+        var service = new TweakPromotionGateCatalogService(_docsRoot);
+
+        var decision = service.EvaluateApplyRequest("power.promoted-record-only");
+
+        Assert.False(decision.Allowed);
+        Assert.Equal("promotion-state:promoted", decision.Message);
     }
 
     [Fact]

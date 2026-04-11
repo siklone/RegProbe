@@ -1792,6 +1792,17 @@ def evaluate_candidate_gate(
     )
     stale_revalidation = bool(freshness_status.get("revalidation_needed"))
 
+    legacy_ingest_promotable = (
+        bool_value(decision.get("apply_allowed"))
+        and app_status == "matches-research"
+        and tweak_origin == "legacy-curated"
+    )
+    research_record_promotable = (
+        bool_value(bench_results.get("executed"))
+        and bench_results.get("safety_passed") is True
+        and rollback_status.get("rollback_verified") is True
+    )
+
     if record_status == "deprecated" or "archived" in blocker_set:
         state = "rejected"
     elif "schema-version-unsupported" in blocker_set:
@@ -1800,7 +1811,7 @@ def evaluate_candidate_gate(
         state = "blocked"
     elif stale_revalidation:
         state = "revalidation-pending"
-    elif bool_value(decision.get("apply_allowed")) and app_status == "matches-research" and tweak_origin == "legacy-curated":
+    elif legacy_ingest_promotable or research_record_promotable:
         state = "promoted"
     else:
         state = "promotion-eligible"
@@ -1823,7 +1834,7 @@ def evaluate_candidate_gate(
         "promotion_state": state,
         "promotion_blockers": promotion_blockers,
         "record_promotion_allowed": state in {"promotion-eligible", "promoted", "revalidation-pending"},
-        "tweak_ingest_allowed": state == "promoted",
+        "tweak_ingest_allowed": state == "promoted" and legacy_ingest_promotable,
         "apply_allowed": bool_value(decision.get("apply_allowed")),
         "app_mapping_status": app_status,
         "next_missing_layer": missing_layer or "none",
