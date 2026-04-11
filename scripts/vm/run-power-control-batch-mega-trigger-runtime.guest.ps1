@@ -1190,11 +1190,67 @@ function Get-TraceLinesFromXml {
     $operation = $null
     $keyPath = $null
     $valueName = $null
+    $baseNameToken = $null
+    $relativeNameToken = $null
     $inEvent = $false
+    $eventFieldPairs = New-Object System.Collections.Generic.List[string]
+
+    $readXmlElementValue = {
+        param([System.Xml.XmlReader]$Reader)
+
+        $attributeValue = $null
+        foreach ($attributeName in @('Value', 'value', 'FormattedValue', 'formattedValue', 'Text', 'text')) {
+            $candidateValue = [string]$Reader.GetAttribute($attributeName)
+            if (-not [string]::IsNullOrWhiteSpace($candidateValue)) {
+                $attributeValue = $candidateValue
+                break
+            }
+        }
+
+        $contentValue = ''
+        try {
+            $contentValue = [string]$Reader.ReadElementContentAsString()
+        }
+        catch {
+            $contentValue = ''
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($contentValue)) {
+            return $contentValue
+        }
+
+        return $attributeValue
+    }
 
     $flushEvent = {
         if (-not $inEvent) {
             return
+        }
+
+        $basePath = Normalize-RegistryPathToken -Value $baseNameToken
+        if ([string]::IsNullOrWhiteSpace($keyPath) -and -not [string]::IsNullOrWhiteSpace($basePath)) {
+            $keyPath = $basePath
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($relativeNameToken)) {
+            $relativePath = Normalize-RegistryPathToken -Value $relativeNameToken
+            if ([string]::IsNullOrWhiteSpace($keyPath) -and -not [string]::IsNullOrWhiteSpace($relativePath)) {
+                $keyPath = $relativePath
+            }
+
+            if ([string]::IsNullOrWhiteSpace($keyPath) -and -not [string]::IsNullOrWhiteSpace($basePath)) {
+                $isValueOperation = [string]$operation -match 'RegQueryValue|RegSetValue|RegDeleteValue|EnumerateValueKey|QueryMultipleValueKey'
+                if ($isValueOperation) {
+                    $keyPath = $basePath
+                    if ([string]::IsNullOrWhiteSpace($valueName)) {
+                        $valueName = $relativeNameToken
+                    }
+                }
+                else {
+                    $combinedPath = '{0}\{1}' -f $basePath.TrimEnd('\'), ([string]$relativeNameToken).TrimStart('\')
+                    $keyPath = Normalize-RegistryPathToken -Value $combinedPath
+                }
+            }
         }
 
         $parts = New-Object System.Collections.Generic.List[string]
@@ -1209,6 +1265,7 @@ function Get-TraceLinesFromXml {
             $lines.Add(($parts -join ' '))
         }
 
+        $rawExcerpt = if ($eventFieldPairs.Count -gt 0) { (($eventFieldPairs -join '; ') -replace '\s+', ' ').Trim() } else { $null }
         $dedupeKey = "{0}|{1}|{2}|{3}" -f $operation, $keyPath, $valueName, $processName
         if (-not $touchSeen.ContainsKey($dedupeKey)) {
             $touchSeen[$dedupeKey] = $true
@@ -1219,6 +1276,7 @@ function Get-TraceLinesFromXml {
                     operation = $operation
                     key_path = $keyPath
                     value_name = $valueName
+                    raw_excerpt = if ([string]::IsNullOrWhiteSpace($rawExcerpt)) { $null } else { $rawExcerpt.Substring(0, [Math]::Min(400, $rawExcerpt.Length)) }
                 })
         }
     }
@@ -1239,6 +1297,9 @@ function Get-TraceLinesFromXml {
                         $operation = $null
                         $keyPath = $null
                         $valueName = $null
+                        $baseNameToken = $null
+                        $relativeNameToken = $null
+                        $eventFieldPairs = New-Object System.Collections.Generic.List[string]
                         $inEvent = $true
                         continue
                     }
@@ -1290,10 +1351,19 @@ function Get-TraceLinesFromXml {
                             }
                             $dataNameCounts[$name]++
                         }
-                        $value = [string]$reader.ReadElementContentAsString()
+                        $value = [string]$readXmlElementValue.InvokeReturnAsIs($reader)
+                        if (-not [string]::IsNullOrWhiteSpace($name) -and -not [string]::IsNullOrWhiteSpace($value) -and $eventFieldPairs.Count -lt 24) {
+                            $eventFieldPairs.Add(("{0}={1}" -f $name, (($value -replace '\s+', ' ').Trim())))
+                        }
                         switch -Regex ($name) {
-                            '^(KeyName|PathName|Path|KeyPath|BaseName|CompleteName)$' {
+                            '^(KeyName|PathName|Path|KeyPath|CompleteName)$' {
                                 $keyPath = Normalize-RegistryPathToken -Value $value
+                            }
+                            '^(BaseName)$' {
+                                $baseNameToken = $value
+                                if ([string]::IsNullOrWhiteSpace($keyPath)) {
+                                    $keyPath = Normalize-RegistryPathToken -Value $value
+                                }
                             }
                             '^(ValueName|Value)$' {
                                 if (-not [string]::IsNullOrWhiteSpace($value) -and $value -notmatch '\\') {
@@ -1301,6 +1371,7 @@ function Get-TraceLinesFromXml {
                                 }
                             }
                             '^(RelativeName)$' {
+                                $relativeNameToken = $value
                                 if (-not [string]::IsNullOrWhiteSpace($value)) {
                                     if ($value -match '\\') {
                                         if ([string]::IsNullOrWhiteSpace($keyPath)) {
@@ -1337,10 +1408,19 @@ function Get-TraceLinesFromXml {
                             continue
                         }
 
-                        $value = [string]$reader.ReadElementContentAsString()
+                        $value = [string]$readXmlElementValue.InvokeReturnAsIs($reader)
+                        if (-not [string]::IsNullOrWhiteSpace($elementName) -and -not [string]::IsNullOrWhiteSpace($value) -and $eventFieldPairs.Count -lt 24) {
+                            $eventFieldPairs.Add(("{0}={1}" -f $elementName, (($value -replace '\s+', ' ').Trim())))
+                        }
                         switch -Regex ($elementName) {
-                            '^(KeyName|PathName|Path|KeyPath|BaseName|CompleteName)$' {
+                            '^(KeyName|PathName|Path|KeyPath|CompleteName)$' {
                                 $keyPath = Normalize-RegistryPathToken -Value $value
+                            }
+                            '^(BaseName)$' {
+                                $baseNameToken = $value
+                                if ([string]::IsNullOrWhiteSpace($keyPath)) {
+                                    $keyPath = Normalize-RegistryPathToken -Value $value
+                                }
                             }
                             '^(ValueName|Value)$' {
                                 if (-not [string]::IsNullOrWhiteSpace($value) -and $value -notmatch '\\') {
@@ -1348,6 +1428,7 @@ function Get-TraceLinesFromXml {
                                 }
                             }
                             '^(RelativeName)$' {
+                                $relativeNameToken = $value
                                 if (-not [string]::IsNullOrWhiteSpace($value)) {
                                     if ($value -match '\\') {
                                         if ([string]::IsNullOrWhiteSpace($keyPath)) {
@@ -1389,6 +1470,9 @@ function Get-TraceLinesFromXml {
                 $operation = $null
                 $keyPath = $null
                 $valueName = $null
+                $baseNameToken = $null
+                $relativeNameToken = $null
+                $eventFieldPairs = New-Object System.Collections.Generic.List[string]
                 $inEvent = $false
             }
         }
@@ -1431,8 +1515,8 @@ function Get-TraceLinesFromXml {
             exists = $true
             event_count = $eventCount
             line_count = @($lines).Count
-            element_name_counts = @($toCountSummary.InvokeReturnAsIs($elementCounts))
-            data_name_counts = @($toCountSummary.InvokeReturnAsIs($dataNameCounts))
+            element_name_counts = @((& $toCountSummary $elementCounts))
+            data_name_counts = @((& $toCountSummary $dataNameCounts))
             sample_events = @($sampleEvents)
         }
     }
