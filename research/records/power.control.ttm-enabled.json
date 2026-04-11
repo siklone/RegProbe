@@ -1,0 +1,214 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.control.ttm-enabled",
+  "tweak_id": "power.control.ttm-enabled",
+  "record_status": "draft",
+  "summary": "Draft Control Power record. `TtmEnabled` sits under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`, has an exact repo-doc default of `0`, exists on the observed clean baseline with preview value `0`, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and later gained a lightweight public-header corroboration through `systeminformer/phnt` where `ntpoapi.h` exposes `BOOLEAN TtmEnabled;`. A later current-build INIT-table follow-up also showed `TtmEnabled` adjacent to the broader `Power` descriptor family that contains the execution-required pair and Power Throttling surfaces. The main caution is runtime behavior: a dedicated mega-trigger isolation pass later showed `DWORD=1` reproducing `boot-unsafe` on the pilot-safe profile. That is enough for a schema-backed draft, but not for a safe tweak recommendation.",
+  "validation_proof": {
+    "source_url": "Docs/power/power.md",
+    "exact_quote_or_path": "Docs/power/power.md:207 shows `\"TtmEnabled\"; = 0; // TtmpEnabled` under the main Control\\\\Power family.",
+    "key_found_on_page": true,
+    "notes": "The repo docs, the 96-key baseline existence batch, and the current-build targeted string pass all converge on the same Control\\\\Power value name."
+  },
+  "setting": {
+    "name": "TTM Enabled",
+    "category": "Power",
+    "area": "Raw Power Manager Registry",
+    "scope": "device",
+    "casual_explanation": "TtmEnabled is a low-level Control\\Power registry value tied to an internal `TtmpEnabled` power-manager state.",
+    "why_people_change_it": "Researchers track it when studying low-level power-manager behavior, adjacent execution-required settings, and boot-sensitive Control\\Power toggles.",
+    "tradeoffs_overview": "The lane has exact repo docs, a clean baseline value, a current-build `ntoskrnl.exe` string hit, a public-header corroboration through `systeminformer/phnt`, and adjacency inside the broader current-build Power init-table family. The same lane also has a strong red flag: an isolated runtime probe with `DWORD=1` reproduced `boot-unsafe`, so the value is currently research-only and unsuitable for any apply surface.",
+    "professional_notes": "The kernel-power 96 routing pass grouped TtmEnabled inside the main `Control\\Power` docs cluster. The clean phase-0 existence batch later confirmed that `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\TtmEnabled` exists on the Win25H2Clean baseline with preview value `0`. The broad targeted string batch then found an exact Unicode hit for `TtmEnabled` in `C:\\Windows\\System32\\ntoskrnl.exe`. A later source-enrichment follow-up over a shallow `winsiderss/systeminformer` clone surfaced `BOOLEAN TtmEnabled;` in `phnt/include/ntpoapi.h`, which is not a primary Microsoft contract but does corroborate that the value family remains visible through a public NT-style header surface. A later host-side INIT-table follow-up for the execution-required pair also showed `TtmEnabled` adjacent to the broader current-build `Power` descriptor slice, which strengthens that this is a real member of the same initialization family rather than a stray doc-only token. The main runtime result is negative for safety: the mega-trigger V2 follow-up isolated `TtmEnabled` under `DWORD=1` and recorded `boot-unsafe`, while sibling `HiberbootEnabled` and `MSDisabled` probes on the same pilot-safe family stayed individually safe. That means the record is strong enough for schema-backed tracking, but not for a user-facing or bench-ready apply lane.",
+    "targets": [
+      {
+        "target_id": "ttm-enabled",
+        "location_kind": "registry",
+        "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "TtmEnabled",
+        "value_type": "REG_DWORD",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": 0,
+            "label": "Observed Win25H2Clean baseline",
+            "meaning": "The current clean baseline exposes TtmEnabled = 0.",
+            "evidence_ids": [
+              "repo-power-doc",
+              "vm-power-control-phase0-20260329"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": 1,
+            "label": "Boot-unsafe probe value",
+            "meaning": "An isolated runtime probe with DWORD 1 reproduced boot-unsafe behavior and is not a recommended preset.",
+            "evidence_ids": [
+              "vm-power-control-ttm-boot-unsafe-20260402"
+            ]
+          }
+        ],
+        "notes": "Track this as a research-only raw power-manager value. The non-default probe value is evidence of risk, not a recommendation."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "not-mapped",
+    "provider_source": "not currently shipped in the app",
+    "notes": "The current app does not expose TtmEnabled as a tweak or UI surface.",
+    "writes": []
+  },
+  "windows_defaults": [
+    {
+      "label": "Observed Win25H2Clean baseline",
+      "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+      "states": [
+        {
+          "target_id": "ttm-enabled",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the observed baseline value while this raw control remains in research packaging only."
+        }
+      ],
+      "notes": "Observed directly from the 96-key phase-0 existence batch on Win25H2Clean.",
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "observed-baseline",
+      "label": "Observed baseline",
+      "intended_for": [
+        "Registry research tracking",
+        "Power-manager documentation"
+      ],
+      "avoid_for": [
+        "General users",
+        "One-click apply surfaces"
+      ],
+      "states": [
+        {
+          "target_id": "ttm-enabled",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Track the observed baseline without turning the value into a shipped preset."
+        }
+      ],
+      "good_when": "You want the repo to track the live baseline and current evidence for this raw power-manager value.",
+      "bad_when": "You want a supported end-user tweak or a value that has already cleared safety validation.",
+      "tradeoffs": [
+        "Preserves the observed baseline value.",
+        "Keeps the candidate research-only and non-actionable."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "vm-power-control-phase0-20260329",
+        "static-power-control-ttm-string-20260331"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-power-doc",
+      "kind": "repo-doc",
+      "title": "Repo power notes for TtmEnabled",
+      "location": "Docs/power/power.md",
+      "summary": "Repo power notes contain an exact `TtmEnabled = 0 // TtmpEnabled` entry under the main Control\\Power family.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-control-phase0-20260329",
+      "kind": "registry-observation",
+      "title": "Win25H2Clean 96-key phase-0 existence batch",
+      "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+      "summary": "The 96-key existence batch confirmed TtmEnabled exists on the clean baseline with observed preview value 0.",
+      "supports": [
+        "path",
+        "value",
+        "default",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "static-power-control-ttm-string-20260331",
+      "kind": "decompilation",
+      "title": "Broad targeted string triage for TtmEnabled",
+      "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json",
+      "summary": "The broad targeted string batch found an exact current-build Unicode hit for TtmEnabled in `C:\\Windows\\System32\\ntoskrnl.exe`.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "source-enrichment-ttm-header-20260412",
+      "kind": "analysis-output",
+      "title": "System Informer source-enrichment follow-up for TtmEnabled",
+      "location": "registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json and research/notes/source-enrichment-systeminformer-follow-up-20260412.md",
+      "summary": "A source-enrichment follow-up over `winsiderss/systeminformer` surfaced `BOOLEAN TtmEnabled;` in `phnt/include/ntpoapi.h`, adding a lightweight public-header corroboration layer.",
+      "supports": [
+        "value",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "static-power-control-init-table-adjacent-20260411",
+      "kind": "analysis-output",
+      "title": "Current-build Power init-table adjacency includes TtmEnabled",
+      "location": "research/notes/power-control-execution-required-init-table-static-follow-up-20260411.md",
+      "summary": "The host-side current-build init-table follow-up for the execution-required pair also showed TtmEnabled adjacent inside the broader `Power` descriptor slice, which strengthens that the value is part of the same real initialization family.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power-control-ttm-boot-unsafe-20260402",
+      "kind": "vm-test",
+      "title": "Mega-trigger isolation marked TtmEnabled boot-unsafe under DWORD 1",
+      "location": "registry-research-framework/audit/power-control-mega-trigger-v2-status-20260402.json and research/notes/power-control-mega-trigger-v2-status-20260402.md",
+      "summary": "The mega-trigger V2 follow-up isolated TtmEnabled and recorded `boot-unsafe` under `DWORD=1`, while sibling HiberbootEnabled and MSDisabled probes on the same pilot family remained individually safe.",
+      "supports": [
+        "risk",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "low",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": true,
+    "restore_previous_supported": true,
+    "needs_vm_validation": true,
+    "why": "TtmEnabled now has enough docs, baseline, and current-build corroboration for a schema-backed draft, but the current runtime evidence is dominated by risk: the isolated non-default probe reproduced boot-unsafe behavior and there is still no primary Microsoft documentation or exact naturally resolved current-build consumer path for this value.",
+    "blocking_issues": [
+      "The current runtime lane marks TtmEnabled as boot-unsafe under DWORD 1 on the isolated pilot profile.",
+      "No primary current-build Microsoft documentation has been found for this exact value.",
+      "The current build does not yet have an exact naturally resolved consumer or registry-read path for TtmEnabled."
+    ]
+  },
+  "open_questions": [
+    "What exact subsystem or feature does `TtmpEnabled` gate on the current build?",
+    "Is the observed baseline `0` a stable default across other Windows 11 builds or only this current baseline?",
+    "Can a future static or KD pass resolve the exact current-build consumer path without reintroducing unsafe runtime writes?"
+  ],
+  "last_reviewed_utc": "2026-04-12T01:47:00+03:00"
+}

@@ -1,29 +1,31 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-11T21:52:21.598113Z",
+  "generated_utc": "2026-04-11T22:42:05.755823Z",
   "summary": {
-    "total_active_records": 267,
+    "total_active_records": 268,
     "class_counts": {
       "A": 249,
       "B": 8,
-      "C": 1,
+      "C": 2,
       "D": 9
     },
     "lane_counts": {
-      "official-policy": 238,
+      "official-policy": 240,
       "runtime": 5,
       "system": 6,
-      "early-boot": 18
+      "early-boot": 17
     },
     "next_missing_layer_counts": {
       "none": 248,
       "decision-gate": 9,
       "validation-proof": 9,
+      "reboot-diff": 1,
       "incident-review": 1
     },
     "promotion_state_counts": {
       "promoted": 247,
-      "blocked": 20
+      "blocked": 20,
+      "unknown": 1
     },
     "re_audit_required_count": 12,
     "imported_candidate_backlog": {
@@ -5980,10 +5982,10 @@
       "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
       "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
       "evidence_class": "B",
-      "lane": "early-boot",
+      "lane": "official-policy",
       "class_ready_basis": "pending",
-      "official": false,
-      "official_doc_exists": false,
+      "official": true,
+      "official_doc_exists": true,
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
@@ -5997,9 +5999,11 @@
         "runtime_procmon",
         "static_ghidra",
         "behavior_wpr",
-        "runtime_reboot"
+        "runtime_reboot",
+        "official_doc"
       ],
       "tools_used": [
+        "official-doc",
         "etw",
         "procmon",
         "ghidra",
@@ -6124,13 +6128,12 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
-        "no-primary-current-build-doc"
+        "documentation-first-review"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
+        "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -6139,7 +6142,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -6154,7 +6157,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T16:30:00+03:00"
+        "last_verified_at": "2026-04-12T00:49:51+03:00"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -7062,6 +7065,72 @@
       "elevation_context": "elevated",
       "machine_user_scope": "machine",
       "source_file": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "power.control.ttm-enabled",
+      "tweak_id": "power.control.ttm-enabled",
+      "evidence_class": "C",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": true,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "reboot-diff",
+      "cross_layer_satisfied": false,
+      "layers_used": [
+        "static_ghidra"
+      ],
+      "tools_used": [
+        "ghidra"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": false,
+        "correct_tool_used": true,
+        "trigger_condition_tested": false
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
+      "stale_reason": null,
+      "last_known_good_build": null,
+      "revalidation_need": "none",
+      "rollback_verification_status": "unverified",
+      "bench_status": "not-run",
+      "conflict_reason": null,
+      "last_known_good_verification_context": {},
+      "os_build": "26100",
+      "os_edition": "Professional",
+      "architecture": "x64",
+      "elevation_context": "elevated",
+      "machine_user_scope": "machine",
+      "source_file": "research/records/power.control.ttm-enabled.json",
       "incident_ids": []
     },
     {
@@ -18788,10 +18857,10 @@
       "record_id": "system.kernel.global-timer-resolution-requests",
       "tweak_id": "system.kernel.global-timer-resolution-requests",
       "evidence_class": "D",
-      "lane": "early-boot",
+      "lane": "official-policy",
       "class_ready_basis": "pending",
-      "official": false,
-      "official_doc_exists": false,
+      "official": true,
+      "official_doc_exists": true,
       "procmon": true,
       "ghidra": false,
       "ghidra_no_function_fallback": false,
@@ -18800,12 +18869,14 @@
       "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "validation-proof",
-      "cross_layer_satisfied": false,
+      "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "runtime_reboot"
+        "runtime_reboot",
+        "official_doc"
       ],
       "tools_used": [
+        "official-doc",
         "procmon",
         "reboot"
       ],
@@ -18820,7 +18891,7 @@
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.2",
