@@ -106,9 +106,16 @@
       "trace_file": null
     },
     "benchmark": {
-      "executed": false,
-      "summary": null,
-      "output_file": null
+      "executed": true,
+      "summary": "VM functional safety bench passed: HibernateEnabled was changed from the observed baseline 0 to DWORD 1, critical services and recent event logs stayed healthy, C:\\hiberfil.sys remained absent before and after the run, and rollback restored the baseline value 0.",
+      "output_file": "evidence/records/power.control.hibernate-enabled/bench-results/power.control.hibernate-enabled-vm-functional.json",
+      "bench_tier": "vm",
+      "bench_profile": "functional",
+      "safety_passed": true,
+      "safety_status": "passed",
+      "bench_environment": "windows-11-25h2-vm",
+      "bench_measurement_reliability": "functional",
+      "executed_at": "2026-04-10T19:17:38.8447218-07:00"
     },
     "registry_sideeffects": {
       "executed": false,
@@ -499,20 +506,41 @@
       "clue_type": "api_semantics"
     }
   ],
+  "reproducibility": {
+    "vm_name": "windows-11-25h2-vm",
+    "domain": "regprobe-win11-25h2-session",
+    "baseline_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
+    "bench_script": "registry-research-framework/scripts/vm/run-safety-bench-guest.ps1",
+    "bench_wrapper": "registry-research-framework/scripts/vm/run-safety-bench-hibernate-enabled.guest.ps1",
+    "snapshot_attempt": {
+      "attempted": true,
+      "method": "virsh internal snapshot",
+      "result": "unsupported-pflash-qcow2-nvram-required"
+    }
+  },
   "bench_results": {
-    "bench_tier": "unknown",
-    "bench_required": false,
-    "bench_vm_capable": true,
-    "bench_bare_metal_required": false,
-    "feature_area_group": "power",
-    "profiles": [
-      "boot_time_relative",
-      "functional_throughput"
-    ],
-    "executed": false,
-    "summary": null,
-    "statistics": null,
-    "significance_verdict": null
+    "candidate_id": "power.control.hibernate-enabled",
+    "bench_tier": "vm",
+    "bench_profile": "functional",
+    "apply_value": 1,
+    "apply_type": "REG_DWORD",
+    "rollback_method": "restore-baseline",
+    "safety_passed": true,
+    "safety_status": "passed",
+    "boot_success": true,
+    "shell_usable": true,
+    "services_healthy": true,
+    "event_log_clean": true,
+    "rollback_executed": true,
+    "rollback_verified": true,
+    "rollback_failure_reason": null,
+    "bench_environment": "windows-11-25h2-vm",
+    "bench_measurement_reliability": "functional",
+    "output_file": "evidence/records/power.control.hibernate-enabled/bench-results/power.control.hibernate-enabled-vm-functional.json",
+    "executed_at": "2026-04-10T19:17:38.8447218-07:00",
+    "apply_verified": true,
+    "state_changed": true,
+    "hiberfile_sideeffects_clean": true
   },
   "score_breakdown": {
     "static_evidence_strength": 3,
@@ -594,9 +622,9 @@
   },
   "rollback_verification": {
     "rollback_declared": true,
-    "rollback_executed": false,
+    "rollback_executed": true,
     "rollback_verified": true,
-    "rollback_verification_method": "record-restore-story",
+    "rollback_verification_method": "vm-safety-bench-restore-baseline",
     "rollback_failure_reason": null,
     "rollback_value": {
       "source": "windows_defaults",
@@ -611,9 +639,44 @@
       ],
       "rollback_strategy": "restore_default"
     },
-    "state_changed": null,
-    "apply_diff": null,
-    "restore_diff": null
+    "state_changed": true,
+    "apply_diff": {
+      "before": {
+        "exists": true,
+        "value": 0,
+        "value_kind": "DWord"
+      },
+      "after": {
+        "exists": true,
+        "value": 1,
+        "value_kind": "DWord"
+      }
+    },
+    "restore_diff": {
+      "before": {
+        "exists": true,
+        "value": 1,
+        "value_kind": "DWord"
+      },
+      "after": {
+        "exists": true,
+        "value": 0,
+        "value_kind": "DWord"
+      }
+    },
+    "sideeffect_diff": {
+      "hiberfile_before": {
+        "exists": false,
+        "length": null,
+        "last_write_time_utc": null
+      },
+      "hiberfile_after": {
+        "exists": false,
+        "length": null,
+        "last_write_time_utc": null
+      },
+      "hiberfile_sideeffects_clean": true
+    }
   },
   "freshness_status": {
     "status": "fresh",
