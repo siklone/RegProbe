@@ -1,36 +1,44 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-09T03:34:57.676649Z",
+  "generated_utc": "2026-04-11T21:37:34.315452Z",
   "summary": {
-    "total_active_records": 259,
+    "total_active_records": 267,
     "class_counts": {
       "A": 249,
-      "B": 7,
-      "C": 3
+      "B": 8,
+      "C": 1,
+      "D": 9
     },
     "lane_counts": {
-      "official-policy": 236,
-      "runtime": 6,
-      "early-boot": 12,
-      "system": 5
+      "official-policy": 237,
+      "runtime": 5,
+      "system": 6,
+      "early-boot": 19
     },
     "next_missing_layer_counts": {
-      "none": 249,
-      "decision-gate": 10
+      "none": 248,
+      "decision-gate": 9,
+      "validation-proof": 9,
+      "incident-review": 1
     },
     "promotion_state_counts": {
-      "promoted": 237,
-      "blocked": 11,
-      "promotion-eligible": 8,
-      "revalidation-pending": 3
+      "promoted": 248,
+      "blocked": 10,
+      "unknown": 9
     },
-    "re_audit_required_count": 12,
-    "total": 259,
-    "promoted": 237,
-    "blocked": 11,
-    "revalidation_pending": 3,
-    "stale": 3,
-    "gate_health": "green"
+    "re_audit_required_count": 13,
+    "imported_candidate_backlog": {
+      "path": "research/imported-candidate-backlog.json",
+      "exists": true,
+      "generated_utc": "2026-04-08T12:58:36.140594Z",
+      "candidate_count": 0,
+      "import_count": 0,
+      "source_run_count": 0,
+      "blocked_candidate_count": 0,
+      "counts_by_source_tool": {},
+      "counts_by_confidence": {},
+      "counts_by_promotion_state": {}
+    }
   },
   "entries": [
     {
@@ -392,7 +400,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -643,7 +651,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -726,7 +734,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:32:25.0993203+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -892,7 +900,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T18:15:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -1060,7 +1068,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T07:47:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -1313,7 +1321,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -1396,7 +1404,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -1486,7 +1494,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -1925,7 +1933,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T17:30:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -2008,7 +2016,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:00:31+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -2095,7 +2103,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T17:35:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -2617,7 +2625,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T17:06:31+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -2700,7 +2708,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -2866,7 +2874,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T02:32:46.1598415+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -2949,7 +2957,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T08:13:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3032,7 +3040,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3115,7 +3123,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3198,7 +3206,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T08:24:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3281,7 +3289,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3364,7 +3372,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:12:09+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3447,7 +3455,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T08:28:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3530,7 +3538,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:25:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3613,7 +3621,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:31:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3696,7 +3704,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:37:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3779,7 +3787,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:43:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3862,7 +3870,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:41:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3945,7 +3953,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T02:34:07.7304266+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4028,7 +4036,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4111,7 +4119,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4194,7 +4202,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:58:30Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4277,7 +4285,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4360,7 +4368,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4692,7 +4700,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4775,7 +4783,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:47:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4858,7 +4866,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:51:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4941,7 +4949,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -5107,7 +5115,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T08:33:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -5190,7 +5198,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T08:38:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -5273,7 +5281,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T08:42:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -5356,7 +5364,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T09:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -5439,7 +5447,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -5522,7 +5530,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -5783,7 +5791,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T18:10:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -5866,7 +5874,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -5880,27 +5888,31 @@
       "record_id": "policy.system.enable-virtualization",
       "tweak_id": "policy.system.enable-virtualization",
       "evidence_class": "B",
-      "lane": "runtime",
+      "lane": "system",
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_procmon",
         "static_ghidra",
-        "behavior_wpr"
+        "behavior_wpr",
+        "runtime_reboot"
       ],
       "tools_used": [
         "etw",
+        "procmon",
         "ghidra",
-        "wpr"
+        "wpr",
+        "reboot"
       ],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -5969,7 +5981,7 @@
     {
       "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
       "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
-      "evidence_class": "C",
+      "evidence_class": "B",
       "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
@@ -5977,7 +5989,7 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
@@ -5986,33 +5998,36 @@
       "layers_used": [
         "runtime_procmon",
         "static_ghidra",
+        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
+        "etw",
         "procmon",
         "ghidra",
+        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
+      "confidence": "low",
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
@@ -6066,7 +6081,7 @@
     {
       "record_id": "power.control.allow-system-required-power-requests",
       "tweak_id": "power.control.allow-system-required-power-requests",
-      "evidence_class": "C",
+      "evidence_class": "B",
       "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
@@ -6074,7 +6089,7 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
@@ -6083,33 +6098,36 @@
       "layers_used": [
         "runtime_procmon",
         "static_ghidra",
+        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
+        "etw",
         "procmon",
         "ghidra",
+        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
+      "confidence": "low",
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
@@ -6211,7 +6229,7 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -6234,7 +6252,7 @@
       "last_known_good_build": "26100",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
@@ -6265,7 +6283,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "none",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -6299,9 +6317,9 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "high",
+      "confidence": "medium",
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -6324,7 +6342,7 @@
       "last_known_good_build": "26100",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
@@ -6482,7 +6500,7 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -6505,7 +6523,7 @@
       "last_known_good_build": "26100",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
@@ -6569,7 +6587,7 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -6592,7 +6610,7 @@
       "last_known_good_build": "26100",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
@@ -6659,7 +6677,7 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -6682,7 +6700,7 @@
       "last_known_good_build": "26100",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
@@ -6749,7 +6767,7 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -6772,7 +6790,7 @@
       "last_known_good_build": "26100",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
@@ -6879,6 +6897,68 @@
       "incident_ids": []
     },
     {
+      "record_id": "power.control.power-watchdog-timeout-cluster",
+      "tweak_id": "power.control.power-watchdog-timeout-cluster",
+      "evidence_class": "D",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
+      "layers_used": [],
+      "tools_used": [],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": false,
+        "correct_tool_used": true,
+        "trigger_condition_tested": false
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
+      "stale_reason": null,
+      "last_known_good_build": null,
+      "revalidation_need": "none",
+      "rollback_verification_status": "unverified",
+      "bench_status": "not-run",
+      "conflict_reason": null,
+      "last_known_good_verification_context": {},
+      "os_build": "26100",
+      "os_edition": "Professional",
+      "architecture": "x64",
+      "elevation_context": "elevated",
+      "machine_user_scope": "machine",
+      "source_file": "research/records/power.control.power-watchdog-timeout-cluster.json",
+      "incident_ids": []
+    },
+    {
       "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
       "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
       "evidence_class": "B",
@@ -6970,6 +7050,68 @@
       "elevation_context": "elevated",
       "machine_user_scope": "machine",
       "source_file": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+      "tweak_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+      "evidence_class": "D",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
+      "layers_used": [],
+      "tools_used": [],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": false,
+        "correct_tool_used": true,
+        "trigger_condition_tested": false
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
+      "stale_reason": null,
+      "last_known_good_build": null,
+      "revalidation_need": "none",
+      "rollback_verification_status": "unverified",
+      "bench_status": "not-run",
+      "conflict_reason": null,
+      "last_known_good_verification_context": {},
+      "os_build": "26100",
+      "os_edition": "Professional",
+      "architecture": "x64",
+      "elevation_context": "elevated",
+      "machine_user_scope": "machine",
+      "source_file": "research/records/power.control.win32k-callout-watchdog-timeout-seconds.json",
       "incident_ids": []
     },
     {
@@ -7159,7 +7301,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T18:34:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -7495,7 +7637,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:54:12.5883201+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -7582,7 +7724,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:50:40.9899199+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -7669,7 +7811,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:52:37.0229425+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -7860,7 +8002,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": true,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "incident-review",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -7947,6 +8089,72 @@
       ]
     },
     {
+      "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+      "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+      "evidence_class": "D",
+      "lane": "system",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": true,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
+      "layers_used": [
+        "static_ghidra"
+      ],
+      "tools_used": [
+        "ghidra"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": false,
+        "correct_tool_used": true,
+        "trigger_condition_tested": false
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
+      "stale_reason": null,
+      "last_known_good_build": null,
+      "revalidation_need": "none",
+      "rollback_verification_status": "unverified",
+      "bench_status": "not-run",
+      "conflict_reason": null,
+      "last_known_good_verification_context": {},
+      "os_build": "26100",
+      "os_edition": "Professional",
+      "architecture": "x64",
+      "elevation_context": "elevated",
+      "machine_user_scope": "machine",
+      "source_file": "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json",
+      "incident_ids": []
+    },
+    {
       "record_id": "privacy.block-microsoft-accounts",
       "tweak_id": "privacy.block-microsoft-accounts",
       "evidence_class": "A",
@@ -8019,7 +8227,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T09:10:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8185,7 +8393,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T09:15:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8268,7 +8476,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T17:50:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8351,7 +8559,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:45:22.0860678+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8436,7 +8644,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T07:18:02Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8689,7 +8897,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8772,7 +8980,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T09:22:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8855,7 +9063,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:43:39.9856620+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8938,7 +9146,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:59:12.4633283+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9021,7 +9229,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:57:25.3102002+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9104,7 +9312,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:55:44.8915752+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9187,7 +9395,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:46:47.8894113+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9353,7 +9561,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T12:42:34.7172784+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9604,7 +9812,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T13:21:47.8064758+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9689,7 +9897,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T13:39:09.6770515+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9774,7 +9982,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T13:25:41.8070282+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9859,7 +10067,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T15:13:40.4233180+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9946,7 +10154,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T13:18:10.1644837+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10029,7 +10237,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:04:56.8703898+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10114,7 +10322,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T13:52:31.0573715+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10199,7 +10407,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:06:31.7575056+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10367,7 +10575,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:36:20Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10452,7 +10660,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T13:57:40.2504858+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10535,7 +10743,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T03:10:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10618,7 +10826,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T18:00:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10701,7 +10909,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T14:11:36.6972806+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10784,7 +10992,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:00:59.6788102+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10869,7 +11077,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:00:59.6788102+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10954,7 +11162,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T13:30:32.7900102+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11037,7 +11245,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T19:10:41.8261076+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11122,7 +11330,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T14:41:27.2749969+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11207,7 +11415,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T14:33:43.3708461+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11462,7 +11670,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11547,7 +11755,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T19:36:19.8449566+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11715,7 +11923,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11800,7 +12008,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T14:55:09.6057576+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -11972,7 +12180,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T14:14:01.2716386+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12057,7 +12265,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T15:11:19.1409952+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12225,7 +12433,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-14T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12308,7 +12516,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T15:00:19.7365760+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12393,7 +12601,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T15:05:03.3434487+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12476,7 +12684,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T15:08:49.7390244+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12561,7 +12769,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T14:27:06.4267409+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12727,7 +12935,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:21:59.0000000+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12810,7 +13018,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:19:29.3085629+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12893,7 +13101,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:17:57.1358753+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -12976,7 +13184,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:13:30.1052626+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -13059,7 +13267,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:12:07.5358609+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -13225,7 +13433,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T19:59:10.6720406+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -13310,7 +13518,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:01:37.1486924+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -13729,7 +13937,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:04:21.2349557+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -13982,7 +14190,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T18:52:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -14231,7 +14439,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T19:57:17.8070811+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -14646,7 +14854,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:43:20.0000000+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -15208,12 +15416,10 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -15229,9 +15435,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": "verification-age-threshold",
+      "stale_reason": null,
       "last_known_good_build": "26100",
-      "revalidation_need": "required",
+      "revalidation_need": "none",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -15239,7 +15445,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-11T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -15409,7 +15615,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:06:48.3919056+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -15494,7 +15700,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:08:54.2187340+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -15660,7 +15866,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T19:51:42.0176899+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -15714,12 +15920,10 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -15735,9 +15939,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": "verification-age-threshold",
+      "stale_reason": null,
       "last_known_good_build": "26100",
-      "revalidation_need": "required",
+      "revalidation_need": "none",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -15745,7 +15949,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-11T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -15828,7 +16032,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T19:43:33.3741864+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -15911,7 +16115,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T15:22:05.5259006+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -15994,7 +16198,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T15:25:49.0591858+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -16164,7 +16368,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T19:54:30.6213142+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -16420,7 +16624,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:37:01.2379374+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -16586,7 +16790,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -16875,7 +17079,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:10:28.6818900+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -16958,7 +17162,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:08:26.6324695+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17041,7 +17245,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:12:39.1790212+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17124,7 +17328,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:03:30Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17377,7 +17581,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:55:30Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17436,7 +17640,7 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -17459,7 +17663,7 @@
       "last_known_good_build": "26100",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
@@ -17488,20 +17692,22 @@
       "ghidra_no_function_fallback": false,
       "wpr": true,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
         "static_ghidra",
-        "behavior_wpr"
+        "behavior_wpr",
+        "runtime_reboot"
       ],
       "tools_used": [
         "etw",
         "procmon",
         "ghidra",
-        "wpr"
+        "wpr",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
@@ -17640,7 +17846,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:10:30Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17723,7 +17929,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:08:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17806,7 +18012,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:12:30Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17889,7 +18095,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:14:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17972,7 +18178,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:17:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17983,93 +18189,205 @@
       "incident_ids": []
     },
     {
-      "record_id": "system.io-allow-remote-dasd",
-      "tweak_id": "system.io-allow-remote-dasd",
-      "evidence_class": "B",
-      "lane": "system",
+      "record_id": "system.kernel-dpc-watchdog-control-cluster",
+      "tweak_id": "system.kernel-dpc-watchdog-control-cluster",
+      "evidence_class": "D",
+      "lane": "official-policy",
+      "class_ready_basis": "pending",
+      "official": true,
+      "official_doc_exists": true,
+      "procmon": false,
+      "ghidra": true,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": false,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": true,
+      "layers_used": [
+        "static_ghidra",
+        "official_doc"
+      ],
+      "tools_used": [
+        "official-doc",
+        "ghidra"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": false,
+        "correct_tool_used": true,
+        "trigger_condition_tested": false
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
+      "stale_reason": null,
+      "last_known_good_build": null,
+      "revalidation_need": "none",
+      "rollback_verification_status": "unverified",
+      "bench_status": "not-run",
+      "conflict_reason": null,
+      "last_known_good_verification_context": {},
+      "os_build": "26100",
+      "os_edition": "Professional",
+      "architecture": "x64",
+      "elevation_context": "elevated",
+      "machine_user_scope": "machine",
+      "source_file": "research/records/system.kernel-dpc-watchdog-control-cluster.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "tweak_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "evidence_class": "D",
+      "lane": "early-boot",
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": true,
+      "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
-      "cross_layer_satisfied": true,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
       "layers_used": [
-        "static_ghidra",
-        "behavior_wpr"
+        "static_ghidra"
       ],
       "tools_used": [
-        "etw",
-        "ghidra",
-        "wpr"
+        "ghidra"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
-        "etw_executed": true,
-        "boot_phase_included": true,
+        "etw_executed": false,
+        "boot_phase_included": false,
         "correct_tool_used": true,
-        "trigger_condition_tested": true
+        "trigger_condition_tested": false
       },
-      "re_audit_required": true,
-      "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker",
-      "original_class": "B",
-      "original_pipeline_version": "pre-v3.1",
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "original_class": null,
+      "original_pipeline_version": null,
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "blocked",
-      "promotion_blockers": [
-        "documentation-first-review",
-        "path_context_unclear",
-        "runtime_no_read"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "score_breakdown": {
-        "static_evidence_strength": 4,
-        "runtime_evidence_strength": 2,
-        "rollback_clarity": 5,
-        "blast_radius": 2,
-        "tweak_suitability": 2,
-        "privilege_complexity": 3,
-        "build_specificity": 5,
-        "sibling_expansion_value": 4,
-        "bench_priority": 5,
-        "overall_score": 3.56,
-        "next_missing_layer": "decision-gate"
-      },
-      "schema_compatibility_mode": "native",
-      "evaluator_version": "3.6.0",
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
       "stale_reason": null,
-      "last_known_good_build": "26100",
+      "last_known_good_build": null,
       "revalidation_need": "none",
-      "rollback_verification_status": "verified",
+      "rollback_verification_status": "unverified",
       "bench_status": "not-run",
       "conflict_reason": null,
-      "last_known_good_verification_context": {
-        "backend_id": "rai-linux-vm",
-        "tested_build": "26100",
-        "current_build": "26100",
-        "last_verified_at": "2026-03-30T19:30:00Z"
-      },
+      "last_known_good_verification_context": {},
       "os_build": "26100",
       "os_edition": "Professional",
       "architecture": "x64",
       "elevation_context": "elevated",
       "machine_user_scope": "machine",
-      "source_file": "research/records/system.io-allow-remote-dasd.json",
+      "source_file": "research/records/system.kernel-dpc-watchdog-profile-cluster.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "system.kernel-long-dpc-threshold-cluster",
+      "tweak_id": "system.kernel-long-dpc-threshold-cluster",
+      "evidence_class": "D",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": true,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": true,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
+      "layers_used": [
+        "runtime_procmon",
+        "runtime_reboot"
+      ],
+      "tools_used": [
+        "procmon",
+        "reboot"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
+      "stale_reason": null,
+      "last_known_good_build": null,
+      "revalidation_need": "none",
+      "rollback_verification_status": "unverified",
+      "bench_status": "not-run",
+      "conflict_reason": null,
+      "last_known_good_verification_context": {},
+      "os_build": "26100",
+      "os_edition": "Professional",
+      "architecture": "x64",
+      "elevation_context": "elevated",
+      "machine_user_scope": "machine",
+      "source_file": "research/records/system.kernel-long-dpc-threshold-cluster.json",
       "incident_ids": []
     },
     {
@@ -18211,7 +18529,7 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -18234,7 +18552,7 @@
       "last_known_good_build": "26100",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
@@ -18248,6 +18566,206 @@
       "elevation_context": "elevated",
       "machine_user_scope": "machine",
       "source_file": "research/records/system.kernel.disable-exception-chain-validation.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+      "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+      "evidence_class": "D",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": true,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
+      "layers_used": [
+        "runtime_reboot"
+      ],
+      "tools_used": [
+        "reboot"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
+      "stale_reason": null,
+      "last_known_good_build": null,
+      "revalidation_need": "none",
+      "rollback_verification_status": "unverified",
+      "bench_status": "not-run",
+      "conflict_reason": null,
+      "last_known_good_verification_context": {},
+      "os_build": "26100",
+      "os_edition": "Professional",
+      "architecture": "x64",
+      "elevation_context": "elevated",
+      "machine_user_scope": "machine",
+      "source_file": "research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "system.kernel.global-timer-resolution-requests",
+      "tweak_id": "system.kernel.global-timer-resolution-requests",
+      "evidence_class": "D",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": true,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": true,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
+      "layers_used": [
+        "runtime_procmon",
+        "runtime_reboot"
+      ],
+      "tools_used": [
+        "procmon",
+        "reboot"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
+      "stale_reason": null,
+      "last_known_good_build": null,
+      "revalidation_need": "none",
+      "rollback_verification_status": "unverified",
+      "bench_status": "not-run",
+      "conflict_reason": null,
+      "last_known_good_verification_context": {},
+      "os_build": "26100",
+      "os_edition": "Professional",
+      "architecture": "x64",
+      "elevation_context": "elevated",
+      "machine_user_scope": "machine",
+      "source_file": "research/records/system.kernel.global-timer-resolution-requests.json",
+      "incident_ids": []
+    },
+    {
+      "record_id": "system.kernel.timer-check-flags",
+      "tweak_id": "system.kernel.timer-check-flags",
+      "evidence_class": "D",
+      "lane": "early-boot",
+      "class_ready_basis": "pending",
+      "official": false,
+      "official_doc_exists": false,
+      "procmon": false,
+      "ghidra": false,
+      "ghidra_no_function_fallback": false,
+      "wpr": false,
+      "benchmark": false,
+      "reboot_tested": true,
+      "incident_seen": false,
+      "next_missing_layer": "validation-proof",
+      "cross_layer_satisfied": false,
+      "layers_used": [
+        "runtime_reboot"
+      ],
+      "tools_used": [
+        "reboot"
+      ],
+      "boot_phase_relevant": true,
+      "suspected_layer": "kernel",
+      "frida_kernel_guard_applied": true,
+      "dead_flag_checks": {
+        "etw_executed": false,
+        "boot_phase_included": true,
+        "correct_tool_used": true,
+        "trigger_condition_tested": true
+      },
+      "re_audit_required": false,
+      "re_audit_priority": 0,
+      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": null,
+      "original_pipeline_version": null,
+      "new_pipeline_version": "v3.2",
+      "artifact_refs": [],
+      "app_mapping_status": "not-mapped",
+      "restore_story_known": true,
+      "apply_allowed": false,
+      "confidence": "low",
+      "tweak_origin": null,
+      "promotion_state": null,
+      "promotion_blockers": null,
+      "record_promotion_allowed": null,
+      "tweak_ingest_allowed": null,
+      "score_breakdown": null,
+      "schema_compatibility_mode": null,
+      "evaluator_version": null,
+      "stale_reason": null,
+      "last_known_good_build": null,
+      "revalidation_need": "none",
+      "rollback_verification_status": "unverified",
+      "bench_status": "not-run",
+      "conflict_reason": null,
+      "last_known_good_verification_context": {},
+      "os_build": "26100",
+      "os_edition": "Professional",
+      "architecture": "x64",
+      "elevation_context": "elevated",
+      "machine_user_scope": "machine",
+      "source_file": "research/records/system.kernel.timer-check-flags.json",
       "incident_ids": []
     },
     {
@@ -18323,7 +18841,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T00:49:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18462,12 +18980,10 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "revalidation-pending",
-      "promotion_blockers": [
-        "stale-evidence"
-      ],
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -18483,9 +18999,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": "verification-age-threshold",
+      "stale_reason": null,
       "last_known_good_build": "26100",
-      "revalidation_need": "required",
+      "revalidation_need": "none",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -18493,7 +19009,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T00:00:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18742,7 +19258,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T18:44:00+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18825,7 +19341,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:38:30.1171873+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18908,7 +19424,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:22:00Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18991,7 +19507,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:34:02.4377701+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -19157,7 +19673,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T01:20:30Z"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20003,7 +20519,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:31:28.9439482+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20171,7 +20687,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:39:16.2759098+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20254,7 +20770,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:31:17.9391409+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20337,7 +20853,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T02:50:43+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20420,7 +20936,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:28:07.0501445+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20503,7 +21019,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:32:33.0455208+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20586,7 +21102,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:37:44.3907002+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20669,7 +21185,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:35:59.8118130+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20752,7 +21268,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:34:25.6329894+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20835,7 +21351,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:40:40.8295775+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -20918,7 +21434,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:16:48.4391102+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21001,7 +21517,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:23:21.9705499+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21084,7 +21600,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:20:26.6158930+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21167,7 +21683,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:18:23.9251495+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21250,7 +21766,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:25:32.4359503+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21333,7 +21849,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:21:50.7186744+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21416,7 +21932,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:42:05.5484537+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21499,7 +22015,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:14:43.5557490+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21582,7 +22098,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:29:22.7863493+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21665,7 +22181,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-13T02:52:43+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21835,7 +22351,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T20:26:54.8725742+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21920,7 +22436,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-03-12T21:28:41.5872918+03:00"
+        "last_verified_at": "2026-04-11T05:09:52.494780Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21943,15 +22459,17 @@
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_reboot",
         "official_doc"
       ],
       "tools_used": [
-        "official-doc"
+        "official-doc",
+        "reboot"
       ],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -21960,7 +22478,7 @@
         "etw_executed": false,
         "boot_phase_included": true,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
@@ -22015,38 +22533,5 @@
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
       "incident_ids": []
     }
-  ],
-  "blocker_breakdown": {
-    "ambiguous-value-semantics": 2,
-    "documentation-first-review": 10,
-    "no-runtime-proof": 3,
-    "record-blocker": 25,
-    "schema-incomplete": 1,
-    "stale-evidence": 3,
-    "trigger_context_unclear": 1
-  },
-  "stale_records": [
-    {
-      "candidate_id": "security.trusted-path-credential-prompting",
-      "promotion_state": "revalidation-pending",
-      "stale_reason": "verification-age-threshold",
-      "last_known_good_build": "26100"
-    },
-    {
-      "candidate_id": "system.disable-auto-maintenance",
-      "promotion_state": "revalidation-pending",
-      "stale_reason": "verification-age-threshold",
-      "last_known_good_build": "26100"
-    },
-    {
-      "candidate_id": "system.memory-large-system-cache-client",
-      "promotion_state": "revalidation-pending",
-      "stale_reason": "verification-age-threshold",
-      "last_known_good_build": "26100"
-    }
-  ],
-  "conflict_records": [],
-  "missing_docs_records": [],
-  "rollback_unverified_records": [],
-  "bench_pending_records": []
+  ]
 }
