@@ -8,6 +8,9 @@ param(
     [int]$ApplyValue = 1,
     [string]$ApplyType = 'REG_DWORD',
     [string]$RollbackMethod = 'delete',
+    [Nullable[int]]$RollbackValue = $null,
+    [string]$RollbackType = 'REG_DWORD',
+    [bool]$RequireStateChanged = $true,
     [string]$BenchTier = 'vm',
     [string]$BenchProfile = 'functional',
     [string]$BenchEnvironment = 'windows-11-25h2-vm',
@@ -76,6 +79,59 @@ function Get-RegistryValueState {
     return $state
 }
 
+function Convert-RegistryValueKind {
+    param([string]$Kind)
+
+    switch -Regex ($Kind) {
+        '^(REG_DWORD|DWord)$' { return [Microsoft.Win32.RegistryValueKind]::DWord }
+        '^(REG_QWORD|QWord)$' { return [Microsoft.Win32.RegistryValueKind]::QWord }
+        '^(REG_SZ|String)$' { return [Microsoft.Win32.RegistryValueKind]::String }
+        '^(REG_EXPAND_SZ|ExpandString)$' { return [Microsoft.Win32.RegistryValueKind]::ExpandString }
+        '^(REG_MULTI_SZ|MultiString)$' { return [Microsoft.Win32.RegistryValueKind]::MultiString }
+        '^(REG_BINARY|Binary)$' { return [Microsoft.Win32.RegistryValueKind]::Binary }
+        default { throw "Unsupported registry value kind: $Kind" }
+    }
+}
+
+function Set-RegistryBenchValue {
+    param(
+        [string]$SubKey,
+        [string]$Name,
+        [object]$Value,
+        [string]$Kind
+    )
+
+    $writeKey = [Microsoft.Win32.Registry]::LocalMachine.CreateSubKey($SubKey)
+    try {
+        $writeKey.SetValue($Name, $Value, (Convert-RegistryValueKind -Kind $Kind))
+    }
+    finally {
+        if ($writeKey) {
+            $writeKey.Close()
+        }
+    }
+}
+
+function Remove-RegistryBenchValue {
+    param(
+        [string]$SubKey,
+        [string]$Name,
+        [string]$NativePath
+    )
+
+    $rollbackKey = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($SubKey, $true)
+    if (-not $rollbackKey) {
+        throw "Registry key not found for rollback: $NativePath"
+    }
+
+    try {
+        $rollbackKey.DeleteValue($Name, $false)
+    }
+    finally {
+        $rollbackKey.Close()
+    }
+}
+
 function Test-ValueEquals {
     param(
         [object]$Left,
@@ -113,6 +169,7 @@ $benchResult = [ordered]@{
     bench_measurement_reliability = $BenchMeasurementReliability
     executed_at = $null
     apply_verified = $null
+    state_changed = $null
     baseline_state = $null
     service_statuses = @()
     critical_event_count = $null
@@ -125,18 +182,18 @@ try {
     $baselineState = Get-RegistryValueState -SubKey $RegistrySubKey -Name $ValueName -NativePath $RegistryPathNative
     $benchResult.baseline_state = $baselineState
 
-    $writeKey = [Microsoft.Win32.Registry]::LocalMachine.CreateSubKey($RegistrySubKey)
-    try {
-        $writeKey.SetValue($ValueName, $ApplyValue, [Microsoft.Win32.RegistryValueKind]::DWord)
-    }
-    finally {
-        if ($writeKey) {
-            $writeKey.Close()
-        }
-    }
+    Set-RegistryBenchValue -SubKey $RegistrySubKey -Name $ValueName -Value $ApplyValue -Kind $ApplyType
 
     $appliedState = Get-RegistryValueState -SubKey $RegistrySubKey -Name $ValueName -NativePath $RegistryPathNative
     $benchResult.apply_verified = [bool]($appliedState.exists -and (Test-ValueEquals -Left $appliedState.value -Right $ApplyValue))
+    $benchResult.state_changed = [bool](
+        (-not $baselineState.exists -and $appliedState.exists) -or
+        ($baselineState.exists -and (
+            (-not $appliedState.exists) -or
+            (-not (Test-ValueEquals -Left $baselineState.value -Right $appliedState.value)) -or
+            ([string]$baselineState.value_kind -ne [string]$appliedState.value_kind)
+        ))
+    )
 
     $criticalServices = 'LanmanWorkstation', 'EventLog', 'RpcSs', 'Schedule'
     $serviceStatuses = @(
@@ -162,18 +219,23 @@ try {
     $benchResult.event_log_clean = [bool]($recentEvents.Count -eq 0)
 
     if ($RollbackMethod -eq 'delete') {
-        $rollbackKey = [Microsoft.Win32.Registry]::LocalMachine.OpenSubKey($RegistrySubKey, $true)
-        if (-not $rollbackKey) {
-            throw "Registry key not found for rollback: $RegistryPathNative"
+        Remove-RegistryBenchValue -SubKey $RegistrySubKey -Name $ValueName -NativePath $RegistryPathNative
+        $benchResult.rollback_executed = $true
+    }
+    elseif ($RollbackMethod -eq 'restore-baseline') {
+        if ($baselineState.exists) {
+            Set-RegistryBenchValue -SubKey $RegistrySubKey -Name $ValueName -Value $baselineState.value -Kind $baselineState.value_kind
         }
-
-        try {
-            $rollbackKey.DeleteValue($ValueName, $false)
+        else {
+            Remove-RegistryBenchValue -SubKey $RegistrySubKey -Name $ValueName -NativePath $RegistryPathNative
         }
-        finally {
-            $rollbackKey.Close()
+        $benchResult.rollback_executed = $true
+    }
+    elseif ($RollbackMethod -eq 'set') {
+        if ($null -eq $RollbackValue) {
+            throw 'RollbackValue is required when RollbackMethod is set.'
         }
-
+        Set-RegistryBenchValue -SubKey $RegistrySubKey -Name $ValueName -Value $RollbackValue -Kind $RollbackType
         $benchResult.rollback_executed = $true
     }
     else {
@@ -212,6 +274,7 @@ finally {
         $benchResult.boot_success -and
         $benchResult.shell_usable -and
         $benchResult.apply_verified -and
+        ((-not $RequireStateChanged) -or $benchResult.state_changed) -and
         $benchResult.services_healthy -and
         $benchResult.event_log_clean -and
         $benchResult.rollback_executed -and
