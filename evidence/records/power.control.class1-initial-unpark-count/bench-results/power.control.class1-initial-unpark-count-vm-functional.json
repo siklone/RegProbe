@@ -1,0 +1,50 @@
+{
+  "candidate_id": "power.control.class1-initial-unpark-count",
+  "bench_tier": "vm",
+  "bench_profile": "functional",
+  "apply_value": 63,
+  "apply_type": "REG_DWORD",
+  "rollback_method": "restore-baseline",
+  "safety_passed": true,
+  "boot_success": true,
+  "shell_usable": true,
+  "services_healthy": true,
+  "event_log_clean": true,
+  "rollback_executed": true,
+  "rollback_verified": true,
+  "rollback_failure_reason": null,
+  "bench_environment": "windows-11-25h2-vm",
+  "bench_measurement_reliability": "functional",
+  "executed_at": "2026-04-10T19:01:30.9880781-07:00",
+  "apply_verified": true,
+  "state_changed": true,
+  "baseline_state": {
+    "exists": true,
+    "value": 64,
+    "value_kind": "DWord"
+  },
+  "service_statuses": [
+    {
+      "Name": "EventLog",
+      "Status": 4,
+      "StartType": 2
+    },
+    {
+      "Name": "LanmanWorkstation",
+      "Status": 4,
+      "StartType": 2
+    },
+    {
+      "Name": "RpcSs",
+      "Status": 4,
+      "StartType": 2
+    },
+    {
+      "Name": "Schedule",
+      "Status": 4,
+      "StartType": 2
+    }
+  ],
+  "critical_event_count": 0,
+  "critical_events": []
+}
