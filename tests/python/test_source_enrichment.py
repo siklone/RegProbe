@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -25,6 +26,38 @@ source_enrichment_scan = load_module("source_enrichment_scan", SCRIPTS_ROOT / "s
 
 
 class SourceEnrichmentTests(unittest.TestCase):
+    def test_expand_root_supports_windows_style_env_vars(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            windir = Path(temp_root) / "WindowsRoot"
+            with patch.dict(source_enrichment_scan.os.environ, {"WINDIR": str(windir)}, clear=False):
+                expanded = source_enrichment_scan.expand_root(r"%WINDIR%\PolicyDefinitions")
+
+            self.assertEqual(expanded, windir / "PolicyDefinitions")
+
+    def test_expand_root_supports_case_insensitive_windows_env_names(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            program_files = Path(temp_root) / "Program Files (x86)"
+            with patch.dict(source_enrichment_scan.os.environ, {"programfiles(x86)": str(program_files)}, clear=False):
+                expanded = source_enrichment_scan.expand_root(r"%ProgramFiles(x86)%\Windows Kits\10\Include")
+
+            self.assertEqual(expanded, program_files / "Windows Kits" / "10" / "Include")
+
+    def test_expand_root_prefers_source_specific_override(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            windir = Path(temp_root) / "WindowsRoot"
+            override = Path(temp_root) / "override" / "admx"
+            with patch.dict(
+                source_enrichment_scan.os.environ,
+                {
+                    "WINDIR": str(windir),
+                    "REGPROBE_SOURCE_ROOT_ADMX": str(override),
+                },
+                clear=False,
+            ):
+                expanded = source_enrichment_scan.expand_root(r"%WINDIR%\PolicyDefinitions", source_id="admx")
+
+            self.assertEqual(expanded, override)
+
     def test_score_candidate_tracks_weighted_support_and_trigger_family(self) -> None:
         candidate = {
             "candidate_id": "power.control.allow-system-required-power-requests",

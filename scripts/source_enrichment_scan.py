@@ -4,6 +4,7 @@ import argparse
 import fnmatch
 import json
 import os
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,6 +21,8 @@ DEFAULT_WEIGHTS = {
     "wdk_headers": 2,
     "geoff_chappell": 2,
 }
+
+WINDOWS_ENVVAR_PATTERN = re.compile(r"%([^%]+)%")
 
 
 def load_json(path: Path):
@@ -64,10 +67,63 @@ def load_sources(path: Path, source_ids: List[str]) -> List[Dict[str, Any]]:
     return sources
 
 
-def expand_root(value: str | None) -> Path | None:
-    if not value:
+def _lookup_env_var(name: str) -> str | None:
+    direct = os.environ.get(name)
+    if direct is not None:
+        return direct
+
+    upper_name = name.upper()
+    for key, value in os.environ.items():
+        if key.upper() == upper_name:
+            return value
+    return None
+
+
+def _expand_windows_env_vars(value: str) -> str:
+    def replace(match: re.Match[str]) -> str:
+        resolved = _lookup_env_var(match.group(1))
+        return resolved if resolved is not None else match.group(0)
+
+    return WINDOWS_ENVVAR_PATTERN.sub(replace, value)
+
+
+def _normalize_source_id(source_id: str | None) -> str | None:
+    if not source_id:
         return None
-    expanded = os.path.expandvars(value)
+    normalized = re.sub(r"[^A-Z0-9]+", "_", source_id.upper()).strip("_")
+    return normalized or None
+
+
+def _source_root_override(source_id: str | None) -> str | None:
+    normalized = _normalize_source_id(source_id)
+    if not normalized:
+        return None
+
+    for env_name in (f"REGPROBE_SOURCE_ROOT_{normalized}", f"REGPROBE_{normalized}_ROOT"):
+        override = _lookup_env_var(env_name)
+        if override:
+            return override
+    return None
+
+
+def _normalize_path_separators(value: str) -> str:
+    normalized = value.strip().strip('"')
+    if os.sep == "/":
+        return normalized.replace("\\", "/")
+    if os.sep == "\\":
+        return normalized.replace("/", "\\")
+    return normalized
+
+
+def expand_root(value: str | None, source_id: str | None = None) -> Path | None:
+    raw_value = _source_root_override(source_id) or value
+    if not raw_value:
+        return None
+
+    expanded = os.path.expandvars(raw_value)
+    expanded = _expand_windows_env_vars(expanded)
+    expanded = os.path.expanduser(expanded)
+    expanded = _normalize_path_separators(expanded)
     if not expanded:
         return None
     return Path(expanded)
@@ -85,7 +141,7 @@ def count_source_weight(source: Dict[str, Any]) -> int:
 
 
 def scan_source(source: Dict[str, Any], candidates: List[Dict[str, Any]], max_hits_per_key: int = 8) -> Dict[str, Any]:
-    root = expand_root(source.get("root"))
+    root = expand_root(source.get("root"), source_id=source.get("id"))
     patterns = source.get("patterns", [])
     result: Dict[str, Any] = {
         "id": source["id"],
