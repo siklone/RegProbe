@@ -167,9 +167,9 @@
     {
       "evidence_id": "vm-session-manager-kernel-force-bugcheck-kd-20260407",
       "kind": "vm-test",
-      "title": "Dedicated KVM local-KD bundle resolves KiForceBugcheckForDpcWatchdog = 0",
+      "title": "Dedicated KVM local-KD symbol family bundle resolves KiForceBugcheckForDpcWatchdog = 0",
       "location": "evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/summary.json and evidence/files/vm-tooling-staging/dpc-watchdog-force-bugcheck-kd-20260407a/dpc-watchdog-force-bugcheck-kd-20260407a.stdout.txt",
-      "summary": "A dedicated live KVM local-KD bundle resolved the DPC watchdog symbol cluster and directly read `nt!KiForceBugcheckForDpcWatchdog = 0` on the running current build.",
+      "summary": "A dedicated live KVM local-KD symbol family bundle resolved the surrounding DPC watchdog symbol cluster and directly read `nt!KiForceBugcheckForDpcWatchdog = 0` on the running current build.",
       "supports": [
         "behavior",
         "default",

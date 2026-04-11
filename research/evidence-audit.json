@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-11T22:50:25.882339Z",
+  "generated_utc": "2026-04-11T23:14:59.359110Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -17,10 +17,11 @@
     "next_missing_layer_counts": {
       "none": 248,
       "decision-gate": 11,
-      "ghidra": 5,
-      "reboot-diff": 2,
+      "ghidra": 2,
+      "reboot-diff": 3,
       "incident-review": 1,
-      "procmon": 1
+      "procmon": 1,
+      "runtime-trace": 2
     },
     "promotion_state_counts": {
       "promoted": 247,
@@ -7163,16 +7164,20 @@
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
-      "ghidra": false,
+      "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "reboot-diff",
       "cross_layer_satisfied": false,
-      "layers_used": [],
-      "tools_used": [],
+      "layers_used": [
+        "static_ghidra"
+      ],
+      "tools_used": [
+        "ghidra"
+      ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
@@ -7198,8 +7203,8 @@
       "promotion_blockers": [
         "no-current-build-registry-seeding-path",
         "no-doc-source",
-        "no-runtime-proof",
         "non-default-semantics-unproven",
+        "reboot-diff",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
@@ -7215,7 +7220,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.22,
-        "next_missing_layer": "ghidra"
+        "next_missing_layer": "reboot-diff"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18525,20 +18530,22 @@
       "official": false,
       "official_doc_exists": false,
       "procmon": true,
-      "ghidra": false,
+      "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
-      "cross_layer_satisfied": false,
+      "next_missing_layer": "runtime-trace",
+      "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
+        "static_ghidra",
         "runtime_reboot"
       ],
       "tools_used": [
         "procmon",
+        "ghidra",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -18552,7 +18559,7 @@
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": "B",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
@@ -18583,7 +18590,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.44,
-        "next_missing_layer": "ghidra"
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18794,18 +18801,20 @@
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
-      "ghidra": false,
+      "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
-      "cross_layer_satisfied": false,
+      "next_missing_layer": "runtime-trace",
+      "cross_layer_satisfied": true,
       "layers_used": [
+        "static_ghidra",
         "runtime_reboot"
       ],
       "tools_used": [
+        "ghidra",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -18819,7 +18828,7 @@
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": "B",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
@@ -18850,7 +18859,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.33,
-        "next_missing_layer": "ghidra"
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",

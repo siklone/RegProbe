@@ -146,9 +146,9 @@
     {
       "evidence_id": "vm-watchdog-win32k-callout-timeout-kd-20260407",
       "kind": "vm-test",
-      "title": "KVM local-KD confirms live Win32k callout watchdog timeout global",
+      "title": "KVM local-KD disassembly confirms the live Win32k callout watchdog timeout global",
       "location": "research/notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-local-kd-follow-up-20260407.md and evidence/files/vm-tooling-staging/watchdog-win32k-callout-timeout-kd-20260407a/host-review.json",
-      "summary": "A live KVM local-KD pass read `PopWin32kCalloutWatchdogTimeoutSeconds = 30` and disassembled `PopInvokeWin32CalloutWithWatchdog`, which directly multiplies the global by `1000` before issuing the watchdog packet through `ZwPowerInformation` and then returning to `PsInvokeWin32Callout`.",
+      "summary": "A live KVM local-KD pass read `PopWin32kCalloutWatchdogTimeoutSeconds = 30` and retained a direct disassembly of `PopInvokeWin32CalloutWithWatchdog`, which multiplies the global by `1000` before issuing the watchdog packet through `ZwPowerInformation` and then returning to `PsInvokeWin32Callout`.",
       "supports": [
         "behavior",
         "version-scope",

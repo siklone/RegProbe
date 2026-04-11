@@ -266,7 +266,7 @@
     },
     {
       "evidence_id": "static-session-manager-kernel-long-dpc-threshold-ghidra-queue-xref-20260408",
-      "kind": "analysis-output",
+      "kind": "decompilation",
       "title": "PDB-backed Ghidra xrefs resolve KiLongDpcQueueThreshold in KiExecuteAllDpcs and KeInitSystem",
       "location": "evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-summary.json and evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-evidence.json and evidence/files/vm-tooling-staging/longdpc-queue-threshold-ghidra-20260408b/longdpc-queue-threshold-ghidra-20260408b-ghidra-matches.md",
       "summary": "A current-build PDB-backed Ghidra export resolved three naturally-resolved references to `KiLongDpcQueueThreshold`: one in `KiExecuteAllDpcs` and two in `KeInitSystem`, tightening the queue-threshold side from adjacent ETW lineage to a direct consumer/init xref while still leaving the runtime-threshold read site unresolved.",
