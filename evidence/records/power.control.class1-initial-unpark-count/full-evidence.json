@@ -89,14 +89,32 @@
   },
   "behavior": {
     "typeperf": {
-      "executed": false,
-      "counter": null,
-      "before_average": null,
-      "after_average": null,
-      "delta_percent": null,
-      "sample_count": null,
-      "before_file": null,
-      "after_file": null
+      "executed": true,
+      "counter": "vm-relative-power-latency-ms",
+      "before_average": 38.709,
+      "after_average": 9.863,
+      "before_median_ms": 38.709,
+      "after_median_ms": 9.863,
+      "delta_percent": -74.52,
+      "delta_ms": -28.846,
+      "sample_count": 3,
+      "aggregation": "median",
+      "measurement_profile": "power",
+      "measurement_components": [
+        "service-query-ms",
+        "boot-event-query-ms"
+      ],
+      "bench_tier": "vm",
+      "bench_profile": "performance",
+      "bench_environment": "windows-11-25h2-vm",
+      "bench_measurement_reliability": "relative",
+      "bench_bare_metal_pending": true,
+      "rollback_verified": true,
+      "summary": "VM perf bench (relative) for power.control.class1-initial-unpark-count measured a median of 38.709 ms before apply and 9.863 ms after apply (delta -28.846 ms / -74.52%). Rollback verified; bare-metal perf validation is still pending.",
+      "before_file": "evidence/records/power.control.class1-initial-unpark-count/bench-results/power.control.class1-initial-unpark-count-vm-performance.json",
+      "after_file": "evidence/records/power.control.class1-initial-unpark-count/bench-results/power.control.class1-initial-unpark-count-vm-performance.json",
+      "output_file": "evidence/records/power.control.class1-initial-unpark-count/bench-results/power.control.class1-initial-unpark-count-vm-performance.json",
+      "executed_at": "2026-04-10T21:51:00-07:00"
     },
     "wpr": {
       "executed": false,
@@ -169,6 +187,10 @@
     {
       "step": "last_reviewed",
       "timestamp": "2026-03-30T00:05:00Z"
+    },
+    {
+      "step": "vm_perf_bench",
+      "timestamp": "2026-04-10T21:51:00-07:00"
     }
   ],
   "artifact_refs": [],
@@ -504,7 +526,9 @@
     "domain": "regprobe-win11-25h2-session",
     "baseline_snapshot": "RegProbe-Baseline-ToolsHardened-20260330",
     "bench_script": "registry-research-framework/scripts/vm/run-safety-bench-guest.ps1",
-    "bench_wrapper": "registry-research-framework/scripts/vm/run-safety-bench-class1-initial-unpark-count.guest.ps1"
+    "bench_wrapper": "registry-research-framework/scripts/vm/run-safety-bench-class1-initial-unpark-count.guest.ps1",
+    "perf_bench_script": "registry-research-framework/scripts/vm/run-perf-bench-guest.ps1",
+    "perf_bench_wrapper": "registry-research-framework/scripts/vm/run-perf-bench-promoted-batch.guest.ps1"
   },
   "bench_results": {
     "candidate_id": "power.control.class1-initial-unpark-count",
@@ -674,5 +698,30 @@
     "dead_links": [],
     "checked_urls": [],
     "status": "not-run"
+  },
+  "perf_bench_results": {
+    "candidate_id": "power.control.class1-initial-unpark-count",
+    "bench_tier": "vm",
+    "bench_profile": "performance",
+    "bench_measurement_reliability": "relative",
+    "measurement_profile": "power",
+    "measurement_components": [
+      "service-query-ms",
+      "boot-event-query-ms"
+    ],
+    "sample_count": 3,
+    "apply_value": 63,
+    "apply_type": "REG_DWORD",
+    "rollback_method": "restore-baseline",
+    "bench_environment": "windows-11-25h2-vm",
+    "bench_bare_metal_pending": true,
+    "baseline_median_ms": 38.709,
+    "applied_median_ms": 9.863,
+    "delta_ms": -28.846,
+    "delta_pct": -74.52,
+    "rollback_verified": true,
+    "executed_at": "2026-04-10T21:51:00-07:00",
+    "output_file": "evidence/records/power.control.class1-initial-unpark-count/bench-results/power.control.class1-initial-unpark-count-vm-performance.json",
+    "rollback_failure_reason": null
   }
 }

@@ -1,0 +1,28 @@
+{
+  "candidate_id": "system.executive-additional-worker-threads",
+  "bench_tier": "vm",
+  "bench_profile": "performance",
+  "bench_measurement_reliability": "relative",
+  "measurement_profile": "system",
+  "measurement_components": [
+    "service-query-ms",
+    "registry-query-ms"
+  ],
+  "sample_count": 3,
+  "apply_value": {
+    "AdditionalCriticalWorkerThreads": 1,
+    "AdditionalDelayedWorkerThreads": 1
+  },
+  "apply_type": "REG_DWORD pair",
+  "rollback_method": "restore-baseline",
+  "bench_environment": "windows-11-25h2-vm",
+  "bench_bare_metal_pending": true,
+  "baseline_median_ms": 6.19,
+  "applied_median_ms": 3.749,
+  "delta_ms": -2.441,
+  "delta_pct": -39.435,
+  "rollback_verified": true,
+  "executed_at": "2026-04-10T21:51:00-07:00",
+  "output_file": "evidence/records/system.executive-additional-worker-threads/bench-results/system.executive-additional-worker-threads-vm-performance.json",
+  "rollback_failure_reason": null
+}
