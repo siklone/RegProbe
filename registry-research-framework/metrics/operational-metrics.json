@@ -8,9 +8,11 @@
   "revalidation_pending": 0,
   "stale_count": 0,
   "blocker_breakdown": {
+    "boot-unsafe, do not probe without dedicated boot lane": 1,
     "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,
     "intentional-ghidra-hold": 1,
+    "intentional-hold": 3,
     "no-current-build-registry-seeding-path": 2,
     "no-current-build-string-or-symbol-hit": 1,
     "no-doc-source": 2,
@@ -24,5 +26,5 @@
   },
   "bench_completion_rate": 1.0,
   "missing_docs_count": 0,
-  "generated_at": "2026-04-12T16:21:24.741058Z"
+  "generated_at": "2026-04-12T16:30:54.731527Z"
 }
