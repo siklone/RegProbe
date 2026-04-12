@@ -1,0 +1,40 @@
+﻿{
+    "generated_utc":  "2026-04-12T01:55:43.6224357Z",
+    "stage":  "collect",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name":  "TimerCheckFlags",
+    "output_name":  "kernel-timing-wpr-boot-registry-20260412",
+    "status":  "error",
+    "error_kind":  "wpr-stopboot-nonzero-exit",
+    "error":  "wpr -stopboot exited with code .",
+    "recovery_action":  "none",
+    "transport_blocker":  "none",
+    "guest_health":  "stable",
+    "before_boot_time_utc":  "2026-04-12T00:10:50.3709660Z",
+    "after_boot_time_utc":  "2026-04-12T01:53:47.5000000Z",
+    "reboot_observed":  true,
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "stopboot":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Press Ctrl+C to cancel the stop operation.\r\nThe trace was successfully saved.\r\n\r\nThis trace has dropped 22686 events. Please record this trace again.",
+                     "stderr":  ""
+                 },
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-wpr-boot-registry-20260412\\kernel-timing-wpr-boot-registry-20260412.etl",
+    "etl_exists":  true,
+    "csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-wpr-boot-registry-20260412\\kernel-timing-wpr-boot-registry-20260412.csv",
+    "csv_exists":  false,
+    "normalized_bundle_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-wpr-boot-registry-20260412\\kernel-timing-wpr-boot-registry-20260412.normalized.json",
+    "normalized_bundle_exists":  false,
+    "normalized_result_ref":  null,
+    "normalization_status":  "missing",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "normalization_errors":  [
+
+                             ],
+    "hit_line_count":  0,
+    "fragment_hit_counts":  {
+
+                            }
+}

@@ -1,0 +1,36 @@
+﻿{
+    "generated_utc":  "2026-04-12T01:52:23.3112656Z",
+    "stage":  "arm",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name":  "TimerCheckFlags",
+    "output_name":  "kernel-timing-wpr-boot-registry-20260412",
+    "status":  "error",
+    "error_kind":  "wpr-addboot-nonzero-exit",
+    "error":  "wpr -addboot exited with code \u003cnull\u003e.",
+    "recovery_action":  "none",
+    "transport_blocker":  "none",
+    "guest_health":  "stable",
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "before_boot_time_utc":  "2026-04-12T00:10:50.3709660Z",
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-wpr-boot-registry-20260412\\kernel-timing-wpr-boot-registry-20260412.etl",
+    "state_file":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-wpr-boot-registry-20260412\\state.json",
+    "cancelboot":  {
+                       "exit_code":  null,
+                       "timed_out":  false,
+                       "stdout":  "",
+                       "stderr":  ""
+                   },
+    "cancel":  {
+                   "exit_code":  null,
+                   "timed_out":  false,
+                   "stdout":  "",
+                   "stderr":  "There are no trace profiles running.\r\r\n\r\n\tError code: 0xc5583000"
+               },
+    "arm":  {
+                "exit_code":  null,
+                "timed_out":  false,
+                "stdout":  "",
+                "stderr":  ""
+            }
+}

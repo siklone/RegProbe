@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-12T00:31:05.354364Z",
+  "parser": "tracerpt",
+  "provider_guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+  "summary": {
+    "total_artifacts": 1,
+    "physical_etl_count": 1,
+    "placeholder_only_count": 0,
+    "parsed_count": 0,
+    "source_counts": {
+      "unknown": 1
+    }
+  },
+  "entries": [
+    {
+      "path": "evidence/files/vm-tooling-staging/dpc-timer-registry-etw-20260412/dpc-timer-registry_000001.etl",
+      "size_bytes": 42926080,
+      "estimated_source": "unknown",
+      "is_placeholder": false,
+      "actual_etl_path": "evidence/files/vm-tooling-staging/dpc-timer-registry-etw-20260412/dpc-timer-registry_000001.etl",
+      "parsed": false,
+      "parse_status": "parser-unavailable",
+      "parse_reason": "tracerpt.exe is not available in this environment.",
+      "xml_output": null,
+      "normalized_touch_count": 0
+    }
+  ]
+}

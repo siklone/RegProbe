@@ -1,0 +1,27 @@
+# Kernel Timing WPR Boot Registry 2026-04-12
+
+- Guest boot WPR lane produced a saved ETL even though `summary-arm.json` / `summary.json` reported `null` exit code errors from `wpr`.
+- Probe inventory confirmed the guest output root contained:
+  - `kernel-timing-wpr-boot-registry-20260412.etl` at `2337275904` bytes
+  - `kernel-timing-wpr-boot-registry-20260412.manual.csv` at `8248730751` bytes
+- Lightweight `findstr` filtering over the prebuilt CSV returned `101` matching lines for `Session Manager\\Kernel`.
+- All `101` matched lines were key-level registry events:
+  - `KCBCreate`: `34`
+  - `Open`: `33`
+  - `KCBDelete`: `34`
+- The CSV format itself is not limited to key-open noise. Header and context samples show value-level rows render as `Type = QueryValue` with the queried value name in the trailing user-data field.
+- A retained context window around lines `147010` to `147016` shows:
+  - `Open` for `Session Manager\\Kernel`
+  - followed by `QueryValue`
+  - with the queried value rendered as `DefaultHeteroCpuPolicy`
+- That means the current boot WPR CSV is capable of carrying exact value-name reads for this key family.
+- No exact value-name hits were found for:
+  - `TimerCheckFlags`
+  - `LongDpcRuntimeThreshold`
+  - `LongDpcQueueThreshold`
+  - `ForceBugcheckForDpcWatchdog`
+  - `ForceBugcheckOnDpcWatchdog`
+- Current interpretation:
+  - This lane establishes boot-time runtime evidence that the kernel opens `HKLM\\SYSTEM\\ControlSet001\\Control\\Session Manager\\Kernel`.
+  - It also shows that the WPR CSV format can preserve exact `QueryValue` names under the same key.
+  - It still does not establish direct value-read evidence for the three blocked records, so the present negative result is stronger than a parser-format limitation.

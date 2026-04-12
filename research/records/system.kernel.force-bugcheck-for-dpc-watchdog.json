@@ -176,6 +176,19 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-force-bugcheck-wpr-boot-negative-20260412",
+      "kind": "vm-test",
+      "title": "Boot WPR captured Session Manager Kernel QueryValue context but no exact runtime read for ForceBugcheckForDpcWatchdog",
+      "location": "evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/session-manager-kernel-context.txt and evidence/files/vm-tooling-staging/kernel-timing-wpr-boot-registry-20260412/findstr-filter-summary.json",
+      "summary": "A KVM boot WPR registry trace produced a saved ETL and a large tracerpt CSV. The retained context window shows `Open` for `Session Manager\\\\Kernel` followed by `QueryValue` for `DefaultHeteroCpuPolicy`, proving this CSV format can render exact value-name reads under the same key family. Whole-file filtering found no exact `ForceBugcheckForDpcWatchdog` hit, so this lane is retained as stronger negative runtime evidence and no exact runtime read proof.",
+      "supports": [
+        "runtime-gap",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {

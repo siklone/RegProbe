@@ -127,6 +127,12 @@ function Invoke-NativeProcess {
     }
 }
 
+function Test-NonZeroExitCode {
+    param([object]$Result)
+
+    return ($null -ne $Result -and -not $Result.timed_out -and $null -ne $Result.exit_code -and $Result.exit_code -ne 0)
+}
+
 function Get-RowField {
     param(
         [Parameter(Mandatory = $true)]$Row,
@@ -367,11 +373,14 @@ if ($Stage -eq 'arm') {
                 $summary.error_kind = 'wpr-addboot-timeout'
                 $summary.error = "wpr -addboot timed out after $WprTimeoutSeconds second(s)."
             }
-            elseif ($arm.exit_code -ne 0) {
+            elseif (Test-NonZeroExitCode -Result $arm) {
                 $summary.status = 'error'
                 $summary.error_kind = 'wpr-addboot-nonzero-exit'
                 $armExitCode = if ($null -eq $arm.exit_code) { '<null>' } else { [string]$arm.exit_code }
                 $summary.error = "wpr -addboot exited with code $armExitCode."
+            }
+            elseif ($null -eq $arm.exit_code) {
+                $summary.arm_exit_code_indeterminate = $true
             }
         }
     }
@@ -449,10 +458,13 @@ try {
             $summary.error_kind = 'wpr-stopboot-timeout'
             $summary.error = "wpr -stopboot timed out after $WprTimeoutSeconds second(s)."
         }
-        elseif ($stopResult.exit_code -ne 0) {
+        elseif (Test-NonZeroExitCode -Result $stopResult) {
             $summary.status = 'error'
             $summary.error_kind = 'wpr-stopboot-nonzero-exit'
             $summary.error = "wpr -stopboot exited with code $($stopResult.exit_code)."
+        }
+        elseif ($null -eq $stopResult.exit_code) {
+            $summary.stopboot_exit_code_indeterminate = $true
         }
     }
 
@@ -480,8 +492,6 @@ try {
         }
 
         if ($summary.csv_exists) {
-            $lines = Get-Content -Path $csvPath -ErrorAction SilentlyContinue
-            $summary['csv_line_count'] = @($lines).Count
             $fragments = New-Object System.Collections.Generic.List[string]
             foreach ($fragment in @([string]$state.registry_path, [string]$state.value_name) + @($state.match_fragments)) {
                 if (-not [string]::IsNullOrWhiteSpace($fragment) -and -not $fragments.Contains($fragment)) {
@@ -490,11 +500,13 @@ try {
             }
 
             $hitLines = New-Object System.Collections.Generic.List[string]
+            $csvLineCount = 0
             foreach ($fragment in $fragments) {
                 $summary.fragment_hit_counts[$fragment] = 0
             }
 
-            foreach ($line in $lines) {
+            foreach ($line in Get-Content -Path $csvPath -ErrorAction SilentlyContinue) {
+                $csvLineCount++
                 foreach ($fragment in $fragments) {
                     if ($line -like "*$fragment*") {
                         $summary.fragment_hit_counts[$fragment]++
@@ -507,6 +519,7 @@ try {
             if ($hitLines.Count -gt 0) {
                 $hitLines | Set-Content -Path $hitsPath -Encoding UTF8
             }
+            $summary['csv_line_count'] = $csvLineCount
             $summary.hit_line_count = $hitLines.Count
             $summary['hits_path'] = $hitsPath
             $summary['hits_exists'] = [bool](Test-Path $hitsPath)
