@@ -1,0 +1,32 @@
+{
+    "output_name":  "dpc-watchdog-profile-wpr-filter-20260412a",
+    "status":  "completed",
+    "source_csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-wpr-boot-registry-20260412\\kernel-timing-wpr-boot-registry-20260412.manual.csv",
+    "source_csv_exists":  true,
+    "source_csv_size_bytes":  8248730751,
+    "patterns":  [
+                     "DpcWatchdogProfileBufferSizeBytes",
+                     "DpcWatchdogProfileCumulativeDpcThreshold",
+                     "DpcWatchdogProfileOffset",
+                     "DpcWatchdogProfileSingleDpcThreshold"
+                 ],
+    "hits_path":  "C:\\RegProbe-Diag\\wpr-filter\\dpc-watchdog-profile-wpr-filter-20260412a\\dpc-watchdog-profile-wpr-filter-20260412a.hits.txt",
+    "hits_exists":  true,
+    "hit_line_count":  0,
+    "pattern_hit_counts":  {
+                               "DpcWatchdogProfileBufferSizeBytes":  0,
+                               "DpcWatchdogProfileCumulativeDpcThreshold":  0,
+                               "DpcWatchdogProfileOffset":  0,
+                               "DpcWatchdogProfileSingleDpcThreshold":  0
+                           },
+    "any_target_hits":  false,
+    "findstr_exit_code":  1,
+    "uploads":  {
+                    "hits":  {
+                                 "path":  "C:\\RegProbe-Diag\\wpr-filter\\dpc-watchdog-profile-wpr-filter-20260412a\\dpc-watchdog-profile-wpr-filter-20260412a.hits.txt",
+                                 "uri":  "http://10.0.2.2:8766/dpc-watchdog-profile-wpr-filter-20260412a.hits.txt"
+                             }
+                },
+    "error":  null,
+    "collected_utc":  "2026-04-12T14:41:01.1610209Z"
+}

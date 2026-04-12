@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T14:34:01.479076Z",
+  "generated_utc": "2026-04-12T14:44:29.353196Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -16,11 +16,10 @@
     },
     "next_missing_layer_counts": {
       "none": 248,
-      "decision-gate": 16,
+      "decision-gate": 17,
       "ghidra": 1,
       "reboot-diff": 1,
-      "incident-review": 1,
-      "runtime-trace": 1
+      "incident-review": 1
     },
     "promotion_state_counts": {
       "promoted": 248,
@@ -18449,18 +18448,20 @@
       "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
         "static_ghidra",
+        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
         "ghidra",
+        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -18487,16 +18488,16 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "conditional-initialization-unproven",
+        "documentation-first-review",
         "live-defaults-conflict-docs",
         "no-doc-source-outside-repo",
-        "no-runtime-proof",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -18504,8 +18505,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.56,
-        "next_missing_layer": "runtime-trace"
+        "overall_score": 3.67,
+        "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18519,7 +18520,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T14:25:00Z"
+        "last_verified_at": "2026-04-12T14:42:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
