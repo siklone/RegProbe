@@ -1621,7 +1621,9 @@ def bench_results_projection(full_evidence: dict[str, Any], record: dict[str, An
     behavior = (full_evidence.get("behavior") or {}) if isinstance(full_evidence, dict) else {}
     benchmark = (behavior.get("benchmark") or {}) if isinstance(behavior, dict) else {}
     record_bench_results = (record.get("bench_results") or {}) if isinstance(record, dict) else {}
-    explicit_results = (full_evidence.get("bench_results") or record_bench_results or {}) if isinstance(full_evidence, dict) else record_bench_results
+    # Record-level bench results are the curated canonical verdict. Older
+    # full-evidence bundles may still retain failed exploratory runs.
+    explicit_results = (record_bench_results or full_evidence.get("bench_results") or {}) if isinstance(full_evidence, dict) else record_bench_results
     reproducibility = full_evidence.get("reproducibility") or {}
     audit = audit or {}
     record = record or {}

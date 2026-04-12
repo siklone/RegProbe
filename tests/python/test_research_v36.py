@@ -570,6 +570,51 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["bench_status"]["bench_measurement_reliability"], "functional")
         self.assertNotIn("bench-failed-safety", gate["promotion_blockers"])
 
+    def test_record_level_bench_results_override_legacy_full_evidence(self) -> None:
+        record = {
+            "record_id": "example.vm-safety-record-override",
+            "tweak_id": "example.vm-safety-record-override",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": True,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+            "bench_results": {
+                "bench_tier": "vm",
+                "executed": True,
+                "safety_passed": True,
+                "summary": "Canonical record-level bench passed.",
+            },
+        }
+        full_evidence = {
+            "bench_results": {
+                "bench_tier": "unknown",
+                "executed": True,
+                "summary": "Legacy exploratory runner failed.",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "none"}, full_evidence)
+
+        self.assertEqual(gate["bench_status"]["bench_tier"], "vm")
+        self.assertEqual(gate["bench_status"]["summary"], "Canonical record-level bench passed.")
+        self.assertTrue(gate["bench_status"]["safety_passed"])
+
     def test_failed_vm_safety_bench_blocks_candidate(self) -> None:
         record = {
             "record_id": "example.vm-safety-failed",
