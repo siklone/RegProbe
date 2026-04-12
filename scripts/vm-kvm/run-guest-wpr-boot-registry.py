@@ -125,6 +125,101 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     return path.exists()
 
 
+def try_qga_download(
+    *,
+    repo_root: Path,
+    args: argparse.Namespace,
+    guest_path: str,
+    host_path: Path,
+) -> dict[str, object]:
+    cmd = [
+        sys.executable,
+        str(repo_root / "scripts" / "vm-kvm" / "qga-get-file.py"),
+        "--domain",
+        args.domain,
+        "--connect",
+        args.connect,
+        "--source",
+        guest_path,
+        "--destination",
+        str(host_path),
+        "--timeout",
+        str(args.salvage_qga_timeout_seconds),
+    ]
+    result = subprocess.run(cmd, cwd=str(repo_root), capture_output=True, text=True)
+    payload: dict[str, object] = {
+        "guest_path": guest_path,
+        "host_path": str(host_path),
+        "returncode": result.returncode,
+        "exists": host_path.exists(),
+    }
+    if result.stdout:
+        try:
+            payload["result"] = json.loads(result.stdout)
+        except json.JSONDecodeError:
+            payload["stdout"] = result.stdout
+    if result.stderr:
+        payload["stderr"] = result.stderr.strip()
+    return payload
+
+
+def inspect_hits_csv(path: Path, value_name: str) -> dict[str, object]:
+    if not path.exists():
+        return {
+            "exists": False,
+            "line_count": 0,
+            "hit_line_count": 0,
+            "contains_value_name": False,
+        }
+
+    text = path.read_text(encoding="utf-8-sig", errors="replace")
+    lines = [line for line in text.splitlines() if line.strip()]
+    data_lines = lines[1:] if lines else []
+    return {
+        "exists": True,
+        "size_bytes": path.stat().st_size,
+        "line_count": len(lines),
+        "hit_line_count": len(data_lines),
+        "contains_value_name": value_name.lower() in text.lower(),
+    }
+
+
+def salvage_timeout_artifacts(
+    *,
+    repo_root: Path,
+    args: argparse.Namespace,
+    upload_dir: Path,
+    guest_output_root: str,
+) -> dict[str, object]:
+    if not args.salvage_timeout_artifacts or args.launch_transport == "send-key":
+        return {
+            "enabled": bool(args.salvage_timeout_artifacts),
+            "attempted": False,
+            "reason": "disabled-or-non-qga-transport",
+        }
+
+    salvage_targets = {
+        "guest_summary": ("summary.json", upload_dir / f"{args.output_name}-summary-guest.json"),
+        "guest_summary_arm": ("summary-arm.json", upload_dir / f"{args.output_name}-summary-arm-guest.json"),
+        "guest_stage": ("stage.json", upload_dir / f"{args.output_name}-stage-guest.json"),
+        "guest_hits_csv": (f"{args.output_name}.hits.csv", upload_dir / f"{args.output_name}.hits.csv"),
+        "guest_normalized": (f"{args.output_name}.normalized.json", upload_dir / f"{args.output_name}.normalized.json"),
+    }
+    downloads = {}
+    for name, (guest_name, host_path) in salvage_targets.items():
+        guest_path = guest_output_root.rstrip("\\") + "\\" + guest_name
+        downloads[name] = try_qga_download(repo_root=repo_root, args=args, guest_path=guest_path, host_path=host_path)
+
+    hits_csv_path = salvage_targets["guest_hits_csv"][1]
+    return {
+        "enabled": True,
+        "attempted": True,
+        "guest_output_root": guest_output_root,
+        "downloads": downloads,
+        "hits_csv": inspect_hits_csv(hits_csv_path, args.value_name),
+    }
+
+
 def build_guest_launcher(guest_scripts_root: str, bridge: str, generated_name: str) -> str:
     return "\n".join(
         [
@@ -158,6 +253,8 @@ def main() -> int:
     parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
     parser.add_argument("--wpr-timeout-seconds", type=int, default=180)
     parser.add_argument("--tracerpt-timeout-seconds", type=int, default=180)
+    parser.add_argument("--salvage-timeout-artifacts", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--salvage-qga-timeout-seconds", type=int, default=30)
     parser.add_argument("--registry-path", required=True)
     parser.add_argument("--value-name", required=True)
     parser.add_argument("--output-name", required=True)
@@ -387,6 +484,12 @@ def main() -> int:
             "arm_launch_transport": arm_launch_transport,
             "collect_launch_transport": collect_launch_transport,
             "status": "timeout",
+            "timeout_salvage": salvage_timeout_artifacts(
+                repo_root=repo_root,
+                args=args,
+                upload_dir=upload_dir,
+                guest_output_root=rf"C:\RegProbe-Diag\wpr-boot-registry\{args.output_name}",
+            ),
         },
         default_error_kind="runner-timeout",
         default_recovery_action="rerun-wpr-boot-registry",
