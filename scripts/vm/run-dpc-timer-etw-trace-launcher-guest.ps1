@@ -10,7 +10,17 @@ $ErrorActionPreference = "Stop"
 
 $runner = Join-Path $PSScriptRoot "run-dpc-timer-etw-trace-guest.ps1"
 if (-not (Test-Path $runner)) {
-    throw "DPC/timer ETW runner not found next to launcher: $runner"
+    $runnerItem = Get-ChildItem -Path $PSScriptRoot -File -ErrorAction SilentlyContinue |
+        Where-Object {
+            $_.Name -like "run-dpc-timer-etw-trace-gue*.ps1" -or
+            $_.Name -like "RUN_DPC_TIMER_ETW_TRACE_GUE*.PS1"
+        } |
+        Sort-Object Name |
+        Select-Object -First 1
+    if (-not $runnerItem) {
+        throw "DPC/timer ETW runner not found next to launcher: $runner"
+    }
+    $runner = $runnerItem.FullName
 }
 
 & $runner `

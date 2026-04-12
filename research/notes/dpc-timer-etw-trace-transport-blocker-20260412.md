@@ -18,16 +18,24 @@ QGA is reachable enough for `guest-ping`, but the installed agent reports versio
 
 The keyboard lane is currently unreliable for long commands. The first ISO invocation failed because the mounted CD-ROM was not `D:`. The bridge-download invocation then appeared to enter a malformed or stuck command line in the elevated PowerShell window, and the admin-shell recovery helper timed out without publishing its marker.
 
+The blocker was worked around by using the ISO-visible 8.3 names:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File D:\extras\RUN_DPC_TIMER_ETW_TRACE_LAU.PS1 -UploadPrefix dpc-timer-etw-20260412-fixed
+```
+
+That run completed successfully. It produced a 5.7 MB ETL and a 57 MB tracerpt XML, uploaded both to the active guest bridge root, and wrote the retained summary under `evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json`.
+
+The result is a clean no-target-hit runtime trace: `target_hits_count = 0` for `TimerCheckFlags`, `LongDpc`, `ForceBugcheck`, `DpcWatchdog`, `DpcWatchdogProfile`, `DpcWatchdogPeriod`, and `KeTimerCheckFlags`.
+
 ## Next Step
 
-Use the short launcher after resetting the guest shell, or update the guest QGA package to a build that supports `guest-exec`.
+Use a targeted trigger or boot/reboot lane next. This trace proves the ETW collection lane works, but it does not close the `runtime_no_read` blockers for the DPC/timer records.
 
 Preferred manual guest command after the ISO is attached:
 
 ```powershell
-$d = (Get-Volume -FileSystemLabel REGPROBE_KVM_BOOTSTRAP).DriveLetter
-& ($d + ':\extras\run-dpc-timer-etw-trace-launcher-guest.ps1') `
-  -UploadPrefix 'dpc-timer-etw-20260412'
+powershell -ExecutionPolicy Bypass -File D:\extras\RUN_DPC_TIMER_ETW_TRACE_LAU.PS1 -UploadPrefix dpc-timer-etw-YYYYMMDD-label
 ```
 
 Expected host output path:

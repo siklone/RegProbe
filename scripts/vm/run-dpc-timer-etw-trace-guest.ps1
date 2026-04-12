@@ -12,9 +12,10 @@ $ErrorActionPreference = "Stop"
 New-Item -ItemType Directory -Force -Path $OutputPath | Out-Null
 
 $traceName = "regprobe-dpc-timer-registry"
-$etlPath = Join-Path $OutputPath "dpc-timer-registry.etl"
-$xmlPath = Join-Path $OutputPath "dpc-timer-registry.xml"
-$hitsPath = Join-Path $OutputPath "target-hits.txt"
+$stamp = Get-Date -Format "yyyyMMdd-HHmmss"
+$etlPath = Join-Path $OutputPath "dpc-timer-registry-$stamp.etl"
+$xmlPath = Join-Path $OutputPath "dpc-timer-registry-$stamp.xml"
+$hitsPath = Join-Path $OutputPath "target-hits-$stamp.txt"
 $summaryPath = Join-Path $OutputPath "trace-summary.json"
 
 function Join-UploadUri {
@@ -109,15 +110,12 @@ try {
     Invoke-Logman -Arguments @("stop", $traceName) -IgnoreFailure | Out-Null
     Invoke-Logman -Arguments @("delete", $traceName) -IgnoreFailure | Out-Null
 
-    if (Test-Path $etlPath) {
-        Remove-Item -Force $etlPath
-    }
-    if (Test-Path $xmlPath) {
-        Remove-Item -Force $xmlPath
-    }
-    if (Test-Path $hitsPath) {
-        Remove-Item -Force $hitsPath
-    }
+    Get-ChildItem -Path $OutputPath -File -Filter "dpc-timer-registry*.etl" -ErrorAction SilentlyContinue |
+        Remove-Item -Force -ErrorAction SilentlyContinue
+    Get-ChildItem -Path $OutputPath -File -Filter "dpc-timer-registry*.xml" -ErrorAction SilentlyContinue |
+        Remove-Item -Force -ErrorAction SilentlyContinue
+    Get-ChildItem -Path $OutputPath -File -Filter "target-hits*.txt" -ErrorAction SilentlyContinue |
+        Remove-Item -Force -ErrorAction SilentlyContinue
 
     $create = Invoke-Logman -Arguments @(
         "create", "trace", $traceName,

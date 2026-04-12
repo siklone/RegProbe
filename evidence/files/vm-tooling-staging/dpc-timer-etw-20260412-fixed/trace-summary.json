@@ -1,0 +1,62 @@
+﻿{
+    "trace_name":  "regprobe-dpc-timer-registry",
+    "etl_path":  "C:\\regprobe-dpc-timer-etw\\dpc-timer-registry-20260412-095648_000001.etl",
+    "etl_exists":  true,
+    "etl_size_bytes":  5734400,
+    "xml_path":  "C:\\regprobe-dpc-timer-etw\\dpc-timer-registry-20260412-095648.xml",
+    "xml_exists":  true,
+    "xml_size_bytes":  57001135,
+    "target_hits_path":  "C:\\regprobe-dpc-timer-etw\\target-hits-20260412-095648.txt",
+    "target_hits_exists":  false,
+    "target_hits_count":  0,
+    "logman_create_exit_code":  0,
+    "logman_update_results":  [
+                                  {
+                                      "exit_code":  0,
+                                      "provider":  "Microsoft-Windows-Kernel-Registry"
+                                  },
+                                  {
+                                      "exit_code":  0,
+                                      "provider":  "Microsoft-Windows-Kernel-General"
+                                  },
+                                  {
+                                      "exit_code":  0,
+                                      "provider":  "Microsoft-Windows-Kernel-Power"
+                                  },
+                                  {
+                                      "exit_code":  0,
+                                      "provider":  "Microsoft-Windows-Kernel-Processor-Power"
+                                  }
+                              ],
+    "logman_start_exit_code":  0,
+    "logman_stop_exit_code":  0,
+    "tracerpt_exit_code":  0,
+    "trace_seconds":  45,
+    "uploads":  {
+                    "summary":  {
+                                    "status":  "uploaded",
+                                    "path":  "C:\\regprobe-dpc-timer-etw\\trace-summary.json",
+                                    "remote_name":  "dpc-timer-etw-20260412-fixed/trace-summary.json",
+                                    "size_bytes":  1769,
+                                    "uri":  "http://10.0.2.2:8766/dpc-timer-etw-20260412-fixed/trace-summary.json"
+                                },
+                    "target_hits":  null,
+                    "etl":  {
+                                "status":  "uploaded",
+                                "path":  "C:\\regprobe-dpc-timer-etw\\dpc-timer-registry-20260412-095648_000001.etl",
+                                "remote_name":  "dpc-timer-etw-20260412-fixed/dpc-timer-registry.etl",
+                                "size_bytes":  5734400,
+                                "uri":  "http://10.0.2.2:8766/dpc-timer-etw-20260412-fixed/dpc-timer-registry.etl"
+                            },
+                    "xml":  {
+                                "status":  "uploaded",
+                                "path":  "C:\\regprobe-dpc-timer-etw\\dpc-timer-registry-20260412-095648.xml",
+                                "remote_name":  "dpc-timer-etw-20260412-fixed/dpc-timer-registry.xml",
+                                "size_bytes":  57001135,
+                                "uri":  "http://10.0.2.2:8766/dpc-timer-etw-20260412-fixed/dpc-timer-registry.xml"
+                            }
+                },
+    "collected_utc":  "2026-04-12T16:57:39.9042676Z",
+    "status":  "completed",
+    "error":  null
+}

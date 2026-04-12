@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "collected_utc": "2026-04-12T16:57:39.9042676Z",
+  "status": "completed",
+  "trace_name": "regprobe-dpc-timer-registry",
+  "bench_environment": "windows-11-25h2-vm",
+  "purpose": "Runtime ETW registry-read search for DPC/timer/watchdog candidate values.",
+  "target_candidates": [
+    "system.kernel-long-dpc-threshold-cluster",
+    "system.kernel.force-bugcheck-for-dpc-watchdog",
+    "system.kernel.timer-check-flags"
+  ],
+  "target_patterns": [
+    "TimerCheckFlags",
+    "LongDpc",
+    "ForceBugcheck",
+    "DpcWatchdog",
+    "DpcWatchdogProfile",
+    "DpcWatchdogPeriod",
+    "KeTimerCheckFlags"
+  ],
+  "providers": [
+    "Microsoft-Windows-Kernel-Registry",
+    "Microsoft-Windows-Kernel-General",
+    "Microsoft-Windows-Kernel-Power",
+    "Microsoft-Windows-Kernel-Processor-Power"
+  ],
+  "trace_seconds": 45,
+  "target_hits_count": 0,
+  "runtime_status": "no-target-hit",
+  "interpretation": "The ETW collection lane is functional and produced ETL/XML artifacts, but this 45-second window did not produce an exact target string/read hit for the DPC/timer/watchdog values. This is negative runtime evidence only; it does not close runtime_no_read blockers.",
+  "repo_artifacts": [
+    {
+      "path": "evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json",
+      "sha256": "c65d6dbbc3143949fdd8252d0df1b320a58cc64dc317aa86e98ee325f4dc3fa7",
+      "size": 3338,
+      "collected_utc": "2026-04-12T16:57:39.9042676Z"
+    }
+  ],
+  "external_artifacts_not_committed": [
+    {
+      "path": "/tmp/regprobe-bridge/dpc-timer-etw-20260412-fixed/dpc-timer-registry.etl",
+      "sha256": "5e2bbc05f5f3d694aa8cb2a8b8e9e0826fb98a845442f6a92c218dc7d6682102",
+      "size": 5734400
+    },
+    {
+      "path": "/tmp/regprobe-bridge/dpc-timer-etw-20260412-fixed/dpc-timer-registry.xml",
+      "sha256": "b145e6fcf481396a0917e8e305cdfc761f0b16ec81bc51be58a61645c9635dac",
+      "size": 57001135
+    }
+  ],
+  "next_step": "Use a targeted trigger or boot/reboot lane for exact runtime reads; this idle-window trace alone should not promote the candidate records."
+}
