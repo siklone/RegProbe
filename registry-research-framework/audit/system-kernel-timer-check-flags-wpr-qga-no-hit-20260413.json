@@ -1,0 +1,31 @@
+{
+  "generated_utc": "2026-04-12T22:01:23.1097874Z",
+  "candidate_id": "system.kernel.timer-check-flags",
+  "record_id": "system.kernel.timer-check-flags",
+  "run_id": "timer-check-flags-wpr-qga-20260413a",
+  "transport": "qga",
+  "capture_phase": "boot",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+  "value_name": "TimerCheckFlags",
+  "status": "ok",
+  "reboot_observed": true,
+  "etl_exists": true,
+  "csv_exists": true,
+  "normalized_bundle_exists": true,
+  "normalization_status": "ok",
+  "normalizer_name": "GuestTracerptCsvRegistryNormalizer",
+  "hit_line_count": 0,
+  "normalized_event_count": 0,
+  "fragment_hit_counts": {
+    "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel": 0,
+    "TimerCheckFlags": 0
+  },
+  "tracerpt_dropped_events": 22159,
+  "negative_evidence": "exact-runtime-no-hit",
+  "artifacts": [
+    "evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary-arm.json",
+    "evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary.json",
+    "evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json",
+    "research/notes/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.md"
+  ]
+}
