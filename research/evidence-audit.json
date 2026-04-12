@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T17:04:25.205941Z",
+  "generated_utc": "2026-04-12T21:52:51.212098Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -15,14 +15,15 @@
       "early-boot": 17
     },
     "next_missing_layer_counts": {
-      "none": 249,
-      "decision-gate": 17,
+      "none": 250,
+      "decision-gate": 16,
       "ghidra": 1,
       "reboot-diff": 1
     },
     "promotion_state_counts": {
       "promoted": 249,
-      "blocked": 19
+      "blocked": 18,
+      "promotion-eligible": 1
     },
     "re_audit_required_count": 22,
     "imported_candidate_backlog": {
@@ -39,7 +40,7 @@
     },
     "total": 268,
     "promoted": 249,
-    "blocked": 19,
+    "blocked": 18,
     "revalidation_pending": 0,
     "stale": 0,
     "gate_health": "green"
@@ -5941,7 +5942,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "runtime_no_read"
+        "intentional-hold",
+        "not-mapped-to-supported-app-surface",
+        "research-only-raw-policy-system-value"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -5970,7 +5973,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-07T00:00:00Z"
+        "last_verified_at": "2026-04-12T21:23:47Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -6161,7 +6164,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T16:09:52Z"
+        "last_verified_at": "2026-04-12T20:20:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -6314,7 +6317,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "runtime_no_read"
+        "intentional-hold",
+        "not-mapped-to-supported-app-surface",
+        "research-only-raw-power-manager-value"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6343,7 +6348,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-07T00:00:00Z"
+        "last_verified_at": "2026-04-12T19:45:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -17855,7 +17860,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "decision-gate",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -17889,13 +17894,11 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
+      "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "blocked",
-      "promotion_blockers": [
-        "runtime_no_read"
-      ],
-      "record_promotion_allowed": false,
+      "promotion_state": "promotion-eligible",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
@@ -17908,7 +17911,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.67,
-        "next_missing_layer": "decision-gate"
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -17922,7 +17925,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-07T11:45:30Z"
+        "last_verified_at": "2026-04-12T21:36:42Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -22842,17 +22845,20 @@
     "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,
     "intentional-ghidra-hold": 1,
-    "intentional-hold": 3,
+    "intentional-hold": 5,
     "no-current-build-registry-seeding-path": 2,
     "no-current-build-string-or-symbol-hit": 1,
     "no-doc-source": 2,
     "no-doc-source-outside-repo": 5,
     "no-primary-current-build-doc": 3,
-    "no-runtime-proof": 15,
+    "no-runtime-proof": 12,
     "non-default-semantics-unproven": 5,
+    "not-mapped-to-supported-app-surface": 2,
     "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane": 1,
     "reboot-diff": 1,
-    "record-blocker": 12
+    "record-blocker": 12,
+    "research-only-raw-policy-system-value": 1,
+    "research-only-raw-power-manager-value": 1
   },
   "stale_records": [],
   "conflict_records": [],

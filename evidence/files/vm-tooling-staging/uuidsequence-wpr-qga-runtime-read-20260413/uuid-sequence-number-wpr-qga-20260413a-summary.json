@@ -1,0 +1,53 @@
+﻿{
+    "generated_utc":  "2026-04-12T21:30:27.3779479Z",
+    "stage":  "collect",
+    "registry_path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+    "value_name":  "UuidSequenceNumber",
+    "output_name":  "uuid-sequence-number-wpr-qga-20260413a",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "recovery_action":  "none",
+    "transport_blocker":  "none",
+    "guest_health":  "stable",
+    "before_boot_time_utc":  "2026-04-12T21:16:41.5000000Z",
+    "after_boot_time_utc":  "2026-04-12T21:29:24.5000000Z",
+    "reboot_observed":  true,
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "stopboot":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Press Ctrl+C to cancel the stop operation.\r\nThe trace was successfully saved.\r\n\r\nThis trace has dropped 22052 events. Please record this trace again.",
+                     "stderr":  ""
+                 },
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.etl",
+    "etl_exists":  true,
+    "csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.csv",
+    "csv_exists":  true,
+    "normalized_bundle_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.normalized.json",
+    "normalized_bundle_exists":  true,
+    "normalized_result_ref":  "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.normalized.json",
+    "normalization_status":  "ok",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "normalization_errors":  [
+
+                             ],
+    "hits_csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.hits.csv",
+    "hits_csv_exists":  true,
+    "hit_line_count":  2,
+    "fragment_hit_counts":  {
+                                "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive":  0,
+                                "UuidSequenceNumber":  2
+                            },
+    "stopboot_exit_code_indeterminate":  true,
+    "tracerpt":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Input\r\n----------------\r\nFile(s):\r\n     C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.etl\r\n\n0.00%0.95%1.90%2.85%3.80%4.75%5.70%6.65%7.60%8.55%9.50%10.45%11.40%12.35%13.30%14.25%15.20%16.15%17.10%18.05%19.00%19.95%20.90%21.85%22.80%23.75%24.70%25.65%26.60%27.55%28.50%29.45%30.40%31.35%32.30%33.25%34.20%35.15%36.10%37.05%38.00%38.95%39.90%40.86%41.81%42.76%43.71%44.66%45.61%46.56%47.51%48.46%49.41%50.36%51.31%52.26%53.21%54.16%55.11%56.06%57.01%57.96%58.91%59.86%60.81%61.76%62.71%63.66%64.61%65.56%66.51%67.46%68.41%69.36%70.31%71.26%72.21%73.16%74.11%75.06%76.01%76.96%77.91%78.86%79.81%80.76%81.71%82.66%83.61%84.56%85.51%86.46%87.41%88.36%89.31%90.26%91.21%92.16%93.11%94.06%95.01%95.96%96.91%97.86%98.81%99.76%100.00%\n\r\nOutput\r\n----------------\r\nDumpFile:           C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.csv\r\n\nThe command completed successfully.",
+                     "stderr":  ""
+                 },
+    "tracerpt_exit_code_indeterminate":  true,
+    "hits_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.hits.txt",
+    "hits_exists":  true
+}

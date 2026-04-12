@@ -1,0 +1,47 @@
+{
+  "captured_at_utc": "2026-04-12T21:36:42Z",
+  "candidate_id": "system.executive-uuid-sequence-number",
+  "domain": "regprobe-win11-25h2-session",
+  "wrapper_path": "scripts/vm-kvm/run-guest-wpr-boot-registry.py",
+  "guest_tool_path": "scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1",
+  "launch_transport": "qga",
+  "output_name": "uuid-sequence-number-wpr-qga-20260413a",
+  "registry_path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+  "value_name": "UuidSequenceNumber",
+  "summary": {
+    "status": "ok",
+    "reboot_observed": true,
+    "etl_exists": true,
+    "csv_exists": true,
+    "hits_csv_exists": true,
+    "hit_line_count": 2,
+    "normalized_bundle_exists": true,
+    "normalization_status": "ok",
+    "tracerpt_exit_code_indeterminate": true
+  },
+  "normalized_events": [
+    {
+      "operation": "QueryValue",
+      "hive": "HKLM",
+      "key_path": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "normalization_note": "raw-tracerpt-registry-hit-line"
+    },
+    {
+      "operation": "SetValue",
+      "hive": "HKLM",
+      "key_path": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "normalization_note": "raw-tracerpt-registry-hit-line"
+    }
+  ],
+  "artifacts": {
+    "summary_arm_path": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary-arm.json",
+    "summary_path": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json",
+    "stage_path": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-stage.json",
+    "hits_path": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.hits.txt",
+    "normalized_bundle_path": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json"
+  },
+  "key_observation": "The QGA-launched WPR boot-registry rerun now captures both an exact `QueryValue` and an exact `SetValue` line for `UuidSequenceNumber`. The guest normalizer binds those retained exact-value hits to the intended Session Manager Executive path supplied to the run, and that path was already independently fixed by the earlier ETL review and local-KD disassembly, so the record's runtime_no_read blocker can be retired.",
+  "transport_note": "This result also closes the earlier WPR addboot transport uncertainty for this record on the current guest."
+}

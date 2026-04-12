@@ -1,0 +1,60 @@
+﻿{
+    "$schema":  "registry-research-framework/schemas/normalized-registry-bundle.schema.json",
+    "run_id":  "uuid-sequence-number-wpr-qga-20260413a",
+    "source_tool":  "wpr",
+    "capture_phase":  "boot",
+    "generated_utc":  "2026-04-12T21:35:05.5541319Z",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "input_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.hits.csv",
+    "status":  "ok",
+    "error_kind":  null,
+    "errors":  [
+
+               ],
+    "event_count":  2,
+    "filtered_event_count":  2,
+    "evidence_refs":  [
+                          "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.hits.csv",
+                          "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.normalized.json"
+                      ],
+    "events":  [
+                   {
+                       "run_id":  "uuid-sequence-number-wpr-qga-20260413a",
+                       "source_tool":  "wpr",
+                       "capture_phase":  "boot",
+                       "process_name":  null,
+                       "pid":  null,
+                       "operation":  "QueryValue",
+                       "timestamp_utc":  null,
+                       "hive":  "HKLM",
+                       "key_path":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+                       "value_name":  "UuidSequenceNumber",
+                       "value_type":  null,
+                       "data_text":  "Registry, QueryValue,            0,          2,          0,          0,         16,          0, 0x0000000000000000, 0x00000004, 0x00000008,                    1,             ,                     ,   {00000000-0000-0000-0000-000000000000},                                         ,   134205029657450904,        855,          0,         15261443,        0,        2, 0xFFFFBA0293675AF0, \"UuidSequenceNumber\"",
+                       "result":  null,
+                       "evidence_refs":  [
+                                             "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.hits.csv"
+                                         ],
+                       "normalization_note":  "raw-tracerpt-registry-hit-line"
+                   },
+                   {
+                       "run_id":  "uuid-sequence-number-wpr-qga-20260413a",
+                       "source_tool":  "wpr",
+                       "capture_phase":  "boot",
+                       "process_name":  null,
+                       "pid":  null,
+                       "operation":  "SetValue",
+                       "timestamp_utc":  null,
+                       "hive":  "HKLM",
+                       "key_path":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+                       "value_name":  "UuidSequenceNumber",
+                       "value_type":  null,
+                       "data_text":  "Registry,   SetValue,            0,          2,          0,          0,         14,          0, 0x0000000000000000, 0x00000004, 0x00000008,                    1,             ,                     ,   {00000000-0000-0000-0000-000000000000},                                         ,   134205029657451140,        855,          0,         15261667,        0,        0, 0xFFFFBA0293675AF0, \"UuidSequenceNumber\"",
+                       "result":  null,
+                       "evidence_refs":  [
+                                             "C:\\RegProbe-Diag\\wpr-boot-registry\\uuid-sequence-number-wpr-qga-20260413a\\uuid-sequence-number-wpr-qga-20260413a.hits.csv"
+                                         ],
+                       "normalization_note":  "raw-tracerpt-registry-hit-line"
+                   }
+               ]
+}

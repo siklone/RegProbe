@@ -2,7 +2,7 @@
   "total_discovered": 12429,
   "total_triaged": 3546,
   "total_discarded": 8883,
-  "total_blocked": 19,
+  "total_blocked": 18,
   "total_promoted": 249,
   "total_rejected": 55,
   "revalidation_pending": 0,
@@ -12,19 +12,22 @@
     "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,
     "intentional-ghidra-hold": 1,
-    "intentional-hold": 3,
+    "intentional-hold": 5,
     "no-current-build-registry-seeding-path": 2,
     "no-current-build-string-or-symbol-hit": 1,
     "no-doc-source": 2,
     "no-doc-source-outside-repo": 5,
     "no-primary-current-build-doc": 3,
-    "no-runtime-proof": 15,
+    "no-runtime-proof": 12,
     "non-default-semantics-unproven": 5,
+    "not-mapped-to-supported-app-surface": 2,
     "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane": 1,
     "reboot-diff": 1,
-    "record-blocker": 12
+    "record-blocker": 12,
+    "research-only-raw-policy-system-value": 1,
+    "research-only-raw-power-manager-value": 1
   },
   "bench_completion_rate": 1.0,
   "missing_docs_count": 0,
-  "generated_at": "2026-04-12T21:27:06.988459Z"
+  "generated_at": "2026-04-12T21:53:12.044936Z"
 }
