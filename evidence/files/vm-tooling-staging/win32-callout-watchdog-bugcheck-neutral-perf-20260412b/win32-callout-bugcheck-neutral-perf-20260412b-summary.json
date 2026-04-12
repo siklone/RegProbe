@@ -1,0 +1,25 @@
+﻿{
+    "generated_utc":  "2026-04-12T06:20:14.1136484Z",
+    "output_name":  "win32-callout-bugcheck-neutral-perf-20260412b",
+    "candidate_id":  "power.session-win32-callout-watchdog-bugcheck-enabled",
+    "registry_sub_key":  "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+    "value_name":  "Win32CalloutWatchdogBugcheckEnabled",
+    "apply_value":  0,
+    "apply_type":  "REG_DWORD",
+    "rollback_method":  "restore-baseline",
+    "status":  "ok",
+    "bench_result_path":  "C:\\RegProbe-Diag\\bench\\win32-callout-bugcheck-neutral-perf-20260412b\\win32-callout-bugcheck-neutral-perf-20260412b.json",
+    "bench_result_exists":  true,
+    "rollback_verified":  true,
+    "error":  null,
+    "uploads":  {
+
+                },
+    "apply_verified":  true,
+    "baseline_median_ms":  7.028,
+    "applied_median_ms":  3.723,
+    "delta_ms":  -3.305,
+    "delta_pct":  -47.026,
+    "executed_at":  "2026-04-11T23:20:14.2580989-07:00",
+    "bench_measurement_reliability":  "relative-neutral-value"
+}

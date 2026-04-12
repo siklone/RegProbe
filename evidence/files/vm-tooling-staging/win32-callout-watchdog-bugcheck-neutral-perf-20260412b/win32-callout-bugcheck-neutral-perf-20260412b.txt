@@ -1,0 +1,106 @@
+﻿OUTPUT_NAME=win32-callout-bugcheck-neutral-perf-20260412b
+CANDIDATE_ID=power.session-win32-callout-watchdog-bugcheck-enabled
+REGISTRY_SUB_KEY=SYSTEM\CurrentControlSet\Control\Session Manager\Power
+VALUE_NAME=Win32CalloutWatchdogBugcheckEnabled
+APPLY_VALUE=0
+ROLLBACK_METHOD=restore-baseline
+BENCH_RESULT={
+    "candidate_id":  "power.session-win32-callout-watchdog-bugcheck-enabled",
+    "bench_tier":  "vm",
+    "bench_profile":  "performance",
+    "bench_measurement_reliability":  "relative-neutral-value",
+    "measurement_profile":  "system",
+    "measurement_components":  [
+                                   "service-query-ms",
+                                   "registry-query-ms"
+                               ],
+    "sample_count":  3,
+    "registry_read_iterations":  400,
+    "apply_value":  {
+                        "Win32CalloutWatchdogBugcheckEnabled":  0
+                    },
+    "apply_type":  "REG_DWORD",
+    "rollback_method":  "restore-baseline",
+    "bench_environment":  "windows-11-25h2-kvm",
+    "bench_bare_metal_pending":  true,
+    "baseline_state":  {
+                           "Win32CalloutWatchdogBugcheckEnabled":  {
+                                                                       "exists":  false,
+                                                                       "value":  null,
+                                                                       "value_kind":  null
+                                                                   }
+                       },
+    "restored_state":  {
+                           "Win32CalloutWatchdogBugcheckEnabled":  {
+                                                                       "exists":  false,
+                                                                       "value":  null,
+                                                                       "value_kind":  null
+                                                                   }
+                       },
+    "baseline_samples":  [
+                             {
+                                 "service_query_ms":  2.036,
+                                 "registry_query_ms":  32.672,
+                                 "total_ms":  34.708,
+                                 "measurement_components":  [
+                                                                "service-query-ms",
+                                                                "registry-query-ms"
+                                                            ]
+                             },
+                             {
+                                 "service_query_ms":  0.921,
+                                 "registry_query_ms":  1.156,
+                                 "total_ms":  2.077,
+                                 "measurement_components":  [
+                                                                "service-query-ms",
+                                                                "registry-query-ms"
+                                                            ]
+                             },
+                             {
+                                 "service_query_ms":  5.828,
+                                 "registry_query_ms":  1.2,
+                                 "total_ms":  7.028,
+                                 "measurement_components":  [
+                                                                "service-query-ms",
+                                                                "registry-query-ms"
+                                                            ]
+                             }
+                         ],
+    "applied_samples":  [
+                            {
+                                "service_query_ms":  0.895,
+                                "registry_query_ms":  2.828,
+                                "total_ms":  3.723,
+                                "measurement_components":  [
+                                                               "service-query-ms",
+                                                               "registry-query-ms"
+                                                           ]
+                            },
+                            {
+                                "service_query_ms":  1.394,
+                                "registry_query_ms":  1.964,
+                                "total_ms":  3.358,
+                                "measurement_components":  [
+                                                               "service-query-ms",
+                                                               "registry-query-ms"
+                                                           ]
+                            },
+                            {
+                                "service_query_ms":  9.266,
+                                "registry_query_ms":  1.889,
+                                "total_ms":  11.155,
+                                "measurement_components":  [
+                                                               "service-query-ms",
+                                                               "registry-query-ms"
+                                                           ]
+                            }
+                        ],
+    "baseline_median_ms":  7.028,
+    "applied_median_ms":  3.723,
+    "delta_ms":  -3.305,
+    "delta_pct":  -47.026,
+    "apply_verified":  true,
+    "rollback_verified":  true,
+    "rollback_failure_reason":  null,
+    "executed_at":  "2026-04-11T23:20:14.2580989-07:00"
+}

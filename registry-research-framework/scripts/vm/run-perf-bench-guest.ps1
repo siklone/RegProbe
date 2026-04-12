@@ -168,7 +168,7 @@ function Get-Median {
     }
 
     $sorted = @($Values | Sort-Object)
-    $mid = [int]($sorted.Count / 2)
+    $mid = [int][Math]::Floor($sorted.Count / 2)
     if (($sorted.Count % 2) -eq 1) {
         return [Math]::Round([double]$sorted[$mid], 3)
     }

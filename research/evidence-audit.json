@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T06:12:32.669245Z",
+  "generated_utc": "2026-04-12T06:27:22.091238Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -16,11 +16,10 @@
     },
     "next_missing_layer_counts": {
       "none": 248,
-      "decision-gate": 15,
+      "decision-gate": 16,
       "ghidra": 1,
       "reboot-diff": 2,
-      "incident-review": 1,
-      "wpr-or-benchmark": 1
+      "incident-review": 1
     },
     "promotion_state_counts": {
       "promoted": 247,
@@ -8235,18 +8234,20 @@
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": false,
-      "benchmark": false,
+      "benchmark": true,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "wpr-or-benchmark",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "behavior_benchmark"
       ],
       "tools_used": [
         "procmon",
-        "ghidra"
+        "ghidra",
+        "benchmark"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
@@ -8271,7 +8272,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "bench-not-run",
+        "documentation-first-review",
         "no-doc-source",
         "non-default-semantics-unproven",
         "runtime_no_read"
@@ -8280,7 +8281,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -8288,8 +8289,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.56,
-        "next_missing_layer": "wpr-or-benchmark"
+        "overall_score": 3.67,
+        "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -8297,13 +8298,13 @@
       "last_known_good_build": "26200",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T04:40:00Z"
+        "last_verified_at": "2026-04-12T06:20:45Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",

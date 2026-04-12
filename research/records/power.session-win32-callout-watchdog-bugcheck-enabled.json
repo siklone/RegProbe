@@ -4,7 +4,7 @@
   "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
   "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
   "record_status": "draft",
-  "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and now has both a canonical PDB-backed Ghidra structural pass and a broader KVM local-KD seeding sweep. Together they now say something narrower and more useful: the current build still carries the sibling, the live global currently reads `0`, the named wrapper path is not the direct reader, code-xref recovery stayed empty, but a later current-build INIT descriptor scan found the value-name binding row for the same live global RVA under `Session Manager\\Power`. A new dedicated KVM Procmon runtime replay also reached live guest execution under `TriggerProfile = watchdog-power-burst`, but stalled at `procmon-saveas` and ended with `Procmon SaveAs timed out after 60 second(s).` This keeps the record alive as an adjacent watchdog-family global with structurally real registry-seeding metadata and an attempted bounded runtime lane, but still with unproven runtime registry semantics.",
+  "summary": "Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and now has both a canonical PDB-backed Ghidra structural pass and a broader KVM local-KD seeding sweep. Together they now say something narrower and more useful: the current build still carries the sibling, the live global currently reads `0`, the named wrapper path is not the direct reader, code-xref recovery stayed empty, but a later current-build INIT descriptor scan found the value-name binding row for the same live global RVA under `Session Manager\\Power`. A dedicated KVM Procmon runtime replay reached live guest execution under `TriggerProfile = watchdog-power-burst`, but stalled at `procmon-saveas` and ended with `Procmon SaveAs timed out after 60 second(s).` A later neutral-value VM perf bench applied DWORD `0`, verified apply, restored the missing baseline, and verified rollback. This keeps the record alive as an adjacent watchdog-family global with structurally real registry-seeding metadata and bounded VM bench coverage, but still with unproven runtime registry semantics.",
   "validation_proof": {
     "source_url": "research/notes/kernel-power-net-new-existence-probe-20260328.md",
     "exact_quote_or_path": "research/notes/kernel-power-net-new-existence-probe-20260328.md plus the later watchdog KD/Ghidra follow-ups keep `Win32CalloutWatchdogBugcheckEnabled` inside the same `Session Manager\\\\Power` watchdog sibling family as the validated timeout pair.",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "This appears to be a low-level watchdog-related value under Session Manager Power. On the current clean baseline, the parent key exists but the value is not configured.",
     "why_people_change_it": "Kernel and power researchers may inspect this value when tracing watchdog behavior around Session Manager power initialization and callout handling.",
-    "tradeoffs_overview": "The value is kernel-adjacent, boot-relevant, and still unproven as an end-user tweak. Evidence is good enough to keep it in the research queue as a watchdog-family adjacent global, but not good enough to apply, recommend, or even treat as the strongest next watchdog candidate without a real seeding or read path. A new dedicated KVM Procmon runtime replay reached live guest execution, but it still failed at `Procmon SaveAs` before any CSV review could happen.",
-    "professional_notes": "The current repo evidence says `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power\\\\Win32CalloutWatchdogBugcheckEnabled` is absent by default on the clean baseline while the parent path exists. A later targeted current-build string batch found an exact Unicode hit in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD symbol sweep resolved a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` global alongside `PopWatchdogInit`, `PopWatchdogResumeTimeout`, `PopWatchdogSleepTimeout`, and `PopInvokeWin32CalloutWithWatchdog`, which proved the sibling still exists in the current watchdog-family symbol surface. A direct KVM local-KD follow-up then showed that `PopInvokeWin32CalloutWithWatchdog` uses `PopWin32kCalloutWatchdogTimeoutSeconds`, builds a watchdog callback packet around `PopWin32CalloutWatchdogCallback`, calls `ZwPowerInformation`, and then invokes `PsInvokeWin32Callout`; the same pass read `PopWin32CalloutWatchdogBugcheckEnabled = 0` live, but did not show that wrapper reading the target global. The new canonical PDB-backed Ghidra full-analysis pass confirmed that the exact value-name string still exists in `ntoskrnl.exe`, but recovered zero direct code xrefs from that string. The new broader KVM local-KD seed sweep then widened the search across watchdog/bugcheck symbols and helper disassembly, but still did not reveal a target-specific setter, copy helper, or registry seeding caller for the global. The only proven current-build registry helper path in this neighborhood remains the generic power reader chain `PopReadUlongPowerKey -> PopReadRegKeyValue -> ZwOpenKey / ZwQueryValueKey`, and the directly observed timeout selector still reads `PopWatchdogSleepTimeout` and `PopWatchdogResumeTimeout`, not this sibling. The right interpretation is now narrower: this is an adjacent watchdog-family global with unproven registry semantics on the current build, not the strongest un-packaged watchdog tweak lead. Absent a new runtime or documentation lead, this sibling should stop taking priority over stronger watchdog lanes. A later host-side current-build INIT descriptor scan then found the `Win32CalloutWatchdogBugcheckEnabled` UTF-16 string and one nearby `Session Manager\\Power` row at file offset `0xbeda88` pointing at static RVA `0xFC5FA8`, matching the live KD RVA for `nt!PopWin32CalloutWatchdogBugcheckEnabled`. That narrows the open question further: the current build still carries a concrete registry-seeding table entry for the sibling even though the currently observed wrapper/code-xref lanes do not show who consumes it. A new dedicated KVM Procmon runtime replay then reused `TriggerProfile = watchdog-power-burst`, reached live guest execution, uploaded a `procmon-saveas` stage marker, and ended with `Procmon SaveAs timed out after 60 second(s).` The result text still reported the restored state as path-missing and value-missing, so the runtime lane now fails as an explicit Procmon export blocker rather than as an unrun or ambiguous trigger lane.",
+    "tradeoffs_overview": "The value is kernel-adjacent, boot-relevant, and still unproven as an end-user tweak. Evidence is good enough to keep it in the research queue as a watchdog-family adjacent global, but not good enough to apply, recommend, or even treat as the strongest next watchdog candidate without a real seeding or read path. A dedicated KVM Procmon runtime replay reached live guest execution, but it still failed at `Procmon SaveAs` before any CSV review could happen. A later neutral-value VM perf bench covered apply and rollback mechanics without exercising a behavior-changing DWORD `1`.",
+    "professional_notes": "The current repo evidence says `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Power\\\\Win32CalloutWatchdogBugcheckEnabled` is absent by default on the clean baseline while the parent path exists. A later targeted current-build string batch found an exact Unicode hit in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD symbol sweep resolved a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` global alongside `PopWatchdogInit`, `PopWatchdogResumeTimeout`, `PopWatchdogSleepTimeout`, and `PopInvokeWin32CalloutWithWatchdog`, which proved the sibling still exists in the current watchdog-family symbol surface. A direct KVM local-KD follow-up then showed that `PopInvokeWin32CalloutWithWatchdog` uses `PopWin32kCalloutWatchdogTimeoutSeconds`, builds a watchdog callback packet around `PopWin32CalloutWatchdogCallback`, calls `ZwPowerInformation`, and then invokes `PsInvokeWin32Callout`; the same pass read `PopWin32CalloutWatchdogBugcheckEnabled = 0` live, but did not show that wrapper reading the target global. The new canonical PDB-backed Ghidra full-analysis pass confirmed that the exact value-name string still exists in `ntoskrnl.exe`, but recovered zero direct code xrefs from that string. The new broader KVM local-KD seed sweep then widened the search across watchdog/bugcheck symbols and helper disassembly, but still did not reveal a target-specific setter, copy helper, or registry seeding caller for the global. The only proven current-build registry helper path in this neighborhood remains the generic power reader chain `PopReadUlongPowerKey -> PopReadRegKeyValue -> ZwOpenKey / ZwQueryValueKey`, and the directly observed timeout selector still reads `PopWatchdogSleepTimeout` and `PopWatchdogResumeTimeout`, not this sibling. The right interpretation is now narrower: this is an adjacent watchdog-family global with unproven registry semantics on the current build, not the strongest un-packaged watchdog tweak lead. Absent a new runtime or documentation lead, this sibling should stop taking priority over stronger watchdog lanes. A later host-side current-build INIT descriptor scan then found the `Win32CalloutWatchdogBugcheckEnabled` UTF-16 string and one nearby `Session Manager\\Power` row at file offset `0xbeda88` pointing at static RVA `0xFC5FA8`, matching the live KD RVA for `nt!PopWin32CalloutWatchdogBugcheckEnabled`. That narrows the open question further: the current build still carries a concrete registry-seeding table entry for the sibling even though the currently observed wrapper/code-xref lanes do not show who consumes it. A dedicated KVM Procmon runtime replay then reused `TriggerProfile = watchdog-power-burst`, reached live guest execution, uploaded a `procmon-saveas` stage marker, and ended with `Procmon SaveAs timed out after 60 second(s).` The result text still reported the restored state as path-missing and value-missing, so the runtime lane now fails as an explicit Procmon export blocker rather than as an unrun or ambiguous trigger lane. A later neutral-value VM perf bench deliberately applied DWORD `0`, matching the live KD-observed global value, to avoid exercising behavior-changing bugcheck semantics. The bench verified apply, measured 3 relative VM samples, restored the missing baseline by deleting the value, and verified rollback. The first bench pass exposed and fixed a PowerShell median-index bug in `run-perf-bench-guest.ps1`; the retained rerun reports baseline median `7.028 ms`, applied median `3.723 ms`, and rollback verified. Those timing numbers are VM-relative and not a performance claim; the useful conclusion is that apply/rollback mechanics are now covered without changing intended bugcheck behavior.",
     "targets": [
       {
         "target_id": "win32-callout-watchdog-bugcheck-enabled",
@@ -226,8 +226,54 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-watchdog-win32-callout-neutral-perf-20260412",
+      "kind": "runtime-benchmark",
+      "title": "Neutral-value VM perf bench verifies apply and rollback for Win32CalloutWatchdogBugcheckEnabled",
+      "location": "evidence/files/vm-tooling-staging/win32-callout-watchdog-bugcheck-neutral-perf-20260412b/win32-callout-bugcheck-neutral-perf-20260412b-summary.json and evidence/files/vm-tooling-staging/win32-callout-watchdog-bugcheck-neutral-perf-20260412b/win32-callout-bugcheck-neutral-perf-20260412b.json and evidence/files/vm-tooling-staging/win32-callout-watchdog-bugcheck-neutral-perf-20260412b/host-review.json and research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-vm-neutral-perf-bench-20260412.md",
+      "summary": "A bounded VM perf bench deliberately applied `Win32CalloutWatchdogBugcheckEnabled = DWORD 0`, matching the live KD-observed global value, to avoid behavior-changing bugcheck semantics. Apply was verified, 3 relative service/registry samples were collected, rollback restored the missing baseline, and rollback verification passed. The run also fixed the shared PowerShell median calculation before retaining the final numbers.",
+      "supports": [
+        "behavior",
+        "rollback",
+        "risk",
+        "benchmark",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
+  "bench_results": {
+    "executed": true,
+    "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+    "bench_tier": "vm",
+    "bench_profile": "performance",
+    "bench_measurement_reliability": "relative-neutral-value",
+    "measurement_profile": "system",
+    "measurement_components": [
+      "service-query-ms",
+      "registry-query-ms"
+    ],
+    "sample_count": 3,
+    "registry_read_iterations": 400,
+    "apply_value": {
+      "Win32CalloutWatchdogBugcheckEnabled": 0
+    },
+    "apply_type": "REG_DWORD",
+    "rollback_method": "restore-baseline",
+    "bench_environment": "windows-11-25h2-kvm",
+    "bench_bare_metal_pending": true,
+    "baseline_median_ms": 7.028,
+    "applied_median_ms": 3.723,
+    "delta_ms": -3.305,
+    "delta_pct": -47.026,
+    "apply_verified": true,
+    "rollback_verified": true,
+    "rollback_failure_reason": null,
+    "executed_at": "2026-04-11T23:20:14.2580989-07:00",
+    "summary": "VM neutral-value perf bench applied DWORD 0, verified apply, restored the missing baseline, and verified rollback. Timing is VM-relative and not a performance claim.",
+    "output_file": "evidence/files/vm-tooling-staging/win32-callout-watchdog-bugcheck-neutral-perf-20260412b/win32-callout-bugcheck-neutral-perf-20260412b.json"
+  },
   "decision": {
     "confidence": "low",
     "apply_allowed": false,
@@ -235,7 +281,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has clean-baseline absence, a current-build string hit, a live current-build KD symbol/value for `PopWin32CalloutWatchdogBugcheckEnabled`, a current-build INIT descriptor binding from the value name to the same global under `Session Manager\\Power`, and now a dedicated Procmon runtime attempt that reached guest execution. It is not ready for validation because an exact runtime registry read has not been captured, the bounded runtime lane currently fails at `Procmon SaveAs`, the direct code-reader path is still unresolved, and non-default semantics remain unproven.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has clean-baseline absence, a current-build string hit, a live current-build KD symbol/value for `PopWin32CalloutWatchdogBugcheckEnabled`, a current-build INIT descriptor binding from the value name to the same global under `Session Manager\\Power`, a dedicated Procmon runtime attempt that reached guest execution, and a neutral-value VM perf bench that verified apply and rollback. It is not ready for validation because an exact runtime registry read has not been captured, the bounded runtime lane currently fails at `Procmon SaveAs`, the direct code-reader path is still unresolved, and non-default semantics remain unproven.",
     "manual_review_required": true,
     "blocking_issues": [
       "runtime_no_read",
@@ -262,5 +308,5 @@
       "notes": "A host-side `ntoskrnl.exe` decode found a `Session Manager\\Power` descriptor row for `Win32CalloutWatchdogBugcheckEnabled` pointing at the same static RVA as live `nt!PopWin32CalloutWatchdogBugcheckEnabled`."
     }
   ],
-  "last_reviewed_utc": "2026-04-12T04:40:00Z"
+  "last_reviewed_utc": "2026-04-12T06:20:45Z"
 }

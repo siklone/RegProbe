@@ -1,0 +1,38 @@
+{
+  "generated_utc": "2026-04-12T06:20:45Z",
+  "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+  "output_name": "win32-callout-bugcheck-neutral-perf-20260412b",
+  "bench_tier": "vm",
+  "bench_profile": "performance",
+  "bench_measurement_reliability": "relative-neutral-value",
+  "measurement_profile": "system",
+  "registry_sub_key": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+  "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+  "apply_value": 0,
+  "apply_type": "REG_DWORD",
+  "rollback_method": "restore-baseline",
+  "apply_verified": true,
+  "rollback_verified": true,
+  "baseline_state": {
+    "exists": false,
+    "value": null,
+    "value_kind": null
+  },
+  "restored_state": {
+    "exists": false,
+    "value": null,
+    "value_kind": null
+  },
+  "baseline_median_ms": 7.028,
+  "applied_median_ms": 3.723,
+  "delta_ms": -3.305,
+  "delta_pct": -47.026,
+  "sample_count": 3,
+  "registry_read_iterations": 400,
+  "measurement_components": [
+    "service-query-ms",
+    "registry-query-ms"
+  ],
+  "bench_bare_metal_pending": true,
+  "interpretation": "This VM perf bench intentionally applied DWORD 0, matching the observed live KD global value, to minimize semantic risk while exercising apply and rollback mechanics. The measured delta is relative and noisy, not a claim of performance improvement. The useful result is that apply was verified, rollback restored the missing baseline, and the bench-not-run blocker can be replaced with a bounded neutral-value VM bench note."
+}

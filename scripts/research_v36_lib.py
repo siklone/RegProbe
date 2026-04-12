@@ -1620,7 +1620,8 @@ def score_etl_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
 def bench_results_projection(full_evidence: dict[str, Any], record: dict[str, Any] | None = None, audit: dict[str, Any] | None = None) -> dict[str, Any]:
     behavior = (full_evidence.get("behavior") or {}) if isinstance(full_evidence, dict) else {}
     benchmark = (behavior.get("benchmark") or {}) if isinstance(behavior, dict) else {}
-    explicit_results = (full_evidence.get("bench_results") or {}) if isinstance(full_evidence, dict) else {}
+    record_bench_results = (record.get("bench_results") or {}) if isinstance(record, dict) else {}
+    explicit_results = (full_evidence.get("bench_results") or record_bench_results or {}) if isinstance(full_evidence, dict) else record_bench_results
     reproducibility = full_evidence.get("reproducibility") or {}
     audit = audit or {}
     record = record or {}
