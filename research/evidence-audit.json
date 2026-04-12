@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T03:43:01.412608Z",
+  "generated_utc": "2026-04-12T04:04:21.256073Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -18579,16 +18579,15 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "long-dpc-runtime-threshold-direct-read-still-unresolved",
+        "documentation-first-review",
         "no-doc-source-outside-repo",
-        "no-runtime-proof",
         "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 2,
+        "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -18597,8 +18596,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.56,
-        "next_missing_layer": "runtime-trace"
+        "overall_score": 3.78,
+        "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18612,7 +18611,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-08T14:18:00Z"
+        "last_verified_at": "2026-04-12T03:45:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18850,16 +18849,15 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-current-build-reader-path",
+        "documentation-first-review",
         "no-doc-source-outside-repo",
-        "no-runtime-proof",
         "non-default-semantics-unproven",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 2,
+        "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
@@ -18868,8 +18866,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.44,
-        "next_missing_layer": "runtime-trace"
+        "overall_score": 3.67,
+        "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18883,7 +18881,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-07T19:08:00Z"
+        "last_verified_at": "2026-04-12T03:45:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18902,7 +18900,7 @@
       "official": true,
       "official_doc_exists": true,
       "procmon": true,
-      "ghidra": false,
+      "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
@@ -18912,12 +18910,14 @@
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
+        "static_ghidra",
         "runtime_reboot",
         "official_doc"
       ],
       "tools_used": [
         "official-doc",
         "procmon",
+        "ghidra",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -18944,7 +18944,6 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "documentation-first-review",
-        "no-current-build-reader-path",
         "no-primary-current-build-doc",
         "runtime_no_read"
       ],
@@ -18975,7 +18974,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T01:04:47+03:00"
+        "last_verified_at": "2026-04-12T04:05:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -19035,8 +19034,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "documentation-first-review",
         "no-primary-current-build-doc",
-        "no-runtime-proof",
         "non-default-semantics-unproven",
         "runtime_no_read"
       ],
@@ -19053,7 +19052,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.67,
-        "next_missing_layer": "runtime-trace"
+        "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -22846,17 +22845,15 @@
   "blocker_breakdown": {
     "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,
-    "documentation-first-review": 11,
+    "documentation-first-review": 14,
     "incident-review": 1,
     "intentional-ghidra-hold": 1,
-    "long-dpc-runtime-threshold-direct-read-still-unresolved": 1,
-    "no-current-build-reader-path": 2,
     "no-current-build-registry-seeding-path": 4,
     "no-current-build-string-or-symbol-hit": 1,
     "no-doc-source": 2,
     "no-doc-source-outside-repo": 5,
     "no-primary-current-build-doc": 3,
-    "no-runtime-proof": 17,
+    "no-runtime-proof": 14,
     "non-default-semantics-unproven": 5,
     "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane": 1,
     "reboot-diff": 3,

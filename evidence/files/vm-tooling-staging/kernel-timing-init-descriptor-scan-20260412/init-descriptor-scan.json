@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T03:39:57Z",
+  "generated_utc": "2026-04-12T04:02:40Z",
   "analysis_kind": "host-side-pe-init-descriptor-binding-scan",
   "binary": "/tmp/regprobe-kernel-upload/uploads/ntoskrnl.exe",
   "image_base": "0x140000000",
@@ -195,6 +195,78 @@
     },
     {
       "target": {
+        "candidate_id": "system.kernel.global-timer-resolution-requests",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "GlobalTimerResolutionRequests",
+        "live_symbol": "nt!KiGlobalTimerResolutionRequests",
+        "expected_global_rva": 16538696,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/local-kd-globaltimerres-20260408a.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140FC5C48",
+      "string_hits": [
+        {
+          "file_offset": "0xbf43b8",
+          "rva": "0xc7b3b8",
+          "va": "0x140c7b3b8",
+          "section": "INIT",
+          "string": "GlobalTimerResolutionRequests",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbed488",
+              "rva": "0xc74488",
+              "va": "0x140c74488",
+              "section": "INIT",
+              "points_to": "0x140c7b3b8"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbed488",
+          "rva": "0xc74488",
+          "va": "0x140c74488",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7B3B8",
+              "interpretation": "value_name_pointer",
+              "decoded": "GlobalTimerResolutionRequests"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140FC5C48",
+              "interpretation": "target_global_pointer",
+              "decoded": "KiGlobalTimerResolutionRequests"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbed480",
+            "rva": "0xc74480",
+            "va": "0x140c74480",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7A670",
+            "decoded_key_path": "Session Manager\\Kernel",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
         "candidate_id": "system.kernel-long-dpc-threshold-cluster",
         "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
         "value_name": "LongDpcQueueThreshold",
@@ -328,6 +400,510 @@
             "file_offset": "0xbf25e0",
             "rva": "0xc795e0",
             "va": "0x140c795e0",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7A670",
+            "decoded_key_path": "Session Manager\\Kernel",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
+        "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DPCTimeout",
+        "live_symbol": "nt!KeDpcTimeoutMs",
+        "expected_global_rva": 16531512,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-control-values-kd-20260408a/dpc-watchdog-control-values-kd-20260408a.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140FC4038",
+      "string_hits": [
+        {
+          "file_offset": "0xbf4960",
+          "rva": "0xc7b960",
+          "va": "0x140c7b960",
+          "section": "INIT",
+          "string": "DPCTimeout",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbed0f8",
+              "rva": "0xc740f8",
+              "va": "0x140c740f8",
+              "section": "INIT",
+              "points_to": "0x140c7b960"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbed0f8",
+          "rva": "0xc740f8",
+          "va": "0x140c740f8",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7B960",
+              "interpretation": "value_name_pointer",
+              "decoded": "DPCTimeout"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140FC4038",
+              "interpretation": "target_global_pointer",
+              "decoded": "KeDpcTimeoutMs"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbed0f0",
+            "rva": "0xc740f0",
+            "va": "0x140c740f0",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7A670",
+            "decoded_key_path": "Session Manager\\Kernel",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
+        "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcSoftTimeout",
+        "live_symbol": "nt!KeDpcSoftTimeoutMs",
+        "expected_global_rva": 16531520,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-control-values-kd-20260408a/dpc-watchdog-control-values-kd-20260408a.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140FC4040",
+      "string_hits": [
+        {
+          "file_offset": "0xbf4978",
+          "rva": "0xc7b978",
+          "va": "0x140c7b978",
+          "section": "INIT",
+          "string": "DpcSoftTimeout",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbed128",
+              "rva": "0xc74128",
+              "va": "0x140c74128",
+              "section": "INIT",
+              "points_to": "0x140c7b978"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbed128",
+          "rva": "0xc74128",
+          "va": "0x140c74128",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7B978",
+              "interpretation": "value_name_pointer",
+              "decoded": "DpcSoftTimeout"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140FC4040",
+              "interpretation": "target_global_pointer",
+              "decoded": "KeDpcSoftTimeoutMs"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbed120",
+            "rva": "0xc74120",
+            "va": "0x140c74120",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7A670",
+            "decoded_key_path": "Session Manager\\Kernel",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
+        "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcCumulativeSoftTimeout",
+        "live_symbol": "nt!KeDpcCumulativeSoftTimeoutMs",
+        "expected_global_rva": 16531516,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-control-values-kd-20260408a/dpc-watchdog-control-values-kd-20260408a.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140FC403C",
+      "string_hits": [
+        {
+          "file_offset": "0xbf46d8",
+          "rva": "0xc7b6d8",
+          "va": "0x140c7b6d8",
+          "section": "INIT",
+          "string": "DpcCumulativeSoftTimeout",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbed158",
+              "rva": "0xc74158",
+              "va": "0x140c74158",
+              "section": "INIT",
+              "points_to": "0x140c7b6d8"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbed158",
+          "rva": "0xc74158",
+          "va": "0x140c74158",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7B6D8",
+              "interpretation": "value_name_pointer",
+              "decoded": "DpcCumulativeSoftTimeout"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140FC403C",
+              "interpretation": "target_global_pointer",
+              "decoded": "KeDpcCumulativeSoftTimeoutMs"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbed150",
+            "rva": "0xc74150",
+            "va": "0x140c74150",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7A670",
+            "decoded_key_path": "Session Manager\\Kernel",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
+        "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileBufferSizeBytes",
+        "live_symbol": "nt!KeDpcWatchdogProfileBufferSizeBytes",
+        "expected_global_rva": 16531528,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140FC4048",
+      "string_hits": [
+        {
+          "file_offset": "0xbf4690",
+          "rva": "0xc7b690",
+          "va": "0x140c7b690",
+          "section": "INIT",
+          "string": "DpcWatchdogProfileBufferSizeBytes",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbed1e8",
+              "rva": "0xc741e8",
+              "va": "0x140c741e8",
+              "section": "INIT",
+              "points_to": "0x140c7b690"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbed1e8",
+          "rva": "0xc741e8",
+          "va": "0x140c741e8",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7B690",
+              "interpretation": "value_name_pointer",
+              "decoded": "DpcWatchdogProfileBufferSizeBytes"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140FC4048",
+              "interpretation": "target_global_pointer",
+              "decoded": "KeDpcWatchdogProfileBufferSizeBytes"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbed1e0",
+            "rva": "0xc741e0",
+            "va": "0x140c741e0",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7A670",
+            "decoded_key_path": "Session Manager\\Kernel",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
+        "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileCumulativeDpcThreshold",
+        "live_symbol": "nt!KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+        "expected_global_rva": 16531492,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140FC4024",
+      "string_hits": [
+        {
+          "file_offset": "0xbf4810",
+          "rva": "0xc7b810",
+          "va": "0x140c7b810",
+          "section": "INIT",
+          "string": "DpcWatchdogProfileCumulativeDpcThreshold",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbed248",
+              "rva": "0xc74248",
+              "va": "0x140c74248",
+              "section": "INIT",
+              "points_to": "0x140c7b810"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbed248",
+          "rva": "0xc74248",
+          "va": "0x140c74248",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7B810",
+              "interpretation": "value_name_pointer",
+              "decoded": "DpcWatchdogProfileCumulativeDpcThreshold"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140FC4024",
+              "interpretation": "target_global_pointer",
+              "decoded": "KeDpcWatchdogProfileCumulativeDpcThresholdMs"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbed240",
+            "rva": "0xc74240",
+            "va": "0x140c74240",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7A670",
+            "decoded_key_path": "Session Manager\\Kernel",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
+        "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileOffset",
+        "live_symbol": "nt!KeDpcWatchdogProfileOffsetMs",
+        "expected_global_rva": 16539604,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140FC5FD4",
+      "string_hits": [
+        {
+          "file_offset": "0xbf4650",
+          "rva": "0xc7b650",
+          "va": "0x140c7b650",
+          "section": "INIT",
+          "string": "DpcWatchdogProfileOffset",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbed1b8",
+              "rva": "0xc741b8",
+              "va": "0x140c741b8",
+              "section": "INIT",
+              "points_to": "0x140c7b650"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbed1b8",
+          "rva": "0xc741b8",
+          "va": "0x140c741b8",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7B650",
+              "interpretation": "value_name_pointer",
+              "decoded": "DpcWatchdogProfileOffset"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140FC5FD4",
+              "interpretation": "target_global_pointer",
+              "decoded": "KeDpcWatchdogProfileOffsetMs"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbed1b0",
+            "rva": "0xc741b0",
+            "va": "0x140c741b0",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7A670",
+            "decoded_key_path": "Session Manager\\Kernel",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
+        "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileSingleDpcThreshold",
+        "live_symbol": "nt!KeDpcWatchdogProfileSingleDpcThresholdMs",
+        "expected_global_rva": 16531496,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140FC4028",
+      "string_hits": [
+        {
+          "file_offset": "0xbf47c0",
+          "rva": "0xc7b7c0",
+          "va": "0x140c7b7c0",
+          "section": "INIT",
+          "string": "DpcWatchdogProfileSingleDpcThreshold",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbed218",
+              "rva": "0xc74218",
+              "va": "0x140c74218",
+              "section": "INIT",
+              "points_to": "0x140c7b7c0"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbed218",
+          "rva": "0xc74218",
+          "va": "0x140c74218",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7B7C0",
+              "interpretation": "value_name_pointer",
+              "decoded": "DpcWatchdogProfileSingleDpcThreshold"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140FC4028",
+              "interpretation": "target_global_pointer",
+              "decoded": "KeDpcWatchdogProfileSingleDpcThresholdMs"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbed210",
+            "rva": "0xc74210",
+            "va": "0x140c74210",
             "section": "INIT",
             "key_path_pointer": "0x0000000140C7A670",
             "decoded_key_path": "Session Manager\\Kernel",

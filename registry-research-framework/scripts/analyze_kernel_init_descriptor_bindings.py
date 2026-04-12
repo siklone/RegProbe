@@ -33,6 +33,17 @@ DEFAULT_TARGETS = [
         ),
     },
     {
+        "candidate_id": "system.kernel.global-timer-resolution-requests",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "GlobalTimerResolutionRequests",
+        "live_symbol": "nt!KiGlobalTimerResolutionRequests",
+        "expected_global_rva": 0xFC5C48,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/local-kd-globaltimerres-20260408a/"
+            "local-kd-globaltimerres-20260408a.stdout.txt"
+        ),
+    },
+    {
         "candidate_id": "system.kernel-long-dpc-threshold-cluster",
         "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
         "value_name": "LongDpcQueueThreshold",
@@ -52,6 +63,83 @@ DEFAULT_TARGETS = [
         "live_kd_artifact": (
             "evidence/files/vm-tooling-staging/local-kd-longdpc-values-20260408a/"
             "local-kd-longdpc-values-20260408a.stdout.txt"
+        ),
+    },
+    {
+        "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DPCTimeout",
+        "live_symbol": "nt!KeDpcTimeoutMs",
+        "expected_global_rva": 0xFC4038,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/dpc-watchdog-control-values-kd-20260408a/"
+            "dpc-watchdog-control-values-kd-20260408a.stdout.txt"
+        ),
+    },
+    {
+        "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcSoftTimeout",
+        "live_symbol": "nt!KeDpcSoftTimeoutMs",
+        "expected_global_rva": 0xFC4040,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/dpc-watchdog-control-values-kd-20260408a/"
+            "dpc-watchdog-control-values-kd-20260408a.stdout.txt"
+        ),
+    },
+    {
+        "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcCumulativeSoftTimeout",
+        "live_symbol": "nt!KeDpcCumulativeSoftTimeoutMs",
+        "expected_global_rva": 0xFC403C,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/dpc-watchdog-control-values-kd-20260408a/"
+            "dpc-watchdog-control-values-kd-20260408a.stdout.txt"
+        ),
+    },
+    {
+        "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileBufferSizeBytes",
+        "live_symbol": "nt!KeDpcWatchdogProfileBufferSizeBytes",
+        "expected_global_rva": 0xFC4048,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/"
+            "dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt"
+        ),
+    },
+    {
+        "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileCumulativeDpcThreshold",
+        "live_symbol": "nt!KeDpcWatchdogProfileCumulativeDpcThresholdMs",
+        "expected_global_rva": 0xFC4024,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/"
+            "dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt"
+        ),
+    },
+    {
+        "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileOffset",
+        "live_symbol": "nt!KeDpcWatchdogProfileOffsetMs",
+        "expected_global_rva": 0xFC5FD4,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/"
+            "dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt"
+        ),
+    },
+    {
+        "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DpcWatchdogProfileSingleDpcThreshold",
+        "live_symbol": "nt!KeDpcWatchdogProfileSingleDpcThresholdMs",
+        "expected_global_rva": 0xFC4028,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/"
+            "dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt"
         ),
     },
 ]
@@ -278,6 +366,8 @@ def analyze_target(image: PeImage, target: dict[str, Any]) -> dict[str, Any]:
 
 
 def write_notes(path: Path, payload: dict[str, Any]) -> None:
+    found_count = sum(1 for result in payload["results"] if result["binding_found"])
+    target_count = len(payload["results"])
     lines = [
         "# Kernel Timing INIT Descriptor Scan 2026-04-12",
         "",
@@ -304,9 +394,9 @@ def write_notes(path: Path, payload: dict[str, Any]) -> None:
             "",
             "## Interpretation",
             "",
-            "- All four target value-name strings are present in the current-build `INIT` section and each has a 64-bit pointer reference from an INIT descriptor row.",
+            f"- {found_count} of {target_count} target value-name strings are present in the current-build `INIT` section and have a 64-bit pointer reference from an INIT descriptor row.",
             "- Each retained descriptor row points at the same static RVA as the live KD global captured in the earlier VM debugger bundles.",
-            "- This strengthens the static registry-seeding/binding layer for the three runtime-blocked kernel timing records.",
+            "- This strengthens the static registry-seeding/binding layer for the runtime-blocked kernel timing records.",
             "- It does not claim an exact runtime registry read; the post-boot ETW, unseeded boot WPR, and seeded boot WPR lanes still found no exact target value-name hit.",
             "",
         ]
