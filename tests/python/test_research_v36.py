@@ -615,6 +615,38 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["bench_status"]["summary"], "Canonical record-level bench passed.")
         self.assertTrue(gate["bench_status"]["safety_passed"])
 
+    def test_specific_decision_gate_blocker_suppresses_generic_doc_review(self) -> None:
+        record = {
+            "record_id": "example.decision-specific-blocker",
+            "tweak_id": "example.decision-specific-blocker",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+                "blocking_issues": ["runtime_no_read"],
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
+
+        self.assertIn("runtime_no_read", gate["promotion_blockers"])
+        self.assertNotIn("documentation-first-review", gate["promotion_blockers"])
+
     def test_failed_vm_safety_bench_blocks_candidate(self) -> None:
         record = {
             "record_id": "example.vm-safety-failed",

@@ -1720,6 +1720,14 @@ def _gate_layer_blockers(next_layer: str) -> list[str]:
     return list(mapping.get(next_layer, [next_layer])) if next_layer not in {"", "none"} else []
 
 
+def _gate_layer_blockers_for_record(next_layer: str, existing_blockers: set[str]) -> list[str]:
+    # Decision gates should surface the real blocker when one is already known.
+    # The generic documentation-first-review label is only a fallback.
+    if next_layer == "decision-gate" and existing_blockers:
+        return []
+    return _gate_layer_blockers(next_layer)
+
+
 def evaluate_candidate_gate(
     record: dict[str, Any],
     audit: dict[str, Any] | None = None,
@@ -1781,7 +1789,7 @@ def evaluate_candidate_gate(
         blocker_set.add("dead-link")
     if bench_results.get("bench_required") and not bench_results.get("executed"):
         blocker_set.add("bench-not-run")
-    blocker_set.update(_gate_layer_blockers(missing_layer))
+    blocker_set.update(_gate_layer_blockers_for_record(missing_layer, blocker_set))
 
     documentation_status = documentation_status_projection(
         record,

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T16:15:06.343276Z",
+  "generated_utc": "2026-04-12T16:21:14.891009Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -5941,7 +5941,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
@@ -6036,7 +6035,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "no-current-build-registry-seeding-path",
         "no-primary-current-build-doc",
         "runtime_no_read"
@@ -6133,7 +6131,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "no-current-build-registry-seeding-path",
         "runtime_no_read"
       ],
@@ -6317,7 +6314,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
@@ -6411,8 +6407,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "The current clean-baseline runtime package still does not contain an exact runtime query/read operation for this value.",
-        "The current virtualized baselines do not support hibernation, so a real hibernation trigger is not available for runtime ETW validation on these VMs.",
-        "documentation-first-review"
+        "The current virtualized baselines do not support hibernation, so a real hibernation trigger is not available for runtime ETW validation on these VMs."
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6855,8 +6850,7 @@
       "promotion_blockers": [
         "Exact leaf values and semantics under PowerRequestOverride are still unresolved because the retained runtime trace currently shows root queries and NAME NOT FOUND probes on Driver, Process, and Service rather than stable leaf-value reads.",
         "The record does not yet have a reliable restore story beyond the observed retained subtree-presence snapshot.",
-        "The retained static context is still adjacent rather than leaf-specific: it narrows the override family around timeout-specific and generic power-setting surfaces, but it does not yet bind Driver, Process, or Service leaves to a naturally resolved direct-reading function.",
-        "documentation-first-review"
+        "The retained static context is still adjacent rather than leaf-specific: it narrows the override family around timeout-specific and generic power-setting surfaces, but it does not yet bind Driver, Process, or Service leaves to a naturally resolved direct-reading function."
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -7035,8 +7029,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "The current virtualized baselines do not support S0 Low Power Idle / Modern Standby, so a real DRIPS-exit trigger cannot be exercised here.",
-        "The runtime package therefore still lacks an exact runtime query/read operation for this value on the current VM baselines.",
-        "documentation-first-review"
+        "The runtime package therefore still lacks an exact runtime query/read operation for this value on the current VM baselines."
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -7215,7 +7208,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "no-doc-source",
         "non-default-semantics-unproven",
         "runtime_no_read"
@@ -8182,8 +8174,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "The ETL review, the Procmon boot-log review, the targeted post-boot DcomLaunch/Power trigger, the newer tools-hardened lightweight ETW S1 follow-up, and the reusable Linux KVM Procmon power-burst replay still stop short of a decisive exact live read of WatchdogResumeTimeout and WatchdogSleepTimeout.",
-        "The newer KVM local-KD follow-ups now identify the generic current-build registry helper surface, but the exact watchdog-specific caller into that helper path is still unresolved and the old fallback xref offsets no longer count as trustworthy reader-side proof.",
-        "documentation-first-review"
+        "The newer KVM local-KD follow-ups now identify the generic current-build registry helper surface, but the exact watchdog-specific caller into that helper path is still unresolved and the old fallback xref offsets no longer count as trustworthy reader-side proof."
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -8279,7 +8270,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "no-doc-source",
         "non-default-semantics-unproven",
         "runtime_no_read"
@@ -17899,7 +17889,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
@@ -18402,7 +18391,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "live-defaults-conflict-docs",
         "no-doc-source-outside-repo",
         "runtime_no_read"
@@ -18495,7 +18483,6 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "conditional-initialization-unproven",
-        "documentation-first-review",
         "live-defaults-conflict-docs",
         "no-doc-source-outside-repo",
         "runtime_no_read"
@@ -18589,7 +18576,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "no-doc-source-outside-repo",
         "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
         "runtime_no_read"
@@ -18859,7 +18845,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "no-doc-source-outside-repo",
         "non-default-semantics-unproven",
         "runtime_no_read"
@@ -18953,7 +18938,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "no-primary-current-build-doc",
         "runtime_no_read"
       ],
@@ -19044,7 +19028,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review",
         "no-primary-current-build-doc",
         "non-default-semantics-unproven",
         "runtime_no_read"
@@ -22853,7 +22836,6 @@
   "blocker_breakdown": {
     "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,
-    "documentation-first-review": 17,
     "intentional-ghidra-hold": 1,
     "no-current-build-registry-seeding-path": 2,
     "no-current-build-string-or-symbol-hit": 1,
