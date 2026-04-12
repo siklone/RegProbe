@@ -1,0 +1,30 @@
+{
+  "candidate_id": "power.session-watchdog-timeouts",
+  "reviewed_utc": "2026-04-12T15:44:27Z",
+  "review_type": "vm-incident",
+  "incident_ids": [
+    "20260328082113-power-session-watchdog-timeouts",
+    "20260328084313-power-session-watchdog-timeouts",
+    "20260328084937-power-session-watchdog-timeouts",
+    "20260328090153-power-session-watchdog-timeouts",
+    "20260329031714-power-session-watchdog-timeouts",
+    "20260329033857-power-session-watchdog-timeouts"
+  ],
+  "reviewed_lanes": [
+    "direct S1 Procmon runtime attempt",
+    "scheduled-task S1 Procmon runtime attempt",
+    "tools-hardened lightweight ETW S1 runtime attempt"
+  ],
+  "classification": "validation-environment-limitation",
+  "environment": "Windows 11 25H2 VMware baselines exposing Standby (S1) only",
+  "shell_recovered": true,
+  "rollback_required": false,
+  "exact_runtime_read_captured": false,
+  "interpretation": "The S1 lanes repeatedly destabilized guest-ops or shell continuity before usable exact-value runtime artifacts could be preserved. The incidents are treated as environment and transport failures, not as evidence that the watchdog timeout pair is safe, unsafe, or decisively read at runtime.",
+  "remaining_blocker": "Capture an exact live registry read for WatchdogResumeTimeout and WatchdogSleepTimeout in a more reliable suspend/resume environment, or identify the current-build watchdog-specific caller into the generic PopReadRegKeyValue / PopOpenPowerKey helper path.",
+  "source_notes": [
+    "research/notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md",
+    "research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md",
+    "research/notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md"
+  ]
+}

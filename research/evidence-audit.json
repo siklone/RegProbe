@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T14:44:29.353196Z",
+  "generated_utc": "2026-04-12T15:46:32.683946Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -16,10 +16,9 @@
     },
     "next_missing_layer_counts": {
       "none": 248,
-      "decision-gate": 17,
+      "decision-gate": 18,
       "ghidra": 1,
-      "reboot-diff": 1,
-      "incident-review": 1
+      "reboot-diff": 1
     },
     "promotion_state_counts": {
       "promoted": 248,
@@ -8136,7 +8135,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": true,
-      "next_missing_layer": "incident-review",
+      "next_missing_layer": "decision-gate",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -8176,7 +8175,7 @@
       "promotion_blockers": [
         "The ETL review, the Procmon boot-log review, the targeted post-boot DcomLaunch/Power trigger, the newer tools-hardened lightweight ETW S1 follow-up, and the reusable Linux KVM Procmon power-burst replay still stop short of a decisive exact live read of WatchdogResumeTimeout and WatchdogSleepTimeout.",
         "The newer KVM local-KD follow-ups now identify the generic current-build registry helper surface, but the exact watchdog-specific caller into that helper path is still unresolved and the old fallback xref offsets no longer count as trustworthy reader-side proof.",
-        "incident-review"
+        "documentation-first-review"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -8191,7 +8190,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 5,
         "overall_score": 3.78,
-        "next_missing_layer": "incident-review"
+        "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -8205,7 +8204,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-07T12:50:00Z"
+        "last_verified_at": "2026-04-12T15:44:27Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
