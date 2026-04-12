@@ -36,18 +36,16 @@ def sha256_path(path: Path) -> str:
     return digest.hexdigest()
 
 
-def guest_exec(
+def start_guest_exec(
     domain: str,
     path: str,
     arg: list[str],
     *,
     connect: str,
     timeout: int,
-    wait_timeout: int,
-    poll_interval: float,
     capture_output: bool,
 ) -> dict[str, object]:
-    started = run_agent_command(
+    return run_agent_command(
         domain,
         {
             "execute": "guest-exec",
@@ -60,7 +58,19 @@ def guest_exec(
         connect=connect,
         timeout=timeout,
     )
-    pid = int(started["pid"])
+
+
+def wait_guest_exec(
+    domain: str,
+    pid: int,
+    path: str,
+    arg: list[str],
+    *,
+    connect: str,
+    timeout: int,
+    wait_timeout: int,
+    poll_interval: float,
+) -> dict[str, object]:
 
     deadline = time.time() + wait_timeout
     status: dict[str, object] | None = None
@@ -93,6 +103,37 @@ def guest_exec(
         "stdout": decode_base64_text(status.get("out-data") if isinstance(status.get("out-data"), str) else None),
         "stderr": decode_base64_text(status.get("err-data") if isinstance(status.get("err-data"), str) else None),
     }
+
+
+def guest_exec(
+    domain: str,
+    path: str,
+    arg: list[str],
+    *,
+    connect: str,
+    timeout: int,
+    wait_timeout: int,
+    poll_interval: float,
+    capture_output: bool,
+) -> dict[str, object]:
+    started = start_guest_exec(
+        domain,
+        path,
+        arg,
+        connect=connect,
+        timeout=timeout,
+        capture_output=capture_output,
+    )
+    return wait_guest_exec(
+        domain,
+        int(started["pid"]),
+        path,
+        arg,
+        connect=connect,
+        timeout=timeout,
+        wait_timeout=wait_timeout,
+        poll_interval=poll_interval,
+    )
 
 
 def powershell_quote(value: str) -> str:
@@ -229,12 +270,15 @@ def main() -> int:
     parser.add_argument("--poll-interval", type=float, default=1.0)
     parser.add_argument("--chunk-size", type=int, default=32768)
     parser.add_argument("--keep", action="store_true", help="Keep the uploaded guest script after execution.")
+    parser.add_argument("--no-wait", action="store_true", help="Start the guest script and return immediately without waiting for completion.")
     parser.add_argument("--propagate-exit-code", action="store_true")
     args = parser.parse_args()
 
     source = Path(args.script).resolve()
     if not source.is_file():
         raise FileNotFoundError(f"Host script not found: {source}")
+    if args.no_wait and args.propagate_exit_code:
+        parser.error("--propagate-exit-code requires waiting for the guest process to exit")
 
     guest_script_path = (args.guest_script_path or (args.guest_dir.rstrip("\\") + "\\" + source.name)).replace("/", "\\")
     guest_dir = guest_script_path.rsplit("\\", 1)[0] if "\\" in guest_script_path else args.guest_dir
@@ -261,15 +305,47 @@ def main() -> int:
         chunk_size=args.chunk_size,
     )
 
-    exec_result = guest_exec(
+    exec_args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", guest_script_path] + args.ps_arg
+    started = start_guest_exec(
         args.domain,
         args.powershell_path,
-        ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", guest_script_path] + args.ps_arg,
+        exec_args,
+        connect=args.connect,
+        timeout=args.timeout,
+        capture_output=not args.no_wait,
+    )
+    pid = int(started["pid"])
+
+    if args.no_wait:
+        result = {
+            "status": "started",
+            "domain": args.domain,
+            "guest_dir": guest_dir,
+            "guest_script_path": guest_script_path,
+            "upload": upload_result,
+            "execution": {
+                "status": "started",
+                "pid": pid,
+                "path": args.powershell_path,
+                "arg": exec_args,
+            },
+            "cleanup": {
+                "status": "skipped",
+                "reason": "no-wait-launch",
+            },
+        }
+        print(json.dumps(result, indent=2))
+        return 0
+
+    exec_result = wait_guest_exec(
+        args.domain,
+        pid,
+        args.powershell_path,
+        exec_args,
         connect=args.connect,
         timeout=args.timeout,
         wait_timeout=args.wait_timeout,
         poll_interval=args.poll_interval,
-        capture_output=True,
     )
 
     cleanup_result = None

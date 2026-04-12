@@ -1,0 +1,50 @@
+{
+  "captured_at_utc": "2026-04-12T17:34:42.4094476Z",
+  "domain": "regprobe-win11-25h2-session",
+  "wrapper_path": "scripts/vm-kvm/run-guest-registry-policy-probe.py",
+  "helper_path": "scripts/vm-kvm/qga-run-powershell.py",
+  "launch_transport": "qga",
+  "helper_mode": "no-wait",
+  "smoke_command": [
+    "python3",
+    "scripts/vm-kvm/run-guest-registry-policy-probe.py",
+    "--launch-transport",
+    "qga",
+    "--registry-path",
+    "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+    "--value-name",
+    "AllowRemoteDASD",
+    "--output-name",
+    "allowremotedasd-procmon-kvm-qga-async-20260412",
+    "--trigger-profile",
+    "session-manager-io-raw-burst",
+    "--saveas-timeout-seconds",
+    "20",
+    "--timeout-seconds",
+    "120"
+  ],
+  "launcher_stage": {
+    "stage": "invoke-wrapper",
+    "status": "starting"
+  },
+  "probe_stage": {
+    "stage": "exception",
+    "status": "error",
+    "message": "Procmon SaveAs timed out after 20 second(s)."
+  },
+  "summary": {
+    "status": "error",
+    "summary_source": "probe-stage-fallback",
+    "error_kind": "probe-stage-error",
+    "transport_blocker": "probe-stage-error",
+    "guest_health": "degraded",
+    "error": "System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 20 second(s)."
+  },
+  "impact": "The host wrapper now launches through QGA without an elevated foreground shell and still returns the same probe-stage fallback contract when the inner Procmon lane fails.",
+  "separation_of_concerns": {
+    "transport_result": "qga-launch-succeeded",
+    "probe_result": "procmon-saveas-timeout",
+    "note": "The transport migration is validated independently of the existing Procmon SaveAs bottleneck."
+  },
+  "next_step": "Migrate the other long-running KVM wrappers to the same no-wait QGA launch pattern and leave send-key as fallback only."
+}
