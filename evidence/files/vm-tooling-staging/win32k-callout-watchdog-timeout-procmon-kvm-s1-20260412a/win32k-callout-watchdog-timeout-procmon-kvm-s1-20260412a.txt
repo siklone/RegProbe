@@ -1,0 +1,5 @@
+﻿ERROR=System.Management.Automation.RuntimeException: Procmon SaveAs exited with code 1.
+AT=At C:\RegProbe-Diag\bootstrap\registry-policy-probe.ps1:320 char:9
++         throw "Procmon SaveAs exited with code $($saveProc.ExitCode). ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RESTORED={"path_exists":true,"value_exists":false,"value":null,"value_type":null}

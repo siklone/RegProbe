@@ -1,0 +1,28 @@
+{
+  "generated_utc": "2026-04-12T05:06:40Z",
+  "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+  "output_name": "win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+  "trigger_kind": "watchdog-s1-callout",
+  "summary_source": "manual-host-review",
+  "launcher_stage": "invoke-wrapper",
+  "launcher_stage_status": "starting",
+  "probe_stage": "exception",
+  "probe_stage_status": "error",
+  "error_kind": "probe-stage-error",
+  "error": "System.Management.Automation.RuntimeException: Procmon SaveAs exited with code 1.",
+  "csv_exists": false,
+  "hits_csv_exists": false,
+  "normalized_bundle_exists": false,
+  "modal_observations": [
+    "A Process Monitor prompt asked whether to save boot-time data from a previous instance.",
+    "A later Process Monitor dialog reported 'The specified log file does not exist.'"
+  ],
+  "restored_state": {
+    "path_exists": true,
+    "value_exists": false,
+    "value": null,
+    "value_type": null
+  }
+}

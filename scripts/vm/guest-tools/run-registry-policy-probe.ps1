@@ -9,7 +9,7 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$OutputName,
 
-    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst', 'hiber-file-size-burst', 'watchdog-power-burst', 'power-request-simulation', 'timer-dpc-stress')]
+    [ValidateSet('custom', 'uuid-rpc-com-burst', 'uac-policy-surface-burst', 'session-manager-io-raw-burst', 'executive-worker-burst', 'hiber-file-size-burst', 'watchdog-power-burst', 'watchdog-s1-callout', 'power-request-simulation', 'timer-dpc-stress')]
     [string]$TriggerProfile = 'custom',
 
     [int]$SaveAsTimeoutSeconds = 60,
@@ -231,6 +231,33 @@ catch {
 }
 finally {
     Remove-Item -Path $diagPath -Recurse -Force -ErrorAction SilentlyContinue
+}
+'@
+        }
+        'watchdog-s1-callout' {
+            return @'
+try {
+    $diagPath = 'C:\RegProbe-Diag\watchdog-s1-callout'
+    New-Item -ItemType Directory -Path $diagPath -Force | Out-Null
+
+    cmd /c "powercfg /a > `"$diagPath\powercfg-a-before.txt`"" | Out-Null
+    cmd /c "powercfg /lastwake > `"$diagPath\lastwake-before.txt`"" | Out-Null
+    cmd /c "wevtutil qe System /q:""*[System[(Provider[@Name='Microsoft-Windows-Kernel-Power'] and (EventID=1 or EventID=42 or EventID=107 or EventID=506))]]"" /c:20 /rd:true /f:text > `"$diagPath\kernelpower-before.txt`"" | Out-Null
+
+    Start-Sleep -Seconds 3
+    Start-Process -FilePath "$env:SystemRoot\System32\rundll32.exe" -ArgumentList 'powrprof.dll,SetSuspendState 0,1,0' -WindowStyle Hidden | Out-Null
+    Start-Sleep -Seconds 50
+
+    cmd /c "powercfg /lastwake > `"$diagPath\lastwake-after.txt`"" | Out-Null
+    cmd /c "wevtutil qe System /q:""*[System[(Provider[@Name='Microsoft-Windows-Kernel-Power'] and (EventID=1 or EventID=42 or EventID=107 or EventID=506))]]"" /c:20 /rd:true /f:text > `"$diagPath\kernelpower-after.txt`"" | Out-Null
+    cmd /c "powercfg /a > `"$diagPath\powercfg-a-after.txt`"" | Out-Null
+
+    Start-Sleep -Seconds 5
+}
+catch {
+}
+finally {
+    Remove-Item -Path 'C:\RegProbe-Diag\watchdog-s1-callout' -Recurse -Force -ErrorAction SilentlyContinue
 }
 '@
         }
