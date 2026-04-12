@@ -150,6 +150,45 @@ function Get-RowField {
     return $null
 }
 
+function Get-RawRegistryLineValueName {
+    param([string]$Line)
+
+    if ([string]::IsNullOrWhiteSpace($Line)) {
+        return $null
+    }
+
+    $match = [regex]::Match($Line, '"([^"]+)"\s*$')
+    if ($match.Success) {
+        return $match.Groups[1].Value
+    }
+
+    return $null
+}
+
+function Test-RegistryFragmentMatch {
+    param(
+        [string]$Line,
+        [string]$Fragment,
+        [string]$RegistryPath,
+        [string]$ValueName
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Line) -or [string]::IsNullOrWhiteSpace($Fragment)) {
+        return $false
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($ValueName) -and $Fragment.Equals($ValueName, [System.StringComparison]::OrdinalIgnoreCase)) {
+        $rawValueName = Get-RawRegistryLineValueName -Line $Line
+        return ($null -ne $rawValueName -and $rawValueName.Equals($ValueName, [System.StringComparison]::OrdinalIgnoreCase))
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($RegistryPath) -and $Fragment.Equals($RegistryPath, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return ($Line -like "*$RegistryPath*")
+    }
+
+    return ($Line -like "*$Fragment*")
+}
+
 function Split-RegistryPath {
     param(
         [string]$Path,
@@ -203,10 +242,11 @@ function Write-NormalizedTracerptBundle {
 
         $eventType = Get-RowField -Row $row -Names @('Type', 'Task Name', 'Opcode Name', 'Task')
         $userData = Get-RowField -Row $row -Names @('User Data', 'ValueName', 'Name')
+        $rowPath = Get-RowField -Row $row -Names @('KeyName', 'Path', 'Key Path')
         $joined = ($row.PSObject.Properties | ForEach-Object { [string]$_.Value }) -join ' | '
         $matched = $false
         foreach ($fragment in $SearchFragments) {
-            if (-not [string]::IsNullOrWhiteSpace($fragment) -and $joined -like "*$fragment*") {
+            if (Test-RegistryFragmentMatch -Line $joined -Fragment $fragment -RegistryPath $RegistryPath -ValueName $ValueName) {
                 $matched = $true
                 break
             }
@@ -216,7 +256,7 @@ function Write-NormalizedTracerptBundle {
             continue
         }
 
-        $pathParts = Split-RegistryPath -Path (Get-RowField -Row $row -Names @('KeyName', 'Path', 'Key Path')) -FallbackPath $RegistryPath -FallbackValueName $ValueName
+        $pathParts = Split-RegistryPath -Path $rowPath -FallbackPath $RegistryPath -FallbackValueName $ValueName
         $rowValueName = $pathParts.value_name
         if (
             $eventType -and
@@ -226,6 +266,15 @@ function Write-NormalizedTracerptBundle {
             $userData -notmatch '^0x'
         ) {
             $rowValueName = $userData.Trim('"')
+        }
+
+        if (
+            -not [string]::IsNullOrWhiteSpace($ValueName) -and
+            -not [string]::IsNullOrWhiteSpace($rowValueName) -and
+            -not $rowValueName.Equals($ValueName, [System.StringComparison]::OrdinalIgnoreCase) -and
+            -not (Test-RegistryFragmentMatch -Line $joined -Fragment $RegistryPath -RegistryPath $RegistryPath -ValueName $ValueName)
+        ) {
+            continue
         }
 
         $pidRaw = Get-RowField -Row $row -Names @('PID', 'Process ID')
@@ -271,7 +320,16 @@ function Write-NormalizedTracerptBundle {
                 continue
             }
 
-            if (-not [string]::IsNullOrWhiteSpace($ValueName) -and $cleanLine -notmatch [regex]::Escape($ValueName)) {
+            $rawValueName = Get-RawRegistryLineValueName -Line $cleanLine
+            $matchesTarget = $false
+            foreach ($fragment in $SearchFragments) {
+                if (Test-RegistryFragmentMatch -Line $cleanLine -Fragment $fragment -RegistryPath $RegistryPath -ValueName $ValueName) {
+                    $matchesTarget = $true
+                    break
+                }
+            }
+
+            if (-not $matchesTarget) {
                 continue
             }
 
@@ -285,7 +343,7 @@ function Write-NormalizedTracerptBundle {
                 timestamp_utc = $null
                 hive = $fallbackPathParts.hive
                 key_path = $fallbackPathParts.key_path
-                value_name = $ValueName
+                value_name = if (-not [string]::IsNullOrWhiteSpace($rawValueName)) { $rawValueName } else { $ValueName }
                 value_type = $null
                 data_text = $cleanLine
                 result = $null
@@ -577,7 +635,19 @@ try {
             }
 
             foreach ($match in Select-String -Path $csvPath -Pattern @($fragments) -SimpleMatch -ErrorAction SilentlyContinue) {
-                if ($match.Line -match '^\s*Registry\s*,') {
+                if ($match.Line -match '^\s*Registry\s*,' ) {
+                    $lineMatched = $false
+                    foreach ($fragment in $fragments) {
+                        if (Test-RegistryFragmentMatch -Line $match.Line -Fragment $fragment -RegistryPath ([string]$state.registry_path) -ValueName ([string]$state.value_name)) {
+                            $lineMatched = $true
+                            break
+                        }
+                    }
+
+                    if (-not $lineMatched) {
+                        continue
+                    }
+
                     [void]$hitLineSet.Add($match.Line)
                 }
             }
@@ -586,7 +656,7 @@ try {
             foreach ($line in $hitLineSet) {
                 $hitLines.Add($line)
                 foreach ($fragment in $fragments) {
-                    if ($line -like "*$fragment*") {
+                    if (Test-RegistryFragmentMatch -Line $line -Fragment $fragment -RegistryPath ([string]$state.registry_path) -ValueName ([string]$state.value_name)) {
                         $summary.fragment_hit_counts[$fragment]++
                     }
                 }

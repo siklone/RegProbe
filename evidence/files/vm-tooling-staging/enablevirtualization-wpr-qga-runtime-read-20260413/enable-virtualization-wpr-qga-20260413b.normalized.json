@@ -1,0 +1,117 @@
+﻿{
+    "$schema":  "registry-research-framework/schemas/normalized-registry-bundle.schema.json",
+    "run_id":  "enable-virtualization-wpr-qga-20260413b",
+    "source_tool":  "wpr",
+    "capture_phase":  "boot",
+    "generated_utc":  "2026-04-12T21:22:25.6393923Z",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "input_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\enable-virtualization-wpr-qga-20260413b\\enable-virtualization-wpr-qga-20260413b.hits.csv",
+    "status":  "ok",
+    "error_kind":  null,
+    "errors":  [
+
+               ],
+    "event_count":  5,
+    "filtered_event_count":  5,
+    "evidence_refs":  [
+                          "C:\\RegProbe-Diag\\wpr-boot-registry\\enable-virtualization-wpr-qga-20260413b\\enable-virtualization-wpr-qga-20260413b.hits.csv",
+                          "C:\\RegProbe-Diag\\wpr-boot-registry\\enable-virtualization-wpr-qga-20260413b\\enable-virtualization-wpr-qga-20260413b.normalized.json"
+                      ],
+    "events":  [
+                   {
+                       "run_id":  "enable-virtualization-wpr-qga-20260413b",
+                       "source_tool":  "wpr",
+                       "capture_phase":  "boot",
+                       "process_name":  null,
+                       "pid":  null,
+                       "operation":  "QueryValue",
+                       "timestamp_utc":  null,
+                       "hive":  "HKLM",
+                       "key_path":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                       "value_name":  "EnableVirtualization",
+                       "value_type":  null,
+                       "data_text":  "Registry, QueryValue,            0,          2,          0,          0,         16,          0, 0x0000000000000000, 0x00000060, 0x00000238,                    0,             ,                     ,   {00000000-0000-0000-0000-000000000000},                                         ,   134205022238491064,         15,          0,        226143763,        0,        2, 0xFFFFC18547C31250, \"EnableVirtualization\"",
+                       "result":  null,
+                       "evidence_refs":  [
+                                             "C:\\RegProbe-Diag\\wpr-boot-registry\\enable-virtualization-wpr-qga-20260413b\\enable-virtualization-wpr-qga-20260413b.hits.csv"
+                                         ],
+                       "normalization_note":  "raw-tracerpt-registry-hit-line"
+                   },
+                   {
+                       "run_id":  "enable-virtualization-wpr-qga-20260413b",
+                       "source_tool":  "wpr",
+                       "capture_phase":  "boot",
+                       "process_name":  null,
+                       "pid":  null,
+                       "operation":  "QueryValue",
+                       "timestamp_utc":  null,
+                       "hive":  "HKLM",
+                       "key_path":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                       "value_name":  "EnableVirtualization",
+                       "value_type":  null,
+                       "data_text":  "Registry, QueryValue,            0,          2,          0,          0,         16,          0, 0x0000000000000000, 0x00000348, 0x0000034C,                    0,             ,                     ,   {00000000-0000-0000-0000-000000000000},                                         ,   134205022246229380,          0,         15,        233882073,        0,        2, 0xFFFFC1854AAF2D10, \"EnableVirtualization\"",
+                       "result":  null,
+                       "evidence_refs":  [
+                                             "C:\\RegProbe-Diag\\wpr-boot-registry\\enable-virtualization-wpr-qga-20260413b\\enable-virtualization-wpr-qga-20260413b.hits.csv"
+                                         ],
+                       "normalization_note":  "raw-tracerpt-registry-hit-line"
+                   },
+                   {
+                       "run_id":  "enable-virtualization-wpr-qga-20260413b",
+                       "source_tool":  "wpr",
+                       "capture_phase":  "boot",
+                       "process_name":  null,
+                       "pid":  null,
+                       "operation":  "QueryValue",
+                       "timestamp_utc":  null,
+                       "hive":  "HKLM",
+                       "key_path":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                       "value_name":  "EnableVirtualization",
+                       "value_type":  null,
+                       "data_text":  "Registry, QueryValue,            0,          2,          0,          0,         16,          0, 0x0000000000000000, 0x00000348, 0x0000034C,                    0,             ,                     ,   {00000000-0000-0000-0000-000000000000},                                         ,   134205022246234557,          0,         15,        233887250,        0,        2, 0xFFFFC1854AAF2D10, \"EnableVirtualization\"",
+                       "result":  null,
+                       "evidence_refs":  [
+                                             "C:\\RegProbe-Diag\\wpr-boot-registry\\enable-virtualization-wpr-qga-20260413b\\enable-virtualization-wpr-qga-20260413b.hits.csv"
+                                         ],
+                       "normalization_note":  "raw-tracerpt-registry-hit-line"
+                   },
+                   {
+                       "run_id":  "enable-virtualization-wpr-qga-20260413b",
+                       "source_tool":  "wpr",
+                       "capture_phase":  "boot",
+                       "process_name":  null,
+                       "pid":  null,
+                       "operation":  "QueryValue",
+                       "timestamp_utc":  null,
+                       "hive":  "HKLM",
+                       "key_path":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                       "value_name":  "EnableVirtualization",
+                       "value_type":  null,
+                       "data_text":  "Registry, QueryValue,            0,          2,          0,          0,         16,          0, 0x0000000000000000, 0x00000348, 0x0000036C,                    1,             ,                     ,   {00000000-0000-0000-0000-000000000000},                                         ,   134205022250151363,          0,          0,        237804055,        0,        2, 0xFFFFC1854AAF2D10, \"EnableVirtualization\"",
+                       "result":  null,
+                       "evidence_refs":  [
+                                             "C:\\RegProbe-Diag\\wpr-boot-registry\\enable-virtualization-wpr-qga-20260413b\\enable-virtualization-wpr-qga-20260413b.hits.csv"
+                                         ],
+                       "normalization_note":  "raw-tracerpt-registry-hit-line"
+                   },
+                   {
+                       "run_id":  "enable-virtualization-wpr-qga-20260413b",
+                       "source_tool":  "wpr",
+                       "capture_phase":  "boot",
+                       "process_name":  null,
+                       "pid":  null,
+                       "operation":  "QueryValue",
+                       "timestamp_utc":  null,
+                       "hive":  "HKLM",
+                       "key_path":  "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+                       "value_name":  "EnableVirtualization",
+                       "value_type":  null,
+                       "data_text":  "Registry, QueryValue,            0,          2,          0,          0,         16,          0, 0x0000000000000000, 0x00001240, 0x000012C4,                    1,             ,                     ,   {00000000-0000-0000-0000-000000000000},                                         ,   134205022414682735,         15,          0,        402335424,        0,        2, 0xFFFFC1854AAF2D10, \"EnableVirtualization\"",
+                       "result":  null,
+                       "evidence_refs":  [
+                                             "C:\\RegProbe-Diag\\wpr-boot-registry\\enable-virtualization-wpr-qga-20260413b\\enable-virtualization-wpr-qga-20260413b.hits.csv"
+                                         ],
+                       "normalization_note":  "raw-tracerpt-registry-hit-line"
+                   }
+               ]
+}
