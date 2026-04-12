@@ -45,6 +45,21 @@ stdout: qga-helper-ok
 exitcode: 0
 ```
 
+The follow-up file helper:
+
+```bash
+python3 scripts/vm-kvm/qga-put-file.py \
+  --domain regprobe-win11-25h2-session \
+  --source /tmp/qga-file-ok.txt \
+  --destination 'C:\RegProbe-Diag\qga-file-ok.txt'
+```
+
+uploaded a 12-byte host file into the guest, and a `guest-exec` PowerShell read-back returned:
+
+```text
+qga-file-ok
+```
+
 ## Why this matters
 
 This does not solve the execution-required pair by itself, but it removes a lot of avoidable friction from the KVM runtime lane. We can now run guest commands, poll status, and move files through qga-supported surfaces instead of relying on long send-key sequences, ISO short-name quirks, or fragile foreground shells.

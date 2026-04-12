@@ -35,6 +35,14 @@
     "stdout": "qga-helper-ok",
     "stderr": ""
   },
+  "guest_file_smoke": {
+    "source": "/tmp/qga-file-ok.txt",
+    "destination": "C:\\RegProbe-Diag\\qga-file-ok.txt",
+    "sha256": "49543380003156d9e1874fa5fddc9bbdfe728743091ac75dd64c6ff8d5439911",
+    "size_bytes": 12,
+    "written_bytes": 12,
+    "readback_stdout": "qga-file-ok"
+  },
   "impact": "The active KVM guest-control lane now supports real guest-exec and guest-file operations, so future runtime traces can be orchestrated without keyboard typing or ISO 8.3 path workarounds.",
   "next_step": "Migrate targeted VM trace/probe flows from send-key transport to qga-exec where possible."
 }
