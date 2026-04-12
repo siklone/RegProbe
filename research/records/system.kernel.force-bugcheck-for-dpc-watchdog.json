@@ -217,6 +217,19 @@
         "kernel-derivation"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-force-bugcheck-dpc-timer-etw-no-hit-20260412",
+      "kind": "vm-test",
+      "title": "DPC/timer ETW registry trace completed but found no ForceBugcheck target hit",
+      "location": "registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json and evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json",
+      "summary": "A KVM guest DPC/timer ETW run collected Microsoft-Windows-Kernel-Registry, Kernel-General, Kernel-Power, and Kernel-Processor-Power providers for 45 seconds, produced a 5.7 MB ETL and 57 MB tracerpt XML, and successfully uploaded the trace summary. The target filter found zero hits for `ForceBugcheck`, so this is retained as additional negative runtime evidence and does not close the exact runtime-read blocker.",
+      "supports": [
+        "runtime-gap",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -247,5 +260,5 @@
       "notes": "The lane currently combines baseline existence, a write-and-reboot runtime attempt, dedicated KVM local-KD proof that `KiForceBugcheckForDpcWatchdog = 0` on the running current build, and a current-build INIT descriptor binding from the registry value name to the same global."
     }
   ],
-  "last_reviewed_utc": "2026-04-12T03:45:00Z"
+  "last_reviewed_utc": "2026-04-12T17:05:00Z"
 }

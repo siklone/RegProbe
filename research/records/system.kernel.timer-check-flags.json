@@ -230,6 +230,19 @@
         "rollback"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-timer-check-flags-dpc-timer-etw-no-hit-20260412",
+      "kind": "vm-test",
+      "title": "DPC/timer ETW registry trace completed but found no TimerCheckFlags target hit",
+      "location": "registry-research-framework/audit/dpc-timer-etw-trace-20260412-fixed.json and evidence/files/vm-tooling-staging/dpc-timer-etw-20260412-fixed/trace-summary.json",
+      "summary": "A KVM guest DPC/timer ETW run collected Microsoft-Windows-Kernel-Registry, Kernel-General, Kernel-Power, and Kernel-Processor-Power providers for 45 seconds, produced a 5.7 MB ETL and 57 MB tracerpt XML, and successfully uploaded the trace summary. The target filter found zero hits for `TimerCheckFlags`, so this is retained as additional negative runtime evidence and does not close the exact runtime-read blocker.",
+      "supports": [
+        "runtime-gap",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -266,5 +279,5 @@
       "notes": "Current-build live local-KD resolved `nt!KeTimerCheckFlags` and directly read its value as `1`."
     }
   ],
-  "last_reviewed_utc": "2026-04-12T02:08:00+03:00"
+  "last_reviewed_utc": "2026-04-12T17:05:00Z"
 }
