@@ -142,7 +142,7 @@ function Get-RowField {
     foreach ($name in $Names) {
         foreach ($property in $Row.PSObject.Properties) {
             if ($property.Name -ieq $name -and $null -ne $property.Value -and -not [string]::IsNullOrWhiteSpace([string]$property.Value)) {
-                return [string]$property.Value
+                return ([string]$property.Value).Trim()
             }
         }
     }
@@ -196,6 +196,13 @@ function Write-NormalizedTracerptBundle {
 
     $events = New-Object System.Collections.Generic.List[object]
     foreach ($row in Import-Csv -Path $CsvPath) {
+        $eventName = Get-RowField -Row $row -Names @('Event Name', 'EventName')
+        if ($eventName -and $eventName -ine 'Registry') {
+            continue
+        }
+
+        $eventType = Get-RowField -Row $row -Names @('Type', 'Task Name', 'Opcode Name', 'Task')
+        $userData = Get-RowField -Row $row -Names @('User Data', 'ValueName', 'Name')
         $joined = ($row.PSObject.Properties | ForEach-Object { [string]$_.Value }) -join ' | '
         $matched = $false
         foreach ($fragment in $SearchFragments) {
@@ -210,6 +217,17 @@ function Write-NormalizedTracerptBundle {
         }
 
         $pathParts = Split-RegistryPath -Path (Get-RowField -Row $row -Names @('KeyName', 'Path', 'Key Path')) -FallbackPath $RegistryPath -FallbackValueName $ValueName
+        $rowValueName = $pathParts.value_name
+        if (
+            $eventType -and
+            $eventType -imatch '^(QueryValue|SetValue|DeleteValue)$' -and
+            -not [string]::IsNullOrWhiteSpace($userData) -and
+            $userData -notmatch '[\\/:]' -and
+            $userData -notmatch '^0x'
+        ) {
+            $rowValueName = $userData.Trim('"')
+        }
+
         $pidRaw = Get-RowField -Row $row -Names @('PID', 'Process ID')
         $parsedPid = 0
         $pidValue = $null
@@ -223,16 +241,58 @@ function Write-NormalizedTracerptBundle {
             capture_phase = 'boot'
             process_name = Get-RowField -Row $row -Names @('Process Name', 'ProcessName', 'Process')
             pid = $pidValue
-            operation = (Get-RowField -Row $row -Names @('Event Name', 'Task Name', 'Opcode Name', 'EventName', 'Task'))
+            operation = if ($eventName -ieq 'Registry' -and -not [string]::IsNullOrWhiteSpace($eventType)) { $eventType } else { (Get-RowField -Row $row -Names @('Event Name', 'Task Name', 'Opcode Name', 'EventName', 'Task')) }
             timestamp_utc = (Get-RowField -Row $row -Names @('Event Time', 'TimeCreated', 'Time Stamp', 'Timestamp', 'Time'))
             hive = $pathParts.hive
             key_path = $pathParts.key_path
-            value_name = $pathParts.value_name
+            value_name = $rowValueName
             value_type = Get-RowField -Row $row -Names @('Type', 'Value Type', 'Data Type')
             data_text = $joined
             result = Get-RowField -Row $row -Names @('Result', 'Status')
             evidence_refs = @($CsvPath)
         }) | Out-Null
+    }
+
+    if ($events.Count -eq 0 -and (Test-Path $CsvPath)) {
+        $fallbackPathParts = Split-RegistryPath -Path $RegistryPath -FallbackPath $RegistryPath -FallbackValueName $ValueName
+        foreach ($line in (Get-Content -Path $CsvPath -ErrorAction SilentlyContinue | Select-Object -Skip 1)) {
+            $cleanLine = ([string]$line).TrimStart([char]0xFEFF).Trim()
+            if ($cleanLine -notmatch '^Registry\s*,') {
+                continue
+            }
+
+            $columns = $cleanLine -split ','
+            if ($columns.Count -lt 2) {
+                continue
+            }
+
+            $operation = $columns[1].Trim()
+            if ($operation -notmatch '^(QueryValue|SetValue|DeleteValue)$') {
+                continue
+            }
+
+            if (-not [string]::IsNullOrWhiteSpace($ValueName) -and $cleanLine -notmatch [regex]::Escape($ValueName)) {
+                continue
+            }
+
+            $events.Add([ordered]@{
+                run_id = $RunId
+                source_tool = 'wpr'
+                capture_phase = 'boot'
+                process_name = $null
+                pid = $null
+                operation = $operation
+                timestamp_utc = $null
+                hive = $fallbackPathParts.hive
+                key_path = $fallbackPathParts.key_path
+                value_name = $ValueName
+                value_type = $null
+                data_text = $cleanLine
+                result = $null
+                evidence_refs = @($CsvPath)
+                normalization_note = 'raw-tracerpt-registry-hit-line'
+            }) | Out-Null
+        }
     }
 
     $eventItems = @($events | ForEach-Object { $_ })
@@ -517,7 +577,9 @@ try {
             }
 
             foreach ($match in Select-String -Path $csvPath -Pattern @($fragments) -SimpleMatch -ErrorAction SilentlyContinue) {
-                [void]$hitLineSet.Add($match.Line)
+                if ($match.Line -match '^\s*Registry\s*,') {
+                    [void]$hitLineSet.Add($match.Line)
+                }
             }
 
             $hitLines = New-Object System.Collections.Generic.List[string]

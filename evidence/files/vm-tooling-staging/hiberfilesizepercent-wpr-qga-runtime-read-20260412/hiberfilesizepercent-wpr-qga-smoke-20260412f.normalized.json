@@ -1,0 +1,41 @@
+﻿{
+    "$schema":  "registry-research-framework/schemas/normalized-registry-bundle.schema.json",
+    "run_id":  "hiberfilesizepercent-wpr-qga-smoke-20260412f",
+    "source_tool":  "wpr",
+    "capture_phase":  "boot",
+    "generated_utc":  "2026-04-12T19:39:39.8046865Z",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "input_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.hits.csv",
+    "status":  "ok",
+    "error_kind":  null,
+    "errors":  [
+
+               ],
+    "event_count":  1,
+    "filtered_event_count":  1,
+    "evidence_refs":  [
+                          "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.hits.csv",
+                          "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json"
+                      ],
+    "events":  [
+                   {
+                       "run_id":  "hiberfilesizepercent-wpr-qga-smoke-20260412f",
+                       "source_tool":  "wpr",
+                       "capture_phase":  "boot",
+                       "process_name":  null,
+                       "pid":  null,
+                       "operation":  "QueryValue",
+                       "timestamp_utc":  null,
+                       "hive":  "HKLM",
+                       "key_path":  "SYSTEM\\CurrentControlSet\\Control\\Power",
+                       "value_name":  "HiberFileSizePercent",
+                       "value_type":  null,
+                       "data_text":  "Registry, QueryValue,            0,          2,          0,          0,         16,          0, 0x0000000000000000, 0x000001AC, 0x000001B0,                    0,             ,                     ,   {00000000-0000-0000-0000-000000000000},                                         ,   134204960678731550,        180,          0,        226438918,        0,        2, 0xFFFFAF89ED3D4410, \"HiberFileSizePercent\"",
+                       "result":  null,
+                       "evidence_refs":  [
+                                             "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.hits.csv"
+                                         ],
+                       "normalization_note":  "raw-tracerpt-registry-hit-line"
+                   }
+               ]
+}

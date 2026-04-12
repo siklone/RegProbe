@@ -1,0 +1,37 @@
+﻿{
+    "generated_utc":  "2026-04-12T19:33:37.1812119Z",
+    "stage":  "arm",
+    "registry_path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name":  "HiberFileSizePercent",
+    "output_name":  "hiberfilesizepercent-wpr-qga-smoke-20260412f",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "recovery_action":  "none",
+    "transport_blocker":  "none",
+    "guest_health":  "stable",
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "before_boot_time_utc":  "2026-04-12T19:23:08.5000000Z",
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.etl",
+    "state_file":  "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\state.json",
+    "cancelboot":  {
+                       "exit_code":  null,
+                       "timed_out":  false,
+                       "stdout":  "",
+                       "stderr":  "There are no trace profiles running.\r\r\n\r\n\tError code: 0xc5583000"
+                   },
+    "cancel":  {
+                   "exit_code":  null,
+                   "timed_out":  false,
+                   "stdout":  "",
+                   "stderr":  "There are no trace profiles running.\r\r\n\r\n\tError code: 0xc5583000"
+               },
+    "arm":  {
+                "exit_code":  null,
+                "timed_out":  false,
+                "stdout":  "",
+                "stderr":  ""
+            },
+    "arm_exit_code_indeterminate":  true
+}

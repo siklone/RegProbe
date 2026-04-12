@@ -1,0 +1,53 @@
+﻿{
+    "generated_utc":  "2026-04-12T19:35:06.8617204Z",
+    "stage":  "collect",
+    "registry_path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name":  "HiberFileSizePercent",
+    "output_name":  "hiberfilesizepercent-wpr-qga-smoke-20260412f",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "recovery_action":  "none",
+    "transport_blocker":  "none",
+    "guest_health":  "stable",
+    "before_boot_time_utc":  "2026-04-12T19:23:08.5000000Z",
+    "after_boot_time_utc":  "2026-04-12T19:34:05.5000000Z",
+    "reboot_observed":  true,
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "stopboot":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Press Ctrl+C to cancel the stop operation.\r\nThe trace was successfully saved.\r\n\r\nThis trace has dropped 24977 events. Please record this trace again.",
+                     "stderr":  ""
+                 },
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.etl",
+    "etl_exists":  true,
+    "csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.csv",
+    "csv_exists":  true,
+    "normalized_bundle_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json",
+    "normalized_bundle_exists":  true,
+    "normalized_result_ref":  "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json",
+    "normalization_status":  "ok",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "normalization_errors":  [
+
+                             ],
+    "hits_csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.hits.csv",
+    "hits_csv_exists":  true,
+    "hit_line_count":  5,
+    "fragment_hit_counts":  {
+                                "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power":  0,
+                                "HiberFileSizePercent":  5
+                            },
+    "stopboot_exit_code_indeterminate":  true,
+    "tracerpt":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Input\r\n----------------\r\nFile(s):\r\n     C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.etl\r\n\n0.00%0.98%1.95%2.93%3.90%4.88%5.85%6.83%7.80%8.78%9.76%10.73%11.71%12.68%13.66%14.63%15.61%16.59%17.56%18.54%19.51%20.49%21.46%22.44%23.41%24.39%25.37%26.34%27.32%28.29%29.27%30.24%31.22%32.20%33.17%34.15%35.12%36.10%37.07%38.05%39.02%40.00%40.98%41.95%42.93%43.90%44.88%45.85%46.83%47.80%48.78%49.76%50.73%51.71%52.68%53.66%54.63%55.61%56.59%57.56%58.54%59.51%60.49%61.46%62.44%63.41%64.39%65.37%66.34%67.32%68.29%69.27%70.24%71.22%72.20%73.17%74.15%75.12%76.10%77.07%78.05%79.02%80.00%80.98%81.95%82.93%83.90%84.88%85.85%86.83%87.80%88.78%89.76%90.73%91.71%92.68%93.66%94.63%95.61%96.59%97.56%98.54%99.51%100.00%\n\r\nOutput\r\n----------------\r\nDumpFile:           C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.csv\r\n\nThe command completed successfully.",
+                     "stderr":  ""
+                 },
+    "tracerpt_exit_code_indeterminate":  true,
+    "hits_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\hiberfilesizepercent-wpr-qga-smoke-20260412f\\hiberfilesizepercent-wpr-qga-smoke-20260412f.hits.txt",
+    "hits_exists":  true
+}
