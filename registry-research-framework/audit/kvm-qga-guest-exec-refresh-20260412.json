@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "collected_utc": "2026-04-12T17:10:00Z",
+  "status": "completed",
+  "domain": "regprobe-win11-25h2-session",
+  "environment": "windows-11-25h2-kvm",
+  "installer_source_url": "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-qemu-ga/qemu-ga-x86_64.msi",
+  "installer_sha256": "c50ea2e7c04730a1097ab6c112138645be4da26015518329daebe8d3630e0790",
+  "installer_size_bytes": 11793408,
+  "guest_install_command": "msiexec /i D:\\extras\\QEMU_GA_X86_64.MSI /qn /norestart",
+  "guest_info_after": {
+    "version": "110.0.2",
+    "supported_commands": [
+      "guest-exec",
+      "guest-exec-status",
+      "guest-file-open",
+      "guest-file-read",
+      "guest-file-write",
+      "guest-file-close",
+      "guest-get-fsinfo",
+      "guest-get-osinfo",
+      "guest-network-get-interfaces",
+      "guest-ping",
+      "guest-sync",
+      "guest-sync-delimited"
+    ]
+  },
+  "guest_exec_smoke": {
+    "path": "cmd.exe",
+    "arg": [
+      "/c",
+      "echo qga-helper-ok"
+    ],
+    "exitcode": 0,
+    "stdout": "qga-helper-ok",
+    "stderr": ""
+  },
+  "impact": "The active KVM guest-control lane now supports real guest-exec and guest-file operations, so future runtime traces can be orchestrated without keyboard typing or ISO 8.3 path workarounds.",
+  "next_step": "Migrate targeted VM trace/probe flows from send-key transport to qga-exec where possible."
+}
