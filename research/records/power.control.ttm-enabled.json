@@ -198,8 +198,10 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "TtmEnabled now has enough docs, baseline, and current-build corroboration for a schema-backed draft, but the current runtime evidence is dominated by risk: the isolated non-default probe reproduced boot-unsafe behavior and there is still no primary Microsoft documentation or exact naturally resolved current-build consumer path for this value.",
+    "why": "TtmEnabled now has enough docs, baseline, and current-build corroboration for a schema-backed draft, but the current runtime evidence is dominated by risk: the isolated non-default probe reproduced boot-unsafe behavior and there is still no primary Microsoft documentation or exact naturally resolved current-build consumer path for this value. The 2026-04-12 decision marks this as an intentional hold: boot-unsafe, do not probe without dedicated boot lane.",
     "blocking_issues": [
+      "intentional-hold",
+      "boot-unsafe, do not probe without dedicated boot lane",
       "The current runtime lane marks TtmEnabled as boot-unsafe under DWORD 1 on the isolated pilot profile.",
       "No primary current-build Microsoft documentation has been found for this exact value.",
       "The current build does not yet have an exact naturally resolved consumer or registry-read path for TtmEnabled."
@@ -210,5 +212,5 @@
     "Is the observed baseline `0` a stable default across other Windows 11 builds or only this current baseline?",
     "Can a future static or KD pass resolve the exact current-build consumer path without reintroducing unsafe runtime writes?"
   ],
-  "last_reviewed_utc": "2026-04-12T01:47:00+03:00"
+  "last_reviewed_utc": "2026-04-12T16:30:00Z"
 }
