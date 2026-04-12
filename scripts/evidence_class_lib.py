@@ -74,6 +74,21 @@ DEBUGGER_STATIC_HINTS = (
     "symbol family",
 )
 
+EXACT_RUNTIME_NEGATIVE_HINTS = (
+    "did not capture an exact runtime read",
+    "did not yield an exact runtime read",
+    "no exact runtime read",
+    "no exact runtime-read",
+    "exact runtime read gap remains open",
+    "exact runtime-read gap remains open",
+    "exact runtime read still failed",
+    "exact runtime-read still failed",
+    "still lacks an exact runtime read",
+    "still lacks an exact runtime-read",
+    "without an exact runtime read",
+    "without an exact runtime-read",
+)
+
 WPR_EVIDENCE_KINDS = {
     "wpr-trace",
     "etw-trace",
@@ -403,7 +418,7 @@ def has_exact_runtime_read(record: dict[str, Any]) -> bool:
             str(item.get(field) or "")
             for field in ("title", "summary", "location", "Title", "Summary", "Location")
         ).lower()
-        if "did not capture an exact runtime read" in text or "no exact runtime read" in text:
+        if any(hint in text for hint in EXACT_RUNTIME_NEGATIVE_HINTS):
             continue
         if "exact runtime read" in text or "exact-value read" in text or "exact-hit" in text:
             return True

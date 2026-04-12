@@ -1,0 +1,15 @@
+{
+  "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+  "output_name": "win32k-callout-watchdog-timeout-reboot-kvm-20260412c",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+  "before_boot_time_utc": "2026-04-12T04:20:14.5000000Z",
+  "after_boot_time_utc": "2026-04-12T04:33:01.5000000Z",
+  "reboot_observed": true,
+  "before_key_exists": true,
+  "after_key_exists": true,
+  "before_value_exists": false,
+  "after_value_exists": false,
+  "value_preserved": true,
+  "summary": "A host-driven KVM reboot observation confirmed that the Control\\Power parent key still exists after a real guest reboot while Win32kCalloutWatchdogTimeoutSeconds stayed absent before and after boot. The lingering GetValueKind error in the raw snapshots reflects the missing value state, not a missing key, because key_exists remained true on both sides of the reboot."
+}

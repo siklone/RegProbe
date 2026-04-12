@@ -25,6 +25,7 @@ def load_module(name: str, path: Path):
 
 
 research_v36_lib = load_module("research_v36_lib", SCRIPTS_ROOT / "research_v36_lib.py")
+evidence_class_lib = load_module("evidence_class_lib", SCRIPTS_ROOT / "evidence_class_lib.py")
 validate_contracts = load_module("validate_research_contracts", FRAMEWORK_SCRIPTS / "validate_research_contracts.py")
 
 
@@ -219,6 +220,30 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(score["bench_priority"], 0.4)
         self.assertTrue(score["has_value_context"])
         self.assertGreaterEqual(score["total"], 0.57)
+
+    def test_has_exact_runtime_read_ignores_negative_gap_language(self) -> None:
+        record = {
+            "evidence": [
+                {
+                    "kind": "vm-test",
+                    "summary": "The exact runtime-read gap remains open after the Procmon SaveAs timeout.",
+                }
+            ]
+        }
+
+        self.assertFalse(evidence_class_lib.has_exact_runtime_read(record))
+
+    def test_has_exact_runtime_read_accepts_positive_exact_read_language(self) -> None:
+        record = {
+            "evidence": [
+                {
+                    "kind": "procmon-trace",
+                    "summary": "The guest-processed boot log captured an exact runtime read for ExampleValue via RegQueryValue.",
+                }
+            ]
+        }
+
+        self.assertTrue(evidence_class_lib.has_exact_runtime_read(record))
 
     def test_repo_code_only_static_evidence_scores_low(self) -> None:
         record = {

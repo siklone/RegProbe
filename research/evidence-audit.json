@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T04:10:02.947331Z",
+  "generated_utc": "2026-04-12T04:56:28.732570Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -18,9 +18,10 @@
       "none": 248,
       "decision-gate": 14,
       "ghidra": 1,
-      "reboot-diff": 3,
+      "reboot-diff": 2,
+      "runtime-trace": 1,
       "incident-review": 1,
-      "procmon": 1
+      "wpr-or-benchmark": 1
     },
     "promotion_state_counts": {
       "promoted": 247,
@@ -38,13 +39,7 @@
       "counts_by_source_tool": {},
       "counts_by_confidence": {},
       "counts_by_promotion_state": {}
-    },
-    "total": 268,
-    "promoted": 247,
-    "blocked": 21,
-    "revalidation_pending": 0,
-    "stale": 0,
-    "gate_health": "green"
+    }
   },
   "entries": [
     {
@@ -7174,28 +7169,30 @@
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "reboot-diff",
-      "cross_layer_satisfied": false,
+      "next_missing_layer": "runtime-trace",
+      "cross_layer_satisfied": true,
       "layers_used": [
-        "static_ghidra"
+        "static_ghidra",
+        "runtime_reboot"
       ],
       "tools_used": [
-        "ghidra"
+        "ghidra",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": "B",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
@@ -7207,17 +7204,16 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-current-build-registry-seeding-path",
         "no-doc-source",
+        "no-runtime-proof",
         "non-default-semantics-unproven",
-        "reboot-diff",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 2,
-        "runtime_evidence_strength": 1,
+        "static_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -7225,8 +7221,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.22,
-        "next_missing_layer": "reboot-diff"
+        "overall_score": 3.56,
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -7240,7 +7236,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-07T18:52:30Z"
+        "last_verified_at": "2026-04-12T04:40:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8232,19 +8228,21 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": false,
+      "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "procmon",
-      "cross_layer_satisfied": false,
+      "next_missing_layer": "wpr-or-benchmark",
+      "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_procmon",
         "static_ghidra"
       ],
       "tools_used": [
+        "procmon",
         "ghidra"
       ],
       "boot_phase_relevant": true,
@@ -8254,11 +8252,11 @@
         "etw_executed": false,
         "boot_phase_included": false,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
       "original_class": "B",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
@@ -8270,17 +8268,16 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-current-build-registry-seeding-path",
+        "bench-not-run",
         "no-doc-source",
-        "no-runtime-proof",
         "non-default-semantics-unproven",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 3,
-        "runtime_evidence_strength": 1,
+        "static_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -8288,8 +8285,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.33,
-        "next_missing_layer": "procmon"
+        "overall_score": 3.56,
+        "next_missing_layer": "wpr-or-benchmark"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -8303,7 +8300,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-07T18:22:43Z"
+        "last_verified_at": "2026-04-12T04:40:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -22839,28 +22836,5 @@
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
       "incident_ids": []
     }
-  ],
-  "blocker_breakdown": {
-    "conditional-initialization-unproven": 1,
-    "conflicting-sources": 2,
-    "documentation-first-review": 14,
-    "incident-review": 1,
-    "intentional-ghidra-hold": 1,
-    "no-current-build-registry-seeding-path": 2,
-    "no-current-build-string-or-symbol-hit": 1,
-    "no-doc-source": 2,
-    "no-doc-source-outside-repo": 5,
-    "no-primary-current-build-doc": 3,
-    "no-runtime-proof": 14,
-    "non-default-semantics-unproven": 5,
-    "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane": 1,
-    "reboot-diff": 3,
-    "record-blocker": 12,
-    "schema-incomplete": 1
-  },
-  "stale_records": [],
-  "conflict_records": [],
-  "missing_docs_records": [],
-  "rollback_unverified_records": [],
-  "bench_pending_records": []
+  ]
 }

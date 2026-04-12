@@ -1,0 +1,62 @@
+﻿{
+    "generated_utc":  "2026-04-12T04:36:10.4870030Z",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name":  "Win32kCalloutWatchdogTimeoutSeconds",
+    "output_name":  "win32k-callout-watchdog-timeout-reboot-kvm-20260412c",
+    "output_root":  "C:\\RegProbe-Diag\\reboot-observation\\win32k-callout-watchdog-timeout-reboot-kvm-20260412c",
+    "task_name":  "RegProbe-RebootObservation-win32k-callout-watchdog-timeout-reboot-kvm-20260412c",
+    "before":  {
+                   "generated_utc":  "2026-04-12T04:31:08.7582653Z",
+                   "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                   "provider_path":  "Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                   "value_name":  "Win32kCalloutWatchdogTimeoutSeconds",
+                   "key_exists":  true,
+                   "value_exists":  false,
+                   "value_kind":  null,
+                   "value":  null,
+                   "error":  "Exception calling \"GetValueKind\" with \"1\" argument(s): \"The specified registry key does not exist.\"",
+                   "boot_time_utc":  "2026-04-12T04:20:14.5000000Z"
+               },
+    "after":  {
+                  "generated_utc":  "2026-04-12T04:36:10.2039209Z",
+                  "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                  "provider_path":  "Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                  "value_name":  "Win32kCalloutWatchdogTimeoutSeconds",
+                  "key_exists":  true,
+                  "value_exists":  false,
+                  "value_kind":  null,
+                  "value":  null,
+                  "error":  "Exception calling \"GetValueKind\" with \"1\" argument(s): \"The specified registry key does not exist.\"",
+                  "boot_time_utc":  "2026-04-12T04:33:01.5000000Z"
+              },
+    "before_powercfg_path":  "C:\\RegProbe-Diag\\reboot-observation\\win32k-callout-watchdog-timeout-reboot-kvm-20260412c\\powercfg-a-before.txt",
+    "after_powercfg_path":  "C:\\RegProbe-Diag\\reboot-observation\\win32k-callout-watchdog-timeout-reboot-kvm-20260412c\\powercfg-a-after.txt",
+    "reboot_observed":  true,
+    "value_changed":  true,
+    "value_preserved":  true,
+    "uploads":  {
+                    "before":  {
+                                   "path":  "C:\\RegProbe-Diag\\reboot-observation\\win32k-callout-watchdog-timeout-reboot-kvm-20260412c\\before.json",
+                                   "uri":  "http://10.0.2.2:8766/win32k-callout-watchdog-timeout-reboot-kvm-20260412c-before.json",
+                                   "attempts":  1
+                               },
+                    "after":  {
+                                  "path":  "C:\\RegProbe-Diag\\reboot-observation\\win32k-callout-watchdog-timeout-reboot-kvm-20260412c\\after.json",
+                                  "uri":  "http://10.0.2.2:8766/win32k-callout-watchdog-timeout-reboot-kvm-20260412c-after.json",
+                                  "attempts":  1
+                              },
+                    "powercfg_before":  {
+                                            "path":  "C:\\RegProbe-Diag\\reboot-observation\\win32k-callout-watchdog-timeout-reboot-kvm-20260412c\\powercfg-a-before.txt",
+                                            "uri":  "http://10.0.2.2:8766/win32k-callout-watchdog-timeout-reboot-kvm-20260412c-powercfg-a-before.txt",
+                                            "attempts":  1
+                                        },
+                    "powercfg_after":  {
+                                           "path":  "C:\\RegProbe-Diag\\reboot-observation\\win32k-callout-watchdog-timeout-reboot-kvm-20260412c\\powercfg-a-after.txt",
+                                           "uri":  "http://10.0.2.2:8766/win32k-callout-watchdog-timeout-reboot-kvm-20260412c-powercfg-a-after.txt",
+                                           "attempts":  1
+                                       }
+                },
+    "errors":  [
+
+               ]
+}

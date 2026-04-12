@@ -1,0 +1,21 @@
+{
+  "generated_utc": "2026-04-12T04:38:10.7843746Z",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+  "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+  "output_name": "win32-callout-watchdog-bugcheck-procmon-kvm-20260412b",
+  "trigger_profile": "watchdog-power-burst",
+  "output_root": "C:\\RegProbe-Diag\\procmon\\win32-callout-watchdog-bugcheck-procmon-kvm-20260412b",
+  "status": "error",
+  "result_exists": true,
+  "csv_exists": false,
+  "hits_csv_exists": false,
+  "probe_stage_exists": true,
+  "probe_stage": "procmon-saveas",
+  "probe_stage_status": "stale-running",
+  "probe_stage_message": "Procmon SaveAs timed out after 60 second(s).",
+  "result_error_line": "ERROR=System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 60 second(s).",
+  "error_kind": "probe-stage-error",
+  "error": "System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 60 second(s).",
+  "error_position": null,
+  "summary_source": "manual-host-fallback"
+}

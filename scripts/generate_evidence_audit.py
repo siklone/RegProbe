@@ -33,7 +33,12 @@ from evidence_class_lib import (
     sanitize_value,
     suspected_layer,
 )
-from research_v36_lib import PROMOTION_GATES_PATH, build_sku_awareness, default_execution_context, load_json_if_exists
+from research_v36_lib import (
+    build_sku_awareness,
+    default_execution_context,
+    evaluate_candidate_gate,
+    load_url_validation_report,
+)
 from imported_candidate_backlog_lib import build_imported_candidate_backlog_summary
 from research_path_lib import REPO_ROOT, RESEARCH_ROOT, V31_EVIDENCE_ROOT, is_github_release_url, normalize_reference
 
@@ -60,21 +65,6 @@ def load_incident_map(path: Path) -> dict[str, list[dict[str, Any]]]:
             if not key:
                 continue
             result.setdefault(key, []).append(incident)
-    return result
-
-
-def load_promotion_gate_map(path: Path) -> dict[str, dict[str, Any]]:
-    payload = load_json_if_exists(path)
-    if not isinstance(payload, dict):
-        return {}
-    result: dict[str, dict[str, Any]] = {}
-    for entry in payload.get("entries") or []:
-        if not isinstance(entry, dict):
-            continue
-        for key_name in ("record_id", "tweak_id", "candidate_id"):
-            key = str(entry.get(key_name) or "").strip()
-            if key and key not in result:
-                result[key] = entry
     return result
 
 
@@ -311,7 +301,7 @@ def main() -> int:
     provenance_map = load_provenance_map(PROVENANCE_PATH)
     overrides = load_overrides(OVERRIDES_PATH)
     incident_map = load_incident_map(INCIDENTS_PATH)
-    promotion_gate_map = load_promotion_gate_map(PROMOTION_GATES_PATH)
+    url_validation_map = load_url_validation_report()
 
     entries: list[dict[str, Any]] = []
     class_counts: Counter[str] = Counter()
@@ -339,8 +329,13 @@ def main() -> int:
             next_layer = str(override["next_missing_layer_override"])
         official = has_official_evidence(record)
         class_id = class_entry["evidence_class"]
-        promotion_gate = promotion_gate_map.get(record_id) or {}
         full_evidence = load_v31_full_evidence(record_id)
+        promotion_gate = evaluate_candidate_gate(
+            record,
+            {"next_missing_layer": next_layer},
+            full_evidence or {},
+            url_validation_status=url_validation_map.get(record_id),
+        )
         audit_surface = audit_surface_from_gate(record, promotion_gate, full_evidence)
         checks = dead_flag_checks(record_id, record)
         audit_required = re_audit_required(class_id, official, record_id, record, incident_seen)

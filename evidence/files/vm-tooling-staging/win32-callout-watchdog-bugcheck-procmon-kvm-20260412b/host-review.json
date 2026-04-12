@@ -1,0 +1,21 @@
+{
+  "generated_utc": "2026-04-12T04:40:00Z",
+  "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+  "output_name": "win32-callout-watchdog-bugcheck-procmon-kvm-20260412b",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+  "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+  "trigger_kind": "watchdog-power-burst",
+  "summary_source": "manual-host-fallback",
+  "probe_stage": "procmon-saveas",
+  "probe_stage_status": "stale-running",
+  "error_kind": "probe-stage-error",
+  "error": "System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 60 second(s).",
+  "csv_exists": false,
+  "hits_csv_exists": false,
+  "restored_state": {
+    "path_exists": false,
+    "value_exists": false,
+    "value": null,
+    "value_type": null
+  }
+}
