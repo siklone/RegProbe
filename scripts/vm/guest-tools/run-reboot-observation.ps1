@@ -38,7 +38,7 @@ function Write-JsonFile {
 function Convert-ToProviderPath {
     param([Parameter(Mandatory = $true)][string]$Path)
 
-    $trimmed = $Path.Trim()
+    $trimmed = $Path.Trim().Replace('HKLM:\', 'HKLM\').Replace('HKCU:\', 'HKCU\').Replace('HKCR:\', 'HKCR\').Replace('HKU:\', 'HKU\').Replace('HKCC:\', 'HKCC\')
     $map = [ordered]@{
         'HKLM\' = 'Registry::HKEY_LOCAL_MACHINE\'
         'HKEY_LOCAL_MACHINE\' = 'Registry::HKEY_LOCAL_MACHINE\'
@@ -278,6 +278,8 @@ Capture-PowercfgA -Path $afterPowercfgPath
 
 $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
+    status = 'ok'
+    error = $null
     registry_path = $RegistryPath
     value_name = $ValueName
     output_name = $OutputName
@@ -299,14 +301,18 @@ if ($before -and $before.boot_time_utc -and $after.boot_time_utc) {
 }
 
 if ($before) {
-    $beforeJson = $before | ConvertTo-Json -Depth 12
-    $afterJson = $after | ConvertTo-Json -Depth 12
-    $summary.value_changed = ($beforeJson -ne $afterJson)
-    $summary.value_preserved = (
-        [bool]$before.value_exists -eq [bool]$after.value_exists -and
-        [string]$before.value_kind -eq [string]$after.value_kind -and
-        (($before.value | ConvertTo-Json -Compress) -eq ($after.value | ConvertTo-Json -Compress))
+    $summary.value_changed = (
+        [bool]$before.key_exists -ne [bool]$after.key_exists -or
+        [bool]$before.value_exists -ne [bool]$after.value_exists -or
+        [string]$before.value_kind -ne [string]$after.value_kind -or
+        (($before.value | ConvertTo-Json -Compress) -ne ($after.value | ConvertTo-Json -Compress))
     )
+    $summary.value_preserved = -not $summary.value_changed
+}
+
+if (-not $summary.reboot_observed) {
+    $summary.status = 'error'
+    $summary.error = 'Boot time did not change across the reboot observation.'
 }
 
 foreach ($entry in @(

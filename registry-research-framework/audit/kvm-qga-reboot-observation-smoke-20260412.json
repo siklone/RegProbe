@@ -1,0 +1,42 @@
+{
+  "captured_at_utc": "2026-04-12T17:58:10.1971109Z",
+  "domain": "regprobe-win11-25h2-session",
+  "wrapper_path": "scripts/vm-kvm/run-guest-reboot-observation.py",
+  "guest_tool_path": "scripts/vm/guest-tools/run-reboot-observation.ps1",
+  "helper_path": "scripts/vm-kvm/qga-run-powershell.py",
+  "launch_transport": "qga",
+  "output_name": "hiberfilesizepercent-qga-reboot-smoke-20260412d",
+  "registry_path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "HiberFileSizePercent",
+  "summary": {
+    "status": "ok",
+    "reboot_observed": true,
+    "value_changed": false,
+    "value_preserved": true,
+    "prepare_launch_transport": "qga",
+    "post_reboot_launch_transport": "qga"
+  },
+  "before": {
+    "value_kind": "DWord",
+    "value": 0,
+    "boot_time_utc": "2026-04-12T17:54:58.5000000Z"
+  },
+  "after": {
+    "value_kind": "DWord",
+    "value": 0,
+    "boot_time_utc": "2026-04-12T17:57:12.5000000Z"
+  },
+  "artifacts": {
+    "summary_path": "/tmp/regprobe-bridge/hiberfilesizepercent-qga-reboot-smoke-20260412d-summary.json",
+    "before_path": "/tmp/regprobe-bridge/hiberfilesizepercent-qga-reboot-smoke-20260412d-before.json",
+    "after_path": "/tmp/regprobe-bridge/hiberfilesizepercent-qga-reboot-smoke-20260412d-after.json",
+    "powercfg_before_path": "/tmp/regprobe-bridge/hiberfilesizepercent-qga-reboot-smoke-20260412d-powercfg-a-before.txt",
+    "powercfg_after_path": "/tmp/regprobe-bridge/hiberfilesizepercent-qga-reboot-smoke-20260412d-powercfg-a-after.txt"
+  },
+  "fixes_validated": [
+    "Convert-ToProviderPath now accepts HKLM:\\ style registry paths",
+    "post-reboot QGA launch retries until guest agent is ready",
+    "value_changed now reflects semantic registry drift instead of timestamp-only JSON differences"
+  ],
+  "next_step": "Move any remaining reboot-backed KVM orchestration onto the same QGA-first pattern and keep send-key as fallback only."
+}
