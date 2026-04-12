@@ -235,6 +235,10 @@ function Write-NormalizedTracerptBundle {
         }) | Out-Null
     }
 
+    $eventItems = @($events | ForEach-Object { $_ })
+    $eventCount = $events.Count
+    $bundleEvidenceRefs = @($CsvPath, $BundlePath)
+
     $bundle = [ordered]@{
         '$schema' = 'registry-research-framework/schemas/normalized-registry-bundle.schema.json'
         run_id = $RunId
@@ -246,10 +250,10 @@ function Write-NormalizedTracerptBundle {
         status = 'ok'
         error_kind = $null
         errors = @()
-        event_count = @($events).Count
-        filtered_event_count = @($events).Count
-        evidence_refs = @($CsvPath, $BundlePath)
-        events = @($events)
+        event_count = $eventCount
+        filtered_event_count = $eventCount
+        evidence_refs = $bundleEvidenceRefs
+        events = $eventItems
     }
 
     $bundle | ConvertTo-Json -Depth 12 | Set-Content -Path $BundlePath -Encoding UTF8
@@ -271,6 +275,7 @@ $summaryPath = Join-Path $OutputRoot 'summary.json'
 $stagePath = Join-Path $OutputRoot 'stage.json'
 $etlPath = Join-Path $OutputRoot ($OutputName + '.etl')
 $csvPath = Join-Path $OutputRoot ($OutputName + '.csv')
+$hitsCsvPath = Join-Path $OutputRoot ($OutputName + '.hits.csv')
 $hitsPath = Join-Path $OutputRoot ($OutputName + '.hits.txt')
 $normalizedBundlePath = Join-Path $OutputRoot ($OutputName + '.normalized.json')
 
@@ -302,7 +307,7 @@ function Publish-Stage {
 }
 
 if ($Stage -eq 'arm') {
-    foreach ($path in @($summaryArmPath, $summaryPath, $stagePath, $etlPath, $csvPath, $hitsPath, $normalizedBundlePath)) {
+    foreach ($path in @($summaryArmPath, $summaryPath, $stagePath, $etlPath, $csvPath, $hitsCsvPath, $hitsPath, $normalizedBundlePath)) {
         Remove-Item -Path $path -Force -ErrorAction SilentlyContinue
     }
 
@@ -408,6 +413,7 @@ $summaryPath = Join-Path $OutputRoot 'summary.json'
 $stagePath = Join-Path $OutputRoot 'stage.json'
 $etlPath = Join-Path $OutputRoot ($OutputName + '.etl')
 $csvPath = Join-Path $OutputRoot ($OutputName + '.csv')
+$hitsCsvPath = Join-Path $OutputRoot ($OutputName + '.hits.csv')
 $hitsPath = Join-Path $OutputRoot ($OutputName + '.hits.txt')
 $normalizedBundlePath = Join-Path $OutputRoot ($OutputName + '.normalized.json')
 
@@ -439,6 +445,8 @@ $summary = [ordered]@{
     normalization_status = 'missing'
     normalizer_name = 'GuestTracerptCsvRegistryNormalizer'
     normalization_errors = @()
+    hits_csv_path = $hitsCsvPath
+    hits_csv_exists = $false
     hit_line_count = 0
     fragment_hit_counts = [ordered]@{}
 }
@@ -480,10 +488,13 @@ try {
             $summary.error_kind = 'tracerpt-timeout'
             $summary.error = "tracerpt timed out after $TracerptTimeoutSeconds second(s)."
         }
-        elseif ($convertResult.exit_code -ne 0) {
+        elseif (Test-NonZeroExitCode -Result $convertResult) {
             $summary.status = 'error'
             $summary.error_kind = 'tracerpt-nonzero-exit'
             $summary.error = "tracerpt exited with code $($convertResult.exit_code)."
+        }
+        elseif ($null -eq $convertResult.exit_code) {
+            $summary.tracerpt_exit_code_indeterminate = $true
         }
         elseif (-not $summary.csv_exists) {
             $summary.status = 'error'
@@ -499,33 +510,41 @@ try {
                 }
             }
 
-            $hitLines = New-Object System.Collections.Generic.List[string]
-            $csvLineCount = 0
+            $headerLine = Get-Content -Path $csvPath -TotalCount 1 -ErrorAction SilentlyContinue
+            $hitLineSet = New-Object 'System.Collections.Generic.HashSet[string]'
             foreach ($fragment in $fragments) {
                 $summary.fragment_hit_counts[$fragment] = 0
             }
 
-            foreach ($line in Get-Content -Path $csvPath -ErrorAction SilentlyContinue) {
-                $csvLineCount++
+            foreach ($match in Select-String -Path $csvPath -Pattern @($fragments) -SimpleMatch -ErrorAction SilentlyContinue) {
+                [void]$hitLineSet.Add($match.Line)
+            }
+
+            $hitLines = New-Object System.Collections.Generic.List[string]
+            foreach ($line in $hitLineSet) {
+                $hitLines.Add($line)
                 foreach ($fragment in $fragments) {
                     if ($line -like "*$fragment*") {
                         $summary.fragment_hit_counts[$fragment]++
-                        $hitLines.Add($line)
-                        break
                     }
                 }
+            }
+
+            if (-not [string]::IsNullOrWhiteSpace($headerLine)) {
+                @($headerLine) + @($hitLines) | Set-Content -Path $hitsCsvPath -Encoding UTF8
+                $summary.hits_csv_exists = [bool](Test-Path $hitsCsvPath)
             }
 
             if ($hitLines.Count -gt 0) {
                 $hitLines | Set-Content -Path $hitsPath -Encoding UTF8
             }
-            $summary['csv_line_count'] = $csvLineCount
             $summary.hit_line_count = $hitLines.Count
             $summary['hits_path'] = $hitsPath
             $summary['hits_exists'] = [bool](Test-Path $hitsPath)
 
             try {
-                $bundle = Write-NormalizedTracerptBundle -BundlePath $normalizedBundlePath -RunId $OutputName -CsvPath $csvPath -SearchFragments @($fragments) -RegistryPath ([string]$state.registry_path) -ValueName ([string]$state.value_name)
+                $normalizerInputPath = if ($summary.hits_csv_exists) { $hitsCsvPath } else { $csvPath }
+                $bundle = Write-NormalizedTracerptBundle -BundlePath $normalizedBundlePath -RunId $OutputName -CsvPath $normalizerInputPath -SearchFragments @($fragments) -RegistryPath ([string]$state.registry_path) -ValueName ([string]$state.value_name)
                 $summary.normalized_bundle_exists = [bool](Test-Path $normalizedBundlePath)
                 $summary.normalized_result_ref = if ($summary.normalized_bundle_exists) { $normalizedBundlePath } else { $null }
                 $summary.normalization_status = [string]$bundle.status

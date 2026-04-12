@@ -24,6 +24,98 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def launch_generated_script(
+    *,
+    repo_root: Path,
+    generated_path: Path,
+    guest_launcher: str,
+    guest_scripts_root: str,
+    marker_name: str,
+    args: argparse.Namespace,
+) -> str:
+    if args.launch_transport in {"auto", "qga"}:
+        qga_cmd = [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "qga-run-powershell.py"),
+            "--domain",
+            args.domain,
+            "--connect",
+            args.connect,
+            "--script",
+            str(generated_path),
+            "--guest-dir",
+            guest_scripts_root,
+            "--no-wait",
+        ]
+        qga_result = None
+        deadline = time.time() + max(args.qga_retry_seconds, 0)
+        while True:
+            qga_result = subprocess.run(qga_cmd, cwd=str(repo_root), capture_output=True, text=True)
+            if qga_result.returncode == 0:
+                break
+            if time.time() >= deadline:
+                break
+            time.sleep(max(args.qga_retry_interval_seconds, 1))
+
+        if qga_result.returncode == 0:
+            return "qga"
+        if args.launch_transport == "qga":
+            raise subprocess.CalledProcessError(
+                qga_result.returncode,
+                qga_cmd,
+                output=qga_result.stdout,
+                stderr=qga_result.stderr,
+            )
+        sys.stderr.write(
+            f"[run-guest-wpr-boot-registry] qga launch failed, falling back to send-key transport for {args.output_name}.\n"
+        )
+        if qga_result.stdout:
+            sys.stderr.write(qga_result.stdout)
+        if qga_result.stderr:
+            sys.stderr.write(qga_result.stderr)
+
+    run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+            "--repo-root",
+            str(repo_root),
+            "--domain",
+            args.domain,
+            "--connect",
+            args.connect,
+            "--bridge-base-url",
+            args.bridge_base_url,
+            "--upload-dir",
+            str(Path(args.upload_dir).resolve()),
+            "--guest-scripts-root",
+            guest_scripts_root,
+            "--delay-ms",
+            args.delay_ms,
+            "--marker-name",
+            marker_name,
+        ],
+        cwd=repo_root,
+    )
+    run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+            args.domain,
+            "--connect",
+            args.connect,
+            "--delay-ms",
+            args.delay_ms,
+            "--wake-key",
+            args.wake_key,
+            "--enter",
+            guest_launcher,
+        ],
+        cwd=repo_root,
+    )
+    return "send-key"
+
+
 def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     deadline = time.time() + timeout_seconds
     while time.time() < deadline:
@@ -61,6 +153,11 @@ def main() -> int:
     parser.add_argument("--timeout-seconds", type=int, default=420)
     parser.add_argument("--reboot-settle-seconds", type=int, default=45)
     parser.add_argument("--host-reboot-mode", choices=["reboot", "reset"], default="reboot")
+    parser.add_argument("--qga-retry-seconds", type=int, default=90)
+    parser.add_argument("--qga-retry-interval-seconds", type=int, default=5)
+    parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
+    parser.add_argument("--wpr-timeout-seconds", type=int, default=180)
+    parser.add_argument("--tracerpt-timeout-seconds", type=int, default=180)
     parser.add_argument("--registry-path", required=True)
     parser.add_argument("--value-name", required=True)
     parser.add_argument("--output-name", required=True)
@@ -83,29 +180,7 @@ def main() -> int:
     generated_dir.mkdir(parents=True, exist_ok=True)
 
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(upload_dir),
-            "--guest-scripts-root",
-            guest_scripts_root := args.guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            f"{args.output_name}-wpr-arm-ready",
-        ],
-        cwd=repo_root,
-    )
+    guest_scripts_root = args.guest_scripts_root
 
     bridge = args.bridge_base_url.rstrip("/")
     arm_name = f"guest-wpr-boot-registry-arm-{args.output_name}.ps1"
@@ -132,27 +207,23 @@ def main() -> int:
         quote_ps(args.output_name),
         "-UploadBaseUrl",
         quote_ps(bridge),
+        "-WprTimeoutSeconds",
+        str(args.wpr_timeout_seconds),
+        "-TracerptTimeoutSeconds",
+        str(args.tracerpt_timeout_seconds),
     ]
     if args.match_fragment:
         arm_command.extend(["-MatchFragments", quote_ps_array(args.match_fragment)])
     arm_lines.append(" ".join(arm_command))
     arm_path.write_text("\n".join(arm_lines) + "\n", encoding="utf-8")
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            build_guest_launcher(guest_scripts_root, bridge, arm_name),
-        ],
-        cwd=repo_root,
+    arm_launch_transport = launch_generated_script(
+        repo_root=repo_root,
+        generated_path=arm_path,
+        guest_launcher=build_guest_launcher(guest_scripts_root, bridge, arm_name),
+        guest_scripts_root=guest_scripts_root,
+        marker_name=f"{args.output_name}-wpr-arm-ready",
+        args=args,
     )
 
     if not wait_for_file(summary_arm_path, args.prepare_timeout_seconds):
@@ -161,6 +232,7 @@ def main() -> int:
                 {
                     "summary_arm_path": str(summary_arm_path),
                     "output_name": args.output_name,
+                    "arm_launch_transport": arm_launch_transport,
                     "status": "prepare-timeout",
                 },
                 indent=2,
@@ -173,6 +245,7 @@ def main() -> int:
         payload = {
             "summary_arm_path": str(summary_arm_path),
             "output_name": args.output_name,
+            "arm_launch_transport": arm_launch_transport,
             "status": "error",
             "error_kind": summary_arm.get("error_kind"),
             "error": summary_arm.get("error"),
@@ -183,30 +256,6 @@ def main() -> int:
 
     run(["virsh", "-c", args.connect, args.host_reboot_mode, args.domain], cwd=repo_root)
     time.sleep(args.reboot_settle_seconds)
-
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(upload_dir),
-            "--guest-scripts-root",
-            guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            f"{args.output_name}-wpr-collect-ready",
-        ],
-        cwd=repo_root,
-    )
 
     state_file = rf"C:\RegProbe-Diag\wpr-boot-registry\{args.output_name}\state.json"
     collect_name = f"guest-wpr-boot-registry-collect-{args.output_name}.ps1"
@@ -222,26 +271,20 @@ def main() -> int:
         (
             f"& {quote_ps(guest_scripts_root + r'\\run-wpr-boot-registry-probe.ps1')} "
             f"-Stage collect "
-            f"-StateFile {quote_ps(state_file)}"
+            f"-StateFile {quote_ps(state_file)} "
+            f"-WprTimeoutSeconds {args.wpr_timeout_seconds} "
+            f"-TracerptTimeoutSeconds {args.tracerpt_timeout_seconds}"
         ),
     ]
     collect_path.write_text("\n".join(collect_lines) + "\n", encoding="utf-8")
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            build_guest_launcher(guest_scripts_root, bridge, collect_name),
-        ],
-        cwd=repo_root,
+    collect_launch_transport = launch_generated_script(
+        repo_root=repo_root,
+        generated_path=collect_path,
+        guest_launcher=build_guest_launcher(guest_scripts_root, bridge, collect_name),
+        guest_scripts_root=guest_scripts_root,
+        marker_name=f"{args.output_name}-wpr-collect-ready",
+        args=args,
     )
 
     deadline = time.time() + args.timeout_seconds
@@ -263,6 +306,8 @@ def main() -> int:
                 "stage_path": str(stage_path),
                 "hits_path": str(hits_path),
                 "output_name": args.output_name,
+                "arm_launch_transport": arm_launch_transport,
+                "collect_launch_transport": collect_launch_transport,
                 "status": summary.get("status", "unknown"),
                 "error_kind": summary.get("error_kind"),
                 "error": summary.get("error"),
@@ -318,6 +363,8 @@ def main() -> int:
                     "stage_path": str(stage_path),
                     "hits_path": str(hits_path),
                     "output_name": args.output_name,
+                    "arm_launch_transport": arm_launch_transport,
+                    "collect_launch_transport": collect_launch_transport,
                     "status": "error",
                     "error_kind": "wpr-stage-error",
                     "recovery_action": summary.get("recovery_action"),
@@ -337,6 +384,8 @@ def main() -> int:
             "summary_arm_path": str(summary_arm_path),
             "summary_path": str(summary_path),
             "output_name": args.output_name,
+            "arm_launch_transport": arm_launch_transport,
+            "collect_launch_transport": collect_launch_transport,
             "status": "timeout",
         },
         default_error_kind="runner-timeout",

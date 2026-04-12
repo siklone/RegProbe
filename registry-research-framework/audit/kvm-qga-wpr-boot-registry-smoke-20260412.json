@@ -1,0 +1,45 @@
+{
+  "captured_at_utc": "2026-04-12T18:39:20.0000000Z",
+  "domain": "regprobe-win11-25h2-session",
+  "wrapper_path": "scripts/vm-kvm/run-guest-wpr-boot-registry.py",
+  "guest_tool_path": "scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1",
+  "helper_path": "scripts/vm-kvm/qga-run-powershell.py",
+  "launch_transport": "qga",
+  "helper_mode": "no-wait",
+  "output_name": "hiberfilesizepercent-wpr-qga-smoke-20260412d",
+  "registry_path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "HiberFileSizePercent",
+  "summary": {
+    "status": "ok",
+    "reboot_observed": true,
+    "etl_exists": true,
+    "csv_exists": true,
+    "hits_csv_exists": true,
+    "hit_line_count": 25,
+    "normalized_bundle_exists": true,
+    "normalization_status": "ok",
+    "tracerpt_exit_code_indeterminate": true
+  },
+  "artifacts": {
+    "summary_arm_path": "/tmp/regprobe-bridge/hiberfilesizepercent-wpr-qga-smoke-20260412d-summary-arm.json",
+    "summary_path": "/tmp/regprobe-bridge/hiberfilesizepercent-wpr-qga-smoke-20260412d-summary.json",
+    "stage_path": "/tmp/regprobe-bridge/hiberfilesizepercent-wpr-qga-smoke-20260412d-stage.json",
+    "hits_path": "/tmp/regprobe-bridge/hiberfilesizepercent-wpr-qga-smoke-20260412d.hits.txt"
+  },
+  "key_observation": "The WPR boot-registry wrapper now launches, reboots, collects, converts, filters, and normalizes cleanly through QGA without foreground shell typing.",
+  "fixes": [
+    {
+      "change": "Treat tracerpt exit_code=null as indeterminate rather than fatal when CSV output exists",
+      "result": "successful tracerpt runs that return stdout-only completion no longer surface as tracerpt-nonzero-exit"
+    },
+    {
+      "change": "Build the normalized bundle from precomputed arrays and counts instead of inline @($events) expressions inside [ordered] hashtables",
+      "result": "the GuestTracerptCsvRegistryNormalizer no longer throws Argument types do not match"
+    },
+    {
+      "change": "Filter tracerpt CSV into a small hit-only CSV before normalization",
+      "result": "the guest normalizer works on a compact input set and still captures the matching registry rows"
+    }
+  ],
+  "next_step": "Use the now-stable WPR QGA lane for targeted boot-registry probes that still need runtime-trace evidence."
+}
