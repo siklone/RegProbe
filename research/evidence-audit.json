@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T14:27:56.828275Z",
+  "generated_utc": "2026-04-12T14:34:01.479076Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -23,8 +23,8 @@
       "runtime-trace": 1
     },
     "promotion_state_counts": {
-      "promoted": 247,
-      "blocked": 21
+      "promoted": 248,
+      "blocked": 20
     },
     "re_audit_required_count": 21,
     "imported_candidate_backlog": {
@@ -22802,12 +22802,10 @@
       "apply_allowed": true,
       "confidence": "medium",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "blocked",
-      "promotion_blockers": [
-        "schema-incomplete"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,

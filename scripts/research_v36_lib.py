@@ -1761,7 +1761,8 @@ def evaluate_candidate_gate(
         blocker_set.add("deprecated-record")
     if record_status == "archived" or missing_layer == "archived":
         blocker_set.add("archived")
-    if not target.get("path") or not target.get("value_name") or not target.get("value_type"):
+    value_name_present = "value_name" in target and target.get("value_name") is not None
+    if not target.get("path") or not value_name_present or not target.get("value_type"):
         blocker_set.add("schema-incomplete")
     rollback_failure_reason = str(rollback_status.get("rollback_failure_reason") or "")
     if rollback_failure_reason == "rollback-state-mismatch":

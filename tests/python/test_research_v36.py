@@ -72,6 +72,42 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["tweak_origin"], "legacy-curated")
         self.assertTrue(gate["tweak_ingest_allowed"])
 
+    def test_default_registry_value_name_is_schema_complete(self) -> None:
+        record = {
+            "record_id": "example.default-value",
+            "tweak_id": "example.default-value",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKCU\\Software\\Classes\\Example\\InprocServer32",
+                        "value_name": "",
+                        "value_type": "REG_SZ",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": True,
+                "confidence": "high",
+                "restore_default_supported": True,
+            },
+            "app_current_implementation": {
+                "status": "matches-research",
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+        audit = {"next_missing_layer": "none"}
+
+        gate = research_v36_lib.derive_promotion_state(record, audit)
+
+        self.assertEqual(gate["promotion_state"], "promoted")
+        self.assertNotIn("schema-incomplete", gate["promotion_blockers"])
+        self.assertTrue(gate["tweak_ingest_allowed"])
+
     def test_research_derived_record_stays_blocked_with_missing_layer(self) -> None:
         record = {
             "record_id": "example.blocked",
