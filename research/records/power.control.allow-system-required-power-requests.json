@@ -383,6 +383,19 @@
         "version-scope"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "analysis-power-control-allow-system-required-power-requests-decision-gate-review-20260412",
+      "kind": "analysis-output",
+      "title": "Decision gate review keeps AllowSystemRequiredPowerRequests blocked on seeding path",
+      "location": "research/notes/power-control-execution-required-decision-gate-review-20260412.md",
+      "summary": "A retained decision-gate review separates the current reader/binding evidence from the still-missing current-build registry seeding path. The value remains research-only until the unlabeled INIT walker is resolved to a named/public seeding routine or an exact runtime registry read is captured.",
+      "supports": [
+        "risk",
+        "version-scope",
+        "research-gap"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -392,9 +405,12 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is now stronger than a raw draft because it has repo-doc semantics, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, Microsoft documentation for the public hidden system-required setting family, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, a retained Ghidra reader-family corroboration, a retained soft-reboot ETW attempt, a visible UMPO override-query lineage, a timeout-setting callback disassembly, a retained timeout timer/worker chain, a retained override-response plus callback-worker follow-up that still exposed no visible `*PowerRequest*Reg*` symbol, a retained generic power-setting callback subsystem pass around `PoRegisterPowerSettingCallback`, a later current-build INIT-table binding that maps the exact value name to the KD-resolved target global, and a later host-side disassembly follow-up that statically recovers the generic init walker feeding that table. It remains decision-gated because Microsoft still does not publish the internal `Control\\\\Power\\\\AllowSystemRequiredPowerRequests` seeding path, that path is still inferred from current-build analysis, and an exact runtime registry read remains unresolved.",
+    "why": "The candidate is now stronger than a raw draft because it has repo-doc semantics, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, Microsoft documentation for the public hidden system-required setting family, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, a retained Ghidra reader-family corroboration, a retained soft-reboot ETW attempt, a visible UMPO override-query lineage, a timeout-setting callback disassembly, a retained timeout timer/worker chain, a retained override-response plus callback-worker follow-up that still exposed no visible `*PowerRequest*Reg*` symbol, a retained generic power-setting callback subsystem pass around `PoRegisterPowerSettingCallback`, a later current-build INIT-table binding that maps the exact value name to the KD-resolved target global, and a later host-side disassembly follow-up that statically recovers the generic init walker feeding that table. It remains decision-gated because Microsoft still does not publish the internal `Control\\\\Power\\\\AllowSystemRequiredPowerRequests` seeding path, that path is still inferred from current-build INIT-table/static analysis rather than resolved to a named public routine, and an exact runtime registry read remains unresolved.",
     "manual_review_required": true,
-    "blocking_issues": []
+    "blocking_issues": [
+      "no-current-build-registry-seeding-path",
+      "runtime_no_read"
+    ]
   },
   "open_questions": [
     "Can the unlabeled current-build `INIT` walker at `0x140C48AB8`, plus its wrappers at `0x140C483EF` and `0x140C48414`, be symbol-resolved or tied to a documented power-init routine?",
@@ -457,5 +473,5 @@
       "notes": "A retained KVM local-KD wildcard pass exposed `PopInitializePowerSettingCallbacks`, `PoRegisterPowerSettingCallback`, and the broader power-setting callback subsystem while `x nt!*ExecutionRequired*Setting*` still returned only `PopPowerRequestExecutionRequiredSettingCallback`."
     }
   ],
-  "last_reviewed_utc": "2026-04-12T00:49:51+03:00"
+  "last_reviewed_utc": "2026-04-12T16:09:52Z"
 }

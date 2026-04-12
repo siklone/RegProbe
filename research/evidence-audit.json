@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T15:46:32.683946Z",
+  "generated_utc": "2026-04-12T16:11:08.160293Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -24,7 +24,7 @@
       "promoted": 248,
       "blocked": 20
     },
-    "re_audit_required_count": 21,
+    "re_audit_required_count": 22,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
@@ -36,7 +36,13 @@
       "counts_by_source_tool": {},
       "counts_by_confidence": {},
       "counts_by_promotion_state": {}
-    }
+    },
+    "total": 268,
+    "promoted": 248,
+    "blocked": 20,
+    "revalidation_pending": 0,
+    "stale": 0,
+    "gate_health": "green"
   },
   "entries": [
     {
@@ -6031,7 +6037,9 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "documentation-first-review",
-        "no-primary-current-build-doc"
+        "no-current-build-registry-seeding-path",
+        "no-primary-current-build-doc",
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6060,7 +6068,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T01:03:00+03:00"
+        "last_verified_at": "2026-04-12T16:09:52Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -6075,7 +6083,7 @@
       "tweak_id": "power.control.allow-system-required-power-requests",
       "evidence_class": "B",
       "lane": "official-policy",
-      "class_ready_basis": "final-decision-gate",
+      "class_ready_basis": "pending",
       "official": true,
       "official_doc_exists": true,
       "procmon": true,
@@ -6111,11 +6119,11 @@
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "not-mapped",
@@ -6125,7 +6133,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "documentation-first-review"
+        "documentation-first-review",
+        "no-current-build-registry-seeding-path",
+        "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6154,7 +6164,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T00:49:51+03:00"
+        "last_verified_at": "2026-04-12T16:09:52Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -22841,5 +22851,26 @@
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
       "incident_ids": []
     }
-  ]
+  ],
+  "blocker_breakdown": {
+    "conditional-initialization-unproven": 1,
+    "conflicting-sources": 2,
+    "documentation-first-review": 18,
+    "intentional-ghidra-hold": 1,
+    "no-current-build-registry-seeding-path": 2,
+    "no-current-build-string-or-symbol-hit": 1,
+    "no-doc-source": 2,
+    "no-doc-source-outside-repo": 5,
+    "no-primary-current-build-doc": 3,
+    "no-runtime-proof": 15,
+    "non-default-semantics-unproven": 5,
+    "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane": 1,
+    "reboot-diff": 1,
+    "record-blocker": 12
+  },
+  "stale_records": [],
+  "conflict_records": [],
+  "missing_docs_records": [],
+  "rollback_unverified_records": [],
+  "bench_pending_records": []
 }
