@@ -4,12 +4,12 @@
   "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
   "tweak_id": "power.control.win32k-callout-watchdog-timeout-seconds",
   "record_status": "draft",
-  "summary": "Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. This is a stronger current-build lead than the bugcheck-enabled sibling, but the exact registry seeding path and non-default override semantics are still unproven.",
+  "summary": "Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. A later current-build INIT descriptor scan then found the matching value-name binding row pointing at the same live global RVA, which closes the static registry-seeding layer for the candidate. This is a stronger current-build lead than the bugcheck-enabled sibling, but the exact runtime registry read and non-default override semantics are still unproven.",
   "validation_proof": {
     "source_url": "research/notes/kernel-power-96-key-routing-20260327.md",
     "exact_quote_or_path": "research/notes/kernel-power-96-key-routing-20260327.md routes `Win32kCalloutWatchdogTimeoutSeconds` into the Control\\\\Power watchdog family, and the later KVM local-KD follow-up proves the running build consumes `nt!PopWin32kCalloutWatchdogTimeoutSeconds` in `nt!PopInvokeWin32CalloutWithWatchdog`.",
     "key_found_on_page": true,
-    "notes": "Baseline absence, an exact current-build string hit, and direct live KD proof of the consuming global establish this as a real current-build watchdog record even though the registry seeding path remains blocked."
+    "notes": "The record now has docs-first naming, live current-build KD proof for the global and consumer path, plus a current-build INIT descriptor row for the same value name. The unresolved part is exact runtime registry-read proof and whether a present override beats the built-in 30-second default."
   },
   "setting": {
     "name": "Win32k Callout Watchdog Timeout Seconds",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "This appears to be a low-level power-manager watchdog timeout for Win32k callouts. On the observed clean baseline the registry value is not configured, but the running kernel still keeps an in-memory default.",
     "why_people_change_it": "Kernel and power researchers may inspect this value when tracing Win32k callout watchdog behavior and watchdog packet timing in the power manager.",
-    "tradeoffs_overview": "The value is kernel-adjacent, not user-facing, and only partially understood. Current-build usage is real and direct, but the exact registry seeding path and safe non-default semantics are still missing.",
-    "professional_notes": "The repo docs-first power routing pass already listed `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\\\\Win32kCalloutWatchdogTimeoutSeconds` as a new candidate. A later existence-first pass on the observed clean baseline confirmed that the `Control\\\\Power` path exists while the value itself is absent. A later targeted current-build string batch found an exact Unicode hit for `Win32kCalloutWatchdogTimeoutSeconds` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD follow-up then resolved the live current-build watchdog-family cluster around `PopInvokeWin32CalloutWithWatchdog` and directly read `PopWin32kCalloutWatchdogTimeoutSeconds = 0x1e` (`30`). The same pass disassembled `PopInvokeWin32CalloutWithWatchdog` and showed a direct `imul` against the global by `1000`, followed by the watchdog packet path through `ZwPowerInformation` and the surrounding Win32 callout path. That is materially stronger than a string-only or sibling-only clue: the running kernel is actively consuming the global even though the registry value is missing on the observed baseline. The main open question is whether the registry value is an optional override on top of a built-in 30-second default, or whether a boot-only helper still seeds the same global from `Control\\\\Power` when present.",
+    "tradeoffs_overview": "The candidate now has repo routing, clean-baseline absence, exact current-build string presence, a live current-build consumer path, and a current-build INIT descriptor binding for the same global. It is still too weak for a published tweak because exact runtime registry-read proof and non-default override semantics remain unresolved.",
+    "professional_notes": "The repo docs-first power routing pass already listed `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\\\\Win32kCalloutWatchdogTimeoutSeconds` as a new candidate. A later existence-first pass on the observed clean baseline confirmed that the `Control\\\\Power` path exists while the value itself is absent. A later targeted current-build string batch found an exact Unicode hit for `Win32kCalloutWatchdogTimeoutSeconds` in `C:\\\\Windows\\\\System32\\\\ntoskrnl.exe`. A later KVM local-KD follow-up then resolved the live current-build watchdog-family cluster around `PopInvokeWin32CalloutWithWatchdog` and directly read `PopWin32kCalloutWatchdogTimeoutSeconds = 0x1e` (`30`). The same pass disassembled `PopInvokeWin32CalloutWithWatchdog` and showed a direct `imul` against the global by `1000`, followed by the watchdog packet path through `ZwPowerInformation` and the surrounding Win32 callout path. That is materially stronger than a string-only or sibling-only clue: the running kernel is actively consuming the global even though the registry value is missing on the observed baseline. The main open question is whether the registry value is an optional override on top of a built-in 30-second default, or whether a boot-only helper still seeds the same global from `Control\\\\Power` when present. A later host-side current-build INIT descriptor scan found the `Win32kCalloutWatchdogTimeoutSeconds` UTF-16 string in `ntoskrnl.exe` and one nearby row at file offset `0xbee0e8` pointing at static RVA `0xE0B518`, matching the live KD RVA for `nt!PopWin32kCalloutWatchdogTimeoutSeconds`. The nearest retained key-context string in that row family is the generic `Power` label rather than a longer decoded `Control\\Power` path, but the row/global alignment is still current-build specific and closes the static registry-seeding layer.",
     "targets": [
       {
         "target_id": "win32k-callout-watchdog-timeout-seconds",
@@ -99,7 +99,8 @@
         "repo-power-key-routing-20260327",
         "vm-power-control-win32k-callout-existence-20260329",
         "static-power-win32k-callout-string-20260331",
-        "vm-watchdog-win32k-callout-timeout-kd-20260407"
+        "vm-watchdog-win32k-callout-timeout-kd-20260407",
+        "static-power-win32k-callout-init-descriptor-20260412"
       ]
     }
   ],
@@ -155,6 +156,20 @@
         "risk"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "static-power-win32k-callout-init-descriptor-20260412",
+      "kind": "decompilation",
+      "title": "Current-build INIT descriptor binds Win32kCalloutWatchdogTimeoutSeconds to PopWin32kCalloutWatchdogTimeoutSeconds",
+      "location": "evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/init-descriptor-scan.json and evidence/files/vm-tooling-staging/kernel-timing-init-descriptor-scan-20260412/analysis-notes.md",
+      "summary": "A host-side current-build `ntoskrnl.exe` INIT descriptor scan found the `Win32kCalloutWatchdogTimeoutSeconds` UTF-16 string and one descriptor row at file offset `0xbee0e8`. The row points at static target VA `0x140E0B518`, whose RVA `0xE0B518` matches the live KD RVA for `nt!PopWin32kCalloutWatchdogTimeoutSeconds`; the nearby decoded key-context string is the generic `Power` label, which still keeps this as current-build static registry-seeding proof while leaving exact runtime registry trace evidence unresolved.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope",
+        "kernel-derivation"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -164,10 +179,9 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because the path/value clue, current-build string hit, and direct current-build caller consumption are all real. It is not ready for a validated record because the exact registry seeding path, non-default override semantics, and safe rollback behavior for a present value are still unproven.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has docs-first routing, observed baseline absence, a current-build string hit, direct live current-build KD proof that `PopInvokeWin32CalloutWithWatchdog` consumes `PopWin32kCalloutWatchdogTimeoutSeconds`, and a current-build INIT descriptor binding from the value name to the same global. It is not ready for validation because an exact runtime registry read has not been captured and non-default override semantics remain unproven.",
     "manual_review_required": true,
     "blocking_issues": [
-      "no-current-build-registry-seeding-path",
       "runtime_no_read",
       "no-doc-source",
       "non-default-semantics-unproven"
@@ -175,7 +189,7 @@
   },
   "open_questions": [
     "Does a present `REG_DWORD` override the built-in 30-second current-build default for the global?",
-    "Which power-manager helper seeds `PopWin32kCalloutWatchdogTimeoutSeconds` when the registry value is present, if any?",
+    "Can a future boot/runtime trace capture the exact registry query or descriptor-consumption path that seeds `PopWin32kCalloutWatchdogTimeoutSeconds` when the registry value is present?",
     "Does changing the value alter only the `ZwPowerInformation` watchdog packet timeout, or are there additional sibling code paths that consume the same global?"
   ],
   "tested_on": [
@@ -184,7 +198,13 @@
       "os": "Windows 11 25H2",
       "build": "26200",
       "notes": "Baseline registry state came from the clean baseline existence pass; current-build caller proof came from a later live KVM local-KD follow-up."
+    },
+    {
+      "environment": "Host-side current-build PE descriptor scan",
+      "os": "Windows 11 kernel image",
+      "build": "26100.1.amd64fre.ge_release.240331-1435",
+      "notes": "A host-side `ntoskrnl.exe` decode found a descriptor row for `Win32kCalloutWatchdogTimeoutSeconds` pointing at the same static RVA as live `nt!PopWin32kCalloutWatchdogTimeoutSeconds`."
     }
   ],
-  "last_reviewed_utc": "2026-04-07T18:52:30Z"
+  "last_reviewed_utc": "2026-04-12T04:35:00Z"
 }

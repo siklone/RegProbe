@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T04:02:40Z",
+  "generated_utc": "2026-04-12T04:08:33Z",
   "analysis_kind": "host-side-pe-init-descriptor-binding-scan",
   "binary": "/tmp/regprobe-kernel-upload/uploads/ntoskrnl.exe",
   "image_base": "0x140000000",
@@ -907,6 +907,150 @@
             "section": "INIT",
             "key_path_pointer": "0x0000000140C7A670",
             "decoded_key_path": "Session Manager\\Kernel",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
+        "candidate_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+        "live_symbol": "nt!PopWin32kCalloutWatchdogTimeoutSeconds",
+        "expected_global_rva": 14726424,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/watchdog-win32-callout-20260407a/watchdog-win32-callout-20260407a.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140E0B518",
+      "string_hits": [
+        {
+          "file_offset": "0xbf5b10",
+          "rva": "0xc7cb10",
+          "va": "0x140c7cb10",
+          "section": "INIT",
+          "string": "Win32kCalloutWatchdogTimeoutSeconds",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbee0e8",
+              "rva": "0xc750e8",
+              "va": "0x140c750e8",
+              "section": "INIT",
+              "points_to": "0x140c7cb10"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbee0e8",
+          "rva": "0xc750e8",
+          "va": "0x140c750e8",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7CB10",
+              "interpretation": "value_name_pointer",
+              "decoded": "Win32kCalloutWatchdogTimeoutSeconds"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140E0B518",
+              "interpretation": "target_global_pointer",
+              "decoded": "PopWin32kCalloutWatchdogTimeoutSeconds"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbee0e0",
+            "rva": "0xc750e0",
+            "va": "0x140c750e0",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7BB60",
+            "decoded_key_path": "Power",
+            "distance_before_row": 8
+          }
+        }
+      ],
+      "binding_found": true
+    },
+    {
+      "target": {
+        "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+        "live_symbol": "nt!PopWin32CalloutWatchdogBugcheckEnabled",
+        "expected_global_rva": 16539560,
+        "live_kd_artifact": "evidence/files/vm-tooling-staging/watchdog-win32-callout-seed-kd-20260407d/watchdog-win32-callout-seed-kd-20260407d.stdout.txt"
+      },
+      "expected_global_va": "0x0000000140FC5FA8",
+      "string_hits": [
+        {
+          "file_offset": "0xbf4a30",
+          "rva": "0xc7ba30",
+          "va": "0x140c7ba30",
+          "section": "INIT",
+          "string": "Win32CalloutWatchdogBugcheckEnabled",
+          "encoding": "utf-16-le",
+          "pointer_refs": [
+            {
+              "file_offset": "0xbeda88",
+              "rva": "0xc74a88",
+              "va": "0x140c74a88",
+              "section": "INIT",
+              "points_to": "0x140c7ba30"
+            }
+          ]
+        }
+      ],
+      "descriptor_rows": [
+        {
+          "file_offset": "0xbeda88",
+          "rva": "0xc74a88",
+          "va": "0x140c74a88",
+          "section": "INIT",
+          "fields": [
+            {
+              "offset": "+0x00",
+              "value": "0x0000000140C7BA30",
+              "interpretation": "value_name_pointer",
+              "decoded": "Win32CalloutWatchdogBugcheckEnabled"
+            },
+            {
+              "offset": "+0x08",
+              "value": "0x0000000140FC5FA8",
+              "interpretation": "target_global_pointer",
+              "decoded": "PopWin32CalloutWatchdogBugcheckEnabled"
+            },
+            {
+              "offset": "+0x10",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            },
+            {
+              "offset": "+0x18",
+              "value": "0x0000000000000000",
+              "interpretation": "reserved_or_flags"
+            }
+          ],
+          "nearest_key_context": {
+            "file_offset": "0xbeda80",
+            "rva": "0xc74a80",
+            "va": "0x140c74a80",
+            "section": "INIT",
+            "key_path_pointer": "0x0000000140C7BC90",
+            "decoded_key_path": "Session Manager\\Power",
             "distance_before_row": 8
           }
         }

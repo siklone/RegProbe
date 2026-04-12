@@ -1,6 +1,6 @@
 # Kernel Timing INIT Descriptor Scan 2026-04-12
 
-- Purpose: find current-build `ntoskrnl.exe` INIT descriptor rows that bind `Session Manager\Kernel` registry value-name strings to live KD kernel globals.
+- Purpose: find current-build `ntoskrnl.exe` INIT descriptor rows that bind selected registry value-name strings to live KD kernel globals.
 - Binary: `/tmp/regprobe-kernel-upload/uploads/ntoskrnl.exe`
 - Image base: `0x140000000`
 
@@ -29,10 +29,14 @@
   - row `0xbed1b8` / `0xc741b8`; key context `Session Manager\Kernel`
 - `DpcWatchdogProfileSingleDpcThreshold` -> `nt!KeDpcWatchdogProfileSingleDpcThresholdMs`: binding found
   - row `0xbed218` / `0xc74218`; key context `Session Manager\Kernel`
+- `Win32kCalloutWatchdogTimeoutSeconds` -> `nt!PopWin32kCalloutWatchdogTimeoutSeconds`: binding found
+  - row `0xbee0e8` / `0xc750e8`; key context `Power`
+- `Win32CalloutWatchdogBugcheckEnabled` -> `nt!PopWin32CalloutWatchdogBugcheckEnabled`: binding found
+  - row `0xbeda88` / `0xc74a88`; key context `Session Manager\Power`
 
 ## Interpretation
 
-- 12 of 12 target value-name strings are present in the current-build `INIT` section and have a 64-bit pointer reference from an INIT descriptor row.
+- 14 of 14 target value-name strings are present in the current-build `INIT` section and have a 64-bit pointer reference from an INIT descriptor row.
 - Each retained descriptor row points at the same static RVA as the live KD global captured in the earlier VM debugger bundles.
 - This strengthens the static registry-seeding/binding layer for the runtime-blocked kernel timing records.
 - It does not claim an exact runtime registry read; the post-boot ETW, unseeded boot WPR, and seeded boot WPR lanes still found no exact target value-name hit.

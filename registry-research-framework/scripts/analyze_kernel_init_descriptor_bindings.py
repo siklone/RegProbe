@@ -142,6 +142,28 @@ DEFAULT_TARGETS = [
             "dpc-watchdog-profile-thresholds-kd-20260407a.stdout.txt"
         ),
     },
+    {
+        "candidate_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+        "live_symbol": "nt!PopWin32kCalloutWatchdogTimeoutSeconds",
+        "expected_global_rva": 0xE0B518,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/watchdog-win32-callout-20260407a/"
+            "watchdog-win32-callout-20260407a.stdout.txt"
+        ),
+    },
+    {
+        "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+        "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+        "live_symbol": "nt!PopWin32CalloutWatchdogBugcheckEnabled",
+        "expected_global_rva": 0xFC5FA8,
+        "live_kd_artifact": (
+            "evidence/files/vm-tooling-staging/watchdog-win32-callout-seed-kd-20260407d/"
+            "watchdog-win32-callout-seed-kd-20260407d.stdout.txt"
+        ),
+    },
 ]
 
 
@@ -305,16 +327,43 @@ def decode_descriptor_row(image: PeImage, row_offset: int, target: dict[str, Any
     }
 
 
-def nearest_key_context(image: PeImage, row_offset: int) -> dict[str, Any] | None:
+def target_key_hints(target: dict[str, Any]) -> list[str]:
+    key_path = str(target.get("key_path") or "").replace("/", "\\")
+    parts = [part for part in key_path.split("\\") if part]
+    hints: list[str] = []
+    if not parts:
+        return hints
+
+    if len(parts) >= 2:
+        hints.append("\\".join(parts[-2:]))
+    if len(parts) >= 3:
+        hints.append("\\".join(parts[-3:]))
+    hints.append(parts[-1])
+
+    lowered = [part.lower() for part in parts]
+    for marker in ("currentcontrolset", "controlset001", "system"):
+        if marker in lowered:
+            index = lowered.index(marker)
+            tail = parts[index + 1 :]
+            if len(tail) >= 2:
+                hints.append("\\".join(tail[-2:]))
+            if tail:
+                hints.append("\\".join(tail))
+    return list(dict.fromkeys(hints))
+
+
+def nearest_key_context(image: PeImage, row_offset: int, target: dict[str, Any]) -> dict[str, Any] | None:
     candidates: list[dict[str, Any]] = []
     start = max(0, row_offset - 0x100)
+    hints = [hint.lower() for hint in target_key_hints(target)]
     for offset in range(start, row_offset, 8):
         value = image.u64(offset)
         target_file = image.va_to_file_offset(value)
         if target_file is None:
             continue
         decoded = image.read_ascii_wide(target_file)
-        if decoded and "Session Manager\\Kernel" in decoded:
+        normalized = decoded.lower()
+        if decoded and any(hint in normalized for hint in hints):
             candidates.append(
                 {
                     **image.offset_record(offset),
@@ -351,7 +400,7 @@ def analyze_target(image: PeImage, target: dict[str, Any]) -> dict[str, Any]:
             row_global = int(str(fields[1]["value"]), 16) if len(fields) > 1 else None
             if row_global != expected_global_va:
                 continue
-            key_context = nearest_key_context(image, row_offset)
+            key_context = nearest_key_context(image, row_offset, target)
             if key_context:
                 row["nearest_key_context"] = key_context
             descriptor_rows.append(row)
@@ -371,7 +420,7 @@ def write_notes(path: Path, payload: dict[str, Any]) -> None:
     lines = [
         "# Kernel Timing INIT Descriptor Scan 2026-04-12",
         "",
-        "- Purpose: find current-build `ntoskrnl.exe` INIT descriptor rows that bind `Session Manager\\Kernel` registry value-name strings to live KD kernel globals.",
+        "- Purpose: find current-build `ntoskrnl.exe` INIT descriptor rows that bind selected registry value-name strings to live KD kernel globals.",
         f"- Binary: `{payload['binary']}`",
         f"- Image base: `{payload['image_base']}`",
         "",
