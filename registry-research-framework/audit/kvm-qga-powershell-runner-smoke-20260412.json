@@ -1,0 +1,48 @@
+{
+  "captured_at_utc": "2026-04-12T17:24:56.1688700Z",
+  "domain": "regprobe-win11-25h2-session",
+  "helper_path": "scripts/vm-kvm/qga-run-powershell.py",
+  "guest_script_path": "C:\\RegProbe-Diag\\staging\\run-dpc-timer-etw-trace-guest.ps1",
+  "host_script_path": "scripts/vm/run-dpc-timer-etw-trace-guest.ps1",
+  "host_script_sha256": "30b677900ba755169266048dd611154897346ade0b422a3ed310e6b22fead05c",
+  "smoke_trace_profile": {
+    "trace_seconds": 5,
+    "upload_prefix": "qga-runner-dpc-timer-smoke-20260412",
+    "upload_base_url": "http://10.0.2.2:8766"
+  },
+  "upload": {
+    "destination": "C:\\RegProbe-Diag\\staging\\run-dpc-timer-etw-trace-guest.ps1",
+    "size_bytes": 7817,
+    "written_bytes": 7817
+  },
+  "execution": {
+    "exitcode": 0,
+    "stdout_lines": [
+      "Trace started, waiting 5 seconds...",
+      "ETL produced: C:\\regprobe-dpc-timer-etw\\dpc-timer-registry-20260412-102447_000001.etl (1040384 bytes)",
+      "XML produced: C:\\regprobe-dpc-timer-etw\\dpc-timer-registry-20260412-102447.xml (9666445 bytes)",
+      "Summary: C:\\regprobe-dpc-timer-etw\\trace-summary.json"
+    ],
+    "stderr": ""
+  },
+  "cleanup": {
+    "uploaded_script_deleted": true
+  },
+  "artifacts": {
+    "summary_path": "/tmp/regprobe-bridge/qga-runner-dpc-timer-smoke-20260412/trace-summary.json",
+    "etl_path": "/tmp/regprobe-bridge/qga-runner-dpc-timer-smoke-20260412/dpc-timer-registry.etl",
+    "etl_size_bytes": 1040384,
+    "xml_path": "/tmp/regprobe-bridge/qga-runner-dpc-timer-smoke-20260412/dpc-timer-registry.xml",
+    "xml_size_bytes": 9666445
+  },
+  "trace_summary": {
+    "status": "completed",
+    "target_hits_count": 0,
+    "tracerpt_exit_code": 0,
+    "logman_create_exit_code": 0,
+    "logman_start_exit_code": 0,
+    "logman_stop_exit_code": 0
+  },
+  "impact": "QGA now supports a full host-driven guest PowerShell lane: upload a repo script, execute it without send-key transport, and collect uploaded artifacts back through the bridge.",
+  "next_step": "Move existing guest runtime probes and bench runners onto qga-run-powershell.py so KVM automation no longer depends on foreground shell typing."
+}
