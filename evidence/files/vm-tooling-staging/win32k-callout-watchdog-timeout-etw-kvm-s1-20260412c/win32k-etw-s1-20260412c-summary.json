@@ -1,0 +1,46 @@
+﻿{
+    "generated_utc":  "2026-04-12T06:06:57.2100565Z",
+    "output_name":  "win32k-etw-s1-20260412c",
+    "registry_path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name":  "Win32kCalloutWatchdogTimeoutSeconds",
+    "trigger_profile":  "watchdog-s1-callout",
+    "status":  "no-hit",
+    "etl_path":  "C:\\RegProbe-Diag\\etw\\win32k-etw-s1-20260412c\\win32k-etw-s1-20260412c_000001.etl",
+    "etl_exists":  true,
+    "etl_size_bytes":  2867200,
+    "etl_candidates":  [
+                           {
+                               "FullName":  "C:\\RegProbe-Diag\\etw\\win32k-etw-s1-20260412c\\win32k-etw-s1-20260412c_000001.etl",
+                               "Length":  2867200,
+                               "LastWriteTimeUtc":  "\/Date(1775974014180)\/"
+                           }
+                       ],
+    "xml_path":  "C:\\RegProbe-Diag\\etw\\win32k-etw-s1-20260412c\\win32k-etw-s1-20260412c.xml",
+    "xml_exists":  true,
+    "hits_path":  "C:\\RegProbe-Diag\\etw\\win32k-etw-s1-20260412c\\win32k-etw-s1-20260412c.hits.txt",
+    "hits_count":  0,
+    "sentinel_hits_count":  50,
+    "tracerpt_timed_out":  false,
+    "tracerpt_result":  {
+                            "exit_code":  null,
+                            "timed_out":  false
+                        },
+    "registry_state_before":  {
+                                  "path_exists":  true,
+                                  "value_exists":  false,
+                                  "value":  null,
+                                  "value_type":  null,
+                                  "value_error":  "Property Win32kCalloutWatchdogTimeoutSeconds does not exist at path HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power."
+                              },
+    "registry_state_after":  {
+                                 "path_exists":  true,
+                                 "value_exists":  false,
+                                 "value":  null,
+                                 "value_type":  null,
+                                 "value_error":  "Property Win32kCalloutWatchdogTimeoutSeconds does not exist at path HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power."
+                             },
+    "error_kind":  null,
+    "error":  null,
+    "bench_environment":  "windows-11-25h2-kvm",
+    "measurement_reliability":  "runtime-etw-relative"
+}

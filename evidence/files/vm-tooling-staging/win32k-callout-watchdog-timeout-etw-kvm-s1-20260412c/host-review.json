@@ -1,0 +1,32 @@
+{
+  "generated_utc": "2026-04-12T06:08:16Z",
+  "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+  "output_name": "win32k-etw-s1-20260412c",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+  "trigger_kind": "watchdog-s1-callout",
+  "summary_source": "manual-host-review",
+  "trace_backend": "logman Microsoft-Windows-Kernel-Registry",
+  "trace_status": "no-hit",
+  "etl_exists": true,
+  "etl_size_bytes": 2867200,
+  "xml_generated_in_guest": true,
+  "tracerpt_timed_out": false,
+  "target_hits_count": 0,
+  "sentinel_hits_count": 50,
+  "host_parser_status": "parser-unavailable",
+  "host_parser_reason": "tracerpt.exe is not available in the Linux host environment; guest-side tracerpt completed successfully.",
+  "registry_state_before": {
+    "path_exists": true,
+    "value_exists": false,
+    "value": null,
+    "value_type": null
+  },
+  "registry_state_after": {
+    "path_exists": true,
+    "value_exists": false,
+    "value": null,
+    "value_type": null
+  },
+  "interpretation": "The non-Procmon S1 ETW lane produced a real 2.7 MB registry ETL and guest-side tracerpt XML. A non-target sentinel registry query appeared in the XML, proving the provider and parser path were live, but no Win32kCalloutWatchdogTimeoutSeconds or Control\\Power target hit appeared during the bounded S1 callout trigger. This does not close the runtime-read blocker; it narrows the next proof attempt toward boot-time seeding or a more targeted WPR/KD lane rather than Procmon GUI export."
+}

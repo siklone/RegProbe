@@ -1,0 +1,16 @@
+﻿OUTPUT_NAME=win32k-etw-s1-20260412c
+REGISTRY_PATH=HKLM:\SYSTEM\CurrentControlSet\Control\Power
+VALUE_NAME=Win32kCalloutWatchdogTimeoutSeconds
+REGISTRY_STATE_BEFORE={"path_exists":true,"value_exists":false,"value":null,"value_type":null,"value_error":"Property Win32kCalloutWatchdogTimeoutSeconds does not exist at path HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power."}
+LOGMAN_CREATE=The command completed successfully.
+LOGMAN_START=The command completed successfully.
+SENTINEL_REG_QUERY= | HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion |     ProductName    REG_SZ    Windows 10 Pro | 
+LOGMAN_STOP=The command completed successfully.
+REGISTRY_STATE_AFTER={"path_exists":true,"value_exists":false,"value":null,"value_type":null,"value_error":"Property Win32kCalloutWatchdogTimeoutSeconds does not exist at path HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power."}
+ETL_CANDIDATES={"FullName":"C:\\RegProbe-Diag\\etw\\win32k-etw-s1-20260412c\\win32k-etw-s1-20260412c_000001.etl","Length":2867200,"LastWriteTimeUtc":"\/Date(1775974014180)\/"}
+ETL_EXISTS=True
+ETL_SIZE_BYTES=2867200
+TRACERPT_RESULT={"exit_code":null,"timed_out":false}
+XML_EXISTS=True
+SENTINEL_HITS_COUNT=50
+HITS_COUNT=0

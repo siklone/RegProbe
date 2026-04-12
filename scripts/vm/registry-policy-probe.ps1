@@ -264,6 +264,89 @@ function Publish-ProbeStage {
     }
 }
 
+function Find-StaleProcmonBootLogs {
+    $patterns = @(
+        'C:\bootlog*.pml',
+        'C:\Windows\bootlog*.pml',
+        'C:\Tools\Sysinternals\bootlog*.pml',
+        'C:\Tools\Perf\Procmon\bootlog*.pml',
+        'C:\Users\*\bootlog*.pml',
+        'C:\Users\*\AppData\Local\Temp\bootlog*.pml'
+    )
+
+    $results = @()
+    foreach ($pattern in $patterns) {
+        try {
+            $items = Get-ChildItem -Path $pattern -Force -ErrorAction SilentlyContinue
+            foreach ($item in $items) {
+                if ($item -and $item.FullName) {
+                    $results += [pscustomobject]@{
+                        full_name = $item.FullName
+                        length = $item.Length
+                        last_write_time_utc = $item.LastWriteTimeUtc.ToString('o')
+                    }
+                }
+            }
+        }
+        catch {
+        }
+    }
+
+    return @($results | Sort-Object full_name -Unique)
+}
+
+function Clear-ProcmonBootResidue {
+    $result = [ordered]@{
+        removed_bootlog_files = @()
+        removed_registry_values = @()
+        errors = @()
+    }
+
+    foreach ($candidate in Find-StaleProcmonBootLogs) {
+        try {
+            Remove-Item -Path $candidate.full_name -Force -ErrorAction Stop
+            $result.removed_bootlog_files += [ordered]@{
+                full_name = $candidate.full_name
+                removed = $true
+            }
+        }
+        catch {
+            $result.removed_bootlog_files += [ordered]@{
+                full_name = $candidate.full_name
+                removed = $false
+                error = $_.Exception.Message
+            }
+        }
+    }
+
+    $procmonStatePath = 'HKCU:\Software\Sysinternals\Process Monitor'
+    if (Test-Path $procmonStatePath) {
+        foreach ($name in @('Logfile', 'SourcePath', 'FlightRecorder')) {
+            try {
+                $value = Get-ItemProperty -Path $procmonStatePath -Name $name -ErrorAction Stop
+                Remove-ItemProperty -Path $procmonStatePath -Name $name -ErrorAction Stop
+                $result.removed_registry_values += [ordered]@{
+                    path = $procmonStatePath
+                    name = $name
+                    previous_value = $value.$name
+                    removed = $true
+                }
+            }
+            catch [System.Management.Automation.ItemNotFoundException] {
+            }
+            catch {
+                $result.errors += [ordered]@{
+                    path = $procmonStatePath
+                    name = $name
+                    error = $_.Exception.Message
+                }
+            }
+        }
+    }
+
+    return $result
+}
+
 $effectivePrefix = New-ProbePrefix -ConfiguredPrefix $Prefix -Path $RegistryPath -Name $ValueName
 $pml = Join-Path $OutputDirectory "$effectivePrefix.pml"
 $csv = Join-Path $OutputDirectory "$effectivePrefix.csv"
@@ -290,6 +373,10 @@ try {
             Remove-Item -Path $path -Force -ErrorAction SilentlyContinue
         }
     }
+
+    Publish-ProbeStage -Stage 'procmon-cleanup-boot-residue'
+    $cleanup = Clear-ProcmonBootResidue
+    $lines.Add('PROCMON_BOOT_RESIDUE_CLEANUP=' + ($cleanup | ConvertTo-Json -Compress -Depth 6))
 
     Publish-ProbeStage -Stage 'procmon-terminate-existing'
     & $procmon -Terminate -Quiet | Out-Null

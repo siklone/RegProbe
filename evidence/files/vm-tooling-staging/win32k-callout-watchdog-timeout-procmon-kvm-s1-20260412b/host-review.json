@@ -1,0 +1,50 @@
+{
+  "generated_utc": "2026-04-12T05:50:51Z",
+  "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+  "output_name": "win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412b",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+  "trigger_kind": "watchdog-s1-callout",
+  "summary_source": "manual-host-review",
+  "launcher_stage": "invoke-wrapper",
+  "launcher_stage_status": "starting",
+  "probe_stage": "exception",
+  "probe_stage_status": "error",
+  "error_kind": "probe-stage-error",
+  "error": "System.Management.Automation.RuntimeException: Procmon SaveAs timed out after 180 second(s).",
+  "csv_exists": false,
+  "hits_csv_exists": false,
+  "normalized_bundle_exists": false,
+  "cleanup_observations": {
+    "removed_bootlog_files": [],
+    "removed_registry_values": [
+      {
+        "path": "HKCU:\\Software\\Sysinternals\\Process Monitor",
+        "name": "Logfile",
+        "previous_value": "C:\\RegProbe-Diag\\procmon\\win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a\\win32k-callout-watchdog-timeout-procmon-kvm-s1-20260412a.pml",
+        "removed": true
+      },
+      {
+        "path": "HKCU:\\Software\\Sysinternals\\Process Monitor",
+        "name": "SourcePath",
+        "previous_value": "",
+        "removed": true
+      },
+      {
+        "path": "HKCU:\\Software\\Sysinternals\\Process Monitor",
+        "name": "FlightRecorder",
+        "previous_value": 0,
+        "removed": true
+      }
+    ],
+    "errors": []
+  },
+  "modal_observations": [],
+  "interpretation": "The rerun cleared stale Procmon boot-log state before capture and reached the same dedicated KVM S1 trigger lane, but Procmon SaveAs still timed out without producing CSV or normalized hits. This narrows the remaining runtime blocker to Procmon export reliability rather than trigger selection or stale boot-log residue.",
+  "restored_state": {
+    "path_exists": true,
+    "value_exists": false,
+    "value": null,
+    "value_type": null
+  }
+}

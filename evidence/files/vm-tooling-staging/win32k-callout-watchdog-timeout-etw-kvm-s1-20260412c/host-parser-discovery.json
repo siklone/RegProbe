@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-12T06:08:16.787850Z",
+  "parser": "tracerpt",
+  "provider_guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+  "execution_context": {
+    "backend_id": "rai-linux-vm",
+    "type": "vm",
+    "os": "linux-with-vm",
+    "privilege": "elevated",
+    "isolation": "vm"
+  },
+  "etl_count": 1,
+  "inventory_summary": {
+    "total_artifacts": 1,
+    "physical_etl_count": 1,
+    "placeholder_only_count": 0,
+    "parsed_count": 0,
+    "source_counts": {
+      "unknown": 1
+    }
+  },
+  "candidate_count": 0,
+  "discarded_candidate_count": 0,
+  "appended_event_count": 0,
+  "discovery_candidates": [],
+  "discarded_candidates": [],
+  "results": [
+    {
+      "schema_version": "1.0",
+      "etl_path": "evidence/files/vm-tooling-staging/win32k-callout-watchdog-timeout-etw-kvm-s1-20260412c/win32k-etw-s1-20260412c.etl",
+      "parser": "tracerpt",
+      "provider_guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+      "status": "parser-unavailable",
+      "registry_touches": [],
+      "notes": [
+        "tracerpt.exe is not available in this environment."
+      ]
+    }
+  ]
+}
