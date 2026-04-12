@@ -51,7 +51,7 @@ Collection mode is explicit now. `evidence` is the safe default for research and
 
 VM secret handling was also tightened. Repo-tracked VM scripts no longer keep plaintext guest passwords. Credentials are resolved from explicit input first, then environment variables such as `REGPROBE_VM_GUEST_USER` and `REGPROBE_VM_GUEST_PASSWORD`, and finally from a DPAPI-protected CLIXML credential file referenced outside the repo. `vmrun` still consumes credentials at invocation time because that is a VMware CLI limitation, but the repo avoids storing or logging those secrets directly and the shared VM helper masks them in runner output.
 
-Hard runtime cases no longer stop at "reboot and idle." The current escalation path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. The current runtime note is that safe mega-trigger v2 restores cleanly and completes the full 8-trigger pilot; ETL parsing is now the part that decides whether a lane becomes classifier-grade or stays a safe pilot.
+Hard runtime cases no longer stop at "reboot and idle." The current escalation path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. The newer Wave 3 work is less a banner than a rhythm now: ETL discovery feeds the queue, feature-area enrichment and triage keep the noise down, VM safety bench results can promote only the profiles that deserve it, and hard blockers say plainly what is missing instead of hiding behind generic review language. Some lanes are still intentionally held, but they are held with reasons: exact runtime reads are missing, the VM cannot expose the right power state, or the probe is boot-unsafe without a dedicated lane.
 
 For the full validation flow, start with the [VM workflow](Docs/VM_WORKFLOW.md), [Runtime escalation](Docs/RUNTIME_ESCALATION.md), and [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md).
 
@@ -60,8 +60,8 @@ For the full validation flow, start with the [VM workflow](Docs/VM_WORKFLOW.md),
 <!-- BEGIN:RESEARCH_HEALTH -->
 | Metric | Value |
 |--------|-------|
-| Promoted | 248 |
-| Blocked | 20 |
+| Promoted | 249 |
+| Blocked | 19 |
 | Revalidation Pending | 0 |
 | Gate Health | green |
 | Schema Complete | 100% |
