@@ -1,0 +1,39 @@
+{
+  "captured_at_utc": "2026-04-12T20:20:00.0000000Z",
+  "candidate_id": "power.control.allow-system-required-power-requests",
+  "domain": "regprobe-win11-25h2-session",
+  "wrapper_path": "scripts/vm-kvm/run-guest-wpr-boot-registry.py",
+  "guest_tool_path": "scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1",
+  "download_helper_path": "scripts/vm-kvm/qga-get-file.py",
+  "launch_transport": "qga",
+  "output_name": "allow-system-required-wpr-qga-20260412a",
+  "registry_path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "AllowSystemRequiredPowerRequests",
+  "runner_result": {
+    "status": "timeout",
+    "error_kind": "runner-timeout",
+    "arm_launch_transport": "qga",
+    "collect_launch_transport": "qga",
+    "transport_blocker": "timeout"
+  },
+  "guest_artifacts": {
+    "etl_size_bytes": 1555038208,
+    "csv_size_bytes": 2973035854,
+    "hits_csv_size_bytes": 346,
+    "summary_json_size_bytes": 0,
+    "normalized_json_size_bytes": 0
+  },
+  "salvaged_hit_csv": {
+    "path": "evidence/files/vm-tooling-staging/allow-system-required-wpr-qga-no-hit-20260412/allow-system-required-wpr-qga-20260412a.hits.csv",
+    "contains_value_name": false,
+    "line_count": 1,
+    "interpretation": "header-only no-hit"
+  },
+  "cleanup": {
+    "removed_guest_wpr_directories": 5,
+    "removed_guest_trace_bytes_reported": 35773040551,
+    "free_after_bytes": 35769593856
+  },
+  "key_observation": "The QGA-launched WPR boot-registry lane reached collect/tracerpt for AllowSystemRequiredPowerRequests, but the target-specific hit CSV contained no exact value-name line. This keeps runtime_no_read open and narrows the next step toward symbolizing the INIT walker or using a smaller streamed trace.",
+  "tooling_observation": "The run produced a multi-GB ETL/CSV pair and zero-byte summary/normalized guest files under disk pressure. qga-get-file.py was added so small salvage artifacts can be downloaded through guest-file-read without relying on guest shell output."
+}
