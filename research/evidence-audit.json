@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T06:27:22.091238Z",
+  "generated_utc": "2026-04-12T14:27:56.828275Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -18,8 +18,9 @@
       "none": 248,
       "decision-gate": 16,
       "ghidra": 1,
-      "reboot-diff": 2,
-      "incident-review": 1
+      "reboot-diff": 1,
+      "incident-review": 1,
+      "runtime-trace": 1
     },
     "promotion_state_counts": {
       "promoted": 247,
@@ -18450,28 +18451,30 @@
       "ghidra_no_function_fallback": false,
       "wpr": false,
       "benchmark": false,
-      "reboot_tested": false,
+      "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "reboot-diff",
-      "cross_layer_satisfied": false,
+      "next_missing_layer": "runtime-trace",
+      "cross_layer_satisfied": true,
       "layers_used": [
-        "static_ghidra"
+        "static_ghidra",
+        "runtime_reboot"
       ],
       "tools_used": [
-        "ghidra"
+        "ghidra",
+        "reboot"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": "B",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
@@ -18486,14 +18489,14 @@
         "conditional-initialization-unproven",
         "live-defaults-conflict-docs",
         "no-doc-source-outside-repo",
-        "reboot-diff",
+        "no-runtime-proof",
         "runtime_no_read"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -18501,8 +18504,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.44,
-        "next_missing_layer": "reboot-diff"
+        "overall_score": 3.56,
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -18516,7 +18519,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T04:20:00Z"
+        "last_verified_at": "2026-04-12T14:25:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",

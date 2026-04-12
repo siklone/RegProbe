@@ -1,0 +1,40 @@
+{
+    "generated_utc":  "2026-04-12T14:22:33.4193173Z",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "provider_path":  "Registry::HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "key_exists":  true,
+    "boot_time_utc":  "2026-04-12T14:17:36.5000000Z",
+    "values":  {
+                   "DpcWatchdogProfileBufferSizeBytes":  {
+                                                             "value_name":  "DpcWatchdogProfileBufferSizeBytes",
+                                                             "value_exists":  false,
+                                                             "value_kind":  null,
+                                                             "value":  null,
+                                                             "error":  "Exception calling \"GetValueKind\" with \"1\" argument(s): \"The specified registry key does not exist.\""
+                                                         },
+                   "DpcWatchdogProfileCumulativeDpcThreshold":  {
+                                                                    "value_name":  "DpcWatchdogProfileCumulativeDpcThreshold",
+                                                                    "value_exists":  false,
+                                                                    "value_kind":  null,
+                                                                    "value":  null,
+                                                                    "error":  "Exception calling \"GetValueKind\" with \"1\" argument(s): \"The specified registry key does not exist.\""
+                                                                },
+                   "DpcWatchdogProfileOffset":  {
+                                                    "value_name":  "DpcWatchdogProfileOffset",
+                                                    "value_exists":  true,
+                                                    "value_kind":  "DWord",
+                                                    "value":  10000,
+                                                    "error":  null
+                                                },
+                   "DpcWatchdogProfileSingleDpcThreshold":  {
+                                                                "value_name":  "DpcWatchdogProfileSingleDpcThreshold",
+                                                                "value_exists":  false,
+                                                                "value_kind":  null,
+                                                                "value":  null,
+                                                                "error":  "Exception calling \"GetValueKind\" with \"1\" argument(s): \"The specified registry key does not exist.\""
+                                                            }
+               },
+    "errors":  [
+
+               ]
+}

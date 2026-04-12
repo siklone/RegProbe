@@ -1,0 +1,92 @@
+{
+  "record_id": "system.kernel-dpc-watchdog-profile-cluster",
+  "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+  "evidence_id": "vm-session-manager-kernel-dpc-watchdog-profile-reboot-observation-20260412",
+  "artifact_bundle": "evidence/files/vm-tooling-staging/dpc-watchdog-profile-cluster-reboot-kvm-20260412a",
+  "reviewed_utc": "2026-04-12T14:25:00Z",
+  "environment": {
+    "hypervisor": "KVM",
+    "guest": "Windows 11 25H2",
+    "domain": "regprobe-win11-25h2-session",
+    "transport": "KVM text plus HTTP bridge",
+    "mode": "write-free host-driven reboot observation"
+  },
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+  "observed_values": [
+    "DpcWatchdogProfileBufferSizeBytes",
+    "DpcWatchdogProfileCumulativeDpcThreshold",
+    "DpcWatchdogProfileOffset",
+    "DpcWatchdogProfileSingleDpcThreshold"
+  ],
+  "result": {
+    "reboot_observed": true,
+    "key_preserved": true,
+    "all_values_preserved": true,
+    "before_boot_time_utc": "2026-04-12T04:33:01.5000000Z",
+    "after_boot_time_utc": "2026-04-12T14:17:36.5000000Z",
+    "value_preservation": {
+      "DpcWatchdogProfileBufferSizeBytes": true,
+      "DpcWatchdogProfileCumulativeDpcThreshold": true,
+      "DpcWatchdogProfileOffset": true,
+      "DpcWatchdogProfileSingleDpcThreshold": true
+    },
+    "errors": []
+  },
+  "before_values": {
+    "DpcWatchdogProfileBufferSizeBytes": {
+      "value_exists": false,
+      "value_kind": null,
+      "value": null
+    },
+    "DpcWatchdogProfileCumulativeDpcThreshold": {
+      "value_exists": false,
+      "value_kind": null,
+      "value": null
+    },
+    "DpcWatchdogProfileOffset": {
+      "value_exists": true,
+      "value_kind": "DWord",
+      "value": 10000
+    },
+    "DpcWatchdogProfileSingleDpcThreshold": {
+      "value_exists": false,
+      "value_kind": null,
+      "value": null
+    }
+  },
+  "after_values": {
+    "DpcWatchdogProfileBufferSizeBytes": {
+      "value_exists": false,
+      "value_kind": null,
+      "value": null
+    },
+    "DpcWatchdogProfileCumulativeDpcThreshold": {
+      "value_exists": false,
+      "value_kind": null,
+      "value": null
+    },
+    "DpcWatchdogProfileOffset": {
+      "value_exists": true,
+      "value_kind": "DWord",
+      "value": 10000
+    },
+    "DpcWatchdogProfileSingleDpcThreshold": {
+      "value_exists": false,
+      "value_kind": null,
+      "value": null
+    }
+  },
+  "interpretation": "The KVM guest completed a real host-driven reboot between the before and after snapshots. The Session Manager\\Kernel key remained present and all four DPC watchdog profile registry value states were preserved exactly: DpcWatchdogProfileOffset stayed REG_DWORD 10000, while the other three profile values remained absent. This closes the record's reboot-diff observation layer for state preservation, but it does not prove an exact runtime registry read, does not identify the boot/init descriptor consumer, and does not resolve the documented-default versus current-build-live-default conflict.",
+  "limitations": [
+    "The script is intentionally write-free and did not apply candidate values.",
+    "The observation proves persistence across a reboot cycle, not the exact registry reader path.",
+    "The current live state still conflicts with repo-documented non-zero defaults for three profile values."
+  ],
+  "artifacts": {
+    "before": "dpc-watchdog-profile-cluster-reboot-kvm-20260412a-before.json",
+    "after": "dpc-watchdog-profile-cluster-reboot-kvm-20260412a-after.json",
+    "summary": "dpc-watchdog-profile-cluster-reboot-kvm-20260412a-summary.json",
+    "system_events": "dpc-watchdog-profile-cluster-reboot-kvm-20260412a-system-events.txt",
+    "screenshot": "dpc-profile-reboot-post.png"
+  }
+}
