@@ -162,9 +162,28 @@ $logText = if (Test-Path $logPath) { Get-Content -Path $logPath -Raw -ErrorActio
 $combinedText = '{0}{1}{2}' -f $logText, [Environment]::NewLine, $stdoutText
 $breakpointCommandsPresent = @($effectiveCommands | Where-Object { $_ -match '^(bp|bu)\s+' }).Count -gt 0
 $runControlRequested = @($effectiveCommands | Where-Object { $_ -match '^g(\s|$)' }).Count -gt 0
+$attached = ($combinedText -match 'Connected to Windows')
+$querySymbolSeen = ($combinedText -match [regex]::Escape($QuerySymbol))
+$status = 'ok'
+$statusError = $null
+
+if (-not $completed) {
+    $status = 'error'
+    $statusError = "kd.exe timed out after $TimeoutSeconds second(s)."
+}
+elseif (-not $attached) {
+    $status = 'error'
+    $statusError = 'Local KD did not attach to the live kernel target.'
+}
+elseif ((-not ($DebuggerCommands -and $DebuggerCommands.Count -gt 0)) -and (-not [string]::IsNullOrWhiteSpace($QuerySymbol)) -and (-not $querySymbolSeen)) {
+    $status = 'error'
+    $statusError = "Query symbol did not appear in debugger output: $QuerySymbol"
+}
 
 $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
+    status = $status
+    error = $statusError
     kd_path = $kdPath
     symchk_path = $symchkPath
     symchk_exit_code = $symchkProc.ExitCode
@@ -182,12 +201,12 @@ $summary = [ordered]@{
     run_control_requested = $runControlRequested
     completed = $completed
     exit_code = if ($completed) { $proc.ExitCode } else { $null }
-    attached = ($combinedText -match 'Connected to Windows')
+    attached = $attached
     local_kernel_disabled = ($combinedText -match 'Local kernel debugging is disabled by default')
     symbol_reload_started = ($combinedText -match 'Loading Kernel Symbols')
     breakpoint_supported = if ($breakpointCommandsPresent) { -not ($combinedText -match 'Operation not supported by current debuggee') } else { $null }
     runnable_debuggee = if ($runControlRequested) { -not ($combinedText -match 'No runnable debuggees') } else { $null }
-    query_symbol_seen = ($combinedText -match [regex]::Escape($QuerySymbol))
+    query_symbol_seen = $querySymbolSeen
     command_file_exists = [bool](Test-Path $commandFile)
     log_exists = [bool](Test-Path $logPath)
     stdout_exists = [bool](Test-Path $stdoutPath)

@@ -20,6 +20,89 @@ def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(cwd), check=True, capture_output=True, text=True)
 
 
+def launch_generated_script(
+    *,
+    repo_root: Path,
+    generated_path: Path,
+    guest_launcher: str,
+    guest_scripts_root: str,
+    output_name: str,
+    args: argparse.Namespace,
+) -> str:
+    if args.launch_transport in {"auto", "qga"}:
+        qga_cmd = [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "qga-run-powershell.py"),
+            "--domain",
+            args.domain,
+            "--connect",
+            args.connect,
+            "--script",
+            str(generated_path),
+            "--guest-dir",
+            guest_scripts_root,
+            "--no-wait",
+        ]
+        qga_result = subprocess.run(qga_cmd, cwd=str(repo_root), capture_output=True, text=True)
+        if qga_result.returncode == 0:
+            return "qga"
+        if args.launch_transport == "qga":
+            raise subprocess.CalledProcessError(
+                qga_result.returncode,
+                qga_cmd,
+                output=qga_result.stdout,
+                stderr=qga_result.stderr,
+            )
+        sys.stderr.write(
+            f"[run-guest-local-kd-smoke] qga launch failed, falling back to send-key transport for {output_name}.\n"
+        )
+        if qga_result.stdout:
+            sys.stderr.write(qga_result.stdout)
+        if qga_result.stderr:
+            sys.stderr.write(qga_result.stderr)
+
+    run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
+            "--repo-root",
+            str(repo_root),
+            "--domain",
+            args.domain,
+            "--connect",
+            args.connect,
+            "--bridge-base-url",
+            args.bridge_base_url,
+            "--upload-dir",
+            str(Path(args.upload_dir).resolve()),
+            "--guest-scripts-root",
+            guest_scripts_root,
+            "--delay-ms",
+            args.delay_ms,
+            "--marker-name",
+            f"{output_name}-admin-shell-ready",
+        ],
+        cwd=repo_root,
+    )
+    run(
+        [
+            sys.executable,
+            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
+            args.domain,
+            "--connect",
+            args.connect,
+            "--delay-ms",
+            args.delay_ms,
+            "--wake-key",
+            args.wake_key,
+            "--enter",
+            guest_launcher,
+        ],
+        cwd=repo_root,
+    )
+    return "send-key"
+
+
 def resolve_trigger_profile(profile: str) -> str:
     if profile == "uuid-rpc-com-burst":
         return """1..80 | ForEach-Object {
@@ -42,6 +125,20 @@ def resolve_trigger_profile(profile: str) -> str:
     raise ValueError(f"Unsupported trigger profile: {profile}")
 
 
+def resolve_summary_status(summary: dict[str, object]) -> str:
+    status = summary.get("status")
+    if isinstance(status, str) and status:
+        return status
+
+    attached = bool(summary.get("attached"))
+    completed = bool(summary.get("completed"))
+    used_custom_commands = bool(summary.get("used_custom_commands"))
+    query_symbol_seen = bool(summary.get("query_symbol_seen"))
+    if attached and completed and (used_custom_commands or query_symbol_seen):
+        return "ok"
+    return "unknown"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Stage and run run-local-kd-smoke.ps1 inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -60,6 +157,7 @@ def main() -> int:
     parser.add_argument("--trigger-command", default="", help="Optional PowerShell command to run while KD is attached.")
     parser.add_argument("--trigger-profile", default="", help="Optional built-in trigger profile name.")
     parser.add_argument("--trigger-delay-seconds", type=int, default=2)
+    parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -68,29 +166,7 @@ def main() -> int:
     generated_dir = repo_root / "dist" / "kvm-generated"
     generated_dir.mkdir(parents=True, exist_ok=True)
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "ensure-guest-admin-shell.py"),
-            "--repo-root",
-            str(repo_root),
-            "--domain",
-            args.domain,
-            "--connect",
-            args.connect,
-            "--bridge-base-url",
-            args.bridge_base_url,
-            "--upload-dir",
-            str(upload_dir),
-            "--guest-scripts-root",
-            guest_scripts_root := args.guest_scripts_root,
-            "--delay-ms",
-            args.delay_ms,
-            "--marker-name",
-            f"{args.output_name}-admin-shell-ready",
-        ],
-        cwd=repo_root,
-    )
+    guest_scripts_root = args.guest_scripts_root
 
     bridge = args.bridge_base_url.rstrip("/")
     generated_name = f"guest-local-kd-smoke-{args.output_name}.ps1"
@@ -147,39 +223,33 @@ def main() -> int:
         ]
     )
 
-    run(
-        [
-            sys.executable,
-            str(repo_root / "scripts" / "vm-kvm" / "type-to-guest.py"),
-            args.domain,
-            "--connect",
-            args.connect,
-            "--delay-ms",
-            args.delay_ms,
-            "--wake-key",
-            args.wake_key,
-            "--enter",
-            guest_launcher,
-        ],
-        cwd=repo_root,
+    launcher_transport = launch_generated_script(
+        repo_root=repo_root,
+        generated_path=generated_path,
+        guest_launcher=guest_launcher,
+        guest_scripts_root=guest_scripts_root,
+        output_name=args.output_name,
+        args=args,
     )
 
     deadline = time.time() + args.timeout_seconds
     while time.time() < deadline:
         if summary_path.exists():
             summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
+            summary_status = resolve_summary_status(summary)
             payload = {
                 "summary_path": str(summary_path),
                 "output_name": args.output_name,
                 "query_symbol": args.query_symbol,
-                "status": summary.get("status", "unknown"),
+                "launch_transport": launcher_transport,
+                "status": summary_status,
                 "error_kind": summary.get("error_kind"),
                 "recovery_action": summary.get("recovery_action"),
                 "transport_blocker": summary.get("transport_blocker"),
                 "guest_health": summary.get("guest_health"),
             }
             print(json.dumps(payload, indent=2))
-            return 0 if summary.get("status") != "error" else 1
+            return 0 if summary_status != "error" else 1
         time.sleep(2)
 
     timeout_summary = write_summary_contract(
@@ -188,6 +258,7 @@ def main() -> int:
             "summary_path": str(summary_path),
             "output_name": args.output_name,
             "query_symbol": args.query_symbol,
+            "launch_transport": launcher_transport,
             "status": "timeout",
         },
         default_error_kind="runner-timeout",
