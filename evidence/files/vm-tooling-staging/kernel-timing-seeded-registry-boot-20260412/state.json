@@ -1,0 +1,58 @@
+﻿{
+    "generated_utc":  "2026-04-12T03:17:50.1922497Z",
+    "output_name":  "kernel-timing-seeded-registry-boot-20260412",
+    "output_root":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "targets":  [
+                    {
+                        "Name":  "TimerCheckFlags",
+                        "Value":  1,
+                        "Type":  "DWord"
+                    },
+                    {
+                        "Name":  "ForceBugcheckForDpcWatchdog",
+                        "Value":  0,
+                        "Type":  "DWord"
+                    },
+                    {
+                        "Name":  "LongDpcQueueThreshold",
+                        "Value":  3,
+                        "Type":  "DWord"
+                    },
+                    {
+                        "Name":  "LongDpcRuntimeThreshold",
+                        "Value":  100,
+                        "Type":  "DWord"
+                    }
+                ],
+    "seed_backup":  [
+                        {
+                            "name":  "TimerCheckFlags",
+                            "was_present":  false,
+                            "kind":  null,
+                            "value":  null
+                        },
+                        {
+                            "name":  "ForceBugcheckForDpcWatchdog",
+                            "was_present":  false,
+                            "kind":  null,
+                            "value":  null
+                        },
+                        {
+                            "name":  "LongDpcQueueThreshold",
+                            "was_present":  false,
+                            "kind":  null,
+                            "value":  null
+                        },
+                        {
+                            "name":  "LongDpcRuntimeThreshold",
+                            "was_present":  false,
+                            "kind":  null,
+                            "value":  null
+                        }
+                    ],
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412\\kernel-timing-seeded-registry-boot-20260412.etl",
+    "csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412\\kernel-timing-seeded-registry-boot-20260412.csv",
+    "hits_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412\\kernel-timing-seeded-registry-boot-20260412.target-hits.txt",
+    "before_boot_time_utc":  "2026-04-12T01:53:47.5000000Z"
+}

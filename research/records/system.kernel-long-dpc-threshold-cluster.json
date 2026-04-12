@@ -315,6 +315,19 @@
         "research-gap"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-long-dpc-threshold-seeded-wpr-boot-negative-20260412",
+      "kind": "vm-test",
+      "title": "Seeded default Registry-only boot WPR still found no exact runtime read for Long-DPC thresholds",
+      "location": "evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/summary.json",
+      "summary": "A Registry-only WPR boot trace seeded `LongDpcQueueThreshold = 3` and `LongDpcRuntimeThreshold = 100` before reboot, captured a saved ETL and tracerpt CSV, then rolled both values back to their original absent state. The target exact-hit filter still returned `LongDpcQueueThreshold = 0` and `LongDpcRuntimeThreshold = 0` hits, so this is stronger negative runtime evidence and no exact runtime read proof.",
+      "supports": [
+        "runtime-gap",
+        "version-scope",
+        "rollback"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {

@@ -1,0 +1,75 @@
+﻿{
+    "stage":  "arm",
+    "output_name":  "kernel-timing-seeded-registry-boot-20260412",
+    "output_root":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "targets":  [
+                    {
+                        "Name":  "TimerCheckFlags",
+                        "Value":  1,
+                        "Type":  "DWord"
+                    },
+                    {
+                        "Name":  "ForceBugcheckForDpcWatchdog",
+                        "Value":  0,
+                        "Type":  "DWord"
+                    },
+                    {
+                        "Name":  "LongDpcQueueThreshold",
+                        "Value":  3,
+                        "Type":  "DWord"
+                    },
+                    {
+                        "Name":  "LongDpcRuntimeThreshold",
+                        "Value":  100,
+                        "Type":  "DWord"
+                    }
+                ],
+    "status":  "armed",
+    "seed_backup":  [
+                        {
+                            "name":  "TimerCheckFlags",
+                            "was_present":  false,
+                            "kind":  null,
+                            "value":  null
+                        },
+                        {
+                            "name":  "ForceBugcheckForDpcWatchdog",
+                            "was_present":  false,
+                            "kind":  null,
+                            "value":  null
+                        },
+                        {
+                            "name":  "LongDpcQueueThreshold",
+                            "was_present":  false,
+                            "kind":  null,
+                            "value":  null
+                        },
+                        {
+                            "name":  "LongDpcRuntimeThreshold",
+                            "was_present":  false,
+                            "kind":  null,
+                            "value":  null
+                        }
+                    ],
+    "cancelboot":  {
+                       "exit_code":  null,
+                       "timed_out":  false,
+                       "stdout":  "",
+                       "stderr":  "There are no trace profiles running.\r\r\n\r\n\tError code: 0xc5583000"
+                   },
+    "cancel":  {
+                   "exit_code":  null,
+                   "timed_out":  false,
+                   "stdout":  "",
+                   "stderr":  "There are no trace profiles running.\r\r\n\r\n\tError code: 0xc5583000"
+               },
+    "addboot":  {
+                    "exit_code":  null,
+                    "timed_out":  false,
+                    "stdout":  "",
+                    "stderr":  ""
+                },
+    "error":  null,
+    "generated_utc":  "2026-04-12T03:17:49.9009306Z"
+}

@@ -1,0 +1,29 @@
+# Kernel Timing Seeded Registry Boot Trace 2026-04-12
+
+- Purpose: seed the blocked Session Manager Kernel timing values with documented/default DWORDs before boot, then capture a Registry-only WPR boot trace.
+- Seeded values:
+  - `TimerCheckFlags = 1`
+  - `ForceBugcheckForDpcWatchdog = 0`
+  - `LongDpcQueueThreshold = 3`
+  - `LongDpcRuntimeThreshold = 100`
+- Arm stage:
+  - `status = armed`
+  - all four values were absent before seeding (`was_present = false`)
+- Collect stage:
+  - `status = completed`
+  - WPR saved ETL successfully
+  - tracerpt produced CSV successfully
+  - ETL size: `1844445184` bytes
+  - CSV size: `6199907209` bytes
+  - WPR reported dropped events: `75021`
+- Rollback:
+  - all four seeded values were removed/restored to the original absent state
+- Target exact-hit result:
+  - `TimerCheckFlags`: `0`
+  - `ForceBugcheckForDpcWatchdog`: `0`
+  - `LongDpcQueueThreshold`: `0`
+  - `LongDpcRuntimeThreshold`: `0`
+- Current interpretation:
+  - Seeding the documented/default values did not surface exact value-name reads for the blocked values in this WPR Registry boot trace.
+  - This is stronger negative runtime evidence than the prior absent-value boot trace because the values were present during boot and then rolled back cleanly.
+  - It still does not close `runtime_no_read`; it narrows the next lane toward KD-assisted breakpoint/probe or a lower-level registry callback capture.

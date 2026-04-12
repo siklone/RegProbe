@@ -15,6 +15,8 @@
   - followed by `QueryValue`
   - with the queried value rendered as `DefaultHeteroCpuPolicy`
 - That means the current boot WPR CSV is capable of carrying exact value-name reads for this key family.
+- A follow-up full-CSV inventory pass processed `13,113,575` CSV rows, including `3,935,161` registry rows and `732,299` `QueryValue` rows overall.
+- The same inventory pass did not produce target-associated QueryValue rows for the blocked values, and exact whole-file filtering still found no target value-name hits.
 - No exact value-name hits were found for:
   - `TimerCheckFlags`
   - `LongDpcRuntimeThreshold`

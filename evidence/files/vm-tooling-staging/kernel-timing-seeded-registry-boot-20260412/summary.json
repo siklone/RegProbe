@@ -1,0 +1,86 @@
+﻿{
+    "stage":  "collect",
+    "output_name":  "kernel-timing-seeded-registry-boot-20260412",
+    "output_root":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "targets":  [
+                    {
+                        "Name":  "TimerCheckFlags",
+                        "Value":  1,
+                        "Type":  "DWord"
+                    },
+                    {
+                        "Name":  "ForceBugcheckForDpcWatchdog",
+                        "Value":  0,
+                        "Type":  "DWord"
+                    },
+                    {
+                        "Name":  "LongDpcQueueThreshold",
+                        "Value":  3,
+                        "Type":  "DWord"
+                    },
+                    {
+                        "Name":  "LongDpcRuntimeThreshold",
+                        "Value":  100,
+                        "Type":  "DWord"
+                    }
+                ],
+    "status":  "completed",
+    "stopboot":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Press Ctrl+C to cancel the stop operation.\r\nThe trace was successfully saved.\r\n\r\nThis trace has dropped 75021 events. Please record this trace again.",
+                     "stderr":  ""
+                 },
+    "tracerpt":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Input\r\n----------------\r\nFile(s):\r\n     C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412\\kernel-timing-seeded-registry-boot-20260412.etl\r\n\n0.00%0.91%1.82%2.73%3.64%4.55%5.45%6.36%7.27%8.18%9.09%10.00%10.91%11.82%12.73%13.64%14.55%15.45%16.36%17.27%18.18%19.09%20.00%20.91%21.82%22.73%23.64%24.55%25.45%26.36%27.27%28.18%29.09%30.00%30.91%31.82%32.73%33.64%34.55%35.45%36.36%37.27%38.18%39.09%40.00%40.91%41.82%42.73%43.64%44.55%45.45%46.36%47.27%48.18%49.09%50.00%50.91%51.82%52.73%53.64%54.55%55.45%56.36%57.27%58.18%59.09%60.00%60.91%61.82%62.73%63.64%64.55%65.45%66.36%67.27%68.18%69.09%70.00%70.91%71.82%72.73%73.64%74.55%75.45%76.36%77.27%78.18%79.09%80.00%80.91%81.82%82.73%83.64%84.55%85.45%86.36%87.27%88.18%89.09%90.00%90.91%91.82%92.73%93.64%94.55%95.45%96.36%97.27%98.18%99.09%100.00%\n\r\nOutput\r\n----------------\r\nDumpFile:           C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412\\kernel-timing-seeded-registry-boot-20260412.csv\r\n\nThe command completed successfully.",
+                     "stderr":  ""
+                 },
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412\\kernel-timing-seeded-registry-boot-20260412.etl",
+    "etl_exists":  true,
+    "etl_size_bytes":  1844445184,
+    "csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412\\kernel-timing-seeded-registry-boot-20260412.csv",
+    "csv_exists":  true,
+    "csv_size_bytes":  6199907209,
+    "hits_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412\\kernel-timing-seeded-registry-boot-20260412.target-hits.txt",
+    "hits_exists":  false,
+    "hit_count":  0,
+    "target_hit_counts":  {
+                              "TimerCheckFlags":  0,
+                              "ForceBugcheckForDpcWatchdog":  0,
+                              "LongDpcQueueThreshold":  0,
+                              "LongDpcRuntimeThreshold":  0
+                          },
+    "context_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-seeded-registry-boot-20260412\\kernel-timing-seeded-registry-boot-20260412.session-manager-kernel-context.txt",
+    "restore_results":  [
+                            {
+                                "name":  "TimerCheckFlags",
+                                "status":  "restored",
+                                "original_kind":  null,
+                                "was_present":  false
+                            },
+                            {
+                                "name":  "ForceBugcheckForDpcWatchdog",
+                                "status":  "restored",
+                                "original_kind":  null,
+                                "was_present":  false
+                            },
+                            {
+                                "name":  "LongDpcQueueThreshold",
+                                "status":  "restored",
+                                "original_kind":  null,
+                                "was_present":  false
+                            },
+                            {
+                                "name":  "LongDpcRuntimeThreshold",
+                                "status":  "restored",
+                                "original_kind":  null,
+                                "was_present":  false
+                            }
+                        ],
+    "copied_to":  null,
+    "error":  null,
+    "generated_utc":  "2026-04-12T03:20:42.1034650Z"
+}

@@ -217,6 +217,19 @@
         "research-gap"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-session-manager-kernel-timer-check-flags-seeded-wpr-boot-negative-20260412",
+      "kind": "vm-test",
+      "title": "Seeded default Registry-only boot WPR still found no exact runtime read for TimerCheckFlags",
+      "location": "evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/analysis-notes.md and evidence/files/vm-tooling-staging/kernel-timing-seeded-registry-boot-20260412/summary.json",
+      "summary": "A Registry-only WPR boot trace seeded `TimerCheckFlags = 1` before reboot, captured a saved ETL and tracerpt CSV, then rolled the value back to its original absent state. The target exact-hit filter still returned `TimerCheckFlags = 0` hits, so this is stronger negative runtime evidence and no exact runtime read proof.",
+      "supports": [
+        "runtime-gap",
+        "version-scope",
+        "rollback"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
