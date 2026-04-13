@@ -31,6 +31,7 @@ metrics_publish_v36_lib = load_module("metrics_publish_v36_lib", SCRIPTS_ROOT / 
 blocked_worklist_lib = load_module("generate_blocked_worklist", FRAMEWORK_SCRIPTS / "generate_blocked_worklist.py")
 blocked_worklist_check = load_module("check_blocked_worklist", FRAMEWORK_SCRIPTS / "check_blocked_worklist.py")
 power_request_override_audit = load_module("audit_power_request_override_runtime", FRAMEWORK_SCRIPTS / "audit_power_request_override_runtime.py")
+ghidra_job_queue = load_module("generate_ghidra_job_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_job_queue.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -1780,6 +1781,45 @@ class BlockedWorklistTests(unittest.TestCase):
         self.assertEqual(focus["ghidra"]["candidate_id"], "power.top")
         self.assertEqual(focus["ghidra"]["suggested_command"], "cmd top")
         self.assertEqual(focus["ghidra"]["next_action_hint"], "hint top")
+
+
+class GhidraJobQueueTests(unittest.TestCase):
+    def test_ghidra_job_queue_only_includes_active_ghidra_items(self) -> None:
+        payload = {
+            "items": [
+                {
+                    "candidate_id": "power.keep",
+                    "next_missing_layer": "ghidra",
+                    "actionability": "active",
+                    "feature_area": "Power",
+                    "key_path": "HKLM\\System\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+                    "suggested_command": "winopt research show-blocked power.keep --json",
+                    "next_action_hint": "Resolve seeding path.",
+                },
+                {
+                    "candidate_id": "power.hold",
+                    "next_missing_layer": "ghidra",
+                    "actionability": "hold",
+                    "promotion_blockers": ["powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot"],
+                },
+                {
+                    "candidate_id": "runtime.other",
+                    "next_missing_layer": "runtime-trace",
+                    "actionability": "active",
+                    "promotion_blockers": ["timer-check-flags-wpr-boot-no-hit-current-build"],
+                },
+            ]
+        }
+
+        jobs = ghidra_job_queue.ghidra_jobs_from_worklist(payload, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertEqual(len(jobs), 1)
+        self.assertEqual(jobs[0]["candidate_id"], "power.keep")
+        self.assertEqual(jobs[0]["status"], "queued")
+        self.assertEqual(jobs[0]["job_type"], "ghidra-decompile-context")
+        self.assertEqual(jobs[0]["priority_rank"], 1)
 
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):
