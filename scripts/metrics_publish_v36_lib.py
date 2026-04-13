@@ -53,6 +53,9 @@ def normalize_blocker_name(blocker: Any) -> str:
         or "registry-etw-no-hit" in lowered
         or "etw-no-hit" in lowered
         or "procmon-saveas-timeout" in lowered
+        or "runtime-read-unresolved" in lowered
+        or "exact-runtime-read-unresolved" in lowered
+        or "megatrigger-etw-no-hit" in lowered
     ):
         return "no-runtime-proof"
     if raw == "conflicting-sources" or "conflict" in lowered:

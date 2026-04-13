@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T02:00:56.970412Z",
+  "generated_utc": "2026-04-13T02:09:42.205843Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -6039,8 +6039,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "execution-required-megatrigger-etw-no-hit-current-build",
         "no-primary-current-build-doc",
-        "runtime_no_read",
         "unlabeled-init-walker-not-symbol-resolved"
       ],
       "record_promotion_allowed": false,
@@ -6412,8 +6412,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "The current clean-baseline runtime package still does not contain an exact runtime query/read operation for this value.",
-        "The current virtualized baselines do not support hibernation, so a real hibernation trigger is not available for runtime ETW validation on these VMs.",
+        "hibernate-runtime-read-unresolved",
+        "hibernate-trigger-not-available-on-current-vm",
         "intentional-hold"
       ],
       "record_promotion_allowed": false,
@@ -7034,8 +7034,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "The current virtualized baselines do not support S0 Low Power Idle / Modern Standby, so a real DRIPS-exit trigger cannot be exercised here.",
-        "The runtime package therefore still lacks an exact runtime query/read operation for this value on the current VM baselines.",
+        "drips-exit-runtime-read-unresolved",
+        "drips-trigger-not-available-on-current-vm",
         "intentional-hold"
       ],
       "record_promotion_allowed": false,
@@ -7121,12 +7121,12 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "No primary current-build Microsoft documentation has been found for this exact value.",
-        "The current build does not yet have an exact naturally resolved consumer or registry-read path for TtmEnabled.",
-        "The current runtime lane marks TtmEnabled as boot-unsafe under DWORD 1 on the isolated pilot profile.",
         "boot-unsafe, do not probe without dedicated boot lane",
+        "boot-unsafe-on-isolated-pilot-profile",
         "intentional-hold",
-        "reboot-diff"
+        "no-primary-current-build-doc",
+        "reboot-diff",
+        "ttmenabled-reader-unresolved"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -8182,8 +8182,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "The ETL review, the Procmon boot-log review, the targeted post-boot DcomLaunch/Power trigger, the newer tools-hardened lightweight ETW S1 follow-up, and the reusable Linux KVM Procmon power-burst replay still stop short of a decisive exact live read of WatchdogResumeTimeout and WatchdogSleepTimeout.",
-        "The newer KVM local-KD follow-ups now identify the generic current-build registry helper surface, but the exact watchdog-specific caller into that helper path is still unresolved and the old fallback xref offsets no longer count as trustworthy reader-side proof."
+        "watchdog-timeouts-exact-runtime-read-unresolved",
+        "watchdog-timeouts-specific-caller-unresolved"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -22844,24 +22844,28 @@
   ],
   "blocker_breakdown": {
     "boot-unsafe, do not probe without dedicated boot lane": 1,
+    "boot-unsafe-on-isolated-pilot-profile": 1,
     "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,
+    "drips-trigger-not-available-on-current-vm": 1,
+    "hibernate-trigger-not-available-on-current-vm": 1,
     "intentional-ghidra-hold": 1,
     "intentional-hold": 5,
     "no-current-build-string-or-symbol-hit": 1,
     "no-doc-source-outside-repo": 5,
-    "no-primary-current-build-doc": 5,
-    "no-runtime-proof": 12,
+    "no-primary-current-build-doc": 6,
+    "no-runtime-proof": 15,
     "non-default-semantics-unproven": 5,
     "not-mapped-to-supported-app-surface": 2,
     "powerrequestoverride-leaf-semantics-unresolved": 1,
     "reboot-diff": 1,
-    "record-blocker": 9,
     "research-only-raw-policy-system-value": 1,
     "research-only-raw-power-manager-value": 1,
     "restore-story-unproven-subtree-presence-only": 1,
     "static-context-adjacent-not-leaf-specific": 1,
-    "unlabeled-init-walker-not-symbol-resolved": 2
+    "ttmenabled-reader-unresolved": 1,
+    "unlabeled-init-walker-not-symbol-resolved": 2,
+    "watchdog-timeouts-specific-caller-unresolved": 1
   },
   "stale_records": [],
   "conflict_records": [],

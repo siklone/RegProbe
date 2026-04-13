@@ -202,9 +202,9 @@
     "blocking_issues": [
       "intentional-hold",
       "boot-unsafe, do not probe without dedicated boot lane",
-      "The current runtime lane marks TtmEnabled as boot-unsafe under DWORD 1 on the isolated pilot profile.",
-      "No primary current-build Microsoft documentation has been found for this exact value.",
-      "The current build does not yet have an exact naturally resolved consumer or registry-read path for TtmEnabled."
+      "boot-unsafe-on-isolated-pilot-profile",
+      "no-primary-current-build-doc",
+      "ttmenabled-reader-unresolved"
     ]
   },
   "open_questions": [
