@@ -733,8 +733,9 @@ class PromotionStateTests(unittest.TestCase):
 
     def test_runtime_lane_specific_no_hit_blockers_stay_runtime_trace(self) -> None:
         for blocker in [
-            "bounded-s1-registry-etw-no-hit-current-build",
-            "procmon-saveas-timeout-on-bounded-callout-lane",
+            "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
+            "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
+            "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
             "powerwatchdog-timeout-family-runtime-read-unresolved",
             "dpc-watchdog-control-runtime-read-unresolved",
             "timer-check-flags-wpr-boot-no-hit-current-build",

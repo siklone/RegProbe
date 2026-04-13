@@ -224,7 +224,7 @@
     "why": "The candidate is strong enough for a schema-backed draft because it has docs-first routing, observed baseline absence, a current-build string hit, direct live current-build KD proof that `PopInvokeWin32CalloutWithWatchdog` consumes `PopWin32kCalloutWatchdogTimeoutSeconds`, a current-build INIT descriptor binding from the value name to the same global, a reboot-backed confirmation that the parent `Control\\Power` path persists while the value stays absent across a real guest reboot, bounded KVM S1 Procmon attempts that reached guest execution, and a non-Procmon S1 registry ETW trace with sentinel validation. It is not ready for validation because an exact runtime registry read has still not been captured, the S1 ETW lane did not see the target read, and non-default override semantics remain unproven.",
     "manual_review_required": true,
     "blocking_issues": [
-      "bounded-s1-registry-etw-no-hit-current-build",
+      "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
       "win32k-callout-watchdog-no-primary-current-build-doc",
       "win32k-callout-watchdog-override-semantics-unproven"
     ]
