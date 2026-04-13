@@ -307,23 +307,52 @@ class Program
 
         var blockedCommand = new Command("list-blocked", "List blocked candidates");
         var reasonOption = new Option<string?>("--reason", "Only show blockers matching this reason");
+        var worklistOption = new Option<bool>("--worklist", "Show the prioritized blocked worklist view");
+        var actionableOnlyOption = new Option<bool>("--actionable-only", "Only show blocked candidates that are currently actionable");
+        var laneOption = new Option<string?>("--lane", "Only show blocked candidates for a specific next-missing-layer lane");
+        var topOption = new Option<int?>("--top", "Limit the number of blocked candidates shown");
         blockedCommand.AddOption(reasonOption);
+        blockedCommand.AddOption(worklistOption);
+        blockedCommand.AddOption(actionableOnlyOption);
+        blockedCommand.AddOption(laneOption);
+        blockedCommand.AddOption(topOption);
         blockedCommand.SetHandler(context =>
         {
             var reason = context.ParseResult.GetValueForOption(reasonOption);
+            var useWorklist = context.ParseResult.GetValueForOption(worklistOption)
+                              || context.ParseResult.GetValueForOption(actionableOnlyOption)
+                              || context.ParseResult.GetValueForOption(topOption) is > 0
+                              || !string.IsNullOrWhiteSpace(context.ParseResult.GetValueForOption(laneOption));
             var catalog = new TweakPromotionGateCatalogService();
-            var entries = catalog.Catalog.Entries
-                .Where(entry => string.Equals(entry.PromotionState, "blocked", StringComparison.OrdinalIgnoreCase));
-
-            if (!string.IsNullOrWhiteSpace(reason))
+            if (useWorklist)
             {
-                entries = entries.Where(entry => entry.PromotionBlockers.Any(blocker =>
-                    blocker.Contains(reason, StringComparison.OrdinalIgnoreCase)));
+                var entries = catalog.ListBlockedWorklist(
+                    reason,
+                    context.ParseResult.GetValueForOption(laneOption),
+                    context.ParseResult.GetValueForOption(actionableOnlyOption),
+                    context.ParseResult.GetValueForOption(topOption));
+
+                foreach (var entry in entries)
+                {
+                    Console.WriteLine(
+                        $"{entry.CandidateId} [{entry.NextMissingLayer} | {entry.Actionability} | score={entry.PriorityScore}] :: {entry.NextActionHint}");
+                }
             }
-
-            foreach (var entry in entries.OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase))
+            else
             {
-                Console.WriteLine($"{entry.TweakId} [{entry.TweakOrigin}] -> {entry.PromotionState} :: {entry.GatingReason}");
+                var entries = catalog.Catalog.Entries
+                    .Where(entry => string.Equals(entry.PromotionState, "blocked", StringComparison.OrdinalIgnoreCase));
+
+                if (!string.IsNullOrWhiteSpace(reason))
+                {
+                    entries = entries.Where(entry => entry.PromotionBlockers.Any(blocker =>
+                        blocker.Contains(reason, StringComparison.OrdinalIgnoreCase)));
+                }
+
+                foreach (var entry in entries.OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine($"{entry.TweakId} [{entry.TweakOrigin}] -> {entry.PromotionState} :: {entry.GatingReason}");
+                }
             }
 
             context.ExitCode = 0;

@@ -17,6 +17,28 @@ public sealed class TweakPromotionGateCatalog
     public List<TweakPromotionGateEntry> Entries { get; set; } = new();
 }
 
+public sealed class BlockedWorklistCatalog
+{
+    public string GeneratedAt { get; set; } = string.Empty;
+    public int BlockedCount { get; set; }
+    public Dictionary<string, int> LaneCounts { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+    public List<BlockedWorklistEntry> Items { get; set; } = new();
+}
+
+public sealed class BlockedWorklistEntry
+{
+    public string CandidateId { get; set; } = string.Empty;
+    public string FeatureArea { get; set; } = string.Empty;
+    public string NextMissingLayer { get; set; } = string.Empty;
+    public string Actionability { get; set; } = string.Empty;
+    public int PriorityScore { get; set; }
+    public int BlockerCount { get; set; }
+    public List<string> PromotionBlockers { get; set; } = new();
+    public string KeyPath { get; set; } = string.Empty;
+    public string ValueName { get; set; } = string.Empty;
+    public string NextActionHint { get; set; } = string.Empty;
+}
+
 public sealed class TweakPromotionGateSummary
 {
     public int TotalRecords { get; set; }
@@ -116,11 +138,14 @@ public sealed class TweakPromotionGateEntry
 public sealed class TweakPromotionGateCatalogService
 {
     private const string CatalogPath = "research/promotion-gates.json";
+    private const string BlockedWorklistPath = "registry-research-framework/audit/blocked-worklist.json";
     private const string MutationAuditLogPath = "registry-research-framework/audit/mutation-override-audit-log.jsonl";
     private readonly string? _docsRoot;
     private readonly string? _repoRoot;
     private readonly TweakPromotionGateCatalog _catalog;
+    private readonly BlockedWorklistCatalog _blockedWorklist;
     private readonly IReadOnlyDictionary<string, TweakPromotionGateEntry> _index;
+    private readonly IReadOnlyDictionary<string, BlockedWorklistEntry> _blockedWorklistIndex;
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -136,10 +161,13 @@ public sealed class TweakPromotionGateCatalogService
             ? null
             : Directory.GetParent(_docsRoot)?.FullName;
         _catalog = LoadCatalog();
+        _blockedWorklist = LoadBlockedWorklist();
         _index = BuildIndex(_catalog.Entries);
+        _blockedWorklistIndex = BuildBlockedWorklistIndex(_blockedWorklist.Items);
     }
 
     public TweakPromotionGateCatalog Catalog => _catalog;
+    public BlockedWorklistCatalog BlockedWorklist => _blockedWorklist;
     public string? LastMutationAuditError { get; private set; }
 
     public IEnumerable<TweakPromotionGateEntry> ListBlocked(string? reason = null)
@@ -163,6 +191,60 @@ public sealed class TweakPromotionGateCatalogService
             .Where(entry => string.Equals(entry.PromotionState, "revalidation-pending", StringComparison.OrdinalIgnoreCase)
                             || (entry.FreshnessStatus?.RevalidationNeeded ?? false))
             .OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase);
+    }
+
+    public IEnumerable<BlockedWorklistEntry> ListBlockedWorklist(
+        string? reason = null,
+        string? lane = null,
+        bool actionableOnly = false,
+        int? top = null)
+    {
+        IEnumerable<BlockedWorklistEntry> entries = _blockedWorklist.Items;
+
+        if (!string.IsNullOrWhiteSpace(reason))
+        {
+            entries = entries.Where(entry => entry.PromotionBlockers.Any(blocker =>
+                blocker.Contains(reason, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        if (!string.IsNullOrWhiteSpace(lane))
+        {
+            entries = entries.Where(entry => string.Equals(entry.NextMissingLayer, lane, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (actionableOnly)
+        {
+            entries = entries.Where(entry => string.Equals(entry.Actionability, "active", StringComparison.OrdinalIgnoreCase));
+        }
+
+        entries = entries
+            .OrderByDescending(entry => entry.PriorityScore)
+            .ThenBy(entry => entry.BlockerCount)
+            .ThenBy(entry => entry.CandidateId, StringComparer.OrdinalIgnoreCase);
+
+        if (top is > 0)
+        {
+            entries = entries.Take(top.Value);
+        }
+
+        return entries;
+    }
+
+    public bool TryResolveBlockedWorklist(string candidateId, out BlockedWorklistEntry entry)
+    {
+        entry = new BlockedWorklistEntry();
+        if (string.IsNullOrWhiteSpace(candidateId))
+        {
+            return false;
+        }
+
+        if (!_blockedWorklistIndex.TryGetValue(candidateId, out var match))
+        {
+            return false;
+        }
+
+        entry = Clone(match);
+        return true;
     }
 
     public TweakMutationDecision EvaluateApplyRequest(string tweakId, bool overrideRequested = false, string? overrideReason = null, bool? contributorMode = null)
@@ -310,6 +392,26 @@ public sealed class TweakPromotionGateCatalogService
         }
     }
 
+    private BlockedWorklistCatalog LoadBlockedWorklist()
+    {
+        var path = ResolvePath(BlockedWorklistPath);
+        if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
+        {
+            return new BlockedWorklistCatalog();
+        }
+
+        try
+        {
+            var json = File.ReadAllText(path);
+            return JsonSerializer.Deserialize<BlockedWorklistCatalog>(json, JsonOptions)
+                   ?? new BlockedWorklistCatalog();
+        }
+        catch
+        {
+            return new BlockedWorklistCatalog();
+        }
+    }
+
     private static IReadOnlyDictionary<string, TweakPromotionGateEntry> BuildIndex(IEnumerable<TweakPromotionGateEntry> entries)
     {
         var index = new Dictionary<string, TweakPromotionGateEntry>(StringComparer.OrdinalIgnoreCase);
@@ -326,6 +428,20 @@ public sealed class TweakPromotionGateCatalogService
                 {
                     index[key] = entry;
                 }
+            }
+        }
+
+        return index;
+    }
+
+    private static IReadOnlyDictionary<string, BlockedWorklistEntry> BuildBlockedWorklistIndex(IEnumerable<BlockedWorklistEntry> entries)
+    {
+        var index = new Dictionary<string, BlockedWorklistEntry>(StringComparer.OrdinalIgnoreCase);
+        foreach (var entry in entries)
+        {
+            if (!string.IsNullOrWhiteSpace(entry.CandidateId) && !index.ContainsKey(entry.CandidateId))
+            {
+                index[entry.CandidateId] = entry;
             }
         }
 
@@ -384,6 +500,23 @@ public sealed class TweakPromotionGateCatalogService
                     StaleReason = entry.FreshnessStatus.StaleReason,
                     LastKnownGoodBuild = entry.FreshnessStatus.LastKnownGoodBuild,
                 },
+        };
+    }
+
+    private static BlockedWorklistEntry Clone(BlockedWorklistEntry entry)
+    {
+        return new BlockedWorklistEntry
+        {
+            CandidateId = entry.CandidateId,
+            FeatureArea = entry.FeatureArea,
+            NextMissingLayer = entry.NextMissingLayer,
+            Actionability = entry.Actionability,
+            PriorityScore = entry.PriorityScore,
+            BlockerCount = entry.BlockerCount,
+            PromotionBlockers = entry.PromotionBlockers.ToList(),
+            KeyPath = entry.KeyPath,
+            ValueName = entry.ValueName,
+            NextActionHint = entry.NextActionHint,
         };
     }
 

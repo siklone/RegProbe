@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using RegProbe.App.Services;
 
 namespace RegProbe.Tests;
@@ -14,6 +15,7 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         _rootDirectory = Path.Combine(Path.GetTempPath(), "RegProbe-PromotionGateTests", Guid.NewGuid().ToString("N"));
         _docsRoot = Path.Combine(_rootDirectory, "Docs");
         Directory.CreateDirectory(Path.Combine(_docsRoot, "research"));
+        Directory.CreateDirectory(Path.Combine(_rootDirectory, "registry-research-framework", "audit"));
 
         File.WriteAllText(
             Path.Combine(_docsRoot, "research", "promotion-gates.json"),
@@ -91,6 +93,50 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
               ]
             }
             """);
+
+        File.WriteAllText(
+            Path.Combine(_rootDirectory, "registry-research-framework", "audit", "blocked-worklist.json"),
+            """
+            {
+              "generated_at": "2026-04-13T04:00:00Z",
+              "blocked_count": 2,
+              "lane_counts": {
+                "ghidra": 1,
+                "intentional-hold": 1
+              },
+              "items": [
+                {
+                  "candidate_id": "power.test-gate",
+                  "feature_area": "Power",
+                  "next_missing_layer": "ghidra",
+                  "actionability": "active",
+                  "priority_score": 33,
+                  "blocker_count": 2,
+                  "promotion_blockers": [
+                    "power-test-runtime-read-unresolved",
+                    "power-test-specific-caller-unresolved"
+                  ],
+                  "key_path": "HKLM\\\\Software\\\\Example",
+                  "value_name": "Enabled",
+                  "next_action_hint": "Continue static RE."
+                },
+                {
+                  "candidate_id": "power.intentional-hold",
+                  "feature_area": "Power",
+                  "next_missing_layer": "intentional-hold",
+                  "actionability": "hold",
+                  "priority_score": 10,
+                  "blocker_count": 1,
+                  "promotion_blockers": [
+                    "power-hold-trigger-not-available"
+                  ],
+                  "key_path": "HKLM\\\\Software\\\\Hold",
+                  "value_name": "Enabled",
+                  "next_action_hint": "Wait for a safer lane."
+                }
+              ]
+            }
+            """);
     }
 
     [Fact]
@@ -155,6 +201,20 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
 
         Assert.NotNull(consumer.LastAppliedGate);
         Assert.Equal("blocked", consumer.LastAppliedGate!.PromotionState);
+    }
+
+    [Fact]
+    public void BlockedWorklist_LoadsAndFiltersActionableEntries()
+    {
+        var service = new TweakPromotionGateCatalogService(_docsRoot);
+
+        var actionable = service.ListBlockedWorklist(actionableOnly: true, top: 1).ToList();
+
+        Assert.Single(actionable);
+        Assert.Equal("power.test-gate", actionable[0].CandidateId);
+        Assert.Equal("active", actionable[0].Actionability);
+        Assert.True(service.TryResolveBlockedWorklist("power.test-gate", out var entry));
+        Assert.Equal(33, entry.PriorityScore);
     }
 
     public void Dispose()
