@@ -871,6 +871,43 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["next_missing_layer"], "ghidra")
         self.assertIn("no-current-build-string-or-symbol-hit", gate["promotion_blockers"])
 
+    def test_specific_ghidra_blockers_stay_ghidra(self) -> None:
+        for blocker in [
+            "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
+            "powerrequestoverride-static-context-adjacent-not-leaf-specific",
+            "dpc-watchdog-profile-conditional-initialization-unproven",
+        ]:
+            record = {
+                "record_id": f"example.{blocker}",
+                "tweak_id": f"example.{blocker}",
+                "record_status": "validated",
+                "setting": {
+                    "area": "Example",
+                    "targets": [
+                        {
+                            "path": "HKLM\\Software\\Example",
+                            "value_name": "Enabled",
+                            "value_type": "REG_DWORD",
+                        }
+                    ],
+                },
+                "decision": {
+                    "apply_allowed": False,
+                    "confidence": "medium",
+                    "restore_default_supported": True,
+                    "blocking_issues": [blocker],
+                },
+                "validation_proof": {
+                    "source_url": "Docs/example.md",
+                    "exact_quote_or_path": "Docs/example.md:1",
+                },
+            }
+
+            gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
+
+            self.assertEqual(gate["next_missing_layer"], "ghidra")
+            self.assertIn(blocker, gate["promotion_blockers"])
+
     def test_specific_hold_blockers_map_to_intentional_hold_lane_without_generic_tag(self) -> None:
         for blocker in [
             "research-only-raw-policy-system-value",

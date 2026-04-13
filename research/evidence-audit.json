@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T03:19:35.294298Z",
+  "generated_utc": "2026-04-13T03:21:05.403685Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -6849,8 +6849,8 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "powerrequestoverride-leaf-semantics-unresolved",
-        "restore-story-unproven-subtree-presence-only",
-        "static-context-adjacent-not-leaf-specific"
+        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
+        "restore-story-unproven-subtree-presence-only"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6931,7 +6931,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-current-build-string-or-symbol-hit",
+        "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
         "powerwatchdog-timeout-family-no-primary-current-build-doc",
         "powerwatchdog-timeout-family-runtime-read-unresolved"
       ],
@@ -18476,7 +18476,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "conditional-initialization-unproven",
+        "dpc-watchdog-profile-conditional-initialization-unproven",
         "dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs",
         "dpc-watchdog-profile-no-primary-current-build-doc",
         "dpc-watchdog-profile-wpr-boot-no-hit-current-build"
@@ -22832,20 +22832,20 @@
   "blocker_breakdown": {
     "boot-unsafe-dedicated-boot-lane-required": 1,
     "boot-unsafe-on-isolated-pilot-profile": 1,
-    "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,
+    "dpc-watchdog-profile-conditional-initialization-unproven": 1,
     "drips-trigger-not-available-on-current-vm": 1,
     "execution-required-init-walker-not-symbol-resolved": 2,
     "force-bugcheck-for-dpc-watchdog-semantics-unproven": 1,
     "hibernate-trigger-not-available-on-current-vm": 1,
-    "no-current-build-string-or-symbol-hit": 1,
     "no-primary-current-build-doc": 11,
     "no-runtime-proof": 13,
     "powerrequestoverride-leaf-semantics-unresolved": 1,
+    "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
+    "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit": 1,
     "research-only-raw-policy-system-value": 1,
     "research-only-raw-power-manager-value": 1,
     "restore-story-unproven-subtree-presence-only": 1,
-    "static-context-adjacent-not-leaf-specific": 1,
     "timer-check-flags-modern-bit-semantics-unproven": 1,
     "ttmenabled-reader-unresolved": 1,
     "watchdog-timeouts-specific-caller-unresolved": 1,
