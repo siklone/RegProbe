@@ -285,7 +285,7 @@
     "manual_review_required": true,
     "blocking_issues": [
       "runtime_no_read",
-      "no-doc-source",
+      "no-primary-current-build-doc",
       "non-default-semantics-unproven"
     ]
   },
@@ -308,5 +308,5 @@
       "notes": "A host-side `ntoskrnl.exe` decode found a `Session Manager\\Power` descriptor row for `Win32CalloutWatchdogBugcheckEnabled` pointing at the same static RVA as live `nt!PopWin32CalloutWatchdogBugcheckEnabled`."
     }
   ],
-  "last_reviewed_utc": "2026-04-12T06:20:45Z"
+  "last_reviewed_utc": "2026-04-13T01:19:00Z"
 }
