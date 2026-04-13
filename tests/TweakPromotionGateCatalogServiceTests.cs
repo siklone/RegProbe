@@ -100,6 +100,10 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
             {
               "generated_at": "2026-04-13T04:00:00Z",
               "blocked_count": 2,
+              "actionability_counts": {
+                "active": 1,
+                "hold": 1
+              },
               "lane_counts": {
                 "ghidra": 1,
                 "intentional-hold": 1
@@ -118,6 +122,9 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
               },
               "top_actionable_candidates": [
                 "power.test-gate"
+              ],
+              "top_hold_candidates": [
+                "power.intentional-hold"
               ],
               "items": [
                 {
@@ -236,7 +243,9 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         Assert.Equal("active", actionable[0].Actionability);
         Assert.Single(actionable[0].RecentAuditArtifacts);
         Assert.Equal("winopt research show-blocked power.test-gate --json", actionable[0].SuggestedCommand);
+        Assert.Equal(1, service.BlockedWorklist.ActionabilityCounts["active"]);
         Assert.Single(service.BlockedWorklist.TopActionableCandidates);
+        Assert.Single(service.BlockedWorklist.TopHoldCandidates);
         Assert.True(service.BlockedWorklist.LaneFocus.ContainsKey("ghidra"));
         Assert.True(service.TryResolveBlockedWorklist("power.test-gate", out var entry));
         Assert.Equal(33, entry.PriorityScore);

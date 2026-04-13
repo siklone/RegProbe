@@ -1,15 +1,20 @@
 # Blocked Worklist
 
-Generated: `2026-04-13T05:18:24.686386Z`
+Generated: `2026-04-13T05:23:16.700670Z`
 
 Blocked candidates: `18`
 
+## Actionability
+
+- `active`: 13
+- `hold`: 5
+
 ## Lane Summary
 
-- `ghidra`: 5 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static RE or Ghidra work until the exact reader or initializer is named.
-- `intentional-hold`: 5 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 - `restore-story`: 1 | first: `power.control.power-request-override-subtree` | `winopt research list-blocked --worklist --lane restore-story --top 5` | Prove restore or rollback behavior for the exact subtree or value.
+- `ghidra`: 5 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static RE or Ghidra work until the exact reader or initializer is named.
 - `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
+- `intentional-hold`: 5 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
@@ -18,6 +23,14 @@ Blocked candidates: `18`
 - `power.session-watchdog-timeouts` (`ghidra`, score=33, blockers=2)
 - `power.control.allow-audio-to-enable-execution-required-power-requests` (`ghidra`, score=32, blockers=3)
 - `power.control.power-watchdog-timeout-cluster` (`ghidra`, score=32, blockers=3)
+
+## Top Holds
+
+- `policy.system.enable-virtualization` (`intentional-hold`, score=9, blockers=1)
+- `power.control.hiber-file-size-percent` (`intentional-hold`, score=9, blockers=1)
+- `power.control.hibernate-enabled-default` (`intentional-hold`, score=9, blockers=1)
+- `power.control.timer-rebase-threshold-on-drips-exit` (`intentional-hold`, score=9, blockers=1)
+- `power.control.ttm-enabled` (`intentional-hold`, score=6, blockers=4)
 
 ## Candidates
 

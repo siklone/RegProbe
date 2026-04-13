@@ -12,6 +12,10 @@
     "restore-story": 1,
     "runtime-trace": 7
   },
+  "blocked_actionability_counts": {
+    "active": 13,
+    "hold": 5
+  },
   "top_actionable_blocked_candidates": [
     "power.control.power-request-override-subtree",
     "power.control.allow-system-required-power-requests",
@@ -19,7 +23,14 @@
     "power.control.allow-audio-to-enable-execution-required-power-requests",
     "power.control.power-watchdog-timeout-cluster"
   ],
-  "generated_at": "2026-04-13T05:18:24.118258Z",
+  "top_hold_blocked_candidates": [
+    "policy.system.enable-virtualization",
+    "power.control.hiber-file-size-percent",
+    "power.control.hibernate-enabled-default",
+    "power.control.timer-rebase-threshold-on-drips-exit",
+    "power.control.ttm-enabled"
+  ],
+  "generated_at": "2026-04-13T05:23:16.177835Z",
   "blocked_worklist_json": "registry-research-framework/audit/blocked-worklist.json",
   "blocked_worklist_markdown": "registry-research-framework/audit/blocked-worklist.md"
 }

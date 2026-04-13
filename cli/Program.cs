@@ -390,9 +390,11 @@ class Program
                     {
                         catalog.BlockedWorklist.GeneratedAt,
                         catalog.BlockedWorklist.BlockedCount,
+                        ActionabilityCounts = catalog.BlockedWorklist.ActionabilityCounts,
                         LaneCounts = catalog.BlockedWorklist.LaneCounts,
                         LaneFocus = catalog.BlockedWorklist.LaneFocus,
                         TopActionableCandidates = catalog.BlockedWorklist.TopActionableCandidates,
+                        TopHoldCandidates = catalog.BlockedWorklist.TopHoldCandidates,
                     };
 
                     if (emitJson)
@@ -402,6 +404,10 @@ class Program
                     else
                     {
                         Console.WriteLine($"Blocked candidates: {catalog.BlockedWorklist.BlockedCount}");
+                        foreach (var pair in catalog.BlockedWorklist.ActionabilityCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine($"{pair.Key}: {pair.Value}");
+                        }
                         foreach (var pair in catalog.BlockedWorklist.LaneCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
                         {
                             if (catalog.BlockedWorklist.LaneFocus.TryGetValue(pair.Key, out var laneFocus)
@@ -426,6 +432,14 @@ class Program
                         {
                             Console.WriteLine("Top actionable:");
                             foreach (var candidateId in catalog.BlockedWorklist.TopActionableCandidates)
+                            {
+                                Console.WriteLine($"  {candidateId}");
+                            }
+                        }
+                        if (catalog.BlockedWorklist.TopHoldCandidates.Count > 0)
+                        {
+                            Console.WriteLine("Top holds:");
+                            foreach (var candidateId in catalog.BlockedWorklist.TopHoldCandidates)
                             {
                                 Console.WriteLine($"  {candidateId}");
                             }

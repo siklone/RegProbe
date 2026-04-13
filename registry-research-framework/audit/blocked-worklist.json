@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-13T05:18:24.686386Z",
+  "generated_at": "2026-04-13T05:23:16.700670Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 5,
@@ -7,11 +7,21 @@
     "restore-story": 1,
     "runtime-trace": 7
   },
+  "actionability_counts": {
+    "active": 13,
+    "hold": 5
+  },
+  "ordered_lanes": [
+    "restore-story",
+    "ghidra",
+    "runtime-trace",
+    "intentional-hold"
+  ],
   "lane_suggested_commands": {
-    "ghidra": "winopt research list-blocked --worklist --lane ghidra --top 5",
-    "intentional-hold": "winopt research list-blocked --worklist --lane intentional-hold",
     "restore-story": "winopt research list-blocked --worklist --lane restore-story --top 5",
-    "runtime-trace": "winopt research list-blocked --worklist --lane runtime-trace --top 5"
+    "ghidra": "winopt research list-blocked --worklist --lane ghidra --top 5",
+    "runtime-trace": "winopt research list-blocked --worklist --lane runtime-trace --top 5",
+    "intentional-hold": "winopt research list-blocked --worklist --lane intentional-hold"
   },
   "lane_focus": {
     "restore-story": {
@@ -41,6 +51,13 @@
     "power.session-watchdog-timeouts",
     "power.control.allow-audio-to-enable-execution-required-power-requests",
     "power.control.power-watchdog-timeout-cluster"
+  ],
+  "top_hold_candidates": [
+    "policy.system.enable-virtualization",
+    "power.control.hiber-file-size-percent",
+    "power.control.hibernate-enabled-default",
+    "power.control.timer-rebase-threshold-on-drips-exit",
+    "power.control.ttm-enabled"
   ],
   "items": [
     {

@@ -1587,9 +1587,12 @@ class BlockedWorklistTests(unittest.TestCase):
 
         self.assertGreaterEqual(int(payload.get("blocked_count") or 0), 1)
         self.assertIsInstance(payload.get("top_actionable_candidates"), list)
+        self.assertIsInstance(payload.get("top_hold_candidates"), list)
+        self.assertIsInstance(payload.get("actionability_counts"), dict)
         self.assertIsInstance(payload.get("lane_suggested_commands"), dict)
         self.assertIsInstance(payload.get("lane_focus"), dict)
         self.assertLessEqual(len(payload.get("top_actionable_candidates") or []), 5)
+        self.assertLessEqual(len(payload.get("top_hold_candidates") or []), 5)
         self.assertEqual(
             sum(int(value) for value in (payload.get("lane_counts") or {}).values()),
             int(payload.get("blocked_count") or 0),
@@ -1636,7 +1639,9 @@ class BlockedWorklistTests(unittest.TestCase):
         )
 
         self.assertEqual(payload["blocked_lane_counts"], {"ghidra": 5, "runtime-trace": 7})
+        self.assertEqual(payload["blocked_actionability_counts"], {"active": 2, "hold": 1})
         self.assertEqual(payload["top_actionable_blocked_candidates"], ["a", "c"])
+        self.assertEqual(payload["top_hold_blocked_candidates"], ["b"])
 
     def test_candidate_slug_tokens_prioritize_specific_prefixes(self) -> None:
         tokens = blocked_worklist_lib.candidate_slug_tokens("power.control.allow-system-required-power-requests")

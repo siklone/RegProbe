@@ -294,6 +294,21 @@ def build_publish_metrics(
         for item in (blocked_worklist.get("items") or [])
         if str(item.get("actionability") or "") == "active"
     ][:5]
+    top_holds = [
+        str(item.get("candidate_id") or "")
+        for item in (blocked_worklist.get("items") or [])
+        if str(item.get("actionability") or "") == "hold"
+    ][:5]
+    actionability_counts = dict(blocked_worklist.get("actionability_counts") or {})
+    if not actionability_counts:
+        actionability_counts = dict(
+            sorted(
+                Counter(
+                    str(item.get("actionability") or "unknown")
+                    for item in (blocked_worklist.get("items") or [])
+                ).items()
+            )
+        )
 
     return {
         "promoted_candidate_count": int((gate_payload.get("summary") or {}).get("promotion_state_counts", {}).get("promoted") or 0),
@@ -304,7 +319,9 @@ def build_publish_metrics(
         "bench_safety_summary": f"{len(bench_pending)} bench-pending, {int(gate_metrics.get('bench_not_run_count') or 0)} blocker-counted",
         "verification_health_summary": f"gate={health}, schema_complete_ratio={gate_metrics.get('schema_complete_ratio')}, missing_docs={int(validation_summary.get('missing_docs_count') or 0)}",
         "blocked_lane_counts": dict(blocked_worklist.get("lane_counts") or {}),
+        "blocked_actionability_counts": actionability_counts,
         "top_actionable_blocked_candidates": top_actionable,
+        "top_hold_blocked_candidates": top_holds,
         "generated_at": generated_at,
     }
 

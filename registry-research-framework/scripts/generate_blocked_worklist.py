@@ -80,6 +80,13 @@ def lane_suggested_command_for(lane: str) -> str:
     return f"winopt research list-blocked --worklist --lane {lane}"
 
 
+def ordered_lanes(lanes: list[str]) -> list[str]:
+    return sorted(
+        lanes,
+        key=lambda lane: (-int(LANE_PRIORITY.get(lane, 0)), str(lane)),
+    )
+
+
 def lane_focus_for(items: list[dict[str, Any]]) -> dict[str, dict[str, str]]:
     focus: dict[str, dict[str, str]] = {}
     for item in items:
@@ -222,22 +229,36 @@ def build_worklist() -> dict[str, Any]:
         )
     )
 
+    actionability_counts = dict(
+        sorted(
+            Counter(str(item.get("actionability") or "unknown") for item in items).items()
+        )
+    )
     top_actionable_candidates = [
         str(item.get("candidate_id") or "")
         for item in items
         if str(item.get("actionability") or "") == "active"
     ][:5]
+    top_hold_candidates = [
+        str(item.get("candidate_id") or "")
+        for item in items
+        if str(item.get("actionability") or "") == "hold"
+    ][:5]
+    sorted_lanes = ordered_lanes(list(lane_counts))
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "blocked_count": len(items),
         "lane_counts": dict(sorted(lane_counts.items())),
+        "actionability_counts": actionability_counts,
+        "ordered_lanes": sorted_lanes,
         "lane_suggested_commands": {
             lane: lane_suggested_command_for(lane)
-            for lane in sorted(lane_counts)
+            for lane in sorted_lanes
         },
         "lane_focus": lane_focus_for(items),
         "top_actionable_candidates": top_actionable_candidates,
+        "top_hold_candidates": top_hold_candidates,
         "items": items,
     }
 
@@ -250,10 +271,20 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
         f"Blocked candidates: `{payload.get('blocked_count')}`",
         "",
-        "## Lane Summary",
+        "## Actionability",
         "",
     ]
-    for lane, count in (payload.get("lane_counts") or {}).items():
+    for label, count in (payload.get("actionability_counts") or {}).items():
+        lines.append(f"- `{label}`: {count}")
+
+    lines.extend([
+        "",
+        "## Lane Summary",
+        "",
+    ])
+    lane_counts = payload.get("lane_counts") or {}
+    for lane in payload.get("ordered_lanes") or list(lane_counts.keys()):
+        count = int(lane_counts.get(lane) or 0)
         lane_command = (payload.get("lane_suggested_commands") or {}).get(lane)
         lane_focus = (payload.get("lane_focus") or {}).get(lane) or {}
         lane_target = str(lane_focus.get("candidate_id") or "")
@@ -271,6 +302,14 @@ def render_markdown(payload: dict[str, Any]) -> str:
     if actionable:
         lines.extend(["", "## Top Actionable Candidates", ""])
         for item in actionable:
+            lines.append(
+                f"- `{item['candidate_id']}` (`{item['next_missing_layer']}`, score={item['priority_score']}, blockers={item['blocker_count']})"
+            )
+
+    holds = [item for item in (payload.get("items") or []) if item.get("actionability") == "hold"][:5]
+    if holds:
+        lines.extend(["", "## Top Holds", ""])
+        for item in holds:
             lines.append(
                 f"- `{item['candidate_id']}` (`{item['next_missing_layer']}`, score={item['priority_score']}, blockers={item['blocker_count']})"
             )
