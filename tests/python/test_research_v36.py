@@ -33,6 +33,7 @@ blocked_worklist_check = load_module("check_blocked_worklist", FRAMEWORK_SCRIPTS
 power_request_override_audit = load_module("audit_power_request_override_runtime", FRAMEWORK_SCRIPTS / "audit_power_request_override_runtime.py")
 ghidra_job_queue = load_module("generate_ghidra_job_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_job_queue.py")
 ghidra_dispatch_batch = load_module("generate_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_dispatch_batch.py")
+ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "run_ghidra_dispatch_batch.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -1856,6 +1857,7 @@ class GhidraDispatchBatchTests(unittest.TestCase):
         self.assertEqual(payload["jobs"][0]["target_binary"], "ntoskrnl.exe")
         self.assertEqual(payload["jobs"][0]["analysis_mode"], "registry-string-xref")
         self.assertTrue(payload["jobs"][0]["can_run_headless"])
+        self.assertEqual(payload["jobs"][0]["command_argv"][:3], ["pwsh", "-File", "registry-research-framework/tools/ghidra-headless-analyze.ps1"])
         self.assertIn("ghidra-headless-analyze.ps1", payload["jobs"][0]["suggested_command"])
         self.assertEqual(
             payload["jobs"][1]["patterns"],
@@ -1877,7 +1879,39 @@ class GhidraDispatchBatchTests(unittest.TestCase):
 
         self.assertFalse(payload["jobs"][0]["can_run_headless"])
         self.assertEqual(payload["jobs"][0]["missing_inputs"], ["target_binary", "patterns"])
+        self.assertIsNone(payload["jobs"][0]["command_argv"])
         self.assertIsNone(payload["jobs"][0]["suggested_command"])
+
+
+class GhidraDispatchRunnerTests(unittest.TestCase):
+    def test_build_run_plan_selects_only_runnable_jobs(self) -> None:
+        payload = {
+            "jobs": [
+                {
+                    "job_id": "job-1",
+                    "candidate_id": "power.keep",
+                    "dispatch_status": "prepared",
+                    "can_run_headless": True,
+                    "command_argv": ["pwsh", "-File", "tool.ps1"],
+                    "suggested_command": "pwsh -File tool.ps1",
+                    "output_dir": "evidence/files/ghidra/job-1",
+                },
+                {
+                    "job_id": "job-2",
+                    "candidate_id": "power.skip",
+                    "dispatch_status": "prepared",
+                    "can_run_headless": False,
+                    "command_argv": None,
+                },
+            ]
+        }
+
+        plan = ghidra_dispatch_runner.build_run_plan(payload, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertEqual(plan["selected_job_count"], 1)
+        self.assertEqual(plan["blocked_job_count"], 1)
+        self.assertEqual(plan["jobs"][0]["candidate_id"], "power.keep")
+        self.assertEqual(plan["jobs"][0]["command_argv"], ["pwsh", "-File", "tool.ps1"])
 
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):

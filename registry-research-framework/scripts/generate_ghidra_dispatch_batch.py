@@ -81,6 +81,23 @@ def build_suggested_command(target_binary: str | None, output_name: str, pattern
     )
 
 
+def build_command_argv(target_binary: str | None, output_name: str, patterns: list[str]) -> list[str] | None:
+    if not target_binary or not patterns:
+        return None
+    argv = [
+        "pwsh",
+        "-File",
+        repo_relative(TOOL_PATH),
+        "-TargetBinary",
+        target_binary,
+        "-OutputName",
+        output_name,
+    ]
+    for pattern in patterns:
+        argv.extend(["-Patterns", pattern])
+    return argv
+
+
 def dispatch_batch_from_queue(rows: list[dict[str, Any]], generated_utc: str | None = None) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
     jobs: list[dict[str, Any]] = []
@@ -89,6 +106,7 @@ def dispatch_batch_from_queue(rows: list[dict[str, Any]], generated_utc: str | N
         output_name = f"ghidra-auto-{index:02d}-{slugify(candidate_id)}"
         patterns = split_patterns(row.get("value_name"))
         target_binary = infer_target_binary(row.get("key_path"))
+        command_argv = build_command_argv(target_binary, output_name, patterns)
         missing_inputs: list[str] = []
         if not target_binary:
             missing_inputs.append("target_binary")
@@ -111,6 +129,7 @@ def dispatch_batch_from_queue(rows: list[dict[str, Any]], generated_utc: str | N
                 "output_dir": f"evidence/files/ghidra/{output_name}",
                 "can_run_headless": not missing_inputs,
                 "missing_inputs": missing_inputs,
+                "command_argv": command_argv,
                 "suggested_command": build_suggested_command(target_binary, output_name, patterns),
                 "promotion_blockers": row.get("promotion_blockers") or [],
                 "next_action_hint": row.get("next_action_hint"),
