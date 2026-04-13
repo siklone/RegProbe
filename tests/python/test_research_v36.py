@@ -1044,7 +1044,7 @@ class PromotionStateTests(unittest.TestCase):
                 "apply_allowed": False,
                 "confidence": "medium",
                 "restore_default_supported": True,
-                "blocking_issues": ["powerrequestoverride-restore-story-unproven-subtree-presence-only"],
+                "blocking_issues": ["powerrequestoverride-restore-story-leaf-model-unproven"],
             },
             "validation_proof": {
                 "source_url": "Docs/example.md",
@@ -1055,7 +1055,7 @@ class PromotionStateTests(unittest.TestCase):
         gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
 
         self.assertEqual(gate["next_missing_layer"], "restore-story")
-        self.assertIn("powerrequestoverride-restore-story-unproven-subtree-presence-only", gate["promotion_blockers"])
+        self.assertIn("powerrequestoverride-restore-story-leaf-model-unproven", gate["promotion_blockers"])
 
     def test_specific_execution_required_runtime_no_hit_blockers_map_to_runtime_trace_lane(self) -> None:
         for blocker in [
@@ -1647,7 +1647,7 @@ class BlockedWorklistTests(unittest.TestCase):
 
     def test_blocker_hint_prefers_restore_story_guidance(self) -> None:
         hint = blocked_worklist_lib.blocker_hint(
-            ["powerrequestoverride-restore-story-unproven-subtree-presence-only"],
+            ["powerrequestoverride-restore-story-leaf-model-unproven"],
             "restore-story",
         )
 

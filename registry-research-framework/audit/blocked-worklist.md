@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-13T05:50:47.163472Z`
+Generated: `2026-04-13T05:54:34.264788Z`
 
 Blocked candidates: `18`
 
@@ -42,7 +42,7 @@ Blocked candidates: `18`
 - Feature area: `Power Request Override Routing`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
 - Value name: `(subtree root, Driver, Process, Service)`
-- Blockers: `powerrequestoverride-restore-story-unproven-subtree-presence-only`, `powerrequestoverride-static-context-adjacent-not-leaf-specific`, `powerrequestoverride-subtree-leaf-semantics-unresolved`
+- Blockers: `powerrequestoverride-restore-story-leaf-model-unproven`, `powerrequestoverride-static-context-adjacent-not-leaf-specific`, `powerrequestoverride-subtree-leaf-semantics-unresolved`
 - Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
 - Suggested command: `winopt research show-blocked power.control.power-request-override-subtree --json`
 - Next action hint: Prove restore or rollback behavior for the exact subtree or value.
