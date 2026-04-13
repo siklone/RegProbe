@@ -39,6 +39,7 @@ ghidra_autotrigger_inputs = load_module("generate_ghidra_autotrigger_inputs", FR
 ghidra_refresh_pipeline = load_module("refresh_ghidra_autotrigger_pipeline", FRAMEWORK_SCRIPTS / "refresh_ghidra_autotrigger_pipeline.py")
 ghidra_autotrigger_health = load_module("generate_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_health.py")
 ghidra_autotrigger_health_check = load_module("check_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_health.py")
+ghidra_autotrigger_sync = load_module("sync_ghidra_autotrigger_lane", FRAMEWORK_SCRIPTS / "sync_ghidra_autotrigger_lane.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2540,6 +2541,88 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertTrue(any("queue_jobs mismatch" in error for error in errors))
         self.assertTrue(any("selected+blocked does not cover dispatch jobs" in error for error in errors))
         self.assertTrue(any("top_queue_candidate does not match" in error for error in errors))
+
+
+class GhidraAutotriggerSyncTests(unittest.TestCase):
+    def test_sync_lane_refreshes_and_validates_health(self) -> None:
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "status": "queued",
+                "priority_rank": 1,
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+                "trigger": "blocked-worklist-ghidra-lane",
+                "next_action_hint": "Resolve seeding path.",
+            }
+        ]
+        bundle = {
+            "run_id": "synthetic-stack-seed",
+            "source_tool": "wpr",
+            "capture_phase": "boot",
+            "stack_capture": {"source_fields": ["Stack"], "captured_event_count": 1},
+            "events": [
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopPowerRequestInitialize"],
+                }
+            ],
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            evidence_root = temp_root / "evidence"
+            bundle_path = evidence_root / "sample" / "normalized-registry-bundle.json"
+            bundle_path.parent.mkdir(parents=True, exist_ok=True)
+            bundle_path.write_text(json.dumps(bundle), encoding="utf-8")
+            queue_path = temp_root / "ghidra-job-queue.jsonl"
+            queue_path.write_text("".join(json.dumps(row) + "\n" for row in queue_rows), encoding="utf-8")
+            bundle_manifest_path = temp_root / "ghidra-autotrigger-inputs.json"
+            seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            batch_path = temp_root / "ghidra-dispatch-batch.json"
+            run_path = temp_root / "ghidra-dispatch-run.json"
+            health_path = temp_root / "ghidra-autotrigger-health.json"
+            output_path = temp_root / "ghidra-autotrigger-sync.json"
+
+            payload = ghidra_autotrigger_sync.sync_lane(
+                discover_input_roots=[evidence_root],
+                queue_path=queue_path,
+                bundle_manifest_path=bundle_manifest_path,
+                seeds_path=seeds_path,
+                batch_path=batch_path,
+                run_path=run_path,
+                health_path=health_path,
+                output_path=output_path,
+            )
+
+            self.assertEqual(payload["sync_status"], "ok")
+            self.assertEqual(payload["health_check"]["status"], "ok")
+            self.assertTrue(output_path.exists())
+
+    def test_sync_lane_returns_idle_when_no_discovered_inputs_exist(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            evidence_root = temp_root / "evidence"
+            evidence_root.mkdir(parents=True, exist_ok=True)
+            queue_path = temp_root / "ghidra-job-queue.jsonl"
+            queue_path.write_text("", encoding="utf-8")
+            bundle_manifest_path = temp_root / "ghidra-autotrigger-inputs.json"
+            output_path = temp_root / "ghidra-autotrigger-sync.json"
+
+            payload = ghidra_autotrigger_sync.sync_lane(
+                discover_input_roots=[evidence_root],
+                queue_path=queue_path,
+                bundle_manifest_path=bundle_manifest_path,
+                output_path=output_path,
+            )
+
+            self.assertEqual(payload["sync_status"], "idle")
+            self.assertEqual(payload["bundle_manifest"]["selected_count"], 0)
+            self.assertTrue(output_path.exists())
 
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):
