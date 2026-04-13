@@ -121,11 +121,16 @@ def render_markdown(payload: dict[str, Any]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def main() -> int:
+def write_outputs(payload: dict[str, Any] | None = None) -> dict[str, Any]:
     AUDIT_ROOT.mkdir(parents=True, exist_ok=True)
-    payload = build_worklist()
+    payload = payload or build_worklist()
     JSON_OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     MARKDOWN_OUTPUT.write_text(render_markdown(payload), encoding="utf-8")
+    return payload
+
+
+def main() -> int:
+    payload = write_outputs()
     print(
         json.dumps(
             {

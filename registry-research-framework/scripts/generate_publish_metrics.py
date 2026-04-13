@@ -28,6 +28,11 @@ from metrics_publish_v36_lib import (  # noqa: E402
     utc_now_iso,
     write_json,
 )
+from generate_blocked_worklist import (  # noqa: E402
+    JSON_OUTPUT as BLOCKED_WORKLIST_JSON_PATH,
+    MARKDOWN_OUTPUT as BLOCKED_WORKLIST_MARKDOWN_PATH,
+    write_outputs as write_blocked_worklist_outputs,
+)
 from research_v36_lib import (  # noqa: E402
     PROMOTION_GATES_PATH,
     QUEUE_ROOT,
@@ -76,6 +81,7 @@ def main() -> int:
     write_json(GATE_METRICS_PATH, gate_metrics)
     write_json(PUBLISH_METRICS_PATH, publish_metrics)
     write_json(AUDIT_PATH, final_audit)
+    blocked_worklist = write_blocked_worklist_outputs()
 
     readme_block = research_health_markdown(
         publish_metrics,
@@ -91,10 +97,13 @@ def main() -> int:
         "gate_metrics": str(GATE_METRICS_PATH.relative_to(REPO_ROOT)).replace("\\", "/"),
         "publish_metrics": str(PUBLISH_METRICS_PATH.relative_to(REPO_ROOT)).replace("\\", "/"),
         "evidence_audit": str(AUDIT_PATH.relative_to(REPO_ROOT)).replace("\\", "/"),
+        "blocked_worklist_json": str(BLOCKED_WORKLIST_JSON_PATH.relative_to(REPO_ROOT)).replace("\\", "/"),
+        "blocked_worklist_markdown": str(BLOCKED_WORKLIST_MARKDOWN_PATH.relative_to(REPO_ROOT)).replace("\\", "/"),
         "readme": str(README_PATH.relative_to(REPO_ROOT)).replace("\\", "/"),
         "gate_health": final_audit.get("summary", {}).get("gate_health"),
         "missing_docs_count": validation_summary.get("missing_docs_count"),
         "threshold_violations": gate_metrics.get("threshold_violations"),
+        "blocked_count": blocked_worklist.get("blocked_count"),
     }
 
     if args.emit_json:
