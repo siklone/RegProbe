@@ -800,6 +800,38 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["next_missing_layer"], "ghidra")
         self.assertIn("unlabeled-init-walker-not-symbol-resolved", gate["promotion_blockers"])
 
+    def test_string_or_symbol_no_hit_blocker_maps_to_ghidra_lane(self) -> None:
+        record = {
+            "record_id": "example.string-or-symbol-no-hit",
+            "tweak_id": "example.string-or-symbol-no-hit",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+                "blocking_issues": ["no-current-build-string-or-symbol-hit"],
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
+
+        self.assertEqual(gate["next_missing_layer"], "ghidra")
+        self.assertIn("no-current-build-string-or-symbol-hit", gate["promotion_blockers"])
+
     def test_specific_hold_blockers_map_to_intentional_hold_lane_without_generic_tag(self) -> None:
         for blocker in [
             "research-only-raw-policy-system-value",
