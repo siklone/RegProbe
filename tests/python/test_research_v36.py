@@ -285,7 +285,24 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(score["tweak_suitability"], 0.9)
         self.assertEqual(score["bench_priority"], 0.4)
         self.assertTrue(score["has_value_context"])
+        self.assertFalse(score["has_caller_stack"])
+        self.assertEqual(score["caller_stack_frame_count"], 0)
         self.assertGreaterEqual(score["total"], 0.57)
+
+    def test_score_etl_candidate_reports_caller_stack_context(self) -> None:
+        candidate = {
+            "discovery_source": "etl-registry-touch",
+            "feature_area": "System",
+            "operation": "RegQueryValue",
+            "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+            "value_name": "TimerCheckFlags",
+            "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopReadRegKeyValue"],
+        }
+
+        score = research_v36_lib.score_etl_candidate(candidate)
+
+        self.assertTrue(score["has_caller_stack"])
+        self.assertEqual(score["caller_stack_frame_count"], 2)
 
     def test_has_exact_runtime_read_ignores_negative_gap_language(self) -> None:
         record = {
@@ -1369,6 +1386,27 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(touches[0]["value_name"], "AllowSystemRequiredPowerRequests")
         self.assertEqual(touches[0]["operation"], "RegQueryValue")
         self.assertEqual(touches[0]["caller_stack"], ["nt!PopReadRegKeyValue", "nt!PopPowerRequestInitialize"])
+
+    def test_etl_touch_candidates_preserve_caller_stack_context(self) -> None:
+        candidates = research_v36_lib.etl_touch_candidates(
+            {
+                "etl_path": "evidence/files/etw-stackwalk/sample.etl",
+                "registry_touches": [
+                    {
+                        "provider_guid_matched": True,
+                        "process_name": "System",
+                        "operation": "RegQueryValue",
+                        "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                        "value_name": "TimerCheckFlags",
+                        "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopReadRegKeyValue"],
+                    }
+                ],
+            }
+        )
+
+        self.assertEqual(len(candidates), 1)
+        self.assertEqual(candidates[0]["caller_stack"], ["ntoskrnl.exe+0x1F234", "nt!PopReadRegKeyValue"])
+        self.assertEqual(candidates[0]["caller_stack_frame_count"], 2)
 
     def test_normalized_registry_schema_allows_caller_stack(self) -> None:
         event_schema = json.loads(

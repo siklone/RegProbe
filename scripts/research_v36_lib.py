@@ -1585,6 +1585,8 @@ def score_etl_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
     operation = _etl_candidate_operation(candidate)
     has_value = _etl_candidate_has_value_context(candidate)
     feature_area = str(candidate.get("feature_area") or "Unknown")
+    caller_stack = candidate.get("caller_stack") if isinstance(candidate.get("caller_stack"), list) else []
+    caller_stack_frame_count = len([frame for frame in caller_stack if str(frame).strip()])
 
     if operation in {"RegSetValue", "SetValueKey", "RegCreateKey", "CreateKey"} and has_value:
         runtime_evidence_strength = 0.8
@@ -1612,6 +1614,8 @@ def score_etl_candidate(candidate: dict[str, Any]) -> dict[str, Any]:
         "feature_area": feature_area,
         "operation": operation or "unknown",
         "has_value_context": has_value,
+        "has_caller_stack": caller_stack_frame_count > 0,
+        "caller_stack_frame_count": caller_stack_frame_count,
         **components,
         "total": total,
     }
@@ -3263,25 +3267,30 @@ def etl_touch_candidates(parse_result: dict[str, Any], backend_id: str = DEFAULT
         value_name = touch.get("value_name")
         operation = touch.get("operation") or "registry-touch"
         digest = hashlib.sha1(f"{etl_path}|{operation}|{key_path}|{value_name}".encode("utf-8")).hexdigest()[:16]
-        candidates.append(
-            {
-                "schema_version": CURRENT_SCHEMA_VERSION,
-                "candidate_id": f"etl::{digest}",
-                "discovery_source": "etl-registry-touch",
-                "discovery_reason": "registry_touch_extracted",
-                "feature_area": _feature_area_from_key_path(key_path, feature_source),
-                "key_path": key_path,
-                "value_name": value_name,
-                "value_type": None,
-                "value_data": touch.get("value_data"),
-                "operation": operation,
-                "registry_clue": f"{operation} via {touch.get('process_name') or 'unknown-process'}",
-                "initial_confidence": "medium" if touch.get("provider_guid_matched") else "low",
-                "seed_reference": etl_path,
-                "required_followup": "triage",
-                "execution_context": default_execution_context(backend_id),
-            }
-        )
+        candidate = {
+            "schema_version": CURRENT_SCHEMA_VERSION,
+            "candidate_id": f"etl::{digest}",
+            "discovery_source": "etl-registry-touch",
+            "discovery_reason": "registry_touch_extracted",
+            "feature_area": _feature_area_from_key_path(key_path, feature_source),
+            "key_path": key_path,
+            "value_name": value_name,
+            "value_type": None,
+            "value_data": touch.get("value_data"),
+            "operation": operation,
+            "registry_clue": f"{operation} via {touch.get('process_name') or 'unknown-process'}",
+            "initial_confidence": "medium" if touch.get("provider_guid_matched") else "low",
+            "seed_reference": etl_path,
+            "required_followup": "triage",
+            "execution_context": default_execution_context(backend_id),
+        }
+        caller_stack = touch.get("caller_stack")
+        if isinstance(caller_stack, list):
+            frames = [str(frame).strip() for frame in caller_stack if str(frame).strip()]
+            if frames:
+                candidate["caller_stack"] = frames
+                candidate["caller_stack_frame_count"] = len(frames)
+        candidates.append(candidate)
     return candidates
 
 
