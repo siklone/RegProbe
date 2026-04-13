@@ -2314,6 +2314,65 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             self.assertEqual(payload["bundle_count"], 1)
             self.assertEqual(payload["outputs"]["bundle_manifest_path"], manifest_path.as_posix())
 
+    def test_refresh_pipeline_can_refresh_manifest_from_discovered_roots(self) -> None:
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "status": "queued",
+                "priority_rank": 1,
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+                "trigger": "blocked-worklist-ghidra-lane",
+                "next_action_hint": "Resolve seeding path.",
+            }
+        ]
+        bundle = {
+            "run_id": "synthetic-stack-seed",
+            "source_tool": "wpr",
+            "capture_phase": "boot",
+            "stack_capture": {"source_fields": ["Stack"], "captured_event_count": 1},
+            "events": [
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopPowerRequestInitialize"],
+                }
+            ],
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            evidence_root = temp_root / "evidence"
+            bundle_path = evidence_root / "sample" / "normalized-registry-bundle.json"
+            manifest_path = temp_root / "ghidra-autotrigger-inputs.json"
+            queue_path = temp_root / "ghidra-job-queue.jsonl"
+            seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            batch_path = temp_root / "ghidra-dispatch-batch.json"
+            run_path = temp_root / "ghidra-dispatch-run.json"
+            health_path = temp_root / "ghidra-autotrigger-health.json"
+            bundle_path.parent.mkdir(parents=True, exist_ok=True)
+            bundle_path.write_text(json.dumps(bundle), encoding="utf-8")
+            queue_path.write_text("".join(json.dumps(row) + "\n" for row in queue_rows), encoding="utf-8")
+
+            payload = ghidra_refresh_pipeline.refresh_pipeline(
+                bundle_manifest_path=manifest_path,
+                refresh_bundle_manifest=True,
+                input_roots=[evidence_root],
+                queue_path=queue_path,
+                seeds_path=seeds_path,
+                batch_path=batch_path,
+                run_path=run_path,
+                health_path=health_path,
+            )
+
+            manifest_payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+            self.assertTrue(payload["bundle_manifest_refreshed"])
+            self.assertEqual(payload["bundle_manifest_selected_count"], 1)
+            self.assertEqual(manifest_payload["selected_count"], 1)
+
 
 class GhidraAutotriggerInputTests(unittest.TestCase):
     def test_input_manifest_discovers_stack_bundles(self) -> None:

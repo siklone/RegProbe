@@ -56,6 +56,9 @@ def refresh_pipeline(
     bundle_paths: list[Path] | None = None,
     bundle_root: Path | None = None,
     bundle_manifest_path: Path | None = None,
+    refresh_bundle_manifest: bool = False,
+    input_roots: list[Path] | None = None,
+    input_manifest_limit: int | None = None,
     queue_path: Path = QUEUE_PATH,
     seeds_path: Path = SEEDS_PATH,
     batch_path: Path = BATCH_PATH,
@@ -63,12 +66,22 @@ def refresh_pipeline(
     health_path: Path = HEALTH_PATH,
 ) -> dict[str, Any]:
     queue_rows = autotrigger.load_jsonl(queue_path)
+    bundle_manifest_payload: dict[str, Any] | None = None
+    effective_manifest_path = bundle_manifest_path or INPUTS_PATH
+    if refresh_bundle_manifest:
+        roots = input_roots or [autotrigger_inputs.DEFAULT_SEARCH_ROOT]
+        bundle_manifest_payload = autotrigger_inputs.input_manifest(
+            roots,
+            limit=input_manifest_limit,
+            require_caller_stack=True,
+        )
+        autotrigger_inputs.write_json(effective_manifest_path, bundle_manifest_payload)
     effective_bundle_paths = autotrigger.collect_bundle_paths(
         ([bundle_path] if bundle_path else []) + list(bundle_paths or []),
         bundle_root=bundle_root,
     )
-    if bundle_manifest_path and not effective_bundle_paths:
-        effective_bundle_paths = bundle_paths_from_manifest(bundle_manifest_path)
+    if effective_manifest_path and not effective_bundle_paths:
+        effective_bundle_paths = bundle_paths_from_manifest(effective_manifest_path)
     if not effective_bundle_paths:
         raise ValueError("Provide bundle_path, bundle_paths, or bundle_root with at least one normalized bundle.")
     seeds = autotrigger.autotrigger_seeds_from_bundle_paths(
@@ -99,8 +112,10 @@ def refresh_pipeline(
             "batch_path": autotrigger.portable_path(batch_path),
             "run_path": autotrigger.portable_path(run_path),
             "health_path": autotrigger.portable_path(health_path),
-            "bundle_manifest_path": autotrigger.portable_path(bundle_manifest_path) if bundle_manifest_path else None,
+            "bundle_manifest_path": autotrigger.portable_path(effective_manifest_path) if effective_manifest_path else None,
         },
+        "bundle_manifest_refreshed": refresh_bundle_manifest,
+        "bundle_manifest_selected_count": int((bundle_manifest_payload or {}).get("selected_count") or 0),
     }
 
 
@@ -109,6 +124,9 @@ def main() -> int:
     parser.add_argument("--bundle", type=Path, action="append", default=[])
     parser.add_argument("--bundle-root", type=Path, default=None)
     parser.add_argument("--bundle-manifest", type=Path, default=INPUTS_PATH)
+    parser.add_argument("--refresh-bundle-manifest", action="store_true")
+    parser.add_argument("--discover-input-root", type=Path, action="append", default=[])
+    parser.add_argument("--input-manifest-limit", type=int, default=None)
     parser.add_argument("--queue", type=Path, default=QUEUE_PATH)
     parser.add_argument("--seeds-output", type=Path, default=SEEDS_PATH)
     parser.add_argument("--batch-output", type=Path, default=BATCH_PATH)
@@ -120,6 +138,9 @@ def main() -> int:
         bundle_paths=args.bundle,
         bundle_root=args.bundle_root,
         bundle_manifest_path=args.bundle_manifest,
+        refresh_bundle_manifest=args.refresh_bundle_manifest,
+        input_roots=args.discover_input_root,
+        input_manifest_limit=args.input_manifest_limit,
         queue_path=args.queue,
         seeds_path=args.seeds_output,
         batch_path=args.batch_output,
