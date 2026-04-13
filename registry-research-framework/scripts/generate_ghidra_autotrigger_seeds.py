@@ -69,6 +69,17 @@ def collect_bundle_paths(bundle_paths: list[Path] | None = None, *, bundle_root:
     return collected
 
 
+def bundle_caller_stack_event_count(bundle: dict[str, Any]) -> int:
+    stack_capture = bundle.get("stack_capture") or {}
+    try:
+        captured = int(stack_capture.get("captured_event_count") or 0)
+    except (TypeError, ValueError):
+        captured = 0
+    if captured > 0:
+        return captured
+    return sum(1 for event in (bundle.get("events") or []) if event.get("caller_stack"))
+
+
 def normalize_registry_path(value: Any) -> str:
     text = str(value or "").strip().replace("/", "\\")
     text = re.sub(r"^\\\\REGISTRY\\\\MACHINE\\\\", lambda _: "HKLM\\", text, flags=re.IGNORECASE)

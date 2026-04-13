@@ -35,6 +35,7 @@ ghidra_job_queue = load_module("generate_ghidra_job_queue", FRAMEWORK_SCRIPTS / 
 ghidra_dispatch_batch = load_module("generate_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_dispatch_batch.py")
 ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "run_ghidra_dispatch_batch.py")
 ghidra_autotrigger = load_module("generate_ghidra_autotrigger_seeds", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_seeds.py")
+ghidra_autotrigger_inputs = load_module("generate_ghidra_autotrigger_inputs", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_inputs.py")
 ghidra_refresh_pipeline = load_module("refresh_ghidra_autotrigger_pipeline", FRAMEWORK_SCRIPTS / "refresh_ghidra_autotrigger_pipeline.py")
 ghidra_autotrigger_health = load_module("generate_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_health.py")
 ghidra_autotrigger_health_check = load_module("check_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_health.py")
@@ -2254,6 +2255,110 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             self.assertEqual(payload["seed_count"], 1)
             self.assertEqual(payload["dispatch_autotrigger_matched_job_count"], 1)
             self.assertTrue(health_path.exists())
+
+    def test_refresh_pipeline_supports_bundle_manifest(self) -> None:
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "status": "queued",
+                "priority_rank": 1,
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+                "trigger": "blocked-worklist-ghidra-lane",
+                "next_action_hint": "Resolve seeding path.",
+            }
+        ]
+        bundle = {
+            "run_id": "synthetic-stack-seed",
+            "source_tool": "wpr",
+            "capture_phase": "boot",
+            "stack_capture": {"source_fields": ["Stack"], "captured_event_count": 1},
+            "events": [
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopPowerRequestInitialize"],
+                }
+            ],
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            bundle_path = temp_root / "evidence" / "sample" / "normalized-registry-bundle.json"
+            manifest_path = temp_root / "ghidra-autotrigger-inputs.json"
+            queue_path = temp_root / "ghidra-job-queue.jsonl"
+            seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            batch_path = temp_root / "ghidra-dispatch-batch.json"
+            run_path = temp_root / "ghidra-dispatch-run.json"
+            health_path = temp_root / "ghidra-autotrigger-health.json"
+            bundle_path.parent.mkdir(parents=True, exist_ok=True)
+            bundle_path.write_text(json.dumps(bundle), encoding="utf-8")
+            queue_path.write_text("".join(json.dumps(row) + "\n" for row in queue_rows), encoding="utf-8")
+            manifest_path.write_text(
+                json.dumps({"entries": [{"path": bundle_path.as_posix()}]}),
+                encoding="utf-8",
+            )
+
+            payload = ghidra_refresh_pipeline.refresh_pipeline(
+                bundle_manifest_path=manifest_path,
+                queue_path=queue_path,
+                seeds_path=seeds_path,
+                batch_path=batch_path,
+                run_path=run_path,
+                health_path=health_path,
+            )
+
+            self.assertEqual(payload["bundle_count"], 1)
+            self.assertEqual(payload["outputs"]["bundle_manifest_path"], manifest_path.as_posix())
+
+
+class GhidraAutotriggerInputTests(unittest.TestCase):
+    def test_input_manifest_discovers_stack_bundles(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            with_stack = root / "with-stack" / "normalized-registry-bundle.json"
+            no_stack = root / "no-stack" / "normalized-registry-bundle.json"
+            with_stack.parent.mkdir(parents=True, exist_ok=True)
+            no_stack.parent.mkdir(parents=True, exist_ok=True)
+            with_stack.write_text(
+                json.dumps(
+                    {
+                        "run_id": "with-stack",
+                        "source_tool": "wpr",
+                        "capture_phase": "boot",
+                        "stack_capture": {"captured_event_count": 2},
+                        "event_count": 2,
+                        "events": [{"caller_stack": ["nt!Foo"]}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            no_stack.write_text(
+                json.dumps(
+                    {
+                        "run_id": "no-stack",
+                        "source_tool": "wpr",
+                        "capture_phase": "boot",
+                        "stack_capture": {"captured_event_count": 0},
+                        "event_count": 1,
+                        "events": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            payload = ghidra_autotrigger_inputs.input_manifest(
+                [root],
+                require_caller_stack=True,
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+
+        self.assertEqual(payload["selected_count"], 1)
+        self.assertEqual(payload["entries"][0]["run_id"], "with-stack")
+        self.assertEqual(payload["entries"][0]["caller_stack_event_count"], 2)
 
 
 class GhidraAutotriggerHealthTests(unittest.TestCase):

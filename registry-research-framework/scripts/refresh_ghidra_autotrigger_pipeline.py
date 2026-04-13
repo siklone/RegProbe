@@ -16,6 +16,7 @@ SEEDS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-seeds.jsonl"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 HEALTH_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
+INPUTS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-inputs.json"
 
 
 def load_local_module(name: str, path: Path):
@@ -28,9 +29,25 @@ def load_local_module(name: str, path: Path):
 
 
 autotrigger = load_local_module("refresh_pipeline_autotrigger", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_seeds.py")
+autotrigger_inputs = load_local_module("refresh_pipeline_autotrigger_inputs", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_inputs.py")
 dispatch_batch = load_local_module("refresh_pipeline_dispatch_batch", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_dispatch_batch.py")
 dispatch_runner = load_local_module("refresh_pipeline_dispatch_runner", FRAMEWORK_ROOT / "scripts" / "run_ghidra_dispatch_batch.py")
 autotrigger_health = load_local_module("refresh_pipeline_autotrigger_health", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_health.py")
+
+
+def resolve_path(path_value: str) -> Path:
+    path = Path(path_value)
+    return path if path.is_absolute() else (REPO_ROOT / path)
+
+
+def bundle_paths_from_manifest(path: Path) -> list[Path]:
+    payload = autotrigger.load_json(path)
+    bundle_paths: list[Path] = []
+    for entry in payload.get("entries") or []:
+        path_value = str(entry.get("path") or "").strip()
+        if path_value:
+            bundle_paths.append(resolve_path(path_value).resolve())
+    return bundle_paths
 
 
 def refresh_pipeline(
@@ -38,6 +55,7 @@ def refresh_pipeline(
     *,
     bundle_paths: list[Path] | None = None,
     bundle_root: Path | None = None,
+    bundle_manifest_path: Path | None = None,
     queue_path: Path = QUEUE_PATH,
     seeds_path: Path = SEEDS_PATH,
     batch_path: Path = BATCH_PATH,
@@ -49,6 +67,8 @@ def refresh_pipeline(
         ([bundle_path] if bundle_path else []) + list(bundle_paths or []),
         bundle_root=bundle_root,
     )
+    if bundle_manifest_path and not effective_bundle_paths:
+        effective_bundle_paths = bundle_paths_from_manifest(bundle_manifest_path)
     if not effective_bundle_paths:
         raise ValueError("Provide bundle_path, bundle_paths, or bundle_root with at least one normalized bundle.")
     seeds = autotrigger.autotrigger_seeds_from_bundle_paths(
@@ -79,6 +99,7 @@ def refresh_pipeline(
             "batch_path": autotrigger.portable_path(batch_path),
             "run_path": autotrigger.portable_path(run_path),
             "health_path": autotrigger.portable_path(health_path),
+            "bundle_manifest_path": autotrigger.portable_path(bundle_manifest_path) if bundle_manifest_path else None,
         },
     }
 
@@ -87,6 +108,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Refresh Ghidra auto-trigger surfaces from one or more fresh normalized registry bundles.")
     parser.add_argument("--bundle", type=Path, action="append", default=[])
     parser.add_argument("--bundle-root", type=Path, default=None)
+    parser.add_argument("--bundle-manifest", type=Path, default=INPUTS_PATH)
     parser.add_argument("--queue", type=Path, default=QUEUE_PATH)
     parser.add_argument("--seeds-output", type=Path, default=SEEDS_PATH)
     parser.add_argument("--batch-output", type=Path, default=BATCH_PATH)
@@ -97,6 +119,7 @@ def main() -> int:
     payload = refresh_pipeline(
         bundle_paths=args.bundle,
         bundle_root=args.bundle_root,
+        bundle_manifest_path=args.bundle_manifest,
         queue_path=args.queue,
         seeds_path=args.seeds_output,
         batch_path=args.batch_output,
