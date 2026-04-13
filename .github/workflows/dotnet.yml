@@ -69,6 +69,20 @@ jobs:
       - name: Research quality gate summary
         run: python registry-research-framework/scripts/run_research_quality_gate.py --skip-python-tests --skip-ghidra-smoke
 
+      - name: Upload research quality gate artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-quality-gate
+          path: |
+            registry-research-framework/audit/research-quality-gate.json
+            registry-research-framework/audit/research-quality-gate.md
+            registry-research-framework/audit/ghidra-autotrigger-smoke.json
+            registry-research-framework/audit/ghidra-autotrigger-smoke.md
+            registry-research-framework/audit/ghidra-autotrigger-smoke-check.json
+            registry-research-framework/audit/ghidra-autotrigger-smoke-check.md
+            registry-research-framework/audit/ghidra-autotrigger-smoke/**
+
       - name: Run PowerShell pipeline smoke checks
         run: pwsh -NoProfile -ExecutionPolicy Bypass -File tests/Invoke-PipelineQualitySmoke.ps1
 
