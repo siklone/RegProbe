@@ -209,6 +209,10 @@ publish/
 # Local source mirrors used for provenance analysis
 research/_source-mirrors/
 
+# CI/local aggregate quality gate reports are uploaded as workflow artifacts.
+registry-research-framework/audit/research-quality-gate.json
+registry-research-framework/audit/research-quality-gate.md
+
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
 # checkin your Azure Web App publish settings, but sensitive information contained
 # in these scripts will be unencrypted
