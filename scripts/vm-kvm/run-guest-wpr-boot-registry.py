@@ -330,6 +330,7 @@ def main() -> int:
     parser.add_argument("--tracerpt-timeout-seconds", type=int, default=180)
     parser.add_argument("--salvage-timeout-artifacts", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--salvage-qga-timeout-seconds", type=int, default=30)
+    parser.add_argument("--expect-caller-stack", action="store_true", help="Fail the run if the normalized bundle has no caller_stack frames.")
     parser.add_argument("--registry-path", required=True)
     parser.add_argument("--value-name", required=True)
     parser.add_argument("--output-name", required=True)
@@ -490,10 +491,18 @@ def main() -> int:
                 "normalized_bundle_exists": summary.get("normalized_bundle_exists"),
                 "normalization_status": summary.get("normalization_status"),
                 "normalizer_name": summary.get("normalizer_name"),
+                "caller_stack_event_count": summary.get("caller_stack_event_count"),
                 "recovery_action": summary.get("recovery_action"),
                 "transport_blocker": summary.get("transport_blocker"),
                 "guest_health": summary.get("guest_health"),
             }
+            caller_stack_event_count = int(summary.get("caller_stack_event_count") or 0)
+            if args.expect_caller_stack and caller_stack_event_count == 0 and summary.get("status") != "error":
+                payload["status"] = "error"
+                payload["error_kind"] = "caller-stack-missing"
+                payload["error"] = "Caller stack frames were requested but the normalized bundle contains none."
+                print(json.dumps(payload, indent=2))
+                return 1
             print(json.dumps(payload, indent=2))
             if summary.get("status") == "error" or summary.get("normalization_status") not in {None, "ok"}:
                 return 1

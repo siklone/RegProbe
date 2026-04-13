@@ -6,7 +6,7 @@
 - Symbol resolution via Microsoft Symbol Server
 - New bundle field: caller_stack
 
-Status: schema and parser support for `caller_stack` is in place; the remaining capture work is the provider-specific WPR/xperf profile that actually emits stack frames.
+Status: schema and parser support for `caller_stack` is in place, and the KVM WPR runner can now fail stack-expected runs when no frames are present. The remaining capture work is the provider-specific WPR/xperf profile that actually emits stack frames.
 
 ## Motor 2: Ghidra Auto-Decompiler Pipeline
 - Ghidra job queue: ghidra-job-queue.jsonl

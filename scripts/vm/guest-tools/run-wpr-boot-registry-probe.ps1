@@ -749,6 +749,8 @@ try {
                 $summary.normalized_bundle_exists = [bool](Test-Path $normalizedBundlePath)
                 $summary.normalized_result_ref = if ($summary.normalized_bundle_exists) { $normalizedBundlePath } else { $null }
                 $summary.normalization_status = [string]$bundle.status
+                $summary.stack_capture = $bundle.stack_capture
+                $summary.caller_stack_event_count = [int]$bundle.stack_capture.captured_event_count
             }
             catch {
                 $summary.normalization_status = 'error'
