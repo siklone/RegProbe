@@ -1,15 +1,15 @@
 # Blocked Worklist
 
-Generated: `2026-04-13T04:34:26.856852Z`
+Generated: `2026-04-13T05:18:24.686386Z`
 
 Blocked candidates: `18`
 
 ## Lane Summary
 
-- `ghidra`: 5 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5`
-- `intentional-hold`: 5 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold`
-- `restore-story`: 1 | first: `power.control.power-request-override-subtree` | `winopt research list-blocked --worklist --lane restore-story --top 5`
-- `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5`
+- `ghidra`: 5 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static RE or Ghidra work until the exact reader or initializer is named.
+- `intentional-hold`: 5 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `restore-story`: 1 | first: `power.control.power-request-override-subtree` | `winopt research list-blocked --worklist --lane restore-story --top 5` | Prove restore or rollback behavior for the exact subtree or value.
+- `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ## Top Actionable Candidates
 

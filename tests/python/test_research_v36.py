@@ -1697,6 +1697,7 @@ class BlockedWorklistTests(unittest.TestCase):
 
         self.assertEqual(focus["ghidra"]["candidate_id"], "power.top")
         self.assertEqual(focus["ghidra"]["suggested_command"], "cmd top")
+        self.assertEqual(focus["ghidra"]["next_action_hint"], "hint top")
 
 
 if __name__ == "__main__":

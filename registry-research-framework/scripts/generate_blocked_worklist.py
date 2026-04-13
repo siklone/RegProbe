@@ -257,7 +257,10 @@ def render_markdown(payload: dict[str, Any]) -> str:
         lane_command = (payload.get("lane_suggested_commands") or {}).get(lane)
         lane_focus = (payload.get("lane_focus") or {}).get(lane) or {}
         lane_target = str(lane_focus.get("candidate_id") or "")
-        if lane_command and lane_target:
+        lane_hint = str(lane_focus.get("next_action_hint") or "")
+        if lane_command and lane_target and lane_hint:
+            lines.append(f"- `{lane}`: {count} | first: `{lane_target}` | `{lane_command}` | {lane_hint}")
+        elif lane_command and lane_target:
             lines.append(f"- `{lane}`: {count} | first: `{lane_target}` | `{lane_command}`")
         elif lane_command:
             lines.append(f"- `{lane}`: {count} | `{lane_command}`")

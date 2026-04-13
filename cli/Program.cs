@@ -412,6 +412,10 @@ class Program
                                 {
                                     Console.WriteLine($"  command: {laneFocus.SuggestedCommand}");
                                 }
+                                if (!string.IsNullOrWhiteSpace(laneFocus.NextActionHint))
+                                {
+                                    Console.WriteLine($"  next: {laneFocus.NextActionHint}");
+                                }
                             }
                             else
                             {
