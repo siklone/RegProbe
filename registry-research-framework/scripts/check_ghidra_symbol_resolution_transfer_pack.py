@@ -80,6 +80,35 @@ def validate_file_entry(pack_root: Path, entry: dict[str, Any]) -> list[str]:
     return errors
 
 
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def validate_zip_entry(zf: zipfile.ZipFile, entry: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    relative_path = str(entry.get("path") or "").strip()
+    if not relative_path:
+        return ["pack file entry is missing path"]
+    try:
+        data = zf.read(relative_path)
+    except KeyError:
+        return [f"archive entry missing: {relative_path}"]
+    expected_size = int(entry.get("size_bytes") or 0)
+    if len(data) != expected_size:
+        errors.append(f"archive entry size mismatch: {relative_path} expected={expected_size} actual={len(data)}")
+    expected_sha = str(entry.get("sha256") or "")
+    if sha256_bytes(data) != expected_sha:
+        errors.append(f"archive entry sha256 mismatch: {relative_path}")
+    return errors
+
+
+def checksum_payload_from_zip(zf: zipfile.ZipFile) -> dict[str, Any]:
+    try:
+        return json.loads(zf.read("CHECKSUMS.json").decode("utf-8"))
+    except KeyError:
+        return {}
+
+
 def validate_transfer_pack(summary: dict[str, Any], *, summary_path: Path = DEFAULT_SUMMARY_PATH, generated_utc: str | None = None) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
     errors: list[str] = []
@@ -92,7 +121,7 @@ def validate_transfer_pack(summary: dict[str, Any], *, summary_path: Path = DEFA
     if not pack_root:
         errors.append("summary missing output_root")
     elif not pack_root.exists():
-        errors.append(f"pack root missing: {portable_path(pack_root)}")
+        pack_root = None
 
     checked_files = 0
     checksum_payload: dict[str, Any] = {}
@@ -113,6 +142,7 @@ def validate_transfer_pack(summary: dict[str, Any], *, summary_path: Path = DEFA
             errors.append("CHECKSUMS.json missing from pack root")
 
     archive_entries: list[str] = []
+    archive_checked_files = 0
     if not archive_path:
         errors.append("summary missing archive path")
     elif not archive_path.exists():
@@ -127,6 +157,11 @@ def validate_transfer_pack(summary: dict[str, Any], *, summary_path: Path = DEFA
             errors.append("archive size mismatch")
         with zipfile.ZipFile(archive_path) as zf:
             archive_entries = sorted(name for name in zf.namelist() if not name.endswith("/"))
+            if not checksum_payload:
+                checksum_payload = checksum_payload_from_zip(zf)
+            for entry in pack_files:
+                errors.extend(validate_zip_entry(zf, entry))
+                archive_checked_files += 1
         expected_archive_entries = sorted(str(item.get("path") or "") for item in pack_files if str(item.get("path") or ""))
         if archive_entries != expected_archive_entries:
             errors.append("archive entries do not match summary pack_files")
@@ -147,6 +182,7 @@ def validate_transfer_pack(summary: dict[str, Any], *, summary_path: Path = DEFA
         "errors": errors,
         "counts": {
             "checked_pack_files": checked_files,
+            "checked_archive_files": archive_checked_files,
             "checksum_manifest_files": len((checksum_payload.get("files") or [])),
             "archive_entries": len(archive_entries),
             "command_files": len(command_files),

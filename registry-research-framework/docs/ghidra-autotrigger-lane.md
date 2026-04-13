@@ -103,6 +103,7 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   The materializer also writes `CHECKSUMS.json` inside the pack and records the archive SHA-256 in the summary JSON, so the destination host can verify the transfer before running any commands.
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.json`
   Verification result for the materialized pack, covering file hashes, zip entries, command files, and archive SHA-256.
+  The checker can also validate directly from the zip archive when the extracted pack directory is not present, which is the expected destination-host shape after transfer.
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.md`
   Human-readable verification summary.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
