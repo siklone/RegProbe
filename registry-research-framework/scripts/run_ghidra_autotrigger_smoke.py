@@ -30,6 +30,7 @@ def load_local_module(name: str, path: Path):
 
 autotrigger = load_local_module("ghidra_smoke_autotrigger", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_seeds.py")
 sync_lane_mod = load_local_module("ghidra_smoke_sync_lane", FRAMEWORK_ROOT / "scripts" / "sync_ghidra_autotrigger_lane.py")
+transfer_mod = load_local_module("ghidra_smoke_transfer", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_symbol_resolution_transfer.py")
 
 
 def now_utc() -> str:
@@ -230,6 +231,8 @@ def run_smoke(
     sync_markdown_path = output_root / "ghidra-autotrigger-sync.md"
     handoff_path = output_root / "ghidra-symbol-resolution-handoff.json"
     handoff_markdown_path = output_root / "ghidra-symbol-resolution-handoff.md"
+    transfer_path = output_root / "ghidra-symbol-resolution-transfer.json"
+    transfer_markdown_path = output_root / "ghidra-symbol-resolution-transfer.md"
 
     sync_payload = sync_lane_mod.sync_lane(
         discover_input_roots=[smoke_input_root],
@@ -248,6 +251,9 @@ def run_smoke(
         output_path=sync_path,
     )
     handoff_payload = load_json(handoff_path)
+    transfer_payload = transfer_mod.transfer_payload(handoff_payload, handoff_path=handoff_path)
+    write_json(transfer_path, transfer_payload)
+    write_text(transfer_markdown_path, transfer_mod.render_markdown(transfer_payload))
 
     refresh = sync_payload.get("refresh") or {}
     counts = {
@@ -299,8 +305,11 @@ def run_smoke(
             "sync_markdown_path": autotrigger.portable_path(sync_markdown_path),
             "handoff_path": autotrigger.portable_path(handoff_path),
             "handoff_markdown_path": autotrigger.portable_path(handoff_markdown_path),
+            "transfer_path": autotrigger.portable_path(transfer_path),
+            "transfer_markdown_path": autotrigger.portable_path(transfer_markdown_path),
         },
         "handoff_status": handoff_payload.get("handoff_status"),
+        "transfer_status": transfer_payload.get("transfer_status"),
     }
     write_json(output_path, payload)
     write_text(markdown_path, render_markdown(payload))

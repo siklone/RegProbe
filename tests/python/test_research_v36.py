@@ -45,6 +45,7 @@ ghidra_autotrigger_health_check = load_module("check_ghidra_autotrigger_health",
 ghidra_autotrigger_sync = load_module("sync_ghidra_autotrigger_lane", FRAMEWORK_SCRIPTS / "sync_ghidra_autotrigger_lane.py")
 ghidra_autotrigger_smoke = load_module("run_ghidra_autotrigger_smoke", FRAMEWORK_SCRIPTS / "run_ghidra_autotrigger_smoke.py")
 ghidra_symbol_handoff = load_module("generate_ghidra_symbol_resolution_handoff", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_handoff.py")
+ghidra_symbol_transfer = load_module("generate_ghidra_symbol_resolution_transfer", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_transfer.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2393,6 +2394,54 @@ class GhidraSymbolResolutionHandoffTests(unittest.TestCase):
         self.assertIn("request-2", markdown)
 
 
+class GhidraSymbolResolutionTransferTests(unittest.TestCase):
+    def test_transfer_payload_packages_selected_jobs_and_repo_paths(self) -> None:
+        handoff = {
+            "handoff_status": "ready",
+            "required_host_tools": ["python3", "curl", "virsh"],
+            "counts": {
+                "selected_jobs": 1,
+                "blocked_jobs": 1,
+            },
+            "selected_jobs": [
+                {
+                    "request_id": "request-1",
+                    "job_id": "job-1",
+                    "target_binary": "ntoskrnl.exe",
+                    "guest_binary_path": r"C:\Windows\System32\ntoskrnl.exe",
+                    "patterns": ["AllowSystemRequiredPowerRequests"],
+                    "candidate_ids": ["power.keep"],
+                    "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --pattern AllowSystemRequiredPowerRequests",
+                    "output_dir": "evidence/files/ghidra/job-1",
+                }
+            ],
+            "blocked_jobs": [
+                {
+                    "request_id": "request-2",
+                    "missing_inputs": ["patterns"],
+                    "missing_host_tools": [],
+                }
+            ],
+        }
+
+        payload = ghidra_symbol_transfer.transfer_payload(
+            handoff,
+            handoff_path=Path("/tmp/handoff.json"),
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(payload["transfer_status"], "ready")
+        self.assertEqual(payload["operator"]["blocker"], "transfer-pack-ready")
+        self.assertEqual(payload["counts"]["selected_jobs"], 1)
+        self.assertEqual(payload["counts"]["candidate_count"], 1)
+        self.assertIn("scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py", payload["required_repo_paths"])
+        self.assertEqual(payload["jobs"][0]["request_id"], "request-1")
+
+        markdown = ghidra_symbol_transfer.render_markdown(payload)
+        self.assertIn("# Ghidra Symbol Resolution Transfer", markdown)
+        self.assertIn("request-1", markdown)
+
+
 class GhidraAutotriggerPipelineTests(unittest.TestCase):
     def test_refresh_pipeline_writes_seed_batch_and_run_surfaces(self) -> None:
         bundle = {
@@ -3132,6 +3181,7 @@ class GhidraAutotriggerSmokeTests(unittest.TestCase):
             self.assertGreaterEqual(payload["counts"]["symbol_resolution_request_count"], 3)
             self.assertEqual(payload["operator"]["blocker"], "symbol-resolution-ready")
             self.assertEqual(payload["handoff_status"], "ready")
+            self.assertEqual(payload["transfer_status"], "ready")
             self.assertIn("module_offset", payload["frame_resolution_counts"])
             self.assertIn("raw_address", payload["frame_resolution_counts"])
             self.assertTrue(output_path.exists())

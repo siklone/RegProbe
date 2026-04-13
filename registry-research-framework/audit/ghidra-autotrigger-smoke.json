@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T10:32:32.117486Z",
+  "generated_utc": "2026-04-13T10:36:13.492354Z",
   "smoke_status": "ok",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "output_root": "registry-research-framework/audit/ghidra-autotrigger-smoke",
@@ -46,7 +46,10 @@
     "sync_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-sync.json",
     "sync_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-sync.md",
     "handoff_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.json",
-    "handoff_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.md"
+    "handoff_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.md",
+    "transfer_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.json",
+    "transfer_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.md"
   },
-  "handoff_status": "ready"
+  "handoff_status": "ready",
+  "transfer_status": "ready"
 }

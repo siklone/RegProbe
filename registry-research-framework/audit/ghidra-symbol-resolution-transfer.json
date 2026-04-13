@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T10:36:13.439219Z",
+  "source_handoff_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.json",
+  "transfer_status": "idle",
+  "operator": {
+    "blocker": "no-selected-symbol-jobs",
+    "next_action": "Refresh the autotrigger lane until the handoff surface exposes at least one selected symbol-resolution job."
+  },
+  "counts": {
+    "selected_jobs": 0,
+    "blocked_jobs": 0,
+    "candidate_count": 0,
+    "repo_file_count": 9,
+    "missing_repo_file_count": 0
+  },
+  "candidate_ids": [],
+  "required_host_tools": [],
+  "required_repo_paths": [
+    "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+    "scripts/vm-kvm/ensure-guest-admin-shell.py",
+    "scripts/vm-kvm/type-to-guest.py",
+    "scripts/vm-kvm/guest_bridge.py",
+    "scripts/vm-kvm/summary_contract_lib.py",
+    "scripts/vm/guest-tools/run-ghidra-symbolized-probe.ps1",
+    "scripts/vm/guest-tools/ghidra-headless.cmd",
+    "scripts/vm/ghidra/ExportBranchAnalysis.java",
+    "scripts/vm/ghidra/SetPdbSymbolRepository.java"
+  ],
+  "missing_repo_paths": [],
+  "jobs": [],
+  "blocked_jobs": []
+}
