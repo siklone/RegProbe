@@ -734,6 +734,8 @@ class PromotionStateTests(unittest.TestCase):
         for blocker in [
             "bounded-s1-registry-etw-no-hit-current-build",
             "procmon-saveas-timeout-on-bounded-callout-lane",
+            "powerwatchdog-timeout-family-runtime-read-unresolved",
+            "dpc-watchdog-control-runtime-read-unresolved",
         ]:
             record = {
                 "record_id": f"example.{blocker}",

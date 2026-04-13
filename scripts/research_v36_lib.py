@@ -1792,6 +1792,7 @@ def _infer_blocker_driven_missing_layer(base_layer: str, blockers: set[str]) -> 
         "wpr-boot-registry-no-hit",
         "registry-etw-no-hit",
         "etw-no-hit",
+        "runtime-read-unresolved",
         "hibernate-runtime-read-unresolved",
         "drips-exit-runtime-read-unresolved",
         "watchdog-timeouts-exact-runtime-read-unresolved",
