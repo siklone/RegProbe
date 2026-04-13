@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T02:36:56.581516Z",
+  "generated_utc": "2026-04-13T02:42:29.381988Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -5943,7 +5943,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "intentional-hold",
         "not-mapped-to-supported-app-surface",
         "research-only-raw-policy-system-value"
       ],
@@ -6318,7 +6317,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "intentional-hold",
         "not-mapped-to-supported-app-surface",
         "research-only-raw-power-manager-value"
       ],
@@ -6413,8 +6411,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "hibernate-runtime-read-unresolved",
-        "hibernate-trigger-not-available-on-current-vm",
-        "intentional-hold"
+        "hibernate-trigger-not-available-on-current-vm"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -7035,8 +7032,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "drips-exit-runtime-read-unresolved",
-        "drips-trigger-not-available-on-current-vm",
-        "intentional-hold"
+        "drips-trigger-not-available-on-current-vm"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -7123,7 +7119,6 @@
       "promotion_blockers": [
         "boot-unsafe-dedicated-boot-lane-required",
         "boot-unsafe-on-isolated-pilot-profile",
-        "intentional-hold",
         "no-primary-current-build-doc",
         "reboot-diff",
         "ttmenabled-reader-unresolved"
@@ -22850,7 +22845,6 @@
     "drips-trigger-not-available-on-current-vm": 1,
     "hibernate-trigger-not-available-on-current-vm": 1,
     "intentional-ghidra-hold": 1,
-    "intentional-hold": 5,
     "no-current-build-string-or-symbol-hit": 1,
     "no-primary-current-build-doc": 11,
     "no-runtime-proof": 15,

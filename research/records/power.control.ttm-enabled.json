@@ -200,7 +200,6 @@
     "needs_vm_validation": true,
     "why": "TtmEnabled now has enough docs, baseline, and current-build corroboration for a schema-backed draft, but the current runtime evidence is dominated by risk: the isolated non-default probe reproduced boot-unsafe behavior and there is still no primary Microsoft documentation or exact naturally resolved current-build consumer path for this value. The 2026-04-12 decision marks this as an intentional hold: boot-unsafe, do not probe without dedicated boot lane.",
     "blocking_issues": [
-      "intentional-hold",
       "boot-unsafe-dedicated-boot-lane-required",
       "boot-unsafe-on-isolated-pilot-profile",
       "no-primary-current-build-doc",

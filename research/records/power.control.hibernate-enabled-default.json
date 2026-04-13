@@ -234,7 +234,6 @@
                      "needs_vm_validation":  false,
                      "why":  "HibernateEnabledDefault is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, a second guest-processed post-boot Procmon trigger batch, a guest-return ETW follow-up, and a host-driven KVM reboot observation. The ETW lane produced an exact line hit, and the KVM reboot lane showed that the value persists at `1` across a real reboot while hibernation remains unavailable. The record therefore stays decision-gated by an environment limitation rather than by a dead-flag conclusion. The 2026-04-12 decision review marks this as an intentional hold because the current virtualized baselines cannot exercise a real hibernation transition.",
                      "blocking_issues":  [
-                                             "intentional-hold",
       "hibernate-runtime-read-unresolved",
       "hibernate-trigger-not-available-on-current-vm"
                                          ]

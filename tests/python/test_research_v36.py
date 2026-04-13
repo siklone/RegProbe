@@ -800,6 +800,45 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["next_missing_layer"], "ghidra")
         self.assertIn("unlabeled-init-walker-not-symbol-resolved", gate["promotion_blockers"])
 
+    def test_specific_hold_blockers_map_to_intentional_hold_lane_without_generic_tag(self) -> None:
+        for blocker in [
+            "research-only-raw-policy-system-value",
+            "research-only-raw-power-manager-value",
+            "hibernate-trigger-not-available-on-current-vm",
+            "drips-trigger-not-available-on-current-vm",
+            "boot-unsafe-dedicated-boot-lane-required",
+        ]:
+            record = {
+                "record_id": f"example.{blocker}",
+                "tweak_id": f"example.{blocker}",
+                "record_status": "validated",
+                "setting": {
+                    "area": "Example",
+                    "targets": [
+                        {
+                            "path": "HKLM\\Software\\Example",
+                            "value_name": "Enabled",
+                            "value_type": "REG_DWORD",
+                        }
+                    ],
+                },
+                "decision": {
+                    "apply_allowed": False,
+                    "confidence": "medium",
+                    "restore_default_supported": True,
+                    "blocking_issues": [blocker],
+                },
+                "validation_proof": {
+                    "source_url": "Docs/example.md",
+                    "exact_quote_or_path": "Docs/example.md:1",
+                },
+            }
+
+            gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
+
+            self.assertEqual(gate["next_missing_layer"], "intentional-hold")
+            self.assertIn(blocker, gate["promotion_blockers"])
+
     def test_restore_story_specific_blocker_maps_to_restore_story_lane(self) -> None:
         record = {
             "record_id": "example.restore-story",
