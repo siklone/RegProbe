@@ -9,8 +9,6 @@
   "stale_count": 0,
   "blocker_breakdown": {
     "audio-execution-required-init-walker-not-symbol-resolved": 1,
-    "boot-unsafe-dedicated-boot-lane-required": 1,
-    "boot-unsafe-on-isolated-pilot-profile": 1,
     "conflicting-sources": 2,
     "dpc-watchdog-profile-conditional-initialization-unproven": 1,
     "drips-trigger-not-available-on-current-vm": 1,
@@ -26,6 +24,8 @@
     "research-only-raw-power-manager-value": 1,
     "system-execution-required-init-walker-not-symbol-resolved": 1,
     "timer-check-flags-modern-bit-semantics-unproven": 1,
+    "ttmenabled-boot-unsafe-dedicated-boot-lane-required": 1,
+    "ttmenabled-boot-unsafe-on-isolated-pilot-profile": 1,
     "ttmenabled-reader-unresolved": 1,
     "watchdog-timeouts-specific-caller-unresolved": 1,
     "win32-callout-watchdog-bugcheck-semantics-unproven": 1,
@@ -33,5 +33,5 @@
   },
   "bench_completion_rate": 1.0,
   "missing_docs_count": 0,
-  "generated_at": "2026-04-13T03:30:40.682607Z"
+  "generated_at": "2026-04-13T03:32:12.484987Z"
 }

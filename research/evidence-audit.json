@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T03:29:58.038413Z",
+  "generated_utc": "2026-04-13T03:31:56.762314Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -7110,8 +7110,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "boot-unsafe-dedicated-boot-lane-required",
-        "boot-unsafe-on-isolated-pilot-profile",
+        "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
+        "ttmenabled-boot-unsafe-on-isolated-pilot-profile",
         "ttmenabled-no-primary-current-build-doc",
         "ttmenabled-reader-unresolved"
       ],
@@ -22831,8 +22831,6 @@
   ],
   "blocker_breakdown": {
     "audio-execution-required-init-walker-not-symbol-resolved": 1,
-    "boot-unsafe-dedicated-boot-lane-required": 1,
-    "boot-unsafe-on-isolated-pilot-profile": 1,
     "conflicting-sources": 2,
     "dpc-watchdog-profile-conditional-initialization-unproven": 1,
     "drips-trigger-not-available-on-current-vm": 1,
@@ -22848,6 +22846,8 @@
     "research-only-raw-power-manager-value": 1,
     "system-execution-required-init-walker-not-symbol-resolved": 1,
     "timer-check-flags-modern-bit-semantics-unproven": 1,
+    "ttmenabled-boot-unsafe-dedicated-boot-lane-required": 1,
+    "ttmenabled-boot-unsafe-on-isolated-pilot-profile": 1,
     "ttmenabled-reader-unresolved": 1,
     "watchdog-timeouts-specific-caller-unresolved": 1,
     "win32-callout-watchdog-bugcheck-semantics-unproven": 1,

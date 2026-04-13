@@ -950,7 +950,7 @@ class PromotionStateTests(unittest.TestCase):
             "research-only-raw-power-manager-value",
             "hibernate-trigger-not-available-on-current-vm",
             "drips-trigger-not-available-on-current-vm",
-            "boot-unsafe-dedicated-boot-lane-required",
+            "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
         ]:
             record = {
                 "record_id": f"example.{blocker}",
@@ -1003,8 +1003,8 @@ class PromotionStateTests(unittest.TestCase):
                 "confidence": "medium",
                 "restore_default_supported": True,
                 "blocking_issues": [
-                    "boot-unsafe-dedicated-boot-lane-required",
-                    "boot-unsafe-on-isolated-pilot-profile",
+                    "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
+                    "ttmenabled-boot-unsafe-on-isolated-pilot-profile",
                 ],
             },
             "validation_proof": {
@@ -1016,7 +1016,7 @@ class PromotionStateTests(unittest.TestCase):
         gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "reboot-diff"}, {})
 
         self.assertEqual(gate["next_missing_layer"], "intentional-hold")
-        self.assertIn("boot-unsafe-dedicated-boot-lane-required", gate["promotion_blockers"])
+        self.assertIn("ttmenabled-boot-unsafe-dedicated-boot-lane-required", gate["promotion_blockers"])
         self.assertNotIn("reboot-diff", gate["promotion_blockers"])
 
     def test_restore_story_specific_blocker_maps_to_restore_story_lane(self) -> None:
