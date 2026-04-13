@@ -376,6 +376,11 @@ def build_final_audit_payload(
 def research_health_markdown(publish_metrics: dict[str, Any], gate_metrics: dict[str, Any], validation_summary: dict[str, Any], gate_health: str) -> str:
     icon = {"green": "🟢", "yellow": "🟡", "red": "🔴"}.get(gate_health, "⚪")
     schema_percent = round(float(gate_metrics.get("schema_complete_ratio") or 0) * 100)
+    actionability_counts = dict(publish_metrics.get("blocked_actionability_counts") or {})
+    blocked_actionability = ", ".join(
+        f"{count} {label}"
+        for label, count in actionability_counts.items()
+    ) or "n/a"
     return "\n".join(
         [
             README_BLOCK_START,
@@ -389,6 +394,7 @@ def research_health_markdown(publish_metrics: dict[str, Any], gate_metrics: dict
             f"| Gate Health | {icon} {gate_health} |",
             f"| Schema Complete | {schema_percent}% |",
             f"| Missing Docs | {int(validation_summary.get('missing_docs_count') or 0)} |",
+            f"| Blocked Actionability | {blocked_actionability} |",
             "| Blocked Worklist | `audit/blocked-worklist.md` |",
             README_BLOCK_END,
         ]

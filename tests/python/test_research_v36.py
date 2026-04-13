@@ -1643,6 +1643,21 @@ class BlockedWorklistTests(unittest.TestCase):
         self.assertEqual(payload["top_actionable_blocked_candidates"], ["a", "c"])
         self.assertEqual(payload["top_hold_blocked_candidates"], ["b"])
 
+    def test_research_health_markdown_includes_blocked_actionability(self) -> None:
+        block = metrics_publish_v36_lib.research_health_markdown(
+            publish_metrics={
+                "promoted_candidate_count": 250,
+                "blocked_candidate_count": 18,
+                "revalidation_pending_count": 0,
+                "blocked_actionability_counts": {"active": 13, "hold": 5},
+            },
+            gate_metrics={"schema_complete_ratio": 1.0},
+            validation_summary={"missing_docs_count": 0},
+            gate_health="green",
+        )
+
+        self.assertIn("| Blocked Actionability | 13 active, 5 hold |", block)
+
     def test_candidate_slug_tokens_prioritize_specific_prefixes(self) -> None:
         tokens = blocked_worklist_lib.candidate_slug_tokens("power.control.allow-system-required-power-requests")
 
