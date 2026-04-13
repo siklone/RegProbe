@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T02:43:52.189810Z",
+  "generated_utc": "2026-04-13T02:46:33.474901Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -16,10 +16,9 @@
     },
     "next_missing_layer_counts": {
       "none": 250,
-      "intentional-hold": 4,
+      "intentional-hold": 5,
       "ghidra": 5,
       "restore-story": 1,
-      "reboot-diff": 1,
       "runtime-trace": 7
     },
     "promotion_state_counts": {
@@ -7086,7 +7085,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "reboot-diff",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": false,
       "layers_used": [
         "static_ghidra"
@@ -7120,7 +7119,6 @@
         "boot-unsafe-dedicated-boot-lane-required",
         "boot-unsafe-on-isolated-pilot-profile",
         "no-primary-current-build-doc",
-        "reboot-diff",
         "ttmenabled-reader-unresolved"
       ],
       "record_promotion_allowed": false,
@@ -22851,7 +22849,6 @@
     "non-default-semantics-unproven": 5,
     "not-mapped-to-supported-app-surface": 2,
     "powerrequestoverride-leaf-semantics-unresolved": 1,
-    "reboot-diff": 1,
     "research-only-raw-policy-system-value": 1,
     "research-only-raw-power-manager-value": 1,
     "restore-story-unproven-subtree-presence-only": 1,

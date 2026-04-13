@@ -839,6 +839,42 @@ class PromotionStateTests(unittest.TestCase):
             self.assertEqual(gate["next_missing_layer"], "intentional-hold")
             self.assertIn(blocker, gate["promotion_blockers"])
 
+    def test_reboot_diff_boot_unsafe_blocker_upgrades_to_intentional_hold_lane(self) -> None:
+        record = {
+            "record_id": "example.boot-unsafe-reboot-diff",
+            "tweak_id": "example.boot-unsafe-reboot-diff",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+                "blocking_issues": [
+                    "boot-unsafe-dedicated-boot-lane-required",
+                    "boot-unsafe-on-isolated-pilot-profile",
+                ],
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "reboot-diff"}, {})
+
+        self.assertEqual(gate["next_missing_layer"], "intentional-hold")
+        self.assertIn("boot-unsafe-dedicated-boot-lane-required", gate["promotion_blockers"])
+        self.assertNotIn("reboot-diff", gate["promotion_blockers"])
+
     def test_restore_story_specific_blocker_maps_to_restore_story_lane(self) -> None:
         record = {
             "record_id": "example.restore-story",
