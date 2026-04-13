@@ -798,6 +798,38 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["next_missing_layer"], "ghidra")
         self.assertIn("unlabeled-init-walker-not-symbol-resolved", gate["promotion_blockers"])
 
+    def test_restore_story_specific_blocker_maps_to_restore_story_lane(self) -> None:
+        record = {
+            "record_id": "example.restore-story",
+            "tweak_id": "example.restore-story",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+                "blocking_issues": ["restore-story-unproven-subtree-presence-only"],
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
+
+        self.assertEqual(gate["next_missing_layer"], "restore-story")
+        self.assertIn("restore-story-unproven-subtree-presence-only", gate["promotion_blockers"])
+
     def test_negative_evidence_functional_no_effect_blocks_candidate(self) -> None:
         record = {
             "record_id": "example.functional-no-effect",

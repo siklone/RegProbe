@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T01:58:38.748114Z",
+  "generated_utc": "2026-04-13T02:00:56.970412Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -6855,9 +6855,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "Exact leaf values and semantics under PowerRequestOverride are still unresolved because the retained runtime trace currently shows root queries and NAME NOT FOUND probes on Driver, Process, and Service rather than stable leaf-value reads.",
-        "The record does not yet have a reliable restore story beyond the observed retained subtree-presence snapshot.",
-        "The retained static context is still adjacent rather than leaf-specific: it narrows the override family around timeout-specific and generic power-setting surfaces, but it does not yet bind Driver, Process, or Service leaves to a naturally resolved direct-reading function."
+        "powerrequestoverride-leaf-semantics-unresolved",
+        "restore-story-unproven-subtree-presence-only",
+        "static-context-adjacent-not-leaf-specific"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -22854,10 +22854,13 @@
     "no-runtime-proof": 12,
     "non-default-semantics-unproven": 5,
     "not-mapped-to-supported-app-surface": 2,
+    "powerrequestoverride-leaf-semantics-unresolved": 1,
     "reboot-diff": 1,
-    "record-blocker": 12,
+    "record-blocker": 9,
     "research-only-raw-policy-system-value": 1,
     "research-only-raw-power-manager-value": 1,
+    "restore-story-unproven-subtree-presence-only": 1,
+    "static-context-adjacent-not-leaf-specific": 1,
     "unlabeled-init-walker-not-symbol-resolved": 2
   },
   "stale_records": [],

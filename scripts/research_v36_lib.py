@@ -1760,6 +1760,7 @@ def _infer_blocker_driven_missing_layer(base_layer: str, blockers: set[str]) -> 
 
     if has_phrase(
         "restore story",
+        "restore-story",
         "rollback",
         "restore/default story",
     ):
