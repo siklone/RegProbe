@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shlex
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -55,6 +56,21 @@ def split_csv(value: str | None) -> list[str]:
     return [item.strip() for item in str(value or "").split(",") if item.strip()]
 
 
+def shell_quote(value: str) -> str:
+    if not value:
+        return "''"
+    safe = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_+-=.,/:")
+    if all(ch in safe for ch in value):
+        return value
+    return "'" + value.replace("'", "'\"'\"'") + "'"
+
+
+def command_argv(command: str) -> list[str]:
+    if not command:
+        return []
+    return shlex.split(command, posix=False)
+
+
 def parse_command_file(path: Path) -> dict[str, Any]:
     metadata: dict[str, str] = {}
     command_lines: list[str] = []
@@ -73,6 +89,7 @@ def parse_command_file(path: Path) -> dict[str, Any]:
     destination_command = original_command
     if destination_command.startswith("python3 scripts/"):
         destination_command = destination_command.replace("python3 scripts/", "python3 repo/scripts/", 1)
+    destination_argv = command_argv(destination_command)
     return {
         "command_file": path.name,
         "request_id": metadata.get("request_id"),
@@ -82,6 +99,8 @@ def parse_command_file(path: Path) -> dict[str, Any]:
         "patterns": split_csv(metadata.get("patterns")),
         "original_command": original_command,
         "destination_command": destination_command,
+        "destination_argv": destination_argv,
+        "destination_shell_command": " ".join(shell_quote(item) for item in destination_argv),
     }
 
 
@@ -91,8 +110,9 @@ def missing_inputs_for_job(import_root: Path, job: dict[str, Any]) -> list[str]:
         missing.append("request_id")
     if not job.get("destination_command"):
         missing.append("destination_command")
-    if str(job.get("destination_command") or "").startswith("python3 repo/scripts/"):
-        relative_script = str(job.get("destination_command")).split()[1]
+    destination_argv = job.get("destination_argv") or []
+    if len(destination_argv) >= 2 and destination_argv[0] == "python3" and str(destination_argv[1]).startswith("repo/scripts/"):
+        relative_script = str(destination_argv[1])
         if not (import_root / relative_script).exists():
             missing.append(f"missing-script:{relative_script}")
     return missing
@@ -179,7 +199,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         lines.append("- none")
     for job in jobs:
         lines.append(f"- `{job.get('request_id')}`")
-        lines.append(f"  command: `{job.get('destination_command')}`")
+        lines.append(f"  command: `{job.get('destination_shell_command')}`")
     lines.extend(["", "## Errors", ""])
     errors = payload.get("errors") or []
     if not errors:

@@ -2678,6 +2678,8 @@ class GhidraSymbolResolutionTransferPackTests(unittest.TestCase):
             self.assertEqual(payload["counts"]["ready_jobs"], 1)
             self.assertEqual(payload["jobs"][0]["request_id"], "request-1")
             self.assertTrue(payload["jobs"][0]["destination_command"].startswith("python3 repo/scripts/"))
+            self.assertEqual(payload["jobs"][0]["destination_argv"][3], r"C:\Windows\System32\ntoskrnl.exe")
+            self.assertIn("'C:\\Windows\\System32\\ntoskrnl.exe'", payload["jobs"][0]["destination_shell_command"])
             self.assertEqual(payload["jobs"][0]["missing_inputs"], [])
 
     def test_execution_plan_blocks_missing_import_runner_script(self) -> None:
