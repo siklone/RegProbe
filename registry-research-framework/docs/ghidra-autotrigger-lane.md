@@ -42,7 +42,7 @@ Run the synthetic smoke harness:
 python3 registry-research-framework/scripts/run_ghidra_autotrigger_smoke.py
 ```
 
-The smoke harness writes both `ghidra-autotrigger-smoke.json` and `ghidra-autotrigger-smoke-check.json`, so the latest run leaves an operator summary and a machine-checkable gate.
+The smoke harness writes both `ghidra-autotrigger-smoke.json` and `ghidra-autotrigger-smoke-check.json`, so the latest run leaves an operator summary and a machine-checkable gate. The command exits nonzero when either the smoke assertions or the smoke-check gate fail.
 
 Validate the latest synthetic smoke result:
 

@@ -451,7 +451,9 @@ def main() -> int:
         limit=args.limit,
     )
     print(json.dumps(payload, indent=2))
-    return 0
+    smoke_check_path = args.output.with_name(f"{args.output.stem}-check.json")
+    smoke_check_payload = load_json(smoke_check_path) if smoke_check_path.exists() else {}
+    return 0 if payload.get("smoke_status") == "ok" and smoke_check_payload.get("check_status") == "ok" else 1
 
 
 if __name__ == "__main__":
