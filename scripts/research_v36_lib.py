@@ -1781,6 +1781,8 @@ def _infer_blocker_driven_missing_layer(base_layer: str, blockers: set[str]) -> 
         "runtime_no_read",
         "no-runtime-proof",
         "wpr-boot-registry-no-hit",
+        "registry-etw-no-hit",
+        "etw-no-hit",
         "exact runtime query/read",
         "exact live read",
         "runtime package",

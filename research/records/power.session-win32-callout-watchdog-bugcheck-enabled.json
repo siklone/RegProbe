@@ -284,7 +284,7 @@
     "why": "The candidate is strong enough for a schema-backed draft because it has clean-baseline absence, a current-build string hit, a live current-build KD symbol/value for `PopWin32CalloutWatchdogBugcheckEnabled`, a current-build INIT descriptor binding from the value name to the same global under `Session Manager\\Power`, a dedicated Procmon runtime attempt that reached guest execution, and a neutral-value VM perf bench that verified apply and rollback. It is not ready for validation because an exact runtime registry read has not been captured, the bounded runtime lane currently fails at `Procmon SaveAs`, the direct code-reader path is still unresolved, and non-default semantics remain unproven.",
     "manual_review_required": true,
     "blocking_issues": [
-      "runtime_no_read",
+      "procmon-saveas-timeout-on-bounded-callout-lane",
       "no-primary-current-build-doc",
       "non-default-semantics-unproven"
     ]

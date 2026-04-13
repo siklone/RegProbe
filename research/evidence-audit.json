@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T01:53:50.248226Z",
+  "generated_utc": "2026-04-13T01:56:31.425177Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -38,13 +38,7 @@
       "counts_by_source_tool": {},
       "counts_by_confidence": {},
       "counts_by_promotion_state": {}
-    },
-    "total": 268,
-    "promoted": 250,
-    "blocked": 18,
-    "revalidation_pending": 0,
-    "stale": 0,
-    "gate_health": "green"
+    }
   },
   "entries": [
     {
@@ -7217,9 +7211,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "bounded-s1-registry-etw-no-hit-current-build",
         "no-primary-current-build-doc",
-        "non-default-semantics-unproven",
-        "runtime_no_read"
+        "non-default-semantics-unproven"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -8281,7 +8275,7 @@
       "promotion_blockers": [
         "no-primary-current-build-doc",
         "non-default-semantics-unproven",
-        "runtime_no_read"
+        "procmon-saveas-timeout-on-bounded-callout-lane"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -22841,6 +22835,11 @@
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
       "incident_ids": []
     }
+  ]
+}
+-classic-context-menu.review.json",
+      "incident_ids": []
+    }
   ],
   "blocker_breakdown": {
     "boot-unsafe, do not probe without dedicated boot lane": 1,
@@ -22852,10 +22851,9 @@
     "no-current-build-string-or-symbol-hit": 1,
     "no-doc-source-outside-repo": 5,
     "no-primary-current-build-doc": 5,
-    "no-runtime-proof": 11,
+    "no-runtime-proof": 12,
     "non-default-semantics-unproven": 5,
     "not-mapped-to-supported-app-surface": 2,
-    "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane": 1,
     "reboot-diff": 1,
     "record-blocker": 12,
     "research-only-raw-policy-system-value": 1,
