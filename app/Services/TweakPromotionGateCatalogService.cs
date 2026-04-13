@@ -210,6 +210,7 @@ public sealed class TweakPromotionGateCatalogService
     public IEnumerable<BlockedWorklistEntry> ListBlockedWorklist(
         string? reason = null,
         string? lane = null,
+        string? actionability = null,
         bool actionableOnly = false,
         int? top = null)
     {
@@ -224,6 +225,11 @@ public sealed class TweakPromotionGateCatalogService
         if (!string.IsNullOrWhiteSpace(lane))
         {
             entries = entries.Where(entry => string.Equals(entry.NextMissingLayer, lane, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(actionability))
+        {
+            entries = entries.Where(entry => string.Equals(entry.Actionability, actionability, StringComparison.OrdinalIgnoreCase));
         }
 
         if (actionableOnly)

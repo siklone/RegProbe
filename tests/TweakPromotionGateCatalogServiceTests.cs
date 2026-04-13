@@ -241,10 +241,14 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         var service = new TweakPromotionGateCatalogService(_docsRoot);
 
         var actionable = service.ListBlockedWorklist(actionableOnly: true, top: 1).ToList();
+        var holds = service.ListBlockedWorklist(actionability: "hold").ToList();
 
         Assert.Single(actionable);
         Assert.Equal("power.test-gate", actionable[0].CandidateId);
         Assert.Equal("active", actionable[0].Actionability);
+        Assert.Single(holds);
+        Assert.Equal("power.intentional-hold", holds[0].CandidateId);
+        Assert.Equal("hold", holds[0].Actionability);
         Assert.Single(actionable[0].RecentAuditArtifacts);
         Assert.Equal("winopt research show-blocked power.test-gate --json", actionable[0].SuggestedCommand);
         Assert.Equal(1, service.BlockedWorklist.ActionabilityCounts["active"]);

@@ -360,6 +360,7 @@ class Program
         var reasonOption = new Option<string?>("--reason", "Only show blockers matching this reason");
         var worklistOption = new Option<bool>("--worklist", "Show the prioritized blocked worklist view");
         var actionableOnlyOption = new Option<bool>("--actionable-only", "Only show blocked candidates that are currently actionable");
+        var actionabilityOption = new Option<string?>("--actionability", "Only show blocked candidates with a specific actionability (active or hold)");
         var laneOption = new Option<string?>("--lane", "Only show blocked candidates for a specific next-missing-layer lane");
         var topOption = new Option<int?>("--top", "Limit the number of blocked candidates shown");
         var blockedJsonOption = new Option<bool>("--json", "Emit blocked candidates as JSON");
@@ -367,6 +368,7 @@ class Program
         blockedCommand.AddOption(reasonOption);
         blockedCommand.AddOption(worklistOption);
         blockedCommand.AddOption(actionableOnlyOption);
+        blockedCommand.AddOption(actionabilityOption);
         blockedCommand.AddOption(laneOption);
         blockedCommand.AddOption(topOption);
         blockedCommand.AddOption(blockedJsonOption);
@@ -376,8 +378,18 @@ class Program
             var reason = context.ParseResult.GetValueForOption(reasonOption);
             var emitJson = context.ParseResult.GetValueForOption(blockedJsonOption);
             var emitSummary = context.ParseResult.GetValueForOption(blockedSummaryOption);
+            var actionability = context.ParseResult.GetValueForOption(actionabilityOption);
+            if (!string.IsNullOrWhiteSpace(actionability)
+                && !string.Equals(actionability, "active", StringComparison.OrdinalIgnoreCase)
+                && !string.Equals(actionability, "hold", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine($"Unsupported actionability filter: {actionability}");
+                context.ExitCode = 1;
+                return;
+            }
             var useWorklist = context.ParseResult.GetValueForOption(worklistOption)
                               || context.ParseResult.GetValueForOption(actionableOnlyOption)
+                              || !string.IsNullOrWhiteSpace(actionability)
                               || emitSummary
                               || context.ParseResult.GetValueForOption(topOption) is > 0
                               || !string.IsNullOrWhiteSpace(context.ParseResult.GetValueForOption(laneOption));
@@ -458,6 +470,7 @@ class Program
                 var entries = catalog.ListBlockedWorklist(
                     reason,
                     context.ParseResult.GetValueForOption(laneOption),
+                    actionability,
                     context.ParseResult.GetValueForOption(actionableOnlyOption),
                     context.ParseResult.GetValueForOption(topOption)).ToList();
 
