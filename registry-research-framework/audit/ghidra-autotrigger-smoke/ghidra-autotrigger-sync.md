@@ -17,6 +17,13 @@
 - Selected jobs: `4`
 - Path: `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.json`
 
+## Transfer Pack
+
+- Pack status: `ready`
+- Selected jobs: `4`
+- Summary path: `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.json`
+- Archive path: `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.zip`
+
 ## Refresh
 
 - Bundle count: `1`

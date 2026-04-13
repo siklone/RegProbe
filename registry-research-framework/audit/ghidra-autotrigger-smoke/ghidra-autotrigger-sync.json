@@ -18,6 +18,8 @@
     "symbol_resolution_handoff_selected_job_count": 4,
     "symbol_resolution_transfer_status": "ready",
     "symbol_resolution_transfer_selected_job_count": 4,
+    "symbol_resolution_transfer_pack_status": "ready",
+    "symbol_resolution_transfer_pack_selected_job_count": 4,
     "dispatch_job_count": 4,
     "dispatch_autotrigger_matched_job_count": 4,
     "run_plan_selected_job_count": 4,
@@ -31,6 +33,10 @@
       "handoff_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.md",
       "transfer_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.json",
       "transfer_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.md",
+      "transfer_pack_output_root": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack",
+      "transfer_pack_summary_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.json",
+      "transfer_pack_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.md",
+      "transfer_pack_archive_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.zip",
       "batch_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-dispatch-batch.json",
       "run_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-dispatch-run.json",
       "health_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-health.json",
@@ -55,6 +61,14 @@
     "selected_jobs": 4,
     "path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.json",
     "markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.md"
+  },
+  "transfer_pack": {
+    "status": "ready",
+    "selected_jobs": 4,
+    "path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.json",
+    "markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.md",
+    "archive_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.zip",
+    "output_root": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack"
   },
   "operator": {
     "status": "ready",

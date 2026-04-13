@@ -135,6 +135,19 @@ def render_markdown(payload: dict[str, Any]) -> str:
                 f"- Path: `{transfer.get('path')}`",
             ]
         )
+    pack = payload.get("transfer_pack") or {}
+    if pack:
+        lines.extend(
+            [
+                "",
+                "## Transfer Pack",
+                "",
+                f"- Pack status: `{pack.get('status')}`",
+                f"- Selected jobs: `{pack.get('selected_jobs')}`",
+                f"- Summary path: `{pack.get('path')}`",
+                f"- Archive path: `{pack.get('archive_path')}`",
+            ]
+        )
     refresh = payload.get("refresh") or {}
     if refresh:
         lines.extend(
@@ -185,6 +198,10 @@ def sync_lane(
     handoff_markdown_path: Path | None = None,
     transfer_path: Path | None = None,
     transfer_markdown_path: Path | None = None,
+    transfer_pack_output_root: Path | None = None,
+    transfer_pack_summary_path: Path | None = None,
+    transfer_pack_markdown_path: Path | None = None,
+    transfer_pack_archive_path: Path | None = None,
     markdown_path: Path = MARKDOWN_PATH,
     output_path: Path = OUTPUT_PATH,
 ) -> dict[str, Any]:
@@ -209,6 +226,10 @@ def sync_lane(
             handoff_markdown_path=handoff_markdown_path or refresh_pipeline_mod.HANDOFF_MARKDOWN_PATH,
             transfer_path=transfer_path or refresh_pipeline_mod.TRANSFER_PATH,
             transfer_markdown_path=transfer_markdown_path or refresh_pipeline_mod.TRANSFER_MARKDOWN_PATH,
+            transfer_pack_output_root=transfer_pack_output_root or refresh_pipeline_mod.TRANSFER_PACK_OUTPUT_ROOT,
+            transfer_pack_summary_path=transfer_pack_summary_path or refresh_pipeline_mod.TRANSFER_PACK_SUMMARY_PATH,
+            transfer_pack_markdown_path=transfer_pack_markdown_path or refresh_pipeline_mod.TRANSFER_PACK_MARKDOWN_PATH,
+            transfer_pack_archive_path=transfer_pack_archive_path or refresh_pipeline_mod.TRANSFER_PACK_ARCHIVE_PATH,
         )
     except ValueError as exc:
         manifest_payload = refresh_pipeline_mod.autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {}
@@ -230,6 +251,7 @@ def sync_lane(
                 },
                 "handoff": None,
                 "transfer": None,
+                "transfer_pack": None,
                 "operator": operator,
                 "error": str(exc),
             }
@@ -267,6 +289,14 @@ def sync_lane(
             "path": (refresh_payload.get("outputs") or {}).get("transfer_path"),
             "markdown_path": (refresh_payload.get("outputs") or {}).get("transfer_markdown_path"),
         },
+        "transfer_pack": {
+            "status": refresh_payload.get("symbol_resolution_transfer_pack_status"),
+            "selected_jobs": refresh_payload.get("symbol_resolution_transfer_pack_selected_job_count"),
+            "path": (refresh_payload.get("outputs") or {}).get("transfer_pack_summary_path"),
+            "markdown_path": (refresh_payload.get("outputs") or {}).get("transfer_pack_markdown_path"),
+            "archive_path": (refresh_payload.get("outputs") or {}).get("transfer_pack_archive_path"),
+            "output_root": (refresh_payload.get("outputs") or {}).get("transfer_pack_output_root"),
+        },
         "operator": operator,
     }
     write_json(output_path, payload)
@@ -291,6 +321,10 @@ def main() -> int:
     parser.add_argument("--handoff-markdown-output", type=Path, default=None)
     parser.add_argument("--transfer-output", type=Path, default=None)
     parser.add_argument("--transfer-markdown-output", type=Path, default=None)
+    parser.add_argument("--transfer-pack-output-root", type=Path, default=None)
+    parser.add_argument("--transfer-pack-summary-output", type=Path, default=None)
+    parser.add_argument("--transfer-pack-markdown-output", type=Path, default=None)
+    parser.add_argument("--transfer-pack-archive-output", type=Path, default=None)
     parser.add_argument("--markdown-output", type=Path, default=MARKDOWN_PATH)
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     args = parser.parse_args()
@@ -311,6 +345,10 @@ def main() -> int:
         handoff_markdown_path=args.handoff_markdown_output,
         transfer_path=args.transfer_output,
         transfer_markdown_path=args.transfer_markdown_output,
+        transfer_pack_output_root=args.transfer_pack_output_root,
+        transfer_pack_summary_path=args.transfer_pack_summary_output,
+        transfer_pack_markdown_path=args.transfer_pack_markdown_output,
+        transfer_pack_archive_path=args.transfer_pack_archive_output,
         markdown_path=args.markdown_output,
         output_path=args.output,
     )

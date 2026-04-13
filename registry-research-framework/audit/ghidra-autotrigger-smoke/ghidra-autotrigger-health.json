@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T10:40:28.716453Z",
+  "generated_utc": "2026-04-13T10:50:36.619733Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -9,6 +9,7 @@
   "symbol_run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
   "symbol_handoff_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.json",
   "symbol_transfer_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.json",
+  "symbol_transfer_pack_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.json",
   "batch_path": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
   "counts": {
@@ -23,6 +24,7 @@
     "symbol_resolution_run_blocked_jobs": 0,
     "symbol_resolution_handoff_selected_jobs": 4,
     "symbol_resolution_transfer_selected_jobs": 4,
+    "symbol_resolution_transfer_pack_selected_jobs": 4,
     "dispatch_jobs": 4,
     "autotrigger_dispatch_jobs": 4,
     "run_selected_jobs": 4,
@@ -55,6 +57,14 @@
     "selected_jobs": 4,
     "repo_file_count": 9,
     "missing_repo_file_count": 0
+  },
+  "symbol_resolution_transfer_pack": {
+    "status": "ready",
+    "operator_blocker": "transfer-pack-ready",
+    "selected_jobs": 4,
+    "repo_files_copied": 9,
+    "command_files_written": 4,
+    "archive_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.zip"
   },
   "runner": {
     "available": false,
@@ -113,6 +123,12 @@
       "ghidra-symbol-03-ntoskrnl-exe-0x2c80",
       "ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002"
     ],
+    "symbol_resolution_transfer_pack_request_ids": [
+      "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
+      "ghidra-symbol-02-ntoskrnl-exe-0x1920",
+      "ghidra-symbol-03-ntoskrnl-exe-0x2c80",
+      "ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002"
+    ],
     "autotrigger_dispatch_candidate_ids": [
       "power.control.allow-system-required-power-requests",
       "power.session-watchdog-timeouts",
@@ -128,6 +144,7 @@
     "top_symbol_resolution_batch_request": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
     "top_symbol_resolution_handoff_request": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
     "top_symbol_resolution_transfer_request": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
+    "top_symbol_resolution_transfer_pack_request": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
     "missing_input_jobs": []
   }
 }

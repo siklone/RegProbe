@@ -1,0 +1,7 @@
+request_id: ghidra-symbol-03-ntoskrnl-exe-0x2c80
+target_binary: ntoskrnl.exe
+guest_binary_path: C:\Windows\System32\ntoskrnl.exe
+candidate_ids: system.kernel-dpc-watchdog-profile-cluster
+patterns: DpcWatchdogProfileBufferSizeBytes
+
+python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntoskrnl.exe --output-name ghidra-symbolized-03-system-kernel-dpc-watchdog-profile-cluster --pattern DpcWatchdogProfileBufferSizeBytes

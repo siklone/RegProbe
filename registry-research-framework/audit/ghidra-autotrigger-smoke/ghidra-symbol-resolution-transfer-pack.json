@@ -1,18 +1,20 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T10:50:36.613452Z",
-  "source_handoff_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.json",
+  "generated_utc": "2026-04-13T10:50:36.613840Z",
+  "source_transfer_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.json",
+  "pack_status": "ready",
   "transfer_status": "ready",
   "operator": {
     "blocker": "transfer-pack-ready",
     "next_action": "Copy the listed repo files and use the exported commands on the destination KVM-capable host."
   },
+  "output_root": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack",
+  "archive_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.zip",
   "counts": {
     "selected_jobs": 4,
-    "blocked_jobs": 0,
-    "candidate_count": 4,
-    "repo_file_count": 9,
-    "missing_repo_file_count": 0
+    "repo_files_copied": 9,
+    "command_files_written": 4,
+    "manifest_files_written": 4
   },
   "candidate_ids": [
     "power.control.allow-audio-to-enable-execution-required-power-requests",
@@ -20,8 +22,13 @@
     "power.session-watchdog-timeouts",
     "system.kernel-dpc-watchdog-profile-cluster"
   ],
-  "required_host_tools": [],
-  "required_repo_paths": [
+  "request_ids": [
+    "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
+    "ghidra-symbol-02-ntoskrnl-exe-0x1920",
+    "ghidra-symbol-03-ntoskrnl-exe-0x2c80",
+    "ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002"
+  ],
+  "copied_repo_paths": [
     "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
     "scripts/vm-kvm/ensure-guest-admin-shell.py",
     "scripts/vm-kvm/type-to-guest.py",
@@ -32,7 +39,18 @@
     "scripts/vm/ghidra/ExportBranchAnalysis.java",
     "scripts/vm/ghidra/SetPdbSymbolRepository.java"
   ],
-  "missing_repo_paths": [],
+  "command_files": [
+    "01-ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver.txt",
+    "02-ghidra-symbol-02-ntoskrnl-exe-0x1920.txt",
+    "03-ghidra-symbol-03-ntoskrnl-exe-0x2c80.txt",
+    "04-ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002.txt"
+  ],
+  "manifest_files": [
+    "manifests/ghidra-symbol-resolution-transfer.json",
+    "manifests/ghidra-symbol-resolution-transfer.md",
+    "manifests/ghidra-symbol-resolution-handoff.json",
+    "manifests/ghidra-symbol-resolution-handoff.md"
+  ],
   "jobs": [
     {
       "request_id": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
@@ -90,6 +108,5 @@
       "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-04-power-session-watchdog-timeouts --pattern WatchdogResumeTimeout",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-04-power-session-watchdog-timeouts"
     }
-  ],
-  "blocked_jobs": []
+  ]
 }

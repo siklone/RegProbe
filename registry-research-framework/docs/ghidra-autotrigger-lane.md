@@ -54,6 +54,12 @@ Render the portable transfer pack:
 python3 registry-research-framework/scripts/generate_ghidra_symbol_resolution_transfer.py
 ```
 
+Materialize the portable transfer pack as a directory plus zip archive:
+
+```bash
+python3 registry-research-framework/scripts/materialize_ghidra_symbol_resolution_transfer_pack.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -82,6 +88,12 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Portable transfer manifest for selected symbol-resolution jobs, including commands and required repo paths for another host.
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer.md`
   Human-readable export summary for the transfer manifest.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.json`
+  Materialized export-pack summary showing the copied repo files, command files, and archive path.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.md`
+  Short operator summary of the materialized pack.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip`
+  Ready-to-move archive containing manifests, repo helpers, and per-request command files.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`
@@ -117,6 +129,6 @@ The new symbol-resolution queue sits between seeds and dispatch. When the lane i
 
 There is now a dedicated handoff surface for those prepared jobs. Instead of opening multiple JSON files to figure out what is runnable, what is blocked, and which command should move next, the handoff summary packages the selected jobs, blocked jobs, candidate coverage, and next action into one place.
 
-On top of that, the transfer manifest turns the selected jobs into a small export pack. It lists the commands, repo-side dependencies, and candidate coverage needed to move the work to a different KVM-capable host without reconstructing the lane by hand.
+On top of that, the transfer manifest turns the selected jobs into a small export contract, and the transfer-pack materializer turns that contract into a real folder tree plus zip archive. That means another KVM-capable host can pick up a ready-made pack with the manifests, repo-side helpers, and per-request commands already laid out.
 
 Because fresh caller-stack bundles are still intermittent, the lane now also has a synthetic smoke harness. It fabricates a small normalized bundle from the active blocked `ghidra` queue, runs the same sync path in an isolated audit directory, and proves that symbol-resolution-ready work would be emitted when matching stack-bearing bundles arrive.

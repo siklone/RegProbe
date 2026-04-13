@@ -17,6 +17,7 @@ SYMBOL_BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-batch.j
 SYMBOL_RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-run.json"
 HANDOFF_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-handoff.json"
 TRANSFER_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer.json"
+TRANSFER_PACK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack.json"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
@@ -61,6 +62,7 @@ def health_payload(
     symbol_run: dict[str, Any],
     handoff: dict[str, Any],
     transfer: dict[str, Any],
+    transfer_pack: dict[str, Any],
     batch: dict[str, Any],
     run: dict[str, Any],
     *,
@@ -93,6 +95,11 @@ def health_payload(
     ]
     transfer_jobs = transfer.get("jobs") or []
     transfer_request_ids = [str(job.get("request_id") or "") for job in transfer_jobs if str(job.get("request_id") or "")]
+    transfer_pack_request_ids = [
+        str(request_id or "")
+        for request_id in (transfer_pack.get("request_ids") or [])
+        if str(request_id or "")
+    ]
     autotrigger_jobs = [job for job in (batch.get("jobs") or []) if int(job.get("autotrigger_seed_count") or 0) > 0]
     missing_input_jobs = [
         {
@@ -113,6 +120,7 @@ def health_payload(
         "symbol_run_path": portable_path(SYMBOL_RUN_PATH),
         "symbol_handoff_path": portable_path(HANDOFF_PATH),
         "symbol_transfer_path": portable_path(TRANSFER_PATH),
+        "symbol_transfer_pack_path": portable_path(TRANSFER_PACK_PATH),
         "batch_path": portable_path(BATCH_PATH),
         "run_path": portable_path(RUN_PATH),
         "counts": {
@@ -127,6 +135,7 @@ def health_payload(
             "symbol_resolution_run_blocked_jobs": int(symbol_run.get("blocked_job_count") or 0),
             "symbol_resolution_handoff_selected_jobs": int((handoff.get("counts") or {}).get("selected_jobs") or 0),
             "symbol_resolution_transfer_selected_jobs": int((transfer.get("counts") or {}).get("selected_jobs") or 0),
+            "symbol_resolution_transfer_pack_selected_jobs": int((transfer_pack.get("counts") or {}).get("selected_jobs") or 0),
             "dispatch_jobs": int(batch.get("job_count") or 0),
             "autotrigger_dispatch_jobs": len(autotrigger_jobs),
             "run_selected_jobs": int(run.get("selected_job_count") or 0),
@@ -156,6 +165,14 @@ def health_payload(
             "repo_file_count": int((transfer.get("counts") or {}).get("repo_file_count") or 0),
             "missing_repo_file_count": int((transfer.get("counts") or {}).get("missing_repo_file_count") or 0),
         },
+        "symbol_resolution_transfer_pack": {
+            "status": transfer_pack.get("pack_status"),
+            "operator_blocker": (transfer_pack.get("operator") or {}).get("blocker"),
+            "selected_jobs": int((transfer_pack.get("counts") or {}).get("selected_jobs") or 0),
+            "repo_files_copied": int((transfer_pack.get("counts") or {}).get("repo_files_copied") or 0),
+            "command_files_written": int((transfer_pack.get("counts") or {}).get("command_files_written") or 0),
+            "archive_path": transfer_pack.get("archive_path"),
+        },
         "runner": {
             "available": bool(run.get("runner_available")),
             "mode": run.get("mode"),
@@ -171,6 +188,7 @@ def health_payload(
             "symbol_resolution_batch_request_ids": symbol_batch_request_ids,
             "symbol_resolution_handoff_request_ids": handoff_request_ids,
             "symbol_resolution_transfer_request_ids": transfer_request_ids,
+            "symbol_resolution_transfer_pack_request_ids": transfer_pack_request_ids,
             "autotrigger_dispatch_candidate_ids": [str(job.get("candidate_id") or "") for job in autotrigger_jobs],
         },
         "focus": {
@@ -181,6 +199,7 @@ def health_payload(
             "top_symbol_resolution_batch_request": symbol_batch_request_ids[0] if symbol_batch_request_ids else None,
             "top_symbol_resolution_handoff_request": handoff_request_ids[0] if handoff_request_ids else None,
             "top_symbol_resolution_transfer_request": transfer_request_ids[0] if transfer_request_ids else None,
+            "top_symbol_resolution_transfer_pack_request": transfer_pack_request_ids[0] if transfer_pack_request_ids else None,
             "missing_input_jobs": missing_input_jobs,
         },
     }
@@ -209,6 +228,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol resolution run selected jobs: `{counts.get('symbol_resolution_run_selected_jobs', 0)}`",
         f"- Symbol resolution handoff selected jobs: `{counts.get('symbol_resolution_handoff_selected_jobs', 0)}`",
         f"- Symbol resolution transfer selected jobs: `{counts.get('symbol_resolution_transfer_selected_jobs', 0)}`",
+        f"- Symbol resolution transfer pack selected jobs: `{counts.get('symbol_resolution_transfer_pack_selected_jobs', 0)}`",
         f"- Dispatch jobs: `{counts.get('dispatch_jobs', 0)}`",
         f"- Autotrigger dispatch jobs: `{counts.get('autotrigger_dispatch_jobs', 0)}`",
         f"- Run selected jobs: `{counts.get('run_selected_jobs', 0)}`",
@@ -225,6 +245,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Top symbol resolution batch request: `{focus.get('top_symbol_resolution_batch_request')}`",
         f"- Top symbol resolution handoff request: `{focus.get('top_symbol_resolution_handoff_request')}`",
         f"- Top symbol resolution transfer request: `{focus.get('top_symbol_resolution_transfer_request')}`",
+        f"- Top symbol resolution transfer pack request: `{focus.get('top_symbol_resolution_transfer_pack_request')}`",
         "",
         "## Coverage",
         "",
@@ -235,6 +256,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol resolution batch request ids: `{len(coverage.get('symbol_resolution_batch_request_ids') or [])}`",
         f"- Symbol resolution handoff request ids: `{len(coverage.get('symbol_resolution_handoff_request_ids') or [])}`",
         f"- Symbol resolution transfer request ids: `{len(coverage.get('symbol_resolution_transfer_request_ids') or [])}`",
+        f"- Symbol resolution transfer pack request ids: `{len(coverage.get('symbol_resolution_transfer_pack_request_ids') or [])}`",
         f"- Autotrigger dispatch candidate ids: `{len(coverage.get('autotrigger_dispatch_candidate_ids') or [])}`",
         "",
         "## Symbol Handoff",
@@ -250,6 +272,14 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Operator blocker: `{(payload.get('symbol_resolution_transfer') or {}).get('operator_blocker')}`",
         f"- Selected jobs: `{(payload.get('symbol_resolution_transfer') or {}).get('selected_jobs')}`",
         f"- Missing repo files: `{(payload.get('symbol_resolution_transfer') or {}).get('missing_repo_file_count')}`",
+        "",
+        "## Transfer Pack",
+        "",
+        f"- Pack status: `{(payload.get('symbol_resolution_transfer_pack') or {}).get('status')}`",
+        f"- Operator blocker: `{(payload.get('symbol_resolution_transfer_pack') or {}).get('operator_blocker')}`",
+        f"- Selected jobs: `{(payload.get('symbol_resolution_transfer_pack') or {}).get('selected_jobs')}`",
+        f"- Repo files copied: `{(payload.get('symbol_resolution_transfer_pack') or {}).get('repo_files_copied')}`",
+        f"- Command files written: `{(payload.get('symbol_resolution_transfer_pack') or {}).get('command_files_written')}`",
         "",
         "## Symbol Batch Diagnostics",
         "",
@@ -274,9 +304,22 @@ def main() -> int:
     symbol_run = load_json(SYMBOL_RUN_PATH)
     handoff = load_json(HANDOFF_PATH)
     transfer = load_json(TRANSFER_PATH)
+    transfer_pack = load_json(TRANSFER_PACK_PATH)
     batch = load_json(BATCH_PATH)
     run = load_json(RUN_PATH)
-    payload = health_payload(input_manifest, queue_rows, seed_rows, symbol_queue, symbol_batch, symbol_run, handoff, transfer, batch, run)
+    payload = health_payload(
+        input_manifest,
+        queue_rows,
+        seed_rows,
+        symbol_queue,
+        symbol_batch,
+        symbol_run,
+        handoff,
+        transfer,
+        transfer_pack,
+        batch,
+        run,
+    )
     write_json(OUTPUT_PATH, payload)
     write_text(MARKDOWN_PATH, render_markdown(payload))
     print(

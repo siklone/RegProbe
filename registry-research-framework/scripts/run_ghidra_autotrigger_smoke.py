@@ -163,6 +163,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol requests: `{counts.get('symbol_resolution_request_count')}`",
         f"- Symbol batch jobs: `{counts.get('symbol_resolution_batch_job_count')}`",
         f"- Dispatch jobs: `{counts.get('dispatch_job_count')}`",
+        f"- Transfer pack jobs: `{counts.get('transfer_pack_selected_job_count')}`",
         f"- Operator blocker: `{operator.get('blocker')}`",
         f"- Next action: `{operator.get('next_action')}`",
         "",
@@ -232,6 +233,10 @@ def run_smoke(
     handoff_markdown_path = output_root / "ghidra-symbol-resolution-handoff.md"
     transfer_path = output_root / "ghidra-symbol-resolution-transfer.json"
     transfer_markdown_path = output_root / "ghidra-symbol-resolution-transfer.md"
+    transfer_pack_output_root = output_root / "ghidra-symbol-resolution-transfer-pack"
+    transfer_pack_summary_path = output_root / "ghidra-symbol-resolution-transfer-pack.json"
+    transfer_pack_markdown_path = output_root / "ghidra-symbol-resolution-transfer-pack.md"
+    transfer_pack_archive_path = output_root / "ghidra-symbol-resolution-transfer-pack.zip"
 
     sync_payload = sync_lane_mod.sync_lane(
         discover_input_roots=[smoke_input_root],
@@ -248,11 +253,16 @@ def run_smoke(
         handoff_markdown_path=handoff_markdown_path,
         transfer_path=transfer_path,
         transfer_markdown_path=transfer_markdown_path,
+        transfer_pack_output_root=transfer_pack_output_root,
+        transfer_pack_summary_path=transfer_pack_summary_path,
+        transfer_pack_markdown_path=transfer_pack_markdown_path,
+        transfer_pack_archive_path=transfer_pack_archive_path,
         markdown_path=sync_markdown_path,
         output_path=sync_path,
     )
     handoff_payload = load_json(handoff_path)
     transfer_payload = load_json(transfer_path)
+    transfer_pack_payload = load_json(transfer_pack_summary_path)
 
     refresh = sync_payload.get("refresh") or {}
     counts = {
@@ -263,6 +273,7 @@ def run_smoke(
         "symbol_resolution_run_selected_job_count": int(refresh.get("symbol_resolution_run_selected_job_count") or 0),
         "dispatch_job_count": int(refresh.get("dispatch_job_count") or 0),
         "dispatch_selected_job_count": int(refresh.get("run_plan_selected_job_count") or 0),
+        "transfer_pack_selected_job_count": int(refresh.get("symbol_resolution_transfer_pack_selected_job_count") or 0),
     }
     failed_assertions = [
         name
@@ -273,6 +284,7 @@ def run_smoke(
             "seed-count-matches-candidates": counts["seed_count"] == metadata["selected_candidate_count"],
             "symbol-request-count-positive": counts["symbol_resolution_request_count"] > 0,
             "symbol-batch-job-count-positive": counts["symbol_resolution_batch_job_count"] > 0,
+            "transfer-pack-ready": transfer_pack_payload.get("pack_status") == "ready",
         }.items()
         if not passed
     ]
@@ -306,9 +318,14 @@ def run_smoke(
             "handoff_markdown_path": autotrigger.portable_path(handoff_markdown_path),
             "transfer_path": autotrigger.portable_path(transfer_path),
             "transfer_markdown_path": autotrigger.portable_path(transfer_markdown_path),
+            "transfer_pack_output_root": autotrigger.portable_path(transfer_pack_output_root),
+            "transfer_pack_summary_path": autotrigger.portable_path(transfer_pack_summary_path),
+            "transfer_pack_markdown_path": autotrigger.portable_path(transfer_pack_markdown_path),
+            "transfer_pack_archive_path": autotrigger.portable_path(transfer_pack_archive_path),
         },
         "handoff_status": handoff_payload.get("handoff_status"),
         "transfer_status": transfer_payload.get("transfer_status"),
+        "transfer_pack_status": transfer_pack_payload.get("pack_status"),
     }
     write_json(output_path, payload)
     write_text(markdown_path, render_markdown(payload))

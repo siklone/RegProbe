@@ -23,6 +23,10 @@ HANDOFF_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-handoff.json
 HANDOFF_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-handoff.md"
 TRANSFER_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer.json"
 TRANSFER_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer.md"
+TRANSFER_PACK_OUTPUT_ROOT = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack"
+TRANSFER_PACK_SUMMARY_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack.json"
+TRANSFER_PACK_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack.md"
+TRANSFER_PACK_ARCHIVE_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack.zip"
 INPUTS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-inputs.json"
 
 
@@ -45,6 +49,10 @@ dispatch_runner = load_local_module("refresh_pipeline_dispatch_runner", FRAMEWOR
 autotrigger_health = load_local_module("refresh_pipeline_autotrigger_health", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_health.py")
 handoff_mod = load_local_module("refresh_pipeline_symbol_handoff", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_symbol_resolution_handoff.py")
 transfer_mod = load_local_module("refresh_pipeline_symbol_transfer", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_symbol_resolution_transfer.py")
+transfer_pack_mod = load_local_module(
+    "refresh_pipeline_symbol_transfer_pack",
+    FRAMEWORK_ROOT / "scripts" / "materialize_ghidra_symbol_resolution_transfer_pack.py",
+)
 
 
 def resolve_path(path_value: str) -> Path:
@@ -83,6 +91,10 @@ def refresh_pipeline(
     handoff_markdown_path: Path = HANDOFF_MARKDOWN_PATH,
     transfer_path: Path = TRANSFER_PATH,
     transfer_markdown_path: Path = TRANSFER_MARKDOWN_PATH,
+    transfer_pack_output_root: Path = TRANSFER_PACK_OUTPUT_ROOT,
+    transfer_pack_summary_path: Path = TRANSFER_PACK_SUMMARY_PATH,
+    transfer_pack_markdown_path: Path = TRANSFER_PACK_MARKDOWN_PATH,
+    transfer_pack_archive_path: Path = TRANSFER_PACK_ARCHIVE_PATH,
 ) -> dict[str, Any]:
     queue_rows = autotrigger.load_jsonl(queue_path)
     bundle_manifest_payload: dict[str, Any] | None = None
@@ -134,6 +146,14 @@ def refresh_pipeline(
     transfer = transfer_mod.transfer_payload(handoff, handoff_path=handoff_path)
     transfer_mod.write_json(transfer_path, transfer)
     transfer_mod.write_text(transfer_markdown_path, transfer_mod.render_markdown(transfer))
+    transfer_pack = transfer_pack_mod.materialize_transfer_pack(
+        transfer,
+        transfer_path=transfer_path,
+        output_root=transfer_pack_output_root,
+        summary_path=transfer_pack_summary_path,
+        markdown_path=transfer_pack_markdown_path,
+        archive_path=transfer_pack_archive_path,
+    )
 
     input_manifest = autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {"entries": []}
     health = autotrigger_health.health_payload(
@@ -145,6 +165,7 @@ def refresh_pipeline(
         symbol_run,
         handoff,
         transfer,
+        transfer_pack,
         batch,
         run_plan,
     )
@@ -161,6 +182,8 @@ def refresh_pipeline(
         "symbol_resolution_handoff_selected_job_count": int((handoff.get("counts") or {}).get("selected_jobs") or 0),
         "symbol_resolution_transfer_status": transfer.get("transfer_status"),
         "symbol_resolution_transfer_selected_job_count": int((transfer.get("counts") or {}).get("selected_jobs") or 0),
+        "symbol_resolution_transfer_pack_status": transfer_pack.get("pack_status"),
+        "symbol_resolution_transfer_pack_selected_job_count": int((transfer_pack.get("counts") or {}).get("selected_jobs") or 0),
         "dispatch_job_count": batch.get("job_count", 0),
         "dispatch_autotrigger_matched_job_count": batch.get("autotrigger_matched_job_count", 0),
         "run_plan_selected_job_count": run_plan.get("selected_job_count", 0),
@@ -174,6 +197,10 @@ def refresh_pipeline(
             "handoff_markdown_path": autotrigger.portable_path(handoff_markdown_path),
             "transfer_path": autotrigger.portable_path(transfer_path),
             "transfer_markdown_path": autotrigger.portable_path(transfer_markdown_path),
+            "transfer_pack_output_root": autotrigger.portable_path(transfer_pack_output_root),
+            "transfer_pack_summary_path": autotrigger.portable_path(transfer_pack_summary_path),
+            "transfer_pack_markdown_path": autotrigger.portable_path(transfer_pack_markdown_path),
+            "transfer_pack_archive_path": autotrigger.portable_path(transfer_pack_archive_path),
             "batch_path": autotrigger.portable_path(batch_path),
             "run_path": autotrigger.portable_path(run_path),
             "health_path": autotrigger.portable_path(health_path),
@@ -204,6 +231,10 @@ def main() -> int:
     parser.add_argument("--handoff-markdown-output", type=Path, default=HANDOFF_MARKDOWN_PATH)
     parser.add_argument("--transfer-output", type=Path, default=TRANSFER_PATH)
     parser.add_argument("--transfer-markdown-output", type=Path, default=TRANSFER_MARKDOWN_PATH)
+    parser.add_argument("--transfer-pack-output-root", type=Path, default=TRANSFER_PACK_OUTPUT_ROOT)
+    parser.add_argument("--transfer-pack-summary-output", type=Path, default=TRANSFER_PACK_SUMMARY_PATH)
+    parser.add_argument("--transfer-pack-markdown-output", type=Path, default=TRANSFER_PACK_MARKDOWN_PATH)
+    parser.add_argument("--transfer-pack-archive-output", type=Path, default=TRANSFER_PACK_ARCHIVE_PATH)
     args = parser.parse_args()
 
     payload = refresh_pipeline(
@@ -225,6 +256,10 @@ def main() -> int:
         handoff_markdown_path=args.handoff_markdown_output,
         transfer_path=args.transfer_output,
         transfer_markdown_path=args.transfer_markdown_output,
+        transfer_pack_output_root=args.transfer_pack_output_root,
+        transfer_pack_summary_path=args.transfer_pack_summary_output,
+        transfer_pack_markdown_path=args.transfer_pack_markdown_output,
+        transfer_pack_archive_path=args.transfer_pack_archive_output,
     )
     print(json.dumps(payload, indent=2))
     return 0

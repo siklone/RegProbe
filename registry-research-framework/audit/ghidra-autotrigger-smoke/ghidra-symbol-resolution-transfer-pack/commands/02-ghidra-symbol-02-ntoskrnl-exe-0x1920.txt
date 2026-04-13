@@ -1,0 +1,7 @@
+request_id: ghidra-symbol-02-ntoskrnl-exe-0x1920
+target_binary: ntoskrnl.exe
+guest_binary_path: C:\Windows\System32\ntoskrnl.exe
+candidate_ids: power.control.allow-system-required-power-requests
+patterns: AllowSystemRequiredPowerRequests
+
+python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntoskrnl.exe --output-name ghidra-symbolized-02-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests

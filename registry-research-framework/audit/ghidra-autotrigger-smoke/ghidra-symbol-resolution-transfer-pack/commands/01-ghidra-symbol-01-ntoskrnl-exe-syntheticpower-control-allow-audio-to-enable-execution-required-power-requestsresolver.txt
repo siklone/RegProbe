@@ -1,0 +1,7 @@
+request_id: ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver
+target_binary: ntoskrnl.exe
+guest_binary_path: C:\Windows\System32\ntoskrnl.exe
+candidate_ids: power.control.allow-audio-to-enable-execution-required-power-requests
+patterns: AllowAudioToEnableExecutionRequiredPowerRequests
+
+python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntoskrnl.exe --output-name ghidra-symbolized-01-power-control-allow-audio-to-enable-execution-required-power-requests --pattern AllowAudioToEnableExecutionRequiredPowerRequests
