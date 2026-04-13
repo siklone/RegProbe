@@ -15,6 +15,7 @@ QUEUE_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-job-queue.jsonl"
 SEEDS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-seeds.jsonl"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
+HEALTH_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
 
 
 def load_local_module(name: str, path: Path):
@@ -29,6 +30,7 @@ def load_local_module(name: str, path: Path):
 autotrigger = load_local_module("refresh_pipeline_autotrigger", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_seeds.py")
 dispatch_batch = load_local_module("refresh_pipeline_dispatch_batch", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_dispatch_batch.py")
 dispatch_runner = load_local_module("refresh_pipeline_dispatch_runner", FRAMEWORK_ROOT / "scripts" / "run_ghidra_dispatch_batch.py")
+autotrigger_health = load_local_module("refresh_pipeline_autotrigger_health", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_health.py")
 
 
 def refresh_pipeline(
@@ -40,6 +42,7 @@ def refresh_pipeline(
     seeds_path: Path = SEEDS_PATH,
     batch_path: Path = BATCH_PATH,
     run_path: Path = RUN_PATH,
+    health_path: Path = HEALTH_PATH,
 ) -> dict[str, Any]:
     queue_rows = autotrigger.load_jsonl(queue_path)
     effective_bundle_paths = autotrigger.collect_bundle_paths(
@@ -60,6 +63,9 @@ def refresh_pipeline(
     run_plan = dispatch_runner.build_run_plan(batch)
     dispatch_runner.write_json(run_path, run_plan)
 
+    health = autotrigger_health.health_payload(queue_rows, seeds, batch, run_plan)
+    autotrigger_health.write_json(health_path, health)
+
     return {
         "bundle_count": len(effective_bundle_paths),
         "bundle_paths": [autotrigger.portable_path(path) for path in effective_bundle_paths],
@@ -72,6 +78,7 @@ def refresh_pipeline(
             "seeds_path": autotrigger.portable_path(seeds_path),
             "batch_path": autotrigger.portable_path(batch_path),
             "run_path": autotrigger.portable_path(run_path),
+            "health_path": autotrigger.portable_path(health_path),
         },
     }
 
@@ -84,6 +91,7 @@ def main() -> int:
     parser.add_argument("--seeds-output", type=Path, default=SEEDS_PATH)
     parser.add_argument("--batch-output", type=Path, default=BATCH_PATH)
     parser.add_argument("--run-output", type=Path, default=RUN_PATH)
+    parser.add_argument("--health-output", type=Path, default=HEALTH_PATH)
     args = parser.parse_args()
 
     payload = refresh_pipeline(
@@ -93,6 +101,7 @@ def main() -> int:
         seeds_path=args.seeds_output,
         batch_path=args.batch_output,
         run_path=args.run_output,
+        health_path=args.health_output,
     )
     print(json.dumps(payload, indent=2))
     return 0

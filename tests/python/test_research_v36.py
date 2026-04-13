@@ -2168,6 +2168,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
+            health_path = temp_root / "ghidra-autotrigger-health.json"
             bundle_path.write_text(json.dumps(bundle), encoding="utf-8")
             queue_path.write_text("".join(json.dumps(row) + "\n" for row in queue_rows), encoding="utf-8")
 
@@ -2177,6 +2178,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 seeds_path=seeds_path,
                 batch_path=batch_path,
                 run_path=run_path,
+                health_path=health_path,
             )
 
             self.assertEqual(payload["seed_count"], 1)
@@ -2191,6 +2193,10 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
 
             run_payload = json.loads(run_path.read_text(encoding="utf-8"))
             self.assertEqual(run_payload["selected_job_count"], 1)
+
+            health_payload = json.loads(health_path.read_text(encoding="utf-8"))
+            self.assertEqual(health_payload["counts"]["autotrigger_seeds"], 1)
+            self.assertEqual(payload["outputs"]["health_path"], health_path.as_posix())
 
     def test_refresh_pipeline_supports_bundle_root(self) -> None:
         queue_rows = [
@@ -2229,6 +2235,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
+            health_path = temp_root / "ghidra-autotrigger-health.json"
             bundle_path.parent.mkdir(parents=True, exist_ok=True)
             bundle_path.write_text(json.dumps(bundle), encoding="utf-8")
             queue_path.write_text("".join(json.dumps(row) + "\n" for row in queue_rows), encoding="utf-8")
@@ -2239,11 +2246,13 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 seeds_path=seeds_path,
                 batch_path=batch_path,
                 run_path=run_path,
+                health_path=health_path,
             )
 
             self.assertEqual(payload["bundle_count"], 1)
             self.assertEqual(payload["seed_count"], 1)
             self.assertEqual(payload["dispatch_autotrigger_matched_job_count"], 1)
+            self.assertTrue(health_path.exists())
 
 
 class GhidraAutotriggerHealthTests(unittest.TestCase):
