@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -1542,6 +1543,22 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(inventory["summary"]["placeholder_only_count"], 1)
         self.assertFalse(inventory["entries"][0]["parsed"])
         self.assertEqual(inventory["entries"][0]["parse_reason"], "placeholder-markdown-only")
+
+    def test_kvm_etw_stackwalk_launcher_help_loads(self) -> None:
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(REPO_ROOT / "scripts" / "vm-kvm" / "run-guest-etw-stackwalk-capture.py"),
+                "--help",
+            ],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("ETW registry stackwalk capture helper", result.stdout)
 
     def test_parse_etl_registry_touches_uses_existing_xml_sidecar_when_tracerpt_missing(self) -> None:
         xml_payload = """<?xml version="1.0" encoding="utf-8"?>
