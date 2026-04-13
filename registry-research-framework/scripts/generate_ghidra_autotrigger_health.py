@@ -15,6 +15,7 @@ SEEDS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-seeds.jsonl"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
+MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.md"
 
 
 def now_utc() -> str:
@@ -110,6 +111,45 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
+def render_markdown(payload: dict[str, Any]) -> str:
+    counts = payload.get("counts") or {}
+    runner = payload.get("runner") or {}
+    coverage = payload.get("coverage") or {}
+    focus = payload.get("focus") or {}
+    lines = [
+        "# Ghidra Autotrigger Health",
+        "",
+        f"- Generated UTC: `{payload.get('generated_utc')}`",
+        f"- Input bundles selected: `{counts.get('input_manifest_selected', 0)}`",
+        f"- Queue jobs: `{counts.get('queue_jobs', 0)}`",
+        f"- Autotrigger seeds: `{counts.get('autotrigger_seeds', 0)}`",
+        f"- Dispatch jobs: `{counts.get('dispatch_jobs', 0)}`",
+        f"- Autotrigger dispatch jobs: `{counts.get('autotrigger_dispatch_jobs', 0)}`",
+        f"- Run selected jobs: `{counts.get('run_selected_jobs', 0)}`",
+        f"- Runner available: `{runner.get('available')}`",
+        f"- Runner mode: `{runner.get('mode')}`",
+        "",
+        "## Focus",
+        "",
+        f"- Top input bundle: `{focus.get('top_input_bundle')}`",
+        f"- Top queue candidate: `{focus.get('top_queue_candidate')}`",
+        f"- Top autotrigger candidate: `{focus.get('top_autotrigger_candidate')}`",
+        "",
+        "## Coverage",
+        "",
+        f"- Input bundle paths: `{len(coverage.get('input_bundle_paths') or [])}`",
+        f"- Queued candidate ids: `{len(coverage.get('queued_candidate_ids') or [])}`",
+        f"- Seed candidate ids: `{len(coverage.get('seed_candidate_ids') or [])}`",
+        f"- Autotrigger dispatch candidate ids: `{len(coverage.get('autotrigger_dispatch_candidate_ids') or [])}`",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+
+
 def main() -> int:
     input_manifest = load_json(INPUTS_PATH)
     queue_rows = load_jsonl(QUEUE_PATH)
@@ -118,6 +158,7 @@ def main() -> int:
     run = load_json(RUN_PATH)
     payload = health_payload(input_manifest, queue_rows, seed_rows, batch, run)
     write_json(OUTPUT_PATH, payload)
+    write_text(MARKDOWN_PATH, render_markdown(payload))
     print(json.dumps({"output": portable_path(OUTPUT_PATH), "queue_jobs": len(queue_rows), "autotrigger_seeds": len(seed_rows)}, indent=2))
     return 0
 

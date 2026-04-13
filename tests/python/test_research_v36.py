@@ -2499,6 +2499,11 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["focus"]["top_autotrigger_candidate"], "power.keep")
         self.assertEqual(payload["focus"]["missing_input_jobs"][0]["candidate_id"], "power.other")
 
+        markdown = ghidra_autotrigger_health.render_markdown(payload)
+        self.assertIn("# Ghidra Autotrigger Health", markdown)
+        self.assertIn("Top queue candidate", markdown)
+        self.assertIn("`power.keep`", markdown)
+
     def test_validate_health_rejects_inconsistent_counts(self) -> None:
         payload = {
             "counts": {
