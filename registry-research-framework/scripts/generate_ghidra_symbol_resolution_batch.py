@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -92,9 +93,14 @@ def symbol_resolution_batch_from_queue(
     missing_host_tools = [name for name, item in tool_status.items() if not item.get("present")]
     requests = payload.get("requests") or []
     jobs: list[dict[str, Any]] = []
+    resolution_kind_counts: Counter[str] = Counter()
+    missing_input_counts: Counter[str] = Counter()
+    blocked_examples: list[dict[str, Any]] = []
 
     for index, request in enumerate(requests, start=1):
         request_id = str(request.get("request_id") or "")
+        resolution_kind = str(request.get("resolution_kind") or "unknown")
+        resolution_kind_counts[resolution_kind] += 1
         candidate_ids = request.get("candidate_ids") or []
         output_name = f"ghidra-symbolized-{index:02d}-{slugify(candidate_ids[0] if candidate_ids else request_id)}"
         patterns = [
@@ -108,8 +114,19 @@ def symbol_resolution_batch_from_queue(
             missing_inputs.append("guest_binary_path")
         if not patterns:
             missing_inputs.append("patterns")
+        for item in missing_inputs:
+            missing_input_counts[item] += 1
         command_argv = build_command_argv(guest_binary_path, output_name, patterns)
         can_run_guest_orchestrator = not missing_inputs and not missing_host_tools and isinstance(command_argv, list)
+        if (missing_inputs or missing_host_tools) and len(blocked_examples) < 10:
+            blocked_examples.append(
+                {
+                    "request_id": request_id,
+                    "lookup_key": request.get("lookup_key"),
+                    "missing_inputs": list(missing_inputs),
+                    "missing_host_tools": list(missing_host_tools),
+                }
+            )
         jobs.append(
             {
                 "job_id": f"ghidra-symbol-dispatch-{index:02d}-{slugify(request_id)}",
@@ -118,7 +135,7 @@ def symbol_resolution_batch_from_queue(
                 "created_utc": generated_utc,
                 "priority_rank": int(request.get("priority_rank") or index),
                 "lookup_key": request.get("lookup_key"),
-                "resolution_kind": request.get("resolution_kind"),
+                "resolution_kind": resolution_kind,
                 "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
                 "candidate_ids": candidate_ids,
                 "candidate_count": int(request.get("candidate_count") or 0),
@@ -144,13 +161,20 @@ def symbol_resolution_batch_from_queue(
         )
 
     runnable_job_count = sum(1 for job in jobs if job.get("can_run_guest_orchestrator"))
+    blocked_job_count = len(jobs) - runnable_job_count
     return {
         "schema_version": "1.0",
         "generated_utc": generated_utc,
         "source_symbol_queue": repo_relative(INPUT_PATH),
         "job_count": len(jobs),
         "runnable_job_count": runnable_job_count,
+        "blocked_job_count": blocked_job_count,
         "missing_host_tools": missing_host_tools,
+        "diagnostics": {
+            "resolution_kind_counts": dict(sorted(resolution_kind_counts.items())),
+            "missing_input_counts": dict(sorted(missing_input_counts.items())),
+            "blocked_examples": blocked_examples,
+        },
         "jobs": jobs,
     }
 

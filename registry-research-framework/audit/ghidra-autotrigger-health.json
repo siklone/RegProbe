@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T09:51:50.384331Z",
+  "generated_utc": "2026-04-13T09:55:48.741257Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -16,6 +16,7 @@
     "symbol_resolution_requests": 0,
     "symbol_resolution_batch_jobs": 0,
     "symbol_resolution_runnable_jobs": 0,
+    "symbol_resolution_blocked_jobs": 0,
     "symbol_resolution_run_selected_jobs": 0,
     "symbol_resolution_run_blocked_jobs": 0,
     "dispatch_jobs": 4,
@@ -27,6 +28,12 @@
     "available": true,
     "mode": "dry-run",
     "error": null
+  },
+  "symbol_resolution_batch": {
+    "missing_host_tools": [],
+    "missing_input_counts": {},
+    "resolution_kind_counts": {},
+    "blocked_examples": []
   },
   "runner": {
     "available": false,

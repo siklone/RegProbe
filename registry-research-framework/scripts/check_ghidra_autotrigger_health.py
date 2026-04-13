@@ -29,6 +29,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_requests = int(counts.get("symbol_resolution_requests") or 0)
     symbol_resolution_batch_jobs = int(counts.get("symbol_resolution_batch_jobs") or 0)
     symbol_resolution_runnable_jobs = int(counts.get("symbol_resolution_runnable_jobs") or 0)
+    symbol_resolution_blocked_jobs = int(counts.get("symbol_resolution_blocked_jobs") or 0)
     symbol_resolution_run_selected_jobs = int(counts.get("symbol_resolution_run_selected_jobs") or 0)
     symbol_resolution_run_blocked_jobs = int(counts.get("symbol_resolution_run_blocked_jobs") or 0)
     dispatch_jobs = int(counts.get("dispatch_jobs") or 0)
@@ -76,6 +77,16 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
         errors.append(
             "symbol_resolution_runnable_jobs exceeds symbol_resolution_batch_jobs: "
             f"{symbol_resolution_runnable_jobs}>{symbol_resolution_batch_jobs}"
+        )
+    if symbol_resolution_blocked_jobs > symbol_resolution_batch_jobs:
+        errors.append(
+            "symbol_resolution_blocked_jobs exceeds symbol_resolution_batch_jobs: "
+            f"{symbol_resolution_blocked_jobs}>{symbol_resolution_batch_jobs}"
+        )
+    if symbol_resolution_runnable_jobs + symbol_resolution_blocked_jobs != symbol_resolution_batch_jobs:
+        errors.append(
+            "symbol_resolution runnable+blocked does not equal batch jobs: "
+            f"{symbol_resolution_runnable_jobs}+{symbol_resolution_blocked_jobs}!={symbol_resolution_batch_jobs}"
         )
     if symbol_resolution_run_selected_jobs > symbol_resolution_batch_jobs:
         errors.append(

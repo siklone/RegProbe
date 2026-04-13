@@ -63,6 +63,15 @@ def build_run_plan(payload: dict[str, Any], *, limit: int | None = None, generat
         "runner_available": runner_available(),
         "selected_job_count": len(jobs),
         "blocked_job_count": len(blocked),
+        "blocked_jobs": [
+            {
+                "job_id": job.get("job_id"),
+                "request_id": job.get("request_id"),
+                "missing_inputs": job.get("missing_inputs") or [],
+                "missing_host_tools": job.get("missing_host_tools") or [],
+            }
+            for job in blocked[:10]
+        ],
         "jobs": [
             {
                 "job_id": job.get("job_id"),
@@ -87,14 +96,15 @@ def run_jobs(payload: dict[str, Any], *, limit: int | None = None, generated_utc
         return {
             "schema_version": "1.0",
             "generated_utc": generated_utc,
-            "mode": "run",
-            "source_batch": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
-            "runner_available": False,
-            "selected_job_count": len(jobs),
-            "executed_job_count": 0,
-            "error": "host-kvm-tools-missing",
-            "jobs": [],
-        }
+        "mode": "run",
+        "source_batch": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
+        "runner_available": False,
+        "selected_job_count": len(jobs),
+        "executed_job_count": 0,
+        "blocked_job_count": int(payload.get("blocked_job_count") or 0),
+        "error": "host-kvm-tools-missing",
+        "jobs": [],
+    }
 
     result_jobs: list[dict[str, Any]] = []
     for job in jobs:

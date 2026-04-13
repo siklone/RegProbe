@@ -2220,9 +2220,11 @@ class GhidraSymbolResolutionBatchTests(unittest.TestCase):
 
         self.assertEqual(batch["job_count"], 1)
         self.assertEqual(batch["runnable_job_count"], 1)
+        self.assertEqual(batch["blocked_job_count"], 0)
         self.assertEqual(batch["jobs"][0]["guest_binary_path"], r"C:\Windows\System32\ntoskrnl.exe")
         self.assertTrue(batch["jobs"][0]["can_run_guest_orchestrator"])
         self.assertEqual(batch["jobs"][0]["patterns"], ["AllowSystemRequiredPowerRequests"])
+        self.assertEqual(batch["diagnostics"]["resolution_kind_counts"], {"module_offset": 1})
         self.assertEqual(
             batch["jobs"][0]["command_argv"][:3],
             ["python3", "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py", "--binary-path"],
@@ -2257,7 +2259,10 @@ class GhidraSymbolResolutionBatchTests(unittest.TestCase):
         )
 
         self.assertFalse(batch["jobs"][0]["can_run_guest_orchestrator"])
+        self.assertEqual(batch["blocked_job_count"], 1)
         self.assertEqual(batch["jobs"][0]["missing_inputs"], ["patterns"])
+        self.assertEqual(batch["diagnostics"]["missing_input_counts"], {"patterns": 1})
+        self.assertEqual(batch["diagnostics"]["blocked_examples"][0]["request_id"], "ghidra-symbol-plain-text")
         self.assertIsNone(batch["jobs"][0]["command_argv"])
 
 
@@ -2296,6 +2301,7 @@ class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
         self.assertEqual(plan["selected_job_count"], 1)
         self.assertEqual(plan["blocked_job_count"], 1)
         self.assertEqual(plan["jobs"][0]["request_id"], "request-1")
+        self.assertEqual(plan["blocked_jobs"][0]["request_id"], "request-2")
 
 
 class GhidraAutotriggerPipelineTests(unittest.TestCase):
@@ -2727,10 +2733,12 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["autotrigger_seeds"], 1)
         self.assertEqual(payload["counts"]["symbol_resolution_requests"], 1)
         self.assertEqual(payload["counts"]["symbol_resolution_batch_jobs"], 1)
+        self.assertEqual(payload["counts"]["symbol_resolution_blocked_jobs"], 0)
         self.assertEqual(payload["counts"]["symbol_resolution_run_selected_jobs"], 1)
         self.assertEqual(payload["counts"]["autotrigger_dispatch_jobs"], 1)
         self.assertFalse(payload["runner"]["available"])
         self.assertTrue(payload["symbol_resolution_runner"]["available"])
+        self.assertEqual(payload["symbol_resolution_batch"]["resolution_kind_counts"], {})
         self.assertEqual(payload["focus"]["top_input_bundle"], "evidence/files/example/normalized-registry-bundle.json")
         self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
         self.assertEqual(payload["focus"]["top_autotrigger_candidate"], "power.keep")
@@ -2753,6 +2761,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "symbol_resolution_requests": 1,
                 "symbol_resolution_batch_jobs": 1,
                 "symbol_resolution_runnable_jobs": 2,
+                "symbol_resolution_blocked_jobs": 0,
                 "symbol_resolution_run_selected_jobs": 0,
                 "symbol_resolution_run_blocked_jobs": 0,
                 "dispatch_jobs": 1,

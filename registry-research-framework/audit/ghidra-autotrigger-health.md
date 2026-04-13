@@ -1,11 +1,12 @@
 # Ghidra Autotrigger Health
 
-- Generated UTC: `2026-04-13T09:51:50.384331Z`
+- Generated UTC: `2026-04-13T09:55:48.741257Z`
 - Input bundles selected: `0`
 - Queue jobs: `4`
 - Autotrigger seeds: `0`
 - Symbol resolution requests: `0`
 - Symbol resolution batch jobs: `0`
+- Symbol resolution blocked jobs: `0`
 - Symbol resolution run selected jobs: `0`
 - Dispatch jobs: `4`
 - Autotrigger dispatch jobs: `0`
@@ -30,3 +31,9 @@
 - Symbol resolution requests: `0`
 - Symbol resolution batch request ids: `0`
 - Autotrigger dispatch candidate ids: `0`
+
+## Symbol Batch Diagnostics
+
+- Missing host tools: `none`
+- Missing input counts: `{}`
+- Resolution kind counts: `{}`

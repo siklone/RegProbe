@@ -79,6 +79,7 @@ def health_payload(
     )
     symbol_batch_jobs = symbol_batch.get("jobs") or []
     symbol_batch_request_ids = [str(job.get("request_id") or "") for job in symbol_batch_jobs]
+    symbol_batch_diagnostics = symbol_batch.get("diagnostics") or {}
     autotrigger_jobs = [job for job in (batch.get("jobs") or []) if int(job.get("autotrigger_seed_count") or 0) > 0]
     missing_input_jobs = [
         {
@@ -106,6 +107,7 @@ def health_payload(
             "symbol_resolution_requests": len(symbol_requests),
             "symbol_resolution_batch_jobs": int(symbol_batch.get("job_count") or 0),
             "symbol_resolution_runnable_jobs": int(symbol_batch.get("runnable_job_count") or 0),
+            "symbol_resolution_blocked_jobs": int(symbol_batch.get("blocked_job_count") or 0),
             "symbol_resolution_run_selected_jobs": int(symbol_run.get("selected_job_count") or 0),
             "symbol_resolution_run_blocked_jobs": int(symbol_run.get("blocked_job_count") or 0),
             "dispatch_jobs": int(batch.get("job_count") or 0),
@@ -117,6 +119,12 @@ def health_payload(
             "available": bool(symbol_run.get("runner_available")),
             "mode": symbol_run.get("mode"),
             "error": symbol_run.get("error"),
+        },
+        "symbol_resolution_batch": {
+            "missing_host_tools": symbol_batch.get("missing_host_tools") or [],
+            "missing_input_counts": symbol_batch_diagnostics.get("missing_input_counts") or {},
+            "resolution_kind_counts": symbol_batch_diagnostics.get("resolution_kind_counts") or {},
+            "blocked_examples": symbol_batch_diagnostics.get("blocked_examples") or [],
         },
         "runner": {
             "available": bool(run.get("runner_available")),
@@ -163,6 +171,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Autotrigger seeds: `{counts.get('autotrigger_seeds', 0)}`",
         f"- Symbol resolution requests: `{counts.get('symbol_resolution_requests', 0)}`",
         f"- Symbol resolution batch jobs: `{counts.get('symbol_resolution_batch_jobs', 0)}`",
+        f"- Symbol resolution blocked jobs: `{counts.get('symbol_resolution_blocked_jobs', 0)}`",
         f"- Symbol resolution run selected jobs: `{counts.get('symbol_resolution_run_selected_jobs', 0)}`",
         f"- Dispatch jobs: `{counts.get('dispatch_jobs', 0)}`",
         f"- Autotrigger dispatch jobs: `{counts.get('autotrigger_dispatch_jobs', 0)}`",
@@ -187,6 +196,12 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol resolution requests: `{len(coverage.get('symbol_resolution_request_ids') or [])}`",
         f"- Symbol resolution batch request ids: `{len(coverage.get('symbol_resolution_batch_request_ids') or [])}`",
         f"- Autotrigger dispatch candidate ids: `{len(coverage.get('autotrigger_dispatch_candidate_ids') or [])}`",
+        "",
+        "## Symbol Batch Diagnostics",
+        "",
+        f"- Missing host tools: `{', '.join((payload.get('symbol_resolution_batch') or {}).get('missing_host_tools') or []) or 'none'}`",
+        f"- Missing input counts: `{json.dumps((payload.get('symbol_resolution_batch') or {}).get('missing_input_counts') or {}, sort_keys=True)}`",
+        f"- Resolution kind counts: `{json.dumps((payload.get('symbol_resolution_batch') or {}).get('resolution_kind_counts') or {}, sort_keys=True)}`",
     ]
     return "\n".join(lines) + "\n"
 
