@@ -40,6 +40,21 @@ KD_SYMBOLS = [
 ]
 
 
+def normalize_registry_path(text: str) -> str:
+    normalized = text.strip().replace("/", "\\").lower()
+    normalized = normalized.replace("hkey_local_machine\\", "hklm\\")
+    normalized = normalized.replace("hkey_current_user\\", "hkcu\\")
+    return normalized
+
+
+def subtree_present_in_dump(root_text: str, override_root: str = OVERRIDE_ROOT) -> bool:
+    normalized_override_root = normalize_registry_path(override_root)
+    return any(
+        normalize_registry_path(line) == normalized_override_root
+        for line in root_text.splitlines()
+    )
+
+
 def format_counter(counter: Counter[str]) -> dict[str, int]:
     return {key: counter[key] for key in sorted(counter)}
 
@@ -56,7 +71,7 @@ def main() -> int:
     root_text = (REPO_ROOT / ROOT_DUMP).read_text(encoding="utf-8-sig")
     kd_text = (REPO_ROOT / KD_STDOUT).read_text(encoding="utf-8-sig")
 
-    subtree_present = OVERRIDE_ROOT.replace("System", "SYSTEM") in root_text
+    subtree_present = subtree_present_in_dump(root_text)
     kd_symbols_found = [name for name in KD_SYMBOLS if name in kd_text]
 
     payload = {

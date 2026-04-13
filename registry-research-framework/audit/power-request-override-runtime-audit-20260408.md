@@ -5,7 +5,7 @@ Target path: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
 
 ## Outcome
 
-- Root subtree present in retained dump: `False`
+- Root subtree present in retained dump: `True`
 - Runtime hits under subtree: `15`
 - Processes: `{'svchost.exe': 15}`
 - Operations: `{'RegCloseKey': 3, 'RegOpenKey': 9, 'RegQueryKey': 3}`

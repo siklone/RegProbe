@@ -30,6 +30,7 @@ validate_contracts = load_module("validate_research_contracts", FRAMEWORK_SCRIPT
 metrics_publish_v36_lib = load_module("metrics_publish_v36_lib", SCRIPTS_ROOT / "metrics_publish_v36_lib.py")
 blocked_worklist_lib = load_module("generate_blocked_worklist", FRAMEWORK_SCRIPTS / "generate_blocked_worklist.py")
 blocked_worklist_check = load_module("check_blocked_worklist", FRAMEWORK_SCRIPTS / "check_blocked_worklist.py")
+power_request_override_audit = load_module("audit_power_request_override_runtime", FRAMEWORK_SCRIPTS / "audit_power_request_override_runtime.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -1755,6 +1756,26 @@ class BlockedWorklistTests(unittest.TestCase):
         self.assertEqual(focus["ghidra"]["candidate_id"], "power.top")
         self.assertEqual(focus["ghidra"]["suggested_command"], "cmd top")
         self.assertEqual(focus["ghidra"]["next_action_hint"], "hint top")
+
+
+class PowerRequestOverrideAuditTests(unittest.TestCase):
+    def test_normalize_registry_path_collapses_hklm_alias(self) -> None:
+        self.assertEqual(
+            power_request_override_audit.normalize_registry_path(
+                r"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride"
+            ),
+            power_request_override_audit.normalize_registry_path(
+                r"HKLM\System\CurrentControlSet\Control\Power\PowerRequestOverride"
+            ),
+        )
+
+    def test_subtree_present_in_dump_accepts_retained_root_dump_format(self) -> None:
+        root_dump = "\n".join([
+            r"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power",
+            r"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride",
+        ])
+
+        self.assertTrue(power_request_override_audit.subtree_present_in_dump(root_dump))
 
 
 if __name__ == "__main__":
