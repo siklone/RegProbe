@@ -35,6 +35,7 @@ ghidra_job_queue = load_module("generate_ghidra_job_queue", FRAMEWORK_SCRIPTS / 
 ghidra_dispatch_batch = load_module("generate_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_dispatch_batch.py")
 ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "run_ghidra_dispatch_batch.py")
 ghidra_autotrigger = load_module("generate_ghidra_autotrigger_seeds", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_seeds.py")
+ghidra_refresh_pipeline = load_module("refresh_ghidra_autotrigger_pipeline", FRAMEWORK_SCRIPTS / "refresh_ghidra_autotrigger_pipeline.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2022,6 +2023,68 @@ class GhidraAutotriggerTests(unittest.TestCase):
         self.assertEqual(seeds[0]["resolved_frames"], ["nt!PopPowerRequestInitialize"])
         self.assertEqual(seeds[0]["suggested_patterns"], ["AllowSystemRequiredPowerRequests"])
         self.assertEqual(seeds[0]["trigger"], "caller-stack-unresolved-frame")
+
+
+class GhidraAutotriggerPipelineTests(unittest.TestCase):
+    def test_refresh_pipeline_writes_seed_batch_and_run_surfaces(self) -> None:
+        bundle = {
+            "run_id": "synthetic-stack-seed",
+            "source_tool": "wpr",
+            "capture_phase": "boot",
+            "stack_capture": {"source_fields": ["Stack"]},
+            "events": [
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopPowerRequestInitialize"],
+                }
+            ],
+        }
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "status": "queued",
+                "priority_rank": 1,
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+                "trigger": "blocked-worklist-ghidra-lane",
+                "next_action_hint": "Resolve seeding path.",
+            }
+        ]
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            bundle_path = temp_root / "normalized-registry-bundle.json"
+            queue_path = temp_root / "ghidra-job-queue.jsonl"
+            seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            batch_path = temp_root / "ghidra-dispatch-batch.json"
+            run_path = temp_root / "ghidra-dispatch-run.json"
+            bundle_path.write_text(json.dumps(bundle), encoding="utf-8")
+            queue_path.write_text("".join(json.dumps(row) + "\n" for row in queue_rows), encoding="utf-8")
+
+            payload = ghidra_refresh_pipeline.refresh_pipeline(
+                bundle_path,
+                queue_path=queue_path,
+                seeds_path=seeds_path,
+                batch_path=batch_path,
+                run_path=run_path,
+            )
+
+            self.assertEqual(payload["seed_count"], 1)
+            self.assertEqual(payload["dispatch_autotrigger_matched_job_count"], 1)
+            self.assertEqual(payload["run_plan_selected_job_count"], 1)
+
+            seeds_rows = [json.loads(line) for line in seeds_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+            self.assertEqual(seeds_rows[0]["candidate_id"], "power.control.allow-system-required-power-requests")
+
+            batch_payload = json.loads(batch_path.read_text(encoding="utf-8"))
+            self.assertEqual(batch_payload["jobs"][0]["autotrigger_seed_count"], 1)
+
+            run_payload = json.loads(run_path.read_text(encoding="utf-8"))
+            self.assertEqual(run_payload["selected_job_count"], 1)
 
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):
