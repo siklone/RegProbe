@@ -14,6 +14,8 @@ FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
 QUEUE_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-job-queue.jsonl"
 SEEDS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-seeds.jsonl"
 SYMBOL_QUEUE_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-queue.json"
+SYMBOL_BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-batch.json"
+SYMBOL_RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-run.json"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 HEALTH_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
@@ -32,6 +34,8 @@ def load_local_module(name: str, path: Path):
 autotrigger = load_local_module("refresh_pipeline_autotrigger", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_seeds.py")
 autotrigger_inputs = load_local_module("refresh_pipeline_autotrigger_inputs", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_inputs.py")
 symbol_queue_mod = load_local_module("refresh_pipeline_symbol_queue", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_symbol_resolution_queue.py")
+symbol_batch_mod = load_local_module("refresh_pipeline_symbol_batch", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_symbol_resolution_batch.py")
+symbol_run_mod = load_local_module("refresh_pipeline_symbol_run", FRAMEWORK_ROOT / "scripts" / "run_ghidra_symbol_resolution_batch.py")
 dispatch_batch = load_local_module("refresh_pipeline_dispatch_batch", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_dispatch_batch.py")
 dispatch_runner = load_local_module("refresh_pipeline_dispatch_runner", FRAMEWORK_ROOT / "scripts" / "run_ghidra_dispatch_batch.py")
 autotrigger_health = load_local_module("refresh_pipeline_autotrigger_health", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_health.py")
@@ -64,6 +68,8 @@ def refresh_pipeline(
     queue_path: Path = QUEUE_PATH,
     seeds_path: Path = SEEDS_PATH,
     symbol_queue_path: Path = SYMBOL_QUEUE_PATH,
+    symbol_batch_path: Path = SYMBOL_BATCH_PATH,
+    symbol_run_path: Path = SYMBOL_RUN_PATH,
     batch_path: Path = BATCH_PATH,
     run_path: Path = RUN_PATH,
     health_path: Path = HEALTH_PATH,
@@ -97,6 +103,10 @@ def refresh_pipeline(
 
     symbol_queue = symbol_queue_mod.symbol_resolution_queue_from_seeds(seeds)
     symbol_queue_mod.write_json(symbol_queue_path, symbol_queue)
+    symbol_batch = symbol_batch_mod.symbol_resolution_batch_from_queue(symbol_queue)
+    symbol_batch_mod.write_json(symbol_batch_path, symbol_batch)
+    symbol_run = symbol_run_mod.build_run_plan(symbol_batch)
+    symbol_run_mod.write_json(symbol_run_path, symbol_run)
 
     batch = dispatch_batch.dispatch_batch_from_queue(queue_rows, autotrigger_rows=seeds)
     dispatch_batch.write_json(batch_path, batch)
@@ -105,7 +115,16 @@ def refresh_pipeline(
     dispatch_runner.write_json(run_path, run_plan)
 
     input_manifest = autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {"entries": []}
-    health = autotrigger_health.health_payload(input_manifest, queue_rows, seeds, symbol_queue, batch, run_plan)
+    health = autotrigger_health.health_payload(
+        input_manifest,
+        queue_rows,
+        seeds,
+        symbol_queue,
+        symbol_batch,
+        symbol_run,
+        batch,
+        run_plan,
+    )
     autotrigger_health.write_json(health_path, health)
 
     return {
@@ -113,6 +132,8 @@ def refresh_pipeline(
         "bundle_paths": [autotrigger.portable_path(path) for path in effective_bundle_paths],
         "seed_count": len(seeds),
         "symbol_resolution_request_count": symbol_queue.get("request_count", 0),
+        "symbol_resolution_batch_job_count": symbol_batch.get("job_count", 0),
+        "symbol_resolution_run_selected_job_count": symbol_run.get("selected_job_count", 0),
         "dispatch_job_count": batch.get("job_count", 0),
         "dispatch_autotrigger_matched_job_count": batch.get("autotrigger_matched_job_count", 0),
         "run_plan_selected_job_count": run_plan.get("selected_job_count", 0),
@@ -120,6 +141,8 @@ def refresh_pipeline(
         "outputs": {
             "seeds_path": autotrigger.portable_path(seeds_path),
             "symbol_queue_path": autotrigger.portable_path(symbol_queue_path),
+            "symbol_batch_path": autotrigger.portable_path(symbol_batch_path),
+            "symbol_run_path": autotrigger.portable_path(symbol_run_path),
             "batch_path": autotrigger.portable_path(batch_path),
             "run_path": autotrigger.portable_path(run_path),
             "health_path": autotrigger.portable_path(health_path),
@@ -141,6 +164,8 @@ def main() -> int:
     parser.add_argument("--queue", type=Path, default=QUEUE_PATH)
     parser.add_argument("--seeds-output", type=Path, default=SEEDS_PATH)
     parser.add_argument("--symbol-queue-output", type=Path, default=SYMBOL_QUEUE_PATH)
+    parser.add_argument("--symbol-batch-output", type=Path, default=SYMBOL_BATCH_PATH)
+    parser.add_argument("--symbol-run-output", type=Path, default=SYMBOL_RUN_PATH)
     parser.add_argument("--batch-output", type=Path, default=BATCH_PATH)
     parser.add_argument("--run-output", type=Path, default=RUN_PATH)
     parser.add_argument("--health-output", type=Path, default=HEALTH_PATH)
@@ -156,6 +181,8 @@ def main() -> int:
         queue_path=args.queue,
         seeds_path=args.seeds_output,
         symbol_queue_path=args.symbol_queue_output,
+        symbol_batch_path=args.symbol_batch_output,
+        symbol_run_path=args.symbol_run_output,
         batch_path=args.batch_output,
         run_path=args.run_output,
         health_path=args.health_output,

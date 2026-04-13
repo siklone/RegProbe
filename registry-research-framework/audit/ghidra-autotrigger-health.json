@@ -1,10 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T09:36:42.881337Z",
+  "generated_utc": "2026-04-13T09:51:50.384331Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
   "symbol_resolution_path": "registry-research-framework/queue/ghidra-symbol-resolution-queue.json",
+  "symbol_batch_path": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
+  "symbol_run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
   "batch_path": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
   "counts": {
@@ -12,10 +14,19 @@
     "queue_jobs": 4,
     "autotrigger_seeds": 0,
     "symbol_resolution_requests": 0,
+    "symbol_resolution_batch_jobs": 0,
+    "symbol_resolution_runnable_jobs": 0,
+    "symbol_resolution_run_selected_jobs": 0,
+    "symbol_resolution_run_blocked_jobs": 0,
     "dispatch_jobs": 4,
     "autotrigger_dispatch_jobs": 0,
     "run_selected_jobs": 4,
     "run_blocked_jobs": 0
+  },
+  "symbol_resolution_runner": {
+    "available": true,
+    "mode": "dry-run",
+    "error": null
   },
   "runner": {
     "available": false,
@@ -34,6 +45,7 @@
     "symbol_resolution_request_ids": [],
     "symbol_resolution_lookup_keys": [],
     "symbol_resolution_candidate_ids": [],
+    "symbol_resolution_batch_request_ids": [],
     "autotrigger_dispatch_candidate_ids": []
   },
   "focus": {
@@ -41,6 +53,7 @@
     "top_queue_candidate": "power.control.allow-system-required-power-requests",
     "top_autotrigger_candidate": null,
     "top_symbol_resolution_request": null,
+    "top_symbol_resolution_batch_request": null,
     "missing_input_jobs": []
   }
 }

@@ -13,6 +13,8 @@ INPUTS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-inputs.json"
 QUEUE_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-job-queue.jsonl"
 SEEDS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-seeds.jsonl"
 SYMBOL_QUEUE_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-queue.json"
+SYMBOL_BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-batch.json"
+SYMBOL_RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-run.json"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
@@ -53,6 +55,8 @@ def health_payload(
     queue_rows: list[dict[str, Any]],
     seed_rows: list[dict[str, Any]],
     symbol_queue: dict[str, Any],
+    symbol_batch: dict[str, Any],
+    symbol_run: dict[str, Any],
     batch: dict[str, Any],
     run: dict[str, Any],
     *,
@@ -73,6 +77,8 @@ def health_payload(
             if str(candidate_id or "")
         }
     )
+    symbol_batch_jobs = symbol_batch.get("jobs") or []
+    symbol_batch_request_ids = [str(job.get("request_id") or "") for job in symbol_batch_jobs]
     autotrigger_jobs = [job for job in (batch.get("jobs") or []) if int(job.get("autotrigger_seed_count") or 0) > 0]
     missing_input_jobs = [
         {
@@ -89,6 +95,8 @@ def health_payload(
         "queue_path": portable_path(QUEUE_PATH),
         "seeds_path": portable_path(SEEDS_PATH),
         "symbol_resolution_path": portable_path(SYMBOL_QUEUE_PATH),
+        "symbol_batch_path": portable_path(SYMBOL_BATCH_PATH),
+        "symbol_run_path": portable_path(SYMBOL_RUN_PATH),
         "batch_path": portable_path(BATCH_PATH),
         "run_path": portable_path(RUN_PATH),
         "counts": {
@@ -96,10 +104,19 @@ def health_payload(
             "queue_jobs": len(queue_rows),
             "autotrigger_seeds": len(seed_rows),
             "symbol_resolution_requests": len(symbol_requests),
+            "symbol_resolution_batch_jobs": int(symbol_batch.get("job_count") or 0),
+            "symbol_resolution_runnable_jobs": int(symbol_batch.get("runnable_job_count") or 0),
+            "symbol_resolution_run_selected_jobs": int(symbol_run.get("selected_job_count") or 0),
+            "symbol_resolution_run_blocked_jobs": int(symbol_run.get("blocked_job_count") or 0),
             "dispatch_jobs": int(batch.get("job_count") or 0),
             "autotrigger_dispatch_jobs": len(autotrigger_jobs),
             "run_selected_jobs": int(run.get("selected_job_count") or 0),
             "run_blocked_jobs": int(run.get("blocked_job_count") or 0),
+        },
+        "symbol_resolution_runner": {
+            "available": bool(symbol_run.get("runner_available")),
+            "mode": symbol_run.get("mode"),
+            "error": symbol_run.get("error"),
         },
         "runner": {
             "available": bool(run.get("runner_available")),
@@ -113,6 +130,7 @@ def health_payload(
             "symbol_resolution_request_ids": symbol_resolution_request_ids,
             "symbol_resolution_lookup_keys": symbol_resolution_lookup_keys,
             "symbol_resolution_candidate_ids": symbol_resolution_candidate_ids,
+            "symbol_resolution_batch_request_ids": symbol_batch_request_ids,
             "autotrigger_dispatch_candidate_ids": [str(job.get("candidate_id") or "") for job in autotrigger_jobs],
         },
         "focus": {
@@ -120,6 +138,7 @@ def health_payload(
             "top_queue_candidate": queue_candidates[0] if queue_candidates else None,
             "top_autotrigger_candidate": str(autotrigger_jobs[0].get("candidate_id") or "") if autotrigger_jobs else None,
             "top_symbol_resolution_request": symbol_resolution_lookup_keys[0] if symbol_resolution_lookup_keys else None,
+            "top_symbol_resolution_batch_request": symbol_batch_request_ids[0] if symbol_batch_request_ids else None,
             "missing_input_jobs": missing_input_jobs,
         },
     }
@@ -143,9 +162,12 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Queue jobs: `{counts.get('queue_jobs', 0)}`",
         f"- Autotrigger seeds: `{counts.get('autotrigger_seeds', 0)}`",
         f"- Symbol resolution requests: `{counts.get('symbol_resolution_requests', 0)}`",
+        f"- Symbol resolution batch jobs: `{counts.get('symbol_resolution_batch_jobs', 0)}`",
+        f"- Symbol resolution run selected jobs: `{counts.get('symbol_resolution_run_selected_jobs', 0)}`",
         f"- Dispatch jobs: `{counts.get('dispatch_jobs', 0)}`",
         f"- Autotrigger dispatch jobs: `{counts.get('autotrigger_dispatch_jobs', 0)}`",
         f"- Run selected jobs: `{counts.get('run_selected_jobs', 0)}`",
+        f"- Symbol runner available: `{(payload.get('symbol_resolution_runner') or {}).get('available')}`",
         f"- Runner available: `{runner.get('available')}`",
         f"- Runner mode: `{runner.get('mode')}`",
         "",
@@ -155,6 +177,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Top queue candidate: `{focus.get('top_queue_candidate')}`",
         f"- Top autotrigger candidate: `{focus.get('top_autotrigger_candidate')}`",
         f"- Top symbol resolution request: `{focus.get('top_symbol_resolution_request')}`",
+        f"- Top symbol resolution batch request: `{focus.get('top_symbol_resolution_batch_request')}`",
         "",
         "## Coverage",
         "",
@@ -162,6 +185,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Queued candidate ids: `{len(coverage.get('queued_candidate_ids') or [])}`",
         f"- Seed candidate ids: `{len(coverage.get('seed_candidate_ids') or [])}`",
         f"- Symbol resolution requests: `{len(coverage.get('symbol_resolution_request_ids') or [])}`",
+        f"- Symbol resolution batch request ids: `{len(coverage.get('symbol_resolution_batch_request_ids') or [])}`",
         f"- Autotrigger dispatch candidate ids: `{len(coverage.get('autotrigger_dispatch_candidate_ids') or [])}`",
     ]
     return "\n".join(lines) + "\n"
@@ -177,9 +201,11 @@ def main() -> int:
     queue_rows = load_jsonl(QUEUE_PATH)
     seed_rows = load_jsonl(SEEDS_PATH)
     symbol_queue = load_json(SYMBOL_QUEUE_PATH)
+    symbol_batch = load_json(SYMBOL_BATCH_PATH)
+    symbol_run = load_json(SYMBOL_RUN_PATH)
     batch = load_json(BATCH_PATH)
     run = load_json(RUN_PATH)
-    payload = health_payload(input_manifest, queue_rows, seed_rows, symbol_queue, batch, run)
+    payload = health_payload(input_manifest, queue_rows, seed_rows, symbol_queue, symbol_batch, symbol_run, batch, run)
     write_json(OUTPUT_PATH, payload)
     write_text(MARKDOWN_PATH, render_markdown(payload))
     print(
@@ -189,6 +215,7 @@ def main() -> int:
                 "queue_jobs": len(queue_rows),
                 "autotrigger_seeds": len(seed_rows),
                 "symbol_resolution_requests": int((symbol_queue or {}).get("request_count") or 0),
+                "symbol_resolution_batch_jobs": int((symbol_batch or {}).get("job_count") or 0),
             },
             indent=2,
         )

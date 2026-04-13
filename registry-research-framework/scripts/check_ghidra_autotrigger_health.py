@@ -27,6 +27,10 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     queue_jobs = int(counts.get("queue_jobs") or 0)
     seeds = int(counts.get("autotrigger_seeds") or 0)
     symbol_resolution_requests = int(counts.get("symbol_resolution_requests") or 0)
+    symbol_resolution_batch_jobs = int(counts.get("symbol_resolution_batch_jobs") or 0)
+    symbol_resolution_runnable_jobs = int(counts.get("symbol_resolution_runnable_jobs") or 0)
+    symbol_resolution_run_selected_jobs = int(counts.get("symbol_resolution_run_selected_jobs") or 0)
+    symbol_resolution_run_blocked_jobs = int(counts.get("symbol_resolution_run_blocked_jobs") or 0)
     dispatch_jobs = int(counts.get("dispatch_jobs") or 0)
     autotrigger_dispatch_jobs = int(counts.get("autotrigger_dispatch_jobs") or 0)
     run_selected_jobs = int(counts.get("run_selected_jobs") or 0)
@@ -37,8 +41,10 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     seed_candidate_ids = coverage.get("seed_candidate_ids") or []
     symbol_resolution_request_ids = coverage.get("symbol_resolution_request_ids") or []
     symbol_resolution_lookup_keys = coverage.get("symbol_resolution_lookup_keys") or []
+    symbol_resolution_batch_request_ids = coverage.get("symbol_resolution_batch_request_ids") or []
     autotrigger_dispatch_candidate_ids = coverage.get("autotrigger_dispatch_candidate_ids") or []
     missing_input_jobs = focus.get("missing_input_jobs") or []
+    symbol_resolution_runner = payload.get("symbol_resolution_runner") or {}
 
     if len(input_bundle_paths) != input_manifest_selected:
         errors.append(f"input_manifest_selected mismatch: counts={input_manifest_selected} coverage={len(input_bundle_paths)}")
@@ -56,10 +62,35 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
             "symbol_resolution_lookup_keys mismatch: "
             f"counts={symbol_resolution_requests} coverage={len(symbol_resolution_lookup_keys)}"
         )
+    if len(symbol_resolution_batch_request_ids) != symbol_resolution_batch_jobs:
+        errors.append(
+            "symbol_resolution_batch_jobs mismatch: "
+            f"counts={symbol_resolution_batch_jobs} coverage={len(symbol_resolution_batch_request_ids)}"
+        )
     if len(autotrigger_dispatch_candidate_ids) != autotrigger_dispatch_jobs:
         errors.append(
             "autotrigger_dispatch_jobs mismatch: "
             f"counts={autotrigger_dispatch_jobs} coverage={len(autotrigger_dispatch_candidate_ids)}"
+        )
+    if symbol_resolution_runnable_jobs > symbol_resolution_batch_jobs:
+        errors.append(
+            "symbol_resolution_runnable_jobs exceeds symbol_resolution_batch_jobs: "
+            f"{symbol_resolution_runnable_jobs}>{symbol_resolution_batch_jobs}"
+        )
+    if symbol_resolution_run_selected_jobs > symbol_resolution_batch_jobs:
+        errors.append(
+            "symbol_resolution_run_selected_jobs exceeds symbol_resolution_batch_jobs: "
+            f"{symbol_resolution_run_selected_jobs}>{symbol_resolution_batch_jobs}"
+        )
+    if symbol_resolution_run_blocked_jobs > symbol_resolution_batch_jobs:
+        errors.append(
+            "symbol_resolution_run_blocked_jobs exceeds symbol_resolution_batch_jobs: "
+            f"{symbol_resolution_run_blocked_jobs}>{symbol_resolution_batch_jobs}"
+        )
+    if symbol_resolution_run_selected_jobs + symbol_resolution_run_blocked_jobs < symbol_resolution_batch_jobs:
+        errors.append(
+            "symbol_resolution selected+blocked does not cover batch jobs: "
+            f"{symbol_resolution_run_selected_jobs}+{symbol_resolution_run_blocked_jobs}<{symbol_resolution_batch_jobs}"
         )
     if autotrigger_dispatch_jobs > dispatch_jobs:
         errors.append(f"autotrigger_dispatch_jobs exceeds dispatch_jobs: {autotrigger_dispatch_jobs}>{dispatch_jobs}")
@@ -100,6 +131,16 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     if symbol_resolution_requests > 0 and symbol_resolution_lookup_keys and top_symbol_resolution_request != symbol_resolution_lookup_keys[0]:
         errors.append("top_symbol_resolution_request does not match first symbol resolution lookup key")
 
+    top_symbol_resolution_batch_request = focus.get("top_symbol_resolution_batch_request")
+    if symbol_resolution_batch_jobs == 0 and top_symbol_resolution_batch_request is not None:
+        errors.append("top_symbol_resolution_batch_request should be null when no symbol resolution batch jobs exist")
+    if symbol_resolution_batch_jobs > 0 and symbol_resolution_batch_request_ids and top_symbol_resolution_batch_request != symbol_resolution_batch_request_ids[0]:
+        errors.append("top_symbol_resolution_batch_request does not match first symbol resolution batch request id")
+    if symbol_resolution_batch_jobs > 0 and not symbol_resolution_batch_request_ids and top_symbol_resolution_batch_request is not None:
+        errors.append("top_symbol_resolution_batch_request does not match first symbol resolution batch request id")
+
+    if symbol_resolution_runner.get("available") and symbol_resolution_runner.get("error"):
+        errors.append("symbol_resolution_runner cannot be available and errored at the same time")
     if runner.get("available") and runner.get("error"):
         errors.append("runner cannot be available and errored at the same time")
 
