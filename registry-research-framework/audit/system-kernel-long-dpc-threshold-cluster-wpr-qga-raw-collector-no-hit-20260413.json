@@ -1,0 +1,43 @@
+{
+  "generated_utc": "2026-04-13T00:45:11.4100914Z",
+  "candidate_id": "system.kernel-long-dpc-threshold-cluster",
+  "record_id": "system.kernel-long-dpc-threshold-cluster",
+  "run_id": "long-dpc-threshold-cluster-wpr-qga-20260413a",
+  "transport": "qga",
+  "capture_phase": "boot",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+  "value_name": "LongDpcRuntimeThreshold",
+  "match_fragments": [
+    "LongDpcQueueThreshold"
+  ],
+  "status": "ok",
+  "reboot_observed": true,
+  "target_etl_exists": false,
+  "raw_collector_salvage": true,
+  "raw_collector_size_bytes": 262144,
+  "raw_collector_csv_exists": true,
+  "raw_collector_csv_size_bytes": 2677,
+  "hits_csv_exists": true,
+  "hits_csv_size_bytes": 346,
+  "hit_line_count": 0,
+  "fragment_hit_counts": {
+    "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel": 0,
+    "LongDpcRuntimeThreshold": 0,
+    "LongDpcQueueThreshold": 0
+  },
+  "normalized_bundle_exists": true,
+  "normalization_status": "ok",
+  "normalized_event_count": 0,
+  "normalizer_name": "GuestTracerptCsvRegistryNormalizer",
+  "negative_evidence": "raw-collector-exact-runtime-no-hit",
+  "blocker_closed": false,
+  "remaining_blocker": "runtime_no_read",
+  "artifacts": [
+    "evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a-summary-arm.json",
+    "evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a-summary.json",
+    "evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a.normalized.json",
+    "evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a.raw-collector.csv",
+    "evidence/files/vm-tooling-staging/long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413/long-dpc-threshold-cluster-wpr-qga-20260413a.raw-collector.hits.csv",
+    "research/notes/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.md"
+  ]
+}

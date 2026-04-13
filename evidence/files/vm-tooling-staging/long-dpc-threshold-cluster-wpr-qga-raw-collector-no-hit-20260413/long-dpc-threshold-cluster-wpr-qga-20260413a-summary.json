@@ -1,0 +1,58 @@
+﻿{
+    "generated_utc":  "2026-04-13T00:45:10.6730667Z",
+    "stage":  "collect",
+    "registry_path":  "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name":  "LongDpcRuntimeThreshold",
+    "output_name":  "long-dpc-threshold-cluster-wpr-qga-20260413a",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "recovery_action":  "none",
+    "transport_blocker":  "none",
+    "guest_health":  "stable",
+    "before_boot_time_utc":  "2026-04-13T00:30:15.5000000Z",
+    "after_boot_time_utc":  "2026-04-13T00:40:26.5000000Z",
+    "reboot_observed":  true,
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "stopboot":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "",
+                     "stderr":  "There are no trace profiles running.\r\r\n\r\n\tError code: 0xc5583000"
+                 },
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\long-dpc-threshold-cluster-wpr-qga-20260413a.etl",
+    "etl_exists":  false,
+    "tracerpt_input_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\WPR_initiated_WprApp_boottr_WPRC_Internal_Collector_B5C754C0-47DF-45A6-9B86-E621ED2E3F4A.etl",
+    "csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\long-dpc-threshold-cluster-wpr-qga-20260413a.raw-collector.csv",
+    "csv_exists":  true,
+    "raw_collector_salvage":  true,
+    "raw_collector_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\WPR_initiated_WprApp_boottr_WPRC_Internal_Collector_B5C754C0-47DF-45A6-9B86-E621ED2E3F4A.etl",
+    "raw_collector_size_bytes":  262144,
+    "normalized_bundle_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\long-dpc-threshold-cluster-wpr-qga-20260413a.normalized.json",
+    "normalized_bundle_exists":  true,
+    "normalized_result_ref":  "C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\long-dpc-threshold-cluster-wpr-qga-20260413a.normalized.json",
+    "normalization_status":  "ok",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "normalization_errors":  [
+
+                             ],
+    "hits_csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\long-dpc-threshold-cluster-wpr-qga-20260413a.raw-collector.hits.csv",
+    "hits_csv_exists":  true,
+    "hit_line_count":  0,
+    "fragment_hit_counts":  {
+                                "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel":  0,
+                                "LongDpcRuntimeThreshold":  0,
+                                "LongDpcQueueThreshold":  0
+                            },
+    "stopboot_exit_code_indeterminate":  true,
+    "tracerpt":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Input\r\n----------------\r\nFile(s):\r\n     C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\WPR_initiated_WprApp_boottr_WPRC_Internal_Collector_B5C754C0-47DF-45A6-9B86-E621ED2E3F4A.etl\r\n\n0.00%100.00%\n\r\nOutput\r\n----------------\r\nDumpFile:           C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\long-dpc-threshold-cluster-wpr-qga-20260413a.raw-collector.csv\r\n\nThe command completed successfully.",
+                     "stderr":  ""
+                 },
+    "tracerpt_exit_code_indeterminate":  true,
+    "hits_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\long-dpc-threshold-cluster-wpr-qga-20260413a\\long-dpc-threshold-cluster-wpr-qga-20260413a.raw-collector.hits.txt",
+    "hits_exists":  false
+}
