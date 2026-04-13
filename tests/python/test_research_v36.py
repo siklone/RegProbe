@@ -2375,7 +2375,16 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
 
 
 class GhidraAutotriggerInputTests(unittest.TestCase):
-    def test_input_manifest_discovers_stack_bundles(self) -> None:
+    def test_input_manifest_discovers_matching_stack_bundles(self) -> None:
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+            }
+        ]
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
             with_stack = root / "with-stack" / "normalized-registry-bundle.json"
@@ -2390,7 +2399,14 @@ class GhidraAutotriggerInputTests(unittest.TestCase):
                         "capture_phase": "boot",
                         "stack_capture": {"captured_event_count": 2},
                         "event_count": 2,
-                        "events": [{"caller_stack": ["nt!Foo"]}],
+                        "events": [
+                            {
+                                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                                "value_name": "AllowSystemRequiredPowerRequests",
+                                "operation": "RegQueryValue",
+                                "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopPowerRequestInitialize"],
+                            }
+                        ],
                     }
                 ),
                 encoding="utf-8",
@@ -2411,13 +2427,20 @@ class GhidraAutotriggerInputTests(unittest.TestCase):
 
             payload = ghidra_autotrigger_inputs.input_manifest(
                 [root],
+                queue_rows=queue_rows,
                 require_caller_stack=True,
+                require_queue_match=True,
                 generated_utc="2026-04-13T00:00:00Z",
             )
 
         self.assertEqual(payload["selected_count"], 1)
         self.assertEqual(payload["entries"][0]["run_id"], "with-stack")
         self.assertEqual(payload["entries"][0]["caller_stack_event_count"], 2)
+        self.assertEqual(payload["entries"][0]["matched_candidate_count"], 1)
+        self.assertEqual(
+            payload["entries"][0]["matched_candidate_ids"],
+            ["power.control.allow-system-required-power-requests"],
+        )
 
 
 class GhidraAutotriggerHealthTests(unittest.TestCase):

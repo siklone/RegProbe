@@ -13,6 +13,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[2]
 FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
 DEFAULT_SEARCH_ROOT = REPO_ROOT / "evidence"
+QUEUE_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-job-queue.jsonl"
 OUTPUT_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-inputs.json"
 
 
@@ -39,9 +40,12 @@ def iso_from_timestamp(timestamp: float) -> str:
 def discover_input_entries(
     bundle_roots: list[Path],
     *,
+    queue_rows: list[dict[str, Any]] | None = None,
     require_caller_stack: bool = True,
+    require_queue_match: bool = False,
     limit: int | None = None,
 ) -> list[dict[str, Any]]:
+    queue_rows = queue_rows or []
     entries: list[dict[str, Any]] = []
     seen: set[Path] = set()
     for root in bundle_roots:
@@ -52,6 +56,19 @@ def discover_input_entries(
             bundle = autotrigger.load_json(path)
             caller_stack_event_count = autotrigger.bundle_caller_stack_event_count(bundle)
             if require_caller_stack and caller_stack_event_count <= 0:
+                continue
+            matched_candidate_ids = sorted(
+                {
+                    str(seed.get("candidate_id") or "")
+                    for seed in autotrigger.autotrigger_seeds_from_bundle(
+                        bundle,
+                        bundle_path=autotrigger.portable_path(path),
+                        queue_rows=queue_rows,
+                    )
+                    if str(seed.get("candidate_id") or "")
+                }
+            )
+            if require_queue_match and not matched_candidate_ids:
                 continue
             stat = path.stat()
             entries.append(
@@ -64,6 +81,8 @@ def discover_input_entries(
                     "status": bundle.get("status"),
                     "event_count": int(bundle.get("event_count") or 0),
                     "caller_stack_event_count": caller_stack_event_count,
+                    "matched_candidate_count": len(matched_candidate_ids),
+                    "matched_candidate_ids": matched_candidate_ids,
                     "generated_utc": bundle.get("generated_utc"),
                     "modified_utc": iso_from_timestamp(stat.st_mtime),
                     "_sort_mtime": stat.st_mtime,
@@ -71,6 +90,7 @@ def discover_input_entries(
             )
     entries.sort(
         key=lambda item: (
+            -int(item.get("matched_candidate_count") or 0),
             -int(item.get("caller_stack_event_count") or 0),
             -float(item.get("_sort_mtime") or 0),
             str(item.get("path") or ""),
@@ -87,17 +107,27 @@ def discover_input_entries(
 def input_manifest(
     bundle_roots: list[Path],
     *,
+    queue_rows: list[dict[str, Any]] | None = None,
     require_caller_stack: bool = True,
+    require_queue_match: bool = False,
     limit: int | None = None,
     generated_utc: str | None = None,
 ) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
-    entries = discover_input_entries(bundle_roots, require_caller_stack=require_caller_stack, limit=limit)
+    entries = discover_input_entries(
+        bundle_roots,
+        queue_rows=queue_rows,
+        require_caller_stack=require_caller_stack,
+        require_queue_match=require_queue_match,
+        limit=limit,
+    )
     return {
         "schema_version": "1.0",
         "generated_utc": generated_utc,
         "search_roots": [autotrigger.portable_path(root) for root in bundle_roots],
+        "queue_path": autotrigger.portable_path(QUEUE_PATH),
         "require_caller_stack": require_caller_stack,
+        "require_queue_match": require_queue_match,
         "selection_limit": limit,
         "selected_count": len(entries),
         "entries": entries,
@@ -112,15 +142,20 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Discover normalized bundles that can feed the Ghidra autotrigger lane.")
     parser.add_argument("--bundle-root", type=Path, action="append", default=[])
+    parser.add_argument("--queue", type=Path, default=QUEUE_PATH)
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--include-no-stack", action="store_true", help="Keep normalized bundles even when they contain no caller_stack events.")
+    parser.add_argument("--include-unmatched", action="store_true", help="Keep bundles even when they do not currently map to queued Ghidra candidates.")
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     args = parser.parse_args()
 
     roots = args.bundle_root or [DEFAULT_SEARCH_ROOT]
+    queue_rows = autotrigger.load_jsonl(args.queue)
     payload = input_manifest(
         roots,
+        queue_rows=queue_rows,
         require_caller_stack=not args.include_no_stack,
+        require_queue_match=not args.include_unmatched,
         limit=args.limit,
     )
     write_json(args.output, payload)

@@ -72,8 +72,10 @@ def refresh_pipeline(
         roots = input_roots or [autotrigger_inputs.DEFAULT_SEARCH_ROOT]
         bundle_manifest_payload = autotrigger_inputs.input_manifest(
             roots,
+            queue_rows=queue_rows,
             limit=input_manifest_limit,
             require_caller_stack=True,
+            require_queue_match=True,
         )
         autotrigger_inputs.write_json(effective_manifest_path, bundle_manifest_payload)
     effective_bundle_paths = autotrigger.collect_bundle_paths(
