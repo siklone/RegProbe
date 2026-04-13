@@ -8,4 +8,4 @@
 - Repo files copied: `9`
 - Command files written: `4`
 - Pack files checksummed: `19`
-- Archive SHA-256: `ecf1643de7a6d1b975134f55e5f205c257dbd2e192aed9dd8d7560159db2243d`
+- Archive SHA-256: `dd26f1f3c5e14578d78fa8149d15aa05d894e6d57229009b5aad9d9198654f16`

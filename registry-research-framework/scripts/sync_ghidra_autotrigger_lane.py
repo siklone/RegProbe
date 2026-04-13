@@ -112,6 +112,21 @@ def cached_transfer_pack_check_summary(path: Path | None, markdown_path: Path | 
     }
 
 
+def cached_execution_run_summary(path: Path | None, markdown_path: Path | None) -> dict[str, Any] | None:
+    if not path or not path.exists():
+        return None
+    payload = load_json(path)
+    counts = payload.get("counts") or {}
+    return {
+        "status": payload.get("execution_run_status"),
+        "ready_jobs": int(counts.get("ready_jobs") or 0),
+        "blocked_jobs": int(counts.get("blocked_jobs") or 0),
+        "path": portable_path(path),
+        "markdown_path": portable_path(markdown_path) if markdown_path and markdown_path.exists() else None,
+        "source": "cached",
+    }
+
+
 def cached_health_status(path: Path | None) -> dict[str, Any] | None:
     if not path or not path.exists():
         return None
@@ -238,6 +253,19 @@ def render_markdown(payload: dict[str, Any]) -> str:
                 f"- Path: `{pack_check.get('path')}`",
             ]
         )
+    execution_run = payload.get("execution_run") or {}
+    if execution_run:
+        lines.extend(
+            [
+                "",
+                "## Transfer Execution Run",
+                "",
+                f"- Run status: `{execution_run.get('status')}`",
+                f"- Ready jobs: `{execution_run.get('ready_jobs')}`",
+                f"- Blocked jobs: `{execution_run.get('blocked_jobs')}`",
+                f"- Path: `{execution_run.get('path')}`",
+            ]
+        )
     refresh = payload.get("refresh") or {}
     if refresh:
         lines.extend(
@@ -310,6 +338,8 @@ def sync_lane(
     effective_transfer_pack_archive_path = transfer_pack_archive_path or refresh_pipeline_mod.TRANSFER_PACK_ARCHIVE_PATH
     effective_transfer_pack_check_path = transfer_pack_check_path or refresh_pipeline_mod.TRANSFER_PACK_CHECK_PATH
     effective_transfer_pack_check_markdown_path = transfer_pack_check_markdown_path or refresh_pipeline_mod.TRANSFER_PACK_CHECK_MARKDOWN_PATH
+    effective_execution_run_path = effective_transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run.json")
+    effective_execution_run_markdown_path = effective_transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run.md")
     try:
         refresh_payload = refresh_pipeline_mod.refresh_pipeline(
             refresh_bundle_manifest=True,
@@ -334,6 +364,8 @@ def sync_lane(
             transfer_pack_archive_path=effective_transfer_pack_archive_path,
             transfer_pack_check_path=effective_transfer_pack_check_path,
             transfer_pack_check_markdown_path=effective_transfer_pack_check_markdown_path,
+            execution_run_path=effective_execution_run_path,
+            execution_run_markdown_path=effective_execution_run_markdown_path,
         )
     except ValueError as exc:
         manifest_payload = refresh_pipeline_mod.autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {}
@@ -364,6 +396,10 @@ def sync_lane(
                 "transfer_pack_check": cached_transfer_pack_check_summary(
                     effective_transfer_pack_check_path,
                     effective_transfer_pack_check_markdown_path,
+                ),
+                "execution_run": cached_execution_run_summary(
+                    effective_execution_run_path,
+                    effective_execution_run_markdown_path,
                 ),
                 "operator": operator,
                 "error": str(exc),
@@ -415,6 +451,13 @@ def sync_lane(
             "error_count": refresh_payload.get("symbol_resolution_transfer_pack_check_error_count"),
             "path": (refresh_payload.get("outputs") or {}).get("transfer_pack_check_path"),
             "markdown_path": (refresh_payload.get("outputs") or {}).get("transfer_pack_check_markdown_path"),
+        },
+        "execution_run": {
+            "status": refresh_payload.get("symbol_resolution_execution_run_status"),
+            "ready_jobs": refresh_payload.get("symbol_resolution_execution_run_ready_job_count"),
+            "blocked_jobs": refresh_payload.get("symbol_resolution_execution_run_blocked_job_count"),
+            "path": (refresh_payload.get("outputs") or {}).get("execution_run_path"),
+            "markdown_path": (refresh_payload.get("outputs") or {}).get("execution_run_markdown_path"),
         },
         "operator": operator,
     }

@@ -36,6 +36,9 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_transfer_selected_jobs = int(counts.get("symbol_resolution_transfer_selected_jobs") or 0)
     symbol_resolution_transfer_pack_selected_jobs = int(counts.get("symbol_resolution_transfer_pack_selected_jobs") or 0)
     symbol_resolution_transfer_pack_check_errors = int(counts.get("symbol_resolution_transfer_pack_check_errors") or 0)
+    symbol_resolution_execution_run_planned_jobs = int(counts.get("symbol_resolution_execution_run_planned_jobs") or 0)
+    symbol_resolution_execution_run_ready_jobs = int(counts.get("symbol_resolution_execution_run_ready_jobs") or 0)
+    symbol_resolution_execution_run_blocked_jobs = int(counts.get("symbol_resolution_execution_run_blocked_jobs") or 0)
     dispatch_jobs = int(counts.get("dispatch_jobs") or 0)
     autotrigger_dispatch_jobs = int(counts.get("autotrigger_dispatch_jobs") or 0)
     run_selected_jobs = int(counts.get("run_selected_jobs") or 0)
@@ -50,6 +53,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_handoff_request_ids = coverage.get("symbol_resolution_handoff_request_ids") or []
     symbol_resolution_transfer_request_ids = coverage.get("symbol_resolution_transfer_request_ids") or []
     symbol_resolution_transfer_pack_request_ids = coverage.get("symbol_resolution_transfer_pack_request_ids") or []
+    symbol_resolution_execution_run_request_ids = coverage.get("symbol_resolution_execution_run_request_ids") or []
     autotrigger_dispatch_candidate_ids = coverage.get("autotrigger_dispatch_candidate_ids") or []
     missing_input_jobs = focus.get("missing_input_jobs") or []
     symbol_resolution_runner = payload.get("symbol_resolution_runner") or {}
@@ -57,6 +61,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_transfer = payload.get("symbol_resolution_transfer") or {}
     symbol_resolution_transfer_pack = payload.get("symbol_resolution_transfer_pack") or {}
     symbol_resolution_transfer_pack_check = payload.get("symbol_resolution_transfer_pack_check") or {}
+    symbol_resolution_execution_run = payload.get("symbol_resolution_execution_run") or {}
 
     if len(input_bundle_paths) != input_manifest_selected:
         errors.append(f"input_manifest_selected mismatch: counts={input_manifest_selected} coverage={len(input_bundle_paths)}")
@@ -115,6 +120,23 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
         errors.append("symbol_resolution_transfer_pack_check error_count does not match counts")
     if symbol_resolution_transfer_pack_check_errors > 0 and symbol_resolution_transfer_pack_check.get("status") == "ok":
         errors.append("symbol_resolution_transfer_pack_check cannot be ok when errors are present")
+    if symbol_resolution_execution_run_planned_jobs > len(symbol_resolution_execution_run_request_ids):
+        errors.append(
+            "symbol_resolution_execution_run_planned_jobs exceeds execution run coverage: "
+            f"{symbol_resolution_execution_run_planned_jobs}>{len(symbol_resolution_execution_run_request_ids)}"
+        )
+    if symbol_resolution_execution_run_planned_jobs > symbol_resolution_transfer_pack_selected_jobs:
+        errors.append(
+            "symbol_resolution_execution_run_planned_jobs exceeds symbol_resolution_transfer_pack_selected_jobs: "
+            f"{symbol_resolution_execution_run_planned_jobs}>{symbol_resolution_transfer_pack_selected_jobs}"
+        )
+    if symbol_resolution_execution_run_ready_jobs + symbol_resolution_execution_run_blocked_jobs != symbol_resolution_execution_run_planned_jobs:
+        errors.append(
+            "symbol_resolution execution ready+blocked does not equal planned jobs: "
+            f"{symbol_resolution_execution_run_ready_jobs}+{symbol_resolution_execution_run_blocked_jobs}!={symbol_resolution_execution_run_planned_jobs}"
+        )
+    if symbol_resolution_transfer_pack_selected_jobs > 0 and symbol_resolution_execution_run.get("status") != "ready":
+        errors.append("symbol_resolution_execution_run must be ready when transfer pack has selected jobs")
     if len(autotrigger_dispatch_candidate_ids) != autotrigger_dispatch_jobs:
         errors.append(
             "autotrigger_dispatch_jobs mismatch: "
@@ -218,6 +240,12 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     ):
         errors.append("top_symbol_resolution_transfer_pack_request does not match first symbol transfer pack request id")
 
+    top_symbol_resolution_execution_run_request = focus.get("top_symbol_resolution_execution_run_request")
+    if not symbol_resolution_execution_run_request_ids and top_symbol_resolution_execution_run_request is not None:
+        errors.append("top_symbol_resolution_execution_run_request should be null when no execution run requests exist")
+    if symbol_resolution_execution_run_request_ids and top_symbol_resolution_execution_run_request != symbol_resolution_execution_run_request_ids[0]:
+        errors.append("top_symbol_resolution_execution_run_request does not match first symbol execution run request id")
+
     if symbol_resolution_runner.get("available") and symbol_resolution_runner.get("error"):
         errors.append("symbol_resolution_runner cannot be available and errored at the same time")
     if symbol_resolution_handoff.get("selected_jobs") != symbol_resolution_handoff_selected_jobs:
@@ -226,6 +254,13 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
         errors.append("symbol_resolution_transfer selected_jobs does not match counts")
     if symbol_resolution_transfer_pack.get("selected_jobs") != symbol_resolution_transfer_pack_selected_jobs:
         errors.append("symbol_resolution_transfer_pack selected_jobs does not match counts")
+    if symbol_resolution_execution_run:
+        if symbol_resolution_execution_run.get("planned_jobs") != symbol_resolution_execution_run_planned_jobs:
+            errors.append("symbol_resolution_execution_run planned_jobs does not match counts")
+        if symbol_resolution_execution_run.get("ready_jobs") != symbol_resolution_execution_run_ready_jobs:
+            errors.append("symbol_resolution_execution_run ready_jobs does not match counts")
+        if symbol_resolution_execution_run.get("blocked_jobs") != symbol_resolution_execution_run_blocked_jobs:
+            errors.append("symbol_resolution_execution_run blocked_jobs does not match counts")
     if runner.get("available") and runner.get("error"):
         errors.append("runner cannot be available and errored at the same time")
 

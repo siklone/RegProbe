@@ -19,6 +19,7 @@ HANDOFF_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-handoff.json
 TRANSFER_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer.json"
 TRANSFER_PACK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack.json"
 TRANSFER_PACK_CHECK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-check.json"
+EXECUTION_RUN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run.json"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
@@ -68,9 +69,11 @@ def health_payload(
     batch: dict[str, Any],
     run: dict[str, Any],
     *,
+    execution_run: dict[str, Any] | None = None,
     generated_utc: str | None = None,
 ) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
+    execution_run = execution_run or {}
     input_entries = input_manifest.get("entries") or []
     queue_candidates = [str(row.get("candidate_id") or "") for row in queue_rows]
     seed_candidates = [str(row.get("candidate_id") or "") for row in seed_rows]
@@ -102,6 +105,13 @@ def health_payload(
         for request_id in (transfer_pack.get("request_ids") or [])
         if str(request_id or "")
     ]
+    execution_run_jobs = execution_run.get("jobs") or []
+    execution_run_blocked_jobs = execution_run.get("blocked_jobs") or []
+    execution_run_request_ids = [
+        str(job.get("request_id") or "")
+        for job in [*execution_run_jobs, *execution_run_blocked_jobs]
+        if str(job.get("request_id") or "")
+    ]
     autotrigger_jobs = [job for job in (batch.get("jobs") or []) if int(job.get("autotrigger_seed_count") or 0) > 0]
     missing_input_jobs = [
         {
@@ -124,6 +134,7 @@ def health_payload(
         "symbol_transfer_path": portable_path(TRANSFER_PATH),
         "symbol_transfer_pack_path": portable_path(TRANSFER_PACK_PATH),
         "symbol_transfer_pack_check_path": portable_path(TRANSFER_PACK_CHECK_PATH),
+        "symbol_execution_run_path": portable_path(EXECUTION_RUN_PATH),
         "batch_path": portable_path(BATCH_PATH),
         "run_path": portable_path(RUN_PATH),
         "counts": {
@@ -140,6 +151,9 @@ def health_payload(
             "symbol_resolution_transfer_selected_jobs": int((transfer.get("counts") or {}).get("selected_jobs") or 0),
             "symbol_resolution_transfer_pack_selected_jobs": int((transfer_pack.get("counts") or {}).get("selected_jobs") or 0),
             "symbol_resolution_transfer_pack_check_errors": len(transfer_pack_check.get("errors") or []),
+            "symbol_resolution_execution_run_planned_jobs": int((execution_run.get("counts") or {}).get("planned_jobs") or 0),
+            "symbol_resolution_execution_run_ready_jobs": int((execution_run.get("counts") or {}).get("ready_jobs") or 0),
+            "symbol_resolution_execution_run_blocked_jobs": int((execution_run.get("counts") or {}).get("blocked_jobs") or 0),
             "dispatch_jobs": int(batch.get("job_count") or 0),
             "autotrigger_dispatch_jobs": len(autotrigger_jobs),
             "run_selected_jobs": int(run.get("selected_job_count") or 0),
@@ -184,6 +198,15 @@ def health_payload(
             "checked_archive_files": int((transfer_pack_check.get("counts") or {}).get("checked_archive_files") or 0),
             "archive_entries": int((transfer_pack_check.get("counts") or {}).get("archive_entries") or 0),
         },
+        "symbol_resolution_execution_run": {
+            "status": execution_run.get("execution_run_status"),
+            "mode": execution_run.get("mode"),
+            "operator_blocker": (execution_run.get("operator") or {}).get("blocker"),
+            "planned_jobs": int((execution_run.get("counts") or {}).get("planned_jobs") or 0),
+            "ready_jobs": int((execution_run.get("counts") or {}).get("ready_jobs") or 0),
+            "blocked_jobs": int((execution_run.get("counts") or {}).get("blocked_jobs") or 0),
+            "executed_jobs": int((execution_run.get("counts") or {}).get("executed_jobs") or 0),
+        },
         "runner": {
             "available": bool(run.get("runner_available")),
             "mode": run.get("mode"),
@@ -200,6 +223,7 @@ def health_payload(
             "symbol_resolution_handoff_request_ids": handoff_request_ids,
             "symbol_resolution_transfer_request_ids": transfer_request_ids,
             "symbol_resolution_transfer_pack_request_ids": transfer_pack_request_ids,
+            "symbol_resolution_execution_run_request_ids": execution_run_request_ids,
             "autotrigger_dispatch_candidate_ids": [str(job.get("candidate_id") or "") for job in autotrigger_jobs],
         },
         "focus": {
@@ -211,6 +235,7 @@ def health_payload(
             "top_symbol_resolution_handoff_request": handoff_request_ids[0] if handoff_request_ids else None,
             "top_symbol_resolution_transfer_request": transfer_request_ids[0] if transfer_request_ids else None,
             "top_symbol_resolution_transfer_pack_request": transfer_pack_request_ids[0] if transfer_pack_request_ids else None,
+            "top_symbol_resolution_execution_run_request": execution_run_request_ids[0] if execution_run_request_ids else None,
             "missing_input_jobs": missing_input_jobs,
         },
     }
@@ -241,6 +266,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol resolution transfer selected jobs: `{counts.get('symbol_resolution_transfer_selected_jobs', 0)}`",
         f"- Symbol resolution transfer pack selected jobs: `{counts.get('symbol_resolution_transfer_pack_selected_jobs', 0)}`",
         f"- Symbol resolution transfer pack check errors: `{counts.get('symbol_resolution_transfer_pack_check_errors', 0)}`",
+        f"- Symbol resolution execution run ready jobs: `{counts.get('symbol_resolution_execution_run_ready_jobs', 0)}`",
+        f"- Symbol resolution execution run blocked jobs: `{counts.get('symbol_resolution_execution_run_blocked_jobs', 0)}`",
         f"- Dispatch jobs: `{counts.get('dispatch_jobs', 0)}`",
         f"- Autotrigger dispatch jobs: `{counts.get('autotrigger_dispatch_jobs', 0)}`",
         f"- Run selected jobs: `{counts.get('run_selected_jobs', 0)}`",
@@ -258,6 +285,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Top symbol resolution handoff request: `{focus.get('top_symbol_resolution_handoff_request')}`",
         f"- Top symbol resolution transfer request: `{focus.get('top_symbol_resolution_transfer_request')}`",
         f"- Top symbol resolution transfer pack request: `{focus.get('top_symbol_resolution_transfer_pack_request')}`",
+        f"- Top symbol resolution execution run request: `{focus.get('top_symbol_resolution_execution_run_request')}`",
         "",
         "## Coverage",
         "",
@@ -269,6 +297,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol resolution handoff request ids: `{len(coverage.get('symbol_resolution_handoff_request_ids') or [])}`",
         f"- Symbol resolution transfer request ids: `{len(coverage.get('symbol_resolution_transfer_request_ids') or [])}`",
         f"- Symbol resolution transfer pack request ids: `{len(coverage.get('symbol_resolution_transfer_pack_request_ids') or [])}`",
+        f"- Symbol resolution execution run request ids: `{len(coverage.get('symbol_resolution_execution_run_request_ids') or [])}`",
         f"- Autotrigger dispatch candidate ids: `{len(coverage.get('autotrigger_dispatch_candidate_ids') or [])}`",
         "",
         "## Symbol Handoff",
@@ -300,6 +329,14 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Checked pack files: `{(payload.get('symbol_resolution_transfer_pack_check') or {}).get('checked_pack_files')}`",
         f"- Checked archive files: `{(payload.get('symbol_resolution_transfer_pack_check') or {}).get('checked_archive_files')}`",
         "",
+        "## Transfer Execution Run",
+        "",
+        f"- Run status: `{(payload.get('symbol_resolution_execution_run') or {}).get('status')}`",
+        f"- Operator blocker: `{(payload.get('symbol_resolution_execution_run') or {}).get('operator_blocker')}`",
+        f"- Planned jobs: `{(payload.get('symbol_resolution_execution_run') or {}).get('planned_jobs')}`",
+        f"- Ready jobs: `{(payload.get('symbol_resolution_execution_run') or {}).get('ready_jobs')}`",
+        f"- Blocked jobs: `{(payload.get('symbol_resolution_execution_run') or {}).get('blocked_jobs')}`",
+        "",
         "## Symbol Batch Diagnostics",
         "",
         f"- Missing host tools: `{', '.join((payload.get('symbol_resolution_batch') or {}).get('missing_host_tools') or []) or 'none'}`",
@@ -325,6 +362,7 @@ def main() -> int:
     transfer = load_json(TRANSFER_PATH)
     transfer_pack = load_json(TRANSFER_PACK_PATH)
     transfer_pack_check = load_json(TRANSFER_PACK_CHECK_PATH)
+    execution_run = load_json(EXECUTION_RUN_PATH)
     batch = load_json(BATCH_PATH)
     run = load_json(RUN_PATH)
     payload = health_payload(
@@ -340,6 +378,7 @@ def main() -> int:
         transfer_pack_check,
         batch,
         run,
+        execution_run=execution_run,
     )
     write_json(OUTPUT_PATH, payload)
     write_text(MARKDOWN_PATH, render_markdown(payload))

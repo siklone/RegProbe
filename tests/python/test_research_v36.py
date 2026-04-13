@@ -2889,6 +2889,10 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             transfer_pack_check_payload = json.loads(transfer_pack_check_path.read_text(encoding="utf-8"))
             self.assertEqual(transfer_pack_check_payload["check_status"], "ok")
             self.assertTrue(transfer_pack_check_markdown_path.exists())
+            execution_run_path = temp_root / "ghidra-symbol-resolution-transfer-pack-execution-run.json"
+            execution_run_payload = json.loads(execution_run_path.read_text(encoding="utf-8"))
+            self.assertEqual(execution_run_payload["execution_run_status"], "ready")
+            self.assertEqual(execution_run_payload["counts"]["ready_jobs"], 1)
 
             batch_payload = json.loads(batch_path.read_text(encoding="utf-8"))
             self.assertEqual(batch_payload["jobs"][0]["autotrigger_seed_count"], 1)
@@ -2901,6 +2905,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             self.assertEqual(health_payload["counts"]["symbol_resolution_requests"], 1)
             self.assertEqual(health_payload["counts"]["symbol_resolution_transfer_pack_selected_jobs"], 1)
             self.assertEqual(health_payload["symbol_resolution_transfer_pack_check"]["status"], "ok")
+            self.assertEqual(health_payload["symbol_resolution_execution_run"]["status"], "ready")
             self.assertEqual(payload["outputs"]["health_path"], health_path.as_posix())
 
     def test_refresh_pipeline_supports_bundle_root(self) -> None:
@@ -3315,6 +3320,23 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "archive_entries": 19,
             },
         }
+        execution_run = {
+            "execution_run_status": "ready",
+            "mode": "dry-run",
+            "operator": {"blocker": "execution-run-ready"},
+            "counts": {
+                "planned_jobs": 1,
+                "ready_jobs": 1,
+                "blocked_jobs": 0,
+                "executed_jobs": 0,
+            },
+            "jobs": [
+                {
+                    "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x1f234",
+                }
+            ],
+            "blocked_jobs": [],
+        }
         batch = {
             "job_count": 2,
             "jobs": [
@@ -3351,6 +3373,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             transfer_pack_check,
             batch,
             run,
+            execution_run=execution_run,
             generated_utc="2026-04-13T00:00:00Z",
         )
 
@@ -3365,6 +3388,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["symbol_resolution_transfer_selected_jobs"], 1)
         self.assertEqual(payload["counts"]["symbol_resolution_transfer_pack_selected_jobs"], 1)
         self.assertEqual(payload["counts"]["symbol_resolution_transfer_pack_check_errors"], 0)
+        self.assertEqual(payload["counts"]["symbol_resolution_execution_run_ready_jobs"], 1)
         self.assertEqual(payload["counts"]["autotrigger_dispatch_jobs"], 1)
         self.assertFalse(payload["runner"]["available"])
         self.assertTrue(payload["symbol_resolution_runner"]["available"])
@@ -3373,6 +3397,8 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["symbol_resolution_transfer_pack"]["status"], "ready")
         self.assertEqual(payload["symbol_resolution_transfer_pack_check"]["status"], "ok")
         self.assertEqual(payload["symbol_resolution_transfer_pack_check"]["checked_archive_files"], 19)
+        self.assertEqual(payload["symbol_resolution_execution_run"]["status"], "ready")
+        self.assertEqual(payload["symbol_resolution_execution_run"]["ready_jobs"], 1)
         self.assertEqual(payload["symbol_resolution_batch"]["resolution_kind_counts"], {})
         self.assertEqual(payload["focus"]["top_input_bundle"], "evidence/files/example/normalized-registry-bundle.json")
         self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
@@ -3382,6 +3408,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["focus"]["top_symbol_resolution_handoff_request"], "ghidra-symbol-01-ntoskrnl-exe-0x1f234")
         self.assertEqual(payload["focus"]["top_symbol_resolution_transfer_request"], "ghidra-symbol-01-ntoskrnl-exe-0x1f234")
         self.assertEqual(payload["focus"]["top_symbol_resolution_transfer_pack_request"], "ghidra-symbol-01-ntoskrnl-exe-0x1f234")
+        self.assertEqual(payload["focus"]["top_symbol_resolution_execution_run_request"], "ghidra-symbol-01-ntoskrnl-exe-0x1f234")
         self.assertEqual(payload["focus"]["missing_input_jobs"][0]["candidate_id"], "power.other")
 
         markdown = ghidra_autotrigger_health.render_markdown(payload)
@@ -3575,6 +3602,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             self.assertEqual(payload["transfer_pack"]["selected_jobs"], 1)
             self.assertEqual(payload["transfer_pack_check"]["status"], "ok")
             self.assertEqual(payload["transfer_pack_check"]["error_count"], 0)
+            self.assertEqual(payload["execution_run"]["status"], "ready")
+            self.assertEqual(payload["execution_run"]["ready_jobs"], 1)
             self.assertEqual(payload["operator"]["blocker"], "symbol-resolution-ready")
             self.assertIn("Run the symbol-resolution batch", payload["operator"]["next_action"])
             symbol_queue_payload = json.loads(symbol_queue_path.read_text(encoding="utf-8"))
@@ -3591,6 +3620,9 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             self.assertEqual(transfer_pack_payload["pack_status"], "ready")
             transfer_pack_check_payload = json.loads(transfer_pack_check_path.read_text(encoding="utf-8"))
             self.assertEqual(transfer_pack_check_payload["check_status"], "ok")
+            execution_run_path = temp_root / "ghidra-symbol-resolution-transfer-pack-execution-run.json"
+            execution_run_payload = json.loads(execution_run_path.read_text(encoding="utf-8"))
+            self.assertEqual(execution_run_payload["execution_run_status"], "ready")
             self.assertTrue(transfer_pack_archive_path.exists())
             self.assertTrue(output_path.exists())
             self.assertTrue(markdown_path.exists())

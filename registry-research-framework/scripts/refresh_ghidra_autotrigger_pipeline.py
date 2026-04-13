@@ -29,6 +29,13 @@ TRANSFER_PACK_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resoluti
 TRANSFER_PACK_ARCHIVE_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack.zip"
 TRANSFER_PACK_CHECK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-check.json"
 TRANSFER_PACK_CHECK_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-check.md"
+TRANSFER_PACK_IMPORT_ROOT = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-import"
+TRANSFER_PACK_IMPORT_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-import.json"
+TRANSFER_PACK_IMPORT_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-import.md"
+EXECUTION_PLAN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-plan.json"
+EXECUTION_PLAN_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-plan.md"
+EXECUTION_RUN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run.json"
+EXECUTION_RUN_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run.md"
 INPUTS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-inputs.json"
 
 
@@ -58,6 +65,18 @@ transfer_pack_mod = load_local_module(
 transfer_pack_check_mod = load_local_module(
     "refresh_pipeline_symbol_transfer_pack_check",
     FRAMEWORK_ROOT / "scripts" / "check_ghidra_symbol_resolution_transfer_pack.py",
+)
+transfer_pack_import_mod = load_local_module(
+    "refresh_pipeline_symbol_transfer_pack_import",
+    FRAMEWORK_ROOT / "scripts" / "unpack_ghidra_symbol_resolution_transfer_pack.py",
+)
+execution_plan_mod = load_local_module(
+    "refresh_pipeline_symbol_transfer_execution_plan",
+    FRAMEWORK_ROOT / "scripts" / "generate_ghidra_transfer_pack_execution_plan.py",
+)
+execution_run_mod = load_local_module(
+    "refresh_pipeline_symbol_transfer_execution_run",
+    FRAMEWORK_ROOT / "scripts" / "run_ghidra_transfer_pack_execution_plan.py",
 )
 
 
@@ -103,7 +122,21 @@ def refresh_pipeline(
     transfer_pack_archive_path: Path = TRANSFER_PACK_ARCHIVE_PATH,
     transfer_pack_check_path: Path = TRANSFER_PACK_CHECK_PATH,
     transfer_pack_check_markdown_path: Path = TRANSFER_PACK_CHECK_MARKDOWN_PATH,
+    transfer_pack_import_root: Path | None = None,
+    transfer_pack_import_path: Path | None = None,
+    transfer_pack_import_markdown_path: Path | None = None,
+    execution_plan_path: Path | None = None,
+    execution_plan_markdown_path: Path | None = None,
+    execution_run_path: Path | None = None,
+    execution_run_markdown_path: Path | None = None,
 ) -> dict[str, Any]:
+    transfer_pack_import_root = transfer_pack_import_root or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-import")
+    transfer_pack_import_path = transfer_pack_import_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-import.json")
+    transfer_pack_import_markdown_path = transfer_pack_import_markdown_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-import.md")
+    execution_plan_path = execution_plan_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-plan.json")
+    execution_plan_markdown_path = execution_plan_markdown_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-plan.md")
+    execution_run_path = execution_run_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run.json")
+    execution_run_markdown_path = execution_run_markdown_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run.md")
     queue_rows = autotrigger.load_jsonl(queue_path)
     bundle_manifest_payload: dict[str, Any] | None = None
     effective_manifest_path = bundle_manifest_path or INPUTS_PATH
@@ -171,6 +204,26 @@ def refresh_pipeline(
         transfer_pack_check_markdown_path,
         transfer_pack_check_mod.render_markdown(transfer_pack_check),
     )
+    transfer_pack_import = transfer_pack_import_mod.unpack_transfer_pack(
+        transfer_pack,
+        summary_path=transfer_pack_summary_path,
+        output_root=transfer_pack_import_root,
+        output_path=transfer_pack_import_path,
+        markdown_path=transfer_pack_import_markdown_path,
+    )
+    execution_plan = execution_plan_mod.execution_plan_from_import(
+        transfer_pack_import,
+        import_path=transfer_pack_import_path,
+    )
+    execution_plan_mod.write_json(execution_plan_path, execution_plan)
+    execution_plan_mod.write_text(execution_plan_markdown_path, execution_plan_mod.render_markdown(execution_plan))
+    execution_run = execution_run_mod.execution_run_from_plan(
+        execution_plan,
+        plan_path=execution_plan_path,
+        execute=False,
+    )
+    execution_run_mod.write_json(execution_run_path, execution_run)
+    execution_run_mod.write_text(execution_run_markdown_path, execution_run_mod.render_markdown(execution_run))
 
     input_manifest = autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {"entries": []}
     health = autotrigger_health.health_payload(
@@ -186,6 +239,7 @@ def refresh_pipeline(
         transfer_pack_check,
         batch,
         run_plan,
+        execution_run=execution_run,
     )
     autotrigger_health.write_json(health_path, health)
 
@@ -204,6 +258,11 @@ def refresh_pipeline(
         "symbol_resolution_transfer_pack_selected_job_count": int((transfer_pack.get("counts") or {}).get("selected_jobs") or 0),
         "symbol_resolution_transfer_pack_check_status": transfer_pack_check.get("check_status"),
         "symbol_resolution_transfer_pack_check_error_count": len(transfer_pack_check.get("errors") or []),
+        "symbol_resolution_transfer_pack_import_status": transfer_pack_import.get("import_status"),
+        "symbol_resolution_execution_plan_status": execution_plan.get("execution_plan_status"),
+        "symbol_resolution_execution_run_status": execution_run.get("execution_run_status"),
+        "symbol_resolution_execution_run_ready_job_count": int((execution_run.get("counts") or {}).get("ready_jobs") or 0),
+        "symbol_resolution_execution_run_blocked_job_count": int((execution_run.get("counts") or {}).get("blocked_jobs") or 0),
         "dispatch_job_count": batch.get("job_count", 0),
         "dispatch_autotrigger_matched_job_count": batch.get("autotrigger_matched_job_count", 0),
         "run_plan_selected_job_count": run_plan.get("selected_job_count", 0),
@@ -223,6 +282,13 @@ def refresh_pipeline(
             "transfer_pack_archive_path": autotrigger.portable_path(transfer_pack_archive_path),
             "transfer_pack_check_path": autotrigger.portable_path(transfer_pack_check_path),
             "transfer_pack_check_markdown_path": autotrigger.portable_path(transfer_pack_check_markdown_path),
+            "transfer_pack_import_root": autotrigger.portable_path(transfer_pack_import_root),
+            "transfer_pack_import_path": autotrigger.portable_path(transfer_pack_import_path),
+            "transfer_pack_import_markdown_path": autotrigger.portable_path(transfer_pack_import_markdown_path),
+            "execution_plan_path": autotrigger.portable_path(execution_plan_path),
+            "execution_plan_markdown_path": autotrigger.portable_path(execution_plan_markdown_path),
+            "execution_run_path": autotrigger.portable_path(execution_run_path),
+            "execution_run_markdown_path": autotrigger.portable_path(execution_run_markdown_path),
             "batch_path": autotrigger.portable_path(batch_path),
             "run_path": autotrigger.portable_path(run_path),
             "health_path": autotrigger.portable_path(health_path),
@@ -259,6 +325,13 @@ def main() -> int:
     parser.add_argument("--transfer-pack-archive-output", type=Path, default=TRANSFER_PACK_ARCHIVE_PATH)
     parser.add_argument("--transfer-pack-check-output", type=Path, default=TRANSFER_PACK_CHECK_PATH)
     parser.add_argument("--transfer-pack-check-markdown-output", type=Path, default=TRANSFER_PACK_CHECK_MARKDOWN_PATH)
+    parser.add_argument("--transfer-pack-import-root", type=Path, default=TRANSFER_PACK_IMPORT_ROOT)
+    parser.add_argument("--transfer-pack-import-output", type=Path, default=TRANSFER_PACK_IMPORT_PATH)
+    parser.add_argument("--transfer-pack-import-markdown-output", type=Path, default=TRANSFER_PACK_IMPORT_MARKDOWN_PATH)
+    parser.add_argument("--execution-plan-output", type=Path, default=EXECUTION_PLAN_PATH)
+    parser.add_argument("--execution-plan-markdown-output", type=Path, default=EXECUTION_PLAN_MARKDOWN_PATH)
+    parser.add_argument("--execution-run-output", type=Path, default=EXECUTION_RUN_PATH)
+    parser.add_argument("--execution-run-markdown-output", type=Path, default=EXECUTION_RUN_MARKDOWN_PATH)
     args = parser.parse_args()
 
     payload = refresh_pipeline(
@@ -286,6 +359,13 @@ def main() -> int:
         transfer_pack_archive_path=args.transfer_pack_archive_output,
         transfer_pack_check_path=args.transfer_pack_check_output,
         transfer_pack_check_markdown_path=args.transfer_pack_check_markdown_output,
+        transfer_pack_import_root=args.transfer_pack_import_root,
+        transfer_pack_import_path=args.transfer_pack_import_output,
+        transfer_pack_import_markdown_path=args.transfer_pack_import_markdown_output,
+        execution_plan_path=args.execution_plan_output,
+        execution_plan_markdown_path=args.execution_plan_markdown_output,
+        execution_run_path=args.execution_run_output,
+        execution_run_markdown_path=args.execution_run_markdown_output,
     )
     print(json.dumps(payload, indent=2))
     return 0
