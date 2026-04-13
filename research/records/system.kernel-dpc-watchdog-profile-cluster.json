@@ -414,7 +414,7 @@
     "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, a concrete current-build reader/validator/writer path, a live-KD confirmed privileged `NtSetSystemInformation` writer callsite, a live-KD confirmed outer query wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`, current-build INIT descriptor bindings for all four registry value names, a write-free KVM reboot observation showing that the current registry state is preserved across a real reboot, and target-specific WPR negative evidence for the retained boot trace. It is not ready for promotion because the current build conflicts with the repo-doc defaults for most values, the exact inner query arm still has not been isolated, conditional initialization is still part of the explanation, and no exact runtime registry read has been captured.",
     "manual_review_required": true,
     "blocking_issues": [
-      "live-defaults-conflict-docs",
+      "live-state-conflicts-with-repo-docs",
       "wpr-boot-registry-no-hit-current-build",
       "no-primary-current-build-doc",
       "conditional-initialization-unproven"
