@@ -37,6 +37,7 @@ ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRI
 ghidra_autotrigger = load_module("generate_ghidra_autotrigger_seeds", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_seeds.py")
 ghidra_refresh_pipeline = load_module("refresh_ghidra_autotrigger_pipeline", FRAMEWORK_SCRIPTS / "refresh_ghidra_autotrigger_pipeline.py")
 ghidra_autotrigger_health = load_module("generate_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_health.py")
+ghidra_autotrigger_health_check = load_module("check_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_health.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2302,6 +2303,38 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
         self.assertEqual(payload["focus"]["top_autotrigger_candidate"], "power.keep")
         self.assertEqual(payload["focus"]["missing_input_jobs"][0]["candidate_id"], "power.other")
+
+    def test_validate_health_rejects_inconsistent_counts(self) -> None:
+        payload = {
+            "counts": {
+                "queue_jobs": 2,
+                "autotrigger_seeds": 1,
+                "dispatch_jobs": 1,
+                "autotrigger_dispatch_jobs": 0,
+                "run_selected_jobs": 0,
+                "run_blocked_jobs": 0,
+            },
+            "coverage": {
+                "queued_candidate_ids": ["one"],
+                "seed_candidate_ids": [],
+                "autotrigger_dispatch_candidate_ids": [],
+            },
+            "focus": {
+                "top_queue_candidate": "wrong",
+                "top_autotrigger_candidate": None,
+                "missing_input_jobs": [],
+            },
+            "runner": {
+                "available": False,
+                "error": None,
+            },
+        }
+
+        errors = ghidra_autotrigger_health_check.validate_health(payload)
+
+        self.assertTrue(any("queue_jobs mismatch" in error for error in errors))
+        self.assertTrue(any("selected+blocked does not cover dispatch jobs" in error for error in errors))
+        self.assertTrue(any("top_queue_candidate does not match" in error for error in errors))
 
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):
