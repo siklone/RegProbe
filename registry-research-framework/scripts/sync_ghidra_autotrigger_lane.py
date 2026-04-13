@@ -99,6 +99,19 @@ def cached_transfer_pack_summary(
     }
 
 
+def cached_transfer_pack_check_summary(path: Path | None, markdown_path: Path | None) -> dict[str, Any] | None:
+    if not path or not path.exists():
+        return None
+    payload = load_json(path)
+    return {
+        "status": payload.get("check_status"),
+        "error_count": len(payload.get("errors") or []),
+        "path": portable_path(path),
+        "markdown_path": portable_path(markdown_path) if markdown_path and markdown_path.exists() else None,
+        "source": "cached",
+    }
+
+
 def cached_health_status(path: Path | None) -> dict[str, Any] | None:
     if not path or not path.exists():
         return None
@@ -213,6 +226,18 @@ def render_markdown(payload: dict[str, Any]) -> str:
                 f"- Archive path: `{pack.get('archive_path')}`",
             ]
         )
+    pack_check = payload.get("transfer_pack_check") or {}
+    if pack_check:
+        lines.extend(
+            [
+                "",
+                "## Transfer Pack Check",
+                "",
+                f"- Check status: `{pack_check.get('status')}`",
+                f"- Error count: `{pack_check.get('error_count')}`",
+                f"- Path: `{pack_check.get('path')}`",
+            ]
+        )
     refresh = payload.get("refresh") or {}
     if refresh:
         lines.extend(
@@ -267,6 +292,8 @@ def sync_lane(
     transfer_pack_summary_path: Path | None = None,
     transfer_pack_markdown_path: Path | None = None,
     transfer_pack_archive_path: Path | None = None,
+    transfer_pack_check_path: Path | None = None,
+    transfer_pack_check_markdown_path: Path | None = None,
     markdown_path: Path = MARKDOWN_PATH,
     output_path: Path = OUTPUT_PATH,
 ) -> dict[str, Any]:
@@ -281,6 +308,8 @@ def sync_lane(
     effective_transfer_pack_summary_path = transfer_pack_summary_path or refresh_pipeline_mod.TRANSFER_PACK_SUMMARY_PATH
     effective_transfer_pack_markdown_path = transfer_pack_markdown_path or refresh_pipeline_mod.TRANSFER_PACK_MARKDOWN_PATH
     effective_transfer_pack_archive_path = transfer_pack_archive_path or refresh_pipeline_mod.TRANSFER_PACK_ARCHIVE_PATH
+    effective_transfer_pack_check_path = transfer_pack_check_path or refresh_pipeline_mod.TRANSFER_PACK_CHECK_PATH
+    effective_transfer_pack_check_markdown_path = transfer_pack_check_markdown_path or refresh_pipeline_mod.TRANSFER_PACK_CHECK_MARKDOWN_PATH
     try:
         refresh_payload = refresh_pipeline_mod.refresh_pipeline(
             refresh_bundle_manifest=True,
@@ -303,6 +332,8 @@ def sync_lane(
             transfer_pack_summary_path=effective_transfer_pack_summary_path,
             transfer_pack_markdown_path=effective_transfer_pack_markdown_path,
             transfer_pack_archive_path=effective_transfer_pack_archive_path,
+            transfer_pack_check_path=effective_transfer_pack_check_path,
+            transfer_pack_check_markdown_path=effective_transfer_pack_check_markdown_path,
         )
     except ValueError as exc:
         manifest_payload = refresh_pipeline_mod.autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {}
@@ -329,6 +360,10 @@ def sync_lane(
                     effective_transfer_pack_markdown_path,
                     effective_transfer_pack_archive_path,
                     effective_transfer_pack_output_root,
+                ),
+                "transfer_pack_check": cached_transfer_pack_check_summary(
+                    effective_transfer_pack_check_path,
+                    effective_transfer_pack_check_markdown_path,
                 ),
                 "operator": operator,
                 "error": str(exc),
@@ -375,6 +410,12 @@ def sync_lane(
             "archive_path": (refresh_payload.get("outputs") or {}).get("transfer_pack_archive_path"),
             "output_root": (refresh_payload.get("outputs") or {}).get("transfer_pack_output_root"),
         },
+        "transfer_pack_check": {
+            "status": refresh_payload.get("symbol_resolution_transfer_pack_check_status"),
+            "error_count": refresh_payload.get("symbol_resolution_transfer_pack_check_error_count"),
+            "path": (refresh_payload.get("outputs") or {}).get("transfer_pack_check_path"),
+            "markdown_path": (refresh_payload.get("outputs") or {}).get("transfer_pack_check_markdown_path"),
+        },
         "operator": operator,
     }
     write_json(output_path, payload)
@@ -403,6 +444,8 @@ def main() -> int:
     parser.add_argument("--transfer-pack-summary-output", type=Path, default=None)
     parser.add_argument("--transfer-pack-markdown-output", type=Path, default=None)
     parser.add_argument("--transfer-pack-archive-output", type=Path, default=None)
+    parser.add_argument("--transfer-pack-check-output", type=Path, default=None)
+    parser.add_argument("--transfer-pack-check-markdown-output", type=Path, default=None)
     parser.add_argument("--markdown-output", type=Path, default=MARKDOWN_PATH)
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     args = parser.parse_args()
@@ -427,6 +470,8 @@ def main() -> int:
         transfer_pack_summary_path=args.transfer_pack_summary_output,
         transfer_pack_markdown_path=args.transfer_pack_markdown_output,
         transfer_pack_archive_path=args.transfer_pack_archive_output,
+        transfer_pack_check_path=args.transfer_pack_check_output,
+        transfer_pack_check_markdown_path=args.transfer_pack_check_markdown_output,
         markdown_path=args.markdown_output,
         output_path=args.output,
     )

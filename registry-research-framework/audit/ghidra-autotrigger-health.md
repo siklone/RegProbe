@@ -1,6 +1,6 @@
 # Ghidra Autotrigger Health
 
-- Generated UTC: `2026-04-13T10:53:32.227681Z`
+- Generated UTC: `2026-04-13T11:16:03.700120Z`
 - Input bundles selected: `0`
 - Queue jobs: `4`
 - Autotrigger seeds: `0`
@@ -11,6 +11,7 @@
 - Symbol resolution handoff selected jobs: `0`
 - Symbol resolution transfer selected jobs: `0`
 - Symbol resolution transfer pack selected jobs: `0`
+- Symbol resolution transfer pack check errors: `0`
 - Dispatch jobs: `4`
 - Autotrigger dispatch jobs: `0`
 - Run selected jobs: `4`
@@ -62,6 +63,13 @@
 - Selected jobs: `0`
 - Repo files copied: `0`
 - Command files written: `0`
+
+## Transfer Pack Check
+
+- Check status: `None`
+- Error count: `0`
+- Checked pack files: `0`
+- Checked archive files: `0`
 
 ## Symbol Batch Diagnostics
 

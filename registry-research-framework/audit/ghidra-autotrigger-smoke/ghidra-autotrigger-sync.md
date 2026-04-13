@@ -24,6 +24,12 @@
 - Summary path: `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.json`
 - Archive path: `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack.zip`
 
+## Transfer Pack Check
+
+- Check status: `ok`
+- Error count: `0`
+- Path: `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-check.json`
+
 ## Refresh
 
 - Bundle count: `1`

@@ -264,6 +264,8 @@ def run_smoke(
         transfer_pack_summary_path=transfer_pack_summary_path,
         transfer_pack_markdown_path=transfer_pack_markdown_path,
         transfer_pack_archive_path=transfer_pack_archive_path,
+        transfer_pack_check_path=transfer_pack_check_path,
+        transfer_pack_check_markdown_path=transfer_pack_check_markdown_path,
         markdown_path=sync_markdown_path,
         output_path=sync_path,
     )
