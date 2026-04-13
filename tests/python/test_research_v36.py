@@ -51,6 +51,7 @@ ghidra_symbol_transfer_pack = load_module("materialize_ghidra_symbol_resolution_
 ghidra_symbol_transfer_pack_check = load_module("check_ghidra_symbol_resolution_transfer_pack", FRAMEWORK_SCRIPTS / "check_ghidra_symbol_resolution_transfer_pack.py")
 ghidra_symbol_transfer_pack_unpack = load_module("unpack_ghidra_symbol_resolution_transfer_pack", FRAMEWORK_SCRIPTS / "unpack_ghidra_symbol_resolution_transfer_pack.py")
 ghidra_transfer_pack_execution = load_module("generate_ghidra_transfer_pack_execution_plan", FRAMEWORK_SCRIPTS / "generate_ghidra_transfer_pack_execution_plan.py")
+ghidra_transfer_pack_execution_run = load_module("run_ghidra_transfer_pack_execution_plan", FRAMEWORK_SCRIPTS / "run_ghidra_transfer_pack_execution_plan.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2703,6 +2704,76 @@ class GhidraSymbolResolutionTransferPackTests(unittest.TestCase):
             self.assertEqual(payload["counts"]["blocked_jobs"], 1)
             self.assertTrue(any(item.startswith("missing-script:") for item in payload["blocked_jobs"][0]["missing_inputs"]))
 
+    def test_execution_run_from_plan_dry_run_surfaces_ready_commands(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            import_root = temp_root / "import"
+            import_root.mkdir(parents=True, exist_ok=True)
+            plan_payload = {
+                "execution_plan_status": "ready",
+                "import_root": import_root.as_posix(),
+                "errors": [],
+                "jobs": [
+                    {
+                        "request_id": "request-1",
+                        "candidate_ids": ["power.keep"],
+                        "destination_argv": [
+                            "python3",
+                            "repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+                            "--binary-path",
+                            r"C:\Windows\System32\ntoskrnl.exe",
+                        ],
+                        "destination_shell_command": r"python3 repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path 'C:\Windows\System32\ntoskrnl.exe'",
+                        "missing_inputs": [],
+                    }
+                ],
+                "blocked_jobs": [],
+            }
+
+            payload = ghidra_transfer_pack_execution_run.execution_run_from_plan(
+                plan_payload,
+                plan_path=temp_root / "execution-plan.json",
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+
+            self.assertEqual(payload["execution_run_status"], "ready")
+            self.assertEqual(payload["mode"], "dry-run")
+            self.assertEqual(payload["operator"]["blocker"], "execution-run-ready")
+            self.assertEqual(payload["counts"]["planned_jobs"], 1)
+            self.assertEqual(payload["counts"]["ready_jobs"], 1)
+            self.assertEqual(payload["counts"]["executed_jobs"], 0)
+            self.assertEqual(payload["jobs"][0]["cwd"], import_root.resolve().as_posix())
+            self.assertEqual(payload["jobs"][0]["argv"][3], r"C:\Windows\System32\ntoskrnl.exe")
+
+    def test_execution_run_blocks_when_plan_is_not_ready(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            import_root = temp_root / "import"
+            import_root.mkdir(parents=True, exist_ok=True)
+            payload = ghidra_transfer_pack_execution_run.execution_run_from_plan(
+                {
+                    "execution_plan_status": "blocked",
+                    "import_root": import_root.as_posix(),
+                    "errors": [],
+                    "jobs": [],
+                    "blocked_jobs": [
+                        {
+                            "request_id": "request-1",
+                            "destination_argv": [],
+                            "destination_shell_command": "",
+                            "missing_inputs": ["missing-script:repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py"],
+                        }
+                    ],
+                },
+                plan_path=temp_root / "execution-plan.json",
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+
+            self.assertEqual(payload["execution_run_status"], "blocked")
+            self.assertEqual(payload["operator"]["blocker"], "execution-run-blocked")
+            self.assertEqual(payload["counts"]["blocked_jobs"], 1)
+            self.assertIn("execution_plan_status is not ready", payload["errors"])
+
 
 class GhidraAutotriggerPipelineTests(unittest.TestCase):
     def test_refresh_pipeline_writes_seed_batch_and_run_surfaces(self) -> None:
@@ -3707,12 +3778,14 @@ class GhidraAutotriggerSmokeTests(unittest.TestCase):
             self.assertEqual(payload["transfer_pack_check_status"], "ok")
             self.assertEqual(payload["transfer_pack_import_status"], "ok")
             self.assertEqual(payload["execution_plan_status"], "ready")
+            self.assertEqual(payload["execution_run_status"], "ready")
             self.assertIn("module_offset", payload["frame_resolution_counts"])
             self.assertIn("raw_address", payload["frame_resolution_counts"])
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-check.json").exists())
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-import.json").exists())
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-import" / "CHECKSUMS.json").exists())
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-execution-plan.json").exists())
+            self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-execution-run.json").exists())
             self.assertTrue(output_path.exists())
             self.assertTrue(markdown_path.exists())
 

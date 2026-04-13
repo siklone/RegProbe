@@ -4,7 +4,7 @@ The Ghidra autotrigger lane turns fresh `normalized-registry-bundle.json` eviden
 
 ## What It Does
 
-At a high level, the lane does four things:
+At a high level, the lane does five things:
 
 1. Discover candidate bundles that contain caller stacks and can map back to queued `ghidra` records.
 2. Convert unresolved stack frames into `ghidra-autotrigger-seed` rows.
@@ -78,6 +78,12 @@ Generate the destination execution plan from an imported pack:
 python3 registry-research-framework/scripts/generate_ghidra_transfer_pack_execution_plan.py
 ```
 
+Dry-run the destination execution plan before running anything:
+
+```bash
+python3 registry-research-framework/scripts/run_ghidra_transfer_pack_execution_plan.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -126,6 +132,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Destination-host execution plan generated from imported command files.
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-plan.md`
   Human-readable list of ready destination commands and blockers.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run.json`
+  Dry-run or execution result for the imported transfer-pack commands, including cwd, argv, shell-safe command text, and per-job blockers.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run.md`
+  Human-readable run-ready checklist for the destination host.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`
@@ -165,8 +175,8 @@ On top of that, the transfer manifest turns the selected jobs into a small expor
 
 Because fresh caller-stack bundles are still intermittent, the lane now also has a synthetic smoke harness. It fabricates a small normalized bundle from the active blocked `ghidra` queue, runs the same sync path in an isolated audit directory, and proves that symbol-resolution-ready work would be emitted when matching stack-bearing bundles arrive.
 
-The smoke harness also materializes, verifies, imports, and plans execution for the transfer pack. A passing smoke run now means the lane can produce symbol-resolution jobs, package the required helper files, hash the payload, validate the zip, prove the destination-side unpack path, and emit ready destination commands before anyone moves it to another host.
+The smoke harness also materializes, verifies, imports, plans execution, and dry-runs the transfer pack. A passing smoke run now means the lane can produce symbol-resolution jobs, package the required helper files, hash the payload, validate the zip, prove the destination-side unpack path, emit ready destination commands, and render a final run-ready checklist before anyone moves it to another host.
 
 For the destination side, the unpack helper validates the summary and archive before extraction, then writes an import surface. This keeps the transfer lane reversible: a pack can be checked in place, copied as a zip, checked again from the archive alone, and unpacked only after those checks pass.
 
-After import, the execution-plan helper rewrites the original repo-relative commands into imported-pack commands that run from the extracted pack root. It does not execute anything by itself; it gives the operator a final ready/blocked surface before touching the VM.
+After import, the execution-plan helper rewrites the original repo-relative commands into imported-pack commands that run from the extracted pack root. The execution-run helper then performs the final dry-run by default: it records cwd, argv, and shell-safe command text without touching the VM. It can execute with `--execute`, but the safe path is to review the dry-run surface first.

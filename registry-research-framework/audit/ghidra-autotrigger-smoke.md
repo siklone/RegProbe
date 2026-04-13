@@ -11,6 +11,7 @@
 - Transfer pack check: `ok`
 - Transfer pack import: `ok`
 - Execution plan: `ready`
+- Execution dry-run: `ready`
 - Operator blocker: `symbol-resolution-ready`
 - Next action: `Run the symbol-resolution batch to resolve caller-stack pivots before deeper Ghidra dispatch.`
 
