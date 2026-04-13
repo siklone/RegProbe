@@ -32,6 +32,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_blocked_jobs = int(counts.get("symbol_resolution_blocked_jobs") or 0)
     symbol_resolution_run_selected_jobs = int(counts.get("symbol_resolution_run_selected_jobs") or 0)
     symbol_resolution_run_blocked_jobs = int(counts.get("symbol_resolution_run_blocked_jobs") or 0)
+    symbol_resolution_handoff_selected_jobs = int(counts.get("symbol_resolution_handoff_selected_jobs") or 0)
     dispatch_jobs = int(counts.get("dispatch_jobs") or 0)
     autotrigger_dispatch_jobs = int(counts.get("autotrigger_dispatch_jobs") or 0)
     run_selected_jobs = int(counts.get("run_selected_jobs") or 0)
@@ -43,9 +44,11 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_request_ids = coverage.get("symbol_resolution_request_ids") or []
     symbol_resolution_lookup_keys = coverage.get("symbol_resolution_lookup_keys") or []
     symbol_resolution_batch_request_ids = coverage.get("symbol_resolution_batch_request_ids") or []
+    symbol_resolution_handoff_request_ids = coverage.get("symbol_resolution_handoff_request_ids") or []
     autotrigger_dispatch_candidate_ids = coverage.get("autotrigger_dispatch_candidate_ids") or []
     missing_input_jobs = focus.get("missing_input_jobs") or []
     symbol_resolution_runner = payload.get("symbol_resolution_runner") or {}
+    symbol_resolution_handoff = payload.get("symbol_resolution_handoff") or {}
 
     if len(input_bundle_paths) != input_manifest_selected:
         errors.append(f"input_manifest_selected mismatch: counts={input_manifest_selected} coverage={len(input_bundle_paths)}")
@@ -67,6 +70,16 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
         errors.append(
             "symbol_resolution_batch_jobs mismatch: "
             f"counts={symbol_resolution_batch_jobs} coverage={len(symbol_resolution_batch_request_ids)}"
+        )
+    if symbol_resolution_handoff_selected_jobs > len(symbol_resolution_handoff_request_ids):
+        errors.append(
+            "symbol_resolution_handoff_selected_jobs exceeds handoff coverage: "
+            f"{symbol_resolution_handoff_selected_jobs}>{len(symbol_resolution_handoff_request_ids)}"
+        )
+    if symbol_resolution_handoff_selected_jobs > symbol_resolution_batch_jobs:
+        errors.append(
+            "symbol_resolution_handoff_selected_jobs exceeds symbol_resolution_batch_jobs: "
+            f"{symbol_resolution_handoff_selected_jobs}>{symbol_resolution_batch_jobs}"
         )
     if len(autotrigger_dispatch_candidate_ids) != autotrigger_dispatch_jobs:
         errors.append(
@@ -150,8 +163,16 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     if symbol_resolution_batch_jobs > 0 and not symbol_resolution_batch_request_ids and top_symbol_resolution_batch_request is not None:
         errors.append("top_symbol_resolution_batch_request does not match first symbol resolution batch request id")
 
+    top_symbol_resolution_handoff_request = focus.get("top_symbol_resolution_handoff_request")
+    if not symbol_resolution_handoff_request_ids and top_symbol_resolution_handoff_request is not None:
+        errors.append("top_symbol_resolution_handoff_request should be null when no symbol handoff requests exist")
+    if symbol_resolution_handoff_request_ids and top_symbol_resolution_handoff_request != symbol_resolution_handoff_request_ids[0]:
+        errors.append("top_symbol_resolution_handoff_request does not match first symbol handoff request id")
+
     if symbol_resolution_runner.get("available") and symbol_resolution_runner.get("error"):
         errors.append("symbol_resolution_runner cannot be available and errored at the same time")
+    if symbol_resolution_handoff.get("selected_jobs") != symbol_resolution_handoff_selected_jobs:
+        errors.append("symbol_resolution_handoff selected_jobs does not match counts")
     if runner.get("available") and runner.get("error"):
         errors.append("runner cannot be available and errored at the same time")
 

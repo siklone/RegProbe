@@ -1,12 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T10:29:48.927312Z",
+  "generated_utc": "2026-04-13T10:32:32.122130Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
   "symbol_resolution_path": "registry-research-framework/queue/ghidra-symbol-resolution-queue.json",
   "symbol_batch_path": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
   "symbol_run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
+  "symbol_handoff_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.json",
   "batch_path": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
   "counts": {
@@ -19,6 +20,7 @@
     "symbol_resolution_blocked_jobs": 0,
     "symbol_resolution_run_selected_jobs": 4,
     "symbol_resolution_run_blocked_jobs": 0,
+    "symbol_resolution_handoff_selected_jobs": 4,
     "dispatch_jobs": 4,
     "autotrigger_dispatch_jobs": 4,
     "run_selected_jobs": 4,
@@ -38,6 +40,12 @@
       "raw_address": 1
     },
     "blocked_examples": []
+  },
+  "symbol_resolution_handoff": {
+    "status": "ready",
+    "operator_blocker": "symbol-resolution-ready",
+    "selected_jobs": 4,
+    "blocked_jobs": 0
   },
   "runner": {
     "available": false,
@@ -84,6 +92,12 @@
       "ghidra-symbol-03-ntoskrnl-exe-0x2c80",
       "ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002"
     ],
+    "symbol_resolution_handoff_request_ids": [
+      "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
+      "ghidra-symbol-02-ntoskrnl-exe-0x1920",
+      "ghidra-symbol-03-ntoskrnl-exe-0x2c80",
+      "ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002"
+    ],
     "autotrigger_dispatch_candidate_ids": [
       "power.control.allow-system-required-power-requests",
       "power.session-watchdog-timeouts",
@@ -97,6 +111,7 @@
     "top_autotrigger_candidate": "power.control.allow-system-required-power-requests",
     "top_symbol_resolution_request": "ntoskrnl.exe!Syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsResolver",
     "top_symbol_resolution_batch_request": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
+    "top_symbol_resolution_handoff_request": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
     "missing_input_jobs": []
   }
 }

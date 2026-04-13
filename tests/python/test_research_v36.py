@@ -2803,6 +2803,17 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             "blocked_job_count": 0,
             "error": None,
         }
+        handoff = {
+            "handoff_status": "ready",
+            "operator": {"blocker": "symbol-resolution-ready"},
+            "counts": {"selected_jobs": 1, "blocked_jobs": 0},
+            "selected_jobs": [
+                {
+                    "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x1f234",
+                }
+            ],
+            "blocked_jobs": [],
+        }
         batch = {
             "job_count": 2,
             "jobs": [
@@ -2833,6 +2844,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             symbol_queue,
             symbol_batch,
             symbol_run,
+            handoff,
             batch,
             run,
             generated_utc="2026-04-13T00:00:00Z",
@@ -2845,15 +2857,18 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["symbol_resolution_batch_jobs"], 1)
         self.assertEqual(payload["counts"]["symbol_resolution_blocked_jobs"], 0)
         self.assertEqual(payload["counts"]["symbol_resolution_run_selected_jobs"], 1)
+        self.assertEqual(payload["counts"]["symbol_resolution_handoff_selected_jobs"], 1)
         self.assertEqual(payload["counts"]["autotrigger_dispatch_jobs"], 1)
         self.assertFalse(payload["runner"]["available"])
         self.assertTrue(payload["symbol_resolution_runner"]["available"])
+        self.assertEqual(payload["symbol_resolution_handoff"]["status"], "ready")
         self.assertEqual(payload["symbol_resolution_batch"]["resolution_kind_counts"], {})
         self.assertEqual(payload["focus"]["top_input_bundle"], "evidence/files/example/normalized-registry-bundle.json")
         self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
         self.assertEqual(payload["focus"]["top_autotrigger_candidate"], "power.keep")
         self.assertEqual(payload["focus"]["top_symbol_resolution_request"], "ntoskrnl.exe+0x1f234")
         self.assertEqual(payload["focus"]["top_symbol_resolution_batch_request"], "ghidra-symbol-01-ntoskrnl-exe-0x1f234")
+        self.assertEqual(payload["focus"]["top_symbol_resolution_handoff_request"], "ghidra-symbol-01-ntoskrnl-exe-0x1f234")
         self.assertEqual(payload["focus"]["missing_input_jobs"][0]["candidate_id"], "power.other")
 
         markdown = ghidra_autotrigger_health.render_markdown(payload)
@@ -2874,6 +2889,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "symbol_resolution_blocked_jobs": 0,
                 "symbol_resolution_run_selected_jobs": 0,
                 "symbol_resolution_run_blocked_jobs": 0,
+                "symbol_resolution_handoff_selected_jobs": 2,
                 "dispatch_jobs": 1,
                 "autotrigger_dispatch_jobs": 0,
                 "run_selected_jobs": 0,
@@ -2886,6 +2902,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "symbol_resolution_request_ids": [],
                 "symbol_resolution_lookup_keys": [],
                 "symbol_resolution_batch_request_ids": [],
+                "symbol_resolution_handoff_request_ids": [],
                 "autotrigger_dispatch_candidate_ids": [],
             },
             "focus": {
@@ -2894,11 +2911,15 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "top_autotrigger_candidate": None,
                 "top_symbol_resolution_request": "wrong-symbol",
                 "top_symbol_resolution_batch_request": "wrong-batch",
+                "top_symbol_resolution_handoff_request": "wrong-handoff",
                 "missing_input_jobs": [],
             },
             "symbol_resolution_runner": {
                 "available": True,
                 "error": "bad",
+            },
+            "symbol_resolution_handoff": {
+                "selected_jobs": 1,
             },
             "runner": {
                 "available": False,
@@ -2917,7 +2938,9 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertTrue(any("symbol_resolution selected+blocked does not cover batch jobs" in error for error in errors))
         self.assertTrue(any("top_symbol_resolution_request does not match" in error for error in errors))
         self.assertTrue(any("top_symbol_resolution_batch_request does not match" in error for error in errors))
+        self.assertTrue(any("top_symbol_resolution_handoff_request" in error for error in errors))
         self.assertTrue(any("symbol_resolution_runner cannot be available and errored" in error for error in errors))
+        self.assertTrue(any("symbol_resolution_handoff selected_jobs does not match counts" in error for error in errors))
         self.assertTrue(any("selected+blocked does not cover dispatch jobs" in error for error in errors))
         self.assertTrue(any("top_queue_candidate does not match" in error for error in errors))
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T10:29:48.925157Z",
+  "generated_utc": "2026-04-13T10:32:32.119921Z",
   "source_seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
   "request_count": 4,
   "diagnostics": {
@@ -11,7 +11,7 @@
     {
       "request_id": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
       "status": "queued",
-      "created_utc": "2026-04-13T10:29:48.925157Z",
+      "created_utc": "2026-04-13T10:32:32.119921Z",
       "priority_rank": 1,
       "lookup_key": "ntoskrnl.exe!Syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsResolver",
       "resolution_kind": "plain_text",
@@ -29,7 +29,7 @@
         "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json"
       ],
       "source_run_ids": [
-        "ghidra-autotrigger-smoke-20260413T102948.923045Z"
+        "ghidra-autotrigger-smoke-20260413T103232.117486Z"
       ],
       "source_event_indices": [
         3
@@ -50,7 +50,7 @@
     {
       "request_id": "ghidra-symbol-02-ntoskrnl-exe-0x1920",
       "status": "queued",
-      "created_utc": "2026-04-13T10:29:48.925157Z",
+      "created_utc": "2026-04-13T10:32:32.119921Z",
       "priority_rank": 2,
       "lookup_key": "ntoskrnl.exe+0x1920",
       "resolution_kind": "module_offset",
@@ -68,7 +68,7 @@
         "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json"
       ],
       "source_run_ids": [
-        "ghidra-autotrigger-smoke-20260413T102948.923045Z"
+        "ghidra-autotrigger-smoke-20260413T103232.117486Z"
       ],
       "source_event_indices": [
         1
@@ -89,7 +89,7 @@
     {
       "request_id": "ghidra-symbol-03-ntoskrnl-exe-0x2c80",
       "status": "queued",
-      "created_utc": "2026-04-13T10:29:48.925157Z",
+      "created_utc": "2026-04-13T10:32:32.119921Z",
       "priority_rank": 3,
       "lookup_key": "ntoskrnl.exe+0x2c80",
       "resolution_kind": "module_offset",
@@ -107,7 +107,7 @@
         "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json"
       ],
       "source_run_ids": [
-        "ghidra-autotrigger-smoke-20260413T102948.923045Z"
+        "ghidra-autotrigger-smoke-20260413T103232.117486Z"
       ],
       "source_event_indices": [
         4
@@ -128,7 +128,7 @@
     {
       "request_id": "ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002",
       "status": "queued",
-      "created_utc": "2026-04-13T10:29:48.925157Z",
+      "created_utc": "2026-04-13T10:32:32.119921Z",
       "priority_rank": 4,
       "lookup_key": "ntoskrnl.exe@0xfffff80512340002",
       "resolution_kind": "raw_address",
@@ -146,7 +146,7 @@
         "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json"
       ],
       "source_run_ids": [
-        "ghidra-autotrigger-smoke-20260413T102948.923045Z"
+        "ghidra-autotrigger-smoke-20260413T103232.117486Z"
       ],
       "source_event_indices": [
         2

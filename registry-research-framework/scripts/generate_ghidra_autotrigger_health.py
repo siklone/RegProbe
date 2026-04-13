@@ -15,6 +15,7 @@ SEEDS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-seeds.jsonl"
 SYMBOL_QUEUE_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-queue.json"
 SYMBOL_BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-batch.json"
 SYMBOL_RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-run.json"
+HANDOFF_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-handoff.json"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
@@ -57,6 +58,7 @@ def health_payload(
     symbol_queue: dict[str, Any],
     symbol_batch: dict[str, Any],
     symbol_run: dict[str, Any],
+    handoff: dict[str, Any],
     batch: dict[str, Any],
     run: dict[str, Any],
     *,
@@ -80,6 +82,13 @@ def health_payload(
     symbol_batch_jobs = symbol_batch.get("jobs") or []
     symbol_batch_request_ids = [str(job.get("request_id") or "") for job in symbol_batch_jobs]
     symbol_batch_diagnostics = symbol_batch.get("diagnostics") or {}
+    handoff_selected_jobs = handoff.get("selected_jobs") or []
+    handoff_blocked_jobs = handoff.get("blocked_jobs") or []
+    handoff_request_ids = [
+        str(job.get("request_id") or "")
+        for job in [*handoff_selected_jobs, *handoff_blocked_jobs]
+        if str(job.get("request_id") or "")
+    ]
     autotrigger_jobs = [job for job in (batch.get("jobs") or []) if int(job.get("autotrigger_seed_count") or 0) > 0]
     missing_input_jobs = [
         {
@@ -98,6 +107,7 @@ def health_payload(
         "symbol_resolution_path": portable_path(SYMBOL_QUEUE_PATH),
         "symbol_batch_path": portable_path(SYMBOL_BATCH_PATH),
         "symbol_run_path": portable_path(SYMBOL_RUN_PATH),
+        "symbol_handoff_path": portable_path(HANDOFF_PATH),
         "batch_path": portable_path(BATCH_PATH),
         "run_path": portable_path(RUN_PATH),
         "counts": {
@@ -110,6 +120,7 @@ def health_payload(
             "symbol_resolution_blocked_jobs": int(symbol_batch.get("blocked_job_count") or 0),
             "symbol_resolution_run_selected_jobs": int(symbol_run.get("selected_job_count") or 0),
             "symbol_resolution_run_blocked_jobs": int(symbol_run.get("blocked_job_count") or 0),
+            "symbol_resolution_handoff_selected_jobs": int((handoff.get("counts") or {}).get("selected_jobs") or 0),
             "dispatch_jobs": int(batch.get("job_count") or 0),
             "autotrigger_dispatch_jobs": len(autotrigger_jobs),
             "run_selected_jobs": int(run.get("selected_job_count") or 0),
@@ -126,6 +137,12 @@ def health_payload(
             "resolution_kind_counts": symbol_batch_diagnostics.get("resolution_kind_counts") or {},
             "blocked_examples": symbol_batch_diagnostics.get("blocked_examples") or [],
         },
+        "symbol_resolution_handoff": {
+            "status": handoff.get("handoff_status"),
+            "operator_blocker": (handoff.get("operator") or {}).get("blocker"),
+            "selected_jobs": int((handoff.get("counts") or {}).get("selected_jobs") or 0),
+            "blocked_jobs": int((handoff.get("counts") or {}).get("blocked_jobs") or 0),
+        },
         "runner": {
             "available": bool(run.get("runner_available")),
             "mode": run.get("mode"),
@@ -139,6 +156,7 @@ def health_payload(
             "symbol_resolution_lookup_keys": symbol_resolution_lookup_keys,
             "symbol_resolution_candidate_ids": symbol_resolution_candidate_ids,
             "symbol_resolution_batch_request_ids": symbol_batch_request_ids,
+            "symbol_resolution_handoff_request_ids": handoff_request_ids,
             "autotrigger_dispatch_candidate_ids": [str(job.get("candidate_id") or "") for job in autotrigger_jobs],
         },
         "focus": {
@@ -147,6 +165,7 @@ def health_payload(
             "top_autotrigger_candidate": str(autotrigger_jobs[0].get("candidate_id") or "") if autotrigger_jobs else None,
             "top_symbol_resolution_request": symbol_resolution_lookup_keys[0] if symbol_resolution_lookup_keys else None,
             "top_symbol_resolution_batch_request": symbol_batch_request_ids[0] if symbol_batch_request_ids else None,
+            "top_symbol_resolution_handoff_request": handoff_request_ids[0] if handoff_request_ids else None,
             "missing_input_jobs": missing_input_jobs,
         },
     }
@@ -173,6 +192,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol resolution batch jobs: `{counts.get('symbol_resolution_batch_jobs', 0)}`",
         f"- Symbol resolution blocked jobs: `{counts.get('symbol_resolution_blocked_jobs', 0)}`",
         f"- Symbol resolution run selected jobs: `{counts.get('symbol_resolution_run_selected_jobs', 0)}`",
+        f"- Symbol resolution handoff selected jobs: `{counts.get('symbol_resolution_handoff_selected_jobs', 0)}`",
         f"- Dispatch jobs: `{counts.get('dispatch_jobs', 0)}`",
         f"- Autotrigger dispatch jobs: `{counts.get('autotrigger_dispatch_jobs', 0)}`",
         f"- Run selected jobs: `{counts.get('run_selected_jobs', 0)}`",
@@ -187,6 +207,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Top autotrigger candidate: `{focus.get('top_autotrigger_candidate')}`",
         f"- Top symbol resolution request: `{focus.get('top_symbol_resolution_request')}`",
         f"- Top symbol resolution batch request: `{focus.get('top_symbol_resolution_batch_request')}`",
+        f"- Top symbol resolution handoff request: `{focus.get('top_symbol_resolution_handoff_request')}`",
         "",
         "## Coverage",
         "",
@@ -195,7 +216,15 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Seed candidate ids: `{len(coverage.get('seed_candidate_ids') or [])}`",
         f"- Symbol resolution requests: `{len(coverage.get('symbol_resolution_request_ids') or [])}`",
         f"- Symbol resolution batch request ids: `{len(coverage.get('symbol_resolution_batch_request_ids') or [])}`",
+        f"- Symbol resolution handoff request ids: `{len(coverage.get('symbol_resolution_handoff_request_ids') or [])}`",
         f"- Autotrigger dispatch candidate ids: `{len(coverage.get('autotrigger_dispatch_candidate_ids') or [])}`",
+        "",
+        "## Symbol Handoff",
+        "",
+        f"- Handoff status: `{(payload.get('symbol_resolution_handoff') or {}).get('status')}`",
+        f"- Operator blocker: `{(payload.get('symbol_resolution_handoff') or {}).get('operator_blocker')}`",
+        f"- Selected jobs: `{(payload.get('symbol_resolution_handoff') or {}).get('selected_jobs')}`",
+        f"- Blocked jobs: `{(payload.get('symbol_resolution_handoff') or {}).get('blocked_jobs')}`",
         "",
         "## Symbol Batch Diagnostics",
         "",
@@ -218,9 +247,10 @@ def main() -> int:
     symbol_queue = load_json(SYMBOL_QUEUE_PATH)
     symbol_batch = load_json(SYMBOL_BATCH_PATH)
     symbol_run = load_json(SYMBOL_RUN_PATH)
+    handoff = load_json(HANDOFF_PATH)
     batch = load_json(BATCH_PATH)
     run = load_json(RUN_PATH)
-    payload = health_payload(input_manifest, queue_rows, seed_rows, symbol_queue, symbol_batch, symbol_run, batch, run)
+    payload = health_payload(input_manifest, queue_rows, seed_rows, symbol_queue, symbol_batch, symbol_run, handoff, batch, run)
     write_json(OUTPUT_PATH, payload)
     write_text(MARKDOWN_PATH, render_markdown(payload))
     print(

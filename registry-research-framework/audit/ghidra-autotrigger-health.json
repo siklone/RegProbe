@@ -1,12 +1,13 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T09:55:48.741257Z",
+  "generated_utc": "2026-04-13T10:32:31.983113Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
   "symbol_resolution_path": "registry-research-framework/queue/ghidra-symbol-resolution-queue.json",
   "symbol_batch_path": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
   "symbol_run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
+  "symbol_handoff_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.json",
   "batch_path": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
   "counts": {
@@ -19,6 +20,7 @@
     "symbol_resolution_blocked_jobs": 0,
     "symbol_resolution_run_selected_jobs": 0,
     "symbol_resolution_run_blocked_jobs": 0,
+    "symbol_resolution_handoff_selected_jobs": 0,
     "dispatch_jobs": 4,
     "autotrigger_dispatch_jobs": 0,
     "run_selected_jobs": 4,
@@ -34,6 +36,12 @@
     "missing_input_counts": {},
     "resolution_kind_counts": {},
     "blocked_examples": []
+  },
+  "symbol_resolution_handoff": {
+    "status": "idle",
+    "operator_blocker": "no-symbol-resolution-jobs",
+    "selected_jobs": 0,
+    "blocked_jobs": 0
   },
   "runner": {
     "available": false,
@@ -53,6 +61,7 @@
     "symbol_resolution_lookup_keys": [],
     "symbol_resolution_candidate_ids": [],
     "symbol_resolution_batch_request_ids": [],
+    "symbol_resolution_handoff_request_ids": [],
     "autotrigger_dispatch_candidate_ids": []
   },
   "focus": {
@@ -61,6 +70,7 @@
     "top_autotrigger_candidate": null,
     "top_symbol_resolution_request": null,
     "top_symbol_resolution_batch_request": null,
+    "top_symbol_resolution_handoff_request": null,
     "missing_input_jobs": []
   }
 }

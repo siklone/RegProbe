@@ -135,6 +135,7 @@ def refresh_pipeline(
         symbol_queue,
         symbol_batch,
         symbol_run,
+        handoff,
         batch,
         run_plan,
     )
