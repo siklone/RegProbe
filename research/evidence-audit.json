@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T02:35:14.878336Z",
+  "generated_utc": "2026-04-13T02:36:56.581516Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -6940,7 +6940,7 @@
       "promotion_blockers": [
         "intentional-ghidra-hold",
         "no-current-build-string-or-symbol-hit",
-        "no-doc-source-outside-repo",
+        "no-primary-current-build-doc",
         "non-default-semantics-unproven",
         "powerwatchdog-timeout-family-runtime-read-unresolved"
       ],
@@ -18400,7 +18400,7 @@
       "promotion_blockers": [
         "dpc-watchdog-control-runtime-read-unresolved",
         "live-defaults-conflict-docs",
-        "no-doc-source-outside-repo"
+        "no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18491,7 +18491,7 @@
       "promotion_blockers": [
         "conditional-initialization-unproven",
         "live-defaults-conflict-docs",
-        "no-doc-source-outside-repo",
+        "no-primary-current-build-doc",
         "wpr-boot-registry-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
@@ -18583,7 +18583,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-doc-source-outside-repo",
+        "no-primary-current-build-doc",
         "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
         "wpr-boot-registry-no-hit-current-build"
       ],
@@ -18852,7 +18852,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-doc-source-outside-repo",
+        "no-primary-current-build-doc",
         "non-default-semantics-unproven",
         "wpr-boot-registry-no-hit-current-build"
       ],
@@ -22852,8 +22852,7 @@
     "intentional-ghidra-hold": 1,
     "intentional-hold": 5,
     "no-current-build-string-or-symbol-hit": 1,
-    "no-doc-source-outside-repo": 5,
-    "no-primary-current-build-doc": 6,
+    "no-primary-current-build-doc": 11,
     "no-runtime-proof": 15,
     "non-default-semantics-unproven": 5,
     "not-mapped-to-supported-app-surface": 2,
