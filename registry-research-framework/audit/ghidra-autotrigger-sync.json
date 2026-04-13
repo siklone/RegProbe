@@ -7,7 +7,12 @@
   ],
   "input_manifest_limit": null,
   "refresh": null,
-  "health_check": null,
+  "health_check": {
+    "status": "ok",
+    "errors": [],
+    "path": "registry-research-framework/audit/ghidra-autotrigger-health.json",
+    "source": "cached"
+  },
   "bundle_manifest": {
     "path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
     "selected_count": 0,
@@ -22,8 +27,20 @@
       "skipped_examples": []
     }
   },
-  "handoff": null,
-  "transfer": null,
+  "handoff": {
+    "status": "idle",
+    "selected_jobs": 0,
+    "path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.json",
+    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.md",
+    "source": "cached"
+  },
+  "transfer": {
+    "status": "idle",
+    "selected_jobs": 0,
+    "path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.json",
+    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.md",
+    "source": "cached"
+  },
   "transfer_pack": null,
   "operator": {
     "status": "idle",

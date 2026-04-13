@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T10:40:28.574895Z",
+  "generated_utc": "2026-04-13T10:53:32.227681Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -9,6 +9,7 @@
   "symbol_run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
   "symbol_handoff_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.json",
   "symbol_transfer_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.json",
+  "symbol_transfer_pack_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.json",
   "batch_path": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
   "counts": {
@@ -23,6 +24,7 @@
     "symbol_resolution_run_blocked_jobs": 0,
     "symbol_resolution_handoff_selected_jobs": 0,
     "symbol_resolution_transfer_selected_jobs": 0,
+    "symbol_resolution_transfer_pack_selected_jobs": 0,
     "dispatch_jobs": 4,
     "autotrigger_dispatch_jobs": 0,
     "run_selected_jobs": 4,
@@ -52,6 +54,14 @@
     "repo_file_count": 9,
     "missing_repo_file_count": 0
   },
+  "symbol_resolution_transfer_pack": {
+    "status": null,
+    "operator_blocker": null,
+    "selected_jobs": 0,
+    "repo_files_copied": 0,
+    "command_files_written": 0,
+    "archive_path": null
+  },
   "runner": {
     "available": false,
     "mode": "dry-run",
@@ -72,6 +82,7 @@
     "symbol_resolution_batch_request_ids": [],
     "symbol_resolution_handoff_request_ids": [],
     "symbol_resolution_transfer_request_ids": [],
+    "symbol_resolution_transfer_pack_request_ids": [],
     "autotrigger_dispatch_candidate_ids": []
   },
   "focus": {
@@ -82,6 +93,7 @@
     "top_symbol_resolution_batch_request": null,
     "top_symbol_resolution_handoff_request": null,
     "top_symbol_resolution_transfer_request": null,
+    "top_symbol_resolution_transfer_pack_request": null,
     "missing_input_jobs": []
   }
 }

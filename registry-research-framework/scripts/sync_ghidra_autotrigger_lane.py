@@ -47,6 +47,71 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def load_json(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def cached_handoff_summary(path: Path | None, markdown_path: Path | None) -> dict[str, Any] | None:
+    if not path or not path.exists():
+        return None
+    payload = load_json(path)
+    return {
+        "status": payload.get("handoff_status"),
+        "selected_jobs": int((payload.get("counts") or {}).get("selected_jobs") or 0),
+        "path": portable_path(path),
+        "markdown_path": portable_path(markdown_path) if markdown_path and markdown_path.exists() else None,
+        "source": "cached",
+    }
+
+
+def cached_transfer_summary(path: Path | None, markdown_path: Path | None) -> dict[str, Any] | None:
+    if not path or not path.exists():
+        return None
+    payload = load_json(path)
+    return {
+        "status": payload.get("transfer_status"),
+        "selected_jobs": int((payload.get("counts") or {}).get("selected_jobs") or 0),
+        "path": portable_path(path),
+        "markdown_path": portable_path(markdown_path) if markdown_path and markdown_path.exists() else None,
+        "source": "cached",
+    }
+
+
+def cached_transfer_pack_summary(
+    summary_path: Path | None,
+    markdown_path: Path | None,
+    archive_path: Path | None,
+    output_root: Path | None,
+) -> dict[str, Any] | None:
+    if not summary_path or not summary_path.exists():
+        return None
+    payload = load_json(summary_path)
+    return {
+        "status": payload.get("pack_status"),
+        "selected_jobs": int((payload.get("counts") or {}).get("selected_jobs") or 0),
+        "path": portable_path(summary_path),
+        "markdown_path": portable_path(markdown_path) if markdown_path and markdown_path.exists() else None,
+        "archive_path": portable_path(archive_path) if archive_path and archive_path.exists() else payload.get("archive_path"),
+        "output_root": portable_path(output_root) if output_root and output_root.exists() else payload.get("output_root"),
+        "source": "cached",
+    }
+
+
+def cached_health_status(path: Path | None) -> dict[str, Any] | None:
+    if not path or not path.exists():
+        return None
+    payload = health_check_mod.load_json(path)
+    errors = health_check_mod.validate_health(payload)
+    return {
+        "status": "ok" if not errors else "error",
+        "errors": errors,
+        "path": portable_path(path),
+        "source": "cached",
+    }
+
+
 def derive_operator_state(*, sync_status: str, manifest_payload: dict[str, Any] | None, health_payload: dict[str, Any] | None) -> dict[str, Any]:
     manifest_payload = manifest_payload or {}
     health_payload = health_payload or {}
@@ -208,6 +273,14 @@ def sync_lane(
     roots = discover_input_roots or [DEFAULT_EVIDENCE_ROOT]
     effective_manifest_path = bundle_manifest_path or refresh_pipeline_mod.INPUTS_PATH
     effective_health_path = health_path or refresh_pipeline_mod.HEALTH_PATH
+    effective_handoff_path = handoff_path or refresh_pipeline_mod.HANDOFF_PATH
+    effective_handoff_markdown_path = handoff_markdown_path or refresh_pipeline_mod.HANDOFF_MARKDOWN_PATH
+    effective_transfer_path = transfer_path or refresh_pipeline_mod.TRANSFER_PATH
+    effective_transfer_markdown_path = transfer_markdown_path or refresh_pipeline_mod.TRANSFER_MARKDOWN_PATH
+    effective_transfer_pack_output_root = transfer_pack_output_root or refresh_pipeline_mod.TRANSFER_PACK_OUTPUT_ROOT
+    effective_transfer_pack_summary_path = transfer_pack_summary_path or refresh_pipeline_mod.TRANSFER_PACK_SUMMARY_PATH
+    effective_transfer_pack_markdown_path = transfer_pack_markdown_path or refresh_pipeline_mod.TRANSFER_PACK_MARKDOWN_PATH
+    effective_transfer_pack_archive_path = transfer_pack_archive_path or refresh_pipeline_mod.TRANSFER_PACK_ARCHIVE_PATH
     try:
         refresh_payload = refresh_pipeline_mod.refresh_pipeline(
             refresh_bundle_manifest=True,
@@ -222,14 +295,14 @@ def sync_lane(
             batch_path=batch_path or refresh_pipeline_mod.BATCH_PATH,
             run_path=run_path or refresh_pipeline_mod.RUN_PATH,
             health_path=effective_health_path,
-            handoff_path=handoff_path or refresh_pipeline_mod.HANDOFF_PATH,
-            handoff_markdown_path=handoff_markdown_path or refresh_pipeline_mod.HANDOFF_MARKDOWN_PATH,
-            transfer_path=transfer_path or refresh_pipeline_mod.TRANSFER_PATH,
-            transfer_markdown_path=transfer_markdown_path or refresh_pipeline_mod.TRANSFER_MARKDOWN_PATH,
-            transfer_pack_output_root=transfer_pack_output_root or refresh_pipeline_mod.TRANSFER_PACK_OUTPUT_ROOT,
-            transfer_pack_summary_path=transfer_pack_summary_path or refresh_pipeline_mod.TRANSFER_PACK_SUMMARY_PATH,
-            transfer_pack_markdown_path=transfer_pack_markdown_path or refresh_pipeline_mod.TRANSFER_PACK_MARKDOWN_PATH,
-            transfer_pack_archive_path=transfer_pack_archive_path or refresh_pipeline_mod.TRANSFER_PACK_ARCHIVE_PATH,
+            handoff_path=effective_handoff_path,
+            handoff_markdown_path=effective_handoff_markdown_path,
+            transfer_path=effective_transfer_path,
+            transfer_markdown_path=effective_transfer_markdown_path,
+            transfer_pack_output_root=effective_transfer_pack_output_root,
+            transfer_pack_summary_path=effective_transfer_pack_summary_path,
+            transfer_pack_markdown_path=effective_transfer_pack_markdown_path,
+            transfer_pack_archive_path=effective_transfer_pack_archive_path,
         )
     except ValueError as exc:
         manifest_payload = refresh_pipeline_mod.autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {}
@@ -243,15 +316,20 @@ def sync_lane(
                 "discover_input_roots": [portable_path(path) for path in roots],
                 "input_manifest_limit": input_manifest_limit,
                 "refresh": None,
-                "health_check": None,
+                "health_check": cached_health_status(effective_health_path),
                 "bundle_manifest": {
                     "path": portable_path(effective_manifest_path),
                     "selected_count": selected_count,
                     "diagnostics": (manifest_payload or {}).get("diagnostics") or {},
                 },
-                "handoff": None,
-                "transfer": None,
-                "transfer_pack": None,
+                "handoff": cached_handoff_summary(effective_handoff_path, effective_handoff_markdown_path),
+                "transfer": cached_transfer_summary(effective_transfer_path, effective_transfer_markdown_path),
+                "transfer_pack": cached_transfer_pack_summary(
+                    effective_transfer_pack_summary_path,
+                    effective_transfer_pack_markdown_path,
+                    effective_transfer_pack_archive_path,
+                    effective_transfer_pack_output_root,
+                ),
                 "operator": operator,
                 "error": str(exc),
             }

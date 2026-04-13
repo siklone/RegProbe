@@ -1,6 +1,6 @@
 # Ghidra Autotrigger Health
 
-- Generated UTC: `2026-04-13T10:40:28.574895Z`
+- Generated UTC: `2026-04-13T10:53:32.227681Z`
 - Input bundles selected: `0`
 - Queue jobs: `4`
 - Autotrigger seeds: `0`
@@ -10,6 +10,7 @@
 - Symbol resolution run selected jobs: `0`
 - Symbol resolution handoff selected jobs: `0`
 - Symbol resolution transfer selected jobs: `0`
+- Symbol resolution transfer pack selected jobs: `0`
 - Dispatch jobs: `4`
 - Autotrigger dispatch jobs: `0`
 - Run selected jobs: `4`
@@ -26,6 +27,7 @@
 - Top symbol resolution batch request: `None`
 - Top symbol resolution handoff request: `None`
 - Top symbol resolution transfer request: `None`
+- Top symbol resolution transfer pack request: `None`
 
 ## Coverage
 
@@ -36,6 +38,7 @@
 - Symbol resolution batch request ids: `0`
 - Symbol resolution handoff request ids: `0`
 - Symbol resolution transfer request ids: `0`
+- Symbol resolution transfer pack request ids: `0`
 - Autotrigger dispatch candidate ids: `0`
 
 ## Symbol Handoff
@@ -51,6 +54,14 @@
 - Operator blocker: `no-selected-symbol-jobs`
 - Selected jobs: `0`
 - Missing repo files: `0`
+
+## Transfer Pack
+
+- Pack status: `None`
+- Operator blocker: `None`
+- Selected jobs: `0`
+- Repo files copied: `0`
+- Command files written: `0`
 
 ## Symbol Batch Diagnostics
 

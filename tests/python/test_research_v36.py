@@ -3304,6 +3304,69 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             self.assertTrue(markdown_path.exists())
             self.assertTrue(output_path.exists())
 
+    def test_sync_lane_idle_surfaces_can_report_cached_transfer_state(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            evidence_root = temp_root / "evidence"
+            evidence_root.mkdir(parents=True, exist_ok=True)
+            queue_path = temp_root / "ghidra-job-queue.jsonl"
+            queue_path.write_text("", encoding="utf-8")
+            bundle_manifest_path = temp_root / "ghidra-autotrigger-inputs.json"
+            handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
+            handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
+            transfer_path = temp_root / "ghidra-symbol-resolution-transfer.json"
+            transfer_markdown_path = temp_root / "ghidra-symbol-resolution-transfer.md"
+            transfer_pack_output_root = temp_root / "ghidra-symbol-resolution-transfer-pack"
+            transfer_pack_summary_path = temp_root / "ghidra-symbol-resolution-transfer-pack.json"
+            transfer_pack_markdown_path = temp_root / "ghidra-symbol-resolution-transfer-pack.md"
+            transfer_pack_archive_path = temp_root / "ghidra-symbol-resolution-transfer-pack.zip"
+            output_path = temp_root / "ghidra-autotrigger-sync.json"
+            markdown_path = temp_root / "ghidra-autotrigger-sync.md"
+
+            handoff_path.write_text(json.dumps({"handoff_status": "idle", "counts": {"selected_jobs": 0}}), encoding="utf-8")
+            handoff_markdown_path.write_text("# handoff\n", encoding="utf-8")
+            transfer_path.write_text(json.dumps({"transfer_status": "idle", "counts": {"selected_jobs": 0}}), encoding="utf-8")
+            transfer_markdown_path.write_text("# transfer\n", encoding="utf-8")
+            transfer_pack_output_root.mkdir(parents=True, exist_ok=True)
+            transfer_pack_summary_path.write_text(
+                json.dumps(
+                    {
+                        "pack_status": "idle",
+                        "counts": {"selected_jobs": 0},
+                        "archive_path": transfer_pack_archive_path.as_posix(),
+                        "output_root": transfer_pack_output_root.as_posix(),
+                    }
+                ),
+                encoding="utf-8",
+            )
+            transfer_pack_markdown_path.write_text("# pack\n", encoding="utf-8")
+            transfer_pack_archive_path.write_bytes(b"PK")
+
+            payload = ghidra_autotrigger_sync.sync_lane(
+                discover_input_roots=[evidence_root],
+                queue_path=queue_path,
+                bundle_manifest_path=bundle_manifest_path,
+                handoff_path=handoff_path,
+                handoff_markdown_path=handoff_markdown_path,
+                transfer_path=transfer_path,
+                transfer_markdown_path=transfer_markdown_path,
+                transfer_pack_output_root=transfer_pack_output_root,
+                transfer_pack_summary_path=transfer_pack_summary_path,
+                transfer_pack_markdown_path=transfer_pack_markdown_path,
+                transfer_pack_archive_path=transfer_pack_archive_path,
+                markdown_path=markdown_path,
+                output_path=output_path,
+            )
+
+            self.assertEqual(payload["sync_status"], "idle")
+            self.assertEqual(payload["handoff"]["status"], "idle")
+            self.assertEqual(payload["handoff"]["source"], "cached")
+            self.assertEqual(payload["transfer"]["status"], "idle")
+            self.assertEqual(payload["transfer"]["source"], "cached")
+            self.assertEqual(payload["transfer_pack"]["status"], "idle")
+            self.assertEqual(payload["transfer_pack"]["source"], "cached")
+            self.assertEqual(payload["transfer_pack"]["archive_path"], transfer_pack_archive_path.as_posix())
+
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):
     def test_normalize_registry_path_collapses_hklm_alias(self) -> None:
