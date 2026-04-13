@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T03:07:29.358888Z",
+  "generated_utc": "2026-04-13T03:09:53.178844Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -7206,7 +7206,7 @@
       "promotion_blockers": [
         "bounded-s1-registry-etw-no-hit-current-build",
         "no-primary-current-build-doc",
-        "non-default-semantics-unproven"
+        "win32k-callout-watchdog-override-semantics-unproven"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -8267,8 +8267,8 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "no-primary-current-build-doc",
-        "non-default-semantics-unproven",
-        "procmon-saveas-timeout-on-bounded-callout-lane"
+        "procmon-saveas-timeout-on-bounded-callout-lane",
+        "win32-callout-watchdog-bugcheck-semantics-unproven"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18839,8 +18839,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "force-bugcheck-for-dpc-watchdog-semantics-unproven",
         "no-primary-current-build-doc",
-        "non-default-semantics-unproven",
         "wpr-boot-registry-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
@@ -19025,7 +19025,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "no-primary-current-build-doc",
-        "non-default-semantics-unproven",
+        "timer-check-flags-modern-bit-semantics-unproven",
         "wpr-boot-registry-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
@@ -22835,19 +22835,22 @@
     "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,
     "drips-trigger-not-available-on-current-vm": 1,
+    "force-bugcheck-for-dpc-watchdog-semantics-unproven": 1,
     "hibernate-trigger-not-available-on-current-vm": 1,
     "no-current-build-string-or-symbol-hit": 1,
     "no-primary-current-build-doc": 11,
     "no-runtime-proof": 13,
-    "non-default-semantics-unproven": 4,
     "powerrequestoverride-leaf-semantics-unresolved": 1,
     "research-only-raw-policy-system-value": 1,
     "research-only-raw-power-manager-value": 1,
     "restore-story-unproven-subtree-presence-only": 1,
     "static-context-adjacent-not-leaf-specific": 1,
+    "timer-check-flags-modern-bit-semantics-unproven": 1,
     "ttmenabled-reader-unresolved": 1,
     "unlabeled-init-walker-not-symbol-resolved": 2,
-    "watchdog-timeouts-specific-caller-unresolved": 1
+    "watchdog-timeouts-specific-caller-unresolved": 1,
+    "win32-callout-watchdog-bugcheck-semantics-unproven": 1,
+    "win32k-callout-watchdog-override-semantics-unproven": 1
   },
   "stale_records": [],
   "conflict_records": [],
