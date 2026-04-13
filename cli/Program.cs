@@ -398,16 +398,62 @@ class Program
             {
                 if (emitSummary)
                 {
+                    var summaryEntries = catalog.ListBlockedWorklist(
+                        reason,
+                        context.ParseResult.GetValueForOption(laneOption),
+                        actionability,
+                        context.ParseResult.GetValueForOption(actionableOnly),
+                        top: null).ToList();
+                    var actionabilityCounts = summaryEntries
+                        .GroupBy(entry => entry.Actionability, StringComparer.OrdinalIgnoreCase)
+                        .OrderBy(group => group.Key, StringComparer.OrdinalIgnoreCase)
+                        .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase);
+                    var laneCounts = summaryEntries
+                        .GroupBy(entry => entry.NextMissingLayer, StringComparer.OrdinalIgnoreCase)
+                        .ToDictionary(group => group.Key, group => group.Count(), StringComparer.OrdinalIgnoreCase);
+                    var preferredLaneOrder = catalog.BlockedWorklist.OrderedLanes
+                        .Where(lane => laneCounts.ContainsKey(lane));
+                    var fallbackLaneOrder = laneCounts.Keys
+                        .Except(preferredLaneOrder, StringComparer.OrdinalIgnoreCase)
+                        .OrderBy(lane => lane, StringComparer.OrdinalIgnoreCase);
+                    var orderedLanes = preferredLaneOrder.Concat(fallbackLaneOrder).ToList();
+                    var laneFocus = orderedLanes
+                        .Select(lane => new
+                        {
+                            lane,
+                            entry = summaryEntries.FirstOrDefault(entry =>
+                                string.Equals(entry.NextMissingLayer, lane, StringComparison.OrdinalIgnoreCase))
+                        })
+                        .Where(item => item.entry is not null)
+                        .ToDictionary(
+                            item => item.lane,
+                            item => new
+                            {
+                                item.entry!.CandidateId,
+                                item.entry.SuggestedCommand,
+                                item.entry.NextActionHint,
+                            },
+                            StringComparer.OrdinalIgnoreCase);
+                    var topActionableCandidates = summaryEntries
+                        .Where(entry => string.Equals(entry.Actionability, "active", StringComparison.OrdinalIgnoreCase))
+                        .Select(entry => entry.CandidateId)
+                        .Take(5)
+                        .ToList();
+                    var topHoldCandidates = summaryEntries
+                        .Where(entry => string.Equals(entry.Actionability, "hold", StringComparison.OrdinalIgnoreCase))
+                        .Select(entry => entry.CandidateId)
+                        .Take(5)
+                        .ToList();
                     var payload = new
                     {
                         catalog.BlockedWorklist.GeneratedAt,
-                        catalog.BlockedWorklist.BlockedCount,
-                        ActionabilityCounts = catalog.BlockedWorklist.ActionabilityCounts,
-                        LaneCounts = catalog.BlockedWorklist.LaneCounts,
-                        OrderedLanes = catalog.BlockedWorklist.OrderedLanes,
-                        LaneFocus = catalog.BlockedWorklist.LaneFocus,
-                        TopActionableCandidates = catalog.BlockedWorklist.TopActionableCandidates,
-                        TopHoldCandidates = catalog.BlockedWorklist.TopHoldCandidates,
+                        BlockedCount = summaryEntries.Count,
+                        ActionabilityCounts = actionabilityCounts,
+                        LaneCounts = laneCounts,
+                        OrderedLanes = orderedLanes,
+                        LaneFocus = laneFocus,
+                        TopActionableCandidates = topActionableCandidates,
+                        TopHoldCandidates = topHoldCandidates,
                     };
 
                     if (emitJson)
@@ -416,28 +462,25 @@ class Program
                     }
                     else
                     {
-                        Console.WriteLine($"Blocked candidates: {catalog.BlockedWorklist.BlockedCount}");
-                        foreach (var pair in catalog.BlockedWorklist.ActionabilityCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
+                        Console.WriteLine($"Blocked candidates: {summaryEntries.Count}");
+                        foreach (var pair in actionabilityCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
                         {
                             Console.WriteLine($"{pair.Key}: {pair.Value}");
                         }
-                        var orderedLanes = catalog.BlockedWorklist.OrderedLanes.Count > 0
-                            ? catalog.BlockedWorklist.OrderedLanes
-                            : catalog.BlockedWorklist.LaneCounts.Keys.OrderBy(key => key, StringComparer.OrdinalIgnoreCase).ToList();
                         foreach (var lane in orderedLanes)
                         {
-                            var count = catalog.BlockedWorklist.LaneCounts.TryGetValue(lane, out var laneCount) ? laneCount : 0;
-                            if (catalog.BlockedWorklist.LaneFocus.TryGetValue(lane, out var laneFocus)
-                                && !string.IsNullOrWhiteSpace(laneFocus.CandidateId))
+                            var count = laneCounts.TryGetValue(lane, out var laneCount) ? laneCount : 0;
+                            if (laneFocus.TryGetValue(lane, out var focus)
+                                && !string.IsNullOrWhiteSpace(focus.CandidateId))
                             {
-                                Console.WriteLine($"{lane}: {count} -> {laneFocus.CandidateId}");
-                                if (!string.IsNullOrWhiteSpace(laneFocus.SuggestedCommand))
+                                Console.WriteLine($"{lane}: {count} -> {focus.CandidateId}");
+                                if (!string.IsNullOrWhiteSpace(focus.SuggestedCommand))
                                 {
-                                    Console.WriteLine($"  command: {laneFocus.SuggestedCommand}");
+                                    Console.WriteLine($"  command: {focus.SuggestedCommand}");
                                 }
-                                if (!string.IsNullOrWhiteSpace(laneFocus.NextActionHint))
+                                if (!string.IsNullOrWhiteSpace(focus.NextActionHint))
                                 {
-                                    Console.WriteLine($"  next: {laneFocus.NextActionHint}");
+                                    Console.WriteLine($"  next: {focus.NextActionHint}");
                                 }
                             }
                             else
@@ -445,18 +488,18 @@ class Program
                                 Console.WriteLine($"{lane}: {count}");
                             }
                         }
-                        if (catalog.BlockedWorklist.TopActionableCandidates.Count > 0)
+                        if (topActionableCandidates.Count > 0)
                         {
                             Console.WriteLine("Top actionable:");
-                            foreach (var candidateId in catalog.BlockedWorklist.TopActionableCandidates)
+                            foreach (var candidateId in topActionableCandidates)
                             {
                                 Console.WriteLine($"  {candidateId}");
                             }
                         }
-                        if (catalog.BlockedWorklist.TopHoldCandidates.Count > 0)
+                        if (topHoldCandidates.Count > 0)
                         {
                             Console.WriteLine("Top holds:");
-                            foreach (var candidateId in catalog.BlockedWorklist.TopHoldCandidates)
+                            foreach (var candidateId in topHoldCandidates)
                             {
                                 Console.WriteLine($"  {candidateId}");
                             }
