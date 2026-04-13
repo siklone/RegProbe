@@ -45,7 +45,12 @@ def normalize_blocker_name(blocker: Any) -> str:
         return raw
     if raw in {"rollback-unverified", "rollback-failed", "dead-link", "bench-not-run", "bench-failed-safety", "bench-bare-metal-pending", "functional-no-effect"}:
         return raw
-    if raw == "runtime_no_read" or "no-runtime-proof" in lowered or "runtime no read" in lowered:
+    if (
+        raw == "runtime_no_read"
+        or "no-runtime-proof" in lowered
+        or "runtime no read" in lowered
+        or "wpr-boot-registry-no-hit" in lowered
+    ):
         return "no-runtime-proof"
     if raw == "conflicting-sources" or "conflict" in lowered:
         return "conflicting-sources"

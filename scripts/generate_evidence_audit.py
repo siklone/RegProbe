@@ -336,6 +336,7 @@ def main() -> int:
             full_evidence or {},
             url_validation_status=url_validation_map.get(record_id),
         )
+        next_layer = str(promotion_gate.get("next_missing_layer") or next_layer)
         audit_surface = audit_surface_from_gate(record, promotion_gate, full_evidence)
         checks = dead_flag_checks(record_id, record)
         audit_required = re_audit_required(class_id, official, record_id, record, incident_seen)
@@ -351,7 +352,7 @@ def main() -> int:
                 basis = "converged-vm"
             else:
                 basis = "unknown"
-        elif is_final_decision_gate(record, class_id, incident_seen):
+        elif class_id == "B" and not ((record.get("decision") or {}).get("blocking_issues") or []) and next_layer == "decision-gate":
             basis = "final-decision-gate"
         else:
             basis = "pending"
