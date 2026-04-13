@@ -64,6 +64,7 @@ Use this refresh sequence after a decision:
 ```bash
 python3 registry-research-framework/scripts/generate_promotion_gates.py
 python3 registry-research-framework/scripts/generate_publish_metrics.py
+python3 registry-research-framework/scripts/check_blocked_worklist.py
 python3 registry-research-framework/scripts/check_gate_thresholds.py
 python3 registry-research-framework/scripts/check_mcp_readiness.py
 ```
