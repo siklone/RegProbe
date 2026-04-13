@@ -63,6 +63,9 @@ jobs:
       - name: Run Python pipeline tests
         run: python -m unittest discover -s tests/python -p "test*.py"
 
+      - name: Ghidra autotrigger smoke gate
+        run: python registry-research-framework/scripts/run_ghidra_autotrigger_smoke.py
+
       - name: Generate research metrics
         run: python registry-research-framework/scripts/generate_publish_metrics.py
 
