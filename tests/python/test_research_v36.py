@@ -44,6 +44,7 @@ ghidra_autotrigger_health = load_module("generate_ghidra_autotrigger_health", FR
 ghidra_autotrigger_health_check = load_module("check_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_health.py")
 ghidra_autotrigger_sync = load_module("sync_ghidra_autotrigger_lane", FRAMEWORK_SCRIPTS / "sync_ghidra_autotrigger_lane.py")
 ghidra_autotrigger_smoke = load_module("run_ghidra_autotrigger_smoke", FRAMEWORK_SCRIPTS / "run_ghidra_autotrigger_smoke.py")
+ghidra_symbol_handoff = load_module("generate_ghidra_symbol_resolution_handoff", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_handoff.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2305,6 +2306,93 @@ class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
         self.assertEqual(plan["blocked_jobs"][0]["request_id"], "request-2")
 
 
+class GhidraSymbolResolutionHandoffTests(unittest.TestCase):
+    def test_handoff_payload_summarizes_selected_and_blocked_jobs(self) -> None:
+        batch = {
+            "job_count": 2,
+            "runnable_job_count": 1,
+            "blocked_job_count": 1,
+            "missing_host_tools": [],
+            "diagnostics": {
+                "resolution_kind_counts": {"module_offset": 1, "plain_text": 1},
+                "missing_input_counts": {"patterns": 1},
+                "blocked_examples": [{"request_id": "request-2"}],
+            },
+            "jobs": [
+                {
+                    "job_id": "job-1",
+                    "request_id": "request-1",
+                    "lookup_key": "ntoskrnl.exe+0x1f234",
+                    "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+                    "candidate_ids": ["power.keep"],
+                    "target_binary": "ntoskrnl.exe",
+                    "guest_binary_path": r"C:\Windows\System32\ntoskrnl.exe",
+                    "patterns": ["AllowSystemRequiredPowerRequests"],
+                    "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+                    "output_dir": "evidence/files/ghidra/job-1",
+                    "missing_inputs": [],
+                    "missing_host_tools": [],
+                    "can_run_guest_orchestrator": True,
+                },
+                {
+                    "job_id": "job-2",
+                    "request_id": "request-2",
+                    "lookup_key": "ntoskrnl.exe!PlainTextHint",
+                    "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+                    "candidate_ids": ["power.other"],
+                    "target_binary": "ntoskrnl.exe",
+                    "guest_binary_path": r"C:\Windows\System32\ntoskrnl.exe",
+                    "patterns": [],
+                    "suggested_command": None,
+                    "output_dir": "evidence/files/ghidra/job-2",
+                    "missing_inputs": ["patterns"],
+                    "missing_host_tools": [],
+                    "can_run_guest_orchestrator": False,
+                },
+            ],
+        }
+        run = {
+            "mode": "dry-run",
+            "runner_available": True,
+            "selected_job_count": 1,
+            "blocked_job_count": 1,
+            "jobs": [
+                {
+                    "job_id": "job-1",
+                    "request_id": "request-1",
+                }
+            ],
+            "blocked_jobs": [
+                {
+                    "job_id": "job-2",
+                    "request_id": "request-2",
+                }
+            ],
+        }
+
+        payload = ghidra_symbol_handoff.handoff_payload(
+            batch,
+            run,
+            batch_path=Path("/tmp/batch.json"),
+            run_path=Path("/tmp/run.json"),
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(payload["handoff_status"], "ready")
+        self.assertEqual(payload["operator"]["blocker"], "symbol-resolution-ready")
+        self.assertEqual(payload["counts"]["prepared_jobs"], 2)
+        self.assertEqual(payload["counts"]["selected_jobs"], 1)
+        self.assertEqual(payload["counts"]["blocked_jobs"], 1)
+        self.assertEqual(payload["candidate_ids"], ["power.keep", "power.other"])
+        self.assertEqual(payload["selected_jobs"][0]["request_id"], "request-1")
+        self.assertEqual(payload["blocked_jobs"][0]["request_id"], "request-2")
+
+        markdown = ghidra_symbol_handoff.render_markdown(payload)
+        self.assertIn("# Ghidra Symbol Resolution Handoff", markdown)
+        self.assertIn("request-1", markdown)
+        self.assertIn("request-2", markdown)
+
+
 class GhidraAutotriggerPipelineTests(unittest.TestCase):
     def test_refresh_pipeline_writes_seed_batch_and_run_surfaces(self) -> None:
         bundle = {
@@ -2991,6 +3079,7 @@ class GhidraAutotriggerSmokeTests(unittest.TestCase):
             self.assertEqual(payload["counts"]["seed_count"], 3)
             self.assertGreaterEqual(payload["counts"]["symbol_resolution_request_count"], 3)
             self.assertEqual(payload["operator"]["blocker"], "symbol-resolution-ready")
+            self.assertEqual(payload["handoff_status"], "ready")
             self.assertIn("module_offset", payload["frame_resolution_counts"])
             self.assertIn("raw_address", payload["frame_resolution_counts"])
             self.assertTrue(output_path.exists())

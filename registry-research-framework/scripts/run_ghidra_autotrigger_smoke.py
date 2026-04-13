@@ -30,6 +30,7 @@ def load_local_module(name: str, path: Path):
 
 autotrigger = load_local_module("ghidra_smoke_autotrigger", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_seeds.py")
 sync_lane_mod = load_local_module("ghidra_smoke_sync_lane", FRAMEWORK_ROOT / "scripts" / "sync_ghidra_autotrigger_lane.py")
+handoff_mod = load_local_module("ghidra_smoke_handoff", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_symbol_resolution_handoff.py")
 
 
 def now_utc() -> str:
@@ -228,6 +229,8 @@ def run_smoke(
     health_path = output_root / "ghidra-autotrigger-health.json"
     sync_path = output_root / "ghidra-autotrigger-sync.json"
     sync_markdown_path = output_root / "ghidra-autotrigger-sync.md"
+    handoff_path = output_root / "ghidra-symbol-resolution-handoff.json"
+    handoff_markdown_path = output_root / "ghidra-symbol-resolution-handoff.md"
 
     sync_payload = sync_lane_mod.sync_lane(
         discover_input_roots=[smoke_input_root],
@@ -243,6 +246,14 @@ def run_smoke(
         markdown_path=sync_markdown_path,
         output_path=sync_path,
     )
+    handoff_payload = handoff_mod.handoff_payload(
+        load_json(symbol_batch_path),
+        load_json(symbol_run_path),
+        batch_path=symbol_batch_path,
+        run_path=symbol_run_path,
+    )
+    write_json(handoff_path, handoff_payload)
+    write_text(handoff_markdown_path, handoff_mod.render_markdown(handoff_payload))
 
     refresh = sync_payload.get("refresh") or {}
     counts = {
@@ -292,7 +303,10 @@ def run_smoke(
             "health_path": autotrigger.portable_path(health_path),
             "sync_path": autotrigger.portable_path(sync_path),
             "sync_markdown_path": autotrigger.portable_path(sync_markdown_path),
+            "handoff_path": autotrigger.portable_path(handoff_path),
+            "handoff_markdown_path": autotrigger.portable_path(handoff_markdown_path),
         },
+        "handoff_status": handoff_payload.get("handoff_status"),
     }
     write_json(output_path, payload)
     write_text(markdown_path, render_markdown(payload))

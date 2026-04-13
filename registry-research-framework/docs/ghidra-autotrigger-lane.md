@@ -40,6 +40,12 @@ Run the synthetic smoke harness:
 python3 registry-research-framework/scripts/run_ghidra_autotrigger_smoke.py
 ```
 
+Render the symbol-resolution handoff surface:
+
+```bash
+python3 registry-research-framework/scripts/generate_ghidra_symbol_resolution_handoff.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -60,6 +66,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Prepared KVM guest symbolized-probe jobs built from the symbol-resolution queue.
 - `registry-research-framework/queue/ghidra-symbol-resolution-run.json`
   Dry-run or execution plan for the prepared symbol-resolution jobs.
+- `registry-research-framework/audit/ghidra-symbol-resolution-handoff.json`
+  Operator-facing handoff summary for prepared symbol-resolution jobs, including runnable commands and blocked-job reasons.
+- `registry-research-framework/audit/ghidra-symbol-resolution-handoff.md`
+  Short markdown version of the same handoff package.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`
@@ -92,5 +102,7 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 The lane is intentionally split between discovery and execution. Discovery, dispatch planning, health reporting, and validation now work locally. Real headless execution is still blocked by the host environment: we do not currently have `pwsh` plus a runnable Ghidra install on this machine.
 
 The new symbol-resolution queue sits between seeds and dispatch. When the lane is not idle, that queue gives us an explicit list of offsets or addresses that still need names before we can expect clean decompiler pivots. The symbol-resolution batch now turns that list into prepared KVM guest symbolized-probe jobs, so the unresolved frames can move straight into a repeatable operator lane instead of staying as a passive note.
+
+There is now a dedicated handoff surface for those prepared jobs. Instead of opening multiple JSON files to figure out what is runnable, what is blocked, and which command should move next, the handoff summary packages the selected jobs, blocked jobs, candidate coverage, and next action into one place.
 
 Because fresh caller-stack bundles are still intermittent, the lane now also has a synthetic smoke harness. It fabricates a small normalized bundle from the active blocked `ghidra` queue, runs the same sync path in an isolated audit directory, and proves that symbol-resolution-ready work would be emitted when matching stack-bearing bundles arrive.

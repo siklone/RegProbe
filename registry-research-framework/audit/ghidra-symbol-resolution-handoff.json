@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T10:23:11.970088Z",
+  "batch_path": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
+  "run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
+  "handoff_status": "idle",
+  "operator": {
+    "status": "idle",
+    "blocker": "no-symbol-resolution-jobs",
+    "next_action": "Refresh the autotrigger lane from a stack-bearing normalized bundle before preparing a handoff.",
+    "top_focus": null
+  },
+  "counts": {
+    "prepared_jobs": 0,
+    "runnable_jobs": 0,
+    "blocked_jobs": 0,
+    "selected_jobs": 0,
+    "run_blocked_jobs": 0,
+    "candidate_count": 0
+  },
+  "required_host_tools": [],
+  "batch_missing_host_tools": [],
+  "candidate_ids": [],
+  "selected_jobs": [],
+  "blocked_jobs": [],
+  "diagnostics": {
+    "batch_resolution_kind_counts": {},
+    "batch_missing_input_counts": {},
+    "batch_blocked_examples": [],
+    "run_runner_available": true,
+    "run_mode": "dry-run"
+  }
+}
