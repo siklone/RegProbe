@@ -1721,11 +1721,80 @@ def _gate_layer_blockers(next_layer: str) -> list[str]:
 
 
 def _gate_layer_blockers_for_record(next_layer: str, existing_blockers: set[str]) -> list[str]:
-    # Decision gates should surface the real blocker when one is already known.
-    # The generic documentation-first-review label is only a fallback.
-    if next_layer == "decision-gate" and existing_blockers:
+    # Surface the specific blocker family when a record already carries one.
+    # Generic layer labels are only fallbacks for otherwise clean records.
+    if next_layer in {
+        "decision-gate",
+        "official-doc",
+        "runtime-trace",
+        "ghidra",
+        "restore-story",
+        "intentional-hold",
+    } and existing_blockers:
         return []
     return _gate_layer_blockers(next_layer)
+
+
+def _infer_blocker_driven_missing_layer(base_layer: str, blockers: set[str]) -> str:
+    if base_layer != "decision-gate":
+        return base_layer
+
+    blocker_texts = [str(item).strip().lower() for item in blockers if str(item).strip()]
+    if not blocker_texts:
+        return base_layer
+
+    def has_phrase(*phrases: str) -> bool:
+        return any(phrase in blocker for blocker in blocker_texts for phrase in phrases)
+
+    if has_phrase(
+        "intentional-hold",
+        "boot-unsafe",
+        "not-mapped-to-supported-app-surface",
+        "research-only-raw-",
+        "do not probe without dedicated boot lane",
+        "virtualized baselines do not support",
+        "a real hibernation trigger is not available",
+        "a real drips-exit trigger cannot be exercised here",
+    ):
+        return "intentional-hold"
+
+    if has_phrase(
+        "restore story",
+        "rollback",
+        "restore/default story",
+    ):
+        return "restore-story"
+
+    if has_phrase(
+        "no-current-build-registry-seeding-path",
+        "no-current-build-string-or-symbol-hit",
+        "caller into that helper path is still unresolved",
+        "exact watchdog-specific caller",
+        "adjacent rather than leaf-specific",
+        "leaf-specific",
+        "direct-reading function",
+        "conditional-initialization-unproven",
+    ):
+        return "ghidra"
+
+    if has_phrase(
+        "runtime_no_read",
+        "no-runtime-proof",
+        "exact runtime query/read",
+        "exact live read",
+        "runtime package",
+        "procmon-saveas-timeout",
+    ):
+        return "runtime-trace"
+
+    if has_phrase(
+        "no-primary-current-build-doc",
+        "no-doc-source-outside-repo",
+        "official documentation",
+    ):
+        return "official-doc"
+
+    return base_layer
 
 
 def evaluate_candidate_gate(
@@ -1754,7 +1823,6 @@ def evaluate_candidate_gate(
     bench_results = bench_results_projection(full_evidence, record, audit)
     negative_evidence = negative_evidence_projection(full_evidence, record, audit, rollback_status, bench_results)
     score_breakdown = score_candidate(record, audit, full_evidence)
-    evidence_status = evidence_status_projection(record, audit)
     url_validation = (
         dict(url_validation_status)
         if isinstance(url_validation_status, dict)
@@ -1789,7 +1857,13 @@ def evaluate_candidate_gate(
         blocker_set.add("dead-link")
     if bench_results.get("bench_required") and not bench_results.get("executed"):
         blocker_set.add("bench-not-run")
+    missing_layer = _infer_blocker_driven_missing_layer(missing_layer, blocker_set)
     blocker_set.update(_gate_layer_blockers_for_record(missing_layer, blocker_set))
+
+    evidence_status = evidence_status_projection(
+        record,
+        {**audit, "next_missing_layer": missing_layer},
+    )
 
     documentation_status = documentation_status_projection(
         record,
