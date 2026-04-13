@@ -363,6 +363,7 @@ def research_health_markdown(publish_metrics: dict[str, Any], gate_metrics: dict
             f"| Gate Health | {icon} {gate_health} |",
             f"| Schema Complete | {schema_percent}% |",
             f"| Missing Docs | {int(validation_summary.get('missing_docs_count') or 0)} |",
+            "| Blocked Worklist | `audit/blocked-worklist.md` |",
             README_BLOCK_END,
         ]
     )

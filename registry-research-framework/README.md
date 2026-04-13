@@ -25,4 +25,5 @@ Canonical imported artifacts live under `evidence/files/`. The published researc
 | Gate Health | 🟢 green |
 | Schema Complete | 100% |
 | Missing Docs | 0 |
+| Blocked Worklist | `audit/blocked-worklist.md` |
 <!-- END:RESEARCH_HEALTH -->
