@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T03:15:28.120335Z",
+  "generated_utc": "2026-04-13T03:19:35.294298Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -6036,9 +6036,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "audio-execution-required-no-primary-current-build-doc",
         "execution-required-init-walker-not-symbol-resolved",
-        "execution-required-megatrigger-etw-no-hit-current-build",
-        "no-primary-current-build-doc"
+        "execution-required-megatrigger-etw-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6932,7 +6932,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "no-current-build-string-or-symbol-hit",
-        "no-primary-current-build-doc",
+        "powerwatchdog-timeout-family-no-primary-current-build-doc",
         "powerwatchdog-timeout-family-runtime-read-unresolved"
       ],
       "record_promotion_allowed": false,
@@ -7112,7 +7112,7 @@
       "promotion_blockers": [
         "boot-unsafe-dedicated-boot-lane-required",
         "boot-unsafe-on-isolated-pilot-profile",
-        "no-primary-current-build-doc",
+        "ttmenabled-no-primary-current-build-doc",
         "ttmenabled-reader-unresolved"
       ],
       "record_promotion_allowed": false,
@@ -7205,7 +7205,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "bounded-s1-registry-etw-no-hit-current-build",
-        "no-primary-current-build-doc",
+        "win32k-callout-watchdog-no-primary-current-build-doc",
         "win32k-callout-watchdog-override-semantics-unproven"
       ],
       "record_promotion_allowed": false,
@@ -8266,8 +8266,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-primary-current-build-doc",
         "procmon-saveas-timeout-on-bounded-callout-lane",
+        "win32-callout-watchdog-bugcheck-no-primary-current-build-doc",
         "win32-callout-watchdog-bugcheck-semantics-unproven"
       ],
       "record_promotion_allowed": false,
@@ -18386,8 +18386,8 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
-        "dpc-watchdog-control-runtime-read-unresolved",
-        "no-primary-current-build-doc"
+        "dpc-watchdog-control-no-primary-current-build-doc",
+        "dpc-watchdog-control-runtime-read-unresolved"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18478,8 +18478,8 @@
       "promotion_blockers": [
         "conditional-initialization-unproven",
         "dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs",
-        "dpc-watchdog-profile-wpr-boot-no-hit-current-build",
-        "no-primary-current-build-doc"
+        "dpc-watchdog-profile-no-primary-current-build-doc",
+        "dpc-watchdog-profile-wpr-boot-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18570,8 +18570,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "long-dpc-threshold-no-primary-current-build-doc",
         "long-dpc-threshold-wpr-boot-no-hit-current-build",
-        "no-primary-current-build-doc",
         "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
       ],
       "record_promotion_allowed": false,
@@ -18839,9 +18839,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
         "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build",
-        "force-bugcheck-for-dpc-watchdog-semantics-unproven",
-        "no-primary-current-build-doc"
+        "force-bugcheck-for-dpc-watchdog-semantics-unproven"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18934,8 +18934,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "global-timer-resolution-wpr-boot-no-hit-current-build",
-        "no-primary-current-build-doc"
+        "global-timer-resolution-no-primary-current-build-doc",
+        "global-timer-resolution-wpr-boot-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -19024,8 +19024,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-primary-current-build-doc",
         "timer-check-flags-modern-bit-semantics-unproven",
+        "timer-check-flags-no-primary-current-build-doc",
         "timer-check-flags-wpr-boot-no-hit-current-build"
       ],
       "record_promotion_allowed": false,

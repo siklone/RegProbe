@@ -27,6 +27,7 @@ def load_module(name: str, path: Path):
 research_v36_lib = load_module("research_v36_lib", SCRIPTS_ROOT / "research_v36_lib.py")
 evidence_class_lib = load_module("evidence_class_lib", SCRIPTS_ROOT / "evidence_class_lib.py")
 validate_contracts = load_module("validate_research_contracts", FRAMEWORK_SCRIPTS / "validate_research_contracts.py")
+metrics_publish_v36_lib = load_module("metrics_publish_v36_lib", SCRIPTS_ROOT / "metrics_publish_v36_lib.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -768,6 +769,43 @@ class PromotionStateTests(unittest.TestCase):
 
             self.assertEqual(gate["next_missing_layer"], "runtime-trace")
             self.assertIn(blocker, gate["promotion_blockers"])
+
+    def test_specific_current_build_doc_blockers_keep_official_doc_and_metrics_mapping(self) -> None:
+        blocker = "timer-check-flags-no-primary-current-build-doc"
+        record = {
+            "record_id": f"example.{blocker}",
+            "tweak_id": f"example.{blocker}",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKLM\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+                "blocking_issues": [blocker],
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+        }
+
+        gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
+
+        self.assertEqual(gate["next_missing_layer"], "official-doc")
+        self.assertIn(blocker, gate["promotion_blockers"])
+        self.assertEqual(
+            metrics_publish_v36_lib.normalize_blocker_name(blocker),
+            "no-primary-current-build-doc",
+        )
 
     def test_execution_required_init_walker_blocker_maps_to_ghidra_lane(self) -> None:
         record = {

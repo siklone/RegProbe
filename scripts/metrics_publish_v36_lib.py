@@ -59,6 +59,8 @@ def normalize_blocker_name(blocker: Any) -> str:
         or "megatrigger-etw-no-hit" in lowered
     ):
         return "no-runtime-proof"
+    if raw == "no-primary-current-build-doc" or "no-primary-current-build-doc" in lowered:
+        return "no-primary-current-build-doc"
     if raw == "conflicting-sources" or "conflict" in lowered:
         return "conflicting-sources"
     if raw == "schema-version-unsupported":

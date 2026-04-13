@@ -400,7 +400,7 @@
       "kind": "analysis-output",
       "title": "Decision gate review keeps AllowAudioToEnableExecutionRequiredPowerRequests blocked on seeding path",
       "location": "research/notes/power-control-execution-required-decision-gate-review-20260412.md",
-      "summary": "A retained decision-gate review separates the current reader/binding evidence from the still-missing current-build registry seeding path. The value remains research-only until the unlabeled INIT walker is resolved to a named/public seeding routine or an exact runtime registry read is captured; the audio-specific value also keeps its no-primary-current-build-doc blocker.",
+      "summary": "A retained decision-gate review separates the current reader/binding evidence from the still-missing current-build registry seeding path. The value remains research-only until the unlabeled INIT walker is resolved to a named/public seeding routine or an exact runtime registry read is captured; the audio-specific value also keeps its audio-execution-required-no-primary-current-build-doc blocker.",
       "supports": [
         "risk",
         "version-scope",
@@ -419,7 +419,7 @@
     "why": "The candidate is now stronger than a raw draft because it has repo-doc semantics, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, adjacent Microsoft documentation for generic execution-required and audio-active behavior, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, a retained Ghidra reader-family corroboration, a retained soft-reboot ETW attempt, a visible UMPO override-query lineage, a timeout-setting callback disassembly, a retained timeout timer/worker chain, a retained override-response plus callback-worker follow-up that still exposed no visible `*PowerRequest*Reg*` symbol, a retained generic power-setting callback subsystem pass around `PoRegisterPowerSettingCallback`, a later current-build INIT-table binding that maps the exact value name to the KD-resolved target global, and a later host-side disassembly follow-up that statically recovers the generic init walker feeding that table. It remains decision-gated because Microsoft still does not publish a primary current-build doc for the exact audio-specific internal setting, the current-build `Control\\\\Power\\\\AllowAudioToEnableExecutionRequiredPowerRequests` seeding path is still inferred from INIT-table/static analysis rather than resolved to a named public routine, and an exact runtime registry read remains unresolved.",
     "manual_review_required": true,
     "blocking_issues": [
-      "no-primary-current-build-doc",
+      "audio-execution-required-no-primary-current-build-doc",
       "execution-required-init-walker-not-symbol-resolved",
       "execution-required-megatrigger-etw-no-hit-current-build"
     ]
