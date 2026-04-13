@@ -1,20 +1,20 @@
 # Blocked Worklist
 
-Generated: `2026-04-13T05:56:57.297961Z`
+Generated: `2026-04-13T05:59:40.719935Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 13
-- `hold`: 5
+- `active`: 12
+- `hold`: 6
 
 ## Lane Summary
 
 - `restore-story`: 1 | first: `power.control.power-request-override-subtree` | `winopt research list-blocked --worklist --lane restore-story --top 5` | Prove restore or rollback behavior for the exact subtree or value.
-- `ghidra`: 5 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
+- `ghidra`: 4 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
 - `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
-- `intentional-hold`: 5 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `intentional-hold`: 6 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
@@ -22,7 +22,7 @@ Blocked candidates: `18`
 - `power.control.allow-system-required-power-requests` (`ghidra`, score=33, blockers=2)
 - `power.session-watchdog-timeouts` (`ghidra`, score=33, blockers=2)
 - `power.control.allow-audio-to-enable-execution-required-power-requests` (`ghidra`, score=32, blockers=3)
-- `power.control.power-watchdog-timeout-cluster` (`ghidra`, score=32, blockers=3)
+- `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
 
 ## Top Holds
 
@@ -30,7 +30,7 @@ Blocked candidates: `18`
 - `power.control.hiber-file-size-percent` (`intentional-hold`, score=9, blockers=1)
 - `power.control.hibernate-enabled-default` (`intentional-hold`, score=9, blockers=1)
 - `power.control.timer-rebase-threshold-on-drips-exit` (`intentional-hold`, score=9, blockers=1)
-- `power.control.ttm-enabled` (`intentional-hold`, score=6, blockers=4)
+- `power.control.power-watchdog-timeout-cluster` (`intentional-hold`, score=6, blockers=4)
 
 ## Candidates
 
@@ -85,19 +85,6 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
 - Suggested command: `winopt research show-blocked power.control.allow-audio-to-enable-execution-required-power-requests --json`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
-
-### `power.control.power-watchdog-timeout-cluster`
-
-- Lane: `ghidra`
-- Actionability: `active`
-- Priority score: `32`
-- Feature area: `Control Power Watchdog Defaults`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
-- Value name: `PowerWatchdogDrvSetMonitorTimeoutMsec`
-- Blockers: `powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit`, `powerwatchdog-timeout-family-no-primary-current-build-doc`, `powerwatchdog-timeout-family-runtime-read-unresolved`
-- Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
-- Suggested command: `winopt research show-blocked power.control.power-watchdog-timeout-cluster --json`
-- Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
 
 ### `system.kernel-dpc-watchdog-profile-cluster`
 
@@ -252,6 +239,19 @@ Blocked candidates: `18`
 - Blockers: `timer-rebase-threshold-drips-trigger-not-available-on-current-vm`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Treat as environment-limited or intentional hold unless a safer lane becomes available.
+
+### `power.control.power-watchdog-timeout-cluster`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `6`
+- Feature area: `Control Power Watchdog Defaults`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
+- Value name: `PowerWatchdogDrvSetMonitorTimeoutMsec`
+- Blockers: `powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot`, `powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit`, `powerwatchdog-timeout-family-no-primary-current-build-doc`, `powerwatchdog-timeout-family-runtime-read-unresolved`
+- Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
 
 ### `power.control.ttm-enabled`
 

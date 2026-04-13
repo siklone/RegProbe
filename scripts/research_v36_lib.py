@@ -1736,9 +1736,6 @@ def _gate_layer_blockers_for_record(next_layer: str, existing_blockers: set[str]
 
 
 def _infer_blocker_driven_missing_layer(base_layer: str, blockers: set[str]) -> str:
-    if base_layer not in {"decision-gate", "reboot-diff"}:
-        return base_layer
-
     blocker_texts = [str(item).strip().lower() for item in blockers if str(item).strip()]
     if not blocker_texts:
         return base_layer
@@ -1760,6 +1757,9 @@ def _infer_blocker_driven_missing_layer(base_layer: str, blockers: set[str]) -> 
         "a real drips-exit trigger cannot be exercised here",
     ):
         return "intentional-hold"
+
+    if base_layer not in {"decision-gate", "reboot-diff"}:
+        return base_layer
 
     if has_phrase(
         "restore story",

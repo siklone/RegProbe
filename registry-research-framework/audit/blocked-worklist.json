@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-04-13T05:56:57.297961Z",
+  "generated_at": "2026-04-13T05:59:40.719935Z",
   "blocked_count": 18,
   "lane_counts": {
-    "ghidra": 5,
-    "intentional-hold": 5,
+    "ghidra": 4,
+    "intentional-hold": 6,
     "restore-story": 1,
     "runtime-trace": 7
   },
   "actionability_counts": {
-    "active": 13,
-    "hold": 5
+    "active": 12,
+    "hold": 6
   },
   "ordered_lanes": [
     "restore-story",
@@ -50,14 +50,14 @@
     "power.control.allow-system-required-power-requests",
     "power.session-watchdog-timeouts",
     "power.control.allow-audio-to-enable-execution-required-power-requests",
-    "power.control.power-watchdog-timeout-cluster"
+    "system.kernel-dpc-watchdog-profile-cluster"
   ],
   "top_hold_candidates": [
     "policy.system.enable-virtualization",
     "power.control.hiber-file-size-percent",
     "power.control.hibernate-enabled-default",
     "power.control.timer-rebase-threshold-on-drips-exit",
-    "power.control.ttm-enabled"
+    "power.control.power-watchdog-timeout-cluster"
   ],
   "items": [
     {
@@ -144,28 +144,6 @@
       ],
       "suggested_command": "winopt research show-blocked power.control.allow-audio-to-enable-execution-required-power-requests --json",
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
-    },
-    {
-      "candidate_id": "power.control.power-watchdog-timeout-cluster",
-      "feature_area": "Control Power Watchdog Defaults",
-      "next_missing_layer": "ghidra",
-      "actionability": "active",
-      "priority_score": 32,
-      "blocker_count": 3,
-      "promotion_blockers": [
-        "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
-        "powerwatchdog-timeout-family-no-primary-current-build-doc",
-        "powerwatchdog-timeout-family-runtime-read-unresolved"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
-      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
-        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
-        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
-      ],
-      "suggested_command": "winopt research show-blocked power.control.power-watchdog-timeout-cluster --json",
-      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
     },
     {
       "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
@@ -402,6 +380,29 @@
       "recent_audit_artifacts": [],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
+    },
+    {
+      "candidate_id": "power.control.power-watchdog-timeout-cluster",
+      "feature_area": "Control Power Watchdog Defaults",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 6,
+      "blocker_count": 4,
+      "promotion_blockers": [
+        "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
+        "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
+        "powerwatchdog-timeout-family-no-primary-current-build-doc",
+        "powerwatchdog-timeout-family-runtime-read-unresolved"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
     },
     {
       "candidate_id": "power.control.ttm-enabled",

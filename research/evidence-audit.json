@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T05:56:56.676789Z",
+  "generated_utc": "2026-04-13T05:59:40.104944Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -16,8 +16,8 @@
     },
     "next_missing_layer_counts": {
       "none": 250,
-      "intentional-hold": 5,
-      "ghidra": 5,
+      "intentional-hold": 6,
+      "ghidra": 4,
       "restore-story": 1,
       "runtime-trace": 7
     },
@@ -6904,7 +6904,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": false,
       "layers_used": [],
       "tools_used": [],
@@ -6931,6 +6931,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
         "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
         "powerwatchdog-timeout-family-no-primary-current-build-doc",
         "powerwatchdog-timeout-family-runtime-read-unresolved"
@@ -22843,6 +22844,7 @@
     "powerrequestoverride-restore-story-leaf-model-unproven": 1,
     "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
     "powerrequestoverride-subtree-leaf-semantics-unresolved": 1,
+    "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot": 1,
     "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit": 1,
     "system-execution-required-no-current-build-registry-seeding-path": 1,
     "timer-check-flags-modern-bit-semantics-unproven": 1,

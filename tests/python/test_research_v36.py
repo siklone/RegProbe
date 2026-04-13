@@ -957,6 +957,7 @@ class PromotionStateTests(unittest.TestCase):
             "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm",
             "timer-rebase-threshold-drips-trigger-not-available-on-current-vm",
             "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
+            "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
         ]:
             record = {
                 "record_id": f"example.{blocker}",
@@ -988,6 +989,10 @@ class PromotionStateTests(unittest.TestCase):
 
             self.assertEqual(gate["next_missing_layer"], "intentional-hold")
             self.assertIn(blocker, gate["promotion_blockers"])
+
+            ghidra_gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "ghidra"}, {})
+
+            self.assertEqual(ghidra_gate["next_missing_layer"], "intentional-hold")
 
     def test_reboot_diff_boot_unsafe_blocker_upgrades_to_intentional_hold_lane(self) -> None:
         record = {

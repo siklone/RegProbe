@@ -320,6 +320,7 @@
     "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults and a clean observed-baseline state. It is not ready for validation or tweak exposure because the current build still lacks a direct symbol/string/caller pivot for any of the five values; this is an intentional Ghidra/static hold until a targeted binary probe or new trace appears.",
     "manual_review_required": true,
     "blocking_issues": [
+      "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
       "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
       "powerwatchdog-timeout-family-runtime-read-unresolved",
       "powerwatchdog-timeout-family-no-primary-current-build-doc"
