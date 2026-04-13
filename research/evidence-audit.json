@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T03:09:53.178844Z",
+  "generated_utc": "2026-04-13T03:11:06.440493Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -18385,8 +18385,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
         "dpc-watchdog-control-runtime-read-unresolved",
-        "live-state-conflicts-with-repo-docs",
         "no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
@@ -18477,7 +18477,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "conditional-initialization-unproven",
-        "live-state-conflicts-with-repo-docs",
+        "dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs",
         "no-primary-current-build-doc",
         "wpr-boot-registry-no-hit-current-build"
       ],

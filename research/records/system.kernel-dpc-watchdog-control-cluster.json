@@ -342,7 +342,7 @@
     "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, concrete current-build reader/writer proof, direct live value reads that show the sampled control globals are zero on the running build, a live-KD confirmed privileged `NtSetSystemInformation` writer callsite, a live-KD confirmed outer query wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`, Microsoft-documented public zero-as-disabled watchdog semantics, and current-build INIT descriptor bindings for all three registry value names. It is not ready for validation because the exact inner query arm still has not been isolated, the live state still conflicts with the repo-doc defaults, and no exact runtime registry read has been captured.",
     "manual_review_required": true,
     "blocking_issues": [
-      "live-state-conflicts-with-repo-docs",
+      "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
       "dpc-watchdog-control-runtime-read-unresolved",
       "no-primary-current-build-doc"
     ]
