@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T02:11:23.071987Z",
+  "generated_utc": "2026-04-13T02:12:29.858093Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -7121,7 +7121,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "boot-unsafe, do not probe without dedicated boot lane",
+        "boot-unsafe-dedicated-boot-lane-required",
         "boot-unsafe-on-isolated-pilot-profile",
         "intentional-hold",
         "no-primary-current-build-doc",
@@ -22843,7 +22843,7 @@
     }
   ],
   "blocker_breakdown": {
-    "boot-unsafe, do not probe without dedicated boot lane": 1,
+    "boot-unsafe-dedicated-boot-lane-required": 1,
     "boot-unsafe-on-isolated-pilot-profile": 1,
     "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,

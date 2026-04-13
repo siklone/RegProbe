@@ -8,7 +8,7 @@
   "revalidation_pending": 0,
   "stale_count": 0,
   "blocker_breakdown": {
-    "boot-unsafe, do not probe without dedicated boot lane": 1,
+    "boot-unsafe-dedicated-boot-lane-required": 1,
     "boot-unsafe-on-isolated-pilot-profile": 1,
     "conditional-initialization-unproven": 1,
     "conflicting-sources": 2,
@@ -34,5 +34,5 @@
   },
   "bench_completion_rate": 1.0,
   "missing_docs_count": 0,
-  "generated_at": "2026-04-13T02:11:31.861955Z"
+  "generated_at": "2026-04-13T02:12:31.381565Z"
 }
