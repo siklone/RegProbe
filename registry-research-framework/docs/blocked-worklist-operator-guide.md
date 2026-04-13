@@ -10,6 +10,18 @@ Use the summary first:
 winopt research list-blocked --summary
 ```
 
+Focus the summary on active work:
+
+```bash
+winopt research list-blocked --summary --actionability active
+```
+
+Focus the summary on one lane:
+
+```bash
+winopt research list-blocked --summary --lane runtime-trace
+```
+
 Work the active queue:
 
 ```bash
