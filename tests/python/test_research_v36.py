@@ -37,6 +37,8 @@ ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRI
 ghidra_autotrigger = load_module("generate_ghidra_autotrigger_seeds", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_seeds.py")
 ghidra_autotrigger_inputs = load_module("generate_ghidra_autotrigger_inputs", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_inputs.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
+ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
+ghidra_symbol_runner = load_module("run_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "run_ghidra_symbol_resolution_batch.py")
 ghidra_refresh_pipeline = load_module("refresh_ghidra_autotrigger_pipeline", FRAMEWORK_SCRIPTS / "refresh_ghidra_autotrigger_pipeline.py")
 ghidra_autotrigger_health = load_module("generate_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_health.py")
 ghidra_autotrigger_health_check = load_module("check_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_health.py")
@@ -2144,6 +2146,7 @@ class GhidraSymbolResolutionQueueTests(unittest.TestCase):
                 "source_bundle_path": "evidence/files/example/normalized-registry-bundle.json",
                 "source_run_id": "run-one",
                 "event_index": 1,
+                "suggested_patterns": ["AllowSystemRequiredPowerRequests"],
                 "unresolved_frames": [
                     "ntoskrnl.exe+0x1F234",
                     "UNKNOWN",
@@ -2155,6 +2158,7 @@ class GhidraSymbolResolutionQueueTests(unittest.TestCase):
                 "source_bundle_path": "evidence/files/example/normalized-registry-bundle.json",
                 "source_run_id": "run-two",
                 "event_index": 2,
+                "suggested_patterns": ["AllowSystemRequiredPowerRequests"],
                 "unresolved_frames": [
                     "ntoskrnl.exe+0x1F234",
                     "0xfffff80512345678",
@@ -2172,11 +2176,126 @@ class GhidraSymbolResolutionQueueTests(unittest.TestCase):
         self.assertEqual(payload["diagnostics"]["skipped_frame_counts"]["unknown_marker"], 1)
         self.assertEqual(payload["requests"][0]["lookup_key"], "ntoskrnl.exe+0x1f234")
         self.assertEqual(payload["requests"][0]["occurrence_count"], 2)
+        self.assertEqual(payload["requests"][0]["suggested_patterns"], ["AllowSystemRequiredPowerRequests"])
         self.assertEqual(
             payload["requests"][0]["candidate_ids"],
             ["power.control.allow-system-required-power-requests"],
         )
         self.assertIn("microsoft-public-symbol-server", payload["requests"][0]["suggested_symbol_sources"])
+
+
+class GhidraSymbolResolutionBatchTests(unittest.TestCase):
+    def test_symbol_resolution_batch_prepares_kvm_guest_jobs(self) -> None:
+        queue_payload = {
+            "requests": [
+                {
+                    "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x1f234",
+                    "priority_rank": 1,
+                    "lookup_key": "ntoskrnl.exe+0x1f234",
+                    "resolution_kind": "module_offset",
+                    "target_binary": "ntoskrnl.exe",
+                    "candidate_ids": ["power.control.allow-system-required-power-requests"],
+                    "candidate_count": 1,
+                    "occurrence_count": 2,
+                    "suggested_patterns": ["AllowSystemRequiredPowerRequests"],
+                    "frame_variants": ["ntoskrnl.exe+0x1F234"],
+                    "next_action_hint": "Resolve caller.",
+                    "source_bundle_paths": ["evidence/files/example/normalized-registry-bundle.json"],
+                    "source_run_ids": ["run-one"],
+                    "source_event_indices": [1],
+                }
+            ]
+        }
+        tool_status = {
+            "python3": {"present": True, "path": "/usr/bin/python3"},
+            "curl": {"present": True, "path": "/usr/bin/curl"},
+            "virsh": {"present": True, "path": "/usr/bin/virsh"},
+        }
+
+        batch = ghidra_symbol_batch.symbol_resolution_batch_from_queue(
+            queue_payload,
+            generated_utc="2026-04-13T00:00:00Z",
+            tool_status=tool_status,
+        )
+
+        self.assertEqual(batch["job_count"], 1)
+        self.assertEqual(batch["runnable_job_count"], 1)
+        self.assertEqual(batch["jobs"][0]["guest_binary_path"], r"C:\Windows\System32\ntoskrnl.exe")
+        self.assertTrue(batch["jobs"][0]["can_run_guest_orchestrator"])
+        self.assertEqual(batch["jobs"][0]["patterns"], ["AllowSystemRequiredPowerRequests"])
+        self.assertEqual(
+            batch["jobs"][0]["command_argv"][:3],
+            ["python3", "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py", "--binary-path"],
+        )
+
+    def test_symbol_resolution_batch_marks_missing_inputs(self) -> None:
+        queue_payload = {
+            "requests": [
+                {
+                    "request_id": "ghidra-symbol-plain-text",
+                    "priority_rank": 1,
+                    "lookup_key": "ntoskrnl.exe!PlainTextHint",
+                    "resolution_kind": "plain_text",
+                    "target_binary": "ntoskrnl.exe",
+                    "candidate_ids": ["power.keep"],
+                    "candidate_count": 1,
+                    "occurrence_count": 1,
+                    "suggested_patterns": [],
+                }
+            ]
+        }
+        tool_status = {
+            "python3": {"present": True, "path": "/usr/bin/python3"},
+            "curl": {"present": True, "path": "/usr/bin/curl"},
+            "virsh": {"present": True, "path": "/usr/bin/virsh"},
+        }
+
+        batch = ghidra_symbol_batch.symbol_resolution_batch_from_queue(
+            queue_payload,
+            generated_utc="2026-04-13T00:00:00Z",
+            tool_status=tool_status,
+        )
+
+        self.assertFalse(batch["jobs"][0]["can_run_guest_orchestrator"])
+        self.assertEqual(batch["jobs"][0]["missing_inputs"], ["patterns"])
+        self.assertIsNone(batch["jobs"][0]["command_argv"])
+
+
+class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
+    def test_symbol_resolution_run_plan_selects_runnable_jobs(self) -> None:
+        payload = {
+            "jobs": [
+                {
+                    "job_id": "job-1",
+                    "request_id": "request-1",
+                    "priority_rank": 1,
+                    "candidate_count": 1,
+                    "occurrence_count": 2,
+                    "dispatch_status": "prepared",
+                    "can_run_guest_orchestrator": True,
+                    "command_argv": ["python3", "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py"],
+                    "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+                    "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+                    "output_dir": "evidence/files/ghidra/job-1",
+                },
+                {
+                    "job_id": "job-2",
+                    "request_id": "request-2",
+                    "priority_rank": 2,
+                    "candidate_count": 1,
+                    "occurrence_count": 1,
+                    "dispatch_status": "prepared",
+                    "can_run_guest_orchestrator": False,
+                    "command_argv": None,
+                },
+            ]
+        }
+
+        plan = ghidra_symbol_runner.build_run_plan(payload, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertEqual(plan["selected_job_count"], 1)
+        self.assertEqual(plan["blocked_job_count"], 1)
+        self.assertEqual(plan["jobs"][0]["request_id"], "request-1")
 
 
 class GhidraAutotriggerPipelineTests(unittest.TestCase):

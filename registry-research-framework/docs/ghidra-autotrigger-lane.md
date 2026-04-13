@@ -50,6 +50,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Seed rows produced from unresolved caller-stack frames.
 - `registry-research-framework/queue/ghidra-symbol-resolution-queue.json`
   Aggregated symbol-resolution requests derived from actionable unresolved frames such as `module+0xoffset` and raw addresses.
+- `registry-research-framework/queue/ghidra-symbol-resolution-batch.json`
+  Prepared KVM guest symbolized-probe jobs built from the symbol-resolution queue.
+- `registry-research-framework/queue/ghidra-symbol-resolution-run.json`
+  Dry-run or execution plan for the prepared symbol-resolution jobs.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`
@@ -75,4 +79,4 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 
 The lane is intentionally split between discovery and execution. Discovery, dispatch planning, health reporting, and validation now work locally. Real headless execution is still blocked by the host environment: we do not currently have `pwsh` plus a runnable Ghidra install on this machine.
 
-The new symbol-resolution queue sits between seeds and dispatch. When the lane is not idle, that queue gives us an explicit list of offsets or addresses that still need names before we can expect clean decompiler pivots.
+The new symbol-resolution queue sits between seeds and dispatch. When the lane is not idle, that queue gives us an explicit list of offsets or addresses that still need names before we can expect clean decompiler pivots. The symbol-resolution batch now turns that list into prepared KVM guest symbolized-probe jobs, so the unresolved frames can move straight into a repeatable operator lane instead of staying as a passive note.

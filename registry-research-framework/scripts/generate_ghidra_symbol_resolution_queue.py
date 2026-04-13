@@ -138,6 +138,7 @@ def symbol_resolution_queue_from_seeds(
                     "_source_run_ids": set(),
                     "_source_event_indices": set(),
                     "_frame_variants": set(),
+                    "_suggested_patterns": set(),
                     "_occurrence_count": 0,
                 },
             )
@@ -149,6 +150,10 @@ def symbol_resolution_queue_from_seeds(
             if event_index > 0:
                 request["_source_event_indices"].add(event_index)
             request["_frame_variants"].add(str(frame).strip())
+            for pattern in seed.get("suggested_patterns") or []:
+                cleaned = str(pattern or "").strip()
+                if cleaned:
+                    request["_suggested_patterns"].add(cleaned)
             request["_occurrence_count"] += 1
 
     requests: list[dict[str, Any]] = []
@@ -181,6 +186,7 @@ def symbol_resolution_queue_from_seeds(
             "source_run_ids": sorted(row["_source_run_ids"]),
             "source_event_indices": sorted(row["_source_event_indices"]),
             "frame_variants": sorted(row["_frame_variants"]),
+            "suggested_patterns": sorted(row["_suggested_patterns"]),
             "suggested_symbol_sources": [
                 "microsoft-public-symbol-server",
                 "local-pdb-cache",
