@@ -305,6 +305,53 @@ class Program
         });
         researchCommand.AddCommand(evaluateCommand);
 
+        var showBlockedCommand = new Command("show-blocked", "Show blocked worklist detail for a candidate");
+        var showBlockedIdArg = new Argument<string>("candidate-id", "Blocked candidate id");
+        var showBlockedJsonOption = new Option<bool>("--json", "Emit blocked worklist detail as JSON");
+        showBlockedCommand.AddArgument(showBlockedIdArg);
+        showBlockedCommand.AddOption(showBlockedJsonOption);
+        showBlockedCommand.SetHandler(context =>
+        {
+            var candidateId = context.ParseResult.GetValueForArgument(showBlockedIdArg);
+            var emitJson = context.ParseResult.GetValueForOption(showBlockedJsonOption);
+            var catalog = new TweakPromotionGateCatalogService();
+            if (!catalog.TryResolveBlockedWorklist(candidateId, out var entry))
+            {
+                Console.WriteLine($"Candidate not found in blocked-worklist.json: {candidateId}");
+                context.ExitCode = 1;
+                return;
+            }
+
+            if (emitJson)
+            {
+                Console.WriteLine(JsonSerializer.Serialize(entry, JsonOptions));
+                context.ExitCode = 0;
+                return;
+            }
+
+            Console.WriteLine(entry.CandidateId);
+            Console.WriteLine($"  lane: {entry.NextMissingLayer}");
+            Console.WriteLine($"  actionability: {entry.Actionability}");
+            Console.WriteLine($"  priority: {entry.PriorityScore}");
+            Console.WriteLine($"  blockers: {string.Join(", ", entry.PromotionBlockers)}");
+            if (!string.IsNullOrWhiteSpace(entry.KeyPath))
+            {
+                Console.WriteLine($"  key: {entry.KeyPath}");
+            }
+            if (!string.IsNullOrWhiteSpace(entry.ValueName))
+            {
+                Console.WriteLine($"  value: {entry.ValueName}");
+            }
+            Console.WriteLine($"  next: {entry.NextActionHint}");
+            foreach (var artifact in entry.RecentAuditArtifacts)
+            {
+                Console.WriteLine($"  audit: {artifact}");
+            }
+
+            context.ExitCode = 0;
+        });
+        researchCommand.AddCommand(showBlockedCommand);
+
         var blockedCommand = new Command("list-blocked", "List blocked candidates");
         var reasonOption = new Option<string?>("--reason", "Only show blockers matching this reason");
         var worklistOption = new Option<bool>("--worklist", "Show the prioritized blocked worklist view");
