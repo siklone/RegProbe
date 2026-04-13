@@ -173,7 +173,7 @@
     "needs_vm_validation": true,
     "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, and bounded adjacent static context from retained Ghidra and local-KD query/store analysis. That is enough to keep the subtree as a standalone draft lane, but not enough yet to claim exact leaf defaults, exact binding semantics, or a safe restore story.",
     "blocking_issues": [
-      "powerrequestoverride-leaf-semantics-unresolved",
+      "powerrequestoverride-subtree-leaf-semantics-unresolved",
       "powerrequestoverride-static-context-adjacent-not-leaf-specific",
       "powerrequestoverride-restore-story-unproven-subtree-presence-only"
     ]

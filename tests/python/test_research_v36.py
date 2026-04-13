@@ -736,6 +736,7 @@ class PromotionStateTests(unittest.TestCase):
             "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
             "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
             "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
+            "power-session-watchdog-timeouts-exact-runtime-read-unresolved",
             "powerwatchdog-timeout-family-runtime-read-unresolved",
             "dpc-watchdog-control-runtime-read-unresolved",
             "timer-check-flags-wpr-boot-no-hit-current-build",
@@ -913,6 +914,7 @@ class PromotionStateTests(unittest.TestCase):
             "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
             "powerrequestoverride-static-context-adjacent-not-leaf-specific",
             "dpc-watchdog-profile-conditional-initialization-unproven",
+            "power-session-watchdog-timeouts-specific-caller-unresolved",
         ]:
             record = {
                 "record_id": f"example.{blocker}",

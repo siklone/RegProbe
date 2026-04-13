@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T03:37:30.826071Z",
+  "generated_utc": "2026-04-13T03:40:05.615278Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -6848,9 +6848,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "powerrequestoverride-leaf-semantics-unresolved",
         "powerrequestoverride-restore-story-unproven-subtree-presence-only",
-        "powerrequestoverride-static-context-adjacent-not-leaf-specific"
+        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
+        "powerrequestoverride-subtree-leaf-semantics-unresolved"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -8169,8 +8169,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "watchdog-timeouts-exact-runtime-read-unresolved",
-        "watchdog-timeouts-specific-caller-unresolved"
+        "power-session-watchdog-timeouts-exact-runtime-read-unresolved",
+        "power-session-watchdog-timeouts-specific-caller-unresolved"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18840,8 +18840,8 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
-        "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build",
-        "force-bugcheck-for-dpc-watchdog-semantics-unproven"
+        "force-bugcheck-dpc-watchdog-semantics-unproven",
+        "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -22834,14 +22834,15 @@
     "conflicting-sources": 2,
     "dpc-watchdog-profile-conditional-initialization-unproven": 1,
     "enable-virtualization-research-only-raw-policy-system-value": 1,
-    "force-bugcheck-for-dpc-watchdog-semantics-unproven": 1,
+    "force-bugcheck-dpc-watchdog-semantics-unproven": 1,
     "hiber-file-size-percent-research-only-raw-power-manager-value": 1,
     "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm": 1,
     "no-primary-current-build-doc": 11,
     "no-runtime-proof": 13,
-    "powerrequestoverride-leaf-semantics-unresolved": 1,
+    "power-session-watchdog-timeouts-specific-caller-unresolved": 1,
     "powerrequestoverride-restore-story-unproven-subtree-presence-only": 1,
     "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
+    "powerrequestoverride-subtree-leaf-semantics-unresolved": 1,
     "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit": 1,
     "system-execution-required-init-walker-not-symbol-resolved": 1,
     "timer-check-flags-modern-bit-semantics-unproven": 1,
@@ -22849,7 +22850,6 @@
     "ttmenabled-boot-unsafe-dedicated-boot-lane-required": 1,
     "ttmenabled-boot-unsafe-on-isolated-pilot-profile": 1,
     "ttmenabled-reader-unresolved": 1,
-    "watchdog-timeouts-specific-caller-unresolved": 1,
     "win32-callout-watchdog-bugcheck-semantics-unproven": 1,
     "win32k-callout-watchdog-override-semantics-unproven": 1
   },
