@@ -312,23 +312,53 @@ class Program
         var laneOption = new Option<string?>("--lane", "Only show blocked candidates for a specific next-missing-layer lane");
         var topOption = new Option<int?>("--top", "Limit the number of blocked candidates shown");
         var blockedJsonOption = new Option<bool>("--json", "Emit blocked candidates as JSON");
+        var blockedSummaryOption = new Option<bool>("--summary", "Show blocked lane counts instead of individual candidates");
         blockedCommand.AddOption(reasonOption);
         blockedCommand.AddOption(worklistOption);
         blockedCommand.AddOption(actionableOnlyOption);
         blockedCommand.AddOption(laneOption);
         blockedCommand.AddOption(topOption);
         blockedCommand.AddOption(blockedJsonOption);
+        blockedCommand.AddOption(blockedSummaryOption);
         blockedCommand.SetHandler(context =>
         {
             var reason = context.ParseResult.GetValueForOption(reasonOption);
             var emitJson = context.ParseResult.GetValueForOption(blockedJsonOption);
+            var emitSummary = context.ParseResult.GetValueForOption(blockedSummaryOption);
             var useWorklist = context.ParseResult.GetValueForOption(worklistOption)
                               || context.ParseResult.GetValueForOption(actionableOnlyOption)
+                              || emitSummary
                               || context.ParseResult.GetValueForOption(topOption) is > 0
                               || !string.IsNullOrWhiteSpace(context.ParseResult.GetValueForOption(laneOption));
             var catalog = new TweakPromotionGateCatalogService();
             if (useWorklist)
             {
+                if (emitSummary)
+                {
+                    var payload = new
+                    {
+                        catalog.BlockedWorklist.GeneratedAt,
+                        catalog.BlockedWorklist.BlockedCount,
+                        LaneCounts = catalog.BlockedWorklist.LaneCounts,
+                    };
+
+                    if (emitJson)
+                    {
+                        Console.WriteLine(JsonSerializer.Serialize(payload, JsonOptions));
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Blocked candidates: {catalog.BlockedWorklist.BlockedCount}");
+                        foreach (var pair in catalog.BlockedWorklist.LaneCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine($"{pair.Key}: {pair.Value}");
+                        }
+                    }
+
+                    context.ExitCode = 0;
+                    return;
+                }
+
                 var entries = catalog.ListBlockedWorklist(
                     reason,
                     context.ParseResult.GetValueForOption(laneOption),
