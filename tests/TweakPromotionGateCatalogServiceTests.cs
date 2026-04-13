@@ -108,6 +108,10 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                 "ghidra": 1,
                 "intentional-hold": 1
               },
+              "ordered_lanes": [
+                "ghidra",
+                "intentional-hold"
+              ],
               "lane_focus": {
                 "ghidra": {
                   "candidate_id": "power.test-gate",
@@ -244,6 +248,7 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         Assert.Single(actionable[0].RecentAuditArtifacts);
         Assert.Equal("winopt research show-blocked power.test-gate --json", actionable[0].SuggestedCommand);
         Assert.Equal(1, service.BlockedWorklist.ActionabilityCounts["active"]);
+        Assert.Equal("ghidra", service.BlockedWorklist.OrderedLanes[0]);
         Assert.Single(service.BlockedWorklist.TopActionableCandidates);
         Assert.Single(service.BlockedWorklist.TopHoldCandidates);
         Assert.True(service.BlockedWorklist.LaneFocus.ContainsKey("ghidra"));

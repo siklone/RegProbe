@@ -392,6 +392,7 @@ class Program
                         catalog.BlockedWorklist.BlockedCount,
                         ActionabilityCounts = catalog.BlockedWorklist.ActionabilityCounts,
                         LaneCounts = catalog.BlockedWorklist.LaneCounts,
+                        OrderedLanes = catalog.BlockedWorklist.OrderedLanes,
                         LaneFocus = catalog.BlockedWorklist.LaneFocus,
                         TopActionableCandidates = catalog.BlockedWorklist.TopActionableCandidates,
                         TopHoldCandidates = catalog.BlockedWorklist.TopHoldCandidates,
@@ -408,12 +409,16 @@ class Program
                         {
                             Console.WriteLine($"{pair.Key}: {pair.Value}");
                         }
-                        foreach (var pair in catalog.BlockedWorklist.LaneCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
+                        var orderedLanes = catalog.BlockedWorklist.OrderedLanes.Count > 0
+                            ? catalog.BlockedWorklist.OrderedLanes
+                            : catalog.BlockedWorklist.LaneCounts.Keys.OrderBy(key => key, StringComparer.OrdinalIgnoreCase).ToList();
+                        foreach (var lane in orderedLanes)
                         {
-                            if (catalog.BlockedWorklist.LaneFocus.TryGetValue(pair.Key, out var laneFocus)
+                            var count = catalog.BlockedWorklist.LaneCounts.TryGetValue(lane, out var laneCount) ? laneCount : 0;
+                            if (catalog.BlockedWorklist.LaneFocus.TryGetValue(lane, out var laneFocus)
                                 && !string.IsNullOrWhiteSpace(laneFocus.CandidateId))
                             {
-                                Console.WriteLine($"{pair.Key}: {pair.Value} -> {laneFocus.CandidateId}");
+                                Console.WriteLine($"{lane}: {count} -> {laneFocus.CandidateId}");
                                 if (!string.IsNullOrWhiteSpace(laneFocus.SuggestedCommand))
                                 {
                                     Console.WriteLine($"  command: {laneFocus.SuggestedCommand}");
@@ -425,7 +430,7 @@ class Program
                             }
                             else
                             {
-                                Console.WriteLine($"{pair.Key}: {pair.Value}");
+                                Console.WriteLine($"{lane}: {count}");
                             }
                         }
                         if (catalog.BlockedWorklist.TopActionableCandidates.Count > 0)

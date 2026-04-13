@@ -23,6 +23,7 @@ public sealed class BlockedWorklistCatalog
     public int BlockedCount { get; set; }
     public Dictionary<string, int> ActionabilityCounts { get; set; } = new(StringComparer.OrdinalIgnoreCase);
     public Dictionary<string, int> LaneCounts { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+    public List<string> OrderedLanes { get; set; } = new();
     public Dictionary<string, BlockedLaneFocus> LaneFocus { get; set; } = new(StringComparer.OrdinalIgnoreCase);
     public List<string> TopActionableCandidates { get; set; } = new();
     public List<string> TopHoldCandidates { get; set; } = new();
