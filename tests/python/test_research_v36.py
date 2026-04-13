@@ -3639,9 +3639,12 @@ class GhidraAutotriggerSmokeTests(unittest.TestCase):
             self.assertEqual(payload["transfer_status"], "ready")
             self.assertEqual(payload["transfer_pack_status"], "ready")
             self.assertEqual(payload["transfer_pack_check_status"], "ok")
+            self.assertEqual(payload["transfer_pack_import_status"], "ok")
             self.assertIn("module_offset", payload["frame_resolution_counts"])
             self.assertIn("raw_address", payload["frame_resolution_counts"])
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-check.json").exists())
+            self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-import.json").exists())
+            self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-import" / "CHECKSUMS.json").exists())
             self.assertTrue(output_path.exists())
             self.assertTrue(markdown_path.exists())
 

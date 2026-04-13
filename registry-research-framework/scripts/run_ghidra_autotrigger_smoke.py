@@ -34,6 +34,10 @@ transfer_pack_check_mod = load_local_module(
     "ghidra_smoke_transfer_pack_check",
     FRAMEWORK_ROOT / "scripts" / "check_ghidra_symbol_resolution_transfer_pack.py",
 )
+transfer_pack_import_mod = load_local_module(
+    "ghidra_smoke_transfer_pack_import",
+    FRAMEWORK_ROOT / "scripts" / "unpack_ghidra_symbol_resolution_transfer_pack.py",
+)
 
 
 def now_utc() -> str:
@@ -169,6 +173,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Dispatch jobs: `{counts.get('dispatch_job_count')}`",
         f"- Transfer pack jobs: `{counts.get('transfer_pack_selected_job_count')}`",
         f"- Transfer pack check: `{payload.get('transfer_pack_check_status')}`",
+        f"- Transfer pack import: `{payload.get('transfer_pack_import_status')}`",
         f"- Operator blocker: `{operator.get('blocker')}`",
         f"- Next action: `{operator.get('next_action')}`",
         "",
@@ -244,6 +249,9 @@ def run_smoke(
     transfer_pack_archive_path = output_root / "ghidra-symbol-resolution-transfer-pack.zip"
     transfer_pack_check_path = output_root / "ghidra-symbol-resolution-transfer-pack-check.json"
     transfer_pack_check_markdown_path = output_root / "ghidra-symbol-resolution-transfer-pack-check.md"
+    transfer_pack_import_root = output_root / "ghidra-symbol-resolution-transfer-pack-import"
+    transfer_pack_import_path = output_root / "ghidra-symbol-resolution-transfer-pack-import.json"
+    transfer_pack_import_markdown_path = output_root / "ghidra-symbol-resolution-transfer-pack-import.md"
 
     sync_payload = sync_lane_mod.sync_lane(
         discover_input_roots=[smoke_input_root],
@@ -278,6 +286,13 @@ def run_smoke(
     )
     write_json(transfer_pack_check_path, transfer_pack_check_payload)
     write_text(transfer_pack_check_markdown_path, transfer_pack_check_mod.render_markdown(transfer_pack_check_payload))
+    transfer_pack_import_payload = transfer_pack_import_mod.unpack_transfer_pack(
+        transfer_pack_payload,
+        summary_path=transfer_pack_summary_path,
+        output_root=transfer_pack_import_root,
+        output_path=transfer_pack_import_path,
+        markdown_path=transfer_pack_import_markdown_path,
+    )
 
     refresh = sync_payload.get("refresh") or {}
     counts = {
@@ -301,6 +316,7 @@ def run_smoke(
             "symbol-batch-job-count-positive": counts["symbol_resolution_batch_job_count"] > 0,
             "transfer-pack-ready": transfer_pack_payload.get("pack_status") == "ready",
             "transfer-pack-check-ok": transfer_pack_check_payload.get("check_status") == "ok",
+            "transfer-pack-import-ok": transfer_pack_import_payload.get("import_status") == "ok",
         }.items()
         if not passed
     ]
@@ -340,11 +356,15 @@ def run_smoke(
             "transfer_pack_archive_path": autotrigger.portable_path(transfer_pack_archive_path),
             "transfer_pack_check_path": autotrigger.portable_path(transfer_pack_check_path),
             "transfer_pack_check_markdown_path": autotrigger.portable_path(transfer_pack_check_markdown_path),
+            "transfer_pack_import_root": autotrigger.portable_path(transfer_pack_import_root),
+            "transfer_pack_import_path": autotrigger.portable_path(transfer_pack_import_path),
+            "transfer_pack_import_markdown_path": autotrigger.portable_path(transfer_pack_import_markdown_path),
         },
         "handoff_status": handoff_payload.get("handoff_status"),
         "transfer_status": transfer_payload.get("transfer_status"),
         "transfer_pack_status": transfer_pack_payload.get("pack_status"),
         "transfer_pack_check_status": transfer_pack_check_payload.get("check_status"),
+        "transfer_pack_import_status": transfer_pack_import_payload.get("import_status"),
     }
     write_json(output_path, payload)
     write_text(markdown_path, render_markdown(payload))
