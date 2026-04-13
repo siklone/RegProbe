@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T07:47:20.472164Z",
+  "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
+  "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
+  "batch_path": "registry-research-framework/queue/ghidra-dispatch-batch.json",
+  "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
+  "counts": {
+    "queue_jobs": 4,
+    "autotrigger_seeds": 0,
+    "dispatch_jobs": 4,
+    "autotrigger_dispatch_jobs": 0,
+    "run_selected_jobs": 4,
+    "run_blocked_jobs": 0
+  },
+  "runner": {
+    "available": false,
+    "mode": "dry-run",
+    "error": null
+  },
+  "coverage": {
+    "queued_candidate_ids": [
+      "power.control.allow-system-required-power-requests",
+      "power.session-watchdog-timeouts",
+      "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "system.kernel-dpc-watchdog-profile-cluster"
+    ],
+    "seed_candidate_ids": [],
+    "autotrigger_dispatch_candidate_ids": []
+  },
+  "focus": {
+    "top_queue_candidate": "power.control.allow-system-required-power-requests",
+    "top_autotrigger_candidate": null,
+    "missing_input_jobs": []
+  }
+}

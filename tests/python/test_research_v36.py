@@ -36,6 +36,7 @@ ghidra_dispatch_batch = load_module("generate_ghidra_dispatch_batch", FRAMEWORK_
 ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "run_ghidra_dispatch_batch.py")
 ghidra_autotrigger = load_module("generate_ghidra_autotrigger_seeds", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_seeds.py")
 ghidra_refresh_pipeline = load_module("refresh_ghidra_autotrigger_pipeline", FRAMEWORK_SCRIPTS / "refresh_ghidra_autotrigger_pipeline.py")
+ghidra_autotrigger_health = load_module("generate_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_health.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2243,6 +2244,55 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             self.assertEqual(payload["bundle_count"], 1)
             self.assertEqual(payload["seed_count"], 1)
             self.assertEqual(payload["dispatch_autotrigger_matched_job_count"], 1)
+
+
+class GhidraAutotriggerHealthTests(unittest.TestCase):
+    def test_health_payload_summarizes_queue_seed_batch_and_run_surfaces(self) -> None:
+        queue_rows = [
+            {"candidate_id": "power.keep"},
+            {"candidate_id": "power.other"},
+        ]
+        seed_rows = [
+            {"candidate_id": "power.keep"},
+        ]
+        batch = {
+            "job_count": 2,
+            "jobs": [
+                {
+                    "candidate_id": "power.keep",
+                    "autotrigger_seed_count": 1,
+                    "missing_inputs": [],
+                },
+                {
+                    "candidate_id": "power.other",
+                    "autotrigger_seed_count": 0,
+                    "missing_inputs": ["target_binary"],
+                },
+            ],
+        }
+        run = {
+            "mode": "dry-run",
+            "runner_available": False,
+            "selected_job_count": 1,
+            "blocked_job_count": 1,
+            "error": "pwsh-not-found",
+        }
+
+        payload = ghidra_autotrigger_health.health_payload(
+            queue_rows,
+            seed_rows,
+            batch,
+            run,
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(payload["counts"]["queue_jobs"], 2)
+        self.assertEqual(payload["counts"]["autotrigger_seeds"], 1)
+        self.assertEqual(payload["counts"]["autotrigger_dispatch_jobs"], 1)
+        self.assertFalse(payload["runner"]["available"])
+        self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
+        self.assertEqual(payload["focus"]["top_autotrigger_candidate"], "power.keep")
+        self.assertEqual(payload["focus"]["missing_input_jobs"][0]["candidate_id"], "power.other")
 
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):
