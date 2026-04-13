@@ -1597,6 +1597,7 @@ class BlockedWorklistTests(unittest.TestCase):
             self.assertTrue(item.get("candidate_id"))
             self.assertTrue(item.get("next_missing_layer"))
             self.assertTrue(item.get("next_action_hint"))
+            self.assertTrue(item.get("suggested_command"))
             self.assertIn(item.get("actionability"), {"active", "hold"})
             self.assertIsInstance(item.get("priority_score"), int)
             self.assertIsInstance(item.get("promotion_blockers"), list)
@@ -1655,6 +1656,16 @@ class BlockedWorklistTests(unittest.TestCase):
         )
 
         self.assertGreater(specific, generic)
+
+    def test_suggested_command_prefers_show_blocked_for_active_lanes(self) -> None:
+        self.assertEqual(
+            blocked_worklist_lib.suggested_command_for("power.test-gate", "ghidra"),
+            "winopt research show-blocked power.test-gate --json",
+        )
+        self.assertEqual(
+            blocked_worklist_lib.suggested_command_for("power.test-gate", "intentional-hold"),
+            "winopt research list-blocked --worklist --lane intentional-hold",
+        )
 
 
 if __name__ == "__main__":

@@ -124,6 +124,7 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                   "recent_audit_artifacts": [
                     "registry-research-framework/audit/power-test-runtime-audit-20260413.json"
                   ],
+                  "suggested_command": "winopt research show-blocked power.test-gate --json",
                   "next_action_hint": "Continue static RE."
                 },
                 {
@@ -139,6 +140,7 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                   "key_path": "HKLM\\\\Software\\\\Hold",
                   "value_name": "Enabled",
                   "recent_audit_artifacts": [],
+                  "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
                   "next_action_hint": "Wait for a safer lane."
                 }
               ]
@@ -221,10 +223,12 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         Assert.Equal("power.test-gate", actionable[0].CandidateId);
         Assert.Equal("active", actionable[0].Actionability);
         Assert.Single(actionable[0].RecentAuditArtifacts);
+        Assert.Equal("winopt research show-blocked power.test-gate --json", actionable[0].SuggestedCommand);
         Assert.Single(service.BlockedWorklist.TopActionableCandidates);
         Assert.True(service.TryResolveBlockedWorklist("power.test-gate", out var entry));
         Assert.Equal(33, entry.PriorityScore);
         Assert.Single(entry.RecentAuditArtifacts);
+        Assert.Equal("winopt research show-blocked power.test-gate --json", entry.SuggestedCommand);
     }
 
     public void Dispose()

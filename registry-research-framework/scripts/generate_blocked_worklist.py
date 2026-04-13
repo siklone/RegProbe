@@ -68,6 +68,12 @@ def priority_score_for(lane: str, blocker_count: int) -> int:
     return int(LANE_PRIORITY.get(lane, 0)) - int(blocker_count)
 
 
+def suggested_command_for(candidate_id: str, lane: str) -> str:
+    if lane in {"ghidra", "runtime-trace", "restore-story"}:
+        return f"winopt research show-blocked {candidate_id} --json"
+    return f"winopt research list-blocked --worklist --lane {lane}"
+
+
 def candidate_slug_tokens(candidate_id: str) -> list[str]:
     parts = [segment for segment in candidate_id.lower().split(".") if segment]
     tokens: list[str] = []
@@ -182,6 +188,7 @@ def build_worklist() -> dict[str, Any]:
                 "key_path": str(target.get("path") or entry.get("key_path") or ""),
                 "value_name": str(target.get("value_name") or entry.get("value_name") or ""),
                 "recent_audit_artifacts": recent_audit_artifacts_for(candidate_id),
+                "suggested_command": suggested_command_for(candidate_id, lane),
                 "next_action_hint": blocker_hint(blockers, lane),
             }
         )
@@ -248,6 +255,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         artifacts = item.get("recent_audit_artifacts") or []
         if artifacts:
             lines.append(f"- Recent audit artifacts: {', '.join(f'`{value}`' for value in artifacts)}")
+        if item.get("suggested_command"):
+            lines.append(f"- Suggested command: `{item['suggested_command']}`")
         lines.append(f"- Next action hint: {item['next_action_hint']}")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"

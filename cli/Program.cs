@@ -342,6 +342,10 @@ class Program
             {
                 Console.WriteLine($"  value: {entry.ValueName}");
             }
+            if (!string.IsNullOrWhiteSpace(entry.SuggestedCommand))
+            {
+                Console.WriteLine($"  command: {entry.SuggestedCommand}");
+            }
             Console.WriteLine($"  next: {entry.NextActionHint}");
             foreach (var artifact in entry.RecentAuditArtifacts)
             {

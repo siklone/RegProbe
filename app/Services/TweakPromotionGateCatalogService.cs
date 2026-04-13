@@ -38,6 +38,7 @@ public sealed class BlockedWorklistEntry
     public string KeyPath { get; set; } = string.Empty;
     public string ValueName { get; set; } = string.Empty;
     public List<string> RecentAuditArtifacts { get; set; } = new();
+    public string SuggestedCommand { get; set; } = string.Empty;
     public string NextActionHint { get; set; } = string.Empty;
 }
 
@@ -519,6 +520,7 @@ public sealed class TweakPromotionGateCatalogService
             KeyPath = entry.KeyPath,
             ValueName = entry.ValueName,
             RecentAuditArtifacts = entry.RecentAuditArtifacts.ToList(),
+            SuggestedCommand = entry.SuggestedCommand,
             NextActionHint = entry.NextActionHint,
         };
     }
