@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T15:27:26.925529Z",
+  "source_import_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-import.json",
+  "execution_plan_status": "ready",
+  "operator": {
+    "blocker": "execution-plan-ready",
+    "next_action": "Run the destination_command values from the imported pack root on the KVM-capable host."
+  },
+  "import_root": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-import",
+  "counts": {
+    "ready_jobs": 4,
+    "blocked_jobs": 0,
+    "candidate_count": 4
+  },
+  "errors": [],
+  "jobs": [
+    {
+      "command_file": "01-ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver.txt",
+      "request_id": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
+      "target_binary": "ntoskrnl.exe",
+      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
+      "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests"
+      ],
+      "patterns": [
+        "AllowAudioToEnableExecutionRequiredPowerRequests"
+      ],
+      "original_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-01-power-control-allow-audio-to-enable-execution-required-power-requests --pattern AllowAudioToEnableExecutionRequiredPowerRequests",
+      "destination_command": "python3 repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-01-power-control-allow-audio-to-enable-execution-required-power-requests --pattern AllowAudioToEnableExecutionRequiredPowerRequests",
+      "missing_inputs": [],
+      "ready": true
+    },
+    {
+      "command_file": "02-ghidra-symbol-02-ntoskrnl-exe-0x1920.txt",
+      "request_id": "ghidra-symbol-02-ntoskrnl-exe-0x1920",
+      "target_binary": "ntoskrnl.exe",
+      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "original_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-02-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "destination_command": "python3 repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-02-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "missing_inputs": [],
+      "ready": true
+    },
+    {
+      "command_file": "03-ghidra-symbol-03-ntoskrnl-exe-0x2c80.txt",
+      "request_id": "ghidra-symbol-03-ntoskrnl-exe-0x2c80",
+      "target_binary": "ntoskrnl.exe",
+      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
+      "candidate_ids": [
+        "system.kernel-dpc-watchdog-profile-cluster"
+      ],
+      "patterns": [
+        "DpcWatchdogProfileBufferSizeBytes"
+      ],
+      "original_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-03-system-kernel-dpc-watchdog-profile-cluster --pattern DpcWatchdogProfileBufferSizeBytes",
+      "destination_command": "python3 repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-03-system-kernel-dpc-watchdog-profile-cluster --pattern DpcWatchdogProfileBufferSizeBytes",
+      "missing_inputs": [],
+      "ready": true
+    },
+    {
+      "command_file": "04-ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002.txt",
+      "request_id": "ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002",
+      "target_binary": "ntoskrnl.exe",
+      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
+      "candidate_ids": [
+        "power.session-watchdog-timeouts"
+      ],
+      "patterns": [
+        "WatchdogResumeTimeout"
+      ],
+      "original_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-04-power-session-watchdog-timeouts --pattern WatchdogResumeTimeout",
+      "destination_command": "python3 repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-04-power-session-watchdog-timeouts --pattern WatchdogResumeTimeout",
+      "missing_inputs": [],
+      "ready": true
+    }
+  ],
+  "blocked_jobs": []
+}

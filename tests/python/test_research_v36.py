@@ -50,6 +50,7 @@ ghidra_symbol_transfer = load_module("generate_ghidra_symbol_resolution_transfer
 ghidra_symbol_transfer_pack = load_module("materialize_ghidra_symbol_resolution_transfer_pack", FRAMEWORK_SCRIPTS / "materialize_ghidra_symbol_resolution_transfer_pack.py")
 ghidra_symbol_transfer_pack_check = load_module("check_ghidra_symbol_resolution_transfer_pack", FRAMEWORK_SCRIPTS / "check_ghidra_symbol_resolution_transfer_pack.py")
 ghidra_symbol_transfer_pack_unpack = load_module("unpack_ghidra_symbol_resolution_transfer_pack", FRAMEWORK_SCRIPTS / "unpack_ghidra_symbol_resolution_transfer_pack.py")
+ghidra_transfer_pack_execution = load_module("generate_ghidra_transfer_pack_execution_plan", FRAMEWORK_SCRIPTS / "generate_ghidra_transfer_pack_execution_plan.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2636,6 +2637,69 @@ class GhidraSymbolResolutionTransferPackTests(unittest.TestCase):
             self.assertEqual(payload["counts"]["extracted_files"], summary["counts"]["pack_files_checksummed"])
             self.assertTrue((import_root / "CHECKSUMS.json").exists())
             self.assertTrue((import_root / "commands" / summary["command_files"][0]).exists())
+
+    def test_execution_plan_from_import_rewrites_commands_to_imported_repo_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            import_root = temp_root / "import"
+            command_root = import_root / "commands"
+            script_path = import_root / "repo" / "scripts" / "vm-kvm" / "run-guest-ghidra-symbolized-probe.py"
+            command_root.mkdir(parents=True, exist_ok=True)
+            script_path.parent.mkdir(parents=True, exist_ok=True)
+            script_path.write_text("# runner\n", encoding="utf-8")
+            (command_root / "01-request-1.txt").write_text(
+                "\n".join(
+                    [
+                        "request_id: request-1",
+                        "target_binary: ntoskrnl.exe",
+                        r"guest_binary_path: C:\Windows\System32\ntoskrnl.exe",
+                        "candidate_ids: power.keep",
+                        "patterns: AllowSystemRequiredPowerRequests",
+                        "",
+                        r"python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntoskrnl.exe --pattern AllowSystemRequiredPowerRequests",
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            import_payload = {
+                "import_status": "ok",
+                "output_root": import_root.as_posix(),
+                "errors": [],
+            }
+
+            payload = ghidra_transfer_pack_execution.execution_plan_from_import(
+                import_payload,
+                import_path=temp_root / "import.json",
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+
+            self.assertEqual(payload["execution_plan_status"], "ready")
+            self.assertEqual(payload["counts"]["ready_jobs"], 1)
+            self.assertEqual(payload["jobs"][0]["request_id"], "request-1")
+            self.assertTrue(payload["jobs"][0]["destination_command"].startswith("python3 repo/scripts/"))
+            self.assertEqual(payload["jobs"][0]["missing_inputs"], [])
+
+    def test_execution_plan_blocks_missing_import_runner_script(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            import_root = temp_root / "import"
+            command_root = import_root / "commands"
+            command_root.mkdir(parents=True, exist_ok=True)
+            (command_root / "01-request-1.txt").write_text(
+                "request_id: request-1\n\npython3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --pattern Example\n",
+                encoding="utf-8",
+            )
+
+            payload = ghidra_transfer_pack_execution.execution_plan_from_import(
+                {"import_status": "ok", "output_root": import_root.as_posix(), "errors": []},
+                import_path=temp_root / "import.json",
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+
+            self.assertEqual(payload["execution_plan_status"], "blocked")
+            self.assertEqual(payload["counts"]["blocked_jobs"], 1)
+            self.assertTrue(any(item.startswith("missing-script:") for item in payload["blocked_jobs"][0]["missing_inputs"]))
 
 
 class GhidraAutotriggerPipelineTests(unittest.TestCase):

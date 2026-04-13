@@ -72,6 +72,12 @@ Validate and unpack a transfer archive on the destination host:
 python3 registry-research-framework/scripts/unpack_ghidra_symbol_resolution_transfer_pack.py
 ```
 
+Generate the destination execution plan from an imported pack:
+
+```bash
+python3 registry-research-framework/scripts/generate_ghidra_transfer_pack_execution_plan.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -116,6 +122,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Destination-host import result for a verified transfer archive.
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-import.md`
   Short import summary with extracted file counts and errors.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-plan.json`
+  Destination-host execution plan generated from imported command files.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-plan.md`
+  Human-readable list of ready destination commands and blockers.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`
@@ -158,3 +168,5 @@ Because fresh caller-stack bundles are still intermittent, the lane now also has
 The smoke harness also materializes, verifies, and imports the transfer pack. A passing smoke run now means the lane can produce symbol-resolution jobs, package the required helper files, hash the payload, validate the zip, and prove the destination-side unpack path before anyone moves it to another host.
 
 For the destination side, the unpack helper validates the summary and archive before extraction, then writes an import surface. This keeps the transfer lane reversible: a pack can be checked in place, copied as a zip, checked again from the archive alone, and unpacked only after those checks pass.
+
+After import, the execution-plan helper rewrites the original repo-relative commands into imported-pack commands that run from the extracted pack root. It does not execute anything by itself; it gives the operator a final ready/blocked surface before touching the VM.
