@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T17:27:42.174714Z",
+  "generated_utc": "2026-04-13T17:30:23.812141Z",
   "smoke_status": "ok",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "output_root": "registry-research-framework/audit/ghidra-autotrigger-smoke",
@@ -62,7 +62,9 @@
     "execution_plan_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-execution-plan.json",
     "execution_plan_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-execution-plan.md",
     "execution_run_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-execution-run.json",
-    "execution_run_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-execution-run.md"
+    "execution_run_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-execution-run.md",
+    "execution_run_check_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-execution-run-check.json",
+    "execution_run_check_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer-pack-execution-run-check.md"
   },
   "handoff_status": "ready",
   "transfer_status": "ready",
@@ -70,5 +72,6 @@
   "transfer_pack_check_status": "ok",
   "transfer_pack_import_status": "ok",
   "execution_plan_status": "ready",
-  "execution_run_status": "ready"
+  "execution_run_status": "ready",
+  "execution_run_check_status": "ok"
 }

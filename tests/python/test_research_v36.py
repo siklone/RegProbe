@@ -52,6 +52,7 @@ ghidra_symbol_transfer_pack_check = load_module("check_ghidra_symbol_resolution_
 ghidra_symbol_transfer_pack_unpack = load_module("unpack_ghidra_symbol_resolution_transfer_pack", FRAMEWORK_SCRIPTS / "unpack_ghidra_symbol_resolution_transfer_pack.py")
 ghidra_transfer_pack_execution = load_module("generate_ghidra_transfer_pack_execution_plan", FRAMEWORK_SCRIPTS / "generate_ghidra_transfer_pack_execution_plan.py")
 ghidra_transfer_pack_execution_run = load_module("run_ghidra_transfer_pack_execution_plan", FRAMEWORK_SCRIPTS / "run_ghidra_transfer_pack_execution_plan.py")
+ghidra_transfer_pack_execution_run_check = load_module("check_ghidra_transfer_pack_execution_run", FRAMEWORK_SCRIPTS / "check_ghidra_transfer_pack_execution_run.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2774,6 +2775,74 @@ class GhidraSymbolResolutionTransferPackTests(unittest.TestCase):
             self.assertEqual(payload["counts"]["blocked_jobs"], 1)
             self.assertIn("execution_plan_status is not ready", payload["errors"])
 
+    def test_execution_run_check_accepts_ready_dry_run(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            import_root = temp_root / "import"
+            import_root.mkdir(parents=True, exist_ok=True)
+            payload = ghidra_transfer_pack_execution_run_check.validate_execution_run(
+                {
+                    "execution_run_status": "ready",
+                    "mode": "dry-run",
+                    "counts": {
+                        "planned_jobs": 1,
+                        "ready_jobs": 1,
+                        "blocked_jobs": 0,
+                        "executed_jobs": 0,
+                    },
+                    "jobs": [
+                        {
+                            "request_id": "request-1",
+                            "cwd": import_root.as_posix(),
+                            "argv": ["python3", "repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py"],
+                            "command": "python3 repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+                            "ready": True,
+                            "executed": False,
+                            "missing_inputs": [],
+                        }
+                    ],
+                    "blocked_jobs": [],
+                },
+                run_path=temp_root / "execution-run.json",
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+
+            self.assertEqual(payload["check_status"], "ok")
+            self.assertEqual(payload["counts"]["ready_jobs"], 1)
+
+    def test_execution_run_check_rejects_count_mismatch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            payload = ghidra_transfer_pack_execution_run_check.validate_execution_run(
+                {
+                    "execution_run_status": "ready",
+                    "mode": "dry-run",
+                    "counts": {
+                        "planned_jobs": 2,
+                        "ready_jobs": 2,
+                        "blocked_jobs": 0,
+                        "executed_jobs": 0,
+                    },
+                    "jobs": [
+                        {
+                            "request_id": "request-1",
+                            "cwd": (temp_root / "missing").as_posix(),
+                            "argv": [],
+                            "command": "",
+                            "ready": True,
+                            "missing_inputs": [],
+                        }
+                    ],
+                    "blocked_jobs": [],
+                },
+                run_path=temp_root / "execution-run.json",
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+
+            self.assertEqual(payload["check_status"], "error")
+            self.assertTrue(any("planned_jobs mismatch" in error for error in payload["errors"]))
+            self.assertTrue(any("argv" in error for error in payload["errors"]))
+
 
 class GhidraAutotriggerPipelineTests(unittest.TestCase):
     def test_refresh_pipeline_writes_seed_batch_and_run_surfaces(self) -> None:
@@ -3811,6 +3880,7 @@ class GhidraAutotriggerSmokeTests(unittest.TestCase):
             self.assertEqual(payload["transfer_pack_import_status"], "ok")
             self.assertEqual(payload["execution_plan_status"], "ready")
             self.assertEqual(payload["execution_run_status"], "ready")
+            self.assertEqual(payload["execution_run_check_status"], "ok")
             self.assertIn("module_offset", payload["frame_resolution_counts"])
             self.assertIn("raw_address", payload["frame_resolution_counts"])
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-check.json").exists())
@@ -3818,6 +3888,7 @@ class GhidraAutotriggerSmokeTests(unittest.TestCase):
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-import" / "CHECKSUMS.json").exists())
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-execution-plan.json").exists())
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-execution-run.json").exists())
+            self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-execution-run-check.json").exists())
             self.assertTrue(output_path.exists())
             self.assertTrue(markdown_path.exists())
 

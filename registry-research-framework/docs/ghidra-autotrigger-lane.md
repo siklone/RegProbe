@@ -84,6 +84,12 @@ Dry-run the destination execution plan before running anything:
 python3 registry-research-framework/scripts/run_ghidra_transfer_pack_execution_plan.py
 ```
 
+Validate the execution dry-run surface:
+
+```bash
+python3 registry-research-framework/scripts/check_ghidra_transfer_pack_execution_run.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -136,6 +142,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Dry-run or execution result for the imported transfer-pack commands, including cwd, argv, shell-safe command text, and per-job blockers.
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run.md`
   Human-readable run-ready checklist for the destination host.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run-check.json`
+  Validator result for the execution dry-run surface, covering job counts, cwd availability, argv, command text, and ready/blocked consistency.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run-check.md`
+  Human-readable validation summary for the run-ready checklist.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`
@@ -175,7 +185,7 @@ On top of that, the transfer manifest turns the selected jobs into a small expor
 
 Because fresh caller-stack bundles are still intermittent, the lane now also has a synthetic smoke harness. It fabricates a small normalized bundle from the active blocked `ghidra` queue, runs the same sync path in an isolated audit directory, and proves that symbol-resolution-ready work would be emitted when matching stack-bearing bundles arrive.
 
-The smoke harness also materializes, verifies, imports, plans execution, and dry-runs the transfer pack. A passing smoke run now means the lane can produce symbol-resolution jobs, package the required helper files, hash the payload, validate the zip, prove the destination-side unpack path, emit ready destination commands, and render a final run-ready checklist before anyone moves it to another host.
+The smoke harness also materializes, verifies, imports, plans execution, dry-runs the transfer pack, and validates that dry-run surface. A passing smoke run now means the lane can produce symbol-resolution jobs, package the required helper files, hash the payload, validate the zip, prove the destination-side unpack path, emit ready destination commands, render a final run-ready checklist, and check that checklist before anyone moves it to another host.
 
 For the destination side, the unpack helper validates the summary and archive before extraction, then writes an import surface. This keeps the transfer lane reversible: a pack can be checked in place, copied as a zip, checked again from the archive alone, and unpacked only after those checks pass.
 
