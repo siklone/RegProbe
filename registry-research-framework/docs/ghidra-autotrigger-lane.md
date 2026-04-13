@@ -143,3 +143,5 @@ There is now a dedicated handoff surface for those prepared jobs. Instead of ope
 On top of that, the transfer manifest turns the selected jobs into a small export contract, and the transfer-pack materializer turns that contract into a real folder tree plus zip archive. That means another KVM-capable host can pick up a ready-made pack with the manifests, repo-side helpers, and per-request commands already laid out.
 
 Because fresh caller-stack bundles are still intermittent, the lane now also has a synthetic smoke harness. It fabricates a small normalized bundle from the active blocked `ghidra` queue, runs the same sync path in an isolated audit directory, and proves that symbol-resolution-ready work would be emitted when matching stack-bearing bundles arrive.
+
+The smoke harness also materializes and verifies the transfer pack. A passing smoke run now means the lane can produce symbol-resolution jobs, package the required helper files, hash the payload, and validate the zip before anyone moves it to another host.

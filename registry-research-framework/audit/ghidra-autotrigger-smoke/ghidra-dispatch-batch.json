@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T11:07:24.751572Z",
+  "generated_utc": "2026-04-13T11:10:28.707437Z",
   "source_queue": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "source_autotrigger_queue": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
   "job_count": 4,
@@ -12,7 +12,7 @@
       "job_id": "ghidra-dispatch-01-power-control-allow-system-required-power-requests",
       "dispatch_status": "prepared",
       "queue_status": "queued",
-      "created_utc": "2026-04-13T11:07:24.751572Z",
+      "created_utc": "2026-04-13T11:10:28.707437Z",
       "candidate_id": "power.control.allow-system-required-power-requests",
       "feature_area": "Control Power Requests",
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
@@ -43,7 +43,7 @@
         {
           "trigger": "caller-stack-unresolved-frame",
           "source_bundle_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json",
-          "source_run_id": "ghidra-autotrigger-smoke-20260413T110724.748104Z",
+          "source_run_id": "ghidra-autotrigger-smoke-20260413T111028.703889Z",
           "event_index": 1,
           "unresolved_frames": [
             "ntoskrnl.exe+0x1920"
@@ -67,7 +67,7 @@
       "job_id": "ghidra-dispatch-02-power-session-watchdog-timeouts",
       "dispatch_status": "prepared",
       "queue_status": "queued",
-      "created_utc": "2026-04-13T11:07:24.751572Z",
+      "created_utc": "2026-04-13T11:10:28.707437Z",
       "candidate_id": "power.session-watchdog-timeouts",
       "feature_area": "Directed Power Watchdog Timeouts",
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
@@ -101,7 +101,7 @@
         {
           "trigger": "caller-stack-unresolved-frame",
           "source_bundle_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json",
-          "source_run_id": "ghidra-autotrigger-smoke-20260413T110724.748104Z",
+          "source_run_id": "ghidra-autotrigger-smoke-20260413T111028.703889Z",
           "event_index": 2,
           "unresolved_frames": [
             "0xFFFFF80512340002"
@@ -125,7 +125,7 @@
       "job_id": "ghidra-dispatch-03-power-control-allow-audio-to-enable-execution-required-power-requests",
       "dispatch_status": "prepared",
       "queue_status": "queued",
-      "created_utc": "2026-04-13T11:07:24.751572Z",
+      "created_utc": "2026-04-13T11:10:28.707437Z",
       "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
       "feature_area": "Control Power Requests",
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
@@ -156,7 +156,7 @@
         {
           "trigger": "caller-stack-unresolved-frame",
           "source_bundle_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json",
-          "source_run_id": "ghidra-autotrigger-smoke-20260413T110724.748104Z",
+          "source_run_id": "ghidra-autotrigger-smoke-20260413T111028.703889Z",
           "event_index": 3,
           "unresolved_frames": [
             "Syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsResolver"
@@ -181,7 +181,7 @@
       "job_id": "ghidra-dispatch-04-system-kernel-dpc-watchdog-profile-cluster",
       "dispatch_status": "prepared",
       "queue_status": "queued",
-      "created_utc": "2026-04-13T11:07:24.751572Z",
+      "created_utc": "2026-04-13T11:10:28.707437Z",
       "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
       "feature_area": "Session Manager Kernel DPC Watchdog Profile",
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
@@ -212,7 +212,7 @@
         {
           "trigger": "caller-stack-unresolved-frame",
           "source_bundle_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json",
-          "source_run_id": "ghidra-autotrigger-smoke-20260413T110724.748104Z",
+          "source_run_id": "ghidra-autotrigger-smoke-20260413T111028.703889Z",
           "event_index": 4,
           "unresolved_frames": [
             "ntoskrnl.exe+0x2C80"

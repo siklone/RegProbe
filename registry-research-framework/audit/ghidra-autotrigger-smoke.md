@@ -8,6 +8,7 @@
 - Symbol batch jobs: `4`
 - Dispatch jobs: `4`
 - Transfer pack jobs: `4`
+- Transfer pack check: `ok`
 - Operator blocker: `symbol-resolution-ready`
 - Next action: `Run the symbol-resolution batch to resolve caller-stack pivots before deeper Ghidra dispatch.`
 
