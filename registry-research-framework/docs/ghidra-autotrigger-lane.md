@@ -98,6 +98,12 @@ Validate the execution dry-run surface:
 python3 registry-research-framework/scripts/check_ghidra_transfer_pack_execution_run.py
 ```
 
+Generate the ETW stackwalk capture plan for producing fresh caller-stack bundles:
+
+```bash
+python3 registry-research-framework/scripts/generate_etw_stackwalk_capture_plan.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -174,6 +180,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Validator result for the latest smoke summary and its critical child surfaces.
 - `registry-research-framework/audit/ghidra-autotrigger-smoke-check.md`
   Human-readable smoke validation summary.
+- `registry-research-framework/audit/etw-stackwalk-capture-plan.json`
+  Operator-ready xperf registry stackwalk plan for producing fresh `caller_stack` events.
+- `registry-research-framework/audit/etw-stackwalk-capture-plan.md`
+  Copy/paste command view of the same stackwalk capture plan.
 
 ## Status Semantics
 
@@ -196,6 +206,8 @@ There is now a dedicated handoff surface for those prepared jobs. Instead of ope
 On top of that, the transfer manifest turns the selected jobs into a small export contract, and the transfer-pack materializer turns that contract into a real folder tree plus zip archive. That means another KVM-capable host can pick up a ready-made pack with the manifests, repo-side helpers, and per-request commands already laid out.
 
 Because fresh caller-stack bundles are still intermittent, the lane now also has a synthetic smoke harness. It fabricates a small normalized bundle from the active blocked `ghidra` queue, runs the same sync path in an isolated audit directory, and proves that symbol-resolution-ready work would be emitted when matching stack-bearing bundles arrive.
+
+The first real capture path is now explicit too. The ETW stackwalk plan records the xperf kernel flags, registry stackwalk events, buffer settings, output paths, and tracerpt/repo parse handoff needed to produce a stack-bearing bundle. It does not touch a VM by itself; it gives the operator a reviewable elevated Windows command sequence before capture.
 
 The smoke harness also materializes, verifies, imports, plans execution, dry-runs the transfer pack, and validates that dry-run surface. A passing smoke run now means the lane can produce symbol-resolution jobs, package the required helper files, hash the payload, validate the zip, prove the destination-side unpack path, emit ready destination commands, render a final run-ready checklist, and check that checklist before anyone moves it to another host.
 

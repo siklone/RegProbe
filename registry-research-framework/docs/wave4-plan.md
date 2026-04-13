@@ -6,7 +6,7 @@
 - Symbol resolution via Microsoft Symbol Server
 - New bundle field: caller_stack
 
-Status: schema and parser support for `caller_stack` is in place, and the KVM WPR runner can now fail stack-expected runs when no frames are present. The remaining capture work is the provider-specific WPR/xperf profile that actually emits stack frames.
+Status: schema and parser support for `caller_stack` is in place, and the KVM WPR runner can now fail stack-expected runs when no frames are present. The first xperf registry stackwalk profile is now captured in `registry-research-framework/config/etw-stackwalk-profiles.json`, and `generate_etw_stackwalk_capture_plan.py` renders the elevated Windows commands plus repo parse handoff. The remaining capture work is to run that plan on a Windows host/guest with Windows Performance Toolkit and land the first real stack-bearing bundle.
 
 ## Motor 2: Ghidra Auto-Decompiler Pipeline
 - Ghidra job queue: ghidra-job-queue.jsonl

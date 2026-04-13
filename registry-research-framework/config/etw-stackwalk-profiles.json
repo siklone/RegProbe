@@ -1,0 +1,59 @@
+{
+  "version": "1.0",
+  "default_profile": "kernel-registry-stackwalk-v1",
+  "profiles": [
+    {
+      "profile_id": "kernel-registry-stackwalk-v1",
+      "description": "Runtime ETW registry capture with xperf stack walking enabled for registry key/value operations.",
+      "tool": "xperf",
+      "capture_phase": "runtime",
+      "provider": {
+        "name": "Microsoft-Windows-Kernel-Registry",
+        "guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+        "flags": "0xFFFF",
+        "level": "5"
+      },
+      "kernel_flags": [
+        "PROC_THREAD",
+        "LOADER",
+        "REGISTRY"
+      ],
+      "stackwalk_events": [
+        "RegCreateKey",
+        "RegOpenKey",
+        "RegQueryKey",
+        "RegSetValue",
+        "RegQueryValue",
+        "RegDeleteValue",
+        "RegCloseKey"
+      ],
+      "buffer": {
+        "size_kb": 1024,
+        "min_buffers": 64,
+        "max_buffers": 256
+      },
+      "default_duration_seconds": 60,
+      "default_output_root": "C:\\RegProbe-Diag\\etw-stackwalk",
+      "required_tools": [
+        "xperf.exe",
+        "tracerpt.exe"
+      ],
+      "stack_capture": {
+        "expected": true,
+        "source_fields": [
+          "Stack",
+          "CallStack",
+          "Call Stack",
+          "StackTrace",
+          "Stack Trace",
+          "UserStack",
+          "User Stack"
+        ]
+      },
+      "postprocess": {
+        "parser": "tracerpt",
+        "normalized_bundle_field": "caller_stack"
+      }
+    }
+  ]
+}

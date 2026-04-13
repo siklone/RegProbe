@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T17:58:54.800118Z",
+  "plan_status": "ready",
+  "errors": [],
+  "profile_id": "kernel-registry-stackwalk-v1",
+  "description": "Runtime ETW registry capture with xperf stack walking enabled for registry key/value operations.",
+  "capture_phase": "runtime",
+  "provider": {
+    "name": "Microsoft-Windows-Kernel-Registry",
+    "guid": "{AE53722E-C863-11D2-8659-00C04FA321A1}",
+    "flags": "0xFFFF",
+    "level": "5"
+  },
+  "target": {
+    "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name": "TimerCheckFlags"
+  },
+  "run": {
+    "run_id": "wave4-registry-stackwalk",
+    "duration_seconds": 60,
+    "output_root": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk",
+    "raw_etl_path": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.raw.etl",
+    "etl_path": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.etl",
+    "xml_path": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.xml",
+    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl"
+  },
+  "stack_capture": {
+    "expected": true,
+    "stackwalk_events": [
+      "RegCreateKey",
+      "RegOpenKey",
+      "RegQueryKey",
+      "RegSetValue",
+      "RegQueryValue",
+      "RegDeleteValue",
+      "RegCloseKey"
+    ],
+    "source_fields": [
+      "Stack",
+      "CallStack",
+      "Call Stack",
+      "StackTrace",
+      "Stack Trace",
+      "UserStack",
+      "User Stack"
+    ],
+    "normalized_bundle_field": "caller_stack"
+  },
+  "commands": {
+    "preflight": [
+      [
+        "where",
+        "xperf.exe"
+      ],
+      [
+        "where",
+        "tracerpt.exe"
+      ]
+    ],
+    "prepare": [
+      [
+        "powershell",
+        "-NoProfile",
+        "-Command",
+        "New-Item -ItemType Directory -Force -Path 'C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk' | Out-Null"
+      ],
+      [
+        "xperf",
+        "-stop"
+      ]
+    ],
+    "start": [
+      "xperf",
+      "-on",
+      "PROC_THREAD+LOADER+REGISTRY",
+      "-stackwalk",
+      "RegCreateKey+RegOpenKey+RegQueryKey+RegSetValue+RegQueryValue+RegDeleteValue+RegCloseKey",
+      "-BufferSize",
+      "1024",
+      "-MinBuffers",
+      "64",
+      "-MaxBuffers",
+      "256",
+      "-f",
+      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.raw.etl"
+    ],
+    "wait": [
+      "powershell",
+      "-NoProfile",
+      "-Command",
+      "Start-Sleep -Seconds 60"
+    ],
+    "stop": [
+      "xperf",
+      "-d",
+      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.etl"
+    ],
+    "parse_xml": [
+      "tracerpt",
+      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.etl",
+      "-o",
+      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.xml",
+      "-of",
+      "XML"
+    ],
+    "repo_parse": [
+      "python3",
+      "registry-research-framework/scripts/parse_etl_registry_touches.py",
+      "--input",
+      "evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl"
+    ]
+  },
+  "operator_notes": [
+    "Run from an elevated Windows shell with Windows Performance Toolkit installed.",
+    "Copy the final ETL into evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl before running repo_parse.",
+    "The start command enables registry stack walking; the parser expects tracerpt XML fields such as Stack or CallStack.",
+    "If caller_stack remains empty, rerun with a narrower trigger window or move the ETL to WPA/xperf for stack inspection."
+  ],
+  "config_path": "registry-research-framework/config/etw-stackwalk-profiles.json"
+}
