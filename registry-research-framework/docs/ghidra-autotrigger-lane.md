@@ -110,7 +110,8 @@ Run the matching elevated Windows guest helper when Windows Performance Toolkit 
 powershell -ExecutionPolicy Bypass -File scripts\vm\guest-tools\run-etw-registry-stackwalk-capture.ps1 `
   -RunId wave4-registry-stackwalk `
   -RegistryPath 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel' `
-  -ValueName TimerCheckFlags
+  -ValueName TimerCheckFlags `
+  -UploadBaseUrl http://10.0.2.2:8766
 ```
 
 Validate that the stackwalk plan still contains the registry stack flags, caller-stack handoff, and parser command:

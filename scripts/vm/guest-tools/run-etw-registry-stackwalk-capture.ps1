@@ -18,6 +18,10 @@ param(
     [int]$BufferSizeKb = 1024,
     [int]$MinBuffers = 64,
     [int]$MaxBuffers = 256,
+    [string]$UploadBaseUrl = '',
+    [int]$UploadRetryCount = 10,
+    [int]$UploadRetryDelaySeconds = 3,
+    [switch]$UploadEtl,
     [switch]$SkipTracerpt
 )
 
@@ -71,6 +75,42 @@ function Write-JsonFile {
     $Payload | ConvertTo-Json -Depth 12 | Set-Content -Path $Path -Encoding UTF8
 }
 
+function Invoke-ArtifactUpload {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$RemoteName
+    )
+
+    if ([string]::IsNullOrWhiteSpace($UploadBaseUrl) -or -not (Test-Path -Path $Path -PathType Leaf)) {
+        return $null
+    }
+
+    $targetUri = '{0}/{1}' -f $UploadBaseUrl.TrimEnd('/'), $RemoteName
+    for ($attempt = 1; $attempt -le [Math]::Max($UploadRetryCount, 1); $attempt++) {
+        try {
+            Invoke-WebRequest -Method Put -Uri $targetUri -InFile $Path -UseBasicParsing | Out-Null
+            return [ordered]@{
+                path = $Path
+                uri = $targetUri
+                attempts = $attempt
+            }
+        }
+        catch {
+            if ($attempt -ge [Math]::Max($UploadRetryCount, 1)) {
+                return [ordered]@{
+                    path = $Path
+                    uri = $targetUri
+                    attempts = $attempt
+                    error = $_.Exception.Message
+                }
+            }
+            Start-Sleep -Seconds ([Math]::Max($UploadRetryDelaySeconds, 1))
+        }
+    }
+
+    return $null
+}
+
 $safeRunId = ConvertTo-SafeName -Value $RunId
 $runRoot = Join-Path $OutputRoot $safeRunId
 New-Item -ItemType Directory -Force -Path $runRoot | Out-Null
@@ -103,6 +143,8 @@ $summary = [ordered]@{
     etl_exists = $false
     xml_exists = $false
     stack_field_hit_count = 0
+    upload_base_url = $UploadBaseUrl
+    artifact_uploads = [ordered]@{}
     commands = [ordered]@{}
 }
 
@@ -162,5 +204,9 @@ catch {
 }
 
 $summary.generated_utc = [DateTime]::UtcNow.ToString('o')
+$summary.artifact_uploads['xml'] = if ($summary.xml_exists) { Invoke-ArtifactUpload -Path $xmlPath -RemoteName ($safeRunId + '.xml') } else { $null }
+$summary.artifact_uploads['etl'] = if ($UploadEtl -and $summary.etl_exists) { Invoke-ArtifactUpload -Path $etlPath -RemoteName ($safeRunId + '.etl') } else { $null }
+Write-JsonFile -Path $summaryPath -Payload $summary
+$summary.artifact_uploads['summary'] = Invoke-ArtifactUpload -Path $summaryPath -RemoteName ($safeRunId + '-summary.json')
 Write-JsonFile -Path $summaryPath -Payload $summary
 Write-Output $summaryPath
