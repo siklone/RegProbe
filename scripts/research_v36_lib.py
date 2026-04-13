@@ -7,7 +7,7 @@ import subprocess
 import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
-from collections import Counter
+from collections import Counter, deque
 from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 from pathlib import Path
@@ -2908,6 +2908,74 @@ def _caller_stack_from_event_data(event_data: dict[str, str]) -> list[str]:
     return []
 
 
+def _parse_etw_numeric(value: Any) -> int | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    text = re.sub(r"\s+", "", text)
+    try:
+        return int(text, 0)
+    except ValueError:
+        return None
+
+
+def _stackwalk_frames_from_event_data(event_data: dict[str, str]) -> list[str]:
+    indexed_frames: list[tuple[int, str]] = []
+    for name, value in event_data.items():
+        match = re.fullmatch(r"Stack(\d+)", name.strip(), flags=re.IGNORECASE)
+        if not match:
+            continue
+        cleaned = str(value or "").strip()
+        if not cleaned:
+            continue
+        indexed_frames.append((int(match.group(1)), cleaned))
+    indexed_frames.sort(key=lambda item: item[0])
+    return [frame for _, frame in indexed_frames]
+
+
+def _attach_stackwalk_to_recent_touch(
+    recent_touches_by_thread: dict[tuple[str, str], deque[dict[str, Any]]],
+    *,
+    stack_process: Any,
+    stack_thread: Any,
+    event_timestamp: Any,
+    frames: list[str],
+) -> bool:
+    process_key = _parse_etw_numeric(stack_process)
+    thread_key = _parse_etw_numeric(stack_thread)
+    if process_key is None or thread_key is None or not frames:
+        return False
+
+    candidates = recent_touches_by_thread.get((str(process_key), str(thread_key)))
+    if not candidates:
+        return False
+
+    stack_time = _parse_etw_numeric(event_timestamp)
+    best_touch: dict[str, Any] | None = None
+    best_delta: int | None = None
+    for item in reversed(candidates):
+        touch = item.get("touch")
+        if not isinstance(touch, dict) or touch.get("caller_stack"):
+            continue
+        touch_time = _parse_etw_numeric(item.get("event_time"))
+        if stack_time is not None and touch_time is not None:
+            if touch_time > stack_time:
+                continue
+            delta = stack_time - touch_time
+        else:
+            delta = 0 if best_touch is None else 1
+        if best_touch is None or best_delta is None or delta < best_delta:
+            best_touch = touch
+            best_delta = delta
+
+    if best_touch is None:
+        return False
+
+    best_touch["caller_stack"] = frames
+    best_touch["caller_stack_frame_count"] = len(frames)
+    return True
+
+
 def _normalize_registry_relative_path(text: str | None) -> str | None:
     normalized = _normalize_registry_context_path(text)
     if not normalized:
@@ -3057,6 +3125,7 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
     touches: list[dict[str, Any]] = []
     seen: set[tuple[str, str, str]] = set()
     open_key_paths: dict[str, str] = {}
+    recent_touches_by_thread: dict[tuple[str, str], deque[dict[str, Any]]] = {}
 
     for _, event in iterator:
         if _xml_local_name(event.tag).lower() != "event":
@@ -3065,8 +3134,10 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
         provider = ""
         event_id = ""
         process_id = ""
+        thread_id = ""
         key_path = None
         value_name = None
+        rendering_event_name = ""
         event_data: dict[str, str] = {}
 
         for child in event:
@@ -3085,6 +3156,7 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
                         event_id = _xml_text_or_attribute(system_child) or event_id
                     elif system_tag == "execution":
                         process_id = system_child.attrib.get("ProcessID") or process_id
+                        thread_id = system_child.attrib.get("ThreadID") or thread_id
             elif tag == "eventdata":
                 for data_child in child:
                     if _xml_local_name(data_child.tag).lower() != "data":
@@ -3093,6 +3165,21 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
                     if not name:
                         continue
                     event_data[name] = _xml_text_or_attribute(data_child)
+            elif tag == "renderinginfo":
+                for rendering_child in child:
+                    if _xml_local_name(rendering_child.tag).lower() == "eventname":
+                        rendering_event_name = _xml_text_or_attribute(rendering_child) or rendering_event_name
+
+        if rendering_event_name.strip().lower() == "stackwalk":
+            _attach_stackwalk_to_recent_touch(
+                recent_touches_by_thread,
+                stack_process=event_data.get("StackProcess"),
+                stack_thread=event_data.get("StackThread"),
+                event_timestamp=event_data.get("EventTimeStamp"),
+                frames=_stackwalk_frames_from_event_data(event_data),
+            )
+            event.clear()
+            continue
 
         key_object = (
             event_data.get("KeyObject")
@@ -3171,6 +3258,7 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
             "provider_guid_matched": provider_match,
             "process_name": process_name or None,
             "process_id": process_id or None,
+            "thread_id": thread_id or None,
             "operation": operation or "registry-touch",
             "key_path": key_path,
             "value_name": value_name,
@@ -3190,6 +3278,15 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
             continue
         seen.add(dedupe_key)
         touches.append(touch)
+        process_key = _parse_etw_numeric(process_id)
+        thread_key = _parse_etw_numeric(thread_id)
+        if process_key is not None and thread_key is not None:
+            recent_touches_by_thread.setdefault((str(process_key), str(thread_key)), deque(maxlen=64)).append(
+                {
+                    "touch": touch,
+                    "event_time": event_data.get("InitialTime") or event_data.get("EventTimeStamp"),
+                }
+            )
         if event_id == "13" and key_object:
             open_key_paths.pop(key_object, None)
         event.clear()
@@ -3325,7 +3422,7 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
     xml_output = etl_path.with_suffix(".etl.xml")
     legacy_xml_output = etl_path.with_suffix(".xml")
     touch_sidecar = etl_path.with_suffix(".etl.registry-touches.json")
-    command = [tracerpt, str(etl_path), "-o", str(xml_output), "-of", "XML"]
+    command = [tracerpt, str(etl_path), "-o", str(xml_output), "-of", "XML", "-lr"]
 
     def resolve_existing_xml_sidecar() -> Path | None:
         if xml_output.exists():

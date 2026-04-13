@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T18:07:09.745651Z",
+  "generated_utc": "2026-04-13T20:12:32.825316Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -67,31 +67,31 @@
     "missing_repo_file_count": 0
   },
   "symbol_resolution_transfer_pack": {
-    "status": null,
-    "operator_blocker": null,
+    "status": "idle",
+    "operator_blocker": "no-selected-symbol-jobs",
     "selected_jobs": 0,
-    "repo_files_copied": 0,
+    "repo_files_copied": 9,
     "command_files_written": 0,
-    "archive_path": null
+    "archive_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip"
   },
   "symbol_resolution_transfer_pack_check": {
-    "status": null,
+    "status": "ok",
     "error_count": 0,
-    "checked_pack_files": 0,
-    "checked_archive_files": 0,
-    "archive_entries": 0
+    "checked_pack_files": 15,
+    "checked_archive_files": 15,
+    "archive_entries": 15
   },
   "symbol_resolution_execution_run": {
-    "status": null,
-    "mode": null,
-    "operator_blocker": null,
+    "status": "blocked",
+    "mode": "dry-run",
+    "operator_blocker": "execution-run-blocked",
     "planned_jobs": 0,
     "ready_jobs": 0,
     "blocked_jobs": 0,
     "executed_jobs": 0
   },
   "symbol_resolution_execution_run_check": {
-    "status": null,
+    "status": "ok",
     "error_count": 0,
     "jobs_with_blockers": 0,
     "blocked_jobs_with_blockers": 0
@@ -102,13 +102,13 @@
     "error": null
   },
   "etw_stackwalk_capture": {
-    "plan_status": "ready",
-    "check_status": "ok",
-    "profile_id": "kernel-registry-stackwalk-v1",
-    "run_id": "wave4-registry-stackwalk",
-    "stack_expected": true,
-    "stackwalk_event_count": 7,
-    "handoff_etl_path": "evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl",
+    "plan_status": null,
+    "check_status": null,
+    "profile_id": null,
+    "run_id": null,
+    "stack_expected": false,
+    "stackwalk_event_count": 0,
+    "handoff_etl_path": null,
     "plan_errors": [],
     "check_errors": []
   },

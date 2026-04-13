@@ -51,13 +51,19 @@ function Invoke-NativeProcess {
     try {
         $proc = Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -PassThru -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
         $proc.WaitForExit()
+        try {
+            $proc.Refresh()
+        }
+        catch {
+        }
         $stdout = if (Test-Path $stdoutPath) { (Get-Content -Path $stdoutPath -Raw -ErrorAction SilentlyContinue) } else { '' }
         $stderr = if (Test-Path $stderrPath) { (Get-Content -Path $stderrPath -Raw -ErrorAction SilentlyContinue) } else { '' }
-        if (-not $IgnoreExitCode -and $proc.ExitCode -ne 0) {
-            throw "$([System.IO.Path]::GetFileName($FilePath)) failed with exit code $($proc.ExitCode): $stderr"
+        $exitCode = if ($null -eq $proc.ExitCode) { 0 } else { [int]$proc.ExitCode }
+        if (-not $IgnoreExitCode -and $exitCode -ne 0) {
+            throw "$([System.IO.Path]::GetFileName($FilePath)) failed with exit code ${exitCode}: $stderr"
         }
         return [ordered]@{
-            exit_code = $proc.ExitCode
+            exit_code = $exitCode
             stdout = ('{0}' -f $stdout).Trim()
             stderr = ('{0}' -f $stderr).Trim()
         }
@@ -65,6 +71,26 @@ function Invoke-NativeProcess {
     finally {
         Remove-Item -Path $stdoutPath, $stderrPath -Force -ErrorAction SilentlyContinue
     }
+}
+
+function Format-CommandFailure {
+    param(
+        [Parameter(Mandatory = $true)][string]$ToolName,
+        [Parameter(Mandatory = $true)][hashtable]$Result,
+        [Parameter(Mandatory = $true)][string[]]$ArgumentList
+    )
+
+    $message = if (-not [string]::IsNullOrWhiteSpace([string]$Result.stderr)) {
+        [string]$Result.stderr
+    }
+    elseif (-not [string]::IsNullOrWhiteSpace([string]$Result.stdout)) {
+        [string]$Result.stdout
+    }
+    else {
+        'no diagnostic output captured'
+    }
+
+    return "$ToolName failed with exit code $($Result.exit_code): $message | argv=$($ArgumentList -join ' ')"
 }
 
 function Write-JsonFile {
@@ -113,6 +139,9 @@ function Invoke-ArtifactUpload {
 
 $safeRunId = ConvertTo-SafeName -Value $RunId
 $runRoot = Join-Path $OutputRoot $safeRunId
+if (Test-Path -LiteralPath $runRoot) {
+    Remove-Item -LiteralPath $runRoot -Recurse -Force -ErrorAction Stop
+}
 New-Item -ItemType Directory -Force -Path $runRoot | Out-Null
 
 $rawEtlPath = Join-Path $runRoot ($safeRunId + '.raw.etl')
@@ -153,7 +182,11 @@ try {
         throw 'xperf.exe not found. Install Windows Performance Toolkit.'
     }
 
-    Remove-Item -Path $rawEtlPath, $etlPath, $xmlPath -Force -ErrorAction SilentlyContinue
+    foreach ($pathToRemove in @($rawEtlPath, $etlPath, $xmlPath, $summaryPath)) {
+        if (Test-Path -LiteralPath $pathToRemove) {
+            Remove-Item -LiteralPath $pathToRemove -Force -ErrorAction Stop
+        }
+    }
 
     $stopExisting = Invoke-NativeProcess -FilePath $xperf -ArgumentList @('-stop') -IgnoreExitCode
     $summary.commands['stop_existing'] = $stopExisting
@@ -173,26 +206,38 @@ try {
         $rawEtlPath
     )
     $summary.commands['start_args'] = @($startArgs)
-    $summary.commands['start'] = Invoke-NativeProcess -FilePath $xperf -ArgumentList $startArgs
+    $summary.commands['start'] = Invoke-NativeProcess -FilePath $xperf -ArgumentList $startArgs -IgnoreExitCode
+    if (($summary.commands['start'].exit_code) -ne 0) {
+        throw (Format-CommandFailure -ToolName 'xperf.exe' -Result $summary.commands['start'] -ArgumentList $startArgs)
+    }
 
     Start-Sleep -Seconds ([Math]::Max($DurationSeconds, 1))
 
     $stopArgs = @('-d', $etlPath)
     $summary.commands['stop_args'] = @($stopArgs)
-    $summary.commands['stop'] = Invoke-NativeProcess -FilePath $xperf -ArgumentList $stopArgs
+    $summary.commands['stop'] = Invoke-NativeProcess -FilePath $xperf -ArgumentList $stopArgs -IgnoreExitCode
+    if (($summary.commands['stop'].exit_code) -ne 0) {
+        throw (Format-CommandFailure -ToolName 'xperf.exe' -Result $summary.commands['stop'] -ArgumentList $stopArgs)
+    }
     $summary.etl_exists = [bool](Test-Path $etlPath)
 
     if (-not $SkipTracerpt) {
         if (-not (Test-Path $tracerpt)) {
             throw 'tracerpt.exe not found.'
         }
-        $parseArgs = @($etlPath, '-o', $xmlPath, '-of', 'XML')
+        if (Test-Path -LiteralPath $xmlPath) {
+            Remove-Item -LiteralPath $xmlPath -Force -ErrorAction Stop
+        }
+        $parseArgs = @($etlPath, '-o', $xmlPath, '-of', 'XML', '-lr')
         $summary.commands['tracerpt_args'] = @($parseArgs)
-        $summary.commands['tracerpt'] = Invoke-NativeProcess -FilePath $tracerpt -ArgumentList $parseArgs
+        $summary.commands['tracerpt'] = Invoke-NativeProcess -FilePath $tracerpt -ArgumentList $parseArgs -IgnoreExitCode
+        if (($summary.commands['tracerpt'].exit_code) -ne 0) {
+            throw (Format-CommandFailure -ToolName 'tracerpt.exe' -Result $summary.commands['tracerpt'] -ArgumentList $parseArgs)
+        }
         $summary.xml_exists = [bool](Test-Path $xmlPath)
         if ($summary.xml_exists) {
             $summary.stack_field_hit_count = @(
-                Select-String -Path $xmlPath -Pattern 'Name="Stack"', 'Name="CallStack"', 'Name="StackTrace"', 'Name="UserStack"' -SimpleMatch -ErrorAction SilentlyContinue
+                Select-String -Path $xmlPath -Pattern 'Name="Stack\d+"', 'Name="CallStack"', 'Name="StackTrace"', 'Name="UserStack"', '>StackWalk<' -ErrorAction SilentlyContinue
             ).Count
         }
     }

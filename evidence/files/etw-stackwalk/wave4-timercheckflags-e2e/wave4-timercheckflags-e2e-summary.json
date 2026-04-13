@@ -1,0 +1,97 @@
+﻿{
+    "schema_version":  "1.0",
+    "generated_utc":  "2026-04-13T20:10:42.9504492Z",
+    "run_id":  "wave4-timercheckflags-e2e",
+    "capture_profile":  "kernel-registry-stackwalk-v1",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name":  "TimerCheckFlags",
+    "duration_seconds":  3,
+    "kernel_flags":  [
+                         "PROC_THREAD",
+                         "LOADER",
+                         "REGISTRY"
+                     ],
+    "stackwalk_events":  [
+                             "RegCreateKey",
+                             "RegOpenKey",
+                             "RegQueryKey",
+                             "RegSetValue",
+                             "RegQueryValue",
+                             "RegDeleteValue",
+                             "RegCloseKey"
+                         ],
+    "stack_capture_expected":  true,
+    "xperf_exists":  true,
+    "tracerpt_exists":  true,
+    "output_root":  "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e",
+    "raw_etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.raw.etl",
+    "etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.etl",
+    "xml_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.xml",
+    "etl_exists":  true,
+    "xml_exists":  true,
+    "stack_field_hit_count":  383473,
+    "upload_base_url":  "http://10.0.2.2:8766",
+    "artifact_uploads":  {
+                             "xml":  {
+                                         "path":  "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.xml",
+                                         "uri":  "http://10.0.2.2:8766/wave4-timercheckflags-e2e.xml",
+                                         "attempts":  1
+                                     },
+                             "etl":  {
+                                         "path":  "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.etl",
+                                         "uri":  "http://10.0.2.2:8766/wave4-timercheckflags-e2e.etl",
+                                         "attempts":  1
+                                     }
+                         },
+    "commands":  {
+                     "stop_existing":  {
+                                           "exit_code":  0,
+                                           "stdout":  "",
+                                           "stderr":  "xperf: error: NT Kernel Logger: The instance name passed was not recognized as valid by a WMI data provider. (0x1069)."
+                                       },
+                     "start_args":  [
+                                        "-on",
+                                        "PROC_THREAD+LOADER+REGISTRY",
+                                        "-stackwalk",
+                                        "RegCreateKey+RegOpenKey+RegQueryKey+RegSetValue+RegQueryValue+RegDeleteValue+RegCloseKey",
+                                        "-BufferSize",
+                                        "1024",
+                                        "-MinBuffers",
+                                        "64",
+                                        "-MaxBuffers",
+                                        "256",
+                                        "-f",
+                                        "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.raw.etl"
+                                    ],
+                     "start":  {
+                                   "exit_code":  0,
+                                   "stdout":  "",
+                                   "stderr":  ""
+                               },
+                     "stop_args":  [
+                                       "-d",
+                                       "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.etl"
+                                   ],
+                     "stop":  {
+                                  "exit_code":  0,
+                                  "stdout":  "Merged Etl: C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.etl\r\nThe trace you have just captured \"C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.etl\" may contain personally identifiable information, including but not necessarily limited to paths to files accessed, paths to registry accessed and process names. Exact information depends on the events that were logged. Please be aware of this when sharing out this trace with other people.",
+                                  "stderr":  ""
+                              },
+                     "tracerpt_args":  [
+                                           "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.etl",
+                                           "-o",
+                                           "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.xml",
+                                           "-of",
+                                           "XML",
+                                           "-lr"
+                                       ],
+                     "tracerpt":  {
+                                      "exit_code":  0,
+                                      "stdout":  "Input\r\n----------------\r\nFile(s):\r\n     C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.etl\r\n\n0.00%94.12%100.00%\n\r\nOutput\r\n----------------\r\nDumpFile:           C:\\RegProbe-Diag\\etw-stackwalk\\wave4-timercheckflags-e2e\\wave4-timercheckflags-e2e.xml\r\n\nThe command completed successfully.",
+                                      "stderr":  ""
+                                  }
+                 }
+}

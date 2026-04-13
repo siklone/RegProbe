@@ -1389,6 +1389,64 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(touches[0]["operation"], "RegQueryValue")
         self.assertEqual(touches[0]["caller_stack"], ["nt!PopReadRegKeyValue", "nt!PopPowerRequestInitialize"])
 
+    def test_extract_registry_touches_from_tracerpt_xml_attaches_separate_stackwalk_events(self) -> None:
+        xml_payload = """<?xml version="1.0" encoding="utf-8"?>
+<Events>
+  <Event>
+    <System>
+      <Provider Guid="{AE53722E-C863-11D2-8659-00C04FA321A1}" />
+      <EventID>10</EventID>
+      <Execution ProcessID="7228" ThreadID="3976" />
+    </System>
+    <EventData>
+      <Data Name="InitialTime">10401529963</Data>
+      <Data Name="KeyName">\\REGISTRY\\MACHINE\\System\\CurrentControlSet\\Control\\Session Manager\\Kernel</Data>
+      <Data Name="ValueName">TimerCheckFlags</Data>
+      <Data Name="ProcessName">wbemsvc.dll</Data>
+      <Data Name="Operation">QueryValueKey</Data>
+    </EventData>
+    <RenderingInfo>
+      <EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Registry</EventName>
+    </RenderingInfo>
+  </Event>
+  <Event>
+    <System>
+      <Provider Guid="{9E814AAD-3204-11D2-9A82-006008A86939}" />
+      <EventID>0</EventID>
+      <Execution ProcessID="4294967295" ThreadID="4294967295" />
+    </System>
+    <EventData>
+      <Data Name="EventTimeStamp">10401529966</Data>
+      <Data Name="StackProcess">0x1C3C</Data>
+      <Data Name="StackThread">3976</Data>
+      <Data Name="Stack1">0xFFFFF803C3FEDD84</Data>
+      <Data Name="Stack2">0xFFFFF803C3FED794</Data>
+      <Data Name="Stack3">0xFFFFF803C3F27B4D</Data>
+    </EventData>
+    <RenderingInfo>
+      <EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">StackWalk</EventName>
+    </RenderingInfo>
+  </Event>
+</Events>
+"""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            xml_path = Path(temp_dir) / "sample.etl.xml"
+            xml_path.write_text(xml_payload, encoding="utf-8")
+
+            touches = research_v36_lib.extract_registry_touches_from_tracerpt_xml(
+                xml_path,
+                provider_guid="{AE53722E-C863-11D2-8659-00C04FA321A1}",
+            )
+
+        self.assertEqual(len(touches), 1)
+        self.assertEqual(touches[0]["key_path"], "HKLM\\System\\CurrentControlSet\\Control\\Session Manager\\Kernel")
+        self.assertEqual(touches[0]["value_name"], "TimerCheckFlags")
+        self.assertEqual(
+            touches[0]["caller_stack"],
+            ["0xFFFFF803C3FEDD84", "0xFFFFF803C3FED794", "0xFFFFF803C3F27B4D"],
+        )
+        self.assertEqual(touches[0]["caller_stack_frame_count"], 3)
+
     def test_etl_touch_candidates_preserve_caller_stack_context(self) -> None:
         candidates = research_v36_lib.etl_touch_candidates(
             {

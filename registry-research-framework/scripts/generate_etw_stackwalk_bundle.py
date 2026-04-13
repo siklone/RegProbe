@@ -14,6 +14,11 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
 SCRIPTS_ROOT = REPO_ROOT / "scripts"
 
+for import_root in (SCRIPTS_ROOT, FRAMEWORK_ROOT / "scripts"):
+    import_root_text = str(import_root)
+    if import_root_text not in sys.path:
+        sys.path.insert(0, import_root_text)
+
 
 def load_local_module(name: str, path: Path):
     spec = importlib.util.spec_from_file_location(name, path)
