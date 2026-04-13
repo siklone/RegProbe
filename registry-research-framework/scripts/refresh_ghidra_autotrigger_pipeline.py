@@ -96,7 +96,8 @@ def refresh_pipeline(
     run_plan = dispatch_runner.build_run_plan(batch)
     dispatch_runner.write_json(run_path, run_plan)
 
-    health = autotrigger_health.health_payload(queue_rows, seeds, batch, run_plan)
+    input_manifest = autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {"entries": []}
+    health = autotrigger_health.health_payload(input_manifest, queue_rows, seeds, batch, run_plan)
     autotrigger_health.write_json(health_path, health)
 
     return {

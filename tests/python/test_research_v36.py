@@ -2422,6 +2422,11 @@ class GhidraAutotriggerInputTests(unittest.TestCase):
 
 class GhidraAutotriggerHealthTests(unittest.TestCase):
     def test_health_payload_summarizes_queue_seed_batch_and_run_surfaces(self) -> None:
+        input_manifest = {
+            "entries": [
+                {"path": "evidence/files/example/normalized-registry-bundle.json"},
+            ]
+        }
         queue_rows = [
             {"candidate_id": "power.keep"},
             {"candidate_id": "power.other"},
@@ -2453,6 +2458,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         }
 
         payload = ghidra_autotrigger_health.health_payload(
+            input_manifest,
             queue_rows,
             seed_rows,
             batch,
@@ -2460,10 +2466,12 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             generated_utc="2026-04-13T00:00:00Z",
         )
 
+        self.assertEqual(payload["counts"]["input_manifest_selected"], 1)
         self.assertEqual(payload["counts"]["queue_jobs"], 2)
         self.assertEqual(payload["counts"]["autotrigger_seeds"], 1)
         self.assertEqual(payload["counts"]["autotrigger_dispatch_jobs"], 1)
         self.assertFalse(payload["runner"]["available"])
+        self.assertEqual(payload["focus"]["top_input_bundle"], "evidence/files/example/normalized-registry-bundle.json")
         self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
         self.assertEqual(payload["focus"]["top_autotrigger_candidate"], "power.keep")
         self.assertEqual(payload["focus"]["missing_input_jobs"][0]["candidate_id"], "power.other")
@@ -2471,6 +2479,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
     def test_validate_health_rejects_inconsistent_counts(self) -> None:
         payload = {
             "counts": {
+                "input_manifest_selected": 1,
                 "queue_jobs": 2,
                 "autotrigger_seeds": 1,
                 "dispatch_jobs": 1,
@@ -2479,11 +2488,13 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "run_blocked_jobs": 0,
             },
             "coverage": {
+                "input_bundle_paths": [],
                 "queued_candidate_ids": ["one"],
                 "seed_candidate_ids": [],
                 "autotrigger_dispatch_candidate_ids": [],
             },
             "focus": {
+                "top_input_bundle": "wrong-bundle",
                 "top_queue_candidate": "wrong",
                 "top_autotrigger_candidate": None,
                 "missing_input_jobs": [],
@@ -2496,6 +2507,8 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
 
         errors = ghidra_autotrigger_health_check.validate_health(payload)
 
+        self.assertTrue(any("input_manifest_selected mismatch" in error for error in errors))
+        self.assertTrue(any("top_input_bundle does not match" in error for error in errors))
         self.assertTrue(any("queue_jobs mismatch" in error for error in errors))
         self.assertTrue(any("selected+blocked does not cover dispatch jobs" in error for error in errors))
         self.assertTrue(any("top_queue_candidate does not match" in error for error in errors))

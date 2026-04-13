@@ -23,6 +23,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     focus = payload.get("focus") or {}
     runner = payload.get("runner") or {}
 
+    input_manifest_selected = int(counts.get("input_manifest_selected") or 0)
     queue_jobs = int(counts.get("queue_jobs") or 0)
     seeds = int(counts.get("autotrigger_seeds") or 0)
     dispatch_jobs = int(counts.get("dispatch_jobs") or 0)
@@ -30,11 +31,14 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     run_selected_jobs = int(counts.get("run_selected_jobs") or 0)
     run_blocked_jobs = int(counts.get("run_blocked_jobs") or 0)
 
+    input_bundle_paths = coverage.get("input_bundle_paths") or []
     queued_candidate_ids = coverage.get("queued_candidate_ids") or []
     seed_candidate_ids = coverage.get("seed_candidate_ids") or []
     autotrigger_dispatch_candidate_ids = coverage.get("autotrigger_dispatch_candidate_ids") or []
     missing_input_jobs = focus.get("missing_input_jobs") or []
 
+    if len(input_bundle_paths) != input_manifest_selected:
+        errors.append(f"input_manifest_selected mismatch: counts={input_manifest_selected} coverage={len(input_bundle_paths)}")
     if len(queued_candidate_ids) != queue_jobs:
         errors.append(f"queue_jobs mismatch: counts={queue_jobs} coverage={len(queued_candidate_ids)}")
     if len(seed_candidate_ids) != seeds:
@@ -54,6 +58,14 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
         errors.append(
             f"selected+blocked does not cover dispatch jobs: {run_selected_jobs}+{run_blocked_jobs}<{dispatch_jobs}"
         )
+
+    top_input_bundle = focus.get("top_input_bundle")
+    if input_manifest_selected == 0 and top_input_bundle is not None:
+        errors.append("top_input_bundle should be null when input manifest is empty")
+    if input_manifest_selected > 0 and not input_bundle_paths and top_input_bundle is not None:
+        errors.append("top_input_bundle does not match first discovered input bundle")
+    if input_manifest_selected > 0 and input_bundle_paths and top_input_bundle != input_bundle_paths[0]:
+        errors.append("top_input_bundle does not match first discovered input bundle")
 
     top_queue_candidate = focus.get("top_queue_candidate")
     if queue_jobs == 0 and top_queue_candidate is not None:

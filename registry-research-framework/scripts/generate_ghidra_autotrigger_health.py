@@ -9,6 +9,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
+INPUTS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-inputs.json"
 QUEUE_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-job-queue.jsonl"
 SEEDS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-seeds.jsonl"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
@@ -46,6 +47,7 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
 
 
 def health_payload(
+    input_manifest: dict[str, Any],
     queue_rows: list[dict[str, Any]],
     seed_rows: list[dict[str, Any]],
     batch: dict[str, Any],
@@ -54,6 +56,7 @@ def health_payload(
     generated_utc: str | None = None,
 ) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
+    input_entries = input_manifest.get("entries") or []
     queue_candidates = [str(row.get("candidate_id") or "") for row in queue_rows]
     seed_candidates = [str(row.get("candidate_id") or "") for row in seed_rows]
     autotrigger_jobs = [job for job in (batch.get("jobs") or []) if int(job.get("autotrigger_seed_count") or 0) > 0]
@@ -68,11 +71,13 @@ def health_payload(
     return {
         "schema_version": "1.0",
         "generated_utc": generated_utc,
+        "inputs_path": portable_path(INPUTS_PATH),
         "queue_path": portable_path(QUEUE_PATH),
         "seeds_path": portable_path(SEEDS_PATH),
         "batch_path": portable_path(BATCH_PATH),
         "run_path": portable_path(RUN_PATH),
         "counts": {
+            "input_manifest_selected": len(input_entries),
             "queue_jobs": len(queue_rows),
             "autotrigger_seeds": len(seed_rows),
             "dispatch_jobs": int(batch.get("job_count") or 0),
@@ -86,11 +91,13 @@ def health_payload(
             "error": run.get("error"),
         },
         "coverage": {
+            "input_bundle_paths": [str(entry.get("path") or "") for entry in input_entries],
             "queued_candidate_ids": queue_candidates,
             "seed_candidate_ids": seed_candidates,
             "autotrigger_dispatch_candidate_ids": [str(job.get("candidate_id") or "") for job in autotrigger_jobs],
         },
         "focus": {
+            "top_input_bundle": str(input_entries[0].get("path") or "") if input_entries else None,
             "top_queue_candidate": queue_candidates[0] if queue_candidates else None,
             "top_autotrigger_candidate": str(autotrigger_jobs[0].get("candidate_id") or "") if autotrigger_jobs else None,
             "missing_input_jobs": missing_input_jobs,
@@ -104,11 +111,12 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 def main() -> int:
+    input_manifest = load_json(INPUTS_PATH)
     queue_rows = load_jsonl(QUEUE_PATH)
     seed_rows = load_jsonl(SEEDS_PATH)
     batch = load_json(BATCH_PATH)
     run = load_json(RUN_PATH)
-    payload = health_payload(queue_rows, seed_rows, batch, run)
+    payload = health_payload(input_manifest, queue_rows, seed_rows, batch, run)
     write_json(OUTPUT_PATH, payload)
     print(json.dumps({"output": portable_path(OUTPUT_PATH), "queue_jobs": len(queue_rows), "autotrigger_seeds": len(seed_rows)}, indent=2))
     return 0
