@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T17:30:23.836314Z",
+  "generated_utc": "2026-04-13T17:33:14.299460Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -12,6 +12,7 @@
   "symbol_transfer_pack_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.json",
   "symbol_transfer_pack_check_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.json",
   "symbol_execution_run_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run.json",
+  "symbol_execution_run_check_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run-check.json",
   "batch_path": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
   "counts": {
@@ -31,6 +32,7 @@
     "symbol_resolution_execution_run_planned_jobs": 4,
     "symbol_resolution_execution_run_ready_jobs": 4,
     "symbol_resolution_execution_run_blocked_jobs": 0,
+    "symbol_resolution_execution_run_check_errors": 0,
     "dispatch_jobs": 4,
     "autotrigger_dispatch_jobs": 4,
     "run_selected_jobs": 4,
@@ -87,6 +89,12 @@
     "ready_jobs": 4,
     "blocked_jobs": 0,
     "executed_jobs": 0
+  },
+  "symbol_resolution_execution_run_check": {
+    "status": "ok",
+    "error_count": 0,
+    "jobs_with_blockers": 0,
+    "blocked_jobs_with_blockers": 0
   },
   "runner": {
     "available": false,

@@ -36,6 +36,8 @@ EXECUTION_PLAN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-trans
 EXECUTION_PLAN_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-plan.md"
 EXECUTION_RUN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run.json"
 EXECUTION_RUN_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run.md"
+EXECUTION_RUN_CHECK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run-check.json"
+EXECUTION_RUN_CHECK_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run-check.md"
 INPUTS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-inputs.json"
 
 
@@ -77,6 +79,10 @@ execution_plan_mod = load_local_module(
 execution_run_mod = load_local_module(
     "refresh_pipeline_symbol_transfer_execution_run",
     FRAMEWORK_ROOT / "scripts" / "run_ghidra_transfer_pack_execution_plan.py",
+)
+execution_run_check_mod = load_local_module(
+    "refresh_pipeline_symbol_transfer_execution_run_check",
+    FRAMEWORK_ROOT / "scripts" / "check_ghidra_transfer_pack_execution_run.py",
 )
 
 
@@ -129,6 +135,8 @@ def refresh_pipeline(
     execution_plan_markdown_path: Path | None = None,
     execution_run_path: Path | None = None,
     execution_run_markdown_path: Path | None = None,
+    execution_run_check_path: Path | None = None,
+    execution_run_check_markdown_path: Path | None = None,
 ) -> dict[str, Any]:
     transfer_pack_import_root = transfer_pack_import_root or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-import")
     transfer_pack_import_path = transfer_pack_import_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-import.json")
@@ -137,6 +145,8 @@ def refresh_pipeline(
     execution_plan_markdown_path = execution_plan_markdown_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-plan.md")
     execution_run_path = execution_run_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run.json")
     execution_run_markdown_path = execution_run_markdown_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run.md")
+    execution_run_check_path = execution_run_check_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run-check.json")
+    execution_run_check_markdown_path = execution_run_check_markdown_path or transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run-check.md")
     queue_rows = autotrigger.load_jsonl(queue_path)
     bundle_manifest_payload: dict[str, Any] | None = None
     effective_manifest_path = bundle_manifest_path or INPUTS_PATH
@@ -224,6 +234,15 @@ def refresh_pipeline(
     )
     execution_run_mod.write_json(execution_run_path, execution_run)
     execution_run_mod.write_text(execution_run_markdown_path, execution_run_mod.render_markdown(execution_run))
+    execution_run_check = execution_run_check_mod.validate_execution_run(
+        execution_run,
+        run_path=execution_run_path,
+    )
+    execution_run_check_mod.write_json(execution_run_check_path, execution_run_check)
+    execution_run_check_mod.write_text(
+        execution_run_check_markdown_path,
+        execution_run_check_mod.render_markdown(execution_run_check),
+    )
 
     input_manifest = autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {"entries": []}
     health = autotrigger_health.health_payload(
@@ -240,6 +259,7 @@ def refresh_pipeline(
         batch,
         run_plan,
         execution_run=execution_run,
+        execution_run_check=execution_run_check,
     )
     autotrigger_health.write_json(health_path, health)
 
@@ -261,6 +281,8 @@ def refresh_pipeline(
         "symbol_resolution_transfer_pack_import_status": transfer_pack_import.get("import_status"),
         "symbol_resolution_execution_plan_status": execution_plan.get("execution_plan_status"),
         "symbol_resolution_execution_run_status": execution_run.get("execution_run_status"),
+        "symbol_resolution_execution_run_check_status": execution_run_check.get("check_status"),
+        "symbol_resolution_execution_run_check_error_count": len(execution_run_check.get("errors") or []),
         "symbol_resolution_execution_run_ready_job_count": int((execution_run.get("counts") or {}).get("ready_jobs") or 0),
         "symbol_resolution_execution_run_blocked_job_count": int((execution_run.get("counts") or {}).get("blocked_jobs") or 0),
         "dispatch_job_count": batch.get("job_count", 0),
@@ -289,6 +311,8 @@ def refresh_pipeline(
             "execution_plan_markdown_path": autotrigger.portable_path(execution_plan_markdown_path),
             "execution_run_path": autotrigger.portable_path(execution_run_path),
             "execution_run_markdown_path": autotrigger.portable_path(execution_run_markdown_path),
+            "execution_run_check_path": autotrigger.portable_path(execution_run_check_path),
+            "execution_run_check_markdown_path": autotrigger.portable_path(execution_run_check_markdown_path),
             "batch_path": autotrigger.portable_path(batch_path),
             "run_path": autotrigger.portable_path(run_path),
             "health_path": autotrigger.portable_path(health_path),
@@ -332,6 +356,8 @@ def main() -> int:
     parser.add_argument("--execution-plan-markdown-output", type=Path, default=EXECUTION_PLAN_MARKDOWN_PATH)
     parser.add_argument("--execution-run-output", type=Path, default=EXECUTION_RUN_PATH)
     parser.add_argument("--execution-run-markdown-output", type=Path, default=EXECUTION_RUN_MARKDOWN_PATH)
+    parser.add_argument("--execution-run-check-output", type=Path, default=EXECUTION_RUN_CHECK_PATH)
+    parser.add_argument("--execution-run-check-markdown-output", type=Path, default=EXECUTION_RUN_CHECK_MARKDOWN_PATH)
     args = parser.parse_args()
 
     payload = refresh_pipeline(
@@ -366,6 +392,8 @@ def main() -> int:
         execution_plan_markdown_path=args.execution_plan_markdown_output,
         execution_run_path=args.execution_run_output,
         execution_run_markdown_path=args.execution_run_markdown_output,
+        execution_run_check_path=args.execution_run_check_output,
+        execution_run_check_markdown_path=args.execution_run_check_markdown_output,
     )
     print(json.dumps(payload, indent=2))
     return 0

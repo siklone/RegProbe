@@ -39,6 +39,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_execution_run_planned_jobs = int(counts.get("symbol_resolution_execution_run_planned_jobs") or 0)
     symbol_resolution_execution_run_ready_jobs = int(counts.get("symbol_resolution_execution_run_ready_jobs") or 0)
     symbol_resolution_execution_run_blocked_jobs = int(counts.get("symbol_resolution_execution_run_blocked_jobs") or 0)
+    symbol_resolution_execution_run_check_errors = int(counts.get("symbol_resolution_execution_run_check_errors") or 0)
     dispatch_jobs = int(counts.get("dispatch_jobs") or 0)
     autotrigger_dispatch_jobs = int(counts.get("autotrigger_dispatch_jobs") or 0)
     run_selected_jobs = int(counts.get("run_selected_jobs") or 0)
@@ -62,6 +63,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_transfer_pack = payload.get("symbol_resolution_transfer_pack") or {}
     symbol_resolution_transfer_pack_check = payload.get("symbol_resolution_transfer_pack_check") or {}
     symbol_resolution_execution_run = payload.get("symbol_resolution_execution_run") or {}
+    symbol_resolution_execution_run_check = payload.get("symbol_resolution_execution_run_check") or {}
 
     if len(input_bundle_paths) != input_manifest_selected:
         errors.append(f"input_manifest_selected mismatch: counts={input_manifest_selected} coverage={len(input_bundle_paths)}")
@@ -137,6 +139,12 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
         )
     if symbol_resolution_transfer_pack_selected_jobs > 0 and symbol_resolution_execution_run.get("status") != "ready":
         errors.append("symbol_resolution_execution_run must be ready when transfer pack has selected jobs")
+    if symbol_resolution_execution_run_ready_jobs > 0 and symbol_resolution_execution_run_check.get("status") != "ok":
+        errors.append("symbol_resolution_execution_run_check must be ok when execution run has ready jobs")
+    if int(symbol_resolution_execution_run_check.get("error_count") or 0) != symbol_resolution_execution_run_check_errors:
+        errors.append("symbol_resolution_execution_run_check error_count does not match counts")
+    if symbol_resolution_execution_run_check_errors > 0 and symbol_resolution_execution_run_check.get("status") == "ok":
+        errors.append("symbol_resolution_execution_run_check cannot be ok when errors are present")
     if len(autotrigger_dispatch_candidate_ids) != autotrigger_dispatch_jobs:
         errors.append(
             "autotrigger_dispatch_jobs mismatch: "

@@ -20,6 +20,7 @@ TRANSFER_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer.js
 TRANSFER_PACK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack.json"
 TRANSFER_PACK_CHECK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-check.json"
 EXECUTION_RUN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run.json"
+EXECUTION_RUN_CHECK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run-check.json"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
@@ -70,10 +71,12 @@ def health_payload(
     run: dict[str, Any],
     *,
     execution_run: dict[str, Any] | None = None,
+    execution_run_check: dict[str, Any] | None = None,
     generated_utc: str | None = None,
 ) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
     execution_run = execution_run or {}
+    execution_run_check = execution_run_check or {}
     input_entries = input_manifest.get("entries") or []
     queue_candidates = [str(row.get("candidate_id") or "") for row in queue_rows]
     seed_candidates = [str(row.get("candidate_id") or "") for row in seed_rows]
@@ -135,6 +138,7 @@ def health_payload(
         "symbol_transfer_pack_path": portable_path(TRANSFER_PACK_PATH),
         "symbol_transfer_pack_check_path": portable_path(TRANSFER_PACK_CHECK_PATH),
         "symbol_execution_run_path": portable_path(EXECUTION_RUN_PATH),
+        "symbol_execution_run_check_path": portable_path(EXECUTION_RUN_CHECK_PATH),
         "batch_path": portable_path(BATCH_PATH),
         "run_path": portable_path(RUN_PATH),
         "counts": {
@@ -154,6 +158,7 @@ def health_payload(
             "symbol_resolution_execution_run_planned_jobs": int((execution_run.get("counts") or {}).get("planned_jobs") or 0),
             "symbol_resolution_execution_run_ready_jobs": int((execution_run.get("counts") or {}).get("ready_jobs") or 0),
             "symbol_resolution_execution_run_blocked_jobs": int((execution_run.get("counts") or {}).get("blocked_jobs") or 0),
+            "symbol_resolution_execution_run_check_errors": len(execution_run_check.get("errors") or []),
             "dispatch_jobs": int(batch.get("job_count") or 0),
             "autotrigger_dispatch_jobs": len(autotrigger_jobs),
             "run_selected_jobs": int(run.get("selected_job_count") or 0),
@@ -206,6 +211,12 @@ def health_payload(
             "ready_jobs": int((execution_run.get("counts") or {}).get("ready_jobs") or 0),
             "blocked_jobs": int((execution_run.get("counts") or {}).get("blocked_jobs") or 0),
             "executed_jobs": int((execution_run.get("counts") or {}).get("executed_jobs") or 0),
+        },
+        "symbol_resolution_execution_run_check": {
+            "status": execution_run_check.get("check_status"),
+            "error_count": len(execution_run_check.get("errors") or []),
+            "jobs_with_blockers": int((execution_run_check.get("counts") or {}).get("jobs_with_blockers") or 0),
+            "blocked_jobs_with_blockers": int((execution_run_check.get("counts") or {}).get("blocked_jobs_with_blockers") or 0),
         },
         "runner": {
             "available": bool(run.get("runner_available")),
@@ -268,6 +279,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol resolution transfer pack check errors: `{counts.get('symbol_resolution_transfer_pack_check_errors', 0)}`",
         f"- Symbol resolution execution run ready jobs: `{counts.get('symbol_resolution_execution_run_ready_jobs', 0)}`",
         f"- Symbol resolution execution run blocked jobs: `{counts.get('symbol_resolution_execution_run_blocked_jobs', 0)}`",
+        f"- Symbol resolution execution run check errors: `{counts.get('symbol_resolution_execution_run_check_errors', 0)}`",
         f"- Dispatch jobs: `{counts.get('dispatch_jobs', 0)}`",
         f"- Autotrigger dispatch jobs: `{counts.get('autotrigger_dispatch_jobs', 0)}`",
         f"- Run selected jobs: `{counts.get('run_selected_jobs', 0)}`",
@@ -336,6 +348,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Planned jobs: `{(payload.get('symbol_resolution_execution_run') or {}).get('planned_jobs')}`",
         f"- Ready jobs: `{(payload.get('symbol_resolution_execution_run') or {}).get('ready_jobs')}`",
         f"- Blocked jobs: `{(payload.get('symbol_resolution_execution_run') or {}).get('blocked_jobs')}`",
+        f"- Check status: `{(payload.get('symbol_resolution_execution_run_check') or {}).get('status')}`",
+        f"- Check errors: `{(payload.get('symbol_resolution_execution_run_check') or {}).get('error_count')}`",
         "",
         "## Symbol Batch Diagnostics",
         "",
@@ -363,6 +377,7 @@ def main() -> int:
     transfer_pack = load_json(TRANSFER_PACK_PATH)
     transfer_pack_check = load_json(TRANSFER_PACK_CHECK_PATH)
     execution_run = load_json(EXECUTION_RUN_PATH)
+    execution_run_check = load_json(EXECUTION_RUN_CHECK_PATH)
     batch = load_json(BATCH_PATH)
     run = load_json(RUN_PATH)
     payload = health_payload(
@@ -379,6 +394,7 @@ def main() -> int:
         batch,
         run,
         execution_run=execution_run,
+        execution_run_check=execution_run_check,
     )
     write_json(OUTPUT_PATH, payload)
     write_text(MARKDOWN_PATH, render_markdown(payload))

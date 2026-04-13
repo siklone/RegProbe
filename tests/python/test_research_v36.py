@@ -2962,6 +2962,9 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             execution_run_payload = json.loads(execution_run_path.read_text(encoding="utf-8"))
             self.assertEqual(execution_run_payload["execution_run_status"], "ready")
             self.assertEqual(execution_run_payload["counts"]["ready_jobs"], 1)
+            execution_run_check_path = temp_root / "ghidra-symbol-resolution-transfer-pack-execution-run-check.json"
+            execution_run_check_payload = json.loads(execution_run_check_path.read_text(encoding="utf-8"))
+            self.assertEqual(execution_run_check_payload["check_status"], "ok")
 
             batch_payload = json.loads(batch_path.read_text(encoding="utf-8"))
             self.assertEqual(batch_payload["jobs"][0]["autotrigger_seed_count"], 1)
@@ -2975,6 +2978,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             self.assertEqual(health_payload["counts"]["symbol_resolution_transfer_pack_selected_jobs"], 1)
             self.assertEqual(health_payload["symbol_resolution_transfer_pack_check"]["status"], "ok")
             self.assertEqual(health_payload["symbol_resolution_execution_run"]["status"], "ready")
+            self.assertEqual(health_payload["symbol_resolution_execution_run_check"]["status"], "ok")
             self.assertEqual(payload["outputs"]["health_path"], health_path.as_posix())
 
     def test_refresh_pipeline_supports_bundle_root(self) -> None:
@@ -3406,6 +3410,14 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             ],
             "blocked_jobs": [],
         }
+        execution_run_check = {
+            "check_status": "ok",
+            "errors": [],
+            "counts": {
+                "jobs_with_blockers": 0,
+                "blocked_jobs_with_blockers": 0,
+            },
+        }
         batch = {
             "job_count": 2,
             "jobs": [
@@ -3443,6 +3455,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             batch,
             run,
             execution_run=execution_run,
+            execution_run_check=execution_run_check,
             generated_utc="2026-04-13T00:00:00Z",
         )
 
@@ -3458,6 +3471,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["symbol_resolution_transfer_pack_selected_jobs"], 1)
         self.assertEqual(payload["counts"]["symbol_resolution_transfer_pack_check_errors"], 0)
         self.assertEqual(payload["counts"]["symbol_resolution_execution_run_ready_jobs"], 1)
+        self.assertEqual(payload["counts"]["symbol_resolution_execution_run_check_errors"], 0)
         self.assertEqual(payload["counts"]["autotrigger_dispatch_jobs"], 1)
         self.assertFalse(payload["runner"]["available"])
         self.assertTrue(payload["symbol_resolution_runner"]["available"])
@@ -3468,6 +3482,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["symbol_resolution_transfer_pack_check"]["checked_archive_files"], 19)
         self.assertEqual(payload["symbol_resolution_execution_run"]["status"], "ready")
         self.assertEqual(payload["symbol_resolution_execution_run"]["ready_jobs"], 1)
+        self.assertEqual(payload["symbol_resolution_execution_run_check"]["status"], "ok")
         self.assertEqual(payload["symbol_resolution_batch"]["resolution_kind_counts"], {})
         self.assertEqual(payload["focus"]["top_input_bundle"], "evidence/files/example/normalized-registry-bundle.json")
         self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
@@ -3673,6 +3688,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             self.assertEqual(payload["transfer_pack_check"]["error_count"], 0)
             self.assertEqual(payload["execution_run"]["status"], "ready")
             self.assertEqual(payload["execution_run"]["ready_jobs"], 1)
+            self.assertEqual(payload["execution_run_check"]["status"], "ok")
+            self.assertEqual(payload["execution_run_check"]["error_count"], 0)
             self.assertEqual(payload["operator"]["blocker"], "symbol-resolution-ready")
             self.assertIn("Run the symbol-resolution batch", payload["operator"]["next_action"])
             symbol_queue_payload = json.loads(symbol_queue_path.read_text(encoding="utf-8"))
@@ -3692,6 +3709,9 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             execution_run_path = temp_root / "ghidra-symbol-resolution-transfer-pack-execution-run.json"
             execution_run_payload = json.loads(execution_run_path.read_text(encoding="utf-8"))
             self.assertEqual(execution_run_payload["execution_run_status"], "ready")
+            execution_run_check_path = temp_root / "ghidra-symbol-resolution-transfer-pack-execution-run-check.json"
+            execution_run_check_payload = json.loads(execution_run_check_path.read_text(encoding="utf-8"))
+            self.assertEqual(execution_run_check_payload["check_status"], "ok")
             self.assertTrue(transfer_pack_archive_path.exists())
             self.assertTrue(output_path.exists())
             self.assertTrue(markdown_path.exists())

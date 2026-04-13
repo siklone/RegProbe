@@ -28,7 +28,7 @@ python3 registry-research-framework/scripts/refresh_ghidra_autotrigger_pipeline.
   --discover-input-root evidence
 ```
 
-That refresh path now updates the symbol-resolution handoff files, transfer pack, pack verification, local import rehearsal, execution plan, and dry-run execution surface in the same pass, so the operator view stays current without a second manual step.
+That refresh path now updates the symbol-resolution handoff files, transfer pack, pack verification, local import rehearsal, execution plan, dry-run execution surface, and dry-run validation in the same pass, so the operator view stays current without a second manual step.
 
 Run the one-shot sync wrapper:
 
@@ -189,4 +189,4 @@ The smoke harness also materializes, verifies, imports, plans execution, dry-run
 
 For the destination side, the unpack helper validates the summary and archive before extraction, then writes an import surface. This keeps the transfer lane reversible: a pack can be checked in place, copied as a zip, checked again from the archive alone, and unpacked only after those checks pass.
 
-After import, the execution-plan helper rewrites the original repo-relative commands into imported-pack commands that run from the extracted pack root. The execution-run helper then performs the final dry-run by default: it records cwd, argv, and shell-safe command text without touching the VM. It can execute with `--execute`, but the safe path is to review the dry-run surface first. The regular refresh and sync path now emits that dry-run surface too, not just the smoke harness, so health can fail if a transfer pack is selected but no run-ready rehearsal exists.
+After import, the execution-plan helper rewrites the original repo-relative commands into imported-pack commands that run from the extracted pack root. The execution-run helper then performs the final dry-run by default: it records cwd, argv, and shell-safe command text without touching the VM. It can execute with `--execute`, but the safe path is to review the dry-run surface first. The regular refresh and sync path now emits and validates that dry-run surface too, not just the smoke harness, so health can fail if a transfer pack is selected but no checked run-ready rehearsal exists.
