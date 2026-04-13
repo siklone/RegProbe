@@ -3563,6 +3563,23 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "blocked_jobs_with_blockers": 0,
             },
         }
+        etw_stackwalk_plan = {
+            "plan_status": "ready",
+            "profile_id": "kernel-registry-stackwalk-v1",
+            "errors": [],
+            "run": {
+                "run_id": "registry-stackwalk",
+                "host_etl_repo_path": "evidence/files/etw-stackwalk/registry-stackwalk/registry-stackwalk.etl",
+            },
+            "stack_capture": {
+                "expected": True,
+                "stackwalk_events": ["RegQueryValue", "RegSetValue"],
+            },
+        }
+        etw_stackwalk_plan_check = {
+            "check_status": "ok",
+            "errors": [],
+        }
         batch = {
             "job_count": 2,
             "jobs": [
@@ -3601,6 +3618,8 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             run,
             execution_run=execution_run,
             execution_run_check=execution_run_check,
+            etw_stackwalk_plan=etw_stackwalk_plan,
+            etw_stackwalk_plan_check=etw_stackwalk_plan_check,
             generated_utc="2026-04-13T00:00:00Z",
         )
 
@@ -3617,6 +3636,8 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["symbol_resolution_transfer_pack_check_errors"], 0)
         self.assertEqual(payload["counts"]["symbol_resolution_execution_run_ready_jobs"], 1)
         self.assertEqual(payload["counts"]["symbol_resolution_execution_run_check_errors"], 0)
+        self.assertEqual(payload["counts"]["etw_stackwalk_plan_errors"], 0)
+        self.assertEqual(payload["counts"]["etw_stackwalk_plan_check_errors"], 0)
         self.assertEqual(payload["counts"]["autotrigger_dispatch_jobs"], 1)
         self.assertFalse(payload["runner"]["available"])
         self.assertTrue(payload["symbol_resolution_runner"]["available"])
@@ -3628,6 +3649,9 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["symbol_resolution_execution_run"]["status"], "ready")
         self.assertEqual(payload["symbol_resolution_execution_run"]["ready_jobs"], 1)
         self.assertEqual(payload["symbol_resolution_execution_run_check"]["status"], "ok")
+        self.assertEqual(payload["etw_stackwalk_capture"]["plan_status"], "ready")
+        self.assertEqual(payload["etw_stackwalk_capture"]["check_status"], "ok")
+        self.assertEqual(payload["etw_stackwalk_capture"]["stackwalk_event_count"], 2)
         self.assertEqual(payload["symbol_resolution_batch"]["resolution_kind_counts"], {})
         self.assertEqual(payload["focus"]["top_input_bundle"], "evidence/files/example/normalized-registry-bundle.json")
         self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
@@ -3645,6 +3669,8 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertIn("Top queue candidate", markdown)
         self.assertIn("`power.keep`", markdown)
         self.assertIn("Top symbol resolution request", markdown)
+        self.assertIn("ETW Stackwalk Capture", markdown)
+        self.assertIn("registry-stackwalk", markdown)
 
     def test_validate_health_rejects_inconsistent_counts(self) -> None:
         payload = {
@@ -3735,6 +3761,146 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertTrue(any("symbol_resolution_transfer_pack_check cannot be ok" in error for error in errors))
         self.assertTrue(any("selected+blocked does not cover dispatch jobs" in error for error in errors))
         self.assertTrue(any("top_queue_candidate does not match" in error for error in errors))
+
+    def test_validate_health_rejects_inconsistent_etw_stackwalk_status(self) -> None:
+        payload = {
+            "counts": {
+                "input_manifest_selected": 0,
+                "queue_jobs": 0,
+                "autotrigger_seeds": 0,
+                "symbol_resolution_requests": 0,
+                "symbol_resolution_batch_jobs": 0,
+                "symbol_resolution_runnable_jobs": 0,
+                "symbol_resolution_blocked_jobs": 0,
+                "symbol_resolution_run_selected_jobs": 0,
+                "symbol_resolution_run_blocked_jobs": 0,
+                "symbol_resolution_handoff_selected_jobs": 0,
+                "symbol_resolution_transfer_selected_jobs": 0,
+                "symbol_resolution_transfer_pack_selected_jobs": 0,
+                "symbol_resolution_transfer_pack_check_errors": 0,
+                "symbol_resolution_execution_run_planned_jobs": 0,
+                "symbol_resolution_execution_run_ready_jobs": 0,
+                "symbol_resolution_execution_run_blocked_jobs": 0,
+                "symbol_resolution_execution_run_check_errors": 0,
+                "etw_stackwalk_plan_errors": 0,
+                "etw_stackwalk_plan_check_errors": 1,
+                "dispatch_jobs": 0,
+                "autotrigger_dispatch_jobs": 0,
+                "run_selected_jobs": 0,
+                "run_blocked_jobs": 0,
+            },
+            "coverage": {
+                "input_bundle_paths": [],
+                "queued_candidate_ids": [],
+                "seed_candidate_ids": [],
+                "symbol_resolution_request_ids": [],
+                "symbol_resolution_lookup_keys": [],
+                "symbol_resolution_batch_request_ids": [],
+                "symbol_resolution_handoff_request_ids": [],
+                "symbol_resolution_transfer_request_ids": [],
+                "symbol_resolution_transfer_pack_request_ids": [],
+                "symbol_resolution_execution_run_request_ids": [],
+                "autotrigger_dispatch_candidate_ids": [],
+            },
+            "focus": {
+                "top_input_bundle": None,
+                "top_queue_candidate": None,
+                "top_autotrigger_candidate": None,
+                "top_symbol_resolution_request": None,
+                "top_symbol_resolution_batch_request": None,
+                "top_symbol_resolution_handoff_request": None,
+                "top_symbol_resolution_transfer_request": None,
+                "top_symbol_resolution_transfer_pack_request": None,
+                "top_symbol_resolution_execution_run_request": None,
+                "missing_input_jobs": [],
+            },
+            "runner": {"available": False, "error": None},
+            "symbol_resolution_runner": {"available": False, "error": None},
+            "etw_stackwalk_capture": {
+                "plan_status": "ready",
+                "check_status": "error",
+                "stack_expected": False,
+                "stackwalk_event_count": 0,
+                "plan_errors": [],
+                "check_errors": ["missing required stackwalk events: RegSetValue"],
+            },
+        }
+
+        errors = ghidra_autotrigger_health_check.validate_health(payload)
+
+        self.assertTrue(any("etw_stackwalk check must be ok" in error for error in errors))
+        self.assertTrue(any("etw_stackwalk stack_expected must be true" in error for error in errors))
+        self.assertTrue(any("etw_stackwalk stackwalk_event_count must be positive" in error for error in errors))
+
+    def test_validate_health_allows_missing_optional_etw_stackwalk_surface(self) -> None:
+        payload = {
+            "counts": {
+                "input_manifest_selected": 0,
+                "queue_jobs": 0,
+                "autotrigger_seeds": 0,
+                "symbol_resolution_requests": 0,
+                "symbol_resolution_batch_jobs": 0,
+                "symbol_resolution_runnable_jobs": 0,
+                "symbol_resolution_blocked_jobs": 0,
+                "symbol_resolution_run_selected_jobs": 0,
+                "symbol_resolution_run_blocked_jobs": 0,
+                "symbol_resolution_handoff_selected_jobs": 0,
+                "symbol_resolution_transfer_selected_jobs": 0,
+                "symbol_resolution_transfer_pack_selected_jobs": 0,
+                "symbol_resolution_transfer_pack_check_errors": 0,
+                "symbol_resolution_execution_run_planned_jobs": 0,
+                "symbol_resolution_execution_run_ready_jobs": 0,
+                "symbol_resolution_execution_run_blocked_jobs": 0,
+                "symbol_resolution_execution_run_check_errors": 0,
+                "dispatch_jobs": 0,
+                "autotrigger_dispatch_jobs": 0,
+                "run_selected_jobs": 0,
+                "run_blocked_jobs": 0,
+            },
+            "coverage": {
+                "input_bundle_paths": [],
+                "queued_candidate_ids": [],
+                "seed_candidate_ids": [],
+                "symbol_resolution_request_ids": [],
+                "symbol_resolution_lookup_keys": [],
+                "symbol_resolution_batch_request_ids": [],
+                "symbol_resolution_handoff_request_ids": [],
+                "symbol_resolution_transfer_request_ids": [],
+                "symbol_resolution_transfer_pack_request_ids": [],
+                "symbol_resolution_execution_run_request_ids": [],
+                "autotrigger_dispatch_candidate_ids": [],
+            },
+            "focus": {
+                "top_input_bundle": None,
+                "top_queue_candidate": None,
+                "top_autotrigger_candidate": None,
+                "top_symbol_resolution_request": None,
+                "top_symbol_resolution_batch_request": None,
+                "top_symbol_resolution_handoff_request": None,
+                "top_symbol_resolution_transfer_request": None,
+                "top_symbol_resolution_transfer_pack_request": None,
+                "top_symbol_resolution_execution_run_request": None,
+                "missing_input_jobs": [],
+            },
+            "runner": {"available": False, "error": None},
+            "symbol_resolution_runner": {"available": False, "error": None},
+            "symbol_resolution_handoff": {"selected_jobs": 0},
+            "symbol_resolution_transfer": {"selected_jobs": 0},
+            "symbol_resolution_transfer_pack": {"selected_jobs": 0},
+            "symbol_resolution_transfer_pack_check": {"status": None, "error_count": 0},
+            "etw_stackwalk_capture": {
+                "plan_status": None,
+                "check_status": None,
+                "stack_expected": False,
+                "stackwalk_event_count": 0,
+                "plan_errors": [],
+                "check_errors": [],
+            },
+        }
+
+        errors = ghidra_autotrigger_health_check.validate_health(payload)
+
+        self.assertEqual(errors, [])
 
 
 class GhidraAutotriggerSyncTests(unittest.TestCase):

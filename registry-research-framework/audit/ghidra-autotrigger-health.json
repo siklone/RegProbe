@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T11:16:03.700120Z",
+  "generated_utc": "2026-04-13T18:07:09.745651Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -11,6 +11,10 @@
   "symbol_transfer_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.json",
   "symbol_transfer_pack_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.json",
   "symbol_transfer_pack_check_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.json",
+  "symbol_execution_run_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run.json",
+  "symbol_execution_run_check_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run-check.json",
+  "etw_stackwalk_plan_path": "registry-research-framework/audit/etw-stackwalk-capture-plan.json",
+  "etw_stackwalk_plan_check_path": "registry-research-framework/audit/etw-stackwalk-capture-plan-check.json",
   "batch_path": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
   "counts": {
@@ -27,6 +31,12 @@
     "symbol_resolution_transfer_selected_jobs": 0,
     "symbol_resolution_transfer_pack_selected_jobs": 0,
     "symbol_resolution_transfer_pack_check_errors": 0,
+    "symbol_resolution_execution_run_planned_jobs": 0,
+    "symbol_resolution_execution_run_ready_jobs": 0,
+    "symbol_resolution_execution_run_blocked_jobs": 0,
+    "symbol_resolution_execution_run_check_errors": 0,
+    "etw_stackwalk_plan_errors": 0,
+    "etw_stackwalk_plan_check_errors": 0,
     "dispatch_jobs": 4,
     "autotrigger_dispatch_jobs": 0,
     "run_selected_jobs": 4,
@@ -71,10 +81,36 @@
     "checked_archive_files": 0,
     "archive_entries": 0
   },
+  "symbol_resolution_execution_run": {
+    "status": null,
+    "mode": null,
+    "operator_blocker": null,
+    "planned_jobs": 0,
+    "ready_jobs": 0,
+    "blocked_jobs": 0,
+    "executed_jobs": 0
+  },
+  "symbol_resolution_execution_run_check": {
+    "status": null,
+    "error_count": 0,
+    "jobs_with_blockers": 0,
+    "blocked_jobs_with_blockers": 0
+  },
   "runner": {
     "available": false,
     "mode": "dry-run",
     "error": null
+  },
+  "etw_stackwalk_capture": {
+    "plan_status": "ready",
+    "check_status": "ok",
+    "profile_id": "kernel-registry-stackwalk-v1",
+    "run_id": "wave4-registry-stackwalk",
+    "stack_expected": true,
+    "stackwalk_event_count": 7,
+    "handoff_etl_path": "evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl",
+    "plan_errors": [],
+    "check_errors": []
   },
   "coverage": {
     "input_bundle_paths": [],
@@ -92,6 +128,7 @@
     "symbol_resolution_handoff_request_ids": [],
     "symbol_resolution_transfer_request_ids": [],
     "symbol_resolution_transfer_pack_request_ids": [],
+    "symbol_resolution_execution_run_request_ids": [],
     "autotrigger_dispatch_candidate_ids": []
   },
   "focus": {
@@ -103,6 +140,7 @@
     "top_symbol_resolution_handoff_request": null,
     "top_symbol_resolution_transfer_request": null,
     "top_symbol_resolution_transfer_pack_request": null,
+    "top_symbol_resolution_execution_run_request": null,
     "missing_input_jobs": []
   }
 }

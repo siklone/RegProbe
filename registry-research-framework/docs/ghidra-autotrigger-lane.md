@@ -173,7 +173,7 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 - `registry-research-framework/audit/ghidra-autotrigger-health.json`
   Machine-readable health summary for the lane.
 - `registry-research-framework/audit/ghidra-autotrigger-health.md`
-  Human-readable health snapshot, now including symbol handoff, transfer readiness, pack verification, and execution dry-run readiness.
+  Human-readable health snapshot, now including symbol handoff, transfer readiness, pack verification, execution dry-run readiness, and ETW stackwalk capture-plan readiness.
 - `registry-research-framework/audit/ghidra-autotrigger-sync.json`
   One-shot sync result with status `ok`, `idle`, or `error`.
 - `registry-research-framework/audit/ghidra-autotrigger-sync.md`

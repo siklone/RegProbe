@@ -1,6 +1,6 @@
 # Ghidra Autotrigger Health
 
-- Generated UTC: `2026-04-13T11:16:03.700120Z`
+- Generated UTC: `2026-04-13T18:07:09.745651Z`
 - Input bundles selected: `0`
 - Queue jobs: `4`
 - Autotrigger seeds: `0`
@@ -12,6 +12,11 @@
 - Symbol resolution transfer selected jobs: `0`
 - Symbol resolution transfer pack selected jobs: `0`
 - Symbol resolution transfer pack check errors: `0`
+- Symbol resolution execution run ready jobs: `0`
+- Symbol resolution execution run blocked jobs: `0`
+- Symbol resolution execution run check errors: `0`
+- ETW stackwalk plan status: `ready`
+- ETW stackwalk plan check: `ok`
 - Dispatch jobs: `4`
 - Autotrigger dispatch jobs: `0`
 - Run selected jobs: `4`
@@ -29,6 +34,7 @@
 - Top symbol resolution handoff request: `None`
 - Top symbol resolution transfer request: `None`
 - Top symbol resolution transfer pack request: `None`
+- Top symbol resolution execution run request: `None`
 
 ## Coverage
 
@@ -40,6 +46,7 @@
 - Symbol resolution handoff request ids: `0`
 - Symbol resolution transfer request ids: `0`
 - Symbol resolution transfer pack request ids: `0`
+- Symbol resolution execution run request ids: `0`
 - Autotrigger dispatch candidate ids: `0`
 
 ## Symbol Handoff
@@ -70,6 +77,28 @@
 - Error count: `0`
 - Checked pack files: `0`
 - Checked archive files: `0`
+
+## Transfer Execution Run
+
+- Run status: `None`
+- Operator blocker: `None`
+- Planned jobs: `0`
+- Ready jobs: `0`
+- Blocked jobs: `0`
+- Check status: `None`
+- Check errors: `0`
+
+## ETW Stackwalk Capture
+
+- Plan status: `ready`
+- Check status: `ok`
+- Profile: `kernel-registry-stackwalk-v1`
+- Run id: `wave4-registry-stackwalk`
+- Stack expected: `True`
+- Stackwalk event count: `7`
+- Handoff ETL path: `evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl`
+- Plan errors: `0`
+- Check errors: `0`
 
 ## Symbol Batch Diagnostics
 

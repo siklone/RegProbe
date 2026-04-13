@@ -21,6 +21,8 @@ TRANSFER_PACK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transf
 TRANSFER_PACK_CHECK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-check.json"
 EXECUTION_RUN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run.json"
 EXECUTION_RUN_CHECK_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer-pack-execution-run-check.json"
+ETW_STACKWALK_PLAN_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-capture-plan.json"
+ETW_STACKWALK_PLAN_CHECK_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-capture-plan-check.json"
 BATCH_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-batch.json"
 RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
@@ -72,11 +74,15 @@ def health_payload(
     *,
     execution_run: dict[str, Any] | None = None,
     execution_run_check: dict[str, Any] | None = None,
+    etw_stackwalk_plan: dict[str, Any] | None = None,
+    etw_stackwalk_plan_check: dict[str, Any] | None = None,
     generated_utc: str | None = None,
 ) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
     execution_run = execution_run or {}
     execution_run_check = execution_run_check or {}
+    etw_stackwalk_plan = etw_stackwalk_plan or {}
+    etw_stackwalk_plan_check = etw_stackwalk_plan_check or {}
     input_entries = input_manifest.get("entries") or []
     queue_candidates = [str(row.get("candidate_id") or "") for row in queue_rows]
     seed_candidates = [str(row.get("candidate_id") or "") for row in seed_rows]
@@ -139,6 +145,8 @@ def health_payload(
         "symbol_transfer_pack_check_path": portable_path(TRANSFER_PACK_CHECK_PATH),
         "symbol_execution_run_path": portable_path(EXECUTION_RUN_PATH),
         "symbol_execution_run_check_path": portable_path(EXECUTION_RUN_CHECK_PATH),
+        "etw_stackwalk_plan_path": portable_path(ETW_STACKWALK_PLAN_PATH),
+        "etw_stackwalk_plan_check_path": portable_path(ETW_STACKWALK_PLAN_CHECK_PATH),
         "batch_path": portable_path(BATCH_PATH),
         "run_path": portable_path(RUN_PATH),
         "counts": {
@@ -159,6 +167,8 @@ def health_payload(
             "symbol_resolution_execution_run_ready_jobs": int((execution_run.get("counts") or {}).get("ready_jobs") or 0),
             "symbol_resolution_execution_run_blocked_jobs": int((execution_run.get("counts") or {}).get("blocked_jobs") or 0),
             "symbol_resolution_execution_run_check_errors": len(execution_run_check.get("errors") or []),
+            "etw_stackwalk_plan_errors": len(etw_stackwalk_plan.get("errors") or []),
+            "etw_stackwalk_plan_check_errors": len(etw_stackwalk_plan_check.get("errors") or []),
             "dispatch_jobs": int(batch.get("job_count") or 0),
             "autotrigger_dispatch_jobs": len(autotrigger_jobs),
             "run_selected_jobs": int(run.get("selected_job_count") or 0),
@@ -223,6 +233,17 @@ def health_payload(
             "mode": run.get("mode"),
             "error": run.get("error"),
         },
+        "etw_stackwalk_capture": {
+            "plan_status": etw_stackwalk_plan.get("plan_status"),
+            "check_status": etw_stackwalk_plan_check.get("check_status"),
+            "profile_id": etw_stackwalk_plan.get("profile_id"),
+            "run_id": (etw_stackwalk_plan.get("run") or {}).get("run_id"),
+            "stack_expected": bool((etw_stackwalk_plan.get("stack_capture") or {}).get("expected")),
+            "stackwalk_event_count": len((etw_stackwalk_plan.get("stack_capture") or {}).get("stackwalk_events") or []),
+            "handoff_etl_path": (etw_stackwalk_plan.get("run") or {}).get("host_etl_repo_path"),
+            "plan_errors": etw_stackwalk_plan.get("errors") or [],
+            "check_errors": etw_stackwalk_plan_check.get("errors") or [],
+        },
         "coverage": {
             "input_bundle_paths": [str(entry.get("path") or "") for entry in input_entries],
             "queued_candidate_ids": queue_candidates,
@@ -262,6 +283,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
     runner = payload.get("runner") or {}
     coverage = payload.get("coverage") or {}
     focus = payload.get("focus") or {}
+    etw_stackwalk_capture = payload.get("etw_stackwalk_capture") or {}
     lines = [
         "# Ghidra Autotrigger Health",
         "",
@@ -280,6 +302,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol resolution execution run ready jobs: `{counts.get('symbol_resolution_execution_run_ready_jobs', 0)}`",
         f"- Symbol resolution execution run blocked jobs: `{counts.get('symbol_resolution_execution_run_blocked_jobs', 0)}`",
         f"- Symbol resolution execution run check errors: `{counts.get('symbol_resolution_execution_run_check_errors', 0)}`",
+        f"- ETW stackwalk plan status: `{etw_stackwalk_capture.get('plan_status')}`",
+        f"- ETW stackwalk plan check: `{etw_stackwalk_capture.get('check_status')}`",
         f"- Dispatch jobs: `{counts.get('dispatch_jobs', 0)}`",
         f"- Autotrigger dispatch jobs: `{counts.get('autotrigger_dispatch_jobs', 0)}`",
         f"- Run selected jobs: `{counts.get('run_selected_jobs', 0)}`",
@@ -351,6 +375,18 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Check status: `{(payload.get('symbol_resolution_execution_run_check') or {}).get('status')}`",
         f"- Check errors: `{(payload.get('symbol_resolution_execution_run_check') or {}).get('error_count')}`",
         "",
+        "## ETW Stackwalk Capture",
+        "",
+        f"- Plan status: `{etw_stackwalk_capture.get('plan_status')}`",
+        f"- Check status: `{etw_stackwalk_capture.get('check_status')}`",
+        f"- Profile: `{etw_stackwalk_capture.get('profile_id')}`",
+        f"- Run id: `{etw_stackwalk_capture.get('run_id')}`",
+        f"- Stack expected: `{etw_stackwalk_capture.get('stack_expected')}`",
+        f"- Stackwalk event count: `{etw_stackwalk_capture.get('stackwalk_event_count')}`",
+        f"- Handoff ETL path: `{etw_stackwalk_capture.get('handoff_etl_path')}`",
+        f"- Plan errors: `{len(etw_stackwalk_capture.get('plan_errors') or [])}`",
+        f"- Check errors: `{len(etw_stackwalk_capture.get('check_errors') or [])}`",
+        "",
         "## Symbol Batch Diagnostics",
         "",
         f"- Missing host tools: `{', '.join((payload.get('symbol_resolution_batch') or {}).get('missing_host_tools') or []) or 'none'}`",
@@ -378,6 +414,8 @@ def main() -> int:
     transfer_pack_check = load_json(TRANSFER_PACK_CHECK_PATH)
     execution_run = load_json(EXECUTION_RUN_PATH)
     execution_run_check = load_json(EXECUTION_RUN_CHECK_PATH)
+    etw_stackwalk_plan = load_json(ETW_STACKWALK_PLAN_PATH)
+    etw_stackwalk_plan_check = load_json(ETW_STACKWALK_PLAN_CHECK_PATH)
     batch = load_json(BATCH_PATH)
     run = load_json(RUN_PATH)
     payload = health_payload(
@@ -395,6 +433,8 @@ def main() -> int:
         run,
         execution_run=execution_run,
         execution_run_check=execution_run_check,
+        etw_stackwalk_plan=etw_stackwalk_plan,
+        etw_stackwalk_plan_check=etw_stackwalk_plan_check,
     )
     write_json(OUTPUT_PATH, payload)
     write_text(MARKDOWN_PATH, render_markdown(payload))

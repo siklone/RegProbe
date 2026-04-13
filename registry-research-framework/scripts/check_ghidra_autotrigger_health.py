@@ -40,6 +40,8 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_execution_run_ready_jobs = int(counts.get("symbol_resolution_execution_run_ready_jobs") or 0)
     symbol_resolution_execution_run_blocked_jobs = int(counts.get("symbol_resolution_execution_run_blocked_jobs") or 0)
     symbol_resolution_execution_run_check_errors = int(counts.get("symbol_resolution_execution_run_check_errors") or 0)
+    etw_stackwalk_plan_errors = int(counts.get("etw_stackwalk_plan_errors") or 0)
+    etw_stackwalk_plan_check_errors = int(counts.get("etw_stackwalk_plan_check_errors") or 0)
     dispatch_jobs = int(counts.get("dispatch_jobs") or 0)
     autotrigger_dispatch_jobs = int(counts.get("autotrigger_dispatch_jobs") or 0)
     run_selected_jobs = int(counts.get("run_selected_jobs") or 0)
@@ -64,6 +66,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_transfer_pack_check = payload.get("symbol_resolution_transfer_pack_check") or {}
     symbol_resolution_execution_run = payload.get("symbol_resolution_execution_run") or {}
     symbol_resolution_execution_run_check = payload.get("symbol_resolution_execution_run_check") or {}
+    etw_stackwalk_capture = payload.get("etw_stackwalk_capture") or {}
 
     if len(input_bundle_paths) != input_manifest_selected:
         errors.append(f"input_manifest_selected mismatch: counts={input_manifest_selected} coverage={len(input_bundle_paths)}")
@@ -145,6 +148,27 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
         errors.append("symbol_resolution_execution_run_check error_count does not match counts")
     if symbol_resolution_execution_run_check_errors > 0 and symbol_resolution_execution_run_check.get("status") == "ok":
         errors.append("symbol_resolution_execution_run_check cannot be ok when errors are present")
+    etw_stackwalk_active = bool(
+        etw_stackwalk_capture.get("plan_status")
+        or etw_stackwalk_capture.get("check_status")
+        or etw_stackwalk_capture.get("plan_errors")
+        or etw_stackwalk_capture.get("check_errors")
+    )
+    if etw_stackwalk_active:
+        if len(etw_stackwalk_capture.get("plan_errors") or []) != etw_stackwalk_plan_errors:
+            errors.append("etw_stackwalk plan error_count does not match counts")
+        if len(etw_stackwalk_capture.get("check_errors") or []) != etw_stackwalk_plan_check_errors:
+            errors.append("etw_stackwalk check error_count does not match counts")
+        if etw_stackwalk_plan_errors > 0 and etw_stackwalk_capture.get("plan_status") == "ready":
+            errors.append("etw_stackwalk plan cannot be ready when errors are present")
+        if etw_stackwalk_plan_check_errors > 0 and etw_stackwalk_capture.get("check_status") == "ok":
+            errors.append("etw_stackwalk check cannot be ok when errors are present")
+        if etw_stackwalk_capture.get("plan_status") == "ready" and etw_stackwalk_capture.get("check_status") != "ok":
+            errors.append("etw_stackwalk check must be ok when plan is ready")
+        if etw_stackwalk_capture.get("stack_expected") is not True:
+            errors.append("etw_stackwalk stack_expected must be true")
+        if int(etw_stackwalk_capture.get("stackwalk_event_count") or 0) <= 0:
+            errors.append("etw_stackwalk stackwalk_event_count must be positive")
     if len(autotrigger_dispatch_candidate_ids) != autotrigger_dispatch_jobs:
         errors.append(
             "autotrigger_dispatch_jobs mismatch: "
