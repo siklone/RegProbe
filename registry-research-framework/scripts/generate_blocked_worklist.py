@@ -21,6 +21,14 @@ if str(SCRIPTS_ROOT) not in sys.path:
 from research_v36_lib import load_promotion_gate_map, load_records, primary_target  # noqa: E402
 
 
+LANE_PRIORITY = {
+    "restore-story": 40,
+    "ghidra": 35,
+    "runtime-trace": 30,
+    "intentional-hold": 10,
+}
+
+
 def blocker_hint(blockers: list[str], lane: str) -> str:
     lowered = " | ".join(str(item).lower() for item in blockers)
     if "restore-story" in lowered or "rollback" in lowered:
@@ -42,19 +50,24 @@ def blocker_hint(blockers: list[str], lane: str) -> str:
     return "Review blockers manually and choose the next evidence lane."
 
 
+def actionability_for_lane(lane: str) -> str:
+    return "active" if lane in {"restore-story", "ghidra", "runtime-trace"} else "hold"
+
+
+def priority_score_for(lane: str, blocker_count: int) -> int:
+    return int(LANE_PRIORITY.get(lane, 0)) - int(blocker_count)
+
+
 def build_worklist() -> dict[str, Any]:
     gate_map = load_promotion_gate_map()
     record_map = {
         str(record.get("record_id") or record.get("tweak_id") or ""): record
         for record in load_records()
     }
-    blocked_entries = sorted(
-        (
-            entry for entry in gate_map.values()
-            if str(entry.get("promotion_state") or "") == "blocked"
-        ),
-        key=lambda item: str(item.get("candidate_id") or item.get("tweak_id") or ""),
-    )
+    blocked_entries = [
+        entry for entry in gate_map.values()
+        if str(entry.get("promotion_state") or "") == "blocked"
+    ]
 
     items: list[dict[str, Any]] = []
     lane_counts: Counter[str] = Counter()
@@ -62,6 +75,7 @@ def build_worklist() -> dict[str, Any]:
         candidate_id = str(entry.get("candidate_id") or entry.get("tweak_id") or "")
         lane = str(entry.get("next_missing_layer") or "unknown")
         blockers = [str(item) for item in (entry.get("promotion_blockers") or [])]
+        blocker_count = len(blockers)
         record = record_map.get(candidate_id, {})
         target = primary_target(record) if record else {}
         items.append(
@@ -74,7 +88,9 @@ def build_worklist() -> dict[str, Any]:
                     or "Unknown"
                 ),
                 "next_missing_layer": lane,
-                "blocker_count": len(blockers),
+                "actionability": actionability_for_lane(lane),
+                "priority_score": priority_score_for(lane, blocker_count),
+                "blocker_count": blocker_count,
                 "promotion_blockers": blockers,
                 "key_path": str(target.get("path") or entry.get("key_path") or ""),
                 "value_name": str(target.get("value_name") or entry.get("value_name") or ""),
@@ -82,6 +98,14 @@ def build_worklist() -> dict[str, Any]:
             }
         )
         lane_counts[lane] += 1
+
+    items.sort(
+        key=lambda item: (
+            -int(item.get("priority_score") or 0),
+            int(item.get("blocker_count") or 0),
+            str(item.get("candidate_id") or ""),
+        )
+    )
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -105,11 +129,21 @@ def render_markdown(payload: dict[str, Any]) -> str:
     for lane, count in (payload.get("lane_counts") or {}).items():
         lines.append(f"- `{lane}`: {count}")
 
+    actionable = [item for item in (payload.get("items") or []) if item.get("actionability") == "active"][:5]
+    if actionable:
+        lines.extend(["", "## Top Actionable Candidates", ""])
+        for item in actionable:
+            lines.append(
+                f"- `{item['candidate_id']}` (`{item['next_missing_layer']}`, score={item['priority_score']}, blockers={item['blocker_count']})"
+            )
+
     lines.extend(["", "## Candidates", ""])
     for item in payload.get("items") or []:
         lines.append(f"### `{item['candidate_id']}`")
         lines.append("")
         lines.append(f"- Lane: `{item['next_missing_layer']}`")
+        lines.append(f"- Actionability: `{item['actionability']}`")
+        lines.append(f"- Priority score: `{item['priority_score']}`")
         lines.append(f"- Feature area: `{item['feature_area']}`")
         if item.get("key_path"):
             lines.append(f"- Key path: `{item['key_path']}`")

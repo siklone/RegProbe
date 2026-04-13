@@ -1595,6 +1595,8 @@ class BlockedWorklistTests(unittest.TestCase):
             self.assertTrue(item.get("candidate_id"))
             self.assertTrue(item.get("next_missing_layer"))
             self.assertTrue(item.get("next_action_hint"))
+            self.assertIn(item.get("actionability"), {"active", "hold"})
+            self.assertIsInstance(item.get("priority_score"), int)
             self.assertIsInstance(item.get("promotion_blockers"), list)
 
     def test_blocker_hint_prefers_restore_story_guidance(self) -> None:
@@ -1604,6 +1606,10 @@ class BlockedWorklistTests(unittest.TestCase):
         )
 
         self.assertIn("restore", hint.lower())
+
+    def test_actionability_for_lane_flags_intentional_hold(self) -> None:
+        self.assertEqual(blocked_worklist_lib.actionability_for_lane("ghidra"), "active")
+        self.assertEqual(blocked_worklist_lib.actionability_for_lane("intentional-hold"), "hold")
 
 
 if __name__ == "__main__":
