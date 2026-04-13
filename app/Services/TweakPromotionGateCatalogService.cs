@@ -22,6 +22,7 @@ public sealed class BlockedWorklistCatalog
     public string GeneratedAt { get; set; } = string.Empty;
     public int BlockedCount { get; set; }
     public Dictionary<string, int> LaneCounts { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+    public List<string> TopActionableCandidates { get; set; } = new();
     public List<BlockedWorklistEntry> Items { get; set; } = new();
 }
 

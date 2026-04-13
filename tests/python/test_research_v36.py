@@ -1586,6 +1586,8 @@ class BlockedWorklistTests(unittest.TestCase):
         payload = blocked_worklist_lib.build_worklist()
 
         self.assertGreaterEqual(int(payload.get("blocked_count") or 0), 1)
+        self.assertIsInstance(payload.get("top_actionable_candidates"), list)
+        self.assertLessEqual(len(payload.get("top_actionable_candidates") or []), 5)
         self.assertEqual(
             sum(int(value) for value in (payload.get("lane_counts") or {}).values()),
             int(payload.get("blocked_count") or 0),

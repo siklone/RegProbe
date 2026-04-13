@@ -340,6 +340,7 @@ class Program
                         catalog.BlockedWorklist.GeneratedAt,
                         catalog.BlockedWorklist.BlockedCount,
                         LaneCounts = catalog.BlockedWorklist.LaneCounts,
+                        TopActionableCandidates = catalog.BlockedWorklist.TopActionableCandidates,
                     };
 
                     if (emitJson)
@@ -352,6 +353,14 @@ class Program
                         foreach (var pair in catalog.BlockedWorklist.LaneCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
                         {
                             Console.WriteLine($"{pair.Key}: {pair.Value}");
+                        }
+                        if (catalog.BlockedWorklist.TopActionableCandidates.Count > 0)
+                        {
+                            Console.WriteLine("Top actionable:");
+                            foreach (var candidateId in catalog.BlockedWorklist.TopActionableCandidates)
+                            {
+                                Console.WriteLine($"  {candidateId}");
+                            }
                         }
                     }
 

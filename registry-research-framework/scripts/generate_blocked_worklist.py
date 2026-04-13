@@ -195,10 +195,17 @@ def build_worklist() -> dict[str, Any]:
         )
     )
 
+    top_actionable_candidates = [
+        str(item.get("candidate_id") or "")
+        for item in items
+        if str(item.get("actionability") or "") == "active"
+    ][:5]
+
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "blocked_count": len(items),
         "lane_counts": dict(sorted(lane_counts.items())),
+        "top_actionable_candidates": top_actionable_candidates,
         "items": items,
     }
 

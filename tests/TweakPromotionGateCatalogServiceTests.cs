@@ -104,6 +104,9 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                 "ghidra": 1,
                 "intentional-hold": 1
               },
+              "top_actionable_candidates": [
+                "power.test-gate"
+              ],
               "items": [
                 {
                   "candidate_id": "power.test-gate",
@@ -218,6 +221,7 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         Assert.Equal("power.test-gate", actionable[0].CandidateId);
         Assert.Equal("active", actionable[0].Actionability);
         Assert.Single(actionable[0].RecentAuditArtifacts);
+        Assert.Single(service.BlockedWorklist.TopActionableCandidates);
         Assert.True(service.TryResolveBlockedWorklist("power.test-gate", out var entry));
         Assert.Equal(33, entry.PriorityScore);
         Assert.Single(entry.RecentAuditArtifacts);
