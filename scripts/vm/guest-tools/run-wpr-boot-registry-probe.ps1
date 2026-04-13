@@ -396,6 +396,7 @@ $csvPath = Join-Path $OutputRoot ($OutputName + '.csv')
 $hitsCsvPath = Join-Path $OutputRoot ($OutputName + '.hits.csv')
 $hitsPath = Join-Path $OutputRoot ($OutputName + '.hits.txt')
 $normalizedBundlePath = Join-Path $OutputRoot ($OutputName + '.normalized.json')
+$tracerptInputPath = $etlPath
 
 function Publish-Stage {
     param(
@@ -534,6 +535,7 @@ $csvPath = Join-Path $OutputRoot ($OutputName + '.csv')
 $hitsCsvPath = Join-Path $OutputRoot ($OutputName + '.hits.csv')
 $hitsPath = Join-Path $OutputRoot ($OutputName + '.hits.txt')
 $normalizedBundlePath = Join-Path $OutputRoot ($OutputName + '.normalized.json')
+$tracerptInputPath = $etlPath
 
 $summary = [ordered]@{
     generated_utc = [DateTime]::UtcNow.ToString('o')
@@ -555,8 +557,12 @@ $summary = [ordered]@{
     stopboot = $null
     etl_path = $etlPath
     etl_exists = $false
+    tracerpt_input_path = $etlPath
     csv_path = $csvPath
     csv_exists = $false
+    raw_collector_salvage = $false
+    raw_collector_path = $null
+    raw_collector_size_bytes = 0
     normalized_bundle_path = $normalizedBundlePath
     normalized_bundle_exists = $false
     normalized_result_ref = $null
@@ -596,9 +602,30 @@ try {
 
     $summary.etl_exists = [bool](Test-Path $etlPath)
 
-    if ($summary.status -eq 'ok' -and $summary.etl_exists -and (Test-Path $tracerpt)) {
+    if ($summary.status -eq 'ok' -and -not $summary.etl_exists) {
+        $rawCollector = Get-ChildItem -Path $OutputRoot -Filter '*.etl' -File -ErrorAction SilentlyContinue |
+            Where-Object { $_.FullName -ine $etlPath } |
+            Sort-Object -Property Length -Descending |
+            Select-Object -First 1
+
+        if ($null -ne $rawCollector) {
+            $tracerptInputPath = $rawCollector.FullName
+            $csvPath = Join-Path $OutputRoot ($OutputName + '.raw-collector.csv')
+            $hitsCsvPath = Join-Path $OutputRoot ($OutputName + '.raw-collector.hits.csv')
+            $hitsPath = Join-Path $OutputRoot ($OutputName + '.raw-collector.hits.txt')
+            $summary.tracerpt_input_path = $tracerptInputPath
+            $summary.csv_path = $csvPath
+            $summary.hits_csv_path = $hitsCsvPath
+            $summary.raw_collector_salvage = $true
+            $summary.raw_collector_path = $rawCollector.FullName
+            $summary.raw_collector_size_bytes = [int64]$rawCollector.Length
+        }
+    }
+
+    if ($summary.status -eq 'ok' -and (Test-Path $tracerptInputPath) -and (Test-Path $tracerpt)) {
         Publish-Stage -StageName 'collect-tracerpt' -Status 'starting'
-        $convertResult = Invoke-NativeProcess -FilePath $tracerpt -ArgumentList @($etlPath, '-o', $csvPath, '-of', 'CSV') -TimeoutSeconds $TracerptTimeoutSeconds -IgnoreExitCode
+        Remove-Item -Path $csvPath, $hitsCsvPath, $hitsPath -Force -ErrorAction SilentlyContinue
+        $convertResult = Invoke-NativeProcess -FilePath $tracerpt -ArgumentList @($tracerptInputPath, '-o', $csvPath, '-of', 'CSV') -TimeoutSeconds $TracerptTimeoutSeconds -IgnoreExitCode
         $summary['tracerpt'] = $convertResult
         $summary.csv_exists = [bool](Test-Path $csvPath)
         if ($convertResult.timed_out) {
