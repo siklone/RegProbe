@@ -111,6 +111,18 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Next action: `{operator.get('next_action')}`",
         f"- Top focus: `{operator.get('top_focus')}`",
     ]
+    handoff = payload.get("handoff") or {}
+    if handoff:
+        lines.extend(
+            [
+                "",
+                "## Symbol Handoff",
+                "",
+                f"- Handoff status: `{handoff.get('status')}`",
+                f"- Selected jobs: `{handoff.get('selected_jobs')}`",
+                f"- Path: `{handoff.get('path')}`",
+            ]
+        )
     refresh = payload.get("refresh") or {}
     if refresh:
         lines.extend(
@@ -157,6 +169,8 @@ def sync_lane(
     batch_path: Path | None = None,
     run_path: Path | None = None,
     health_path: Path | None = None,
+    handoff_path: Path | None = None,
+    handoff_markdown_path: Path | None = None,
     markdown_path: Path = MARKDOWN_PATH,
     output_path: Path = OUTPUT_PATH,
 ) -> dict[str, Any]:
@@ -177,6 +191,8 @@ def sync_lane(
             batch_path=batch_path or refresh_pipeline_mod.BATCH_PATH,
             run_path=run_path or refresh_pipeline_mod.RUN_PATH,
             health_path=effective_health_path,
+            handoff_path=handoff_path or refresh_pipeline_mod.HANDOFF_PATH,
+            handoff_markdown_path=handoff_markdown_path or refresh_pipeline_mod.HANDOFF_MARKDOWN_PATH,
         )
     except ValueError as exc:
         manifest_payload = refresh_pipeline_mod.autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {}
@@ -196,6 +212,7 @@ def sync_lane(
                     "selected_count": selected_count,
                     "diagnostics": (manifest_payload or {}).get("diagnostics") or {},
                 },
+                "handoff": None,
                 "operator": operator,
                 "error": str(exc),
             }
@@ -221,6 +238,12 @@ def sync_lane(
             "errors": errors,
             "path": portable_path(effective_health_path),
         },
+        "handoff": {
+            "status": refresh_payload.get("symbol_resolution_handoff_status"),
+            "selected_jobs": refresh_payload.get("symbol_resolution_handoff_selected_job_count"),
+            "path": (refresh_payload.get("outputs") or {}).get("handoff_path"),
+            "markdown_path": (refresh_payload.get("outputs") or {}).get("handoff_markdown_path"),
+        },
         "operator": operator,
     }
     write_json(output_path, payload)
@@ -241,6 +264,8 @@ def main() -> int:
     parser.add_argument("--batch-output", type=Path, default=None)
     parser.add_argument("--run-output", type=Path, default=None)
     parser.add_argument("--health-output", type=Path, default=None)
+    parser.add_argument("--handoff-output", type=Path, default=None)
+    parser.add_argument("--handoff-markdown-output", type=Path, default=None)
     parser.add_argument("--markdown-output", type=Path, default=MARKDOWN_PATH)
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     args = parser.parse_args()
@@ -257,6 +282,8 @@ def main() -> int:
         batch_path=args.batch_output,
         run_path=args.run_output,
         health_path=args.health_output,
+        handoff_path=args.handoff_output,
+        handoff_markdown_path=args.handoff_markdown_output,
         markdown_path=args.markdown_output,
         output_path=args.output,
     )

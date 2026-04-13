@@ -30,7 +30,6 @@ def load_local_module(name: str, path: Path):
 
 autotrigger = load_local_module("ghidra_smoke_autotrigger", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_seeds.py")
 sync_lane_mod = load_local_module("ghidra_smoke_sync_lane", FRAMEWORK_ROOT / "scripts" / "sync_ghidra_autotrigger_lane.py")
-handoff_mod = load_local_module("ghidra_smoke_handoff", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_symbol_resolution_handoff.py")
 
 
 def now_utc() -> str:
@@ -243,17 +242,12 @@ def run_smoke(
         batch_path=batch_path,
         run_path=run_path,
         health_path=health_path,
+        handoff_path=handoff_path,
+        handoff_markdown_path=handoff_markdown_path,
         markdown_path=sync_markdown_path,
         output_path=sync_path,
     )
-    handoff_payload = handoff_mod.handoff_payload(
-        load_json(symbol_batch_path),
-        load_json(symbol_run_path),
-        batch_path=symbol_batch_path,
-        run_path=symbol_run_path,
-    )
-    write_json(handoff_path, handoff_payload)
-    write_text(handoff_markdown_path, handoff_mod.render_markdown(handoff_payload))
+    handoff_payload = load_json(handoff_path)
 
     refresh = sync_payload.get("refresh") or {}
     counts = {

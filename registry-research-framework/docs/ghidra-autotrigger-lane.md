@@ -28,6 +28,8 @@ python3 registry-research-framework/scripts/refresh_ghidra_autotrigger_pipeline.
   --discover-input-root evidence
 ```
 
+That refresh path now updates the symbol-resolution handoff files in the same pass, so the operator view stays current without a second manual step.
+
 Run the one-shot sync wrapper:
 
 ```bash

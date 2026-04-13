@@ -2431,6 +2431,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             symbol_batch_path = temp_root / "ghidra-symbol-resolution-batch.json"
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
+            handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
+            handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2444,6 +2446,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 symbol_queue_path=symbol_queue_path,
                 symbol_batch_path=symbol_batch_path,
                 symbol_run_path=symbol_run_path,
+                handoff_path=handoff_path,
+                handoff_markdown_path=handoff_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2453,6 +2457,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             self.assertEqual(payload["symbol_resolution_request_count"], 1)
             self.assertEqual(payload["symbol_resolution_batch_job_count"], 1)
             self.assertEqual(payload["symbol_resolution_run_selected_job_count"], 1)
+            self.assertEqual(payload["symbol_resolution_handoff_status"], "ready")
+            self.assertEqual(payload["symbol_resolution_handoff_selected_job_count"], 1)
             self.assertEqual(payload["dispatch_autotrigger_matched_job_count"], 1)
             self.assertEqual(payload["run_plan_selected_job_count"], 1)
 
@@ -2466,6 +2472,9 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             self.assertEqual(symbol_batch_payload["job_count"], 1)
             symbol_run_payload = json.loads(symbol_run_path.read_text(encoding="utf-8"))
             self.assertEqual(symbol_run_payload["selected_job_count"], 1)
+            handoff_payload = json.loads(handoff_path.read_text(encoding="utf-8"))
+            self.assertEqual(handoff_payload["handoff_status"], "ready")
+            self.assertTrue(handoff_markdown_path.exists())
 
             batch_payload = json.loads(batch_path.read_text(encoding="utf-8"))
             self.assertEqual(batch_payload["jobs"][0]["autotrigger_seed_count"], 1)
@@ -2516,6 +2525,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             symbol_batch_path = temp_root / "ghidra-symbol-resolution-batch.json"
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
+            handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
+            handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2530,6 +2541,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 symbol_queue_path=symbol_queue_path,
                 symbol_batch_path=symbol_batch_path,
                 symbol_run_path=symbol_run_path,
+                handoff_path=handoff_path,
+                handoff_markdown_path=handoff_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2578,6 +2591,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             symbol_batch_path = temp_root / "ghidra-symbol-resolution-batch.json"
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
+            handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
+            handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2596,6 +2611,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 symbol_queue_path=symbol_queue_path,
                 symbol_batch_path=symbol_batch_path,
                 symbol_run_path=symbol_run_path,
+                handoff_path=handoff_path,
+                handoff_markdown_path=handoff_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2643,6 +2660,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             symbol_batch_path = temp_root / "ghidra-symbol-resolution-batch.json"
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
+            handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
+            handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2659,6 +2678,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 symbol_queue_path=symbol_queue_path,
                 symbol_batch_path=symbol_batch_path,
                 symbol_run_path=symbol_run_path,
+                handoff_path=handoff_path,
+                handoff_markdown_path=handoff_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2944,6 +2965,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             symbol_batch_path = temp_root / "ghidra-symbol-resolution-batch.json"
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
+            handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
+            handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2958,6 +2981,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
                 symbol_queue_path=symbol_queue_path,
                 symbol_batch_path=symbol_batch_path,
                 symbol_run_path=symbol_run_path,
+                handoff_path=handoff_path,
+                handoff_markdown_path=handoff_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2967,6 +2992,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
 
             self.assertEqual(payload["sync_status"], "ok")
             self.assertEqual(payload["health_check"]["status"], "ok")
+            self.assertEqual(payload["handoff"]["status"], "ready")
+            self.assertEqual(payload["handoff"]["selected_jobs"], 1)
             self.assertEqual(payload["operator"]["blocker"], "symbol-resolution-ready")
             self.assertIn("Run the symbol-resolution batch", payload["operator"]["next_action"])
             symbol_queue_payload = json.loads(symbol_queue_path.read_text(encoding="utf-8"))
@@ -2975,6 +3002,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             self.assertEqual(symbol_batch_payload["job_count"], 1)
             symbol_run_payload = json.loads(symbol_run_path.read_text(encoding="utf-8"))
             self.assertEqual(symbol_run_payload["selected_job_count"], 1)
+            handoff_payload = json.loads(handoff_path.read_text(encoding="utf-8"))
+            self.assertEqual(handoff_payload["handoff_status"], "ready")
             self.assertTrue(output_path.exists())
             self.assertTrue(markdown_path.exists())
 
