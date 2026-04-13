@@ -60,7 +60,7 @@ For the full validation flow, start with the [VM workflow](Docs/VM_WORKFLOW.md),
 <!-- BEGIN:RESEARCH_HEALTH -->
 | Metric | Value |
 |--------|-------|
-| Promoted | 249 |
+| Promoted | 250 |
 | Blocked | 18 |
 | Revalidation Pending | 0 |
 | Gate Health | green |
