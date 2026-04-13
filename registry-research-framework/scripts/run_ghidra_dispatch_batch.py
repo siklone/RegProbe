@@ -26,13 +26,21 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def runnable_jobs(payload: dict[str, Any]) -> list[dict[str, Any]]:
     jobs = payload.get("jobs") or []
-    return [
+    runnable = [
         job
         for job in jobs
         if job.get("dispatch_status") == "prepared"
         and bool(job.get("can_run_headless"))
         and isinstance(job.get("command_argv"), list)
     ]
+    return sorted(
+        runnable,
+        key=lambda job: (
+            -int(job.get("autotrigger_seed_count") or 0),
+            int(((job.get("source_job") or {}).get("priority_rank")) or 999999),
+            str(job.get("candidate_id") or ""),
+        ),
+    )
 
 
 def runner_available(executable: str = "pwsh") -> bool:
@@ -57,6 +65,8 @@ def build_run_plan(payload: dict[str, Any], *, limit: int | None = None, generat
             {
                 "job_id": job.get("job_id"),
                 "candidate_id": job.get("candidate_id"),
+                "analysis_mode": job.get("analysis_mode"),
+                "autotrigger_seed_count": int(job.get("autotrigger_seed_count") or 0),
                 "command_argv": job.get("command_argv"),
                 "suggested_command": job.get("suggested_command"),
                 "output_dir": job.get("output_dir"),
@@ -94,6 +104,8 @@ def run_jobs(payload: dict[str, Any], *, limit: int | None = None, generated_utc
             {
                 "job_id": job.get("job_id"),
                 "candidate_id": job.get("candidate_id"),
+                "analysis_mode": job.get("analysis_mode"),
+                "autotrigger_seed_count": int(job.get("autotrigger_seed_count") or 0),
                 "exit_code": completed.returncode,
                 "stdout": completed.stdout,
                 "stderr": completed.stderr,

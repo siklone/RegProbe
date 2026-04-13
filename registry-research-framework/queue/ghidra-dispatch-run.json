@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T07:25:01.068595Z",
+  "generated_utc": "2026-04-13T07:42:02.367493Z",
   "mode": "dry-run",
   "source_batch": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "runner_available": false,
@@ -10,6 +10,8 @@
     {
       "job_id": "ghidra-dispatch-01-power-control-allow-system-required-power-requests",
       "candidate_id": "power.control.allow-system-required-power-requests",
+      "analysis_mode": "registry-string-xref",
+      "autotrigger_seed_count": 0,
       "command_argv": [
         "pwsh",
         "-File",
@@ -27,6 +29,8 @@
     {
       "job_id": "ghidra-dispatch-02-power-session-watchdog-timeouts",
       "candidate_id": "power.session-watchdog-timeouts",
+      "analysis_mode": "registry-string-xref",
+      "autotrigger_seed_count": 0,
       "command_argv": [
         "pwsh",
         "-File",
@@ -46,6 +50,8 @@
     {
       "job_id": "ghidra-dispatch-03-power-control-allow-audio-to-enable-execution-required-power-requests",
       "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "analysis_mode": "registry-string-xref",
+      "autotrigger_seed_count": 0,
       "command_argv": [
         "pwsh",
         "-File",
@@ -63,6 +69,8 @@
     {
       "job_id": "ghidra-dispatch-04-system-kernel-dpc-watchdog-profile-cluster",
       "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "analysis_mode": "registry-string-xref",
+      "autotrigger_seed_count": 0,
       "command_argv": [
         "pwsh",
         "-File",

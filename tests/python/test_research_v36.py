@@ -1962,6 +1962,38 @@ class GhidraDispatchRunnerTests(unittest.TestCase):
         self.assertEqual(plan["jobs"][0]["candidate_id"], "power.keep")
         self.assertEqual(plan["jobs"][0]["command_argv"], ["pwsh", "-File", "tool.ps1"])
 
+    def test_build_run_plan_prioritizes_autotrigger_enriched_jobs(self) -> None:
+        payload = {
+            "jobs": [
+                {
+                    "job_id": "job-low",
+                    "candidate_id": "power.low",
+                    "dispatch_status": "prepared",
+                    "can_run_headless": True,
+                    "command_argv": ["pwsh", "-File", "tool.ps1"],
+                    "analysis_mode": "registry-string-xref",
+                    "autotrigger_seed_count": 0,
+                    "source_job": {"priority_rank": 1},
+                },
+                {
+                    "job_id": "job-high",
+                    "candidate_id": "power.high",
+                    "dispatch_status": "prepared",
+                    "can_run_headless": True,
+                    "command_argv": ["pwsh", "-File", "tool.ps1"],
+                    "analysis_mode": "registry-string-xref+caller-stack-pivot",
+                    "autotrigger_seed_count": 2,
+                    "source_job": {"priority_rank": 5},
+                },
+            ]
+        }
+
+        plan = ghidra_dispatch_runner.build_run_plan(payload, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertEqual(plan["jobs"][0]["candidate_id"], "power.high")
+        self.assertEqual(plan["jobs"][0]["autotrigger_seed_count"], 2)
+        self.assertEqual(plan["jobs"][0]["analysis_mode"], "registry-string-xref+caller-stack-pivot")
+
 
 class GhidraAutotriggerTests(unittest.TestCase):
     def test_frame_resolution_kind_classifies_common_shapes(self) -> None:
