@@ -128,6 +128,18 @@ def write_pack_readme(pack_root: Path, payload: dict[str, Any]) -> None:
         "- `commands/` one file per selected request with its suggested command",
         "- `CHECKSUMS.json` SHA-256 manifest for every file in this pack",
         "",
+        "## Destination Workflow",
+        "",
+        "Use this pack from a full RegProbe checkout on the destination host. First validate the pack summary and archive, then unpack it, generate the imported-pack execution plan, dry-run that plan, and validate the dry-run surface before using `--execute`.",
+        "",
+        "```bash",
+        "python3 registry-research-framework/scripts/check_ghidra_symbol_resolution_transfer_pack.py --summary /path/to/ghidra-symbol-resolution-transfer-pack.json",
+        "python3 registry-research-framework/scripts/unpack_ghidra_symbol_resolution_transfer_pack.py --summary /path/to/ghidra-symbol-resolution-transfer-pack.json --output-root /path/to/ghidra-symbol-resolution-transfer-pack-import",
+        "python3 registry-research-framework/scripts/generate_ghidra_transfer_pack_execution_plan.py --import /path/to/ghidra-symbol-resolution-transfer-pack-import.json",
+        "python3 registry-research-framework/scripts/run_ghidra_transfer_pack_execution_plan.py --plan /path/to/ghidra-symbol-resolution-transfer-pack-execution-plan.json",
+        "python3 registry-research-framework/scripts/check_ghidra_transfer_pack_execution_run.py --run /path/to/ghidra-symbol-resolution-transfer-pack-execution-run.json",
+        "```",
+        "",
     ]
     write_text(pack_root / "README.md", "\n".join(lines) + "\n")
 

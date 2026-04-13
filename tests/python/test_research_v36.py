@@ -2508,6 +2508,10 @@ class GhidraSymbolResolutionTransferPackTests(unittest.TestCase):
             self.assertTrue((output_root / "repo" / "scripts" / "vm-kvm" / "run-guest-ghidra-symbolized-probe.py").exists())
             self.assertTrue((output_root / "commands" / "01-request-1.txt").exists())
             self.assertTrue((output_root / "README.md").exists())
+            self.assertIn(
+                "check_ghidra_transfer_pack_execution_run.py",
+                (output_root / "README.md").read_text(encoding="utf-8"),
+            )
             self.assertTrue((output_root / "CHECKSUMS.json").exists())
             self.assertGreater(payload["counts"]["pack_files_checksummed"], 0)
             self.assertTrue(any(item["path"] == "CHECKSUMS.json" for item in payload["pack_files"]))
