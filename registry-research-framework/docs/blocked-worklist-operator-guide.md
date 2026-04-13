@@ -69,6 +69,8 @@ python3 registry-research-framework/scripts/check_gate_thresholds.py
 python3 registry-research-framework/scripts/check_mcp_readiness.py
 ```
 
+`generate_publish_metrics.py` also runs the blocked worklist consistency check and returns non-zero if the worklist drifts. If that happens, run `check_blocked_worklist.py` directly to see the exact mismatch.
+
 ## Hold Policy
 
 Do not force `intentional-hold` records through normal VM lanes. A hold is a safety decision, not backlog debt.
