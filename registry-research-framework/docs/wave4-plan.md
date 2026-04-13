@@ -15,7 +15,7 @@ Status: schema and parser support for `caller_stack` is in place, and the KVM WP
 - Decompile -> C pseudocode -> enrichment cache
 - New bundle field: decompiled_context
 
-Status: queue skeleton, dispatch manifest, dry-run dispatch runner, and caller-stack seed generation are now in place for the active blocked `ghidra` lane; the remaining gap is wiring direct auto-trigger from fresh bundles and real headless execution on a host with `pwsh` + Ghidra available.
+Status: queue skeleton, dispatch manifest, dry-run dispatch runner, caller-stack seed generation, and dispatch enrichment from those seeds are now in place for the active blocked `ghidra` lane; the remaining gap is wiring direct auto-trigger from fresh bundles and real headless execution on a host with `pwsh` + Ghidra available.
 
 ## Motor 3: AI Fuzzer
 - Local Ollama (Qwen2.5-Coder-7B) integration

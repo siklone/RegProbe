@@ -1865,6 +1865,53 @@ class GhidraDispatchBatchTests(unittest.TestCase):
             ["WatchdogResumeTimeout", "WatchdogSleepTimeout"],
         )
 
+    def test_dispatch_batch_enriches_matching_job_with_autotrigger_context(self) -> None:
+        rows = [
+            {
+                "candidate_id": "power.keep",
+                "status": "queued",
+                "priority_rank": 1,
+                "feature_area": "Power",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+                "trigger": "blocked-worklist-ghidra-lane",
+                "next_action_hint": "Resolve seeding path.",
+            }
+        ]
+        autotrigger_rows = [
+            {
+                "candidate_id": "power.keep",
+                "trigger": "caller-stack-unresolved-frame",
+                "source_bundle_path": "evidence/files/example/normalized-registry-bundle.json",
+                "source_run_id": "example-run",
+                "event_index": 1,
+                "unresolved_frames": ["ntoskrnl.exe+0x1F234"],
+                "resolved_frames": ["nt!PopPowerRequestInitialize"],
+            },
+            {
+                "candidate_id": "power.other",
+                "trigger": "caller-stack-unresolved-frame",
+            },
+        ]
+
+        payload = ghidra_dispatch_batch.dispatch_batch_from_queue(
+            rows,
+            generated_utc="2026-04-13T00:00:00Z",
+            autotrigger_rows=autotrigger_rows,
+        )
+
+        self.assertEqual(payload["job_count"], 1)
+        self.assertEqual(payload["autotrigger_seed_count"], 2)
+        self.assertEqual(payload["autotrigger_matched_job_count"], 1)
+        self.assertEqual(payload["autotrigger_unmatched_seed_count"], 1)
+        self.assertEqual(payload["jobs"][0]["analysis_mode"], "registry-string-xref+caller-stack-pivot")
+        self.assertEqual(payload["jobs"][0]["autotrigger_seed_count"], 1)
+        self.assertEqual(
+            payload["jobs"][0]["autotrigger_context"][0]["unresolved_frames"],
+            ["ntoskrnl.exe+0x1F234"],
+        )
+
     def test_dispatch_batch_marks_missing_inputs_when_binary_cannot_be_inferred(self) -> None:
         rows = [
             {
