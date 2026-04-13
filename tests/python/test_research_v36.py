@@ -839,6 +839,42 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["next_missing_layer"], "ghidra")
         self.assertIn("execution-required-init-walker-not-symbol-resolved", gate["promotion_blockers"])
 
+    def test_specific_execution_required_init_walker_blockers_stay_ghidra(self) -> None:
+        for blocker in [
+            "audio-execution-required-init-walker-not-symbol-resolved",
+            "system-execution-required-init-walker-not-symbol-resolved",
+        ]:
+            record = {
+                "record_id": f"example.{blocker}",
+                "tweak_id": f"example.{blocker}",
+                "record_status": "validated",
+                "setting": {
+                    "area": "Example",
+                    "targets": [
+                        {
+                            "path": "HKLM\\Software\\Example",
+                            "value_name": "Enabled",
+                            "value_type": "REG_DWORD",
+                        }
+                    ],
+                },
+                "decision": {
+                    "apply_allowed": False,
+                    "confidence": "medium",
+                    "restore_default_supported": True,
+                    "blocking_issues": [blocker],
+                },
+                "validation_proof": {
+                    "source_url": "Docs/example.md",
+                    "exact_quote_or_path": "Docs/example.md:1",
+                },
+            }
+
+            gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
+
+            self.assertEqual(gate["next_missing_layer"], "ghidra")
+            self.assertIn(blocker, gate["promotion_blockers"])
+
     def test_string_or_symbol_no_hit_blocker_maps_to_ghidra_lane(self) -> None:
         record = {
             "record_id": "example.string-or-symbol-no-hit",

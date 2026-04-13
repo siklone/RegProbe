@@ -421,7 +421,7 @@
     "why": "The candidate is now stronger than a raw draft because it has repo-doc semantics, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, Microsoft documentation for the public hidden system-required setting family, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, a retained Ghidra reader-family corroboration, a retained soft-reboot ETW attempt, a visible UMPO override-query lineage, a timeout-setting callback disassembly, a retained timeout timer/worker chain, a retained override-response plus callback-worker follow-up that still exposed no visible `*PowerRequest*Reg*` symbol, a retained generic power-setting callback subsystem pass around `PoRegisterPowerSettingCallback`, a later current-build INIT-table binding that maps the exact value name to the KD-resolved target global, and a later host-side disassembly follow-up that statically recovers the generic init walker feeding that table. A QGA-launched WPR boot-registry attempt now adds a target-specific no-hit result rather than closing the gap. It remains decision-gated because Microsoft still does not publish the internal `Control\\\\Power\\\\AllowSystemRequiredPowerRequests` seeding path, that path is still inferred from current-build INIT-table/static analysis rather than resolved to a named public routine, and an exact runtime registry read remains unresolved.",
     "manual_review_required": true,
     "blocking_issues": [
-      "execution-required-init-walker-not-symbol-resolved",
+      "system-execution-required-init-walker-not-symbol-resolved",
       "execution-required-wpr-boot-no-hit-current-build"
     ]
   },
