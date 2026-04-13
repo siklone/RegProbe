@@ -60,6 +60,12 @@ Materialize the portable transfer pack as a directory plus zip archive:
 python3 registry-research-framework/scripts/materialize_ghidra_symbol_resolution_transfer_pack.py
 ```
 
+Verify a materialized transfer pack before moving or executing it:
+
+```bash
+python3 registry-research-framework/scripts/check_ghidra_symbol_resolution_transfer_pack.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -95,6 +101,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip`
   Ready-to-move archive containing manifests, repo helpers, and per-request command files.
   The materializer also writes `CHECKSUMS.json` inside the pack and records the archive SHA-256 in the summary JSON, so the destination host can verify the transfer before running any commands.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.json`
+  Verification result for the materialized pack, covering file hashes, zip entries, command files, and archive SHA-256.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.md`
+  Human-readable verification summary.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`
