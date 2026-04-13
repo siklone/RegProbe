@@ -83,6 +83,7 @@ def sync_lane(
                 "bundle_manifest": {
                     "path": portable_path(effective_manifest_path),
                     "selected_count": selected_count,
+                    "diagnostics": (manifest_payload or {}).get("diagnostics") or {},
                 },
                 "error": str(exc),
             }

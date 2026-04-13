@@ -44,6 +44,7 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 
 - `registry-research-framework/queue/ghidra-autotrigger-inputs.json`
   Discovery manifest of normalized bundles ranked by queued-candidate match and caller-stack coverage.
+  It also includes diagnostics for scanned bundles and skip reasons such as `no-caller-stack` and `no-queue-match`.
 - `registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl`
   Seed rows produced from unresolved caller-stack frames.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
@@ -61,6 +62,7 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 
 - `idle`
   The lane is healthy, but no matching bundle inputs were discovered.
+  Check the input manifest diagnostics first to see whether the lane found no bundles at all, or found bundles that failed the caller-stack or queue-match filters.
 - `ok`
   Inputs were discovered, surfaces refreshed, and the health checker passed.
 - `error`

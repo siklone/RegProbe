@@ -2442,6 +2442,10 @@ class GhidraAutotriggerInputTests(unittest.TestCase):
             payload["entries"][0]["matched_candidate_ids"],
             ["power.control.allow-system-required-power-requests"],
         )
+        self.assertEqual(payload["diagnostics"]["scanned_bundle_count"], 2)
+        self.assertEqual(payload["diagnostics"]["caller_stack_capable_bundle_count"], 1)
+        self.assertEqual(payload["diagnostics"]["skipped_reason_counts"]["no-caller-stack"], 1)
+        self.assertEqual(payload["diagnostics"]["skipped_reason_counts"]["no-queue-match"], 0)
 
 
 class GhidraAutotriggerHealthTests(unittest.TestCase):
@@ -2622,6 +2626,7 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
 
             self.assertEqual(payload["sync_status"], "idle")
             self.assertEqual(payload["bundle_manifest"]["selected_count"], 0)
+            self.assertEqual(payload["bundle_manifest"]["diagnostics"]["scanned_bundle_count"], 0)
             self.assertTrue(output_path.exists())
 
 

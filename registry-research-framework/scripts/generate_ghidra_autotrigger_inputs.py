@@ -37,26 +37,44 @@ def iso_from_timestamp(timestamp: float) -> str:
     return datetime.fromtimestamp(timestamp, tz=timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def discover_input_entries(
+def discover_input_manifest_data(
     bundle_roots: list[Path],
     *,
     queue_rows: list[dict[str, Any]] | None = None,
     require_caller_stack: bool = True,
     require_queue_match: bool = False,
     limit: int | None = None,
-) -> list[dict[str, Any]]:
+) -> dict[str, Any]:
     queue_rows = queue_rows or []
     entries: list[dict[str, Any]] = []
+    skipped_examples: list[dict[str, Any]] = []
+    skipped_reason_counts = {
+        "no-caller-stack": 0,
+        "no-queue-match": 0,
+    }
+    scanned_count = 0
+    stack_capable_count = 0
     seen: set[Path] = set()
     for root in bundle_roots:
         for path in autotrigger.collect_bundle_paths(bundle_root=root):
             if path in seen:
                 continue
             seen.add(path)
+            scanned_count += 1
             bundle = autotrigger.load_json(path)
             caller_stack_event_count = autotrigger.bundle_caller_stack_event_count(bundle)
             if require_caller_stack and caller_stack_event_count <= 0:
+                skipped_reason_counts["no-caller-stack"] += 1
+                if len(skipped_examples) < 10:
+                    skipped_examples.append(
+                        {
+                            "path": autotrigger.portable_path(path),
+                            "reason": "no-caller-stack",
+                        }
+                    )
                 continue
+            if caller_stack_event_count > 0:
+                stack_capable_count += 1
             matched_candidate_ids = sorted(
                 {
                     str(seed.get("candidate_id") or "")
@@ -69,6 +87,14 @@ def discover_input_entries(
                 }
             )
             if require_queue_match and not matched_candidate_ids:
+                skipped_reason_counts["no-queue-match"] += 1
+                if len(skipped_examples) < 10:
+                    skipped_examples.append(
+                        {
+                            "path": autotrigger.portable_path(path),
+                            "reason": "no-queue-match",
+                        }
+                    )
                 continue
             stat = path.stat()
             entries.append(
@@ -101,7 +127,16 @@ def discover_input_entries(
     for index, entry in enumerate(entries, start=1):
         entry["priority_rank"] = index
         entry.pop("_sort_mtime", None)
-    return entries
+    return {
+        "entries": entries,
+        "diagnostics": {
+            "scanned_bundle_count": scanned_count,
+            "caller_stack_capable_bundle_count": stack_capable_count,
+            "selected_count": len(entries),
+            "skipped_reason_counts": skipped_reason_counts,
+            "skipped_examples": skipped_examples,
+        },
+    }
 
 
 def input_manifest(
@@ -114,13 +149,14 @@ def input_manifest(
     generated_utc: str | None = None,
 ) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
-    entries = discover_input_entries(
+    manifest_data = discover_input_manifest_data(
         bundle_roots,
         queue_rows=queue_rows,
         require_caller_stack=require_caller_stack,
         require_queue_match=require_queue_match,
         limit=limit,
     )
+    entries = manifest_data["entries"]
     return {
         "schema_version": "1.0",
         "generated_utc": generated_utc,
@@ -130,6 +166,7 @@ def input_manifest(
         "require_queue_match": require_queue_match,
         "selection_limit": limit,
         "selected_count": len(entries),
+        "diagnostics": manifest_data["diagnostics"],
         "entries": entries,
     }
 
