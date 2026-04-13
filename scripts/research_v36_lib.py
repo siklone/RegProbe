@@ -2433,6 +2433,8 @@ def core_cli_surface_status(cli_source_text: str | None = None) -> dict[str, Any
         cli_source_text = cli_path.read_text(encoding="utf-8") if cli_path.exists() else ""
     required_tokens = [
         "list-blocked",
+        "show-blocked",
+        "--actionability",
         "show-stale",
         "show-revalidation-pending",
         "generate-regression-pack",
@@ -2444,6 +2446,44 @@ def core_cli_surface_status(cli_source_text: str | None = None) -> dict[str, Any
     return {
         "pass": not missing,
         "missing_commands": missing,
+    }
+
+
+def blocked_worklist_surface_status(payload: dict[str, Any] | None = None) -> dict[str, Any]:
+    if payload is None:
+        path = REPO_ROOT / "registry-research-framework" / "audit" / "blocked-worklist.json"
+        if not path.exists():
+            return {
+                "pass": False,
+                "errors": ["blocked-worklist.json missing"],
+            }
+        payload = load_json_if_exists(path) or {}
+
+    items = list(payload.get("items") or [])
+    lane_counts = dict(payload.get("lane_counts") or {})
+    actionability_counts = dict(payload.get("actionability_counts") or {})
+    expected_lane_counts = dict(sorted(Counter(str(item.get("next_missing_layer") or "unknown") for item in items).items()))
+    expected_actionability_counts = dict(sorted(Counter(str(item.get("actionability") or "unknown") for item in items).items()))
+    errors: list[str] = []
+
+    if int(payload.get("blocked_count") or 0) != len(items):
+        errors.append("blocked_count-mismatch")
+    if lane_counts != expected_lane_counts:
+        errors.append("lane_counts-mismatch")
+    if actionability_counts != expected_actionability_counts:
+        errors.append("actionability_counts-mismatch")
+    if not payload.get("top_actionable_candidates"):
+        errors.append("top_actionable_candidates-missing")
+    if not payload.get("lane_focus"):
+        errors.append("lane_focus-missing")
+    if any(not item.get("suggested_command") for item in items):
+        errors.append("suggested_command-missing")
+
+    return {
+        "pass": not errors,
+        "errors": errors,
+        "blocked_count": int(payload.get("blocked_count") or 0),
+        "actionability_counts": actionability_counts,
     }
 
 
@@ -2464,6 +2504,7 @@ def check_mcp_readiness(promotion_catalog: dict[str, Any] | None = None, cli_sou
     )
     methods_ready = all(callable(globals().get(name)) for name in MCP_METHOD_NAMES)
     cli_status = core_cli_surface_status(cli_source_text)
+    blocked_worklist_status = blocked_worklist_surface_status()
     revalidation_pending_count = int(promotion_counts.get("revalidation-pending", 0) or 0)
     stale_blocker_count = int(blocker_counts.get("stale-evidence", 0) or 0)
     status_checks = {
@@ -2474,6 +2515,7 @@ def check_mcp_readiness(promotion_catalog: dict[str, Any] | None = None, cli_sou
         "revalidation_queue_accounted_for": revalidation_pending_count >= 1 or stale_blocker_count == 0,
         "core_cli_green": bool(cli_status.get("pass")),
         "ci_gate_metrics_green": int(summary.get("invalid_gate_entries", 0)) == 0,
+        "blocked_worklist_consistent": bool(blocked_worklist_status.get("pass")),
         "mcp_methods_present": methods_ready,
     }
     ready = all(status_checks.values())
@@ -2481,6 +2523,7 @@ def check_mcp_readiness(promotion_catalog: dict[str, Any] | None = None, cli_sou
         "status": "MCP_READY" if ready else "MCP_BLOCKED",
         "checks": status_checks,
         "missing_cli_commands": cli_status.get("missing_commands"),
+        "blocked_worklist_errors": blocked_worklist_status.get("errors"),
         "supported_methods": list(MCP_METHOD_NAMES),
         "promotion_state_counts": summary.get("promotion_state_counts") or {},
     }

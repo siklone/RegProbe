@@ -1631,6 +1631,19 @@ class BlockedWorklistTests(unittest.TestCase):
 
         self.assertTrue(any("top_actionable_candidates" in error for error in errors))
 
+    def test_blocked_worklist_surface_status_accepts_generated_payload(self) -> None:
+        status = research_v36_lib.blocked_worklist_surface_status(blocked_worklist_lib.build_worklist())
+
+        self.assertTrue(status["pass"], status)
+        self.assertEqual(status["errors"], [])
+
+    def test_core_cli_surface_status_requires_blocked_operator_commands(self) -> None:
+        status = research_v36_lib.core_cli_surface_status("list-blocked show-stale apply rollback")
+
+        self.assertFalse(status["pass"])
+        self.assertIn("show-blocked", status["missing_commands"])
+        self.assertIn("--actionability", status["missing_commands"])
+
     def test_blocker_hint_prefers_restore_story_guidance(self) -> None:
         hint = blocked_worklist_lib.blocker_hint(
             ["powerrequestoverride-restore-story-unproven-subtree-presence-only"],
