@@ -1,0 +1,255 @@
+{
+  "generated_at": "2026-04-13T03:45:01.939631Z",
+  "blocked_count": 18,
+  "lane_counts": {
+    "ghidra": 5,
+    "intentional-hold": 5,
+    "restore-story": 1,
+    "runtime-trace": 7
+  },
+  "items": [
+    {
+      "candidate_id": "policy.system.enable-virtualization",
+      "feature_area": "Policy System Registry",
+      "next_missing_layer": "intentional-hold",
+      "blocker_count": 1,
+      "promotion_blockers": [
+        "enable-virtualization-research-only-raw-policy-system-value"
+      ],
+      "key_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+      "value_name": "EnableVirtualization",
+      "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
+    },
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "next_missing_layer": "ghidra",
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "audio-execution-required-init-walker-not-symbol-resolved",
+        "audio-execution-required-megatrigger-etw-no-hit-current-build",
+        "audio-execution-required-no-primary-current-build-doc"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "next_missing_layer": "ghidra",
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "system-execution-required-init-walker-not-symbol-resolved",
+        "system-execution-required-wpr-boot-no-hit-current-build"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowSystemRequiredPowerRequests",
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+    },
+    {
+      "candidate_id": "power.control.hiber-file-size-percent",
+      "feature_area": "Raw Power Manager Registry",
+      "next_missing_layer": "intentional-hold",
+      "blocker_count": 1,
+      "promotion_blockers": [
+        "hiber-file-size-percent-research-only-raw-power-manager-value"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HiberFileSizePercent",
+      "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
+    },
+    {
+      "candidate_id": "power.control.hibernate-enabled-default",
+      "feature_area": "Raw Power Manager Registry",
+      "next_missing_layer": "intentional-hold",
+      "blocker_count": 1,
+      "promotion_blockers": [
+        "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabledDefault",
+      "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
+    },
+    {
+      "candidate_id": "power.control.power-request-override-subtree",
+      "feature_area": "Power Request Override Routing",
+      "next_missing_layer": "restore-story",
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "powerrequestoverride-restore-story-unproven-subtree-presence-only",
+        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
+        "powerrequestoverride-subtree-leaf-semantics-unresolved"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": "(subtree root, Driver, Process, Service)",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    {
+      "candidate_id": "power.control.power-watchdog-timeout-cluster",
+      "feature_area": "Control Power Watchdog Defaults",
+      "next_missing_layer": "ghidra",
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
+        "powerwatchdog-timeout-family-no-primary-current-build-doc",
+        "powerwatchdog-timeout-family-runtime-read-unresolved"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+    },
+    {
+      "candidate_id": "power.control.timer-rebase-threshold-on-drips-exit",
+      "feature_area": "Raw Power Manager Registry",
+      "next_missing_layer": "intentional-hold",
+      "blocker_count": 1,
+      "promotion_blockers": [
+        "timer-rebase-threshold-drips-trigger-not-available-on-current-vm"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
+    },
+    {
+      "candidate_id": "power.control.ttm-enabled",
+      "feature_area": "Raw Power Manager Registry",
+      "next_missing_layer": "intentional-hold",
+      "blocker_count": 4,
+      "promotion_blockers": [
+        "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
+        "ttmenabled-boot-unsafe-on-isolated-pilot-profile",
+        "ttmenabled-no-primary-current-build-doc",
+        "ttmenabled-reader-unresolved"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TtmEnabled",
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
+    },
+    {
+      "candidate_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+      "feature_area": "Control Power Watchdog Sibling",
+      "next_missing_layer": "runtime-trace",
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
+        "win32k-callout-watchdog-no-primary-current-build-doc",
+        "win32k-callout-watchdog-override-semantics-unproven"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+    },
+    {
+      "candidate_id": "power.session-watchdog-timeouts",
+      "feature_area": "Directed Power Watchdog Timeouts",
+      "next_missing_layer": "ghidra",
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "power-session-watchdog-timeouts-exact-runtime-read-unresolved",
+        "power-session-watchdog-timeouts-specific-caller-unresolved"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+    },
+    {
+      "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+      "feature_area": "Session Manager Power Watchdog Sibling",
+      "next_missing_layer": "runtime-trace",
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "win32-callout-watchdog-bugcheck-no-primary-current-build-doc",
+        "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
+        "win32-callout-watchdog-bugcheck-semantics-unproven"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+    },
+    {
+      "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+      "feature_area": "Session Manager Kernel DPC Watchdog Control Timeouts",
+      "next_missing_layer": "runtime-trace",
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
+        "dpc-watchdog-control-no-primary-current-build-doc",
+        "dpc-watchdog-control-runtime-read-unresolved"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "DPCTimeout",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+    },
+    {
+      "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "feature_area": "Session Manager Kernel DPC Watchdog Profile",
+      "next_missing_layer": "ghidra",
+      "blocker_count": 4,
+      "promotion_blockers": [
+        "dpc-watchdog-profile-conditional-initialization-unproven",
+        "dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs",
+        "dpc-watchdog-profile-no-primary-current-build-doc",
+        "dpc-watchdog-profile-wpr-boot-no-hit-current-build"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "DpcWatchdogProfileBufferSizeBytes",
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+    },
+    {
+      "candidate_id": "system.kernel-long-dpc-threshold-cluster",
+      "feature_area": "Session Manager Kernel DPC Scheduling",
+      "next_missing_layer": "runtime-trace",
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "long-dpc-threshold-no-primary-current-build-doc",
+        "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
+        "long-dpc-threshold-wpr-boot-no-hit-current-build"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "LongDpcQueueThreshold",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+    },
+    {
+      "candidate_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+      "feature_area": "Session Manager Kernel DPC Watchdog",
+      "next_missing_layer": "runtime-trace",
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
+        "force-bugcheck-dpc-watchdog-semantics-unproven",
+        "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "ForceBugcheckForDpcWatchdog",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+    },
+    {
+      "candidate_id": "system.kernel.global-timer-resolution-requests",
+      "feature_area": "Session Manager Kernel Timer Resolution",
+      "next_missing_layer": "runtime-trace",
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "global-timer-resolution-no-primary-current-build-doc",
+        "global-timer-resolution-wpr-boot-no-hit-current-build"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "GlobalTimerResolutionRequests",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+    },
+    {
+      "candidate_id": "system.kernel.timer-check-flags",
+      "feature_area": "Session Manager Kernel Timer Diagnostics",
+      "next_missing_layer": "runtime-trace",
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "timer-check-flags-modern-bit-semantics-unproven",
+        "timer-check-flags-no-primary-current-build-doc",
+        "timer-check-flags-wpr-boot-no-hit-current-build"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "TimerCheckFlags",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+    }
+  ]
+}
