@@ -3916,6 +3916,9 @@ class GhidraAutotriggerSmokeTests(unittest.TestCase):
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-execution-run-check.json").exists())
             self.assertTrue(output_path.exists())
             self.assertTrue(markdown_path.exists())
+            self.assertTrue((temp_root / "ghidra-autotrigger-smoke-check.json").exists())
+            smoke_check_payload = json.loads((temp_root / "ghidra-autotrigger-smoke-check.json").read_text(encoding="utf-8"))
+            self.assertEqual(smoke_check_payload["check_status"], "ok")
 
             check_payload = ghidra_autotrigger_smoke_check.validate_smoke(
                 json.loads(output_path.read_text(encoding="utf-8")),

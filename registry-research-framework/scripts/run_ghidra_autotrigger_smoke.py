@@ -50,6 +50,10 @@ execution_run_check_mod = load_local_module(
     "ghidra_smoke_transfer_pack_execution_run_check",
     FRAMEWORK_ROOT / "scripts" / "check_ghidra_transfer_pack_execution_run.py",
 )
+smoke_check_mod = load_local_module(
+    "ghidra_smoke_check",
+    FRAMEWORK_ROOT / "scripts" / "check_ghidra_autotrigger_smoke.py",
+)
 
 
 def now_utc() -> str:
@@ -420,6 +424,11 @@ def run_smoke(
     }
     write_json(output_path, payload)
     write_text(markdown_path, render_markdown(payload))
+    smoke_check_path = output_path.with_name(f"{output_path.stem}-check.json")
+    smoke_check_markdown_path = markdown_path.with_name(f"{markdown_path.stem}-check.md")
+    smoke_check_payload = smoke_check_mod.validate_smoke(payload, smoke_path=output_path)
+    smoke_check_mod.write_json(smoke_check_path, smoke_check_payload)
+    smoke_check_mod.write_text(smoke_check_markdown_path, smoke_check_mod.render_markdown(smoke_check_payload))
     return payload
 
 

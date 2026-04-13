@@ -5,7 +5,7 @@
 - Checked pack files: `19`
 - Archive entries: `19`
 - Command files: `4`
-- Archive SHA-256: `c65241465c4482c235ee4ba7a79731a0c56f59c1b0da0b2ebe12eff5d1ab1df3`
+- Archive SHA-256: `393c32971301a33dbe18e106f7bb04082277e91bb646f15802252f95eb68055e`
 
 ## Errors
 
