@@ -19,7 +19,7 @@ Canonical imported artifacts live under `evidence/files/`. The published researc
 
 | Metric | Value |
 |--------|-------|
-| Promoted | 249 |
+| Promoted | 250 |
 | Blocked | 18 |
 | Revalidation Pending | 0 |
 | Gate Health | 🟢 green |

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T00:48:55.996207Z",
+  "generated_utc": "2026-04-13T01:05:38.783151Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -21,9 +21,8 @@
       "reboot-diff": 1
     },
     "promotion_state_counts": {
-      "promoted": 249,
-      "blocked": 18,
-      "promotion-eligible": 1
+      "promoted": 250,
+      "blocked": 18
     },
     "re_audit_required_count": 22,
     "imported_candidate_backlog": {
@@ -39,7 +38,7 @@
       "counts_by_promotion_state": {}
     },
     "total": 268,
-    "promoted": 249,
+    "promoted": 250,
     "blocked": 18,
     "revalidation_pending": 0,
     "stale": 0,
@@ -17896,7 +17895,7 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
@@ -17919,7 +17918,7 @@
       "last_known_good_build": "26100",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
-      "bench_status": "not-run",
+      "bench_status": "executed",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",

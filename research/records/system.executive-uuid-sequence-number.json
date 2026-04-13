@@ -417,5 +417,24 @@
     "why": "UuidSequenceNumber now has converged project evidence: clean baseline existence, an exact current-build ntoskrnl string hit, bounded early-boot ETL evidence in the same Session Manager Executive path, a live KVM local-KD wildcard plus disassembly that resolve the current-build UUID load/save/state family and tie it to the exact `UuidSequenceNumber` value name, a same-run forced-invalid follow-up that shows both the live kernel state and stored registry value advance together by `+1`, and now a QGA-launched WPR boot-registry trace that retains exact quoted `QueryValue` plus `SetValue` lines for `UuidSequenceNumber` during boot. The WPR normalizer binds those retained exact-value hits to the intended Session Manager Executive target path supplied to the run, and that path was already independently corroborated by the earlier bounded ETL review and local-KD disassembly. That is enough for Class A in this project even though the value remains research-only and not app-mapped.",
     "blocking_issues": []
   },
+  "bench_results": {
+    "executed": true,
+    "candidate_id": "system.executive-uuid-sequence-number",
+    "bench_tier": "vm",
+    "bench_profile": "observational-runtime",
+    "bench_measurement_reliability": "runtime-read",
+    "bench_environment": "windows-11-25h2-kvm",
+    "safety_passed": true,
+    "safety_status": "passed",
+    "boot_success": true,
+    "shell_usable": true,
+    "apply_verified": null,
+    "rollback_executed": false,
+    "rollback_verified": true,
+    "rollback_failure_reason": null,
+    "executed_at": "2026-04-12T21:36:42Z",
+    "summary": "Research-only observational VM bench: the QGA-launched WPR boot-registry lane completed a real reboot, retained exact `UuidSequenceNumber` QueryValue and SetValue hits, normalized them to the independently corroborated Session Manager Executive target path, and left the guest usable. No candidate value was applied, so rollback verification relies on the record restore story and observed baseline rather than a mutation rollback.",
+    "output_file": "evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json"
+  },
   "last_reviewed_utc": "2026-04-12T21:36:42Z"
 }
