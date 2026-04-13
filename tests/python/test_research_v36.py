@@ -1685,6 +1685,7 @@ class BlockedWorklistTests(unittest.TestCase):
                 "blocked_candidate_count": 18,
                 "revalidation_pending_count": 0,
                 "blocked_actionability_counts": {"active": 13, "hold": 5},
+                "blocked_worklist_status": "PASS",
             },
             gate_metrics={"schema_complete_ratio": 1.0},
             validation_summary={"missing_docs_count": 0},
@@ -1692,6 +1693,7 @@ class BlockedWorklistTests(unittest.TestCase):
         )
 
         self.assertIn("| Blocked Actionability | 13 active, 5 hold |", block)
+        self.assertIn("| Blocked Worklist Gate | PASS |", block)
 
     def test_candidate_slug_tokens_prioritize_specific_prefixes(self) -> None:
         tokens = blocked_worklist_lib.candidate_slug_tokens("power.control.allow-system-required-power-requests")
