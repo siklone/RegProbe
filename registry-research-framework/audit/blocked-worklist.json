@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-13T04:13:28.011392Z",
+  "generated_at": "2026-04-13T04:17:57.509975Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 5,
@@ -22,6 +22,10 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
       "value_name": "(subtree root, Driver, Process, Service)",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.md",
+        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.json"
+      ],
       "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
     },
     {
@@ -37,6 +41,11 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "AllowSystemRequiredPowerRequests",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json",
+        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
+        "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json"
+      ],
       "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
     },
     {
@@ -52,6 +61,11 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
+      ],
       "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
     },
     {
@@ -68,6 +82,11 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json",
+        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
+        "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json"
+      ],
       "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
     },
     {
@@ -84,6 +103,11 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
+      ],
       "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
     },
     {
@@ -101,6 +125,10 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "DpcWatchdogProfileBufferSizeBytes",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json",
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
+      ],
       "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
     },
     {
@@ -116,6 +144,9 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "GlobalTimerResolutionRequests",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json"
+      ],
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
@@ -132,6 +163,11 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
+      ],
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
@@ -148,6 +184,9 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
+      ],
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
@@ -164,6 +203,10 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "DPCTimeout",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json",
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
+      ],
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
@@ -180,6 +223,9 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "LongDpcQueueThreshold",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json"
+      ],
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
@@ -196,6 +242,9 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "ForceBugcheckForDpcWatchdog",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
+      ],
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
@@ -212,6 +261,9 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "TimerCheckFlags",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json"
+      ],
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
@@ -226,6 +278,11 @@
       ],
       "key_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
       "value_name": "EnableVirtualization",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.json",
+        "registry-research-framework/audit/policy-system-enable-virtualization-path-aware-follow-up-20260331.json",
+        "registry-research-framework/audit/policy-system-enable-virtualization-path-aware-follow-up-20260330.json"
+      ],
       "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
     },
     {
@@ -240,6 +297,11 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "HiberFileSizePercent",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.json",
+        "registry-research-framework/audit/power-control-hiber-file-size-percent-lightweight-runtime-20260330.json",
+        "registry-research-framework/audit/hiber-file-size-percent-stepwise-runtime-audit-20260408.md"
+      ],
       "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
     },
     {
@@ -254,6 +316,7 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "HibernateEnabledDefault",
+      "recent_audit_artifacts": [],
       "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
     },
     {
@@ -268,6 +331,7 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "TimerRebaseThresholdOnDripsExit",
+      "recent_audit_artifacts": [],
       "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
     },
     {
@@ -285,6 +349,7 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "TtmEnabled",
+      "recent_audit_artifacts": [],
       "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
     }
   ]

@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-13T04:13:28.011392Z`
+Generated: `2026-04-13T04:17:57.509975Z`
 
 Blocked candidates: `18`
 
@@ -30,6 +30,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
 - Value name: `(subtree root, Driver, Process, Service)`
 - Blockers: `powerrequestoverride-restore-story-unproven-subtree-presence-only`, `powerrequestoverride-static-context-adjacent-not-leaf-specific`, `powerrequestoverride-subtree-leaf-semantics-unresolved`
+- Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
 - Next action hint: Prove restore or rollback behavior for the exact subtree or value.
 
 ### `power.control.allow-system-required-power-requests`
@@ -41,6 +42,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `AllowSystemRequiredPowerRequests`
 - Blockers: `system-execution-required-init-walker-not-symbol-resolved`, `system-execution-required-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
 - Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
 
 ### `power.session-watchdog-timeouts`
@@ -52,6 +54,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`
 - Value name: `WatchdogResumeTimeout / WatchdogSleepTimeout`
 - Blockers: `power-session-watchdog-timeouts-exact-runtime-read-unresolved`, `power-session-watchdog-timeouts-specific-caller-unresolved`
+- Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
 - Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
 
 ### `power.control.allow-audio-to-enable-execution-required-power-requests`
@@ -63,6 +66,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `AllowAudioToEnableExecutionRequiredPowerRequests`
 - Blockers: `audio-execution-required-init-walker-not-symbol-resolved`, `audio-execution-required-megatrigger-etw-no-hit-current-build`, `audio-execution-required-no-primary-current-build-doc`
+- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
 - Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
 
 ### `power.control.power-watchdog-timeout-cluster`
@@ -74,6 +78,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `PowerWatchdogDrvSetMonitorTimeoutMsec`
 - Blockers: `powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit`, `powerwatchdog-timeout-family-no-primary-current-build-doc`, `powerwatchdog-timeout-family-runtime-read-unresolved`
+- Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
 - Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
 
 ### `system.kernel-dpc-watchdog-profile-cluster`
@@ -85,6 +90,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `DpcWatchdogProfileBufferSizeBytes`
 - Blockers: `dpc-watchdog-profile-conditional-initialization-unproven`, `dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs`, `dpc-watchdog-profile-no-primary-current-build-doc`, `dpc-watchdog-profile-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
 
 ### `system.kernel.global-timer-resolution-requests`
@@ -96,6 +102,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `GlobalTimerResolutionRequests`
 - Blockers: `global-timer-resolution-no-primary-current-build-doc`, `global-timer-resolution-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `power.control.win32k-callout-watchdog-timeout-seconds`
@@ -107,6 +114,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `Win32kCalloutWatchdogTimeoutSeconds`
 - Blockers: `win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build`, `win32k-callout-watchdog-no-primary-current-build-doc`, `win32k-callout-watchdog-override-semantics-unproven`
+- Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `power.session-win32-callout-watchdog-bugcheck-enabled`
@@ -118,6 +126,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`
 - Value name: `Win32CalloutWatchdogBugcheckEnabled`
 - Blockers: `win32-callout-watchdog-bugcheck-no-primary-current-build-doc`, `win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane`, `win32-callout-watchdog-bugcheck-semantics-unproven`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `system.kernel-dpc-watchdog-control-cluster`
@@ -129,6 +138,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `DPCTimeout`
 - Blockers: `dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs`, `dpc-watchdog-control-no-primary-current-build-doc`, `dpc-watchdog-control-runtime-read-unresolved`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `system.kernel-long-dpc-threshold-cluster`
@@ -140,6 +150,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `LongDpcQueueThreshold`
 - Blockers: `long-dpc-threshold-no-primary-current-build-doc`, `long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane`, `long-dpc-threshold-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `system.kernel.force-bugcheck-for-dpc-watchdog`
@@ -151,6 +162,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `ForceBugcheckForDpcWatchdog`
 - Blockers: `force-bugcheck-dpc-watchdog-no-primary-current-build-doc`, `force-bugcheck-dpc-watchdog-semantics-unproven`, `force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `system.kernel.timer-check-flags`
@@ -162,6 +174,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `TimerCheckFlags`
 - Blockers: `timer-check-flags-modern-bit-semantics-unproven`, `timer-check-flags-no-primary-current-build-doc`, `timer-check-flags-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `policy.system.enable-virtualization`
@@ -173,6 +186,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`
 - Value name: `EnableVirtualization`
 - Blockers: `enable-virtualization-research-only-raw-policy-system-value`
+- Recent audit artifacts: `registry-research-framework/audit/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.json`, `registry-research-framework/audit/policy-system-enable-virtualization-path-aware-follow-up-20260331.json`, `registry-research-framework/audit/policy-system-enable-virtualization-path-aware-follow-up-20260330.json`
 - Next action hint: Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ### `power.control.hiber-file-size-percent`
@@ -184,6 +198,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `HiberFileSizePercent`
 - Blockers: `hiber-file-size-percent-research-only-raw-power-manager-value`
+- Recent audit artifacts: `registry-research-framework/audit/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.json`, `registry-research-framework/audit/power-control-hiber-file-size-percent-lightweight-runtime-20260330.json`, `registry-research-framework/audit/hiber-file-size-percent-stepwise-runtime-audit-20260408.md`
 - Next action hint: Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ### `power.control.hibernate-enabled-default`

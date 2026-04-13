@@ -1598,6 +1598,8 @@ class BlockedWorklistTests(unittest.TestCase):
             self.assertIn(item.get("actionability"), {"active", "hold"})
             self.assertIsInstance(item.get("priority_score"), int)
             self.assertIsInstance(item.get("promotion_blockers"), list)
+            self.assertIsInstance(item.get("recent_audit_artifacts"), list)
+            self.assertLessEqual(len(item.get("recent_audit_artifacts") or []), 3)
 
     def test_blocker_hint_prefers_restore_story_guidance(self) -> None:
         hint = blocked_worklist_lib.blocker_hint(
@@ -1630,6 +1632,27 @@ class BlockedWorklistTests(unittest.TestCase):
 
         self.assertEqual(payload["blocked_lane_counts"], {"ghidra": 5, "runtime-trace": 7})
         self.assertEqual(payload["top_actionable_blocked_candidates"], ["a", "c"])
+
+    def test_candidate_slug_tokens_prioritize_specific_prefixes(self) -> None:
+        tokens = blocked_worklist_lib.candidate_slug_tokens("power.control.allow-system-required-power-requests")
+
+        self.assertEqual(tokens[0], "power-control-allow-system-required-power-requests")
+        self.assertIn("allow-system-required-power-requests", tokens)
+        self.assertNotIn("power-control", tokens)
+
+    def test_audit_artifact_match_score_prefers_specific_hits(self) -> None:
+        candidate_id = "power.control.power-request-override-subtree"
+
+        specific = blocked_worklist_lib.audit_artifact_match_score(
+            candidate_id,
+            "power-request-override-runtime-audit-20260408.json",
+        )
+        generic = blocked_worklist_lib.audit_artifact_match_score(
+            candidate_id,
+            "power-control-windbg-execution-20260403.json",
+        )
+
+        self.assertGreater(specific, generic)
 
 
 if __name__ == "__main__":

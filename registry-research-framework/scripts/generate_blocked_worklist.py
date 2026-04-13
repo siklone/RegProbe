@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import Counter
 from datetime import datetime, timezone
@@ -26,6 +27,15 @@ LANE_PRIORITY = {
     "ghidra": 35,
     "runtime-trace": 30,
     "intentional-hold": 10,
+}
+
+GENERIC_SLUG_WORDS = {
+    "control",
+    "kernel",
+    "policy",
+    "power",
+    "session",
+    "system",
 }
 
 
@@ -56,6 +66,83 @@ def actionability_for_lane(lane: str) -> str:
 
 def priority_score_for(lane: str, blocker_count: int) -> int:
     return int(LANE_PRIORITY.get(lane, 0)) - int(blocker_count)
+
+
+def candidate_slug_tokens(candidate_id: str) -> list[str]:
+    parts = [segment for segment in candidate_id.lower().split(".") if segment]
+    tokens: list[str] = []
+    if not parts:
+        return tokens
+
+    joined = "-".join(parts)
+    tail = parts[-1]
+    tail_pair = "-".join(parts[-2:]) if len(parts) >= 2 else ""
+    for token in (joined, tail_pair, tail):
+        if token and token not in tokens:
+            tokens.append(token)
+    return tokens
+
+
+def candidate_match_words(candidate_id: str) -> list[str]:
+    words = [
+        word
+        for word in candidate_id.lower().replace(".", "-").split("-")
+        if word and len(word) >= 3 and word not in GENERIC_SLUG_WORDS
+    ]
+    return sorted(set(words), key=len, reverse=True)
+
+
+def normalize_match_word(word: str) -> str:
+    lowered = word.lower()
+    if len(lowered) > 4 and lowered.endswith("s") and not lowered.endswith("ss"):
+        return lowered[:-1]
+    return lowered
+
+
+def artifact_match_words(artifact_name: str) -> set[str]:
+    stem = Path(artifact_name).stem.lower()
+    return {
+        normalize_match_word(word)
+        for word in re.split(r"[^a-z0-9]+", stem)
+        if word
+    }
+
+
+def audit_artifact_match_score(candidate_id: str, artifact_name: str) -> int:
+    lowered = artifact_name.lower()
+    score = 0
+    for index, token in enumerate(candidate_slug_tokens(candidate_id)):
+        if token and token in lowered:
+            score += 10 - index
+    artifact_words = artifact_match_words(artifact_name)
+    word_hits = sum(
+        1
+        for word in candidate_match_words(candidate_id)
+        if normalize_match_word(word) in artifact_words
+    )
+    if word_hits >= 2:
+        score += 5 + word_hits
+    return score
+
+
+def recent_audit_artifacts_for(candidate_id: str, limit: int = 3) -> list[str]:
+    if not AUDIT_ROOT.exists():
+        return []
+
+    matches: list[tuple[int, str, Path]] = []
+    for path in AUDIT_ROOT.iterdir():
+        if not path.is_file():
+            continue
+        score = audit_artifact_match_score(candidate_id, path.name)
+        if score <= 0:
+            continue
+        matches.append((score, path.name.lower(), path))
+
+    matches.sort(key=lambda item: (item[0], item[1]), reverse=True)
+    return [
+        str(path.relative_to(REPO_ROOT)).replace("\\", "/")
+        for _, _, path in matches[:limit]
+    ]
 
 
 def build_worklist() -> dict[str, Any]:
@@ -94,6 +181,7 @@ def build_worklist() -> dict[str, Any]:
                 "promotion_blockers": blockers,
                 "key_path": str(target.get("path") or entry.get("key_path") or ""),
                 "value_name": str(target.get("value_name") or entry.get("value_name") or ""),
+                "recent_audit_artifacts": recent_audit_artifacts_for(candidate_id),
                 "next_action_hint": blocker_hint(blockers, lane),
             }
         )
@@ -150,6 +238,9 @@ def render_markdown(payload: dict[str, Any]) -> str:
         if item.get("value_name"):
             lines.append(f"- Value name: `{item['value_name']}`")
         lines.append(f"- Blockers: {', '.join(f'`{value}`' for value in item.get('promotion_blockers') or [])}")
+        artifacts = item.get("recent_audit_artifacts") or []
+        if artifacts:
+            lines.append(f"- Recent audit artifacts: {', '.join(f'`{value}`' for value in artifacts)}")
         lines.append(f"- Next action hint: {item['next_action_hint']}")
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
