@@ -104,6 +104,15 @@ Generate the ETW stackwalk capture plan for producing fresh caller-stack bundles
 python3 registry-research-framework/scripts/generate_etw_stackwalk_capture_plan.py
 ```
 
+Run the matching elevated Windows guest helper when Windows Performance Toolkit is available:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\vm\guest-tools\run-etw-registry-stackwalk-capture.ps1 `
+  -RunId wave4-registry-stackwalk `
+  -RegistryPath 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel' `
+  -ValueName TimerCheckFlags
+```
+
 Validate that the stackwalk plan still contains the registry stack flags, caller-stack handoff, and parser command:
 
 ```bash

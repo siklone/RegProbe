@@ -15,6 +15,7 @@ $parserTargets = @(
     'registry-research-framework\tools\run-power-control-batch-mega-trigger-runtime-safe.ps1',
     'registry-research-framework\tools\run-path-aware-runtime-probe.ps1',
     'scripts\vm\get-vm-shell-health.ps1',
+    'scripts\vm\guest-tools\run-etw-registry-stackwalk-capture.ps1',
     'scripts\vm\configure-kernel-debug-baseline.ps1',
     'scripts\vm\new-windbg-registry-watch-script.ps1',
     'registry-research-framework\tools\run-windbg-boot-registry-trace.ps1',
