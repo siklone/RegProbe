@@ -29,6 +29,7 @@ evidence_class_lib = load_module("evidence_class_lib", SCRIPTS_ROOT / "evidence_
 validate_contracts = load_module("validate_research_contracts", FRAMEWORK_SCRIPTS / "validate_research_contracts.py")
 metrics_publish_v36_lib = load_module("metrics_publish_v36_lib", SCRIPTS_ROOT / "metrics_publish_v36_lib.py")
 blocked_worklist_lib = load_module("generate_blocked_worklist", FRAMEWORK_SCRIPTS / "generate_blocked_worklist.py")
+blocked_worklist_check = load_module("check_blocked_worklist", FRAMEWORK_SCRIPTS / "check_blocked_worklist.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -1608,6 +1609,27 @@ class BlockedWorklistTests(unittest.TestCase):
             self.assertIsInstance(item.get("promotion_blockers"), list)
             self.assertIsInstance(item.get("recent_audit_artifacts"), list)
             self.assertLessEqual(len(item.get("recent_audit_artifacts") or []), 3)
+
+    def test_blocked_worklist_validator_accepts_generated_payload(self) -> None:
+        payload = blocked_worklist_lib.build_worklist()
+
+        self.assertEqual(blocked_worklist_check.validate_payload(payload), [])
+
+    def test_blocked_worklist_validator_rejects_count_mismatch(self) -> None:
+        payload = blocked_worklist_lib.build_worklist()
+        payload["blocked_count"] = int(payload.get("blocked_count") or 0) + 1
+
+        errors = blocked_worklist_check.validate_payload(payload)
+
+        self.assertTrue(any("blocked_count mismatch" in error for error in errors))
+
+    def test_blocked_worklist_validator_rejects_top_list_mismatch(self) -> None:
+        payload = blocked_worklist_lib.build_worklist()
+        payload["top_actionable_candidates"] = ["wrong.candidate"]
+
+        errors = blocked_worklist_check.validate_payload(payload)
+
+        self.assertTrue(any("top_actionable_candidates" in error for error in errors))
 
     def test_blocker_hint_prefers_restore_story_guidance(self) -> None:
         hint = blocked_worklist_lib.blocker_hint(
