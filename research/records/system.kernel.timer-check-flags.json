@@ -268,7 +268,7 @@
     "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, current-build string hit, WRK-backed semantic source evidence, a real write-and-reboot runtime lane, dedicated live current-build KD proof that `KeTimerCheckFlags = 1`, a current-build INIT descriptor binding from `TimerCheckFlags` to the same global, and now a targeted QGA-launched WPR boot-registry rerun that completes end to end on the current build. It is not ready for validation because even that targeted boot trace still returned zero exact `TimerCheckFlags` runtime hits.",
     "manual_review_required": true,
     "blocking_issues": [
-      "wpr-boot-registry-no-hit-current-build",
+      "timer-check-flags-wpr-boot-no-hit-current-build",
       "no-primary-current-build-doc",
       "timer-check-flags-modern-bit-semantics-unproven"
     ]

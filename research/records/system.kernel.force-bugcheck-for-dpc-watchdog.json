@@ -256,7 +256,7 @@
     "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, current-build string hit, a real write-and-reboot runtime lane, dedicated live current-build KD proof that the kernel global exists at value `0`, and a current-build INIT descriptor binding from `ForceBugcheckForDpcWatchdog` to the same global. A QGA-launched raw WPR System Collector salvage run also found zero exact value-name hits after a real reboot. It is not ready for validation because the exact runtime registry read and non-default semantics remain unproven.",
     "manual_review_required": true,
     "blocking_issues": [
-      "wpr-boot-registry-no-hit-current-build",
+      "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build",
       "no-primary-current-build-doc",
       "force-bugcheck-for-dpc-watchdog-semantics-unproven"
     ]

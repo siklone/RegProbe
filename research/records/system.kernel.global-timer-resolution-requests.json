@@ -273,7 +273,7 @@
     "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, adjacent Microsoft documentation for the timer-resolution feature family, a live current-build KD value that matches the repo-doc default, a current-build INIT descriptor binding from `GlobalTimerResolutionRequests` to the same live global, a concrete enrichment-recommended trigger family that is now mirrored by a repo-native harness, a real write-and-reboot runtime lane, and a targeted QGA/WPR boot-registry timeout-salvage run that retained zero exact hits. It is not ready for validation because an exact runtime registry read remains unproven, and Microsoft does not publish the exact internal `GlobalTimerResolutionRequests` registry contract.",
     "manual_review_required": true,
     "blocking_issues": [
-      "wpr-boot-registry-no-hit-current-build",
+      "global-timer-resolution-wpr-boot-no-hit-current-build",
       "no-primary-current-build-doc"
     ]
   },

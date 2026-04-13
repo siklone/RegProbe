@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T03:12:21.325923Z",
+  "generated_utc": "2026-04-13T03:15:28.120335Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -6133,7 +6133,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "execution-required-init-walker-not-symbol-resolved",
-        "wpr-boot-registry-no-hit-current-build"
+        "execution-required-wpr-boot-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18478,8 +18478,8 @@
       "promotion_blockers": [
         "conditional-initialization-unproven",
         "dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs",
-        "no-primary-current-build-doc",
-        "wpr-boot-registry-no-hit-current-build"
+        "dpc-watchdog-profile-wpr-boot-no-hit-current-build",
+        "no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18570,9 +18570,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "long-dpc-threshold-wpr-boot-no-hit-current-build",
         "no-primary-current-build-doc",
-        "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
-        "wpr-boot-registry-no-hit-current-build"
+        "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18839,9 +18839,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build",
         "force-bugcheck-for-dpc-watchdog-semantics-unproven",
-        "no-primary-current-build-doc",
-        "wpr-boot-registry-no-hit-current-build"
+        "no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18934,8 +18934,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-primary-current-build-doc",
-        "wpr-boot-registry-no-hit-current-build"
+        "global-timer-resolution-wpr-boot-no-hit-current-build",
+        "no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -19026,7 +19026,7 @@
       "promotion_blockers": [
         "no-primary-current-build-doc",
         "timer-check-flags-modern-bit-semantics-unproven",
-        "wpr-boot-registry-no-hit-current-build"
+        "timer-check-flags-wpr-boot-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,

@@ -382,7 +382,7 @@
     "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a bounded current-build consumer pass that narrows adjacent lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent`, a direct PDB-backed Ghidra xref for `KiLongDpcQueueThreshold` in `KiExecuteAllDpcs` and `KeInitSystem`, current-build INIT descriptor bindings from both registry value-name strings to the same live globals, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export, and a QGA WPR raw-collector salvage run that normalized to zero exact hits for both Long-DPC sibling values. It is not ready for validation because no exact runtime registry read capture exists, the narrow Procmon lane is export-blocked, the WPR lane still fails to save the requested target ETL reliably, and there is still no primary Microsoft source for either value.",
     "manual_review_required": true,
     "blocking_issues": [
-      "wpr-boot-registry-no-hit-current-build",
+      "long-dpc-threshold-wpr-boot-no-hit-current-build",
       "no-primary-current-build-doc",
       "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
     ]

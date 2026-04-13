@@ -736,6 +736,7 @@ class PromotionStateTests(unittest.TestCase):
             "procmon-saveas-timeout-on-bounded-callout-lane",
             "powerwatchdog-timeout-family-runtime-read-unresolved",
             "dpc-watchdog-control-runtime-read-unresolved",
+            "timer-check-flags-wpr-boot-no-hit-current-build",
         ]:
             record = {
                 "record_id": f"example.{blocker}",
