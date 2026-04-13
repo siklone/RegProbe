@@ -947,10 +947,10 @@ class PromotionStateTests(unittest.TestCase):
 
     def test_specific_hold_blockers_map_to_intentional_hold_lane_without_generic_tag(self) -> None:
         for blocker in [
-            "research-only-raw-policy-system-value",
-            "research-only-raw-power-manager-value",
-            "hibernate-trigger-not-available-on-current-vm",
-            "drips-trigger-not-available-on-current-vm",
+            "enable-virtualization-research-only-raw-policy-system-value",
+            "hiber-file-size-percent-research-only-raw-power-manager-value",
+            "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm",
+            "timer-rebase-threshold-drips-trigger-not-available-on-current-vm",
             "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
         ]:
             record = {

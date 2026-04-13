@@ -221,7 +221,7 @@
                      "needs_vm_validation":  false,
                      "why":  "TimerRebaseThresholdOnDripsExit is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, a tools-hardened DRIPS capability gate on RegProbe-Baseline-ToolsHardened-20260330, and a host-driven KVM reboot observation. The KVM lane showed that the value persists at `60` across a real reboot while S0 Low Power Idle stays unavailable. The record remains decision-gated because the current virtualized baselines still do not support a real Modern Standby / DRIPS exit trigger. The 2026-04-12 decision review marks this as an intentional hold until a Modern Standby / DRIPS-capable validation environment exists.",
                      "blocking_issues":  [
-      "drips-trigger-not-available-on-current-vm"
+      "timer-rebase-threshold-drips-trigger-not-available-on-current-vm"
                                          ]
                  },
     "last_reviewed_utc":  "2026-04-13T01:16:00Z"

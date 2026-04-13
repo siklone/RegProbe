@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T03:34:03.215075Z",
+  "generated_utc": "2026-04-13T03:37:30.826071Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -5942,7 +5942,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "research-only-raw-policy-system-value"
+        "enable-virtualization-research-only-raw-policy-system-value"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6315,7 +6315,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "research-only-raw-power-manager-value"
+        "hiber-file-size-percent-research-only-raw-power-manager-value"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6407,7 +6407,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "hibernate-trigger-not-available-on-current-vm"
+        "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -7025,7 +7025,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "drips-trigger-not-available-on-current-vm"
+        "timer-rebase-threshold-drips-trigger-not-available-on-current-vm"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -22833,19 +22833,19 @@
     "audio-execution-required-init-walker-not-symbol-resolved": 1,
     "conflicting-sources": 2,
     "dpc-watchdog-profile-conditional-initialization-unproven": 1,
-    "drips-trigger-not-available-on-current-vm": 1,
+    "enable-virtualization-research-only-raw-policy-system-value": 1,
     "force-bugcheck-for-dpc-watchdog-semantics-unproven": 1,
-    "hibernate-trigger-not-available-on-current-vm": 1,
+    "hiber-file-size-percent-research-only-raw-power-manager-value": 1,
+    "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm": 1,
     "no-primary-current-build-doc": 11,
     "no-runtime-proof": 13,
     "powerrequestoverride-leaf-semantics-unresolved": 1,
     "powerrequestoverride-restore-story-unproven-subtree-presence-only": 1,
     "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
     "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit": 1,
-    "research-only-raw-policy-system-value": 1,
-    "research-only-raw-power-manager-value": 1,
     "system-execution-required-init-walker-not-symbol-resolved": 1,
     "timer-check-flags-modern-bit-semantics-unproven": 1,
+    "timer-rebase-threshold-drips-trigger-not-available-on-current-vm": 1,
     "ttmenabled-boot-unsafe-dedicated-boot-lane-required": 1,
     "ttmenabled-boot-unsafe-on-isolated-pilot-profile": 1,
     "ttmenabled-reader-unresolved": 1,

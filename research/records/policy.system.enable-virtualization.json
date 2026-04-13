@@ -269,7 +269,7 @@
     "needs_vm_validation": false,
     "why": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, shell-safe runtime follow-ups across multiple transports, a KVM bootlog probe that completed a real reboot but showed `/EnableBootLogging` is not accepted on the current guest, a KVM local-KD disassembly that confirms the live current-build `Policies\\System` path plus the adjacent `EnableLUA` / `EnableVirtualization` / `EnableInstallerDetection` family on the running guest, and a QGA-launched WPR boot trace that retained five exact quoted `EnableVirtualization` `QueryValue` lines during boot. The WPR normalizer binds those retained exact-value hits to the intended `Policies\\System` target path supplied to the run, and that path was already independently corroborated by the earlier static and local-KD work. The record therefore no longer lacks runtime attribution. It remains intentionally held because this is a research-only legacy UAC virtualization control that is not mapped to a supported app surface.",
     "blocking_issues": [
-      "research-only-raw-policy-system-value"
+      "enable-virtualization-research-only-raw-policy-system-value"
     ]
   },
   "last_reviewed_utc": "2026-04-13T01:10:00Z"
