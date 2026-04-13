@@ -74,6 +74,12 @@ def suggested_command_for(candidate_id: str, lane: str) -> str:
     return f"winopt research list-blocked --worklist --lane {lane}"
 
 
+def lane_suggested_command_for(lane: str) -> str:
+    if lane in {"ghidra", "runtime-trace", "restore-story"}:
+        return f"winopt research list-blocked --worklist --lane {lane} --top 5"
+    return f"winopt research list-blocked --worklist --lane {lane}"
+
+
 def candidate_slug_tokens(candidate_id: str) -> list[str]:
     parts = [segment for segment in candidate_id.lower().split(".") if segment]
     tokens: list[str] = []
@@ -212,6 +218,10 @@ def build_worklist() -> dict[str, Any]:
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "blocked_count": len(items),
         "lane_counts": dict(sorted(lane_counts.items())),
+        "lane_suggested_commands": {
+            lane: lane_suggested_command_for(lane)
+            for lane in sorted(lane_counts)
+        },
         "top_actionable_candidates": top_actionable_candidates,
         "items": items,
     }
@@ -229,7 +239,11 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
     ]
     for lane, count in (payload.get("lane_counts") or {}).items():
-        lines.append(f"- `{lane}`: {count}")
+        lane_command = (payload.get("lane_suggested_commands") or {}).get(lane)
+        if lane_command:
+            lines.append(f"- `{lane}`: {count} | `{lane_command}`")
+        else:
+            lines.append(f"- `{lane}`: {count}")
 
     actionable = [item for item in (payload.get("items") or []) if item.get("actionability") == "active"][:5]
     if actionable:

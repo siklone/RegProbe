@@ -1,11 +1,17 @@
 {
-  "generated_at": "2026-04-13T04:26:25.178640Z",
+  "generated_at": "2026-04-13T04:27:22.422035Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 5,
     "intentional-hold": 5,
     "restore-story": 1,
     "runtime-trace": 7
+  },
+  "lane_suggested_commands": {
+    "ghidra": "winopt research list-blocked --worklist --lane ghidra --top 5",
+    "intentional-hold": "winopt research list-blocked --worklist --lane intentional-hold",
+    "restore-story": "winopt research list-blocked --worklist --lane restore-story --top 5",
+    "runtime-trace": "winopt research list-blocked --worklist --lane runtime-trace --top 5"
   },
   "top_actionable_candidates": [
     "power.control.power-request-override-subtree",

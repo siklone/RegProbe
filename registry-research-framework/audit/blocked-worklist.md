@@ -1,15 +1,15 @@
 # Blocked Worklist
 
-Generated: `2026-04-13T04:26:25.178640Z`
+Generated: `2026-04-13T04:27:22.422035Z`
 
 Blocked candidates: `18`
 
 ## Lane Summary
 
-- `ghidra`: 5
-- `intentional-hold`: 5
-- `restore-story`: 1
-- `runtime-trace`: 7
+- `ghidra`: 5 | `winopt research list-blocked --worklist --lane ghidra --top 5`
+- `intentional-hold`: 5 | `winopt research list-blocked --worklist --lane intentional-hold`
+- `restore-story`: 1 | `winopt research list-blocked --worklist --lane restore-story --top 5`
+- `runtime-trace`: 7 | `winopt research list-blocked --worklist --lane runtime-trace --top 5`
 
 ## Top Actionable Candidates
 

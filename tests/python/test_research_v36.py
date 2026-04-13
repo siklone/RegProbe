@@ -1587,6 +1587,7 @@ class BlockedWorklistTests(unittest.TestCase):
 
         self.assertGreaterEqual(int(payload.get("blocked_count") or 0), 1)
         self.assertIsInstance(payload.get("top_actionable_candidates"), list)
+        self.assertIsInstance(payload.get("lane_suggested_commands"), dict)
         self.assertLessEqual(len(payload.get("top_actionable_candidates") or []), 5)
         self.assertEqual(
             sum(int(value) for value in (payload.get("lane_counts") or {}).values()),
@@ -1664,6 +1665,16 @@ class BlockedWorklistTests(unittest.TestCase):
         )
         self.assertEqual(
             blocked_worklist_lib.suggested_command_for("power.test-gate", "intentional-hold"),
+            "winopt research list-blocked --worklist --lane intentional-hold",
+        )
+
+    def test_lane_suggested_command_prefers_top_five_for_active_lanes(self) -> None:
+        self.assertEqual(
+            blocked_worklist_lib.lane_suggested_command_for("runtime-trace"),
+            "winopt research list-blocked --worklist --lane runtime-trace --top 5",
+        )
+        self.assertEqual(
+            blocked_worklist_lib.lane_suggested_command_for("intentional-hold"),
             "winopt research list-blocked --worklist --lane intentional-hold",
         )
 
