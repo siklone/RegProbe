@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T01:56:31.425177Z",
+  "generated_utc": "2026-04-13T01:58:38.748114Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -38,7 +38,13 @@
       "counts_by_source_tool": {},
       "counts_by_confidence": {},
       "counts_by_promotion_state": {}
-    }
+    },
+    "total": 268,
+    "promoted": 250,
+    "blocked": 18,
+    "revalidation_pending": 0,
+    "stale": 0,
+    "gate_health": "green"
   },
   "entries": [
     {
@@ -6033,9 +6039,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-current-build-registry-seeding-path",
         "no-primary-current-build-doc",
-        "runtime_no_read"
+        "runtime_no_read",
+        "unlabeled-init-walker-not-symbol-resolved"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6129,8 +6135,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "no-current-build-registry-seeding-path",
-        "runtime_no_read"
+        "unlabeled-init-walker-not-symbol-resolved",
+        "wpr-boot-registry-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -22835,11 +22841,6 @@
       "source_file": "research/records/visibility.restore-classic-context-menu.review.json",
       "incident_ids": []
     }
-  ]
-}
--classic-context-menu.review.json",
-      "incident_ids": []
-    }
   ],
   "blocker_breakdown": {
     "boot-unsafe, do not probe without dedicated boot lane": 1,
@@ -22847,7 +22848,6 @@
     "conflicting-sources": 2,
     "intentional-ghidra-hold": 1,
     "intentional-hold": 5,
-    "no-current-build-registry-seeding-path": 2,
     "no-current-build-string-or-symbol-hit": 1,
     "no-doc-source-outside-repo": 5,
     "no-primary-current-build-doc": 5,
@@ -22857,7 +22857,8 @@
     "reboot-diff": 1,
     "record-blocker": 12,
     "research-only-raw-policy-system-value": 1,
-    "research-only-raw-power-manager-value": 1
+    "research-only-raw-power-manager-value": 1,
+    "unlabeled-init-walker-not-symbol-resolved": 2
   },
   "stale_records": [],
   "conflict_records": [],

@@ -1768,6 +1768,9 @@ def _infer_blocker_driven_missing_layer(base_layer: str, blockers: set[str]) -> 
     if has_phrase(
         "no-current-build-registry-seeding-path",
         "no-current-build-string-or-symbol-hit",
+        "init-walker-not-symbol-resolved",
+        "unlabeled init walker",
+        "not-symbol-resolved",
         "caller into that helper path is still unresolved",
         "exact watchdog-specific caller",
         "adjacent rather than leaf-specific",
