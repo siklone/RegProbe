@@ -37,6 +37,7 @@ ghidra_dispatch_batch = load_module("generate_ghidra_dispatch_batch", FRAMEWORK_
 ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "run_ghidra_dispatch_batch.py")
 ghidra_autotrigger = load_module("generate_ghidra_autotrigger_seeds", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_seeds.py")
 ghidra_autotrigger_inputs = load_module("generate_ghidra_autotrigger_inputs", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_inputs.py")
+ghidra_autotrigger_smoke_check = load_module("check_ghidra_autotrigger_smoke", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_smoke.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
 ghidra_symbol_runner = load_module("run_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "run_ghidra_symbol_resolution_batch.py")
@@ -3915,6 +3916,52 @@ class GhidraAutotriggerSmokeTests(unittest.TestCase):
             self.assertTrue((output_root / "ghidra-symbol-resolution-transfer-pack-execution-run-check.json").exists())
             self.assertTrue(output_path.exists())
             self.assertTrue(markdown_path.exists())
+
+            check_payload = ghidra_autotrigger_smoke_check.validate_smoke(
+                json.loads(output_path.read_text(encoding="utf-8")),
+                smoke_path=output_path,
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+            self.assertEqual(check_payload["check_status"], "ok")
+            self.assertEqual(check_payload["counts"]["selected_candidates"], 3)
+
+    def test_smoke_check_rejects_failed_assertions_and_bad_status(self) -> None:
+        payload = {
+            "smoke_status": "error",
+            "sync_status": "ok",
+            "handoff_status": "ready",
+            "transfer_status": "ready",
+            "transfer_pack_status": "ready",
+            "transfer_pack_check_status": "ok",
+            "transfer_pack_import_status": "ok",
+            "execution_plan_status": "ready",
+            "execution_run_status": "ready",
+            "execution_run_check_status": "ok",
+            "selected_candidate_count": 1,
+            "selected_candidate_ids": ["power.keep"],
+            "failed_assertions": ["boom"],
+            "operator": {"blocker": "wrong"},
+            "counts": {
+                "manifest_selected_count": 0,
+                "seed_count": 0,
+                "symbol_resolution_request_count": 0,
+                "symbol_resolution_batch_job_count": 0,
+                "dispatch_job_count": 0,
+                "dispatch_selected_job_count": 0,
+                "transfer_pack_selected_job_count": 0,
+            },
+            "paths": {},
+        }
+
+        check_payload = ghidra_autotrigger_smoke_check.validate_smoke(
+            payload,
+            smoke_path=Path("smoke.json"),
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(check_payload["check_status"], "error")
+        self.assertTrue(any("smoke_status" in error for error in check_payload["errors"]))
+        self.assertTrue(any("failed_assertions" in error for error in check_payload["errors"]))
 
 
 if __name__ == "__main__":

@@ -42,6 +42,12 @@ Run the synthetic smoke harness:
 python3 registry-research-framework/scripts/run_ghidra_autotrigger_smoke.py
 ```
 
+Validate the latest synthetic smoke result:
+
+```bash
+python3 registry-research-framework/scripts/check_ghidra_autotrigger_smoke.py
+```
+
 Render the symbol-resolution handoff surface:
 
 ```bash
@@ -162,6 +168,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Synthetic end-to-end proof that the lane can leave `idle` and produce symbol-resolution-ready work without waiting on a fresh real capture.
 - `registry-research-framework/audit/ghidra-autotrigger-smoke.md`
   Short operator summary for the latest smoke run, including candidate coverage and assertion failures.
+- `registry-research-framework/audit/ghidra-autotrigger-smoke-check.json`
+  Validator result for the latest smoke summary and its critical child surfaces.
+- `registry-research-framework/audit/ghidra-autotrigger-smoke-check.md`
+  Human-readable smoke validation summary.
 
 ## Status Semantics
 
