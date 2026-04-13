@@ -118,6 +118,9 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                   ],
                   "key_path": "HKLM\\\\Software\\\\Example",
                   "value_name": "Enabled",
+                  "recent_audit_artifacts": [
+                    "registry-research-framework/audit/power-test-runtime-audit-20260413.json"
+                  ],
                   "next_action_hint": "Continue static RE."
                 },
                 {
@@ -132,6 +135,7 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                   ],
                   "key_path": "HKLM\\\\Software\\\\Hold",
                   "value_name": "Enabled",
+                  "recent_audit_artifacts": [],
                   "next_action_hint": "Wait for a safer lane."
                 }
               ]
@@ -213,8 +217,10 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         Assert.Single(actionable);
         Assert.Equal("power.test-gate", actionable[0].CandidateId);
         Assert.Equal("active", actionable[0].Actionability);
+        Assert.Single(actionable[0].RecentAuditArtifacts);
         Assert.True(service.TryResolveBlockedWorklist("power.test-gate", out var entry));
         Assert.Equal(33, entry.PriorityScore);
+        Assert.Single(entry.RecentAuditArtifacts);
     }
 
     public void Dispose()

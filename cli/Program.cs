@@ -376,6 +376,10 @@ class Program
                 {
                     Console.WriteLine(
                         $"{entry.CandidateId} [{entry.NextMissingLayer} | {entry.Actionability} | score={entry.PriorityScore}] :: {entry.NextActionHint}");
+                    if (entry.RecentAuditArtifacts.Count > 0)
+                    {
+                        Console.WriteLine($"  audit: {string.Join(", ", entry.RecentAuditArtifacts)}");
+                    }
                 }
             }
             else
