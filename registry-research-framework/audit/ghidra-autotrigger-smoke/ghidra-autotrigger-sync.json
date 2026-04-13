@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "sync_status": "ok",
+  "discover_input_roots": [
+    "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs"
+  ],
+  "input_manifest_limit": null,
+  "refresh": {
+    "bundle_count": 1,
+    "bundle_paths": [
+      "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json"
+    ],
+    "seed_count": 4,
+    "symbol_resolution_request_count": 4,
+    "symbol_resolution_batch_job_count": 4,
+    "symbol_resolution_run_selected_job_count": 4,
+    "dispatch_job_count": 4,
+    "dispatch_autotrigger_matched_job_count": 4,
+    "run_plan_selected_job_count": 4,
+    "runner_available": false,
+    "outputs": {
+      "seeds_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-seeds.jsonl",
+      "symbol_queue_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-queue.json",
+      "symbol_batch_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-batch.json",
+      "symbol_run_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-run.json",
+      "batch_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-dispatch-batch.json",
+      "run_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-dispatch-run.json",
+      "health_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-health.json",
+      "bundle_manifest_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-inputs.json"
+    },
+    "bundle_manifest_refreshed": true,
+    "bundle_manifest_selected_count": 1
+  },
+  "health_check": {
+    "status": "ok",
+    "errors": [],
+    "path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-health.json"
+  },
+  "operator": {
+    "status": "ready",
+    "blocker": "symbol-resolution-ready",
+    "next_action": "Run the symbol-resolution batch to resolve caller-stack pivots before deeper Ghidra dispatch.",
+    "top_focus": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver"
+  }
+}

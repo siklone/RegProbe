@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "run_id": "ghidra-autotrigger-smoke-20260413T100907.251908Z",
+  "source_tool": "synthetic-smoke",
+  "capture_phase": "synthetic-smoke",
+  "normalizer_name": "ghidra-autotrigger-smoke",
+  "status": "completed",
+  "generated_utc": "2026-04-13T10:09:07.251908Z",
+  "event_count": 4,
+  "stack_capture": {
+    "source_fields": [
+      "SyntheticCallerStack"
+    ],
+    "captured_event_count": 4
+  },
+  "events": [
+    {
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowSystemRequiredPowerRequests",
+      "operation": "RegQueryValue",
+      "caller_stack": [
+        "nt!PopPowerRequestInitialize",
+        "ntoskrnl.exe+0x1920"
+      ]
+    },
+    {
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogResumeTimeout",
+      "operation": "RegQueryValue",
+      "caller_stack": [
+        "nt!PopPowerRequestInitialize",
+        "0xFFFFF80512340002"
+      ]
+    },
+    {
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "operation": "RegQueryValue",
+      "caller_stack": [
+        "nt!PopPowerRequestInitialize",
+        "Syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsResolver"
+      ]
+    },
+    {
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "DpcWatchdogProfileBufferSizeBytes",
+      "operation": "RegQueryValue",
+      "caller_stack": [
+        "nt!ExpInitializeExecutive",
+        "ntoskrnl.exe+0x2C80"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T10:09:07.251908Z",
+  "smoke_status": "ok",
+  "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
+  "output_root": "registry-research-framework/audit/ghidra-autotrigger-smoke",
+  "synthetic_bundle_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json",
+  "selected_candidate_count": 4,
+  "selected_candidate_ids": [
+    "power.control.allow-system-required-power-requests",
+    "power.session-watchdog-timeouts",
+    "power.control.allow-audio-to-enable-execution-required-power-requests",
+    "system.kernel-dpc-watchdog-profile-cluster"
+  ],
+  "frame_resolution_counts": {
+    "module_offset": 2,
+    "plain_text": 1,
+    "raw_address": 1
+  },
+  "sync_status": "ok",
+  "operator": {
+    "status": "ready",
+    "blocker": "symbol-resolution-ready",
+    "next_action": "Run the symbol-resolution batch to resolve caller-stack pivots before deeper Ghidra dispatch.",
+    "top_focus": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver"
+  },
+  "counts": {
+    "manifest_selected_count": 1,
+    "seed_count": 4,
+    "symbol_resolution_request_count": 4,
+    "symbol_resolution_batch_job_count": 4,
+    "symbol_resolution_run_selected_job_count": 4,
+    "dispatch_job_count": 4,
+    "dispatch_selected_job_count": 4
+  },
+  "failed_assertions": [],
+  "paths": {
+    "manifest_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-inputs.json",
+    "seeds_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-seeds.jsonl",
+    "symbol_queue_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-queue.json",
+    "symbol_batch_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-batch.json",
+    "symbol_run_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-run.json",
+    "dispatch_batch_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-dispatch-batch.json",
+    "dispatch_run_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-dispatch-run.json",
+    "health_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-health.json",
+    "sync_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-sync.json",
+    "sync_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-sync.md"
+  }
+}

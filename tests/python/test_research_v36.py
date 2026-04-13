@@ -43,6 +43,7 @@ ghidra_refresh_pipeline = load_module("refresh_ghidra_autotrigger_pipeline", FRA
 ghidra_autotrigger_health = load_module("generate_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_health.py")
 ghidra_autotrigger_health_check = load_module("check_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_health.py")
 ghidra_autotrigger_sync = load_module("sync_ghidra_autotrigger_lane", FRAMEWORK_SCRIPTS / "sync_ghidra_autotrigger_lane.py")
+ghidra_autotrigger_smoke = load_module("run_ghidra_autotrigger_smoke", FRAMEWORK_SCRIPTS / "run_ghidra_autotrigger_smoke.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2934,6 +2935,66 @@ class PowerRequestOverrideAuditTests(unittest.TestCase):
         ])
 
         self.assertTrue(power_request_override_audit.subtree_present_in_dump(root_dump))
+
+
+class GhidraAutotriggerSmokeTests(unittest.TestCase):
+    def test_smoke_run_produces_symbol_resolution_ready_summary(self) -> None:
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "priority_rank": 1,
+                "status": "queued",
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+            },
+            {
+                "candidate_id": "power.session-watchdog-timeouts",
+                "priority_rank": 2,
+                "status": "queued",
+                "feature_area": "Directed Power Watchdog Timeouts",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
+                "promotion_blockers": ["power-session-watchdog-timeouts-specific-caller-unresolved"],
+            },
+            {
+                "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+                "priority_rank": 3,
+                "status": "queued",
+                "feature_area": "Session Manager Kernel DPC Watchdog Profile",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                "value_name": "DpcWatchdogProfileBufferSizeBytes",
+                "promotion_blockers": ["dpc-watchdog-profile-conditional-initialization-unproven"],
+            },
+        ]
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            queue_path = temp_root / "ghidra-job-queue.jsonl"
+            queue_path.write_text("".join(json.dumps(row) + "\n" for row in queue_rows), encoding="utf-8")
+            output_root = temp_root / "smoke"
+            output_path = temp_root / "ghidra-autotrigger-smoke.json"
+            markdown_path = temp_root / "ghidra-autotrigger-smoke.md"
+
+            payload = ghidra_autotrigger_smoke.run_smoke(
+                queue_path=queue_path,
+                output_root=output_root,
+                output_path=output_path,
+                markdown_path=markdown_path,
+            )
+
+            self.assertEqual(payload["smoke_status"], "ok")
+            self.assertEqual(payload["sync_status"], "ok")
+            self.assertEqual(payload["selected_candidate_count"], 3)
+            self.assertEqual(payload["counts"]["manifest_selected_count"], 1)
+            self.assertEqual(payload["counts"]["seed_count"], 3)
+            self.assertGreaterEqual(payload["counts"]["symbol_resolution_request_count"], 3)
+            self.assertEqual(payload["operator"]["blocker"], "symbol-resolution-ready")
+            self.assertIn("module_offset", payload["frame_resolution_counts"])
+            self.assertIn("raw_address", payload["frame_resolution_counts"])
+            self.assertTrue(output_path.exists())
+            self.assertTrue(markdown_path.exists())
 
 
 if __name__ == "__main__":

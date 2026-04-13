@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T10:09:07.254621Z",
+  "source_seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
+  "request_count": 4,
+  "diagnostics": {
+    "actionable_frame_count": 4,
+    "skipped_frame_counts": {}
+  },
+  "requests": [
+    {
+      "request_id": "ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver",
+      "status": "queued",
+      "created_utc": "2026-04-13T10:09:07.254621Z",
+      "priority_rank": 1,
+      "lookup_key": "ntoskrnl.exe!Syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsResolver",
+      "resolution_kind": "plain_text",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": null,
+      "symbol_hint": "Syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsResolver",
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "ghidra-autotrigger-smoke-20260413T100907.251908Z"
+      ],
+      "source_event_indices": [
+        3
+      ],
+      "frame_variants": [
+        "Syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsResolver"
+      ],
+      "suggested_patterns": [
+        "AllowAudioToEnableExecutionRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe!Syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsResolver against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-audio-to-enable-execution-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-02-ntoskrnl-exe-0x1920",
+      "status": "queued",
+      "created_utc": "2026-04-13T10:09:07.254621Z",
+      "priority_rank": 2,
+      "lookup_key": "ntoskrnl.exe+0x1920",
+      "resolution_kind": "module_offset",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": "0x1920",
+      "address": null,
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "ghidra-autotrigger-smoke-20260413T100907.251908Z"
+      ],
+      "source_event_indices": [
+        1
+      ],
+      "frame_variants": [
+        "ntoskrnl.exe+0x1920"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe+0x1920 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-03-ntoskrnl-exe-0x2c80",
+      "status": "queued",
+      "created_utc": "2026-04-13T10:09:07.254621Z",
+      "priority_rank": 3,
+      "lookup_key": "ntoskrnl.exe+0x2c80",
+      "resolution_kind": "module_offset",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": "0x2c80",
+      "address": null,
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "system.kernel-dpc-watchdog-profile-cluster"
+      ],
+      "source_bundle_paths": [
+        "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "ghidra-autotrigger-smoke-20260413T100907.251908Z"
+      ],
+      "source_event_indices": [
+        4
+      ],
+      "frame_variants": [
+        "ntoskrnl.exe+0x2C80"
+      ],
+      "suggested_patterns": [
+        "DpcWatchdogProfileBufferSizeBytes"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe+0x2c80 against ntoskrnl.exe symbols before running the next Ghidra pivot for system.kernel-dpc-watchdog-profile-cluster."
+    },
+    {
+      "request_id": "ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002",
+      "status": "queued",
+      "created_utc": "2026-04-13T10:09:07.254621Z",
+      "priority_rank": 4,
+      "lookup_key": "ntoskrnl.exe@0xfffff80512340002",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0xfffff80512340002",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.session-watchdog-timeouts"
+      ],
+      "source_bundle_paths": [
+        "registry-research-framework/audit/ghidra-autotrigger-smoke/inputs/synthetic/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "ghidra-autotrigger-smoke-20260413T100907.251908Z"
+      ],
+      "source_event_indices": [
+        2
+      ],
+      "frame_variants": [
+        "0xFFFFF80512340002"
+      ],
+      "suggested_patterns": [
+        "WatchdogResumeTimeout"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff80512340002 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.session-watchdog-timeouts."
+    }
+  ]
+}

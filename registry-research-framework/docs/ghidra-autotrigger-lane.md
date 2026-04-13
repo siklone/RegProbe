@@ -34,6 +34,12 @@ Run the one-shot sync wrapper:
 python3 registry-research-framework/scripts/sync_ghidra_autotrigger_lane.py
 ```
 
+Run the synthetic smoke harness:
+
+```bash
+python3 registry-research-framework/scripts/run_ghidra_autotrigger_smoke.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -66,6 +72,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   One-shot sync result with status `ok`, `idle`, or `error`.
 - `registry-research-framework/audit/ghidra-autotrigger-sync.md`
   Operator-facing sync snapshot with the current blocker and next action.
+- `registry-research-framework/audit/ghidra-autotrigger-smoke.json`
+  Synthetic end-to-end proof that the lane can leave `idle` and produce symbol-resolution-ready work without waiting on a fresh real capture.
+- `registry-research-framework/audit/ghidra-autotrigger-smoke.md`
+  Short operator summary for the latest smoke run, including candidate coverage and assertion failures.
 
 ## Status Semantics
 
@@ -82,3 +92,5 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 The lane is intentionally split between discovery and execution. Discovery, dispatch planning, health reporting, and validation now work locally. Real headless execution is still blocked by the host environment: we do not currently have `pwsh` plus a runnable Ghidra install on this machine.
 
 The new symbol-resolution queue sits between seeds and dispatch. When the lane is not idle, that queue gives us an explicit list of offsets or addresses that still need names before we can expect clean decompiler pivots. The symbol-resolution batch now turns that list into prepared KVM guest symbolized-probe jobs, so the unresolved frames can move straight into a repeatable operator lane instead of staying as a passive note.
+
+Because fresh caller-stack bundles are still intermittent, the lane now also has a synthetic smoke harness. It fabricates a small normalized bundle from the active blocked `ghidra` queue, runs the same sync path in an isolated audit directory, and proves that symbol-resolution-ready work would be emitted when matching stack-bearing bundles arrive.
