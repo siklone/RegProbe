@@ -768,7 +768,7 @@ class PromotionStateTests(unittest.TestCase):
             self.assertEqual(gate["next_missing_layer"], "runtime-trace")
             self.assertIn(blocker, gate["promotion_blockers"])
 
-    def test_unlabeled_init_walker_blocker_maps_to_ghidra_lane(self) -> None:
+    def test_execution_required_init_walker_blocker_maps_to_ghidra_lane(self) -> None:
         record = {
             "record_id": "example.init-walker",
             "tweak_id": "example.init-walker",
@@ -787,7 +787,7 @@ class PromotionStateTests(unittest.TestCase):
                 "apply_allowed": False,
                 "confidence": "medium",
                 "restore_default_supported": True,
-                "blocking_issues": ["unlabeled-init-walker-not-symbol-resolved"],
+                "blocking_issues": ["execution-required-init-walker-not-symbol-resolved"],
             },
             "validation_proof": {
                 "source_url": "Docs/example.md",
@@ -798,7 +798,7 @@ class PromotionStateTests(unittest.TestCase):
         gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
 
         self.assertEqual(gate["next_missing_layer"], "ghidra")
-        self.assertIn("unlabeled-init-walker-not-symbol-resolved", gate["promotion_blockers"])
+        self.assertIn("execution-required-init-walker-not-symbol-resolved", gate["promotion_blockers"])
 
     def test_string_or_symbol_no_hit_blocker_maps_to_ghidra_lane(self) -> None:
         record = {
