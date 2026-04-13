@@ -32,6 +32,7 @@ blocked_worklist_lib = load_module("generate_blocked_worklist", FRAMEWORK_SCRIPT
 blocked_worklist_check = load_module("check_blocked_worklist", FRAMEWORK_SCRIPTS / "check_blocked_worklist.py")
 power_request_override_audit = load_module("audit_power_request_override_runtime", FRAMEWORK_SCRIPTS / "audit_power_request_override_runtime.py")
 ghidra_job_queue = load_module("generate_ghidra_job_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_job_queue.py")
+ghidra_dispatch_batch = load_module("generate_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_dispatch_batch.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -1820,6 +1821,63 @@ class GhidraJobQueueTests(unittest.TestCase):
         self.assertEqual(jobs[0]["status"], "queued")
         self.assertEqual(jobs[0]["job_type"], "ghidra-decompile-context")
         self.assertEqual(jobs[0]["priority_rank"], 1)
+
+
+class GhidraDispatchBatchTests(unittest.TestCase):
+    def test_dispatch_batch_prepares_headless_kernel_jobs(self) -> None:
+        rows = [
+            {
+                "candidate_id": "power.keep",
+                "status": "queued",
+                "priority_rank": 1,
+                "feature_area": "Power",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+                "trigger": "blocked-worklist-ghidra-lane",
+                "next_action_hint": "Resolve seeding path.",
+            },
+            {
+                "candidate_id": "power.watchdog",
+                "status": "queued",
+                "priority_rank": 2,
+                "feature_area": "Kernel",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+                "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
+                "promotion_blockers": ["power-session-watchdog-timeouts-specific-caller-unresolved"],
+                "trigger": "blocked-worklist-ghidra-lane",
+                "next_action_hint": "Name the exact reader.",
+            },
+        ]
+
+        payload = ghidra_dispatch_batch.dispatch_batch_from_queue(rows, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertEqual(payload["job_count"], 2)
+        self.assertEqual(payload["jobs"][0]["target_binary"], "ntoskrnl.exe")
+        self.assertEqual(payload["jobs"][0]["analysis_mode"], "registry-string-xref")
+        self.assertTrue(payload["jobs"][0]["can_run_headless"])
+        self.assertIn("ghidra-headless-analyze.ps1", payload["jobs"][0]["suggested_command"])
+        self.assertEqual(
+            payload["jobs"][1]["patterns"],
+            ["WatchdogResumeTimeout", "WatchdogSleepTimeout"],
+        )
+
+    def test_dispatch_batch_marks_missing_inputs_when_binary_cannot_be_inferred(self) -> None:
+        rows = [
+            {
+                "candidate_id": "user.unknown",
+                "status": "queued",
+                "priority_rank": 1,
+                "key_path": "HKCU\\Software\\Example",
+                "value_name": "",
+            }
+        ]
+
+        payload = ghidra_dispatch_batch.dispatch_batch_from_queue(rows, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertFalse(payload["jobs"][0]["can_run_headless"])
+        self.assertEqual(payload["jobs"][0]["missing_inputs"], ["target_binary", "patterns"])
+        self.assertIsNone(payload["jobs"][0]["suggested_command"])
 
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):

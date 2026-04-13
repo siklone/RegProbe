@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T07:23:00.764622Z",
+  "source_queue": "registry-research-framework/queue/ghidra-job-queue.jsonl",
+  "job_count": 4,
+  "jobs": [
+    {
+      "job_id": "ghidra-dispatch-01-power-control-allow-system-required-power-requests",
+      "dispatch_status": "prepared",
+      "queue_status": "queued",
+      "created_utc": "2026-04-13T07:23:00.764622Z",
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "target_binary": "ntoskrnl.exe",
+      "analysis_mode": "registry-string-xref",
+      "tool_path": "registry-research-framework/tools/ghidra-headless-analyze.ps1",
+      "output_name": "ghidra-auto-01-power-control-allow-system-required-power-requests",
+      "output_dir": "evidence/files/ghidra/ghidra-auto-01-power-control-allow-system-required-power-requests",
+      "can_run_headless": true,
+      "missing_inputs": [],
+      "suggested_command": "pwsh -File \"registry-research-framework/tools/ghidra-headless-analyze.ps1\" -TargetBinary \"ntoskrnl.exe\" -OutputName \"ghidra-auto-01-power-control-allow-system-required-power-requests\" -Patterns \"AllowSystemRequiredPowerRequests\"",
+      "promotion_blockers": [
+        "system-execution-required-no-current-build-registry-seeding-path",
+        "system-execution-required-wpr-boot-no-hit-current-build"
+      ],
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane.",
+      "source_job": {
+        "priority_rank": 1,
+        "trigger": "blocked-worklist-ghidra-lane"
+      }
+    },
+    {
+      "job_id": "ghidra-dispatch-02-power-session-watchdog-timeouts",
+      "dispatch_status": "prepared",
+      "queue_status": "queued",
+      "created_utc": "2026-04-13T07:23:00.764622Z",
+      "candidate_id": "power.session-watchdog-timeouts",
+      "feature_area": "Directed Power Watchdog Timeouts",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "patterns": [
+        "WatchdogResumeTimeout",
+        "WatchdogSleepTimeout"
+      ],
+      "target_binary": "ntoskrnl.exe",
+      "analysis_mode": "registry-string-xref",
+      "tool_path": "registry-research-framework/tools/ghidra-headless-analyze.ps1",
+      "output_name": "ghidra-auto-02-power-session-watchdog-timeouts",
+      "output_dir": "evidence/files/ghidra/ghidra-auto-02-power-session-watchdog-timeouts",
+      "can_run_headless": true,
+      "missing_inputs": [],
+      "suggested_command": "pwsh -File \"registry-research-framework/tools/ghidra-headless-analyze.ps1\" -TargetBinary \"ntoskrnl.exe\" -OutputName \"ghidra-auto-02-power-session-watchdog-timeouts\" -Patterns \"WatchdogResumeTimeout\" -Patterns \"WatchdogSleepTimeout\"",
+      "promotion_blockers": [
+        "power-session-watchdog-timeouts-exact-runtime-read-unresolved",
+        "power-session-watchdog-timeouts-specific-caller-unresolved"
+      ],
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named.",
+      "source_job": {
+        "priority_rank": 2,
+        "trigger": "blocked-worklist-ghidra-lane"
+      }
+    },
+    {
+      "job_id": "ghidra-dispatch-03-power-control-allow-audio-to-enable-execution-required-power-requests",
+      "dispatch_status": "prepared",
+      "queue_status": "queued",
+      "created_utc": "2026-04-13T07:23:00.764622Z",
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "patterns": [
+        "AllowAudioToEnableExecutionRequiredPowerRequests"
+      ],
+      "target_binary": "ntoskrnl.exe",
+      "analysis_mode": "registry-string-xref",
+      "tool_path": "registry-research-framework/tools/ghidra-headless-analyze.ps1",
+      "output_name": "ghidra-auto-03-power-control-allow-audio-to-enable-execution-required-power-requests",
+      "output_dir": "evidence/files/ghidra/ghidra-auto-03-power-control-allow-audio-to-enable-execution-required-power-requests",
+      "can_run_headless": true,
+      "missing_inputs": [],
+      "suggested_command": "pwsh -File \"registry-research-framework/tools/ghidra-headless-analyze.ps1\" -TargetBinary \"ntoskrnl.exe\" -OutputName \"ghidra-auto-03-power-control-allow-audio-to-enable-execution-required-power-requests\" -Patterns \"AllowAudioToEnableExecutionRequiredPowerRequests\"",
+      "promotion_blockers": [
+        "audio-execution-required-megatrigger-etw-no-hit-current-build",
+        "audio-execution-required-no-current-build-registry-seeding-path",
+        "audio-execution-required-no-primary-current-build-doc"
+      ],
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane.",
+      "source_job": {
+        "priority_rank": 3,
+        "trigger": "blocked-worklist-ghidra-lane"
+      }
+    },
+    {
+      "job_id": "ghidra-dispatch-04-system-kernel-dpc-watchdog-profile-cluster",
+      "dispatch_status": "prepared",
+      "queue_status": "queued",
+      "created_utc": "2026-04-13T07:23:00.764622Z",
+      "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "feature_area": "Session Manager Kernel DPC Watchdog Profile",
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "patterns": [
+        "DpcWatchdogProfileBufferSizeBytes"
+      ],
+      "target_binary": "ntoskrnl.exe",
+      "analysis_mode": "registry-string-xref",
+      "tool_path": "registry-research-framework/tools/ghidra-headless-analyze.ps1",
+      "output_name": "ghidra-auto-04-system-kernel-dpc-watchdog-profile-cluster",
+      "output_dir": "evidence/files/ghidra/ghidra-auto-04-system-kernel-dpc-watchdog-profile-cluster",
+      "can_run_headless": true,
+      "missing_inputs": [],
+      "suggested_command": "pwsh -File \"registry-research-framework/tools/ghidra-headless-analyze.ps1\" -TargetBinary \"ntoskrnl.exe\" -OutputName \"ghidra-auto-04-system-kernel-dpc-watchdog-profile-cluster\" -Patterns \"DpcWatchdogProfileBufferSizeBytes\"",
+      "promotion_blockers": [
+        "dpc-watchdog-profile-conditional-initialization-unproven",
+        "dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs",
+        "dpc-watchdog-profile-no-primary-current-build-doc",
+        "dpc-watchdog-profile-wpr-boot-no-hit-current-build"
+      ],
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named.",
+      "source_job": {
+        "priority_rank": 4,
+        "trigger": "blocked-worklist-ghidra-lane"
+      }
+    }
+  ]
+}
