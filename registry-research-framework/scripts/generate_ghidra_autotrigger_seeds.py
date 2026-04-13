@@ -53,6 +53,22 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
     )
 
 
+def collect_bundle_paths(bundle_paths: list[Path] | None = None, *, bundle_root: Path | None = None) -> list[Path]:
+    collected: list[Path] = []
+    seen: set[Path] = set()
+    for path in bundle_paths or []:
+        resolved = path.resolve()
+        if resolved not in seen:
+            seen.add(resolved)
+            collected.append(resolved)
+    if bundle_root:
+        for path in sorted(bundle_root.resolve().rglob("normalized-registry-bundle.json")):
+            if path not in seen:
+                seen.add(path)
+                collected.append(path)
+    return collected
+
+
 def normalize_registry_path(value: Any) -> str:
     text = str(value or "").strip().replace("/", "\\")
     text = re.sub(r"^\\\\REGISTRY\\\\MACHINE\\\\", lambda _: "HKLM\\", text, flags=re.IGNORECASE)
@@ -195,22 +211,61 @@ def autotrigger_seeds_from_bundle(
     return seeds
 
 
+def autotrigger_seeds_from_bundle_paths(
+    bundle_paths: list[Path],
+    *,
+    queue_rows: list[dict[str, Any]],
+    generated_utc: str | None = None,
+) -> list[dict[str, Any]]:
+    generated_utc = generated_utc or now_utc()
+    seeds: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, int, str]] = set()
+    for bundle_path in bundle_paths:
+        bundle = load_json(bundle_path)
+        bundle_seeds = autotrigger_seeds_from_bundle(
+            bundle,
+            bundle_path=portable_path(bundle_path),
+            queue_rows=queue_rows,
+            generated_utc=generated_utc,
+        )
+        for seed in bundle_seeds:
+            dedupe_key = (
+                str(seed.get("candidate_id") or ""),
+                str(seed.get("source_bundle_path") or ""),
+                int(seed.get("event_index") or 0),
+                "|".join(str(item) for item in (seed.get("unresolved_frames") or [])),
+            )
+            if dedupe_key in seen:
+                continue
+            seen.add(dedupe_key)
+            seeds.append(seed)
+    return seeds
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate Ghidra auto-trigger seeds from caller_stack events in a normalized bundle.")
-    parser.add_argument("--bundle", type=Path, required=True)
+    parser.add_argument("--bundle", type=Path, action="append", default=[])
+    parser.add_argument("--bundle-root", type=Path, default=None)
     parser.add_argument("--queue", type=Path, default=QUEUE_PATH)
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     args = parser.parse_args()
 
-    bundle = load_json(args.bundle)
     queue_rows = load_jsonl(args.queue)
-    seeds = autotrigger_seeds_from_bundle(
-        bundle,
-        bundle_path=portable_path(args.bundle),
-        queue_rows=queue_rows,
-    )
+    bundle_paths = collect_bundle_paths(args.bundle, bundle_root=args.bundle_root)
+    if not bundle_paths:
+        parser.error("Provide at least one --bundle or a --bundle-root containing normalized-registry-bundle.json files.")
+    seeds = autotrigger_seeds_from_bundle_paths(bundle_paths, queue_rows=queue_rows)
     write_jsonl(args.output, seeds)
-    print(json.dumps({"output": portable_path(args.output), "seed_count": len(seeds)}, indent=2))
+    print(
+        json.dumps(
+            {
+                "output": portable_path(args.output),
+                "bundle_count": len(bundle_paths),
+                "seed_count": len(seeds),
+            },
+            indent=2,
+        )
+    )
     return 0
 
 

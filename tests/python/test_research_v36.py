@@ -2056,6 +2056,79 @@ class GhidraAutotriggerTests(unittest.TestCase):
         self.assertEqual(seeds[0]["suggested_patterns"], ["AllowSystemRequiredPowerRequests"])
         self.assertEqual(seeds[0]["trigger"], "caller-stack-unresolved-frame")
 
+    def test_collect_bundle_paths_supports_bundle_root(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            first = root / "a" / "normalized-registry-bundle.json"
+            second = root / "b" / "normalized-registry-bundle.json"
+            first.parent.mkdir(parents=True, exist_ok=True)
+            second.parent.mkdir(parents=True, exist_ok=True)
+            first.write_text("{}", encoding="utf-8")
+            second.write_text("{}", encoding="utf-8")
+
+            paths = ghidra_autotrigger.collect_bundle_paths(bundle_root=root)
+
+        self.assertEqual(len(paths), 2)
+        self.assertEqual(paths[0].name, "normalized-registry-bundle.json")
+
+    def test_autotrigger_seeds_from_bundle_paths_aggregates_multiple_bundles(self) -> None:
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+            }
+        ]
+        bundle_one = {
+            "run_id": "run-one",
+            "source_tool": "wpr",
+            "capture_phase": "boot",
+            "stack_capture": {"source_fields": ["Stack"]},
+            "events": [
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopPowerRequestInitialize"],
+                }
+            ],
+        }
+        bundle_two = {
+            "run_id": "run-two",
+            "source_tool": "wpr",
+            "capture_phase": "boot",
+            "stack_capture": {"source_fields": ["Stack"]},
+            "events": [
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": ["ntoskrnl.exe+0x1F999", "nt!PopPowerRequestInitialize"],
+                }
+            ],
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            one_path = root / "one" / "normalized-registry-bundle.json"
+            two_path = root / "two" / "normalized-registry-bundle.json"
+            one_path.parent.mkdir(parents=True, exist_ok=True)
+            two_path.parent.mkdir(parents=True, exist_ok=True)
+            one_path.write_text(json.dumps(bundle_one), encoding="utf-8")
+            two_path.write_text(json.dumps(bundle_two), encoding="utf-8")
+
+            seeds = ghidra_autotrigger.autotrigger_seeds_from_bundle_paths(
+                [one_path, two_path],
+                queue_rows=queue_rows,
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+
+        self.assertEqual(len(seeds), 2)
+        self.assertEqual(seeds[0]["source_run_id"], "run-one")
+        self.assertEqual(seeds[1]["source_run_id"], "run-two")
+
 
 class GhidraAutotriggerPipelineTests(unittest.TestCase):
     def test_refresh_pipeline_writes_seed_batch_and_run_surfaces(self) -> None:
@@ -2117,6 +2190,59 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
 
             run_payload = json.loads(run_path.read_text(encoding="utf-8"))
             self.assertEqual(run_payload["selected_job_count"], 1)
+
+    def test_refresh_pipeline_supports_bundle_root(self) -> None:
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "status": "queued",
+                "priority_rank": 1,
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+                "trigger": "blocked-worklist-ghidra-lane",
+                "next_action_hint": "Resolve seeding path.",
+            }
+        ]
+        bundle = {
+            "run_id": "synthetic-stack-seed",
+            "source_tool": "wpr",
+            "capture_phase": "boot",
+            "stack_capture": {"source_fields": ["Stack"]},
+            "events": [
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopPowerRequestInitialize"],
+                }
+            ],
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            bundle_root = temp_root / "evidence"
+            bundle_path = bundle_root / "sample" / "normalized-registry-bundle.json"
+            queue_path = temp_root / "ghidra-job-queue.jsonl"
+            seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            batch_path = temp_root / "ghidra-dispatch-batch.json"
+            run_path = temp_root / "ghidra-dispatch-run.json"
+            bundle_path.parent.mkdir(parents=True, exist_ok=True)
+            bundle_path.write_text(json.dumps(bundle), encoding="utf-8")
+            queue_path.write_text("".join(json.dumps(row) + "\n" for row in queue_rows), encoding="utf-8")
+
+            payload = ghidra_refresh_pipeline.refresh_pipeline(
+                bundle_root=bundle_root,
+                queue_path=queue_path,
+                seeds_path=seeds_path,
+                batch_path=batch_path,
+                run_path=run_path,
+            )
+
+            self.assertEqual(payload["bundle_count"], 1)
+            self.assertEqual(payload["seed_count"], 1)
+            self.assertEqual(payload["dispatch_autotrigger_matched_job_count"], 1)
 
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):

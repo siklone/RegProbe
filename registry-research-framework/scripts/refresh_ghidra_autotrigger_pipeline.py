@@ -32,18 +32,24 @@ dispatch_runner = load_local_module("refresh_pipeline_dispatch_runner", FRAMEWOR
 
 
 def refresh_pipeline(
-    bundle_path: Path,
+    bundle_path: Path | None = None,
     *,
+    bundle_paths: list[Path] | None = None,
+    bundle_root: Path | None = None,
     queue_path: Path = QUEUE_PATH,
     seeds_path: Path = SEEDS_PATH,
     batch_path: Path = BATCH_PATH,
     run_path: Path = RUN_PATH,
 ) -> dict[str, Any]:
-    bundle = autotrigger.load_json(bundle_path)
     queue_rows = autotrigger.load_jsonl(queue_path)
-    seeds = autotrigger.autotrigger_seeds_from_bundle(
-        bundle,
-        bundle_path=autotrigger.portable_path(bundle_path),
+    effective_bundle_paths = autotrigger.collect_bundle_paths(
+        ([bundle_path] if bundle_path else []) + list(bundle_paths or []),
+        bundle_root=bundle_root,
+    )
+    if not effective_bundle_paths:
+        raise ValueError("Provide bundle_path, bundle_paths, or bundle_root with at least one normalized bundle.")
+    seeds = autotrigger.autotrigger_seeds_from_bundle_paths(
+        effective_bundle_paths,
         queue_rows=queue_rows,
     )
     autotrigger.write_jsonl(seeds_path, seeds)
@@ -55,7 +61,8 @@ def refresh_pipeline(
     dispatch_runner.write_json(run_path, run_plan)
 
     return {
-        "bundle_path": autotrigger.portable_path(bundle_path),
+        "bundle_count": len(effective_bundle_paths),
+        "bundle_paths": [autotrigger.portable_path(path) for path in effective_bundle_paths],
         "seed_count": len(seeds),
         "dispatch_job_count": batch.get("job_count", 0),
         "dispatch_autotrigger_matched_job_count": batch.get("autotrigger_matched_job_count", 0),
@@ -70,8 +77,9 @@ def refresh_pipeline(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Refresh Ghidra auto-trigger surfaces from a fresh normalized registry bundle.")
-    parser.add_argument("--bundle", type=Path, required=True)
+    parser = argparse.ArgumentParser(description="Refresh Ghidra auto-trigger surfaces from one or more fresh normalized registry bundles.")
+    parser.add_argument("--bundle", type=Path, action="append", default=[])
+    parser.add_argument("--bundle-root", type=Path, default=None)
     parser.add_argument("--queue", type=Path, default=QUEUE_PATH)
     parser.add_argument("--seeds-output", type=Path, default=SEEDS_PATH)
     parser.add_argument("--batch-output", type=Path, default=BATCH_PATH)
@@ -79,7 +87,8 @@ def main() -> int:
     args = parser.parse_args()
 
     payload = refresh_pipeline(
-        args.bundle,
+        bundle_paths=args.bundle,
+        bundle_root=args.bundle_root,
         queue_path=args.queue,
         seeds_path=args.seeds_output,
         batch_path=args.batch_output,
