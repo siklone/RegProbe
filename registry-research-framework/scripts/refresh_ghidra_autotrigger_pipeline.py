@@ -21,6 +21,8 @@ RUN_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-dispatch-run.json"
 HEALTH_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-autotrigger-health.json"
 HANDOFF_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-handoff.json"
 HANDOFF_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-handoff.md"
+TRANSFER_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer.json"
+TRANSFER_MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "ghidra-symbol-resolution-transfer.md"
 INPUTS_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-autotrigger-inputs.json"
 
 
@@ -42,6 +44,7 @@ dispatch_batch = load_local_module("refresh_pipeline_dispatch_batch", FRAMEWORK_
 dispatch_runner = load_local_module("refresh_pipeline_dispatch_runner", FRAMEWORK_ROOT / "scripts" / "run_ghidra_dispatch_batch.py")
 autotrigger_health = load_local_module("refresh_pipeline_autotrigger_health", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_autotrigger_health.py")
 handoff_mod = load_local_module("refresh_pipeline_symbol_handoff", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_symbol_resolution_handoff.py")
+transfer_mod = load_local_module("refresh_pipeline_symbol_transfer", FRAMEWORK_ROOT / "scripts" / "generate_ghidra_symbol_resolution_transfer.py")
 
 
 def resolve_path(path_value: str) -> Path:
@@ -78,6 +81,8 @@ def refresh_pipeline(
     health_path: Path = HEALTH_PATH,
     handoff_path: Path = HANDOFF_PATH,
     handoff_markdown_path: Path = HANDOFF_MARKDOWN_PATH,
+    transfer_path: Path = TRANSFER_PATH,
+    transfer_markdown_path: Path = TRANSFER_MARKDOWN_PATH,
 ) -> dict[str, Any]:
     queue_rows = autotrigger.load_jsonl(queue_path)
     bundle_manifest_payload: dict[str, Any] | None = None
@@ -126,6 +131,9 @@ def refresh_pipeline(
     )
     handoff_mod.write_json(handoff_path, handoff)
     handoff_mod.write_text(handoff_markdown_path, handoff_mod.render_markdown(handoff))
+    transfer = transfer_mod.transfer_payload(handoff, handoff_path=handoff_path)
+    transfer_mod.write_json(transfer_path, transfer)
+    transfer_mod.write_text(transfer_markdown_path, transfer_mod.render_markdown(transfer))
 
     input_manifest = autotrigger.load_json(effective_manifest_path) if effective_manifest_path.exists() else {"entries": []}
     health = autotrigger_health.health_payload(
@@ -136,6 +144,7 @@ def refresh_pipeline(
         symbol_batch,
         symbol_run,
         handoff,
+        transfer,
         batch,
         run_plan,
     )
@@ -150,6 +159,8 @@ def refresh_pipeline(
         "symbol_resolution_run_selected_job_count": symbol_run.get("selected_job_count", 0),
         "symbol_resolution_handoff_status": handoff.get("handoff_status"),
         "symbol_resolution_handoff_selected_job_count": int((handoff.get("counts") or {}).get("selected_jobs") or 0),
+        "symbol_resolution_transfer_status": transfer.get("transfer_status"),
+        "symbol_resolution_transfer_selected_job_count": int((transfer.get("counts") or {}).get("selected_jobs") or 0),
         "dispatch_job_count": batch.get("job_count", 0),
         "dispatch_autotrigger_matched_job_count": batch.get("autotrigger_matched_job_count", 0),
         "run_plan_selected_job_count": run_plan.get("selected_job_count", 0),
@@ -161,6 +172,8 @@ def refresh_pipeline(
             "symbol_run_path": autotrigger.portable_path(symbol_run_path),
             "handoff_path": autotrigger.portable_path(handoff_path),
             "handoff_markdown_path": autotrigger.portable_path(handoff_markdown_path),
+            "transfer_path": autotrigger.portable_path(transfer_path),
+            "transfer_markdown_path": autotrigger.portable_path(transfer_markdown_path),
             "batch_path": autotrigger.portable_path(batch_path),
             "run_path": autotrigger.portable_path(run_path),
             "health_path": autotrigger.portable_path(health_path),
@@ -189,6 +202,8 @@ def main() -> int:
     parser.add_argument("--health-output", type=Path, default=HEALTH_PATH)
     parser.add_argument("--handoff-output", type=Path, default=HANDOFF_PATH)
     parser.add_argument("--handoff-markdown-output", type=Path, default=HANDOFF_MARKDOWN_PATH)
+    parser.add_argument("--transfer-output", type=Path, default=TRANSFER_PATH)
+    parser.add_argument("--transfer-markdown-output", type=Path, default=TRANSFER_MARKDOWN_PATH)
     args = parser.parse_args()
 
     payload = refresh_pipeline(
@@ -208,6 +223,8 @@ def main() -> int:
         health_path=args.health_output,
         handoff_path=args.handoff_output,
         handoff_markdown_path=args.handoff_markdown_output,
+        transfer_path=args.transfer_output,
+        transfer_markdown_path=args.transfer_markdown_output,
     )
     print(json.dumps(payload, indent=2))
     return 0

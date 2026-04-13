@@ -16,6 +16,8 @@
     "symbol_resolution_run_selected_job_count": 4,
     "symbol_resolution_handoff_status": "ready",
     "symbol_resolution_handoff_selected_job_count": 4,
+    "symbol_resolution_transfer_status": "ready",
+    "symbol_resolution_transfer_selected_job_count": 4,
     "dispatch_job_count": 4,
     "dispatch_autotrigger_matched_job_count": 4,
     "run_plan_selected_job_count": 4,
@@ -27,6 +29,8 @@
       "symbol_run_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-run.json",
       "handoff_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.json",
       "handoff_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.md",
+      "transfer_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.json",
+      "transfer_markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.md",
       "batch_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-dispatch-batch.json",
       "run_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-dispatch-run.json",
       "health_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-autotrigger-health.json",
@@ -45,6 +49,12 @@
     "selected_jobs": 4,
     "path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.json",
     "markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.md"
+  },
+  "transfer": {
+    "status": "ready",
+    "selected_jobs": 4,
+    "path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.json",
+    "markdown_path": "registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.md"
   },
   "operator": {
     "status": "ready",

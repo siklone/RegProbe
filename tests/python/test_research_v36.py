@@ -2482,6 +2482,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
             handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
             handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
+            transfer_path = temp_root / "ghidra-symbol-resolution-transfer.json"
+            transfer_markdown_path = temp_root / "ghidra-symbol-resolution-transfer.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2497,6 +2499,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 symbol_run_path=symbol_run_path,
                 handoff_path=handoff_path,
                 handoff_markdown_path=handoff_markdown_path,
+                transfer_path=transfer_path,
+                transfer_markdown_path=transfer_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2508,6 +2512,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             self.assertEqual(payload["symbol_resolution_run_selected_job_count"], 1)
             self.assertEqual(payload["symbol_resolution_handoff_status"], "ready")
             self.assertEqual(payload["symbol_resolution_handoff_selected_job_count"], 1)
+            self.assertEqual(payload["symbol_resolution_transfer_status"], "ready")
+            self.assertEqual(payload["symbol_resolution_transfer_selected_job_count"], 1)
             self.assertEqual(payload["dispatch_autotrigger_matched_job_count"], 1)
             self.assertEqual(payload["run_plan_selected_job_count"], 1)
 
@@ -2524,6 +2530,9 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             handoff_payload = json.loads(handoff_path.read_text(encoding="utf-8"))
             self.assertEqual(handoff_payload["handoff_status"], "ready")
             self.assertTrue(handoff_markdown_path.exists())
+            transfer_payload = json.loads(transfer_path.read_text(encoding="utf-8"))
+            self.assertEqual(transfer_payload["transfer_status"], "ready")
+            self.assertTrue(transfer_markdown_path.exists())
 
             batch_payload = json.loads(batch_path.read_text(encoding="utf-8"))
             self.assertEqual(batch_payload["jobs"][0]["autotrigger_seed_count"], 1)
@@ -2576,6 +2585,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
             handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
             handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
+            transfer_path = temp_root / "ghidra-symbol-resolution-transfer.json"
+            transfer_markdown_path = temp_root / "ghidra-symbol-resolution-transfer.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2592,6 +2603,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 symbol_run_path=symbol_run_path,
                 handoff_path=handoff_path,
                 handoff_markdown_path=handoff_markdown_path,
+                transfer_path=transfer_path,
+                transfer_markdown_path=transfer_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2642,6 +2655,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
             handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
             handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
+            transfer_path = temp_root / "ghidra-symbol-resolution-transfer.json"
+            transfer_markdown_path = temp_root / "ghidra-symbol-resolution-transfer.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2662,6 +2677,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 symbol_run_path=symbol_run_path,
                 handoff_path=handoff_path,
                 handoff_markdown_path=handoff_markdown_path,
+                transfer_path=transfer_path,
+                transfer_markdown_path=transfer_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2711,6 +2728,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
             handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
             handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
+            transfer_path = temp_root / "ghidra-symbol-resolution-transfer.json"
+            transfer_markdown_path = temp_root / "ghidra-symbol-resolution-transfer.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2729,6 +2748,8 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 symbol_run_path=symbol_run_path,
                 handoff_path=handoff_path,
                 handoff_markdown_path=handoff_markdown_path,
+                transfer_path=transfer_path,
+                transfer_markdown_path=transfer_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2863,6 +2884,20 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             ],
             "blocked_jobs": [],
         }
+        transfer = {
+            "transfer_status": "ready",
+            "operator": {"blocker": "transfer-pack-ready"},
+            "counts": {
+                "selected_jobs": 1,
+                "repo_file_count": 9,
+                "missing_repo_file_count": 0,
+            },
+            "jobs": [
+                {
+                    "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x1f234",
+                }
+            ],
+        }
         batch = {
             "job_count": 2,
             "jobs": [
@@ -2894,6 +2929,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             symbol_batch,
             symbol_run,
             handoff,
+            transfer,
             batch,
             run,
             generated_utc="2026-04-13T00:00:00Z",
@@ -2907,10 +2943,12 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["symbol_resolution_blocked_jobs"], 0)
         self.assertEqual(payload["counts"]["symbol_resolution_run_selected_jobs"], 1)
         self.assertEqual(payload["counts"]["symbol_resolution_handoff_selected_jobs"], 1)
+        self.assertEqual(payload["counts"]["symbol_resolution_transfer_selected_jobs"], 1)
         self.assertEqual(payload["counts"]["autotrigger_dispatch_jobs"], 1)
         self.assertFalse(payload["runner"]["available"])
         self.assertTrue(payload["symbol_resolution_runner"]["available"])
         self.assertEqual(payload["symbol_resolution_handoff"]["status"], "ready")
+        self.assertEqual(payload["symbol_resolution_transfer"]["status"], "ready")
         self.assertEqual(payload["symbol_resolution_batch"]["resolution_kind_counts"], {})
         self.assertEqual(payload["focus"]["top_input_bundle"], "evidence/files/example/normalized-registry-bundle.json")
         self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
@@ -2918,6 +2956,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["focus"]["top_symbol_resolution_request"], "ntoskrnl.exe+0x1f234")
         self.assertEqual(payload["focus"]["top_symbol_resolution_batch_request"], "ghidra-symbol-01-ntoskrnl-exe-0x1f234")
         self.assertEqual(payload["focus"]["top_symbol_resolution_handoff_request"], "ghidra-symbol-01-ntoskrnl-exe-0x1f234")
+        self.assertEqual(payload["focus"]["top_symbol_resolution_transfer_request"], "ghidra-symbol-01-ntoskrnl-exe-0x1f234")
         self.assertEqual(payload["focus"]["missing_input_jobs"][0]["candidate_id"], "power.other")
 
         markdown = ghidra_autotrigger_health.render_markdown(payload)
@@ -2939,6 +2978,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "symbol_resolution_run_selected_jobs": 0,
                 "symbol_resolution_run_blocked_jobs": 0,
                 "symbol_resolution_handoff_selected_jobs": 2,
+                "symbol_resolution_transfer_selected_jobs": 2,
                 "dispatch_jobs": 1,
                 "autotrigger_dispatch_jobs": 0,
                 "run_selected_jobs": 0,
@@ -2952,6 +2992,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "symbol_resolution_lookup_keys": [],
                 "symbol_resolution_batch_request_ids": [],
                 "symbol_resolution_handoff_request_ids": [],
+                "symbol_resolution_transfer_request_ids": [],
                 "autotrigger_dispatch_candidate_ids": [],
             },
             "focus": {
@@ -2961,6 +3002,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "top_symbol_resolution_request": "wrong-symbol",
                 "top_symbol_resolution_batch_request": "wrong-batch",
                 "top_symbol_resolution_handoff_request": "wrong-handoff",
+                "top_symbol_resolution_transfer_request": "wrong-transfer",
                 "missing_input_jobs": [],
             },
             "symbol_resolution_runner": {
@@ -2968,6 +3010,9 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "error": "bad",
             },
             "symbol_resolution_handoff": {
+                "selected_jobs": 1,
+            },
+            "symbol_resolution_transfer": {
                 "selected_jobs": 1,
             },
             "runner": {
@@ -2988,8 +3033,10 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertTrue(any("top_symbol_resolution_request does not match" in error for error in errors))
         self.assertTrue(any("top_symbol_resolution_batch_request does not match" in error for error in errors))
         self.assertTrue(any("top_symbol_resolution_handoff_request" in error for error in errors))
+        self.assertTrue(any("top_symbol_resolution_transfer_request" in error for error in errors))
         self.assertTrue(any("symbol_resolution_runner cannot be available and errored" in error for error in errors))
         self.assertTrue(any("symbol_resolution_handoff selected_jobs does not match counts" in error for error in errors))
+        self.assertTrue(any("symbol_resolution_transfer selected_jobs does not match counts" in error for error in errors))
         self.assertTrue(any("selected+blocked does not cover dispatch jobs" in error for error in errors))
         self.assertTrue(any("top_queue_candidate does not match" in error for error in errors))
 
@@ -3039,6 +3086,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             symbol_run_path = temp_root / "ghidra-symbol-resolution-run.json"
             handoff_path = temp_root / "ghidra-symbol-resolution-handoff.json"
             handoff_markdown_path = temp_root / "ghidra-symbol-resolution-handoff.md"
+            transfer_path = temp_root / "ghidra-symbol-resolution-transfer.json"
+            transfer_markdown_path = temp_root / "ghidra-symbol-resolution-transfer.md"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -3055,6 +3104,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
                 symbol_run_path=symbol_run_path,
                 handoff_path=handoff_path,
                 handoff_markdown_path=handoff_markdown_path,
+                transfer_path=transfer_path,
+                transfer_markdown_path=transfer_markdown_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -3066,6 +3117,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             self.assertEqual(payload["health_check"]["status"], "ok")
             self.assertEqual(payload["handoff"]["status"], "ready")
             self.assertEqual(payload["handoff"]["selected_jobs"], 1)
+            self.assertEqual(payload["transfer"]["status"], "ready")
+            self.assertEqual(payload["transfer"]["selected_jobs"], 1)
             self.assertEqual(payload["operator"]["blocker"], "symbol-resolution-ready")
             self.assertIn("Run the symbol-resolution batch", payload["operator"]["next_action"])
             symbol_queue_payload = json.loads(symbol_queue_path.read_text(encoding="utf-8"))
@@ -3076,6 +3129,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             self.assertEqual(symbol_run_payload["selected_job_count"], 1)
             handoff_payload = json.loads(handoff_path.read_text(encoding="utf-8"))
             self.assertEqual(handoff_payload["handoff_status"], "ready")
+            transfer_payload = json.loads(transfer_path.read_text(encoding="utf-8"))
+            self.assertEqual(transfer_payload["transfer_status"], "ready")
             self.assertTrue(output_path.exists())
             self.assertTrue(markdown_path.exists())
 

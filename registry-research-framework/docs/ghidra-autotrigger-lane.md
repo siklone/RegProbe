@@ -28,7 +28,7 @@ python3 registry-research-framework/scripts/refresh_ghidra_autotrigger_pipeline.
   --discover-input-root evidence
 ```
 
-That refresh path now updates the symbol-resolution handoff files in the same pass, so the operator view stays current without a second manual step.
+That refresh path now updates both the symbol-resolution handoff files and the transfer pack in the same pass, so the operator view stays current without a second manual step.
 
 Run the one-shot sync wrapper:
 
@@ -89,7 +89,7 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 - `registry-research-framework/audit/ghidra-autotrigger-health.json`
   Machine-readable health summary for the lane.
 - `registry-research-framework/audit/ghidra-autotrigger-health.md`
-  Human-readable health snapshot, now including symbol handoff readiness.
+  Human-readable health snapshot, now including symbol handoff and transfer readiness.
 - `registry-research-framework/audit/ghidra-autotrigger-sync.json`
   One-shot sync result with status `ok`, `idle`, or `error`.
 - `registry-research-framework/audit/ghidra-autotrigger-sync.md`

@@ -11,6 +11,12 @@
 - Selected jobs: `4`
 - Path: `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-handoff.json`
 
+## Symbol Transfer
+
+- Transfer status: `ready`
+- Selected jobs: `4`
+- Path: `registry-research-framework/audit/ghidra-autotrigger-smoke/ghidra-symbol-resolution-transfer.json`
+
 ## Refresh
 
 - Bundle count: `1`
