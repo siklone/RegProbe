@@ -33,6 +33,7 @@ from generate_blocked_worklist import (  # noqa: E402
     MARKDOWN_OUTPUT as BLOCKED_WORKLIST_MARKDOWN_PATH,
     write_outputs as write_blocked_worklist_outputs,
 )
+from check_blocked_worklist import build_result as build_blocked_worklist_check  # noqa: E402
 from research_v36_lib import (  # noqa: E402
     PROMOTION_GATES_PATH,
     QUEUE_ROOT,
@@ -61,6 +62,7 @@ def main() -> int:
     if int(url_report.get("dead_link_count") or 0) > int(gate_metrics.get("dead_link_count") or 0):
         gate_metrics["dead_link_count"] = int(url_report.get("dead_link_count") or 0)
     blocked_worklist = write_blocked_worklist_outputs()
+    blocked_worklist_check = build_blocked_worklist_check(BLOCKED_WORKLIST_JSON_PATH)
     operational_metrics = build_operational_metrics(
         queue_payload,
         gate_payload,
@@ -83,6 +85,8 @@ def main() -> int:
     write_json(GATE_METRICS_PATH, gate_metrics)
     publish_metrics["blocked_worklist_json"] = str(BLOCKED_WORKLIST_JSON_PATH.relative_to(REPO_ROOT)).replace("\\", "/")
     publish_metrics["blocked_worklist_markdown"] = str(BLOCKED_WORKLIST_MARKDOWN_PATH.relative_to(REPO_ROOT)).replace("\\", "/")
+    publish_metrics["blocked_worklist_status"] = blocked_worklist_check.get("status")
+    publish_metrics["blocked_worklist_errors"] = blocked_worklist_check.get("errors") or []
     write_json(PUBLISH_METRICS_PATH, publish_metrics)
     write_json(AUDIT_PATH, final_audit)
 
@@ -107,6 +111,8 @@ def main() -> int:
         "missing_docs_count": validation_summary.get("missing_docs_count"),
         "threshold_violations": gate_metrics.get("threshold_violations"),
         "blocked_count": blocked_worklist.get("blocked_count"),
+        "blocked_worklist_status": blocked_worklist_check.get("status"),
+        "blocked_worklist_errors": blocked_worklist_check.get("errors") or [],
         "blocked_actionability_counts": publish_metrics.get("blocked_actionability_counts"),
         "top_actionable_blocked_candidates": publish_metrics.get("top_actionable_blocked_candidates"),
         "top_hold_blocked_candidates": publish_metrics.get("top_hold_blocked_candidates"),
@@ -116,7 +122,7 @@ def main() -> int:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
-    return 0
+    return 0 if blocked_worklist_check.get("status") == "PASS" else 1
 
 
 if __name__ == "__main__":
