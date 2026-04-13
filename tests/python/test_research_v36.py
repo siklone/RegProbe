@@ -38,6 +38,7 @@ ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRI
 ghidra_autotrigger = load_module("generate_ghidra_autotrigger_seeds", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_seeds.py")
 ghidra_autotrigger_inputs = load_module("generate_ghidra_autotrigger_inputs", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_inputs.py")
 ghidra_autotrigger_smoke_check = load_module("check_ghidra_autotrigger_smoke", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_smoke.py")
+research_quality_gate = load_module("run_research_quality_gate", FRAMEWORK_SCRIPTS / "run_research_quality_gate.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
 ghidra_symbol_runner = load_module("run_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "run_ghidra_symbol_resolution_batch.py")
@@ -3965,6 +3966,48 @@ class GhidraAutotriggerSmokeTests(unittest.TestCase):
         self.assertEqual(check_payload["check_status"], "error")
         self.assertTrue(any("smoke_status" in error for error in check_payload["errors"]))
         self.assertTrue(any("failed_assertions" in error for error in check_payload["errors"]))
+
+
+class ResearchQualityGateTests(unittest.TestCase):
+    def test_quality_gate_payload_reports_pass_and_skipped_steps(self) -> None:
+        payload = research_quality_gate.quality_gate_payload(
+            [
+                research_quality_gate.GateStep(
+                    "pass-step",
+                    "Pass Step",
+                    [sys.executable, "-c", "print('ok')"],
+                ),
+                research_quality_gate.GateStep(
+                    "skip-step",
+                    "Skip Step",
+                    [sys.executable, "-c", "raise SystemExit(99)"],
+                    skipped=True,
+                    skip_reason="unit-test",
+                ),
+            ],
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(payload["quality_gate_status"], "PASS")
+        self.assertEqual(payload["counts"]["passed"], 1)
+        self.assertEqual(payload["counts"]["skipped"], 1)
+
+    def test_quality_gate_payload_reports_failed_step(self) -> None:
+        payload = research_quality_gate.quality_gate_payload(
+            [
+                research_quality_gate.GateStep(
+                    "fail-step",
+                    "Fail Step",
+                    [sys.executable, "-c", "import sys; print('bad'); sys.exit(7)"],
+                )
+            ],
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(payload["quality_gate_status"], "FAIL")
+        self.assertEqual(payload["failed_step_ids"], ["fail-step"])
+        self.assertEqual(payload["steps"][0]["returncode"], 7)
+        self.assertIn("bad", payload["steps"][0]["stdout_tail"])
 
 
 if __name__ == "__main__":

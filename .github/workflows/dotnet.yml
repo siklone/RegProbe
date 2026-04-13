@@ -66,17 +66,8 @@ jobs:
       - name: Ghidra autotrigger smoke gate
         run: python registry-research-framework/scripts/run_ghidra_autotrigger_smoke.py
 
-      - name: Generate research metrics
-        run: python registry-research-framework/scripts/generate_publish_metrics.py
-
-      - name: Gate metrics threshold check
-        run: python registry-research-framework/scripts/check_gate_thresholds.py
-
-      - name: URL validation
-        run: python registry-research-framework/scripts/validate_source_urls.py
-
-      - name: MCP readiness
-        run: python registry-research-framework/scripts/check_mcp_readiness.py
+      - name: Research quality gate summary
+        run: python registry-research-framework/scripts/run_research_quality_gate.py --skip-python-tests --skip-ghidra-smoke
 
       - name: Run PowerShell pipeline smoke checks
         run: pwsh -NoProfile -ExecutionPolicy Bypass -File tests/Invoke-PipelineQualitySmoke.ps1
