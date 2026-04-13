@@ -107,6 +107,9 @@ def main() -> int:
         "missing_docs_count": validation_summary.get("missing_docs_count"),
         "threshold_violations": gate_metrics.get("threshold_violations"),
         "blocked_count": blocked_worklist.get("blocked_count"),
+        "blocked_actionability_counts": publish_metrics.get("blocked_actionability_counts"),
+        "top_actionable_blocked_candidates": publish_metrics.get("top_actionable_blocked_candidates"),
+        "top_hold_blocked_candidates": publish_metrics.get("top_hold_blocked_candidates"),
     }
 
     if args.emit_json:
