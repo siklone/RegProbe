@@ -94,6 +94,7 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Short operator summary of the materialized pack.
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip`
   Ready-to-move archive containing manifests, repo helpers, and per-request command files.
+  The materializer also writes `CHECKSUMS.json` inside the pack and records the archive SHA-256 in the summary JSON, so the destination host can verify the transfer before running any commands.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`

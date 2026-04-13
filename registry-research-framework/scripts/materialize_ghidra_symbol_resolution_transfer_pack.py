@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import zipfile
@@ -118,15 +119,40 @@ def write_pack_readme(pack_root: Path, payload: dict[str, Any]) -> None:
         f"- Selected jobs: `{counts.get('selected_jobs')}`",
         f"- Repo files copied: `{counts.get('repo_files_copied')}`",
         f"- Command files written: `{counts.get('command_files_written')}`",
+        f"- Pack files checksummed: `{counts.get('pack_files_checksummed')}`",
         "",
         "## Layout",
         "",
         "- `manifests/` copied JSON and markdown manifests",
         "- `repo/` repo-side scripts and guest helpers needed on the destination host",
         "- `commands/` one file per selected request with its suggested command",
+        "- `CHECKSUMS.json` SHA-256 manifest for every file in this pack",
         "",
     ]
     write_text(pack_root / "README.md", "\n".join(lines) + "\n")
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def pack_file_manifest(pack_root: Path) -> list[dict[str, Any]]:
+    files: list[dict[str, Any]] = []
+    for path in sorted(pack_root.rglob("*")):
+        if not path.is_file():
+            continue
+        files.append(
+            {
+                "path": path.relative_to(pack_root).as_posix(),
+                "size_bytes": path.stat().st_size,
+                "sha256": sha256_file(path),
+            }
+        )
+    return files
 
 
 def build_archive(source_root: Path, archive_path: Path) -> None:
@@ -208,16 +234,35 @@ def materialize_transfer_pack(
             "repo_files_copied": len(copied_repo_paths),
             "command_files_written": len(command_files),
             "manifest_files_written": len(manifest_files),
+            "pack_files_checksummed": 0,
         },
         "candidate_ids": transfer.get("candidate_ids") or [],
         "request_ids": request_ids,
         "copied_repo_paths": copied_repo_paths,
         "command_files": command_files,
         "manifest_files": manifest_files,
+        "pack_files": [],
+        "archive": {},
         "jobs": transfer.get("jobs") or [],
     }
     write_pack_readme(output_root, payload)
+    files_before_checksums = pack_file_manifest(output_root)
+    checksum_payload = {
+        "schema_version": "1.0",
+        "generated_utc": generated_utc,
+        "file_count": len(files_before_checksums),
+        "files": files_before_checksums,
+    }
+    write_json(output_root / "CHECKSUMS.json", checksum_payload)
+    pack_files = pack_file_manifest(output_root)
     build_archive(output_root, archive_path)
+    payload["counts"]["pack_files_checksummed"] = len(pack_files)
+    payload["pack_files"] = pack_files
+    payload["archive"] = {
+        "path": portable_path(archive_path),
+        "size_bytes": archive_path.stat().st_size if archive_path.exists() else 0,
+        "sha256": sha256_file(archive_path) if archive_path.exists() else None,
+    }
     write_json(summary_path, payload)
     markdown_lines = [
         "# Ghidra Symbol Resolution Transfer Pack",
@@ -229,6 +274,8 @@ def materialize_transfer_pack(
         f"- Selected jobs: `{(payload.get('counts') or {}).get('selected_jobs')}`",
         f"- Repo files copied: `{(payload.get('counts') or {}).get('repo_files_copied')}`",
         f"- Command files written: `{(payload.get('counts') or {}).get('command_files_written')}`",
+        f"- Pack files checksummed: `{(payload.get('counts') or {}).get('pack_files_checksummed')}`",
+        f"- Archive SHA-256: `{(payload.get('archive') or {}).get('sha256')}`",
     ]
     write_text(markdown_path, "\n".join(markdown_lines) + "\n")
     return payload
