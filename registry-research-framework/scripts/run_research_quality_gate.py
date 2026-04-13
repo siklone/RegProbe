@@ -107,6 +107,11 @@ def default_steps(args: argparse.Namespace) -> list[GateStep]:
             skip_reason="--skip-ghidra-smoke",
         ),
         GateStep(
+            "etw-stackwalk-plan",
+            "ETW stackwalk capture plan check",
+            [python, "registry-research-framework/scripts/check_etw_stackwalk_capture_plan.py"],
+        ),
+        GateStep(
             "publish-metrics",
             "Generate research publish metrics",
             [python, "registry-research-framework/scripts/generate_publish_metrics.py"],

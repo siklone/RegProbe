@@ -40,6 +40,7 @@ ghidra_autotrigger_inputs = load_module("generate_ghidra_autotrigger_inputs", FR
 ghidra_autotrigger_smoke_check = load_module("check_ghidra_autotrigger_smoke", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_smoke.py")
 research_quality_gate = load_module("run_research_quality_gate", FRAMEWORK_SCRIPTS / "run_research_quality_gate.py")
 etw_stackwalk_plan = load_module("generate_etw_stackwalk_capture_plan", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_capture_plan.py")
+etw_stackwalk_check = load_module("check_etw_stackwalk_capture_plan", FRAMEWORK_SCRIPTS / "check_etw_stackwalk_capture_plan.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
 ghidra_symbol_runner = load_module("run_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "run_ghidra_symbol_resolution_batch.py")
@@ -1436,6 +1437,52 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(plan["plan_status"], "blocked")
         self.assertIn("stackwalk_events must include at least one registry event.", plan["errors"])
+
+    def test_etw_stackwalk_capture_plan_check_accepts_ready_plan(self) -> None:
+        profile = {
+            "profile_id": "kernel-registry-stackwalk-v1",
+            "tool": "xperf",
+            "capture_phase": "runtime",
+            "kernel_flags": ["PROC_THREAD", "LOADER", "REGISTRY"],
+            "stackwalk_events": ["RegQueryValue", "RegSetValue"],
+            "default_output_root": r"C:\RegProbe-Diag\etw-stackwalk",
+            "stack_capture": {"expected": True, "source_fields": ["Stack"]},
+            "postprocess": {"normalized_bundle_field": "caller_stack"},
+        }
+        plan = etw_stackwalk_plan.build_capture_plan(
+            profile,
+            run_id="ready",
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        payload = etw_stackwalk_check.check_plan(plan, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_capture_plan_check_rejects_missing_stack_handoff(self) -> None:
+        profile = {
+            "profile_id": "kernel-registry-stackwalk-v1",
+            "tool": "xperf",
+            "capture_phase": "runtime",
+            "kernel_flags": ["REGISTRY"],
+            "stackwalk_events": ["RegQueryValue"],
+            "default_output_root": r"C:\RegProbe-Diag\etw-stackwalk",
+            "stack_capture": {"expected": False, "source_fields": []},
+            "postprocess": {"normalized_bundle_field": "raw_text"},
+        }
+        plan = etw_stackwalk_plan.build_capture_plan(
+            profile,
+            run_id="bad",
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        payload = etw_stackwalk_check.check_plan(plan, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertIn("missing required stackwalk events: RegSetValue", payload["errors"])
+        self.assertIn("stack_capture.expected must be true.", payload["errors"])
+        self.assertIn("stack_capture.normalized_bundle_field must be caller_stack.", payload["errors"])
 
     def test_build_etl_corpus_inventory_marks_placeholder_reason(self) -> None:
         inventory = research_v36_lib.build_etl_corpus_inventory(

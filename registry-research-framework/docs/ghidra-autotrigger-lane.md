@@ -104,6 +104,12 @@ Generate the ETW stackwalk capture plan for producing fresh caller-stack bundles
 python3 registry-research-framework/scripts/generate_etw_stackwalk_capture_plan.py
 ```
 
+Validate that the stackwalk plan still contains the registry stack flags, caller-stack handoff, and parser command:
+
+```bash
+python3 registry-research-framework/scripts/check_etw_stackwalk_capture_plan.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -184,6 +190,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Operator-ready xperf registry stackwalk plan for producing fresh `caller_stack` events.
 - `registry-research-framework/audit/etw-stackwalk-capture-plan.md`
   Copy/paste command view of the same stackwalk capture plan.
+- `registry-research-framework/audit/etw-stackwalk-capture-plan-check.json`
+  Machine-readable validation result for the stackwalk capture plan.
+- `registry-research-framework/audit/etw-stackwalk-capture-plan-check.md`
+  Human-readable validation summary for the stackwalk capture plan.
 
 ## Status Semantics
 

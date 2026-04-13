@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T18:02:30.185473Z",
+  "check_status": "ok",
+  "errors": [],
+  "plan_status": "ready",
+  "profile_id": "kernel-registry-stackwalk-v1",
+  "run_id": "wave4-registry-stackwalk",
+  "stackwalk_events": [
+    "RegCloseKey",
+    "RegCreateKey",
+    "RegDeleteValue",
+    "RegOpenKey",
+    "RegQueryKey",
+    "RegQueryValue",
+    "RegSetValue"
+  ],
+  "commands_checked": [
+    "parse_xml",
+    "preflight",
+    "prepare",
+    "repo_parse",
+    "start",
+    "stop",
+    "wait"
+  ],
+  "plan_path": "registry-research-framework/audit/etw-stackwalk-capture-plan.json"
+}
