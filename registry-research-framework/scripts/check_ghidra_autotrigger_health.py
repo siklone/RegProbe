@@ -26,6 +26,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     input_manifest_selected = int(counts.get("input_manifest_selected") or 0)
     queue_jobs = int(counts.get("queue_jobs") or 0)
     seeds = int(counts.get("autotrigger_seeds") or 0)
+    symbol_resolution_requests = int(counts.get("symbol_resolution_requests") or 0)
     dispatch_jobs = int(counts.get("dispatch_jobs") or 0)
     autotrigger_dispatch_jobs = int(counts.get("autotrigger_dispatch_jobs") or 0)
     run_selected_jobs = int(counts.get("run_selected_jobs") or 0)
@@ -34,6 +35,8 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     input_bundle_paths = coverage.get("input_bundle_paths") or []
     queued_candidate_ids = coverage.get("queued_candidate_ids") or []
     seed_candidate_ids = coverage.get("seed_candidate_ids") or []
+    symbol_resolution_request_ids = coverage.get("symbol_resolution_request_ids") or []
+    symbol_resolution_lookup_keys = coverage.get("symbol_resolution_lookup_keys") or []
     autotrigger_dispatch_candidate_ids = coverage.get("autotrigger_dispatch_candidate_ids") or []
     missing_input_jobs = focus.get("missing_input_jobs") or []
 
@@ -43,6 +46,16 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
         errors.append(f"queue_jobs mismatch: counts={queue_jobs} coverage={len(queued_candidate_ids)}")
     if len(seed_candidate_ids) != seeds:
         errors.append(f"autotrigger_seeds mismatch: counts={seeds} coverage={len(seed_candidate_ids)}")
+    if len(symbol_resolution_request_ids) != symbol_resolution_requests:
+        errors.append(
+            "symbol_resolution_requests mismatch: "
+            f"counts={symbol_resolution_requests} coverage={len(symbol_resolution_request_ids)}"
+        )
+    if len(symbol_resolution_lookup_keys) != symbol_resolution_requests:
+        errors.append(
+            "symbol_resolution_lookup_keys mismatch: "
+            f"counts={symbol_resolution_requests} coverage={len(symbol_resolution_lookup_keys)}"
+        )
     if len(autotrigger_dispatch_candidate_ids) != autotrigger_dispatch_jobs:
         errors.append(
             "autotrigger_dispatch_jobs mismatch: "
@@ -78,6 +91,14 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
         errors.append("top_autotrigger_candidate should be null when no autotrigger dispatch jobs exist")
     if autotrigger_dispatch_jobs > 0 and top_autotrigger_candidate != autotrigger_dispatch_candidate_ids[0]:
         errors.append("top_autotrigger_candidate does not match first autotrigger dispatch candidate")
+
+    top_symbol_resolution_request = focus.get("top_symbol_resolution_request")
+    if symbol_resolution_requests == 0 and top_symbol_resolution_request is not None:
+        errors.append("top_symbol_resolution_request should be null when no symbol resolution requests exist")
+    if symbol_resolution_requests > 0 and not symbol_resolution_lookup_keys and top_symbol_resolution_request is not None:
+        errors.append("top_symbol_resolution_request does not match first symbol resolution lookup key")
+    if symbol_resolution_requests > 0 and symbol_resolution_lookup_keys and top_symbol_resolution_request != symbol_resolution_lookup_keys[0]:
+        errors.append("top_symbol_resolution_request does not match first symbol resolution lookup key")
 
     if runner.get("available") and runner.get("error"):
         errors.append("runner cannot be available and errored at the same time")

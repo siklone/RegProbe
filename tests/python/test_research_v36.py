@@ -36,6 +36,7 @@ ghidra_dispatch_batch = load_module("generate_ghidra_dispatch_batch", FRAMEWORK_
 ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "run_ghidra_dispatch_batch.py")
 ghidra_autotrigger = load_module("generate_ghidra_autotrigger_seeds", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_seeds.py")
 ghidra_autotrigger_inputs = load_module("generate_ghidra_autotrigger_inputs", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_inputs.py")
+ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_refresh_pipeline = load_module("refresh_ghidra_autotrigger_pipeline", FRAMEWORK_SCRIPTS / "refresh_ghidra_autotrigger_pipeline.py")
 ghidra_autotrigger_health = load_module("generate_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_health.py")
 ghidra_autotrigger_health_check = load_module("check_ghidra_autotrigger_health", FRAMEWORK_SCRIPTS / "check_ghidra_autotrigger_health.py")
@@ -2134,6 +2135,50 @@ class GhidraAutotriggerTests(unittest.TestCase):
         self.assertEqual(seeds[1]["source_run_id"], "run-two")
 
 
+class GhidraSymbolResolutionQueueTests(unittest.TestCase):
+    def test_symbol_resolution_queue_groups_actionable_unresolved_frames(self) -> None:
+        seed_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "target_binary": "ntoskrnl.exe",
+                "source_bundle_path": "evidence/files/example/normalized-registry-bundle.json",
+                "source_run_id": "run-one",
+                "event_index": 1,
+                "unresolved_frames": [
+                    "ntoskrnl.exe+0x1F234",
+                    "UNKNOWN",
+                ],
+            },
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "target_binary": "ntoskrnl.exe",
+                "source_bundle_path": "evidence/files/example/normalized-registry-bundle.json",
+                "source_run_id": "run-two",
+                "event_index": 2,
+                "unresolved_frames": [
+                    "ntoskrnl.exe+0x1F234",
+                    "0xfffff80512345678",
+                ],
+            },
+        ]
+
+        payload = ghidra_symbol_queue.symbol_resolution_queue_from_seeds(
+            seed_rows,
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(payload["request_count"], 2)
+        self.assertEqual(payload["diagnostics"]["actionable_frame_count"], 3)
+        self.assertEqual(payload["diagnostics"]["skipped_frame_counts"]["unknown_marker"], 1)
+        self.assertEqual(payload["requests"][0]["lookup_key"], "ntoskrnl.exe+0x1f234")
+        self.assertEqual(payload["requests"][0]["occurrence_count"], 2)
+        self.assertEqual(
+            payload["requests"][0]["candidate_ids"],
+            ["power.control.allow-system-required-power-requests"],
+        )
+        self.assertIn("microsoft-public-symbol-server", payload["requests"][0]["suggested_symbol_sources"])
+
+
 class GhidraAutotriggerPipelineTests(unittest.TestCase):
     def test_refresh_pipeline_writes_seed_batch_and_run_surfaces(self) -> None:
         bundle = {
@@ -2169,6 +2214,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             bundle_path = temp_root / "normalized-registry-bundle.json"
             queue_path = temp_root / "ghidra-job-queue.jsonl"
             seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2179,17 +2225,23 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 bundle_path,
                 queue_path=queue_path,
                 seeds_path=seeds_path,
+                symbol_queue_path=symbol_queue_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
             )
 
             self.assertEqual(payload["seed_count"], 1)
+            self.assertEqual(payload["symbol_resolution_request_count"], 1)
             self.assertEqual(payload["dispatch_autotrigger_matched_job_count"], 1)
             self.assertEqual(payload["run_plan_selected_job_count"], 1)
 
             seeds_rows = [json.loads(line) for line in seeds_path.read_text(encoding="utf-8").splitlines() if line.strip()]
             self.assertEqual(seeds_rows[0]["candidate_id"], "power.control.allow-system-required-power-requests")
+
+            symbol_queue_payload = json.loads(symbol_queue_path.read_text(encoding="utf-8"))
+            self.assertEqual(symbol_queue_payload["request_count"], 1)
+            self.assertEqual(symbol_queue_payload["requests"][0]["lookup_key"], "ntoskrnl.exe+0x1f234")
 
             batch_payload = json.loads(batch_path.read_text(encoding="utf-8"))
             self.assertEqual(batch_payload["jobs"][0]["autotrigger_seed_count"], 1)
@@ -2199,6 +2251,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
 
             health_payload = json.loads(health_path.read_text(encoding="utf-8"))
             self.assertEqual(health_payload["counts"]["autotrigger_seeds"], 1)
+            self.assertEqual(health_payload["counts"]["symbol_resolution_requests"], 1)
             self.assertEqual(payload["outputs"]["health_path"], health_path.as_posix())
 
     def test_refresh_pipeline_supports_bundle_root(self) -> None:
@@ -2236,6 +2289,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             bundle_path = bundle_root / "sample" / "normalized-registry-bundle.json"
             queue_path = temp_root / "ghidra-job-queue.jsonl"
             seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2247,6 +2301,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 bundle_root=bundle_root,
                 queue_path=queue_path,
                 seeds_path=seeds_path,
+                symbol_queue_path=symbol_queue_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2292,6 +2347,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             manifest_path = temp_root / "ghidra-autotrigger-inputs.json"
             queue_path = temp_root / "ghidra-job-queue.jsonl"
             seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2307,6 +2363,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 bundle_manifest_path=manifest_path,
                 queue_path=queue_path,
                 seeds_path=seeds_path,
+                symbol_queue_path=symbol_queue_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2351,6 +2408,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
             manifest_path = temp_root / "ghidra-autotrigger-inputs.json"
             queue_path = temp_root / "ghidra-job-queue.jsonl"
             seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2364,6 +2422,7 @@ class GhidraAutotriggerPipelineTests(unittest.TestCase):
                 input_roots=[evidence_root],
                 queue_path=queue_path,
                 seeds_path=seeds_path,
+                symbol_queue_path=symbol_queue_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2462,6 +2521,15 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         seed_rows = [
             {"candidate_id": "power.keep"},
         ]
+        symbol_queue = {
+            "requests": [
+                {
+                    "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x1f234",
+                    "lookup_key": "ntoskrnl.exe+0x1f234",
+                    "candidate_ids": ["power.keep"],
+                }
+            ]
+        }
         batch = {
             "job_count": 2,
             "jobs": [
@@ -2489,6 +2557,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
             input_manifest,
             queue_rows,
             seed_rows,
+            symbol_queue,
             batch,
             run,
             generated_utc="2026-04-13T00:00:00Z",
@@ -2497,17 +2566,20 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["input_manifest_selected"], 1)
         self.assertEqual(payload["counts"]["queue_jobs"], 2)
         self.assertEqual(payload["counts"]["autotrigger_seeds"], 1)
+        self.assertEqual(payload["counts"]["symbol_resolution_requests"], 1)
         self.assertEqual(payload["counts"]["autotrigger_dispatch_jobs"], 1)
         self.assertFalse(payload["runner"]["available"])
         self.assertEqual(payload["focus"]["top_input_bundle"], "evidence/files/example/normalized-registry-bundle.json")
         self.assertEqual(payload["focus"]["top_queue_candidate"], "power.keep")
         self.assertEqual(payload["focus"]["top_autotrigger_candidate"], "power.keep")
+        self.assertEqual(payload["focus"]["top_symbol_resolution_request"], "ntoskrnl.exe+0x1f234")
         self.assertEqual(payload["focus"]["missing_input_jobs"][0]["candidate_id"], "power.other")
 
         markdown = ghidra_autotrigger_health.render_markdown(payload)
         self.assertIn("# Ghidra Autotrigger Health", markdown)
         self.assertIn("Top queue candidate", markdown)
         self.assertIn("`power.keep`", markdown)
+        self.assertIn("Top symbol resolution request", markdown)
 
     def test_validate_health_rejects_inconsistent_counts(self) -> None:
         payload = {
@@ -2515,6 +2587,7 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "input_manifest_selected": 1,
                 "queue_jobs": 2,
                 "autotrigger_seeds": 1,
+                "symbol_resolution_requests": 1,
                 "dispatch_jobs": 1,
                 "autotrigger_dispatch_jobs": 0,
                 "run_selected_jobs": 0,
@@ -2524,12 +2597,15 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
                 "input_bundle_paths": [],
                 "queued_candidate_ids": ["one"],
                 "seed_candidate_ids": [],
+                "symbol_resolution_request_ids": [],
+                "symbol_resolution_lookup_keys": [],
                 "autotrigger_dispatch_candidate_ids": [],
             },
             "focus": {
                 "top_input_bundle": "wrong-bundle",
                 "top_queue_candidate": "wrong",
                 "top_autotrigger_candidate": None,
+                "top_symbol_resolution_request": "wrong-symbol",
                 "missing_input_jobs": [],
             },
             "runner": {
@@ -2543,6 +2619,8 @@ class GhidraAutotriggerHealthTests(unittest.TestCase):
         self.assertTrue(any("input_manifest_selected mismatch" in error for error in errors))
         self.assertTrue(any("top_input_bundle does not match" in error for error in errors))
         self.assertTrue(any("queue_jobs mismatch" in error for error in errors))
+        self.assertTrue(any("symbol_resolution_requests mismatch" in error for error in errors))
+        self.assertTrue(any("top_symbol_resolution_request does not match" in error for error in errors))
         self.assertTrue(any("selected+blocked does not cover dispatch jobs" in error for error in errors))
         self.assertTrue(any("top_queue_candidate does not match" in error for error in errors))
 
@@ -2587,6 +2665,7 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             queue_path.write_text("".join(json.dumps(row) + "\n" for row in queue_rows), encoding="utf-8")
             bundle_manifest_path = temp_root / "ghidra-autotrigger-inputs.json"
             seeds_path = temp_root / "ghidra-autotrigger-seeds.jsonl"
+            symbol_queue_path = temp_root / "ghidra-symbol-resolution-queue.json"
             batch_path = temp_root / "ghidra-dispatch-batch.json"
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
@@ -2597,6 +2676,7 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
                 queue_path=queue_path,
                 bundle_manifest_path=bundle_manifest_path,
                 seeds_path=seeds_path,
+                symbol_queue_path=symbol_queue_path,
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
@@ -2605,6 +2685,8 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
 
             self.assertEqual(payload["sync_status"], "ok")
             self.assertEqual(payload["health_check"]["status"], "ok")
+            symbol_queue_payload = json.loads(symbol_queue_path.read_text(encoding="utf-8"))
+            self.assertEqual(symbol_queue_payload["request_count"], 1)
             self.assertTrue(output_path.exists())
 
     def test_sync_lane_returns_idle_when_no_discovered_inputs_exist(self) -> None:

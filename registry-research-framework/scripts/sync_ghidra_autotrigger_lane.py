@@ -48,6 +48,7 @@ def sync_lane(
     queue_path: Path | None = None,
     bundle_manifest_path: Path | None = None,
     seeds_path: Path | None = None,
+    symbol_queue_path: Path | None = None,
     batch_path: Path | None = None,
     run_path: Path | None = None,
     health_path: Path | None = None,
@@ -64,6 +65,7 @@ def sync_lane(
             queue_path=queue_path or refresh_pipeline_mod.QUEUE_PATH,
             bundle_manifest_path=effective_manifest_path,
             seeds_path=seeds_path or refresh_pipeline_mod.SEEDS_PATH,
+            symbol_queue_path=symbol_queue_path or refresh_pipeline_mod.SYMBOL_QUEUE_PATH,
             batch_path=batch_path or refresh_pipeline_mod.BATCH_PATH,
             run_path=run_path or refresh_pipeline_mod.RUN_PATH,
             health_path=effective_health_path,
@@ -115,6 +117,7 @@ def main() -> int:
     parser.add_argument("--queue", type=Path, default=None)
     parser.add_argument("--bundle-manifest", type=Path, default=None)
     parser.add_argument("--seeds-output", type=Path, default=None)
+    parser.add_argument("--symbol-queue-output", type=Path, default=None)
     parser.add_argument("--batch-output", type=Path, default=None)
     parser.add_argument("--run-output", type=Path, default=None)
     parser.add_argument("--health-output", type=Path, default=None)
@@ -127,6 +130,7 @@ def main() -> int:
         queue_path=args.queue,
         bundle_manifest_path=args.bundle_manifest,
         seeds_path=args.seeds_output,
+        symbol_queue_path=args.symbol_queue_output,
         batch_path=args.batch_output,
         run_path=args.run_output,
         health_path=args.health_output,

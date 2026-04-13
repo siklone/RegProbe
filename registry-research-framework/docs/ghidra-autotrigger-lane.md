@@ -8,8 +8,9 @@ At a high level, the lane does four things:
 
 1. Discover candidate bundles that contain caller stacks and can map back to queued `ghidra` records.
 2. Convert unresolved stack frames into `ghidra-autotrigger-seed` rows.
-3. Enrich the existing dispatch batch so caller-stack-driven jobs are visible and prioritized.
-4. Publish health surfaces so we can tell whether the lane is idle, ready, or blocked by tooling.
+3. Convert actionable unresolved frames into a symbol-resolution queue so module offsets and raw addresses do not stay implicit.
+4. Enrich the existing dispatch batch so caller-stack-driven jobs are visible and prioritized.
+5. Publish health surfaces so we can tell whether the lane is idle, ready, or blocked by tooling.
 
 ## Main Commands
 
@@ -47,6 +48,8 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   It also includes diagnostics for scanned bundles and skip reasons such as `no-caller-stack` and `no-queue-match`.
 - `registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl`
   Seed rows produced from unresolved caller-stack frames.
+- `registry-research-framework/queue/ghidra-symbol-resolution-queue.json`
+  Aggregated symbol-resolution requests derived from actionable unresolved frames such as `module+0xoffset` and raw addresses.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`
@@ -71,3 +74,5 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
 ## Current Reality
 
 The lane is intentionally split between discovery and execution. Discovery, dispatch planning, health reporting, and validation now work locally. Real headless execution is still blocked by the host environment: we do not currently have `pwsh` plus a runnable Ghidra install on this machine.
+
+The new symbol-resolution queue sits between seeds and dispatch. When the lane is not idle, that queue gives us an explicit list of offsets or addresses that still need names before we can expect clean decompiler pivots.
