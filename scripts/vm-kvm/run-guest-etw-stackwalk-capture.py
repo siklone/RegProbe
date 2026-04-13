@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import subprocess
 import sys
 import time
@@ -26,6 +27,75 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
             return True
         time.sleep(2)
     return path.exists()
+
+
+def ingest_capture_artifacts(
+    *,
+    repo_root: Path,
+    run_id: str,
+    summary_path: Path,
+    xml_path: Path | None,
+    etl_path: Path | None,
+    ingest_root: Path,
+    refresh_ghidra: bool,
+) -> dict[str, object]:
+    if etl_path is None or not etl_path.exists():
+        return {
+            "status": "error",
+            "error": "ETL upload is required for ingest.",
+        }
+
+    target_root = (ingest_root / run_id).resolve()
+    target_root.mkdir(parents=True, exist_ok=True)
+    target_etl = target_root / f"{run_id}.etl"
+    target_xml = target_root / f"{run_id}.xml"
+    target_summary = target_root / f"{run_id}-summary.json"
+    target_bundle = target_root / "normalized-registry-bundle.json"
+
+    shutil.copy2(etl_path, target_etl)
+    shutil.copy2(summary_path, target_summary)
+    if xml_path and xml_path.exists():
+        shutil.copy2(xml_path, target_xml)
+
+    bundle_cmd = [
+        sys.executable,
+        str(repo_root / "registry-research-framework" / "scripts" / "generate_etw_stackwalk_bundle.py"),
+        "--input",
+        str(target_etl),
+        "--output",
+        str(target_bundle),
+        "--run-id",
+        run_id,
+    ]
+    bundle_result = subprocess.run(bundle_cmd, cwd=str(repo_root), capture_output=True, text=True)
+    payload: dict[str, object] = {
+        "status": "ok" if bundle_result.returncode == 0 else "error",
+        "target_root": str(target_root),
+        "etl_path": str(target_etl),
+        "xml_path": str(target_xml) if target_xml.exists() else None,
+        "summary_path": str(target_summary),
+        "bundle_path": str(target_bundle) if target_bundle.exists() else None,
+        "bundle_returncode": bundle_result.returncode,
+        "bundle_stdout": (bundle_result.stdout or "").strip(),
+        "bundle_stderr": (bundle_result.stderr or "").strip(),
+    }
+    if bundle_result.returncode != 0:
+        return payload
+
+    if refresh_ghidra and target_bundle.exists():
+        refresh_cmd = [
+            sys.executable,
+            str(repo_root / "registry-research-framework" / "scripts" / "refresh_ghidra_autotrigger_pipeline.py"),
+            "--bundle",
+            str(target_bundle),
+        ]
+        refresh_result = subprocess.run(refresh_cmd, cwd=str(repo_root), capture_output=True, text=True)
+        payload["ghidra_refresh_returncode"] = refresh_result.returncode
+        payload["ghidra_refresh_stdout"] = (refresh_result.stdout or "").strip()
+        payload["ghidra_refresh_stderr"] = (refresh_result.stderr or "").strip()
+        if refresh_result.returncode != 0:
+            payload["status"] = "error"
+    return payload
 
 
 def build_guest_launcher(
@@ -192,6 +262,9 @@ def main() -> int:
     parser.add_argument("--value-name", default="TimerCheckFlags")
     parser.add_argument("--upload-etl", action="store_true")
     parser.add_argument("--skip-tracerpt", action="store_true")
+    parser.add_argument("--ingest-to-repo", action="store_true", help="Copy uploaded ETL/XML into evidence/files/etw-stackwalk/<run-id> and build a normalized bundle.")
+    parser.add_argument("--refresh-ghidra", action="store_true", help="After ingest, refresh the Ghidra autotrigger pipeline from the new normalized bundle.")
+    parser.add_argument("--ingest-root", default="evidence/files/etw-stackwalk")
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -203,6 +276,11 @@ def main() -> int:
     etl_path = upload_dir / f"{safe_run_id}.etl"
     for path in (summary_path, xml_path, etl_path):
         path.unlink(missing_ok=True)
+
+    if args.refresh_ghidra and not args.ingest_to_repo:
+        parser.error("--refresh-ghidra requires --ingest-to-repo.")
+    if args.ingest_to_repo:
+        args.upload_etl = True
 
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
     bridge = args.bridge_base_url.rstrip("/")
@@ -257,6 +335,20 @@ def main() -> int:
         "etl_exists": summary.get("etl_exists"),
         "xml_exists": summary.get("xml_exists"),
     }
+    if args.ingest_to_repo and payload["status"] == "ok":
+        payload["ingest"] = ingest_capture_artifacts(
+            repo_root=repo_root,
+            run_id=safe_run_id,
+            summary_path=summary_path,
+            xml_path=xml_path if xml_path.exists() else None,
+            etl_path=etl_path if etl_path.exists() else None,
+            ingest_root=(Path(args.ingest_root) if Path(args.ingest_root).is_absolute() else (repo_root / args.ingest_root)).resolve(),
+            refresh_ghidra=args.refresh_ghidra,
+        )
+        if str((payload.get("ingest") or {}).get("status") or "") != "ok":
+            payload["status"] = "error"
+            payload["error_kind"] = "ingest-failed"
+            payload["error"] = str((payload.get("ingest") or {}).get("error") or "ETW capture ingest failed.")
     print(json.dumps(payload, indent=2))
     return 0 if payload["status"] == "ok" else 1
 

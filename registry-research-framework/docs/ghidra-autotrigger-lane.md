@@ -122,6 +122,16 @@ python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py \
   --value-name TimerCheckFlags
 ```
 
+To drop the uploaded ETL/XML into `evidence/files/etw-stackwalk/<run-id>/`, build `normalized-registry-bundle.json`, and immediately refresh the autotrigger lane:
+
+```bash
+python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py \
+  --run-id wave4-registry-stackwalk \
+  --value-name TimerCheckFlags \
+  --ingest-to-repo \
+  --refresh-ghidra
+```
+
 Validate that the stackwalk plan still contains the registry stack flags, caller-stack handoff, and parser command:
 
 ```bash

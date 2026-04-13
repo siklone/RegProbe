@@ -42,6 +42,7 @@ ghidra_autotrigger_smoke_check = load_module("check_ghidra_autotrigger_smoke", F
 research_quality_gate = load_module("run_research_quality_gate", FRAMEWORK_SCRIPTS / "run_research_quality_gate.py")
 etw_stackwalk_plan = load_module("generate_etw_stackwalk_capture_plan", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_capture_plan.py")
 etw_stackwalk_check = load_module("check_etw_stackwalk_capture_plan", FRAMEWORK_SCRIPTS / "check_etw_stackwalk_capture_plan.py")
+etw_stackwalk_bundle = load_module("generate_etw_stackwalk_bundle", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_bundle.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
 ghidra_symbol_runner = load_module("run_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "run_ghidra_symbol_resolution_batch.py")
@@ -1559,6 +1560,40 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("ETW registry stackwalk capture helper", result.stdout)
+        self.assertIn("--ingest-to-repo", result.stdout)
+
+    def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
+        parse_result = {
+            "etl_path": "evidence/files/etw-stackwalk/sample/sample.etl",
+            "xml_output": "evidence/files/etw-stackwalk/sample/sample.xml",
+            "status": "parsed-sidecar-xml",
+            "notes": ["parsed from sidecar"],
+            "registry_touches": [
+                {
+                    "process_name": "System",
+                    "process_id": "4",
+                    "operation": "RegQueryValue",
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+                    "value_name": "TimerCheckFlags",
+                    "raw_excerpt": "TimerCheckFlags read",
+                    "caller_stack": ["ntoskrnl.exe+0x1F234", "nt!PopReadRegKeyValue"],
+                }
+            ],
+        }
+
+        bundle = etw_stackwalk_bundle.bundle_from_parse_result(
+            parse_result,
+            run_id="wave4-stackwalk",
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(bundle["status"], "ok")
+        self.assertEqual(bundle["source_tool"], "etw")
+        self.assertEqual(bundle["stack_capture"]["captured_event_count"], 1)
+        self.assertEqual(bundle["events"][0]["key_path"], "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel")
+        self.assertEqual(bundle["events"][0]["hive"], "HKLM")
+        self.assertEqual(bundle["events"][0]["pid"], 4)
+        self.assertEqual(bundle["events"][0]["caller_stack"], ["ntoskrnl.exe+0x1F234", "nt!PopReadRegKeyValue"])
 
     def test_parse_etl_registry_touches_uses_existing_xml_sidecar_when_tracerpt_missing(self) -> None:
         xml_payload = """<?xml version="1.0" encoding="utf-8"?>
