@@ -311,14 +311,17 @@ class Program
         var actionableOnlyOption = new Option<bool>("--actionable-only", "Only show blocked candidates that are currently actionable");
         var laneOption = new Option<string?>("--lane", "Only show blocked candidates for a specific next-missing-layer lane");
         var topOption = new Option<int?>("--top", "Limit the number of blocked candidates shown");
+        var blockedJsonOption = new Option<bool>("--json", "Emit blocked candidates as JSON");
         blockedCommand.AddOption(reasonOption);
         blockedCommand.AddOption(worklistOption);
         blockedCommand.AddOption(actionableOnlyOption);
         blockedCommand.AddOption(laneOption);
         blockedCommand.AddOption(topOption);
+        blockedCommand.AddOption(blockedJsonOption);
         blockedCommand.SetHandler(context =>
         {
             var reason = context.ParseResult.GetValueForOption(reasonOption);
+            var emitJson = context.ParseResult.GetValueForOption(blockedJsonOption);
             var useWorklist = context.ParseResult.GetValueForOption(worklistOption)
                               || context.ParseResult.GetValueForOption(actionableOnlyOption)
                               || context.ParseResult.GetValueForOption(topOption) is > 0
@@ -330,7 +333,14 @@ class Program
                     reason,
                     context.ParseResult.GetValueForOption(laneOption),
                     context.ParseResult.GetValueForOption(actionableOnlyOption),
-                    context.ParseResult.GetValueForOption(topOption));
+                    context.ParseResult.GetValueForOption(topOption)).ToList();
+
+                if (emitJson)
+                {
+                    Console.WriteLine(JsonSerializer.Serialize(entries, JsonOptions));
+                    context.ExitCode = 0;
+                    return;
+                }
 
                 foreach (var entry in entries)
                 {
@@ -349,7 +359,16 @@ class Program
                         blocker.Contains(reason, StringComparison.OrdinalIgnoreCase)));
                 }
 
-                foreach (var entry in entries.OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase))
+                var orderedEntries = entries.OrderBy(entry => entry.TweakId, StringComparer.OrdinalIgnoreCase).ToList();
+
+                if (emitJson)
+                {
+                    Console.WriteLine(JsonSerializer.Serialize(orderedEntries, JsonOptions));
+                    context.ExitCode = 0;
+                    return;
+                }
+
+                foreach (var entry in orderedEntries)
                 {
                     Console.WriteLine($"{entry.TweakId} [{entry.TweakOrigin}] -> {entry.PromotionState} :: {entry.GatingReason}");
                 }
