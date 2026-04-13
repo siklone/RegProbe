@@ -66,6 +66,12 @@ Verify a materialized transfer pack before moving or executing it:
 python3 registry-research-framework/scripts/check_ghidra_symbol_resolution_transfer_pack.py
 ```
 
+Validate and unpack a transfer archive on the destination host:
+
+```bash
+python3 registry-research-framework/scripts/unpack_ghidra_symbol_resolution_transfer_pack.py
+```
+
 Regenerate and validate health surfaces:
 
 ```bash
@@ -106,6 +112,10 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   The checker can also validate directly from the zip archive when the extracted pack directory is not present, which is the expected destination-host shape after transfer.
 - `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.md`
   Human-readable verification summary.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-import.json`
+  Destination-host import result for a verified transfer archive.
+- `registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-import.md`
+  Short import summary with extracted file counts and errors.
 - `registry-research-framework/queue/ghidra-dispatch-batch.json`
   Prepared headless-analysis jobs, enriched with autotrigger context when available.
 - `registry-research-framework/queue/ghidra-dispatch-run.json`
@@ -146,3 +156,5 @@ On top of that, the transfer manifest turns the selected jobs into a small expor
 Because fresh caller-stack bundles are still intermittent, the lane now also has a synthetic smoke harness. It fabricates a small normalized bundle from the active blocked `ghidra` queue, runs the same sync path in an isolated audit directory, and proves that symbol-resolution-ready work would be emitted when matching stack-bearing bundles arrive.
 
 The smoke harness also materializes and verifies the transfer pack. A passing smoke run now means the lane can produce symbol-resolution jobs, package the required helper files, hash the payload, and validate the zip before anyone moves it to another host.
+
+For the destination side, the unpack helper validates the summary and archive before extraction, then writes an import surface. This keeps the transfer lane reversible: a pack can be checked in place, copied as a zip, checked again from the archive alone, and unpacked only after those checks pass.

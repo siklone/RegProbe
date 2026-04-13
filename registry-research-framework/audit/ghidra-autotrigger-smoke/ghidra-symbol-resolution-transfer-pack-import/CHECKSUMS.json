@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-13T11:16:06.953068Z",
+  "file_count": 18,
+  "files": [
+    {
+      "path": "README.md",
+      "size_bytes": 672,
+      "sha256": "7c4158c4beda29d0437e8afdce1a06938349bf4c50ac0098a54cd39e711c99fe"
+    },
+    {
+      "path": "commands/01-ghidra-symbol-01-ntoskrnl-exe-syntheticpower-control-allow-audio-to-enable-execution-required-power-requestsresolver.txt",
+      "size_bytes": 625,
+      "sha256": "1fceb2317ba2df75ba2f6658f08992079d51e9c1c941bd8498c93a0bf4bee48e"
+    },
+    {
+      "path": "commands/02-ghidra-symbol-02-ntoskrnl-exe-0x1920.txt",
+      "size_bytes": 475,
+      "sha256": "991d77e9ab0ba8594a4f4375dd4a2528a3f25d91b0e8bd131e100edbbeabc1c9"
+    },
+    {
+      "path": "commands/03-ghidra-symbol-03-ntoskrnl-exe-0x2c80.txt",
+      "size_bytes": 461,
+      "sha256": "4bc17d84f58ac6fa3bc87b95137e8c628ecb770df0487c42ca310154f94320b9"
+    },
+    {
+      "path": "commands/04-ghidra-symbol-04-ntoskrnl-exe-0xfffff80512340002.txt",
+      "size_bytes": 427,
+      "sha256": "678ad082f7bf3ce1ddb41a6fdf7c58343b068b2d5c311b92055f927b92c24bfd"
+    },
+    {
+      "path": "manifests/ghidra-symbol-resolution-handoff.json",
+      "size_bytes": 5804,
+      "sha256": "5b52291a1f0afd4dcb620c1cab021a533b19929095a55bd28229d7508bfce3d3"
+    },
+    {
+      "path": "manifests/ghidra-symbol-resolution-handoff.md",
+      "size_bytes": 1915,
+      "sha256": "cae7ede28b365aa3f10f8fd30ff7cee7e6aedb14b99a7f60f3379a1ce8da97d8"
+    },
+    {
+      "path": "manifests/ghidra-symbol-resolution-transfer.json",
+      "size_bytes": 4803,
+      "sha256": "82c0fc37c93e470dbcc835c48a8a7564af0118f490bc51fb208588d10dcfaf8d"
+    },
+    {
+      "path": "manifests/ghidra-symbol-resolution-transfer.md",
+      "size_bytes": 2244,
+      "sha256": "7069a72389452c3714a74abd8466a53d286fdd3148ab835724ace6e3799d8eb6"
+    },
+    {
+      "path": "repo/scripts/vm/ghidra/ExportBranchAnalysis.java",
+      "size_bytes": 27228,
+      "sha256": "cfe7ed0c02b5b80cdbcc0b8135da1a1088370d75343eb6b8aa57b4199a01ba86"
+    },
+    {
+      "path": "repo/scripts/vm/ghidra/SetPdbSymbolRepository.java",
+      "size_bytes": 3205,
+      "sha256": "f3955010dfd4a38a736e7cca746c6735187212cfb88c96f8f0af26774fd33c8d"
+    },
+    {
+      "path": "repo/scripts/vm/guest-tools/ghidra-headless.cmd",
+      "size_bytes": 316,
+      "sha256": "781ed5dcfbc669c4c8892c335be96f3eebae73cc6a2b2030a0f13f6d3ea0169a"
+    },
+    {
+      "path": "repo/scripts/vm/guest-tools/run-ghidra-symbolized-probe.ps1",
+      "size_bytes": 6423,
+      "sha256": "811bd61e77750ada219f35439d2e163946964c41e573e3d6eacdf433c9bba8c5"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/ensure-guest-admin-shell.py",
+      "size_bytes": 6213,
+      "sha256": "9670fc081ec9a4c65772897e4f6f3fa4ba7ffc12493b2a4958014abff8b631ce"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/guest_bridge.py",
+      "size_bytes": 2386,
+      "sha256": "7a39034be07cda3e2dd8912aafd8306decf83ea0ce9e0e6d629fcf988e7838c6"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+      "size_bytes": 12362,
+      "sha256": "9a8f203aecc43c1d2ed9d3c140b0965313899880440f77b2732fea22fffa9a66"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/summary_contract_lib.py",
+      "size_bytes": 2287,
+      "sha256": "12f6a2e914803dca0cd809572f9954bc6669967b0f4483c30ee1fbcd8cec2cb4"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/type-to-guest.py",
+      "size_bytes": 3939,
+      "sha256": "94bea9a2bccdcfd56412f9ee77c5280ee1a1812932273d0fec20d07f8977e1ce"
+    }
+  ]
+}

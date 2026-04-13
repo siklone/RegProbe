@@ -49,6 +49,7 @@ ghidra_symbol_handoff = load_module("generate_ghidra_symbol_resolution_handoff",
 ghidra_symbol_transfer = load_module("generate_ghidra_symbol_resolution_transfer", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_transfer.py")
 ghidra_symbol_transfer_pack = load_module("materialize_ghidra_symbol_resolution_transfer_pack", FRAMEWORK_SCRIPTS / "materialize_ghidra_symbol_resolution_transfer_pack.py")
 ghidra_symbol_transfer_pack_check = load_module("check_ghidra_symbol_resolution_transfer_pack", FRAMEWORK_SCRIPTS / "check_ghidra_symbol_resolution_transfer_pack.py")
+ghidra_symbol_transfer_pack_unpack = load_module("unpack_ghidra_symbol_resolution_transfer_pack", FRAMEWORK_SCRIPTS / "unpack_ghidra_symbol_resolution_transfer_pack.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -2594,6 +2595,47 @@ class GhidraSymbolResolutionTransferPackTests(unittest.TestCase):
             self.assertEqual(check_payload["check_status"], "ok")
             self.assertEqual(check_payload["counts"]["checked_pack_files"], 0)
             self.assertEqual(check_payload["counts"]["checked_archive_files"], summary["counts"]["pack_files_checksummed"])
+
+    def test_unpack_transfer_pack_validates_and_extracts_archive(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            transfer_path = temp_root / "ghidra-symbol-resolution-transfer.json"
+            transfer = {
+                "transfer_status": "ready",
+                "counts": {"selected_jobs": 1},
+                "required_repo_paths": ["scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py"],
+                "jobs": [{"request_id": "request-1", "suggested_command": "echo hi"}],
+                "candidate_ids": ["power.keep"],
+            }
+            transfer_path.write_text(json.dumps(transfer), encoding="utf-8")
+            pack_root = temp_root / "pack"
+            summary_path = temp_root / "pack-summary.json"
+            ghidra_symbol_transfer_pack.materialize_transfer_pack(
+                transfer,
+                transfer_path=transfer_path,
+                output_root=pack_root,
+                summary_path=summary_path,
+                markdown_path=temp_root / "pack-summary.md",
+                archive_path=temp_root / "pack.zip",
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+            summary = json.loads(summary_path.read_text(encoding="utf-8"))
+            shutil.rmtree(pack_root)
+
+            import_root = temp_root / "import"
+            payload = ghidra_symbol_transfer_pack_unpack.unpack_transfer_pack(
+                summary,
+                summary_path=summary_path,
+                output_root=import_root,
+                output_path=temp_root / "import.json",
+                markdown_path=temp_root / "import.md",
+                generated_utc="2026-04-13T00:00:00Z",
+            )
+
+            self.assertEqual(payload["import_status"], "ok")
+            self.assertEqual(payload["counts"]["extracted_files"], summary["counts"]["pack_files_checksummed"])
+            self.assertTrue((import_root / "CHECKSUMS.json").exists())
+            self.assertTrue((import_root / "commands" / summary["command_files"][0]).exists())
 
 
 class GhidraAutotriggerPipelineTests(unittest.TestCase):
