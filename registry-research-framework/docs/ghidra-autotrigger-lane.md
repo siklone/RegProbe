@@ -114,6 +114,14 @@ powershell -ExecutionPolicy Bypass -File scripts\vm\guest-tools\run-etw-registry
   -UploadBaseUrl http://10.0.2.2:8766
 ```
 
+From the KVM host, the wrapper stages that helper through the bridge and waits for the uploaded summary:
+
+```bash
+python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py \
+  --run-id wave4-registry-stackwalk \
+  --value-name TimerCheckFlags
+```
+
 Validate that the stackwalk plan still contains the registry stack flags, caller-stack handoff, and parser command:
 
 ```bash
