@@ -42,6 +42,10 @@
       "type": "array",
       "items": { "type": "string" }
     },
+    "stack_capture": {
+      "type": "object",
+      "additionalProperties": true
+    },
     "events": {
       "type": "array",
       "items": {

@@ -1324,6 +1324,7 @@ class EtlDiscoveryTests(unittest.TestCase):
       <Data Name="ValueName">AllowSystemRequiredPowerRequests</Data>
       <Data Name="ProcessName">svchost.exe</Data>
       <Data Name="Operation">QueryValueKey</Data>
+      <Data Name="Stack">nt!PopReadRegKeyValue; nt!PopPowerRequestInitialize</Data>
     </EventData>
   </Event>
 </Events>
@@ -1341,6 +1342,22 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(touches[0]["key_path"], "HKLM\\System\\CurrentControlSet\\Control\\Power")
         self.assertEqual(touches[0]["value_name"], "AllowSystemRequiredPowerRequests")
         self.assertEqual(touches[0]["operation"], "RegQueryValue")
+        self.assertEqual(touches[0]["caller_stack"], ["nt!PopReadRegKeyValue", "nt!PopPowerRequestInitialize"])
+
+    def test_normalized_registry_schema_allows_caller_stack(self) -> None:
+        event_schema = json.loads(
+            (REPO_ROOT / "registry-research-framework" / "schemas" / "normalized-registry-event.schema.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        bundle_schema = json.loads(
+            (REPO_ROOT / "registry-research-framework" / "schemas" / "normalized-registry-bundle.schema.json").read_text(
+                encoding="utf-8"
+            )
+        )
+
+        self.assertIn("caller_stack", event_schema["properties"])
+        self.assertIn("stack_capture", bundle_schema["properties"])
 
     def test_build_etl_corpus_inventory_marks_placeholder_reason(self) -> None:
         inventory = research_v36_lib.build_etl_corpus_inventory(

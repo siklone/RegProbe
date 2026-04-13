@@ -165,6 +165,37 @@ function Get-RawRegistryLineValueName {
     return $null
 }
 
+function Get-CallerStackFrames {
+    param([Parameter(Mandatory = $true)]$Row)
+
+    $stackFieldNames = @(
+        'Stack',
+        'CallStack',
+        'Call Stack',
+        'StackTrace',
+        'Stack Trace',
+        'UserStack',
+        'User Stack'
+    )
+    foreach ($fieldName in $stackFieldNames) {
+        $rawStack = Get-RowField -Row $Row -Names @($fieldName)
+        if ([string]::IsNullOrWhiteSpace($rawStack)) {
+            continue
+        }
+
+        $frames = @(
+            ($rawStack -split '(?:\r\n|\n|\r|;|\|)') |
+                ForEach-Object { ([string]$_).Trim() } |
+                Where-Object { -not [string]::IsNullOrWhiteSpace($_) -and $_ -notin @('Stack', 'Call Stack', 'Stack Trace') }
+        )
+        if ($frames.Count -gt 0) {
+            return $frames
+        }
+    }
+
+    return @()
+}
+
 function Test-RegistryFragmentMatch {
     param(
         [string]$Line,
@@ -284,7 +315,8 @@ function Write-NormalizedTracerptBundle {
             $pidValue = $parsedPid
         }
 
-        $events.Add([ordered]@{
+        $callerStack = @(Get-CallerStackFrames -Row $row)
+        $event = [ordered]@{
             run_id = $RunId
             source_tool = 'wpr'
             capture_phase = 'boot'
@@ -299,7 +331,11 @@ function Write-NormalizedTracerptBundle {
             data_text = $joined
             result = Get-RowField -Row $row -Names @('Result', 'Status')
             evidence_refs = @($CsvPath)
-        }) | Out-Null
+        }
+        if ($callerStack.Count -gt 0) {
+            $event.caller_stack = @($callerStack)
+        }
+        $events.Add($event) | Out-Null
     }
 
     if ($events.Count -eq 0 -and (Test-Path $CsvPath)) {
@@ -355,6 +391,7 @@ function Write-NormalizedTracerptBundle {
 
     $eventItems = @($events | ForEach-Object { $_ })
     $eventCount = $events.Count
+    $stackedEventCount = @($eventItems | Where-Object { @($_.caller_stack).Count -gt 0 }).Count
     $bundleEvidenceRefs = @($CsvPath, $BundlePath)
 
     $bundle = [ordered]@{
@@ -371,6 +408,11 @@ function Write-NormalizedTracerptBundle {
         event_count = $eventCount
         filtered_event_count = $eventCount
         evidence_refs = $bundleEvidenceRefs
+        stack_capture = [ordered]@{
+            parser_supported = $true
+            captured_event_count = $stackedEventCount
+            source_fields = @('Stack', 'CallStack', 'Call Stack', 'StackTrace', 'Stack Trace', 'UserStack', 'User Stack')
+        }
         events = $eventItems
     }
 

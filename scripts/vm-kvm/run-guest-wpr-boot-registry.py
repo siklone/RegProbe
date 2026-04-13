@@ -224,6 +224,11 @@ def synthesize_empty_normalized_bundle(
         "filtered_event_count": 0,
         "evidence_refs": [str(hits_csv_path), str(bundle_path)],
         "target": path_parts,
+        "stack_capture": {
+            "parser_supported": True,
+            "captured_event_count": 0,
+            "source_fields": ["Stack", "CallStack", "Call Stack", "StackTrace", "Stack Trace", "UserStack", "User Stack"],
+        },
         "events": [],
         "salvage_note": "QGA timeout salvage retained a header-only hits CSV; no target registry events were present.",
     }

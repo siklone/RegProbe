@@ -30,6 +30,10 @@
     "value_type": { "type": ["string", "null"] },
     "data_text": { "type": ["string", "null"] },
     "result": { "type": ["string", "null"] },
+    "caller_stack": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
     "evidence_refs": {
       "type": "array",
       "items": { "type": "string" }

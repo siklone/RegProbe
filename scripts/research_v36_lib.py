@@ -2871,6 +2871,39 @@ def _xml_text_or_attribute(element: ET.Element) -> str:
     return ""
 
 
+CALLER_STACK_EVENT_DATA_KEYS = {
+    "stack",
+    "callstack",
+    "call stack",
+    "stacktrace",
+    "stack trace",
+    "userstack",
+    "user stack",
+}
+
+
+def _split_caller_stack_frames(raw_stack: str | None) -> list[str]:
+    raw = str(raw_stack or "").strip()
+    if not raw:
+        return []
+
+    frames: list[str] = []
+    for frame in re.split(r"[\r\n;|]+", raw):
+        cleaned = frame.strip()
+        if cleaned and cleaned.lower() not in {"stack", "call stack", "stack trace"}:
+            frames.append(cleaned)
+    return frames
+
+
+def _caller_stack_from_event_data(event_data: dict[str, str]) -> list[str]:
+    for name, value in event_data.items():
+        if name.strip().lower() in CALLER_STACK_EVENT_DATA_KEYS:
+            frames = _split_caller_stack_frames(value)
+            if frames:
+                return frames
+    return []
+
+
 def _normalize_registry_relative_path(text: str | None) -> str | None:
     normalized = _normalize_registry_context_path(text)
     if not normalized:
@@ -3067,6 +3100,7 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
         base_name = event_data.get("BaseName")
         relative_name = event_data.get("RelativeName")
         value_name = event_data.get("ValueName") or None
+        caller_stack = _caller_stack_from_event_data(event_data)
         process_name = event_data.get("ProcessName") or event_data.get("Image") or (f"pid:{process_id}" if process_id else None)
 
         raw_excerpt = "; ".join(
@@ -3138,6 +3172,8 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
             "value_name": value_name,
             "raw_excerpt": raw_excerpt or text_blob[:400],
         }
+        if caller_stack:
+            touch["caller_stack"] = caller_stack
         dedupe_key = (
             str(touch.get("operation") or ""),
             str(touch.get("key_path") or ""),
@@ -3199,6 +3235,11 @@ def extract_registry_touches_from_sidecar_json(json_path: Path, provider_guid: s
             "value_name": value_name,
             "raw_excerpt": str(raw.get("raw_excerpt") or "")[:400],
         }
+        caller_stack = raw.get("caller_stack")
+        if isinstance(caller_stack, list):
+            frames = [str(frame).strip() for frame in caller_stack if str(frame).strip()]
+            if frames:
+                touch["caller_stack"] = frames
         dedupe_key = (
             str(touch.get("operation") or ""),
             str(touch.get("key_path") or ""),
