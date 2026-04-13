@@ -64,6 +64,8 @@ python3 registry-research-framework/scripts/check_ghidra_autotrigger_health.py
   Human-readable health snapshot.
 - `registry-research-framework/audit/ghidra-autotrigger-sync.json`
   One-shot sync result with status `ok`, `idle`, or `error`.
+- `registry-research-framework/audit/ghidra-autotrigger-sync.md`
+  Operator-facing sync snapshot with the current blocker and next action.
 
 ## Status Semantics
 

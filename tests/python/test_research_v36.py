@@ -2859,6 +2859,7 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             run_path = temp_root / "ghidra-dispatch-run.json"
             health_path = temp_root / "ghidra-autotrigger-health.json"
             output_path = temp_root / "ghidra-autotrigger-sync.json"
+            markdown_path = temp_root / "ghidra-autotrigger-sync.md"
 
             payload = ghidra_autotrigger_sync.sync_lane(
                 discover_input_roots=[evidence_root],
@@ -2871,11 +2872,14 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
                 batch_path=batch_path,
                 run_path=run_path,
                 health_path=health_path,
+                markdown_path=markdown_path,
                 output_path=output_path,
             )
 
             self.assertEqual(payload["sync_status"], "ok")
             self.assertEqual(payload["health_check"]["status"], "ok")
+            self.assertEqual(payload["operator"]["blocker"], "symbol-resolution-ready")
+            self.assertIn("Run the symbol-resolution batch", payload["operator"]["next_action"])
             symbol_queue_payload = json.loads(symbol_queue_path.read_text(encoding="utf-8"))
             self.assertEqual(symbol_queue_payload["request_count"], 1)
             symbol_batch_payload = json.loads(symbol_batch_path.read_text(encoding="utf-8"))
@@ -2883,6 +2887,7 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             symbol_run_payload = json.loads(symbol_run_path.read_text(encoding="utf-8"))
             self.assertEqual(symbol_run_payload["selected_job_count"], 1)
             self.assertTrue(output_path.exists())
+            self.assertTrue(markdown_path.exists())
 
     def test_sync_lane_returns_idle_when_no_discovered_inputs_exist(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -2893,17 +2898,21 @@ class GhidraAutotriggerSyncTests(unittest.TestCase):
             queue_path.write_text("", encoding="utf-8")
             bundle_manifest_path = temp_root / "ghidra-autotrigger-inputs.json"
             output_path = temp_root / "ghidra-autotrigger-sync.json"
+            markdown_path = temp_root / "ghidra-autotrigger-sync.md"
 
             payload = ghidra_autotrigger_sync.sync_lane(
                 discover_input_roots=[evidence_root],
                 queue_path=queue_path,
                 bundle_manifest_path=bundle_manifest_path,
+                markdown_path=markdown_path,
                 output_path=output_path,
             )
 
             self.assertEqual(payload["sync_status"], "idle")
             self.assertEqual(payload["bundle_manifest"]["selected_count"], 0)
             self.assertEqual(payload["bundle_manifest"]["diagnostics"]["scanned_bundle_count"], 0)
+            self.assertEqual(payload["operator"]["blocker"], "no-bundles-discovered")
+            self.assertTrue(markdown_path.exists())
             self.assertTrue(output_path.exists())
 
 
