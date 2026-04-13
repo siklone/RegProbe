@@ -1002,7 +1002,7 @@ class PromotionStateTests(unittest.TestCase):
                 "apply_allowed": False,
                 "confidence": "medium",
                 "restore_default_supported": True,
-                "blocking_issues": ["restore-story-unproven-subtree-presence-only"],
+                "blocking_issues": ["powerrequestoverride-restore-story-unproven-subtree-presence-only"],
             },
             "validation_proof": {
                 "source_url": "Docs/example.md",
@@ -1013,7 +1013,7 @@ class PromotionStateTests(unittest.TestCase):
         gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
 
         self.assertEqual(gate["next_missing_layer"], "restore-story")
-        self.assertIn("restore-story-unproven-subtree-presence-only", gate["promotion_blockers"])
+        self.assertIn("powerrequestoverride-restore-story-unproven-subtree-presence-only", gate["promotion_blockers"])
 
     def test_execution_required_megatrigger_no_hit_maps_to_runtime_trace_lane(self) -> None:
         record = {
