@@ -1538,5 +1538,47 @@ class CanonicalBundleProjectionTests(unittest.TestCase):
         self.assertEqual(payload["machine_user_scope"], "machine")
 
 
+class BlockerNamingRegressionTests(unittest.TestCase):
+    def test_blocked_records_do_not_reintroduce_deprecated_generic_blockers(self) -> None:
+        gates_path = REPO_ROOT / "research" / "promotion-gates.json"
+        gates = json.loads(gates_path.read_text(encoding="utf-8"))
+        entries = gates.get("entries") or gates.get("gates") or []
+        blocked = [
+            entry for entry in entries
+            if entry.get("promotion_state") == "blocked" or entry.get("state") == "blocked"
+        ]
+
+        deprecated = {
+            "documentation-first-review",
+            "no-primary-current-build-doc",
+            "runtime_no_read",
+            "wpr-boot-registry-no-hit-current-build",
+            "execution-required-init-walker-not-symbol-resolved",
+            "execution-required-megatrigger-etw-no-hit-current-build",
+            "execution-required-wpr-boot-no-hit-current-build",
+            "research-only-raw-policy-system-value",
+            "research-only-raw-power-manager-value",
+            "hibernate-trigger-not-available-on-current-vm",
+            "drips-trigger-not-available-on-current-vm",
+            "boot-unsafe-dedicated-boot-lane-required",
+            "boot-unsafe-on-isolated-pilot-profile",
+            "bounded-s1-registry-etw-no-hit-current-build",
+            "procmon-saveas-timeout-on-bounded-callout-lane",
+            "procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
+            "watchdog-timeouts-exact-runtime-read-unresolved",
+            "watchdog-timeouts-specific-caller-unresolved",
+            "powerrequestoverride-leaf-semantics-unresolved",
+            "force-bugcheck-for-dpc-watchdog-semantics-unproven",
+        }
+
+        found: dict[str, list[str]] = {}
+        for entry in blocked:
+            present = sorted(set(entry.get("promotion_blockers") or []) & deprecated)
+            if present:
+                found[str(entry.get("candidate_id"))] = present
+
+        self.assertEqual(found, {}, found)
+
+
 if __name__ == "__main__":
     unittest.main()
