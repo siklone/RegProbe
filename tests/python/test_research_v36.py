@@ -1051,37 +1051,41 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["next_missing_layer"], "restore-story")
         self.assertIn("powerrequestoverride-restore-story-unproven-subtree-presence-only", gate["promotion_blockers"])
 
-    def test_execution_required_megatrigger_no_hit_maps_to_runtime_trace_lane(self) -> None:
-        record = {
-            "record_id": "example.executionrequired-no-hit",
-            "tweak_id": "example.executionrequired-no-hit",
-            "record_status": "validated",
-            "setting": {
-                "area": "Example",
-                "targets": [
-                    {
-                        "path": "HKLM\\Software\\Example",
-                        "value_name": "Enabled",
-                        "value_type": "REG_DWORD",
-                    }
-                ],
-            },
-            "decision": {
-                "apply_allowed": False,
-                "confidence": "medium",
-                "restore_default_supported": True,
-                "blocking_issues": ["execution-required-megatrigger-etw-no-hit-current-build"],
-            },
-            "validation_proof": {
-                "source_url": "Docs/example.md",
-                "exact_quote_or_path": "Docs/example.md:1",
-            },
-        }
+    def test_specific_execution_required_runtime_no_hit_blockers_map_to_runtime_trace_lane(self) -> None:
+        for blocker in [
+            "audio-execution-required-megatrigger-etw-no-hit-current-build",
+            "system-execution-required-wpr-boot-no-hit-current-build",
+        ]:
+            record = {
+                "record_id": f"example.{blocker}",
+                "tweak_id": f"example.{blocker}",
+                "record_status": "validated",
+                "setting": {
+                    "area": "Example",
+                    "targets": [
+                        {
+                            "path": "HKLM\\Software\\Example",
+                            "value_name": "Enabled",
+                            "value_type": "REG_DWORD",
+                        }
+                    ],
+                },
+                "decision": {
+                    "apply_allowed": False,
+                    "confidence": "medium",
+                    "restore_default_supported": True,
+                    "blocking_issues": [blocker],
+                },
+                "validation_proof": {
+                    "source_url": "Docs/example.md",
+                    "exact_quote_or_path": "Docs/example.md:1",
+                },
+            }
 
-        gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
+            gate = research_v36_lib.evaluate_candidate_gate(record, {"next_missing_layer": "decision-gate"}, {})
 
-        self.assertEqual(gate["next_missing_layer"], "runtime-trace")
-        self.assertIn("execution-required-megatrigger-etw-no-hit-current-build", gate["promotion_blockers"])
+            self.assertEqual(gate["next_missing_layer"], "runtime-trace")
+            self.assertIn(blocker, gate["promotion_blockers"])
 
     def test_negative_evidence_functional_no_effect_blocks_candidate(self) -> None:
         record = {
