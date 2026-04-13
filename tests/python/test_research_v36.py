@@ -34,6 +34,7 @@ power_request_override_audit = load_module("audit_power_request_override_runtime
 ghidra_job_queue = load_module("generate_ghidra_job_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_job_queue.py")
 ghidra_dispatch_batch = load_module("generate_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_dispatch_batch.py")
 ghidra_dispatch_runner = load_module("run_ghidra_dispatch_batch", FRAMEWORK_SCRIPTS / "run_ghidra_dispatch_batch.py")
+ghidra_autotrigger = load_module("generate_ghidra_autotrigger_seeds", FRAMEWORK_SCRIPTS / "generate_ghidra_autotrigger_seeds.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -1912,6 +1913,68 @@ class GhidraDispatchRunnerTests(unittest.TestCase):
         self.assertEqual(plan["blocked_job_count"], 1)
         self.assertEqual(plan["jobs"][0]["candidate_id"], "power.keep")
         self.assertEqual(plan["jobs"][0]["command_argv"], ["pwsh", "-File", "tool.ps1"])
+
+
+class GhidraAutotriggerTests(unittest.TestCase):
+    def test_frame_resolution_kind_classifies_common_shapes(self) -> None:
+        self.assertEqual(ghidra_autotrigger.frame_resolution_kind("nt!PopReadRegKeyValue"), "resolved_symbol")
+        self.assertEqual(ghidra_autotrigger.frame_resolution_kind("ntoskrnl.exe+0x1F234"), "module_offset")
+        self.assertEqual(ghidra_autotrigger.frame_resolution_kind("0xfffff80512345678"), "raw_address")
+        self.assertEqual(ghidra_autotrigger.frame_resolution_kind("UNKNOWN"), "unknown_marker")
+
+    def test_autotrigger_seeds_match_queued_candidate_and_unresolved_frames(self) -> None:
+        bundle = {
+            "run_id": "wpr-boot-power-test",
+            "source_tool": "wpr",
+            "capture_phase": "boot",
+            "stack_capture": {
+                "source_fields": ["Stack", "CallStack"],
+            },
+            "events": [
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": [
+                        "ntoskrnl.exe+0x1F234",
+                        "nt!PopPowerRequestInitialize",
+                    ],
+                },
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": [
+                        "nt!PopReadRegKeyValue",
+                        "nt!PopPowerRequestInitialize",
+                    ],
+                },
+            ],
+        }
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+            }
+        ]
+
+        seeds = ghidra_autotrigger.autotrigger_seeds_from_bundle(
+            bundle,
+            bundle_path="evidence/files/example/normalized-registry-bundle.json",
+            queue_rows=queue_rows,
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(len(seeds), 1)
+        self.assertEqual(seeds[0]["candidate_id"], "power.control.allow-system-required-power-requests")
+        self.assertEqual(seeds[0]["target_binary"], "ntoskrnl.exe")
+        self.assertEqual(seeds[0]["unresolved_frames"], ["ntoskrnl.exe+0x1F234"])
+        self.assertEqual(seeds[0]["resolved_frames"], ["nt!PopPowerRequestInitialize"])
+        self.assertEqual(seeds[0]["suggested_patterns"], ["AllowSystemRequiredPowerRequests"])
+        self.assertEqual(seeds[0]["trigger"], "caller-stack-unresolved-frame")
 
 
 class PowerRequestOverrideAuditTests(unittest.TestCase):
