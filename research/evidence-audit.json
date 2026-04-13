@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T03:03:31.257126Z",
+  "generated_utc": "2026-04-13T03:05:46.020711Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -6407,7 +6407,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "hibernate-runtime-read-unresolved",
         "hibernate-trigger-not-available-on-current-vm"
       ],
       "record_promotion_allowed": false,
@@ -7027,7 +7026,6 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "drips-exit-runtime-read-unresolved",
         "drips-trigger-not-available-on-current-vm"
       ],
       "record_promotion_allowed": false,
@@ -22841,7 +22839,7 @@
     "hibernate-trigger-not-available-on-current-vm": 1,
     "no-current-build-string-or-symbol-hit": 1,
     "no-primary-current-build-doc": 11,
-    "no-runtime-proof": 15,
+    "no-runtime-proof": 13,
     "non-default-semantics-unproven": 5,
     "powerrequestoverride-leaf-semantics-unresolved": 1,
     "research-only-raw-policy-system-value": 1,
