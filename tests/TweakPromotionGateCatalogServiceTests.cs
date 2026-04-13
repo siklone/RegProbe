@@ -104,6 +104,18 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
                 "ghidra": 1,
                 "intentional-hold": 1
               },
+              "lane_focus": {
+                "ghidra": {
+                  "candidate_id": "power.test-gate",
+                  "suggested_command": "winopt research show-blocked power.test-gate --json",
+                  "next_action_hint": "Continue static RE."
+                },
+                "intentional-hold": {
+                  "candidate_id": "power.intentional-hold",
+                  "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+                  "next_action_hint": "Wait for a safer lane."
+                }
+              },
               "top_actionable_candidates": [
                 "power.test-gate"
               ],
@@ -225,6 +237,7 @@ public sealed class TweakPromotionGateCatalogServiceTests : IDisposable
         Assert.Single(actionable[0].RecentAuditArtifacts);
         Assert.Equal("winopt research show-blocked power.test-gate --json", actionable[0].SuggestedCommand);
         Assert.Single(service.BlockedWorklist.TopActionableCandidates);
+        Assert.True(service.BlockedWorklist.LaneFocus.ContainsKey("ghidra"));
         Assert.True(service.TryResolveBlockedWorklist("power.test-gate", out var entry));
         Assert.Equal(33, entry.PriorityScore);
         Assert.Single(entry.RecentAuditArtifacts);

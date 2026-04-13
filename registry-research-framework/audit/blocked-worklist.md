@@ -1,15 +1,15 @@
 # Blocked Worklist
 
-Generated: `2026-04-13T04:27:22.422035Z`
+Generated: `2026-04-13T04:34:26.856852Z`
 
 Blocked candidates: `18`
 
 ## Lane Summary
 
-- `ghidra`: 5 | `winopt research list-blocked --worklist --lane ghidra --top 5`
-- `intentional-hold`: 5 | `winopt research list-blocked --worklist --lane intentional-hold`
-- `restore-story`: 1 | `winopt research list-blocked --worklist --lane restore-story --top 5`
-- `runtime-trace`: 7 | `winopt research list-blocked --worklist --lane runtime-trace --top 5`
+- `ghidra`: 5 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5`
+- `intentional-hold`: 5 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold`
+- `restore-story`: 1 | first: `power.control.power-request-override-subtree` | `winopt research list-blocked --worklist --lane restore-story --top 5`
+- `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5`
 
 ## Top Actionable Candidates
 

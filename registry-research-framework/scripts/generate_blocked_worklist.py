@@ -80,6 +80,20 @@ def lane_suggested_command_for(lane: str) -> str:
     return f"winopt research list-blocked --worklist --lane {lane}"
 
 
+def lane_focus_for(items: list[dict[str, Any]]) -> dict[str, dict[str, str]]:
+    focus: dict[str, dict[str, str]] = {}
+    for item in items:
+        lane = str(item.get("next_missing_layer") or "unknown")
+        if lane in focus:
+            continue
+        focus[lane] = {
+            "candidate_id": str(item.get("candidate_id") or ""),
+            "suggested_command": str(item.get("suggested_command") or ""),
+            "next_action_hint": str(item.get("next_action_hint") or ""),
+        }
+    return focus
+
+
 def candidate_slug_tokens(candidate_id: str) -> list[str]:
     parts = [segment for segment in candidate_id.lower().split(".") if segment]
     tokens: list[str] = []
@@ -222,6 +236,7 @@ def build_worklist() -> dict[str, Any]:
             lane: lane_suggested_command_for(lane)
             for lane in sorted(lane_counts)
         },
+        "lane_focus": lane_focus_for(items),
         "top_actionable_candidates": top_actionable_candidates,
         "items": items,
     }
@@ -240,7 +255,11 @@ def render_markdown(payload: dict[str, Any]) -> str:
     ]
     for lane, count in (payload.get("lane_counts") or {}).items():
         lane_command = (payload.get("lane_suggested_commands") or {}).get(lane)
-        if lane_command:
+        lane_focus = (payload.get("lane_focus") or {}).get(lane) or {}
+        lane_target = str(lane_focus.get("candidate_id") or "")
+        if lane_command and lane_target:
+            lines.append(f"- `{lane}`: {count} | first: `{lane_target}` | `{lane_command}`")
+        elif lane_command:
             lines.append(f"- `{lane}`: {count} | `{lane_command}`")
         else:
             lines.append(f"- `{lane}`: {count}")

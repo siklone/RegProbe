@@ -391,6 +391,7 @@ class Program
                         catalog.BlockedWorklist.GeneratedAt,
                         catalog.BlockedWorklist.BlockedCount,
                         LaneCounts = catalog.BlockedWorklist.LaneCounts,
+                        LaneFocus = catalog.BlockedWorklist.LaneFocus,
                         TopActionableCandidates = catalog.BlockedWorklist.TopActionableCandidates,
                     };
 
@@ -403,7 +404,19 @@ class Program
                         Console.WriteLine($"Blocked candidates: {catalog.BlockedWorklist.BlockedCount}");
                         foreach (var pair in catalog.BlockedWorklist.LaneCounts.OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase))
                         {
-                            Console.WriteLine($"{pair.Key}: {pair.Value}");
+                            if (catalog.BlockedWorklist.LaneFocus.TryGetValue(pair.Key, out var laneFocus)
+                                && !string.IsNullOrWhiteSpace(laneFocus.CandidateId))
+                            {
+                                Console.WriteLine($"{pair.Key}: {pair.Value} -> {laneFocus.CandidateId}");
+                                if (!string.IsNullOrWhiteSpace(laneFocus.SuggestedCommand))
+                                {
+                                    Console.WriteLine($"  command: {laneFocus.SuggestedCommand}");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{pair.Key}: {pair.Value}");
+                            }
                         }
                         if (catalog.BlockedWorklist.TopActionableCandidates.Count > 0)
                         {

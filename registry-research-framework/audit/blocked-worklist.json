@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-13T04:27:22.422035Z",
+  "generated_at": "2026-04-13T04:34:26.856852Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 5,
@@ -12,6 +12,28 @@
     "intentional-hold": "winopt research list-blocked --worklist --lane intentional-hold",
     "restore-story": "winopt research list-blocked --worklist --lane restore-story --top 5",
     "runtime-trace": "winopt research list-blocked --worklist --lane runtime-trace --top 5"
+  },
+  "lane_focus": {
+    "restore-story": {
+      "candidate_id": "power.control.power-request-override-subtree",
+      "suggested_command": "winopt research show-blocked power.control.power-request-override-subtree --json",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
+    },
+    "ghidra": {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "suggested_command": "winopt research show-blocked power.control.allow-system-required-power-requests --json",
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+    },
+    "runtime-trace": {
+      "candidate_id": "system.kernel.global-timer-resolution-requests",
+      "suggested_command": "winopt research show-blocked system.kernel.global-timer-resolution-requests --json",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+    },
+    "intentional-hold": {
+      "candidate_id": "policy.system.enable-virtualization",
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
+    }
   },
   "top_actionable_candidates": [
     "power.control.power-request-override-subtree",

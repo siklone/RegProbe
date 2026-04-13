@@ -22,8 +22,16 @@ public sealed class BlockedWorklistCatalog
     public string GeneratedAt { get; set; } = string.Empty;
     public int BlockedCount { get; set; }
     public Dictionary<string, int> LaneCounts { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+    public Dictionary<string, BlockedLaneFocus> LaneFocus { get; set; } = new(StringComparer.OrdinalIgnoreCase);
     public List<string> TopActionableCandidates { get; set; } = new();
     public List<BlockedWorklistEntry> Items { get; set; } = new();
+}
+
+public sealed class BlockedLaneFocus
+{
+    public string CandidateId { get; set; } = string.Empty;
+    public string SuggestedCommand { get; set; } = string.Empty;
+    public string NextActionHint { get; set; } = string.Empty;
 }
 
 public sealed class BlockedWorklistEntry

@@ -1588,6 +1588,7 @@ class BlockedWorklistTests(unittest.TestCase):
         self.assertGreaterEqual(int(payload.get("blocked_count") or 0), 1)
         self.assertIsInstance(payload.get("top_actionable_candidates"), list)
         self.assertIsInstance(payload.get("lane_suggested_commands"), dict)
+        self.assertIsInstance(payload.get("lane_focus"), dict)
         self.assertLessEqual(len(payload.get("top_actionable_candidates") or []), 5)
         self.assertEqual(
             sum(int(value) for value in (payload.get("lane_counts") or {}).values()),
@@ -1677,6 +1678,25 @@ class BlockedWorklistTests(unittest.TestCase):
             blocked_worklist_lib.lane_suggested_command_for("intentional-hold"),
             "winopt research list-blocked --worklist --lane intentional-hold",
         )
+
+    def test_lane_focus_prefers_highest_priority_entry_per_lane(self) -> None:
+        focus = blocked_worklist_lib.lane_focus_for([
+            {
+                "candidate_id": "power.top",
+                "next_missing_layer": "ghidra",
+                "suggested_command": "cmd top",
+                "next_action_hint": "hint top",
+            },
+            {
+                "candidate_id": "power.second",
+                "next_missing_layer": "ghidra",
+                "suggested_command": "cmd second",
+                "next_action_hint": "hint second",
+            },
+        ])
+
+        self.assertEqual(focus["ghidra"]["candidate_id"], "power.top")
+        self.assertEqual(focus["ghidra"]["suggested_command"], "cmd top")
 
 
 if __name__ == "__main__":
