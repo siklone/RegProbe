@@ -6,6 +6,7 @@ import json
 import subprocess
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 from guest_bridge import ensure_guest_bridge
@@ -184,6 +185,57 @@ def inspect_hits_csv(path: Path, value_name: str) -> dict[str, object]:
     }
 
 
+def split_registry_path(registry_path: str, value_name: str) -> dict[str, object]:
+    normalized = registry_path.replace("/", "\\").replace("HKLM:\\", "HKLM\\").replace("HKCU:\\", "HKCU\\")
+    for hive in ("HKLM", "HKCU", "HKCR", "HKU", "HKCC"):
+        prefix = hive + "\\"
+        if normalized.lower().startswith(prefix.lower()):
+            return {
+                "hive": hive,
+                "key_path": normalized[len(prefix) :],
+                "value_name": value_name,
+            }
+    return {
+        "hive": None,
+        "key_path": normalized or None,
+        "value_name": value_name,
+    }
+
+
+def synthesize_empty_normalized_bundle(
+    *,
+    hits_csv_path: Path,
+    bundle_path: Path,
+    args: argparse.Namespace,
+) -> dict[str, object]:
+    path_parts = split_registry_path(args.registry_path, args.value_name)
+    bundle = {
+        "$schema": "registry-research-framework/schemas/normalized-registry-bundle.schema.json",
+        "run_id": args.output_name,
+        "source_tool": "wpr",
+        "capture_phase": "boot",
+        "generated_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "normalizer_name": "HostTimeoutSalvageNormalizer",
+        "input_path": str(hits_csv_path),
+        "status": "ok",
+        "error_kind": None,
+        "errors": [],
+        "event_count": 0,
+        "filtered_event_count": 0,
+        "evidence_refs": [str(hits_csv_path), str(bundle_path)],
+        "target": path_parts,
+        "events": [],
+        "salvage_note": "QGA timeout salvage retained a header-only hits CSV; no target registry events were present.",
+    }
+    bundle_path.write_text(json.dumps(bundle, indent=2) + "\n", encoding="utf-8")
+    return {
+        "created": True,
+        "path": str(bundle_path),
+        "event_count": 0,
+        "normalizer_name": bundle["normalizer_name"],
+    }
+
+
 def salvage_timeout_artifacts(
     *,
     repo_root: Path,
@@ -211,12 +263,30 @@ def salvage_timeout_artifacts(
         downloads[name] = try_qga_download(repo_root=repo_root, args=args, guest_path=guest_path, host_path=host_path)
 
     hits_csv_path = salvage_targets["guest_hits_csv"][1]
+    normalized_path = salvage_targets["guest_normalized"][1]
+    hits_csv = inspect_hits_csv(hits_csv_path, args.value_name)
+    normalized_salvage: dict[str, object] = {
+        "created": False,
+        "reason": "not-needed",
+    }
+    if (
+        hits_csv.get("exists")
+        and int(hits_csv.get("hit_line_count") or 0) == 0
+        and (not normalized_path.exists() or normalized_path.stat().st_size == 0)
+    ):
+        normalized_salvage = synthesize_empty_normalized_bundle(
+            hits_csv_path=hits_csv_path,
+            bundle_path=normalized_path,
+            args=args,
+        )
+
     return {
         "enabled": True,
         "attempted": True,
         "guest_output_root": guest_output_root,
         "downloads": downloads,
-        "hits_csv": inspect_hits_csv(hits_csv_path, args.value_name),
+        "hits_csv": hits_csv,
+        "normalized_salvage": normalized_salvage,
     }
 
 

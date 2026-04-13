@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-12T22:05:37.327055Z",
+  "generated_utc": "2026-04-13T00:28:28.365652Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -18904,7 +18904,7 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
@@ -18913,6 +18913,7 @@
       "layers_used": [
         "runtime_procmon",
         "static_ghidra",
+        "behavior_wpr",
         "runtime_reboot",
         "official_doc"
       ],
@@ -18920,6 +18921,7 @@
         "official-doc",
         "procmon",
         "ghidra",
+        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -18952,7 +18954,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -18960,7 +18962,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.89,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -18975,7 +18977,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-12T04:05:00Z"
+        "last_verified_at": "2026-04-12T22:08:39Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
