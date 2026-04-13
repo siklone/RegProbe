@@ -28,6 +28,7 @@ research_v36_lib = load_module("research_v36_lib", SCRIPTS_ROOT / "research_v36_
 evidence_class_lib = load_module("evidence_class_lib", SCRIPTS_ROOT / "evidence_class_lib.py")
 validate_contracts = load_module("validate_research_contracts", FRAMEWORK_SCRIPTS / "validate_research_contracts.py")
 metrics_publish_v36_lib = load_module("metrics_publish_v36_lib", SCRIPTS_ROOT / "metrics_publish_v36_lib.py")
+blocked_worklist_lib = load_module("generate_blocked_worklist", FRAMEWORK_SCRIPTS / "generate_blocked_worklist.py")
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -1578,6 +1579,31 @@ class BlockerNamingRegressionTests(unittest.TestCase):
                 found[str(entry.get("candidate_id"))] = present
 
         self.assertEqual(found, {}, found)
+
+
+class BlockedWorklistTests(unittest.TestCase):
+    def test_blocked_worklist_payload_is_structurally_sound(self) -> None:
+        payload = blocked_worklist_lib.build_worklist()
+
+        self.assertGreaterEqual(int(payload.get("blocked_count") or 0), 1)
+        self.assertEqual(
+            sum(int(value) for value in (payload.get("lane_counts") or {}).values()),
+            int(payload.get("blocked_count") or 0),
+        )
+
+        for item in payload.get("items") or []:
+            self.assertTrue(item.get("candidate_id"))
+            self.assertTrue(item.get("next_missing_layer"))
+            self.assertTrue(item.get("next_action_hint"))
+            self.assertIsInstance(item.get("promotion_blockers"), list)
+
+    def test_blocker_hint_prefers_restore_story_guidance(self) -> None:
+        hint = blocked_worklist_lib.blocker_hint(
+            ["powerrequestoverride-restore-story-unproven-subtree-presence-only"],
+            "restore-story",
+        )
+
+        self.assertIn("restore", hint.lower())
 
 
 if __name__ == "__main__":
