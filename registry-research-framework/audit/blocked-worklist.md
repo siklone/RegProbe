@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-13T05:54:34.264788Z`
+Generated: `2026-04-13T05:56:57.297961Z`
 
 Blocked candidates: `18`
 
@@ -12,7 +12,7 @@ Blocked candidates: `18`
 ## Lane Summary
 
 - `restore-story`: 1 | first: `power.control.power-request-override-subtree` | `winopt research list-blocked --worklist --lane restore-story --top 5` | Prove restore or rollback behavior for the exact subtree or value.
-- `ghidra`: 5 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static RE or Ghidra work until the exact reader or initializer is named.
+- `ghidra`: 5 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
 - `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
 - `intentional-hold`: 5 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
@@ -55,10 +55,10 @@ Blocked candidates: `18`
 - Feature area: `Control Power Requests`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `AllowSystemRequiredPowerRequests`
-- Blockers: `system-execution-required-init-walker-not-symbol-resolved`, `system-execution-required-wpr-boot-no-hit-current-build`
+- Blockers: `system-execution-required-no-current-build-registry-seeding-path`, `system-execution-required-wpr-boot-no-hit-current-build`
 - Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
 - Suggested command: `winopt research show-blocked power.control.allow-system-required-power-requests --json`
-- Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
+- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `power.session-watchdog-timeouts`
 
@@ -81,10 +81,10 @@ Blocked candidates: `18`
 - Feature area: `Control Power Requests`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `AllowAudioToEnableExecutionRequiredPowerRequests`
-- Blockers: `audio-execution-required-init-walker-not-symbol-resolved`, `audio-execution-required-megatrigger-etw-no-hit-current-build`, `audio-execution-required-no-primary-current-build-doc`
+- Blockers: `audio-execution-required-megatrigger-etw-no-hit-current-build`, `audio-execution-required-no-current-build-registry-seeding-path`, `audio-execution-required-no-primary-current-build-doc`
 - Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
 - Suggested command: `winopt research show-blocked power.control.allow-audio-to-enable-execution-required-power-requests --json`
-- Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
+- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `power.control.power-watchdog-timeout-cluster`
 

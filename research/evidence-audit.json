@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T05:54:24.773790Z",
+  "generated_utc": "2026-04-13T05:56:56.676789Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -6036,8 +6036,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "audio-execution-required-init-walker-not-symbol-resolved",
         "audio-execution-required-megatrigger-etw-no-hit-current-build",
+        "audio-execution-required-no-current-build-registry-seeding-path",
         "audio-execution-required-no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
@@ -6132,7 +6132,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "system-execution-required-init-walker-not-symbol-resolved",
+        "system-execution-required-no-current-build-registry-seeding-path",
         "system-execution-required-wpr-boot-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
@@ -22830,7 +22830,7 @@
     }
   ],
   "blocker_breakdown": {
-    "audio-execution-required-init-walker-not-symbol-resolved": 1,
+    "audio-execution-required-no-current-build-registry-seeding-path": 1,
     "conflicting-sources": 2,
     "dpc-watchdog-profile-conditional-initialization-unproven": 1,
     "enable-virtualization-research-only-raw-policy-system-value": 1,
@@ -22844,7 +22844,7 @@
     "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
     "powerrequestoverride-subtree-leaf-semantics-unresolved": 1,
     "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit": 1,
-    "system-execution-required-init-walker-not-symbol-resolved": 1,
+    "system-execution-required-no-current-build-registry-seeding-path": 1,
     "timer-check-flags-modern-bit-semantics-unproven": 1,
     "timer-rebase-threshold-drips-trigger-not-available-on-current-vm": 1,
     "ttmenabled-boot-unsafe-dedicated-boot-lane-required": 1,

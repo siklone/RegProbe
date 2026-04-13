@@ -844,10 +844,10 @@ class PromotionStateTests(unittest.TestCase):
         self.assertEqual(gate["next_missing_layer"], "ghidra")
         self.assertIn("execution-required-init-walker-not-symbol-resolved", gate["promotion_blockers"])
 
-    def test_specific_execution_required_init_walker_blockers_stay_ghidra(self) -> None:
+    def test_specific_execution_required_seeding_path_blockers_stay_ghidra(self) -> None:
         for blocker in [
-            "audio-execution-required-init-walker-not-symbol-resolved",
-            "system-execution-required-init-walker-not-symbol-resolved",
+            "audio-execution-required-no-current-build-registry-seeding-path",
+            "system-execution-required-no-current-build-registry-seeding-path",
         ]:
             record = {
                 "record_id": f"example.{blocker}",
@@ -1572,6 +1572,8 @@ class BlockerNamingRegressionTests(unittest.TestCase):
             "watchdog-timeouts-specific-caller-unresolved",
             "powerrequestoverride-leaf-semantics-unresolved",
             "force-bugcheck-for-dpc-watchdog-semantics-unproven",
+            "audio-execution-required-init-walker-not-symbol-resolved",
+            "system-execution-required-init-walker-not-symbol-resolved",
         }
 
         found: dict[str, list[str]] = {}

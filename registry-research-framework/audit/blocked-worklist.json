@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-13T05:54:34.264788Z",
+  "generated_at": "2026-04-13T05:56:57.297961Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 5,
@@ -32,7 +32,7 @@
     "ghidra": {
       "candidate_id": "power.control.allow-system-required-power-requests",
       "suggested_command": "winopt research show-blocked power.control.allow-system-required-power-requests --json",
-      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     "runtime-trace": {
       "candidate_id": "system.kernel.global-timer-resolution-requests",
@@ -89,7 +89,7 @@
       "priority_score": 33,
       "blocker_count": 2,
       "promotion_blockers": [
-        "system-execution-required-init-walker-not-symbol-resolved",
+        "system-execution-required-no-current-build-registry-seeding-path",
         "system-execution-required-wpr-boot-no-hit-current-build"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
@@ -100,7 +100,7 @@
         "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json"
       ],
       "suggested_command": "winopt research show-blocked power.control.allow-system-required-power-requests --json",
-      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
       "candidate_id": "power.session-watchdog-timeouts",
@@ -131,8 +131,8 @@
       "priority_score": 32,
       "blocker_count": 3,
       "promotion_blockers": [
-        "audio-execution-required-init-walker-not-symbol-resolved",
         "audio-execution-required-megatrigger-etw-no-hit-current-build",
+        "audio-execution-required-no-current-build-registry-seeding-path",
         "audio-execution-required-no-primary-current-build-doc"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
@@ -143,7 +143,7 @@
         "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json"
       ],
       "suggested_command": "winopt research show-blocked power.control.allow-audio-to-enable-execution-required-power-requests --json",
-      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
       "candidate_id": "power.control.power-watchdog-timeout-cluster",

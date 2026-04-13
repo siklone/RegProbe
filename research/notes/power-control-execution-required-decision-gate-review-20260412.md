@@ -15,7 +15,7 @@ Keep both candidates research-only.
 The active blockers are:
 
 - `no-current-build-registry-seeding-path`
-- `runtime_no_read`
+- exact-runtime-read-no-hit (`system-execution-required-wpr-boot-no-hit-current-build` / `audio-execution-required-megatrigger-etw-no-hit-current-build`)
 
 For the audio-specific value, keep the additional `no-primary-current-build-doc` blocker because Microsoft documentation covers the adjacent generic execution-required and audio-active behavior, but not the exact internal `AllowAudioToEnableExecutionRequiredPowerRequests` value.
 
