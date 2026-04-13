@@ -279,6 +279,7 @@ def build_publish_metrics(
     audit_payload: dict[str, Any],
     validation_summary: dict[str, Any],
     gate_metrics: dict[str, Any],
+    blocked_worklist: dict[str, Any] | None = None,
     generated_at: str | None = None,
 ) -> dict[str, Any]:
     generated_at = generated_at or utc_now_iso()
@@ -287,6 +288,12 @@ def build_publish_metrics(
     rollback_unverified = rollback_unverified_records(entries)
     bench_pending = bench_pending_records(entries)
     health = determine_gate_health(gate_metrics, validation_summary, len(bench_pending))
+    blocked_worklist = blocked_worklist or {}
+    top_actionable = [
+        str(item.get("candidate_id") or "")
+        for item in (blocked_worklist.get("items") or [])
+        if str(item.get("actionability") or "") == "active"
+    ][:5]
 
     return {
         "promoted_candidate_count": int((gate_payload.get("summary") or {}).get("promotion_state_counts", {}).get("promoted") or 0),
@@ -296,6 +303,8 @@ def build_publish_metrics(
         "rollback_verification_health": f"{len(entries) - len(rollback_unverified)} verified-or-known, {len(rollback_unverified)} pending/failing",
         "bench_safety_summary": f"{len(bench_pending)} bench-pending, {int(gate_metrics.get('bench_not_run_count') or 0)} blocker-counted",
         "verification_health_summary": f"gate={health}, schema_complete_ratio={gate_metrics.get('schema_complete_ratio')}, missing_docs={int(validation_summary.get('missing_docs_count') or 0)}",
+        "blocked_lane_counts": dict(blocked_worklist.get("lane_counts") or {}),
+        "top_actionable_blocked_candidates": top_actionable,
         "generated_at": generated_at,
     }
 

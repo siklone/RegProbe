@@ -60,6 +60,7 @@ def main() -> int:
     gate_metrics = build_gate_metrics(gate_payload, audit_payload, validation_summary, generated_at=generated_at)
     if int(url_report.get("dead_link_count") or 0) > int(gate_metrics.get("dead_link_count") or 0):
         gate_metrics["dead_link_count"] = int(url_report.get("dead_link_count") or 0)
+    blocked_worklist = write_blocked_worklist_outputs()
     operational_metrics = build_operational_metrics(
         queue_payload,
         gate_payload,
@@ -73,15 +74,17 @@ def main() -> int:
         audit_payload,
         validation_summary,
         gate_metrics,
+        blocked_worklist=blocked_worklist,
         generated_at=generated_at,
     )
     final_audit = build_final_audit_payload(audit_payload, gate_metrics, validation_summary)
 
     write_json(OPERATIONAL_METRICS_PATH, operational_metrics)
     write_json(GATE_METRICS_PATH, gate_metrics)
+    publish_metrics["blocked_worklist_json"] = str(BLOCKED_WORKLIST_JSON_PATH.relative_to(REPO_ROOT)).replace("\\", "/")
+    publish_metrics["blocked_worklist_markdown"] = str(BLOCKED_WORKLIST_MARKDOWN_PATH.relative_to(REPO_ROOT)).replace("\\", "/")
     write_json(PUBLISH_METRICS_PATH, publish_metrics)
     write_json(AUDIT_PATH, final_audit)
-    blocked_worklist = write_blocked_worklist_outputs()
 
     readme_block = research_health_markdown(
         publish_metrics,

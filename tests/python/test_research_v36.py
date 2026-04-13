@@ -1611,6 +1611,26 @@ class BlockedWorklistTests(unittest.TestCase):
         self.assertEqual(blocked_worklist_lib.actionability_for_lane("ghidra"), "active")
         self.assertEqual(blocked_worklist_lib.actionability_for_lane("intentional-hold"), "hold")
 
+    def test_publish_metrics_include_blocked_worklist_summary(self) -> None:
+        payload = metrics_publish_v36_lib.build_publish_metrics(
+            gate_payload={"summary": {"promotion_state_counts": {"promoted": 250, "blocked": 18}}},
+            audit_payload={"entries": []},
+            validation_summary={"missing_docs_count": 0},
+            gate_metrics={"schema_complete_ratio": 1.0, "bench_not_run_count": 0},
+            blocked_worklist={
+                "lane_counts": {"ghidra": 5, "runtime-trace": 7},
+                "items": [
+                    {"candidate_id": "a", "actionability": "active"},
+                    {"candidate_id": "b", "actionability": "hold"},
+                    {"candidate_id": "c", "actionability": "active"},
+                ],
+            },
+            generated_at="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(payload["blocked_lane_counts"], {"ghidra": 5, "runtime-trace": 7})
+        self.assertEqual(payload["top_actionable_blocked_candidates"], ["a", "c"])
+
 
 if __name__ == "__main__":
     unittest.main()

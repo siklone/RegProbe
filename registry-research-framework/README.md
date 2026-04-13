@@ -27,3 +27,5 @@ Canonical imported artifacts live under `evidence/files/`. The published researc
 | Missing Docs | 0 |
 | Blocked Worklist | `audit/blocked-worklist.md` |
 <!-- END:RESEARCH_HEALTH -->
+
+If you want the blocked queue in a hurry, start with `audit/blocked-worklist.md`. For terminal use, `winopt research list-blocked --worklist --top 5` shows the highest-priority active items, and `winopt research list-blocked --summary` prints the current lane split without dumping the whole list.
