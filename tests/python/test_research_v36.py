@@ -43,6 +43,10 @@ ghidra_autotrigger_smoke_check = load_module("check_ghidra_autotrigger_smoke", F
 research_quality_gate = load_module("run_research_quality_gate", FRAMEWORK_SCRIPTS / "run_research_quality_gate.py")
 etw_stackwalk_plan = load_module("generate_etw_stackwalk_capture_plan", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_capture_plan.py")
 etw_stackwalk_check = load_module("check_etw_stackwalk_capture_plan", FRAMEWORK_SCRIPTS / "check_etw_stackwalk_capture_plan.py")
+etw_stackwalk_dispatch_batch = load_module(
+    "generate_etw_stackwalk_dispatch_batch",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_dispatch_batch.py",
+)
 etw_stackwalk_bundle = load_module("generate_etw_stackwalk_bundle", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_bundle.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
@@ -1807,6 +1811,175 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("no ETW stackwalk profile mapping", result.stderr)
+
+    def test_etw_stackwalk_dispatch_batch_builds_mapped_candidate_commands(self) -> None:
+        profile_config = {
+            "default_profile": "kernel-registry-stackwalk-v1",
+            "profiles": [
+                {
+                    "profile_id": "execution-required-system-stackwalk-v1",
+                    "description": "Focused system profile.",
+                    "tool": "xperf",
+                    "capture_phase": "runtime",
+                    "kernel_flags": ["PROC_THREAD", "REGISTRY"],
+                    "stackwalk_events": ["RegQueryValue", "RegSetValue"],
+                    "default_output_root": r"C:\RegProbe-Diag\etw-stackwalk",
+                    "default_duration_seconds": 45,
+                    "default_run_id": "wave4-system",
+                    "target_defaults": {
+                        "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                        "value_name": "AllowSystemRequiredPowerRequests",
+                    },
+                    "buffer": {
+                        "size_kb": 512,
+                        "min_buffers": 32,
+                        "max_buffers": 128,
+                    },
+                    "stack_capture": {
+                        "expected": True,
+                        "source_fields": ["Stack"],
+                    },
+                    "postprocess": {
+                        "normalized_bundle_field": "caller_stack",
+                    },
+                }
+            ],
+        }
+        runner_config = {
+            "runtime": {
+                "power.control.allow-system-required-power-requests": {
+                    "script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+                    "etw_stackwalk_profile_id": "execution-required-system-stackwalk-v1",
+                    "required_capabilities": ["registry_read", "etw_capture"],
+                    "supported_backend_types": ["vm"],
+                    "args": ["-CandidateIds", "power.control.allow-system-required-power-requests"],
+                }
+            }
+        }
+        queue_payload = {
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "state": "blocked",
+                    "feature_area": "Control Power Requests",
+                    "key_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                }
+            ]
+        }
+        gates_payload = {
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "promotion_state": "blocked",
+                    "next_missing_layer": "runtime-trace",
+                    "promotion_blockers": ["needs-focused-etw"],
+                }
+            ]
+        }
+
+        payload = etw_stackwalk_dispatch_batch.build_dispatch_batch(
+            profile_config=profile_config,
+            runner_config=runner_config,
+            queue_payload=queue_payload,
+            gates_payload=gates_payload,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["batch_status"], "ready")
+        self.assertEqual(payload["mapped_candidate_count"], 1)
+        self.assertEqual(payload["dispatch_recommended_count"], 1)
+        self.assertEqual(payload["profiles_used"], ["execution-required-system-stackwalk-v1"])
+        item = payload["items"][0]
+        self.assertEqual(item["candidate_id"], "power.control.allow-system-required-power-requests")
+        self.assertEqual(item["actionability"], "active")
+        self.assertTrue(item["capture_ready"])
+        self.assertTrue(item["dispatch_recommended"])
+        self.assertIn("--candidate-id power.control.allow-system-required-power-requests", item["dispatch_command"])
+        self.assertEqual(item["capture_plan"]["run"]["run_id"], "wave4-system")
+
+    def test_etw_stackwalk_dispatch_batch_marks_intentional_hold_candidates(self) -> None:
+        profile_config = {
+            "default_profile": "kernel-registry-stackwalk-v1",
+            "profiles": [
+                {
+                    "profile_id": "execution-required-audio-stackwalk-v1",
+                    "description": "Focused audio profile.",
+                    "tool": "xperf",
+                    "capture_phase": "runtime",
+                    "kernel_flags": ["PROC_THREAD", "REGISTRY"],
+                    "stackwalk_events": ["RegQueryValue", "RegSetValue"],
+                    "default_output_root": r"C:\RegProbe-Diag\etw-stackwalk",
+                    "default_duration_seconds": 60,
+                    "default_run_id": "wave4-audio",
+                    "target_defaults": {
+                        "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                        "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+                    },
+                    "buffer": {
+                        "size_kb": 512,
+                        "min_buffers": 32,
+                        "max_buffers": 128,
+                    },
+                    "stack_capture": {
+                        "expected": True,
+                        "source_fields": ["Stack"],
+                    },
+                    "postprocess": {
+                        "normalized_bundle_field": "caller_stack",
+                    },
+                }
+            ],
+        }
+        runner_config = {
+            "runtime": {
+                "power.control.allow-audio-to-enable-execution-required-power-requests": {
+                    "script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+                    "etw_stackwalk_profile_id": "execution-required-audio-stackwalk-v1",
+                }
+            }
+        }
+        queue_payload = {
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "state": "blocked",
+                    "feature_area": "Control Power Requests",
+                    "key_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                    "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+                }
+            ]
+        }
+        gates_payload = {
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "promotion_state": "blocked",
+                    "next_missing_layer": "intentional-hold",
+                    "promotion_blockers": [
+                        "audio-execution-required-no-current-build-registry-seeding-path",
+                        "intentional-hold",
+                    ],
+                }
+            ]
+        }
+
+        payload = etw_stackwalk_dispatch_batch.build_dispatch_batch(
+            profile_config=profile_config,
+            runner_config=runner_config,
+            queue_payload=queue_payload,
+            gates_payload=gates_payload,
+            candidate_ids={"power.control.allow-audio-to-enable-execution-required-power-requests"},
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["mapped_candidate_count"], 1)
+        self.assertEqual(payload["dispatch_recommended_count"], 0)
+        self.assertEqual(payload["hold_candidate_count"], 1)
+        item = payload["items"][0]
+        self.assertEqual(item["actionability"], "hold")
+        self.assertFalse(item["dispatch_recommended"])
+        self.assertIn("Reopen only when a boot/init reader or registry seeding caller pivot becomes available.", item["next_action_hint"])
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {
