@@ -2,10 +2,10 @@
 
 ## Decision
 
-Keep `system.kernel-dpc-watchdog-control-cluster` blocked.
+Keep `system.kernel-dpc-watchdog-control-cluster` as an intentional hold.
 
-The current package still has three material gaps: live zero-state readings conflict with the retained repo defaults, no primary current-build documentation source exists outside the repo, and the last structural explanation above `KeUpdateDpcWatchdogConfiguration` is still unresolved. What remains is no longer a generic runtime-read story; it is the persisted seeding caller or exact inner query arm that would reconcile the all-zero live state with the retained `Session Manager\\Kernel` rows.
+The current package still has the same structural contradictions, but the runtime lane has now converged. A fresh QGA-launched WPR boot-registry replay on 2026-04-14 produced a retained `1.76 GB` ETL and a retained `5.23 GB` CSV for the exact current-build boot lane, and a dedicated guest-side exact-value filter still returned zero hits for `DPCTimeout`, `DpcSoftTimeout`, and `DpcCumulativeSoftTimeout`.
 
-This stays active blocked work, not an intentional hold, because the family still has a concrete current-build writer/query path and a plausible debugger/decompiler pivot for the last missing explanation. The active blockers are now the live-state conflict, the missing non-repo documentation source, and the unresolved persisted seeding caller / exact query arm.
+That changes the status of the record. This is no longer blocked because setup is incomplete or because the old source bundle disappeared. It is now repeating bounded no-hit runtime outcomes while the live zero-state conflict, the missing primary Microsoft documentation, and the unresolved persisted seeding caller / exact inner query arm all remain.
 
-As of 2026-04-14, a dedicated guest-side WPR filter wrapper also exists for the control cluster, but the historical `kernel-timing-wpr-boot-registry-20260412.manual.csv` bundle was no longer retained on the working guest. The next runtime-trace step is therefore explicit: rerun or recover the boot-registry source bundle before expecting an exact-value filter result.
+The hold is explicit: wait for a stronger current-build query-arm/decompiler pivot or authoritative documentation before re-opening active chase. Promotion still requires either a decisive exact read or a named boot/init path that explains why the live zero state diverges from the retained repo defaults.

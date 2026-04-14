@@ -2476,7 +2476,9 @@ def blocked_worklist_surface_status(payload: dict[str, Any] | None = None) -> di
         errors.append("lane_counts-mismatch")
     if actionability_counts != expected_actionability_counts:
         errors.append("actionability_counts-mismatch")
-    if not payload.get("top_actionable_candidates"):
+    if "top_actionable_candidates" not in payload:
+        errors.append("top_actionable_candidates-missing")
+    elif expected_actionability_counts.get("active", 0) > 0 and not payload.get("top_actionable_candidates"):
         errors.append("top_actionable_candidates-missing")
     if not payload.get("lane_focus"):
         errors.append("lane_focus-missing")

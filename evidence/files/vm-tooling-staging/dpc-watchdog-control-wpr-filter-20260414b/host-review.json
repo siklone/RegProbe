@@ -1,0 +1,16 @@
+{
+  "record_id": "system.kernel-dpc-watchdog-control-cluster",
+  "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+  "reviewed_utc": "2026-04-14T09:52:00Z",
+  "artifact_bundle": "evidence/files/vm-tooling-staging/dpc-watchdog-control-wpr-filter-20260414b",
+  "status": "completed",
+  "source_csv_path": "C:\\RegProbe-Diag\\wpr-boot-registry\\dpc-watchdog-control-boot-registry-20260414a\\dpc-watchdog-control-boot-registry-20260414a.csv",
+  "source_csv_size_bytes": 5232294334,
+  "patterns": [
+    "DPCTimeout",
+    "DpcSoftTimeout",
+    "DpcCumulativeSoftTimeout"
+  ],
+  "interpretation": "A fresh QGA-launched current-build WPR boot-registry replay produced a retained 1.76 GB ETL and a 5.23 GB CSV for the exact Session Manager Kernel DPC watchdog control lane. A dedicated guest-side exact-value filter then returned zero hits for DPCTimeout, DpcSoftTimeout, and DpcCumulativeSoftTimeout. The remaining gap is no longer setup or source-retention; it is the lack of a stronger persisted-seeding caller or exact query-arm pivot that explains the mixed repo-doc versus live-zero state.",
+  "next_step": "Treat the lane as an intentional hold until a stronger debugger/decompiler pivot or authoritative documentation resolves the persisted seeding caller or exact ExpQuerySystemInformation arm."
+}

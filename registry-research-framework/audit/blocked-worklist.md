@@ -1,22 +1,16 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T09:27:30.214934Z`
+Generated: `2026-04-14T10:02:27.001147Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 1
-- `hold`: 17
+- `hold`: 18
 
 ## Lane Summary
 
-- `runtime-trace`: 1 | first: `system.kernel-dpc-watchdog-control-cluster` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Find a primary current-build Microsoft source or explicitly accept research-only status.
-- `intentional-hold`: 17 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
-
-## Top Actionable Candidates
-
-- `system.kernel-dpc-watchdog-control-cluster` (`runtime-trace`, score=27, blockers=3)
+- `intentional-hold`: 18 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Holds
 
@@ -27,19 +21,6 @@ Blocked candidates: `18`
 - `power.control.allow-system-required-power-requests` (`intentional-hold`, score=8, blockers=2)
 
 ## Candidates
-
-### `system.kernel-dpc-watchdog-control-cluster`
-
-- Lane: `runtime-trace`
-- Actionability: `active`
-- Priority score: `27`
-- Feature area: `Session Manager Kernel DPC Watchdog Control Timeouts`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
-- Value name: `DPCTimeout`
-- Blockers: `dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs`, `dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm`, `dpc-watchdog-control-no-primary-current-build-doc`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
-- Suggested command: `winopt research show-blocked system.kernel-dpc-watchdog-control-cluster --json`
-- Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
 
 ### `policy.system.enable-virtualization`
 
@@ -245,6 +226,19 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Prove restore or rollback behavior for the exact subtree or value.
+
+### `system.kernel-dpc-watchdog-control-cluster`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `5`
+- Feature area: `Session Manager Kernel DPC Watchdog Control Timeouts`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
+- Value name: `DPCTimeout`
+- Blockers: `dpc-watchdog-control-intentional-hold-no-current-build-pivot`, `dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs`, `dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm`, `dpc-watchdog-control-no-primary-current-build-doc`, `dpc-watchdog-control-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `system.kernel-dpc-watchdog-profile-cluster`
 

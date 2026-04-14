@@ -1,0 +1,30 @@
+﻿{
+    "output_name":  "dpc-watchdog-control-wpr-filter-20260414b",
+    "status":  "completed",
+    "source_csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\dpc-watchdog-control-boot-registry-20260414a\\dpc-watchdog-control-boot-registry-20260414a.csv",
+    "source_csv_exists":  true,
+    "source_csv_size_bytes":  5232294334,
+    "patterns":  [
+                     "DPCTimeout",
+                     "DpcSoftTimeout",
+                     "DpcCumulativeSoftTimeout"
+                 ],
+    "hits_path":  "C:\\RegProbe-Diag\\wpr-filter\\dpc-watchdog-control-wpr-filter-20260414b\\dpc-watchdog-control-wpr-filter-20260414b.hits.txt",
+    "hits_exists":  true,
+    "hit_line_count":  0,
+    "pattern_hit_counts":  {
+                               "DPCTimeout":  0,
+                               "DpcSoftTimeout":  0,
+                               "DpcCumulativeSoftTimeout":  0
+                           },
+    "any_target_hits":  false,
+    "findstr_exit_code":  1,
+    "uploads":  {
+                    "hits":  {
+                                 "path":  "C:\\RegProbe-Diag\\wpr-filter\\dpc-watchdog-control-wpr-filter-20260414b\\dpc-watchdog-control-wpr-filter-20260414b.hits.txt",
+                                 "uri":  "http://10.0.2.2:8766/dpc-watchdog-control-wpr-filter-20260414b.hits.txt"
+                             }
+                },
+    "error":  null,
+    "collected_utc":  "2026-04-14T09:52:00.8054237Z"
+}

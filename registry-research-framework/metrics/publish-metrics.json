@@ -7,16 +7,12 @@
   "bench_safety_summary": "0 bench-pending, 0 blocker-counted",
   "verification_health_summary": "gate=green, schema_complete_ratio=1.0, missing_docs=0",
   "blocked_lane_counts": {
-    "intentional-hold": 17,
-    "runtime-trace": 1
+    "intentional-hold": 18
   },
   "blocked_actionability_counts": {
-    "active": 1,
-    "hold": 17
+    "hold": 18
   },
-  "top_actionable_blocked_candidates": [
-    "system.kernel-dpc-watchdog-control-cluster"
-  ],
+  "top_actionable_blocked_candidates": [],
   "top_hold_blocked_candidates": [
     "policy.system.enable-virtualization",
     "power.control.hiber-file-size-percent",
@@ -24,7 +20,7 @@
     "power.control.timer-rebase-threshold-on-drips-exit",
     "power.control.allow-system-required-power-requests"
   ],
-  "generated_at": "2026-04-14T09:27:29.650425Z",
+  "generated_at": "2026-04-14T10:02:26.426782Z",
   "blocked_worklist_json": "registry-research-framework/audit/blocked-worklist.json",
   "blocked_worklist_markdown": "registry-research-framework/audit/blocked-worklist.md",
   "blocked_worklist_status": "PASS",
