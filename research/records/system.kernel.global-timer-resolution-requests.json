@@ -270,9 +270,10 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, adjacent Microsoft documentation for the timer-resolution feature family, a live current-build KD value that matches the repo-doc default, a current-build INIT descriptor binding from `GlobalTimerResolutionRequests` to the same live global, a concrete enrichment-recommended trigger family that is now mirrored by a repo-native harness, a real write-and-reboot runtime lane, and a targeted QGA/WPR boot-registry timeout-salvage run that retained zero exact hits. It is not ready for validation because an exact runtime registry read remains unproven, and Microsoft does not publish the exact internal `GlobalTimerResolutionRequests` registry contract. This remains active blocked work rather than an intentional hold because the runtime lane is valid and the missing proof is narrowly scoped.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, adjacent Microsoft documentation for the timer-resolution feature family, a live current-build KD value that matches the repo-doc default, a current-build INIT descriptor binding from `GlobalTimerResolutionRequests` to the same live global, a concrete enrichment-recommended trigger family that is now mirrored by a repo-native harness, a real write-and-reboot runtime lane, and a targeted QGA/WPR boot-registry timeout-salvage run that retained zero exact hits. The 2026-04-14 decision moves this to an intentional hold because repeated targeted runtime capture still provides no exact current-build registry-read pivot, and Microsoft still does not publish the exact internal `GlobalTimerResolutionRequests` registry contract. Further chase should wait for a stronger binary or trace pivot rather than re-running the same no-hit lane.",
     "manual_review_required": true,
     "blocking_issues": [
+      "global-timer-resolution-intentional-hold-no-current-build-pivot",
       "global-timer-resolution-wpr-boot-no-hit-current-build",
       "global-timer-resolution-no-primary-current-build-doc"
     ]
@@ -310,5 +311,5 @@
       "notes": "The run reached post-reboot collection, produced a large ETL/CSV pair, and salvaged a header-only hits CSV plus an empty host-normalized bundle with zero exact `GlobalTimerResolutionRequests` events."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T06:08:26Z"
+  "last_reviewed_utc": "2026-04-14T07:12:50Z"
 }

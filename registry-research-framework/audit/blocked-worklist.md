@@ -1,27 +1,27 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T06:11:52.055269Z`
+Generated: `2026-04-14T07:13:20.176186Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 9
-- `hold`: 9
+- `active`: 8
+- `hold`: 10
 
 ## Lane Summary
 
 - `ghidra`: 2 | first: `power.session-watchdog-timeouts` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static RE or Ghidra work until the exact reader or initializer is named.
-- `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
-- `intentional-hold`: 9 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `runtime-trace`: 6 | first: `power.control.win32k-callout-watchdog-timeout-seconds` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
+- `intentional-hold`: 10 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
 - `power.session-watchdog-timeouts` (`ghidra`, score=33, blockers=2)
 - `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
-- `system.kernel.global-timer-resolution-requests` (`runtime-trace`, score=28, blockers=2)
 - `power.control.win32k-callout-watchdog-timeout-seconds` (`runtime-trace`, score=27, blockers=3)
 - `power.session-win32-callout-watchdog-bugcheck-enabled` (`runtime-trace`, score=27, blockers=3)
+- `system.kernel-dpc-watchdog-control-cluster` (`runtime-trace`, score=27, blockers=3)
 
 ## Top Holds
 
@@ -58,19 +58,6 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Suggested command: `winopt research show-blocked system.kernel-dpc-watchdog-profile-cluster --json`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
-
-### `system.kernel.global-timer-resolution-requests`
-
-- Lane: `runtime-trace`
-- Actionability: `active`
-- Priority score: `28`
-- Feature area: `Session Manager Kernel Timer Resolution`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
-- Value name: `GlobalTimerResolutionRequests`
-- Blockers: `global-timer-resolution-no-primary-current-build-doc`, `global-timer-resolution-wpr-boot-no-hit-current-build`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json`
-- Suggested command: `winopt research show-blocked system.kernel.global-timer-resolution-requests --json`
-- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `power.control.win32k-callout-watchdog-timeout-seconds`
 
@@ -225,6 +212,19 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
+
+### `system.kernel.global-timer-resolution-requests`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `7`
+- Feature area: `Session Manager Kernel Timer Resolution`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
+- Value name: `GlobalTimerResolutionRequests`
+- Blockers: `global-timer-resolution-intentional-hold-no-current-build-pivot`, `global-timer-resolution-no-primary-current-build-doc`, `global-timer-resolution-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `power.control.power-watchdog-timeout-cluster`
 
