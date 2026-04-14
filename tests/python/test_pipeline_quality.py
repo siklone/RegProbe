@@ -95,18 +95,27 @@ class RunnerConfigTests(unittest.TestCase):
         self.assertIn("execution-required-power-requests-short", source)
 
     def test_execution_required_runtime_runner_mapping_survives_decision_gate_closure(self) -> None:
-        audit_path = REPO_ROOT / "research" / "evidence-audit.json"
+        readiness_path = (
+            REPO_ROOT / "registry-research-framework" / "audit" / "runtime-trace-runner-readiness-20260408.json"
+        )
         config_path = REPO_ROOT / "registry-research-framework" / "config" / "tweak-vm-runners.json"
-        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        readiness = json.loads(readiness_path.read_text(encoding="utf-8"))
         config = json.loads(config_path.read_text(encoding="utf-8"))
         runtime = config["runtime"]
 
         runtime_trace_ids = sorted(
             entry["tweak_id"]
-            for entry in audit["entries"]
-            if entry.get("next_missing_layer") == "runtime-trace"
+            for entry in readiness["records"]
+            if entry.get("runner_mapped")
         )
-        self.assertEqual(runtime_trace_ids, [])
+        self.assertEqual(
+            runtime_trace_ids,
+            [
+                "power.control.allow-audio-to-enable-execution-required-power-requests",
+                "power.control.allow-system-required-power-requests",
+            ],
+        )
+        self.assertTrue(readiness["all_runtime_trace_records_mapped"])
         self.assertIn("power.control.allow-audio-to-enable-execution-required-power-requests", runtime)
         self.assertIn("power.control.allow-system-required-power-requests", runtime)
 

@@ -47,6 +47,10 @@ etw_stackwalk_dispatch_batch = load_module(
     "generate_etw_stackwalk_dispatch_batch",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_dispatch_batch.py",
 )
+etw_stackwalk_dispatch_check = load_module(
+    "check_etw_stackwalk_dispatch_batch",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_dispatch_batch.py",
+)
 etw_stackwalk_bundle = load_module("generate_etw_stackwalk_bundle", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_bundle.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
@@ -1980,6 +1984,125 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(item["actionability"], "hold")
         self.assertFalse(item["dispatch_recommended"])
         self.assertIn("Reopen only when a boot/init reader or registry seeding caller pivot becomes available.", item["next_action_hint"])
+
+    def test_etw_stackwalk_dispatch_batch_check_accepts_matching_surface(self) -> None:
+        profile_config = {
+            "default_profile": "kernel-registry-stackwalk-v1",
+            "profiles": [
+                {
+                    "profile_id": "execution-required-system-stackwalk-v1",
+                    "description": "Focused system profile.",
+                    "tool": "xperf",
+                    "capture_phase": "runtime",
+                    "kernel_flags": ["PROC_THREAD", "REGISTRY"],
+                    "stackwalk_events": ["RegQueryValue", "RegSetValue"],
+                    "default_output_root": r"C:\RegProbe-Diag\etw-stackwalk",
+                    "default_duration_seconds": 45,
+                    "default_run_id": "wave4-system",
+                    "target_defaults": {
+                        "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                        "value_name": "AllowSystemRequiredPowerRequests",
+                    },
+                    "buffer": {"size_kb": 512, "min_buffers": 32, "max_buffers": 128},
+                    "stack_capture": {"expected": True, "source_fields": ["Stack"]},
+                    "postprocess": {"normalized_bundle_field": "caller_stack"},
+                }
+            ],
+        }
+        runner_config = {
+            "runtime": {
+                "power.control.allow-system-required-power-requests": {
+                    "script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+                    "etw_stackwalk_profile_id": "execution-required-system-stackwalk-v1",
+                }
+            }
+        }
+        queue_payload = {
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "state": "blocked",
+                    "feature_area": "Control Power Requests",
+                    "key_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                }
+            ]
+        }
+        gates_payload = {
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "promotion_state": "blocked",
+                    "next_missing_layer": "runtime-trace",
+                    "promotion_blockers": ["needs-focused-etw"],
+                }
+            ]
+        }
+        surface = etw_stackwalk_dispatch_batch.build_dispatch_batch(
+            profile_config=profile_config,
+            runner_config=runner_config,
+            queue_payload=queue_payload,
+            gates_payload=gates_payload,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        payload = etw_stackwalk_dispatch_check.compare_batch(
+            surface,
+            surface,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_dispatch_batch_check_rejects_mismatched_counts(self) -> None:
+        good_surface = {
+            "schema_version": "1.0",
+            "batch_status": "ready",
+            "mapped_candidate_count": 1,
+            "ready_capture_count": 1,
+            "dispatch_recommended_count": 1,
+            "active_candidate_count": 1,
+            "hold_candidate_count": 0,
+            "profiles_used": ["execution-required-system-stackwalk-v1"],
+            "items": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "profile_id": "execution-required-system-stackwalk-v1",
+                    "queue_state": "blocked",
+                    "promotion_state": "blocked",
+                    "next_missing_layer": "runtime-trace",
+                    "actionability": "active",
+                    "capture_ready": True,
+                    "dispatch_recommended": True,
+                    "promotion_blockers": ["needs-focused-etw"],
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+                    "next_action_hint": "Ready to dispatch when we want another focused ETW caller-stack capture.",
+                    "capture_plan": {
+                        "run": {
+                            "run_id": "wave4-system",
+                            "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                        },
+                        "stack_capture": {
+                            "expected": True,
+                            "stackwalk_events": ["RegQueryValue", "RegSetValue"],
+                        },
+                    },
+                }
+            ],
+        }
+        bad_surface = dict(good_surface)
+        bad_surface["mapped_candidate_count"] = 2
+
+        payload = etw_stackwalk_dispatch_check.compare_batch(
+            bad_surface,
+            good_surface,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("mapped_candidate_count mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {

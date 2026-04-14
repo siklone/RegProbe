@@ -310,6 +310,7 @@ class McpReadinessTests(unittest.TestCase):
         cli_surface = "\n".join(
             [
                 "list-blocked",
+                "show-blocked --actionability",
                 "show-stale",
                 "show-revalidation-pending",
                 "generate-regression-pack",
@@ -346,6 +347,7 @@ class McpReadinessTests(unittest.TestCase):
         cli_surface = "\n".join(
             [
                 "list-blocked",
+                "show-blocked --actionability",
                 "show-stale",
                 "show-revalidation-pending",
                 "generate-regression-pack",
