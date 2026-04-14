@@ -107,6 +107,14 @@ etw_stackwalk_reopen_operator_brief_check = load_module(
     "check_etw_stackwalk_reopen_operator_brief",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_operator_brief.py",
 )
+etw_stackwalk_reopen_journal = load_module(
+    "generate_etw_stackwalk_reopen_journal",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_journal.py",
+)
+etw_stackwalk_reopen_journal_check = load_module(
+    "check_etw_stackwalk_reopen_journal",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_journal.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -3326,6 +3334,156 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("counts.blocked_candidates mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_journal_marks_blocked_candidates_deferred(self) -> None:
+        brief_payload = {
+            "brief_status": "blocked",
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "brief_status": "blocked",
+                    "operator_posture": "do-not-run",
+                    "operator_blocker": "outstanding-prerequisites",
+                    "remaining_to_ready_count": 2,
+                    "outstanding_reason_codes": [
+                        "await-seeding-pivot",
+                        "explicit-reopen-required",
+                    ],
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "next_review_trigger": "Revisit after the seeding-path pivot lands.",
+                    "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+                    "include_holds_plan_command": "python3 reopen.py --plan",
+                    "include_holds_run_command": "python3 reopen.py --run",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_journal.build_reopen_journal(
+            brief_payload,
+            generated_utc="2026-04-15T16:00:00Z",
+        )
+
+        self.assertEqual(payload["journal_status"], "deferred")
+        self.assertEqual(payload["operator"]["blocker"], "acknowledge-deferred-holds")
+        self.assertEqual(payload["entries"][0]["journal_state"], "deferred")
+        self.assertEqual(payload["entries"][0]["recommended_disposition"], "keep-closed")
+
+    def test_etw_stackwalk_reopen_journal_marks_review_ready_candidates(self) -> None:
+        brief_payload = {
+            "brief_status": "review-ready",
+            "entries": [
+                {
+                    "candidate_id": "example.ready",
+                    "feature_area": "Example",
+                    "brief_status": "review-ready",
+                    "operator_posture": "review-before-run",
+                    "operator_blocker": "explicit-review-required",
+                    "remaining_to_ready_count": 0,
+                    "outstanding_reason_codes": ["explicit-reopen-required"],
+                    "next_unlock_prerequisite": None,
+                    "next_review_trigger": "Review before reopening.",
+                    "next_action_hint": "Review first.",
+                    "include_holds_plan_command": "python3 reopen.py --plan",
+                    "include_holds_run_command": "python3 reopen.py --run",
+                    "run_id": "example-run",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_journal.build_reopen_journal(
+            brief_payload,
+            generated_utc="2026-04-15T16:00:00Z",
+        )
+
+        self.assertEqual(payload["journal_status"], "review-pending")
+        self.assertEqual(payload["counts"]["review_pending_count"], 1)
+        self.assertEqual(payload["entries"][0]["journal_state"], "review-pending")
+
+    def test_etw_stackwalk_reopen_journal_check_accepts_matching_surface(self) -> None:
+        surface = {
+            "schema_version": "1.0",
+            "source_reopen_operator_brief_path": "registry-research-framework/audit/etw-stackwalk-reopen-operator-brief.json",
+            "brief_status": "blocked",
+            "journal_status": "deferred",
+            "operator": {
+                "blocker": "acknowledge-deferred-holds",
+                "next_action": "Keep the blocked lanes deferred until their prerequisites land.",
+            },
+            "counts": {
+                "candidate_count": 1,
+                "deferred_count": 1,
+                "review_pending_count": 0,
+                "ack_required_count": 1,
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "journal_state": "deferred",
+                    "recommended_disposition": "keep-closed",
+                    "operator_ack_required": True,
+                    "operator_blocker": "outstanding-prerequisites",
+                    "operator_posture": "do-not-run",
+                    "remaining_to_ready_count": 2,
+                    "outstanding_reason_codes": [
+                        "await-seeding-pivot",
+                        "explicit-reopen-required",
+                    ],
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "next_review_trigger": "Revisit after the seeding-path pivot lands.",
+                    "next_action": "Do not run the include-holds commands yet.",
+                    "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+                    "include_holds_plan_command": "python3 reopen.py --plan",
+                    "include_holds_run_command": "python3 reopen.py --run",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_journal_check.compare_reopen_journal(
+            surface,
+            surface,
+            generated_utc="2026-04-15T16:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_reopen_journal_check_rejects_ack_count_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_reopen_operator_brief_path": "registry-research-framework/audit/etw-stackwalk-reopen-operator-brief.json",
+            "brief_status": "blocked",
+            "journal_status": "deferred",
+            "operator": {
+                "blocker": "acknowledge-deferred-holds",
+                "next_action": "Keep the blocked lanes deferred until their prerequisites land.",
+            },
+            "counts": {
+                "candidate_count": 1,
+                "deferred_count": 1,
+                "review_pending_count": 0,
+                "ack_required_count": 1,
+            },
+            "entries": [],
+        }
+        surface = dict(expected)
+        surface["counts"] = dict(expected["counts"])
+        surface["counts"]["ack_required_count"] = 2
+
+        payload = etw_stackwalk_reopen_journal_check.compare_reopen_journal(
+            surface,
+            expected,
+            generated_utc="2026-04-15T16:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("counts.ack_required_count mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {

@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-14T22:17:13.446996Z",
+  "source_reopen_operator_brief_path": "registry-research-framework/audit/etw-stackwalk-reopen-operator-brief.json",
+  "brief_status": "blocked",
+  "journal_status": "deferred",
+  "operator": {
+    "blocker": "acknowledge-deferred-holds",
+    "next_action": "Keep the blocked lanes deferred until their prerequisites land."
+  },
+  "counts": {
+    "candidate_count": 2,
+    "deferred_count": 2,
+    "review_pending_count": 0,
+    "ack_required_count": 2
+  },
+  "entries": [
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "journal_state": "deferred",
+      "recommended_disposition": "keep-closed",
+      "operator_ack_required": true,
+      "operator_blocker": "outstanding-prerequisites",
+      "operator_posture": "do-not-run",
+      "remaining_to_ready_count": 3,
+      "outstanding_reason_codes": [
+        "await-seeding-pivot",
+        "await-primary-doc",
+        "explicit-reopen-required"
+      ],
+      "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+      "next_review_trigger": "Revisit after a current-build seeding-path pivot and a primary Microsoft doc both land.",
+      "next_action": "Do not run the include-holds commands yet.",
+      "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+      "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests",
+      "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --run",
+      "run_id": "wave4-allow-audio-e2e",
+      "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl"
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "journal_state": "deferred",
+      "recommended_disposition": "keep-closed",
+      "operator_ack_required": true,
+      "operator_blocker": "outstanding-prerequisites",
+      "operator_posture": "do-not-run",
+      "remaining_to_ready_count": 2,
+      "outstanding_reason_codes": [
+        "await-seeding-pivot",
+        "explicit-reopen-required"
+      ],
+      "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+      "next_review_trigger": "Revisit after a current-build boot/init reader or registry seeding caller pivot lands.",
+      "next_action": "Do not run the include-holds commands yet.",
+      "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+      "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
+      "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+      "run_id": "wave4-allow-system-required-e2e",
+      "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl"
+    }
+  ]
+}
