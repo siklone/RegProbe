@@ -71,6 +71,10 @@ etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
 )
+etw_stackwalk_execution_manifest_check = load_module(
+    "check_etw_stackwalk_execution_manifest",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_execution_manifest.py",
+)
 etw_stackwalk_bundle = load_module("generate_etw_stackwalk_bundle", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_bundle.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
@@ -2523,6 +2527,91 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["status"], "blocked")
         self.assertEqual(payload["missing_candidate_ids"], ["missing.candidate"])
+
+    def test_etw_stackwalk_execution_manifest_check_accepts_matching_surface(self) -> None:
+        surface = {
+            "schema_version": "1.0",
+            "status": "idle",
+            "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+            "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+            "source_hold_reopen_plan_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-plan.json",
+            "include_holds": False,
+            "requested_candidate_ids": ["power.control.allow-system-required-power-requests"],
+            "missing_candidate_ids": [],
+            "selected_count": 0,
+            "excluded_count": 1,
+            "default_selected_job_count": 0,
+            "default_skipped_hold_count": 1,
+            "operator": {
+                "next_action": "Review excluded hold candidates and reopen intentionally if needed.",
+                "include_holds_required": False,
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "actionability": "hold",
+                    "selected": False,
+                    "selection_reason": "excluded",
+                    "profile_id": "execution-required-system-stackwalk-v1",
+                    "queue_state": "blocked",
+                    "promotion_state": "blocked",
+                    "next_missing_layer": "intentional-hold",
+                    "promotion_blockers": ["intentional-hold"],
+                    "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "run_id": "wave4-allow-system-required-e2e",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+                    "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
+                    "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+                    "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+                    "reopen_prerequisites": ["Explicitly reopen the lane before dispatching runtime capture."],
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_execution_manifest_check.compare_execution_manifest(
+            surface,
+            surface,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_execution_manifest_check_rejects_mismatched_selected_count(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "status": "ready",
+            "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+            "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+            "source_hold_reopen_plan_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-plan.json",
+            "include_holds": True,
+            "requested_candidate_ids": ["power.control.allow-audio-to-enable-execution-required-power-requests"],
+            "missing_candidate_ids": [],
+            "selected_count": 1,
+            "excluded_count": 0,
+            "default_selected_job_count": 0,
+            "default_skipped_hold_count": 1,
+            "operator": {
+                "next_action": "Run the selected dispatch commands.",
+                "include_holds_required": True,
+            },
+            "entries": [],
+        }
+        surface = dict(expected)
+        surface["selected_count"] = 0
+
+        payload = etw_stackwalk_execution_manifest_check.compare_execution_manifest(
+            surface,
+            expected,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("selected_count mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {
