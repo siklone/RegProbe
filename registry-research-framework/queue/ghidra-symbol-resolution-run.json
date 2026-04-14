@@ -1,19 +1,92 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T00:15:14.137418Z",
-  "mode": "run",
+  "generated_utc": "2026-04-14T00:29:59.363259Z",
+  "mode": "dry-run",
   "source_batch": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
   "runner_available": true,
-  "selected_job_count": 1,
-  "executed_job_count": 1,
-  "jobs": [
+  "selected_job_count": 0,
+  "blocked_job_count": 16,
+  "blocked_jobs": [
     {
       "job_id": "ghidra-symbol-dispatch-01-ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
       "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "exit_code": 0,
-      "stdout": "{\n  \"generated_utc\": \"2026-04-14T00:26:34.4431312Z\",\n  \"binary_path\": \"C:\\\\Windows\\\\System32\\\\ntoskrnl.exe\",\n  \"output_name\": \"ghidra-symbolized-01-power-control-allow-system-required-power-requests\",\n  \"project_name\": \"Probe_ghidra_symbolized_01_power_control_allow_system_required_power_requests\",\n  \"symbol_root\": \"C:\\\\Tools\\\\Symbols\\\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\",\n  \"output_root\": \"C:\\\\RegProbe-Diag\\\\ghidra\\\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\",\n  \"symchk_path\": \"C:\\\\Program Files (x86)\\\\Windows Kits\\\\10\\\\Debuggers\\\\x64\\\\symchk.exe\",\n  \"symchk_exit_code\": 0,\n  \"staged_pdb_count\": 2,\n  \"staged_pdb_sample\": [\n    \"C:\\\\Tools\\\\Symbols\\\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\\\ntkrnlmp.pdb\",\n    \"C:\\\\Tools\\\\Symbols\\\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\\\ntkrnlmp.pdb\\\\24DE61DB3A27C5B383DFF181CB51F7E11\\\\ntkrnlmp.pdb\"\n  ],\n  \"ghidra_exit_code\": 0,\n  \"no_analysis\": false,\n  \"pdb_loaded\": false,\n  \"match_count\": 1,\n  \"uploads\": {\n    \"evidence\": {\n      \"path\": \"C:\\\\RegProbe-Diag\\\\ghidra\\\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\\\evidence.json\",\n      \"uri\": \"http://10.0.2.2:8766/ghidra-symbolized-01-power-control-allow-system-required-power-requests-evidence.json\"\n    },\n    \"markdown\": {\n      \"path\": \"C:\\\\RegProbe-Diag\\\\ghidra\\\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\\\ghidra-matches.md\",\n      \"uri\": \"http://10.0.2.2:8766/ghidra-symbolized-01-power-control-allow-system-required-power-requests-ghidra-matches.md\"\n    },\n    \"symchk_log\": {\n      \"path\": \"C:\\\\RegProbe-Diag\\\\ghidra\\\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\\\symchk.txt\",\n      \"uri\": \"http://10.0.2.2:8766/ghidra-symbolized-01-power-control-allow-system-required-power-requests-symchk.txt\"\n    }\n  },\n  \"status\": \"ok\",\n  \"error_kind\": \"ghidra-symbolized-probe-error\",\n  \"recovery_action\": \"inspect-ghidra-symbolized-run\",\n  \"transport_blocker\": \"ghidra\",\n  \"guest_health\": \"stable\"\n}\n",
-      "stderr": ""
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-02-ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
+      "request_id": "ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-03-ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
+      "request_id": "ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-04-ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
+      "request_id": "ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-05-ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
+      "request_id": "ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-06-ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
+      "request_id": "ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-07-ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
+      "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-08-ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
+      "request_id": "ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-09-ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
+      "request_id": "ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-10-ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
+      "request_id": "ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
+      "missing_inputs": [
+        "module_base"
+      ],
+      "missing_host_tools": []
     }
-  ]
+  ],
+  "jobs": []
 }

@@ -2614,6 +2614,41 @@ class GhidraSymbolResolutionBatchTests(unittest.TestCase):
         self.assertEqual(batch["diagnostics"]["blocked_examples"][0]["request_id"], "ghidra-symbol-plain-text")
         self.assertIsNone(batch["jobs"][0]["command_argv"])
 
+    def test_symbol_resolution_batch_blocks_raw_addresses_without_module_base(self) -> None:
+        queue_payload = {
+            "requests": [
+                {
+                    "request_id": "ghidra-symbol-raw-address",
+                    "priority_rank": 1,
+                    "lookup_key": "ntoskrnl.exe@0xfffff80512345678",
+                    "resolution_kind": "raw_address",
+                    "target_binary": "ntoskrnl.exe",
+                    "candidate_ids": ["power.keep"],
+                    "candidate_count": 1,
+                    "occurrence_count": 1,
+                    "suggested_patterns": ["AllowSystemRequiredPowerRequests"],
+                    "address": "0xfffff80512345678",
+                }
+            ]
+        }
+        tool_status = {
+            "python3": {"present": True, "path": "/usr/bin/python3"},
+            "curl": {"present": True, "path": "/usr/bin/curl"},
+            "virsh": {"present": True, "path": "/usr/bin/virsh"},
+        }
+
+        batch = ghidra_symbol_batch.symbol_resolution_batch_from_queue(
+            queue_payload,
+            generated_utc="2026-04-13T00:00:00Z",
+            tool_status=tool_status,
+        )
+
+        self.assertFalse(batch["jobs"][0]["can_run_guest_orchestrator"])
+        self.assertEqual(batch["blocked_job_count"], 1)
+        self.assertEqual(batch["jobs"][0]["missing_inputs"], ["module_base"])
+        self.assertEqual(batch["diagnostics"]["missing_input_counts"], {"module_base": 1})
+        self.assertIsNone(batch["jobs"][0]["command_argv"])
+
 
 class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
     def test_symbol_resolution_run_plan_selects_runnable_jobs(self) -> None:

@@ -82,6 +82,14 @@ def build_suggested_command(command_argv: list[str] | None) -> str | None:
     return " ".join(f'"{arg}"' if " " in arg else arg for arg in command_argv)
 
 
+def raw_address_requires_module_base(request: dict[str, Any]) -> bool:
+    if str(request.get("resolution_kind") or "") != "raw_address":
+        return False
+    if request.get("offset_hex"):
+        return False
+    return not str(request.get("module_base") or "").strip()
+
+
 def symbol_resolution_batch_from_queue(
     payload: dict[str, Any],
     *,
@@ -114,9 +122,11 @@ def symbol_resolution_batch_from_queue(
             missing_inputs.append("guest_binary_path")
         if not patterns:
             missing_inputs.append("patterns")
+        if raw_address_requires_module_base(request):
+            missing_inputs.append("module_base")
         for item in missing_inputs:
             missing_input_counts[item] += 1
-        command_argv = build_command_argv(guest_binary_path, output_name, patterns)
+        command_argv = None if missing_inputs else build_command_argv(guest_binary_path, output_name, patterns)
         can_run_guest_orchestrator = not missing_inputs and not missing_host_tools and isinstance(command_argv, list)
         if (missing_inputs or missing_host_tools) and len(blocked_examples) < 10:
             blocked_examples.append(

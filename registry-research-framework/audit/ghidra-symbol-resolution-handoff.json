@@ -1,21 +1,21 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T00:12:13.095651Z",
+  "generated_utc": "2026-04-14T00:29:59.417844Z",
   "batch_path": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
-  "handoff_status": "ready",
+  "handoff_status": "blocked",
   "operator": {
-    "status": "ready",
-    "blocker": "symbol-resolution-ready",
-    "next_action": "Run the prepared symbol-resolution jobs locally.",
+    "status": "blocked",
+    "blocker": "symbol-resolution-inputs-missing",
+    "next_action": "Fill the missing inputs or host tools called out in the blocked jobs before attempting a handoff.",
     "top_focus": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b"
   },
   "counts": {
     "prepared_jobs": 16,
-    "runnable_jobs": 16,
-    "blocked_jobs": 0,
-    "selected_jobs": 16,
-    "run_blocked_jobs": 0,
+    "runnable_jobs": 0,
+    "blocked_jobs": 16,
+    "selected_jobs": 0,
+    "run_blocked_jobs": 16,
     "candidate_count": 1
   },
   "required_host_tools": [],
@@ -23,7 +23,8 @@
   "candidate_ids": [
     "power.control.allow-system-required-power-requests"
   ],
-  "selected_jobs": [
+  "selected_jobs": [],
+  "blocked_jobs": [
     {
       "job_id": "ghidra-symbol-dispatch-01-ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
       "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
@@ -37,11 +38,13 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-01-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-01-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     },
     {
       "job_id": "ghidra-symbol-dispatch-02-ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
@@ -56,11 +59,13 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-02-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-02-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     },
     {
       "job_id": "ghidra-symbol-dispatch-03-ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
@@ -75,11 +80,13 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-03-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-03-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     },
     {
       "job_id": "ghidra-symbol-dispatch-04-ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
@@ -94,11 +101,13 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-04-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-04-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     },
     {
       "job_id": "ghidra-symbol-dispatch-05-ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
@@ -113,11 +122,13 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-05-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-05-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     },
     {
       "job_id": "ghidra-symbol-dispatch-06-ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
@@ -132,11 +143,13 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-06-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-06-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     },
     {
       "job_id": "ghidra-symbol-dispatch-07-ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
@@ -151,11 +164,13 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-07-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-07-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     },
     {
       "job_id": "ghidra-symbol-dispatch-08-ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
@@ -170,11 +185,13 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-08-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-08-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     },
     {
       "job_id": "ghidra-symbol-dispatch-09-ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
@@ -189,11 +206,13 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-09-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-09-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     },
     {
       "job_id": "ghidra-symbol-dispatch-10-ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
@@ -208,134 +227,104 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-10-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": null,
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-10-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
+      "missing_inputs": [
+        "module_base"
+      ],
       "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-11-ghidra-symbol-11-ntoskrnl-exe-0xfffff803c3f27b4d",
-      "request_id": "ghidra-symbol-11-ntoskrnl-exe-0xfffff803c3f27b4d",
-      "lookup_key": "ntoskrnl.exe@0xfffff803c3f27b4d",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "ntoskrnl.exe",
-      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-11-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-11-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-12-ghidra-symbol-12-ntoskrnl-exe-0xfffff803c3fed794",
-      "request_id": "ghidra-symbol-12-ntoskrnl-exe-0xfffff803c3fed794",
-      "lookup_key": "ntoskrnl.exe@0xfffff803c3fed794",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "ntoskrnl.exe",
-      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-12-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-12-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-13-ghidra-symbol-13-ntoskrnl-exe-0xfffff803c3fedd84",
-      "request_id": "ghidra-symbol-13-ntoskrnl-exe-0xfffff803c3fedd84",
-      "lookup_key": "ntoskrnl.exe@0xfffff803c3fedd84",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "ntoskrnl.exe",
-      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-13-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-13-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-14-ghidra-symbol-14-ntoskrnl-exe-0xfffff803c42be358",
-      "request_id": "ghidra-symbol-14-ntoskrnl-exe-0xfffff803c42be358",
-      "lookup_key": "ntoskrnl.exe@0xfffff803c42be358",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "ntoskrnl.exe",
-      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-14-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-14-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-15-ghidra-symbol-15-ntoskrnl-exe-0xfffff803c447108c",
-      "request_id": "ghidra-symbol-15-ntoskrnl-exe-0xfffff803c447108c",
-      "lookup_key": "ntoskrnl.exe@0xfffff803c447108c",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "ntoskrnl.exe",
-      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-15-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-15-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-16-ghidra-symbol-16-ntoskrnl-exe-0xfffff803c46e49f6",
-      "request_id": "ghidra-symbol-16-ntoskrnl-exe-0xfffff803c46e49f6",
-      "lookup_key": "ntoskrnl.exe@0xfffff803c46e49f6",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "ntoskrnl.exe",
-      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-16-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-16-power-control-allow-system-required-power-requests",
-      "missing_inputs": [],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": true
+      "can_run_guest_orchestrator": false
     }
   ],
-  "blocked_jobs": [],
   "diagnostics": {
     "batch_resolution_kind_counts": {
       "raw_address": 16
     },
-    "batch_missing_input_counts": {},
-    "batch_blocked_examples": [],
+    "batch_missing_input_counts": {
+      "module_base": 16
+    },
+    "batch_blocked_examples": [
+      {
+        "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
+        "lookup_key": "ntoskrnl.exe@0x7ff74fcf128b",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      },
+      {
+        "request_id": "ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
+        "lookup_key": "ntoskrnl.exe@0x7ff74fcf379d",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      },
+      {
+        "request_id": "ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
+        "lookup_key": "ntoskrnl.exe@0x7ff74fcf65c6",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      },
+      {
+        "request_id": "ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
+        "lookup_key": "ntoskrnl.exe@0x7ff74fcf6775",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      },
+      {
+        "request_id": "ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
+        "lookup_key": "ntoskrnl.exe@0x7ff9a412e436",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      },
+      {
+        "request_id": "ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
+        "lookup_key": "ntoskrnl.exe@0x7ff9a412edab",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      },
+      {
+        "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
+        "lookup_key": "ntoskrnl.exe@0x7ff9a4130aad",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      },
+      {
+        "request_id": "ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
+        "lookup_key": "ntoskrnl.exe@0x7ff9a5ebe8d7",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      },
+      {
+        "request_id": "ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
+        "lookup_key": "ntoskrnl.exe@0x7ff9a772c48c",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      },
+      {
+        "request_id": "ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
+        "lookup_key": "ntoskrnl.exe@0x7ff9a7801d74",
+        "missing_inputs": [
+          "module_base"
+        ],
+        "missing_host_tools": []
+      }
+    ],
     "run_runner_available": true,
     "run_mode": "dry-run"
   }

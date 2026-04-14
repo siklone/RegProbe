@@ -1,12 +1,12 @@
 # Ghidra Autotrigger Health
 
-- Generated UTC: `2026-04-13T18:07:09.745651Z`
+- Generated UTC: `2026-04-14T00:29:59.510196Z`
 - Input bundles selected: `0`
 - Queue jobs: `4`
-- Autotrigger seeds: `0`
-- Symbol resolution requests: `0`
-- Symbol resolution batch jobs: `0`
-- Symbol resolution blocked jobs: `0`
+- Autotrigger seeds: `1`
+- Symbol resolution requests: `16`
+- Symbol resolution batch jobs: `16`
+- Symbol resolution blocked jobs: `16`
 - Symbol resolution run selected jobs: `0`
 - Symbol resolution handoff selected jobs: `0`
 - Symbol resolution transfer selected jobs: `0`
@@ -18,7 +18,7 @@
 - ETW stackwalk plan status: `ready`
 - ETW stackwalk plan check: `ok`
 - Dispatch jobs: `4`
-- Autotrigger dispatch jobs: `0`
+- Autotrigger dispatch jobs: `1`
 - Run selected jobs: `4`
 - Symbol runner available: `True`
 - Runner available: `False`
@@ -28,10 +28,10 @@
 
 - Top input bundle: `None`
 - Top queue candidate: `power.control.allow-system-required-power-requests`
-- Top autotrigger candidate: `None`
-- Top symbol resolution request: `None`
-- Top symbol resolution batch request: `None`
-- Top symbol resolution handoff request: `None`
+- Top autotrigger candidate: `power.control.allow-system-required-power-requests`
+- Top symbol resolution request: `ntoskrnl.exe@0x7ff74fcf128b`
+- Top symbol resolution batch request: `ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b`
+- Top symbol resolution handoff request: `ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b`
 - Top symbol resolution transfer request: `None`
 - Top symbol resolution transfer pack request: `None`
 - Top symbol resolution execution run request: `None`
@@ -40,21 +40,21 @@
 
 - Input bundle paths: `0`
 - Queued candidate ids: `4`
-- Seed candidate ids: `0`
-- Symbol resolution requests: `0`
-- Symbol resolution batch request ids: `0`
-- Symbol resolution handoff request ids: `0`
+- Seed candidate ids: `1`
+- Symbol resolution requests: `16`
+- Symbol resolution batch request ids: `16`
+- Symbol resolution handoff request ids: `10`
 - Symbol resolution transfer request ids: `0`
 - Symbol resolution transfer pack request ids: `0`
 - Symbol resolution execution run request ids: `0`
-- Autotrigger dispatch candidate ids: `0`
+- Autotrigger dispatch candidate ids: `1`
 
 ## Symbol Handoff
 
-- Handoff status: `idle`
-- Operator blocker: `no-symbol-resolution-jobs`
+- Handoff status: `blocked`
+- Operator blocker: `symbol-resolution-inputs-missing`
 - Selected jobs: `0`
-- Blocked jobs: `0`
+- Blocked jobs: `16`
 
 ## Symbol Transfer
 
@@ -103,5 +103,5 @@
 ## Symbol Batch Diagnostics
 
 - Missing host tools: `none`
-- Missing input counts: `{}`
-- Resolution kind counts: `{}`
+- Missing input counts: `{"module_base": 16}`
+- Resolution kind counts: `{"raw_address": 16}`
