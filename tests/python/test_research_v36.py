@@ -91,6 +91,14 @@ etw_stackwalk_reopen_readiness_scoreboard_check = load_module(
     "check_etw_stackwalk_reopen_readiness_scoreboard",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_readiness_scoreboard.py",
 )
+etw_stackwalk_reopen_prerequisite_delta = load_module(
+    "generate_etw_stackwalk_reopen_prerequisite_delta",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_prerequisite_delta.py",
+)
+etw_stackwalk_reopen_prerequisite_delta_check = load_module(
+    "check_etw_stackwalk_reopen_prerequisite_delta",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_prerequisite_delta.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -2997,6 +3005,184 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(payload["reachable_url_count"], 2)
         self.assertEqual(payload["dead_link_count"], 0)
         self.assertEqual(payload["status"], "ok")
+
+    def test_etw_stackwalk_reopen_prerequisite_delta_counts_outstanding_reasons(self) -> None:
+        ledger_payload = {
+            "ledger_status": "deferred",
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "decision_state": "defer",
+                    "decision_reason_codes": [
+                        "await-seeding-pivot",
+                        "await-primary-doc",
+                        "explicit-reopen-required",
+                    ],
+                    "reopen_prerequisites": [
+                        "Land a current-build boot/init reader or registry seeding caller proof.",
+                        "Land a primary current-build Microsoft document for the exact value semantics.",
+                        "Explicitly reopen the lane before dispatching runtime capture.",
+                    ],
+                    "next_review_trigger": "Revisit after both evidence lanes land.",
+                    "run_id": "wave4-audio",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-audio/wave4-audio.etl",
+                },
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "decision_state": "defer",
+                    "decision_reason_codes": [
+                        "await-seeding-pivot",
+                        "explicit-reopen-required",
+                    ],
+                    "reopen_prerequisites": [
+                        "Land a current-build boot/init reader or registry seeding caller proof.",
+                        "Explicitly reopen the lane before dispatching runtime capture.",
+                    ],
+                    "next_review_trigger": "Revisit after the seeding-path pivot lands.",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                },
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_prerequisite_delta.build_reopen_prerequisite_delta(
+            ledger_payload,
+            generated_utc="2026-04-15T14:00:00Z",
+        )
+
+        self.assertEqual(payload["delta_status"], "blocked")
+        self.assertEqual(payload["counts"]["candidate_count"], 2)
+        self.assertEqual(payload["counts"]["outstanding_reason_counts"]["await-seeding-pivot"], 2)
+        self.assertEqual(payload["counts"]["outstanding_reason_counts"]["await-primary-doc"], 1)
+        self.assertEqual(payload["counts"]["outstanding_reason_counts"]["explicit-reopen-required"], 2)
+        self.assertEqual(payload["entries"][0]["candidate_id"], "power.control.allow-audio-to-enable-execution-required-power-requests")
+
+    def test_etw_stackwalk_reopen_prerequisite_delta_marks_clear_candidates(self) -> None:
+        ledger_payload = {
+            "ledger_status": "review-ready",
+            "entries": [
+                {
+                    "candidate_id": "example.ready",
+                    "feature_area": "Example",
+                    "decision_state": "review-ready",
+                    "decision_reason_codes": ["explicit-reopen-required"],
+                    "reopen_prerequisites": [],
+                    "next_review_trigger": "Revisit only after we intentionally reopen this ETW lane.",
+                    "run_id": "example-run",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_prerequisite_delta.build_reopen_prerequisite_delta(
+            ledger_payload,
+            generated_utc="2026-04-15T14:00:00Z",
+        )
+
+        self.assertEqual(payload["delta_status"], "clear")
+        self.assertEqual(payload["counts"]["blocked_candidate_count"], 0)
+        self.assertEqual(payload["counts"]["clear_candidate_count"], 1)
+        self.assertEqual(payload["entries"][0]["remaining_to_ready_count"], 0)
+
+    def test_etw_stackwalk_reopen_prerequisite_delta_check_accepts_matching_surface(self) -> None:
+        surface = {
+            "schema_version": "1.0",
+            "source_reopen_decision_ledger_path": "registry-research-framework/audit/etw-stackwalk-reopen-decision-ledger.json",
+            "ledger_status": "deferred",
+            "delta_status": "blocked",
+            "operator": {
+                "next_action": "Use the delta entries to land the next outstanding prerequisite before reopening the ETW lane.",
+                "intentional_reopen_required": True,
+            },
+            "counts": {
+                "candidate_count": 1,
+                "blocked_candidate_count": 1,
+                "clear_candidate_count": 0,
+                "outstanding_reason_counts": {
+                    "await-seeding-pivot": 1,
+                    "explicit-reopen-required": 1,
+                },
+                "unique_prerequisite_count": 2,
+            },
+            "unique_prerequisites": [
+                {
+                    "prerequisite": "Explicitly reopen the lane before dispatching runtime capture.",
+                    "candidate_ids": ["power.control.allow-system-required-power-requests"],
+                    "candidate_count": 1,
+                },
+                {
+                    "prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "candidate_ids": ["power.control.allow-system-required-power-requests"],
+                    "candidate_count": 1,
+                },
+            ],
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "decision_state": "defer",
+                    "delta_status": "blocked",
+                    "remaining_to_ready_count": 2,
+                    "outstanding_reason_codes": [
+                        "await-seeding-pivot",
+                        "explicit-reopen-required",
+                    ],
+                    "outstanding_reason_classes": ["evidence-gap", "operator-decision"],
+                    "outstanding_prerequisites": [
+                        "Land a current-build boot/init reader or registry seeding caller proof.",
+                        "Explicitly reopen the lane before dispatching runtime capture.",
+                    ],
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "next_review_trigger": "Revisit after a current-build boot/init reader or registry seeding caller pivot lands.",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_prerequisite_delta_check.compare_reopen_prerequisite_delta(
+            surface,
+            surface,
+            generated_utc="2026-04-15T14:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_reopen_prerequisite_delta_check_rejects_reason_count_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_reopen_decision_ledger_path": "registry-research-framework/audit/etw-stackwalk-reopen-decision-ledger.json",
+            "ledger_status": "deferred",
+            "delta_status": "blocked",
+            "operator": {
+                "next_action": "Use the delta entries to land the next outstanding prerequisite before reopening the ETW lane.",
+                "intentional_reopen_required": True,
+            },
+            "counts": {
+                "candidate_count": 1,
+                "blocked_candidate_count": 1,
+                "clear_candidate_count": 0,
+                "outstanding_reason_counts": {"await-seeding-pivot": 1},
+                "unique_prerequisite_count": 1,
+            },
+            "unique_prerequisites": [],
+            "entries": [],
+        }
+        surface = dict(expected)
+        surface["counts"] = dict(expected["counts"])
+        surface["counts"]["outstanding_reason_counts"] = {"await-seeding-pivot": 2}
+
+        payload = etw_stackwalk_reopen_prerequisite_delta_check.compare_reopen_prerequisite_delta(
+            surface,
+            expected,
+            generated_utc="2026-04-15T14:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("counts.outstanding_reason_counts mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {

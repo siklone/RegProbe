@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-14T22:06:04.408839Z",
+  "source_reopen_decision_ledger_path": "registry-research-framework/audit/etw-stackwalk-reopen-decision-ledger.json",
+  "ledger_status": "deferred",
+  "delta_status": "blocked",
+  "operator": {
+    "next_action": "Use the delta entries to land the next outstanding prerequisite before reopening the ETW lane.",
+    "intentional_reopen_required": true
+  },
+  "counts": {
+    "candidate_count": 2,
+    "blocked_candidate_count": 2,
+    "clear_candidate_count": 0,
+    "outstanding_reason_counts": {
+      "await-seeding-pivot": 2,
+      "await-primary-doc": 1,
+      "explicit-reopen-required": 2
+    },
+    "unique_prerequisite_count": 3
+  },
+  "unique_prerequisites": [
+    {
+      "prerequisite": "Explicitly reopen the lane before dispatching runtime capture.",
+      "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests",
+        "power.control.allow-system-required-power-requests"
+      ],
+      "candidate_count": 2
+    },
+    {
+      "prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+      "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests",
+        "power.control.allow-system-required-power-requests"
+      ],
+      "candidate_count": 2
+    },
+    {
+      "prerequisite": "Land a primary current-build Microsoft document for the exact value semantics.",
+      "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests"
+      ],
+      "candidate_count": 1
+    }
+  ],
+  "entries": [
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "decision_state": "defer",
+      "delta_status": "blocked",
+      "remaining_to_ready_count": 3,
+      "outstanding_reason_codes": [
+        "await-seeding-pivot",
+        "await-primary-doc",
+        "explicit-reopen-required"
+      ],
+      "outstanding_reason_classes": [
+        "evidence-gap",
+        "operator-decision"
+      ],
+      "outstanding_prerequisites": [
+        "Land a current-build boot/init reader or registry seeding caller proof.",
+        "Land a primary current-build Microsoft document for the exact value semantics.",
+        "Explicitly reopen the lane before dispatching runtime capture."
+      ],
+      "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+      "next_review_trigger": "Revisit after a current-build seeding-path pivot and a primary Microsoft doc both land.",
+      "run_id": "wave4-allow-audio-e2e",
+      "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl"
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "decision_state": "defer",
+      "delta_status": "blocked",
+      "remaining_to_ready_count": 2,
+      "outstanding_reason_codes": [
+        "await-seeding-pivot",
+        "explicit-reopen-required"
+      ],
+      "outstanding_reason_classes": [
+        "evidence-gap",
+        "operator-decision"
+      ],
+      "outstanding_prerequisites": [
+        "Land a current-build boot/init reader or registry seeding caller proof.",
+        "Explicitly reopen the lane before dispatching runtime capture."
+      ],
+      "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+      "next_review_trigger": "Revisit after a current-build boot/init reader or registry seeding caller pivot lands.",
+      "run_id": "wave4-allow-system-required-e2e",
+      "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl"
+    }
+  ]
+}
