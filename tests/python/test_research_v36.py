@@ -63,6 +63,10 @@ etw_stackwalk_hold_reopen_plan = load_module(
     "generate_etw_stackwalk_hold_reopen_plan",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_hold_reopen_plan.py",
 )
+etw_stackwalk_hold_reopen_check = load_module(
+    "check_etw_stackwalk_hold_reopen_plan",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_hold_reopen_plan.py",
+)
 etw_stackwalk_bundle = load_module("generate_etw_stackwalk_bundle", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_bundle.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
@@ -2326,6 +2330,72 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["reopen_candidate_count"], 0)
         self.assertEqual(payload["items"], [])
+
+    def test_etw_stackwalk_hold_reopen_check_accepts_matching_surface(self) -> None:
+        surface = {
+            "schema_version": "1.0",
+            "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+            "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+            "default_run_mode": "dry-run",
+            "default_selected_job_count": 0,
+            "default_skipped_hold_count": 2,
+            "reopen_candidate_count": 1,
+            "items": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "next_missing_layer": "intentional-hold",
+                    "promotion_blockers": [
+                        "intentional-hold",
+                        "system-execution-required-no-current-build-registry-seeding-path",
+                    ],
+                    "reopen_prerequisites": [
+                        "Land a current-build boot/init reader or registry seeding caller proof.",
+                        "Explicitly reopen the lane before dispatching runtime capture.",
+                    ],
+                    "default_dispatch_excluded": True,
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+                    "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
+                    "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+                    "run_id": "wave4-allow-system-required-e2e",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                    "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_hold_reopen_check.compare_hold_reopen_plan(
+            surface,
+            surface,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_hold_reopen_check_rejects_mismatched_reopen_count(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+            "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+            "default_run_mode": "dry-run",
+            "default_selected_job_count": 0,
+            "default_skipped_hold_count": 2,
+            "reopen_candidate_count": 2,
+            "items": [],
+        }
+        surface = dict(expected)
+        surface["reopen_candidate_count"] = 1
+
+        payload = etw_stackwalk_hold_reopen_check.compare_hold_reopen_plan(
+            surface,
+            expected,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("reopen_candidate_count mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {
