@@ -339,11 +339,11 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, concrete current-build reader/writer proof, direct live value reads that show the sampled control globals are zero on the running build, a live-KD confirmed privileged `NtSetSystemInformation` writer callsite, a live-KD confirmed outer query wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`, Microsoft-documented public zero-as-disabled watchdog semantics, and current-build INIT descriptor bindings for all three registry value names. It is not ready for validation because the exact inner `ExpQuerySystemInformation` watchdog arm still has not been isolated, the live state still conflicts with the repo-doc defaults, and no exact current-build runtime registry read has been captured. This remains active blocked work rather than an intentional hold because the family has a concrete current-build code path and the unresolved pieces are specific trace gaps.",
+    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, concrete current-build reader/writer proof, direct live value reads that show the sampled control globals are zero on the running build, a live-KD confirmed privileged `NtSetSystemInformation` writer callsite, a live-KD confirmed outer query wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`, Microsoft-documented public zero-as-disabled watchdog semantics, and current-build INIT descriptor bindings for all three registry value names. It is not ready for validation because the remaining current-build gap is now precise rather than generic: we still have not isolated the persisted seeding caller or exact inner query arm that would explain how the `Session Manager\\Kernel` rows interact with the all-zero live control state, and we still do not have a primary Microsoft publication for the internal contract. This remains active blocked work rather than an intentional hold because the family still has a concrete current-build code path, documented disabled-state-compatible semantics, and a plausible debugger/decompiler pivot that could close the last structural gap.",
     "manual_review_required": true,
     "blocking_issues": [
       "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
-      "dpc-watchdog-control-no-current-build-query-arm-or-exact-registry-read",
+      "dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm",
       "dpc-watchdog-control-no-primary-current-build-doc"
     ]
   },
@@ -368,5 +368,5 @@
       "notes": "A host-side `ntoskrnl.exe` decode found `Session Manager\\Kernel` INIT descriptor rows for `DPCTimeout`, `DpcSoftTimeout`, and `DpcCumulativeSoftTimeout` that point to the same static RVAs as the live `KeDpcTimeoutMs`, `KeDpcSoftTimeoutMs`, and `KeDpcCumulativeSoftTimeoutMs` globals."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T08:51:58Z"
+  "last_reviewed_utc": "2026-04-14T09:26:47Z"
 }
