@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-14T08:52:22.726295Z",
+  "generated_at": "2026-04-14T08:55:53.567647Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 2,
-    "intentional-hold": 10,
-    "runtime-trace": 6
+    "intentional-hold": 11,
+    "runtime-trace": 5
   },
   "actionability_counts": {
-    "active": 8,
-    "hold": 10
+    "active": 7,
+    "hold": 11
   },
   "ordered_lanes": [
     "ghidra",
@@ -41,8 +41,8 @@
     "power.session-watchdog-timeouts",
     "system.kernel-dpc-watchdog-profile-cluster",
     "power.control.win32k-callout-watchdog-timeout-seconds",
-    "power.session-win32-callout-watchdog-bugcheck-enabled",
-    "system.kernel-dpc-watchdog-control-cluster"
+    "system.kernel-dpc-watchdog-control-cluster",
+    "system.kernel-long-dpc-threshold-cluster"
   ],
   "top_hold_candidates": [
     "policy.system.enable-virtualization",
@@ -115,26 +115,6 @@
         "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
       ],
       "suggested_command": "winopt research show-blocked power.control.win32k-callout-watchdog-timeout-seconds --json",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
-    },
-    {
-      "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
-      "feature_area": "Session Manager Power Watchdog Sibling",
-      "next_missing_layer": "runtime-trace",
-      "actionability": "active",
-      "priority_score": 27,
-      "blocker_count": 3,
-      "promotion_blockers": [
-        "win32-callout-watchdog-bugcheck-no-primary-current-build-doc",
-        "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
-        "win32-callout-watchdog-bugcheck-semantics-unproven"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
-      "value_name": "Win32CalloutWatchdogBugcheckEnabled",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
-      ],
-      "suggested_command": "winopt research show-blocked power.session-win32-callout-watchdog-bugcheck-enabled --json",
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
@@ -394,6 +374,27 @@
       "recent_audit_artifacts": [],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
+    },
+    {
+      "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+      "feature_area": "Session Manager Power Watchdog Sibling",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 6,
+      "blocker_count": 4,
+      "promotion_blockers": [
+        "win32-callout-watchdog-bugcheck-intentional-hold-adjacent-sibling-without-current-build-pivot",
+        "win32-callout-watchdog-bugcheck-no-primary-current-build-doc",
+        "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
+        "win32-callout-watchdog-bugcheck-semantics-unproven"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
       "candidate_id": "power.control.power-request-override-subtree",
