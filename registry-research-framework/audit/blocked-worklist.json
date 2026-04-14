@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T06:02:27.534460Z",
+  "generated_at": "2026-04-14T06:03:53.670978Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 2,
@@ -60,8 +60,8 @@
       "priority_score": 33,
       "blocker_count": 2,
       "promotion_blockers": [
-        "power-session-watchdog-timeouts-exact-runtime-read-unresolved",
-        "power-session-watchdog-timeouts-specific-caller-unresolved"
+        "power-session-watchdog-timeouts-no-current-build-exact-registry-read",
+        "power-session-watchdog-timeouts-no-current-build-watchdog-specific-caller"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",

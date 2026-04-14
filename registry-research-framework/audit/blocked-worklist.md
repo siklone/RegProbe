@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T06:02:27.534460Z`
+Generated: `2026-04-14T06:03:53.670978Z`
 
 Blocked candidates: `18`
 
@@ -41,7 +41,7 @@ Blocked candidates: `18`
 - Feature area: `Directed Power Watchdog Timeouts`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`
 - Value name: `WatchdogResumeTimeout / WatchdogSleepTimeout`
-- Blockers: `power-session-watchdog-timeouts-exact-runtime-read-unresolved`, `power-session-watchdog-timeouts-specific-caller-unresolved`
+- Blockers: `power-session-watchdog-timeouts-no-current-build-exact-registry-read`, `power-session-watchdog-timeouts-no-current-build-watchdog-specific-caller`
 - Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
 - Suggested command: `winopt research show-blocked power.session-watchdog-timeouts --json`
 - Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
