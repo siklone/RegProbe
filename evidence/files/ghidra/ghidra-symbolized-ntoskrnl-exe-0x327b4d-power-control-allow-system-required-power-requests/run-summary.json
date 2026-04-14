@@ -1,0 +1,46 @@
+{
+  "generated_utc": "2026-04-14T02:37:30.9926706Z",
+  "binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
+  "output_name": "ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests",
+  "project_name": "Probe_ghidra_symbolized_ntoskrnl_exe_0x327b4d_power_control_allow_system_required_power_requests",
+  "symbol_root": "C:\\Tools\\Symbols\\ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests",
+  "output_root": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests",
+  "symchk_path": "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+  "symchk_exit_code": 0,
+  "staged_pdb_count": 2,
+  "staged_pdb_sample": [
+    "C:\\Tools\\Symbols\\ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests\\ntkrnlmp.pdb",
+    "C:\\Tools\\Symbols\\ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests\\ntkrnlmp.pdb\\24DE61DB3A27C5B383DFF181CB51F7E11\\ntkrnlmp.pdb"
+  ],
+  "ghidra_exit_code": 0,
+  "no_analysis": false,
+  "module_offsets": [
+    "ntoskrnl.exe+0x327B4D",
+    "ntoskrnl.exe+0x3ED794",
+    "ntoskrnl.exe+0x3EDD84",
+    "ntoskrnl.exe+0x6BE358",
+    "ntoskrnl.exe+0x87108C",
+    "ntoskrnl.exe+0xAE49F6"
+  ],
+  "pdb_loaded": true,
+  "match_count": 7,
+  "uploads": {
+    "evidence": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests\\evidence.json",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests-evidence.json"
+    },
+    "markdown": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests\\ghidra-matches.md",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests-ghidra-matches.md"
+    },
+    "symchk_log": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests\\symchk.txt",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests-symchk.txt"
+    }
+  },
+  "status": "ok",
+  "error_kind": "ghidra-symbolized-probe-error",
+  "recovery_action": "inspect-ghidra-symbolized-run",
+  "transport_blocker": "ghidra",
+  "guest_health": "stable"
+}
