@@ -1,25 +1,24 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T09:03:50.608346Z`
+Generated: `2026-04-14T09:09:58.912056Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 4
-- `hold`: 14
+- `active`: 3
+- `hold`: 15
 
 ## Lane Summary
 
 - `ghidra`: 2 | first: `power.session-watchdog-timeouts` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static reverse-engineering for exact leaf-level proof.
-- `runtime-trace`: 2 | first: `power.control.win32k-callout-watchdog-timeout-seconds` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
-- `intentional-hold`: 14 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `runtime-trace`: 1 | first: `system.kernel-dpc-watchdog-control-cluster` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Find a primary current-build Microsoft source or explicitly accept research-only status.
+- `intentional-hold`: 15 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
 - `power.session-watchdog-timeouts` (`ghidra`, score=33, blockers=2)
 - `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
-- `power.control.win32k-callout-watchdog-timeout-seconds` (`runtime-trace`, score=27, blockers=3)
 - `system.kernel-dpc-watchdog-control-cluster` (`runtime-trace`, score=27, blockers=3)
 
 ## Top Holds
@@ -57,19 +56,6 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Suggested command: `winopt research show-blocked system.kernel-dpc-watchdog-profile-cluster --json`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
-
-### `power.control.win32k-callout-watchdog-timeout-seconds`
-
-- Lane: `runtime-trace`
-- Actionability: `active`
-- Priority score: `27`
-- Feature area: `Control Power Watchdog Sibling`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
-- Value name: `Win32kCalloutWatchdogTimeoutSeconds`
-- Blockers: `win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build`, `win32k-callout-watchdog-no-primary-current-build-doc`, `win32k-callout-watchdog-override-semantics-unproven`
-- Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
-- Suggested command: `winopt research show-blocked power.control.win32k-callout-watchdog-timeout-seconds --json`
-- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `system.kernel-dpc-watchdog-control-cluster`
 
@@ -197,6 +183,19 @@ Blocked candidates: `18`
 - Blockers: `ttmenabled-boot-unsafe-dedicated-boot-lane-required`, `ttmenabled-boot-unsafe-on-isolated-pilot-profile`, `ttmenabled-no-primary-current-build-doc`, `ttmenabled-reader-unresolved`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
+
+### `power.control.win32k-callout-watchdog-timeout-seconds`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `6`
+- Feature area: `Control Power Watchdog Sibling`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
+- Value name: `Win32kCalloutWatchdogTimeoutSeconds`
+- Blockers: `win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build`, `win32k-callout-watchdog-intentional-hold-no-current-build-pivot`, `win32k-callout-watchdog-no-primary-current-build-doc`, `win32k-callout-watchdog-override-semantics-unproven`
+- Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `power.session-win32-callout-watchdog-bugcheck-enabled`
 

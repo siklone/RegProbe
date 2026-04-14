@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-14T09:03:50.608346Z",
+  "generated_at": "2026-04-14T09:09:58.912056Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 2,
-    "intentional-hold": 14,
-    "runtime-trace": 2
+    "intentional-hold": 15,
+    "runtime-trace": 1
   },
   "actionability_counts": {
-    "active": 4,
-    "hold": 14
+    "active": 3,
+    "hold": 15
   },
   "ordered_lanes": [
     "ghidra",
@@ -27,9 +27,9 @@
       "next_action_hint": "Continue static reverse-engineering for exact leaf-level proof."
     },
     "runtime-trace": {
-      "candidate_id": "power.control.win32k-callout-watchdog-timeout-seconds",
-      "suggested_command": "winopt research show-blocked power.control.win32k-callout-watchdog-timeout-seconds --json",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+      "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+      "suggested_command": "winopt research show-blocked system.kernel-dpc-watchdog-control-cluster --json",
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
     },
     "intentional-hold": {
       "candidate_id": "policy.system.enable-virtualization",
@@ -40,7 +40,6 @@
   "top_actionable_candidates": [
     "power.session-watchdog-timeouts",
     "system.kernel-dpc-watchdog-profile-cluster",
-    "power.control.win32k-callout-watchdog-timeout-seconds",
     "system.kernel-dpc-watchdog-control-cluster"
   ],
   "top_hold_candidates": [
@@ -93,28 +92,6 @@
       ],
       "suggested_command": "winopt research show-blocked system.kernel-dpc-watchdog-profile-cluster --json",
       "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
-    },
-    {
-      "candidate_id": "power.control.win32k-callout-watchdog-timeout-seconds",
-      "feature_area": "Control Power Watchdog Sibling",
-      "next_missing_layer": "runtime-trace",
-      "actionability": "active",
-      "priority_score": 27,
-      "blocker_count": 3,
-      "promotion_blockers": [
-        "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
-        "win32k-callout-watchdog-no-primary-current-build-doc",
-        "win32k-callout-watchdog-override-semantics-unproven"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
-      "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
-        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
-        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
-      ],
-      "suggested_command": "winopt research show-blocked power.control.win32k-callout-watchdog-timeout-seconds --json",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
       "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
@@ -313,6 +290,29 @@
       "recent_audit_artifacts": [],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
+    },
+    {
+      "candidate_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+      "feature_area": "Control Power Watchdog Sibling",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 6,
+      "blocker_count": 4,
+      "promotion_blockers": [
+        "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
+        "win32k-callout-watchdog-intentional-hold-no-current-build-pivot",
+        "win32k-callout-watchdog-no-primary-current-build-doc",
+        "win32k-callout-watchdog-override-semantics-unproven"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
       "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
