@@ -32,6 +32,7 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
     symbol_resolution_blocked_jobs = int(counts.get("symbol_resolution_blocked_jobs") or 0)
     symbol_resolution_run_selected_jobs = int(counts.get("symbol_resolution_run_selected_jobs") or 0)
     symbol_resolution_run_blocked_jobs = int(counts.get("symbol_resolution_run_blocked_jobs") or 0)
+    symbol_resolution_run_completed_jobs = int(counts.get("symbol_resolution_run_completed_jobs") or 0)
     symbol_resolution_handoff_selected_jobs = int(counts.get("symbol_resolution_handoff_selected_jobs") or 0)
     symbol_resolution_transfer_selected_jobs = int(counts.get("symbol_resolution_transfer_selected_jobs") or 0)
     symbol_resolution_transfer_pack_selected_jobs = int(counts.get("symbol_resolution_transfer_pack_selected_jobs") or 0)
@@ -199,10 +200,15 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
             "symbol_resolution_run_blocked_jobs exceeds symbol_resolution_batch_jobs: "
             f"{symbol_resolution_run_blocked_jobs}>{symbol_resolution_batch_jobs}"
         )
-    if symbol_resolution_run_selected_jobs + symbol_resolution_run_blocked_jobs < symbol_resolution_batch_jobs:
+    if symbol_resolution_run_completed_jobs > symbol_resolution_batch_jobs:
         errors.append(
-            "symbol_resolution selected+blocked does not cover batch jobs: "
-            f"{symbol_resolution_run_selected_jobs}+{symbol_resolution_run_blocked_jobs}<{symbol_resolution_batch_jobs}"
+            "symbol_resolution_run_completed_jobs exceeds symbol_resolution_batch_jobs: "
+            f"{symbol_resolution_run_completed_jobs}>{symbol_resolution_batch_jobs}"
+        )
+    if symbol_resolution_run_selected_jobs + symbol_resolution_run_blocked_jobs + symbol_resolution_run_completed_jobs < symbol_resolution_batch_jobs:
+        errors.append(
+            "symbol_resolution selected+blocked+completed does not cover batch jobs: "
+            f"{symbol_resolution_run_selected_jobs}+{symbol_resolution_run_blocked_jobs}+{symbol_resolution_run_completed_jobs}<{symbol_resolution_batch_jobs}"
         )
     if autotrigger_dispatch_jobs > dispatch_jobs:
         errors.append(f"autotrigger_dispatch_jobs exceeds dispatch_jobs: {autotrigger_dispatch_jobs}>{dispatch_jobs}")

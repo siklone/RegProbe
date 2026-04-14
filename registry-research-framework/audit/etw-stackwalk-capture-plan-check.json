@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T18:02:30.185473Z",
+  "generated_utc": "2026-04-14T03:42:52.590048Z",
   "check_status": "ok",
   "errors": [],
   "plan_status": "ready",
-  "profile_id": "kernel-registry-stackwalk-v1",
-  "run_id": "wave4-registry-stackwalk",
+  "profile_id": "execution-required-audio-stackwalk-v1",
+  "run_id": "wave4-allow-audio-e2e",
   "stackwalk_events": [
     "RegCloseKey",
     "RegCreateKey",
@@ -19,6 +19,7 @@
     "parse_xml",
     "preflight",
     "prepare",
+    "repo_guest_capture",
     "repo_parse",
     "start",
     "stop",

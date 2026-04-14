@@ -102,13 +102,16 @@ def build_capture_plan(
 ) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
     errors = validate_profile(profile)
-    normalized_run_id = sanitize_run_id(run_id)
+    target_defaults = profile.get("target_defaults") or {}
+    normalized_run_id = sanitize_run_id(run_id or str(profile.get("default_run_id") or "registry-stackwalk-operator"))
     base_output_root = str(output_root or profile.get("default_output_root") or "").rstrip("\\")
     run_output_root = windows_join(base_output_root, normalized_run_id)
     raw_etl_path = windows_join(run_output_root, f"{normalized_run_id}.raw.etl")
     etl_path = windows_join(run_output_root, f"{normalized_run_id}.etl")
     xml_path = windows_join(run_output_root, f"{normalized_run_id}.xml")
     host_etl_ref = f"evidence/files/etw-stackwalk/{normalized_run_id}/{normalized_run_id}.etl"
+    target_registry_path = registry_path or target_defaults.get("registry_path")
+    target_value_name = value_name or target_defaults.get("value_name")
     kernel_flags = unique_strings(profile.get("kernel_flags") or [])
     stackwalk_events = unique_strings(profile.get("stackwalk_events") or [])
     buffer = profile.get("buffer") or {}
@@ -139,8 +142,8 @@ def build_capture_plan(
         "capture_phase": profile.get("capture_phase"),
         "provider": profile.get("provider") or {},
         "target": {
-            "registry_path": registry_path,
-            "value_name": value_name,
+            "registry_path": target_registry_path,
+            "value_name": target_value_name,
         },
         "run": {
             "run_id": normalized_run_id,
@@ -176,11 +179,26 @@ def build_capture_plan(
                 "--input",
                 host_etl_ref,
             ],
+            "repo_guest_capture": [
+                "python3",
+                "scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+                "--run-id",
+                normalized_run_id,
+                "--duration-seconds",
+                str(duration),
+                "--registry-path",
+                str(target_registry_path or ""),
+                "--value-name",
+                str(target_value_name or ""),
+                "--ingest-to-repo",
+                "--refresh-ghidra",
+            ],
         },
         "operator_notes": [
             "Run from an elevated Windows shell with Windows Performance Toolkit installed.",
             f"Copy the final ETL into {host_etl_ref} before running repo_parse.",
             "The start command enables registry stack walking; the parser expects tracerpt XML fields such as Stack or CallStack.",
+            "The repo_guest_capture command is the preferred host-side lane when the focused KVM guest is available because it launches the guest helper, ingests the ETL/XML into the repo, and refreshes caller-stack follow-up automatically.",
             "If caller_stack remains empty, rerun with a narrower trigger window or move the ETL to WPA/xperf for stack inspection.",
         ],
     }
@@ -202,13 +220,15 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Capture phase: `{payload.get('capture_phase')}`",
         f"- Run id: `{run.get('run_id')}`",
         f"- Duration seconds: `{run.get('duration_seconds')}`",
+        f"- Registry path: `{(payload.get('target') or {}).get('registry_path')}`",
+        f"- Value name: `{(payload.get('target') or {}).get('value_name')}`",
         f"- Stack expected: `{stack_capture.get('expected')}`",
         f"- Stackwalk events: `{', '.join(stack_capture.get('stackwalk_events') or [])}`",
         "",
         "## Commands",
         "",
     ]
-    for name in ("preflight", "prepare", "start", "wait", "stop", "parse_xml", "repo_parse"):
+    for name in ("preflight", "prepare", "start", "wait", "stop", "parse_xml", "repo_parse", "repo_guest_capture"):
         command = commands.get(name)
         if not command:
             continue
@@ -235,7 +255,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Generate an operator-ready ETW registry stackwalk capture plan.")
     parser.add_argument("--config", type=Path, default=CONFIG_PATH)
     parser.add_argument("--profile-id")
-    parser.add_argument("--run-id", default="registry-stackwalk-operator")
+    parser.add_argument("--run-id")
     parser.add_argument("--output-root")
     parser.add_argument("--duration-seconds", type=int)
     parser.add_argument("--registry-path")

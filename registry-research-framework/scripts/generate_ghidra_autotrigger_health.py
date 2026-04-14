@@ -159,6 +159,7 @@ def health_payload(
             "symbol_resolution_blocked_jobs": int(symbol_batch.get("blocked_job_count") or 0),
             "symbol_resolution_run_selected_jobs": int(symbol_run.get("selected_job_count") or 0),
             "symbol_resolution_run_blocked_jobs": int(symbol_run.get("blocked_job_count") or 0),
+            "symbol_resolution_run_completed_jobs": int(symbol_run.get("completed_job_count") or 0),
             "symbol_resolution_handoff_selected_jobs": int((handoff.get("counts") or {}).get("selected_jobs") or 0),
             "symbol_resolution_transfer_selected_jobs": int((transfer.get("counts") or {}).get("selected_jobs") or 0),
             "symbol_resolution_transfer_pack_selected_jobs": int((transfer_pack.get("counts") or {}).get("selected_jobs") or 0),
@@ -178,6 +179,7 @@ def health_payload(
             "available": bool(symbol_run.get("runner_available")),
             "mode": symbol_run.get("mode"),
             "error": symbol_run.get("error"),
+            "completed_jobs": int(symbol_run.get("completed_job_count") or 0),
         },
         "symbol_resolution_batch": {
             "missing_host_tools": symbol_batch.get("missing_host_tools") or [],
@@ -295,6 +297,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Symbol resolution batch jobs: `{counts.get('symbol_resolution_batch_jobs', 0)}`",
         f"- Symbol resolution blocked jobs: `{counts.get('symbol_resolution_blocked_jobs', 0)}`",
         f"- Symbol resolution run selected jobs: `{counts.get('symbol_resolution_run_selected_jobs', 0)}`",
+        f"- Symbol resolution run completed jobs: `{counts.get('symbol_resolution_run_completed_jobs', 0)}`",
         f"- Symbol resolution handoff selected jobs: `{counts.get('symbol_resolution_handoff_selected_jobs', 0)}`",
         f"- Symbol resolution transfer selected jobs: `{counts.get('symbol_resolution_transfer_selected_jobs', 0)}`",
         f"- Symbol resolution transfer pack selected jobs: `{counts.get('symbol_resolution_transfer_pack_selected_jobs', 0)}`",

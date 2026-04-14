@@ -1,6 +1,6 @@
 # Ghidra Autotrigger Health
 
-- Generated UTC: `2026-04-14T02:41:15.991087Z`
+- Generated UTC: `2026-04-14T03:44:15.676747Z`
 - Input bundles selected: `0`
 - Queue jobs: `4`
 - Autotrigger seeds: `1`
@@ -8,8 +8,9 @@
 - Symbol resolution batch jobs: `5`
 - Symbol resolution blocked jobs: `0`
 - Symbol resolution run selected jobs: `0`
+- Symbol resolution run completed jobs: `5`
 - Symbol resolution handoff selected jobs: `0`
-- Symbol resolution transfer selected jobs: `2`
+- Symbol resolution transfer selected jobs: `0`
 - Symbol resolution transfer pack selected jobs: `0`
 - Symbol resolution transfer pack check errors: `0`
 - Symbol resolution execution run ready jobs: `0`
@@ -32,7 +33,7 @@
 - Top symbol resolution request: `KernelBase.dll+0x2e436`
 - Top symbol resolution batch request: `ghidra-symbol-01-kernelbase-dll-0x2e436`
 - Top symbol resolution handoff request: `ghidra-symbol-01-kernelbase-dll-0x2e436`
-- Top symbol resolution transfer request: `ghidra-symbol-07-ntoskrnl-exe-0x327b4d`
+- Top symbol resolution transfer request: `None`
 - Top symbol resolution transfer pack request: `None`
 - Top symbol resolution execution run request: `None`
 
@@ -44,7 +45,7 @@
 - Symbol resolution requests: `16`
 - Symbol resolution batch request ids: `5`
 - Symbol resolution handoff request ids: `5`
-- Symbol resolution transfer request ids: `2`
+- Symbol resolution transfer request ids: `0`
 - Symbol resolution transfer pack request ids: `0`
 - Symbol resolution execution run request ids: `0`
 - Autotrigger dispatch candidate ids: `1`
@@ -58,9 +59,9 @@
 
 ## Symbol Transfer
 
-- Transfer status: `ready`
-- Operator blocker: `transfer-pack-ready`
-- Selected jobs: `2`
+- Transfer status: `idle`
+- Operator blocker: `no-selected-symbol-jobs`
+- Selected jobs: `0`
 - Missing repo files: `0`
 
 ## Transfer Pack
@@ -92,11 +93,11 @@
 
 - Plan status: `ready`
 - Check status: `ok`
-- Profile: `kernel-registry-stackwalk-v1`
-- Run id: `wave4-registry-stackwalk`
+- Profile: `execution-required-audio-stackwalk-v1`
+- Run id: `wave4-allow-audio-e2e`
 - Stack expected: `True`
 - Stackwalk event count: `7`
-- Handoff ETL path: `evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl`
+- Handoff ETL path: `evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl`
 - Plan errors: `0`
 - Check errors: `0`
 

@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T17:58:54.800118Z",
+  "generated_utc": "2026-04-14T03:42:48.937843Z",
   "plan_status": "ready",
   "errors": [],
-  "profile_id": "kernel-registry-stackwalk-v1",
-  "description": "Runtime ETW registry capture with xperf stack walking enabled for registry key/value operations.",
+  "profile_id": "execution-required-audio-stackwalk-v1",
+  "description": "Wave 4 runtime ETW stackwalk capture for the exact AllowAudioToEnableExecutionRequiredPowerRequests query lane.",
   "capture_phase": "runtime",
   "provider": {
     "name": "Microsoft-Windows-Kernel-Registry",
@@ -13,17 +13,17 @@
     "level": "5"
   },
   "target": {
-    "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
-    "value_name": "TimerCheckFlags"
+    "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests"
   },
   "run": {
-    "run_id": "wave4-registry-stackwalk",
+    "run_id": "wave4-allow-audio-e2e",
     "duration_seconds": 60,
-    "output_root": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk",
-    "raw_etl_path": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.raw.etl",
-    "etl_path": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.etl",
-    "xml_path": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.xml",
-    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl"
+    "output_root": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-allow-audio-e2e",
+    "raw_etl_path": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-allow-audio-e2e\\wave4-allow-audio-e2e.raw.etl",
+    "etl_path": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-allow-audio-e2e\\wave4-allow-audio-e2e.etl",
+    "xml_path": "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-allow-audio-e2e\\wave4-allow-audio-e2e.xml",
+    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl"
   },
   "stack_capture": {
     "expected": true,
@@ -63,7 +63,7 @@
         "powershell",
         "-NoProfile",
         "-Command",
-        "New-Item -ItemType Directory -Force -Path 'C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk' | Out-Null"
+        "New-Item -ItemType Directory -Force -Path 'C:\\RegProbe-Diag\\etw-stackwalk\\wave4-allow-audio-e2e' | Out-Null"
       ],
       [
         "xperf",
@@ -83,7 +83,7 @@
       "-MaxBuffers",
       "256",
       "-f",
-      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.raw.etl"
+      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-allow-audio-e2e\\wave4-allow-audio-e2e.raw.etl"
     ],
     "wait": [
       "powershell",
@@ -94,13 +94,13 @@
     "stop": [
       "xperf",
       "-d",
-      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.etl"
+      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-allow-audio-e2e\\wave4-allow-audio-e2e.etl"
     ],
     "parse_xml": [
       "tracerpt",
-      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.etl",
+      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-allow-audio-e2e\\wave4-allow-audio-e2e.etl",
       "-o",
-      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-registry-stackwalk\\wave4-registry-stackwalk.xml",
+      "C:\\RegProbe-Diag\\etw-stackwalk\\wave4-allow-audio-e2e\\wave4-allow-audio-e2e.xml",
       "-of",
       "XML"
     ],
@@ -108,13 +108,28 @@
       "python3",
       "registry-research-framework/scripts/parse_etl_registry_touches.py",
       "--input",
-      "evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl"
+      "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl"
+    ],
+    "repo_guest_capture": [
+      "python3",
+      "scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+      "--run-id",
+      "wave4-allow-audio-e2e",
+      "--duration-seconds",
+      "60",
+      "--registry-path",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "--value-name",
+      "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "--ingest-to-repo",
+      "--refresh-ghidra"
     ]
   },
   "operator_notes": [
     "Run from an elevated Windows shell with Windows Performance Toolkit installed.",
-    "Copy the final ETL into evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl before running repo_parse.",
+    "Copy the final ETL into evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl before running repo_parse.",
     "The start command enables registry stack walking; the parser expects tracerpt XML fields such as Stack or CallStack.",
+    "The repo_guest_capture command is the preferred host-side lane when the focused KVM guest is available because it launches the guest helper, ingests the ETL/XML into the repo, and refreshes caller-stack follow-up automatically.",
     "If caller_stack remains empty, rerun with a narrower trigger window or move the ETL to WPA/xperf for stack inspection."
   ],
   "config_path": "registry-research-framework/config/etw-stackwalk-profiles.json"

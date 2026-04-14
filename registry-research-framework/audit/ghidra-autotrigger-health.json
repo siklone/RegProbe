@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T02:41:15.991087Z",
+  "generated_utc": "2026-04-14T03:44:15.676747Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -27,8 +27,9 @@
     "symbol_resolution_blocked_jobs": 0,
     "symbol_resolution_run_selected_jobs": 0,
     "symbol_resolution_run_blocked_jobs": 0,
+    "symbol_resolution_run_completed_jobs": 5,
     "symbol_resolution_handoff_selected_jobs": 0,
-    "symbol_resolution_transfer_selected_jobs": 2,
+    "symbol_resolution_transfer_selected_jobs": 0,
     "symbol_resolution_transfer_pack_selected_jobs": 0,
     "symbol_resolution_transfer_pack_check_errors": 0,
     "symbol_resolution_execution_run_planned_jobs": 0,
@@ -45,7 +46,8 @@
   "symbol_resolution_runner": {
     "available": true,
     "mode": "dry-run",
-    "error": null
+    "error": null,
+    "completed_jobs": 5
   },
   "symbol_resolution_batch": {
     "missing_host_tools": [],
@@ -62,9 +64,9 @@
     "blocked_jobs": 0
   },
   "symbol_resolution_transfer": {
-    "status": "ready",
-    "operator_blocker": "transfer-pack-ready",
-    "selected_jobs": 2,
+    "status": "idle",
+    "operator_blocker": "no-selected-symbol-jobs",
+    "selected_jobs": 0,
     "repo_file_count": 9,
     "missing_repo_file_count": 0
   },
@@ -106,11 +108,11 @@
   "etw_stackwalk_capture": {
     "plan_status": "ready",
     "check_status": "ok",
-    "profile_id": "kernel-registry-stackwalk-v1",
-    "run_id": "wave4-registry-stackwalk",
+    "profile_id": "execution-required-audio-stackwalk-v1",
+    "run_id": "wave4-allow-audio-e2e",
     "stack_expected": true,
     "stackwalk_event_count": 7,
-    "handoff_etl_path": "evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl",
+    "handoff_etl_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
     "plan_errors": [],
     "check_errors": []
   },
@@ -178,10 +180,7 @@
       "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
       "ghidra-symbol-13-reg-exe-0x128b"
     ],
-    "symbol_resolution_transfer_request_ids": [
-      "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
-      "ghidra-symbol-13-reg-exe-0x128b"
-    ],
+    "symbol_resolution_transfer_request_ids": [],
     "symbol_resolution_transfer_pack_request_ids": [],
     "symbol_resolution_execution_run_request_ids": [],
     "autotrigger_dispatch_candidate_ids": [
@@ -195,7 +194,7 @@
     "top_symbol_resolution_request": "KernelBase.dll+0x2e436",
     "top_symbol_resolution_batch_request": "ghidra-symbol-01-kernelbase-dll-0x2e436",
     "top_symbol_resolution_handoff_request": "ghidra-symbol-01-kernelbase-dll-0x2e436",
-    "top_symbol_resolution_transfer_request": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+    "top_symbol_resolution_transfer_request": null,
     "top_symbol_resolution_transfer_pack_request": null,
     "top_symbol_resolution_execution_run_request": null,
     "missing_input_jobs": []
