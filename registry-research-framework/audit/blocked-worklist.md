@@ -1,28 +1,28 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T05:56:03.863349Z`
+Generated: `2026-04-14T06:00:23.602257Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 12
-- `hold`: 6
+- `active`: 10
+- `hold`: 8
 
 ## Lane Summary
 
 - `restore-story`: 1 | first: `power.control.power-request-override-subtree` | `winopt research list-blocked --worklist --lane restore-story --top 5` | Prove restore or rollback behavior for the exact subtree or value.
-- `ghidra`: 4 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static reverse-engineering for exact leaf-level proof.
+- `ghidra`: 2 | first: `power.session-watchdog-timeouts` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static RE or Ghidra work until the exact reader or initializer is named.
 - `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
-- `intentional-hold`: 6 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `intentional-hold`: 8 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
 - `power.control.power-request-override-subtree` (`restore-story`, score=37, blockers=3)
-- `power.control.allow-system-required-power-requests` (`ghidra`, score=34, blockers=1)
-- `power.control.allow-audio-to-enable-execution-required-power-requests` (`ghidra`, score=33, blockers=2)
 - `power.session-watchdog-timeouts` (`ghidra`, score=33, blockers=2)
 - `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
+- `system.kernel.global-timer-resolution-requests` (`runtime-trace`, score=28, blockers=2)
+- `power.control.win32k-callout-watchdog-timeout-seconds` (`runtime-trace`, score=27, blockers=3)
 
 ## Top Holds
 
@@ -30,7 +30,7 @@ Blocked candidates: `18`
 - `power.control.hiber-file-size-percent` (`intentional-hold`, score=9, blockers=1)
 - `power.control.hibernate-enabled-default` (`intentional-hold`, score=9, blockers=1)
 - `power.control.timer-rebase-threshold-on-drips-exit` (`intentional-hold`, score=9, blockers=1)
-- `power.control.power-watchdog-timeout-cluster` (`intentional-hold`, score=6, blockers=4)
+- `power.control.allow-system-required-power-requests` (`intentional-hold`, score=8, blockers=2)
 
 ## Candidates
 
@@ -46,32 +46,6 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
 - Suggested command: `winopt research show-blocked power.control.power-request-override-subtree --json`
 - Next action hint: Prove restore or rollback behavior for the exact subtree or value.
-
-### `power.control.allow-system-required-power-requests`
-
-- Lane: `ghidra`
-- Actionability: `active`
-- Priority score: `34`
-- Feature area: `Control Power Requests`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
-- Value name: `AllowSystemRequiredPowerRequests`
-- Blockers: `system-execution-required-no-current-build-registry-seeding-path`
-- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
-- Suggested command: `winopt research show-blocked power.control.allow-system-required-power-requests --json`
-- Next action hint: Continue static reverse-engineering for exact leaf-level proof.
-
-### `power.control.allow-audio-to-enable-execution-required-power-requests`
-
-- Lane: `ghidra`
-- Actionability: `active`
-- Priority score: `33`
-- Feature area: `Control Power Requests`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
-- Value name: `AllowAudioToEnableExecutionRequiredPowerRequests`
-- Blockers: `audio-execution-required-no-current-build-registry-seeding-path`, `audio-execution-required-no-primary-current-build-doc`
-- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
-- Suggested command: `winopt research show-blocked power.control.allow-audio-to-enable-execution-required-power-requests --json`
-- Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
 
 ### `power.session-watchdog-timeouts`
 
@@ -239,6 +213,32 @@ Blocked candidates: `18`
 - Blockers: `timer-rebase-threshold-drips-trigger-not-available-on-current-vm`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Treat as environment-limited or intentional hold unless a safer lane becomes available.
+
+### `power.control.allow-system-required-power-requests`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `8`
+- Feature area: `Control Power Requests`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
+- Value name: `AllowSystemRequiredPowerRequests`
+- Blockers: `intentional-hold`, `system-execution-required-no-current-build-registry-seeding-path`
+- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Wait for a safer environment or a clearer product surface before probing.
+
+### `power.control.allow-audio-to-enable-execution-required-power-requests`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `7`
+- Feature area: `Control Power Requests`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
+- Value name: `AllowAudioToEnableExecutionRequiredPowerRequests`
+- Blockers: `audio-execution-required-no-current-build-registry-seeding-path`, `audio-execution-required-no-primary-current-build-doc`, `intentional-hold`
+- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
 
 ### `power.control.power-watchdog-timeout-cluster`
 

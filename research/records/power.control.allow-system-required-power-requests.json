@@ -446,10 +446,11 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is now stronger than a raw draft because it has repo-doc semantics, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, Microsoft documentation for the public hidden system-required setting family, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, a retained Ghidra reader-family corroboration, a retained soft-reboot ETW attempt, a visible UMPO override-query lineage, a timeout-setting callback disassembly, a retained timeout timer/worker chain, a retained override-response plus callback-worker follow-up that still exposed no visible `*PowerRequest*Reg*` symbol, a retained generic power-setting callback subsystem pass around `PoRegisterPowerSettingCallback`, a later current-build INIT-table binding that maps the exact value name to the KD-resolved target global, a later host-side disassembly follow-up that statically recovers the generic init walker feeding that table, and a later Wave 4 ETW stackwalk plus grouped Ghidra lane that resolves an exact current-build runtime query path through `reg.exe`, `NtQueryValueKey`, and the ETW registry/stackwalk surfaces. It remains decision-gated because Microsoft still does not publish the internal `Control\\\\Power\\\\AllowSystemRequiredPowerRequests` seeding path and that earlier boot/init seeding route is still inferred from current-build INIT-table/static analysis rather than resolved to a named public routine.",
+    "why": "The candidate is now stronger than a raw draft because it has repo-doc semantics, observed baseline state, a current-build string hit, a retained enrichment recommendation, a matching repo-native trigger harness, Microsoft documentation for the public hidden system-required setting family, a live KVM local-KD value that aligns with the repo-doc default, direct current-build callback/reader disassembly, a retained Ghidra reader-family corroboration, a retained soft-reboot ETW attempt, a visible UMPO override-query lineage, a timeout-setting callback disassembly, a retained timeout timer/worker chain, a retained override-response plus callback-worker follow-up that still exposed no visible `*PowerRequest*Reg*` symbol, a retained generic power-setting callback subsystem pass around `PoRegisterPowerSettingCallback`, a later current-build INIT-table binding that maps the exact value name to the KD-resolved target global, a later host-side disassembly follow-up that statically recovers the generic init walker feeding that table, and a later Wave 4 ETW stackwalk plus grouped Ghidra lane that resolves an exact current-build runtime query path through `reg.exe`, `NtQueryValueKey`, and the ETW registry/stackwalk surfaces. It remains an intentional hold because runtime query/read proof is present, but Microsoft still does not publish the internal `Control\\\\Power\\\\AllowSystemRequiredPowerRequests` seeding path and that earlier boot/init seeding route is still inferred from current-build INIT-table/static analysis rather than resolved to a named public routine. Further binary analysis is required before this can become a promotion path.",
     "manual_review_required": true,
     "blocking_issues": [
-      "system-execution-required-no-current-build-registry-seeding-path"
+      "system-execution-required-no-current-build-registry-seeding-path",
+      "intentional-hold"
     ]
   },
   "open_questions": [
@@ -462,7 +463,7 @@
       "environment": "Win25H2Clean observed baseline",
       "os": "Windows 11 25H2",
       "build": "26200",
-      "notes": "The lane currently combines baseline existence, exact current-build string presence, enrichment guidance, and a repo-native trigger harness, but no dedicated runtime or KD validation yet."
+      "notes": "The lane now combines baseline existence, exact current-build string presence, enrichment guidance, a repo-native trigger harness, a retained KVM local-KD live value read, and a retained Wave 4 ETW exact-query plus grouped Ghidra caller-chain capture."
     },
     {
       "environment": "KVM local-KD live guest session",
@@ -525,5 +526,5 @@
       "notes": "A retained Wave 4 ETW stackwalk run captured an explicit `reg.exe query` for `AllowSystemRequiredPowerRequests`, exact `KeyName` hits in the runtime bundle, and grouped caller-stack decompilation through `reg.exe`, `kernelbase.dll`, `ntdll.dll`, and `ntoskrnl.exe`."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T02:45:00Z"
+  "last_reviewed_utc": "2026-04-14T05:59:10Z"
 }

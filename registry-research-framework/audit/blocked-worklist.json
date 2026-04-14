@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-04-14T05:56:03.863349Z",
+  "generated_at": "2026-04-14T06:00:23.602257Z",
   "blocked_count": 18,
   "lane_counts": {
-    "ghidra": 4,
-    "intentional-hold": 6,
+    "ghidra": 2,
+    "intentional-hold": 8,
     "restore-story": 1,
     "runtime-trace": 7
   },
   "actionability_counts": {
-    "active": 12,
-    "hold": 6
+    "active": 10,
+    "hold": 8
   },
   "ordered_lanes": [
     "restore-story",
@@ -30,9 +30,9 @@
       "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
     },
     "ghidra": {
-      "candidate_id": "power.control.allow-system-required-power-requests",
-      "suggested_command": "winopt research show-blocked power.control.allow-system-required-power-requests --json",
-      "next_action_hint": "Continue static reverse-engineering for exact leaf-level proof."
+      "candidate_id": "power.session-watchdog-timeouts",
+      "suggested_command": "winopt research show-blocked power.session-watchdog-timeouts --json",
+      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
     },
     "runtime-trace": {
       "candidate_id": "system.kernel.global-timer-resolution-requests",
@@ -47,17 +47,17 @@
   },
   "top_actionable_candidates": [
     "power.control.power-request-override-subtree",
-    "power.control.allow-system-required-power-requests",
-    "power.control.allow-audio-to-enable-execution-required-power-requests",
     "power.session-watchdog-timeouts",
-    "system.kernel-dpc-watchdog-profile-cluster"
+    "system.kernel-dpc-watchdog-profile-cluster",
+    "system.kernel.global-timer-resolution-requests",
+    "power.control.win32k-callout-watchdog-timeout-seconds"
   ],
   "top_hold_candidates": [
     "policy.system.enable-virtualization",
     "power.control.hiber-file-size-percent",
     "power.control.hibernate-enabled-default",
     "power.control.timer-rebase-threshold-on-drips-exit",
-    "power.control.power-watchdog-timeout-cluster"
+    "power.control.allow-system-required-power-requests"
   ],
   "items": [
     {
@@ -80,47 +80,6 @@
       ],
       "suggested_command": "winopt research show-blocked power.control.power-request-override-subtree --json",
       "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
-    },
-    {
-      "candidate_id": "power.control.allow-system-required-power-requests",
-      "feature_area": "Control Power Requests",
-      "next_missing_layer": "ghidra",
-      "actionability": "active",
-      "priority_score": 34,
-      "blocker_count": 1,
-      "promotion_blockers": [
-        "system-execution-required-no-current-build-registry-seeding-path"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
-      "value_name": "AllowSystemRequiredPowerRequests",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json",
-        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
-        "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json"
-      ],
-      "suggested_command": "winopt research show-blocked power.control.allow-system-required-power-requests --json",
-      "next_action_hint": "Continue static reverse-engineering for exact leaf-level proof."
-    },
-    {
-      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
-      "feature_area": "Control Power Requests",
-      "next_missing_layer": "ghidra",
-      "actionability": "active",
-      "priority_score": 33,
-      "blocker_count": 2,
-      "promotion_blockers": [
-        "audio-execution-required-no-current-build-registry-seeding-path",
-        "audio-execution-required-no-primary-current-build-doc"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
-      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json",
-        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
-        "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json"
-      ],
-      "suggested_command": "winopt research show-blocked power.control.allow-audio-to-enable-execution-required-power-requests --json",
-      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
     },
     {
       "candidate_id": "power.session-watchdog-timeouts",
@@ -378,6 +337,49 @@
       "recent_audit_artifacts": [],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Treat as environment-limited or intentional hold unless a safer lane becomes available."
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 8,
+      "blocker_count": 2,
+      "promotion_blockers": [
+        "intentional-hold",
+        "system-execution-required-no-current-build-registry-seeding-path"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowSystemRequiredPowerRequests",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json",
+        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
+        "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Wait for a safer environment or a clearer product surface before probing."
+    },
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 7,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "audio-execution-required-no-current-build-registry-seeding-path",
+        "audio-execution-required-no-primary-current-build-doc",
+        "intentional-hold"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json",
+        "registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json",
+        "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
     },
     {
       "candidate_id": "power.control.power-watchdog-timeout-cluster",
