@@ -411,13 +411,13 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, a concrete current-build reader/validator/writer path, a live-KD confirmed privileged `NtSetSystemInformation` writer callsite, a live-KD confirmed outer query wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`, current-build INIT descriptor bindings for all four registry value names, a write-free KVM reboot observation showing that the current registry state is preserved across a real reboot, and target-specific WPR negative evidence for the retained boot trace. It is not ready for promotion because the current build conflicts with the repo-doc defaults for most values, the exact inner query arm still has not been isolated, conditional initialization is still part of the explanation, and no exact runtime registry read has been captured.",
+    "why": "The family is strong enough for a schema-backed draft because it has explicit repo-doc defaults, dedicated current-build live kernel-state proof, a concrete current-build reader/validator/writer path, a live-KD confirmed privileged `NtSetSystemInformation` writer callsite, a live-KD confirmed outer query wrapper `NtQuerySystemInformation -> ExpQuerySystemInformation`, current-build INIT descriptor bindings for all four registry value names, a write-free KVM reboot observation showing that the current registry state is preserved across a real reboot, and target-specific WPR negative evidence for the retained boot trace. It is not ready for promotion because the current build conflicts with the repo-doc defaults for most values, the exact inner query arm still has not been isolated, conditional initialization is still part of the explanation, and no exact runtime registry read has been captured. This remains active blocked work rather than an intentional hold because the family has a concrete current-build code path and the remaining gaps are specific proof gaps, not unsupported deployment risk.",
     "manual_review_required": true,
     "blocking_issues": [
-      "dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs",
-      "dpc-watchdog-profile-wpr-boot-no-hit-current-build",
+      "dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs",
+      "dpc-watchdog-profile-no-current-build-exact-registry-read",
       "dpc-watchdog-profile-no-primary-current-build-doc",
-      "dpc-watchdog-profile-conditional-initialization-unproven"
+      "dpc-watchdog-profile-conditional-init-semantics-unproven"
     ]
   },
   "open_questions": [
@@ -454,5 +454,5 @@
       "notes": "A targeted filter over the retained `kernel-timing-wpr-boot-registry-20260412` boot CSV found zero hits for all four `DpcWatchdogProfile*` value names."
     }
   ],
-  "last_reviewed_utc": "2026-04-13T01:21:00Z"
+  "last_reviewed_utc": "2026-04-14T06:04:43Z"
 }

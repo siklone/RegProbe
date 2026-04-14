@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T06:03:53.670978Z",
+  "generated_at": "2026-04-14T06:05:09.540934Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 2,
@@ -81,10 +81,10 @@
       "priority_score": 31,
       "blocker_count": 4,
       "promotion_blockers": [
-        "dpc-watchdog-profile-conditional-initialization-unproven",
-        "dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs",
-        "dpc-watchdog-profile-no-primary-current-build-doc",
-        "dpc-watchdog-profile-wpr-boot-no-hit-current-build"
+        "dpc-watchdog-profile-conditional-init-semantics-unproven",
+        "dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs",
+        "dpc-watchdog-profile-no-current-build-exact-registry-read",
+        "dpc-watchdog-profile-no-primary-current-build-doc"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "DpcWatchdogProfileBufferSizeBytes",
@@ -93,7 +93,7 @@
         "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
       ],
       "suggested_command": "winopt research show-blocked system.kernel-dpc-watchdog-profile-cluster --json",
-      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
     },
     {
       "candidate_id": "system.kernel.global-timer-resolution-requests",

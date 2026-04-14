@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T06:03:53.670978Z`
+Generated: `2026-04-14T06:05:09.540934Z`
 
 Blocked candidates: `18`
 
@@ -54,10 +54,10 @@ Blocked candidates: `18`
 - Feature area: `Session Manager Kernel DPC Watchdog Profile`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `DpcWatchdogProfileBufferSizeBytes`
-- Blockers: `dpc-watchdog-profile-conditional-initialization-unproven`, `dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs`, `dpc-watchdog-profile-no-primary-current-build-doc`, `dpc-watchdog-profile-wpr-boot-no-hit-current-build`
+- Blockers: `dpc-watchdog-profile-conditional-init-semantics-unproven`, `dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs`, `dpc-watchdog-profile-no-current-build-exact-registry-read`, `dpc-watchdog-profile-no-primary-current-build-doc`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Suggested command: `winopt research show-blocked system.kernel-dpc-watchdog-profile-cluster --json`
-- Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
+- Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
 
 ### `system.kernel.global-timer-resolution-requests`
 
