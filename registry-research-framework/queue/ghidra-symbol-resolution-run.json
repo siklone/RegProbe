@@ -1,100 +1,27 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T02:20:53.079292Z",
-  "mode": "dry-run",
+  "generated_utc": "2026-04-14T02:21:51.107041Z",
+  "mode": "run",
   "source_batch": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
   "runner_available": true,
-  "selected_job_count": 3,
-  "blocked_job_count": 0,
+  "selected_job_count": 1,
+  "executed_job_count": 1,
   "completed_job_count": 2,
-  "blocked_jobs": [],
-  "completed_jobs": [
-    {
-      "job_id": "ghidra-symbol-dispatch-01-ghidra-symbol-01-kernelbase-dll-0x2e436",
-      "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests"
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-02-ghidra-symbol-04-kernel32-dll-0x2e8d7",
-      "request_id": "ghidra-symbol-04-kernel32-dll-0x2e8d7",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests"
-    }
-  ],
   "jobs": [
     {
       "job_id": "ghidra-symbol-dispatch-03-ghidra-symbol-05-ntdll-dll-0x161d74",
       "request_id": "ghidra-symbol-05-ntdll-dll-0x161d74",
       "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "command_argv": [
-        "python3",
-        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
-        "--binary-path",
-        "C:\\Windows\\System32\\ntdll.dll",
-        "--output-name",
-        "ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests",
-        "--pattern",
-        "AllowSystemRequiredPowerRequests",
-        "--module-offset",
-        "ntdll.dll+0x161D74",
-        "--module-offset",
-        "ntdll.dll+0x8C48C"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntdll.dll --output-name ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x161D74 --module-offset ntdll.dll+0x8C48C",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests"
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-04-ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
-      "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "command_argv": [
-        "python3",
-        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
-        "--binary-path",
-        "C:\\Windows\\System32\\ntoskrnl.exe",
-        "--output-name",
-        "ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests",
-        "--pattern",
-        "AllowSystemRequiredPowerRequests",
-        "--module-offset",
-        "ntoskrnl.exe+0x327B4D",
-        "--module-offset",
-        "ntoskrnl.exe+0x3ED794",
-        "--module-offset",
-        "ntoskrnl.exe+0x3EDD84",
-        "--module-offset",
-        "ntoskrnl.exe+0x6BE358",
-        "--module-offset",
-        "ntoskrnl.exe+0x87108C",
-        "--module-offset",
-        "ntoskrnl.exe+0xAE49F6"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x327B4D --module-offset ntoskrnl.exe+0x3ED794 --module-offset ntoskrnl.exe+0x3EDD84 --module-offset ntoskrnl.exe+0x6BE358 --module-offset ntoskrnl.exe+0x87108C --module-offset ntoskrnl.exe+0xAE49F6",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests"
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-05-ghidra-symbol-13-reg-exe-0x128b",
-      "request_id": "ghidra-symbol-13-reg-exe-0x128b",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "command_argv": [
-        "python3",
-        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
-        "--binary-path",
-        "C:\\Windows\\System32\\reg.exe",
-        "--output-name",
-        "ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests",
-        "--pattern",
-        "AllowSystemRequiredPowerRequests",
-        "--module-offset",
-        "reg.exe+0x128B",
-        "--module-offset",
-        "reg.exe+0x379D",
-        "--module-offset",
-        "reg.exe+0x65C6",
-        "--module-offset",
-        "reg.exe+0x6775"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset reg.exe+0x128B --module-offset reg.exe+0x379D --module-offset reg.exe+0x65C6 --module-offset reg.exe+0x6775",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests"
+      "exit_code": 0,
+      "stdout": "{\n  \"generated_utc\": \"2026-04-14T02:24:19.7721076Z\",\n  \"binary_path\": \"C:\\\\Windows\\\\System32\\\\ntdll.dll\",\n  \"output_name\": \"ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests\",\n  \"project_name\": \"Probe_ghidra_symbolized_ntdll_dll_0x161d74_power_control_allow_system_required_power_requests\",\n  \"symbol_root\": \"C:\\\\Tools\\\\Symbols\\\\ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests\",\n  \"output_root\": \"C:\\\\RegProbe-Diag\\\\ghidra\\\\ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests\",\n  \"symchk_path\": \"C:\\\\Program Files (x86)\\\\Windows Kits\\\\10\\\\Debuggers\\\\x64\\\\symchk.exe\",\n  \"symchk_exit_code\": 0,\n  \"staged_pdb_count\": 2,\n  \"staged_pdb_sample\": [\n    \"C:\\\\Tools\\\\Symbols\\\\ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests\\\\ntdll.pdb\",\n    \"C:\\\\Tools\\\\Symbols\\\\ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests\\\\ntdll.pdb\\\\5A9F4004DB806B50BCBD7B6C55417B041\\\\ntdll.pdb\"\n  ],\n  \"ghidra_exit_code\": 0,\n  \"no_analysis\": false,\n  \"module_offsets\": [\n    \"ntdll.dll+0x161D74\",\n    \"ntdll.dll+0x8C48C\"\n  ],\n  \"pdb_loaded\": true,\n  \"match_count\": 2,\n  \"uploads\": {\n    \"evidence\": {\n      \"path\": \"C:\\\\RegProbe-Diag\\\\ghidra\\\\ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests\\\\evidence.json\",\n      \"uri\": \"http://10.0.2.2:8766/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests-evidence.json\"\n    },\n    \"markdown\": {\n      \"path\": \"C:\\\\RegProbe-Diag\\\\ghidra\\\\ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests\\\\ghidra-matches.md\",\n      \"uri\": \"http://10.0.2.2:8766/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests-ghidra-matches.md\"\n    },\n    \"symchk_log\": {\n      \"path\": \"C:\\\\RegProbe-Diag\\\\ghidra\\\\ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests\\\\symchk.txt\",\n      \"uri\": \"http://10.0.2.2:8766/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests-symchk.txt\"\n    }\n  },\n  \"status\": \"ok\",\n  \"error_kind\": \"ghidra-symbolized-probe-error\",\n  \"recovery_action\": \"inspect-ghidra-symbolized-run\",\n  \"transport_blocker\": \"ghidra\",\n  \"guest_health\": \"stable\"\n}\n",
+      "stderr": "",
+      "materialized_files": [
+        "evidence.json",
+        "ghidra-matches.md",
+        "run-summary.json",
+        "launcher-stage.json",
+        "symchk.txt"
+      ]
     }
   ]
 }

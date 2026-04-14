@@ -1,0 +1,120 @@
+{
+  "binary": "ntdll.dll",
+  "probe": "ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests",
+  "timestamp": "2026-04-14T02:24:19.053623100Z",
+  "pdb_source": "C:\\Tools\\Symbols\\ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests",
+  "pdb_loaded": true,
+  "matches": [
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "ntdll.dll+0x161D74",
+      "address": "180161d74",
+      "function_name": "NtQueryValueKey",
+      "function_source": "pdb-symbol",
+      "function_confidence": "symbolized_branch",
+      "unclear": false,
+      "value_map": "value=0 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "180161d88  TEST byte ptr [0x7ffe0308],0x1",
+      "jump_condition": "180161d70  JNZ 0x180161d75",
+      "branch_effect": "compare + conditional jump recovered in bounded context.",
+      "stack_summary": "no obvious stack-relative access in the bounded context.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 90,
+      "effect_summary": "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare+jump survived bounded symbolized review",
+        "compare/test anchor found",
+        "conditional jump found",
+        "value immediate found in bounded block"
+      ],
+      "register_focus": [
+        "RCX",
+        "R10",
+        "EAX"
+      ],
+      "flag_focus": [
+        "ZF"
+      ],
+      "context_before": [
+        "180161d60  MOV R10,RCX",
+        "180161d63  MOV EAX,0x17",
+        "180161d68  TEST byte ptr [0x7ffe0308],0x1",
+        "180161d70  JNZ 0x180161d75",
+        "180161d72  SYSCALL"
+      ],
+      "branch_snippet": [
+        "180161d74  RET",
+        "180161d88  TEST byte ptr [0x7ffe0308],0x1",
+        "180161d70  JNZ 0x180161d75",
+        "180161d68  TEST byte ptr [0x7ffe0308],0x1"
+      ],
+      "context_after": [
+        "180161d75  INT 0x2e",
+        "180161d77  RET",
+        "180161d80  MOV R10,RCX",
+        "180161d83  MOV EAX,0x18",
+        "180161d88  TEST byte ptr [0x7ffe0308],0x1"
+      ]
+    },
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "ntdll.dll+0x8C48C",
+      "address": "18008c48c",
+      "function_name": "RtlUserThreadStart",
+      "function_source": "pdb-symbol",
+      "function_confidence": "symbolized_branch",
+      "unclear": false,
+      "value_map": "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "18008c480  CMP RAX,RCX",
+      "jump_condition": "18008c48c  JMP 0x18008c4b6",
+      "branch_effect": "compare + conditional jump recovered in bounded context.",
+      "stack_summary": "no obvious stack-relative access in the bounded context.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 90,
+      "effect_summary": "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare+jump survived bounded symbolized review",
+        "compare/test anchor found",
+        "conditional jump found",
+        "value immediate found in bounded block"
+      ],
+      "register_focus": [
+        "RDX",
+        "R9",
+        "RAX",
+        "RCX",
+        "ECX"
+      ],
+      "flag_focus": [
+        "ZF",
+        "CF",
+        "SF",
+        "OF"
+      ],
+      "context_before": [
+        "18008c47d  MOV RDX,R9",
+        "18008c480  CMP RAX,RCX",
+        "18008c483  JZ 0x18008c48e",
+        "18008c485  XOR ECX,ECX",
+        "18008c487  CALL 0x180172020"
+      ],
+      "branch_snippet": [
+        "18008c48c  JMP 0x18008c4b6",
+        "18008c495  JMP 0x18008c48c",
+        "18008c483  JZ 0x18008c48e",
+        "18008c480  CMP RAX,RCX"
+      ],
+      "context_after": [
+        "18008c48e  XOR ECX,ECX",
+        "18008c490  CALL 0x18000d900",
+        "18008c495  JMP 0x18008c48c",
+        "18008c497  MOV RCX,RDX",
+        "18008c49a  MOV RAX,R9"
+      ]
+    }
+  ]
+}
