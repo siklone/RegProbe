@@ -8,20 +8,19 @@
   "verification_health_summary": "gate=green, schema_complete_ratio=1.0, missing_docs=0",
   "blocked_lane_counts": {
     "ghidra": 2,
-    "intentional-hold": 8,
-    "restore-story": 1,
+    "intentional-hold": 9,
     "runtime-trace": 7
   },
   "blocked_actionability_counts": {
-    "active": 10,
-    "hold": 8
+    "active": 9,
+    "hold": 9
   },
   "top_actionable_blocked_candidates": [
-    "power.control.power-request-override-subtree",
     "power.session-watchdog-timeouts",
     "system.kernel-dpc-watchdog-profile-cluster",
     "system.kernel.global-timer-resolution-requests",
-    "power.control.win32k-callout-watchdog-timeout-seconds"
+    "power.control.win32k-callout-watchdog-timeout-seconds",
+    "power.session-win32-callout-watchdog-bugcheck-enabled"
   ],
   "top_hold_blocked_candidates": [
     "policy.system.enable-virtualization",
@@ -30,7 +29,7 @@
     "power.control.timer-rebase-threshold-on-drips-exit",
     "power.control.allow-system-required-power-requests"
   ],
-  "generated_at": "2026-04-14T06:00:23.056742Z",
+  "generated_at": "2026-04-14T06:02:26.979660Z",
   "blocked_worklist_json": "registry-research-framework/audit/blocked-worklist.json",
   "blocked_worklist_markdown": "registry-research-framework/audit/blocked-worklist.md",
   "blocked_worklist_status": "PASS",

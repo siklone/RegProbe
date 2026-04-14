@@ -1,34 +1,26 @@
 {
-  "generated_at": "2026-04-14T06:00:23.602257Z",
+  "generated_at": "2026-04-14T06:02:27.534460Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 2,
-    "intentional-hold": 8,
-    "restore-story": 1,
+    "intentional-hold": 9,
     "runtime-trace": 7
   },
   "actionability_counts": {
-    "active": 10,
-    "hold": 8
+    "active": 9,
+    "hold": 9
   },
   "ordered_lanes": [
-    "restore-story",
     "ghidra",
     "runtime-trace",
     "intentional-hold"
   ],
   "lane_suggested_commands": {
-    "restore-story": "winopt research list-blocked --worklist --lane restore-story --top 5",
     "ghidra": "winopt research list-blocked --worklist --lane ghidra --top 5",
     "runtime-trace": "winopt research list-blocked --worklist --lane runtime-trace --top 5",
     "intentional-hold": "winopt research list-blocked --worklist --lane intentional-hold"
   },
   "lane_focus": {
-    "restore-story": {
-      "candidate_id": "power.control.power-request-override-subtree",
-      "suggested_command": "winopt research show-blocked power.control.power-request-override-subtree --json",
-      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
-    },
     "ghidra": {
       "candidate_id": "power.session-watchdog-timeouts",
       "suggested_command": "winopt research show-blocked power.session-watchdog-timeouts --json",
@@ -46,11 +38,11 @@
     }
   },
   "top_actionable_candidates": [
-    "power.control.power-request-override-subtree",
     "power.session-watchdog-timeouts",
     "system.kernel-dpc-watchdog-profile-cluster",
     "system.kernel.global-timer-resolution-requests",
-    "power.control.win32k-callout-watchdog-timeout-seconds"
+    "power.control.win32k-callout-watchdog-timeout-seconds",
+    "power.session-win32-callout-watchdog-bugcheck-enabled"
   ],
   "top_hold_candidates": [
     "policy.system.enable-virtualization",
@@ -60,27 +52,6 @@
     "power.control.allow-system-required-power-requests"
   ],
   "items": [
-    {
-      "candidate_id": "power.control.power-request-override-subtree",
-      "feature_area": "Power Request Override Routing",
-      "next_missing_layer": "restore-story",
-      "actionability": "active",
-      "priority_score": 37,
-      "blocker_count": 3,
-      "promotion_blockers": [
-        "powerrequestoverride-restore-story-leaf-model-unproven",
-        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-        "powerrequestoverride-subtree-leaf-semantics-unresolved"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
-      "value_name": "(subtree root, Driver, Process, Service)",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.md",
-        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.json"
-      ],
-      "suggested_command": "winopt research show-blocked power.control.power-request-override-subtree --json",
-      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
-    },
     {
       "candidate_id": "power.session-watchdog-timeouts",
       "feature_area": "Directed Power Watchdog Timeouts",
@@ -422,6 +393,29 @@
       "recent_audit_artifacts": [],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
+    },
+    {
+      "candidate_id": "power.control.power-request-override-subtree",
+      "feature_area": "Power Request Override Routing",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 5,
+      "blocker_count": 5,
+      "promotion_blockers": [
+        "intentional-hold",
+        "powerrequestoverride-restore-story-leaf-model-unproven",
+        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
+        "powerrequestoverride-subtree-leaf-semantics-unresolved",
+        "powerrequestoverride-subtree-not-mapped-to-supported-app-surface"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": "(subtree root, Driver, Process, Service)",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.md",
+        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
     }
   ]
 }

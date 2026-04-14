@@ -1,28 +1,27 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T06:00:23.602257Z`
+Generated: `2026-04-14T06:02:27.534460Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 10
-- `hold`: 8
+- `active`: 9
+- `hold`: 9
 
 ## Lane Summary
 
-- `restore-story`: 1 | first: `power.control.power-request-override-subtree` | `winopt research list-blocked --worklist --lane restore-story --top 5` | Prove restore or rollback behavior for the exact subtree or value.
 - `ghidra`: 2 | first: `power.session-watchdog-timeouts` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static RE or Ghidra work until the exact reader or initializer is named.
 - `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
-- `intentional-hold`: 8 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `intentional-hold`: 9 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
-- `power.control.power-request-override-subtree` (`restore-story`, score=37, blockers=3)
 - `power.session-watchdog-timeouts` (`ghidra`, score=33, blockers=2)
 - `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
 - `system.kernel.global-timer-resolution-requests` (`runtime-trace`, score=28, blockers=2)
 - `power.control.win32k-callout-watchdog-timeout-seconds` (`runtime-trace`, score=27, blockers=3)
+- `power.session-win32-callout-watchdog-bugcheck-enabled` (`runtime-trace`, score=27, blockers=3)
 
 ## Top Holds
 
@@ -33,19 +32,6 @@ Blocked candidates: `18`
 - `power.control.allow-system-required-power-requests` (`intentional-hold`, score=8, blockers=2)
 
 ## Candidates
-
-### `power.control.power-request-override-subtree`
-
-- Lane: `restore-story`
-- Actionability: `active`
-- Priority score: `37`
-- Feature area: `Power Request Override Routing`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
-- Value name: `(subtree root, Driver, Process, Service)`
-- Blockers: `powerrequestoverride-restore-story-leaf-model-unproven`, `powerrequestoverride-static-context-adjacent-not-leaf-specific`, `powerrequestoverride-subtree-leaf-semantics-unresolved`
-- Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
-- Suggested command: `winopt research show-blocked power.control.power-request-override-subtree --json`
-- Next action hint: Prove restore or rollback behavior for the exact subtree or value.
 
 ### `power.session-watchdog-timeouts`
 
@@ -264,3 +250,16 @@ Blocked candidates: `18`
 - Blockers: `ttmenabled-boot-unsafe-dedicated-boot-lane-required`, `ttmenabled-boot-unsafe-on-isolated-pilot-profile`, `ttmenabled-no-primary-current-build-doc`, `ttmenabled-reader-unresolved`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
+
+### `power.control.power-request-override-subtree`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `5`
+- Feature area: `Power Request Override Routing`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
+- Value name: `(subtree root, Driver, Process, Service)`
+- Blockers: `intentional-hold`, `powerrequestoverride-restore-story-leaf-model-unproven`, `powerrequestoverride-static-context-adjacent-not-leaf-specific`, `powerrequestoverride-subtree-leaf-semantics-unresolved`, `powerrequestoverride-subtree-not-mapped-to-supported-app-surface`
+- Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Prove restore or rollback behavior for the exact subtree or value.

@@ -171,11 +171,13 @@
     "restore_default_supported": false,
     "restore_previous_supported": false,
     "needs_vm_validation": true,
-    "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, and bounded adjacent static context from retained Ghidra and local-KD query/store analysis. That is enough to keep the subtree as a standalone draft lane, but not enough yet to claim exact leaf defaults, exact binding semantics, or a safe restore story.",
+    "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, and bounded adjacent static context from retained Ghidra and local-KD query/store analysis. That is enough to keep the subtree as a standalone draft lane, but not enough yet to claim exact leaf defaults, exact binding semantics, or a safe restore story. The 2026-04-14 decision keeps this as an intentional hold because the current evidence is subtree-level rather than leaf-specific, the lane is not mapped to a supported tweak/apply surface, and further leaf modeling would be required before promotion.",
     "blocking_issues": [
       "powerrequestoverride-subtree-leaf-semantics-unresolved",
       "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-      "powerrequestoverride-restore-story-leaf-model-unproven"
+      "powerrequestoverride-restore-story-leaf-model-unproven",
+      "powerrequestoverride-subtree-not-mapped-to-supported-app-surface",
+      "intentional-hold"
     ]
   },
   "open_questions": [
@@ -200,5 +202,5 @@
       "notes": "The retained wildcard KD lineage pass from 2026-04-08 exposes the current-build override family around response handling, initialization, and UMPO override query / cleanup."
     }
   ],
-  "last_reviewed_utc": "2026-04-13T01:15:00Z"
+  "last_reviewed_utc": "2026-04-14T06:02:00Z"
 }
