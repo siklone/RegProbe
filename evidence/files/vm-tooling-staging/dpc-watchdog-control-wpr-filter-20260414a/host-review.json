@@ -1,0 +1,15 @@
+{
+  "record_id": "system.kernel-dpc-watchdog-control-cluster",
+  "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+  "reviewed_utc": "2026-04-14T09:36:39Z",
+  "artifact_bundle": "evidence/files/vm-tooling-staging/dpc-watchdog-control-wpr-filter-20260414a",
+  "status": "source-missing",
+  "source_csv_path": "C:\\RegProbe-Diag\\wpr-boot-registry\\kernel-timing-wpr-boot-registry-20260412\\kernel-timing-wpr-boot-registry-20260412.manual.csv",
+  "patterns": [
+    "DPCTimeout",
+    "DpcSoftTimeout",
+    "DpcCumulativeSoftTimeout"
+  ],
+  "interpretation": "A dedicated guest-side WPR filter wrapper now exists for the DPC watchdog control cluster and executed successfully through QGA guest-exec. The remaining blocker for this lane is source retention: the historical kernel-timing boot-registry manual CSV is no longer present on the guest, so no exact-value filter result can be produced from the retained 20260412 bundle.",
+  "next_step": "Recover the original CSV from host-side stash, rerun a dedicated boot-registry WPR capture for the control cluster, or bypass the CSV lane with a stronger debugger/decompiler pivot for the persisted seeding caller or exact query arm."
+}
