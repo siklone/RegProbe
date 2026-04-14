@@ -59,6 +59,10 @@ etw_stackwalk_dispatch_run_check = load_module(
     "check_etw_stackwalk_dispatch_run",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_dispatch_run.py",
 )
+etw_stackwalk_hold_reopen_plan = load_module(
+    "generate_etw_stackwalk_hold_reopen_plan",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_hold_reopen_plan.py",
+)
 etw_stackwalk_bundle = load_module("generate_etw_stackwalk_bundle", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_bundle.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
@@ -2251,6 +2255,77 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("skipped_hold_count mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_hold_reopen_plan_collects_hold_candidates(self) -> None:
+        batch = {
+            "items": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "next_missing_layer": "intentional-hold",
+                    "actionability": "hold",
+                    "capture_ready": True,
+                    "dispatch_recommended": False,
+                    "promotion_blockers": [
+                        "intentional-hold",
+                        "system-execution-required-no-current-build-registry-seeding-path",
+                    ],
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+                    "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+                    "capture_plan": {
+                        "run": {
+                            "run_id": "wave4-allow-system-required-e2e",
+                            "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                        }
+                    },
+                },
+                {
+                    "candidate_id": "example.active",
+                    "actionability": "active",
+                    "capture_ready": True,
+                    "dispatch_recommended": True,
+                },
+            ]
+        }
+        run_payload = {
+            "mode": "dry-run",
+            "selected_job_count": 0,
+            "skipped_hold_count": 1,
+        }
+
+        payload = etw_stackwalk_hold_reopen_plan.build_hold_reopen_plan(
+            batch,
+            run_payload,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["reopen_candidate_count"], 1)
+        self.assertEqual(payload["default_selected_job_count"], 0)
+        self.assertEqual(payload["default_skipped_hold_count"], 1)
+        item = payload["items"][0]
+        self.assertEqual(item["candidate_id"], "power.control.allow-system-required-power-requests")
+        self.assertTrue(item["default_dispatch_excluded"])
+        self.assertIn("registry seeding caller proof", " ".join(item["reopen_prerequisites"]))
+        self.assertIn("--include-holds --candidate-id power.control.allow-system-required-power-requests", item["include_holds_plan_command"])
+
+    def test_etw_stackwalk_hold_reopen_plan_ignores_non_hold_candidates(self) -> None:
+        payload = etw_stackwalk_hold_reopen_plan.build_hold_reopen_plan(
+            {
+                "items": [
+                    {
+                        "candidate_id": "example.active",
+                        "actionability": "active",
+                        "capture_ready": True,
+                    }
+                ]
+            },
+            {"mode": "dry-run", "selected_job_count": 1, "skipped_hold_count": 0},
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["reopen_candidate_count"], 0)
+        self.assertEqual(payload["items"], [])
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {

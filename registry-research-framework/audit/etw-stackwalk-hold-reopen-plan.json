@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-14T17:21:19.976128Z",
+  "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+  "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+  "default_run_mode": "dry-run",
+  "default_selected_job_count": 0,
+  "default_skipped_hold_count": 2,
+  "reopen_candidate_count": 2,
+  "items": [
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "next_missing_layer": "intentional-hold",
+      "promotion_blockers": [
+        "audio-execution-required-no-current-build-registry-seeding-path",
+        "audio-execution-required-no-primary-current-build-doc",
+        "intentional-hold"
+      ],
+      "reopen_prerequisites": [
+        "Land a current-build boot/init reader or registry seeding caller proof.",
+        "Land a primary current-build Microsoft document for the exact value semantics.",
+        "Explicitly reopen the lane before dispatching runtime capture."
+      ],
+      "default_dispatch_excluded": true,
+      "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --print-effective-config",
+      "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --ingest-to-repo --refresh-ghidra",
+      "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests",
+      "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --run",
+      "run_id": "wave4-allow-audio-e2e",
+      "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+      "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available."
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "next_missing_layer": "intentional-hold",
+      "promotion_blockers": [
+        "intentional-hold",
+        "system-execution-required-no-current-build-registry-seeding-path"
+      ],
+      "reopen_prerequisites": [
+        "Land a current-build boot/init reader or registry seeding caller proof.",
+        "Explicitly reopen the lane before dispatching runtime capture."
+      ],
+      "default_dispatch_excluded": true,
+      "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+      "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+      "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
+      "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+      "run_id": "wave4-allow-system-required-e2e",
+      "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+      "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available."
+    }
+  ]
+}
