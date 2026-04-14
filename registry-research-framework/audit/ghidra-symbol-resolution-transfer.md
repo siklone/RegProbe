@@ -3,15 +3,13 @@
 - Transfer status: `ready`
 - Operator blocker: `transfer-pack-ready`
 - Next action: `Copy the listed repo files and use the exported commands on the destination KVM-capable host.`
-- Selected jobs: `3`
+- Selected jobs: `2`
 - Candidate count: `1`
 - Required repo files: `9`
 - Missing repo files: `0`
 
 ## Transfer Jobs
 
-- `ghidra-symbol-05-ntdll-dll-0x161d74` -> `ntdll.dll` | patterns=1 | candidates=1
-  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntdll.dll --output-name ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x161D74 --module-offset ntdll.dll+0x8C48C`
 - `ghidra-symbol-07-ntoskrnl-exe-0x327b4d` -> `ntoskrnl.exe` | patterns=1 | candidates=1
   command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntoskrnl.exe --output-name ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x327B4D --module-offset ntoskrnl.exe+0x3ED794 --module-offset ntoskrnl.exe+0x3EDD84 --module-offset ntoskrnl.exe+0x6BE358 --module-offset ntoskrnl.exe+0x87108C --module-offset ntoskrnl.exe+0xAE49F6`
 - `ghidra-symbol-13-reg-exe-0x128b` -> `reg.exe` | patterns=1 | candidates=1
