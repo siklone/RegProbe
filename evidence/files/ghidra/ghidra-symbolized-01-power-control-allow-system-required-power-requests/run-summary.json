@@ -1,0 +1,38 @@
+{
+  "generated_utc": "2026-04-14T00:26:34.4431312Z",
+  "binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
+  "output_name": "ghidra-symbolized-01-power-control-allow-system-required-power-requests",
+  "project_name": "Probe_ghidra_symbolized_01_power_control_allow_system_required_power_requests",
+  "symbol_root": "C:\\Tools\\Symbols\\ghidra-symbolized-01-power-control-allow-system-required-power-requests",
+  "output_root": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-01-power-control-allow-system-required-power-requests",
+  "symchk_path": "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+  "symchk_exit_code": 0,
+  "staged_pdb_count": 2,
+  "staged_pdb_sample": [
+    "C:\\Tools\\Symbols\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\ntkrnlmp.pdb",
+    "C:\\Tools\\Symbols\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\ntkrnlmp.pdb\\24DE61DB3A27C5B383DFF181CB51F7E11\\ntkrnlmp.pdb"
+  ],
+  "ghidra_exit_code": 0,
+  "no_analysis": false,
+  "pdb_loaded": false,
+  "match_count": 1,
+  "uploads": {
+    "evidence": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\evidence.json",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-01-power-control-allow-system-required-power-requests-evidence.json"
+    },
+    "markdown": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\ghidra-matches.md",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-01-power-control-allow-system-required-power-requests-ghidra-matches.md"
+    },
+    "symchk_log": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-01-power-control-allow-system-required-power-requests\\symchk.txt",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-01-power-control-allow-system-required-power-requests-symchk.txt"
+    }
+  },
+  "status": "ok",
+  "error_kind": "ghidra-symbolized-probe-error",
+  "recovery_action": "inspect-ghidra-symbolized-run",
+  "transport_blocker": "ghidra",
+  "guest_health": "stable"
+}
