@@ -127,6 +127,11 @@ def default_steps(args: argparse.Namespace) -> list[GateStep]:
             [python, "registry-research-framework/scripts/check_etw_stackwalk_hold_reopen_plan.py"],
         ),
         GateStep(
+            "etw-stackwalk-hold-reopen-pack",
+            "ETW stackwalk hold reopen pack check",
+            [python, "registry-research-framework/scripts/check_etw_stackwalk_hold_reopen_pack.py"],
+        ),
+        GateStep(
             "etw-stackwalk-execution-manifest",
             "ETW stackwalk execution manifest check",
             [python, "registry-research-framework/scripts/check_etw_stackwalk_execution_manifest.py"],

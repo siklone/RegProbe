@@ -1,0 +1,204 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-14T21:27:42.948165Z",
+  "source_plan_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-plan.json",
+  "source_plan_markdown_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-plan.md",
+  "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+  "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+  "source_execution_manifest_path": "registry-research-framework/audit/etw-stackwalk-execution-manifest.json",
+  "source_execution_manifest_markdown_path": "registry-research-framework/audit/etw-stackwalk-execution-manifest.md",
+  "pack_status": "ready",
+  "default_run_mode": "dry-run",
+  "default_selected_job_count": 0,
+  "default_skipped_hold_count": 2,
+  "operator": {
+    "next_action": "Review prerequisites, dry-run the include-holds plan command, then run the include-holds reopen command intentionally.",
+    "intentional_reopen_required": true
+  },
+  "output_root": "registry-research-framework/audit/etw-stackwalk-hold-reopen-pack",
+  "archive_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-pack.zip",
+  "counts": {
+    "reopen_candidates": 2,
+    "repo_files_copied": 6,
+    "command_files_written": 2,
+    "manifest_files_written": 8,
+    "pack_files_checksummed": 18
+  },
+  "reopen_candidate_ids": [
+    "power.control.allow-audio-to-enable-execution-required-power-requests",
+    "power.control.allow-system-required-power-requests"
+  ],
+  "required_repo_paths": [
+    "scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+    "registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py",
+    "registry-research-framework/scripts/generate_etw_stackwalk_hold_reopen_plan.py",
+    "registry-research-framework/scripts/generate_etw_stackwalk_execution_manifest.py",
+    "registry-research-framework/config/etw-stackwalk-profiles.json",
+    "registry-research-framework/config/tweak-vm-runners.json"
+  ],
+  "copied_repo_paths": [
+    "scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+    "registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py",
+    "registry-research-framework/scripts/generate_etw_stackwalk_hold_reopen_plan.py",
+    "registry-research-framework/scripts/generate_etw_stackwalk_execution_manifest.py",
+    "registry-research-framework/config/etw-stackwalk-profiles.json",
+    "registry-research-framework/config/tweak-vm-runners.json"
+  ],
+  "command_files": [
+    "01-power.control.allow-audio-to-enable-execution-required-power-requests.txt",
+    "02-power.control.allow-system-required-power-requests.txt"
+  ],
+  "manifest_files": [
+    "manifests/etw-stackwalk-hold-reopen-plan.json",
+    "manifests/etw-stackwalk-hold-reopen-plan.md",
+    "manifests/etw-stackwalk-dispatch-batch.json",
+    "manifests/etw-stackwalk-dispatch-batch.md",
+    "manifests/etw-stackwalk-dispatch-run.json",
+    "manifests/etw-stackwalk-dispatch-run.md",
+    "manifests/etw-stackwalk-execution-manifest.json",
+    "manifests/etw-stackwalk-execution-manifest.md"
+  ],
+  "items": [
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "next_missing_layer": "intentional-hold",
+      "promotion_blockers": [
+        "audio-execution-required-no-current-build-registry-seeding-path",
+        "audio-execution-required-no-primary-current-build-doc",
+        "intentional-hold"
+      ],
+      "reopen_prerequisites": [
+        "Land a current-build boot/init reader or registry seeding caller proof.",
+        "Land a primary current-build Microsoft document for the exact value semantics.",
+        "Explicitly reopen the lane before dispatching runtime capture."
+      ],
+      "default_dispatch_excluded": true,
+      "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --print-effective-config",
+      "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --ingest-to-repo --refresh-ghidra",
+      "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests",
+      "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --run",
+      "run_id": "wave4-allow-audio-e2e",
+      "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+      "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available."
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "feature_area": "Control Power Requests",
+      "next_missing_layer": "intentional-hold",
+      "promotion_blockers": [
+        "intentional-hold",
+        "system-execution-required-no-current-build-registry-seeding-path"
+      ],
+      "reopen_prerequisites": [
+        "Land a current-build boot/init reader or registry seeding caller proof.",
+        "Explicitly reopen the lane before dispatching runtime capture."
+      ],
+      "default_dispatch_excluded": true,
+      "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+      "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+      "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
+      "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+      "run_id": "wave4-allow-system-required-e2e",
+      "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+      "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available."
+    }
+  ],
+  "pack_files": [
+    {
+      "path": "CHECKSUMS.json",
+      "size_bytes": 3426,
+      "sha256": "84720930ea4924158d0ea1cc7d778abb52062650ec95b437b52b62ae8b1a3ca1"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 987,
+      "sha256": "2410fb1e2c6df9073375e127090abcde36ff6959d7f07669e9474ad5c627e9fe"
+    },
+    {
+      "path": "commands/01-power.control.allow-audio-to-enable-execution-required-power-requests.txt",
+      "size_bytes": 1443,
+      "sha256": "83d4b0b3069571e06bd791c238157b061e6d94ff2e7de84f1cb354580e664383"
+    },
+    {
+      "path": "commands/02-power.control.allow-system-required-power-requests.txt",
+      "size_bytes": 1262,
+      "sha256": "eac7145d70c0092291f46aa57648334027bf0c6507a3083ff39cdde174a63aaf"
+    },
+    {
+      "path": "manifests/etw-stackwalk-dispatch-batch.json",
+      "size_bytes": 8941,
+      "sha256": "5a140f1251f09737a229fe0e3fa24411e4903aaff690ebd41169cd5e5b535fc2"
+    },
+    {
+      "path": "manifests/etw-stackwalk-dispatch-batch.md",
+      "size_bytes": 2772,
+      "sha256": "523eb90f102bb249369e1f3168fd77624f7c83221edca620054861deef967d9c"
+    },
+    {
+      "path": "manifests/etw-stackwalk-dispatch-run.json",
+      "size_bytes": 312,
+      "sha256": "66dc0ca460e37a2296c4a685e684c5a7a4d04eacd5e6ac48e6bbd9604f4e1ae1"
+    },
+    {
+      "path": "manifests/etw-stackwalk-dispatch-run.md",
+      "size_bytes": 163,
+      "sha256": "55bbc49822f8de82678ea42f923f707b7b8473cf6bee19288ab2182d871c0fa0"
+    },
+    {
+      "path": "manifests/etw-stackwalk-execution-manifest.json",
+      "size_bytes": 5040,
+      "sha256": "f080a6aa7ebf9e826642f5ace0a15dd53efbf4b581d1bf5db4f9a835d3a2c8ee"
+    },
+    {
+      "path": "manifests/etw-stackwalk-execution-manifest.md",
+      "size_bytes": 2828,
+      "sha256": "68d884d764a908778248320b5b26edfd65731febee949c1fe4e66527cc536742"
+    },
+    {
+      "path": "manifests/etw-stackwalk-hold-reopen-plan.json",
+      "size_bytes": 3914,
+      "sha256": "758a7c297cd2b0a8ac9197f7f6b31d589913c3417b85ed800ba4d84bc7e1b640"
+    },
+    {
+      "path": "manifests/etw-stackwalk-hold-reopen-plan.md",
+      "size_bytes": 2709,
+      "sha256": "90d884b15a8e9f12fec124395c2132f266bde490c3be7a0191cdf6c8e632f855"
+    },
+    {
+      "path": "repo/registry-research-framework/config/etw-stackwalk-profiles.json",
+      "size_bytes": 4740,
+      "sha256": "eac8b8193ec5b263ca120bc8d1fbc1e1733cade6989b5514c87287ab5c102601"
+    },
+    {
+      "path": "repo/registry-research-framework/config/tweak-vm-runners.json",
+      "size_bytes": 9255,
+      "sha256": "76483fb27f6f1b87f85ed84454b8119883982030e98e94c59b0275cfe6f07387"
+    },
+    {
+      "path": "repo/registry-research-framework/scripts/generate_etw_stackwalk_execution_manifest.py",
+      "size_bytes": 10479,
+      "sha256": "4f37717d16defa0cdd5673a6e4d773c4e111ad16ebe29b2d246de4f2c42dd8c3"
+    },
+    {
+      "path": "repo/registry-research-framework/scripts/generate_etw_stackwalk_hold_reopen_plan.py",
+      "size_bytes": 7459,
+      "sha256": "f93631788b72cc2e2509ca57497885c129c8fb15685dad2f69a1efa14b5e1755"
+    },
+    {
+      "path": "repo/registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py",
+      "size_bytes": 8908,
+      "sha256": "0e5a9af634ae0822df4370b29a2e5d43606c93727f8ac5738c5bf2c9fc373c24"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+      "size_bytes": 22475,
+      "sha256": "3b92888e100daec921fb6c50ebfbd72cfbed342397e52e61df82c7ed21cb4306"
+    }
+  ],
+  "archive": {
+    "path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-pack.zip",
+    "size_bytes": 26350,
+    "sha256": "198c168124457328194e27799e2ea8adf14a424aec5efe66ac0084310a30450b"
+  }
+}
