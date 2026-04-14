@@ -1,0 +1,69 @@
+{
+  "binary": "KernelBase.dll",
+  "probe": "ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests",
+  "timestamp": "2026-04-14T01:01:38.272962300Z",
+  "pdb_source": "C:\\Tools\\Symbols\\ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests",
+  "pdb_loaded": true,
+  "matches": [
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "KernelBase.dll+0x2E436",
+      "address": "18002e436",
+      "function_name": "RegGetValueW",
+      "function_source": "pdb-symbol",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "18002e447  CMP R13,RAX",
+      "jump_condition": "unclear",
+      "branch_effect": "comparison recovered, but nearby jump condition is still unclear.",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 50,
+      "effect_summary": "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare/test anchor found",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "RDI",
+        "R13",
+        "RSP",
+        "R14",
+        "R12",
+        "ECX",
+        "RAX",
+        "EAX",
+        "EBX",
+        "EDX"
+      ],
+      "flag_focus": [
+        "ZF",
+        "CF",
+        "SF",
+        "OF"
+      ],
+      "context_before": [
+        "18002e420  CMOVNZ R13,RDI",
+        "18002e424  XOR R8D,R8D",
+        "18002e427  MOV qword ptr [RSP + 0x28],R13",
+        "18002e42c  MOV qword ptr [RSP + 0x20],R14",
+        "18002e431  CALL 0x18002ecb0"
+      ],
+      "branch_snippet": [
+        "18002e436  MOV ECX,dword ptr [R12]",
+        "18002e447  CMP R13,RAX",
+        "18002e420  CMOVNZ R13,RDI"
+      ],
+      "context_after": [
+        "18002e43a  XOR R11D,R11D",
+        "18002e43d  MOV EBX,EAX",
+        "18002e43f  MOV EDX,R11D",
+        "18002e442  LEA RAX,[RSP + 0x44]",
+        "18002e447  CMP R13,RAX"
+      ]
+    }
+  ]
+}

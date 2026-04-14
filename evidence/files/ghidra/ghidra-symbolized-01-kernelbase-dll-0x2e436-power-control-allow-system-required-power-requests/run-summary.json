@@ -1,0 +1,41 @@
+{
+  "generated_utc": "2026-04-14T01:01:39.5598166Z",
+  "binary_path": "C:\\Windows\\System32\\KernelBase.dll",
+  "output_name": "ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests",
+  "project_name": "Probe_ghidra_symbolized_01_kernelbase_dll_0x2e436_power_control_allow_system_required_power_requests",
+  "symbol_root": "C:\\Tools\\Symbols\\ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests",
+  "output_root": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests",
+  "symchk_path": "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+  "symchk_exit_code": 0,
+  "staged_pdb_count": 2,
+  "staged_pdb_sample": [
+    "C:\\Tools\\Symbols\\ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests\\kernelbase.pdb",
+    "C:\\Tools\\Symbols\\ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests\\kernelbase.pdb\\92F6993C1974DB86F9A4DE4D51FB4CB41\\kernelbase.pdb"
+  ],
+  "ghidra_exit_code": 0,
+  "no_analysis": false,
+  "module_offsets": [
+    "KernelBase.dll+0x2E436"
+  ],
+  "pdb_loaded": true,
+  "match_count": 1,
+  "uploads": {
+    "evidence": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests\\evidence.json",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests-evidence.json"
+    },
+    "markdown": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests\\ghidra-matches.md",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests-ghidra-matches.md"
+    },
+    "symchk_log": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests\\symchk.txt",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-01-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests-symchk.txt"
+    }
+  },
+  "status": "ok",
+  "guest_health": "stable",
+  "transport_blocker": null,
+  "error_kind": null,
+  "recovery_action": null
+}
