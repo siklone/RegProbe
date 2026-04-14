@@ -281,7 +281,7 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has clean-baseline absence, a current-build string hit, a live current-build KD symbol/value for `PopWin32CalloutWatchdogBugcheckEnabled`, a current-build INIT descriptor binding from the value name to the same global under `Session Manager\\Power`, a dedicated Procmon runtime attempt that reached guest execution, and a neutral-value VM perf bench that verified apply and rollback. It is not ready for validation because an exact runtime registry read has not been captured, the bounded runtime lane currently fails at `Procmon SaveAs`, the direct code-reader path is still unresolved, and non-default semantics remain unproven.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has clean-baseline absence, a current-build string hit, a live current-build KD symbol/value for `PopWin32CalloutWatchdogBugcheckEnabled`, a current-build INIT descriptor binding from the value name to the same global under `Session Manager\\Power`, a dedicated Procmon runtime attempt that reached guest execution, and a neutral-value VM perf bench that verified apply and rollback. It is not ready for validation because an exact runtime registry read has not been captured, the bounded runtime lane currently fails at `Procmon SaveAs`, the direct code-reader path is still unresolved, and non-default semantics remain unproven. This remains active blocked work rather than an intentional hold because the lane is restore-safe and the missing pieces are still concrete current-build proof gaps.",
     "manual_review_required": true,
     "blocking_issues": [
       "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
@@ -308,5 +308,5 @@
       "notes": "A host-side `ntoskrnl.exe` decode found a `Session Manager\\Power` descriptor row for `Win32CalloutWatchdogBugcheckEnabled` pointing at the same static RVA as live `nt!PopWin32CalloutWatchdogBugcheckEnabled`."
     }
   ],
-  "last_reviewed_utc": "2026-04-13T01:19:00Z"
+  "last_reviewed_utc": "2026-04-14T06:06:38Z"
 }

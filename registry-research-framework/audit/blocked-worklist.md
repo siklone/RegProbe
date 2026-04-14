@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T06:05:09.540934Z`
+Generated: `2026-04-14T06:07:40.680682Z`
 
 Blocked candidates: `18`
 
@@ -106,10 +106,10 @@ Blocked candidates: `18`
 - Feature area: `Session Manager Kernel DPC Watchdog Control Timeouts`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `DPCTimeout`
-- Blockers: `dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs`, `dpc-watchdog-control-no-primary-current-build-doc`, `dpc-watchdog-control-runtime-read-unresolved`
+- Blockers: `dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs`, `dpc-watchdog-control-no-current-build-exact-registry-read`, `dpc-watchdog-control-no-primary-current-build-doc`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Suggested command: `winopt research show-blocked system.kernel-dpc-watchdog-control-cluster --json`
-- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
+- Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
 
 ### `system.kernel-long-dpc-threshold-cluster`
 
