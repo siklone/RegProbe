@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-14T09:09:58.912056Z",
+  "generated_at": "2026-04-14T09:13:30.207918Z",
   "blocked_count": 18,
   "lane_counts": {
-    "ghidra": 2,
-    "intentional-hold": 15,
+    "ghidra": 1,
+    "intentional-hold": 16,
     "runtime-trace": 1
   },
   "actionability_counts": {
-    "active": 3,
-    "hold": 15
+    "active": 2,
+    "hold": 16
   },
   "ordered_lanes": [
     "ghidra",
@@ -22,9 +22,9 @@
   },
   "lane_focus": {
     "ghidra": {
-      "candidate_id": "power.session-watchdog-timeouts",
-      "suggested_command": "winopt research show-blocked power.session-watchdog-timeouts --json",
-      "next_action_hint": "Continue static reverse-engineering for exact leaf-level proof."
+      "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "suggested_command": "winopt research show-blocked system.kernel-dpc-watchdog-profile-cluster --json",
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
     },
     "runtime-trace": {
       "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
@@ -38,7 +38,6 @@
     }
   },
   "top_actionable_candidates": [
-    "power.session-watchdog-timeouts",
     "system.kernel-dpc-watchdog-profile-cluster",
     "system.kernel-dpc-watchdog-control-cluster"
   ],
@@ -50,27 +49,6 @@
     "power.control.allow-system-required-power-requests"
   ],
   "items": [
-    {
-      "candidate_id": "power.session-watchdog-timeouts",
-      "feature_area": "Directed Power Watchdog Timeouts",
-      "next_missing_layer": "ghidra",
-      "actionability": "active",
-      "priority_score": 33,
-      "blocker_count": 2,
-      "promotion_blockers": [
-        "power-session-watchdog-timeouts-no-current-build-exact-registry-read",
-        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
-      "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
-        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
-        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
-      ],
-      "suggested_command": "winopt research show-blocked power.session-watchdog-timeouts --json",
-      "next_action_hint": "Continue static reverse-engineering for exact leaf-level proof."
-    },
     {
       "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
       "feature_area": "Session Manager Kernel DPC Watchdog Profile",
@@ -228,6 +206,28 @@
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
+    },
+    {
+      "candidate_id": "power.session-watchdog-timeouts",
+      "feature_area": "Directed Power Watchdog Timeouts",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 7,
+      "blocker_count": 3,
+      "promotion_blockers": [
+        "power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation",
+        "power-session-watchdog-timeouts-no-current-build-exact-registry-read",
+        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json",
+        "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Wait for a safer environment or a clearer product surface before probing."
     },
     {
       "candidate_id": "system.kernel.global-timer-resolution-requests",

@@ -1,23 +1,22 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T09:09:58.912056Z`
+Generated: `2026-04-14T09:13:30.207918Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 3
-- `hold`: 15
+- `active`: 2
+- `hold`: 16
 
 ## Lane Summary
 
-- `ghidra`: 2 | first: `power.session-watchdog-timeouts` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static reverse-engineering for exact leaf-level proof.
+- `ghidra`: 1 | first: `system.kernel-dpc-watchdog-profile-cluster` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Find a primary current-build Microsoft source or explicitly accept research-only status.
 - `runtime-trace`: 1 | first: `system.kernel-dpc-watchdog-control-cluster` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Find a primary current-build Microsoft source or explicitly accept research-only status.
-- `intentional-hold`: 15 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `intentional-hold`: 16 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
-- `power.session-watchdog-timeouts` (`ghidra`, score=33, blockers=2)
 - `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
 - `system.kernel-dpc-watchdog-control-cluster` (`runtime-trace`, score=27, blockers=3)
 
@@ -30,19 +29,6 @@ Blocked candidates: `18`
 - `power.control.allow-system-required-power-requests` (`intentional-hold`, score=8, blockers=2)
 
 ## Candidates
-
-### `power.session-watchdog-timeouts`
-
-- Lane: `ghidra`
-- Actionability: `active`
-- Priority score: `33`
-- Feature area: `Directed Power Watchdog Timeouts`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`
-- Value name: `WatchdogResumeTimeout / WatchdogSleepTimeout`
-- Blockers: `power-session-watchdog-timeouts-no-current-build-exact-registry-read`, `power-session-watchdog-timeouts-no-current-build-registry-seeding-caller`
-- Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
-- Suggested command: `winopt research show-blocked power.session-watchdog-timeouts --json`
-- Next action hint: Continue static reverse-engineering for exact leaf-level proof.
 
 ### `system.kernel-dpc-watchdog-profile-cluster`
 
@@ -145,6 +131,19 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
+
+### `power.session-watchdog-timeouts`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `7`
+- Feature area: `Directed Power Watchdog Timeouts`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`
+- Value name: `WatchdogResumeTimeout / WatchdogSleepTimeout`
+- Blockers: `power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation`, `power-session-watchdog-timeouts-no-current-build-exact-registry-read`, `power-session-watchdog-timeouts-no-current-build-registry-seeding-caller`
+- Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Wait for a safer environment or a clearer product surface before probing.
 
 ### `system.kernel.global-timer-resolution-requests`
 
