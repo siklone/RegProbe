@@ -8,12 +8,12 @@
   "verification_health_summary": "gate=green, schema_complete_ratio=1.0, missing_docs=0",
   "blocked_lane_counts": {
     "ghidra": 2,
-    "intentional-hold": 11,
-    "runtime-trace": 5
+    "intentional-hold": 12,
+    "runtime-trace": 4
   },
   "blocked_actionability_counts": {
-    "active": 7,
-    "hold": 11
+    "active": 6,
+    "hold": 12
   },
   "top_actionable_blocked_candidates": [
     "power.session-watchdog-timeouts",
@@ -29,7 +29,7 @@
     "power.control.timer-rebase-threshold-on-drips-exit",
     "power.control.allow-system-required-power-requests"
   ],
-  "generated_at": "2026-04-14T08:55:53.000863Z",
+  "generated_at": "2026-04-14T08:59:49.544708Z",
   "blocked_worklist_json": "registry-research-framework/audit/blocked-worklist.json",
   "blocked_worklist_markdown": "registry-research-framework/audit/blocked-worklist.md",
   "blocked_worklist_status": "PASS",

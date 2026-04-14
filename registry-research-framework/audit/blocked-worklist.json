@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-14T08:55:53.567647Z",
+  "generated_at": "2026-04-14T08:59:50.171891Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 2,
-    "intentional-hold": 11,
-    "runtime-trace": 5
+    "intentional-hold": 12,
+    "runtime-trace": 4
   },
   "actionability_counts": {
-    "active": 7,
-    "hold": 11
+    "active": 6,
+    "hold": 12
   },
   "ordered_lanes": [
     "ghidra",
@@ -156,26 +156,6 @@
         "registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json"
       ],
       "suggested_command": "winopt research show-blocked system.kernel-long-dpc-threshold-cluster --json",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
-    },
-    {
-      "candidate_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
-      "feature_area": "Session Manager Kernel DPC Watchdog",
-      "next_missing_layer": "runtime-trace",
-      "actionability": "active",
-      "priority_score": 27,
-      "blocker_count": 3,
-      "promotion_blockers": [
-        "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
-        "force-bugcheck-dpc-watchdog-semantics-unproven",
-        "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
-      "value_name": "ForceBugcheckForDpcWatchdog",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
-      ],
-      "suggested_command": "winopt research show-blocked system.kernel.force-bugcheck-for-dpc-watchdog --json",
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
@@ -390,6 +370,27 @@
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+    },
+    {
+      "candidate_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+      "feature_area": "Session Manager Kernel DPC Watchdog",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 6,
+      "blocker_count": 4,
+      "promotion_blockers": [
+        "force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot",
+        "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
+        "force-bugcheck-dpc-watchdog-semantics-unproven",
+        "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "ForceBugcheckForDpcWatchdog",
       "recent_audit_artifacts": [
         "registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json"
       ],

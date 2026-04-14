@@ -253,9 +253,10 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, current-build string hit, a real write-and-reboot runtime lane, dedicated live current-build KD proof that the kernel global exists at value `0`, and a current-build INIT descriptor binding from `ForceBugcheckForDpcWatchdog` to the same global. A QGA-launched raw WPR System Collector salvage run also found zero exact value-name hits after a real reboot. It is not ready for validation because the exact runtime registry read and non-default semantics remain unproven. This remains active blocked work rather than an intentional hold because the lane is boot-capable and the missing proof is still narrow.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, a real write-and-reboot runtime lane, dedicated live current-build KD proof that the kernel global exists at value `0`, and a current-build INIT descriptor binding from `ForceBugcheckForDpcWatchdog` to the same global. Additional current-build runtime attempts now converge on the same gap: a seeded Registry-only boot WPR trace, a DPC/timer ETW trace, and a QGA-launched raw WPR System Collector salvage run all retained zero exact value-name hits after real reboot activity. The 2026-04-14 decision moves this to an intentional hold because the value is safety-sensitive, still lacks an exact current-build runtime registry-read pivot, non-default bugcheck semantics remain unproven, and Microsoft does not publish a primary current-build document for the internal contract. Further chase should wait for a stronger debugger-assisted caller trace or authoritative documentation rather than spending more bounded boot/runtime retries on another no-hit lane.",
     "manual_review_required": true,
     "blocking_issues": [
+      "force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot",
       "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build",
       "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
       "force-bugcheck-dpc-watchdog-semantics-unproven"
@@ -275,5 +276,5 @@
       "notes": "The lane currently combines baseline existence, a write-and-reboot runtime attempt, dedicated KVM local-KD proof that `KiForceBugcheckForDpcWatchdog = 0` on the running current build, a current-build INIT descriptor binding from the registry value name to the same global, and a QGA-launched raw WPR System Collector salvage run with zero exact value-name hits."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T06:06:38Z"
+  "last_reviewed_utc": "2026-04-14T08:59:05Z"
 }

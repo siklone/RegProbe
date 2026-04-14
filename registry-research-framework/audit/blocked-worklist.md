@@ -1,19 +1,19 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T08:55:53.567647Z`
+Generated: `2026-04-14T08:59:50.171891Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 7
-- `hold`: 11
+- `active`: 6
+- `hold`: 12
 
 ## Lane Summary
 
 - `ghidra`: 2 | first: `power.session-watchdog-timeouts` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static reverse-engineering for exact leaf-level proof.
-- `runtime-trace`: 5 | first: `power.control.win32k-callout-watchdog-timeout-seconds` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
-- `intentional-hold`: 11 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `runtime-trace`: 4 | first: `power.control.win32k-callout-watchdog-timeout-seconds` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
+- `intentional-hold`: 12 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
@@ -96,19 +96,6 @@ Blocked candidates: `18`
 - Blockers: `long-dpc-threshold-no-primary-current-build-doc`, `long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane`, `long-dpc-threshold-wpr-boot-no-hit-current-build`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`
 - Suggested command: `winopt research show-blocked system.kernel-long-dpc-threshold-cluster --json`
-- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
-
-### `system.kernel.force-bugcheck-for-dpc-watchdog`
-
-- Lane: `runtime-trace`
-- Actionability: `active`
-- Priority score: `27`
-- Feature area: `Session Manager Kernel DPC Watchdog`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
-- Value name: `ForceBugcheckForDpcWatchdog`
-- Blockers: `force-bugcheck-dpc-watchdog-no-primary-current-build-doc`, `force-bugcheck-dpc-watchdog-semantics-unproven`, `force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
-- Suggested command: `winopt research show-blocked system.kernel.force-bugcheck-for-dpc-watchdog --json`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `system.kernel.timer-check-flags`
@@ -247,6 +234,19 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`
 - Value name: `Win32CalloutWatchdogBugcheckEnabled`
 - Blockers: `win32-callout-watchdog-bugcheck-intentional-hold-adjacent-sibling-without-current-build-pivot`, `win32-callout-watchdog-bugcheck-no-primary-current-build-doc`, `win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane`, `win32-callout-watchdog-bugcheck-semantics-unproven`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
+
+### `system.kernel.force-bugcheck-for-dpc-watchdog`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `6`
+- Feature area: `Session Manager Kernel DPC Watchdog`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
+- Value name: `ForceBugcheckForDpcWatchdog`
+- Blockers: `force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot`, `force-bugcheck-dpc-watchdog-no-primary-current-build-doc`, `force-bugcheck-dpc-watchdog-semantics-unproven`, `force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
