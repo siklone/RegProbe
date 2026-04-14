@@ -205,6 +205,7 @@
     },
     "power.control.allow-system-required-power-requests": {
       "script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "etw_stackwalk_profile_id": "execution-required-system-stackwalk-v1",
       "required_capabilities": [
         "registry_read",
         "registry_write",
@@ -227,6 +228,7 @@
     },
     "power.control.allow-audio-to-enable-execution-required-power-requests": {
       "script": "registry-research-framework/tools/run-path-aware-runtime-probe.ps1",
+      "etw_stackwalk_profile_id": "execution-required-audio-stackwalk-v1",
       "required_capabilities": [
         "registry_read",
         "registry_write",

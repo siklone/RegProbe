@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T03:42:48.937843Z",
+  "generated_utc": "2026-04-14T03:46:05.382441Z",
   "plan_status": "ready",
   "errors": [],
   "profile_id": "execution-required-audio-stackwalk-v1",
@@ -13,6 +13,7 @@
     "level": "5"
   },
   "target": {
+    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
     "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
     "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests"
   },
@@ -132,5 +133,6 @@
     "The repo_guest_capture command is the preferred host-side lane when the focused KVM guest is available because it launches the guest helper, ingests the ETL/XML into the repo, and refreshes caller-stack follow-up automatically.",
     "If caller_stack remains empty, rerun with a narrower trigger window or move the ETL to WPA/xperf for stack inspection."
   ],
-  "config_path": "registry-research-framework/config/etw-stackwalk-profiles.json"
+  "config_path": "registry-research-framework/config/etw-stackwalk-profiles.json",
+  "runner_config_path": "registry-research-framework/config/tweak-vm-runners.json"
 }

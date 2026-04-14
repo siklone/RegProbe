@@ -5,6 +5,7 @@
 - Capture phase: `runtime`
 - Run id: `wave4-allow-audio-e2e`
 - Duration seconds: `60`
+- Candidate id: `power.control.allow-audio-to-enable-execution-required-power-requests`
 - Registry path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `AllowAudioToEnableExecutionRequiredPowerRequests`
 - Stack expected: `True`

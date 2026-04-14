@@ -12,6 +12,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[2]
 FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
 CONFIG_PATH = FRAMEWORK_ROOT / "config" / "etw-stackwalk-profiles.json"
+RUNNER_CONFIG_PATH = FRAMEWORK_ROOT / "config" / "tweak-vm-runners.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-capture-plan.json"
 MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-capture-plan.md"
 
@@ -42,12 +43,32 @@ def load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_runner_config(path: Path = RUNNER_CONFIG_PATH) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def profile_by_id(config: dict[str, Any], profile_id: str | None = None) -> dict[str, Any]:
     selected_id = profile_id or str(config.get("default_profile") or "")
     for profile in config.get("profiles") or []:
         if str(profile.get("profile_id") or "") == selected_id:
             return profile
     raise ValueError(f"Unknown ETW stackwalk profile: {selected_id}")
+
+
+def profile_id_for_candidate(candidate_id: str, runner_config: dict[str, Any]) -> str | None:
+    target_id = str(candidate_id or "").strip()
+    if not target_id:
+        return None
+    for lane_entries in runner_config.values():
+        if not isinstance(lane_entries, dict):
+            continue
+        entry = lane_entries.get(target_id)
+        if not isinstance(entry, dict):
+            continue
+        profile_id = str(entry.get("etw_stackwalk_profile_id") or "").strip()
+        if profile_id:
+            return profile_id
+    return None
 
 
 def sanitize_run_id(value: str) -> str:
@@ -96,6 +117,7 @@ def build_capture_plan(
     run_id: str,
     output_root: str | None = None,
     duration_seconds: int | None = None,
+    candidate_id: str | None = None,
     registry_path: str | None = None,
     value_name: str | None = None,
     generated_utc: str | None = None,
@@ -142,6 +164,7 @@ def build_capture_plan(
         "capture_phase": profile.get("capture_phase"),
         "provider": profile.get("provider") or {},
         "target": {
+            "candidate_id": candidate_id,
             "registry_path": target_registry_path,
             "value_name": target_value_name,
         },
@@ -220,6 +243,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Capture phase: `{payload.get('capture_phase')}`",
         f"- Run id: `{run.get('run_id')}`",
         f"- Duration seconds: `{run.get('duration_seconds')}`",
+        f"- Candidate id: `{(payload.get('target') or {}).get('candidate_id')}`",
         f"- Registry path: `{(payload.get('target') or {}).get('registry_path')}`",
         f"- Value name: `{(payload.get('target') or {}).get('value_name')}`",
         f"- Stack expected: `{stack_capture.get('expected')}`",
@@ -254,7 +278,9 @@ def render_markdown(payload: dict[str, Any]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate an operator-ready ETW registry stackwalk capture plan.")
     parser.add_argument("--config", type=Path, default=CONFIG_PATH)
+    parser.add_argument("--runner-config", type=Path, default=RUNNER_CONFIG_PATH)
     parser.add_argument("--profile-id")
+    parser.add_argument("--candidate-id")
     parser.add_argument("--run-id")
     parser.add_argument("--output-root")
     parser.add_argument("--duration-seconds", type=int)
@@ -265,16 +291,23 @@ def main() -> int:
     args = parser.parse_args()
 
     config = load_config(args.config)
-    profile = profile_by_id(config, args.profile_id)
+    resolved_profile_id = args.profile_id
+    if not resolved_profile_id and args.candidate_id:
+        resolved_profile_id = profile_id_for_candidate(args.candidate_id, load_runner_config(args.runner_config))
+        if not resolved_profile_id:
+            raise ValueError(f"No ETW stackwalk profile mapping found for candidate: {args.candidate_id}")
+    profile = profile_by_id(config, resolved_profile_id)
     payload = build_capture_plan(
         profile,
         run_id=args.run_id,
         output_root=args.output_root,
         duration_seconds=args.duration_seconds,
+        candidate_id=args.candidate_id,
         registry_path=args.registry_path,
         value_name=args.value_name,
     )
     payload["config_path"] = portable_path(args.config)
+    payload["runner_config_path"] = portable_path(args.runner_config)
     write_json(args.output, payload)
     write_text(args.markdown_output, render_markdown(payload))
     print(json.dumps({"plan": portable_path(args.output), "status": payload.get("plan_status")}, indent=2))
