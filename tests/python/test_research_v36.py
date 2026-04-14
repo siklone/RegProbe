@@ -1714,6 +1714,8 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertIn("--ingest-to-repo", result.stdout)
         self.assertIn("--profile-id", result.stdout)
         self.assertIn("--list-profiles", result.stdout)
+        self.assertIn("--candidate-id", result.stdout)
+        self.assertIn("--print-effective-config", result.stdout)
 
     def test_kvm_etw_stackwalk_launcher_lists_profiles(self) -> None:
         result = subprocess.run(
@@ -1763,6 +1765,48 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(resolved["value_name"], "AllowSystemRequiredPowerRequests")
         self.assertIn("REGISTRY", resolved["kernel_flags"])
         self.assertIn("RegQueryValue", resolved["stackwalk_events"])
+
+    def test_kvm_etw_stackwalk_launcher_prints_effective_config_for_candidate(self) -> None:
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(REPO_ROOT / "scripts" / "vm-kvm" / "run-guest-etw-stackwalk-capture.py"),
+                "--candidate-id",
+                "power.control.allow-system-required-power-requests",
+                "--print-effective-config",
+            ],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        payload = json.loads(result.stdout)
+        effective = payload["effective"]
+        self.assertEqual(payload["candidate_id"], "power.control.allow-system-required-power-requests")
+        self.assertEqual(effective["profile_id"], "execution-required-system-stackwalk-v1")
+        self.assertEqual(effective["run_id"], "wave4-allow-system-required-e2e")
+        self.assertEqual(effective["registry_path"], r"HKLM\SYSTEM\CurrentControlSet\Control\Power")
+        self.assertEqual(effective["value_name"], "AllowSystemRequiredPowerRequests")
+
+    def test_kvm_etw_stackwalk_launcher_rejects_unmapped_candidate(self) -> None:
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(REPO_ROOT / "scripts" / "vm-kvm" / "run-guest-etw-stackwalk-capture.py"),
+                "--candidate-id",
+                "does.not.exist",
+                "--print-effective-config",
+            ],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("no ETW stackwalk profile mapping", result.stderr)
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {

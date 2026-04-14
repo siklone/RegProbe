@@ -14,6 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 CURRENT_DIR = Path(__file__).resolve().parent
 FRAMEWORK_SCRIPTS = REPO_ROOT / "registry-research-framework" / "scripts"
 DEFAULT_PROFILE_CONFIG = REPO_ROOT / "registry-research-framework" / "config" / "etw-stackwalk-profiles.json"
+DEFAULT_RUNNER_CONFIG = REPO_ROOT / "registry-research-framework" / "config" / "tweak-vm-runners.json"
 DEFAULT_RUN_ID = "wave4-registry-stackwalk"
 DEFAULT_DURATION_SECONDS = 60
 DEFAULT_REGISTRY_PATH = r"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel"
@@ -40,6 +41,8 @@ if str(FRAMEWORK_SCRIPTS) not in sys.path:
 
 from guest_bridge import ensure_guest_bridge
 from generate_etw_stackwalk_capture_plan import load_config as load_profile_config  # noqa: E402
+from generate_etw_stackwalk_capture_plan import load_runner_config  # noqa: E402
+from generate_etw_stackwalk_capture_plan import profile_id_for_candidate  # noqa: E402
 from generate_etw_stackwalk_capture_plan import profile_by_id  # noqa: E402
 
 
@@ -322,6 +325,21 @@ def list_profiles_payload(config: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def effective_config_payload(
+    *,
+    candidate_id: str | None,
+    profile_config_path: Path,
+    runner_config_path: Path,
+    effective: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "candidate_id": candidate_id,
+        "profile_config": str(profile_config_path),
+        "runner_config": str(runner_config_path),
+        "effective": effective,
+    }
+
+
 def resolve_effective_capture_settings(
     *,
     config: dict[str, Any] | None,
@@ -377,8 +395,11 @@ def main() -> int:
     parser.add_argument("--qga-retry-interval-seconds", type=int, default=5)
     parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
     parser.add_argument("--profile-config", default=str(DEFAULT_PROFILE_CONFIG))
+    parser.add_argument("--runner-config", default=str(DEFAULT_RUNNER_CONFIG))
+    parser.add_argument("--candidate-id", default=None, help="Resolve the ETW stackwalk profile from tweak-vm-runners.json.")
     parser.add_argument("--profile-id", default=None)
     parser.add_argument("--list-profiles", action="store_true", help="List available ETW stackwalk profiles and exit.")
+    parser.add_argument("--print-effective-config", action="store_true", help="Print the resolved capture settings and exit without launching the guest.")
     parser.add_argument("--run-id", default=None)
     parser.add_argument("--duration-seconds", type=int, default=None)
     parser.add_argument("--registry-path", default=None)
@@ -400,10 +421,19 @@ def main() -> int:
     profile_config_path = Path(args.profile_config)
     if not profile_config_path.is_absolute():
         profile_config_path = (repo_root / profile_config_path).resolve()
+    runner_config_path = Path(args.runner_config)
+    if not runner_config_path.is_absolute():
+        runner_config_path = (repo_root / runner_config_path).resolve()
     config = load_profile_config(profile_config_path)
     if args.list_profiles:
         print(json.dumps(list_profiles_payload(config), indent=2))
         return 0
+    if args.candidate_id and not args.profile_id:
+        runner_config = load_runner_config(runner_config_path)
+        resolved_profile_id = profile_id_for_candidate(args.candidate_id, runner_config)
+        if not resolved_profile_id:
+            parser.error(f"--candidate-id has no ETW stackwalk profile mapping: {args.candidate_id}")
+        args.profile_id = resolved_profile_id
 
     effective = resolve_effective_capture_settings(
         config=config,
@@ -430,6 +460,19 @@ def main() -> int:
     args.min_buffers = effective["min_buffers"]
     args.max_buffers = effective["max_buffers"]
     args.profile_id = effective["profile_id"]
+    if args.print_effective_config:
+        print(
+            json.dumps(
+                effective_config_payload(
+                    candidate_id=args.candidate_id,
+                    profile_config_path=profile_config_path,
+                    runner_config_path=runner_config_path,
+                    effective=effective,
+                ),
+                indent=2,
+            )
+        )
+        return 0
 
     upload_dir = Path(args.upload_dir).resolve()
     upload_dir.mkdir(parents=True, exist_ok=True)
