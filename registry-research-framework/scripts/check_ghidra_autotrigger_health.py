@@ -205,6 +205,14 @@ def validate_health(payload: dict[str, Any]) -> list[str]:
             "symbol_resolution_run_completed_jobs exceeds symbol_resolution_batch_jobs: "
             f"{symbol_resolution_run_completed_jobs}>{symbol_resolution_batch_jobs}"
         )
+    if (
+        symbol_resolution_run_completed_jobs == 0
+        and symbol_resolution_run_selected_jobs + symbol_resolution_run_blocked_jobs < symbol_resolution_batch_jobs
+    ):
+        errors.append(
+            "symbol_resolution selected+blocked does not cover batch jobs: "
+            f"{symbol_resolution_run_selected_jobs}+{symbol_resolution_run_blocked_jobs}<{symbol_resolution_batch_jobs}"
+        )
     if symbol_resolution_run_selected_jobs + symbol_resolution_run_blocked_jobs + symbol_resolution_run_completed_jobs < symbol_resolution_batch_jobs:
         errors.append(
             "symbol_resolution selected+blocked+completed does not cover batch jobs: "

@@ -367,6 +367,21 @@ def sync_lane(
     effective_execution_run_markdown_path = effective_transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run.md")
     effective_execution_run_check_path = effective_transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run-check.json")
     effective_execution_run_check_markdown_path = effective_transfer_pack_summary_path.with_name("ghidra-symbol-resolution-transfer-pack-execution-run-check.md")
+    allow_cached_idle_surfaces = any(
+        value is not None
+        for value in (
+            handoff_path,
+            handoff_markdown_path,
+            transfer_path,
+            transfer_markdown_path,
+            transfer_pack_output_root,
+            transfer_pack_summary_path,
+            transfer_pack_markdown_path,
+            transfer_pack_archive_path,
+            transfer_pack_check_path,
+            transfer_pack_check_markdown_path,
+        )
+    )
     try:
         refresh_payload = refresh_pipeline_mod.refresh_pipeline(
             refresh_bundle_manifest=True,
@@ -414,25 +429,49 @@ def sync_lane(
                     "selected_count": selected_count,
                     "diagnostics": (manifest_payload or {}).get("diagnostics") or {},
                 },
-                "handoff": cached_handoff_summary(effective_handoff_path, effective_handoff_markdown_path),
-                "transfer": cached_transfer_summary(effective_transfer_path, effective_transfer_markdown_path),
-                "transfer_pack": cached_transfer_pack_summary(
-                    effective_transfer_pack_summary_path,
-                    effective_transfer_pack_markdown_path,
-                    effective_transfer_pack_archive_path,
-                    effective_transfer_pack_output_root,
+                "handoff": (
+                    cached_handoff_summary(effective_handoff_path, effective_handoff_markdown_path)
+                    if allow_cached_idle_surfaces
+                    else None
                 ),
-                "transfer_pack_check": cached_transfer_pack_check_summary(
-                    effective_transfer_pack_check_path,
-                    effective_transfer_pack_check_markdown_path,
+                "transfer": (
+                    cached_transfer_summary(effective_transfer_path, effective_transfer_markdown_path)
+                    if allow_cached_idle_surfaces
+                    else None
                 ),
-                "execution_run": cached_execution_run_summary(
-                    effective_execution_run_path,
-                    effective_execution_run_markdown_path,
+                "transfer_pack": (
+                    cached_transfer_pack_summary(
+                        effective_transfer_pack_summary_path,
+                        effective_transfer_pack_markdown_path,
+                        effective_transfer_pack_archive_path,
+                        effective_transfer_pack_output_root,
+                    )
+                    if allow_cached_idle_surfaces
+                    else None
                 ),
-                "execution_run_check": cached_execution_run_check_summary(
-                    effective_execution_run_check_path,
-                    effective_execution_run_check_markdown_path,
+                "transfer_pack_check": (
+                    cached_transfer_pack_check_summary(
+                        effective_transfer_pack_check_path,
+                        effective_transfer_pack_check_markdown_path,
+                    )
+                    if allow_cached_idle_surfaces
+                    else None
+                ),
+                "execution_run": (
+                    cached_execution_run_summary(
+                        effective_execution_run_path,
+                        effective_execution_run_markdown_path,
+                    )
+                    if allow_cached_idle_surfaces
+                    else None
+                ),
+                "execution_run_check": (
+                    cached_execution_run_check_summary(
+                        effective_execution_run_check_path,
+                        effective_execution_run_check_markdown_path,
+                    )
+                    if allow_cached_idle_surfaces
+                    else None
                 ),
                 "operator": operator,
                 "error": str(exc),
