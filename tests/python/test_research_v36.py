@@ -99,6 +99,14 @@ etw_stackwalk_reopen_prerequisite_delta_check = load_module(
     "check_etw_stackwalk_reopen_prerequisite_delta",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_prerequisite_delta.py",
 )
+etw_stackwalk_reopen_operator_brief = load_module(
+    "generate_etw_stackwalk_reopen_operator_brief",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_operator_brief.py",
+)
+etw_stackwalk_reopen_operator_brief_check = load_module(
+    "check_etw_stackwalk_reopen_operator_brief",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_operator_brief.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -3183,6 +3191,141 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("counts.outstanding_reason_counts mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_operator_brief_marks_blocked_candidates_do_not_run(self) -> None:
+        delta_payload = {
+            "delta_status": "blocked",
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "delta_status": "blocked",
+                    "remaining_to_ready_count": 2,
+                    "outstanding_reason_codes": [
+                        "await-seeding-pivot",
+                        "explicit-reopen-required",
+                    ],
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "next_review_trigger": "Revisit after the seeding-path pivot lands.",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                }
+            ],
+        }
+        pack_payload = {
+            "pack_status": "ready",
+            "items": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "promotion_blockers": [
+                        "intentional-hold",
+                        "system-execution-required-no-current-build-registry-seeding-path",
+                    ],
+                    "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+                    "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
+                    "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_operator_brief.build_reopen_operator_brief(
+            delta_payload,
+            pack_payload,
+            generated_utc="2026-04-15T15:00:00Z",
+        )
+
+        self.assertEqual(payload["brief_status"], "blocked")
+        self.assertEqual(payload["operator"]["blocker"], "reopen-prerequisites-blocked")
+        self.assertEqual(payload["entries"][0]["operator_posture"], "do-not-run")
+
+    def test_etw_stackwalk_reopen_operator_brief_check_accepts_matching_surface(self) -> None:
+        surface = {
+            "schema_version": "1.0",
+            "source_reopen_prerequisite_delta_path": "registry-research-framework/audit/etw-stackwalk-reopen-prerequisite-delta.json",
+            "source_hold_reopen_pack_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-pack.json",
+            "delta_status": "blocked",
+            "pack_status": "ready",
+            "brief_status": "blocked",
+            "operator": {
+                "blocker": "reopen-prerequisites-blocked",
+                "next_action": "Do not run the include-holds commands yet; land the next unlock prerequisite first.",
+            },
+            "counts": {
+                "candidate_count": 1,
+                "blocked_candidates": 1,
+                "review_ready_candidates": 0,
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "brief_status": "blocked",
+                    "operator_posture": "do-not-run",
+                    "operator_blocker": "outstanding-prerequisites",
+                    "remaining_to_ready_count": 2,
+                    "outstanding_reason_codes": [
+                        "await-seeding-pivot",
+                        "explicit-reopen-required",
+                    ],
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "next_review_trigger": "Revisit after the seeding-path pivot lands.",
+                    "promotion_blockers": [
+                        "intentional-hold",
+                        "system-execution-required-no-current-build-registry-seeding-path",
+                    ],
+                    "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+                    "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
+                    "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_operator_brief_check.compare_reopen_operator_brief(
+            surface,
+            surface,
+            generated_utc="2026-04-15T15:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_reopen_operator_brief_check_rejects_brief_count_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_reopen_prerequisite_delta_path": "registry-research-framework/audit/etw-stackwalk-reopen-prerequisite-delta.json",
+            "source_hold_reopen_pack_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-pack.json",
+            "delta_status": "blocked",
+            "pack_status": "ready",
+            "brief_status": "blocked",
+            "operator": {
+                "blocker": "reopen-prerequisites-blocked",
+                "next_action": "Do not run the include-holds commands yet; land the next unlock prerequisite first.",
+            },
+            "counts": {
+                "candidate_count": 1,
+                "blocked_candidates": 1,
+                "review_ready_candidates": 0,
+            },
+            "entries": [],
+        }
+        surface = dict(expected)
+        surface["counts"] = dict(expected["counts"])
+        surface["counts"]["blocked_candidates"] = 2
+
+        payload = etw_stackwalk_reopen_operator_brief_check.compare_reopen_operator_brief(
+            surface,
+            expected,
+            generated_utc="2026-04-15T15:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("counts.blocked_candidates mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {
