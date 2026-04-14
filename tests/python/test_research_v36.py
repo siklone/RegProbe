@@ -2710,6 +2710,62 @@ class GhidraSymbolResolutionBatchTests(unittest.TestCase):
             r"C:\Windows\System32\ntdll.dll",
         )
 
+    def test_symbol_resolution_batch_coalesces_module_offsets_for_same_target(self) -> None:
+        queue_payload = {
+            "requests": [
+                {
+                    "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
+                    "priority_rank": 1,
+                    "lookup_key": "KernelBase.dll+0x2e436",
+                    "resolution_kind": "module_offset",
+                    "target_binary": "KernelBase.dll",
+                    "candidate_ids": ["power.control.allow-system-required-power-requests"],
+                    "candidate_count": 1,
+                    "occurrence_count": 1,
+                    "suggested_patterns": ["AllowSystemRequiredPowerRequests"],
+                    "frame_variants": ["KernelBase.dll+0x2E436"],
+                },
+                {
+                    "request_id": "ghidra-symbol-02-kernelbase-dll-0x2edab",
+                    "priority_rank": 2,
+                    "lookup_key": "KernelBase.dll+0x2edab",
+                    "resolution_kind": "module_offset",
+                    "target_binary": "KernelBase.dll",
+                    "candidate_ids": ["power.control.allow-system-required-power-requests"],
+                    "candidate_count": 1,
+                    "occurrence_count": 1,
+                    "suggested_patterns": ["AllowSystemRequiredPowerRequests"],
+                    "frame_variants": ["KernelBase.dll+0x2EDAB"],
+                },
+            ]
+        }
+        tool_status = {
+            "python3": {"present": True, "path": "/usr/bin/python3"},
+            "curl": {"present": True, "path": "/usr/bin/curl"},
+            "virsh": {"present": True, "path": "/usr/bin/virsh"},
+        }
+
+        batch = ghidra_symbol_batch.symbol_resolution_batch_from_queue(
+            queue_payload,
+            generated_utc="2026-04-13T00:00:00Z",
+            tool_status=tool_status,
+        )
+
+        self.assertEqual(batch["job_count"], 1)
+        self.assertEqual(batch["runnable_job_count"], 1)
+        self.assertEqual(batch["jobs"][0]["request_count"], 2)
+        self.assertEqual(
+            batch["jobs"][0]["request_ids"],
+            [
+                "ghidra-symbol-01-kernelbase-dll-0x2e436",
+                "ghidra-symbol-02-kernelbase-dll-0x2edab",
+            ],
+        )
+        self.assertEqual(
+            batch["jobs"][0]["module_offsets"],
+            ["KernelBase.dll+0x2E436", "KernelBase.dll+0x2EDAB"],
+        )
+
 
 class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
     def test_symbol_resolution_run_plan_selects_runnable_jobs(self) -> None:

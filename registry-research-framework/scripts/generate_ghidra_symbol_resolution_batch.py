@@ -102,6 +102,24 @@ def raw_address_requires_module_base(request: dict[str, Any]) -> bool:
     return not str(request.get("module_base") or "").strip()
 
 
+def group_key_for_request(
+    request: dict[str, Any],
+    *,
+    guest_binary_path: str | None,
+    patterns: list[str],
+) -> tuple[Any, ...]:
+    resolution_kind = str(request.get("resolution_kind") or "")
+    if resolution_kind == "module_offset":
+        return (
+            "module_offset",
+            str(request.get("target_binary") or ""),
+            str(guest_binary_path or ""),
+            tuple(str(item) for item in (request.get("candidate_ids") or [])),
+            tuple(patterns),
+        )
+    return ("single", str(request.get("request_id") or ""))
+
+
 def symbol_resolution_batch_from_queue(
     payload: dict[str, Any],
     *,
@@ -112,19 +130,16 @@ def symbol_resolution_batch_from_queue(
     tool_status = tool_status or host_tool_status()
     missing_host_tools = [name for name, item in tool_status.items() if not item.get("present")]
     requests = payload.get("requests") or []
-    jobs: list[dict[str, Any]] = []
+    grouped_jobs: dict[tuple[Any, ...], dict[str, Any]] = {}
     resolution_kind_counts: Counter[str] = Counter()
     missing_input_counts: Counter[str] = Counter()
     blocked_examples: list[dict[str, Any]] = []
 
-    for index, request in enumerate(requests, start=1):
+    for request in requests:
         request_id = str(request.get("request_id") or "")
         resolution_kind = str(request.get("resolution_kind") or "unknown")
         resolution_kind_counts[resolution_kind] += 1
         candidate_ids = request.get("candidate_ids") or []
-        lookup_slug = slugify(request.get("lookup_key") or request_id)
-        candidate_slug = slugify(candidate_ids[0] if candidate_ids else request_id)
-        output_name = f"ghidra-symbolized-{index:02d}-{lookup_slug}-{candidate_slug}"
         patterns = [
             str(pattern).strip()
             for pattern in (request.get("suggested_patterns") or [])
@@ -145,53 +160,131 @@ def symbol_resolution_batch_from_queue(
             for frame in (request.get("frame_variants") or [])
             if str(frame).strip() and str(request.get("resolution_kind") or "") == "module_offset"
         ]
-        command_argv = None if missing_inputs else build_command_argv(
-            guest_binary_path,
-            output_name,
-            patterns,
-            module_offsets=module_offsets,
-        )
-        can_run_guest_orchestrator = not missing_inputs and not missing_host_tools and isinstance(command_argv, list)
-        if (missing_inputs or missing_host_tools) and len(blocked_examples) < 10:
-            blocked_examples.append(
-                {
-                    "request_id": request_id,
-                    "lookup_key": request.get("lookup_key"),
-                    "missing_inputs": list(missing_inputs),
-                    "missing_host_tools": list(missing_host_tools),
-                }
-            )
-        jobs.append(
-            {
-                "job_id": f"ghidra-symbol-dispatch-{index:02d}-{slugify(request_id)}",
+        group_key = group_key_for_request(request, guest_binary_path=guest_binary_path, patterns=patterns)
+        group = grouped_jobs.get(group_key)
+        if group is None:
+            lookup_slug = slugify(request.get("lookup_key") or request_id)
+            candidate_slug = slugify(candidate_ids[0] if candidate_ids else request_id)
+            group = {
                 "request_id": request_id,
+                "request_ids": [],
+                "lookup_key": request.get("lookup_key"),
+                "lookup_keys": [],
                 "dispatch_status": "prepared",
                 "created_utc": generated_utc,
-                "priority_rank": int(request.get("priority_rank") or index),
-                "lookup_key": request.get("lookup_key"),
+                "priority_rank": int(request.get("priority_rank") or len(grouped_jobs) + 1),
                 "resolution_kind": resolution_kind,
                 "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-                "candidate_ids": candidate_ids,
-                "candidate_count": int(request.get("candidate_count") or 0),
-                "occurrence_count": int(request.get("occurrence_count") or 0),
+                "candidate_ids": sorted({str(item) for item in candidate_ids if str(item)}),
+                "candidate_count": 0,
+                "occurrence_count": 0,
                 "target_binary": request.get("target_binary"),
                 "guest_binary_path": guest_binary_path,
-                "patterns": patterns,
-                "frame_variants": request.get("frame_variants") or [],
-                "module_offsets": module_offsets,
+                "patterns": [],
+                "frame_variants": [],
+                "module_offsets": [],
                 "next_action_hint": request.get("next_action_hint"),
                 "required_host_tools": list(REQUIRED_HOST_TOOLS),
-                "missing_host_tools": missing_host_tools,
+                "missing_host_tools": list(missing_host_tools),
+                "missing_inputs": [],
+                "output_name": f"ghidra-symbolized-{lookup_slug}-{candidate_slug}",
+                "output_dir": "",
+                "source_request": {
+                    "source_bundle_paths": [],
+                    "source_run_ids": [],
+                    "source_event_indices": [],
+                },
+            }
+            grouped_jobs[group_key] = group
+
+        group["request_ids"].append(request_id)
+        lookup_key = str(request.get("lookup_key") or "")
+        if lookup_key and lookup_key not in group["lookup_keys"]:
+            group["lookup_keys"].append(lookup_key)
+        group["candidate_count"] = max(int(group["candidate_count"] or 0), int(request.get("candidate_count") or 0))
+        group["occurrence_count"] = int(group["occurrence_count"] or 0) + int(request.get("occurrence_count") or 0)
+        for pattern in patterns:
+            if pattern not in group["patterns"]:
+                group["patterns"].append(pattern)
+        for frame in request.get("frame_variants") or []:
+            cleaned = str(frame).strip()
+            if cleaned and cleaned not in group["frame_variants"]:
+                group["frame_variants"].append(cleaned)
+        for module_offset in module_offsets:
+            if module_offset not in group["module_offsets"]:
+                group["module_offsets"].append(module_offset)
+        for item in missing_inputs:
+            if item not in group["missing_inputs"]:
+                group["missing_inputs"].append(item)
+        for item in (request.get("source_bundle_paths") or []):
+            if item not in group["source_request"]["source_bundle_paths"]:
+                group["source_request"]["source_bundle_paths"].append(item)
+        for item in (request.get("source_run_ids") or []):
+            if item not in group["source_request"]["source_run_ids"]:
+                group["source_request"]["source_run_ids"].append(item)
+        for item in (request.get("source_event_indices") or []):
+            if item not in group["source_request"]["source_event_indices"]:
+                group["source_request"]["source_event_indices"].append(item)
+
+    jobs: list[dict[str, Any]] = []
+    grouped_rows = sorted(
+        grouped_jobs.values(),
+        key=lambda item: (
+            int(item.get("priority_rank") or 999999),
+            -int(item.get("candidate_count") or 0),
+            -int(item.get("occurrence_count") or 0),
+            str(item.get("request_id") or ""),
+        ),
+    )
+    for index, group in enumerate(grouped_rows, start=1):
+        output_name = f"{group['output_name']}"
+        command_argv = None if group["missing_inputs"] else build_command_argv(
+            group.get("guest_binary_path"),
+            output_name,
+            group.get("patterns") or [],
+            module_offsets=group.get("module_offsets") or [],
+        )
+        can_run_guest_orchestrator = not group["missing_inputs"] and not group["missing_host_tools"] and isinstance(command_argv, list)
+        if (group["missing_inputs"] or group["missing_host_tools"]) and len(blocked_examples) < 10:
+            blocked_examples.append(
+                {
+                    "request_id": group.get("request_id"),
+                    "lookup_key": group.get("lookup_key"),
+                    "missing_inputs": list(group.get("missing_inputs") or []),
+                    "missing_host_tools": list(group.get("missing_host_tools") or []),
+                }
+            )
+        group["output_dir"] = f"evidence/files/ghidra/{output_name}"
+        jobs.append(
+            {
+                "job_id": f"ghidra-symbol-dispatch-{index:02d}-{slugify(group.get('request_id'))}",
+                "request_id": group.get("request_id"),
+                "request_ids": group.get("request_ids") or [],
+                "request_count": len(group.get("request_ids") or []),
+                "dispatch_status": group.get("dispatch_status"),
+                "created_utc": group.get("created_utc"),
+                "priority_rank": int(group.get("priority_rank") or index),
+                "lookup_key": group.get("lookup_key"),
+                "lookup_keys": group.get("lookup_keys") or [],
+                "resolution_kind": group.get("resolution_kind"),
+                "analysis_mode": group.get("analysis_mode"),
+                "candidate_ids": group.get("candidate_ids") or [],
+                "candidate_count": int(group.get("candidate_count") or 0),
+                "occurrence_count": int(group.get("occurrence_count") or 0),
+                "target_binary": group.get("target_binary"),
+                "guest_binary_path": group.get("guest_binary_path"),
+                "patterns": group.get("patterns") or [],
+                "frame_variants": group.get("frame_variants") or [],
+                "module_offsets": group.get("module_offsets") or [],
+                "next_action_hint": group.get("next_action_hint"),
+                "required_host_tools": list(REQUIRED_HOST_TOOLS),
+                "missing_host_tools": group.get("missing_host_tools") or [],
                 "can_run_guest_orchestrator": can_run_guest_orchestrator,
-                "missing_inputs": missing_inputs,
+                "missing_inputs": group.get("missing_inputs") or [],
                 "command_argv": command_argv,
                 "suggested_command": build_suggested_command(command_argv),
-                "output_dir": f"evidence/files/ghidra/{output_name}",
-                "source_request": {
-                    "source_bundle_paths": request.get("source_bundle_paths") or [],
-                    "source_run_ids": request.get("source_run_ids") or [],
-                    "source_event_indices": request.get("source_event_indices") or [],
-                },
+                "output_dir": group["output_dir"],
+                "source_request": group.get("source_request") or {},
             }
         )
 
