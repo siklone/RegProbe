@@ -1,19 +1,19 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T09:02:17.531015Z`
+Generated: `2026-04-14T09:03:50.608346Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 5
-- `hold`: 13
+- `active`: 4
+- `hold`: 14
 
 ## Lane Summary
 
 - `ghidra`: 2 | first: `power.session-watchdog-timeouts` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static reverse-engineering for exact leaf-level proof.
-- `runtime-trace`: 3 | first: `power.control.win32k-callout-watchdog-timeout-seconds` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
-- `intentional-hold`: 13 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `runtime-trace`: 2 | first: `power.control.win32k-callout-watchdog-timeout-seconds` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
+- `intentional-hold`: 14 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
@@ -21,7 +21,6 @@ Blocked candidates: `18`
 - `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
 - `power.control.win32k-callout-watchdog-timeout-seconds` (`runtime-trace`, score=27, blockers=3)
 - `system.kernel-dpc-watchdog-control-cluster` (`runtime-trace`, score=27, blockers=3)
-- `system.kernel.timer-check-flags` (`runtime-trace`, score=27, blockers=3)
 
 ## Top Holds
 
@@ -84,19 +83,6 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Suggested command: `winopt research show-blocked system.kernel-dpc-watchdog-control-cluster --json`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
-
-### `system.kernel.timer-check-flags`
-
-- Lane: `runtime-trace`
-- Actionability: `active`
-- Priority score: `27`
-- Feature area: `Session Manager Kernel Timer Diagnostics`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
-- Value name: `TimerCheckFlags`
-- Blockers: `timer-check-flags-modern-bit-semantics-unproven`, `timer-check-flags-no-primary-current-build-doc`, `timer-check-flags-wpr-boot-no-hit-current-build`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json`
-- Suggested command: `winopt research show-blocked system.kernel.timer-check-flags --json`
-- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `policy.system.enable-virtualization`
 
@@ -248,6 +234,19 @@ Blocked candidates: `18`
 - Value name: `ForceBugcheckForDpcWatchdog`
 - Blockers: `force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot`, `force-bugcheck-dpc-watchdog-no-primary-current-build-doc`, `force-bugcheck-dpc-watchdog-semantics-unproven`, `force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
+
+### `system.kernel.timer-check-flags`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `6`
+- Feature area: `Session Manager Kernel Timer Diagnostics`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
+- Value name: `TimerCheckFlags`
+- Blockers: `timer-check-flags-intentional-hold-no-current-build-pivot`, `timer-check-flags-modern-bit-semantics-unproven`, `timer-check-flags-no-primary-current-build-doc`, `timer-check-flags-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 

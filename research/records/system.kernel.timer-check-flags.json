@@ -265,9 +265,10 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, current-build string hit, WRK-backed semantic source evidence, a real write-and-reboot runtime lane, dedicated live current-build KD proof that `KeTimerCheckFlags = 1`, a current-build INIT descriptor binding from `TimerCheckFlags` to the same global, and now a targeted QGA-launched WPR boot-registry rerun that completes end to end on the current build. It is not ready for validation because even that targeted boot trace still returned zero exact `TimerCheckFlags` runtime hits. This remains active blocked work rather than an intentional hold because the lane has already produced stable reboot and static proof and only the exact runtime read plus modern bit semantics remain open.",
+    "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, WRK-backed semantic source evidence, a real write-and-reboot runtime lane, dedicated live current-build KD proof that `KeTimerCheckFlags = 1`, a current-build INIT descriptor binding from `TimerCheckFlags` to the same global, and a targeted QGA-launched WPR boot-registry rerun that completes end to end on the current build. The 2026-04-14 decision moves this to an intentional hold because the current build still offers no exact `TimerCheckFlags` runtime hit, Microsoft does not publish a primary current-build document for the modern flag semantics, and the remaining question is no longer simple enable/disable behavior but modern bit interpretation. Further chase should wait for a stronger caller trace or authoritative documentation instead of repeating more bounded boot no-hit runs.",
     "manual_review_required": true,
     "blocking_issues": [
+      "timer-check-flags-intentional-hold-no-current-build-pivot",
       "timer-check-flags-wpr-boot-no-hit-current-build",
       "timer-check-flags-no-primary-current-build-doc",
       "timer-check-flags-modern-bit-semantics-unproven"
@@ -292,5 +293,5 @@
       "notes": "Current-build live local-KD resolved `nt!KeTimerCheckFlags` and directly read its value as `1`."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T06:08:26Z"
+  "last_reviewed_utc": "2026-04-14T09:03:07Z"
 }
