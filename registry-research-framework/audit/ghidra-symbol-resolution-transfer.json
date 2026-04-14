@@ -1,22 +1,20 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T02:25:21.290379Z",
+  "generated_utc": "2026-04-14T02:41:15.992911Z",
   "source_handoff_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.json",
-  "transfer_status": "ready",
+  "transfer_status": "idle",
   "operator": {
-    "blocker": "transfer-pack-ready",
-    "next_action": "Copy the listed repo files and use the exported commands on the destination KVM-capable host."
+    "blocker": "no-selected-symbol-jobs",
+    "next_action": "Refresh the autotrigger lane until the handoff surface exposes at least one selected symbol-resolution job."
   },
   "counts": {
-    "selected_jobs": 2,
-    "blocked_jobs": 3,
-    "candidate_count": 1,
+    "selected_jobs": 0,
+    "blocked_jobs": 5,
+    "candidate_count": 0,
     "repo_file_count": 9,
     "missing_repo_file_count": 0
   },
-  "candidate_ids": [
-    "power.control.allow-system-required-power-requests"
-  ],
+  "candidate_ids": [],
   "required_host_tools": [],
   "required_repo_paths": [
     "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
@@ -30,36 +28,7 @@
     "scripts/vm/ghidra/SetPdbSymbolRepository.java"
   ],
   "missing_repo_paths": [],
-  "jobs": [
-    {
-      "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
-      "job_id": "ghidra-symbol-dispatch-04-ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
-      "target_binary": "ntoskrnl.exe",
-      "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x327B4D --module-offset ntoskrnl.exe+0x3ED794 --module-offset ntoskrnl.exe+0x3EDD84 --module-offset ntoskrnl.exe+0x6BE358 --module-offset ntoskrnl.exe+0x87108C --module-offset ntoskrnl.exe+0xAE49F6",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests"
-    },
-    {
-      "request_id": "ghidra-symbol-13-reg-exe-0x128b",
-      "job_id": "ghidra-symbol-dispatch-05-ghidra-symbol-13-reg-exe-0x128b",
-      "target_binary": "reg.exe",
-      "guest_binary_path": "C:\\Windows\\System32\\reg.exe",
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset reg.exe+0x128B --module-offset reg.exe+0x379D --module-offset reg.exe+0x65C6 --module-offset reg.exe+0x6775",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests"
-    }
-  ],
+  "jobs": [],
   "blocked_jobs": [
     {
       "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
@@ -73,6 +42,16 @@
     },
     {
       "request_id": "ghidra-symbol-05-ntdll-dll-0x161d74",
+      "missing_inputs": [],
+      "missing_host_tools": []
+    },
+    {
+      "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+      "missing_inputs": [],
+      "missing_host_tools": []
+    },
+    {
+      "request_id": "ghidra-symbol-13-reg-exe-0x128b",
       "missing_inputs": [],
       "missing_host_tools": []
     }

@@ -1,19 +1,16 @@
 # Ghidra Symbol Resolution Transfer
 
-- Transfer status: `ready`
-- Operator blocker: `transfer-pack-ready`
-- Next action: `Copy the listed repo files and use the exported commands on the destination KVM-capable host.`
-- Selected jobs: `2`
-- Candidate count: `1`
+- Transfer status: `idle`
+- Operator blocker: `no-selected-symbol-jobs`
+- Next action: `Refresh the autotrigger lane until the handoff surface exposes at least one selected symbol-resolution job.`
+- Selected jobs: `0`
+- Candidate count: `0`
 - Required repo files: `9`
 - Missing repo files: `0`
 
 ## Transfer Jobs
 
-- `ghidra-symbol-07-ntoskrnl-exe-0x327b4d` -> `ntoskrnl.exe` | patterns=1 | candidates=1
-  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntoskrnl.exe --output-name ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x327B4D --module-offset ntoskrnl.exe+0x3ED794 --module-offset ntoskrnl.exe+0x3EDD84 --module-offset ntoskrnl.exe+0x6BE358 --module-offset ntoskrnl.exe+0x87108C --module-offset ntoskrnl.exe+0xAE49F6`
-- `ghidra-symbol-13-reg-exe-0x128b` -> `reg.exe` | patterns=1 | candidates=1
-  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\reg.exe --output-name ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset reg.exe+0x128B --module-offset reg.exe+0x379D --module-offset reg.exe+0x65C6 --module-offset reg.exe+0x6775`
+- none
 
 ## Required Repo Paths
 

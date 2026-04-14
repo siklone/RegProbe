@@ -1,15 +1,15 @@
 # Ghidra Autotrigger Health
 
-- Generated UTC: `2026-04-14T02:25:21.274506Z`
+- Generated UTC: `2026-04-14T02:41:15.991087Z`
 - Input bundles selected: `0`
 - Queue jobs: `4`
 - Autotrigger seeds: `1`
 - Symbol resolution requests: `16`
 - Symbol resolution batch jobs: `5`
 - Symbol resolution blocked jobs: `0`
-- Symbol resolution run selected jobs: `2`
-- Symbol resolution handoff selected jobs: `2`
-- Symbol resolution transfer selected jobs: `3`
+- Symbol resolution run selected jobs: `0`
+- Symbol resolution handoff selected jobs: `0`
+- Symbol resolution transfer selected jobs: `2`
 - Symbol resolution transfer pack selected jobs: `0`
 - Symbol resolution transfer pack check errors: `0`
 - Symbol resolution execution run ready jobs: `0`
@@ -31,8 +31,8 @@
 - Top autotrigger candidate: `power.control.allow-system-required-power-requests`
 - Top symbol resolution request: `KernelBase.dll+0x2e436`
 - Top symbol resolution batch request: `ghidra-symbol-01-kernelbase-dll-0x2e436`
-- Top symbol resolution handoff request: `ghidra-symbol-07-ntoskrnl-exe-0x327b4d`
-- Top symbol resolution transfer request: `ghidra-symbol-05-ntdll-dll-0x161d74`
+- Top symbol resolution handoff request: `ghidra-symbol-01-kernelbase-dll-0x2e436`
+- Top symbol resolution transfer request: `ghidra-symbol-07-ntoskrnl-exe-0x327b4d`
 - Top symbol resolution transfer pack request: `None`
 - Top symbol resolution execution run request: `None`
 
@@ -44,23 +44,23 @@
 - Symbol resolution requests: `16`
 - Symbol resolution batch request ids: `5`
 - Symbol resolution handoff request ids: `5`
-- Symbol resolution transfer request ids: `3`
+- Symbol resolution transfer request ids: `2`
 - Symbol resolution transfer pack request ids: `0`
 - Symbol resolution execution run request ids: `0`
 - Autotrigger dispatch candidate ids: `1`
 
 ## Symbol Handoff
 
-- Handoff status: `ready`
-- Operator blocker: `symbol-resolution-ready`
-- Selected jobs: `2`
+- Handoff status: `idle`
+- Operator blocker: `no-runnable-symbol-resolution-jobs`
+- Selected jobs: `0`
 - Blocked jobs: `0`
 
 ## Symbol Transfer
 
 - Transfer status: `ready`
 - Operator blocker: `transfer-pack-ready`
-- Selected jobs: `3`
+- Selected jobs: `2`
 - Missing repo files: `0`
 
 ## Transfer Pack
