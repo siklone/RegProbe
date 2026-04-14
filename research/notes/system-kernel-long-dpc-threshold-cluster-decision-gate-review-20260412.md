@@ -2,8 +2,8 @@
 
 ## Decision
 
-Keep `system.kernel-long-dpc-threshold-cluster` blocked.
+Keep `system.kernel-long-dpc-threshold-cluster` as an intentional hold.
 
-The current runtime lane did not produce a usable exact read, and the dedicated timer/DPC stress lane hit a Procmon SaveAs timeout. The record also still lacks a primary current-build documentation source outside the repo.
+The current package is still useful, but the chase is now looping through the same bounded outcomes: retained WPR no-hit evidence, two dedicated timer/DPC stress replays that both died at `Procmon SaveAs`, and no primary current-build documentation source outside the repo for either threshold value.
 
-This is evidence-missing, not an intentional hold. Promotion requires a successful trace export or another runtime lane that captures the threshold values decisively.
+The hold is explicit: wait for a stronger binary/debugger pivot or a reliable non-Procmon trace path before re-opening active chase. Promotion still requires a decisive exact read or another current-build lane that captures the threshold values without the export failure.

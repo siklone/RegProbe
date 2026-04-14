@@ -379,9 +379,10 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a bounded current-build consumer pass that narrows adjacent lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent`, a direct PDB-backed Ghidra xref for `KiLongDpcQueueThreshold` in `KiExecuteAllDpcs` and `KeInitSystem`, current-build INIT descriptor bindings from both registry value-name strings to the same live globals, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export, and a QGA WPR raw-collector salvage run that normalized to zero exact hits for both Long-DPC sibling values. It is not ready for validation because no exact runtime registry read capture exists, the narrow Procmon lane is export-blocked, the WPR lane still fails to save the requested target ETL reliably, and there is still no primary Microsoft source for either value. This remains active blocked work rather than an intentional hold because the runtime lane is reproducible and the next proof step is still clear.",
+    "why": "The cluster is strong enough for a canonical draft because it has explicit repo-doc defaults, observed baseline state, exact current-build string hits, live current-build kernel values that match the repo-doc defaults, a bounded current-build consumer pass that narrows adjacent lineage to `KiEnterLongDpcProcessing -> EtwTraceLongDpcMitigationEvent`, a direct PDB-backed Ghidra xref for `KiLongDpcQueueThreshold` in `KiExecuteAllDpcs` and `KeInitSystem`, current-build INIT descriptor bindings from both registry value-name strings to the same live globals, a broad runtime replay that explicitly armed both values from missing to `1` while still leaving them in no-hit hold, two dedicated narrow timer-dpc-stress replays that both reached guest execution before failing deterministically at Procmon export, and a QGA WPR raw-collector salvage run that normalized to zero exact hits for both Long-DPC sibling values. The 2026-04-14 decision moves this to an intentional hold because the current-build chase is now repeating the same bounded outcomes: no exact runtime registry-read pivot, repeated Procmon export failure on the dedicated trigger lane, retained WPR no-hit evidence, and no primary Microsoft source for either value. Further work should wait for a stronger binary/debugger pivot or a reliable non-Procmon trace path rather than spending more runtime retries on the same export-blocked lane.",
     "manual_review_required": true,
     "blocking_issues": [
+      "long-dpc-threshold-intentional-hold-no-current-build-pivot",
       "long-dpc-threshold-wpr-boot-no-hit-current-build",
       "long-dpc-threshold-no-primary-current-build-doc",
       "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
@@ -421,5 +422,5 @@
       "notes": "A targeted QGA-launched WPR boot attempt observed a real reboot and produced a normalized raw-collector bundle with zero exact hits for `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold`, but the requested target ETL was not saved."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T06:06:38Z"
+  "last_reviewed_utc": "2026-04-14T09:01:43Z"
 }
