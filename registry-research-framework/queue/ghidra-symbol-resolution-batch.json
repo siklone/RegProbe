@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T02:09:48.399892Z",
+  "generated_utc": "2026-04-14T05:52:20.527133Z",
   "source_symbol_queue": "registry-research-framework/queue/ghidra-symbol-resolution-queue.json",
   "job_count": 5,
   "runnable_job_count": 5,
@@ -24,7 +24,7 @@
       ],
       "request_count": 3,
       "dispatch_status": "prepared",
-      "created_utc": "2026-04-14T02:09:48.399892Z",
+      "created_utc": "2026-04-14T05:52:20.527133Z",
       "priority_rank": 1,
       "lookup_key": "KernelBase.dll+0x2e436",
       "lookup_keys": [
@@ -35,13 +35,15 @@
       "resolution_kind": "module_offset",
       "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
       "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests",
         "power.control.allow-system-required-power-requests"
       ],
-      "candidate_count": 1,
-      "occurrence_count": 3,
+      "candidate_count": 2,
+      "occurrence_count": 6,
       "target_binary": "KernelBase.dll",
       "guest_binary_path": "C:\\Windows\\System32\\KernelBase.dll",
       "patterns": [
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "AllowSystemRequiredPowerRequests"
       ],
       "frame_variants": [
@@ -54,7 +56,7 @@
         "KernelBase.dll+0x2EDAB",
         "KernelBase.dll+0x30AAD"
       ],
-      "next_action_hint": "Resolve KernelBase.dll+0x2e436 against KernelBase.dll symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests.",
+      "next_action_hint": "Resolve KernelBase.dll+0x2e436 against KernelBase.dll symbols before running the next Ghidra pivot for power.control.allow-audio-to-enable-execution-required-power-requests.",
       "required_host_tools": [
         "python3",
         "curl",
@@ -69,7 +71,9 @@
         "--binary-path",
         "C:\\Windows\\System32\\KernelBase.dll",
         "--output-name",
-        "ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests",
+        "ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests",
+        "--pattern",
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "--pattern",
         "AllowSystemRequiredPowerRequests",
         "--module-offset",
@@ -79,13 +83,15 @@
         "--module-offset",
         "KernelBase.dll+0x30AAD"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\KernelBase.dll --output-name ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x2E436 --module-offset KernelBase.dll+0x2EDAB --module-offset KernelBase.dll+0x30AAD",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\KernelBase.dll --output-name ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests --pattern AllowAudioToEnableExecutionRequiredPowerRequests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x2E436 --module-offset KernelBase.dll+0x2EDAB --module-offset KernelBase.dll+0x30AAD",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests",
       "source_request": {
         "source_bundle_paths": [
+          "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
           "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
         ],
         "source_run_ids": [
+          "wave4-allow-audio-e2e",
           "wave4-allow-system-required-e2e"
         ],
         "source_event_indices": [
@@ -101,7 +107,7 @@
       ],
       "request_count": 1,
       "dispatch_status": "prepared",
-      "created_utc": "2026-04-14T02:09:48.399892Z",
+      "created_utc": "2026-04-14T05:52:20.527133Z",
       "priority_rank": 4,
       "lookup_key": "kernel32.dll+0x2e8d7",
       "lookup_keys": [
@@ -110,13 +116,15 @@
       "resolution_kind": "module_offset",
       "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
       "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests",
         "power.control.allow-system-required-power-requests"
       ],
-      "candidate_count": 1,
-      "occurrence_count": 1,
+      "candidate_count": 2,
+      "occurrence_count": 2,
       "target_binary": "kernel32.dll",
       "guest_binary_path": "C:\\Windows\\System32\\kernel32.dll",
       "patterns": [
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "AllowSystemRequiredPowerRequests"
       ],
       "frame_variants": [
@@ -125,7 +133,7 @@
       "module_offsets": [
         "kernel32.dll+0x2E8D7"
       ],
-      "next_action_hint": "Resolve kernel32.dll+0x2e8d7 against kernel32.dll symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests.",
+      "next_action_hint": "Resolve kernel32.dll+0x2e8d7 against kernel32.dll symbols before running the next Ghidra pivot for power.control.allow-audio-to-enable-execution-required-power-requests.",
       "required_host_tools": [
         "python3",
         "curl",
@@ -140,19 +148,23 @@
         "--binary-path",
         "C:\\Windows\\System32\\kernel32.dll",
         "--output-name",
-        "ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests",
+        "ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests",
+        "--pattern",
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "--pattern",
         "AllowSystemRequiredPowerRequests",
         "--module-offset",
         "kernel32.dll+0x2E8D7"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\kernel32.dll --output-name ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset kernel32.dll+0x2E8D7",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\kernel32.dll --output-name ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests --pattern AllowAudioToEnableExecutionRequiredPowerRequests --pattern AllowSystemRequiredPowerRequests --module-offset kernel32.dll+0x2E8D7",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests",
       "source_request": {
         "source_bundle_paths": [
+          "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
           "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
         ],
         "source_run_ids": [
+          "wave4-allow-audio-e2e",
           "wave4-allow-system-required-e2e"
         ],
         "source_event_indices": [
@@ -169,7 +181,7 @@
       ],
       "request_count": 2,
       "dispatch_status": "prepared",
-      "created_utc": "2026-04-14T02:09:48.399892Z",
+      "created_utc": "2026-04-14T05:52:20.527133Z",
       "priority_rank": 5,
       "lookup_key": "ntdll.dll+0x161d74",
       "lookup_keys": [
@@ -179,13 +191,15 @@
       "resolution_kind": "module_offset",
       "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
       "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests",
         "power.control.allow-system-required-power-requests"
       ],
-      "candidate_count": 1,
-      "occurrence_count": 2,
+      "candidate_count": 2,
+      "occurrence_count": 4,
       "target_binary": "ntdll.dll",
       "guest_binary_path": "C:\\Windows\\System32\\ntdll.dll",
       "patterns": [
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "AllowSystemRequiredPowerRequests"
       ],
       "frame_variants": [
@@ -196,7 +210,7 @@
         "ntdll.dll+0x161D74",
         "ntdll.dll+0x8C48C"
       ],
-      "next_action_hint": "Resolve ntdll.dll+0x161d74 against ntdll.dll symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests.",
+      "next_action_hint": "Resolve ntdll.dll+0x161d74 against ntdll.dll symbols before running the next Ghidra pivot for power.control.allow-audio-to-enable-execution-required-power-requests.",
       "required_host_tools": [
         "python3",
         "curl",
@@ -211,7 +225,9 @@
         "--binary-path",
         "C:\\Windows\\System32\\ntdll.dll",
         "--output-name",
-        "ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests",
+        "ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests",
+        "--pattern",
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "--pattern",
         "AllowSystemRequiredPowerRequests",
         "--module-offset",
@@ -219,13 +235,15 @@
         "--module-offset",
         "ntdll.dll+0x8C48C"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntdll.dll --output-name ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x161D74 --module-offset ntdll.dll+0x8C48C",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntdll.dll --output-name ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests --pattern AllowAudioToEnableExecutionRequiredPowerRequests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x161D74 --module-offset ntdll.dll+0x8C48C",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-audio-to-enable-execution-required-power-requests",
       "source_request": {
         "source_bundle_paths": [
+          "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
           "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
         ],
         "source_run_ids": [
+          "wave4-allow-audio-e2e",
           "wave4-allow-system-required-e2e"
         ],
         "source_event_indices": [
@@ -246,7 +264,7 @@
       ],
       "request_count": 6,
       "dispatch_status": "prepared",
-      "created_utc": "2026-04-14T02:09:48.399892Z",
+      "created_utc": "2026-04-14T05:52:20.527133Z",
       "priority_rank": 7,
       "lookup_key": "ntoskrnl.exe+0x327b4d",
       "lookup_keys": [
@@ -260,13 +278,15 @@
       "resolution_kind": "module_offset",
       "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
       "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests",
         "power.control.allow-system-required-power-requests"
       ],
-      "candidate_count": 1,
-      "occurrence_count": 6,
+      "candidate_count": 2,
+      "occurrence_count": 12,
       "target_binary": "ntoskrnl.exe",
       "guest_binary_path": "C:\\Windows\\System32\\ntoskrnl.exe",
       "patterns": [
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "AllowSystemRequiredPowerRequests"
       ],
       "frame_variants": [
@@ -285,7 +305,7 @@
         "ntoskrnl.exe+0x87108C",
         "ntoskrnl.exe+0xAE49F6"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe+0x327b4d against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests.",
+      "next_action_hint": "Resolve ntoskrnl.exe+0x327b4d against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-audio-to-enable-execution-required-power-requests.",
       "required_host_tools": [
         "python3",
         "curl",
@@ -300,7 +320,9 @@
         "--binary-path",
         "C:\\Windows\\System32\\ntoskrnl.exe",
         "--output-name",
-        "ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests",
+        "ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests",
+        "--pattern",
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "--pattern",
         "AllowSystemRequiredPowerRequests",
         "--module-offset",
@@ -316,13 +338,15 @@
         "--module-offset",
         "ntoskrnl.exe+0xAE49F6"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x327B4D --module-offset ntoskrnl.exe+0x3ED794 --module-offset ntoskrnl.exe+0x3EDD84 --module-offset ntoskrnl.exe+0x6BE358 --module-offset ntoskrnl.exe+0x87108C --module-offset ntoskrnl.exe+0xAE49F6",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-system-required-power-requests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests --pattern AllowAudioToEnableExecutionRequiredPowerRequests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x327B4D --module-offset ntoskrnl.exe+0x3ED794 --module-offset ntoskrnl.exe+0x3EDD84 --module-offset ntoskrnl.exe+0x6BE358 --module-offset ntoskrnl.exe+0x87108C --module-offset ntoskrnl.exe+0xAE49F6",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests",
       "source_request": {
         "source_bundle_paths": [
+          "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
           "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
         ],
         "source_run_ids": [
+          "wave4-allow-audio-e2e",
           "wave4-allow-system-required-e2e"
         ],
         "source_event_indices": [
@@ -341,7 +365,7 @@
       ],
       "request_count": 4,
       "dispatch_status": "prepared",
-      "created_utc": "2026-04-14T02:09:48.399892Z",
+      "created_utc": "2026-04-14T05:52:20.527133Z",
       "priority_rank": 13,
       "lookup_key": "reg.exe+0x128b",
       "lookup_keys": [
@@ -353,13 +377,15 @@
       "resolution_kind": "module_offset",
       "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
       "candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests",
         "power.control.allow-system-required-power-requests"
       ],
-      "candidate_count": 1,
-      "occurrence_count": 4,
+      "candidate_count": 2,
+      "occurrence_count": 8,
       "target_binary": "reg.exe",
       "guest_binary_path": "C:\\Windows\\System32\\reg.exe",
       "patterns": [
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "AllowSystemRequiredPowerRequests"
       ],
       "frame_variants": [
@@ -374,7 +400,7 @@
         "reg.exe+0x65C6",
         "reg.exe+0x6775"
       ],
-      "next_action_hint": "Resolve reg.exe+0x128b against reg.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests.",
+      "next_action_hint": "Resolve reg.exe+0x128b against reg.exe symbols before running the next Ghidra pivot for power.control.allow-audio-to-enable-execution-required-power-requests.",
       "required_host_tools": [
         "python3",
         "curl",
@@ -389,7 +415,9 @@
         "--binary-path",
         "C:\\Windows\\System32\\reg.exe",
         "--output-name",
-        "ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests",
+        "ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests",
+        "--pattern",
+        "AllowAudioToEnableExecutionRequiredPowerRequests",
         "--pattern",
         "AllowSystemRequiredPowerRequests",
         "--module-offset",
@@ -401,13 +429,15 @@
         "--module-offset",
         "reg.exe+0x6775"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset reg.exe+0x128B --module-offset reg.exe+0x379D --module-offset reg.exe+0x65C6 --module-offset reg.exe+0x6775",
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests --pattern AllowAudioToEnableExecutionRequiredPowerRequests --pattern AllowSystemRequiredPowerRequests --module-offset reg.exe+0x128B --module-offset reg.exe+0x379D --module-offset reg.exe+0x65C6 --module-offset reg.exe+0x6775",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-reg-exe-0x128b-power-control-allow-audio-to-enable-execution-required-power-requests",
       "source_request": {
         "source_bundle_paths": [
+          "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
           "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
         ],
         "source_run_ids": [
+          "wave4-allow-audio-e2e",
           "wave4-allow-system-required-e2e"
         ],
         "source_event_indices": [

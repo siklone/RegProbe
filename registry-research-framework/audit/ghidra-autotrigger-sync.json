@@ -1,55 +1,119 @@
 {
   "schema_version": "1.0",
-  "sync_status": "idle",
-  "reason": "no-discovered-bundles",
+  "sync_status": "ok",
   "discover_input_roots": [
     "evidence"
   ],
   "input_manifest_limit": null,
-  "refresh": null,
+  "refresh": {
+    "bundle_count": 2,
+    "bundle_paths": [
+      "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
+      "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+    ],
+    "seed_count": 2,
+    "symbol_resolution_request_count": 16,
+    "symbol_resolution_batch_job_count": 5,
+    "symbol_resolution_run_selected_job_count": 0,
+    "symbol_resolution_handoff_status": "idle",
+    "symbol_resolution_handoff_selected_job_count": 0,
+    "symbol_resolution_transfer_status": "idle",
+    "symbol_resolution_transfer_selected_job_count": 0,
+    "symbol_resolution_transfer_pack_status": "idle",
+    "symbol_resolution_transfer_pack_selected_job_count": 0,
+    "symbol_resolution_transfer_pack_check_status": "ok",
+    "symbol_resolution_transfer_pack_check_error_count": 0,
+    "symbol_resolution_transfer_pack_import_status": "ok",
+    "symbol_resolution_execution_plan_status": "blocked",
+    "symbol_resolution_execution_run_status": "blocked",
+    "symbol_resolution_execution_run_check_status": "ok",
+    "symbol_resolution_execution_run_check_error_count": 0,
+    "symbol_resolution_execution_run_ready_job_count": 0,
+    "symbol_resolution_execution_run_blocked_job_count": 0,
+    "dispatch_job_count": 4,
+    "dispatch_autotrigger_matched_job_count": 2,
+    "run_plan_selected_job_count": 4,
+    "runner_available": false,
+    "outputs": {
+      "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
+      "symbol_queue_path": "registry-research-framework/queue/ghidra-symbol-resolution-queue.json",
+      "symbol_batch_path": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
+      "symbol_run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
+      "handoff_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.json",
+      "handoff_markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.md",
+      "transfer_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.json",
+      "transfer_markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.md",
+      "transfer_pack_output_root": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack",
+      "transfer_pack_summary_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.json",
+      "transfer_pack_markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.md",
+      "transfer_pack_archive_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip",
+      "transfer_pack_check_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.json",
+      "transfer_pack_check_markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.md",
+      "transfer_pack_import_root": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-import",
+      "transfer_pack_import_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-import.json",
+      "transfer_pack_import_markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-import.md",
+      "execution_plan_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-plan.json",
+      "execution_plan_markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-plan.md",
+      "execution_run_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run.json",
+      "execution_run_markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run.md",
+      "execution_run_check_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run-check.json",
+      "execution_run_check_markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run-check.md",
+      "batch_path": "registry-research-framework/queue/ghidra-dispatch-batch.json",
+      "run_path": "registry-research-framework/queue/ghidra-dispatch-run.json",
+      "health_path": "registry-research-framework/audit/ghidra-autotrigger-health.json",
+      "bundle_manifest_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json"
+    },
+    "bundle_manifest_refreshed": true,
+    "bundle_manifest_selected_count": 2
+  },
   "health_check": {
     "status": "ok",
     "errors": [],
-    "path": "registry-research-framework/audit/ghidra-autotrigger-health.json",
-    "source": "cached"
-  },
-  "bundle_manifest": {
-    "path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
-    "selected_count": 0,
-    "diagnostics": {
-      "scanned_bundle_count": 0,
-      "caller_stack_capable_bundle_count": 0,
-      "selected_count": 0,
-      "skipped_reason_counts": {
-        "no-caller-stack": 0,
-        "no-queue-match": 0
-      },
-      "skipped_examples": []
-    }
+    "path": "registry-research-framework/audit/ghidra-autotrigger-health.json"
   },
   "handoff": {
     "status": "idle",
     "selected_jobs": 0,
     "path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.json",
-    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.md",
-    "source": "cached"
+    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-handoff.md"
   },
   "transfer": {
     "status": "idle",
     "selected_jobs": 0,
     "path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.json",
-    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.md",
-    "source": "cached"
+    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.md"
   },
-  "transfer_pack": null,
-  "transfer_pack_check": null,
-  "execution_run": null,
-  "execution_run_check": null,
-  "operator": {
+  "transfer_pack": {
     "status": "idle",
-    "blocker": "no-bundles-discovered",
-    "next_action": "Produce at least one fresh normalized registry bundle with caller stacks, then rerun sync.",
-    "top_focus": null
+    "selected_jobs": 0,
+    "path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.json",
+    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.md",
+    "archive_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip",
+    "output_root": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack"
   },
-  "error": "Provide bundle_path, bundle_paths, or bundle_root with at least one normalized bundle."
+  "transfer_pack_check": {
+    "status": "ok",
+    "error_count": 0,
+    "path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.json",
+    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-check.md"
+  },
+  "execution_run": {
+    "status": "blocked",
+    "ready_jobs": 0,
+    "blocked_jobs": 0,
+    "path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run.json",
+    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run.md"
+  },
+  "execution_run_check": {
+    "status": "ok",
+    "error_count": 0,
+    "path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run-check.json",
+    "markdown_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-execution-run-check.md"
+  },
+  "operator": {
+    "status": "ready",
+    "blocker": "dispatch-ready",
+    "next_action": "Run the prepared Ghidra dispatch batch for the queued blocked candidates.",
+    "top_focus": "power.control.allow-system-required-power-requests"
+  }
 }

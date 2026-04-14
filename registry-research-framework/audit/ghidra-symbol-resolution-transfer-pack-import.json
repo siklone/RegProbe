@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-14T05:52:20.546198Z",
+  "summary_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.json",
+  "archive_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip",
+  "output_root": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-import",
+  "import_status": "ok",
+  "errors": [],
+  "counts": {
+    "expected_files": 15,
+    "extracted_files": 15,
+    "command_files": 0,
+    "request_ids": 0
+  },
+  "check": {
+    "status": "ok",
+    "checked_archive_files": 15
+  },
+  "extracted_files": [
+    "CHECKSUMS.json",
+    "README.md",
+    "manifests/ghidra-symbol-resolution-handoff.json",
+    "manifests/ghidra-symbol-resolution-handoff.md",
+    "manifests/ghidra-symbol-resolution-transfer.json",
+    "manifests/ghidra-symbol-resolution-transfer.md",
+    "repo/scripts/vm-kvm/ensure-guest-admin-shell.py",
+    "repo/scripts/vm-kvm/guest_bridge.py",
+    "repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+    "repo/scripts/vm-kvm/summary_contract_lib.py",
+    "repo/scripts/vm-kvm/type-to-guest.py",
+    "repo/scripts/vm/ghidra/ExportBranchAnalysis.java",
+    "repo/scripts/vm/ghidra/SetPdbSymbolRepository.java",
+    "repo/scripts/vm/guest-tools/ghidra-headless.cmd",
+    "repo/scripts/vm/guest-tools/run-ghidra-symbolized-probe.ps1"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-14T05:52:20.551132Z",
+  "source_import_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-import.json",
+  "execution_plan_status": "blocked",
+  "operator": {
+    "blocker": "execution-plan-blocked",
+    "next_action": "Resolve import or command-file blockers before running destination commands."
+  },
+  "import_root": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack-import",
+  "counts": {
+    "ready_jobs": 0,
+    "blocked_jobs": 0,
+    "candidate_count": 0
+  },
+  "errors": [
+    "no command files found in imported transfer pack"
+  ],
+  "jobs": [],
+  "blocked_jobs": []
+}

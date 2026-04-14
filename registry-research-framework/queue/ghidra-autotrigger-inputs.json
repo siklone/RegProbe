@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T17:33:18.259841Z",
+  "generated_utc": "2026-04-14T05:50:11.240391Z",
   "search_roots": [
     "evidence"
   ],
@@ -8,16 +8,56 @@
   "require_caller_stack": true,
   "require_queue_match": true,
   "selection_limit": null,
-  "selected_count": 0,
+  "selected_count": 2,
   "diagnostics": {
-    "scanned_bundle_count": 0,
-    "caller_stack_capable_bundle_count": 0,
-    "selected_count": 0,
+    "scanned_bundle_count": 3,
+    "caller_stack_capable_bundle_count": 3,
+    "selected_count": 2,
     "skipped_reason_counts": {
       "no-caller-stack": 0,
-      "no-queue-match": 0
+      "no-queue-match": 1
     },
-    "skipped_examples": []
+    "skipped_examples": [
+      {
+        "path": "evidence/files/etw-stackwalk/wave4-timercheckflags-e2e/normalized-registry-bundle.json",
+        "reason": "no-queue-match"
+      }
+    ]
   },
-  "entries": []
+  "entries": [
+    {
+      "path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
+      "run_id": "wave4-allow-audio-e2e",
+      "source_tool": "etw",
+      "capture_phase": "runtime",
+      "normalizer_name": "EtwStackwalkTracerptXmlNormalizer",
+      "status": "ok",
+      "event_count": 5734,
+      "caller_stack_event_count": 2080,
+      "matched_candidate_count": 1,
+      "matched_candidate_ids": [
+        "power.control.allow-audio-to-enable-execution-required-power-requests"
+      ],
+      "generated_utc": "2026-04-14T04:05:31.422495Z",
+      "modified_utc": "2026-04-14T04:05:32.022880Z",
+      "priority_rank": 1
+    },
+    {
+      "path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json",
+      "run_id": "wave4-allow-system-required-e2e",
+      "source_tool": "etw",
+      "capture_phase": "runtime",
+      "normalizer_name": "EtwStackwalkTracerptXmlNormalizer",
+      "status": "ok",
+      "event_count": 5238,
+      "caller_stack_event_count": 1596,
+      "matched_candidate_count": 1,
+      "matched_candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "generated_utc": "2026-04-14T00:36:38.769689Z",
+      "modified_utc": "2026-04-14T00:36:39.176510Z",
+      "priority_rank": 2
+    }
+  ]
 }

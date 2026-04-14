@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-14T05:52:20.534225Z",
+  "source_transfer_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer.json",
+  "pack_status": "idle",
+  "transfer_status": "idle",
+  "operator": {
+    "blocker": "no-selected-symbol-jobs",
+    "next_action": "Refresh the autotrigger lane until the handoff surface exposes at least one selected symbol-resolution job."
+  },
+  "output_root": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack",
+  "archive_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip",
+  "counts": {
+    "selected_jobs": 0,
+    "repo_files_copied": 9,
+    "command_files_written": 0,
+    "manifest_files_written": 4,
+    "pack_files_checksummed": 15
+  },
+  "candidate_ids": [],
+  "request_ids": [],
+  "copied_repo_paths": [
+    "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+    "scripts/vm-kvm/ensure-guest-admin-shell.py",
+    "scripts/vm-kvm/type-to-guest.py",
+    "scripts/vm-kvm/guest_bridge.py",
+    "scripts/vm-kvm/summary_contract_lib.py",
+    "scripts/vm/guest-tools/run-ghidra-symbolized-probe.ps1",
+    "scripts/vm/guest-tools/ghidra-headless.cmd",
+    "scripts/vm/ghidra/ExportBranchAnalysis.java",
+    "scripts/vm/ghidra/SetPdbSymbolRepository.java"
+  ],
+  "command_files": [],
+  "manifest_files": [
+    "manifests/ghidra-symbol-resolution-transfer.json",
+    "manifests/ghidra-symbol-resolution-transfer.md",
+    "manifests/ghidra-symbol-resolution-handoff.json",
+    "manifests/ghidra-symbol-resolution-handoff.md"
+  ],
+  "pack_files": [
+    {
+      "path": "CHECKSUMS.json",
+      "size_bytes": 2692,
+      "sha256": "a72fbfa9cf39dcc50835a4ec73d52141fed7900e34547fd0f17e67eb4ed29844"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1842,
+      "sha256": "2f338614253b7859df55bb89a9c258a81c207d5a6048b88338c9a26b4accd285"
+    },
+    {
+      "path": "manifests/ghidra-symbol-resolution-handoff.json",
+      "size_bytes": 8226,
+      "sha256": "0025c876b4b6f18cf571401a6bf999929c7e8e6d606db417f6931acc89760879"
+    },
+    {
+      "path": "manifests/ghidra-symbol-resolution-handoff.md",
+      "size_bytes": 892,
+      "sha256": "368cea3f3163fecc6ad14c87d32ba93ec078d49198021ce22995830782513cde"
+    },
+    {
+      "path": "manifests/ghidra-symbol-resolution-transfer.json",
+      "size_bytes": 1809,
+      "sha256": "20703d5d1b9dc70a88538528b19c562a64f2e127b22d96937068917b4042d1b4"
+    },
+    {
+      "path": "manifests/ghidra-symbol-resolution-transfer.md",
+      "size_bytes": 834,
+      "sha256": "1bfb2b22a9a9821824a5f9d9ad38fe0395060ab38b40283c592d428815e94456"
+    },
+    {
+      "path": "repo/scripts/vm/ghidra/ExportBranchAnalysis.java",
+      "size_bytes": 29568,
+      "sha256": "0c56b69d14f81e8f40f4b71d61ea033c8ae587568da8c960942f4f961de56b83"
+    },
+    {
+      "path": "repo/scripts/vm/ghidra/SetPdbSymbolRepository.java",
+      "size_bytes": 3205,
+      "sha256": "f3955010dfd4a38a736e7cca746c6735187212cfb88c96f8f0af26774fd33c8d"
+    },
+    {
+      "path": "repo/scripts/vm/guest-tools/ghidra-headless.cmd",
+      "size_bytes": 316,
+      "sha256": "781ed5dcfbc669c4c8892c335be96f3eebae73cc6a2b2030a0f13f6d3ea0169a"
+    },
+    {
+      "path": "repo/scripts/vm/guest-tools/run-ghidra-symbolized-probe.ps1",
+      "size_bytes": 6680,
+      "sha256": "052395fb53df931ab2def8cc6bfdf519710a1dcd9ec150e442bd78af3d355358"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/ensure-guest-admin-shell.py",
+      "size_bytes": 6213,
+      "sha256": "9670fc081ec9a4c65772897e4f6f3fa4ba7ffc12493b2a4958014abff8b631ce"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/guest_bridge.py",
+      "size_bytes": 2386,
+      "sha256": "7a39034be07cda3e2dd8912aafd8306decf83ea0ce9e0e6d629fcf988e7838c6"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+      "size_bytes": 12774,
+      "sha256": "848ae24240b246b85f569f9161be0929abe5e461a9c6840b670dbd0383a3739a"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/summary_contract_lib.py",
+      "size_bytes": 2287,
+      "sha256": "12f6a2e914803dca0cd809572f9954bc6669967b0f4483c30ee1fbcd8cec2cb4"
+    },
+    {
+      "path": "repo/scripts/vm-kvm/type-to-guest.py",
+      "size_bytes": 3939,
+      "sha256": "94bea9a2bccdcfd56412f9ee77c5280ee1a1812932273d0fec20d07f8977e1ce"
+    }
+  ],
+  "archive": {
+    "path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip",
+    "size_bytes": 23151,
+    "sha256": "99a3eeef2e7b5c003f8335dd0d0f6535cadc5191509acd4059ad1bba7eab3a27"
+  },
+  "jobs": []
+}

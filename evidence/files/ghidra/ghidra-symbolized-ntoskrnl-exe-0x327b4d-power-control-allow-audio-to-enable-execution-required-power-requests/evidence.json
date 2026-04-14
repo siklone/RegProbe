@@ -1,0 +1,392 @@
+{
+  "binary": "ntoskrnl.exe",
+  "probe": "ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests",
+  "timestamp": "2026-04-14T04:29:37.133879800Z",
+  "pdb_source": "C:\\Tools\\Symbols\\ghidra-symbolized-ntoskrnl-exe-0x327b4d-power-control-allow-audio-to-enable-execution-required-power-requests",
+  "pdb_loaded": true,
+  "matches": [
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "ntoskrnl.exe+0x327B4D",
+      "address": "140327b4d",
+      "function_name": "FUN_1403278a4",
+      "function_source": "auto-analysis-fallback",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "unclear",
+      "jump_condition": "140327b52  JMP 0x140327924",
+      "branch_effect": "jump recovered, but the compare/test anchor is still unclear.",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 30,
+      "effect_summary": "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+      "heuristic_reasons": [
+        "conditional jump found",
+        "value immediate found in bounded block",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "EDI",
+        "RSI",
+        "R8",
+        "RDX",
+        "RBP",
+        "RCX",
+        "R13",
+        "ECX",
+        "EAX"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140327b3b  MOV R9D,EDI",
+        "140327b3e  MOV R8,RSI",
+        "140327b41  LEA RDX,[RBP + 0x30]",
+        "140327b45  MOV RCX,R13",
+        "140327b48  CALL 0x1403ed650"
+      ],
+      "branch_snippet": [
+        "140327b4d  MOVZX R8D,word ptr [RBP]",
+        "140327b52  JMP 0x140327924",
+        "140327b5b  JMP 0x14032790d"
+      ],
+      "context_after": [
+        "140327b52  JMP 0x140327924",
+        "140327b57  DEC.LOCK dword ptr [RDX + 0xc]",
+        "140327b5b  JMP 0x14032790d",
+        "140327b60  XOR ECX,ECX",
+        "140327b62  MOV EAX,dword ptr [R13 + 0x504]"
+      ]
+    },
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "ntoskrnl.exe+0x3ED794",
+      "address": "1403ed794",
+      "function_name": "EtwpStackTraceDispatcher",
+      "function_source": "pdb-symbol",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "value=0 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "unclear",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 45,
+      "effect_summary": "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "value immediate found in bounded block",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "RBP",
+        "R9",
+        "RDI",
+        "R8",
+        "EBX",
+        "EDX",
+        "RCX",
+        "RSI",
+        "RSP",
+        "R13",
+        "RBX"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "1403ed784  MOV R9,RBP",
+        "1403ed787  MOV R8,RDI",
+        "1403ed78a  MOV EDX,EBX",
+        "1403ed78c  MOV RCX,RSI",
+        "1403ed78f  CALL 0x1403edbd0"
+      ],
+      "branch_snippet": [
+        "1403ed794  ADD RSP,0x40"
+      ],
+      "context_after": [
+        "1403ed798  POP R13",
+        "1403ed79a  POP RDI",
+        "1403ed79b  POP RSI",
+        "1403ed79c  POP RBP",
+        "1403ed79d  POP RBX"
+      ]
+    },
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "ntoskrnl.exe+0x3EDD84",
+      "address": "1403edd84",
+      "function_name": "EtwpTraceStackWalk",
+      "function_source": "pdb-symbol",
+      "function_confidence": "symbolized_branch",
+      "unclear": false,
+      "value_map": "value=0 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "1403edd89  TEST CL,0x2",
+      "jump_condition": "1403edd8c  JNZ 0x1403ee160",
+      "branch_effect": "compare + conditional jump recovered in bounded context.",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 95,
+      "effect_summary": "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare+jump survived bounded symbolized review",
+        "compare/test anchor found",
+        "conditional jump found",
+        "value immediate found in bounded block",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "R12",
+        "EAX",
+        "RSI",
+        "RSP",
+        "R13",
+        "ECX"
+      ],
+      "flag_focus": [
+        "ZF",
+        "CF",
+        "SF",
+        "OF"
+      ],
+      "context_before": [
+        "1403edd6a  MOVZX EAX,byte ptr [R12 + 0x7d]",
+        "1403edd70  AND EAX,0x1",
+        "1403edd73  MOV qword ptr [R12 + 0x6b0],RSI",
+        "1403edd7b  MOV dword ptr [RSP + 0x30],EAX",
+        "1403edd7f  CALL 0x14027d7a0"
+      ],
+      "branch_snippet": [
+        "1403edd84  MOVZX ECX,byte ptr [R13 + 0x7]",
+        "1403edd89  TEST CL,0x2",
+        "1403edd8c  JNZ 0x1403ee160",
+        "1403edd9b  CMP dword ptr [RSP + 0x30],ECX"
+      ],
+      "context_after": [
+        "1403edd89  TEST CL,0x2",
+        "1403edd8c  JNZ 0x1403ee160",
+        "1403edd92  MOVZX ECX,byte ptr [R12 + 0x7d]",
+        "1403edd98  AND ECX,0x1",
+        "1403edd9b  CMP dword ptr [RSP + 0x30],ECX"
+      ]
+    },
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "ntoskrnl.exe+0x6BE358",
+      "address": "1406be358",
+      "function_name": "KiSystemServiceStart",
+      "function_source": "pdb-symbol",
+      "function_confidence": "symbolized_branch",
+      "unclear": false,
+      "value_map": "value=0 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "1406be37e  TEST byte ptr [RBP + 0xf0],0x1",
+      "jump_condition": "1406be34a  JNZ 0x1406bebfa",
+      "branch_effect": "compare + conditional jump recovered in bounded context.",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 95,
+      "effect_summary": "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare+jump survived bounded symbolized review",
+        "compare/test anchor found",
+        "conditional jump found",
+        "value immediate found in bounded block",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "RAX",
+        "R10",
+        "RBP",
+        "RBX",
+        "RDI",
+        "RSI",
+        "R11"
+      ],
+      "flag_focus": [
+        "ZF"
+      ],
+      "context_before": [
+        "1406be340  TEST dword ptr [0x140fc5b08],0x40",
+        "1406be34a  JNZ 0x1406bebfa",
+        "1406be350  MOV RAX,R10",
+        "1406be353  CALL RAX",
+        "1406be355  NOP dword ptr [RAX]"
+      ],
+      "branch_snippet": [
+        "1406be358  INC dword ptr GS:[0x2eb8]",
+        "1406be37e  TEST byte ptr [RBP + 0xf0],0x1",
+        "1406be34a  JNZ 0x1406bebfa",
+        "1406be340  TEST dword ptr [0x140fc5b08],0x40"
+      ],
+      "context_after": [
+        "1406be360  MOV RBX,qword ptr [RBP + 0xc0]",
+        "1406be367  MOV RDI,qword ptr [RBP + 0xc8]",
+        "1406be36e  MOV RSI,qword ptr [RBP + 0xd0]",
+        "1406be375  MOV R11,qword ptr GS:[0x188]",
+        "1406be37e  TEST byte ptr [RBP + 0xf0],0x1"
+      ]
+    },
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "ntoskrnl.exe+0x87108C",
+      "address": "14087108c",
+      "function_name": "EtwpTraceRegistry",
+      "function_source": "pdb-symbol",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "value=0 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "unclear",
+      "jump_condition": "14087109d  JNZ 0x140870fc0",
+      "branch_effect": "jump recovered, but the compare/test anchor is still unclear.",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 60,
+      "effect_summary": "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "conditional jump found",
+        "value immediate found in bounded block",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "RSP",
+        "RDX",
+        "EAX",
+        "R11",
+        "EBX",
+        "RDI",
+        "RSI"
+      ],
+      "flag_focus": [
+        "ZF"
+      ],
+      "context_before": [
+        "140871072  MOV qword ptr [RSP + RAX*0x8 + 0x70],0x2",
+        "14087107b  LEA EAX,[RDX + 0x1]",
+        "14087107e  LEA RDX,[RSP + 0x68]",
+        "140871083  MOV dword ptr [RSP + 0x20],EAX",
+        "140871087  CALL 0x1403274f0"
+      ],
+      "branch_snippet": [
+        "14087108c  MOV R8D,0x900",
+        "14087109d  JNZ 0x140870fc0"
+      ],
+      "context_after": [
+        "140871092  LEA R11,[0x140010290]",
+        "140871099  BSF R10D,EBX",
+        "14087109d  JNZ 0x140870fc0",
+        "1408710a3  MOV RDI,qword ptr [RSP + 0xe0]",
+        "1408710ab  MOV RSI,qword ptr [RSP + 0xd8]"
+      ]
+    },
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "ntoskrnl.exe+0xAE49F6",
+      "address": "140ae49f6",
+      "function_name": "NtQueryValueKey",
+      "function_source": "pdb-symbol",
+      "function_confidence": "symbolized_branch",
+      "unclear": false,
+      "value_map": "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "140ae49fb  TEST RAX,RAX",
+      "jump_condition": "140ae49fe  JZ 0x140ae4a15",
+      "branch_effect": "compare + conditional jump recovered in bounded context.",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 95,
+      "effect_summary": "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare+jump survived bounded symbolized review",
+        "compare/test anchor found",
+        "conditional jump found",
+        "value immediate found in bounded block",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "EBX",
+        "RDX",
+        "RSP",
+        "RAX",
+        "RCX"
+      ],
+      "flag_focus": [
+        "ZF",
+        "CF",
+        "SF",
+        "OF"
+      ],
+      "context_before": [
+        "140ae49e1  MOV R9D,R15D",
+        "140ae49e4  MOV R8D,EBX",
+        "140ae49e7  LEA RDX,[RSP + 0x210]",
+        "140ae49ef  MOV CL,0x10",
+        "140ae49f1  CALL 0x1406b3df0"
+      ],
+      "branch_snippet": [
+        "140ae49f6  MOV RAX,qword ptr [RSP + 0x68]",
+        "140ae49fb  TEST RAX,RAX",
+        "140ae49fe  JZ 0x140ae4a15",
+        "140ae4a08  CMP RAX,RCX",
+        "140ae4a0b  JZ 0x140ae4a15"
+      ],
+      "context_after": [
+        "140ae49fb  TEST RAX,RAX",
+        "140ae49fe  JZ 0x140ae4a15",
+        "140ae4a00  LEA RCX,[RSP + 0x230]",
+        "140ae4a08  CMP RAX,RCX",
+        "140ae4a0b  JZ 0x140ae4a15"
+      ]
+    },
+    {
+      "match_kind": "registry_string_xref",
+      "pattern": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "address": "140c76288",
+      "function_name": "<no function>",
+      "function_source": "unresolved",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "unclear",
+      "jump_condition": "unclear",
+      "branch_effect": "trap/fault-adjacent block detected; control-flow may be misleading.",
+      "stack_summary": "no obvious stack-relative access in the bounded context.",
+      "exception_review_required": true,
+      "exception_reason": "trap-or-fault-adjacent instructions present; control-flow may be misleading.",
+      "heuristic_score": 0,
+      "effect_summary": "unclear - exception-adjacent control flow needs manual review before any semantic claim.",
+      "heuristic_reasons": [
+        "exception/trap gate forced review-only"
+      ],
+      "register_focus": [
+        "EAX",
+        "RAX"
+      ],
+      "flag_focus": [
+        "unclear"
+      ],
+      "context_before": [
+        "140c71630  OR EAX,0xa00",
+        "140c71635  ADD AH,CL",
+        "140c71637  INT3",
+        "140c71640  AND byte ptr [RAX],AL",
+        "140c71642  ADD byte ptr [RAX],AL"
+      ],
+      "branch_snippet": [
+        "140c71644  INT3"
+      ],
+      "context_after": []
+    }
+  ]
+}
