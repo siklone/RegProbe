@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T00:39:53.766601Z",
+  "generated_utc": "2026-04-14T00:53:02.992740Z",
   "batch_path": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
   "handoff_status": "ready",
@@ -8,14 +8,14 @@
     "status": "ready",
     "blocker": "symbol-resolution-ready",
     "next_action": "Run the prepared symbol-resolution jobs locally.",
-    "top_focus": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d"
+    "top_focus": "ghidra-symbol-01-kernelbase-dll-0x2e436"
   },
   "counts": {
     "prepared_jobs": 16,
-    "runnable_jobs": 10,
-    "blocked_jobs": 6,
-    "selected_jobs": 10,
-    "run_blocked_jobs": 6,
+    "runnable_jobs": 16,
+    "blocked_jobs": 0,
+    "selected_jobs": 16,
+    "run_blocked_jobs": 0,
     "candidate_count": 1
   },
   "required_host_tools": [],
@@ -24,6 +24,120 @@
     "power.control.allow-system-required-power-requests"
   ],
   "selected_jobs": [
+    {
+      "job_id": "ghidra-symbol-dispatch-01-ghidra-symbol-01-kernelbase-dll-0x2e436",
+      "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
+      "lookup_key": "KernelBase.dll+0x2e436",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "target_binary": "KernelBase.dll",
+      "guest_binary_path": "C:\\Windows\\System32\\KernelBase.dll",
+      "patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\KernelBase.dll --output-name ghidra-symbolized-01-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x2E436",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-01-power-control-allow-system-required-power-requests",
+      "missing_inputs": [],
+      "missing_host_tools": [],
+      "can_run_guest_orchestrator": true
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-02-ghidra-symbol-02-kernelbase-dll-0x2edab",
+      "request_id": "ghidra-symbol-02-kernelbase-dll-0x2edab",
+      "lookup_key": "KernelBase.dll+0x2edab",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "target_binary": "KernelBase.dll",
+      "guest_binary_path": "C:\\Windows\\System32\\KernelBase.dll",
+      "patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\KernelBase.dll --output-name ghidra-symbolized-02-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x2EDAB",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-02-power-control-allow-system-required-power-requests",
+      "missing_inputs": [],
+      "missing_host_tools": [],
+      "can_run_guest_orchestrator": true
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-03-ghidra-symbol-03-kernelbase-dll-0x30aad",
+      "request_id": "ghidra-symbol-03-kernelbase-dll-0x30aad",
+      "lookup_key": "KernelBase.dll+0x30aad",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "target_binary": "KernelBase.dll",
+      "guest_binary_path": "C:\\Windows\\System32\\KernelBase.dll",
+      "patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\KernelBase.dll --output-name ghidra-symbolized-03-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x30AAD",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-03-power-control-allow-system-required-power-requests",
+      "missing_inputs": [],
+      "missing_host_tools": [],
+      "can_run_guest_orchestrator": true
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-04-ghidra-symbol-04-kernel32-dll-0x2e8d7",
+      "request_id": "ghidra-symbol-04-kernel32-dll-0x2e8d7",
+      "lookup_key": "kernel32.dll+0x2e8d7",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "target_binary": "kernel32.dll",
+      "guest_binary_path": "C:\\Windows\\System32\\kernel32.dll",
+      "patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\kernel32.dll --output-name ghidra-symbolized-04-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset kernel32.dll+0x2E8D7",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-04-power-control-allow-system-required-power-requests",
+      "missing_inputs": [],
+      "missing_host_tools": [],
+      "can_run_guest_orchestrator": true
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-05-ghidra-symbol-05-ntdll-dll-0x161d74",
+      "request_id": "ghidra-symbol-05-ntdll-dll-0x161d74",
+      "lookup_key": "ntdll.dll+0x161d74",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "target_binary": "ntdll.dll",
+      "guest_binary_path": "C:\\Windows\\System32\\ntdll.dll",
+      "patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntdll.dll --output-name ghidra-symbolized-05-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x161D74",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-05-power-control-allow-system-required-power-requests",
+      "missing_inputs": [],
+      "missing_host_tools": [],
+      "can_run_guest_orchestrator": true
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-06-ghidra-symbol-06-ntdll-dll-0x8c48c",
+      "request_id": "ghidra-symbol-06-ntdll-dll-0x8c48c",
+      "lookup_key": "ntdll.dll+0x8c48c",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "target_binary": "ntdll.dll",
+      "guest_binary_path": "C:\\Windows\\System32\\ntdll.dll",
+      "patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntdll.dll --output-name ghidra-symbolized-06-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x8C48C",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-06-power-control-allow-system-required-power-requests",
+      "missing_inputs": [],
+      "missing_host_tools": [],
+      "can_run_guest_orchestrator": true
+    },
     {
       "job_id": "ghidra-symbol-dispatch-07-ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
       "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
@@ -215,191 +329,13 @@
       "can_run_guest_orchestrator": true
     }
   ],
-  "blocked_jobs": [
-    {
-      "job_id": "ghidra-symbol-dispatch-01-ghidra-symbol-01-kernelbase-dll-0x2e436",
-      "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
-      "lookup_key": "KernelBase.dll+0x2e436",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "KernelBase.dll",
-      "guest_binary_path": null,
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": null,
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-01-power-control-allow-system-required-power-requests",
-      "missing_inputs": [
-        "guest_binary_path"
-      ],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": false
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-02-ghidra-symbol-02-kernelbase-dll-0x2edab",
-      "request_id": "ghidra-symbol-02-kernelbase-dll-0x2edab",
-      "lookup_key": "KernelBase.dll+0x2edab",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "KernelBase.dll",
-      "guest_binary_path": null,
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": null,
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-02-power-control-allow-system-required-power-requests",
-      "missing_inputs": [
-        "guest_binary_path"
-      ],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": false
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-03-ghidra-symbol-03-kernelbase-dll-0x30aad",
-      "request_id": "ghidra-symbol-03-kernelbase-dll-0x30aad",
-      "lookup_key": "KernelBase.dll+0x30aad",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "KernelBase.dll",
-      "guest_binary_path": null,
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": null,
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-03-power-control-allow-system-required-power-requests",
-      "missing_inputs": [
-        "guest_binary_path"
-      ],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": false
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-04-ghidra-symbol-04-kernel32-dll-0x2e8d7",
-      "request_id": "ghidra-symbol-04-kernel32-dll-0x2e8d7",
-      "lookup_key": "kernel32.dll+0x2e8d7",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "kernel32.dll",
-      "guest_binary_path": null,
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": null,
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-04-power-control-allow-system-required-power-requests",
-      "missing_inputs": [
-        "guest_binary_path"
-      ],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": false
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-05-ghidra-symbol-05-ntdll-dll-0x161d74",
-      "request_id": "ghidra-symbol-05-ntdll-dll-0x161d74",
-      "lookup_key": "ntdll.dll+0x161d74",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "ntdll.dll",
-      "guest_binary_path": null,
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": null,
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-05-power-control-allow-system-required-power-requests",
-      "missing_inputs": [
-        "guest_binary_path"
-      ],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": false
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-06-ghidra-symbol-06-ntdll-dll-0x8c48c",
-      "request_id": "ghidra-symbol-06-ntdll-dll-0x8c48c",
-      "lookup_key": "ntdll.dll+0x8c48c",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "candidate_ids": [
-        "power.control.allow-system-required-power-requests"
-      ],
-      "target_binary": "ntdll.dll",
-      "guest_binary_path": null,
-      "patterns": [
-        "AllowSystemRequiredPowerRequests"
-      ],
-      "suggested_command": null,
-      "output_dir": "evidence/files/ghidra/ghidra-symbolized-06-power-control-allow-system-required-power-requests",
-      "missing_inputs": [
-        "guest_binary_path"
-      ],
-      "missing_host_tools": [],
-      "can_run_guest_orchestrator": false
-    }
-  ],
+  "blocked_jobs": [],
   "diagnostics": {
     "batch_resolution_kind_counts": {
       "module_offset": 16
     },
-    "batch_missing_input_counts": {
-      "guest_binary_path": 6
-    },
-    "batch_blocked_examples": [
-      {
-        "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
-        "lookup_key": "KernelBase.dll+0x2e436",
-        "missing_inputs": [
-          "guest_binary_path"
-        ],
-        "missing_host_tools": []
-      },
-      {
-        "request_id": "ghidra-symbol-02-kernelbase-dll-0x2edab",
-        "lookup_key": "KernelBase.dll+0x2edab",
-        "missing_inputs": [
-          "guest_binary_path"
-        ],
-        "missing_host_tools": []
-      },
-      {
-        "request_id": "ghidra-symbol-03-kernelbase-dll-0x30aad",
-        "lookup_key": "KernelBase.dll+0x30aad",
-        "missing_inputs": [
-          "guest_binary_path"
-        ],
-        "missing_host_tools": []
-      },
-      {
-        "request_id": "ghidra-symbol-04-kernel32-dll-0x2e8d7",
-        "lookup_key": "kernel32.dll+0x2e8d7",
-        "missing_inputs": [
-          "guest_binary_path"
-        ],
-        "missing_host_tools": []
-      },
-      {
-        "request_id": "ghidra-symbol-05-ntdll-dll-0x161d74",
-        "lookup_key": "ntdll.dll+0x161d74",
-        "missing_inputs": [
-          "guest_binary_path"
-        ],
-        "missing_host_tools": []
-      },
-      {
-        "request_id": "ghidra-symbol-06-ntdll-dll-0x8c48c",
-        "lookup_key": "ntdll.dll+0x8c48c",
-        "missing_inputs": [
-          "guest_binary_path"
-        ],
-        "missing_host_tools": []
-      }
-    ],
+    "batch_missing_input_counts": {},
+    "batch_blocked_examples": [],
     "run_runner_available": true,
     "run_mode": "dry-run"
   }

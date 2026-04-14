@@ -3,13 +3,25 @@
 - Transfer status: `ready`
 - Operator blocker: `transfer-pack-ready`
 - Next action: `Copy the listed repo files and use the exported commands on the destination KVM-capable host.`
-- Selected jobs: `10`
+- Selected jobs: `16`
 - Candidate count: `1`
 - Required repo files: `9`
 - Missing repo files: `0`
 
 ## Transfer Jobs
 
+- `ghidra-symbol-01-kernelbase-dll-0x2e436` -> `KernelBase.dll` | patterns=1 | candidates=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\KernelBase.dll --output-name ghidra-symbolized-01-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x2E436`
+- `ghidra-symbol-02-kernelbase-dll-0x2edab` -> `KernelBase.dll` | patterns=1 | candidates=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\KernelBase.dll --output-name ghidra-symbolized-02-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x2EDAB`
+- `ghidra-symbol-03-kernelbase-dll-0x30aad` -> `KernelBase.dll` | patterns=1 | candidates=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\KernelBase.dll --output-name ghidra-symbolized-03-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x30AAD`
+- `ghidra-symbol-04-kernel32-dll-0x2e8d7` -> `kernel32.dll` | patterns=1 | candidates=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\kernel32.dll --output-name ghidra-symbolized-04-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset kernel32.dll+0x2E8D7`
+- `ghidra-symbol-05-ntdll-dll-0x161d74` -> `ntdll.dll` | patterns=1 | candidates=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntdll.dll --output-name ghidra-symbolized-05-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x161D74`
+- `ghidra-symbol-06-ntdll-dll-0x8c48c` -> `ntdll.dll` | patterns=1 | candidates=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntdll.dll --output-name ghidra-symbolized-06-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x8C48C`
 - `ghidra-symbol-07-ntoskrnl-exe-0x327b4d` -> `ntoskrnl.exe` | patterns=1 | candidates=1
   command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntoskrnl.exe --output-name ghidra-symbolized-07-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x327B4D`
 - `ghidra-symbol-08-ntoskrnl-exe-0x3ed794` -> `ntoskrnl.exe` | patterns=1 | candidates=1

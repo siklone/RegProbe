@@ -4,13 +4,25 @@
 - Operator blocker: `symbol-resolution-ready`
 - Next action: `Run the prepared symbol-resolution jobs locally.`
 - Prepared jobs: `16`
-- Runnable jobs: `10`
-- Selected jobs: `10`
-- Blocked jobs: `6`
+- Runnable jobs: `16`
+- Selected jobs: `16`
+- Blocked jobs: `0`
 - Candidate count: `1`
 
 ## Selected Jobs
 
+- `ghidra-symbol-01-kernelbase-dll-0x2e436` -> `KernelBase.dll` | candidates=1 | patterns=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\KernelBase.dll --output-name ghidra-symbolized-01-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x2E436`
+- `ghidra-symbol-02-kernelbase-dll-0x2edab` -> `KernelBase.dll` | candidates=1 | patterns=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\KernelBase.dll --output-name ghidra-symbolized-02-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x2EDAB`
+- `ghidra-symbol-03-kernelbase-dll-0x30aad` -> `KernelBase.dll` | candidates=1 | patterns=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\KernelBase.dll --output-name ghidra-symbolized-03-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset KernelBase.dll+0x30AAD`
+- `ghidra-symbol-04-kernel32-dll-0x2e8d7` -> `kernel32.dll` | candidates=1 | patterns=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\kernel32.dll --output-name ghidra-symbolized-04-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset kernel32.dll+0x2E8D7`
+- `ghidra-symbol-05-ntdll-dll-0x161d74` -> `ntdll.dll` | candidates=1 | patterns=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntdll.dll --output-name ghidra-symbolized-05-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x161D74`
+- `ghidra-symbol-06-ntdll-dll-0x8c48c` -> `ntdll.dll` | candidates=1 | patterns=1
+  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntdll.dll --output-name ghidra-symbolized-06-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x8C48C`
 - `ghidra-symbol-07-ntoskrnl-exe-0x327b4d` -> `ntoskrnl.exe` | candidates=1 | patterns=1
   command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntoskrnl.exe --output-name ghidra-symbolized-07-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x327B4D`
 - `ghidra-symbol-08-ntoskrnl-exe-0x3ed794` -> `ntoskrnl.exe` | candidates=1 | patterns=1
@@ -34,15 +46,10 @@
 
 ## Blocked Jobs
 
-- `ghidra-symbol-01-kernelbase-dll-0x2e436` missing_inputs=['guest_binary_path'] missing_host_tools=[]
-- `ghidra-symbol-02-kernelbase-dll-0x2edab` missing_inputs=['guest_binary_path'] missing_host_tools=[]
-- `ghidra-symbol-03-kernelbase-dll-0x30aad` missing_inputs=['guest_binary_path'] missing_host_tools=[]
-- `ghidra-symbol-04-kernel32-dll-0x2e8d7` missing_inputs=['guest_binary_path'] missing_host_tools=[]
-- `ghidra-symbol-05-ntdll-dll-0x161d74` missing_inputs=['guest_binary_path'] missing_host_tools=[]
-- `ghidra-symbol-06-ntdll-dll-0x8c48c` missing_inputs=['guest_binary_path'] missing_host_tools=[]
+- none
 
 ## Diagnostics
 
 - Resolution kind counts: `{"module_offset": 16}`
-- Missing input counts: `{"guest_binary_path": 6}`
+- Missing input counts: `{}`
 - Runner available: `True`

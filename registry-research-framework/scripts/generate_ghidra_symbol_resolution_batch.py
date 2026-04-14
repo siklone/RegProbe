@@ -45,6 +45,10 @@ def infer_guest_binary_path(target_binary: Any) -> str | None:
         return r"C:\Windows\System32\ntoskrnl.exe"
     if lowered == "explorer.exe":
         return r"C:\Windows\explorer.exe"
+    if lowered.endswith(".dll"):
+        return rf"C:\Windows\System32\{name}"
+    if lowered.endswith(".sys"):
+        return rf"C:\Windows\System32\drivers\{name}"
     if lowered.endswith(".exe"):
         return rf"C:\Windows\System32\{name}"
     return None

@@ -2700,6 +2700,16 @@ class GhidraSymbolResolutionBatchTests(unittest.TestCase):
         self.assertEqual(batch["diagnostics"]["missing_input_counts"], {"module_base": 1})
         self.assertIsNone(batch["jobs"][0]["command_argv"])
 
+    def test_symbol_resolution_batch_infers_system32_dll_paths(self) -> None:
+        self.assertEqual(
+            ghidra_symbol_batch.infer_guest_binary_path("KernelBase.dll"),
+            r"C:\Windows\System32\KernelBase.dll",
+        )
+        self.assertEqual(
+            ghidra_symbol_batch.infer_guest_binary_path("ntdll.dll"),
+            r"C:\Windows\System32\ntdll.dll",
+        )
+
 
 class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
     def test_symbol_resolution_run_plan_selects_runnable_jobs(self) -> None:
