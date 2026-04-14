@@ -2860,6 +2860,7 @@ class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
 
     def test_symbol_resolution_run_executes_only_incomplete_jobs(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
             completed_output_dir = Path(tmpdir) / "completed-job"
             completed_output_dir.mkdir(parents=True, exist_ok=True)
             (completed_output_dir / "run-summary.json").write_text(
@@ -2890,10 +2891,18 @@ class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
                         "can_run_guest_orchestrator": True,
                         "command_argv": ["python3", "pending.py"],
                         "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-                        "output_dir": "evidence/files/ghidra/job-2",
+                        "output_dir": str(tmp_path / "job-2"),
                     },
                 ]
             }
+            bridge_dir = tmp_path / "bridge"
+            bridge_dir.mkdir(parents=True, exist_ok=True)
+            (bridge_dir / "job-2-summary.json").write_text(
+                json.dumps({"status": "ok", "ghidra_exit_code": 0}),
+                encoding="utf-8",
+            )
+            (bridge_dir / "job-2-evidence.json").write_text('{"probe":"job-2"}', encoding="utf-8")
+            (bridge_dir / "job-2-ghidra-matches.md").write_text("# job-2", encoding="utf-8")
 
             with unittest.mock.patch.object(ghidra_symbol_runner, "runner_available", return_value=True):
                 with unittest.mock.patch.object(
@@ -2906,13 +2915,48 @@ class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
                         stderr="",
                     ),
                 ) as mock_run:
-                    result = ghidra_symbol_runner.run_jobs(payload, generated_utc="2026-04-13T00:00:00Z")
+                    result = ghidra_symbol_runner.run_jobs(
+                        payload,
+                        generated_utc="2026-04-13T00:00:00Z",
+                    )
 
         self.assertEqual(result["selected_job_count"], 1)
         self.assertEqual(result["executed_job_count"], 1)
         self.assertEqual(result["completed_job_count"], 1)
         self.assertEqual(result["jobs"][0]["request_id"], "request-2")
+        self.assertEqual(
+            result["jobs"][0]["materialized_files"],
+            [],
+        )
         mock_run.assert_called_once()
+
+    def test_materialize_bridge_artifacts_copies_expected_files(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            bridge_dir = tmp_path / "bridge"
+            bridge_dir.mkdir(parents=True, exist_ok=True)
+            output_dir = tmp_path / "evidence" / "job-3"
+
+            (bridge_dir / "job-3-summary.json").write_text(
+                json.dumps({"status": "ok", "ghidra_exit_code": 0}),
+                encoding="utf-8",
+            )
+            (bridge_dir / "job-3-evidence.json").write_text('{"probe":"job-3"}', encoding="utf-8")
+            (bridge_dir / "job-3-ghidra-matches.md").write_text("# job-3", encoding="utf-8")
+            (bridge_dir / "job-3-symchk.txt").write_text("symchk", encoding="utf-8")
+
+            materialized = ghidra_symbol_runner.materialize_bridge_artifacts(
+                {"output_dir": str(output_dir)},
+                bridge_dir=bridge_dir,
+            )
+            self.assertEqual(
+                materialized,
+                ["evidence.json", "ghidra-matches.md", "run-summary.json", "symchk.txt"],
+            )
+            self.assertTrue((output_dir / "evidence.json").exists())
+            self.assertTrue((output_dir / "ghidra-matches.md").exists())
+            self.assertTrue((output_dir / "run-summary.json").exists())
+            self.assertTrue((output_dir / "symchk.txt").exists())
 
 
 class GhidraSymbolResolutionHandoffTests(unittest.TestCase):

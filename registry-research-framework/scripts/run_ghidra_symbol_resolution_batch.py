@@ -15,6 +15,14 @@ FRAMEWORK_ROOT = REPO_ROOT / "registry-research-framework"
 INPUT_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-batch.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "queue" / "ghidra-symbol-resolution-run.json"
 REQUIRED_HOST_TOOLS = ("python3", "curl", "virsh")
+DEFAULT_BRIDGE_DIR = Path("/tmp/regprobe-bridge")
+BRIDGE_ARTIFACTS = (
+    ("-evidence.json", "evidence.json"),
+    ("-ghidra-matches.md", "ghidra-matches.md"),
+    ("-summary.json", "run-summary.json"),
+    ("-launcher-stage.json", "launcher-stage.json"),
+    ("-symchk.txt", "symchk.txt"),
+)
 
 
 def now_utc() -> str:
@@ -29,13 +37,37 @@ def runner_available(required_tools: tuple[str, ...] = REQUIRED_HOST_TOOLS) -> b
     return all(shutil.which(tool) for tool in required_tools)
 
 
-def job_output_completed(job: dict[str, Any]) -> bool:
+def resolve_output_dir(job: dict[str, Any]) -> Path | None:
     output_dir = str(job.get("output_dir") or "").strip()
     if not output_dir:
-        return False
+        return None
     path = Path(output_dir)
     if not path.is_absolute():
         path = REPO_ROOT / path
+    return path
+
+
+def materialize_bridge_artifacts(job: dict[str, Any], *, bridge_dir: Path = DEFAULT_BRIDGE_DIR) -> list[str]:
+    output_dir = resolve_output_dir(job)
+    if output_dir is None:
+        return []
+    output_name = output_dir.name
+    materialized: list[str] = []
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for bridge_suffix, target_name in BRIDGE_ARTIFACTS:
+        bridge_path = bridge_dir / f"{output_name}{bridge_suffix}"
+        if not bridge_path.exists():
+            continue
+        target_path = output_dir / target_name
+        shutil.copy2(bridge_path, target_path)
+        materialized.append(target_name)
+    return materialized
+
+
+def job_output_completed(job: dict[str, Any]) -> bool:
+    path = resolve_output_dir(job)
+    if path is None:
+        return False
     summary_path = path / "run-summary.json"
     if not summary_path.exists():
         return False
@@ -158,6 +190,7 @@ def run_jobs(payload: dict[str, Any], *, limit: int | None = None, generated_utc
     for job in jobs:
         argv = [str(part) for part in (job.get("command_argv") or [])]
         process = subprocess.run(argv, cwd=REPO_ROOT, capture_output=True, text=True, check=False)
+        materialized_files = materialize_bridge_artifacts(job)
         result_jobs.append(
             {
                 "job_id": job.get("job_id"),
@@ -166,6 +199,7 @@ def run_jobs(payload: dict[str, Any], *, limit: int | None = None, generated_utc
                 "exit_code": process.returncode,
                 "stdout": process.stdout,
                 "stderr": process.stderr,
+                "materialized_files": materialized_files,
             }
         )
 

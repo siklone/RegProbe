@@ -1,14 +1,14 @@
 # Ghidra Autotrigger Health
 
-- Generated UTC: `2026-04-14T02:09:57.414940Z`
+- Generated UTC: `2026-04-14T02:20:53.118001Z`
 - Input bundles selected: `0`
 - Queue jobs: `4`
 - Autotrigger seeds: `1`
 - Symbol resolution requests: `16`
 - Symbol resolution batch jobs: `5`
 - Symbol resolution blocked jobs: `0`
-- Symbol resolution run selected jobs: `4`
-- Symbol resolution handoff selected jobs: `4`
+- Symbol resolution run selected jobs: `3`
+- Symbol resolution handoff selected jobs: `3`
 - Symbol resolution transfer selected jobs: `5`
 - Symbol resolution transfer pack selected jobs: `0`
 - Symbol resolution transfer pack check errors: `0`
@@ -31,7 +31,7 @@
 - Top autotrigger candidate: `power.control.allow-system-required-power-requests`
 - Top symbol resolution request: `KernelBase.dll+0x2e436`
 - Top symbol resolution batch request: `ghidra-symbol-01-kernelbase-dll-0x2e436`
-- Top symbol resolution handoff request: `ghidra-symbol-04-kernel32-dll-0x2e8d7`
+- Top symbol resolution handoff request: `ghidra-symbol-05-ntdll-dll-0x161d74`
 - Top symbol resolution transfer request: `ghidra-symbol-01-kernelbase-dll-0x2e436`
 - Top symbol resolution transfer pack request: `None`
 - Top symbol resolution execution run request: `None`
@@ -53,7 +53,7 @@
 
 - Handoff status: `ready`
 - Operator blocker: `symbol-resolution-ready`
-- Selected jobs: `4`
+- Selected jobs: `3`
 - Blocked jobs: `0`
 
 ## Symbol Transfer

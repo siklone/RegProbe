@@ -1,40 +1,26 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T02:09:50.810177Z",
+  "generated_utc": "2026-04-14T02:20:53.079292Z",
   "mode": "dry-run",
   "source_batch": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
   "runner_available": true,
-  "selected_job_count": 4,
+  "selected_job_count": 3,
   "blocked_job_count": 0,
-  "completed_job_count": 1,
+  "completed_job_count": 2,
   "blocked_jobs": [],
   "completed_jobs": [
     {
       "job_id": "ghidra-symbol-dispatch-01-ghidra-symbol-01-kernelbase-dll-0x2e436",
       "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-system-required-power-requests"
-    }
-  ],
-  "jobs": [
+    },
     {
       "job_id": "ghidra-symbol-dispatch-02-ghidra-symbol-04-kernel32-dll-0x2e8d7",
       "request_id": "ghidra-symbol-04-kernel32-dll-0x2e8d7",
-      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
-      "command_argv": [
-        "python3",
-        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
-        "--binary-path",
-        "C:\\Windows\\System32\\kernel32.dll",
-        "--output-name",
-        "ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests",
-        "--pattern",
-        "AllowSystemRequiredPowerRequests",
-        "--module-offset",
-        "kernel32.dll+0x2E8D7"
-      ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\kernel32.dll --output-name ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset kernel32.dll+0x2E8D7",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests"
-    },
+    }
+  ],
+  "jobs": [
     {
       "job_id": "ghidra-symbol-dispatch-03-ghidra-symbol-05-ntdll-dll-0x161d74",
       "request_id": "ghidra-symbol-05-ntdll-dll-0x161d74",

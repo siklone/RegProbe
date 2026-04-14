@@ -5,14 +5,12 @@
 - Next action: `Run the prepared symbol-resolution jobs locally.`
 - Prepared jobs: `5`
 - Runnable jobs: `5`
-- Selected jobs: `4`
+- Selected jobs: `3`
 - Blocked jobs: `0`
 - Candidate count: `1`
 
 ## Selected Jobs
 
-- `ghidra-symbol-04-kernel32-dll-0x2e8d7` -> `kernel32.dll` | candidates=1 | patterns=1
-  command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\kernel32.dll --output-name ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset kernel32.dll+0x2E8D7`
 - `ghidra-symbol-05-ntdll-dll-0x161d74` -> `ntdll.dll` | candidates=1 | patterns=1
   command: `python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\Windows\System32\ntdll.dll --output-name ghidra-symbolized-ntdll-dll-0x161d74-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntdll.dll+0x161D74 --module-offset ntdll.dll+0x8C48C`
 - `ghidra-symbol-07-ntoskrnl-exe-0x327b4d` -> `ntoskrnl.exe` | candidates=1 | patterns=1
@@ -23,6 +21,7 @@
 ## Blocked Jobs
 
 - `ghidra-symbol-01-kernelbase-dll-0x2e436` missing_inputs=[] missing_host_tools=[]
+- `ghidra-symbol-04-kernel32-dll-0x2e8d7` missing_inputs=[] missing_host_tools=[]
 
 ## Diagnostics
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T02:09:57.414940Z",
+  "generated_utc": "2026-04-14T02:20:53.118001Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -25,9 +25,9 @@
     "symbol_resolution_batch_jobs": 5,
     "symbol_resolution_runnable_jobs": 5,
     "symbol_resolution_blocked_jobs": 0,
-    "symbol_resolution_run_selected_jobs": 4,
+    "symbol_resolution_run_selected_jobs": 3,
     "symbol_resolution_run_blocked_jobs": 0,
-    "symbol_resolution_handoff_selected_jobs": 4,
+    "symbol_resolution_handoff_selected_jobs": 3,
     "symbol_resolution_transfer_selected_jobs": 5,
     "symbol_resolution_transfer_pack_selected_jobs": 0,
     "symbol_resolution_transfer_pack_check_errors": 0,
@@ -58,7 +58,7 @@
   "symbol_resolution_handoff": {
     "status": "ready",
     "operator_blocker": "symbol-resolution-ready",
-    "selected_jobs": 4,
+    "selected_jobs": 3,
     "blocked_jobs": 0
   },
   "symbol_resolution_transfer": {
@@ -172,11 +172,11 @@
       "ghidra-symbol-13-reg-exe-0x128b"
     ],
     "symbol_resolution_handoff_request_ids": [
-      "ghidra-symbol-04-kernel32-dll-0x2e8d7",
       "ghidra-symbol-05-ntdll-dll-0x161d74",
       "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
       "ghidra-symbol-13-reg-exe-0x128b",
-      "ghidra-symbol-01-kernelbase-dll-0x2e436"
+      "ghidra-symbol-01-kernelbase-dll-0x2e436",
+      "ghidra-symbol-04-kernel32-dll-0x2e8d7"
     ],
     "symbol_resolution_transfer_request_ids": [
       "ghidra-symbol-01-kernelbase-dll-0x2e436",
@@ -197,7 +197,7 @@
     "top_autotrigger_candidate": "power.control.allow-system-required-power-requests",
     "top_symbol_resolution_request": "KernelBase.dll+0x2e436",
     "top_symbol_resolution_batch_request": "ghidra-symbol-01-kernelbase-dll-0x2e436",
-    "top_symbol_resolution_handoff_request": "ghidra-symbol-04-kernel32-dll-0x2e8d7",
+    "top_symbol_resolution_handoff_request": "ghidra-symbol-05-ntdll-dll-0x161d74",
     "top_symbol_resolution_transfer_request": "ghidra-symbol-01-kernelbase-dll-0x2e436",
     "top_symbol_resolution_transfer_pack_request": null,
     "top_symbol_resolution_execution_run_request": null,
