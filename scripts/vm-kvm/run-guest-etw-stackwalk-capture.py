@@ -8,12 +8,47 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from typing import Any
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+CURRENT_DIR = Path(__file__).resolve().parent
+FRAMEWORK_SCRIPTS = REPO_ROOT / "registry-research-framework" / "scripts"
+DEFAULT_PROFILE_CONFIG = REPO_ROOT / "registry-research-framework" / "config" / "etw-stackwalk-profiles.json"
+DEFAULT_RUN_ID = "wave4-registry-stackwalk"
+DEFAULT_DURATION_SECONDS = 60
+DEFAULT_REGISTRY_PATH = r"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel"
+DEFAULT_VALUE_NAME = "TimerCheckFlags"
+DEFAULT_GUEST_OUTPUT_ROOT = r"C:\RegProbe-Diag\etw-stackwalk"
+DEFAULT_KERNEL_FLAGS = ["PROC_THREAD", "LOADER", "REGISTRY"]
+DEFAULT_STACKWALK_EVENTS = [
+    "RegCreateKey",
+    "RegOpenKey",
+    "RegQueryKey",
+    "RegSetValue",
+    "RegQueryValue",
+    "RegDeleteValue",
+    "RegCloseKey",
+]
+DEFAULT_BUFFER_SIZE_KB = 1024
+DEFAULT_MIN_BUFFERS = 64
+DEFAULT_MAX_BUFFERS = 256
+
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
+if str(FRAMEWORK_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(FRAMEWORK_SCRIPTS))
 
 from guest_bridge import ensure_guest_bridge
+from generate_etw_stackwalk_capture_plan import load_config as load_profile_config  # noqa: E402
+from generate_etw_stackwalk_capture_plan import profile_by_id  # noqa: E402
 
 
 def quote_ps(value: str) -> str:
     return "'" + value.replace("'", "''") + "'"
+
+
+def quote_ps_array(values: list[str]) -> str:
+    return ", ".join(quote_ps(value) for value in values)
 
 
 def run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -216,10 +251,22 @@ def build_generated_script(*, args: argparse.Namespace, bridge: str, guest_scrip
         quote_ps(args.run_id),
         "-DurationSeconds",
         str(args.duration_seconds),
+        "-OutputRoot",
+        quote_ps(args.guest_output_root),
         "-RegistryPath",
         quote_ps(args.registry_path),
         "-ValueName",
         quote_ps(args.value_name),
+        "-KernelFlags",
+        f"@({quote_ps_array(args.kernel_flags)})",
+        "-StackwalkEvents",
+        f"@({quote_ps_array(args.stackwalk_events)})",
+        "-BufferSizeKb",
+        str(args.buffer_size_kb),
+        "-MinBuffers",
+        str(args.min_buffers),
+        "-MaxBuffers",
+        str(args.max_buffers),
         "-UploadBaseUrl",
         quote_ps(bridge),
     ]
@@ -242,6 +289,79 @@ def build_generated_script(*, args: argparse.Namespace, bridge: str, guest_scrip
     ) + "\n"
 
 
+def unique_strings(values: list[Any] | None) -> list[str]:
+    result: list[str] = []
+    seen: set[str] = set()
+    for value in values or []:
+        text = str(value or "").strip()
+        if not text or text.lower() in seen:
+            continue
+        seen.add(text.lower())
+        result.append(text)
+    return result
+
+
+def list_profiles_payload(config: dict[str, Any]) -> dict[str, Any]:
+    default_profile = str(config.get("default_profile") or "").strip()
+    profiles = []
+    for profile in config.get("profiles") or []:
+        target_defaults = profile.get("target_defaults") or {}
+        profiles.append(
+            {
+                "profile_id": profile.get("profile_id"),
+                "description": profile.get("description"),
+                "default_run_id": profile.get("default_run_id"),
+                "registry_path": target_defaults.get("registry_path"),
+                "value_name": target_defaults.get("value_name"),
+                "is_default": str(profile.get("profile_id") or "") == default_profile,
+            }
+        )
+    return {
+        "default_profile": default_profile,
+        "profiles": profiles,
+    }
+
+
+def resolve_effective_capture_settings(
+    *,
+    config: dict[str, Any] | None,
+    profile_id: str | None,
+    run_id: str | None,
+    duration_seconds: int | None,
+    registry_path: str | None,
+    value_name: str | None,
+    guest_output_root: str | None,
+    kernel_flags: list[str] | None,
+    stackwalk_events: list[str] | None,
+    buffer_size_kb: int | None,
+    min_buffers: int | None,
+    max_buffers: int | None,
+) -> dict[str, Any]:
+    profile: dict[str, Any] = {}
+    if config:
+        profile = profile_by_id(config, profile_id)
+    target_defaults = profile.get("target_defaults") or {}
+    buffer = profile.get("buffer") or {}
+
+    effective_kernel_flags = unique_strings(kernel_flags) or unique_strings(profile.get("kernel_flags")) or list(DEFAULT_KERNEL_FLAGS)
+    effective_stackwalk_events = unique_strings(stackwalk_events) or unique_strings(profile.get("stackwalk_events")) or list(DEFAULT_STACKWALK_EVENTS)
+
+    return {
+        "profile_id": profile.get("profile_id"),
+        "profile_description": profile.get("description"),
+        "run_id": str(run_id or profile.get("default_run_id") or DEFAULT_RUN_ID),
+        "duration_seconds": int(duration_seconds or profile.get("default_duration_seconds") or DEFAULT_DURATION_SECONDS),
+        "registry_path": str(registry_path or target_defaults.get("registry_path") or DEFAULT_REGISTRY_PATH),
+        "value_name": str(value_name if value_name is not None else (target_defaults.get("value_name") or DEFAULT_VALUE_NAME)),
+        "guest_output_root": str(guest_output_root or profile.get("default_output_root") or DEFAULT_GUEST_OUTPUT_ROOT),
+        "kernel_flags": effective_kernel_flags,
+        "stackwalk_events": effective_stackwalk_events,
+        "buffer_size_kb": int(buffer_size_kb or buffer.get("size_kb") or DEFAULT_BUFFER_SIZE_KB),
+        "min_buffers": int(min_buffers or buffer.get("min_buffers") or DEFAULT_MIN_BUFFERS),
+        "max_buffers": int(max_buffers or buffer.get("max_buffers") or DEFAULT_MAX_BUFFERS),
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the ETW registry stackwalk capture helper inside the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -256,10 +376,19 @@ def main() -> int:
     parser.add_argument("--qga-retry-seconds", type=int, default=30)
     parser.add_argument("--qga-retry-interval-seconds", type=int, default=5)
     parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
-    parser.add_argument("--run-id", default="wave4-registry-stackwalk")
-    parser.add_argument("--duration-seconds", type=int, default=60)
-    parser.add_argument("--registry-path", default=r"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel")
-    parser.add_argument("--value-name", default="TimerCheckFlags")
+    parser.add_argument("--profile-config", default=str(DEFAULT_PROFILE_CONFIG))
+    parser.add_argument("--profile-id", default=None)
+    parser.add_argument("--list-profiles", action="store_true", help="List available ETW stackwalk profiles and exit.")
+    parser.add_argument("--run-id", default=None)
+    parser.add_argument("--duration-seconds", type=int, default=None)
+    parser.add_argument("--registry-path", default=None)
+    parser.add_argument("--value-name", default=None)
+    parser.add_argument("--guest-output-root", default=None)
+    parser.add_argument("--kernel-flag", action="append", default=[], help="Override xperf kernel flags. Repeat for multiple values.")
+    parser.add_argument("--stackwalk-event", action="append", default=[], help="Override xperf stackwalk events. Repeat for multiple values.")
+    parser.add_argument("--buffer-size-kb", type=int, default=None)
+    parser.add_argument("--min-buffers", type=int, default=None)
+    parser.add_argument("--max-buffers", type=int, default=None)
     parser.add_argument("--upload-etl", action="store_true")
     parser.add_argument("--skip-tracerpt", action="store_true")
     parser.add_argument("--ingest-to-repo", action="store_true", help="Copy uploaded ETL/XML into evidence/files/etw-stackwalk/<run-id> and build a normalized bundle.")
@@ -268,6 +397,40 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
+    profile_config_path = Path(args.profile_config)
+    if not profile_config_path.is_absolute():
+        profile_config_path = (repo_root / profile_config_path).resolve()
+    config = load_profile_config(profile_config_path)
+    if args.list_profiles:
+        print(json.dumps(list_profiles_payload(config), indent=2))
+        return 0
+
+    effective = resolve_effective_capture_settings(
+        config=config,
+        profile_id=args.profile_id,
+        run_id=args.run_id,
+        duration_seconds=args.duration_seconds,
+        registry_path=args.registry_path,
+        value_name=args.value_name,
+        guest_output_root=args.guest_output_root,
+        kernel_flags=args.kernel_flag,
+        stackwalk_events=args.stackwalk_event,
+        buffer_size_kb=args.buffer_size_kb,
+        min_buffers=args.min_buffers,
+        max_buffers=args.max_buffers,
+    )
+    args.run_id = effective["run_id"]
+    args.duration_seconds = effective["duration_seconds"]
+    args.registry_path = effective["registry_path"]
+    args.value_name = effective["value_name"]
+    args.guest_output_root = effective["guest_output_root"]
+    args.kernel_flags = effective["kernel_flags"]
+    args.stackwalk_events = effective["stackwalk_events"]
+    args.buffer_size_kb = effective["buffer_size_kb"]
+    args.min_buffers = effective["min_buffers"]
+    args.max_buffers = effective["max_buffers"]
+    args.profile_id = effective["profile_id"]
+
     upload_dir = Path(args.upload_dir).resolve()
     upload_dir.mkdir(parents=True, exist_ok=True)
     safe_run_id = "".join(ch if ch.isalnum() or ch in "._-" else "-" for ch in args.run_id).strip("-") or "registry-stackwalk"
@@ -326,6 +489,7 @@ def main() -> int:
         "status": summary.get("status", "unknown"),
         "error_kind": summary.get("error_kind"),
         "error": summary.get("error"),
+        "profile_id": args.profile_id,
         "run_id": safe_run_id,
         "launch_transport": launch_transport,
         "summary_path": str(summary_path),

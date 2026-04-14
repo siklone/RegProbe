@@ -60,6 +60,10 @@ ghidra_symbol_transfer_pack_unpack = load_module("unpack_ghidra_symbol_resolutio
 ghidra_transfer_pack_execution = load_module("generate_ghidra_transfer_pack_execution_plan", FRAMEWORK_SCRIPTS / "generate_ghidra_transfer_pack_execution_plan.py")
 ghidra_transfer_pack_execution_run = load_module("run_ghidra_transfer_pack_execution_plan", FRAMEWORK_SCRIPTS / "run_ghidra_transfer_pack_execution_plan.py")
 ghidra_transfer_pack_execution_run_check = load_module("check_ghidra_transfer_pack_execution_run", FRAMEWORK_SCRIPTS / "check_ghidra_transfer_pack_execution_run.py")
+etw_stackwalk_runner = load_module(
+    "run_guest_etw_stackwalk_capture",
+    REPO_ROOT / "scripts" / "vm-kvm" / "run-guest-etw-stackwalk-capture.py",
+)
 
 
 class ContractValidationTests(unittest.TestCase):
@@ -1708,6 +1712,57 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("ETW registry stackwalk capture helper", result.stdout)
         self.assertIn("--ingest-to-repo", result.stdout)
+        self.assertIn("--profile-id", result.stdout)
+        self.assertIn("--list-profiles", result.stdout)
+
+    def test_kvm_etw_stackwalk_launcher_lists_profiles(self) -> None:
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(REPO_ROOT / "scripts" / "vm-kvm" / "run-guest-etw-stackwalk-capture.py"),
+                "--list-profiles",
+            ],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        payload = json.loads(result.stdout)
+        self.assertEqual(payload["default_profile"], "kernel-registry-stackwalk-v1")
+        profile_ids = {item["profile_id"] for item in payload["profiles"]}
+        self.assertIn("execution-required-system-stackwalk-v1", profile_ids)
+        self.assertIn("execution-required-audio-stackwalk-v1", profile_ids)
+
+    def test_etw_stackwalk_runner_profile_resolution_uses_profile_defaults(self) -> None:
+        config = json.loads(
+            (REPO_ROOT / "registry-research-framework" / "config" / "etw-stackwalk-profiles.json").read_text(
+                encoding="utf-8"
+            )
+        )
+
+        resolved = etw_stackwalk_runner.resolve_effective_capture_settings(
+            config=config,
+            profile_id="execution-required-system-stackwalk-v1",
+            run_id=None,
+            duration_seconds=None,
+            registry_path=None,
+            value_name=None,
+            guest_output_root=None,
+            kernel_flags=None,
+            stackwalk_events=None,
+            buffer_size_kb=None,
+            min_buffers=None,
+            max_buffers=None,
+        )
+
+        self.assertEqual(resolved["profile_id"], "execution-required-system-stackwalk-v1")
+        self.assertEqual(resolved["run_id"], "wave4-allow-system-required-e2e")
+        self.assertEqual(resolved["registry_path"], r"HKLM\SYSTEM\CurrentControlSet\Control\Power")
+        self.assertEqual(resolved["value_name"], "AllowSystemRequiredPowerRequests")
+        self.assertIn("REGISTRY", resolved["kernel_flags"])
+        self.assertIn("RegQueryValue", resolved["stackwalk_events"])
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {
