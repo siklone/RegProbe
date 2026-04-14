@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T01:05:24.753097Z",
+  "generated_at": "2026-04-14T02:51:21.483262Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 4,
@@ -32,7 +32,7 @@
     "ghidra": {
       "candidate_id": "power.control.allow-system-required-power-requests",
       "suggested_command": "winopt research show-blocked power.control.allow-system-required-power-requests --json",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+      "next_action_hint": "Continue static reverse-engineering for exact leaf-level proof."
     },
     "runtime-trace": {
       "candidate_id": "system.kernel.global-timer-resolution-requests",
@@ -86,11 +86,10 @@
       "feature_area": "Control Power Requests",
       "next_missing_layer": "ghidra",
       "actionability": "active",
-      "priority_score": 33,
-      "blocker_count": 2,
+      "priority_score": 34,
+      "blocker_count": 1,
       "promotion_blockers": [
-        "system-execution-required-no-current-build-registry-seeding-path",
-        "system-execution-required-wpr-boot-no-hit-current-build"
+        "system-execution-required-no-current-build-registry-seeding-path"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "value_name": "AllowSystemRequiredPowerRequests",
@@ -100,7 +99,7 @@
         "registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json"
       ],
       "suggested_command": "winopt research show-blocked power.control.allow-system-required-power-requests --json",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+      "next_action_hint": "Continue static reverse-engineering for exact leaf-level proof."
     },
     {
       "candidate_id": "power.session-watchdog-timeouts",

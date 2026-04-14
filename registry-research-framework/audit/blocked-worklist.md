@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T01:05:24.753097Z`
+Generated: `2026-04-14T02:51:21.483262Z`
 
 Blocked candidates: `18`
 
@@ -12,14 +12,14 @@ Blocked candidates: `18`
 ## Lane Summary
 
 - `restore-story`: 1 | first: `power.control.power-request-override-subtree` | `winopt research list-blocked --worklist --lane restore-story --top 5` | Prove restore or rollback behavior for the exact subtree or value.
-- `ghidra`: 4 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
+- `ghidra`: 4 | first: `power.control.allow-system-required-power-requests` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static reverse-engineering for exact leaf-level proof.
 - `runtime-trace`: 7 | first: `system.kernel.global-timer-resolution-requests` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
 - `intentional-hold`: 6 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
 - `power.control.power-request-override-subtree` (`restore-story`, score=37, blockers=3)
-- `power.control.allow-system-required-power-requests` (`ghidra`, score=33, blockers=2)
+- `power.control.allow-system-required-power-requests` (`ghidra`, score=34, blockers=1)
 - `power.session-watchdog-timeouts` (`ghidra`, score=33, blockers=2)
 - `power.control.allow-audio-to-enable-execution-required-power-requests` (`ghidra`, score=32, blockers=3)
 - `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
@@ -51,14 +51,14 @@ Blocked candidates: `18`
 
 - Lane: `ghidra`
 - Actionability: `active`
-- Priority score: `33`
+- Priority score: `34`
 - Feature area: `Control Power Requests`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
 - Value name: `AllowSystemRequiredPowerRequests`
-- Blockers: `system-execution-required-no-current-build-registry-seeding-path`, `system-execution-required-wpr-boot-no-hit-current-build`
+- Blockers: `system-execution-required-no-current-build-registry-seeding-path`
 - Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
 - Suggested command: `winopt research show-blocked power.control.allow-system-required-power-requests --json`
-- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
+- Next action hint: Continue static reverse-engineering for exact leaf-level proof.
 
 ### `power.session-watchdog-timeouts`
 
