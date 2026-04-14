@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T07:13:20.176186Z`
+Generated: `2026-04-14T07:15:42.162434Z`
 
 Blocked candidates: `18`
 
@@ -11,7 +11,7 @@ Blocked candidates: `18`
 
 ## Lane Summary
 
-- `ghidra`: 2 | first: `power.session-watchdog-timeouts` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static RE or Ghidra work until the exact reader or initializer is named.
+- `ghidra`: 2 | first: `power.session-watchdog-timeouts` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Continue static reverse-engineering for exact leaf-level proof.
 - `runtime-trace`: 6 | first: `power.control.win32k-callout-watchdog-timeout-seconds` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Retry runtime capture with a narrower trigger or a more reliable trace lane.
 - `intentional-hold`: 10 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
@@ -41,10 +41,10 @@ Blocked candidates: `18`
 - Feature area: `Directed Power Watchdog Timeouts`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power`
 - Value name: `WatchdogResumeTimeout / WatchdogSleepTimeout`
-- Blockers: `power-session-watchdog-timeouts-no-current-build-exact-registry-read`, `power-session-watchdog-timeouts-no-current-build-watchdog-specific-caller`
+- Blockers: `power-session-watchdog-timeouts-no-current-build-exact-registry-read`, `power-session-watchdog-timeouts-no-current-build-registry-seeding-caller`
 - Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
 - Suggested command: `winopt research show-blocked power.session-watchdog-timeouts --json`
-- Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
+- Next action hint: Continue static reverse-engineering for exact leaf-level proof.
 
 ### `system.kernel-dpc-watchdog-profile-cluster`
 

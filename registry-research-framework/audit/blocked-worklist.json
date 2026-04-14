@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T07:13:20.176186Z",
+  "generated_at": "2026-04-14T07:15:42.162434Z",
   "blocked_count": 18,
   "lane_counts": {
     "ghidra": 2,
@@ -24,7 +24,7 @@
     "ghidra": {
       "candidate_id": "power.session-watchdog-timeouts",
       "suggested_command": "winopt research show-blocked power.session-watchdog-timeouts --json",
-      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+      "next_action_hint": "Continue static reverse-engineering for exact leaf-level proof."
     },
     "runtime-trace": {
       "candidate_id": "power.control.win32k-callout-watchdog-timeout-seconds",
@@ -61,7 +61,7 @@
       "blocker_count": 2,
       "promotion_blockers": [
         "power-session-watchdog-timeouts-no-current-build-exact-registry-read",
-        "power-session-watchdog-timeouts-no-current-build-watchdog-specific-caller"
+        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
@@ -71,7 +71,7 @@
         "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
       ],
       "suggested_command": "winopt research show-blocked power.session-watchdog-timeouts --json",
-      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+      "next_action_hint": "Continue static reverse-engineering for exact leaf-level proof."
     },
     {
       "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
