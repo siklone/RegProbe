@@ -14,6 +14,7 @@ param(
     [string]$SymbolRoot = '',
     [string]$OutputRoot = '',
     [string]$UploadBaseUrl = '',
+    [string[]]$ModuleOffsets = @(),
     [switch]$SkipSymchk,
     [switch]$NoAnalysis
 )
@@ -161,7 +162,17 @@ if ($NoAnalysis) {
 
 $ghidraArgs += @(
     '-postScript', 'ExportBranchAnalysis.java', $markdownPath, $evidencePath, $OutputName, $SymbolRoot
-) + $Patterns + @(
+)
+
+foreach ($pattern in $Patterns) {
+    $ghidraArgs += @('--pattern', $pattern)
+}
+
+foreach ($moduleOffset in $ModuleOffsets) {
+    $ghidraArgs += @('--module-offset', $moduleOffset)
+}
+
+$ghidraArgs += @(
     '-deleteProject'
 )
 
@@ -201,6 +212,7 @@ $result = [ordered]@{
     staged_pdb_sample = $stagedPdbSample
     ghidra_exit_code = $ghidraExit
     no_analysis = [bool]$NoAnalysis
+    module_offsets = $ModuleOffsets
     pdb_loaded = [bool]$evidence.pdb_loaded
     match_count = @($evidence.matches).Count
     uploads = $uploads

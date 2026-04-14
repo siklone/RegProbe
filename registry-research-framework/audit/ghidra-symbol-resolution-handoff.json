@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T00:37:03.423539Z",
+  "generated_utc": "2026-04-14T00:39:53.766601Z",
   "batch_path": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
   "run_path": "registry-research-framework/queue/ghidra-symbol-resolution-run.json",
   "handoff_status": "ready",
@@ -37,7 +37,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-07-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-07-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x327B4D",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-07-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
@@ -56,7 +56,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-08-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-08-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x3ED794",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-08-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
@@ -75,7 +75,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-09-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-09-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x3EDD84",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-09-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
@@ -94,7 +94,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-10-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-10-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x6BE358",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-10-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
@@ -113,7 +113,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-11-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-11-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0x87108C",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-11-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
@@ -132,7 +132,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-12-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-12-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset ntoskrnl.exe+0xAE49F6",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-12-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
@@ -151,7 +151,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-13-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-13-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset reg.exe+0x128B",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-13-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
@@ -170,7 +170,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-14-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-14-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset reg.exe+0x379D",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-14-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
@@ -189,7 +189,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-15-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-15-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset reg.exe+0x65C6",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-15-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],
@@ -208,7 +208,7 @@
       "patterns": [
         "AllowSystemRequiredPowerRequests"
       ],
-      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-16-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-16-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests --module-offset reg.exe+0x6775",
       "output_dir": "evidence/files/ghidra/ghidra-symbolized-16-power-control-allow-system-required-power-requests",
       "missing_inputs": [],
       "missing_host_tools": [],

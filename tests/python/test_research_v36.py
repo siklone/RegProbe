@@ -2626,6 +2626,9 @@ class GhidraSymbolResolutionBatchTests(unittest.TestCase):
             batch["jobs"][0]["command_argv"][:3],
             ["python3", "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py", "--binary-path"],
         )
+        self.assertIn("--module-offset", batch["jobs"][0]["command_argv"])
+        self.assertIn("ntoskrnl.exe+0x1F234", batch["jobs"][0]["command_argv"])
+        self.assertEqual(batch["jobs"][0]["module_offsets"], ["ntoskrnl.exe+0x1F234"])
 
     def test_symbol_resolution_batch_marks_missing_inputs(self) -> None:
         queue_payload = {

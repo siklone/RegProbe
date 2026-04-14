@@ -34,6 +34,7 @@ public class ExportBranchAnalysis extends GhidraScript {
     };
 
     private static final class MatchEvidence {
+        String matchKind;
         String pattern;
         String address;
         String functionName;
@@ -60,8 +61,8 @@ public class ExportBranchAnalysis extends GhidraScript {
     @Override
     public void run() throws Exception {
         String[] args = getScriptArgs();
-        if (args.length < 5) {
-            println("Usage: ExportBranchAnalysis <markdown-path> <evidence-json-path> <probe-name> <pdb-source> <pattern-1> [pattern-2] [...]");
+        if (args.length < 4) {
+            println("Usage: ExportBranchAnalysis <markdown-path> <evidence-json-path> <probe-name> <pdb-source> [--pattern <pattern>] [--module-offset <module+0xoffset>] [...]");
             return;
         }
 
@@ -69,7 +70,23 @@ public class ExportBranchAnalysis extends GhidraScript {
         File evidenceFile = new File(args[1]);
         String probeName = args[2];
         String pdbSource = args[3];
-        List<String> patterns = Arrays.asList(Arrays.copyOfRange(args, 4, args.length));
+        List<String> patterns = new ArrayList<>();
+        List<String> moduleOffsets = new ArrayList<>();
+        for (int i = 4; i < args.length; i++) {
+            String token = args[i] == null ? "" : args[i].trim();
+            if (token.isEmpty()) {
+                continue;
+            }
+            if ("--pattern".equals(token) && i + 1 < args.length) {
+                patterns.add(args[++i]);
+                continue;
+            }
+            if ("--module-offset".equals(token) && i + 1 < args.length) {
+                moduleOffsets.add(args[++i]);
+                continue;
+            }
+            patterns.add(token);
+        }
 
         markdownFile.getParentFile().mkdirs();
         evidenceFile.getParentFile().mkdirs();
@@ -86,7 +103,29 @@ public class ExportBranchAnalysis extends GhidraScript {
             writer.printf("- Probe: `%s`%n", probeName);
             writer.printf("- Timestamp: `%s`%n", timestamp);
             writer.printf("- PDB source: `%s`%n", escapeInline(pdbSource));
-            writer.printf("- Patterns: `%s`%n%n", String.join("`, `", patterns));
+            writer.printf("- Patterns: `%s`%n", String.join("`, `", patterns));
+            writer.printf("- Module offsets: `%s`%n%n", String.join("`, `", moduleOffsets));
+
+            for (String rawModuleOffset : moduleOffsets) {
+                String moduleOffset = rawModuleOffset == null ? "" : rawModuleOffset.trim();
+                if (moduleOffset.isEmpty()) {
+                    continue;
+                }
+
+                writer.printf("## Caller stack frame `%s`%n%n", escapeInline(moduleOffset));
+                Address frameAddress = addressFromModuleOffset(moduleOffset);
+                if (frameAddress == null) {
+                    writer.printf("_Unable to map module offset into the imported program image._%n%n");
+                    continue;
+                }
+
+                MatchEvidence evidence = buildEvidence(listing, frameAddress, moduleOffset, "caller_stack_frame");
+                matches.add(evidence);
+                if ("pdb-symbol".equals(evidence.functionSource)) {
+                    pdbLoaded = true;
+                }
+                writeMatchMarkdown(writer, evidence);
+            }
 
             for (String rawPattern : patterns) {
                 String pattern = rawPattern == null ? "" : rawPattern.trim();
@@ -123,29 +162,13 @@ public class ExportBranchAnalysis extends GhidraScript {
                     int emittedRefs = 0;
                     while (refs.hasNext() && emittedRefs < MAX_REFERENCES_PER_STRING) {
                         Reference ref = refs.next();
-                        MatchEvidence evidence = buildEvidence(listing, ref.getFromAddress(), pattern);
+                        MatchEvidence evidence = buildEvidence(listing, ref.getFromAddress(), pattern, "registry_string_xref");
                         matches.add(evidence);
                         if ("pdb-symbol".equals(evidence.functionSource)) {
                             pdbLoaded = true;
                         }
 
-                        writer.printf("- Function: `%s`%n", escapeInline(evidence.functionName));
-                        writer.printf("- Function source: `%s`%n", evidence.functionSource);
-                        writer.printf("- Function confidence: `%s`%n", evidence.functionConfidence);
-                        writer.printf("- Address: `%s`%n", evidence.address);
-                        writer.printf("- Register focus: `%s`%n", String.join("`, `", evidence.registerFocus));
-                        writer.printf("- Flag focus: `%s`%n", String.join("`, `", evidence.flagFocus));
-                        writer.printf("- Compare: `%s`%n", escapeInline(evidence.compareCondition));
-                        writer.printf("- Jump: `%s`%n", escapeInline(evidence.jumpCondition));
-                        writer.printf("- Value mapping: `%s`%n", escapeInline(evidence.valueMap));
-                        writer.printf("- Branch effect: `%s`%n", escapeInline(evidence.branchEffect));
-                        writer.printf("- Stack note: `%s`%n", escapeInline(evidence.stackSummary));
-                        writer.printf("- Exception gate: `%s`%n", escapeInline(evidence.exceptionReason));
-                        writer.printf("- Heuristic score: `%d`%n", evidence.heuristicScore);
-                        writer.printf("- Heuristic reasons: `%s`%n", String.join(" | ", evidence.heuristicReasons));
-                        writer.printf("- Effect: %s%n", escapeInline(evidence.effectSummary));
-                        writer.printf("- Unclear: `%s`%n%n", evidence.unclear);
-                        writer.printf("```asm%n%s%n```%n%n", renderContext(evidence));
+                        writeMatchMarkdown(writer, evidence);
                         emittedRefs++;
                     }
 
@@ -164,8 +187,46 @@ public class ExportBranchAnalysis extends GhidraScript {
         writeEvidenceJson(evidenceFile, currentProgram.getName(), probeName, timestamp, pdbSource, pdbLoaded, matches);
     }
 
-    private MatchEvidence buildEvidence(Listing listing, Address referenceAddress, String pattern) {
+    private Address addressFromModuleOffset(String moduleOffset) {
+        String text = moduleOffset == null ? "" : moduleOffset.trim();
+        int plus = text.toLowerCase(Locale.ROOT).lastIndexOf("+0x");
+        if (plus < 0) {
+            return null;
+        }
+        String offsetText = text.substring(plus + 1);
+        try {
+            long offset = Long.decode(offsetText);
+            return currentProgram.getImageBase().add(offset);
+        }
+        catch (Exception ex) {
+            return null;
+        }
+    }
+
+    private void writeMatchMarkdown(PrintWriter writer, MatchEvidence evidence) {
+        writer.printf("- Match kind: `%s`%n", escapeInline(evidence.matchKind));
+        writer.printf("- Function: `%s`%n", escapeInline(evidence.functionName));
+        writer.printf("- Function source: `%s`%n", evidence.functionSource);
+        writer.printf("- Function confidence: `%s`%n", evidence.functionConfidence);
+        writer.printf("- Address: `%s`%n", evidence.address);
+        writer.printf("- Register focus: `%s`%n", String.join("`, `", evidence.registerFocus));
+        writer.printf("- Flag focus: `%s`%n", String.join("`, `", evidence.flagFocus));
+        writer.printf("- Compare: `%s`%n", escapeInline(evidence.compareCondition));
+        writer.printf("- Jump: `%s`%n", escapeInline(evidence.jumpCondition));
+        writer.printf("- Value mapping: `%s`%n", escapeInline(evidence.valueMap));
+        writer.printf("- Branch effect: `%s`%n", escapeInline(evidence.branchEffect));
+        writer.printf("- Stack note: `%s`%n", escapeInline(evidence.stackSummary));
+        writer.printf("- Exception gate: `%s`%n", escapeInline(evidence.exceptionReason));
+        writer.printf("- Heuristic score: `%d`%n", evidence.heuristicScore);
+        writer.printf("- Heuristic reasons: `%s`%n", String.join(" | ", evidence.heuristicReasons));
+        writer.printf("- Effect: %s%n", escapeInline(evidence.effectSummary));
+        writer.printf("- Unclear: `%s`%n%n", evidence.unclear);
+        writer.printf("```asm%n%s%n```%n%n", renderContext(evidence));
+    }
+
+    private MatchEvidence buildEvidence(Listing listing, Address referenceAddress, String pattern, String matchKind) {
         MatchEvidence evidence = new MatchEvidence();
+        evidence.matchKind = matchKind;
         evidence.pattern = pattern;
         evidence.address = referenceAddress.toString();
 
@@ -575,6 +636,7 @@ public class ExportBranchAnalysis extends GhidraScript {
             for (int i = 0; i < matches.size(); i++) {
                 MatchEvidence match = matches.get(i);
                 writer.println("    {");
+                writer.printf("      \"match_kind\": \"%s\",%n", escapeJson(match.matchKind));
                 writer.printf("      \"pattern\": \"%s\",%n", escapeJson(match.pattern));
                 writer.printf("      \"address\": \"%s\",%n", escapeJson(match.address));
                 writer.printf("      \"function_name\": \"%s\",%n", escapeJson(match.functionName));

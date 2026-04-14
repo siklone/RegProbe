@@ -38,6 +38,7 @@ def main() -> int:
     parser.add_argument("--binary-path", required=True)
     parser.add_argument("--output-name", required=True)
     parser.add_argument("--pattern", action="append", default=[])
+    parser.add_argument("--module-offset", action="append", default=[])
     parser.add_argument("--no-analysis", action="store_true")
     parser.add_argument("--skip-symchk", action="store_true")
     args = parser.parse_args()
@@ -114,6 +115,7 @@ def main() -> int:
         "    generated_utc = [DateTime]::UtcNow.ToString('o')",
         f"    output_name = {quote_ps(args.output_name)}",
         f"    binary_path = {quote_ps(args.binary_path)}",
+        f"    module_offsets = @({quote_ps_array(args.module_offset)})",
         "    status = 'starting'",
         "    stage = 'bootstrap'",
         "    wrapper_summary_exists = $false",
@@ -156,6 +158,8 @@ def main() -> int:
         "-Patterns",
         f"@({quote_ps_array(args.pattern)})",
     ]
+    if args.module_offset:
+        probe_command.extend(["-ModuleOffsets", f"@({quote_ps_array(args.module_offset)})"])
     if args.no_analysis:
         probe_command.append("-NoAnalysis")
     if args.skip_symchk:

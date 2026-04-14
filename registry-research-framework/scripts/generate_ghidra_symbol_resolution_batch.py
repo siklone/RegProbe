@@ -60,7 +60,13 @@ def host_tool_status(tool_names: tuple[str, ...] = REQUIRED_HOST_TOOLS) -> dict[
     }
 
 
-def build_command_argv(guest_binary_path: str | None, output_name: str, patterns: list[str]) -> list[str] | None:
+def build_command_argv(
+    guest_binary_path: str | None,
+    output_name: str,
+    patterns: list[str],
+    *,
+    module_offsets: list[str] | None = None,
+) -> list[str] | None:
     if not guest_binary_path or not patterns:
         return None
     argv = [
@@ -73,6 +79,8 @@ def build_command_argv(guest_binary_path: str | None, output_name: str, patterns
     ]
     for pattern in patterns:
         argv.extend(["--pattern", pattern])
+    for module_offset in module_offsets or []:
+        argv.extend(["--module-offset", module_offset])
     return argv
 
 
@@ -126,7 +134,17 @@ def symbol_resolution_batch_from_queue(
             missing_inputs.append("module_base")
         for item in missing_inputs:
             missing_input_counts[item] += 1
-        command_argv = None if missing_inputs else build_command_argv(guest_binary_path, output_name, patterns)
+        module_offsets = [
+            str(frame).strip()
+            for frame in (request.get("frame_variants") or [])
+            if str(frame).strip() and str(request.get("resolution_kind") or "") == "module_offset"
+        ]
+        command_argv = None if missing_inputs else build_command_argv(
+            guest_binary_path,
+            output_name,
+            patterns,
+            module_offsets=module_offsets,
+        )
         can_run_guest_orchestrator = not missing_inputs and not missing_host_tools and isinstance(command_argv, list)
         if (missing_inputs or missing_host_tools) and len(blocked_examples) < 10:
             blocked_examples.append(
@@ -154,6 +172,7 @@ def symbol_resolution_batch_from_queue(
                 "guest_binary_path": guest_binary_path,
                 "patterns": patterns,
                 "frame_variants": request.get("frame_variants") or [],
+                "module_offsets": module_offsets,
                 "next_action_hint": request.get("next_action_hint"),
                 "required_host_tools": list(REQUIRED_HOST_TOOLS),
                 "missing_host_tools": missing_host_tools,
