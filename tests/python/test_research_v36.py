@@ -2804,6 +2804,59 @@ class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
         self.assertEqual(plan["jobs"][0]["request_id"], "request-1")
         self.assertEqual(plan["blocked_jobs"][0]["request_id"], "request-2")
 
+    def test_symbol_resolution_run_plan_skips_completed_jobs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            completed_output_dir = Path(tmpdir) / "completed-job"
+            completed_output_dir.mkdir(parents=True, exist_ok=True)
+            (completed_output_dir / "run-summary.json").write_text(
+                json.dumps(
+                    {
+                        "status": "ok",
+                        "ghidra_exit_code": 0,
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            payload = {
+                "jobs": [
+                    {
+                        "job_id": "job-1",
+                        "request_id": "request-1",
+                        "priority_rank": 1,
+                        "candidate_count": 1,
+                        "occurrence_count": 2,
+                        "dispatch_status": "prepared",
+                        "can_run_guest_orchestrator": True,
+                        "command_argv": ["python3", "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py"],
+                        "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+                        "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+                        "output_dir": str(completed_output_dir),
+                    },
+                    {
+                        "job_id": "job-2",
+                        "request_id": "request-2",
+                        "priority_rank": 2,
+                        "candidate_count": 1,
+                        "occurrence_count": 1,
+                        "dispatch_status": "prepared",
+                        "can_run_guest_orchestrator": True,
+                        "command_argv": ["python3", "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py"],
+                        "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+                        "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+                        "output_dir": "evidence/files/ghidra/job-2",
+                    },
+                ]
+            }
+
+            plan = ghidra_symbol_runner.build_run_plan(payload, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertEqual(plan["selected_job_count"], 1)
+        self.assertEqual(plan["completed_job_count"], 1)
+        self.assertEqual(plan["blocked_job_count"], 0)
+        self.assertEqual(plan["jobs"][0]["request_id"], "request-2")
+        self.assertEqual(plan["completed_jobs"][0]["request_id"], "request-1")
+
 
 class GhidraSymbolResolutionHandoffTests(unittest.TestCase):
     def test_handoff_payload_summarizes_selected_and_blocked_jobs(self) -> None:

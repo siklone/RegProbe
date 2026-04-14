@@ -29,11 +29,43 @@ def runner_available(required_tools: tuple[str, ...] = REQUIRED_HOST_TOOLS) -> b
     return all(shutil.which(tool) for tool in required_tools)
 
 
+def job_output_completed(job: dict[str, Any]) -> bool:
+    output_dir = str(job.get("output_dir") or "").strip()
+    if not output_dir:
+        return False
+    path = Path(output_dir)
+    if not path.is_absolute():
+        path = REPO_ROOT / path
+    summary_path = path / "run-summary.json"
+    if not summary_path.exists():
+        return False
+    try:
+        payload = load_json(summary_path)
+    except json.JSONDecodeError:
+        return False
+    if str(payload.get("status") or "").strip().lower() == "ok":
+        return True
+    try:
+        return int(payload.get("ghidra_exit_code")) == 0
+    except (TypeError, ValueError):
+        return False
+
+
+def completed_jobs(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    return [
+        job
+        for job in (payload.get("jobs") or [])
+        if isinstance(job, dict) and job_output_completed(job)
+    ]
+
+
 def runnable_jobs(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    completed_ids = {str(job.get("job_id") or "") for job in completed_jobs(payload)}
     jobs = payload.get("jobs") or []
     runnable = [
         job
         for job in jobs
+        if str(job.get("job_id") or "") not in completed_ids
         if job.get("dispatch_status") == "prepared"
         and bool(job.get("can_run_guest_orchestrator"))
         and isinstance(job.get("command_argv"), list)
@@ -51,10 +83,15 @@ def runnable_jobs(payload: dict[str, Any]) -> list[dict[str, Any]]:
 
 def build_run_plan(payload: dict[str, Any], *, limit: int | None = None, generated_utc: str | None = None) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
+    completed = completed_jobs(payload)
+    completed_ids = {str(job.get("job_id") or "") for job in completed if str(job.get("job_id") or "")}
     jobs = runnable_jobs(payload)
     if limit is not None:
         jobs = jobs[:limit]
-    blocked = [job for job in payload.get("jobs") or [] if job not in jobs]
+    blocked = [
+        job for job in payload.get("jobs") or []
+        if job not in jobs and str(job.get("job_id") or "") not in completed_ids
+    ]
     return {
         "schema_version": "1.0",
         "generated_utc": generated_utc,
@@ -63,6 +100,7 @@ def build_run_plan(payload: dict[str, Any], *, limit: int | None = None, generat
         "runner_available": runner_available(),
         "selected_job_count": len(jobs),
         "blocked_job_count": len(blocked),
+        "completed_job_count": len(completed),
         "blocked_jobs": [
             {
                 "job_id": job.get("job_id"),
@@ -71,6 +109,14 @@ def build_run_plan(payload: dict[str, Any], *, limit: int | None = None, generat
                 "missing_host_tools": job.get("missing_host_tools") or [],
             }
             for job in blocked[:10]
+        ],
+        "completed_jobs": [
+            {
+                "job_id": job.get("job_id"),
+                "request_id": job.get("request_id"),
+                "output_dir": job.get("output_dir"),
+            }
+            for job in completed[:10]
         ],
         "jobs": [
             {
@@ -88,6 +134,7 @@ def build_run_plan(payload: dict[str, Any], *, limit: int | None = None, generat
 
 def run_jobs(payload: dict[str, Any], *, limit: int | None = None, generated_utc: str | None = None) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
+    completed = completed_jobs(payload)
     jobs = runnable_jobs(payload)
     if limit is not None:
         jobs = jobs[:limit]
@@ -101,6 +148,7 @@ def run_jobs(payload: dict[str, Any], *, limit: int | None = None, generated_utc
         "runner_available": False,
         "selected_job_count": len(jobs),
         "executed_job_count": 0,
+        "completed_job_count": len(completed),
         "blocked_job_count": int(payload.get("blocked_job_count") or 0),
         "error": "host-kvm-tools-missing",
         "jobs": [],
@@ -129,6 +177,7 @@ def run_jobs(payload: dict[str, Any], *, limit: int | None = None, generated_utc
         "runner_available": True,
         "selected_job_count": len(jobs),
         "executed_job_count": len(result_jobs),
+        "completed_job_count": len(completed),
         "jobs": result_jobs,
     }
 
