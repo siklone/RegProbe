@@ -1,0 +1,41 @@
+{
+  "generated_utc": "2026-04-14T04:13:16.3277460Z",
+  "binary_path": "C:\\Windows\\System32\\kernel32.dll",
+  "output_name": "ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests",
+  "project_name": "Probe_ghidra_symbolized_kernel32_dll_0x2e8d7_power_control_allow_audio_to_enable_execution_required_power_requests",
+  "symbol_root": "C:\\Tools\\Symbols\\ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests",
+  "output_root": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests",
+  "symchk_path": "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+  "symchk_exit_code": 0,
+  "staged_pdb_count": 2,
+  "staged_pdb_sample": [
+    "C:\\Tools\\Symbols\\ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests\\kernel32.pdb",
+    "C:\\Tools\\Symbols\\ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests\\kernel32.pdb\\F7B745DE7A69EF1B7C8BE0C4FDED10A11\\kernel32.pdb"
+  ],
+  "ghidra_exit_code": 0,
+  "no_analysis": false,
+  "module_offsets": [
+    "kernel32.dll+0x2E8D7"
+  ],
+  "pdb_loaded": true,
+  "match_count": 1,
+  "uploads": {
+    "evidence": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests\\evidence.json",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests-evidence.json"
+    },
+    "markdown": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests\\ghidra-matches.md",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests-ghidra-matches.md"
+    },
+    "symchk_log": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests\\symchk.txt",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-kernel32-dll-0x2e8d7-power-control-allow-audio-to-enable-execution-required-power-requests-symchk.txt"
+    }
+  },
+  "status": "ok",
+  "error_kind": "ghidra-symbolized-probe-error",
+  "recovery_action": "inspect-ghidra-symbolized-run",
+  "transport_blocker": "ghidra",
+  "guest_health": "stable"
+}

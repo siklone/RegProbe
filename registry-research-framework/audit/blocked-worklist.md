@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T02:51:21.483262Z`
+Generated: `2026-04-14T04:19:50.921360Z`
 
 Blocked candidates: `18`
 
@@ -20,8 +20,8 @@ Blocked candidates: `18`
 
 - `power.control.power-request-override-subtree` (`restore-story`, score=37, blockers=3)
 - `power.control.allow-system-required-power-requests` (`ghidra`, score=34, blockers=1)
+- `power.control.allow-audio-to-enable-execution-required-power-requests` (`ghidra`, score=33, blockers=2)
 - `power.session-watchdog-timeouts` (`ghidra`, score=33, blockers=2)
-- `power.control.allow-audio-to-enable-execution-required-power-requests` (`ghidra`, score=32, blockers=3)
 - `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
 
 ## Top Holds
@@ -60,6 +60,19 @@ Blocked candidates: `18`
 - Suggested command: `winopt research show-blocked power.control.allow-system-required-power-requests --json`
 - Next action hint: Continue static reverse-engineering for exact leaf-level proof.
 
+### `power.control.allow-audio-to-enable-execution-required-power-requests`
+
+- Lane: `ghidra`
+- Actionability: `active`
+- Priority score: `33`
+- Feature area: `Control Power Requests`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
+- Value name: `AllowAudioToEnableExecutionRequiredPowerRequests`
+- Blockers: `audio-execution-required-no-current-build-registry-seeding-path`, `audio-execution-required-no-primary-current-build-doc`
+- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
+- Suggested command: `winopt research show-blocked power.control.allow-audio-to-enable-execution-required-power-requests --json`
+- Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
+
 ### `power.session-watchdog-timeouts`
 
 - Lane: `ghidra`
@@ -72,19 +85,6 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json`, `registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json`
 - Suggested command: `winopt research show-blocked power.session-watchdog-timeouts --json`
 - Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
-
-### `power.control.allow-audio-to-enable-execution-required-power-requests`
-
-- Lane: `ghidra`
-- Actionability: `active`
-- Priority score: `32`
-- Feature area: `Control Power Requests`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power`
-- Value name: `AllowAudioToEnableExecutionRequiredPowerRequests`
-- Blockers: `audio-execution-required-megatrigger-etw-no-hit-current-build`, `audio-execution-required-no-current-build-registry-seeding-path`, `audio-execution-required-no-primary-current-build-doc`
-- Recent audit artifacts: `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-status-20260403.json`, `registry-research-framework/audit/power-control-windbg-singlekey-allow-system-required-power-requests-20260403.json`, `registry-research-framework/audit/power-control-allow-system-required-wpr-qga-no-hit-20260412.json`
-- Suggested command: `winopt research show-blocked power.control.allow-audio-to-enable-execution-required-power-requests --json`
-- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
 ### `system.kernel-dpc-watchdog-profile-cluster`
 

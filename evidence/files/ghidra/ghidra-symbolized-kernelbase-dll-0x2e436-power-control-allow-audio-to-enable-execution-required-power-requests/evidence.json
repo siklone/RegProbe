@@ -1,0 +1,192 @@
+{
+  "binary": "KernelBase.dll",
+  "probe": "ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests",
+  "timestamp": "2026-04-14T04:11:12.174392600Z",
+  "pdb_source": "C:\\Tools\\Symbols\\ghidra-symbolized-kernelbase-dll-0x2e436-power-control-allow-audio-to-enable-execution-required-power-requests",
+  "pdb_loaded": true,
+  "matches": [
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "KernelBase.dll+0x2E436",
+      "address": "18002e436",
+      "function_name": "RegGetValueW",
+      "function_source": "pdb-symbol",
+      "function_confidence": "string_only_review",
+      "unclear": true,
+      "value_map": "unclear",
+      "compare_condition": "18002e447  CMP R13,RAX",
+      "jump_condition": "unclear",
+      "branch_effect": "comparison recovered, but nearby jump condition is still unclear.",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 50,
+      "effect_summary": "unclear - keep this as review-only until a PDB-backed branch mapping is available.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare/test anchor found",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "RDI",
+        "R13",
+        "RSP",
+        "R14",
+        "R12",
+        "ECX",
+        "RAX",
+        "EAX",
+        "EBX",
+        "EDX"
+      ],
+      "flag_focus": [
+        "ZF",
+        "CF",
+        "SF",
+        "OF"
+      ],
+      "context_before": [
+        "18002e420  CMOVNZ R13,RDI",
+        "18002e424  XOR R8D,R8D",
+        "18002e427  MOV qword ptr [RSP + 0x28],R13",
+        "18002e42c  MOV qword ptr [RSP + 0x20],R14",
+        "18002e431  CALL 0x18002ecb0"
+      ],
+      "branch_snippet": [
+        "18002e436  MOV ECX,dword ptr [R12]",
+        "18002e447  CMP R13,RAX",
+        "18002e420  CMOVNZ R13,RDI"
+      ],
+      "context_after": [
+        "18002e43a  XOR R11D,R11D",
+        "18002e43d  MOV EBX,EAX",
+        "18002e43f  MOV EDX,R11D",
+        "18002e442  LEA RAX,[RSP + 0x44]",
+        "18002e447  CMP R13,RAX"
+      ]
+    },
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "KernelBase.dll+0x2EDAB",
+      "address": "18002edab",
+      "function_name": "RegQueryValueExW",
+      "function_source": "pdb-symbol",
+      "function_confidence": "symbolized_branch",
+      "unclear": false,
+      "value_map": "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "18002edb5  TEST ESI,ESI",
+      "jump_condition": "18002edb7  JZ 0x18002ee03",
+      "branch_effect": "compare + conditional jump recovered in bounded context.",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 95,
+      "effect_summary": "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare+jump survived bounded symbolized review",
+        "compare/test anchor found",
+        "conditional jump found",
+        "value immediate found in bounded block",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "RDI",
+        "R9",
+        "RSP",
+        "R8",
+        "RDX",
+        "RCX",
+        "R13",
+        "EAX",
+        "ESI",
+        "R15",
+        "EDX"
+      ],
+      "flag_focus": [
+        "ZF"
+      ],
+      "context_before": [
+        "18002ed96  MOV R9,RDI",
+        "18002ed99  LEA R8,[RSP + 0x30]",
+        "18002ed9e  LEA RDX,[RSP + 0x58]",
+        "18002eda3  MOV RCX,R13",
+        "18002eda6  CALL 0x180030940"
+      ],
+      "branch_snippet": [
+        "18002edab  MOV ESI,EAX",
+        "18002edb5  TEST ESI,ESI",
+        "18002edb7  JZ 0x18002ee03",
+        "18002edbd  TEST R15,R15"
+      ],
+      "context_after": [
+        "18002edad  MOV R8D,dword ptr [RSP + 0xc0]",
+        "18002edb5  TEST ESI,ESI",
+        "18002edb7  JZ 0x18002ee03",
+        "18002edb9  MOV EDX,dword ptr [RSP + 0x30]",
+        "18002edbd  TEST R15,R15"
+      ]
+    },
+    {
+      "match_kind": "caller_stack_frame",
+      "pattern": "KernelBase.dll+0x30AAD",
+      "address": "180030aad",
+      "function_name": "BaseRegQueryValueInternal",
+      "function_source": "pdb-symbol",
+      "function_confidence": "symbolized_branch",
+      "unclear": false,
+      "value_map": "value=1 participates in this conditional block; opposite branch still needs explicit review.",
+      "compare_condition": "180030ab4  TEST R13,R13",
+      "jump_condition": "180030ab7  JNZ 0x180030d62",
+      "branch_effect": "compare + conditional jump recovered in bounded context.",
+      "stack_summary": "stack-relative access is visible in the bounded context; review local variables and home-space assumptions before claiming semantics.",
+      "exception_review_required": false,
+      "exception_reason": "none",
+      "heuristic_score": 95,
+      "effect_summary": "PDB-backed function identity, compare/jump structure, and a bounded value map are present.",
+      "heuristic_reasons": [
+        "pdb-symbol present",
+        "compare+jump survived bounded symbolized review",
+        "compare/test anchor found",
+        "conditional jump found",
+        "value immediate found in bounded block",
+        "stack-relative context detected"
+      ],
+      "register_focus": [
+        "RAX",
+        "RSP",
+        "RDX",
+        "RSI",
+        "RCX",
+        "RDI",
+        "R13",
+        "EAX",
+        "EBX",
+        "RBP",
+        "R14"
+      ],
+      "flag_focus": [
+        "ZF"
+      ],
+      "context_before": [
+        "180030a96  MOV qword ptr [RSP + 0x28],RAX",
+        "180030a9b  MOV RDX,RSI",
+        "180030a9e  MOV RCX,RDI",
+        "180030aa1  MOV dword ptr [RSP + 0x20],R14D",
+        "180030aa6  CALL qword ptr [0x1802909a8]"
+      ],
+      "branch_snippet": [
+        "180030aad  NOP dword ptr [RAX + RAX*0x1]",
+        "180030ab4  TEST R13,R13",
+        "180030ab7  JNZ 0x180030d62"
+      ],
+      "context_after": [
+        "180030ab2  MOV EBX,EAX",
+        "180030ab4  TEST R13,R13",
+        "180030ab7  JNZ 0x180030d62",
+        "180030abd  MOV RDI,qword ptr [RBP + -0x68]",
+        "180030ac1  LEA R14,[RBP + -0x40]"
+      ]
+    }
+  ]
+}
