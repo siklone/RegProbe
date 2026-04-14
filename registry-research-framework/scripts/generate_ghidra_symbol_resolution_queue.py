@@ -62,6 +62,7 @@ def parse_actionable_frame(frame: Any, *, target_binary: Any = None) -> tuple[di
     if resolution_kind == "module_offset":
         module_name, raw_offset = text.split("+0x", 1)
         module_name = module_name.strip() or binary_hint
+        binary_hint = module_name or binary_hint
         offset_hex = normalize_hex(raw_offset)
         lookup_key = f"{module_name}+{offset_hex}" if module_name else offset_hex
     elif resolution_kind == "raw_address":

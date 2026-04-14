@@ -2932,6 +2932,98 @@ def _parse_etw_numeric(value: Any) -> int | None:
         return None
 
 
+def _hex_or_none(value: int | None) -> str | None:
+    if value is None:
+        return None
+    return f"0x{value:X}"
+
+
+def _module_name_from_image_path(value: Any) -> str | None:
+    text = str(value or "").strip().replace("/", "\\")
+    if not text:
+        return None
+    return text.rsplit("\\", 1)[-1].strip() or None
+
+
+def extract_etw_module_map_from_tracerpt_xml(xml_path: Path) -> list[dict[str, Any]]:
+    if not xml_path.exists():
+        return []
+
+    try:
+        iterator = ET.iterparse(xml_path, events=("end",))
+    except ET.ParseError:
+        return []
+
+    modules: list[dict[str, Any]] = []
+    seen: set[tuple[int, int, str, str]] = set()
+
+    for _, event in iterator:
+        if _xml_local_name(event.tag).lower() != "event":
+            continue
+
+        rendering_event_name = ""
+        rendering_opcode = ""
+        event_data: dict[str, str] = {}
+
+        for child in event:
+            tag = _xml_local_name(child.tag).lower()
+            if tag == "eventdata":
+                for data_child in child:
+                    if _xml_local_name(data_child.tag).lower() != "data":
+                        continue
+                    name = str(data_child.attrib.get("Name") or "").strip()
+                    if name:
+                        event_data[name] = _xml_text_or_attribute(data_child)
+            elif tag == "renderinginfo":
+                for rendering_child in child:
+                    rendering_tag = _xml_local_name(rendering_child.tag).lower()
+                    if rendering_tag == "eventname":
+                        rendering_event_name = _xml_text_or_attribute(rendering_child) or rendering_event_name
+                    elif rendering_tag == "opcode":
+                        rendering_opcode = _xml_text_or_attribute(rendering_child) or rendering_opcode
+
+        if rendering_event_name.strip().lower() != "image":
+            event.clear()
+            continue
+
+        image_base = _parse_etw_numeric(event_data.get("ImageBase"))
+        image_size = _parse_etw_numeric(event_data.get("ImageSize"))
+        image_path = str(event_data.get("FileName") or "").strip()
+        module_name = _module_name_from_image_path(image_path)
+        if image_base is None or image_size is None or image_size <= 0 or not module_name:
+            event.clear()
+            continue
+
+        process_id = str(event_data.get("ProcessId") or "").strip()
+        key = (image_base, image_size, module_name.lower(), process_id)
+        if key in seen:
+            event.clear()
+            continue
+        seen.add(key)
+
+        modules.append(
+            {
+                "module_name": module_name,
+                "image_path": image_path,
+                "image_base": _hex_or_none(image_base),
+                "image_size": _hex_or_none(image_size),
+                "image_end": _hex_or_none(image_base + image_size),
+                "process_id": process_id or None,
+                "opcode": rendering_opcode or None,
+            }
+        )
+        event.clear()
+
+    return sorted(
+        modules,
+        key=lambda item: (
+            int(str(item.get("image_base") or "0"), 16),
+            str(item.get("module_name") or "").lower(),
+            str(item.get("process_id") or ""),
+        ),
+    )
+
+
 def _stackwalk_frames_from_event_data(event_data: dict[str, str]) -> list[str]:
     indexed_frames: list[tuple[int, str]] = []
     for name, value in event_data.items():
@@ -3483,6 +3575,8 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
         output["xml_output"] = normalize_repo_relative_path(str(xml_sidecar_path.relative_to(REPO_ROOT)))
         output["registry_touches"] = extract_registry_touches_from_tracerpt_xml(xml_sidecar_path, provider_guid=provider_guid)
         output["normalized_touch_count"] = len(output["registry_touches"])
+        output["module_map"] = extract_etw_module_map_from_tracerpt_xml(xml_sidecar_path)
+        output["module_map_count"] = len(output["module_map"])
         return output
 
     def use_existing_touch_sidecar(note: str) -> dict[str, Any]:
@@ -3519,4 +3613,6 @@ def parse_etl_registry_touches(etl_path: Path, parser: str = "tracerpt", provide
     output["xml_output"] = normalize_repo_relative_path(str(xml_output.relative_to(REPO_ROOT)))
     output["registry_touches"] = extract_registry_touches_from_tracerpt_xml(xml_output, provider_guid=provider_guid)
     output["normalized_touch_count"] = len(output["registry_touches"])
+    output["module_map"] = extract_etw_module_map_from_tracerpt_xml(xml_output)
+    output["module_map_count"] = len(output["module_map"])
     return output

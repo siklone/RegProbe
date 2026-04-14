@@ -131,6 +131,32 @@ def frame_resolution_kind(frame: Any) -> str:
     return "plain_text"
 
 
+def parse_hex_address(value: Any) -> int | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    try:
+        return int(text, 0)
+    except ValueError:
+        return None
+
+
+def resolve_raw_frame_with_module_map(frame: Any, module_map: list[dict[str, Any]]) -> str | None:
+    address = parse_hex_address(frame)
+    if address is None:
+        return None
+
+    for module in module_map:
+        image_base = parse_hex_address(module.get("image_base"))
+        image_end = parse_hex_address(module.get("image_end"))
+        module_name = str(module.get("module_name") or "").strip()
+        if image_base is None or image_end is None or not module_name:
+            continue
+        if image_base <= address < image_end:
+            return f"{module_name}+0x{address - image_base:X}"
+    return None
+
+
 def event_matches_job(event: dict[str, Any], job: dict[str, Any]) -> bool:
     if normalize_registry_path(event.get("key_path")) != normalize_registry_path(job.get("key_path")):
         return False
@@ -160,6 +186,7 @@ def autotrigger_seeds_from_bundle(
     seeds: list[dict[str, Any]] = []
     seen: set[tuple[str, str, str, str]] = set()
     events = bundle.get("events") or []
+    module_map = bundle.get("module_map") or []
     source_fields = ((bundle.get("stack_capture") or {}).get("source_fields")) or []
 
     for index, event in enumerate(events, start=1):
@@ -167,8 +194,27 @@ def autotrigger_seeds_from_bundle(
         if not frames:
             continue
 
-        frame_details = [{"frame": frame, "resolution_kind": frame_resolution_kind(frame)} for frame in frames]
-        unresolved_frames = [item["frame"] for item in frame_details if item["resolution_kind"] != "resolved_symbol"]
+        frame_details = []
+        for frame in frames:
+            resolution_kind = frame_resolution_kind(frame)
+            detail: dict[str, Any] = {
+                "frame": frame,
+                "resolution_kind": resolution_kind,
+            }
+            if resolution_kind == "raw_address":
+                resolved_frame = resolve_raw_frame_with_module_map(frame, module_map)
+                if resolved_frame:
+                    detail["resolved_frame"] = resolved_frame
+                    detail["resolution_kind"] = "module_offset"
+                    detail["resolution_source"] = "module_map"
+            frame_details.append(detail)
+
+        unresolved_frames = [
+            str(item.get("resolved_frame") or item.get("frame") or "").strip()
+            for item in frame_details
+            if item["resolution_kind"] != "resolved_symbol"
+        ]
+        unresolved_frames = [frame for frame in unresolved_frames if frame]
         if not unresolved_frames:
             continue
 
@@ -208,6 +254,7 @@ def autotrigger_seeds_from_bundle(
                 "value_name": event.get("value_name"),
                 "operation": event.get("operation"),
                 "target_binary": target_binary,
+                "module_map_count": len(module_map),
                 "suggested_patterns": suggested_patterns_for_event(event, job),
                 "resolved_frames": resolved_frames,
                 "unresolved_frames": unresolved_frames,

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T00:12:13.092978Z",
+  "generated_utc": "2026-04-14T00:37:03.421209Z",
   "source_seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
   "request_count": 16,
   "diagnostics": {
@@ -9,16 +9,16 @@
   },
   "requests": [
     {
-      "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
+      "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 1,
-      "lookup_key": "ntoskrnl.exe@0x7ff74fcf128b",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff74fcf128b",
+      "lookup_key": "KernelBase.dll+0x2e436",
+      "resolution_kind": "module_offset",
+      "module_name": "KernelBase.dll",
+      "target_binary": "KernelBase.dll",
+      "offset_hex": "0x2e436",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -35,7 +35,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF74FCF128B"
+        "KernelBase.dll+0x2E436"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -45,19 +45,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff74fcf128b against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve KernelBase.dll+0x2e436 against KernelBase.dll symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
+      "request_id": "ghidra-symbol-02-kernelbase-dll-0x2edab",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 2,
-      "lookup_key": "ntoskrnl.exe@0x7ff74fcf379d",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff74fcf379d",
+      "lookup_key": "KernelBase.dll+0x2edab",
+      "resolution_kind": "module_offset",
+      "module_name": "KernelBase.dll",
+      "target_binary": "KernelBase.dll",
+      "offset_hex": "0x2edab",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -74,7 +74,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF74FCF379D"
+        "KernelBase.dll+0x2EDAB"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -84,19 +84,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff74fcf379d against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve KernelBase.dll+0x2edab against KernelBase.dll symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
+      "request_id": "ghidra-symbol-03-kernelbase-dll-0x30aad",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 3,
-      "lookup_key": "ntoskrnl.exe@0x7ff74fcf65c6",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff74fcf65c6",
+      "lookup_key": "KernelBase.dll+0x30aad",
+      "resolution_kind": "module_offset",
+      "module_name": "KernelBase.dll",
+      "target_binary": "KernelBase.dll",
+      "offset_hex": "0x30aad",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -113,7 +113,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF74FCF65C6"
+        "KernelBase.dll+0x30AAD"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -123,19 +123,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff74fcf65c6 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve KernelBase.dll+0x30aad against KernelBase.dll symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
+      "request_id": "ghidra-symbol-04-kernel32-dll-0x2e8d7",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 4,
-      "lookup_key": "ntoskrnl.exe@0x7ff74fcf6775",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff74fcf6775",
+      "lookup_key": "kernel32.dll+0x2e8d7",
+      "resolution_kind": "module_offset",
+      "module_name": "kernel32.dll",
+      "target_binary": "kernel32.dll",
+      "offset_hex": "0x2e8d7",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -152,7 +152,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF74FCF6775"
+        "kernel32.dll+0x2E8D7"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -162,19 +162,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff74fcf6775 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve kernel32.dll+0x2e8d7 against kernel32.dll symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
+      "request_id": "ghidra-symbol-05-ntdll-dll-0x161d74",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 5,
-      "lookup_key": "ntoskrnl.exe@0x7ff9a412e436",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff9a412e436",
+      "lookup_key": "ntdll.dll+0x161d74",
+      "resolution_kind": "module_offset",
+      "module_name": "ntdll.dll",
+      "target_binary": "ntdll.dll",
+      "offset_hex": "0x161d74",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -191,7 +191,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF9A412E436"
+        "ntdll.dll+0x161D74"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -201,19 +201,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a412e436 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve ntdll.dll+0x161d74 against ntdll.dll symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
+      "request_id": "ghidra-symbol-06-ntdll-dll-0x8c48c",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 6,
-      "lookup_key": "ntoskrnl.exe@0x7ff9a412edab",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff9a412edab",
+      "lookup_key": "ntdll.dll+0x8c48c",
+      "resolution_kind": "module_offset",
+      "module_name": "ntdll.dll",
+      "target_binary": "ntdll.dll",
+      "offset_hex": "0x8c48c",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -230,7 +230,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF9A412EDAB"
+        "ntdll.dll+0x8C48C"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -240,19 +240,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a412edab against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve ntdll.dll+0x8c48c against ntdll.dll symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
+      "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 7,
-      "lookup_key": "ntoskrnl.exe@0x7ff9a4130aad",
-      "resolution_kind": "raw_address",
+      "lookup_key": "ntoskrnl.exe+0x327b4d",
+      "resolution_kind": "module_offset",
       "module_name": "ntoskrnl.exe",
       "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff9a4130aad",
+      "offset_hex": "0x327b4d",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -269,7 +269,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF9A4130AAD"
+        "ntoskrnl.exe+0x327B4D"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -279,19 +279,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a4130aad against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve ntoskrnl.exe+0x327b4d against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
+      "request_id": "ghidra-symbol-08-ntoskrnl-exe-0x3ed794",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 8,
-      "lookup_key": "ntoskrnl.exe@0x7ff9a5ebe8d7",
-      "resolution_kind": "raw_address",
+      "lookup_key": "ntoskrnl.exe+0x3ed794",
+      "resolution_kind": "module_offset",
       "module_name": "ntoskrnl.exe",
       "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff9a5ebe8d7",
+      "offset_hex": "0x3ed794",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -308,7 +308,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF9A5EBE8D7"
+        "ntoskrnl.exe+0x3ED794"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -318,19 +318,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a5ebe8d7 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve ntoskrnl.exe+0x3ed794 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
+      "request_id": "ghidra-symbol-09-ntoskrnl-exe-0x3edd84",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 9,
-      "lookup_key": "ntoskrnl.exe@0x7ff9a772c48c",
-      "resolution_kind": "raw_address",
+      "lookup_key": "ntoskrnl.exe+0x3edd84",
+      "resolution_kind": "module_offset",
       "module_name": "ntoskrnl.exe",
       "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff9a772c48c",
+      "offset_hex": "0x3edd84",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -347,7 +347,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF9A772C48C"
+        "ntoskrnl.exe+0x3EDD84"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -357,19 +357,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a772c48c against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve ntoskrnl.exe+0x3edd84 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
+      "request_id": "ghidra-symbol-10-ntoskrnl-exe-0x6be358",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 10,
-      "lookup_key": "ntoskrnl.exe@0x7ff9a7801d74",
-      "resolution_kind": "raw_address",
+      "lookup_key": "ntoskrnl.exe+0x6be358",
+      "resolution_kind": "module_offset",
       "module_name": "ntoskrnl.exe",
       "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0x7ff9a7801d74",
+      "offset_hex": "0x6be358",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -386,7 +386,7 @@
         152
       ],
       "frame_variants": [
-        "0x7FF9A7801D74"
+        "ntoskrnl.exe+0x6BE358"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -396,19 +396,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a7801d74 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve ntoskrnl.exe+0x6be358 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-11-ntoskrnl-exe-0xfffff803c3f27b4d",
+      "request_id": "ghidra-symbol-11-ntoskrnl-exe-0x87108c",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 11,
-      "lookup_key": "ntoskrnl.exe@0xfffff803c3f27b4d",
-      "resolution_kind": "raw_address",
+      "lookup_key": "ntoskrnl.exe+0x87108c",
+      "resolution_kind": "module_offset",
       "module_name": "ntoskrnl.exe",
       "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0xfffff803c3f27b4d",
+      "offset_hex": "0x87108c",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -425,7 +425,7 @@
         152
       ],
       "frame_variants": [
-        "0xFFFFF803C3F27B4D"
+        "ntoskrnl.exe+0x87108C"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -435,19 +435,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c3f27b4d against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve ntoskrnl.exe+0x87108c against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-12-ntoskrnl-exe-0xfffff803c3fed794",
+      "request_id": "ghidra-symbol-12-ntoskrnl-exe-0xae49f6",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 12,
-      "lookup_key": "ntoskrnl.exe@0xfffff803c3fed794",
-      "resolution_kind": "raw_address",
+      "lookup_key": "ntoskrnl.exe+0xae49f6",
+      "resolution_kind": "module_offset",
       "module_name": "ntoskrnl.exe",
       "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0xfffff803c3fed794",
+      "offset_hex": "0xae49f6",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -464,7 +464,7 @@
         152
       ],
       "frame_variants": [
-        "0xFFFFF803C3FED794"
+        "ntoskrnl.exe+0xAE49F6"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -474,19 +474,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c3fed794 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve ntoskrnl.exe+0xae49f6 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-13-ntoskrnl-exe-0xfffff803c3fedd84",
+      "request_id": "ghidra-symbol-13-reg-exe-0x128b",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 13,
-      "lookup_key": "ntoskrnl.exe@0xfffff803c3fedd84",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0xfffff803c3fedd84",
+      "lookup_key": "reg.exe+0x128b",
+      "resolution_kind": "module_offset",
+      "module_name": "reg.exe",
+      "target_binary": "reg.exe",
+      "offset_hex": "0x128b",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -503,7 +503,7 @@
         152
       ],
       "frame_variants": [
-        "0xFFFFF803C3FEDD84"
+        "reg.exe+0x128B"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -513,19 +513,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c3fedd84 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve reg.exe+0x128b against reg.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-14-ntoskrnl-exe-0xfffff803c42be358",
+      "request_id": "ghidra-symbol-14-reg-exe-0x379d",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 14,
-      "lookup_key": "ntoskrnl.exe@0xfffff803c42be358",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0xfffff803c42be358",
+      "lookup_key": "reg.exe+0x379d",
+      "resolution_kind": "module_offset",
+      "module_name": "reg.exe",
+      "target_binary": "reg.exe",
+      "offset_hex": "0x379d",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -542,7 +542,7 @@
         152
       ],
       "frame_variants": [
-        "0xFFFFF803C42BE358"
+        "reg.exe+0x379D"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -552,19 +552,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c42be358 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve reg.exe+0x379d against reg.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-15-ntoskrnl-exe-0xfffff803c447108c",
+      "request_id": "ghidra-symbol-15-reg-exe-0x65c6",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 15,
-      "lookup_key": "ntoskrnl.exe@0xfffff803c447108c",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0xfffff803c447108c",
+      "lookup_key": "reg.exe+0x65c6",
+      "resolution_kind": "module_offset",
+      "module_name": "reg.exe",
+      "target_binary": "reg.exe",
+      "offset_hex": "0x65c6",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -581,7 +581,7 @@
         152
       ],
       "frame_variants": [
-        "0xFFFFF803C447108C"
+        "reg.exe+0x65C6"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -591,19 +591,19 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c447108c against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve reg.exe+0x65c6 against reg.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     },
     {
-      "request_id": "ghidra-symbol-16-ntoskrnl-exe-0xfffff803c46e49f6",
+      "request_id": "ghidra-symbol-16-reg-exe-0x6775",
       "status": "queued",
-      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "created_utc": "2026-04-14T00:37:03.421209Z",
       "priority_rank": 16,
-      "lookup_key": "ntoskrnl.exe@0xfffff803c46e49f6",
-      "resolution_kind": "raw_address",
-      "module_name": "ntoskrnl.exe",
-      "target_binary": "ntoskrnl.exe",
-      "offset_hex": null,
-      "address": "0xfffff803c46e49f6",
+      "lookup_key": "reg.exe+0x6775",
+      "resolution_kind": "module_offset",
+      "module_name": "reg.exe",
+      "target_binary": "reg.exe",
+      "offset_hex": "0x6775",
+      "address": null,
       "symbol_hint": null,
       "occurrence_count": 1,
       "candidate_count": 1,
@@ -620,7 +620,7 @@
         152
       ],
       "frame_variants": [
-        "0xFFFFF803C46E49F6"
+        "reg.exe+0x6775"
       ],
       "suggested_patterns": [
         "AllowSystemRequiredPowerRequests"
@@ -630,7 +630,7 @@
         "local-pdb-cache",
         "ghidra-project-symbol-tree"
       ],
-      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c46e49f6 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+      "next_action_hint": "Resolve reg.exe+0x6775 against reg.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
     }
   ]
 }

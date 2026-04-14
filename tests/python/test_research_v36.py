@@ -2412,6 +2412,54 @@ class GhidraAutotriggerTests(unittest.TestCase):
         self.assertEqual(seeds[0]["suggested_patterns"], ["AllowSystemRequiredPowerRequests"])
         self.assertEqual(seeds[0]["trigger"], "caller-stack-unresolved-frame")
 
+    def test_autotrigger_seeds_resolve_raw_frames_with_module_map(self) -> None:
+        bundle = {
+            "run_id": "wpr-boot-power-test",
+            "source_tool": "wpr",
+            "capture_phase": "boot",
+            "stack_capture": {
+                "source_fields": ["Stack"],
+                "module_map_count": 1,
+            },
+            "module_map": [
+                {
+                    "module_name": "ntoskrnl.exe",
+                    "image_path": "\\SystemRoot\\system32\\ntoskrnl.exe",
+                    "image_base": "0xFFFFF803C3C00000",
+                    "image_end": "0xFFFFF803C5050000",
+                }
+            ],
+            "events": [
+                {
+                    "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "operation": "RegQueryValue",
+                    "caller_stack": ["0xFFFFF803C3FEDD84"],
+                }
+            ],
+        }
+        queue_rows = [
+            {
+                "candidate_id": "power.control.allow-system-required-power-requests",
+                "feature_area": "Control Power Requests",
+                "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+                "value_name": "AllowSystemRequiredPowerRequests",
+                "promotion_blockers": ["system-execution-required-no-current-build-registry-seeding-path"],
+            }
+        ]
+
+        seeds = ghidra_autotrigger.autotrigger_seeds_from_bundle(
+            bundle,
+            bundle_path="evidence/files/example/normalized-registry-bundle.json",
+            queue_rows=queue_rows,
+            generated_utc="2026-04-13T00:00:00Z",
+        )
+
+        self.assertEqual(seeds[0]["unresolved_frames"], ["ntoskrnl.exe+0x3EDD84"])
+        self.assertEqual(seeds[0]["module_map_count"], 1)
+        self.assertEqual(seeds[0]["frame_resolution"][0]["resolution_kind"], "module_offset")
+        self.assertEqual(seeds[0]["frame_resolution"][0]["resolution_source"], "module_map")
+
     def test_collect_bundle_paths_supports_bundle_root(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)

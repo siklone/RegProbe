@@ -1,92 +1,231 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T00:29:59.363259Z",
+  "generated_utc": "2026-04-14T00:37:03.422640Z",
   "mode": "dry-run",
   "source_batch": "registry-research-framework/queue/ghidra-symbol-resolution-batch.json",
   "runner_available": true,
-  "selected_job_count": 0,
-  "blocked_job_count": 16,
+  "selected_job_count": 10,
+  "blocked_job_count": 6,
   "blocked_jobs": [
     {
-      "job_id": "ghidra-symbol-dispatch-01-ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
-      "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
+      "job_id": "ghidra-symbol-dispatch-01-ghidra-symbol-01-kernelbase-dll-0x2e436",
+      "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
       "missing_inputs": [
-        "module_base"
+        "guest_binary_path"
       ],
       "missing_host_tools": []
     },
     {
-      "job_id": "ghidra-symbol-dispatch-02-ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
-      "request_id": "ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
+      "job_id": "ghidra-symbol-dispatch-02-ghidra-symbol-02-kernelbase-dll-0x2edab",
+      "request_id": "ghidra-symbol-02-kernelbase-dll-0x2edab",
       "missing_inputs": [
-        "module_base"
+        "guest_binary_path"
       ],
       "missing_host_tools": []
     },
     {
-      "job_id": "ghidra-symbol-dispatch-03-ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
-      "request_id": "ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
+      "job_id": "ghidra-symbol-dispatch-03-ghidra-symbol-03-kernelbase-dll-0x30aad",
+      "request_id": "ghidra-symbol-03-kernelbase-dll-0x30aad",
       "missing_inputs": [
-        "module_base"
+        "guest_binary_path"
       ],
       "missing_host_tools": []
     },
     {
-      "job_id": "ghidra-symbol-dispatch-04-ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
-      "request_id": "ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
+      "job_id": "ghidra-symbol-dispatch-04-ghidra-symbol-04-kernel32-dll-0x2e8d7",
+      "request_id": "ghidra-symbol-04-kernel32-dll-0x2e8d7",
       "missing_inputs": [
-        "module_base"
+        "guest_binary_path"
       ],
       "missing_host_tools": []
     },
     {
-      "job_id": "ghidra-symbol-dispatch-05-ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
-      "request_id": "ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
+      "job_id": "ghidra-symbol-dispatch-05-ghidra-symbol-05-ntdll-dll-0x161d74",
+      "request_id": "ghidra-symbol-05-ntdll-dll-0x161d74",
       "missing_inputs": [
-        "module_base"
+        "guest_binary_path"
       ],
       "missing_host_tools": []
     },
     {
-      "job_id": "ghidra-symbol-dispatch-06-ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
-      "request_id": "ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
+      "job_id": "ghidra-symbol-dispatch-06-ghidra-symbol-06-ntdll-dll-0x8c48c",
+      "request_id": "ghidra-symbol-06-ntdll-dll-0x8c48c",
       "missing_inputs": [
-        "module_base"
-      ],
-      "missing_host_tools": []
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-07-ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
-      "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
-      "missing_inputs": [
-        "module_base"
-      ],
-      "missing_host_tools": []
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-08-ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
-      "request_id": "ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
-      "missing_inputs": [
-        "module_base"
-      ],
-      "missing_host_tools": []
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-09-ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
-      "request_id": "ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
-      "missing_inputs": [
-        "module_base"
-      ],
-      "missing_host_tools": []
-    },
-    {
-      "job_id": "ghidra-symbol-dispatch-10-ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
-      "request_id": "ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
-      "missing_inputs": [
-        "module_base"
+        "guest_binary_path"
       ],
       "missing_host_tools": []
     }
   ],
-  "jobs": []
+  "jobs": [
+    {
+      "job_id": "ghidra-symbol-dispatch-07-ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+      "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "--output-name",
+        "ghidra-symbolized-07-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-07-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-07-power-control-allow-system-required-power-requests"
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-08-ghidra-symbol-08-ntoskrnl-exe-0x3ed794",
+      "request_id": "ghidra-symbol-08-ntoskrnl-exe-0x3ed794",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "--output-name",
+        "ghidra-symbolized-08-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-08-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-08-power-control-allow-system-required-power-requests"
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-09-ghidra-symbol-09-ntoskrnl-exe-0x3edd84",
+      "request_id": "ghidra-symbol-09-ntoskrnl-exe-0x3edd84",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "--output-name",
+        "ghidra-symbolized-09-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-09-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-09-power-control-allow-system-required-power-requests"
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-10-ghidra-symbol-10-ntoskrnl-exe-0x6be358",
+      "request_id": "ghidra-symbol-10-ntoskrnl-exe-0x6be358",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "--output-name",
+        "ghidra-symbolized-10-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-10-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-10-power-control-allow-system-required-power-requests"
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-11-ghidra-symbol-11-ntoskrnl-exe-0x87108c",
+      "request_id": "ghidra-symbol-11-ntoskrnl-exe-0x87108c",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "--output-name",
+        "ghidra-symbolized-11-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-11-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-11-power-control-allow-system-required-power-requests"
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-12-ghidra-symbol-12-ntoskrnl-exe-0xae49f6",
+      "request_id": "ghidra-symbol-12-ntoskrnl-exe-0xae49f6",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\ntoskrnl.exe",
+        "--output-name",
+        "ghidra-symbolized-12-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\ntoskrnl.exe --output-name ghidra-symbolized-12-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-12-power-control-allow-system-required-power-requests"
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-13-ghidra-symbol-13-reg-exe-0x128b",
+      "request_id": "ghidra-symbol-13-reg-exe-0x128b",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\reg.exe",
+        "--output-name",
+        "ghidra-symbolized-13-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-13-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-13-power-control-allow-system-required-power-requests"
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-14-ghidra-symbol-14-reg-exe-0x379d",
+      "request_id": "ghidra-symbol-14-reg-exe-0x379d",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\reg.exe",
+        "--output-name",
+        "ghidra-symbolized-14-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-14-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-14-power-control-allow-system-required-power-requests"
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-15-ghidra-symbol-15-reg-exe-0x65c6",
+      "request_id": "ghidra-symbol-15-reg-exe-0x65c6",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\reg.exe",
+        "--output-name",
+        "ghidra-symbolized-15-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-15-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-15-power-control-allow-system-required-power-requests"
+    },
+    {
+      "job_id": "ghidra-symbol-dispatch-16-ghidra-symbol-16-reg-exe-0x6775",
+      "request_id": "ghidra-symbol-16-reg-exe-0x6775",
+      "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+      "command_argv": [
+        "python3",
+        "scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py",
+        "--binary-path",
+        "C:\\Windows\\System32\\reg.exe",
+        "--output-name",
+        "ghidra-symbolized-16-power-control-allow-system-required-power-requests",
+        "--pattern",
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_command": "python3 scripts/vm-kvm/run-guest-ghidra-symbolized-probe.py --binary-path C:\\Windows\\System32\\reg.exe --output-name ghidra-symbolized-16-power-control-allow-system-required-power-requests --pattern AllowSystemRequiredPowerRequests",
+      "output_dir": "evidence/files/ghidra/ghidra-symbolized-16-power-control-allow-system-required-power-requests"
+    }
+  ]
 }

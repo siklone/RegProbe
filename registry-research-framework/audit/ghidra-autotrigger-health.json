@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-14T00:29:59.510196Z",
+  "generated_utc": "2026-04-14T00:37:03.447505Z",
   "inputs_path": "registry-research-framework/queue/ghidra-autotrigger-inputs.json",
   "queue_path": "registry-research-framework/queue/ghidra-job-queue.jsonl",
   "seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
@@ -23,16 +23,16 @@
     "autotrigger_seeds": 1,
     "symbol_resolution_requests": 16,
     "symbol_resolution_batch_jobs": 16,
-    "symbol_resolution_runnable_jobs": 0,
-    "symbol_resolution_blocked_jobs": 16,
-    "symbol_resolution_run_selected_jobs": 0,
-    "symbol_resolution_run_blocked_jobs": 16,
-    "symbol_resolution_handoff_selected_jobs": 0,
-    "symbol_resolution_transfer_selected_jobs": 0,
-    "symbol_resolution_transfer_pack_selected_jobs": 0,
+    "symbol_resolution_runnable_jobs": 10,
+    "symbol_resolution_blocked_jobs": 6,
+    "symbol_resolution_run_selected_jobs": 10,
+    "symbol_resolution_run_blocked_jobs": 6,
+    "symbol_resolution_handoff_selected_jobs": 10,
+    "symbol_resolution_transfer_selected_jobs": 10,
+    "symbol_resolution_transfer_pack_selected_jobs": 10,
     "symbol_resolution_transfer_pack_check_errors": 0,
-    "symbol_resolution_execution_run_planned_jobs": 0,
-    "symbol_resolution_execution_run_ready_jobs": 0,
+    "symbol_resolution_execution_run_planned_jobs": 10,
+    "symbol_resolution_execution_run_ready_jobs": 10,
     "symbol_resolution_execution_run_blocked_jobs": 0,
     "symbol_resolution_execution_run_check_errors": 0,
     "etw_stackwalk_plan_errors": 0,
@@ -50,133 +50,101 @@
   "symbol_resolution_batch": {
     "missing_host_tools": [],
     "missing_input_counts": {
-      "module_base": 16
+      "guest_binary_path": 6
     },
     "resolution_kind_counts": {
-      "raw_address": 16
+      "module_offset": 16
     },
     "blocked_examples": [
       {
-        "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
-        "lookup_key": "ntoskrnl.exe@0x7ff74fcf128b",
+        "request_id": "ghidra-symbol-01-kernelbase-dll-0x2e436",
+        "lookup_key": "KernelBase.dll+0x2e436",
         "missing_inputs": [
-          "module_base"
+          "guest_binary_path"
         ],
         "missing_host_tools": []
       },
       {
-        "request_id": "ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
-        "lookup_key": "ntoskrnl.exe@0x7ff74fcf379d",
+        "request_id": "ghidra-symbol-02-kernelbase-dll-0x2edab",
+        "lookup_key": "KernelBase.dll+0x2edab",
         "missing_inputs": [
-          "module_base"
+          "guest_binary_path"
         ],
         "missing_host_tools": []
       },
       {
-        "request_id": "ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
-        "lookup_key": "ntoskrnl.exe@0x7ff74fcf65c6",
+        "request_id": "ghidra-symbol-03-kernelbase-dll-0x30aad",
+        "lookup_key": "KernelBase.dll+0x30aad",
         "missing_inputs": [
-          "module_base"
+          "guest_binary_path"
         ],
         "missing_host_tools": []
       },
       {
-        "request_id": "ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
-        "lookup_key": "ntoskrnl.exe@0x7ff74fcf6775",
+        "request_id": "ghidra-symbol-04-kernel32-dll-0x2e8d7",
+        "lookup_key": "kernel32.dll+0x2e8d7",
         "missing_inputs": [
-          "module_base"
+          "guest_binary_path"
         ],
         "missing_host_tools": []
       },
       {
-        "request_id": "ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
-        "lookup_key": "ntoskrnl.exe@0x7ff9a412e436",
+        "request_id": "ghidra-symbol-05-ntdll-dll-0x161d74",
+        "lookup_key": "ntdll.dll+0x161d74",
         "missing_inputs": [
-          "module_base"
+          "guest_binary_path"
         ],
         "missing_host_tools": []
       },
       {
-        "request_id": "ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
-        "lookup_key": "ntoskrnl.exe@0x7ff9a412edab",
+        "request_id": "ghidra-symbol-06-ntdll-dll-0x8c48c",
+        "lookup_key": "ntdll.dll+0x8c48c",
         "missing_inputs": [
-          "module_base"
-        ],
-        "missing_host_tools": []
-      },
-      {
-        "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
-        "lookup_key": "ntoskrnl.exe@0x7ff9a4130aad",
-        "missing_inputs": [
-          "module_base"
-        ],
-        "missing_host_tools": []
-      },
-      {
-        "request_id": "ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
-        "lookup_key": "ntoskrnl.exe@0x7ff9a5ebe8d7",
-        "missing_inputs": [
-          "module_base"
-        ],
-        "missing_host_tools": []
-      },
-      {
-        "request_id": "ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
-        "lookup_key": "ntoskrnl.exe@0x7ff9a772c48c",
-        "missing_inputs": [
-          "module_base"
-        ],
-        "missing_host_tools": []
-      },
-      {
-        "request_id": "ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
-        "lookup_key": "ntoskrnl.exe@0x7ff9a7801d74",
-        "missing_inputs": [
-          "module_base"
+          "guest_binary_path"
         ],
         "missing_host_tools": []
       }
     ]
   },
   "symbol_resolution_handoff": {
-    "status": "blocked",
-    "operator_blocker": "symbol-resolution-inputs-missing",
-    "selected_jobs": 0,
-    "blocked_jobs": 16
+    "status": "ready",
+    "operator_blocker": "symbol-resolution-ready",
+    "selected_jobs": 10,
+    "blocked_jobs": 6
   },
   "symbol_resolution_transfer": {
-    "status": "idle",
-    "operator_blocker": "no-selected-symbol-jobs",
-    "selected_jobs": 0,
+    "status": "ready",
+    "operator_blocker": "transfer-pack-ready",
+    "selected_jobs": 10,
     "repo_file_count": 9,
     "missing_repo_file_count": 0
   },
   "symbol_resolution_transfer_pack": {
-    "status": null,
-    "operator_blocker": null,
-    "selected_jobs": 0,
-    "repo_files_copied": 0,
-    "command_files_written": 0,
-    "archive_path": null
+    "status": "ready",
+    "operator_blocker": "transfer-pack-ready",
+    "selected_jobs": 10,
+    "repo_files_copied": 9,
+    "command_files_written": 10,
+    "archive_path": "registry-research-framework/audit/ghidra-symbol-resolution-transfer-pack.zip"
   },
   "symbol_resolution_transfer_pack_check": {
-    "status": null,
+    "status": "ok",
     "error_count": 0,
-    "checked_pack_files": 0,
-    "checked_archive_files": 0,
-    "archive_entries": 0
+    "checked_pack_files": 25,
+    "checked_archive_files": 25,
+    "archive_entries": 25
   },
   "symbol_resolution_execution_run": {
-    "status": null,
-    "mode": null,
-    "operator_blocker": null,
-    "planned_jobs": 0,
-    "ready_jobs": 0,
+    "status": "ready",
+    "mode": "dry-run",
+    "operator_blocker": "execution-run-ready",
+    "planned_jobs": 10,
+    "ready_jobs": 10,
     "blocked_jobs": 0,
     "executed_jobs": 0
   },
   "symbol_resolution_execution_run_check": {
-    "status": null,
+    "status": "ok",
     "error_count": 0,
     "jobs_with_blockers": 0,
     "blocked_jobs_with_blockers": 0
@@ -187,13 +155,13 @@
     "error": null
   },
   "etw_stackwalk_capture": {
-    "plan_status": "ready",
-    "check_status": "ok",
-    "profile_id": "kernel-registry-stackwalk-v1",
-    "run_id": "wave4-registry-stackwalk",
-    "stack_expected": true,
-    "stackwalk_event_count": 7,
-    "handoff_etl_path": "evidence/files/etw-stackwalk/wave4-registry-stackwalk/wave4-registry-stackwalk.etl",
+    "plan_status": null,
+    "check_status": null,
+    "profile_id": null,
+    "run_id": null,
+    "stack_expected": false,
+    "stackwalk_event_count": 0,
+    "handoff_etl_path": null,
     "plan_errors": [],
     "check_errors": []
   },
@@ -209,77 +177,116 @@
       "power.control.allow-system-required-power-requests"
     ],
     "symbol_resolution_request_ids": [
-      "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
-      "ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
-      "ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
-      "ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
-      "ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
-      "ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
-      "ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
-      "ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
-      "ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
-      "ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
-      "ghidra-symbol-11-ntoskrnl-exe-0xfffff803c3f27b4d",
-      "ghidra-symbol-12-ntoskrnl-exe-0xfffff803c3fed794",
-      "ghidra-symbol-13-ntoskrnl-exe-0xfffff803c3fedd84",
-      "ghidra-symbol-14-ntoskrnl-exe-0xfffff803c42be358",
-      "ghidra-symbol-15-ntoskrnl-exe-0xfffff803c447108c",
-      "ghidra-symbol-16-ntoskrnl-exe-0xfffff803c46e49f6"
+      "ghidra-symbol-01-kernelbase-dll-0x2e436",
+      "ghidra-symbol-02-kernelbase-dll-0x2edab",
+      "ghidra-symbol-03-kernelbase-dll-0x30aad",
+      "ghidra-symbol-04-kernel32-dll-0x2e8d7",
+      "ghidra-symbol-05-ntdll-dll-0x161d74",
+      "ghidra-symbol-06-ntdll-dll-0x8c48c",
+      "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+      "ghidra-symbol-08-ntoskrnl-exe-0x3ed794",
+      "ghidra-symbol-09-ntoskrnl-exe-0x3edd84",
+      "ghidra-symbol-10-ntoskrnl-exe-0x6be358",
+      "ghidra-symbol-11-ntoskrnl-exe-0x87108c",
+      "ghidra-symbol-12-ntoskrnl-exe-0xae49f6",
+      "ghidra-symbol-13-reg-exe-0x128b",
+      "ghidra-symbol-14-reg-exe-0x379d",
+      "ghidra-symbol-15-reg-exe-0x65c6",
+      "ghidra-symbol-16-reg-exe-0x6775"
     ],
     "symbol_resolution_lookup_keys": [
-      "ntoskrnl.exe@0x7ff74fcf128b",
-      "ntoskrnl.exe@0x7ff74fcf379d",
-      "ntoskrnl.exe@0x7ff74fcf65c6",
-      "ntoskrnl.exe@0x7ff74fcf6775",
-      "ntoskrnl.exe@0x7ff9a412e436",
-      "ntoskrnl.exe@0x7ff9a412edab",
-      "ntoskrnl.exe@0x7ff9a4130aad",
-      "ntoskrnl.exe@0x7ff9a5ebe8d7",
-      "ntoskrnl.exe@0x7ff9a772c48c",
-      "ntoskrnl.exe@0x7ff9a7801d74",
-      "ntoskrnl.exe@0xfffff803c3f27b4d",
-      "ntoskrnl.exe@0xfffff803c3fed794",
-      "ntoskrnl.exe@0xfffff803c3fedd84",
-      "ntoskrnl.exe@0xfffff803c42be358",
-      "ntoskrnl.exe@0xfffff803c447108c",
-      "ntoskrnl.exe@0xfffff803c46e49f6"
+      "KernelBase.dll+0x2e436",
+      "KernelBase.dll+0x2edab",
+      "KernelBase.dll+0x30aad",
+      "kernel32.dll+0x2e8d7",
+      "ntdll.dll+0x161d74",
+      "ntdll.dll+0x8c48c",
+      "ntoskrnl.exe+0x327b4d",
+      "ntoskrnl.exe+0x3ed794",
+      "ntoskrnl.exe+0x3edd84",
+      "ntoskrnl.exe+0x6be358",
+      "ntoskrnl.exe+0x87108c",
+      "ntoskrnl.exe+0xae49f6",
+      "reg.exe+0x128b",
+      "reg.exe+0x379d",
+      "reg.exe+0x65c6",
+      "reg.exe+0x6775"
     ],
     "symbol_resolution_candidate_ids": [
       "power.control.allow-system-required-power-requests"
     ],
     "symbol_resolution_batch_request_ids": [
-      "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
-      "ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
-      "ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
-      "ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
-      "ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
-      "ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
-      "ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
-      "ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
-      "ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
-      "ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
-      "ghidra-symbol-11-ntoskrnl-exe-0xfffff803c3f27b4d",
-      "ghidra-symbol-12-ntoskrnl-exe-0xfffff803c3fed794",
-      "ghidra-symbol-13-ntoskrnl-exe-0xfffff803c3fedd84",
-      "ghidra-symbol-14-ntoskrnl-exe-0xfffff803c42be358",
-      "ghidra-symbol-15-ntoskrnl-exe-0xfffff803c447108c",
-      "ghidra-symbol-16-ntoskrnl-exe-0xfffff803c46e49f6"
+      "ghidra-symbol-01-kernelbase-dll-0x2e436",
+      "ghidra-symbol-02-kernelbase-dll-0x2edab",
+      "ghidra-symbol-03-kernelbase-dll-0x30aad",
+      "ghidra-symbol-04-kernel32-dll-0x2e8d7",
+      "ghidra-symbol-05-ntdll-dll-0x161d74",
+      "ghidra-symbol-06-ntdll-dll-0x8c48c",
+      "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+      "ghidra-symbol-08-ntoskrnl-exe-0x3ed794",
+      "ghidra-symbol-09-ntoskrnl-exe-0x3edd84",
+      "ghidra-symbol-10-ntoskrnl-exe-0x6be358",
+      "ghidra-symbol-11-ntoskrnl-exe-0x87108c",
+      "ghidra-symbol-12-ntoskrnl-exe-0xae49f6",
+      "ghidra-symbol-13-reg-exe-0x128b",
+      "ghidra-symbol-14-reg-exe-0x379d",
+      "ghidra-symbol-15-reg-exe-0x65c6",
+      "ghidra-symbol-16-reg-exe-0x6775"
     ],
     "symbol_resolution_handoff_request_ids": [
-      "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
-      "ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
-      "ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
-      "ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
-      "ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
-      "ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
-      "ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
-      "ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
-      "ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
-      "ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74"
+      "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+      "ghidra-symbol-08-ntoskrnl-exe-0x3ed794",
+      "ghidra-symbol-09-ntoskrnl-exe-0x3edd84",
+      "ghidra-symbol-10-ntoskrnl-exe-0x6be358",
+      "ghidra-symbol-11-ntoskrnl-exe-0x87108c",
+      "ghidra-symbol-12-ntoskrnl-exe-0xae49f6",
+      "ghidra-symbol-13-reg-exe-0x128b",
+      "ghidra-symbol-14-reg-exe-0x379d",
+      "ghidra-symbol-15-reg-exe-0x65c6",
+      "ghidra-symbol-16-reg-exe-0x6775",
+      "ghidra-symbol-01-kernelbase-dll-0x2e436",
+      "ghidra-symbol-02-kernelbase-dll-0x2edab",
+      "ghidra-symbol-03-kernelbase-dll-0x30aad",
+      "ghidra-symbol-04-kernel32-dll-0x2e8d7",
+      "ghidra-symbol-05-ntdll-dll-0x161d74",
+      "ghidra-symbol-06-ntdll-dll-0x8c48c"
     ],
-    "symbol_resolution_transfer_request_ids": [],
-    "symbol_resolution_transfer_pack_request_ids": [],
-    "symbol_resolution_execution_run_request_ids": [],
+    "symbol_resolution_transfer_request_ids": [
+      "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+      "ghidra-symbol-08-ntoskrnl-exe-0x3ed794",
+      "ghidra-symbol-09-ntoskrnl-exe-0x3edd84",
+      "ghidra-symbol-10-ntoskrnl-exe-0x6be358",
+      "ghidra-symbol-11-ntoskrnl-exe-0x87108c",
+      "ghidra-symbol-12-ntoskrnl-exe-0xae49f6",
+      "ghidra-symbol-13-reg-exe-0x128b",
+      "ghidra-symbol-14-reg-exe-0x379d",
+      "ghidra-symbol-15-reg-exe-0x65c6",
+      "ghidra-symbol-16-reg-exe-0x6775"
+    ],
+    "symbol_resolution_transfer_pack_request_ids": [
+      "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+      "ghidra-symbol-08-ntoskrnl-exe-0x3ed794",
+      "ghidra-symbol-09-ntoskrnl-exe-0x3edd84",
+      "ghidra-symbol-10-ntoskrnl-exe-0x6be358",
+      "ghidra-symbol-11-ntoskrnl-exe-0x87108c",
+      "ghidra-symbol-12-ntoskrnl-exe-0xae49f6",
+      "ghidra-symbol-13-reg-exe-0x128b",
+      "ghidra-symbol-14-reg-exe-0x379d",
+      "ghidra-symbol-15-reg-exe-0x65c6",
+      "ghidra-symbol-16-reg-exe-0x6775"
+    ],
+    "symbol_resolution_execution_run_request_ids": [
+      "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+      "ghidra-symbol-08-ntoskrnl-exe-0x3ed794",
+      "ghidra-symbol-09-ntoskrnl-exe-0x3edd84",
+      "ghidra-symbol-10-ntoskrnl-exe-0x6be358",
+      "ghidra-symbol-11-ntoskrnl-exe-0x87108c",
+      "ghidra-symbol-12-ntoskrnl-exe-0xae49f6",
+      "ghidra-symbol-13-reg-exe-0x128b",
+      "ghidra-symbol-14-reg-exe-0x379d",
+      "ghidra-symbol-15-reg-exe-0x65c6",
+      "ghidra-symbol-16-reg-exe-0x6775"
+    ],
     "autotrigger_dispatch_candidate_ids": [
       "power.control.allow-system-required-power-requests"
     ]
@@ -288,12 +295,12 @@
     "top_input_bundle": null,
     "top_queue_candidate": "power.control.allow-system-required-power-requests",
     "top_autotrigger_candidate": "power.control.allow-system-required-power-requests",
-    "top_symbol_resolution_request": "ntoskrnl.exe@0x7ff74fcf128b",
-    "top_symbol_resolution_batch_request": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
-    "top_symbol_resolution_handoff_request": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
-    "top_symbol_resolution_transfer_request": null,
-    "top_symbol_resolution_transfer_pack_request": null,
-    "top_symbol_resolution_execution_run_request": null,
+    "top_symbol_resolution_request": "KernelBase.dll+0x2e436",
+    "top_symbol_resolution_batch_request": "ghidra-symbol-01-kernelbase-dll-0x2e436",
+    "top_symbol_resolution_handoff_request": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+    "top_symbol_resolution_transfer_request": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+    "top_symbol_resolution_transfer_pack_request": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
+    "top_symbol_resolution_execution_run_request": "ghidra-symbol-07-ntoskrnl-exe-0x327b4d",
     "missing_input_jobs": []
   }
 }

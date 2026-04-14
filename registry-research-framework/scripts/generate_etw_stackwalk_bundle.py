@@ -69,6 +69,41 @@ def parse_pid(value: Any) -> int | None:
         return None
 
 
+def parse_hex(value: Any) -> int | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    try:
+        return int(text, 0)
+    except ValueError:
+        return None
+
+
+def frame_addresses_from_touches(touches: list[dict[str, Any]]) -> set[int]:
+    addresses: set[int] = set()
+    for touch in touches:
+        for frame in touch.get("caller_stack") or []:
+            address = parse_hex(frame)
+            if address is not None:
+                addresses.add(address)
+    return addresses
+
+
+def filter_module_map_to_stack_frames(module_map: list[dict[str, Any]], frame_addresses: set[int]) -> list[dict[str, Any]]:
+    if not module_map or not frame_addresses:
+        return []
+
+    filtered: list[dict[str, Any]] = []
+    for module in module_map:
+        image_base = parse_hex(module.get("image_base"))
+        image_end = parse_hex(module.get("image_end"))
+        if image_base is None or image_end is None:
+            continue
+        if any(image_base <= address < image_end for address in frame_addresses):
+            filtered.append(module)
+    return filtered
+
+
 def detect_hive(key_path: Any) -> str | None:
     text = str(key_path or "").strip().replace("/", "\\")
     for hive in ("HKLM", "HKCU", "HKCR", "HKU", "HKCC"):
@@ -88,6 +123,8 @@ def bundle_from_parse_result(
     etl_path = str(parse_result.get("etl_path") or "")
     xml_output = str(parse_result.get("xml_output") or "")
     touches = parse_result.get("registry_touches") or []
+    frame_addresses = frame_addresses_from_touches(touches)
+    module_map = filter_module_map_to_stack_frames(parse_result.get("module_map") or [], frame_addresses)
     source_fields = list(DEFAULT_SOURCE_FIELDS)
     events: list[dict[str, Any]] = []
     caller_stack_event_count = 0
@@ -141,7 +178,9 @@ def bundle_from_parse_result(
             "captured_event_count": caller_stack_event_count,
             "source_fields": source_fields,
             "parser_status": parse_status,
+            "module_map_count": len(module_map),
         },
+        "module_map": module_map,
         "events": events,
     }
 
