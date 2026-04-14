@@ -115,6 +115,14 @@ etw_stackwalk_reopen_journal_check = load_module(
     "check_etw_stackwalk_reopen_journal",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_journal.py",
 )
+etw_stackwalk_reopen_snapshot = load_module(
+    "generate_etw_stackwalk_reopen_snapshot",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_snapshot.py",
+)
+etw_stackwalk_reopen_snapshot_check = load_module(
+    "check_etw_stackwalk_reopen_snapshot",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_snapshot.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -3484,6 +3492,168 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("counts.ack_required_count mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_snapshot_tracks_top_deferred_candidate(self) -> None:
+        journal_payload = {
+            "journal_status": "deferred",
+            "operator": {
+                "blocker": "acknowledge-deferred-holds",
+                "next_action": "Keep the blocked lanes deferred until their prerequisites land.",
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "journal_state": "deferred",
+                    "operator_blocker": "outstanding-prerequisites",
+                    "recommended_disposition": "keep-closed",
+                    "remaining_to_ready_count": 3,
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "next_action": "Do not run the include-holds commands yet.",
+                    "run_id": "wave4-audio",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-audio/wave4-audio.etl",
+                },
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "journal_state": "deferred",
+                    "operator_blocker": "outstanding-prerequisites",
+                    "recommended_disposition": "keep-closed",
+                    "remaining_to_ready_count": 2,
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "next_action": "Do not run the include-holds commands yet.",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                },
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_snapshot.build_reopen_snapshot(
+            journal_payload,
+            generated_utc="2026-04-15T17:00:00Z",
+        )
+
+        self.assertEqual(payload["snapshot_status"], "deferred")
+        self.assertEqual(payload["counts"]["candidate_count"], 2)
+        self.assertEqual(payload["focus"]["top_deferred_candidate"], "power.control.allow-audio-to-enable-execution-required-power-requests")
+        self.assertTrue(payload["snapshot_id"])
+
+    def test_etw_stackwalk_reopen_snapshot_handles_idle_state(self) -> None:
+        journal_payload = {
+            "journal_status": "idle",
+            "operator": {
+                "blocker": "no-reopen-candidates",
+                "next_action": "No ETW reopen journal entries are currently tracked.",
+            },
+            "entries": [],
+        }
+
+        payload = etw_stackwalk_reopen_snapshot.build_reopen_snapshot(
+            journal_payload,
+            generated_utc="2026-04-15T17:00:00Z",
+        )
+
+        self.assertEqual(payload["snapshot_status"], "idle")
+        self.assertEqual(payload["counts"]["candidate_count"], 0)
+        self.assertEqual(payload["focus"]["top_deferred_candidate"], None)
+
+    def test_etw_stackwalk_reopen_snapshot_check_accepts_matching_surface(self) -> None:
+        surface = {
+            "schema_version": "1.0",
+            "source_reopen_journal_path": "registry-research-framework/audit/etw-stackwalk-reopen-journal.json",
+            "snapshot_scope": "current-reopen-state",
+            "snapshot_status": "deferred",
+            "snapshot_id": "abc123def456",
+            "operator": {
+                "blocker": "acknowledge-deferred-holds",
+                "next_action": "Keep the blocked lanes deferred until their prerequisites land.",
+            },
+            "counts": {
+                "candidate_count": 1,
+                "deferred_count": 1,
+                "review_pending_count": 0,
+                "ack_required_count": 1,
+            },
+            "focus": {
+                "top_deferred_candidate": "power.control.allow-system-required-power-requests",
+                "top_review_pending_candidate": None,
+                "top_next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+            },
+            "history_markers": {
+                "state_signature": [
+                    "power.control.allow-system-required-power-requests:deferred:2",
+                ],
+                "blocker_signature": [
+                    "power.control.allow-system-required-power-requests:outstanding-prerequisites",
+                ],
+                "run_id_signature": ["wave4-system"],
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "journal_state": "deferred",
+                    "operator_blocker": "outstanding-prerequisites",
+                    "recommended_disposition": "keep-closed",
+                    "remaining_to_ready_count": 2,
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "next_action": "Do not run the include-holds commands yet.",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                }
+            ],
+        }
+        expected = dict(surface)
+
+        payload = etw_stackwalk_reopen_snapshot_check.compare_reopen_snapshot(
+            surface,
+            expected,
+            generated_utc="2026-04-15T17:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_reopen_snapshot_check_rejects_snapshot_id_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_reopen_journal_path": "registry-research-framework/audit/etw-stackwalk-reopen-journal.json",
+            "snapshot_scope": "current-reopen-state",
+            "snapshot_status": "deferred",
+            "snapshot_id": "abc123def456",
+            "operator": {
+                "blocker": "acknowledge-deferred-holds",
+                "next_action": "Keep the blocked lanes deferred until their prerequisites land.",
+            },
+            "counts": {
+                "candidate_count": 0,
+                "deferred_count": 0,
+                "review_pending_count": 0,
+                "ack_required_count": 0,
+            },
+            "focus": {
+                "top_deferred_candidate": None,
+                "top_review_pending_candidate": None,
+                "top_next_unlock_prerequisite": None,
+            },
+            "history_markers": {
+                "state_signature": [],
+                "blocker_signature": [],
+                "run_id_signature": [],
+            },
+            "entries": [],
+        }
+        surface = dict(expected)
+        surface["snapshot_id"] = "deadbeef0000"
+
+        payload = etw_stackwalk_reopen_snapshot_check.compare_reopen_snapshot(
+            surface,
+            expected,
+            generated_utc="2026-04-15T17:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("snapshot_id mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {
