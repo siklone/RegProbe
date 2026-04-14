@@ -122,7 +122,9 @@ def symbol_resolution_batch_from_queue(
         resolution_kind = str(request.get("resolution_kind") or "unknown")
         resolution_kind_counts[resolution_kind] += 1
         candidate_ids = request.get("candidate_ids") or []
-        output_name = f"ghidra-symbolized-{index:02d}-{slugify(candidate_ids[0] if candidate_ids else request_id)}"
+        lookup_slug = slugify(request.get("lookup_key") or request_id)
+        candidate_slug = slugify(candidate_ids[0] if candidate_ids else request_id)
+        output_name = f"ghidra-symbolized-{index:02d}-{lookup_slug}-{candidate_slug}"
         patterns = [
             str(pattern).strip()
             for pattern in (request.get("suggested_patterns") or [])

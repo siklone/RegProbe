@@ -53,6 +53,12 @@ def main() -> int:
     generated_dir = repo_root / "dist" / "kvm-generated"
     generated_dir.mkdir(parents=True, exist_ok=True)
 
+    for stale_path in (summary_path, stage_path):
+        try:
+            stale_path.unlink()
+        except FileNotFoundError:
+            pass
+
     ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
     run(
         [
