@@ -75,6 +75,14 @@ etw_stackwalk_execution_manifest_check = load_module(
     "check_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_execution_manifest.py",
 )
+etw_stackwalk_execution_pack = load_module(
+    "materialize_etw_stackwalk_execution_pack",
+    FRAMEWORK_SCRIPTS / "materialize_etw_stackwalk_execution_pack.py",
+)
+etw_stackwalk_execution_pack_check = load_module(
+    "check_etw_stackwalk_execution_pack",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_execution_pack.py",
+)
 etw_stackwalk_bundle = load_module("generate_etw_stackwalk_bundle", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_bundle.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
@@ -2612,6 +2620,258 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("selected_count mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_execution_pack_materializes_ready_pack(self) -> None:
+        manifest = {
+            "schema_version": "1.0",
+            "status": "ready",
+            "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+            "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+            "source_hold_reopen_plan_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-plan.json",
+            "include_holds": True,
+            "requested_candidate_ids": ["power.control.allow-audio-to-enable-execution-required-power-requests"],
+            "operator": {
+                "next_action": "Run the selected dispatch commands.",
+                "include_holds_required": True,
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "selected": True,
+                    "selection_reason": "hold-reopen",
+                    "actionability": "hold",
+                    "profile_id": "execution-required-audio-stackwalk-v1",
+                    "run_id": "wave4-allow-audio-e2e",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+                    "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                    "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --print-effective-config",
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --ingest-to-repo --refresh-ghidra",
+                    "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --run",
+                    "next_action_hint": "Reopen intentionally before dispatch.",
+                    "promotion_blockers": ["intentional-hold"],
+                    "reopen_prerequisites": ["Explicitly reopen the lane before dispatching runtime capture."],
+                }
+            ],
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            base = Path(temp_dir)
+            manifest_path = base / "etw-stackwalk-execution-manifest.json"
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            manifest_path.with_suffix(".md").write_text("# manifest\n", encoding="utf-8")
+
+            payload = etw_stackwalk_execution_pack.materialize_execution_pack(
+                manifest,
+                manifest_path=manifest_path,
+                output_root=base / "pack",
+                summary_path=base / "pack.json",
+                markdown_path=base / "pack.md",
+                archive_path=base / "pack.zip",
+                generated_utc="2026-04-14T18:00:00Z",
+            )
+
+            self.assertEqual(payload["pack_status"], "ready")
+            self.assertEqual(payload["counts"]["selected_candidates"], 1)
+            self.assertEqual(payload["counts"]["command_files_written"], 1)
+            self.assertEqual(payload["selected_candidate_ids"], ["power.control.allow-audio-to-enable-execution-required-power-requests"])
+            command_path = base / "pack" / "commands" / payload["command_files"][0]
+            self.assertTrue(command_path.exists())
+            self.assertIn("--include-holds", command_path.read_text(encoding="utf-8"))
+            self.assertTrue((base / "pack.zip").exists())
+
+    def test_etw_stackwalk_execution_pack_defaults_to_idle_for_unselected_manifest(self) -> None:
+        manifest = {
+            "schema_version": "1.0",
+            "status": "idle",
+            "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+            "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+            "source_hold_reopen_plan_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-plan.json",
+            "include_holds": False,
+            "requested_candidate_ids": ["power.control.allow-system-required-power-requests"],
+            "operator": {
+                "next_action": "Review excluded hold candidates and reopen intentionally if needed.",
+                "include_holds_required": False,
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "selected": False,
+                    "selection_reason": "excluded",
+                    "actionability": "hold",
+                    "profile_id": "execution-required-system-stackwalk-v1",
+                    "run_id": "wave4-allow-system-required-e2e",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                    "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+                    "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+                    "next_action_hint": "Reopen only when a pivot appears.",
+                    "promotion_blockers": ["intentional-hold"],
+                    "reopen_prerequisites": ["Explicitly reopen the lane before dispatching runtime capture."],
+                }
+            ],
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            base = Path(temp_dir)
+            manifest_path = base / "etw-stackwalk-execution-manifest.json"
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            manifest_path.with_suffix(".md").write_text("# manifest\n", encoding="utf-8")
+
+            payload = etw_stackwalk_execution_pack.materialize_execution_pack(
+                manifest,
+                manifest_path=manifest_path,
+                output_root=base / "pack",
+                summary_path=base / "pack.json",
+                markdown_path=base / "pack.md",
+                archive_path=base / "pack.zip",
+                generated_utc="2026-04-14T18:00:00Z",
+            )
+
+            self.assertEqual(payload["pack_status"], "idle")
+            self.assertEqual(payload["counts"]["selected_candidates"], 0)
+            self.assertEqual(payload["counts"]["command_files_written"], 0)
+
+    def test_etw_stackwalk_execution_pack_check_accepts_matching_surface(self) -> None:
+        manifest = {
+            "schema_version": "1.0",
+            "status": "ready",
+            "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+            "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+            "source_hold_reopen_plan_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-plan.json",
+            "include_holds": False,
+            "requested_candidate_ids": ["power.control.allow-system-required-power-requests"],
+            "operator": {
+                "next_action": "Run the selected dispatch commands.",
+                "include_holds_required": False,
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "selected": True,
+                    "selection_reason": "default-dispatch",
+                    "actionability": "active",
+                    "profile_id": "execution-required-system-stackwalk-v1",
+                    "run_id": "wave4-allow-system-required-e2e",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e.etl",
+                    "registry_path": r"HKLM\SYSTEM\CurrentControlSet\Control\Power",
+                    "value_name": "AllowSystemRequiredPowerRequests",
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --print-effective-config",
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests --ingest-to-repo --refresh-ghidra",
+                    "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+                    "next_action_hint": "Ready to dispatch.",
+                    "promotion_blockers": ["needs-focused-etw"],
+                    "reopen_prerequisites": [],
+                }
+            ],
+        }
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            base = Path(temp_dir)
+            manifest_path = base / "etw-stackwalk-execution-manifest.json"
+            summary_path = base / "etw-stackwalk-execution-pack.json"
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            manifest_path.with_suffix(".md").write_text("# manifest\n", encoding="utf-8")
+
+            etw_stackwalk_execution_pack.materialize_execution_pack(
+                manifest,
+                manifest_path=manifest_path,
+                output_root=base / "pack",
+                summary_path=summary_path,
+                markdown_path=base / "pack.md",
+                archive_path=base / "pack.zip",
+                generated_utc="2026-04-14T18:00:00Z",
+            )
+            summary = json.loads(summary_path.read_text(encoding="utf-8"))
+
+            payload = etw_stackwalk_execution_pack_check.compare_pack_summary(
+                summary,
+                etw_stackwalk_execution_pack.build_pack_plan(manifest, manifest_path=manifest_path),
+                generated_utc="2026-04-14T18:00:00Z",
+            )
+            asset_errors, counts = etw_stackwalk_execution_pack_check.validate_pack_assets(summary)
+
+            self.assertEqual(payload["check_status"], "ok")
+            self.assertEqual(asset_errors, [])
+            self.assertGreaterEqual(counts["checked_pack_files"], 1)
+
+    def test_etw_stackwalk_execution_pack_check_rejects_selected_candidate_mismatch(self) -> None:
+        expected = {
+            "source_manifest_path": "registry-research-framework/audit/etw-stackwalk-execution-manifest.json",
+            "source_manifest_markdown_path": "registry-research-framework/audit/etw-stackwalk-execution-manifest.md",
+            "source_batch_path": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+            "source_run_path": "registry-research-framework/audit/etw-stackwalk-dispatch-run.json",
+            "source_hold_reopen_plan_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-plan.json",
+            "manifest_status": "ready",
+            "pack_status": "ready",
+            "include_holds": False,
+            "operator": {"next_action": "Run the selected dispatch commands."},
+            "requested_candidate_ids": ["example.candidate"],
+            "selected_candidate_ids": ["example.candidate"],
+            "excluded_candidate_ids": [],
+            "required_repo_paths": ["scripts/vm-kvm/run-guest-etw-stackwalk-capture.py"],
+            "entries": [
+                {
+                    "candidate_id": "example.candidate",
+                    "selected": True,
+                    "selection_reason": "default-dispatch",
+                    "actionability": "active",
+                    "profile_id": "example-profile",
+                    "run_id": "example-run",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                    "registry_path": r"HKLM\Software\Example",
+                    "value_name": "Enabled",
+                    "selected_command": "python3 example.py --run",
+                    "effective_config_command": "python3 example.py --print-effective-config",
+                    "dispatch_command": "python3 example.py --run",
+                    "include_holds_run_command": None,
+                    "next_action_hint": "Ready to dispatch.",
+                    "promotion_blockers": [],
+                    "reopen_prerequisites": [],
+                }
+            ],
+        }
+        surface = {
+            "schema_version": "1.0",
+            "source_manifest_path": expected["source_manifest_path"],
+            "source_manifest_markdown_path": expected["source_manifest_markdown_path"],
+            "source_batch_path": expected["source_batch_path"],
+            "source_run_path": expected["source_run_path"],
+            "source_hold_reopen_plan_path": expected["source_hold_reopen_plan_path"],
+            "manifest_status": "ready",
+            "pack_status": "ready",
+            "include_holds": False,
+            "operator": {"next_action": "Run the selected dispatch commands."},
+            "counts": {
+                "requested_candidates": 1,
+                "selected_candidates": 0,
+                "excluded_candidates": 1,
+                "repo_files_copied": 0,
+                "command_files_written": 0,
+                "manifest_files_written": 0,
+                "pack_files_checksummed": 0,
+            },
+            "requested_candidate_ids": ["example.candidate"],
+            "selected_candidate_ids": [],
+            "excluded_candidate_ids": ["example.candidate"],
+            "required_repo_paths": ["scripts/vm-kvm/run-guest-etw-stackwalk-capture.py"],
+            "copied_repo_paths": [],
+            "command_files": [],
+            "manifest_files": [],
+            "entries": [],
+            "pack_files": [],
+        }
+
+        payload = etw_stackwalk_execution_pack_check.compare_pack_summary(
+            surface,
+            expected,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("selected_candidate_ids mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {
