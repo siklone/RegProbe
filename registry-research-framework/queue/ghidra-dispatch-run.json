@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T20:12:32.809056Z",
+  "generated_utc": "2026-04-14T00:12:13.095447Z",
   "mode": "dry-run",
   "source_batch": "registry-research-framework/queue/ghidra-dispatch-batch.json",
   "runner_available": false,
@@ -10,8 +10,8 @@
     {
       "job_id": "ghidra-dispatch-01-power-control-allow-system-required-power-requests",
       "candidate_id": "power.control.allow-system-required-power-requests",
-      "analysis_mode": "registry-string-xref",
-      "autotrigger_seed_count": 0,
+      "analysis_mode": "registry-string-xref+caller-stack-pivot",
+      "autotrigger_seed_count": 1,
       "command_argv": [
         "pwsh",
         "-File",

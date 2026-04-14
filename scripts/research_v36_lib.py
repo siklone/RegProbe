@@ -2815,6 +2815,8 @@ def _normalize_registry_context_path(text: str | None) -> str | None:
         if upper.startswith(source.upper()):
             normalized = target + normalized[len(source):]
             break
+    if re.match(r"^(SYSTEM|SOFTWARE|HARDWARE|SAM|SECURITY|BCD00000000)(\\|$)", normalized, flags=re.IGNORECASE):
+        normalized = "HKLM\\" + normalized.lstrip("\\")
     return normalized.rstrip("\\") if normalized not in {"HKLM\\", "HKCU\\", "HKCR\\", "HKU\\"} else normalized.rstrip("\\")
 
 
@@ -2857,6 +2859,17 @@ REGISTRY_XML_EVENT_ID_MAP = {
     "12": "FlushKey",
     "13": "CloseKey",
     "14": "QuerySecurityKey",
+}
+
+REGISTRY_RENDERING_OPCODE_MAP = {
+    "open": "RegOpenKey",
+    "create": "RegCreateKey",
+    "close": "RegCloseKey",
+    "queryvalue": "RegQueryValue",
+    "setvalue": "RegSetValue",
+    "deletevalue": "RegDeleteValue",
+    "querykey": "RegQueryKey",
+    "delete": "RegDeleteKey",
 }
 
 
@@ -3020,7 +3033,12 @@ def _registry_parent_path(path: str | None) -> str | None:
     return normalized.rsplit("\\", 1)[0]
 
 
-def _registry_operation_for_event(event_id: str | None, text_blob: str) -> str:
+def _registry_operation_for_event(event_id: str | None, text_blob: str, rendering_opcode: str | None = None) -> str:
+    opcode_key = str(rendering_opcode or "").strip().lower()
+    if opcode_key:
+        mapped_opcode = REGISTRY_RENDERING_OPCODE_MAP.get(opcode_key)
+        if mapped_opcode:
+            return mapped_opcode
     mapped = REGISTRY_XML_EVENT_ID_MAP.get(str(event_id or ""))
     guessed = _guess_registry_operation(text_blob or "")
     return guessed or mapped or "registry-touch"
@@ -3126,6 +3144,7 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
     seen: set[tuple[str, str, str]] = set()
     open_key_paths: dict[str, str] = {}
     recent_touches_by_thread: dict[tuple[str, str], deque[dict[str, Any]]] = {}
+    recent_key_paths_by_thread: dict[tuple[str, str], deque[str]] = {}
 
     for _, event in iterator:
         if _xml_local_name(event.tag).lower() != "event":
@@ -3138,6 +3157,7 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
         key_path = None
         value_name = None
         rendering_event_name = ""
+        rendering_opcode = ""
         event_data: dict[str, str] = {}
 
         for child in event:
@@ -3167,8 +3187,11 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
                     event_data[name] = _xml_text_or_attribute(data_child)
             elif tag == "renderinginfo":
                 for rendering_child in child:
-                    if _xml_local_name(rendering_child.tag).lower() == "eventname":
+                    rendering_tag = _xml_local_name(rendering_child.tag).lower()
+                    if rendering_tag == "eventname":
                         rendering_event_name = _xml_text_or_attribute(rendering_child) or rendering_event_name
+                    elif rendering_tag == "opcode":
+                        rendering_opcode = _xml_text_or_attribute(rendering_child) or rendering_opcode
 
         if rendering_event_name.strip().lower() == "stackwalk":
             _attach_stackwalk_to_recent_touch(
@@ -3199,21 +3222,40 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
             for name, value in event_data.items()
             if value
         )[:400]
+        operation = _registry_operation_for_event(event_id, f"{rendering_opcode} {raw_excerpt}", rendering_opcode=rendering_opcode)
         text_blob = " ".join(
             part
             for part in [
                 provider,
                 event_id,
                 REGISTRY_XML_EVENT_ID_MAP.get(event_id, ""),
+                rendering_opcode,
                 raw_excerpt,
             ]
             if part
         )
 
+        process_key = _parse_etw_numeric(process_id)
+        thread_key = _parse_etw_numeric(thread_id)
+        thread_lookup_key = (
+            str(process_key if process_key is not None else process_id or ""),
+            str(thread_key if thread_key is not None else thread_id or ""),
+        )
+        recent_thread_paths = recent_key_paths_by_thread.get(thread_lookup_key)
+        thread_recent_path = recent_thread_paths[-1] if recent_thread_paths else None
+        value_operations = {"RegQueryValue", "RegSetValue", "RegDeleteValue"}
+
         context_key_path = None
-        base_path = _normalize_registry_context_path(base_name) or _normalize_registry_context_path(key_name)
+        key_name_path = _normalize_registry_context_path(key_name)
+        base_path = _normalize_registry_context_path(base_name)
+        if not base_path and key_name_path and (
+            operation not in value_operations
+            or _is_registry_path_rooted(key_name)
+            or "\\" in str(key_name or "")
+        ):
+            base_path = key_name_path
         inherited_base_path = base_path or (open_key_paths.get(base_object) if base_object else None)
-        if event_id in {"1", "2"}:
+        if operation in {"RegCreateKey", "OpenKey", "RegOpenKey"}:
             context_key_path = (
                 _combine_registry_path(inherited_base_path, relative_name)
                 or base_path
@@ -3223,15 +3265,20 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
             if context_key_path and key_object and status_text in {"", "0", "0x0"}:
                 open_key_paths[key_object] = context_key_path
                 if base_object and base_object not in open_key_paths:
-                    parent_path = _registry_parent_path(context_key_path)
-                    if parent_path:
-                        open_key_paths[base_object] = parent_path
+                        parent_path = _registry_parent_path(context_key_path)
+                        if parent_path:
+                            open_key_paths[base_object] = parent_path
         else:
+            if operation in value_operations and not value_name and key_name and not _is_registry_path_rooted(key_name):
+                value_name = key_name
             context_key_path = (
                 (open_key_paths.get(key_object) if key_object else None)
-                or _normalize_registry_context_path(key_name)
                 or _combine_registry_path(inherited_base_path, relative_name)
+                or base_path
+                or thread_recent_path
             )
+            if not context_key_path and operation not in value_operations:
+                context_key_path = _normalize_registry_context_path(key_name)
             if not context_key_path:
                 match = re.search(
                     r"(HKLM|HKCU|HKCR|HKU|HKEY_LOCAL_MACHINE|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_USERS|\\\\REGISTRY\\\\MACHINE|\\\\REGISTRY\\\\USER)\\\\[^\r\n\"<>]+",
@@ -3245,9 +3292,8 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
         provider_match = False
         if provider_guid:
             provider_match = provider_guid in provider.lower().strip("{}")
-        operation = _registry_operation_for_event(event_id, text_blob)
         if not key_path and not provider_match:
-            if event_id == "13" and key_object:
+            if operation == "RegCloseKey" and key_object:
                 open_key_paths.pop(key_object, None)
             event.clear()
             continue
@@ -3272,14 +3318,12 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
             str(touch.get("value_name") or ""),
         )
         if dedupe_key in seen:
-            if event_id == "13" and key_object:
+            if operation == "RegCloseKey" and key_object:
                 open_key_paths.pop(key_object, None)
             event.clear()
             continue
         seen.add(dedupe_key)
         touches.append(touch)
-        process_key = _parse_etw_numeric(process_id)
-        thread_key = _parse_etw_numeric(thread_id)
         if process_key is not None and thread_key is not None:
             recent_touches_by_thread.setdefault((str(process_key), str(thread_key)), deque(maxlen=64)).append(
                 {
@@ -3287,7 +3331,9 @@ def extract_registry_touches_from_tracerpt_xml(xml_path: Path, provider_guid: st
                     "event_time": event_data.get("InitialTime") or event_data.get("EventTimeStamp"),
                 }
             )
-        if event_id == "13" and key_object:
+            if key_path:
+                recent_key_paths_by_thread.setdefault((str(process_key), str(thread_key)), deque(maxlen=32)).append(key_path)
+        if operation == "RegCloseKey" and key_object:
             open_key_paths.pop(key_object, None)
         event.clear()
 

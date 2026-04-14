@@ -1,11 +1,636 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T20:12:32.807884Z",
+  "generated_utc": "2026-04-14T00:12:13.092978Z",
   "source_seeds_path": "registry-research-framework/queue/ghidra-autotrigger-seeds.jsonl",
-  "request_count": 0,
+  "request_count": 16,
   "diagnostics": {
-    "actionable_frame_count": 0,
+    "actionable_frame_count": 16,
     "skipped_frame_counts": {}
   },
-  "requests": []
+  "requests": [
+    {
+      "request_id": "ghidra-symbol-01-ntoskrnl-exe-0x7ff74fcf128b",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 1,
+      "lookup_key": "ntoskrnl.exe@0x7ff74fcf128b",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff74fcf128b",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF74FCF128B"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff74fcf128b against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-02-ntoskrnl-exe-0x7ff74fcf379d",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 2,
+      "lookup_key": "ntoskrnl.exe@0x7ff74fcf379d",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff74fcf379d",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF74FCF379D"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff74fcf379d against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-03-ntoskrnl-exe-0x7ff74fcf65c6",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 3,
+      "lookup_key": "ntoskrnl.exe@0x7ff74fcf65c6",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff74fcf65c6",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF74FCF65C6"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff74fcf65c6 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-04-ntoskrnl-exe-0x7ff74fcf6775",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 4,
+      "lookup_key": "ntoskrnl.exe@0x7ff74fcf6775",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff74fcf6775",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF74FCF6775"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff74fcf6775 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-05-ntoskrnl-exe-0x7ff9a412e436",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 5,
+      "lookup_key": "ntoskrnl.exe@0x7ff9a412e436",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff9a412e436",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF9A412E436"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a412e436 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-06-ntoskrnl-exe-0x7ff9a412edab",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 6,
+      "lookup_key": "ntoskrnl.exe@0x7ff9a412edab",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff9a412edab",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF9A412EDAB"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a412edab against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-07-ntoskrnl-exe-0x7ff9a4130aad",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 7,
+      "lookup_key": "ntoskrnl.exe@0x7ff9a4130aad",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff9a4130aad",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF9A4130AAD"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a4130aad against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-08-ntoskrnl-exe-0x7ff9a5ebe8d7",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 8,
+      "lookup_key": "ntoskrnl.exe@0x7ff9a5ebe8d7",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff9a5ebe8d7",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF9A5EBE8D7"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a5ebe8d7 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-09-ntoskrnl-exe-0x7ff9a772c48c",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 9,
+      "lookup_key": "ntoskrnl.exe@0x7ff9a772c48c",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff9a772c48c",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF9A772C48C"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a772c48c against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-10-ntoskrnl-exe-0x7ff9a7801d74",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 10,
+      "lookup_key": "ntoskrnl.exe@0x7ff9a7801d74",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0x7ff9a7801d74",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0x7FF9A7801D74"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0x7ff9a7801d74 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-11-ntoskrnl-exe-0xfffff803c3f27b4d",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 11,
+      "lookup_key": "ntoskrnl.exe@0xfffff803c3f27b4d",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0xfffff803c3f27b4d",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0xFFFFF803C3F27B4D"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c3f27b4d against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-12-ntoskrnl-exe-0xfffff803c3fed794",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 12,
+      "lookup_key": "ntoskrnl.exe@0xfffff803c3fed794",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0xfffff803c3fed794",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0xFFFFF803C3FED794"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c3fed794 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-13-ntoskrnl-exe-0xfffff803c3fedd84",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 13,
+      "lookup_key": "ntoskrnl.exe@0xfffff803c3fedd84",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0xfffff803c3fedd84",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0xFFFFF803C3FEDD84"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c3fedd84 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-14-ntoskrnl-exe-0xfffff803c42be358",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 14,
+      "lookup_key": "ntoskrnl.exe@0xfffff803c42be358",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0xfffff803c42be358",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0xFFFFF803C42BE358"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c42be358 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-15-ntoskrnl-exe-0xfffff803c447108c",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 15,
+      "lookup_key": "ntoskrnl.exe@0xfffff803c447108c",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0xfffff803c447108c",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0xFFFFF803C447108C"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c447108c against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    },
+    {
+      "request_id": "ghidra-symbol-16-ntoskrnl-exe-0xfffff803c46e49f6",
+      "status": "queued",
+      "created_utc": "2026-04-14T00:12:13.092978Z",
+      "priority_rank": 16,
+      "lookup_key": "ntoskrnl.exe@0xfffff803c46e49f6",
+      "resolution_kind": "raw_address",
+      "module_name": "ntoskrnl.exe",
+      "target_binary": "ntoskrnl.exe",
+      "offset_hex": null,
+      "address": "0xfffff803c46e49f6",
+      "symbol_hint": null,
+      "occurrence_count": 1,
+      "candidate_count": 1,
+      "candidate_ids": [
+        "power.control.allow-system-required-power-requests"
+      ],
+      "source_bundle_paths": [
+        "evidence/files/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json"
+      ],
+      "source_run_ids": [
+        "wave4-allow-system-required-e2e"
+      ],
+      "source_event_indices": [
+        152
+      ],
+      "frame_variants": [
+        "0xFFFFF803C46E49F6"
+      ],
+      "suggested_patterns": [
+        "AllowSystemRequiredPowerRequests"
+      ],
+      "suggested_symbol_sources": [
+        "microsoft-public-symbol-server",
+        "local-pdb-cache",
+        "ghidra-project-symbol-tree"
+      ],
+      "next_action_hint": "Resolve ntoskrnl.exe@0xfffff803c46e49f6 against ntoskrnl.exe symbols before running the next Ghidra pivot for power.control.allow-system-required-power-requests."
+    }
+  ]
 }

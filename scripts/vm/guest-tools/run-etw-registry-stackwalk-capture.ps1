@@ -29,6 +29,7 @@ $ErrorActionPreference = 'Stop'
 
 $xperf = 'C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\xperf.exe'
 $tracerpt = 'C:\Windows\System32\tracerpt.exe'
+$regExe = 'C:\Windows\System32\reg.exe'
 
 function ConvertTo-SafeName {
     param([string]$Value)
@@ -101,6 +102,24 @@ function Write-JsonFile {
     $Payload | ConvertTo-Json -Depth 12 | Set-Content -Path $Path -Encoding UTF8
 }
 
+function Invoke-RegistryProbe {
+    param(
+        [Parameter(Mandatory = $true)][string]$RegistryPath,
+        [string]$ValueName
+    )
+
+    $probeArgs = @('query', $RegistryPath)
+    if (-not [string]::IsNullOrWhiteSpace($ValueName)) {
+        $probeArgs += @('/v', $ValueName)
+    }
+
+    return [ordered]@{
+        file_path = $regExe
+        argument_list = @($probeArgs)
+        result = Invoke-NativeProcess -FilePath $regExe -ArgumentList $probeArgs -IgnoreExitCode
+    }
+}
+
 function Invoke-ArtifactUpload {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -163,6 +182,7 @@ $summary = [ordered]@{
     kernel_flags = @($KernelFlags)
     stackwalk_events = @($StackwalkEvents)
     stack_capture_expected = $true
+    registry_probe_attempted = $false
     xperf_exists = [bool](Test-Path $xperf)
     tracerpt_exists = [bool](Test-Path $tracerpt)
     output_root = $runRoot
@@ -209,6 +229,11 @@ try {
     $summary.commands['start'] = Invoke-NativeProcess -FilePath $xperf -ArgumentList $startArgs -IgnoreExitCode
     if (($summary.commands['start'].exit_code) -ne 0) {
         throw (Format-CommandFailure -ToolName 'xperf.exe' -Result $summary.commands['start'] -ArgumentList $startArgs)
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($RegistryPath) -and (Test-Path $regExe)) {
+        $summary.registry_probe_attempted = $true
+        $summary.commands['registry_probe'] = Invoke-RegistryProbe -RegistryPath $RegistryPath -ValueName $ValueName
     }
 
     Start-Sleep -Seconds ([Math]::Max($DurationSeconds, 1))
