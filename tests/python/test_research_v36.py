@@ -55,6 +55,10 @@ etw_stackwalk_dispatch_runner = load_module(
     "run_etw_stackwalk_dispatch_batch",
     FRAMEWORK_SCRIPTS / "run_etw_stackwalk_dispatch_batch.py",
 )
+etw_stackwalk_dispatch_run_check = load_module(
+    "check_etw_stackwalk_dispatch_run",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_dispatch_run.py",
+)
 etw_stackwalk_bundle = load_module("generate_etw_stackwalk_bundle", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_bundle.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
@@ -2190,6 +2194,63 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(result["executed_job_count"], 1)
         self.assertEqual(result["jobs"][0]["exit_code"], 0)
         self.assertIn("dispatch-ok", result["jobs"][0]["stdout"])
+
+    def test_etw_stackwalk_dispatch_run_check_accepts_matching_dry_run(self) -> None:
+        batch = {
+            "items": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "actionability": "hold",
+                    "capture_ready": True,
+                    "dispatch_recommended": False,
+                    "profile_id": "execution-required-system-stackwalk-v1",
+                    "dispatch_command_argv": [
+                        "python3",
+                        "scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+                        "--candidate-id",
+                        "power.control.allow-system-required-power-requests",
+                    ],
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests",
+                    "next_action_hint": "Reopen only when a boot/init reader pivot exists.",
+                }
+            ]
+        }
+        run_surface = etw_stackwalk_dispatch_runner.build_run_plan(
+            batch,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        payload = etw_stackwalk_dispatch_run_check.compare_run_plan(
+            run_surface,
+            run_surface,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_dispatch_run_check_rejects_mismatched_skipped_hold_count(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "mode": "dry-run",
+            "source_batch": "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
+            "include_holds": False,
+            "runner_available": True,
+            "selected_job_count": 0,
+            "skipped_hold_count": 2,
+            "jobs": [],
+        }
+        surface = dict(expected)
+        surface["skipped_hold_count"] = 1
+
+        payload = etw_stackwalk_dispatch_run_check.compare_run_plan(
+            surface,
+            expected,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("skipped_hold_count mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {

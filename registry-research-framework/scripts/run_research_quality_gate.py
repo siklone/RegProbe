@@ -117,6 +117,11 @@ def default_steps(args: argparse.Namespace) -> list[GateStep]:
             [python, "registry-research-framework/scripts/check_etw_stackwalk_dispatch_batch.py"],
         ),
         GateStep(
+            "etw-stackwalk-dispatch-run",
+            "ETW stackwalk dispatch run check",
+            [python, "registry-research-framework/scripts/check_etw_stackwalk_dispatch_run.py"],
+        ),
+        GateStep(
             "publish-metrics",
             "Generate research publish metrics",
             [python, "registry-research-framework/scripts/generate_publish_metrics.py"],
