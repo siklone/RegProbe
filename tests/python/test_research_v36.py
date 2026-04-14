@@ -75,6 +75,14 @@ etw_stackwalk_hold_reopen_pack_check = load_module(
     "check_etw_stackwalk_hold_reopen_pack",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_hold_reopen_pack.py",
 )
+etw_stackwalk_reopen_decision_ledger = load_module(
+    "generate_etw_stackwalk_reopen_decision_ledger",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_decision_ledger.py",
+)
+etw_stackwalk_reopen_decision_ledger_check = load_module(
+    "check_etw_stackwalk_reopen_decision_ledger",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_decision_ledger.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -2649,6 +2657,158 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("reopen_candidate_ids mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_decision_ledger_defers_candidates_with_unsatisfied_prereqs(self) -> None:
+        pack_payload = {
+            "pack_status": "ready",
+            "items": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "next_missing_layer": "intentional-hold",
+                    "promotion_blockers": [
+                        "intentional-hold",
+                        "system-execution-required-no-current-build-registry-seeding-path",
+                    ],
+                    "reopen_prerequisites": [
+                        "Land a current-build boot/init reader or registry seeding caller proof.",
+                        "Explicitly reopen the lane before dispatching runtime capture.",
+                    ],
+                    "include_holds_plan_command": "python3 reopen.py --plan",
+                    "include_holds_run_command": "python3 reopen.py --run",
+                    "effective_config_command": "python3 reopen.py --print-effective-config",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                    "next_action_hint": "Reopen only when a pivot appears.",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_decision_ledger.build_reopen_decision_ledger(
+            pack_payload,
+            generated_utc="2026-04-15T12:00:00Z",
+        )
+
+        self.assertEqual(payload["ledger_status"], "deferred")
+        self.assertEqual(payload["deferred_candidate_count"], 1)
+        entry = payload["entries"][0]
+        self.assertEqual(entry["decision_state"], "defer")
+        self.assertIn("await-seeding-pivot", entry["decision_reason_codes"])
+        self.assertEqual(entry["prerequisite_status"], "unsatisfied")
+
+    def test_etw_stackwalk_reopen_decision_ledger_marks_ready_candidates_for_review(self) -> None:
+        pack_payload = {
+            "pack_status": "ready",
+            "items": [
+                {
+                    "candidate_id": "example.ready",
+                    "feature_area": "Example",
+                    "next_missing_layer": "intentional-hold",
+                    "promotion_blockers": ["intentional-hold"],
+                    "reopen_prerequisites": [],
+                    "include_holds_plan_command": "python3 reopen.py --plan",
+                    "include_holds_run_command": "python3 reopen.py --run",
+                    "effective_config_command": "python3 reopen.py --print-effective-config",
+                    "run_id": "example-run",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                    "next_action_hint": "Review manually.",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_decision_ledger.build_reopen_decision_ledger(
+            pack_payload,
+            generated_utc="2026-04-15T12:00:00Z",
+        )
+
+        self.assertEqual(payload["ledger_status"], "review-ready")
+        self.assertEqual(payload["review_ready_candidate_count"], 1)
+        self.assertEqual(payload["entries"][0]["decision_state"], "review-ready")
+
+    def test_etw_stackwalk_reopen_decision_ledger_check_accepts_matching_surface(self) -> None:
+        surface = {
+            "schema_version": "1.0",
+            "source_hold_reopen_pack_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-pack.json",
+            "pack_status": "ready",
+            "ledger_status": "deferred",
+            "operator": {
+                "next_action": "Keep the ETW lane closed until one of the listed prerequisites lands.",
+                "intentional_reopen_required": True,
+            },
+            "reopen_candidate_count": 1,
+            "deferred_candidate_count": 1,
+            "review_ready_candidate_count": 0,
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "next_missing_layer": "intentional-hold",
+                    "promotion_blockers": [
+                        "audio-execution-required-no-current-build-registry-seeding-path",
+                        "audio-execution-required-no-primary-current-build-doc",
+                        "intentional-hold",
+                    ],
+                    "blocker_count": 3,
+                    "reopen_prerequisites": [
+                        "Land a current-build boot/init reader or registry seeding caller proof.",
+                        "Land a primary current-build Microsoft document for the exact value semantics.",
+                        "Explicitly reopen the lane before dispatching runtime capture.",
+                    ],
+                    "prerequisite_count": 3,
+                    "prerequisite_status": "unsatisfied",
+                    "decision_state": "defer",
+                    "decision_reason_codes": [
+                        "await-seeding-pivot",
+                        "await-primary-doc",
+                        "explicit-reopen-required",
+                    ],
+                    "decision_summary": "Keep the lane deferred until the listed prerequisites are satisfied.",
+                    "next_review_trigger": "Revisit after a current-build seeding-path pivot and a primary Microsoft doc both land.",
+                    "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --run",
+                    "effective_config_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-audio-to-enable-execution-required-power-requests --print-effective-config",
+                    "run_id": "wave4-allow-audio-e2e",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e.etl",
+                    "next_action_hint": "Reopen only when a boot/init reader or registry seeding caller pivot becomes available.",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_decision_ledger_check.compare_reopen_decision_ledger(
+            surface,
+            surface,
+            generated_utc="2026-04-15T12:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_reopen_decision_ledger_check_rejects_count_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_hold_reopen_pack_path": "registry-research-framework/audit/etw-stackwalk-hold-reopen-pack.json",
+            "pack_status": "ready",
+            "ledger_status": "deferred",
+            "operator": {
+                "next_action": "Keep the ETW lane closed until one of the listed prerequisites lands.",
+                "intentional_reopen_required": True,
+            },
+            "reopen_candidate_count": 2,
+            "deferred_candidate_count": 2,
+            "review_ready_candidate_count": 0,
+            "entries": [],
+        }
+        surface = dict(expected)
+        surface["deferred_candidate_count"] = 1
+
+        payload = etw_stackwalk_reopen_decision_ledger_check.compare_reopen_decision_ledger(
+            surface,
+            expected,
+            generated_utc="2026-04-15T12:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("deferred_candidate_count mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {
