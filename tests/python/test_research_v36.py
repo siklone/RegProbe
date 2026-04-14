@@ -7,6 +7,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
 
 
@@ -2856,6 +2857,62 @@ class GhidraSymbolResolutionRunnerTests(unittest.TestCase):
         self.assertEqual(plan["blocked_job_count"], 0)
         self.assertEqual(plan["jobs"][0]["request_id"], "request-2")
         self.assertEqual(plan["completed_jobs"][0]["request_id"], "request-1")
+
+    def test_symbol_resolution_run_executes_only_incomplete_jobs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            completed_output_dir = Path(tmpdir) / "completed-job"
+            completed_output_dir.mkdir(parents=True, exist_ok=True)
+            (completed_output_dir / "run-summary.json").write_text(
+                json.dumps(
+                    {
+                        "status": "ok",
+                        "ghidra_exit_code": 0,
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            payload = {
+                "jobs": [
+                    {
+                        "job_id": "job-1",
+                        "request_id": "request-1",
+                        "dispatch_status": "prepared",
+                        "can_run_guest_orchestrator": True,
+                        "command_argv": ["python3", "completed.py"],
+                        "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+                        "output_dir": str(completed_output_dir),
+                    },
+                    {
+                        "job_id": "job-2",
+                        "request_id": "request-2",
+                        "dispatch_status": "prepared",
+                        "can_run_guest_orchestrator": True,
+                        "command_argv": ["python3", "pending.py"],
+                        "analysis_mode": "pdb-symbolized-branch+caller-stack-resolution",
+                        "output_dir": "evidence/files/ghidra/job-2",
+                    },
+                ]
+            }
+
+            with unittest.mock.patch.object(ghidra_symbol_runner, "runner_available", return_value=True):
+                with unittest.mock.patch.object(
+                    ghidra_symbol_runner.subprocess,
+                    "run",
+                    return_value=subprocess.CompletedProcess(
+                        args=["python3", "pending.py"],
+                        returncode=0,
+                        stdout="ok",
+                        stderr="",
+                    ),
+                ) as mock_run:
+                    result = ghidra_symbol_runner.run_jobs(payload, generated_utc="2026-04-13T00:00:00Z")
+
+        self.assertEqual(result["selected_job_count"], 1)
+        self.assertEqual(result["executed_job_count"], 1)
+        self.assertEqual(result["completed_job_count"], 1)
+        self.assertEqual(result["jobs"][0]["request_id"], "request-2")
+        mock_run.assert_called_once()
 
 
 class GhidraSymbolResolutionHandoffTests(unittest.TestCase):

@@ -157,15 +157,15 @@ def run_jobs(payload: dict[str, Any], *, limit: int | None = None, generated_utc
     result_jobs: list[dict[str, Any]] = []
     for job in jobs:
         argv = [str(part) for part in (job.get("command_argv") or [])]
-        completed = subprocess.run(argv, cwd=REPO_ROOT, capture_output=True, text=True, check=False)
+        process = subprocess.run(argv, cwd=REPO_ROOT, capture_output=True, text=True, check=False)
         result_jobs.append(
             {
                 "job_id": job.get("job_id"),
                 "request_id": job.get("request_id"),
                 "analysis_mode": job.get("analysis_mode"),
-                "exit_code": completed.returncode,
-                "stdout": completed.stdout,
-                "stderr": completed.stderr,
+                "exit_code": process.returncode,
+                "stdout": process.stdout,
+                "stderr": process.stderr,
             }
         )
 
