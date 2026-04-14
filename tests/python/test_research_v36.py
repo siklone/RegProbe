@@ -83,6 +83,14 @@ etw_stackwalk_reopen_decision_ledger_check = load_module(
     "check_etw_stackwalk_reopen_decision_ledger",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_decision_ledger.py",
 )
+etw_stackwalk_reopen_readiness_scoreboard = load_module(
+    "generate_etw_stackwalk_reopen_readiness_scoreboard",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_readiness_scoreboard.py",
+)
+etw_stackwalk_reopen_readiness_scoreboard_check = load_module(
+    "check_etw_stackwalk_reopen_readiness_scoreboard",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_readiness_scoreboard.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -2809,6 +2817,186 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("deferred_candidate_count mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_readiness_scoreboard_marks_blocked_candidates(self) -> None:
+        ledger_payload = {
+            "ledger_status": "deferred",
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "decision_state": "defer",
+                    "decision_reason_codes": [
+                        "await-seeding-pivot",
+                        "await-primary-doc",
+                        "explicit-reopen-required",
+                    ],
+                    "blocker_count": 3,
+                    "prerequisite_count": 3,
+                    "reopen_prerequisites": [
+                        "Land a current-build boot/init reader or registry seeding caller proof.",
+                        "Land a primary current-build Microsoft document for the exact value semantics.",
+                        "Explicitly reopen the lane before dispatching runtime capture.",
+                    ],
+                    "next_review_trigger": "Revisit after a current-build seeding-path pivot and a primary Microsoft doc both land.",
+                    "include_holds_plan_command": "python3 reopen.py --plan",
+                    "include_holds_run_command": "python3 reopen.py --run",
+                    "run_id": "wave4-audio",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-audio/wave4-audio.etl",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_readiness_scoreboard.build_reopen_readiness_scoreboard(
+            ledger_payload,
+            generated_utc="2026-04-15T13:00:00Z",
+        )
+
+        self.assertEqual(payload["scoreboard_status"], "blocked")
+        self.assertEqual(payload["counts"]["blocked_count"], 1)
+        self.assertEqual(payload["entries"][0]["dominant_reason_code"], "await-seeding-pivot")
+        self.assertEqual(payload["entries"][0]["unblocker_class"], "evidence-gap")
+
+    def test_etw_stackwalk_reopen_readiness_scoreboard_marks_ready_candidates(self) -> None:
+        ledger_payload = {
+            "ledger_status": "review-ready",
+            "entries": [
+                {
+                    "candidate_id": "example.ready",
+                    "feature_area": "Example",
+                    "decision_state": "review-ready",
+                    "decision_reason_codes": ["explicit-reopen-required"],
+                    "blocker_count": 1,
+                    "prerequisite_count": 0,
+                    "reopen_prerequisites": [],
+                    "next_review_trigger": "Revisit only after we intentionally reopen this ETW lane.",
+                    "include_holds_plan_command": "python3 reopen.py --plan",
+                    "include_holds_run_command": "python3 reopen.py --run",
+                    "run_id": "example-run",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/example/example.etl",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_readiness_scoreboard.build_reopen_readiness_scoreboard(
+            ledger_payload,
+            generated_utc="2026-04-15T13:00:00Z",
+        )
+
+        self.assertEqual(payload["scoreboard_status"], "review-ready")
+        self.assertEqual(payload["counts"]["ready_count"], 1)
+        self.assertEqual(payload["entries"][0]["readiness_bucket"], "ready")
+
+    def test_etw_stackwalk_reopen_readiness_scoreboard_check_accepts_matching_surface(self) -> None:
+        surface = {
+            "schema_version": "1.0",
+            "source_reopen_decision_ledger_path": "registry-research-framework/audit/etw-stackwalk-reopen-decision-ledger.json",
+            "ledger_status": "deferred",
+            "scoreboard_status": "blocked",
+            "operator": {
+                "next_action": "Track the next unlock prerequisite for the top blocked reopen candidate.",
+                "intentional_reopen_required": True,
+            },
+            "counts": {
+                "candidate_count": 1,
+                "ready_count": 0,
+                "blocked_count": 1,
+                "dominant_reason_counts": {"await-seeding-pivot": 1},
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "decision_state": "defer",
+                    "readiness_bucket": "blocked",
+                    "dominant_reason_code": "await-seeding-pivot",
+                    "reason_code_priority": 1,
+                    "unblocker_class": "evidence-gap",
+                    "blocker_count": 2,
+                    "prerequisite_count": 2,
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                    "next_review_trigger": "Revisit after a current-build boot/init reader or registry seeding caller pivot lands.",
+                    "include_holds_plan_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests",
+                    "include_holds_run_command": "python3 registry-research-framework/scripts/run_etw_stackwalk_dispatch_batch.py --include-holds --candidate-id power.control.allow-system-required-power-requests --run",
+                    "run_id": "wave4-system",
+                    "host_etl_repo_path": "evidence/files/etw-stackwalk/wave4-system/wave4-system.etl",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_readiness_scoreboard_check.compare_reopen_readiness_scoreboard(
+            surface,
+            surface,
+            generated_utc="2026-04-15T13:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_reopen_readiness_scoreboard_check_rejects_count_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_reopen_decision_ledger_path": "registry-research-framework/audit/etw-stackwalk-reopen-decision-ledger.json",
+            "ledger_status": "deferred",
+            "scoreboard_status": "blocked",
+            "operator": {
+                "next_action": "Track the next unlock prerequisite for the top blocked reopen candidate.",
+                "intentional_reopen_required": True,
+            },
+            "counts": {
+                "candidate_count": 2,
+                "ready_count": 0,
+                "blocked_count": 2,
+                "dominant_reason_counts": {"await-seeding-pivot": 2},
+            },
+            "entries": [],
+        }
+        surface = dict(expected)
+        surface["counts"] = dict(expected["counts"])
+        surface["counts"]["blocked_count"] = 1
+
+        payload = etw_stackwalk_reopen_readiness_scoreboard_check.compare_reopen_readiness_scoreboard(
+            surface,
+            expected,
+            generated_utc="2026-04-15T13:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("counts.blocked_count mismatch" in error for error in payload["errors"]))
+
+    def test_validate_candidate_urls_dedupes_duplicate_url_checks_per_candidate(self) -> None:
+        record = {"record_id": "system.memory-disable-paging-executive"}
+        full_evidence = {
+            "source_enrichment": [
+                {
+                    "evidence_id": "ms-kernel-trace-control-api",
+                    "kind": "official-doc",
+                    "title": "Microsoft Learn: Kernel Trace Control API Reference",
+                    "url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference",
+                },
+                {
+                    "evidence_id": "validation-proof",
+                    "kind": "validation-proof",
+                    "title": "Validation proof",
+                    "url": "https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference",
+                },
+            ]
+        }
+
+        calls: list[str] = []
+
+        def checker(url: str, timeout: float = 5.0) -> tuple[bool, int | None, str | None]:
+            del timeout
+            calls.append(url)
+            return True, 200, None
+
+        payload = research_v36_lib.validate_candidate_urls(record, full_evidence, checker=checker)
+
+        self.assertEqual(calls, ["https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference"])
+        self.assertEqual(payload["checked_url_count"], 2)
+        self.assertEqual(payload["reachable_url_count"], 2)
+        self.assertEqual(payload["dead_link_count"], 0)
+        self.assertEqual(payload["status"], "ok")
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {

@@ -1211,8 +1211,14 @@ def validate_candidate_urls(
 
     checked: list[dict[str, Any]] = []
     dead_links: list[dict[str, Any]] = []
+    per_candidate_cache: dict[str, tuple[bool, int | None, str | None]] = {}
     for reference in url_references_from_source_enrichment(source_enrichment):
-        reachable, status_code, error = checker(reference["url"], timeout=timeout)
+        url = reference["url"]
+        cached = per_candidate_cache.get(url)
+        if cached is None:
+            cached = checker(url, timeout=timeout)
+            per_candidate_cache[url] = cached
+        reachable, status_code, error = cached
         item = {
             **reference,
             "reachable": reachable,
