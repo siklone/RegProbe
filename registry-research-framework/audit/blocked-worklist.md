@@ -1,23 +1,21 @@
 # Blocked Worklist
 
-Generated: `2026-04-14T09:13:30.207918Z`
+Generated: `2026-04-14T09:25:33.432240Z`
 
 Blocked candidates: `18`
 
 ## Actionability
 
-- `active`: 2
-- `hold`: 16
+- `active`: 1
+- `hold`: 17
 
 ## Lane Summary
 
-- `ghidra`: 1 | first: `system.kernel-dpc-watchdog-profile-cluster` | `winopt research list-blocked --worklist --lane ghidra --top 5` | Find a primary current-build Microsoft source or explicitly accept research-only status.
 - `runtime-trace`: 1 | first: `system.kernel-dpc-watchdog-control-cluster` | `winopt research list-blocked --worklist --lane runtime-trace --top 5` | Find a primary current-build Microsoft source or explicitly accept research-only status.
-- `intentional-hold`: 16 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
+- `intentional-hold`: 17 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
 
 ## Top Actionable Candidates
 
-- `system.kernel-dpc-watchdog-profile-cluster` (`ghidra`, score=31, blockers=4)
 - `system.kernel-dpc-watchdog-control-cluster` (`runtime-trace`, score=27, blockers=3)
 
 ## Top Holds
@@ -29,19 +27,6 @@ Blocked candidates: `18`
 - `power.control.allow-system-required-power-requests` (`intentional-hold`, score=8, blockers=2)
 
 ## Candidates
-
-### `system.kernel-dpc-watchdog-profile-cluster`
-
-- Lane: `ghidra`
-- Actionability: `active`
-- Priority score: `31`
-- Feature area: `Session Manager Kernel DPC Watchdog Profile`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
-- Value name: `DpcWatchdogProfileBufferSizeBytes`
-- Blockers: `dpc-watchdog-profile-conditional-init-semantics-unproven`, `dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs`, `dpc-watchdog-profile-no-current-build-exact-registry-read`, `dpc-watchdog-profile-no-primary-current-build-doc`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
-- Suggested command: `winopt research show-blocked system.kernel-dpc-watchdog-profile-cluster --json`
-- Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
 
 ### `system.kernel-dpc-watchdog-control-cluster`
 
@@ -260,3 +245,16 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Prove restore or rollback behavior for the exact subtree or value.
+
+### `system.kernel-dpc-watchdog-profile-cluster`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `5`
+- Feature area: `Session Manager Kernel DPC Watchdog Profile`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
+- Value name: `DpcWatchdogProfileBufferSizeBytes`
+- Blockers: `dpc-watchdog-profile-conditional-init-semantics-unproven`, `dpc-watchdog-profile-intentional-hold-mixed-live-state-without-current-build-pivot`, `dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs`, `dpc-watchdog-profile-no-current-build-exact-registry-read`, `dpc-watchdog-profile-no-primary-current-build-doc`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
