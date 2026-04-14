@@ -51,6 +51,10 @@ etw_stackwalk_dispatch_check = load_module(
     "check_etw_stackwalk_dispatch_batch",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_dispatch_batch.py",
 )
+etw_stackwalk_dispatch_runner = load_module(
+    "run_etw_stackwalk_dispatch_batch",
+    FRAMEWORK_SCRIPTS / "run_etw_stackwalk_dispatch_batch.py",
+)
 etw_stackwalk_bundle = load_module("generate_etw_stackwalk_bundle", FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_bundle.py")
 ghidra_symbol_queue = load_module("generate_ghidra_symbol_resolution_queue", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_queue.py")
 ghidra_symbol_batch = load_module("generate_ghidra_symbol_resolution_batch", FRAMEWORK_SCRIPTS / "generate_ghidra_symbol_resolution_batch.py")
@@ -2103,6 +2107,89 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("mapped_candidate_count mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_dispatch_run_plan_skips_hold_candidates_by_default(self) -> None:
+        payload = {
+            "items": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "actionability": "hold",
+                    "capture_ready": True,
+                    "dispatch_recommended": False,
+                    "profile_id": "execution-required-system-stackwalk-v1",
+                    "dispatch_command_argv": [
+                        "python3",
+                        "scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+                        "--candidate-id",
+                        "power.control.allow-system-required-power-requests",
+                    ],
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests",
+                    "next_action_hint": "Reopen only when a boot/init reader pivot exists.",
+                }
+            ]
+        }
+
+        plan = etw_stackwalk_dispatch_runner.build_run_plan(payload, generated_utc="2026-04-14T18:00:00Z")
+
+        self.assertEqual(plan["mode"], "dry-run")
+        self.assertEqual(plan["selected_job_count"], 0)
+        self.assertEqual(plan["skipped_hold_count"], 1)
+
+    def test_etw_stackwalk_dispatch_run_plan_can_include_holds(self) -> None:
+        payload = {
+            "items": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "actionability": "hold",
+                    "capture_ready": True,
+                    "dispatch_recommended": False,
+                    "profile_id": "execution-required-system-stackwalk-v1",
+                    "dispatch_command_argv": [
+                        "python3",
+                        "scripts/vm-kvm/run-guest-etw-stackwalk-capture.py",
+                        "--candidate-id",
+                        "power.control.allow-system-required-power-requests",
+                    ],
+                    "dispatch_command": "python3 scripts/vm-kvm/run-guest-etw-stackwalk-capture.py --candidate-id power.control.allow-system-required-power-requests",
+                    "next_action_hint": "Reopen only when a boot/init reader pivot exists.",
+                }
+            ]
+        }
+
+        plan = etw_stackwalk_dispatch_runner.build_run_plan(
+            payload,
+            include_holds=True,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(plan["selected_job_count"], 1)
+        self.assertEqual(plan["skipped_hold_count"], 0)
+        self.assertEqual(plan["jobs"][0]["candidate_id"], "power.control.allow-system-required-power-requests")
+
+    def test_etw_stackwalk_dispatch_run_executes_selected_jobs(self) -> None:
+        payload = {
+            "items": [
+                {
+                    "candidate_id": "example.dispatch",
+                    "actionability": "active",
+                    "capture_ready": True,
+                    "dispatch_recommended": True,
+                    "profile_id": "kernel-registry-stackwalk-v1",
+                    "dispatch_command_argv": [sys.executable, "-c", "print('dispatch-ok')"],
+                }
+            ]
+        }
+
+        result = etw_stackwalk_dispatch_runner.run_jobs(
+            payload,
+            generated_utc="2026-04-14T18:00:00Z",
+        )
+
+        self.assertEqual(result["mode"], "run")
+        self.assertEqual(result["selected_job_count"], 1)
+        self.assertEqual(result["executed_job_count"], 1)
+        self.assertEqual(result["jobs"][0]["exit_code"], 0)
+        self.assertIn("dispatch-ok", result["jobs"][0]["stdout"])
 
     def test_etw_stackwalk_bundle_preserves_caller_stack_events(self) -> None:
         parse_result = {
