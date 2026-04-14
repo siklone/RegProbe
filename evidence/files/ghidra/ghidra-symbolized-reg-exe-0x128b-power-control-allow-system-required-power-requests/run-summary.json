@@ -1,0 +1,44 @@
+{
+  "generated_utc": "2026-04-14T02:40:05.1606529Z",
+  "binary_path": "C:\\Windows\\System32\\reg.exe",
+  "output_name": "ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests",
+  "project_name": "Probe_ghidra_symbolized_reg_exe_0x128b_power_control_allow_system_required_power_requests",
+  "symbol_root": "C:\\Tools\\Symbols\\ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests",
+  "output_root": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests",
+  "symchk_path": "C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\symchk.exe",
+  "symchk_exit_code": 0,
+  "staged_pdb_count": 2,
+  "staged_pdb_sample": [
+    "C:\\Tools\\Symbols\\ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests\\reg.pdb",
+    "C:\\Tools\\Symbols\\ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests\\reg.pdb\\C2CB4776395A937BAF0BB2DC0E5A91121\\reg.pdb"
+  ],
+  "ghidra_exit_code": 0,
+  "no_analysis": false,
+  "module_offsets": [
+    "reg.exe+0x128B",
+    "reg.exe+0x379D",
+    "reg.exe+0x65C6",
+    "reg.exe+0x6775"
+  ],
+  "pdb_loaded": true,
+  "match_count": 4,
+  "uploads": {
+    "evidence": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests\\evidence.json",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests-evidence.json"
+    },
+    "markdown": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests\\ghidra-matches.md",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests-ghidra-matches.md"
+    },
+    "symchk_log": {
+      "path": "C:\\RegProbe-Diag\\ghidra\\ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests\\symchk.txt",
+      "uri": "http://10.0.2.2:8766/ghidra-symbolized-reg-exe-0x128b-power-control-allow-system-required-power-requests-symchk.txt"
+    }
+  },
+  "status": "ok",
+  "error_kind": "ghidra-symbolized-probe-error",
+  "recovery_action": "inspect-ghidra-symbolized-run",
+  "transport_blocker": "ghidra",
+  "guest_health": "stable"
+}
