@@ -2,7 +2,7 @@ using RegProbe.Infrastructure;
 
 namespace RegProbe.Tests;
 
-public class UnitTest1
+public class AppPathsAndSettingsStoreTests
 {
     [Fact]
     public void AppPathsBuildsExpectedLocations()

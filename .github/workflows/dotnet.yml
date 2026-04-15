@@ -6,7 +6,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main]
   pull_request:
     branches: [main]
   release:
@@ -63,6 +63,9 @@ jobs:
       - name: Run Python pipeline tests
         run: python -m unittest discover -s tests/python -p "test*.py"
 
+      - name: Check public repo hygiene
+        run: python registry-research-framework/scripts/check_public_repo_hygiene.py
+
       - name: Ghidra autotrigger smoke gate
         run: python registry-research-framework/scripts/run_ghidra_autotrigger_smoke.py
 
@@ -77,6 +80,8 @@ jobs:
           path: |
             registry-research-framework/audit/research-quality-gate.json
             registry-research-framework/audit/research-quality-gate.md
+            registry-research-framework/audit/public-repo-hygiene-check.json
+            registry-research-framework/audit/public-repo-hygiene-check.md
             registry-research-framework/audit/ghidra-autotrigger-smoke.json
             registry-research-framework/audit/ghidra-autotrigger-smoke.md
             registry-research-framework/audit/ghidra-autotrigger-smoke-check.json

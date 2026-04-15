@@ -16,7 +16,7 @@ RegProbe is both a desktop tweak app and a registry research workspace. Most use
 - this repo uses a `main`-only remote workflow
 - do not commit plaintext VM credentials
 - do not treat `staged` manifests as proof
-- do not touch [research/vm-incidents.json](H:/D/Dev/RegProbe/research/vm-incidents.json) unless the task explicitly targets incident logging
+- do not touch [research/vm-incidents.json](research/vm-incidents.json) unless the task explicitly targets incident logging
 
 ## Evidence Contract
 
@@ -46,12 +46,12 @@ New research output should preserve and reuse these surfaces instead of inventin
 
 Relevant files:
 
-- [interaction-graph.json](H:/D/Dev/RegProbe/registry-research-framework/config/interaction-graph.json)
-- [tweak-dependencies.json](H:/D/Dev/RegProbe/registry-research-framework/config/tweak-dependencies.json)
-- [anticheat-risk-overrides.json](H:/D/Dev/RegProbe/registry-research-framework/config/anticheat-risk-overrides.json)
-- [reproducibility-manifest.json](H:/D/Dev/RegProbe/registry-research-framework/config/reproducibility-manifest.json)
-- [regression-history.json](H:/D/Dev/RegProbe/research/regression-history.json)
-- [evidence-not-found](H:/D/Dev/RegProbe/research/evidence-not-found)
+- [interaction-graph.json](registry-research-framework/config/interaction-graph.json)
+- [tweak-dependencies.json](registry-research-framework/config/tweak-dependencies.json)
+- [anticheat-risk-overrides.json](registry-research-framework/config/anticheat-risk-overrides.json)
+- [reproducibility-manifest.json](registry-research-framework/config/reproducibility-manifest.json)
+- [regression-history.json](research/regression-history.json)
+- [evidence-not-found](research/evidence-not-found)
 
 ## Collection Modes and Rollback
 
@@ -78,7 +78,7 @@ Do not silently revert and pretend nothing changed.
 
 ## VM Credentials
 
-All repo-tracked VM scripts should resolve credentials through the shared helper under [scripts/vm/_vmrun-common.ps1](H:/D/Dev/RegProbe/scripts/vm/_vmrun-common.ps1).
+All repo-tracked VM scripts should resolve credentials through the shared helper under [scripts/vm/_vmrun-common.ps1](scripts/vm/_vmrun-common.ps1).
 
 Resolution order:
 

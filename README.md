@@ -4,9 +4,11 @@
   <img src="assets/brand/regprobe-logo-full.png" alt="RegProbe logo" width="320">
 </p>
 
-RegProbe started as a personal frustration with the state of Windows registry "optimization" advice. Most of it is folklore, some of it is actively harmful, and almost none of it is verified before people are told to run it. The goal here is simple: before RegProbe applies anything, prove what the setting is, where it lives, what Windows appears to do with it, and how to get back.
+**Evidence-first Windows registry research and safer configuration tooling.**
 
-The app is the visible part of that idea. The repo is the trail behind it: research records, runtime captures, static analysis, VM notes, audits, and the scripts used to reproduce the evidence. RegProbe is intentionally preview-first and reversible because registry tooling should feel calmer than the problem it is trying to solve.
+RegProbe investigates, validates, and applies Windows registry-backed settings with a strong bias toward proof, reversibility, and controlled rollout. Instead of treating registry advice like folklore, RegProbe treats every setting like a claim that needs evidence: what changes, why it matters, how it was validated, and how to undo it.
+
+That is the public product promise and the repo contract underneath it. The desktop app is the calm surface. The research pipeline, VM lanes, traces, audits, and static-analysis exports are the proof system behind it.
 
 ![.NET Version](https://img.shields.io/badge/.NET-8.0-512BD4)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D4)
@@ -15,11 +17,124 @@ The app is the visible part of that idea. The repo is the trail behind it: resea
 ![License](https://img.shields.io/badge/license-MIT-22c55e)
 [![CI](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml/badge.svg)](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml)
 
+## What RegProbe Does
+
+- Detects current registry-backed setting state before making changes
+- Shows what a change means before apply
+- Separates standard app logic from elevated operations
+- Tracks evidence quality per setting
+- Records rollback expectations explicitly
+- Distinguishes research-only findings from shippable actions
+
+## What RegProbe Does Not Do
+
+- Blindly apply popular tweak lists
+- Treat community claims as proof
+- Assume a policy surface proves runtime behavior
+- Ship risky settings without rollback expectations
+- Auto-apply changes on startup
+
+## Safety Model
+
+RegProbe follows this flow:
+
+`Detect -> Preview -> Apply -> Verify -> Record rollback`
+
+That means changes are meant to be deliberate, inspectable, and reversible.
+
+```mermaid
+flowchart LR
+    A["User Selects Setting"] --> B["Detect Current State"]
+    B --> C["Preview Change"]
+    C --> D["Elevated Host Applies"]
+    D --> E["Verify Result"]
+    E --> F["Store Rollback Snapshot"]
+    F --> G["Optional Cleanup"]
+```
+
+## How To Read A Setting
+
+Every serious setting in RegProbe should answer four questions:
+
+1. What is it?
+2. How strong is the proof?
+3. Can I safely apply it?
+4. How do I undo it?
+
+The longer contributor walkthrough lives in [How to read a record](Docs/HOW_TO_READ_A_RECORD.md).
+
+## Evidence Model
+
+RegProbe separates three layers of confidence.
+
+### 1. Control Surface Proof
+
+This shows that Windows exposes or recognizes the setting.
+
+- official documentation
+- ADMX / CSP / policy mapping
+- known registry write surface
+- app or provider mapping
+
+### 2. Runtime Proof
+
+This shows that changing the value produces meaningful behavior on real systems or controlled VMs.
+
+- VM before/after validation
+- Procmon / ETW / WPR traces
+- observed service or component reads
+- controlled reproduction artifacts
+
+### 3. Shipping Decision
+
+This determines whether RegProbe should expose the setting for users.
+
+- apply allowed
+- visible but blocked
+- research-only
+- archived or negative evidence
+- revalidation required for newer builds
+
+The proof model and vocabulary are documented in more detail in [Proof model and visual grammar](Docs/PROOF_MODEL.md).
+
+## Badge Legend
+
+| Badge | Meaning |
+|--------|---------|
+| `Docs` | Official documentation or primary source found |
+| `Policy` | ADMX, CSP, group policy, or control surface confirmed |
+| `VM` | Tested in a controlled virtual environment |
+| `Trace` | Runtime activity captured via Procmon, ETW, or WPR |
+| `RE` | Reverse engineering supported interpretation |
+| `Rollback` | Rollback path explicitly tested |
+| `No-hit` | Researched, but runtime evidence is insufficient |
+| `Experimental` | Not ready for normal user-facing apply flow |
+
+## Status Meanings
+
+| Status | Meaning |
+|--------|---------|
+| `Recommended` | Sufficient evidence and rollback confidence |
+| `Experimental` | Promising, but still under validation |
+| `Research-only` | Useful record, not safe to expose for apply |
+| `Blocked` | Known control surface, insufficient runtime proof |
+| `Archived` | Retained to avoid rediscovering dead ends |
+
+## Start Here
+
+- I want to use the app: [User guide](Docs/USER_GUIDE.md)
+- I want to build the app: [Build and run](#build-and-run)
+- I want to contribute research: [Contributing](CONTRIBUTING.md)
+
 ## What Ships Today
 
 The shipped app is a focused three-surface shell. `Configuration` is the main workspace, `Repairs` handles recovery and cleanup actions, and `About` keeps repo, build, and log context close at hand. The current UI is deliberately tighter than older builds: dark, flat, list-first, and more interested in exposing research than in showing off.
 
 That restraint is intentional. Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the old policy-heavy shell are no longer part of the shipped experience. Contributor-only evidence metadata still exists, but it stays behind repo and developer gating instead of turning the app into a research database with buttons.
+
+## For Contributors
+
+Everything below this point is mostly contributor depth: evidence policy, VM workflow, research health, audit surfaces, and the mechanics used to decide whether a tweak is safe enough to ship. If you only wanted the quick adoption path, you can stop at the build and run section and come back later.
 
 ## Core Principles
 
@@ -143,7 +258,7 @@ pwsh -File scripts/publish_release.ps1
 
 ## Useful Entry Points
 
-Most day-to-day contributors will want [Contributing](CONTRIBUTING.md), [VM workflow](Docs/VM_WORKFLOW.md), [Runtime escalation](Docs/RUNTIME_ESCALATION.md), [Script catalog](Docs/SCRIPT_CATALOG.md), [Tweak sources](Docs/TWEAK_SOURCES.md), the [Research readme](research/README.md), the [Evidence atlas](research/evidence-atlas.md), and the current [Evidence audit](research/evidence-audit.json).
+Most day-to-day contributors will want [Contributing](CONTRIBUTING.md), [How to read a record](Docs/HOW_TO_READ_A_RECORD.md), [Proof model and visual grammar](Docs/PROOF_MODEL.md), [VM workflow](Docs/VM_WORKFLOW.md), [Runtime escalation](Docs/RUNTIME_ESCALATION.md), [Script catalog](Docs/SCRIPT_CATALOG.md), [Tweak sources](Docs/TWEAK_SOURCES.md), the [Research readme](research/README.md), the [Evidence atlas](research/evidence-atlas.md), and the current [Evidence audit](research/evidence-audit.json).
 
 ## License
 
