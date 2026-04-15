@@ -112,6 +112,21 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected promotion gate split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_win_config_catalog_service_stays_split_into_focused_files(self) -> None:
+        service_lines = (
+            REPO_ROOT / "app" / "Services" / "WinConfigCatalogService.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "WinConfigCatalogModels.cs",
+            REPO_ROOT / "app" / "Services" / "WinConfigCatalogParser.cs",
+            REPO_ROOT / "app" / "Services" / "WinConfigCatalogStore.cs",
+            REPO_ROOT / "app" / "Services" / "WinConfigCatalogClient.cs",
+        ]
+
+        self.assertLessEqual(len(service_lines), 120)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected win-config split file: {path.relative_to(REPO_ROOT)}")
+
     def test_application_layer_links_and_app_layer_removes_split_service_files(self) -> None:
         application_project = (REPO_ROOT / "application" / "application.csproj").read_text(encoding="utf-8")
         app_project = (REPO_ROOT / "app" / "app.csproj").read_text(encoding="utf-8")
