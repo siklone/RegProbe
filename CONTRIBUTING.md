@@ -96,9 +96,9 @@ Read these first:
 - [research/README.md](research/README.md)
 - [research/evidence-atlas.md](research/evidence-atlas.md)
 - [research/evidence-audit.json](research/evidence-audit.json)
-- [Docs/VM_WORKFLOW.md](Docs/VM_WORKFLOW.md)
-- [Docs/RUNTIME_ESCALATION.md](Docs/RUNTIME_ESCALATION.md)
-- [Docs/SCRIPT_CATALOG.md](Docs/SCRIPT_CATALOG.md)
+- [Docs/research/vm-workflow.md](Docs/research/vm-workflow.md)
+- [Docs/research/runtime-escalation.md](Docs/research/runtime-escalation.md)
+- [Docs/research/script-catalog.md](Docs/research/script-catalog.md)
 - [Docs/TWEAK_SOURCES.md](Docs/TWEAK_SOURCES.md)
 - [Docs/SERVICES_DOCUMENTATION.md](Docs/SERVICES_DOCUMENTATION.md)
 

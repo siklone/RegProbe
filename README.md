@@ -19,7 +19,7 @@ That is the public product promise and the repo contract underneath it. The desk
 
 ## Product Preview
 
-The repo now carries a small public media lane so the product promise is visible before the deep research prose starts. These preview assets are generated from the current UI language and kept in sync through [Product media](Docs/PRODUCT_MEDIA.md).
+The repo now carries a small public media lane so the product promise is visible before the deep research prose starts. These preview assets are generated from the current UI language and kept in sync through [Product media](Docs/product/media.md).
 
 <table>
   <tr>
@@ -88,7 +88,7 @@ Every serious setting in RegProbe should answer four questions:
 3. Can I safely apply it?
 4. How do I undo it?
 
-The longer contributor walkthrough lives in [How to read a record](Docs/HOW_TO_READ_A_RECORD.md).
+The longer contributor walkthrough lives in [How to read a record](Docs/research/how-to-read-a-record.md).
 
 ## Evidence Model
 
@@ -122,7 +122,7 @@ This determines whether RegProbe should expose the setting for users.
 - archived or negative evidence
 - revalidation required for newer builds
 
-The proof model and vocabulary are documented in more detail in [Proof model and visual grammar](Docs/PROOF_MODEL.md).
+The proof model and vocabulary are documented in more detail in [Proof model and visual grammar](Docs/research/proof-model.md).
 
 ## Badge Legend
 
@@ -149,9 +149,11 @@ The proof model and vocabulary are documented in more detail in [Proof model and
 
 ## Start Here
 
-- I want to use the app: [User guide](Docs/USER_GUIDE.md)
+- I want to use the app: [User guide](Docs/product/user-guide.md)
 - I want to build the app: [Build and run](#build-and-run)
 - I want to contribute research: [Contributing](CONTRIBUTING.md)
+
+The docs are now split the same way the repo is meant to feel from the outside: [Docs/product](Docs/product/README.md) for public-facing usage and trust signals, [Docs/research](Docs/research/README.md) for contributor and validation depth.
 
 ## What Ships Today
 
@@ -195,7 +197,7 @@ VM secret handling was also tightened. Repo-tracked VM scripts no longer keep pl
 
 Hard runtime cases no longer stop at "reboot and idle." The current escalation path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. The newer research work is less a banner than a rhythm now: ETL discovery feeds the queue, feature-area enrichment and triage keep the noise down, VM safety bench results can promote only the profiles that deserve it, and hard blockers say plainly what is missing instead of hiding behind generic review language. Some lanes are still intentionally held, but they are held with reasons: exact runtime reads are missing, the VM cannot expose the right power state, or the probe is boot-unsafe without a dedicated lane.
 
-For the full validation flow, start with the [VM workflow](Docs/VM_WORKFLOW.md), [Runtime escalation](Docs/RUNTIME_ESCALATION.md), and [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md).
+For the full validation flow, start with the [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), and [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md).
 
 ## Research Health
 
@@ -233,17 +235,17 @@ The supported validation VM is `Win25H2Clean`, and the current canonical snapsho
 
 The baseline is tooling-first. Defender stays enabled, exclusions are bounded to trusted tooling, app payloads do not persist in the saved baseline, and app launch smoke is allowed only as an ephemeral deploy/validate/cleanup lane. The details matter because registry evidence collected from a messy VM is worse than no evidence: it looks authoritative while quietly carrying someone else's state.
 
-Start with the [VM workflow](Docs/VM_WORKFLOW.md) when you need the whole flow, and use [Runtime escalation](Docs/RUNTIME_ESCALATION.md) when a value needs more than a simple before/after check.
+Start with the [VM workflow](Docs/research/vm-workflow.md) when you need the whole flow, and use [Runtime escalation](Docs/research/runtime-escalation.md) when a value needs more than a simple before/after check.
 
 ## Scripts
 
 The repo has a lot of PowerShell, but not every script has the same job. Some scripts are everyday build, package, clean, baseline maintenance, shell-health, and app-smoke helpers. Some are active research runners for current escalation lanes. Others are historical reproducibility scripts kept because old notes, audits, and evidence bundles still depend on them.
 
-Regenerable clutter such as `bin/`, `obj/`, `publish/`, `dist/`, and `TestResults/` can be cleaned freely. Narrow `.ps1` runners should be treated more carefully; many exist so an old evidence claim can still be replayed. The full map lives in the [Script catalog](Docs/SCRIPT_CATALOG.md), and it is worth reading before deleting anything that looks oddly specific.
+Regenerable clutter such as `bin/`, `obj/`, `publish/`, `dist/`, and `TestResults/` can be cleaned freely. Narrow `.ps1` runners should be treated more carefully; many exist so an old evidence claim can still be replayed. The full map lives in the [Script catalog](Docs/research/script-catalog.md), and it is worth reading before deleting anything that looks oddly specific.
 
 ## Where To Start If You Want To Learn
 
-Start with this [README](README.md) and [Contributing](CONTRIBUTING.md), then move to the [VM workflow](Docs/VM_WORKFLOW.md) and the [script catalog](Docs/SCRIPT_CATALOG.md). After that, open the [research atlas](research/evidence-atlas.md), pick one record under [research/records](research/records), and read it next to its matching bundle under [evidence/records](evidence/records). That path gives you the "what", the "how", and the proof trail in the same order most contributors discover it.
+Start with this [README](README.md) and [Contributing](CONTRIBUTING.md), then move to the [VM workflow](Docs/research/vm-workflow.md) and the [script catalog](Docs/research/script-catalog.md). After that, open the [research atlas](research/evidence-atlas.md), pick one record under [research/records](research/records), and read it next to its matching bundle under [evidence/records](evidence/records). That path gives you the "what", the "how", and the proof trail in the same order most contributors discover it.
 
 ## Build And Run
 
@@ -285,7 +287,7 @@ pwsh -File scripts/publish_release.ps1
 
 ## Useful Entry Points
 
-Most day-to-day contributors will want [Contributing](CONTRIBUTING.md), [How to read a record](Docs/HOW_TO_READ_A_RECORD.md), [Proof model and visual grammar](Docs/PROOF_MODEL.md), [VM workflow](Docs/VM_WORKFLOW.md), [Runtime escalation](Docs/RUNTIME_ESCALATION.md), [Script catalog](Docs/SCRIPT_CATALOG.md), [Tweak sources](Docs/TWEAK_SOURCES.md), the [Research readme](research/README.md), the [Evidence atlas](research/evidence-atlas.md), and the current [Evidence audit](research/evidence-audit.json).
+Most day-to-day contributors will want [Contributing](CONTRIBUTING.md), [How to read a record](Docs/research/how-to-read-a-record.md), [Proof model and visual grammar](Docs/research/proof-model.md), [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), [Script catalog](Docs/research/script-catalog.md), [Tweak sources](Docs/TWEAK_SOURCES.md), the [Research readme](research/README.md), the [Evidence atlas](research/evidence-atlas.md), and the current [Evidence audit](research/evidence-audit.json).
 
 ## License
 
