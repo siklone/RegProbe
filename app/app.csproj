@@ -58,8 +58,13 @@
     <Compile Remove="Models\\PresetModel.cs" />
     <Compile Remove="Models\\PresetResults.cs" />
     <Compile Remove="Services\\ConfigurationWorkspaceClassifier.cs" />
+    <Compile Remove="Services\\ConfigExportModels.cs" />
     <Compile Remove="Services\\ConfigExportService.cs" />
+    <Compile Remove="Services\\ConfigExportSnapshotBuilder.cs" />
+    <Compile Remove="Services\\ConfigImportExecutor.cs" />
     <Compile Remove="Services\\DnsService.cs" />
+    <Compile Remove="Services\\PresetCatalog.cs" />
+    <Compile Remove="Services\\PresetExecutionEngine.cs" />
     <Compile Remove="Services\\PresetService.cs" />
     <Compile Remove="Services\\TweakCatalogService.cs" />
     <Compile Remove="Services\\TweakPromotionGateCatalogService.cs" />

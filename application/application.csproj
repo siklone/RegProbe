@@ -22,8 +22,13 @@
     <Compile Include="..\\app\\Models\\PresetModel.cs" Link="Models\\PresetModel.cs" />
     <Compile Include="..\\app\\Models\\PresetResults.cs" Link="Models\\PresetResults.cs" />
     <Compile Include="..\\app\\Services\\ConfigurationWorkspaceClassifier.cs" Link="Services\\ConfigurationWorkspaceClassifier.cs" />
+    <Compile Include="..\\app\\Services\\ConfigExportModels.cs" Link="Services\\ConfigExportModels.cs" />
     <Compile Include="..\\app\\Services\\ConfigExportService.cs" Link="Services\\ConfigExportService.cs" />
+    <Compile Include="..\\app\\Services\\ConfigExportSnapshotBuilder.cs" Link="Services\\ConfigExportSnapshotBuilder.cs" />
+    <Compile Include="..\\app\\Services\\ConfigImportExecutor.cs" Link="Services\\ConfigImportExecutor.cs" />
     <Compile Include="..\\app\\Services\\DnsService.cs" Link="Services\\DnsService.cs" />
+    <Compile Include="..\\app\\Services\\PresetCatalog.cs" Link="Services\\PresetCatalog.cs" />
+    <Compile Include="..\\app\\Services\\PresetExecutionEngine.cs" Link="Services\\PresetExecutionEngine.cs" />
     <Compile Include="..\\app\\Services\\PresetService.cs" Link="Services\\PresetService.cs" />
     <Compile Include="..\\app\\Services\\TweakCatalogService.cs" Link="Services\\TweakCatalogService.cs" />
     <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogService.cs" Link="Services\\TweakPromotionGateCatalogService.cs" />
