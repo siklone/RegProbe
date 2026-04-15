@@ -10,9 +10,5 @@
              FontSize="12"
              UseLayoutRounding="True"
              SnapsToDevicePixels="True">
-    <views:WorkspaceShellChrome>
-        <views:WorkspaceShellChrome.ShellContent>
-            <views:ConfigurationContentView/>
-        </views:WorkspaceShellChrome.ShellContent>
-    </views:WorkspaceShellChrome>
+    <views:TweaksWorkspaceView DataContext="{Binding Workspace}"/>
 </UserControl>

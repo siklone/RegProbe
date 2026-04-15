@@ -48,4 +48,17 @@ public sealed class TweaksShellStateViewModelTests
 
         Assert.Equal("About & Diagnostics", coordinator.Title);
     }
+
+    [Fact]
+    public void ResetFilters_ClearsScopeFilter()
+    {
+        var viewModel = new TweaksShellStateViewModel
+        {
+            ScopeFilter = "machine"
+        };
+
+        viewModel.ResetFilters();
+
+        Assert.Equal(string.Empty, viewModel.ScopeFilter);
+    }
 }

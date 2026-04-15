@@ -95,6 +95,8 @@ public abstract class WorkspaceShellViewModelBase : ViewModelBase, IDisposable
 
     public string SearchPlaceholder => Workspace.SearchPlaceholder;
 
+    public int SearchFocusRequestId => Workspace.SearchFocusRequestId;
+
     public bool ShowSafe
     {
         get => Workspace.ShowSafe;

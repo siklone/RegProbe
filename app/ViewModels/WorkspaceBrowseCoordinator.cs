@@ -140,6 +140,12 @@ public sealed class WorkspaceBrowseCoordinator : IDisposable
             return false;
         }
 
+        if (!string.IsNullOrWhiteSpace(_shellState.ScopeFilter)
+            && !string.Equals(item.ScopeFilterKey, _shellState.ScopeFilter, StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
         if (item.Risk == TweakRiskLevel.Safe && !_shellState.ShowSafe)
         {
             return false;

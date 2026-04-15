@@ -8,8 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using Microsoft.Win32;
 using RegProbe.Core;
 using RegProbe.Infrastructure.Elevation;
 using RegProbe.Infrastructure.Registry;
@@ -44,6 +46,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly RelayCommand _filterRolledBackCommand;
     private readonly RelayCommand _showSettingsWorkspaceCommand;
     private readonly RelayCommand _showMaintenanceWorkspaceCommand;
+    private readonly RelayCommand _toggleSecondaryPanelCommand;
+    private readonly RelayCommand _copySelectedPlanCommand;
+    private readonly RelayCommand _exportSelectedPlanCommand;
 	private readonly bool _isElevated;
 	private readonly string _elevatedHostExecutablePath;
 	private readonly bool _isElevatedHostAvailable;
@@ -64,6 +69,11 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     private readonly WorkspaceSupportCoordinator _supportCoordinator;
     private readonly IAppLogger _appLogger;
     private readonly IBusyService _busyService;
+    private TweakItemViewModel? _selectedTweak;
+    private bool _isSecondaryPanelCollapsed;
+    private bool _isPlanDrawerExpanded;
+    private bool _isSelectedTweakEvidenceExpanded;
+    private int _searchFocusRequestId;
 
     /// <summary>
     /// DNS configuration panel ViewModel for Network category.
@@ -172,6 +182,9 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _filterRolledBackCommand = new RelayCommand(_ => _configurationCoordinator.ShowRolledBackOnly());
         _showSettingsWorkspaceCommand = new RelayCommand(_ => _configurationCoordinator.ShowConfigurationWorkspace());
         _showMaintenanceWorkspaceCommand = new RelayCommand(_ => SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance);
+        _toggleSecondaryPanelCommand = new RelayCommand(_ => IsSecondaryPanelCollapsed = !IsSecondaryPanelCollapsed);
+        _copySelectedPlanCommand = new RelayCommand(_ => CopySelectedPlan(), _ => HasSelectedTweak);
+        _exportSelectedPlanCommand = new RelayCommand(_ => ExportSelectedPlan(), _ => HasSelectedTweak);
 
         _catalogCoordinator.LoadInitialTweaks(Tweaks);
         _inventoryCoordinator.LoadCachedInventoryState(Tweaks);
@@ -180,6 +193,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         UpdateFilterSummary();
         _healthCoordinator.Refresh(Tweaks);
         RefreshSummaryStats();
+        SyncSelectedTweak(forceFirstVisible: true);
 
     }
 
@@ -250,6 +264,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public ICommand CollapseAllDetailsCommand => _commandCoordinator.CollapseAllDetailsCommand;
 
+    public ICommand ToggleSecondaryPanelCommand => _toggleSecondaryPanelCommand;
+
+    public ICommand CopySelectedPlanCommand => _copySelectedPlanCommand;
+
+    public ICommand ExportSelectedPlanCommand => _exportSelectedPlanCommand;
+
     public int ScorableTweaksTotal => _healthCoordinator.ScorableTweaksTotal;
 
     public int TotalTweaksAvailable => _presentationState.TotalTweaksAvailable;
@@ -309,6 +329,38 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string WorkspaceVerificationSummaryText => CurrentWorkspaceSummary.Verification.DetailText;
 
     public string WorkspaceVerificationSummaryState => CurrentWorkspaceSummary.Verification.State;
+
+    public string WorkspaceVerificationStripText => WorkspaceVerificationSummaryState == "ok"
+        ? "Verified"
+        : "Needs review";
+
+    public string WorkspaceRiskStripText
+    {
+        get
+        {
+            var visibleTweaks = GetVisibleWorkspaceTweaks();
+            if (visibleTweaks.Any(t => t.Risk == TweakRiskLevel.Risky))
+            {
+                return "Mixed risk";
+            }
+
+            if (visibleTweaks.Any(t => t.Risk == TweakRiskLevel.Advanced))
+            {
+                return "Managed risk";
+            }
+
+            return "Low risk";
+        }
+    }
+
+    public string WorkspacePendingStripText => $"{WorkspacePendingSummaryValue} pending";
+
+    public string WorkspaceRollbackStripText => WorkspaceRollbackSummaryState switch
+    {
+        "ok" => "Rollback ready",
+        "attention" => "Rollback partial",
+        _ => "Rollback missing"
+    };
 
     public string WorkspaceCategoryHeader => _shellState.WorkspaceCategoryHeader;
 
@@ -400,9 +452,120 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public bool HasStatusFilter => _shellState.HasStatusFilter;
 
+    public string ScopeFilter
+    {
+        get => _shellState.ScopeFilter;
+        set => _shellState.ScopeFilter = value;
+    }
+
+    public TweakItemViewModel? SelectedTweak
+    {
+        get => _selectedTweak;
+        set
+        {
+            if (ReferenceEquals(_selectedTweak, value))
+            {
+                return;
+            }
+
+            if (_selectedTweak is not null)
+            {
+                _selectedTweak.PropertyChanged -= OnSelectedTweakPropertyChanged;
+            }
+
+            _selectedTweak = value;
+
+            if (_selectedTweak is not null)
+            {
+                _selectedTweak.PropertyChanged += OnSelectedTweakPropertyChanged;
+            }
+
+            IsSelectedTweakEvidenceExpanded = false;
+            OnPropertyChanged(nameof(SelectedTweak));
+            RaiseSelectedTweakChanged();
+        }
+    }
+
+    public bool HasSelectedTweak => SelectedTweak is not null;
+
+    public bool IsSecondaryPanelCollapsed
+    {
+        get => _isSecondaryPanelCollapsed;
+        set
+        {
+            if (SetProperty(ref _isSecondaryPanelCollapsed, value))
+            {
+                OnPropertyChanged(nameof(SecondaryPanelWidth));
+            }
+        }
+    }
+
+    public GridLength SecondaryPanelWidth => IsSecondaryPanelCollapsed
+        ? new GridLength(72)
+        : new GridLength(240);
+
+    public int SearchFocusRequestId
+    {
+        get => _searchFocusRequestId;
+        private set => SetProperty(ref _searchFocusRequestId, value);
+    }
+
+    public bool IsPlanDrawerExpanded
+    {
+        get => _isPlanDrawerExpanded;
+        set => SetProperty(ref _isPlanDrawerExpanded, value);
+    }
+
+    public bool IsSelectedTweakEvidenceExpanded
+    {
+        get => _isSelectedTweakEvidenceExpanded;
+        set => SetProperty(ref _isSelectedTweakEvidenceExpanded, value);
+    }
+
+    public bool IsSelectedTweakExecutionMode =>
+        SelectedTweak?.IsRunning == true
+        || SelectedTweak?.ShowTerminal == true
+        || SelectedTweak?.HasTerminalOutput == true;
+
+    public string SelectedTweakDrawerTitle => IsSelectedTweakExecutionMode
+        ? "Execution log"
+        : HasSelectedTweak
+            ? "Plan preview"
+            : "Plan";
+
+    public string SelectedTweakDrawerSummary
+    {
+        get
+        {
+            if (SelectedTweak is null)
+            {
+                return "Plan unavailable";
+            }
+
+            if (IsSelectedTweakExecutionMode)
+            {
+                return string.IsNullOrWhiteSpace(SelectedTweak.OutcomeSummary)
+                    ? $"{SelectedTweak.Name} • running"
+                    : SelectedTweak.OutcomeSummary;
+            }
+
+            return TweakExecutionPlanSnapshot.Create(SelectedTweak).CollapsedSummary;
+        }
+    }
+
+    public IReadOnlyList<string> SelectedTweakPlanLines => TweakExecutionPlanSnapshot.Create(SelectedTweak).Lines;
+
+    public string SelectedTweakExecutionLogText => SelectedTweak?.TerminalOutput ?? string.Empty;
+
     private void TriggerSearchUpdate()
     {
         _browseCoordinator.TriggerSearchUpdate(() => RefreshFilteredViews());
+    }
+
+    public void RequestSearchFocus()
+    {
+        IsSecondaryPanelCollapsed = false;
+        SearchFocusRequestId++;
     }
 
     public bool ShowSafe
@@ -553,6 +716,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         RaiseHealthMetricsChanged();
         RaiseWorkspaceMetricsChanged();
         RefreshSummaryStats();
+        SyncSelectedTweak();
     }
 
     private void RaiseHealthMetricsChanged()
@@ -617,6 +781,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
                 TriggerSearchUpdate();
                 break;
             case nameof(TweaksShellStateViewModel.StatusFilter):
+            case nameof(TweaksShellStateViewModel.ScopeFilter):
             case nameof(TweaksShellStateViewModel.ShowSafe):
             case nameof(TweaksShellStateViewModel.ShowAdvanced):
             case nameof(TweaksShellStateViewModel.ShowRisky):
@@ -709,6 +874,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(WorkspaceVerificationSummaryValue));
         OnPropertyChanged(nameof(WorkspaceVerificationSummaryText));
         OnPropertyChanged(nameof(WorkspaceVerificationSummaryState));
+        OnPropertyChanged(nameof(WorkspaceVerificationStripText));
+        OnPropertyChanged(nameof(WorkspaceRiskStripText));
+        OnPropertyChanged(nameof(WorkspacePendingStripText));
+        OnPropertyChanged(nameof(WorkspaceRollbackStripText));
         OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
     }
 
@@ -739,6 +908,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         RepairsRowsView.Refresh();
         UpdateFilterSummary(rebuildCategoryGroups);
         RaiseWorkspaceMetricsChanged();
+        SyncSelectedTweak();
     }
 
     private void RefreshSummaryStats()
@@ -749,6 +919,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             Tweaks.Count(t => t.ShowInApp && t.WasRolledBack));
         RaiseWorkspaceMetricsChanged();
         _inventoryCoordinator.UpdateStatusMessage(Tweaks);
+        RaiseSelectedTweakChanged();
     }
 
     private List<TweakItemViewModel> GetVisibleWorkspaceTweaks()
@@ -766,11 +937,144 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             .ToList();
     }
 
+    private List<TweakItemViewModel> GetVisibleSettingsTweaks()
+    {
+        return TweaksView.Cast<TweakItemViewModel>()
+            .Where(t => t.ShowInApp)
+            .ToList();
+    }
+
+    private void SyncSelectedTweak(bool forceFirstVisible = false)
+    {
+        var visibleSettingsTweaks = GetVisibleSettingsTweaks();
+        if (visibleSettingsTweaks.Count == 0)
+        {
+            SelectedTweak = null;
+            return;
+        }
+
+        if (!forceFirstVisible
+            && SelectedTweak is not null
+            && visibleSettingsTweaks.Contains(SelectedTweak))
+        {
+            return;
+        }
+
+        SelectedTweak = visibleSettingsTweaks[0];
+    }
+
+    private void OnSelectedTweakPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.PropertyName))
+        {
+            RaiseSelectedTweakChanged();
+            return;
+        }
+
+        if (e.PropertyName is nameof(TweakItemViewModel.IsRunning)
+            or nameof(TweakItemViewModel.ShowTerminal)
+            or nameof(TweakItemViewModel.TerminalOutput)
+            or nameof(TweakItemViewModel.HasTerminalOutput))
+        {
+            if (IsSelectedTweakExecutionMode)
+            {
+                IsPlanDrawerExpanded = true;
+            }
+        }
+
+        if (e.PropertyName is nameof(TweakItemViewModel.IsRunning)
+            or nameof(TweakItemViewModel.ShowTerminal)
+            or nameof(TweakItemViewModel.TerminalOutput)
+            or nameof(TweakItemViewModel.HasTerminalOutput)
+            or nameof(TweakItemViewModel.OutcomeSummary)
+            or nameof(TweakItemViewModel.RollbackSnapshotState)
+            or nameof(TweakItemViewModel.TargetValue)
+            or nameof(TweakItemViewModel.CurrentValue)
+            or nameof(TweakItemViewModel.Name)
+            or nameof(TweakItemViewModel.RegistryPath))
+        {
+            RaiseSelectedTweakChanged();
+        }
+    }
+
+    private void RaiseSelectedTweakChanged()
+    {
+        OnPropertyChanged(nameof(SelectedTweak));
+        OnPropertyChanged(nameof(HasSelectedTweak));
+        OnPropertyChanged(nameof(IsSelectedTweakExecutionMode));
+        OnPropertyChanged(nameof(SelectedTweakDrawerTitle));
+        OnPropertyChanged(nameof(SelectedTweakDrawerSummary));
+        OnPropertyChanged(nameof(SelectedTweakPlanLines));
+        OnPropertyChanged(nameof(SelectedTweakExecutionLogText));
+        _copySelectedPlanCommand.RaiseCanExecuteChanged();
+        _exportSelectedPlanCommand.RaiseCanExecuteChanged();
+    }
+
+    private void CopySelectedPlan()
+    {
+        if (SelectedTweak is null)
+        {
+            return;
+        }
+
+        var exportText = TweakExecutionPlanSnapshot.Create(SelectedTweak).ExportText;
+        if (string.IsNullOrWhiteSpace(exportText))
+        {
+            return;
+        }
+
+        try
+        {
+            Clipboard.SetText(exportText);
+            _commandCoordinator.SetBulkStatusMessage("Plan copied.");
+        }
+        catch
+        {
+            _commandCoordinator.SetBulkStatusMessage("Plan copy failed.");
+        }
+    }
+
+    private void ExportSelectedPlan()
+    {
+        if (SelectedTweak is null)
+        {
+            return;
+        }
+
+        var exportText = TweakExecutionPlanSnapshot.Create(SelectedTweak).ExportText;
+        if (string.IsNullOrWhiteSpace(exportText))
+        {
+            return;
+        }
+
+        var safeFileName = string.Join(
+            "-",
+            (SelectedTweak.Id ?? SelectedTweak.Name)
+            .Split(Path.GetInvalidFileNameChars(), StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+
+        var dialog = new SaveFileDialog
+        {
+            Title = "Export plan",
+            DefaultExt = ".txt",
+            Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
+            FileName = $"{safeFileName}-plan.txt"
+        };
+
+        if (dialog.ShowDialog() != true)
+        {
+            return;
+        }
+
+        File.WriteAllText(dialog.FileName, exportText);
+        _commandCoordinator.SetBulkStatusMessage("Plan exported.");
+    }
+
     internal void FocusMaintenanceWorkspace(string categoryName)
     {
         SelectedWorkspace = ConfigurationWorkspaceKind.Maintenance;
         SelectedCategoryName = categoryName;
         StatusFilter = string.Empty;
+        ScopeFilter = string.Empty;
         SearchText = string.Empty;
         ShowFavoritesOnly = false;
         ShowSafe = true;
@@ -867,6 +1171,10 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _healthCoordinator.PropertyChanged -= OnHealthCoordinatorPropertyChanged;
         _inventoryCoordinator.PropertyChanged -= OnInventoryCoordinatorPropertyChanged;
         Tweaks.CollectionChanged -= OnTweaksCollectionChanged;
+        if (_selectedTweak is not null)
+        {
+            _selectedTweak.PropertyChanged -= OnSelectedTweakPropertyChanged;
+        }
 
     }
 }

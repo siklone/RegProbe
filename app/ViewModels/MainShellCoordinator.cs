@@ -93,13 +93,30 @@ public sealed class MainShellCoordinator : ViewModelBase
 
     public void FocusSearch()
     {
-        ShowConfiguration();
+        if (IsConfigurationViewActive)
+        {
+            _configurationViewModel.FocusSearch();
+            return;
+        }
+
+        if (IsRepairsViewActive)
+        {
+            _repairsViewModel.FocusSearch();
+        }
     }
 
     public void ClearFilters()
     {
-        _configurationViewModel.ClearFilters();
-        CurrentViewModel = _configurationViewModel;
+        if (IsConfigurationViewActive)
+        {
+            _configurationViewModel.ClearFilters();
+            return;
+        }
+
+        if (IsRepairsViewActive)
+        {
+            _repairsViewModel.ClearFilters();
+        }
     }
 
     private void RaiseShellViewStateChanged()

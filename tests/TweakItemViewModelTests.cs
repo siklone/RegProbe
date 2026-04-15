@@ -257,6 +257,50 @@ public sealed class TweakItemViewModelTests
         Assert.Contains("evidence-first", viewModel.RiskSnapshotText);
     }
 
+    [Fact]
+    public void CompactStateAndScope_ExposeCompactTweaksMetadata()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.scope-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false)
+        {
+            RegistryPath = @"HKCU\Software\RegProbe\Test"
+        };
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true
+        });
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "promoted",
+            RecordPromotionAllowed = true,
+            TweakIngestAllowed = true,
+            ApplyAllowed = true,
+            AppMappingStatus = "matches-research",
+            NextMissingLayer = "none",
+            DebugOverrideAllowed = false
+        });
+
+        Assert.Equal("Verified", viewModel.CompactStateText);
+        Assert.Equal("ok", viewModel.CompactStateTone);
+        Assert.Equal("user", viewModel.ScopeFilterKey);
+        Assert.Equal("User", viewModel.ScopeDisplayText);
+    }
+
     private sealed class RecordingLogger : IAppLogger
     {
         public void Log(LogLevel level, string message, Exception? exception = null)

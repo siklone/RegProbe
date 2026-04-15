@@ -28,6 +28,17 @@ public sealed class RepairsShellViewModel : WorkspaceShellViewModelBase
         _repairsCoordinator.ShowCleanupWorkspace();
     }
 
+    public void FocusSearch()
+    {
+        ShowRepairsWorkspace();
+        Workspace.RequestSearchFocus();
+    }
+
+    public void ClearFilters()
+    {
+        Workspace.ResetFiltersCommand.Execute(null);
+    }
+
     protected override void AfterWorkspacePropertyChanged(PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(TweaksViewModel.IsBulkRunning) && RunFastCleanCommand is RelayCommand relayCommand)

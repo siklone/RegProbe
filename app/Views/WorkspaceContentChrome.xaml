@@ -4,6 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:RegProbe.App.Behaviors"
              mc:Ignorable="d"
              Background="#151515"
              FontFamily="{DynamicResource FontFamilyText}"
@@ -105,7 +107,11 @@
                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource SearchBoxStyle}"
                              Tag="{Binding SearchPlaceholder}"
-                             ToolTip="{Binding SearchPlaceholder}"/>
+                             ToolTip="{Binding SearchPlaceholder}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:FocusOnRequestBehavior RequestToken="{Binding SearchFocusRequestId}"/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
 
                     <Border Grid.Column="1"
                             Width="1"

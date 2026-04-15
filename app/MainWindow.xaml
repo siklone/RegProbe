@@ -13,7 +13,7 @@
         Height="820"
         MinWidth="980"
         MinHeight="680"
-        Background="#151515"
+        Background="#0B0F14"
         Icon="Resources/Brand/regprobe-mark.ico"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -26,7 +26,7 @@
         TextOptions.TextRenderingMode="ClearType">
 
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="34"
+        <WindowChrome CaptionHeight="48"
                       ResizeBorderThickness="7"
                       GlassFrameThickness="0"
                       CornerRadius="0"/>
@@ -37,6 +37,7 @@
         <KeyBinding Key="D2" Modifiers="Control" Command="{Binding ShowRepairsCommand}"/>
         <KeyBinding Key="F1" Command="{Binding ShowAboutCommand}"/>
         <KeyBinding Key="F" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
+        <KeyBinding Key="K" Modifiers="Control" Command="{Binding FocusSearchCommand}"/>
         <KeyBinding Key="Escape" Command="{Binding ClearFiltersCommand}"/>
     </Window.InputBindings>
 
@@ -56,8 +57,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="Root"
-                                Width="18"
+                        <Border Width="18"
                                 Height="18"
                                 Background="Transparent">
                             <Grid>
@@ -97,13 +97,13 @@
 
         <Style x:Key="ShellTopTabButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#6C6C6C"/>
+            <Setter Property="Foreground" Value="#7E8A9B"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="8,0,8,2"/>
+            <Setter Property="Padding" Value="12,0,12,2"/>
             <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDisplay}"/>
-            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -112,46 +112,175 @@
                                               VerticalAlignment="Center"
                                               Margin="{TemplateBinding Padding}"/>
                             <Border x:Name="Accent"
-                                    Width="20"
                                     Height="2"
-                                    Background="#C0392B"
+                                    Width="22"
+                                    CornerRadius="999"
+                                    Background="#4F8CFF"
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Center"
                                     Opacity="0"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" Value="#DDDDDD"/>
+                                <Setter Property="Foreground" Value="#EAF1FB"/>
                             </Trigger>
                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Value="True">
-                                <Setter Property="Foreground" Value="#F3F3F3"/>
+                                <Setter Property="Foreground" Value="#F5F9FF"/>
                                 <Setter Property="FontWeight" Value="SemiBold"/>
                                 <Setter TargetName="Accent" Property="Opacity" Value="1"/>
                             </DataTrigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" Value="0.45"/>
+                                <Setter Property="Opacity" Value="0.4"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="EnvironmentChipButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="MinWidth" Value="66"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Background" Value="#111A25"/>
+            <Setter Property="BorderBrush" Value="#263545"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#D7E2F0"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="999">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TopIconButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Background" Value="#111A25"/>
+            <Setter Property="BorderBrush" Value="#263545"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#C9D6E8"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#152131"/>
+                    <Setter Property="BorderBrush" Value="#355074"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.45"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SearchCommandButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="Background" Value="#111A25"/>
+            <Setter Property="BorderBrush" Value="#263545"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#DBE5F2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#152131"/>
+                    <Setter Property="BorderBrush" Value="#355074"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.45"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="StatusStripTokenBorderStyle" TargetType="Border">
+            <Setter Property="Padding" Value="8,2"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="CornerRadius" Value="999"/>
+            <Setter Property="Background" Value="#111A25"/>
+            <Setter Property="BorderBrush" Value="#223041"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Tone}" Value="ok">
+                    <Setter Property="Background" Value="#102117"/>
+                    <Setter Property="BorderBrush" Value="#2E7D4F"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Tone}" Value="info">
+                    <Setter Property="Background" Value="#142338"/>
+                    <Setter Property="BorderBrush" Value="#285EA8"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Tone}" Value="warning">
+                    <Setter Property="Background" Value="#2A2212"/>
+                    <Setter Property="BorderBrush" Value="#8A5B18"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
 
-    <Grid Background="#151515"
+    <Grid Background="#0B0F14"
           ClipToBounds="True">
         <Grid.RowDefinitions>
-            <RowDefinition Height="34"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="28"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0"
                 Panel.ZIndex="100"
-                Background="#1A1A1A"
-                BorderBrush="#242424"
+                Background="#0D131B"
+                BorderBrush="#1B2431"
                 BorderThickness="0,0,0,1">
-            <Grid>
+            <Grid Margin="18,0,16,0">
+                <i:Interaction.Behaviors>
+                    <behaviors:WindowTitleBarDragBehavior/>
+                </i:Interaction.Behaviors>
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -160,7 +289,6 @@
 
                 <StackPanel Grid.Column="0"
                             Orientation="Horizontal"
-                            Margin="20,0,0,0"
                             VerticalAlignment="Center"
                             WindowChrome.IsHitTestVisibleInChrome="True">
                     <Image Source="Resources/Brand/regprobe-mark.png"
@@ -170,25 +298,88 @@
                            Stretch="Uniform"
                            SnapsToDevicePixels="True"/>
                     <TextBlock Text="RegProbe"
-                               Margin="0,0,0,0"
                                VerticalAlignment="Center"
-                               Foreground="#B2B2B2"
-                               FontSize="12"
-                               FontWeight="SemiBold"
-                               TextTrimming="CharacterEllipsis"/>
+                               Foreground="#F3F7FD"
+                               FontSize="13"
+                               FontWeight="SemiBold"/>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="16,0,0,0"
+                                VerticalAlignment="Center">
+                        <Button Content="Prod"
+                                Style="{StaticResource EnvironmentChipButtonStyle}"/>
+                        <Button Content="Staging"
+                                Margin="8,0,0,0"
+                                IsEnabled="{Binding CanUseStagingEnvironment}"
+                                ToolTip="{Binding StagingEnvironmentTooltip}"
+                                Style="{StaticResource EnvironmentChipButtonStyle}"/>
+                    </StackPanel>
+
+                    <Border Margin="12,0,0,0"
+                            Padding="10,4"
+                            CornerRadius="999"
+                            Background="#111A25"
+                            BorderBrush="#243446"
+                            BorderThickness="1">
+                        <TextBlock Text="{Binding HostContextLabel}"
+                                   Foreground="#9BA8BA"
+                                   FontSize="11"/>
+                    </Border>
                 </StackPanel>
 
-                <Grid Grid.Column="1">
-                    <i:Interaction.Behaviors>
-                        <behaviors:WindowTitleBarDragBehavior/>
-                    </i:Interaction.Behaviors>
-                </Grid>
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button Content="Tweaks"
+                            Command="{Binding ShowConfigurationCommand}"
+                            Tag="{Binding IsConfigurationViewActive}"
+                            Margin="0,0,16,0"
+                            Style="{StaticResource ShellTopTabButtonStyle}"/>
+                    <Button Content="Recovery"
+                            Command="{Binding ShowRepairsCommand}"
+                            Tag="{Binding IsRepairsViewActive}"
+                            Margin="0,0,16,0"
+                            Style="{StaticResource ShellTopTabButtonStyle}"/>
+                    <Button Content="Diagnostics"
+                            Command="{Binding ShowAboutCommand}"
+                            Tag="{Binding IsAboutViewActive}"
+                            Style="{StaticResource ShellTopTabButtonStyle}"/>
+                </StackPanel>
 
                 <StackPanel Grid.Column="2"
                             Orientation="Horizontal"
                             VerticalAlignment="Center"
-                            Margin="0,0,16,0"
                             WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button Command="{Binding FocusSearchCommand}"
+                            IsEnabled="{Binding CanFocusSearch}"
+                            ToolTip="Focus the active search field (Ctrl+K)"
+                            Style="{StaticResource SearchCommandButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="⌕"
+                                       Margin="0,0,8,0"
+                                       FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding FocusSearchLabel}"
+                                       FontSize="11"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="Ctrl+K"
+                                       Margin="8,0,0,0"
+                                       Foreground="#6F8094"
+                                       FontSize="10"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Content="&#xE7F4;"
+                            IsEnabled="False"
+                            Style="{StaticResource TopIconButtonStyle}"/>
+                    <Button Content="&#xE77B;"
+                            IsEnabled="False"
+                            Margin="0,0,12,0"
+                            Style="{StaticResource TopIconButtonStyle}"/>
+
                     <Button Command="{Binding HostController.MinimizeCommand, ElementName=RootWindow}"
                             ToolTip="Minimize"
                             Foreground="#FEBC2E"
@@ -212,27 +403,28 @@
 
         <Border Grid.Row="1"
                 Panel.ZIndex="90"
-                Background="#1A1A1A"
-                BorderBrush="#242424"
+                Background="#0D131B"
+                BorderBrush="#182230"
                 BorderThickness="0,0,0,1">
             <Grid Margin="18,0,18,0">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <Button Content="Tweaks"
-                            Command="{Binding ShowConfigurationCommand}"
-                            Tag="{Binding IsConfigurationViewActive}"
-                            Margin="0,0,12,0"
-                            Style="{StaticResource ShellTopTabButtonStyle}"/>
-                    <Button Content="Recovery"
-                            Command="{Binding ShowRepairsCommand}"
-                            Tag="{Binding IsRepairsViewActive}"
-                            Margin="0,0,12,0"
-                            Style="{StaticResource ShellTopTabButtonStyle}"/>
-                    <Button Content="About &amp; Diagnostics"
-                            Command="{Binding ShowAboutCommand}"
-                            Tag="{Binding IsAboutViewActive}"
-                            Style="{StaticResource ShellTopTabButtonStyle}"/>
-                </StackPanel>
+                <ItemsControl ItemsSource="{Binding StatusStripTokens}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        VerticalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource StatusStripTokenBorderStyle}">
+                                <TextBlock Text="{Binding Text}"
+                                           Foreground="#D6E0EE"
+                                           FontSize="10"
+                                           FontWeight="Medium"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </Grid>
         </Border>
 
@@ -314,8 +506,8 @@
             </StackPanel>
 
             <Border Grid.Row="1"
-                    Background="#151515"
-                    BorderBrush="#171717"
+                    Background="#0B0F14"
+                    BorderBrush="#0F151D"
                     BorderThickness="0,1,0,0">
                 <ContentControl Content="{Binding CurrentViewModel}">
                     <i:Interaction.Behaviors>

@@ -32,9 +32,7 @@ public sealed class ConfigurationWorkspaceCoordinator
     public void ClearFilters()
     {
         ShowConfigurationWorkspace();
-        _workspace.SearchText = string.Empty;
-        _workspace.StatusFilter = string.Empty;
-        _workspace.ShowFavoritesOnly = false;
+        _workspace.ResetFiltersCommand.Execute(null);
     }
 
 }

@@ -6,6 +6,7 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
 {
     private string _searchText = string.Empty;
     private string _statusFilter = string.Empty;
+    private string _scopeFilter = string.Empty;
     private bool _showSafe = true;
     private bool _showAdvanced = true;
     private bool _showRisky = true;
@@ -53,6 +54,12 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
                 OnPropertyChanged(nameof(HasStatusFilter));
             }
         }
+    }
+
+    public string ScopeFilter
+    {
+        get => _scopeFilter;
+        set => SetProperty(ref _scopeFilter, value);
     }
 
     public string StatusFilterLabel => _statusFilter switch
@@ -192,6 +199,7 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
     {
         SearchText = string.Empty;
         StatusFilter = string.Empty;
+        ScopeFilter = string.Empty;
         ShowSafe = true;
         ShowAdvanced = true;
         ShowRisky = true;

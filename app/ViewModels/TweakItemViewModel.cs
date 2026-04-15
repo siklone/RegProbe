@@ -467,6 +467,8 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(HasRegistryPath));
                 OnPropertyChanged(nameof(HasDiff));
+                OnPropertyChanged(nameof(ScopeFilterKey));
+                OnPropertyChanged(nameof(ScopeDisplayText));
                 RaiseInsightPropertiesChanged();
             }
         }
@@ -1085,6 +1087,47 @@ public sealed class TweakItemViewModel : ViewModelBase
         _ => "Research-only"
     };
 
+    public string CompactStateText => VerdictState switch
+    {
+        "allowed" => "Verified",
+        "blocked" => "Needs review",
+        "archived" => "Archived",
+        _ => "Research"
+    };
+
+    public string CompactStateTone => VerdictState switch
+    {
+        "allowed" => "ok",
+        "blocked" => "warning",
+        "archived" => "muted",
+        _ => "info"
+    };
+
+    public string ScopeFilterKey
+    {
+        get
+        {
+            if (RegistryPath.StartsWith("HKCU\\", StringComparison.OrdinalIgnoreCase))
+            {
+                return "user";
+            }
+
+            if (RegistryPath.StartsWith("HKLM\\", StringComparison.OrdinalIgnoreCase) || RequiresElevation)
+            {
+                return "machine";
+            }
+
+            return string.IsNullOrWhiteSpace(RegistryPath) ? "mixed" : "mixed";
+        }
+    }
+
+    public string ScopeDisplayText => ScopeFilterKey switch
+    {
+        "user" => "User",
+        "machine" => "Machine",
+        _ => "Mixed"
+    };
+
     public string VerdictSummary => VerdictState switch
     {
         "allowed" => _rollbackVerified
@@ -1481,6 +1524,8 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         OnPropertyChanged(nameof(VerdictState));
         OnPropertyChanged(nameof(VerdictText));
+        OnPropertyChanged(nameof(CompactStateText));
+        OnPropertyChanged(nameof(CompactStateTone));
         OnPropertyChanged(nameof(VerdictSummary));
         OnPropertyChanged(nameof(DocsSnapshotState));
         OnPropertyChanged(nameof(DocsSnapshotText));

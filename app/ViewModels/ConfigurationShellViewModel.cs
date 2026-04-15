@@ -31,6 +31,12 @@ public sealed class ConfigurationShellViewModel : WorkspaceShellViewModelBase
         _configurationCoordinator.ShowConfigurationWorkspace();
     }
 
+    public void FocusSearch()
+    {
+        ShowConfigurationWorkspace();
+        Workspace.RequestSearchFocus();
+    }
+
     public void ClearFilters()
     {
         _configurationCoordinator.ClearFilters();
