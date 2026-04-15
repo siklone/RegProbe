@@ -44,6 +44,11 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
       - name: Cache .NET packages
         uses: actions/cache@v4
         with:
@@ -70,6 +75,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.SOLUTION }}
@@ -247,6 +257,11 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
       - name: Restore dependencies
         run: dotnet restore ${{ env.SOLUTION }}
 
@@ -311,16 +326,34 @@ jobs:
           -CliPublishDir "publish-cli"
           -OutputDir "release-assets"
 
+      - name: Validate publish release assets
+        run: >
+          python scripts/check_release_assets.py
+          --asset-dir release-assets
+          --version-label "${{ github.sha }}"
+          --runtime "${{ env.RUNTIME }}"
+          --write-report release-assets/release-asset-check.json
+
       - name: Write publish package summary
         shell: bash
         run: |
-          {
-            echo "## Publish Packages"
-            echo
-            echo "- \`RegProbe-Portable-${GITHUB_SHA}-${RUNTIME}.zip\`"
-            echo "- \`RegProbe-Cli-${GITHUB_SHA}-${RUNTIME}.zip\`"
-            echo "- \`RegProbe-${GITHUB_SHA}-${RUNTIME}-sha256.txt\`"
-          } >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads(Path("release-assets/release-asset-check.json").read_text(encoding="utf-8"))
+          lines = [
+              "## Publish Packages",
+              "",
+              f"- `RegProbe-Portable-{os.environ['GITHUB_SHA']}-{os.environ['RUNTIME']}.zip`",
+              f"- `RegProbe-Cli-{os.environ['GITHUB_SHA']}-{os.environ['RUNTIME']}.zip`",
+              f"- `RegProbe-{os.environ['GITHUB_SHA']}-{os.environ['RUNTIME']}-sha256.txt`",
+              f"- Release asset validation: `{report['status']}`",
+          ]
+          summary_path = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          summary_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+          PY
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
@@ -345,6 +378,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.SOLUTION }}
@@ -386,16 +424,37 @@ jobs:
           -CliPublishDir "release-cli"
           -OutputDir "release-assets"
 
+      - name: Validate release assets
+        run: >
+          python scripts/check_release_assets.py
+          --asset-dir release-assets
+          --version-label "${{ github.event.release.tag_name }}"
+          --runtime "${{ env.RUNTIME }}"
+          --write-report release-assets/release-asset-check.json
+
       - name: Write release package summary
         shell: bash
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: |
-          {
-            echo "## Release Packages"
-            echo
-            echo "- \`RegProbe-Portable-${{ github.event.release.tag_name }}-${RUNTIME}.zip\`"
-            echo "- \`RegProbe-Cli-${{ github.event.release.tag_name }}-${RUNTIME}.zip\`"
-            echo "- \`RegProbe-${{ github.event.release.tag_name }}-${RUNTIME}-sha256.txt\`"
-          } >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads(Path("release-assets/release-asset-check.json").read_text(encoding="utf-8"))
+          release_tag = os.environ["RELEASE_TAG"]
+          lines = [
+              "## Release Packages",
+              "",
+              f"- `RegProbe-Portable-{release_tag}-{os.environ['RUNTIME']}.zip`",
+              f"- `RegProbe-Cli-{release_tag}-{os.environ['RUNTIME']}.zip`",
+              f"- `RegProbe-{release_tag}-{os.environ['RUNTIME']}-sha256.txt`",
+              f"- Release asset validation: `{report['status']}`",
+          ]
+          summary_path = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          summary_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+          PY
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
