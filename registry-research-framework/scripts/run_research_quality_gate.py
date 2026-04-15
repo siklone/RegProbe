@@ -167,6 +167,11 @@ def default_steps(args: argparse.Namespace) -> list[GateStep]:
             [python, "registry-research-framework/scripts/check_etw_stackwalk_reopen_transition_summary.py"],
         ),
         GateStep(
+            "etw-stackwalk-reopen-baseline-archive",
+            "ETW stackwalk reopen baseline archive check",
+            [python, "registry-research-framework/scripts/check_etw_stackwalk_reopen_baseline_archive.py"],
+        ),
+        GateStep(
             "etw-stackwalk-execution-manifest",
             "ETW stackwalk execution manifest check",
             [python, "registry-research-framework/scripts/check_etw_stackwalk_execution_manifest.py"],

@@ -131,6 +131,14 @@ etw_stackwalk_reopen_transition_summary_check = load_module(
     "check_etw_stackwalk_reopen_transition_summary",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_transition_summary.py",
 )
+etw_stackwalk_reopen_baseline_archive = load_module(
+    "materialize_etw_stackwalk_reopen_baseline_archive",
+    FRAMEWORK_SCRIPTS / "materialize_etw_stackwalk_reopen_baseline_archive.py",
+)
+etw_stackwalk_reopen_baseline_archive_check = load_module(
+    "check_etw_stackwalk_reopen_baseline_archive",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_baseline_archive.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -3820,6 +3828,147 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("counts.changed_candidate_count mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_baseline_archive_materializes_pack(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            snapshot_path = temp_root / "etw-stackwalk-reopen-snapshot.json"
+            transition_path = temp_root / "etw-stackwalk-reopen-transition-summary.json"
+            snapshot_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0",
+                        "snapshot_status": "deferred",
+                        "snapshot_id": "ec5b6c91b4e6",
+                        "counts": {"candidate_count": 2},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            snapshot_path.with_suffix(".md").write_text("# snapshot\n", encoding="utf-8")
+            transition_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0",
+                        "transition_status": "baseline",
+                    }
+                ),
+                encoding="utf-8",
+            )
+            transition_path.with_suffix(".md").write_text("# transition\n", encoding="utf-8")
+            output_root = temp_root / "archive"
+            summary_path = temp_root / "archive.json"
+            markdown_path = temp_root / "archive.md"
+            archive_path = temp_root / "archive.zip"
+
+            payload = etw_stackwalk_reopen_baseline_archive.materialize_baseline_archive(
+                etw_stackwalk_reopen_baseline_archive.load_json(snapshot_path),
+                etw_stackwalk_reopen_baseline_archive.load_json(transition_path),
+                snapshot_path=snapshot_path,
+                transition_path=transition_path,
+                output_root=output_root,
+                summary_path=summary_path,
+                markdown_path=markdown_path,
+                archive_path=archive_path,
+                generated_utc="2026-04-15T19:00:00Z",
+            )
+
+            self.assertEqual(payload["archive_status"], "baseline-ready")
+            self.assertEqual(payload["retained_snapshot_id"], "ec5b6c91b4e6")
+            self.assertTrue((output_root / "manifests" / "etw-stackwalk-reopen-snapshot.json").exists())
+            self.assertTrue(archive_path.exists())
+
+    def test_etw_stackwalk_reopen_baseline_archive_check_accepts_matching_surface(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            snapshot_path = temp_root / "etw-stackwalk-reopen-snapshot.json"
+            transition_path = temp_root / "etw-stackwalk-reopen-transition-summary.json"
+            snapshot_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0",
+                        "snapshot_status": "deferred",
+                        "snapshot_id": "ec5b6c91b4e6",
+                        "counts": {"candidate_count": 2},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            snapshot_path.with_suffix(".md").write_text("# snapshot\n", encoding="utf-8")
+            transition_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0",
+                        "transition_status": "baseline",
+                    }
+                ),
+                encoding="utf-8",
+            )
+            transition_path.with_suffix(".md").write_text("# transition\n", encoding="utf-8")
+            output_root = temp_root / "archive"
+            summary_path = temp_root / "archive.json"
+            markdown_path = temp_root / "archive.md"
+            archive_path = temp_root / "archive.zip"
+
+            etw_stackwalk_reopen_baseline_archive.materialize_baseline_archive(
+                etw_stackwalk_reopen_baseline_archive.load_json(snapshot_path),
+                etw_stackwalk_reopen_baseline_archive.load_json(transition_path),
+                snapshot_path=snapshot_path,
+                transition_path=transition_path,
+                output_root=output_root,
+                summary_path=summary_path,
+                markdown_path=markdown_path,
+                archive_path=archive_path,
+                generated_utc="2026-04-15T19:00:00Z",
+            )
+            surface = json.loads(summary_path.read_text(encoding="utf-8"))
+            expected = etw_stackwalk_reopen_baseline_archive.build_archive_plan(
+                etw_stackwalk_reopen_baseline_archive.load_json(snapshot_path),
+                etw_stackwalk_reopen_baseline_archive.load_json(transition_path),
+                snapshot_path=snapshot_path,
+                transition_path=transition_path,
+            )
+            payload = etw_stackwalk_reopen_baseline_archive_check.compare_archive_summary(
+                surface,
+                expected,
+                generated_utc="2026-04-15T19:00:00Z",
+            )
+            asset_errors, _ = etw_stackwalk_reopen_baseline_archive_check.validate_pack_assets(surface)
+
+            self.assertEqual(payload["check_status"], "ok")
+            self.assertEqual(asset_errors, [])
+
+    def test_etw_stackwalk_reopen_baseline_archive_check_rejects_snapshot_id_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
+            "source_current_snapshot_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.md",
+            "source_transition_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json",
+            "source_transition_summary_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.md",
+            "archive_status": "baseline-ready",
+            "transition_status": "baseline",
+            "retained_snapshot_id": "ec5b6c91b4e6",
+            "operator": {
+                "blocker": "retain-baseline-for-next-diff",
+                "next_action": "Retain this snapshot as the next previous baseline before expecting diff-driven transition summaries.",
+            },
+            "promote_previous_snapshot_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.json registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json",
+            "promote_previous_snapshot_markdown_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.md registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.md",
+            "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+            "archive_candidate_count": 2,
+            "focus_snapshot_id": "ec5b6c91b4e6",
+        }
+        surface = dict(expected)
+        surface["retained_snapshot_id"] = "deadbeef"
+
+        payload = etw_stackwalk_reopen_baseline_archive_check.compare_archive_summary(
+            surface,
+            expected,
+            generated_utc="2026-04-15T19:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("retained_snapshot_id mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {
