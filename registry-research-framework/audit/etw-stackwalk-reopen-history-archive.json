@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-15T02:44:19.024869Z",
+  "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
+  "source_previous_snapshot_path": null,
+  "source_transition_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json",
+  "source_transition_summary_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.md",
+  "source_baseline_archive_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.json",
+  "source_baseline_archive_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.md",
+  "history_status": "seed-required",
+  "history_seed_source": "baseline-archive",
+  "transition_status": "baseline",
+  "current_snapshot_id": "ec5b6c91b4e6",
+  "previous_snapshot_id": null,
+  "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+  "operator": {
+    "blocker": "seed-previous-snapshot-from-baseline-archive",
+    "next_action": "Promote the retained baseline snapshot into snapshot.previous before expecting history-driven reopen diffs."
+  },
+  "seed_previous_snapshot_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.json registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json",
+  "seed_previous_snapshot_markdown_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.md registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.md",
+  "persist_current_snapshot_history_command": "mkdir -p registry-research-framework/audit/etw-stackwalk-reopen-history-store/ec5b6c91b4e6 && cp registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json registry-research-framework/audit/etw-stackwalk-reopen-history-store/ec5b6c91b4e6/etw-stackwalk-reopen-snapshot.json && cp registry-research-framework/audit/etw-stackwalk-reopen-snapshot.md registry-research-framework/audit/etw-stackwalk-reopen-history-store/ec5b6c91b4e6/etw-stackwalk-reopen-snapshot.md",
+  "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+  "history_candidate_count": 2,
+  "focus_snapshot_id": "ec5b6c91b4e6",
+  "output_root": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive",
+  "archive_path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.zip",
+  "archive": {
+    "path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.zip",
+    "size_bytes": 8568,
+    "sha256": "4cce8ed6356e1d22d98321914e3377d0780d3d509d1f7c684521738277063a4e"
+  },
+  "counts": {
+    "manifest_files_copied": 6,
+    "seed_files_copied": 2,
+    "command_files_written": 3,
+    "pack_files_checksummed": 13
+  },
+  "manifest_files": [
+    "manifests/current/etw-stackwalk-reopen-snapshot.json",
+    "manifests/current/etw-stackwalk-reopen-snapshot.md",
+    "manifests/transition/etw-stackwalk-reopen-transition-summary.json",
+    "manifests/transition/etw-stackwalk-reopen-transition-summary.md",
+    "manifests/baseline/etw-stackwalk-reopen-baseline-archive.json",
+    "manifests/baseline/etw-stackwalk-reopen-baseline-archive.md"
+  ],
+  "seed_files": [
+    "seed/retained-baseline/etw-stackwalk-reopen-snapshot.json",
+    "seed/retained-baseline/etw-stackwalk-reopen-snapshot.md"
+  ],
+  "command_files": [
+    "commands/01-seed-previous-snapshot.txt",
+    "commands/02-persist-current-snapshot-history.txt",
+    "commands/03-refresh-transition-summary.txt"
+  ],
+  "pack_files": [
+    {
+      "path": "CHECKSUMS.json",
+      "size_bytes": 2342,
+      "sha256": "9687aa7046e9a7f993e28dffc54a3cd0c0845d41e68160ab08238653ff7a9b49"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1606,
+      "sha256": "1976f2f9f45d7669e855c9f83fa53b11c998f64a940e49db3360347ac7f4d0b2"
+    },
+    {
+      "path": "commands/01-seed-previous-snapshot.txt",
+      "size_bytes": 466,
+      "sha256": "ade0a40d5c549ad5548a552c6bbd2f9541189eeeec724391e19a6bc2d1d58f51"
+    },
+    {
+      "path": "commands/02-persist-current-snapshot-history.txt",
+      "size_bytes": 513,
+      "sha256": "28e25e788da9b5c8c1335c53b43aa0da9e556446968bbd15f512e6f6f15a5bca"
+    },
+    {
+      "path": "commands/03-refresh-transition-summary.txt",
+      "size_bytes": 132,
+      "sha256": "64ee7f79738a8704f6df45c08fe755851e85a88a0b32a102c5062c1ce33bf18b"
+    },
+    {
+      "path": "manifests/baseline/etw-stackwalk-reopen-baseline-archive.json",
+      "size_bytes": 3875,
+      "sha256": "947ad73cc7fc70a10e688d612e7745aa596db599a5556ad300826f483ae39961"
+    },
+    {
+      "path": "manifests/baseline/etw-stackwalk-reopen-baseline-archive.md",
+      "size_bytes": 920,
+      "sha256": "5728238e610887cb756591778991cf72abfc07ad1d6bf66225ffb072bfd85f69"
+    },
+    {
+      "path": "manifests/current/etw-stackwalk-reopen-snapshot.json",
+      "size_bytes": 2733,
+      "sha256": "0c17dee08ba73ffdd43af68b99c8586c61d9d34ae7f30b5c66f3d8f6200e293d"
+    },
+    {
+      "path": "manifests/current/etw-stackwalk-reopen-snapshot.md",
+      "size_bytes": 1092,
+      "sha256": "7224c4b227436538c2656cde93b6d9d32f13a00f10291b9f8d7cac002e7b3925"
+    },
+    {
+      "path": "manifests/transition/etw-stackwalk-reopen-transition-summary.json",
+      "size_bytes": 2212,
+      "sha256": "94f484866adda031f820c70ee52cd2a120d4a9214534a7a142e9707a79c5e4da"
+    },
+    {
+      "path": "manifests/transition/etw-stackwalk-reopen-transition-summary.md",
+      "size_bytes": 1029,
+      "sha256": "28d51ef551ad854e2d5646a611f6ec4a3ae7e10e7b214d0d2398e3c1f81923df"
+    },
+    {
+      "path": "seed/retained-baseline/etw-stackwalk-reopen-snapshot.json",
+      "size_bytes": 2733,
+      "sha256": "0c17dee08ba73ffdd43af68b99c8586c61d9d34ae7f30b5c66f3d8f6200e293d"
+    },
+    {
+      "path": "seed/retained-baseline/etw-stackwalk-reopen-snapshot.md",
+      "size_bytes": 1092,
+      "sha256": "7224c4b227436538c2656cde93b6d9d32f13a00f10291b9f8d7cac002e7b3925"
+    }
+  ]
+}

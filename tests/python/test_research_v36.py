@@ -139,6 +139,14 @@ etw_stackwalk_reopen_baseline_archive_check = load_module(
     "check_etw_stackwalk_reopen_baseline_archive",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_baseline_archive.py",
 )
+etw_stackwalk_reopen_history_archive = load_module(
+    "materialize_etw_stackwalk_reopen_history_archive",
+    FRAMEWORK_SCRIPTS / "materialize_etw_stackwalk_reopen_history_archive.py",
+)
+etw_stackwalk_reopen_history_archive_check = load_module(
+    "check_etw_stackwalk_reopen_history_archive",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_history_archive.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -3969,6 +3977,191 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("retained_snapshot_id mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_history_archive_materializes_seed_required_pack(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            current_path = temp_root / "etw-stackwalk-reopen-snapshot.json"
+            transition_path = temp_root / "etw-stackwalk-reopen-transition-summary.json"
+            baseline_summary_path = temp_root / "etw-stackwalk-reopen-baseline-archive.json"
+            baseline_root = temp_root / "etw-stackwalk-reopen-baseline-archive"
+            (baseline_root / "manifests").mkdir(parents=True, exist_ok=True)
+            current_payload = {
+                "schema_version": "1.0",
+                "snapshot_status": "deferred",
+                "snapshot_id": "ec5b6c91b4e6",
+                "counts": {"candidate_count": 2},
+            }
+            current_path.write_text(json.dumps(current_payload), encoding="utf-8")
+            current_path.with_suffix(".md").write_text("# current\n", encoding="utf-8")
+            transition_path.write_text(json.dumps({"schema_version": "1.0", "transition_status": "baseline"}), encoding="utf-8")
+            transition_path.with_suffix(".md").write_text("# transition\n", encoding="utf-8")
+            baseline_summary_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0",
+                        "retained_snapshot_id": "ec5b6c91b4e6",
+                        "output_root": str(baseline_root),
+                    }
+                ),
+                encoding="utf-8",
+            )
+            baseline_summary_path.with_suffix(".md").write_text("# baseline\n", encoding="utf-8")
+            (baseline_root / "manifests" / "etw-stackwalk-reopen-snapshot.json").write_text(
+                json.dumps(current_payload),
+                encoding="utf-8",
+            )
+            (baseline_root / "manifests" / "etw-stackwalk-reopen-snapshot.md").write_text("# seed\n", encoding="utf-8")
+
+            output_root = temp_root / "history"
+            summary_path = temp_root / "history.json"
+            markdown_path = temp_root / "history.md"
+            archive_path = temp_root / "history.zip"
+
+            payload = etw_stackwalk_reopen_history_archive.materialize_history_archive(
+                etw_stackwalk_reopen_history_archive.load_json(current_path),
+                None,
+                etw_stackwalk_reopen_history_archive.load_json(transition_path),
+                etw_stackwalk_reopen_history_archive.load_json(baseline_summary_path),
+                current_snapshot_path=current_path,
+                previous_snapshot_path=temp_root / "missing.previous.json",
+                transition_summary_path=transition_path,
+                baseline_archive_summary_path=baseline_summary_path,
+                output_root=output_root,
+                summary_path=summary_path,
+                markdown_path=markdown_path,
+                archive_path=archive_path,
+                generated_utc="2026-04-15T20:00:00Z",
+            )
+
+            self.assertEqual(payload["history_status"], "seed-required")
+            self.assertEqual(payload["history_seed_source"], "baseline-archive")
+            self.assertEqual(payload["current_snapshot_id"], "ec5b6c91b4e6")
+            self.assertTrue((output_root / "seed" / "retained-baseline" / "etw-stackwalk-reopen-snapshot.json").exists())
+            self.assertTrue(archive_path.exists())
+
+    def test_etw_stackwalk_reopen_history_archive_check_accepts_matching_surface(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir)
+            current_path = temp_root / "etw-stackwalk-reopen-snapshot.json"
+            previous_path = temp_root / "etw-stackwalk-reopen-snapshot.previous.json"
+            transition_path = temp_root / "etw-stackwalk-reopen-transition-summary.json"
+            baseline_summary_path = temp_root / "etw-stackwalk-reopen-baseline-archive.json"
+            baseline_root = temp_root / "etw-stackwalk-reopen-baseline-archive"
+            (baseline_root / "manifests").mkdir(parents=True, exist_ok=True)
+            current_payload = {
+                "schema_version": "1.0",
+                "snapshot_status": "deferred",
+                "snapshot_id": "ec5b6c91b4e6",
+                "counts": {"candidate_count": 2},
+            }
+            previous_payload = {
+                "schema_version": "1.0",
+                "snapshot_status": "deferred",
+                "snapshot_id": "ab12cd34ef56",
+                "counts": {"candidate_count": 2},
+            }
+            current_path.write_text(json.dumps(current_payload), encoding="utf-8")
+            current_path.with_suffix(".md").write_text("# current\n", encoding="utf-8")
+            previous_path.write_text(json.dumps(previous_payload), encoding="utf-8")
+            previous_path.with_suffix(".md").write_text("# previous\n", encoding="utf-8")
+            transition_path.write_text(json.dumps({"schema_version": "1.0", "transition_status": "changed"}), encoding="utf-8")
+            transition_path.with_suffix(".md").write_text("# transition\n", encoding="utf-8")
+            baseline_summary_path.write_text(
+                json.dumps(
+                    {
+                        "schema_version": "1.0",
+                        "retained_snapshot_id": "ec5b6c91b4e6",
+                        "output_root": str(baseline_root),
+                    }
+                ),
+                encoding="utf-8",
+            )
+            baseline_summary_path.with_suffix(".md").write_text("# baseline\n", encoding="utf-8")
+            (baseline_root / "manifests" / "etw-stackwalk-reopen-snapshot.json").write_text(
+                json.dumps(current_payload),
+                encoding="utf-8",
+            )
+            (baseline_root / "manifests" / "etw-stackwalk-reopen-snapshot.md").write_text("# seed\n", encoding="utf-8")
+
+            output_root = temp_root / "history"
+            summary_path = temp_root / "history.json"
+            markdown_path = temp_root / "history.md"
+            archive_path = temp_root / "history.zip"
+
+            etw_stackwalk_reopen_history_archive.materialize_history_archive(
+                etw_stackwalk_reopen_history_archive.load_json(current_path),
+                etw_stackwalk_reopen_history_archive.load_json(previous_path),
+                etw_stackwalk_reopen_history_archive.load_json(transition_path),
+                etw_stackwalk_reopen_history_archive.load_json(baseline_summary_path),
+                current_snapshot_path=current_path,
+                previous_snapshot_path=previous_path,
+                transition_summary_path=transition_path,
+                baseline_archive_summary_path=baseline_summary_path,
+                output_root=output_root,
+                summary_path=summary_path,
+                markdown_path=markdown_path,
+                archive_path=archive_path,
+                generated_utc="2026-04-15T20:00:00Z",
+            )
+            surface = json.loads(summary_path.read_text(encoding="utf-8"))
+            expected = etw_stackwalk_reopen_history_archive.build_history_plan(
+                etw_stackwalk_reopen_history_archive.load_json(current_path),
+                etw_stackwalk_reopen_history_archive.load_json(previous_path),
+                etw_stackwalk_reopen_history_archive.load_json(transition_path),
+                etw_stackwalk_reopen_history_archive.load_json(baseline_summary_path),
+                current_snapshot_path=current_path,
+                previous_snapshot_path=previous_path,
+                transition_summary_path=transition_path,
+                baseline_archive_summary_path=baseline_summary_path,
+            )
+            payload = etw_stackwalk_reopen_history_archive_check.compare_history_summary(
+                surface,
+                expected,
+                generated_utc="2026-04-15T20:00:00Z",
+            )
+            asset_errors, _ = etw_stackwalk_reopen_history_archive_check.validate_pack_assets(surface)
+
+            self.assertEqual(payload["check_status"], "ok")
+            self.assertEqual(asset_errors, [])
+
+    def test_etw_stackwalk_reopen_history_archive_check_rejects_status_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
+            "source_previous_snapshot_path": None,
+            "source_transition_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json",
+            "source_transition_summary_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.md",
+            "source_baseline_archive_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.json",
+            "source_baseline_archive_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.md",
+            "history_status": "seed-required",
+            "history_seed_source": "baseline-archive",
+            "transition_status": "baseline",
+            "current_snapshot_id": "ec5b6c91b4e6",
+            "previous_snapshot_id": None,
+            "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+            "operator": {
+                "blocker": "seed-previous-snapshot-from-baseline-archive",
+                "next_action": "Promote the retained baseline snapshot into snapshot.previous before expecting history-driven reopen diffs.",
+            },
+            "seed_previous_snapshot_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.json registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json",
+            "seed_previous_snapshot_markdown_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.md registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.md",
+            "persist_current_snapshot_history_command": "mkdir -p registry-research-framework/audit/etw-stackwalk-reopen-history-store/ec5b6c91b4e6 && cp registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json registry-research-framework/audit/etw-stackwalk-reopen-history-store/ec5b6c91b4e6/etw-stackwalk-reopen-snapshot.json && cp registry-research-framework/audit/etw-stackwalk-reopen-snapshot.md registry-research-framework/audit/etw-stackwalk-reopen-history-store/ec5b6c91b4e6/etw-stackwalk-reopen-snapshot.md",
+            "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+            "history_candidate_count": 2,
+            "focus_snapshot_id": "ec5b6c91b4e6",
+        }
+        surface = dict(expected)
+        surface["history_status"] = "rotation-ready"
+
+        payload = etw_stackwalk_reopen_history_archive_check.compare_history_summary(
+            surface,
+            expected,
+            generated_utc="2026-04-15T20:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("history_status mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {

@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "file_count": 12,
+  "files": [
+    {
+      "path": "README.md",
+      "size_bytes": 1606,
+      "sha256": "1976f2f9f45d7669e855c9f83fa53b11c998f64a940e49db3360347ac7f4d0b2"
+    },
+    {
+      "path": "commands/01-seed-previous-snapshot.txt",
+      "size_bytes": 466,
+      "sha256": "ade0a40d5c549ad5548a552c6bbd2f9541189eeeec724391e19a6bc2d1d58f51"
+    },
+    {
+      "path": "commands/02-persist-current-snapshot-history.txt",
+      "size_bytes": 513,
+      "sha256": "28e25e788da9b5c8c1335c53b43aa0da9e556446968bbd15f512e6f6f15a5bca"
+    },
+    {
+      "path": "commands/03-refresh-transition-summary.txt",
+      "size_bytes": 132,
+      "sha256": "64ee7f79738a8704f6df45c08fe755851e85a88a0b32a102c5062c1ce33bf18b"
+    },
+    {
+      "path": "manifests/baseline/etw-stackwalk-reopen-baseline-archive.json",
+      "size_bytes": 3875,
+      "sha256": "947ad73cc7fc70a10e688d612e7745aa596db599a5556ad300826f483ae39961"
+    },
+    {
+      "path": "manifests/baseline/etw-stackwalk-reopen-baseline-archive.md",
+      "size_bytes": 920,
+      "sha256": "5728238e610887cb756591778991cf72abfc07ad1d6bf66225ffb072bfd85f69"
+    },
+    {
+      "path": "manifests/current/etw-stackwalk-reopen-snapshot.json",
+      "size_bytes": 2733,
+      "sha256": "0c17dee08ba73ffdd43af68b99c8586c61d9d34ae7f30b5c66f3d8f6200e293d"
+    },
+    {
+      "path": "manifests/current/etw-stackwalk-reopen-snapshot.md",
+      "size_bytes": 1092,
+      "sha256": "7224c4b227436538c2656cde93b6d9d32f13a00f10291b9f8d7cac002e7b3925"
+    },
+    {
+      "path": "manifests/transition/etw-stackwalk-reopen-transition-summary.json",
+      "size_bytes": 2212,
+      "sha256": "94f484866adda031f820c70ee52cd2a120d4a9214534a7a142e9707a79c5e4da"
+    },
+    {
+      "path": "manifests/transition/etw-stackwalk-reopen-transition-summary.md",
+      "size_bytes": 1029,
+      "sha256": "28d51ef551ad854e2d5646a611f6ec4a3ae7e10e7b214d0d2398e3c1f81923df"
+    },
+    {
+      "path": "seed/retained-baseline/etw-stackwalk-reopen-snapshot.json",
+      "size_bytes": 2733,
+      "sha256": "0c17dee08ba73ffdd43af68b99c8586c61d9d34ae7f30b5c66f3d8f6200e293d"
+    },
+    {
+      "path": "seed/retained-baseline/etw-stackwalk-reopen-snapshot.md",
+      "size_bytes": 1092,
+      "sha256": "7224c4b227436538c2656cde93b6d9d32f13a00f10291b9f8d7cac002e7b3925"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-15T02:29:15.370547Z",
+  "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
+  "source_current_snapshot_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.md",
+  "source_transition_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json",
+  "source_transition_summary_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.md",
+  "archive_status": "baseline-ready",
+  "transition_status": "baseline",
+  "retained_snapshot_id": "ec5b6c91b4e6",
+  "operator": {
+    "blocker": "retain-baseline-for-next-diff",
+    "next_action": "Retain this snapshot as the next previous baseline before expecting diff-driven transition summaries."
+  },
+  "promote_previous_snapshot_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.json registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json",
+  "promote_previous_snapshot_markdown_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.md registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.md",
+  "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+  "archive_candidate_count": 2,
+  "focus_snapshot_id": "ec5b6c91b4e6",
+  "output_root": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive",
+  "archive_path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.zip",
+  "archive": {
+    "path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.zip",
+    "size_bytes": 4503,
+    "sha256": "78f7464d8cbdb9f24e0d52a1477210b91a01a853ab459d99535bac00e70a6857"
+  },
+  "counts": {
+    "manifest_files_copied": 4,
+    "command_files_written": 2,
+    "pack_files_checksummed": 8
+  },
+  "manifest_files": [
+    "manifests/etw-stackwalk-reopen-snapshot.json",
+    "manifests/etw-stackwalk-reopen-snapshot.md",
+    "manifests/etw-stackwalk-reopen-transition-summary.json",
+    "manifests/etw-stackwalk-reopen-transition-summary.md"
+  ],
+  "command_files": [
+    "commands/01-promote-previous-snapshot.txt",
+    "commands/02-refresh-transition-summary.txt"
+  ],
+  "pack_files": [
+    {
+      "path": "CHECKSUMS.json",
+      "size_bytes": 1327,
+      "sha256": "c5cb97d95ab625e223a0c7a267fdc7c43129a2ebe0a118d0c0220284da89d96e"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 976,
+      "sha256": "40b0fec498fcae69bb011bfb71d3fb9757893b70eb2bf8dc87b597d1e17b97ca"
+    },
+    {
+      "path": "commands/01-promote-previous-snapshot.txt",
+      "size_bytes": 472,
+      "sha256": "4c825d0032567ab3adc857daf245da8b584baff1d966a7f34bc2220403f67675"
+    },
+    {
+      "path": "commands/02-refresh-transition-summary.txt",
+      "size_bytes": 132,
+      "sha256": "64ee7f79738a8704f6df45c08fe755851e85a88a0b32a102c5062c1ce33bf18b"
+    },
+    {
+      "path": "manifests/etw-stackwalk-reopen-snapshot.json",
+      "size_bytes": 2733,
+      "sha256": "0c17dee08ba73ffdd43af68b99c8586c61d9d34ae7f30b5c66f3d8f6200e293d"
+    },
+    {
+      "path": "manifests/etw-stackwalk-reopen-snapshot.md",
+      "size_bytes": 1092,
+      "sha256": "7224c4b227436538c2656cde93b6d9d32f13a00f10291b9f8d7cac002e7b3925"
+    },
+    {
+      "path": "manifests/etw-stackwalk-reopen-transition-summary.json",
+      "size_bytes": 2212,
+      "sha256": "94f484866adda031f820c70ee52cd2a120d4a9214534a7a142e9707a79c5e4da"
+    },
+    {
+      "path": "manifests/etw-stackwalk-reopen-transition-summary.md",
+      "size_bytes": 1029,
+      "sha256": "28d51ef551ad854e2d5646a611f6ec4a3ae7e10e7b214d0d2398e3c1f81923df"
+    }
+  ]
+}
