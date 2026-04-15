@@ -140,6 +140,19 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected tweak provenance split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_tweak_evidence_class_service_stays_split_into_models_and_store_files(self) -> None:
+        service_lines = (
+            REPO_ROOT / "app" / "Services" / "TweakEvidenceClassCatalogService.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "TweakEvidenceClassCatalogModels.cs",
+            REPO_ROOT / "app" / "Services" / "TweakEvidenceClassCatalogStore.cs",
+        ]
+
+        self.assertLessEqual(len(service_lines), 80)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected evidence class split file: {path.relative_to(REPO_ROOT)}")
+
     def test_application_layer_links_and_app_layer_removes_split_service_files(self) -> None:
         application_project = (REPO_ROOT / "application" / "application.csproj").read_text(encoding="utf-8")
         app_project = (REPO_ROOT / "app" / "app.csproj").read_text(encoding="utf-8")
