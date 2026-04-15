@@ -123,6 +123,14 @@ etw_stackwalk_reopen_snapshot_check = load_module(
     "check_etw_stackwalk_reopen_snapshot",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_snapshot.py",
 )
+etw_stackwalk_reopen_transition_summary = load_module(
+    "generate_etw_stackwalk_reopen_transition_summary",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_transition_summary.py",
+)
+etw_stackwalk_reopen_transition_summary_check = load_module(
+    "check_etw_stackwalk_reopen_transition_summary",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_transition_summary.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -3654,6 +3662,164 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("snapshot_id mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_transition_summary_defaults_to_baseline_without_previous(self) -> None:
+        current_snapshot = {
+            "snapshot_status": "deferred",
+            "snapshot_id": "ec5b6c91b4e6",
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "journal_state": "deferred",
+                    "operator_blocker": "outstanding-prerequisites",
+                    "remaining_to_ready_count": 2,
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_transition_summary.build_reopen_transition_summary(
+            current_snapshot,
+            None,
+            generated_utc="2026-04-15T18:00:00Z",
+        )
+
+        self.assertEqual(payload["transition_status"], "baseline")
+        self.assertEqual(payload["counts"]["changed_candidate_count"], 1)
+        self.assertEqual(payload["counts"]["added_candidate_count"], 1)
+        self.assertEqual(payload["focus"]["top_changed_candidate"], "power.control.allow-system-required-power-requests")
+
+    def test_etw_stackwalk_reopen_transition_summary_marks_unchanged_snapshot_ids(self) -> None:
+        current_snapshot = {
+            "snapshot_status": "deferred",
+            "snapshot_id": "same123",
+            "entries": [
+                {
+                    "candidate_id": "example.candidate",
+                    "feature_area": "Example",
+                    "journal_state": "deferred",
+                    "operator_blocker": "outstanding-prerequisites",
+                    "remaining_to_ready_count": 1,
+                    "next_unlock_prerequisite": "Land the prerequisite.",
+                }
+            ],
+        }
+        previous_snapshot = {
+            "snapshot_status": "deferred",
+            "snapshot_id": "same123",
+            "entries": [
+                {
+                    "candidate_id": "example.candidate",
+                    "feature_area": "Example",
+                    "journal_state": "deferred",
+                    "operator_blocker": "outstanding-prerequisites",
+                    "remaining_to_ready_count": 1,
+                    "next_unlock_prerequisite": "Land the prerequisite.",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_transition_summary.build_reopen_transition_summary(
+            current_snapshot,
+            previous_snapshot,
+            generated_utc="2026-04-15T18:00:00Z",
+        )
+
+        self.assertEqual(payload["transition_status"], "unchanged")
+        self.assertEqual(payload["counts"]["changed_candidate_count"], 0)
+        self.assertEqual(payload["focus"]["top_changed_candidate"], None)
+
+    def test_etw_stackwalk_reopen_transition_summary_check_accepts_matching_surface(self) -> None:
+        surface = {
+            "schema_version": "1.0",
+            "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
+            "source_previous_snapshot_path": None,
+            "transition_status": "baseline",
+            "operator": {
+                "blocker": "no-previous-snapshot",
+                "next_action": "Treat the current reopen snapshot as the baseline until a previous snapshot is retained.",
+            },
+            "counts": {
+                "current_candidate_count": 1,
+                "previous_candidate_count": 0,
+                "changed_candidate_count": 1,
+                "added_candidate_count": 1,
+                "removed_candidate_count": 0,
+            },
+            "focus": {
+                "current_snapshot_id": "ec5b6c91b4e6",
+                "previous_snapshot_id": None,
+                "current_snapshot_status": "deferred",
+                "previous_snapshot_status": None,
+                "top_changed_candidate": "power.control.allow-system-required-power-requests",
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Control Power Requests",
+                    "transition_type": "added",
+                    "current_journal_state": "deferred",
+                    "previous_journal_state": None,
+                    "current_operator_blocker": "outstanding-prerequisites",
+                    "previous_operator_blocker": None,
+                    "current_remaining_to_ready_count": 2,
+                    "previous_remaining_to_ready_count": None,
+                    "current_snapshot_id": "ec5b6c91b4e6",
+                    "previous_snapshot_id": None,
+                    "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+                }
+            ],
+        }
+        expected = dict(surface)
+
+        payload = etw_stackwalk_reopen_transition_summary_check.compare_reopen_transition_summary(
+            surface,
+            expected,
+            generated_utc="2026-04-15T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+        self.assertEqual(payload["errors"], [])
+
+    def test_etw_stackwalk_reopen_transition_summary_check_rejects_changed_count_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
+            "source_previous_snapshot_path": None,
+            "transition_status": "baseline",
+            "operator": {
+                "blocker": "no-previous-snapshot",
+                "next_action": "Treat the current reopen snapshot as the baseline until a previous snapshot is retained.",
+            },
+            "counts": {
+                "current_candidate_count": 1,
+                "previous_candidate_count": 0,
+                "changed_candidate_count": 1,
+                "added_candidate_count": 1,
+                "removed_candidate_count": 0,
+            },
+            "focus": {
+                "current_snapshot_id": "ec5b6c91b4e6",
+                "previous_snapshot_id": None,
+                "current_snapshot_status": "deferred",
+                "previous_snapshot_status": None,
+                "top_changed_candidate": "power.control.allow-system-required-power-requests",
+            },
+            "entries": [],
+        }
+        surface = dict(expected)
+        surface["counts"] = dict(expected["counts"])
+        surface["counts"]["changed_candidate_count"] = 0
+
+        payload = etw_stackwalk_reopen_transition_summary_check.compare_reopen_transition_summary(
+            surface,
+            expected,
+            generated_utc="2026-04-15T18:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("counts.changed_candidate_count mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {
