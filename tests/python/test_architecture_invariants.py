@@ -72,6 +72,20 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected CLI split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_config_export_service_stays_split_into_use_case_files(self) -> None:
+        service_lines = (
+            REPO_ROOT / "app" / "Services" / "ConfigExportService.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "ConfigExportSnapshotBuilder.cs",
+            REPO_ROOT / "app" / "Services" / "ConfigImportExecutor.cs",
+            REPO_ROOT / "app" / "Services" / "ConfigExportModels.cs",
+        ]
+
+        self.assertLessEqual(len(service_lines), 120)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected config export split file: {path.relative_to(REPO_ROOT)}")
+
 
 if __name__ == "__main__":
     unittest.main()
