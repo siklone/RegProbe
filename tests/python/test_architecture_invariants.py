@@ -48,9 +48,13 @@ class ArchitectureInvariantTests(unittest.TestCase):
         research_root_lines = (
             REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.cs"
         ).read_text(encoding="utf-8").splitlines()
+        tweak_root_lines = (
+            REPO_ROOT / "cli" / "Commands" / "Program.TweakCommand.cs"
+        ).read_text(encoding="utf-8").splitlines()
 
         self.assertLessEqual(len(cli_program_lines), 120)
         self.assertLessEqual(len(research_root_lines), 40)
+        self.assertLessEqual(len(tweak_root_lines), 30)
 
     def test_cli_research_command_is_split_into_targeted_files(self) -> None:
         expected_paths = [
@@ -60,6 +64,9 @@ class ArchitectureInvariantTests(unittest.TestCase):
             REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.Automation.cs",
             REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.Trace.cs",
             REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.Json.cs",
+            REPO_ROOT / "cli" / "Commands" / "Program.TweakCommand.List.cs",
+            REPO_ROOT / "cli" / "Commands" / "Program.TweakCommand.Apply.cs",
+            REPO_ROOT / "cli" / "Commands" / "Program.TweakCommand.Revert.cs",
         ]
 
         for path in expected_paths:
