@@ -4,6 +4,7 @@
 - Rotation mode: `seed-from-baseline`
 - History status: `seed-required`
 - Transition status: `baseline`
+- Seed receipt status: `pending`
 - Operator blocker: `seed-previous-snapshot-from-history-archive`
 - Next action: `Seed snapshot.previous from the retained baseline snapshot before expecting rotation-aware reopen diffs.`
 - Current snapshot id: `ec5b6c91b4e6`

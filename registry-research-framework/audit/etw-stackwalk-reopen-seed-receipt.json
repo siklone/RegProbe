@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-15T03:11:23.013484Z",
+  "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
+  "source_previous_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json",
+  "source_history_archive_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json",
+  "receipt_status": "pending",
+  "receipt_mode": "await-seed",
+  "operator": {
+    "blocker": "seed-not-applied",
+    "next_action": "Apply the retained baseline seed commands, then refresh the transition summary and rotation ledger."
+  },
+  "seed_commands": {
+    "seed_previous_snapshot_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.json registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json",
+    "seed_previous_snapshot_markdown_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.md registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.md",
+    "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py"
+  },
+  "verification": {
+    "previous_snapshot_present": false,
+    "previous_matches_current_snapshot": false,
+    "previous_matches_retained_baseline": false
+  },
+  "focus": {
+    "current_snapshot_id": "ec5b6c91b4e6",
+    "previous_snapshot_id": null,
+    "retained_baseline_snapshot_id": "ec5b6c91b4e6"
+  },
+  "counts": {
+    "candidate_count": 2,
+    "verification_true_count": 0
+  }
+}

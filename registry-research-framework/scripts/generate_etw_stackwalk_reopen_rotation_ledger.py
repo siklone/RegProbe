@@ -14,6 +14,7 @@ CURRENT_SNAPSHOT_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-reopen-snapsho
 PREVIOUS_SNAPSHOT_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-reopen-snapshot.previous.json"
 TRANSITION_SUMMARY_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-reopen-transition-summary.json"
 HISTORY_ARCHIVE_SUMMARY_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-reopen-history-archive.json"
+SEED_RECEIPT_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-reopen-seed-receipt.json"
 OUTPUT_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-reopen-rotation-ledger.json"
 MARKDOWN_PATH = FRAMEWORK_ROOT / "audit" / "etw-stackwalk-reopen-rotation-ledger.md"
 
@@ -57,11 +58,13 @@ def build_rotation_ledger(
     previous_snapshot: dict[str, Any] | None,
     transition_summary: dict[str, Any],
     history_archive_summary: dict[str, Any],
+    seed_receipt: dict[str, Any] | None = None,
     *,
     current_snapshot_path: Path | None = None,
     previous_snapshot_path: Path | None = None,
     transition_summary_path: Path | None = None,
     history_archive_summary_path: Path | None = None,
+    seed_receipt_path: Path | None = None,
     generated_utc: str | None = None,
 ) -> dict[str, Any]:
     generated_utc = generated_utc or now_utc()
@@ -69,6 +72,7 @@ def build_rotation_ledger(
     previous_snapshot_id = str((previous_snapshot or {}).get("snapshot_id") or "") or None
     transition_status = str(transition_summary.get("transition_status") or "unknown")
     history_status = str(history_archive_summary.get("history_status") or "unknown")
+    seed_receipt_status = str((seed_receipt or {}).get("receipt_status") or "") or None
     changed_entries = [
         entry for entry in (transition_summary.get("entries") or [])
         if str(entry.get("transition_type") or "unchanged") != "unchanged"
@@ -82,10 +86,16 @@ def build_rotation_ledger(
         entry_disposition = "seed-baseline"
         prerequisite_codes = ["seed-previous-snapshot", "refresh-transition-summary"]
     elif previous_snapshot_id == current_snapshot_id:
-        rotation_status = "steady"
-        rotation_mode = "no-rotation"
-        operator_blocker = "await-new-reopen-snapshot"
-        next_action = "Current and previous snapshot ids already match; wait for a new current reopen snapshot before rotating history."
+        if seed_receipt_status in {"seeded-retained-baseline", "current-matches-previous"}:
+            rotation_status = "seed-complete"
+            rotation_mode = "receipt-confirmed-steady"
+            operator_blocker = "await-new-reopen-snapshot"
+            next_action = "Seed receipt confirms snapshot.previous is aligned; wait for a new current reopen snapshot before expecting rotation-aware diffs."
+        else:
+            rotation_status = "steady"
+            rotation_mode = "no-rotation"
+            operator_blocker = "await-new-reopen-snapshot"
+            next_action = "Current and previous snapshot ids already match; wait for a new current reopen snapshot before rotating history."
         entry_disposition = "steady"
         prerequisite_codes = []
     else:
@@ -135,10 +145,12 @@ def build_rotation_ledger(
         "source_history_archive_markdown_path": portable_path(
             history_archive_summary_path.with_suffix(".md") if history_archive_summary_path is not None else None
         ),
+        "source_seed_receipt_path": portable_path(seed_receipt_path) if seed_receipt is not None else None,
         "rotation_status": rotation_status,
         "rotation_mode": rotation_mode,
         "history_status": history_status,
         "transition_status": transition_status,
+        "seed_receipt_status": seed_receipt_status,
         "operator": {
             "blocker": operator_blocker,
             "next_action": next_action,
@@ -179,6 +191,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Rotation mode: `{payload.get('rotation_mode')}`",
         f"- History status: `{payload.get('history_status')}`",
         f"- Transition status: `{payload.get('transition_status')}`",
+        f"- Seed receipt status: `{payload.get('seed_receipt_status')}`",
         f"- Operator blocker: `{operator.get('blocker')}`",
         f"- Next action: `{operator.get('next_action')}`",
         f"- Current snapshot id: `{focus.get('current_snapshot_id')}`",
@@ -223,6 +236,7 @@ def main() -> int:
     parser.add_argument("--previous", type=Path, default=PREVIOUS_SNAPSHOT_PATH)
     parser.add_argument("--transition", type=Path, default=TRANSITION_SUMMARY_PATH)
     parser.add_argument("--history-archive-summary", type=Path, default=HISTORY_ARCHIVE_SUMMARY_PATH)
+    parser.add_argument("--seed-receipt", type=Path, default=SEED_RECEIPT_PATH)
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     parser.add_argument("--markdown-output", type=Path, default=MARKDOWN_PATH)
     args = parser.parse_args()
@@ -232,10 +246,12 @@ def main() -> int:
         load_json_if_exists(args.previous),
         load_json(args.transition),
         load_json(args.history_archive_summary),
+        load_json_if_exists(args.seed_receipt),
         current_snapshot_path=args.current,
         previous_snapshot_path=args.previous,
         transition_summary_path=args.transition,
         history_archive_summary_path=args.history_archive_summary,
+        seed_receipt_path=args.seed_receipt,
     )
     write_json(args.output, payload)
     write_text(args.markdown_output, render_markdown(payload))

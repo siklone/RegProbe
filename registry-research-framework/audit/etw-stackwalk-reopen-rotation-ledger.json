@@ -1,15 +1,17 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-15T03:02:12.797111Z",
+  "generated_utc": "2026-04-15T03:11:23.072496Z",
   "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
   "source_previous_snapshot_path": null,
   "source_transition_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json",
   "source_history_archive_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json",
   "source_history_archive_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.md",
+  "source_seed_receipt_path": "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
   "rotation_status": "seed-pending",
   "rotation_mode": "seed-from-baseline",
   "history_status": "seed-required",
   "transition_status": "baseline",
+  "seed_receipt_status": "pending",
   "operator": {
     "blocker": "seed-previous-snapshot-from-history-archive",
     "next_action": "Seed snapshot.previous from the retained baseline snapshot before expecting rotation-aware reopen diffs."

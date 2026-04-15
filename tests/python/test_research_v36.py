@@ -155,6 +155,14 @@ etw_stackwalk_reopen_rotation_ledger_check = load_module(
     "check_etw_stackwalk_reopen_rotation_ledger",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_rotation_ledger.py",
 )
+etw_stackwalk_reopen_seed_receipt = load_module(
+    "generate_etw_stackwalk_reopen_seed_receipt",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_seed_receipt.py",
+)
+etw_stackwalk_reopen_seed_receipt_check = load_module(
+    "check_etw_stackwalk_reopen_seed_receipt",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_seed_receipt.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -4232,6 +4240,113 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(payload["counts"]["rotation_candidate_count"], 2)
         self.assertEqual(payload["entries"][0]["rotation_disposition"], "seed-baseline")
 
+    def test_etw_stackwalk_reopen_seed_receipt_pending_without_previous(self) -> None:
+        current = {
+            "schema_version": "1.0",
+            "snapshot_id": "ec5b6c91b4e6",
+            "counts": {"candidate_count": 2},
+        }
+        history = {
+            "schema_version": "1.0",
+            "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+            "seed_previous_snapshot_command": "cp retained current.previous",
+            "seed_previous_snapshot_markdown_command": "cp retained-md current.previous.md",
+            "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+        }
+        payload = etw_stackwalk_reopen_seed_receipt.build_seed_receipt(
+            current,
+            None,
+            history,
+            current_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json"),
+            previous_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json"),
+            history_archive_summary_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json"),
+            generated_utc="2026-04-15T21:30:00Z",
+        )
+
+        self.assertEqual(payload["receipt_status"], "pending")
+        self.assertEqual(payload["receipt_mode"], "await-seed")
+        self.assertFalse(payload["verification"]["previous_snapshot_present"])
+
+    def test_etw_stackwalk_reopen_seed_receipt_check_accepts_matching_surface(self) -> None:
+        current = {
+            "schema_version": "1.0",
+            "snapshot_id": "ec5b6c91b4e6",
+            "counts": {"candidate_count": 2},
+        }
+        previous = {
+            "schema_version": "1.0",
+            "snapshot_id": "ec5b6c91b4e6",
+            "counts": {"candidate_count": 2},
+        }
+        history = {
+            "schema_version": "1.0",
+            "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+            "seed_previous_snapshot_command": "cp retained current.previous",
+            "seed_previous_snapshot_markdown_command": "cp retained-md current.previous.md",
+            "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+        }
+        expected = etw_stackwalk_reopen_seed_receipt.build_seed_receipt(
+            current,
+            previous,
+            history,
+            current_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json"),
+            previous_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json"),
+            history_archive_summary_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json"),
+            generated_utc="2026-04-15T21:30:00Z",
+        )
+
+        payload = etw_stackwalk_reopen_seed_receipt_check.compare_seed_receipt(
+            json.loads(json.dumps(expected)),
+            expected,
+            generated_utc="2026-04-15T21:30:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+
+    def test_etw_stackwalk_reopen_seed_receipt_check_rejects_receipt_status_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
+            "source_previous_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json",
+            "source_history_archive_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json",
+            "receipt_status": "seeded-retained-baseline",
+            "receipt_mode": "baseline-seed-confirmed",
+            "operator": {
+                "blocker": "refresh-transition-after-seed",
+                "next_action": "Seed receipt is confirmed; refresh the transition summary and rotation ledger so the lane leaves seed-pending.",
+            },
+            "seed_commands": {
+                "seed_previous_snapshot_command": "cp retained current.previous",
+                "seed_previous_snapshot_markdown_command": "cp retained-md current.previous.md",
+                "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+            },
+            "verification": {
+                "previous_snapshot_present": True,
+                "previous_matches_current_snapshot": True,
+                "previous_matches_retained_baseline": True,
+            },
+            "focus": {
+                "current_snapshot_id": "ec5b6c91b4e6",
+                "previous_snapshot_id": "ec5b6c91b4e6",
+                "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+            },
+            "counts": {
+                "candidate_count": 2,
+                "verification_true_count": 3,
+            },
+        }
+        surface = json.loads(json.dumps(expected))
+        surface["receipt_status"] = "pending"
+
+        payload = etw_stackwalk_reopen_seed_receipt_check.compare_seed_receipt(
+            surface,
+            expected,
+            generated_utc="2026-04-15T21:30:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("receipt_status mismatch" in error for error in payload["errors"]))
+
     def test_etw_stackwalk_reopen_rotation_ledger_check_accepts_matching_surface(self) -> None:
         current = {
             "schema_version": "1.0",
@@ -4270,15 +4385,21 @@ class EtlDiscoveryTests(unittest.TestCase):
             "persist_current_snapshot_history_command": "mkdir -p history-store",
             "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
         }
+        seed_receipt = {
+            "schema_version": "1.0",
+            "receipt_status": "custom-previous-present",
+        }
         expected = etw_stackwalk_reopen_rotation_ledger.build_rotation_ledger(
             current,
             previous,
             transition,
             history,
+            seed_receipt,
             current_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json"),
             previous_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json"),
             transition_summary_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json"),
             history_archive_summary_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json"),
+            seed_receipt_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json"),
             generated_utc="2026-04-15T21:00:00Z",
         )
         surface = json.loads(json.dumps(expected))
@@ -4299,10 +4420,12 @@ class EtlDiscoveryTests(unittest.TestCase):
             "source_transition_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json",
             "source_history_archive_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json",
             "source_history_archive_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.md",
+            "source_seed_receipt_path": None,
             "rotation_status": "seed-pending",
             "rotation_mode": "seed-from-baseline",
             "history_status": "seed-required",
             "transition_status": "baseline",
+            "seed_receipt_status": None,
             "operator": {
                 "blocker": "seed-previous-snapshot-from-history-archive",
                 "next_action": "Seed snapshot.previous from the retained baseline snapshot before expecting rotation-aware reopen diffs.",
