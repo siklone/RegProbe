@@ -1177,14 +1177,15 @@ def url_references_from_source_enrichment(items: list[dict[str, Any]] | None) ->
 
 
 def is_url_reachable(url: str, timeout: float = 5.0) -> tuple[bool, int | None, str | None]:
-    request = urllib.request.Request(url, method="HEAD")
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; RegProbeURLValidator/1.0)"}
+    request = urllib.request.Request(url, method="HEAD", headers=headers)
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             status = getattr(response, "status", None)
             return bool(status is None or status < 400), status, None
     except urllib.error.HTTPError as exc:
-        if exc.code == 405:
-            fallback = urllib.request.Request(url, method="GET")
+        if exc.code in {403, 405}:
+            fallback = urllib.request.Request(url, method="GET", headers=headers)
             try:
                 with urllib.request.urlopen(fallback, timeout=timeout) as response:
                     status = getattr(response, "status", None)

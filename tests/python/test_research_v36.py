@@ -163,6 +163,14 @@ etw_stackwalk_reopen_seed_receipt_check = load_module(
     "check_etw_stackwalk_reopen_seed_receipt",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_seed_receipt.py",
 )
+etw_stackwalk_reopen_seed_ack_journal = load_module(
+    "generate_etw_stackwalk_reopen_seed_ack_journal",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_seed_ack_journal.py",
+)
+etw_stackwalk_reopen_seed_ack_journal_check = load_module(
+    "check_etw_stackwalk_reopen_seed_ack_journal",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_seed_ack_journal.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -3070,6 +3078,71 @@ class EtlDiscoveryTests(unittest.TestCase):
         self.assertEqual(payload["dead_link_count"], 0)
         self.assertEqual(payload["status"], "ok")
 
+    def test_is_url_reachable_sends_browser_compatible_user_agent(self) -> None:
+        requests: list[object] = []
+
+        class _Response:
+            status = 200
+
+            def __enter__(self) -> "_Response":
+                return self
+
+            def __exit__(self, exc_type, exc, tb) -> None:
+                del exc_type, exc, tb
+                return None
+
+        def fake_urlopen(request: object, timeout: float = 5.0) -> _Response:
+            del timeout
+            requests.append(request)
+            return _Response()
+
+        with unittest.mock.patch.object(research_v36_lib.urllib.request, "urlopen", side_effect=fake_urlopen):
+            reachable, status_code, error = research_v36_lib.is_url_reachable("https://example.test/hags")
+
+        self.assertTrue(reachable)
+        self.assertEqual(status_code, 200)
+        self.assertIsNone(error)
+        self.assertEqual(len(requests), 1)
+        request = requests[0]
+        self.assertEqual(request.get_header("User-agent"), "Mozilla/5.0 (compatible; RegProbeURLValidator/1.0)")
+        self.assertEqual(request.get_method(), "HEAD")
+
+    def test_is_url_reachable_falls_back_to_get_after_403(self) -> None:
+        requests: list[object] = []
+
+        class _Response:
+            status = 200
+
+            def __enter__(self) -> "_Response":
+                return self
+
+            def __exit__(self, exc_type, exc, tb) -> None:
+                del exc_type, exc, tb
+                return None
+
+        def fake_urlopen(request: object, timeout: float = 5.0) -> _Response:
+            del timeout
+            requests.append(request)
+            if len(requests) == 1:
+                raise research_v36_lib.urllib.error.HTTPError(
+                    request.full_url,
+                    403,
+                    "Forbidden",
+                    hdrs=None,
+                    fp=None,
+                )
+            return _Response()
+
+        with unittest.mock.patch.object(research_v36_lib.urllib.request, "urlopen", side_effect=fake_urlopen):
+            reachable, status_code, error = research_v36_lib.is_url_reachable("https://example.test/hags")
+
+        self.assertTrue(reachable)
+        self.assertEqual(status_code, 200)
+        self.assertIsNone(error)
+        self.assertEqual(len(requests), 2)
+        self.assertEqual(requests[0].get_method(), "HEAD")
+        self.assertEqual(requests[1].get_method(), "GET")
+
     def test_etw_stackwalk_reopen_prerequisite_delta_counts_outstanding_reasons(self) -> None:
         ledger_payload = {
             "ledger_status": "deferred",
@@ -4346,6 +4419,167 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("receipt_status mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_seed_ack_journal_awaits_application_when_receipt_pending(self) -> None:
+        receipt = {
+            "schema_version": "1.0",
+            "receipt_status": "pending",
+            "receipt_mode": "await-seed",
+            "seed_commands": {
+                "seed_previous_snapshot_command": "cp retained current.previous",
+                "seed_previous_snapshot_markdown_command": "cp retained-md current.previous.md",
+                "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+            },
+            "verification": {
+                "previous_snapshot_present": False,
+                "previous_matches_current_snapshot": False,
+                "previous_matches_retained_baseline": False,
+            },
+            "focus": {
+                "current_snapshot_id": "ec5b6c91b4e6",
+                "previous_snapshot_id": None,
+                "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+            },
+            "counts": {"candidate_count": 2},
+        }
+        rotation = {
+            "schema_version": "1.0",
+            "rotation_status": "seed-pending",
+            "rotation_mode": "seed-from-baseline",
+            "counts": {"prerequisite_count": 2},
+            "focus": {"top_rotation_candidate": "power.control.allow-system-required-power-requests"},
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "transition_type": "added",
+                    "rotation_disposition": "seed-baseline",
+                    "current_journal_state": "deferred",
+                    "next_unlock_prerequisite": "await-seeding-pivot",
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_seed_ack_journal.build_seed_ack_journal(
+            receipt,
+            rotation,
+            seed_receipt_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json"),
+            rotation_ledger_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json"),
+            generated_utc="2026-04-15T22:00:00Z",
+        )
+
+        self.assertEqual(payload["ack_status"], "awaiting-application")
+        self.assertEqual(payload["ack_mode"], "apply-seed")
+        self.assertEqual(payload["counts"]["ack_required_candidate_count"], 1)
+
+    def test_etw_stackwalk_reopen_seed_ack_journal_check_accepts_matching_surface(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_seed_receipt_path": "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
+            "source_rotation_ledger_path": "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
+            "ack_status": "awaiting-refresh",
+            "ack_mode": "refresh-after-seed",
+            "receipt_status": "seeded-retained-baseline",
+            "rotation_status": "seed-pending",
+            "rotation_mode": "seed-from-baseline",
+            "operator": {
+                "blocker": "refresh-transition-and-ledger",
+                "next_action": "Regenerate the transition summary and rotation ledger so the lane can leave seed-pending.",
+            },
+            "commands": {
+                "seed_previous_snapshot_command": "cp retained current.previous",
+                "seed_previous_snapshot_markdown_command": "cp retained-md current.previous.md",
+                "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+                "regenerate_seed_receipt_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_seed_receipt.py",
+                "regenerate_rotation_ledger_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_rotation_ledger.py",
+            },
+            "verification": {
+                "previous_snapshot_present": True,
+                "previous_matches_current_snapshot": True,
+                "previous_matches_retained_baseline": True,
+                "rotation_prerequisites_pending": True,
+            },
+            "focus": {
+                "current_snapshot_id": "ec5b6c91b4e6",
+                "previous_snapshot_id": "ec5b6c91b4e6",
+                "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+                "top_rotation_candidate": "power.control.allow-system-required-power-requests",
+            },
+            "counts": {
+                "candidate_count": 2,
+                "ack_required_candidate_count": 1,
+                "rotation_candidate_count": 1,
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "transition_type": "added",
+                    "rotation_disposition": "seed-baseline",
+                    "current_journal_state": "deferred",
+                    "next_unlock_prerequisite": "await-seeding-pivot",
+                    "ack_required": True,
+                }
+            ],
+        }
+
+        payload = etw_stackwalk_reopen_seed_ack_journal_check.compare_seed_ack_journal(
+            json.loads(json.dumps(expected)),
+            expected,
+            generated_utc="2026-04-15T22:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+
+    def test_etw_stackwalk_reopen_seed_ack_journal_check_rejects_ack_status_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_seed_receipt_path": "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
+            "source_rotation_ledger_path": "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
+            "ack_status": "complete",
+            "ack_mode": "steady",
+            "receipt_status": "current-matches-previous",
+            "rotation_status": "seed-complete",
+            "rotation_mode": "receipt-confirmed-steady",
+            "operator": {
+                "blocker": "await-new-current-snapshot",
+                "next_action": "Seed alignment is complete; wait for a new current reopen snapshot.",
+            },
+            "commands": {
+                "seed_previous_snapshot_command": "cp retained current.previous",
+                "seed_previous_snapshot_markdown_command": "cp retained-md current.previous.md",
+                "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+                "regenerate_seed_receipt_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_seed_receipt.py",
+                "regenerate_rotation_ledger_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_rotation_ledger.py",
+            },
+            "verification": {
+                "previous_snapshot_present": True,
+                "previous_matches_current_snapshot": True,
+                "previous_matches_retained_baseline": True,
+                "rotation_prerequisites_pending": False,
+            },
+            "focus": {
+                "current_snapshot_id": "ec5b6c91b4e6",
+                "previous_snapshot_id": "ec5b6c91b4e6",
+                "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+                "top_rotation_candidate": None,
+            },
+            "counts": {
+                "candidate_count": 2,
+                "ack_required_candidate_count": 0,
+                "rotation_candidate_count": 0,
+            },
+            "entries": [],
+        }
+        surface = json.loads(json.dumps(expected))
+        surface["ack_status"] = "manual-review"
+
+        payload = etw_stackwalk_reopen_seed_ack_journal_check.compare_seed_ack_journal(
+            surface,
+            expected,
+            generated_utc="2026-04-15T22:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("ack_status mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_reopen_rotation_ledger_check_accepts_matching_surface(self) -> None:
         current = {

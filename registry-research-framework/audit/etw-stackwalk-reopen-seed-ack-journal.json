@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-15T05:02:53.548658Z",
+  "source_seed_receipt_path": "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
+  "source_rotation_ledger_path": "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
+  "ack_status": "awaiting-application",
+  "ack_mode": "apply-seed",
+  "receipt_status": "pending",
+  "rotation_status": "seed-pending",
+  "rotation_mode": "seed-from-baseline",
+  "operator": {
+    "blocker": "seed-not-yet-applied",
+    "next_action": "Run the seed commands, then regenerate the seed receipt and rotation ledger."
+  },
+  "commands": {
+    "seed_previous_snapshot_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.json registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json",
+    "seed_previous_snapshot_markdown_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/manifests/etw-stackwalk-reopen-snapshot.md registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.md",
+    "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+    "regenerate_seed_receipt_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_seed_receipt.py",
+    "regenerate_rotation_ledger_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_rotation_ledger.py"
+  },
+  "verification": {
+    "previous_snapshot_present": false,
+    "previous_matches_current_snapshot": false,
+    "previous_matches_retained_baseline": false,
+    "rotation_prerequisites_pending": true
+  },
+  "focus": {
+    "current_snapshot_id": "ec5b6c91b4e6",
+    "previous_snapshot_id": null,
+    "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+    "top_rotation_candidate": "power.control.allow-audio-to-enable-execution-required-power-requests"
+  },
+  "counts": {
+    "candidate_count": 2,
+    "ack_required_candidate_count": 2,
+    "rotation_candidate_count": 2
+  },
+  "entries": [
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "transition_type": "added",
+      "rotation_disposition": "seed-baseline",
+      "current_journal_state": "deferred",
+      "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+      "ack_required": true
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "transition_type": "added",
+      "rotation_disposition": "seed-baseline",
+      "current_journal_state": "deferred",
+      "next_unlock_prerequisite": "Land a current-build boot/init reader or registry seeding caller proof.",
+      "ack_required": true
+    }
+  ]
+}

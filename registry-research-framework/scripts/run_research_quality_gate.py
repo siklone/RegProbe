@@ -182,6 +182,11 @@ def default_steps(args: argparse.Namespace) -> list[GateStep]:
             [python, "registry-research-framework/scripts/check_etw_stackwalk_reopen_seed_receipt.py"],
         ),
         GateStep(
+            "etw-stackwalk-reopen-seed-ack-journal",
+            "ETW stackwalk reopen seed ack journal check",
+            [python, "registry-research-framework/scripts/check_etw_stackwalk_reopen_seed_ack_journal.py"],
+        ),
+        GateStep(
             "etw-stackwalk-reopen-rotation-ledger",
             "ETW stackwalk reopen rotation ledger check",
             [python, "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py"],
