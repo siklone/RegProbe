@@ -188,7 +188,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         return _catalogCoordinator.BuildWinConfigCategoryCoverageMap(Tweaks);
     }
 
-    public string Title => "Configuration";
+    public string Title => "Tweaks";
 
 	public bool IsElevated => _isElevated;
 

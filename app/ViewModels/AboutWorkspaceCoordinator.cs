@@ -40,7 +40,7 @@ public sealed class AboutWorkspaceCoordinator : ViewModelBase
         OpenLogFileCommand = new RelayCommand(_ => OpenLogFile());
     }
 
-    public string Title => "About";
+    public string Title => "About & Diagnostics";
 
     public string AppVersion => AppInfo.Version;
 

@@ -128,7 +128,7 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
 
     public bool IsMaintenanceWorkspaceSelected => SelectedWorkspace == ConfigurationWorkspaceKind.Maintenance;
 
-    public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Repairs" : "Configuration";
+    public string CurrentWorkspaceLabel => IsMaintenanceWorkspaceSelected ? "Recovery" : "Tweaks";
 
     public string CurrentWorkspaceDescription => IsMaintenanceWorkspaceSelected
         ? "One-off cleanup, reset, and recovery actions."
@@ -144,7 +144,7 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         ? "Search cleanup, reset, and recovery actions..."
         : "Search settings, features, and switches...";
 
-    public string ToolbarSectionLabel => IsMaintenanceWorkspaceSelected ? "Repair filters" : "Configuration filters";
+    public string ToolbarSectionLabel => IsMaintenanceWorkspaceSelected ? "Recovery filters" : "Tweak filters";
 
     public string ToolbarSectionHint => IsMaintenanceWorkspaceSelected
         ? "Surface one-off cleanup and recovery actions fast."
@@ -159,33 +159,33 @@ public sealed class TweaksShellStateViewModel : ViewModelBase
         : "Search by behavior, narrow to one area, or keep favorites close for the settings you revisit most.";
 
     public string EmptyStateTitle => IsMaintenanceWorkspaceSelected
-        ? "No repairs match"
-        : "No settings match";
+        ? "No recovery actions match"
+        : "No tweaks match";
 
     public string EmptyStateDescription => IsMaintenanceWorkspaceSelected
         ? "Try a broader search or choose another category."
         : "Try a simpler search or pick a different area.";
 
     public string EmptyStateActionText => IsMaintenanceWorkspaceSelected
-        ? "Show all repairs"
-        : "Show all settings";
+        ? "Show all recovery actions"
+        : "Show all tweaks";
 
     public bool CanClearCategorySelection => !IsAllCategoriesSelected;
 
     public string ClearCategorySelectionText => IsMaintenanceWorkspaceSelected
-        ? "Browse all repair categories"
-        : "Browse all areas";
+        ? "Browse all recovery categories"
+        : "Browse all tweak areas";
 
-    public string FilterSummaryLabel => IsMaintenanceWorkspaceSelected ? "Repair scope" : "Configuration scope";
+    public string FilterSummaryLabel => IsMaintenanceWorkspaceSelected ? "Recovery scope" : "Tweak scope";
 
-    public string InventorySummaryLabel => IsMaintenanceWorkspaceSelected ? "Repair status" : "Configuration status";
+    public string InventorySummaryLabel => IsMaintenanceWorkspaceSelected ? "Recovery status" : "Tweak status";
 
     public bool IsAllCategoriesSelected => string.IsNullOrWhiteSpace(_selectedCategoryName);
 
     public string SelectedCategoryLabel => IsAllCategoriesSelected ? AllItemsLabel : _selectedCategoryName;
 
     public string SelectedCategoryContext => IsAllCategoriesSelected
-        ? (IsMaintenanceWorkspaceSelected ? "All repair categories" : "All configuration areas")
+        ? (IsMaintenanceWorkspaceSelected ? "All recovery categories" : "All tweak areas")
         : SelectedCategoryLabel;
 
     public void ResetFilters()
