@@ -127,6 +127,19 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected win-config split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_tweak_provenance_service_stays_split_into_models_and_store_files(self) -> None:
+        service_lines = (
+            REPO_ROOT / "app" / "Services" / "TweakProvenanceCatalogService.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "TweakProvenanceCatalogModels.cs",
+            REPO_ROOT / "app" / "Services" / "TweakProvenanceCatalogStore.cs",
+        ]
+
+        self.assertLessEqual(len(service_lines), 160)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected tweak provenance split file: {path.relative_to(REPO_ROOT)}")
+
     def test_application_layer_links_and_app_layer_removes_split_service_files(self) -> None:
         application_project = (REPO_ROOT / "application" / "application.csproj").read_text(encoding="utf-8")
         app_project = (REPO_ROOT / "app" / "app.csproj").read_text(encoding="utf-8")
