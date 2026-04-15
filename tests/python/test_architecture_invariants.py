@@ -43,6 +43,28 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertEqual(leaked_refs, [])
 
+    def test_cli_bootstrap_and_research_root_stay_compact(self) -> None:
+        cli_program_lines = (REPO_ROOT / "cli" / "Program.cs").read_text(encoding="utf-8").splitlines()
+        research_root_lines = (
+            REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.cs"
+        ).read_text(encoding="utf-8").splitlines()
+
+        self.assertLessEqual(len(cli_program_lines), 120)
+        self.assertLessEqual(len(research_root_lines), 40)
+
+    def test_cli_research_command_is_split_into_targeted_files(self) -> None:
+        expected_paths = [
+            REPO_ROOT / "cli" / "Program.ResearchHelpers.cs",
+            REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.Promotion.cs",
+            REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.Blocked.cs",
+            REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.Automation.cs",
+            REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.Trace.cs",
+            REPO_ROOT / "cli" / "Commands" / "Program.ResearchCommand.Json.cs",
+        ]
+
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected CLI split file: {path.relative_to(REPO_ROOT)}")
+
 
 if __name__ == "__main__":
     unittest.main()
