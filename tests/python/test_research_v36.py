@@ -147,6 +147,14 @@ etw_stackwalk_reopen_history_archive_check = load_module(
     "check_etw_stackwalk_reopen_history_archive",
     FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_history_archive.py",
 )
+etw_stackwalk_reopen_rotation_ledger = load_module(
+    "generate_etw_stackwalk_reopen_rotation_ledger",
+    FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_reopen_rotation_ledger.py",
+)
+etw_stackwalk_reopen_rotation_ledger_check = load_module(
+    "check_etw_stackwalk_reopen_rotation_ledger",
+    FRAMEWORK_SCRIPTS / "check_etw_stackwalk_reopen_rotation_ledger.py",
+)
 etw_stackwalk_execution_manifest = load_module(
     "generate_etw_stackwalk_execution_manifest",
     FRAMEWORK_SCRIPTS / "generate_etw_stackwalk_execution_manifest.py",
@@ -4162,6 +4170,202 @@ class EtlDiscoveryTests(unittest.TestCase):
 
         self.assertEqual(payload["check_status"], "error")
         self.assertTrue(any("history_status mismatch" in error for error in payload["errors"]))
+
+    def test_etw_stackwalk_reopen_rotation_ledger_defaults_to_seed_pending_without_previous(self) -> None:
+        current = {
+            "schema_version": "1.0",
+            "snapshot_id": "ec5b6c91b4e6",
+            "counts": {"candidate_count": 2},
+        }
+        transition = {
+            "schema_version": "1.0",
+            "transition_status": "baseline",
+            "counts": {"changed_candidate_count": 2},
+            "focus": {"top_changed_candidate": "power.control.allow-system-required-power-requests"},
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Power",
+                    "transition_type": "added",
+                    "current_journal_state": "deferred",
+                    "previous_journal_state": None,
+                    "current_operator_blocker": "await-seeding-pivot",
+                    "previous_operator_blocker": None,
+                    "next_unlock_prerequisite": "await-seeding-pivot",
+                },
+                {
+                    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "feature_area": "Power",
+                    "transition_type": "added",
+                    "current_journal_state": "deferred",
+                    "previous_journal_state": None,
+                    "current_operator_blocker": "await-primary-doc",
+                    "previous_operator_blocker": None,
+                    "next_unlock_prerequisite": "await-primary-doc",
+                },
+            ],
+        }
+        history = {
+            "schema_version": "1.0",
+            "history_status": "seed-required",
+            "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+            "seed_previous_snapshot_command": "cp retained current.previous",
+            "seed_previous_snapshot_markdown_command": "cp retained-md current.previous.md",
+            "persist_current_snapshot_history_command": "mkdir -p history-store",
+            "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+        }
+
+        payload = etw_stackwalk_reopen_rotation_ledger.build_rotation_ledger(
+            current,
+            None,
+            transition,
+            history,
+            current_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json"),
+            previous_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json"),
+            transition_summary_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json"),
+            history_archive_summary_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json"),
+            generated_utc="2026-04-15T21:00:00Z",
+        )
+
+        self.assertEqual(payload["rotation_status"], "seed-pending")
+        self.assertEqual(payload["rotation_mode"], "seed-from-baseline")
+        self.assertEqual(payload["counts"]["rotation_candidate_count"], 2)
+        self.assertEqual(payload["entries"][0]["rotation_disposition"], "seed-baseline")
+
+    def test_etw_stackwalk_reopen_rotation_ledger_check_accepts_matching_surface(self) -> None:
+        current = {
+            "schema_version": "1.0",
+            "snapshot_id": "ec5b6c91b4e6",
+            "counts": {"candidate_count": 2},
+        }
+        previous = {
+            "schema_version": "1.0",
+            "snapshot_id": "ab12cd34ef56",
+            "counts": {"candidate_count": 2},
+        }
+        transition = {
+            "schema_version": "1.0",
+            "transition_status": "changed",
+            "counts": {"changed_candidate_count": 1},
+            "focus": {"top_changed_candidate": "power.control.allow-system-required-power-requests"},
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Power",
+                    "transition_type": "blocker-changed",
+                    "current_journal_state": "deferred",
+                    "previous_journal_state": "deferred",
+                    "current_operator_blocker": "await-seeding-pivot",
+                    "previous_operator_blocker": "await-kd-lane",
+                    "next_unlock_prerequisite": "await-seeding-pivot",
+                }
+            ],
+        }
+        history = {
+            "schema_version": "1.0",
+            "history_status": "rotation-ready",
+            "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+            "seed_previous_snapshot_command": "cp retained current.previous",
+            "seed_previous_snapshot_markdown_command": "cp retained-md current.previous.md",
+            "persist_current_snapshot_history_command": "mkdir -p history-store",
+            "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+        }
+        expected = etw_stackwalk_reopen_rotation_ledger.build_rotation_ledger(
+            current,
+            previous,
+            transition,
+            history,
+            current_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json"),
+            previous_snapshot_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json"),
+            transition_summary_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json"),
+            history_archive_summary_path=Path("registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json"),
+            generated_utc="2026-04-15T21:00:00Z",
+        )
+        surface = json.loads(json.dumps(expected))
+
+        payload = etw_stackwalk_reopen_rotation_ledger_check.compare_rotation_ledger(
+            surface,
+            expected,
+            generated_utc="2026-04-15T21:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "ok")
+
+    def test_etw_stackwalk_reopen_rotation_ledger_check_rejects_rotation_status_mismatch(self) -> None:
+        expected = {
+            "schema_version": "1.0",
+            "source_current_snapshot_path": "registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json",
+            "source_previous_snapshot_path": None,
+            "source_transition_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-transition-summary.json",
+            "source_history_archive_summary_path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json",
+            "source_history_archive_markdown_path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.md",
+            "rotation_status": "seed-pending",
+            "rotation_mode": "seed-from-baseline",
+            "history_status": "seed-required",
+            "transition_status": "baseline",
+            "operator": {
+                "blocker": "seed-previous-snapshot-from-history-archive",
+                "next_action": "Seed snapshot.previous from the retained baseline snapshot before expecting rotation-aware reopen diffs.",
+            },
+            "seed_previous_snapshot_command": "cp retained current.previous",
+            "seed_previous_snapshot_markdown_command": "cp retained-md current.previous.md",
+            "persist_current_snapshot_history_command": "mkdir -p history-store",
+            "rotate_previous_snapshot_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-snapshot.json registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.json",
+            "rotate_previous_snapshot_markdown_command": "cp registry-research-framework/audit/etw-stackwalk-reopen-snapshot.md registry-research-framework/audit/etw-stackwalk-reopen-snapshot.previous.md",
+            "refresh_transition_summary_command": "python3 registry-research-framework/scripts/generate_etw_stackwalk_reopen_transition_summary.py",
+            "prerequisite_codes": ["seed-previous-snapshot", "refresh-transition-summary"],
+            "counts": {
+                "current_candidate_count": 2,
+                "previous_candidate_count": 0,
+                "changed_candidate_count": 2,
+                "rotation_candidate_count": 2,
+                "prerequisite_count": 2,
+            },
+            "focus": {
+                "current_snapshot_id": "ec5b6c91b4e6",
+                "previous_snapshot_id": None,
+                "retained_baseline_snapshot_id": "ec5b6c91b4e6",
+                "top_changed_candidate": "power.control.allow-system-required-power-requests",
+                "top_rotation_candidate": "power.control.allow-system-required-power-requests",
+            },
+            "entries": [
+                {
+                    "candidate_id": "power.control.allow-system-required-power-requests",
+                    "feature_area": "Power",
+                    "transition_type": "added",
+                    "current_journal_state": "deferred",
+                    "previous_journal_state": None,
+                    "current_operator_blocker": "await-seeding-pivot",
+                    "previous_operator_blocker": None,
+                    "next_unlock_prerequisite": "await-seeding-pivot",
+                    "requires_rotation_review": True,
+                    "rotation_disposition": "seed-baseline",
+                },
+                {
+                    "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+                    "feature_area": "Power",
+                    "transition_type": "added",
+                    "current_journal_state": "deferred",
+                    "previous_journal_state": None,
+                    "current_operator_blocker": "await-primary-doc",
+                    "previous_operator_blocker": None,
+                    "next_unlock_prerequisite": "await-primary-doc",
+                    "requires_rotation_review": True,
+                    "rotation_disposition": "seed-baseline",
+                },
+            ],
+        }
+        surface = json.loads(json.dumps(expected))
+        surface["rotation_status"] = "steady"
+
+        payload = etw_stackwalk_reopen_rotation_ledger_check.compare_rotation_ledger(
+            surface,
+            expected,
+            generated_utc="2026-04-15T21:00:00Z",
+        )
+
+        self.assertEqual(payload["check_status"], "error")
+        self.assertTrue(any("rotation_status mismatch" in error for error in payload["errors"]))
 
     def test_etw_stackwalk_execution_manifest_defaults_to_idle_for_hold_only_set(self) -> None:
         batch = {
