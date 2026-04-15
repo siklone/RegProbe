@@ -24,6 +24,7 @@ env:
   UNIT_TEST_PROJECT: tests/tests.csproj
   INTEGRATION_TEST_PROJECT: tests.integration/tests.integration.csproj
   APP_PROJECT: app/app.csproj
+  CLI_PROJECT: cli/cli.csproj
   ELEVATED_HOST_PROJECT: elevated-host/elevated-host.csproj
   COVERAGE_LINE_THRESHOLD: "31"
   COVERAGE_BRANCH_THRESHOLD: "17"
@@ -122,13 +123,15 @@ jobs:
           current_branch = round(float(current.attrib.get("branch-rate", "0")) * 100, 2)
           baseline_line = baseline["coverage"]["totals"]["line_percent"]
           baseline_branch = baseline["coverage"]["totals"]["branch_percent"]
+          threshold_line = os.environ["COVERAGE_LINE_THRESHOLD"]
+          threshold_branch = os.environ["COVERAGE_BRANCH_THRESHOLD"]
 
           lines = [
               "## Coverage Summary",
               "",
               f"- Line coverage: `{current_line:.2f}%` (baseline `{baseline_line:.2f}%`, delta `{current_line - baseline_line:+.2f}`)",
               f"- Branch coverage: `{current_branch:.2f}%` (baseline `{baseline_branch:.2f}%`, delta `{current_branch - baseline_branch:+.2f}`)",
-              f"- Thresholds: line `{31}%`, branch `{17}%`",
+              f"- Thresholds: line `{threshold_line}%`, branch `{threshold_branch}%`",
           ]
           summary_path = Path(os.environ["GITHUB_STEP_SUMMARY"])
           summary_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -253,10 +256,26 @@ jobs:
       - name: Publish main application
         run: dotnet publish ${{ env.APP_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o publish
 
+      - name: Publish CLI
+        run: dotnet publish ${{ env.CLI_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained false -o publish-cli
+
       - name: Copy documentation
         run: |
           if (Test-Path "Docs") {
             Copy-Item -Path "Docs" -Destination "publish/Docs" -Recurse -Force
+          }
+
+          if (Test-Path "Docs/product/cli.md") {
+            New-Item -ItemType Directory -Path "publish-cli/Docs/product" -Force | Out-Null
+            Copy-Item -Path "Docs/product/cli.md" -Destination "publish-cli/Docs/product/cli.md" -Force
+          }
+
+          if (Test-Path "README.md") {
+            Copy-Item -Path "README.md" -Destination "publish-cli/README.md" -Force
+          }
+
+          if (Test-Path "LICENSE") {
+            Copy-Item -Path "LICENSE" -Destination "publish-cli/LICENSE" -Force
           }
 
       - name: Verify ElevatedHost packaging
@@ -275,16 +294,47 @@ jobs:
             exit 1
           }
 
+      - name: Verify CLI packaging
+        run: |
+          $cliPath = "publish-cli/RegProbe.CLI.exe"
+          if (!(Test-Path $cliPath)) {
+            Write-Error "CRITICAL: CLI not found at $cliPath"
+            exit 1
+          }
+
+      - name: Package publish artifacts
+        run: >
+          pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/package_release_assets.ps1
+          -VersionLabel "${{ github.sha }}"
+          -Runtime "${{ env.RUNTIME }}"
+          -AppPublishDir "publish"
+          -CliPublishDir "publish-cli"
+          -OutputDir "release-assets"
+
+      - name: Write publish package summary
+        shell: bash
+        run: |
+          {
+            echo "## Publish Packages"
+            echo
+            echo "- \`RegProbe-Portable-${GITHUB_SHA}-${RUNTIME}.zip\`"
+            echo "- \`RegProbe-Cli-${GITHUB_SHA}-${RUNTIME}.zip\`"
+            echo "- \`RegProbe-${GITHUB_SHA}-${RUNTIME}-sha256.txt\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
         with:
           name: RegProbe-${{ github.sha }}
-          path: publish/
+          path: |
+            publish/
+            publish-cli/
+            release-assets/
           retention-days: 30
 
   release:
     name: Create Release
-    needs: [unit-tests, code-quality]
+    needs: [unit-tests, integration-tests, code-quality]
     runs-on: windows-latest
     if: github.event_name == 'release'
     steps:
@@ -305,18 +355,54 @@ jobs:
       - name: Publish main application
         run: dotnet publish ${{ env.APP_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained -o release
 
+      - name: Publish CLI
+        run: dotnet publish ${{ env.CLI_PROJECT }} -c ${{ env.CONFIGURATION }} -r ${{ env.RUNTIME }} --self-contained false -o release-cli
+
       - name: Copy documentation
         run: |
           if (Test-Path "Docs") {
             Copy-Item -Path "Docs" -Destination "release/Docs" -Recurse -Force
           }
 
-      - name: Create release archive
-        run: Compress-Archive -Path release/* -DestinationPath RegProbe-${{ github.event.release.tag_name }}.zip
+          if (Test-Path "Docs/product/cli.md") {
+            New-Item -ItemType Directory -Path "release-cli/Docs/product" -Force | Out-Null
+            Copy-Item -Path "Docs/product/cli.md" -Destination "release-cli/Docs/product/cli.md" -Force
+          }
+
+          if (Test-Path "README.md") {
+            Copy-Item -Path "README.md" -Destination "release-cli/README.md" -Force
+          }
+
+          if (Test-Path "LICENSE") {
+            Copy-Item -Path "LICENSE" -Destination "release-cli/LICENSE" -Force
+          }
+
+      - name: Package release assets
+        run: >
+          pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/package_release_assets.ps1
+          -VersionLabel "${{ github.event.release.tag_name }}"
+          -Runtime "${{ env.RUNTIME }}"
+          -AppPublishDir "release"
+          -CliPublishDir "release-cli"
+          -OutputDir "release-assets"
+
+      - name: Write release package summary
+        shell: bash
+        run: |
+          {
+            echo "## Release Packages"
+            echo
+            echo "- \`RegProbe-Portable-${{ github.event.release.tag_name }}-${RUNTIME}.zip\`"
+            echo "- \`RegProbe-Cli-${{ github.event.release.tag_name }}-${RUNTIME}.zip\`"
+            echo "- \`RegProbe-${{ github.event.release.tag_name }}-${RUNTIME}-sha256.txt\`"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
-          files: RegProbe-${{ github.event.release.tag_name }}.zip
+          files: |
+            release-assets/RegProbe-Portable-${{ github.event.release.tag_name }}-${{ env.RUNTIME }}.zip
+            release-assets/RegProbe-Cli-${{ github.event.release.tag_name }}-${{ env.RUNTIME }}.zip
+            release-assets/RegProbe-${{ github.event.release.tag_name }}-${{ env.RUNTIME }}-sha256.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

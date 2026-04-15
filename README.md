@@ -150,6 +150,7 @@ The proof model and vocabulary are documented in more detail in [Proof model and
 ## Start Here
 
 - I want to use the app: [User guide](Docs/product/user-guide.md)
+- I want the public support story: [Support matrix](Docs/product/support-matrix.md)
 - I want to build the app: [Build and run](#build-and-run)
 - I want to contribute research: [Contributing](CONTRIBUTING.md)
 
@@ -253,21 +254,21 @@ The latest release is available on the [Releases page](https://github.com/siklon
 
 ### Verify The Download
 
-Each release should include a SHA256 checksum file.
+Each release includes a SHA256 checksum file.
 
 ```powershell
-Get-FileHash .\RegProbe-Setup.exe -Algorithm SHA256
+Get-FileHash .\RegProbe-Portable-v0.0.0-win-x64.zip -Algorithm SHA256
 ```
 
-Compare the output against the `.sha256` file published with the release.
+Compare the output against the `RegProbe-<version>-win-x64-sha256.txt` file published with the same release.
 
 ### Available Packages
 
 | Package | Description |
 |--------|-------------|
-| `RegProbe-Setup.exe` | Installer, recommended |
-| `RegProbe-Portable.zip` | Portable desktop build |
-| `RegProbe-Cli.zip` | CLI-only package for scripted workflows |
+| `RegProbe-Portable-<version>-win-x64.zip` | Portable desktop build, recommended |
+| `RegProbe-Cli-<version>-win-x64.zip` | CLI-only package for scripted workflows |
+| `RegProbe-<version>-win-x64-sha256.txt` | SHA256 checksums for release verification |
 
 ## CLI Reference
 

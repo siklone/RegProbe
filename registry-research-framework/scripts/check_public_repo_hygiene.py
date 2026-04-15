@@ -56,6 +56,7 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
     codeowners_path = repo_root / ".github" / "CODEOWNERS"
     pr_template_path = repo_root / ".github" / "PULL_REQUEST_TEMPLATE.md"
     cli_docs_path = repo_root / "Docs" / "product" / "cli.md"
+    support_matrix_path = repo_root / "Docs" / "product" / "support-matrix.md"
     issue_template_dir = repo_root / ".github" / "ISSUE_TEMPLATE"
     required_issue_templates = [
         issue_template_dir / "bug-report.yml",
@@ -79,6 +80,7 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         "pr_template_present": pr_template_path.exists(),
         "codeowners_present": codeowners_path.exists(),
         "cli_docs_present": cli_docs_path.exists(),
+        "support_matrix_present": support_matrix_path.exists(),
         "readme_surface_names_current": all(token in readme_text for token in ("`Tweaks`", "`Recovery`", "`Diagnostics`")) and "`Configuration` is the main workspace" not in readme_text,
         "user_guide_surface_names_current": all(token in user_guide_text for token in ("`Tweaks`", "`Recovery`", "`Diagnostics`")) and "`Configuration` is the main tweak workspace" not in user_guide_text,
     }
@@ -104,6 +106,8 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         errors.append(".github/CODEOWNERS is missing.")
     if not checks["cli_docs_present"]:
         errors.append("Docs/product/cli.md is missing.")
+    if not checks["support_matrix_present"]:
+        errors.append("Docs/product/support-matrix.md is missing.")
     if not checks["readme_surface_names_current"]:
         errors.append("README.md still drifts from the shipped Tweaks/Recovery/Diagnostics surface language.")
     if not checks["user_guide_surface_names_current"]:

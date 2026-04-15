@@ -1,7 +1,7 @@
 # Public Repo Hygiene Check
 
 - Status: **PASS**
-- Generated UTC: `2026-04-15T11:59:11Z`
+- Generated UTC: `2026-04-15T12:06:06Z`
 
 ## Checks
 - `security_policy_present`: `True`
@@ -13,5 +13,6 @@
 - `pr_template_present`: `True`
 - `codeowners_present`: `True`
 - `cli_docs_present`: `True`
+- `support_matrix_present`: `True`
 - `readme_surface_names_current`: `True`
 - `user_guide_surface_names_current`: `True`

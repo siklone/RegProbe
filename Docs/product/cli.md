@@ -48,4 +48,4 @@ dotnet run --project cli/cli.csproj -- research validate-json-tweaks --input-dir
 
 ## Release Use
 
-If you only want the CLI from a release artifact, prefer the CLI-only package once it is published for that release train. Until then, building from source is the reliable path.
+If you only want the CLI from a release artifact, prefer the `RegProbe-Cli-<version>-win-x64.zip` package and verify it against the matching `RegProbe-<version>-win-x64-sha256.txt` file.

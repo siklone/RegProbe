@@ -47,6 +47,7 @@ class PublicRepoHygieneTests(unittest.TestCase):
                 encoding="utf-8",
             )
             (repo_root / "Docs" / "product" / "cli.md").write_text("# CLI\n", encoding="utf-8")
+            (repo_root / "Docs" / "product" / "support-matrix.md").write_text("# Support Matrix\n", encoding="utf-8")
             (repo_root / ".github" / "CODEOWNERS").write_text("* @owner\n", encoding="utf-8")
             (repo_root / ".github" / "PULL_REQUEST_TEMPLATE.md").write_text("## Summary\n", encoding="utf-8")
             for name in ("bug-report.yml", "feature-request.yml", "research-finding.yml"):
@@ -89,6 +90,7 @@ class PublicRepoHygieneTests(unittest.TestCase):
             self.assertTrue(any("issue templates" in error for error in report["errors"]))
             self.assertTrue(any("CODEOWNERS" in error for error in report["errors"]))
             self.assertTrue(any("Docs/product/cli.md" in error for error in report["errors"]))
+            self.assertTrue(any("support-matrix.md" in error for error in report["errors"]))
             self.assertEqual(len(report["absolute_local_path_violations"]), 1)
 
 
