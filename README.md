@@ -17,6 +17,33 @@ That is the public product promise and the repo contract underneath it. The desk
 ![License](https://img.shields.io/badge/license-MIT-22c55e)
 [![CI](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml/badge.svg)](https://github.com/siklone/RegProbe/actions/workflows/dotnet.yml)
 
+## Product Preview
+
+The repo now carries a small public media lane so the product promise is visible before the deep research prose starts. These preview assets are generated from the current UI language and kept in sync through [Product media](Docs/PRODUCT_MEDIA.md).
+
+<table>
+  <tr>
+    <td width="33%">
+      <img src="assets/product/configuration-verdict-card.svg" alt="Tweaks surface with a visible verdict and evidence snapshot card" width="100%">
+    </td>
+    <td width="33%">
+      <img src="assets/product/evidence-detail-drawer.svg" alt="Evidence detail drawer with verdict, proof snapshot, and plain-English explanation" width="100%">
+    </td>
+    <td width="33%">
+      <img src="assets/product/recovery-surface.svg" alt="Recovery surface with rollback actions and history visible" width="100%">
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Tweaks</strong><br>Verdict and evidence snapshot live directly in the row instead of staying hidden in repo docs.</td>
+    <td><strong>Evidence detail</strong><br>Plain-English explanation comes first, technical justification follows one layer deeper.</td>
+    <td><strong>Recovery</strong><br>Rollback stays visible enough to feel operational, not theoretical.</td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="assets/product/preview-apply-verify-rollback.gif" alt="Storyboard preview of the Detect, Preview, Apply, Verify, and Rollback flow" width="960">
+</p>
+
 ## What RegProbe Does
 
 - Detects current registry-backed setting state before making changes
