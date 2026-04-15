@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RegProbe.App.Services;
+namespace RegProbe.Application.Services;
 
 public enum ConfigurationWorkspaceKind
 {

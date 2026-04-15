@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using RegProbe.App.Services.TweakProviders;
-using RegProbe.App.Utilities;
+using RegProbe.Application.Services.TweakProviders;
+using RegProbe.Application.Utilities;
 using RegProbe.Core;
 using RegProbe.Core.Services;
 using RegProbe.Engine;
@@ -15,7 +15,7 @@ using RegProbe.Infrastructure;
 using RegProbe.Infrastructure.Elevation;
 using RegProbe.Infrastructure.Registry;
 
-namespace RegProbe.App.Services;
+namespace RegProbe.Application.Services;
 
 public sealed record TweakCatalogEntry(string Category, ITweak Tweak);
 

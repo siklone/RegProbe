@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using RegProbe.App.Services.TweakProviders;
+using RegProbe.Application.Services.TweakProviders;
 using Xunit;
 
 public sealed class JsonTweakLoaderTests : IDisposable

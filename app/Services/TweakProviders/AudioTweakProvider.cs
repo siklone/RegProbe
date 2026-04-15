@@ -7,7 +7,7 @@ using RegProbe.Engine;
 using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Peripheral;
 
-namespace RegProbe.App.Services.TweakProviders;
+namespace RegProbe.Application.Services.TweakProviders;
 
 public sealed class AudioTweakProvider : BaseTweakProvider
 {

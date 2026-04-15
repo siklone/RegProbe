@@ -1,6 +1,5 @@
 # RegProbe CI/CD Pipeline
-# Comprehensive build, test, and publish workflow
-# Source: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+# Split into explicit build, unit, integration, code-quality, publish, and release jobs.
 
 name: CI/CD
 
@@ -18,18 +17,21 @@ permissions:
 
 env:
   DOTNET_VERSION: "8.0.x"
+  PYTHON_VERSION: "3.12"
   CONFIGURATION: Release
   RUNTIME: win-x64
   SOLUTION: RegProbe.sln
-  TEST_PROJECT: tests/tests.csproj
+  UNIT_TEST_PROJECT: tests/tests.csproj
+  INTEGRATION_TEST_PROJECT: tests.integration/tests.integration.csproj
   APP_PROJECT: app/app.csproj
   ELEVATED_HOST_PROJECT: elevated-host/elevated-host.csproj
+  COVERAGE_LINE_THRESHOLD: "31"
+  COVERAGE_BRANCH_THRESHOLD: "17"
 
 jobs:
   build:
-    name: Build & Test
+    name: Build
     runs-on: windows-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,11 +42,6 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
 
       - name: Cache .NET packages
         uses: actions/cache@v4
@@ -60,6 +57,144 @@ jobs:
       - name: Build solution
         run: dotnet build ${{ env.SOLUTION }} -c ${{ env.CONFIGURATION }} --no-restore
 
+  unit-tests:
+    name: Unit Tests
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SOLUTION }}
+
+      - name: Run unit tests with coverage gates
+        run: >
+          dotnet test ${{ env.UNIT_TEST_PROJECT }}
+          -c ${{ env.CONFIGURATION }}
+          --no-restore
+          --logger trx
+          --results-directory TestResults/Unit
+          /p:CollectCoverage=true
+          /p:CoverletOutput=TestResults/Coverage/
+          /p:CoverletOutputFormat=cobertura
+          /p:Threshold=${{ env.COVERAGE_LINE_THRESHOLD }}
+          /p:ThresholdType=line,branch
+          /p:ThresholdStat=minimum
+
+      - name: Upload unit test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unit-test-results
+          path: TestResults/Unit/*.trx
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: TestResults/Coverage/coverage.cobertura.xml
+
+      - name: Write coverage summary
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+
+          baseline_path = Path("Docs/metrics/baseline.json")
+          coverage_path = Path("TestResults/Coverage/coverage.cobertura.xml")
+          if not baseline_path.exists() or not coverage_path.exists():
+              raise SystemExit(0)
+
+          baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+          current = ET.fromstring(coverage_path.read_bytes())
+          current_line = round(float(current.attrib.get("line-rate", "0")) * 100, 2)
+          current_branch = round(float(current.attrib.get("branch-rate", "0")) * 100, 2)
+          baseline_line = baseline["coverage"]["totals"]["line_percent"]
+          baseline_branch = baseline["coverage"]["totals"]["branch_percent"]
+
+          lines = [
+              "## Coverage Summary",
+              "",
+              f"- Line coverage: `{current_line:.2f}%` (baseline `{baseline_line:.2f}%`, delta `{current_line - baseline_line:+.2f}`)",
+              f"- Branch coverage: `{current_branch:.2f}%` (baseline `{baseline_branch:.2f}%`, delta `{current_branch - baseline_branch:+.2f}`)",
+              f"- Thresholds: line `{31}%`, branch `{17}%`",
+          ]
+          summary_path = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          summary_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+          PY
+
+  integration-tests:
+    name: Integration Tests
+    needs: build
+    runs-on: windows-latest
+    if: github.event_name != 'release'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SOLUTION }}
+
+      - name: Run SAFE flow integration tests
+        run: >
+          dotnet test ${{ env.INTEGRATION_TEST_PROJECT }}
+          -c ${{ env.CONFIGURATION }}
+          --no-restore
+          --logger trx
+          --results-directory TestResults/Integration
+
+      - name: Upload integration test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: integration-test-results
+          path: TestResults/Integration/*.trx
+
+  code-quality:
+    name: Code Quality
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SOLUTION }}
+
+      - name: Build with warnings-as-errors
+        run: dotnet build ${{ env.SOLUTION }} -c ${{ env.CONFIGURATION }} --no-restore /p:TreatWarningsAsErrors=true
+
+      - name: Run analyzers with warnings-as-errors
+        run: dotnet build ${{ env.SOLUTION }} -c ${{ env.CONFIGURATION }} --no-restore /p:RunAnalyzers=true /p:TreatWarningsAsErrors=true
+
       - name: Run Python pipeline tests
         run: python -m unittest discover -s tests/python -p "test*.py"
 
@@ -71,6 +206,9 @@ jobs:
 
       - name: Research quality gate summary
         run: python registry-research-framework/scripts/run_research_quality_gate.py --skip-python-tests --skip-ghidra-smoke
+
+      - name: Run PowerShell pipeline smoke checks
+        run: pwsh -NoProfile -ExecutionPolicy Bypass -File tests/Invoke-PipelineQualitySmoke.ps1
 
       - name: Upload research quality gate artifacts
         uses: actions/upload-artifact@v4
@@ -92,32 +230,11 @@ jobs:
             registry-research-framework/audit/etw-stackwalk-capture-plan-check.json
             registry-research-framework/audit/etw-stackwalk-capture-plan-check.md
 
-      - name: Run PowerShell pipeline smoke checks
-        run: pwsh -NoProfile -ExecutionPolicy Bypass -File tests/Invoke-PipelineQualitySmoke.ps1
-
-      - name: Run tests
-        run: dotnet test ${{ env.TEST_PROJECT }} -c ${{ env.CONFIGURATION }} --no-build --verbosity normal --logger trx --results-directory TestResults --collect:"XPlat Code Coverage"
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: test-results
-          path: TestResults/*.trx
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: coverage-report
-          path: TestResults/**/coverage.cobertura.xml
-
   publish:
     name: Publish Application
-    needs: build
+    needs: [unit-tests, integration-tests, code-quality]
     runs-on: windows-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -149,7 +266,6 @@ jobs:
             Write-Error "CRITICAL: ElevatedHost.exe not found at $hostPath"
             exit 1
           }
-          Write-Host "ElevatedHost.exe verified at $hostPath"
 
       - name: Verify main application
         run: |
@@ -158,7 +274,6 @@ jobs:
             Write-Error "CRITICAL: Main application not found at $appPath"
             exit 1
           }
-          Write-Host "RegProbe.App.exe verified at $appPath"
 
       - name: Upload publish artifact
         uses: actions/upload-artifact@v4
@@ -169,10 +284,9 @@ jobs:
 
   release:
     name: Create Release
-    needs: build
+    needs: [unit-tests, code-quality]
     runs-on: windows-latest
     if: github.event_name == 'release'
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -198,8 +312,7 @@ jobs:
           }
 
       - name: Create release archive
-        run: |
-          Compress-Archive -Path release/* -DestinationPath RegProbe-${{ github.event.release.tag_name }}.zip
+        run: Compress-Archive -Path release/* -DestinationPath RegProbe-${{ github.event.release.tag_name }}.zip
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
@@ -207,26 +320,3 @@ jobs:
           files: RegProbe-${{ github.event.release.tag_name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  code-quality:
-    name: Code Quality Check
-    runs-on: windows-latest
-    if: github.event_name == 'pull_request'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: Restore dependencies
-        run: dotnet restore ${{ env.SOLUTION }}
-
-      - name: Build with warnings as errors
-        run: dotnet build ${{ env.SOLUTION }} -c ${{ env.CONFIGURATION }} --no-restore /p:TreatWarningsAsErrors=true
-
-      - name: Run code analysis
-        run: dotnet build ${{ env.SOLUTION }} -c ${{ env.CONFIGURATION }} --no-restore /p:RunAnalyzers=true /p:TreatWarningsAsErrors=true

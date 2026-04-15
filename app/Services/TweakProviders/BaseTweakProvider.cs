@@ -10,7 +10,7 @@ using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Commands.RegistryOps;
 using Microsoft.Win32;
 
-namespace RegProbe.App.Services.TweakProviders;
+namespace RegProbe.Application.Services.TweakProviders;
 
 /// <summary>
 /// Wrapper that adds documentation metadata to any ITweak.
@@ -18,20 +18,20 @@ namespace RegProbe.App.Services.TweakProviders;
 public sealed class DocumentedTweak : ITweak, ITweakWithDocumentation
 {
     private readonly ITweak _innerTweak;
-    
+
     public DocumentedTweak(ITweak innerTweak, TweakDocumentation documentation)
     {
         _innerTweak = innerTweak ?? throw new ArgumentNullException(nameof(innerTweak));
         Documentation = documentation ?? throw new ArgumentNullException(nameof(documentation));
     }
-    
+
     public string Id => _innerTweak.Id;
     public string Name => _innerTweak.Name;
     public string Description => _innerTweak.Description;
     public TweakRiskLevel Risk => _innerTweak.Risk;
     public bool RequiresElevation => _innerTweak.RequiresElevation;
     public TweakDocumentation Documentation { get; }
-    
+
     public System.Threading.Tasks.Task<TweakResult> DetectAsync(System.Threading.CancellationToken ct) => _innerTweak.DetectAsync(ct);
     public System.Threading.Tasks.Task<TweakResult> ApplyAsync(System.Threading.CancellationToken ct) => _innerTweak.ApplyAsync(ct);
     public System.Threading.Tasks.Task<TweakResult> VerifyAsync(System.Threading.CancellationToken ct) => _innerTweak.VerifyAsync(ct);
@@ -329,13 +329,13 @@ public abstract class BaseTweakProvider : ITweakProvider
             context.ElevatedFileSystem,
             requiresElevation);
     }
-    
+
     /// <summary>
     /// Wraps a tweak with documentation metadata.
     /// </summary>
     protected DocumentedTweak WithDocumentation(ITweak tweak, TweakDocumentation documentation)
         => new DocumentedTweak(tweak, documentation);
-    
+
     /// <summary>
     /// Wraps a tweak with nohuto documentation.
     /// </summary>
@@ -344,7 +344,7 @@ public abstract class BaseTweakProvider : ITweakProvider
     /// <param name="anchor">Optional anchor in the markdown file</param>
     protected DocumentedTweak WithNohutoDoc(ITweak tweak, string category, string anchor = "")
         => new DocumentedTweak(tweak, TweakDocumentation.FromNohuto(category, anchor));
-    
+
     /// <summary>
     /// Wraps a tweak with Microsoft documentation.
     /// </summary>

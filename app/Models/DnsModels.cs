@@ -1,4 +1,4 @@
-namespace RegProbe.App.Models;
+namespace RegProbe.Application.Models;
 
 /// <summary>
 /// Represents a DNS provider configuration.

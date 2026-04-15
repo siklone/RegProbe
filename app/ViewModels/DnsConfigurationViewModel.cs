@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using RegProbe.App.Models;
+using RegProbe.Application.Models;
 using RegProbe.App.Services;
 using RegProbe.App.Utilities;
 
@@ -21,10 +21,10 @@ public sealed class DnsConfigurationViewModel : ViewModelBase
     public DnsConfigurationViewModel()
     {
         DnsProviders = new ObservableCollection<DnsProvider>(DnsService.GetProviders());
-        
+
         ApplyDnsCommand = new RelayCommand(async _ => await ApplyDnsAsync(), _ => SelectedDnsProvider != null && !IsBusy);
         FlushDnsCommand = new RelayCommand(async _ => await FlushDnsAsync(), _ => !IsBusy);
-        
+
         _ = LoadDnsInfoAsync();
     }
 

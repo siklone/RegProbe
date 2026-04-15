@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace RegProbe.App.Utilities;
+namespace RegProbe.Application.Utilities;
 
 public static class DocsLocator
 {

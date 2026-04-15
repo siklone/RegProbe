@@ -53,6 +53,13 @@ Relevant files:
 - [regression-history.json](research/regression-history.json)
 - [evidence-not-found](research/evidence-not-found)
 
+## Pull Request Expectations
+
+- if you change the SAFE flow, update the integration coverage for `Detect -> Apply -> Verify -> Rollback`
+- if you change shipped UI language or layout, update the public media lane in [Docs/product/media.md](Docs/product/media.md)
+- if you change CLI behavior, update [Docs/product/cli.md](Docs/product/cli.md)
+- if you change trust language, keep README, user guide, and app labels aligned
+
 ## Collection Modes and Rollback
 
 Research runners now accept `-CollectionMode evidence|operational`.

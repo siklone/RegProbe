@@ -33,13 +33,24 @@ class PublicRepoHygieneTests(unittest.TestCase):
             repo_root = Path(temp_root)
             (repo_root / "Docs").mkdir(parents=True)
             (repo_root / ".github" / "workflows").mkdir(parents=True)
+            (repo_root / ".github" / "ISSUE_TEMPLATE").mkdir(parents=True)
+            (repo_root / "Docs" / "product").mkdir(parents=True)
             (repo_root / "README.md").write_text(
-                "# Repo\n\n## What RegProbe Does\n\n## Start Here\n",
+                "# Repo\n\n## What RegProbe Does\n\n## Start Here\n\n`Tweaks` `Recovery` `Diagnostics`\n",
                 encoding="utf-8",
             )
             (repo_root / "CONTRIBUTING.md").write_text("# Contributing\n", encoding="utf-8")
             (repo_root / "SECURITY.md").write_text("# Security\n", encoding="utf-8")
             (repo_root / "Docs" / "guide.md").write_text("# Guide\n", encoding="utf-8")
+            (repo_root / "Docs" / "product" / "user-guide.md").write_text(
+                "# User Guide\n\n`Tweaks` `Recovery` `Diagnostics`\n",
+                encoding="utf-8",
+            )
+            (repo_root / "Docs" / "product" / "cli.md").write_text("# CLI\n", encoding="utf-8")
+            (repo_root / ".github" / "CODEOWNERS").write_text("* @owner\n", encoding="utf-8")
+            (repo_root / ".github" / "PULL_REQUEST_TEMPLATE.md").write_text("## Summary\n", encoding="utf-8")
+            for name in ("bug-report.yml", "feature-request.yml", "research-finding.yml"):
+                (repo_root / ".github" / "ISSUE_TEMPLATE" / name).write_text("name: test\n", encoding="utf-8")
             (repo_root / ".github" / "workflows" / "dotnet.yml").write_text(
                 "on:\n  push:\n    branches: [main]\n",
                 encoding="utf-8",
@@ -75,6 +86,9 @@ class PublicRepoHygieneTests(unittest.TestCase):
             self.assertTrue(any("product-first entry sections" in error for error in report["errors"]))
             self.assertTrue(any("main-only policy" in error for error in report["errors"]))
             self.assertTrue(any("UnitTest1.cs" in error for error in report["errors"]))
+            self.assertTrue(any("issue templates" in error for error in report["errors"]))
+            self.assertTrue(any("CODEOWNERS" in error for error in report["errors"]))
+            self.assertTrue(any("Docs/product/cli.md" in error for error in report["errors"]))
             self.assertEqual(len(report["absolute_local_path_violations"]), 1)
 
 

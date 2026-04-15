@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using RegProbe.App.Services;
-using RegProbe.App.Services.TweakProviders;
+using RegProbe.Application.Services.TweakProviders;
 using RegProbe.Engine.Services;
 using RegProbe.Infrastructure;
 

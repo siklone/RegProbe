@@ -7,7 +7,7 @@ using RegProbe.Engine;
 using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Developer;
 
-namespace RegProbe.App.Services.TweakProviders;
+namespace RegProbe.Application.Services.TweakProviders;
 
 /// <summary>
 /// Provides developer-focused tweaks for Visual Studio, Git, .NET, and other development tools.

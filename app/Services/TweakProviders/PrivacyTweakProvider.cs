@@ -12,7 +12,7 @@ using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Commands.Privacy;
 using RegProbe.Engine.Tweaks.Misc;
 
-namespace RegProbe.App.Services.TweakProviders;
+namespace RegProbe.Application.Services.TweakProviders;
 
 public sealed class PrivacyTweakProvider : BaseTweakProvider
 {

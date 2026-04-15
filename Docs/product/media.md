@@ -53,6 +53,15 @@ Refresh product media when one of these changes lands:
 - navigation labels change
 - release notes claim a calmer or safer product story than the README visuals currently show
 
+## Pull Request Checklist
+
+If a PR changes the shipped UI, public media should be reviewed as part of the definition of done.
+
+- confirm the README screenshots still match the current labels and layout
+- regenerate `assets/product/` if the public preview lane changed
+- refresh any release-grade captures if the shipped visuals changed materially
+- do not merge a UI rename while README and media still show the old surface names
+
 ## Release Upgrade Path
 
 The current lane is intentionally repo-local and reproducible. For a release-grade refresh, replace or augment these assets with real Windows captures:

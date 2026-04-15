@@ -1,15 +1,26 @@
 {
-  "generated_utc": "2026-04-15T05:47:11Z",
+  "generated_utc": "2026-04-15T11:59:11Z",
   "check_status": "PASS",
   "checks": {
     "security_policy_present": true,
     "readme_has_product_entry": true,
     "workflow_push_main_only": true,
     "placeholder_unittest_removed": true,
-    "absolute_local_paths_removed": true
+    "absolute_local_paths_removed": true,
+    "issue_templates_present": true,
+    "pr_template_present": true,
+    "codeowners_present": true,
+    "cli_docs_present": true,
+    "readme_surface_names_current": true,
+    "user_guide_surface_names_current": true
   },
   "workflow_push_branches": [
     "main"
+  ],
+  "required_issue_templates": [
+    ".github/ISSUE_TEMPLATE/bug-report.yml",
+    ".github/ISSUE_TEMPLATE/feature-request.yml",
+    ".github/ISSUE_TEMPLATE/research-finding.yml"
   ],
   "public_markdown_files": [
     "README.md",
@@ -33,6 +44,7 @@
     "Docs/VM_WORKFLOW.md",
     "Docs/affinities/affinities.md",
     "Docs/cleanup/cleanup.md",
+    "Docs/metrics/baseline.md",
     "Docs/misc/misc.md",
     "Docs/network/network.md",
     "Docs/notifications/notifications.md",
@@ -43,6 +55,7 @@
     "Docs/privacy/privacy-verified.md",
     "Docs/privacy/privacy.md",
     "Docs/product/README.md",
+    "Docs/product/cli.md",
     "Docs/product/media.md",
     "Docs/product/user-guide.md",
     "Docs/research/README.md",

@@ -13,7 +13,7 @@ using RegProbe.Core.Plugins;
 using RegProbe.Core.Registry;
 using RegProbe.Engine.Tweaks;
 
-namespace RegProbe.App.Services.TweakProviders;
+namespace RegProbe.Application.Services.TweakProviders;
 
 /// <summary>
 /// Loads tweak definitions from JSON files with hot-reload support.

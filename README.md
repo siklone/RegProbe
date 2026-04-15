@@ -157,7 +157,7 @@ The docs are now split the same way the repo is meant to feel from the outside: 
 
 ## What Ships Today
 
-The shipped app is a focused three-surface shell. `Configuration` is the main workspace, `Repairs` handles recovery and cleanup actions, and `About` keeps repo, build, and log context close at hand. The current UI is deliberately tighter than older builds: dark, flat, list-first, and more interested in exposing research than in showing off.
+The shipped app is a focused three-surface shell. `Tweaks` is the main workspace, `Recovery` handles rollback and cleanup actions, and `Diagnostics` keeps repo, build, and log context close at hand. The current UI is deliberately tighter than older builds: dark, flat, list-first, and more interested in exposing research than in showing off.
 
 That restraint is intentional. Older surfaces such as the hardware dashboard, services browser, bloatware browser, startup manager, disk-health area, and the old policy-heavy shell are no longer part of the shipped experience. Contributor-only evidence metadata still exists, but it stays behind repo and developer gating instead of turning the app into a research database with buttons.
 
@@ -246,6 +246,43 @@ Regenerable clutter such as `bin/`, `obj/`, `publish/`, `dist/`, and `TestResult
 ## Where To Start If You Want To Learn
 
 Start with this [README](README.md) and [Contributing](CONTRIBUTING.md), then move to the [VM workflow](Docs/research/vm-workflow.md) and the [script catalog](Docs/research/script-catalog.md). After that, open the [research atlas](research/evidence-atlas.md), pick one record under [research/records](research/records), and read it next to its matching bundle under [evidence/records](evidence/records). That path gives you the "what", the "how", and the proof trail in the same order most contributors discover it.
+
+## Download
+
+The latest release is available on the [Releases page](https://github.com/siklone/RegProbe/releases/latest).
+
+### Verify The Download
+
+Each release should include a SHA256 checksum file.
+
+```powershell
+Get-FileHash .\RegProbe-Setup.exe -Algorithm SHA256
+```
+
+Compare the output against the `.sha256` file published with the release.
+
+### Available Packages
+
+| Package | Description |
+|--------|-------------|
+| `RegProbe-Setup.exe` | Installer, recommended |
+| `RegProbe-Portable.zip` | Portable desktop build |
+| `RegProbe-Cli.zip` | CLI-only package for scripted workflows |
+
+## CLI Reference
+
+RegProbe includes a CLI for scripted and audit-friendly workflows. The short version lives here; the fuller command guide is in [Docs/product/cli.md](Docs/product/cli.md).
+
+```powershell
+# Preview a tweak without applying it
+dotnet run --project cli/cli.csproj -- tweak apply system.disable-game-recording-broadcasting
+
+# Apply with verify + rollback-on-failure
+dotnet run --project cli/cli.csproj -- tweak apply system.disable-game-recording-broadcasting --apply
+
+# Roll back to the previous state
+dotnet run --project cli/cli.csproj -- tweak revert system.disable-game-recording-broadcasting --apply
+```
 
 ## Build And Run
 

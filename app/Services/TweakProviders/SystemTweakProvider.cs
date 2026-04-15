@@ -8,7 +8,7 @@ using RegProbe.Engine;
 using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Commands.Cleanup;
 
-namespace RegProbe.App.Services.TweakProviders;
+namespace RegProbe.Application.Services.TweakProviders;
 
 public sealed class SystemTweakProvider : BaseTweakProvider
 {

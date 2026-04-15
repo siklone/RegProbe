@@ -53,10 +53,21 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
     readme_path = repo_root / "README.md"
     workflow_path = repo_root / ".github" / "workflows" / "dotnet.yml"
     placeholder_test_path = repo_root / "tests" / "UnitTest1.cs"
+    codeowners_path = repo_root / ".github" / "CODEOWNERS"
+    pr_template_path = repo_root / ".github" / "PULL_REQUEST_TEMPLATE.md"
+    cli_docs_path = repo_root / "Docs" / "product" / "cli.md"
+    issue_template_dir = repo_root / ".github" / "ISSUE_TEMPLATE"
+    required_issue_templates = [
+        issue_template_dir / "bug-report.yml",
+        issue_template_dir / "feature-request.yml",
+        issue_template_dir / "research-finding.yml",
+    ]
 
     workflow_push_branches = parse_push_branches(workflow_path.read_text(encoding="utf-8")) if workflow_path.exists() else []
 
     readme_text = readme_path.read_text(encoding="utf-8")
+    user_guide_path = repo_root / "Docs" / "product" / "user-guide.md"
+    user_guide_text = user_guide_path.read_text(encoding="utf-8") if user_guide_path.exists() else ""
 
     checks = {
         "security_policy_present": security_path.exists(),
@@ -64,6 +75,12 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         "workflow_push_main_only": workflow_push_branches == ["main"],
         "placeholder_unittest_removed": not placeholder_test_path.exists(),
         "absolute_local_paths_removed": not absolute_path_violations,
+        "issue_templates_present": all(path.exists() for path in required_issue_templates),
+        "pr_template_present": pr_template_path.exists(),
+        "codeowners_present": codeowners_path.exists(),
+        "cli_docs_present": cli_docs_path.exists(),
+        "readme_surface_names_current": all(token in readme_text for token in ("`Tweaks`", "`Recovery`", "`Diagnostics`")) and "`Configuration` is the main workspace" not in readme_text,
+        "user_guide_surface_names_current": all(token in user_guide_text for token in ("`Tweaks`", "`Recovery`", "`Diagnostics`")) and "`Configuration` is the main tweak workspace" not in user_guide_text,
     }
 
     errors: list[str] = []
@@ -79,12 +96,25 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         errors.append(
             f"Found {len(absolute_path_violations)} public markdown link(s) with workstation-specific absolute paths."
         )
+    if not checks["issue_templates_present"]:
+        errors.append("Required issue templates are missing under .github/ISSUE_TEMPLATE/.")
+    if not checks["pr_template_present"]:
+        errors.append(".github/PULL_REQUEST_TEMPLATE.md is missing.")
+    if not checks["codeowners_present"]:
+        errors.append(".github/CODEOWNERS is missing.")
+    if not checks["cli_docs_present"]:
+        errors.append("Docs/product/cli.md is missing.")
+    if not checks["readme_surface_names_current"]:
+        errors.append("README.md still drifts from the shipped Tweaks/Recovery/Diagnostics surface language.")
+    if not checks["user_guide_surface_names_current"]:
+        errors.append("Docs/product/user-guide.md still drifts from the shipped Tweaks/Recovery/Diagnostics surface language.")
 
     return {
         "generated_utc": datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z"),
         "check_status": "PASS" if not errors else "FAIL",
         "checks": checks,
         "workflow_push_branches": workflow_push_branches,
+        "required_issue_templates": [path.relative_to(repo_root).as_posix() for path in required_issue_templates],
         "public_markdown_files": [path.relative_to(repo_root).as_posix() for path in markdown_files],
         "absolute_local_path_violations": absolute_path_violations,
         "errors": errors,

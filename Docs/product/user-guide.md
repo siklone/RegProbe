@@ -28,9 +28,9 @@ Read the [security policy](../../SECURITY.md) if you want the elevated-host boun
 
 The current shipped app is intentionally focused:
 
-- `Configuration` is the main tweak workspace
-- `Repairs` is for recovery and cleanup flows
-- `About` keeps build, repo, and log context nearby
+- `Tweaks` is the main tweak workspace
+- `Recovery` is for rollback and cleanup flows
+- `Diagnostics` keeps build, repo, and log context nearby
 
 The research pipeline is much broader than the shipped UI. Most users can ignore the repo's traces, audits, ETW captures, and static-analysis exports unless they want to understand why a setting is trusted or blocked.
 
@@ -62,3 +62,7 @@ dotnet run --project app/app.csproj
 ```
 
 The fuller build, test, package, and publish commands live in the root [README](../../README.md).
+
+## CLI
+
+If you prefer scripted workflows, use the [CLI reference](cli.md). The CLI mirrors the same SAFE bias as the desktop app: dry-run by default where possible, explicit apply when mutation is intended, and research gating that stays honest about blocked or research-only tweaks.

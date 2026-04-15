@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using System.Management;
-using RegProbe.App.Models;
+using RegProbe.Application.Models;
 
-namespace RegProbe.App.Services;
+namespace RegProbe.Application.Services;
 
 /// <summary>
 /// Service for managing DNS configuration using WMI.

@@ -1,0 +1,38 @@
+name: Research Finding
+description: Report a registry behavior finding, evidence gap, or validation result
+labels:
+  - research
+  - evidence
+body:
+  - type: input
+    id: registry_path
+    attributes:
+      label: Registry path
+      placeholder: 'e.g. HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR'
+    validations:
+      required: true
+  - type: dropdown
+    id: finding_type
+    attributes:
+      label: Finding type
+      options:
+        - Undocumented behavior
+        - Validation gap
+        - Rollback failure
+        - VM detection inconsistency
+        - Promotion gate mismatch
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and reproduction
+      description: Include Windows build, host or VM, trace lane, and the smallest reproducible steps.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: SAFE flow impact
+      placeholder: "What does this change for Detect, Apply, Verify, Rollback, or ship eligibility?"

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using RegProbe.Infrastructure.Elevation;
 
-namespace RegProbe.App.Utilities;
+namespace RegProbe.Application.Utilities;
 
 public static class ElevatedHostLocator
 {

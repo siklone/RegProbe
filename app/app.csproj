@@ -45,11 +45,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\\application\\application.csproj" />
     <ProjectReference Include="..\\core\\core.csproj" />
     <ProjectReference Include="..\\engine\\engine.csproj" />
     <ProjectReference Include="..\\infrastructure\\infrastructure.csproj" />
     <ProjectReference Include="..\\elevated-host\\elevated-host.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\\plugins-devtools\\plugins-devtools.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\\DnsModels.cs" />
+    <Compile Remove="Models\\PresetModel.cs" />
+    <Compile Remove="Models\\PresetResults.cs" />
+    <Compile Remove="Services\\ConfigurationWorkspaceClassifier.cs" />
+    <Compile Remove="Services\\ConfigExportService.cs" />
+    <Compile Remove="Services\\DnsService.cs" />
+    <Compile Remove="Services\\PresetService.cs" />
+    <Compile Remove="Services\\TweakCatalogService.cs" />
+    <Compile Remove="Services\\TweakPromotionGateCatalogService.cs" />
+    <Compile Remove="Services\\TweakProviders\\**\\*.cs" />
+    <Compile Remove="Utilities\\ContributorMode.cs" />
+    <Compile Remove="Utilities\\DocsLocator.cs" />
+    <Compile Remove="Utilities\\ElevatedHostLocator.cs" />
+    <Compile Remove="Utilities\\ProcessElevation.cs" />
   </ItemGroup>
 
   <ItemGroup>

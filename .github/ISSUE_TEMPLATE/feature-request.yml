@@ -1,0 +1,46 @@
+name: Feature Request
+description: Suggest a product, research, or workflow improvement
+labels:
+  - enhancement
+  - needs-triage
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Short summary
+      placeholder: "One sentence for the request"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Tweaks
+        - Recovery
+        - Diagnostics
+        - CLI
+        - CI / Tooling
+        - Research workflow
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or friction
+      placeholder: "What feels missing, noisy, risky, or confusing today?"
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      placeholder: "Describe the behavior, UI, or workflow you want to see."
+    validations:
+      required: true
+  - type: textarea
+    id: trust
+    attributes:
+      label: SAFE flow or trust impact
+      placeholder: "Does this affect Detect, Apply, Verify, Rollback, evidence, or rollback expectations?"

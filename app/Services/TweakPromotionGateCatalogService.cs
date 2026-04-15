@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using RegProbe.App.Utilities;
+using RegProbe.Application.Utilities;
 
-namespace RegProbe.App.Services;
+namespace RegProbe.Application.Services;
 
 public sealed class TweakPromotionGateCatalog
 {

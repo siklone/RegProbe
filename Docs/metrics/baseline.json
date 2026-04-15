@@ -1,0 +1,258 @@
+{
+  "generated_utc": "2026-04-15T11:36:01Z",
+  "source": {
+    "repository": "siklone/RegProbe",
+    "workflow": "dotnet.yml",
+    "branch": "main",
+    "workflow_run_id": 24087678150,
+    "workflow_run_created_at": "2026-04-07T14:47:07Z",
+    "workflow_run_head_sha": "fa50cbaa4fe1d619eab06cba50eda11412e066cf",
+    "artifact": {
+      "id": 6308389518,
+      "name": "coverage-report",
+      "digest": "sha256:90e7ac321ddd1df21e33ef49ff5cf59a86d82dcee6aa172b6ec52ad56f5681ae",
+      "download_strategy": "nightly-link",
+      "coverage_member_path": "de5728ff-e443-4b37-8100-2daae360b55d/coverage.cobertura.xml"
+    }
+  },
+  "coverage": {
+    "totals": {
+      "line_percent": 36.58,
+      "branch_percent": 22.91
+    },
+    "lowest_files": [
+      {
+        "path": "app/App.xaml",
+        "line_percent": 0.0,
+        "branch_percent": 0.0,
+        "line_hits": 0,
+        "line_total": 1,
+        "branch_hits": 0,
+        "branch_total": 0
+      },
+      {
+        "path": "app/App.xaml.cs",
+        "line_percent": 0.0,
+        "branch_percent": 0.0,
+        "line_hits": 0,
+        "line_total": 50,
+        "branch_hits": 0,
+        "branch_total": 16
+      },
+      {
+        "path": "app/Behaviors/NavigationTransitionBehavior.cs",
+        "line_percent": 0.0,
+        "branch_percent": 0.0,
+        "line_hits": 0,
+        "line_total": 105,
+        "branch_hits": 0,
+        "branch_total": 38
+      },
+      {
+        "path": "app/Behaviors/WindowTitleBarDragBehavior.cs",
+        "line_percent": 0.0,
+        "branch_percent": 0.0,
+        "line_hits": 0,
+        "line_total": 19,
+        "branch_hits": 0,
+        "branch_total": 6
+      },
+      {
+        "path": "app/Converters/ArcConverter.cs",
+        "line_percent": 0.0,
+        "branch_percent": 0.0,
+        "line_hits": 0,
+        "line_total": 39,
+        "branch_hits": 0,
+        "branch_total": 18
+      }
+    ],
+    "file_count": 277
+  },
+  "complexity_hotspots": [
+    {
+      "path": "cli/Commands/Program.ResearchCommand.cs",
+      "member": "CreateResearchCommand",
+      "line_count": 537,
+      "cyclomatic_complexity": 63,
+      "start_line": 15
+    },
+    {
+      "path": "app/Services/NohutoChangeAnalyzer.cs",
+      "member": "ResolveKeywordCategory",
+      "line_count": 50,
+      "cyclomatic_complexity": 60,
+      "start_line": 305
+    },
+    {
+      "path": "app/ViewModels/WorkspaceBrowseCoordinator.cs",
+      "member": "MatchesFilters",
+      "line_count": 94,
+      "cyclomatic_complexity": 34,
+      "start_line": 105
+    },
+    {
+      "path": "app/Services/OsDetectionResolver.cs",
+      "member": "Resolve",
+      "line_count": 184,
+      "cyclomatic_complexity": 31,
+      "start_line": 28
+    },
+    {
+      "path": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "member": "CreateTweaks",
+      "line_count": 1101,
+      "cyclomatic_complexity": 29,
+      "start_line": 29
+    }
+  ],
+  "cli_program": {
+    "path": "cli/Program.cs",
+    "method_count": 9,
+    "average_method_length": 23.0,
+    "direct_namespace_dependencies": [
+      "System",
+      "System.Collections.Generic",
+      "System.CommandLine",
+      "System.Diagnostics",
+      "System.IO",
+      "System.Linq",
+      "System.Text.Json",
+      "RegProbe.Application.Services",
+      "RegProbe.Application.Services.TweakProviders",
+      "RegProbe.Application.Utilities",
+      "RegProbe.Core",
+      "RegProbe.Engine",
+      "RegProbe.Infrastructure.Elevation"
+    ],
+    "methods": [
+      {
+        "member": "Main",
+        "line_count": 16,
+        "cyclomatic_complexity": 1,
+        "start_line": 28
+      },
+      {
+        "member": "BuildJsonTweakValidationReport",
+        "line_count": 23,
+        "cyclomatic_complexity": 1,
+        "start_line": 45
+      },
+      {
+        "member": "TryParseRisk",
+        "line_count": 16,
+        "cyclomatic_complexity": 2,
+        "start_line": 69
+      },
+      {
+        "member": "WriteReport",
+        "line_count": 9,
+        "cyclomatic_complexity": 2,
+        "start_line": 86
+      },
+      {
+        "member": "WriteStep",
+        "line_count": 4,
+        "cyclomatic_complexity": 1,
+        "start_line": 96
+      },
+      {
+        "member": "EnsureCanRunTweak",
+        "line_count": 29,
+        "cyclomatic_complexity": 5,
+        "start_line": 101
+      },
+      {
+        "member": "TryFindRepoRoot",
+        "line_count": 17,
+        "cyclomatic_complexity": 6,
+        "start_line": 131
+      },
+      {
+        "member": "ResolveResearchPath",
+        "line_count": 15,
+        "cyclomatic_complexity": 3,
+        "start_line": 149
+      },
+      {
+        "member": "RunResearchPythonScript",
+        "line_count": 78,
+        "cyclomatic_complexity": 10,
+        "start_line": 165
+      }
+    ],
+    "command_hotspots": [
+      {
+        "path": "cli/Commands/Program.ResearchCommand.cs",
+        "member": "CreateResearchCommand",
+        "line_count": 537,
+        "cyclomatic_complexity": 63
+      },
+      {
+        "path": "cli/Commands/Program.TweakCommand.cs",
+        "member": "CreateTweakCommand",
+        "line_count": 198,
+        "cyclomatic_complexity": 21
+      },
+      {
+        "path": "cli/Commands/Program.DnsCommand.cs",
+        "member": "CreateDnsCommand",
+        "line_count": 96,
+        "cyclomatic_complexity": 7
+      },
+      {
+        "path": "cli/Commands/Program.PresetCommand.cs",
+        "member": "CreatePresetCommand",
+        "line_count": 78,
+        "cyclomatic_complexity": 5
+      },
+      {
+        "path": "cli/Commands/Program.ExportCommand.cs",
+        "member": "CreateExportCommand",
+        "line_count": 59,
+        "cyclomatic_complexity": 1
+      }
+    ]
+  },
+  "ui_hotspots": {
+    "hotspots": [
+      {
+        "path": "app/Views/TweaksWorkspaceView.xaml",
+        "line_count": 744
+      },
+      {
+        "path": "app/Resources/TweaksWorkspaceResources.xaml",
+        "line_count": 806
+      },
+      {
+        "path": "app/ViewModels/TweaksViewModel.cs",
+        "line_count": 1180
+      },
+      {
+        "path": "app/ViewModels/TweakItemViewModel.cs",
+        "line_count": 3530
+      },
+      {
+        "path": "app/MainWindow.xaml",
+        "line_count": 530
+      },
+      {
+        "path": "app/MainWindow.xaml.cs",
+        "line_count": 27
+      }
+    ],
+    "main_window": {
+      "xaml_lines": 530,
+      "codebehind_lines": 27,
+      "event_handler_count": 0,
+      "mutable_state_field_count": 0
+    }
+  },
+  "core_scripting_dependencies": {
+    "core_package_references": [],
+    "core_contains_nlua_reference": false,
+    "core_contains_pythonnet_reference": false,
+    "active_usage_count": 0,
+    "active_usages": []
+  }
+}

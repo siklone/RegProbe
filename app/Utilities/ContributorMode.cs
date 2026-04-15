@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace RegProbe.App.Utilities;
+namespace RegProbe.Application.Utilities;
 
 public static class ContributorMode
 {

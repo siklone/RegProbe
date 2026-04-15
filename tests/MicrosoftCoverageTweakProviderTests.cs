@@ -1,7 +1,7 @@
 using System.Linq;
 using Moq;
 using Microsoft.Win32;
-using RegProbe.App.Services.TweakProviders;
+using RegProbe.Application.Services.TweakProviders;
 using RegProbe.Core.Commands;
 using RegProbe.Core.Files;
 using RegProbe.Core;

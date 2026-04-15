@@ -7,7 +7,7 @@ using RegProbe.Engine;
 using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Commands.Security;
 
-namespace RegProbe.App.Services.TweakProviders;
+namespace RegProbe.Application.Services.TweakProviders;
 
 /// <summary>
 /// Security tweaks provider with references to trusted sources.

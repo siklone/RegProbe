@@ -15,12 +15,7 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <DefaultItemExcludes>$(DefaultItemExcludes);**\artifacts\**</DefaultItemExcludes>
     
-    <!-- 
-      Note: Null warnings (CS8600-CS8609) are enabled but NOT treated as errors.
-      This allows gradual null safety adoption. 
-      To enforce strict null safety later, uncomment:
-      <WarningsAsErrors>CS8600;CS8601;CS8602;CS8603;CS8604;CS8625</WarningsAsErrors>
-    -->
+    <WarningsAsErrors>CS8600;CS8601;CS8602;CS8603;CS8604</WarningsAsErrors>
   </PropertyGroup>
 </Project>
 

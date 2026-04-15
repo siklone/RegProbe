@@ -4,7 +4,7 @@ using RegProbe.Core;
 using RegProbe.Engine;
 using RegProbe.Infrastructure;
 
-namespace RegProbe.App.Services;
+namespace RegProbe.Application.Services;
 
 /// <summary>
 /// Service for exporting and importing application configuration.

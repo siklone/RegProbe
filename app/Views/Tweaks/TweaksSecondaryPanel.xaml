@@ -1,0 +1,215 @@
+<UserControl x:Class="RegProbe.App.Views.Tweaks.TweaksSecondaryPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:RegProbe.App.Behaviors"
+             Background="Transparent">
+    <Border Background="#0F1620"
+            BorderBrush="#1A2431"
+            BorderThickness="0,0,1,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  Margin="16,14,16,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Width="28"
+                        Padding="0"
+                        Content="☰"
+                        Command="{Binding ToggleSecondaryPanelCommand}"
+                        Style="{StaticResource SecondaryPanelButtonStyle}"/>
+
+                <StackPanel Grid.Column="1"
+                            Margin="10,0,0,0"
+                            Visibility="{Binding IsSecondaryPanelCollapsed, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                    <TextBlock Text="Tweaks"
+                               Foreground="#F5F9FF"
+                               FontSize="15"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="Search, filter, and select one validated surface at a time."
+                               Margin="0,3,0,0"
+                               Foreground="#7D8A9C"
+                               FontSize="11"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Grid.Row="1"
+                        Margin="16,0,16,12"
+                        Visibility="{Binding IsSecondaryPanelCollapsed, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         Tag="{Binding SearchPlaceholder}"
+                         ToolTip="{Binding SearchPlaceholder}"
+                         Style="{StaticResource CompactSearchBoxStyle}">
+                    <i:Interaction.Behaviors>
+                        <behaviors:FocusOnRequestBehavior RequestToken="{Binding SearchFocusRequestId}"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2"
+                        Margin="16,0,16,12"
+                        Visibility="{Binding IsSecondaryPanelCollapsed, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                <TextBlock Text="Filters"
+                           Margin="0,0,0,8"
+                           Style="{StaticResource SectionEyebrowStyle}"/>
+
+                <WrapPanel Margin="0,0,0,10">
+                    <CheckBox Tag="Safe"
+                              IsChecked="{Binding ShowSafe}"
+                              Style="{StaticResource ChipStyle}">
+                        <TextBlock Text="Low"/>
+                    </CheckBox>
+                    <CheckBox Tag="Advanced"
+                              IsChecked="{Binding ShowAdvanced}"
+                              Style="{StaticResource ChipStyle}">
+                        <TextBlock Text="Advanced"/>
+                    </CheckBox>
+                    <CheckBox Tag="Risky"
+                              IsChecked="{Binding ShowRisky}"
+                              Style="{StaticResource ChipStyle}">
+                        <TextBlock Text="High"/>
+                    </CheckBox>
+                </WrapPanel>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox Grid.Column="0"
+                              SelectedValuePath="Tag"
+                              SelectedValue="{Binding StatusFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Style="{StaticResource CompactFilterComboStyle}">
+                        <ComboBoxItem Content="All statuses" Tag=""/>
+                        <ComboBoxItem Content="Applied" Tag="applied"/>
+                        <ComboBoxItem Content="Rolled back" Tag="rolledback"/>
+                    </ComboBox>
+
+                    <ComboBox Grid.Column="2"
+                              SelectedValuePath="Tag"
+                              SelectedValue="{Binding ScopeFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Style="{StaticResource CompactFilterComboStyle}">
+                        <ComboBoxItem Content="All scopes" Tag=""/>
+                        <ComboBoxItem Content="Machine" Tag="machine"/>
+                        <ComboBoxItem Content="User" Tag="user"/>
+                        <ComboBoxItem Content="Mixed" Tag="mixed"/>
+                    </ComboBox>
+                </Grid>
+            </StackPanel>
+
+            <Grid Grid.Row="3"
+                  Margin="10,0,10,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ListBox ItemsSource="{Binding TweaksView}"
+                         SelectedItem="{Binding SelectedTweakPane.SelectedTweak, Mode=TwoWay}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ItemContainerStyle="{StaticResource SecondaryPanelListItemStyle}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="10,8,10,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="34"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Width="28"
+                                        Height="28"
+                                        CornerRadius="8"
+                                        Background="#162437"
+                                        BorderBrush="#294263"
+                                        BorderThickness="1"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding CategoryIcon}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               FontSize="13"/>
+                                </Border>
+
+                                <StackPanel Grid.Column="1"
+                                            Visibility="{Binding DataContext.IsSecondaryPanelCollapsed, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding Name}"
+                                               Foreground="#F3F7FD"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding ConfigurationFriendlyDescription}"
+                                               Margin="0,3,0,6"
+                                               Foreground="#90A0B5"
+                                               FontSize="11"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    <DockPanel LastChildFill="False">
+                                        <StackPanel Orientation="Horizontal"
+                                                    DockPanel.Dock="Left">
+                                            <Ellipse Width="7"
+                                                     Height="7"
+                                                     Margin="0,0,6,0"
+                                                     VerticalAlignment="Center">
+                                                <Ellipse.Style>
+                                                    <Style TargetType="Ellipse">
+                                                        <Setter Property="Fill" Value="#5B708A"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding CompactStateTone}" Value="ok">
+                                                                <Setter Property="Fill" Value="#36D07F"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding CompactStateTone}" Value="warning">
+                                                                <Setter Property="Fill" Value="#F2C94C"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding CompactStateTone}" Value="muted">
+                                                                <Setter Property="Fill" Value="#8C97A6"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Ellipse.Style>
+                                            </Ellipse>
+                                            <TextBlock Text="{Binding CompactStateText}"
+                                                       Margin="0,0,10,0"
+                                                       Foreground="#B9C6D6"
+                                                       FontSize="11"/>
+                                        </StackPanel>
+
+                                        <Border DockPanel.Dock="Right"
+                                                Style="{StaticResource MiniBadgeBorderStyle}">
+                                            <TextBlock Text="{Binding RiskBadgeText}"
+                                                       Foreground="#EAF1FB"
+                                                       FontSize="10"
+                                                       FontWeight="SemiBold"/>
+                                        </Border>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock Grid.Row="1"
+                           Margin="8,8,8,0"
+                           Text="{Binding FilterSummary}"
+                           Foreground="#6E7D90"
+                           FontSize="11"
+                           TextWrapping="Wrap"
+                           Visibility="{Binding IsSecondaryPanelCollapsed, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,4 +1,4 @@
-namespace RegProbe.App.Models;
+namespace RegProbe.Application.Models;
 
 /// <summary>
 /// Result of applying a preset.

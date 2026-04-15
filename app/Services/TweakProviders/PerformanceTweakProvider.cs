@@ -7,7 +7,7 @@ using RegProbe.Engine;
 using RegProbe.Engine.Tweaks;
 using RegProbe.Engine.Tweaks.Commands.Performance;
 
-namespace RegProbe.App.Services.TweakProviders;
+namespace RegProbe.Application.Services.TweakProviders;
 
 /// <summary>
 /// Performance optimization tweaks provider.

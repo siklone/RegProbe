@@ -1,8 +1,9 @@
-using RegProbe.App.Models;
+using RegProbe.Application.Models;
 using RegProbe.Core;
 using RegProbe.Engine;
+using Microsoft.Win32;
 
-namespace RegProbe.App.Services;
+namespace RegProbe.Application.Services;
 
 /// <summary>
 /// Service for managing and applying optimization presets.
@@ -54,7 +55,7 @@ public class PresetService
         for (int i = 0; i < preset.TweakIds.Count; i++)
         {
             var tweakId = preset.TweakIds[i];
-            
+
             try
             {
                 // Apply tweak through existing TweakService
@@ -283,31 +284,40 @@ public class PresetService
     {
         try
         {
-            var resolverType = Type.GetType("RegProbe.App.Services.OsDetectionResolver, RegProbe.App");
-            if (resolverType != null)
+            using var currentVersion = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+            if (currentVersion != null)
             {
-                var resolveMethod = resolverType.GetMethod("Resolve", new[] { typeof(bool) });
-                if (resolveMethod != null)
+                var productName = currentVersion.GetValue("ProductName")?.ToString();
+                var displayVersion = currentVersion.GetValue("DisplayVersion")?.ToString();
+                var buildText = currentVersion.GetValue("CurrentBuild")?.ToString()
+                    ?? currentVersion.GetValue("CurrentBuildNumber")?.ToString();
+
+                if (!string.IsNullOrWhiteSpace(productName))
                 {
-                    var result = resolveMethod.Invoke(null, new object[] { false });
-                    var normalizedNameProperty = result?.GetType().GetProperty("NormalizedName");
-                    if (normalizedNameProperty != null)
+                    if (!string.IsNullOrWhiteSpace(displayVersion) && !string.IsNullOrWhiteSpace(buildText))
                     {
-                        var normalizedName = normalizedNameProperty.GetValue(result) as string;
-                        if (!string.IsNullOrEmpty(normalizedName))
-                        {
-                            return normalizedName;
-                        }
+                        return $"{productName} {displayVersion} (build {buildText})";
                     }
+
+                    if (!string.IsNullOrWhiteSpace(displayVersion))
+                    {
+                        return $"{productName} {displayVersion}";
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(buildText))
+                    {
+                        return $"{productName} (build {buildText})";
+                    }
+
+                    return productName;
                 }
             }
-
-            var osVersion = Environment.OSVersion;
-            return $"{osVersion.Version.Major}.{osVersion.Version.Minor}.{osVersion.Version.Build}";
         }
         catch
         {
-            return Environment.OSVersion.VersionString;
         }
+
+        var osVersion = Environment.OSVersion;
+        return $"{osVersion.Version.Major}.{osVersion.Version.Minor}.{osVersion.Version.Build}";
     }
 }
