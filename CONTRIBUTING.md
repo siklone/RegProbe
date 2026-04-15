@@ -58,7 +58,23 @@ Relevant files:
 - if you change the SAFE flow, update the integration coverage for `Detect -> Apply -> Verify -> Rollback`
 - if you change shipped UI language or layout, update the public media lane in [Docs/product/media.md](Docs/product/media.md)
 - if you change CLI behavior, update [Docs/product/cli.md](Docs/product/cli.md)
+- if you change release packaging or download guidance, update [Docs/product/support-matrix.md](Docs/product/support-matrix.md) and the root [README.md](README.md)
 - if you change trust language, keep README, user guide, and app labels aligned
+
+## Contribution Standards
+
+- SAFE flow work is not done until the integration test story is still true
+- UI renames or layout changes are not done until the media lane and README preview stay truthful
+- CLI changes are not done until the command guide stays current
+- release contract changes are not done until package names, checksums, and support docs stay aligned
+
+Use conventional commit style when practical:
+
+- `feat: add rollback point naming`
+- `fix: correct GameDVR registry path`
+- `docs: refresh CLI reference`
+- `test: add SAFE flow smoke coverage`
+- `refactor: extract application service layer`
 
 ## Collection Modes and Rollback
 

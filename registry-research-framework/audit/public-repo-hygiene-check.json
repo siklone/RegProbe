@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-04-15T12:06:06Z",
+  "generated_utc": "2026-04-15T20:07:03Z",
   "check_status": "PASS",
   "checks": {
     "security_policy_present": true,
@@ -12,8 +12,17 @@
     "codeowners_present": true,
     "cli_docs_present": true,
     "support_matrix_present": true,
+    "media_doc_present": true,
     "readme_surface_names_current": true,
-    "user_guide_surface_names_current": true
+    "user_guide_surface_names_current": true,
+    "contributing_has_safe_flow_expectations": true,
+    "contributing_has_media_lane_expectations": true,
+    "contributing_has_cli_docs_expectations": true,
+    "contributing_has_release_doc_expectations": true,
+    "pr_template_has_safe_flow_check": true,
+    "pr_template_has_media_and_release_checks": true,
+    "issue_templates_use_current_surface_names": true,
+    "media_doc_has_refresh_rules": true
   },
   "workflow_push_branches": [
     "main"
