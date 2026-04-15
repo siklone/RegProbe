@@ -171,8 +171,8 @@ public sealed class WorkspaceCommandCoordinator : ViewModelBase, IDisposable
     }
 
     public string SelectionSummary => SelectedCount == 0
-        ? "No settings selected"
-        : $"{SelectedCount} setting{(SelectedCount == 1 ? string.Empty : "s")} selected";
+        ? "No items selected"
+        : $"{SelectedCount} item{(SelectedCount == 1 ? string.Empty : "s")} selected";
 
     public bool HasSelection => SelectedCount > 0;
 

@@ -80,7 +80,7 @@ public sealed class WorkspaceBrowseCoordinator : IDisposable
         ArgumentNullException.ThrowIfNull(tweaks);
         ArgumentNullException.ThrowIfNull(clearSelectedCategory);
 
-        var noun = _shellState.IsMaintenanceWorkspaceSelected ? "repairs" : "settings";
+        var noun = _shellState.IsMaintenanceWorkspaceSelected ? "recovery actions" : "tweaks";
         var scopedText = _shellState.IsAllCategoriesSelected
             ? $"{visibleCount} of {totalCount} {noun}"
             : $"{visibleCount} of {totalCount} {noun} in {_shellState.SelectedCategoryLabel}";

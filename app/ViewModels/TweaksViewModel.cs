@@ -271,8 +271,44 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
     public string CurrentWorkspaceDescription => _shellState.CurrentWorkspaceDescription;
 
     public string CurrentWorkspaceCountLabel => IsMaintenanceWorkspaceSelected
-        ? $"{CurrentWorkspaceItemCount} repairs"
-        : $"{CurrentWorkspaceItemCount} settings";
+        ? $"{CurrentWorkspaceItemCount} recovery actions"
+        : $"{CurrentWorkspaceItemCount} tweaks";
+
+    private WorkspaceSummarySnapshot CurrentWorkspaceSummary => WorkspaceSummarySnapshot.Create(GetVisibleWorkspaceTweaks(), IsElevated);
+
+    public string WorkspacePendingSummaryLabel => IsMaintenanceWorkspaceSelected
+        ? "Pending recovery"
+        : "Pending changes";
+
+    public string WorkspacePendingSummaryValue => CurrentWorkspaceSummary.Pending.ValueText;
+
+    public string WorkspacePendingSummaryText => CurrentWorkspaceSummary.Pending.DetailText;
+
+    public string WorkspacePendingSummaryState => CurrentWorkspaceSummary.Pending.State;
+
+    public string WorkspaceRollbackSummaryLabel => "Rollback coverage";
+
+    public string WorkspaceRollbackSummaryValue => CurrentWorkspaceSummary.Rollback.ValueText;
+
+    public string WorkspaceRollbackSummaryText => CurrentWorkspaceSummary.Rollback.DetailText;
+
+    public string WorkspaceRollbackSummaryState => CurrentWorkspaceSummary.Rollback.State;
+
+    public string WorkspaceElevationSummaryLabel => "Elevation";
+
+    public string WorkspaceElevationSummaryValue => CurrentWorkspaceSummary.Elevation.ValueText;
+
+    public string WorkspaceElevationSummaryText => CurrentWorkspaceSummary.Elevation.DetailText;
+
+    public string WorkspaceElevationSummaryState => CurrentWorkspaceSummary.Elevation.State;
+
+    public string WorkspaceVerificationSummaryLabel => "Verification";
+
+    public string WorkspaceVerificationSummaryValue => CurrentWorkspaceSummary.Verification.ValueText;
+
+    public string WorkspaceVerificationSummaryText => CurrentWorkspaceSummary.Verification.DetailText;
+
+    public string WorkspaceVerificationSummaryState => CurrentWorkspaceSummary.Verification.State;
 
     public string WorkspaceCategoryHeader => _shellState.WorkspaceCategoryHeader;
 
@@ -479,6 +515,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         else if (e.PropertyName is nameof(TweakItemViewModel.IsApplied)
                  or nameof(TweakItemViewModel.AppliedStatus)
                  or nameof(TweakItemViewModel.WasRolledBack)
+                 or nameof(TweakItemViewModel.RollbackSnapshotState)
                  or nameof(TweakItemViewModel.CurrentValue)
                  or nameof(TweakItemViewModel.TargetValue)
                  or nameof(TweakItemViewModel.LastDetectedAtUtc)
@@ -656,6 +693,22 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         OnPropertyChanged(nameof(MaintenanceWorkspaceCount));
         OnPropertyChanged(nameof(CurrentWorkspaceItemCount));
         OnPropertyChanged(nameof(CurrentWorkspaceCountLabel));
+        OnPropertyChanged(nameof(WorkspacePendingSummaryLabel));
+        OnPropertyChanged(nameof(WorkspacePendingSummaryValue));
+        OnPropertyChanged(nameof(WorkspacePendingSummaryText));
+        OnPropertyChanged(nameof(WorkspacePendingSummaryState));
+        OnPropertyChanged(nameof(WorkspaceRollbackSummaryLabel));
+        OnPropertyChanged(nameof(WorkspaceRollbackSummaryValue));
+        OnPropertyChanged(nameof(WorkspaceRollbackSummaryText));
+        OnPropertyChanged(nameof(WorkspaceRollbackSummaryState));
+        OnPropertyChanged(nameof(WorkspaceElevationSummaryLabel));
+        OnPropertyChanged(nameof(WorkspaceElevationSummaryValue));
+        OnPropertyChanged(nameof(WorkspaceElevationSummaryText));
+        OnPropertyChanged(nameof(WorkspaceElevationSummaryState));
+        OnPropertyChanged(nameof(WorkspaceVerificationSummaryLabel));
+        OnPropertyChanged(nameof(WorkspaceVerificationSummaryValue));
+        OnPropertyChanged(nameof(WorkspaceVerificationSummaryText));
+        OnPropertyChanged(nameof(WorkspaceVerificationSummaryState));
         OnPropertyChanged(nameof(ShowDnsConfigurationPanel));
     }
 
@@ -685,6 +738,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         TweaksView.Refresh();
         RepairsRowsView.Refresh();
         UpdateFilterSummary(rebuildCategoryGroups);
+        RaiseWorkspaceMetricsChanged();
     }
 
     private void RefreshSummaryStats()
@@ -695,6 +749,21 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
             Tweaks.Count(t => t.ShowInApp && t.WasRolledBack));
         RaiseWorkspaceMetricsChanged();
         _inventoryCoordinator.UpdateStatusMessage(Tweaks);
+    }
+
+    private List<TweakItemViewModel> GetVisibleWorkspaceTweaks()
+    {
+        if (IsMaintenanceWorkspaceSelected)
+        {
+            return RepairsRowsView.Cast<RepairsItemViewModel>()
+                .Select(row => row.Source)
+                .Where(t => t.ShowInApp)
+                .ToList();
+        }
+
+        return TweaksView.Cast<TweakItemViewModel>()
+            .Where(t => t.ShowInApp)
+            .ToList();
     }
 
     internal void FocusMaintenanceWorkspace(string categoryName)

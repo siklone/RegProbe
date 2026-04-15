@@ -68,7 +68,7 @@ public sealed class WorkspaceHealthCoordinator : ViewModelBase
         GlobalOptimizationScore = score;
         HealthCalculationSummary = measured == 0
             ? "Health is calculated from detected states. Run Detect to refresh current states."
-            : $"{applied} / {measured} detected settings applied (Safe+Advanced; excludes Demo/Risky).";
+            : $"{applied} / {measured} detected tweaks applied (Safe+Advanced; excludes Demo/Risky).";
         HealthStatusMessage = score switch
         {
             >= 90 => "Excellent optimization level",

@@ -45,6 +45,38 @@ public abstract class WorkspaceShellViewModelBase : ViewModelBase, IDisposable
 
     public string CurrentWorkspaceDescription => Workspace.CurrentWorkspaceDescription;
 
+    public string WorkspacePendingSummaryLabel => Workspace.WorkspacePendingSummaryLabel;
+
+    public string WorkspacePendingSummaryValue => Workspace.WorkspacePendingSummaryValue;
+
+    public string WorkspacePendingSummaryText => Workspace.WorkspacePendingSummaryText;
+
+    public string WorkspacePendingSummaryState => Workspace.WorkspacePendingSummaryState;
+
+    public string WorkspaceRollbackSummaryLabel => Workspace.WorkspaceRollbackSummaryLabel;
+
+    public string WorkspaceRollbackSummaryValue => Workspace.WorkspaceRollbackSummaryValue;
+
+    public string WorkspaceRollbackSummaryText => Workspace.WorkspaceRollbackSummaryText;
+
+    public string WorkspaceRollbackSummaryState => Workspace.WorkspaceRollbackSummaryState;
+
+    public string WorkspaceElevationSummaryLabel => Workspace.WorkspaceElevationSummaryLabel;
+
+    public string WorkspaceElevationSummaryValue => Workspace.WorkspaceElevationSummaryValue;
+
+    public string WorkspaceElevationSummaryText => Workspace.WorkspaceElevationSummaryText;
+
+    public string WorkspaceElevationSummaryState => Workspace.WorkspaceElevationSummaryState;
+
+    public string WorkspaceVerificationSummaryLabel => Workspace.WorkspaceVerificationSummaryLabel;
+
+    public string WorkspaceVerificationSummaryValue => Workspace.WorkspaceVerificationSummaryValue;
+
+    public string WorkspaceVerificationSummaryText => Workspace.WorkspaceVerificationSummaryText;
+
+    public string WorkspaceVerificationSummaryState => Workspace.WorkspaceVerificationSummaryState;
+
     public bool IsSettingsWorkspaceSelected => Workspace.IsSettingsWorkspaceSelected;
 
     public bool IsMaintenanceWorkspaceSelected => Workspace.IsMaintenanceWorkspaceSelected;

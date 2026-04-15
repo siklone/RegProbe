@@ -22,6 +22,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -34,7 +35,63 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="1" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="16,12,28,12">
+        <Border Grid.Row="1" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="16,10,28,12">
+            <Grid MaxWidth="1040" HorizontalAlignment="Left">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0"
+                            Tag="{Binding WorkspacePendingSummaryState}"
+                            Style="{StaticResource WorkspaceSummaryCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding WorkspacePendingSummaryLabel}" Style="{StaticResource SectionEyebrowStyle}"/>
+                            <TextBlock Text="{Binding WorkspacePendingSummaryValue}" Style="{StaticResource WorkspaceSummaryValueStyle}"/>
+                            <TextBlock Text="{Binding WorkspacePendingSummaryText}" Style="{StaticResource WorkspaceSummaryDetailStyle}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="2"
+                            Tag="{Binding WorkspaceRollbackSummaryState}"
+                            Style="{StaticResource WorkspaceSummaryCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding WorkspaceRollbackSummaryLabel}" Style="{StaticResource SectionEyebrowStyle}"/>
+                            <TextBlock Text="{Binding WorkspaceRollbackSummaryValue}" Style="{StaticResource WorkspaceSummaryValueStyle}"/>
+                            <TextBlock Text="{Binding WorkspaceRollbackSummaryText}" Style="{StaticResource WorkspaceSummaryDetailStyle}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="4"
+                            Tag="{Binding WorkspaceElevationSummaryState}"
+                            Style="{StaticResource WorkspaceSummaryCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding WorkspaceElevationSummaryLabel}" Style="{StaticResource SectionEyebrowStyle}"/>
+                            <TextBlock Text="{Binding WorkspaceElevationSummaryValue}" Style="{StaticResource WorkspaceSummaryValueStyle}"/>
+                            <TextBlock Text="{Binding WorkspaceElevationSummaryText}" Style="{StaticResource WorkspaceSummaryDetailStyle}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Column="6"
+                            Tag="{Binding WorkspaceVerificationSummaryState}"
+                            Style="{StaticResource WorkspaceSummaryCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding WorkspaceVerificationSummaryLabel}" Style="{StaticResource SectionEyebrowStyle}"/>
+                            <TextBlock Text="{Binding WorkspaceVerificationSummaryValue}" Style="{StaticResource WorkspaceSummaryValueStyle}"/>
+                            <TextBlock Text="{Binding WorkspaceVerificationSummaryText}" Style="{StaticResource WorkspaceSummaryDetailStyle}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" BorderBrush="#2A2A2A" BorderThickness="0,0,0,1" Padding="16,12,28,12">
             <Grid MaxWidth="1040" HorizontalAlignment="Left">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -117,7 +174,7 @@
             </Grid>
         </Border>
 
-        <Grid Grid.Row="2" Margin="16,12,28,0" MaxWidth="1040" HorizontalAlignment="Left">
+        <Grid Grid.Row="3" Margin="16,12,28,0" MaxWidth="1040" HorizontalAlignment="Left">
             <ListBox ItemsSource="{Binding ElementName=Root, Path=ItemsSource}"
                      ItemTemplate="{Binding ElementName=Root, Path=ItemTemplate}"
                      ItemContainerStyle="{StaticResource TweakListItemStyle}"

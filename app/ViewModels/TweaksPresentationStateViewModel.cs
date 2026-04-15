@@ -5,7 +5,7 @@ namespace RegProbe.App.ViewModels;
 
 public sealed class TweaksPresentationStateViewModel : ViewModelBase
 {
-    private string _filterSummary = "Showing 0 of 0 settings.";
+    private string _filterSummary = "Showing 0 of 0 items.";
     private bool _hasVisibleTweaks;
     private int _totalTweaksAvailable;
     private int _tweaksApplied;
