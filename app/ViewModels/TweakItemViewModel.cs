@@ -119,6 +119,17 @@ public sealed class TweakItemViewModel : ViewModelBase
     private string _runtimeProofSource = string.Empty;
     private string _upstreamLineageSummary = string.Empty;
     private string _upstreamLineageSource = string.Empty;
+    private bool _restoreStoryKnown;
+    private bool _isEvidenceArchived;
+    private bool _hasSemanticsEvidenceFlag;
+    private bool _needsVmValidationFlag;
+    private bool _hasRuntimeEvidenceFlag;
+    private bool _hasLineageEvidenceFlag;
+    private bool _rollbackDeclared;
+    private bool _rollbackExecuted;
+    private bool _rollbackVerified;
+    private string _rollbackVerificationMethod = string.Empty;
+    private string _rollbackFailureReason = string.Empty;
     private readonly RelayCommand _toggleFavoriteCommand;
     private readonly ObservableCollection<string> _batchDetails = new();
     private string _batchDetailsTitle = "Details";
@@ -145,6 +156,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             OnPropertyChanged(nameof(HasReferenceLinks));
             OnPropertyChanged(nameof(UserReferenceLinks));
             OnPropertyChanged(nameof(HasUserReferenceLinks));
+            RaiseVerdictSnapshotChanged();
         };
         SubOptions = new ObservableCollection<TweakSubOption>();
         ChoiceOptions = new ObservableCollection<TweakChoiceOption>();
@@ -1037,6 +1049,191 @@ public sealed class TweakItemViewModel : ViewModelBase
         _ => ClassEBackgroundBrush
     };
 
+    public string VerdictState
+    {
+        get
+        {
+            if (_isEvidenceArchived || string.Equals(_evidenceClassActionState, "archived", StringComparison.OrdinalIgnoreCase))
+            {
+                return "archived";
+            }
+
+            if (!ShowInApp)
+            {
+                return "research";
+            }
+
+            if (IsMutationAllowed)
+            {
+                return "allowed";
+            }
+
+            if (IsResearchGated || !IsPromotionActionable || !IsEvidenceClassActionable)
+            {
+                return "blocked";
+            }
+
+            return "research";
+        }
+    }
+
+    public string VerdictText => VerdictState switch
+    {
+        "allowed" => "Apply allowed",
+        "blocked" => "Blocked",
+        "archived" => "Archived",
+        _ => "Research-only"
+    };
+
+    public string VerdictSummary => VerdictState switch
+    {
+        "allowed" => _rollbackVerified
+            ? "Proof and rollback signals are strong enough for the normal apply flow."
+            : "Apply is available, but the safest path is still preview, verify, and keep rollback close.",
+        "blocked" => !IsEvidenceClassActionable
+            ? "The control surface is still being validated, so this stays visible for review instead of normal apply."
+            : "This setting is visible for review, but stronger proof is still required before apply opens.",
+        "archived" => "This record stays in the evidence trail so we do not rediscover the same dead end later.",
+        _ => "This record is useful for research and interpretation, but it stays outside the normal apply flow."
+    };
+
+    public string DocsSnapshotState
+    {
+        get
+        {
+            if (ReferenceLinks.Any(link => link.Kind is ReferenceLinkKind.Docs or ReferenceLinkKind.Details))
+            {
+                return "ready";
+            }
+
+            if (_hasSemanticsEvidenceFlag || HasValidatedSemantics || !string.IsNullOrWhiteSpace(_validatedSemanticsSource))
+            {
+                return "partial";
+            }
+
+            return "missing";
+        }
+    }
+
+    public string DocsSnapshotText => BuildSnapshotText("Docs", DocsSnapshotState);
+
+    public string RuntimeSnapshotState
+    {
+        get
+        {
+            if (_hasRuntimeEvidenceFlag || HasRuntimeProof)
+            {
+                return "ready";
+            }
+
+            if (_needsVmValidationFlag || _hasSemanticsEvidenceFlag || HasValidatedSemantics)
+            {
+                return "partial";
+            }
+
+            return "missing";
+        }
+    }
+
+    public string RuntimeSnapshotText => BuildSnapshotText("Runtime", RuntimeSnapshotState);
+
+    public string SourceSnapshotState
+    {
+        get
+        {
+            if (_hasLineageEvidenceFlag || HasUpstreamLineage || HasNohutoEvidence || HasWindowsInternalsContext)
+            {
+                return "ready";
+            }
+
+            if (NeedsSourceReview || !string.IsNullOrWhiteSpace(ProvenanceSummary))
+            {
+                return "partial";
+            }
+
+            return "missing";
+        }
+    }
+
+    public string SourceSnapshotText => BuildSnapshotText("Source", SourceSnapshotState);
+
+    public string RollbackSnapshotState
+    {
+        get
+        {
+            if (_rollbackVerified)
+            {
+                return "ready";
+            }
+
+            if (_rollbackDeclared || _restoreStoryKnown || HasDefaultChoice || !string.IsNullOrWhiteSpace(_rollbackFailureReason))
+            {
+                return "partial";
+            }
+
+            return "missing";
+        }
+    }
+
+    public string RollbackSnapshotText => BuildSnapshotText("Rollback", RollbackSnapshotState);
+
+    public string RiskSnapshotText
+    {
+        get
+        {
+            var summary = Risk switch
+            {
+                TweakRiskLevel.Safe => "Risk: Low-risk surface with the standard preview and verify flow.",
+                TweakRiskLevel.Advanced => "Risk: Higher-impact change, so preview first and verify after applying.",
+                TweakRiskLevel.Risky => "Risk: High-impact change. Treat it carefully and keep recovery in view.",
+                _ => "Risk: Review carefully before you apply."
+            };
+
+            if (!IsMutationAllowed)
+            {
+                return $"{summary} It stays evidence-first until the remaining proof lands.";
+            }
+
+            return summary;
+        }
+    }
+
+    public string RollbackStoryText
+    {
+        get
+        {
+            if (_rollbackVerified)
+            {
+                var method = string.IsNullOrWhiteSpace(_rollbackVerificationMethod)
+                    ? string.Empty
+                    : $" via {_rollbackVerificationMethod}";
+                return $"Rollback: Verified{method}.";
+            }
+
+            if (!string.IsNullOrWhiteSpace(_rollbackFailureReason))
+            {
+                return $"Rollback: Restore path exists, but the last verification failed ({_rollbackFailureReason}).";
+            }
+
+            if (_rollbackDeclared && _rollbackExecuted)
+            {
+                return "Rollback: Restore path executed, but verification is still pending.";
+            }
+
+            if (_rollbackDeclared)
+            {
+                return "Rollback: Restore path is declared, but full verification is still pending.";
+            }
+
+            if (_restoreStoryKnown || HasDefaultChoice)
+            {
+                return "Rollback: Restore story is defined, but it still needs stronger gate proof.";
+            }
+
+            return "Rollback: Restore story still needs stronger proof.";
+        }
+    }
+
     public string ConfigurationPrimaryActionTooltip => IsMutationAllowed
         ? "Apply this setting."
         : PublicMutationGatingReason;
@@ -1086,6 +1283,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(HasProvenance));
                 OnPropertyChanged(nameof(ProvenanceStatusText));
+                RaiseVerdictSnapshotChanged();
             }
         }
     }
@@ -1099,6 +1297,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(HasProvenance));
                 OnPropertyChanged(nameof(ProvenanceStatusText));
+                RaiseVerdictSnapshotChanged();
             }
         }
     }
@@ -1112,6 +1311,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             {
                 OnPropertyChanged(nameof(HasProvenance));
                 OnPropertyChanged(nameof(ProvenanceStatusText));
+                RaiseVerdictSnapshotChanged();
             }
         }
     }
@@ -1124,6 +1324,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             if (SetProperty(ref _provenanceSummary, value))
             {
                 OnPropertyChanged(nameof(HasProvenance));
+                RaiseVerdictSnapshotChanged();
             }
         }
     }
@@ -1179,6 +1380,14 @@ public sealed class TweakItemViewModel : ViewModelBase
         _runtimeProofSource = entry.RuntimeProof?.PrimarySourceText?.Trim() ?? string.Empty;
         _upstreamLineageSummary = entry.UpstreamLineage?.Summary?.Trim() ?? string.Empty;
         _upstreamLineageSource = entry.UpstreamLineage?.PrimarySourceText?.Trim() ?? string.Empty;
+        _restoreStoryKnown = entry.RestoreStoryKnown;
+        _isEvidenceArchived = entry.IsArchived;
+        _hasSemanticsEvidenceFlag = entry.ValidatedSemantics?.HasSemanticsEvidence ?? false;
+        _needsVmValidationFlag = entry.ValidatedSemantics?.NeedsVmValidation == true
+            || entry.RuntimeProof?.NeedsVmValidation == true;
+        _hasRuntimeEvidenceFlag = entry.RuntimeProof?.HasRuntimeEvidence ?? false;
+        _hasLineageEvidenceFlag = entry.UpstreamLineage?.HasNohutoLineage ?? false
+            || entry.UpstreamLineage?.HasValidationProof == true;
 
         RaiseEvidenceClassificationChanged();
     }
@@ -1196,6 +1405,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         _promotionGatingReason = string.IsNullOrWhiteSpace(entry.GatingReason)
             ? "Promotion pending."
             : entry.GatingReason;
+        _rollbackDeclared = entry.RollbackStatus?.RollbackDeclared ?? false;
+        _rollbackExecuted = entry.RollbackStatus?.RollbackExecuted ?? false;
+        _rollbackVerified = entry.RollbackStatus?.RollbackVerified ?? false;
+        _rollbackVerificationMethod = entry.RollbackStatus?.RollbackVerificationMethod?.Trim() ?? string.Empty;
+        _rollbackFailureReason = entry.RollbackStatus?.RollbackFailureReason?.Trim() ?? string.Empty;
 
         RaisePromotionGateChanged();
     }
@@ -1237,6 +1451,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(HasEvidenceProofBoxes));
         OnPropertyChanged(nameof(RestoreDefaultTooltip));
         OnPropertyChanged(nameof(PublicMutationGatingReason));
+        RaiseVerdictSnapshotChanged();
         UpdateCommandStates();
     }
 
@@ -1258,8 +1473,33 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(ResearchGateMessage));
         OnPropertyChanged(nameof(HasResearchGateMessage));
         OnPropertyChanged(nameof(RestoreDefaultTooltip));
+        RaiseVerdictSnapshotChanged();
         UpdateCommandStates();
     }
+
+    private void RaiseVerdictSnapshotChanged()
+    {
+        OnPropertyChanged(nameof(VerdictState));
+        OnPropertyChanged(nameof(VerdictText));
+        OnPropertyChanged(nameof(VerdictSummary));
+        OnPropertyChanged(nameof(DocsSnapshotState));
+        OnPropertyChanged(nameof(DocsSnapshotText));
+        OnPropertyChanged(nameof(RuntimeSnapshotState));
+        OnPropertyChanged(nameof(RuntimeSnapshotText));
+        OnPropertyChanged(nameof(SourceSnapshotState));
+        OnPropertyChanged(nameof(SourceSnapshotText));
+        OnPropertyChanged(nameof(RollbackSnapshotState));
+        OnPropertyChanged(nameof(RollbackSnapshotText));
+        OnPropertyChanged(nameof(RiskSnapshotText));
+        OnPropertyChanged(nameof(RollbackStoryText));
+    }
+
+    private static string BuildSnapshotText(string label, string state) => state switch
+    {
+        "ready" => $"{label} ready",
+        "partial" => $"{label} partial",
+        _ => $"{label} pending"
+    };
 
     public ObservableCollection<string> BatchDetails => _batchDetails;
 

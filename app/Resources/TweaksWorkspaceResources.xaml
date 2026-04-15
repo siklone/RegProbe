@@ -420,6 +420,151 @@
                                    Margin="0,0,0,10"
                                    ToolTip="{Binding FriendlyDescription}"/>
 
+                        <Border BorderBrush="#2A3038"
+                                BorderThickness="1"
+                                Background="#101418"
+                                CornerRadius="12"
+                                Padding="12,10"
+                                Margin="0,0,0,10">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Verdict"
+                                               Foreground="#7F8792"
+                                               FontSize="10"
+                                               FontWeight="SemiBold"
+                                               VerticalAlignment="Center"/>
+                                    <Border Grid.Column="1">
+                                        <Border.Style>
+                                            <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
+                                                <Setter Property="Background" Value="#121826"/>
+                                                <Setter Property="BorderBrush" Value="#385171"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding VerdictState}" Value="allowed">
+                                                        <Setter Property="Background" Value="#112419"/>
+                                                        <Setter Property="BorderBrush" Value="#2E7D4F"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding VerdictState}" Value="blocked">
+                                                        <Setter Property="Background" Value="#2B2112"/>
+                                                        <Setter Property="BorderBrush" Value="#8B6A2A"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding VerdictState}" Value="archived">
+                                                        <Setter Property="Background" Value="#1C1F24"/>
+                                                        <Setter Property="BorderBrush" Value="#5B626D"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Text="{Binding VerdictText}"
+                                                   Foreground="#EAEAEA"
+                                                   FontSize="10"
+                                                   FontWeight="SemiBold"/>
+                                    </Border>
+                                </Grid>
+
+                                <TextBlock Text="{Binding VerdictSummary}"
+                                           Foreground="#C8CDD4"
+                                           FontSize="12"
+                                           TextWrapping="Wrap"
+                                           Margin="0,0,0,8"/>
+
+                                <WrapPanel Margin="0,0,0,8">
+                                    <Border Margin="0,0,8,8">
+                                        <Border.Style>
+                                            <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
+                                                <Setter Property="Background" Value="#1C1F24"/>
+                                                <Setter Property="BorderBrush" Value="#5B626D"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding DocsSnapshotState}" Value="ready">
+                                                        <Setter Property="Background" Value="#112419"/>
+                                                        <Setter Property="BorderBrush" Value="#2E7D4F"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding DocsSnapshotState}" Value="partial">
+                                                        <Setter Property="Background" Value="#142338"/>
+                                                        <Setter Property="BorderBrush" Value="#285EA8"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Text="{Binding DocsSnapshotText}" Foreground="#D5DBE3" FontSize="10" FontWeight="Medium"/>
+                                    </Border>
+
+                                    <Border Margin="0,0,8,8">
+                                        <Border.Style>
+                                            <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
+                                                <Setter Property="Background" Value="#1C1F24"/>
+                                                <Setter Property="BorderBrush" Value="#5B626D"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RuntimeSnapshotState}" Value="ready">
+                                                        <Setter Property="Background" Value="#112419"/>
+                                                        <Setter Property="BorderBrush" Value="#2E7D4F"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding RuntimeSnapshotState}" Value="partial">
+                                                        <Setter Property="Background" Value="#142338"/>
+                                                        <Setter Property="BorderBrush" Value="#285EA8"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Text="{Binding RuntimeSnapshotText}" Foreground="#D5DBE3" FontSize="10" FontWeight="Medium"/>
+                                    </Border>
+
+                                    <Border Margin="0,0,8,8">
+                                        <Border.Style>
+                                            <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
+                                                <Setter Property="Background" Value="#1C1F24"/>
+                                                <Setter Property="BorderBrush" Value="#5B626D"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SourceSnapshotState}" Value="ready">
+                                                        <Setter Property="Background" Value="#112419"/>
+                                                        <Setter Property="BorderBrush" Value="#2E7D4F"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding SourceSnapshotState}" Value="partial">
+                                                        <Setter Property="Background" Value="#142338"/>
+                                                        <Setter Property="BorderBrush" Value="#285EA8"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Text="{Binding SourceSnapshotText}" Foreground="#D5DBE3" FontSize="10" FontWeight="Medium"/>
+                                    </Border>
+
+                                    <Border Margin="0,0,8,8">
+                                        <Border.Style>
+                                            <Style TargetType="Border" BasedOn="{StaticResource EvidencePillBorderStyle}">
+                                                <Setter Property="Background" Value="#1C1F24"/>
+                                                <Setter Property="BorderBrush" Value="#5B626D"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RollbackSnapshotState}" Value="ready">
+                                                        <Setter Property="Background" Value="#112419"/>
+                                                        <Setter Property="BorderBrush" Value="#2E7D4F"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding RollbackSnapshotState}" Value="partial">
+                                                        <Setter Property="Background" Value="#142338"/>
+                                                        <Setter Property="BorderBrush" Value="#285EA8"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Text="{Binding RollbackSnapshotText}" Foreground="#D5DBE3" FontSize="10" FontWeight="Medium"/>
+                                    </Border>
+                                </WrapPanel>
+
+                                <TextBlock Text="{Binding RiskSnapshotText}"
+                                           Foreground="#A9B3BE"
+                                           FontSize="11"
+                                           TextWrapping="Wrap"
+                                           Margin="0,0,0,4"/>
+                                <TextBlock Text="{Binding RollbackStoryText}"
+                                           Foreground="#A9B3BE"
+                                           FontSize="11"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+
                         <WrapPanel>
                             <Border Margin="0,0,10,0">
                                 <Border.Style>
@@ -624,4 +769,3 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 </ResourceDictionary>
-

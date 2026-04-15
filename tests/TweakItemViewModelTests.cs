@@ -111,6 +111,152 @@ public sealed class TweakItemViewModelTests
         Assert.Equal("blocked", viewModel.PromotionState);
     }
 
+    [Fact]
+    public void ApplyAllowedVerdict_UsesProofAndRollbackSnapshots()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.apply-allowed-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ReferenceLinks.Add(new ReferenceLink(
+            "User guide",
+            "https://example.com/docs",
+            kind: ReferenceLinkKind.Docs));
+        viewModel.HasNohutoEvidence = true;
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "A",
+            ClassLabel = "Class A",
+            ClassTitle = "Ready",
+            ClassDescription = "Ready for app surface",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+            RestoreStoryKnown = true,
+            ValidatedSemantics = new TweakEvidenceProofBlock
+            {
+                Summary = "Docs-backed semantics",
+                HasSemanticsEvidence = true,
+                HasValidationProof = true,
+                PrimarySourceText = "Primary docs"
+            },
+            RuntimeProof = new TweakEvidenceProofBlock
+            {
+                Summary = "VM runtime confirmed",
+                HasRuntimeEvidence = true,
+                HasValidationProof = true
+            },
+            UpstreamLineage = new TweakEvidenceProofBlock
+            {
+                Summary = "Source lineage present",
+                HasNohutoLineage = true,
+                HasValidationProof = true
+            }
+        });
+
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "promoted",
+            RecordPromotionAllowed = true,
+            TweakIngestAllowed = true,
+            ApplyAllowed = true,
+            AppMappingStatus = "matches-research",
+            NextMissingLayer = "none",
+            DebugOverrideAllowed = false,
+            RollbackStatus = new TweakRollbackGateStatus
+            {
+                RollbackDeclared = true,
+                RollbackExecuted = true,
+                RollbackVerified = true,
+                RollbackVerificationMethod = "vm-safety-bench"
+            }
+        });
+
+        Assert.Equal("Apply allowed", viewModel.VerdictText);
+        Assert.Equal("allowed", viewModel.VerdictState);
+        Assert.Equal("ready", viewModel.DocsSnapshotState);
+        Assert.Equal("ready", viewModel.RuntimeSnapshotState);
+        Assert.Equal("ready", viewModel.SourceSnapshotState);
+        Assert.Equal("ready", viewModel.RollbackSnapshotState);
+        Assert.Contains("Verified", viewModel.RollbackStoryText);
+    }
+
+    [Fact]
+    public void AddingDocsReference_RefreshesDocsSnapshot()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.docs-snapshot-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        Assert.Equal("missing", viewModel.DocsSnapshotState);
+
+        viewModel.ReferenceLinks.Add(new ReferenceLink(
+            "How it works",
+            "https://example.com/details",
+            kind: ReferenceLinkKind.Details));
+
+        Assert.Equal("ready", viewModel.DocsSnapshotState);
+        Assert.Equal("Docs ready", viewModel.DocsSnapshotText);
+    }
+
+    [Fact]
+    public void BlockedVerdict_KeepsRuntimeAndRollbackInPendingState()
+    {
+        var pipeline = new TweakExecutionPipeline(new RecordingLogger());
+        var tweak = new TestTweak("system.blocked-verdict-test");
+        var viewModel = new TweakItemViewModel(tweak, pipeline, isElevated: false);
+
+        viewModel.ApplyEvidenceClassification(new TweakEvidenceClassEntry
+        {
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            EvidenceClass = "B",
+            ClassLabel = "Class B",
+            ClassTitle = "Control surface known",
+            ClassDescription = "Needs runtime proof",
+            ActionState = "actionable",
+            GatingReason = string.Empty,
+            IsActionable = true,
+            ShowInApp = true,
+            ValidatedSemantics = new TweakEvidenceProofBlock
+            {
+                Summary = "Semantics inferred",
+                HasSemanticsEvidence = true,
+                NeedsVmValidation = true
+            }
+        });
+
+        viewModel.ApplyResearchPromotionGate(new TweakPromotionGateEntry
+        {
+            CandidateId = tweak.Id,
+            RecordId = tweak.Id,
+            TweakId = tweak.Id,
+            TweakOrigin = "research-derived",
+            PromotionState = "blocked",
+            PromotionBlockers = new List<string> { "runtime-trace" },
+            RecordPromotionAllowed = false,
+            TweakIngestAllowed = false,
+            ApplyAllowed = false,
+            AppMappingStatus = "not-mapped",
+            NextMissingLayer = "runtime-trace",
+            DebugOverrideAllowed = false
+        });
+
+        Assert.Equal("Blocked", viewModel.VerdictText);
+        Assert.Equal("blocked", viewModel.VerdictState);
+        Assert.Equal("partial", viewModel.RuntimeSnapshotState);
+        Assert.Equal("missing", viewModel.RollbackSnapshotState);
+        Assert.Contains("evidence-first", viewModel.RiskSnapshotText);
+    }
+
     private sealed class RecordingLogger : IAppLogger
     {
         public void Log(LogLevel level, string message, Exception? exception = null)
