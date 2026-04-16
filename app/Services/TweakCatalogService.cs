@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using RegProbe.Application.Services.TweakProviders;
 using RegProbe.Core;
 using RegProbe.Core.Services;
+using RegProbe.Engine;
+using RegProbe.Engine.Services;
 
 namespace RegProbe.Application.Services;
 

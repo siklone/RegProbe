@@ -1,4 +1,5 @@
 using RegProbe.Application.Services.TweakProviders;
+using RegProbe.Engine.Services;
 
 namespace RegProbe.Application.Services;
 

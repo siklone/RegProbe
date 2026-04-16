@@ -1,5 +1,6 @@
 using RegProbe.Core;
 using RegProbe.Engine;
+using RegProbe.Infrastructure;
 
 namespace RegProbe.Application.Services;
 
