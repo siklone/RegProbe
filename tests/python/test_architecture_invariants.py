@@ -167,6 +167,19 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected DNS split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_tweak_catalog_service_stays_split_into_bootstrap_and_provider_files(self) -> None:
+        service_lines = (
+            REPO_ROOT / "app" / "Services" / "TweakCatalogService.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "TweakCatalogBootstrap.cs",
+            REPO_ROOT / "app" / "Services" / "TweakProviderCatalog.cs",
+        ]
+
+        self.assertLessEqual(len(service_lines), 120)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected tweak catalog split file: {path.relative_to(REPO_ROOT)}")
+
     def test_tweak_documentation_linker_stays_split_into_service_and_store_files(self) -> None:
         service_lines = (
             REPO_ROOT / "app" / "Services" / "TweakDocumentationLinker.cs"
@@ -219,6 +232,8 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "..\\\\app\\\\Services\\\\DnsProviderCatalog.cs",
             "..\\\\app\\\\Services\\\\PresetCatalog.cs",
             "..\\\\app\\\\Services\\\\PresetExecutionEngine.cs",
+            "..\\\\app\\\\Services\\\\TweakCatalogBootstrap.cs",
+            "..\\\\app\\\\Services\\\\TweakProviderCatalog.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogModels.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogStore.cs",
         ]
@@ -231,6 +246,8 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "Services\\\\DnsProviderCatalog.cs",
             "Services\\\\PresetCatalog.cs",
             "Services\\\\PresetExecutionEngine.cs",
+            "Services\\\\TweakCatalogBootstrap.cs",
+            "Services\\\\TweakProviderCatalog.cs",
             "Services\\\\TweakPromotionGateCatalogModels.cs",
             "Services\\\\TweakPromotionGateCatalogStore.cs",
         ]
