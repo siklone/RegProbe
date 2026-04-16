@@ -3,6 +3,7 @@ using System.CommandLine;
 using System.Threading;
 using RegProbe.Application.Services;
 using RegProbe.Core;
+using RegProbe.Engine;
 
 namespace RegProbe.CLI;
 

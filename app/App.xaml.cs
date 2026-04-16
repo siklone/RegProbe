@@ -5,10 +5,11 @@ using System.Windows.Threading;
 using RegProbe.App.Diagnostics;
 using RegProbe.App.Services;
 using RegProbe.App.ViewModels;
+using WpfApplication = System.Windows.Application;
 
 namespace RegProbe.App;
 
-public partial class App : Application
+public partial class App : WpfApplication
 {
     private static int _dispatcherErrorDialogShown;
     private readonly AppStartupCoordinator _startupCoordinator = new();

@@ -41,7 +41,7 @@ public class NotificationService : INotificationService
     /// </summary>
     public NotificationService()
     {
-        _dispatcher = Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher;
+        _dispatcher = System.Windows.Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher;
     }
 
     /// <inheritdoc />

@@ -1,3 +1,6 @@
+global using System.IO;
+global using System.Net.Http;
+
 global using RegProbe.Application.Models;
 global using RegProbe.Application.Services;
 global using RegProbe.Application.Services.TweakProviders;

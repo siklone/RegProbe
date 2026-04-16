@@ -130,7 +130,7 @@ public sealed class SingleInstanceManager : IDisposable
                         Debug.WriteLine($"[SingleInstance] Received args: {string.Join(" ", args)}");
 
                         // Dispatch to UI thread
-                        var app = Application.Current;
+                        var app = System.Windows.Application.Current;
                         if (app != null)
                         {
                             await app.Dispatcher.InvokeAsync(() =>
@@ -218,7 +218,7 @@ public sealed class SingleInstanceManager : IDisposable
 
     private static void BringToForeground()
     {
-        var mainWindow = Application.Current?.MainWindow;
+        var mainWindow = System.Windows.Application.Current?.MainWindow;
         if (mainWindow == null) return;
 
         try
