@@ -201,9 +201,10 @@ class ArchitectureInvariantTests(unittest.TestCase):
         expected_paths = [
             REPO_ROOT / "app" / "Services" / "NohutoRepoScanClient.cs",
             REPO_ROOT / "app" / "Services" / "NohutoRepoScanStore.cs",
+            REPO_ROOT / "app" / "Services" / "NohutoRepositoryScanner.cs",
         ]
 
-        self.assertLessEqual(len(service_lines), 180)
+        self.assertLessEqual(len(service_lines), 120)
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected nohuto repo scan split file: {path.relative_to(REPO_ROOT)}")
 
