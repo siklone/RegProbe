@@ -173,6 +173,7 @@ class ArchitectureInvariantTests(unittest.TestCase):
         ).read_text(encoding="utf-8").splitlines()
         expected_paths = [
             REPO_ROOT / "app" / "Services" / "TweakCatalogBootstrap.cs",
+            REPO_ROOT / "app" / "Services" / "TweakCatalogIndexBuilder.cs",
             REPO_ROOT / "app" / "Services" / "TweakProviderCatalog.cs",
         ]
 
@@ -233,6 +234,7 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "..\\\\app\\\\Services\\\\PresetCatalog.cs",
             "..\\\\app\\\\Services\\\\PresetExecutionEngine.cs",
             "..\\\\app\\\\Services\\\\TweakCatalogBootstrap.cs",
+            "..\\\\app\\\\Services\\\\TweakCatalogIndexBuilder.cs",
             "..\\\\app\\\\Services\\\\TweakProviderCatalog.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogModels.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogStore.cs",
@@ -247,6 +249,7 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "Services\\\\PresetCatalog.cs",
             "Services\\\\PresetExecutionEngine.cs",
             "Services\\\\TweakCatalogBootstrap.cs",
+            "Services\\\\TweakCatalogIndexBuilder.cs",
             "Services\\\\TweakProviderCatalog.cs",
             "Services\\\\TweakPromotionGateCatalogModels.cs",
             "Services\\\\TweakPromotionGateCatalogStore.cs",

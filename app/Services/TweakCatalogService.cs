@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using RegProbe.Application.Services.TweakProviders;
@@ -63,21 +62,9 @@ public sealed class TweakCatalogService : ITweakCatalog
                 return _cache;
             }
 
-            var entries = new List<TweakCatalogEntry>();
-            foreach (var provider in _providers)
-            {
-                foreach (var tweak in provider.CreateTweaks(_pipeline, _context, IsElevated))
-                {
-                    entries.Add(new TweakCatalogEntry(provider.CategoryName, tweak));
-                }
-            }
-
-            _cache = entries;
-            _byId = entries
-                .Select(entry => entry.Tweak)
-                .Where(tweak => !string.IsNullOrWhiteSpace(tweak.Id))
-                .GroupBy(tweak => tweak.Id, StringComparer.OrdinalIgnoreCase)
-                .ToDictionary(group => group.Key, group => group.First(), StringComparer.OrdinalIgnoreCase);
+            var index = TweakCatalogIndexBuilder.Build(_providers, _pipeline, _context, IsElevated);
+            _cache = index.Entries;
+            _byId = index.ById;
 
             return _cache;
         }
