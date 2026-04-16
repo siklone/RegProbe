@@ -105,6 +105,7 @@ class ArchitectureInvariantTests(unittest.TestCase):
         ).read_text(encoding="utf-8").splitlines()
         expected_paths = [
             REPO_ROOT / "app" / "Services" / "TweakPromotionGateCatalogModels.cs",
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGateCatalogBootstrap.cs",
             REPO_ROOT / "app" / "Services" / "TweakPromotionGateCatalogStore.cs",
         ]
 
@@ -237,6 +238,7 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "..\\\\app\\\\Services\\\\TweakCatalogIndexBuilder.cs",
             "..\\\\app\\\\Services\\\\TweakProviderCatalog.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogModels.cs",
+            "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogBootstrap.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogStore.cs",
         ]
         expected_removed_files = [
@@ -252,6 +254,7 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "Services\\\\TweakCatalogIndexBuilder.cs",
             "Services\\\\TweakProviderCatalog.cs",
             "Services\\\\TweakPromotionGateCatalogModels.cs",
+            "Services\\\\TweakPromotionGateCatalogBootstrap.cs",
             "Services\\\\TweakPromotionGateCatalogStore.cs",
         ]
 

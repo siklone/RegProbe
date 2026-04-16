@@ -1,6 +1,4 @@
 using System.Reflection;
-using RegProbe.Application.Utilities;
-
 namespace RegProbe.Application.Services;
 
 public sealed class TweakPromotionGateCatalogService
@@ -13,11 +11,12 @@ public sealed class TweakPromotionGateCatalogService
 
     public TweakPromotionGateCatalogService(string? docsRoot = null)
     {
-        _store = new TweakPromotionGateCatalogStore(docsRoot ?? DocsLocator.TryFindDocsRoot());
-        _catalog = _store.LoadCatalog();
-        _blockedWorklist = _store.LoadBlockedWorklist();
-        _index = TweakPromotionGateCatalogStore.BuildIndex(_catalog.Entries);
-        _blockedWorklistIndex = TweakPromotionGateCatalogStore.BuildBlockedWorklistIndex(_blockedWorklist.Items);
+        var bootstrap = TweakPromotionGateCatalogBootstrap.Create(docsRoot);
+        _store = bootstrap.Store;
+        _catalog = bootstrap.Catalog;
+        _blockedWorklist = bootstrap.BlockedWorklist;
+        _index = bootstrap.Index;
+        _blockedWorklistIndex = bootstrap.BlockedWorklistIndex;
     }
 
     public TweakPromotionGateCatalog Catalog => _catalog;
