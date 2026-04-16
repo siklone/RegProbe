@@ -9,13 +9,13 @@ public abstract class ViewModelBase : INotifyPropertyChanged
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
-        if (Application.Current?.Dispatcher?.CheckAccess() ?? true)
+        if (System.Windows.Application.Current?.Dispatcher?.CheckAccess() ?? true)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         else
         {
-            Application.Current?.Dispatcher?.BeginInvoke(() =>
+            System.Windows.Application.Current?.Dispatcher?.BeginInvoke(() =>
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)));
         }
     }

@@ -2307,13 +2307,13 @@ public sealed class TweakItemViewModel : ViewModelBase
         {
             try
             {
-                if (Application.Current?.Dispatcher?.CheckAccess() == true)
+                if (System.Windows.Application.Current?.Dispatcher?.CheckAccess() == true)
                 {
                     Clipboard.SetText(text);
                 }
-                else if (Application.Current?.Dispatcher != null)
+                else if (System.Windows.Application.Current?.Dispatcher != null)
                 {
-                    Application.Current.Dispatcher.Invoke(() => Clipboard.SetText(text));
+                    System.Windows.Application.Current.Dispatcher.Invoke(() => Clipboard.SetText(text));
                 }
                 else
                 {
