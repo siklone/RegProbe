@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net.Http;
 using RegProbe.Infrastructure;
 
 namespace RegProbe.App.Services;
