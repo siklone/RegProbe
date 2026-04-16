@@ -208,6 +208,21 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected nohuto repo scan split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_nohuto_repo_scan_store_stays_split_into_cache_report_and_result_files(self) -> None:
+        store_lines = (
+            REPO_ROOT / "app" / "Services" / "NohutoRepoScanStore.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "NohutoRepoScanCache.cs",
+            REPO_ROOT / "app" / "Services" / "NohutoRepoScanReportWriter.cs",
+            REPO_ROOT / "app" / "Services" / "NohutoRepoScanResultBuilder.cs",
+            REPO_ROOT / "app" / "Services" / "RepositoryScanPayload.cs",
+        ]
+
+        self.assertLessEqual(len(store_lines), 90)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected nohuto repo scan store split file: {path.relative_to(REPO_ROOT)}")
+
     def test_nohuto_change_analyzer_stays_split_into_logic_and_models_files(self) -> None:
         service_lines = (
             REPO_ROOT / "app" / "Services" / "NohutoChangeAnalyzer.cs"
