@@ -62,6 +62,9 @@
     <Compile Remove="Services\\ConfigExportService.cs" />
     <Compile Remove="Services\\ConfigExportSnapshotBuilder.cs" />
     <Compile Remove="Services\\ConfigImportExecutor.cs" />
+    <Compile Remove="Services\\DnsCacheFlusher.cs" />
+    <Compile Remove="Services\\DnsConfigurationStore.cs" />
+    <Compile Remove="Services\\DnsProviderCatalog.cs" />
     <Compile Remove="Services\\DnsService.cs" />
     <Compile Remove="Services\\PresetCatalog.cs" />
     <Compile Remove="Services\\PresetExecutionEngine.cs" />

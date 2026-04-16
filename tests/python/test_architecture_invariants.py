@@ -153,6 +153,20 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected evidence class split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_dns_service_stays_split_into_provider_store_and_flusher_files(self) -> None:
+        service_lines = (
+            REPO_ROOT / "app" / "Services" / "DnsService.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "DnsProviderCatalog.cs",
+            REPO_ROOT / "app" / "Services" / "DnsConfigurationStore.cs",
+            REPO_ROOT / "app" / "Services" / "DnsCacheFlusher.cs",
+        ]
+
+        self.assertLessEqual(len(service_lines), 80)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected DNS split file: {path.relative_to(REPO_ROOT)}")
+
     def test_tweak_documentation_linker_stays_split_into_service_and_store_files(self) -> None:
         service_lines = (
             REPO_ROOT / "app" / "Services" / "TweakDocumentationLinker.cs"
@@ -200,6 +214,9 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "..\\\\app\\\\Services\\\\ConfigExportModels.cs",
             "..\\\\app\\\\Services\\\\ConfigExportSnapshotBuilder.cs",
             "..\\\\app\\\\Services\\\\ConfigImportExecutor.cs",
+            "..\\\\app\\\\Services\\\\DnsCacheFlusher.cs",
+            "..\\\\app\\\\Services\\\\DnsConfigurationStore.cs",
+            "..\\\\app\\\\Services\\\\DnsProviderCatalog.cs",
             "..\\\\app\\\\Services\\\\PresetCatalog.cs",
             "..\\\\app\\\\Services\\\\PresetExecutionEngine.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogModels.cs",
@@ -209,6 +226,9 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "Services\\\\ConfigExportModels.cs",
             "Services\\\\ConfigExportSnapshotBuilder.cs",
             "Services\\\\ConfigImportExecutor.cs",
+            "Services\\\\DnsCacheFlusher.cs",
+            "Services\\\\DnsConfigurationStore.cs",
+            "Services\\\\DnsProviderCatalog.cs",
             "Services\\\\PresetCatalog.cs",
             "Services\\\\PresetExecutionEngine.cs",
             "Services\\\\TweakPromotionGateCatalogModels.cs",
