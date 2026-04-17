@@ -100,7 +100,7 @@ public sealed class SingleInstanceManager : IDisposable
     {
         Debug.WriteLine($"[SingleInstance] Received args: {string.Join(" ", args)}");
 
-        var app = Application.Current;
+        var app = System.Windows.Application.Current;
         if (app != null)
         {
             await app.Dispatcher.InvokeAsync(() =>

@@ -7,7 +7,7 @@ internal static class SingleInstanceWindowActivator
 {
     public static void BringToForeground()
     {
-        var mainWindow = Application.Current?.MainWindow;
+        var mainWindow = System.Windows.Application.Current?.MainWindow;
         if (mainWindow == null) return;
 
         try
