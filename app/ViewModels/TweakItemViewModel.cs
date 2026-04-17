@@ -23,7 +23,6 @@ namespace RegProbe.App.ViewModels;
 
 public sealed class TweakItemViewModel : ViewModelBase
 {
-    private const string PublicResearchGateExplanation = "Evidence pending";
     private const int MaxBatchDetailLines = 200;
     private const int MaxDisplayMessageLength = 1024;
     private static readonly TweakInsightFormatter InsightFormatter = new();
@@ -716,9 +715,8 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string EvidenceClassGatingReason => _evidenceClassGatingReason;
 
-    public string PublicEvidenceClassGatingReason => ContributorMode.IsEnabled
-        ? EvidenceClassGatingReason
-        : PublicResearchGateExplanation;
+    public string PublicEvidenceClassGatingReason =>
+        TweakVerdictPresentation.BuildPublicEvidenceClassGatingReason(EvidenceClassGatingReason);
 
     public bool IsEvidenceClassActionable => _isEvidenceClassActionable;
 
@@ -738,27 +736,14 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool IsMutationAllowed => IsEvidenceClassActionable && (IsPromotionActionable || CanDebugOverridePromotionGate);
 
-    public string PublicMutationGatingReason
-    {
-        get
-        {
-            if (!IsEvidenceClassActionable)
-            {
-                return PublicEvidenceClassGatingReason;
-            }
+    public string PublicMutationGatingReason =>
+        TweakVerdictPresentation.BuildPublicMutationGatingReason(
+            IsEvidenceClassActionable,
+            PublicEvidenceClassGatingReason,
+            IsMutationAllowed,
+            PromotionGatingReason);
 
-            if (IsMutationAllowed)
-            {
-                return string.Empty;
-            }
-
-            return ContributorMode.IsEnabled
-                ? PromotionGatingReason
-                : PublicResearchGateExplanation;
-        }
-    }
-
-    public bool IsResearchGated => ShowInApp && !IsMutationAllowed;
+    public bool IsResearchGated => TweakVerdictPresentation.IsResearchGated(ShowInApp, IsMutationAllowed);
 
     public bool HasEvidenceClass => !string.IsNullOrWhiteSpace(_evidenceClassId);
 
@@ -766,57 +751,20 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public Brush EvidenceClassBackgroundBrush => TweakEvidenceClassPresentation.GetBackgroundBrush(EvidenceClassId);
 
-    public string VerdictState
-    {
-        get
-        {
-            if (_isEvidenceArchived || string.Equals(_evidenceClassActionState, "archived", StringComparison.OrdinalIgnoreCase))
-            {
-                return "archived";
-            }
+    public string VerdictState => TweakVerdictPresentation.BuildVerdictState(
+        _isEvidenceArchived,
+        _evidenceClassActionState,
+        ShowInApp,
+        IsMutationAllowed,
+        IsResearchGated,
+        IsPromotionActionable,
+        IsEvidenceClassActionable);
 
-            if (!ShowInApp)
-            {
-                return "research";
-            }
+    public string VerdictText => TweakVerdictPresentation.BuildVerdictText(VerdictState);
 
-            if (IsMutationAllowed)
-            {
-                return "allowed";
-            }
+    public string CompactStateText => TweakVerdictPresentation.BuildCompactStateText(VerdictState);
 
-            if (IsResearchGated || !IsPromotionActionable || !IsEvidenceClassActionable)
-            {
-                return "blocked";
-            }
-
-            return "research";
-        }
-    }
-
-    public string VerdictText => VerdictState switch
-    {
-        "allowed" => "Apply allowed",
-        "blocked" => "Blocked",
-        "archived" => "Archived",
-        _ => "Research-only"
-    };
-
-    public string CompactStateText => VerdictState switch
-    {
-        "allowed" => "Verified",
-        "blocked" => "Needs review",
-        "archived" => "Archived",
-        _ => "Research"
-    };
-
-    public string CompactStateTone => VerdictState switch
-    {
-        "allowed" => "ok",
-        "blocked" => "warning",
-        "archived" => "muted",
-        _ => "info"
-    };
+    public string CompactStateTone => TweakVerdictPresentation.BuildCompactStateTone(VerdictState);
 
     public string ScopeFilterKey
     {
@@ -843,17 +791,10 @@ public sealed class TweakItemViewModel : ViewModelBase
         _ => "Mixed"
     };
 
-    public string VerdictSummary => VerdictState switch
-    {
-        "allowed" => _rollbackVerified
-            ? "Proof and rollback signals are strong enough for the normal apply flow."
-            : "Apply is available, but the safest path is still preview, verify, and keep rollback close.",
-        "blocked" => !IsEvidenceClassActionable
-            ? "The control surface is still being validated, so this stays visible for review instead of normal apply."
-            : "This setting is visible for review, but stronger proof is still required before apply opens.",
-        "archived" => "This record stays in the evidence trail so we do not rediscover the same dead end later.",
-        _ => "This record is useful for research and interpretation, but it stays outside the normal apply flow."
-    };
+    public string VerdictSummary => TweakVerdictPresentation.BuildVerdictSummary(
+        VerdictState,
+        _rollbackVerified,
+        IsEvidenceClassActionable);
 
     public string DocsSnapshotState
     {
@@ -1008,7 +949,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         ? "Restore the previous value captured before you ran this action."
         : PublicMutationGatingReason;
 
-    public string ResearchGateMessage => IsMutationAllowed ? string.Empty : PublicResearchGateExplanation;
+    public string ResearchGateMessage => TweakVerdictPresentation.BuildResearchGateMessage(IsMutationAllowed);
 
     public bool HasResearchGateMessage => !string.IsNullOrWhiteSpace(ResearchGateMessage);
 
