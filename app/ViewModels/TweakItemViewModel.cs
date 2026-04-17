@@ -18,7 +18,6 @@ using RegProbe.Engine.Tweaks.Commands;
 using RegProbe.Engine.Tweaks.Commands.Cleanup;
 using RegProbe.Infrastructure;
 using RegProbe.App.Services;
-using RegProbe.App.Utilities;
 
 namespace RegProbe.App.ViewModels;
 
@@ -177,7 +176,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _openReferenceLinkCommand = new RelayCommand(OpenReferenceLink, parameter => parameter is string url && !string.IsNullOrWhiteSpace(url));
         _toggleFavoriteCommand = new RelayCommand(_ => ToggleFavorite());
 
-        _impactAreaLabel = DetermineImpactAreaLabel(_tweak);
+        _impactAreaLabel = TweakCategoryPresentation.DetermineImpactAreaLabel(_tweak);
         _batchDetails.CollectionChanged += (_, __) =>
         {
             OnPropertyChanged(nameof(HasBatchDetails));
@@ -260,9 +259,9 @@ public sealed class TweakItemViewModel : ViewModelBase
         ? "Requires elevation. Approve the UAC prompt to continue."
         : string.Empty;
 
-    public string Category => ExtractCategory(Id);
+    public string Category => TweakCategoryPresentation.ExtractCategory(Id);
 
-    public string CategoryIcon => GetCategoryIcon(Category);
+    public string CategoryIcon => TweakCategoryPresentation.GetCategoryIcon(Category);
 
     public string StatusTooltip => AppliedStatus switch
     {
@@ -281,97 +280,6 @@ public sealed class TweakItemViewModel : ViewModelBase
         "Verify: Confirms current state matches desired\n" +
         "Restore Previous: Puts back the last state captured before Apply\n" +
         "Restore Default: Applies the product's default option when the tweak defines one";
-
-    private static string ExtractCategory(string id)
-    {
-        if (string.IsNullOrWhiteSpace(id))
-        {
-            return Utilities.StringPool.Intern("Other");
-        }
-
-        // Plugins follow: plugin.<pluginId>.<tweakId>...
-        // Group plugin tweaks by pluginId in the UI (e.g. DevTools).
-        if (id.StartsWith("plugin.", StringComparison.OrdinalIgnoreCase))
-        {
-            var parts = id.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            if (parts.Length >= 2)
-            {
-                return Utilities.StringPool.GetCategory(parts[1]);
-            }
-        }
-
-        var dotIndex = id.IndexOf('.');
-        if (dotIndex <= 0)
-        {
-            var hyphenIndex = id.IndexOf('-');
-            if (hyphenIndex > 0)
-            {
-                var candidate = id[..hyphenIndex];
-                if (IsKnownCategoryPrefix(candidate))
-                {
-                    return Utilities.StringPool.GetCategory(candidate);
-                }
-            }
-
-            return Utilities.StringPool.Intern("Other");
-        }
-
-        var cat = id.Substring(0, dotIndex);
-        return Utilities.StringPool.GetCategory(cat);
-    }
-
-    private static bool IsKnownCategoryPrefix(string candidate) => candidate.ToLowerInvariant() switch
-    {
-        "system" or
-        "security" or
-        "privacy" or
-        "network" or
-        "visibility" or
-        "audio" or
-        "peripheral" or
-        "power" or
-        "performance" or
-        "cleanup" or
-        "explorer" or
-        "notifications" or
-        "devtools" => true,
-        _ => false
-    };
-
-    private static string GetCategoryIcon(string category) => category.ToLowerInvariant() switch
-    {
-        "system" => "SYS",
-        "security" => "SEC",
-        "privacy" => "PRV",
-        "network" => "NET",
-        "visibility" => "UI",
-        "audio" => "AUD",
-        "peripheral" => "DEV",
-        "power" => "PWR",
-        "performance" => "PERF",
-        "cleanup" => "CLN",
-        "explorer" => "EXP",
-        "notifications" => "NTF",
-        "devtools" => "DEV",
-        _ => "CFG"
-    };
-
-    private static string DetermineImpactAreaLabel(ITweak tweak)
-    {
-        var area = tweak switch
-        {
-            RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak or RegistryValuePresetBatchTweak => "Registry",
-            IChoiceTweak => "Preset",
-            ServiceStartModeBatchTweak => "Service",
-            ScheduledTaskBatchTweak => "Task",
-            SettingsToggleTweak => "Settings",
-            FileCleanupTweak or FileRenameTweak => "File",
-            CommandTweak => "Command",
-            CompositeTweak => "Composite",
-            _ => "Other"
-        };
-        return Utilities.StringPool.GetImpactArea(area);
-    }
 
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
 
