@@ -1493,7 +1493,7 @@ public sealed class TweakItemViewModel : ViewModelBase
     {
         return string.IsNullOrWhiteSpace(message)
             ? FormatStatusMessage(action, status)
-            : CondenseMessageForDisplay(message);
+            : TweakExecutionMessageParser.CondenseForDisplay(message, MaxDisplayMessageLength);
     }
 
     private static string FormatStepLogLine(TweakAction action, TweakStatus status, string message)
@@ -2656,96 +2656,28 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
-        if (message.Contains("Value not set", StringComparison.OrdinalIgnoreCase))
+        if (TweakExecutionMessageParser.TryExtractCurrentValue(message, out var value))
         {
-            CurrentValue = "Not set";
-            return;
+            CurrentValue = value;
         }
-
-        if (TryExtractAfterPrefix(message, "Current value is ", out var value))
-        {
-            CurrentValue = value.TrimEnd('.');
-            return;
-        }
-
-        if (TryExtractAfterPrefix(message, "Current state:", out var state))
-        {
-            var trimmed = state.Trim();
-            var newlineIndex = trimmed.IndexOfAny(new[] { '\r', '\n' });
-            if (newlineIndex >= 0)
-            {
-                trimmed = trimmed[..newlineIndex];
-            }
-
-            var detailsIndex = trimmed.IndexOf("Details", StringComparison.OrdinalIgnoreCase);
-            if (detailsIndex >= 0)
-            {
-                trimmed = trimmed[..detailsIndex];
-            }
-
-            var servicesIndex = trimmed.IndexOf("Services", StringComparison.OrdinalIgnoreCase);
-            if (servicesIndex >= 0)
-            {
-                trimmed = trimmed[..servicesIndex];
-            }
-
-            var tasksIndex = trimmed.IndexOf("Tasks", StringComparison.OrdinalIgnoreCase);
-            if (tasksIndex >= 0)
-            {
-                trimmed = trimmed[..tasksIndex];
-            }
-
-            var entriesIndex = trimmed.IndexOf("Entries", StringComparison.OrdinalIgnoreCase);
-            if (entriesIndex >= 0)
-            {
-                trimmed = trimmed[..entriesIndex];
-            }
-
-            var valuesIndex = trimmed.IndexOf("Values", StringComparison.OrdinalIgnoreCase);
-            if (valuesIndex >= 0)
-            {
-                trimmed = trimmed[..valuesIndex];
-            }
-
-            var periodIndex = trimmed.IndexOf('.');
-            if (periodIndex >= 0)
-            {
-                trimmed = trimmed[..periodIndex];
-            }
-
-            CurrentValue = trimmed.Trim();
-        }
-    }
-
-    private static bool TryExtractAfterPrefix(string message, string prefix, out string value)
-    {
-        value = string.Empty;
-        var index = message.IndexOf(prefix, StringComparison.OrdinalIgnoreCase);
-        if (index < 0)
-        {
-            return false;
-        }
-
-        value = message[(index + prefix.Length)..];
-        return true;
     }
 
     private void TryUpdateBatchDetailsFromMessage(string message)
     {
-        if (!TryExtractBatchDetails(message, out var title, out var lines, out var omittedLineCount))
+        if (!TweakExecutionMessageParser.TryParseBatchDetails(message, MaxBatchDetailLines, out var snapshot))
         {
             ClearBatchDetails();
             return;
         }
 
-        BatchDetailsTitle = title;
+        BatchDetailsTitle = snapshot.Title;
         _batchDetails.Clear();
-        foreach (var line in lines)
+        foreach (var line in snapshot.Lines)
         {
             _batchDetails.Add(line);
         }
 
-        BatchSummaryLine = BuildBatchSummary(title, lines, omittedLineCount);
+        BatchSummaryLine = snapshot.Summary;
     }
 
     private void ClearBatchDetails()
@@ -2758,242 +2690,6 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         _batchDetails.Clear();
         BatchSummaryLine = string.Empty;
-    }
-
-    private static bool TryExtractBatchDetails(string message, out string title, out List<string> lines, out int omittedLineCount)
-    {
-        lines = new List<string>();
-        title = string.Empty;
-        omittedLineCount = 0;
-
-        var markers = new[]
-        {
-            ("Services:", "Services"),
-            ("Tasks:", "Tasks"),
-            ("Entries:", "Registry Values"),
-            ("Values:", "Registry Values")
-        };
-
-        foreach (var (marker, markerTitle) in markers)
-        {
-            var index = message.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
-            if (index < 0)
-            {
-                continue;
-            }
-
-            var start = index + marker.Length;
-            if (start >= message.Length)
-            {
-                continue;
-            }
-
-            var detailText = message[start..];
-            var parsedLines = ExtractBatchLines(detailText, MaxBatchDetailLines, out var totalLineCount);
-
-            if (parsedLines.Count == 0)
-            {
-                continue;
-            }
-
-            title = markerTitle;
-            lines = parsedLines;
-            omittedLineCount = Math.Max(0, totalLineCount - parsedLines.Count);
-            return true;
-        }
-
-        return false;
-    }
-
-    private static List<string> ExtractBatchLines(string detailText, int maxLines, out int totalLineCount)
-    {
-        totalLineCount = 0;
-        var result = new List<string>(Math.Min(maxLines, 16));
-
-        using var reader = new StringReader(detailText);
-        while (reader.ReadLine() is { } rawLine)
-        {
-            var trimmed = rawLine.Trim();
-            if (trimmed.Length == 0)
-            {
-                continue;
-            }
-
-            totalLineCount++;
-            if (result.Count >= maxLines)
-            {
-                continue;
-            }
-
-            result.Add(trimmed.StartsWith("-", StringComparison.Ordinal) ? trimmed : $"- {trimmed}");
-        }
-
-        return result;
-    }
-
-    private static string BuildBatchSummary(string title, IReadOnlyList<string> lines, int omittedLineCount)
-    {
-        if (lines.Count == 0)
-        {
-            return string.Empty;
-        }
-
-        var matched = 0;
-        var missing = 0;
-        var mismatched = 0;
-        var errors = 0;
-        var unknown = 0;
-
-        foreach (var line in lines)
-        {
-            var lower = line.ToLowerInvariant();
-            if (lower.Contains("missing"))
-            {
-                missing++;
-                continue;
-            }
-
-            if (lower.Contains("error"))
-            {
-                errors++;
-                continue;
-            }
-
-            if (lower.Contains("unknown"))
-            {
-                unknown++;
-                continue;
-            }
-
-            if (title.Equals("Tasks", StringComparison.OrdinalIgnoreCase))
-            {
-                if (lower.Contains("disabled"))
-                {
-                    matched++;
-                }
-                else if (lower.Contains("enabled"))
-                {
-                    mismatched++;
-                }
-                else
-                {
-                    unknown++;
-                }
-
-                continue;
-            }
-
-            if (TryEvaluateArrowMatch(line, out var isMatch))
-            {
-                if (isMatch)
-                {
-                    matched++;
-                }
-                else
-                {
-                    mismatched++;
-                }
-            }
-            else
-            {
-                unknown++;
-            }
-        }
-
-        var parts = new List<string>
-        {
-            $"{matched} matched",
-            $"{missing} missing"
-        };
-
-        if (mismatched > 0)
-        {
-            parts.Add($"{mismatched} mismatched");
-        }
-
-        if (errors > 0)
-        {
-            parts.Add($"{errors} error{(errors == 1 ? string.Empty : "s")}");
-        }
-
-        if (unknown > 0)
-        {
-            parts.Add($"{unknown} unknown");
-        }
-
-        if (omittedLineCount > 0)
-        {
-            parts.Add($"{omittedLineCount} more hidden");
-        }
-
-        return string.Join(" / ", parts);
-    }
-
-    private static string CondenseMessageForDisplay(string message)
-    {
-        var trimmed = message.Trim();
-        if (trimmed.Length == 0)
-        {
-            return string.Empty;
-        }
-
-        foreach (var marker in new[] { "\nEntries:", "\nValues:", "\nServices:", "\nTasks:" })
-        {
-            var markerIndex = trimmed.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
-            if (markerIndex > 0)
-            {
-                var headline = trimmed[..markerIndex].Trim();
-                if (headline.Length > 0)
-                {
-                    return headline;
-                }
-            }
-        }
-
-        if (trimmed.Length <= MaxDisplayMessageLength)
-        {
-            return trimmed;
-        }
-
-        return $"{trimmed[..MaxDisplayMessageLength].TrimEnd()}...";
-    }
-
-    private static bool TryEvaluateArrowMatch(string line, out bool isMatch)
-    {
-        isMatch = false;
-
-        var arrowIndex = line.IndexOf("->", StringComparison.Ordinal);
-        var arrowLength = 2;
-
-        if (arrowIndex < 0)
-        {
-            return false;
-        }
-
-        var colonIndex = line.IndexOf(':');
-        var currentStart = colonIndex >= 0 ? colonIndex + 1 : 0;
-        if (currentStart >= arrowIndex)
-        {
-            return false;
-        }
-
-        var current = line[currentStart..arrowIndex].Trim();
-        var target = line[(arrowIndex + arrowLength)..].Trim();
-        if (string.IsNullOrWhiteSpace(current) || string.IsNullOrWhiteSpace(target))
-        {
-            return false;
-        }
-
-        var currentValue = current.Split('(')[0].Trim();
-        var targetValue = target.Split('(')[0].Trim();
-        if (string.IsNullOrWhiteSpace(currentValue) || string.IsNullOrWhiteSpace(targetValue))
-        {
-            return false;
-        }
-
-        isMatch = currentValue.Equals(targetValue, StringComparison.OrdinalIgnoreCase)
-            || currentValue.Contains(targetValue, StringComparison.OrdinalIgnoreCase);
-        return true;
     }
 
     private async Task RunCustomActionAsync()
