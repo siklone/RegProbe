@@ -253,11 +253,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ? $"{CurrentWorkspaceItemCount} recovery actions"
         : $"{CurrentWorkspaceItemCount} tweaks";
 
-    private WorkspaceSummarySnapshot CurrentWorkspaceSummary => WorkspaceSummarySnapshot.Create(GetVisibleWorkspaceTweaks(), IsElevated);
+    private WorkspaceSummaryPresentation CurrentWorkspaceSummary => WorkspaceSummaryPresentation.Create(
+        GetVisibleWorkspaceTweaks(),
+        IsElevated,
+        IsMaintenanceWorkspaceSelected);
 
-    public string WorkspacePendingSummaryLabel => IsMaintenanceWorkspaceSelected
-        ? "Pending recovery"
-        : "Pending changes";
+    public string WorkspacePendingSummaryLabel => CurrentWorkspaceSummary.PendingLabel;
 
     public string WorkspacePendingSummaryValue => CurrentWorkspaceSummary.Pending.ValueText;
 
@@ -289,37 +290,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string WorkspaceVerificationSummaryState => CurrentWorkspaceSummary.Verification.State;
 
-    public string WorkspaceVerificationStripText => WorkspaceVerificationSummaryState == "ok"
-        ? "Verified"
-        : "Needs review";
+    public string WorkspaceVerificationStripText => CurrentWorkspaceSummary.VerificationStripText;
 
-    public string WorkspaceRiskStripText
-    {
-        get
-        {
-            var visibleTweaks = GetVisibleWorkspaceTweaks();
-            if (visibleTweaks.Any(t => t.Risk == TweakRiskLevel.Risky))
-            {
-                return "Mixed risk";
-            }
+    public string WorkspaceRiskStripText => CurrentWorkspaceSummary.RiskStripText;
 
-            if (visibleTweaks.Any(t => t.Risk == TweakRiskLevel.Advanced))
-            {
-                return "Managed risk";
-            }
+    public string WorkspacePendingStripText => CurrentWorkspaceSummary.PendingStripText;
 
-            return "Low risk";
-        }
-    }
-
-    public string WorkspacePendingStripText => $"{WorkspacePendingSummaryValue} pending";
-
-    public string WorkspaceRollbackStripText => WorkspaceRollbackSummaryState switch
-    {
-        "ok" => "Rollback ready",
-        "attention" => "Rollback partial",
-        _ => "Rollback missing"
-    };
+    public string WorkspaceRollbackStripText => CurrentWorkspaceSummary.RollbackStripText;
 
     public string WorkspaceCategoryHeader => _shellState.WorkspaceCategoryHeader;
 
