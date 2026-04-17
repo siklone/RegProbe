@@ -347,6 +347,22 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected elevated host locator split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_single_instance_manager_stays_split_into_ipc_and_ui_helpers(self) -> None:
+        manager_lines = (
+            REPO_ROOT / "app" / "Services" / "SingleInstanceManager.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "SingleInstanceIpcClient.cs",
+            REPO_ROOT / "app" / "Services" / "SingleInstanceIpcServer.cs",
+            REPO_ROOT / "app" / "Services" / "SingleInstanceKeyProvider.cs",
+            REPO_ROOT / "app" / "Services" / "SingleInstanceUserNotifier.cs",
+            REPO_ROOT / "app" / "Services" / "SingleInstanceWindowActivator.cs",
+        ]
+
+        self.assertLessEqual(len(manager_lines), 140)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected single instance split file: {path.relative_to(REPO_ROOT)}")
+
     def test_application_layer_links_and_app_layer_removes_split_service_files(self) -> None:
         application_project = (REPO_ROOT / "application" / "application.csproj").read_text(encoding="utf-8")
         app_project = (REPO_ROOT / "app" / "app.csproj").read_text(encoding="utf-8")
