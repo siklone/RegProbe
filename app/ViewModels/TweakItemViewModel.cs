@@ -796,106 +796,43 @@ public sealed class TweakItemViewModel : ViewModelBase
         _rollbackVerified,
         IsEvidenceClassActionable);
 
-    public string DocsSnapshotState
-    {
-        get
-        {
-            if (ReferenceLinks.Any(link => link.Kind is ReferenceLinkKind.Docs or ReferenceLinkKind.Details))
-            {
-                return "ready";
-            }
+    public string DocsSnapshotState => TweakProofSnapshotPresentation.BuildDocsSnapshotState(
+        ReferenceLinks.Any(link => link.Kind is ReferenceLinkKind.Docs or ReferenceLinkKind.Details),
+        _hasSemanticsEvidenceFlag,
+        HasValidatedSemantics,
+        _validatedSemanticsSource);
 
-            if (_hasSemanticsEvidenceFlag || HasValidatedSemantics || !string.IsNullOrWhiteSpace(_validatedSemanticsSource))
-            {
-                return "partial";
-            }
+    public string DocsSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Docs", DocsSnapshotState);
 
-            return "missing";
-        }
-    }
+    public string RuntimeSnapshotState => TweakProofSnapshotPresentation.BuildRuntimeSnapshotState(
+        _hasRuntimeEvidenceFlag,
+        HasRuntimeProof,
+        _needsVmValidationFlag,
+        _hasSemanticsEvidenceFlag,
+        HasValidatedSemantics);
 
-    public string DocsSnapshotText => BuildSnapshotText("Docs", DocsSnapshotState);
+    public string RuntimeSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Runtime", RuntimeSnapshotState);
 
-    public string RuntimeSnapshotState
-    {
-        get
-        {
-            if (_hasRuntimeEvidenceFlag || HasRuntimeProof)
-            {
-                return "ready";
-            }
+    public string SourceSnapshotState => TweakProofSnapshotPresentation.BuildSourceSnapshotState(
+        _hasLineageEvidenceFlag,
+        HasUpstreamLineage,
+        HasNohutoEvidence,
+        HasWindowsInternalsContext,
+        NeedsSourceReview,
+        ProvenanceSummary);
 
-            if (_needsVmValidationFlag || _hasSemanticsEvidenceFlag || HasValidatedSemantics)
-            {
-                return "partial";
-            }
+    public string SourceSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Source", SourceSnapshotState);
 
-            return "missing";
-        }
-    }
+    public string RollbackSnapshotState => TweakProofSnapshotPresentation.BuildRollbackSnapshotState(
+        _rollbackVerified,
+        _rollbackDeclared,
+        _restoreStoryKnown,
+        HasDefaultChoice,
+        _rollbackFailureReason);
 
-    public string RuntimeSnapshotText => BuildSnapshotText("Runtime", RuntimeSnapshotState);
+    public string RollbackSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Rollback", RollbackSnapshotState);
 
-    public string SourceSnapshotState
-    {
-        get
-        {
-            if (_hasLineageEvidenceFlag || HasUpstreamLineage || HasNohutoEvidence || HasWindowsInternalsContext)
-            {
-                return "ready";
-            }
-
-            if (NeedsSourceReview || !string.IsNullOrWhiteSpace(ProvenanceSummary))
-            {
-                return "partial";
-            }
-
-            return "missing";
-        }
-    }
-
-    public string SourceSnapshotText => BuildSnapshotText("Source", SourceSnapshotState);
-
-    public string RollbackSnapshotState
-    {
-        get
-        {
-            if (_rollbackVerified)
-            {
-                return "ready";
-            }
-
-            if (_rollbackDeclared || _restoreStoryKnown || HasDefaultChoice || !string.IsNullOrWhiteSpace(_rollbackFailureReason))
-            {
-                return "partial";
-            }
-
-            return "missing";
-        }
-    }
-
-    public string RollbackSnapshotText => BuildSnapshotText("Rollback", RollbackSnapshotState);
-
-    public string RiskSnapshotText
-    {
-        get
-        {
-            var summary = Risk switch
-            {
-                TweakRiskLevel.Safe => "Risk: Low-risk surface with the standard preview and verify flow.",
-                TweakRiskLevel.Advanced => "Risk: Higher-impact change, so preview first and verify after applying.",
-                TweakRiskLevel.Risky => "Risk: High-impact change. Treat it carefully and keep recovery in view.",
-                _ => "Risk: Review carefully before you apply."
-            };
-
-            if (!IsMutationAllowed)
-            {
-                return $"{summary} It stays evidence-first until the remaining proof lands.";
-            }
-
-            return summary;
-        }
-    }
+    public string RiskSnapshotText => TweakProofSnapshotPresentation.BuildRiskSnapshotText(Risk, IsMutationAllowed);
 
     public string RollbackStoryText
     {
@@ -1194,13 +1131,6 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(RiskSnapshotText));
         OnPropertyChanged(nameof(RollbackStoryText));
     }
-
-    private static string BuildSnapshotText(string label, string state) => state switch
-    {
-        "ready" => $"{label} ready",
-        "partial" => $"{label} partial",
-        _ => $"{label} pending"
-    };
 
     public ObservableCollection<string> BatchDetails => _batchDetails;
 
