@@ -34,6 +34,9 @@ jobs:
     name: Build
     runs-on: windows-latest
     steps:
+      - name: Enable long paths for checkout
+        run: git config --global core.longpaths true
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -68,6 +71,9 @@ jobs:
     needs: build
     runs-on: windows-latest
     steps:
+      - name: Enable long paths for checkout
+        run: git config --global core.longpaths true
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -153,6 +159,9 @@ jobs:
     runs-on: windows-latest
     if: github.event_name != 'release'
     steps:
+      - name: Enable long paths for checkout
+        run: git config --global core.longpaths true
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -184,6 +193,9 @@ jobs:
     needs: build
     runs-on: windows-latest
     steps:
+      - name: Enable long paths for checkout
+        run: git config --global core.longpaths true
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -249,6 +261,9 @@ jobs:
     runs-on: windows-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
+      - name: Enable long paths for checkout
+        run: git config --global core.longpaths true
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -371,6 +386,9 @@ jobs:
     runs-on: windows-latest
     if: github.event_name == 'release'
     steps:
+      - name: Enable long paths for checkout
+        run: git config --global core.longpaths true
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
