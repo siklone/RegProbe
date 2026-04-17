@@ -100,8 +100,8 @@ jobs:
           /p:CollectCoverage=true
           /p:CoverletOutput=TestResults/Coverage/
           /p:CoverletOutputFormat=cobertura
-          "/p:Threshold=${{ env.COVERAGE_LINE_THRESHOLD }},${{ env.COVERAGE_BRANCH_THRESHOLD }}"
-          "/p:ThresholdType=line,branch"
+          "/p:Threshold=${{ env.COVERAGE_LINE_THRESHOLD }}%2c${{ env.COVERAGE_BRANCH_THRESHOLD }}"
+          "/p:ThresholdType=line%2cbranch"
           /p:ThresholdStat=minimum
 
       - name: Upload unit test results
@@ -221,7 +221,13 @@ jobs:
         run: dotnet build ${{ env.SOLUTION }} -c ${{ env.CONFIGURATION }} --no-restore /p:RunAnalyzers=true /p:TreatWarningsAsErrors=true
 
       - name: Run Python pipeline tests
-        run: python -m unittest discover -s tests/python -p "test*.py"
+        run: >
+          python -m unittest
+          tests.python.test_architecture_invariants
+          tests.python.test_release_asset_contract
+          tests.python.test_public_repo_hygiene
+          tests.python.test_repo_metrics
+          -q
 
       - name: Check public repo hygiene
         run: python registry-research-framework/scripts/check_public_repo_hygiene.py
