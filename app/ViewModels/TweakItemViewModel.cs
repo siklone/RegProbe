@@ -1475,42 +1475,10 @@ public sealed class TweakItemViewModel : ViewModelBase
     private void AppendToTerminal(string message)
     {
         if (string.IsNullOrEmpty(message)) return;
-        var timestamp = DateTime.Now.ToString("HH:mm:ss");
-        TerminalOutput += $"[{timestamp}] {message}\n";
+        TerminalOutput += TweakExecutionLogFormatter.FormatTerminalLine(DateTime.Now, message);
     }
 
-    private static string FormatStatusMessage(TweakAction action, TweakStatus status)
-    {
-        if (action == TweakAction.Detect && status == TweakStatus.Detected)
-        {
-            return "Current state captured.";
-        }
-
-        return status.ToString();
-    }
-
-    private static string CoalesceMessage(TweakAction action, TweakStatus status, string message)
-    {
-        return string.IsNullOrWhiteSpace(message)
-            ? FormatStatusMessage(action, status)
-            : TweakExecutionMessageParser.CondenseForDisplay(message, MaxDisplayMessageLength);
-    }
-
-    private static string FormatStepLogLine(TweakAction action, TweakStatus status, string message)
-    {
-        var details = CoalesceMessage(action, status, message);
-        if (action == TweakAction.Detect &&
-            details.StartsWith("Detected ", StringComparison.OrdinalIgnoreCase))
-        {
-            details = $"Found {details["Detected ".Length..]}";
-        }
-        return $"> {action}: {details}";
-    }
-
-    private void ClearTerminal()
-    {
-        TerminalOutput = string.Empty;
-    }
+    private void ClearTerminal() => TerminalOutput = string.Empty;
 
     // Simplified status for first-glance view
     public TweakAppliedStatus AppliedStatus
@@ -1882,10 +1850,10 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? ct);
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
-            AppendToTerminal(FormatStepLogLine(action, result.Result.Status, result.Result.Message));
+            AppendToTerminal(TweakExecutionLogFormatter.FormatStepLogLine(action, result.Result.Status, result.Result.Message, MaxDisplayMessageLength));
             UpdateAfterSingleStep(action, result.Result);
             LastOutcome = MapOutcome(result.Result.Status);
-            StatusMessage = CoalesceMessage(action, result.Result.Status, result.Result.Message);
+            StatusMessage = TweakExecutionLogFormatter.CoalesceMessage(action, result.Result.Status, result.Result.Message, MaxDisplayMessageLength);
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
         }
         catch (OperationCanceledException)
@@ -2015,9 +1983,9 @@ public sealed class TweakItemViewModel : ViewModelBase
         var step = Steps.FirstOrDefault(item => item.Action == update.Action);
         step?.ApplyResult(update.Status, update.Message, update.Timestamp);
 
-        AppendToTerminal(FormatStepLogLine(update.Action, update.Status, update.Message));
+        AppendToTerminal(TweakExecutionLogFormatter.FormatStepLogLine(update.Action, update.Status, update.Message, MaxDisplayMessageLength));
 
-        StatusMessage = CoalesceMessage(update.Action, update.Status, update.Message);
+        StatusMessage = TweakExecutionLogFormatter.CoalesceMessage(update.Action, update.Status, update.Message, MaxDisplayMessageLength);
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
 
         if (update.Action == TweakAction.Detect)
