@@ -418,6 +418,18 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected TweaksViewModel split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_tweak_item_view_model_keeps_presentation_helpers_split_out(self) -> None:
+        view_model_lines = (
+            REPO_ROOT / "app" / "ViewModels" / "TweakItemViewModel.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "ViewModels" / "TweakItemPresentationFormatter.cs",
+        ]
+
+        self.assertLessEqual(len(view_model_lines), 3350)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected TweakItemViewModel split file: {path.relative_to(REPO_ROOT)}")
+
     def test_application_layer_links_and_app_layer_removes_split_service_files(self) -> None:
         application_project = (REPO_ROOT / "application" / "application.csproj").read_text(encoding="utf-8")
         app_project = (REPO_ROOT / "app" / "app.csproj").read_text(encoding="utf-8")
