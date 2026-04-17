@@ -26,16 +26,6 @@ public sealed class TweakItemViewModel : ViewModelBase
     private const string PublicResearchGateExplanation = "Evidence pending";
     private const int MaxBatchDetailLines = 200;
     private const int MaxDisplayMessageLength = 1024;
-    private static readonly SolidColorBrush ClassABrush = CreateFrozenBrush("#A3BE8C");
-    private static readonly SolidColorBrush ClassABackgroundBrush = CreateFrozenBrush("#2AA3BE8C");
-    private static readonly SolidColorBrush ClassBBrush = CreateFrozenBrush("#88C0D0");
-    private static readonly SolidColorBrush ClassBBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
-    private static readonly SolidColorBrush ClassCBrush = CreateFrozenBrush("#EBCB8B");
-    private static readonly SolidColorBrush ClassCBackgroundBrush = CreateFrozenBrush("#2AEBCB8B");
-    private static readonly SolidColorBrush ClassDBrush = CreateFrozenBrush("#D08770");
-    private static readonly SolidColorBrush ClassDBackgroundBrush = CreateFrozenBrush("#2AD08770");
-    private static readonly SolidColorBrush ClassEBrush = CreateFrozenBrush("#4C566A");
-    private static readonly SolidColorBrush ClassEBackgroundBrush = CreateFrozenBrush("#2A4C566A");
     private static readonly TweakInsightFormatter InsightFormatter = new();
 
     private readonly ITweak _tweak;
@@ -772,23 +762,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool HasEvidenceClass => !string.IsNullOrWhiteSpace(_evidenceClassId);
 
-    public Brush EvidenceClassBrush => EvidenceClassId switch
-    {
-        "A" => ClassABrush,
-        "B" => ClassBBrush,
-        "C" => ClassCBrush,
-        "D" => ClassDBrush,
-        _ => ClassEBrush
-    };
+    public Brush EvidenceClassBrush => TweakEvidenceClassPresentation.GetBrush(EvidenceClassId);
 
-    public Brush EvidenceClassBackgroundBrush => EvidenceClassId switch
-    {
-        "A" => ClassABackgroundBrush,
-        "B" => ClassBBackgroundBrush,
-        "C" => ClassCBackgroundBrush,
-        "D" => ClassDBackgroundBrush,
-        _ => ClassEBackgroundBrush
-    };
+    public Brush EvidenceClassBackgroundBrush => TweakEvidenceClassPresentation.GetBackgroundBrush(EvidenceClassId);
 
     public string VerdictState
     {
@@ -1426,14 +1402,6 @@ public sealed class TweakItemViewModel : ViewModelBase
     private bool RequiresAdminScan =>
         AppliedStatus == TweakAppliedStatus.Unknown
         && WillPromptForDetect;
-
-    private static SolidColorBrush CreateFrozenBrush(string hex)
-    {
-        var color = (Color)ColorConverter.ConvertFromString(hex);
-        var brush = new SolidColorBrush(color);
-        brush.Freeze();
-        return brush;
-    }
 
     public bool IsRunning
     {
