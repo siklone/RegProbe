@@ -100,8 +100,8 @@ jobs:
           /p:CollectCoverage=true
           /p:CoverletOutput=TestResults/Coverage/
           /p:CoverletOutputFormat=cobertura
-          /p:Threshold=${{ env.COVERAGE_LINE_THRESHOLD }}
-          /p:ThresholdType=line,branch
+          "/p:Threshold=${{ env.COVERAGE_LINE_THRESHOLD }},${{ env.COVERAGE_BRANCH_THRESHOLD }}"
+          "/p:ThresholdType=line,branch"
           /p:ThresholdStat=minimum
 
       - name: Upload unit test results
