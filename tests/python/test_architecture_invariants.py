@@ -331,6 +331,22 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected batch execution split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_elevated_host_locator_stays_split_into_candidate_and_diagnostics_files(self) -> None:
+        locator_lines = (
+            REPO_ROOT / "app" / "Utilities" / "ElevatedHostLocator.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Utilities" / "ElevatedHostBuildInfo.cs",
+            REPO_ROOT / "app" / "Utilities" / "ElevatedHostBuildInfoExtractor.cs",
+            REPO_ROOT / "app" / "Utilities" / "ElevatedHostCandidateBuilder.cs",
+            REPO_ROOT / "app" / "Utilities" / "ElevatedHostCandidateValidator.cs",
+            REPO_ROOT / "app" / "Utilities" / "ElevatedHostLocatorDiagnostics.cs",
+        ]
+
+        self.assertLessEqual(len(locator_lines), 80)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected elevated host locator split file: {path.relative_to(REPO_ROOT)}")
+
     def test_application_layer_links_and_app_layer_removes_split_service_files(self) -> None:
         application_project = (REPO_ROOT / "application" / "application.csproj").read_text(encoding="utf-8")
         app_project = (REPO_ROOT / "app" / "app.csproj").read_text(encoding="utf-8")
@@ -358,6 +374,11 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "..\\\\app\\\\Services\\\\TweakPromotionGateCloner.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateIndexBuilder.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGatePathResolver.cs",
+            "..\\\\app\\\\Utilities\\\\ElevatedHostBuildInfo.cs",
+            "..\\\\app\\\\Utilities\\\\ElevatedHostBuildInfoExtractor.cs",
+            "..\\\\app\\\\Utilities\\\\ElevatedHostCandidateBuilder.cs",
+            "..\\\\app\\\\Utilities\\\\ElevatedHostCandidateValidator.cs",
+            "..\\\\app\\\\Utilities\\\\ElevatedHostLocatorDiagnostics.cs",
         ]
         expected_removed_files = [
             "Services\\\\ConfigExportModels.cs",
@@ -382,6 +403,11 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "Services\\\\TweakPromotionGateCloner.cs",
             "Services\\\\TweakPromotionGateIndexBuilder.cs",
             "Services\\\\TweakPromotionGatePathResolver.cs",
+            "Utilities\\\\ElevatedHostBuildInfo.cs",
+            "Utilities\\\\ElevatedHostBuildInfoExtractor.cs",
+            "Utilities\\\\ElevatedHostCandidateBuilder.cs",
+            "Utilities\\\\ElevatedHostCandidateValidator.cs",
+            "Utilities\\\\ElevatedHostLocatorDiagnostics.cs",
         ]
 
         for value in expected_linked_files:

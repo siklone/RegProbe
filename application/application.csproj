@@ -52,7 +52,12 @@
     <Compile Include="..\\app\\Services\\TweakProviders\\*.cs" Link="Services\\TweakProviders\\%(Filename)%(Extension)" />
     <Compile Include="..\\app\\Utilities\\ContributorMode.cs" Link="Utilities\\ContributorMode.cs" />
     <Compile Include="..\\app\\Utilities\\DocsLocator.cs" Link="Utilities\\DocsLocator.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostBuildInfo.cs" Link="Utilities\\ElevatedHostBuildInfo.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostBuildInfoExtractor.cs" Link="Utilities\\ElevatedHostBuildInfoExtractor.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostCandidateBuilder.cs" Link="Utilities\\ElevatedHostCandidateBuilder.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostCandidateValidator.cs" Link="Utilities\\ElevatedHostCandidateValidator.cs" />
     <Compile Include="..\\app\\Utilities\\ElevatedHostLocator.cs" Link="Utilities\\ElevatedHostLocator.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostLocatorDiagnostics.cs" Link="Utilities\\ElevatedHostLocatorDiagnostics.cs" />
     <Compile Include="..\\app\\Utilities\\ProcessElevation.cs" Link="Utilities\\ProcessElevation.cs" />
   </ItemGroup>
 
