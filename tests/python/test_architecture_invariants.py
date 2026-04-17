@@ -113,6 +113,22 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected promotion gate split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_tweak_promotion_gate_catalog_store_stays_split_into_loader_index_and_audit_files(self) -> None:
+        store_lines = (
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGateCatalogStore.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGateAuditLogWriter.cs",
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGateCatalogLoader.cs",
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGateCloner.cs",
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGateIndexBuilder.cs",
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGatePathResolver.cs",
+        ]
+
+        self.assertLessEqual(len(store_lines), 70)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected promotion gate store split file: {path.relative_to(REPO_ROOT)}")
+
     def test_win_config_catalog_service_stays_split_into_focused_files(self) -> None:
         service_lines = (
             REPO_ROOT / "app" / "Services" / "WinConfigCatalogService.cs"
@@ -287,6 +303,11 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogModels.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogBootstrap.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogStore.cs",
+            "..\\\\app\\\\Services\\\\TweakPromotionGateAuditLogWriter.cs",
+            "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogLoader.cs",
+            "..\\\\app\\\\Services\\\\TweakPromotionGateCloner.cs",
+            "..\\\\app\\\\Services\\\\TweakPromotionGateIndexBuilder.cs",
+            "..\\\\app\\\\Services\\\\TweakPromotionGatePathResolver.cs",
         ]
         expected_removed_files = [
             "Services\\\\ConfigExportModels.cs",
@@ -303,6 +324,11 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "Services\\\\TweakPromotionGateCatalogModels.cs",
             "Services\\\\TweakPromotionGateCatalogBootstrap.cs",
             "Services\\\\TweakPromotionGateCatalogStore.cs",
+            "Services\\\\TweakPromotionGateAuditLogWriter.cs",
+            "Services\\\\TweakPromotionGateCatalogLoader.cs",
+            "Services\\\\TweakPromotionGateCloner.cs",
+            "Services\\\\TweakPromotionGateIndexBuilder.cs",
+            "Services\\\\TweakPromotionGatePathResolver.cs",
         ]
 
         for value in expected_linked_files:
