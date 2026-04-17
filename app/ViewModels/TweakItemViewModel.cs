@@ -424,23 +424,10 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string RestoreDefaultButtonText => HasDefaultChoice ? "Restore Default" : string.Empty;
 
-    public string RestoreDefaultTooltip
-    {
-        get
-        {
-            if (!IsMutationAllowed)
-            {
-                return PublicMutationGatingReason;
-            }
-
-            if (_tweak is not IChoiceTweak choiceTweak || string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceLabel))
-            {
-                return "Restore the product's default option.";
-            }
-
-            return $"Apply '{choiceTweak.DefaultChoiceLabel}' instead of restoring your previously captured value.";
-        }
-    }
+    public string RestoreDefaultTooltip => TweakRollbackPresentation.BuildRestoreDefaultTooltip(
+        IsMutationAllowed,
+        PublicMutationGatingReason,
+        _tweak is IChoiceTweak choiceTweak ? choiceTweak.DefaultChoiceLabel ?? string.Empty : string.Empty);
 
     public bool HasRegistryPath => !string.IsNullOrEmpty(RegistryPath);
 
@@ -834,57 +821,26 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string RiskSnapshotText => TweakProofSnapshotPresentation.BuildRiskSnapshotText(Risk, IsMutationAllowed);
 
-    public string RollbackStoryText
-    {
-        get
-        {
-            if (_rollbackVerified)
-            {
-                var method = string.IsNullOrWhiteSpace(_rollbackVerificationMethod)
-                    ? string.Empty
-                    : $" via {_rollbackVerificationMethod}";
-                return $"Rollback: Verified{method}.";
-            }
+    public string RollbackStoryText => TweakRollbackPresentation.BuildRollbackStoryText(
+        _rollbackVerified,
+        _rollbackVerificationMethod,
+        _rollbackFailureReason,
+        _rollbackDeclared,
+        _rollbackExecuted,
+        _restoreStoryKnown,
+        HasDefaultChoice);
 
-            if (!string.IsNullOrWhiteSpace(_rollbackFailureReason))
-            {
-                return $"Rollback: Restore path exists, but the last verification failed ({_rollbackFailureReason}).";
-            }
+    public string ConfigurationPrimaryActionTooltip =>
+        TweakRollbackPresentation.BuildConfigurationPrimaryActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
 
-            if (_rollbackDeclared && _rollbackExecuted)
-            {
-                return "Rollback: Restore path executed, but verification is still pending.";
-            }
+    public string ConfigurationRollbackActionTooltip =>
+        TweakRollbackPresentation.BuildConfigurationRollbackActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
 
-            if (_rollbackDeclared)
-            {
-                return "Rollback: Restore path is declared, but full verification is still pending.";
-            }
+    public string PrimaryActionTooltip =>
+        TweakRollbackPresentation.BuildPrimaryActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
 
-            if (_restoreStoryKnown || HasDefaultChoice)
-            {
-                return "Rollback: Restore story is defined, but it still needs stronger gate proof.";
-            }
-
-            return "Rollback: Restore story still needs stronger proof.";
-        }
-    }
-
-    public string ConfigurationPrimaryActionTooltip => IsMutationAllowed
-        ? "Apply this setting."
-        : PublicMutationGatingReason;
-
-    public string ConfigurationRollbackActionTooltip => IsMutationAllowed
-        ? "Restore the value from before you changed this setting."
-        : PublicMutationGatingReason;
-
-    public string PrimaryActionTooltip => IsMutationAllowed
-        ? "Run this action."
-        : PublicMutationGatingReason;
-
-    public string RollbackActionTooltip => IsMutationAllowed
-        ? "Restore the previous value captured before you ran this action."
-        : PublicMutationGatingReason;
+    public string RollbackActionTooltip =>
+        TweakRollbackPresentation.BuildRollbackActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
 
     public string ResearchGateMessage => TweakVerdictPresentation.BuildResearchGateMessage(IsMutationAllowed);
 
