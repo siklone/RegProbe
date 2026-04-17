@@ -194,6 +194,22 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected documentation linker split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_tweak_documentation_catalog_store_stays_split_into_path_index_and_anchor_files(self) -> None:
+        store_lines = (
+            REPO_ROOT / "app" / "Services" / "TweakDocumentationCatalogStore.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "TweakDocumentationAnchorCache.cs",
+            REPO_ROOT / "app" / "Services" / "TweakDocumentationCatalogIndex.cs",
+            REPO_ROOT / "app" / "Services" / "TweakDocumentationCatalogModels.cs",
+            REPO_ROOT / "app" / "Services" / "TweakDocumentationPathResolver.cs",
+            REPO_ROOT / "app" / "Services" / "TweakDocumentationTextHelpers.cs",
+        ]
+
+        self.assertLessEqual(len(store_lines), 80)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected documentation catalog store split file: {path.relative_to(REPO_ROOT)}")
+
     def test_nohuto_repo_scan_service_stays_split_into_client_and_store_files(self) -> None:
         service_lines = (
             REPO_ROOT / "app" / "Services" / "NohutoRepoScanService.cs"
