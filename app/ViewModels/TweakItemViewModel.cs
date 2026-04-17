@@ -187,20 +187,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool IsRisky => Risk == TweakRiskLevel.Risky;
 
-    public string RiskBadgeText => Risk switch
-    {
-        TweakRiskLevel.Safe => "SAFE",
-        TweakRiskLevel.Advanced => "ADVANCED",
-        TweakRiskLevel.Risky => "RISKY",
-        _ => "SAFE"
-    };
+    public string RiskBadgeText => TweakSurfacePresentation.BuildRiskBadgeText(Risk);
 
-    public string RepairsRiskHint => Risk switch
-    {
-        TweakRiskLevel.Advanced => "Advanced repair",
-        TweakRiskLevel.Risky => "Risky repair",
-        _ => string.Empty
-    };
+    public string RepairsRiskHint => TweakSurfacePresentation.BuildRepairsRiskHint(Risk);
 
     public bool HasRepairsRiskHint => !string.IsNullOrWhiteSpace(RepairsRiskHint);
 
@@ -226,15 +215,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         IsScanFriendly
         && !WillPromptForDetect;
 
-    public string ElevationBadgeText => "Admin";
+    public string ElevationBadgeText => TweakSurfacePresentation.ElevationBadgeText;
 
-    public string ElevationTooltip => IsElevated
-        ? "Admin required. Runs via ElevatedHost."
-        : "Admin required. You'll get a UAC prompt and it runs via ElevatedHost.";
+    public string ElevationTooltip => TweakSurfacePresentation.BuildElevationTooltip(IsElevated);
 
-    public string ElevationWarningText => WillPromptForElevation
-        ? "Requires elevation. Approve the UAC prompt to continue."
-        : string.Empty;
+    public string ElevationWarningText => TweakSurfacePresentation.BuildElevationWarningText(WillPromptForElevation);
 
     public string Category => TweakCategoryPresentation.ExtractCategory(Id);
 
@@ -245,13 +230,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         ShouldShowMixedStatus,
         RequiresAdminScan);
 
-    public string ActionsHelpTooltip =>
-        "Detect: Reads current state (no changes)\n" +
-        "Preview: Dry run (no changes)\n" +
-        "Apply: Detect -> Apply -> Verify (Rollback on failure)\n" +
-        "Verify: Confirms current state matches desired\n" +
-        "Restore Previous: Puts back the last state captured before Apply\n" +
-        "Restore Default: Applies the product's default option when the tweak defines one";
+    public string ActionsHelpTooltip => TweakSurfacePresentation.ActionsHelpTooltip;
 
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
 
@@ -303,9 +282,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    public string RepairsActionButtonText => string.Equals(ActionButtonText, "Apply", StringComparison.Ordinal)
-        ? "Run"
-        : ActionButtonText;
+    public string RepairsActionButtonText => TweakSurfacePresentation.BuildRepairsActionButtonText(ActionButtonText);
 
     public string RegistryPath
     {
@@ -753,30 +730,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string CompactStateTone => TweakVerdictPresentation.BuildCompactStateTone(VerdictState);
 
-    public string ScopeFilterKey
-    {
-        get
-        {
-            if (RegistryPath.StartsWith("HKCU\\", StringComparison.OrdinalIgnoreCase))
-            {
-                return "user";
-            }
+    public string ScopeFilterKey => TweakSurfacePresentation.BuildScopeFilterKey(RegistryPath, RequiresElevation);
 
-            if (RegistryPath.StartsWith("HKLM\\", StringComparison.OrdinalIgnoreCase) || RequiresElevation)
-            {
-                return "machine";
-            }
-
-            return string.IsNullOrWhiteSpace(RegistryPath) ? "mixed" : "mixed";
-        }
-    }
-
-    public string ScopeDisplayText => ScopeFilterKey switch
-    {
-        "user" => "User",
-        "machine" => "Machine",
-        _ => "Mixed"
-    };
+    public string ScopeDisplayText => TweakSurfacePresentation.BuildScopeDisplayText(ScopeFilterKey);
 
     public string VerdictSummary => TweakVerdictPresentation.BuildVerdictSummary(
         VerdictState,
