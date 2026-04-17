@@ -393,6 +393,18 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected workspace catalog split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_workspace_command_coordinator_stays_split_into_command_set_file(self) -> None:
+        coordinator_lines = (
+            REPO_ROOT / "app" / "ViewModels" / "WorkspaceCommandCoordinator.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "ViewModels" / "WorkspaceCommandSet.cs",
+        ]
+
+        self.assertLessEqual(len(coordinator_lines), 260)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected workspace command split file: {path.relative_to(REPO_ROOT)}")
+
     def test_application_layer_links_and_app_layer_removes_split_service_files(self) -> None:
         application_project = (REPO_ROOT / "application" / "application.csproj").read_text(encoding="utf-8")
         app_project = (REPO_ROOT / "app" / "app.csproj").read_text(encoding="utf-8")
