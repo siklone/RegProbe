@@ -26,18 +26,6 @@ public sealed class TweakItemViewModel : ViewModelBase
     private const string PublicResearchGateExplanation = "Evidence pending";
     private const int MaxBatchDetailLines = 200;
     private const int MaxDisplayMessageLength = 1024;
-    private static readonly SolidColorBrush AppliedStatusBrush = CreateFrozenBrush("#A3BE8C");
-    private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#666666");
-    private static readonly SolidColorBrush NotAppliedStatusBorderBrush = CreateFrozenBrush("#333333");
-    private static readonly SolidColorBrush MixedStatusBrush = CreateFrozenBrush("#D08770");
-    private static readonly SolidColorBrush ErrorStatusBrush = CreateFrozenBrush("#BF616A");
-    private static readonly SolidColorBrush UnknownStatusBrush = CreateFrozenBrush("#88C0D0");
-
-    private static readonly SolidColorBrush AppliedStatusBackgroundBrush = CreateFrozenBrush("#2AA3BE8C");
-    private static readonly SolidColorBrush NotAppliedStatusBackgroundBrush = CreateFrozenBrush("#1A1A1A");
-    private static readonly SolidColorBrush MixedStatusBackgroundBrush = CreateFrozenBrush("#2AD08770");
-    private static readonly SolidColorBrush ErrorStatusBackgroundBrush = CreateFrozenBrush("#2ABF616A");
-    private static readonly SolidColorBrush UnknownStatusBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
     private static readonly SolidColorBrush ClassABrush = CreateFrozenBrush("#A3BE8C");
     private static readonly SolidColorBrush ClassABackgroundBrush = CreateFrozenBrush("#2AA3BE8C");
     private static readonly SolidColorBrush ClassBBrush = CreateFrozenBrush("#88C0D0");
@@ -263,15 +251,10 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string CategoryIcon => TweakCategoryPresentation.GetCategoryIcon(Category);
 
-    public string StatusTooltip => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => "Mixed. Some sub-items match the desired configuration.",
-        TweakAppliedStatus.Applied => "Applied. Current state matches the desired configuration.",
-        TweakAppliedStatus.NotApplied => "Not applied. Detected state differs from the desired configuration.",
-        TweakAppliedStatus.Error => "Error. Open Execution Log for details.",
-        _ when RequiresAdminScan => "Unknown. Run an admin detect to read current state.",
-        _ => "Unknown. Click Detect to read current state."
-    };
+    public string StatusTooltip => TweakStatusPresentation.BuildTooltip(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
     public string ActionsHelpTooltip =>
         "Detect: Reads current state (no changes)\n" +
@@ -1405,59 +1388,35 @@ public sealed class TweakItemViewModel : ViewModelBase
         private set => SetProperty(ref _wasRolledBack, value);
     }
 
-    public string StatusIcon => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => "M",
-        TweakAppliedStatus.Applied => "+",
-        TweakAppliedStatus.NotApplied => "o",
-        TweakAppliedStatus.Error => "x",
-        _ when RequiresAdminScan => "!",
-        _ => "?"
-    };
+    public string StatusIcon => TweakStatusPresentation.BuildIcon(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public Brush StatusColor => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => MixedStatusBrush,
-        TweakAppliedStatus.Applied => AppliedStatusBrush,
-        TweakAppliedStatus.NotApplied => NotAppliedStatusBrush,
-        TweakAppliedStatus.Error => ErrorStatusBrush,
-        _ when RequiresAdminScan => NotAppliedStatusBrush,
-        _ => UnknownStatusBrush
-    };
+    public Brush StatusColor => TweakStatusPresentation.GetStatusBrush(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public Brush StatusBorderBrush => AppliedStatus switch
-    {
-        TweakAppliedStatus.NotApplied => NotAppliedStatusBorderBrush,
-        _ when RequiresAdminScan => NotAppliedStatusBorderBrush,
-        _ => StatusColor
-    };
+    public Brush StatusBorderBrush => TweakStatusPresentation.GetBorderBrush(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public Brush StatusTextBrush => AppliedStatus switch
-    {
-        TweakAppliedStatus.NotApplied => NotAppliedStatusBrush,
-        _ when RequiresAdminScan => NotAppliedStatusBrush,
-        _ => StatusColor
-    };
+    public Brush StatusTextBrush => TweakStatusPresentation.GetTextBrush(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public Brush StatusBadgeBackground => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => MixedStatusBackgroundBrush,
-        TweakAppliedStatus.Applied => AppliedStatusBackgroundBrush,
-        TweakAppliedStatus.NotApplied => NotAppliedStatusBackgroundBrush,
-        TweakAppliedStatus.Error => ErrorStatusBackgroundBrush,
-        _ when RequiresAdminScan => NotAppliedStatusBackgroundBrush,
-        _ => UnknownStatusBackgroundBrush
-    };
+    public Brush StatusBadgeBackground => TweakStatusPresentation.GetBadgeBackground(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public string StatusText => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => "Mixed",
-        TweakAppliedStatus.Applied => "Applied",
-        TweakAppliedStatus.NotApplied => "Not Applied",
-        TweakAppliedStatus.Error => "Error",
-        _ when RequiresAdminScan => "Needs Admin",
-        _ => "Unknown"
-    };
+    public string StatusText => TweakStatusPresentation.BuildText(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
     private bool ShouldShowMixedStatus =>
         AppliedStatus is not TweakAppliedStatus.Error
