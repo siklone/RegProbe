@@ -486,21 +486,10 @@ public sealed class TweakItemViewModel : ViewModelBase
             }
 
             choiceTweak.SelectedChoiceKey = value.Key;
-            TargetValue = value.Label;
-
-            if (!string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceLabel))
-            {
-                CurrentValue = choiceTweak.MatchedChoiceLabel!;
-            }
-
-            if (!string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceKey))
-            {
-                AppliedStatus = string.Equals(choiceTweak.MatchedChoiceKey, value.Key, StringComparison.OrdinalIgnoreCase)
-                    ? TweakAppliedStatus.Applied
-                    : TweakAppliedStatus.NotApplied;
-            }
-
-            StatusMessage = $"Selected '{value.Label}'. Click Apply to use it.";
+            ApplyChoiceStateSnapshot(TweakChoiceStateCoordinator.BuildSelectionSnapshot(
+                value,
+                choiceTweak.MatchedChoiceKey,
+                choiceTweak.MatchedChoiceLabel));
         }
     }
 
@@ -2164,13 +2153,12 @@ public sealed class TweakItemViewModel : ViewModelBase
         try
         {
             ChoiceOptions.Clear();
-            foreach (var choice in choiceTweak.Choices)
+            foreach (var choice in TweakChoiceStateCoordinator.BuildOptions(choiceTweak))
             {
-                ChoiceOptions.Add(new TweakChoiceOption(choice.Key, choice.Label, choice.Description));
+                ChoiceOptions.Add(choice);
             }
 
-            _selectedChoiceOption = ChoiceOptions.FirstOrDefault(
-                option => option.Key.Equals(choiceTweak.SelectedChoiceKey, StringComparison.OrdinalIgnoreCase));
+            _selectedChoiceOption = TweakChoiceStateCoordinator.ResolveSelectedOption(ChoiceOptions, choiceTweak.SelectedChoiceKey);
         }
         finally
         {
@@ -2197,8 +2185,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _isSyncingChoiceOption = true;
         try
         {
-            _selectedChoiceOption = ChoiceOptions.FirstOrDefault(
-                option => option.Key.Equals(choiceTweak.SelectedChoiceKey, StringComparison.OrdinalIgnoreCase));
+            _selectedChoiceOption = TweakChoiceStateCoordinator.ResolveSelectedOption(ChoiceOptions, choiceTweak.SelectedChoiceKey);
         }
         finally
         {
@@ -2208,37 +2195,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(SelectedChoiceOption));
         OnPropertyChanged(nameof(SelectedChoiceDescription));
 
-        if (_selectedChoiceOption is not null)
-        {
-            TargetValue = _selectedChoiceOption.Label;
-        }
-
-        if (!string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceLabel))
-        {
-            CurrentValue = choiceTweak.MatchedChoiceLabel!;
-        }
-        else if (HasDetectedState || AppliedStatus is TweakAppliedStatus.Applied or TweakAppliedStatus.NotApplied)
-        {
-            CurrentValue = "Custom / Mixed";
-        }
-
-        if (!updateAppliedStatus)
-        {
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceKey))
-        {
-            AppliedStatus = TweakAppliedStatus.NotApplied;
-        }
-        else if (string.Equals(choiceTweak.MatchedChoiceKey, choiceTweak.SelectedChoiceKey, StringComparison.OrdinalIgnoreCase))
-        {
-            AppliedStatus = TweakAppliedStatus.Applied;
-        }
-        else
-        {
-            AppliedStatus = TweakAppliedStatus.NotApplied;
-        }
+        ApplyChoiceStateSnapshot(TweakChoiceStateCoordinator.BuildSyncSnapshot(
+            choiceTweak,
+            _selectedChoiceOption,
+            HasDetectedState || AppliedStatus is TweakAppliedStatus.Applied or TweakAppliedStatus.NotApplied,
+            updateAppliedStatus));
     }
 
     public TweakInventoryState ExportInventoryState()
@@ -2286,8 +2247,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         if (_tweak is IChoiceTweak choiceTweak && ChoiceOptions.Count > 0)
         {
-            var matchingOption = ChoiceOptions.FirstOrDefault(option =>
-                option.Label.Equals(TargetValue, StringComparison.OrdinalIgnoreCase));
+            var matchingOption = TweakChoiceStateCoordinator.ResolveOptionForTargetValue(ChoiceOptions, TargetValue);
             if (matchingOption is not null)
             {
                 _isSyncingChoiceOption = true;
@@ -2451,9 +2411,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
-        var defaultOption = ChoiceOptions.FirstOrDefault(option =>
-            option.Key.Equals(choiceTweak.DefaultChoiceKey, StringComparison.OrdinalIgnoreCase));
-
+        var defaultOption = TweakChoiceStateCoordinator.ResolveDefaultOption(choiceTweak, ChoiceOptions);
         if (defaultOption is null)
         {
             return;
@@ -2466,6 +2424,29 @@ public sealed class TweakItemViewModel : ViewModelBase
     private void LogToFile(string message)
     {
         TweakFileLogger.Log(message);
+    }
+
+    private void ApplyChoiceStateSnapshot(TweakChoiceStateSnapshot snapshot)
+    {
+        if (!string.IsNullOrWhiteSpace(snapshot.TargetValue))
+        {
+            TargetValue = snapshot.TargetValue;
+        }
+
+        if (!string.IsNullOrWhiteSpace(snapshot.CurrentValue))
+        {
+            CurrentValue = snapshot.CurrentValue;
+        }
+
+        if (snapshot.AppliedStatus.HasValue)
+        {
+            AppliedStatus = snapshot.AppliedStatus.Value;
+        }
+
+        if (!string.IsNullOrWhiteSpace(snapshot.StatusMessage))
+        {
+            StatusMessage = snapshot.StatusMessage;
+        }
     }
 
 }
