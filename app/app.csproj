@@ -77,6 +77,11 @@
     <Compile Remove="Services\\TweakPromotionGateCatalogBootstrap.cs" />
     <Compile Remove="Services\\TweakPromotionGateCatalogService.cs" />
     <Compile Remove="Services\\TweakPromotionGateCatalogStore.cs" />
+    <Compile Remove="Services\\TweakPromotionGateAuditLogWriter.cs" />
+    <Compile Remove="Services\\TweakPromotionGateCatalogLoader.cs" />
+    <Compile Remove="Services\\TweakPromotionGateCloner.cs" />
+    <Compile Remove="Services\\TweakPromotionGateIndexBuilder.cs" />
+    <Compile Remove="Services\\TweakPromotionGatePathResolver.cs" />
     <Compile Remove="Services\\TweakProviders\\**\\*.cs" />
     <Compile Remove="Utilities\\ContributorMode.cs" />
     <Compile Remove="Utilities\\DocsLocator.cs" />

@@ -41,6 +41,11 @@
     <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogBootstrap.cs" Link="Services\\TweakPromotionGateCatalogBootstrap.cs" />
     <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogService.cs" Link="Services\\TweakPromotionGateCatalogService.cs" />
     <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogStore.cs" Link="Services\\TweakPromotionGateCatalogStore.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateAuditLogWriter.cs" Link="Services\\TweakPromotionGateAuditLogWriter.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogLoader.cs" Link="Services\\TweakPromotionGateCatalogLoader.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateCloner.cs" Link="Services\\TweakPromotionGateCloner.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateIndexBuilder.cs" Link="Services\\TweakPromotionGateIndexBuilder.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGatePathResolver.cs" Link="Services\\TweakPromotionGatePathResolver.cs" />
     <Compile Include="..\\app\\Services\\TweakProviders\\*.cs" Link="Services\\TweakProviders\\%(Filename)%(Extension)" />
     <Compile Include="..\\app\\Utilities\\ContributorMode.cs" Link="Utilities\\ContributorMode.cs" />
     <Compile Include="..\\app\\Utilities\\DocsLocator.cs" Link="Utilities\\DocsLocator.cs" />
