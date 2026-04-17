@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -2040,7 +2039,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void CopyId()
     {
-        if (TrySetClipboardText(Id, out var error))
+        if (TweakClipboardHelper.TrySetText(Id, out var error))
         {
             StatusMessage = "Tweak ID copied to clipboard.";
             return;
@@ -2049,10 +2048,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         StatusMessage = $"Copy failed: {error}";
     }
 
-    private bool CanInspect()
-    {
-        return !IsRunning && !IsBulkLocked;
-    }
+    private bool CanInspect() => !IsRunning && !IsBulkLocked;
 
     private bool CanMutate()
     {
@@ -2110,59 +2106,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void CopyRegistryPath()
     {
-        if (TrySetClipboardText(RegistryPath, out var error))
+        if (TweakClipboardHelper.TrySetText(RegistryPath, out var error))
         {
             StatusMessage = "Registry path copied to clipboard.";
             return;
         }
 
         StatusMessage = $"Copy failed: {error}";
-    }
-
-    private static bool TrySetClipboardText(string text, out string? errorMessage)
-    {
-        const int ClipboardBusy = unchecked((int)0x800401D0);
-        const int ClipboardCantEmpty = unchecked((int)0x800401D1);
-        errorMessage = null;
-
-        if (string.IsNullOrWhiteSpace(text))
-        {
-            errorMessage = "Nothing to copy.";
-            return false;
-        }
-
-        for (var attempt = 0; attempt < 4; attempt++)
-        {
-            try
-            {
-                if (System.Windows.Application.Current?.Dispatcher?.CheckAccess() == true)
-                {
-                    Clipboard.SetText(text);
-                }
-                else if (System.Windows.Application.Current?.Dispatcher != null)
-                {
-                    System.Windows.Application.Current.Dispatcher.Invoke(() => Clipboard.SetText(text));
-                }
-                else
-                {
-                    Clipboard.SetText(text);
-                }
-
-                return true;
-            }
-            catch (COMException ex) when (ex.HResult == ClipboardBusy || ex.HResult == ClipboardCantEmpty)
-            {
-                Thread.Sleep(30 * (attempt + 1));
-            }
-            catch (Exception ex)
-            {
-                errorMessage = ex.Message;
-                return false;
-            }
-        }
-
-        errorMessage = "Clipboard is busy. Try again.";
-        return false;
     }
 
     private void OpenReferenceLink(object? parameter)
