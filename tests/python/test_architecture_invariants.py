@@ -287,6 +287,21 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected nohuto classifier split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_crash_report_service_stays_split_into_model_store_and_sender_files(self) -> None:
+        service_lines = (
+            REPO_ROOT / "app" / "Services" / "CrashReportService.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "Services" / "CrashReport.cs",
+            REPO_ROOT / "app" / "Services" / "CrashReportFactory.cs",
+            REPO_ROOT / "app" / "Services" / "CrashReportSender.cs",
+            REPO_ROOT / "app" / "Services" / "CrashReportStore.cs",
+        ]
+
+        self.assertLessEqual(len(service_lines), 90)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected crash report split file: {path.relative_to(REPO_ROOT)}")
+
     def test_application_layer_links_and_app_layer_removes_split_service_files(self) -> None:
         application_project = (REPO_ROOT / "application" / "application.csproj").read_text(encoding="utf-8")
         app_project = (REPO_ROOT / "app" / "app.csproj").read_text(encoding="utf-8")
