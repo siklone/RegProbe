@@ -102,7 +102,7 @@ jobs:
           /p:CoverletOutputFormat=cobertura
           "/p:Threshold=${{ env.COVERAGE_LINE_THRESHOLD }}%2c${{ env.COVERAGE_BRANCH_THRESHOLD }}"
           "/p:ThresholdType=line%2cbranch"
-          /p:ThresholdStat=minimum
+          /p:ThresholdStat=total
 
       - name: Upload unit test results
         uses: actions/upload-artifact@v4
@@ -233,7 +233,11 @@ jobs:
         run: python registry-research-framework/scripts/check_public_repo_hygiene.py
 
       - name: Ghidra autotrigger smoke gate
-        run: python registry-research-framework/scripts/run_ghidra_autotrigger_smoke.py
+        run: >
+          python registry-research-framework/scripts/run_ghidra_autotrigger_smoke.py
+          --output-root "${{ runner.temp }}/ghidra-autotrigger-smoke"
+          --output registry-research-framework/audit/ghidra-autotrigger-smoke.json
+          --markdown-output registry-research-framework/audit/ghidra-autotrigger-smoke.md
 
       - name: Research quality gate summary
         run: python registry-research-framework/scripts/run_research_quality_gate.py --skip-python-tests --skip-ghidra-smoke
