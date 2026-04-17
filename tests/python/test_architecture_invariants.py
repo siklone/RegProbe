@@ -363,6 +363,20 @@ class ArchitectureInvariantTests(unittest.TestCase):
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected single instance split file: {path.relative_to(REPO_ROOT)}")
 
+    def test_workspace_browse_coordinator_stays_split_into_filter_search_and_group_builder_files(self) -> None:
+        coordinator_lines = (
+            REPO_ROOT / "app" / "ViewModels" / "WorkspaceBrowseCoordinator.cs"
+        ).read_text(encoding="utf-8").splitlines()
+        expected_paths = [
+            REPO_ROOT / "app" / "ViewModels" / "WorkspaceFilterEvaluator.cs",
+            REPO_ROOT / "app" / "ViewModels" / "WorkspaceCategoryGroupBuilder.cs",
+            REPO_ROOT / "app" / "ViewModels" / "WorkspaceSearchDebouncer.cs",
+        ]
+
+        self.assertLessEqual(len(coordinator_lines), 140)
+        for path in expected_paths:
+            self.assertTrue(path.exists(), f"Missing expected workspace browse split file: {path.relative_to(REPO_ROOT)}")
+
     def test_application_layer_links_and_app_layer_removes_split_service_files(self) -> None:
         application_project = (REPO_ROOT / "application" / "application.csproj").read_text(encoding="utf-8")
         app_project = (REPO_ROOT / "app" / "app.csproj").read_text(encoding="utf-8")
