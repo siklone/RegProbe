@@ -107,9 +107,12 @@ class ArchitectureInvariantTests(unittest.TestCase):
             REPO_ROOT / "app" / "Services" / "TweakPromotionGateCatalogModels.cs",
             REPO_ROOT / "app" / "Services" / "TweakPromotionGateCatalogBootstrap.cs",
             REPO_ROOT / "app" / "Services" / "TweakPromotionGateCatalogStore.cs",
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGateApplicator.cs",
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGateMutationEvaluator.cs",
+            REPO_ROOT / "app" / "Services" / "TweakPromotionGateQueryService.cs",
         ]
 
-        self.assertLessEqual(len(service_lines), 280)
+        self.assertLessEqual(len(service_lines), 160)
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected promotion gate split file: {path.relative_to(REPO_ROOT)}")
 
@@ -303,6 +306,9 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogModels.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogBootstrap.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogStore.cs",
+            "..\\\\app\\\\Services\\\\TweakPromotionGateApplicator.cs",
+            "..\\\\app\\\\Services\\\\TweakPromotionGateMutationEvaluator.cs",
+            "..\\\\app\\\\Services\\\\TweakPromotionGateQueryService.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateAuditLogWriter.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCatalogLoader.cs",
             "..\\\\app\\\\Services\\\\TweakPromotionGateCloner.cs",
@@ -324,6 +330,9 @@ class ArchitectureInvariantTests(unittest.TestCase):
             "Services\\\\TweakPromotionGateCatalogModels.cs",
             "Services\\\\TweakPromotionGateCatalogBootstrap.cs",
             "Services\\\\TweakPromotionGateCatalogStore.cs",
+            "Services\\\\TweakPromotionGateApplicator.cs",
+            "Services\\\\TweakPromotionGateMutationEvaluator.cs",
+            "Services\\\\TweakPromotionGateQueryService.cs",
             "Services\\\\TweakPromotionGateAuditLogWriter.cs",
             "Services\\\\TweakPromotionGateCatalogLoader.cs",
             "Services\\\\TweakPromotionGateCloner.cs",
