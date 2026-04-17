@@ -430,9 +430,10 @@ class ArchitectureInvariantTests(unittest.TestCase):
             REPO_ROOT / "app" / "ViewModels" / "TweakReferenceLinkNavigator.cs",
             REPO_ROOT / "app" / "ViewModels" / "TweakClipboardHelper.cs",
             REPO_ROOT / "app" / "ViewModels" / "TweakFileLogger.cs",
+            REPO_ROOT / "app" / "ViewModels" / "TweakChoiceStateCoordinator.cs",
         ]
 
-        self.assertLessEqual(len(view_model_lines), 2590)
+        self.assertLessEqual(len(view_model_lines), 2570)
         for path in expected_paths:
             self.assertTrue(path.exists(), f"Missing expected TweakItemViewModel split file: {path.relative_to(REPO_ROOT)}")
 
