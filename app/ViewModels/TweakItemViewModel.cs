@@ -2050,15 +2050,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private bool CanInspect() => !IsRunning && !IsBulkLocked;
 
-    private bool CanMutate()
-    {
-        return !IsRunning && !IsBulkLocked && IsMutationAllowed;
-    }
+    private bool CanMutate() => !IsRunning && !IsBulkLocked && IsMutationAllowed;
 
-    private bool CanCancel()
-    {
-        return IsRunning && !IsBulkLocked;
-    }
+    private bool CanCancel() => IsRunning && !IsBulkLocked;
 
     private void UpdateCommandStates()
     {
@@ -2073,10 +2067,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _customActionCommand.RaiseCanExecuteChanged();
     }
 
-    private bool CanToggle()
-    {
-        return CanMutate() && AppliedStatus != TweakAppliedStatus.Unknown;
-    }
+    private bool CanToggle() => CanMutate() && AppliedStatus != TweakAppliedStatus.Unknown;
 
     private bool CanRestoreDefault()
     {
@@ -2474,17 +2465,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void LogToFile(string message)
     {
-        try
-        {
-            var logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RegProbe", "Logs", "tweak-vm.log");
-            Directory.CreateDirectory(Path.GetDirectoryName(logPath)!);
-            File.AppendAllText(logPath, $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}{Environment.NewLine}");
-        }
-        catch
-        {
-            // Ignore logging failures
-        }
+        TweakFileLogger.Log(message);
     }
 
 }
