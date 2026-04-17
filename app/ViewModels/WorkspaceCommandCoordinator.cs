@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using RegProbe.App.Services;
-using RegProbe.Core.Commands;
 
 namespace RegProbe.App.ViewModels;
 
 public sealed class WorkspaceCommandCoordinator : ViewModelBase, IDisposable
 {
     private readonly WorkspaceActionCoordinator _actionCoordinator;
+    private readonly WorkspaceCommandSet _commands;
     private readonly Func<IEnumerable<TweakItemViewModel>> _getAllTweaks;
     private readonly Func<IEnumerable<TweakItemViewModel>> _getVisibleTweaks;
     private readonly Func<List<TweakItemViewModel>> _getAllFilteredTweaks;
@@ -51,63 +50,47 @@ public sealed class WorkspaceCommandCoordinator : ViewModelBase, IDisposable
         _setDetailsExpanded = setDetailsExpanded ?? throw new ArgumentNullException(nameof(setDetailsExpanded));
 
         _actionCoordinator = new WorkspaceActionCoordinator(busyService);
-
-        PreviewAllCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Preview", _getAllFilteredTweaks, (item, token) => item.RunPreviewAsync(token)),
-            _ => CanRunBulkInspectable(_getAllFilteredTweaks));
-        ApplyAllCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Apply", _getAllActionableFilteredTweaks, (item, token) => item.RunApplyAsync(token)),
-            _ => CanRunBulkMutating(_getAllActionableFilteredTweaks));
-        VerifyAllCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Verify", _getAllFilteredTweaks, (item, token) => item.RunVerifyAsync(token)),
-            _ => CanRunBulkInspectable(_getAllFilteredTweaks));
-        RollbackAllCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Rollback", _getAllActionableFilteredTweaks, (item, token) => item.RunRollbackAsync(token)),
-            _ => CanRunBulkMutating(_getAllActionableFilteredTweaks));
-        CancelAllCommand = new RelayCommand(_ => CancelBulk(), _ => IsBulkRunning);
-        SelectAllCommand = new RelayCommand(_ => SelectAllVisible());
-        DeselectAllCommand = new RelayCommand(_ => DeselectAll());
-        DetectSelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Detect Selected", _getSelectedTweaks, (item, token) => item.RunDetectAsync(token)),
-            _ => CanRunBulkInspectable(_getSelectedTweaks));
-        ApplySelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Apply Selected", _getSelectedActionableTweaks, (item, token) => item.RunApplyAsync(token)),
-            _ => CanRunBulkMutating(_getSelectedActionableTweaks));
-        VerifySelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Verify Selected", _getSelectedTweaks, (item, token) => item.RunVerifyAsync(token)),
-            _ => CanRunBulkInspectable(_getSelectedTweaks));
-        RollbackSelectedCommand = new RelayCommand(
-            _ => _ = RunBulkAsync("Rollback Selected", _getSelectedActionableTweaks, (item, token) => item.RunRollbackAsync(token)),
-            _ => CanRunBulkMutating(_getSelectedActionableTweaks));
-        ExpandAllDetailsCommand = new RelayCommand(_ => _setDetailsExpanded(true));
-        CollapseAllDetailsCommand = new RelayCommand(_ => _setDetailsExpanded(false));
+        _commands = new WorkspaceCommandSet(
+            RunBulkAsync,
+            CanRunBulkInspectable,
+            CanRunBulkMutating,
+            () => IsBulkRunning,
+            CancelBulk,
+            SelectAllVisible,
+            DeselectAll,
+            _getAllFilteredTweaks,
+            _getAllActionableFilteredTweaks,
+            _getSelectedTweaks,
+            _getSelectedActionableTweaks,
+            () => _setDetailsExpanded(true),
+            () => _setDetailsExpanded(false));
     }
 
-    public ICommand PreviewAllCommand { get; }
+    public ICommand PreviewAllCommand => _commands.PreviewAllCommand;
 
-    public ICommand ApplyAllCommand { get; }
+    public ICommand ApplyAllCommand => _commands.ApplyAllCommand;
 
-    public ICommand VerifyAllCommand { get; }
+    public ICommand VerifyAllCommand => _commands.VerifyAllCommand;
 
-    public ICommand RollbackAllCommand { get; }
+    public ICommand RollbackAllCommand => _commands.RollbackAllCommand;
 
-    public ICommand CancelAllCommand { get; }
+    public ICommand CancelAllCommand => _commands.CancelAllCommand;
 
-    public ICommand SelectAllCommand { get; }
+    public ICommand SelectAllCommand => _commands.SelectAllCommand;
 
-    public ICommand DeselectAllCommand { get; }
+    public ICommand DeselectAllCommand => _commands.DeselectAllCommand;
 
-    public ICommand DetectSelectedCommand { get; }
+    public ICommand DetectSelectedCommand => _commands.DetectSelectedCommand;
 
-    public ICommand ApplySelectedCommand { get; }
+    public ICommand ApplySelectedCommand => _commands.ApplySelectedCommand;
 
-    public ICommand VerifySelectedCommand { get; }
+    public ICommand VerifySelectedCommand => _commands.VerifySelectedCommand;
 
-    public ICommand RollbackSelectedCommand { get; }
+    public ICommand RollbackSelectedCommand => _commands.RollbackSelectedCommand;
 
-    public ICommand ExpandAllDetailsCommand { get; }
+    public ICommand ExpandAllDetailsCommand => _commands.ExpandAllDetailsCommand;
 
-    public ICommand CollapseAllDetailsCommand { get; }
+    public ICommand CollapseAllDetailsCommand => _commands.CollapseAllDetailsCommand;
 
     public string BulkStatusMessage
     {
@@ -254,27 +237,11 @@ public sealed class WorkspaceCommandCoordinator : ViewModelBase, IDisposable
 
     private void RaiseBulkCommandCanExecuteChanged()
     {
-        RaiseIfRelay(PreviewAllCommand);
-        RaiseIfRelay(ApplyAllCommand);
-        RaiseIfRelay(VerifyAllCommand);
-        RaiseIfRelay(RollbackAllCommand);
-        RaiseIfRelay(CancelAllCommand);
-        RaiseSelectedCommandCanExecuteChanged();
+        _commands.RaiseBulkCanExecuteChanged();
     }
 
     private void RaiseSelectedCommandCanExecuteChanged()
     {
-        RaiseIfRelay(DetectSelectedCommand);
-        RaiseIfRelay(ApplySelectedCommand);
-        RaiseIfRelay(VerifySelectedCommand);
-        RaiseIfRelay(RollbackSelectedCommand);
-    }
-
-    private static void RaiseIfRelay(ICommand command)
-    {
-        if (command is RelayCommand relayCommand)
-        {
-            relayCommand.RaiseCanExecuteChanged();
-        }
+        _commands.RaiseSelectedCanExecuteChanged();
     }
 }
