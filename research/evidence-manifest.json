@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-18T15:40:34.173359Z",
+  "generated_utc": "2026-04-18T16:25:19.612089Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-18T15:40:33.165189Z",
+      "generated_utc": "2026-04-18T16:25:18.697165Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -22654,7 +22654,7 @@
         "confidence": "low",
         "app_mapping_status": "not-mapped",
         "restore_story_known": true,
-        "tested_build": "26200",
+        "tested_build": "26200.8246",
         "anticheat_risk": {
           "anticheat_risk": "unknown",
           "anticheat_details": null,
@@ -22718,13 +22718,13 @@
         }
       },
       "source_file": "research/records/system.kernel.timer-check-flags.json",
-      "source_file_sha256": "1cda775337caa5930b7d38cbc480cddb02269af20f1c42cfac1498944c56c6e9",
-      "source_file_size_bytes": 21084,
+      "source_file_sha256": "5970b639a4dd8a4d43d1c63f8b9e08f3c6f8000ff15799d2b3f7df352d1296ae",
+      "source_file_size_bytes": 24263,
       "name": "Timer Check Flags",
       "category": "System",
       "area": "Session Manager Kernel Timer Diagnostics",
       "scope": "device",
-      "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The lane is therefore live-state-confirmed and static-binding-confirmed, but even a targeted current-build boot trace still lacks an exact runtime registry read showing the boot/init descriptor path being consumed.",
+      "summary": "Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `no-hit`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed.",
       "decision": {
         "confidence": "low",
         "apply_allowed": false,
@@ -22732,10 +22732,11 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, WRK-backed semantic source evidence, a real write-and-reboot runtime lane, dedicated live current-build KD proof that `KeTimerCheckFlags = 1`, a current-build INIT descriptor binding from `TimerCheckFlags` to the same global, and a targeted QGA-launched WPR boot-registry rerun that completes end to end on the current build. The 2026-04-14 decision moves this to an intentional hold because the current build still offers no exact `TimerCheckFlags` runtime hit, Microsoft does not publish a primary current-build document for the modern flag semantics, and the remaining question is no longer simple enable/disable behavior but modern bit interpretation. Further chase should wait for a stronger caller trace or authoritative documentation instead of repeating more bounded boot no-hit runs.",
+        "why": "The candidate is strong enough for a schema-backed draft because it has a repo-doc default, observed baseline state, a current-build string hit, WRK-backed semantic source evidence, a real write-and-reboot runtime lane, dedicated live current-build KD proof that `KeTimerCheckFlags = 1`, a current-build INIT descriptor binding from `TimerCheckFlags` to the same global, a targeted QGA-launched WPR boot-registry rerun that completes end to end on the current build, and a fresh QGA ETW stackwalk pass with physical artifacts. The 2026-04-18 review keeps this as an intentional hold because the current build still offers no exact `TimerCheckFlags` runtime read, the new ETW pass retained only helper-command-line text rather than target consumption, Microsoft does not publish a primary current-build document for the modern flag semantics, and the remaining question is no longer simple enable/disable behavior but modern bit interpretation. Further chase should wait for a stronger caller trace, a fixed exact-query instrumentation check, or authoritative documentation instead of repeating more bounded idle no-hit runs.",
         "blocking_issues": [
           "timer-check-flags-intentional-hold-no-current-build-pivot",
           "timer-check-flags-wpr-boot-no-hit-current-build",
+          "timer-check-flags-etw-stackwalk-helper-only-no-target-read",
           "timer-check-flags-no-primary-current-build-doc",
           "timer-check-flags-modern-bit-semantics-unproven"
         ]
@@ -22824,7 +22825,9 @@
             "static-session-manager-kernel-timer-check-flags-string-20260331",
             "analysis-session-manager-kernel-timer-check-flags-wrk-20260403",
             "vm-session-manager-kernel-timer-check-flags-runtime-20260331",
-            "static-session-manager-kernel-timer-check-flags-init-descriptor-20260412"
+            "static-session-manager-kernel-timer-check-flags-init-descriptor-20260412",
+            "vm-session-manager-kernel-timer-check-flags-wpr-qga-no-hit-20260413",
+            "vm-session-manager-kernel-timer-check-flags-etw-stackwalk-helper-only-20260418"
           ]
         }
       ],
@@ -22978,6 +22981,20 @@
           "location": "registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json and evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary.json and evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json and research/notes/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.md",
           "summary": "A QGA-launched current-build WPR boot-registry rerun completed a real reboot, saved a 1.76 GB ETL, converted it into a 6.06 GB tracerpt CSV, and normalized the filtered hit set successfully. The exact fragment filters for both `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel` and `TimerCheckFlags` still returned `0` hits, so this is stronger targeted negative runtime evidence and does not close the exact runtime-read blocker.",
           "strength": "high",
+          "supports": [
+            "runtime-gap",
+            "version-scope",
+            "research-gap"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-timer-check-flags-etw-stackwalk-helper-only-20260418",
+          "kind": "vm-test",
+          "title": "QGA ETW stackwalk retained only helper command-line text for TimerCheckFlags",
+          "location": "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json and evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md",
+          "summary": "A fresh QGA-launched ETW registry stackwalk run completed for 45 seconds, saved a physical ETL, and generated a normalized bundle with 5461 registry events and 1750 caller-stack events. Field-level review found zero `value_name = TimerCheckFlags` events and zero exact `Session Manager\\\\Kernel` key-path events. The only retained target text was the helper-side `reg.exe` command line, and that helper query reported `ERROR: Invalid syntax.`, so this is weak/no-hit runtime evidence rather than target behavior proof.",
+          "strength": "medium",
           "supports": [
             "runtime-gap",
             "version-scope",

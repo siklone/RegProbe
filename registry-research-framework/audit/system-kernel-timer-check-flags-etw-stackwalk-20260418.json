@@ -1,0 +1,81 @@
+{
+  "generated_utc": "2026-04-18T16:24:00Z",
+  "candidate_id": "system.kernel.timer-check-flags",
+  "record_id": "system.kernel.timer-check-flags",
+  "vm_target": "Win25H2Clean",
+  "os_build": "26200.8246",
+  "classification": "blocked-pending-stronger-runtime-proof",
+  "strongest_evidence_source": "static-init-descriptor-plus-live-kd-state",
+  "static_confidence": "high",
+  "static_hypothesis": {
+    "component": "ntoskrnl.exe",
+    "global_symbol": "nt!KeTimerCheckFlags",
+    "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name": "TimerCheckFlags",
+    "trigger_family": "timer-diagnostic-idle-registry-stackwalk"
+  },
+  "runtime_plan": {
+    "lane_order": [
+      "etw-stackwalk",
+      "wpr-boot-registry-already-completed",
+      "windbg-only-if-a-new-exact-read-pivot-appears"
+    ],
+    "why": "The record already has repo docs, current-build string evidence, WRK semantic support, live KD state, and an INIT descriptor binding. The cheapest remaining lane was another narrow ETW stackwalk review before considering any heavier debugger path. The prior QGA/WPR boot-registry lane is still the stronger boot/runtime no-hit evidence, so this sprint does not repeat broad WPR."
+  },
+  "lanes": [
+    {
+      "lane": "etw-stackwalk",
+      "run_id": "timer-check-flags-etw-stackwalk-20260418",
+      "status": "weak-no-hit",
+      "best_signal": "helper-command-line-only",
+      "details": {
+        "capture_status": "ok",
+        "launch_transport": "qga",
+        "duration_seconds": 45,
+        "etl_exists": true,
+        "xml_exists_locally": true,
+        "normalized_bundle_exists": true,
+        "normalized_event_count": 5461,
+        "caller_stack_event_count": 1750,
+        "stack_field_hit_count": 406613,
+        "value_field_timercheckflags_hits": 0,
+        "exact_session_manager_kernel_key_hits": 0,
+        "data_text_timercheckflags_hits": 1,
+        "data_text_session_manager_kernel_hits": 1,
+        "registry_probe_attempted": true,
+        "registry_probe_valid": false,
+        "registry_probe_stderr": "ERROR: Invalid syntax.",
+        "target_hit_interpretation": "The only retained TimerCheckFlags text was the helper reg.exe command line. No normalized event retained value_name = TimerCheckFlags, and no exact Session Manager\\Kernel key-path event was retained."
+      },
+      "artifact_refs": [
+        {
+          "path": "evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json",
+          "sha256": "9b50f73b75793b53b20b72ddeeaa6ffbebad14a161f8899d33a9055e8da5d6b8",
+          "size": 7698,
+          "collected_utc": "2026-04-18T16:17:57.7321759Z"
+        },
+        {
+          "path": "evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418.etl",
+          "sha256": "0d0fb9629de41ba0f6a8b93f404734ef5b135f7e37f6940522b7b510c61231d2",
+          "size": 15728640,
+          "collected_utc": "2026-04-18T16:17:57.7321759Z"
+        },
+        {
+          "path": "evidence/files/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json",
+          "sha256": "30b979cd4af1c38c79594c744e6bec8be606556e3841023d07f56c5c641ab6b9",
+          "size": 7127707,
+          "collected_utc": "2026-04-18T16:17:57.7321759Z"
+        }
+      ],
+      "interpretation": "This is a real ETW capture with physical artifacts, but it does not prove target behavior. The helper-side reg.exe probe did not execute a valid value query because the space-containing key path was not quoted correctly by the guest helper, and the normalized event stream otherwise retained no exact TimerCheckFlags value read."
+    }
+  ],
+  "final_gap": "No retained exact runtime registry read or value-level normalized event for TimerCheckFlags on the current guest.",
+  "why_not_shippable": [
+    "no exact runtime registry-read proof",
+    "no primary Microsoft documentation for the modern TimerCheckFlags bit contract",
+    "no shipped app mapping",
+    "current ETW sprint only produced helper-command-line text, not target consumption"
+  ],
+  "recommendation": "Keep the record research-only and blocked pending a stronger exact-read runtime lane or authoritative current-build documentation. Do not repeat broad idle ETW/WPR capture without a better trigger or caller pivot."
+}

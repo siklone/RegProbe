@@ -24,6 +24,6 @@ The retained summary shows:
 
 ## Artifact Set
 
-- [timer-check-flags-wpr-qga-20260413a-summary-arm.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary-arm.json)
-- [timer-check-flags-wpr-qga-20260413a-summary.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary.json)
-- [timer-check-flags-wpr-qga-20260413a.normalized.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json)
+- `evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary-arm.json`
+- `evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a-summary.json`
+- `evidence/files/vm-tooling-staging/timer-check-flags-wpr-qga-no-hit-20260413/timer-check-flags-wpr-qga-20260413a.normalized.json`
