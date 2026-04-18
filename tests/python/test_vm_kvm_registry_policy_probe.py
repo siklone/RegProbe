@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+import io
 import json
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -31,6 +33,53 @@ registry_policy_probe = load_module(
 
 
 class VmKvmRegistryPolicyProbeTests(unittest.TestCase):
+    def test_main_timeout_uses_contract_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            argv = [
+                "run-guest-registry-policy-probe.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "policy-probe-test",
+                "--registry-path",
+                r"HKLM\SOFTWARE\RegProbe",
+                "--value-name",
+                "Enabled",
+                "--trigger-profile",
+                "default",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                registry_policy_probe,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                registry_policy_probe,
+                "launch_generated_script",
+                return_value="qga",
+            ), mock.patch.object(
+                registry_policy_probe,
+                "try_probe_stage_fallback",
+                return_value=None,
+            ), mock.patch.object(
+                registry_policy_probe.time,
+                "sleep",
+                return_value=None,
+            ), mock.patch.object(
+                registry_policy_probe.time,
+                "time",
+                side_effect=[0.0, 999.0, 1000.0, 1001.0, 1002.0, 1003.0, 1004.0, 1005.0],
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = registry_policy_probe.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(payload["status"], "timeout")
+        self.assertEqual(payload["error_kind"], "runner-timeout")
+        self.assertEqual(payload["recovery_action"], "rerun-registry-policy-probe")
+        self.assertEqual(payload["transport_blocker"], "timeout")
+        self.assertEqual(payload["guest_health"], "unknown")
+
     def test_try_probe_stage_fallback_preserves_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             temp_dir = Path(temp_root)
