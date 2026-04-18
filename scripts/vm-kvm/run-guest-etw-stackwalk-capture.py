@@ -39,6 +39,8 @@ if str(CURRENT_DIR) not in sys.path:
 if str(FRAMEWORK_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(FRAMEWORK_SCRIPTS))
 
+from summary_contract_lib import apply_summary_contract, write_summary_contract
+
 from guest_bridge import ensure_guest_bridge
 from generate_etw_stackwalk_capture_plan import load_config as load_profile_config  # noqa: E402
 from generate_etw_stackwalk_capture_plan import load_runner_config  # noqa: E402
@@ -514,20 +516,27 @@ def main() -> int:
     )
 
     if not wait_for_file(summary_path, args.timeout_seconds):
-        print(
-            json.dumps(
-                {
-                    "status": "timeout",
-                    "summary_path": str(summary_path),
-                    "run_id": safe_run_id,
-                    "launch_transport": launch_transport,
-                },
-                indent=2,
-            )
+        timeout_summary = write_summary_contract(
+            summary_path,
+            {
+                "status": "timeout",
+                "summary_path": str(summary_path),
+                "run_id": safe_run_id,
+                "profile_id": args.profile_id,
+                "launch_transport": launch_transport,
+                "xml_exists": False,
+                "etl_exists": False,
+                "summary_source": "host-timeout",
+            },
+            default_error_kind="runner-timeout",
+            default_recovery_action="rerun-etw-stackwalk-capture",
+            default_transport_blocker="timeout",
+            default_guest_health="unknown",
         )
+        print(json.dumps(timeout_summary, indent=2))
         return 2
 
-    summary = json.loads(summary_path.read_text(encoding="utf-8-sig"))
+    summary = apply_summary_contract(json.loads(summary_path.read_text(encoding="utf-8-sig")))
     payload = {
         "status": summary.get("status", "unknown"),
         "error_kind": summary.get("error_kind"),
