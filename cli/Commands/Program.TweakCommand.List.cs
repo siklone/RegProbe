@@ -10,10 +10,10 @@ partial class Program
     static Command CreateTweakListCommand()
     {
         var command = new Command("list", "List all available tweaks");
-        var categoryOption = new Option<string?>("--category", "Filter by category");
-        var riskOption = new Option<string?>("--risk", "Filter by risk: safe, advanced, risky");
-        var requiresAdminOption = new Option<bool>("--requires-admin", "Only list tweaks requiring elevation");
-        var verboseOption = new Option<bool>("--verbose", "Include descriptions");
+        var categoryOption = CreateOption<string?>("--category", "Filter by category");
+        var riskOption = CreateOption<string?>("--risk", "Filter by risk: safe, advanced, risky");
+        var requiresAdminOption = CreateOption<bool>("--requires-admin", "Only list tweaks requiring elevation");
+        var verboseOption = CreateOption<bool>("--verbose", "Include descriptions");
         command.AddOption(categoryOption);
         command.AddOption(riskOption);
         command.AddOption(requiresAdminOption);

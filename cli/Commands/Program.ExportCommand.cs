@@ -10,10 +10,10 @@ partial class Program
         var exportCommand = new Command("config", "Configuration export/import");
 
         var exportSubCommand = new Command("export", "Export configuration to file");
-        var fileOption = new Option<string>("--file", () => "config.json", "Output file path");
-        var includeTweaks = new Option<bool>("--include-tweaks", () => true, "Include applied tweak states");
-        var includeDns = new Option<bool>("--include-dns", () => true, "Include DNS settings");
-        var includeSettings = new Option<bool>("--include-settings", () => true, "Include app settings");
+        var fileOption = CreateOption<string>("--file", () => "config.json", "Output file path");
+        var includeTweaks = CreateOption<bool>("--include-tweaks", () => true, "Include applied tweak states");
+        var includeDns = CreateOption<bool>("--include-dns", () => true, "Include DNS settings");
+        var includeSettings = CreateOption<bool>("--include-settings", () => true, "Include app settings");
         exportSubCommand.AddOption(fileOption);
         exportSubCommand.AddOption(includeTweaks);
         exportSubCommand.AddOption(includeDns);
@@ -41,8 +41,8 @@ partial class Program
         exportCommand.AddCommand(exportSubCommand);
 
         var importSubCommand = new Command("import", "Import configuration from file (default: dry-run)");
-        var importFileArg = new Argument<string>("file", "Configuration file path");
-        var applyOption = new Option<bool>("--apply", "Actually apply changes (default: dry-run)");
+        var importFileArg = CreateArgument<string>("file", "Configuration file path");
+        var applyOption = CreateOption<bool>("--apply", "Actually apply changes (default: dry-run)");
         importSubCommand.AddArgument(importFileArg);
         importSubCommand.AddOption(applyOption);
         importSubCommand.SetHandler(async context =>

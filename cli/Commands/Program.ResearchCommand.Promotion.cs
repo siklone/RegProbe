@@ -11,7 +11,7 @@ partial class Program
     static Command CreateResearchScoreCandidateCommand()
     {
         var command = new Command("score-candidate", "Show the score breakdown for a candidate");
-        var candidateIdArgument = new Argument<string>("candidate-id", "Record or tweak id");
+        var candidateIdArgument = CreateArgument<string>("candidate-id", "Record or tweak id");
         command.AddArgument(candidateIdArgument);
         command.SetHandler(context =>
         {
@@ -41,7 +41,7 @@ partial class Program
     static Command CreateResearchEvaluateGateCommand()
     {
         var command = new Command("evaluate-gate", "Show the gate evaluation for a candidate");
-        var candidateIdArgument = new Argument<string>("candidate-id", "Record or tweak id");
+        var candidateIdArgument = CreateArgument<string>("candidate-id", "Record or tweak id");
         command.AddArgument(candidateIdArgument);
         command.SetHandler(context =>
         {

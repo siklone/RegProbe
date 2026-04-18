@@ -24,8 +24,8 @@ partial class Program
         presetCommand.AddCommand(listCommand);
 
         var applyCommand = new Command("apply", "Apply a preset (default: dry-run)");
-        var presetArg = new Argument<string>("preset-name", "Name of the preset");
-        var applyOption = new Option<bool>("--apply", "Actually apply changes (default: dry-run)");
+        var presetArg = CreateArgument<string>("preset-name", "Name of the preset");
+        var applyOption = CreateOption<bool>("--apply", "Actually apply changes (default: dry-run)");
         applyCommand.AddArgument(presetArg);
         applyCommand.AddOption(applyOption);
         applyCommand.SetHandler(async context =>
@@ -62,8 +62,8 @@ partial class Program
         presetCommand.AddCommand(applyCommand);
 
         var revertCommand = new Command("revert", "Rollback a preset (default: dry-run)");
-        var revertArg = new Argument<string>("preset-name", "Name of the preset");
-        var revertApplyOption = new Option<bool>("--apply", "Actually rollback changes (default: dry-run)");
+        var revertArg = CreateArgument<string>("preset-name", "Name of the preset");
+        var revertApplyOption = CreateOption<bool>("--apply", "Actually rollback changes (default: dry-run)");
         revertCommand.AddArgument(revertArg);
         revertCommand.AddOption(revertApplyOption);
         revertCommand.SetHandler(async context =>
