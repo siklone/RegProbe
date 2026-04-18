@@ -214,14 +214,21 @@ def main() -> int:
     if not wait_for_file(before_path, args.prepare_timeout_seconds):
         print(
             json.dumps(
-                {
-                    "before_path": str(before_path),
-                    "output_name": args.output_name,
-                    "registry_path": args.registry_path,
-                    "value_name": args.value_name,
-                    "prepare_launch_transport": prepare_launch_transport,
-                    "status": "prepare-timeout",
-                },
+                apply_summary_contract(
+                    {
+                        "before_path": str(before_path),
+                        "output_name": args.output_name,
+                        "registry_path": args.registry_path,
+                        "value_name": args.value_name,
+                        "prepare_launch_transport": prepare_launch_transport,
+                        "status": "prepare-timeout",
+                        "summary_source": "reboot-observation-prepare-timeout",
+                        "error_kind": "runner-timeout",
+                        "recovery_action": "rerun-reboot-observation",
+                        "transport_blocker": "timeout",
+                        "guest_health": "unknown",
+                    }
+                ),
                 indent=2,
             )
         )
