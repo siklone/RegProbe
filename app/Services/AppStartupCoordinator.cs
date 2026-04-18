@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using RegProbe.App.Diagnostics;
 using RegProbe.App.ViewModels;
 using RegProbe.Infrastructure;
+using WpfApplication = System.Windows.Application;
 
 namespace RegProbe.App.Services;
 
@@ -16,7 +17,7 @@ public sealed class AppStartupCoordinator
 {
     private readonly MainWindowFactory _windowFactory = new();
 
-    public async Task<MainWindow> CreateAndShowMainWindowAsync(Application application)
+    public async Task<MainWindow> CreateAndShowMainWindowAsync(WpfApplication application)
     {
         ArgumentNullException.ThrowIfNull(application);
 

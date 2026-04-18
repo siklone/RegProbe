@@ -64,7 +64,7 @@ public sealed class GameDvrSafeFlowIntegrationTests
         Assert.True(applyReport.Applied);
         Assert.True(applyReport.Verified);
         Assert.Equal(0, registry.ReadValue(GameDvrReference)?.ToObject());
-        Assert.Equal(1, rollbackStore.MarkAppliedCalls.Count);
+        Assert.Single(rollbackStore.MarkAppliedCalls);
         Assert.Contains(
             applyReport.Steps,
             step => step.Action == TweakAction.Verify && step.Result.Status == TweakStatus.Verified);
@@ -111,7 +111,7 @@ public sealed class GameDvrSafeFlowIntegrationTests
             report.Steps,
             step => step.Action == TweakAction.Rollback && step.Result.Status == TweakStatus.RolledBack);
         Assert.Equal(1, writeRegistry.ReadValue(GameDvrReference)?.ToObject());
-        Assert.Equal(1, rollbackStore.MarkRolledBackCalls.Count);
+        Assert.Single(rollbackStore.MarkRolledBackCalls);
     }
 
     private static ITweak CreateGameDvrTweak(IRegistryAccessor readRegistry, IRegistryAccessor writeRegistry)

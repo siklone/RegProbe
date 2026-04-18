@@ -22,15 +22,42 @@
     <Compile Include="..\\app\\Models\\PresetModel.cs" Link="Models\\PresetModel.cs" />
     <Compile Include="..\\app\\Models\\PresetResults.cs" Link="Models\\PresetResults.cs" />
     <Compile Include="..\\app\\Services\\ConfigurationWorkspaceClassifier.cs" Link="Services\\ConfigurationWorkspaceClassifier.cs" />
+    <Compile Include="..\\app\\Services\\ConfigExportModels.cs" Link="Services\\ConfigExportModels.cs" />
     <Compile Include="..\\app\\Services\\ConfigExportService.cs" Link="Services\\ConfigExportService.cs" />
+    <Compile Include="..\\app\\Services\\ConfigExportSnapshotBuilder.cs" Link="Services\\ConfigExportSnapshotBuilder.cs" />
+    <Compile Include="..\\app\\Services\\ConfigImportExecutor.cs" Link="Services\\ConfigImportExecutor.cs" />
+    <Compile Include="..\\app\\Services\\DnsCacheFlusher.cs" Link="Services\\DnsCacheFlusher.cs" />
+    <Compile Include="..\\app\\Services\\DnsConfigurationStore.cs" Link="Services\\DnsConfigurationStore.cs" />
+    <Compile Include="..\\app\\Services\\DnsProviderCatalog.cs" Link="Services\\DnsProviderCatalog.cs" />
     <Compile Include="..\\app\\Services\\DnsService.cs" Link="Services\\DnsService.cs" />
+    <Compile Include="..\\app\\Services\\PresetCatalog.cs" Link="Services\\PresetCatalog.cs" />
+    <Compile Include="..\\app\\Services\\PresetExecutionEngine.cs" Link="Services\\PresetExecutionEngine.cs" />
     <Compile Include="..\\app\\Services\\PresetService.cs" Link="Services\\PresetService.cs" />
+    <Compile Include="..\\app\\Services\\TweakCatalogBootstrap.cs" Link="Services\\TweakCatalogBootstrap.cs" />
+    <Compile Include="..\\app\\Services\\TweakCatalogIndexBuilder.cs" Link="Services\\TweakCatalogIndexBuilder.cs" />
     <Compile Include="..\\app\\Services\\TweakCatalogService.cs" Link="Services\\TweakCatalogService.cs" />
+    <Compile Include="..\\app\\Services\\TweakProviderCatalog.cs" Link="Services\\TweakProviderCatalog.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogModels.cs" Link="Services\\TweakPromotionGateCatalogModels.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogBootstrap.cs" Link="Services\\TweakPromotionGateCatalogBootstrap.cs" />
     <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogService.cs" Link="Services\\TweakPromotionGateCatalogService.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateApplicator.cs" Link="Services\\TweakPromotionGateApplicator.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateMutationEvaluator.cs" Link="Services\\TweakPromotionGateMutationEvaluator.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateQueryService.cs" Link="Services\\TweakPromotionGateQueryService.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogStore.cs" Link="Services\\TweakPromotionGateCatalogStore.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateAuditLogWriter.cs" Link="Services\\TweakPromotionGateAuditLogWriter.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateCatalogLoader.cs" Link="Services\\TweakPromotionGateCatalogLoader.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateCloner.cs" Link="Services\\TweakPromotionGateCloner.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGateIndexBuilder.cs" Link="Services\\TweakPromotionGateIndexBuilder.cs" />
+    <Compile Include="..\\app\\Services\\TweakPromotionGatePathResolver.cs" Link="Services\\TweakPromotionGatePathResolver.cs" />
     <Compile Include="..\\app\\Services\\TweakProviders\\*.cs" Link="Services\\TweakProviders\\%(Filename)%(Extension)" />
     <Compile Include="..\\app\\Utilities\\ContributorMode.cs" Link="Utilities\\ContributorMode.cs" />
     <Compile Include="..\\app\\Utilities\\DocsLocator.cs" Link="Utilities\\DocsLocator.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostBuildInfo.cs" Link="Utilities\\ElevatedHostBuildInfo.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostBuildInfoExtractor.cs" Link="Utilities\\ElevatedHostBuildInfoExtractor.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostCandidateBuilder.cs" Link="Utilities\\ElevatedHostCandidateBuilder.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostCandidateValidator.cs" Link="Utilities\\ElevatedHostCandidateValidator.cs" />
     <Compile Include="..\\app\\Utilities\\ElevatedHostLocator.cs" Link="Utilities\\ElevatedHostLocator.cs" />
+    <Compile Include="..\\app\\Utilities\\ElevatedHostLocatorDiagnostics.cs" Link="Utilities\\ElevatedHostLocatorDiagnostics.cs" />
     <Compile Include="..\\app\\Utilities\\ProcessElevation.cs" Link="Utilities\\ProcessElevation.cs" />
   </ItemGroup>
 

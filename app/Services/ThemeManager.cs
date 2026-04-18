@@ -14,7 +14,7 @@ public record ThemePalette(
 
 public class ThemeManager
 {
-    private static readonly ResourceDictionary _resources = Application.Current.Resources;
+    private static readonly ResourceDictionary _resources = System.Windows.Application.Current.Resources;
 
     public static readonly ThemePalette Nord = new(
         "Nord",
@@ -94,7 +94,7 @@ public class ThemeManager
             // But MergedDictionaries access by Source can be tricky if not absolute.
             // Safer strategy: Remove any dictionary that contains "BackgroundDarkestBrush" and add the new one.
             
-            var mergedDicts = Application.Current.Resources.MergedDictionaries;
+            var mergedDicts = System.Windows.Application.Current.Resources.MergedDictionaries;
             ResourceDictionary? oldDict = null;
 
             foreach (var dict in mergedDicts)

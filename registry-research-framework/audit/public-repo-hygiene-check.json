@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-04-15T11:59:11Z",
+  "generated_utc": "2026-04-15T20:07:03Z",
   "check_status": "PASS",
   "checks": {
     "security_policy_present": true,
@@ -11,8 +11,18 @@
     "pr_template_present": true,
     "codeowners_present": true,
     "cli_docs_present": true,
+    "support_matrix_present": true,
+    "media_doc_present": true,
     "readme_surface_names_current": true,
-    "user_guide_surface_names_current": true
+    "user_guide_surface_names_current": true,
+    "contributing_has_safe_flow_expectations": true,
+    "contributing_has_media_lane_expectations": true,
+    "contributing_has_cli_docs_expectations": true,
+    "contributing_has_release_doc_expectations": true,
+    "pr_template_has_safe_flow_check": true,
+    "pr_template_has_media_and_release_checks": true,
+    "issue_templates_use_current_surface_names": true,
+    "media_doc_has_refresh_rules": true
   },
   "workflow_push_branches": [
     "main"
@@ -57,6 +67,7 @@
     "Docs/product/README.md",
     "Docs/product/cli.md",
     "Docs/product/media.md",
+    "Docs/product/support-matrix.md",
     "Docs/product/user-guide.md",
     "Docs/research/README.md",
     "Docs/research/how-to-read-a-record.md",

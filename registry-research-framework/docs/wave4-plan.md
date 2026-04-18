@@ -12,10 +12,10 @@ Job queue: ghidra-job-queue.jsonl
 Ghidra headless -> C pseudocode -> enrichment cache.
 New bundle field: decompiled_context
 
-## Motor 3: AI Fuzzer (Context-Aware)
-Burada sen giriyorsun devreye lokal ai degil
+## Motor 3: Evidence Triage Queue
+Aktif yon runtime research ve kanit guclendirme.
 Context: Ghidra output + ReactOS cache + mevcut corpus.
-Output: discovery_source=ai-fuzzer candidates.
+Output: discovery_source=triage-queue candidates.
 Triage contract aynı.
 
 ## Motor 4: DPC/ISR Latency Bench
@@ -40,6 +40,6 @@ P1: ETL parser frame extraction
 P2: Symbol resolution + caller_stack bundle field
 P3: Ghidra job queue + auto-trigger
 P4: Ghidra headless job runner
-P5: AI Fuzzer (GPT)
+P5: Evidence triage queue
 P6: DPC/ISR bench
 P7: WinDbg TTD

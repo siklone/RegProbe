@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using System.Management;
 using RegProbe.Application.Models;
 
 namespace RegProbe.Application.Services;
@@ -9,155 +7,32 @@ namespace RegProbe.Application.Services;
 /// </summary>
 public class DnsService
 {
-    private const string BackupFileName = "dns_backup.json";
+    private readonly DnsConfigurationStore _configurationStore = new();
+    private readonly DnsCacheFlusher _cacheFlusher = new();
 
     /// <summary>
     /// Gets predefined DNS providers.
     /// </summary>
     public static List<DnsProvider> GetProviders()
-    {
-        return new List<DnsProvider>
-        {
-            new DnsProvider(
-                Name: "Cloudflare",
-                Description: "Fast and privacy-focused DNS (1.1.1.1)",
-                PrimaryDns: "1.1.1.1",
-                SecondaryDns: "1.0.0.1",
-                Icon: "CF"
-            ),
-            new DnsProvider(
-                Name: "Google",
-                Description: "Reliable and fast DNS (8.8.8.8)",
-                PrimaryDns: "8.8.8.8",
-                SecondaryDns: "8.8.4.4",
-                Icon: "GO"
-            ),
-            new DnsProvider(
-                Name: "Quad9",
-                Description: "Security-focused DNS with malware blocking (9.9.9.9)",
-                PrimaryDns: "9.9.9.9",
-                SecondaryDns: "149.112.112.112",
-                Icon: "Q9"
-            ),
-            new DnsProvider(
-                Name: "OpenDNS",
-                Description: "Family-safe DNS with content filtering (208.67.222.222)",
-                PrimaryDns: "208.67.222.222",
-                SecondaryDns: "208.67.220.220",
-                Icon: "OD"
-            ),
-            new DnsProvider(
-                Name: "Automatic",
-                Description: "Use DNS from DHCP (router default)",
-                PrimaryDns: "",
-                SecondaryDns: "",
-                Icon: "DH"
-            )
-        };
-    }
+        => DnsProviderCatalog.GetProviders();
 
     /// <summary>
     /// Gets current DNS configuration for active network adapter.
     /// </summary>
     public async Task<DnsConfiguration?> GetCurrentDnsAsync()
-    {
-        return await Task.Run(() =>
-        {
-            try
-            {
-                using var searcher = new ManagementObjectSearcher(
-                    "SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = True");
-
-                foreach (ManagementObject adapter in searcher.Get())
-                {
-                    var adapterName = adapter["Description"]?.ToString() ?? "Unknown";
-                    var dnsServers = adapter["DNSServerSearchOrder"] as string[];
-
-                    if (dnsServers == null || dnsServers.Length == 0)
-                    {
-                        return new DnsConfiguration(adapterName, "DHCP", "DHCP", true);
-                    }
-
-                    return new DnsConfiguration(
-                        AdapterName: adapterName,
-                        PrimaryDns: dnsServers.Length > 0 ? dnsServers[0] : "",
-                        SecondaryDns: dnsServers.Length > 1 ? dnsServers[1] : "",
-                        IsDhcp: false
-                    );
-                }
-
-                return null;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        });
-    }
+        => await Task.Run(_configurationStore.GetCurrentDns);
 
     /// <summary>
     /// Sets DNS servers for all active network adapters.
     /// </summary>
     public async Task<bool> SetDnsAsync(DnsProvider provider)
-    {
-        return await Task.Run(() =>
-        {
-            try
-            {
-                using var searcher = new ManagementObjectSearcher(
-                    "SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = True");
-
-                foreach (ManagementObject adapter in searcher.Get())
-                {
-                    if (string.IsNullOrEmpty(provider.PrimaryDns))
-                    {
-                        adapter.InvokeMethod("SetDNSServerSearchOrder", new object[] { null! });
-                    }
-                    else
-                    {
-                        var dnsServers = new[] { provider.PrimaryDns, provider.SecondaryDns };
-                        adapter.InvokeMethod("SetDNSServerSearchOrder", new object[] { dnsServers });
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        });
-    }
+        => await Task.Run(() => _configurationStore.SetDns(provider));
 
     /// <summary>
     /// Flushes DNS resolver cache.
     /// </summary>
     public async Task<bool> FlushDnsCacheAsync()
-    {
-        return await Task.Run(() =>
-        {
-            try
-            {
-                var psi = new ProcessStartInfo
-                {
-                    FileName = "ipconfig",
-                    Arguments = "/flushdns",
-                    CreateNoWindow = true,
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true
-                };
-
-                using var process = Process.Start(psi);
-                process?.WaitForExit();
-
-                return process?.ExitCode == 0;
-            }
-            catch
-            {
-                return false;
-            }
-        });
-    }
+        => await Task.Run(_cacheFlusher.FlushDnsCache);
 
     /// <summary>
     /// Detects which provider is currently in use.

@@ -1,19 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using RegProbe.Application.Services.TweakProviders;
-using RegProbe.Application.Utilities;
 using RegProbe.Core;
 using RegProbe.Core.Services;
 using RegProbe.Engine;
 using RegProbe.Engine.Services;
-using RegProbe.Infrastructure;
-using RegProbe.Infrastructure.Elevation;
-using RegProbe.Infrastructure.Registry;
 
 namespace RegProbe.Application.Services;
 
@@ -49,37 +42,13 @@ public sealed class TweakCatalogService : ITweakCatalog
 
     public TweakCatalogService()
     {
-        var paths = AppPaths.FromEnvironment();
-        paths.EnsureDirectories();
-        var logger = new FileAppLogger(paths);
-        var logStore = new FileTweakLogStore(paths);
-        var rollbackStore = new RollbackStateStore(paths);
-        _pipeline = new TweakExecutionPipeline(logger, logStore, rollbackStore);
-
-        IsElevated = ProcessElevation.IsElevated();
-        ElevatedHostPath = ElevatedHostLocator.GetExecutablePath();
-        IsElevatedHostAvailable = File.Exists(ElevatedHostPath);
-        var sessionToken = ElevatedHostDefaults.CreateSessionToken();
-        var parentProcessId = Process.GetCurrentProcess().Id;
-
-        var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
-        {
-            HostExecutablePath = ElevatedHostPath,
-            PipeName = ElevatedHostDefaults.GetPipeNameForProcess(parentProcessId, sessionToken),
-            ParentProcessId = parentProcessId,
-            SessionToken = sessionToken
-        });
-
-        var elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
-        _context = new TweakContext(
-            new RoutingRegistryAccessor(new LocalRegistryAccessor(), elevatedRegistryAccessor),
-            elevatedRegistryAccessor,
-            new ElevatedServiceManager(elevatedHostClient),
-            new ElevatedScheduledTaskManager(elevatedHostClient),
-            new ElevatedFileSystemAccessor(elevatedHostClient),
-            new ElevatedCommandRunner(elevatedHostClient));
-
-        _providers = BuildProviders();
+        var bootstrap = TweakCatalogBootstrap.Create();
+        _pipeline = bootstrap.Pipeline;
+        _context = bootstrap.Context;
+        IsElevated = bootstrap.IsElevated;
+        IsElevatedHostAvailable = bootstrap.IsElevatedHostAvailable;
+        ElevatedHostPath = bootstrap.ElevatedHostPath;
+        _providers = TweakProviderCatalog.CreateDefault();
     }
 
     public bool IsElevated { get; }
@@ -95,21 +64,9 @@ public sealed class TweakCatalogService : ITweakCatalog
                 return _cache;
             }
 
-            var entries = new List<TweakCatalogEntry>();
-            foreach (var provider in _providers)
-            {
-                foreach (var tweak in provider.CreateTweaks(_pipeline, _context, IsElevated))
-                {
-                    entries.Add(new TweakCatalogEntry(provider.CategoryName, tweak));
-                }
-            }
-
-            _cache = entries;
-            _byId = entries
-                .Select(entry => entry.Tweak)
-                .Where(tweak => !string.IsNullOrWhiteSpace(tweak.Id))
-                .GroupBy(tweak => tweak.Id, StringComparer.OrdinalIgnoreCase)
-                .ToDictionary(group => group.Key, group => group.First(), StringComparer.OrdinalIgnoreCase);
+            var index = TweakCatalogIndexBuilder.Build(_providers, _pipeline, _context, IsElevated);
+            _cache = index.Entries;
+            _byId = index.ById;
 
             return _cache;
         }
@@ -148,23 +105,4 @@ public sealed class TweakCatalogService : ITweakCatalog
         IProgress<TweakExecutionUpdate>? progress = null,
         CancellationToken ct = default)
         => _pipeline.ExecuteStepAsync(tweak, action, progress, ct);
-
-    private static IReadOnlyList<ITweakProvider> BuildProviders()
-    {
-        return new ITweakProvider[]
-        {
-            new SystemTweakProvider(),
-            new SystemRegistryTweakProvider(),
-            new PrivacyTweakProvider(),
-            new SecurityTweakProvider(),
-            new NetworkTweakProvider(),
-            new PowerTweakProvider(),
-            new PeripheralTweakProvider(),
-            new VisibilityTweakProvider(),
-            new PerformanceTweakProvider(),
-            new AudioTweakProvider(),
-            new MiscTweakProvider(),
-            new DeveloperTweakProvider()
-        };
-    }
 }

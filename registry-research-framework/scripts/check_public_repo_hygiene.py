@@ -51,11 +51,14 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
 
     security_path = repo_root / "SECURITY.md"
     readme_path = repo_root / "README.md"
+    contributing_path = repo_root / "CONTRIBUTING.md"
     workflow_path = repo_root / ".github" / "workflows" / "dotnet.yml"
     placeholder_test_path = repo_root / "tests" / "UnitTest1.cs"
     codeowners_path = repo_root / ".github" / "CODEOWNERS"
     pr_template_path = repo_root / ".github" / "PULL_REQUEST_TEMPLATE.md"
     cli_docs_path = repo_root / "Docs" / "product" / "cli.md"
+    support_matrix_path = repo_root / "Docs" / "product" / "support-matrix.md"
+    media_doc_path = repo_root / "Docs" / "product" / "media.md"
     issue_template_dir = repo_root / ".github" / "ISSUE_TEMPLATE"
     required_issue_templates = [
         issue_template_dir / "bug-report.yml",
@@ -66,8 +69,13 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
     workflow_push_branches = parse_push_branches(workflow_path.read_text(encoding="utf-8")) if workflow_path.exists() else []
 
     readme_text = readme_path.read_text(encoding="utf-8")
+    contributing_text = contributing_path.read_text(encoding="utf-8") if contributing_path.exists() else ""
+    pr_template_text = pr_template_path.read_text(encoding="utf-8") if pr_template_path.exists() else ""
     user_guide_path = repo_root / "Docs" / "product" / "user-guide.md"
     user_guide_text = user_guide_path.read_text(encoding="utf-8") if user_guide_path.exists() else ""
+    media_doc_text = media_doc_path.read_text(encoding="utf-8") if media_doc_path.exists() else ""
+    bug_report_text = (issue_template_dir / "bug-report.yml").read_text(encoding="utf-8") if (issue_template_dir / "bug-report.yml").exists() else ""
+    feature_request_text = (issue_template_dir / "feature-request.yml").read_text(encoding="utf-8") if (issue_template_dir / "feature-request.yml").exists() else ""
 
     checks = {
         "security_policy_present": security_path.exists(),
@@ -79,8 +87,18 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         "pr_template_present": pr_template_path.exists(),
         "codeowners_present": codeowners_path.exists(),
         "cli_docs_present": cli_docs_path.exists(),
+        "support_matrix_present": support_matrix_path.exists(),
+        "media_doc_present": media_doc_path.exists(),
         "readme_surface_names_current": all(token in readme_text for token in ("`Tweaks`", "`Recovery`", "`Diagnostics`")) and "`Configuration` is the main workspace" not in readme_text,
         "user_guide_surface_names_current": all(token in user_guide_text for token in ("`Tweaks`", "`Recovery`", "`Diagnostics`")) and "`Configuration` is the main tweak workspace" not in user_guide_text,
+        "contributing_has_safe_flow_expectations": "Detect -> Apply -> Verify -> Rollback" in contributing_text and "integration coverage" in contributing_text,
+        "contributing_has_media_lane_expectations": "Docs/product/media.md" in contributing_text,
+        "contributing_has_cli_docs_expectations": "Docs/product/cli.md" in contributing_text,
+        "contributing_has_release_doc_expectations": "Docs/product/support-matrix.md" in contributing_text,
+        "pr_template_has_safe_flow_check": "SAFE Flow Impact" in pr_template_text and "integration coverage should be updated" in pr_template_text,
+        "pr_template_has_media_and_release_checks": "Screenshot or media lane updated if UI changed" in pr_template_text and "Support matrix or release docs updated if package contract changed" in pr_template_text,
+        "issue_templates_use_current_surface_names": all(token in bug_report_text for token in ("Tweaks", "Recovery", "Diagnostics")) and all(token in feature_request_text for token in ("Tweaks", "Recovery", "Diagnostics")),
+        "media_doc_has_refresh_rules": "When To Refresh" in media_doc_text and "do not merge a UI rename" in media_doc_text,
     }
 
     errors: list[str] = []
@@ -104,10 +122,30 @@ def build_public_repo_hygiene_report(repo_root: Path) -> dict[str, Any]:
         errors.append(".github/CODEOWNERS is missing.")
     if not checks["cli_docs_present"]:
         errors.append("Docs/product/cli.md is missing.")
+    if not checks["support_matrix_present"]:
+        errors.append("Docs/product/support-matrix.md is missing.")
+    if not checks["media_doc_present"]:
+        errors.append("Docs/product/media.md is missing.")
     if not checks["readme_surface_names_current"]:
         errors.append("README.md still drifts from the shipped Tweaks/Recovery/Diagnostics surface language.")
     if not checks["user_guide_surface_names_current"]:
         errors.append("Docs/product/user-guide.md still drifts from the shipped Tweaks/Recovery/Diagnostics surface language.")
+    if not checks["contributing_has_safe_flow_expectations"]:
+        errors.append("CONTRIBUTING.md no longer carries the SAFE flow integration expectation.")
+    if not checks["contributing_has_media_lane_expectations"]:
+        errors.append("CONTRIBUTING.md is missing the product media lane expectation.")
+    if not checks["contributing_has_cli_docs_expectations"]:
+        errors.append("CONTRIBUTING.md is missing the CLI docs update expectation.")
+    if not checks["contributing_has_release_doc_expectations"]:
+        errors.append("CONTRIBUTING.md is missing the release/support-matrix update expectation.")
+    if not checks["pr_template_has_safe_flow_check"]:
+        errors.append("PULL_REQUEST_TEMPLATE.md is missing the SAFE flow integration reminder.")
+    if not checks["pr_template_has_media_and_release_checks"]:
+        errors.append("PULL_REQUEST_TEMPLATE.md is missing the media or release contract checklist items.")
+    if not checks["issue_templates_use_current_surface_names"]:
+        errors.append("Issue templates drifted from the shipped Tweaks/Recovery/Diagnostics surface names.")
+    if not checks["media_doc_has_refresh_rules"]:
+        errors.append("Docs/product/media.md is missing the media refresh or rename-drift rules.")
 
     return {
         "generated_utc": datetime.now(UTC).isoformat(timespec="seconds").replace("+00:00", "Z"),

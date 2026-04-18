@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,8 +10,6 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using RegProbe.Core;
-using RegProbe.Infrastructure.Elevation;
-using RegProbe.Infrastructure.Registry;
 using RegProbe.Infrastructure.Services;
 using RegProbe.Engine;
 using RegProbe.Engine.Services;
@@ -28,10 +24,6 @@ using RegProbe.Engine.Tweaks.Power;
 using RegProbe.App.Utilities;
 using RegProbe.App.Services;
 using RegProbe.Infrastructure;
-using RegProbe.Core.Commands;
-using RegProbe.Core.Files;
-using RegProbe.Core.Registry;
-using RegProbe.Core.Tasks;
 
 namespace RegProbe.App.ViewModels;
 
@@ -107,42 +99,17 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         _inventoryCoordinator.PropertyChanged += OnInventoryCoordinatorPropertyChanged;
 		_pipeline = new TweakExecutionPipeline(logger, _logStore, _rollbackStore);
 		_isElevated = ProcessElevation.IsElevated();
-		_elevatedHostExecutablePath = ElevatedHostLocator.GetExecutablePath();
-		_isElevatedHostAvailable = File.Exists(_elevatedHostExecutablePath);
-		var sessionToken = ElevatedHostDefaults.CreateSessionToken();
-		var parentProcessId = Process.GetCurrentProcess().Id;
-		var elevatedHostClient = new ElevatedHostClient(new ElevatedHostClientOptions
-		{
-			HostExecutablePath = _elevatedHostExecutablePath,
-			PipeName = ElevatedHostDefaults.GetPipeNameForProcess(parentProcessId, sessionToken),
-			ParentProcessId = parentProcessId,
-			SessionToken = sessionToken
-		});
-        var machineLocalRegistryAccessor = new LocalRegistryAccessor();
-        var elevatedRegistryAccessor = new ElevatedRegistryAccessor(elevatedHostClient);
-        var localRegistryAccessor = new RoutingRegistryAccessor(machineLocalRegistryAccessor, elevatedRegistryAccessor);
-        var hybridRegistryAccessor = new HybridRegistryAccessor(machineLocalRegistryAccessor, elevatedRegistryAccessor);
-        IRegistryAccessor scanAwareElevatedRegistryAccessor = _isElevated ? elevatedRegistryAccessor : hybridRegistryAccessor;
-        var elevatedServiceManager = new ElevatedServiceManager(elevatedHostClient);
-        var elevatedTaskManager = new ElevatedScheduledTaskManager(elevatedHostClient);
-        var elevatedFileSystemAccessor = new ElevatedFileSystemAccessor(elevatedHostClient);
-        var elevatedCommandRunner = new ElevatedCommandRunner(elevatedHostClient);
-        var systemRoot = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-        var system32Path = Path.Combine(systemRoot, "System32");
-        var mobsyncPath = Path.Combine(system32Path, "mobsync.exe");
-        var mobsyncDisabledPath = mobsyncPath + ".disabled";
-        var psrPath = Path.Combine(system32Path, "psr.exe");
-        var psrDisabledPath = psrPath + ".disabled";
-		var helpPanePath = Path.Combine(system32Path, "HelpPane.exe");
-        var helpPaneDisabledPath = helpPanePath + ".disabled";
+        var workspaceInfrastructure = TweaksWorkspaceInfrastructure.Create(_isElevated);
+		_elevatedHostExecutablePath = workspaceInfrastructure.ElevatedHostExecutablePath;
+		_isElevatedHostAvailable = workspaceInfrastructure.IsElevatedHostAvailable;
         _catalogCoordinator = new WorkspaceCatalogCoordinator(
             providers,
-            localRegistryAccessor,
-            scanAwareElevatedRegistryAccessor,
-            elevatedServiceManager,
-            elevatedTaskManager,
-            elevatedFileSystemAccessor,
-            elevatedCommandRunner,
+            workspaceInfrastructure.LocalRegistryAccessor,
+            workspaceInfrastructure.ScanAwareElevatedRegistryAccessor,
+            workspaceInfrastructure.ElevatedServiceManager,
+            workspaceInfrastructure.ElevatedTaskManager,
+            workspaceInfrastructure.ElevatedFileSystemAccessor,
+            workspaceInfrastructure.ElevatedCommandRunner,
             _pipeline,
             _isElevated,
             _appLogger);
@@ -208,7 +175,7 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
 	public string ElevatedHostStatusMessage => IsElevatedHostAvailable
 		? string.Empty
-		: $"ElevatedHost not found. Expected at: {_elevatedHostExecutablePath}. Build RegProbe.ElevatedHost or set {ElevatedHostDefaults.OverridePathEnvVar}.";
+		: $"ElevatedHost not found. Expected at: {_elevatedHostExecutablePath}. Build RegProbe.ElevatedHost or set {TweaksWorkspaceInfrastructure.OverridePathEnvironmentVariable}.";
 
 	public ObservableCollection<TweakItemViewModel> Tweaks { get; }
 
@@ -286,11 +253,12 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
         ? $"{CurrentWorkspaceItemCount} recovery actions"
         : $"{CurrentWorkspaceItemCount} tweaks";
 
-    private WorkspaceSummarySnapshot CurrentWorkspaceSummary => WorkspaceSummarySnapshot.Create(GetVisibleWorkspaceTweaks(), IsElevated);
+    private WorkspaceSummaryPresentation CurrentWorkspaceSummary => WorkspaceSummaryPresentation.Create(
+        GetVisibleWorkspaceTweaks(),
+        IsElevated,
+        IsMaintenanceWorkspaceSelected);
 
-    public string WorkspacePendingSummaryLabel => IsMaintenanceWorkspaceSelected
-        ? "Pending recovery"
-        : "Pending changes";
+    public string WorkspacePendingSummaryLabel => CurrentWorkspaceSummary.PendingLabel;
 
     public string WorkspacePendingSummaryValue => CurrentWorkspaceSummary.Pending.ValueText;
 
@@ -322,37 +290,13 @@ public sealed class TweaksViewModel : ViewModelBase, IDisposable
 
     public string WorkspaceVerificationSummaryState => CurrentWorkspaceSummary.Verification.State;
 
-    public string WorkspaceVerificationStripText => WorkspaceVerificationSummaryState == "ok"
-        ? "Verified"
-        : "Needs review";
+    public string WorkspaceVerificationStripText => CurrentWorkspaceSummary.VerificationStripText;
 
-    public string WorkspaceRiskStripText
-    {
-        get
-        {
-            var visibleTweaks = GetVisibleWorkspaceTweaks();
-            if (visibleTweaks.Any(t => t.Risk == TweakRiskLevel.Risky))
-            {
-                return "Mixed risk";
-            }
+    public string WorkspaceRiskStripText => CurrentWorkspaceSummary.RiskStripText;
 
-            if (visibleTweaks.Any(t => t.Risk == TweakRiskLevel.Advanced))
-            {
-                return "Managed risk";
-            }
+    public string WorkspacePendingStripText => CurrentWorkspaceSummary.PendingStripText;
 
-            return "Low risk";
-        }
-    }
-
-    public string WorkspacePendingStripText => $"{WorkspacePendingSummaryValue} pending";
-
-    public string WorkspaceRollbackStripText => WorkspaceRollbackSummaryState switch
-    {
-        "ok" => "Rollback ready",
-        "attention" => "Rollback partial",
-        _ => "Rollback missing"
-    };
+    public string WorkspaceRollbackStripText => CurrentWorkspaceSummary.RollbackStripText;
 
     public string WorkspaceCategoryHeader => _shellState.WorkspaceCategoryHeader;
 

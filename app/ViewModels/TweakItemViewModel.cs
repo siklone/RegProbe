@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,37 +18,13 @@ using RegProbe.Engine.Tweaks.Commands;
 using RegProbe.Engine.Tweaks.Commands.Cleanup;
 using RegProbe.Infrastructure;
 using RegProbe.App.Services;
-using RegProbe.App.Utilities;
 
 namespace RegProbe.App.ViewModels;
 
 public sealed class TweakItemViewModel : ViewModelBase
 {
-    private const string PublicResearchGateExplanation = "Evidence pending";
     private const int MaxBatchDetailLines = 200;
     private const int MaxDisplayMessageLength = 1024;
-    private static readonly SolidColorBrush AppliedStatusBrush = CreateFrozenBrush("#A3BE8C");
-    private static readonly SolidColorBrush NotAppliedStatusBrush = CreateFrozenBrush("#666666");
-    private static readonly SolidColorBrush NotAppliedStatusBorderBrush = CreateFrozenBrush("#333333");
-    private static readonly SolidColorBrush MixedStatusBrush = CreateFrozenBrush("#D08770");
-    private static readonly SolidColorBrush ErrorStatusBrush = CreateFrozenBrush("#BF616A");
-    private static readonly SolidColorBrush UnknownStatusBrush = CreateFrozenBrush("#88C0D0");
-
-    private static readonly SolidColorBrush AppliedStatusBackgroundBrush = CreateFrozenBrush("#2AA3BE8C");
-    private static readonly SolidColorBrush NotAppliedStatusBackgroundBrush = CreateFrozenBrush("#1A1A1A");
-    private static readonly SolidColorBrush MixedStatusBackgroundBrush = CreateFrozenBrush("#2AD08770");
-    private static readonly SolidColorBrush ErrorStatusBackgroundBrush = CreateFrozenBrush("#2ABF616A");
-    private static readonly SolidColorBrush UnknownStatusBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
-    private static readonly SolidColorBrush ClassABrush = CreateFrozenBrush("#A3BE8C");
-    private static readonly SolidColorBrush ClassABackgroundBrush = CreateFrozenBrush("#2AA3BE8C");
-    private static readonly SolidColorBrush ClassBBrush = CreateFrozenBrush("#88C0D0");
-    private static readonly SolidColorBrush ClassBBackgroundBrush = CreateFrozenBrush("#2A88C0D0");
-    private static readonly SolidColorBrush ClassCBrush = CreateFrozenBrush("#EBCB8B");
-    private static readonly SolidColorBrush ClassCBackgroundBrush = CreateFrozenBrush("#2AEBCB8B");
-    private static readonly SolidColorBrush ClassDBrush = CreateFrozenBrush("#D08770");
-    private static readonly SolidColorBrush ClassDBackgroundBrush = CreateFrozenBrush("#2AD08770");
-    private static readonly SolidColorBrush ClassEBrush = CreateFrozenBrush("#4C566A");
-    private static readonly SolidColorBrush ClassEBackgroundBrush = CreateFrozenBrush("#2A4C566A");
     private static readonly TweakInsightFormatter InsightFormatter = new();
 
     private readonly ITweak _tweak;
@@ -178,7 +153,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _openReferenceLinkCommand = new RelayCommand(OpenReferenceLink, parameter => parameter is string url && !string.IsNullOrWhiteSpace(url));
         _toggleFavoriteCommand = new RelayCommand(_ => ToggleFavorite());
 
-        _impactAreaLabel = DetermineImpactAreaLabel(_tweak);
+        _impactAreaLabel = TweakCategoryPresentation.DetermineImpactAreaLabel(_tweak);
         _batchDetails.CollectionChanged += (_, __) =>
         {
             OnPropertyChanged(nameof(HasBatchDetails));
@@ -197,12 +172,12 @@ public sealed class TweakItemViewModel : ViewModelBase
     /// <summary>
     /// Rich tooltip explaining implications of this tweak.
     /// </summary>
-    public string HelpTooltip => GenerateHelpTooltip();
+    public string HelpTooltip => TweakItemPresentationFormatter.BuildHelpTooltip(Description, Implications);
 
     /// <summary>
     /// Implications of enabling/disabling this tweak.
     /// </summary>
-    public string Implications => GenerateImplications();
+    public string Implications => TweakItemPresentationFormatter.BuildImplications(Risk, Category, RequiresElevation);
 
     public TweakRiskLevel Risk => _tweak.Risk;
 
@@ -212,20 +187,9 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool IsRisky => Risk == TweakRiskLevel.Risky;
 
-    public string RiskBadgeText => Risk switch
-    {
-        TweakRiskLevel.Safe => "SAFE",
-        TweakRiskLevel.Advanced => "ADVANCED",
-        TweakRiskLevel.Risky => "RISKY",
-        _ => "SAFE"
-    };
+    public string RiskBadgeText => TweakSurfacePresentation.BuildRiskBadgeText(Risk);
 
-    public string RepairsRiskHint => Risk switch
-    {
-        TweakRiskLevel.Advanced => "Advanced repair",
-        TweakRiskLevel.Risky => "Risky repair",
-        _ => string.Empty
-    };
+    public string RepairsRiskHint => TweakSurfacePresentation.BuildRepairsRiskHint(Risk);
 
     public bool HasRepairsRiskHint => !string.IsNullOrWhiteSpace(RepairsRiskHint);
 
@@ -251,158 +215,22 @@ public sealed class TweakItemViewModel : ViewModelBase
         IsScanFriendly
         && !WillPromptForDetect;
 
-    public string ElevationBadgeText => "Admin";
+    public string ElevationBadgeText => TweakSurfacePresentation.ElevationBadgeText;
 
-    public string ElevationTooltip => IsElevated
-        ? "Admin required. Runs via ElevatedHost."
-        : "Admin required. You'll get a UAC prompt and it runs via ElevatedHost.";
+    public string ElevationTooltip => TweakSurfacePresentation.BuildElevationTooltip(IsElevated);
 
-    public string ElevationWarningText => WillPromptForElevation
-        ? "Requires elevation. Approve the UAC prompt to continue."
-        : string.Empty;
+    public string ElevationWarningText => TweakSurfacePresentation.BuildElevationWarningText(WillPromptForElevation);
 
-    public string Category => ExtractCategory(Id);
+    public string Category => TweakCategoryPresentation.ExtractCategory(Id);
 
-    public string CategoryIcon => GetCategoryIcon(Category);
+    public string CategoryIcon => TweakCategoryPresentation.GetCategoryIcon(Category);
 
-    public string StatusTooltip => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => "Mixed. Some sub-items match the desired configuration.",
-        TweakAppliedStatus.Applied => "Applied. Current state matches the desired configuration.",
-        TweakAppliedStatus.NotApplied => "Not applied. Detected state differs from the desired configuration.",
-        TweakAppliedStatus.Error => "Error. Open Execution Log for details.",
-        _ when RequiresAdminScan => "Unknown. Run an admin detect to read current state.",
-        _ => "Unknown. Click Detect to read current state."
-    };
+    public string StatusTooltip => TweakStatusPresentation.BuildTooltip(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public string ActionsHelpTooltip =>
-        "Detect: Reads current state (no changes)\n" +
-        "Preview: Dry run (no changes)\n" +
-        "Apply: Detect -> Apply -> Verify (Rollback on failure)\n" +
-        "Verify: Confirms current state matches desired\n" +
-        "Restore Previous: Puts back the last state captured before Apply\n" +
-        "Restore Default: Applies the product's default option when the tweak defines one";
-
-    private static string ExtractCategory(string id)
-    {
-        if (string.IsNullOrWhiteSpace(id))
-        {
-            return Utilities.StringPool.Intern("Other");
-        }
-
-        // Plugins follow: plugin.<pluginId>.<tweakId>...
-        // Group plugin tweaks by pluginId in the UI (e.g. DevTools).
-        if (id.StartsWith("plugin.", StringComparison.OrdinalIgnoreCase))
-        {
-            var parts = id.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            if (parts.Length >= 2)
-            {
-                return Utilities.StringPool.GetCategory(parts[1]);
-            }
-        }
-
-        var dotIndex = id.IndexOf('.');
-        if (dotIndex <= 0)
-        {
-            var hyphenIndex = id.IndexOf('-');
-            if (hyphenIndex > 0)
-            {
-                var candidate = id[..hyphenIndex];
-                if (IsKnownCategoryPrefix(candidate))
-                {
-                    return Utilities.StringPool.GetCategory(candidate);
-                }
-            }
-
-            return Utilities.StringPool.Intern("Other");
-        }
-
-        var cat = id.Substring(0, dotIndex);
-        return Utilities.StringPool.GetCategory(cat);
-    }
-
-    private static bool IsKnownCategoryPrefix(string candidate) => candidate.ToLowerInvariant() switch
-    {
-        "system" or
-        "security" or
-        "privacy" or
-        "network" or
-        "visibility" or
-        "audio" or
-        "peripheral" or
-        "power" or
-        "performance" or
-        "cleanup" or
-        "explorer" or
-        "notifications" or
-        "devtools" => true,
-        _ => false
-    };
-
-    private static string GetCategoryIcon(string category) => category.ToLowerInvariant() switch
-    {
-        "system" => "SYS",
-        "security" => "SEC",
-        "privacy" => "PRV",
-        "network" => "NET",
-        "visibility" => "UI",
-        "audio" => "AUD",
-        "peripheral" => "DEV",
-        "power" => "PWR",
-        "performance" => "PERF",
-        "cleanup" => "CLN",
-        "explorer" => "EXP",
-        "notifications" => "NTF",
-        "devtools" => "DEV",
-        _ => "CFG"
-    };
-
-    private static string DetermineImpactAreaLabel(ITweak tweak)
-    {
-        var area = tweak switch
-        {
-            RegistryValueTweak or RegistryValueBatchTweak or RegistryValueSetTweak or RegistryValuePresetBatchTweak => "Registry",
-            IChoiceTweak => "Preset",
-            ServiceStartModeBatchTweak => "Service",
-            ScheduledTaskBatchTweak => "Task",
-            SettingsToggleTweak => "Settings",
-            FileCleanupTweak or FileRenameTweak => "File",
-            CommandTweak => "Command",
-            CompositeTweak => "Composite",
-            _ => "Other"
-        };
-        return Utilities.StringPool.GetImpactArea(area);
-    }
-
-    private static string BuildConfigurationFriendlyDescription(string description)
-    {
-        if (string.IsNullOrWhiteSpace(description))
-        {
-            return string.Empty;
-        }
-
-        var normalized = string.Join(" ", description
-            .Split(['\r', '\n', '\t'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
-
-        if (normalized.Length <= 132)
-        {
-            return normalized;
-        }
-
-        var sentenceEnd = normalized.IndexOfAny(['.', '!', '?']);
-        if (sentenceEnd is > 0 and <= 156)
-        {
-            return normalized[..(sentenceEnd + 1)].Trim();
-        }
-
-        var softBreak = normalized.LastIndexOf(' ', 132);
-        if (softBreak < 72)
-        {
-            softBreak = 132;
-        }
-
-        return $"{normalized[..softBreak].Trim()}...";
-    }
+    public string ActionsHelpTooltip => TweakSurfacePresentation.ActionsHelpTooltip;
 
     public ObservableCollection<TweakStepStatusViewModel> Steps { get; }
 
@@ -454,9 +282,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    public string RepairsActionButtonText => string.Equals(ActionButtonText, "Apply", StringComparison.Ordinal)
-        ? "Run"
-        : ActionButtonText;
+    public string RepairsActionButtonText => TweakSurfacePresentation.BuildRepairsActionButtonText(ActionButtonText);
 
     public string RegistryPath
     {
@@ -517,21 +343,10 @@ public sealed class TweakItemViewModel : ViewModelBase
             }
 
             choiceTweak.SelectedChoiceKey = value.Key;
-            TargetValue = value.Label;
-
-            if (!string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceLabel))
-            {
-                CurrentValue = choiceTweak.MatchedChoiceLabel!;
-            }
-
-            if (!string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceKey))
-            {
-                AppliedStatus = string.Equals(choiceTweak.MatchedChoiceKey, value.Key, StringComparison.OrdinalIgnoreCase)
-                    ? TweakAppliedStatus.Applied
-                    : TweakAppliedStatus.NotApplied;
-            }
-
-            StatusMessage = $"Selected '{value.Label}'. Click Apply to use it.";
+            ApplyChoiceStateSnapshot(TweakChoiceStateCoordinator.BuildSelectionSnapshot(
+                value,
+                choiceTweak.MatchedChoiceKey,
+                choiceTweak.MatchedChoiceLabel));
         }
     }
 
@@ -539,70 +354,46 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private TweakGuidance? Guidance => (_tweak as ITweakWithGuidance)?.Guidance;
 
-    public string FriendlyDescription => string.IsNullOrWhiteSpace(Guidance?.CasualSummary)
-        ? Description
-        : Guidance!.CasualSummary;
+    public string FriendlyDescription => TweakItemPresentationFormatter.BuildFriendlyDescription(
+        Guidance?.CasualSummary,
+        Description);
 
-    public string ConfigurationFriendlyDescription => BuildConfigurationFriendlyDescription(FriendlyDescription);
+    public string ConfigurationFriendlyDescription => TweakItemPresentationFormatter.BuildConfigurationFriendlyDescription(FriendlyDescription);
 
     public string GuidanceWhenHelpful => Guidance?.WhenHelpful ?? string.Empty;
 
-    public bool HasGuidanceWhenHelpful => !string.IsNullOrWhiteSpace(GuidanceWhenHelpful);
+    public bool HasGuidanceWhenHelpful => TweakItemPresentationFormatter.HasText(GuidanceWhenHelpful);
 
     public string GuidanceTradeoffs => Guidance?.Tradeoffs ?? string.Empty;
 
-    public bool HasGuidanceTradeoffs => !string.IsNullOrWhiteSpace(GuidanceTradeoffs);
+    public bool HasGuidanceTradeoffs => TweakItemPresentationFormatter.HasText(GuidanceTradeoffs);
 
-    public string DefaultVsPreviousSummary
-    {
-        get
-        {
-            if (!string.IsNullOrWhiteSpace(Guidance?.DefaultVsPrevious))
-            {
-                return Guidance!.DefaultVsPrevious;
-            }
+    public string DefaultVsPreviousSummary => TweakItemPresentationFormatter.BuildDefaultVsPreviousSummary(
+        Guidance?.DefaultVsPrevious,
+        HasDefaultChoice);
 
-            return HasDefaultChoice
-                ? "Restore Previous uses the snapshot captured before Apply. Restore Default applies the tweak's built-in default option."
-                : string.Empty;
-        }
-    }
-
-    public bool HasDefaultVsPreviousSummary => !string.IsNullOrWhiteSpace(DefaultVsPreviousSummary);
+    public bool HasDefaultVsPreviousSummary => TweakItemPresentationFormatter.HasText(DefaultVsPreviousSummary);
 
     public string ProfessionalNotes => Guidance?.ProfessionalNotes ?? string.Empty;
 
-    public bool HasProfessionalNotes => !string.IsNullOrWhiteSpace(ProfessionalNotes);
+    public bool HasProfessionalNotes => TweakItemPresentationFormatter.HasText(ProfessionalNotes);
 
-    public bool HasExtendedGuidance =>
-        HasGuidanceWhenHelpful ||
-        HasGuidanceTradeoffs ||
-        HasDefaultVsPreviousSummary ||
-        HasProfessionalNotes;
+    public bool HasExtendedGuidance => TweakItemPresentationFormatter.HasExtendedGuidance(
+        HasGuidanceWhenHelpful,
+        HasGuidanceTradeoffs,
+        HasDefaultVsPreviousSummary,
+        HasProfessionalNotes);
 
     public bool HasDefaultChoice =>
         _tweak is IChoiceTweak choiceTweak &&
         !string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceKey);
 
-    public string RestoreDefaultButtonText => HasDefaultChoice ? "Restore Default" : string.Empty;
+    public string RestoreDefaultButtonText => TweakItemPresentationFormatter.BuildRestoreDefaultButtonText(HasDefaultChoice);
 
-    public string RestoreDefaultTooltip
-    {
-        get
-        {
-            if (!IsMutationAllowed)
-            {
-                return PublicMutationGatingReason;
-            }
-
-            if (_tweak is not IChoiceTweak choiceTweak || string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceLabel))
-            {
-                return "Restore the product's default option.";
-            }
-
-            return $"Apply '{choiceTweak.DefaultChoiceLabel}' instead of restoring your previously captured value.";
-        }
-    }
+    public string RestoreDefaultTooltip => TweakRollbackPresentation.BuildRestoreDefaultTooltip(
+        IsMutationAllowed,
+        PublicMutationGatingReason,
+        _tweak is IChoiceTweak choiceTweak ? choiceTweak.DefaultChoiceLabel ?? string.Empty : string.Empty);
 
     public bool HasRegistryPath => !string.IsNullOrEmpty(RegistryPath);
 
@@ -691,82 +482,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool HasDetectedState => LastDetectedAtUtc.HasValue;
 
-    public string InventoryFreshnessText
-    {
-        get
-        {
-            if (!LastDetectedAtUtc.HasValue)
-            {
-                return "Not scanned yet";
-            }
+    public string InventoryFreshnessText => TweakInventoryPresentation.BuildInventoryFreshnessText(
+        LastDetectedAtUtc,
+        IsStateFromCache);
 
-            var elapsed = DateTimeOffset.UtcNow - LastDetectedAtUtc.Value;
-            if (elapsed < TimeSpan.Zero)
-            {
-                elapsed = TimeSpan.Zero;
-            }
-
-            string ageText;
-            if (elapsed.TotalMinutes < 1)
-            {
-                ageText = $"{Math.Max(1, (int)elapsed.TotalSeconds)}s ago";
-            }
-            else if (elapsed.TotalHours < 1)
-            {
-                ageText = $"{(int)elapsed.TotalMinutes}m ago";
-            }
-            else if (elapsed.TotalDays < 1)
-            {
-                ageText = $"{(int)elapsed.TotalHours}h ago";
-            }
-            else
-            {
-                ageText = $"{(int)elapsed.TotalDays}d ago";
-            }
-
-            var source = IsStateFromCache ? "Cached" : "Live";
-            return $"{source} {ageText}";
-        }
-    }
-
-    public string ConfigurationInventoryFreshnessText
-    {
-        get
-        {
-            if (!LastDetectedAtUtc.HasValue)
-            {
-                return "Not checked yet";
-            }
-
-            var elapsed = DateTimeOffset.UtcNow - LastDetectedAtUtc.Value;
-            if (elapsed < TimeSpan.Zero)
-            {
-                elapsed = TimeSpan.Zero;
-            }
-
-            string ageText;
-            if (elapsed.TotalMinutes < 1)
-            {
-                ageText = $"{Math.Max(1, (int)elapsed.TotalSeconds)}s ago";
-            }
-            else if (elapsed.TotalHours < 1)
-            {
-                ageText = $"{(int)elapsed.TotalMinutes}m ago";
-            }
-            else if (elapsed.TotalDays < 1)
-            {
-                ageText = $"{(int)elapsed.TotalHours}h ago";
-            }
-            else
-            {
-                ageText = $"{(int)elapsed.TotalDays}d ago";
-            }
-
-            return IsStateFromCache
-                ? $"Checked from cache {ageText}"
-                : $"Checked live {ageText}";
-        }
-    }
+    public string ConfigurationInventoryFreshnessText => TweakInventoryPresentation.BuildConfigurationInventoryFreshnessText(
+        LastDetectedAtUtc,
+        IsStateFromCache);
 
     /// <summary>
     /// Before state for snapshot comparison (same as CurrentValue).
@@ -796,64 +518,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string ImpactAreaLabel => _impactAreaLabel;
 
-    public string ConfigurationImpactAreaText => ImpactAreaLabel switch
-    {
-        "Registry" => "Registry setting",
-        "Preset" => "Preset option",
-        "Service" => "Service setting",
-        "Task" => "Scheduled task",
-        "Settings" => "Windows setting",
-        "File" => "File cleanup",
-        "Command" => "Command action",
-        "Composite" => "Multi-step change",
-        _ => ImpactAreaLabel
-    };
+    public string ConfigurationImpactAreaText => TweakItemPresentationFormatter.BuildConfigurationImpactAreaText(ImpactAreaLabel);
 
-    public string EffectSummary
-    {
-        get
-        {
-            var segments = new List<string>
-            {
-                Risk switch
-                {
-                    TweakRiskLevel.Safe => "Low risk and designed to be reversible.",
-                    TweakRiskLevel.Advanced => "Changes Windows behavior more noticeably, so review before applying.",
-                    TweakRiskLevel.Risky => "Use carefully and verify the result after applying.",
-                    _ => "Review before applying."
-                }
-            };
-
-            var scope = Category.ToLowerInvariant() switch
-            {
-                "privacy" => "Main impact: privacy and background data collection.",
-                "performance" => "Main impact: responsiveness, latency, or background load.",
-                "security" => "Main impact: security posture and protection behavior.",
-                "network" => "Main impact: connectivity, DNS, or transport behavior.",
-                "visibility" => "Main impact: Windows UI visibility and shell behavior.",
-                "power" => "Main impact: power plans, timers, or idle behavior.",
-                "system" => "Main impact: Windows platform defaults and system services.",
-                _ => string.Empty
-            };
-
-            if (!string.IsNullOrWhiteSpace(scope))
-            {
-                segments.Add(scope);
-            }
-
-            if (RequiresElevation)
-            {
-                segments.Add("Requires administrator approval.");
-            }
-
-            if (WillPromptForDetect)
-            {
-                segments.Add("Status check may ask for an elevated prompt on this PC.");
-            }
-
-            return string.Join(" ", segments);
-        }
-    }
+    public string EffectSummary => TweakItemPresentationFormatter.BuildEffectSummary(
+        Risk,
+        Category,
+        RequiresElevation,
+        WillPromptForDetect);
 
     public string DetectedFromSummary => BuildInsightSnapshot().DetectedFrom;
 
@@ -865,87 +536,28 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool HasCompactInfoLine => !string.IsNullOrWhiteSpace(ImpactAreaLabel);
 
-    public string CompactInfoLine
-    {
-        get
-        {
-            if (!HasCompactInfoLine)
-            {
-                return string.Empty;
-            }
+    public string CompactInfoLine => TweakItemPresentationFormatter.BuildCompactInfoLine(
+        HasCompactInfoLine,
+        CurrentValue,
+        TargetValue);
 
-            var current = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : NormalizeDisplayValue(CurrentValue);
-            var target = string.IsNullOrWhiteSpace(TargetValue) ? "Optimized" : NormalizeDisplayValue(TargetValue);
-            return $"{current} -> {target}";
-        }
-    }
+    public string ConfigurationCompactInfoLine => TweakItemPresentationFormatter.BuildConfigurationCompactInfoLine(
+        CurrentValue,
+        TargetValue);
 
-    public string ConfigurationCompactInfoLine
-    {
-        get
-        {
-            var target = string.IsNullOrWhiteSpace(TargetValue) ? "Preferred state" : NormalizeDisplayValue(TargetValue);
-            var current = string.IsNullOrWhiteSpace(CurrentValue) ? string.Empty : NormalizeDisplayValue(CurrentValue);
+    public string CompactInfoTooltip => TweakItemPresentationFormatter.BuildCompactInfoTooltip(
+        ImpactAreaLabel,
+        CompactInfoLine,
+        HasBatchSummaryLine,
+        BatchSummaryLine);
 
-            if (string.IsNullOrWhiteSpace(current) || current.Equals("Unknown", StringComparison.OrdinalIgnoreCase))
-            {
-                return $"Preferred: {target}";
-            }
-
-            if (current.Equals(target, StringComparison.OrdinalIgnoreCase))
-            {
-                return $"Current: {current}";
-            }
-
-            return $"Current: {current}  ·  Preferred: {target}";
-        }
-    }
-
-    private static string NormalizeDisplayValue(string value)
-    {
-        var normalized = value.Trim();
-        normalized = normalized.Replace("(0x", " (0x", StringComparison.Ordinal);
-        normalized = normalized.Replace("(0X", " (0X", StringComparison.Ordinal);
-        return normalized;
-    }
-
-    public string CompactInfoTooltip
-    {
-        get
-        {
-            var baseText = $"{ImpactAreaLabel}: {CompactInfoLine}";
-            if (HasBatchSummaryLine)
-            {
-                return $"{baseText}\n{BatchSummaryLine}";
-            }
-
-            return baseText;
-        }
-    }
-
-    public string RowMetaText
-    {
-        get
-        {
-            var segments = new List<string>();
-
-            if (!string.IsNullOrWhiteSpace(ImpactAreaLabel))
-            {
-                segments.Add(ImpactAreaLabel);
-            }
-
-            if (!string.IsNullOrWhiteSpace(CurrentValue) || !string.IsNullOrWhiteSpace(TargetValue))
-            {
-                var current = string.IsNullOrWhiteSpace(CurrentValue) ? "Unknown" : CurrentValue;
-                var target = string.IsNullOrWhiteSpace(TargetValue) ? "Optimized" : TargetValue;
-                segments.Add($"{current} -> {target}");
-            }
-
-            segments.Add(HasDetectedState ? InventoryFreshnessText : LastUpdatedText);
-
-            return string.Join(" / ", segments.Where(segment => !string.IsNullOrWhiteSpace(segment)));
-        }
-    }
+    public string RowMetaText => TweakItemPresentationFormatter.BuildRowMetaText(
+        ImpactAreaLabel,
+        CurrentValue,
+        TargetValue,
+        HasDetectedState,
+        InventoryFreshnessText,
+        LastUpdatedText);
 
     public bool IsRecommended
     {
@@ -975,21 +587,20 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string EvidenceClassDescription => _evidenceClassDescription;
 
-    public string EvidenceClassBadgeText => EvidenceClassId;
+    public string EvidenceClassBadgeText => TweakEvidenceClassPresentation.BuildBadgeText(EvidenceClassId);
 
     public bool IsEvidenceConfirmed => IsEvidenceClassActionable;
 
-    public string EvidenceStateText => IsEvidenceConfirmed ? "Confirmed" : "Evidence pending";
+    public string EvidenceStateText => TweakEvidenceClassPresentation.BuildEvidenceStateText(IsEvidenceConfirmed);
 
     public string EvidenceClassActionState => _evidenceClassActionState;
 
-    public string EvidenceClassTooltip => $"{EvidenceClassTitle}. {EvidenceClassDescription}";
+    public string EvidenceClassTooltip => TweakEvidenceClassPresentation.BuildTooltip(EvidenceClassTitle, EvidenceClassDescription);
 
     public string EvidenceClassGatingReason => _evidenceClassGatingReason;
 
-    public string PublicEvidenceClassGatingReason => ContributorMode.IsEnabled
-        ? EvidenceClassGatingReason
-        : PublicResearchGateExplanation;
+    public string PublicEvidenceClassGatingReason =>
+        TweakVerdictPresentation.BuildPublicEvidenceClassGatingReason(EvidenceClassGatingReason);
 
     public bool IsEvidenceClassActionable => _isEvidenceClassActionable;
 
@@ -1009,291 +620,105 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool IsMutationAllowed => IsEvidenceClassActionable && (IsPromotionActionable || CanDebugOverridePromotionGate);
 
-    public string PublicMutationGatingReason
-    {
-        get
-        {
-            if (!IsEvidenceClassActionable)
-            {
-                return PublicEvidenceClassGatingReason;
-            }
+    public string PublicMutationGatingReason =>
+        TweakVerdictPresentation.BuildPublicMutationGatingReason(
+            IsEvidenceClassActionable,
+            PublicEvidenceClassGatingReason,
+            IsMutationAllowed,
+            PromotionGatingReason);
 
-            if (IsMutationAllowed)
-            {
-                return string.Empty;
-            }
+    public bool IsResearchGated => TweakVerdictPresentation.IsResearchGated(ShowInApp, IsMutationAllowed);
 
-            return ContributorMode.IsEnabled
-                ? PromotionGatingReason
-                : PublicResearchGateExplanation;
-        }
-    }
+    public bool HasEvidenceClass => TweakEvidenceClassPresentation.HasEvidenceClass(EvidenceClassId);
 
-    public bool IsResearchGated => ShowInApp && !IsMutationAllowed;
+    public Brush EvidenceClassBrush => TweakEvidenceClassPresentation.GetBrush(EvidenceClassId);
 
-    public bool HasEvidenceClass => !string.IsNullOrWhiteSpace(_evidenceClassId);
+    public Brush EvidenceClassBackgroundBrush => TweakEvidenceClassPresentation.GetBackgroundBrush(EvidenceClassId);
 
-    public Brush EvidenceClassBrush => EvidenceClassId switch
-    {
-        "A" => ClassABrush,
-        "B" => ClassBBrush,
-        "C" => ClassCBrush,
-        "D" => ClassDBrush,
-        _ => ClassEBrush
-    };
+    public string VerdictState => TweakVerdictPresentation.BuildVerdictState(
+        _isEvidenceArchived,
+        _evidenceClassActionState,
+        ShowInApp,
+        IsMutationAllowed,
+        IsResearchGated,
+        IsPromotionActionable,
+        IsEvidenceClassActionable);
 
-    public Brush EvidenceClassBackgroundBrush => EvidenceClassId switch
-    {
-        "A" => ClassABackgroundBrush,
-        "B" => ClassBBackgroundBrush,
-        "C" => ClassCBackgroundBrush,
-        "D" => ClassDBackgroundBrush,
-        _ => ClassEBackgroundBrush
-    };
+    public string VerdictText => TweakVerdictPresentation.BuildVerdictText(VerdictState);
 
-    public string VerdictState
-    {
-        get
-        {
-            if (_isEvidenceArchived || string.Equals(_evidenceClassActionState, "archived", StringComparison.OrdinalIgnoreCase))
-            {
-                return "archived";
-            }
+    public string CompactStateText => TweakVerdictPresentation.BuildCompactStateText(VerdictState);
 
-            if (!ShowInApp)
-            {
-                return "research";
-            }
+    public string CompactStateTone => TweakVerdictPresentation.BuildCompactStateTone(VerdictState);
 
-            if (IsMutationAllowed)
-            {
-                return "allowed";
-            }
+    public string ScopeFilterKey => TweakSurfacePresentation.BuildScopeFilterKey(RegistryPath, RequiresElevation);
 
-            if (IsResearchGated || !IsPromotionActionable || !IsEvidenceClassActionable)
-            {
-                return "blocked";
-            }
+    public string ScopeDisplayText => TweakSurfacePresentation.BuildScopeDisplayText(ScopeFilterKey);
 
-            return "research";
-        }
-    }
+    public string VerdictSummary => TweakVerdictPresentation.BuildVerdictSummary(
+        VerdictState,
+        _rollbackVerified,
+        IsEvidenceClassActionable);
 
-    public string VerdictText => VerdictState switch
-    {
-        "allowed" => "Apply allowed",
-        "blocked" => "Blocked",
-        "archived" => "Archived",
-        _ => "Research-only"
-    };
+    public string DocsSnapshotState => TweakProofSnapshotPresentation.BuildDocsSnapshotState(
+        ReferenceLinks.Any(link => link.Kind is ReferenceLinkKind.Docs or ReferenceLinkKind.Details),
+        _hasSemanticsEvidenceFlag,
+        HasValidatedSemantics,
+        _validatedSemanticsSource);
 
-    public string CompactStateText => VerdictState switch
-    {
-        "allowed" => "Verified",
-        "blocked" => "Needs review",
-        "archived" => "Archived",
-        _ => "Research"
-    };
+    public string DocsSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Docs", DocsSnapshotState);
 
-    public string CompactStateTone => VerdictState switch
-    {
-        "allowed" => "ok",
-        "blocked" => "warning",
-        "archived" => "muted",
-        _ => "info"
-    };
+    public string RuntimeSnapshotState => TweakProofSnapshotPresentation.BuildRuntimeSnapshotState(
+        _hasRuntimeEvidenceFlag,
+        HasRuntimeProof,
+        _needsVmValidationFlag,
+        _hasSemanticsEvidenceFlag,
+        HasValidatedSemantics);
 
-    public string ScopeFilterKey
-    {
-        get
-        {
-            if (RegistryPath.StartsWith("HKCU\\", StringComparison.OrdinalIgnoreCase))
-            {
-                return "user";
-            }
+    public string RuntimeSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Runtime", RuntimeSnapshotState);
 
-            if (RegistryPath.StartsWith("HKLM\\", StringComparison.OrdinalIgnoreCase) || RequiresElevation)
-            {
-                return "machine";
-            }
+    public string SourceSnapshotState => TweakProofSnapshotPresentation.BuildSourceSnapshotState(
+        _hasLineageEvidenceFlag,
+        HasUpstreamLineage,
+        HasNohutoEvidence,
+        HasWindowsInternalsContext,
+        NeedsSourceReview,
+        ProvenanceSummary);
 
-            return string.IsNullOrWhiteSpace(RegistryPath) ? "mixed" : "mixed";
-        }
-    }
+    public string SourceSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Source", SourceSnapshotState);
 
-    public string ScopeDisplayText => ScopeFilterKey switch
-    {
-        "user" => "User",
-        "machine" => "Machine",
-        _ => "Mixed"
-    };
+    public string RollbackSnapshotState => TweakProofSnapshotPresentation.BuildRollbackSnapshotState(
+        _rollbackVerified,
+        _rollbackDeclared,
+        _restoreStoryKnown,
+        HasDefaultChoice,
+        _rollbackFailureReason);
 
-    public string VerdictSummary => VerdictState switch
-    {
-        "allowed" => _rollbackVerified
-            ? "Proof and rollback signals are strong enough for the normal apply flow."
-            : "Apply is available, but the safest path is still preview, verify, and keep rollback close.",
-        "blocked" => !IsEvidenceClassActionable
-            ? "The control surface is still being validated, so this stays visible for review instead of normal apply."
-            : "This setting is visible for review, but stronger proof is still required before apply opens.",
-        "archived" => "This record stays in the evidence trail so we do not rediscover the same dead end later.",
-        _ => "This record is useful for research and interpretation, but it stays outside the normal apply flow."
-    };
+    public string RollbackSnapshotText => TweakProofSnapshotPresentation.BuildSnapshotText("Rollback", RollbackSnapshotState);
 
-    public string DocsSnapshotState
-    {
-        get
-        {
-            if (ReferenceLinks.Any(link => link.Kind is ReferenceLinkKind.Docs or ReferenceLinkKind.Details))
-            {
-                return "ready";
-            }
+    public string RiskSnapshotText => TweakProofSnapshotPresentation.BuildRiskSnapshotText(Risk, IsMutationAllowed);
 
-            if (_hasSemanticsEvidenceFlag || HasValidatedSemantics || !string.IsNullOrWhiteSpace(_validatedSemanticsSource))
-            {
-                return "partial";
-            }
+    public string RollbackStoryText => TweakRollbackPresentation.BuildRollbackStoryText(
+        _rollbackVerified,
+        _rollbackVerificationMethod,
+        _rollbackFailureReason,
+        _rollbackDeclared,
+        _rollbackExecuted,
+        _restoreStoryKnown,
+        HasDefaultChoice);
 
-            return "missing";
-        }
-    }
+    public string ConfigurationPrimaryActionTooltip =>
+        TweakRollbackPresentation.BuildConfigurationPrimaryActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
 
-    public string DocsSnapshotText => BuildSnapshotText("Docs", DocsSnapshotState);
+    public string ConfigurationRollbackActionTooltip =>
+        TweakRollbackPresentation.BuildConfigurationRollbackActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
 
-    public string RuntimeSnapshotState
-    {
-        get
-        {
-            if (_hasRuntimeEvidenceFlag || HasRuntimeProof)
-            {
-                return "ready";
-            }
+    public string PrimaryActionTooltip =>
+        TweakRollbackPresentation.BuildPrimaryActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
 
-            if (_needsVmValidationFlag || _hasSemanticsEvidenceFlag || HasValidatedSemantics)
-            {
-                return "partial";
-            }
+    public string RollbackActionTooltip =>
+        TweakRollbackPresentation.BuildRollbackActionTooltip(IsMutationAllowed, PublicMutationGatingReason);
 
-            return "missing";
-        }
-    }
-
-    public string RuntimeSnapshotText => BuildSnapshotText("Runtime", RuntimeSnapshotState);
-
-    public string SourceSnapshotState
-    {
-        get
-        {
-            if (_hasLineageEvidenceFlag || HasUpstreamLineage || HasNohutoEvidence || HasWindowsInternalsContext)
-            {
-                return "ready";
-            }
-
-            if (NeedsSourceReview || !string.IsNullOrWhiteSpace(ProvenanceSummary))
-            {
-                return "partial";
-            }
-
-            return "missing";
-        }
-    }
-
-    public string SourceSnapshotText => BuildSnapshotText("Source", SourceSnapshotState);
-
-    public string RollbackSnapshotState
-    {
-        get
-        {
-            if (_rollbackVerified)
-            {
-                return "ready";
-            }
-
-            if (_rollbackDeclared || _restoreStoryKnown || HasDefaultChoice || !string.IsNullOrWhiteSpace(_rollbackFailureReason))
-            {
-                return "partial";
-            }
-
-            return "missing";
-        }
-    }
-
-    public string RollbackSnapshotText => BuildSnapshotText("Rollback", RollbackSnapshotState);
-
-    public string RiskSnapshotText
-    {
-        get
-        {
-            var summary = Risk switch
-            {
-                TweakRiskLevel.Safe => "Risk: Low-risk surface with the standard preview and verify flow.",
-                TweakRiskLevel.Advanced => "Risk: Higher-impact change, so preview first and verify after applying.",
-                TweakRiskLevel.Risky => "Risk: High-impact change. Treat it carefully and keep recovery in view.",
-                _ => "Risk: Review carefully before you apply."
-            };
-
-            if (!IsMutationAllowed)
-            {
-                return $"{summary} It stays evidence-first until the remaining proof lands.";
-            }
-
-            return summary;
-        }
-    }
-
-    public string RollbackStoryText
-    {
-        get
-        {
-            if (_rollbackVerified)
-            {
-                var method = string.IsNullOrWhiteSpace(_rollbackVerificationMethod)
-                    ? string.Empty
-                    : $" via {_rollbackVerificationMethod}";
-                return $"Rollback: Verified{method}.";
-            }
-
-            if (!string.IsNullOrWhiteSpace(_rollbackFailureReason))
-            {
-                return $"Rollback: Restore path exists, but the last verification failed ({_rollbackFailureReason}).";
-            }
-
-            if (_rollbackDeclared && _rollbackExecuted)
-            {
-                return "Rollback: Restore path executed, but verification is still pending.";
-            }
-
-            if (_rollbackDeclared)
-            {
-                return "Rollback: Restore path is declared, but full verification is still pending.";
-            }
-
-            if (_restoreStoryKnown || HasDefaultChoice)
-            {
-                return "Rollback: Restore story is defined, but it still needs stronger gate proof.";
-            }
-
-            return "Rollback: Restore story still needs stronger proof.";
-        }
-    }
-
-    public string ConfigurationPrimaryActionTooltip => IsMutationAllowed
-        ? "Apply this setting."
-        : PublicMutationGatingReason;
-
-    public string ConfigurationRollbackActionTooltip => IsMutationAllowed
-        ? "Restore the value from before you changed this setting."
-        : PublicMutationGatingReason;
-
-    public string PrimaryActionTooltip => IsMutationAllowed
-        ? "Run this action."
-        : PublicMutationGatingReason;
-
-    public string RollbackActionTooltip => IsMutationAllowed
-        ? "Restore the previous value captured before you ran this action."
-        : PublicMutationGatingReason;
-
-    public string ResearchGateMessage => IsMutationAllowed ? string.Empty : PublicResearchGateExplanation;
+    public string ResearchGateMessage => TweakVerdictPresentation.BuildResearchGateMessage(IsMutationAllowed);
 
     public bool HasResearchGateMessage => !string.IsNullOrWhiteSpace(ResearchGateMessage);
 
@@ -1372,34 +797,16 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    public bool HasProvenance =>
-        HasNohutoEvidence ||
-        HasWindowsInternalsContext ||
-        NeedsSourceReview ||
-        !string.IsNullOrWhiteSpace(ProvenanceSummary);
+    public bool HasProvenance => TweakProvenancePresentation.HasProvenance(
+        HasNohutoEvidence,
+        HasWindowsInternalsContext,
+        NeedsSourceReview,
+        ProvenanceSummary);
 
-    public string ProvenanceStatusText
-    {
-        get
-        {
-            if (HasNohutoEvidence && HasWindowsInternalsContext)
-            {
-                return "Dump source + Internals";
-            }
-
-            if (HasNohutoEvidence)
-            {
-                return "Dump source";
-            }
-
-            if (HasWindowsInternalsContext)
-            {
-                return "Internals";
-            }
-
-            return NeedsSourceReview ? "Needs review" : "No source links";
-        }
-    }
+    public string ProvenanceStatusText => TweakProvenancePresentation.BuildStatusText(
+        HasNohutoEvidence,
+        HasWindowsInternalsContext,
+        NeedsSourceReview);
 
     public void ApplyEvidenceClassification(TweakEvidenceClassEntry? entry)
     {
@@ -1539,13 +946,6 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(RollbackStoryText));
     }
 
-    private static string BuildSnapshotText(string label, string state) => state switch
-    {
-        "ready" => $"{label} ready",
-        "partial" => $"{label} partial",
-        _ => $"{label} pending"
-    };
-
     public ObservableCollection<string> BatchDetails => _batchDetails;
 
     public string BatchDetailsTitle
@@ -1615,42 +1015,10 @@ public sealed class TweakItemViewModel : ViewModelBase
     private void AppendToTerminal(string message)
     {
         if (string.IsNullOrEmpty(message)) return;
-        var timestamp = DateTime.Now.ToString("HH:mm:ss");
-        TerminalOutput += $"[{timestamp}] {message}\n";
+        TerminalOutput += TweakExecutionLogFormatter.FormatTerminalLine(DateTime.Now, message);
     }
 
-    private static string FormatStatusMessage(TweakAction action, TweakStatus status)
-    {
-        if (action == TweakAction.Detect && status == TweakStatus.Detected)
-        {
-            return "Current state captured.";
-        }
-
-        return status.ToString();
-    }
-
-    private static string CoalesceMessage(TweakAction action, TweakStatus status, string message)
-    {
-        return string.IsNullOrWhiteSpace(message)
-            ? FormatStatusMessage(action, status)
-            : CondenseMessageForDisplay(message);
-    }
-
-    private static string FormatStepLogLine(TweakAction action, TweakStatus status, string message)
-    {
-        var details = CoalesceMessage(action, status, message);
-        if (action == TweakAction.Detect &&
-            details.StartsWith("Detected ", StringComparison.OrdinalIgnoreCase))
-        {
-            details = $"Found {details["Detected ".Length..]}";
-        }
-        return $"> {action}: {details}";
-    }
-
-    private void ClearTerminal()
-    {
-        TerminalOutput = string.Empty;
-    }
+    private void ClearTerminal() => TerminalOutput = string.Empty;
 
     // Simplified status for first-glance view
     public TweakAppliedStatus AppliedStatus
@@ -1681,59 +1049,35 @@ public sealed class TweakItemViewModel : ViewModelBase
         private set => SetProperty(ref _wasRolledBack, value);
     }
 
-    public string StatusIcon => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => "M",
-        TweakAppliedStatus.Applied => "+",
-        TweakAppliedStatus.NotApplied => "o",
-        TweakAppliedStatus.Error => "x",
-        _ when RequiresAdminScan => "!",
-        _ => "?"
-    };
+    public string StatusIcon => TweakStatusPresentation.BuildIcon(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public Brush StatusColor => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => MixedStatusBrush,
-        TweakAppliedStatus.Applied => AppliedStatusBrush,
-        TweakAppliedStatus.NotApplied => NotAppliedStatusBrush,
-        TweakAppliedStatus.Error => ErrorStatusBrush,
-        _ when RequiresAdminScan => NotAppliedStatusBrush,
-        _ => UnknownStatusBrush
-    };
+    public Brush StatusColor => TweakStatusPresentation.GetStatusBrush(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public Brush StatusBorderBrush => AppliedStatus switch
-    {
-        TweakAppliedStatus.NotApplied => NotAppliedStatusBorderBrush,
-        _ when RequiresAdminScan => NotAppliedStatusBorderBrush,
-        _ => StatusColor
-    };
+    public Brush StatusBorderBrush => TweakStatusPresentation.GetBorderBrush(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public Brush StatusTextBrush => AppliedStatus switch
-    {
-        TweakAppliedStatus.NotApplied => NotAppliedStatusBrush,
-        _ when RequiresAdminScan => NotAppliedStatusBrush,
-        _ => StatusColor
-    };
+    public Brush StatusTextBrush => TweakStatusPresentation.GetTextBrush(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public Brush StatusBadgeBackground => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => MixedStatusBackgroundBrush,
-        TweakAppliedStatus.Applied => AppliedStatusBackgroundBrush,
-        TweakAppliedStatus.NotApplied => NotAppliedStatusBackgroundBrush,
-        TweakAppliedStatus.Error => ErrorStatusBackgroundBrush,
-        _ when RequiresAdminScan => NotAppliedStatusBackgroundBrush,
-        _ => UnknownStatusBackgroundBrush
-    };
+    public Brush StatusBadgeBackground => TweakStatusPresentation.GetBadgeBackground(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
-    public string StatusText => AppliedStatus switch
-    {
-        _ when ShouldShowMixedStatus => "Mixed",
-        TweakAppliedStatus.Applied => "Applied",
-        TweakAppliedStatus.NotApplied => "Not Applied",
-        TweakAppliedStatus.Error => "Error",
-        _ when RequiresAdminScan => "Needs Admin",
-        _ => "Unknown"
-    };
+    public string StatusText => TweakStatusPresentation.BuildText(
+        AppliedStatus,
+        ShouldShowMixedStatus,
+        RequiresAdminScan);
 
     private bool ShouldShowMixedStatus =>
         AppliedStatus is not TweakAppliedStatus.Error
@@ -1743,14 +1087,6 @@ public sealed class TweakItemViewModel : ViewModelBase
     private bool RequiresAdminScan =>
         AppliedStatus == TweakAppliedStatus.Unknown
         && WillPromptForDetect;
-
-    private static SolidColorBrush CreateFrozenBrush(string hex)
-    {
-        var color = (Color)ColorConverter.ConvertFromString(hex);
-        var brush = new SolidColorBrush(color);
-        brush.Freeze();
-        return brush;
-    }
 
     public bool IsRunning
     {
@@ -1847,22 +1183,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    public bool HasOutcome => LastOutcome != TweakRunOutcome.None;
+    public bool HasOutcome => TweakOutcomePresentation.HasOutcome(LastOutcome);
 
-    public string OutcomeText => LastOutcome switch
-    {
-        TweakRunOutcome.InProgress => "Running",
-        TweakRunOutcome.RolledBack => "Rolled Back",
-        TweakRunOutcome.Success => "Success",
-        TweakRunOutcome.Failed => "Failed",
-        TweakRunOutcome.Cancelled => "Cancelled",
-        TweakRunOutcome.Skipped => "Skipped",
-        _ => "Idle"
-    };
+    public string OutcomeText => TweakOutcomePresentation.BuildOutcomeText(LastOutcome);
 
-    public string OutcomeSummary => HasOutcome
-        ? $"{LastActionText} - {OutcomeText}"
-        : "No runs yet";
+    public string OutcomeSummary => TweakOutcomePresentation.BuildOutcomeSummary(LastOutcome, LastActionText);
 
     public bool IsDetailsExpanded
     {
@@ -2022,10 +1347,10 @@ public sealed class TweakItemViewModel : ViewModelBase
 
             var result = await _pipeline.ExecuteStepAsync(_tweak, action, updateProgress, _cts?.Token ?? ct);
             step?.ApplyResult(result.Result.Status, result.Result.Message, result.Result.Timestamp);
-            AppendToTerminal(FormatStepLogLine(action, result.Result.Status, result.Result.Message));
+            AppendToTerminal(TweakExecutionLogFormatter.FormatStepLogLine(action, result.Result.Status, result.Result.Message, MaxDisplayMessageLength));
             UpdateAfterSingleStep(action, result.Result);
             LastOutcome = MapOutcome(result.Result.Status);
-            StatusMessage = CoalesceMessage(action, result.Result.Status, result.Result.Message);
+            StatusMessage = TweakExecutionLogFormatter.CoalesceMessage(action, result.Result.Status, result.Result.Message, MaxDisplayMessageLength);
             LastUpdatedText = $"Last update: {result.Result.Timestamp.ToLocalTime():HH:mm:ss}";
         }
         catch (OperationCanceledException)
@@ -2155,9 +1480,9 @@ public sealed class TweakItemViewModel : ViewModelBase
         var step = Steps.FirstOrDefault(item => item.Action == update.Action);
         step?.ApplyResult(update.Status, update.Message, update.Timestamp);
 
-        AppendToTerminal(FormatStepLogLine(update.Action, update.Status, update.Message));
+        AppendToTerminal(TweakExecutionLogFormatter.FormatStepLogLine(update.Action, update.Status, update.Message, MaxDisplayMessageLength));
 
-        StatusMessage = CoalesceMessage(update.Action, update.Status, update.Message);
+        StatusMessage = TweakExecutionLogFormatter.CoalesceMessage(update.Action, update.Status, update.Message, MaxDisplayMessageLength);
         LastUpdatedText = $"Last update: {update.Timestamp.ToLocalTime():HH:mm:ss}";
 
         if (update.Action == TweakAction.Detect)
@@ -2212,7 +1537,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void CopyId()
     {
-        if (TrySetClipboardText(Id, out var error))
+        if (TweakClipboardHelper.TrySetText(Id, out var error))
         {
             StatusMessage = "Tweak ID copied to clipboard.";
             return;
@@ -2221,20 +1546,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         StatusMessage = $"Copy failed: {error}";
     }
 
-    private bool CanInspect()
-    {
-        return !IsRunning && !IsBulkLocked;
-    }
+    private bool CanInspect() => !IsRunning && !IsBulkLocked;
 
-    private bool CanMutate()
-    {
-        return !IsRunning && !IsBulkLocked && IsMutationAllowed;
-    }
+    private bool CanMutate() => !IsRunning && !IsBulkLocked && IsMutationAllowed;
 
-    private bool CanCancel()
-    {
-        return IsRunning && !IsBulkLocked;
-    }
+    private bool CanCancel() => IsRunning && !IsBulkLocked;
 
     private void UpdateCommandStates()
     {
@@ -2249,10 +1565,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _customActionCommand.RaiseCanExecuteChanged();
     }
 
-    private bool CanToggle()
-    {
-        return CanMutate() && AppliedStatus != TweakAppliedStatus.Unknown;
-    }
+    private bool CanToggle() => CanMutate() && AppliedStatus != TweakAppliedStatus.Unknown;
 
     private bool CanRestoreDefault()
     {
@@ -2282,59 +1595,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void CopyRegistryPath()
     {
-        if (TrySetClipboardText(RegistryPath, out var error))
+        if (TweakClipboardHelper.TrySetText(RegistryPath, out var error))
         {
             StatusMessage = "Registry path copied to clipboard.";
             return;
         }
 
         StatusMessage = $"Copy failed: {error}";
-    }
-
-    private static bool TrySetClipboardText(string text, out string? errorMessage)
-    {
-        const int ClipboardBusy = unchecked((int)0x800401D0);
-        const int ClipboardCantEmpty = unchecked((int)0x800401D1);
-        errorMessage = null;
-
-        if (string.IsNullOrWhiteSpace(text))
-        {
-            errorMessage = "Nothing to copy.";
-            return false;
-        }
-
-        for (var attempt = 0; attempt < 4; attempt++)
-        {
-            try
-            {
-                if (Application.Current?.Dispatcher?.CheckAccess() == true)
-                {
-                    Clipboard.SetText(text);
-                }
-                else if (Application.Current?.Dispatcher != null)
-                {
-                    Application.Current.Dispatcher.Invoke(() => Clipboard.SetText(text));
-                }
-                else
-                {
-                    Clipboard.SetText(text);
-                }
-
-                return true;
-            }
-            catch (COMException ex) when (ex.HResult == ClipboardBusy || ex.HResult == ClipboardCantEmpty)
-            {
-                Thread.Sleep(30 * (attempt + 1));
-            }
-            catch (Exception ex)
-            {
-                errorMessage = ex.Message;
-                return false;
-            }
-        }
-
-        errorMessage = "Clipboard is busy. Try again.";
-        return false;
     }
 
     private void OpenReferenceLink(object? parameter)
@@ -2344,256 +1611,48 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
-        try
+        LogToFile($"OpenReferenceLink: {url}");
+        var result = TweakReferenceLinkNavigator.Open(url);
+        StatusMessage = result.StatusMessage;
+        if (!result.Success)
         {
-            LogToFile($"OpenReferenceLink: {url}");
-            if (TryOpenFileAnchor(url))
-            {
-                StatusMessage = "Opening catalog entry...";
-                return;
-            }
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = url,
-                UseShellExecute = true,
-                Verb = "open"
-            };
-
-            Process.Start(startInfo);
-            StatusMessage = "Opening link...";
+            LogToFile($"OpenReferenceLink failed: {result.ErrorMessage ?? result.StatusMessage} ({url})");
         }
-        catch (Exception ex)
-        {
-            try
-            {
-                // Fallback: use explorer to open the URL (avoids shell association edge cases).
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = "explorer.exe",
-                    Arguments = url,
-                    UseShellExecute = true
-                });
-                StatusMessage = "Opening link...";
-                return;
-            }
-            catch
-            {
-            }
-
-            StatusMessage = $"Could not open link: {ex.Message}";
-            LogToFile($"OpenReferenceLink failed: {ex.Message} ({url})");
-        }
-    }
-
-    private static bool TryOpenFileAnchor(string url)
-    {
-        if (string.IsNullOrWhiteSpace(url))
-        {
-            return false;
-        }
-
-        if (Uri.TryCreate(url, UriKind.Absolute, out var absoluteUri)
-            && (string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase)
-                || string.Equals(absoluteUri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)))
-        {
-            return false;
-        }
-
-        var (rawPath, anchor) = SplitAnchor(url);
-        if (TryResolveLocalPath(rawPath, out var localPath))
-        {
-            return TryOpenLocalPath(localPath, anchor);
-        }
-
-        if (Uri.TryCreate(url, UriKind.Absolute, out absoluteUri))
-        {
-            if (!absoluteUri.IsFile)
-            {
-                return false;
-            }
-
-            var absoluteAnchor = absoluteUri.Fragment;
-            var trimmedAnchor = string.IsNullOrWhiteSpace(absoluteAnchor)
-                ? anchor
-                : absoluteAnchor.TrimStart('#');
-            return TryOpenLocalPath(absoluteUri.LocalPath, trimmedAnchor);
-        }
-
-        var hashIndex = url.IndexOf('#', StringComparison.Ordinal);
-        var path = hashIndex > 0 ? url.Substring(0, hashIndex) : url;
-        var fallbackAnchor = hashIndex > 0 ? url.Substring(hashIndex + 1) : string.Empty;
-
-        if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
-        {
-            return false;
-        }
-
-        return TryOpenLocalPath(path, fallbackAnchor);
-    }
-
-    private static bool TryOpenLocalPath(string localPath, string? anchor = null)
-    {
-        if (string.IsNullOrWhiteSpace(localPath) || !File.Exists(localPath))
-        {
-            return false;
-        }
-
-        var extension = Path.GetExtension(localPath);
-        var allowAnchor = string.Equals(extension, ".html", StringComparison.OrdinalIgnoreCase)
-                          || string.Equals(extension, ".htm", StringComparison.OrdinalIgnoreCase);
-
-        if (allowAnchor && !string.IsNullOrWhiteSpace(anchor))
-        {
-            var escapedAnchor = Uri.EscapeDataString(anchor);
-            var fileUri = new Uri(localPath, UriKind.Absolute);
-            var anchoredUri = new Uri(fileUri.AbsoluteUri + "#" + escapedAnchor, UriKind.Absolute);
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = anchoredUri.AbsoluteUri,
-                UseShellExecute = true
-            });
-            return true;
-        }
-
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = localPath,
-            UseShellExecute = true
-        });
-        return true;
-    }
-
-    private static (string path, string? anchor) SplitAnchor(string url)
-    {
-        var hashIndex = url.IndexOf('#', StringComparison.Ordinal);
-        if (hashIndex <= 0)
-        {
-            return (url, null);
-        }
-
-        return (url.Substring(0, hashIndex), url.Substring(hashIndex + 1));
-    }
-
-    private static bool TryResolveLocalPath(string path, out string localPath)
-    {
-        localPath = string.Empty;
-        if (string.IsNullOrWhiteSpace(path))
-        {
-            return false;
-        }
-
-        if (Path.IsPathRooted(path) && File.Exists(path))
-        {
-            localPath = path;
-            return true;
-        }
-
-        var docsRoot = DocsLocator.TryFindDocsRoot();
-        var repoRoot = string.IsNullOrWhiteSpace(docsRoot)
-            ? string.Empty
-            : Directory.GetParent(docsRoot)?.FullName ?? string.Empty;
-        var normalized = path.Replace('/', Path.DirectorySeparatorChar).TrimStart(Path.DirectorySeparatorChar);
-
-        if (!string.IsNullOrWhiteSpace(repoRoot))
-        {
-            var repoCandidate = Path.Combine(repoRoot, normalized);
-            if (File.Exists(repoCandidate))
-            {
-                localPath = repoCandidate;
-                return true;
-            }
-        }
-
-        if (!string.IsNullOrWhiteSpace(docsRoot))
-        {
-            var trimmed = normalized;
-            if (trimmed.StartsWith("Docs", StringComparison.OrdinalIgnoreCase))
-            {
-                trimmed = trimmed.Substring(4).TrimStart(Path.DirectorySeparatorChar);
-            }
-
-            var docsCandidate = Path.Combine(docsRoot, trimmed);
-            if (File.Exists(docsCandidate))
-            {
-                localPath = docsCandidate;
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private void TryPopulateTechnicalInfo()
     {
+        var snapshot = TweakTechnicalInfoBuilder.Build(_tweak, RegistryPath, TargetValue, CodeExample);
+        ApplyTechnicalInfoSnapshot(snapshot);
+
         switch (_tweak)
         {
             case RegistryValuePresetBatchTweak presetBatchTweak:
-                if (string.IsNullOrWhiteSpace(RegistryPath))
-                {
-                    RegistryPath = presetBatchTweak.PrimaryScopePath;
-                }
-
                 InitializeChoiceOptions(presetBatchTweak);
                 SyncChoiceStateFromTweak(updateAppliedStatus: false);
-
-                if (string.IsNullOrWhiteSpace(CodeExample))
-                {
-                    CodeExample = "Choose an option from the row, then click Apply to write that preset.";
-                }
-
                 break;
             case IChoiceTweak choiceTweak:
                 InitializeChoiceOptions(choiceTweak);
                 SyncChoiceStateFromTweak(updateAppliedStatus: false);
-
-                if (string.IsNullOrWhiteSpace(CodeExample))
-                {
-                    CodeExample = "Choose a profile, click Apply to use it, Restore Previous to undo, or Restore Default to go back to the app's default behavior.";
-                }
-
                 break;
-            case RegistryValueTweak registryValueTweak:
-                if (string.IsNullOrWhiteSpace(RegistryPath))
-                {
-                    RegistryPath = FormatRegistryValuePath(registryValueTweak.Reference);
-                }
+        }
+    }
 
-                if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
-                {
-                    TargetValue = FormatRegistryValueForDisplay(registryValueTweak.ValueKind, registryValueTweak.TargetValue);
-                }
+    private void ApplyTechnicalInfoSnapshot(TweakTechnicalInfoSnapshot snapshot)
+    {
+        if (!string.IsNullOrWhiteSpace(snapshot.RegistryPath))
+        {
+            RegistryPath = snapshot.RegistryPath;
+        }
 
-                if (string.IsNullOrWhiteSpace(CodeExample))
-                {
-                    CodeExample = BuildRegistryCommandPreview(
-                        registryValueTweak.Reference,
-                        registryValueTweak.ValueKind,
-                        registryValueTweak.TargetValue);
-                }
+        if (!string.IsNullOrWhiteSpace(snapshot.TargetValue))
+        {
+            TargetValue = snapshot.TargetValue;
+        }
 
-                break;
-            case RegistryValueBatchTweak:
-            case RegistryValueSetTweak:
-                if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
-                {
-                    TargetValue = "Multiple values";
-                }
-
-                break;
-            case ServiceStartModeBatchTweak serviceStartModeBatchTweak:
-                if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
-                {
-                    TargetValue = FormatServiceStartModeForDisplay(serviceStartModeBatchTweak.TargetStartModeSummary);
-                }
-
-                break;
-            case ScheduledTaskBatchTweak:
-                if (string.IsNullOrWhiteSpace(TargetValue) || TargetValue == "Optimized")
-                {
-                    TargetValue = "Disabled";
-                }
-
-                break;
+        if (!string.IsNullOrWhiteSpace(snapshot.CodeExample))
+        {
+            CodeExample = snapshot.CodeExample;
         }
     }
 
@@ -2603,13 +1662,12 @@ public sealed class TweakItemViewModel : ViewModelBase
         try
         {
             ChoiceOptions.Clear();
-            foreach (var choice in choiceTweak.Choices)
+            foreach (var choice in TweakChoiceStateCoordinator.BuildOptions(choiceTweak))
             {
-                ChoiceOptions.Add(new TweakChoiceOption(choice.Key, choice.Label, choice.Description));
+                ChoiceOptions.Add(choice);
             }
 
-            _selectedChoiceOption = ChoiceOptions.FirstOrDefault(
-                option => option.Key.Equals(choiceTweak.SelectedChoiceKey, StringComparison.OrdinalIgnoreCase));
+            _selectedChoiceOption = TweakChoiceStateCoordinator.ResolveSelectedOption(ChoiceOptions, choiceTweak.SelectedChoiceKey);
         }
         finally
         {
@@ -2636,8 +1694,7 @@ public sealed class TweakItemViewModel : ViewModelBase
         _isSyncingChoiceOption = true;
         try
         {
-            _selectedChoiceOption = ChoiceOptions.FirstOrDefault(
-                option => option.Key.Equals(choiceTweak.SelectedChoiceKey, StringComparison.OrdinalIgnoreCase));
+            _selectedChoiceOption = TweakChoiceStateCoordinator.ResolveSelectedOption(ChoiceOptions, choiceTweak.SelectedChoiceKey);
         }
         finally
         {
@@ -2647,167 +1704,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(SelectedChoiceOption));
         OnPropertyChanged(nameof(SelectedChoiceDescription));
 
-        if (_selectedChoiceOption is not null)
-        {
-            TargetValue = _selectedChoiceOption.Label;
-        }
-
-        if (!string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceLabel))
-        {
-            CurrentValue = choiceTweak.MatchedChoiceLabel!;
-        }
-        else if (HasDetectedState || AppliedStatus is TweakAppliedStatus.Applied or TweakAppliedStatus.NotApplied)
-        {
-            CurrentValue = "Custom / Mixed";
-        }
-
-        if (!updateAppliedStatus)
-        {
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(choiceTweak.MatchedChoiceKey))
-        {
-            AppliedStatus = TweakAppliedStatus.NotApplied;
-        }
-        else if (string.Equals(choiceTweak.MatchedChoiceKey, choiceTweak.SelectedChoiceKey, StringComparison.OrdinalIgnoreCase))
-        {
-            AppliedStatus = TweakAppliedStatus.Applied;
-        }
-        else
-        {
-            AppliedStatus = TweakAppliedStatus.NotApplied;
-        }
-    }
-
-    private static string FormatServiceStartModeForDisplay(ServiceStartMode startMode)
-    {
-        return startMode == ServiceStartMode.Unknown
-            ? "Mixed"
-            : startMode.ToString();
-    }
-
-    private static string FormatRegistryValuePath(RegProbe.Core.Registry.RegistryValueReference reference)
-    {
-        var key = FormatRegistryKey(reference);
-        return $"{key}\\{reference.ValueName}";
-    }
-
-    private static string FormatRegistryKey(RegProbe.Core.Registry.RegistryValueReference reference)
-    {
-        var keyPath = (reference.KeyPath ?? string.Empty).Trim().TrimStart('\\').TrimEnd('\\');
-        if (keyPath.StartsWith("HKEY_", StringComparison.OrdinalIgnoreCase)
-            || keyPath.StartsWith("HKLM\\", StringComparison.OrdinalIgnoreCase)
-            || keyPath.StartsWith("HKCU\\", StringComparison.OrdinalIgnoreCase)
-            || keyPath.StartsWith("HKCR\\", StringComparison.OrdinalIgnoreCase)
-            || keyPath.StartsWith("HKU\\", StringComparison.OrdinalIgnoreCase)
-            || keyPath.StartsWith("HKCC\\", StringComparison.OrdinalIgnoreCase))
-        {
-            return keyPath;
-        }
-
-        var hive = reference.Hive switch
-        {
-            RegistryHive.LocalMachine => "HKLM",
-            RegistryHive.CurrentUser => "HKCU",
-            RegistryHive.ClassesRoot => "HKCR",
-            RegistryHive.Users => "HKU",
-            RegistryHive.CurrentConfig => "HKCC",
-            _ => reference.Hive.ToString()
-        };
-
-        return string.IsNullOrEmpty(keyPath) ? hive : $"{hive}\\{keyPath}";
-    }
-
-    private static string BuildRegistryCommandPreview(
-        RegProbe.Core.Registry.RegistryValueReference reference,
-        RegistryValueKind valueKind,
-        object targetValue)
-    {
-        var key = FormatRegistryKey(reference);
-        var regType = valueKind switch
-        {
-            RegistryValueKind.String => "REG_SZ",
-            RegistryValueKind.ExpandString => "REG_EXPAND_SZ",
-            RegistryValueKind.MultiString => "REG_MULTI_SZ",
-            RegistryValueKind.Binary => "REG_BINARY",
-            RegistryValueKind.DWord => "REG_DWORD",
-            RegistryValueKind.QWord => "REG_QWORD",
-            _ => $"REG_{valueKind.ToString().ToUpperInvariant()}"
-        };
-
-        var viewFlag = reference.View switch
-        {
-            RegistryView.Registry32 => " /reg:32",
-            RegistryView.Registry64 => " /reg:64",
-            _ => string.Empty
-        };
-
-        var data = FormatRegistryValueForRegAdd(valueKind, targetValue);
-
-        return string.Join(
-            Environment.NewLine,
-            $"reg add \"{key}\" /v \"{reference.ValueName}\" /t {regType} /d {data} /f{viewFlag}",
-            $"reg query \"{key}\" /v \"{reference.ValueName}\"{viewFlag}");
-    }
-
-    private static string FormatRegistryValueForRegAdd(RegistryValueKind valueKind, object value)
-    {
-        switch (valueKind)
-        {
-            case RegistryValueKind.DWord:
-            case RegistryValueKind.QWord:
-                return Convert.ToInt64(value).ToString();
-            case RegistryValueKind.MultiString:
-                if (value is string[] strings)
-                {
-                    var combined = string.Join("\\0", strings);
-                    return $"\"{combined}\\0\"";
-                }
-
-                return $"\"{value}\"";
-            case RegistryValueKind.String:
-            case RegistryValueKind.ExpandString:
-                return $"\"{value}\"";
-            case RegistryValueKind.Binary:
-                if (value is byte[] bytes)
-                {
-                    var hex = BitConverter.ToString(bytes).Replace("-", string.Empty);
-                    return hex;
-                }
-
-                return value.ToString() ?? string.Empty;
-            default:
-                return value.ToString() ?? string.Empty;
-        }
-    }
-
-    private static string FormatRegistryValueForDisplay(RegistryValueKind valueKind, object value)
-    {
-        switch (valueKind)
-        {
-            case RegistryValueKind.DWord:
-            case RegistryValueKind.QWord:
-                try
-                {
-                    var number = Convert.ToInt64(value);
-                    return $"{number} (0x{number:X})";
-                }
-                catch
-                {
-                    return value.ToString() ?? "Unknown";
-                }
-            case RegistryValueKind.MultiString:
-                return value is string[] strings
-                    ? string.Join("; ", strings)
-                    : value.ToString() ?? "Unknown";
-            case RegistryValueKind.Binary:
-                return value is byte[] bytes
-                    ? $"0x{BitConverter.ToString(bytes).Replace("-", string.Empty)}"
-                    : value.ToString() ?? "Unknown";
-            default:
-                return value.ToString() ?? "Unknown";
-        }
+        ApplyChoiceStateSnapshot(TweakChoiceStateCoordinator.BuildSyncSnapshot(
+            choiceTweak,
+            _selectedChoiceOption,
+            HasDetectedState || AppliedStatus is TweakAppliedStatus.Applied or TweakAppliedStatus.NotApplied,
+            updateAppliedStatus));
     }
 
     public TweakInventoryState ExportInventoryState()
@@ -2855,8 +1756,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         if (_tweak is IChoiceTweak choiceTweak && ChoiceOptions.Count > 0)
         {
-            var matchingOption = ChoiceOptions.FirstOrDefault(option =>
-                option.Label.Equals(TargetValue, StringComparison.OrdinalIgnoreCase));
+            var matchingOption = TweakChoiceStateCoordinator.ResolveOptionForTargetValue(ChoiceOptions, TargetValue);
             if (matchingOption is not null)
             {
                 _isSyncingChoiceOption = true;
@@ -2964,96 +1864,28 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
-        if (message.Contains("Value not set", StringComparison.OrdinalIgnoreCase))
+        if (TweakExecutionMessageParser.TryExtractCurrentValue(message, out var value))
         {
-            CurrentValue = "Not set";
-            return;
+            CurrentValue = value;
         }
-
-        if (TryExtractAfterPrefix(message, "Current value is ", out var value))
-        {
-            CurrentValue = value.TrimEnd('.');
-            return;
-        }
-
-        if (TryExtractAfterPrefix(message, "Current state:", out var state))
-        {
-            var trimmed = state.Trim();
-            var newlineIndex = trimmed.IndexOfAny(new[] { '\r', '\n' });
-            if (newlineIndex >= 0)
-            {
-                trimmed = trimmed[..newlineIndex];
-            }
-
-            var detailsIndex = trimmed.IndexOf("Details", StringComparison.OrdinalIgnoreCase);
-            if (detailsIndex >= 0)
-            {
-                trimmed = trimmed[..detailsIndex];
-            }
-
-            var servicesIndex = trimmed.IndexOf("Services", StringComparison.OrdinalIgnoreCase);
-            if (servicesIndex >= 0)
-            {
-                trimmed = trimmed[..servicesIndex];
-            }
-
-            var tasksIndex = trimmed.IndexOf("Tasks", StringComparison.OrdinalIgnoreCase);
-            if (tasksIndex >= 0)
-            {
-                trimmed = trimmed[..tasksIndex];
-            }
-
-            var entriesIndex = trimmed.IndexOf("Entries", StringComparison.OrdinalIgnoreCase);
-            if (entriesIndex >= 0)
-            {
-                trimmed = trimmed[..entriesIndex];
-            }
-
-            var valuesIndex = trimmed.IndexOf("Values", StringComparison.OrdinalIgnoreCase);
-            if (valuesIndex >= 0)
-            {
-                trimmed = trimmed[..valuesIndex];
-            }
-
-            var periodIndex = trimmed.IndexOf('.');
-            if (periodIndex >= 0)
-            {
-                trimmed = trimmed[..periodIndex];
-            }
-
-            CurrentValue = trimmed.Trim();
-        }
-    }
-
-    private static bool TryExtractAfterPrefix(string message, string prefix, out string value)
-    {
-        value = string.Empty;
-        var index = message.IndexOf(prefix, StringComparison.OrdinalIgnoreCase);
-        if (index < 0)
-        {
-            return false;
-        }
-
-        value = message[(index + prefix.Length)..];
-        return true;
     }
 
     private void TryUpdateBatchDetailsFromMessage(string message)
     {
-        if (!TryExtractBatchDetails(message, out var title, out var lines, out var omittedLineCount))
+        if (!TweakExecutionMessageParser.TryParseBatchDetails(message, MaxBatchDetailLines, out var snapshot))
         {
             ClearBatchDetails();
             return;
         }
 
-        BatchDetailsTitle = title;
+        BatchDetailsTitle = snapshot.Title;
         _batchDetails.Clear();
-        foreach (var line in lines)
+        foreach (var line in snapshot.Lines)
         {
             _batchDetails.Add(line);
         }
 
-        BatchSummaryLine = BuildBatchSummary(title, lines, omittedLineCount);
+        BatchSummaryLine = snapshot.Summary;
     }
 
     private void ClearBatchDetails()
@@ -3066,242 +1898,6 @@ public sealed class TweakItemViewModel : ViewModelBase
 
         _batchDetails.Clear();
         BatchSummaryLine = string.Empty;
-    }
-
-    private static bool TryExtractBatchDetails(string message, out string title, out List<string> lines, out int omittedLineCount)
-    {
-        lines = new List<string>();
-        title = string.Empty;
-        omittedLineCount = 0;
-
-        var markers = new[]
-        {
-            ("Services:", "Services"),
-            ("Tasks:", "Tasks"),
-            ("Entries:", "Registry Values"),
-            ("Values:", "Registry Values")
-        };
-
-        foreach (var (marker, markerTitle) in markers)
-        {
-            var index = message.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
-            if (index < 0)
-            {
-                continue;
-            }
-
-            var start = index + marker.Length;
-            if (start >= message.Length)
-            {
-                continue;
-            }
-
-            var detailText = message[start..];
-            var parsedLines = ExtractBatchLines(detailText, MaxBatchDetailLines, out var totalLineCount);
-
-            if (parsedLines.Count == 0)
-            {
-                continue;
-            }
-
-            title = markerTitle;
-            lines = parsedLines;
-            omittedLineCount = Math.Max(0, totalLineCount - parsedLines.Count);
-            return true;
-        }
-
-        return false;
-    }
-
-    private static List<string> ExtractBatchLines(string detailText, int maxLines, out int totalLineCount)
-    {
-        totalLineCount = 0;
-        var result = new List<string>(Math.Min(maxLines, 16));
-
-        using var reader = new StringReader(detailText);
-        while (reader.ReadLine() is { } rawLine)
-        {
-            var trimmed = rawLine.Trim();
-            if (trimmed.Length == 0)
-            {
-                continue;
-            }
-
-            totalLineCount++;
-            if (result.Count >= maxLines)
-            {
-                continue;
-            }
-
-            result.Add(trimmed.StartsWith("-", StringComparison.Ordinal) ? trimmed : $"- {trimmed}");
-        }
-
-        return result;
-    }
-
-    private static string BuildBatchSummary(string title, IReadOnlyList<string> lines, int omittedLineCount)
-    {
-        if (lines.Count == 0)
-        {
-            return string.Empty;
-        }
-
-        var matched = 0;
-        var missing = 0;
-        var mismatched = 0;
-        var errors = 0;
-        var unknown = 0;
-
-        foreach (var line in lines)
-        {
-            var lower = line.ToLowerInvariant();
-            if (lower.Contains("missing"))
-            {
-                missing++;
-                continue;
-            }
-
-            if (lower.Contains("error"))
-            {
-                errors++;
-                continue;
-            }
-
-            if (lower.Contains("unknown"))
-            {
-                unknown++;
-                continue;
-            }
-
-            if (title.Equals("Tasks", StringComparison.OrdinalIgnoreCase))
-            {
-                if (lower.Contains("disabled"))
-                {
-                    matched++;
-                }
-                else if (lower.Contains("enabled"))
-                {
-                    mismatched++;
-                }
-                else
-                {
-                    unknown++;
-                }
-
-                continue;
-            }
-
-            if (TryEvaluateArrowMatch(line, out var isMatch))
-            {
-                if (isMatch)
-                {
-                    matched++;
-                }
-                else
-                {
-                    mismatched++;
-                }
-            }
-            else
-            {
-                unknown++;
-            }
-        }
-
-        var parts = new List<string>
-        {
-            $"{matched} matched",
-            $"{missing} missing"
-        };
-
-        if (mismatched > 0)
-        {
-            parts.Add($"{mismatched} mismatched");
-        }
-
-        if (errors > 0)
-        {
-            parts.Add($"{errors} error{(errors == 1 ? string.Empty : "s")}");
-        }
-
-        if (unknown > 0)
-        {
-            parts.Add($"{unknown} unknown");
-        }
-
-        if (omittedLineCount > 0)
-        {
-            parts.Add($"{omittedLineCount} more hidden");
-        }
-
-        return string.Join(" / ", parts);
-    }
-
-    private static string CondenseMessageForDisplay(string message)
-    {
-        var trimmed = message.Trim();
-        if (trimmed.Length == 0)
-        {
-            return string.Empty;
-        }
-
-        foreach (var marker in new[] { "\nEntries:", "\nValues:", "\nServices:", "\nTasks:" })
-        {
-            var markerIndex = trimmed.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
-            if (markerIndex > 0)
-            {
-                var headline = trimmed[..markerIndex].Trim();
-                if (headline.Length > 0)
-                {
-                    return headline;
-                }
-            }
-        }
-
-        if (trimmed.Length <= MaxDisplayMessageLength)
-        {
-            return trimmed;
-        }
-
-        return $"{trimmed[..MaxDisplayMessageLength].TrimEnd()}...";
-    }
-
-    private static bool TryEvaluateArrowMatch(string line, out bool isMatch)
-    {
-        isMatch = false;
-
-        var arrowIndex = line.IndexOf("->", StringComparison.Ordinal);
-        var arrowLength = 2;
-
-        if (arrowIndex < 0)
-        {
-            return false;
-        }
-
-        var colonIndex = line.IndexOf(':');
-        var currentStart = colonIndex >= 0 ? colonIndex + 1 : 0;
-        if (currentStart >= arrowIndex)
-        {
-            return false;
-        }
-
-        var current = line[currentStart..arrowIndex].Trim();
-        var target = line[(arrowIndex + arrowLength)..].Trim();
-        if (string.IsNullOrWhiteSpace(current) || string.IsNullOrWhiteSpace(target))
-        {
-            return false;
-        }
-
-        var currentValue = current.Split('(')[0].Trim();
-        var targetValue = target.Split('(')[0].Trim();
-        if (string.IsNullOrWhiteSpace(currentValue) || string.IsNullOrWhiteSpace(targetValue))
-        {
-            return false;
-        }
-
-        isMatch = currentValue.Equals(targetValue, StringComparison.OrdinalIgnoreCase)
-            || currentValue.Contains(targetValue, StringComparison.OrdinalIgnoreCase);
-        return true;
     }
 
     private async Task RunCustomActionAsync()
@@ -3324,9 +1920,7 @@ public sealed class TweakItemViewModel : ViewModelBase
             return;
         }
 
-        var defaultOption = ChoiceOptions.FirstOrDefault(option =>
-            option.Key.Equals(choiceTweak.DefaultChoiceKey, StringComparison.OrdinalIgnoreCase));
-
+        var defaultOption = TweakChoiceStateCoordinator.ResolveDefaultOption(choiceTweak, ChoiceOptions);
         if (defaultOption is null)
         {
             return;
@@ -3338,193 +1932,30 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private void LogToFile(string message)
     {
-        try
-        {
-            var logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RegProbe", "Logs", "tweak-vm.log");
-            Directory.CreateDirectory(Path.GetDirectoryName(logPath)!);
-            File.AppendAllText(logPath, $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}{Environment.NewLine}");
-        }
-        catch
-        {
-            // Ignore logging failures
-        }
+        TweakFileLogger.Log(message);
     }
 
-    /// <summary>
-    /// Generates a rich tooltip for contextual help.
-    /// </summary>
-    private string GenerateHelpTooltip()
+    private void ApplyChoiceStateSnapshot(TweakChoiceStateSnapshot snapshot)
     {
-        var tooltip = Description;
-        var implications = GenerateImplications();
-
-        if (!string.IsNullOrEmpty(implications))
+        if (!string.IsNullOrWhiteSpace(snapshot.TargetValue))
         {
-            tooltip += $"\n\n{implications}";
+            TargetValue = snapshot.TargetValue;
         }
 
-        return tooltip;
-    }
-
-    /// <summary>
-    /// Generates implications text based on tweak category and risk.
-    /// </summary>
-    private string GenerateImplications()
-    {
-        var implications = new List<string>();
-
-        switch (Risk)
+        if (!string.IsNullOrWhiteSpace(snapshot.CurrentValue))
         {
-            case TweakRiskLevel.Safe:
-                implications.Add("SAFE: Safe to apply with minimal system impact.");
-                break;
-            case TweakRiskLevel.Advanced:
-                implications.Add("NOTE: Advanced setting that may affect some features.");
-                break;
-            case TweakRiskLevel.Risky:
-                implications.Add("WARN: Risky setting that could impact system stability.");
-                break;
+            CurrentValue = snapshot.CurrentValue;
         }
 
-        var category = Category.ToLowerInvariant();
-        switch (category)
+        if (snapshot.AppliedStatus.HasValue)
         {
-            case "privacy":
-                implications.Add("Affects: Privacy and data collection.");
-                break;
-            case "performance":
-                implications.Add("Affects: System responsiveness.");
-                break;
-            case "security":
-                implications.Add("Affects: System security posture.");
-                break;
-            case "network":
-                implications.Add("Affects: Network connectivity.");
-                break;
-            case "visibility":
-                implications.Add("Affects: UI elements and visual features.");
-                break;
+            AppliedStatus = snapshot.AppliedStatus.Value;
         }
 
-        if (RequiresElevation)
+        if (!string.IsNullOrWhiteSpace(snapshot.StatusMessage))
         {
-            implications.Add("Requires administrator privileges.");
+            StatusMessage = snapshot.StatusMessage;
         }
-
-        return string.Join("\n", implications);
-    }
-}
-
-/// <summary>
-/// Types of primary actions for a tweak
-/// </summary>
-public enum TweakActionType
-{
-    Toggle,
-    Open,
-    Import,
-    Export,
-    Clean,
-    Remove,
-    Custom
-}
-
-/// <summary>
-/// A reference link for documentation or sources
-/// </summary>
-public sealed class ReferenceLink
-{
-    public ReferenceLink(string title, string url, string? tooltip = null, ReferenceLinkKind kind = ReferenceLinkKind.Other)
-    {
-        Title = title;
-        Url = url;
-        Tooltip = string.IsNullOrWhiteSpace(tooltip) ? url : tooltip;
-        Kind = kind;
-    }
-    public string Title { get; }
-    public string Url { get; }
-    public string Tooltip { get; }
-    public ReferenceLinkKind Kind { get; }
-    public string Icon => Kind switch
-    {
-        ReferenceLinkKind.Catalog => "CAT",
-        ReferenceLinkKind.Details => "DET",
-        ReferenceLinkKind.Docs => "DOC",
-        ReferenceLinkKind.Source => "SRC",
-        _ => "REF"
-    };
-}
-
-public enum ReferenceLinkKind
-{
-    Catalog,
-    Details,
-    Docs,
-    Source,
-    Other
-}
-
-/// <summary>
-/// A sub-option for fine-tuning a tweak
-/// </summary>
-public sealed class TweakSubOption : ViewModelBase
-{
-    private bool _isEnabled;
-    private string _value = string.Empty;
-
-    public TweakSubOption(string label, TweakSubOptionType type)
-    {
-        Label = label;
-        Type = type;
     }
 
-    public string Label { get; }
-    public TweakSubOptionType Type { get; }
-
-    public bool IsEnabled
-    {
-        get => _isEnabled;
-        set => SetProperty(ref _isEnabled, value);
-    }
-
-    public string Value
-    {
-        get => _value;
-        set => SetProperty(ref _value, value);
-    }
-}
-
-public sealed class TweakChoiceOption : ViewModelBase
-{
-    public TweakChoiceOption(string key, string label, string description)
-    {
-        Key = key;
-        Label = label;
-        Description = description ?? string.Empty;
-    }
-
-    public string Key { get; }
-
-    public string Label { get; }
-
-    public string Description { get; }
-}
-
-public enum TweakSubOptionType
-{
-    Toggle,
-    Numeric,
-    Dropdown
-}
-
-/// <summary>
-/// Simplified status for first-glance view
-/// </summary>
-public enum TweakAppliedStatus
-{
-    Unknown,
-    Applied,
-    NotApplied,
-    Error
 }
