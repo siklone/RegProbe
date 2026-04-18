@@ -7,6 +7,13 @@ namespace RegProbe.App.ViewModels;
 
 internal static class TweakItemPresentationFormatter
 {
+    public static string BuildFriendlyDescription(string? casualSummary, string fallbackDescription)
+    {
+        return string.IsNullOrWhiteSpace(casualSummary)
+            ? fallbackDescription
+            : casualSummary;
+    }
+
     public static string BuildConfigurationFriendlyDescription(string description)
     {
         if (string.IsNullOrWhiteSpace(description))
@@ -35,6 +42,42 @@ internal static class TweakItemPresentationFormatter
         }
 
         return $"{normalized[..softBreak].Trim()}...";
+    }
+
+    public static bool HasText(string value)
+    {
+        return !string.IsNullOrWhiteSpace(value);
+    }
+
+    public static string BuildDefaultVsPreviousSummary(
+        string? defaultVsPrevious,
+        bool hasDefaultChoice)
+    {
+        if (!string.IsNullOrWhiteSpace(defaultVsPrevious))
+        {
+            return defaultVsPrevious;
+        }
+
+        return hasDefaultChoice
+            ? "Restore Previous uses the snapshot captured before Apply. Restore Default applies the tweak's built-in default option."
+            : string.Empty;
+    }
+
+    public static bool HasExtendedGuidance(
+        bool hasGuidanceWhenHelpful,
+        bool hasGuidanceTradeoffs,
+        bool hasDefaultVsPreviousSummary,
+        bool hasProfessionalNotes)
+    {
+        return hasGuidanceWhenHelpful ||
+            hasGuidanceTradeoffs ||
+            hasDefaultVsPreviousSummary ||
+            hasProfessionalNotes;
+    }
+
+    public static string BuildRestoreDefaultButtonText(bool hasDefaultChoice)
+    {
+        return hasDefaultChoice ? "Restore Default" : string.Empty;
     }
 
     public static string BuildConfigurationImpactAreaText(string impactAreaLabel) => impactAreaLabel switch
