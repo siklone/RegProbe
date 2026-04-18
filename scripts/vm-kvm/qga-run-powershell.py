@@ -38,6 +38,37 @@ def sha256_path(path: Path) -> str:
     return digest.hexdigest()
 
 
+def print_error_payload(
+    *,
+    domain: str,
+    guest_dir: str,
+    guest_script_path: str,
+    script: str,
+    error: Exception,
+) -> None:
+    print(
+        json.dumps(
+            apply_summary_contract(
+                {
+                    "status": "error",
+                    "summary_source": "qga-powershell-launch-error",
+                    "domain": domain,
+                    "guest_dir": guest_dir,
+                    "guest_script_path": guest_script_path,
+                    "script": script,
+                    "message": str(error),
+                    "exception_type": type(error).__name__,
+                },
+                default_error_kind="qga-powershell-launch-error",
+                default_recovery_action="rerun-qga-powershell",
+                default_transport_blocker="qga-agent-command",
+                default_guest_health="unknown",
+            ),
+            indent=2,
+        )
+    )
+
+
 def start_guest_exec(
     domain: str,
     path: str,
@@ -282,125 +313,135 @@ def main() -> int:
     parser.add_argument("--no-wait", action="store_true", help="Start the guest script and return immediately without waiting for completion.")
     parser.add_argument("--propagate-exit-code", action="store_true")
     args = parser.parse_args()
-
-    source = Path(args.script).resolve()
-    if not source.is_file():
-        raise FileNotFoundError(f"Host script not found: {source}")
     if args.no_wait and args.propagate_exit_code:
         parser.error("--propagate-exit-code requires waiting for the guest process to exit")
 
+    source = Path(args.script).resolve()
     guest_script_path = (args.guest_script_path or (args.guest_dir.rstrip("\\") + "\\" + source.name)).replace("/", "\\")
     guest_dir = guest_script_path.rsplit("\\", 1)[0] if "\\" in guest_script_path else args.guest_dir
 
-    ensure_result = ensure_guest_directory(
-        args.domain,
-        guest_dir,
-        connect=args.connect,
-        timeout=args.timeout,
-        wait_timeout=max(args.wait_timeout, 60),
-        poll_interval=args.poll_interval,
-    )
-    ensure_exitcode = ensure_result.get("exitcode")
-    if ensure_result.get("status") != "exited" or (ensure_exitcode is None or int(ensure_exitcode) != 0):
-        print(
-            json.dumps(
-                apply_summary_contract(
-                    {
-                        "status": "error",
-                        "summary_source": "qga-ensure-guest-dir-error",
-                        "domain": args.domain,
-                        "guest_dir": guest_dir,
-                        "result": ensure_result,
-                    },
-                    default_error_kind="guest-dir-ensure-failed",
-                    default_recovery_action="rerun-qga-powershell",
-                    default_transport_blocker="guest-dir-ensure",
-                    default_guest_health="unknown",
-                ),
-                indent=2,
-            )
-        )
-        return 1
+    try:
+        if not source.is_file():
+            raise FileNotFoundError(f"Host script not found: {source}")
 
-    upload_result = upload_guest_file(
-        args.domain,
-        source,
-        guest_script_path,
-        connect=args.connect,
-        timeout=args.timeout,
-        chunk_size=args.chunk_size,
-    )
-
-    exec_args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", guest_script_path] + args.ps_arg
-    started = start_guest_exec(
-        args.domain,
-        args.powershell_path,
-        exec_args,
-        connect=args.connect,
-        timeout=args.timeout,
-        capture_output=not args.no_wait,
-    )
-    pid = int(started["pid"])
-
-    if args.no_wait:
-        result = {
-            "status": "started",
-            "domain": args.domain,
-            "guest_dir": guest_dir,
-            "guest_script_path": guest_script_path,
-            "upload": upload_result,
-            "execution": {
-                "status": "started",
-                "pid": pid,
-                "path": args.powershell_path,
-                "arg": exec_args,
-            },
-            "cleanup": {
-                "status": "skipped",
-                "reason": "no-wait-launch",
-            },
-        }
-        print(json.dumps(result, indent=2))
-        return 0
-
-    exec_result = wait_guest_exec(
-        args.domain,
-        pid,
-        args.powershell_path,
-        exec_args,
-        connect=args.connect,
-        timeout=args.timeout,
-        wait_timeout=args.wait_timeout,
-        poll_interval=args.poll_interval,
-    )
-
-    cleanup_result = None
-    if not args.keep:
-        cleanup_result = remove_guest_path(
+        ensure_result = ensure_guest_directory(
             args.domain,
-            guest_script_path,
+            guest_dir,
             connect=args.connect,
             timeout=args.timeout,
             wait_timeout=max(args.wait_timeout, 60),
             poll_interval=args.poll_interval,
         )
+        ensure_exitcode = ensure_result.get("exitcode")
+        if ensure_result.get("status") != "exited" or (ensure_exitcode is None or int(ensure_exitcode) != 0):
+            print(
+                json.dumps(
+                    apply_summary_contract(
+                        {
+                            "status": "error",
+                            "summary_source": "qga-ensure-guest-dir-error",
+                            "domain": args.domain,
+                            "guest_dir": guest_dir,
+                            "result": ensure_result,
+                        },
+                        default_error_kind="guest-dir-ensure-failed",
+                        default_recovery_action="rerun-qga-powershell",
+                        default_transport_blocker="guest-dir-ensure",
+                        default_guest_health="unknown",
+                    ),
+                    indent=2,
+                )
+            )
+            return 1
 
-    result = {
-        "status": "completed" if exec_result.get("status") == "exited" else exec_result.get("status"),
-        "domain": args.domain,
-        "guest_dir": guest_dir,
-        "guest_script_path": guest_script_path,
-        "upload": upload_result,
-        "execution": exec_result,
-        "cleanup": cleanup_result,
-    }
-    print(json.dumps(result, indent=2))
+        upload_result = upload_guest_file(
+            args.domain,
+            source,
+            guest_script_path,
+            connect=args.connect,
+            timeout=args.timeout,
+            chunk_size=args.chunk_size,
+        )
 
-    if args.propagate_exit_code and exec_result.get("status") == "exited":
-        return int(exec_result.get("exitcode") or 0)
-    if exec_result.get("status") != "exited":
-        return 124
-    return 0
+        exec_args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", guest_script_path] + args.ps_arg
+        started = start_guest_exec(
+            args.domain,
+            args.powershell_path,
+            exec_args,
+            connect=args.connect,
+            timeout=args.timeout,
+            capture_output=not args.no_wait,
+        )
+        pid = int(started["pid"])
+
+        if args.no_wait:
+            result = {
+                "status": "started",
+                "domain": args.domain,
+                "guest_dir": guest_dir,
+                "guest_script_path": guest_script_path,
+                "upload": upload_result,
+                "execution": {
+                    "status": "started",
+                    "pid": pid,
+                    "path": args.powershell_path,
+                    "arg": exec_args,
+                },
+                "cleanup": {
+                    "status": "skipped",
+                    "reason": "no-wait-launch",
+                },
+            }
+            print(json.dumps(result, indent=2))
+            return 0
+
+        exec_result = wait_guest_exec(
+            args.domain,
+            pid,
+            args.powershell_path,
+            exec_args,
+            connect=args.connect,
+            timeout=args.timeout,
+            wait_timeout=args.wait_timeout,
+            poll_interval=args.poll_interval,
+        )
+
+        cleanup_result = None
+        if not args.keep:
+            cleanup_result = remove_guest_path(
+                args.domain,
+                guest_script_path,
+                connect=args.connect,
+                timeout=args.timeout,
+                wait_timeout=max(args.wait_timeout, 60),
+                poll_interval=args.poll_interval,
+            )
+
+        result = {
+            "status": "completed" if exec_result.get("status") == "exited" else exec_result.get("status"),
+            "domain": args.domain,
+            "guest_dir": guest_dir,
+            "guest_script_path": guest_script_path,
+            "upload": upload_result,
+            "execution": exec_result,
+            "cleanup": cleanup_result,
+        }
+        print(json.dumps(result, indent=2))
+
+        if args.propagate_exit_code and exec_result.get("status") == "exited":
+            return int(exec_result.get("exitcode") or 0)
+        if exec_result.get("status") != "exited":
+            return 124
+        return 0
+    except Exception as error:  # pragma: no cover - exercised via CLI-facing tests
+        print_error_payload(
+            domain=args.domain,
+            guest_dir=guest_dir,
+            guest_script_path=guest_script_path,
+            script=args.script,
+            error=error,
+        )
+        return 1
 
 
 if __name__ == "__main__":

@@ -148,6 +148,26 @@ class VmKvmQgaTimeoutContractTests(unittest.TestCase):
         self.assertEqual(payload["transport_blocker"], "guest-dir-ensure")
         self.assertEqual(payload["summary_source"], "qga-ensure-guest-dir-error")
 
+    def test_qga_run_powershell_main_missing_host_script_uses_contract_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            script_path = Path(temp_root) / "missing-script.ps1"
+            argv = [
+                "qga-run-powershell.py",
+                "--script",
+                str(script_path),
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = qga_run_powershell.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "qga-powershell-launch-error")
+        self.assertEqual(payload["recovery_action"], "rerun-qga-powershell")
+        self.assertEqual(payload["transport_blocker"], "qga-agent-command")
+        self.assertEqual(payload["summary_source"], "qga-powershell-launch-error")
+        self.assertEqual(payload["exception_type"], "FileNotFoundError")
+
     def test_qga_get_file_main_error_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             destination = Path(temp_root) / "download.bin"
