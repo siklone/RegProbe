@@ -482,82 +482,13 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool HasDetectedState => LastDetectedAtUtc.HasValue;
 
-    public string InventoryFreshnessText
-    {
-        get
-        {
-            if (!LastDetectedAtUtc.HasValue)
-            {
-                return "Not scanned yet";
-            }
+    public string InventoryFreshnessText => TweakInventoryPresentation.BuildInventoryFreshnessText(
+        LastDetectedAtUtc,
+        IsStateFromCache);
 
-            var elapsed = DateTimeOffset.UtcNow - LastDetectedAtUtc.Value;
-            if (elapsed < TimeSpan.Zero)
-            {
-                elapsed = TimeSpan.Zero;
-            }
-
-            string ageText;
-            if (elapsed.TotalMinutes < 1)
-            {
-                ageText = $"{Math.Max(1, (int)elapsed.TotalSeconds)}s ago";
-            }
-            else if (elapsed.TotalHours < 1)
-            {
-                ageText = $"{(int)elapsed.TotalMinutes}m ago";
-            }
-            else if (elapsed.TotalDays < 1)
-            {
-                ageText = $"{(int)elapsed.TotalHours}h ago";
-            }
-            else
-            {
-                ageText = $"{(int)elapsed.TotalDays}d ago";
-            }
-
-            var source = IsStateFromCache ? "Cached" : "Live";
-            return $"{source} {ageText}";
-        }
-    }
-
-    public string ConfigurationInventoryFreshnessText
-    {
-        get
-        {
-            if (!LastDetectedAtUtc.HasValue)
-            {
-                return "Not checked yet";
-            }
-
-            var elapsed = DateTimeOffset.UtcNow - LastDetectedAtUtc.Value;
-            if (elapsed < TimeSpan.Zero)
-            {
-                elapsed = TimeSpan.Zero;
-            }
-
-            string ageText;
-            if (elapsed.TotalMinutes < 1)
-            {
-                ageText = $"{Math.Max(1, (int)elapsed.TotalSeconds)}s ago";
-            }
-            else if (elapsed.TotalHours < 1)
-            {
-                ageText = $"{(int)elapsed.TotalMinutes}m ago";
-            }
-            else if (elapsed.TotalDays < 1)
-            {
-                ageText = $"{(int)elapsed.TotalHours}h ago";
-            }
-            else
-            {
-                ageText = $"{(int)elapsed.TotalDays}d ago";
-            }
-
-            return IsStateFromCache
-                ? $"Checked from cache {ageText}"
-                : $"Checked live {ageText}";
-        }
-    }
+    public string ConfigurationInventoryFreshnessText => TweakInventoryPresentation.BuildConfigurationInventoryFreshnessText(
+        LastDetectedAtUtc,
+        IsStateFromCache);
 
     /// <summary>
     /// Before state for snapshot comparison (same as CurrentValue).
