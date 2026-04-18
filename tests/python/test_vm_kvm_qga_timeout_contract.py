@@ -4,9 +4,11 @@ import importlib.util
 import io
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
+from itertools import count
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -26,9 +28,46 @@ def load_module(name: str, path: Path):
 
 qga_exec = load_module("qga_exec_for_timeout_contract_tests", VM_KVM_SCRIPTS / "qga-exec.py")
 qga_run_powershell = load_module("qga_run_powershell_for_timeout_contract_tests", VM_KVM_SCRIPTS / "qga-run-powershell.py")
+ensure_guest_admin_shell = load_module("ensure_guest_admin_shell_for_timeout_contract_tests", VM_KVM_SCRIPTS / "ensure-guest-admin-shell.py")
 
 
 class VmKvmQgaTimeoutContractTests(unittest.TestCase):
+    def test_ensure_guest_admin_shell_timeout_uses_contract_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            argv = [
+                "ensure-guest-admin-shell.py",
+                "--repo-root",
+                str(REPO_ROOT),
+                "--upload-dir",
+                str(Path(temp_root)),
+                "--timeout-seconds",
+                "0",
+                "--marker-name",
+                "timeout-marker",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ensure_guest_admin_shell,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(ensure_guest_admin_shell, "send_key", return_value=None), mock.patch.object(
+                ensure_guest_admin_shell,
+                "type_text",
+                return_value=None,
+            ), mock.patch.object(ensure_guest_admin_shell.time, "sleep", return_value=None), mock.patch.object(
+                ensure_guest_admin_shell.time,
+                "time",
+                side_effect=(float(value) for value in count()),
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ensure_guest_admin_shell.main()
+
+            payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 2)
+        self.assertEqual(payload["status"], "timeout")
+        self.assertEqual(payload["error_kind"], "runner-timeout")
+        self.assertEqual(payload["recovery_action"], "rerun-admin-shell-recovery")
+        self.assertEqual(payload["transport_blocker"], "timeout")
+        self.assertEqual(payload["guest_health"], "unknown")
+
     def test_qga_exec_main_timeout_uses_contract_fields(self) -> None:
         argv = [
             "qga-exec.py",
