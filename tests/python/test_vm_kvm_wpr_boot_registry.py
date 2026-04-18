@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import importlib.util
 import io
 import json
@@ -33,6 +34,65 @@ wpr_boot_registry = load_module(
 
 
 class VmKvmWprBootRegistryTests(unittest.TestCase):
+    def test_describe_downloaded_file_reports_zero_byte_state(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            zero_path = Path(temp_root) / "summary.json"
+            zero_path.write_text("", encoding="utf-8")
+
+            described = wpr_boot_registry.describe_downloaded_file(zero_path)
+
+        self.assertTrue(described["exists"])
+        self.assertEqual(described["size_bytes"], 0)
+        self.assertTrue(described["is_zero_byte"])
+
+    def test_salvage_timeout_artifacts_records_zero_byte_guest_artifacts(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root)
+            args = argparse.Namespace(
+                salvage_timeout_artifacts=True,
+                launch_transport="qga",
+                domain="dummy",
+                connect="dummy",
+                salvage_qga_timeout_seconds=30,
+                output_name="sample-run",
+                registry_path=r"HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel",
+                value_name="GlobalTimerResolutionRequests",
+            )
+
+            def fake_download(*, host_path: Path, guest_path: str, **_: object) -> dict[str, object]:
+                if host_path.name.endswith("-summary-guest.json"):
+                    host_path.write_text("", encoding="utf-8")
+                elif host_path.name.endswith(".normalized.json"):
+                    host_path.write_text("", encoding="utf-8")
+                elif host_path.name.endswith(".hits.csv"):
+                    host_path.write_text("Event Name,Type\n", encoding="utf-8")
+                elif host_path.name.endswith("-stage-guest.json"):
+                    host_path.write_text('{"status":"running"}\n', encoding="utf-8")
+                else:
+                    host_path.write_text('{"status":"collect-tracerpt"}\n', encoding="utf-8")
+
+                return {
+                    "guest_path": guest_path,
+                    "host_path": str(host_path),
+                    "returncode": 0,
+                    **wpr_boot_registry.describe_downloaded_file(host_path),
+                }
+
+            with mock.patch.object(wpr_boot_registry, "try_qga_download", side_effect=fake_download):
+                payload = wpr_boot_registry.salvage_timeout_artifacts(
+                    repo_root=REPO_ROOT,
+                    args=args,
+                    upload_dir=upload_dir,
+                    guest_output_root=r"C:\RegProbe-Diag\wpr-boot-registry\sample-run",
+                )
+
+        self.assertTrue(payload["attempted"])
+        self.assertTrue(payload["artifact_health"]["guest_summary"]["is_zero_byte"])
+        self.assertTrue(payload["artifact_health"]["guest_normalized"]["is_zero_byte"])
+        self.assertEqual(payload["hits_csv"]["hit_line_count"], 0)
+        self.assertTrue(payload["normalized_salvage"]["created"])
+        self.assertEqual(payload["normalized_salvage"]["normalizer_name"], "HostTimeoutSalvageNormalizer")
+
     def test_prepare_timeout_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"

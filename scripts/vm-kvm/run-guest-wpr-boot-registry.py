@@ -126,6 +126,16 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     return path.exists()
 
 
+def describe_downloaded_file(path: Path) -> dict[str, object]:
+    exists = path.exists()
+    size_bytes = path.stat().st_size if exists else 0
+    return {
+        "exists": exists,
+        "size_bytes": size_bytes,
+        "is_zero_byte": exists and size_bytes == 0,
+    }
+
+
 def try_qga_download(
     *,
     repo_root: Path,
@@ -152,8 +162,8 @@ def try_qga_download(
         "guest_path": guest_path,
         "host_path": str(host_path),
         "returncode": result.returncode,
-        "exists": host_path.exists(),
     }
+    payload.update(describe_downloaded_file(host_path))
     if result.stdout:
         try:
             payload["result"] = json.loads(result.stdout)
@@ -267,6 +277,10 @@ def salvage_timeout_artifacts(
         guest_path = guest_output_root.rstrip("\\") + "\\" + guest_name
         downloads[name] = try_qga_download(repo_root=repo_root, args=args, guest_path=guest_path, host_path=host_path)
 
+    artifact_health = {
+        name: describe_downloaded_file(host_path)
+        for name, (_, host_path) in salvage_targets.items()
+    }
     hits_csv_path = salvage_targets["guest_hits_csv"][1]
     normalized_path = salvage_targets["guest_normalized"][1]
     hits_csv = inspect_hits_csv(hits_csv_path, args.value_name)
@@ -290,6 +304,7 @@ def salvage_timeout_artifacts(
         "attempted": True,
         "guest_output_root": guest_output_root,
         "downloads": downloads,
+        "artifact_health": artifact_health,
         "hits_csv": hits_csv,
         "normalized_salvage": normalized_salvage,
     }
