@@ -13,8 +13,8 @@ partial class Program
     static Command CreateResearchShowBlockedCommand()
     {
         var command = new Command("show-blocked", "Show blocked worklist detail for a candidate");
-        var candidateIdArgument = new Argument<string>("candidate-id", "Blocked candidate id");
-        var emitJsonOption = new Option<bool>("--json", "Emit blocked worklist detail as JSON");
+        var candidateIdArgument = CreateArgument<string>("candidate-id", "Blocked candidate id");
+        var emitJsonOption = CreateOption<bool>("--json", "Emit blocked worklist detail as JSON");
         command.AddArgument(candidateIdArgument);
         command.AddOption(emitJsonOption);
         command.SetHandler(context =>
@@ -67,14 +67,14 @@ partial class Program
     static Command CreateResearchListBlockedCommand()
     {
         var command = new Command("list-blocked", "List blocked candidates");
-        var reasonOption = new Option<string?>("--reason", "Only show blockers matching this reason");
-        var worklistOption = new Option<bool>("--worklist", "Show the prioritized blocked worklist view");
-        var actionableOnlyOption = new Option<bool>("--actionable-only", "Only show blocked candidates that are currently actionable");
-        var actionabilityOption = new Option<string?>("--actionability", "Only show blocked candidates with a specific actionability (active or hold)");
-        var laneOption = new Option<string?>("--lane", "Only show blocked candidates for a specific next-missing-layer lane");
-        var topOption = new Option<int?>("--top", "Limit the number of blocked candidates shown");
-        var emitJsonOption = new Option<bool>("--json", "Emit blocked candidates as JSON");
-        var emitSummaryOption = new Option<bool>("--summary", "Show blocked lane counts instead of individual candidates");
+        var reasonOption = CreateOption<string?>("--reason", "Only show blockers matching this reason");
+        var worklistOption = CreateOption<bool>("--worklist", "Show the prioritized blocked worklist view");
+        var actionableOnlyOption = CreateOption<bool>("--actionable-only", "Only show blocked candidates that are currently actionable");
+        var actionabilityOption = CreateOption<string?>("--actionability", "Only show blocked candidates with a specific actionability (active or hold)");
+        var laneOption = CreateOption<string?>("--lane", "Only show blocked candidates for a specific next-missing-layer lane");
+        var topOption = CreateOption<int?>("--top", "Limit the number of blocked candidates shown");
+        var emitJsonOption = CreateOption<bool>("--json", "Emit blocked candidates as JSON");
+        var emitSummaryOption = CreateOption<bool>("--summary", "Show blocked lane counts instead of individual candidates");
         command.AddOption(reasonOption);
         command.AddOption(worklistOption);
         command.AddOption(actionableOnlyOption);

@@ -23,9 +23,9 @@ partial class Program
         dnsCommand.AddCommand(listCommand);
 
         var setCommand = new Command("set", "Set DNS provider (default: dry-run)");
-        var providerArg = new Argument<string>("provider", "DNS provider name");
-        var applyOption = new Option<bool>("--apply", "Actually apply changes (default: dry-run)");
-        var flushOption = new Option<bool>("--flush", "Flush DNS cache after applying");
+        var providerArg = CreateArgument<string>("provider", "DNS provider name");
+        var applyOption = CreateOption<bool>("--apply", "Actually apply changes (default: dry-run)");
+        var flushOption = CreateOption<bool>("--flush", "Flush DNS cache after applying");
         setCommand.AddArgument(providerArg);
         setCommand.AddOption(applyOption);
         setCommand.AddOption(flushOption);
@@ -75,7 +75,7 @@ partial class Program
         dnsCommand.AddCommand(setCommand);
 
         var resetCommand = new Command("reset", "Reset DNS to automatic (default: dry-run)");
-        var resetApplyOption = new Option<bool>("--apply", "Actually apply changes (default: dry-run)");
+        var resetApplyOption = CreateOption<bool>("--apply", "Actually apply changes (default: dry-run)");
         resetCommand.AddOption(resetApplyOption);
         resetCommand.SetHandler(async context =>
         {

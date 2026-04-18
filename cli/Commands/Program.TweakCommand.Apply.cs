@@ -12,12 +12,12 @@ partial class Program
     static Command CreateTweakApplyCommand()
     {
         var command = new Command("apply", "Apply a tweak (default: dry-run)");
-        var tweakIdArgument = new Argument<string>("tweak-id", "ID of the tweak to apply");
-        var applyOption = new Option<bool>("--apply", "Actually apply changes (default: dry-run)");
-        var noVerifyOption = new Option<bool>("--no-verify", "Skip verify step after apply");
-        var noRollbackOption = new Option<bool>("--no-rollback", "Do not rollback on failure");
-        var overrideOption = new Option<bool>("--override", "Allow contributor/debug override for gated research-derived candidates");
-        var overrideReasonOption = new Option<string?>("--reason", "Optional reason for a contributor/debug override");
+        var tweakIdArgument = CreateArgument<string>("tweak-id", "ID of the tweak to apply");
+        var applyOption = CreateOption<bool>("--apply", "Actually apply changes (default: dry-run)");
+        var noVerifyOption = CreateOption<bool>("--no-verify", "Skip verify step after apply");
+        var noRollbackOption = CreateOption<bool>("--no-rollback", "Do not rollback on failure");
+        var overrideOption = CreateOption<bool>("--override", "Allow contributor/debug override for gated research-derived candidates");
+        var overrideReasonOption = CreateOption<string?>("--reason", "Optional reason for a contributor/debug override");
         command.AddArgument(tweakIdArgument);
         command.AddOption(applyOption);
         command.AddOption(noVerifyOption);

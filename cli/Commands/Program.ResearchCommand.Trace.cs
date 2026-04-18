@@ -11,13 +11,13 @@ partial class Program
     static Command CreateResearchNormalizeRegistryTraceCommand()
     {
         var command = new Command("normalize-registry-trace", "Normalize an ETL or Procmon CSV into a compact registry bundle.");
-        var formatOption = new Option<string>("--format", "Normalization format: etl or procmon-csv") { IsRequired = true };
-        var inputOption = new Option<string>("--input", "Input trace path") { IsRequired = true };
-        var outputOption = new Option<string>("--output", "Output normalized bundle path") { IsRequired = true };
-        var runIdOption = new Option<string>("--run-id", "Run identifier") { IsRequired = true };
-        var sourceToolOption = new Option<string>("--source-tool", () => "imported", "Source tool tag");
-        var capturePhaseOption = new Option<string>("--capture-phase", () => "runtime", "Capture phase tag");
-        var evidenceRefsOption = new Option<string[]>("--evidence-ref", () => Array.Empty<string>(), "Evidence reference(s)");
+        var formatOption = CreateRequiredOption<string>("--format", "Normalization format: etl or procmon-csv");
+        var inputOption = CreateRequiredOption<string>("--input", "Input trace path");
+        var outputOption = CreateRequiredOption<string>("--output", "Output normalized bundle path");
+        var runIdOption = CreateRequiredOption<string>("--run-id", "Run identifier");
+        var sourceToolOption = CreateOption<string>("--source-tool", () => "imported", "Source tool tag");
+        var capturePhaseOption = CreateOption<string>("--capture-phase", () => "runtime", "Capture phase tag");
+        var evidenceRefsOption = CreateOption<string[]>("--evidence-ref", () => Array.Empty<string>(), "Evidence reference(s)");
         command.AddOption(formatOption);
         command.AddOption(inputOption);
         command.AddOption(outputOption);

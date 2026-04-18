@@ -20,12 +20,9 @@ partial class Program
         WriteIndented = true
     };
 
-    static async Task<int> Main(string[] args)
+    static int Main(string[] args)
     {
-        var rootCommand = new RootCommand("RegProbe CLI - System optimization tool")
-        {
-            Name = "winopt"
-        };
+        var rootCommand = new RootCommand("RegProbe CLI - System optimization tool");
 
         rootCommand.AddCommand(CreateTweakCommand());
         rootCommand.AddCommand(CreatePresetCommand());
@@ -34,7 +31,7 @@ partial class Program
         rootCommand.AddCommand(CreateExportCommand());
         rootCommand.AddCommand(CreateResearchCommand());
 
-        return await rootCommand.InvokeAsync(args);
+        return rootCommand.Parse(args).Invoke();
     }
 
     private static bool TryParseRisk(string? value, out TweakRiskLevel risk)

@@ -12,10 +12,10 @@ partial class Program
     static Command CreateTweakRevertCommand()
     {
         var command = new Command("revert", "Rollback a tweak (default: dry-run)");
-        var tweakIdArgument = new Argument<string>("tweak-id", "ID of the tweak to revert");
-        var applyOption = new Option<bool>("--apply", "Actually rollback changes (default: dry-run)");
-        var overrideOption = new Option<bool>("--override", "Allow contributor/debug override for gated research-derived candidates");
-        var overrideReasonOption = new Option<string?>("--reason", "Optional reason for a contributor/debug override");
+        var tweakIdArgument = CreateArgument<string>("tweak-id", "ID of the tweak to revert");
+        var applyOption = CreateOption<bool>("--apply", "Actually rollback changes (default: dry-run)");
+        var overrideOption = CreateOption<bool>("--override", "Allow contributor/debug override for gated research-derived candidates");
+        var overrideReasonOption = CreateOption<string?>("--reason", "Optional reason for a contributor/debug override");
         command.AddArgument(tweakIdArgument);
         command.AddOption(applyOption);
         command.AddOption(overrideOption);

@@ -11,8 +11,8 @@ partial class Program
     static Command CreateResearchValidateJsonTweaksCommand()
     {
         var command = new Command("validate-json-tweaks", "Validate JSON tweak definitions and emit an invalid-definition report.");
-        var inputDirectoryOption = new Option<string>("--input-dir", "Directory containing JSON tweak definitions.") { IsRequired = true };
-        var reportOutputOption = new Option<string?>("--output", "Optional JSON report output path.");
+        var inputDirectoryOption = CreateRequiredOption<string>("--input-dir", "Directory containing JSON tweak definitions.");
+        var reportOutputOption = CreateOption<string?>("--output", "Optional JSON report output path.");
         command.AddOption(inputDirectoryOption);
         command.AddOption(reportOutputOption);
         command.SetHandler(context =>

@@ -10,10 +10,10 @@ partial class Program
     static Command CreateResearchValidateBatchCommand()
     {
         var command = new Command("validate-batch", "Validate invalid, undocumented, blocked, or missing-doc candidates");
-        var undocumentedOption = new Option<bool>("--undocumented", "Only show undocumented candidates");
-        var invalidOption = new Option<bool>("--invalid", "Only show invalid/schema-failing candidates");
-        var blockedStateOption = new Option<bool>("--blocked-state", "Only show blocked candidates");
-        var missingDocsOption = new Option<bool>("--missing-docs", "Only show documentation-quality failures");
+        var undocumentedOption = CreateOption<bool>("--undocumented", "Only show undocumented candidates");
+        var invalidOption = CreateOption<bool>("--invalid", "Only show invalid/schema-failing candidates");
+        var blockedStateOption = CreateOption<bool>("--blocked-state", "Only show blocked candidates");
+        var missingDocsOption = CreateOption<bool>("--missing-docs", "Only show documentation-quality failures");
         command.AddOption(undocumentedOption);
         command.AddOption(invalidOption);
         command.AddOption(blockedStateOption);
@@ -47,14 +47,12 @@ partial class Program
     static Command CreateResearchGenerateRegressionPackCommand()
     {
         var command = new Command("generate-regression-pack", "Generate a regression pack for one candidate or all promotable candidates");
-        var candidateIdArgument = new Argument<string?>("candidate-id", () => null, "Record or tweak id");
-        var allCandidatesOption = new Option<bool>("--all", "Generate regression packs for all promotable candidates");
-        var statesOption = new Option<string[]>("--state", "Restrict --all to one or more promotion states")
-        {
-            AllowMultipleArgumentsPerToken = true
-        };
-        var limitOption = new Option<int?>("--limit", "Optional max candidate count for --all");
-        var outputRootOption = new Option<string?>("--output-root", "Optional output root directory");
+        var candidateIdArgument = CreateArgument<string?>("candidate-id", () => null, "Record or tweak id");
+        var allCandidatesOption = CreateOption<bool>("--all", "Generate regression packs for all promotable candidates");
+        var statesOption = CreateOption<string[]>("--state", "Restrict --all to one or more promotion states");
+        statesOption.AllowMultipleArgumentsPerToken = true;
+        var limitOption = CreateOption<int?>("--limit", "Optional max candidate count for --all");
+        var outputRootOption = CreateOption<string?>("--output-root", "Optional output root directory");
         command.AddArgument(candidateIdArgument);
         command.AddOption(allCandidatesOption);
         command.AddOption(statesOption);
