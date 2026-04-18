@@ -1281,22 +1281,11 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    public bool HasOutcome => LastOutcome != TweakRunOutcome.None;
+    public bool HasOutcome => TweakOutcomePresentation.HasOutcome(LastOutcome);
 
-    public string OutcomeText => LastOutcome switch
-    {
-        TweakRunOutcome.InProgress => "Running",
-        TweakRunOutcome.RolledBack => "Rolled Back",
-        TweakRunOutcome.Success => "Success",
-        TweakRunOutcome.Failed => "Failed",
-        TweakRunOutcome.Cancelled => "Cancelled",
-        TweakRunOutcome.Skipped => "Skipped",
-        _ => "Idle"
-    };
+    public string OutcomeText => TweakOutcomePresentation.BuildOutcomeText(LastOutcome);
 
-    public string OutcomeSummary => HasOutcome
-        ? $"{LastActionText} - {OutcomeText}"
-        : "No runs yet";
+    public string OutcomeSummary => TweakOutcomePresentation.BuildOutcomeSummary(LastOutcome, LastActionText);
 
     public bool IsDetailsExpanded
     {
