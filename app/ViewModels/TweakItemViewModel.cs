@@ -667,15 +667,15 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public string EvidenceClassDescription => _evidenceClassDescription;
 
-    public string EvidenceClassBadgeText => EvidenceClassId;
+    public string EvidenceClassBadgeText => TweakEvidenceClassPresentation.BuildBadgeText(EvidenceClassId);
 
     public bool IsEvidenceConfirmed => IsEvidenceClassActionable;
 
-    public string EvidenceStateText => IsEvidenceConfirmed ? "Confirmed" : "Evidence pending";
+    public string EvidenceStateText => TweakEvidenceClassPresentation.BuildEvidenceStateText(IsEvidenceConfirmed);
 
     public string EvidenceClassActionState => _evidenceClassActionState;
 
-    public string EvidenceClassTooltip => $"{EvidenceClassTitle}. {EvidenceClassDescription}";
+    public string EvidenceClassTooltip => TweakEvidenceClassPresentation.BuildTooltip(EvidenceClassTitle, EvidenceClassDescription);
 
     public string EvidenceClassGatingReason => _evidenceClassGatingReason;
 
@@ -709,7 +709,7 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     public bool IsResearchGated => TweakVerdictPresentation.IsResearchGated(ShowInApp, IsMutationAllowed);
 
-    public bool HasEvidenceClass => !string.IsNullOrWhiteSpace(_evidenceClassId);
+    public bool HasEvidenceClass => TweakEvidenceClassPresentation.HasEvidenceClass(EvidenceClassId);
 
     public Brush EvidenceClassBrush => TweakEvidenceClassPresentation.GetBrush(EvidenceClassId);
 
