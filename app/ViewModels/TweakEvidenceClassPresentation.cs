@@ -33,6 +33,28 @@ internal static class TweakEvidenceClassPresentation
         _ => ClassEBackgroundBrush
     };
 
+    public static string BuildBadgeText(string evidenceClassId)
+    {
+        return evidenceClassId;
+    }
+
+    public static string BuildEvidenceStateText(bool isEvidenceConfirmed)
+    {
+        return isEvidenceConfirmed ? "Confirmed" : "Evidence pending";
+    }
+
+    public static string BuildTooltip(
+        string evidenceClassTitle,
+        string evidenceClassDescription)
+    {
+        return $"{evidenceClassTitle}. {evidenceClassDescription}";
+    }
+
+    public static bool HasEvidenceClass(string evidenceClassId)
+    {
+        return !string.IsNullOrWhiteSpace(evidenceClassId);
+    }
+
     private static SolidColorBrush CreateFrozenBrush(string hex)
     {
         var color = (Color)ColorConverter.ConvertFromString(hex);
