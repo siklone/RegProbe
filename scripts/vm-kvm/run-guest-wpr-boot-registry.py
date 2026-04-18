@@ -415,15 +415,22 @@ def main() -> int:
 
     summary_arm = json.loads(summary_arm_path.read_text(encoding="utf-8-sig"))
     if summary_arm.get("status") == "error":
-        payload = {
-            "summary_arm_path": str(summary_arm_path),
-            "output_name": args.output_name,
-            "arm_launch_transport": arm_launch_transport,
-            "status": "error",
-            "error_kind": summary_arm.get("error_kind"),
-            "error": summary_arm.get("error"),
-            "stage": "arm",
-        }
+        payload = apply_summary_contract(
+            {
+                "summary_arm_path": str(summary_arm_path),
+                "output_name": args.output_name,
+                "arm_launch_transport": arm_launch_transport,
+                "status": "error",
+                "error_kind": summary_arm.get("error_kind") or "wpr-arm-error",
+                "error": summary_arm.get("error"),
+                "stage": "arm",
+                "summary_source": "arm-summary",
+            },
+            default_error_kind="wpr-arm-error",
+            default_recovery_action="inspect-wpr-arm",
+            default_transport_blocker="arm-stage-error",
+            default_guest_health="degraded",
+        )
         print(json.dumps(payload, indent=2))
         return 1
 
@@ -498,9 +505,22 @@ def main() -> int:
             }
             caller_stack_event_count = int(summary.get("caller_stack_event_count") or 0)
             if args.expect_caller_stack and caller_stack_event_count == 0 and summary.get("status") != "error":
-                payload["status"] = "error"
-                payload["error_kind"] = "caller-stack-missing"
-                payload["error"] = "Caller stack frames were requested but the normalized bundle contains none."
+                payload = apply_summary_contract(
+                    {
+                        **payload,
+                        "status": "error",
+                        "error_kind": "caller-stack-missing",
+                        "error": "Caller stack frames were requested but the normalized bundle contains none.",
+                        "summary_source": "caller-stack-check",
+                        "recovery_action": "rerun-wpr-with-caller-stack",
+                        "transport_blocker": "caller-stack-missing",
+                        "guest_health": "degraded",
+                    },
+                    default_error_kind="caller-stack-missing",
+                    default_recovery_action="rerun-wpr-with-caller-stack",
+                    default_transport_blocker="caller-stack-missing",
+                    default_guest_health="degraded",
+                )
                 print(json.dumps(payload, indent=2))
                 return 1
             print(json.dumps(payload, indent=2))
@@ -555,6 +575,13 @@ def main() -> int:
                     "stage_name": stage.get("stage"),
                     "summary_source": "stage-fallback",
                 }
+                payload = apply_summary_contract(
+                    payload,
+                    default_error_kind="wpr-stage-error",
+                    default_recovery_action="inspect-wpr-stage",
+                    default_transport_blocker="stage-error",
+                    default_guest_health="degraded",
+                )
                 print(json.dumps(payload, indent=2))
                 return 1
         time.sleep(2)
