@@ -32,6 +32,29 @@ etw_stackwalk_capture = load_module(
 
 
 class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
+    def test_ingest_capture_artifacts_missing_etl_uses_contract_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            temp_dir = Path(temp_root)
+            summary_path = temp_dir / "summary.json"
+            summary_path.write_text('{"status":"ok"}\n', encoding="utf-8")
+
+            payload = etw_stackwalk_capture.ingest_capture_artifacts(
+                repo_root=REPO_ROOT,
+                run_id="stackwalk-test",
+                summary_path=summary_path,
+                xml_path=None,
+                etl_path=temp_dir / "missing.etl",
+                ingest_root=temp_dir / "ingest",
+                refresh_ghidra=False,
+            )
+
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "ingest-missing-etl")
+        self.assertEqual(payload["recovery_action"], "rerun-etw-stackwalk-capture")
+        self.assertEqual(payload["transport_blocker"], "missing-etl")
+        self.assertEqual(payload["guest_health"], "degraded")
+        self.assertEqual(payload["summary_source"], "ingest-preflight")
+
     def test_timeout_summary_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             upload_dir = Path(temp_root) / "upload"

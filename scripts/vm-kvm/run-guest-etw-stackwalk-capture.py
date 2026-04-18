@@ -80,10 +80,17 @@ def ingest_capture_artifacts(
     refresh_ghidra: bool,
 ) -> dict[str, object]:
     if etl_path is None or not etl_path.exists():
-        return {
-            "status": "error",
-            "error": "ETL upload is required for ingest.",
-        }
+        return apply_summary_contract(
+            {
+                "status": "error",
+                "summary_source": "ingest-preflight",
+                "error": "ETL upload is required for ingest.",
+            },
+            default_error_kind="ingest-missing-etl",
+            default_recovery_action="rerun-etw-stackwalk-capture",
+            default_transport_blocker="missing-etl",
+            default_guest_health="degraded",
+        )
 
     target_root = (ingest_root / run_id).resolve()
     target_root.mkdir(parents=True, exist_ok=True)
