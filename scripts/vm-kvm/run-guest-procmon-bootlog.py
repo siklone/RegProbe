@@ -160,11 +160,18 @@ def main() -> int:
     if not wait_for_file(arm_summary_path, args.prepare_timeout_seconds):
         print(
             json.dumps(
-                {
-                    "summary_arm_path": str(arm_summary_path),
-                    "output_name": args.output_name,
-                    "status": "prepare-timeout",
-                },
+                apply_summary_contract(
+                    {
+                        "summary_arm_path": str(arm_summary_path),
+                        "output_name": args.output_name,
+                        "status": "prepare-timeout",
+                        "summary_source": "procmon-prepare-timeout",
+                        "error_kind": "runner-timeout",
+                        "recovery_action": "rerun-procmon-bootlog",
+                        "transport_blocker": "timeout",
+                        "guest_health": "unknown",
+                    }
+                ),
                 indent=2,
             )
         )

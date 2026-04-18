@@ -126,6 +126,16 @@ def wait_for_file(path: Path, timeout_seconds: int) -> bool:
     return path.exists()
 
 
+def describe_downloaded_file(path: Path) -> dict[str, object]:
+    exists = path.exists()
+    size_bytes = path.stat().st_size if exists else 0
+    return {
+        "exists": exists,
+        "size_bytes": size_bytes,
+        "is_zero_byte": exists and size_bytes == 0,
+    }
+
+
 def try_qga_download(
     *,
     repo_root: Path,
@@ -152,8 +162,8 @@ def try_qga_download(
         "guest_path": guest_path,
         "host_path": str(host_path),
         "returncode": result.returncode,
-        "exists": host_path.exists(),
     }
+    payload.update(describe_downloaded_file(host_path))
     if result.stdout:
         try:
             payload["result"] = json.loads(result.stdout)
@@ -267,6 +277,10 @@ def salvage_timeout_artifacts(
         guest_path = guest_output_root.rstrip("\\") + "\\" + guest_name
         downloads[name] = try_qga_download(repo_root=repo_root, args=args, guest_path=guest_path, host_path=host_path)
 
+    artifact_health = {
+        name: describe_downloaded_file(host_path)
+        for name, (_, host_path) in salvage_targets.items()
+    }
     hits_csv_path = salvage_targets["guest_hits_csv"][1]
     normalized_path = salvage_targets["guest_normalized"][1]
     hits_csv = inspect_hits_csv(hits_csv_path, args.value_name)
@@ -290,8 +304,59 @@ def salvage_timeout_artifacts(
         "attempted": True,
         "guest_output_root": guest_output_root,
         "downloads": downloads,
+        "artifact_health": artifact_health,
         "hits_csv": hits_csv,
         "normalized_salvage": normalized_salvage,
+    }
+
+
+def summarize_timeout_salvage(timeout_salvage: dict[str, object]) -> dict[str, object]:
+    artifact_health = timeout_salvage.get("artifact_health") or {}
+    if not isinstance(artifact_health, dict):
+        artifact_health = {}
+    hits_csv = timeout_salvage.get("hits_csv") or {}
+    if not isinstance(hits_csv, dict):
+        hits_csv = {}
+    normalized_salvage = timeout_salvage.get("normalized_salvage") or {}
+    if not isinstance(normalized_salvage, dict):
+        normalized_salvage = {}
+
+    guest_summary = artifact_health.get("guest_summary") or {}
+    guest_normalized = artifact_health.get("guest_normalized") or {}
+    guest_hits_csv = artifact_health.get("guest_hits_csv") or {}
+    if not isinstance(guest_summary, dict):
+        guest_summary = {}
+    if not isinstance(guest_normalized, dict):
+        guest_normalized = {}
+    if not isinstance(guest_hits_csv, dict):
+        guest_hits_csv = {}
+
+    normalized_created = bool(normalized_salvage.get("created"))
+    hit_line_count = int(hits_csv.get("hit_line_count") or 0)
+
+    if normalized_created and hit_line_count == 0:
+        salvage_classification = "header-only-no-hit"
+        normalization_status = "ok"
+        normalizer_name = normalized_salvage.get("normalizer_name")
+    elif normalized_created:
+        salvage_classification = "normalized-salvage-created"
+        normalization_status = "ok"
+        normalizer_name = normalized_salvage.get("normalizer_name")
+    else:
+        salvage_classification = str(normalized_salvage.get("reason") or "not-needed")
+        normalization_status = "timeout"
+        normalizer_name = None
+
+    return {
+        "summary_source": "timeout-salvage",
+        "hit_line_count": hit_line_count,
+        "hits_csv_exists": bool(guest_hits_csv.get("exists")),
+        "guest_summary_zero_byte": bool(guest_summary.get("is_zero_byte")),
+        "guest_normalized_zero_byte": bool(guest_normalized.get("is_zero_byte")),
+        "normalized_bundle_exists": bool(guest_normalized.get("exists")) or normalized_created,
+        "normalization_status": normalization_status,
+        "normalizer_name": normalizer_name,
+        "salvage_classification": salvage_classification,
     }
 
 
@@ -402,12 +467,19 @@ def main() -> int:
     if not wait_for_file(summary_arm_path, args.prepare_timeout_seconds):
         print(
             json.dumps(
-                {
-                    "summary_arm_path": str(summary_arm_path),
-                    "output_name": args.output_name,
-                    "arm_launch_transport": arm_launch_transport,
-                    "status": "prepare-timeout",
-                },
+                apply_summary_contract(
+                    {
+                        "summary_arm_path": str(summary_arm_path),
+                        "output_name": args.output_name,
+                        "arm_launch_transport": arm_launch_transport,
+                        "status": "prepare-timeout",
+                        "summary_source": "wpr-prepare-timeout",
+                        "error_kind": "runner-timeout",
+                        "recovery_action": "rerun-wpr-boot-registry",
+                        "transport_blocker": "timeout",
+                        "guest_health": "unknown",
+                    }
+                ),
                 indent=2,
             )
         )
@@ -415,15 +487,22 @@ def main() -> int:
 
     summary_arm = json.loads(summary_arm_path.read_text(encoding="utf-8-sig"))
     if summary_arm.get("status") == "error":
-        payload = {
-            "summary_arm_path": str(summary_arm_path),
-            "output_name": args.output_name,
-            "arm_launch_transport": arm_launch_transport,
-            "status": "error",
-            "error_kind": summary_arm.get("error_kind"),
-            "error": summary_arm.get("error"),
-            "stage": "arm",
-        }
+        payload = apply_summary_contract(
+            {
+                "summary_arm_path": str(summary_arm_path),
+                "output_name": args.output_name,
+                "arm_launch_transport": arm_launch_transport,
+                "status": "error",
+                "error_kind": summary_arm.get("error_kind") or "wpr-arm-error",
+                "error": summary_arm.get("error"),
+                "stage": "arm",
+                "summary_source": "arm-summary",
+            },
+            default_error_kind="wpr-arm-error",
+            default_recovery_action="inspect-wpr-arm",
+            default_transport_blocker="arm-stage-error",
+            default_guest_health="degraded",
+        )
         print(json.dumps(payload, indent=2))
         return 1
 
@@ -498,9 +577,22 @@ def main() -> int:
             }
             caller_stack_event_count = int(summary.get("caller_stack_event_count") or 0)
             if args.expect_caller_stack and caller_stack_event_count == 0 and summary.get("status") != "error":
-                payload["status"] = "error"
-                payload["error_kind"] = "caller-stack-missing"
-                payload["error"] = "Caller stack frames were requested but the normalized bundle contains none."
+                payload = apply_summary_contract(
+                    {
+                        **payload,
+                        "status": "error",
+                        "error_kind": "caller-stack-missing",
+                        "error": "Caller stack frames were requested but the normalized bundle contains none.",
+                        "summary_source": "caller-stack-check",
+                        "recovery_action": "rerun-wpr-with-caller-stack",
+                        "transport_blocker": "caller-stack-missing",
+                        "guest_health": "degraded",
+                    },
+                    default_error_kind="caller-stack-missing",
+                    default_recovery_action="rerun-wpr-with-caller-stack",
+                    default_transport_blocker="caller-stack-missing",
+                    default_guest_health="degraded",
+                )
                 print(json.dumps(payload, indent=2))
                 return 1
             print(json.dumps(payload, indent=2))
@@ -555,10 +647,23 @@ def main() -> int:
                     "stage_name": stage.get("stage"),
                     "summary_source": "stage-fallback",
                 }
+                payload = apply_summary_contract(
+                    payload,
+                    default_error_kind="wpr-stage-error",
+                    default_recovery_action="inspect-wpr-stage",
+                    default_transport_blocker="stage-error",
+                    default_guest_health="degraded",
+                )
                 print(json.dumps(payload, indent=2))
                 return 1
         time.sleep(2)
 
+    timeout_salvage = salvage_timeout_artifacts(
+        repo_root=repo_root,
+        args=args,
+        upload_dir=upload_dir,
+        guest_output_root=rf"C:\RegProbe-Diag\wpr-boot-registry\{args.output_name}",
+    )
     timeout_summary = write_summary_contract(
         summary_path,
         {
@@ -568,12 +673,8 @@ def main() -> int:
             "arm_launch_transport": arm_launch_transport,
             "collect_launch_transport": collect_launch_transport,
             "status": "timeout",
-            "timeout_salvage": salvage_timeout_artifacts(
-                repo_root=repo_root,
-                args=args,
-                upload_dir=upload_dir,
-                guest_output_root=rf"C:\RegProbe-Diag\wpr-boot-registry\{args.output_name}",
-            ),
+            "timeout_salvage": timeout_salvage,
+            **summarize_timeout_salvage(timeout_salvage),
         },
         default_error_kind="runner-timeout",
         default_recovery_action="rerun-wpr-boot-registry",

@@ -57,6 +57,35 @@ def type_text(
     run(cmd, cwd=repo_root)
 
 
+def print_error_payload(
+    *,
+    domain: str,
+    marker_name: str,
+    bridge_base_url: str,
+    error: Exception,
+) -> None:
+    print(
+        json.dumps(
+            apply_summary_contract(
+                {
+                    "status": "error",
+                    "summary_source": "guest-admin-shell-launch-error",
+                    "domain": domain,
+                    "marker_name": marker_name,
+                    "bridge_base_url": bridge_base_url,
+                    "message": str(error),
+                    "exception_type": type(error).__name__,
+                },
+                default_error_kind="guest-admin-shell-launch-error",
+                default_recovery_action="rerun-admin-shell-recovery",
+                default_transport_blocker="host-launch-error",
+                default_guest_health="unknown",
+            ),
+            indent=2,
+        )
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Best-effort host-side helper that reopens an elevated PowerShell session in the KVM guest.")
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
@@ -71,103 +100,111 @@ def main() -> int:
     parser.add_argument("--timeout-seconds", type=int, default=45)
     parser.add_argument("--marker-name", default="guest-admin-shell-ready")
     args = parser.parse_args()
+    try:
+        repo_root = Path(args.repo_root).resolve()
+        upload_dir = Path(args.upload_dir).resolve()
+        upload_dir.mkdir(parents=True, exist_ok=True)
+        ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
 
-    repo_root = Path(args.repo_root).resolve()
-    upload_dir = Path(args.upload_dir).resolve()
-    upload_dir.mkdir(parents=True, exist_ok=True)
-    ensure_guest_bridge(repo_root=repo_root, bridge_base_url=args.bridge_base_url, upload_root=upload_dir)
-
-    bridge = args.bridge_base_url.rstrip("/")
-    marker_file = upload_dir / f"{args.marker_name}.txt"
-    if marker_file.exists():
-        marker_file.unlink()
-
-    elevate_command = "powershell -c Start-Process powershell -Verb RunAs"
-    ready_command = f"iwr -UseBasicParsing -Method Put -Uri '{bridge}/{marker_file.name}' -Body 'ready'|Out-Null"
-
-    send_key(args.connect, args.domain, "KEY_ESC")
-    time.sleep(float(args.delay_ms) / 1000.0)
-    send_key(args.connect, args.domain, "KEY_LEFTMETA", "KEY_R")
-    time.sleep(args.launch_delay_seconds)
-    type_text(repo_root, args.domain, args.connect, elevate_command, delay_ms=args.delay_ms, press_enter=True)
-
-    time.sleep(args.uac_delay_seconds)
-    send_key(args.connect, args.domain, "KEY_LEFT")
-    time.sleep(0.2)
-    send_key(args.connect, args.domain, "KEY_ENTER")
-    time.sleep(max(args.launch_delay_seconds, 1.0))
-    type_text(repo_root, args.domain, args.connect, ready_command, delay_ms=args.delay_ms, press_enter=True)
-
-    deadline = time.time() + args.timeout_seconds
-    while time.time() < deadline:
+        bridge = args.bridge_base_url.rstrip("/")
+        marker_file = upload_dir / f"{args.marker_name}.txt"
         if marker_file.exists():
-            payload = {
-                "marker_path": str(marker_file),
-                "marker_name": marker_file.name,
-                "status": "ready",
-            }
-            print(json.dumps(payload, indent=2))
-            return 0
-        time.sleep(1)
+            marker_file.unlink()
 
-    send_key(args.connect, args.domain, "KEY_ESC")
-    time.sleep(float(args.delay_ms) / 1000.0)
-    send_key(args.connect, args.domain, "KEY_LEFTMETA", "KEY_R")
-    time.sleep(max(args.launch_delay_seconds, 1.5))
-    type_text(repo_root, args.domain, args.connect, elevate_command, delay_ms=args.delay_ms, press_enter=True)
+        elevate_command = "powershell -c Start-Process powershell -Verb RunAs"
+        ready_command = f"iwr -UseBasicParsing -Method Put -Uri '{bridge}/{marker_file.name}' -Body 'ready'|Out-Null"
 
-    time.sleep(max(args.uac_delay_seconds, 2.0))
-    send_key(args.connect, args.domain, "KEY_LEFT")
-    time.sleep(0.2)
-    send_key(args.connect, args.domain, "KEY_ENTER")
-    time.sleep(max(args.launch_delay_seconds, 1.5))
-    type_text(repo_root, args.domain, args.connect, ready_command, delay_ms=args.delay_ms, press_enter=True)
+        send_key(args.connect, args.domain, "KEY_ESC")
+        time.sleep(float(args.delay_ms) / 1000.0)
+        send_key(args.connect, args.domain, "KEY_LEFTMETA", "KEY_R")
+        time.sleep(args.launch_delay_seconds)
+        type_text(repo_root, args.domain, args.connect, elevate_command, delay_ms=args.delay_ms, press_enter=True)
 
-    retry_deadline = time.time() + 20
-    while time.time() < retry_deadline:
-        if marker_file.exists():
-            payload = apply_summary_contract({
-                "marker_path": str(marker_file),
-                "marker_name": marker_file.name,
-                "status": "ready-via-retry",
-            })
-            print(json.dumps(payload, indent=2))
-            return 0
-        time.sleep(1)
+        time.sleep(args.uac_delay_seconds)
+        send_key(args.connect, args.domain, "KEY_LEFT")
+        time.sleep(0.2)
+        send_key(args.connect, args.domain, "KEY_ENTER")
+        time.sleep(max(args.launch_delay_seconds, 1.0))
+        type_text(repo_root, args.domain, args.connect, ready_command, delay_ms=args.delay_ms, press_enter=True)
 
-    send_key(args.connect, args.domain, "KEY_ESC")
-    time.sleep(float(args.delay_ms) / 1000.0)
-    type_text(repo_root, args.domain, args.connect, ready_command, delay_ms=args.delay_ms, press_enter=True)
-
-    fallback_deadline = time.time() + 10
-    while time.time() < fallback_deadline:
-        if marker_file.exists():
-            payload = apply_summary_contract({
-                "marker_path": str(marker_file),
-                "marker_name": marker_file.name,
-                "status": "ready-via-fallback",
-            })
-            print(json.dumps(payload, indent=2))
-            return 0
-        time.sleep(1)
-
-    print(
-        json.dumps(
-            apply_summary_contract(
-                {
+        deadline = time.time() + args.timeout_seconds
+        while time.time() < deadline:
+            if marker_file.exists():
+                payload = {
                     "marker_path": str(marker_file),
                     "marker_name": marker_file.name,
-                    "status": "timeout",
-                },
-                default_error_kind="runner-timeout",
-                default_recovery_action="rerun-admin-shell-recovery",
-                default_transport_blocker="timeout",
-                default_guest_health="unknown",
-            ),
-            indent=2,
+                    "status": "ready",
+                }
+                print(json.dumps(payload, indent=2))
+                return 0
+            time.sleep(1)
+
+        send_key(args.connect, args.domain, "KEY_ESC")
+        time.sleep(float(args.delay_ms) / 1000.0)
+        send_key(args.connect, args.domain, "KEY_LEFTMETA", "KEY_R")
+        time.sleep(max(args.launch_delay_seconds, 1.5))
+        type_text(repo_root, args.domain, args.connect, elevate_command, delay_ms=args.delay_ms, press_enter=True)
+
+        time.sleep(max(args.uac_delay_seconds, 2.0))
+        send_key(args.connect, args.domain, "KEY_LEFT")
+        time.sleep(0.2)
+        send_key(args.connect, args.domain, "KEY_ENTER")
+        time.sleep(max(args.launch_delay_seconds, 1.5))
+        type_text(repo_root, args.domain, args.connect, ready_command, delay_ms=args.delay_ms, press_enter=True)
+
+        retry_deadline = time.time() + 20
+        while time.time() < retry_deadline:
+            if marker_file.exists():
+                payload = apply_summary_contract({
+                    "marker_path": str(marker_file),
+                    "marker_name": marker_file.name,
+                    "status": "ready-via-retry",
+                })
+                print(json.dumps(payload, indent=2))
+                return 0
+            time.sleep(1)
+
+        send_key(args.connect, args.domain, "KEY_ESC")
+        time.sleep(float(args.delay_ms) / 1000.0)
+        type_text(repo_root, args.domain, args.connect, ready_command, delay_ms=args.delay_ms, press_enter=True)
+
+        fallback_deadline = time.time() + 10
+        while time.time() < fallback_deadline:
+            if marker_file.exists():
+                payload = apply_summary_contract({
+                    "marker_path": str(marker_file),
+                    "marker_name": marker_file.name,
+                    "status": "ready-via-fallback",
+                })
+                print(json.dumps(payload, indent=2))
+                return 0
+            time.sleep(1)
+
+        print(
+            json.dumps(
+                apply_summary_contract(
+                    {
+                        "marker_path": str(marker_file),
+                        "marker_name": marker_file.name,
+                        "status": "timeout",
+                    },
+                    default_error_kind="runner-timeout",
+                    default_recovery_action="rerun-admin-shell-recovery",
+                    default_transport_blocker="timeout",
+                    default_guest_health="unknown",
+                ),
+                indent=2,
+            )
         )
-    )
-    return 2
+        return 2
+    except Exception as error:  # pragma: no cover - exercised via CLI-facing tests
+        print_error_payload(
+            domain=args.domain,
+            marker_name=args.marker_name,
+            bridge_base_url=args.bridge_base_url,
+            error=error,
+        )
+        return 1
 
 
 if __name__ == "__main__":
