@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-14T10:02:27.001147Z",
+  "generated_at": "2026-04-18T16:05:57.813901Z",
   "blocked_count": 18,
   "lane_counts": {
     "intentional-hold": 18
@@ -181,7 +181,8 @@
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "GlobalTimerResolutionRequests",
       "recent_audit_artifacts": [
-        "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json"
+        "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json",
+        "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
