@@ -34,6 +34,37 @@ qga_put_file = load_module("qga_put_file_for_timeout_contract_tests", VM_KVM_SCR
 
 
 class VmKvmQgaTimeoutContractTests(unittest.TestCase):
+    def test_ensure_guest_admin_shell_host_failure_uses_contract_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            argv = [
+                "ensure-guest-admin-shell.py",
+                "--repo-root",
+                str(REPO_ROOT),
+                "--upload-dir",
+                str(Path(temp_root)),
+                "--marker-name",
+                "launch-error-marker",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ensure_guest_admin_shell,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                ensure_guest_admin_shell,
+                "send_key",
+                side_effect=RuntimeError("send-key failed"),
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ensure_guest_admin_shell.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["error_kind"], "guest-admin-shell-launch-error")
+        self.assertEqual(payload["recovery_action"], "rerun-admin-shell-recovery")
+        self.assertEqual(payload["transport_blocker"], "host-launch-error")
+        self.assertEqual(payload["summary_source"], "guest-admin-shell-launch-error")
+        self.assertEqual(payload["exception_type"], "RuntimeError")
+
     def test_ensure_guest_admin_shell_timeout_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             argv = [
