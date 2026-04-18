@@ -354,52 +354,41 @@ public sealed class TweakItemViewModel : ViewModelBase
 
     private TweakGuidance? Guidance => (_tweak as ITweakWithGuidance)?.Guidance;
 
-    public string FriendlyDescription => string.IsNullOrWhiteSpace(Guidance?.CasualSummary)
-        ? Description
-        : Guidance!.CasualSummary;
+    public string FriendlyDescription => TweakItemPresentationFormatter.BuildFriendlyDescription(
+        Guidance?.CasualSummary,
+        Description);
 
     public string ConfigurationFriendlyDescription => TweakItemPresentationFormatter.BuildConfigurationFriendlyDescription(FriendlyDescription);
 
     public string GuidanceWhenHelpful => Guidance?.WhenHelpful ?? string.Empty;
 
-    public bool HasGuidanceWhenHelpful => !string.IsNullOrWhiteSpace(GuidanceWhenHelpful);
+    public bool HasGuidanceWhenHelpful => TweakItemPresentationFormatter.HasText(GuidanceWhenHelpful);
 
     public string GuidanceTradeoffs => Guidance?.Tradeoffs ?? string.Empty;
 
-    public bool HasGuidanceTradeoffs => !string.IsNullOrWhiteSpace(GuidanceTradeoffs);
+    public bool HasGuidanceTradeoffs => TweakItemPresentationFormatter.HasText(GuidanceTradeoffs);
 
-    public string DefaultVsPreviousSummary
-    {
-        get
-        {
-            if (!string.IsNullOrWhiteSpace(Guidance?.DefaultVsPrevious))
-            {
-                return Guidance!.DefaultVsPrevious;
-            }
+    public string DefaultVsPreviousSummary => TweakItemPresentationFormatter.BuildDefaultVsPreviousSummary(
+        Guidance?.DefaultVsPrevious,
+        HasDefaultChoice);
 
-            return HasDefaultChoice
-                ? "Restore Previous uses the snapshot captured before Apply. Restore Default applies the tweak's built-in default option."
-                : string.Empty;
-        }
-    }
-
-    public bool HasDefaultVsPreviousSummary => !string.IsNullOrWhiteSpace(DefaultVsPreviousSummary);
+    public bool HasDefaultVsPreviousSummary => TweakItemPresentationFormatter.HasText(DefaultVsPreviousSummary);
 
     public string ProfessionalNotes => Guidance?.ProfessionalNotes ?? string.Empty;
 
-    public bool HasProfessionalNotes => !string.IsNullOrWhiteSpace(ProfessionalNotes);
+    public bool HasProfessionalNotes => TweakItemPresentationFormatter.HasText(ProfessionalNotes);
 
-    public bool HasExtendedGuidance =>
-        HasGuidanceWhenHelpful ||
-        HasGuidanceTradeoffs ||
-        HasDefaultVsPreviousSummary ||
-        HasProfessionalNotes;
+    public bool HasExtendedGuidance => TweakItemPresentationFormatter.HasExtendedGuidance(
+        HasGuidanceWhenHelpful,
+        HasGuidanceTradeoffs,
+        HasDefaultVsPreviousSummary,
+        HasProfessionalNotes);
 
     public bool HasDefaultChoice =>
         _tweak is IChoiceTweak choiceTweak &&
         !string.IsNullOrWhiteSpace(choiceTweak.DefaultChoiceKey);
 
-    public string RestoreDefaultButtonText => HasDefaultChoice ? "Restore Default" : string.Empty;
+    public string RestoreDefaultButtonText => TweakItemPresentationFormatter.BuildRestoreDefaultButtonText(HasDefaultChoice);
 
     public string RestoreDefaultTooltip => TweakRollbackPresentation.BuildRestoreDefaultTooltip(
         IsMutationAllowed,
