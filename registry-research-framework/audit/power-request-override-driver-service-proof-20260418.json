@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-18T18:38:18Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "target": {
+    "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+    "vm": "Win25H2Clean",
+    "host_lane": "KVM QGA"
+  },
+  "official_source": {
+    "kind": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+    "surface": "powercfg /requestsoverride [caller_type name request]"
+  },
+  "driver_service_powercfg_proof": {
+    "run_id": "power-request-override-driver-service-proof-20260418",
+    "artifact": {
+      "path": "evidence/files/vm-tooling-staging/power-request-override-driver-service-powercfg-proof-20260418/host-summary.json",
+      "sha256": "14fbd744d89308d0cb4a0f047bd07cb577e80721ef598fda9d56ec00cd632ed9",
+      "size": 5748
+    },
+    "chosen_callers": {
+      "service": "Audiosrv",
+      "driver": "ACPI"
+    },
+    "command_results": {
+      "list_before_exit_code": 0,
+      "add_service_exit_code": 0,
+      "add_driver_exit_code": 0,
+      "list_after_add_exit_code": 0,
+      "remove_service_exit_code": 0,
+      "remove_driver_exit_code": 0,
+      "list_after_remove_exit_code": 0
+    },
+    "observed_state": {
+      "before_service_values_empty": true,
+      "before_driver_values_empty": true,
+      "after_add_powercfg_service_line": "Audiosrv DISPLAY SYSTEM AWAYMODE",
+      "after_add_powercfg_driver_line": "ACPI DISPLAY SYSTEM AWAYMODE",
+      "after_add_service_registry_value": "PowerRequestOverride\\Service :: Audiosrv=7",
+      "after_add_driver_registry_value": "PowerRequestOverride\\Driver :: ACPI=7",
+      "after_remove_service_values_empty": true,
+      "after_remove_driver_values_empty": true,
+      "direct_cleanup_applied": false
+    },
+    "interpretation": "The documented powercfg surface materializes and removes Service and Driver leaves cleanly for the tested current-build callers. The observed value 7 is retained as the all-request bitmask observation for this proof, not as a complete named-reader binding."
+  },
+  "etw_followup": {
+    "attempted": true,
+    "status": "environment-failure",
+    "failure": "The ETW host wrapper did not finish ingesting before manual cleanup; no new published ETW artifact was retained from this follow-up.",
+    "published_artifact_produced": false,
+    "interpretation": "This follow-up is tooling context only. The sprint result does not rely on a new ETW artifact."
+  },
+  "classification": {
+    "result": "research-only draft / intentional hold",
+    "record_status": "draft",
+    "apply_allowed": false,
+    "restore_previous_supported": true,
+    "restore_default_supported": false,
+    "remaining_gaps": [
+      "The exact current-build reader binding remains unresolved.",
+      "The live consumer path is still adjacent rather than directly proven.",
+      "The subtree is not mapped to a supported app apply surface."
+    ]
+  }
+}

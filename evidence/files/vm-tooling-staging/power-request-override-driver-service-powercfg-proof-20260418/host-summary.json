@@ -1,0 +1,164 @@
+{
+  "target": "power.control.power-request-override-subtree",
+  "run_id": "power-request-override-driver-service-proof-20260418",
+  "root_path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+  "service_name": "Audiosrv",
+  "driver_name": "ACPI",
+  "requests": [
+    "DISPLAY",
+    "SYSTEM",
+    "AWAYMODE"
+  ],
+  "before": {
+    "list": {
+      "label": "list-before",
+      "arguments": "/requestsoverride",
+      "exit_code": 0,
+      "stdout_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\list-before.stdout.txt",
+      "stderr_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\list-before.stderr.txt",
+      "stdout": "[SERVICE]\r\n\r\n[PROCESS]\r\n\r\n[DRIVER]\r\n\r\n",
+      "stderr": ""
+    },
+    "tree": {
+      "root_exists": true,
+      "child_keys": [
+        "Driver",
+        "Process",
+        "Service"
+      ],
+      "service": {
+        "leaf": "Service",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Service",
+        "exists": true,
+        "values": {}
+      },
+      "process": {
+        "leaf": "Process",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process",
+        "exists": true,
+        "values": {}
+      },
+      "driver": {
+        "leaf": "Driver",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Driver",
+        "exists": true,
+        "values": {}
+      }
+    }
+  },
+  "add_service": {
+    "label": "add-service",
+    "arguments": "/requestsoverride SERVICE Audiosrv DISPLAY SYSTEM AWAYMODE",
+    "exit_code": 0,
+    "stdout_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\add-service.stdout.txt",
+    "stderr_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\add-service.stderr.txt",
+    "stdout": "",
+    "stderr": ""
+  },
+  "add_driver": {
+    "label": "add-driver",
+    "arguments": "/requestsoverride DRIVER ACPI DISPLAY SYSTEM AWAYMODE",
+    "exit_code": 0,
+    "stdout_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\add-driver.stdout.txt",
+    "stderr_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\add-driver.stderr.txt",
+    "stdout": "",
+    "stderr": ""
+  },
+  "after_add": {
+    "list": {
+      "label": "list-after-add",
+      "arguments": "/requestsoverride",
+      "exit_code": 0,
+      "stdout_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\list-after-add.stdout.txt",
+      "stderr_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\list-after-add.stderr.txt",
+      "stdout": "[SERVICE]\r\nAudiosrv DISPLAY SYSTEM AWAYMODE\r\n\r\n[PROCESS]\r\n\r\n[DRIVER]\r\nACPI DISPLAY SYSTEM AWAYMODE\r\n\r\n",
+      "stderr": ""
+    },
+    "tree": {
+      "root_exists": true,
+      "child_keys": [
+        "Driver",
+        "Process",
+        "Service"
+      ],
+      "service": {
+        "leaf": "Service",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Service",
+        "exists": true,
+        "values": {
+          "Audiosrv": 7
+        }
+      },
+      "process": {
+        "leaf": "Process",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process",
+        "exists": true,
+        "values": {}
+      },
+      "driver": {
+        "leaf": "Driver",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Driver",
+        "exists": true,
+        "values": {
+          "ACPI": 7
+        }
+      }
+    }
+  },
+  "remove_service": {
+    "label": "remove-service",
+    "arguments": "/requestsoverride SERVICE Audiosrv",
+    "exit_code": 0,
+    "stdout_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\remove-service.stdout.txt",
+    "stderr_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\remove-service.stderr.txt",
+    "stdout": "",
+    "stderr": ""
+  },
+  "remove_driver": {
+    "label": "remove-driver",
+    "arguments": "/requestsoverride DRIVER ACPI",
+    "exit_code": 0,
+    "stdout_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\remove-driver.stdout.txt",
+    "stderr_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\remove-driver.stderr.txt",
+    "stdout": "",
+    "stderr": ""
+  },
+  "after_remove": {
+    "list": {
+      "label": "list-after-remove",
+      "arguments": "/requestsoverride",
+      "exit_code": 0,
+      "stdout_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\list-after-remove.stdout.txt",
+      "stderr_path": "C:\\RegProbe-Diag\\power-request-override-driver-service-proof-20260418\\list-after-remove.stderr.txt",
+      "stdout": "[SERVICE]\r\n\r\n[PROCESS]\r\n\r\n[DRIVER]\r\n\r\n",
+      "stderr": ""
+    },
+    "tree": {
+      "root_exists": true,
+      "child_keys": [
+        "Driver",
+        "Process",
+        "Service"
+      ],
+      "service": {
+        "leaf": "Service",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Service",
+        "exists": true,
+        "values": {}
+      },
+      "process": {
+        "leaf": "Process",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process",
+        "exists": true,
+        "values": {}
+      },
+      "driver": {
+        "leaf": "Driver",
+        "path": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Driver",
+        "exists": true,
+        "values": {}
+      }
+    }
+  },
+  "direct_cleanup_applied": false
+}

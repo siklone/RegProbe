@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-18T16:56:59.259885Z",
+  "generated_utc": "2026-04-18T18:38:41.696568Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-18T16:56:58.376474Z",
+      "generated_utc": "2026-04-18T18:38:40.785936Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -18844,7 +18844,7 @@
         "is_archived": false,
         "action_state": "research-gated",
         "gating_reason": "The subtree now has retained runtime access, override-family lineage, and bounded adjacent static context, but exact Driver/Process/Service leaf semantics and a safe restore story are still unresolved.",
-        "confidence": "medium",
+        "confidence": "medium-high",
         "app_mapping_status": "not-mapped",
         "restore_story_known": true,
         "tested_build": "26100",
@@ -18854,7 +18854,7 @@
           "gaming_safe": null
         },
         "validated_semantics": {
-          "summary": "The proof now establishes the public command surface, current-build subtree reads, and a reversible process-leaf add/remove cycle. It does not yet resolve Driver or Service leaf semantics or the exact kernel reader binding.",
+          "summary": "The proof now establishes the public command surface, current-build subtree reads, and reversible process/service/driver add/remove cycles for the tested callers. It does not yet resolve the exact kernel reader binding or prove that live reader behavior is...",
           "has_validation_proof": true,
           "has_semantics_evidence": true,
           "links": [
@@ -18862,7 +18862,7 @@
               "title": "Validation proof source",
               "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
               "kind": "validation-proof",
-              "summary": "Microsoft documents `powercfg /requestsoverride [caller_type name request]`; the 2026-04-18 VM proof maps that control surface to `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\Po..."
+              "summary": "Microsoft documents `powercfg /requestsoverride [caller_type name request]`; the 2026-04-18 VM proofs map that control surface to reversible `Process`, `Service`, and `Driver` l..."
             },
             {
               "title": "Retained adjacent static context for the power-request override family",
@@ -18911,25 +18911,24 @@
         }
       },
       "source_file": "research/records/power.control.power-request-override-subtree.json",
-      "source_file_sha256": "e27673e76e8198d38e8794bcc580502206dc268d29d80d173ba910857abff028",
-      "source_file_size_bytes": 19817,
+      "source_file_sha256": "2b66151c6746725c3c2690be2a612dcc3e8b5733e2489a7f2bc4b8ba5398e4e5",
+      "source_file_size_bytes": 22933,
       "name": "Power Request Override Subtree",
       "category": "Power",
       "area": "Power Request Override Routing",
       "scope": "device",
-      "summary": "Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup, and retained Ghidra plus local-KD query/store follow-ups now provide bounded current-build static context around the same power-request family. A later ETW stackwalk pass captured current-build root and `RuleCount` / `ENABLED` / `DISABLED` reads, and a QGA powercfg proof showed `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE` materializing a `Process` leaf value of `7` and removing it cleanly with the same command surface. The lane remains draft because Driver and Service leaf semantics plus the exact current-build reader binding remain unresolved, not because the subtree lacks runtime or restore context.",
+      "summary": "Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup, and retained Ghidra plus local-KD query/store follow-ups now provide bounded current-build static context around the same power-request family. A later ETW stackwalk pass captured current-build root and `RuleCount` / `ENABLED` / `DISABLED` reads, a QGA powercfg proof showed `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE` materializing a `Process` leaf value of `7` and removing it cleanly, and a later QGA driver/service proof showed the same documented surface materializing reversible `Service\\Audiosrv=7` and `Driver\\ACPI=7` leaves for `DISPLAY SYSTEM AWAYMODE`. The lane remains draft because the exact current-build reader binding and live consumer semantics remain unresolved, not because the subtree lacks runtime, rollback, or cross-leaf storage context.",
       "decision": {
-        "confidence": "medium",
+        "confidence": "medium-high",
         "apply_allowed": false,
         "recommended_for_general_users": false,
         "restore_default_supported": false,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, bounded adjacent static context from retained Ghidra and local-KD query/store analysis, a stack-bearing ETW root/control-value read, and a reversible process-leaf add/remove cycle through the documented powercfg surface. That is enough to narrow the restore-story gap for powercfg-managed Process entries, but not enough to claim complete Driver or Service leaf semantics, an exact current-build kernel reader binding, or an app-ready apply surface. The record therefore remains a research-only draft and intentional hold.",
+        "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, bounded adjacent static context from retained Ghidra and local-KD query/store analysis, a stack-bearing ETW root/control-value read, and reversible powercfg-managed add/remove cycles for Process, Service, and Driver leaves through the documented command surface. That is enough to materially strengthen the storage and rollback story across all three leaves, but not enough to name the exact current-build reader binding, prove the live consumer path, or map the subtree to an app-ready apply surface. The record therefore remains a research-only draft and intentional hold.",
         "blocking_issues": [
-          "powerrequestoverride-subtree-leaf-semantics-unresolved",
+          "powerrequestoverride-subtree-live-reader-binding-unresolved",
           "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-          "powerrequestoverride-driver-service-leaf-semantics-unproven",
           "powerrequestoverride-subtree-not-mapped-to-supported-app-surface",
           "intentional-hold"
         ]
@@ -18961,12 +18960,13 @@
             },
             {
               "state_kind": "feature-dependent",
-              "label": "Leaf semantics unresolved",
-              "meaning": "The older retained runtime capture probed Driver, Process, and Service and landed on NAME NOT FOUND for those leaves. The later powercfg proof resolves one Process-leaf add/remove pattern, but Driver and Service leaf semantics remain feature-dependent.",
+              "label": "Powercfg-managed leaf model partially proven",
+              "meaning": "The older retained runtime capture probed Driver, Process, and Service and landed on NAME NOT FOUND for those leaves. Later QGA powercfg proofs then showed reversible Process, Service, and Driver entries with an observed `7` bitmask after `DISPLAY SYSTEM AWAYMODE`, but the live reader binding remains unresolved.",
               "evidence_ids": [
                 "vm-power-request-override-runtime-audit-20260408",
                 "vm-power-request-override-kd-lineage-20260408",
-                "vm-power-request-override-powercfg-proof-20260418"
+                "vm-power-request-override-powercfg-proof-20260418",
+                "vm-power-request-override-driver-service-powercfg-proof-20260418"
               ]
             },
             {
@@ -18977,6 +18977,16 @@
               "evidence_ids": [
                 "ms-powercfg-requestsoverride-doc",
                 "vm-power-request-override-powercfg-proof-20260418"
+              ]
+            },
+            {
+              "state_kind": "observed-runtime",
+              "value": "PowerRequestOverride\\Service :: Audiosrv = 7 and PowerRequestOverride\\Driver :: ACPI = 7 after DISPLAY SYSTEM AWAYMODE",
+              "label": "Observed powercfg-managed service and driver overrides",
+              "meaning": "A later QGA follow-up started from empty Service and Driver leaves, materialized `Audiosrv=7` and `ACPI=7` through the documented powercfg surface, and removed both entries cleanly through the same command family. Treat this as a reversible storage-model proof, not as a direct kernel-consumer proof.",
+              "evidence_ids": [
+                "ms-powercfg-requestsoverride-doc",
+                "vm-power-request-override-driver-service-powercfg-proof-20260418"
               ]
             }
           ]
@@ -19021,10 +19031,10 @@
             }
           ],
           "good_when": "You want to document the retained subtree and current-build override-family lineage.",
-          "bad_when": "You need complete Driver/Service leaf semantics, a safe recommendation, or an app-ready toggle.",
+          "bad_when": "You need a direct current-build reader binding, a safe recommendation, or an app-ready toggle.",
           "tradeoffs": [
-            "Preserves the retained subtree evidence and the reversible process-leaf proof.",
-            "Leaves Driver and Service leaf semantics unresolved."
+            "Preserves the retained subtree evidence and the reversible process/service/driver leaf proofs.",
+            "Leaves the live reader binding and consumer semantics unresolved."
           ],
           "apply_allowed": false,
           "evidence_ids": [
@@ -19032,7 +19042,8 @@
             "vm-power-request-override-runtime-audit-20260408",
             "vm-power-request-override-kd-lineage-20260408",
             "vm-power-request-override-etw-stackwalk-20260418",
-            "vm-power-request-override-powercfg-proof-20260418"
+            "vm-power-request-override-powercfg-proof-20260418",
+            "vm-power-request-override-driver-service-powercfg-proof-20260418"
           ]
         }
       ],
@@ -19134,15 +19145,30 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power-request-override-driver-service-powercfg-proof-20260418",
+          "kind": "vm-test",
+          "title": "QGA powercfg proof materializes and removes service and driver override leaves",
+          "location": "evidence/files/vm-tooling-staging/power-request-override-driver-service-powercfg-proof-20260418/host-summary.json and research/notes/power-control-power-request-override-subtree-driver-service-proof-20260418.md",
+          "summary": "A QGA command-state proof started from empty `Service` and `Driver` leaves, added `SERVICE Audiosrv DISPLAY SYSTEM AWAYMODE` and `DRIVER ACPI DISPLAY SYSTEM AWAYMODE`, observed `PowerRequestOverride\\Service :: Audiosrv=7` and `PowerRequestOverride\\Driver :: ACPI=7`, then removed both entries cleanly through the same powercfg surface.",
+          "strength": "high",
+          "supports": [
+            "control-surface",
+            "value",
+            "rollback",
+            "version-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": {
         "source_url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
-        "exact_quote_or_path": "Microsoft documents `powercfg /requestsoverride [caller_type name request]`; the 2026-04-18 VM proof maps that control surface to `HKLM/SYSTEM/CurrentControlSet/Control/Power/PowerRequestOverride/Process` leaf materialization and cleanup.",
+        "exact_quote_or_path": "Microsoft documents `powercfg /requestsoverride [caller_type name request]`; the 2026-04-18 VM proofs map that control surface to reversible `Process`, `Service`, and `Driver` leaf materialization under `HKLM/SYSTEM/CurrentControlSet/Control/Power/PowerRequestOverride`.",
         "key_found_on_page": true,
-        "notes": "The proof now establishes the public command surface, current-build subtree reads, and a reversible process-leaf add/remove cycle. It does not yet resolve Driver or Service leaf semantics or the exact kernel reader binding."
+        "notes": "The proof now establishes the public command surface, current-build subtree reads, and reversible process/service/driver add/remove cycles for the tested callers. It does not yet resolve the exact kernel reader binding or prove that live reader behavior is fully equivalent to the powercfg storage model."
       },
-      "validation_proof_sha256": "21cb5f927983b289a33fea63a1487d5220f7dfc6c78f6a50d3e5026b5dcc6afa",
+      "validation_proof_sha256": "aa9c9e94ec63d67015132776dd1e6edd9ec30b2a7abd1f99c34ecb2cdfec8152",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
