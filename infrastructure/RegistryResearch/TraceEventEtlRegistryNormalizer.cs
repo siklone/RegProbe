@@ -39,11 +39,6 @@ public sealed class TraceEventEtlRegistryNormalizer : IRegistryTraceNormalizer
             var events = new List<NormalizedRegistryEvent>();
             foreach (var record in _recordLoader(inputPath))
             {
-                if (!IsRegistryEvent(record))
-                {
-                    continue;
-                }
-
                 var operation = FirstNonEmpty(record.EventName, record.OpcodeName, record.TaskName) ?? "RegistryEvent";
                 var rawPath = FirstNonEmpty(
                     GetPayload(record, "KeyName"),
@@ -51,6 +46,11 @@ public sealed class TraceEventEtlRegistryNormalizer : IRegistryTraceNormalizer
                     GetPayload(record, "KeyPath"),
                     GetPayload(record, "Path"),
                     GetPayload(record, "BaseName"));
+                if (!IsRegistryEvent(record, rawPath))
+                {
+                    continue;
+                }
+
                 var valueName = FirstNonEmpty(
                     GetPayload(record, "ValueName"),
                     GetPayload(record, "Value"),
@@ -139,7 +139,7 @@ public sealed class TraceEventEtlRegistryNormalizer : IRegistryTraceNormalizer
         return records;
     }
 
-    private static bool IsRegistryEvent(RegistryTraceEventRecord record)
+    private static bool IsRegistryEvent(RegistryTraceEventRecord record, string? rawPath)
     {
         var providerName = record.ProviderName ?? string.Empty;
         var taskName = record.TaskName ?? string.Empty;
@@ -147,7 +147,34 @@ public sealed class TraceEventEtlRegistryNormalizer : IRegistryTraceNormalizer
         return providerName.Contains("Registry", StringComparison.OrdinalIgnoreCase)
             || taskName.Contains("Registry", StringComparison.OrdinalIgnoreCase)
             || eventName.Contains("Registry", StringComparison.OrdinalIgnoreCase)
-            || providerName.Equals("Microsoft-Windows-Kernel-Registry", StringComparison.OrdinalIgnoreCase);
+            || providerName.Equals("Microsoft-Windows-Kernel-Registry", StringComparison.OrdinalIgnoreCase)
+            || HasRegistryPathHint(rawPath)
+            || HasRegistryPayloadHint(record);
+    }
+
+    private static bool HasRegistryPathHint(string? rawPath)
+    {
+        var parts = RegistryPathParser.Parse(rawPath, splitLastSegmentAsValue: false);
+        return !string.IsNullOrWhiteSpace(parts.Hive);
+    }
+
+    private static bool HasRegistryPayloadHint(RegistryTraceEventRecord record)
+    {
+        foreach (var payloadName in record.Payloads.Keys)
+        {
+            if (string.Equals(payloadName, "KeyName", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(payloadName, "Key", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(payloadName, "KeyPath", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(payloadName, "BaseName", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(payloadName, "ValueName", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(payloadName, "ValueType", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(payloadName, "ValueData", StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static string? GetPayload(RegistryTraceEventRecord record, string name)
