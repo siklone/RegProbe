@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-13T05:59:40.104944Z",
+  "generated_utc": "2026-04-18T15:40:34.072243Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -16,20 +16,18 @@
     },
     "next_missing_layer_counts": {
       "none": 250,
-      "intentional-hold": 6,
-      "ghidra": 4,
-      "restore-story": 1,
-      "runtime-trace": 7
+      "intentional-hold": 18
     },
     "promotion_state_counts": {
-      "promoted": 250,
+      "revalidation-pending": 24,
+      "promoted": 226,
       "blocked": 18
     },
     "re_audit_required_count": 22,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-08T12:58:36.140594Z",
+      "generated_utc": "2026-04-18T15:40:33.165189Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -39,10 +37,10 @@
       "counts_by_promotion_state": {}
     },
     "total": 268,
-    "promoted": 250,
+    "promoted": 226,
     "blocked": 18,
-    "revalidation_pending": 0,
-    "stale": 0,
+    "revalidation_pending": 24,
+    "stale": 24,
     "gate_health": "green"
   },
   "entries": [
@@ -90,10 +88,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -109,9 +109,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -459,10 +459,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -478,9 +480,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -959,10 +961,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -978,9 +982,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -1127,10 +1131,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -1146,9 +1152,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -4427,10 +4433,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -4446,9 +4454,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -4510,10 +4518,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -4529,9 +4539,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -5684,10 +5694,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -5703,9 +5715,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -5996,7 +6008,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -6036,9 +6048,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "audio-execution-required-megatrigger-etw-no-hit-current-build",
         "audio-execution-required-no-current-build-registry-seeding-path",
-        "audio-execution-required-no-primary-current-build-doc"
+        "audio-execution-required-no-primary-current-build-doc",
+        "intentional-hold"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6067,7 +6079,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:11:00Z"
+        "last_verified_at": "2026-04-14T05:59:10Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -6092,7 +6104,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -6132,8 +6144,8 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "system-execution-required-no-current-build-registry-seeding-path",
-        "system-execution-required-wpr-boot-no-hit-current-build"
+        "intentional-hold",
+        "system-execution-required-no-current-build-registry-seeding-path"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6162,7 +6174,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:12:00Z"
+        "last_verified_at": "2026-04-14T05:59:10Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -6815,7 +6827,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "restore-story",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -6848,9 +6860,11 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "intentional-hold",
         "powerrequestoverride-restore-story-leaf-model-unproven",
         "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-        "powerrequestoverride-subtree-leaf-semantics-unresolved"
+        "powerrequestoverride-subtree-leaf-semantics-unresolved",
+        "powerrequestoverride-subtree-not-mapped-to-supported-app-surface"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -6879,7 +6893,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:15:00Z"
+        "last_verified_at": "2026-04-14T06:02:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -7168,7 +7182,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -7206,6 +7220,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "win32k-callout-watchdog-bounded-s1-registry-etw-no-hit-current-build",
+        "win32k-callout-watchdog-intentional-hold-no-current-build-pivot",
         "win32k-callout-watchdog-no-primary-current-build-doc",
         "win32k-callout-watchdog-override-semantics-unproven"
       ],
@@ -7236,7 +7251,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:17:00Z"
+        "last_verified_at": "2026-04-14T09:09:27Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -7995,10 +8010,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8014,9 +8031,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -8132,7 +8149,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": true,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -8170,8 +8187,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "power-session-watchdog-timeouts-exact-runtime-read-unresolved",
-        "power-session-watchdog-timeouts-specific-caller-unresolved"
+        "power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation",
+        "power-session-watchdog-timeouts-no-current-build-exact-registry-read",
+        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -8200,7 +8218,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:18:00Z"
+        "last_verified_at": "2026-04-14T09:11:55Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8232,7 +8250,7 @@
       "benchmark": true,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -8267,6 +8285,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "win32-callout-watchdog-bugcheck-intentional-hold-adjacent-sibling-without-current-build-pivot",
         "win32-callout-watchdog-bugcheck-no-primary-current-build-doc",
         "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
         "win32-callout-watchdog-bugcheck-semantics-unproven"
@@ -8298,7 +8317,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:19:00Z"
+        "last_verified_at": "2026-04-14T08:55:12Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8852,10 +8871,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8871,9 +8892,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -9769,10 +9790,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9788,9 +9811,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -9854,10 +9877,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9873,9 +9898,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -11965,10 +11990,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -11984,9 +12011,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -12473,10 +12500,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12492,9 +12521,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -12977,10 +13006,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12996,9 +13027,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -13475,10 +13506,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13494,9 +13527,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -13811,10 +13844,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13830,9 +13865,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -13894,10 +13929,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13913,9 +13950,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -15908,10 +15945,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -15927,9 +15966,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -16666,10 +16705,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -16685,9 +16726,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -17623,10 +17664,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17642,9 +17685,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -18349,32 +18392,34 @@
       "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "static_ghidra",
+        "behavior_wpr",
         "official_doc"
       ],
       "tools_used": [
         "official-doc",
-        "ghidra"
+        "ghidra",
+        "wpr"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": false,
+        "boot_phase_included": true,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "current_blocker; etw_not_recorded; dead_flag_checks_incomplete",
       "original_class": "B",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
@@ -18386,15 +18431,17 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "dpc-watchdog-control-intentional-hold-no-current-build-pivot",
         "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
+        "dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm",
         "dpc-watchdog-control-no-primary-current-build-doc",
-        "dpc-watchdog-control-runtime-read-unresolved"
+        "dpc-watchdog-control-wpr-boot-no-hit-current-build"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -18402,7 +18449,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.56,
+        "overall_score": 3.67,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -18417,7 +18464,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:20:00Z"
+        "last_verified_at": "2026-04-14T09:52:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18442,7 +18489,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "ghidra",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "static_ghidra",
@@ -18477,10 +18524,11 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "dpc-watchdog-profile-conditional-initialization-unproven",
-        "dpc-watchdog-profile-live-mixed-state-conflicts-with-repo-docs",
-        "dpc-watchdog-profile-no-primary-current-build-doc",
-        "dpc-watchdog-profile-wpr-boot-no-hit-current-build"
+        "dpc-watchdog-profile-conditional-init-semantics-unproven",
+        "dpc-watchdog-profile-intentional-hold-mixed-live-state-without-current-build-pivot",
+        "dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs",
+        "dpc-watchdog-profile-no-current-build-exact-registry-read",
+        "dpc-watchdog-profile-no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18509,7 +18557,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:21:00Z"
+        "last_verified_at": "2026-04-14T09:24:59Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18534,7 +18582,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -18571,6 +18619,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "long-dpc-threshold-intentional-hold-no-current-build-pivot",
         "long-dpc-threshold-no-primary-current-build-doc",
         "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
         "long-dpc-threshold-wpr-boot-no-hit-current-build"
@@ -18602,7 +18651,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200.8037",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:22:00Z"
+        "last_verified_at": "2026-04-14T09:01:43Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18805,7 +18854,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "static_ghidra",
@@ -18840,6 +18889,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot",
         "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
         "force-bugcheck-dpc-watchdog-semantics-unproven",
         "force-bugcheck-dpc-watchdog-wpr-boot-no-hit-current-build"
@@ -18871,7 +18921,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:23:00Z"
+        "last_verified_at": "2026-04-14T08:59:05Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18896,7 +18946,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
@@ -18935,8 +18985,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
-        "global-timer-resolution-no-primary-current-build-doc",
-        "global-timer-resolution-wpr-boot-no-hit-current-build"
+        "global-timer-resolution-clean-wpr-subtree-only-no-value-hit-current-build",
+        "global-timer-resolution-intentional-hold-no-current-build-pivot",
+        "global-timer-resolution-no-primary-current-build-doc"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -18965,7 +19016,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:24:00Z"
+        "last_verified_at": "2026-04-18T16:15:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -18990,7 +19041,7 @@
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
         "static_ghidra",
@@ -19025,6 +19076,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "timer-check-flags-intentional-hold-no-current-build-pivot",
         "timer-check-flags-modern-bit-semantics-unproven",
         "timer-check-flags-no-primary-current-build-doc",
         "timer-check-flags-wpr-boot-no-hit-current-build"
@@ -19056,7 +19108,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26200",
         "current_build": "26100",
-        "last_verified_at": "2026-04-13T01:25:00Z"
+        "last_verified_at": "2026-04-14T09:03:07Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -19361,10 +19413,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19380,9 +19434,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -19444,10 +19498,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19463,9 +19519,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -19859,10 +19915,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19878,9 +19936,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -22537,10 +22595,12 @@
       "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": true,
+      "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -22556,9 +22616,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
@@ -22833,29 +22893,186 @@
   "blocker_breakdown": {
     "audio-execution-required-no-current-build-registry-seeding-path": 1,
     "conflicting-sources": 2,
-    "dpc-watchdog-profile-conditional-initialization-unproven": 1,
+    "dpc-watchdog-control-intentional-hold-no-current-build-pivot": 1,
+    "dpc-watchdog-profile-conditional-init-semantics-unproven": 1,
+    "dpc-watchdog-profile-no-current-build-exact-registry-read": 1,
     "enable-virtualization-research-only-raw-policy-system-value": 1,
     "force-bugcheck-dpc-watchdog-semantics-unproven": 1,
+    "global-timer-resolution-clean-wpr-subtree-only-no-value-hit-current-build": 1,
+    "global-timer-resolution-intentional-hold-no-current-build-pivot": 1,
     "hiber-file-size-percent-research-only-raw-power-manager-value": 1,
     "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm": 1,
+    "intentional-hold": 3,
+    "long-dpc-threshold-intentional-hold-no-current-build-pivot": 1,
     "no-primary-current-build-doc": 11,
-    "no-runtime-proof": 13,
-    "power-session-watchdog-timeouts-specific-caller-unresolved": 1,
+    "no-runtime-proof": 8,
+    "power-session-watchdog-timeouts-no-current-build-exact-registry-read": 1,
+    "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller": 1,
     "powerrequestoverride-restore-story-leaf-model-unproven": 1,
     "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
     "powerrequestoverride-subtree-leaf-semantics-unresolved": 1,
+    "powerrequestoverride-subtree-not-mapped-to-supported-app-surface": 1,
     "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot": 1,
     "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit": 1,
+    "record-blocker": 5,
+    "stale-evidence": 24,
     "system-execution-required-no-current-build-registry-seeding-path": 1,
+    "timer-check-flags-intentional-hold-no-current-build-pivot": 1,
     "timer-check-flags-modern-bit-semantics-unproven": 1,
     "timer-rebase-threshold-drips-trigger-not-available-on-current-vm": 1,
     "ttmenabled-boot-unsafe-dedicated-boot-lane-required": 1,
     "ttmenabled-boot-unsafe-on-isolated-pilot-profile": 1,
     "ttmenabled-reader-unresolved": 1,
     "win32-callout-watchdog-bugcheck-semantics-unproven": 1,
+    "win32k-callout-watchdog-intentional-hold-no-current-build-pivot": 1,
     "win32k-callout-watchdog-override-semantics-unproven": 1
   },
-  "stale_records": [],
+  "stale_records": [
+    {
+      "candidate_id": "audio.disable-beep",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "developer.docker-performance",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "developer.ssh-agent-autostart",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "developer.wsl2-memory",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "network.smb-encrypt-data",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "network.smb-increase-client-metadata-cache",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "peripheral.autoplay-take-no-action",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "power.optimize-cpu-boost",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "privacy.disable-app-suggestions",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "privacy.disable-copilot",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "privacy.disable-cross-device-experiences.policy",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "privacy.disable-resume",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "privacy.disable-suggestions.policy",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "privacy.disable-windows-tips",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "privacy.hide-username-at-signin",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "privacy.troubleshooter-dont-run",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "privacy.turn-off-sync-by-default-allow-user-override",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "system.bsod-display-parameters",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "system.disable-restartable-apps",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "system.enable-hags",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "system.memory-nonpaged-pool-dynamic",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "system.memory-paged-pool-dynamic",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "system.ntfs-reset-memory-usage",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    },
+    {
+      "candidate_id": "visibility.hide-language-bar",
+      "promotion_state": "revalidation-pending",
+      "stale_reason": "verification-age-threshold",
+      "last_known_good_build": "26100"
+    }
+  ],
   "conflict_records": [],
   "missing_docs_records": [],
   "rollback_unverified_records": [],
