@@ -1,6 +1,6 @@
 # Baseline Metrics
 
-- Generated UTC: `2026-04-15T11:36:01Z`
+- Generated UTC: `2026-04-18T03:40:37Z`
 - Source workflow run: `24087678150` on `main`
 - Source commit: `fa50cbaa4fe1d619eab06cba50eda11412e066cf`
 - Coverage artifact: `coverage-report` (`6308389518`)
@@ -20,31 +20,31 @@
 
 ## Highest Complexity Methods
 
-- `cli/Commands/Program.ResearchCommand.cs:15` `CreateResearchCommand` — complexity `63`, lines `537`
-- `app/Services/NohutoChangeAnalyzer.cs:305` `ResolveKeywordCategory` — complexity `60`, lines `50`
-- `app/ViewModels/WorkspaceBrowseCoordinator.cs:105` `MatchesFilters` — complexity `34`, lines `94`
-- `app/Services/OsDetectionResolver.cs:28` `Resolve` — complexity `31`, lines `184`
+- `app/Services/NohutoKeywordCategoryResolver.cs:5` `Resolve` — complexity `60`, lines `25`
+- `app/ViewModels/WorkspaceFilterEvaluator.cs:44` `MatchesFilters` — complexity `34`, lines `94`
 - `app/Services/TweakProviders/PrivacyTweakProvider.cs:29` `CreateTweaks` — complexity `29`, lines `1101`
+- `app/Services/TweakDocumentationLinker.cs:9` `TweakDocumentationLinker` — complexity `27`, lines `141`
+- `app/ViewModels/WinConfigCategoryCoverageMapper.cs:24` `MapLocalCategoryToWinConfigId` — complexity `22`, lines `36`
 
 ## CLI Program.cs
 
-- Method count: `9`
-- Average method length: `23.0` lines
-- Direct namespace dependencies: `System, System.Collections.Generic, System.CommandLine, System.Diagnostics, System.IO, System.Linq, System.Text.Json, RegProbe.Application.Services, RegProbe.Application.Services.TweakProviders, RegProbe.Application.Utilities, RegProbe.Core, RegProbe.Engine, RegProbe.Infrastructure.Elevation`
+- Method count: `5`
+- Average method length: `14.8` lines
+- Direct namespace dependencies: `System, System.Collections.Generic, System.CommandLine, System.Text.Json, RegProbe.Application.Services, RegProbe.Core, RegProbe.Engine, RegProbe.Infrastructure.Elevation`
 
 ### Command Hotspots
-- `cli/Commands/Program.ResearchCommand.cs` `CreateResearchCommand` — complexity `63`, lines `537`
-- `cli/Commands/Program.TweakCommand.cs` `CreateTweakCommand` — complexity `21`, lines `198`
-- `cli/Commands/Program.DnsCommand.cs` `CreateDnsCommand` — complexity `7`, lines `96`
-- `cli/Commands/Program.PresetCommand.cs` `CreatePresetCommand` — complexity `5`, lines `78`
-- `cli/Commands/Program.ExportCommand.cs` `CreateExportCommand` — complexity `1`, lines `59`
+- `cli/Commands/Program.ResearchCommand.Blocked.cs` `RenderBlockedWorklist` — complexity `16`, lines `141`
+- `cli/Commands/Program.ResearchCommand.Blocked.cs` `CreateResearchListBlockedCommand` — complexity `14`, lines `83`
+- `cli/Commands/Program.ResearchCommand.Automation.cs` `CreateResearchGenerateRegressionPackCommand` — complexity `11`, lines `60`
+- `cli/Commands/Program.TweakCommand.List.cs` `CreateTweakListCommand` — complexity `10`, lines `74`
+- `cli/Commands/Program.TweakCommand.Revert.cs` `CreateTweakRevertCommand` — complexity `8`, lines `66`
 
 ## UI Hotspots
 
-- `app/Views/TweaksWorkspaceView.xaml` — `744` lines
-- `app/Resources/TweaksWorkspaceResources.xaml` — `806` lines
-- `app/ViewModels/TweaksViewModel.cs` — `1180` lines
-- `app/ViewModels/TweakItemViewModel.cs` — `3530` lines
+- `app/Views/TweaksWorkspaceView.xaml` — `42` lines
+- `app/Resources/TweaksWorkspaceResources.xaml` — `12` lines
+- `app/ViewModels/TweaksViewModel.cs` — `916` lines
+- `app/ViewModels/TweakItemViewModel.cs` — `1961` lines
 - `app/MainWindow.xaml` — `530` lines
 - `app/MainWindow.xaml.cs` — `27` lines
 

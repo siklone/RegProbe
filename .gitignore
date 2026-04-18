@@ -213,6 +213,9 @@ research/_source-mirrors/
 registry-research-framework/audit/research-quality-gate.json
 registry-research-framework/audit/research-quality-gate.md
 
+# Local-only VM validation helper; not part of the tracked validation workflow.
+/scripts/validate-in-vm.ps1
+
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
 # checkin your Azure Web App publish settings, but sensitive information contained
 # in these scripts will be unencrypted

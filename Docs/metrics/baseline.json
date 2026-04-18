@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-04-15T11:36:01Z",
+  "generated_utc": "2026-04-18T03:40:37Z",
   "source": {
     "repository": "siklone/RegProbe",
     "workflow": "dotnet.yml",
@@ -71,32 +71,18 @@
   },
   "complexity_hotspots": [
     {
-      "path": "cli/Commands/Program.ResearchCommand.cs",
-      "member": "CreateResearchCommand",
-      "line_count": 537,
-      "cyclomatic_complexity": 63,
-      "start_line": 15
-    },
-    {
-      "path": "app/Services/NohutoChangeAnalyzer.cs",
-      "member": "ResolveKeywordCategory",
-      "line_count": 50,
+      "path": "app/Services/NohutoKeywordCategoryResolver.cs",
+      "member": "Resolve",
+      "line_count": 25,
       "cyclomatic_complexity": 60,
-      "start_line": 305
+      "start_line": 5
     },
     {
-      "path": "app/ViewModels/WorkspaceBrowseCoordinator.cs",
+      "path": "app/ViewModels/WorkspaceFilterEvaluator.cs",
       "member": "MatchesFilters",
       "line_count": 94,
       "cyclomatic_complexity": 34,
-      "start_line": 105
-    },
-    {
-      "path": "app/Services/OsDetectionResolver.cs",
-      "member": "Resolve",
-      "line_count": 184,
-      "cyclomatic_complexity": 31,
-      "start_line": 28
+      "start_line": 44
     },
     {
       "path": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
@@ -104,23 +90,32 @@
       "line_count": 1101,
       "cyclomatic_complexity": 29,
       "start_line": 29
+    },
+    {
+      "path": "app/Services/TweakDocumentationLinker.cs",
+      "member": "TweakDocumentationLinker",
+      "line_count": 141,
+      "cyclomatic_complexity": 27,
+      "start_line": 9
+    },
+    {
+      "path": "app/ViewModels/WinConfigCategoryCoverageMapper.cs",
+      "member": "MapLocalCategoryToWinConfigId",
+      "line_count": 36,
+      "cyclomatic_complexity": 22,
+      "start_line": 24
     }
   ],
   "cli_program": {
     "path": "cli/Program.cs",
-    "method_count": 9,
-    "average_method_length": 23.0,
+    "method_count": 5,
+    "average_method_length": 14.8,
     "direct_namespace_dependencies": [
       "System",
       "System.Collections.Generic",
       "System.CommandLine",
-      "System.Diagnostics",
-      "System.IO",
-      "System.Linq",
       "System.Text.Json",
       "RegProbe.Application.Services",
-      "RegProbe.Application.Services.TweakProviders",
-      "RegProbe.Application.Utilities",
       "RegProbe.Core",
       "RegProbe.Engine",
       "RegProbe.Infrastructure.Elevation"
@@ -130,87 +125,63 @@
         "member": "Main",
         "line_count": 16,
         "cyclomatic_complexity": 1,
-        "start_line": 28
-      },
-      {
-        "member": "BuildJsonTweakValidationReport",
-        "line_count": 23,
-        "cyclomatic_complexity": 1,
-        "start_line": 45
+        "start_line": 23
       },
       {
         "member": "TryParseRisk",
         "line_count": 16,
         "cyclomatic_complexity": 2,
-        "start_line": 69
+        "start_line": 40
       },
       {
         "member": "WriteReport",
         "line_count": 9,
         "cyclomatic_complexity": 2,
-        "start_line": 86
+        "start_line": 57
       },
       {
         "member": "WriteStep",
         "line_count": 4,
         "cyclomatic_complexity": 1,
-        "start_line": 96
+        "start_line": 67
       },
       {
         "member": "EnsureCanRunTweak",
         "line_count": 29,
         "cyclomatic_complexity": 5,
-        "start_line": 101
-      },
-      {
-        "member": "TryFindRepoRoot",
-        "line_count": 17,
-        "cyclomatic_complexity": 6,
-        "start_line": 131
-      },
-      {
-        "member": "ResolveResearchPath",
-        "line_count": 15,
-        "cyclomatic_complexity": 3,
-        "start_line": 149
-      },
-      {
-        "member": "RunResearchPythonScript",
-        "line_count": 78,
-        "cyclomatic_complexity": 10,
-        "start_line": 165
+        "start_line": 72
       }
     ],
     "command_hotspots": [
       {
-        "path": "cli/Commands/Program.ResearchCommand.cs",
-        "member": "CreateResearchCommand",
-        "line_count": 537,
-        "cyclomatic_complexity": 63
+        "path": "cli/Commands/Program.ResearchCommand.Blocked.cs",
+        "member": "RenderBlockedWorklist",
+        "line_count": 141,
+        "cyclomatic_complexity": 16
       },
       {
-        "path": "cli/Commands/Program.TweakCommand.cs",
-        "member": "CreateTweakCommand",
-        "line_count": 198,
-        "cyclomatic_complexity": 21
+        "path": "cli/Commands/Program.ResearchCommand.Blocked.cs",
+        "member": "CreateResearchListBlockedCommand",
+        "line_count": 83,
+        "cyclomatic_complexity": 14
       },
       {
-        "path": "cli/Commands/Program.DnsCommand.cs",
-        "member": "CreateDnsCommand",
-        "line_count": 96,
-        "cyclomatic_complexity": 7
+        "path": "cli/Commands/Program.ResearchCommand.Automation.cs",
+        "member": "CreateResearchGenerateRegressionPackCommand",
+        "line_count": 60,
+        "cyclomatic_complexity": 11
       },
       {
-        "path": "cli/Commands/Program.PresetCommand.cs",
-        "member": "CreatePresetCommand",
-        "line_count": 78,
-        "cyclomatic_complexity": 5
+        "path": "cli/Commands/Program.TweakCommand.List.cs",
+        "member": "CreateTweakListCommand",
+        "line_count": 74,
+        "cyclomatic_complexity": 10
       },
       {
-        "path": "cli/Commands/Program.ExportCommand.cs",
-        "member": "CreateExportCommand",
-        "line_count": 59,
-        "cyclomatic_complexity": 1
+        "path": "cli/Commands/Program.TweakCommand.Revert.cs",
+        "member": "CreateTweakRevertCommand",
+        "line_count": 66,
+        "cyclomatic_complexity": 8
       }
     ]
   },
@@ -218,19 +189,19 @@
     "hotspots": [
       {
         "path": "app/Views/TweaksWorkspaceView.xaml",
-        "line_count": 744
+        "line_count": 42
       },
       {
         "path": "app/Resources/TweaksWorkspaceResources.xaml",
-        "line_count": 806
+        "line_count": 12
       },
       {
         "path": "app/ViewModels/TweaksViewModel.cs",
-        "line_count": 1180
+        "line_count": 916
       },
       {
         "path": "app/ViewModels/TweakItemViewModel.cs",
-        "line_count": 3530
+        "line_count": 1961
       },
       {
         "path": "app/MainWindow.xaml",

@@ -35,7 +35,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Enable long paths for checkout
-        run: git config --global core.longpaths true
+        run: git config --system core.longpaths true
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -72,7 +72,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Enable long paths for checkout
-        run: git config --global core.longpaths true
+        run: git config --system core.longpaths true
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -160,7 +160,7 @@ jobs:
     if: github.event_name != 'release'
     steps:
       - name: Enable long paths for checkout
-        run: git config --global core.longpaths true
+        run: git config --system core.longpaths true
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -194,7 +194,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Enable long paths for checkout
-        run: git config --global core.longpaths true
+        run: git config --system core.longpaths true
 
       - name: Checkout repository
         uses: actions/checkout@v4
