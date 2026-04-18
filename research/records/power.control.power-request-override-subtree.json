@@ -4,12 +4,12 @@
   "record_id": "power.control.power-request-override-subtree",
   "tweak_id": "power.control.power-request-override-subtree",
   "record_status": "draft",
-  "summary": "Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup, and retained Ghidra plus local-KD query/store follow-ups now provide bounded current-build static context around the same power-request family. The lane remains draft because exact leaf values and restore semantics are still unresolved, not because the subtree lacks all static context.",
+  "summary": "Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup, and retained Ghidra plus local-KD query/store follow-ups now provide bounded current-build static context around the same power-request family. A later ETW stackwalk pass captured current-build root and `RuleCount` / `ENABLED` / `DISABLED` reads, and a QGA powercfg proof showed `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE` materializing a `Process` leaf value of `7` and removing it cleanly with the same command surface. The lane remains draft because Driver and Service leaf semantics plus the exact current-build reader binding remain unresolved, not because the subtree lacks runtime or restore context.",
   "validation_proof": {
-    "source_url": "research/notes/power-control-power-request-override-subtree-triage-20260408.md",
-    "exact_quote_or_path": "The retained root dump contains `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride`, the retained current-build path trace shows 15 subtree hits from `svchost.exe`, and the retained wildcard KD lineage exposes the override family.",
+    "source_url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+    "exact_quote_or_path": "Microsoft documents `powercfg /requestsoverride [caller_type name request]`; the 2026-04-18 VM proof maps that control surface to `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process` leaf materialization and cleanup.",
     "key_found_on_page": true,
-    "notes": "This proof establishes subtree existence plus live current-build access, but it does not yet resolve exact leaf-value semantics."
+    "notes": "The proof now establishes the public command surface, current-build subtree reads, and a reversible process-leaf add/remove cycle. It does not yet resolve Driver or Service leaf semantics or the exact kernel reader binding."
   },
   "setting": {
     "name": "Power Request Override Subtree",
@@ -18,8 +18,8 @@
     "scope": "device",
     "casual_explanation": "This is a low-level Control\\Power subtree that appears to back override handling for power requests.",
     "why_people_change_it": "Researchers track it when they want to understand how the kernel power-request override flow is persisted, queried, or routed through UMPO and service-host activity.",
-    "tradeoffs_overview": "The subtree now has retained persisted presence, retained runtime access, retained current-build override-family lineage, and bounded adjacent static context from retained Ghidra and local-KD query/store work. What is still missing is exact leaf semantics and a restore story rather than a total absence of static context.",
-    "professional_notes": "The retained power-control root dump from 2026-03-24 contains the `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride` subtree as a persisted root key. The retained current-build docs-first stepwise runtime trace from 2026-03-29 shows 15 accesses under the subtree, all from `svchost.exe`, with a compact operation mix of `RegOpenKey`, `RegQueryKey`, and `RegCloseKey`. The observed paths cover the subtree root plus the `Driver`, `Process`, and `Service` leaves, and the leaf probes in that retained capture land as `NAME NOT FOUND`. A retained wildcard local-KD lineage pass from 2026-04-08 then exposed `PopPowerRequestHandleRequestOverrideQueryResponse`, `PopPowerRequestOverrideInitialize`, `PopUmpoSendPowerRequestOverrideQuery`, and `PopUmpoSendPowerRequestOverrideCleanup`, which ties the subtree to a visible current-build override family. Retained adjacent static analysis now narrows the same family further: the symbol-seeded Ghidra binding pass naturally resolves the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback` path through `GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT`, while the retained local-KD power-setting query/store disassembly shows the visible generic power-setting layer operating through `PopFindPowerSettingConfiguration`, `PopSettingLock`, `PopPowerSettingChangeStamp`, `PopRegisteredPowerSettingCallbacks`, and `PoRegisterPowerSettingCallback` without exposing a direct registry API in the retained path. That closes the older gap around missing static context entirely, but it still does not prove exact `PowerRequestOverride` leaf-value semantics, a restore story, or a direct leaf-binding function.",
+    "tradeoffs_overview": "The subtree now has retained persisted presence, retained runtime access, retained current-build override-family lineage, bounded adjacent static context from retained Ghidra and local-KD query/store work, an ETW stackwalk read of the root control values, and a reversible process-leaf proof through the documented powercfg surface. What is still missing is complete Driver/Service leaf semantics and a direct reader binding rather than a total absence of runtime or restore context.",
+    "professional_notes": "The retained power-control root dump from 2026-03-24 contains the `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride` subtree as a persisted root key. The retained current-build docs-first stepwise runtime trace from 2026-03-29 shows 15 accesses under the subtree, all from `svchost.exe`, with a compact operation mix of `RegOpenKey`, `RegQueryKey`, and `RegCloseKey`. The observed paths cover the subtree root plus the `Driver`, `Process`, and `Service` leaves, and the leaf probes in that retained capture land as `NAME NOT FOUND`. A retained wildcard local-KD lineage pass from 2026-04-08 then exposed `PopPowerRequestHandleRequestOverrideQueryResponse`, `PopPowerRequestOverrideInitialize`, `PopUmpoSendPowerRequestOverrideQuery`, and `PopUmpoSendPowerRequestOverrideCleanup`, which ties the subtree to a visible current-build override family. Retained adjacent static analysis now narrows the same family further: the symbol-seeded Ghidra binding pass naturally resolves the timeout-specific `PopPowerRequestExecutionRequiredSettingCallback` path through `GUID_EXECUTION_REQUIRED_REQUEST_TIMEOUT`, while the retained local-KD power-setting query/store disassembly shows the visible generic power-setting layer operating through `PopFindPowerSettingConfiguration`, `PopSettingLock`, `PopPowerSettingChangeStamp`, `PopRegisteredPowerSettingCallbacks`, and `PoRegisterPowerSettingCallback` without exposing a direct registry API in the retained path. The 2026-04-18 ETW stackwalk pass then captured a current-build root query with stack-bearing `RegOpenKey`, `RegCloseKey`, and `RegQueryValue` events for `RuleCount`, `DISABLED`, and `ENABLED`. A QGA powercfg proof then used the Microsoft-documented `/requestsoverride` surface to add `PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE`; the VM observed `PowerRequestOverride\\Process :: RegProbeOverrideProof.exe=7`, listed the override through powercfg, removed it through `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe`, and confirmed the test value was absent after cleanup. That proves one reversible powercfg-managed process-leaf cycle, but it still does not prove Driver/Service leaf semantics or a direct current-build kernel reader binding.",
     "targets": [
       {
         "target_id": "powerrequestoverride-subtree",
@@ -41,10 +41,21 @@
           {
             "state_kind": "feature-dependent",
             "label": "Leaf semantics unresolved",
-            "meaning": "The current retained runtime capture probes Driver, Process, and Service but lands on NAME NOT FOUND for those leaves, so exact subtree content still appears trigger- or environment-dependent.",
+            "meaning": "The older retained runtime capture probed Driver, Process, and Service and landed on NAME NOT FOUND for those leaves. The later powercfg proof resolves one Process-leaf add/remove pattern, but Driver and Service leaf semantics remain feature-dependent.",
             "evidence_ids": [
               "vm-power-request-override-runtime-audit-20260408",
-              "vm-power-request-override-kd-lineage-20260408"
+              "vm-power-request-override-kd-lineage-20260408",
+              "vm-power-request-override-powercfg-proof-20260418"
+            ]
+          },
+          {
+            "state_kind": "observed-runtime",
+            "value": "PowerRequestOverride\\Process :: RegProbeOverrideProof.exe = 7 after DISPLAY SYSTEM AWAYMODE",
+            "label": "Observed powercfg-managed process override",
+            "meaning": "The documented `powercfg /requestsoverride` surface materialized a process-leaf value for the synthetic caller and removed it cleanly through the same command family. Treat `7` as the observed all-request bitmask for this test, not as a complete cross-leaf model.",
+            "evidence_ids": [
+              "ms-powercfg-requestsoverride-doc",
+              "vm-power-request-override-powercfg-proof-20260418"
             ]
           }
         ],
@@ -98,16 +109,18 @@
         }
       ],
       "good_when": "You want to document the retained subtree and current-build override-family lineage.",
-      "bad_when": "You need exact leaf semantics, a safe recommendation, or an app-ready toggle.",
+      "bad_when": "You need complete Driver/Service leaf semantics, a safe recommendation, or an app-ready toggle.",
       "tradeoffs": [
-        "Preserves the retained subtree evidence.",
-        "Leaves leaf-value semantics unresolved."
+        "Preserves the retained subtree evidence and the reversible process-leaf proof.",
+        "Leaves Driver and Service leaf semantics unresolved."
       ],
       "apply_allowed": false,
       "evidence_ids": [
         "vm-power-request-override-root-dump-20260324",
         "vm-power-request-override-runtime-audit-20260408",
-        "vm-power-request-override-kd-lineage-20260408"
+        "vm-power-request-override-kd-lineage-20260408",
+        "vm-power-request-override-etw-stackwalk-20260418",
+        "vm-power-request-override-powercfg-proof-20260418"
       ]
     }
   ],
@@ -162,6 +175,46 @@
         "version-scope"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "ms-powercfg-requestsoverride-doc",
+      "kind": "official-doc",
+      "title": "Microsoft Learn documents the powercfg /requestsoverride command surface",
+      "location": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+      "summary": "Microsoft documents `/requestsoverride` as the command surface for setting a Power Request override for a process, service, or driver and listing the current override set when no parameters are supplied.",
+      "supports": [
+        "control-surface",
+        "allowed-values",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-request-override-etw-stackwalk-20260418",
+      "kind": "etw-trace",
+      "title": "QGA ETW stackwalk captures PowerRequestOverride root and control-value reads",
+      "location": "evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json and evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl and evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json and research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md",
+      "summary": "A QGA-launched ETW stackwalk run on Win25H2Clean produced a physical ETL and normalized bundle with 5,497 registry events, 1,650 caller-stack events, eight PowerRequestOverride text hits, stack-bearing root RegOpenKey / RegCloseKey activity, and RegQueryValue reads for `RuleCount`, `DISABLED`, and `ENABLED`.",
+      "supports": [
+        "path",
+        "behavior",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power-request-override-powercfg-proof-20260418",
+      "kind": "vm-test",
+      "title": "QGA powercfg proof materializes and removes a process override leaf",
+      "location": "evidence/files/vm-tooling-staging/power-request-override-powercfg-proof-20260418/host-summary.json and research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md",
+      "summary": "A QGA command-state proof used `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE`, observed `PowerRequestOverride\\Process :: RegProbeOverrideProof.exe=7`, listed the override through powercfg, removed it with `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe`, and confirmed the test value was absent after cleanup without direct registry deletion.",
+      "supports": [
+        "control-surface",
+        "value",
+        "rollback",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -169,21 +222,21 @@
     "apply_allowed": false,
     "recommended_for_general_users": false,
     "restore_default_supported": false,
-    "restore_previous_supported": false,
+    "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, and bounded adjacent static context from retained Ghidra and local-KD query/store analysis. That is enough to keep the subtree as a standalone draft lane, but not enough yet to claim exact leaf defaults, exact binding semantics, or a safe restore story. The 2026-04-14 decision keeps this as an intentional hold because the current evidence is subtree-level rather than leaf-specific, the lane is not mapped to a supported tweak/apply surface, and further leaf modeling would be required before promotion.",
+    "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, bounded adjacent static context from retained Ghidra and local-KD query/store analysis, a stack-bearing ETW root/control-value read, and a reversible process-leaf add/remove cycle through the documented powercfg surface. That is enough to narrow the restore-story gap for powercfg-managed Process entries, but not enough to claim complete Driver or Service leaf semantics, an exact current-build kernel reader binding, or an app-ready apply surface. The record therefore remains a research-only draft and intentional hold.",
     "blocking_issues": [
       "powerrequestoverride-subtree-leaf-semantics-unresolved",
       "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-      "powerrequestoverride-restore-story-leaf-model-unproven",
+      "powerrequestoverride-driver-service-leaf-semantics-unproven",
       "powerrequestoverride-subtree-not-mapped-to-supported-app-surface",
       "intentional-hold"
     ]
   },
   "open_questions": [
     "Which component seeds or materializes the Driver, Process, and Service leaves under PowerRequestOverride on the current build?",
-    "Does the modern override flow persist stable leaf values in registry, or are the runtime probes simply checking for optional override entries that are normally absent?",
-    "Can a dedicated Ghidra pass tie the subtree more tightly to the visible UMPO override family?"
+    "Do Driver and Service leaves use the same request-type bitmask model observed for the Process leaf, or do they carry caller-specific semantics?",
+    "Can a dedicated Ghidra or debugger-assisted pass tie the subtree more tightly to the visible UMPO override family and the current-build registry reader?"
   ],
   "tested_on": [
     {
@@ -200,7 +253,17 @@
       "environment": "KVM wildcard local-KD power-request lineage pass",
       "os": "Windows 11",
       "notes": "The retained wildcard KD lineage pass from 2026-04-08 exposes the current-build override family around response handling, initialization, and UMPO override query / cleanup."
+    },
+    {
+      "environment": "Win25H2Clean QGA ETW stackwalk",
+      "os": "Windows 11 build 26100",
+      "notes": "The 2026-04-18 QGA ETW stackwalk captured root PowerRequestOverride activity and RegQueryValue reads for RuleCount, DISABLED, and ENABLED."
+    },
+    {
+      "environment": "Win25H2Clean QGA powercfg command-state proof",
+      "os": "Windows 11 build 26100",
+      "notes": "The 2026-04-18 QGA proof materialized RegProbeOverrideProof.exe=7 under the Process leaf through powercfg and removed it through the same command surface."
     }
   ],
-  "last_reviewed_utc": "2026-04-14T06:02:00Z"
+  "last_reviewed_utc": "2026-04-18T16:53:21Z"
 }

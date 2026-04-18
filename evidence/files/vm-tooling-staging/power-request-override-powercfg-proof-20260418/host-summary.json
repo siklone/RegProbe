@@ -1,0 +1,91 @@
+{
+  "generated_utc": "2026-04-18T16:53:21.5018170Z",
+  "run_id": "power-request-override-proof-20260418c",
+  "override_key_exists": true,
+  "test_process_key_exists_after_cleanup": false,
+  "direct_cleanup_applied": false,
+  "command_results": [
+    {
+      "label": "list-before",
+      "argv": "C:\\WINDOWS\\System32\\powercfg.exe /requestsoverride",
+      "exited": true,
+      "exit_code": 0,
+      "stdout_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\list-before.stdout.txt",
+      "stderr_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\list-before.stderr.txt",
+      "stdout": "[SERVICE]\r\n\r\n[PROCESS]\r\n\r\n[DRIVER]\r\n\r\n",
+      "stderr": null
+    },
+    {
+      "label": "add",
+      "argv": "C:\\WINDOWS\\System32\\powercfg.exe /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE",
+      "exited": true,
+      "exit_code": 0,
+      "stdout_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\add.stdout.txt",
+      "stderr_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\add.stderr.txt",
+      "stdout": null,
+      "stderr": null
+    },
+    {
+      "label": "list-after-add",
+      "argv": "C:\\WINDOWS\\System32\\powercfg.exe /requestsoverride",
+      "exited": true,
+      "exit_code": 0,
+      "stdout_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\list-after-add.stdout.txt",
+      "stderr_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\list-after-add.stderr.txt",
+      "stdout": "[SERVICE]\r\n\r\n[PROCESS]\r\nRegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE\r\n\r\n[DRIVER]\r\n\r\n",
+      "stderr": null
+    },
+    {
+      "label": "remove",
+      "argv": "C:\\WINDOWS\\System32\\powercfg.exe /requestsoverride PROCESS RegProbeOverrideProof.exe",
+      "exited": true,
+      "exit_code": 0,
+      "stdout_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\remove.stdout.txt",
+      "stderr_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\remove.stderr.txt",
+      "stdout": null,
+      "stderr": null
+    },
+    {
+      "label": "list-after-remove",
+      "argv": "C:\\WINDOWS\\System32\\powercfg.exe /requestsoverride",
+      "exited": true,
+      "exit_code": 0,
+      "stdout_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\list-after-remove.stdout.txt",
+      "stderr_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\list-after-remove.stderr.txt",
+      "stdout": "[SERVICE]\r\n\r\n[PROCESS]\r\n\r\n[DRIVER]\r\n\r\n",
+      "stderr": null
+    },
+    {
+      "label": "list-after-cleanup",
+      "argv": "C:\\WINDOWS\\System32\\powercfg.exe /requestsoverride",
+      "exited": true,
+      "exit_code": 0,
+      "stdout_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\list-after-cleanup.stdout.txt",
+      "stderr_path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\list-after-cleanup.stderr.txt",
+      "stdout": "[SERVICE]\r\n\r\n[PROCESS]\r\n\r\n[DRIVER]\r\n\r\n",
+      "stderr": null
+    }
+  ],
+  "snapshots": [
+    {
+      "label": "before",
+      "path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\before.tree.txt",
+      "text": "override_key_exists=True\r\ntest_process_key_exists=False\r\nKEY=HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\r\nKEY=HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process\r\n"
+    },
+    {
+      "label": "after-add",
+      "path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\after-add.tree.txt",
+      "text": "override_key_exists=True\r\ntest_process_key_exists=False\r\nKEY=HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\r\nKEY=HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process\r\nVALUE=HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process :: RegProbeOverrideProof.exe=7\r\n"
+    },
+    {
+      "label": "after-remove",
+      "path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\after-remove.tree.txt",
+      "text": "override_key_exists=True\r\ntest_process_key_exists=False\r\nKEY=HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\r\nKEY=HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process\r\n"
+    },
+    {
+      "label": "after-cleanup",
+      "path": "C:\\RegProbe-Diag\\power-request-override-proof-20260418c\\after-cleanup.tree.txt",
+      "text": "override_key_exists=True\r\ntest_process_key_exists=False\r\nKEY=HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\r\nKEY=HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride\\Process\r\n"
+    }
+  ]
+}

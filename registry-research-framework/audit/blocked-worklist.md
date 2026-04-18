@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-18T16:26:03.751220Z`
+Generated: `2026-04-18T16:57:00.276302Z`
 
 Blocked candidates: `18`
 
@@ -223,7 +223,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
 - Value name: `(subtree root, Driver, Process, Service)`
 - Blockers: `intentional-hold`, `powerrequestoverride-restore-story-leaf-model-unproven`, `powerrequestoverride-static-context-adjacent-not-leaf-specific`, `powerrequestoverride-subtree-leaf-semantics-unresolved`, `powerrequestoverride-subtree-not-mapped-to-supported-app-surface`
-- Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
+- Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-proof-20260418.json`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Prove restore or rollback behavior for the exact subtree or value.
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-18T16:25:19.512181Z",
+  "generated_utc": "2026-04-18T16:56:59.162962Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -9,10 +9,10 @@
       "C": 2
     },
     "lane_counts": {
-      "official-policy": 240,
+      "official-policy": 241,
       "runtime": 5,
       "system": 6,
-      "early-boot": 17
+      "early-boot": 16
     },
     "next_missing_layer_counts": {
       "none": 250,
@@ -27,7 +27,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-18T16:25:18.697165Z",
+      "generated_utc": "2026-04-18T16:56:58.376474Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -6816,14 +6816,14 @@
       "record_id": "power.control.power-request-override-subtree",
       "tweak_id": "power.control.power-request-override-subtree",
       "evidence_class": "C",
-      "lane": "early-boot",
+      "lane": "official-policy",
       "class_ready_basis": "pending",
-      "official": false,
-      "official_doc_exists": false,
+      "official": true,
+      "official_doc_exists": true,
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
@@ -6831,24 +6831,29 @@
       "cross_layer_satisfied": true,
       "layers_used": [
         "runtime_procmon",
-        "static_ghidra"
+        "static_ghidra",
+        "behavior_wpr",
+        "official_doc"
       ],
       "tools_used": [
+        "official-doc",
+        "etw",
         "procmon",
-        "ghidra"
+        "ghidra",
+        "wpr"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
-        "etw_executed": false,
-        "boot_phase_included": false,
+        "etw_executed": true,
+        "boot_phase_included": true,
         "correct_tool_used": true,
         "trigger_condition_tested": true
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
+      "re_audit_reason": "",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.2",
@@ -6861,7 +6866,7 @@
       "promotion_state": "blocked",
       "promotion_blockers": [
         "intentional-hold",
-        "powerrequestoverride-restore-story-leaf-model-unproven",
+        "powerrequestoverride-driver-service-leaf-semantics-unproven",
         "powerrequestoverride-static-context-adjacent-not-leaf-specific",
         "powerrequestoverride-subtree-leaf-semantics-unresolved",
         "powerrequestoverride-subtree-not-mapped-to-supported-app-surface"
@@ -6869,8 +6874,8 @@
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 4,
-        "runtime_evidence_strength": 2,
+        "static_evidence_strength": 5,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -6878,7 +6883,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.56,
+        "overall_score": 3.78,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -6893,7 +6898,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-14T06:02:00Z"
+        "last_verified_at": "2026-04-18T16:53:21Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -22909,7 +22914,7 @@
     "no-runtime-proof": 8,
     "power-session-watchdog-timeouts-no-current-build-exact-registry-read": 1,
     "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller": 1,
-    "powerrequestoverride-restore-story-leaf-model-unproven": 1,
+    "powerrequestoverride-driver-service-leaf-semantics-unproven": 1,
     "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
     "powerrequestoverride-subtree-leaf-semantics-unresolved": 1,
     "powerrequestoverride-subtree-not-mapped-to-supported-app-surface": 1,
