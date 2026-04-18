@@ -27,10 +27,12 @@ def load_module(name: str, path: Path):
     return module
 
 
+<<<<<<< HEAD
 wpr_boot_registry = load_module(
     "run_guest_wpr_boot_registry_for_tests",
     VM_KVM_SCRIPTS / "run-guest-wpr-boot-registry.py",
 )
+summary_contract = load_module("summary_contract_lib_for_wpr_tests", VM_KVM_SCRIPTS / "summary_contract_lib.py")
 
 
 class VmKvmWprBootRegistryTests(unittest.TestCase):
@@ -92,6 +94,76 @@ class VmKvmWprBootRegistryTests(unittest.TestCase):
         self.assertEqual(payload["hits_csv"]["hit_line_count"], 0)
         self.assertTrue(payload["normalized_salvage"]["created"])
         self.assertEqual(payload["normalized_salvage"]["normalizer_name"], "HostTimeoutSalvageNormalizer")
+
+    def test_summarize_timeout_salvage_exposes_top_level_no_hit_fields(self) -> None:
+        payload = wpr_boot_registry.summarize_timeout_salvage(
+            {
+                "artifact_health": {
+                    "guest_summary": {"exists": True, "size_bytes": 0, "is_zero_byte": True},
+                    "guest_normalized": {"exists": True, "size_bytes": 0, "is_zero_byte": True},
+                    "guest_hits_csv": {"exists": True, "size_bytes": 16, "is_zero_byte": False},
+                },
+                "hits_csv": {
+                    "exists": True,
+                    "line_count": 1,
+                    "hit_line_count": 0,
+                    "contains_value_name": False,
+                },
+                "normalized_salvage": {
+                    "created": True,
+                    "path": "/tmp/sample.normalized.json",
+                    "event_count": 0,
+                    "normalizer_name": "HostTimeoutSalvageNormalizer",
+                },
+            }
+        )
+
+        self.assertEqual(payload["summary_source"], "timeout-salvage")
+        self.assertEqual(payload["salvage_classification"], "header-only-no-hit")
+        self.assertTrue(payload["guest_summary_zero_byte"])
+        self.assertTrue(payload["guest_normalized_zero_byte"])
+        self.assertTrue(payload["normalized_bundle_exists"])
+        self.assertEqual(payload["normalization_status"], "ok")
+        self.assertEqual(payload["normalizer_name"], "HostTimeoutSalvageNormalizer")
+
+    def test_timeout_summary_contract_can_embed_salvage_surface_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            output_path = Path(temp_root) / "summary.json"
+            timeout_salvage = {
+                "artifact_health": {
+                    "guest_summary": {"exists": True, "size_bytes": 0, "is_zero_byte": True},
+                    "guest_normalized": {"exists": True, "size_bytes": 0, "is_zero_byte": True},
+                    "guest_hits_csv": {"exists": True, "size_bytes": 16, "is_zero_byte": False},
+                },
+                "hits_csv": {"exists": True, "line_count": 1, "hit_line_count": 0, "contains_value_name": False},
+                "normalized_salvage": {
+                    "created": True,
+                    "path": str(Path(temp_root) / "sample.normalized.json"),
+                    "event_count": 0,
+                    "normalizer_name": "HostTimeoutSalvageNormalizer",
+                },
+            }
+
+            payload = summary_contract.write_summary_contract(
+                output_path,
+                {
+                    "status": "timeout",
+                    "output_name": "sample-run",
+                    "timeout_salvage": timeout_salvage,
+                    **wpr_boot_registry.summarize_timeout_salvage(timeout_salvage),
+                },
+                default_error_kind="runner-timeout",
+                default_recovery_action="rerun-wpr-boot-registry",
+                default_transport_blocker="timeout",
+                default_guest_health="unknown",
+            )
+
+            written = json.loads(output_path.read_text(encoding="utf-8"))
+        self.assertEqual(written["summary_source"], "timeout-salvage")
+        self.assertEqual(written["salvage_classification"], "header-only-no-hit")
+        self.assertTrue(written["guest_summary_zero_byte"])
+        self.assertTrue(written["guest_normalized_zero_byte"])
+        self.assertEqual(payload["recovery_action"], "rerun-wpr-boot-registry")
 
     def test_prepare_timeout_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
@@ -354,6 +426,45 @@ class VmKvmWprBootRegistryTests(unittest.TestCase):
         self.assertTrue(payload["normalized_bundle_exists"])
         self.assertEqual(payload["normalization_status"], "ok")
         self.assertEqual(payload["normalizer_name"], "HostTimeoutSalvageNormalizer")
+
+    def test_timeout_summary_contract_can_embed_salvage_surface_fields(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            output_path = Path(temp_root) / "summary.json"
+            timeout_salvage = {
+                "artifact_health": {
+                    "guest_summary": {"exists": True, "size_bytes": 0, "is_zero_byte": True},
+                    "guest_normalized": {"exists": True, "size_bytes": 0, "is_zero_byte": True},
+                    "guest_hits_csv": {"exists": True, "size_bytes": 16, "is_zero_byte": False},
+                },
+                "hits_csv": {"exists": True, "line_count": 1, "hit_line_count": 0, "contains_value_name": False},
+                "normalized_salvage": {
+                    "created": True,
+                    "path": str(Path(temp_root) / "sample.normalized.json"),
+                    "event_count": 0,
+                    "normalizer_name": "HostTimeoutSalvageNormalizer",
+                },
+            }
+
+            payload = summary_contract.write_summary_contract(
+                output_path,
+                {
+                    "status": "timeout",
+                    "output_name": "sample-run",
+                    "timeout_salvage": timeout_salvage,
+                    **wpr_boot_registry.summarize_timeout_salvage(timeout_salvage),
+                },
+                default_error_kind="runner-timeout",
+                default_recovery_action="rerun-wpr-boot-registry",
+                default_transport_blocker="timeout",
+                default_guest_health="unknown",
+            )
+
+            written = json.loads(output_path.read_text(encoding="utf-8"))
+            self.assertEqual(written["summary_source"], "timeout-salvage")
+            self.assertEqual(written["salvage_classification"], "header-only-no-hit")
+            self.assertTrue(written["guest_summary_zero_byte"])
+            self.assertTrue(written["guest_normalized_zero_byte"])
+            self.assertEqual(payload["recovery_action"], "rerun-wpr-boot-registry")
 
 
 if __name__ == "__main__":
