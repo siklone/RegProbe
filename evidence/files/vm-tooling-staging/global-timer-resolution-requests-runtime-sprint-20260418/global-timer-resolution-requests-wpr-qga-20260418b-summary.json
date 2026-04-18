@@ -1,0 +1,72 @@
+﻿{
+    "generated_utc":  "2026-04-18T15:29:05.5536441Z",
+    "stage":  "collect",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name":  "GlobalTimerResolutionRequests",
+    "output_name":  "global-timer-resolution-requests-wpr-qga-20260418b",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "recovery_action":  "none",
+    "transport_blocker":  "none",
+    "guest_health":  "stable",
+    "before_boot_time_utc":  "2026-04-15T07:24:18.8232660Z",
+    "after_boot_time_utc":  "2026-04-18T15:28:10.5000000Z",
+    "reboot_observed":  true,
+    "wpr_exists":  true,
+    "tracerpt_exists":  true,
+    "stopboot":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Press Ctrl+C to cancel the stop operation.\r\nThe trace was successfully saved.\r\n\r\nThis trace has dropped 23446 events. Please record this trace again.",
+                     "stderr":  ""
+                 },
+    "etl_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260418b\\global-timer-resolution-requests-wpr-qga-20260418b.etl",
+    "etl_exists":  true,
+    "tracerpt_input_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260418b\\global-timer-resolution-requests-wpr-qga-20260418b.etl",
+    "csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260418b\\global-timer-resolution-requests-wpr-qga-20260418b.csv",
+    "csv_exists":  true,
+    "raw_collector_salvage":  false,
+    "raw_collector_path":  null,
+    "raw_collector_size_bytes":  0,
+    "normalized_bundle_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260418b\\global-timer-resolution-requests-wpr-qga-20260418b.normalized.json",
+    "normalized_bundle_exists":  true,
+    "normalized_result_ref":  "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260418b\\global-timer-resolution-requests-wpr-qga-20260418b.normalized.json",
+    "normalization_status":  "ok",
+    "normalizer_name":  "GuestTracerptCsvRegistryNormalizer",
+    "normalization_errors":  [
+
+                             ],
+    "hits_csv_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260418b\\global-timer-resolution-requests-wpr-qga-20260418b.hits.csv",
+    "hits_csv_exists":  true,
+    "hit_line_count":  101,
+    "fragment_hit_counts":  {
+                                "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel":  0,
+                                "GlobalTimerResolutionRequests":  0,
+                                "Session Manager\\Kernel":  101
+                            },
+    "stopboot_exit_code_indeterminate":  true,
+    "tracerpt":  {
+                     "exit_code":  null,
+                     "timed_out":  false,
+                     "stdout":  "Input\r\n----------------\r\nFile(s):\r\n     C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260418b\\global-timer-resolution-requests-wpr-qga-20260418b.etl\r\n\n0.00%0.92%1.84%2.76%3.68%4.60%5.51%6.43%7.35%8.27%9.19%10.11%11.03%11.95%12.87%13.79%14.70%15.62%16.54%17.46%18.38%19.30%20.22%21.14%22.06%22.98%23.89%24.81%25.73%26.65%27.57%28.49%29.41%30.33%31.25%32.17%33.08%34.00%34.92%35.84%36.76%37.68%38.60%39.52%40.44%41.36%42.27%43.19%44.11%45.03%45.95%46.87%47.79%48.71%49.63%50.55%51.46%52.38%53.30%54.22%55.14%56.06%56.98%57.90%58.82%59.74%60.65%61.57%62.49%63.41%64.33%65.25%66.17%67.09%68.01%68.93%69.84%70.76%71.68%72.60%73.52%74.44%75.36%76.28%77.20%78.12%79.04%79.95%80.87%81.79%82.71%83.63%84.55%85.47%86.39%87.31%88.23%89.14%90.06%90.98%91.90%92.82%93.74%94.66%95.58%96.50%97.42%98.33%99.25%100.00%\n\r\nOutput\r\n----------------\r\nDumpFile:           C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260418b\\global-timer-resolution-requests-wpr-qga-20260418b.csv\r\n\nThe command completed successfully.",
+                     "stderr":  ""
+                 },
+    "tracerpt_exit_code_indeterminate":  true,
+    "hits_path":  "C:\\RegProbe-Diag\\wpr-boot-registry\\global-timer-resolution-requests-wpr-qga-20260418b\\global-timer-resolution-requests-wpr-qga-20260418b.hits.txt",
+    "hits_exists":  true,
+    "stack_capture":  {
+                          "parser_supported":  true,
+                          "captured_event_count":  0,
+                          "source_fields":  [
+                                                "Stack",
+                                                "CallStack",
+                                                "Call Stack",
+                                                "StackTrace",
+                                                "Stack Trace",
+                                                "UserStack",
+                                                "User Stack"
+                                            ]
+                      },
+    "caller_stack_event_count":  0
+}

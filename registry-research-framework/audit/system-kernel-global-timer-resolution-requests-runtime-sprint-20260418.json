@@ -1,0 +1,97 @@
+{
+  "generated_utc": "2026-04-18T16:15:00Z",
+  "candidate_id": "system.kernel.global-timer-resolution-requests",
+  "record_id": "system.kernel.global-timer-resolution-requests",
+  "vm_target": "Win25H2Clean",
+  "classification": "blocked-pending-stronger-runtime-proof",
+  "strongest_evidence_source": "wpr-boot-registry-clean-subtree-signal-no-exact-value-hit",
+  "static_confidence": "medium-high",
+  "static_hypothesis": {
+    "component": "ntoskrnl.exe",
+    "global_symbol": "nt!KiGlobalTimerResolutionRequests",
+    "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+    "value_name": "GlobalTimerResolutionRequests",
+    "trigger_family": "power-request-simulation"
+  },
+  "runtime_plan": {
+    "lane_order": [
+      "etw-stackwalk",
+      "procmon-support",
+      "wpr-boot-registry"
+    ],
+    "why": "The record already had current-build static binding and live KD state, so the cheapest missing layer was exact runtime attribution. ETW stayed weak, Procmon failed at export, and WPR was the cheapest justified escalation that could retain boot-time registry activity on the KVM guest."
+  },
+  "lanes": [
+    {
+      "lane": "etw-stackwalk",
+      "run_id": "global-timer-resolution-requests-etw-power-request-20260418a",
+      "status": "weak-signal",
+      "best_signal": "helper-query-only",
+      "details": {
+        "summary_exists": false,
+        "etl_exists": true,
+        "xml_exists": true,
+        "exact_value_hit_count": 2,
+        "key_path_hit_count": 0,
+        "regquery_hit_count": 50,
+        "stack_field_hit_count": 100
+      },
+      "interpretation": "The retained sample lines were only the helper-side reg.exe query for the target value. This lane produced real capture artifacts but did not prove target behavior."
+    },
+    {
+      "lane": "procmon-support",
+      "run_id": "global-timer-resolution-requests-procmon-power-request-20260418a",
+      "status": "environment-failure",
+      "best_signal": "saveas-timeout",
+      "details": {
+        "error_kind": "probe-stage-error",
+        "probe_stage": "exception",
+        "probe_stage_message": "Procmon SaveAs timed out after 120 second(s).",
+        "csv_exists": false,
+        "normalized_bundle_exists": false
+      },
+      "artifacts": [
+        "evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-procmon-power-request-20260418a-launcher-stage.json",
+        "evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-procmon-power-request-20260418a-probe-stage.json",
+        "evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-procmon-power-request-20260418a-summary.json",
+        "evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-procmon-power-request-20260418a.txt"
+      ],
+      "interpretation": "This lane did not produce value-level runtime evidence because export failed before a CSV could be materialized."
+    },
+    {
+      "lane": "wpr-boot-registry",
+      "run_id": "global-timer-resolution-requests-wpr-qga-20260418b",
+      "status": "supporting-signal",
+      "best_signal": "session-manager-kernel-subtree-activity",
+      "details": {
+        "status": "ok",
+        "reboot_observed": true,
+        "etl_exists": true,
+        "csv_exists": true,
+        "hit_line_count": 101,
+        "fragment_hit_counts": {
+          "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel": 0,
+          "GlobalTimerResolutionRequests": 0,
+          "Session Manager\\Kernel": 101
+        },
+        "normalized_bundle_exists": true,
+        "normalized_event_count": 0,
+        "normalizer_name": "GuestTracerptCsvRegistryNormalizer"
+      },
+      "artifacts": [
+        "evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-wpr-qga-20260418b-summary-arm.json",
+        "evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-wpr-qga-20260418b-summary.json",
+        "evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-wpr-qga-20260418b.hits.txt",
+        "evidence/files/vm-tooling-staging/global-timer-resolution-requests-runtime-sprint-20260418/global-timer-resolution-requests-wpr-qga-20260418b.normalized.json"
+      ],
+      "interpretation": "This clean rerun proves current-build boot activity on the Session Manager Kernel subtree, but it still does not retain an exact GlobalTimerResolutionRequests value read."
+    }
+  ],
+  "final_gap": "No retained exact runtime read or value-level normalized event for GlobalTimerResolutionRequests on the current guest.",
+  "why_not_shippable": [
+    "no exact runtime registry-read proof",
+    "no primary Microsoft documentation for the exact internal registry seed",
+    "no app mapping"
+  ],
+  "recommendation": "Keep the record research-only and blocked pending a narrower exact-read runtime lane."
+}

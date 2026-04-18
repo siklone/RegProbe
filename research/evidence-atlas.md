@@ -7,18 +7,18 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 
 | Field | Value |
 | --- | --- |
-| Total records | 312 |
-| Validated | 245 |
-| Deprecated | 54 |
+| Total records | 323 |
+| Validated | 255 |
+| Deprecated | 55 |
 | Review required | 0 |
-| Records with evidence | 312 |
+| Records with evidence | 323 |
 | Records without evidence | 0 |
 | Records missing validation proof | 0 |
 | Deprecated missing validation proof | 0 |
-| Class A | 248 |
-| Class B | 8 |
+| Class A | 249 |
+| Class B | 17 |
 | Class C | 2 |
-| Class E | 54 |
+| Class E | 55 |
 
 ## Category coverage
 
@@ -32,10 +32,10 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Notifications | 5 |
 | Performance | 3 |
 | Peripheral | 3 |
-| Power | 24 |
+| Power | 29 |
 | Privacy | 84 |
 | Security | 25 |
-| System | 79 |
+| System | 85 |
 | Visibility | 23 |
 
 ## Validated
@@ -2154,6 +2154,12 @@ Nohuto lineage references:
 | `value` | `0` | Show empty drives | Explorer keeps drives with no media visible. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart into This PC. | ms-settings-common-fileexplorer-hide-empty-drives, dump-25h2-explorer-advanced-hidedriveswithnomedia, procmon-hidedriveswithnomedia-runtime |
 | `value` | `1` | Hide empty drives | Explorer hides drives with no media present. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart into This PC. | ms-settings-common-fileexplorer-hide-empty-drives, dump-25h2-explorer-advanced-hidedriveswithnomedia, procmon-hidedriveswithnomedia-runtime |
 
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean user baseline | Current user profile on the Win25H2Clean validation VM before the reversible Procmon probe | explorer-hidedriveswithnomedia-flag: missing None - The validation proof notes that the baseline value was absent and was restored to the absent state after the runtime probe. |
+
 **Recommended profiles**
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
@@ -2508,6 +2514,12 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- |
 | `value` | `0` | Do not show drive letters first | Explorer does not enable the drive-letter-first presentation. Microsoft documents 0 as the disabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart. | ms-gppref-global-folder-options-vista-showdriveletter, dump-25h2-explorer-showdrivelettersfirst, procmon-showdrivelettersfirst-runtime |
 | `value` | `1` | Show drive letters first | Explorer enables the drive-letter-first presentation. Microsoft documents 1 as the enabled state, and the Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart. | ms-gppref-global-folder-options-vista-showdriveletter, dump-25h2-explorer-showdrivelettersfirst, procmon-showdrivelettersfirst-runtime |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean user baseline | Current user profile on the Win25H2Clean validation VM before the reversible Procmon probe | explorer-showdrivelettersfirst-flag: missing None - The validation proof notes that the baseline value was absent and was restored to the absent state after the runtime probe. |
 
 **Recommended profiles**
 
@@ -3225,6 +3237,12 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- |
 | `value` | `0` | Do not show recent items | Explorer does not show recently used files in Home. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 0 after restart. | ms-settings-common-fileexplorer-showrecentlyusedfiles, dump-25h2-explorer-showrecent, procmon-showrecent-runtime |
 | `value` | `1` | Show recent items | Explorer shows recently used files in Home. The Win25H2Clean Procmon capture shows Explorer.EXE querying Data: 1 after restart. | ms-settings-common-fileexplorer-showrecentlyusedfiles, dump-25h2-explorer-showrecent, procmon-showrecent-runtime |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean user baseline | Current user profile on the Win25H2Clean validation VM before the reversible Procmon probe | explorer-showrecent-flag: value 0 - The validation proof notes that the VM user baseline was 0 and was restored to 0 after the runtime probe. |
 
 **Recommended profiles**
 
@@ -8793,6 +8811,880 @@ Windows Internals references:
 
 ### Power
 
+### `power.control.class1-initial-unpark-count`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Power` |
+| Area | `Raw Power Manager Registry` |
+| Scope | `device` |
+| Source file | [research/records/power.control.class1-initial-unpark-count.json](records/power.control.class1-initial-unpark-count.json) |
+| V3.1 evidence root | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated candidate package for Class1InitialUnparkCount under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for Class1InitialUnparkCount. App surfacing remains a separate product decision from evidence classification.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs |
+| Notes | The current app uses a documented power plan core-parking surface instead of shipping the raw Class1InitialUnparkCount registry value as a standalone tweak. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `research-gated` |
+| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `class1initialunparkcount`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
+| Value name | `Class1InitialUnparkCount` |
+| Value type | `REG_DWORD` |
+| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `64` | Observed Win25H2Clean baseline | The current clean VM baseline exposes Class1InitialUnparkCount=64. | vm-power-control-phase0-20260329, repo-power-doc |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-ToolsHardened-20260330 research baseline | class1initialunparkcount: value 64 - Keep the currently observed baseline value (64) while this raw control stays in research packaging only. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:104](../Docs/power/power.md:104) shows `Class1InitialUnparkCount` with observed literal `64` in the repo power notes. |
+| Key found on page | `True` |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for Class1InitialUnparkCount. App surfacing is tracked separately from evidence classification. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | Class1InitialUnparkCount now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification. |
+
+---
+
+### `power.control.hiber-file-size-percent`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Power` |
+| Area | `Raw Power Manager Registry` |
+| Scope | `device` |
+| Source file | [research/records/power.control.hiber-file-size-percent.json](records/power.control.hiber-file-size-percent.json) |
+| V3.1 evidence root | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated decision-gated record for HiberFileSizePercent under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the residual string triage found an exact current-build ntoskrnl.exe hit, and the tools-hardened lightweight ETW follow-up surfaced exact runtime lines but not an exact runtime read. A later KVM local-KD follow-up then resolved the live hibernation symbol family, confirmed the current-build `Control\Power` registry path through `PopOpenHiberPersistedKey` and `PopQueryHiberPersistedRegValue`, and showed `PopHiberFileSizePercent = 0` on the running guest. Dedicated and recovery-backed KVM Procmon replays then captured real `Control\Power` activity through `powercfg.exe` and the `System` process, but still surfaced zero direct `HiberFileSizePercent` hits. A later host-driven KVM reboot observation closed the reboot gap by confirming a real boot-time advance while `HiberFileSizePercent` stayed `0` and `powercfg /a` stayed hibernation-unsupported before and after reboot. A QGA-launched WPR boot registry trace then produced an exact normalized `Registry / QueryValue / HiberFileSizePercent` event, closing the remaining runtime-read attribution gap while keeping the record research-only and non-actionable.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | The current app does not expose HiberFileSizePercent as a direct tweak or supported UI surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `research-gated` |
+| Gating reason | This record is cross-layer verified. A rebooted stepwise Procmon boot trace now preserves an exact HiberFileSizePercent runtime read, and app actionability stays separate from evidence class. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `hiberfilesizepercent`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
+| Value name | `HiberFileSizePercent` |
+| Value type | `REG_DWORD` |
+| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `0` | Observed Win25H2Clean baseline | The current clean VM baseline exposes HiberFileSizePercent=0. | vm-power-control-phase0-20260329, repo-power-doc |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-ToolsHardened-20260330 research baseline | hiberfilesizepercent: value 0 - Keep the currently observed baseline value (0) while this raw control stays in research packaging only. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for HiberFileSizePercent | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `static-power-control-residual-string-20260330` | `repo-doc` | `Current repo docs` | Residual value-exists string triage for HiberFileSizePercent | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) | `high` | path, value, version-scope |
+| `vm-power-control-hiber-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for HiberFileSizePercent | [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-164001/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json) and [research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md](notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-hiber-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD follow-up for HiberFileSizePercent | [evidence/files/vm/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a-summary.json) and [evidence/files/vm/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a.log) and [evidence/files/vm/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a-summary.json) and [evidence/files/vm/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a.log) and [evidence/files/vm/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a.log) and [research/notes/power-control-hiber-file-size-percent-kvm-local-kd-follow-up-20260406.md](notes/power-control-hiber-file-size-percent-kvm-local-kd-follow-up-20260406.md) | `medium` | path, value, behavior, version-scope |
+| `vm-power-control-hiber-kvm-procmon-runtime-20260407` | `vm-test` | `VM test / probe` | Linux KVM Procmon runtime replay for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c-summary.json) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c.txt) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-20260407c/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-procmon-runtime-20260407.md](notes/power-control-hiber-file-size-percent-kvm-procmon-runtime-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-hiber-kvm-procmon-recovery-20260407` | `vm-test` | `VM test / probe` | Linux KVM recovery-backed Procmon replay for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md](notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-hiber-kvm-reboot-observation-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md](notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
+| `vm-power-control-hiber-wpr-qga-runtime-read-20260412` | `etw-trace` | `unspecified` | QGA-launched WPR boot trace captures HiberFileSizePercent QueryValue | [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json) and [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json) and [research/notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md](notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md) | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:149](../Docs/power/power.md:149) shows `HiberFileSizePercent` with the note that the literal is set to 0 by default on LTSC IoT Enterprise 2024 when hibernation is unsupported by default. |
+| Key found on page | `True` |
+| Notes | The docs-first triage and the 96-key baseline existence batch agree on the current Win25H2Clean baseline value for HiberFileSizePercent. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | HiberFileSizePercent now has a real docs/static/runtime package on RegProbe-Baseline-ToolsHardened-20260330 plus a KVM local-KD follow-up that confirms the live current-build `Control\Power` path and a running `PopHiberFileSizePercent = 0` state. Repeated KVM Procmon replays also captured real adjacent `Control\Power` activity, and a host-driven KVM reboot observation proves that the value persists at `0` across a real guest reboot while hibernation remains unavailable. A QGA-launched WPR boot trace now adds the missing exact runtime read by normalizing a `Registry / QueryValue / HiberFileSizePercent` event. The record remains intentionally held because this is a raw power-manager value, not a mapped or supported end-user tweak surface. |
+
+Blocking issues:
+- hiber-file-size-percent-research-only-raw-power-manager-value
+
+---
+
+### `power.control.hibernate-enabled`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Power` |
+| Area | `Raw Power Manager Registry` |
+| Scope | `device` |
+| Source file | [research/records/power.control.hibernate-enabled.json](records/power.control.hibernate-enabled.json) |
+| V3.1 evidence root | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated candidate package for HibernateEnabled under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for HibernateEnabled. App surfacing remains a separate product decision from evidence classification.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/DisableHibernationTweak.cs |
+| Notes | The current app uses the documented powercfg hibernation command surface instead of shipping the raw HibernateEnabled registry value. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `research-gated` |
+| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `hibernateenabled`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
+| Value name | `HibernateEnabled` |
+| Value type | `REG_DWORD` |
+| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `0` | Observed Win25H2Clean baseline | The current clean VM baseline exposes HibernateEnabled=0. | vm-power-control-phase0-20260329, repo-power-doc |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-Clean-20260329 research baseline | hibernateenabled: value 0 - Keep the currently observed baseline value (0) while this raw control stays in research packaging only. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:154](../Docs/power/power.md:154) shows `HibernateEnabled` with observed literal `0` in the repo power notes. |
+| Key found on page | `True` |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for HibernateEnabled. App surfacing is tracked separately from evidence classification. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | HibernateEnabled now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification. |
+
+---
+
+### `power.control.hibernate-enabled-default`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Power` |
+| Area | `Raw Power Manager Registry` |
+| Scope | `device` |
+| Source file | [research/records/power.control.hibernate-enabled-default.json](records/power.control.hibernate-enabled-default.json) |
+| V3.1 evidence root | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated decision-gated record for HibernateEnabledDefault under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for HibernateEnabledDefault. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for HibernateEnabledDefault. Later ETW follow-ups confirmed that the virtualized guest still cannot exercise a real hibernation trigger, and a newer KVM reboot observation showed that HibernateEnabledDefault stays `1` across a real reboot while `powercfg /a` remains hibernation-unsupported before and after boot. The lane therefore remains decision-gated by an environment limitation rather than by path uncertainty.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | The current app does not expose HibernateEnabledDefault as a direct tweak or supported UI surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
+| Action state | `research-gated` |
+| Gating reason | Cross-layer evidence is strong, but the clean VMware baseline cannot exercise a real hibernation trigger (`vm_firmware_limitation`), so runtime promotion stays decision-gated. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `hibernateenableddefault`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
+| Value name | `HibernateEnabledDefault` |
+| Value type | `REG_DWORD` |
+| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `1` | Observed Win25H2Clean baseline | The current clean VM baseline exposes HibernateEnabledDefault=1. | vm-power-control-phase0-20260329, repo-power-doc |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-Clean-20260329 research baseline | hibernateenableddefault: value 1 - Keep the currently observed baseline value (1) while this raw control stays in research packaging only. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-trigger-etw-followup-20260329` | `etw-trace` | `unspecified` | Trigger-based ETW follow-up for HibernateEnabledDefault | [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log) and [research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-follow-up-20260329.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-trigger-etw-guestvar-20260329` | `etw-trace` | `unspecified` | Guest-return ETW trigger follow-up for docs-first power-control values | [evidence/files/vm/power-control-docs-first-trigger-etw-guestvar-20260329-233504/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-233504/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-guestvar-20260329-233504/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-guestvar-20260329-233504/results.json) and [research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-hibernate-default-kvm-reboot-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for HibernateEnabledDefault | [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-summary.json](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-summary.json) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-before.json](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-before.json) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-after.json](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-after.json) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-before.txt) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/hibernateenableddefault-reboot-kvm-20260407a-powercfg-a-after.txt) and [evidence/files/vm/hibernateenableddefault-reboot-kvm-20260407a/host-review.json](../evidence/files/vm-tooling-staging/hibernateenableddefault-reboot-kvm-20260407a/host-review.json) and [research/notes/power-control-hibernate-enabled-default-kvm-reboot-follow-up-20260407.md](notes/power-control-hibernate-enabled-default-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:154](../Docs/power/power.md:154) shows `HibernateEnabledDefault` with observed literal `1` in the repo power notes. |
+| Key found on page | `True` |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for HibernateEnabledDefault. App surfacing is tracked separately from evidence classification. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | HibernateEnabledDefault is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, the clean-baseline stepwise Procmon boot log package, a second guest-processed post-boot Procmon trigger batch, a guest-return ETW follow-up, and a host-driven KVM reboot observation. The ETW lane produced an exact line hit, and the KVM reboot lane showed that the value persists at `1` across a real reboot while hibernation remains unavailable. The record therefore stays decision-gated by an environment limitation rather than by a dead-flag conclusion. The 2026-04-12 decision review marks this as an intentional hold because the current virtualized baselines cannot exercise a real hibernation transition. |
+
+Blocking issues:
+- hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm
+
+---
+
+### `power.control.lid-reliability-state`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Power` |
+| Area | `Raw Power Manager Registry` |
+| Scope | `device` |
+| Source file | [research/records/power.control.lid-reliability-state.json](records/power.control.lid-reliability-state.json) |
+| V3.1 evidence root | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated candidate package for LidReliabilityState under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for LidReliabilityState. App surfacing remains a separate product decision from evidence classification.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | The current app does not expose LidReliabilityState as a direct tweak or supported UI surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `research-gated` |
+| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `lidreliabilitystate`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
+| Value name | `LidReliabilityState` |
+| Value type | `REG_DWORD` |
+| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `1` | Observed Win25H2Clean baseline | The current clean VM baseline exposes LidReliabilityState=1. | vm-power-control-phase0-20260329, repo-power-doc |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-Clean-20260329 research baseline | lidreliabilitystate: value 1 - Keep the currently observed baseline value (1) while this raw control stays in research packaging only. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:170](../Docs/power/power.md:170) shows `LidReliabilityState` with observed literal `1` in the repo power notes. |
+| Key found on page | `True` |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for LidReliabilityState. App surfacing is tracked separately from evidence classification. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification. |
+
+---
+
+### `power.control.mf-buffering-threshold`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Power` |
+| Area | `Raw Power Manager Registry` |
+| Scope | `device` |
+| Source file | [research/records/power.control.mf-buffering-threshold.json](records/power.control.mf-buffering-threshold.json) |
+| V3.1 evidence root | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated candidate package for MfBufferingThreshold under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for MfBufferingThreshold through the new disk I/O burst trigger. App surfacing remains a separate product decision from evidence classification.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | The current app does not expose MfBufferingThreshold as a direct tweak or supported UI surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `research-gated` |
+| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `mfbufferingthreshold`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
+| Value name | `MfBufferingThreshold` |
+| Value type | `REG_DWORD` |
+| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `0` | Observed Win25H2Clean baseline | The current clean VM baseline exposes MfBufferingThreshold=0. | vm-power-control-phase0-20260329, repo-power-doc |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-ToolsHardened-20260330 research baseline | mfbufferingthreshold: value 0 - Keep the currently observed baseline value (0) while this raw control stays in research packaging only. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-lightweight-runtime-remaining-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW I/O burst follow-up for remaining power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:173](../Docs/power/power.md:173) shows `MfBufferingThreshold` with observed literal `0` in the repo power notes. |
+| Key found on page | `True` |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for MfBufferingThreshold. App surfacing is tracked separately from evidence classification. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | MfBufferingThreshold now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW I/O burst follow-up. App mapping is tracked separately and does not block evidence classification. |
+
+---
+
+### `power.control.perf-calculate-actual-utilization`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class A` |
+| Category | `Power` |
+| Area | `Raw Power Manager Registry` |
+| Scope | `device` |
+| Source file | [research/records/power.control.perf-calculate-actual-utilization.json](records/power.control.perf-calculate-actual-utilization.json) |
+| V3.1 evidence root | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. App surfacing remains a separate product decision from evidence classification.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/SetCpuBoostPerfModeTweak.cs |
+| Notes | The current app uses the documented PERFBOOSTMODE command surface and does not ship PerfCalculateActualUtilization as a standalone raw registry value. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `research-gated` |
+| Gating reason | This record is cross-layer verified. App surfacing and one-click actionability are tracked separately. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `perfcalculateactualutilization`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
+| Value name | `PerfCalculateActualUtilization` |
+| Value type | `REG_DWORD` |
+| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `1` | Observed Win25H2Clean baseline | The current clean VM baseline exposes PerfCalculateActualUtilization=1. | vm-power-control-phase0-20260329, repo-power-doc |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-ToolsHardened-20260330 research baseline | perfcalculateactualutilization: value 1 - Keep the currently observed baseline value (1) while this raw control stays in research packaging only. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:181](../Docs/power/power.md:181) shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes. |
+| Key found on page | `True` |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification. |
+
+---
+
+### `power.control.timer-rebase-threshold-on-drips-exit`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Power` |
+| Area | `Raw Power Manager Registry` |
+| Scope | `device` |
+| Source file | [research/records/power.control.timer-rebase-threshold-on-drips-exit.json](records/power.control.timer-rebase-threshold-on-drips-exit.json) |
+| V3.1 evidence root | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated decision-gated record for TimerRebaseThresholdOnDripsExit under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 first checked modern standby capability before attempting any DRIPS-exit trigger. That capability gate showed the older VMware baseline does not expose S0 Low Power Idle / Modern Standby. A newer KVM reboot observation then confirmed that TimerRebaseThresholdOnDripsExit stays `60` across a real reboot while `powercfg /a` still reports S0 Low Power Idle unavailable before and after boot. The record therefore remains decision-gated by a virtualized-baseline standby limitation rather than by a dead-flag conclusion.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | The current app does not expose TimerRebaseThresholdOnDripsExit as a direct tweak or supported UI surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
+| Action state | `research-gated` |
+| Gating reason | Cross-layer evidence is strong, but the clean VMware baseline exposes only Standby (S1) and cannot exercise a real DRIPS / Modern Standby exit trigger (`vm_standby_limitation`), so runtime promotion stays decision-gated. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `timerrebasethresholdondripsexit`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
+| Value name | `TimerRebaseThresholdOnDripsExit` |
+| Value type | `REG_DWORD` |
+| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `60` | Observed Win25H2Clean baseline | The current clean VM baseline exposes TimerRebaseThresholdOnDripsExit=60. | vm-power-control-phase0-20260329, repo-power-doc |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-ToolsHardened-20260330 research baseline | timerrebasethresholdondripsexit: value 60 - Keep the currently observed baseline value (60) while this raw control stays in research packaging only. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/files/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
+| `vm-power-control-drips-capability-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight DRIPS capability gate for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
+| `vm-power-control-drips-kvm-reboot-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json) and [research/notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md](notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:206](../Docs/power/power.md:206) shows `TimerRebaseThresholdOnDripsExit` with observed literal `60` in the repo power notes. |
+| Key found on page | `True` |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for TimerRebaseThresholdOnDripsExit. App surfacing is tracked separately from evidence classification. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | TimerRebaseThresholdOnDripsExit is backed by phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, a tools-hardened DRIPS capability gate on RegProbe-Baseline-ToolsHardened-20260330, and a host-driven KVM reboot observation. The KVM lane showed that the value persists at `60` across a real reboot while S0 Low Power Idle stays unavailable. The record remains decision-gated because the current virtualized baselines still do not support a real Modern Standby / DRIPS exit trigger. The 2026-04-12 decision review marks this as an intentional hold until a Modern Standby / DRIPS-capable validation environment exists. |
+
+Blocking issues:
+- timer-rebase-threshold-drips-trigger-not-available-on-current-vm
+
+---
+
 ### `power.disable-cpu-idle-states`
 
 | Field | Value |
@@ -8804,7 +9696,7 @@ Windows Internals references:
 | Scope | `device` |
 | Source file | [research/records/power.disable-cpu-idle-states.json](records/power.disable-cpu-idle-states.json) |
 | V3.1 evidence root | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -8830,7 +9722,7 @@ Current writes
 | --- | --- |
 | Label | `Class A` |
 | Title | Cross-Layer Verified |
-| Action state | `research-gated` |
+| Action state | `actionable` |
 | Gating reason | This record is cross-layer verified. The project treats strong proof for undocumented raw registry surfaces as Class A even when app actionability stays separate. |
 
 **Sources**
@@ -8887,7 +9779,7 @@ Windows Internals references:
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
 | `windows-default` | Windows default | ['General users', 'Battery-sensitive laptops', 'Systems using standard Windows processor power management'] | ['None until a supported Microsoft mapping is confirmed'] | `False` |
-| `current-app-profile` | Current app profile | ['Latency experiments', 'Advanced VM-only power research'] | ['Battery-sensitive systems', 'General users'] | `False` |
+| `current-app-profile` | Current app profile | ['Latency experiments', 'Advanced VM-only power research'] | ['Battery-sensitive systems', 'General users'] | `True` |
 
 **Evidence**
 
@@ -8905,6 +9797,7 @@ Windows Internals references:
 | `vm-vmware-tooling-minimal-diagnostic-20260328` | `vm-test` | `VM test / probe` | Win25H2Clean minimal VMware guest tooling smoke | [evidence/files/vm/vm-tooling-minimal-diagnostic-20260328-200634/summary.json](../evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/summary.json) and [evidence/files/vm/vm-tooling-minimal-diagnostic-20260328-200634/environment.json](../evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/environment.json) and [evidence/files/vm/vm-tooling-minimal-diagnostic-20260328-200634/script-result.json](../evidence/files/vm-tooling-staging/vm-tooling-minimal-diagnostic-20260328-200634/script-result.json) and [research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md](notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md) | `high` | version-scope, open-question |
 | `vm-cpu-idle-minimal-regwrite-20260328` | `vm-test` | `VM test / probe` | Win25H2Clean minimal direct registry write diagnostic for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/summary.json) and [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json) and [research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md](notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md) | `high` | path, value, rollback, open-question |
 | `vm-cpu-idle-stepwise-orchestration-20260329` | `vm-test` | `VM test / probe` | Win25H2Clean excluded-baseline stepwise CPU idle orchestration package | [evidence/files/vm/cpu-idle-runtime-20260329-015521/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260329-015521/summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/session.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/session.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-a-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-a-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-b-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-b-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c1-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c1-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c2-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c2-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c3-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c3-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c4-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c4-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-d-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-d-summary.json) and [research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md](notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md) | `high` | path, value, rollback, version-scope, open-question |
+| `analysis-power-disable-cpu-idle-states-decision-gate-review-20260412` | `analysis-output` | `unspecified` | Decision gate review promotes the advanced CPU idle-state app profile | [research/notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md](notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md) | `medium` | risk, rollback, version-scope, ui-mapping |
 
 **Validation proof**
 
@@ -8919,12 +9812,12 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead, but the remaining layers now converge strongly enough for this project: follow-up minimal VMware smoke and direct registry-write diagnostics proved that generic guest execution, host copy-back, and the raw bundle writes themselves were healthy under C:/RegProbe-Diag, and the final excluded-baseline stepwise runtime package on RegProbe-Baseline-20260328 completed baseline apply, rebooted post-boot read, WPR start, WPR stop, ETL existence, host copy-back, restore, and post-restore verification. The remaining issue is not runtime or reversibility. Within RegProbe, undocumented raw control surfaces can still reach Class A when cross-layer evidence is strong enough. |
+| Why | The repo power notes and the Win25H2Clean probe line up on the same raw bundle and show both the current observed baseline and the app profile. The current-build Ghidra follow-up still did not surface a direct ntoskrnl lead, but the remaining layers now converge strongly enough for this project: follow-up minimal VMware smoke and direct registry-write diagnostics proved that generic guest execution, host copy-back, and the raw bundle writes themselves were healthy under C:/RegProbe-Diag, and the final excluded-baseline stepwise runtime package on RegProbe-Baseline-20260328 completed baseline apply, rebooted post-boot read, WPR start, WPR stop, ETL existence, host copy-back, restore, and post-restore verification. The remaining issue is not runtime or reversibility. Within RegProbe, undocumented raw control surfaces can still reach Class A when cross-layer evidence is strong enough. This makes the existing app profile apply-allowed as an advanced-only surface, not recommended for general users or battery-sensitive systems. |
 
 ---
 
@@ -8943,7 +9836,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Disables the local Fast Startup setting by writing HiberbootEnabled under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power. This is the documented local on/off surface for Fast Startup. A separate policy value, HKLM\Software\Policies\Microsoft\Windows\System\HiberbootEnabled, only forces Fast Startup on and does not provide a symmetric disable path. The app previously wrote HKLM\SYSTEM\CurrentControlSet\Control\Power\HiberbootEnabled, which is not the authoritative local Fast Startup toggle; both app surfaces now align to the Session Manager path.
+**Summary:** Disables the local Fast Startup setting by writing HiberbootEnabled under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power. This is the documented local on/off surface for Fast Startup. A separate policy value, HKLM\Software\Policies\Microsoft\Windows\System\HiberbootEnabled, only forces Fast Startup on and does not provide a symmetric disable path. The app previously wrote HKLM\SYSTEM\CurrentControlSet\Control\Power\HiberbootEnabled, which is not the authoritative local Fast Startup toggle; both app surfaces now align to the Session Manager path. A later source-enrichment follow-up on the public System Informer `phnt` headers then added a lightweight current-build corroboration layer by surfacing `SystemHiberbootState` with an explicit `effective HiberbootEnabled state` comment in `ntpoapi.h`.
 
 **Current implementation**
 
@@ -9035,6 +9928,7 @@ Windows Internals references:
 | `nohuto-fast-startup-asset` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto power asset for HiberbootEnabled research | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootPolicy.c) and [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PopReadHiberbootGroupPolicy.c) | `medium` | path, value, app-mismatch |
 | `live-registry-divergence` | `registry-observation` | `VM registry observation` | Live build observation of diverging HiberbootEnabled values | Local observation - 2026-03-13, Windows 11 Pro 10.0.26200.8037 | `medium` | path, app-mismatch |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs and engine/Tweaks/Power/PowerSettingsTweaks.cs | `high` | path, value, ui-mapping |
+| `source-enrichment-hiberboot-header-20260412` | `analysis-output` | `unspecified` | System Informer source-enrichment follow-up for HiberbootEnabled | [registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json](../registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json) and [research/notes/source-enrichment-systeminformer-follow-up-20260412.md](notes/source-enrichment-systeminformer-follow-up-20260412.md) | `medium` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -10154,7 +11048,7 @@ Windows Internals references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits plus current-build Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, and a new tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed. The pair remains Class B because the current VMware baseline is S1-only and still does not provide a reliable decisive runtime path for the exact watchdog values.
+**Summary:** Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits, earlier Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, a tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed, and an explicit incident review that classifies those S1 losses as validation-environment limitations rather than safety proof. Later Linux KVM local-KD follow-ups first resolved the live watchdog globals plus the derived directed-power timeout globals, then disassembled the current-build watchdog selection path, and later identified the generic current-build power-manager registry helper family (`PopOpenPowerKey`, `PopReadRegKeyValue`) while remapping the older fallback xref offsets away from the watchdog lane and into unrelated PnP initialization code. A reusable Linux KVM Procmon power-burst replay still exported a real 260953-row CSV but returned zero hits for the watchdog pair and adjacent Session Manager\Power fragments. The pair remains Class B because the research package is now strong on path, state, current-build code flow, helper surfaces, incident accounting, and repeated KVM runtime replay, but still lacks a decisive exact live registry-read lane for the watchdog values themselves.
 
 **Current implementation**
 
@@ -10231,6 +11125,11 @@ Windows Internals references:
 | `vm-watchdog-s1-procmon-follow-up-20260328` | `vm-observation` | `unspecified` | S1-specific Procmon follow-up for the watchdog lane | [evidence/files/vm/watchdog-s1-procmon-20260328-144402/summary.json](../evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/summary.json) and [evidence/files/vm/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-lastwake-postcheck.txt](../evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-lastwake-postcheck.txt) and [evidence/files/vm/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-kernelpower-postcheck.txt](../evidence/files/vm-tooling-staging/watchdog-s1-procmon-20260328-144402/watchdog-s1-procmon-kernelpower-postcheck.txt) and [research/notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md](notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md) | `medium` | risk, version-scope |
 | `vm-watchdog-s1-scheduled-procmon-follow-up-20260328` | `vm-observation` | `unspecified` | S1 scheduled-task Procmon follow-up for the watchdog lane | [evidence/files/vm/watchdog-s1-scheduled-procmon-20260328-150559/summary.json](../evidence/files/vm-tooling-staging/watchdog-s1-scheduled-procmon-20260328-150559/summary.json) and [evidence/files/vm/watchdog-s1-scheduled-procmon-20260328-150559/watchdog-s1-scheduled-procmon-live-postmortem.txt](../evidence/files/vm-tooling-staging/watchdog-s1-scheduled-procmon-20260328-150559/watchdog-s1-scheduled-procmon-live-postmortem.txt) and [research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md](notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md) | `medium` | risk, version-scope |
 | `vm-watchdog-lightweight-runtime-20260330` | `vm-observation` | `unspecified` | Tools-hardened lightweight ETW S1 follow-up for the watchdog lane | [evidence/files/vm/watchdog-lightweight-runtime-20260330-131636/summary.json](../evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/summary.json) and [evidence/files/vm/watchdog-lightweight-runtime-20260330-131636/results.json](../evidence/files/vm-tooling-staging/watchdog-lightweight-runtime-20260330-131636/results.json) and [research/notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md](notes/power-session-watchdog-timeouts-lightweight-runtime-20260330.md) | `high` | risk, version-scope |
+| `vm-watchdog-kvm-local-kd-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD value follow-up for the watchdog timeout pair | [evidence/files/vm/local-kd-watchdog-values-20260407a/local-kd-watchdog-values-20260407a-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-values-20260407a/local-kd-watchdog-values-20260407a-summary.json) and [evidence/files/vm/local-kd-watchdog-values-20260407a/local-kd-watchdog-values-20260407a.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-values-20260407a/local-kd-watchdog-values-20260407a.log) and [evidence/files/vm/local-kd-watchdog-sleep-20260407a/local-kd-watchdog-sleep-20260407a-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-sleep-20260407a/local-kd-watchdog-sleep-20260407a-summary.json) and [evidence/files/vm/local-kd-watchdog-sleep-20260407a/local-kd-watchdog-sleep-20260407a.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-sleep-20260407a/local-kd-watchdog-sleep-20260407a.log) and [research/notes/power-session-watchdog-timeouts-kvm-local-kd-follow-up-20260407.md](notes/power-session-watchdog-timeouts-kvm-local-kd-follow-up-20260407.md) | `medium` | value, behavior, version-scope |
+| `vm-watchdog-kvm-local-kd-disasm-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD disassembly for the watchdog timeout path | [evidence/files/vm/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a-summary.json) and [evidence/files/vm/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a.log) and [research/notes/power-session-watchdog-timeouts-kvm-local-kd-disasm-follow-up-20260407.md](notes/power-session-watchdog-timeouts-kvm-local-kd-disasm-follow-up-20260407.md) | `medium` | behavior, version-scope |
+| `vm-watchdog-kvm-procmon-power-burst-20260407` | `procmon` | `unspecified` | Linux KVM Procmon power-burst replay for the watchdog timeout pair | [evidence/files/vm/watchdog-procmon-kvm-power-burst-20260407a/watchdog-procmon-kvm-power-burst-20260407a-summary.json](../evidence/files/vm-tooling-staging/watchdog-procmon-kvm-power-burst-20260407a/watchdog-procmon-kvm-power-burst-20260407a-summary.json) and [evidence/files/vm/watchdog-procmon-kvm-power-burst-20260407a/watchdog-procmon-kvm-power-burst-20260407a.txt](../evidence/files/vm-tooling-staging/watchdog-procmon-kvm-power-burst-20260407a/watchdog-procmon-kvm-power-burst-20260407a.txt) and [evidence/files/vm/watchdog-procmon-kvm-power-burst-20260407a/host-review.json](../evidence/files/vm-tooling-staging/watchdog-procmon-kvm-power-burst-20260407a/host-review.json) and [research/notes/power-session-watchdog-timeouts-kvm-procmon-power-burst-20260407.md](notes/power-session-watchdog-timeouts-kvm-procmon-power-burst-20260407.md) | `medium` | path, behavior, risk, version-scope |
+| `vm-watchdog-kvm-local-kd-reg-helper-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD registry-helper follow-up for the watchdog timeout pair | [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b.log) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c.log) and [research/notes/power-session-watchdog-timeouts-kvm-local-kd-reg-helper-follow-up-20260407.md](notes/power-session-watchdog-timeouts-kvm-local-kd-reg-helper-follow-up-20260407.md) | `medium` | path, behavior, risk, version-scope |
+| `vm-watchdog-session-timeouts-incident-review-20260412` | `vm-incident` | `unspecified` | Incident review for S1 watchdog timeout runtime attempts | [research/notes/power-session-watchdog-timeouts-incident-review-20260412.md](notes/power-session-watchdog-timeouts-incident-review-20260412.md) and [evidence/files/vm/watchdog-session-timeouts-incident-review-20260412/host-review.json](../evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json) | `medium` | risk, version-scope, research-gap |
 | `kernel-power-existing-next-gate-20260328` | `inference` | `unspecified` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) | `medium` | version-scope, risk |
 
 **Validation proof**
@@ -10251,11 +11150,12 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and Ghidra fallback artifacts, repo-side PoFx pseudocode, a successful reboot-verified boot trace, a host-side ETL registry review, and multiple runtime attempts across Procmon and lightweight ETW. The current blocker is no longer lack of research depth. It is that the current S1-only VMware environment still does not provide a reliable decisive exact-value runtime path for the watchdog pair. |
+| Why | The watchdog timeout pair now has cross-layer evidence: a clean baseline export, exact current-build ntoskrnl string and earlier Ghidra fallback artifacts, repo-side PoFx pseudocode, a successful reboot-verified boot trace, a host-side ETL registry review, multiple runtime attempts across Procmon and lightweight ETW, an explicit incident review for the failed S1 lanes, KVM local-KD follow-ups that confirm both the live watchdog and directed-power globals, the current-build watchdog selection code path through `PopComputeWatchdogTimeout`, and the generic current-build power-manager registry helper surface, plus a reusable Linux KVM Procmon power-burst replay that still exported a large zero-hit CSV. The 2026-04-14 decision moves this to an intentional hold because the retained runtime failures now classify as validation-environment limitation rather than missing setup: the S1-only VMware suspend/resume lanes repeatedly failed before preserving decisive artifacts, the KVM power-burst replay still produced zero exact hits, and the remaining proof now depends on either a more reliable suspend/resume environment or a stronger current-build caller pivot into `PopReadRegKeyValue` / `PopOpenPowerKey`. Further chase should wait for one of those pivots instead of consuming more bounded retries in the same environment. |
 
 Blocking issues:
-- The ETL review, the Procmon boot-log review, the targeted post-boot DcomLaunch/Power trigger, and the newer tools-hardened lightweight ETW S1 follow-up still stop short of a decisive exact live read of WatchdogResumeTimeout and WatchdogSleepTimeout.
-- The current Win25H2Clean VMware baseline only exposes Standby (S1), and repeated S1-specific follow-ups still fail by dropping guest ops or guest shell state before the decisive runtime bundle can complete.
+- power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation
+- power-session-watchdog-timeouts-no-current-build-exact-registry-read
+- power-session-watchdog-timeouts-no-current-build-registry-seeding-caller
 
 ---
 
@@ -18595,6 +19495,122 @@ Current writes
 
 ### Security
 
+### `policy.system.enable-virtualization`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `Security` |
+| Area | `Policy System Registry` |
+| Scope | `device` |
+| Source file | [research/records/policy.system.enable-virtualization.json](records/policy.system.enable-virtualization.json) |
+| V3.1 evidence root | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated decision-gated record for EnableVirtualization under HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but stayed a clean no-hit. The same path-aware runtime lane on the secondary profile reproduced the no-hit result, and a Linux KVM Procmon replay with a dedicated UAC/policy burst also produced a real CSV with zero matching lines. A KVM local-KD disassembly and string-dump follow-up on the running guest then showed the same current-build `PsBootPhaseComplete` cluster opening `\Registry\Machine\Software\Microsoft\Windows\CurrentVersion\Policies\System` and staging `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection` directly. A later recovery-backed KVM Procmon replay reopened the elevated guest shell automatically and still returned zero intended-path or family hits. A follow-up KVM Procmon bootlog probe then completed a real reboot cycle, but Procmon returned exit code 1 for both `/EnableBootLogging` variants, left Procmon state unchanged, and skipped bootlog conversion with no PML or CSV. A later QGA-launched WPR boot registry trace then retained five exact quoted `EnableVirtualization` QueryValue hit lines and normalized them against the intended `Policies\System` target path, closing the runtime-read gap while keeping the record research-only and non-actionable.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | The current app does not expose EnableVirtualization as a direct tweak or UI surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
+| Action state | `research-gated` |
+| Gating reason | Static routing is promising, but the path-aware ETW lane stayed no-hit and the family still carries a nearby VBS collision in winload.exe. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `enable-virtualization`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System` |
+| Value name | `EnableVirtualization` |
+| Value type | `REG_DWORD` |
+| Notes | This candidate is tracked as a research-only raw policy-system value, not as a shipped end-user surface. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `0` | Virtualization off | Disables legacy file and registry virtualization. | repo-security-doc |
+| `value` | `1` | Observed baseline | Enables legacy file and registry virtualization for qualifying legacy apps. | repo-security-doc, vm-policy-system-phase0-20260329 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-ToolsHardened-20260330 research baseline | enable-virtualization: value 1 - Keep the observed baseline while this policy-system value remains in research packaging only. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Policy-system documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-security-doc` | `repo-doc` | `Current repo docs` | Repo security notes for EnableVirtualization | [Docs/security/security.md](../Docs/security/security.md) | `high` | path, value, allowed-values, behavior |
+| `vm-policy-system-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `nohuto-uac-bootphase` | `decompilation` | `Our Ghidra decompilation` | Boot-phase UAC policy cluster lead | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
+| `static-policy-system-enable-virtualization-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for EnableVirtualization | [evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json) and [evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md](../evidence/files/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
+| `vm-policy-system-enable-virtualization-runtime-20260330` | `etw-trace` | `unspecified` | Path-aware lightweight ETW follow-up for EnableVirtualization | [evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
+| `vm-policy-system-enable-virtualization-runtime-secondary-20260331` | `etw-trace` | `unspecified` | Secondary-profile path-aware ETW replay for EnableVirtualization | [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json) and [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
+| `vm-policy-system-enable-virtualization-kvm-procmon-20260406` | `procmon-trace` | `VM Procmon trace` | Linux KVM Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/host-review.json) | `medium` | behavior, risk, version-scope |
+| `vm-policy-system-enable-virtualization-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD disassembly for EnableVirtualization | [evidence/files/vm/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a-summary.json) and [evidence/files/vm/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a.log) and [evidence/files/vm/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a.log) and [research/notes/policy-system-enable-virtualization-kvm-local-kd-disasm-follow-up-20260406.md](notes/policy-system-enable-virtualization-kvm-local-kd-disasm-follow-up-20260406.md) | `medium` | path, value, behavior, version-scope |
+| `vm-policy-system-enable-virtualization-kvm-procmon-recovery-20260407` | `procmon-trace` | `VM Procmon trace` | Linux KVM recovery-backed Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-policy-system-enable-virtualization-kvm-procmon-bootlog-20260407` | `vm-test` | `VM test / probe` | Linux KVM Procmon bootlog probe for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-policy-system-enable-virtualization-wpr-qga-runtime-read-20260413` | `etw-trace` | `unspecified` | QGA-launched WPR boot trace captures exact EnableVirtualization QueryValue hits | [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json) and [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json) and [research/notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md](notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md) | `high` | path, value, behavior, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/security/security.md](../Docs/security/security.md) |
+| Exact quote / path | [Docs/security/security.md:105-110](../Docs/security/security.md:105-110) documents `EnableVirtualization` with 0 = disables data redirection and 1 = enables legacy file and registry virtualization. |
+| Key found on page | `True` |
+| Notes | Phase-0 existence and repo security documentation agree on the current baseline value for EnableVirtualization. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, shell-safe runtime follow-ups across multiple transports, a KVM bootlog probe that completed a real reboot but showed `/EnableBootLogging` is not accepted on the current guest, a KVM local-KD disassembly that confirms the live current-build `Policies\System` path plus the adjacent `EnableLUA` / `EnableVirtualization` / `EnableInstallerDetection` family on the running guest, and a QGA-launched WPR boot trace that retained five exact quoted `EnableVirtualization` `QueryValue` lines during boot. The WPR normalizer binds those retained exact-value hits to the intended `Policies\System` target path supplied to the run, and that path was already independently corroborated by the earlier static and local-KD work. The record therefore no longer lacks runtime attribution. It remains intentionally held because this is a research-only legacy UAC virtualization control that is not mapped to a supported app surface. |
+
+Blocking issues:
+- enable-virtualization-research-only-raw-policy-system-value
+
+---
+
 ### `security.disable-defender-sample-submission`
 
 | Field | Value |
@@ -24507,7 +25523,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated cross-layer record. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\Executive, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, a supporting ReactOS semantic hypothesis, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent I/O and process-burst trigger. That is enough for Class A within this project even though the lane remains research-only and non-actionable in the app.
+**Summary:** Validated cross-layer record. The Session Manager Executive worker-thread pair now has a clean baseline export on Win25H2Clean, a bounded boot-time ETL extract that proves runtime access to Session Manager\Executive, exact current-build ntoskrnl string hits, preserved Ghidra fallback artifacts, a supporting ReactOS semantic hypothesis, a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent I/O and process-burst trigger, a later host-driven KVM Procmon replay that stayed a clean no-hit on the working guest, a later hardened-runner KVM Procmon replay that again stayed a clean no-hit under the same Executive burst, a KVM local-KD wildcard that resolved the live `ExpAdditionalCriticalWorkerThreads` / `ExpAdditionalDelayedWorkerThreads` data symbols, and a KVM local-KD value dump that showed the same live pair still at `0 / 0`. That is enough for Class A within this project even though the lane remains research-only and non-actionable in the app.
 
 **Current implementation**
 
@@ -24581,6 +25597,10 @@ Windows Internals references:
 | `vm-executive-etw-keyword-review-20260328` | `etw-trace` | `unspecified` | ETW-specific keyword review for the Executive worker-thread pair | [evidence/files/vm/executive-etw-keyword-review-20260328-180226/summary.json](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json) and [evidence/files/vm/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt](../evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt) and [research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md](notes/system-executive-additional-worker-threads-follow-up-package-20260328.md) | `medium` | path, behavior, version-scope |
 | `vm-executive-procmon-bootlog-20260328` | `procmon-trace` | `VM Procmon trace` | Procmon boot-log review for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json) and [evidence/files/vm/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json) and [research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md](notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md) | `medium` | behavior, version-scope |
 | `vm-executive-stress-trigger-20260328` | `procmon-trace` | `VM Procmon trace` | Shell-safe post-boot stress trigger for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-stress-20260328-184856/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json) and [evidence/files/vm/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt](../evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt) and [research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md](notes/system-executive-additional-worker-threads-stress-trigger-20260328.md) | `medium` | behavior, version-scope |
+| `vm-executive-kvm-procmon-runtime-20260406` | `procmon-trace` | `VM Procmon trace` | Host-driven KVM Procmon replay for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-procmon-kvm-20260406e/executive-worker-threads-procmon-kvm-20260406e-summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-20260406e/executive-worker-threads-procmon-kvm-20260406e-summary.json) and [evidence/files/vm/executive-worker-threads-procmon-kvm-20260406e/host-review.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-20260406e/host-review.json) and [research/notes/system-executive-additional-worker-threads-kvm-procmon-runtime-20260406.md](notes/system-executive-additional-worker-threads-kvm-procmon-runtime-20260406.md) | `medium` | behavior, version-scope |
+| `vm-executive-kvm-procmon-hardened-20260407` | `procmon-trace` | `VM Procmon trace` | Hardened-runner KVM Procmon replay for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-procmon-kvm-hardened-20260407a/executive-worker-threads-procmon-kvm-hardened-20260407a-summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-hardened-20260407a/executive-worker-threads-procmon-kvm-hardened-20260407a-summary.json) and [evidence/files/vm/executive-worker-threads-procmon-kvm-hardened-20260407a/executive-worker-threads-procmon-kvm-hardened-20260407a.txt](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-hardened-20260407a/executive-worker-threads-procmon-kvm-hardened-20260407a.txt) and [evidence/files/vm/executive-worker-threads-procmon-kvm-hardened-20260407a/host-review.json](../evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-hardened-20260407a/host-review.json) and [research/notes/system-executive-additional-worker-threads-kvm-procmon-hardened-20260407.md](notes/system-executive-additional-worker-threads-kvm-procmon-hardened-20260407.md) | `medium` | behavior, version-scope |
+| `vm-executive-worker-threads-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD wildcard for the Executive worker-thread pair | [evidence/files/vm/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a-summary.json) and [evidence/files/vm/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a.log) and [research/notes/system-executive-additional-worker-threads-kvm-local-kd-symbol-follow-up-20260406.md](notes/system-executive-additional-worker-threads-kvm-local-kd-symbol-follow-up-20260406.md) | `medium` | behavior, version-scope |
+| `vm-executive-worker-threads-kvm-local-kd-values-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD live value dump for the Executive worker-thread pair | [evidence/files/vm/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a-summary.json) and [evidence/files/vm/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a.log) and [research/notes/system-executive-additional-worker-threads-kvm-local-kd-value-follow-up-20260406.md](notes/system-executive-additional-worker-threads-kvm-local-kd-value-follow-up-20260406.md) | `medium` | value, version-scope |
 | `reactos-executive-worker-threads-hypothesis-20260328` | `open-source-reference` | `unspecified` | ReactOS semantic hypothesis for the Executive worker-thread pair | [evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md](../evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md) and [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) | `medium` | behavior, version-scope |
 
 **Validation proof**
@@ -24601,7 +25621,131 @@ Windows Internals references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project even though the lane remains research-only and not app-actionable. |
+| Why | The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, a supporting live KVM local-KD symbol query for the exact `ExpAdditional*` data names, a matching live KVM value dump that still shows the pair at `0 / 0`, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project even though the lane remains research-only and not app-actionable. |
+
+---
+
+### `system.executive-uuid-sequence-number`
+
+| Field | Value |
+| --- | --- |
+| Status | `validated` |
+| Evidence class | `Class B` |
+| Category | `System` |
+| Area | `Session Manager Executive Registry` |
+| Scope | `device` |
+| Source file | [research/records/system.executive-uuid-sequence-number.json](records/system.executive-uuid-sequence-number.json) |
+| V3.1 evidence root | [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number) |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Validated cross-layer record for UuidSequenceNumber under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive. The clean Win25H2Clean baseline confirmed the live value, the residual static triage found an exact current-build ntoskrnl.exe Unicode hit, later KVM full-analysis replays confirmed that the string still exists but did not recover a direct or bounded indirect ntoskrnl code reference, the bounded Executive ETL review proved adjacent query and set activity for the same value during early boot, and later KVM local-KD follow-ups resolved both the live UUID symbol family and the current-build load/save path that opens a Session Manager Executive persisted-state location and queries or sets the `UuidSequenceNumber` value name. A deeper KVM local-KD value dump also showed live current-build in-memory UUID state on the working guest, and a later trigger-state follow-up wrapped the existing UUID / RPC / COM burst between two local-KD snapshots but still observed no delta: `ExpUuidSequenceNumber = 0x002caf1b`, `ExpUuidSequenceNumberValid = 1`, and `ExpUuidSequenceNumberNotSaved = 0` before and after the trigger. A subsequent API-level local-KD disassembly then showed that `ExUuidCreate` funnels into `ExpUuidGetValues`, `NtAllocateUuids` funnels into `ExpAllocateUuids`, and `ExpAllocateUuids` can update `ExpUuidSequenceNumber` and set `ExpUuidSequenceNumberNotSaved = 1` before `ExpUuidSaveSequenceNumberIf` runs. A direct user-mode API trigger built around repeated `UuidCreateSequential` plus `NtAllocateUuids` calls then also completed cleanly and still produced no state delta in the same local-KD snapshot lane. A follow-up seed and Config Manager disassembly then showed `NtSetUuidSeed` as a privileged seed-write path with `SeAccessCheck` and cache updates, while `CmpUuidCreate` turned out to be only a retry wrapper around `ExUuidCreate`. A later forced-invalid local-KD follow-up then cleared `ExpUuidSequenceNumberValid` to `0`, reran the same direct API burst, and observed `ExpUuidSequenceNumber` advance from `0x002caf1b` to `0x002caf1c` while `ExpUuidSequenceNumberValid` returned to `1` and `ExpUuidSequenceNumberNotSaved` stayed `0`. A later same-run forced-invalid follow-up then observed both the live kernel state and the stored `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\UuidSequenceNumber` value advance from `0x002caf1d` to `0x002caf1e` in the same trigger window. A later hardened-runner KVM Procmon replay then ensured an elevated guest shell, exported `240500` rows under the alternate Executive burst, and still returned zero `Session Manager\Executive` or `UuidSequenceNumber` hits. A later bounded exact-read Procmon diagnostic then showed that both a minimal custom control replay and the stronger direct UUID API replay fail at `Procmon SaveAs` on the working KVM guest. Runtime ETW and KVM Procmon lanes therefore stayed clean no-hits even after the same-run kernel-plus-registry state-transition proof under local-KD. A later QGA-launched WPR boot-registry rerun then completed a real reboot cycle, retained exact quoted `UuidSequenceNumber` `QueryValue` and `SetValue` lines, and closed the remaining direct runtime-read gap. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | The current app does not expose UuidSequenceNumber as a direct tweak or UI surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class B` |
+| Title | Strong but Decision-Gated |
+| Action state | `research-gated` |
+| Gating reason | Baseline existence, exact ntoskrnl string evidence, and adjacent early-boot ETL activity exist, but the dedicated runtime lane still stayed no-hit and the exact trigger context remains unclear. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `uuid-sequence-number`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive` |
+| Value name | `UuidSequenceNumber` |
+| Value type | `REG_DWORD` |
+| Notes | Track this as a separate research lane from the Executive worker-thread pair. Adjacent runtime activity exists, but direct current-build runtime proof is still missing. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `25272111` | Observed Win25H2Clean baseline | The current clean research baseline exposes a live UuidSequenceNumber DWORD under Session Manager Executive. | vm-session-manager-executive-phase0-20260329, vm-session-manager-executive-baseline-20260328 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-ToolsHardened-20260330 research baseline | uuid-sequence-number: value 25272111 - Keep the observed baseline value while this lane remains research-only and runtime-gated. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Session Manager Executive documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `vm-session-manager-executive-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) | `high` | path, value, default, version-scope |
+| `vm-session-manager-executive-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `static-executive-uuid-sequence-number-20260330` | `decompilation` | `Our Ghidra decompilation` | Residual static triage for UuidSequenceNumber | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) | `high` | path, value, version-scope |
+| `kvm-static-executive-uuid-string-20260406` | `decompilation` | `Our Ghidra decompilation` | KVM PDB-backed string replay for UuidSequenceNumber | [evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json](../evidence/files/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json) and [evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json](../evidence/files/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json) and [research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md) | `medium` | path, value, version-scope |
+| `vm-session-manager-executive-etl-adjacent-20260328` | `etw-trace` | `unspecified` | Bounded Executive ETL review with adjacent UuidSequenceNumber activity | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, runtime-proof, version-scope |
+| `vm-executive-uuid-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for UuidSequenceNumber | [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json) and [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json) and [research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md](notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md) | `medium` | behavior, risk, version-scope |
+| `vm-executive-uuid-kvm-procmon-runtime-20260406` | `procmon-trace` | `VM Procmon trace` | KVM Procmon UUID / RPC / COM replay for UuidSequenceNumber | [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt) and [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json) and [research/notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md](notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md) | `medium` | behavior, risk, version-scope |
+| `vm-executive-uuid-thread-burst-20260330` | `inference` | `unspecified` | Alternate thread-burst follow-up for UuidSequenceNumber | [research/notes/system-executive-uuid-sequence-number-thread-burst-20260330.md](notes/system-executive-uuid-sequence-number-thread-burst-20260330.md) and [registry-research-framework/audit/system-executive-uuid-sequence-number-thread-burst-20260330.json](../registry-research-framework/audit/system-executive-uuid-sequence-number-thread-burst-20260330.json) | `medium` | risk, version-scope |
+| `vm-executive-uuid-kvm-executive-burst-20260406` | `procmon-trace` | `VM Procmon trace` | KVM Executive-burst Procmon replay for UuidSequenceNumber | [evidence/files/vm/uuidsequence-procmon-kvm-executive-burst-20260406b/uuidsequence-procmon-kvm-executive-burst-20260406b-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-executive-burst-20260406b/uuidsequence-procmon-kvm-executive-burst-20260406b-summary.json) and [evidence/files/vm/uuidsequence-procmon-kvm-executive-burst-20260406b/host-review.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-executive-burst-20260406b/host-review.json) and [research/notes/system-executive-uuid-sequence-number-kvm-executive-burst-20260406.md](notes/system-executive-uuid-sequence-number-kvm-executive-burst-20260406.md) | `medium` | behavior, risk, version-scope |
+| `vm-executive-uuid-kvm-hardened-procmon-20260407` | `procmon-trace` | `VM Procmon trace` | KVM hardened-runner Procmon replay for UuidSequenceNumber | [evidence/files/vm/uuidsequence-procmon-kvm-hardened-20260407a/uuidsequence-procmon-kvm-hardened-20260407a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-hardened-20260407a/uuidsequence-procmon-kvm-hardened-20260407a-summary.json) and [evidence/files/vm/uuidsequence-procmon-kvm-hardened-20260407a/uuidsequence-procmon-kvm-hardened-20260407a.txt](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-hardened-20260407a/uuidsequence-procmon-kvm-hardened-20260407a.txt) and [evidence/files/vm/uuidsequence-procmon-kvm-hardened-20260407a/host-review.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-hardened-20260407a/host-review.json) and [research/notes/system-executive-uuid-sequence-number-kvm-procmon-hardened-20260407.md](notes/system-executive-uuid-sequence-number-kvm-procmon-hardened-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-executive-uuid-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD wildcard for the UuidSequenceNumber symbol family | [evidence/files/vm/local-kd-uuid-wildcard-20260406a/local-kd-uuid-wildcard-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-wildcard-20260406a/local-kd-uuid-wildcard-20260406a-summary.json) and [evidence/files/vm/local-kd-uuid-wildcard-20260406a/local-kd-uuid-wildcard-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-uuid-wildcard-20260406a/local-kd-uuid-wildcard-20260406a.log) and [research/notes/system-executive-uuid-sequence-number-kvm-local-kd-symbol-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-local-kd-symbol-follow-up-20260406.md) | `medium` | behavior, version-scope |
+| `vm-executive-uuid-kvm-local-kd-disasm-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD disassembly for the UuidSequenceNumber path | [evidence/files/vm/local-kd-uuid-disasm-20260406a/local-kd-uuid-disasm-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-disasm-20260406a/local-kd-uuid-disasm-20260406a-summary.json) and [evidence/files/vm/local-kd-uuid-disasm-20260406a/local-kd-uuid-disasm-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-uuid-disasm-20260406a/local-kd-uuid-disasm-20260406a.log) and [evidence/files/vm/local-kd-uuid-strings-20260406a/local-kd-uuid-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-strings-20260406a/local-kd-uuid-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-uuid-strings-20260406a/local-kd-uuid-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-uuid-strings-20260406a/local-kd-uuid-strings-20260406a.log) and [research/notes/system-executive-uuid-sequence-number-kvm-local-kd-disasm-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-local-kd-disasm-follow-up-20260406.md) | `medium` | path, behavior, version-scope |
+| `vm-executive-uuid-kvm-local-kd-values-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD value dump for UuidSequenceNumber state | [evidence/files/vm/local-kd-uuid-values-20260406b/local-kd-uuid-values-20260406b-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-values-20260406b/local-kd-uuid-values-20260406b-summary.json) and [evidence/files/vm/local-kd-uuid-values-20260406b/local-kd-uuid-values-20260406b.log](../evidence/files/vm-tooling-staging/local-kd-uuid-values-20260406b/local-kd-uuid-values-20260406b.log) and [research/notes/system-executive-uuid-sequence-number-kvm-local-kd-value-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-local-kd-value-follow-up-20260406.md) | `medium` | value, behavior, version-scope |
+| `vm-executive-uuid-kvm-local-kd-trigger-state-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD trigger-state follow-up for UuidSequenceNumber | [evidence/files/vm/local-kd-uuid-trigger-state-20260407a/local-kd-uuid-trigger-state-20260407a-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-trigger-state-20260407a/local-kd-uuid-trigger-state-20260407a-summary.json) and [evidence/files/vm/local-kd-uuid-trigger-state-20260407a/local-kd-uuid-trigger-state-20260407a.log](../evidence/files/vm-tooling-staging/local-kd-uuid-trigger-state-20260407a/local-kd-uuid-trigger-state-20260407a.log) and [research/notes/system-executive-uuid-sequence-number-kvm-local-kd-trigger-state-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-local-kd-trigger-state-follow-up-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-executive-uuid-kvm-local-kd-api-disasm-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD API disassembly for UuidSequenceNumber allocation paths | [evidence/files/vm/local-kd-uuid-api-disasm-20260407c/local-kd-uuid-api-disasm-20260407c-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-api-disasm-20260407c/local-kd-uuid-api-disasm-20260407c-summary.json) and [evidence/files/vm/local-kd-uuid-api-disasm-20260407c/local-kd-uuid-api-disasm-20260407c.log](../evidence/files/vm-tooling-staging/local-kd-uuid-api-disasm-20260407c/local-kd-uuid-api-disasm-20260407c.log) and [research/notes/system-executive-uuid-sequence-number-kvm-local-kd-api-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-local-kd-api-follow-up-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-executive-uuid-kvm-local-kd-api-trigger-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD direct API trigger follow-up for UuidSequenceNumber | [evidence/files/vm/local-kd-uuid-api-trigger-state-20260407d/local-kd-uuid-api-trigger-state-20260407d-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-api-trigger-state-20260407d/local-kd-uuid-api-trigger-state-20260407d-summary.json) and [evidence/files/vm/local-kd-uuid-api-trigger-state-20260407d/local-kd-uuid-api-trigger-state-20260407d.log](../evidence/files/vm-tooling-staging/local-kd-uuid-api-trigger-state-20260407d/local-kd-uuid-api-trigger-state-20260407d.log) and [research/notes/system-executive-uuid-sequence-number-kvm-local-kd-api-trigger-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-local-kd-api-trigger-follow-up-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-executive-uuid-kvm-local-kd-seed-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD seed and Config Manager follow-up for UuidSequenceNumber | [evidence/files/vm/local-kd-uuid-seed-disasm-20260407e/local-kd-uuid-seed-disasm-20260407e-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-seed-disasm-20260407e/local-kd-uuid-seed-disasm-20260407e-summary.json) and [evidence/files/vm/local-kd-uuid-seed-disasm-20260407e/local-kd-uuid-seed-disasm-20260407e.log](../evidence/files/vm-tooling-staging/local-kd-uuid-seed-disasm-20260407e/local-kd-uuid-seed-disasm-20260407e.log) and [research/notes/system-executive-uuid-sequence-number-kvm-local-kd-seed-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-local-kd-seed-follow-up-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-executive-uuid-kvm-local-kd-force-invalid-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD forced-invalid trigger follow-up for UuidSequenceNumber | [evidence/files/vm/local-kd-uuid-force-invalid-trigger-20260407f/local-kd-uuid-force-invalid-trigger-20260407f-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-force-invalid-trigger-20260407f/local-kd-uuid-force-invalid-trigger-20260407f-summary.json) and [evidence/files/vm/local-kd-uuid-force-invalid-trigger-20260407f/local-kd-uuid-force-invalid-trigger-20260407f.log](../evidence/files/vm-tooling-staging/local-kd-uuid-force-invalid-trigger-20260407f/local-kd-uuid-force-invalid-trigger-20260407f.log) and [research/notes/system-executive-uuid-sequence-number-kvm-local-kd-force-invalid-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-local-kd-force-invalid-follow-up-20260407.md) | `medium` | behavior, runtime-proof, version-scope |
+| `vm-executive-uuid-kvm-regstate-force-invalid-20260407` | `vm-test` | `VM test / probe` | Linux KVM guest-side regstate follow-up for the forced-invalid UUID trigger | [evidence/files/vm/uuidsequence-regstate-kvm-force-invalid-20260407h/uuidsequence-regstate-kvm-force-invalid-20260407h-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-regstate-kvm-force-invalid-20260407h/uuidsequence-regstate-kvm-force-invalid-20260407h-summary.json) and [evidence/files/vm/local-kd-uuid-force-invalid-regstate-20260407h/local-kd-uuid-force-invalid-regstate-20260407h-summary.json](../evidence/files/vm-tooling-staging/local-kd-uuid-force-invalid-regstate-20260407h/local-kd-uuid-force-invalid-regstate-20260407h-summary.json) and [evidence/files/vm/local-kd-uuid-force-invalid-regstate-20260407h/local-kd-uuid-force-invalid-regstate-20260407h.log](../evidence/files/vm-tooling-staging/local-kd-uuid-force-invalid-regstate-20260407h/local-kd-uuid-force-invalid-regstate-20260407h.log) and [research/notes/system-executive-uuid-sequence-number-kvm-regstate-force-invalid-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-regstate-force-invalid-follow-up-20260407.md) | `medium` | behavior, runtime-proof, risk, version-scope |
+| `vm-executive-uuid-kvm-procmon-saveas-timeout-20260407` | `procmon-trace` | `VM Procmon trace` | Linux KVM bounded Procmon SaveAs timeout follow-up for UuidSequenceNumber | [evidence/files/vm/procmon-saveas-timeout-kvm-20260407u6/u6-summary.json](../evidence/files/vm-tooling-staging/procmon-saveas-timeout-kvm-20260407u6/u6-summary.json) and [evidence/files/vm/procmon-saveas-timeout-kvm-20260407u6/u6-probe-stage.json](../evidence/files/vm-tooling-staging/procmon-saveas-timeout-kvm-20260407u6/u6-probe-stage.json) and [evidence/files/vm/procmon-saveas-timeout-kvm-20260407u6/u6.txt](../evidence/files/vm-tooling-staging/procmon-saveas-timeout-kvm-20260407u6/u6.txt) and [evidence/files/vm/procmon-saveas-timeout-kvm-20260407u6/host-review.json](../evidence/files/vm-tooling-staging/procmon-saveas-timeout-kvm-20260407u6/host-review.json) and [evidence/files/vm/uuidsequence-procmon-saveas-timeout-kvm-20260407u7/u7-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-saveas-timeout-kvm-20260407u7/u7-summary.json) and [evidence/files/vm/uuidsequence-procmon-saveas-timeout-kvm-20260407u7/u7-probe-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-saveas-timeout-kvm-20260407u7/u7-probe-stage.json) and [evidence/files/vm/uuidsequence-procmon-saveas-timeout-kvm-20260407u7/u7.txt](../evidence/files/vm-tooling-staging/uuidsequence-procmon-saveas-timeout-kvm-20260407u7/u7.txt) and [evidence/files/vm/uuidsequence-procmon-saveas-timeout-kvm-20260407u7/host-review.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-saveas-timeout-kvm-20260407u7/host-review.json) and [research/notes/system-executive-uuid-sequence-number-kvm-procmon-saveas-timeout-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-procmon-saveas-timeout-follow-up-20260407.md) | `medium` | behavior, risk, version-scope |
+| `reactos-executive-uuid-adjacent-20260328` | `open-source-reference` | `unspecified` | ReactOS adjacent context for UuidSequenceNumber | [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) | `medium` | behavior, dependency, version-scope |
+| `vm-executive-uuid-kvm-wpr-addboot-20260407` | `wpr` | `unspecified` | Linux KVM boot-registry WPR addboot follow-up for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json) and [research/notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md) | `medium` | behavior, risk, version-scope |
+| `vm-executive-uuid-kvm-wpr-qga-runtime-read-20260413` | `wpr` | `unspecified` | Linux KVM QGA-launched WPR boot-registry runtime read for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json) and [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json) and [research/notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md](notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md) | `high` | path, value, behavior, runtime-proof, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) |
+| Exact quote / path | session-manager-executive-baseline.txt:5 shows `UuidSequenceNumber    REG_DWORD    0x1819f30` under HKLM/SYSTEM/CurrentControlSet/Control/Session Manager/Executive. |
+| Key found on page | `True` |
+| Notes | The Session Manager Executive baseline export and the 96-key phase-0 existence batch agree that UuidSequenceNumber exists on the clean Win25H2Clean baseline. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | UuidSequenceNumber now has converged project evidence: clean baseline existence, an exact current-build ntoskrnl string hit, bounded early-boot ETL evidence in the same Session Manager Executive path, a live KVM local-KD wildcard plus disassembly that resolve the current-build UUID load/save/state family and tie it to the exact `UuidSequenceNumber` value name, a same-run forced-invalid follow-up that shows both the live kernel state and stored registry value advance together by `+1`, and now a QGA-launched WPR boot-registry trace that retains exact quoted `QueryValue` plus `SetValue` lines for `UuidSequenceNumber` during boot. The WPR normalizer binds those retained exact-value hits to the intended Session Manager Executive target path supplied to the run, and that path was already independently corroborated by the earlier bounded ETL review and local-KD disassembly. That is enough for Class A in this project even though the value remains research-only and not app-mapped. |
 
 ---
 
@@ -25367,7 +26511,7 @@ Windows Internals references:
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated cross-layer record for DisableExceptionChainValidation under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
+**Summary:** Validated cross-layer record for DisableExceptionChainValidation under HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel. The broad 96-key phase-0 batch confirmed the baseline path and value absence, repo system notes already tracked the value by name, broad current-build static triage found an exact ntoskrnl.exe hit, and the tools-hardened Session Manager Kernel lightweight ETW batch wrote the candidate, rebooted once, and captured exact RegQueryValue hits for DisableExceptionChainValidation while the other 20 sibling kernel candidates stayed no-hit. A later source-enrichment follow-up on public `systeminformer/phnt` headers then added a small but useful corroboration by surfacing the `DisableExceptionChainValidation` execution-option bit in `ntpsapi.h`. That is enough for Class A in this project even though the value remains research-only and not app-mapped.
 
 **Current implementation**
 
@@ -25435,6 +26579,7 @@ Windows Internals references:
 | `vm-session-manager-kernel-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, default, version-scope |
 | `static-session-manager-kernel-targeted-string-20260331` | `decompilation` | `Our Ghidra decompilation` | Broad targeted static triage for Session Manager Kernel candidates | [evidence/files/vm/targeted-string-batch-primary-20260331-135356/results.json](../evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json) and [research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md](notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md) | `high` | path, value, version-scope |
 | `vm-session-manager-kernel-lightweight-runtime-20260331` | `etw-trace` | `unspecified` | Tools-hardened single-reboot ETW batch for Session Manager Kernel | [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json) and [evidence/files/vm/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json](../evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json) and [research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md](notes/session-manager-kernel-batch-lightweight-runtime-20260331.md) | `high` | path, value, behavior, runtime-proof, version-scope |
+| `source-enrichment-disable-exception-chain-validation-20260412` | `analysis-output` | `unspecified` | System Informer source-enrichment follow-up for DisableExceptionChainValidation | [registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json](../registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json) and [research/notes/source-enrichment-systeminformer-follow-up-20260412.md](notes/source-enrichment-systeminformer-follow-up-20260412.md) | `medium` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -30916,7 +32061,7 @@ Nohuto lineage references:
 | Confidence | `medium` |
 | Needs VM validation | `False` |
 
-**Summary:** The current app uses the known Windows 11 classic-context-menu CLSID workaround by creating HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 with an empty default value. A current Microsoft Q&A article shows the same command and revert path, but also notes that the workaround may be deprecated on newer 24H2-era builds, so this record treats it as a workaround rather than a stable Microsoft policy surface.
+**Summary:** The current app still matches the original Microsoft Q&A HKCU workaround for the Windows 11 classic context menu by creating HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32 with an empty default value. That same Q&A thread is now internally contradictory on newer builds: some later replies say the workaround is deprecated in 24H2, while other later replies still report success when the command is run elevated and Explorer is restarted. Comment-level HKLM ownership/edit advice also appears in the thread, but this review keeps RegProbe on the lower-risk HKCU workaround and does not adopt the HKLM ownership path as canonical research.
 
 **Current implementation**
 
@@ -31005,7 +32150,7 @@ Nohuto lineage references:
 | Source | [https://learn.microsoft.com/en-us/answers/questions/2287432/(article](https://learn.microsoft.com/en-us/answers/questions/2287432/(article))-restore-old-right-click-context-menu-in?forum=windows-all&referrer=answers |
 | Exact quote / path | reg.exe add "HKCU/Software/Classes/CLSID/{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}/InprocServer32" /f /ve ; reg.exe delete "HKCU/Software/Classes/CLSID/{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f |
 | Key found on page | `True` |
-| Notes | The current Microsoft Q&A article shows the same add and delete commands used by the workaround. The same page also notes that this method has been reported as deprecated in 24H2, so the record treats it as workaround evidence rather than a guaranteed modern-build contract. |
+| Notes | The current Microsoft Q&A article still shows the original HKCU add and delete commands. Later comments on the same official thread are contradictory: some report the workaround is deprecated in 24H2, others still report success when run elevated and Explorer is restarted, and some suggest an HKLM ownership/edit path. RegProbe keeps the lower-risk HKCU workaround and does not adopt the HKLM ownership variant. |
 
 **Decision**
 
@@ -31016,7 +32161,7 @@ Nohuto lineage references:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The app matches the same CLSID workaround command and delete path shown in the current Microsoft Q&A article, and the repo documents the restore story. This remains workaround evidence rather than a stable Microsoft policy contract because newer builds may no longer honor it consistently. |
+| Why | The app still matches the HKCU add/delete workaround shown in the current Microsoft Q&A article body, and the repo documents the restore story. The same official thread is now internally contradictory on newer 24H2-era behavior, and comment-level HKLM ownership/edit advice conflicts with the app's current low-risk HKCU mapping. This therefore remains workaround evidence rather than a stable Microsoft policy contract. |
 
 ---
 
@@ -35843,6 +36988,116 @@ Blocking issues:
 
 ---
 
+### `system.io-allow-remote-dasd`
+
+| Field | Value |
+| --- | --- |
+| Status | `deprecated` |
+| Evidence class | `Class E` |
+| Category | `System` |
+| Area | `Session Manager I/O Registry` |
+| Scope | `device` |
+| Source file | [research/records/system.io-allow-remote-dasd.json](records/system.io-allow-remote-dasd.json) |
+| V3.1 evidence root | [evidence/records/system.io-allow-remote-dasd](../evidence/records/system.io-allow-remote-dasd) |
+| Apply allowed | `False` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
+
+**Summary:** Deprecated audit trail for the legacy Session Manager I/O `AllowRemoteDASD` candidate. The clean Win25H2Clean baseline confirmed that a same-named value exists under `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System`, but the strongest current-build evidence no longer points there. The path-aware static pass, live KVM local-KD disassembly of `nt!IopAllowRemoteDASD`, and current Microsoft Learn policy mapping all resolve `AllowRemoteDASD` to `Software\Policies\Microsoft\Windows\RemovableStorageDevices` instead. Repeated ETW and KVM Procmon runtime lanes also stayed clean no-hits for the intended Session Manager I/O path. The repo now keeps this record as a historical collision trail rather than a live tweak candidate.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `not-mapped` |
+| Provider source | not currently shipped in the app |
+| Notes | The current app does not expose AllowRemoteDASD as a direct tweak or UI surface. |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class E` |
+| Title | Archived / Audit Trail |
+| Action state | `archived` |
+| Gating reason | The strongest current-build code route points to the removable-storage policy path, while the intended Session Manager I/O runtime ETW lane stayed no-hit. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
+
+**Targets**
+
+#### `allow-remote-dasd`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `registry` |
+| Path | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System` |
+| Value name | `AllowRemoteDASD` |
+| Value type | `REG_DWORD` |
+| Notes | The intended Session Manager I/O value exists as a historical baseline artifact, but the strongest current-build static, live-kernel, and first-party policy evidence point at the removable-storage policy path instead. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `0` | Observed baseline | The clean Win25H2Clean baseline exposes AllowRemoteDASD=0 at the intended Session Manager I/O path. | vm-session-manager-io-phase0-20260329 |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Observed Win25H2Clean baseline | Current RegProbe-Baseline-ToolsHardened-20260330 research baseline | allow-remote-dasd: value 0 - Keep the observed baseline only as a historical artifact; it is not treated as the current-build active control surface. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Session Manager I/O documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `vm-session-manager-io-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
+| `ms-removable-storage-allow-remote-dasd-20260407` | `official-doc` | `Microsoft official doc` | Microsoft Learn ADMX_RemovableStorage mapping for AllowRemoteDASD | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage) and [research/notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md](notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md) | `high` | path, value, behavior, version-scope |
+| `static-session-manager-io-allow-remote-dasd-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for AllowRemoteDASD | [evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json) and [evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md](../evidence/files/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
+| `vm-session-manager-io-allow-remote-dasd-runtime-20260330` | `etw-trace` | `unspecified` | Path-aware lightweight ETW follow-up for AllowRemoteDASD | [evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json) | `medium` | behavior, risk, version-scope |
+| `historical-collision-note-20260328` | `repo-doc` | `Current repo docs` | Historical collision review for AllowRemoteDASD | [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) | `medium` | behavior, risk |
+| `vm-session-manager-io-allow-remote-dasd-kvm-procmon-20260406` | `procmon-trace` | `VM Procmon trace` | Linux KVM Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/host-review.json) | `medium` | behavior, risk, version-scope |
+| `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD live symbol query for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log) | `medium` | behavior, version-scope |
+| `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-disasm-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD disassembly for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log) and [research/notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md](notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md) | `medium` | path, behavior, version-scope |
+| `vm-session-manager-io-allow-remote-dasd-kvm-procmon-recovery-20260407` | `procmon-trace` | `VM Procmon trace` | Linux KVM recovery-backed Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md](notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage) |
+| Exact quote / path | The Microsoft Learn `ADMX_RemovableStorage Policy CSP` page maps `All Removable Storage: Allow direct access in remote sessions` to `Software/Policies/Microsoft/Windows/RemovableStorageDevices` with registry value name `AllowRemoteDASD`. |
+| Key found on page | `True` |
+| Notes | The old Session Manager I/O baseline observation is still real, but the first-party policy doc now matches the current-build Ghidra and KVM local-KD route to the removable-storage policy family instead of the intended Session Manager I/O path. |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `True` |
+| Restore previous supported | `True` |
+| Needs VM validation | `False` |
+| Why | The old Session Manager I/O value is still worth preserving as a baseline observation, but the strongest current-build evidence no longer supports it as the active control surface. The current-build Ghidra route, the live KVM local-KD disassembly of `IopAllowRemoteDASD`, and the Microsoft Learn ADMX_RemovableStorage mapping all converge on `Software\Policies\Microsoft\Windows\RemovableStorageDevices\AllowRemoteDASD`. Repeated ETW and KVM Procmon lanes also stayed no-hit for the intended Session Manager I/O path. That is enough to retire this Session Manager candidate as a historical collision trail instead of keeping it in the live draft set. |
+
+---
+
 ### `system.kernel-adjust-dpc-threshold`
 
 | Field | Value |
@@ -36519,7 +37774,7 @@ Blocking issues:
 | Confidence | `low` |
 | Needs VM validation | `False` |
 
-**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, and the decompiled watchdog query path now shows the raw period value being consumed, but this research pass did not capture a primary Microsoft source for the exact registry key and value semantics.
+**Summary:** Deprecated audit trail for DpcWatchdogPeriod. The current app writes HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\DpcWatchdogPeriod = 120000, but later KVM current-build evidence tightened the picture sharply: the running kernel currently holds `KeDpcWatchdogPeriodMs = 0`, `KeQueryDpcWatchdogConfiguration` only emits the field when it is non-zero, `KeUpdateDpcWatchdogConfiguration` is the explicit writer that updates the global from caller-supplied validated input, a class-focused live KD pass now ties that writer to an admin-gated `NtSetSystemInformation` arm inferred as numeric `0xE4`, a later query-side KD pass confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm unresolved, Microsoft still documents `KeQueryDpcWatchdogInformation` plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a later Ghidra init-semantics pass shows that zero-valued watchdog globals can survive current-build initialization. This still does not capture a primary Microsoft source for the exact registry value semantics, so the record remains deprecated.
 
 **Current implementation**
 
@@ -36587,6 +37842,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- |
 | `unknown` | - | Primary Microsoft registry mapping not captured | This research pass did not capture a primary Microsoft source for the exact DpcWatchdogPeriod registry semantics. | ms-dpc-watchdog-information, ms-avoid-dpc-watchdog-timeouts, repo-system-doc-kernel |
 | `value` | `120000` | Observed app profile | The current app treats 120000 as the watchdog-period baseline, based on repo research rather than a captured primary Microsoft registry source. | repo-system-doc-kernel, app-system-registry-provider |
+| `live-current-build-global` | `0` | Live current-build kernel state | Dedicated KVM local-KD read `KeDpcWatchdogPeriodMs = 0` on the running current build. | vm-dpc-watchdog-period-current-build-kd-20260407 |
 
 **Windows defaults**
 
@@ -36607,10 +37863,15 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-dpc-watchdog-information` | `official-doc` | `Microsoft official doc` | Microsoft Learn: KeQueryDpcWatchdogInformation function | [https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kequerydpcwatchdoginformation](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kequerydpcwatchdoginformation) | `high` | behavior, side-effects, version-scope |
 | `ms-avoid-dpc-watchdog-timeouts` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Avoiding DPC Watchdog timeout problems in StorPort Miniports | [https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems](https://learn.microsoft.com/en-us/troubleshoot/windows-hardware/drivers/avoid-dpc-watchdog-timeout-problems) | `high` | behavior, side-effects, risk |
+| `ms-kdpc-watchdog-information-struct` | `official-doc` | `Microsoft official doc` | Microsoft Learn: KDPC_WATCHDOG_INFORMATION structure | [https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_kdpc_watchdog_information](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_kdpc_watchdog_information) | `high` | behavior, default, version-scope |
 | `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled DPC watchdog configuration reader | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c) | `high` | path, value, behavior, runtime-gate |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `ghidra-dpc-watchdog-period-reader` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled DPC watchdog configuration reader | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c) | `high` | path, value, behavior, runtime-gate |
+| `vm-dpc-watchdog-period-current-build-kd-20260407` | `vm-test` | `VM test / probe` | Current-build KVM local-KD shows live DpcWatchdogPeriod state plus reader/writer path | [evidence/files/vm/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-thresholds-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-config-readers-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-config-readers-kd-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-update-config-kd-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-update-config-kd-20260407a/summary.json) | `high` | behavior, value, runtime-gate, version-scope |
+| `vm-dpc-watchdog-period-ntsetsysinfo-kd-20260408` | `vm-test` | `VM test / probe` | Current-build KVM local-KD ties DPC watchdog writer to a privileged NtSetSystemInformation arm | [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log) | `high` | behavior, runtime-gate, version-scope |
+| `vm-dpc-watchdog-period-init-ghidra-20260408` | `vm-test` | `VM test / probe` | PDB-backed KVM Ghidra shows current-build init semantics preserve zero watchdog globals | [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md) | `high` | behavior, default, version-scope |
+| `vm-dpc-watchdog-period-query-lineage-kd-20260408` | `vm-test` | `VM test / probe` | Current-build KVM local-KD confirms outer DPC watchdog query wrapper | [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log) | `high` | behavior, runtime-gate, version-scope |
 
 **Validation proof**
 
@@ -36619,7 +37880,7 @@ Windows Internals references:
 | Source | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeQueryDpcWatchdogConfiguration.c) |
 | Exact quote / path | if ( KeDpcWatchdogPeriodMs ) { ... LODWORD(Src) = Src \| 0x200; DWORD2(Src) = KeDpcWatchdogPeriodMs; } |
 | Key found on page | `True` |
-| Notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block. |
+| Notes | Kernel DPC watchdog audit trail. The decompiled routine shows the raw watchdog period value being queried and copied into the configuration block; later KVM local-KD evidence showed the live current-build state is `0` and that `KeUpdateDpcWatchdogConfiguration` is the explicit writer path. |
 
 **Decision**
 
@@ -36630,11 +37891,14 @@ Windows Internals references:
 | Restore default supported | `False` |
 | Restore previous supported | `False` |
 | Needs VM validation | `False` |
-| Why | Microsoft clearly documents the DPC watchdog feature, but this research pass did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself. |
+| Why | Microsoft clearly documents the DPC watchdog feature, but this research pass still did not capture a primary Microsoft source for the DpcWatchdogPeriod registry value itself and the later current-build KD/Ghidra work now shows that the app baseline conflicts with both live kernel state and the current-build init/runtime writer story. |
 
 Blocking issues:
 - No primary Microsoft source for the DpcWatchdogPeriod registry value was captured in this research pass.
 - The current app mapping relies on repo provenance instead of a directly captured Microsoft source for the registry key.
+- The current app baseline 120000 conflicts with observed current-build `KeDpcWatchdogPeriodMs = 0`.
+- The current-build runtime writer is now tied to a privileged `NtSetSystemInformation` arm while no persisted registry seeding caller has been shown.
+- The exact inner `ExpQuerySystemInformation` arm for the watchdog query path is still unresolved.
 
 ---
 
