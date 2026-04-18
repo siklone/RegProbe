@@ -402,12 +402,19 @@ def main() -> int:
     if not wait_for_file(summary_arm_path, args.prepare_timeout_seconds):
         print(
             json.dumps(
-                {
-                    "summary_arm_path": str(summary_arm_path),
-                    "output_name": args.output_name,
-                    "arm_launch_transport": arm_launch_transport,
-                    "status": "prepare-timeout",
-                },
+                apply_summary_contract(
+                    {
+                        "summary_arm_path": str(summary_arm_path),
+                        "output_name": args.output_name,
+                        "arm_launch_transport": arm_launch_transport,
+                        "status": "prepare-timeout",
+                        "summary_source": "wpr-prepare-timeout",
+                        "error_kind": "runner-timeout",
+                        "recovery_action": "rerun-wpr-boot-registry",
+                        "transport_blocker": "timeout",
+                        "guest_health": "unknown",
+                    }
+                ),
                 indent=2,
             )
         )
