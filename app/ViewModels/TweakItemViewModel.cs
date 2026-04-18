@@ -797,34 +797,16 @@ public sealed class TweakItemViewModel : ViewModelBase
         }
     }
 
-    public bool HasProvenance =>
-        HasNohutoEvidence ||
-        HasWindowsInternalsContext ||
-        NeedsSourceReview ||
-        !string.IsNullOrWhiteSpace(ProvenanceSummary);
+    public bool HasProvenance => TweakProvenancePresentation.HasProvenance(
+        HasNohutoEvidence,
+        HasWindowsInternalsContext,
+        NeedsSourceReview,
+        ProvenanceSummary);
 
-    public string ProvenanceStatusText
-    {
-        get
-        {
-            if (HasNohutoEvidence && HasWindowsInternalsContext)
-            {
-                return "Dump source + Internals";
-            }
-
-            if (HasNohutoEvidence)
-            {
-                return "Dump source";
-            }
-
-            if (HasWindowsInternalsContext)
-            {
-                return "Internals";
-            }
-
-            return NeedsSourceReview ? "Needs review" : "No source links";
-        }
-    }
+    public string ProvenanceStatusText => TweakProvenancePresentation.BuildStatusText(
+        HasNohutoEvidence,
+        HasWindowsInternalsContext,
+        NeedsSourceReview);
 
     public void ApplyEvidenceClassification(TweakEvidenceClassEntry? entry)
     {
