@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-18T16:05:57.813901Z`
+Generated: `2026-04-18T16:26:03.751220Z`
 
 Blocked candidates: `18`
 
@@ -210,7 +210,7 @@ Blocked candidates: `18`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `TimerCheckFlags`
 - Blockers: `timer-check-flags-intentional-hold-no-current-build-pivot`, `timer-check-flags-modern-bit-semantics-unproven`, `timer-check-flags-no-primary-current-build-doc`, `timer-check-flags-wpr-boot-no-hit-current-build`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 

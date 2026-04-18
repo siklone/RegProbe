@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-18T15:40:34.072243Z",
+  "generated_utc": "2026-04-18T16:25:19.512181Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -27,7 +27,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-18T15:40:33.165189Z",
+      "generated_utc": "2026-04-18T16:25:18.697165Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -19076,6 +19076,7 @@
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
+        "timer-check-flags-etw-stackwalk-helper-only-no-target-read",
         "timer-check-flags-intentional-hold-no-current-build-pivot",
         "timer-check-flags-modern-bit-semantics-unproven",
         "timer-check-flags-no-primary-current-build-doc",
@@ -19099,16 +19100,16 @@
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
       "stale_reason": null,
-      "last_known_good_build": "26200",
+      "last_known_good_build": "26200.8246",
       "revalidation_need": "none",
       "rollback_verification_status": "verified",
       "bench_status": "not-run",
       "conflict_reason": null,
       "last_known_good_verification_context": {
         "backend_id": "rai-linux-vm",
-        "tested_build": "26200",
+        "tested_build": "26200.8246",
         "current_build": "26100",
-        "last_verified_at": "2026-04-14T09:03:07Z"
+        "last_verified_at": "2026-04-18T16:24:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -22917,6 +22918,7 @@
     "record-blocker": 5,
     "stale-evidence": 24,
     "system-execution-required-no-current-build-registry-seeding-path": 1,
+    "timer-check-flags-etw-stackwalk-helper-only-no-target-read": 1,
     "timer-check-flags-intentional-hold-no-current-build-pivot": 1,
     "timer-check-flags-modern-bit-semantics-unproven": 1,
     "timer-rebase-threshold-drips-trigger-not-available-on-current-vm": 1,
