@@ -27,7 +27,6 @@ def load_module(name: str, path: Path):
     return module
 
 
-<<<<<<< HEAD
 wpr_boot_registry = load_module(
     "run_guest_wpr_boot_registry_for_tests",
     VM_KVM_SCRIPTS / "run-guest-wpr-boot-registry.py",
