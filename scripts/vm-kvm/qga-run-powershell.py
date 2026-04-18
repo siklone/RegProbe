@@ -302,7 +302,24 @@ def main() -> int:
     )
     ensure_exitcode = ensure_result.get("exitcode")
     if ensure_result.get("status") != "exited" or (ensure_exitcode is None or int(ensure_exitcode) != 0):
-        print(json.dumps({"status": "ensure-guest-dir-failed", "guest_dir": guest_dir, "result": ensure_result}, indent=2))
+        print(
+            json.dumps(
+                apply_summary_contract(
+                    {
+                        "status": "error",
+                        "summary_source": "qga-ensure-guest-dir-error",
+                        "domain": args.domain,
+                        "guest_dir": guest_dir,
+                        "result": ensure_result,
+                    },
+                    default_error_kind="guest-dir-ensure-failed",
+                    default_recovery_action="rerun-qga-powershell",
+                    default_transport_blocker="guest-dir-ensure",
+                    default_guest_health="unknown",
+                ),
+                indent=2,
+            )
+        )
         return 1
 
     upload_result = upload_guest_file(

@@ -8,6 +8,8 @@ import json
 import subprocess
 from pathlib import Path
 
+from summary_contract_lib import apply_summary_contract
+
 
 def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, timeout: int) -> dict[str, object]:
     cmd = ["virsh"]
@@ -29,6 +31,37 @@ def sha256_path(path: Path) -> str:
     return digest.hexdigest()
 
 
+def print_error_payload(
+    *,
+    domain: str,
+    source: str,
+    destination: str,
+    timeout: int,
+    error: Exception,
+) -> None:
+    print(
+        json.dumps(
+            apply_summary_contract(
+                {
+                    "status": "error",
+                    "domain": domain,
+                    "source": source,
+                    "destination": destination,
+                    "timeout": timeout,
+                    "summary_source": "qga-file-upload-error",
+                    "message": str(error),
+                    "exception_type": type(error).__name__,
+                },
+                default_error_kind="qga-file-upload-error",
+                default_recovery_action="rerun-qga-put-file",
+                default_transport_blocker="qga-agent-command",
+                default_guest_health="unknown",
+            ),
+            indent=2,
+        )
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Upload a host file into the guest through qemu guest agent guest-file-* commands.")
     parser.add_argument("--domain", default="regprobe-win11-25h2-session")
@@ -40,70 +73,80 @@ def main() -> int:
     parser.add_argument("--mode", default="wb")
     args = parser.parse_args()
 
-    source = Path(args.source).resolve()
-    size = source.stat().st_size
-    digest = sha256_path(source)
-
-    opened = run_agent_command(
-        args.domain,
-        {
-            "execute": "guest-file-open",
-            "arguments": {
-                "path": args.destination,
-                "mode": args.mode,
-            },
-        },
-        connect=args.connect,
-        timeout=args.timeout,
-    )
-    handle = int(opened)
-
-    written_total = 0
     try:
-        with source.open("rb") as infile:
-            while True:
-                chunk = infile.read(args.chunk_size)
-                if not chunk:
-                    break
-                payload = {
-                    "execute": "guest-file-write",
-                    "arguments": {
-                        "handle": handle,
-                        "buf-b64": base64.b64encode(chunk).decode("ascii"),
-                    },
-                }
-                result = run_agent_command(args.domain, payload, connect=args.connect, timeout=args.timeout)
-                written_total += int(result.get("count", 0))
+        source = Path(args.source).resolve()
+        size = source.stat().st_size
+        digest = sha256_path(source)
 
-        run_agent_command(
+        opened = run_agent_command(
             args.domain,
-            {"execute": "guest-file-flush", "arguments": {"handle": handle}},
-            connect=args.connect,
-            timeout=args.timeout,
-        )
-    finally:
-        run_agent_command(
-            args.domain,
-            {"execute": "guest-file-close", "arguments": {"handle": handle}},
-            connect=args.connect,
-            timeout=args.timeout,
-        )
-
-    print(
-        json.dumps(
             {
-                "status": "uploaded",
-                "domain": args.domain,
-                "source": str(source),
-                "destination": args.destination,
-                "size_bytes": size,
-                "written_bytes": written_total,
-                "sha256": digest,
+                "execute": "guest-file-open",
+                "arguments": {
+                    "path": args.destination,
+                    "mode": args.mode,
+                },
             },
-            indent=2,
+            connect=args.connect,
+            timeout=args.timeout,
         )
-    )
-    return 0
+        handle = int(opened)
+
+        written_total = 0
+        try:
+            with source.open("rb") as infile:
+                while True:
+                    chunk = infile.read(args.chunk_size)
+                    if not chunk:
+                        break
+                    payload = {
+                        "execute": "guest-file-write",
+                        "arguments": {
+                            "handle": handle,
+                            "buf-b64": base64.b64encode(chunk).decode("ascii"),
+                        },
+                    }
+                    result = run_agent_command(args.domain, payload, connect=args.connect, timeout=args.timeout)
+                    written_total += int(result.get("count", 0))
+
+            run_agent_command(
+                args.domain,
+                {"execute": "guest-file-flush", "arguments": {"handle": handle}},
+                connect=args.connect,
+                timeout=args.timeout,
+            )
+        finally:
+            run_agent_command(
+                args.domain,
+                {"execute": "guest-file-close", "arguments": {"handle": handle}},
+                connect=args.connect,
+                timeout=args.timeout,
+            )
+
+        print(
+            json.dumps(
+                {
+                    "status": "uploaded",
+                    "domain": args.domain,
+                    "source": str(source),
+                    "destination": args.destination,
+                    "size_bytes": size,
+                    "written_bytes": written_total,
+                    "sha256": digest,
+                },
+                indent=2,
+            )
+        )
+        return 0
+    except Exception as error:  # pragma: no cover - exercised via CLI-facing tests
+        print_error_payload(
+            domain=args.domain,
+            source=args.source,
+            destination=args.destination,
+            timeout=args.timeout,
+            error=error,
+        )
+        return 1
 
 
 if __name__ == "__main__":
