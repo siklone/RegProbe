@@ -491,7 +491,7 @@ jobs:
           PY
 
       - name: Upload release asset
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             release-assets/RegProbe-Portable-${{ github.event.release.tag_name }}-${{ env.RUNTIME }}.zip
