@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-18T16:53:21Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "target": {
+    "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+    "vm": "Win25H2Clean",
+    "host_lane": "KVM QGA"
+  },
+  "official_source": {
+    "kind": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+    "surface": "powercfg /requestsoverride [caller_type name request]"
+  },
+  "etw_stackwalk": {
+    "run_id": "power-request-override-subtree-etw-stackwalk-20260418",
+    "status": "ok",
+    "launch_transport": "qga",
+    "event_count": 5497,
+    "caller_stack_event_count": 1650,
+    "stack_field_hit_count": 402714,
+    "power_request_override_text_hits": 8,
+    "observed_operations": {
+      "registry-touch": 3,
+      "RegOpenKey": 1,
+      "RegCloseKey": 1,
+      "RegQueryValue": 3
+    },
+    "observed_value_names": [
+      "RuleCount",
+      "DISABLED",
+      "ENABLED"
+    ],
+    "artifacts": [
+      {
+        "path": "evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418-summary.json",
+        "sha256": "68833631529c2f9043b0b1e008efa4f2ced8b17f7bd7876b0706f14aec180c1c",
+        "size": 5045
+      },
+      {
+        "path": "evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/power-request-override-subtree-etw-stackwalk-20260418.etl",
+        "sha256": "179a762a1a8c0792b52f54ab32f78f3beffcc5e597efcba945e9f74c82643e45",
+        "size": 15728640
+      },
+      {
+        "path": "evidence/files/etw-stackwalk/power-request-override-subtree-etw-stackwalk-20260418/normalized-registry-bundle.json",
+        "sha256": "a8a2a87cfdad993c01371be153edc85854f981cd678e35bfa9d0d25fcbc9055f",
+        "size": 7396966
+      }
+    ],
+    "interpretation": "Direct current-build runtime evidence for subtree/root control-value reads. This does not by itself prove powercfg leaf materialization."
+  },
+  "powercfg_proof": {
+    "run_id": "power-request-override-proof-20260418c",
+    "artifact": {
+      "path": "evidence/files/vm-tooling-staging/power-request-override-powercfg-proof-20260418/host-summary.json",
+      "sha256": "fb605d918e339a0ffe123ded7313963c2505cec1c984fb3c900e4a17df11465a",
+      "size": 4857
+    },
+    "command_results": {
+      "list_before_exit_code": 0,
+      "add_exit_code": 0,
+      "list_after_add_exit_code": 0,
+      "remove_exit_code": 0,
+      "list_after_remove_exit_code": 0,
+      "list_after_cleanup_exit_code": 0
+    },
+    "observed_state": {
+      "before_process_section_empty": true,
+      "after_add_powercfg_line": "RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE",
+      "after_add_registry_value": "PowerRequestOverride\\Process :: RegProbeOverrideProof.exe=7",
+      "after_remove_process_section_empty": true,
+      "test_process_key_exists_after_cleanup": false,
+      "direct_cleanup_applied": false
+    },
+    "interpretation": "The documented powercfg surface materializes and removes a Process leaf cleanly for the synthetic caller. The observed value 7 is retained as an all-request bitmask observation, not as a complete Driver/Service model."
+  },
+  "procmon_escalation": {
+    "attempted": true,
+    "status": "environment-failure",
+    "failure": "Procmon SaveAs timed out after 180 second(s).",
+    "csv_produced": false,
+    "normalized_bundle_produced": false,
+    "interpretation": "The failed Procmon SaveAs is retained in the research note as tooling/environment context only; it is not behavior proof."
+  },
+  "classification": {
+    "result": "research-only draft / intentional hold",
+    "record_status": "draft",
+    "apply_allowed": false,
+    "restore_previous_supported": true,
+    "restore_default_supported": false,
+    "remaining_gaps": [
+      "Driver and Service leaf semantics are still unproven.",
+      "The exact current-build kernel reader binding remains adjacent rather than direct.",
+      "The subtree is not mapped to a supported app apply surface."
+    ]
+  }
+}
