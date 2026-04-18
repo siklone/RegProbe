@@ -310,6 +310,56 @@ def salvage_timeout_artifacts(
     }
 
 
+def summarize_timeout_salvage(timeout_salvage: dict[str, object]) -> dict[str, object]:
+    artifact_health = timeout_salvage.get("artifact_health") or {}
+    if not isinstance(artifact_health, dict):
+        artifact_health = {}
+    hits_csv = timeout_salvage.get("hits_csv") or {}
+    if not isinstance(hits_csv, dict):
+        hits_csv = {}
+    normalized_salvage = timeout_salvage.get("normalized_salvage") or {}
+    if not isinstance(normalized_salvage, dict):
+        normalized_salvage = {}
+
+    guest_summary = artifact_health.get("guest_summary") or {}
+    guest_normalized = artifact_health.get("guest_normalized") or {}
+    guest_hits_csv = artifact_health.get("guest_hits_csv") or {}
+    if not isinstance(guest_summary, dict):
+        guest_summary = {}
+    if not isinstance(guest_normalized, dict):
+        guest_normalized = {}
+    if not isinstance(guest_hits_csv, dict):
+        guest_hits_csv = {}
+
+    normalized_created = bool(normalized_salvage.get("created"))
+    hit_line_count = int(hits_csv.get("hit_line_count") or 0)
+
+    if normalized_created and hit_line_count == 0:
+        salvage_classification = "header-only-no-hit"
+        normalization_status = "ok"
+        normalizer_name = normalized_salvage.get("normalizer_name")
+    elif normalized_created:
+        salvage_classification = "normalized-salvage-created"
+        normalization_status = "ok"
+        normalizer_name = normalized_salvage.get("normalizer_name")
+    else:
+        salvage_classification = str(normalized_salvage.get("reason") or "not-needed")
+        normalization_status = "timeout"
+        normalizer_name = None
+
+    return {
+        "summary_source": "timeout-salvage",
+        "hit_line_count": hit_line_count,
+        "hits_csv_exists": bool(guest_hits_csv.get("exists")),
+        "guest_summary_zero_byte": bool(guest_summary.get("is_zero_byte")),
+        "guest_normalized_zero_byte": bool(guest_normalized.get("is_zero_byte")),
+        "normalized_bundle_exists": bool(guest_normalized.get("exists")) or normalized_created,
+        "normalization_status": normalization_status,
+        "normalizer_name": normalizer_name,
+        "salvage_classification": salvage_classification,
+    }
+
+
 def build_guest_launcher(guest_scripts_root: str, bridge: str, generated_name: str) -> str:
     return "\n".join(
         [
@@ -608,6 +658,12 @@ def main() -> int:
                 return 1
         time.sleep(2)
 
+    timeout_salvage = salvage_timeout_artifacts(
+        repo_root=repo_root,
+        args=args,
+        upload_dir=upload_dir,
+        guest_output_root=rf"C:\RegProbe-Diag\wpr-boot-registry\{args.output_name}",
+    )
     timeout_summary = write_summary_contract(
         summary_path,
         {
@@ -617,12 +673,8 @@ def main() -> int:
             "arm_launch_transport": arm_launch_transport,
             "collect_launch_transport": collect_launch_transport,
             "status": "timeout",
-            "timeout_salvage": salvage_timeout_artifacts(
-                repo_root=repo_root,
-                args=args,
-                upload_dir=upload_dir,
-                guest_output_root=rf"C:\RegProbe-Diag\wpr-boot-registry\{args.output_name}",
-            ),
+            "timeout_salvage": timeout_salvage,
+            **summarize_timeout_salvage(timeout_salvage),
         },
         default_error_kind="runner-timeout",
         default_recovery_action="rerun-wpr-boot-registry",

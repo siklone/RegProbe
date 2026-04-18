@@ -324,6 +324,37 @@ class VmKvmWprBootRegistryTests(unittest.TestCase):
         self.assertEqual(payload["transport_blocker"], "caller-stack-missing")
         self.assertEqual(payload["summary_source"], "caller-stack-check")
 
+    def test_summarize_timeout_salvage_exposes_top_level_no_hit_fields(self) -> None:
+        payload = wpr_boot_registry.summarize_timeout_salvage(
+            {
+                "artifact_health": {
+                    "guest_summary": {"exists": True, "size_bytes": 0, "is_zero_byte": True},
+                    "guest_normalized": {"exists": True, "size_bytes": 0, "is_zero_byte": True},
+                    "guest_hits_csv": {"exists": True, "size_bytes": 16, "is_zero_byte": False},
+                },
+                "hits_csv": {
+                    "exists": True,
+                    "line_count": 1,
+                    "hit_line_count": 0,
+                    "contains_value_name": False,
+                },
+                "normalized_salvage": {
+                    "created": True,
+                    "path": "/tmp/sample.normalized.json",
+                    "event_count": 0,
+                    "normalizer_name": "HostTimeoutSalvageNormalizer",
+                },
+            }
+        )
+
+        self.assertEqual(payload["summary_source"], "timeout-salvage")
+        self.assertEqual(payload["salvage_classification"], "header-only-no-hit")
+        self.assertTrue(payload["guest_summary_zero_byte"])
+        self.assertTrue(payload["guest_normalized_zero_byte"])
+        self.assertTrue(payload["normalized_bundle_exists"])
+        self.assertEqual(payload["normalization_status"], "ok")
+        self.assertEqual(payload["normalizer_name"], "HostTimeoutSalvageNormalizer")
+
 
 if __name__ == "__main__":
     unittest.main()
