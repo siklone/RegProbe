@@ -8,6 +8,8 @@ import subprocess
 import sys
 import time
 
+from summary_contract_lib import apply_summary_contract
+
 
 def run_agent_command(domain: str, payload: dict[str, object], *, connect: str, timeout: int) -> dict[str, object]:
     cmd = ["virsh"]
@@ -64,13 +66,20 @@ def main() -> int:
     if not status or not status.get("exited"):
         print(
             json.dumps(
-                {
-                    "status": "timeout",
-                    "pid": pid,
-                    "path": args.path,
-                    "arg": args.arg,
-                    "wait_timeout": args.wait_timeout,
-                },
+                apply_summary_contract(
+                    {
+                        "status": "timeout",
+                        "pid": pid,
+                        "path": args.path,
+                        "arg": args.arg,
+                        "wait_timeout": args.wait_timeout,
+                        "summary_source": "qga-exec-timeout",
+                    },
+                    default_error_kind="guest-exec-timeout",
+                    default_recovery_action="rerun-qga-exec",
+                    default_transport_blocker="timeout",
+                    default_guest_health="unknown",
+                ),
                 indent=2,
             )
         )
