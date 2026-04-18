@@ -179,6 +179,53 @@ public sealed class TraceEventEtlRegistryNormalizerTests
     }
 
     [Fact]
+    public void TraceEventEtlNormalizer_UsesRegistryPayloadHintsWhenMetadataIsGeneric()
+    {
+        var records = new[]
+        {
+            new RegistryTraceEventRecord
+            {
+                ProviderName = "EventTrace",
+                EventName = "SetValue",
+                OpcodeName = "SetValue",
+                ProcessName = "svchost.exe",
+                ProcessId = 912,
+                TimestampUtc = DateTimeOffset.Parse("2026-04-07T12:15:32Z"),
+                Payloads = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["KeyName"] = @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer",
+                    ["ValueName"] = "HideRecommendedSection",
+                    ["ValueType"] = "REG_DWORD",
+                    ["ValueData"] = "1",
+                    ["Result"] = "SUCCESS"
+                }
+            }
+        };
+
+        var normalizer = new TraceEventEtlRegistryNormalizer(_ => records);
+        var tempPath = Path.Combine(Path.GetTempPath(), $"trace-{Guid.NewGuid():N}.etl");
+        File.WriteAllText(tempPath, "fixture");
+        try
+        {
+            var bundle = normalizer.Normalize(new RegistryNormalizationRequest(tempPath, "run-generic-etl", "etw", "boot"));
+
+            Assert.Equal("ok", bundle.Status);
+            var ev = Assert.Single(bundle.Events);
+            Assert.Equal("SetValue", ev.Operation);
+            Assert.Equal("HKLM", ev.Hive);
+            Assert.Equal(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer", ev.KeyPath);
+            Assert.Equal("HideRecommendedSection", ev.ValueName);
+            Assert.Equal("REG_DWORD", ev.ValueType);
+            Assert.Equal("1", ev.DataText);
+            Assert.Equal("SUCCESS", ev.Result);
+        }
+        finally
+        {
+            File.Delete(tempPath);
+        }
+    }
+
+    [Fact]
     public void TraceEventEtlNormalizer_NoInjectedRegistryEventsReturnsDeterministicError()
     {
         var normalizer = new TraceEventEtlRegistryNormalizer(_ => Array.Empty<RegistryTraceEventRecord>());
