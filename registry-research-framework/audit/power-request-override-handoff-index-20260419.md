@@ -67,6 +67,12 @@ For the current default run id, the dated target pair is:
 - `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json`
 - `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md`
 
+Exact promote command for the current default run id:
+
+```bash
+python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id power-request-override-reader-binding-reacquire
+```
+
 ## Ready-To-Run Files
 
 - `registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt`

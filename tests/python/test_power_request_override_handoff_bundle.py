@@ -25,6 +25,8 @@ LEDGER_PROMOTER_PATH = (
 )
 SCRIPT_CATALOG_MD = REPO_ROOT / "Docs" / "research" / "script-catalog.md"
 GITIGNORE = REPO_ROOT / ".gitignore"
+EXECUTION_MANIFEST_MD = AUDIT_ROOT / "power-request-override-reader-binding-execution-manifest-20260419.md"
+HANDOFF_INDEX_MD = AUDIT_ROOT / "power-request-override-handoff-index-20260419.md"
 PIPELINE_MODULE_PATH = REPO_ROOT / "scripts" / "vm-kvm" / "run-power-request-override-reader-binding-pipeline.py"
 
 
@@ -201,6 +203,30 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("registry-research-framework/scripts/promote_power_request_override_result_ledger.py", content)
         self.assertTrue(LEDGER_GENERATOR_PATH.exists())
         self.assertTrue(LEDGER_PROMOTER_PATH.exists())
+
+    def test_handoff_markdown_mentions_exact_current_run_promotion_targets(self) -> None:
+        execution_manifest_md = EXECUTION_MANIFEST_MD.read_text(encoding="utf-8")
+        handoff_index_md = HANDOFF_INDEX_MD.read_text(encoding="utf-8")
+
+        target_json = (
+            "registry-research-framework/audit/"
+            "power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"
+        )
+        target_md = (
+            "registry-research-framework/audit/"
+            "power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md"
+        )
+        promote_command = (
+            "python3 registry-research-framework/scripts/"
+            "promote_power_request_override_result_ledger.py --run-id power-request-override-reader-binding-reacquire"
+        )
+
+        self.assertIn(target_json, execution_manifest_md)
+        self.assertIn(target_md, execution_manifest_md)
+        self.assertIn(promote_command, execution_manifest_md)
+        self.assertIn(target_json, handoff_index_md)
+        self.assertIn(target_md, handoff_index_md)
+        self.assertIn(promote_command, handoff_index_md)
 
     def test_pipeline_autofill_outputs_are_local_only(self) -> None:
         content = GITIGNORE.read_text(encoding="utf-8")

@@ -89,6 +89,12 @@ For the current default run id, the dated target pair is already known in advanc
 - `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json`
 - `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md`
 
+And the exact promote command for that default run id is:
+
+```bash
+python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id power-request-override-reader-binding-reacquire
+```
+
 ## Non-Goals
 
 - Do not reopen a generic `*PowerRequest*Reg*` symbol hunt first.
