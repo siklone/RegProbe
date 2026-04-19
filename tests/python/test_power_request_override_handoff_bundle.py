@@ -92,7 +92,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         )
         self.assertEqual(
             manifest["bundle_verifier"]["output_contract"],
-            ["ready_for_execute", "summary", "blockers", "next_steps"],
+            ["ready_for_execute", "summary", "blockers", "operator_checklist", "next_steps"],
         )
         self.assertEqual(
             manifest["bundle_verifier"]["skip_example"],
@@ -179,7 +179,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         )
         self.assertEqual(
             payload["bundle_verifier"]["output_contract"],
-            ["ready_for_execute", "summary", "blockers", "next_steps"],
+            ["ready_for_execute", "summary", "blockers", "operator_checklist", "next_steps"],
         )
         self.assertEqual(
             payload["bundle_verifier"]["skip_example"],
@@ -260,6 +260,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("--verify-only", content)
         self.assertIn("ready_for_execute", content)
         self.assertIn("blockers", content)
+        self.assertIn("operator checklist", content.lower())
         self.assertIn("registry-research-framework/scripts/generate_power_request_override_result_ledger.py", content)
         self.assertIn("registry-research-framework/scripts/promote_power_request_override_result_ledger.py", content)
         self.assertIn("registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py", content)
@@ -295,6 +296,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("ready_for_execute", execution_manifest_md)
         self.assertIn("next_steps", execution_manifest_md)
         self.assertIn("blockers", execution_manifest_md)
+        self.assertIn("operator checklist", execution_manifest_md.lower())
         self.assertIn("Expected JSON contract", execution_manifest_md)
         self.assertIn("summary block", execution_manifest_md)
         self.assertIn(target_json, handoff_index_md)
@@ -308,6 +310,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("ready_for_execute", handoff_index_md)
         self.assertIn("next_steps", handoff_index_md)
         self.assertIn("blockers", handoff_index_md)
+        self.assertIn("operator checklist", handoff_index_md.lower())
         self.assertIn("Expected JSON contract", handoff_index_md)
         self.assertIn("summary block", handoff_index_md)
 

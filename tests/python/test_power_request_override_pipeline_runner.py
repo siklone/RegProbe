@@ -101,7 +101,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         )
         self.assertEqual(
             payload["verify_bundle_first"]["output_contract"],
-            ["ready_for_execute", "summary", "blockers", "next_steps"],
+            ["ready_for_execute", "summary", "blockers", "operator_checklist", "next_steps"],
         )
         self.assertTrue(payload["verify_bundle_first"]["required_before_execute"])
         self.assertEqual(
@@ -163,8 +163,9 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertTrue(payload["bundle_verifier_output"]["ready_for_execute"])
         self.assertEqual(
             payload["bundle_verifier_output_contract"],
-            ["ready_for_execute", "summary", "blockers", "next_steps"],
+            ["ready_for_execute", "summary", "blockers", "operator_checklist", "next_steps"],
         )
+        self.assertEqual(len(payload["bundle_verifier_operator_checklist"]), 4)
         self.assertEqual(payload["bundle_verifier_summary"]["status"], "ok")
         self.assertEqual(
             payload["next_steps"]["recommended_example"],

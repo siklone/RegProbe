@@ -12,7 +12,7 @@ AUDIT_ROOT = REPO_ROOT / "registry-research-framework" / "audit"
 MANIFEST_JSON = AUDIT_ROOT / "power-request-override-reader-binding-execution-manifest-20260419.json"
 HANDOFF_JSON = AUDIT_ROOT / "power-request-override-handoff-index-20260419.json"
 REACQUIRE_PLAN_JSON = AUDIT_ROOT / "power-request-override-reader-binding-reacquire-plan-20260419.json"
-OUTPUT_CONTRACT = ["ready_for_execute", "summary", "blockers", "next_steps"]
+OUTPUT_CONTRACT = ["ready_for_execute", "summary", "blockers", "operator_checklist", "next_steps"]
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -86,6 +86,21 @@ def build_next_steps(payload: dict[str, Any]) -> dict[str, str]:
     }
 
 
+def build_operator_checklist(payload: dict[str, Any]) -> list[str]:
+    if payload.get("status") == "ok":
+        return [
+            "Run the pipeline in --dry-run mode once if you want a final command/artifact preview before touching the VM.",
+            "Run the normal pipeline execute path to collect the response-side and UMPO-message KD artifacts.",
+            "Review the local autofill ledger against the review rubric before promoting it.",
+            "Promote the reviewed autofill ledger into the dated audit pair only after the wording and outcome are intentional.",
+        ]
+    return [
+        "Inspect the verifier markdown summary before touching the VM lane.",
+        "Repair the missing bundle paths or promotion mismatches reported in the blocker list.",
+        "Re-run the pipeline with --verify-only until ready_for_execute becomes true.",
+    ]
+
+
 def verify_bundle(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     manifest = load_json(MANIFEST_JSON)
     handoff = load_json(HANDOFF_JSON)
@@ -150,6 +165,7 @@ def verify_bundle(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     payload["blockers"] = build_blockers(payload["summary"])
     payload["ready_for_execute"] = payload["status"] == "ok"
     payload["output_contract"] = OUTPUT_CONTRACT
+    payload["operator_checklist"] = build_operator_checklist(payload)
     payload["next_steps"] = build_next_steps(payload)
     return payload
 
@@ -161,6 +177,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
     summary = payload.get("summary") or {}
     next_steps = payload.get("next_steps") or {}
     blockers = payload.get("blockers") or []
+    operator_checklist = payload.get("operator_checklist") or []
     lines = [
         "# PowerRequestOverride Handoff Bundle Verification",
         "",
@@ -203,9 +220,14 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Dry-run: `{next_steps.get('dry_run_example', '')}`",
         f"- Verify-only: `{next_steps.get('verify_only_example', '')}`",
         "",
+        "## Operator Checklist",
+    ]
+    lines.extend(f"- {item}" for item in operator_checklist)
+    lines.extend([
+        "",
         "## Output Contract",
         f"- Keys: `{payload.get('output_contract', [])}`",
-    ]
+    ])
     return "\n".join(lines) + "\n"
 
 

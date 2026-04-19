@@ -104,7 +104,7 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
 - `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`
   dedicated two-pass local-KD reacquire wrapper for the PowerRequestOverride response and UMPO message boundary lane
 - `scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py`
-  one-shot PowerRequestOverride runner that executes the reacquire wrapper and then generates a prefilled result ledger; use `--dry-run` to print the planned commands and artifact paths without touching the VM, or `--verify-only` to emit the bundle preflight/readiness payload with `ready_for_execute`, blockers, and next-step hints without touching the VM
+  one-shot PowerRequestOverride runner that executes the reacquire wrapper and then generates a prefilled result ledger; use `--dry-run` to print the planned commands and artifact paths without touching the VM, or `--verify-only` to emit the bundle preflight/readiness payload with `ready_for_execute`, blockers, an operator checklist, and next-step hints without touching the VM
 
 ### `Historical / Repro`
 
@@ -185,7 +185,7 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
 - `registry-research-framework/scripts/promote_power_request_override_result_ledger.py`
   promotes the ignored PowerRequestOverride autofill ledger into a dated audit pair after review so intentional outputs, not scratch drafts, are what get committed; supports `--dry-run` for target preview and refuses overwrite unless `--force` is supplied intentionally
 - `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
-  verifies that the current PowerRequestOverride handoff bundle is structurally intact and echoes the exact current-run promotion preview, `ready_for_execute`, compact blocker summary, and next-step guidance in JSON or markdown form
+  verifies that the current PowerRequestOverride handoff bundle is structurally intact and echoes the exact current-run promotion preview, `ready_for_execute`, compact blocker summary, operator checklist, and next-step guidance in JSON or markdown form
 
 ### `Historical / Repro`
 
