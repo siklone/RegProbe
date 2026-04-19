@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-19T03:48:00Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "status": "ready",
+  "operator": {
+    "posture": "run-narrow-kd-pass",
+    "next_action": "Prefer the one-shot pipeline runner; if needed, fall back to the dedicated KVM wrapper or the two local-KD command files, then classify the result with the review rubric."
+  },
+  "pipeline_runner": {
+    "path": "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+    "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+    "dry_run_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
+    "verify_only_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only"
+  },
+  "bundle_verifier": {
+    "path": "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+    "example": "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+    "markdown_example": "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
+    "required_before_execute": true,
+    "verify_only_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
+    "output_contract": [
+      "ready_for_execute",
+      "summary",
+      "blockers",
+      "operator_checklist",
+      "next_steps"
+    ],
+    "skip_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier"
+  },
+  "runner": {
+    "path": "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py",
+    "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py"
+  },
+  "selected_count": 2,
+  "entries": [
+    {
+      "entry_id": "local-kd-powerrequest-response-reacquire",
+      "command_file": "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
+      "goal": "Reacquire response-side disassembly for PopPowerRequestHandleRequestOverrideQueryResponse.",
+      "required_outputs": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ],
+      "success_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopPowerRequestHandleRequestOverrideQueryResponse",
+        "REGPROBE_LOCALKD_END"
+      ]
+    },
+    {
+      "entry_id": "local-kd-powerrequest-umpo-message-reacquire",
+      "command_file": "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt",
+      "goal": "Reacquire UMPO message disassembly for PopUmpoSendPowerMessage.",
+      "required_outputs": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ],
+      "success_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopUmpoSendPowerMessage",
+        "REGPROBE_LOCALKD_END"
+      ]
+    }
+  ],
+  "review_inputs": [
+    "registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.md",
+    "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.md"
+  ],
+  "promotion": {
+    "scratch_outputs": [
+      "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.json",
+      "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.md"
+    ],
+    "scratch_policy": "These autofill outputs are local-only scratch drafts and stay gitignored by default.",
+    "promote_script": "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+    "promote_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id>",
+    "promote_dry_run_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id> --dry-run",
+    "current_run_id": "power-request-override-reader-binding-reacquire",
+    "current_run_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id power-request-override-reader-binding-reacquire",
+    "current_run_dry_run_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id power-request-override-reader-binding-reacquire --dry-run",
+    "preview_targets": {
+      "source_json": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.json",
+      "source_md": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.md",
+      "target_json": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json",
+      "target_md": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md"
+    },
+    "overwrite_policy": "The promote step refuses to overwrite an existing dated ledger unless --force is passed intentionally."
+  },
+  "non_goals": [
+    "Do not reopen a generic *PowerRequest*Reg* symbol hunt first.",
+    "Do not rerun a broad subtree runtime capture first.",
+    "Do not spend the next sprint on another powercfg materialization cycle."
+  ]
+}

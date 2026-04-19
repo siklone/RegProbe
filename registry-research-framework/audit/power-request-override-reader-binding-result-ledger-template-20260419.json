@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "template_generated_utc": "2026-04-19T03:34:00Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "purpose": "Template for recording the next response-side and UMPO message reacquire outcome without reopening the PowerRequestOverride lane from scratch.",
+  "fill_after_run": {
+    "run_id": "<replace-with-run-id>",
+    "vm": "Win25H2Clean",
+    "artifacts": {
+      "response_reacquire": {
+        "stdout_path": "<path>",
+        "summary_path": "<path>",
+        "command_file": "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
+        "required_markers_present": false,
+        "strong_markers_seen": [],
+        "weak_markers_seen": []
+      },
+      "umpo_message_reacquire": {
+        "stdout_path": "<path>",
+        "summary_path": "<path>",
+        "command_file": "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt",
+        "required_markers_present": false,
+        "strong_markers_seen": [],
+        "weak_markers_seen": []
+      }
+    },
+    "review_outcome": {
+      "chosen_outcome": "<direct-registry-read|consumer-semantics-without-read|umpo-boundary-is-best-signal|wrapper-only-path>",
+      "why": "<short justification tied to actual markers in stdout>",
+      "red_flags": [],
+      "stop_condition_triggered": false
+    },
+    "next_move": {
+      "lane": "<kernel-side|umpo-boundary|power-service-follow-up>",
+      "exact_target": "<symbol-or-boundary>",
+      "do_not_do_next": [
+        "Do not reopen a broad *PowerRequest*Reg* hunt.",
+        "Do not rerun a subtree-wide runtime capture first.",
+        "Do not spend the next sprint on another powercfg materialization cycle."
+      ]
+    }
+  }
+}

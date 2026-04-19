@@ -1,0 +1,6 @@
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopPowerRequestHandleRequestOverrideQueryResponse
+uf nt!PopPowerRequestHandleRequestOverrideQueryResponse
+x nt!*PowerRequest*Override*
+.echo REGPROBE_LOCALKD_END
+q

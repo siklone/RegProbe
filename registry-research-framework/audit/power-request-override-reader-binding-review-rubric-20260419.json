@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-19T03:27:00Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "purpose": "Provide a quick review rubric for the next PowerRequestOverride response-side and UMPO message reacquire artifacts.",
+  "artifact_checks": [
+    {
+      "artifact_id": "local-kd-powerrequest-response-reacquire",
+      "required_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopPowerRequestHandleRequestOverrideQueryResponse",
+        "REGPROBE_LOCALKD_END"
+      ],
+      "good_signal_markers": [
+        "CmQueryValueKey",
+        "ZwQueryValueKey",
+        "NtQueryValueKey",
+        "Process",
+        "Service",
+        "Driver"
+      ],
+      "weak_signal_markers": [
+        "PopPowerRequestUpdateWorkItem",
+        "PopPowerRequestCallbackWorker",
+        "PopPowerRequestCallbackExecutionRequired"
+      ]
+    },
+    {
+      "artifact_id": "local-kd-powerrequest-umpo-message-reacquire",
+      "required_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopUmpoSendPowerMessage",
+        "REGPROBE_LOCALKD_END"
+      ],
+      "good_signal_markers": [
+        "ALPC",
+        "rpc",
+        "message",
+        "opcode",
+        "requester"
+      ],
+      "weak_signal_markers": [
+        "ExAllocatePool2",
+        "ExFreePoolWithTag",
+        "PoStoreRequester"
+      ]
+    }
+  ],
+  "outcome_mapping": [
+    {
+      "outcome": "direct-registry-read",
+      "review_rule": "Choose this outcome when the response-side stdout exposes CmQueryValueKey, ZwQueryValueKey, NtQueryValueKey, or a clearly leaf-specific *Reg* helper in the immediate path.",
+      "next_move": "Stay kernel-side and capture the exact read/apply chain."
+    },
+    {
+      "outcome": "consumer-semantics-without-read",
+      "review_rule": "Choose this outcome when the response-side stdout shows Process/Service/Driver branching or stable request-bit semantics without an exact read helper.",
+      "next_move": "Document the consumer semantics but keep the record blocked on exact reader binding."
+    },
+    {
+      "outcome": "umpo-boundary-is-best-signal",
+      "review_rule": "Choose this outcome when the strongest new clue comes from PopUmpoSendPowerMessage transport or payload handling rather than the response-side path.",
+      "next_move": "Pivot to a bounded power-service or powrprof follow-up."
+    },
+    {
+      "outcome": "wrapper-only-path",
+      "review_rule": "Choose this outcome when both reacquired paths are mostly wrappers, allocator/requester scaffolding, or queue plumbing.",
+      "next_move": "Follow only the first non-wrapper callee and stop if the family broadens."
+    }
+  ],
+  "red_flags": [
+    "Missing REGPROBE_LOCALKD_BEGIN or REGPROBE_LOCALKD_END markers.",
+    "Missing stdout for one of the two required reacquire artifacts.",
+    "Only wildcard symbol output is present and no uf disassembly body is retained."
+  ],
+  "non_goals": [
+    "Do not treat another powercfg materialization cycle as progress for this lane.",
+    "Do not treat generic callback or queue plumbing alone as reader-binding proof.",
+    "Do not reopen a broad *PowerRequest*Reg* hunt before reviewing these two reacquired artifacts."
+  ]
+}

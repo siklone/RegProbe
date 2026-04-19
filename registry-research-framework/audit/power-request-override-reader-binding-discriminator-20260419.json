@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-19T03:05:00Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "purpose": "Freeze the next debugger discriminator run for the unresolved PowerRequestOverride live reader-binding gap.",
+  "status": {
+    "record_status": "draft",
+    "classification": "research-only draft / intentional hold",
+    "why_this_exists": "The subtree storage model is now proven across Process, Service, and Driver leaves through the documented powercfg surface, so the next sprint should discriminate between a kernel response-side binding and a UMPO message-boundary pivot instead of reopening the full subtree lane."
+  },
+  "retained_inputs": [
+    {
+      "path": "research/notes/power-control-power-request-override-subtree-reader-binding-targets-20260419.md",
+      "role": "primary narrowed target set"
+    },
+    {
+      "path": "research/notes/power-control-power-request-override-subtree-message-boundary-hypothesis-20260419.md",
+      "role": "message-boundary hypothesis"
+    },
+    {
+      "path": "research/notes/power-control-power-request-override-subtree-reader-binding-discriminator-plan-20260419.md",
+      "role": "decision matrix and stop conditions"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/local-kd-powerrequest-resplineage-20260408a/local-kd-powerrequest-resplineage-20260408a.stdout.txt",
+      "role": "retained response-side lineage context"
+    },
+    {
+      "path": "evidence/files/vm-tooling-staging/local-kd-powerrequest-umpo-20260408a/local-kd-powerrequest-umpo-20260408a.stdout.txt",
+      "role": "retained UMPO send-path context"
+    }
+  ],
+  "primary_commands": [
+    "x nt!PopPowerRequestHandleRequestOverrideQueryResponse",
+    "uf nt!PopPowerRequestHandleRequestOverrideQueryResponse",
+    "uf nt!PopUmpoSendPowerRequestOverrideQuery",
+    "uf nt!PopUmpoSendPowerMessage",
+    "x nt!*PowerRequest*Override*",
+    "x nt!*Umpo*PowerRequest*"
+  ],
+  "fallback_commands": [
+    "uf nt!PopPowerRequestCallbackWorker",
+    "uf nt!PopPowerRequestUpdateWorkItem"
+  ],
+  "decision_matrix": [
+    {
+      "outcome": "direct-registry-read",
+      "signal": "The response-side path or an immediate callee exposes CmQueryValueKey, ZwQueryValueKey, NtQueryValueKey, or a clearly leaf-specific *Reg* helper.",
+      "meaning": "First strong current-build kernel reader-binding proof.",
+      "next_move": "Stay kernel-side, capture the exact call chain, and compare any named Process/Service/Driver reads against the proven powercfg storage model."
+    },
+    {
+      "outcome": "response-applies-state-only",
+      "signal": "The response-side path only updates request state or queues work without exposing a registry API.",
+      "meaning": "The response side is likely an apply boundary rather than the original reader.",
+      "next_move": "Inspect PopUmpoSendPowerMessage and decide whether the next cheapest escalation is a bounded user-mode power-service follow-up."
+    },
+    {
+      "outcome": "consumer-semantics-without-read",
+      "signal": "The response-side path exposes Process/Service/Driver branching or a stable request-bit model such as the observed 7 without naming the exact reader.",
+      "meaning": "Strong consumer-side corroboration, but not full reader-binding proof.",
+      "next_move": "Document the consumer semantics, keep the lane blocked on exact reader binding, and do not promote the record."
+    },
+    {
+      "outcome": "umpo-boundary-is-best-signal",
+      "signal": "The strongest new signal is payload shaping or transport semantics around PopUmpoSendPowerMessage rather than a direct kernel-side read.",
+      "meaning": "The unresolved live binding has effectively narrowed to the UMPO boundary.",
+      "next_move": "Pivot to a bounded powrprof or power-service lane instead of another broad kernel or Procmon sweep."
+    },
+    {
+      "outcome": "wrapper-only-path",
+      "signal": "The named targets are thin wrappers or tail-calls with no meaningful decode logic.",
+      "meaning": "The next task is to identify the first non-wrapper callee that still belongs to the bounded override-response family.",
+      "next_move": "Follow only the first meaningful callee and stop if the path broadens into generic power-request plumbing."
+    }
+  ],
+  "stop_conditions": [
+    "Stop if the response-side pass produces only wrapper logic and no new semantic signal.",
+    "Stop if the path clearly exits into a user-mode or transport boundary without any better kernel-side discriminator.",
+    "Stop if the only new output is queue or callback plumbing already captured by retained notes."
+  ],
+  "recommended_pivot": {
+    "if_kernel_side_stays_weak": "Treat the next lane as a bounded UMPO message-boundary or power-service investigation.",
+    "do_not_do_next": [
+      "Do not rerun a broad PowerRequest subtree search.",
+      "Do not reopen a generic *PowerRequest*Reg* symbol hunt.",
+      "Do not spend the next sprint on another powercfg materialization cycle."
+    ]
+  }
+}

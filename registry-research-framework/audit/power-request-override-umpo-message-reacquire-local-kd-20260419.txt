@@ -1,0 +1,6 @@
+.echo REGPROBE_LOCALKD_BEGIN
+x nt!PopUmpoSendPowerMessage
+uf nt!PopUmpoSendPowerMessage
+x nt!*Umpo*PowerRequest*
+.echo REGPROBE_LOCALKD_END
+q

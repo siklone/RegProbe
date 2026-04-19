@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-18T16:57:00.276302Z",
+  "generated_at": "2026-04-19T02:25:44.199668Z",
   "blocked_count": 18,
   "lane_counts": {
     "intentional-hold": 18
@@ -174,9 +174,9 @@
       "priority_score": 7,
       "blocker_count": 3,
       "promotion_blockers": [
+        "global-timer-resolution-clean-wpr-subtree-only-no-value-hit-current-build",
         "global-timer-resolution-intentional-hold-no-current-build-pivot",
-        "global-timer-resolution-no-primary-current-build-doc",
-        "global-timer-resolution-wpr-boot-no-hit-current-build"
+        "global-timer-resolution-no-primary-current-build-doc"
       ],
       "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
       "value_name": "GlobalTimerResolutionRequests",
@@ -185,7 +185,30 @@
         "registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json"
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
+      "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
+    },
+    {
+      "candidate_id": "power.control.power-request-override-subtree",
+      "feature_area": "Power Request Override Routing",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 6,
+      "blocker_count": 4,
+      "promotion_blockers": [
+        "intentional-hold",
+        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
+        "powerrequestoverride-subtree-live-reader-binding-unresolved",
+        "powerrequestoverride-subtree-not-mapped-to-supported-app-surface"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
+      "value_name": "(subtree root, Driver, Process, Service)",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/power-request-override-runtime-proof-20260418.json",
+        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.md",
+        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.json"
+      ],
+      "suggested_command": "winopt research show-blocked power.control.power-request-override-subtree --json",
+      "next_action_hint": "Target the override response/message boundary next; start with PopPowerRequestHandleRequestOverrideQueryResponse and PopUmpoSendPowerMessage before widening the lane."
     },
     {
       "candidate_id": "power.control.power-watchdog-timeout-cluster",
@@ -316,52 +339,6 @@
       "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     },
     {
-      "candidate_id": "system.kernel.timer-check-flags",
-      "feature_area": "Session Manager Kernel Timer Diagnostics",
-      "next_missing_layer": "intentional-hold",
-      "actionability": "hold",
-      "priority_score": 6,
-      "blocker_count": 4,
-      "promotion_blockers": [
-        "timer-check-flags-intentional-hold-no-current-build-pivot",
-        "timer-check-flags-modern-bit-semantics-unproven",
-        "timer-check-flags-no-primary-current-build-doc",
-        "timer-check-flags-wpr-boot-no-hit-current-build"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
-      "value_name": "TimerCheckFlags",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json",
-        "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json"
-      ],
-      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
-      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
-    },
-    {
-      "candidate_id": "power.control.power-request-override-subtree",
-      "feature_area": "Power Request Override Routing",
-      "next_missing_layer": "intentional-hold",
-      "actionability": "hold",
-      "priority_score": 5,
-      "blocker_count": 5,
-      "promotion_blockers": [
-        "intentional-hold",
-        "powerrequestoverride-restore-story-leaf-model-unproven",
-        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-        "powerrequestoverride-subtree-leaf-semantics-unresolved",
-        "powerrequestoverride-subtree-not-mapped-to-supported-app-surface"
-      ],
-      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerRequestOverride",
-      "value_name": "(subtree root, Driver, Process, Service)",
-      "recent_audit_artifacts": [
-        "registry-research-framework/audit/power-request-override-runtime-proof-20260418.json",
-        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.md",
-        "registry-research-framework/audit/power-request-override-runtime-audit-20260408.json"
-      ],
-      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
-      "next_action_hint": "Prove restore or rollback behavior for the exact subtree or value."
-    },
-    {
       "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
       "feature_area": "Session Manager Kernel DPC Watchdog Control Timeouts",
       "next_missing_layer": "intentional-hold",
@@ -406,6 +383,29 @@
       ],
       "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
       "next_action_hint": "Find a primary current-build Microsoft source or explicitly accept research-only status."
+    },
+    {
+      "candidate_id": "system.kernel.timer-check-flags",
+      "feature_area": "Session Manager Kernel Timer Diagnostics",
+      "next_missing_layer": "intentional-hold",
+      "actionability": "hold",
+      "priority_score": 5,
+      "blocker_count": 5,
+      "promotion_blockers": [
+        "timer-check-flags-etw-stackwalk-helper-only-no-target-read",
+        "timer-check-flags-intentional-hold-no-current-build-pivot",
+        "timer-check-flags-modern-bit-semantics-unproven",
+        "timer-check-flags-no-primary-current-build-doc",
+        "timer-check-flags-wpr-boot-no-hit-current-build"
+      ],
+      "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+      "value_name": "TimerCheckFlags",
+      "recent_audit_artifacts": [
+        "registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json",
+        "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json"
+      ],
+      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
+      "next_action_hint": "Retry runtime capture with a narrower trigger or a more reliable trace lane."
     }
   ]
 }

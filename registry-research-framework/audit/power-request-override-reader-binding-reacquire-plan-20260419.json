@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-19T03:18:00Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "plan_status": "ready",
+  "operator_posture": "run-narrow-kd-pass",
+  "purpose": "Reacquire the missing response-side disassembly and pair it with the UMPO message boundary so the next sprint can discriminate between a kernel response-side binding and a UMPO pivot.",
+  "inputs": [
+    "research/notes/power-control-power-request-override-subtree-reader-binding-targets-20260419.md",
+    "research/notes/power-control-power-request-override-subtree-message-boundary-hypothesis-20260419.md",
+    "research/notes/power-control-power-request-override-subtree-reader-binding-discriminator-plan-20260419.md",
+    "research/notes/power-control-power-request-override-subtree-kd-callee-shortlist-20260419.md",
+    "registry-research-framework/audit/power-request-override-reader-binding-discriminator-20260419.json"
+  ],
+  "required_reacquire_artifacts": [
+    {
+      "artifact_id": "local-kd-powerrequest-response-reacquire",
+      "goal": "Retain stdout for uf nt!PopPowerRequestHandleRequestOverrideQueryResponse.",
+      "command_file": "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
+      "must_include": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ]
+    },
+    {
+      "artifact_id": "local-kd-powerrequest-umpo-message-reacquire",
+      "goal": "Retain stdout for uf nt!PopUmpoSendPowerMessage.",
+      "command_file": "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt",
+      "must_include": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ]
+    }
+  ],
+  "command_order": [
+    "x nt!PopPowerRequestHandleRequestOverrideQueryResponse",
+    "uf nt!PopPowerRequestHandleRequestOverrideQueryResponse",
+    "uf nt!PopUmpoSendPowerMessage",
+    "x nt!*PowerRequest*Override*",
+    "x nt!*Umpo*PowerRequest*"
+  ],
+  "expected_good_outcomes": [
+    "A direct registry read or exact leaf-specific helper appears in the response-side path.",
+    "The response-side path exposes a clear payload-apply or leaf-class decode boundary.",
+    "The UMPO message path exposes a concrete transport or opcode clue that justifies a bounded user-mode pivot."
+  ],
+  "stop_conditions": [
+    "Stop if the response-side reacquire only yields wrapper logic and no new semantic signal.",
+    "Stop if the path clearly exits into a message or user-mode boundary without a better kernel-side discriminator.",
+    "Stop if the only new output is callback or queue plumbing already captured by retained notes."
+  ],
+  "do_not_do_next": [
+    "Do not reopen a generic *PowerRequest*Reg* symbol hunt first.",
+    "Do not rerun another broad subtree runtime capture first.",
+    "Do not spend the next sprint on another powercfg materialization cycle."
+  ],
+  "success_definition": {
+    "minimum": "Both response-side and UMPO message stdout artifacts are retained in-repo.",
+    "preferred": "One of the reacquired paths exposes either a direct registry read, a leaf-class consumer decode, or a clear UMPO pivot boundary."
+  }
+}

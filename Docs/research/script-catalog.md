@@ -1,13 +1,13 @@
 # Script Catalog
 
-This repository contains two kinds of PowerShell:
+This repository contains two main kinds of automation:
 
 - everyday operational scripts that build, package, validate, and maintain the VM baseline
-- research runners that exist to reproduce a specific evidence lane or classification decision
+- research runners and helper scripts that exist to reproduce a specific evidence lane or classification decision
 
 That second category matters. A script that is not part of the daily workflow is not automatically dead. Many `run-*` scripts are intentionally preserved because a note, audit package, or evidence bundle depends on that exact runner shape.
 
-Today, the practical "unused" bucket is mostly generated local output, not source-controlled `.ps1` files. Source-controlled runners that are off the hot path are usually better described as historical or reproducibility helpers.
+Today, the practical "unused" bucket is mostly generated local output, not source-controlled script files. Source-controlled runners that are off the hot path are usually better described as historical or reproducibility helpers.
 
 ## Status Labels
 
@@ -101,6 +101,10 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   exact family-routed broad-batch triage for the remaining path-only queue
 - `scripts/vm/run-ghidra-string-xref-probe.ps1`
   VM-safe Ghidra xref batch runner
+- `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`
+  dedicated two-pass local-KD reacquire wrapper for the PowerRequestOverride response and UMPO message boundary lane
+- `scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py`
+  one-shot PowerRequestOverride runner that executes the reacquire wrapper and then generates a prefilled result ledger; use `--dry-run` to print the planned commands and artifact paths without touching the VM, or `--verify-only` to emit the bundle preflight/readiness payload with `ready_for_execute`, blockers, an operator checklist, and next-step hints without touching the VM
 
 ### `Historical / Repro`
 
@@ -176,6 +180,12 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   enables the host-side Hyper-V prerequisites with `NoRestart` support, records before/after feasibility, and leaves a canonical audit for the reboot boundary
 - `registry-research-framework/tools/run-windbg-vmware-debug-only-short-try.ps1`
   executes the one remaining controlled VMware debug-only branch: fresh provision, transport-first smoke, minimal attach matrix, and breakin smoke with stop-rule closure
+- `registry-research-framework/scripts/generate_power_request_override_result_ledger.py`
+  turns the reacquired PowerRequestOverride KD artifacts into a prefilled result ledger JSON plus markdown review draft
+- `registry-research-framework/scripts/promote_power_request_override_result_ledger.py`
+  promotes the ignored PowerRequestOverride autofill ledger into a dated audit pair after review so intentional outputs, not scratch drafts, are what get committed; supports `--dry-run` for target preview and refuses overwrite unless `--force` is supplied intentionally
+- `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
+  verifies that the current PowerRequestOverride handoff bundle is structurally intact and echoes the exact current-run promotion preview, `ready_for_execute`, compact blocker summary, operator checklist, and next-step guidance in JSON or markdown form
 
 ### `Historical / Repro`
 

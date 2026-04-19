@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-18T16:56:59.162962Z",
+  "generated_utc": "2026-04-18T18:38:41.598027Z",
   "summary": {
     "total_active_records": 268,
     "class_counts": {
@@ -27,7 +27,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-04-18T16:56:58.376474Z",
+      "generated_utc": "2026-04-18T18:38:40.785936Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -6861,14 +6861,13 @@
       "app_mapping_status": "not-mapped",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
+      "confidence": "medium-high",
       "tweak_origin": "research-derived",
       "promotion_state": "blocked",
       "promotion_blockers": [
         "intentional-hold",
-        "powerrequestoverride-driver-service-leaf-semantics-unproven",
         "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-        "powerrequestoverride-subtree-leaf-semantics-unresolved",
+        "powerrequestoverride-subtree-live-reader-binding-unresolved",
         "powerrequestoverride-subtree-not-mapped-to-supported-app-surface"
       ],
       "record_promotion_allowed": false,
@@ -6898,7 +6897,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-18T16:53:21Z"
+        "last_verified_at": "2026-04-18T18:38:18Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -22914,9 +22913,8 @@
     "no-runtime-proof": 8,
     "power-session-watchdog-timeouts-no-current-build-exact-registry-read": 1,
     "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller": 1,
-    "powerrequestoverride-driver-service-leaf-semantics-unproven": 1,
     "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
-    "powerrequestoverride-subtree-leaf-semantics-unresolved": 1,
+    "powerrequestoverride-subtree-live-reader-binding-unresolved": 1,
     "powerrequestoverride-subtree-not-mapped-to-supported-app-surface": 1,
     "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot": 1,
     "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit": 1,
