@@ -2,8 +2,17 @@
 
 - Status: `ready`
 - Operator posture: `run-narrow-kd-pass`
-- Next action: `Run the two local-KD command files, retain stdout/summary/local-kd artifacts for both, then classify the result with the review rubric.`
+- Next action: `Run the dedicated KVM wrapper or the two local-KD command files, retain stdout/summary/local-kd artifacts for both passes, then classify the result with the review rubric.`
 - Selected count: `2`
+
+## Runner
+
+- Path: `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`
+- Example:
+
+```bash
+python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py
+```
 
 ## Entries
 

@@ -46,25 +46,34 @@
     },
     {
       "step": 9,
+      "path": "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py",
+      "role": "top-level KVM wrapper for the two KD reacquire passes"
+    },
+    {
+      "step": 10,
       "path": "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
       "role": "response-side KD command file"
     },
     {
-      "step": 10,
+      "step": 11,
       "path": "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt",
       "role": "UMPO message KD command file"
     },
     {
-      "step": 11,
+      "step": 12,
       "path": "registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.md",
       "role": "post-run stdout review rubric"
     },
     {
-      "step": 12,
+      "step": 13,
       "path": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.md",
       "role": "post-run result write-back template"
     }
   ],
+  "runner": {
+    "path": "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py",
+    "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py"
+  },
   "ready_to_run": [
     "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
     "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt"

@@ -13,6 +13,7 @@ EXECUTION_MANIFEST_JSON = AUDIT_ROOT / "power-request-override-reader-binding-ex
 REACQUIRE_PLAN_JSON = AUDIT_ROOT / "power-request-override-reader-binding-reacquire-plan-20260419.json"
 REVIEW_RUBRIC_JSON = AUDIT_ROOT / "power-request-override-reader-binding-review-rubric-20260419.json"
 RESULT_LEDGER_TEMPLATE_JSON = AUDIT_ROOT / "power-request-override-reader-binding-result-ledger-template-20260419.json"
+RUNNER_PATH = REPO_ROOT / "scripts" / "vm-kvm" / "run-power-request-override-reader-binding-reacquire.py"
 
 
 def load_json(path: Path) -> dict:
@@ -37,6 +38,8 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
 
         self.assertEqual(manifest["status"], "ready")
         self.assertEqual(int(manifest["selected_count"]), 2)
+        self.assertEqual(manifest["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
+        self.assertTrue(RUNNER_PATH.exists())
         entries = manifest.get("entries") or []
         self.assertEqual(len(entries), 2)
 
@@ -60,6 +63,12 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         review_inputs = (load_json(EXECUTION_MANIFEST_JSON).get("review_inputs") or [])
         for rel in review_inputs:
             self.assertTrue((REPO_ROOT / rel).exists(), rel)
+
+    def test_handoff_index_includes_runner(self) -> None:
+        payload = load_json(HANDOFF_INDEX_JSON)
+
+        self.assertEqual(payload["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
+        self.assertTrue(RUNNER_PATH.exists())
 
     def test_review_rubric_and_result_template_stay_aligned(self) -> None:
         rubric = load_json(REVIEW_RUBRIC_JSON)
