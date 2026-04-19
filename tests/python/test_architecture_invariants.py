@@ -264,6 +264,7 @@ class ArchitectureInvariantTests(unittest.TestCase):
         ).read_text(encoding="utf-8").splitlines()
         expected_paths = [
             REPO_ROOT / "app" / "Services" / "NohutoChangeModels.cs",
+            REPO_ROOT / "app" / "Services" / "NohutoChangeEngine.cs",
             REPO_ROOT / "app" / "Services" / "NohutoGitHubModels.cs",
             REPO_ROOT / "app" / "Services" / "NohutoChangeClassifier.cs",
         ]
