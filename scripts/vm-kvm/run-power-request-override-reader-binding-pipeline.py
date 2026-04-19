@@ -302,6 +302,7 @@ def run_bundle_verifier(repo_root: Path) -> tuple[dict[str, object], int]:
         "bundle_verifier": build_bundle_verifier_payload(repo_root),
         "bundle_verifier_returncode": verifier_proc.returncode,
         "bundle_verifier_output": verifier_output,
+        "bundle_verifier_output_contract": verifier_output.get("output_contract") if isinstance(verifier_output, dict) else [],
         "bundle_verifier_checks": verifier_checks or {},
         "bundle_verifier_summary": verifier_summary,
         "bundle_verifier_blockers": verifier_blockers,

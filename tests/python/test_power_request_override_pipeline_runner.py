@@ -157,6 +157,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(payload["bundle_verifier_blockers"], [])
         self.assertEqual(payload["bundle_verifier_output"]["blockers"], [])
         self.assertTrue(payload["bundle_verifier_output"]["ready_for_execute"])
+        self.assertEqual(
+            payload["bundle_verifier_output_contract"],
+            ["ready_for_execute", "summary", "blockers", "next_steps"],
+        )
         self.assertEqual(payload["bundle_verifier_summary"]["status"], "ok")
         self.assertEqual(
             payload["next_steps"]["recommended_example"],
@@ -503,7 +507,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         verifier_result = subprocess.CompletedProcess(
             args=["verifier"],
             returncode=5,
-            stdout='{"status":"error","checks":{"promotion_blocks_match":false},"summary":{"status":"error","promotion_blocks_match":false,"missing_read_order_count":0,"missing_command_file_count":0,"missing_review_input_count":0,"missing_reacquire_command_count":0,"missing_promote_script":false},"blockers":["promotion_blocks_mismatch"],"ready_for_execute":false}',
+            stdout='{"status":"error","checks":{"promotion_blocks_match":false},"summary":{"status":"error","promotion_blocks_match":false,"missing_read_order_count":0,"missing_command_file_count":0,"missing_review_input_count":0,"missing_reacquire_command_count":0,"missing_promote_script":false},"blockers":["promotion_blocks_mismatch"],"ready_for_execute":false,"output_contract":["ready_for_execute","summary","blockers","next_steps"]}',
             stderr="bundle drift",
         )
 
@@ -529,6 +533,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
                 },
                 "blockers": ["promotion_blocks_mismatch"],
                 "ready_for_execute": False,
+                "output_contract": ["ready_for_execute", "summary", "blockers", "next_steps"],
             },
         )
         self.assertEqual(payload["bundle_verifier_checks"], {"promotion_blocks_match": False})
@@ -545,6 +550,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             },
         )
         self.assertEqual(payload["bundle_verifier_blockers"], ["promotion_blocks_mismatch"])
+        self.assertEqual(
+            payload["bundle_verifier_output_contract"],
+            ["ready_for_execute", "summary", "blockers", "next_steps"],
+        )
         self.assertFalse(payload["ready_for_execute"])
         self.assertTrue(payload["runner_skipped"])
         self.assertTrue(payload["ledger_generator_skipped"])
@@ -553,7 +562,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         verifier_result = subprocess.CompletedProcess(
             args=["verifier"],
             returncode=5,
-            stdout='{"status":"error","checks":{"promotion_blocks_match":false},"summary":{"status":"error","promotion_blocks_match":false,"missing_read_order_count":0,"missing_command_file_count":0,"missing_review_input_count":0,"missing_reacquire_command_count":0,"missing_promote_script":false},"blockers":["missing_command_files","promotion_blocks_mismatch"],"ready_for_execute":false,"next_steps":{"recommended_example":"python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown","recommended_reason":"Bundle verifier reported blockers; inspect the markdown summary before executing the VM lane.","dry_run_example":"python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run","verify_only_example":"python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only","markdown_summary_example":"python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown","skip_bundle_verifier_example":"python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier"}}',
+            stdout='{"status":"error","checks":{"promotion_blocks_match":false},"summary":{"status":"error","promotion_blocks_match":false,"missing_read_order_count":0,"missing_command_file_count":0,"missing_review_input_count":0,"missing_reacquire_command_count":0,"missing_promote_script":false},"blockers":["missing_command_files","promotion_blocks_mismatch"],"ready_for_execute":false,"output_contract":["ready_for_execute","summary","blockers","next_steps"],"next_steps":{"recommended_example":"python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown","recommended_reason":"Bundle verifier reported blockers; inspect the markdown summary before executing the VM lane.","dry_run_example":"python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run","verify_only_example":"python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only","markdown_summary_example":"python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown","skip_bundle_verifier_example":"python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier"}}',
             stderr="bundle drift",
         )
 

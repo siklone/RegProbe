@@ -12,6 +12,7 @@ AUDIT_ROOT = REPO_ROOT / "registry-research-framework" / "audit"
 MANIFEST_JSON = AUDIT_ROOT / "power-request-override-reader-binding-execution-manifest-20260419.json"
 HANDOFF_JSON = AUDIT_ROOT / "power-request-override-handoff-index-20260419.json"
 REACQUIRE_PLAN_JSON = AUDIT_ROOT / "power-request-override-reader-binding-reacquire-plan-20260419.json"
+OUTPUT_CONTRACT = ["ready_for_execute", "summary", "blockers", "next_steps"]
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -148,6 +149,7 @@ def verify_bundle(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     payload["summary"] = summarize_checks(payload)
     payload["blockers"] = build_blockers(payload["summary"])
     payload["ready_for_execute"] = payload["status"] == "ok"
+    payload["output_contract"] = OUTPUT_CONTRACT
     payload["next_steps"] = build_next_steps(payload)
     return payload
 
@@ -200,6 +202,9 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Reason: `{next_steps.get('recommended_reason', '')}`",
         f"- Dry-run: `{next_steps.get('dry_run_example', '')}`",
         f"- Verify-only: `{next_steps.get('verify_only_example', '')}`",
+        "",
+        "## Output Contract",
+        f"- Keys: `{payload.get('output_contract', [])}`",
     ]
     return "\n".join(lines) + "\n"
 

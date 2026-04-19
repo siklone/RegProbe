@@ -46,6 +46,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         self.assertEqual(payload["summary"]["missing_command_file_count"], 0)
         self.assertEqual(payload["blockers"], [])
         self.assertTrue(payload["ready_for_execute"])
+        self.assertEqual(payload["output_contract"], ["ready_for_execute", "summary", "blockers", "next_steps"])
         self.assertEqual(
             payload["next_steps"]["recommended_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
@@ -70,6 +71,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         self.assertIn("## Next Steps", proc.stdout)
         self.assertIn("- Blockers: `[]`", proc.stdout)
         self.assertIn("python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only", proc.stdout)
+        self.assertIn("## Output Contract", proc.stdout)
 
     def test_cli_json_outputs_preview_targets(self) -> None:
         proc = subprocess.run(
@@ -90,6 +92,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         self.assertEqual(payload["summary"]["missing_read_order_count"], 0)
         self.assertEqual(payload["blockers"], [])
         self.assertTrue(payload["ready_for_execute"])
+        self.assertEqual(payload["output_contract"], ["ready_for_execute", "summary", "blockers", "next_steps"])
         self.assertEqual(
             payload["next_steps"]["dry_run_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
@@ -107,6 +110,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         self.assertTrue(payload["summary"]["missing_read_order_count"] > 0)
         self.assertTrue(payload["summary"]["missing_command_file_count"] > 0)
         self.assertFalse(payload["ready_for_execute"])
+        self.assertEqual(payload["output_contract"], ["ready_for_execute", "summary", "blockers", "next_steps"])
         self.assertEqual(
             payload["next_steps"]["recommended_example"],
             "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
