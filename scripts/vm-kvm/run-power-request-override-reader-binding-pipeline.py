@@ -9,10 +9,14 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-RUNNER_PATH = REPO_ROOT / "scripts" / "vm-kvm" / "run-power-request-override-reader-binding-reacquire.py"
-LEDGER_GENERATOR_PATH = (
-    REPO_ROOT / "registry-research-framework" / "scripts" / "generate_power_request_override_result_ledger.py"
-)
+
+
+def runner_path(repo_root: Path) -> Path:
+    return repo_root / "scripts" / "vm-kvm" / "run-power-request-override-reader-binding-reacquire.py"
+
+
+def ledger_generator_path(repo_root: Path) -> Path:
+    return repo_root / "registry-research-framework" / "scripts" / "generate_power_request_override_result_ledger.py"
 
 
 def artifact_paths(upload_dir: Path, output_name: str) -> dict[str, Path]:
@@ -32,7 +36,7 @@ def portable_path(path: Path, repo_root: Path) -> str:
 def build_runner_command(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> list[str]:
     return [
         sys.executable,
-        str(RUNNER_PATH),
+        str(runner_path(repo_root)),
         "--repo-root",
         str(repo_root),
         "--domain",
@@ -65,7 +69,7 @@ def build_generator_command(args: argparse.Namespace, repo_root: Path, upload_di
     umpo_paths = artifact_paths(upload_dir, args.umpo_output_name)
     return [
         sys.executable,
-        str(LEDGER_GENERATOR_PATH),
+        str(ledger_generator_path(repo_root)),
         "--run-id",
         args.run_id,
         "--response-stdout",
@@ -86,10 +90,12 @@ def build_generator_command(args: argparse.Namespace, repo_root: Path, upload_di
 def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> dict[str, object]:
     response_paths = artifact_paths(upload_dir, args.response_output_name)
     umpo_paths = artifact_paths(upload_dir, args.umpo_output_name)
+    resolved_runner = runner_path(repo_root)
+    resolved_ledger_generator = ledger_generator_path(repo_root)
     return {
         "mode": "dry-run" if args.dry_run else "execute",
-        "runner": portable_path(RUNNER_PATH, repo_root),
-        "ledger_generator": portable_path(LEDGER_GENERATOR_PATH, repo_root),
+        "runner": portable_path(resolved_runner, repo_root),
+        "ledger_generator": portable_path(resolved_ledger_generator, repo_root),
         "runner_command": build_runner_command(args, repo_root, upload_dir),
         "generator_command": build_generator_command(args, repo_root, upload_dir),
         "expected_artifacts": {
@@ -161,8 +167,8 @@ def main() -> int:
         return generator_proc.returncode
 
     payload = {
-        "runner": str(RUNNER_PATH.relative_to(repo_root)).replace("\\", "/"),
-        "ledger_generator": str(LEDGER_GENERATOR_PATH.relative_to(repo_root)).replace("\\", "/"),
+        "runner": portable_path(runner_path(repo_root), repo_root),
+        "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
         "runner_output": json.loads(runner_proc.stdout),
         "ledger_output": json.loads(generator_proc.stdout),
     }

@@ -71,6 +71,39 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             "/tmp/regprobe-bridge/local-kd-powerrequest-umpo-message-reacquire-20260419a-summary.json",
         )
 
+    def test_dry_run_honors_explicit_repo_root_for_helper_paths(self) -> None:
+        explicit_root = Path("/tmp/regprobe-alt-checkout")
+        proc = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--dry-run",
+                "--repo-root",
+                str(explicit_root),
+                "--upload-dir",
+                "/tmp/regprobe-bridge",
+            ],
+            cwd=str(REPO_ROOT),
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        payload = pipeline.json.loads(proc.stdout)
+
+        self.assertEqual(payload["runner"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
+        self.assertEqual(
+            payload["ledger_generator"],
+            "registry-research-framework/scripts/generate_power_request_override_result_ledger.py",
+        )
+        self.assertEqual(
+            payload["runner_command"][1],
+            "/tmp/regprobe-alt-checkout/scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py",
+        )
+        self.assertEqual(
+            payload["generator_command"][1],
+            "/tmp/regprobe-alt-checkout/registry-research-framework/scripts/generate_power_request_override_result_ledger.py",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
