@@ -24,6 +24,10 @@ def ledger_promoter_path(repo_root: Path) -> Path:
     return repo_root / "registry-research-framework" / "scripts" / "promote_power_request_override_result_ledger.py"
 
 
+def bundle_verifier_path(repo_root: Path) -> Path:
+    return repo_root / "registry-research-framework" / "scripts" / "verify_power_request_override_handoff_bundle.py"
+
+
 def artifact_paths(upload_dir: Path, output_name: str) -> dict[str, Path]:
     return {
         "stdout": upload_dir / f"{output_name}.stdout.txt",
@@ -133,11 +137,13 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
     resolved_runner = runner_path(repo_root)
     resolved_ledger_generator = ledger_generator_path(repo_root)
     resolved_ledger_promoter = ledger_promoter_path(repo_root)
+    resolved_bundle_verifier = bundle_verifier_path(repo_root)
     return {
         "mode": "dry-run" if args.dry_run else "execute",
         "runner": portable_path(resolved_runner, repo_root),
         "ledger_generator": portable_path(resolved_ledger_generator, repo_root),
         "ledger_promoter": portable_path(resolved_ledger_promoter, repo_root),
+        "bundle_verifier": portable_path(resolved_bundle_verifier, repo_root),
         "runner_command": build_runner_command(args, repo_root, upload_dir),
         "generator_command": build_generator_command(args, repo_root, upload_dir),
         "expected_artifacts": {
@@ -149,6 +155,11 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
             "markdown": str(Path(args.output_md).resolve()),
         },
         "scratch_policy": "The default ledger outputs are local-only gitignored autofill drafts; review them first, then promote them into dated audit files.",
+        "verify_bundle_first": {
+            "script": portable_path(resolved_bundle_verifier, repo_root),
+            "example": f"python3 {portable_path(resolved_bundle_verifier, repo_root)}",
+            "markdown_example": f"python3 {portable_path(resolved_bundle_verifier, repo_root)} --markdown",
+        },
         "promote_after_review": build_promotion_payload(args, repo_root),
     }
 
@@ -176,6 +187,16 @@ def build_promotion_payload(args: argparse.Namespace, repo_root: Path) -> dict[s
     }
 
 
+def build_bundle_verifier_payload(repo_root: Path) -> dict[str, str]:
+    resolved_bundle_verifier = bundle_verifier_path(repo_root)
+    verifier_rel = portable_path(resolved_bundle_verifier, repo_root)
+    return {
+        "script": verifier_rel,
+        "example": f"python3 {verifier_rel}",
+        "markdown_example": f"python3 {verifier_rel} --markdown",
+    }
+
+
 def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> tuple[dict[str, object], int]:
     runner_cmd = build_runner_command(args, repo_root, upload_dir)
     runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
@@ -189,6 +210,7 @@ def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path
         payload = {
             "runner": portable_path(runner_path(repo_root), repo_root),
             "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
+            "bundle_verifier": build_bundle_verifier_payload(repo_root),
             "promote_after_review": build_promotion_payload(args, repo_root),
             "runner_returncode": runner_proc.returncode,
             "runner_output": runner_output,
@@ -203,6 +225,7 @@ def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path
         payload = {
             "runner": portable_path(runner_path(repo_root), repo_root),
             "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
+            "bundle_verifier": build_bundle_verifier_payload(repo_root),
             "promote_after_review": build_promotion_payload(args, repo_root),
             "runner_returncode": runner_proc.returncode,
             "runner_output": runner_output,
@@ -218,6 +241,7 @@ def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path
     payload = {
         "runner": portable_path(runner_path(repo_root), repo_root),
         "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
+        "bundle_verifier": build_bundle_verifier_payload(repo_root),
         "promote_after_review": build_promotion_payload(args, repo_root),
         "runner_returncode": runner_proc.returncode,
         "runner_output": runner_output,

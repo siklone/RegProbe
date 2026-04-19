@@ -83,7 +83,15 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["ledger_promoter"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertEqual(
+            payload["bundle_verifier"],
+            "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+        )
         self.assertIn("gitignored autofill drafts", payload["scratch_policy"])
+        self.assertEqual(
+            payload["verify_bundle_first"]["example"],
+            "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+        )
         self.assertEqual(
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
@@ -138,6 +146,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             payload["ledger_promoter"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
+        self.assertEqual(
+            payload["bundle_verifier"],
+            "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
         )
         self.assertEqual(
             payload["promote_after_review"]["current_run_id"],
@@ -225,6 +237,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
         self.assertEqual(
+            payload["bundle_verifier"]["markdown_example"],
+            "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
+        )
+        self.assertEqual(
             payload["promote_after_review"]["current_run_id"],
             "power-request-override-reader-binding-reacquire",
         )
@@ -279,6 +295,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
         self.assertEqual(
+            payload["bundle_verifier"]["script"],
+            "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+        )
+        self.assertEqual(
             payload["promote_after_review"]["current_run_id"],
             "power-request-override-reader-binding-reacquire",
         )
@@ -331,6 +351,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
         self.assertEqual(
+            payload["bundle_verifier"]["script"],
+            "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+        )
+        self.assertEqual(
             payload["promote_after_review"]["current_run_id"],
             "power-request-override-reader-binding-reacquire",
         )
@@ -376,6 +400,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
+        self.assertEqual(
+            payload["bundle_verifier"]["script"],
+            "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
         )
         self.assertEqual(
             payload["promote_after_review"]["current_run_id"],
