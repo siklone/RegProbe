@@ -144,6 +144,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         payload = pipeline.json.loads(proc.stdout)
 
         self.assertEqual(payload["mode"], "verify-only")
+        self.assertEqual(
+            payload["pipeline_runner"]["path"],
+            "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+        )
         self.assertEqual(payload["bundle_verifier_returncode"], 0)
         self.assertEqual(
             payload["bundle_verifier"]["script"],
@@ -152,6 +156,14 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertTrue(payload["ready_for_execute"])
         self.assertEqual(payload["bundle_verifier_blockers"], [])
         self.assertEqual(payload["bundle_verifier_summary"]["status"], "ok")
+        self.assertEqual(
+            payload["next_steps"]["recommended_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+        )
+        self.assertEqual(
+            payload["next_steps"]["dry_run_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
+        )
 
     def test_dry_run_honors_explicit_repo_root_for_helper_paths(self) -> None:
         explicit_root = Path("/tmp/regprobe-alt-checkout")
@@ -528,6 +540,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertFalse(payload["ready_for_execute"])
         self.assertEqual(payload["bundle_verifier_output"], {})
         self.assertIn("stdout did not contain a JSON object", payload["bundle_verifier_stdout_parse_error"])
+        self.assertEqual(
+            payload["next_steps"]["recommended_example"],
+            "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
+        )
 
 
 if __name__ == "__main__":

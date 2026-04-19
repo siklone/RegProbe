@@ -206,6 +206,17 @@ def build_bundle_verifier_payload(repo_root: Path) -> dict[str, str]:
     }
 
 
+def build_pipeline_entry_payload(repo_root: Path) -> dict[str, str]:
+    pipeline_rel = portable_path(Path(__file__).resolve(), repo_root)
+    return {
+        "path": pipeline_rel,
+        "example": f"python3 {pipeline_rel}",
+        "dry_run_example": f"python3 {pipeline_rel} --dry-run",
+        "verify_only_example": f"python3 {pipeline_rel} --verify-only",
+        "skip_bundle_verifier_example": f"python3 {pipeline_rel} --skip-bundle-verifier",
+    }
+
+
 def summarize_bundle_verifier_output(verifier_output: dict[str, object]) -> tuple[dict[str, object], list[str]]:
     checks = verifier_output.get("checks") if isinstance(verifier_output, dict) else {}
     if not isinstance(checks, dict):
@@ -243,8 +254,11 @@ def run_bundle_verifier(repo_root: Path) -> tuple[dict[str, object], int]:
     verifier_output, verifier_parse_error = try_parse_json_object(verifier_proc.stdout)
     verifier_checks = verifier_output.get("checks") if isinstance(verifier_output, dict) else {}
     verifier_summary, verifier_blockers = summarize_bundle_verifier_output(verifier_output)
+    pipeline_entry = build_pipeline_entry_payload(repo_root)
+    ready_for_execute = verifier_proc.returncode == 0 and verifier_parse_error is None
     payload = {
         "mode": "verify-only",
+        "pipeline_runner": pipeline_entry,
         "bundle_verifier": build_bundle_verifier_payload(repo_root),
         "bundle_verifier_returncode": verifier_proc.returncode,
         "bundle_verifier_output": verifier_output,
@@ -254,7 +268,13 @@ def run_bundle_verifier(repo_root: Path) -> tuple[dict[str, object], int]:
         "bundle_verifier_stdout_parse_error": verifier_parse_error,
         "bundle_verifier_stdout": verifier_proc.stdout.strip(),
         "bundle_verifier_stderr": verifier_proc.stderr.strip(),
-        "ready_for_execute": verifier_proc.returncode == 0 and verifier_parse_error is None,
+        "ready_for_execute": ready_for_execute,
+        "next_steps": {
+            "recommended_example": pipeline_entry["example"] if ready_for_execute else build_bundle_verifier_payload(repo_root)["markdown_example"],
+            "dry_run_example": pipeline_entry["dry_run_example"],
+            "markdown_summary_example": build_bundle_verifier_payload(repo_root)["markdown_example"],
+            "skip_bundle_verifier_example": pipeline_entry["skip_bundle_verifier_example"],
+        },
     }
     return payload, verifier_proc.returncode or (1 if verifier_parse_error else 0)
 
