@@ -9,11 +9,22 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-AUDIT_ROOT = REPO_ROOT / "registry-research-framework" / "audit"
-RUNNER_PATH = REPO_ROOT / "scripts" / "vm-kvm" / "run-guest-local-kd-smoke.py"
 
-RESPONSE_COMMAND_FILE = AUDIT_ROOT / "power-request-override-response-reacquire-local-kd-20260419.txt"
-UMPO_COMMAND_FILE = AUDIT_ROOT / "power-request-override-umpo-message-reacquire-local-kd-20260419.txt"
+
+def audit_root(repo_root: Path) -> Path:
+    return repo_root / "registry-research-framework" / "audit"
+
+
+def local_kd_runner_path(repo_root: Path) -> Path:
+    return repo_root / "scripts" / "vm-kvm" / "run-guest-local-kd-smoke.py"
+
+
+def response_command_file(repo_root: Path) -> Path:
+    return audit_root(repo_root) / "power-request-override-response-reacquire-local-kd-20260419.txt"
+
+
+def umpo_command_file(repo_root: Path) -> Path:
+    return audit_root(repo_root) / "power-request-override-umpo-message-reacquire-local-kd-20260419.txt"
 
 
 def load_kd_commands(path: Path) -> list[str]:
@@ -29,11 +40,18 @@ def load_kd_commands(path: Path) -> list[str]:
     return commands
 
 
-def run_pass(*, repo_root: Path, output_name: str, command_file: Path, args: argparse.Namespace) -> dict[str, object]:
+def portable_path(path: Path, repo_root: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(repo_root)).replace("\\", "/")
+    except ValueError:
+        return str(path.resolve()).replace("\\", "/")
+
+
+def build_pass_command(*, repo_root: Path, output_name: str, command_file: Path, args: argparse.Namespace) -> list[str]:
     kd_commands = load_kd_commands(command_file)
     cmd = [
         sys.executable,
-        str(RUNNER_PATH),
+        str(local_kd_runner_path(repo_root)),
         "--repo-root",
         str(repo_root),
         "--domain",
@@ -59,17 +77,60 @@ def run_pass(*, repo_root: Path, output_name: str, command_file: Path, args: arg
     ]
     for kd_command in kd_commands:
         cmd.extend(["--kd-command", kd_command])
+    return cmd
 
+
+def run_pass(*, repo_root: Path, output_name: str, command_file: Path, args: argparse.Namespace) -> dict[str, object]:
+    kd_commands = load_kd_commands(command_file)
+    cmd = build_pass_command(repo_root=repo_root, output_name=output_name, command_file=command_file, args=args)
     proc = subprocess.run(cmd, cwd=str(repo_root), capture_output=True, text=True)
     stdout = proc.stdout.strip()
     payload = json.loads(stdout) if stdout else {}
     return {
         "output_name": output_name,
-        "command_file": str(command_file.relative_to(repo_root)).replace("\\", "/"),
+        "command_file": portable_path(command_file, repo_root),
         "kd_command_count": len(kd_commands),
         "returncode": proc.returncode,
         "runner_payload": payload,
         "stderr": proc.stderr.strip(),
+    }
+
+
+def build_plan_payload(args: argparse.Namespace, repo_root: Path) -> dict[str, object]:
+    response_file = response_command_file(repo_root)
+    umpo_file = umpo_command_file(repo_root)
+    return {
+        "mode": "dry-run",
+        "runner": portable_path(Path(__file__), repo_root),
+        "record_id": "power.control.power-request-override-subtree",
+        "passes": [
+            {
+                "output_name": args.response_output_name,
+                "command_file": portable_path(response_file, repo_root),
+                "kd_command_count": len(load_kd_commands(response_file)) if response_file.exists() else 0,
+                "command": build_pass_command(
+                    repo_root=repo_root,
+                    output_name=args.response_output_name,
+                    command_file=response_file,
+                    args=args,
+                )
+                if response_file.exists()
+                else [],
+            },
+            {
+                "output_name": args.umpo_output_name,
+                "command_file": portable_path(umpo_file, repo_root),
+                "kd_command_count": len(load_kd_commands(umpo_file)) if umpo_file.exists() else 0,
+                "command": build_pass_command(
+                    repo_root=repo_root,
+                    output_name=args.umpo_output_name,
+                    command_file=umpo_file,
+                    args=args,
+                )
+                if umpo_file.exists()
+                else [],
+            },
+        ],
     }
 
 
@@ -89,24 +150,33 @@ def main() -> int:
     parser.add_argument("--smoke-timeout-seconds", type=int, default=180)
     parser.add_argument("--response-output-name", default="local-kd-powerrequest-response-reacquire-20260419a")
     parser.add_argument("--umpo-output-name", default="local-kd-powerrequest-umpo-message-reacquire-20260419a")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Print the planned local-KD smoke commands without touching the VM.",
+    )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
+    if args.dry_run:
+        print(json.dumps(build_plan_payload(args, repo_root), indent=2))
+        return 0
+
     response = run_pass(
         repo_root=repo_root,
         output_name=args.response_output_name,
-        command_file=RESPONSE_COMMAND_FILE,
+        command_file=response_command_file(repo_root),
         args=args,
     )
     umpo = run_pass(
         repo_root=repo_root,
         output_name=args.umpo_output_name,
-        command_file=UMPO_COMMAND_FILE,
+        command_file=umpo_command_file(repo_root),
         args=args,
     )
 
     payload = {
-        "runner": str(Path(__file__).resolve().relative_to(repo_root)).replace("\\", "/"),
+        "runner": portable_path(Path(__file__), repo_root),
         "record_id": "power.control.power-request-override-subtree",
         "passes": [response, umpo],
     }
