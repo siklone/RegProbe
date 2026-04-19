@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-18T18:38:43.066431Z`
+Generated: `2026-04-19T02:21:49.790123Z`
 
 Blocked candidates: `18`
 
@@ -119,10 +119,23 @@ Blocked candidates: `18`
 - Feature area: `Session Manager Kernel Timer Resolution`
 - Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
 - Value name: `GlobalTimerResolutionRequests`
-- Blockers: `global-timer-resolution-intentional-hold-no-current-build-pivot`, `global-timer-resolution-no-primary-current-build-doc`, `global-timer-resolution-wpr-boot-no-hit-current-build`
+- Blockers: `global-timer-resolution-clean-wpr-subtree-only-no-value-hit-current-build`, `global-timer-resolution-intentional-hold-no-current-build-pivot`, `global-timer-resolution-no-primary-current-build-doc`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
-- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
+- Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
+
+### `power.control.power-request-override-subtree`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `6`
+- Feature area: `Power Request Override Routing`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
+- Value name: `(subtree root, Driver, Process, Service)`
+- Blockers: `intentional-hold`, `powerrequestoverride-static-context-adjacent-not-leaf-specific`, `powerrequestoverride-subtree-live-reader-binding-unresolved`, `powerrequestoverride-subtree-not-mapped-to-supported-app-surface`
+- Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-proof-20260418.json`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
 
 ### `power.control.power-watchdog-timeout-cluster`
 
@@ -201,32 +214,6 @@ Blocked candidates: `18`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
 
-### `system.kernel.timer-check-flags`
-
-- Lane: `intentional-hold`
-- Actionability: `hold`
-- Priority score: `6`
-- Feature area: `Session Manager Kernel Timer Diagnostics`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
-- Value name: `TimerCheckFlags`
-- Blockers: `timer-check-flags-intentional-hold-no-current-build-pivot`, `timer-check-flags-modern-bit-semantics-unproven`, `timer-check-flags-no-primary-current-build-doc`, `timer-check-flags-wpr-boot-no-hit-current-build`
-- Recent audit artifacts: `registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json`
-- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
-- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
-
-### `power.control.power-request-override-subtree`
-
-- Lane: `intentional-hold`
-- Actionability: `hold`
-- Priority score: `5`
-- Feature area: `Power Request Override Routing`
-- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerRequestOverride`
-- Value name: `(subtree root, Driver, Process, Service)`
-- Blockers: `intentional-hold`, `powerrequestoverride-restore-story-leaf-model-unproven`, `powerrequestoverride-static-context-adjacent-not-leaf-specific`, `powerrequestoverride-subtree-leaf-semantics-unresolved`, `powerrequestoverride-subtree-not-mapped-to-supported-app-surface`
-- Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-proof-20260418.json`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
-- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
-- Next action hint: Prove restore or rollback behavior for the exact subtree or value.
-
 ### `system.kernel-dpc-watchdog-control-cluster`
 
 - Lane: `intentional-hold`
@@ -252,3 +239,16 @@ Blocked candidates: `18`
 - Recent audit artifacts: `registry-research-framework/audit/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.json`
 - Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
 - Next action hint: Find a primary current-build Microsoft source or explicitly accept research-only status.
+
+### `system.kernel.timer-check-flags`
+
+- Lane: `intentional-hold`
+- Actionability: `hold`
+- Priority score: `5`
+- Feature area: `Session Manager Kernel Timer Diagnostics`
+- Key path: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel`
+- Value name: `TimerCheckFlags`
+- Blockers: `timer-check-flags-etw-stackwalk-helper-only-no-target-read`, `timer-check-flags-intentional-hold-no-current-build-pivot`, `timer-check-flags-modern-bit-semantics-unproven`, `timer-check-flags-no-primary-current-build-doc`, `timer-check-flags-wpr-boot-no-hit-current-build`
+- Recent audit artifacts: `registry-research-framework/audit/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.json`, `registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json`
+- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
+- Next action hint: Retry runtime capture with a narrower trigger or a more reliable trace lane.
