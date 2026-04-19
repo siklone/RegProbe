@@ -39,6 +39,11 @@ This is the single-entry index for the current `power.control.power-request-over
 - Dry-run first: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run`
 - That dry-run preview already includes the scratch ledger paths plus the exact dated promotion targets for the current run id.
 
+## Bundle Verifier
+
+- `python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
+- Markdown summary: `python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown`
+
 ## Runner
 
 - `python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`

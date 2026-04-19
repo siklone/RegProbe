@@ -23,6 +23,9 @@ LEDGER_GENERATOR_PATH = (
 LEDGER_PROMOTER_PATH = (
     REPO_ROOT / "registry-research-framework" / "scripts" / "promote_power_request_override_result_ledger.py"
 )
+HANDOFF_VERIFIER_PATH = (
+    REPO_ROOT / "registry-research-framework" / "scripts" / "verify_power_request_override_handoff_bundle.py"
+)
 SCRIPT_CATALOG_MD = REPO_ROOT / "Docs" / "research" / "script-catalog.md"
 GITIGNORE = REPO_ROOT / ".gitignore"
 EXECUTION_MANIFEST_MD = AUDIT_ROOT / "power-request-override-reader-binding-execution-manifest-20260419.md"
@@ -70,6 +73,15 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
         )
         self.assertTrue(PIPELINE_RUNNER_PATH.exists())
+        self.assertEqual(
+            manifest["bundle_verifier"]["path"],
+            "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+        )
+        self.assertEqual(
+            manifest["bundle_verifier"]["markdown_example"],
+            "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
+        )
+        self.assertTrue(HANDOFF_VERIFIER_PATH.exists())
         self.assertEqual(manifest["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
         self.assertTrue(RUNNER_PATH.exists())
         self.assertEqual(
@@ -127,6 +139,18 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
         )
         self.assertTrue(PIPELINE_RUNNER_PATH.exists())
+        self.assertEqual(
+            payload["bundle_verifier"]["path"],
+            "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+        )
+        self.assertEqual(
+            payload["bundle_verifier"]["example"],
+            "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+        )
+        self.assertEqual(
+            payload["bundle_verifier"]["markdown_example"],
+            "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
+        )
         self.assertEqual(payload["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
         self.assertTrue(RUNNER_PATH.exists())
         self.assertEqual(
@@ -201,8 +225,10 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py", content)
         self.assertIn("registry-research-framework/scripts/generate_power_request_override_result_ledger.py", content)
         self.assertIn("registry-research-framework/scripts/promote_power_request_override_result_ledger.py", content)
+        self.assertIn("registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py", content)
         self.assertTrue(LEDGER_GENERATOR_PATH.exists())
         self.assertTrue(LEDGER_PROMOTER_PATH.exists())
+        self.assertTrue(HANDOFF_VERIFIER_PATH.exists())
 
     def test_handoff_markdown_mentions_exact_current_run_promotion_targets(self) -> None:
         execution_manifest_md = EXECUTION_MANIFEST_MD.read_text(encoding="utf-8")

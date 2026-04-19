@@ -22,6 +22,21 @@ python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --d
 
 That dry-run payload also previews the scratch ledger paths and the exact dated promotion targets derived from the current run id.
 
+## Bundle Verifier
+
+- Path: `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
+- JSON summary:
+
+```bash
+python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py
+```
+
+- Markdown summary:
+
+```bash
+python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown
+```
+
 ## Runner
 
 - Path: `scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`

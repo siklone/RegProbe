@@ -75,11 +75,16 @@
       "role": "post-run result write-back template"
     }
   ],
-    "pipeline_runner": {
-        "path": "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
-        "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
-        "dry_run_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run"
-    },
+  "pipeline_runner": {
+    "path": "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+    "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+    "dry_run_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run"
+  },
+  "bundle_verifier": {
+    "path": "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+    "example": "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+    "markdown_example": "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown"
+  },
   "runner": {
     "path": "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py",
     "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py"
