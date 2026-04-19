@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-19T02:21:49.790123Z",
+  "generated_at": "2026-04-19T02:25:44.199668Z",
   "blocked_count": 18,
   "lane_counts": {
     "intentional-hold": 18
@@ -207,8 +207,8 @@
         "registry-research-framework/audit/power-request-override-runtime-audit-20260408.md",
         "registry-research-framework/audit/power-request-override-runtime-audit-20260408.json"
       ],
-      "suggested_command": "winopt research list-blocked --worklist --lane intentional-hold",
-      "next_action_hint": "Continue static RE or Ghidra work until the exact reader or initializer is named."
+      "suggested_command": "winopt research show-blocked power.control.power-request-override-subtree --json",
+      "next_action_hint": "Target the override response/message boundary next; start with PopPowerRequestHandleRequestOverrideQueryResponse and PopUmpoSendPowerMessage before widening the lane."
     },
     {
       "candidate_id": "power.control.power-watchdog-timeout-cluster",

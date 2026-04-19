@@ -1,6 +1,6 @@
 # Blocked Worklist
 
-Generated: `2026-04-19T02:21:49.790123Z`
+Generated: `2026-04-19T02:25:44.199668Z`
 
 Blocked candidates: `18`
 
@@ -134,8 +134,8 @@ Blocked candidates: `18`
 - Value name: `(subtree root, Driver, Process, Service)`
 - Blockers: `intentional-hold`, `powerrequestoverride-static-context-adjacent-not-leaf-specific`, `powerrequestoverride-subtree-live-reader-binding-unresolved`, `powerrequestoverride-subtree-not-mapped-to-supported-app-surface`
 - Recent audit artifacts: `registry-research-framework/audit/power-request-override-runtime-proof-20260418.json`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.md`, `registry-research-framework/audit/power-request-override-runtime-audit-20260408.json`
-- Suggested command: `winopt research list-blocked --worklist --lane intentional-hold`
-- Next action hint: Continue static RE or Ghidra work until the exact reader or initializer is named.
+- Suggested command: `winopt research show-blocked power.control.power-request-override-subtree --json`
+- Next action hint: Target the override response/message boundary next; start with PopPowerRequestHandleRequestOverrideQueryResponse and PopUmpoSendPowerMessage before widening the lane.
 
 ### `power.control.power-watchdog-timeout-cluster`
 

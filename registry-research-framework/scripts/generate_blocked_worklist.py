@@ -41,6 +41,8 @@ GENERIC_SLUG_WORDS = {
 
 def blocker_hint(blockers: list[str], lane: str) -> str:
     lowered = " | ".join(str(item).lower() for item in blockers)
+    if "live-reader-binding-unresolved" in lowered:
+        return "Target the override response/message boundary next; start with PopPowerRequestHandleRequestOverrideQueryResponse and PopUmpoSendPowerMessage before widening the lane."
     if "restore-story" in lowered or "rollback" in lowered:
         return "Prove restore or rollback behavior for the exact subtree or value."
     if "init-walker" in lowered or "specific-caller" in lowered or "string-or-symbol-hit" in lowered or "adjacent-not-leaf-specific" in lowered or "conditional-initialization" in lowered:
@@ -68,7 +70,10 @@ def priority_score_for(lane: str, blocker_count: int) -> int:
     return int(LANE_PRIORITY.get(lane, 0)) - int(blocker_count)
 
 
-def suggested_command_for(candidate_id: str, lane: str) -> str:
+def suggested_command_for(candidate_id: str, lane: str, blockers: list[str]) -> str:
+    lowered = " | ".join(str(item).lower() for item in blockers)
+    if "live-reader-binding-unresolved" in lowered:
+        return f"winopt research show-blocked {candidate_id} --json"
     if lane in {"ghidra", "runtime-trace", "restore-story"}:
         return f"winopt research show-blocked {candidate_id} --json"
     return f"winopt research list-blocked --worklist --lane {lane}"
@@ -215,7 +220,7 @@ def build_worklist() -> dict[str, Any]:
                 "key_path": str(target.get("path") or entry.get("key_path") or ""),
                 "value_name": str(target.get("value_name") or entry.get("value_name") or ""),
                 "recent_audit_artifacts": recent_audit_artifacts_for(candidate_id),
-                "suggested_command": suggested_command_for(candidate_id, lane),
+                "suggested_command": suggested_command_for(candidate_id, lane, blockers),
                 "next_action_hint": blocker_hint(blockers, lane),
             }
         )
