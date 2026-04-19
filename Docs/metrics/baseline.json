@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-04-18T03:40:37Z",
+  "generated_utc": "2026-04-19T11:03:56Z",
   "source": {
     "repository": "siklone/RegProbe",
     "workflow": "dotnet.yml",
@@ -109,7 +109,7 @@
   "cli_program": {
     "path": "cli/Program.cs",
     "method_count": 5,
-    "average_method_length": 14.8,
+    "average_method_length": 14.2,
     "direct_namespace_dependencies": [
       "System",
       "System.Collections.Generic",
@@ -123,7 +123,7 @@
     "methods": [
       {
         "member": "Main",
-        "line_count": 16,
+        "line_count": 13,
         "cyclomatic_complexity": 1,
         "start_line": 23
       },
@@ -131,25 +131,25 @@
         "member": "TryParseRisk",
         "line_count": 16,
         "cyclomatic_complexity": 2,
-        "start_line": 40
+        "start_line": 37
       },
       {
         "member": "WriteReport",
         "line_count": 9,
         "cyclomatic_complexity": 2,
-        "start_line": 57
+        "start_line": 54
       },
       {
         "member": "WriteStep",
         "line_count": 4,
         "cyclomatic_complexity": 1,
-        "start_line": 67
+        "start_line": 64
       },
       {
         "member": "EnsureCanRunTweak",
         "line_count": 29,
         "cyclomatic_complexity": 5,
-        "start_line": 72
+        "start_line": 69
       }
     ],
     "command_hotspots": [
@@ -168,7 +168,7 @@
       {
         "path": "cli/Commands/Program.ResearchCommand.Automation.cs",
         "member": "CreateResearchGenerateRegressionPackCommand",
-        "line_count": 60,
+        "line_count": 58,
         "cyclomatic_complexity": 11
       },
       {
@@ -218,6 +218,30 @@
       "event_handler_count": 0,
       "mutable_state_field_count": 0
     }
+  },
+  "post_wave_hotspot_targets": {
+    "active_review_targets": [
+      {
+        "path": "cli/Commands/Program.ResearchCommand*.cs",
+        "kind": "partial-family",
+        "aggregate_line_count": 648,
+        "note": "Research command logic now spans six partial files and remains a meaningful maintenance hotspot even though the root partial file is intentionally thin."
+      },
+      {
+        "path": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+        "member": "CreateTweaks",
+        "line_count": 1101,
+        "cyclomatic_complexity": 29,
+        "note": "Still a major maintenance hotspot and the clearest large-method target in the current app surface."
+      }
+    ],
+    "deferred_targets": [
+      {
+        "path": "app/ViewModels/TweakItemViewModel.cs",
+        "line_count": 1961,
+        "note": "Keep out of the active hotspot queue for now; it is already within the current 1961/1980 budget and should not be reopened in this wave."
+      }
+    ]
   },
   "core_scripting_dependencies": {
     "core_package_references": [],
