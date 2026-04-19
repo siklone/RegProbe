@@ -127,6 +127,32 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             "/tmp/regprobe-bridge/local-kd-powerrequest-umpo-message-reacquire-20260419a-summary.json",
         )
 
+    def test_verify_only_outputs_execute_readiness_payload(self) -> None:
+        proc = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT_PATH),
+                "--verify-only",
+                "--repo-root",
+                str(REPO_ROOT),
+            ],
+            cwd=str(REPO_ROOT),
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        payload = pipeline.json.loads(proc.stdout)
+
+        self.assertEqual(payload["mode"], "verify-only")
+        self.assertEqual(payload["bundle_verifier_returncode"], 0)
+        self.assertEqual(
+            payload["bundle_verifier"]["script"],
+            "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+        )
+        self.assertTrue(payload["ready_for_execute"])
+        self.assertEqual(payload["bundle_verifier_blockers"], [])
+        self.assertEqual(payload["bundle_verifier_summary"]["status"], "ok")
+
     def test_dry_run_honors_explicit_repo_root_for_helper_paths(self) -> None:
         explicit_root = Path("/tmp/regprobe-alt-checkout")
         proc = subprocess.run(
@@ -459,7 +485,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         verifier_result = subprocess.CompletedProcess(
             args=["verifier"],
             returncode=5,
-            stdout='{"status":"error"}',
+            stdout='{"status":"error","checks":{"promotion_blocks_match":false}}',
             stderr="bundle drift",
         )
 
@@ -469,9 +495,39 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(run_mock.call_count, 1)
         self.assertEqual(exit_code, 5)
         self.assertEqual(payload["bundle_verifier_returncode"], 5)
-        self.assertEqual(payload["bundle_verifier_output"], {"status": "error"})
+        self.assertEqual(payload["bundle_verifier_output"], {"status": "error", "checks": {"promotion_blocks_match": False}})
+        self.assertEqual(payload["bundle_verifier_checks"], {"promotion_blocks_match": False})
+        self.assertEqual(
+            payload["bundle_verifier_summary"],
+            {
+                "status": "error",
+                "promotion_blocks_match": False,
+                "missing_read_order_count": 0,
+                "missing_command_file_count": 0,
+                "missing_review_input_count": 0,
+                "missing_reacquire_command_count": 0,
+                "missing_promote_script": False,
+            },
+        )
+        self.assertEqual(payload["bundle_verifier_blockers"], ["promotion_blocks_mismatch"])
         self.assertTrue(payload["runner_skipped"])
         self.assertTrue(payload["ledger_generator_skipped"])
+
+    def test_run_bundle_verifier_reports_parse_failure_as_not_ready(self) -> None:
+        verifier_result = subprocess.CompletedProcess(
+            args=["verifier"],
+            returncode=0,
+            stdout="warning only",
+            stderr="",
+        )
+
+        with mock.patch.object(pipeline.subprocess, "run", side_effect=[verifier_result]):
+            payload, exit_code = pipeline.run_bundle_verifier(REPO_ROOT)
+
+        self.assertEqual(exit_code, 1)
+        self.assertFalse(payload["ready_for_execute"])
+        self.assertEqual(payload["bundle_verifier_output"], {})
+        self.assertIn("stdout did not contain a JSON object", payload["bundle_verifier_stdout_parse_error"])
 
 
 if __name__ == "__main__":

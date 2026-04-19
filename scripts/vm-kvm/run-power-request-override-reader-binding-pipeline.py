@@ -206,23 +206,66 @@ def build_bundle_verifier_payload(repo_root: Path) -> dict[str, str]:
     }
 
 
+def summarize_bundle_verifier_output(verifier_output: dict[str, object]) -> tuple[dict[str, object], list[str]]:
+    checks = verifier_output.get("checks") if isinstance(verifier_output, dict) else {}
+    if not isinstance(checks, dict):
+        return {}, []
+
+    summary = {
+        "status": verifier_output.get("status"),
+        "promotion_blocks_match": checks.get("promotion_blocks_match"),
+        "missing_read_order_count": len(checks.get("missing_read_order_paths") or []),
+        "missing_command_file_count": len(checks.get("missing_command_files") or []),
+        "missing_review_input_count": len(checks.get("missing_review_inputs") or []),
+        "missing_reacquire_command_count": len(checks.get("missing_reacquire_commands") or []),
+        "missing_promote_script": bool(checks.get("missing_promote_script")),
+    }
+
+    blockers: list[str] = []
+    if summary["promotion_blocks_match"] is False:
+        blockers.append("promotion_blocks_mismatch")
+    if summary["missing_read_order_count"]:
+        blockers.append("missing_read_order_paths")
+    if summary["missing_command_file_count"]:
+        blockers.append("missing_command_files")
+    if summary["missing_review_input_count"]:
+        blockers.append("missing_review_inputs")
+    if summary["missing_reacquire_command_count"]:
+        blockers.append("missing_reacquire_commands")
+    if summary["missing_promote_script"]:
+        blockers.append("missing_promote_script")
+    return summary, blockers
+
+
+def run_bundle_verifier(repo_root: Path) -> tuple[dict[str, object], int]:
+    verifier_cmd = build_bundle_verifier_command(repo_root)
+    verifier_proc = subprocess.run(verifier_cmd, cwd=str(repo_root), capture_output=True, text=True)
+    verifier_output, verifier_parse_error = try_parse_json_object(verifier_proc.stdout)
+    verifier_checks = verifier_output.get("checks") if isinstance(verifier_output, dict) else {}
+    verifier_summary, verifier_blockers = summarize_bundle_verifier_output(verifier_output)
+    payload = {
+        "mode": "verify-only",
+        "bundle_verifier": build_bundle_verifier_payload(repo_root),
+        "bundle_verifier_returncode": verifier_proc.returncode,
+        "bundle_verifier_output": verifier_output,
+        "bundle_verifier_checks": verifier_checks or {},
+        "bundle_verifier_summary": verifier_summary,
+        "bundle_verifier_blockers": verifier_blockers,
+        "bundle_verifier_stdout_parse_error": verifier_parse_error,
+        "bundle_verifier_stdout": verifier_proc.stdout.strip(),
+        "bundle_verifier_stderr": verifier_proc.stderr.strip(),
+        "ready_for_execute": verifier_proc.returncode == 0 and verifier_parse_error is None,
+    }
+    return payload, verifier_proc.returncode or (1 if verifier_parse_error else 0)
+
+
 def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> tuple[dict[str, object], int]:
     if not args.skip_bundle_verifier:
-        verifier_cmd = build_bundle_verifier_command(repo_root)
-        verifier_proc = subprocess.run(verifier_cmd, cwd=str(repo_root), capture_output=True, text=True)
-        verifier_output, verifier_parse_error = try_parse_json_object(verifier_proc.stdout)
-        if verifier_proc.returncode != 0 or verifier_parse_error:
-            payload = {
-                "bundle_verifier": build_bundle_verifier_payload(repo_root),
-                "bundle_verifier_returncode": verifier_proc.returncode,
-                "bundle_verifier_output": verifier_output,
-                "bundle_verifier_stdout_parse_error": verifier_parse_error,
-                "bundle_verifier_stdout": verifier_proc.stdout.strip(),
-                "bundle_verifier_stderr": verifier_proc.stderr.strip(),
-                "runner_skipped": True,
-                "ledger_generator_skipped": True,
-            }
-            return payload, verifier_proc.returncode or 1
+        payload, verifier_exit_code = run_bundle_verifier(repo_root)
+        if verifier_exit_code != 0:
+            payload["runner_skipped"] = True
+            payload["ledger_generator_skipped"] = True
+            return payload, verifier_exit_code
 
     runner_cmd = build_runner_command(args, repo_root, upload_dir)
     runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
@@ -309,6 +352,11 @@ def main() -> int:
         help="Print the planned reacquire and ledger-generation commands without touching the VM.",
     )
     parser.add_argument(
+        "--verify-only",
+        action="store_true",
+        help="Run only the handoff bundle verifier and print its execute-readiness payload.",
+    )
+    parser.add_argument(
         "--skip-bundle-verifier",
         action="store_true",
         help="Skip the handoff bundle preflight verifier before the execute path.",
@@ -321,6 +369,10 @@ def main() -> int:
     if args.dry_run:
         print(json.dumps(build_plan_payload(args, repo_root, upload_dir), indent=2))
         return 0
+    if args.verify_only:
+        payload, exit_code = run_bundle_verifier(repo_root)
+        print(json.dumps(payload, indent=2))
+        return exit_code
 
     payload, exit_code = execute_pipeline(args, repo_root, upload_dir)
     print(json.dumps(payload, indent=2))

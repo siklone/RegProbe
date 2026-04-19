@@ -72,6 +72,10 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             manifest["pipeline_runner"]["dry_run_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
         )
+        self.assertEqual(
+            manifest["pipeline_runner"]["verify_only_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
+        )
         self.assertTrue(PIPELINE_RUNNER_PATH.exists())
         self.assertEqual(
             manifest["bundle_verifier"]["path"],
@@ -82,6 +86,10 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
         )
         self.assertTrue(manifest["bundle_verifier"]["required_before_execute"])
+        self.assertEqual(
+            manifest["bundle_verifier"]["verify_only_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
+        )
         self.assertEqual(
             manifest["bundle_verifier"]["skip_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier",
@@ -143,6 +151,10 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             payload["pipeline_runner"]["dry_run_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
         )
+        self.assertEqual(
+            payload["pipeline_runner"]["verify_only_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
+        )
         self.assertTrue(PIPELINE_RUNNER_PATH.exists())
         self.assertEqual(
             payload["bundle_verifier"]["path"],
@@ -157,6 +169,10 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
         )
         self.assertTrue(payload["bundle_verifier"]["required_before_execute"])
+        self.assertEqual(
+            payload["bundle_verifier"]["verify_only_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
+        )
         self.assertEqual(
             payload["bundle_verifier"]["skip_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier",
@@ -233,6 +249,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
 
         self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py", content)
         self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py", content)
+        self.assertIn("--verify-only", content)
         self.assertIn("registry-research-framework/scripts/generate_power_request_override_result_ledger.py", content)
         self.assertIn("registry-research-framework/scripts/promote_power_request_override_result_ledger.py", content)
         self.assertIn("registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py", content)
@@ -260,9 +277,17 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn(target_json, execution_manifest_md)
         self.assertIn(target_md, execution_manifest_md)
         self.assertIn(promote_command, execution_manifest_md)
+        self.assertIn(
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
+            execution_manifest_md,
+        )
         self.assertIn(target_json, handoff_index_md)
         self.assertIn(target_md, handoff_index_md)
         self.assertIn(promote_command, handoff_index_md)
+        self.assertIn(
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
+            handoff_index_md,
+        )
 
     def test_pipeline_autofill_outputs_are_local_only(self) -> None:
         content = GITIGNORE.read_text(encoding="utf-8")

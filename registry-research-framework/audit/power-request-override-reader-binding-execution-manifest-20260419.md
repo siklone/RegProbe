@@ -22,6 +22,12 @@ python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --d
 
 That dry-run payload also previews the scratch ledger paths and the exact dated promotion targets derived from the current run id.
 
+Preflight the bundle and get an execute-readiness payload without touching the VM:
+
+```bash
+python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only
+```
+
 ## Bundle Verifier
 
 - Path: `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
@@ -36,6 +42,12 @@ python3 registry-research-framework/scripts/verify_power_request_override_handof
 
 ```bash
 python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown
+```
+
+- Same preflight through the pipeline entry point:
+
+```bash
+python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only
 ```
 
 Only bypass it intentionally:
