@@ -110,6 +110,32 @@ public sealed class NohutoChangeAnalyzerTests
     }
 
     [Fact]
+    public void Analyze_StringOverload_MatchesExplicitRepositoryDefinition()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "src/compare.cpp", Additions = 20, Deletions = 4 },
+            new() { Path = "installer/setup.iss", Additions = 7, Deletions = 1 },
+            new() { Path = "assets/icons/lucide/light/refresh.ico", Additions = 1, Deletions = 0 }
+        };
+
+        var stringAnalysis = NohutoChangeAnalyzer.Analyze("regkit", files);
+        var explicitAnalysis = NohutoChangeAnalyzer.Analyze(
+            NohutoConfigurationSourceCatalog.Get("regkit"),
+            files);
+
+        Assert.Equal(explicitAnalysis.TotalChangedFiles, stringAnalysis.TotalChangedFiles);
+        Assert.Equal(explicitAnalysis.DocumentationChangedFiles, stringAnalysis.DocumentationChangedFiles);
+        Assert.Equal(explicitAnalysis.ScriptChangedFiles, stringAnalysis.ScriptChangedFiles);
+        Assert.Equal(explicitAnalysis.SourceChangedFiles, stringAnalysis.SourceChangedFiles);
+        Assert.Equal(explicitAnalysis.AssetChangedFiles, stringAnalysis.AssetChangedFiles);
+        Assert.Equal(explicitAnalysis.DataChangedFiles, stringAnalysis.DataChangedFiles);
+        Assert.Equal(
+            explicitAnalysis.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)),
+            stringAnalysis.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)));
+    }
+
+    [Fact]
     public void Catalog_ContainsAllTrackedNohutoSources()
     {
         Assert.Collection(
