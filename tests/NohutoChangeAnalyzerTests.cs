@@ -149,6 +149,46 @@ public sealed class NohutoChangeAnalyzerTests
     }
 
     [Fact]
+    public void Analyze_ExplicitRepositoryOverload_ThrowsForNullRepository()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "README.md", Additions = 1, Deletions = 0 }
+        };
+
+        Assert.Throws<ArgumentNullException>(
+            () => NohutoChangeAnalyzer.Analyze((NohutoRepositoryDefinition)null!, files));
+    }
+
+    [Fact]
+    public void Analyze_ExplicitRepositoryOverload_ThrowsForNullChangedFiles()
+    {
+        var repository = NohutoConfigurationSourceCatalog.Get("win-registry");
+
+        Assert.Throws<ArgumentNullException>(
+            () => NohutoChangeAnalyzer.Analyze(repository, (IEnumerable<NohutoChangedFile>)null!));
+    }
+
+    [Fact]
+    public void Analyze_IgnoresNullAndWhitespacePaths()
+    {
+        var repository = NohutoConfigurationSourceCatalog.Get("win-registry");
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "records/Tcpip-Parameters.txt", Additions = 15, Deletions = 2 },
+            new() { Path = "   ", Additions = 40, Deletions = 4 },
+            new() { Path = string.Empty, Additions = 7, Deletions = 1 },
+            null!
+        };
+
+        var analysis = NohutoChangeAnalyzer.Analyze(repository, files);
+
+        Assert.Equal(1, analysis.TotalChangedFiles);
+        Assert.Equal(1, analysis.DataChangedFiles);
+        Assert.Contains(analysis.TopCategories, c => c.Category == "Network");
+    }
+
+    [Fact]
     public void Catalog_ContainsAllTrackedNohutoSources()
     {
         Assert.Collection(
