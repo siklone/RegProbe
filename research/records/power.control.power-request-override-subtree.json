@@ -250,7 +250,7 @@
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, bounded adjacent static context from retained Ghidra and local-KD query/store analysis, a stack-bearing ETW root/control-value read, and reversible powercfg-managed add/remove cycles for Process, Service, and Driver leaves through the documented command surface. That is enough to materially strengthen the storage and rollback story across all three leaves, but not enough to name the exact current-build reader binding, prove the live consumer path, or map the subtree to an app-ready apply surface. The record therefore remains a research-only draft and intentional hold.",
+    "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, bounded adjacent static context from retained Ghidra and local-KD query/store analysis, a stack-bearing ETW root/control-value read, and reversible powercfg-managed add/remove cycles for Process, Service, and Driver leaves through the documented command surface. That is enough to materially strengthen the storage and rollback story across all three leaves, but not enough to name the exact current-build reader binding, prove the live consumer path, or map the subtree to an app-ready apply surface. The current best next lane is no longer a generic subtree reader search; the retained kernel evidence narrows the unresolved live binding to the override response and UMPO message boundary around `PopPowerRequestHandleRequestOverrideQueryResponse` and `PopUmpoSendPowerMessage`. The record therefore remains a research-only draft and intentional hold.",
     "blocking_issues": [
       "powerrequestoverride-subtree-live-reader-binding-unresolved",
       "powerrequestoverride-static-context-adjacent-not-leaf-specific",
@@ -259,9 +259,9 @@
     ]
   },
   "open_questions": [
-    "Which component reads or seeds the Driver, Process, and Service leaves under PowerRequestOverride on the current build?",
-    "Does the live reader/consumer path use the same observed `7` bitmask model captured through powercfg-managed Process, Service, and Driver entries, or is the storage model broader than the runtime consumer semantics?",
-    "Can a dedicated Ghidra or debugger-assisted pass tie the subtree more tightly to the visible UMPO override family and the current-build registry reader?"
+    "Does `PopPowerRequestHandleRequestOverrideQueryResponse` or an adjacent response handler bind the live PowerRequestOverride payload to per-request state on the current build?",
+    "What exact payload does `PopUmpoSendPowerMessage` carry for the override query lane, and does that boundary explain the observed Process, Service, and Driver leaf storage model without requiring a direct retained registry-reader symbol?",
+    "Does the live reader/consumer path use the same observed `7` bitmask model captured through powercfg-managed Process, Service, and Driver entries, or is the storage model broader than the runtime consumer semantics?"
   ],
   "tested_on": [
     {
@@ -295,5 +295,5 @@
       "notes": "The later 2026-04-18 QGA follow-up started from empty Service and Driver leaves, materialized Audiosrv=7 and ACPI=7 through powercfg, and removed both entries through the same command surface."
     }
   ],
-  "last_reviewed_utc": "2026-04-18T18:38:18Z"
+  "last_reviewed_utc": "2026-04-19T02:45:00Z"
 }

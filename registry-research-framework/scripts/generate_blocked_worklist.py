@@ -70,8 +70,8 @@ def priority_score_for(lane: str, blocker_count: int) -> int:
     return int(LANE_PRIORITY.get(lane, 0)) - int(blocker_count)
 
 
-def suggested_command_for(candidate_id: str, lane: str, blockers: list[str]) -> str:
-    lowered = " | ".join(str(item).lower() for item in blockers)
+def suggested_command_for(candidate_id: str, lane: str, blockers: list[str] | None = None) -> str:
+    lowered = " | ".join(str(item).lower() for item in (blockers or []))
     if "live-reader-binding-unresolved" in lowered:
         return f"winopt research show-blocked {candidate_id} --json"
     if lane in {"ghidra", "runtime-trace", "restore-story"}:

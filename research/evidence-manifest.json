@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-18T18:38:41.696568Z",
+  "generated_utc": "2026-04-19T02:30:30.315350Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 323,
@@ -18911,8 +18911,8 @@
         }
       },
       "source_file": "research/records/power.control.power-request-override-subtree.json",
-      "source_file_sha256": "2b66151c6746725c3c2690be2a612dcc3e8b5733e2489a7f2bc4b8ba5398e4e5",
-      "source_file_size_bytes": 22933,
+      "source_file_sha256": "94e6fd131b2902b77750dc711d30f2b5bf1a0bc53f1e133dfb7f0a53689888db",
+      "source_file_size_bytes": 23351,
       "name": "Power Request Override Subtree",
       "category": "Power",
       "area": "Power Request Override Routing",
@@ -18925,7 +18925,7 @@
         "restore_default_supported": false,
         "restore_previous_supported": true,
         "needs_vm_validation": true,
-        "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, bounded adjacent static context from retained Ghidra and local-KD query/store analysis, a stack-bearing ETW root/control-value read, and reversible powercfg-managed add/remove cycles for Process, Service, and Driver leaves through the documented command surface. That is enough to materially strengthen the storage and rollback story across all three leaves, but not enough to name the exact current-build reader binding, prove the live consumer path, or map the subtree to an app-ready apply surface. The record therefore remains a research-only draft and intentional hold.",
+        "why": "PowerRequestOverride now has retained subtree presence, retained runtime path evidence, retained wildcard local-KD lineage on the current build, bounded adjacent static context from retained Ghidra and local-KD query/store analysis, a stack-bearing ETW root/control-value read, and reversible powercfg-managed add/remove cycles for Process, Service, and Driver leaves through the documented command surface. That is enough to materially strengthen the storage and rollback story across all three leaves, but not enough to name the exact current-build reader binding, prove the live consumer path, or map the subtree to an app-ready apply surface. The current best next lane is no longer a generic subtree reader search; the retained kernel evidence narrows the unresolved live binding to the override response and UMPO message boundary around `PopPowerRequestHandleRequestOverrideQueryResponse` and `PopUmpoSendPowerMessage`. The record therefore remains a research-only draft and intentional hold.",
         "blocking_issues": [
           "powerrequestoverride-subtree-live-reader-binding-unresolved",
           "powerrequestoverride-static-context-adjacent-not-leaf-specific",
