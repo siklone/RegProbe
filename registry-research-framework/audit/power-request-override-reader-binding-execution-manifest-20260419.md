@@ -34,6 +34,7 @@ That payload now carries the same verifier summary plus a compact `next_steps` b
 
 - Path: `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
 - This verifier is the default preflight gate before the execute path runs.
+- Its JSON and markdown outputs now include both a compact summary block and concrete next-step guidance.
 - JSON summary:
 
 ```bash
