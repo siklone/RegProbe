@@ -59,8 +59,22 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             manifest["promotion"]["promote_script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertEqual(
+            manifest["promotion"]["current_run_id"],
+            "power-request-override-reader-binding-reacquire",
+        )
+        self.assertIn(
+            "--run-id power-request-override-reader-binding-reacquire",
+            manifest["promotion"]["current_run_example"],
+        )
         self.assertIn("gitignored", manifest["promotion"]["scratch_policy"])
         self.assertTrue(manifest["promotion"]["promote_dry_run_example"].endswith("--dry-run"))
+        self.assertTrue(manifest["promotion"]["current_run_dry_run_example"].endswith("--dry-run"))
+        self.assertTrue(
+            manifest["promotion"]["preview_targets"]["target_json"].endswith(
+                "power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"
+            )
+        )
         self.assertIn("refuses to overwrite", manifest["promotion"]["overwrite_policy"])
         self.assertTrue(LEDGER_PROMOTER_PATH.exists())
         entries = manifest.get("entries") or []
@@ -102,7 +116,21 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             payload["promotion"]["promote_script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertEqual(
+            payload["promotion"]["current_run_id"],
+            "power-request-override-reader-binding-reacquire",
+        )
+        self.assertIn(
+            "--run-id power-request-override-reader-binding-reacquire",
+            payload["promotion"]["current_run_example"],
+        )
         self.assertTrue(payload["promotion"]["promote_dry_run_example"].endswith("--dry-run"))
+        self.assertTrue(payload["promotion"]["current_run_dry_run_example"].endswith("--dry-run"))
+        self.assertTrue(
+            payload["promotion"]["preview_targets"]["target_md"].endswith(
+                "power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md"
+            )
+        )
         self.assertIn("local-only", payload["promotion"]["note"])
         self.assertIn("refuses to overwrite", payload["promotion"]["overwrite_policy"])
 

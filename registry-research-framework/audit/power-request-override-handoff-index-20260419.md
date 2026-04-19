@@ -62,6 +62,11 @@ If you just want to confirm the destination names first:
 python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id> --dry-run
 ```
 
+For the current default run id, the dated target pair is:
+
+- `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json`
+- `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md`
+
 ## Ready-To-Run Files
 
 - `registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt`

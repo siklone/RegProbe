@@ -84,6 +84,11 @@ Dry-run the target names first if you want to confirm the dated output paths wit
 python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id> --dry-run
 ```
 
+For the current default run id, the dated target pair is already known in advance:
+
+- `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json`
+- `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md`
+
 ## Non-Goals
 
 - Do not reopen a generic `*PowerRequest*Reg*` symbol hunt first.

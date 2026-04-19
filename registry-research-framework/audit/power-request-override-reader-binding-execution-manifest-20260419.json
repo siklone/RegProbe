@@ -62,6 +62,15 @@
     "promote_script": "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
     "promote_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id>",
     "promote_dry_run_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id> --dry-run",
+    "current_run_id": "power-request-override-reader-binding-reacquire",
+    "current_run_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id power-request-override-reader-binding-reacquire",
+    "current_run_dry_run_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id power-request-override-reader-binding-reacquire --dry-run",
+    "preview_targets": {
+      "source_json": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.json",
+      "source_md": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.md",
+      "target_json": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json",
+      "target_md": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md"
+    },
     "overwrite_policy": "The promote step refuses to overwrite an existing dated ledger unless --force is passed intentionally."
   },
   "non_goals": [
