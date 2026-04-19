@@ -133,6 +133,37 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
     }
 
 
+def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> tuple[dict[str, object], int]:
+    runner_cmd = build_runner_command(args, repo_root, upload_dir)
+    runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
+    runner_output = parse_json_object(runner_proc.stdout)
+
+    generator_cmd = build_generator_command(args, repo_root, upload_dir)
+    generator_proc = subprocess.run(generator_cmd, cwd=str(repo_root), capture_output=True, text=True)
+    if generator_proc.returncode != 0:
+        payload = {
+            "runner": portable_path(runner_path(repo_root), repo_root),
+            "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
+            "runner_returncode": runner_proc.returncode,
+            "runner_output": runner_output,
+            "runner_stderr": runner_proc.stderr.strip(),
+            "ledger_generator_returncode": generator_proc.returncode,
+            "ledger_generator_stdout": generator_proc.stdout.strip(),
+            "ledger_generator_stderr": generator_proc.stderr.strip(),
+        }
+        return payload, generator_proc.returncode
+
+    payload = {
+        "runner": portable_path(runner_path(repo_root), repo_root),
+        "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
+        "runner_returncode": runner_proc.returncode,
+        "runner_output": runner_output,
+        "runner_stderr": runner_proc.stderr.strip(),
+        "ledger_output": parse_json_object(generator_proc.stdout),
+    }
+    return payload, runner_proc.returncode
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run the PowerRequestOverride reacquire wrapper and then generate a prefilled result ledger."
@@ -172,32 +203,9 @@ def main() -> int:
         print(json.dumps(build_plan_payload(args, repo_root, upload_dir), indent=2))
         return 0
 
-    runner_cmd = build_runner_command(args, repo_root, upload_dir)
-    runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
-    if runner_proc.returncode != 0:
-        if runner_proc.stdout:
-            print(runner_proc.stdout)
-        if runner_proc.stderr:
-            print(runner_proc.stderr, file=sys.stderr)
-        return runner_proc.returncode
-
-    generator_cmd = build_generator_command(args, repo_root, upload_dir)
-    generator_proc = subprocess.run(generator_cmd, cwd=str(repo_root), capture_output=True, text=True)
-    if generator_proc.returncode != 0:
-        if generator_proc.stdout:
-            print(generator_proc.stdout)
-        if generator_proc.stderr:
-            print(generator_proc.stderr, file=sys.stderr)
-        return generator_proc.returncode
-
-    payload = {
-        "runner": portable_path(runner_path(repo_root), repo_root),
-        "ledger_generator": portable_path(ledger_generator_path(repo_root), repo_root),
-        "runner_output": parse_json_object(runner_proc.stdout),
-        "ledger_output": parse_json_object(generator_proc.stdout),
-    }
+    payload, exit_code = execute_pipeline(args, repo_root, upload_dir)
     print(json.dumps(payload, indent=2))
-    return 0
+    return exit_code
 
 
 if __name__ == "__main__":

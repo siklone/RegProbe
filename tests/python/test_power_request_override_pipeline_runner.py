@@ -4,7 +4,9 @@ import importlib.util
 import subprocess
 import sys
 import unittest
+from argparse import Namespace
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -111,6 +113,49 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             payload["generator_command"][1],
             "/tmp/regprobe-alt-checkout/registry-research-framework/scripts/generate_power_request_override_result_ledger.py",
+        )
+
+    def test_execute_pipeline_still_generates_ledger_after_runner_failure(self) -> None:
+        args = Namespace(
+            domain="regprobe-win11-25h2-session",
+            connect="qemu:///session",
+            bridge_base_url="http://10.0.2.2:8766",
+            upload_dir="/tmp/regprobe-bridge",
+            guest_scripts_root=r"C:\RegProbe-Diag\bootstrap",
+            delay_ms="18",
+            wake_key="KEY_ENTER",
+            timeout_seconds=240,
+            smoke_timeout_seconds=180,
+            response_output_name="local-kd-powerrequest-response-reacquire-20260419a",
+            umpo_output_name="local-kd-powerrequest-umpo-message-reacquire-20260419a",
+            run_id="power-request-override-reader-binding-reacquire",
+            output_json=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.json"),
+            output_md=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.md"),
+        )
+        runner_result = subprocess.CompletedProcess(
+            args=["runner"],
+            returncode=7,
+            stdout='{"passes": [{"returncode": 7}]}',
+            stderr="timeout while reacquiring UMPO pass",
+        )
+        generator_result = subprocess.CompletedProcess(
+            args=["generator"],
+            returncode=0,
+            stdout='{"output_json": "registry-research-framework/audit/autofill.json"}',
+            stderr="",
+        )
+
+        with mock.patch.object(pipeline.subprocess, "run", side_effect=[runner_result, generator_result]) as run_mock:
+            payload, exit_code = pipeline.execute_pipeline(args, REPO_ROOT, Path("/tmp/regprobe-bridge"))
+
+        self.assertEqual(run_mock.call_count, 2)
+        self.assertEqual(exit_code, 7)
+        self.assertEqual(payload["runner_returncode"], 7)
+        self.assertEqual(payload["runner_stderr"], "timeout while reacquiring UMPO pass")
+        self.assertEqual(payload["runner_output"], {"passes": [{"returncode": 7}]})
+        self.assertEqual(
+            payload["ledger_output"],
+            {"output_json": "registry-research-framework/audit/autofill.json"},
         )
 
 
