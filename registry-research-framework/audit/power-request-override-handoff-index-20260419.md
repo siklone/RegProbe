@@ -39,14 +39,14 @@ This is the single-entry index for the current `power.control.power-request-over
 - Dry-run first: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run`
 - Preflight only: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only`
 - That dry-run preview already includes the scratch ledger paths plus the exact dated promotion targets for the current run id.
-- The `--verify-only` payload now returns execute readiness and a `next_steps` block so the operator sees the recommended follow-up command immediately.
+- The `--verify-only` payload now returns execute readiness, the verifier `blockers` list, and a `next_steps` block so the operator sees the recommended follow-up command immediately.
 
 ## Bundle Verifier
 
 - `python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
 - Markdown summary: `python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown`
 - Same preflight through the pipeline entry point: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only`
-- The verifier now returns both a compact summary block and concrete next-step guidance.
+- The verifier now returns both a compact summary block, an explicit `blockers` list, and concrete next-step guidance.
 - The execute path runs this verifier by default before it touches the VM.
 - When the bundle is not ready, the pipeline `next_steps.recommended_example` falls back to the markdown summary command for quick human triage.
 - Only bypass it intentionally: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier`
