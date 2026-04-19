@@ -16,6 +16,7 @@
     {
       "artifact_id": "local-kd-powerrequest-response-reacquire",
       "goal": "Retain stdout for uf nt!PopPowerRequestHandleRequestOverrideQueryResponse.",
+      "command_file": "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
       "must_include": [
         "stdout.txt",
         "summary.json",
@@ -25,6 +26,7 @@
     {
       "artifact_id": "local-kd-powerrequest-umpo-message-reacquire",
       "goal": "Retain stdout for uf nt!PopUmpoSendPowerMessage.",
+      "command_file": "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt",
       "must_include": [
         "stdout.txt",
         "summary.json",

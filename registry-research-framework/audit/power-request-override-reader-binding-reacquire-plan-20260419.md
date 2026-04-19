@@ -17,6 +17,7 @@
 ### local-kd-powerrequest-response-reacquire
 
 - Goal: retain stdout for `uf nt!PopPowerRequestHandleRequestOverrideQueryResponse`
+- Command file: `registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt`
 - Must include:
   - `stdout.txt`
   - `summary.json`
@@ -25,6 +26,7 @@
 ### local-kd-powerrequest-umpo-message-reacquire
 
 - Goal: retain stdout for `uf nt!PopUmpoSendPowerMessage`
+- Command file: `registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt`
 - Must include:
   - `stdout.txt`
   - `summary.json`
