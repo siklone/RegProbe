@@ -43,6 +43,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         self.assertFalse(payload["checks"]["missing_promote_script"])
         self.assertEqual(payload["checks"]["missing_command_files"], [])
         self.assertEqual(payload["summary"]["missing_command_file_count"], 0)
+        self.assertEqual(payload["blockers"], [])
         self.assertEqual(
             payload["next_steps"]["recommended_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
@@ -64,6 +65,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
             proc.stdout,
         )
         self.assertIn("## Next Steps", proc.stdout)
+        self.assertIn("- Blockers: `[]`", proc.stdout)
         self.assertIn("python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only", proc.stdout)
 
     def test_cli_json_outputs_preview_targets(self) -> None:
@@ -83,6 +85,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
             )
         )
         self.assertEqual(payload["summary"]["missing_read_order_count"], 0)
+        self.assertEqual(payload["blockers"], [])
         self.assertEqual(
             payload["next_steps"]["dry_run_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",

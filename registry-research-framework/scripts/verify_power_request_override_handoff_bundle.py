@@ -51,6 +51,23 @@ def summarize_checks(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def build_blockers(summary: dict[str, Any]) -> list[str]:
+    blockers: list[str] = []
+    if summary.get("promotion_blocks_match") is False:
+        blockers.append("promotion_blocks_mismatch")
+    if summary.get("missing_read_order_count"):
+        blockers.append("missing_read_order_paths")
+    if summary.get("missing_command_file_count"):
+        blockers.append("missing_command_files")
+    if summary.get("missing_review_input_count"):
+        blockers.append("missing_review_inputs")
+    if summary.get("missing_reacquire_command_count"):
+        blockers.append("missing_reacquire_commands")
+    if summary.get("missing_promote_script"):
+        blockers.append("missing_promote_script")
+    return blockers
+
+
 def build_next_steps(payload: dict[str, Any]) -> dict[str, str]:
     if payload.get("status") == "ok":
         recommended_example = "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py"
@@ -129,6 +146,7 @@ def verify_bundle(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         },
     }
     payload["summary"] = summarize_checks(payload)
+    payload["blockers"] = build_blockers(payload["summary"])
     payload["next_steps"] = build_next_steps(payload)
     return payload
 
@@ -139,6 +157,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
     checks = payload["checks"]
     summary = payload.get("summary") or {}
     next_steps = payload.get("next_steps") or {}
+    blockers = payload.get("blockers") or []
     lines = [
         "# PowerRequestOverride Handoff Bundle Verification",
         "",
@@ -172,6 +191,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Missing command-file count: `{summary.get('missing_command_file_count', '')}`",
         f"- Missing review-input count: `{summary.get('missing_review_input_count', '')}`",
         f"- Missing reacquire-command count: `{summary.get('missing_reacquire_command_count', '')}`",
+        f"- Blockers: `{blockers}`",
         "",
         "## Next Steps",
         f"- Recommended command: `{next_steps.get('recommended_example', '')}`",

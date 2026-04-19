@@ -155,6 +155,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         )
         self.assertTrue(payload["ready_for_execute"])
         self.assertEqual(payload["bundle_verifier_blockers"], [])
+        self.assertEqual(payload["bundle_verifier_output"]["blockers"], [])
         self.assertEqual(payload["bundle_verifier_summary"]["status"], "ok")
         self.assertEqual(
             payload["next_steps"]["recommended_example"],
@@ -501,7 +502,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         verifier_result = subprocess.CompletedProcess(
             args=["verifier"],
             returncode=5,
-            stdout='{"status":"error","checks":{"promotion_blocks_match":false}}',
+            stdout='{"status":"error","checks":{"promotion_blocks_match":false},"summary":{"status":"error","promotion_blocks_match":false,"missing_read_order_count":0,"missing_command_file_count":0,"missing_review_input_count":0,"missing_reacquire_command_count":0,"missing_promote_script":false},"blockers":["promotion_blocks_mismatch"]}',
             stderr="bundle drift",
         )
 
@@ -511,7 +512,23 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(run_mock.call_count, 1)
         self.assertEqual(exit_code, 5)
         self.assertEqual(payload["bundle_verifier_returncode"], 5)
-        self.assertEqual(payload["bundle_verifier_output"], {"status": "error", "checks": {"promotion_blocks_match": False}})
+        self.assertEqual(
+            payload["bundle_verifier_output"],
+            {
+                "status": "error",
+                "checks": {"promotion_blocks_match": False},
+                "summary": {
+                    "status": "error",
+                    "promotion_blocks_match": False,
+                    "missing_read_order_count": 0,
+                    "missing_command_file_count": 0,
+                    "missing_review_input_count": 0,
+                    "missing_reacquire_command_count": 0,
+                    "missing_promote_script": False,
+                },
+                "blockers": ["promotion_blocks_mismatch"],
+            },
+        )
         self.assertEqual(payload["bundle_verifier_checks"], {"promotion_blocks_match": False})
         self.assertEqual(
             payload["bundle_verifier_summary"],

@@ -254,9 +254,10 @@ def run_bundle_verifier(repo_root: Path) -> tuple[dict[str, object], int]:
     verifier_output, verifier_parse_error = try_parse_json_object(verifier_proc.stdout)
     verifier_checks = verifier_output.get("checks") if isinstance(verifier_output, dict) else {}
     verifier_summary = verifier_output.get("summary") if isinstance(verifier_output, dict) else None
+    verifier_blockers = verifier_output.get("blockers") if isinstance(verifier_output, dict) else None
     if not isinstance(verifier_summary, dict):
         verifier_summary, verifier_blockers = summarize_bundle_verifier_output(verifier_output)
-    else:
+    elif not isinstance(verifier_blockers, list):
         verifier_blockers = []
         if verifier_summary.get("promotion_blocks_match") is False:
             verifier_blockers.append("promotion_blocks_mismatch")
