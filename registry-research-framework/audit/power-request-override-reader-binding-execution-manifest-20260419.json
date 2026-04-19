@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-19T03:48:00Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "status": "ready",
+  "operator": {
+    "posture": "run-narrow-kd-pass",
+    "next_action": "Run the two local-KD command files, retain stdout/summary/local-kd artifacts for both, then classify the result with the review rubric."
+  },
+  "selected_count": 2,
+  "entries": [
+    {
+      "entry_id": "local-kd-powerrequest-response-reacquire",
+      "command_file": "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
+      "goal": "Reacquire response-side disassembly for PopPowerRequestHandleRequestOverrideQueryResponse.",
+      "required_outputs": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ],
+      "success_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopPowerRequestHandleRequestOverrideQueryResponse",
+        "REGPROBE_LOCALKD_END"
+      ]
+    },
+    {
+      "entry_id": "local-kd-powerrequest-umpo-message-reacquire",
+      "command_file": "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt",
+      "goal": "Reacquire UMPO message disassembly for PopUmpoSendPowerMessage.",
+      "required_outputs": [
+        "stdout.txt",
+        "summary.json",
+        "local-kd.txt"
+      ],
+      "success_markers": [
+        "REGPROBE_LOCALKD_BEGIN",
+        "PopUmpoSendPowerMessage",
+        "REGPROBE_LOCALKD_END"
+      ]
+    }
+  ],
+  "review_inputs": [
+    "registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.md",
+    "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.md"
+  ],
+  "non_goals": [
+    "Do not reopen a generic *PowerRequest*Reg* symbol hunt first.",
+    "Do not rerun a broad subtree runtime capture first.",
+    "Do not spend the next sprint on another powercfg materialization cycle."
+  ]
+}
