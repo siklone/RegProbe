@@ -255,6 +255,7 @@ def run_bundle_verifier(repo_root: Path) -> tuple[dict[str, object], int]:
     verifier_checks = verifier_output.get("checks") if isinstance(verifier_output, dict) else {}
     verifier_summary = verifier_output.get("summary") if isinstance(verifier_output, dict) else None
     verifier_blockers = verifier_output.get("blockers") if isinstance(verifier_output, dict) else None
+    verifier_ready_for_execute = verifier_output.get("ready_for_execute") if isinstance(verifier_output, dict) else None
     if not isinstance(verifier_summary, dict):
         verifier_summary, verifier_blockers = summarize_bundle_verifier_output(verifier_output)
     elif not isinstance(verifier_blockers, list):
@@ -272,7 +273,10 @@ def run_bundle_verifier(repo_root: Path) -> tuple[dict[str, object], int]:
         if verifier_summary.get("missing_promote_script"):
             verifier_blockers.append("missing_promote_script")
     pipeline_entry = build_pipeline_entry_payload(repo_root)
-    ready_for_execute = verifier_proc.returncode == 0 and verifier_parse_error is None
+    if isinstance(verifier_ready_for_execute, bool):
+        ready_for_execute = verifier_ready_for_execute and verifier_proc.returncode == 0 and verifier_parse_error is None
+    else:
+        ready_for_execute = verifier_proc.returncode == 0 and verifier_parse_error is None
     next_steps = verifier_output.get("next_steps") if isinstance(verifier_output, dict) else None
     if not isinstance(next_steps, dict):
         if ready_for_execute:

@@ -45,6 +45,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         self.assertEqual(payload["checks"]["missing_command_files"], [])
         self.assertEqual(payload["summary"]["missing_command_file_count"], 0)
         self.assertEqual(payload["blockers"], [])
+        self.assertTrue(payload["ready_for_execute"])
         self.assertEqual(
             payload["next_steps"]["recommended_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
@@ -60,6 +61,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         )
 
         self.assertIn("# PowerRequestOverride Handoff Bundle Verification", proc.stdout)
+        self.assertIn("- Ready for execute: `True`", proc.stdout)
         self.assertIn("power-request-override-reader-binding-reacquire", proc.stdout)
         self.assertIn(
             "power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json",
@@ -87,6 +89,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         )
         self.assertEqual(payload["summary"]["missing_read_order_count"], 0)
         self.assertEqual(payload["blockers"], [])
+        self.assertTrue(payload["ready_for_execute"])
         self.assertEqual(
             payload["next_steps"]["dry_run_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
@@ -103,6 +106,7 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         self.assertIn("missing_reacquire_commands", payload["blockers"])
         self.assertTrue(payload["summary"]["missing_read_order_count"] > 0)
         self.assertTrue(payload["summary"]["missing_command_file_count"] > 0)
+        self.assertFalse(payload["ready_for_execute"])
         self.assertEqual(
             payload["next_steps"]["recommended_example"],
             "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",

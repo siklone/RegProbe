@@ -147,6 +147,7 @@ def verify_bundle(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     }
     payload["summary"] = summarize_checks(payload)
     payload["blockers"] = build_blockers(payload["summary"])
+    payload["ready_for_execute"] = payload["status"] == "ok"
     payload["next_steps"] = build_next_steps(payload)
     return payload
 
@@ -162,6 +163,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "# PowerRequestOverride Handoff Bundle Verification",
         "",
         f"- Status: `{payload['status']}`",
+        f"- Ready for execute: `{payload.get('ready_for_execute')}`",
         f"- Record: `{payload['record_id']}`",
         f"- Read-order entries: `{payload['read_order_count']}`",
         f"- Command files: `{payload['command_file_count']}`",
