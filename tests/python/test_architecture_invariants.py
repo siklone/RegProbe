@@ -43,6 +43,23 @@ class ArchitectureInvariantTests(unittest.TestCase):
 
         self.assertEqual(leaked_refs, [])
 
+    def test_app_xaml_keeps_tweaks_workspace_resources_global(self) -> None:
+        app_xaml = (REPO_ROOT / "app" / "App.xaml").read_text(encoding="utf-8")
+
+        self.assertIn('ResourceDictionary Source="Resources/TweaksWorkspaceResources.xaml"', app_xaml)
+
+    def test_control_templates_do_not_bind_margin_from_padding(self) -> None:
+        checked_paths = [
+            REPO_ROOT / "app" / "MainWindow.xaml",
+            REPO_ROOT / "app" / "Resources" / "Styles.xaml",
+            REPO_ROOT / "app" / "Resources" / "Tweaks" / "Buttons.xaml",
+            REPO_ROOT / "app" / "Resources" / "Tweaks" / "List.xaml",
+        ]
+
+        for path in checked_paths:
+            text = path.read_text(encoding="utf-8")
+            self.assertNotIn('ContentPresenter Margin="{TemplateBinding Padding}"', text)
+
     def test_cli_bootstrap_and_research_root_stay_compact(self) -> None:
         cli_program_lines = (REPO_ROOT / "cli" / "Program.cs").read_text(encoding="utf-8").splitlines()
         research_root_lines = (
