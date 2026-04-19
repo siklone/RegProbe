@@ -239,6 +239,48 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(payload["ledger_generator_returncode"], 0)
         self.assertIn("stdout did not contain a JSON object", payload["ledger_generator_stdout_parse_error"])
 
+    def test_execute_pipeline_treats_successful_non_json_runner_output_as_failure(self) -> None:
+        args = Namespace(
+            domain="regprobe-win11-25h2-session",
+            connect="qemu:///session",
+            bridge_base_url="http://10.0.2.2:8766",
+            upload_dir="/tmp/regprobe-bridge",
+            guest_scripts_root=r"C:\RegProbe-Diag\bootstrap",
+            delay_ms="18",
+            wake_key="KEY_ENTER",
+            timeout_seconds=240,
+            smoke_timeout_seconds=180,
+            response_output_name="local-kd-powerrequest-response-reacquire-20260419a",
+            umpo_output_name="local-kd-powerrequest-umpo-message-reacquire-20260419a",
+            run_id="power-request-override-reader-binding-reacquire",
+            output_json=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.json"),
+            output_md=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.md"),
+        )
+        runner_result = subprocess.CompletedProcess(
+            args=["runner"],
+            returncode=0,
+            stdout="success log without json",
+            stderr="",
+        )
+        generator_result = subprocess.CompletedProcess(
+            args=["generator"],
+            returncode=0,
+            stdout='{"output_json": "registry-research-framework/audit/autofill.json"}',
+            stderr="",
+        )
+
+        with mock.patch.object(pipeline.subprocess, "run", side_effect=[runner_result, generator_result]):
+            payload, exit_code = pipeline.execute_pipeline(args, REPO_ROOT, Path("/tmp/regprobe-bridge"))
+
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["runner_returncode"], 0)
+        self.assertEqual(payload["runner_output"], {})
+        self.assertIn("stdout did not contain a JSON object", payload["runner_stdout_parse_error"])
+        self.assertEqual(
+            payload["ledger_output"],
+            {"output_json": "registry-research-framework/audit/autofill.json"},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

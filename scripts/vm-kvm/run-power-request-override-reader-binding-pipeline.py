@@ -144,6 +144,7 @@ def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path
     runner_cmd = build_runner_command(args, repo_root, upload_dir)
     runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
     runner_output, runner_parse_error = try_parse_json_object(runner_proc.stdout)
+    runner_exit_code = runner_proc.returncode if runner_proc.returncode != 0 else (1 if runner_parse_error else 0)
 
     generator_cmd = build_generator_command(args, repo_root, upload_dir)
     generator_proc = subprocess.run(generator_cmd, cwd=str(repo_root), capture_output=True, text=True)
@@ -185,7 +186,7 @@ def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path
         "runner_stderr": runner_proc.stderr.strip(),
         "ledger_output": generator_output,
     }
-    return payload, runner_proc.returncode
+    return payload, runner_exit_code
 
 
 def main() -> int:
