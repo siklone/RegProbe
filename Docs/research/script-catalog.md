@@ -182,6 +182,8 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   executes the one remaining controlled VMware debug-only branch: fresh provision, transport-first smoke, minimal attach matrix, and breakin smoke with stop-rule closure
 - `registry-research-framework/scripts/generate_power_request_override_result_ledger.py`
   turns the reacquired PowerRequestOverride KD artifacts into a prefilled result ledger JSON plus markdown review draft
+- `registry-research-framework/scripts/promote_power_request_override_result_ledger.py`
+  promotes the ignored PowerRequestOverride autofill ledger into a dated audit pair after review so intentional outputs, not scratch drafts, are what get committed; supports `--dry-run` for target preview and refuses overwrite unless `--force` is supplied intentionally
 
 ### `Historical / Repro`
 

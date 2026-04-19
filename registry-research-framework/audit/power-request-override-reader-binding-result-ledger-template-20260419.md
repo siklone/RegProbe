@@ -5,6 +5,16 @@ Use this template after the next two reacquired local-KD artifacts land:
 - `local-kd-powerrequest-response-reacquire`
 - `local-kd-powerrequest-umpo-message-reacquire`
 
+The pipeline autofill outputs are local-only scratch drafts. After review, promote them into dated audit files instead of committing the ignored autofill names directly:
+
+```bash
+python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id>
+```
+
+By default the promote step refuses to overwrite an existing dated ledger; use `--force` only for an intentional replacement.
+
+Use `--dry-run` first if you want to confirm the dated target names before moving the draft files.
+
 ## Fill-After-Run Fields
 
 ### Run Metadata

@@ -62,6 +62,26 @@ python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py
 - `registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.md`
 - `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.md`
 
+## Promotion
+
+- Scratch outputs:
+  - `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.json`
+  - `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.md`
+- Policy: these autofill outputs are local-only scratch drafts and stay gitignored by default.
+- Promote only after review:
+
+```bash
+python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id>
+```
+
+The promote step refuses to overwrite an existing dated ledger unless `--force` is passed intentionally.
+
+Dry-run the target names first if you want to confirm the dated output paths without moving files:
+
+```bash
+python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id> --dry-run
+```
+
 ## Non-Goals
 
 - Do not reopen a generic `*PowerRequest*Reg*` symbol hunt first.

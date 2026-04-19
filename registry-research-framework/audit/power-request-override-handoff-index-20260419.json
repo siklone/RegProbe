@@ -84,6 +84,17 @@
     "path": "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py",
     "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py"
   },
+  "promotion": {
+    "scratch_outputs": [
+      "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.json",
+      "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.md"
+    ],
+    "promote_script": "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+    "promote_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id>",
+    "promote_dry_run_example": "python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id> --dry-run",
+    "note": "Review the ignored local-only autofill drafts first, then promote them into dated audit files only after the outcome and wording are intentional.",
+    "overwrite_policy": "The promote step refuses to overwrite an existing dated ledger unless --force is passed intentionally."
+  },
   "ready_to_run": [
     "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
     "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt"

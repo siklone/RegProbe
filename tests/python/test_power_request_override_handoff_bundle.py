@@ -18,6 +18,9 @@ PIPELINE_RUNNER_PATH = REPO_ROOT / "scripts" / "vm-kvm" / "run-power-request-ove
 LEDGER_GENERATOR_PATH = (
     REPO_ROOT / "registry-research-framework" / "scripts" / "generate_power_request_override_result_ledger.py"
 )
+LEDGER_PROMOTER_PATH = (
+    REPO_ROOT / "registry-research-framework" / "scripts" / "promote_power_request_override_result_ledger.py"
+)
 SCRIPT_CATALOG_MD = REPO_ROOT / "Docs" / "research" / "script-catalog.md"
 GITIGNORE = REPO_ROOT / ".gitignore"
 
@@ -52,6 +55,14 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertTrue(PIPELINE_RUNNER_PATH.exists())
         self.assertEqual(manifest["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
         self.assertTrue(RUNNER_PATH.exists())
+        self.assertEqual(
+            manifest["promotion"]["promote_script"],
+            "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
+        self.assertIn("gitignored", manifest["promotion"]["scratch_policy"])
+        self.assertTrue(manifest["promotion"]["promote_dry_run_example"].endswith("--dry-run"))
+        self.assertIn("refuses to overwrite", manifest["promotion"]["overwrite_policy"])
+        self.assertTrue(LEDGER_PROMOTER_PATH.exists())
         entries = manifest.get("entries") or []
         self.assertEqual(len(entries), 2)
 
@@ -87,6 +98,13 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertTrue(PIPELINE_RUNNER_PATH.exists())
         self.assertEqual(payload["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
         self.assertTrue(RUNNER_PATH.exists())
+        self.assertEqual(
+            payload["promotion"]["promote_script"],
+            "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
+        self.assertTrue(payload["promotion"]["promote_dry_run_example"].endswith("--dry-run"))
+        self.assertIn("local-only", payload["promotion"]["note"])
+        self.assertIn("refuses to overwrite", payload["promotion"]["overwrite_policy"])
 
     def test_script_catalog_mentions_power_request_override_handoff_scripts(self) -> None:
         content = SCRIPT_CATALOG_MD.read_text(encoding="utf-8")
@@ -94,7 +112,9 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py", content)
         self.assertIn("scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py", content)
         self.assertIn("registry-research-framework/scripts/generate_power_request_override_result_ledger.py", content)
+        self.assertIn("registry-research-framework/scripts/promote_power_request_override_result_ledger.py", content)
         self.assertTrue(LEDGER_GENERATOR_PATH.exists())
+        self.assertTrue(LEDGER_PROMOTER_PATH.exists())
 
     def test_pipeline_autofill_outputs_are_local_only(self) -> None:
         content = GITIGNORE.read_text(encoding="utf-8")

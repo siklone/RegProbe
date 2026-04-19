@@ -72,6 +72,15 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["ledger_generator"],
             "registry-research-framework/scripts/generate_power_request_override_result_ledger.py",
         )
+        self.assertEqual(
+            payload["ledger_promoter"],
+            "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
+        self.assertIn("gitignored autofill drafts", payload["scratch_policy"])
+        self.assertEqual(
+            payload["promote_after_review"]["script"],
+            "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
+        )
         self.assertIn("--response-stdout", payload["generator_command"])
         self.assertEqual(
             payload["expected_artifacts"]["response"]["stdout"],
@@ -105,6 +114,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             payload["ledger_generator"],
             "registry-research-framework/scripts/generate_power_request_override_result_ledger.py",
+        )
+        self.assertEqual(
+            payload["ledger_promoter"],
+            "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
         self.assertEqual(
             payload["runner_command"][1],

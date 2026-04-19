@@ -19,6 +19,10 @@ def ledger_generator_path(repo_root: Path) -> Path:
     return repo_root / "registry-research-framework" / "scripts" / "generate_power_request_override_result_ledger.py"
 
 
+def ledger_promoter_path(repo_root: Path) -> Path:
+    return repo_root / "registry-research-framework" / "scripts" / "promote_power_request_override_result_ledger.py"
+
+
 def artifact_paths(upload_dir: Path, output_name: str) -> dict[str, Path]:
     return {
         "stdout": upload_dir / f"{output_name}.stdout.txt",
@@ -123,10 +127,12 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
     umpo_paths = artifact_paths(upload_dir, args.umpo_output_name)
     resolved_runner = runner_path(repo_root)
     resolved_ledger_generator = ledger_generator_path(repo_root)
+    resolved_ledger_promoter = ledger_promoter_path(repo_root)
     return {
         "mode": "dry-run" if args.dry_run else "execute",
         "runner": portable_path(resolved_runner, repo_root),
         "ledger_generator": portable_path(resolved_ledger_generator, repo_root),
+        "ledger_promoter": portable_path(resolved_ledger_promoter, repo_root),
         "runner_command": build_runner_command(args, repo_root, upload_dir),
         "generator_command": build_generator_command(args, repo_root, upload_dir),
         "expected_artifacts": {
@@ -136,6 +142,11 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
         "ledger_outputs": {
             "json": str(Path(args.output_json).resolve()),
             "markdown": str(Path(args.output_md).resolve()),
+        },
+        "scratch_policy": "The default ledger outputs are local-only gitignored autofill drafts; review them first, then promote them into dated audit files.",
+        "promote_after_review": {
+            "script": portable_path(resolved_ledger_promoter, repo_root),
+            "example": f"python3 {portable_path(resolved_ledger_promoter, repo_root)} --run-id <dated-run-id>",
         },
     }
 

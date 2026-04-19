@@ -42,6 +42,25 @@ This is the single-entry index for the current `power.control.power-request-over
 
 - `python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py`
 
+## Promotion
+
+- Scratch outputs stay local-only and gitignored by default:
+  - `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.json`
+  - `registry-research-framework/audit/power-request-override-reader-binding-result-ledger-autofill.md`
+- After review, promote the draft into dated audit files:
+
+```bash
+python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id>
+```
+
+The promote step refuses to overwrite an existing dated ledger unless `--force` is passed intentionally.
+
+If you just want to confirm the destination names first:
+
+```bash
+python3 registry-research-framework/scripts/promote_power_request_override_result_ledger.py --run-id <dated-run-id> --dry-run
+```
+
 ## Ready-To-Run Files
 
 - `registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt`
