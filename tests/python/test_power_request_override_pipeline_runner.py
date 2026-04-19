@@ -546,6 +546,20 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertTrue(payload["runner_skipped"])
         self.assertTrue(payload["ledger_generator_skipped"])
 
+    def test_run_bundle_verifier_preserves_verifier_supplied_blocker_order(self) -> None:
+        verifier_result = subprocess.CompletedProcess(
+            args=["verifier"],
+            returncode=5,
+            stdout='{"status":"error","checks":{"promotion_blocks_match":false},"summary":{"status":"error","promotion_blocks_match":false,"missing_read_order_count":0,"missing_command_file_count":0,"missing_review_input_count":0,"missing_reacquire_command_count":0,"missing_promote_script":false},"blockers":["missing_command_files","promotion_blocks_mismatch"],"next_steps":{"recommended_example":"python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown","recommended_reason":"Bundle verifier reported blockers; inspect the markdown summary before executing the VM lane.","dry_run_example":"python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run","verify_only_example":"python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only","markdown_summary_example":"python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown","skip_bundle_verifier_example":"python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier"}}',
+            stderr="bundle drift",
+        )
+
+        with mock.patch.object(pipeline.subprocess, "run", side_effect=[verifier_result]):
+            payload, exit_code = pipeline.run_bundle_verifier(REPO_ROOT)
+
+        self.assertEqual(exit_code, 5)
+        self.assertEqual(payload["bundle_verifier_blockers"], ["missing_command_files", "promotion_blocks_mismatch"])
+
     def test_run_bundle_verifier_reports_parse_failure_as_not_ready(self) -> None:
         verifier_result = subprocess.CompletedProcess(
             args=["verifier"],

@@ -4,6 +4,7 @@ import importlib.util
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -89,6 +90,22 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         self.assertEqual(
             payload["next_steps"]["dry_run_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
+        )
+
+    def test_verify_bundle_reports_error_blockers_when_paths_are_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            payload = verifier.verify_bundle(repo_root=Path(temp_dir))
+
+        self.assertEqual(payload["status"], "error")
+        self.assertIn("missing_read_order_paths", payload["blockers"])
+        self.assertIn("missing_command_files", payload["blockers"])
+        self.assertIn("missing_review_inputs", payload["blockers"])
+        self.assertIn("missing_reacquire_commands", payload["blockers"])
+        self.assertTrue(payload["summary"]["missing_read_order_count"] > 0)
+        self.assertTrue(payload["summary"]["missing_command_file_count"] > 0)
+        self.assertEqual(
+            payload["next_steps"]["recommended_example"],
+            "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
         )
 
 
