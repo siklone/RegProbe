@@ -184,6 +184,8 @@ These `vm-hyperv` scripts are intentionally separate from the VMware runtime fam
   turns the reacquired PowerRequestOverride KD artifacts into a prefilled result ledger JSON plus markdown review draft
 - `registry-research-framework/scripts/promote_power_request_override_result_ledger.py`
   promotes the ignored PowerRequestOverride autofill ledger into a dated audit pair after review so intentional outputs, not scratch drafts, are what get committed; supports `--dry-run` for target preview and refuses overwrite unless `--force` is supplied intentionally
+- `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
+  verifies that the current PowerRequestOverride handoff bundle is structurally intact and echoes the exact current-run promotion preview in JSON or markdown form
 
 ### `Historical / Repro`
 

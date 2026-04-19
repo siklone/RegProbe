@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+from typing import Any
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+AUDIT_ROOT = REPO_ROOT / "registry-research-framework" / "audit"
+MANIFEST_JSON = AUDIT_ROOT / "power-request-override-reader-binding-execution-manifest-20260419.json"
+HANDOFF_JSON = AUDIT_ROOT / "power-request-override-handoff-index-20260419.json"
+REACQUIRE_PLAN_JSON = AUDIT_ROOT / "power-request-override-reader-binding-reacquire-plan-20260419.json"
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def portable_path(path: Path, *, repo_root: Path = REPO_ROOT) -> str:
+    try:
+        return str(path.resolve().relative_to(repo_root)).replace("\\", "/")
+    except ValueError:
+        return str(path.resolve()).replace("\\", "/")
+
+
+def normalized_promotion_block(payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "promote_script": payload.get("promote_script"),
+        "promote_example": payload.get("promote_example"),
+        "promote_dry_run_example": payload.get("promote_dry_run_example"),
+        "current_run_id": payload.get("current_run_id"),
+        "current_run_example": payload.get("current_run_example"),
+        "current_run_dry_run_example": payload.get("current_run_dry_run_example"),
+        "preview_targets": payload.get("preview_targets") or {},
+        "overwrite_policy": payload.get("overwrite_policy"),
+    }
+
+
+def verify_bundle(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
+    manifest = load_json(MANIFEST_JSON)
+    handoff = load_json(HANDOFF_JSON)
+    reacquire_plan = load_json(REACQUIRE_PLAN_JSON)
+
+    read_order = handoff.get("read_order") or []
+    missing_read_order = [entry["path"] for entry in read_order if not (repo_root / entry["path"]).exists()]
+    command_files = [entry["command_file"] for entry in (manifest.get("entries") or [])]
+    missing_command_files = [rel for rel in command_files if not (repo_root / rel).exists()]
+    review_inputs = manifest.get("review_inputs") or []
+    missing_review_inputs = [rel for rel in review_inputs if not (repo_root / rel).exists()]
+    reacquire_artifacts = reacquire_plan.get("required_reacquire_artifacts") or []
+    missing_reacquire_commands = [
+        artifact["command_file"]
+        for artifact in reacquire_artifacts
+        if not (repo_root / artifact["command_file"]).exists()
+    ]
+
+    promotion_manifest = manifest.get("promotion") or {}
+    promotion_handoff = handoff.get("promotion") or {}
+    normalized_manifest = normalized_promotion_block(promotion_manifest)
+    normalized_handoff = normalized_promotion_block(promotion_handoff)
+    promotion_consistent = normalized_manifest == normalized_handoff
+    missing_promote_script = not (repo_root / promotion_manifest.get("promote_script", "")).exists()
+
+    payload = {
+        "record_id": manifest.get("record_id"),
+        "status": "ok"
+        if not (
+            missing_read_order
+            or missing_command_files
+            or missing_review_inputs
+            or missing_reacquire_commands
+            or missing_promote_script
+            or not promotion_consistent
+        )
+        else "error",
+        "manifest": portable_path(MANIFEST_JSON),
+        "handoff": portable_path(HANDOFF_JSON),
+        "reacquire_plan": portable_path(REACQUIRE_PLAN_JSON),
+        "read_order_count": len(read_order),
+        "command_file_count": len(command_files),
+        "review_input_count": len(review_inputs),
+        "promotion": {
+            "current_run_id": normalized_manifest.get("current_run_id"),
+            "current_run_example": normalized_manifest.get("current_run_example"),
+            "current_run_dry_run_example": normalized_manifest.get("current_run_dry_run_example"),
+            "preview_targets": normalized_manifest.get("preview_targets") or {},
+        },
+        "checks": {
+            "missing_read_order_paths": missing_read_order,
+            "missing_command_files": missing_command_files,
+            "missing_review_inputs": missing_review_inputs,
+            "missing_reacquire_commands": missing_reacquire_commands,
+            "missing_promote_script": missing_promote_script,
+            "promotion_blocks_match": promotion_consistent,
+            "normalized_promotion_manifest": normalized_manifest,
+            "normalized_promotion_handoff": normalized_handoff,
+        },
+    }
+    return payload
+
+
+def render_markdown(payload: dict[str, Any]) -> str:
+    promotion = payload["promotion"]
+    preview_targets = promotion["preview_targets"]
+    checks = payload["checks"]
+    lines = [
+        "# PowerRequestOverride Handoff Bundle Verification",
+        "",
+        f"- Status: `{payload['status']}`",
+        f"- Record: `{payload['record_id']}`",
+        f"- Read-order entries: `{payload['read_order_count']}`",
+        f"- Command files: `{payload['command_file_count']}`",
+        f"- Review inputs: `{payload['review_input_count']}`",
+        "",
+        "## Current Run",
+        f"- Run id: `{promotion['current_run_id']}`",
+        f"- Promote command: `{promotion['current_run_example']}`",
+        f"- Promote dry-run: `{promotion['current_run_dry_run_example']}`",
+        "",
+        "## Preview Targets",
+        f"- Source JSON: `{preview_targets.get('source_json', '')}`",
+        f"- Source MD: `{preview_targets.get('source_md', '')}`",
+        f"- Target JSON: `{preview_targets.get('target_json', '')}`",
+        f"- Target MD: `{preview_targets.get('target_md', '')}`",
+        "",
+        "## Checks",
+        f"- Promotion blocks match: `{checks['promotion_blocks_match']}`",
+        f"- Missing read-order paths: `{checks['missing_read_order_paths']}`",
+        f"- Missing command files: `{checks['missing_command_files']}`",
+        f"- Missing review inputs: `{checks['missing_review_inputs']}`",
+        f"- Missing reacquire commands: `{checks['missing_reacquire_commands']}`",
+        f"- Missing promote script: `{checks['missing_promote_script']}`",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Verify that the PowerRequestOverride handoff bundle is structurally intact.")
+    parser.add_argument("--markdown", action="store_true", help="Render a markdown summary instead of JSON.")
+    args = parser.parse_args()
+
+    payload = verify_bundle()
+    if args.markdown:
+        print(render_markdown(payload))
+    else:
+        print(json.dumps(payload, indent=2))
+    return 0 if payload["status"] == "ok" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
