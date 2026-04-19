@@ -35,6 +35,7 @@ That payload now carries the same verifier summary plus `ready_for_execute`, a c
 - Path: `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
 - This verifier is the default preflight gate before the execute path runs.
 - Its JSON and markdown outputs now include `ready_for_execute`, a compact summary block, an explicit `blockers` list, and concrete next-step guidance.
+- Expected JSON contract: `ready_for_execute`, `summary`, `blockers`, `next_steps`
 - JSON summary:
 
 ```bash

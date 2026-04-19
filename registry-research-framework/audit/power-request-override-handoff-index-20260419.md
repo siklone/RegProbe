@@ -47,6 +47,7 @@ This is the single-entry index for the current `power.control.power-request-over
 - Markdown summary: `python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown`
 - Same preflight through the pipeline entry point: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only`
 - The verifier now returns `ready_for_execute`, a compact summary block, an explicit `blockers` list, and concrete next-step guidance.
+- Expected JSON contract: `ready_for_execute`, `summary`, `blockers`, `next_steps`
 - The execute path runs this verifier by default before it touches the VM.
 - When the bundle is not ready, the pipeline `next_steps.recommended_example` falls back to the markdown summary command for quick human triage.
 - Only bypass it intentionally: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier`

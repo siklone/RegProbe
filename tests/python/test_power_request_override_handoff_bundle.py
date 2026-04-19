@@ -91,6 +91,10 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
         )
         self.assertEqual(
+            manifest["bundle_verifier"]["output_contract"],
+            ["ready_for_execute", "summary", "blockers", "next_steps"],
+        )
+        self.assertEqual(
             manifest["bundle_verifier"]["skip_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier",
         )
@@ -172,6 +176,10 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertEqual(
             payload["bundle_verifier"]["verify_only_example"],
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
+        )
+        self.assertEqual(
+            payload["bundle_verifier"]["output_contract"],
+            ["ready_for_execute", "summary", "blockers", "next_steps"],
         )
         self.assertEqual(
             payload["bundle_verifier"]["skip_example"],
@@ -286,6 +294,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("ready_for_execute", execution_manifest_md)
         self.assertIn("next_steps", execution_manifest_md)
         self.assertIn("blockers", execution_manifest_md)
+        self.assertIn("Expected JSON contract", execution_manifest_md)
         self.assertIn("summary block", execution_manifest_md)
         self.assertIn(target_json, handoff_index_md)
         self.assertIn(target_md, handoff_index_md)
@@ -297,6 +306,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertIn("ready_for_execute", handoff_index_md)
         self.assertIn("next_steps", handoff_index_md)
         self.assertIn("blockers", handoff_index_md)
+        self.assertIn("Expected JSON contract", handoff_index_md)
         self.assertIn("summary block", handoff_index_md)
 
     def test_pipeline_autofill_outputs_are_local_only(self) -> None:
