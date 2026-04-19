@@ -81,6 +81,8 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertTrue(payload["promote_after_review"]["source_json"].endswith("power-request-override-reader-binding-result-ledger-autofill.json"))
+        self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertTrue(payload["promote_after_review"]["dry_run_example"].endswith("--dry-run"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])
         self.assertIn("--response-stdout", payload["generator_command"])
@@ -121,6 +123,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["ledger_promoter"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertTrue(payload["promote_after_review"]["target_md"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md"))
         self.assertTrue(payload["promote_after_review"]["dry_run_example"].endswith("--dry-run"))
         self.assertEqual(
             payload["runner_command"][1],
@@ -170,6 +173,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])
         self.assertEqual(payload["runner_returncode"], 7)
         self.assertIsNone(payload["runner_stdout_parse_error"])
@@ -219,6 +223,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])
         self.assertEqual(payload["runner_returncode"], 9)
         self.assertEqual(payload["runner_output"], {})
@@ -266,6 +271,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])
         self.assertEqual(payload["ledger_generator_returncode"], 0)
         self.assertIn("stdout did not contain a JSON object", payload["ledger_generator_stdout_parse_error"])
@@ -308,6 +314,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
         )
+        self.assertTrue(payload["promote_after_review"]["target_json"].endswith("power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json"))
         self.assertIn("refuses to overwrite", payload["promote_after_review"]["overwrite_policy"])
         self.assertEqual(payload["runner_returncode"], 0)
         self.assertEqual(payload["runner_output"], {})

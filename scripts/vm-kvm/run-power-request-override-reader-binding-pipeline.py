@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -35,6 +36,10 @@ def portable_path(path: Path, repo_root: Path) -> str:
         return str(path.resolve().relative_to(repo_root)).replace("\\", "/")
     except ValueError:
         return str(path.resolve()).replace("\\", "/")
+
+
+def slugify_fragment(value: str) -> str:
+    return re.sub(r"[^A-Za-z0-9._-]+", "-", value.strip()).strip("-._").lower()
 
 
 def parse_json_object(stdout: str) -> dict[str, object]:
@@ -150,9 +155,17 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
 
 def build_promotion_payload(args: argparse.Namespace, repo_root: Path) -> dict[str, str]:
     resolved_ledger_promoter = ledger_promoter_path(repo_root)
+    source_json = Path(args.output_json).resolve()
+    source_md = Path(args.output_md).resolve()
+    suffix = slugify_fragment(args.run_id) or "power-request-override-reader-binding"
+    target_stem = f"power-request-override-reader-binding-result-ledger-{suffix}"
     return {
         "scratch_policy": "The default ledger outputs are local-only gitignored autofill drafts; review them first, then promote them into dated audit files.",
         "script": portable_path(resolved_ledger_promoter, repo_root),
+        "source_json": portable_path(source_json, repo_root),
+        "source_md": portable_path(source_md, repo_root),
+        "target_json": portable_path(source_json.parent / f"{target_stem}.json", repo_root),
+        "target_md": portable_path(source_md.parent / f"{target_stem}.md", repo_root),
         "example": f"python3 {portable_path(resolved_ledger_promoter, repo_root)} --run-id <dated-run-id>",
         "dry_run_example": f"python3 {portable_path(resolved_ledger_promoter, repo_root)} --run-id <dated-run-id> --dry-run",
         "overwrite_policy": "The promote step refuses to overwrite an existing dated ledger unless --force is passed intentionally.",
