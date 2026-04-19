@@ -42,6 +42,11 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
         self.assertTrue(payload["checks"]["promotion_blocks_match"])
         self.assertFalse(payload["checks"]["missing_promote_script"])
         self.assertEqual(payload["checks"]["missing_command_files"], [])
+        self.assertEqual(payload["summary"]["missing_command_file_count"], 0)
+        self.assertEqual(
+            payload["next_steps"]["recommended_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+        )
 
     def test_cli_markdown_outputs_current_run_summary(self) -> None:
         proc = subprocess.run(
@@ -58,6 +63,8 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
             "power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.json",
             proc.stdout,
         )
+        self.assertIn("## Next Steps", proc.stdout)
+        self.assertIn("python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only", proc.stdout)
 
     def test_cli_json_outputs_preview_targets(self) -> None:
         proc = subprocess.run(
@@ -74,6 +81,11 @@ class PowerRequestOverrideHandoffVerifierTests(unittest.TestCase):
             payload["promotion"]["preview_targets"]["target_md"].endswith(
                 "power-request-override-reader-binding-result-ledger-power-request-override-reader-binding-reacquire.md"
             )
+        )
+        self.assertEqual(payload["summary"]["missing_read_order_count"], 0)
+        self.assertEqual(
+            payload["next_steps"]["dry_run_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
         )
 
 

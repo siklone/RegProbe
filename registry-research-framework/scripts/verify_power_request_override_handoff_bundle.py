@@ -38,6 +38,36 @@ def normalized_promotion_block(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def summarize_checks(payload: dict[str, Any]) -> dict[str, Any]:
+    checks = payload.get("checks") or {}
+    return {
+        "status": payload.get("status"),
+        "promotion_blocks_match": checks.get("promotion_blocks_match"),
+        "missing_read_order_count": len(checks.get("missing_read_order_paths") or []),
+        "missing_command_file_count": len(checks.get("missing_command_files") or []),
+        "missing_review_input_count": len(checks.get("missing_review_inputs") or []),
+        "missing_reacquire_command_count": len(checks.get("missing_reacquire_commands") or []),
+        "missing_promote_script": bool(checks.get("missing_promote_script")),
+    }
+
+
+def build_next_steps(payload: dict[str, Any]) -> dict[str, str]:
+    if payload.get("status") == "ok":
+        recommended_example = "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py"
+        recommended_reason = "Bundle verifier passed; the normal pipeline execute path is ready."
+    else:
+        recommended_example = "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown"
+        recommended_reason = "Bundle verifier reported blockers; inspect the markdown summary before executing the VM lane."
+    return {
+        "recommended_example": recommended_example,
+        "recommended_reason": recommended_reason,
+        "dry_run_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
+        "verify_only_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
+        "markdown_summary_example": "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
+        "skip_bundle_verifier_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier",
+    }
+
+
 def verify_bundle(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     manifest = load_json(MANIFEST_JSON)
     handoff = load_json(HANDOFF_JSON)
@@ -98,6 +128,8 @@ def verify_bundle(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
             "normalized_promotion_handoff": normalized_handoff,
         },
     }
+    payload["summary"] = summarize_checks(payload)
+    payload["next_steps"] = build_next_steps(payload)
     return payload
 
 
@@ -105,6 +137,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
     promotion = payload["promotion"]
     preview_targets = promotion["preview_targets"]
     checks = payload["checks"]
+    summary = payload.get("summary") or {}
+    next_steps = payload.get("next_steps") or {}
     lines = [
         "# PowerRequestOverride Handoff Bundle Verification",
         "",
@@ -132,6 +166,18 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Missing review inputs: `{checks['missing_review_inputs']}`",
         f"- Missing reacquire commands: `{checks['missing_reacquire_commands']}`",
         f"- Missing promote script: `{checks['missing_promote_script']}`",
+        "",
+        "## Summary",
+        f"- Missing read-order count: `{summary.get('missing_read_order_count', '')}`",
+        f"- Missing command-file count: `{summary.get('missing_command_file_count', '')}`",
+        f"- Missing review-input count: `{summary.get('missing_review_input_count', '')}`",
+        f"- Missing reacquire-command count: `{summary.get('missing_reacquire_command_count', '')}`",
+        "",
+        "## Next Steps",
+        f"- Recommended command: `{next_steps.get('recommended_example', '')}`",
+        f"- Reason: `{next_steps.get('recommended_reason', '')}`",
+        f"- Dry-run: `{next_steps.get('dry_run_example', '')}`",
+        f"- Verify-only: `{next_steps.get('verify_only_example', '')}`",
     ]
     return "\n".join(lines) + "\n"
 
