@@ -131,6 +131,13 @@ def build_generator_command(args: argparse.Namespace, repo_root: Path, upload_di
     ]
 
 
+def build_bundle_verifier_command(repo_root: Path) -> list[str]:
+    return [
+        sys.executable,
+        str(bundle_verifier_path(repo_root)),
+    ]
+
+
 def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> dict[str, object]:
     response_paths = artifact_paths(upload_dir, args.response_output_name)
     umpo_paths = artifact_paths(upload_dir, args.umpo_output_name)
@@ -144,6 +151,7 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
         "ledger_generator": portable_path(resolved_ledger_generator, repo_root),
         "ledger_promoter": portable_path(resolved_ledger_promoter, repo_root),
         "bundle_verifier": portable_path(resolved_bundle_verifier, repo_root),
+        "bundle_verifier_command": build_bundle_verifier_command(repo_root),
         "runner_command": build_runner_command(args, repo_root, upload_dir),
         "generator_command": build_generator_command(args, repo_root, upload_dir),
         "expected_artifacts": {
@@ -159,6 +167,7 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
             "script": portable_path(resolved_bundle_verifier, repo_root),
             "example": f"python3 {portable_path(resolved_bundle_verifier, repo_root)}",
             "markdown_example": f"python3 {portable_path(resolved_bundle_verifier, repo_root)} --markdown",
+            "required_before_execute": not args.skip_bundle_verifier,
         },
         "promote_after_review": build_promotion_payload(args, repo_root),
     }
@@ -198,6 +207,23 @@ def build_bundle_verifier_payload(repo_root: Path) -> dict[str, str]:
 
 
 def execute_pipeline(args: argparse.Namespace, repo_root: Path, upload_dir: Path) -> tuple[dict[str, object], int]:
+    if not args.skip_bundle_verifier:
+        verifier_cmd = build_bundle_verifier_command(repo_root)
+        verifier_proc = subprocess.run(verifier_cmd, cwd=str(repo_root), capture_output=True, text=True)
+        verifier_output, verifier_parse_error = try_parse_json_object(verifier_proc.stdout)
+        if verifier_proc.returncode != 0 or verifier_parse_error:
+            payload = {
+                "bundle_verifier": build_bundle_verifier_payload(repo_root),
+                "bundle_verifier_returncode": verifier_proc.returncode,
+                "bundle_verifier_output": verifier_output,
+                "bundle_verifier_stdout_parse_error": verifier_parse_error,
+                "bundle_verifier_stdout": verifier_proc.stdout.strip(),
+                "bundle_verifier_stderr": verifier_proc.stderr.strip(),
+                "runner_skipped": True,
+                "ledger_generator_skipped": True,
+            }
+            return payload, verifier_proc.returncode or 1
+
     runner_cmd = build_runner_command(args, repo_root, upload_dir)
     runner_proc = subprocess.run(runner_cmd, cwd=str(repo_root), capture_output=True, text=True)
     runner_output, runner_parse_error = try_parse_json_object(runner_proc.stdout)
@@ -281,6 +307,11 @@ def main() -> int:
         "--dry-run",
         action="store_true",
         help="Print the planned reacquire and ledger-generation commands without touching the VM.",
+    )
+    parser.add_argument(
+        "--skip-bundle-verifier",
+        action="store_true",
+        help="Skip the handoff bundle preflight verifier before the execute path.",
     )
     args = parser.parse_args()
 

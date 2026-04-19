@@ -25,6 +25,7 @@ That dry-run payload also previews the scratch ledger paths and the exact dated 
 ## Bundle Verifier
 
 - Path: `registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
+- This verifier is the default preflight gate before the execute path runs.
 - JSON summary:
 
 ```bash
@@ -35,6 +36,12 @@ python3 registry-research-framework/scripts/verify_power_request_override_handof
 
 ```bash
 python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown
+```
+
+Only bypass it intentionally:
+
+```bash
+python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier
 ```
 
 ## Runner

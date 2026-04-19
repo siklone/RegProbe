@@ -15,7 +15,9 @@
   "bundle_verifier": {
     "path": "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
     "example": "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
-    "markdown_example": "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown"
+    "markdown_example": "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
+    "required_before_execute": true,
+    "skip_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier"
   },
   "runner": {
     "path": "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py",

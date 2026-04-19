@@ -87,11 +87,19 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["bundle_verifier"],
             "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
         )
+        self.assertEqual(
+            payload["bundle_verifier_command"],
+            [
+                sys.executable,
+                str(REPO_ROOT / "registry-research-framework" / "scripts" / "verify_power_request_override_handoff_bundle.py"),
+            ],
+        )
         self.assertIn("gitignored autofill drafts", payload["scratch_policy"])
         self.assertEqual(
             payload["verify_bundle_first"]["example"],
             "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
         )
+        self.assertTrue(payload["verify_bundle_first"]["required_before_execute"])
         self.assertEqual(
             payload["promote_after_review"]["script"],
             "registry-research-framework/scripts/promote_power_request_override_result_ledger.py",
@@ -150,6 +158,13 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
         self.assertEqual(
             payload["bundle_verifier"],
             "registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+        )
+        self.assertEqual(
+            payload["bundle_verifier_command"],
+            [
+                sys.executable,
+                "/tmp/regprobe-alt-checkout/registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
+            ],
         )
         self.assertEqual(
             payload["promote_after_review"]["current_run_id"],
@@ -213,6 +228,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             run_id="power-request-override-reader-binding-reacquire",
             output_json=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.json"),
             output_md=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.md"),
+            skip_bundle_verifier=True,
         )
         runner_result = subprocess.CompletedProcess(
             args=["runner"],
@@ -271,6 +287,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             run_id="power-request-override-reader-binding-reacquire",
             output_json=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.json"),
             output_md=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.md"),
+            skip_bundle_verifier=True,
         )
         runner_result = subprocess.CompletedProcess(
             args=["runner"],
@@ -328,6 +345,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             run_id="power-request-override-reader-binding-reacquire",
             output_json=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.json"),
             output_md=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.md"),
+            skip_bundle_verifier=True,
         )
         runner_result = subprocess.CompletedProcess(
             args=["runner"],
@@ -379,6 +397,7 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             run_id="power-request-override-reader-binding-reacquire",
             output_json=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.json"),
             output_md=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.md"),
+            skip_bundle_verifier=True,
         )
         runner_result = subprocess.CompletedProcess(
             args=["runner"],
@@ -418,6 +437,41 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["ledger_output"],
             {"output_json": "registry-research-framework/audit/autofill.json"},
         )
+
+    def test_execute_pipeline_stops_early_when_bundle_verifier_fails(self) -> None:
+        args = Namespace(
+            domain="regprobe-win11-25h2-session",
+            connect="qemu:///session",
+            bridge_base_url="http://10.0.2.2:8766",
+            upload_dir="/tmp/regprobe-bridge",
+            guest_scripts_root=r"C:\RegProbe-Diag\bootstrap",
+            delay_ms="18",
+            wake_key="KEY_ENTER",
+            timeout_seconds=240,
+            smoke_timeout_seconds=180,
+            response_output_name="local-kd-powerrequest-response-reacquire-20260419a",
+            umpo_output_name="local-kd-powerrequest-umpo-message-reacquire-20260419a",
+            run_id="power-request-override-reader-binding-reacquire",
+            output_json=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.json"),
+            output_md=str(REPO_ROOT / "registry-research-framework" / "audit" / "autofill.md"),
+            skip_bundle_verifier=False,
+        )
+        verifier_result = subprocess.CompletedProcess(
+            args=["verifier"],
+            returncode=5,
+            stdout='{"status":"error"}',
+            stderr="bundle drift",
+        )
+
+        with mock.patch.object(pipeline.subprocess, "run", side_effect=[verifier_result]) as run_mock:
+            payload, exit_code = pipeline.execute_pipeline(args, REPO_ROOT, Path("/tmp/regprobe-bridge"))
+
+        self.assertEqual(run_mock.call_count, 1)
+        self.assertEqual(exit_code, 5)
+        self.assertEqual(payload["bundle_verifier_returncode"], 5)
+        self.assertEqual(payload["bundle_verifier_output"], {"status": "error"})
+        self.assertTrue(payload["runner_skipped"])
+        self.assertTrue(payload["ledger_generator_skipped"])
 
 
 if __name__ == "__main__":

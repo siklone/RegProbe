@@ -81,6 +81,11 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             manifest["bundle_verifier"]["markdown_example"],
             "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
         )
+        self.assertTrue(manifest["bundle_verifier"]["required_before_execute"])
+        self.assertEqual(
+            manifest["bundle_verifier"]["skip_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier",
+        )
         self.assertTrue(HANDOFF_VERIFIER_PATH.exists())
         self.assertEqual(manifest["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
         self.assertTrue(RUNNER_PATH.exists())
@@ -150,6 +155,11 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         self.assertEqual(
             payload["bundle_verifier"]["markdown_example"],
             "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown",
+        )
+        self.assertTrue(payload["bundle_verifier"]["required_before_execute"])
+        self.assertEqual(
+            payload["bundle_verifier"]["skip_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier",
         )
         self.assertEqual(payload["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
         self.assertTrue(RUNNER_PATH.exists())

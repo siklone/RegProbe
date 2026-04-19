@@ -43,6 +43,8 @@ This is the single-entry index for the current `power.control.power-request-over
 
 - `python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py`
 - Markdown summary: `python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py --markdown`
+- The execute path runs this verifier by default before it touches the VM.
+- Only bypass it intentionally: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --skip-bundle-verifier`
 
 ## Runner
 
