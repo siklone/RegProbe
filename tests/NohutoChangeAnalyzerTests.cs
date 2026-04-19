@@ -189,6 +189,28 @@ public sealed class NohutoChangeAnalyzerTests
     }
 
     [Fact]
+    public void Analyze_FilteredInputOnly_ReturnsZeroedAnalysis()
+    {
+        var repository = NohutoConfigurationSourceCatalog.Get("win-registry");
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "   ", Additions = 40, Deletions = 4 },
+            new() { Path = string.Empty, Additions = 7, Deletions = 1 },
+            null!
+        };
+
+        var analysis = NohutoChangeAnalyzer.Analyze(repository, files);
+
+        Assert.Equal(0, analysis.TotalChangedFiles);
+        Assert.Equal(0, analysis.DocumentationChangedFiles);
+        Assert.Equal(0, analysis.ScriptChangedFiles);
+        Assert.Equal(0, analysis.SourceChangedFiles);
+        Assert.Equal(0, analysis.AssetChangedFiles);
+        Assert.Equal(0, analysis.DataChangedFiles);
+        Assert.Empty(analysis.TopCategories);
+    }
+
+    [Fact]
     public void Catalog_ContainsAllTrackedNohutoSources()
     {
         Assert.Collection(
