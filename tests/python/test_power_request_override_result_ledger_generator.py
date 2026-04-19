@@ -75,14 +75,37 @@ class PowerRequestOverrideResultLedgerGeneratorTests(unittest.TestCase):
             )
 
         self.assertEqual(payload["fill_after_run"]["review_outcome"]["chosen_outcome"], "direct-registry-read")
+        response_artifact = payload["fill_after_run"]["artifacts"]["response_reacquire"]
+        umpo_artifact = payload["fill_after_run"]["artifacts"]["umpo_message_reacquire"]
+        self.assertFalse(response_artifact["stdout_path"].startswith("/"))
+        self.assertFalse(response_artifact["summary_path"].startswith("/"))
+        self.assertTrue(response_artifact["stdout_path"].endswith("/response.stdout.txt"))
+        self.assertTrue(umpo_artifact["summary_path"].endswith("/umpo.summary.json"))
         self.assertEqual(
-            payload["fill_after_run"]["artifacts"]["response_reacquire"]["strong_markers_seen"],
+            response_artifact["strong_markers_seen"],
             ["CmQueryValueKey"],
         )
         self.assertEqual(
-            payload["fill_after_run"]["artifacts"]["umpo_message_reacquire"]["strong_markers_seen"],
+            umpo_artifact["strong_markers_seen"],
             ["opcode"],
         )
+
+    def test_missing_external_artifact_red_flag_does_not_leak_absolute_path(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_root:
+            missing_stdout = Path(temp_root) / "missing.stdout.txt"
+            missing_summary = Path(temp_root) / "missing.summary.json"
+            review, red_flags = generator.build_artifact_review(
+                artifact_id="missing-test",
+                stdout_path=missing_stdout,
+                summary_path=missing_summary,
+                command_file="command.txt",
+                rubric_entry={"required_markers": ["REGPROBE_LOCALKD_BEGIN"]},
+            )
+
+        self.assertFalse(review["stdout_path"].startswith("/"))
+        self.assertFalse(review["summary_path"].startswith("/"))
+        self.assertFalse(any(str(temp_root) in flag for flag in red_flags))
+        self.assertTrue(any("external-artifacts/" in flag for flag in red_flags))
 
 
 if __name__ == "__main__":

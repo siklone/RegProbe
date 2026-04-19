@@ -25,6 +25,14 @@ def portable_path(path: Path, *, repo_root: Path = REPO_ROOT) -> str:
         return str(path.resolve()).replace("\\", "/")
 
 
+def artifact_display_path(path: Path, *, repo_root: Path = REPO_ROOT) -> str:
+    try:
+        return str(path.resolve().relative_to(repo_root)).replace("\\", "/")
+    except ValueError:
+        parent = path.parent.name or "external"
+        return f"external-artifacts/{parent}/{path.name}"
+
+
 def collect_markers(text: str, markers: list[str]) -> list[str]:
     return [marker for marker in markers if marker in text]
 
@@ -54,7 +62,7 @@ def build_artifact_review(
     if stdout_path.exists():
         stdout_text = stdout_path.read_text(encoding="utf-8-sig", errors="ignore")
     else:
-        red_flags.append(f"missing stdout: {portable_path(stdout_path)}")
+        red_flags.append(f"missing stdout: {artifact_display_path(stdout_path)}")
 
     required_markers = list(rubric_entry.get("required_markers") or [])
     good_markers = list(rubric_entry.get("good_signal_markers") or [])
@@ -70,8 +78,8 @@ def build_artifact_review(
     return (
         {
             "artifact_id": artifact_id,
-            "stdout_path": portable_path(stdout_path),
-            "summary_path": portable_path(summary_path),
+            "stdout_path": artifact_display_path(stdout_path),
+            "summary_path": artifact_display_path(summary_path),
             "command_file": command_file,
             "required_markers_present": required_present,
             "required_markers_seen": required_seen,
