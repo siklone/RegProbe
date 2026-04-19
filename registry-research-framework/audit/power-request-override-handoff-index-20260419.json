@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-04-19T03:42:00Z",
+  "record_id": "power.control.power-request-override-subtree",
+  "purpose": "Single-entry handoff index for the current PowerRequestOverride evidence, debugger target, reacquire, and review package.",
+  "read_order": [
+    {
+      "step": 1,
+      "path": "research/records/power.control.power-request-override-subtree.json",
+      "role": "current canonical record"
+    },
+    {
+      "step": 2,
+      "path": "research/notes/power-control-power-request-override-subtree-runtime-proof-20260418.md",
+      "role": "process-leaf runtime proof"
+    },
+    {
+      "step": 3,
+      "path": "research/notes/power-control-power-request-override-subtree-driver-service-proof-20260418.md",
+      "role": "service and driver leaf runtime proof"
+    },
+    {
+      "step": 4,
+      "path": "research/notes/power-control-power-request-override-subtree-reader-binding-targets-20260419.md",
+      "role": "narrowed debugger target set"
+    },
+    {
+      "step": 5,
+      "path": "research/notes/power-control-power-request-override-subtree-message-boundary-hypothesis-20260419.md",
+      "role": "why the lane narrows to the response/message boundary"
+    },
+    {
+      "step": 6,
+      "path": "research/notes/power-control-power-request-override-subtree-kd-callee-shortlist-20260419.md",
+      "role": "immediate callee shortlist and retained artifact gap"
+    },
+    {
+      "step": 7,
+      "path": "registry-research-framework/audit/power-request-override-reader-binding-discriminator-20260419.md",
+      "role": "high-level discriminator audit"
+    },
+    {
+      "step": 8,
+      "path": "registry-research-framework/audit/power-request-override-reader-binding-reacquire-plan-20260419.md",
+      "role": "operator-facing reacquire plan"
+    },
+    {
+      "step": 9,
+      "path": "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
+      "role": "response-side KD command file"
+    },
+    {
+      "step": 10,
+      "path": "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt",
+      "role": "UMPO message KD command file"
+    },
+    {
+      "step": 11,
+      "path": "registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.md",
+      "role": "post-run stdout review rubric"
+    },
+    {
+      "step": 12,
+      "path": "registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.md",
+      "role": "post-run result write-back template"
+    }
+  ],
+  "ready_to_run": [
+    "registry-research-framework/audit/power-request-override-response-reacquire-local-kd-20260419.txt",
+    "registry-research-framework/audit/power-request-override-umpo-message-reacquire-local-kd-20260419.txt"
+  ],
+  "do_not_reopen": [
+    "generic *PowerRequest*Reg* symbol hunt",
+    "broad subtree runtime capture",
+    "another powercfg materialization cycle"
+  ],
+  "expected_next_decision": "After the two reacquired local-KD artifacts land, classify the run as direct-registry-read, consumer-semantics-without-read, umpo-boundary-is-best-signal, or wrapper-only-path."
+}
