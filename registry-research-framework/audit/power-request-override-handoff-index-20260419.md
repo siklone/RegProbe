@@ -36,6 +36,7 @@ This is the single-entry index for the current `power.control.power-request-over
 ## Pipeline Runner
 
 - `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py`
+- Dry-run first: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run`
 
 ## Runner
 

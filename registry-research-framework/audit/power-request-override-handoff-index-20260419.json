@@ -75,10 +75,11 @@
       "role": "post-run result write-back template"
     }
   ],
-  "pipeline_runner": {
-    "path": "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
-    "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py"
-  },
+    "pipeline_runner": {
+        "path": "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+        "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py",
+        "dry_run_example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run"
+    },
   "runner": {
     "path": "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py",
     "example": "python3 scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py"

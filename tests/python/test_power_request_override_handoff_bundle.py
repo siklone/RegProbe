@@ -79,6 +79,10 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
         payload = load_json(HANDOFF_INDEX_JSON)
 
         self.assertEqual(payload["pipeline_runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py")
+        self.assertEqual(
+            payload["pipeline_runner"]["dry_run_example"],
+            "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run",
+        )
         self.assertTrue(PIPELINE_RUNNER_PATH.exists())
         self.assertEqual(payload["runner"]["path"], "scripts/vm-kvm/run-power-request-override-reader-binding-reacquire.py")
         self.assertTrue(RUNNER_PATH.exists())
