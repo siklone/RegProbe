@@ -39,7 +39,7 @@ This is the single-entry index for the current `power.control.power-request-over
 - Dry-run first: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --dry-run`
 - Preflight only: `python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only`
 - That dry-run preview already includes the scratch ledger paths plus the exact dated promotion targets for the current run id.
-- The `--verify-only` payload now returns `ready_for_execute`, the verifier `blockers` list, and a `next_steps` block so the operator sees the recommended follow-up command immediately.
+- The `--verify-only` payload now returns `ready_for_execute`, the verifier `blockers` list, an explicit output contract preview, and a `next_steps` block so the operator sees the recommended follow-up command immediately.
 
 ## Bundle Verifier
 

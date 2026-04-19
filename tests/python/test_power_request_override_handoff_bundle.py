@@ -291,6 +291,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
             execution_manifest_md,
         )
+        self.assertIn("output contract preview", execution_manifest_md)
         self.assertIn("ready_for_execute", execution_manifest_md)
         self.assertIn("next_steps", execution_manifest_md)
         self.assertIn("blockers", execution_manifest_md)
@@ -303,6 +304,7 @@ class PowerRequestOverrideHandoffBundleTests(unittest.TestCase):
             "python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py --verify-only",
             handoff_index_md,
         )
+        self.assertIn("output contract preview", handoff_index_md)
         self.assertIn("ready_for_execute", handoff_index_md)
         self.assertIn("next_steps", handoff_index_md)
         self.assertIn("blockers", handoff_index_md)

@@ -99,6 +99,10 @@ class PowerRequestOverridePipelineRunnerTests(unittest.TestCase):
             payload["verify_bundle_first"]["example"],
             "python3 registry-research-framework/scripts/verify_power_request_override_handoff_bundle.py",
         )
+        self.assertEqual(
+            payload["verify_bundle_first"]["output_contract"],
+            ["ready_for_execute", "summary", "blockers", "next_steps"],
+        )
         self.assertTrue(payload["verify_bundle_first"]["required_before_execute"])
         self.assertEqual(
             payload["promote_after_review"]["script"],

@@ -167,6 +167,7 @@ def build_plan_payload(args: argparse.Namespace, repo_root: Path, upload_dir: Pa
             "script": portable_path(resolved_bundle_verifier, repo_root),
             "example": f"python3 {portable_path(resolved_bundle_verifier, repo_root)}",
             "markdown_example": f"python3 {portable_path(resolved_bundle_verifier, repo_root)} --markdown",
+            "output_contract": ["ready_for_execute", "summary", "blockers", "next_steps"],
             "required_before_execute": not args.skip_bundle_verifier,
         },
         "promote_after_review": build_promotion_payload(args, repo_root),
