@@ -120,6 +120,46 @@ public sealed class NohutoChangeAnalyzerTests
     }
 
     [Fact]
+    public void Analyze_UsesMinimumWeightOfOnePerRetainedFile()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "network/zero-weight-a.md", Additions = 0, Deletions = 0 },
+            new() { Path = "network/zero-weight-b.md", Additions = -3, Deletions = 0 }
+        };
+
+        var analysis = NohutoChangeAnalyzer.Analyze("win-config", files);
+        var networkCategory = Assert.Single(analysis.TopCategories);
+
+        Assert.Equal(2, analysis.TotalChangedFiles);
+        Assert.Equal(2, analysis.DocumentationChangedFiles);
+        Assert.Equal("Network", networkCategory.Category);
+        Assert.Equal(2, networkCategory.Score);
+        Assert.Equal(2, networkCategory.FileCount);
+    }
+
+    [Fact]
+    public void Analyze_BreaksScoreTiesUsingFileCount()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "network/file-a.md", Additions = 5, Deletions = 0 },
+            new() { Path = "network/file-b.md", Additions = 5, Deletions = 0 },
+            new() { Path = "power/desc.md", Additions = 10, Deletions = 0 }
+        };
+
+        var analysis = NohutoChangeAnalyzer.Analyze("win-config", files);
+
+        Assert.Equal(
+            new[] { "Network", "Power" },
+            analysis.TopCategories.Select(category => category.Category).ToArray());
+        Assert.Equal(10, analysis.TopCategories[0].Score);
+        Assert.Equal(2, analysis.TopCategories[0].FileCount);
+        Assert.Equal(10, analysis.TopCategories[1].Score);
+        Assert.Equal(1, analysis.TopCategories[1].FileCount);
+    }
+
+    [Fact]
     public void Analyze_DefaultOverload_MatchesExplicitWinRegistryDefinition()
     {
         var files = new List<NohutoChangedFile>
