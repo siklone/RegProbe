@@ -5,6 +5,21 @@ namespace RegProbe.Tests;
 
 public sealed class NohutoChangeAnalyzerTests
 {
+    private static void AssertEquivalent(
+        NohutoChangeAnalysis expected,
+        NohutoChangeAnalysis actual)
+    {
+        Assert.Equal(expected.TotalChangedFiles, actual.TotalChangedFiles);
+        Assert.Equal(expected.DocumentationChangedFiles, actual.DocumentationChangedFiles);
+        Assert.Equal(expected.ScriptChangedFiles, actual.ScriptChangedFiles);
+        Assert.Equal(expected.SourceChangedFiles, actual.SourceChangedFiles);
+        Assert.Equal(expected.AssetChangedFiles, actual.AssetChangedFiles);
+        Assert.Equal(expected.DataChangedFiles, actual.DataChangedFiles);
+        Assert.Equal(
+            expected.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)),
+            actual.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)));
+    }
+
     [Fact]
     public void Analyze_DefaultsToWinRegistryCategories()
     {
@@ -98,15 +113,7 @@ public sealed class NohutoChangeAnalyzerTests
             NohutoConfigurationSourceCatalog.Get("win-registry"),
             files);
 
-        Assert.Equal(explicitAnalysis.TotalChangedFiles, implicitAnalysis.TotalChangedFiles);
-        Assert.Equal(explicitAnalysis.DocumentationChangedFiles, implicitAnalysis.DocumentationChangedFiles);
-        Assert.Equal(explicitAnalysis.ScriptChangedFiles, implicitAnalysis.ScriptChangedFiles);
-        Assert.Equal(explicitAnalysis.SourceChangedFiles, implicitAnalysis.SourceChangedFiles);
-        Assert.Equal(explicitAnalysis.AssetChangedFiles, implicitAnalysis.AssetChangedFiles);
-        Assert.Equal(explicitAnalysis.DataChangedFiles, implicitAnalysis.DataChangedFiles);
-        Assert.Equal(
-            explicitAnalysis.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)),
-            implicitAnalysis.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)));
+        AssertEquivalent(explicitAnalysis, implicitAnalysis);
     }
 
     [Fact]
@@ -124,15 +131,21 @@ public sealed class NohutoChangeAnalyzerTests
             NohutoConfigurationSourceCatalog.Get("regkit"),
             files);
 
-        Assert.Equal(explicitAnalysis.TotalChangedFiles, stringAnalysis.TotalChangedFiles);
-        Assert.Equal(explicitAnalysis.DocumentationChangedFiles, stringAnalysis.DocumentationChangedFiles);
-        Assert.Equal(explicitAnalysis.ScriptChangedFiles, stringAnalysis.ScriptChangedFiles);
-        Assert.Equal(explicitAnalysis.SourceChangedFiles, stringAnalysis.SourceChangedFiles);
-        Assert.Equal(explicitAnalysis.AssetChangedFiles, stringAnalysis.AssetChangedFiles);
-        Assert.Equal(explicitAnalysis.DataChangedFiles, stringAnalysis.DataChangedFiles);
-        Assert.Equal(
-            explicitAnalysis.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)),
-            stringAnalysis.TopCategories.Select(category => (category.Category, category.Score, category.FileCount)));
+        AssertEquivalent(explicitAnalysis, stringAnalysis);
+    }
+
+    [Fact]
+    public void Analyze_StringOverload_ThrowsForUnknownRepositoryId()
+    {
+        var files = new List<NohutoChangedFile>
+        {
+            new() { Path = "README.md", Additions = 1, Deletions = 0 }
+        };
+
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => NohutoChangeAnalyzer.Analyze("does-not-exist", files));
+
+        Assert.Contains("Unknown nohuto repository id", exception.Message);
     }
 
     [Fact]
